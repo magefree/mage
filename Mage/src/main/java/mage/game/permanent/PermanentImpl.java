@@ -72,6 +72,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean monstrous;
     protected boolean renowned;
     protected boolean suspected;
+    protected boolean saddled;
     protected boolean manifested = false;
     protected boolean morphed = false;
     protected boolean disguised = false;
@@ -175,6 +176,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
         this.suspected = permanent.suspected;
+        this.saddled = permanent.saddled;
         this.ringBearerFlag = permanent.ringBearerFlag;
         this.classLevel = permanent.classLevel;
         this.goadingPlayers.addAll(permanent.goadingPlayers);
@@ -203,7 +205,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 + ":" + getCardNumber()
                 + ":" + getImageFileName()
                 + ":" + getImageNumber();
-        return  name
+        return name
                 + ", " + (getBasicMageObject() instanceof Token ? "T" : "C")
                 + ", " + getBasicMageObject().getClass().getSimpleName()
                 + ", " + imageInfo
@@ -237,6 +239,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.maxBlockedBy = 0;
         this.copy = false;
         this.goadingPlayers.clear();
+        this.saddled = false;
         this.loyaltyActivationsAvailable = 1;
         this.legendRuleApplies = true;
         this.canBeSacrificed = true;
@@ -599,7 +602,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     game.getTurnStepType() == PhaseStep.UNTAP
             );
             game.fireEvent(event);
-            game.getState().addSimultaneousUntapped(event, game);
+            game.getState().addSimultaneousUntappedToBatch(event, game);
             return true;
         }
         return false;
@@ -617,7 +620,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.tapped = true;
             TappedEvent event = new TappedEvent(objectId, source, source == null ? null : source.getControllerId(), forCombat);
             game.fireEvent(event);
-            game.getState().addSimultaneousTapped(event, game);
+            game.getState().addSimultaneousTappedToBatch(event, game);
             return true;
         }
         return false;
@@ -1021,6 +1024,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         DamageEvent event = new DamagePermanentEvent(objectId, attackerId, controllerId, damageAmount, preventable, combat);
         event.setAppliedEffects(appliedEffects);
+        // Even if no damage was dealt, some watchers would need a reset next time actions are processed.
+        // For instance PhantomPreventionWatcher used by the [[Phantom Wurm]] type of replacement effect.
+        game.getState().addBatchDamageCouldHaveBeenFired(combat, game);
         if (game.replaceEvent(event)) {
             return 0;
         }
@@ -1168,8 +1174,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 /* Tokens don't have a spellAbility. We must make a phony one as the source so the events in addCounters
                  * can trace the source back to an object/controller.
                  */
-                source = new SpellAbility(null, ((PermanentToken) mdi.sourceObject).name);
-                source.setSourceId(((PermanentToken) mdi.sourceObject).objectId);
+                PermanentToken sourceToken = (PermanentToken) mdi.sourceObject;
+                source = new SpellAbility(null, sourceToken.name);
+                source.setSourceId(sourceToken.objectId);
+                source.setControllerId(sourceToken.controllerId);
             } else if (mdi.sourceObject instanceof Permanent) {
                 source = ((Permanent) mdi.sourceObject).getSpellAbility();
             }
@@ -1720,6 +1728,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         } else {
             addInfo(suspectedInfoKey, null, game);
         }
+    }
+
+    @Override
+    public boolean isSaddled() {
+        return saddled;
+    }
+
+    @Override
+    public void setSaddled(boolean saddled) {
+        this.saddled = saddled;
     }
 
     // Used as key for the ring bearer info.

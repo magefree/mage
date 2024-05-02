@@ -18,6 +18,8 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
     //  - 1 opponent loses 2 life -> No trigger
     //  - 2 opponents lose 1 life each -> Ob Nixilis triggers
     //  - 2 opponents lose 2 life each -> No trigger
+    //  - 2 opponents lose 1 and 2 life respectively -> No trigger
+    //  - 1 opponent loses 1 and controller loses 2 life -> Ob Nixilis triggers
     //  - controller loses 1 life -> No trigger
 
     @Test
@@ -90,6 +92,52 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         execute();
 
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 0);
+    }
+
+    @Test
+    public void damage2Opp1Point1Opp2Points() {
+        addCard(Zone.BATTLEFIELD, playerA, "Ob Nixilis, Captive Kingpin", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Expedition Envoy", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
+
+        attack(1, playerA, "Expedition Envoy", playerB);
+        attack(1, playerA, "Memnite", playerC);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 0);
+    }
+
+    @Test
+    public void damage1Opp1PointCont2Points() {
+        addCard(Zone.BATTLEFIELD, playerA, "Ob Nixilis, Captive Kingpin", 1);
+
+        addCard(Zone.BATTLEFIELD, playerD, "Expedition Envoy", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+
+        addCard(Zone.HAND, playerA, "Withstand Death", 1);
+        addCard(Zone.HAND, playerA, "Deadly Tempest", 1);
+
+//        // Give Ob Nixiis indestructible so it can still trigger
+        addTarget(playerA, "Ob Nixilis, Captive Kingpin");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Withstand Death", true);
+
+        // Destroy all creatures.
+        // Each player loses life equal to the number of creatures they controlled that were destroyed this way.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deadly Tempest", true);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, currentGame.getStartingLife() - 2);
+        assertLife(playerD, currentGame.getStartingLife() - 1);
+
+        assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 1);
     }
 
     @Test

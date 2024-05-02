@@ -33,7 +33,7 @@ public class BecomesTargetSourceTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase(getWhen() + "{this} becomes the target of " + filter.getMessage() + ", ");
-        this.replaceRuleText = true; // default true to replace "{this}" with "it"
+        this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
     }
 
     protected BecomesTargetSourceTriggeredAbility(final BecomesTargetSourceTriggeredAbility ability) {
@@ -61,7 +61,7 @@ public class BecomesTargetSourceTriggeredAbility extends TriggeredAbilityImpl {
         if (targetingObject == null || !filter.match(targetingObject, getControllerId(), this, game)) {
             return false;
         }
-        if (CardUtil.checkTargetedEventAlreadyUsed(this.id.toString(), targetingObject, event, game)) {
+        if (CardUtil.checkTargetedEventAlreadyUsed(this.getId().toString(), targetingObject, event, game)) {
             return false;
         }
         switch (setTargetPointer) {

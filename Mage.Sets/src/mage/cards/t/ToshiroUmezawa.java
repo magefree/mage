@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class ToshiroUmezawa extends CardImpl {
         // Bushido 1
         this.addAbility(new BushidoAbility(1));
         // Whenever a creature an opponent controls dies, you may cast target instant card from your graveyard. If that card would be put into a graveyard this turn, exile it instead.
-        Ability ability = new DiesCreatureTriggeredAbility(new MayCastTargetThenExileEffect(false)
+        Ability ability = new DiesCreatureTriggeredAbility(new MayCastTargetCardEffect(true)
                 .setText("you may cast target instant card from your graveyard. "
                         + ThatSpellGraveyardExileReplacementEffect.RULE_A),
                 true, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE);

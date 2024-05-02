@@ -94,6 +94,7 @@ public enum CounterType {
     GOLD("gold"),
     GROWTH("growth"),
     HARMONY("harmony"),
+    HASTE("haste"),
     HATCHLING("hatchling"),
     HEALING("healing"),
     HEXPROOF("hexproof"),
@@ -123,6 +124,7 @@ public enum CounterType {
     LANDMARK("landmark"),
     LEVEL("level"),
     LIFELINK("lifelink"),
+    LOOT("loot"),
     LORE("lore"),
     LUCK("luck"),
     LOYALTY("loyalty"),
@@ -169,6 +171,7 @@ public enum CounterType {
     PRESSURE("pressure"),
     PREY("prey"),
     PUPA("pupa"),
+    RAD("rad"),
     REACH("reach"),
     REJECTION("rejection"),
     REPAIR("repair"),
@@ -321,6 +324,8 @@ public enum CounterType {
                 return new AbilityCounter(ShadowAbility.getInstance(), amount);
             case TRAMPLE:
                 return new AbilityCounter(TrampleAbility.getInstance(), amount);
+            case HASTE:
+                return new AbilityCounter(HasteAbility.getInstance(), amount);
             case VIGILANCE:
                 return new AbilityCounter(VigilanceAbility.getInstance(), amount);
             default:

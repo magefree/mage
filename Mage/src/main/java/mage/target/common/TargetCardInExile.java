@@ -34,7 +34,7 @@ public class TargetCardInExile extends TargetCard {
     }
 
     public TargetCardInExile(int minNumTargets, int maxNumTargets, FilterCard filter, UUID zoneId) {
-        this(minNumTargets, maxNumTargets, filter, zoneId, false);
+        this(minNumTargets, maxNumTargets, filter, zoneId, zoneId == null);
     }
 
     public TargetCardInExile(int minNumTargets, int maxNumTargets, FilterCard filter, UUID zoneId, boolean allExileZones) {

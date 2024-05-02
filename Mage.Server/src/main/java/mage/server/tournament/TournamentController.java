@@ -324,11 +324,13 @@ public class TournamentController {
         }
     }
 
-    public boolean updateDeck(UUID playerId, Deck deck) {
-        if (tournamentSessions.containsKey(playerId)) {
-            return tournamentSessions.get(playerId).updateDeck(deck);
+    public void updateDeck(UUID playerId, Deck deck) {
+        TournamentSession session = tournamentSessions.getOrDefault(playerId, null);
+        if (session == null) {
+            return;
         }
-        return false;
+
+        session.updateDeck(deck);
     }
 
     public void timeout(UUID userId) {

@@ -54,7 +54,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
     private static final int MAX_SIMULATED_NODES_PER_CALC = 5000;
 
     // same params as Executors.newFixedThreadPool
-    // no needs erorrs check in afterExecute here cause that pool used for FutureTask with result check already
+    // no needs errors check in afterExecute here cause that pool used for FutureTask with result check already
     private static final ExecutorService threadPoolSimulations = new ThreadPoolExecutor(
             COMPUTER_MAX_THREADS_FOR_SIMULATIONS,
             COMPUTER_MAX_THREADS_FOR_SIMULATIONS,
@@ -414,7 +414,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 Target target = effect.getTarget();
                 if (!target.doneChoosing()) {
                     for (UUID targetId : target.possibleTargets(stackObject.getControllerId(), stackObject.getStackAbility(), game)) {
-                        Game sim = game.copy();
+                        Game sim = game.createSimulationForAI();
                         StackAbility newAbility = (StackAbility) stackObject.copy();
                         SearchEffect newEffect = getSearchEffect(newAbility);
                         newEffect.getTarget().addTarget(targetId, newAbility, sim);
@@ -514,8 +514,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 logger.info("Sim Prio [" + depth + "] -- interrupted");
                 break;
             }
-            Game sim = game.copy();
-            sim.setSimulation(true);
+            Game sim = game.createSimulationForAI();
             if (!(action instanceof StaticAbility) //for MorphAbility, etc
                     && sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
                 sim.applyEffects();
@@ -1067,8 +1066,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
      * @return a new game object with simulated players
      */
     protected Game createSimulation(Game game) {
-        Game sim = game.copy();
-        sim.setSimulation(true);
+        Game sim = game.createSimulationForAI();
         for (Player oldPlayer : sim.getState().getPlayers().values()) {
             // replace original player by simulated player and find result (execute/resolve current action)
             Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();

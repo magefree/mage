@@ -33,7 +33,7 @@ public final class TheMeep extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ward--Pay 3 life.
-        this.addAbility(new WardAbility(new PayLifeCost(3)));
+        this.addAbility(new WardAbility(new PayLifeCost(3), false));
 
         // Whenever The Meep attacks, you may sacrifice another creature. If you do, creatures you control have base power and toughness X/X until end of turn, where X is the sacrificed creature's mana value.
         this.addAbility(new AttacksTriggeredAbility(new TheMeepEffect()));

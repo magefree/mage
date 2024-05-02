@@ -35,7 +35,7 @@ public final class ExtractAConfession extends CardImpl {
         // instead each opponent sacrifices a creature with the greatest power among creatures they control.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SacrificeOpponentsEffect(filter),
-                new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
+                new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE),
                 CollectedEvidenceCondition.instance,
                 "each opponent sacrifices a creature. " +
                         "If evidence was collected, instead each opponent " +

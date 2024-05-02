@@ -12,7 +12,9 @@ import java.util.Optional;
 
 
 /**
- * @author github: timhae
+ * Deck import: mtgjson service
+ *
+ * @author timhae
  */
 public class MtgjsonDeckImporter extends JsonDeckImporter {
 

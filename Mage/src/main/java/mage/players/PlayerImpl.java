@@ -154,6 +154,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected PayLifeCostLevel payLifeCostLevel = PayLifeCostLevel.allAbilities;
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
+    protected boolean canPlotFromTopOfLibrary = false;
     protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
@@ -180,6 +181,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     //
     // A card may be able to cast multiple way with multiple methods.
     // The specific MageIdentifier should be checked, before checking null as a fallback.
+    // TODO: must rework playable methods to static
     protected Map<UUID, Set<MageIdentifier>> castSourceIdWithAlternateMana = new HashMap<>();
     protected Map<UUID, Map<MageIdentifier, ManaCosts<ManaCost>>> castSourceIdManaCosts = new HashMap<>();
     protected Map<UUID, Map<MageIdentifier, Costs<Cost>>> castSourceIdCosts = new HashMap<>();
@@ -251,6 +253,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = player.canLoseLife;
         this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard;
+        this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary;
         this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
 
         this.attachments.addAll(player.attachments);
@@ -360,6 +363,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
+        this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
         this.alternativeSourceCosts.clear();
         this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
@@ -474,6 +478,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.payLifeCostLevel = PayLifeCostLevel.allAbilities;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = true;
+        this.canPlotFromTopOfLibrary = false;
         this.drawsOnOpponentsTurn = false;
 
         this.sacrificeCostFilter = null;
@@ -516,6 +521,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sacrificeCostFilter = null;
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = false;
+        this.canPlotFromTopOfLibrary = false;
         this.drawsOnOpponentsTurn = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
@@ -1750,23 +1756,19 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (object instanceof StackAbility || object == null) {
             return useable;
         }
-        boolean previousState = game.inCheckPlayableState();
-        game.setCheckPlayableState(true);
-        try {
-            // collect and filter playable activated abilities
-            // GUI: user clicks on card, but it must activate ability from ANY card's parts (main, left, right)
-            Set<UUID> needIds = CardUtil.getObjectParts(object);
 
-            // workaround to find all abilities first and filter it for one object
-            List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
-            for (ActivatedAbility ability : allPlayable) {
-                if (needIds.contains(ability.getSourceId())) {
-                    useable.putIfAbsent(ability.getId(), ability);
-                }
+        // collect and filter playable activated abilities
+        // GUI: user clicks on card, but it must activate ability from ANY card's parts (main, left, right)
+        Set<UUID> needIds = CardUtil.getObjectParts(object);
+
+        // workaround to find all abilities first and filter it for one object
+        List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
+        for (ActivatedAbility ability : allPlayable) {
+            if (needIds.contains(ability.getSourceId())) {
+                useable.putIfAbsent(ability.getId(), ability);
             }
-        } finally {
-            game.setCheckPlayableState(previousState);
         }
+
         return useable;
     }
 
@@ -2177,7 +2179,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (event.getAmount() > 0) {
                 LifeLostEvent lifeLostEvent = new LifeLostEvent(playerId, source, event.getAmount(), atCombat);
                 game.fireEvent(lifeLostEvent);
-                game.getState().addSimultaneousLifeLossEventToBatches(lifeLostEvent, game);
+                game.getState().addSimultaneousLifeLossToBatch(lifeLostEvent, game);
             }
             return event.getAmount();
         }
@@ -2253,7 +2255,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return doDamage(damage, attackerId, source, game, combatDamage, preventable, appliedEffects);
     }
 
-    private int doDamage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+    private int doDamage(int damage, UUID attackerId, Ability source, Game game, boolean combat, boolean preventable, List<UUID> appliedEffects) {
         if (!this.isInGame()) {
             return 0;
         }
@@ -2261,8 +2263,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (damage < 1) {
             return 0;
         }
-        DamageEvent event = new DamagePlayerEvent(playerId, attackerId, playerId, damage, preventable, combatDamage);
+        DamageEvent event = new DamagePlayerEvent(playerId, attackerId, playerId, damage, preventable, combat);
         event.setAppliedEffects(appliedEffects);
+        // Even if no damage was dealt, some watchers would need a reset next time actions are processed.
+        // For instance PhantomPreventionWatcher used by the [[Phantom Wurm]] type of replacement effect.
+        game.getState().addBatchDamageCouldHaveBeenFired(combat, game);
         if (game.replaceEvent(event)) {
             return 0;
         }
@@ -2298,20 +2303,20 @@ public abstract class PlayerImpl implements Player, Serializable {
             addCounters(CounterType.POISON.createInstance(actualDamage), sourceControllerId, source, game);
         } else {
             GameEvent damageToLifeLossEvent = new GameEvent(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS,
-                    playerId, source, playerId, actualDamage, combatDamage);
+                    playerId, source, playerId, actualDamage, combat);
             if (!game.replaceEvent(damageToLifeLossEvent)) {
-                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combatDamage, attackerId);
+                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combat, attackerId);
             }
         }
         if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
-            if (combatDamage) {
+            if (combat) {
                 game.getPermanent(attackerId).markLifelink(actualDamage);
             } else {
                 Player player = game.getPlayer(sourceControllerId);
                 player.gainLife(actualDamage, game, source);
             }
         }
-        if (combatDamage && sourceAbilities != null && sourceAbilities.containsClass(ToxicAbility.class)) {
+        if (combat && sourceAbilities != null && sourceAbilities.containsClass(ToxicAbility.class)) {
             int countersToAdd = CardUtil
                     .castStream(sourceAbilities.stream(), ToxicAbility.class)
                     .mapToInt(ToxicAbility::getAmount)
@@ -2323,7 +2328,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             Player player = game.getPlayer(sourceControllerId);
             new SquirrelToken().putOntoBattlefield(actualDamage, game, source, player.getId());
         }
-        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, attackerId, playerId, actualDamage, combatDamage);
+        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, attackerId, playerId, actualDamage, combat);
         game.fireEvent(damagedEvent);
         game.getState().addSimultaneousDamage(damagedEvent, game);
         return actualDamage;
@@ -2393,22 +2398,28 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void removeCounters(String name, int amount, Ability source, Game game) {
+
+        GameEvent removeCountersEvent = new RemoveCountersEvent(name, this, source, amount, false);
+        if (game.replaceEvent(removeCountersEvent)){
+            return;
+        }
+
         int finalAmount = 0;
         for (int i = 0; i < amount; i++) {
+
+            GameEvent event = new RemoveCounterEvent(name, this, source, false);
+            if (game.replaceEvent(event)){
+                continue;
+            }
+
             if (!counters.removeCounter(name, 1)) {
                 break;
             }
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED,
-                    getId(), source, (source == null ? null : source.getControllerId()));
-            event.setData(name);
-            event.setAmount(1);
+            event = new CounterRemovedEvent(name, this, source, false);
             game.fireEvent(event);
             finalAmount++;
         }
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED,
-                getId(), source, (source == null ? null : source.getControllerId()));
-        event.setData(name);
-        event.setAmount(finalAmount);
+        GameEvent event = new CountersRemovedEvent(name, this, source, finalAmount, false);
         game.fireEvent(event);
     }
 
@@ -3293,7 +3304,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // raise affected roll events
         for (RollDieResult result : dieRolls) {
-            game.fireEvent(new DieRolledEvent(source, rollDiceEvent.getRollDieType(), rollDiceEvent.getSides(), result.naturalResult, result.modifier, result.planarResult));
+            game.fireEvent(new DieRolledEvent(source, this.getId(), rollDiceEvent.getRollDieType(), rollDiceEvent.getSides(), result.naturalResult, result.modifier, result.planarResult));
         }
         game.fireEvent(new DiceRolledEvent(rollDiceEvent.getSides(), dieResults, source, this.getId()));
 
@@ -3371,13 +3382,13 @@ public abstract class PlayerImpl implements Player, Serializable {
      * combinations of mana are available to cast spells or activate abilities
      * etc.
      *
-     * @param game
+     * @param originalGame
      * @return
      */
     @Override
-    public ManaOptions getManaAvailable(Game game) {
-        boolean oldState = game.inCheckPlayableState();
-        game.setCheckPlayableState(true);
+    public ManaOptions getManaAvailable(Game originalGame) {
+        // workaround to fix a triggers list modification bug (game must be immutable on playable calculations)
+        Game game = originalGame.createSimulationForPlayableCalc();
 
         ManaOptions availableMana = new ManaOptions();
         availableMana.addMana(manaPool.getMana());
@@ -3472,8 +3483,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         availableMana.removeFullyIncludedVariations();
         availableMana.remove(new Mana()); // Remove any empty mana that was left over from the way the code is written
-        game.setCheckPlayableState(oldState);
-        return availableMana;
+
+        // make sure it independent of sim game
+        return availableMana.copy();
     }
 
     /**
@@ -3591,6 +3603,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // ALTERNATIVE COST FROM dynamic effects
+
             for (MageIdentifier identifier : getCastSourceIdWithAlternateMana().getOrDefault(copy.getSourceId(), new HashSet<>())) {
                 ManaCosts alternateCosts = getCastSourceIdManaCosts().get(copy.getSourceId()).get(identifier);
                 Costs<Cost> costs = getCastSourceIdCosts().get(copy.getSourceId()).get(identifier);
@@ -3982,15 +3995,28 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             Set<ApprovingObject> approvingObjects;
             if ((isPlaySpell || isPlayLand) && (fromZone != Zone.BATTLEFIELD)) {
-                // play hand from non hand zone (except battlefield - you can't play already played permanents)
-                approvingObjects = game.getContinuousEffects().asThough(object.getId(),
-                        AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
+                // play card from non hand zone (except battlefield - you can't play already played permanents)
+                approvingObjects = new HashSet<>();
+                approvingObjects.addAll(game.getContinuousEffects().asThough(object.getId(),
+                        AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game));
+                if (isPlaySpell) {
+                    approvingObjects.addAll(game.getContinuousEffects().asThough(object.getId(),
+                            AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game));
+                }
 
                 if (approvingObjects.isEmpty() && isPlaySpell
                         && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
                     approvingObjects = game.getContinuousEffects().asThough(object.getId(),
                             AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
                 }
+
+                // TODO: warning, PLAY_FROM_NOT_OWN_HAND_ZONE save some playable info in player's castSourceXXX fields
+                //  it must be reworked (available/playable methods must be static, all play info must be stored in GameState)
+                // Current workaround to sync sim info with real game, remove here and from regexp search: asThough\(.+AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE
+                Player simPlayer = game.getPlayer(this.getId());
+                this.castSourceIdCosts = new HashMap<>(simPlayer.getCastSourceIdCosts());
+                this.castSourceIdManaCosts = new HashMap<>(simPlayer.getCastSourceIdManaCosts());
+                this.castSourceIdWithAlternateMana = new HashMap<>(simPlayer.getCastSourceIdWithAlternateMana());
             } else {
                 // other abilities from direct zones
                 approvingObjects = new HashSet<>();
@@ -4047,194 +4073,192 @@ public abstract class PlayerImpl implements Player, Serializable {
      * currently cast/activate with his available resources.
      * Without target validation.
      *
-     * @param game
+     * @param originalGame
      * @param hidden                  also from hidden objects (e.g. turned face down cards ?)
      * @param fromZone                of objects from which zone (ALL = from all zones)
      * @param hideDuplicatedAbilities if equal abilities exist return only the
      *                                first instance
      * @return
      */
-    public List<ActivatedAbility> getPlayable(Game game, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
+    public List<ActivatedAbility> getPlayable(Game originalGame, boolean hidden, Zone fromZone, boolean hideDuplicatedAbilities) {
         List<ActivatedAbility> playable = new ArrayList<>();
-        if (shouldSkipGettingPlayable(game)) {
+        if (shouldSkipGettingPlayable(originalGame)) {
             return playable;
         }
 
-        boolean previousState = game.inCheckPlayableState();
-        game.setCheckPlayableState(true);
-        try {
-            ManaOptions availableMana = getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
-            boolean fromAll = fromZone.equals(Zone.ALL);
-            if (hidden && (fromAll || fromZone == Zone.HAND)) {
-                for (Card card : hand.getCards(game)) {
-                    for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
-                        if (ability.getZone().match(Zone.HAND)) {
-                            boolean isPlaySpell = (ability instanceof SpellAbility);
-                            boolean isPlayLand = (ability instanceof PlayLandAbility);
+        Game game = originalGame.createSimulationForPlayableCalc();
+        ManaOptions availableMana = getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
+        boolean fromAll = fromZone.equals(Zone.ALL);
+        if (hidden && (fromAll || fromZone == Zone.HAND)) {
+            for (Card card : hand.getCards(game)) {
+                for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
+                    if (ability.getZone().match(Zone.HAND)) {
+                        boolean isPlaySpell = (ability instanceof SpellAbility);
+                        boolean isPlayLand = (ability instanceof PlayLandAbility);
 
-                            // play land restrictions
-                            if (isPlayLand && game.getContinuousEffects().preventedByRuleModification(
-                                    GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(),
-                                            ability, this.getId()), ability, game, true)) {
-                                continue;
-                            }
-                            // cast spell restrictions 1
-                            GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
-                                    ability.getId(), ability, this.getId());
-                            castEvent.setZone(fromZone);
-                            if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
-                                    castEvent, ability, game, true)) {
-                                continue;
-                            }
-                            // cast spell restrictions 2
-                            GameEvent castLateEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE,
-                                    ability.getId(), ability, this.getId());
-                            castLateEvent.setZone(fromZone);
-                            if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
-                                    castLateEvent, ability, game, true)) {
-                                continue;
-                            }
+                        // play land restrictions
+                        if (isPlayLand && game.getContinuousEffects().preventedByRuleModification(
+                                GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, ability.getSourceId(),
+                                        ability, this.getId()), ability, game, true)) {
+                            continue;
+                        }
+                        // cast spell restrictions 1
+                        GameEvent castEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL,
+                                ability.getId(), ability, this.getId());
+                        castEvent.setZone(fromZone);
+                        if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
+                                castEvent, ability, game, true)) {
+                            continue;
+                        }
+                        // cast spell restrictions 2
+                        GameEvent castLateEvent = GameEvent.getEvent(GameEvent.EventType.CAST_SPELL_LATE,
+                                ability.getId(), ability, this.getId());
+                        castLateEvent.setZone(fromZone);
+                        if (isPlaySpell && game.getContinuousEffects().preventedByRuleModification(
+                                castLateEvent, ability, game, true)) {
+                            continue;
+                        }
 
-                            ActivatedAbility playAbility = findActivatedAbilityFromPlayable(card, availableMana, ability, game);
-                            if (playAbility != null && !playable.contains(playAbility)) {
-                                playable.add(playAbility);
-                            }
+                        ActivatedAbility playAbility = findActivatedAbilityFromPlayable(card, availableMana, ability, game);
+                        if (playAbility != null && !playable.contains(playAbility)) {
+                            playable.add(playAbility);
                         }
                     }
                 }
             }
-
-            if (fromAll || fromZone == Zone.GRAVEYARD) {
-                for (UUID playerId : game.getState().getPlayersInRange(getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player == null) {
-                        continue;
-                    }
-                    for (Card card : player.getGraveyard().getCards(game)) {
-                        getPlayableFromObjectAll(game, Zone.GRAVEYARD, card, availableMana, playable);
-                    }
-                }
-            }
-
-            if (fromAll || fromZone == Zone.EXILED) {
-                for (ExileZone exile : game.getExile().getExileZones()) {
-                    for (Card card : exile.getCards(game)) {
-                        getPlayableFromObjectAll(game, Zone.EXILED, card, availableMana, playable);
-                    }
-                }
-            }
-
-            // check to play revealed cards
-            if (fromAll) {
-                for (Cards revealedCards : game.getState().getRevealed().values()) {
-                    for (Card card : revealedCards.getCards(game)) {
-                        // revealed cards can be from any zones
-                        getPlayableFromObjectAll(game, game.getState().getZone(card.getId()), card, availableMana, playable);
-                    }
-                }
-            }
-
-            // outside cards
-            if (fromAll || fromZone == Zone.OUTSIDE) {
-                // companion cards
-                for (Cards companionCards : game.getState().getCompanion().values()) {
-                    for (Card card : companionCards.getCards(game)) {
-                        getPlayableFromObjectAll(game, Zone.OUTSIDE, card, availableMana, playable);
-                    }
-                }
-
-                // sideboard cards (example: Wish)
-                for (UUID sideboardCardId : this.getSideboard()) {
-                    Card sideboardCard = game.getCard(sideboardCardId);
-                    if (sideboardCard != null) {
-                        getPlayableFromObjectAll(game, Zone.OUTSIDE, sideboardCard, availableMana, playable);
-                    }
-                }
-            }
-
-            // check if it's possible to play the top card of a library
-            if (fromAll || fromZone == Zone.LIBRARY) {
-                for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
-                    Player player = game.getPlayer(playerInRangeId);
-                    if (player != null && player.getLibrary().hasCards()) {
-                        Card card = player.getLibrary().getFromTop(game);
-                        if (card != null) {
-                            getPlayableFromObjectAll(game, Zone.LIBRARY, card, availableMana, playable);
-                        }
-                    }
-                }
-            }
-
-            // check the hand zone (Sen Triplets)
-            // TODO: remove direct hand check (reveal fix in Sen Triplets)?
-            // human games: cards from opponent's hand must be revealed before play
-            // AI games: computer can see and play cards from opponent's hand without reveal
-            if (fromAll || fromZone == Zone.HAND) {
-                for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
-                    Player player = game.getPlayer(playerInRangeId);
-                    if (player != null && !player.getHand().isEmpty()) {
-                        for (Card card : player.getHand().getCards(game)) {
-                            if (card != null) {
-                                getPlayableFromObjectAll(game, Zone.HAND, card, availableMana, playable);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // eliminate duplicate activated abilities (uses for AI plays)
-            Map<String, ActivatedAbility> activatedUnique = new HashMap<>();
-            List<ActivatedAbility> activatedAll = new ArrayList<>();
-
-            // activated abilities from battlefield objects
-            if (fromAll || fromZone == Zone.BATTLEFIELD) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-                    boolean canUseActivated = permanent.canUseActivatedAbilities(game);
-                    List<ActivatedAbility> currentPlayable = new ArrayList<>();
-                    getPlayableFromObjectAll(game, Zone.BATTLEFIELD, permanent, availableMana, currentPlayable);
-                    for (ActivatedAbility ability : currentPlayable) {
-                        if (ability instanceof SpecialAction || canUseActivated) {
-                            activatedUnique.putIfAbsent(ability.toString(), ability);
-                            activatedAll.add(ability);
-                        }
-                    }
-                }
-            }
-
-            // activated abilities from stack objects
-            if (fromAll || fromZone == Zone.STACK) {
-                for (StackObject stackObject : game.getState().getStack()) {
-                    List<ActivatedAbility> currentPlayable = new ArrayList<>();
-                    getPlayableFromObjectAll(game, Zone.STACK, stackObject, availableMana, currentPlayable);
-                    for (ActivatedAbility ability : currentPlayable) {
-                        activatedUnique.put(ability.toString(), ability);
-                        activatedAll.add(ability);
-                    }
-                }
-            }
-
-            // activated abilities from objects in the command zone (emblems or commanders)
-            if (fromAll || fromZone == Zone.COMMAND) {
-                for (CommandObject commandObject : game.getState().getCommand()) {
-                    List<ActivatedAbility> currentPlayable = new ArrayList<>();
-                    getPlayableFromObjectAll(game, Zone.COMMAND, commandObject, availableMana, currentPlayable);
-                    for (ActivatedAbility ability : currentPlayable) {
-                        activatedUnique.put(ability.toString(), ability);
-                        activatedAll.add(ability);
-                    }
-                }
-            }
-
-            if (hideDuplicatedAbilities) {
-                playable.addAll(activatedUnique.values());
-            } else {
-                playable.addAll(activatedAll);
-            }
-        } finally {
-            game.setCheckPlayableState(previousState);
         }
 
-        return playable;
+        if (fromAll || fromZone == Zone.GRAVEYARD) {
+            for (UUID playerId : game.getState().getPlayersInRange(getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player == null) {
+                    continue;
+                }
+                for (Card card : player.getGraveyard().getCards(game)) {
+                    getPlayableFromObjectAll(game, Zone.GRAVEYARD, card, availableMana, playable);
+                }
+            }
+        }
+
+        if (fromAll || fromZone == Zone.EXILED) {
+            for (ExileZone exile : game.getExile().getExileZones()) {
+                for (Card card : exile.getCards(game)) {
+                    getPlayableFromObjectAll(game, Zone.EXILED, card, availableMana, playable);
+                }
+            }
+        }
+
+        // check to play revealed cards
+        if (fromAll) {
+            for (Cards revealedCards : game.getState().getRevealed().values()) {
+                for (Card card : revealedCards.getCards(game)) {
+                    // revealed cards can be from any zones
+                    getPlayableFromObjectAll(game, game.getState().getZone(card.getId()), card, availableMana, playable);
+                }
+            }
+        }
+
+        // outside cards
+        if (fromAll || fromZone == Zone.OUTSIDE) {
+            // companion cards
+            for (Cards companionCards : game.getState().getCompanion().values()) {
+                for (Card card : companionCards.getCards(game)) {
+                    getPlayableFromObjectAll(game, Zone.OUTSIDE, card, availableMana, playable);
+                }
+            }
+
+            // sideboard cards (example: Wish)
+            for (UUID sideboardCardId : this.getSideboard()) {
+                Card sideboardCard = game.getCard(sideboardCardId);
+                if (sideboardCard != null) {
+                    getPlayableFromObjectAll(game, Zone.OUTSIDE, sideboardCard, availableMana, playable);
+                }
+            }
+        }
+
+        // check if it's possible to play the top card of a library
+        if (fromAll || fromZone == Zone.LIBRARY) {
+            for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
+                Player player = game.getPlayer(playerInRangeId);
+                if (player != null && player.getLibrary().hasCards()) {
+                    Card card = player.getLibrary().getFromTop(game);
+                    if (card != null) {
+                        getPlayableFromObjectAll(game, Zone.LIBRARY, card, availableMana, playable);
+                    }
+                }
+            }
+        }
+
+        // check the hand zone (Sen Triplets)
+        // TODO: remove direct hand check (reveal fix in Sen Triplets)?
+        // human games: cards from opponent's hand must be revealed before play
+        // AI games: computer can see and play cards from opponent's hand without reveal
+        if (fromAll || fromZone == Zone.HAND) {
+            for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
+                Player player = game.getPlayer(playerInRangeId);
+                if (player != null && !player.getHand().isEmpty()) {
+                    for (Card card : player.getHand().getCards(game)) {
+                        if (card != null) {
+                            getPlayableFromObjectAll(game, Zone.HAND, card, availableMana, playable);
+                        }
+                    }
+                }
+            }
+        }
+
+        // eliminate duplicate activated abilities (uses for AI plays)
+        Map<String, ActivatedAbility> activatedUnique = new HashMap<>();
+        List<ActivatedAbility> activatedAll = new ArrayList<>();
+
+        // activated abilities from battlefield objects
+        if (fromAll || fromZone == Zone.BATTLEFIELD) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+                boolean canUseActivated = permanent.canUseActivatedAbilities(game);
+                List<ActivatedAbility> currentPlayable = new ArrayList<>();
+                getPlayableFromObjectAll(game, Zone.BATTLEFIELD, permanent, availableMana, currentPlayable);
+                for (ActivatedAbility ability : currentPlayable) {
+                    if (ability instanceof SpecialAction || canUseActivated) {
+                        activatedUnique.putIfAbsent(ability.toString(), ability);
+                        activatedAll.add(ability);
+                    }
+                }
+            }
+        }
+
+        // activated abilities from stack objects
+        if (fromAll || fromZone == Zone.STACK) {
+            for (StackObject stackObject : game.getState().getStack()) {
+                List<ActivatedAbility> currentPlayable = new ArrayList<>();
+                getPlayableFromObjectAll(game, Zone.STACK, stackObject, availableMana, currentPlayable);
+                for (ActivatedAbility ability : currentPlayable) {
+                    activatedUnique.put(ability.toString(), ability);
+                    activatedAll.add(ability);
+                }
+            }
+        }
+
+        // activated abilities from objects in the command zone (emblems or commanders)
+        if (fromAll || fromZone == Zone.COMMAND) {
+            for (CommandObject commandObject : game.getState().getCommand()) {
+                List<ActivatedAbility> currentPlayable = new ArrayList<>();
+                getPlayableFromObjectAll(game, Zone.COMMAND, commandObject, availableMana, currentPlayable);
+                for (ActivatedAbility ability : currentPlayable) {
+                    activatedUnique.put(ability.toString(), ability);
+                    activatedAll.add(ability);
+                }
+            }
+        }
+
+        if (hideDuplicatedAbilities) {
+            playable.addAll(activatedUnique.values());
+        } else {
+            playable.addAll(activatedAll);
+        }
+
+        // make sure it independent of sim game
+        return playable.stream()
+                .map(ActivatedAbility::copy)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -4296,7 +4320,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param game
      * @return
      */
-    private boolean shouldSkipGettingPlayable(Game game) {
+    static private boolean shouldSkipGettingPlayable(Game game) {
         if (game.getStep() == null) { // happens at the start of the game
             return true;
         }
@@ -4527,6 +4551,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public boolean canPlotFromTopOfLibrary() {
+        return canPlotFromTopOfLibrary;
+    }
+
+    @Override
+    public void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary) {
+        this.canPlotFromTopOfLibrary = canPlotFromTopOfLibrary;
+    }
+
+    @Override
     public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
         this.drawsOnOpponentsTurn = drawsOnOpponentsTurn;
     }
@@ -4693,6 +4727,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                 List<ZoneChangeInfo> infoList = new ArrayList<>();
                 for (Card card : cards) {
                     fromZone = game.getState().getZone(card.getId());
+                    // 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
+                    // or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
+                    // that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
+                    // its current zone.
+                    Boolean enterTransformed = (Boolean) game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
+                    if (enterTransformed != null && enterTransformed && !card.isTransformable()) {
+                        continue;
+                    }
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source,
                             byOwner ? card.getOwnerId() : getId(), fromZone, Zone.BATTLEFIELD, appliedEffects);
                     infoList.add(new ZoneChangeInfo.Battlefield(event, faceDown, tapped, source));
@@ -4704,6 +4746,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         successfulMovedCards.add(permanent);
                         if (!game.isSimulation()) {
                             Player eventPlayer = game.getPlayer(info.event.getPlayerId());
+                            fromZone = info.event.getFromZone();
                             if (eventPlayer != null && fromZone != null) {
                                 game.informPlayers(eventPlayer.getLogName() + " puts "
                                         + GameLog.getColoredObjectIdName(permanent) + " from "
@@ -5056,9 +5099,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         Cards cards = new CardsImpl(this.getLibrary().getTopCards(game, event.getAmount()));
         this.moveCards(cards, Zone.GRAVEYARD, source, game);
         for (Card card : cards.getCards(game)) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MILLED_CARD, card.getId(), source, getId()));
+            MilledCardEvent milledEvent = new MilledCardEvent(card, getId(), source);
+            game.fireEvent(milledEvent);
+            game.getState().addSimultaneousMilledCardToBatch(milledEvent, game);
         }
-        game.fireEvent(new MilledCardsEvent(source, getId(), cards));
         return cards;
     }
 

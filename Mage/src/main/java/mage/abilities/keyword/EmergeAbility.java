@@ -110,7 +110,7 @@ public class EmergeAbility extends SpellAbility {
                             this.setCostsTag(EMERGE_ACTIVATION_CREATURE_REFERENCE, mor); //Can access with LKI afterwards
                             return true;
                         } else {
-                            activated = false;
+                            activated = false; // TODO: research, why
                         }
                     }
                 }

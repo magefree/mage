@@ -24,7 +24,7 @@ public final class AshnodsAltar extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Sacrifice a creature: Add {C}{C}.
-        SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
+        SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, 
                 new BasicManaEffect(Mana.ColorlessMana(2), CreaturesYouControlCount.instance), 
                 cost));

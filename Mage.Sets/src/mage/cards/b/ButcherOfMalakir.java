@@ -36,7 +36,7 @@ public final class ButcherOfMalakir extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Butcher of Malakir or another creature you control dies, each opponent sacrifices a creature.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), false, filter));
+        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE), false, filter));
     }
 
     private ButcherOfMalakir(final ButcherOfMalakir card) {

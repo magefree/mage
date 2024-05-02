@@ -22,7 +22,6 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author varaghar
  */
 public final class KingNarfisBetrayal extends CardImpl {
@@ -146,7 +145,7 @@ class KingNarfisBetrayalSecondEffect extends OneShotEffect {
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
         if (exileZone != null) {
             for (Card card : exileZone.getCards(game)) {
-                CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+                CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
             }
         }
 

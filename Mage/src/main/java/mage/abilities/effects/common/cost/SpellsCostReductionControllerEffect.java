@@ -34,12 +34,8 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.amount = 0;
         this.manaCostsToReduce = manaCostsToReduce;
         this.upTo = false;
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage()).append(" you cast cost ");
-        sb.append(manaCostsToReduce.getText());
-        sb.append(" less to cast. This effect reduces only the amount of colored mana you pay.");
-        this.staticText = sb.toString();
+        this.staticText = filter.getMessage() + " you cast cost " + manaCostsToReduce.getText() +
+                " less to cast. This effect reduces only the amount of colored mana you pay.";
     }
 
     public SpellsCostReductionControllerEffect(FilterCard filter, int amount) {

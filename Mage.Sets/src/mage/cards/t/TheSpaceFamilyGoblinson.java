@@ -104,7 +104,7 @@ class TheSpaceFamilyGoblinsonWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DIE_ROLLED) {
-            map.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
+            map.compute(event.getTargetId(), CardUtil::setOrIncrementValue);
         }
     }
 
@@ -146,7 +146,7 @@ class TheSpaceFamilyGoblinsonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return isControlledBy(event.getPlayerId());
+        return isControlledBy(event.getTargetId());
     }
 
 }

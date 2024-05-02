@@ -30,7 +30,6 @@ public class PlayerView implements Serializable {
     private final Counters counters;
     private final int wins;
     private final int winsNeeded;
-    private final long deckHashCode;
     private final int libraryCount;
     private final int handCount;
     private final boolean isActive;
@@ -68,8 +67,6 @@ public class PlayerView implements Serializable {
         this.counters = player.getCounters();
         this.wins = player.getMatchPlayer().getWins();
         this.winsNeeded = player.getMatchPlayer().getWinsNeeded();
-        // If match ended immediately before, deck can be set to null so check is necessarry here
-        this.deckHashCode = player.getMatchPlayer().getDeck() != null ? player.getMatchPlayer().getDeck().getDeckHashCode() : 0;
         this.libraryCount = player.getLibrary().size();
         this.handCount = player.getHand().size();
         this.manaPool = new ManaPoolView(player.getManaPool());
@@ -204,10 +201,6 @@ public class PlayerView implements Serializable {
 
     public int getWinsNeeded() {
         return winsNeeded;
-    }
-
-    public long getDeckHashCode() {
-        return deckHashCode;
     }
 
     public int getHandCount() {

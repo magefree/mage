@@ -53,7 +53,8 @@ public class FeldonOfTheThirdPathTest extends CardTestPlayerBase {
         assertLife(playerB, 18); // -2 from Robber
 
         // possible bug: triggers from destroyed permanents keeps in game state (e.g. 2 triggers in game state)
-        Assert.assertEquals("game state must have only 1 trigger from original card", 1, currentGame.getState().getTriggers().size());
+        // (Since the introduction of Rad Counters, there is one inherent trigger per player in the state, hence the "+ 2")
+        Assert.assertEquals("game state must have only 1 trigger from original card", 1 + 2, currentGame.getState().getTriggers().size());
     }
 
     @Test

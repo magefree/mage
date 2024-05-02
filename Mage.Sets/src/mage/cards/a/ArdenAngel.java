@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -34,7 +34,7 @@ public final class ArdenAngel extends CardImpl {
         // At the beginning of your upkeep, if Arden Angel is in your graveyard, roll a four-sided die. If the result is 1, return Arden Angel from your graveyard to the battlefield.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new ArdenAngelEffect(), TargetController.YOU, false),
-                ArdenAngelCondition.instance, "At the beginning of your upkeep, if {this} is in your graveyard, " +
+                SourceInGraveyardCondition.instance, "At the beginning of your upkeep, if {this} is in your graveyard, " +
                 "roll a four-sided die. If the result is 1, return {this} from your graveyard to the battlefield."
         ));
     }
@@ -46,15 +46,6 @@ public final class ArdenAngel extends CardImpl {
     @Override
     public ArdenAngel copy() {
         return new ArdenAngel(this);
-    }
-}
-
-enum ArdenAngelCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
     }
 }
 

@@ -1,14 +1,12 @@
 
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SacrificeAllControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,26 +14,32 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.DragonToken2;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DayOfTheDragons extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent(SubType.DRAGON, "Dragons");
+
     public DayOfTheDragons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
 
         // When Day of the Dragons enters the battlefield, exile all creatures you control. Then create that many 5/5 red Dragon creature tokens with flying.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DayOfTheDragonsEntersEffect(), false));
 
         // When Day of the Dragons leaves the battlefield, sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new DayOfTheDragonsLeavesEffect(), false));
+        Ability ability = new LeavesBattlefieldTriggeredAbility(new SacrificeAllControllerEffect(filter), false);
+        ability.addEffect(new DayOfTheDragonsLeavesEffect());
+        this.addAbility(ability);
     }
 
     private DayOfTheDragons(final DayOfTheDragons card) {
@@ -92,16 +96,9 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect {
 
 class DayOfTheDragonsLeavesEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent("all Dragons you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(SubType.DRAGON.getPredicate());
-    }
-
     public DayOfTheDragonsLeavesEffect() {
         super(Outcome.Neutral);
-        staticText = "sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control";
+        staticText = "Then return the exiled cards to the battlefield under your control";
     }
 
     private DayOfTheDragonsLeavesEffect(final DayOfTheDragonsLeavesEffect effect) {
@@ -113,11 +110,6 @@ class DayOfTheDragonsLeavesEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null) {
-            for (Permanent dragon : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                if (dragon != null) {
-                    dragon.sacrifice(source, game);
-                }
-            }
             int zoneChangeCounter = source.getSourceObjectZoneChangeCounter();
             if (zoneChangeCounter > 0 && !(sourceObject instanceof PermanentToken)) {
                 zoneChangeCounter--;

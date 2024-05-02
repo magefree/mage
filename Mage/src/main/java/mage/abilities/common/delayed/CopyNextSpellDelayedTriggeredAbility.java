@@ -33,7 +33,7 @@ public class CopyNextSpellDelayedTriggeredAbility extends DelayedTriggeredAbilit
         this.rule = rule;
     }
 
-    private CopyNextSpellDelayedTriggeredAbility(final CopyNextSpellDelayedTriggeredAbility ability) {
+    protected CopyNextSpellDelayedTriggeredAbility(final CopyNextSpellDelayedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;

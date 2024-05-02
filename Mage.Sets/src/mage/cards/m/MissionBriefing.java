@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.cards.CardImpl;
@@ -68,7 +68,7 @@ class MissionBriefingEffect extends OneShotEffect {
         player.surveil(2, source, game);
         Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD);
         player.choose(outcome, target, source, game);
-        Effect effect = new MayCastTargetThenExileEffect(Duration.EndOfTurn);
+        Effect effect = new MayCastTargetCardEffect(Duration.EndOfTurn, true);
         effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
         effect.apply(game, source);
         return true;

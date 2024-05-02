@@ -39,7 +39,7 @@ public class BlitzAbility extends SpellAbility {
         ability.addEffect(new BlitzAddDelayedTriggeredAbilityEffect());
         ability.setRuleVisible(false);
         addSubAbility(ability);
-        this.ruleAdditionalCostsVisible = false;
+        this.setAdditionalCostsRuleVisible(false);
         this.timing = TimingRule.SORCERY;
     }
 

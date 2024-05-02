@@ -17,6 +17,7 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
 import mage.game.command.CommandObject;
+import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.*;
 import mage.game.permanent.Battlefield;
@@ -71,7 +72,6 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
     private final Revealed companion;
 
-    private DelayedTriggeredAbilities delayed;
     private SpecialActions specialActions;
     private Watchers watchers;
     private Turn turn;
@@ -86,6 +86,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean isPlaneChase;
     private List<String> seenPlanes = new ArrayList<>();
     private List<Designation> designations = new ArrayList<>();
+    private List<Emblem> inherentEmblems = new ArrayList<>();
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
@@ -94,8 +95,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
-    private TriggeredAbilities triggers;
-    private List<TriggeredAbility> triggered = new ArrayList<>();
+    private TriggeredAbilities triggers; // all normal triggers
+    private DelayedTriggeredAbilities delayed; // all delayed triggers
+    private List<TriggeredAbility> triggered = new ArrayList<>(); // raised triggers, waiting to resolve (can contains both normal and delayed)
     private Combat combat;
     private Map<String, Object> values = new HashMap<>();
     private Map<UUID, Zone> zones = new HashMap<>();
@@ -157,6 +159,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes.addAll(state.seenPlanes);
         this.designations.addAll(state.designations);
+        this.inherentEmblems = CardUtil.deepCopyObject(state.inherentEmblems);
         this.exile = state.exile.copy();
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
@@ -204,6 +207,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         exile.clear();
         command.clear();
         designations.clear();
+        inherentEmblems.clear();
         seenPlanes.clear();
         isPlaneChase = false;
         revealed.clear();
@@ -233,6 +237,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void restore(GameState state) {
+        // no needs in copy here cause GameState already copied on save and it will be used only one time here
         this.activePlayerId = state.activePlayerId;
         this.playerList.setCurrent(state.activePlayerId);
         this.playerByOrderId = state.playerByOrderId;
@@ -244,6 +249,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes = state.seenPlanes;
         this.designations = state.designations;
+        this.inherentEmblems = state.inherentEmblems;
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
@@ -503,6 +509,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public List<Designation> getDesignations() {
         return designations;
+    }
+
+    public List<Emblem> getInherentEmblems() {
+        return inherentEmblems;
     }
 
     public Plane getCurrentPlane() {
@@ -808,7 +818,119 @@ public class GameState implements Serializable, Copyable<GameState> {
         return !simultaneousEvents.isEmpty();
     }
 
-    public void addSimultaneousLifeLossEventToBatches(LifeLostEvent lifeLossEvent, Game game) {
+    // There might be no damage dealt, but we want to fire that damage (in a batch) could have been dealt.
+    // Of note, DamagedBatchCouldHaveFiredEvent is not a batch event in the sense it doesn't contain sub events.
+    public void addBatchDamageCouldHaveBeenFired(boolean combat, Game game) {
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchCouldHaveFiredEvent
+                    && ((DamagedBatchCouldHaveFiredEvent) event).isCombat() == combat) {
+                return;
+            }
+        }
+        addSimultaneousEvent(new DamagedBatchCouldHaveFiredEvent(combat), game);
+    }
+
+    public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
+        // Combine multiple damage events in the single event (batch)
+        // Note: one event can be stored in multiple batches
+        if (damagedEvent instanceof DamagedPlayerEvent) {
+            // DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
+            addSimultaneousDamageToPlayerBatches((DamagedPlayerEvent) damagedEvent, game);
+        } else if (damagedEvent instanceof DamagedPermanentEvent) {
+            // DAMAGED_BATCH_FOR_PERMANENTS + DAMAGED_BATCH_FOR_ONE_PERMANENT
+            addSimultaneousDamageToPermanentBatches((DamagedPermanentEvent) damagedEvent, game);
+        }
+        // DAMAGED_BATCH_FOR_ALL
+        addSimultaneousDamageToBatchForAll(damagedEvent, game);
+    }
+
+    public void addSimultaneousDamageToPlayerBatches(DamagedPlayerEvent damagedPlayerEvent, Game game) {
+        // find existing batches first
+        boolean isTotalBatchUsed = false;
+        boolean isPlayerBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchForPlayersEvent) {
+                ((DamagedBatchForPlayersEvent) event).addEvent(damagedPlayerEvent);
+                isTotalBatchUsed = true;
+            } else if (event instanceof DamagedBatchForOnePlayerEvent
+                    && damagedPlayerEvent.getTargetId().equals(event.getTargetId())) {
+                ((DamagedBatchForOnePlayerEvent) event).addEvent(damagedPlayerEvent);
+                isPlayerBatchUsed = true;
+            }
+        }
+        // new batches if necessary
+        if (!isTotalBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForPlayersEvent(damagedPlayerEvent), game);
+        }
+        if (!isPlayerBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForOnePlayerEvent(damagedPlayerEvent), game);
+        }
+    }
+
+    public void addSimultaneousDamageToPermanentBatches(DamagedPermanentEvent damagedPermanentEvent, Game game) {
+        // find existing batches first
+        boolean isTotalBatchUsed = false;
+        boolean isSingleBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchForPermanentsEvent) {
+                ((DamagedBatchForPermanentsEvent) event).addEvent(damagedPermanentEvent);
+                isTotalBatchUsed = true;
+            } else if (event instanceof DamagedBatchForOnePermanentEvent
+                    && damagedPermanentEvent.getTargetId().equals(event.getTargetId())) {
+                ((DamagedBatchForOnePermanentEvent) event).addEvent(damagedPermanentEvent);
+                isSingleBatchUsed = true;
+            }
+        }
+        // new batches if necessary
+        if (!isTotalBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForPermanentsEvent(damagedPermanentEvent), game);
+        }
+        if (!isSingleBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForOnePermanentEvent(damagedPermanentEvent), game);
+        }
+    }
+
+    public void addSimultaneousDamageToBatchForAll(DamagedEvent damagedEvent, Game game) {
+        boolean isBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchAllEvent) {
+                ((DamagedBatchAllEvent) event).addEvent(damagedEvent);
+                isBatchUsed = true;
+            }
+        }
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchAllEvent(damagedEvent), game);
+        }
+    }
+
+    public void addSimultaneousMilledCardToBatch(MilledCardEvent milledEvent, Game game) {
+        // Combine multiple mill cards events in the single event (batch)
+        // see GameEvent.MILLED_CARDS_BATCH_FOR_ONE_PLAYER and GameEvent.MILLED_CARDS_BATCH_FOR_ALL
+
+        // existing batch
+        boolean isBatchUsed = false;
+        boolean isBatchForPlayerUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof MilledBatchAllEvent) {
+                ((MilledBatchAllEvent) event).addEvent(milledEvent);
+                isBatchUsed = true;
+            } else if (event instanceof MilledBatchForOnePlayerEvent
+                    && event.getPlayerId().equals(milledEvent.getPlayerId())) {
+                ((MilledBatchForOnePlayerEvent) event).addEvent(milledEvent);
+                isBatchForPlayerUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new MilledBatchAllEvent(milledEvent), game);
+        }
+        if (!isBatchForPlayerUsed) {
+            addSimultaneousEvent(new MilledBatchForOnePlayerEvent(milledEvent), game);
+        }
+    }
+
+    public void addSimultaneousLifeLossToBatch(LifeLostEvent lifeLossEvent, Game game) {
         // Combine multiple life loss events in the single event (batch)
         // see GameEvent.LOST_LIFE_BATCH
 
@@ -827,69 +949,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
-    public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
-        // Combine multiple damage events in the single event (batch)
-        // * per damage type (see GameEvent.DAMAGED_BATCH_FOR_PERMANENTS, GameEvent.DAMAGED_BATCH_FOR_PLAYERS)
-        // * per player (see GameEvent.DAMAGED_BATCH_FOR_ONE_PLAYER)
-        // * per permanent (see GameEvent.DAMAGED_BATCH_FOR_ONE_PERMANENT)
-        //
-        // Warning, one event can be stored in multiple batches,
-        // example: DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
-
-        boolean isPlayerDamage = damagedEvent instanceof DamagedPlayerEvent;
-        boolean isPermanentDamage = damagedEvent instanceof DamagedPermanentEvent;
-
-        // existing batch
-        boolean isDamageBatchUsed = false;
-        boolean isPlayerBatchUsed = false;
-        boolean isPermanentBatchUsed = false;
-        for (GameEvent event : simultaneousEvents) {
-
-            if (isPlayerDamage && event instanceof DamagedBatchForOnePlayerEvent) {
-                // per player
-                DamagedBatchForOnePlayerEvent oldPlayerBatch = (DamagedBatchForOnePlayerEvent) event;
-                if (oldPlayerBatch.getDamageClazz().isInstance(damagedEvent)
-                        && event.getPlayerId().equals(damagedEvent.getTargetId())) {
-                    oldPlayerBatch.addEvent(damagedEvent);
-                    isPlayerBatchUsed = true;
-                }
-            } else if (isPermanentDamage && event instanceof DamagedBatchForOnePermanentEvent) {
-                // per permanent
-                DamagedBatchForOnePermanentEvent oldPermanentBatch = (DamagedBatchForOnePermanentEvent) event;
-                if (oldPermanentBatch.getDamageClazz().isInstance(damagedEvent)
-                        && CardUtil.getEventTargets(event).contains(damagedEvent.getTargetId())) {
-                    oldPermanentBatch.addEvent(damagedEvent);
-                    isPermanentBatchUsed = true;
-                }
-            } else if ((event instanceof DamagedBatchEvent)
-                    && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
-                // per damage type
-                // If the batch event isn't DAMAGED_BATCH_FOR_ONE_PLAYER, the targetIDs need not match,
-                // since "event" is a generic batch in this case
-                // (either DAMAGED_BATCH_FOR_PERMANENTS or DAMAGED_BATCH_FOR_PLAYERS)
-                // Just needs to be a permanent-damaging event for DAMAGED_BATCH_FOR_PERMANENTS,
-                // or a player-damaging event for DAMAGED_BATCH_FOR_PLAYERS
-                ((DamagedBatchEvent) event).addEvent(damagedEvent);
-                isDamageBatchUsed = true;
-            }
-
-        }
-
-        // new batch
-        if (!isDamageBatchUsed) {
-            addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
-        }
-        if (!isPlayerBatchUsed && isPlayerDamage) {
-            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent);
-            addSimultaneousEvent(event, game);
-        }
-        if (!isPermanentBatchUsed && isPermanentDamage) {
-            DamagedBatchEvent event = new DamagedBatchForOnePermanentEvent(damagedEvent);
-            addSimultaneousEvent(event, game);
-        }
-    }
-
-    public void addSimultaneousTapped(TappedEvent tappedEvent, Game game) {
+    public void addSimultaneousTappedToBatch(TappedEvent tappedEvent, Game game) {
         // Combine multiple tapped events in the single event (batch)
 
         boolean isTappedBatchUsed = false;
@@ -904,13 +964,11 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         // new batch
         if (!isTappedBatchUsed) {
-            TappedBatchEvent batch = new TappedBatchEvent();
-            batch.addEvent(tappedEvent);
-            addSimultaneousEvent(batch, game);
+            addSimultaneousEvent(new TappedBatchEvent(tappedEvent), game);
         }
     }
 
-    public void addSimultaneousUntapped(UntappedEvent untappedEvent, Game game) {
+    public void addSimultaneousUntappedToBatch(UntappedEvent untappedEvent, Game game) {
         // Combine multiple untapped events in the single event (batch)
 
         boolean isUntappedBatchUsed = false;
@@ -925,9 +983,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         // new batch
         if (!isUntappedBatchUsed) {
-            UntappedBatchEvent batch = new UntappedBatchEvent();
-            batch.addEvent(untappedEvent);
-            addSimultaneousEvent(batch, game);
+            addSimultaneousEvent(new UntappedBatchEvent(untappedEvent), game);
         }
     }
 
@@ -1124,6 +1180,25 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         for (Ability sub : ability.getSubAbilities()) {
             addAbility(sub, sourceId, attachedTo);
+        }
+    }
+
+    /**
+     * Inherent triggers (Rad counters) in the rules have no source.
+     * However to fit better with the engine, we make a fake emblem source,
+     * which is not displayed in any game zone. That allows the trigger to
+     * have a source, which helps with a bunch of situation like hosting,
+     * rather than having a  trigger.
+     * <p>
+     * Should not be used except in very specific situations
+     */
+    public void addInherentEmblem(Emblem emblem, UUID controllerId) {
+        getInherentEmblems().add(emblem);
+        emblem.setControllerId(controllerId);
+        for (Ability ability : emblem.getInitAbilities()) {
+            ability.setControllerId(controllerId);
+            ability.setSourceId(emblem.getId());
+            addAbility(ability, null, emblem);
         }
     }
 
@@ -1406,7 +1481,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Store the tags of source ability using the MOR as a reference
      */
-    void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source){
+    void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source) {
         if (source.getCostsTagMap() != null) {
             permanentCostsTags.put(permanentMOR, CardUtil.deepCopyObject(source.getCostsTagMap()));
         }
@@ -1416,9 +1491,9 @@ public class GameState implements Serializable, Copyable<GameState> {
      * Removes the cost tags if the corresponding permanent is no longer on the battlefield.
      * Only use if the stack is empty and nothing can refer to them anymore (such as at EOT, the current behavior)
      */
-    public void cleanupPermanentCostsTags(Game game){
+    public void cleanupPermanentCostsTags(Game game) {
         getPermanentCostsTags().entrySet().removeIf(entry ->
-                !(entry.getKey().getZoneChangeCounter() == game.getState().getZoneChangeCounter(entry.getKey().getSourceId())-1)
+                !(entry.getKey().getZoneChangeCounter() == game.getState().getZoneChangeCounter(entry.getKey().getSourceId()) - 1)
         ); // The stored MOR is the stack-moment MOR so need to subtract one from the permanent's ZCC for the check
     }
 

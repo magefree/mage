@@ -16,7 +16,6 @@ import mage.game.Game;
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class EternalScourge extends CardImpl {
@@ -49,7 +48,7 @@ public final class EternalScourge extends CardImpl {
 class EternalScourgePlayEffect extends AsThoughEffectImpl {
 
     EternalScourgePlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from exile";
     }
 

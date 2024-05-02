@@ -75,7 +75,7 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DieRolledEvent drEvent = (DieRolledEvent) event;
         // silver border card must look for "result" instead "natural result"
-        if (this.isControlledBy(event.getPlayerId()) && drEvent.getResult() < 5) {
+        if (this.isControlledBy(event.getTargetId()) && drEvent.getResult() < 5) {
             return false;
         }
 

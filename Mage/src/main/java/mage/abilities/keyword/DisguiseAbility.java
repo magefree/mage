@@ -4,12 +4,14 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.cards.Card;
+import mage.constants.Duration;
 import mage.constants.SpellAbilityCastMode;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
@@ -68,6 +70,10 @@ public class DisguiseAbility extends SpellAbility {
     protected Costs<Cost> disguiseCosts;
 
     public DisguiseAbility(Card card, Cost disguiseCost) {
+        this(card, disguiseCost, null);
+    }
+
+    public DisguiseAbility(Card card, Cost disguiseCost, CostAdjuster costAdjuster) {
         super(new GenericManaCost(3), card.getName());
         this.timing = TimingRule.SORCERY;
         this.disguiseCosts = new CostsImpl<>();
@@ -77,13 +83,15 @@ public class DisguiseAbility extends SpellAbility {
 
         // face down effect (hidden by default, visible in face down objects)
         Ability ability = new SimpleStaticAbility(new BecomesFaceDownCreatureEffect(
-                this.disguiseCosts, BecomesFaceDownCreatureEffect.FaceDownType.DISGUISED));
+                this.disguiseCosts, null, Duration.WhileOnBattlefield,
+                BecomesFaceDownCreatureEffect.FaceDownType.DISGUISED, costAdjuster
+        ));
         ability.setWorksFaceDown(true);
         ability.setRuleVisible(false);
         addSubAbility(ability);
     }
 
-    private DisguiseAbility(final DisguiseAbility ability) {
+    protected DisguiseAbility(final DisguiseAbility ability) {
         super(ability);
         this.disguiseCosts = ability.disguiseCosts; // can't be changed TODO: looks buggy, need research
     }

@@ -202,7 +202,7 @@ public final class CombatUtil {
      * @deprecated TODO: unused, can be deleted?
      */
     public static SurviveInfo willItSurvive(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
-        Game sim = game.copy();
+        Game sim = game.createSimulationForAI();
 
         // TODO: bugged, miss combat.clear code (possible bugs - wrong blocker declare by AI on multiple options?)
         Combat combat = sim.getCombat();
@@ -307,7 +307,7 @@ public final class CombatUtil {
 
     public static SurviveInfo willItSurvive2(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
 
-        Game sim = game.copy();
+        Game sim = game.createSimulationForAI();
 
         // TODO: bugged, miss combat.clear code (possible bugs - wrong blocker declare by AI on multiple options?)
         Combat combat = sim.getCombat();

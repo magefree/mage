@@ -1,22 +1,28 @@
 package mage.abilities.effects;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.constants.Duration;
-import mage.constants.PhaseStep;
+import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.turn.Step;
+import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * Created by IGOUDT on 22-3-2017.
+ * This requires to add the PhantomPreventionWatcher
+ *
+ * @author Susucr
  */
 public class PhantomPreventionEffect extends PreventionEffectImpl {
 
-    // remember turn and phase step to check if counter in this step was already removed
-    private int turn = 0;
-    private Step combatPhaseStep = null;
+    public static PhantomPreventionWatcher createWatcher() {
+        return new PhantomPreventionWatcher();
+    }
 
     public PhantomPreventionEffect() {
         super(Duration.WhileOnBattlefield);
@@ -25,8 +31,6 @@ public class PhantomPreventionEffect extends PreventionEffectImpl {
 
     protected PhantomPreventionEffect(final PhantomPreventionEffect effect) {
         super(effect);
-        this.turn = effect.turn;
-        this.combatPhaseStep = effect.combatPhaseStep;
     }
 
     @Override
@@ -37,26 +41,18 @@ public class PhantomPreventionEffect extends PreventionEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         preventDamageAction(event, source, game);
-
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            boolean removeCounter = true;
-            // check if in the same combat damage step already a counter was removed
-            if (game.getTurn().getPhase().getStep().getType() == PhaseStep.COMBAT_DAMAGE) {
-                if (game.getTurnNum() == turn
-                        && game.getTurn().getStep().equals(combatPhaseStep)) {
-                    removeCounter = false;
-                } else {
-                    turn = game.getTurnNum();
-                    combatPhaseStep = game.getTurn().getStep();
+        PhantomPreventionWatcher watcher = game.getState().getWatcher(PhantomPreventionWatcher.class);
+        if (permanent != null && watcher != null) {
+            MageObjectReference mor = new MageObjectReference(source.getId(), source.getSourceObjectZoneChangeCounter(), game);
+            if (!watcher.hadMORCounterRemovedThisBatch(mor)) {
+                watcher.addMOR(mor);
+                if (permanent.getCounters(game).containsKey(CounterType.P1P1)) {
+                    StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
+                    permanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
+                    sb.append("Removed a +1/+1 counter ");
+                    game.informPlayers(sb.toString());
                 }
-            }
-
-            if (removeCounter && permanent.getCounters(game).containsKey(CounterType.P1P1)) {
-                StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
-                permanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
-                sb.append("Removed a +1/+1 counter ");
-                game.informPlayers(sb.toString());
             }
         }
 
@@ -72,5 +68,38 @@ public class PhantomPreventionEffect extends PreventionEffectImpl {
         }
         return false;
     }
+}
 
+class PhantomPreventionWatcher extends Watcher {
+
+    // We keep a very short-lived set of which PhantomPreventionEffect caused
+    // +1/+1 to get removed during the current damage batch.
+    private final Set<MageObjectReference> morRemovedCounterThisDamageBatch = new HashSet<>();
+
+    PhantomPreventionWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        // This watcher resets every time a Damage Batch could have fired (even if all damage was prevented)
+        if (event.getType() != GameEvent.EventType.DAMAGED_BATCH_COULD_HAVE_FIRED) {
+            return;
+        }
+        morRemovedCounterThisDamageBatch.clear();
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        morRemovedCounterThisDamageBatch.clear();
+    }
+
+    boolean hadMORCounterRemovedThisBatch(MageObjectReference mor) {
+        return morRemovedCounterThisDamageBatch.contains(mor);
+    }
+
+    void addMOR(MageObjectReference mor) {
+        morRemovedCounterThisDamageBatch.add(mor);
+    }
 }

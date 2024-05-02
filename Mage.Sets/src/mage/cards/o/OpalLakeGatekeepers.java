@@ -41,7 +41,7 @@ public final class OpalLakeGatekeepers extends CardImpl {
 
         // When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
+                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), true),
                 gatesCondition,
                 "When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card.")
                 .addHint(new ConditionHint(gatesCondition, "You control two or more Gates")));

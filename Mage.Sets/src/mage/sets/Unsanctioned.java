@@ -16,7 +16,7 @@ public class Unsanctioned extends ExpansionSet {
     }
 
     private Unsanctioned() {
-        super("Unsanctioned", "UND", ExpansionSet.buildDate(2020, 2, 29), SetType.JOKESET);
+        super("Unsanctioned", "UND", ExpansionSet.buildDate(2020, 2, 29), SetType.JOKE_SET);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

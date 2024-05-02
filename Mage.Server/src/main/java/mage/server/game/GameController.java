@@ -568,9 +568,17 @@ public class GameController implements GameCallback {
                 }
             }
             break;
-            case CONCEDE:
-                game.concede(getPlayerId(userId));
+            case CONCEDE: {
+                UUID playerId = getPlayerId(userId);
+                if (playerId != null) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        game.informPlayers(player.getLogName() + " want to concede");
+                        game.setConcedingPlayer(getPlayerId(userId));
+                    }
+                }
                 break;
+            }
             case MANA_AUTO_PAYMENT_OFF:
                 game.setManaPaymentMode(getPlayerId(userId), false);
                 break;
@@ -600,7 +608,7 @@ public class GameController implements GameCallback {
                     }
                 }
                 break;
-            case REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS:
+            case REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS: {
                 UUID playerId = getPlayerId(userId);
                 if (playerId != null) {
                     Player player = game.getPlayer(playerId);
@@ -609,6 +617,7 @@ public class GameController implements GameCallback {
                     }
                 }
                 break;
+            }
             case REQUEST_PERMISSION_TO_SEE_HAND_CARDS:
                 if (data instanceof UUID) {
                     requestPermissionToSeeHandCards(userId, (UUID) data);

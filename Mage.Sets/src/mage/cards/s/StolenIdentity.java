@@ -1,15 +1,14 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.effects.common.CipherEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -17,18 +16,12 @@ import mage.target.TargetPermanent;
  */
 public final class StolenIdentity extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
-
-    static {
-        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
-    }
-
     public StolenIdentity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
         // Create a token that's a copy of target artifact or creature.
         this.getSpellAbility().addEffect(new CreateTokenCopyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         // Cipher
         this.getSpellAbility().addEffect(new CipherEffect());
     }

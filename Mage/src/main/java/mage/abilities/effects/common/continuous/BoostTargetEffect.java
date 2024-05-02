@@ -59,7 +59,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
         }

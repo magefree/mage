@@ -43,4 +43,13 @@ public class CrewedVehicleWatcher extends Watcher {
                 .stream()
                 .anyMatch(mor -> mor.refersTo(crewer, game));
     }
+
+    public static int getCrewCount(Permanent vehicle, Game game) {
+        return game
+                .getState()
+                .getWatcher(CrewedVehicleWatcher.class)
+                .crewMap
+                .getOrDefault(new MageObjectReference(vehicle, game), Collections.emptySet())
+                .size();
+    }
 }

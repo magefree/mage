@@ -269,11 +269,17 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     boolean isSimulation();
 
-    void setSimulation(boolean checkPlayableState);
+    /**
+     * Prepare game for any simulations like AI or effects calc
+     */
+    Game createSimulationForAI();
+
+    /**
+     * Prepare game for any playable calc (available mana/abilities)
+     */
+    Game createSimulationForPlayableCalc();
 
     boolean inCheckPlayableState();
-
-    void setCheckPlayableState(boolean checkPlayableState);
 
     MageObject getLastKnownInformation(UUID objectId, Zone zone);
 
