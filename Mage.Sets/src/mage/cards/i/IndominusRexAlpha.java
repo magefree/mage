@@ -1,6 +1,7 @@
 package mage.cards.i;
 
 import java.util.*;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -9,16 +10,13 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.HexproofBaseAbility;
+import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.AbilityCounter;
-import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,19 +63,19 @@ public final class IndominusRexAlpha extends CardImpl {
 // Based on MindMaggotsEffect
 class IndominusRexAlphaCountersEffect extends OneShotEffect {
 
-    private static final List<CounterType> copyableCounters = Arrays.asList(
-            CounterType.FLYING,
-            CounterType.FIRST_STRIKE,
-            CounterType.DOUBLE_STRIKE,
-            CounterType.DEATHTOUCH,
-            CounterType.HEXPROOF,
-            CounterType.HASTE,
-            CounterType.INDESTRUCTIBLE,
-            CounterType.LIFELINK,
-            CounterType.MENACE,
-            CounterType.REACH,
-            CounterType.TRAMPLE,
-            CounterType.VIGILANCE
+    private static final List<Ability> copyableAbilities = Arrays.asList(
+            FlyingAbility.getInstance(),
+            FirstStrikeAbility.getInstance(),
+            DoubleStrikeAbility.getInstance(),
+            DeathtouchAbility.getInstance(),
+            HexproofAbility.getInstance(),  // Hexproof has a number of variants that will be handled separately
+            HasteAbility.getInstance(),
+            IndestructibleAbility.getInstance(),
+            LifelinkAbility.getInstance(),
+            new MenaceAbility(),
+            ReachAbility.getInstance(),
+            TrampleAbility.getInstance(),
+            VigilanceAbility.getInstance()
     );
 
     IndominusRexAlphaCountersEffect() {
@@ -131,13 +129,13 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
         // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
 
-        ArrayList<Counter> countersToAdd = new ArrayList<>();
+        ArrayList<Ability> abilitiesToAdd = new ArrayList<>();
 
-        for (CounterType counterType : copyableCounters) {
+        for (Ability abilityToCopy : copyableAbilities) {
 
-            Counter counter = counterType.createInstance();
-            Ability abilityToCopy = ((AbilityCounter)(counter)).getAbility();
-            Class<? extends Ability> abilityClass = abilityToCopy.getClass();
+//            Counter counter = counterType.createInstance();
+//            Ability abilityToCopy = ((AbilityCounter)(counter)).getAbility();
+//            Class<? extends Ability> abilityClass = abilityToCopy.getClass();
 
             for (UUID targetId : chosenTargets) {
 
@@ -147,28 +145,24 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
                 }
 
                 for (Ability ability : card.getAbilities(game)) {
-                    if (abilityClass.isInstance(ability)){
-                        countersToAdd.add(counter);
-                        break;
-                    } else if (counterType == CounterType.HEXPROOF && ability instanceof HexproofBaseAbility){
-                        // Exception for hexproof, must also search for abilites extending HexproofBaseAbility
-                        countersToAdd.add(counter);
-                        break;
+                    if (abilitiesToAdd.stream().anyMatch(a -> a.getClass().isInstance(ability))){
+                        continue;
                     }
-                }
-
-                if (countersToAdd.contains(counter)){
-                    // Already added this counter, move on to next counter
-                    break;
+                    if (abilityToCopy.getClass().isInstance(ability)){
+                        abilitiesToAdd.add(ability);
+                    } else if (ability instanceof HexproofBaseAbility) {
+                        // Any subclass of HexproofBaseAbility gets added too--not just instances of HexproofAbility
+                        abilitiesToAdd.add(ability);
+                    }
                 }
 
             }
 
         }
 
-        for (Counter counter : countersToAdd) {
-            permanent.addCounters(counter, source.getControllerId(), source, game, appliedEffects);
+        for (Ability abilityToCopy : abilitiesToAdd) {
+            permanent.addCounters(new AbilityCounter(abilityToCopy, 1), source.getControllerId(), source, game, appliedEffects);
         }
-        return !countersToAdd.isEmpty();
+        return !abilitiesToAdd.isEmpty();
     }
 }

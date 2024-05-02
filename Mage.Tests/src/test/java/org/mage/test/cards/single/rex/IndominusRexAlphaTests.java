@@ -1,5 +1,6 @@
 package org.mage.test.cards.single.rex;
 
+import mage.abilities.keyword.HexproofFromPlaneswalkersAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -80,7 +81,8 @@ public class IndominusRexAlphaTests extends CardTestPlayerBase {
         execute();
 
         assertCounterCount(playerA, "Indominus Rex, Alpha", CounterType.FLYING, 1);
-        assertCounterCount(playerA, "Indominus Rex, Alpha", CounterType.HEXPROOF, 1);
+        assertCounterCount(playerA, "Indominus Rex, Alpha", CounterType.HEXPROOF, 0);
+        assertCounterCount(playerA, "Indominus Rex, Alpha", HexproofFromPlaneswalkersAbility.getInstance().getRule(), 1);
         assertCounterCount(playerA, "Indominus Rex, Alpha", CounterType.LIFELINK, 1);
 
         assertHandCount(playerA, 3);
