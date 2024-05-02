@@ -42,6 +42,8 @@ import mage.watchers.Watchers;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -830,161 +832,90 @@ public class GameState implements Serializable, Copyable<GameState> {
         addSimultaneousEvent(new DamagedBatchCouldHaveFiredEvent(combat), game);
     }
 
+    /**
+     * Add event to the proper batch of the provided batchEventClass.
+     * If no batch exist, one is created with the event in it.
+     * <p>
+     * Note: one event can be stored in multiple batches, and will also fire separatedly.
+     */
+    private <T extends GameEvent, U extends BatchEvent<T>> void addToOrInitializeBatch(
+            Class<U> batchEventClass,
+            Class<T> genericEventClass,
+            T newEvent,
+            Game game
+    ) {
+        for (GameEvent event : simultaneousEvents) {
+            if (batchEventClass.isInstance(event)
+                    && batchEventClass.cast(event).matchEvent(newEvent)
+            ) {
+                // Found the existing batch matching the event.
+                batchEventClass.cast(event).addEvent(newEvent);
+                return;
+            }
+        }
+        // Did not found a matching batch: new batch is created from the single event constructor.
+        // Will throw if not matching a constructor
+        Constructor<U> constructor;
+        try {
+            constructor = batchEventClass.getConstructor(genericEventClass);
+        } catch (NoSuchMethodException e) {
+            throw new IllegalStateException("Missing proper batch constructor for " + batchEventClass.getName()
+                    + " for generic event class " + genericEventClass.getName()
+                    + " with new event " + newEvent.getClass().getName());
+        }
+        BatchEvent<T> newBatch;
+        try {
+            newBatch = constructor.newInstance(newEvent);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new IllegalStateException("Could not instantiate batch constructor for " + batchEventClass.getName()
+                    + " for generic event class " + genericEventClass.getName()
+                    + " with new event " + newEvent.getClass().getName()
+                    + " | " + e.getMessage());
+        }
+        addSimultaneousEvent(newBatch, game);
+    }
+
     public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
-        // Combine multiple damage events in the single event (batch)
-        // Note: one event can be stored in multiple batches
+        // Combine multiple damage events in the appropriate batch events
         if (damagedEvent instanceof DamagedPlayerEvent) {
-            // DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
-            addSimultaneousDamageToPlayerBatches((DamagedPlayerEvent) damagedEvent, game);
+            // DAMAGED_BATCH_FOR_PLAYERS
+            addToOrInitializeBatch(DamagedBatchForPlayersEvent.class, DamagedPlayerEvent.class, (DamagedPlayerEvent) damagedEvent, game);
+            // DAMAGED_BATCH_FOR_ONE_PLAYER
+            addToOrInitializeBatch(DamagedBatchForOnePlayerEvent.class, DamagedPlayerEvent.class, (DamagedPlayerEvent) damagedEvent, game);
         } else if (damagedEvent instanceof DamagedPermanentEvent) {
-            // DAMAGED_BATCH_FOR_PERMANENTS + DAMAGED_BATCH_FOR_ONE_PERMANENT
-            addSimultaneousDamageToPermanentBatches((DamagedPermanentEvent) damagedEvent, game);
+            // DAMAGED_BATCH_FOR_PERMANENTS
+            addToOrInitializeBatch(DamagedBatchForPermanentsEvent.class, DamagedPermanentEvent.class, (DamagedPermanentEvent) damagedEvent, game);
+            // DAMAGED_BATCH_FOR_ONE_PERMANENT
+            addToOrInitializeBatch(DamagedBatchForOnePermanentEvent.class, DamagedPermanentEvent.class, (DamagedPermanentEvent) damagedEvent, game);
         }
         // DAMAGED_BATCH_FOR_ALL
-        addSimultaneousDamageToBatchForAll(damagedEvent, game);
-    }
-
-    public void addSimultaneousDamageToPlayerBatches(DamagedPlayerEvent damagedPlayerEvent, Game game) {
-        // find existing batches first
-        boolean isTotalBatchUsed = false;
-        boolean isPlayerBatchUsed = false;
-        for (GameEvent event : simultaneousEvents) {
-            if (event instanceof DamagedBatchForPlayersEvent) {
-                ((DamagedBatchForPlayersEvent) event).addEvent(damagedPlayerEvent);
-                isTotalBatchUsed = true;
-            } else if (event instanceof DamagedBatchForOnePlayerEvent
-                    && damagedPlayerEvent.getTargetId().equals(event.getTargetId())) {
-                ((DamagedBatchForOnePlayerEvent) event).addEvent(damagedPlayerEvent);
-                isPlayerBatchUsed = true;
-            }
-        }
-        // new batches if necessary
-        if (!isTotalBatchUsed) {
-            addSimultaneousEvent(new DamagedBatchForPlayersEvent(damagedPlayerEvent), game);
-        }
-        if (!isPlayerBatchUsed) {
-            addSimultaneousEvent(new DamagedBatchForOnePlayerEvent(damagedPlayerEvent), game);
-        }
-    }
-
-    public void addSimultaneousDamageToPermanentBatches(DamagedPermanentEvent damagedPermanentEvent, Game game) {
-        // find existing batches first
-        boolean isTotalBatchUsed = false;
-        boolean isSingleBatchUsed = false;
-        for (GameEvent event : simultaneousEvents) {
-            if (event instanceof DamagedBatchForPermanentsEvent) {
-                ((DamagedBatchForPermanentsEvent) event).addEvent(damagedPermanentEvent);
-                isTotalBatchUsed = true;
-            } else if (event instanceof DamagedBatchForOnePermanentEvent
-                    && damagedPermanentEvent.getTargetId().equals(event.getTargetId())) {
-                ((DamagedBatchForOnePermanentEvent) event).addEvent(damagedPermanentEvent);
-                isSingleBatchUsed = true;
-            }
-        }
-        // new batches if necessary
-        if (!isTotalBatchUsed) {
-            addSimultaneousEvent(new DamagedBatchForPermanentsEvent(damagedPermanentEvent), game);
-        }
-        if (!isSingleBatchUsed) {
-            addSimultaneousEvent(new DamagedBatchForOnePermanentEvent(damagedPermanentEvent), game);
-        }
-    }
-
-    public void addSimultaneousDamageToBatchForAll(DamagedEvent damagedEvent, Game game) {
-        boolean isBatchUsed = false;
-        for (GameEvent event : simultaneousEvents) {
-            if (event instanceof DamagedBatchAllEvent) {
-                ((DamagedBatchAllEvent) event).addEvent(damagedEvent);
-                isBatchUsed = true;
-            }
-        }
-        if (!isBatchUsed) {
-            addSimultaneousEvent(new DamagedBatchAllEvent(damagedEvent), game);
-        }
+        addToOrInitializeBatch(DamagedBatchAllEvent.class, DamagedEvent.class, damagedEvent, game);
     }
 
     public void addSimultaneousMilledCardToBatch(MilledCardEvent milledEvent, Game game) {
-        // Combine multiple mill cards events in the single event (batch)
-        // see GameEvent.MILLED_CARDS_BATCH_FOR_ONE_PLAYER and GameEvent.MILLED_CARDS_BATCH_FOR_ALL
-
-        // existing batch
-        boolean isBatchUsed = false;
-        boolean isBatchForPlayerUsed = false;
-        for (GameEvent event : simultaneousEvents) {
-            if (event instanceof MilledBatchAllEvent) {
-                ((MilledBatchAllEvent) event).addEvent(milledEvent);
-                isBatchUsed = true;
-            } else if (event instanceof MilledBatchForOnePlayerEvent
-                    && event.getPlayerId().equals(milledEvent.getPlayerId())) {
-                ((MilledBatchForOnePlayerEvent) event).addEvent(milledEvent);
-                isBatchForPlayerUsed = true;
-            }
-        }
-
-        // new batch
-        if (!isBatchUsed) {
-            addSimultaneousEvent(new MilledBatchAllEvent(milledEvent), game);
-        }
-        if (!isBatchForPlayerUsed) {
-            addSimultaneousEvent(new MilledBatchForOnePlayerEvent(milledEvent), game);
-        }
+        // Combine multiple milled cards events in the appropriate batch events
+        // MILLED_CARDS_BATCH_FOR_ONE_PLAYER
+        addToOrInitializeBatch(MilledBatchAllEvent.class, MilledCardEvent.class, milledEvent, game);
+        // MILLED_CARDS_BATCH_FOR_ALL
+        addToOrInitializeBatch(MilledBatchForOnePlayerEvent.class, MilledCardEvent.class, milledEvent, game);
     }
 
     public void addSimultaneousLifeLossToBatch(LifeLostEvent lifeLossEvent, Game game) {
-        // Combine multiple life loss events in the single event (batch)
-        // see GameEvent.LOST_LIFE_BATCH
-
-        // existing batch
-        boolean isLifeLostBatchUsed = false;
-        for (GameEvent event : simultaneousEvents) {
-            if (event instanceof LifeLostBatchEvent) {
-                ((LifeLostBatchEvent) event).addEvent(lifeLossEvent);
-                isLifeLostBatchUsed = true;
-            }
-        }
-
-        // new batch
-        if (!isLifeLostBatchUsed) {
-            addSimultaneousEvent(new LifeLostBatchEvent(lifeLossEvent), game);
-        }
+        // Combine multiple life loss events in the appropriate batch events
+        // LOST_LIFE_BATCH
+        addToOrInitializeBatch(LifeLostBatchEvent.class, LifeLostEvent.class, lifeLossEvent, game);
     }
 
     public void addSimultaneousTappedToBatch(TappedEvent tappedEvent, Game game) {
-        // Combine multiple tapped events in the single event (batch)
-
-        boolean isTappedBatchUsed = false;
-        for (GameEvent event : simultaneousEvents) {
-            if (event instanceof TappedBatchEvent) {
-                // Adding to the existing batch
-                ((TappedBatchEvent) event).addEvent(tappedEvent);
-                isTappedBatchUsed = true;
-                break;
-            }
-        }
-
-        // new batch
-        if (!isTappedBatchUsed) {
-            addSimultaneousEvent(new TappedBatchEvent(tappedEvent), game);
-        }
+        // Combine multiple tapped events in the appropriate batch events
+        // TAPPED_BATCH
+        addToOrInitializeBatch(TappedBatchEvent.class, TappedEvent.class, tappedEvent, game);
     }
 
     public void addSimultaneousUntappedToBatch(UntappedEvent untappedEvent, Game game) {
-        // Combine multiple untapped events in the single event (batch)
-
-        boolean isUntappedBatchUsed = false;
-        for (GameEvent event : simultaneousEvents) {
-            if (event instanceof UntappedBatchEvent) {
-                // Adding to the existing batch
-                ((UntappedBatchEvent) event).addEvent(untappedEvent);
-                isUntappedBatchUsed = true;
-                break;
-            }
-        }
-
-        // new batch
-        if (!isUntappedBatchUsed) {
-            addSimultaneousEvent(new UntappedBatchEvent(untappedEvent), game);
-        }
+        // Combine multiple untapped events in the appropriate batch events
+        // UNTAPPED_BATCH
+        addToOrInitializeBatch(UntappedBatchEvent.class, UntappedEvent.class, untappedEvent, game);
     }
 
     public void handleEvent(GameEvent event, Game game) {
