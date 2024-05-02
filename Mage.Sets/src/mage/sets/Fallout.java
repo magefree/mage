@@ -258,6 +258,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Raul, Trouble Shooter", 115, Rarity.UNCOMMON, mage.cards.r.RaulTroubleShooter.class));
         cards.add(new SetCardInfo("Ravages of War", 354, Rarity.MYTHIC, mage.cards.r.RavagesOfWar.class));
         cards.add(new SetCardInfo("Razortide Bridge", 281, Rarity.COMMON, mage.cards.r.RazortideBridge.class));
+        cards.add(new SetCardInfo("Recon Craft Theta", 141, Rarity.RARE, mage.cards.r.ReconCraftTheta.class));
         cards.add(new SetCardInfo("Red Death, Shipwrecker", 116, Rarity.RARE, mage.cards.r.RedDeathShipwrecker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Red Death, Shipwrecker", 426, Rarity.RARE, mage.cards.r.RedDeathShipwrecker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Red Death, Shipwrecker", 644, Rarity.RARE, mage.cards.r.RedDeathShipwrecker.class, NON_FULL_USE_VARIOUS));
