@@ -84,6 +84,6 @@ class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return ((MilledBatchForOnePlayerEvent) event).getCards().count(StaticFilters.FILTER_CARD_CREATURE, game) > 0;
+        return ((MilledBatchForOnePlayerEvent) event).getCards(game).count(StaticFilters.FILTER_CARD_CREATURE, game) > 0;
     }
 }

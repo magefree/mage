@@ -2,6 +2,7 @@ package mage.game.events;
 
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.game.Game;
 
 import java.util.UUID;
 
@@ -13,14 +14,11 @@ import java.util.UUID;
  */
 public class MilledCardEvent extends GameEvent {
 
-    private final Card card;
-
     public MilledCardEvent(Card card, UUID playerId, Ability source) {
         super(EventType.MILLED_CARD, card.getId(), source, playerId);
-        this.card = card;
     }
 
-    public Card getCard() {
-        return card;
+    public Card getCard(Game game) {
+        return game.getCard(getTargetId());
     }
 }

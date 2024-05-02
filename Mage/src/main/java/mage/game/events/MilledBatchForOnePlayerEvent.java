@@ -2,6 +2,7 @@ package mage.game.events;
 
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.game.Game;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,10 +16,10 @@ public class MilledBatchForOnePlayerEvent extends BatchEvent<MilledCardEvent> {
         super(EventType.MILLED_CARDS_BATCH_FOR_ONE_PLAYER, false, false, true, event);
     }
 
-    public Cards getCards() {
+    public Cards getCards(Game game) {
         return new CardsImpl(getEvents()
                 .stream()
-                .map(MilledCardEvent::getCard)
+                .map(mce -> mce.getCard(game))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet())
         );

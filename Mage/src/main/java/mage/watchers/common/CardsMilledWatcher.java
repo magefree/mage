@@ -30,7 +30,7 @@ public class CardsMilledWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.MILLED_CARD) {
             return;
         }
-        Card card = ((MilledCardEvent) event).getCard();
+        Card card = ((MilledCardEvent) event).getCard(game);
         if (card == null) {
             return;
         }

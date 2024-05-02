@@ -44,7 +44,7 @@ public class OneOrMoreMilledTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int count = ((MilledBatchAllEvent) event).getCards().count(filter, getControllerId(), this, game);
+        int count = ((MilledBatchAllEvent) event).getCards(game).count(filter, getControllerId(), this, game);
         if (count <= 0) {
             return false;
         }

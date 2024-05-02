@@ -59,7 +59,7 @@ public class MillTriggeredAbility extends TriggeredAbilityImpl {
             default:
                 throw new IllegalArgumentException("Wrong code usage. targetController not yet supported: " + targetController);
         }
-        Card card = ((MilledCardEvent) event).getCard();
+        Card card = ((MilledCardEvent) event).getCard(game);
         return card != null && filter.match(card, getControllerId(), this, game);
     }
 
