@@ -205,6 +205,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Mister Gutsy", 433, Rarity.RARE, mage.cards.m.MisterGutsy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mister Gutsy", 664, Rarity.RARE, mage.cards.m.MisterGutsy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mister Gutsy", 961, Rarity.RARE, mage.cards.m.MisterGutsy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moira Brown, Guide Author", 110, Rarity.RARE, mage.cards.m.MoiraBrownGuideAuthor.class));
         cards.add(new SetCardInfo("Morbid Opportunist", 186, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Mortuary Mire", 272, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
         cards.add(new SetCardInfo("Mossfire Valley", 273, Rarity.RARE, mage.cards.m.MossfireValley.class));
