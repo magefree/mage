@@ -17,6 +17,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.RemoveCountersEvent;
 import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
 
@@ -113,31 +114,35 @@ class DeificationReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source.isControlledBy(event.getPlayerId())) {
-            Permanent planeswalker = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (planeswalker == null) {
-                return false;
-            }
-            if (!event.getFlag()){
-                // not due to damage, prevention does not occur
-                return false;
-            }
 
-            int loyaltyCounters = planeswalker.getCounters(game).getCount(CounterType.LOYALTY);
-            if (!game.isSimulation()){
-                logger.info("loyalty counters on planeswalker: " + loyaltyCounters); //TODO: remove
+        RemoveCountersEvent rEvent = (RemoveCountersEvent) event;
+
+        if (!source.isControlledBy(rEvent.getPlayerId())) {
+            return false;
+        }
+        Permanent planeswalker = game.getPermanentOrLKIBattlefield(rEvent.getTargetId());
+        if (planeswalker == null) {
+            return false;
+        }
+        if (!rEvent.getFlag()){
+            // not due to damage, prevention does not occur
+            return false;
+        }
+
+        int loyaltyCounters = planeswalker.getCounters(game).getCount(CounterType.LOYALTY);
+        if (!game.isSimulation()){
+            logger.info("loyalty counters on planeswalker: " + loyaltyCounters); //TODO: remove
+        }
+        if (planeswalker.hasSubtype(ChoosePlaneswalkerTypeEffect.getChosenPlaneswalkerType(source.getSourceId(), game), game)
+                && (loyaltyCounters - event.getAmount()) < 1
+                && game.getBattlefield().count(
+                StaticFilters.FILTER_CONTROLLED_CREATURE,
+                event.getPlayerId(), source, game) > 0
+        ) {
+            if (!game.isSimulation()) {
+                logger.info("Setting damage to " + (loyaltyCounters - 1));
             }
-            if (planeswalker.hasSubtype(ChoosePlaneswalkerTypeEffect.getChosenPlaneswalkerType(source.getSourceId(), game), game)
-                    && (loyaltyCounters - event.getAmount()) < 1
-                    && game.getBattlefield().count(
-                    StaticFilters.FILTER_CONTROLLED_CREATURE,
-                    event.getPlayerId(), source, game) > 0
-            ) {
-                if (!game.isSimulation()) {
-                    logger.info("Setting damage to " + (loyaltyCounters - 1));
-                }
-                event.setAmount(loyaltyCounters - 1);
-            }
+            event.setAmount(loyaltyCounters - 1);
         }
         return false;
     }
