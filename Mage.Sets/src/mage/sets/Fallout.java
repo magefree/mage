@@ -208,6 +208,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Mossfire Valley", 273, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mountain", 323, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mr. House, President and CEO", 7, Rarity.MYTHIC, mage.cards.m.MrHousePresidentAndCEO.class));
+        cards.add(new SetCardInfo("Mutational Advantage", 111, Rarity.RARE, mage.cards.m.MutationalAdvantage.class));
         cards.add(new SetCardInfo("Myriad Landscape", 274, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Forge", 236, Rarity.RARE, mage.cards.m.MysticForge.class));
         cards.add(new SetCardInfo("Mystic Monastery", 275, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
