@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.RemoveCountersEvent;
 import mage.game.permanent.Permanent;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -88,9 +87,7 @@ class FilterDeification extends FilterPlaneswalkerPermanent {
 
 // Based on SerraTheBenevolentEmblemEffect
 class DeificationReplacementEffect extends ReplacementEffectImpl {
-
-    private static final Logger logger = Logger.getLogger(CardImpl.class);
-
+    
     DeificationReplacementEffect() {
         super(Duration.Custom, Outcome.Benefit);
         staticText = "As long as you control a creature, if damage dealt to a planeswalker you control of the chosen " +
