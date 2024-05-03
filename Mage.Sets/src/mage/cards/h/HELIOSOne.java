@@ -1,14 +1,9 @@
 package mage.cards.h;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.common.PayEnergyCost;
+import mage.abilities.costs.common.PayVariableEnergyCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -18,7 +13,6 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
@@ -49,11 +43,10 @@ public final class HELIOSOne extends CardImpl {
                 new GenericManaCost(3)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new PayEnergyCost(0).setText("Pay X {E}")); // TODO: replace with proper VariableEnergyCost
+        ability.addCost(new PayVariableEnergyCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetNonlandPermanent());
         ability.setTargetAdjuster(new XManaValueTargetAdjuster());
-        ability.setCostAdjuster(HELIOSOneCostAdjuster.instance); // TODO: remove
         this.addAbility(ability);
     }
 
@@ -64,30 +57,5 @@ public final class HELIOSOne extends CardImpl {
     @Override
     public HELIOSOne copy() {
         return new HELIOSOne(this);
-    }
-}
-
-enum HELIOSOneCostAdjuster implements CostAdjuster {
-    instance;
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        MageObject target = game.getObject(ability.getFirstTarget());
-        if (target == null) {
-            return;
-        }
-        int mv = target.getManaValue();
-        Costs<Cost> costs = new CostsImpl<>();
-        costs.addAll(ability.getCosts());
-        ability.clearCosts();
-        for (Cost cost : costs) {
-            if (cost instanceof PayEnergyCost) {
-                if (mv > 0) {
-                    ability.addCost(new PayEnergyCost(mv));
-                }
-            } else {
-                ability.addCost(cost);
-            }
-        }
     }
 }
