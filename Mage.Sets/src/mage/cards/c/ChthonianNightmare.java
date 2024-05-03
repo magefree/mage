@@ -11,21 +11,15 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourceControllerCountersCount;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.filter.Filter;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -49,7 +43,7 @@ public final class ChthonianNightmare extends CardImpl {
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
-        ability.setTargetAdjuster(new ChthonianNightmareTargetAdjuster(SourceControllerCountersCount.ENERGY, ComparisonType.OR_LESS));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         ability.setCostAdjuster(ChthonianNightmareCostAdjuster.instance);
         this.addAbility(ability);
     }
@@ -61,33 +55,6 @@ public final class ChthonianNightmare extends CardImpl {
     @Override
     public ChthonianNightmare copy() {
         return new ChthonianNightmare(this);
-    }
-}
-
-// TODO: replace with ManaValueTargetAdjuster in #12017
-class ChthonianNightmareTargetAdjuster implements TargetAdjuster {
-    private Target blueprintTarget = null;
-    private final DynamicValue dynamicValue;
-    private final ComparisonType comparison;
-
-    ChthonianNightmareTargetAdjuster(DynamicValue value, ComparisonType compare) {
-        this.dynamicValue = value;
-        this.comparison = compare;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (blueprintTarget == null) {
-            blueprintTarget = ability.getTargets().get(0).copy();
-            blueprintTarget.clearChosen();
-        }
-        Target newTarget = blueprintTarget.copy();
-        int amount = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
-        Filter<MageObject> filter = newTarget.getFilter();
-        filter.add(new ManaValuePredicate(comparison, amount));
-        newTarget.setTargetName(filter.getMessage() + " (Mana Value " + comparison + " " + amount + ")");
-        ability.getTargets().clear();
-        ability.addTarget(newTarget);
     }
 }
 

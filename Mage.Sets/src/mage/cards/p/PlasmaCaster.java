@@ -57,11 +57,11 @@ public final class PlasmaCaster extends CardImpl {
                         new DamageTargetEffect(1)
                 ).setText("Choose target creature that's blocking equipped creature. "
                         + "Flip a coin. If you win the flip, exile the chosen creature. "
-                        + "Otherwise, Plasma Caster deals 1 damage to it"),
+                        + "Otherwise, {this} deals 1 damage to it"),
                 new PayEnergyCost(2)
         );
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability, new BlockingOrBlockedWatcher());
+        this.addAbility(ability);
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));

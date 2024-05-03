@@ -12,21 +12,15 @@ import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourceControllerCountersCount;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.filter.Filter;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -58,7 +52,7 @@ public final class HELIOSOne extends CardImpl {
         ability.addCost(new PayEnergyCost(0).setText("Pay X {E}")); // Cost adjusted.
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetNonlandPermanent());
-        ability.setTargetAdjuster(new HELIOSOneTargetAdjuster(SourceControllerCountersCount.ENERGY, ComparisonType.OR_LESS));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         ability.setCostAdjuster(HELIOSOneCostAdjuster.instance);
         this.addAbility(ability);
     }
@@ -70,33 +64,6 @@ public final class HELIOSOne extends CardImpl {
     @Override
     public HELIOSOne copy() {
         return new HELIOSOne(this);
-    }
-}
-
-// TODO: replace with ManaValueTargetAdjuster in #12017
-class HELIOSOneTargetAdjuster implements TargetAdjuster {
-    private Target blueprintTarget = null;
-    private final DynamicValue dynamicValue;
-    private final ComparisonType comparison;
-
-    HELIOSOneTargetAdjuster(DynamicValue value, ComparisonType compare) {
-        this.dynamicValue = value;
-        this.comparison = compare;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (blueprintTarget == null) {
-            blueprintTarget = ability.getTargets().get(0).copy();
-            blueprintTarget.clearChosen();
-        }
-        Target newTarget = blueprintTarget.copy();
-        int amount = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
-        Filter<MageObject> filter = newTarget.getFilter();
-        filter.add(new ManaValuePredicate(comparison, amount));
-        newTarget.setTargetName(filter.getMessage() + " (Mana Value " + comparison + " " + amount + ")");
-        ability.getTargets().clear();
-        ability.addTarget(newTarget);
     }
 }
 
