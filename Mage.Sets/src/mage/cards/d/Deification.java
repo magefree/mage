@@ -15,6 +15,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.predicate.mageobject.ChosenPlaneswalkerTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.RemoveCountersEvent;
@@ -26,6 +27,12 @@ import mage.game.permanent.Permanent;
  */
 public final class Deification extends CardImpl {
 
+    private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("planeswalkers of the chosen type");
+
+    static {
+        filter.add(ChosenPlaneswalkerTypePredicate.TRUE);
+    }
+
     public Deification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         
@@ -34,7 +41,7 @@ public final class Deification extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlaneswalkerTypeEffect(Outcome.AddAbility)));
 
         // Planeswalkers you control of the chosen type have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterDeification())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
         
         // As long as you control a creature, if damage dealt to a planeswalker you control of the chosen type would result in all loyalty counters on it being removed, instead all but one of those counters are removed.
         addAbility(new SimpleStaticAbility(new DeificationReplacementEffect()));
@@ -50,44 +57,9 @@ public final class Deification extends CardImpl {
     }
 }
 
-// Based on Cover of Darkness
-class FilterDeification extends FilterPlaneswalkerPermanent {
-
-    private SubType subType = null;
-
-    public FilterDeification() {
-        super("planeswalkers of the chosen type");
-    }
-
-    private FilterDeification(final FilterDeification filter) {
-        super(filter);
-        this.subType = filter.subType;
-    }
-
-    @Override
-    public FilterDeification copy() {
-        return new FilterDeification(this);
-    }
-
-    @Override
-    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
-        if (super.match(permanent, playerId, source, game)) {
-            if (subType == null) {
-                subType = ChoosePlaneswalkerTypeEffect.getChosenPlaneswalkerType(source.getSourceId(), game);
-                if (subType == null) {
-                    return false;
-                }
-            }
-            return permanent.hasSubtype(subType, game);
-        }
-        return false;
-    }
-
-}
-
 // Based on SerraTheBenevolentEmblemEffect
 class DeificationReplacementEffect extends ReplacementEffectImpl {
-    
+
     DeificationReplacementEffect() {
         super(Duration.Custom, Outcome.Benefit);
         staticText = "As long as you control a creature, if damage dealt to a planeswalker you control of the chosen " +
