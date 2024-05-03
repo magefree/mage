@@ -2364,7 +2364,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.isLand(game)) {
             ActivatedAbility ability = abilities.values().iterator().next();
-            if (ability instanceof ActivatedManaAbilityImpl) {
+            if (ability.isActivatedAbility() && ability.isManaAbility()) {
                 activateAbility(ability, game);
                 return;
             }
@@ -2426,7 +2426,7 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // hide on mana activate and show all other
-            return ability instanceof ActivatedManaAbilityImpl;
+            return ability.isManaActivatedAbility();
         }
         return true;
     }

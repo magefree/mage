@@ -5,7 +5,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.SacrificeCost;
 import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -77,7 +76,7 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
         if (stackAbility == null
-                || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl
+                || stackAbility.getStackAbility().isManaActivatedAbility()
                 || stackAbility
                 .getStackAbility()
                 .getCosts()

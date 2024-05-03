@@ -8,7 +8,6 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -100,7 +99,7 @@ class SharkeyTyrantOfTheShireReplacementEffect extends ReplacementEffectImpl {
         MageObject object = game.getObject(event.getSourceId());
         if (object instanceof Permanent && filter.match((Permanent) object, source.getControllerId(), source, game)) {
             Optional<Ability> ability = object.getAbilities().get(event.getTargetId());
-            if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
+            if (ability.isPresent() && !ability.get().isManaActivatedAbility()) {
                 return true;
             }
         }

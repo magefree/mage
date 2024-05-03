@@ -50,6 +50,10 @@ public enum AbilityType {
         return activatedAbility && !manaAbility;
     }
 
+    public boolean isManaActivatedAbility() {
+        return activatedAbility && manaAbility;
+    }
+
     public boolean isManaAbility() {
         return manaAbility;
     }

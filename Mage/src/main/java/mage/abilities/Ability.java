@@ -78,6 +78,11 @@ public interface Ability extends Controllable, Serializable {
     boolean isNonManaActivatedAbility();
 
     /**
+     * If this ability is a mana activated one.
+     */
+    boolean isManaActivatedAbility();
+
+    /**
      * If this ability is a mana ability, (both triggered and activated can be mana abilities).
      */
     boolean isManaAbility();

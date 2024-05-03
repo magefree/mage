@@ -178,6 +178,11 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public boolean isManaActivatedAbility() {
+        return this.abilityType.isManaActivatedAbility();
+    }
+
+    @Override
     public boolean isManaAbility() {
         return this.abilityType.isManaAbility();
     }
