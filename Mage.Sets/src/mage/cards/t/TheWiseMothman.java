@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.OneOrMoreMilledTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SavedMilledValue;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -17,9 +16,8 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -53,7 +51,7 @@ public final class TheWiseMothman extends CardImpl {
                                 + "where X is the number of nonland cards milled this way")
         );
         ability.addTarget(new TargetCreaturePermanent(0, 0));
-        ability.setTargetAdjuster(new TheWiseMothmanAdjuster(SavedMilledValue.MUCH));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(SavedMilledValue.MUCH));
         this.addAbility(ability);
     }
 
@@ -64,23 +62,5 @@ public final class TheWiseMothman extends CardImpl {
     @Override
     public TheWiseMothman copy() {
         return new TheWiseMothman(this);
-    }
-}
-
-// TODO: cleanup after #12107
-class TheWiseMothmanAdjuster implements TargetAdjuster {
-    private final DynamicValue dynamicValue;
-
-    TheWiseMothmanAdjuster(DynamicValue value) {
-        this.dynamicValue = value;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int count = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
-        ability.getTargets().clear();
-        if (count > 0) {
-            ability.addTarget(new TargetCreaturePermanent(0, count));
-        }
     }
 }

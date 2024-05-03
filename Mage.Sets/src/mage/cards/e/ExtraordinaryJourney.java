@@ -3,7 +3,6 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -23,7 +22,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
@@ -44,7 +43,8 @@ public final class ExtraordinaryJourney extends CardImpl {
 
         // When Extraordinary Journey enters the battlefield, exile up to X target creatures. For each of those cards, its owner may play it for as long as it remains exiled.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExtraordinaryJourneyEffect());
-        ability.setTargetAdjuster(ExtraordinaryJourneyAdjuster.instance);
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
         // Whenever one or more nontoken creatures enter the battlefield, if one or more of them entered from exile or was cast from exile, you draw a card. This ability triggers only once each turn.
@@ -58,16 +58,6 @@ public final class ExtraordinaryJourney extends CardImpl {
     @Override
     public ExtraordinaryJourney copy() {
         return new ExtraordinaryJourney(this);
-    }
-}
-
-enum ExtraordinaryJourneyAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(0, ManacostVariableValue.ETB.calculate(game, ability, null)));
     }
 }
 

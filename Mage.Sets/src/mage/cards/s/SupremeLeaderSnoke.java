@@ -3,8 +3,6 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -21,14 +19,12 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -63,7 +59,8 @@ public final class SupremeLeaderSnoke extends CardImpl {
         ability3.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield).setText("It gains haste"));
         ability3.addEffect(new GainAbilityTargetEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect()), Duration.WhileOnBattlefield)
                 .setText("Sacrifice that creature at the beginning of the next end step"));
-        ability3.setTargetAdjuster(SupremeLeaderSnokeAdjuster.instance);
+        ability3.setTargetAdjuster(new XManaValueTargetAdjuster());
+        ability3.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability3);
     }
 
@@ -74,24 +71,6 @@ public final class SupremeLeaderSnoke extends CardImpl {
     @Override
     public SupremeLeaderSnoke copy() {
         return new SupremeLeaderSnoke(this);
-    }
-}
-
-enum SupremeLeaderSnokeAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int cmc = 0;
-        for (Cost cost : ability.getCosts()) {
-            if (cost instanceof PayVariableLoyaltyCost) {
-                cmc = ((PayVariableLoyaltyCost) cost).getAmount();
-            }
-        }
-        FilterCreaturePermanent newFilter = StaticFilters.FILTER_PERMANENT_CREATURE.copy();
-        newFilter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(newFilter));
     }
 }
 

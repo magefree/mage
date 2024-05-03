@@ -3,7 +3,6 @@ package mage.cards.l;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -21,7 +20,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -45,7 +44,8 @@ public final class LostInTheMaze extends CardImpl {
         // When Lost in the Maze enters the battlefield, tap X target creatures. Put a stun counter on each of those creatures you don't control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect("tap X target creatures"));
         ability.addEffect(new LostInTheMazeEffect());
-        ability.setTargetAdjuster(LostInTheMazeAdjuster.instance);
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // Tapped creatures you control have hexproof.
@@ -61,16 +61,6 @@ public final class LostInTheMaze extends CardImpl {
     @Override
     public LostInTheMaze copy() {
         return new LostInTheMaze(this);
-    }
-}
-
-enum LostInTheMazeAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ManacostVariableValue.ETB.calculate(game, ability, null)));
     }
 }
 

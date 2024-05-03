@@ -21,9 +21,8 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -61,7 +60,7 @@ public final class AgilityBobblehead extends CardImpl {
                 .setText("and can't be blocked this turn except by creatures with haste, "
                         + "where X is the number of Bobbleheads you control as you activate this ability"));
         ability.addTarget(new TargetControlledCreaturePermanent(0, 0));
-        ability.setTargetAdjuster(new AgilityBobbleheadAdjuster(xValue));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(xValue));
         ability.addHint(hint);
         this.addAbility(ability);
     }
@@ -73,23 +72,5 @@ public final class AgilityBobblehead extends CardImpl {
     @Override
     public AgilityBobblehead copy() {
         return new AgilityBobblehead(this);
-    }
-}
-
-// TODO: cleanup after #12107
-class AgilityBobbleheadAdjuster implements TargetAdjuster {
-    private final DynamicValue dynamicValue;
-
-    AgilityBobbleheadAdjuster(DynamicValue value) {
-        this.dynamicValue = value;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int count = dynamicValue.calculate(game, ability, null);
-        ability.getTargets().clear();
-        if (count > 0) {
-            ability.addTarget(new TargetControlledCreaturePermanent(0, count));
-        }
     }
 }

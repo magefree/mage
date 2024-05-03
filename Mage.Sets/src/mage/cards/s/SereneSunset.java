@@ -1,14 +1,12 @@
 package mage.cards.s;
 
-import mage.abilities.Ability;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -23,7 +21,8 @@ public final class SereneSunset extends CardImpl {
         // Prevent all combat damage X target creatures would deal this turn.
         this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true)
                 .setText("prevent all combat damage X target creatures would deal this turn"));
-        this.getSpellAbility().setTargetAdjuster(SereneSunsetAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private SereneSunset(final SereneSunset card) {
@@ -33,15 +32,5 @@ public final class SereneSunset extends CardImpl {
     @Override
     public SereneSunset copy() {
         return new SereneSunset(this);
-    }
-}
-
-enum SereneSunsetAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
     }
 }

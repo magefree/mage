@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.GetKickerXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -13,13 +12,10 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetArtifactPermanent;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -55,7 +51,8 @@ public final class ThievingSkydiver extends CardImpl {
                 "If that artifact is an Equipment, attach it to {this}."
         );
         ability.addEffect(new ThievingSkydiverEffect());
-        ability.setTargetAdjuster(ThievingSkydiverAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
+        ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
 
@@ -66,21 +63,6 @@ public final class ThievingSkydiver extends CardImpl {
     @Override
     public ThievingSkydiver copy() {
         return new ThievingSkydiver(this);
-    }
-}
-
-enum ThievingSkydiverAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = GetKickerXValue.instance.calculate(game, ability, null);
-        FilterPermanent filter = new FilterArtifactPermanent(
-                "artifact with mana value " + xValue + " or less"
-        );
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(filter));
     }
 }
 

@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,27 +10,21 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.util.functions.CopyApplier;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class LazavTheMultifarious extends CardImpl {
@@ -54,7 +47,8 @@ public final class LazavTheMultifarious extends CardImpl {
                 new LazavTheMultifariousEffect(),
                 new ManaCostsImpl<>("{X}")
         );
-        ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 
@@ -65,19 +59,6 @@ public final class LazavTheMultifarious extends CardImpl {
     @Override
     public LazavTheMultifarious copy() {
         return new LazavTheMultifarious(this);
-    }
-}
-
-enum LazavTheMultifariousAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterCard filterCard = new FilterCreatureCard("creature card with mana value " + xValue + " in your graveyard");
-        filterCard.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        ability.getTargets().clear();
-        ability.getTargets().add(new TargetCardInYourGraveyard(filterCard));
     }
 }
 
@@ -134,7 +115,8 @@ class LazavTheMultifariousCopyApplier extends CopyApplier {
                 new LazavTheMultifariousEffect(),
                 new ManaCostsImpl<>("{X}")
         );
-        ability.setTargetAdjuster(LazavTheMultifariousAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         blueprint.getAbilities().add(ability);
         blueprint.setName("Lazav, the Multifarious");
         blueprint.addSuperType(SuperType.LEGENDARY);
