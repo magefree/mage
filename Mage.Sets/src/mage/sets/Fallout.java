@@ -134,7 +134,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 325, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Fraying Sanity", 175, Rarity.RARE, mage.cards.f.FrayingSanity.class));
         cards.add(new SetCardInfo("Gary Clone", 16, Rarity.UNCOMMON, mage.cards.g.GaryClone.class));
-//        cards.add(new SetCardInfo("Gemrazer", 351, Rarity.RARE, mage.cards.g.Gemrazer.class));
+        cards.add(new SetCardInfo("Gemrazer", 351, Rarity.RARE, mage.cards.g.Gemrazer.class));
         cards.add(new SetCardInfo("General's Enforcer", 217, Rarity.UNCOMMON, mage.cards.g.GeneralsEnforcer.class));
         cards.add(new SetCardInfo("Glacial Fortress", 266, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Glimmer of Genius", 176, Rarity.UNCOMMON, mage.cards.g.GlimmerOfGenius.class));
@@ -389,5 +389,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Winding Constrictor", 223, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 316, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
         cards.add(new SetCardInfo("Young Deathclaws", 125, Rarity.UNCOMMON, mage.cards.y.YoungDeathclaws.class));
+
+        cards.removeIf(setCardInfo -> IkoriaLairOfBehemoths.mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
     }
 }
