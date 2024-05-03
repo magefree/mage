@@ -78,7 +78,8 @@ public class HELIOSOneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
 
-        // TODO: investigate why the checkPlayableAbility doesn't go
+        // TODO: checkPlayableAbility doesn't simulate all possible for X, so the targetAdjuster is never involved
+        //       to identify if the ability can actually be activated.
         checkPlayableAbility("can't activate due to lack of energy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}", true); // should be false.
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}");
