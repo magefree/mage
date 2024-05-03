@@ -40,7 +40,8 @@ public final class RexCyberHound extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Rex, Cyber-Hound deals combat damage to a player, they mill two cards and you get {E}{E}.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new MillCardsTargetEffect(2), false, true);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
+                new MillCardsTargetEffect(2).setText("they mill two cards"), false, true);
         ability.addEffect(new GetEnergyCountersControllerEffect(2).concatBy("and"));
         this.addAbility(ability);
 

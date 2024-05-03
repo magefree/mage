@@ -43,6 +43,7 @@ public final class MutationalAdvantage extends CardImpl {
         );
         this.getSpellAbility().addEffect(
                 new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter)
+                        .setText("Prevent all damage that would be dealt to those permanents this turn")
         );
         this.getSpellAbility().addEffect(new ProliferateEffect());
     }

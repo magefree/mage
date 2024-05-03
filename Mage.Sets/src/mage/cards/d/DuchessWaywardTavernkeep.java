@@ -37,7 +37,7 @@ public final class DuchessWaywardTavernkeep extends CardImpl {
 
         // Hunters for Hire -- Whenever a creature you control deals combat damage to a player, put a quest counter on it.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.QUEST.createInstance()),
+                new AddCountersTargetEffect(CounterType.QUEST.createInstance()).setText("put a quest counter on it"),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE,
                 false,
                 SetTargetPointer.PERMANENT,
