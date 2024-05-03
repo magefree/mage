@@ -112,7 +112,7 @@ class Vault112SadisticSimulationChapterEffect extends OneShotEffect {
             return true;
         }
         // Choose one, you may cast it without paying its mana cost.
-        TargetCardInExile target = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD_CARDS, null);
+        TargetCardInExile target = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD_CARDS);
         controller.choose(Outcome.PlayForFree, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
