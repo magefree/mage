@@ -99,19 +99,21 @@ class DeificationReplacementEffect extends ReplacementEffectImpl {
         }
 
         int loyaltyCounters = planeswalker.getCounters(game).getCount(CounterType.LOYALTY);
-        if (planeswalker.hasSubtype(ChoosePlaneswalkerTypeEffect.getChosenPlaneswalkerType(source.getSourceId(), game), game)
+        return planeswalker.hasSubtype(ChoosePlaneswalkerTypeEffect.getChosenPlaneswalkerType(source.getSourceId(), game), game)
                 && (loyaltyCounters - event.getAmount()) < 1
                 && game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
-                event.getPlayerId(), source, game) > 0
-        ) {
-            event.setAmount(loyaltyCounters - 1);
-        }
-        return false;
+                event.getPlayerId(), source, game) > 0;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent planeswalker = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (planeswalker == null) {
+            return false;
+        }
+        int loyaltyCounters = planeswalker.getCounters(game).getCount(CounterType.LOYALTY);
+        event.setAmount(loyaltyCounters - 1);
         return false;
     }
 }
