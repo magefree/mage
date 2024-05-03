@@ -40,9 +40,7 @@ public class ChoosePlaneswalkerTypeEffect extends OneShotEffect {
         if (controller != null && mageObject != null) {
             Choice typeChoice = new ChoicePlaneswalkerType(mageObject);
             if (controller.choose(outcome, typeChoice, game)) {
-                if (!game.isSimulation()) {
-                    game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
-                }
+                game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
                 game.getState().setValue(source.getSourceId() + "_type", SubType.byDescription(typeChoice.getChoice()));
                 if (mageObject instanceof Permanent) {
                     ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
