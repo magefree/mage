@@ -49,11 +49,11 @@ public final class HELIOSOne extends CardImpl {
                 new GenericManaCost(3)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new PayEnergyCost(0).setText("Pay X {E}")); // Cost adjusted.
+        ability.addCost(new PayEnergyCost(0).setText("Pay X {E}")); // TODO: replace with proper VariableEnergyCost
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetNonlandPermanent());
         ability.setTargetAdjuster(new XManaValueTargetAdjuster());
-        ability.setCostAdjuster(HELIOSOneCostAdjuster.instance);
+        ability.setCostAdjuster(HELIOSOneCostAdjuster.instance); // TODO: remove
         this.addAbility(ability);
     }
 

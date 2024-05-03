@@ -38,13 +38,13 @@ public final class ChthonianNightmare extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect()
                         .setText("Return target creature card with mana value X from your graveyard to the battlefield"),
-                new PayEnergyCost(0).setText("Pay X {E}") // Cost adjusted.
+                new PayEnergyCost(0).setText("Pay X {E}") // TODO: replace with proper VariableEnergyCost
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
         ability.setTargetAdjuster(new XManaValueTargetAdjuster());
-        ability.setCostAdjuster(ChthonianNightmareCostAdjuster.instance);
+        ability.setCostAdjuster(ChthonianNightmareCostAdjuster.instance); // TODO: remove
         this.addAbility(ability);
     }
 
