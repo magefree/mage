@@ -2398,7 +2398,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void removeCounters(String name, int amount, Ability source, Game game) {
 
         GameEvent removeCountersEvent = new RemoveCountersEvent(name, this, source, amount, false);
-        if (game.replaceEvent(removeCountersEvent)){
+        if (game.replaceEvent(removeCountersEvent)) {
             return;
         }
 
@@ -2406,7 +2406,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (int i = 0; i < amount; i++) {
 
             GameEvent event = new RemoveCounterEvent(name, this, source, false);
-            if (game.replaceEvent(event)){
+            if (game.replaceEvent(event)) {
                 continue;
             }
 
@@ -3882,8 +3882,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         } else if (ability instanceof AlternativeSourceCosts) {
             // alternative cost must be replaced by real play ability
             return findActivatedAbilityFromAlternativeSourceCost(object, manaFull, ability, game);
-        } else if (ability.isActivatedAbility()) {
-            // all other activated ability
+        } else if (ability instanceof ActivatedAbility) {
+            // all other abilities (include PlayLandAbility & SpellAbility)
             if (canPlay((ActivatedAbility) ability, manaFull, object, game)) {
                 return (ActivatedAbility) ability;
             }
