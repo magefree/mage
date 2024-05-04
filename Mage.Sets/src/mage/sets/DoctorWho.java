@@ -96,6 +96,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Five Hundred Year Diary", 42, Rarity.RARE, mage.cards.f.FiveHundredYearDiary.class));
         cards.add(new SetCardInfo("Flaming Tyrannosaurus", 85, Rarity.RARE, mage.cards.f.FlamingTyrannosaurus.class));
         cards.add(new SetCardInfo("Flatline", 43, Rarity.RARE, mage.cards.f.Flatline.class));
+        cards.add(new SetCardInfo("Flesh Duplicate", 44, Rarity.RARE, mage.cards.f.FleshDuplicate.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 279, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Forest", 204, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortified Village", 280, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
@@ -287,5 +288,6 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Wound Reflection", 223, Rarity.RARE, mage.cards.w.WoundReflection.class));
         cards.add(new SetCardInfo("Wreck and Rebuild", 169, Rarity.UNCOMMON, mage.cards.w.WreckAndRebuild.class));
         cards.add(new SetCardInfo("Yasmin Khan", 7, Rarity.RARE, mage.cards.y.YasminKhan.class));
+        cards.add(new SetCardInfo("Zygon Infiltrator", 63, Rarity.UNCOMMON, mage.cards.z.ZygonInfiltrator.class));
     }
 }
