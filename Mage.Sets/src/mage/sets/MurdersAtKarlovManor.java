@@ -86,6 +86,8 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Conspiracy Unraveler", 47, Rarity.MYTHIC, mage.cards.c.ConspiracyUnraveler.class));
         cards.add(new SetCardInfo("Convenient Target", 119, Rarity.UNCOMMON, mage.cards.c.ConvenientTarget.class));
         cards.add(new SetCardInfo("Cornered Crook", 120, Rarity.UNCOMMON, mage.cards.c.CorneredCrook.class));
+        cards.add(new SetCardInfo("Coveted Falcon", 48, Rarity.RARE, mage.cards.c.CovetedFalcon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coveted Falcon", 393, Rarity.RARE, mage.cards.c.CovetedFalcon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crime Novelist", 121, Rarity.UNCOMMON, mage.cards.c.CrimeNovelist.class));
         cards.add(new SetCardInfo("Crimestopper Sprite", 49, Rarity.COMMON, mage.cards.c.CrimestopperSprite.class));
         cards.add(new SetCardInfo("Crowd-Control Warden", 193, Rarity.COMMON, mage.cards.c.CrowdControlWarden.class));

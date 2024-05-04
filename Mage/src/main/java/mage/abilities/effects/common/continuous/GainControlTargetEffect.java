@@ -105,8 +105,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
                     controlChanged = true;
                 }
             }
-            if (source.isActivatedAbility()
-                    && firstControlChange && !controlChanged) {
+            if (firstControlChange && !controlChanged) {
                 // If it was not possible to get control of target permanent by the activated ability the first time it took place
                 // the effect failed (e.g. because of Guardian Beast) and must be discarded
                 // This does not handle correctly multiple targets at once
