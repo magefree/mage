@@ -2,7 +2,7 @@ package mage.abilities.common.delayed;
 
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
@@ -24,7 +24,7 @@ public class CopyNextSpellDelayedTriggeredAbility extends DelayedTriggeredAbilit
     }
 
     public CopyNextSpellDelayedTriggeredAbility(FilterSpell filter) {
-        this(filter, new CopyTargetSpellEffect(true), null);
+        this(filter, new CopyTargetStackObjectEffect(true), null);
     }
 
     public CopyNextSpellDelayedTriggeredAbility(FilterSpell filter, Effect effect, String rule) {

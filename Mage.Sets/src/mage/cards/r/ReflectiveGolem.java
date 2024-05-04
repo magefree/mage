@@ -5,7 +5,7 @@ import mage.abilities.AbilityImpl;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -51,7 +51,7 @@ public final class ReflectiveGolem extends CardImpl {
 class ReflectiveGolemTriggeredAbility extends TriggeredAbilityImpl {
 
     ReflectiveGolemTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyTargetSpellEffect(), new GenericManaCost(2)), false);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyTargetStackObjectEffect(), new GenericManaCost(2)), false);
     }
 
     private ReflectiveGolemTriggeredAbility(final ReflectiveGolemTriggeredAbility ability) {

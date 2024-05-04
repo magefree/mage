@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -71,7 +71,7 @@ class SevinneTheChronoclasmTriggeredAbility extends SpellCastControllerTriggered
             return false;
         }
         this.getEffects().clear();
-        Effect effect = new CopyTargetSpellEffect(true);
+        Effect effect = new CopyTargetStackObjectEffect(true);
         effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
         this.addEffect(effect);
         return true;

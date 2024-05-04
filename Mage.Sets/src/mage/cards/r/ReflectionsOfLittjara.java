@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,7 +33,7 @@ public final class ReflectionsOfLittjara extends CardImpl {
 
         // Whenever you cast a spell of the chosen type, copy that spell.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect(false, true, false)
+                new CopyTargetStackObjectEffect(false, true, false)
                         .setText("copy that spell"),
                 filter, false, SetTargetPointer.SPELL
         ));

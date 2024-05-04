@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,7 +40,7 @@ public final class RoothaMercurialArtist extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}, Return Rootha, Mercurial Artist to its owner's hand: Copy target instant or sorcery spell you control. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(new CopyTargetSpellEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

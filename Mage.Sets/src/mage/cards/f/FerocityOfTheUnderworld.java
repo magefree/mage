@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Mode;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class FerocityOfTheUnderworld extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(filterMode1));
 
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
-        Mode mode = new Mode(new CopyTargetSpellEffect());
+        Mode mode = new Mode(new CopyTargetStackObjectEffect());
         mode.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.getSpellAbility().addMode(mode);
 
