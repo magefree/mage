@@ -24,7 +24,7 @@ public class DamageTargetEffect extends OneShotEffect {
     protected DynamicValue amount;
     protected boolean preventable;
     protected String targetDescription;
-    protected boolean useOnlyTargetPointer;
+    protected boolean useOnlyTargetPointer; // why do we ignore targetPointer by default??
     protected String sourceName = "{this}";
 
     public DamageTargetEffect(int amount) {
@@ -42,6 +42,10 @@ public class DamageTargetEffect extends OneShotEffect {
 
     public DamageTargetEffect(int amount, boolean preventable, String targetDescription) {
         this(StaticValue.get(amount), preventable, targetDescription);
+    }
+
+    public DamageTargetEffect(int amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer) {
+        this(StaticValue.get(amount), preventable, targetDescription, useOnlyTargetPointer);
     }
 
     public DamageTargetEffect(int amount, boolean preventable, String targetDescription, String whoDealDamageName) {

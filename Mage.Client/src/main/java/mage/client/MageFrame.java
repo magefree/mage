@@ -87,7 +87,6 @@ import java.util.prefs.Preferences;
 public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static final String TITLE_NAME = "XMage";
-    private static final Logger logger = Logger.getLogger(MageFrame.class);
 
     private static final Logger LOGGER = Logger.getLogger(MageFrame.class);
     private static final String LITE_MODE_ARG = "-lite";
@@ -398,7 +397,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void bootstrapSetsAndFormats() {
-        logger.info("Loading sets and formats...");
+        LOGGER.info("Loading sets and formats...");
         ConstructedFormats.ensureLists();
     }
 
@@ -1460,7 +1459,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             try {
                 instance = new MageFrame();
             } catch (Throwable e) {
-                logger.fatal("Critical error on start up, app will be closed: " + e.getMessage(), e);
+                LOGGER.fatal("Critical error on start up, app will be closed: " + e.getMessage(), e);
                 System.exit(1);
             }
 

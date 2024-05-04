@@ -24,7 +24,7 @@ public final class FinalFlourish extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Kicker--Sacrifice an artifact or creature.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT)));
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE)));
 
         // Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

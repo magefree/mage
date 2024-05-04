@@ -64,6 +64,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Death-Rattle Oni", 13, Rarity.UNCOMMON, mage.cards.d.DeathRattleOni.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Death-Rattle Oni", 197, Rarity.UNCOMMON, mage.cards.d.DeathRattleOni.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Death-Rattle Oni", 63, Rarity.UNCOMMON, mage.cards.d.DeathRattleOni.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deification", 2, Rarity.RARE, mage.cards.d.Deification.class));
         cards.add(new SetCardInfo("Drannith Ruins", 100, Rarity.RARE, mage.cards.d.DrannithRuins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Drannith Ruins", 150, Rarity.RARE, mage.cards.d.DrannithRuins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Drannith Ruins", 185, Rarity.RARE, mage.cards.d.DrannithRuins.class, NON_FULL_USE_VARIOUS));

@@ -557,7 +557,7 @@ public class CustomOptionsDialog extends MageDialog {
                 }
                 if (perPlayerEmblemDeck != null) {
                     perPlayerEmblemDeck.clearLayouts();
-                    options.setPerPlayerEmblemCards(perPlayerEmblemDeck.getDeckCardLists().getCards());
+                    options.setPerPlayerEmblemCards(perPlayerEmblemDeck.prepareCardsOnlyDeck().getCards());
                 } else {
                     options.setPerPlayerEmblemCards(Collections.emptySet());
                 }
@@ -571,7 +571,7 @@ public class CustomOptionsDialog extends MageDialog {
                 }
                 if (startingPlayerEmblemDeck != null) {
                     startingPlayerEmblemDeck.clearLayouts();
-                    options.setGlobalEmblemCards(startingPlayerEmblemDeck.getDeckCardLists().getCards());
+                    options.setGlobalEmblemCards(startingPlayerEmblemDeck.prepareCardsOnlyDeck().getCards());
                 } else {
                     options.setGlobalEmblemCards(Collections.emptySet());
                 }

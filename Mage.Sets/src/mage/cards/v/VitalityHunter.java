@@ -3,6 +3,7 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
+import mage.abilities.dynamicvalue.common.GetMonstrosityXValue;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.MonstrosityAbility;
@@ -11,9 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -40,7 +40,8 @@ public final class VitalityHunter extends CardImpl {
                 new AddCountersTargetEffect(CounterType.LIFELINK.createInstance())
                         .setText("put a lifelink counter on each of up to X target creatures")
         );
-        ability.setTargetAdjuster(VitalityHunterAdjuster.instance);
+        ability.setTargetAdjuster(new TargetsCountAdjuster(GetMonstrosityXValue.instance));
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
     }
 
@@ -51,16 +52,5 @@ public final class VitalityHunter extends CardImpl {
     @Override
     public VitalityHunter copy() {
         return new VitalityHunter(this);
-    }
-}
-
-enum VitalityHunterAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ((BecomesMonstrousSourceTriggeredAbility) ability).getMonstrosityValue();
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(0, xValue));
     }
 }

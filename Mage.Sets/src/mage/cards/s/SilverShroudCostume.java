@@ -43,7 +43,7 @@ public final class SilverShroudCostume extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT)));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private SilverShroudCostume(final SilverShroudCostume card) {

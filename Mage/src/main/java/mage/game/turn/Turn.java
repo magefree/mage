@@ -246,7 +246,7 @@ public class Turn implements Serializable {
             Phase phase;
             switch (extraPhase) {
                 case BEGINNING:
-                    phase = new BeginningPhase();
+                    phase = new BeginningPhase(true);
                     break;
                 case PRECOMBAT_MAIN:
                     phase = new PreCombatMainPhase();
@@ -262,6 +262,10 @@ public class Turn implements Serializable {
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown phase type: " + extraPhase);
+            }
+            PhaseStep skipAllButExtraStep = extraPhaseMod.getSkipAllButExtraStep();
+            if (skipAllButExtraStep != null) {
+                phase.keepOnlyStep(skipAllButExtraStep);
             }
             currentPhase = phase;
             game.fireEvent(new PhaseChangedEvent(activePlayerId, extraPhaseMod));

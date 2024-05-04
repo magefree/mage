@@ -8,7 +8,6 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -25,12 +24,12 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author Susucr
  */
 public final class SharkeyTyrantOfTheShire extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("lands your opponents control");
+
     static {
         filter.add(CardType.LAND.getPredicate());
         filter.add(TargetController.OPPONENT.getControllerPredicate());
@@ -38,7 +37,7 @@ public final class SharkeyTyrantOfTheShire extends CardImpl {
 
     public SharkeyTyrantOfTheShire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.subtype.add(SubType.ROGUE);
@@ -98,9 +97,9 @@ class SharkeyTyrantOfTheShireReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
-        if (object instanceof Permanent && filter.match((Permanent)object, source.getControllerId(), source, game)) {
+        if (object instanceof Permanent && filter.match((Permanent) object, source.getControllerId(), source, game)) {
             Optional<Ability> ability = object.getAbilities().get(event.getTargetId());
-            if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
+            if (ability.isPresent() && !ability.get().isManaActivatedAbility()) {
                 return true;
             }
         }
@@ -143,7 +142,7 @@ class SharkeyTyrantOfTheShireContinousEffect extends ContinuousEffectImpl {
                 .map(permanent -> permanent.getAbilities(game))
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull)
-                .filter(ability -> ability.getAbilityType() == AbilityType.ACTIVATED) // Mana abilities are separated in their own AbilityType.Mana
+                .filter(Ability::isNonManaActivatedAbility)
                 .collect(Collectors.toList())) {
             perm.addAbility(ability, source.getSourceId(), game, true);
         }

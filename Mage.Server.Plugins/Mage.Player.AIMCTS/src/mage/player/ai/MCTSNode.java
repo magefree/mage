@@ -245,7 +245,7 @@ public class MCTSNode {
      * @return a new game object with simulated players
      */
     protected Game createSimulation(Game game, UUID playerId) {
-        Game sim = game.copy();
+        Game sim = game.createSimulationForAI();
 
         for (Player oldPlayer: sim.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();
@@ -254,7 +254,6 @@ public class MCTSNode {
             sim.getState().getPlayers().put(oldPlayer.getId(), newPlayer);
         }
         randomizePlayers(sim, playerId);
-        sim.setSimulation(true);
         return sim;
     }
 

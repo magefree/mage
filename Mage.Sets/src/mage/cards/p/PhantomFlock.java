@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,8 +11,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  * @author emerald000
@@ -35,7 +35,7 @@ public final class PhantomFlock extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
 
         // If damage would be dealt to Phantom Flock, prevent that damage. Remove a +1/+1 counter from Phantom Flock.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomPreventionEffect()));
+        this.addAbility(new SimpleStaticAbility(new PhantomPreventionEffect()), PhantomPreventionEffect.createWatcher());
     }
 
     private PhantomFlock(final PhantomFlock card) {

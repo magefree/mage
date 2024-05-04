@@ -24,7 +24,7 @@ public final class Fling extends CardImpl {
 
         Effect effect = new DamageTargetEffect(SacrificeCostCreaturesPower.instance);
         effect.setText("{this} deals damage equal to the sacrificed creature's power to any target");
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(effect);
     }

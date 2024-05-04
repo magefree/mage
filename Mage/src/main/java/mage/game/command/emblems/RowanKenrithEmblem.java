@@ -2,7 +2,6 @@ package mage.game.command.emblems;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CopyStackObjectEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
@@ -56,7 +55,7 @@ class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
+        if (stackAbility == null || stackAbility.getStackAbility().isManaActivatedAbility()) {
             return false;
         }
         this.getEffects().setValue("stackObject", stackAbility);

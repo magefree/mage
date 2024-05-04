@@ -22,7 +22,7 @@ public interface TournamentManager {
 
     void submitDeck(UUID tournamentId, UUID playerId, Deck deck);
 
-    boolean updateDeck(UUID tournamentId, UUID playerId, Deck deck);
+    void updateDeck(UUID tournamentId, UUID playerId, Deck deck);
 
     TournamentView getTournamentView(UUID tournamentId);
 

@@ -2,7 +2,7 @@
 package mage.cards.s;
 
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,7 +21,7 @@ public final class SwarmIntelligence extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell, you may copy that spell. You may choose new targets for the copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect(true)
+                new CopyTargetStackObjectEffect(true)
                         .setText("you may copy that spell. You may choose new targets for the copy"),
                 new FilterInstantOrSorcerySpell("an instant or sorcery spell"),
                 true, SetTargetPointer.SPELL

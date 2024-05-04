@@ -6,7 +6,7 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.CastSecondSpellTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
@@ -35,6 +35,8 @@ public final class StellaLeeWildCard extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
@@ -45,7 +47,7 @@ public final class StellaLeeWildCard extends CardImpl {
 
         // {T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy. Activate only if you've cast three or more spells this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new CopyTargetSpellEffect(),
+                Zone.BATTLEFIELD, new CopyTargetStackObjectEffect(),
                 new TapSourceCost(), StellaLeeWildCardCondition.instance
         );
         ability.addTarget(new TargetSpell(filter));

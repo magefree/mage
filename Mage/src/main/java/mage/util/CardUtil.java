@@ -916,7 +916,14 @@ public final class CardUtil {
     }
 
     public static String getAddRemoveCountersText(DynamicValue amount, Counter counter, String description, boolean add) {
-        StringBuilder sb = new StringBuilder(add ? "put " : "remove ");
+        boolean targetPlayerGets = add && (description.endsWith("player") || description.endsWith("opponent"));
+        StringBuilder sb = new StringBuilder();
+        if (targetPlayerGets) {
+            sb.append(description);
+            sb.append(" gets ");
+        } else {
+            sb.append(add ? "put " : "remove ");
+        }
         boolean xValue = amount.toString().equals("X");
         if (xValue) {
             sb.append("X ").append(counter.getName()).append(" counters");
@@ -925,7 +932,9 @@ public final class CardUtil {
         } else {
             sb.append(counter.getDescription());
         }
-        sb.append(add ? " on " : " from ").append(description);
+        if (!targetPlayerGets) {
+            sb.append(add ? " on " : " from ").append(description);
+        }
         if (!amount.getMessage().isEmpty()) {
             sb.append(xValue ? ", where X is " : " for each ").append(amount.getMessage());
         }
@@ -990,6 +999,7 @@ public final class CardUtil {
                 || text.startsWith("another ")
                 || text.startsWith("any ")
                 || text.startsWith("{this} ")
+                || text.startsWith("your ")
                 || text.startsWith("one ")) {
             return text;
         }
@@ -1280,8 +1290,9 @@ public final class CardUtil {
         }
     }
 
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
-        makeCardPlayable(game, source, card, duration, anyColor, null, null);
+    // TODO: use CastManaAdjustment instead of boolean anyColor
+    public static void makeCardPlayable(Game game, Ability source, Card card, boolean useCastSpellOnly, Duration duration, boolean anyColor) {
+        makeCardPlayable(game, source, card, useCastSpellOnly, duration, anyColor, null, null);
     }
 
     /**
@@ -1296,14 +1307,15 @@ public final class CardUtil {
      * @param anyColor
      * @param condition can be null
      */
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
+    // TODO: use CastManaAdjustment instead of boolean anyColor
+    public static void makeCardPlayable(Game game, Ability source, Card card, boolean useCastSpellOnly, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
         // So there is a workaround to get actual card's ZCC
         // Example: Hostage Taker
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
-        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
+        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, useCastSpellOnly, duration, playerId, condition), source);
         if (anyColor) {
             game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
         }
@@ -1323,7 +1335,7 @@ public final class CardUtil {
      * such as the adventure and main side of adventure spells or both sides of a fuse card.
      *
      * @param cardToCast
-     * @param filter           A filter to determine if a card is eligible for casting.
+     * @param filter           An optional filter to determine if a card is eligible for casting.
      * @param source           The ability or source responsible for the casting.
      * @param player
      * @param game
@@ -1347,7 +1359,9 @@ public final class CardUtil {
         if (!playLand || !player.canPlayLand() || !game.isActivePlayer(playerId)) {
             cards.removeIf(card -> card.isLand(game));
         }
-        cards.removeIf(card -> !filter.match(card, playerId, source, game));
+        if (filter != null) {
+            cards.removeIf(card -> !filter.match(card, playerId, source, game));
+        }
         if (spellCastTracker != null) {
             cards.removeIf(card -> !spellCastTracker.checkCard(card, game));
         }
@@ -1480,6 +1494,10 @@ public final class CardUtil {
     }
 
     public static void castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
+        castSingle(player, source, game, card, false, manaCost);
+    }
+
+    public static void castSingle(Player player, Ability source, Game game, Card card, boolean noMana, ManaCostsImpl<ManaCost> manaCost) {
         // handle split-cards
         if (card instanceof SplitCard) {
             SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
@@ -1546,8 +1564,8 @@ public final class CardUtil {
         }
 
         // cast it
-        player.cast(player.chooseAbilityForCast(card.getMainCard(), game, false),
-                game, false, new ApprovingObject(source, game));
+        player.cast(player.chooseAbilityForCast(card.getMainCard(), game, noMana),
+                game, noMana, new ApprovingObject(source, game));
 
         // turn off effect after cast on every possible card-face
         if (card instanceof SplitCard) {

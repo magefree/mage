@@ -34,7 +34,7 @@ public final class StrongholdAssassin extends CardImpl {
 
         // {tap}, Sacrifice a creature: Destroy target nonblack creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         Target target = new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK);
         ability.addTarget(target);
         this.addAbility(ability);

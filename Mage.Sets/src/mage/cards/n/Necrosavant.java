@@ -39,7 +39,7 @@ public final class Necrosavant extends CardImpl {
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

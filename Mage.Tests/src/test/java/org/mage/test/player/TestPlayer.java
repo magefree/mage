@@ -190,7 +190,7 @@ public class TestPlayer implements Player {
         aliases.put(aliasId, objectId);
     }
 
-    public ManaOptions getAvailableManaTest(Game game) {
+    public ManaOptions getAvailableManaTest(Game game) { // TODO: remove
         return computerPlayer.getManaAvailable(game);
     }
 
@@ -1225,10 +1225,10 @@ public class TestPlayer implements Player {
                         + ", " + (c.isTapped() ? "Tapped" : "Untapped")
                         + getPrintableAliases(", [", c.getId(), "]")
                         + (c.getAttachedTo() == null ? ""
-                                : ", attached to "
-                                        + (game.getObject(c.getAttachedTo()) == null
-                                                ? game.getPlayer(c.getAttachedTo()).getName()
-                                                : game.getObject(c.getAttachedTo()).getIdName()))))
+                        : ", attached to "
+                        + (game.getObject(c.getAttachedTo()) == null
+                        ? game.getPlayer(c.getAttachedTo()).getName()
+                        : game.getObject(c.getAttachedTo()).getIdName()))))
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -2695,7 +2695,7 @@ public class TestPlayer implements Player {
         }
 
         // wrong target settings by addTarget
-        // how to fix: implement target class processing above
+        // how to fix: implement target class processing above (if it a permanent target then check "filter instanceof" code too)
         if (!targets.isEmpty()) {
             String message;
 
@@ -2704,13 +2704,13 @@ public class TestPlayer implements Player {
                         + "\nCard: " + source.getSourceObject(game)
                         + "\nAbility: " + source.getClass().getSimpleName() + " (" + source.getRule() + ")"
                         + "\nTarget: " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
-                        + "\nYou must implement target class support in TestPlayer or setup good targets";
+                        + "\nYou must implement target class support in TestPlayer, \"filter instanceof\", or setup good targets";
             } else {
                 message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used"
                         + "\nCard: unknown source"
                         + "\nAbility: unknown source"
                         + "\nTarget: " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
-                        + "\nYou must implement target class support in TestPlayer or setup good targets";
+                        + "\nYou must implement target class support in TestPlayer, \"filter instanceof\", or setup good targets";
             }
             Assert.fail(message);
         }
@@ -3831,6 +3831,16 @@ public class TestPlayer implements Player {
     @Override
     public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
         computerPlayer.setDrawsOnOpponentsTurn(drawsOnOpponentsTurn);
+    }
+
+    @Override
+    public boolean canPlotFromTopOfLibrary() {
+        return computerPlayer.canPlotFromTopOfLibrary();
+    }
+
+    @Override
+    public void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary) {
+        computerPlayer.setPlotFromTopOfLibrary(canPlotFromTopOfLibrary);
     }
 
     @Override

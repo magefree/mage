@@ -34,7 +34,7 @@ public final class GolgariRotwurm extends CardImpl {
 
         // {B}, Sacrifice a creature: Target player loses 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

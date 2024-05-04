@@ -97,6 +97,7 @@ public enum SubType {
     BAT("Bat", SubTypeSet.CreatureType),
     BEAR("Bear", SubTypeSet.CreatureType),
     BEAST("Beast", SubTypeSet.CreatureType),
+    BEAVER("Beaver", SubTypeSet.CreatureType),
     BEEBLE("Beeble", SubTypeSet.CreatureType),
     BEHOLDER("Beholder", SubTypeSet.CreatureType),
     BERSERKER("Berserker", SubTypeSet.CreatureType),
@@ -315,6 +316,8 @@ public enum SubType {
     PINCHER("Pincher", SubTypeSet.CreatureType),
     PIRATE("Pirate", SubTypeSet.CreatureType),
     PLANT("Plant", SubTypeSet.CreatureType),
+    PORCUPINE("Porcupine", SubTypeSet.CreatureType),
+    POSSUM("Possum", SubTypeSet.CreatureType),
     PRAETOR("Praetor", SubTypeSet.CreatureType),
     PRIMARCH("Primarch", SubTypeSet.CreatureType),
     PRISM("Prism", SubTypeSet.CreatureType),
@@ -582,6 +585,11 @@ public enum SubType {
         return description;
     }
 
+    // note: does not account for irregular plurals
+    public String getPluralName() {
+        return description.endsWith("y") ? description.substring(0, description.length() - 1) + "ies" : description + 's';
+    }
+
     @Override
     public String toString() {
         return description;
@@ -674,6 +682,10 @@ public enum SubType {
 
     public static Set<SubType> getCreatureTypes() {
         return subTypeSetMap.get(SubTypeSet.CreatureType);
+    }
+
+    public static Set<SubType> getNonbasicLandTypes() {
+        return subTypeSetMap.get(SubTypeSet.NonBasicLandType);
     }
 
     public static Set<SubType> getBasicLands() {

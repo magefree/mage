@@ -29,7 +29,7 @@ public final class AgentOfTheFates extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // Heroic - Whenever you cast a spell that targets Agent of the Fates, each opponent sacrifices a creature.
-        this.addAbility(new HeroicAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.addAbility(new HeroicAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private AgentOfTheFates(final AgentOfTheFates card) {

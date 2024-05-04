@@ -60,7 +60,7 @@ class AetherworksMarvelEffect extends OneShotEffect {
     AetherworksMarvelEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Look at the top six cards of your library. "
-                + "You may cast a card from among them without paying "
+                + "You may cast a spell from among them without paying "
                 + "its mana cost. Put the rest on the bottom of your "
                 + "library in a random order";
     }

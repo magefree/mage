@@ -55,11 +55,27 @@ public final class ThreadUtils {
     }
 
     public static void ensureRunInGameThread() {
-        String name = Thread.currentThread().getName();
-        if (!name.startsWith("GAME")) {
+        if (!isRunGameThread()) {
+            // for real games
             // how-to fix: use signal logic to inform a game about new command to execute instead direct execute (see example with WantConcede)
             // reason: user responses/commands are received by network/call thread, but must be processed by game thread
-            throw new IllegalArgumentException("Wrong code usage: game related code must run in GAME thread, but it used in " + name, new Throwable());
+            //
+            // for unit tests
+            // how-to fix: if your test runner uses a diff thread name to run tests then add it to isRunGameThread
+            throw new IllegalArgumentException("Wrong code usage: game related code must run in GAME thread, but it used in " + Thread.currentThread().getName(), new Throwable());
+        }
+    }
+
+    public static boolean isRunGameThread() {
+        String name = Thread.currentThread().getName();
+        if (name.startsWith("GAME ")) {
+            // server game
+            return true;
+        } else if (name.equals("main")) {
+            // unit test
+            return true;
+        } else {
+            return false;
         }
     }
 

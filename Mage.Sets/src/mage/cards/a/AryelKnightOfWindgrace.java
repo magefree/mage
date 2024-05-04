@@ -3,7 +3,6 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapVariableTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,13 +13,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
 import mage.game.permanent.token.KnightToken;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -58,7 +54,8 @@ public final class AryelKnightOfWindgrace extends CardImpl {
                 .setText("Destroy target creature with power X or less"), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapVariableTargetCost(filter));
-        ability.setTargetAdjuster(AryelKnightOfWindgraceAdjuster.instance);
+        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
@@ -69,21 +66,5 @@ public final class AryelKnightOfWindgrace extends CardImpl {
     @Override
     public AryelKnightOfWindgrace copy() {
         return new AryelKnightOfWindgrace(this);
-    }
-}
-
-enum AryelKnightOfWindgraceAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int value = 0;
-        for (VariableCost cost : ability.getCosts().getVariableCosts()) {
-            value = cost.getAmount();
-        }
-        FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent("creature with power " + value + " or less");
-        filterCreaturePermanent.add(new PowerPredicate(ComparisonType.FEWER_THAN, value + 1));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(filterCreaturePermanent));
     }
 }

@@ -54,19 +54,22 @@ public class FinalChapterAbilityResolvesTriggeredAbility extends TriggeredAbilit
         // the ID of the original ability (on the permanent) that the resolving ability
         // came from.
         Optional<Ability> ability_opt = game.getAbility(event.getTargetId(), event.getSourceId());
-        if (!ability_opt.isPresent())
+        if (!ability_opt.isPresent()) {
             return false;
+        }
 
         // Make sure it was a triggered ability (needed for checking if it's a chapter
         // ability)
         Ability ability = ability_opt.get();
-        if (!(ability instanceof TriggeredAbility))
+        if (!(ability.isTriggeredAbility())) {
             return false;
+        }
 
         // Make sure it was a chapter ability
         TriggeredAbility triggeredAbility = (TriggeredAbility) ability;
-        if (!SagaAbility.isChapterAbility(triggeredAbility))
+        if (!SagaAbility.isChapterAbility(triggeredAbility)) {
             return false;
+        }
 
         // There's a chance that the permanent that this abiltiy came from no longer
         // exists, so try and find it on the battlefield or check last known
@@ -75,17 +78,17 @@ public class FinalChapterAbilityResolvesTriggeredAbility extends TriggeredAbilit
         // chapter ability on that permanent.
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (permanent == null
-            || !permanent.isControlledBy(getControllerId())
-            || !permanent.hasSubtype(SubType.SAGA, game)) {
+                || !permanent.isControlledBy(getControllerId())
+                || !permanent.hasSubtype(SubType.SAGA, game)) {
             return false;
         }
 
         // Find the max chapter number from that permanent
         int maxChapter = CardUtil
-            .castStream(permanent.getAbilities(game).stream(), SagaAbility.class)
-            .map(SagaAbility::getMaxChapter)
-            .mapToInt(SagaChapter::getNumber)
-            .sum();
+                .castStream(permanent.getAbilities(game).stream(), SagaAbility.class)
+                .map(SagaAbility::getMaxChapter)
+                .mapToInt(SagaChapter::getNumber)
+                .sum();
 
         // Check if the ability was the last one
         if (!SagaAbility.isFinalAbility(triggeredAbility, maxChapter)) {

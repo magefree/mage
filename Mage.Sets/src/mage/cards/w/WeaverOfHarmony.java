@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CopyTargetStackAbilityEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +48,7 @@ public final class WeaverOfHarmony extends CardImpl {
         )));
 
         // {G}, {T}: Copy target activated or triggered ability you control from an enchantment source. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(new CopyTargetStackAbilityEffect(), new ManaCostsImpl<>("{G}"));
+        Ability ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetActivatedOrTriggeredAbility(filter2));
         this.addAbility(ability);

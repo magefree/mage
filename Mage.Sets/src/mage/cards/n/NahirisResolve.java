@@ -3,7 +3,7 @@ package mage.cards.n;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -101,7 +101,7 @@ class NahirisResolveExileEffect extends OneShotEffect {
                 CardUtil.getExileZoneId(game, source),
                 CardUtil.getSourceName(game, source)
         );
-        game.addDelayedTriggeredAbility(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
+        game.addDelayedTriggeredAbility(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(
                 new NahirisResolveReturnEffect().setTargetPointer(new FixedTargets(cards, game))
         ), source);
         return true;

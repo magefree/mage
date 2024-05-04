@@ -1,7 +1,6 @@
 package mage.target.common;
 
 import mage.abilities.Ability;
-import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterStackObject;
@@ -93,7 +92,7 @@ public class TargetTriggeredAbility extends TargetObject {
         }
         if (stackObject instanceof Ability) {
             Ability ability = (Ability) stackObject;
-            return ability.getAbilityType() == AbilityType.TRIGGERED;
+            return ability.getAbilityType().isTriggeredAbility();
         }
         return false;
     }

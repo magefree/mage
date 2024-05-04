@@ -3,16 +3,13 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.MutatesSourceTriggeredAbility;
-import mage.abilities.effects.common.CastTargetForFreeEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MutateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNoncreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -53,7 +50,7 @@ public final class VadrokApexOfThunder extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Whenever this creature mutates, you may cast target noncreature card with converted mana cost 3 or less from your graveyard without paying its mana cost.
-        Ability ability = new MutatesSourceTriggeredAbility(new CastTargetForFreeEffect());
+        Ability ability = new MutatesSourceTriggeredAbility(new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

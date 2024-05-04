@@ -15,6 +15,10 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
 
     protected final boolean setTargetPointer;
 
+    public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
     }
@@ -23,7 +27,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase(getWhen() + "{this} deals combat damage to a player, ");
-        this.replaceRuleText = true;
+        this.withRuleTextReplacement(true);
     }
 
     protected DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {

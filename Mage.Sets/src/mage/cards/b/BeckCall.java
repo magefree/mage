@@ -11,6 +11,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -44,11 +45,8 @@ public final class BeckCall extends SplitCard {
 
 class BeckTriggeredAbility extends DelayedTriggeredAbility {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public BeckTriggeredAbility() {
-        super(new DrawCardSourceControllerEffect(1), Duration.EndOfTurn, false);
-        optional = true;
+    BeckTriggeredAbility() {
+        super(new DrawCardSourceControllerEffect(1), Duration.EndOfTurn, false, true);
     }
 
     private BeckTriggeredAbility(final BeckTriggeredAbility ability) {
@@ -64,7 +62,7 @@ class BeckTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
-        return filter.match(permanent, getControllerId(), this, game);
+        return StaticFilters.FILTER_PERMANENT_CREATURE.match(permanent, getControllerId(), this, game);
     }
 
     @Override

@@ -1,20 +1,25 @@
 package mage.cards.decks.importer;
 
-import com.google.gson.*;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import mage.cards.decks.DeckCardLists;
 
 import java.io.File;
 import java.io.FileReader;
 
 /**
- * @author github: timhae
+ * Deck import: helper class for all json base formats
+ * TODO: improve files structure
+ *
+ * @author timhae
  */
 public abstract class JsonDeckImporter extends DeckImporter {
 
     protected StringBuilder sbMessage = new StringBuilder();
 
     /**
-     * @param fileName              file to import
+     * @param fileName          file to import
      * @param errorMessages     you can setup output messages to showup to user
      * @param saveAutoFixedFile do not supported for that format
      * @return decks list

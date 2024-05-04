@@ -54,7 +54,7 @@ public final class Marjhan extends CardImpl {
         // {U}{U}, Sacrifice a creature: Untap Marjhan. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new UntapSourceEffect(), new ManaCostsImpl<>("{U}{U}"), new IsStepCondition(PhaseStep.UPKEEP), null);
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // Marjhan can't attack unless defending player controls an Island.

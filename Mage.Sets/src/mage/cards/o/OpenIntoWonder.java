@@ -11,9 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -32,7 +31,8 @@ public final class OpenIntoWonder extends CardImpl {
         Ability abilityToGain = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(abilityToGain, Duration.EndOfTurn,
                 "Until end of turn, those creatures gain \"Whenever this creature deals combat damage to a player, draw a card.\""));
-        this.getSpellAbility().setTargetAdjuster(OpenIntoWonderAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private OpenIntoWonder(final OpenIntoWonder card) {
@@ -42,15 +42,5 @@ public final class OpenIntoWonder extends CardImpl {
     @Override
     public OpenIntoWonder copy() {
         return new OpenIntoWonder(this);
-    }
-}
-
-enum OpenIntoWonderAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
     }
 }

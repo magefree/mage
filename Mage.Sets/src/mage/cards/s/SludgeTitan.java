@@ -16,7 +16,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardAndOrCardInGraveyard;
+import mage.target.common.TargetCardAndOrCard;
 
 import java.util.UUID;
 
@@ -75,8 +75,9 @@ class SludgeTitanEffect extends OneShotEffect {
         }
         Cards cards = controller.millCards(5, source, game);
         game.getState().processAction(game);
+        cards.removeIf(card -> !game.getState().getZone(card).isPublicZone());
         if (!cards.isEmpty()) {
-            TargetCard target = new TargetCardAndOrCardInGraveyard(CardType.CREATURE, CardType.LAND);
+            TargetCard target = new TargetCardAndOrCard(CardType.CREATURE, CardType.LAND);
             controller.choose(Outcome.DrawCard, cards, target, source, game);
             Cards toHand = new CardsImpl();
             toHand.addAll(target.getTargets());

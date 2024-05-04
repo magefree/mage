@@ -2,7 +2,6 @@ package mage.abilities.effects.common.ruleModifying;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
@@ -86,7 +85,7 @@ public class TargetsHaveToTargetPermanentIfAbleEffect extends ContinuousRuleModi
             }
             Ability stackAbility = stackObject.getStackAbility();
             // Ensure that this ability is activated or a cast spell, because Flag Bearer effects don't require triggered abilities to choose a Standard Bearer
-            if (!(stackAbility instanceof ActivatedAbility) &&
+            if (!(stackAbility.isActivatedAbility()) &&
                     !(stackAbility instanceof SpellAbility)) {
                 return false;
             }

@@ -72,5 +72,6 @@ public class Modern extends Constructed {
         banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Yorion, Sky Nomad");
         banned.add("Vault of Whispers");
+        banned.add("Violent Outburst");
     }
 }

@@ -20,7 +20,7 @@ public final class Unstable extends ExpansionSet {
     }
 
     private Unstable() {
-        super("Unstable", "UST", ExpansionSet.buildDate(2017, 12, 8), SetType.JOKESET);
+        super("Unstable", "UST", ExpansionSet.buildDate(2017, 12, 8), SetType.JOKE_SET);
 
         cards.add(new SetCardInfo("Amateur Auteur", "3a", Rarity.COMMON, mage.cards.a.AmateurAuteur.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Amateur Auteur", "3b", Rarity.COMMON, mage.cards.a.AmateurAuteur.class, NON_FULL_USE_VARIOUS));

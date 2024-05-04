@@ -7,13 +7,11 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.target.targetpointer.FixedTarget;
 
@@ -68,7 +66,7 @@ class BurningTreeShamanTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility != null && stackAbility.getAbilityType() == AbilityType.ACTIVATED) {
+        if (stackAbility != null && stackAbility.isNonManaActivatedAbility()) {
             for (Effect effect : getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
             }

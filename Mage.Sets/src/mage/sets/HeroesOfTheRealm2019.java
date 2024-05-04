@@ -17,7 +17,7 @@ public class HeroesOfTheRealm2019 extends ExpansionSet {
     }
 
     private HeroesOfTheRealm2019() {
-        super("Heroes of the Realm 2019", "PH19", ExpansionSet.buildDate(2020, 8, 1), SetType.JOKESET);
+        super("Heroes of the Realm 2019", "PH19", ExpansionSet.buildDate(2020, 8, 1), SetType.JOKE_SET);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

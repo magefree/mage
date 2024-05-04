@@ -9,7 +9,6 @@ import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.hint.StaticHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
@@ -45,8 +44,8 @@ public final class LeoriSparktouchedHunter extends CardImpl {
 
         // Whenever Leori, Sparktouched Hunter deals combat damage to a player, choose a planeswalker type. Until end of turn, whenever you activate an ability of a planeswalker of that type, copy that ability. You may choose new targets for the copies.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-            new LeoriSparktouchedHunterEffect(),
-            false
+                new LeoriSparktouchedHunterEffect(),
+                false
         ));
     }
 
@@ -66,7 +65,7 @@ class LeoriSparktouchedHunterEffect extends OneShotEffect {
     LeoriSparktouchedHunterEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a planeswalker type. Until end of turn, whenever you activate an ability " +
-            "of a planeswalker of that type, copy that ability. You may choose new targets for the copies.";
+                "of a planeswalker of that type, copy that ability. You may choose new targets for the copies.";
     }
 
     private LeoriSparktouchedHunterEffect(final LeoriSparktouchedHunterEffect effect) {
@@ -98,8 +97,8 @@ class LeoriSparktouchedHunterEffect extends OneShotEffect {
         game.informPlayers(controller.getLogName() + " has chosen " + subType);
 
         game.addDelayedTriggeredAbility(
-            new LeoriSparktouchedHunterTriggeredAbility(subType),
-            source
+                new LeoriSparktouchedHunterTriggeredAbility(subType),
+                source
         );
 
         return true;
@@ -139,8 +138,7 @@ class LeoriSparktouchedHunterTriggeredAbility extends DelayedTriggeredAbility {
         }
 
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility == null
-            || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
+        if (stackAbility == null || stackAbility.getStackAbility().isManaActivatedAbility()) {
             return false;
         }
 
@@ -155,6 +153,6 @@ class LeoriSparktouchedHunterTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public String getRule() {
         return "Whenever you activate an ability of a planeswalker of the chosen type, copy that ability. " +
-            "You may choose new targets for the copies.";
+                "You may choose new targets for the copies.";
     }
 }

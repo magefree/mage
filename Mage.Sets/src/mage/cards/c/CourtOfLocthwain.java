@@ -107,7 +107,7 @@ class CourtOfLocthwainFirstEffect extends OneShotEffect {
 
         if (game.getState().getZone(card.getId()) == Zone.EXILED) {
             CardUtil.makeCardPlayable(
-                    game, source, card, Duration.EndOfGame,
+                    game, source, card, false, Duration.EndOfGame,
                     true, controller.getId(), null
             );
         }
@@ -160,7 +160,7 @@ class CourtOfLocthwainCastForFreeEffect extends AsThoughEffectImpl {
     private final MageObjectReference mor;
 
     public CourtOfLocthwainCastForFreeEffect(MageObjectReference mor) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.mor = mor;
     }
 
@@ -195,8 +195,10 @@ class CourtOfLocthwainCastForFreeEffect extends AsThoughEffectImpl {
 
         UUID exileId = CourtOfLocthwain.getExileZoneId(mor, game);
         ExileZone exileZone = game.getExile().getExileZone(exileId);
+
+        Card card = game.getCard(objectId);
         // Is the card attempted to be played in the ExiledZone?
-        if (exileZone == null || !exileZone.contains(objectId)) {
+        if (exileZone == null || card == null || !exileZone.contains(card.getMainCard().getId())) {
             return false;
         }
         // can this ability still be used this turn?

@@ -56,7 +56,8 @@ public final class VronosMaskedInquisitor extends CardImpl {
         // −2: For each opponent, return up to one target nonland permanent that player controls to its owner's hand.
         LoyaltyAbility ability2 = new LoyaltyAbility(new ReturnToHandTargetEffect().setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, return up to one target nonland permanent that player controls to its owner's hand"), -2);
-        ability2.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetNonlandPermanent(0,1)));
+        ability2.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        ability2.addTarget(new TargetNonlandPermanent(0,1));
         this.addAbility(ability2);
 
         // −7: Target artifact you control becomes a 9/9 Construct artifact creature and gains vigilance, indestructible, and "This creature can't be blocked."

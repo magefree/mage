@@ -17,7 +17,7 @@ import java.util.UUID;
 public final class RumblingRockslide extends CardImpl {
 
     private static final DynamicValue xValue
-            = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT);
+            = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
 
     public RumblingRockslide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

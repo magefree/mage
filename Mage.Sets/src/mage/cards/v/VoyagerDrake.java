@@ -13,9 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -44,7 +43,8 @@ public final class VoyagerDrake extends CardImpl {
                 ).setText("up to X target creatures gain flying until end of turn, " +
                         "where X is the number of times {this} was kicked.")
         );
-        ability.setTargetAdjuster(VoyagerDrakeAdjuster.instance);
+        ability.setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
     }
 
@@ -55,18 +55,5 @@ public final class VoyagerDrake extends CardImpl {
     @Override
     public VoyagerDrake copy() {
         return new VoyagerDrake(this);
-    }
-}
-
-enum VoyagerDrakeAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int numbTargets = MultikickerCount.instance.calculate(game, ability, null);
-        if (numbTargets > 0) {
-            ability.addTarget(new TargetCreaturePermanent(0, numbTargets));
-        }
     }
 }

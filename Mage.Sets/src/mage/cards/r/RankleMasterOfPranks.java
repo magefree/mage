@@ -49,7 +49,7 @@ public final class RankleMasterOfPranks extends CardImpl {
         ability.addMode(mode);
 
         // • Each player sacrifices a creature.
-        ability.addMode(new Mode(new SacrificeAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addMode(new Mode(new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE)));
 
         ability.getModes().setMinModes(0);
         ability.getModes().setMaxModes(3);

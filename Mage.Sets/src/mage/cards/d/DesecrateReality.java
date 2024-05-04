@@ -44,7 +44,8 @@ public final class DesecrateReality extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect()
             .setTargetPointer(new EachTargetPointer())
             .setText("for each opponent, exile up to one target permanent that player controls with an even mana value."));
-        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(0, 1, evenFilter)));
+        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, evenFilter));
 
         // Adamant -- If at least three colorless mana was spent to cast this spell, return a permanent card with an odd mana value from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
