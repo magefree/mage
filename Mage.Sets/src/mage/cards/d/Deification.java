@@ -27,9 +27,10 @@ import mage.game.permanent.Permanent;
  */
 public final class Deification extends CardImpl {
 
-    private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("planeswalkers of the chosen type");
+    private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("planeswalkers you control of the chosen type");
 
     static {
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(ChosenPlaneswalkerTypePredicate.TRUE);
     }
 
@@ -41,7 +42,7 @@ public final class Deification extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlaneswalkerTypeEffect(Outcome.AddAbility)));
 
         // Planeswalkers you control of the chosen type have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
         
         // As long as you control a creature, if damage dealt to a planeswalker you control of the chosen type would result in all loyalty counters on it being removed, instead all but one of those counters are removed.
         addAbility(new SimpleStaticAbility(new DeificationReplacementEffect()));
