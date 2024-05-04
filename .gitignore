@@ -8,10 +8,10 @@ syntax: glob
 # logs and logs rotation
 *.log
 *.log.*
+*/gamelogs
+*/gamelogsJson
 
 # Mage.Client
-Mage.Client/gamelogs
-Mage.Client/gamelogsJson
 Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
 # TODO: must save serverlist.txt to temporary files, not root folder
@@ -38,6 +38,7 @@ Utils/*implemented.txt
 # dev environments, IDE and OS
 # IntelliJ IDEA
 .idea
+*.iml
 # Visual Studio Code
 .vscode
 .history
