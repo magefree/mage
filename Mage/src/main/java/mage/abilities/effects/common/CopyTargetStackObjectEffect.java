@@ -13,7 +13,7 @@ import mage.util.functions.StackObjectCopyApplier;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class CopyTargetSpellEffect extends OneShotEffect {
+public class CopyTargetStackObjectEffect extends OneShotEffect {
 
     private final boolean useController;
     private final boolean useLKI;
@@ -22,15 +22,15 @@ public class CopyTargetSpellEffect extends OneShotEffect {
     private final int amount;
     private final StackObjectCopyApplier applier;
 
-    public CopyTargetSpellEffect() {
+    public CopyTargetStackObjectEffect() {
         this(false);
     }
 
-    public CopyTargetSpellEffect(boolean useLKI) {
+    public CopyTargetStackObjectEffect(boolean useLKI) {
         this(false, useLKI, true);
     }
 
-    public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets) {
+    public CopyTargetStackObjectEffect(boolean useController, boolean useLKI, boolean chooseTargets) {
         this(useController, useLKI, chooseTargets, 1, null);
     }
 
@@ -42,8 +42,8 @@ public class CopyTargetSpellEffect extends OneShotEffect {
      * @param amount        The amount of copies to create
      * @param applier       An applier to apply to the newly created copies. Used to change copiable values of the copy, such as types or name
      */
-    public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets, int amount,
-            StackObjectCopyApplier applier) {
+    public CopyTargetStackObjectEffect(boolean useController, boolean useLKI, boolean chooseTargets, int amount,
+                                       StackObjectCopyApplier applier) {
         super(Outcome.Copy);
         this.useController = useController;
         this.useLKI = useLKI;
@@ -52,7 +52,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         this.applier = applier;
     }
 
-    protected CopyTargetSpellEffect(final CopyTargetSpellEffect effect) {
+    protected CopyTargetStackObjectEffect(final CopyTargetStackObjectEffect effect) {
         super(effect);
         this.useLKI = effect.useLKI;
         this.useController = effect.useController;
@@ -87,8 +87,8 @@ public class CopyTargetSpellEffect extends OneShotEffect {
     }
 
     @Override
-    public CopyTargetSpellEffect copy() {
-        return new CopyTargetSpellEffect(this);
+    public CopyTargetStackObjectEffect copy() {
+        return new CopyTargetStackObjectEffect(this);
     }
 
     @Override

@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CopyTargetStackAbilityEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -51,13 +51,13 @@ public final class LithoformEngine extends CardImpl {
         this.addAbility(ability);
 
         // {3}, {T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.
-        ability = new SimpleActivatedAbility(new CopyTargetSpellEffect(), new GenericManaCost(3));
+        ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter2));
         this.addAbility(ability);
 
         // {4}, {T}: Copy target permanent spell you control.
-        ability = new SimpleActivatedAbility(new CopyTargetSpellEffect(
+        ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(
                 false, false, false
         ), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());

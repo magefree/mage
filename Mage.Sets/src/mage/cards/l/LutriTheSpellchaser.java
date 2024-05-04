@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.CompanionCondition;
 import mage.abilities.keyword.FlashAbility;
@@ -55,7 +55,7 @@ public final class LutriTheSpellchaser extends CardImpl {
 
         // When Lutri, the Spellchaser enters the battlefield, if you cast it, copy target instant or sorcery spell you control. You may choose new targets for the copy.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CopyTargetSpellEffect(), false),
+                new EntersBattlefieldTriggeredAbility(new CopyTargetStackObjectEffect(), false),
                 CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
                 "if you cast it, copy target instant or sorcery spell you control. " +
                 "You may choose new targets for the copy."

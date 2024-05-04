@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.cards.CardImpl;
@@ -65,7 +65,7 @@ public final class MelekIzzetParagon extends CardImpl {
 class MelekIzzetParagonTriggeredAbility extends TriggeredAbilityImpl {
 
     public MelekIzzetParagonTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), false);
+        super(Zone.BATTLEFIELD, new CopyTargetStackObjectEffect(), false);
     }
 
     private MelekIzzetParagonTriggeredAbility(final MelekIzzetParagonTriggeredAbility ability) {

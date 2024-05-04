@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +49,7 @@ public final class LeagueGuildmage extends CardImpl {
 
         // {X}{R}, {T}: Copy target instant or sorcery spell you control with converted mana cost X. You may choose new targets for the copy.
         ability = new SimpleActivatedAbility(
-                new CopyTargetSpellEffect(),
+                new CopyTargetStackObjectEffect(),
                 new ManaCostsImpl<>("{X}{R}")
         );
         ability.addCost(new TapSourceCost());
