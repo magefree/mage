@@ -29,7 +29,7 @@ public final class LuckyClover extends CardImpl {
 
         // Whenever you cast an Adventure instant or sorcery spell, copy it. You may choose new targets for the copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetStackObjectEffect(true).withSpellName("it"),
+                new CopyTargetStackObjectEffect(true).withText("it"),
                 filter, false, SetTargetPointer.SPELL
         ));
     }

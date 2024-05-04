@@ -38,7 +38,7 @@ public class ChandraHopesBeacon extends CardImpl {
         //Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy. This ability
         //triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetStackObjectEffect(true).withSpellName("it"),
+                new CopyTargetStackObjectEffect(true).withText("it"),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false, SetTargetPointer.SPELL
         ).setTriggersOnceEachTurn(true));
