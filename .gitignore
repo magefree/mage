@@ -1,135 +1,60 @@
 syntax: glob
 
+# global files
+**/db
+**/saved
+**/target
+
+# logs and logs rotation
+*.log
+*.log.*
+
 # Mage.Client
-Mage.Client/*.dck
-Mage.Client/db
 Mage.Client/gamelogs
 Mage.Client/gamelogsJson
-Mage.Client/*.log
-Mage.Client/game-*.json
 Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
-Mage.Client/target
-
-# Mage.Common
-Mage.Common/target
-
-# Mage.Plugins
-Mage.Plugins/target
-Mage.Plugins/Mage.Card.Plugin/target
-Mage.Plugins/Mage.Counter.Plugin/target
-Mage.Plugins/Mage.Theme.Plugin/target
-Mage.Plugins/Mage.Rating.Plugin/target
+# TODO: must save serverlist.txt to temporary files, not root folder
+Mage.Client/serverlist.txt
 
 # Mage.Server
 Mage.Server/config/init.txt
-Mage.Server/config/ai.please.cast.this.txt
-Mage.Server/saved
-Mage.Server/target
-Mage.Server/db
-Mage.Server/cache
-Mage.Server/gamelogs
-Mage.Server/*.log
 Mage.Server/extensions
 
-# Mage.Server.Console
-Mage.Server.Console/target/
-Mage.Server.Console/mageadmin.log
-
-# Mage.Server.Plugins
-Mage.Server.Plugins/*/target
-Mage.Server.Plugins/target
-
-# Mage.Sets
-Mage.Sets/target
-
-# Mage.Stats
-Mage.Stats/target
-Mage.Stats/*.log
-
-# Mage.Tests
-Mage.Tests/target
-Mage.Tests/cache
-Mage.Tests/db
-Mage.Tests/*.log
-
-# Mage
-Mage/target
-Mage/*.log
-
-# Mage.Updater
-Mage.Updater/target
-mage.updater.client/target
-
 # Mage.Verify
-Mage.Verify/target
-Mage.Verify/*.log
+# downloadable files
 Mage.Verify/*.zip
 Mage.Verify/*.json
-Mage.Verify/db
-
-# Mage.Reports
-Mage.Reports/target
-
-# Logs rotation
-*.log.*
 
 # Utils
+# TODO: remove outdated files and scripts
 releases
 Utils/author.txt
+
+# TODO: remove with outdated perl scripts
 Utils/*_tracker.txt
 Utils/*implemented.txt
-.DS_Store
+
+# dev environments, IDE and OS
+# IntelliJ IDEA
+.idea
+# Visual Studio Code
+.vscode
+.history
+# Eclipse
 .metadata
 .project
 .settings
-.idea/
-.vscode/
 .factorypath
-syntax: regexp
-\.class
-\.jar
-\.iml
-\.ipr
-\.iws
-\.log
-nbactions.xml
-nbactions-*.xml
-nb-configuration.xml
-mage-bundle.zip
-xmage_*.zip
-mage-stats-ws.war
-
-\.orig\..*$
-\.orig$
-\.chg\..*$
-\.rej$
-\.conflict\~$
-
-*.classpath
-*.iml
-hs_err*.log
-/submitted
-
-/Utils/*_unimplemented.txt
-*.netbeans_automatic_build
-Mage.Client/serverlist.txt
-/bin/
-/out/
-/target/
-
-client_secrets.json
-
-dependency-reduced-pom.xml
-mage-bundle
-
-# build-tools config and log files when building client/server with Atom
+**/bin
+**/out
+# NetBeans
+**/nb-configuration.xml
+# Atom
 .build-tools.cson
-build-output.log
+# mac os
+.DS_Store
 
-# Visual Studio Code
-.history
-
-# Makefile
+# build tools
+mage-bundle.zip
 .env
-deploy/
