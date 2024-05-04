@@ -36,7 +36,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     protected TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
-        super(AbilityType.TRIGGERED, zone);
+        super(AbilityType.TRIGGERED_NONMANA, zone);
         setLeavesTheBattlefieldTrigger(false);
         if (effect != null) {
             addEffect(effect);
@@ -265,6 +265,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     /**
      * For use in generating trigger phrases with correct text
+     *
      * @return "When " for an effect that always removes the source from the battlefield, otherwise "Whenever "
      */
     protected final String getWhen() {

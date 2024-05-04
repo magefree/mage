@@ -1592,7 +1592,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 case SPECIAL_MANA_PAYMENT:
                     result = specialManaPayment((SpecialAction) ability.copy(), game);
                     break;
-                case MANA:
+                case ACTIVATED_MANA:
                     result = playManaAbility((ActivatedManaAbilityImpl) ability.copy(), game);
                     break;
                 case SPELL:
@@ -1616,9 +1616,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         //if player has taken an action then reset all player passed flags
         justActivatedType = null;
         if (result) {
-            if (isHuman()
-                    && (ability.getAbilityType() == AbilityType.SPELL
-                    || ability.getAbilityType() == AbilityType.ACTIVATED)) {
+            if (isHuman() && (ability.getAbilityType() == AbilityType.SPELL || ability.getAbilityType().isActivatedAbility())) {
                 if (ability.isUsesStack()) { // if the ability does not use the stack (e.g. Suspend) auto pass would go to next phase unintended
                     setJustActivatedType(ability.getAbilityType());
                 }
@@ -2400,7 +2398,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void removeCounters(String name, int amount, Ability source, Game game) {
 
         GameEvent removeCountersEvent = new RemoveCountersEvent(name, this, source, amount, false);
-        if (game.replaceEvent(removeCountersEvent)){
+        if (game.replaceEvent(removeCountersEvent)) {
             return;
         }
 
@@ -2408,7 +2406,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (int i = 0; i < amount; i++) {
 
             GameEvent event = new RemoveCounterEvent(name, this, source, false);
-            if (game.replaceEvent(event)){
+            if (game.replaceEvent(event)) {
                 continue;
             }
 
@@ -3582,7 +3580,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @return
      */
     protected boolean canPlay(ActivatedAbility ability, ManaOptions availableMana, MageObject sourceObject, Game game) {
-        if (!(ability instanceof ActivatedManaAbilityImpl)) {
+        if (!ability.isManaActivatedAbility()) {
             ActivatedAbility copy = ability.copy(); // Copy is needed because cost reduction effects modify e.g. the mana to activate/cast the ability
             if (!copy.canActivate(playerId, game).canActivate()) {
                 return false;
@@ -3885,7 +3883,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // alternative cost must be replaced by real play ability
             return findActivatedAbilityFromAlternativeSourceCost(object, manaFull, ability, game);
         } else if (ability instanceof ActivatedAbility) {
-            // all other activated ability
+            // all other abilities (include PlayLandAbility & SpellAbility)
             if (canPlay((ActivatedAbility) ability, manaFull, object, game)) {
                 return (ActivatedAbility) ability;
             }
@@ -3964,6 +3962,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // check "can play" condition as affected controller (BUT play from not own hand zone must be checked as original controller)
         // must check all abilities, not activated only
         for (Ability ability : candidateAbilities) {
+            // Note: SpellAbility and PlayLandAbility are ActivatedAbility
             if (!(ability instanceof ActivatedAbility)) {
                 continue;
             }
@@ -4493,9 +4492,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             case allAbilities:
                 return true;
             case onlyManaAbilities:
-                return ability.getAbilityType() == AbilityType.MANA;
+                return ability.isManaAbility();
             case nonSpellnonActivatedAbilities:
-                return ability.getAbilityType() != AbilityType.ACTIVATED && ability.getAbilityType() != AbilityType.SPELL;
+                return !ability.getAbilityType().isActivatedAbility()
+                        && ability.getAbilityType() != AbilityType.SPELL;
             case none:
             default:
                 return false;

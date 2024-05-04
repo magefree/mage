@@ -1,7 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -106,7 +105,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
                     controlChanged = true;
                 }
             }
-            if (source instanceof ActivatedAbility
+            if (source.isActivatedAbility()
                     && firstControlChange && !controlChanged) {
                 // If it was not possible to get control of target permanent by the activated ability the first time it took place
                 // the effect failed (e.g. because of Guardian Beast) and must be discarded
