@@ -78,10 +78,6 @@ public interface Permanent extends Card, Controllable {
 
     void setSuspected(boolean value, Game game, Ability source);
 
-    boolean isSaddled();
-
-    void setSaddled(boolean value);
-
     boolean isPrototyped();
 
     void setPrototyped(boolean value);

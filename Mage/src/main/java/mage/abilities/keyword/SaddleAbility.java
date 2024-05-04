@@ -7,11 +7,12 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SaddledCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.constants.*;
+import mage.constants.Outcome;
+import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -24,11 +25,10 @@ import mage.watchers.common.SaddledMountWatcher;
 
 import java.awt.*;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author TheElk801, Susucr
  */
 public class SaddleAbility extends SimpleActivatedAbility {
 
@@ -36,7 +36,7 @@ public class SaddleAbility extends SimpleActivatedAbility {
     private static final Hint hint = new ConditionHint(SaddledCondition.instance, "This permanent is saddled");
 
     public SaddleAbility(int value) {
-        super(new SaddleEffect(), new SaddleCost(value));
+        super(new SaddleEventEffect(), new SaddleCost(value));
         this.value = value;
         this.addHint(hint);
         this.setTiming(TimingRule.SORCERY);
@@ -60,41 +60,35 @@ public class SaddleAbility extends SimpleActivatedAbility {
     }
 }
 
-class SaddleEffect extends ContinuousEffectImpl {
+class SaddleEventEffect extends OneShotEffect {
 
-    SaddleEffect() {
-        super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
+    SaddleEventEffect() {
+        super(Outcome.Benefit);
     }
 
-    private SaddleEffect(final SaddleEffect effect) {
+    private SaddleEventEffect(final SaddleEventEffect effect) {
         super(effect);
     }
 
     @Override
-    public SaddleEffect copy() {
-        return new SaddleEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        game.fireEvent(GameEvent.getEvent(
-                GameEvent.EventType.MOUNT_SADDLED,
-                source.getSourceId(),
-                source, source.getControllerId()
-        ));
+    public SaddleEventEffect copy() {
+        return new SaddleEventEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .ifPresent(permanent -> permanent.setSaddled(true));
+        if (source.getSourcePermanentIfItStillExists(game) != null) {
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.MOUNT_SADDLED,
+                    source.getSourceId(),
+                    source, source.getControllerId()
+            ));
+        }
         return true;
     }
 }
 
 class SaddleCost extends CostImpl {
-
 
     private static final FilterControlledCreaturePermanent filter
             = new FilterControlledCreaturePermanent("another untapped creature you control");
