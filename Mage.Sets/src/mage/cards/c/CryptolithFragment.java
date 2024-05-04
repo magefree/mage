@@ -1,12 +1,9 @@
-
 package mage.cards.c;
-
-import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.condition.common.XorLessLifeCondition;
+import mage.abilities.condition.common.LifeCompareCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -15,7 +12,10 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -31,16 +31,16 @@ public final class CryptolithFragment extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {T}: Add one mana of any color. Each player loses 1 life.
-        Ability AnyColorManaAbility = new AnyColorManaAbility();
-        AnyColorManaAbility.addEffect(new LoseLifeAllPlayersEffect(1));
-        this.addAbility(AnyColorManaAbility);
+        Ability anyColorManaAbility = new AnyColorManaAbility();
+        anyColorManaAbility.addEffect(new LoseLifeAllPlayersEffect(1));
+        this.addAbility(anyColorManaAbility);
 
         // At the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
-                new XorLessLifeCondition(XorLessLifeCondition.CheckType.EACH_PLAYER, 10),
-                "At the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment."));
+                new LifeCompareCondition(TargetController.EACH_PLAYER, ComparisonType.OR_LESS, 10),
+                "At the beginning of your upkeep, if each player has 10 or less life, transform {this}."));
     }
 
     private CryptolithFragment(final CryptolithFragment card) {
