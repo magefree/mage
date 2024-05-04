@@ -22,7 +22,7 @@ public class CounterRemovedEvent extends GameEvent {
         this.isDamage = isDamage;
     }
 
-    boolean counterRemovedDueToDamage(){
+    public boolean counterRemovedDueToDamage(){
         return this.isDamage;
     }
 
