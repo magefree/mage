@@ -472,12 +472,6 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean seekCard(FilterCard filter, Ability source, Game game);
 
     /**
-     * Gets a random card which matches the given filter and puts it into its owner's graveyard
-     * Doesn't reveal the card
-     */
-    boolean putRandomCardInGraveyard(FilterCard filter, Ability source, Game game);
-
-    /**
      * Reveals all players' libraries. Useful for abilities like Jace, Architect
      * of Thought's -8 that have effects that require information from all
      * libraries.

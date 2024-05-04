@@ -3649,12 +3649,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean putRandomCardInGraveyard(FilterCard filter, Ability source, Game game)
-    {
-        return computerPlayer.putRandomCardInGraveyard(filter, source, game);
-    }
-
-    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
         computerPlayer.lookAtAllLibraries(source, game);
     }
