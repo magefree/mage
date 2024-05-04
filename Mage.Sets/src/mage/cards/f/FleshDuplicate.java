@@ -1,19 +1,20 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.keyword.VanishingAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.util.functions.CopyApplier;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,13 +51,13 @@ class FleshDuplicateCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        if (!blueprint.getAbilities().toString().contains("Vanishing")) {
+        if (!blueprint.getAbilities().containsClass(VanishingAbility.class)) {
             blueprint.getAbilities().add(new VanishingAbility(3));
         }
         return true;
     }
     @Override
     public String getText() {
-        return " ,except it has vanishing 3 if that creature doesn't have vanishing.";
+        return ", except it has vanishing 3 if that creature doesn't have vanishing.";
     }
 }

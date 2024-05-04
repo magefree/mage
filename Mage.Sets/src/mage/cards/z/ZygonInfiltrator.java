@@ -1,6 +1,5 @@
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -9,14 +8,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,10 +36,10 @@ public final class ZygonInfiltrator extends CardImpl {
 
         // Body-print -- {2}{U}: Tap another target creature and put a stun counter on it. Zygon Infiltrator becomes a copy of that creature for as long as that creature remains tapped. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
-        ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance(1)));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE));
+        ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance(1)).setText("and put a stun counter on it"));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         ability.addEffect(new ZygonInfiltratorEffect());
-        this.addAbility(ability);
+        this.addAbility(ability.withFlavorWord("Body-print"));
     }
 
     private ZygonInfiltrator(final ZygonInfiltrator card) {
@@ -70,26 +71,20 @@ class ZygonInfiltratorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-
         Permanent tappedCreature = game.getPermanent(source.getFirstTarget());
-
-
-        Permanent SourceCreature = game.getPermanent(source.getSourceId());
-
-        if (tappedCreature == null
-                || SourceCreature == null) {
+        Permanent sourceCreature = source.getSourcePermanentIfItStillExists(game);
+        if (tappedCreature == null || sourceCreature == null) {
             return false;
         }
-        game.addEffect(new ZygonInfiltratorCopyEffect(SourceCreature, tappedCreature), source);
+        game.addEffect(new ZygonInfiltratorCopyEffect(sourceCreature, tappedCreature), source);
         return true;
     }
 }
 
 class ZygonInfiltratorCopyEffect extends CopyEffect {
 
-    ZygonInfiltratorCopyEffect(Permanent SourceCreature, Permanent tappedCreature) {
-        super(Duration.Custom, tappedCreature, SourceCreature.getId());
+    ZygonInfiltratorCopyEffect(Permanent sourceCreature, Permanent tappedCreature) {
+        super(Duration.Custom, tappedCreature, sourceCreature.getId());
     }
 
     private ZygonInfiltratorCopyEffect(final ZygonInfiltratorCopyEffect effect) {
@@ -107,10 +102,6 @@ class ZygonInfiltratorCopyEffect extends CopyEffect {
             return true;
         }
         Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
-        if (targetPermanent == null || !targetPermanent.isTapped()) {
-            return true;
-        }
-        return false;
+        return targetPermanent == null || !targetPermanent.isTapped();
     }
 }
-
