@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
@@ -11,9 +10,8 @@ import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -34,7 +32,8 @@ public final class IcyBlast extends CardImpl {
                 new LockedInCondition(FerociousCondition.instance));
         effect.setText("<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(IcyBlastAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
@@ -45,15 +44,5 @@ public final class IcyBlast extends CardImpl {
     @Override
     public IcyBlast copy() {
         return new IcyBlast(this);
-    }
-}
-
-enum IcyBlastAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
     }
 }

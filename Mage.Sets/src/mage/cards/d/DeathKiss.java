@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
+import mage.abilities.dynamicvalue.common.GetMonstrosityXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -19,7 +20,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.Set;
@@ -44,9 +45,12 @@ public final class DeathKiss extends CardImpl {
         this.addAbility(new MonstrosityAbility("{X}{X}{R}", Integer.MAX_VALUE));
 
         // When Death Kiss becomes monstrous, goad up to X target creatures your opponents control.
-        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(
+        Ability ability = new BecomesMonstrousSourceTriggeredAbility(
                 new GoadTargetEffect().setText("goad up to X target creatures your opponents control")
-        ).setTargetAdjuster(DeathKissAdjuster.instance));
+        );
+        ability.setTargetAdjuster(new TargetsCountAdjuster(GetMonstrosityXValue.instance));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        this.addAbility(ability);
     }
 
     private DeathKiss(final DeathKiss card) {
@@ -56,17 +60,6 @@ public final class DeathKiss extends CardImpl {
     @Override
     public DeathKiss copy() {
         return new DeathKiss(this);
-    }
-}
-
-enum DeathKissAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ((BecomesMonstrousSourceTriggeredAbility) ability).getMonstrosityValue();
-        ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(0, xValue, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 }
 

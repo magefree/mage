@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.GrandeurAbility;
@@ -11,11 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -26,7 +21,9 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.targetadjustment.XCMCPermanentAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +50,7 @@ public final class LinessaZephyrMage extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{X}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(XCMCPermanentAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
 
         // Grandeur - Discard another card named Linessa, Zephyr Mage: Target player returns a creature they control to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.

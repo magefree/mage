@@ -1,9 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,20 +8,17 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BloodSun extends CardImpl {
@@ -73,9 +67,9 @@ class BloodSunEffect extends ContinuousEffectImpl {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
                         List<Ability> toRemove = new ArrayList<>();
-                        permanent.getAbilities().forEach(a -> {
-                            if (a.getAbilityType() != AbilityType.MANA) {
-                                toRemove.add(a);
+                        permanent.getAbilities().forEach(ability -> {
+                            if (!ability.getAbilityType().isManaAbility()) {
+                                toRemove.add(ability);
                             }
                         });
                         permanent.removeAbilities(toRemove, source.getSourceId(), game);

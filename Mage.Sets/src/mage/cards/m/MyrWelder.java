@@ -1,9 +1,7 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -18,8 +16,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class MyrWelder extends CardImpl {
@@ -102,7 +101,7 @@ class MyrWelderContinuousEffect extends ContinuousEffectImpl {
                 Card card = game.getCard(imprintedId);
                 if (card != null) {
                     for (Ability ability : card.getAbilities(game)) {
-                        if (ability instanceof ActivatedAbility) {
+                        if (ability.isActivatedAbility()) {
                             perm.addAbility(ability, source.getId(), game, true);
                         }
                     }

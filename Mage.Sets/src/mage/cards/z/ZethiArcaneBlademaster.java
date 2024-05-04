@@ -15,7 +15,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 import org.apache.log4j.Logger;
 
 import java.util.UUID;
@@ -24,6 +24,11 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ZethiArcaneBlademaster extends CardImpl {
+    private static final FilterCard filter = new FilterCard("instant cards from your graveyard");
+
+    static {
+        filter.add(CardType.INSTANT.getPredicate());
+    }
 
     public ZethiArcaneBlademaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
@@ -38,8 +43,11 @@ public final class ZethiArcaneBlademaster extends CardImpl {
         this.addAbility(new MultikickerAbility("{W/U}"));
 
         // When Chun-Li enters the battlefield, exile up to X target instant cards from your graveyard, where X is the number of times Chun-Li was kicked. Put a kick counter on each of them.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ZethiArcaneBlademasterExileEffect())
-                .setTargetAdjuster(ZethiArcaneBlademasterAdjuster.instance));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ZethiArcaneBlademasterExileEffect());
+        ability.setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
+        this.addAbility(ability);
+
 
         // Lightning Kick—Whenever Chun-Li attacks, copy each exiled card you own with a kick counter on it. You may cast the copies.
         this.addAbility(new AttacksTriggeredAbility(new ZethiArcaneBlademasterCastEffect()));
@@ -52,22 +60,6 @@ public final class ZethiArcaneBlademaster extends CardImpl {
     @Override
     public ZethiArcaneBlademaster copy() {
         return new ZethiArcaneBlademaster(this);
-    }
-}
-
-enum ZethiArcaneBlademasterAdjuster implements TargetAdjuster {
-    instance;
-    private static final FilterCard filter = new FilterCard("instant cards from your graveyard");
-
-    static {
-        filter.add(CardType.INSTANT.getPredicate());
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int count = MultikickerCount.instance.calculate(game, ability, null);
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(0, count, filter));
     }
 }
 

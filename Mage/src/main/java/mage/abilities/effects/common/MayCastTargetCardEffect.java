@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
@@ -115,8 +114,7 @@ public class MayCastTargetCardEffect extends OneShotEffect {
 
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
             boolean noMana = manaAdjustment == CastManaAdjustment.WITHOUT_PAYING_MANA_COST;
-            controller.cast(controller.chooseAbilityForCast(card, game, noMana),
-                    game, noMana, new ApprovingObject(source, game));
+            CardUtil.castSingle(controller, source, game, card, noMana, null);
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         } else {
             // TODO: support (and add tests!) for the non-NONE manaAdjustment

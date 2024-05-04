@@ -6,6 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
+import mage.cards.FrameStyle;
 import mage.cards.repository.TokenInfo;
 import mage.cards.repository.TokenRepository;
 import mage.constants.Outcome;
@@ -27,6 +28,7 @@ public class RadiationEmblem extends Emblem {
 
     public RadiationEmblem() {
         super("Radiation");
+        this.frameStyle = FrameStyle.M15_NORMAL;
 
         this.getAbilities().add(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfPreCombatMainTriggeredAbility(Zone.ALL, new RadiationEffect(), TargetController.YOU, false, false),

@@ -100,7 +100,7 @@ class MagmaticChannelerExileEffect extends OneShotEffect {
         } else if (cards.size() == 1) {
             card = cards.getRandom(game);
         } else {
-            TargetCard targetCard = new TargetCardInExile(StaticFilters.FILTER_CARD, null);
+            TargetCard targetCard = new TargetCardInExile(StaticFilters.FILTER_CARD);
             player.choose(outcome, cards, targetCard, source, game);
             card = game.getCard(targetCard.getFirstTarget());
         }

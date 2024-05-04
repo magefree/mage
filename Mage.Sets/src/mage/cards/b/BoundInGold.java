@@ -1,24 +1,23 @@
 package mage.cards.b;
 
-import java.util.Optional;
-import java.util.UUID;
-
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
-import mage.constants.*;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class BoundInGold extends CardImpl {
@@ -90,7 +89,7 @@ class BoundInGoldEffect extends ContinuousRuleModifyingEffectImpl {
                 case ACTIVATE_ABILITY:
                     if (enchantment.isAttachedTo(event.getSourceId())) {
                         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                        return ability.isPresent() && ability.get().getAbilityType() != AbilityType.MANA;
+                        return ability.isPresent() && ability.get().isNonManaActivatedAbility();
                     }
             }
         }

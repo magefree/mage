@@ -1959,9 +1959,9 @@ public abstract class GameImpl implements Game {
         informPlayers("You have planeswalked to " + newPlane.getLogName());
 
         // Fire off the planeswalked event
-        GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), null, newPlane.getId(), 0, true);
+        GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), (Ability) null, newPlane.getId(), 0, true);
         if (!replaceEvent(event)) {
-            GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), null, newPlane.getId(), 0, true);
+            GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), (Ability) null, newPlane.getId(), 0, true);
             fireEvent(ge);
         }
 

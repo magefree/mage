@@ -4,7 +4,7 @@ import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.effects.common.CantBeCopiedSourceEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class SeeDouble extends CardImpl {
         this.getSpellAbility().addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint());
 
         // * Copy target spell. You may choose new targets for the copy.
-        this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
+        this.getSpellAbility().addEffect(new CopyTargetStackObjectEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // * Create a token that's a copy of target creature.

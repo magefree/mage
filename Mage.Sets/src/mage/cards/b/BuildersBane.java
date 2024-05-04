@@ -11,7 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public final class BuildersBane extends CardImpl {
         // Destroy X target artifacts. Builder's Bane deals damage to each player equal to the number of artifacts they controlled put into a graveyard this way.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addEffect(new BuildersBaneEffect());
-        this.getSpellAbility().setTargetAdjuster(BuildersBaneAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private BuildersBane(final BuildersBane card) {
@@ -38,17 +38,6 @@ public final class BuildersBane extends CardImpl {
     @Override
     public BuildersBane copy() {
         return new BuildersBane(this);
-    }
-}
-
-enum BuildersBaneAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        ability.addTarget(new TargetArtifactPermanent(xValue, xValue));
     }
 }
 

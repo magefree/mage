@@ -645,7 +645,7 @@ public final class StaticFilters {
         FILTER_CONTROLLED_UNTAPPED_CREATURES.setLockedFilter(true);
     }
 
-    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_NON_LAND = new FilterControlledPermanent("nonland permanent");
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_NON_LAND = new FilterControlledPermanent("nonland permanent you control");
 
     static {
         FILTER_CONTROLLED_PERMANENT_NON_LAND.add(
@@ -904,6 +904,13 @@ public final class StaticFilters {
 
     static {
         FILTER_SPELL_A.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_SPELL_MULTICOLORED = new FilterSpell("multicolored spell");
+
+    static {
+        FILTER_SPELL_MULTICOLORED.add(MulticoloredPredicate.instance);
+        FILTER_SPELL_MULTICOLORED.setLockedFilter(true);
     }
 
     public static final FilterSpell FILTER_SPELL_A_MULTICOLORED = new FilterSpell("a multicolored spell");

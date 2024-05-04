@@ -51,7 +51,7 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
         this.staticText = "Once during each of your turns, you may cast " + filter.getMessage()
-                + (filter.getMessage().contains("from your graveyard") ? "" : " from your graveyard");
+                + (filter.getMessage().contains("your graveyard") ? "" : " from your graveyard");
     }
 
     private CastFromGraveyardOnceEffect(final CastFromGraveyardOnceEffect effect) {

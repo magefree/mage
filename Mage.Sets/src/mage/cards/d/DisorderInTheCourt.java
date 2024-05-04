@@ -15,7 +15,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
@@ -35,7 +35,8 @@ public final class DisorderInTheCourt extends CardImpl {
 
         // Exile X target creatures, then investigate X times. Return the exiled cards to the battlefield tapped under their owners' control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new DisorderInTheCourtEffect());
-        this.getSpellAbility().setTargetAdjuster(DisorderInTheCourtAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private DisorderInTheCourt(final DisorderInTheCourt card) {
@@ -45,16 +46,6 @@ public final class DisorderInTheCourt extends CardImpl {
     @Override
     public DisorderInTheCourt copy() {
         return new DisorderInTheCourt(this);
-    }
-}
-
-enum DisorderInTheCourtAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
     }
 }
 

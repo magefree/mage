@@ -12,7 +12,6 @@ import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
-import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.counters.CounterType;
@@ -1082,7 +1081,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
 
     private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
         // pass or casting two times a spell multiple times on hand is ok
-        if (action instanceof PassAbility || action instanceof SpellAbility || action.getAbilityType() == AbilityType.MANA) {
+        if (action instanceof PassAbility || action instanceof SpellAbility || action.isManaAbility()) {
             return false;
         }
         int newVal = GameStateEvaluator2.evaluate(playerId, sim).getTotalScore();

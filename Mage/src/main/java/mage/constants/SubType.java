@@ -684,6 +684,10 @@ public enum SubType {
         return subTypeSetMap.get(SubTypeSet.CreatureType);
     }
 
+    public static Set<SubType> getNonbasicLandTypes() {
+        return subTypeSetMap.get(SubTypeSet.NonBasicLandType);
+    }
+
     public static Set<SubType> getBasicLands() {
         return subTypeSetMap.get(SubTypeSet.BasicLandType);
     }

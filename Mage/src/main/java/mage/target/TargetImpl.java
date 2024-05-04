@@ -203,7 +203,9 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean isRequired(Ability ability) {
-        return ability == null || ability.isActivated() || !(ability.getAbilityType() == AbilityType.SPELL || ability.getAbilityType() == AbilityType.ACTIVATED);
+        return ability == null
+                || ability.isActivated()
+                || !(ability.getAbilityType() == AbilityType.SPELL || ability.getAbilityType().isActivatedAbility());
     }
 
     @Override
@@ -675,10 +677,10 @@ public abstract class TargetImpl implements Target {
         String abilityText = source.getRule(true).toLowerCase();
         boolean strictModeEnabled = player.getStrictChooseMode();
         boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() // Targets must be picked
-                                && possibleTargets.size() == this.getNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
-                                && !strictModeEnabled  // Test AI is not set to strictChooseMode(true)
-                                && playerAutoTargetLevel > 0 // Human player has enabled auto-choose in settings
-                                && !abilityText.contains("search"); // Do not autochoose for any effects which involve searching
+                && possibleTargets.size() == this.getNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
+                && !strictModeEnabled  // Test AI is not set to strictChooseMode(true)
+                && playerAutoTargetLevel > 0 // Human player has enabled auto-choose in settings
+                && !abilityText.contains("search"); // Do not autochoose for any effects which involve searching
 
 
         if (canAutoChoose) {

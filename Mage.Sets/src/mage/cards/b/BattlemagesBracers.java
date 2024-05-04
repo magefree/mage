@@ -8,7 +8,6 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -16,9 +15,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -79,7 +78,7 @@ class BattlemagesBracersTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
+        if (stackAbility == null || stackAbility.getStackAbility().isManaActivatedAbility()) {
             return false;
         }
         getEffects().setValue("stackObject", stackAbility);

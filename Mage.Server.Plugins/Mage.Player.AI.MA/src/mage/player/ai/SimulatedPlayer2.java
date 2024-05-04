@@ -11,7 +11,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
-import mage.constants.AbilityType;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
@@ -100,7 +99,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
         List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
         playables = filterAbilities(game, playables, suggested);
         for (ActivatedAbility ability : playables) {
-            if (ability.getAbilityType() == AbilityType.MANA) {
+            if (ability.isManaAbility()) {
                 continue;
             }
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);

@@ -1,11 +1,5 @@
 package mage.cards.k;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -16,17 +10,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -49,8 +34,13 @@ import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author DominionSpy
  */
 public final class KayaSpiritsJustice extends CardImpl {
@@ -183,7 +173,7 @@ class KayaSpiritsJusticeCopyEffect extends OneShotEffect {
             return false;
         }
 
-        TargetCard target = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD_CREATURE, null);
+        TargetCard target = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD_CREATURE);
         if (!controller.chooseTarget(outcome, exiledCards, target, source, game)) {
             return false;
         }

@@ -2,7 +2,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class Reiterate extends CardImpl {
 
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
-        this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
+        this.getSpellAbility().addEffect(new CopyTargetStackObjectEffect());
     }
 
     private Reiterate(final Reiterate card) {

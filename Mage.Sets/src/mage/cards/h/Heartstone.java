@@ -1,7 +1,6 @@
 package mage.cards.h;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
@@ -56,10 +55,10 @@ class HeartstoneEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
-            int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 1, 1);            
+            int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 1, 1);
             if (reduceMax <= 0) {
                 return true;
-            }            
+            }
             CardUtil.reduceCost(abilityToModify, reduceMax);
             return true;
         }
@@ -68,9 +67,7 @@ class HeartstoneEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || (abilityToModify.getAbilityType() == AbilityType.MANA
-                && (abilityToModify instanceof ActivatedAbility))) {
+        if (abilityToModify.isActivatedAbility()) {
             // Activated abilities of creatures
             Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
             return permanent != null && permanent.isCreature(game);

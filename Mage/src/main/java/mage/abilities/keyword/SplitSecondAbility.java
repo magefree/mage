@@ -3,7 +3,6 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -14,11 +13,11 @@ import java.util.Optional;
 
 /**
  * Split Second
- *
+ * <p>
  * As long as this spell is on the stack, players can't cast other spells or activate abilities that aren't mana abilities.
  */
 
-public class SplitSecondAbility extends SimpleStaticAbility  {
+public class SplitSecondAbility extends SimpleStaticAbility {
 
     public SplitSecondAbility() {
         super(Zone.STACK, new SplitSecondEffect());
@@ -70,7 +69,7 @@ class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
+            if (ability.isPresent() && !ability.get().isManaActivatedAbility()) {
                 return true;
             }
         }

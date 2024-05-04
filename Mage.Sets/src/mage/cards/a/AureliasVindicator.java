@@ -18,10 +18,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.target.Target;
 import mage.target.common.TargetCardInGraveyardBattlefieldOrStack;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -52,7 +50,10 @@ public final class AureliasVindicator extends CardImpl {
         // When Aurelia's Vindicator is turned face up, exile up to X other target creatures from the battlefield and/or creature cards from graveyards.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ExileTargetForSourceEffect()
                 .setText("exile up to X other target creatures from the battlefield and/or creature cards from graveyards"));
-        ability.setTargetAdjuster(AureliasVindicatorAdjuster.instance);
+        ability.setTargetAdjuster(new TargetsCountAdjuster(MorphManacostVariableValue.instance));
+        ability.addTarget(new TargetCardInGraveyardBattlefieldOrStack(
+                0, 1, StaticFilters.FILTER_CARD_CREATURE, StaticFilters.FILTER_PERMANENT_CREATURES
+        ));
         this.addAbility(ability);
 
         // When Aurelia's Vindicator leaves the battlefield, return the exiled cards to their owners' hands.
@@ -67,19 +68,5 @@ public final class AureliasVindicator extends CardImpl {
     @Override
     public AureliasVindicator copy() {
         return new AureliasVindicator(this);
-    }
-}
-
-enum AureliasVindicatorAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = MorphManacostVariableValue.instance.calculate(game, ability, null);
-        Target target = new TargetCardInGraveyardBattlefieldOrStack(
-                0, xValue, StaticFilters.FILTER_CARD_CREATURE, StaticFilters.FILTER_PERMANENT_CREATURES
-        );
-        ability.addTarget(target);
     }
 }

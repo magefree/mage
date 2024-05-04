@@ -1592,7 +1592,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 case SPECIAL_MANA_PAYMENT:
                     result = specialManaPayment((SpecialAction) ability.copy(), game);
                     break;
-                case MANA:
+                case ACTIVATED_MANA:
                     result = playManaAbility((ActivatedManaAbilityImpl) ability.copy(), game);
                     break;
                 case SPELL:
@@ -1616,9 +1616,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         //if player has taken an action then reset all player passed flags
         justActivatedType = null;
         if (result) {
-            if (isHuman()
-                    && (ability.getAbilityType() == AbilityType.SPELL
-                    || ability.getAbilityType() == AbilityType.ACTIVATED)) {
+            if (isHuman() && (ability.getAbilityType() == AbilityType.SPELL || ability.getAbilityType().isActivatedAbility())) {
                 if (ability.isUsesStack()) { // if the ability does not use the stack (e.g. Suspend) auto pass would go to next phase unintended
                     setJustActivatedType(ability.getAbilityType());
                 }
@@ -2255,7 +2253,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return doDamage(damage, attackerId, source, game, combatDamage, preventable, appliedEffects);
     }
 
-    private int doDamage(int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+    private int doDamage(int damage, UUID attackerId, Ability source, Game game, boolean combat, boolean preventable, List<UUID> appliedEffects) {
         if (!this.isInGame()) {
             return 0;
         }
@@ -2263,8 +2261,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (damage < 1) {
             return 0;
         }
-        DamageEvent event = new DamagePlayerEvent(playerId, attackerId, playerId, damage, preventable, combatDamage);
+        DamageEvent event = new DamagePlayerEvent(playerId, attackerId, playerId, damage, preventable, combat);
         event.setAppliedEffects(appliedEffects);
+        // Even if no damage was dealt, some watchers would need a reset next time actions are processed.
+        // For instance PhantomPreventionWatcher used by the [[Phantom Wurm]] type of replacement effect.
+        game.getState().addBatchDamageCouldHaveBeenFired(combat, game);
         if (game.replaceEvent(event)) {
             return 0;
         }
@@ -2300,20 +2301,20 @@ public abstract class PlayerImpl implements Player, Serializable {
             addCounters(CounterType.POISON.createInstance(actualDamage), sourceControllerId, source, game);
         } else {
             GameEvent damageToLifeLossEvent = new GameEvent(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS,
-                    playerId, source, playerId, actualDamage, combatDamage);
+                    playerId, source, playerId, actualDamage, combat);
             if (!game.replaceEvent(damageToLifeLossEvent)) {
-                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combatDamage, attackerId);
+                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combat, attackerId);
             }
         }
         if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
-            if (combatDamage) {
+            if (combat) {
                 game.getPermanent(attackerId).markLifelink(actualDamage);
             } else {
                 Player player = game.getPlayer(sourceControllerId);
                 player.gainLife(actualDamage, game, source);
             }
         }
-        if (combatDamage && sourceAbilities != null && sourceAbilities.containsClass(ToxicAbility.class)) {
+        if (combat && sourceAbilities != null && sourceAbilities.containsClass(ToxicAbility.class)) {
             int countersToAdd = CardUtil
                     .castStream(sourceAbilities.stream(), ToxicAbility.class)
                     .mapToInt(ToxicAbility::getAmount)
@@ -2325,7 +2326,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             Player player = game.getPlayer(sourceControllerId);
             new SquirrelToken().putOntoBattlefield(actualDamage, game, source, player.getId());
         }
-        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, attackerId, playerId, actualDamage, combatDamage);
+        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, attackerId, playerId, actualDamage, combat);
         game.fireEvent(damagedEvent);
         game.getState().addSimultaneousDamage(damagedEvent, game);
         return actualDamage;
@@ -2395,22 +2396,28 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void removeCounters(String name, int amount, Ability source, Game game) {
+
+        GameEvent removeCountersEvent = new RemoveCountersEvent(name, this, source, amount, false);
+        if (game.replaceEvent(removeCountersEvent)) {
+            return;
+        }
+
         int finalAmount = 0;
         for (int i = 0; i < amount; i++) {
+
+            GameEvent event = new RemoveCounterEvent(name, this, source, false);
+            if (game.replaceEvent(event)) {
+                continue;
+            }
+
             if (!counters.removeCounter(name, 1)) {
                 break;
             }
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED,
-                    getId(), source, (source == null ? null : source.getControllerId()));
-            event.setData(name);
-            event.setAmount(1);
+            event = new CounterRemovedEvent(name, this, source, false);
             game.fireEvent(event);
             finalAmount++;
         }
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED,
-                getId(), source, (source == null ? null : source.getControllerId()));
-        event.setData(name);
-        event.setAmount(finalAmount);
+        GameEvent event = new CountersRemovedEvent(name, this, source, finalAmount, false);
         game.fireEvent(event);
     }
 
@@ -3589,7 +3596,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @return
      */
     protected boolean canPlay(ActivatedAbility ability, ManaOptions availableMana, MageObject sourceObject, Game game) {
-        if (!(ability instanceof ActivatedManaAbilityImpl)) {
+        if (!ability.isManaActivatedAbility()) {
             ActivatedAbility copy = ability.copy(); // Copy is needed because cost reduction effects modify e.g. the mana to activate/cast the ability
             if (!copy.canActivate(playerId, game).canActivate()) {
                 return false;
@@ -3892,7 +3899,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // alternative cost must be replaced by real play ability
             return findActivatedAbilityFromAlternativeSourceCost(object, manaFull, ability, game);
         } else if (ability instanceof ActivatedAbility) {
-            // all other activated ability
+            // all other abilities (include PlayLandAbility & SpellAbility)
             if (canPlay((ActivatedAbility) ability, manaFull, object, game)) {
                 return (ActivatedAbility) ability;
             }
@@ -3971,6 +3978,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // check "can play" condition as affected controller (BUT play from not own hand zone must be checked as original controller)
         // must check all abilities, not activated only
         for (Ability ability : candidateAbilities) {
+            // Note: SpellAbility and PlayLandAbility are ActivatedAbility
             if (!(ability instanceof ActivatedAbility)) {
                 continue;
             }
@@ -4500,9 +4508,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             case allAbilities:
                 return true;
             case onlyManaAbilities:
-                return ability.getAbilityType() == AbilityType.MANA;
+                return ability.isManaAbility();
             case nonSpellnonActivatedAbilities:
-                return ability.getAbilityType() != AbilityType.ACTIVATED && ability.getAbilityType() != AbilityType.SPELL;
+                return !ability.getAbilityType().isActivatedAbility()
+                        && ability.getAbilityType() != AbilityType.SPELL;
             case none:
             default:
                 return false;
@@ -5106,9 +5115,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         Cards cards = new CardsImpl(this.getLibrary().getTopCards(game, event.getAmount()));
         this.moveCards(cards, Zone.GRAVEYARD, source, game);
         for (Card card : cards.getCards(game)) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MILLED_CARD, card.getId(), source, getId()));
+            MilledCardEvent milledEvent = new MilledCardEvent(card, getId(), source);
+            game.fireEvent(milledEvent);
+            game.getState().addSimultaneousMilledCardToBatch(milledEvent, game);
         }
-        game.fireEvent(new MilledCardsEvent(source, getId(), cards));
         return cards;
     }
 

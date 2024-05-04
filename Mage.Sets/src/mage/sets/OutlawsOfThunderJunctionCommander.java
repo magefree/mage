@@ -135,7 +135,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 135, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
         cards.add(new SetCardInfo("Graywater's Fixer", 36, Rarity.RARE, mage.cards.g.GraywatersFixer.class));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 168, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
-        cards.add(new SetCardInfo("Guttersnipe", 169, Rarity.COMMON, mage.cards.g.Guttersnipe.class));
+        cards.add(new SetCardInfo("Guttersnipe", 169, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Harrow", 194, Rarity.COMMON, mage.cards.h.Harrow.class));
         cards.add(new SetCardInfo("Hashep Oasis", 299, Rarity.UNCOMMON, mage.cards.h.HashepOasis.class));
         cards.add(new SetCardInfo("Haughty Djinn", 99, Rarity.RARE, mage.cards.h.HaughtyDjinn.class));
@@ -195,7 +195,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Opulent Palace", 307, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
         cards.add(new SetCardInfo("Oracle of Mul Daya", 200, Rarity.RARE, mage.cards.o.OracleOfMulDaya.class));
         cards.add(new SetCardInfo("Orochi Soul-Reaver", 22, Rarity.RARE, mage.cards.o.OrochiSoulReaver.class));
-        cards.add(new SetCardInfo("Orzhov Signet", 261, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Orzhov Signet", 261, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Overflowing Basin", 308, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Painful Truths", 146, Rarity.RARE, mage.cards.p.PainfulTruths.class));
         cards.add(new SetCardInfo("Painted Bluffs", 309, Rarity.COMMON, mage.cards.p.PaintedBluffs.class));

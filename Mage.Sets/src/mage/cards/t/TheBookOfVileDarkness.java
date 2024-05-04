@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -25,7 +24,6 @@ import mage.game.permanent.token.Token;
 import mage.game.permanent.token.VecnaToken;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
@@ -187,7 +185,7 @@ class TheBookOfVileDarknessEffect extends OneShotEffect {
                 continue;
             }
             for (Ability ability : card.getAbilities(game)) {
-                if (ability instanceof TriggeredAbility) {
+                if (ability.isTriggeredAbility()) {
                     Ability copyAbility = ability.copy();
                     copyAbility.newId();
                     copyAbility.setControllerId(source.getControllerId());

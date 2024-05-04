@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.Mana;
@@ -20,11 +19,12 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -94,12 +94,9 @@ class CrypticTrilobiteManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source != null && !source.isActivated()) {
-            // ex: SimpleManaAbility is an ACTIVATED ability, but it is categorized as a MANA ability
-            return source.getAbilityType() == AbilityType.MANA
-                    || source.getAbilityType() == AbilityType.ACTIVATED;
-        }
-        return false;
+        return source != null
+                && !source.isActivated()
+                && source.isActivatedAbility();
     }
 
     @Override

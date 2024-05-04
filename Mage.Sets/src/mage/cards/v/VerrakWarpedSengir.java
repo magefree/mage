@@ -8,7 +8,6 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -84,7 +83,7 @@ class VerrakWarpedSengirTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
+        if (stackAbility == null || stackAbility.getStackAbility().isManaActivatedAbility()) {
             return false;
         }
         int lifePaid = CardUtil.castStream(

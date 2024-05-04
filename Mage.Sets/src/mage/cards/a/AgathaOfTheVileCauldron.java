@@ -107,7 +107,7 @@ class AgathaOfTheVileCauldronEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         // Activated abilities you control
-        if (abilityToModify.getAbilityType() != AbilityType.ACTIVATED
+        if (!abilityToModify.getAbilityType().isActivatedAbility()
                 || !abilityToModify.isControlledBy(source.getControllerId())) {
             return false;
         }

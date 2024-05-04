@@ -36,7 +36,7 @@ public abstract class Emblem extends CommandObjectImpl {
     protected MageObject sourceObject; // can be null
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
-    private FrameStyle frameStyle;
+    protected FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
 
     public Emblem(String name) {

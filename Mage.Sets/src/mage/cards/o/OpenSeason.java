@@ -15,12 +15,11 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 
 import java.util.UUID;
 
@@ -36,7 +35,8 @@ public final class OpenSeason extends CardImpl {
         Effect effect = new AddCountersTargetEffect(CounterType.BOUNTY.createInstance());
         effect.setText("for each opponent, put a bounty counter on target creature that player controls");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.setTargetAdjuster(OpenSeasonAdjuster.instance);
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // Creatures your opponent control with bounty counters on them can't activate abilities
@@ -54,21 +54,6 @@ public final class OpenSeason extends CardImpl {
     @Override
     public OpenSeason copy() {
         return new OpenSeason(this);
-    }
-}
-
-enum OpenSeasonAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
-                ability.addTarget(new TargetPermanent(new FilterCreaturePermanent("creature from opponent " + opponent.getLogName())));
-            }
-        }
     }
 }
 

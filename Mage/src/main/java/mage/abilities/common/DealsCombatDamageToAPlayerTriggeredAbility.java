@@ -15,6 +15,10 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
 
     protected final boolean setTargetPointer;
 
+    public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
     }

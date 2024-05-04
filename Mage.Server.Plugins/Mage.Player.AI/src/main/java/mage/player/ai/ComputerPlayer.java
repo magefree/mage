@@ -117,7 +117,7 @@ public class ComputerPlayer extends PlayerImpl {
         if (hand.size() < 6
                 || isTestsMode() // ignore mulligan in tests
                 || game.getClass().getName().contains("Momir") // ignore mulligan in Momir games
-                ) {
+        ) {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
@@ -1498,7 +1498,7 @@ public class ComputerPlayer extends PlayerImpl {
         // TODO: wtf?! change to player.getPlayable
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
             for (ActivatedAbility ability : permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
-                if (!(ability instanceof ActivatedManaAbilityImpl) && ability.canActivate(playerId, game).canActivate()) {
+                if (!ability.isManaActivatedAbility() && ability.canActivate(playerId, game).canActivate()) {
                     if (ability instanceof EquipAbility && permanent.getAttachedTo() != null) {
                         continue;
                     }
@@ -2220,7 +2220,7 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-            int min, int max, MultiAmountType type, Game game) {
+                                                                 int min, int max, MultiAmountType type, Game game) {
         log.debug("getMultiAmount");
 
         int needCount = messages.size();
@@ -2767,7 +2767,7 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     protected void findBestPermanentTargets(Outcome outcome, UUID abilityControllerId, UUID sourceId, Ability source, FilterPermanent filter, Game game, Target target,
-            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
+                                            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
         // searching for most valuable/powerfull permanents
         goodList.clear();
         badList.clear();

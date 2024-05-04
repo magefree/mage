@@ -1,8 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,6 +17,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -83,7 +84,7 @@ class FaithsFettersEffect extends ContinuousRuleModifyingEffectImpl {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.isAttachedTo(event.getSourceId())) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability.isPresent() && ability.get().getAbilityType() != AbilityType.MANA) {
+            if (ability.isPresent() && ability.get().isManaAbility()) {
                 return true;
             }
 
