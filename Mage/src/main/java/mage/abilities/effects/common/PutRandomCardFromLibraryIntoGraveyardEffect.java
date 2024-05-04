@@ -7,7 +7,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.RandomUtil;
 import java.util.Set;
@@ -41,8 +40,8 @@ public class PutRandomCardFromLibraryIntoGraveyardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller == null || sourcePermanent == null) {
+
+        if (controller == null) {
             return false;
         }
 
