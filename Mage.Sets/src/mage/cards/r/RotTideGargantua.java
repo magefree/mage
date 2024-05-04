@@ -29,7 +29,7 @@ public final class RotTideGargantua extends CardImpl {
         this.addAbility(new ExploitAbility());
 
         // When Rot-Tide Gargantua exploits a creature, each opponent sacrifices a creature.
-        this.addAbility(new ExploitCreatureTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.addAbility(new ExploitCreatureTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private RotTideGargantua(final RotTideGargantua card) {

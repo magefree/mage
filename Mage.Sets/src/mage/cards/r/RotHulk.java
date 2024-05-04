@@ -3,6 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.OpponentsCount;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
@@ -10,9 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -20,6 +20,11 @@ import java.util.UUID;
  * @author JayDi85
  */
 public final class RotHulk extends CardImpl {
+    private static final FilterCard filterZombie = new FilterCard("Zombie cards from your graveyard");
+
+    static {
+        filterZombie.add(SubType.ZOMBIE.getPredicate());
+    }
 
     public RotHulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
@@ -33,7 +38,8 @@ public final class RotHulk extends CardImpl {
         // When Rot Hulk enters the battlefield, return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have."));
-        ability.setTargetAdjuster(RotHulkAdjuster.instance);
+        ability.setTargetAdjuster(new TargetsCountAdjuster(OpponentsCount.instance));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filterZombie));
         this.addAbility(ability);
     }
 
@@ -44,22 +50,5 @@ public final class RotHulk extends CardImpl {
     @Override
     public RotHulk copy() {
         return new RotHulk(this);
-    }
-}
-
-enum RotHulkAdjuster implements TargetAdjuster {
-    instance;
-    private static final FilterCard filterZombie = new FilterCard("Zombie cards from your graveyard");
-
-    static {
-        filterZombie.add(SubType.ZOMBIE.getPredicate());
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(
-                0, game.getOpponents(ability.getControllerId()).size(), filterZombie
-        ));
     }
 }

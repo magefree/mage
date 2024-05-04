@@ -585,6 +585,11 @@ public enum SubType {
         return description;
     }
 
+    // note: does not account for irregular plurals
+    public String getPluralName() {
+        return description.endsWith("y") ? description.substring(0, description.length() - 1) + "ies" : description + 's';
+    }
+
     @Override
     public String toString() {
         return description;
@@ -677,6 +682,10 @@ public enum SubType {
 
     public static Set<SubType> getCreatureTypes() {
         return subTypeSetMap.get(SubTypeSet.CreatureType);
+    }
+
+    public static Set<SubType> getNonbasicLandTypes() {
+        return subTypeSetMap.get(SubTypeSet.NonBasicLandType);
     }
 
     public static Set<SubType> getBasicLands() {

@@ -21,7 +21,7 @@ public final class TendrilsOfDespair extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // As an additional cost to cast Tendrils of Despair, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Target opponent discards two cards.
         this.getSpellAbility().addTarget(new TargetOpponent());

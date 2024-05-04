@@ -12,9 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -42,7 +41,8 @@ public final class MogissMarauder extends CardImpl {
                 HasteAbility.getInstance(), Duration.EndOfTurn,
                 "and haste until end of turn, where X is your devotion to black"
         ));
-        ability.setTargetAdjuster(MogissMarauderAdjuster.instance);
+        ability.setTargetAdjuster(new TargetsCountAdjuster(DevotionCount.B));
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
         ability.addHint(DevotionCount.B.getHint());
         this.addAbility(ability);
     }
@@ -54,18 +54,5 @@ public final class MogissMarauder extends CardImpl {
     @Override
     public MogissMarauder copy() {
         return new MogissMarauder(this);
-    }
-}
-
-enum MogissMarauderAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int numbTargets = DevotionCount.B.calculate(game, ability, null);
-        if (numbTargets > 0) {
-            ability.addTarget(new TargetCreaturePermanent(0, numbTargets));
-        }
     }
 }

@@ -167,7 +167,7 @@ class NashiMoonSagesScionWatcher extends Watcher {
 class NashiMoonSagesScionPlayEffect extends CanPlayCardControllerEffect {
 
     NashiMoonSagesScionPlayEffect(Game game, Card card) {
-        super(game, card.getMainCard().getId(), card.getZoneChangeCounter(game), Duration.EndOfTurn);
+        super(game, card.getMainCard().getId(), card.getZoneChangeCounter(game), false, Duration.EndOfTurn);
     }
 
     private NashiMoonSagesScionPlayEffect(final NashiMoonSagesScionPlayEffect effect) {

@@ -29,7 +29,7 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
         this.setWorksFaceDown(true);
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("When {this} is turned face up, ");
-        this.replaceRuleText = true;
+        this.withRuleTextReplacement(true);
     }
 
     protected TurnedFaceUpSourceTriggeredAbility(final TurnedFaceUpSourceTriggeredAbility ability) {

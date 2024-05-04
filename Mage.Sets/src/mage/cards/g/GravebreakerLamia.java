@@ -40,8 +40,7 @@ public final class GravebreakerLamia extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Gravebreaker Lamia enters the battlefield, search your library for a card, put it into your graveyard, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInGraveyardEffect()
-                .setText("search your library for a card, put it into your graveyard, then shuffle"), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInGraveyardEffect(false), false));
 
         // Spells you cast from your graveyard cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));

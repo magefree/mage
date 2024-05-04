@@ -33,7 +33,7 @@ public final class LivelyDirge extends CardImpl {
         this.addAbility(new SpreeAbility(this));
 
         // + {1} -- Search your library for a card, put it into your graveyard, then shuffle.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInGraveyardEffect());
+        this.getSpellAbility().addEffect(new SearchLibraryPutInGraveyardEffect(false));
         this.getSpellAbility().withFirstModeCost(new GenericManaCost(1));
 
         // + {2} -- Return up to two creature cards with total mana value 4 or less from your graveyard to the battlefield.

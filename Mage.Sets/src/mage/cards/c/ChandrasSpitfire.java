@@ -14,9 +14,8 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -58,13 +57,13 @@ class ChandrasSpitfireAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-        return !damageEvent.isCombatDamage() && game.getOpponents(controllerId).contains(event.getTargetId());
+        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
+        return !dEvent.isCombatDamage() && dEvent.getAmount() > 0 && game.getOpponents(controllerId).contains(dEvent.getTargetId());
     }
 
     @Override

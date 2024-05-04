@@ -42,7 +42,8 @@ public final class StubbornBurrowfiend extends CardImpl {
 
         // Whenever Stubborn Burrowfiend becomes saddled for the first time each turn, mill two cards, then Stubborn Burrowfiend gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
         Ability ability = new StubbornBurrowfiendTriggeredAbility(new MillCardsControllerEffect(2));
-        ability.addEffect(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn));
+        ability.addEffect(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn)
+                .setText(", then {this} gets +X/+X until end of turn, where X is the number of creature cards in your graveyard"));
         ability.addHint(hint);
         this.addAbility(ability, new StubbornBurrowFiendWatcher());
 
@@ -94,7 +95,7 @@ class StubbornBurrowfiendTriggeredAbility extends TriggeredAbilityImpl {
 
     StubbornBurrowfiendTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("When {this} becomes saddled for the first time this turn, ");
+        setTriggerPhrase("Whenever {this} becomes saddled for the first time each turn, ");
     }
 
     private StubbornBurrowfiendTriggeredAbility(final StubbornBurrowfiendTriggeredAbility ability) {

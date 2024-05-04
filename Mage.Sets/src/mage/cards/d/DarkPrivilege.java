@@ -46,7 +46,7 @@ public final class DarkPrivilege extends CardImpl {
 
         // Sacrifice a creature: Regenerate enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
 
     }
 

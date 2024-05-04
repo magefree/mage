@@ -2,6 +2,7 @@ package mage.abilities.effects.common.replacement;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -50,9 +51,21 @@ public class ThatSpellGraveyardExileReplacementEffect extends ReplacementEffectI
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                    && zEvent.getTargetId().equals(((FixedTarget) getTargetPointer()).getTarget())
-                    && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1
-                    == game.getState().getZoneChangeCounter(zEvent.getTargetId());
+        if (zEvent.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
+        Card cardMoving = game.getCard(zEvent.getTargetId());
+        Card cardTarget = game.getCard(((FixedTarget) getTargetPointer()).getTarget());
+        if (cardMoving == null || cardTarget == null) {
+            return false;
+        }
+        // for MDFC.
+        Card mainCardMoving = cardMoving.getMainCard();
+        Card mainCardTarget = cardTarget.getMainCard();
+        return mainCardMoving != null
+                && mainCardTarget != null
+                && mainCardMoving.getId().equals(mainCardTarget.getId())
+                && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1
+                == game.getState().getZoneChangeCounter(mainCardMoving.getId());
     }
 }

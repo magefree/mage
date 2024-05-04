@@ -37,7 +37,7 @@ public final class MirenTheMoaningWell extends CardImpl {
         // {3}, {tap}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirenTheMoaningWellEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

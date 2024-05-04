@@ -1,13 +1,11 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -15,8 +13,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RunicArmasaur extends CardImpl {
@@ -67,7 +66,7 @@ class RunicArmasaurTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
         if (stackAbility != null
-                && stackAbility.getAbilityType() == AbilityType.ACTIVATED
+                && stackAbility.isNonManaActivatedAbility()
                 && game.getOpponents(this.getControllerId()).contains(stackAbility.getControllerId())
                 && stackAbility.getSourcePermanentOrLKI(game) != null) { // must be a permanent
             MageObject abilitySourceObject = stackAbility.getSourceObject(game);

@@ -40,7 +40,7 @@ public final class InventiveWingsmith extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.FLYING.createInstance()),
                 TargetController.YOU, condition, false
-        ).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
+        ).withRuleTextReplacement(true).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
     }
 
     private InventiveWingsmith(final InventiveWingsmith card) {

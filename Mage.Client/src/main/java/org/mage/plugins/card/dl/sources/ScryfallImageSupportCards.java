@@ -551,6 +551,7 @@ public class ScryfallImageSupportCards {
             add("OTP"); // Breaking News
             add("BIG"); // The Big Score
             add("MH3"); // Modern Horizons 3
+            add("M3C"); // Modern Horizons 3
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
 

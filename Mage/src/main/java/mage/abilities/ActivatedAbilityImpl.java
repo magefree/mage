@@ -57,7 +57,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
-        super(AbilityType.ACTIVATED, zone);
+        super(AbilityType.ACTIVATED_NONMANA, zone);
         this.addEffect(effect);
         this.addCost(cost);
     }
@@ -147,8 +147,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
         if (approvingObjects.isEmpty()) {
             return ActivationStatus.withoutApprovingObject(true);
-        }
-        else {
+        } else {
             return new ActivationStatus(approvingObjects);
         }
     }

@@ -34,7 +34,7 @@ public final class SloppityBilepiper extends CardImpl {
                 new NextSpellCastHasAbilityEffect(new CascadeAbility(), StaticFilters.FILTER_CARD_CREATURE),
                 new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability.withFlavorWord("Jolly Gutpipes"));
     }
 

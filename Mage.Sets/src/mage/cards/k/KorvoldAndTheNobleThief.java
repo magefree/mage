@@ -96,7 +96,7 @@ class KorvoldAndTheNobleThiefEffect extends OneShotEffect {
         cards.retainZone(Zone.EXILED, game);
 
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         }
         return true;
     }

@@ -10,12 +10,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -34,7 +31,8 @@ public final class BlueSunsTwilight extends CardImpl {
                 new CreateTokenCopyTargetEffect(), BlueSunsTwilightCondition.instance,
                 "If X is 5 or more, create a token that's a copy of that creature"
         ));
-        this.getSpellAbility().setTargetAdjuster(BlueSunsTwilightAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private BlueSunsTwilight(final BlueSunsTwilight card) {
@@ -53,18 +51,5 @@ enum BlueSunsTwilightCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return source.getManaCostsToPay().getX() >= 5;
-    }
-}
-
-enum BlueSunsTwilightAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent filter = new FilterCreaturePermanent("creature with mana value " + xValue + " or less");
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(filter));
     }
 }

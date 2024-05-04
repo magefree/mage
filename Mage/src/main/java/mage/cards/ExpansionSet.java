@@ -675,4 +675,13 @@ public abstract class ExpansionSet implements Serializable {
         return numBoosterDoubleFaced;
     }
 
+    protected static void addCardInfoToList(List<CardInfo> boosterList, String name, String expansion, String cardNumber) {
+        CardInfo cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber(name, expansion, cardNumber);
+        if (cardInfo != null && cardInfo.getSetCode().equals(expansion) && cardInfo.getCardNumber().equals(cardNumber)) {
+            boosterList.add(cardInfo);
+        } else {
+            throw new IllegalStateException("CardInfo not found: " + name + " (" + expansion + ":" + cardNumber + ")");
+        }
+    }
+
 }

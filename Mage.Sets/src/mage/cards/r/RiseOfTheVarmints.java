@@ -24,7 +24,7 @@ public final class RiseOfTheVarmints extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(
                 new VarmintToken(),
                 new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)
-        ));
+        ).setText("Create X 2/1 green Varmint creature tokens, where X is the number of creature cards in your graveyard."));
 
         // Plot {2}{G}
         this.addAbility(new PlotAbility("{2}{G}"));

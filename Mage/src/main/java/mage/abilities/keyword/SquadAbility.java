@@ -25,7 +25,17 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
     protected static final String SQUAD_REMINDER = "You may pay an additional "
             + "{cost} any number of times as you cast this spell.";
 
+    private static Costs<Cost> wrapSingleCost(Cost cost) {
+        Costs<Cost> costs = new CostsImpl<>();
+        costs.add(cost);
+        return costs;
+    }
+
     public SquadAbility(Cost cost) {
+        this(wrapSingleCost(cost));
+    }
+
+    public SquadAbility(Costs<Cost> cost) {
         super(Zone.STACK, null);
         setSquadCost(cost);
         addSubAbility(new SquadTriggerAbility());
@@ -37,13 +47,18 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
     }
 
     @Override
+    public void addCost(Cost cost) {
+        throw new IllegalArgumentException("Wrong code usage: costs for Squad should be set all at once.");
+    }
+
+    @Override
     public SquadAbility copy() {
         return new SquadAbility(this);
     }
 
-    private void setSquadCost(Cost cost) {
-        OptionalAdditionalCost newCost = new OptionalAdditionalCostImpl(
-                SQUAD_KEYWORD, SQUAD_REMINDER, cost);
+    private void setSquadCost(Costs<Cost> costs) {
+        OptionalAdditionalCost newCost =
+                new OptionalAdditionalCostImpl(SQUAD_KEYWORD, SQUAD_REMINDER, costs);
         newCost.setRepeatable(true);
         newCost.setCostType(VariableCostType.ADDITIONAL);
         this.cost = newCost;
@@ -83,7 +98,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
                 again = false;
             }
         }
-        ability.setCostsTag(SQUAD_ACTIVATION_VALUE_KEY,cost.getActivateCount());
+        ability.setCostsTag(SQUAD_ACTIVATION_VALUE_KEY, cost.getActivateCount());
     }
 
     @Override
@@ -96,11 +111,12 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
 
     @Override
     public String getRule() {
-        return "Squad "+cost.getText()+" <i>(As an additional cost to cast this spell, you may pay "+
-            cost.getText()+"any number of times. When this creature enters the battlefield, "+
-            "create that many tokens that are copies of it.)</i>";
+        return "Squad " + cost.getText() + " <i>(As an additional cost to cast this spell, you may pay " +
+                cost.getText() + "any number of times. When this creature enters the battlefield, " +
+                "create that many tokens that are copies of it.)</i>";
     }
 }
+
 class SquadTriggerAbility extends EntersBattlefieldTriggeredAbility {
     public SquadTriggerAbility() {
         super(new SquadEffectETB());
@@ -110,6 +126,7 @@ class SquadTriggerAbility extends EntersBattlefieldTriggeredAbility {
     private SquadTriggerAbility(final SquadTriggerAbility ability) {
         super(ability);
     }
+
     @Override
     public SquadTriggerAbility copy() {
         return new SquadTriggerAbility(this);
@@ -117,9 +134,10 @@ class SquadTriggerAbility extends EntersBattlefieldTriggeredAbility {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        int squadCount = CardUtil.getSourceCostsTag(game, this, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
+        int squadCount = CardUtil.getSourceCostsTag(game, this, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY, 0);
         return (squadCount > 0);
     }
+
     @Override
     public String getRule() {
         return "Squad <i>(When this creature enters the battlefield, if its squad cost was paid, "
@@ -144,7 +162,7 @@ class SquadEffectETB extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int squadCount = CardUtil.getSourceCostsTag(game, source, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
+        int squadCount = CardUtil.getSourceCostsTag(game, source, SquadAbility.SQUAD_ACTIVATION_VALUE_KEY, 0);
         CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect(squadCount);
         return effect.apply(game, source);
     }

@@ -72,7 +72,7 @@ public class ExileAdventureSpellEffect extends OneShotEffect implements MageSing
 class AdventureCastFromExileEffect extends AsThoughEffectImpl {
 
     public AdventureCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "Then exile this card. You may cast the creature later from exile.";
     }
 

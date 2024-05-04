@@ -18,6 +18,8 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -54,9 +56,6 @@ import java.util.List;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
-
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 
 /**
  * Human: server side logic to exchange game data between server app and another player's app
@@ -406,6 +405,7 @@ public class HumanPlayer extends PlayerImpl {
 
         MessageToClient messageToClient = new MessageToClient(message, secondMessage);
         Map<String, Serializable> options = new HashMap<>(2);
+        String autoAnswerMessage = message; // Removes self-referential text for the purposes of auto-answering
         if (trueText != null) {
             options.put("UI.left.btn.text", trueText);
         }
@@ -414,18 +414,24 @@ public class HumanPlayer extends PlayerImpl {
         }
         if (source != null) {
             //options.put(Constants.Option.ORIGINAL_ID, "")
+            String sourceName = getRelatedObjectName(source, game);
+            if (sourceName != null) {
+                autoAnswerMessage = autoAnswerMessage.replace(sourceName, "{this}");
+            }
         }
 
+        options.put(Constants.Option.AUTO_ANSWER_MESSAGE, autoAnswerMessage);
 
         // auto-answer
         Boolean answer = null;
         if (source != null) {
             // ability + text
-            answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message);
+            answer = requestAutoAnswerId
+                    .get(source.getOriginalId() + "#" + autoAnswerMessage);
         }
         if (answer == null) {
             // text
-            answer = requestAutoAnswerText.get(message);
+            answer = requestAutoAnswerText.get(autoAnswerMessage);
         }
         if (answer != null) {
             return answer;
@@ -1158,7 +1164,7 @@ public class HumanPlayer extends PlayerImpl {
                     return false;
                 }
                 if (controllingPlayer.getUserData().isPassPriorityActivation()
-                        && getJustActivatedType() == AbilityType.ACTIVATED) {
+                        && getJustActivatedType().isNonManaActivatedAbility()) {
                     setJustActivatedType(null);
                     pass(game);
                     return false;
@@ -2358,7 +2364,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.isLand(game)) {
             ActivatedAbility ability = abilities.values().iterator().next();
-            if (ability instanceof ActivatedManaAbilityImpl) {
+            if (ability.isActivatedAbility() && ability.isManaAbility()) {
                 activateAbility(ability, game);
                 return;
             }
@@ -2420,7 +2426,7 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // hide on mana activate and show all other
-            return ability instanceof ActivatedManaAbilityImpl;
+            return ability.isManaActivatedAbility();
         }
         return true;
     }
@@ -2613,7 +2619,7 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // triggered abilities can't be skipped by cancel or wrong answer
-            if (source.getAbilityType() != AbilityType.TRIGGERED) {
+            if (!source.isTriggeredAbility()) {
                 done = true;
             }
         }
@@ -2781,7 +2787,9 @@ public class HumanPlayer extends PlayerImpl {
                 holdingPriority = false;
                 break;
             case TOGGLE_RECORD_MACRO:
-                if (true) return; // TODO: macro unsupported in current version
+                if (true) {
+                    return; // TODO: macro unsupported in current version
+                }
                 if (recordingMacro) {
                     logger.debug("Finished Recording Macro");
                     activatingMacro = true;

@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTargetsPermanentCondition;
@@ -9,18 +8,16 @@ import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -50,7 +47,8 @@ public final class LullmagesDomination extends CardImpl {
         // Gain control of target creature with converted mana cost X.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom)
                 .setText("gain control of target creature with mana value X"));
-        this.getSpellAbility().setTargetAdjuster(LullmagesDominationAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private LullmagesDomination(final LullmagesDomination card) {
@@ -70,18 +68,5 @@ enum LullmagesDominationPredicate implements Predicate<Permanent> {
     public boolean apply(Permanent input, Game game) {
         Player player = game.getPlayer(input.getControllerId());
         return player != null && player.getGraveyard().size() >= 8;
-    }
-}
-
-enum LullmagesDominationAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value " + xValue);
-        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        ability.addTarget(new TargetCreaturePermanent(filter));
     }
 }

@@ -1,20 +1,21 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,17 +47,13 @@ public final class MindbladeRender extends CardImpl {
 
 class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean usedForCombatDamageStep;
-
     public MindbladeRenderTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
         this.addEffect(new LoseLifeSourceControllerEffect(1));
-        this.usedForCombatDamageStep = false;
     }
 
     private MindbladeRenderTriggeredAbility(final MindbladeRenderTriggeredAbility effect) {
         super(effect);
-        this.usedForCombatDamageStep = effect.usedForCombatDamageStep;
     }
 
     @Override
@@ -66,34 +63,34 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
-            usedForCombatDamageStep = false;
-            return false;
-        }
-        if (event.getType() != GameEvent.EventType.DAMAGED_PLAYER) {
-            return false;
-        }
         Player controller = game.getPlayer(getControllerId());
         if (controller == null) {
             return false;
         }
-        Permanent attacker = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (attacker == null) {
+        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
+
+        if (!controller.hasOpponent(dEvent.getTargetId(), game)){
             return false;
         }
-        if (((DamagedPlayerEvent) event).isCombatDamage()
-                && controller.hasOpponent(event.getTargetId(), game)
-                && attacker.hasSubtype(SubType.WARRIOR, game)
-                && !usedForCombatDamageStep) {
-            usedForCombatDamageStep = true;
-            return true;
+        if (!dEvent.isCombatDamage()) {
+            return false;
         }
-        return false;
+
+        int warriorDamage = dEvent.getEvents()
+                .stream()
+                .filter(ev -> {
+                    Permanent attacker = game.getPermanentOrLKIBattlefield(ev.getSourceId());
+                    return attacker != null && attacker.hasSubtype(SubType.WARRIOR, game);
+                })
+                .mapToInt(GameEvent::getAmount)
+                .sum();
+
+        return warriorDamage > 0;
     }
 
     @Override

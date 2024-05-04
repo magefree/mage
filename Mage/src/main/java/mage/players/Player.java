@@ -493,6 +493,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param approvingObject reference to the ability that allows to play the card
      * @return
      */
+    // TODO: should have a version taking a PlayLandAbility or SpellAbility to handle MDFC/Zoetic Cavern/Adventure/etc...
     boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject);
 
     /**
@@ -504,6 +505,7 @@ public interface Player extends MageItem, Copyable<Player> {
      *                     of lands you already played.
      * @return
      */
+    // TODO: should have a version taking a PlayLandAbility to handle MDFC/Zoetic Cavern/etc...
     boolean playLand(Card card, Game game, boolean ignoreTiming);
 
     boolean activateAbility(ActivatedAbility ability, Game game);
@@ -820,7 +822,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void updateRange(Game game);
 
-    ManaOptions getManaAvailable(Game game);
+    ManaOptions getManaAvailable(Game originalGame);
 
     void addAvailableTriggeredMana(List<Mana> netManaAvailable);
 
@@ -832,7 +834,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     PlayableObjectsList getPlayableObjects(Game game, Zone zone);
 
-    Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
+    Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game originalGame);
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
 

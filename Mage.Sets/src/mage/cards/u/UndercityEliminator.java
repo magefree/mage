@@ -32,7 +32,7 @@ public final class UndercityEliminator extends CardImpl {
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new ExileTargetEffect(), false);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
-                ability, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT),
+                ability, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE),
                 "Sacrifice an artifact or creature?"
         )));
     }

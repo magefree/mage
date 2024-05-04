@@ -66,7 +66,7 @@ class BackdraftHellkiteEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (!this.affectedObjectsSet) {
+        if (!getAffectedObjectsSet()) {
             return;
         }
         Player player = game.getPlayer(source.getControllerId());

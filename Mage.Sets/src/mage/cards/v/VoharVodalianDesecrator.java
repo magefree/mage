@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -8,19 +7,20 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class VoharVodalianDesecrator extends CardImpl {
@@ -40,7 +40,7 @@ public final class VoharVodalianDesecrator extends CardImpl {
 
         // {2}, Sacrifice Vohar, Vodalian Desecrator: You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                new MayCastTargetThenExileEffect(Duration.EndOfTurn), new GenericManaCost(2)
+                new MayCastTargetCardEffect(Duration.EndOfTurn, true), new GenericManaCost(2)
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));

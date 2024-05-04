@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -13,25 +12,21 @@ import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class MarangRiverProwler extends CardImpl {
 
     public MarangRiverProwler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -43,7 +38,7 @@ public final class MarangRiverProwler extends CardImpl {
         effect.setText("and can't be blocked");
         ability.addEffect(effect);
         this.addAbility(ability);
-        
+
         // You may cast Marang River Prowler from your graveyard as long as you control a black or green permanent.
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new MarangRiverProwlerCastEffect()));
     }
@@ -59,14 +54,15 @@ public final class MarangRiverProwler extends CardImpl {
 }
 
 class MarangRiverProwlerCastEffect extends AsThoughEffectImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a black or green permanent");
+
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK), new ColorPredicate(ObjectColor.GREEN)));
     }
 
     MarangRiverProwlerCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard as long as you control a black or green permanent";
     }
 
@@ -88,7 +84,7 @@ class MarangRiverProwlerCastEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null 
+            if (card != null
                     && card.isOwnedBy(affectedControllerId)
                     && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD
                     && game.getBattlefield().count(filter, source.getControllerId(), source, game) > 0) {

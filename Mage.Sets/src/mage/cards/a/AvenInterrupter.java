@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class AvenInterrupter extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("spells your opponent cast from graveyards or from exile");
+    private static final FilterCard filter = new FilterCard("spells your opponents cast from graveyards or from exile");
 
     static {
         filter.add(Predicates.or(

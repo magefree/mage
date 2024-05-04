@@ -46,7 +46,7 @@ public final class DanceOfTheTumbleweeds extends CardImpl {
 
         // + {1} -- Search your library for a basic land card or a Desert card, put it onto the battlefield, then shuffle.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(0, 1, filter)
+                new TargetCardInLibrary(filter)
         ));
         this.getSpellAbility().withFirstModeCost(new GenericManaCost(1));
 

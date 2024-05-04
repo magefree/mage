@@ -16,13 +16,12 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -93,7 +92,7 @@ class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
         // activated ability
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
+            if (stackAbility != null && !stackAbility.getStackAbility().isManaActivatedAbility()) {
                 if (stackAbility.getManaCostsToPay().containsX()) {
                     this.getEffects().setValue("stackObject", (StackObject) stackAbility);
                     return true;

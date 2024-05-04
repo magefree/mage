@@ -22,7 +22,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
     protected boolean poolDependant;
 
     public ActivatedManaAbilityImpl(Zone zone, ManaEffect effect, Cost cost) {
-        super(AbilityType.MANA, zone);
+        super(AbilityType.ACTIVATED_MANA, zone);
         this.usesStack = false;
         this.undoPossible = true;
         if (effect != null) {

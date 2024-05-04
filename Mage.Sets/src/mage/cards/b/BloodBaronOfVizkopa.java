@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class BloodBaronOfVizkopa extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE, ObjectColor.BLACK));
 
         // As long as you have 30 or more life and an opponent has 10 or less life, Blood Baron of Vizkopa gets +6/+6 and has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodBaronOfVizkopaEffect()));
+        this.addAbility(new SimpleStaticAbility(new BloodBaronOfVizkopaEffect()));
     }
 
     private BloodBaronOfVizkopa(final BloodBaronOfVizkopa card) {
@@ -93,27 +92,15 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
     private boolean conditionState(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        if (controller == null || controller.getLife() < 30) {
             return false;
         }
-
-        if (controller.getLife() < 30) {
-            return false;
-        }
-
-        for (UUID opponentId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            if (!controller.hasOpponent(opponentId, game)) {
-                return false;
-            }
-
+        for (UUID opponentId : game.getOpponents(controller.getId())) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                return false;
+            if (opponent != null && opponent.getLife() <= 10) {
+                return true;
             }
-
-            return opponent.getLife() < 11;
         }
-
         return false;
     }
 

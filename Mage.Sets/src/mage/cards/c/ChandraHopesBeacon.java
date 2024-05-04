@@ -108,7 +108,7 @@ class ChandraHopesBeaconPlayEffect extends AsThoughEffectImpl {
     private final Set<MageObjectReference> morSet = new HashSet<>();
 
     ChandraHopesBeaconPlayEffect(Cards cards, Game game) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.UntilEndOfYourNextTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.UntilEndOfYourNextTurn, Outcome.Benefit);
         cards.stream()
                 .map(uuid -> new MageObjectReference(uuid, game))
                 .forEach(morSet::add);

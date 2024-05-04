@@ -32,15 +32,17 @@ public final class TinybonesJoinsUp extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // When Tinybones Joins Up enters the battlefield, any number of target players each discard a card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1)
+                .setText("any number of target players each discard a card"));
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
         this.addAbility(ability);
 
         // Whenever a legendary creature enters the battlefield under your control, any number of target players each mill a card and lose 1 life.
         ability = new EntersBattlefieldControlledTriggeredAbility(
-                new MillCardsTargetEffect(1), filter
+                new MillCardsTargetEffect(1).setText("any number of target players each mill a card"),
+                filter
         );
-        ability.addEffect(new LoseLifeTargetEffect(1));
+        ability.addEffect(new LoseLifeTargetEffect(1).setText("and lose 1 life"));
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
         this.addAbility(ability);
     }

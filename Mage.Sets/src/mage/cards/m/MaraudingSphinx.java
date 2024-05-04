@@ -34,7 +34,7 @@ public final class MaraudingSphinx extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Whenever you commit a crime, surveil 2. This ability triggers only once each turn.
         this.addAbility(new CommittedCrimeTriggeredAbility(new SurveilEffect(2), false).setTriggersOnceEachTurn(true));

@@ -22,7 +22,7 @@ public final class MournersSurprise extends CardImpl {
         // Return up to one target creature card from your graveyard to your hand. Create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new MercenaryToken()));
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
     private MournersSurprise(final MournersSurprise card) {

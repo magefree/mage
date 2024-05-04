@@ -35,7 +35,7 @@ public final class BubblingCauldron extends CardImpl {
         // {1}, {T}, Sacrifice a creature: You gain 4 life.
         Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), new ManaCostsImpl<>("{1}"));
         ability1.addCost(new TapSourceCost());
-        ability1.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability1.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability1);
         // {1}, {T}, Sacrifice a creature named Festering Newt: Each opponent loses 4 life. You gain life equal to the life lost this way.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsYouGainLifeLostEffect(4), new ManaCostsImpl<>("{1}"));

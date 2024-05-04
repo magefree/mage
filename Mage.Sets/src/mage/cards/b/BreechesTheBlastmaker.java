@@ -41,7 +41,7 @@ public final class BreechesTheBlastmaker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you cast your second spell each turn, you may sacrifice an artifact. If you do, flip a coin. When you win the flip, copy that spell. You may choose new targets for the copy. When you lose the flip, Breeches, the Blastmaker deals damage equal to that spell's mana value to any target.
         this.addAbility(new CastSecondSpellTriggeredAbility(new DoIfCostPaid(

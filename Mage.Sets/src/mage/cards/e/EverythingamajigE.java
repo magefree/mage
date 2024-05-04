@@ -41,11 +41,11 @@ public final class EverythingamajigE extends CardImpl {
 
         // Zuran Orb
         // Sacrifice a land: You gain 2 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
 
         // Ashnod's Altar
         // Sacrifice a creature: Add {C}{C} to your mana pool.
-        SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
+        SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.ColorlessMana(2), CreaturesYouControlCount.instance),
                 cost));

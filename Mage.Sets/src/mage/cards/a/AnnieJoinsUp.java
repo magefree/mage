@@ -85,7 +85,8 @@ class AnnieJoinsUpEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(((NumberOfTriggersEvent) event).getSourceId());
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
-                && permanent.isLegendary(game);
+                && permanent.isLegendary(game)
+                && permanent.isCreature(game);
     }
 
     @Override

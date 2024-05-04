@@ -31,9 +31,11 @@ public final class ArmoredArmadillo extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
 
         // {3}{W}: Armored Armadillo gets +X/+0 until end of turn, where X is its toughness.
-        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
-                SourcePermanentToughnessValue.getInstance(), StaticValue.get(0), Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{3}{W}")));
+        this.addAbility(new SimpleActivatedAbility(
+                new BoostSourceEffect(
+                        SourcePermanentToughnessValue.getInstance(), StaticValue.get(0), Duration.EndOfTurn
+                ).setText("{this} gets +X/+0 until end of turn, where X is its toughness."),
+                new ManaCostsImpl<>("{3}{W}")));
     }
 
     private ArmoredArmadillo(final ArmoredArmadillo card) {

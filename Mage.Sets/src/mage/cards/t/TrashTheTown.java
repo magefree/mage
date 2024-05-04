@@ -29,6 +29,7 @@ public final class TrashTheTown extends CardImpl {
 
         // + {2} -- Put two +1/+1 counters on target creature.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().withFirstModeCost(new GenericManaCost(2));
 
         // + {1} -- Target creature gains trample until end of turn.

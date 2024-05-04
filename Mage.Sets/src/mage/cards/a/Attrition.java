@@ -24,7 +24,7 @@ public final class Attrition extends CardImpl {
 
         //{B}, Sacrifice a creature: Destroy target nonblack creature.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.B));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK).withChooseHint("to destroy"));
         this.addAbility(ability);
     }

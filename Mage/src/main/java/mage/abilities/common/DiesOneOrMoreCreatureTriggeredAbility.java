@@ -19,8 +19,8 @@ public class DiesOneOrMoreCreatureTriggeredAbility extends TriggeredAbilityImpl 
 
     private final FilterCreaturePermanent filter;
 
-    public DiesOneOrMoreCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
-        super(Zone.BATTLEFIELD, effect, false);
+    public DiesOneOrMoreCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTriggerPhrase("Whenever one or more " + filter.getMessage() + " die, ");
     }

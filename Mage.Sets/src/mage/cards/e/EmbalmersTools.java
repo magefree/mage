@@ -1,7 +1,6 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapTargetCost;
@@ -86,8 +85,7 @@ class EmbalmersToolsEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
+        if (abilityToModify.isActivatedAbility()){
             // Activated abilities of creatures
             Card card = game.getCard(abilityToModify.getSourceId());
             if (filter.match(card, source.getControllerId(), source, game) && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {

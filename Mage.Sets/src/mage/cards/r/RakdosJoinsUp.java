@@ -14,7 +14,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -28,6 +30,9 @@ import java.util.UUID;
  */
 public final class RakdosJoinsUp extends CardImpl {
 
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("a legendary creature you control");
+
     public RakdosJoinsUp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{R}");
 
@@ -35,15 +40,15 @@ public final class RakdosJoinsUp extends CardImpl {
 
         // When Rakdos Joins Up enters the battlefield, return target creature card from your graveyard to the battlefield with two additional +1/+1 counters on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.P1P1.createInstance(2))
+                new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.P1P1.createInstance(2), true)
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
         // Whenever a legendary creature you control dies, Rakdos Joins Up deals damage equal to that creature's power to target opponent.
         ability = new DiesCreatureTriggeredAbility(
-                new DamageTargetEffect(RakdosJoinsUpValue.instance),
-                false, StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY
+                new DamageTargetEffect(RakdosJoinsUpValue.instance).setText("{this} deals damage equal to that creature's power to target opponent"),
+                false, filter
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

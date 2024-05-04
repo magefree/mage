@@ -14,6 +14,7 @@ public class BecomesPlottedSourceTriggeredAbility extends TriggeredAbilityImpl {
     public BecomesPlottedSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.EXILED, effect, optional);
         setTriggerPhrase("When {this} becomes plotted, ");
+        this.withRuleTextReplacement(true);
     }
 
     public BecomesPlottedSourceTriggeredAbility(Effect effect) {

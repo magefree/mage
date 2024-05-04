@@ -1,11 +1,10 @@
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.*;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,8 +17,9 @@ import mage.game.command.emblems.JaceTelepathUnboundEmblem;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class JaceTelepathUnbound extends CardImpl {
@@ -42,7 +42,7 @@ public final class JaceTelepathUnbound extends CardImpl {
         this.addAbility(ability);
 
         // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
-        ability = new LoyaltyAbility(new MayCastTargetThenExileEffect(Duration.EndOfTurn), -3);
+        ability = new LoyaltyAbility(new MayCastTargetCardEffect(Duration.EndOfTurn, true), -3);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
 

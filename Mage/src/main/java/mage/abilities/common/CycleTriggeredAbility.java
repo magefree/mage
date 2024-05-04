@@ -14,7 +14,7 @@ public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     public CycleTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, "When you cycle {this}, ", optional);
-        this.replaceRuleText = true; // default true to replace "{this}" with "it"
+        this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
     }
 
     public CycleTriggeredAbility(Effect effect) {

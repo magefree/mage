@@ -35,7 +35,7 @@ public final class CollectorsCage extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(
-                new HideawayPlayEffect(), CovenCondition.instance, "then if you control three or more " +
+                new HideawayPlayEffect(), CovenCondition.instance, "Then if you control three or more " +
                 "creatures with different powers, you may play the exiled card without paying its mana cost"
         ));
         ability.addTarget(new TargetControlledCreaturePermanent());

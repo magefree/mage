@@ -28,7 +28,7 @@ public final class VaultPlunderer extends CardImpl {
 
         // When Vault Plunderer enters the battlefield, target player draws a card and loses 1 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardTargetEffect(1));
-        ability.addEffect(new LoseLifeTargetEffect(1).concatBy("and"));
+        ability.addEffect(new LoseLifeTargetEffect(1).setText("and loses 1 life"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

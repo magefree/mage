@@ -4,6 +4,7 @@ import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
+import mage.abilities.keyword.SpreeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,10 +25,13 @@ public final class MetamorphicBlast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Spree
+        this.addAbility(new SpreeAbility(this));
+        
         // + {1} -- Until end of turn, target creature becomes a white Rabbit with base power and toughness 0/1.
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new CreatureToken(
                 0, 1, "white Rabbit with base power and toughness 0/1"
-        ).withSubType(SubType.RABBIT).withColor("W"), false, false, Duration.EndOfTurn));
+        ).withSubType(SubType.RABBIT).withColor("W"), false, false, Duration.EndOfTurn)
+                .withDurationRuleAtStart(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().withFirstModeCost(new GenericManaCost(1));
 

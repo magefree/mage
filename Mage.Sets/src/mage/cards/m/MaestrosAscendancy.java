@@ -52,7 +52,7 @@ public final class MaestrosAscendancy extends CardImpl {
 class MaestrosAscendancyCastEffect extends AsThoughEffectImpl {
 
     MaestrosAscendancyCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.AIDontUseIt);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.AIDontUseIt);
         staticText = "once during each of your turns, you may cast an instant or sorcery spell " +
                 "from your graveyard by sacrificing a creature in addition to paying its other costs.";
     }
@@ -89,7 +89,7 @@ class MaestrosAscendancyCastEffect extends AsThoughEffectImpl {
         }
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.addAll(card.getSpellAbility().getCosts());
-        newCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        newCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         player.setCastSourceIdWithAlternateMana(
                 card.getId(), card.getManaCost(), newCosts,
                 MageIdentifier.MaestrosAscendencyAlternateCast

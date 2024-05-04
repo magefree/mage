@@ -3,10 +3,9 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.common.AttachedToCreatureSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -37,7 +36,7 @@ public final class AssimilationAegis extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // When Assimilation Aegis enters the battlefield, exile up to one target creature until Assimilation Aegis leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AssimilationAegisETBEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
@@ -45,7 +44,7 @@ public final class AssimilationAegis extends CardImpl {
         this.addAbility(new AttachedToCreatureSourceTriggeredAbility(new AssimilationAegisEffect(), false));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private AssimilationAegis(final AssimilationAegis card) {
@@ -58,44 +57,13 @@ public final class AssimilationAegis extends CardImpl {
     }
 }
 
-class AssimilationAegisETBEffect extends OneShotEffect {
-
-    AssimilationAegisETBEffect() {
-        super(Outcome.Exile);
-        staticText = "exile up to one other target creature until {this} leaves the battlefield.";
-    }
-
-    private AssimilationAegisETBEffect(final AssimilationAegisETBEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AssimilationAegisETBEffect copy() {
-        return new AssimilationAegisETBEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (player == null || permanent == null || source.getSourcePermanentIfItStillExists(game) == null) {
-            return false;
-        }
-        UUID exileId = CardUtil.getExileZoneId(game, source);
-        String exileName = CardUtil.getSourceName(game, source);
-        player.moveCardsToExile(permanent, source, game, true, exileId, exileName);
-        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
-        return true;
-    }
-}
-
 // Similar to Blade of Shared Souls.
 class AssimilationAegisEffect extends OneShotEffect {
 
     AssimilationAegisEffect() {
         super(Outcome.Benefit);
         staticText = "for as long as {this} remains attached to it, " +
-                "that creature become a copy of a creature exiled with {this}";
+                "that creature becomes a copy of a creature card exiled with {this}";
     }
 
     private AssimilationAegisEffect(final AssimilationAegisEffect effect) {

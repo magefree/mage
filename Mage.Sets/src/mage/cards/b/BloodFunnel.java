@@ -35,7 +35,7 @@ public final class BloodFunnel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
 
         // Whenever you cast a noncreature spell, counter that spell unless you sacrifice a creature.
-        Effect effect = new CounterUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        Effect effect = new CounterUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         effect.setText("counter that spell unless you sacrifice a creature");
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 effect,

@@ -256,7 +256,7 @@ public abstract class MageTestPlayerBase {
     }
 
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability) {
-        addCustomCardWithAbility(customName, controllerPlayer, ability, null, CardType.ENCHANTMENT, "", Zone.BATTLEFIELD);
+        addCustomCardWithAbility(customName, controllerPlayer, ability, null, null, "", Zone.BATTLEFIELD);
     }
 
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability, SpellAbility spellAbility,

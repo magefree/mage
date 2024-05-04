@@ -53,9 +53,8 @@ class RiteOfHarmonyTriggeredAbility extends DelayedTriggeredAbility {
         filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
     }
 
-    public RiteOfHarmonyTriggeredAbility() {
+    RiteOfHarmonyTriggeredAbility() {
         super(new DrawCardSourceControllerEffect(1), Duration.EndOfTurn, false);
-        optional = false;
     }
 
     private RiteOfHarmonyTriggeredAbility(final RiteOfHarmonyTriggeredAbility ability) {

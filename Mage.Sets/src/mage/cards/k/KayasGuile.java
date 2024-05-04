@@ -29,9 +29,7 @@ public final class KayasGuile extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // • Each opponent sacrifices a creature.
-        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        ));
+        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // • Exile all cards from each opponent's graveyard.
         this.getSpellAbility().addMode(new Mode(new ExileGraveyardAllPlayersEffect(

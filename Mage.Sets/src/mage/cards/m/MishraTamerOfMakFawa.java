@@ -36,7 +36,7 @@ public final class MishraTamerOfMakFawa extends CardImpl {
         // Permanents you control have "Ward--Sacrifice a permanent."
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new WardAbility(new SacrificeTargetCost(
-                        StaticFilters.FILTER_CONTROLLED_PERMANENT_SHORT_TEXT
+                        StaticFilters.FILTER_PERMANENT
                 ), false), Duration.WhileOnBattlefield
         ).withForceQuotes()));
 
