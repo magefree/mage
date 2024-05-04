@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -39,8 +38,8 @@ public final class BonusRound extends CardImpl {
 
 class BonusRoundDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    public BonusRoundDelayedTriggeredAbility() {
-        super(new CopyTargetSpellEffect(true, true), Duration.EndOfTurn, false);
+    BonusRoundDelayedTriggeredAbility() {
+        super(new CopyTargetSpellEffect(true, true, true), Duration.EndOfTurn, false);
     }
 
     private BonusRoundDelayedTriggeredAbility(final BonusRoundDelayedTriggeredAbility ability) {

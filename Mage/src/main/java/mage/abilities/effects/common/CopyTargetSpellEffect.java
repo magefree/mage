@@ -27,19 +27,11 @@ public class CopyTargetSpellEffect extends OneShotEffect {
     }
 
     public CopyTargetSpellEffect(boolean useLKI) {
-        this(false, useLKI);
-    }
-
-    public CopyTargetSpellEffect(boolean useController, boolean useLKI) {
-        this(useController, useLKI, true);
+        this(false, useLKI, true);
     }
 
     public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets) {
-        this(useController, useLKI, chooseTargets, 1);
-    }
-
-    public CopyTargetSpellEffect(boolean useController, boolean useLKI, boolean chooseTargets, int amount) {
-        this(useController, useLKI, chooseTargets, amount, null);
+        this(useController, useLKI, chooseTargets, 1, null);
     }
 
     /**

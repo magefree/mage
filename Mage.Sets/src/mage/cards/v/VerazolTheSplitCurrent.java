@@ -40,7 +40,7 @@ public final class VerazolTheSplitCurrent extends CardImpl {
         // Whenever you cast a kicked spell, you may remove two +1/+1 counters from Verazol, the Split Current. If you do, copy that spell. You may choose new targets for that copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DoIfCostPaid(
-                        new CopyTargetSpellEffect(false, true)
+                        new CopyTargetSpellEffect(true)
                                 .setText("copy that spell. You may choose new targets for the copy"),
                         new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))
                 ), StaticFilters.FILTER_SPELL_KICKED_A, false, SetTargetPointer.SPELL
