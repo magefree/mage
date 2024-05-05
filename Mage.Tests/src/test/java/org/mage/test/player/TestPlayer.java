@@ -194,14 +194,6 @@ public class TestPlayer implements Player {
         return computerPlayer.getManaAvailable(game);
     }
 
-    public void addAction(int turnNum, PhaseStep step, String action) {
-        actions.add(new PlayerAction("", turnNum, step, action));
-    }
-
-    public void addAction(String actionName, int turnNum, PhaseStep step, String action) {
-        actions.add(new PlayerAction(actionName, turnNum, step, action));
-    }
-
     public void addAction(PlayerAction playerAction) {
         actions.add(playerAction);
     }
@@ -555,11 +547,6 @@ public class TestPlayer implements Player {
             result = false;
         }
         return result;
-    }
-
-    @Override
-    public int getActionCount() {
-        return actions.size();
     }
 
     @Override
@@ -3771,11 +3758,6 @@ public class TestPlayer implements Player {
     @Override
     public void setUserData(UserData userData) {
         computerPlayer.setUserData(userData);
-    }
-
-    @Override
-    public void addAction(String action) {
-        computerPlayer.addAction(action);
     }
 
     @Override

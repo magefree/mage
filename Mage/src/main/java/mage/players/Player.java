@@ -375,10 +375,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setTestMode(boolean value);
 
-    void addAction(String action);
-
-    int getActionCount();
-
     void setAllowBadMoves(boolean allowBadMoves);
 
     /**

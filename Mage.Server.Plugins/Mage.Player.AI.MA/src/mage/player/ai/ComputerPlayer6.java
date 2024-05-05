@@ -77,10 +77,6 @@ public class ComputerPlayer6 extends ComputerPlayer {
     List<Permanent> attackersList = new ArrayList<>();
     List<Permanent> attackersToCheck = new ArrayList<>();
 
-    private static final boolean AI_SUGGEST_BY_FILE_ENABLE = true; // old method to instruct AI to play cards (use cheat commands instead now)
-    private static final String AI_SUGGEST_BY_FILE_SOURCE = "config/ai.please.cast.this.txt";
-    private final List<String> suggestedActions = new ArrayList<>();
-
     protected Set<String> actionCache;
     private static final List<TreeOptimizer> optimizers = new ArrayList<>();
     protected int lastLoggedTurn = 0;
@@ -97,13 +93,12 @@ public class ComputerPlayer6 extends ComputerPlayer {
     public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
         super(name, range);
         if (skill < 4) {
-            maxDepth = 4;
+            maxDepth = 4; // wtf
         } else {
             maxDepth = skill;
         }
         maxThink = skill * 3;
         maxNodes = MAX_SIMULATED_NODES_PER_CALC;
-        getSuggestedActions();
         this.actionCache = new HashSet<>();
     }
 
@@ -201,17 +196,6 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 this.activateAbility((ActivatedAbility) ability, game);
                 if (ability.isUsesStack()) {
                     usedStack = true;
-                }
-                if (!suggestedActions.isEmpty() && !(ability instanceof PassAbility)) {
-                    Iterator<String> it = suggestedActions.iterator();
-                    while (it.hasNext()) {
-                        String action = it.next();
-                        Card card = game.getCard(ability.getSourceId());
-                        if (card != null && action.equals(card.getName())) {
-                            logger.info("-> removed from suggested=" + action);
-                            it.remove();
-                        }
-                    }
                 }
             }
             if (usedStack) {
@@ -323,9 +307,6 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 root = root.children.get(0);
             }
             logger.trace("Sim getNextAction -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
-            if (!suggestedActions.isEmpty()) {
-                return false;
-            }
             if (root.playerId.equals(playerId)
                     && root.abilities != null
                     && game.getState().getValue(true).hashCode() == test.gameValue) {
@@ -1069,10 +1050,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         for (Player oldPlayer : sim.getState().getPlayers().values()) {
             // replace original player by simulated player and find result (execute/resolve current action)
             Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();
-            if (!suggestedActions.isEmpty()) {
-                logger.debug(origPlayer.getName() + " suggested: " + suggestedActions);
-            }
-            SimulatedPlayer2 simPlayer = new SimulatedPlayer2(oldPlayer, oldPlayer.getId().equals(playerId), suggestedActions);
+            SimulatedPlayer2 simPlayer = new SimulatedPlayer2(oldPlayer, oldPlayer.getId().equals(playerId));
             simPlayer.restore(origPlayer);
             sim.getState().getPlayers().put(oldPlayer.getId(), simPlayer);
         }
@@ -1105,51 +1083,6 @@ public class ComputerPlayer6 extends ComputerPlayer {
             test = test.getParent();
         }
         return false;
-    }
-
-    protected final void getSuggestedActions() {
-        if (!AI_SUGGEST_BY_FILE_ENABLE) {
-            return;
-        }
-        Scanner scanner = null;
-        try {
-            File file = new File(AI_SUGGEST_BY_FILE_SOURCE);
-            if (file.exists()) {
-                scanner = new Scanner(file);
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    if (line.startsWith("cast:")
-                            || line.startsWith("play:")) {
-                        suggestedActions.add(line.substring(5));
-                    }
-                }
-                System.out.println("suggested::");
-                for (int i = 0; i < suggestedActions.size(); i++) {
-                    System.out.println("    " + suggestedActions.get(i));
-                }
-            }
-        } catch (Exception e) {
-            // swallow
-            e.printStackTrace();
-        } finally {
-            if (scanner != null) {
-                scanner.close();
-            }
-        }
-    }
-
-    @Override
-    public void addAction(String action) {
-        if (action != null
-                && (action.startsWith("cast:")
-                || action.startsWith("play:"))) {
-            suggestedActions.add(action.substring(5));
-        }
-    }
-
-    @Override
-    public int getActionCount() {
-        return suggestedActions.size();
     }
 
     /**

@@ -35,16 +35,13 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
 
     private final boolean isSimulatedPlayer;
-    private final List<String> suggested;
     private transient ConcurrentLinkedQueue<Ability> allActions;
-    private boolean forced;
     private final Player originalPlayer; // copy of the original player, source of choices/results in tests
 
-    public SimulatedPlayer2(Player originalPlayer, boolean isSimulatedPlayer, List<String> suggested) {
+    public SimulatedPlayer2(Player originalPlayer, boolean isSimulatedPlayer) {
         super(originalPlayer.getId());
         this.originalPlayer = originalPlayer.copy();
         this.isSimulatedPlayer = isSimulatedPlayer;
-        this.suggested = suggested;
         this.userData = UserData.getDefaultUserDataView();
         this.matchPlayer = new MatchPlayer(originalPlayer.getMatchPlayer(), this);
     }
@@ -52,7 +49,6 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     public SimulatedPlayer2(final SimulatedPlayer2 player) {
         super(player);
         this.isSimulatedPlayer = player.isSimulatedPlayer;
-        this.suggested = new ArrayList<>(player.suggested);
         // this.allActions = player.allActions; // dynamic, no need to copy
         this.originalPlayer = player.originalPlayer.copy();
     }
@@ -65,15 +61,14 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     public List<Ability> simulatePriority(Game game) {
         allActions = new ConcurrentLinkedQueue<>();
         Game sim = game.createSimulationForAI();
-        forced = false;
         simulateOptions(sim);
 
+        // possible actions
         List<Ability> list = new ArrayList<>(allActions);
         Collections.reverse(list);
 
-        if (!forced) {
-            list.add(new PassAbility());
-        }
+        // pass action
+        list.add(new PassAbility());
 
         if (logger.isTraceEnabled()) {
             for (Ability a : allActions) {
@@ -97,13 +92,11 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
 
     protected void simulateOptions(Game game) {
         List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
-        playables = filterAbilities(game, playables, suggested);
         for (ActivatedAbility ability : playables) {
             if (ability.isManaAbility()) {
                 continue;
             }
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
-            options = filterOptions(game, options, ability, suggested);
             options = optimizeOptions(game, options, ability);
             if (options.isEmpty()) {
                 allActions.add(ability);
@@ -165,84 +158,6 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
             }
 
         }
-
-    }
-
-    /**
-     * if suggested abilities exist, return only those from playables
-     *
-     * @param game
-     * @param playables
-     * @param suggested
-     * @return
-     */
-    protected List<ActivatedAbility> filterAbilities(Game game, List<ActivatedAbility> playables, List<String> suggested) {
-        if (playables.isEmpty()) {
-            return playables;
-        }
-        if (suggested == null || suggested.isEmpty()) {
-            return playables;
-        }
-        List<ActivatedAbility> filtered = new ArrayList<>();
-        for (ActivatedAbility ability : playables) {
-            Card card = game.getCard(ability.getSourceId());
-            if (card != null) {
-                for (String s : suggested) {
-                    if (s.equals(card.getName())) {
-                        logger.debug("matched: " + s);
-                        forced = true;
-                        filtered.add(ability);
-                    }
-                }
-            }
-        }
-        if (!filtered.isEmpty()) {
-            return filtered;
-        }
-        return playables;
-    }
-
-    protected List<Ability> filterOptions(Game game, List<Ability> options, ActivatedAbility ability, List<String> suggested) {
-        if (options.isEmpty()) {
-            return options;
-        }
-        if (suggested == null || suggested.isEmpty()) {
-            return options;
-        }
-        List<Ability> filtered = new ArrayList<>();
-        for (Ability option : options) {
-            if (!option.getTargets().isEmpty() && option.getTargets().get(0).getMaxNumberOfTargets() == 1) {
-                Card card = game.getCard(ability.getSourceId());
-                if (card != null) {
-                    for (String s : suggested) {
-                        String[] groups = s.split(";");
-                        logger.trace("s=" + s + ";groups=" + groups.length);
-                        if (groups.length == 2) {
-                            if (groups[0].equals(card.getName()) && groups[1].startsWith("name=")) {
-                                // extract target and compare to suggested
-                                String targetName = groups[1].split("=")[1];
-                                Player player = game.getPlayer(option.getFirstTarget());
-                                if (player != null && targetName.equals(player.getName())) {
-                                    System.out.println("matched(option): " + s);
-                                    filtered.add(option);
-                                    return filtered;
-                                } else {
-                                    Card target = game.getCard(option.getFirstTarget());
-                                    if (target != null && target.getName().equals(targetName)) {
-                                        System.out.println("matched(option): " + s);
-                                        filtered.add(option);
-                                        return filtered;
-                                    }
-                                    System.out.println("not equal UUID for target, player=" + player);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        // no option was found
-        return options;
     }
 
     protected List<Ability> optimizeOptions(Game game, List<Ability> options, Ability ability) {
