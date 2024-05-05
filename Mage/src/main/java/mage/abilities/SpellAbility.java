@@ -299,9 +299,10 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return spellAbilityCastMode;
     }
 
-    public void setSpellAbilityCastMode(SpellAbilityCastMode spellAbilityCastMode) {
+    public SpellAbility setSpellAbilityCastMode(SpellAbilityCastMode spellAbilityCastMode) {
         this.spellAbilityCastMode = spellAbilityCastMode;
         setSpellName();
+        return this;
     }
 
     public SpellAbility getSpellAbilityToResolve(Game game) {
