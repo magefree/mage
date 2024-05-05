@@ -8,7 +8,7 @@ package mage.game.events;
 public class DamagedBatchBySourceEvent extends BatchEvent<DamagedEvent> {
 
     public DamagedBatchBySourceEvent(DamagedEvent firstEvent) {
-        super(EventType.DAMAGED_BATCH_BY_SOURCE, false, true, firstEvent);
+        super(EventType.DAMAGED_BATCH_BY_SOURCE, false, true, false, firstEvent);
     }
 
     public boolean isCombatDamage() {

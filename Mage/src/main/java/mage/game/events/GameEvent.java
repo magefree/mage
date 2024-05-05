@@ -117,11 +117,11 @@ public class GameEvent implements Serializable {
          combines all MILLED_CARD events for a player milling card at the same time in a single batch
          playerId    the id of the player whose batch it is
          */
-        MILLED_CARDS_BATCH_FOR_ONE_PLAYER,
+        MILLED_CARDS_BATCH_FOR_ONE_PLAYER(true),
         /* MILLED_CARDS_BATCH_FOR_ALL,
          combines all MILLED_CARD events for any player in a single batch
          */
-        MILLED_CARDS_BATCH_FOR_ALL,
+        MILLED_CARDS_BATCH_FOR_ALL(true),
 
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
