@@ -2,6 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,10 +20,13 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.MilledBatchForOnePlayerEvent;
+import mage.game.events.MilledCardEvent;
 import mage.game.permanent.token.Horror2Token;
 import mage.target.TargetPlayer;
 
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -60,7 +64,7 @@ public final class ZellixSanityFlayer extends CardImpl {
     }
 }
 
-class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
+class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<MilledCardEvent> {
 
     ZellixSanityFlayerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new Horror2Token()));
@@ -83,7 +87,19 @@ class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<MilledCardEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((MilledBatchForOnePlayerEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> Optional
+                        .of(e)
+                        .map(mce -> mce.getCard(game))
+                        .filter(card -> StaticFilters.FILTER_CARD_CREATURE.match(card, getControllerId(), this, game))
+                        .isPresent());
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return ((MilledBatchForOnePlayerEvent) event).getCards(game).count(StaticFilters.FILTER_CARD_CREATURE, game) > 0;
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 }
