@@ -369,7 +369,7 @@ public class ForetellAbility extends SpecialAction {
         }
 
         private ActivationStatus canActivateUsingForetell(SpellAbility spellAbility, UUID playerId, Game game) {
-            return spellAbility.copy().setSpellAbilityCastMode(SpellAbilityCastMode.FORETELL).canActivate(playerId, game);
+            return spellAbility.canActivate(SpellAbilityCastMode.FORETELL, playerId, game);
         }
 
         @Override

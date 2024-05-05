@@ -279,7 +279,7 @@ class PlotSpellAbility extends SpellAbility {
     }
 
     private ActivationStatus canActivateUsingPlot(SpellAbility spellAbility, UUID playerId, Game game) {
-        return spellAbility.copy().setSpellAbilityCastMode(SpellAbilityCastMode.PLOT).canActivate(playerId, game);
+        return spellAbility.canActivate(SpellAbilityCastMode.PLOT, playerId, game);
     }
 
     @Override

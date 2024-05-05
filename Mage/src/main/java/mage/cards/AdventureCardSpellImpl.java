@@ -136,18 +136,18 @@ class AdventureCardSpellAbility extends SpellAbility {
     }
 
     @Override
-    public ActivationStatus canActivate(UUID playerId, Game game) {
+    public ActivationStatus canActivate(SpellAbilityCastMode castMode, UUID playerId, Game game) {
         Card spellCard = game.getCard(this.getSourceId());
         if (spellCard == null) {
             return ActivationStatus.getFalse();
         }
-        ActivationStatus activationStatus = super.canActivate(playerId, game);
+        ActivationStatus activationStatus = super.canActivate(castMode, playerId, game);
         if (Zone.HAND.equals(game.getState().getZone(spellCard.getMainCard().getId()))
-                || Zone.COMMAND.equals(game.getState().getZone(spellCard.getMainCard().getId())) // TODO: The Commander SpellAbility may be better setup with a SpellAbilityCastMode?
-                || !getSpellAbilityCastMode().equals(SpellAbilityCastMode.NORMAL)) {
+                || Zone.COMMAND.equals(game.getState().getZone(spellCard.getMainCard().getId())) // It is possible to use an Adventure from the Command Zone
+        ) {
             return activationStatus;
         } else {
-            if (!getSpellAbilityCastMode().equals(SpellAbilityCastMode.NORMAL)) {
+            if (!getSpellAbilityCastMode().equals(castMode)) {
                 // For cases where there is a cast mode modifier that is looking if it can be activated its way.
                 // We do want to return this ability as a valid Approving Object.
                 // One such example is Plot.
