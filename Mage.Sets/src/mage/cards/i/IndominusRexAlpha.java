@@ -132,11 +132,7 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
         ArrayList<Ability> abilitiesToAdd = new ArrayList<>();
 
         for (Ability abilityToCopy : copyableAbilities) {
-
-//            Counter counter = counterType.createInstance();
-//            Ability abilityToCopy = ((AbilityCounter)(counter)).getAbility();
-//            Class<? extends Ability> abilityClass = abilityToCopy.getClass();
-
+            
             for (UUID targetId : chosenTargets) {
 
                 Card card = game.getCard(targetId);
