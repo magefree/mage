@@ -107,7 +107,7 @@ public class MageTable extends JTable {
 
     public static String textToHtmlWithSize(String text, Font font) {
         if (text != null && !text.toLowerCase(Locale.ENGLISH).startsWith("<html>")) {
-            return "<html><p style=\"font-size: " + font.getSize() + ";\">" + text + "</p>";
+            return "<html><p style=\"font-size: " + font.getSize() + "pt;\">" + text + "</p>";
         }
         return text;
     }
