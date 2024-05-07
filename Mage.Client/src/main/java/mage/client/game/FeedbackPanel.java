@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -66,18 +67,27 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private void setGUISize() {
     }
 
-    public void prepareFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options,
+    public void prepareFeedback(FeedbackMode mode, String basicMessage, String additionalMessage, boolean special, Map<String, Serializable> options,
                                 boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
         synchronized (this) {
             this.lastOptions = options;
             this.mode = mode;
         }
 
-        this.helper.setBasicMessage(message);
-        this.helper.setOriginalId(null); // reference to the feedback causing ability
-        String lblText = addAdditionalText(message, options);
-        this.helper.setTextArea(lblText);
+        // build secondary message (will use smaller font)
+        java.util.ArrayList<String> secondaryMessages = new ArrayList<>();
+        if (additionalMessage != null && !additionalMessage.isEmpty()) {
+            // client side additional info like active priority/player
+            secondaryMessages.add(additionalMessage);
+        }
+        String serverSideAdditionalMessage = options != null && options.containsKey(SECOND_MESSAGE) ? (String) options.get(SECOND_MESSAGE) : null;
+        if (serverSideAdditionalMessage != null && !serverSideAdditionalMessage.isEmpty()) {
+            // server side additional info like card/source info
+            secondaryMessages.add(serverSideAdditionalMessage);
+        }
 
+        this.helper.setMessages(basicMessage, String.join("<br>", secondaryMessages));
+        this.helper.setOriginalId(null); // reference to the feedback causing ability
 
         switch (this.mode) {
             case INFORM:
@@ -93,7 +103,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                     // Uses a filtered message for remembering choice if the original message contains a self-reference
                     this.helper.setAutoAnswerMessage((String) options.get(AUTO_ANSWER_MESSAGE));
                 } else {
-                    this.helper.setAutoAnswerMessage(message);
+                    this.helper.setAutoAnswerMessage(basicMessage);
                 }
                 break;
             case CONFIRM:
@@ -136,18 +146,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
         btnRight.setVisible(!rightText.isEmpty());
         btnRight.setText(rightText);
         this.helper.setState(leftText, !leftText.isEmpty(), rightText, !rightText.isEmpty(), mode);
-    }
-
-    private String addAdditionalText(String message, Map<String, Serializable> options) {
-        if (options != null && options.containsKey(SECOND_MESSAGE)) {
-            return message + getSmallText((String) options.get(SECOND_MESSAGE));
-        } else {
-            return message;
-        }
-    }
-
-    protected static String getSmallText(String text) {
-        return "<div style='font-size:" + GUISizeHelper.gameDialogAreaFontSizeSmall + "pt'>" + text + "</div>";
     }
 
     private void setSpecial(String text, boolean visible) {
