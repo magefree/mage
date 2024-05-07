@@ -49,10 +49,14 @@ public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbi
         this.removeIf(ability -> ability.getDuration() == Duration.EndOfTurn); // TODO: add Duration.EndOfYourTurn like effects
     }
 
+    public void removeStartOfNewTurn(Game game) {
+        this.removeIf(ability -> ability.getDuration() == Duration.UntilYourNextTurn
+                && game.getActivePlayerId().equals(ability.getControllerId())
+        );
+    }
+
     public void removeEndOfCombatAbilities() {
         this.removeIf(ability -> ability.getDuration() == Duration.EndOfCombat);
     }
-
-
 }
 

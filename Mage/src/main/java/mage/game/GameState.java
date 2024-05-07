@@ -699,6 +699,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         game.applyEffects();
     }
 
+    public void removeTurnStartEffect(Game game) {
+        delayed.removeStartOfNewTurn(game);
+        game.applyEffects();
+    }
+
     public void addEffect(ContinuousEffect effect, Ability source) {
         addEffect(effect, null, source);
     }
