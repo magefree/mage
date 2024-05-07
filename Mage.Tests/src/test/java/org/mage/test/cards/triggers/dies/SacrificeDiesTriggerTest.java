@@ -116,4 +116,81 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Su-Chi", 1);
         assertTappedCount("Sage of Lat-Nam", true, 1);
     }
+
+    // Bug: reports of Dies trigger not triggering on sacrifice.
+    // This pair was specifically mentionned to not trigger the Su-Chi trigger.
+    // Trying to change Su-Chi's zcc (cast from hand) to see if that changes anything.
+    // This test passed 10k times without failure.
+    @Test
+    public void test_SuChi_SageOfLatNam_BlinkBefore_SameStep() {
+        setStrictChooseMode(true);
+
+        // Su-Chi {4}
+        // Artifact Creature — Construct
+        // When Su-Chi dies, add {C}{C}{C}{C}.
+        // 4/4
+        addCard(Zone.BATTLEFIELD, playerA, "Su-Chi", 1);
+        // Sage of Lat-Nam {1}{U}
+        // Creature — Human Artificer
+        // {T}, Sacrifice an artifact: Draw a card.
+        // 1/2
+        addCard(Zone.BATTLEFIELD, playerA, "Sage of Lat-Nam", 1);
+
+        addCard(Zone.HAND, playerA, "Ephemerate", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.HAND, playerA, "Anvilwrought Raptor"); // Cost {4}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ephemerate", "Su-Chi");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        setChoice(playerA, "Su-Chi");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anvilwrought Raptor");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 1);
+        assertPermanentCount(playerA, "Anvilwrought Raptor", 1);
+        assertGraveyardCount(playerA, "Su-Chi", 1);
+        assertTappedCount("Sage of Lat-Nam", true, 1);
+    }
+
+    // Bug: reports of Dies trigger not triggering on sacrifice.
+    // This pair was specifically mentionned to not trigger the Su-Chi trigger.
+    // Trying to change Su-Chi's zcc to see if that changes anything.
+    // This test passed 10k times without failure.
+    @Test
+    public void test_SuChi_SageOfLatNam_Cast() {
+        setStrictChooseMode(true);
+
+        // Su-Chi {4}
+        // Artifact Creature — Construct
+        // When Su-Chi dies, add {C}{C}{C}{C}.
+        // 4/4
+        addCard(Zone.HAND, playerA, "Su-Chi", 1);
+        // Sage of Lat-Nam {1}{U}
+        // Creature — Human Artificer
+        // {T}, Sacrifice an artifact: Draw a card.
+        // 1/2
+        addCard(Zone.BATTLEFIELD, playerA, "Sage of Lat-Nam", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, "Anvilwrought Raptor"); // Cost {4}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Su-Chi", true);
+
+        setChoice(playerA, "Su-Chi");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anvilwrought Raptor");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 1);
+        assertPermanentCount(playerA, "Anvilwrought Raptor", 1);
+        assertGraveyardCount(playerA, "Su-Chi", 1);
+        assertTappedCount("Sage of Lat-Nam", true, 1);
+    }
 }
