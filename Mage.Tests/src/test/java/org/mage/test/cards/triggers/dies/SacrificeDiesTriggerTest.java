@@ -8,6 +8,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * Checks that dies triggered ability works when sacrificed
+ * Made in an attempt to replicate #12195 issue.
  *
  * @author Susucr
  */
@@ -182,6 +183,124 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
 
         setChoice(playerA, "Su-Chi");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anvilwrought Raptor");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 1);
+        assertPermanentCount(playerA, "Anvilwrought Raptor", 1);
+        assertGraveyardCount(playerA, "Su-Chi", 1);
+        assertTappedCount("Sage of Lat-Nam", true, 1);
+    }
+
+    // Bug: reports of Dies trigger not triggering on sacrifice.
+    // This pair was specifically mentionned to not trigger the Su-Chi trigger.
+    // Trying to trigger a potential bug with shortlived lki
+    // This test passed 10k times without failure.
+    @Test
+    public void test_SuChi_SageOfLatNam_FlameSlash_SacInResponse() {
+        setStrictChooseMode(true);
+
+        // Su-Chi {4}
+        // Artifact Creature — Construct
+        // When Su-Chi dies, add {C}{C}{C}{C}.
+        // 4/4
+        addCard(Zone.HAND, playerA, "Su-Chi", 1);
+        // Sage of Lat-Nam {1}{U}
+        // Creature — Human Artificer
+        // {T}, Sacrifice an artifact: Draw a card.
+        // 1/2
+        addCard(Zone.BATTLEFIELD, playerA, "Sage of Lat-Nam", 1);
+        addCard(Zone.HAND, playerA, "Flame Slash");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, "Anvilwrought Raptor"); // Cost {4}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Su-Chi", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Slash", "Su-Chi");
+
+        setChoice(playerA, "Su-Chi");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anvilwrought Raptor");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 1);
+        assertPermanentCount(playerA, "Anvilwrought Raptor", 1);
+        assertGraveyardCount(playerA, "Su-Chi", 1);
+        assertTappedCount("Sage of Lat-Nam", true, 1);
+    }
+
+    // Bug: reports of Dies trigger not triggering on sacrifice.
+    // This pair was specifically mentionned to not trigger the Su-Chi trigger.
+    // Trying to trigger a potential bug with shortlived lki
+    // This test passed 10k times without failure.
+    @Test
+    public void test_SuChi_SageOfLatNam_FlameSlashSage_SacInResponse() {
+        setStrictChooseMode(true);
+
+        // Su-Chi {4}
+        // Artifact Creature — Construct
+        // When Su-Chi dies, add {C}{C}{C}{C}.
+        // 4/4
+        addCard(Zone.HAND, playerA, "Su-Chi", 1);
+        // Sage of Lat-Nam {1}{U}
+        // Creature — Human Artificer
+        // {T}, Sacrifice an artifact: Draw a card.
+        // 1/2
+        addCard(Zone.BATTLEFIELD, playerA, "Sage of Lat-Nam", 1);
+        addCard(Zone.HAND, playerA, "Flame Slash");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, "Anvilwrought Raptor"); // Cost {4}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Su-Chi", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flame Slash", "Sage of Lat-Nam");
+
+        setChoice(playerA, "Su-Chi");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anvilwrought Raptor");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 1);
+        assertPermanentCount(playerA, "Anvilwrought Raptor", 1);
+        assertGraveyardCount(playerA, "Su-Chi", 1);
+        assertGraveyardCount(playerA, "Sage of Lat-Nam", 1);
+    }
+
+    // Bug: reports of Dies trigger not triggering on sacrifice.
+    // This pair was specifically mentionned to not trigger the Su-Chi trigger.
+    // Trying to trigger a potential bug when other triggers are in the state.
+    // This test passed 10k times without failure.
+    // (tried with 100 triggers 100 times, no fail either, at 500ms each test, didn't feel like going to 10k or add it as regular test)
+    @Test
+    public void test_SuChi_SageOfLatNam_10OtherTriggers() {
+        setStrictChooseMode(true);
+
+        // Whenever a nontoken creature you control dies, create a 1/1 green Saproling creature token.
+        addCard(Zone.BATTLEFIELD, playerA, "Golgari Germination", 10);
+
+        // Su-Chi {4}
+        // Artifact Creature — Construct
+        // When Su-Chi dies, add {C}{C}{C}{C}.
+        // 4/4
+        addCard(Zone.BATTLEFIELD, playerA, "Su-Chi", 1);
+        // Sage of Lat-Nam {1}{U}
+        // Creature — Human Artificer
+        // {T}, Sacrifice an artifact: Draw a card.
+        // 1/2
+        addCard(Zone.BATTLEFIELD, playerA, "Sage of Lat-Nam", 1);
+        addCard(Zone.HAND, playerA, "Anvilwrought Raptor"); // Cost {4}
+
+        setChoice(playerA, "Su-Chi");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
+        setChoice(playerA, "Whenever a nontoken creature you control dies, create a 1/1 green Saproling creature token.", 10); // stack triggers
+
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anvilwrought Raptor");
 
