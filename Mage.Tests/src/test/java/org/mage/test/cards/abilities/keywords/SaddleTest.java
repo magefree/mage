@@ -112,16 +112,14 @@ public class SaddleTest extends CardTestPlayerBase {
         setChoice(playerA, lion);
 
         setStopAt(1, PhaseStep.END_TURN);
+
+        // TODO: test framework must have tools to check targeting (as workaround try to check it by look at test command error)
         try {
             execute();
         } catch (AssertionError e) {
-            Assert.assertEquals(
-                    "Lion can't be targeted",
-                    "Missing CHOICE def for turn 1, step DECLARE_ATTACKERS, PlayerA\n" +
-                            "Object: PermanentCard: Rambling Possum;\n" +
-                            "Target: TargetPermanent: Select creatures that saddled it this turn (selected 0)",
-                    e.getMessage()
-            );
+            if (!e.getMessage().contains("Select creatures that saddled it this turn (selected 0)")) {
+                Assert.fail("Lion can't be targeted, but catch another error:\n" + e.getMessage());
+            }
         }
 
         assertTapped(bear, true);
