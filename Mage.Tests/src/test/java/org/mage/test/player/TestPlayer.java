@@ -2369,7 +2369,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(source)) + ";\n" + getInfo(target));
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target));
         return computerPlayer.choose(outcome, target, source, game, options);
     }
 
@@ -4134,7 +4134,7 @@ public class TestPlayer implements Player {
             assertWrongChoiceUsage(choices.size() > 0 ? choices.get(0) : "empty list");
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(target));
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target));
         return computerPlayer.choose(outcome, cards, target, source, game);
     }
 

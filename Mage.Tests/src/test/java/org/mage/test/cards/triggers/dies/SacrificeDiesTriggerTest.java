@@ -1,8 +1,8 @@
-
 package org.mage.test.cards.triggers.dies;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * Checks that dies triggered ability works when sacrificed
  * Made in an attempt to replicate #12195 issue.
  *
- * @author Susucr
+ * @author Susucr, JayDi85
  */
 public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
 
@@ -311,5 +311,107 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Anvilwrought Raptor", 1);
         assertGraveyardCount(playerA, "Su-Chi", 1);
         assertTappedCount("Sage of Lat-Nam", true, 1);
+    }
+
+    @Test
+    public void test_MultiModesDiesTrigger_ByDamage() {
+        addCustomEffect_BlinkTarget(playerA);
+
+        // When Junji, the Midnight Sky dies, choose one —
+        // • Each opponent discards two cards and loses 2 life.
+        // • Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Junji, the Midnight Sky", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 1);
+        //
+        // Govern the Storm deals 5 damage to target creature.
+        addCard(Zone.HAND, playerA, "Command the Storm", 1); // {4}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+
+        // blink before
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target blink", "Junji, the Midnight Sky");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        // kill junji
+        checkStackSize("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Command the Storm", "Junji, the Midnight Sky");
+        setModeChoice(playerA, "2"); // choose put target non-dragon
+        addTarget(playerA, "Grizzly Bears"); // put to battlefield
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Junji, the Midnight Sky", 1);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+    }
+
+    @Test
+    public void test_MultiModesDiesTrigger_BySacrificeCost() {
+        addCustomEffect_BlinkTarget(playerA);
+
+        // When Junji, the Midnight Sky dies, choose one —
+        // • Each opponent discards two cards and loses 2 life.
+        // • Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Junji, the Midnight Sky", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 1);
+        //
+        // {2}, {T}, Sacrifice a creature: Draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1); // {3}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        // blink before
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target blink", "Junji, the Midnight Sky");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        // sacrifice junji
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice");
+        setChoice(playerA, "Junji, the Midnight Sky"); // sacrifice
+        setModeChoice(playerA, "2"); // choose put target non-dragon
+        addTarget(playerA, "Grizzly Bears"); // put to battlefield
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Junji, the Midnight Sky", 1);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+    }
+
+    @Test
+    @Ignore // TODO: enable after shortLKI and move to battlefield will be fixed
+    public void test_DiesTriggerWhileMultiStepsEffect_ShortLKI() {
+        // see details on shortLKI problems in isInUseableZoneDiesTrigger
+
+        skipInitShuffling();
+
+        // When Junji, the Midnight Sky dies, choose one —
+        // • Each opponent discards two cards and loses 2 life.
+        // • Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Junji, the Midnight Sky", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 1);
+        //
+        // At the beginning of your end step, you may sacrifice a creature. If you do, look at the top X cards of your library,
+        // where X is that creature's mana value. You may put a creature card from among them onto the battlefield.
+        // Put the rest on the bottom of your library in a random order.
+        addCard(Zone.BATTLEFIELD, playerA, "Industrial Advancement", 1);
+        addCard(Zone.LIBRARY, playerA, "Augmenting Automaton", 1);
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 1);
+
+        // end step trigger
+        setChoice(playerA, "Junji, the Midnight Sky"); // sacrifice on end step
+        setChoice(playerA, "Silvercoat Lion"); // put to battlefield
+        // dies trigger
+        setModeChoice(playerA, "2"); // choose put target non-dragon
+        addTarget(playerA, "Grizzly Bears"); // put to battlefield
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // from dies trigger
+        assertGraveyardCount(playerA, "Junji, the Midnight Sky", 1);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        // from end step trigger
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
 }
