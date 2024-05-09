@@ -78,7 +78,9 @@ public final class CardUtil {
             "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay", "collect"
     );
 
-    public static final int TESTS_SET_CODE_LOOKUP_LENGTH = 6; // search set code in commands like "set_code-card_name"
+    // search set code in commands like "set_code-card_name"
+    public static final int TESTS_SET_CODE_MIN_LOOKUP_LENGTH = 3;
+    public static final int TESTS_SET_CODE_MAX_LOOKUP_LENGTH = 6;
     public static final String TESTS_SET_CODE_DELIMETER = "-"; // delimeter for cheats and tests command "set_code-card_name"
 
     /**

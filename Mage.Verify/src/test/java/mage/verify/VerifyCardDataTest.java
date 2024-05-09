@@ -1071,9 +1071,12 @@ public class VerifyCardDataTest {
             }
 
             // CHECK: set code must be compatible with tests commands format like "SET-card"
-            // how-to fix: increase lookup lenth
-            if (set.getCode().length() + 1 > CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH) {
-                errorsList.add("Error: set code too big for test commads lookup: " + set.getCode() + ", lookup length: " + CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH);
+            // how-to fix: change min/max lookup length
+            if (set.getCode().length() < CardUtil.TESTS_SET_CODE_MIN_LOOKUP_LENGTH
+                    || set.getCode().length() > CardUtil.TESTS_SET_CODE_MAX_LOOKUP_LENGTH) {
+                errorsList.add("Error: set code un-supported by test commands lookup: " + set.getCode()
+                        + ", min length: " + CardUtil.TESTS_SET_CODE_MIN_LOOKUP_LENGTH
+                        + ", max length: " + CardUtil.TESTS_SET_CODE_MAX_LOOKUP_LENGTH);
             }
 
             boolean containsDoubleSideCards = false;
