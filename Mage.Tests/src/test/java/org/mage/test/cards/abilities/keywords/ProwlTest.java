@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
+ * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com) and jimga150
  */
 public class ProwlTest extends CardTestPlayerBase {
 
@@ -73,5 +73,35 @@ public class ProwlTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
         assertPermanentCount(playerA, "Goblin Warchief", 1);
         assertPermanentCount(playerA, "Auntie's Snitch", 1);
+    }
+
+    /*
+     * Reported bug: you can't cast something for its prowl cost if you could not afford to cast it for its normal cost. The game won't allow me to put the creature on the stack at all.
+     * It seems it is only in the case of Hunting Velociraptor and not Prowl in general.
+     * GainAbilityControlledSpellsEffect not adding AlternativeSourceCosts in time to check playable
+     */
+    @Test
+    public void test_ProwlWithGainAbilityControlledSpellsEffect() {
+        // {2}{R} Creature — Dinosaur (3/2)
+        // Dinosaur spells you cast have prowl {2}{R}.
+        addCard(Zone.BATTLEFIELD, playerA, "Hunting Velociraptor");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, "Thrasta, Tempest's Roar");
+
+        // prepare prowl condition
+        checkPlayableAbility("can't", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Thrasta", false);
+        attack(1, playerA, "Hunting Velociraptor");
+
+        checkPlayableAbility("must play", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Thrasta", true);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Thrasta, Tempest's Roar");
+        setChoice(playerA, true); // choosing to pay prowl cost
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, currentGame.getStartingLife() - 3);
+        assertPermanentCount(playerA, "Hunting Velociraptor", 1);
+        assertPermanentCount(playerA, "Thrasta, Tempest's Roar", 1);
     }
 }

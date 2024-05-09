@@ -3737,7 +3737,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // TODO: Why is the "sourceObject instanceof Permanent" in there?
         if (sourceObject != null && !(sourceObject instanceof Permanent)) {
             Ability copyAbility; // for alternative cost and reduce tries
-            for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
+            for (Ability alternateSourceCostsAbility : sourceObject.getAbilities(game)) {
                 // if cast for noMana no Alternative costs are allowed
                 if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {
                     if (((AlternativeSourceCosts) alternateSourceCostsAbility).isAvailable(ability, game)) {
