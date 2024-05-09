@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.abilities.keyword.FlashAbility;
@@ -108,11 +108,11 @@ class WeepingAngelMarbleizeEffect extends ContinuousEffectImpl {
     }
 }
 
-// Based on PhyrexianVindicatorEffect
-class WeepingAngelDamageEffect extends ReplacementEffectImpl {
+// Based on PreventDamageAndRemoveCountersEffect
+class WeepingAngelDamageEffect extends PreventionEffectImpl {
 
-    public WeepingAngelDamageEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
+    WeepingAngelDamageEffect() {
+        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, true, false);
         staticText = "If {this} would deal combat damage to a creature, " +
                 "prevent that damage and that creature's owner shuffles it into their library.";
     }
@@ -138,11 +138,6 @@ class WeepingAngelDamageEffect extends ReplacementEffectImpl {
             owner.shuffleCardsToLibrary(card, game, source);
         }
         return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
     }
 
     @Override
