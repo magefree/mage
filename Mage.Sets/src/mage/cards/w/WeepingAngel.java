@@ -66,12 +66,12 @@ public final class WeepingAngel extends CardImpl {
 // Adapted from LoseCreatureTypeSourceEffect
 class WeepingAngelMarbleizeEffect extends ContinuousEffectImpl {
     
-    public WeepingAngelMarbleizeEffect() {
+    WeepingAngelMarbleizeEffect() {
         super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         staticText = "{this} isn't a creature until end of turn.";
     }
 
-    protected WeepingAngelMarbleizeEffect(final WeepingAngelMarbleizeEffect effect) {
+    private WeepingAngelMarbleizeEffect(final WeepingAngelMarbleizeEffect effect) {
         super(effect);
     }
 
