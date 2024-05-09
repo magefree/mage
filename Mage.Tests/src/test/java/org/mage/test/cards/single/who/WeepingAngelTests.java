@@ -56,5 +56,6 @@ public class WeepingAngelTests extends CardTestPlayerBase {
 
         assertLibraryCount(playerB, "Impervious Greatwurm", 1);
         assertPermanentCount(playerB, "Impervious Greatwurm", 0);
+        assertPermanentCount(playerA, "Weeping Angel", 1);
     }
 }
