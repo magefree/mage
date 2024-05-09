@@ -143,7 +143,7 @@ class WeepingAngelDamageEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent == null || !permanent.isCreature()){
+        if (permanent == null || !permanent.isCreature(game)){
             return false;
         }
         return event.getSourceId().equals(source.getSourceId()) && ((DamagePermanentEvent) event).isCombatDamage();
