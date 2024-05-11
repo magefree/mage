@@ -227,7 +227,7 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
 
         try {
             execute();
-            
+
             Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
             if (!e.getMessage().contains("Can't find available command - attack:Lightning Rager")) {
@@ -238,6 +238,30 @@ public class DoublingSeasonTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Rite of the Raging Storm", 1);
         assertPermanentCount(playerB, "Lightning Rager", 2);
         assertTappedCount("Lightning Rager", true, 0);
+    }
+
+    @Test
+    public void test_AddCardOrderDepends() {
+        // put double season after planeswalker, so no x2 on etb
+
+        // planeswalker, 2 starting loyalty
+        // +1: Draw a card, then discard a card at random.
+        addCard(Zone.BATTLEFIELD, playerA, "Tibalt, the Fiend-Blooded");
+        addCard(Zone.BATTLEFIELD, playerA, "Doubling Season");
+
+        // 2 starting loyalty
+        // on etb: no double season effects
+        int onEtbCount = 2;
+        checkPermanentCounters("etb counters", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tibalt, the Fiend-Blooded", CounterType.LOYALTY, onEtbCount);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertCounterCount("Tibalt, the Fiend-Blooded", CounterType.LOYALTY, onEtbCount);
     }
 
     /**
