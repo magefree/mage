@@ -163,6 +163,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 319, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Isolated Chapel", 269, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("James, Wandering Dad", 31, Rarity.RARE, mage.cards.j.JamesWanderingDad.class));
+        cards.add(new SetCardInfo("Jason Bright, Glowing Prophet", 32, Rarity.RARE, mage.cards.j.JasonBrightGlowingProphet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jason Bright, Glowing Prophet", 376, Rarity.RARE, mage.cards.j.JasonBrightGlowingProphet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jason Bright, Glowing Prophet", 560, Rarity.RARE, mage.cards.j.JasonBrightGlowingProphet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jason Bright, Glowing Prophet", 904, Rarity.RARE, mage.cards.j.JasonBrightGlowingProphet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jungle Shrine", 270, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
         cards.add(new SetCardInfo("Junk Jet", 60, Rarity.RARE, mage.cards.j.JunkJet.class));
         cards.add(new SetCardInfo("Junktown", 150, Rarity.RARE, mage.cards.j.Junktown.class));
