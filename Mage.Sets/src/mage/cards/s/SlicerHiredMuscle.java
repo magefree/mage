@@ -98,6 +98,7 @@ class SlicerHiredMuscleUpkeepEffect extends OneShotEffect {
                     newController.getId());
             gainControllEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
             gainControllEffect.setText("and gains control of it");
+            game.addEffect(gainControllEffect, source);
 
             // Untap
             sourcePermanent.untap(game);
@@ -113,8 +114,6 @@ class SlicerHiredMuscleUpkeepEffect extends OneShotEffect {
                     new SimpleStaticAbility(
                             new CantBeSacrificedSourceEffect().setText("This creature can't be sacrificed")),
                     Duration.EndOfTurn).setTargetPointer(new FixedTarget(sourcePermanent, game)), source);
-
-            game.addEffect(gainControllEffect, source);
 
         } else {
             new TransformSourceEffect().apply(game, source);
