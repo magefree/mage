@@ -41,8 +41,8 @@ public final class ChandraAblaze extends CardImpl {
         this.setStartingLoyalty(5);
 
         // +1: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to any target.
-        LoyaltyAbility ability = new LoyaltyAbility(new ChandraAblazeEffect1(), 1);
-        ability.addEffect(new ChandraAblazeEffect2());
+        LoyaltyAbility ability = new LoyaltyAbility(new ChandraAblazeDiscardCardEffect(), 1);
+        ability.addEffect(new ChandraAblazeDamageEffect());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
@@ -54,7 +54,7 @@ public final class ChandraAblaze extends CardImpl {
         this.addAbility(ability);
 
         // -7: Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
-        ability = new LoyaltyAbility(new ChandraAblazeEffect5(), -7);
+        ability = new LoyaltyAbility(new ChandraAblazeCastCardsEffect(), -7);
         this.addAbility(ability);
     }
 
@@ -68,20 +68,20 @@ public final class ChandraAblaze extends CardImpl {
     }
 }
 
-class ChandraAblazeEffect1 extends OneShotEffect {
+class ChandraAblazeDiscardCardEffect extends OneShotEffect {
 
-    public ChandraAblazeEffect1() {
+    public ChandraAblazeDiscardCardEffect() {
         super(Outcome.Discard);
         this.staticText = "Discard a card";
     }
 
-    private ChandraAblazeEffect1(final ChandraAblazeEffect1 effect) {
+    private ChandraAblazeDiscardCardEffect(final ChandraAblazeDiscardCardEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChandraAblazeEffect1 copy() {
-        return new ChandraAblazeEffect1(this);
+    public ChandraAblazeDiscardCardEffect copy() {
+        return new ChandraAblazeDiscardCardEffect(this);
     }
 
     @Override
@@ -107,20 +107,20 @@ class ChandraAblazeEffect1 extends OneShotEffect {
     }
 }
 
-class ChandraAblazeEffect2 extends OneShotEffect {
+class ChandraAblazeDamageEffect extends OneShotEffect {
 
-    public ChandraAblazeEffect2() {
+    public ChandraAblazeDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "If a red card is discarded this way, {this} deals 4 damage to any target";
     }
 
-    private ChandraAblazeEffect2(final ChandraAblazeEffect2 effect) {
+    private ChandraAblazeDamageEffect(final ChandraAblazeDamageEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChandraAblazeEffect2 copy() {
-        return new ChandraAblazeEffect2(this);
+    public ChandraAblazeDamageEffect copy() {
+        return new ChandraAblazeDamageEffect(this);
     }
 
     @Override
@@ -143,7 +143,7 @@ class ChandraAblazeEffect2 extends OneShotEffect {
     }
 }
 
-class ChandraAblazeEffect5 extends OneShotEffect {
+class ChandraAblazeCastCardsEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterInstantOrSorceryCard();
 
@@ -151,18 +151,18 @@ class ChandraAblazeEffect5 extends OneShotEffect {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public ChandraAblazeEffect5() {
+    public ChandraAblazeCastCardsEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs";
     }
 
-    private ChandraAblazeEffect5(final ChandraAblazeEffect5 effect) {
+    private ChandraAblazeCastCardsEffect(final ChandraAblazeCastCardsEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChandraAblazeEffect5 copy() {
-        return new ChandraAblazeEffect5(this);
+    public ChandraAblazeCastCardsEffect copy() {
+        return new ChandraAblazeCastCardsEffect(this);
     }
 
     @Override
