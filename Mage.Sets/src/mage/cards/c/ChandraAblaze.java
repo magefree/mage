@@ -45,12 +45,14 @@ public final class ChandraAblaze extends CardImpl {
         ability.addEffect(new ChandraAblazeEffect2());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
+
         // -2: Each player discards their hand, then draws three cards.
         ability = new LoyaltyAbility(new DiscardHandAllEffect(), -2);
         Effect effect = new DrawCardAllEffect(3);
         effect.setText(", then draws three cards");
         ability.addEffect(effect);
         this.addAbility(ability);
+
         // -7: Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
         ability = new LoyaltyAbility(new ChandraAblazeEffect5(), -7);
         this.addAbility(ability);
@@ -84,6 +86,11 @@ class ChandraAblazeEffect1 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // If you activate Chandra Ablaze’s first ability, you don’t discard a card until the ability resolves.
+        // You may activate the ability even if your hand is empty. You choose a target as you activate the ability
+        // even if you have no red cards in hand at that time.
+        // (2009-10-01)
+
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetDiscard target = new TargetDiscard(player.getId());
