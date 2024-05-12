@@ -99,7 +99,7 @@ class SlicerHiredMuscleUpkeepEffect extends OneShotEffect {
             gainControllEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
             gainControllEffect.setText("and gains control of it");
             game.addEffect(gainControllEffect, source);
-
+            game.getState().processAction(game);
             // Untap
             sourcePermanent.untap(game);
 
