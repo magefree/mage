@@ -73,7 +73,7 @@ public class ChandraAblazeTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    public void test_PlusTwoAbility_Manual() {
+    public void test_MinusTwoAbility_Manual() {
         // -2: Each player discards their hand, then draws three cards.
         addCard(Zone.BATTLEFIELD, playerA, "Chandra Ablaze", 1);
         //
@@ -95,7 +95,7 @@ public class ChandraAblazeTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    public void test_PlusTwoAbility_AI_MustNotSeeOpponentHand_KeepBetterHand() {
+    public void test_MinusTwoAbility_AI_MustNotSeeOpponentHand_KeepBetterHand() {
         // AI must calc battlefield score by visible data, so it do not know opponent's hand,
         // but it is still able to cheat by look ahead in library (e.g. it "see" result of draw actions)
 
@@ -122,7 +122,7 @@ public class ChandraAblazeTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    public void test_PlusTwoAbility_AI_MustNotSeeOpponentHand_KeepWorseHand() {
+    public void test_MinusTwoAbility_AI_MustNotSeeOpponentHand_KeepWorseHand() {
         // -2: Each player discards their hand, then draws three cards.
         addCard(Zone.BATTLEFIELD, playerA, "Chandra Ablaze", 1);
         addCard(Zone.HAND, playerA, "Mountain", 1); // see prev test comments
