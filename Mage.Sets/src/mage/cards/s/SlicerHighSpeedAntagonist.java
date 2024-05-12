@@ -23,11 +23,11 @@ public final class SlicerHighSpeedAntagonist extends CardImpl {
 
     public SlicerHighSpeedAntagonist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT }, "");
-
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
+        this.color.setRed(true);
         this.nightCard = true;
 
         // Living metal
