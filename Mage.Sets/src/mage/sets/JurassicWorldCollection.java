@@ -22,8 +22,8 @@ public final class JurassicWorldCollection extends ExpansionSet {
 
         cards.add(new SetCardInfo("Blue, Loyal Raptor", 33, Rarity.RARE, mage.cards.b.BlueLoyalRaptor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blue, Loyal Raptor", 8, Rarity.RARE, mage.cards.b.BlueLoyalRaptor.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Command Tower", 26, Rarity.COMMON, mage.cards.c.CommandTower.class));
-        cards.add(new SetCardInfo("Command Tower", 26, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Command Tower", 26, Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Command Tower", "26b", Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Compy Swarm", 34, Rarity.RARE, mage.cards.c.CompySwarm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Compy Swarm", 9, Rarity.RARE, mage.cards.c.CompySwarm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cresting Mosasaurus", 2, Rarity.RARE, mage.cards.c.CrestingMosasaurus.class, NON_FULL_USE_VARIOUS));
