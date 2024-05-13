@@ -64,7 +64,11 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Death-Rattle Oni", 13, Rarity.UNCOMMON, mage.cards.d.DeathRattleOni.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Death-Rattle Oni", 197, Rarity.UNCOMMON, mage.cards.d.DeathRattleOni.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Death-Rattle Oni", 63, Rarity.UNCOMMON, mage.cards.d.DeathRattleOni.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Deification", 2, Rarity.RARE, mage.cards.d.Deification.class));
+        cards.add(new SetCardInfo("Deification", 102, Rarity.RARE, mage.cards.d.Deification.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deification", 151, Rarity.RARE, mage.cards.d.Deification.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deification", 187, Rarity.RARE, mage.cards.d.Deification.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deification", 2, Rarity.RARE, mage.cards.d.Deification.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deification", 52, Rarity.RARE, mage.cards.d.Deification.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Drannith Ruins", 100, Rarity.RARE, mage.cards.d.DrannithRuins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Drannith Ruins", 150, Rarity.RARE, mage.cards.d.DrannithRuins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Drannith Ruins", 185, Rarity.RARE, mage.cards.d.DrannithRuins.class, NON_FULL_USE_VARIOUS));
@@ -151,7 +155,11 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         cards.add(new SetCardInfo("Niv-Mizzet, Supreme", 219, Rarity.RARE, mage.cards.n.NivMizzetSupreme.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Niv-Mizzet, Supreme", 40, Rarity.RARE, mage.cards.n.NivMizzetSupreme.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Niv-Mizzet, Supreme", 90, Rarity.RARE, mage.cards.n.NivMizzetSupreme.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ob Nixilis, Captive Kingpin", 41, Rarity.MYTHIC, mage.cards.o.ObNixilisCaptiveKingpin.class));
+        cards.add(new SetCardInfo("Ob Nixilis, Captive Kingpin", 141, Rarity.MYTHIC, mage.cards.o.ObNixilisCaptiveKingpin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ob Nixilis, Captive Kingpin", 176, Rarity.MYTHIC, mage.cards.o.ObNixilisCaptiveKingpin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ob Nixilis, Captive Kingpin", 220, Rarity.MYTHIC, mage.cards.o.ObNixilisCaptiveKingpin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ob Nixilis, Captive Kingpin", 41, Rarity.MYTHIC, mage.cards.o.ObNixilisCaptiveKingpin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ob Nixilis, Captive Kingpin", 91, Rarity.MYTHIC, mage.cards.o.ObNixilisCaptiveKingpin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Open the Way", 123, Rarity.RARE, mage.cards.o.OpenTheWay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Open the Way", 163, Rarity.RARE, mage.cards.o.OpenTheWay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Open the Way", 23, Rarity.RARE, mage.cards.o.OpenTheWay.class, NON_FULL_USE_VARIOUS));
