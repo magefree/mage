@@ -140,21 +140,13 @@ public class CardPluginImpl implements CardPlugin {
         //
         for (MageCard card : cards.values()) {
             MagePermanent perm = (MagePermanent) card.getMainPanel(); // all cards must be MagePermanent on battlefield
-            boolean isAToken = perm.getOriginal().getName().toLowerCase().endsWith(" token");
 
             if (!rowType.isType(perm)) {
                 continue;
             }
-            if ((!perm.isLand() && !isAToken)
+            if ((!perm.isLand() && !perm.isToken())
                     || perm.getOriginalPermanent().isAttachedToPermanent()
-                    || (perm.isCreature() && !isAToken)) {
-                LOGGER.info(
-                        perm.getOriginal().getName() + " perm.getOriginalPermanent().isAttachedToPermanent(): "
-                                + perm.getOriginalPermanent().isAttachedToPermanent());
-                LOGGER.info(perm.getOriginal().getName() + " (!perm.isLand() && !isAToken): "
-                        + (!perm.isLand() && !isAToken));
-                LOGGER.info(perm.getOriginal().getName() + " (perm.isCreature() && !perm.isToken()): "
-                        + (perm.isCreature() && !perm.isToken()));
+                    || (perm.isCreature() && !perm.isToken())) {
                 Stack newStack = new Stack();
                 newStack.add(perm);
                 workingRow.add(newStack);
@@ -163,7 +155,7 @@ public class CardPluginImpl implements CardPlugin {
 
             int insertIndex = -1;
 
-            // Find already added lands with the same name.
+            // Find already added tokens/land with the same name.
             for (int i = 0, n = workingRow.size(); i < n; i++) {
                 // stack contains main card panel, but for any size/order manipulation you must
                 // use top layer panel
@@ -172,7 +164,7 @@ public class CardPluginImpl implements CardPlugin {
                 if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())) {
 
                     if (!empty(firstPanelPerm.getOriginalPermanent().getAttachments())) {
-                        // Put this land to the left of lands with the same name and attachments.
+                        // Put this card to the left of cards with the same name and attachments.
                         insertIndex = i;
                         break;
                     }
@@ -184,7 +176,7 @@ public class CardPluginImpl implements CardPlugin {
                     }
 
                     if (!empty(perm.getOriginalPermanent().getAttachments()) || stack.size() == landStackMax) {
-                        // If this land has attachments or the stack is full, put it to the right.
+                        // If this card has attachments or the stack is full, put it to the right.
                         insertIndex = i + 1;
                         continue;
                     }
