@@ -58,7 +58,8 @@ public class CardPluginImpl implements CardPlugin {
     private static final int landStackMax = 5;
     private int cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();
     private int cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();
-    // card width increment for auto-size searching (bigger value - faster draw speed on screen size, but not as accurate)
+    // card width increment for auto-size searching (bigger value - faster draw
+    // speed on screen size, but not as accurate)
     private static final int CARD_WIDTH_AUTO_FIT_INCREMENT = 10;
 
     private static final boolean stackVertical = false;
@@ -101,12 +102,15 @@ public class CardPluginImpl implements CardPlugin {
      * Temporary card rendering shim. Split card rendering isn't implemented
      * yet, so use old component based rendering for the split cards.
      */
-    private CardPanel makeCardPanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback, boolean isFoil, Dimension dimension, int renderMode, boolean needFullPermanentRender) {
+    private CardPanel makeCardPanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback,
+            boolean isFoil, Dimension dimension, int renderMode, boolean needFullPermanentRender) {
         switch (renderMode) {
             case 0:
-                return new CardPanelRenderModeMTGO(view, gameId, loadImage, callback, isFoil, dimension, needFullPermanentRender);
+                return new CardPanelRenderModeMTGO(view, gameId, loadImage, callback, isFoil, dimension,
+                        needFullPermanentRender);
             case 1:
-                return new CardPanelRenderModeImage(view, gameId, loadImage, callback, isFoil, dimension, needFullPermanentRender);
+                return new CardPanelRenderModeImage(view, gameId, loadImage, callback, isFoil, dimension,
+                        needFullPermanentRender);
             default:
                 throw new IllegalStateException("Unknown render mode " + renderMode);
 
@@ -114,54 +118,56 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public MageCard getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
-        CardPanel cardPanel = makeCardPanel(permanent, gameId, loadImage, callback, false, dimension, renderMode, needFullPermanentRender);
+    public MageCard getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback,
+            boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
+        CardPanel cardPanel = makeCardPanel(permanent, gameId, loadImage, callback, false, dimension, renderMode,
+                needFullPermanentRender);
         cardPanel.setShowCastingCost(true);
         return cardPanel;
     }
 
     @Override
-    public MageCard getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
-        CardPanel cardPanel = makeCardPanel(cardView, gameId, loadImage, callback, false, dimension, renderMode, needFullPermanentRender);
+    public MageCard getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback,
+            boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
+        CardPanel cardPanel = makeCardPanel(cardView, gameId, loadImage, callback, false, dimension, renderMode,
+                needFullPermanentRender);
         cardPanel.setShowCastingCost(true);
         return cardPanel;
     }
 
-    @Override
-    public int sortPermanents(Map<String, JComponent> ui, Map<UUID, MageCard> cards, boolean nonPermanentsOwnRow, boolean topPanel) {
-        //requires to find out is position have been changed that includes:
-        //adding/removing permanents, type change
-
-        // must return new height, so battlefield scrolls can be enabled on too big sizes
-
-        if (ui == null) {
-            throw new RuntimeException("No battlefield ui for layout");
-        }
-
-        JLayeredPane battlefieldPanel = (JLayeredPane) ui.get("battlefieldPanel");
-        JComponent cardsPanel = ui.get("jPanel");
-        JScrollPane scrollPane = (JScrollPane) ui.get("scrollPane");
-        if (battlefieldPanel == null || cardsPanel == null || scrollPane == null) {
-            throw new RuntimeException("No battlefield components for layout");
-        }
-
-        Row rowAllLands = new Row();
-
+    private Row stack_things(Map<UUID, MageCard> cards, Row workingRow, RowType rowType) {
         outerLoop:
         //
         for (MageCard card : cards.values()) {
             MagePermanent perm = (MagePermanent) card.getMainPanel(); // all cards must be MagePermanent on battlefield
+            boolean isAToken = perm.getOriginal().getName().toLowerCase().endsWith(" token");
 
-            if (!perm.isLand() || perm.isCreature()) {
+            if (!rowType.isType(perm)) {
+                continue;
+            }
+            if ((!perm.isLand() && !isAToken)
+                    || perm.getOriginalPermanent().isAttachedToPermanent()
+                    || (perm.isCreature() && !isAToken)) {
+                LOGGER.info(
+                        perm.getOriginal().getName() + " perm.getOriginalPermanent().isAttachedToPermanent(): "
+                                + perm.getOriginalPermanent().isAttachedToPermanent());
+                LOGGER.info(perm.getOriginal().getName() + " (!perm.isLand() && !isAToken): "
+                        + (!perm.isLand() && !isAToken));
+                LOGGER.info(perm.getOriginal().getName() + " (perm.isCreature() && !perm.isToken()): "
+                        + (perm.isCreature() && !perm.isToken()));
+                Stack newStack = new Stack();
+                newStack.add(perm);
+                workingRow.add(newStack);
                 continue;
             }
 
             int insertIndex = -1;
 
             // Find already added lands with the same name.
-            for (int i = 0, n = rowAllLands.size(); i < n; i++) {
-                // stack contains main card panel, but for any size/order manipulation you must use top layer panel
-                Stack stack = rowAllLands.get(i);
+            for (int i = 0, n = workingRow.size(); i < n; i++) {
+                // stack contains main card panel, but for any size/order manipulation you must
+                // use top layer panel
+                Stack stack = workingRow.get(i);
                 MagePermanent firstPanelPerm = stack.get(0);
                 if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())) {
 
@@ -209,11 +215,42 @@ public class CardPluginImpl implements CardPlugin {
             }
 
             stack.add(perm);
-            rowAllLands.add(insertIndex == -1 ? rowAllLands.size() : insertIndex, stack);
+            workingRow.add(insertIndex == -1 ? workingRow.size() : insertIndex, stack);
+
         }
 
-        Row rowAllCreatures = new Row(cards, RowType.creature);
-        Row rowAllOthers = new Row(cards, RowType.other);
+        return workingRow;
+    }
+
+    @Override
+    public int sortPermanents(Map<String, JComponent> ui, Map<UUID, MageCard> cards, boolean nonPermanentsOwnRow,
+            boolean topPanel) {
+        // requires to find out is position have been changed that includes:
+        // adding/removing permanents, type change
+
+        // must return new height, so battlefield scrolls can be enabled on too big
+        // sizes
+
+        if (ui == null) {
+            throw new RuntimeException("No battlefield ui for layout");
+        }
+
+        JLayeredPane battlefieldPanel = (JLayeredPane) ui.get("battlefieldPanel");
+        JComponent cardsPanel = ui.get("jPanel");
+        JScrollPane scrollPane = (JScrollPane) ui.get("scrollPane");
+        if (battlefieldPanel == null || cardsPanel == null || scrollPane == null) {
+            throw new RuntimeException("No battlefield components for layout");
+        }
+
+        Row rowAllLands = new Row();
+
+        stack_things(cards, rowAllLands, RowType.land);
+
+        Row rowAllCreatures = new Row();
+        stack_things(cards, rowAllCreatures, RowType.creature);
+        // Row rowAllOthers = new Row(cards, RowType.other);
+        Row rowAllOthers = new Row();
+        stack_things(cards, rowAllOthers, RowType.other);
         Row rowAllAttached = new Row(cards, RowType.attached);
 
         boolean othersOnTheRight = true;
@@ -233,7 +270,8 @@ public class CardPluginImpl implements CardPlugin {
             // calculate values based on the card size that is changing with every iteration
             cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
             extraCardSpacingX = Math.round(cardWidth * EXTRA_CARD_SPACING_X);
-            cardSpacingX = cardHeight - cardWidth + extraCardSpacingX; // need space for tap animation (horizontal position)
+            cardSpacingX = cardHeight - cardWidth + extraCardSpacingX; // need space for tap animation (horizontal
+                                                                       // position)
             cardSpacingY = Math.round(cardHeight * CARD_SPACING_Y);
             stackSpacingX = stackVertical ? 0 : Math.round(cardWidth * STACK_SPACING_X);
             stackSpacingY = Math.round(cardHeight * STACK_SPACING_Y);
@@ -316,7 +354,8 @@ public class CardPluginImpl implements CardPlugin {
                     }
                 }
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
-                    MagePermanent panelPerm = stack.get(panelIndex); // it's original card panel, but you must change top layer
+                    MagePermanent panelPerm = stack.get(panelIndex); // it's original card panel, but you must change
+                                                                     // top layer
                     int stackPosition = panelCount - panelIndex - 1;
                     if (cardsPanel != null) {
                         cardsPanel.setComponentZOrder(panelPerm.getTopPanelRef(), panelIndex);
@@ -325,7 +364,8 @@ public class CardPluginImpl implements CardPlugin {
                     int panelY = y + (stackPosition * stackSpacingY);
                     try {
                         // may cause:
-                        // java.lang.IllegalArgumentException: illegal component position 26 should be less then 26
+                        // java.lang.IllegalArgumentException: illegal component position 26 should be
+                        // less then 26
                         battlefieldPanel.moveToFront(panelPerm.getTopPanelRef());
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -357,7 +397,8 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     private int wrap(Row sourceRow, List<Row> rows, int insertIndex) {
-        // The cards are sure to fit (with vertical scrolling) at the minimum card width.
+        // The cards are sure to fit (with vertical scrolling) at the minimum card
+        // width.
         boolean allowHeightOverflow = (cardWidth <= cardWidthMin);
 
         Row currentRow = new Row();
@@ -420,7 +461,8 @@ public class CardPluginImpl implements CardPlugin {
         return height - cardSpacingY + GUTTER_Y * 2;
     }
 
-    private AttachmentLayoutInfos calculateNeededNumberOfVerticalColumns(int currentCol, Map<UUID, MageCard> cards, MageCard cardWithAttachments) {
+    private AttachmentLayoutInfos calculateNeededNumberOfVerticalColumns(int currentCol, Map<UUID, MageCard> cards,
+            MageCard cardWithAttachments) {
         int maxCol = ++currentCol;
         int attachments = 0;
         MagePermanent permWithAttachments = (MagePermanent) cardWithAttachments.getMainPanel();
@@ -429,8 +471,10 @@ public class CardPluginImpl implements CardPlugin {
             if (attachedCard != null) {
                 attachments++;
                 MagePermanent attachedPerm = (MagePermanent) attachedCard.getMainPanel();
-                if (attachedPerm.getOriginalPermanent().getAttachments() != null && !attachedPerm.getOriginalPermanent().getAttachments().isEmpty()) {
-                    AttachmentLayoutInfos attachmentLayoutInfos = calculateNeededNumberOfVerticalColumns(currentCol, cards, attachedCard);
+                if (attachedPerm.getOriginalPermanent().getAttachments() != null
+                        && !attachedPerm.getOriginalPermanent().getAttachments().isEmpty()) {
+                    AttachmentLayoutInfos attachmentLayoutInfos = calculateNeededNumberOfVerticalColumns(currentCol,
+                            cards, attachedCard);
                     if (attachmentLayoutInfos.getColumns() > maxCol) {
                         maxCol = attachmentLayoutInfos.getColumns();
                         attachments += attachmentLayoutInfos.getAttachments();
@@ -620,11 +664,12 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         /*
-        it = new CardFrames(imagesDir); // TODO: delete frames download (not need now)
-        for (DownloadJob job : it) {
-            g.getDownloader().add(job);
-        }
-        */
+         * it = new CardFrames(imagesDir); // TODO: delete frames download (not need
+         * now)
+         * for (DownloadJob job : it) {
+         * g.getDownloader().add(job);
+         * }
+         */
 
         jobs = new DirectLinksForDownload();
         for (DownloadJob job : jobs) {
