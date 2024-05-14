@@ -147,7 +147,7 @@ public class CardPluginImpl implements CardPlugin {
 
             if ((!perm.isLand() && !perm.isToken())
                     || perm.getOriginalPermanent().isAttachedToPermanent()
-                    || (perm.isCreature() && !perm.isToken())) {
+                    || (perm.isCreature())) {
                 Stack newStack = new Stack();
                 newStack.add(perm);
                 workingRow.add(newStack);
