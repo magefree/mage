@@ -144,6 +144,7 @@ public class CardPluginImpl implements CardPlugin {
             if (!rowType.isType(perm)) {
                 continue;
             }
+
             if ((!perm.isLand() && !perm.isToken())
                     || perm.getOriginalPermanent().isAttachedToPermanent()
                     || (perm.isCreature() && !perm.isToken())) {
@@ -161,7 +162,9 @@ public class CardPluginImpl implements CardPlugin {
                 // use top layer panel
                 Stack stack = workingRow.get(i);
                 MagePermanent firstPanelPerm = stack.get(0);
-                if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())) {
+                if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
+                        && firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm.getOriginalPermanent()
+                                .hasSummoningSickness()) {
 
                     if (!empty(firstPanelPerm.getOriginalPermanent().getAttachments())) {
                         // Put this land to the left of lands with the same name and attachments.
