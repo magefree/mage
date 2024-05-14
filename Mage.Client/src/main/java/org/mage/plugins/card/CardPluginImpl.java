@@ -55,7 +55,7 @@ public class CardPluginImpl implements CardPlugin {
     private static final float STACK_SPACING_Y = 0.10f;
     private static final float ATTACHMENT_SPACING_Y = 0.13f;
 
-    private static final int landStackMax = 5;
+    private static final int cardStackMax = 5;
     private int cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();
     private int cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();
     // card width increment for auto-size searching (bigger value - faster draw
@@ -135,7 +135,7 @@ public class CardPluginImpl implements CardPlugin {
         return cardPanel;
     }
 
-    private Row stack_things(Map<UUID, MageCard> cards, Row workingRow, RowType rowType) {
+    private Row createStacks(Map<UUID, MageCard> cards, Row workingRow, RowType rowType) {
         outerLoop:
         //
         for (MageCard card : cards.values()) {
@@ -155,7 +155,7 @@ public class CardPluginImpl implements CardPlugin {
 
             int insertIndex = -1;
 
-            // Find already added tokens/land with the same name.
+            // Find already added to with the same name.
             for (int i = 0, n = workingRow.size(); i < n; i++) {
                 // stack contains main card panel, but for any size/order manipulation you must
                 // use top layer panel
@@ -164,7 +164,7 @@ public class CardPluginImpl implements CardPlugin {
                 if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())) {
 
                     if (!empty(firstPanelPerm.getOriginalPermanent().getAttachments())) {
-                        // Put this card to the left of cards with the same name and attachments.
+                        // Put this land to the left of lands with the same name and attachments.
                         insertIndex = i;
                         break;
                     }
@@ -175,8 +175,8 @@ public class CardPluginImpl implements CardPlugin {
                         break;
                     }
 
-                    if (!empty(perm.getOriginalPermanent().getAttachments()) || stack.size() == landStackMax) {
-                        // If this card has attachments or the stack is full, put it to the right.
+                    if (!empty(perm.getOriginalPermanent().getAttachments()) || stack.size() == cardStackMax) {
+                        // If this land has attachments or the stack is full, put it to the right.
                         insertIndex = i + 1;
                         continue;
                     }
@@ -235,14 +235,11 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         Row rowAllLands = new Row();
-
-        stack_things(cards, rowAllLands, RowType.land);
-
+        createStacks(cards, rowAllLands, RowType.land);
         Row rowAllCreatures = new Row();
-        stack_things(cards, rowAllCreatures, RowType.creature);
-        // Row rowAllOthers = new Row(cards, RowType.other);
+        createStacks(cards, rowAllCreatures, RowType.creature);
         Row rowAllOthers = new Row();
-        stack_things(cards, rowAllOthers, RowType.other);
+        createStacks(cards, rowAllOthers, RowType.other);
         Row rowAllAttached = new Row(cards, RowType.attached);
 
         boolean othersOnTheRight = true;
