@@ -129,6 +129,8 @@
 |Generate|EMBLEM:PH17|Emblem Inzerva|||InzervaMasterOfInsightsEmblem|
 |Generate|EMBLEM:LCC|Emblem Sorin|||SorinLordOfInnistradEmblem|
 |Generate|EMBLEM:RVR|Emblem Domri|||DomriRadeEmblem|
+|Generate|EMBLEM:SCD|Emblem Nixilis|||ObNixilisReignitedEmblem|
+|Generate|EMBLEM:SCD|Emblem Sarkhan|||SarkhanTheDragonspeakerEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2277,3 +2279,30 @@
 |Generate|TOK:OTP|Human Rogue|||OutlawsMerrimentRogueToken|
 |Generate|TOK:OTP|Human Warrior|||OutlawsMerrimentWarriorToken|
 |Generate|TOK:OTP|Pest|||Pest11GainLifeToken|
+
+# SCD
+|Generate|TOK:SCD|Beast|||BeastToken|
+|Generate|TOK:SCD|Bird|||BirdToken|
+|Generate|TOK:SCD|Cat|||CatToken|
+|Generate|TOK:SCD|Cat Beast|||CatBeastToken|
+|Generate|TOK:SCD|Cat Bird|||CatBirdToken|
+|Generate|TOK:SCD|Demon|||DemonFlyingToken|
+|Generate|TOK:SCD|Dragon|||DragonToken2|
+|Generate|TOK:SCD|Eldrazi|||EldraziToken|
+|Generate|TOK:SCD|Elephant|||ElephantToken|
+|Generate|TOK:SCD|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:SCD|Faerie|||FaerieToken|
+|Generate|TOK:SCD|Human Warrior|||HumanWarriorToken|
+|Generate|TOK:SCD|Insect|||InsectDeathToken|
+|Generate|TOK:SCD|Karox Bladewing|||KaroxBladewingDragonToken|
+|Generate|TOK:SCD|Ogre|||OgreToken|
+|Generate|TOK:SCD|Pegasus|||PegasusToken|
+|Generate|TOK:SCD|Saproling|||SaprolingToken|
+|Generate|TOK:SCD|Soldier|||SoldierLifelinkToken|
+|Generate|TOK:SCD|Spirit|||SpiritWhiteToken|
+|Generate|TOK:SCD|Thopter|1||ThopterColorlessToken|
+|Generate|TOK:SCD|Thopter|2||ThopterToken|
+|Generate|TOK:SCD|Treasure|||TreasureToken|
+|Generate|TOK:SCD|Zombie|||ZombieToken|
+|Generate|TOK:SCD|Zombie Army|||ZombieArmyToken|
+|Generate|TOK:SCD|Zombie Knight|||ZombieKnightToken|

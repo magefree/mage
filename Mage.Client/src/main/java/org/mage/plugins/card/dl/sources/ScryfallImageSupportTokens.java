@@ -2342,6 +2342,35 @@ public class ScryfallImageSupportTokens {
             put("OTP/Human Warrior", "https://api.scryfall.com/cards/totp/3/en?format=image");
             put("OTP/Pest", "https://api.scryfall.com/cards/totp/4/en?format=image");
 
+             // SCD
+            put("SCD/Beast", "https://api.scryfall.com/cards/tscd/19/en?format=image");
+            put("SCD/Bird", "https://api.scryfall.com/cards/tscd/2/en?format=image");
+            put("SCD/Cat", "https://api.scryfall.com/cards/tscd/3/en?format=image");
+            put("SCD/Cat Beast", "https://api.scryfall.com/cards/tscd/4/en?format=image");
+            put("SCD/Cat Bird", "https://api.scryfall.com/cards/tscd/5/en?format=image");
+            put("SCD/Demon", "https://api.scryfall.com/cards/tscd/12/en?format=image");
+            put("SCD/Dragon", "https://api.scryfall.com/cards/tscd/16/en?format=image");
+            put("SCD/Eldrazi", "https://api.scryfall.com/cards/tscd/1/en?format=image");
+            put("SCD/Elephant", "https://api.scryfall.com/cards/tscd/20/en?format=image");
+            put("SCD/Elf Warrior", "https://api.scryfall.com/cards/tscd/21/en?format=image");
+            put("SCD/Faerie", "https://api.scryfall.com/cards/tscd/10/en?format=image");
+            put("SCD/Human Warrior", "https://api.scryfall.com/cards/tscd/6/en?format=image");
+            put("SCD/Insect", "https://api.scryfall.com/cards/tscd/22/en?format=image");
+            put("SCD/Karox Bladewing", "https://api.scryfall.com/cards/tscd/17/en?format=image");
+            put("SCD/Emblem Nixilis", "https://api.scryfall.com/cards/tscd/26/en?format=image");
+            put("SCD/Ogre", "https://api.scryfall.com/cards/tscd/18/en?format=image");
+            put("SCD/Pegasus", "https://api.scryfall.com/cards/tscd/7/en?format=image");
+            put("SCD/Saproling", "https://api.scryfall.com/cards/tscd/23/en?format=image");
+            put("SCD/Emblem Sarkhan", "https://api.scryfall.com/cards/tscd/27/en?format=image");
+            put("SCD/Soldier", "https://api.scryfall.com/cards/tscd/8/en?format=image");
+            put("SCD/Spirit", "https://api.scryfall.com/cards/tscd/9/en?format=image");
+            put("SCD/Thopter/1", "https://api.scryfall.com/cards/tscd/24/en?format=image");
+            put("SCD/Thopter/2", "https://api.scryfall.com/cards/tscd/11/en?format=image");
+            put("SCD/Treasure", "https://api.scryfall.com/cards/tscd/25/en?format=image");
+            put("SCD/Zombie", "https://api.scryfall.com/cards/tscd/13/en?format=image");
+            put("SCD/Zombie Army", "https://api.scryfall.com/cards/tscd/14/en?format=image");
+            put("SCD/Zombie Knight", "https://api.scryfall.com/cards/tscd/15/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
