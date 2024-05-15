@@ -147,7 +147,7 @@ public class CardPluginImpl implements CardPlugin {
 
             if ((!perm.isLand() && !perm.isToken())
                     || perm.getOriginalPermanent().isAttachedToPermanent()
-                    || (perm.isCreature())) {
+                    || (perm.isCreature() && !perm.isToken())) {
                 Stack newStack = new Stack();
                 newStack.add(perm);
                 workingRow.add(newStack);
@@ -155,40 +155,85 @@ public class CardPluginImpl implements CardPlugin {
             }
 
             int insertIndex = -1;
+            int cardPower = perm.getOriginal().getOriginalPower() != null
+                    ? perm.getOriginal().getOriginalPower().getValue()
+                    : 0;
+            int cardToughness = perm.getOriginal().getOriginalToughness() != null
+                    ? perm.getOriginalPermanent().getOriginalToughness().getValue()
+                    : 0;
+            List<CounterView> cardCounters = perm.getOriginalPermanent().getCounters() != null
+                    ? perm.getOriginalPermanent().getCounters()
+                    : Collections.emptyList();
 
+            String cardAbilities = perm.getToolTipText() != null ? perm.getToolTipText() : "";
+            LOGGER.info("Card abilities: " + cardAbilities);
             // Find already added to with the same name.
+            // LOGGER.info(perm.getName() + "\nperm.getOriginal().getPower(): " +
+            // perm.getOriginal().getPower()
+            // + "\nperm.getOriginalPermanent().getPower(): " +
+            // perm.getOriginalPermanent().getPower()
+            // + "\nperm.getOriginalPermanent().getOriginalPower(): "
+            // + perm.getOriginalPermanent().getOriginalPower() +
+            // "\nperm.getOriginal().getOriginalPower()"
+            // + perm.getOriginal().getOriginalPower() +
+            // "\nperm.getOriginal().getOriginalPower().getValue()"
+            // + perm.getOriginal().getOriginalPower().getValue() +
+            // "\nperm.getOriginalPermanent().getOriginalPower().getValue()"
+            // + perm.getOriginalPermanent().getOriginalPower().getValue());
+
             for (int i = 0, n = workingRow.size(); i < n; i++) {
                 // stack contains main card panel, but for any size/order manipulation you must
                 // use top layer panel
                 Stack stack = workingRow.get(i);
                 MagePermanent firstPanelPerm = stack.get(0);
+
+                int stackPower = firstPanelPerm.getOriginal().getOriginalPower() != null
+                        ? firstPanelPerm.getOriginal().getOriginalPower().getValue()
+                        : 0;
+                int stackToughness = firstPanelPerm.getOriginal().getOriginalToughness() != null
+                        ? firstPanelPerm.getOriginal().getOriginalToughness().getValue()
+                        : 0;
+                List<CounterView> stackCounters = firstPanelPerm.getOriginalPermanent().getCounters() != null
+                        ? firstPanelPerm.getOriginalPermanent().getCounters()
+                        : Collections.emptyList();
+
+                String stackAbilities = firstPanelPerm.getToolTipText() != null ? firstPanelPerm.getToolTipText()
+                        : "";
+
                 if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
+                        && stackPower == cardPower && stackToughness == cardToughness
+                        && stackAbilities.equals(cardAbilities)
+                        && stackCounters.equals(cardCounters)
                         && firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm.getOriginalPermanent()
                                 .hasSummoningSickness()) {
+                    // LOGGER.info("Found same card: " + firstPanelPerm.getOriginal().getName() + "
+                    // power: " + stackPower
+                    // + " toughness: " + stackToughness + " counters: " + cardCounters);
 
                     if (!empty(firstPanelPerm.getOriginalPermanent().getAttachments())) {
                         // Put this land to the left of lands with the same name and attachments.
                         insertIndex = i;
                         break;
                     }
-                    List<CounterView> counters = firstPanelPerm.getOriginalPermanent().getCounters();
-                    if (counters != null && !counters.isEmpty()) {
-                        // don't put to first panel if it has counters
-                        insertIndex = i;
-                        break;
-                    }
+                    // List<CounterView> counters =
+                    // firstPanelPerm.getOriginalPermanent().getCounters();
+                    // if (counters != null && !counters.isEmpty()) {
+                    // // don't put to first panel if it has counters
+                    // insertIndex = i;
+                    // break;
+                    // }
 
                     if (!empty(perm.getOriginalPermanent().getAttachments()) || stack.size() == cardStackMax) {
                         // If this land has attachments or the stack is full, put it to the right.
                         insertIndex = i + 1;
                         continue;
                     }
-                    counters = perm.getOriginalPermanent().getCounters();
-                    if (counters != null && !counters.isEmpty()) {
-                        // if a land has counter, put it to the right
-                        insertIndex = i + 1;
-                        continue;
-                    }
+                    // counters = perm.getOriginalPermanent().getCounters();
+                    // if (counters != null && !counters.isEmpty()) {
+                    // // if a land has counter, put it to the right
+                    // insertIndex = i + 1;
+                    // continue;
+                    // }
                     // Add to stack.
                     stack.add(0, perm);
                     continue outerLoop;
