@@ -140,13 +140,11 @@ public class CardPluginImpl implements CardPlugin {
         for (MageCard card : cards.values()) {
             MagePermanent perm = (MagePermanent) card.getMainPanel(); // all cards must be MagePermanent on battlefield
 
-            if (!rowType.isType(perm)) {
+            if (!rowType.isType(perm) || perm.getOriginalPermanent().isAttachedToPermanent()) {
                 continue;
             }
 
-            if ((!perm.isLand() && !perm.isToken())
-                    || perm.getOriginalPermanent().isAttachedToPermanent()
-                    || (perm.isCreature() && !perm.isToken())) {
+            if ((!perm.isLand() && !perm.isToken()) || (perm.isCreature() && !perm.isToken())) {
                 Stack newStack = new Stack();
                 newStack.add(perm);
                 workingRow.add(newStack);
@@ -191,8 +189,8 @@ public class CardPluginImpl implements CardPlugin {
                         && stackPower == cardPower && stackToughness == cardToughness
                         && stackAbilities.equals(cardAbilities)
                         && stackCounters.equals(cardCounters)
-                        && firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm.getOriginalPermanent()
-                                .hasSummoningSickness()) {
+                        && (!perm.isCreature() || firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm
+                                .getOriginalPermanent().hasSummoningSickness())) {
 
                     if (!empty(firstPanelPerm.getOriginalPermanent().getAttachments())) {
                         // Put this land to the left of lands with the same name and attachments.
