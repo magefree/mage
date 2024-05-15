@@ -163,10 +163,10 @@ public class CardPluginImpl implements CardPlugin {
             List<CounterView> cardCounters = perm.getOriginalPermanent().getCounters() != null
                     ? perm.getOriginalPermanent().getCounters()
                     : Collections.emptyList();
-
             List<String> cardAbilities = perm.getOriginal().getRules() != null ? perm.getOriginal().getRules()
                     : new ArrayList<>();
 
+            // Find already added to with the same name.
             for (int i = 0, n = workingRow.size(); i < n; i++) {
                 // stack contains main card panel, but for any size/order manipulation you must
                 // use top layer panel
