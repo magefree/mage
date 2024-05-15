@@ -113,7 +113,6 @@ public class CardPluginImpl implements CardPlugin {
                         needFullPermanentRender);
             default:
                 throw new IllegalStateException("Unknown render mode " + renderMode);
-
         }
     }
 
@@ -165,21 +164,8 @@ public class CardPluginImpl implements CardPlugin {
                     ? perm.getOriginalPermanent().getCounters()
                     : Collections.emptyList();
 
-            String cardAbilities = perm.getToolTipText() != null ? perm.getToolTipText() : "";
-            LOGGER.info("Card abilities: " + cardAbilities);
-            // Find already added to with the same name.
-            // LOGGER.info(perm.getName() + "\nperm.getOriginal().getPower(): " +
-            // perm.getOriginal().getPower()
-            // + "\nperm.getOriginalPermanent().getPower(): " +
-            // perm.getOriginalPermanent().getPower()
-            // + "\nperm.getOriginalPermanent().getOriginalPower(): "
-            // + perm.getOriginalPermanent().getOriginalPower() +
-            // "\nperm.getOriginal().getOriginalPower()"
-            // + perm.getOriginal().getOriginalPower() +
-            // "\nperm.getOriginal().getOriginalPower().getValue()"
-            // + perm.getOriginal().getOriginalPower().getValue() +
-            // "\nperm.getOriginalPermanent().getOriginalPower().getValue()"
-            // + perm.getOriginalPermanent().getOriginalPower().getValue());
+            List<String> cardAbilities = perm.getOriginal().getRules() != null ? perm.getOriginal().getRules()
+                    : new ArrayList<>();
 
             for (int i = 0, n = workingRow.size(); i < n; i++) {
                 // stack contains main card panel, but for any size/order manipulation you must
@@ -197,8 +183,9 @@ public class CardPluginImpl implements CardPlugin {
                         ? firstPanelPerm.getOriginalPermanent().getCounters()
                         : Collections.emptyList();
 
-                String stackAbilities = firstPanelPerm.getToolTipText() != null ? firstPanelPerm.getToolTipText()
-                        : "";
+                List<String> stackAbilities = firstPanelPerm.getOriginal().getRules() != null
+                        ? firstPanelPerm.getOriginal().getRules()
+                        : new ArrayList<>();
 
                 if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
                         && stackPower == cardPower && stackToughness == cardToughness
@@ -206,34 +193,19 @@ public class CardPluginImpl implements CardPlugin {
                         && stackCounters.equals(cardCounters)
                         && firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm.getOriginalPermanent()
                                 .hasSummoningSickness()) {
-                    // LOGGER.info("Found same card: " + firstPanelPerm.getOriginal().getName() + "
-                    // power: " + stackPower
-                    // + " toughness: " + stackToughness + " counters: " + cardCounters);
 
                     if (!empty(firstPanelPerm.getOriginalPermanent().getAttachments())) {
                         // Put this land to the left of lands with the same name and attachments.
                         insertIndex = i;
                         break;
                     }
-                    // List<CounterView> counters =
-                    // firstPanelPerm.getOriginalPermanent().getCounters();
-                    // if (counters != null && !counters.isEmpty()) {
-                    // // don't put to first panel if it has counters
-                    // insertIndex = i;
-                    // break;
-                    // }
 
                     if (!empty(perm.getOriginalPermanent().getAttachments()) || stack.size() == cardStackMax) {
                         // If this land has attachments or the stack is full, put it to the right.
                         insertIndex = i + 1;
                         continue;
                     }
-                    // counters = perm.getOriginalPermanent().getCounters();
-                    // if (counters != null && !counters.isEmpty()) {
-                    // // if a land has counter, put it to the right
-                    // insertIndex = i + 1;
-                    // continue;
-                    // }
+
                     // Add to stack.
                     stack.add(0, perm);
                     continue outerLoop;
