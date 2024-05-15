@@ -141,13 +141,11 @@ public class CardPluginImpl implements CardPlugin {
         for (MageCard card : cards.values()) {
             MagePermanent perm = (MagePermanent) card.getMainPanel(); // all cards must be MagePermanent on battlefield
 
-            if (!rowType.isType(perm)) {
+            if (!rowType.isType(perm) || perm.getOriginalPermanent().isAttachedToPermanent()) {
                 continue;
             }
 
-            if ((!perm.isLand() && !perm.isToken())
-                    || perm.getOriginalPermanent().isAttachedToPermanent()
-                    || (perm.isCreature())) {
+            if ((!perm.isLand() && !perm.isToken()) || (perm.isCreature())) {
                 Stack newStack = new Stack();
                 newStack.add(perm);
                 workingRow.add(newStack);
@@ -162,9 +160,11 @@ public class CardPluginImpl implements CardPlugin {
                 // use top layer panel
                 Stack stack = workingRow.get(i);
                 MagePermanent firstPanelPerm = stack.get(0);
+
+                // Check the names are equal and are creatures with the same summoning sickness
                 if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
-                        && firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm.getOriginalPermanent()
-                                .hasSummoningSickness()) {
+                        && (!perm.isCreature() || firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm
+                                .getOriginalPermanent().hasSummoningSickness())) {
 
                     if (!empty(firstPanelPerm.getOriginalPermanent().getAttachments())) {
                         // Put this land to the left of lands with the same name and attachments.
