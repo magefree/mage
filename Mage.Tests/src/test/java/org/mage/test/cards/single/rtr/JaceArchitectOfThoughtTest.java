@@ -23,6 +23,8 @@ public class JaceArchitectOfThoughtTest extends CardTestPlayerBase {
 
     @Test
     public void testAbility1normal() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Jace, Architect of Thought");
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
@@ -44,6 +46,8 @@ public class JaceArchitectOfThoughtTest extends CardTestPlayerBase {
 
     @Test
     public void testAbilit1lastOnlyUntilNextTurn() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Jace, Architect of Thought");
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
@@ -69,6 +73,8 @@ public class JaceArchitectOfThoughtTest extends CardTestPlayerBase {
 
     @Test
     public void testAbility1AfterJacesWasExiled() {
+        setStrictChooseMode(true);
+        
         addCard(Zone.BATTLEFIELD, playerA, "Jace, Architect of Thought");
 
         // Sorcery {R}{B}

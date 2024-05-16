@@ -10,6 +10,7 @@ import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.List;
@@ -55,7 +56,7 @@ public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAb
 
     @Override
     public String getRule() {
-        return "Until your next turn, " + trigger.getRule();
+        return "Until your next turn, " + CardUtil.getTextWithFirstCharLowerCase(trigger.getRule());
     }
 
     @Override
