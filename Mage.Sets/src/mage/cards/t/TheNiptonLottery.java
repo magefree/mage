@@ -68,10 +68,9 @@ class TheNiptonLotteryEffect extends OneShotEffect {
         if (creatureList.isEmpty()) {
             return true;
         }
-
-        // You gain control of that creature until end of turn. Untap it. It gains haste until end of turn.
         Permanent permanentToSteal = creatureList.get(RandomUtil.nextInt(creatureList.size()));
 
+        // You gain control of that creature until end of turn. Untap it. It gains haste until end of turn.
         ContinuousEffect controlEffect = new GainControlTargetEffect(Duration.EndOfTurn);
         controlEffect.setTargetPointer(new FixedTarget(permanentToSteal, game));
         game.addEffect(controlEffect, source);
