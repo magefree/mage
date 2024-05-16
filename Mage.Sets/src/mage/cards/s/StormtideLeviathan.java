@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
+import mage.abilities.effects.common.combat.CantAttackAllEffect;
 import mage.abilities.effects.common.continuous.AddBasicLandTypeAllLandsEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IslandwalkAbility;
@@ -45,7 +45,7 @@ public final class StormtideLeviathan extends CardImpl {
                 .setText("all lands are Islands in addition to their other types")));
 
         // Creatures without flying or islandwalk can't attack.
-        this.addAbility(new SimpleStaticAbility(new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private StormtideLeviathan(final StormtideLeviathan card) {

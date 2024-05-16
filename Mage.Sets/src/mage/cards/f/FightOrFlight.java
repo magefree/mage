@@ -3,7 +3,7 @@ package mage.cards.f;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
+import mage.abilities.effects.common.combat.CantAttackAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -96,7 +96,7 @@ class FightOrFlightEffect extends OneShotEffect {
         List<Permanent> canAttack = choice ? pile1 : pile2;
         FilterCreaturePermanent filterRestriction = new FilterCreaturePermanent();
         filterRestriction.add(Predicates.not(new PermanentReferenceInCollectionPredicate(canAttack, game)));
-        game.addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, filterRestriction), source);
+        game.addEffect(new CantAttackAllEffect(Duration.EndOfTurn, filterRestriction), source);
         game.informPlayers("Creatures that can attack this turn: " + canAttack
                 .stream()
                 .map(Permanent::getLogName)

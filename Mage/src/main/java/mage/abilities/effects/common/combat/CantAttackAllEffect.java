@@ -12,11 +12,11 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
+public class CantAttackAllEffect extends RestrictionEffect {
 
     private final FilterCreaturePermanent filter;
 
-    public CantAttackAnyPlayerAllEffect(Duration duration, FilterCreaturePermanent filter) {
+    public CantAttackAllEffect(Duration duration, FilterCreaturePermanent filter) {
         super(duration);
         this.filter = filter;
         StringBuilder sb = new StringBuilder(filter.getMessage()).append(" can't attack");
@@ -30,7 +30,7 @@ public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
         staticText = sb.toString();
     }
 
-    protected CantAttackAnyPlayerAllEffect(final CantAttackAnyPlayerAllEffect effect) {
+    protected CantAttackAllEffect(final CantAttackAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -46,8 +46,8 @@ public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public CantAttackAnyPlayerAllEffect copy() {
-        return new CantAttackAnyPlayerAllEffect(this);
+    public CantAttackAllEffect copy() {
+        return new CantAttackAllEffect(this);
     }
 
 }
