@@ -3,8 +3,7 @@ package mage.cards.f;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.combat.CantAttackTargetEffect;
+import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,12 +12,13 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,17 +93,14 @@ class FightOrFlightEffect extends OneShotEffect {
         }
 
         boolean choice = targetPlayer.choosePile(outcome, "Choose which pile can attack this turn.", pile1, pile2, game);
-        List<Permanent> chosenPile = choice ? pile2 : pile1;
-        List<Permanent> otherPile = choice ? pile1 : pile2;
-        for (Permanent permanent : chosenPile) {
-            if (permanent != null) {
-                RestrictionEffect effect = new CantAttackTargetEffect(Duration.EndOfTurn);
-                effect.setText("");
-                effect.setTargetPointer(new FixedTarget(permanent, game));
-                game.addEffect(effect, source);
-            }
-        }
-        game.informPlayers("Creatures that can attack this turn: " + otherPile.stream().map(Permanent::getLogName).collect(Collectors.joining(", ")));
+        List<Permanent> canAttack = choice ? pile1 : pile2;
+        FilterCreaturePermanent filterRestriction = new FilterCreaturePermanent();
+        filterRestriction.add(Predicates.not(new PermanentReferenceInCollectionPredicate(canAttack, game)));
+        game.addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, filterRestriction), source);
+        game.informPlayers("Creatures that can attack this turn: " + canAttack
+                .stream()
+                .map(Permanent::getLogName)
+                .collect(Collectors.joining(", ")));
         return true;
     }
 }
