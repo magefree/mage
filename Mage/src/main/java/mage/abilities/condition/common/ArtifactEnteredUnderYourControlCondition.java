@@ -18,6 +18,6 @@ public enum ArtifactEnteredUnderYourControlCondition implements Condition {
 
     @Override
     public String toString() {
-        return "an artifact entered under your control this turn";
+        return "an artifact entered the battlefield under your control this turn";
     }
 }
