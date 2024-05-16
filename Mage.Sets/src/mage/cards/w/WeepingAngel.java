@@ -129,7 +129,7 @@ class WeepingAngelDamageEffect extends PreventionEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         game.preventDamage(event, source, game, Integer.MAX_VALUE);
-        Card card = game.getCard(event.getTargetId());
+        Card card = game.getPermanent(event.getTargetId());
         if (card == null) {
             return false;
         }
