@@ -1,5 +1,5 @@
 
-package org.mage.test.cards.planeswalker;
+package org.mage.test.cards.single.emn;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -8,29 +8,31 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * {@link mage.cards.t.TamiyoFieldResearcher Tamiyo, Field Researcher}
- *  {1}{G}{W}{U}
- *  4 loyalty
+ * {1}{G}{W}{U}
+ * 4 loyalty
  * +1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
  * −2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
  * −7: Draw three cards. You get an emblem with "You may cast nonland cards from your hand without paying their mana costs."
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class TamiyoTest extends CardTestPlayerBase {
+public class TamiyoFieldResearcherTest extends CardTestPlayerBase {
 
     /**
      * Reported bug: I activated Tamiyo's +1 ability on a 5/5 Gideon and his 2/2 Knight Ally, but when they both attacked
-     *  and dealt damage I only drew one card when I'm pretty sure I was supposed to draw for each of the two.
+     * and dealt damage I only drew one card when I'm pretty sure I was supposed to draw for each of the two.
      */
     @Test
     public void testFieldResearcherFirstEffectOnGideon() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Tamiyo, Field Researcher", 1);
 
         /* Gideon, Ally of Zendikar {2}{W}{W} - 4 loyalty
          * +1: Until end of turn, Gideon, Ally of Zendikar becomes a 5/5 Human Soldier Ally creature with indestructible
          * that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
          * 0: Create a 2/2 white Knight Ally creature token.
-        **/
+         **/
         addCard(Zone.BATTLEFIELD, playerA, "Gideon, Ally of Zendikar", 1);
 
         // put 2/2 knight ally token on battlefield
@@ -46,6 +48,7 @@ public class TamiyoTest extends CardTestPlayerBase {
         // attack with both unblocked
         attack(3, playerA, "Knight Ally Token");
         attack(3, playerA, "Gideon, Ally of Zendikar");
+        setChoice(playerA, "Until your next turn"); // stack both trigger.
 
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
@@ -62,6 +65,8 @@ public class TamiyoTest extends CardTestPlayerBase {
      */
     @Test
     public void testFieldResearcherFirstEffectSimpleCreatureAttacks() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -87,6 +92,8 @@ public class TamiyoTest extends CardTestPlayerBase {
      */
     @Test
     public void testFieldResearcherFirstEffectSimpleCreaturesAttacks() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -101,6 +108,7 @@ public class TamiyoTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Bronze Sable");
         attack(1, playerA, "Sylvan Advocate");
+        setChoice(playerA, "Until your next turn"); // stack both trigger.
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
@@ -114,6 +122,8 @@ public class TamiyoTest extends CardTestPlayerBase {
      */
     @Test
     public void testFieldResearcherFirstEffectAttackAndBlock() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -142,6 +152,8 @@ public class TamiyoTest extends CardTestPlayerBase {
      */
     @Test
     public void testFieldResearcherFirstEffectOnlyPersistsUntilYourNextTurn() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -176,11 +188,13 @@ public class TamiyoTest extends CardTestPlayerBase {
     }
 
     /**
-     *  I activated his +1 ability once. then, the next turn, i activated it one more time, and then
-     *  i get to draw 3 cards of three creatures. So i think the first activation wasn't away.
+     * I activated his +1 ability once. then, the next turn, i activated it one more time, and then
+     * i get to draw 3 cards of three creatures. So i think the first activation wasn't away.
      */
     @Test
     public void testDrawEffectGetsRemoved() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -198,6 +212,7 @@ public class TamiyoTest extends CardTestPlayerBase {
 
         attack(3, playerA, "Pillarfield Ox");
         attack(3, playerA, "Silvercoat Lion");
+        setChoice(playerA, "Until your next turn"); // stack both trigger.
 
         setStopAt(3, PhaseStep.END_COMBAT);
         execute();
@@ -209,6 +224,8 @@ public class TamiyoTest extends CardTestPlayerBase {
 
     @Test
     public void testFieldResearcherFirstAbilityTargetOpponentCreature() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -231,6 +248,8 @@ public class TamiyoTest extends CardTestPlayerBase {
 
     @Test
     public void testFieldResearcherFirstAbilityTargetOpponentCreatures() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Tamiyo, Field Researcher", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -245,6 +264,7 @@ public class TamiyoTest extends CardTestPlayerBase {
 
         attack(2, playerB, "Bronze Sable");
         attack(2, playerB, "Memnite");
+        setChoice(playerA, "Until your next turn"); // stack both trigger.
 
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
