@@ -66,12 +66,12 @@ public final class SlicerHiredMuscle extends CardImpl {
 
 class SlicerHiredMuscleUpkeepEffect extends OneShotEffect {
 
-    public SlicerHiredMuscleUpkeepEffect() {
+    SlicerHiredMuscleUpkeepEffect() {
         super(Outcome.GainControl);
         staticText = "you may have that player gain control of {this} until end of turn. If you do, untap {this}, goad it, and it can't be sacrificed this turn. If you don't, convert it.";
     }
 
-    public SlicerHiredMuscleUpkeepEffect(final SlicerHiredMuscleUpkeepEffect effect) {
+    private SlicerHiredMuscleUpkeepEffect(final SlicerHiredMuscleUpkeepEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class SlicerHiredMuscleUpkeepEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
 
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Player player = game.getPlayer(sourcePermanent.getOwnerId());
+        Player player = game.getPlayer(sourcePermanent.getControllerId());
         Player newController = game.getPlayer(getTargetPointer().getFirst(game, source));
 
         if (player == null || newController == null || sourcePermanent == null) {
@@ -94,12 +94,12 @@ class SlicerHiredMuscleUpkeepEffect extends OneShotEffect {
         if (player.chooseUse(this.getOutcome(), source.getRule(), source, game)) {
 
             // Gain control
-            ContinuousEffect gainControllEffect = new GainControlTargetEffect(Duration.EndOfTurn, false,
-                    newController.getId());
-            gainControllEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
-            gainControllEffect.setText("and gains control of it");
-            game.addEffect(gainControllEffect, source);
+            game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn, false, newController.getId())
+                    .setTargetPointer(new FixedTarget(sourcePermanent, game)), source);
+
+            // process action so that untap effects the new controller
             game.getState().processAction(game);
+
             // Untap
             sourcePermanent.untap(game);
 
