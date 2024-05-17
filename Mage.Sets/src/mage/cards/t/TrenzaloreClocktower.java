@@ -10,6 +10,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.Cards;
@@ -53,6 +54,7 @@ public final class TrenzaloreClocktower extends CardImpl {
         wheelAbility.addCost(new TapSourceCost());
         wheelAbility.addCost(new RemoveCountersSourceCost(CounterType.TIME.createInstance(12)));
         wheelAbility.addCost(new ExileSourceCost().setText("and exile it"));
+        wheelAbility.addEffect(new DrawCardSourceControllerEffect(7).concatBy(", then"));
         this.addAbility(wheelAbility);
     }
 
@@ -70,7 +72,7 @@ class TrenzaloreClocktowerEffect extends OneShotEffect {
 
     TrenzaloreClocktowerEffect() {
         super(Outcome.Benefit);
-        staticText = "shuffle your graveyard and hand into your library, then draw seven cards";
+        staticText = "shuffle your graveyard and hand into your library";
     }
 
     private TrenzaloreClocktowerEffect(final TrenzaloreClocktowerEffect effect) {
@@ -88,7 +90,6 @@ class TrenzaloreClocktowerEffect extends OneShotEffect {
         cards.addAll(player.getHand());
         player.putCardsOnTopOfLibrary(cards, game, source, false);
         player.shuffleLibrary(source, game);
-        player.drawCards(7, source, game);
         return true;
     }
 
