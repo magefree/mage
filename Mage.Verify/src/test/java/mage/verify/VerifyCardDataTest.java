@@ -136,6 +136,7 @@ public class VerifyCardDataTest {
 
         // supertype
         // skipListAddName(SKIP_LIST_SUPERTYPE, set, cardName);
+        skipListAddName(SKIP_LIST_SUPERTYPE, "MH3", "Echoes of Eternity"); // waiting for tribal -> kindred change
 
         // type
         // skipListAddName(SKIP_LIST_TYPE, set, cardName);
