@@ -22,21 +22,14 @@ public class SentinelSarahLyonsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Darksteel Relic", 1); // Artifact w/ Indestructible
 
         // Before casting an artifact (4/4)
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.UPKEEP);
-        execute();
-
-        assertPowerToughness(playerA, "Sentinel Sarah Lyons", 4, 4);
+        checkPT("1: before casting Relic", 1, PhaseStep.UPKEEP, playerA, "Sentinel Sarah Lyons", 4, 4);
 
         // Casting the artifact (should become a 6/6 until end of turn)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Darksteel Relic");
-
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertPowerToughness(playerA, "Sentinel Sarah Lyons", 6, 6);
+        checkPT("1: after casting Relic", 1, PhaseStep.END_TURN, playerA, "Sentinel Sarah Lyons", 6, 6);
 
         // Turn after casting the artifact (should return to 4/4)
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.UNTAP);
         execute();
 
