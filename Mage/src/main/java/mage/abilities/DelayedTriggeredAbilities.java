@@ -27,11 +27,9 @@ public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbi
         // TODO: add same integrity checks as TriggeredAbilities?!
         for (Iterator<DelayedTriggeredAbility> it = this.iterator(); it.hasNext(); ) {
             DelayedTriggeredAbility ability = it.next();
-            if (ability.getDuration() == Duration.Custom) {
-                if (ability.isInactive(game)) {
-                    it.remove();
-                    continue;
-                }
+            if (ability.isInactive(game)) {
+                it.remove();
+                continue;
             }
             if (!ability.checkEventType(event, game)) {
                 continue;

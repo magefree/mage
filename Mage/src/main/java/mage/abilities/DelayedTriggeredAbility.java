@@ -4,6 +4,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -64,6 +65,11 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public boolean isInactive(Game game) {
-        return false;
+        // discard as soon as possible for leaved player
+        // 800.4d. If an object that would be owned by a player who has left the game would be created in any zone, it isn't created.
+        // If a triggered ability that would be controlled by a player who has left the game would be put onto the stack, it isn't put on the stack.
+        Player player = game.getPlayer(getControllerId());
+        boolean canDelete = player == null || (!player.isInGame() && player.hasReachedNextTurnAfterLeaving());
+        return canDelete;
     }
 }
