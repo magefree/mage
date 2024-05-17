@@ -22,19 +22,19 @@ import java.util.List;
  */
 public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private final TriggeredAbility trigger;
+    private final TriggeredAbility ability;
 
-    public UntilYourNextTurnDelayedTriggeredAbility(TriggeredAbility trigger) {
+    public UntilYourNextTurnDelayedTriggeredAbility(TriggeredAbility ability) {
         super(null, Duration.UntilYourNextTurn);
-        if (trigger.isLeavesTheBattlefieldTrigger()) {
+        if (ability.isLeavesTheBattlefieldTrigger()) {
             this.setLeavesTheBattlefieldTrigger(true);
         }
-        this.trigger = trigger;
+        this.ability = ability;
     }
 
     protected UntilYourNextTurnDelayedTriggeredAbility(final UntilYourNextTurnDelayedTriggeredAbility ability) {
         super(ability);
-        this.trigger = ability.trigger.copy();
+        this.ability = ability.ability.copy();
     }
 
     @Override
@@ -44,63 +44,63 @@ public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAb
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return trigger.checkEventType(event, game);
+        return ability.checkEventType(event, game);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        trigger.setSourceId(this.getSourceId());
-        trigger.setControllerId(this.getControllerId());
-        return trigger.checkTrigger(event, game);
+        ability.setSourceId(this.getSourceId());
+        ability.setControllerId(this.getControllerId());
+        return ability.checkTrigger(event, game);
     }
 
     @Override
     public String getRule() {
-        return "Until your next turn, " + CardUtil.getTextWithFirstCharLowerCase(trigger.getRule());
+        return "Until your next turn, " + CardUtil.getTextWithFirstCharLowerCase(ability.getRule());
     }
 
     @Override
     public Effects getEffects() {
-        return trigger.getEffects();
+        return ability.getEffects();
     }
 
     @Override
     public void addEffect(Effect effect) {
-        trigger.addEffect(effect);
+        ability.addEffect(effect);
     }
 
     @Override
     public Modes getModes() {
-        return trigger.getModes();
+        return ability.getModes();
     }
 
     @Override
     public List<Watcher> getWatchers() {
-        return trigger.getWatchers();
+        return ability.getWatchers();
     }
 
     @Override
     public void addWatcher(Watcher watcher) {
-        trigger.addWatcher(watcher);
+        ability.addWatcher(watcher);
     }
 
     @Override
     public Effects getEffects(Game game, EffectType effectType) {
-        return trigger.getEffects(game, effectType);
+        return ability.getEffects(game, effectType);
     }
 
     @Override
     public boolean isOptional() {
-        return trigger.isOptional();
+        return ability.isOptional();
     }
 
     @Override
     public void setSourceObjectZoneChangeCounter(int sourceObjectZoneChangeCounter) {
-        trigger.setSourceObjectZoneChangeCounter(sourceObjectZoneChangeCounter);
+        ability.setSourceObjectZoneChangeCounter(sourceObjectZoneChangeCounter);
     }
 
     @Override
     public int getSourceObjectZoneChangeCounter() {
-        return trigger.getSourceObjectZoneChangeCounter();
+        return ability.getSourceObjectZoneChangeCounter();
     }
 }
