@@ -69,7 +69,7 @@ public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
         // 800.4d. If an object that would be owned by a player who has left the game would be created in any zone, it isn't created.
         // If a triggered ability that would be controlled by a player who has left the game would be put onto the stack, it isn't put on the stack.
         Player player = game.getPlayer(getControllerId());
-        boolean canDelete = player == null || (!player.isInGame() && player.hasReachedNextTurnAfterLeaving());
+        boolean canDelete = player == null || !player.isInGame();
         return canDelete;
     }
 }
