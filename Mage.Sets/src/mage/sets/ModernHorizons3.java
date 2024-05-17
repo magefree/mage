@@ -30,6 +30,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodsoaked Insight", 252, Rarity.UNCOMMON, mage.cards.b.BloodsoakedInsight.class));
         cards.add(new SetCardInfo("Bloodstained Mire", 216, Rarity.RARE, mage.cards.b.BloodstainedMire.class));
         cards.add(new SetCardInfo("Boggart Trawler", 243, Rarity.UNCOMMON, mage.cards.b.BoggartTrawler.class));
+        cards.add(new SetCardInfo("Bountiful Landscape", 217, Rarity.COMMON, mage.cards.b.BountifulLandscape.class));
         cards.add(new SetCardInfo("Brainsurge", 53, Rarity.UNCOMMON, mage.cards.b.Brainsurge.class));
         cards.add(new SetCardInfo("Breaker of Creation", 1, Rarity.UNCOMMON, mage.cards.b.BreakerOfCreation.class));
         cards.add(new SetCardInfo("Breya, Etherium Shaper", 289, Rarity.MYTHIC, mage.cards.b.BreyaEtheriumShaper.class));
@@ -41,9 +42,11 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Colossal Dreadmask", 148, Rarity.COMMON, mage.cards.c.ColossalDreadmask.class));
         cards.add(new SetCardInfo("Conduit Goblin", 179, Rarity.COMMON, mage.cards.c.ConduitGoblin.class));
         cards.add(new SetCardInfo("Consuming Corruption", 84, Rarity.UNCOMMON, mage.cards.c.ConsumingCorruption.class));
+        cards.add(new SetCardInfo("Contaminated Landscape", 218, Rarity.COMMON, mage.cards.c.ContaminatedLandscape.class));
         cards.add(new SetCardInfo("Copycrook", 55, Rarity.UNCOMMON, mage.cards.c.Copycrook.class));
         cards.add(new SetCardInfo("Cranial Ram", 180, Rarity.COMMON, mage.cards.c.CranialRam.class));
         cards.add(new SetCardInfo("Cursed Mirror", 279, Rarity.RARE, mage.cards.c.CursedMirror.class));
+        cards.add(new SetCardInfo("Deceptive Landscape", 219, Rarity.COMMON, mage.cards.d.DeceptiveLandscape.class));
         cards.add(new SetCardInfo("Decree of Justice", 263, Rarity.UNCOMMON, mage.cards.d.DecreeOfJustice.class));
         cards.add(new SetCardInfo("Deep Analysis", 268, Rarity.UNCOMMON, mage.cards.d.DeepAnalysis.class));
         cards.add(new SetCardInfo("Deserted Temple", 301, Rarity.RARE, mage.cards.d.DesertedTemple.class));
@@ -74,6 +77,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Flare of Malice", 95, Rarity.RARE, mage.cards.f.FlareOfMalice.class));
         cards.add(new SetCardInfo("Flooded Strand", 220, Rarity.RARE, mage.cards.f.FloodedStrand.class));
         cards.add(new SetCardInfo("Flusterstorm", 496, Rarity.RARE, mage.cards.f.Flusterstorm.class));
+        cards.add(new SetCardInfo("Foreboding Landscape", 221, Rarity.COMMON, mage.cards.f.ForebodingLandscape.class));
         cards.add(new SetCardInfo("Forest", 308, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Frogmyr Enforcer", 120, Rarity.UNCOMMON, mage.cards.f.FrogmyrEnforcer.class));
         cards.add(new SetCardInfo("Furnace Hellkite", 121, Rarity.UNCOMMON, mage.cards.f.FurnaceHellkite.class));
@@ -116,6 +120,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Orim's Chant", 265, Rarity.RARE, mage.cards.o.OrimsChant.class));
         cards.add(new SetCardInfo("Path of Annihilation", 165, Rarity.UNCOMMON, mage.cards.p.PathOfAnnihilation.class));
         cards.add(new SetCardInfo("Pearl Medallion", 294, Rarity.RARE, mage.cards.p.PearlMedallion.class));
+        cards.add(new SetCardInfo("Perilous Landscape", 223, Rarity.COMMON, mage.cards.p.PerilousLandscape.class));
         cards.add(new SetCardInfo("Petrifying Meddler", 66, Rarity.COMMON, mage.cards.p.PetrifyingMeddler.class));
         cards.add(new SetCardInfo("Phelia, Exuberant Shepherd", 40, Rarity.RARE, mage.cards.p.PheliaExuberantShepherd.class));
         cards.add(new SetCardInfo("Phlage, Titan of Fire's Fury", 197, Rarity.MYTHIC, mage.cards.p.PhlageTitanOfFiresFury.class));
@@ -140,8 +145,11 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Sapphire Medallion", 296, Rarity.RARE, mage.cards.s.SapphireMedallion.class));
         cards.add(new SetCardInfo("Scurrilous Sentry", 108, Rarity.COMMON, mage.cards.s.ScurrilousSentry.class));
         cards.add(new SetCardInfo("Scurry of Gremlins", 203, Rarity.UNCOMMON, mage.cards.s.ScurryOfGremlins.class));
+        cards.add(new SetCardInfo("Seething Landscape", 225, Rarity.COMMON, mage.cards.s.SeethingLandscape.class));
         cards.add(new SetCardInfo("Serum Visionary", 69, Rarity.COMMON, mage.cards.s.SerumVisionary.class));
         cards.add(new SetCardInfo("Sevinne's Reclamation", 267, Rarity.RARE, mage.cards.s.SevinnesReclamation.class));
+        cards.add(new SetCardInfo("Shattered Landscape", 226, Rarity.COMMON, mage.cards.s.ShatteredLandscape.class));
+        cards.add(new SetCardInfo("Sheltering Landscape", 227, Rarity.COMMON, mage.cards.s.ShelteringLandscape.class));
         cards.add(new SetCardInfo("Shifting Woodland", 228, Rarity.RARE, mage.cards.s.ShiftingWoodland.class));
         cards.add(new SetCardInfo("Sink into Stupor", 241, Rarity.UNCOMMON, mage.cards.s.SinkIntoStupor.class));
         cards.add(new SetCardInfo("Six", 169, Rarity.RARE, mage.cards.s.Six.class));
@@ -167,9 +175,11 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("The Necrobloom", 194, Rarity.RARE, mage.cards.t.TheNecrobloom.class));
         cards.add(new SetCardInfo("Thraben Charm", 45, Rarity.COMMON, mage.cards.t.ThrabenCharm.class));
         cards.add(new SetCardInfo("Toxic Deluge", 277, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
+        cards.add(new SetCardInfo("Tranquil Landscape", 231, Rarity.COMMON, mage.cards.t.TranquilLandscape.class));
         cards.add(new SetCardInfo("Trickster's Elk", 175, Rarity.UNCOMMON, mage.cards.t.TrickstersElk.class));
         cards.add(new SetCardInfo("Triton Wavebreaker", 74, Rarity.UNCOMMON, mage.cards.t.TritonWavebreaker.class));
         cards.add(new SetCardInfo("Tune the Narrative", 75, Rarity.COMMON, mage.cards.t.TuneTheNarrative.class));
+        cards.add(new SetCardInfo("Twisted Landscape", 232, Rarity.COMMON, mage.cards.t.TwistedLandscape.class));
         cards.add(new SetCardInfo("Ugin's Labyrinth", 233, Rarity.MYTHIC, mage.cards.u.UginsLabyrinth.class));
         cards.add(new SetCardInfo("Ulamog, the Defiler", 15, Rarity.MYTHIC, mage.cards.u.UlamogTheDefiler.class));
         cards.add(new SetCardInfo("Urza's Cave", 234, Rarity.UNCOMMON, mage.cards.u.UrzasCave.class));
