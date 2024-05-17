@@ -25,16 +25,16 @@ public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAb
     private final TriggeredAbility ability;
 
     public UntilYourNextTurnDelayedTriggeredAbility(TriggeredAbility ability) {
-        super(null, Duration.UntilYourNextTurn);
+        super(null, Duration.UntilYourNextTurn, false);
         if (ability.isLeavesTheBattlefieldTrigger()) {
             this.setLeavesTheBattlefieldTrigger(true);
         }
         this.ability = ability;
     }
 
-    protected UntilYourNextTurnDelayedTriggeredAbility(final UntilYourNextTurnDelayedTriggeredAbility ability) {
-        super(ability);
-        this.ability = ability.ability.copy();
+    protected UntilYourNextTurnDelayedTriggeredAbility(final UntilYourNextTurnDelayedTriggeredAbility triggeredAbility) {
+        super(triggeredAbility);
+        this.ability = triggeredAbility.ability.copy();
     }
 
     @Override

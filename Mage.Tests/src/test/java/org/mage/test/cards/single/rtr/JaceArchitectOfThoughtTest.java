@@ -45,6 +45,31 @@ public class JaceArchitectOfThoughtTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_DelayedTrigger_TriggerTwice() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Jace, Architect of Thought");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.");
+
+        attack(2, playerB, "Silvercoat Lion");
+        attack(2, playerB, "Grizzly Bears");
+        setChoice(playerA, "Until"); // stack triggers
+
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+
+        assertCounterCount("Jace, Architect of Thought", CounterType.LOYALTY, 5);
+        assertPowerToughness(playerB, "Silvercoat Lion", 1, 2);
+
+        assertLife(playerA, 20 - 2);
+        assertLife(playerB, 20);
+    }
+
+    @Test
     public void testAbilit1lastOnlyUntilNextTurn() {
         setStrictChooseMode(true);
 
@@ -74,7 +99,7 @@ public class JaceArchitectOfThoughtTest extends CardTestPlayerBase {
     @Test
     public void testAbility1AfterJacesWasExiled() {
         setStrictChooseMode(true);
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Jace, Architect of Thought");
 
         // Sorcery {R}{B}
