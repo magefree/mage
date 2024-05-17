@@ -14,9 +14,12 @@ import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 import java.io.FileNotFoundException;
 
 /**
+ * 800.4d. If an object that would be owned by a player who has left the game would be created in any zone, it isn't created.
+ * If a triggered ability that would be controlled by a player who has left the game would be put onto the stack, it isn't put on the stack.
+ *
  * @author Susucr
  */
-public class DelayedTriggerLastingAfterControllerLeavesTest extends CardTestMultiPlayerBase {
+public class DelayedTriggerAfterControllerLeavesTest extends CardTestMultiPlayerBase {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
