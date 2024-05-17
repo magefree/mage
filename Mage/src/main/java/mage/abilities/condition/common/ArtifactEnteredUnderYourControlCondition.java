@@ -6,6 +6,8 @@ import mage.game.Game;
 import mage.watchers.common.ArtifactEnteredControllerWatcher;
 
 /**
+ * /!\ You need to add ArtifactEnteredControllerWatcher to any card using this condition
+ *
  * @author Cguy7777
  */
 public enum ArtifactEnteredUnderYourControlCondition implements Condition {
