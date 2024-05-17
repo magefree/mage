@@ -48,11 +48,13 @@ public class SentinelSarahLyonsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Sentinel Sarah Lyons", 1);
 
         addCard(Zone.HAND, playerB, "Darksteel Relic", 1);
+        // Artifact w/ "You may cast spells as though they had flash."
+        addCard(Zone.BATTLEFIELD, playerB, "Vedalken Orrery", 1);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Darksteel Relic");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Darksteel Relic");
 
         setStrictChooseMode(true);
-        setStopAt(2, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPowerToughness(playerA, "Sentinel Sarah Lyons", 4, 4);
