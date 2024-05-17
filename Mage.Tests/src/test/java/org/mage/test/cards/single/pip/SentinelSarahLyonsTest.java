@@ -30,7 +30,7 @@ public class SentinelSarahLyonsTest extends CardTestPlayerBase {
 
         // Turn after casting the artifact (should return to 4/4)
         setStrictChooseMode(true);
-        setStopAt(2, PhaseStep.UNTAP);
+        setStopAt(2, PhaseStep.UPKEEP);
         execute();
 
         assertPowerToughness(playerA, "Sentinel Sarah Lyons", 4, 4);
