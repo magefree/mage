@@ -118,6 +118,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Recruiter of the Guard", 266, Rarity.MYTHIC, mage.cards.r.RecruiterOfTheGuard.class));
         cards.add(new SetCardInfo("Reef Worm", 271, Rarity.UNCOMMON, mage.cards.r.ReefWorm.class));
         cards.add(new SetCardInfo("Revitalizing Repast", 256, Rarity.UNCOMMON, mage.cards.r.RevitalizingRepast.class));
+        cards.add(new SetCardInfo("Ripples of Undeath", 107, Rarity.RARE, mage.cards.r.RipplesOfUndeath.class));
         cards.add(new SetCardInfo("Roil Cartographer", 67, Rarity.UNCOMMON, mage.cards.r.RoilCartographer.class));
         cards.add(new SetCardInfo("Ruby Medallion", 295, Rarity.RARE, mage.cards.r.RubyMedallion.class));
         cards.add(new SetCardInfo("Rush of Inspiration", 257, Rarity.UNCOMMON, mage.cards.r.RushOfInspiration.class));
