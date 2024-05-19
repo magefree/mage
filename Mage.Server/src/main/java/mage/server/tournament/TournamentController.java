@@ -174,7 +174,7 @@ public class TournamentController {
 
     private void checkStart() {
         if (!started && allJoined()) {
-            managerFactory.threadExecutor().getCallExecutor().execute(this::startTournament);
+            managerFactory.threadExecutor().getTourneyExecutor().execute(this::startTournament);
         }
     }
 
@@ -191,6 +191,7 @@ public class TournamentController {
     }
 
     private synchronized void startTournament() {
+        Thread.currentThread().setName("TOURNEY " + tableId);
         for (final TournamentSession tournamentSession : tournamentSessions.values()) {
             if (!tournamentSession.init()) {
                 logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
