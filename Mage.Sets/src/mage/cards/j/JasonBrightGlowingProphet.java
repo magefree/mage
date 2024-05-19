@@ -6,10 +6,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -20,6 +18,7 @@ import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,6 +33,7 @@ public final class JasonBrightGlowingProphet extends CardImpl {
 
     static {
         filter.add(Predicates.or(SubType.ZOMBIE.getPredicate(), SubType.MUTANT.getPredicate()));
+        filter.add(JasonBrightGlowingProphetPredicate.instance);
     }
 
     public JasonBrightGlowingProphet(UUID ownerId, CardSetInfo setInfo) {
@@ -47,10 +47,8 @@ public final class JasonBrightGlowingProphet extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a Zombie or Mutant you control dies, if its power was different from its base power, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter, true),
-                JasonBrightGlowingProphetCondition.instance,
-                "Whenever a Zombie or Mutant you control dies, if its power was different from its base power, draw a card."));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter)
+                .setTriggerPhrase("Whenever a Zombie or Mutant you control dies, if its power was different from its base power, "));
 
         // Come Fly With Me -- {2}, Sacrifice a creature: Put a +1/+1 counter on target creature you control. It gains flying until end of turn.
         Ability ability = new SimpleActivatedAbility(
@@ -72,17 +70,12 @@ public final class JasonBrightGlowingProphet extends CardImpl {
     }
 }
 
-enum JasonBrightGlowingProphetCondition implements Condition {
+enum JasonBrightGlowingProphetPredicate implements Predicate<Permanent> {
     instance;
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getEffects().get(0).getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (permanent == null) {
-            return false;
-        }
-
-        MageInt power = permanent.getPower();
+    public boolean apply(Permanent input, Game game) {
+        MageInt power = input.getPower();
         return power.getValue() != power.getModifiedBaseValue();
     }
 }
