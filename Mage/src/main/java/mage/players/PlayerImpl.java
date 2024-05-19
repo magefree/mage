@@ -539,6 +539,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void beginTurn(Game game) {
         resetLandsPlayed();
         updateRange(game);
+        game.getState().removeTurnStartEffect(game);
     }
 
     @Override
