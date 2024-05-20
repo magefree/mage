@@ -10,7 +10,6 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.events.GameEvent;
@@ -149,7 +148,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
                         }
                         newAbility.adjustTargets(game);
                         // add the different possible target option for the specific X value
-                        if (!newAbility.getTargets().getUnchosen().isEmpty()) {
+                        if (!newAbility.getTargets().getUnchosen(game).isEmpty()) {
                             addTargetOptions(options, newAbility, targetNum, game);
                         }
                     }

@@ -443,7 +443,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                     }
                     source.addTarget(target);
                 }
-                if (target == null || target.isChosen()) {
+                if (target == null || target.isChosen(game)) {
                     for (Effect effect : effects) {
                         if (effect instanceof ContinuousEffect) {
                             game.addEffect((ContinuousEffect) effect, source);

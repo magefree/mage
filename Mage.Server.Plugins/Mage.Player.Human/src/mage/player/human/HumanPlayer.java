@@ -674,7 +674,7 @@ public class HumanPlayer extends PlayerImpl {
 
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargetIds, required, getOptions(target, options));
+                    game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(game), getRelatedObjectName(source, game)), possibleTargetIds, required, getOptions(target, options));
                 }
                 waitForResponse(game);
                 responseId = getFixedResponseUUID(game);
@@ -696,7 +696,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (target instanceof TargetPermanent) {
                     if (((TargetPermanent) target).canTarget(abilityControllerId, responseId, source, game, false)) {
                         target.add(responseId, game);
-                        if (target.doneChoosing()) {
+                        if (target.doneChoosing(game)) {
                             return true;
                         }
                     }
@@ -708,7 +708,7 @@ public class HumanPlayer extends PlayerImpl {
                                 target.remove(responseId);
                             } else {
                                 target.addTarget(responseId, (Ability) object, game);
-                                if (target.doneChoosing()) {
+                                if (target.doneChoosing(game)) {
                                     return true;
                                 }
                             }
@@ -718,7 +718,7 @@ public class HumanPlayer extends PlayerImpl {
                             target.remove(responseId);
                         } else {
                             target.addTarget(responseId, null, game);
-                            if (target.doneChoosing()) {
+                            if (target.doneChoosing(game)) {
                                 return true;
                             }
                         }
@@ -775,7 +775,7 @@ public class HumanPlayer extends PlayerImpl {
 
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)),
+                    game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(game), getRelatedObjectName(source, game)),
                             possibleTargetIds, required, getOptions(target, options));
                 }
                 waitForResponse(game);
@@ -792,7 +792,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (possibleTargetIds.contains(responseId)) {
                     if (target.canTarget(abilityControllerId, responseId, source, game)) {
                         target.addTarget(responseId, source, game);
-                        if (target.doneChoosing()) {
+                        if (target.doneChoosing(game)) {
                             return true;
                         }
                     }
@@ -873,7 +873,7 @@ public class HumanPlayer extends PlayerImpl {
 
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()), cards, required, options);
+                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(game)), cards, required, options);
                 }
                 waitForResponse(game);
 
@@ -886,7 +886,7 @@ public class HumanPlayer extends PlayerImpl {
                 } else {
                     if (target.canTarget(abilityControllerId, responseId, source, cards, game)) {
                         target.add(responseId, game);
-                        if (target.doneChoosing()) {
+                        if (target.doneChoosing(game)) {
                             return true;
                         }
                     }
@@ -956,7 +956,7 @@ public class HumanPlayer extends PlayerImpl {
 
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), cards, required, options);
+                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(game), getRelatedObjectName(source, game)), cards, required, options);
                 }
                 waitForResponse(game);
 
@@ -968,7 +968,7 @@ public class HumanPlayer extends PlayerImpl {
                     target.remove(responseId);
                 } else if (target.canTarget(abilityControllerId, responseId, source, cards, game)) {
                     target.addTarget(responseId, source, game);
-                    if (target.doneChoosing()) {
+                    if (target.doneChoosing(game)) {
                         return true;
                     }
                 }
@@ -1051,7 +1051,7 @@ public class HumanPlayer extends PlayerImpl {
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
                     String multiType = multiAmountType == MultiAmountType.DAMAGE ? " to divide %d damage" : " to distribute %d counters";
-                    String message = target.getMessage() + String.format(multiType, amountTotal);
+                    String message = target.getMessage(game) + String.format(multiType, amountTotal);
                     game.fireSelectTargetEvent(playerId, new MessageToClient(message, getRelatedObjectName(source, game)), possibleTargetIds, required, options);
                 }
                 waitForResponse(game);

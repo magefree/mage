@@ -19,9 +19,9 @@ import java.util.UUID;
  */
 public interface Target extends Serializable {
 
-    boolean isChosen();
+    boolean isChosen(Game game);
 
-    boolean doneChoosing();
+    boolean doneChoosing(Game game);
 
     void clearChosen();
 
@@ -98,7 +98,10 @@ public interface Target extends Serializable {
      */
     String getDescription();
 
-    String getMessage();
+    /**
+     * @return message displayed on choosing targets (can be dynamically changed on more target selected)
+     */
+    String getMessage(Game game);
 
     /**
      * @return single target name

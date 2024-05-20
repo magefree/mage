@@ -18,7 +18,6 @@ import mage.target.common.TargetSacrifice;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class DevourFlesh extends CardImpl {
@@ -65,7 +64,7 @@ class DevourFleshSacrificeEffect extends OneShotEffect {
         }
         if (game.getBattlefield().count(TargetSacrifice.makeFilter(StaticFilters.FILTER_PERMANENT_CREATURE), player.getId(), source, game) > 0) {
             Target target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
-            while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), source, game)) {
+            while (player.canRespond() && !target.isChosen(game) && target.canChoose(player.getId(), source, game)) {
                 player.choose(Outcome.Sacrifice, target, source, game);
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());

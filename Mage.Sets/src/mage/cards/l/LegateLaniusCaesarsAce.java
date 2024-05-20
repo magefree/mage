@@ -91,7 +91,7 @@ class LegateLaniusCaesarsAceSacrificeEffect extends OneShotEffect {
                 continue;
             }
             TargetSacrifice target = new TargetSacrifice(numTargets, filter);
-            while (!target.isChosen() && target.canChoose(playerId, source, game) && player.canRespond()) {
+            while (!target.isChosen(game) && target.canChoose(playerId, source, game) && player.canRespond()) {
                 player.choose(Outcome.Sacrifice, target, source, game);
             }
             perms.addAll(target.getTargets());

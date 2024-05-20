@@ -113,7 +113,7 @@ class SaddleCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
             @Override
-            public String getMessage() {
+            public String getMessage(Game game) {
                 // shows selected power
                 int selectedPower = this.targets.keySet().stream()
                         .map(game::getPermanent)
@@ -125,7 +125,7 @@ class SaddleCost extends CostImpl {
                 if (selectedPower >= value) {
                     extraInfo = HintUtils.prepareText(extraInfo, Color.GREEN);
                 }
-                return super.getMessage() + " " + extraInfo;
+                return super.getMessage(game) + " " + extraInfo;
             }
         };
 

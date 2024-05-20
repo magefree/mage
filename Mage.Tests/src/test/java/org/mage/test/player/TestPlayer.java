@@ -2001,8 +2001,8 @@ public class TestPlayer implements Player {
         return "Ability: null";
     }
 
-    private String getInfo(Target o) {
-        return "Target: " + (o != null ? o.getClass().getSimpleName() + ": " + o.getMessage() : "null");
+    private String getInfo(Target o, Game game) {
+        return "Target: " + (o != null ? o.getClass().getSimpleName() + ": " + o.getMessage(game) : "null");
     }
 
     private void assertAliasSupportInChoices(boolean methodSupportAliases) {
@@ -2167,7 +2167,7 @@ public class TestPlayer implements Player {
         }
 
         // ignore player select
-        if (target.getMessage().equals("Select a starting player")) {
+        if (target.getMessage(game).equals("Select a starting player")) {
             return computerPlayer.choose(outcome, target, source, game, options);
         }
 
@@ -2317,7 +2317,7 @@ public class TestPlayer implements Player {
 
                 // apply only on ALL targets or revert
                 if (usedChoices.size() > 0) {
-                    if (target.isChosen()) {
+                    if (target.isChosen(game)) {
                         // remove all used choices
                         for (int i = choices.size(); i >= 0; i--) {
                             if (usedChoices.contains(i)) {
@@ -2369,7 +2369,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target));
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, game));
         return computerPlayer.choose(outcome, target, source, game, options);
     }
 
@@ -2690,19 +2690,19 @@ public class TestPlayer implements Player {
                 message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used"
                         + "\nCard: " + source.getSourceObject(game)
                         + "\nAbility: " + source.getClass().getSimpleName() + " (" + source.getRule() + ")"
-                        + "\nTarget: " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
+                        + "\nTarget: " + target.getClass().getSimpleName() + " (" + target.getMessage(game) + ")"
                         + "\nYou must implement target class support in TestPlayer, \"filter instanceof\", or setup good targets";
             } else {
                 message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used"
                         + "\nCard: unknown source"
                         + "\nAbility: unknown source"
-                        + "\nTarget: " + target.getClass().getSimpleName() + " (" + target.getMessage() + ")"
+                        + "\nTarget: " + target.getClass().getSimpleName() + " (" + target.getMessage(game) + ")"
                         + "\nYou must implement target class support in TestPlayer, \"filter instanceof\", or setup good targets";
             }
             Assert.fail(message);
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, game));
         return computerPlayer.chooseTarget(outcome, target, source, game);
     }
 
@@ -2748,7 +2748,7 @@ public class TestPlayer implements Player {
             LOGGER.warn("Wrong target");
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, game));
         return computerPlayer.chooseTarget(outcome, cards, target, source, game);
     }
 
@@ -4134,7 +4134,7 @@ public class TestPlayer implements Player {
             assertWrongChoiceUsage(choices.size() > 0 ? choices.get(0) : "empty list");
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target));
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, game));
         return computerPlayer.choose(outcome, cards, target, source, game);
     }
 
@@ -4207,7 +4207,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, game));
         return computerPlayer.chooseTargetAmount(outcome, target, source, game);
     }
 

@@ -69,7 +69,7 @@ class ReignOfThePitEffect extends OneShotEffect {
             if (player != null) {
                 TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
                 if (target.canChoose(player.getId(), source, game)) {
-                    while (!target.isChosen() && player.canRespond()) {
+                    while (!target.isChosen(game) && player.canRespond()) {
                         player.choose(Outcome.Sacrifice, target, source, game);
                     }
                     perms.addAll(target.getTargets());

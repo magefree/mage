@@ -108,7 +108,7 @@ class DrainPowerEffect extends OneShotEffect {
                     FilterLandPermanent filter2 = new FilterLandPermanent("land you control to tap for mana (remaining: " + permList.size() + ')');
                     filter2.add(new PermanentReferenceInCollectionPredicate(permList, game));
                     target = new TargetPermanent(1, 1, filter2, true);
-                    while (!target.isChosen() && target.canChoose(targetPlayer.getId(), source, game) && targetPlayer.canRespond()) {
+                    while (!target.isChosen(game) && target.canChoose(targetPlayer.getId(), source, game) && targetPlayer.canRespond()) {
                         targetPlayer.chooseTarget(Outcome.Neutral, target, source, game);
                     }
                     permanent = game.getPermanent(target.getFirstTarget());

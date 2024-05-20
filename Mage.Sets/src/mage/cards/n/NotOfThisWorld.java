@@ -70,7 +70,7 @@ enum NotOfThisWorldCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject sourceSpell = game.getStack().getStackObject(source.getSourceId());
-        if (sourceSpell == null || !sourceSpell.getStackAbility().getTargets().isChosen()) {
+        if (sourceSpell == null || !sourceSpell.getStackAbility().getTargets().isChosen(game)) {
             return false;
         }
         StackObject objectToCounter = game.getStack().getStackObject(sourceSpell.getStackAbility().getTargets().getFirstTarget());

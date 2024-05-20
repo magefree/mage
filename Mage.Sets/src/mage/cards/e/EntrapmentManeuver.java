@@ -20,7 +20,6 @@ import mage.target.common.TargetSacrifice;
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class EntrapmentManeuver extends CardImpl {
@@ -67,7 +66,7 @@ class EntrapmentManeuverSacrificeEffect extends OneShotEffect {
         }
         if (game.getBattlefield().count(TargetSacrifice.makeFilter(StaticFilters.FILTER_ATTACKING_CREATURE), player.getId(), source, game) > 0) {
             Target target = new TargetSacrifice(StaticFilters.FILTER_ATTACKING_CREATURE);
-            while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), source, game)) {
+            while (player.canRespond() && !target.isChosen(game) && target.canChoose(player.getId(), source, game)) {
                 player.choose(Outcome.Sacrifice, target, source, game);
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());
