@@ -681,25 +681,29 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (activeFrame != null) {
             activeFrame.deactivated();
         }
+        activeFrame = null;
 
-        // If null, no new frame to activate, return early
+        // clean resources
+        ArrowBuilder.getBuilder().hideAllPanels();
+        MusicPlayer.stopBGM();
+
+        // if no new frame to activate (example: disconnection)
         if (frame == null) {
-            activeFrame = null;
             return;
         }
+
         LOGGER.debug("Setting " + frame.getTitle() + " active");
+
         activeFrame = frame;
-        desktopPane.moveToFront(frame);
+        desktopPane.moveToFront(activeFrame);
         activeFrame.setBounds(0, 0, desktopPane.getWidth(), desktopPane.getHeight());
         activeFrame.revalidate();
         activeFrame.activated();
         activeFrame.setVisible(true);
-        ArrowBuilder.getBuilder().hideAllPanels();
-        if (frame instanceof GamePane) {
-            ArrowBuilder.getBuilder().showPanel(((GamePane) frame).getGameId());
+
+        if (activeFrame instanceof GamePane) {
+            ArrowBuilder.getBuilder().showPanel(((GamePane) activeFrame).getGameId());
             MusicPlayer.playBGM();
-        } else {
-            MusicPlayer.stopBGM();
         }
     }
 
