@@ -83,55 +83,21 @@ class MagmaPummelerPreventionEffect extends PreventDamageAndRemoveCountersEffect
 
         if (amountRemovedInTotal == amountRemovedThisTime && amountRemovedInTotal > 0) {
             // First instance of damage prevention, we create a new reflexive ability.
-            MagmaPummelerTriggeredAbility reflexive = new MagmaPummelerTriggeredAbility();
+            ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
+                    new DamageTargetEffect(SavedCounterRemovedValue.MUCH), false,
+                    "When one or more counters are removed from {this} this way, it deals that much damage to any target."
+            );
+            reflexive.addTarget(new TargetAnyTarget());
             reflexiveId = game.fireReflexiveTriggeredAbility(reflexive, source, true);
         }
         if (reflexiveId != null) {
             // Set the amount of counters removed to the latest known info.
             DelayedTriggeredAbility reflexive = game.getState().getDelayed().get(reflexiveId).orElse(null);
-            if (reflexive instanceof MagmaPummelerTriggeredAbility) {
-                ((MagmaPummelerTriggeredAbility) reflexive).setStoredValue(amountRemovedInTotal);
+            if (reflexive instanceof ReflexiveTriggeredAbility) {
+                reflexive.getEffects().setValue(SavedCounterRemovedValue.VALUE_KEY, amountRemovedInTotal);
             } else {
                 reflexiveId = null;
             }
         }
-    }
-}
-
-class MagmaPummelerTriggeredAbility extends ReflexiveTriggeredAbility {
-
-    private int storedValue;
-
-    void setStoredValue(int storedValue) {
-        this.storedValue = storedValue;
-    }
-
-    MagmaPummelerTriggeredAbility() {
-        super(new DamageTargetEffect(SavedCounterRemovedValue.MUCH), false);
-        setTriggerPhrase("When one or more counters are removed from {this} this way, ");
-        addTarget(new TargetAnyTarget());
-        storedValue = 0;
-    }
-
-    private MagmaPummelerTriggeredAbility(final MagmaPummelerTriggeredAbility ability) {
-        super(ability);
-        this.storedValue = ability.storedValue;
-    }
-
-    @Override
-    public MagmaPummelerTriggeredAbility copy() {
-        return new MagmaPummelerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
-        if (storedValue == 0) {
-            return false;
-        }
-        getEffects().setValue(SavedCounterRemovedValue.VALUE_KEY, storedValue);
-        return true;
     }
 }
