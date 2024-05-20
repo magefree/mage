@@ -332,7 +332,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         setAppIcon();
         MageTray.instance.install();
 
-        desktopPane.add(ArrowBuilder.getBuilder().getArrowsManagerPanel(), JLayeredPane.DRAG_LAYER);
+        desktopPane.add(ArrowBuilder.getBuilder().getArrowsManagerPanel(), JLayeredPane.PALETTE_LAYER);
 
         desktopPane.addComponentListener(new ComponentAdapter() {
             @Override
