@@ -43,8 +43,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
     private static final int GAME_REDRAW_TIMEOUT_MS = 300; // timeout before game goes to redraw on scrollbars change
 
-    // WARNING, permanents contains top level PANELS (cards), use getMainPanel for
-    // real MagePermanent (permanents)
+    // WARNING, permanents contains top level PANELS (cards), use getMainPanel for real MagePermanent (permanents)
     // Source code logic and naming here:
     // * MageCard card - top layer panel (example: permanent + icons layer + another
     // layer);
@@ -73,8 +72,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
     private boolean addedCreature;
 
     private boolean removedCreature;
-    // defines if the battlefield is within a top (means top row of player panels)
-    // or a bottom player panel
+    // defines if the battlefield is within a top (means top row of player panels) or a bottom player panel
     private boolean topPanelBattlefield;
 
     /**
