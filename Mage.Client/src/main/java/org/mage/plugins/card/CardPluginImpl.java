@@ -184,7 +184,7 @@ public class CardPluginImpl implements CardPlugin {
                 List<String> stackAbilities = firstPanelPerm.getOriginal().getRules() != null
                         ? firstPanelPerm.getOriginal().getRules()
                         : new ArrayList<>();
-
+                // Check the names are equal and are creatures with the same summoning sickness
                 if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
                         && stackPower == cardPower && stackToughness == cardToughness
                         && stackAbilities.equals(cardAbilities)

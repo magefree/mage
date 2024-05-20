@@ -86,7 +86,7 @@ class HollowMarauderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int count = 0;
         for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            Player opponent = game.getPlayer(source.getControllerId());
+            Player opponent = game.getPlayer(targetId);
             if (opponent == null) {
                 continue;
             }

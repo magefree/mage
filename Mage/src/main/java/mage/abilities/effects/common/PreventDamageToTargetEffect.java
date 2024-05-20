@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.constants.Duration;
@@ -45,7 +44,9 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return !this.used && super.applies(event, source, game) && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
+        return !this.used
+                && super.applies(event, source, game)
+                && getTargetPointer().getTargets(game, source).contains(event.getTargetId());
     }
 
     @Override
