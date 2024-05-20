@@ -45,12 +45,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
     // WARNING, permanents contains top level PANELS (cards), use getMainPanel for real MagePermanent (permanents)
     // Source code logic and naming here:
-    // * MageCard card - top layer panel (example: permanent + icons layer + another
-    // layer);
-    // * MagePermanent permanent - original card panel with all data, but without
-    // additional panels like icons;
-    // * Only MagePermanent allows for panels here, so getMainPanel() must return
-    // MagePermanent all the time
+    // * MageCard card - top layer panel (example: permanent + icons layer + another layer);
+    // * MagePermanent permanent - original card panel with all data, but without additional panels like icons;
+    // * Only MagePermanent allows for panels here, so getMainPanel() must return MagePermanent all the time
     private final Map<UUID, MageCard> permanents = new LinkedHashMap<>();
 
     private UUID gameId;
@@ -160,20 +157,11 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             int permanentToughness = 0;
             int oldMagePermanentPower = 0;
             int oldMagePermanentToughness = 0;
-            if (permanent != null && oldMagePermanent != null && permanent.getOriginal() != null
-                    && oldMagePermanent.getOriginal() != null) {
-                permanentPower = permanent.getOriginal().getOriginalPower() != null
-                        ? permanent.getOriginal().getOriginalPower().getValue()
-                        : 0;
-                permanentToughness = permanent.getOriginal().getOriginalToughness() != null
-                        ? permanent.getOriginal().getOriginalToughness().getValue()
-                        : 0;
-                oldMagePermanentPower = oldMagePermanent.getOriginal().getOriginalPower() != null
-                        ? oldMagePermanent.getOriginal().getOriginalPower().getValue()
-                        : 0;
-                oldMagePermanentToughness = oldMagePermanent.getOriginal().getOriginalToughness() != null
-                        ? oldMagePermanent.getOriginal().getOriginalToughness().getValue()
-                        : 0;
+            if (permanent != null && oldMagePermanent != null && permanent.getOriginal() != null && oldMagePermanent.getOriginal() != null) {
+                permanentPower = permanent.getOriginal().getOriginalPower() != null ? permanent.getOriginal().getOriginalPower().getValue() : 0;
+                permanentToughness = permanent.getOriginal().getOriginalToughness() != null ? permanent.getOriginal().getOriginalToughness().getValue() : 0;
+                oldMagePermanentPower = oldMagePermanent.getOriginal().getOriginalPower() != null ? oldMagePermanent.getOriginal().getOriginalPower().getValue() : 0;
+                oldMagePermanentToughness = oldMagePermanent.getOriginal().getOriginalToughness() != null ? oldMagePermanent.getOriginal().getOriginalToughness().getValue() : 0;
 
                 if (permanentPower != oldMagePermanentPower || permanentToughness != oldMagePermanentToughness) {
                     changed = true;
@@ -186,8 +174,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             } else {
                 if (!changed) {
                     changed = oldMagePermanent.getOriginalPermanent().isCreature() != permanent.isCreature();
-                    // Check if there was a change in the permanets that are the permanent attached
-                    // to
+                    // Check if there was a change in the permanets that are the permanent attached to
                     if (!changed) {
                         int attachments = permanent.getAttachments() == null ? 0 : permanent.getAttachments().size();
                         int attachmentsBefore = oldMagePermanent.getLinks().size();
@@ -212,9 +199,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                     if (!changed) {
                         UUID attachedToIdBefore = oldMagePermanent.getOriginalPermanent().getAttachedTo();
                         UUID attachedToId = permanent.getAttachedTo();
-                        if (attachedToIdBefore == null && attachedToId != null
-                                || attachedToId == null && attachedToIdBefore != null
-                                || (attachedToIdBefore != null && !attachedToIdBefore.equals(attachedToId))) {
+                        if (attachedToIdBefore == null && attachedToId != null || attachedToId == null && attachedToIdBefore != null || (attachedToIdBefore != null && !attachedToIdBefore.equals(attachedToId))) {
                             changed = true;
                         }
                     }
@@ -285,11 +270,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
     private void addPermanent(PermanentView permanent, final int count) {
         if (cardDimension == null) {
-            cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(),
-                    ClientDefaultSettings.dimensions.getFrameHeight());
+            cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
-        final MageCard perm = Plugins.instance.getMagePermanent(permanent, bigCard, new CardIconRenderSettings(),
-                cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
+        final MageCard perm = Plugins.instance.getMagePermanent(permanent, bigCard, new CardIconRenderSettings(), cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
         perm.setCardContainerRef(jPanel);
         perm.update(permanent);
         // cards sizes changes in parent call by sortLayout
