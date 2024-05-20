@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * @author tiera3
  */
-public enum ScryfallImageSourceSmall extends ScryfallImageSource {
+public final ScryfallImageSourceSmall extends ScryfallImageSource {
 
     private CardImageUrls innerModifyUrl(CardImageUrls cardUrls) {
         String baseUrl = null;
