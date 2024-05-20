@@ -22,7 +22,13 @@ import java.util.*;
 /**
  * @author tiera3
  */
-public final ScryfallImageSourceSmall extends ScryfallImageSource {
+public enum ScryfallImageSourceSmall extends ScryfallImageSource {
+
+    instance;
+    private static final Logger logger = Logger.getLogger(ScryfallImageSourceSmall.class);
+
+    ScryfallImageSourceSmall() {
+    }
 
     private CardImageUrls innerModifyUrl(CardImageUrls cardUrls) {
         String baseUrl = null;
