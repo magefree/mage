@@ -438,7 +438,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             return;
         }
         cardInfoPane.setLocation(40, 40);
-        cardInfoPane.setBackground(new Color(0, 0, 0, 0));
+        cardInfoPane.setBackground(new Color(0, 0, 0, 255)); // use non-transparent background to full draw, see bug example in #12261
         UI.addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
 
         MageRoundPane popupContainer = new MageRoundPane();

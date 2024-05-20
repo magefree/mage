@@ -24,7 +24,6 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
     public static final int TOOLTIP_BORDER_WIDTH = 80;
 
-    private CardView currentCard;
     private int type;
 
     private int addWidth;
@@ -51,8 +50,6 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
     @Override
     public void setCard(final CardView card, final Component container) {
-        currentCard = card;
-
         try {
             SwingUtilities.invokeLater(() -> {
                 TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
@@ -68,6 +65,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
     }
 
     private void resizeTooltipIfNeeded(Component container, int ruleLength, int rules) {
+        // TODO: fix bug with long image path here?
         if (container == null) {
             return;
         }
@@ -96,10 +94,5 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
             this.setSize(addWidth + TOOLTIP_WIDTH_MIN,
                     addHeight + TOOLTIP_HEIGHT_MIN);
         }
-    }
-
-    @Override
-    public boolean isCurrentCard(CardView card) {
-        return currentCard != null && currentCard.equals(card);
     }
 }
