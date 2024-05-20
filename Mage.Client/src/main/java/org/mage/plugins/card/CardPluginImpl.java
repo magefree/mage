@@ -102,27 +102,34 @@ public class CardPluginImpl implements CardPlugin {
      * Temporary card rendering shim. Split card rendering isn't implemented
      * yet, so use old component based rendering for the split cards.
      */
-    private CardPanel makeCardPanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback, boolean isFoil, Dimension dimension, int renderMode, boolean needFullPermanentRender) {
+    private CardPanel makeCardPanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback,
+            boolean isFoil, Dimension dimension, int renderMode, boolean needFullPermanentRender) {
         switch (renderMode) {
             case 0:
-                return new CardPanelRenderModeMTGO(view, gameId, loadImage, callback, isFoil, dimension, needFullPermanentRender);
+                return new CardPanelRenderModeMTGO(view, gameId, loadImage, callback, isFoil, dimension,
+                        needFullPermanentRender);
             case 1:
-                return new CardPanelRenderModeImage(view, gameId, loadImage, callback, isFoil, dimension, needFullPermanentRender);
+                return new CardPanelRenderModeImage(view, gameId, loadImage, callback, isFoil, dimension,
+                        needFullPermanentRender);
             default:
                 throw new IllegalStateException("Unknown render mode " + renderMode);
         }
     }
 
     @Override
-    public MageCard getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
-        CardPanel cardPanel = makeCardPanel(permanent, gameId, loadImage, callback, false, dimension, renderMode, needFullPermanentRender);
+    public MageCard getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback,
+            boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
+        CardPanel cardPanel = makeCardPanel(permanent, gameId, loadImage, callback, false, dimension, renderMode,
+                needFullPermanentRender);
         cardPanel.setShowCastingCost(true);
         return cardPanel;
     }
 
     @Override
-    public MageCard getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
-        CardPanel cardPanel = makeCardPanel(cardView, gameId, loadImage, callback, false, dimension, renderMode, needFullPermanentRender);
+    public MageCard getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback,
+            boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
+        CardPanel cardPanel = makeCardPanel(cardView, gameId, loadImage, callback, false, dimension, renderMode,
+                needFullPermanentRender);
         cardPanel.setShowCastingCost(true);
         return cardPanel;
     }
@@ -145,10 +152,17 @@ public class CardPluginImpl implements CardPlugin {
             }
 
             int insertIndex = -1;
-            int cardPower = perm.getOriginal().getOriginalPower() != null ? perm.getOriginal().getOriginalPower().getValue() : 0;
-            int cardToughness = perm.getOriginal().getOriginalToughness() != null ? perm.getOriginalPermanent().getOriginalToughness().getValue() : 0;
-            List<CounterView> cardCounters = perm.getOriginalPermanent().getCounters() != null ? perm.getOriginalPermanent().getCounters() : Collections.emptyList();
-            List<String> cardAbilities = perm.getOriginal().getRules() != null ? perm.getOriginal().getRules() : new ArrayList<>();
+            int cardPower = perm.getOriginal().getOriginalPower() != null
+                    ? perm.getOriginal().getOriginalPower().getValue()
+                    : 0;
+            int cardToughness = perm.getOriginal().getOriginalToughness() != null
+                    ? perm.getOriginalPermanent().getOriginalToughness().getValue()
+                    : 0;
+            List<CounterView> cardCounters = perm.getOriginalPermanent().getCounters() != null
+                    ? perm.getOriginalPermanent().getCounters()
+                    : Collections.emptyList();
+            List<String> cardAbilities = perm.getOriginal().getRules() != null ? perm.getOriginal().getRules()
+                    : new ArrayList<>();
 
             // Find already added to with the same name.
             for (int i = 0, n = workingRow.size(); i < n; i++) {
@@ -157,13 +171,25 @@ public class CardPluginImpl implements CardPlugin {
                 Stack stack = workingRow.get(i);
                 MagePermanent firstPanelPerm = stack.get(0);
 
-                int stackPower = firstPanelPerm.getOriginal().getOriginalPower() != null ? firstPanelPerm.getOriginal().getOriginalPower().getValue() : 0;
-                int stackToughness = firstPanelPerm.getOriginal().getOriginalToughness() != null ? firstPanelPerm.getOriginal().getOriginalToughness().getValue() : 0;
-                List<CounterView> stackCounters = firstPanelPerm.getOriginalPermanent().getCounters() != null ? firstPanelPerm.getOriginalPermanent().getCounters() : Collections.emptyList();
+                int stackPower = firstPanelPerm.getOriginal().getOriginalPower() != null
+                        ? firstPanelPerm.getOriginal().getOriginalPower().getValue()
+                        : 0;
+                int stackToughness = firstPanelPerm.getOriginal().getOriginalToughness() != null
+                        ? firstPanelPerm.getOriginal().getOriginalToughness().getValue()
+                        : 0;
+                List<CounterView> stackCounters = firstPanelPerm.getOriginalPermanent().getCounters() != null
+                        ? firstPanelPerm.getOriginalPermanent().getCounters()
+                        : Collections.emptyList();
 
-                List<String> stackAbilities = firstPanelPerm.getOriginal().getRules() != null ? firstPanelPerm.getOriginal().getRules() : new ArrayList<>();
+                List<String> stackAbilities = firstPanelPerm.getOriginal().getRules() != null
+                        ? firstPanelPerm.getOriginal().getRules()
+                        : new ArrayList<>();
                 // Check the names are equal and are creatures with the same summoning sickness
-                if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName()) && stackPower == cardPower && stackToughness == cardToughness && stackAbilities.equals(cardAbilities) && stackCounters.equals(cardCounters) && (!perm.isCreature() || firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm.getOriginalPermanent().hasSummoningSickness())) {
+                if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
+                        && stackPower == cardPower && stackToughness == cardToughness
+                        && stackAbilities.equals(cardAbilities) && stackCounters.equals(cardCounters)
+                        && (!perm.isCreature() || firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm
+                                .getOriginalPermanent().hasSummoningSickness())) {
 
                     if (!empty(firstPanelPerm.getOriginalPermanent().getAttachments())) {
                         // Put this land to the left of lands with the same name and attachments.
@@ -188,7 +214,9 @@ public class CardPluginImpl implements CardPlugin {
 
             Stack stack = new Stack();
 
-            if (perm.getOriginalPermanent().getAttachments() != null && !perm.getOriginalPermanent().getAttachments().isEmpty() && !perm.getOriginalPermanent().isAttachedTo()) {
+            if (perm.getOriginalPermanent().getAttachments() != null
+                    && !perm.getOriginalPermanent().getAttachments().isEmpty()
+                    && !perm.getOriginalPermanent().isAttachedTo()) {
                 // get the number of all attachements and sub attachments
                 AttachmentLayoutInfos ali = calculateNeededNumberOfVerticalColumns(0, cards, card);
                 stack.setMaxAttachedCount(ali.getAttachments());
@@ -204,7 +232,8 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     @Override
-    public int sortPermanents(Map<String, JComponent> ui, Map<UUID, MageCard> cards, boolean nonPermanentsOwnRow, boolean topPanel) {
+    public int sortPermanents(Map<String, JComponent> ui, Map<UUID, MageCard> cards, boolean nonPermanentsOwnRow,
+            boolean topPanel) {
         // requires to find out is position have been changed that includes:
         // adding/removing permanents, type change
 
@@ -248,7 +277,7 @@ public class CardPluginImpl implements CardPlugin {
             cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
             extraCardSpacingX = Math.round(cardWidth * EXTRA_CARD_SPACING_X);
             cardSpacingX = cardHeight - cardWidth + extraCardSpacingX; // need space for tap animation (horizontal
-                                                                      // position)
+                                                                       // position)
             cardSpacingY = Math.round(cardHeight * CARD_SPACING_Y);
             stackSpacingX = stackVertical ? 0 : Math.round(cardWidth * STACK_SPACING_X);
             stackSpacingY = Math.round(cardHeight * STACK_SPACING_Y);
@@ -332,7 +361,7 @@ public class CardPluginImpl implements CardPlugin {
                 }
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
                     MagePermanent panelPerm = stack.get(panelIndex); // it's original card panel, but you must change
-                                                                    // top layer
+                                                                     // top layer
                     int stackPosition = panelCount - panelIndex - 1;
                     if (cardsPanel != null) {
                         cardsPanel.setComponentZOrder(panelPerm.getTopPanelRef(), panelIndex);
@@ -422,7 +451,8 @@ public class CardPluginImpl implements CardPlugin {
             if (rowWidth > playAreaWidth) {
                 break;
             }
-            if (stack.getHeight() > row.getHeight() && getRowsHeight(rows) - row.getHeight() + stack.getHeight() > playAreaHeight) {
+            if (stack.getHeight() > row.getHeight()
+                    && getRowsHeight(rows) - row.getHeight() + stack.getHeight() > playAreaHeight) {
                 break;
             }
             row.add(sourceRow.remove(0));
@@ -437,7 +467,8 @@ public class CardPluginImpl implements CardPlugin {
         return height - cardSpacingY + GUTTER_Y * 2;
     }
 
-    private AttachmentLayoutInfos calculateNeededNumberOfVerticalColumns(int currentCol, Map<UUID, MageCard> cards, MageCard cardWithAttachments) {
+    private AttachmentLayoutInfos calculateNeededNumberOfVerticalColumns(int currentCol, Map<UUID, MageCard> cards,
+            MageCard cardWithAttachments) {
         int maxCol = ++currentCol;
         int attachments = 0;
         MagePermanent permWithAttachments = (MagePermanent) cardWithAttachments.getMainPanel();
@@ -446,8 +477,10 @@ public class CardPluginImpl implements CardPlugin {
             if (attachedCard != null) {
                 attachments++;
                 MagePermanent attachedPerm = (MagePermanent) attachedCard.getMainPanel();
-                if (attachedPerm.getOriginalPermanent().getAttachments() != null && !attachedPerm.getOriginalPermanent().getAttachments().isEmpty()) {
-                    AttachmentLayoutInfos attachmentLayoutInfos = calculateNeededNumberOfVerticalColumns(currentCol, cards, attachedCard);
+                if (attachedPerm.getOriginalPermanent().getAttachments() != null
+                        && !attachedPerm.getOriginalPermanent().getAttachments().isEmpty()) {
+                    AttachmentLayoutInfos attachmentLayoutInfos = calculateNeededNumberOfVerticalColumns(currentCol,
+                            cards, attachedCard);
                     if (attachmentLayoutInfos.getColumns() > maxCol) {
                         maxCol = attachmentLayoutInfos.getColumns();
                         attachments += attachmentLayoutInfos.getAttachments();
