@@ -88,14 +88,14 @@ public class PreventDamageAndRemoveCountersEffect extends PreventionEffectImpl {
             // Sum the previous added counter
             amountRemovedInTotal += (Integer) source.getEffects().get(0).getValue(SavedCounterRemovedValue.VALUE_KEY);
         }
-        additionalEffect(event, source, game, amountRemovedInTotal, amountRemovedThisTime);
+        onDamagePrevented(event, source, game, amountRemovedInTotal, amountRemovedThisTime);
         return false;
     }
 
     /**
      * Meant to be Overriden if needs be.
      */
-    protected void additionalEffect(GameEvent event, Ability source, Game game, int amountRemovedInTotal, int amountRemovedThisTime) {
+    protected void onDamagePrevented(GameEvent event, Ability source, Game game, int amountRemovedInTotal, int amountRemovedThisTime) {
         source.getEffects().setValue(SavedCounterRemovedValue.VALUE_KEY, amountRemovedInTotal);
     }
 

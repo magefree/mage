@@ -72,8 +72,8 @@ class BloatflySwarmPreventionEffect extends PreventDamageAndRemoveCountersEffect
     }
 
     @Override
-    protected void additionalEffect(GameEvent event, Ability source, Game game, int amountRemovedInTotal, int amountRemovedThisTime) {
-        super.additionalEffect(event, source, game, amountRemovedInTotal, amountRemovedThisTime);
+    protected void onDamagePrevented(GameEvent event, Ability source, Game game, int amountRemovedInTotal, int amountRemovedThisTime) {
+        super.onDamagePrevented(event, source, game, amountRemovedInTotal, amountRemovedThisTime);
         new AddCountersPlayersEffect(CounterType.RAD.createInstance(amountRemovedThisTime), TargetController.EACH_PLAYER)
                 .apply(game, source);
     }

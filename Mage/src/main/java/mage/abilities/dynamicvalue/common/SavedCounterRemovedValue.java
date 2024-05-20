@@ -8,6 +8,9 @@ import mage.game.Game;
 import java.util.Optional;
 
 /**
+ * For trigger/prevention effects that save a value of removed counters.
+ * Retrieve the value in resulting effects without need for custom ones.
+ *
  * @author Susucr
  */
 public enum SavedCounterRemovedValue implements DynamicValue {
