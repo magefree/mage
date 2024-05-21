@@ -38,9 +38,9 @@ public enum ScryfallImageSourceSmall implements CardImageSource {
 		if (cardUrls.baseUrl != null && !cardUrls.baseUrl.isEmpty()) {
             baseUrl = cardUrls.baseUrl.replaceFirst("/large/","/small/").replaceFirst("format=image","format=image&version=small");
         }
-        if (cardUrls.alternativeUrl != null
-                && !cardUrls.alternativeUrl.isEmpty()) {
-            alternativeUrl = cardUrls.alternativeUrl.replaceFirst("/large/","/small/").replaceFirst("format=image","format=image&version=small");
+        if (cardUrls.alternativeUrls != null
+                && !cardUrls.alternativeUrls.isEmpty()) {
+            alternativeUrl = cardUrls.alternativeUrls.get(0).replaceFirst("/large/","/small/").replaceFirst("format=image","format=image&version=small");
         }
         return new CardImageUrls(baseUrl, alternativeUrl);
 	}
