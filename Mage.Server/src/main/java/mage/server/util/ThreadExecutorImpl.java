@@ -15,8 +15,8 @@ public class ThreadExecutorImpl implements ThreadExecutor {
     private static final Logger logger = Logger.getLogger(ThreadExecutorImpl.class);
 
     // used for max tourney limit, but without new config setting
-    // example: server can have 100 games and 10 tourney at a time
-    private final int GAMES_PER_TOURNEY_RATIO = 100 / 10;
+    // example: server can have 50 games and 10 tourney at a time
+    private static final int GAMES_PER_TOURNEY_RATIO = 50 / 10;
 
     private final ExecutorService callExecutor; // shareable threads to run single task (example: save new game settings from a user, send chat message, etc)
     private final ExecutorService gameExecutor; // game threads to run long tasks, one per game (example: run game and wait user's feedback)
@@ -72,7 +72,7 @@ public class ThreadExecutorImpl implements ThreadExecutor {
 
         CachedThreadPoolWithException() {
             // use same params as Executors.newCachedThreadPool()
-            super(0, Integer.MAX_VALUE,60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+            super(0, Integer.MAX_VALUE,60L, TimeUnit.SECONDS, new SynchronousQueue<>());
         }
 
         @Override
@@ -91,7 +91,7 @@ public class ThreadExecutorImpl implements ThreadExecutor {
 
         FixedThreadPoolWithException(int nThreads) {
             // use same params as Executors.newFixedThreadPool()
-            super(nThreads, nThreads,0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+            super(nThreads, nThreads,0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
         }
 
         @Override
