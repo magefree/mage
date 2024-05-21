@@ -48,19 +48,11 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
      * retrieved using LKI (608.2b).<br>
      * This is only used if the the target pointer is used to transfer
      * information about a related permanent (often from triggered abilities).
-     *
-     * @param game
-     * @param source
-     * @return permanent
      */
     Permanent getFirstTargetPermanentOrLKI(Game game, Ability source);
 
     /**
      * Describes the appropriate subset of targets for ability text.
-     *
-     * @param targets
-     * @param defaultText
-     * @return
      */
     default String describeTargets(Targets targets, String defaultDescription) {
         return defaultDescription;
@@ -71,10 +63,7 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
     }
 
     /**
-     * Store text to target pointer (usefull to keep data for specific trigger, e.g. selected target name for rules)
-     *
-     * @param key
-     * @param value
+     * Store text to target pointer (useful to keep data for specific trigger, e.g. selected target name for rules)
      */
     TargetPointer withData(String key, String value);
 
