@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.CardImageUrls;
 import org.mage.plugins.card.dl.sources.ScryfallImageSource;
+import org.mage.plugins.card.dl.sources.ScryfallImageSourceSmall;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
