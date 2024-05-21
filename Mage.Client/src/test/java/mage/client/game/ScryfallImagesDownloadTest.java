@@ -52,7 +52,7 @@ public class ScryfallImagesDownloadTest {
         CardImageSource imageSourceSmall = ScryfallImageSourceSmall.instance;
 
         // normal card
-        CardImageUrls urls = imageSourceSmall.generateCardUrl(new CardDownloadData("Grizzly Bears", "10E", "268", false, 0));
+        urls = imageSourceSmall.generateCardUrl(new CardDownloadData("Grizzly Bears", "10E", "268", false, 0));
         Assert.assertEquals("https://api.scryfall.com/cards/10e/268/en?format=image&version=small", urls.baseUrl);
 
         // various card
