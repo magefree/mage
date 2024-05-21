@@ -284,6 +284,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Waterlogged Grove", 331, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 256, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Wedding Ring", 213, Rarity.MYTHIC, mage.cards.w.WeddingRing.class));
+        cards.add(new SetCardInfo("Weeping Angel", 168, Rarity.RARE, mage.cards.w.WeepingAngel.class));
         cards.add(new SetCardInfo("Wibbly-wobbly, Timey-wimey", 62, Rarity.COMMON, mage.cards.w.WibblyWobblyTimeyWimey.class));
         cards.add(new SetCardInfo("Wound Reflection", 223, Rarity.RARE, mage.cards.w.WoundReflection.class));
         cards.add(new SetCardInfo("Wreck and Rebuild", 169, Rarity.UNCOMMON, mage.cards.w.WreckAndRebuild.class));
