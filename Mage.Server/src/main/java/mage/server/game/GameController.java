@@ -925,7 +925,7 @@ public class GameController implements GameCallback {
         }
     }
 
-    private synchronized void informPersonal(UUID playerId, final String message) throws MageException {
+    private void informPersonal(UUID playerId, final String message) throws MageException {
         perform(playerId, playerId1 -> getGameSession(playerId1).informPersonal(message));
     }
 

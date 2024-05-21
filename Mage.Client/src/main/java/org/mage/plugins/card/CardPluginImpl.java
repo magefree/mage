@@ -113,7 +113,6 @@ public class CardPluginImpl implements CardPlugin {
                         needFullPermanentRender);
             default:
                 throw new IllegalStateException("Unknown render mode " + renderMode);
-
         }
     }
 
@@ -141,13 +140,11 @@ public class CardPluginImpl implements CardPlugin {
         for (MageCard card : cards.values()) {
             MagePermanent perm = (MagePermanent) card.getMainPanel(); // all cards must be MagePermanent on battlefield
 
-            if (!rowType.isType(perm)) {
+            if (!rowType.isType(perm) || perm.getOriginalPermanent().isAttachedToPermanent()) {
                 continue;
             }
 
-            if ((!perm.isLand() && !perm.isToken())
-                    || perm.getOriginalPermanent().isAttachedToPermanent()
-                    || (perm.isCreature())) {
+            if ((!perm.isLand() && !perm.isToken()) || (perm.isCreature() && !perm.isToken())) {
                 Stack newStack = new Stack();
                 newStack.add(perm);
                 workingRow.add(newStack);
@@ -155,6 +152,17 @@ public class CardPluginImpl implements CardPlugin {
             }
 
             int insertIndex = -1;
+            int cardPower = perm.getOriginal().getOriginalPower() != null
+                    ? perm.getOriginal().getOriginalPower().getValue()
+                    : 0;
+            int cardToughness = perm.getOriginal().getOriginalToughness() != null
+                    ? perm.getOriginalPermanent().getOriginalToughness().getValue()
+                    : 0;
+            List<CounterView> cardCounters = perm.getOriginalPermanent().getCounters() != null
+                    ? perm.getOriginalPermanent().getCounters()
+                    : Collections.emptyList();
+            List<String> cardAbilities = perm.getOriginal().getRules() != null ? perm.getOriginal().getRules()
+                    : new ArrayList<>();
 
             // Find already added to with the same name.
             for (int i = 0, n = workingRow.size(); i < n; i++) {
@@ -162,18 +170,29 @@ public class CardPluginImpl implements CardPlugin {
                 // use top layer panel
                 Stack stack = workingRow.get(i);
                 MagePermanent firstPanelPerm = stack.get(0);
+
+                int stackPower = firstPanelPerm.getOriginal().getOriginalPower() != null
+                        ? firstPanelPerm.getOriginal().getOriginalPower().getValue()
+                        : 0;
+                int stackToughness = firstPanelPerm.getOriginal().getOriginalToughness() != null
+                        ? firstPanelPerm.getOriginal().getOriginalToughness().getValue()
+                        : 0;
+                List<CounterView> stackCounters = firstPanelPerm.getOriginalPermanent().getCounters() != null
+                        ? firstPanelPerm.getOriginalPermanent().getCounters()
+                        : Collections.emptyList();
+
+                List<String> stackAbilities = firstPanelPerm.getOriginal().getRules() != null
+                        ? firstPanelPerm.getOriginal().getRules()
+                        : new ArrayList<>();
+                // Check the names are equal and are creatures with the same summoning sickness
                 if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
-                        && firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm.getOriginalPermanent()
-                                .hasSummoningSickness()) {
+                        && stackPower == cardPower && stackToughness == cardToughness
+                        && stackAbilities.equals(cardAbilities) && stackCounters.equals(cardCounters)
+                        && (!perm.isCreature() || firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm
+                                .getOriginalPermanent().hasSummoningSickness())) {
 
                     if (!empty(firstPanelPerm.getOriginalPermanent().getAttachments())) {
                         // Put this land to the left of lands with the same name and attachments.
-                        insertIndex = i;
-                        break;
-                    }
-                    List<CounterView> counters = firstPanelPerm.getOriginalPermanent().getCounters();
-                    if (counters != null && !counters.isEmpty()) {
-                        // don't put to first panel if it has counters
                         insertIndex = i;
                         break;
                     }
@@ -183,12 +202,7 @@ public class CardPluginImpl implements CardPlugin {
                         insertIndex = i + 1;
                         continue;
                     }
-                    counters = perm.getOriginalPermanent().getCounters();
-                    if (counters != null && !counters.isEmpty()) {
-                        // if a land has counter, put it to the right
-                        insertIndex = i + 1;
-                        continue;
-                    }
+
                     // Add to stack.
                     stack.add(0, perm);
                     continue outerLoop;

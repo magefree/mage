@@ -119,11 +119,12 @@ public class DraftController {
     private synchronized void checkStart() {
         if (!draft.isStarted() && allJoined()) {
             draft.setStarted();
-            managerFactory.threadExecutor().getCallExecutor().execute(this::startDraft);
+            managerFactory.threadExecutor().getTourneyExecutor().execute(this::startDraft);
         }
     }
 
     private void startDraft() {
+        Thread.currentThread().setName("TOURNEY DRAFT " + tableId);
         for (final Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
             if (!entry.getValue().init()) {
                 logger.fatal("Unable to initialize client for playerId " + entry.getKey());

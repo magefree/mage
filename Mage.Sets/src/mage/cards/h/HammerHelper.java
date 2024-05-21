@@ -65,6 +65,7 @@ class HammerHelperEffect extends OneShotEffect {
         if (controller != null && targetCreature != null) {
             source.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId(), game));
             game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn), source);
+            game.getState().processAction(game);
             targetCreature.untap(game);
             int amount = controller.rollDice(outcome, source, game, 6);
             game.addEffect(new BoostTargetEffect(amount, 0, Duration.EndOfTurn), source);

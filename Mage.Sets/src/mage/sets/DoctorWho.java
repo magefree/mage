@@ -276,6 +276,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Time Lord Regeneration", 59, Rarity.UNCOMMON, mage.cards.t.TimeLordRegeneration.class));
         cards.add(new SetCardInfo("Time Wipe", 238, Rarity.RARE, mage.cards.t.TimeWipe.class));
         cards.add(new SetCardInfo("Traverse Eternity", 60, Rarity.RARE, mage.cards.t.TraverseEternity.class));
+        cards.add(new SetCardInfo("Trenzalore Clocktower", 190, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trenzalore Clocktower", 463, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trenzalore Clocktower", 795, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trenzalore Clocktower", 1054, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Truth or Consequences", 163, Rarity.UNCOMMON, mage.cards.t.TruthOrConsequences.class));
         cards.add(new SetCardInfo("Twice Upon a Time", 61, Rarity.RARE, mage.cards.t.TwiceUponATime.class));
         cards.add(new SetCardInfo("Vashta Nerada", 73, Rarity.RARE, mage.cards.v.VashtaNerada.class));
@@ -284,6 +288,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Waterlogged Grove", 331, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 256, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Wedding Ring", 213, Rarity.MYTHIC, mage.cards.w.WeddingRing.class));
+        cards.add(new SetCardInfo("Weeping Angel", 168, Rarity.RARE, mage.cards.w.WeepingAngel.class));
         cards.add(new SetCardInfo("Wibbly-wobbly, Timey-wimey", 62, Rarity.COMMON, mage.cards.w.WibblyWobblyTimeyWimey.class));
         cards.add(new SetCardInfo("Wound Reflection", 223, Rarity.RARE, mage.cards.w.WoundReflection.class));
         cards.add(new SetCardInfo("Wreck and Rebuild", 169, Rarity.UNCOMMON, mage.cards.w.WreckAndRebuild.class));

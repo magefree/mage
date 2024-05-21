@@ -108,6 +108,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonskull Summit", 261, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 262, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
         cards.add(new SetCardInfo("Duchess, Wayward Tavernkeep", 57, Rarity.RARE, mage.cards.d.DuchessWaywardTavernkeep.class));
+        cards.add(new SetCardInfo("ED-E, Lonesome Eyebot", 131, Rarity.RARE, mage.cards.e.EDELonesomeEyebot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("ED-E, Lonesome Eyebot", 432, Rarity.RARE, mage.cards.e.EDELonesomeEyebot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("ED-E, Lonesome Eyebot", 659, Rarity.RARE, mage.cards.e.EDELonesomeEyebot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("ED-E, Lonesome Eyebot", 960, Rarity.RARE, mage.cards.e.EDELonesomeEyebot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elder Arthur Maxson", 102, Rarity.RARE, mage.cards.e.ElderArthurMaxson.class));
         cards.add(new SetCardInfo("Elder Owyn Lyons", 103, Rarity.UNCOMMON, mage.cards.e.ElderOwynLyons.class));
         cards.add(new SetCardInfo("Electrosiphon", 104, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
@@ -163,6 +167,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 319, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Isolated Chapel", 269, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("James, Wandering Dad", 31, Rarity.RARE, mage.cards.j.JamesWanderingDad.class));
+        cards.add(new SetCardInfo("Jason Bright, Glowing Prophet", 32, Rarity.RARE, mage.cards.j.JasonBrightGlowingProphet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jason Bright, Glowing Prophet", 376, Rarity.RARE, mage.cards.j.JasonBrightGlowingProphet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jason Bright, Glowing Prophet", 560, Rarity.RARE, mage.cards.j.JasonBrightGlowingProphet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jason Bright, Glowing Prophet", 904, Rarity.RARE, mage.cards.j.JasonBrightGlowingProphet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jungle Shrine", 270, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
         cards.add(new SetCardInfo("Junk Jet", 60, Rarity.RARE, mage.cards.j.JunkJet.class));
         cards.add(new SetCardInfo("Junktown", 150, Rarity.RARE, mage.cards.j.Junktown.class));
@@ -353,6 +361,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("The Motherlode, Excavator", 389, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Motherlode, Excavator", 590, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Motherlode, Excavator", 917, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Nipton Lottery", 113, Rarity.RARE, mage.cards.t.TheNiptonLottery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Nipton Lottery", 423, Rarity.RARE, mage.cards.t.TheNiptonLottery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Nipton Lottery", 641, Rarity.RARE, mage.cards.t.TheNiptonLottery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Nipton Lottery", 951, Rarity.RARE, mage.cards.t.TheNiptonLottery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Prydwen, Steel Flagship", 22, Rarity.RARE, mage.cards.t.ThePrydwenSteelFlagship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Prydwen, Steel Flagship", 370, Rarity.RARE, mage.cards.t.ThePrydwenSteelFlagship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Prydwen, Steel Flagship", 550, Rarity.RARE, mage.cards.t.ThePrydwenSteelFlagship.class, NON_FULL_USE_VARIOUS));
