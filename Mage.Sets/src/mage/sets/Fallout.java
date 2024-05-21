@@ -357,6 +357,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("The Motherlode, Excavator", 389, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Motherlode, Excavator", 590, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Motherlode, Excavator", 917, Rarity.RARE, mage.cards.t.TheMotherlodeExcavator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Nipton Lottery", 113, Rarity.RARE, mage.cards.t.TheNiptonLottery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Nipton Lottery", 423, Rarity.RARE, mage.cards.t.TheNiptonLottery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Nipton Lottery", 641, Rarity.RARE, mage.cards.t.TheNiptonLottery.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Nipton Lottery", 951, Rarity.RARE, mage.cards.t.TheNiptonLottery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Wise Mothman", 4, Rarity.MYTHIC, mage.cards.t.TheWiseMothman.class));
         cards.add(new SetCardInfo("Thirst for Knowledge", 180, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class));
         cards.add(new SetCardInfo("Thought Vessel", 251, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
