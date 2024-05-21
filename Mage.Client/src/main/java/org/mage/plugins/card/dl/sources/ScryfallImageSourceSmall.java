@@ -102,7 +102,7 @@ public enum ScryfallImageSourceSmall implements CardImageSource {
 
     @Override
     public void setCurrentLanguage(CardLanguage cardLanguage) {
-        baseSource.currentLanguage = cardLanguage;
+        baseSource.setCurrentLanguage(cardLanguage);
     }
 
     @Override
