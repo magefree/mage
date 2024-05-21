@@ -10,6 +10,7 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author Susucr
@@ -28,8 +29,8 @@ public class DealsDamageToThisAllTriggeredAbility extends TriggeredAbilityImpl {
         this.setTargetPointer = setTargetPointer;
         this.filterPermanent = filterPermanent;
         this.combatOnly = combatOnly;
-        setTriggerPhrase("Whenever " + filterPermanent.getMessage() + " deals "
-                + (combatOnly ? "combat " : "") + "damage to a {this}, ");
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filterPermanent.getMessage()) + " deals "
+                + (combatOnly ? "combat " : "") + "damage to {this}, ");
     }
 
     protected DealsDamageToThisAllTriggeredAbility(final DealsDamageToThisAllTriggeredAbility ability) {

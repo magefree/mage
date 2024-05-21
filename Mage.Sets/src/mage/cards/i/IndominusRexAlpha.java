@@ -47,7 +47,8 @@ public final class IndominusRexAlpha extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new IndominusRexAlphaCountersEffect()));
 
         // When Indominus Rex enters the battlefield, draw a card for each counter on it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(xValue)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(xValue)
+                .setText("draw a card for each counter on it")));
     }
 
     private IndominusRexAlpha(final IndominusRexAlpha card) {

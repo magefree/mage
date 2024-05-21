@@ -36,7 +36,7 @@ public final class DontMove extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new UntilYourNextTurnDelayedTriggeredAbility(
                         new BecomesTappedTriggeredAbility(
-                                new DestroyTargetEffect(), false,
+                                new DestroyTargetEffect().setText("destroy it"), false,
                                 StaticFilters.FILTER_PERMANENT_CREATURE, true
                         )
                 )
