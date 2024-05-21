@@ -61,7 +61,7 @@ class MagmaPummelerPreventionEffect extends PreventDamageAndRemoveCountersEffect
 
     MagmaPummelerPreventionEffect() {
         super(true, true, true);
-        staticText = "If damage would be dealt to Magma {this} while it has a +1/+1 counter on it, "
+        staticText = "If damage would be dealt to {this} while it has a +1/+1 counter on it, "
                 + "prevent that damage and remove that many +1/+1 counters from it. "
                 + "When one or more counters are removed from {this} this way, it deals that much damage to any target.";
         this.reflexiveId = null;
