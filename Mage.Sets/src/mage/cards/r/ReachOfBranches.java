@@ -21,7 +21,7 @@ public final class ReachOfBranches extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.FOREST, "a Forest");
 
     public ReachOfBranches(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{4}{G}");
         this.subtype.add(SubType.TREEFOLK);
 
         // Create a 2/5 green Treefolk Shaman creature token.

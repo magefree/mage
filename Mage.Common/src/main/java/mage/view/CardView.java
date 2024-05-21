@@ -1573,8 +1573,8 @@ public class CardView extends SimpleCardView {
         return cardTypes.contains(CardType.ARTIFACT);
     }
 
-    public boolean isTribal() {
-        return cardTypes.contains(CardType.TRIBAL);
+    public boolean isKindred() {
+        return cardTypes.contains(CardType.KINDRED);
     }
 
     public void setInViewerOnly(boolean inViewerOnly) {
