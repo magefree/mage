@@ -30,7 +30,7 @@ import mage.target.common.TargetDiscard;
  */
 public final class IndominusRexAlpha extends CardImpl {
 
-    private static final DynamicValue xValue = new CountersSourceCount(null);
+    private static final DynamicValue xValue = new CountersSourceCount();
 
     public IndominusRexAlpha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U/B}{U/B}{G}{G}");

@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class HancockGhoulishMayor extends CardImpl {
 
-    private static final DynamicValue xValue = new CountersSourceCount(null);
+    private static final DynamicValue xValue = new CountersSourceCount();
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
