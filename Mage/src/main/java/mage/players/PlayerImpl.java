@@ -4349,14 +4349,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         List<Ability> options = new ArrayList<>();
         if (ability.isModal()) {
             addModeOptions(options, ability, game);
-        } else if (!ability.getTargets().getUnchosen().isEmpty()) {
+        } else if (!ability.getTargets().getUnchosen(game).isEmpty()) {
             // TODO: Handle other variable costs than mana costs
             if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                 addVariableXOptions(options, ability, 0, game);
             } else {
                 addTargetOptions(options, ability, 0, game);
             }
-        } else if (!ability.getCosts().getTargets().getUnchosen().isEmpty()) {
+        } else if (!ability.getCosts().getTargets().getUnchosen(game).isEmpty()) {
             addCostTargetOptions(options, ability, 0, game);
         }
 
@@ -4371,13 +4371,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             newOption.getModes().clearSelectedModes();
             newOption.getModes().addSelectedMode(mode.getId());
             newOption.getModes().setActiveMode(mode);
-            if (!newOption.getTargets().getUnchosen().isEmpty()) {
+            if (!newOption.getTargets().getUnchosen(game).isEmpty()) {
                 if (!newOption.getManaCosts().getVariableCosts().isEmpty()) {
                     addVariableXOptions(options, newOption, 0, game);
                 } else {
                     addTargetOptions(options, newOption, 0, game);
                 }
-            } else if (!newOption.getCosts().getTargets().getUnchosen().isEmpty()) {
+            } else if (!newOption.getCosts().getTargets().getUnchosen(game).isEmpty()) {
                 addCostTargetOptions(options, newOption, 0, game);
             } else {
                 options.add(newOption);
@@ -4390,7 +4390,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
-        for (Target target : option.getTargets().getUnchosen().get(targetNum).getTargetOptions(option, game)) {
+        for (Target target : option.getTargets().getUnchosen(game).get(targetNum).getTargetOptions(option, game)) {
             Ability newOption = option.copy();
             if (target instanceof TargetAmount) {
                 for (UUID targetId : target.getTargets()) {

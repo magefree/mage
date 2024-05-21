@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -17,11 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceCreatureType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,8 +25,9 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class CallousOppressor extends CardImpl {
@@ -118,7 +114,7 @@ class CallousOppressorChooseCreatureTypeEffect extends OneShotEffect {
         if (controller != null) {
             TargetOpponent target = new TargetOpponent(true);
             if (target.canChoose(controller.getId(), source, game)) {
-                while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+                while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                     controller.chooseTarget(outcome, target, source, game);
                 }
             } else {

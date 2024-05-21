@@ -34,7 +34,6 @@ import mage.target.Targets;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
-import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
@@ -392,7 +391,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
             if (effect != null
                     && stackObject.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
-                if (!target.doneChoosing()) {
+                if (!target.doneChoosing(game)) {
                     for (UUID targetId : target.possibleTargets(stackObject.getControllerId(), stackObject.getStackAbility(), game)) {
                         Game sim = game.createSimulationForAI();
                         StackAbility newAbility = (StackAbility) stackObject.copy();
@@ -740,10 +739,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
         if (targets.isEmpty()) {
             return super.chooseTarget(outcome, cards, target, source, game);
         }
-        if (!target.doneChoosing()) {
+        if (!target.doneChoosing(game)) {
             for (UUID targetId : targets) {
                 target.addTarget(targetId, source, game);
-                if (target.doneChoosing()) {
+                if (target.doneChoosing(game)) {
                     targets.clear();
                     return true;
                 }
@@ -758,10 +757,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
         if (targets.isEmpty()) {
             return super.choose(outcome, cards, target, source, game);
         }
-        if (!target.doneChoosing()) {
+        if (!target.doneChoosing(game)) {
             for (UUID targetId : targets) {
                 target.add(targetId, game);
-                if (target.doneChoosing()) {
+                if (target.doneChoosing(game)) {
                     targets.clear();
                     return true;
                 }
