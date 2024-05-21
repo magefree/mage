@@ -108,6 +108,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonskull Summit", 261, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 262, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
         cards.add(new SetCardInfo("Duchess, Wayward Tavernkeep", 57, Rarity.RARE, mage.cards.d.DuchessWaywardTavernkeep.class));
+        cards.add(new SetCardInfo("ED-E, Lonesome Eyebot", 131, Rarity.RARE, mage.cards.e.EDELonesomeEyebot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("ED-E, Lonesome Eyebot", 432, Rarity.RARE, mage.cards.e.EDELonesomeEyebot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("ED-E, Lonesome Eyebot", 659, Rarity.RARE, mage.cards.e.EDELonesomeEyebot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("ED-E, Lonesome Eyebot", 960, Rarity.RARE, mage.cards.e.EDELonesomeEyebot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elder Arthur Maxson", 102, Rarity.RARE, mage.cards.e.ElderArthurMaxson.class));
         cards.add(new SetCardInfo("Elder Owyn Lyons", 103, Rarity.UNCOMMON, mage.cards.e.ElderOwynLyons.class));
         cards.add(new SetCardInfo("Electrosiphon", 104, Rarity.RARE, mage.cards.e.Electrosiphon.class, NON_FULL_USE_VARIOUS));
