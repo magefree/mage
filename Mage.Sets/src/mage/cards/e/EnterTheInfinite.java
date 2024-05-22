@@ -1,10 +1,8 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.CardsInControllerLibraryCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
@@ -21,17 +19,18 @@ import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class EnterTheInfinite extends CardImpl {
 
     public EnterTheInfinite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{8}{U}{U}{U}{U}");
 
         // Draw cards equal to the number of cards in your library,
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new CardsInControllerLibraryCount()));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(CardsInControllerLibraryCount.instance));
         //then put a card from your hand on top of your library.
         this.getSpellAbility().addEffect(new PutCardOnLibraryEffect());
         //You have no maximum hand size until your next turn.
@@ -45,35 +44,6 @@ public final class EnterTheInfinite extends CardImpl {
     @Override
     public EnterTheInfinite copy() {
         return new EnterTheInfinite(this);
-    }
-}
-
-class CardsInControllerLibraryCount implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (sourceAbility != null) {
-            Player controller = game.getPlayer(sourceAbility.getControllerId());
-            if (controller != null) {
-                return controller.getLibrary().size();
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public CardsInControllerLibraryCount copy() {
-        return new CardsInControllerLibraryCount();
-    }
-
-    @Override
-    public String getMessage() {
-        return "card in your library";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
     }
 }
 
