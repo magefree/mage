@@ -1,7 +1,6 @@
 package mage;
 
 
-
 /**
  * Enum representing the mana symbols.
  * <p>
@@ -73,6 +72,11 @@ public enum ManaSymbol {
     HYBRID_RW("{R/W}", R, W, Type.HYBRID, Type.COLORED),
     HYBRID_GW("{G/W}", G, W, Type.HYBRID, Type.COLORED),
     HYBRID_GU("{G/U}", G, U, Type.HYBRID, Type.COLORED),
+    HYBRID_CW("{W/U}", W, U, Type.HYBRID, Type.COLORED),
+    HYBRID_CU("{W/U}", W, U, Type.HYBRID, Type.COLORED),
+    HYBRID_CB("{W/B}", W, B, Type.HYBRID, Type.COLORED),
+    HYBRID_CR("{U/R}", U, R, Type.HYBRID, Type.COLORED),
+    HYBRID_CG("{B/G}", B, G, Type.HYBRID, Type.COLORED),
     MONOCOLORED_HYBRID_W("{2/W}", W, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
     MONOCOLORED_HYBRID_U("{2/U}", U, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
     MONOCOLORED_HYBRID_B("{2/B}", B, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),

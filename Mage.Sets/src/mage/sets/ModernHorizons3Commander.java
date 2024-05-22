@@ -32,5 +32,6 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("March from Velis Vel", 48, Rarity.RARE, mage.cards.m.MarchFromVelisVel.class));
         cards.add(new SetCardInfo("Oblivion Sower", 158, Rarity.MYTHIC, mage.cards.o.OblivionSower.class));
         cards.add(new SetCardInfo("Siege-Gang Lieutenant", 61, Rarity.RARE, mage.cards.s.SiegeGangLieutenant.class));
+        cards.add(new SetCardInfo("Ulalek, Fused Atrocity", 4, Rarity.MYTHIC, mage.cards.u.UlalekFusedAtrocity.class));
     }
 }
