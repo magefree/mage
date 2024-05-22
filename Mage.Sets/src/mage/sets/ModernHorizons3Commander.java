@@ -25,6 +25,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Azlask, the Swelling Scourge", 9, Rarity.MYTHIC, mage.cards.a.AzlaskTheSwellingScourge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azlask, the Swelling Scourge", 17, Rarity.MYTHIC, mage.cards.a.AzlaskTheSwellingScourge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Azlask, the Swelling Scourge", 25, Rarity.MYTHIC, mage.cards.a.AzlaskTheSwellingScourge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bloodbraid Challenger", 70, Rarity.RARE, mage.cards.b.BloodbraidChallenger.class));
         cards.add(new SetCardInfo("Cayth, Famed Mechanist", 6, Rarity.MYTHIC, mage.cards.c.CaythFamedMechanist.class));
         cards.add(new SetCardInfo("Crib Swap", 168, Rarity.UNCOMMON, mage.cards.c.CribSwap.class));
         cards.add(new SetCardInfo("Drowner of Hope", 182, Rarity.RARE, mage.cards.d.DrownerOfHope.class));
