@@ -5,8 +5,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.constants.*;
@@ -19,7 +20,6 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,6 +42,8 @@ public final class CleopatraExiledPharaoh extends CardImpl {
         filter2.add(CounterAnyPredicate.instance);
     }
 
+    private static final DynamicValue xValue = CountersDiedCreatureCount.instance;
+
     public CleopatraExiledPharaoh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
         
@@ -60,7 +62,8 @@ public final class CleopatraExiledPharaoh extends CardImpl {
 
         // Betrayal -- Whenever a legendary creature with counters on it dies, draw a card for each counter on it. You lose 2 life.
         Ability ability2 = new DiesCreatureTriggeredAbility(
-                new CleopatraExiledPharaohEffect(), false, filter2).withFlavorWord("Betrayal");
+                new DrawCardSourceControllerEffect(xValue).setText("draw a card for each counter on it"),
+                false, filter2).withFlavorWord("Betrayal");
         Effect effect = new LoseLifeSourceControllerEffect(2);
         effect.setText("You lose 2 life");
         ability2.addEffect(effect);
@@ -77,41 +80,37 @@ public final class CleopatraExiledPharaoh extends CardImpl {
     }
 }
 
-// Based on DrizztDoUrdenEffect
-class CleopatraExiledPharaohEffect extends OneShotEffect {
-
-    CleopatraExiledPharaohEffect() {
-        super(Outcome.Benefit);
-        setText("draw a card for each counter on it");
-    }
-
-    private CleopatraExiledPharaohEffect(final CleopatraExiledPharaohEffect effect) {
-        super(effect);
-    }
+enum CountersDiedCreatureCount implements DynamicValue {
+    instance;
 
     @Override
-    public CleopatraExiledPharaohEffect copy() {
-        return new CleopatraExiledPharaohEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creatureDied = (Permanent) this.getValue("creatureDied");
-        if (creatureDied == null) {
-            return false;
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        if (sourceAbility == null || effect == null) {
+            return 0;
         }
-        int counterCount = creatureDied
+        Permanent creatureDied = (Permanent) effect.getValue("creatureDied");
+        if (creatureDied == null) {
+            return 0;
+        }
+        return creatureDied
                 .getCounters(game)
                 .values()
                 .stream()
                 .mapToInt(Counter::getCount).sum();
+    }
 
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null
-                && player.canRespond()) {
-            player.drawCards(counterCount, source, game);
-            return true;
-        }
-        return false;
+    @Override
+    public DynamicValue copy() {
+        return CountersDiedCreatureCount.instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "counters on creature that died";
+    }
+
+    @Override
+    public String toString() {
+        return "";
     }
 }
