@@ -25,6 +25,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani, Nacatl Pariah", 237, Rarity.MYTHIC, mage.cards.a.AjaniNacatlPariah.class));
         cards.add(new SetCardInfo("Basking Broodscale", 145, Rarity.COMMON, mage.cards.b.BaskingBroodscale.class));
         cards.add(new SetCardInfo("Bloodstained Mire", 216, Rarity.RARE, mage.cards.b.BloodstainedMire.class));
+        cards.add(new SetCardInfo("Brainsurge", 53, Rarity.UNCOMMON, mage.cards.b.Brainsurge.class));
         cards.add(new SetCardInfo("Breaker of Creation", 1, Rarity.UNCOMMON, mage.cards.b.BreakerOfCreation.class));
         cards.add(new SetCardInfo("Breya, Etherium Shaper", 289, Rarity.MYTHIC, mage.cards.b.BreyaEtheriumShaper.class));
         cards.add(new SetCardInfo("Chthonian Nightmare", 83, Rarity.RARE, mage.cards.c.ChthonianNightmare.class));

@@ -8,16 +8,30 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 public class BrainstormEffect extends OneShotEffect {
 
+    private final int toDraw;
+    private final int toPutOnTop;
+
     public BrainstormEffect() {
+        this(3, 2);
+    }
+
+    public BrainstormEffect(int toDraw, int toPutOnTop) {
         super(Outcome.DrawCard);
-        staticText = "draw three cards, then put two cards from your hand on top of your library in any order";
+        this.toDraw = toDraw;
+        this.toPutOnTop = toPutOnTop;
+        staticText = "draw " + CardUtil.numberToText(toDraw) + (toDraw > 1 ? " cards" : " card")
+                + ", then put " + CardUtil.numberToText(toPutOnTop) + (toPutOnTop > 1 ? " cards" : " card")
+                + " from your hand on top of your library in any order";
     }
 
     protected BrainstormEffect(final BrainstormEffect effect) {
         super(effect);
+        this.toDraw = effect.toDraw;
+        this.toPutOnTop = effect.toPutOnTop;
     }
 
     @Override
@@ -29,9 +43,10 @@ public class BrainstormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(3, source, game);
-            putOnLibrary(player, source, game);
-            putOnLibrary(player, source, game);
+            player.drawCards(toDraw, source, game);
+            for (int i = 0; i < toPutOnTop; ++i) {
+                putOnLibrary(player, source, game);
+            }
             return true;
         }
         return false;
