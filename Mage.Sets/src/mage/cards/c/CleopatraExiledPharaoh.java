@@ -7,7 +7,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.LoseLifePermanentControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.constants.*;
 import mage.cards.CardImpl;
@@ -61,7 +61,7 @@ public final class CleopatraExiledPharaoh extends CardImpl {
         // Betrayal -- Whenever a legendary creature with counters on it dies, draw a card for each counter on it. You lose 2 life.
         Ability ability2 = new DiesCreatureTriggeredAbility(
                 new CleopatraExiledPharaohEffect(), false, filter2).withFlavorWord("Betrayal");
-        Effect effect = new LoseLifePermanentControllerEffect(2);
+        Effect effect = new LoseLifeSourceControllerEffect(2);
         effect.setText("You lose 2 life");
         ability2.addEffect(effect);
         this.addAbility(ability2);
