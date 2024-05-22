@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -100,7 +100,7 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl {
 class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     PyromancerAscensionCopyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(true), true);
+        super(Zone.BATTLEFIELD, new CopyTargetStackObjectEffect(true), true);
     }
 
     private PyromancerAscensionCopyTriggeredAbility(final PyromancerAscensionCopyTriggeredAbility ability) {

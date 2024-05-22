@@ -1,27 +1,26 @@
 
 package mage.cards.h;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.Optional;
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class HandToHand extends CardImpl {
 
     public HandToHand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // During combat, players can't cast instant spells or activate abilities that aren't mana abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HandToHandEffect()));
@@ -79,9 +78,7 @@ class HandToHandEffect extends ContinuousRuleModifyingEffectImpl {
             }
             if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
                 Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
-                    return true;
-                }
+                return ability.isPresent() && !ability.get().isManaActivatedAbility();
             }
         }
         return false;

@@ -78,9 +78,7 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
                 .allMatch(card -> card
                         .getAbilities()
                         .stream()
-                        .anyMatch(ability -> ability.getAbilityType() == AbilityType.ACTIVATED
-                                || ability.getAbilityType() == AbilityType.MANA
-                                || ability.getAbilityType() == AbilityType.LOYALTY)
+                        .anyMatch(ability -> ability.isActivatedAbility())
                 );
     }
 }
@@ -112,7 +110,7 @@ class ZirdaTheDawnwakerEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getAbilityType() == AbilityType.ACTIVATED
+        return abilityToModify.isNonManaActivatedAbility()
                 && abilityToModify.isControlledBy(source.getControllerId());
     }
 

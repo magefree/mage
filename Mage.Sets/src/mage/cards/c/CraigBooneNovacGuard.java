@@ -54,7 +54,7 @@ public final class CraigBooneNovacGuard extends CardImpl {
                         new PutCountersSourceCost(CounterType.QUEST.createInstance(2)),
                         "", false
                 ), 2
-        ).withFlavorWord("One for my Baby"));
+        ).withFlavorWord("One for My Baby"));
     }
 
     private CraigBooneNovacGuard(final CraigBooneNovacGuard card) {

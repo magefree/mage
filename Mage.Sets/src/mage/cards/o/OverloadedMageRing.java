@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,7 +34,7 @@ public final class OverloadedMageRing extends CardImpl {
 
         // {1}, {T}, Sacrifice Overloaded Mage-Ring: Copy target spell you control. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(
-                new CopyTargetSpellEffect(false, false, true), new GenericManaCost(1)
+                new CopyTargetStackObjectEffect(false, false, true), new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

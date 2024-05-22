@@ -2162,11 +2162,27 @@ public abstract class GameImpl implements Game {
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
         }
-        // return addDelayedTriggeredAbility(delayedAbility);
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
         if (source != null) {
-            newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+            // Relevant ruling:
+            // 603.7e If an activated or triggered ability creates a delayed triggered ability,
+            // the source of that delayed triggered ability is the same as the source of that other ability.
+            // The controller of that delayed triggered ability is the player who controlled that other ability as it resolved.
+            // 603.7f If a static ability generates a replacement effect which causes a delayed triggered ability to be created,
+            // the source of that delayed triggered ability is the object with that static ability.
+            // The controller of that delayed triggered ability is the same as the controller of that object at the time
+            // the replacement effect was applied.
+            //
+            // There are two possibility for the zcc:
+            // 1/ the source is an Ability with a valid (not 0) zcc, and we must use the same.
+            int zcc = source.getSourceObjectZoneChangeCounter();
+            if (zcc == 0) {
+                // 2/ the source has not a valid zcc (it is most likely a StaticAbility instantiated at beginning of game)
+                //    we use the source objects's zcc
+                zcc = getState().getZoneChangeCounter(source.getSourceId());
+            }
+            newAbility.setSourceObjectZoneChangeCounter(zcc);
             newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.init(this);

@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.costs.costadjusters.ExileCardsFromHandAdjuster;
 import mage.abilities.effects.common.PhaseOutTargetEffect;
 import mage.cards.CardImpl;
@@ -9,9 +8,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -34,7 +32,8 @@ public final class MarchOfSwirlingMist extends CardImpl {
 
         // Up to X target creatures phase out.
         this.getSpellAbility().addEffect(new PhaseOutTargetEffect().setText("up to X target creatures phase out"));
-        this.getSpellAbility().setTargetAdjuster(MarchOfSwirlingMistAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
     }
 
     private MarchOfSwirlingMist(final MarchOfSwirlingMist card) {
@@ -44,15 +43,5 @@ public final class MarchOfSwirlingMist extends CardImpl {
     @Override
     public MarchOfSwirlingMist copy() {
         return new MarchOfSwirlingMist(this);
-    }
-}
-
-enum MarchOfSwirlingMistAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(0, ability.getManaCostsToPay().getX()));
     }
 }

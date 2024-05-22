@@ -5,16 +5,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -28,7 +25,8 @@ public final class KaerveksPurge extends CardImpl {
 
         // Destroy target creature with converted mana cost X. If that creature dies this way, Kaervek's Purge deals damage equal to the creature's power to the creature's controller.
         this.getSpellAbility().addEffect(new KaerveksPurgeEffect());
-        this.getSpellAbility().setTargetAdjuster(KaerveksPurgeAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private KaerveksPurge(final KaerveksPurge card) {
@@ -38,19 +36,6 @@ public final class KaerveksPurge extends CardImpl {
     @Override
     public KaerveksPurge copy() {
         return new KaerveksPurge(this);
-    }
-}
-
-enum KaerveksPurgeAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value " + xValue);
-        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        ability.addTarget(new TargetCreaturePermanent(filter));
     }
 }
 

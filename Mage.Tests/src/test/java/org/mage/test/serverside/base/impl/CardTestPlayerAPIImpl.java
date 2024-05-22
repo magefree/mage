@@ -1071,7 +1071,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert counter count on a permanent
      *
-     * @param cardName Name of the cards that should be counted.
+     * @param cardName Name of the card that should be counted.
      * @param type     Type of the counter that should be counted.
      * @param count    Expected count.
      */
@@ -1079,7 +1079,28 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         this.assertCounterCount(null, cardName, type, count);
     }
 
+    /**
+     * Assert counter count on a permanent
+     *
+     * @param player   Player who owns the card named cardName
+     * @param cardName Name of the card that should be counted.
+     * @param type     Type of the counter that should be counted.
+     * @param count    Expected count.
+     */
     public void assertCounterCount(Player player, String cardName, CounterType type, int count) throws AssertionError {
+        this.assertCounterCount(player, cardName, type.getName(), count);
+    }
+
+    /**
+     * Assert counter count on a permanent
+     *
+     * @param player        Player who owns the card named cardName
+     * @param cardName      Name of the card that should be counted.
+     * @param counterName   Name of the counter that should be counted.
+     *                      (for custom ability counters, use getRule() from the ability)
+     * @param count         Expected count.
+     */
+    public void assertCounterCount(Player player, String cardName, String counterName, int count) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
@@ -1089,7 +1110,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertNotNull("There is no such permanent " + (player == null ? "" : "for player " + player.getName()) + " on the battlefield, cardName=" + cardName, found);
-        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ':' + type + ')', count, found.getCounters(currentGame).getCount(type));
+        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ':' + counterName + ')', count, found.getCounters(currentGame).getCount(counterName));
     }
 
     /**

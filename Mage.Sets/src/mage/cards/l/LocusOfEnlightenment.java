@@ -6,7 +6,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CopyStackObjectEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -82,7 +81,7 @@ class LocusOfEnlightenmentEffect extends ContinuousEffectImpl {
         }
         for (Card card : exileZone.getCards(game)) {
             for (Ability ability : card.getAbilities(game)) {
-                if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.MANA) {
+                if (ability.isActivatedAbility()) {
                     ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
                     copyAbility.setMaxActivationsPerTurn(1);
                     permanent.addAbility(copyAbility, source.getSourceId(), game, true);
@@ -120,7 +119,7 @@ class LocusOfEnlightenmentTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
+        if (stackAbility == null || stackAbility.isManaAbility()) {
             return false;
         }
         this.getEffects().setValue("stackObject", stackAbility);

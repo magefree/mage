@@ -11,13 +11,15 @@ import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.keyword.ChannelAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.PutCards;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -25,6 +27,11 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ShigekiJukaiVisionary extends CardImpl {
+    private static final FilterCard filter = new FilterCard("nonlegendary cards from your graveyard");
+
+    static {
+        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
+    }
 
     public ShigekiJukaiVisionary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}");
@@ -49,10 +56,13 @@ public final class ShigekiJukaiVisionary extends CardImpl {
         this.addAbility(ability);
 
         // Channel — {X}{X}{G}{G}, Discard Shigeki: Return X target nonlegendary cards from your graveyard to your hand.
-        this.addAbility(new ChannelAbility(
+        Ability ability2 = new ChannelAbility(
                 "{X}{X}{G}{G}", new ReturnFromGraveyardToHandTargetEffect()
                 .setText("return X target nonlegendary cards from your graveyard to your hand")
-        ).setTargetAdjuster(ShigekiJukaiVisionaryAdjuster.instance));
+        );
+        ability2.setTargetAdjuster(new XTargetsCountAdjuster());
+        ability2.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addAbility(ability2);
     }
 
     private ShigekiJukaiVisionary(final ShigekiJukaiVisionary card) {
@@ -62,20 +72,5 @@ public final class ShigekiJukaiVisionary extends CardImpl {
     @Override
     public ShigekiJukaiVisionary copy() {
         return new ShigekiJukaiVisionary(this);
-    }
-}
-
-enum ShigekiJukaiVisionaryAdjuster implements TargetAdjuster {
-    instance;
-    private static final FilterCard filter = new FilterCard("nonlegendary cards from your graveyard");
-
-    static {
-        filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), filter));
     }
 }

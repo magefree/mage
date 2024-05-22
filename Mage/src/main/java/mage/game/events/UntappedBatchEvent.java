@@ -6,7 +6,7 @@ package mage.game.events;
 public class UntappedBatchEvent extends BatchEvent<UntappedEvent> {
 
     public UntappedBatchEvent(UntappedEvent firstEvent) {
-        super(EventType.UNTAPPED_BATCH, false, false, firstEvent);
+        super(EventType.UNTAPPED_BATCH, false, false, false, firstEvent);
     }
 
 }

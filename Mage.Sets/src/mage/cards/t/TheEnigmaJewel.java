@@ -14,7 +14,6 @@ import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.predicate.Predicate;
@@ -66,7 +65,7 @@ enum TheEnigmaJewelPredicate implements Predicate<MageObject> {
                 && input instanceof Card
                 && ((Card) input).getAbilities(game)
                 .stream()
-                .anyMatch(a -> (a.getAbilityType() == AbilityType.ACTIVATED || a.getAbilityType() == AbilityType.MANA));
+                .anyMatch(a -> (a.isActivatedAbility()));
     }
 
 }
@@ -98,8 +97,7 @@ class TheEnigmaJewelManaCondition extends ManaCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (source != null && !source.isActivated()) {
-            return source.getAbilityType() == AbilityType.MANA
-                    || source.getAbilityType() == AbilityType.ACTIVATED;
+            return source.isActivatedAbility();
         }
         return false;
     }

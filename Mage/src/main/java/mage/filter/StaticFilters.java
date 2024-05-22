@@ -645,7 +645,7 @@ public final class StaticFilters {
         FILTER_CONTROLLED_UNTAPPED_CREATURES.setLockedFilter(true);
     }
 
-    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_NON_LAND = new FilterControlledPermanent("nonland permanent");
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_NON_LAND = new FilterControlledPermanent("nonland permanent you control");
 
     static {
         FILTER_CONTROLLED_PERMANENT_NON_LAND.add(

@@ -1,7 +1,5 @@
 package mage.cards.s;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -10,10 +8,16 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -68,7 +72,7 @@ class SorcerousSpyglassActivationEffect extends ContinuousRuleModifyingEffectImp
         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
         if (ability.isPresent() && object != null) {
             return game.getState().getPlayersInRange(source.getControllerId(), game).contains(event.getPlayerId()) // controller in range
-                    && ability.get().getAbilityType() != AbilityType.MANA
+                    && !ability.get().isManaAbility()
                     && CardUtil.haveSameNames(object, cardName, game);
         }
         return false;

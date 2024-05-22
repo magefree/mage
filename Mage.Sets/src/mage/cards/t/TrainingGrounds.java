@@ -1,12 +1,14 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -68,9 +70,7 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() != AbilityType.ACTIVATED
-                && (abilityToModify.getAbilityType() != AbilityType.MANA
-                || !(abilityToModify instanceof ActivatedAbility))) {
+        if (!abilityToModify.isActivatedAbility()) {
             return false;
         }
         //Activated abilities of creatures you control

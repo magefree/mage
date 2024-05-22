@@ -1,23 +1,21 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.MillCardsEachPlayerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.watchers.Watcher;
+import mage.filter.predicate.card.MilledThisTurnPredicate;
+import mage.watchers.common.CardsMilledWatcher;
 
-import java.util.*;
+import java.util.UUID;
 
 /**
  * @author Susucr
@@ -27,7 +25,7 @@ public final class RaulTroubleShooter extends CardImpl {
     private static final FilterCard filter = new FilterCard("a spell from among cards in your graveyard that were milled this turn");
 
     static {
-        filter.add(RaulTroubleShooterPredicate.instance);
+        filter.add(MilledThisTurnPredicate.instance);
     }
 
     public RaulTroubleShooter(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +39,7 @@ public final class RaulTroubleShooter extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Once during each of your turns, you may cast a spell from among cards in your graveyard that were milled this turn.
-        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(filter), new RaulTroubleShooterWatcher());
+        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(filter), new CardsMilledWatcher());
 
         // {T}: Each player mills a card.
         this.addAbility(new SimpleActivatedAbility(
@@ -57,60 +55,5 @@ public final class RaulTroubleShooter extends CardImpl {
     @Override
     public RaulTroubleShooter copy() {
         return new RaulTroubleShooter(this);
-    }
-}
-
-enum RaulTroubleShooterPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        return RaulTroubleShooterWatcher.wasMilledThisTurn(
-                input.getPlayerId(),
-                new MageObjectReference(input.getObject().getMainCard(), game),
-                game
-        );
-    }
-}
-
-class RaulTroubleShooterWatcher extends Watcher {
-
-    // player -> set of Cards mor (the main card's mor) milled this turn.
-    private final Map<UUID, Set<MageObjectReference>> milledThisTurn = new HashMap<>();
-
-    RaulTroubleShooterWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.MILLED_CARD) {
-            return;
-        }
-        Card card = game.getCard(event.getTargetId());
-        if (card == null) {
-            return;
-        }
-        Card mainCard = card.getMainCard();
-        if (game.getState().getZone(mainCard.getId()) != Zone.GRAVEYARD) {
-            // Ensure that the current zone is indeed the graveyard
-            return;
-        }
-        milledThisTurn.computeIfAbsent(event.getPlayerId(), k -> new HashSet<>());
-        milledThisTurn.get(event.getPlayerId()).add(new MageObjectReference(mainCard, game));
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        milledThisTurn.clear();
-    }
-
-    static boolean wasMilledThisTurn(UUID playerId, MageObjectReference morMainCard, Game game) {
-        RaulTroubleShooterWatcher watcher = game.getState().getWatcher(RaulTroubleShooterWatcher.class);
-        return watcher != null && watcher
-                .milledThisTurn
-                .getOrDefault(playerId, Collections.emptySet())
-                .contains(morMainCard);
     }
 }

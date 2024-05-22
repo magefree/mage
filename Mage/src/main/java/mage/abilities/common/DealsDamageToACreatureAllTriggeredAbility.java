@@ -63,31 +63,32 @@ public class DealsDamageToACreatureAllTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.isCreature(game)) {
-            return false;
-        }
         if (combatOnly && !((DamagedEvent) event).isCombatDamage()) {
             return false;
         }
-        permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (!filterPermanent.match(permanent, getControllerId(), this, game)) {
+        Permanent permanentDealtDamage = game.getPermanent(event.getTargetId());
+        if (permanentDealtDamage == null || !permanentDealtDamage.isCreature(game)) {
             return false;
         }
-        this.getEffects().setValue("damage", event.getAmount());
+        Permanent permanentDealingDamage = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (!filterPermanent.match(permanentDealingDamage, getControllerId(), this, game)) {
+            return false;
+        }
+        int damageAmount = event.getAmount();
+        if (damageAmount < 1) {
+            return false;
+        }
+        this.getEffects().setValue("damage", damageAmount);
         this.getEffects().setValue("sourceId", event.getSourceId());
         switch (setTargetPointer) {
             case PLAYER:
-                this.getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                this.getEffects().setTargetPointer(new FixedTarget(permanentDealingDamage.getControllerId()));
                 break;
             case PERMANENT:
-                this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                this.getEffects().setTargetPointer(new FixedTarget(permanentDealingDamage, game));
                 break;
             case PERMANENT_TARGET:
-                Permanent permanent_target = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                if (permanent_target != null) {
-                    this.getEffects().setTargetPointer(new FixedTarget(permanent_target, game));
-                }
+                this.getEffects().setTargetPointer(new FixedTarget(permanentDealtDamage, game));
                 break;
         }
         return true;

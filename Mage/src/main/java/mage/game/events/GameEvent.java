@@ -102,13 +102,27 @@ public class GameEvent implements Serializable {
          */
         CLASH, CLASHED,
         DAMAGE_PLAYER,
+
         /* MILL_CARDS
          playerId    the id of the player milling the card (not the source's controller)
          targetId    the id of the card milled
          */
         MILL_CARDS,
+        /* MILLED_CARDS
+         playerId    the id of the player milling the card (not the source's controller)
+         targetId    the id of the card milled
+         */
         MILLED_CARD,
-        MILLED_CARDS,
+        /* MILLED_CARDS_BATCH_FOR_ONE_PLAYER,
+         combines all MILLED_CARD events for a player milling card at the same time in a single batch
+         playerId    the id of the player whose batch it is
+         */
+        MILLED_CARDS_BATCH_FOR_ONE_PLAYER,
+        /* MILLED_CARDS_BATCH_FOR_ALL,
+         combines all MILLED_CARD events for any player in a single batch
+         */
+        MILLED_CARDS_BATCH_FOR_ALL,
+
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
@@ -527,6 +541,14 @@ public class GameEvent implements Serializable {
         STAY_ATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
+        /* REMOVE_COUNTER, REMOVE_COUNTERS, COUNTER_REMOVED, COUNTERS_REMOVED
+         targetId    id of the permanent or player losing counter(s)
+         sourceId    id of the ability removing them
+         playerId    player who controls the ability removing the counters
+         amount      number of counters being removed
+         data        name of the counter(s) being removed
+         */
+        REMOVE_COUNTER, REMOVE_COUNTERS,
         COUNTER_REMOVED, COUNTERS_REMOVED,
         LOSE_CONTROL,
         /* LOST_CONTROL

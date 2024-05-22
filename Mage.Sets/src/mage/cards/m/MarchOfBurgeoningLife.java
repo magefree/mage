@@ -12,18 +12,15 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -47,7 +44,8 @@ public final class MarchOfBurgeoningLife extends CardImpl {
 
         // Choose target creature with mana value less than X. Search your library for a creature card with the same name as that creature, put it onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new MarchOfBurgeoningLifeEffect());
-        this.getSpellAbility().setTargetAdjuster(MarchOfBurgeoningLifeAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.FEWER_THAN));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private MarchOfBurgeoningLife(final MarchOfBurgeoningLife card) {
@@ -57,19 +55,6 @@ public final class MarchOfBurgeoningLife extends CardImpl {
     @Override
     public MarchOfBurgeoningLife copy() {
         return new MarchOfBurgeoningLife(this);
-    }
-}
-
-enum MarchOfBurgeoningLifeAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent filter = new FilterCreaturePermanent("creature with mana value less than " + xValue);
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(filter));
     }
 }
 

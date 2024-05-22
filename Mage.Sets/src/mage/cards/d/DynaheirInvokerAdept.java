@@ -1,15 +1,6 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackAbility;
-import mage.watchers.common.ManaPaidSourceWatcher;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -19,23 +10,25 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.game.stack.StackAbility;
+import mage.watchers.common.ManaPaidSourceWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author Xanderhall
  */
 public final class DynaheirInvokerAdept extends CardImpl {
 
     public DynaheirInvokerAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
@@ -50,7 +43,7 @@ public final class DynaheirInvokerAdept extends CardImpl {
 
         // {T}: When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, copy that ability. You may choose new targets for the copy.
         this.addAbility(new SimpleActivatedAbility(new CreateDelayedTriggeredAbilityEffect(new DynaheirInvokerAdeptTriggeredAbility()), new TapSourceCost()));
-        
+
     }
 
     private DynaheirInvokerAdept(final DynaheirInvokerAdept card) {
@@ -88,9 +81,9 @@ class DynaheirInvokerAdeptHasteEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         return permanent != null
-            && permanent.isCreature(game)
-            && permanent.isControlledBy(source.getControllerId())
-            && !permanent.getId().equals(source.getSourceId());
+                && permanent.isCreature(game)
+                && permanent.isControlledBy(source.getControllerId())
+                && !permanent.getId().equals(source.getSourceId());
     }
 }
 
@@ -121,7 +114,7 @@ class DynaheirInvokerAdeptTriggeredAbility extends DelayedTriggeredAbility {
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
         if (stackAbility == null
-                || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl
+                || stackAbility.getStackAbility().isManaActivatedAbility()
                 || ManaPaidSourceWatcher.getTotalPaid(stackAbility.getId(), game) < 4) {
             return false;
         }

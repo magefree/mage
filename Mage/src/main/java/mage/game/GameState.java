@@ -699,6 +699,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         game.applyEffects();
     }
 
+    public void removeTurnStartEffect(Game game) {
+        delayed.removeStartOfNewTurn(game);
+    }
+
     public void addEffect(ContinuousEffect effect, Ability source) {
         addEffect(effect, null, source);
     }
@@ -819,9 +823,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     // There might be no damage dealt, but we want to fire that damage (in a batch) could have been dealt.
+    // Of note, DamagedBatchCouldHaveFiredEvent is not a batch event in the sense it doesn't contain sub events.
     public void addBatchDamageCouldHaveBeenFired(boolean combat, Game game) {
         for (GameEvent event : simultaneousEvents) {
-            if (event instanceof DamagedBatchCouldHaveFiredEvent && event.getFlag() == combat) {
+            if (event instanceof DamagedBatchCouldHaveFiredEvent
+                    && ((DamagedBatchCouldHaveFiredEvent) event).isCombat() == combat) {
                 return;
             }
         }
@@ -898,6 +904,33 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         if (!isBatchUsed) {
             addSimultaneousEvent(new DamagedBatchAllEvent(damagedEvent), game);
+        }
+    }
+
+    public void addSimultaneousMilledCardToBatch(MilledCardEvent milledEvent, Game game) {
+        // Combine multiple mill cards events in the single event (batch)
+        // see GameEvent.MILLED_CARDS_BATCH_FOR_ONE_PLAYER and GameEvent.MILLED_CARDS_BATCH_FOR_ALL
+
+        // existing batch
+        boolean isBatchUsed = false;
+        boolean isBatchForPlayerUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof MilledBatchAllEvent) {
+                ((MilledBatchAllEvent) event).addEvent(milledEvent);
+                isBatchUsed = true;
+            } else if (event instanceof MilledBatchForOnePlayerEvent
+                    && event.getPlayerId().equals(milledEvent.getPlayerId())) {
+                ((MilledBatchForOnePlayerEvent) event).addEvent(milledEvent);
+                isBatchForPlayerUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new MilledBatchAllEvent(milledEvent), game);
+        }
+        if (!isBatchForPlayerUsed) {
+            addSimultaneousEvent(new MilledBatchForOnePlayerEvent(milledEvent), game);
         }
     }
 

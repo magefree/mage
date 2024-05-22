@@ -1,8 +1,5 @@
 package mage.cards.l;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -11,11 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.PlayerIdPredicate;
@@ -25,16 +18,19 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class LoxodonPeacekeeper extends CardImpl {
 
     public LoxodonPeacekeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.ELEPHANT);
-        this.subtype.add(SubType.SOLDIER);        
+        this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -93,7 +89,7 @@ class LoxodonPeacekeeperEffect extends OneShotEffect {
                         }
                     }
                 }
-                
+
                 if (!tiedPlayers.isEmpty()) {
                     UUID newControllerId = null;
                     if (tiedPlayers.size() > 1) {
@@ -105,7 +101,7 @@ class LoxodonPeacekeeperEffect extends OneShotEffect {
                         }
                         TargetPlayer target = new TargetPlayer(1, 1, true, filter);
                         if (target.canChoose(controller.getId(), source, game)) {
-                            while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+                            while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                                 controller.chooseTarget(outcome, target, source, game);
                             }
                         } else {

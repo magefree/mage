@@ -30,6 +30,7 @@ public enum CounterType {
     BOOK("book"),
     BORE("bore"),
     BOUNTY("bounty"),
+    BRAIN("brain"),
     BRIBERY("bribery"),
     BRICK("brick"),
     BURDEN("burden"),

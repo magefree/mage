@@ -14,7 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.target.targetpointer.FixedTargets;
 
 import java.util.ArrayList;
@@ -32,8 +32,8 @@ public class RedSunsTwilight extends CardImpl {
         // Destroy up to X target artifacts.
         // If X is 5 or more, for each artifact destroyed this way, create a token that's a copy of it.
         // Those tokens gain haste. Exile them at the beginning of the next end step.
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        this.getSpellAbility().setTargetAdjuster(RedSunsTwilightAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent(0, 1));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addEffect(new RedSunsTwilightEffect());
     }
 
@@ -44,18 +44,6 @@ public class RedSunsTwilight extends CardImpl {
     @Override
     public RedSunsTwilight copy() {
         return new RedSunsTwilight(this);
-    }
-}
-
-enum RedSunsTwilightAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        // Select up to X artifacts
-        ability.addTarget(new TargetArtifactPermanent(0, xValue));
     }
 }
 

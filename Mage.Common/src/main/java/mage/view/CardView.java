@@ -1147,7 +1147,7 @@ public class CardView extends SimpleCardView {
 
         // from normal targets
         for (Target target : targets) {
-            if (target.isChosen()) {
+            if (target.isChosen(game)) {
                 newTargets.addAll(target.getTargets());
             }
         }
