@@ -53,14 +53,14 @@ public final class CleopatraExiledPharaoh extends CardImpl {
 
         // Allies -- At the beginning of your end step, put a +1/+1 counter on each of up to two other target legendary creatures.
         // Based on Angelic Quartermaster
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false);
-        ability.setAbilityWord(AbilityWord.ALLIES);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new AddCountersTargetEffect(
+                CounterType.P1P1.createInstance()), TargetController.YOU, false).withFlavorWord("Allies");
         ability.addTarget(new TargetPermanent(0, 2, filter));
         this.addAbility(ability);
 
         // Betrayal -- Whenever a legendary creature with counters on it dies, draw a card for each counter on it. You lose 2 life.
-        Ability ability2 = new DiesCreatureTriggeredAbility(new CleopatraExiledPharaohEffect(), false, filter2);
-        ability2.setAbilityWord(AbilityWord.BETRAYAL);
+        Ability ability2 = new DiesCreatureTriggeredAbility(
+                new CleopatraExiledPharaohEffect(), false, filter2).withFlavorWord("Betrayal");
         Effect effect = new LoseLifePermanentControllerEffect(2);
         effect.setText("You lose 2 life");
         ability2.addEffect(effect);
