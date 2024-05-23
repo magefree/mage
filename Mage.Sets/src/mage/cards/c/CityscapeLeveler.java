@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.UnearthAbility;
@@ -21,7 +21,6 @@ import mage.target.common.TargetNonlandPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class CityscapeLeveler extends CardImpl {
@@ -38,7 +37,7 @@ public final class CityscapeLeveler extends CardImpl {
 
         // When you cast this spell and whenever Cityscape Leveler attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.
         Ability ability = new CityscapeLevelerAbility();
-        ability.addEffect(new CreateTokenControllerTargetPermanentEffect(new PowerstoneToken(), 1, true));
+        ability.addEffect(new CreateTokenControllerTargetEffect(new PowerstoneToken(), 1, true));
         ability.addTarget(new TargetNonlandPermanent(0, 1));
         this.addAbility(ability);
 

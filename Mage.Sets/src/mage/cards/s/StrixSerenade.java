@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -14,24 +13,24 @@ import mage.target.TargetSpell;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author Susucr
  */
-public final class SwanSong extends CardImpl {
+public final class StrixSerenade extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("enchantment, instant, or sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("artifact, creature, or planeswalker spell");
 
     static {
         filter.add(Predicates.or(
-                CardType.ENCHANTMENT.getPredicate(),
-                CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()
         ));
     }
 
-    public SwanSong(UUID ownerId, CardSetInfo setInfo) {
+    public StrixSerenade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
-        // Counter target enchantment, instant or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying.
+        // Counter target artifact, creature, or planeswalker spell. Its controller creates a 2/2 blue Bird creature token with flying.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(
                 new SwanSongBirdToken(), CreateTokenControllerTargetEffect.TargetKind.SPELL
@@ -39,12 +38,12 @@ public final class SwanSong extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    private SwanSong(final SwanSong card) {
+    private StrixSerenade(final StrixSerenade card) {
         super(card);
     }
 
     @Override
-    public SwanSong copy() {
-        return new SwanSong(this);
+    public StrixSerenade copy() {
+        return new StrixSerenade(this);
     }
 }
