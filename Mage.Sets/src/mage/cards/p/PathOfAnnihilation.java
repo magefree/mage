@@ -27,7 +27,7 @@ public final class PathOfAnnihilation extends CardImpl {
     private static final FilterCreatureSpell filter2 = new FilterCreatureSpell("a creature spell with mana value 7 or greater");
 
     static {
-        filter2.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 7));
+        filter2.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 7));
     }
 
     public PathOfAnnihilation(UUID ownerId, CardSetInfo setInfo) {
