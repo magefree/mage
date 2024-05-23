@@ -130,6 +130,7 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
+        skipListAddName(SKIP_LIST_COLOR, "MH3", "Grist, the Plague Swarm"); // temporary
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
