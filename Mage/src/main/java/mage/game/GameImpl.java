@@ -2192,8 +2192,18 @@ public abstract class GameImpl implements Game {
 
     @Override
     public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source) {
+        return fireReflexiveTriggeredAbility(reflexiveAbility, source, false);
+    }
+    
+    @Override
+    public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source, boolean fireAsSimultaneousEvent) {
         UUID uuid = this.addDelayedTriggeredAbility(reflexiveAbility, source);
-        this.fireEvent(GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source, source.getControllerId()));
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source, source.getControllerId());
+        if (fireAsSimultaneousEvent) {
+            this.getState().addSimultaneousEvent(event, this);
+        } else {
+            this.fireEvent(event);
+        }
         return uuid;
     }
 
