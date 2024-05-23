@@ -76,6 +76,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         WIZARDS("1. wizards.com - low quality CARDS, multi-language, slow download", WizardCardsImageSource.instance),
         TOKENS("2. tokens.mtg.onl - high quality TOKENS", TokensMtgImageSource.instance),
         SCRYFALL("3. scryfall.com - high quality CARDS and TOKENS, multi-language", ScryfallImageSource.instance),
+        SCRYFALL_SMALL("3a. scryfall.com small images - low quality CARDS and TOKENS, multi-language", ScryfallImageSourceSmall.instance),
         MAGIDEX("4. magidex.com - high quality CARDS", MagidexImageSource.instance),
         GRAB_BAG("5. GrabBag - STAR WARS cards and tokens", GrabbagImageSource.instance),
         MYTHICSPOILER("6. mythicspoiler.com", MythicspoilerComSource.instance),
