@@ -34,6 +34,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Chthonian Nightmare", 83, Rarity.RARE, mage.cards.c.ChthonianNightmare.class));
         cards.add(new SetCardInfo("Collective Resistance", 147, Rarity.UNCOMMON, mage.cards.c.CollectiveResistance.class));
         cards.add(new SetCardInfo("Conduit Goblin", 179, Rarity.COMMON, mage.cards.c.ConduitGoblin.class));
+        cards.add(new SetCardInfo("Cursed Mirror", 279, Rarity.RARE, mage.cards.c.CursedMirror.class));
         cards.add(new SetCardInfo("Deep Analysis", 268, Rarity.UNCOMMON, mage.cards.d.DeepAnalysis.class));
         cards.add(new SetCardInfo("Deserted Temple", 301, Rarity.RARE, mage.cards.d.DesertedTemple.class));
         cards.add(new SetCardInfo("Devourer of Destiny", 2, Rarity.RARE, mage.cards.d.DevourerOfDestiny.class));
@@ -44,6 +45,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Eldrazi Ravager", 5, Rarity.UNCOMMON, mage.cards.e.EldraziRavager.class));
         cards.add(new SetCardInfo("Emerald Medallion", 291, Rarity.RARE, mage.cards.e.EmeraldMedallion.class));
         cards.add(new SetCardInfo("Emrakul, the World Anew", 6, Rarity.MYTHIC, mage.cards.e.EmrakulTheWorldAnew.class));
+        cards.add(new SetCardInfo("Estrid's Invocation", 269, Rarity.RARE, mage.cards.e.EstridsInvocation.class));
         cards.add(new SetCardInfo("Evolution Witness", 151, Rarity.COMMON, mage.cards.e.EvolutionWitness.class));
         cards.add(new SetCardInfo("Flare of Cultivation", 154, Rarity.RARE, mage.cards.f.FlareOfCultivation.class));
         cards.add(new SetCardInfo("Flare of Denial", 62, Rarity.RARE, mage.cards.f.FlareOfDenial.class));
@@ -87,8 +89,9 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Polluted Delta", 224, Rarity.RARE, mage.cards.p.PollutedDelta.class));
         cards.add(new SetCardInfo("Priest of Titania", 286, Rarity.UNCOMMON, mage.cards.p.PriestOfTitania.class));
         cards.add(new SetCardInfo("Psychic Frog", 199, Rarity.RARE, mage.cards.p.PsychicFrog.class));
-        cards.add(new SetCardInfo("Ral, Monsoon Mage", 247, Rarity.MYTHIC, mage.cards.r.RalMonsoonMage.class));
         cards.add(new SetCardInfo("Ral, Leyline Prodigy", 247, Rarity.MYTHIC, mage.cards.r.RalLeylineProdigy.class));
+        cards.add(new SetCardInfo("Ral, Monsoon Mage", 247, Rarity.MYTHIC, mage.cards.r.RalMonsoonMage.class));
+        cards.add(new SetCardInfo("Reef Worm", 271, Rarity.RARE, mage.cards.r.ReefWorm.class));
         cards.add(new SetCardInfo("Revitalizing Repast", 256, Rarity.UNCOMMON, mage.cards.r.RevitalizingRepast.class));
         cards.add(new SetCardInfo("Ruby Medallion", 295, Rarity.RARE, mage.cards.r.RubyMedallion.class));
         cards.add(new SetCardInfo("Rush of Inspiration", 257, Rarity.UNCOMMON, mage.cards.r.RushOfInspiration.class));
@@ -110,6 +113,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Safekeeper", 287, Rarity.RARE, mage.cards.s.SylvanSafekeeper.class));
         cards.add(new SetCardInfo("Tamiyo, Inquisitive Student", 242, Rarity.MYTHIC, mage.cards.t.TamiyoInquisitiveStudent.class));
         cards.add(new SetCardInfo("Tamiyo, Seasoned Scholar", 242, Rarity.MYTHIC, mage.cards.t.TamiyoSeasonedScholar.class));
+        cards.add(new SetCardInfo("Toxic Deluge", 277, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
         cards.add(new SetCardInfo("Trickster's Elk", 175, Rarity.UNCOMMON, mage.cards.t.TrickstersElk.class));
         cards.add(new SetCardInfo("Tune the Narrative", 75, Rarity.COMMON, mage.cards.t.TuneTheNarrative.class));
         cards.add(new SetCardInfo("Ugin's Labyrinth", 233, Rarity.MYTHIC, mage.cards.u.UginsLabyrinth.class));
