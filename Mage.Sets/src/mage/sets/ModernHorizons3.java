@@ -37,6 +37,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Deserted Temple", 301, Rarity.RARE, mage.cards.d.DesertedTemple.class));
         cards.add(new SetCardInfo("Devourer of Destiny", 2, Rarity.RARE, mage.cards.d.DevourerOfDestiny.class));
         cards.add(new SetCardInfo("Drossclaw", 89, Rarity.COMMON, mage.cards.d.Drossclaw.class));
+        cards.add(new SetCardInfo("Drowner of Truth", 253, Rarity.UNCOMMON, mage.cards.d.DrownerOfTruth.class));
         cards.add(new SetCardInfo("Echoes of Eternity", 4, Rarity.RARE, mage.cards.e.EchoesOfEternity.class));
         cards.add(new SetCardInfo("Eladamri, Korvecdal", 149, Rarity.MYTHIC, mage.cards.e.EladamriKorvecdal.class));
         cards.add(new SetCardInfo("Eldrazi Ravager", 5, Rarity.UNCOMMON, mage.cards.e.EldraziRavager.class));
