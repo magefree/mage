@@ -63,7 +63,6 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Goblin Piker", 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Magma Pummeler");
         setChoice(playerA, "X=5");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         attack(3, playerA, "Magma Pummeler", playerB);
         block(3, playerB, "Memnite", "Magma Pummeler");
@@ -78,6 +77,56 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Magma Pummeler", 2, 2); // 3 counters removed
         assertLife(playerB, 20 - 3); // 3 damage dealt by the 1 trigger.
     }
+
+    @Test
+    public void test_MagmaPummeler_KilledByMore() {
+
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7 + 5);
+        addCard(Zone.HAND, playerA, "Magma Pummeler", 1);
+        addCard(Zone.HAND, playerA, "Shivan Meteor", 1); // 13 damage to target creature
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Magma Pummeler");
+        setChoice(playerA, "X=5");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shivan Meteor", "Magma Pummeler");
+        addTarget(playerA, playerB); // For the reflective trigger
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Magma Pummeler", 1);
+        assertGraveyardCount(playerA, "Shivan Meteor", 1);
+        assertLife(playerB, 20 - 5); // 5 counters removed in total.
+    }
+
+    @Test
+    public void test_MagmaPummeler_DoubleBlocked_And_Die() {
+        // The part of this one that is weird is that there should be only a single trigger, that sums
+        // all the counter removed by multiple prevention effects occuring at the same time.
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        addCard(Zone.HAND, playerA, "Magma Pummeler", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser", 1); // 3/3
+        addCard(Zone.BATTLEFIELD, playerB, "Air Elemental", 1); // 4/4
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Magma Pummeler");
+        setChoice(playerA, "X=5");
+
+        attack(3, playerA, "Magma Pummeler", playerB);
+        block(3, playerB, "Centaur Courser", "Magma Pummeler");
+        block(3, playerB, "Air Elemental", "Magma Pummeler");
+        setChoice(playerA, "X=5"); // damage for Pummeler, does not really matter for this test.
+        addTarget(playerA, playerB); // For the one trigger
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Magma Pummeler", 1);
+        assertLife(playerB, 20 - 5); // 5 counters prevented, Pummeler's trigger dealt 5.
+    }
+
 
     @Test
     public void test_UndergrowthChampion_DoubleBlocked() {
