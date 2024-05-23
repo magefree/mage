@@ -65,6 +65,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Kozilek's Unsealing", 65, Rarity.UNCOMMON, mage.cards.k.KozileksUnsealing.class));
         cards.add(new SetCardInfo("Kudo, King Among Bears", 192, Rarity.RARE, mage.cards.k.KudoKingAmongBears.class));
         cards.add(new SetCardInfo("Laelia, the Blade Reforged", 281, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class));
+        cards.add(new SetCardInfo("Legion Leadership", 255, Rarity.UNCOMMON, mage.cards.l.LegionLeadership.class));
         cards.add(new SetCardInfo("Marionette Apprentice", 100, Rarity.UNCOMMON, mage.cards.m.MarionetteApprentice.class));
         cards.add(new SetCardInfo("Meltdown", 282, Rarity.UNCOMMON, mage.cards.m.Meltdown.class));
         cards.add(new SetCardInfo("Mogg Mob", 127, Rarity.UNCOMMON, mage.cards.m.MoggMob.class));
