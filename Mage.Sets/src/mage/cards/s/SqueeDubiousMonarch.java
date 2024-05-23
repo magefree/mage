@@ -71,7 +71,7 @@ class SqueeDubiousMonarchEffect extends AsThoughEffectImpl {
     }
 
     public SqueeDubiousMonarchEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.staticText = "you may cast {this} from your graveyard by paying {3}{R} and exiling " +
                 "four other cards from your graveyard rather than paying its mana cost";
     }

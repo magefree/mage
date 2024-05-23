@@ -9,7 +9,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.SmokeBlessingToken;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -23,7 +23,8 @@ public final class SmokeSpiritsAid extends CardImpl {
 
         // For each of up to X target creatures, create a red Aura enchantment token named Smoke Blessing attached to that creature. Those tokens have enchant creature and "When enchanted creature dies, it deals 1 damage to its controller and you create a Treasure token."
         this.getSpellAbility().addEffect(new SmokeSpiritsAidEffect());
-        this.getSpellAbility().setTargetAdjuster(SmokeSpiritsAidAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
     }
 
     private SmokeSpiritsAid(final SmokeSpiritsAid card) {
@@ -33,18 +34,6 @@ public final class SmokeSpiritsAid extends CardImpl {
     @Override
     public SmokeSpiritsAid copy() {
         return new SmokeSpiritsAid(this);
-    }
-}
-
-enum SmokeSpiritsAidAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getManaCostsToPay().getX() > 0) {
-            ability.getTargets().clear();
-            ability.addTarget(new TargetCreaturePermanent(0, ability.getManaCostsToPay().getX()));
-        }
     }
 }
 

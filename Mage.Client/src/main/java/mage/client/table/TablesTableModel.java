@@ -1,6 +1,7 @@
 package mage.client.table;
 
 import mage.client.SessionHandler;
+import mage.components.table.TableModelWithTooltip;
 import mage.constants.SkillLevel;
 import mage.remote.MageRemoteException;
 import mage.view.TableView;

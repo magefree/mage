@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.hint.common.ConditionPermanentHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class OneWithTheMultiverse extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may play lands and cast spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect()));
 
         // Once during each of your turns, you may cast a spell from your hand or the top of your library without paying its mana cost.
         this.addAbility(
@@ -77,7 +77,7 @@ enum OneWithTheMultiverseCondition implements Condition {
 class OneWithTheMultiverseEffect extends AsThoughEffectImpl {
 
     OneWithTheMultiverseEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
         staticText = "once during each of your turns, you may cast a spell from your hand " +
                 "or the top of your library without paying its mana cost.";
     }

@@ -61,7 +61,7 @@ public final class SproutingGoblin extends CardImpl {
         // {R}, {T}, Sacrifice a land: Draw a card.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         this.addAbility(ability);
     }
 

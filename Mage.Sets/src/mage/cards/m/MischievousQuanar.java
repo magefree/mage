@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
@@ -41,7 +41,7 @@ public final class MischievousQuanar extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{U}{U}")));
 
         // When Mischievous Quanar is turned face up, copy target instant or sorcery spell. You may choose new targets for that copy.
-        Effect effect2 = new CopyTargetSpellEffect();
+        Effect effect2 = new CopyTargetStackObjectEffect();
         effect2.setText("copy target instant or sorcery spell. You may choose new targets for that copy");
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect2);
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));

@@ -55,7 +55,7 @@ public class AftermathAbility extends SimpleStaticAbility {
 class AftermathCastFromGraveyard extends AsThoughEffectImpl {
 
     public AftermathCastFromGraveyard() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
     }
 
     protected AftermathCastFromGraveyard(final AftermathCastFromGraveyard effect) {

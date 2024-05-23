@@ -22,7 +22,8 @@ public abstract class DeckValidator implements Serializable {
             "Snow-Covered Island",
             "Snow-Covered Swamp",
             "Snow-Covered Mountain",
-            "Snow-Covered Forest"
+            "Snow-Covered Forest",
+            "Snow-Covered Wastes"
     );
     protected static final Map<String, Integer> maxCopiesMap = new HashMap<>();
 

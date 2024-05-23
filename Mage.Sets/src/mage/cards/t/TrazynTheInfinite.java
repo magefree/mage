@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -74,7 +73,7 @@ class TrazynTheInfiniteEffect extends ContinuousEffectImpl {
                 .stream()
                 .map(card -> card.getAbilities(game))
                 .flatMap(Collection::stream)
-                .filter(ActivatedAbility.class::isInstance)
+                .filter(Ability::isActivatedAbility)
                 .collect(Collectors.toSet());
         for (Ability ability : abilities) {
             permanent.addAbility(ability, source.getSourceId(), game, true);

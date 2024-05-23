@@ -4,12 +4,11 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
@@ -57,7 +56,7 @@ public final class HowlOfTheHorde extends CardImpl {
 class HowlOfTheHordeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     HowlOfTheHordeDelayedTriggeredAbility() {
-        super(new CopyTargetSpellEffect(true), Duration.EndOfTurn);
+        super(new CopyTargetStackObjectEffect(true), Duration.EndOfTurn);
     }
 
     private HowlOfTheHordeDelayedTriggeredAbility(final HowlOfTheHordeDelayedTriggeredAbility ability) {

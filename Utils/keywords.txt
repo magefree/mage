@@ -95,6 +95,7 @@ Persist|new|
 Phasing|instance|
 Plainscycling|cost|
 Plainswalk|new|
+Plot|manaString|
 Poisonous|number|
 Prototype|card, manaString|
 Provoke|new|
@@ -106,6 +107,7 @@ Reconfigure|manaString|
 Renown|number|
 Replicate|manaString|
 Riot|new|
+Saddle|number|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|
@@ -113,7 +115,8 @@ Soulbond|new|
 Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|
-Squad|new|
+Spree|card|
+Squad|cost|
 Storm|new|
 Sunburst|new|
 Suspend|number, cost, card|

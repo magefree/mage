@@ -1,16 +1,11 @@
 package mage.cards.w;
 
-import mage.abilities.Ability;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -28,7 +23,8 @@ public final class WindgracesJudgment extends CardImpl {
                 .setTargetPointer(new EachTargetPointer())
                 .setText("For any number of opponents, destroy target nonland permanent that player controls")
         );
-        this.getSpellAbility().setTargetAdjuster(WindgracesJudgmentAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent(0, 1));
     }
 
     private WindgracesJudgment(final WindgracesJudgment card) {
@@ -38,25 +34,5 @@ public final class WindgracesJudgment extends CardImpl {
     @Override
     public WindgracesJudgment copy() {
         return new WindgracesJudgment(this);
-    }
-}
-
-enum WindgracesJudgmentAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        game.getOpponents(ability.getControllerId()).forEach(playerId -> {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                FilterNonlandPermanent filter = new FilterNonlandPermanent(
-                        "nonland permanent controlled by "
-                                + player.getLogName()
-                );
-                filter.add(new ControllerIdPredicate(playerId));
-                ability.addTarget(new TargetPermanent(0, 1, filter, false));
-            }
-        });
     }
 }

@@ -31,7 +31,7 @@ public final class ChitteringSkitterling extends CardImpl {
         // Corrupted -- Sacrifice an artifact or creature: Draw a card. Activate only if an opponent has three or more poison counters and only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE),
                 1, CorruptedCondition.instance
         ).setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint()));
     }

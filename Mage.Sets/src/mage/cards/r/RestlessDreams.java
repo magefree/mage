@@ -1,7 +1,5 @@
 package mage.cards.r;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -9,11 +7,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -32,8 +27,8 @@ public final class RestlessDreams extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return X target creature cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(RestlessDreamsAdjuster.instance);
-
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
     }
 
     private RestlessDreams(final RestlessDreams card) {
@@ -43,24 +38,5 @@ public final class RestlessDreams extends CardImpl {
     @Override
     public RestlessDreams copy() {
         return new RestlessDreams(this);
-    }
-}
-
-enum RestlessDreamsAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = 0;
-        for (Cost cost : ability.getCosts()) {
-            if (cost instanceof DiscardXTargetCost) {
-                xValue = ((DiscardXTargetCost) cost).getAmount();
-            }
-        }
-        Target target = new TargetCardInYourGraveyard(xValue,
-                new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1 ?
-                        " creature cards" : "creature card").append(" from your graveyard").toString()));
-        ability.addTarget(target);
     }
 }

@@ -10,12 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -34,7 +30,8 @@ public final class EntDraughtBasin extends CardImpl {
                 new ManaCostsImpl<>("{X}")
         );
         ability.addCost(new TapSourceCost());
-        ability.setTargetAdjuster(EntDraughtBasinAdjuster.instance);
+        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.EQUAL_TO));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
@@ -45,18 +42,5 @@ public final class EntDraughtBasin extends CardImpl {
     @Override
     public EntDraughtBasin copy() {
         return new EntDraughtBasin(this);
-    }
-}
-
-enum EntDraughtBasinAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent filter = new FilterCreaturePermanent("creature with power " + xValue);
-        filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, xValue));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(filter));
     }
 }

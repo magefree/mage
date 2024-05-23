@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -15,16 +14,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.filter.common.FilterNonlandCard;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.Game;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.token.TamiyosNotebookToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -33,6 +31,11 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TamiyoCompleatedSage extends CardImpl {
+    private static final FilterCard filter = new FilterNonlandCard("nonland permanent card");
+
+    static {
+        filter.add(PermanentPredicate.instance);
+    }
 
     public TamiyoCompleatedSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G/U/P}{U}");
@@ -53,7 +56,10 @@ public final class TamiyoCompleatedSage extends CardImpl {
         this.addAbility(ability);
 
         // −X: Exile target nonland permanent card with mana value X from your graveyard. Create a token that's a copy of that card.
-        this.addAbility(new LoyaltyAbility(new TamiyoCompleatedSageEffect()).setTargetAdjuster(TamiyoCompleatedSageAdjuster.instance));
+        Ability ability2 = new LoyaltyAbility(new TamiyoCompleatedSageEffect());
+        ability2.setTargetAdjuster(new XManaValueTargetAdjuster());
+        ability2.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addAbility(ability2);
 
         // −7: Create Tamiyo's Notebook, a legendary colorless artifact token with "Spells you cast cost {2} less to cast" and "{T}: Draw a card."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new TamiyosNotebookToken()), -7));
@@ -66,20 +72,6 @@ public final class TamiyoCompleatedSage extends CardImpl {
     @Override
     public TamiyoCompleatedSage copy() {
         return new TamiyoCompleatedSage(this);
-    }
-}
-
-enum TamiyoCompleatedSageAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = GetXLoyaltyValue.instance.calculate(game, ability, null);
-        FilterCard filter = new FilterPermanentCard("nonland permanent card with mana value " + xValue);
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
     }
 }
 

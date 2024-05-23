@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,11 +11,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -24,8 +19,9 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.watchers.common.CastFromGraveyardWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj & L_J
  */
 public final class BosiumStrip extends CardImpl {
@@ -53,7 +49,7 @@ public final class BosiumStrip extends CardImpl {
 class BosiumStripCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     BosiumStripCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card";
     }
 

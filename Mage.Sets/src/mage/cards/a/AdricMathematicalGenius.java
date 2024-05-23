@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CopyTargetStackAbilityEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.DoctorsCompanionAbility;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class AdricMathematicalGenius extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{U}, {T}: Copy target activated or triggered ability you control. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(new CopyTargetStackAbilityEffect(), new ManaCostsImpl<>("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetActivatedOrTriggeredAbility(filter));
         this.addAbility(ability);

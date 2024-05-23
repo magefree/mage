@@ -6,7 +6,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.continuous.CastFromHandWithoutPayingManaCostEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class ChandraFlamesCatalyst extends CardImpl {
 
     public ChandraFlamesCatalyst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(5);
@@ -42,7 +42,7 @@ public final class ChandraFlamesCatalyst extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DamagePlayersEffect(3, TargetController.OPPONENT), 1));
 
         // −2: You may cast target red instant or sorcery card from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.
-        Ability ability = new LoyaltyAbility(new MayCastTargetThenExileEffect(false), -2);
+        Ability ability = new LoyaltyAbility(new MayCastTargetCardEffect(true), -2);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 

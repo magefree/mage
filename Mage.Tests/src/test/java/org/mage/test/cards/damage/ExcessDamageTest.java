@@ -12,6 +12,14 @@ public class ExcessDamageTest extends CardTestPlayerBase {
 
     private static final String spill = "Flame Spill";
     private static final String bear = "Grizzly Bears";
+    private static final String envoy = "Expedition Envoy";
+
+    //Bonded Construct can’t attack alone.
+    private static final String bondedConstruct = "Bonded Construct";
+
+    // Spend only mana produced by creatures to cast this spell.
+    private static final String myrSuperion = "Myr Superion";
+
     private static final String jab = "Flame Jab";
     private static final String spirit = "Pestilent Spirit";
     private static final String myr = "Darksteel Myr";
@@ -129,6 +137,44 @@ public class ExcessDamageTest extends CardTestPlayerBase {
         assertHandCount(playerA, 1);
         assertGraveyardCount(playerA, bolt, 1);
         assertGraveyardCount(playerB, bear, 1);
+    }
+
+    @Test
+    public void testAegarTheFreezingFlameMultiDamage() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, aegar);
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.BATTLEFIELD, playerA, envoy);
+        addCard(Zone.BATTLEFIELD, playerA, bondedConstruct);
+        addCard(Zone.HAND, playerA, bolt);
+
+        addCard(Zone.BATTLEFIELD, playerB, myrSuperion);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, bolt, myrSuperion, true);
+
+        attack(2, playerB, myrSuperion, playerA);
+        block(2, playerA, bear, myrSuperion);
+        block(2, playerA, envoy, myrSuperion);
+        block(2, playerA, bondedConstruct, myrSuperion);
+
+        //Assign this much damage to the first blocking creature
+        setChoice(playerB, "X=2");
+
+        //Assign this much damage to the second blocking creature
+        setChoice(playerB, "X=1");
+
+        //Assign this much damage to the third blocking creature
+        setChoice(playerB, "X=1");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        // Excess damage was dealt by the total of 3 blocking creatures, 2 of which each dealt more than lethal damage,
+        // but Aegar's ability should only trigger once
+        assertHandCount(playerA, 1);
     }
 
     @Test

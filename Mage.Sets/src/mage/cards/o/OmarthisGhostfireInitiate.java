@@ -58,7 +58,7 @@ public final class OmarthisGhostfireInitiate extends CardImpl {
 
         // When Omarthis dies, manifest a number of cards from the top of your library equal to the number of counters on it.
         this.addAbility(new DiesSourceTriggeredAbility(
-            new ManifestEffect(new CountersSourceCount(null))
+            new ManifestEffect(new CountersSourceCount())
                 .setText("manifest a number of cards from the top of your library equal to the number of counters on it."),
             false
         ));

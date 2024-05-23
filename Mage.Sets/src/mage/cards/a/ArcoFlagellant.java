@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.SquadAbility;
@@ -28,7 +29,7 @@ public final class ArcoFlagellant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Squad {2}
-        this.addAbility(new SquadAbility());
+        this.addAbility(new SquadAbility(new GenericManaCost(2)));
 
         // Arco-Flagellant can't block.
         this.addAbility(new CantBlockAbility());

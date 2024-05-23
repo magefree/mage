@@ -1,21 +1,19 @@
 package mage.cards.d;
 
-import java.util.List;
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SacrificeAllControllerEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class DeathPitOffering extends CardImpl {
@@ -24,7 +22,7 @@ public final class DeathPitOffering extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // When Death Pit Offering enters the battlefield, sacrifice all creatures you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DeathPitOfferingEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES)));
         // Creatures you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES, false)));
     }
@@ -36,31 +34,5 @@ public final class DeathPitOffering extends CardImpl {
     @Override
     public DeathPitOffering copy() {
         return new DeathPitOffering(this);
-    }
-}
-
-class DeathPitOfferingEffect extends OneShotEffect {
-
-    DeathPitOfferingEffect() {
-        super(Outcome.Sacrifice);
-        this.staticText = "sacrifice all creatures you control";
-    }
-
-    private DeathPitOfferingEffect(final DeathPitOfferingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DeathPitOfferingEffect copy() {
-        return new DeathPitOfferingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
-        for (Permanent permanent : permanents) {
-            permanent.sacrifice(source, game);
-        }
-        return true;
     }
 }

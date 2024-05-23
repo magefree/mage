@@ -1466,7 +1466,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void ask(int messageId, GameView gameView, String question, Map<String, Serializable> options) {
         updateGame(messageId, gameView, false, options, null);
-        this.feedbackPanel.prepareFeedback(FeedbackMode.QUESTION, question, false, options, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.QUESTION, question, "", false, options, true, gameView.getPhase());
     }
 
     public boolean isMissGameData() {
@@ -1760,7 +1760,7 @@ public final class GamePanel extends javax.swing.JPanel {
             dialog = prepareCardsDialog(message, cardsView, required, options0, popupMenuType);
             options0.put("dialog", dialog);
         }
-        this.feedbackPanel.prepareFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, "", gameView.getSpecial(), options0, true, gameView.getPhase());
         if (dialog != null) {
             this.pickTarget.add(dialog);
         }
@@ -1768,7 +1768,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void inform(int messageId, GameView gameView, String information) {
         updateGame(messageId, gameView);
-        this.feedbackPanel.prepareFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, false, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.INFORM, information, "", gameView.getSpecial(), null, false, gameView.getPhase());
     }
 
     public void endMessage(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
@@ -1776,7 +1776,7 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        this.feedbackPanel.prepareFeedback(FeedbackMode.END, message, false, null, true, null);
+        this.feedbackPanel.prepareFeedback(FeedbackMode.END, message, "", false, null, true, null);
         ArrowBuilder.getBuilder().removeAllArrows(gameId);
     }
 
@@ -1823,8 +1823,8 @@ public final class GamePanel extends javax.swing.JPanel {
         if (controllingPlayer) {
             priorityPlayerText = " / priority " + gameView.getPriorityPlayerName();
         }
-        String messageToDisplay = message + FeedbackPanel.getSmallText(activePlayerText + " / " + gameView.getStep().toString() + priorityPlayerText);
-        this.feedbackPanel.prepareFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, true, gameView.getPhase());
+        String additionalMessage = activePlayerText + " / " + gameView.getStep().toString() + priorityPlayerText;
+        this.feedbackPanel.prepareFeedback(FeedbackMode.SELECT, message, additionalMessage, gameView.getSpecial(), panelOptions, true, gameView.getPhase());
     }
 
     public void playMana(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
@@ -1832,7 +1832,7 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        this.feedbackPanel.prepareFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.CANCEL, message, "", gameView.getSpecial(), options, true, gameView.getPhase());
     }
 
     public void playXMana(int messageId, GameView gameView, Map<String, Serializable> options, String message) {
@@ -1840,7 +1840,7 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        this.feedbackPanel.prepareFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(FeedbackMode.CONFIRM, message, "", gameView.getSpecial(), null, true, gameView.getPhase());
     }
 
     public void replayMessage(String message) {

@@ -11,9 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -37,7 +36,8 @@ public final class Archipelagore extends CardImpl {
                 "tap up to X target creatures, where X is the number of times this creature has mutated."
         ));
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
-        ability.setTargetAdjuster(ArchipelagoreAdjuster.instance);
+        ability.setTargetAdjuster(new TargetsCountAdjuster(SourceMutatedCount.instance));
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
     }
 
@@ -48,16 +48,5 @@ public final class Archipelagore extends CardImpl {
     @Override
     public Archipelagore copy() {
         return new Archipelagore(this);
-    }
-}
-
-enum ArchipelagoreAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int mutateCount = SourceMutatedCount.instance.calculate(game, ability, null);
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(0, mutateCount));
     }
 }

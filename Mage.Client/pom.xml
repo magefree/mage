@@ -151,13 +151,6 @@
             <version>1.17</version>
         </dependency>
         <!-- svg support END -->
-
-        <dependency>
-            <!-- time lib for GUI time info -->
-            <groupId>org.ocpsoft.prettytime</groupId>
-            <artifactId>prettytime</artifactId>
-            <version>4.0.6.Final</version>
-        </dependency>
     </dependencies>
 
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->

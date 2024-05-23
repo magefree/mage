@@ -2,7 +2,6 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -25,7 +24,6 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author Susucr
  */
 public final class BlossomingTortoise extends CardImpl {
@@ -38,7 +36,7 @@ public final class BlossomingTortoise extends CardImpl {
 
     public BlossomingTortoise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        
+
         this.subtype.add(SubType.TURTLE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -121,7 +119,7 @@ class BlossomingTortoiseCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof ActivatedAbility)) {
+        if (!abilityToModify.isActivatedAbility()) {
             return false;
         }
         Permanent permanent = abilityToModify.getSourcePermanentIfItStillExists(game);

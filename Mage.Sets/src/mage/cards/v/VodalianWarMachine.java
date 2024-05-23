@@ -134,7 +134,7 @@ class VodalianWarMachineWatcher extends Watcher {
                             for (Cost cost : ability.getCosts()) {
                                 if (cost instanceof TapTargetCost && cost.isPaid()) {
                                     TapTargetCost tapCost = (TapTargetCost) cost;
-                                    if (tapCost.getTarget().isChosen()) {
+                                    if (tapCost.getTarget().isChosen(game)) {
                                         MageObjectReference mor = new MageObjectReference(sourcePermanent.getId(), sourcePermanent.getZoneChangeCounter(game), game);
                                         Set<MageObjectReference> toAdd;
                                         if (tappedMerfolkIds.get(mor) == null) {

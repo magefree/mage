@@ -1,7 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
-
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -28,8 +26,9 @@ import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FirstTargetPointer;
 
+import java.util.UUID;
+
 /**
- *
  * @author DominionSpy
  */
 public final class IllicitMasquerade extends CardImpl {
@@ -107,7 +106,7 @@ enum IllicitMasqueradePredicate implements ObjectSourcePlayerPredicate<MageItem>
     @Override
     public boolean apply(ObjectSourcePlayer<MageItem> input, Game game) {
         Ability ability = input.getSource();
-        if (!(ability instanceof TriggeredAbility)) {
+        if (!ability.isTriggeredAbility()) {
             return true;
         }
         GameEvent event = ((TriggeredAbility) ability).getTriggerEvent();

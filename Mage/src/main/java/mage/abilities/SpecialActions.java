@@ -32,7 +32,7 @@ public class SpecialActions extends AbilitiesImpl<SpecialAction> {
         LinkedHashMap<UUID, SpecialAction> controlledBy = new LinkedHashMap<>();
         for (SpecialAction action : this) {
             if (action.isControlledBy(controllerId) && action.isManaAction() == manaAction) {
-                controlledBy.put(action.id, action);
+                controlledBy.put(action.getId(), action);
             }
         }
         return controlledBy;

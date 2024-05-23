@@ -1,4 +1,4 @@
-// Allows run cheat commands. How to use:
+// Allows run cheat commands in any games. How to use:
 // * open launcher and add to server's command line: -Dxmage.testMode=true
 // * rename that file to init.txt and put to server's config folder
 // * activate smiley button on your player's panel
@@ -10,38 +10,62 @@ battlefield:Human:Mountain:5
 battlefield:Human:Swamp:5
 battlefield:Human:Island:5
 hand:Human:Lightning Bolt:2
-library:Human:Doom Blade:2
 
-// special command, see SystemUtil for more special commands list
-[@activate opponent ability]
-
-[current test]
+[quick game example]
 graveyard:Human:Bloodghast:1
 graveyard:Computer:Bloodghast:1
 hand:Human:Bloodghast:1
 hand:Computer:Bloodghast:1
 
-[diff set codes example]
-battlefield:Human:XLN-Island:1
-battlefield:Human:UST-Island:1
-battlefield:Human:HOU-Island:1
+[real game example]
+graveyard:ReachyRichGuy:Bloodghast:1
+graveyard:Computer 3:Bloodghast:1
+
+[add tokens]
+token:Human:TreasureToken:10
+token:Human:ZombieArmyToken:3
+
+[add planeswalker with loyalty]
+battlefield:Human:Karn Liberated:1
+loyalty:Human:Karn Liberated:20
+
+[add emblem]
+emblem:Human:ElspethSunsChampionEmblem:1
+
+[add commander]
+commander:Human:Silvercoat Lion:1
 
 // @ref command example (all refs will be replaced by commands from ref's group)
-[another test]
+[ref usage]
 @init
 hand:Human:Lightning Bolt:2
 
-[2x bears to me]
-battlefield:Human:Kitesail Corsair:2
+// real test example
+[test karn restart]
+@init
+@bears
+battlefield:Human:Karn Liberated:1
+loyalty:Human:Karn Liberated:20
+commander:Human:Silvercoat Lion:1
+exiled:Human:Lightning Bolt:1
+exiled:Human:Silvercoat Lion:1
+exiled:Computer:Silvercoat Lion:1
 
-[2x bears to comp]
-battlefield:Computer:Kitesail Corsair:2
-//battlefield:Computer:Grizzly Bears:1
-
-// create any useful commands
+// create any useful commands for fast usage
 [clone]
 hand:Human:Clone:3
 [force attack]
 hand:Human:Pit Fight:3
 [exile]
 hand:Human:Angelic Edict:3
+[bears]
+battlefield:Computer:Grizzly Bears:2
+battlefield:Human:Grizzly Bears:2
+
+// special command, see SystemUtil for more special commands list
+[@activate opponent ability]
+
+[diff set codes example]
+battlefield:Human:XLN-Island:1
+battlefield:Human:UST-Island:1
+battlefield:Human:HOU-Island:1

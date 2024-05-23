@@ -1,3 +1,4 @@
+Alchemy: Dominaria|AlchemyDominaria|
 Alchemy: Innistrad|AlchemyInnistrad|
 Adventures in the Forgotten Realms|AdventuresInTheForgottenRealms|
 Forgotten Realms Commander|ForgottenRealmsCommander|
@@ -181,6 +182,7 @@ Mirrodin Besieged|MirrodinBesieged|
 Modern Horizons|ModernHorizons|
 Modern Horizons 2|ModernHorizons2|
 Modern Horizons 3|ModernHorizons3|
+Modern Horizons 3 Commander|ModernHorizons3Commander|
 Modern Masters|ModernMasters|
 Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|
@@ -195,6 +197,7 @@ Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
 Outlaws of Thunder Junction|OutlawsOfThunderJunction|
+Outlaws of Thunder Junction Commander|OutlawsOfThunderJunctionCommander|
 The Big Score|TheBigScore|
 Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
 Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|

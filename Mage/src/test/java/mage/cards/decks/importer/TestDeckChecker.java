@@ -8,6 +8,12 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests only: helper class to test decks
+ * <p>
+ * See decks format examples under download button
+ * at <a href="https://mtg.fandom.com/wiki/Khans_of_Tarkir/Intro_packs">fandom wiki page</a>
+ */
 public class TestDeckChecker {
 
     private final List<String> main = new ArrayList<>();
@@ -48,5 +54,4 @@ public class TestDeckChecker {
     public static TestDeckChecker checker() {
         return new TestDeckChecker();
     }
-
 }

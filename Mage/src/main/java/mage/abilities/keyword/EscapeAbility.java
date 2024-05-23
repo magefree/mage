@@ -32,10 +32,14 @@ public class EscapeAbility extends SpellAbility {
     private final String staticText;
 
     public EscapeAbility(Card card, String manaCost, int exileCount) {
-        this(card, manaCost, exileCount, new CostsImpl<>());
+        this(card, manaCost, new CostsImpl<>(), exileCount);
     }
 
-    public EscapeAbility(Card card, String manaCost, int exileCount, Costs<Cost> additionalCosts) {
+    public EscapeAbility(Card card, String manaCost, Costs<Cost> additionalCost) {
+        this(card, manaCost, additionalCost, 0);
+    }
+
+    public EscapeAbility(Card card, String manaCost, Costs<Cost> additionalCosts, int exileCount) {
         super(card.getSpellAbility());
         this.newId();
         this.setCardName(card.getName() + " with Escape");
@@ -45,17 +49,22 @@ public class EscapeAbility extends SpellAbility {
         this.clearManaCosts();
         this.clearManaCostsToPay();
 
-        String text = "Escape&mdash;" + manaCost;
         this.addCost(new ManaCostsImpl<>(manaCost));
         for (Cost cost : additionalCosts) {
-            text += ", " + CardUtil.getTextWithFirstCharUpperCase(cost.getText());
             this.addCost(cost.copy().setText("")); // hide additional cost text from rules
         }
+        if (exileCount > 0) {
+            this.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(exileCount, filter), "")); // hide additional cost text from rules
+        }
 
-        text += ", Exile " + CardUtil.numberToText(exileCount) + " other cards from your graveyard."
-                + " <i>(You may cast this card from your graveyard for its escape cost.)</i>";
-        this.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(exileCount, filter), "")); // hide additional cost text from rules
-
+        String text = "Escape&mdash;" + manaCost;
+        for (Cost cost : additionalCosts) {
+            text += ", " + CardUtil.getTextWithFirstCharUpperCase(cost.getText());
+        }
+        if (exileCount > 0) {
+            text += ", Exile " + CardUtil.numberToText(exileCount) + " other cards from your graveyard";
+        }
+        text += ". <i>(You may cast this card from your graveyard for its escape cost.)</i>";
         this.staticText = text;
     }
 

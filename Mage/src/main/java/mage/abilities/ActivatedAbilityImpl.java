@@ -57,7 +57,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
-        super(AbilityType.ACTIVATED, zone);
+        super(AbilityType.ACTIVATED_NONMANA, zone);
         this.addEffect(effect);
         this.addCost(cost);
     }
@@ -147,8 +147,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
         if (approvingObjects.isEmpty()) {
             return ActivationStatus.withoutApprovingObject(true);
-        }
-        else {
+        } else {
             return new ActivationStatus(approvingObjects);
         }
     }
@@ -238,11 +237,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     protected ActivationInfo getActivationInfo(Game game) {
         Integer turnNum = (Integer) game.getState()
-                .getValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game));
+                .getValue(CardUtil.getCardZoneString("activationsTurn" + getOriginalId(), sourceId, game));
         Integer activationCount = (Integer) game.getState()
-                .getValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game));
+                .getValue(CardUtil.getCardZoneString("activationsCount" + getOriginalId(), sourceId, game));
         Integer totalActivations = (Integer) game.getState()
-                .getValue(CardUtil.getCardZoneString("totalActivations" + originalId, sourceId, game));
+                .getValue(CardUtil.getCardZoneString("totalActivations" + getOriginalId(), sourceId, game));
         if (turnNum == null || activationCount == null || totalActivations == null) {
             return null;
         }
@@ -251,11 +250,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     protected void setActivationInfo(ActivationInfo activationInfo, Game game) {
         game.getState().setValue(CardUtil
-                .getCardZoneString("activationsTurn" + originalId, sourceId, game), activationInfo.turnNum);
+                .getCardZoneString("activationsTurn" + getOriginalId(), sourceId, game), activationInfo.turnNum);
         game.getState().setValue(CardUtil
-                .getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.activationCounter);
+                .getCardZoneString("activationsCount" + getOriginalId(), sourceId, game), activationInfo.activationCounter);
         game.getState().setValue(CardUtil
-                .getCardZoneString("totalActivations" + originalId, sourceId, game), activationInfo.totalActivations);
+                .getCardZoneString("totalActivations" + getOriginalId(), sourceId, game), activationInfo.totalActivations);
     }
 
     @Override

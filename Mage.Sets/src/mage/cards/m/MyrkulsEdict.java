@@ -44,7 +44,7 @@ public final class MyrkulsEdict extends CardImpl {
         effect.addTableEntry(1, 9, new MyrkulsEdictEffect());
 
         // 10-19 | Each opponent sacrifices a creature.
-        effect.addTableEntry(10, 19, new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        effect.addTableEntry(10, 19, new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // 20 | Each opponent sacrifices a creature with the greatest power among creatures that player controls.
         effect.addTableEntry(20, 20, new SacrificeOpponentsEffect(filter));

@@ -95,13 +95,17 @@ class KairiTheSwirlingSkyTarget extends TargetPermanent {
         if (permanent == null) {
             return false;
         }
-        return permanent.getManaValue()
-                + this.getTargets()
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .mapToInt(MageObject::getManaValue)
-                .sum() <= 6;
+        int added = 0; // We need to prevent the target to be counted twice on revalidation.
+        if (!this.getTargets().contains(id)) {
+            added = permanent.getManaValue();// fresh target, adding its MV
+        }
+        return added +
+                this.getTargets()
+                        .stream()
+                        .map(game::getPermanent)
+                        .filter(Objects::nonNull)
+                        .mapToInt(MageObject::getManaValue)
+                        .sum() <= 6;
     }
 }
 

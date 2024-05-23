@@ -63,6 +63,31 @@ public interface Ability extends Controllable, Serializable {
     AbilityType getAbilityType();
 
     /**
+     * If this ability is an activated one (mana included).
+     */
+    boolean isActivatedAbility();
+
+    /**
+     * If this ability is a triggered one (mana included).
+     */
+    boolean isTriggeredAbility();
+
+    /**
+     * If this ability is an activated one, excluding mana.
+     */
+    boolean isNonManaActivatedAbility();
+
+    /**
+     * If this ability is a mana activated one.
+     */
+    boolean isManaActivatedAbility();
+
+    /**
+     * If this ability is a mana ability, (both triggered and activated can be mana abilities).
+     */
+    boolean isManaAbility();
+
+    /**
      * Sets the id of the controller of this ability.
      *
      * @param controllerId The {@link java.util.UUID} of the controller.
@@ -513,6 +538,14 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     Ability withFirstModeFlavorWord(String flavorWord);
+
+    /**
+     * Sets cost word for first mode
+     *
+     * @param cost
+     * @return
+     */
+    Ability withFirstModeCost(Cost cost);
 
     /**
      * Creates the message about the ability casting/triggering/activating to

@@ -174,7 +174,7 @@ public class TournamentController {
 
     private void checkStart() {
         if (!started && allJoined()) {
-            managerFactory.threadExecutor().getCallExecutor().execute(this::startTournament);
+            managerFactory.threadExecutor().getTourneyExecutor().execute(this::startTournament);
         }
     }
 
@@ -191,6 +191,7 @@ public class TournamentController {
     }
 
     private synchronized void startTournament() {
+        Thread.currentThread().setName("TOURNEY " + tableId);
         for (final TournamentSession tournamentSession : tournamentSessions.values()) {
             if (!tournamentSession.init()) {
                 logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
@@ -324,11 +325,13 @@ public class TournamentController {
         }
     }
 
-    public boolean updateDeck(UUID playerId, Deck deck) {
-        if (tournamentSessions.containsKey(playerId)) {
-            return tournamentSessions.get(playerId).updateDeck(deck);
+    public void updateDeck(UUID playerId, Deck deck) {
+        TournamentSession session = tournamentSessions.getOrDefault(playerId, null);
+        if (session == null) {
+            return;
         }
-        return false;
+
+        session.updateDeck(deck);
     }
 
     public void timeout(UUID userId) {

@@ -16,7 +16,7 @@ public final class SarkhanTheDragonspeakerEmblem extends Emblem {
     public SarkhanTheDragonspeakerEmblem() {
         super("Emblem Sarkhan");
 
-        this.getAbilities().add(new BeginningOfDrawTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(2), TargetController.YOU, false));
+        this.getAbilities().add(new BeginningOfDrawTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(2).setText("draw two additional cards"), TargetController.YOU, false));
         this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new DiscardHandControllerEffect(), TargetController.YOU, null, false));
     }
 

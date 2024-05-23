@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -15,13 +14,14 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,14 +79,14 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getControllerId())) {
-            DamagedEvent damagedEvent = (DamagedEvent) event;
-            return damagedEvent.isCombatDamage();
+        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
+        if (dEvent.getTargetId().equals(this.getControllerId())) {
+            return dEvent.isCombatDamage() && dEvent.getAmount() > 0;
         }
         return false;
     }

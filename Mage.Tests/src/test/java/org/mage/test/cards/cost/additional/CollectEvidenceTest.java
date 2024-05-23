@@ -21,6 +21,7 @@ public class CollectEvidenceTest extends CardTestPlayerBase {
     private static final String effigy = "Fuming Effigy";
     private static final String sprite = "Crimestopper Sprite";
     private static final String monitor = "Surveillance Monitor";
+    private static final String unraveler = "Conspiracy Unraveler";
 
     @Test
     public void testNoPay() {
@@ -290,5 +291,23 @@ public class CollectEvidenceTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Thopter Token", 2);
         assertTapped(sprite, true);
         assertCounterCount(sprite, CounterType.STUN, 1);
+    }
+
+    @Test
+    public void testConspiracyUnraveler() {
+        addCard(Zone.BATTLEFIELD, playerA, unraveler);
+        addCard(Zone.HAND, playerA, "Colossal Dreadmaw");
+        addCard(Zone.GRAVEYARD, playerA, ogre, 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Colossal Dreadmaw");
+        setChoice(playerA, true); // use alternative cast from unraveler
+        setChoice(playerA, ogre, 4); // pay for collect evidence
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(ogre, 4);
+        assertPermanentCount(playerA, "Colossal Dreadmaw", 1);
     }
 }

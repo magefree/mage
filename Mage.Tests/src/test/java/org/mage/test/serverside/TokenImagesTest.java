@@ -670,14 +670,14 @@ public class TokenImagesTest extends CardTestPlayerBase {
 
     @Test
     public void test_Abilities_Embalm_MustGenerateSameTokenAsCard() {
-        prepareCards_SacredCat("AKH=3", "AKR=5", "MB1=1");
-        activate_SacredCat(3 + 5 + 1);
+        prepareCards_SacredCat("AKH=3", "AKR=5");
+        activate_SacredCat(3 + 5);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assert_SacredCat(3 + 5 + 1, "AKH=3", "AKR=5", "MB1=1");
+        assert_SacredCat(3 + 5, "AKH=3", "AKR=5");
     }
 
     @Test // it's ok for fail in 1 of 50
@@ -733,7 +733,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
     // TODO: implement mock or test command to setup "random" images in TokenImpl.generateTokenInfo
     //  (see setFlipCoinResult and setDieRollResult), so no needs in big amount
     public void test_FaceDown_CardWithMorph_MustGetDefaultImage() {
-        int faceDownAmount = 15;
+        int faceDownAmount = 20;
         addCard(Zone.HAND, playerA, "Ainok Tracker", faceDownAmount); // {5}{R}, Morph {4}{R}, face up {3}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5 * faceDownAmount);
 
@@ -752,7 +752,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
 
     @Test // it's ok for fail in very rare random
     public void test_FaceDown_LandWithMorph_MustGetDefaultImage() {
-        int faceDownAmount = 15;
+        int faceDownAmount = 20;
         addCard(Zone.HAND, playerA, "Zoetic Cavern", faceDownAmount);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3 * faceDownAmount);
 
@@ -853,13 +853,13 @@ public class TokenImagesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6 + 3);
 
         // prepare face down permanent
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aerie Bowmasters using Megamorph");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aerie Bowmasters using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         runCode("on face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
             assertPermanentCount(playerA, "Aerie Bowmasters", 0);
             Permanent permanent = getPermanent(EmptyNames.FACE_DOWN_CREATURE.toString(), playerA);
-            assertFaceDownCharacteristics("permanent", permanent, TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH);
+            assertFaceDownCharacteristics("permanent", permanent, TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH);
         });
 
         // face up it and find counter

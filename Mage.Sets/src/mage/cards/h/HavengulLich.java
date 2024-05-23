@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -13,14 +12,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -28,8 +20,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class HavengulLich extends CardImpl {
@@ -66,7 +59,7 @@ public final class HavengulLich extends CardImpl {
 class HavengulLichPlayEffect extends AsThoughEffectImpl {
 
     HavengulLichPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast target creature card in a graveyard this turn";
     }
 

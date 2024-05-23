@@ -72,8 +72,9 @@ public class CrewAbility extends SimpleActivatedAbility {
 
     @Override
     public String getRule() {
-        return "Crew " + value + " <i>(Tap any number of creatures you control with total power "
-                + value + " or more: This Vehicle becomes an artifact creature until end of turn.)</i>";
+        return "Crew " + value + (this.maxActivationsPerTurn == 1 ? ". Activate only once each turn." : "") +
+                " <i>(Tap any number of creatures you control with total power " + value +
+                " or more: This Vehicle becomes an artifact creature until end of turn.)</i>";
     }
 }
 
@@ -150,7 +151,7 @@ class CrewCost extends CostImpl {
         }
         Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
             @Override
-            public String getMessage() {
+            public String getMessage(Game game) {
                 // shows selected power
                 int selectedPower = this.targets.keySet().stream()
                         .map(game::getPermanent)
@@ -161,7 +162,7 @@ class CrewCost extends CostImpl {
                 if (selectedPower >= value) {
                     extraInfo = HintUtils.prepareText(extraInfo, Color.GREEN);
                 }
-                return super.getMessage() + " " + extraInfo;
+                return super.getMessage(game) + " " + extraInfo;
             }
         };
 

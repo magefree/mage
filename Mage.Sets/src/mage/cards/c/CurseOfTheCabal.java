@@ -19,19 +19,16 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.Objects;
 import java.util.UUID;
 
 /**
- *
  * @author anonymous
  */
 public final class CurseOfTheCabal extends CardImpl {
@@ -87,7 +84,7 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
             }
             Target target = new TargetSacrifice(amount, StaticFilters.FILTER_CONTROLLED_PERMANENT);
             if (target.canChoose(targetPlayer.getId(), source, game)) {
-                while (!target.isChosen() 
+                while (!target.isChosen(game)
                         && target.canChoose(targetPlayer.getId(), source, game) && targetPlayer.canRespond()) {
                     targetPlayer.choose(Outcome.Sacrifice, target, source, game);
                 }
@@ -107,9 +104,9 @@ class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalIntervenin
 
     public CurseOfTheCabalInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(
-                Zone.EXILED, new CurseOfTheCabalTriggeredAbilityConditionalDelay(),
-                TargetController.ANY, false, true
-        ),
+                        Zone.EXILED, new CurseOfTheCabalTriggeredAbilityConditionalDelay(),
+                        TargetController.ANY, false, true
+                ),
                 SuspendedCondition.instance,
                 "At the beginning of each player's upkeep, if {this} is suspended, "
                         + "that player may sacrifice a permanent. If the player does, "

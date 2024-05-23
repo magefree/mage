@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardSetInfo;
@@ -45,7 +45,7 @@ public final class EchoMage extends LevelerCard {
         // 2/4
         // {U}{U}, {tap}: Copy target instant or sorcery spell. You may choose new targets for the copy.
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl<>("{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetStackObjectEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         ability.addCost(new TapSourceCost());
         abilities1.add(ability);

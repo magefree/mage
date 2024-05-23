@@ -37,8 +37,8 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
         return this;
     }
 
-    public List<Target> getUnchosen() {
-        return stream().filter(target -> !target.isChosen()).collect(Collectors.toList());
+    public List<Target> getUnchosen(Game game) {
+        return stream().filter(target -> !target.isChosen(game)).collect(Collectors.toList());
     }
 
     public void clearChosen() {
@@ -47,8 +47,8 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
         }
     }
 
-    public boolean isChosen() {
-        return stream().allMatch(Target::isChosen);
+    public boolean isChosen(Game game) {
+        return stream().allMatch(t -> t.isChosen(game));
     }
 
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game) {
@@ -56,8 +56,8 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
             if (!canChoose(playerId, source, game)) {
                 return false;
             }
-            while (!isChosen()) {
-                Target target = this.getUnchosen().get(0);
+            while (!isChosen(game)) {
+                Target target = this.getUnchosen(game).get(0);
                 if (!target.choose(outcome, playerId, sourceId, source, game)) {
                     return false;
                 }
@@ -73,8 +73,8 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
             }
 
             //int state = game.bookmarkState();
-            while (!isChosen()) {
-                Target target = this.getUnchosen().get(0);
+            while (!isChosen(game)) {
+                Target target = this.getUnchosen(game).get(0);
                 UUID targetController = playerId;
 
                 // some targets can have controller different than ability controller
@@ -97,7 +97,7 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
                     return false;
                 }
                 // Check if there are some rules for targets are violated, if so reset the targets and start again
-                if (this.getUnchosen().isEmpty()
+                if (this.getUnchosen(game).isEmpty()
                         && game.replaceEvent(new GameEvent(GameEvent.EventType.TARGETS_VALID, source.getSourceId(), source, source.getControllerId()), source)) {
                     //game.restoreState(state, "Targets");
                     clearChosen();

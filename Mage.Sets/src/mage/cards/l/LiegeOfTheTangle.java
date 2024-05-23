@@ -106,7 +106,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (UUID permId : getTargetPointer().getTargets(game, source)) {
                 affectedObjectList.add(new MageObjectReference(permId, game));
             }

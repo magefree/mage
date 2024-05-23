@@ -510,6 +510,7 @@ public class ScryfallImageSupportCards {
             add("2X2"); // Double Masters 2022
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
+            add("YDMU"); // Alchemy: Dominaria
             add("40K"); // Warhammer 40,000
             add("UNF"); // Unfinity
             add("GN3"); // Game Night 2022
@@ -547,8 +548,11 @@ public class ScryfallImageSupportCards {
             add("MKC"); // Murders at Karlov Manor Commander
             add("CLU"); // Ravnica: Clue Edition
             add("OTJ"); // Outlaws of Thunder Junction
+            add("OTC"); // Outlaws of Thunder Junction Commander
+            add("OTP"); // Breaking News
             add("BIG"); // The Big Score
             add("MH3"); // Modern Horizons 3
+            add("M3C"); // Modern Horizons 3
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
 

@@ -11,12 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -37,7 +33,8 @@ public final class EntrancingLyre extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
-        ability.setTargetAdjuster(EntrancingLyreAdjuster.instance);
+        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
@@ -48,18 +45,5 @@ public final class EntrancingLyre extends CardImpl {
     @Override
     public EntrancingLyre copy() {
         return new EntrancingLyre(this);
-    }
-}
-
-enum EntrancingLyreAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent filter = new FilterCreaturePermanent("creature with power " + xValue + " or less");
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().clear();
-        ability.getTargets().add(new TargetPermanent(filter));
     }
 }

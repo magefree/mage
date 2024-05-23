@@ -153,7 +153,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
     public ConspireAbility setAddedById(UUID addedById) {
         this.addedById = addedById;
         CardUtil.castStream(
-                this.subAbilities.stream(),
+                this.getSubAbilities().stream(),
                 ConspireTriggeredAbility.class
         ).forEach(ability -> ability.setAddedById(addedById));
         return this;

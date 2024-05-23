@@ -99,10 +99,11 @@ enum BatColonyValue implements DynamicValue {
 
 /**
  * Inspired by {@link mage.watchers.common.ManaPaidSourceWatcher}
- * If more cards like Bat Colony care for mana spent by Caves in the future, best to refactor the tracking there.
+ * If more cards like Bat Colony care for mana produced by Caves in the future, best to refactor the tracking there.
  * For now the assumption is that it is a 1of, so don't want to track it in any game.
  */
 class BatColonyWatcher extends Watcher {
+    
     private static final class CaveManaPaidTracker implements Serializable, Copyable<CaveManaPaidTracker> {
         private int caveMana = 0;
 

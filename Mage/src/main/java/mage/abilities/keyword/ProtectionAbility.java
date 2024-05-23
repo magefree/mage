@@ -30,6 +30,7 @@ public class ProtectionAbility extends StaticAbility {
     protected boolean doesntRemoveControlled;
     protected ObjectColor fromColor;
     protected UUID auraIdNotToBeRemoved; // defines an Aura objectId that will not be removed from this protection ability
+    private String staticText;
 
     public ProtectionAbility(Filter filter) {
         super(Zone.BATTLEFIELD, null);
@@ -39,6 +40,7 @@ public class ProtectionAbility extends StaticAbility {
         this.doesntRemoveControlled = false;
         this.fromColor = new ObjectColor();
         this.auraIdNotToBeRemoved = null;
+        this.staticText = null;
     }
 
     protected ProtectionAbility(final ProtectionAbility ability) {
@@ -49,6 +51,7 @@ public class ProtectionAbility extends StaticAbility {
         this.doesntRemoveControlled = ability.doesntRemoveControlled;
         this.fromColor = ability.fromColor;
         this.auraIdNotToBeRemoved = ability.auraIdNotToBeRemoved;
+        this.staticText = ability.staticText;
     }
 
     public static ProtectionAbility from(ObjectColor color) {
@@ -75,8 +78,16 @@ public class ProtectionAbility extends StaticAbility {
 
     @Override
     public String getRule() {
+        if (this.staticText != null && !this.staticText.isEmpty()) {
+            return this.staticText;
+        }
         return (flavorWord == null ? "protection from " : CardUtil.italicizeWithEmDash(flavorWord) + "Protection from ")
                 + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove Auras.");
+    }
+
+    public ProtectionAbility setText(String text) {
+        this.staticText = text;
+        return this;
     }
 
     public boolean canTarget(MageObject source, Game game) {

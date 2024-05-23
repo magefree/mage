@@ -4,12 +4,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
@@ -39,10 +40,7 @@ public final class DiluvianPrimordial extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Diluvian Primordial enters the battlefield, for each opponent, 
-        // you may cast up to one target instant or sorcery card from that 
-        // player's graveyard without paying its mana cost. If a card cast this way 
-        // would be put into a graveyard this turn, exile it instead.
+        // When Diluvian Primordial enters the battlefield, for each opponent, you may cast up to one target instant or sorcery card from that  player's graveyard without paying its mana cost. If a card cast this way would be put into a graveyard this turn, exile it instead.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiluvianPrimordialEffect(), false);
         ability.setTargetAdjuster(DiluvianPrimordialAdjuster.instance);
         this.addAbility(ability);
@@ -106,7 +104,8 @@ class DiluvianPrimordialEffect extends OneShotEffect {
                 if (target instanceof TargetCardInOpponentsGraveyard) {
                     Card targetCard = game.getCard(target.getFirstTarget());
                     if (targetCard != null) {
-                        new MayCastTargetThenExileEffect(true).setTargetPointer(new FixedTarget(targetCard, game)).apply(game, source);
+                        new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true)
+                                .setTargetPointer(new FixedTarget(targetCard, game)).apply(game, source);
                     }
                 }
             }

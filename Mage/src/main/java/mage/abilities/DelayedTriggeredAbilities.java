@@ -24,23 +24,22 @@ public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbi
     }
 
     public void checkTriggers(GameEvent event, Game game) {
-        if (this.size() > 0) {
-            for (Iterator<DelayedTriggeredAbility> it = this.iterator(); it.hasNext(); ) {
-                DelayedTriggeredAbility ability = it.next();
-                if (ability.getDuration() == Duration.Custom) {
-                    if (ability.isInactive(game)) {
-                        it.remove();
-                        continue;
-                    }
-                }
-                if (!ability.checkEventType(event, game)) {
+        // TODO: add same integrity checks as TriggeredAbilities?!
+        for (Iterator<DelayedTriggeredAbility> it = this.iterator(); it.hasNext(); ) {
+            DelayedTriggeredAbility ability = it.next();
+            if (ability.getDuration() == Duration.Custom) {
+                if (ability.isInactive(game)) {
+                    it.remove();
                     continue;
                 }
-                if (ability.checkTrigger(event, game)) {
-                    ability.trigger(game, ability.controllerId, event);
-                    if (ability.getTriggerOnlyOnce()) {
-                        it.remove();
-                    }
+            }
+            if (!ability.checkEventType(event, game)) {
+                continue;
+            }
+            if (ability.checkTrigger(event, game)) {
+                ability.trigger(game, ability.controllerId, event);
+                if (ability.getTriggerOnlyOnce()) {
+                    it.remove();
                 }
             }
         }
@@ -50,10 +49,14 @@ public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbi
         this.removeIf(ability -> ability.getDuration() == Duration.EndOfTurn); // TODO: add Duration.EndOfYourTurn like effects
     }
 
+    public void removeStartOfNewTurn(Game game) {
+        this.removeIf(ability -> ability.getDuration() == Duration.UntilYourNextTurn
+                && game.getActivePlayerId().equals(ability.getControllerId())
+        );
+    }
+
     public void removeEndOfCombatAbilities() {
         this.removeIf(ability -> ability.getDuration() == Duration.EndOfCombat);
     }
-
-
 }
 

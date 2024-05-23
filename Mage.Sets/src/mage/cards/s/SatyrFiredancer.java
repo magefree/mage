@@ -51,9 +51,9 @@ public final class SatyrFiredancer extends CardImpl {
 
 class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
-    public SatyrFiredancerTriggeredAbility() {
+    SatyrFiredancerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SatyrFiredancerDamageEffect(), false);
-        targetAdjuster = SatyrFiredancerAdjuster.instance;
+        this.setTargetAdjuster(SatyrFiredancerAdjuster.instance);
         setTriggerPhrase("Whenever an instant or sorcery spell you control deals damage to an opponent, ");
     }
 

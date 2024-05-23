@@ -6,7 +6,9 @@ import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Player;
 
+import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
 

@@ -66,15 +66,11 @@ class GloomCostIncreaseEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        boolean isWhiteEnchantment = false;
-        boolean isActivated = abilityToModify.getAbilityType() == AbilityType.ACTIVATED;
-        if (isActivated) {
-            MageObject permanent = game.getPermanent(abilityToModify.getSourceId());
-            if (permanent != null) {
-                isWhiteEnchantment = permanent.isEnchantment(game) && permanent.getColor(game).isWhite();
-            }
+        if (!abilityToModify.isActivatedAbility()) {
+            return false;
         }
-        return isActivated && isWhiteEnchantment;
+        MageObject permanent = game.getPermanent(abilityToModify.getSourceId());
+        return permanent != null && permanent.isEnchantment(game) && permanent.getColor(game).isWhite();
     }
 
     @Override
