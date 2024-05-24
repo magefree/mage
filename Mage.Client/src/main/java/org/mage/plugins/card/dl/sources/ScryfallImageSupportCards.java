@@ -616,8 +616,8 @@ public class ScryfallImageSupportCards {
             put("SLD/Zndrsplt, Eye of Wisdom/379b", "https://api.scryfall.com/cards/sld/379/en?format=image&face=back");
             put("SLD/Zndrsplt, Eye of Wisdom/379b*", "https://api.scryfall.com/cards/sld/379★/en?format=image&face=back");
             // normal cards
-            put("SLD/Viscera Seer/99999VS", "https://api.scryfall.com/cards/sld/VS/");
-
+            put("SLD/Viscera Seer/99999VS", "https://api.scryfall.com/cards/sld/VS/"); // see issue 11157
+        
             // CALC - custom alchemy version of cards.
             put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");
 
@@ -660,9 +660,15 @@ public class ScryfallImageSupportCards {
     }
 
     public static String prepareCardNumber(String xmageCardNumber) {
-		if (xmageCardNumber.endsWith("*")) return xmageCardNumber.substring(0 , xmageCardNumber.length() -1) +"★" ;
-        if (xmageCardNumber.endsWith("+")) return xmageCardNumber.substring(0 , xmageCardNumber.length() -1) +"†" ;
-        if (xmageCardNumber.endsWith("Ph")) return xmageCardNumber.substring(0 , xmageCardNumber.length() -2) +"Φ" ;
+        if (xmageCardNumber.endsWith("*")) {
+                return xmageCardNumber.substring(0 , xmageCardNumber.length() -1) +"★" ;
+        }
+        if (xmageCardNumber.endsWith("+")) {
+                return xmageCardNumber.substring(0 , xmageCardNumber.length() -1) +"†" ;
+        }
+        if (xmageCardNumber.endsWith("Ph")) {
+                return xmageCardNumber.substring(0 , xmageCardNumber.length() -2) +"Φ" ;
+	}
         return xmageCardNumber;
     }
 
