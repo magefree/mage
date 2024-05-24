@@ -63,16 +63,12 @@ class WrathOfTheSkiesEffect extends OneShotEffect {
             return false;
         }
         int xValue = source.getManaCostsToPay().getX();
-        if (xValue < 1) {
-            return true;
+        if (xValue > 0) {
+            new GetEnergyCountersControllerEffect(xValue).apply(game, source);
         }
-        new GetEnergyCountersControllerEffect(xValue).apply(game, source);
 
         int numberToPay = controller.getAmount(0, controller.getCounters().getCount(CounterType.ENERGY),
                 "Pay any amount of {E}", game);
-        if (numberToPay < 1) {
-            return true;
-        }
         Cost cost = new PayEnergyCost(numberToPay);
         if (cost.pay(source, game, source, source.getControllerId(), true)) {
             game.getBattlefield()
