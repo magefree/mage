@@ -501,7 +501,7 @@ public class ScryfallImageSupportTokens {
             put("ZNC/Elemental/1", "https://api.scryfall.com/cards/tznc/10/en?format=image"); // 5/5
             put("ZNC/Elemental/2", "https://api.scryfall.com/cards/tznc/8/en?format=image"); // 2/2
             put("ZNC/Faerie Rogue", "https://api.scryfall.com/cards/tznc/3/en?format=image");
-            //put("ZNC/Germ", "https://api.scryfall.com/cards/tznc/4/en?format=image"); // must be in chest or antology
+            put("ZNC/Germ", "https://api.scryfall.com/cards/tznc/4/en?format=image"); // must be in chest or antology
             put("ZNC/Goblin Rogue", "https://api.scryfall.com/cards/tznc/5/en?format=image");
             put("ZNC/Kor Ally", "https://api.scryfall.com/cards/tznc/2/en?format=image");
             put("ZNC/Rat", "https://api.scryfall.com/cards/tznc/6/en?format=image");
