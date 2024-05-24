@@ -142,9 +142,13 @@ public enum ScryfallImageSource implements CardImageSource {
 
         String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
         if (apiUrl != null) {
-            if (apiUrl.endsWith("*/")) apiUrl= apiUrl.substring(0 , apiUrl.length() -2) +"★/" ;
-            else if (apiUrl.endsWith("+/")) apiUrl= apiUrl.substring(0 , apiUrl.length() -2) +"†/" ;
-            else if (apiUrl.endsWith("Ph/")) apiUrl= apiUrl.substring(0 , apiUrl.length() -3) +"Φ/" ;
+            if (apiUrl.endsWith("*/")) {
+                apiUrl= apiUrl.substring(0 , apiUrl.length() -2) +"★/" ;
+            } else if (apiUrl.endsWith("+/")) {
+                apiUrl= apiUrl.substring(0 , apiUrl.length() -2) +"†/" ;
+            } else if (apiUrl.endsWith("Ph/")) {
+                apiUrl= apiUrl.substring(0 , apiUrl.length() -3) +"Φ/" ;
+            }
             // BY DIRECT URL
             // direct links via hardcoded API path. Used for cards with non-ASCII collector numbers
             if (localizedCode.equals(defaultCode)) {
