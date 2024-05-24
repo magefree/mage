@@ -14,7 +14,7 @@ import java.util.UUID;
 public final class TuneTheNarrative extends CardImpl {
 
     public TuneTheNarrative(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Draw a card. You get {E}{E}.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

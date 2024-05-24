@@ -35,7 +35,7 @@ public final class DrownerOfTruth extends ModalDoubleFacedCard {
         this.getLeftHalfCard().setPT(new MageInt(7), new MageInt(6));
 
         // Devoid
-        this.getLeftHalfCard().addAbility(new DevoidAbility(this.color));
+        this.getLeftHalfCard().addAbility(new DevoidAbility(this.getLeftHalfCard().getColor()));
 
         // When you cast this spell, if {C} was spent to cast it, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
