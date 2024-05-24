@@ -661,13 +661,13 @@ public class ScryfallImageSupportCards {
 
     public static String prepareCardNumber(String xmageCardNumber) {
         if (xmageCardNumber.endsWith("*")) {
-                return xmageCardNumber.substring(0 , xmageCardNumber.length() -1) +"★" ;
+                return xmageCardNumber.substring(0 , xmageCardNumber.length() -1) + "★" ;
         }
         if (xmageCardNumber.endsWith("+")) {
-                return xmageCardNumber.substring(0 , xmageCardNumber.length() -1) +"†" ;
+                return xmageCardNumber.substring(0 , xmageCardNumber.length() -1) + "†" ;
         }
         if (xmageCardNumber.endsWith("Ph")) {
-                return xmageCardNumber.substring(0 , xmageCardNumber.length() -2) +"Φ" ;
+                return xmageCardNumber.substring(0 , xmageCardNumber.length() -2) + "Φ" ;
 	}
         return xmageCardNumber;
     }
