@@ -31,19 +31,23 @@ public enum ScryfallImageSourceSmall implements CardImageSource {
     ScryfallImageSourceSmall() {
     }
 
+    private String innerModifyUrlString(String oneUrl) {
+        return oneUrl.replaceFirst("/large/","/small/").replaceFirst("format=image","format=image&version=small");
+    }
+
     private CardImageUrls innerModifyUrl(CardImageUrls cardUrls) {
-        String baseUrl = null;
-        String alternativeUrl = null;
-		
-		if (cardUrls.baseUrl != null && !cardUrls.baseUrl.isEmpty()) {
-            baseUrl = cardUrls.baseUrl.replaceFirst("/large/","/small/").replaceFirst("format=image","format=image&version=small");
-        }
-        if (cardUrls.alternativeUrls != null
-                && !cardUrls.alternativeUrls.isEmpty()) {
-            alternativeUrl = cardUrls.alternativeUrls.get(0).replaceFirst("/large/","/small/").replaceFirst("format=image","format=image&version=small");
-        }
-        return new CardImageUrls(baseUrl, alternativeUrl);
-	}
+        List<String> downloadUrls = cardUrls.getDownloadList()
+
+        // if (downloadUrls.size() > 2) {   // to be uncommented if ScryfallRework gets merged
+        //     return new CardImageUrls(innerModifyUrlString(downloadUrls.get(0), innerModifyUrlString(downloadUrls.get(1), innerModifyUrlString(downloadUrls.get(2));
+        // } 
+        if (downloadUrls.size() > 1) {
+            return new CardImageUrls(innerModifyUrlString(downloadUrls.get(0), innerModifyUrlString(downloadUrls.get(1));
+        } 
+        if (downloadUrls.size() == 1) {
+            return new CardImageUrls(innerModifyUrlString(downloadUrls.get(0));
+        } 
+    }
 
     @Override
     public boolean prepareDownloadList(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList) {
