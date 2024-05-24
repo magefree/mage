@@ -1,10 +1,8 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -20,14 +18,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ExperimentKraj extends CardImpl {
 
     public ExperimentKraj(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{U}{U}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OOZE);
         this.subtype.add(SubType.MUTANT);
@@ -39,7 +38,7 @@ public final class ExperimentKraj extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExperimentKrajEffect()));
 
         // {tap}: Put a +1/+1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -76,9 +75,9 @@ class ExperimentKrajEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent perm = game.getPermanent(source.getSourceId());
         if (perm != null) {
-            for (Permanent creature :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)){
-                for (Ability ability: creature.getAbilities()) {
-                    if (ability instanceof ActivatedAbility) {
+            for (Permanent creature : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                for (Ability ability : creature.getAbilities()) {
+                    if (ability.isActivatedAbility()) {
                         perm.addAbility(ability, source.getSourceId(), game, true);
                     }
                 }

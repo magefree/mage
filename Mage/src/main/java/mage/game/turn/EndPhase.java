@@ -28,8 +28,9 @@ public class EndPhase extends Phase {
     @Override
     protected void playStep(Game game) {
         if (currentStep.getType() == PhaseStep.CLEANUP) {
+            game.getState().increaseStepNum();
             game.getTurn().setEndTurnRequested(false); // so triggers trigger again
-            currentStep.beginStep(game, activePlayerId);
+            prePriority(game, activePlayerId);
             // 514.3a At this point, the game checks to see if any state-based actions would be performed 
             // and/or any triggered abilities are waiting to be put onto the stack (including those that 
             // trigger "at the beginning of the next cleanup step"). If so, those state-based actions are 
@@ -37,10 +38,19 @@ public class EndPhase extends Phase {
             // priority. Players may cast spells and activate abilities. Once the stack is empty and all players
             // pass in succession, another cleanup step begins
             if (game.checkStateAndTriggered()) {
-                game.playPriority(activePlayerId, true);
-                playStep(game);
+                // Queues a new cleanup step
+                game.getState().getTurnMods().add(new TurnMod(activePlayerId).withExtraStep(new CleanupStep()));
+                // resume priority
+                if (!game.isPaused() && !game.checkIfGameIsOver() && !game.executingRollback()) {
+                    currentStep.priority(game, activePlayerId, false);
+                    if (game.executingRollback()) {
+                        return;
+                    }
+                }
             }
-            currentStep.endStep(game, activePlayerId);
+            if (!game.isPaused() && !game.checkIfGameIsOver() && !game.executingRollback()) {
+                postPriority(game, activePlayerId);
+            }
         } else {
             super.playStep(game);
         }

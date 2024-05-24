@@ -59,7 +59,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 player.getGraveyard().stream().map((cardId) -> game.getCard(cardId)).filter(card1 -> card1.isInstantOrSorcery(game)).forEachOrdered((card) -> {

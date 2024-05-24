@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
@@ -16,7 +15,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class AetherTide extends CardImpl {
         effect.setText("Return X target creatures to their owners' hands");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(XTargetsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().setCostAdjuster(AetherTideCostAdjuster.instance);
 
     }

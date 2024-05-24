@@ -160,7 +160,7 @@ class CurseOfHospitalityEffect extends OneShotEffect {
         if (player == null) {
             return true;
         }
-        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true, player.getId(), null);
+        CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, true, player.getId(), null);
         return true;
     }
 }

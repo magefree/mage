@@ -39,7 +39,7 @@ public final class BlackCarriage extends CardImpl {
 
         // Sacrifice a creature: Untap Black Carriage. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new UntapSourceEffect(), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
+                new UntapSourceEffect(), new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 new IsStepCondition(PhaseStep.UPKEEP), "Sacrifice a creature: Untap {this}. Activate only during your upkeep."));
     }
 

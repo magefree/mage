@@ -33,7 +33,6 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- *
  * @author notgreat
  */
 public final class FabricationFoundry extends CardImpl {
@@ -96,6 +95,7 @@ enum ArtifactSpellOrActivatedAbilityCondition implements Condition {
         return object != null && object.isArtifact(game) && !source.isActivated();
     }
 }
+
 //Cost based on Kozilek, The Great Distortion and CrewAbility
 class ExileTargetsTotalManaValueCost extends CostImpl {
     private static final FilterPermanent filter = new FilterControlledArtifactPermanent("one or more other artifacts you control with total mana value X");
@@ -103,6 +103,7 @@ class ExileTargetsTotalManaValueCost extends CostImpl {
     static {
         filter.add(AnotherPredicate.instance);
     }
+
     public ExileTargetsTotalManaValueCost() {
         this.text = "Exile one or more other artifacts you control with total mana value X";
     }
@@ -123,9 +124,9 @@ class ExileTargetsTotalManaValueCost extends CostImpl {
         }
         int minX = abilityTarget.getManaValue();
         int sum = 0;
-        Target target = new TargetPermanent(1, Integer.MAX_VALUE, filter, true){
+        Target target = new TargetPermanent(1, Integer.MAX_VALUE, filter, true) {
             @Override
-            public String getMessage() {
+            public String getMessage(Game game) {
                 // shows selected mana value
                 int selectedPower = this.targets.keySet().stream()
                         .map(game::getPermanent)
@@ -136,10 +137,10 @@ class ExileTargetsTotalManaValueCost extends CostImpl {
                 if (selectedPower >= minX) {
                     extraInfo = HintUtils.prepareText(extraInfo, Color.GREEN);
                 }
-                return super.getMessage() + " " + extraInfo;
+                return super.getMessage(game) + " " + extraInfo;
             }
         };
-        if (!target.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)){
+        if (!target.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
             return paid;
         }
         Cards cards = new CardsImpl();
@@ -152,7 +153,7 @@ class ExileTargetsTotalManaValueCost extends CostImpl {
         }
         paid = (sum >= minX);
         if (paid) {
-            player.moveCardsToExile(cards.getCards(game), source, game, false,null,null);
+            player.moveCardsToExile(cards.getCards(game), source, game, false, null, null);
         }
         return paid;
     }
@@ -161,12 +162,12 @@ class ExileTargetsTotalManaValueCost extends CostImpl {
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         int totalExileMV = 0;
         boolean anyExileFound = false;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controllerId, source, game)){
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, controllerId, source, game)) {
             totalExileMV += permanent.getManaValue();
             anyExileFound = true;
         }
         int minTargetMV = Integer.MAX_VALUE;
-        for (Card card : game.getPlayer(controllerId).getGraveyard().getCards(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD, game)){
+        for (Card card : game.getPlayer(controllerId).getGraveyard().getCards(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD, game)) {
             minTargetMV = Integer.min(minTargetMV, card.getManaValue());
         }
         return anyExileFound && totalExileMV >= minTargetMV;

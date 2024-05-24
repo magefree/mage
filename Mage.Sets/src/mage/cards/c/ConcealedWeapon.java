@@ -41,7 +41,7 @@ public final class ConcealedWeapon extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}{R}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{R}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{1}{R}"), false));
     }
 
     private ConcealedWeapon(final ConcealedWeapon card) {

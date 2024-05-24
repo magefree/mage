@@ -41,7 +41,7 @@ public final class AbueloAncestralEcho extends CardImpl {
                 new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(false),
                 new ManaCostsImpl<>("{1}{W}{U}")
         );
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT));
         this.addAbility(ability);
     }
 

@@ -8,7 +8,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -61,7 +61,7 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ChandraAcolyteOfFlameEffect(), 0));
 
         // -2: You may cast target instant or sorcery card with converted mana cost 3 or less from your graveyard. If that card would be put into your graveyard this turn, exile it instead.
-        Ability ability = new LoyaltyAbility(new MayCastTargetThenExileEffect(false), -2);
+        Ability ability = new LoyaltyAbility(new MayCastTargetCardEffect(true), -2);
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
     }

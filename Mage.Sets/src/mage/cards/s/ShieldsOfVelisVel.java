@@ -1,9 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -16,14 +13,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class ShieldsOfVelisVel extends CardImpl {
 
     public ShieldsOfVelisVel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{W}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
@@ -65,7 +65,7 @@ class ShieldsOfVelisVelGainEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getFirstTarget(), game);
             for (Permanent creature : creatures) {
                 affectedObjectList.add(new MageObjectReference(creature, game));
@@ -75,7 +75,7 @@ class ShieldsOfVelisVelGainEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
                 permanent.setIsAllCreatureTypes(game, true);
@@ -106,7 +106,7 @@ class ShieldsOfVelisVelBoostEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getFirstTarget(), game);
             for (Permanent creature : creatures) {
                 affectedObjectList.add(new MageObjectReference(creature, game));
@@ -116,7 +116,7 @@ class ShieldsOfVelisVelBoostEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
                 permanent.addToughness(1);

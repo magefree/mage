@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MultikickerAbility;
@@ -12,7 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -30,7 +31,8 @@ public final class CometStorm extends CardImpl {
         // Choose any target, then choose another any target for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
         this.getSpellAbility().addEffect(new CometStormEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget(1));
-        this.getSpellAbility().setTargetAdjuster(CometStormAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(new IntPlusDynamicValue(1, MultikickerCount.instance)));
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     private CometStorm(final CometStorm card) {
@@ -40,17 +42,6 @@ public final class CometStorm extends CardImpl {
     @Override
     public CometStorm copy() {
         return new CometStorm(this);
-    }
-}
-
-enum CometStormAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int numbTargets = MultikickerCount.instance.calculate(game, ability, null) + 1;
-        ability.addTarget(new TargetAnyTarget(numbTargets));
     }
 }
 

@@ -186,13 +186,6 @@ public final class GUISizeHelper {
         }
     }
 
-    public static String textToHtmlWithSize(String text, Font font) {
-        if (text != null && !text.toLowerCase(Locale.ENGLISH).startsWith("<html>")) {
-            return "<html><p style=\"font-size: " + font.getSize() + ";\">" + text + "</p>";
-        }
-        return text;
-    }
-
     /**
      * Return scrollbar settings, so user can scroll it more faster for bigger cards
      *

@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -13,19 +12,16 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class NivixAerieOfTheFiremind extends CardImpl {
@@ -92,7 +88,7 @@ class NivixAerieOfTheFiremindEffect extends OneShotEffect {
 class NivixAerieOfTheFiremindCanCastEffect extends AsThoughEffectImpl {
 
     NivixAerieOfTheFiremindCanCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.UntilYourNextTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.UntilYourNextTurn, Outcome.Benefit);
         staticText = "Until your next turn, you may cast that card";
     }
 

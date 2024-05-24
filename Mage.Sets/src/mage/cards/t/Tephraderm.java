@@ -2,26 +2,26 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageToThisAllTriggeredAbility;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
- *
  * @author Quercitron
  */
 public final class Tephraderm extends CardImpl {
@@ -33,7 +33,12 @@ public final class Tephraderm extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever a creature deals damage to Tephraderm, Tephraderm deals that much damage to that creature.
-        this.addAbility(new TephradermCreatureDamageTriggeredAbility());
+        this.addAbility(new DealsDamageToThisAllTriggeredAbility(
+                new DamageTargetEffect(SavedDamageValue.MUCH)
+                        .setText("{this} deals that much damage to that creature"),
+                false, StaticFilters.FILTER_PERMANENT_CREATURE,
+                SetTargetPointer.PERMANENT, false
+        ));
 
         // Whenever a spell deals damage to Tephraderm, Tephraderm deals that much damage to that spell's controller.
         this.addAbility(new TephradermSpellDamageTriggeredAbility());
@@ -46,55 +51,6 @@ public final class Tephraderm extends CardImpl {
     @Override
     public Tephraderm copy() {
         return new Tephraderm(this);
-    }
-}
-
-class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCreaturePermanent FILTER_CREATURE = new FilterCreaturePermanent();
-
-    TephradermCreatureDamageTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
-    }
-
-    private TephradermCreatureDamageTriggeredAbility(final TephradermCreatureDamageTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getTargetId().equals(this.getSourceId())) {
-            return false;
-        }
-
-        Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-        if (sourcePermanent != null
-                && FILTER_CREATURE.match(sourcePermanent, getControllerId(), this, game)) {
-            for (Effect effect : getEffects()) {
-                if (effect instanceof DamageTargetEffect) {
-                    effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
-                    ((DamageTargetEffect) effect).setAmount(StaticValue.get(event.getAmount()));
-                }
-            }
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public TephradermCreatureDamageTriggeredAbility copy() {
-        return new TephradermCreatureDamageTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature deals damage to {this}, {this} deals that much damage to that creature.";
     }
 }
 

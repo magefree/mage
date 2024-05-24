@@ -4,6 +4,7 @@ import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.HaventCastSpellThisTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -21,7 +22,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.UUID;
 
@@ -78,10 +78,7 @@ class ConduitOfWorldsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!game.getState()
-                .getWatcher(SpellsCastWatcher.class)
-                .getSpellsCastThisTurn(source.getControllerId())
-                .isEmpty()) {
+        if (!HaventCastSpellThisTurnCondition.instance.apply(game, source)) {
             return false;
         }
         Player player = game.getPlayer(source.getControllerId());

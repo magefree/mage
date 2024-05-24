@@ -5,12 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CastTargetForFreeEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
@@ -50,7 +51,7 @@ public final class ChancellorOfTheSpires extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Chancellor of the Spires enters the battlefield, you may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CastTargetForFreeEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST));
         ability.addTarget(new TargetCardInOpponentsGraveyard(filter));
         this.addAbility(ability);
     }

@@ -211,7 +211,7 @@ class ImbrahamDeanOfTheoryEffect extends OneShotEffect {
             }
             card.addCounters(CounterType.STUDY.createInstance(), source.getControllerId(), source, game);
         }
-        TargetCard targetCard = new TargetCardInExile(0, 1, filter, null);
+        TargetCard targetCard = new TargetCardInExile(0, 1, filter);
         targetCard.withNotTarget(true);
         player.choose(outcome, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());

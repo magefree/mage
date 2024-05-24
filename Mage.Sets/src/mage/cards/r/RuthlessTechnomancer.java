@@ -6,7 +6,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
@@ -15,19 +14,16 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.PowerTargetAdjuster;
 
 import java.util.UUID;
 
@@ -57,7 +53,9 @@ public final class RuthlessTechnomancer extends CardImpl {
                 new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new SacrificeXTargetCost(filter, false, 1));
-        this.addAbility(ability.setTargetAdjuster(RuthlessTechnomancerAdjuster.instance));
+        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.addAbility(ability);
     }
 
     private RuthlessTechnomancer(final RuthlessTechnomancer card) {
@@ -67,21 +65,6 @@ public final class RuthlessTechnomancer extends CardImpl {
     @Override
     public RuthlessTechnomancer copy() {
         return new RuthlessTechnomancer(this);
-    }
-}
-
-enum RuthlessTechnomancerAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = GetXValue.instance.calculate(game, ability, null);
-        FilterCard filter = new FilterCreatureCard(
-                "creature card in your graveyard with power " + xValue + " or less"
-        );
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
     }
 }
 

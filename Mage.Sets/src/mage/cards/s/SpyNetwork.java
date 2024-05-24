@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -22,8 +21,9 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class SpyNetwork extends CardImpl {
@@ -109,7 +109,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
             if (target.canChoose(controller.getId(), source, game)) {
                 while (controller.chooseUse(outcome, "Look at a face down creature controlled by " + player.getLogName() + "?", source, game)) {
                     target.clearChosen();
-                    while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+                    while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                         controller.chooseTarget(outcome, target, source, game);
                     }
                     Permanent faceDownCreature = game.getPermanent(target.getFirstTarget());

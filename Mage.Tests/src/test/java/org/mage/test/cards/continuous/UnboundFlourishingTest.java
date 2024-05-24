@@ -59,7 +59,7 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_OnCastInstantOrSourcery_MustCopy() {
+    public void test_OnCastInstantOrSorcery_MustCopy() {
         addCard(Zone.BATTLEFIELD, playerA, "Unbound Flourishing", 1);
         //
         // Banefire deals X damage to any target.

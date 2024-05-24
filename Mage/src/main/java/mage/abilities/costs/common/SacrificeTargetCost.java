@@ -27,6 +27,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     /**
      * Sacrifice a permanent matching the filter:
+     *
      * @param filter can be generic, will automatically add article and sacrifice predicates
      */
     public SacrificeTargetCost(FilterPermanent filter) {
@@ -35,6 +36,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     /**
      * Sacrifice N permanents matching the filter:
+     *
      * @param filter can be generic, will automatically add sacrifice predicates
      */
     public SacrificeTargetCost(int numToSac, FilterPermanent filter) {
@@ -57,7 +59,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         UUID activator = controllerId;
-        if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
+        if (ability.getAbilityType().isActivatedAbility() || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             activator = ((ActivatedAbilityImpl) ability).getActivatorId();
         }
         // can be cancel by user
@@ -87,7 +89,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         UUID activator = controllerId;
-        if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
+        if (ability.getAbilityType().isActivatedAbility() || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
                 activator = ((ActivatedAbilityImpl) ability).getActivatorId();
             }  // else, Activator not filled?

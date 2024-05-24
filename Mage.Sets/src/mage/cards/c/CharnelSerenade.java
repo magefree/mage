@@ -31,7 +31,7 @@ public final class CharnelSerenade extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
         // Surveil 3, then return a creature card from your graveyard to the battlefield with a finality counter on it. Exile Charnel Serenade with three time counters on it.
-        this.getSpellAbility().addEffect(new SurveilEffect(3));
+        this.getSpellAbility().addEffect(new SurveilEffect(3, false));
         this.getSpellAbility().addEffect(new CharnelSerenadeEffect());
         this.getSpellAbility().addEffect(new ExileSpellWithTimeCountersEffect(3));
 

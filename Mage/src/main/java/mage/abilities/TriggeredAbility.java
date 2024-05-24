@@ -46,6 +46,8 @@ public interface TriggeredAbility extends Ability {
 
     boolean isOptional();
 
+    TriggeredAbility setOptional();
+
     boolean isLeavesTheBattlefieldTrigger();
 
     void setLeavesTheBattlefieldTrigger(boolean leavesTheBattlefieldTrigger);

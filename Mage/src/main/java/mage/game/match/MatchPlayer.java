@@ -4,6 +4,7 @@ import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.players.Player;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 
@@ -12,13 +13,15 @@ import java.io.Serializable;
  */
 public class MatchPlayer implements Serializable {
 
+    private static final Logger logger = Logger.getLogger(MatchPlayer.class);
+
     private int wins;
     private int winsNeeded;
     private boolean matchWinner;
 
     private Deck deck;
-    private Player player;
-    private String name;
+    private final Player player;
+    private final String name;
 
     private boolean quit;
     private boolean doneSideboarding;
@@ -89,22 +92,33 @@ public class MatchPlayer implements Serializable {
         return viewerDeck;
     }
 
-    public void submitDeck(Deck deck) {
-        this.deck = deck;
+    public void submitDeck(Deck newDeck) {
+        this.deck = newDeck;
         this.doneSideboarding = true;
     }
 
-    public void updateDeck(Deck deck) {
+    public boolean updateDeck(Deck newDeck) {
+        // used for auto-save by timeout from client side
+
+        // workaround to keep deck name for Tiny Leaders because it must be hidden for players
         if (this.deck != null) {
-            // preserver deck name, important for Tiny Leaders format
-            deck.setName(this.getDeck().getName());
-            // preserve the original deck hash code before sideboarding to give no information if cards were swapped
-            deck.setDeckHashCode(this.getDeck().getDeckHashCode());
+            newDeck.setName(this.getDeck().getName());
         }
-        this.deck = deck;
+
+        // make sure it's the same deck (player do not add or remove something)
+        boolean isGood = (this.deck.getDeckHash() == newDeck.getDeckHash());
+        if (!isGood) {
+            logger.error("Found cheating player " + player.getName()
+                    + " with changed deck, main " + newDeck.getCards().size() + ", side " + newDeck.getSideboard().size());
+            newDeck.getCards().clear();
+            newDeck.getSideboard().clear();
+        }
+
+        this.deck = newDeck;
+        return isGood;
     }
 
-    public Deck generateDeck(DeckValidator deckValidator) {
+    public Deck autoCompleteDeck(DeckValidator deckValidator) {
         // auto complete deck
         while (deck.getMaindeckCards().size() < deckValidator.getDeckMinSize() && !deck.getSideboard().isEmpty()) {
             Card card = deck.getSideboard().iterator().next();

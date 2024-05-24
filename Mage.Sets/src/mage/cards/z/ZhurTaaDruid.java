@@ -51,7 +51,7 @@ class ZhurTaaDruidAbility extends TriggeredAbilityImpl {
     ZhurTaaDruidAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT));
         setTriggerPhrase("Whenever you tap {this} for mana, ");
-        this.replaceRuleText = true;
+        this.withRuleTextReplacement(true);
     }
 
     private ZhurTaaDruidAbility(final ZhurTaaDruidAbility ability) {

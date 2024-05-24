@@ -6,10 +6,9 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +27,7 @@ public enum ServerMessagesUtil {
 
     private static final Logger LOGGER = Logger.getLogger(ServerMessagesUtil.class);
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
+    private static final int SERVER_MSG_REFRESH_RATE_SECS = 60;
 
     private final List<String> messages = new ArrayList<>();
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
@@ -43,7 +43,7 @@ public enum ServerMessagesUtil {
 
     ServerMessagesUtil() {
         ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
-        updateExecutor.scheduleAtFixedRate(this::reloadMessages, 5, 5 * 60, TimeUnit.SECONDS);
+        updateExecutor.scheduleAtFixedRate(this::reloadMessages, 5, SERVER_MSG_REFRESH_RATE_SECS, TimeUnit.SECONDS);
     }
 
     public List<String> getMessages() {
@@ -60,7 +60,6 @@ public enum ServerMessagesUtil {
         List<String> motdMessages = readFromFile();
         List<String> newMessages = new ArrayList<>(motdMessages);
         newMessages.add(getServerStatistics());
-        newMessages.add(getServerStatistics2());
 
         lock.writeLock().lock();
         try {
@@ -117,21 +116,15 @@ public enum ServerMessagesUtil {
     private String getServerStatistics() {
         long current = System.currentTimeMillis();
         long hours = ((current - startDate) / (1000 * 60 * 60));
-        String statistics = "Server uptime: " + hours + " hour(s)"
-                + "; Games started: " + gamesStarted.get() + ", ended: " + gamesEnded.get()
-                + "; Tourneys started: " + tournamentsStarted.get() + ", ended: " + tournamentsEnded.get();
-        return statistics;
-    }
-
-    private String getServerStatistics2() {
-        long current = System.currentTimeMillis();
-        long minutes = ((current - startDate) / (1000 * 60));
-        if (minutes == 0) {
-            minutes = 1;
-        }
-        String statistics = "Disconnects: " + lostConnection.get() + ", avg/hour: " + lostConnection.get() * 60 / minutes
-                + "; Reconnects: " + reconnects.get() + ", avg/hour: " + reconnects.get() * 60 / minutes;
-        return statistics;
+        String updated = new Date().toInstant().atOffset(ZoneOffset.UTC).toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        return String.format("Server uptime: %d hours; active games: %d of %d, tourneys: %d of %d; stats from %s",
+                hours,
+                gamesStarted.get() - gamesEnded.get(),
+                gamesStarted.get(),
+                tournamentsStarted.get() - tournamentsEnded.get(),
+                tournamentsStarted.get(),
+                updated
+        );
     }
 
     public void setStartDate(long milliseconds) {

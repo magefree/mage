@@ -7,6 +7,10 @@ import mage.cards.repository.CardInfo;
 import java.util.Optional;
 
 /**
+ * Deck import: Decked Builder, Apprentice and old Magic Online
+ * <p>
+ * Outdated, see actual format in TxtDeckImporter
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class DecDeckImporter extends PlainTextDeckImporter {
@@ -34,11 +38,13 @@ public class DecDeckImporter extends PlainTextDeckImporter {
                 sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
             } else {
                 CardInfo cardInfo = cardLookup.get();
+                DeckCardInfo.makeSureCardAmountFine(num, cardInfo.getName());
+                DeckCardInfo deckCardInfo = new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode());
                 for (int i = 0; i < num; i++) {
-                    if (!sideboard) {
-                        deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
+                    if (sideboard) {
+                        deckList.getSideboard().add(deckCardInfo.copy());
                     } else {
-                        deckList.getSideboard().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
+                        deckList.getCards().add(deckCardInfo.copy());
                     }
                 }
             }

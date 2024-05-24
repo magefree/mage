@@ -3,7 +3,6 @@ package mage.abilities.common;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.Mode;
 import mage.abilities.costs.common.ExileSourceFromHandCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -68,7 +67,7 @@ class CastExiledFromHandCardEffect extends OneShotEffect {
                 .map(MageObjectReference.class::cast)
                 .map(mor -> mor.getCard(game))
                 .ifPresent(card -> CardUtil.makeCardPlayable(
-                        game, source, card, Duration.Custom, false
+                        game, source, card, true, Duration.Custom, false
                 ));
         return true;
     }
@@ -83,12 +82,12 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
         this.colors = colors;
         this.staticText =
                 "target land gains \"{T}: Add " +
-                CardUtil.concatWithOr(
-                        Arrays.stream(colors.split(""))
-                                .map(s -> '{' + s + '}')
-                                .collect(Collectors.toList())
-                ) +
-                "\" until {this} is cast from exile";
+                        CardUtil.concatWithOr(
+                                Arrays.stream(colors.split(""))
+                                        .map(s -> '{' + s + '}')
+                                        .collect(Collectors.toList())
+                        ) +
+                        "\" until {this} is cast from exile";
     }
 
     private GainManaAbilitiesWhileExiledEffect(final GainManaAbilitiesWhileExiledEffect effect) {

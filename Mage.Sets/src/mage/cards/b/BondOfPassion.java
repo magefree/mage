@@ -87,6 +87,7 @@ class BondOfPassionEffect extends OneShotEffect {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
+            game.getState().processAction(game);
             permanent.untap(game);
             effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(permanent, game));

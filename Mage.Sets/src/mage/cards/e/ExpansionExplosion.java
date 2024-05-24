@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
@@ -41,7 +41,7 @@ public final class ExpansionExplosion extends SplitCard {
 
         // Expansion
         // Copy target instant or sorcery spell with converted mana cost 4 or less. You may choose new targets for the copy.
-        this.getLeftHalfCard().getSpellAbility().addEffect(new CopyTargetSpellEffect());
+        this.getLeftHalfCard().getSpellAbility().addEffect(new CopyTargetStackObjectEffect());
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell(filter));
 
         // Explosion

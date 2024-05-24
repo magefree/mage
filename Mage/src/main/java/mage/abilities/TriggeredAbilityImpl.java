@@ -23,11 +23,11 @@ import java.util.UUID;
  */
 public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
 
-    protected boolean optional;
-    protected boolean leavesTheBattlefieldTrigger;
+    private boolean optional;
+    private boolean leavesTheBattlefieldTrigger;
     private boolean triggersOnceEachTurn = false;
     private boolean doOnlyOnceEachTurn = false;
-    protected boolean replaceRuleText = false; // if true, replace "{this}" with "it" in effect text
+    private boolean replaceRuleText = false; // if true, replace "{this}" with "it" in effect text
     private GameEvent triggerEvent = null;
     private String triggerPhrase = null;
 
@@ -36,7 +36,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     protected TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
-        super(AbilityType.TRIGGERED, zone);
+        super(AbilityType.TRIGGERED_NONMANA, zone);
         setLeavesTheBattlefieldTrigger(false);
         if (effect != null) {
             addEffect(effect);
@@ -75,7 +75,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             return;
         }
         game.getState().setValue(CardUtil.getCardZoneString(
-                "lastTurnTriggered" + originalId, sourceId, game
+                "lastTurnTriggered" + getOriginalId(), sourceId, game
         ), game.getTurnNum());
     }
 
@@ -101,7 +101,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             return true;
         }
         Integer lastTurnTriggered = (Integer) game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnTriggered" + originalId, sourceId, game)
+                CardUtil.getCardZoneString("lastTurnTriggered" + getOriginalId(), sourceId, game)
         );
         return lastTurnTriggered == null || lastTurnTriggered != game.getTurnNum();
     }
@@ -112,7 +112,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             return false;
         }
         Integer lastTurnUsed = (Integer) game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnUsed" + originalId, sourceId, game)
+                CardUtil.getCardZoneString("lastTurnUsed" + getOriginalId(), sourceId, game)
         );
         return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
     }
@@ -165,7 +165,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
         if (doOnlyOnceEachTurn) {
             game.getState().setValue(CardUtil.getCardZoneString(
-                    "lastTurnUsed" + originalId, sourceId, game
+                    "lastTurnUsed" + getOriginalId(), sourceId, game
             ), game.getTurnNum());
         }
         //20091005 - 603.4
@@ -243,6 +243,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return ruleLow.startsWith("attach")
                 || ruleLow.startsWith("change")
                 || ruleLow.startsWith("counter")
+                || ruleLow.startsWith("create")
                 || ruleLow.startsWith("destroy")
                 || ruleLow.startsWith("distribute")
                 || ruleLow.startsWith("sacrifice")
@@ -264,6 +265,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     /**
      * For use in generating trigger phrases with correct text
+     *
      * @return "When " for an effect that always removes the source from the battlefield, otherwise "Whenever "
      */
     protected final String getWhen() {
@@ -361,6 +363,20 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean isOptional() {
         return optional;
+    }
+
+    @Override
+    public TriggeredAbility setOptional() {
+        this.optional = true;
+
+        if (getEffects().stream().anyMatch(
+                effect -> effect instanceof DoIfCostPaid && ((DoIfCostPaid) effect).isOptional())) {
+            throw new IllegalArgumentException(
+                    "DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): "
+                            + this.getClass().getSimpleName());
+        }
+
+        return this;
     }
 
     @Override

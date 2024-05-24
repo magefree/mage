@@ -93,7 +93,7 @@ class ZoyowaLavaTongueEffect extends OneShotEffect {
             Cost cost = new OrCost(
                     "discard a card or sacrifice a permanent?",
                     new DiscardCardCost(),
-                    new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_SHORT_TEXT)
+                    new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT)
             );
 
             boolean choseToPay = cost.canPay(source, source, id, game)

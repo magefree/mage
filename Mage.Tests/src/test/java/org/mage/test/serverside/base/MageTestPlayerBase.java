@@ -256,7 +256,7 @@ public abstract class MageTestPlayerBase {
     }
 
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability) {
-        addCustomCardWithAbility(customName, controllerPlayer, ability, null, CardType.ENCHANTMENT, "", Zone.BATTLEFIELD);
+        addCustomCardWithAbility(customName, controllerPlayer, ability, null, null, "", Zone.BATTLEFIELD);
     }
 
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability, SpellAbility spellAbility,
@@ -370,6 +370,24 @@ public abstract class MageTestPlayerBase {
         ability.addTarget(new TargetPermanent());
         addCustomCardWithAbility(
                 "target transform for " + controller.getName(),
+                controller,
+                ability
+        );
+    }
+
+    /**
+     * Add target blink ability that can be called by text "target blink"
+     *
+     * @param controller
+     */
+    protected void addCustomEffect_BlinkTarget(TestPlayer controller) {
+        Ability ability = new SimpleActivatedAbility(
+                new ExileThenReturnTargetEffect(true, true).setText("target blink"),
+                new ManaCostsImpl<>("")
+        );
+        ability.addTarget(new TargetPermanent());
+        addCustomCardWithAbility(
+                "target blink for " + controller.getName(),
                 controller,
                 ability
         );

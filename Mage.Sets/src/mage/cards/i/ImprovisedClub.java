@@ -20,7 +20,7 @@ public final class ImprovisedClub extends CardImpl {
 
         // As an additional cost to cast this spell, sacrifice an artifact or creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(
-                StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT
+                StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE
         ));
 
         // Improvised Club deals 4 damage to any target.

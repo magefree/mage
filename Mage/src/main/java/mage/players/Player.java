@@ -195,6 +195,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canPlayCardsFromGraveyard();
 
+    void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary);
+
+    boolean canPlotFromTopOfLibrary();
+
     void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn);
 
     boolean isDrawsOnOpponentsTurn();
@@ -363,16 +367,13 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Return player's turn control to prev player
+     *
      * @param value
      * @param fullRestore return turn control to own
      */
     void setGameUnderYourControl(boolean value, boolean fullRestore);
 
     void setTestMode(boolean value);
-
-    void addAction(String action);
-
-    int getActionCount();
 
     void setAllowBadMoves(boolean allowBadMoves);
 
@@ -488,6 +489,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param approvingObject reference to the ability that allows to play the card
      * @return
      */
+    // TODO: should have a version taking a PlayLandAbility or SpellAbility to handle MDFC/Zoetic Cavern/Adventure/etc...
     boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject);
 
     /**
@@ -499,6 +501,7 @@ public interface Player extends MageItem, Copyable<Player> {
      *                     of lands you already played.
      * @return
      */
+    // TODO: should have a version taking a PlayLandAbility to handle MDFC/Zoetic Cavern/etc...
     boolean playLand(Card card, Game game, boolean ignoreTiming);
 
     boolean activateAbility(ActivatedAbility ability, Game game);
@@ -815,7 +818,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void updateRange(Game game);
 
-    ManaOptions getManaAvailable(Game game);
+    ManaOptions getManaAvailable(Game originalGame);
 
     void addAvailableTriggeredMana(List<Mana> netManaAvailable);
 
@@ -827,7 +830,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     PlayableObjectsList getPlayableObjects(Game game, Zone zone);
 
-    Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
+    Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game originalGame);
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
 
@@ -988,7 +991,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param source
      * @param game
      * @param fromZone
-     * @param withName for face down: used to hide card name in game logs before real face down status apply
+     * @param withName  for face down: used to hide card name in game logs before real face down status apply
      * @return
      */
     @Deprecated

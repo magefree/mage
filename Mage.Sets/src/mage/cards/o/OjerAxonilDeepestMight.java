@@ -13,6 +13,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -132,9 +133,19 @@ class OjerAxonilDeepestMightReplacementEffect extends ReplacementEffectImpl {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (sourcePermanent == null) {
             sourceObject = game.getObject(event.getSourceId());
+            if (sourceObject == null
+                    || !(sourceObject instanceof Controllable)
+                    || !((Controllable) sourceObject).isControlledBy(controller.getId())
+            ) {
+                return false; // Only source you control.
+            }
         } else {
+            if (!sourcePermanent.isControlledBy(controller.getId())) {
+                return false;  // Only source you control.
+            }
             sourceObject = sourcePermanent;
         }
+
         Permanent ojer = source.getSourcePermanentIfItStillExists(game);
         DamageEvent dmgEvent = (DamageEvent) event;
 

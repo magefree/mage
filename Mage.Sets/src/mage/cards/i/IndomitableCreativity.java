@@ -7,14 +7,13 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,8 @@ public final class IndomitableCreativity extends CardImpl {
 
         // Destroy X target artifacts and/or creatures. For each permanent destroyed this way, its controller reveals cards from the top of their library until an artifact or creature card is revealed and exiles that card. Those players put the exiled card onto the battlefield, then shuffle their libraries.
         this.getSpellAbility().addEffect(new IndomitableCreativityEffect());
-        this.getSpellAbility().setTargetAdjuster(IndomitableCreativityAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
     }
 
     private IndomitableCreativity(final IndomitableCreativity card) {
@@ -41,25 +41,6 @@ public final class IndomitableCreativity extends CardImpl {
     @Override
     public IndomitableCreativity copy() {
         return new IndomitableCreativity(this);
-    }
-}
-
-enum IndomitableCreativityAdjuster implements TargetAdjuster {
-    instance;
-    private static final FilterPermanent filter = new FilterPermanent("artifacts and/or creatures");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()
-        ));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        ability.addTarget(new TargetPermanent(xValue, xValue, filter, false));
     }
 }
 

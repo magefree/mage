@@ -87,7 +87,6 @@ import java.util.prefs.Preferences;
 public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static final String TITLE_NAME = "XMage";
-    private static final Logger logger = Logger.getLogger(MageFrame.class);
 
     private static final Logger LOGGER = Logger.getLogger(MageFrame.class);
     private static final String LITE_MODE_ARG = "-lite";
@@ -333,7 +332,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         setAppIcon();
         MageTray.instance.install();
 
-        desktopPane.add(ArrowBuilder.getBuilder().getArrowsManagerPanel(), JLayeredPane.DRAG_LAYER);
+        desktopPane.add(ArrowBuilder.getBuilder().getArrowsManagerPanel(), JLayeredPane.PALETTE_LAYER);
 
         desktopPane.addComponentListener(new ComponentAdapter() {
             @Override
@@ -398,7 +397,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void bootstrapSetsAndFormats() {
-        logger.info("Loading sets and formats...");
+        LOGGER.info("Loading sets and formats...");
         ConstructedFormats.ensureLists();
     }
 
@@ -439,7 +438,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             return;
         }
         cardInfoPane.setLocation(40, 40);
-        cardInfoPane.setBackground(new Color(0, 0, 0, 0));
+        cardInfoPane.setBackground(new Color(0, 0, 0, 255)); // use non-transparent background to full draw, see bug example in #12261
         UI.addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
 
         MageRoundPane popupContainer = new MageRoundPane();
@@ -682,25 +681,29 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (activeFrame != null) {
             activeFrame.deactivated();
         }
+        activeFrame = null;
 
-        // If null, no new frame to activate, return early
+        // clean resources
+        ArrowBuilder.getBuilder().hideAllPanels();
+        MusicPlayer.stopBGM();
+
+        // if no new frame to activate (example: disconnection)
         if (frame == null) {
-            activeFrame = null;
             return;
         }
+
         LOGGER.debug("Setting " + frame.getTitle() + " active");
+
         activeFrame = frame;
-        desktopPane.moveToFront(frame);
+        desktopPane.moveToFront(activeFrame);
         activeFrame.setBounds(0, 0, desktopPane.getWidth(), desktopPane.getHeight());
         activeFrame.revalidate();
         activeFrame.activated();
         activeFrame.setVisible(true);
-        ArrowBuilder.getBuilder().hideAllPanels();
-        if (frame instanceof GamePane) {
-            ArrowBuilder.getBuilder().showPanel(((GamePane) frame).getGameId());
+
+        if (activeFrame instanceof GamePane) {
+            ArrowBuilder.getBuilder().showPanel(((GamePane) activeFrame).getGameId());
             MusicPlayer.playBGM();
-        } else {
-            MusicPlayer.stopBGM();
         }
     }
 
@@ -1460,7 +1463,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             try {
                 instance = new MageFrame();
             } catch (Throwable e) {
-                logger.fatal("Critical error on start up, app will be closed: " + e.getMessage(), e);
+                LOGGER.fatal("Critical error on start up, app will be closed: " + e.getMessage(), e);
                 System.exit(1);
             }
 

@@ -37,7 +37,8 @@ public final class HexgoldSlash extends CardImpl {
 }
 
 class HexgoldSlashEffect extends OneShotEffect {
-    public HexgoldSlashEffect() {
+
+    HexgoldSlashEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to target creature. If that creature has toxic, " +
                 "{this} deals 4 damage to that creature instead";
@@ -49,7 +50,7 @@ class HexgoldSlashEffect extends OneShotEffect {
 
     @Override
     public HexgoldSlashEffect copy() {
-        return new HexgoldSlashEffect();
+        return new HexgoldSlashEffect(this);
     }
 
     @Override

@@ -60,7 +60,7 @@ public final class RonaSheoldredsFaithful extends CardImpl {
 class RonaSheoldredsFaithfulEffect extends AsThoughEffectImpl {
 
     RonaSheoldredsFaithfulEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.staticText = "you may cast {this} from your graveyard " +
                 "by discarding two cards in addition to paying its other costs";
     }

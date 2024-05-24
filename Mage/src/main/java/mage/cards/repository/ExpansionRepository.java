@@ -56,8 +56,9 @@ public enum ExpansionRepository {
             instanceInitialized = true;
 
             eventSource.fireRepositoryDbLoaded();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            // TODO: add app close?
+            e.printStackTrace();
         }
 
     }

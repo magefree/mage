@@ -18,8 +18,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.*;
@@ -119,7 +117,7 @@ class WorldQuellerEffect extends OneShotEffect {
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player2 = game.getPlayer(playerId);
                     if (player2 != null && target.canChoose(playerId, source, game)) {
-                        while (player2.canRespond() && !target.isChosen() && target.canChoose(playerId, source, game)) {
+                        while (player2.canRespond() && !target.isChosen(game) && target.canChoose(playerId, source, game)) {
                             player2.choose(Outcome.Sacrifice, target, source, game);
                         }
                         Permanent permanent = game.getPermanent(target.getFirstTarget());

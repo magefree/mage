@@ -1861,9 +1861,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     List<CardView> gridStack = new ArrayList<>();
                     gridRow.add(gridStack);
                     for (DeckCardInfo info : stack) {
-                        if (trackedCards.containsKey(info.getSetCode()) && trackedCards.get(info.getSetCode()).containsKey(info.getCardNum())) {
+                        if (trackedCards.containsKey(info.getSetCode()) && trackedCards.get(info.getSetCode()).containsKey(info.getCardNumber())) {
                             List<CardView> candidates
-                                    = trackedCards.get(info.getSetCode()).get(info.getCardNum());
+                                    = trackedCards.get(info.getSetCode()).get(info.getCardNumber());
                             if (!candidates.isEmpty()) {
                                 gridStack.add(candidates.remove(0));
                                 thisMaxStackSize = Math.max(thisMaxStackSize, gridStack.size());

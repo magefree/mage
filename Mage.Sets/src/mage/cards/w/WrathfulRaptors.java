@@ -75,7 +75,7 @@ class WrathfulRaptorsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
@@ -102,7 +102,7 @@ class WrathfulRaptorsTriggeredAbility extends TriggeredAbilityImpl {
 class WrathfulRaptorsEffect extends OneShotEffect {
 
     WrathfulRaptorsEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
     }
 
     private WrathfulRaptorsEffect(final WrathfulRaptorsEffect effect) {

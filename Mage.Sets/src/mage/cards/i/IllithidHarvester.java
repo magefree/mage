@@ -24,7 +24,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.Arrays;
 import java.util.UUID;
@@ -59,7 +59,7 @@ public final class IllithidHarvester extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect()
                 .setText("They don't untap during their controllers' next untap steps"));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellCard().getSpellAbility().setTargetAdjuster(IllithidHarvesterAdjuster.instance);
+        this.getSpellCard().getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
         this.finalizeAdventure();
     }
@@ -71,17 +71,6 @@ public final class IllithidHarvester extends AdventureCard {
     @Override
     public IllithidHarvester copy() {
         return new IllithidHarvester(this);
-    }
-}
-
-enum IllithidHarvesterAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        ability.addTarget(new TargetCreaturePermanent(xValue, xValue));
     }
 }
 

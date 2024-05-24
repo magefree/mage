@@ -5,7 +5,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaAbility;
-import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.ThreadLocalStringBuilder;
@@ -103,6 +102,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         return rules;
     }
 
+    /**
+     * Activated Ability in the engine are broader than in the rules.
+     * Notably SpellAbility & PlayLandAbility are ActivatedAbility,
+     * as they can be activated by a player (the engine meaning).
+     */
     @Override
     public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone) {
         return stream()
@@ -161,7 +165,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     public Abilities<TriggeredAbility> getTriggeredAbilities(Zone zone) {
         Abilities<TriggeredAbility> zonedAbilities = new AbilitiesImpl<>();
         for (T ability : this) {
-            if (ability instanceof TriggeredAbility && ability.getZone().match(zone)) {
+            if (ability.isTriggeredAbility() && ability.getZone().match(zone)) {
                 zonedAbilities.add((TriggeredAbility) ability);
             } else if (ability instanceof ZoneChangeTriggeredAbility) {
                 ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility) ability;
@@ -176,7 +180,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     @Override
     public boolean hasPoolDependantAbilities() {
         return stream()
-                .filter(ability -> ability.getAbilityType() == AbilityType.MANA)
+                .filter(Ability::isManaAbility)
                 .map(ManaAbility.class::cast)
                 .anyMatch(ManaAbility::isPoolDependant);
     }

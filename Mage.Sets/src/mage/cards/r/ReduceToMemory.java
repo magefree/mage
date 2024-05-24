@@ -1,6 +1,6 @@
 package mage.cards.r;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ public final class ReduceToMemory extends CardImpl {
 
         // Exile target nonland permanent. Its controller creates a 3/2 red and white spirit creature token.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new Spirit32Token()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new Spirit32Token()));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 

@@ -167,9 +167,17 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     void setZoneChangeCounter(int value, Game game);
 
     default boolean isHistoric(Game game) {
-        return getCardType(game).contains(CardType.ARTIFACT)
-                || getSuperType(game).contains(SuperType.LEGENDARY)
+        return isArtifact(game)
+                || isLegendary(game)
                 || hasSubtype(SubType.SAGA, game);
+    }
+
+    default boolean isOutlaw(Game game) {
+        return hasSubtype(SubType.ASSASSIN, game)
+                || hasSubtype(SubType.MERCENARY, game)
+                || hasSubtype(SubType.PIRATE, game)
+                || hasSubtype(SubType.ROGUE, game)
+                || hasSubtype(SubType.WARLOCK, game);
     }
 
     default boolean isCreature() {

@@ -8,6 +8,7 @@ Classic Sixth Edition|6ED|
 Seventh Edition|7ED|
 Eighth Edition|8ED|
 Ninth Edition|9ED|
+Alchemy: Dominaria|YDMU|
 Alchemy: Innistrad|Y22|
 Adventures in the Forgotten Realms|AFR|
 Forgotten Realms Commander|AFC|
@@ -180,6 +181,7 @@ Launch Party|MLP|
 Modern Horizons|MH1|
 Modern Horizons 2|MH2|
 Modern Horizons 3|MH3|
+Modern Horizons 3 Commander|M3C|
 Modern Masters 2015|MM2|
 Modern Masters 2017|MM3|
 Modern Masters|MMA|
@@ -197,6 +199,7 @@ Odyssey|ODY|
 Oath of the Gatewatch|OGW|
 Onslaught|ONS|
 Outlaws of Thunder Junction|OTJ|
+Outlaws of Thunder Junction Commander|OTC|
 The Big Score|BIG|
 Magic Origins|ORI|
 Phyrexia: All Will Be One|ONE|

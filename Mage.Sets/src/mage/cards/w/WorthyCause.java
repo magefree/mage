@@ -26,7 +26,7 @@ public final class WorthyCause extends CardImpl {
         this.addAbility(new BuybackAbility("{2}"));
 
         // As an additional cost to cast Worthy Cause, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // You gain life equal to the sacrificed creature's toughness.
         Effect effect = new GainLifeEffect(SacrificeCostCreaturesToughness.instance);

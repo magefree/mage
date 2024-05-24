@@ -82,7 +82,7 @@ class AbolethSpawnTriggeredAbility extends TriggeredAbilityImpl {
             return false; // only creatures entering under opponent's control
         }
         Ability stackAbility = stackObject.getStackAbility();
-        if (!(stackAbility instanceof TriggeredAbility)) {
+        if (!stackAbility.isTriggeredAbility()) {
             return false;
         }
         GameEvent triggerEvent = ((TriggeredAbility) stackAbility).getTriggerEvent();

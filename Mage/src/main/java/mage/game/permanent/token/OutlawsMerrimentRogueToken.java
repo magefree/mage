@@ -25,7 +25,8 @@ public final class OutlawsMerrimentRogueToken extends TokenImpl {
         toughness = new MageInt(2);
 
         this.addAbility(HasteAbility.getInstance());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "it"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "it"))
+                .setTriggerPhrase("When this creature enters the battlefield, ");
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

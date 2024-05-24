@@ -13,7 +13,7 @@ import java.util.List;
  */
 public final class IkoriaLairOfBehemoths extends ExpansionSet {
 
-    private static final List<String> mutateNames = Arrays.asList(
+    public static final List<String> mutateNames = Arrays.asList(
             "Archipelagore",
             "Auspicious Starrix",
             "Boneyard Lurker",

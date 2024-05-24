@@ -173,4 +173,51 @@ public class DisguiseTest extends CardTestPlayerBase {
             Assert.assertFalse(info, foundAbility != null);
         }
     }
+
+    @Test
+    public void testCostReduction() {
+        String chisel = "Dream Chisel"; // Face-down creature spells you cast cost {1} less to cast.
+        String nightdrinker = "Nightdrinker Moroii";
+        /* Nightdrinker Moroii {3}{B} Creature — Vampire
+         * Flying
+         * When Nightdrinker Moroii enters the battlefield, you lose 3 life.
+         * Disguise {B}{B}
+         */
+        addCard(Zone.BATTLEFIELD, playerA, chisel);
+        addCard(Zone.HAND, playerA, nightdrinker);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, nightdrinker + " using Disguise");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertLife(playerA, 20);
+    }
+
+    @Test
+    public void testCostAdjuster() {
+        /*  Fugitive Codebreaker {1}{R}
+         * Creature — Goblin Rogue
+         * Prowess, haste
+         * Disguise {5}{R}. This cost is reduced by {1} for each instant and sorcery card in your graveyard.
+         * When Fugitive Codebreaker is turned face up, discard your hand, then draw three cards.
+         */
+        String codebreaker = "Fugitive Codebreaker";
+        addCard(Zone.HAND, playerA, codebreaker);
+        addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3 + 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, codebreaker + " using Disguise", true);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{5}{R}:");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 3);
+    }
+
 }

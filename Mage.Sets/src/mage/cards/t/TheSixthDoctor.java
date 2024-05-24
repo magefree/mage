@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,7 +38,7 @@ public final class TheSixthDoctor extends CardImpl {
         // Time Lord's Prerogative -- Whenever you cast a historic spell, copy it, except the copy isn't legendary. This ability triggers only once each turn.
         this.addAbility(
                 new SpellCastControllerTriggeredAbility(
-                        new CopyTargetSpellEffect(
+                        new CopyTargetStackObjectEffect(
                                 false, true, false, 1,
                                 new RemoveTypeCopyApplier(SuperType.LEGENDARY)
                         ).setText("copy it, except the copy isn't legendary"),

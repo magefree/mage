@@ -61,7 +61,7 @@ class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
@@ -69,7 +69,7 @@ class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null && StaticFilters.FILTER_CONTROLLED_CREATURE.match(permanent, getControllerId(), this, game)) {
-            getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+            getEffects().setTargetPointer(new FixedTarget(targetId, game));
             return true;
         }
         return false;

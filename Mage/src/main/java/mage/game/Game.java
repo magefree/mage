@@ -29,7 +29,6 @@ import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.turn.Phase;
@@ -269,11 +268,17 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     boolean isSimulation();
 
-    void setSimulation(boolean checkPlayableState);
+    /**
+     * Prepare game for any simulations like AI or effects calc
+     */
+    Game createSimulationForAI();
+
+    /**
+     * Prepare game for any playable calc (available mana/abilities)
+     */
+    Game createSimulationForPlayableCalc();
 
     boolean inCheckPlayableState();
-
-    void setCheckPlayableState(boolean checkPlayableState);
 
     MageObject getLastKnownInformation(UUID objectId, Zone zone);
 
@@ -493,6 +498,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility, Ability source);
 
     UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source);
+
+    UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source, boolean fireAsSimultaneousEvent);
 
     /**
      * Inner game engine call to reset game objects to actual versions

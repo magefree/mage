@@ -8,7 +8,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -23,7 +22,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class OverwhelmingSplendor extends CardImpl {
@@ -149,7 +147,7 @@ class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffe
 
         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
         return ability.isPresent()
-                && !(ability.get() instanceof ActivatedManaAbilityImpl)
+                && !(ability.get().isManaActivatedAbility())
                 && !(ability.get() instanceof LoyaltyAbility);
     }
 }

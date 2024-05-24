@@ -18,7 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -80,8 +80,8 @@ class DevouringHellionEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
-        if (!player.choose(outcome, target, source, game)) {
+        Target target = new TargetSacrifice(0, Integer.MAX_VALUE, filter);
+        if (!player.choose(Outcome.Sacrifice, target, source, game)) {
             return false;
         }
         int xValue = 0;

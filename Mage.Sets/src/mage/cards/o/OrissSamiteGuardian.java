@@ -11,7 +11,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
-import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
+import mage.abilities.effects.common.combat.CantAttackAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -19,7 +19,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -83,7 +82,7 @@ class OrissSamiteGuardianEffect extends OneShotEffect {
             game.addEffect(new OrissSamiteGuardianCantCastEffect(), source);
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that player controls");
             filter.add(new ControllerIdPredicate(getTargetPointer().getFirst(game, source)));
-            ContinuousEffect effect = new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, filter);
+            ContinuousEffect effect = new CantAttackAllEffect(Duration.EndOfTurn, filter);
             game.addEffect(effect, source);
             return true;
         }

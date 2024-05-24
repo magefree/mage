@@ -88,7 +88,7 @@ class CosmiumCatalystEffect extends OneShotEffect {
         if (!target.canChoose(controller.getId(), source, game)) {
             return true;
         }
-        controller.chooseTarget(outcome, target, source, game);
+        target.chooseTarget(outcome, controller.getId(), source, game);
         Card chosenCard = game.getCard(target.getFirstTarget());
         if (chosenCard != null) {
             CardUtil.castSpellWithAttributesForFree(controller, source, game, chosenCard);

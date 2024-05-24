@@ -605,6 +605,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     ability.setRuleVisible(true);
                 }
             }
+            // The current face down implementation is just setting a boolean, so any trigger checking for a
+            // permanent property once being turned face up is not seeing the right face up data.
+            // For instance triggers looking for specific subtypes being turned face up (Detectives in MKM set)
+            // are broken without that processAction call.
+            // This is somewhat a band-aid on the special action nature of turning a permanent face up.
+            // 708.8. As a face-down permanent is turned face up, its copiable values revert to its normal copiable values.
+            // Any effects that have been applied to the face-down permanent still apply to the face-up permanent.
+            game.getState().processAction(game);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNED_FACE_UP, getId(), source, playerId));
             return true;
         }
@@ -807,35 +815,46 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
+    public void removeCounters(String name, int amount, Ability source, Game game, boolean isDamage) {
+
+        if (amount <= 0){
+            return;
+        }
+
+        if (getCounters(game).getCount(name) <= 0){
+            return;
+        }
+
+        GameEvent removeCountersEvent = new RemoveCountersEvent(name, this, source, amount, isDamage);
+        if (game.replaceEvent(removeCountersEvent)){
+            return;
+        }
+
         int finalAmount = 0;
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < removeCountersEvent.getAmount(); i++) {
+
+            GameEvent event = new RemoveCounterEvent(name, this, source, isDamage);
+            if (game.replaceEvent(event)){
+                continue;
+            }
+
             if (!getCounters(game).removeCounter(name, 1)) {
                 break;
             }
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, source, getControllerOrOwnerId());
-            if (source != null
-                    && source.getControllerId() != null) {
-                event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counter
-            }
-            event.setData(name);
+
+            event = new CounterRemovedEvent(name, this, source, isDamage);
             game.fireEvent(event);
+
             finalAmount++;
         }
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED, objectId, source, getControllerOrOwnerId());
-        if (source != null
-                && source.getControllerId() != null) {
-            event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counter
-        }
-        event.setData(name);
-        event.setAmount(finalAmount);
+        GameEvent event = new CountersRemovedEvent(name, this, source, finalAmount, isDamage);
         game.fireEvent(event);
     }
 
     @Override
-    public void removeCounters(Counter counter, Ability source, Game game) {
+    public void removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
         if (counter != null) {
-            removeCounters(counter.getName(), counter.getCount(), source, game);
+            removeCounters(counter.getName(), counter.getCount(), source, game, isDamage);
         }
     }
 
