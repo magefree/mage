@@ -33,6 +33,24 @@ public class CardImageUrls {
         }
     }
 
+    public CardImageUrls(String baseUrl, String alternativeUrl , String nextaltUrl) {
+        this();
+
+        this.baseUrl = baseUrl;
+
+        if (alternativeUrl != null
+                && !alternativeUrl.isEmpty()
+                && !Objects.equals(baseUrl, alternativeUrl)) {
+            this.alternativeUrls.add(alternativeUrl);
+        }
+
+        if (nextaltUrl != null
+                && !nextaltUrl.isEmpty()
+                && !Objects.equals(baseUrl, nextaltUrl)) {
+            this.alternativeUrls.add(nextaltUrl);
+        }
+    }
+
     public List<String> getDownloadList() {
         List<String> downloadUrls = new ArrayList<>();
 
