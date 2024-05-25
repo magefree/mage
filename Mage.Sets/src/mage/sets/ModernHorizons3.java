@@ -80,6 +80,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Jet Medallion", 292, Rarity.RARE, mage.cards.j.JetMedallion.class));
         cards.add(new SetCardInfo("K'rrik, Son of Yawgmoth", 274, Rarity.RARE, mage.cards.k.KrrikSonOfYawgmoth.class));
         cards.add(new SetCardInfo("Kaalia of the Vast", 290, Rarity.MYTHIC, mage.cards.k.KaaliaOfTheVast.class));
+        cards.add(new SetCardInfo("Kami of Jealous Thirst", 98, Rarity.COMMON, mage.cards.k.KamiOfJealousThirst.class));
         cards.add(new SetCardInfo("Kappa Cannoneer", 270, Rarity.RARE, mage.cards.k.KappaCannoneer.class));
         cards.add(new SetCardInfo("Kozilek's Unsealing", 65, Rarity.UNCOMMON, mage.cards.k.KozileksUnsealing.class));
         cards.add(new SetCardInfo("Kudo, King Among Bears", 192, Rarity.RARE, mage.cards.k.KudoKingAmongBears.class));
@@ -88,6 +89,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Mandibular Kite", 34, Rarity.COMMON, mage.cards.m.MandibularKite.class));
         cards.add(new SetCardInfo("Marionette Apprentice", 100, Rarity.UNCOMMON, mage.cards.m.MarionetteApprentice.class));
         cards.add(new SetCardInfo("Meltdown", 282, Rarity.UNCOMMON, mage.cards.m.Meltdown.class));
+        cards.add(new SetCardInfo("Mindless Conscription", 101, Rarity.UNCOMMON, mage.cards.m.MindlessConscription.class));
         cards.add(new SetCardInfo("Mogg Mob", 127, Rarity.UNCOMMON, mage.cards.m.MoggMob.class));
         cards.add(new SetCardInfo("Mountain", 307, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Nethergoyf", 103, Rarity.MYTHIC, mage.cards.n.Nethergoyf.class));
@@ -140,10 +142,12 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Temperamental Oozewagg", 172, Rarity.COMMON, mage.cards.t.TemperamentalOozewagg.class));
         cards.add(new SetCardInfo("Tempest Harvester", 73, Rarity.COMMON, mage.cards.t.TempestHarvester.class));
         cards.add(new SetCardInfo("The Necrobloom", 194, Rarity.RARE, mage.cards.t.TheNecrobloom.class));
+        cards.add(new SetCardInfo("Thraben Charm", 45, Rarity.COMMON, mage.cards.t.ThrabenCharm.class));
         cards.add(new SetCardInfo("Toxic Deluge", 277, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
         cards.add(new SetCardInfo("Trickster's Elk", 175, Rarity.UNCOMMON, mage.cards.t.TrickstersElk.class));
         cards.add(new SetCardInfo("Tune the Narrative", 75, Rarity.COMMON, mage.cards.t.TuneTheNarrative.class));
         cards.add(new SetCardInfo("Ugin's Labyrinth", 233, Rarity.MYTHIC, mage.cards.u.UginsLabyrinth.class));
+        cards.add(new SetCardInfo("Ulamog, the Defiler", 15, Rarity.MYTHIC, mage.cards.u.UlamogTheDefiler.class));
         cards.add(new SetCardInfo("Urza's Cave", 234, Rarity.UNCOMMON, mage.cards.u.UrzasCave.class));
         cards.add(new SetCardInfo("Victimize", 278, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Warren Soultrader", 110, Rarity.RARE, mage.cards.w.WarrenSoultrader.class));
