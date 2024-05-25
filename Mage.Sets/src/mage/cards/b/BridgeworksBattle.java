@@ -15,7 +15,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.targetpointer.FirstTargetPointer;
 
 import java.util.UUID;
 
@@ -43,7 +42,6 @@ public final class BridgeworksBattle extends ModalDoubleFacedCard {
         // Target creature you control gets +2/+2 until end of turn. It fights up to one target creature you don't control.
         this.getLeftHalfCard().getSpellAbility().addEffect(
                 new BoostTargetEffect(2, 2)
-                        .setTargetPointer(new FirstTargetPointer())
         );
         this.getLeftHalfCard().getSpellAbility().addEffect(
                 new FightTargetsEffect()
