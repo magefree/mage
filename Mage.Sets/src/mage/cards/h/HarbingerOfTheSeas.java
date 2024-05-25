@@ -1,10 +1,10 @@
-package mage.cards.m;
+package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -16,34 +16,34 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author Susucr
  */
-public final class MagusOfTheMoon extends CardImpl {
+public final class HarbingerOfTheSeas extends CardImpl {
 
-    public MagusOfTheMoon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add(SubType.HUMAN);
+    public HarbingerOfTheSeas(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+
+        this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
-
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Nonbasic lands are Mountains.
-        this.addAbility(new SimpleStaticAbility(new MagusOfTheMoonEffect()));
+        // Nonbasic lands are Islands.
+        this.addAbility(new SimpleStaticAbility(new HarbingerOfTheSeasEffect()));
     }
 
-    private MagusOfTheMoon(final MagusOfTheMoon card) {
+    private HarbingerOfTheSeas(final HarbingerOfTheSeas card) {
         super(card);
     }
 
     @Override
-    public MagusOfTheMoon copy() {
-        return new MagusOfTheMoon(this);
+    public HarbingerOfTheSeas copy() {
+        return new HarbingerOfTheSeas(this);
     }
-
 }
 
-class MagusOfTheMoonEffect extends ContinuousEffectImpl {
+// Very similar to Magus of the Moon
+class HarbingerOfTheSeasEffect extends ContinuousEffectImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
@@ -51,13 +51,13 @@ class MagusOfTheMoonEffect extends ContinuousEffectImpl {
         filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
     }
 
-    MagusOfTheMoonEffect() {
+    HarbingerOfTheSeasEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        this.staticText = "Nonbasic lands are Mountains";
-        dependencyTypes.add(DependencyType.BecomeMountain);
+        this.staticText = "Nonbasic lands are Islands";
+        dependencyTypes.add(DependencyType.BecomeIsland);
     }
 
-    private MagusOfTheMoonEffect(final MagusOfTheMoonEffect effect) {
+    private HarbingerOfTheSeasEffect(final HarbingerOfTheSeasEffect effect) {
         super(effect);
     }
 
@@ -67,8 +67,8 @@ class MagusOfTheMoonEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public MagusOfTheMoonEffect copy() {
-        return new MagusOfTheMoonEffect(this);
+    public HarbingerOfTheSeasEffect copy() {
+        return new HarbingerOfTheSeasEffect(this);
     }
 
     @Override
@@ -80,9 +80,9 @@ class MagusOfTheMoonEffect extends ContinuousEffectImpl {
                     // So the ability removing has to be done before Layer 6
                     land.removeAllAbilities(source.getSourceId(), game);
                     land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
-                    land.addSubType(game, SubType.MOUNTAIN);
-                    // Mountains have the red mana ability intrinsically so the ability must be added in this layer
-                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                    land.addSubType(game, SubType.ISLAND);
+                    // Islands have the blue mana ability intrinsically so the ability must be added in this layer
+                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
                     break;
             }
         }
