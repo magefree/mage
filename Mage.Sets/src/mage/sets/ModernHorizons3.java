@@ -50,6 +50,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Eviscerator's Insight", 93, Rarity.COMMON, mage.cards.e.EvisceratorsInsight.class));
         cards.add(new SetCardInfo("Evolution Witness", 151, Rarity.COMMON, mage.cards.e.EvolutionWitness.class));
         cards.add(new SetCardInfo("Expanding Ooze", 184, Rarity.COMMON, mage.cards.e.ExpandingOoze.class));
+        cards.add(new SetCardInfo("Fanatic of Rhonas", 152, Rarity.RARE, mage.cards.f.FanaticOfRhonas.class));
         cards.add(new SetCardInfo("Flare of Cultivation", 154, Rarity.RARE, mage.cards.f.FlareOfCultivation.class));
         cards.add(new SetCardInfo("Flare of Denial", 62, Rarity.RARE, mage.cards.f.FlareOfDenial.class));
         cards.add(new SetCardInfo("Flare of Duplication", 119, Rarity.RARE, mage.cards.f.FlareOfDuplication.class));
