@@ -47,6 +47,7 @@ public enum ScryfallImageSourceSmall implements CardImageSource {
         if (downloadUrls.size() == 1) {
             return new CardImageUrls(innerModifyUrlString(downloadUrls.get(0)));
         } 
+        return cardUrls;
     }
 
     @Override
