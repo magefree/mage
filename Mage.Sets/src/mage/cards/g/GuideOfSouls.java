@@ -42,7 +42,7 @@ public final class GuideOfSouls extends CardImpl {
         this.subtype.add(SubType.CLERIC);
 
         this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
         // Whenever another creature enters the battlefield under your control, you gain 1 life and get {E}.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter);

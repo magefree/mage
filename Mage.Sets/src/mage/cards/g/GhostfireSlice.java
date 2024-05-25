@@ -36,7 +36,6 @@ public final class GhostfireSlice extends CardImpl {
     public GhostfireSlice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
-
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
