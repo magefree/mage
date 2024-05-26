@@ -13,24 +13,24 @@ import java.util.UUID;
 /**
  * @author xenohedron
  */
-public class FirstStrikeDamageWatcher extends Watcher {
+public class FirstStrikeWatcher extends Watcher {
 
-    // creatures that dealt damage during the first strike combat damage step of this combat phase
+    // creatures that had first strike or double strike for the first strike combat damage step of this combat phase
+    // (note, due to 0 power or prevention, they may not necessarily have dealt damage)
     private final Set<MageObjectReference> firstStrikingCreatures;
 
     /**
      * Game default watcher, required for combat code
      */
-    public FirstStrikeDamageWatcher() {
+    public FirstStrikeWatcher() {
         super(WatcherScope.GAME);
         this.firstStrikingCreatures = new HashSet<>();
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case COMBAT_PHASE_POST:
-                firstStrikingCreatures.clear();
+        if (event.getType() == GameEvent.EventType.COMBAT_PHASE_POST) {
+            firstStrikingCreatures.clear();
         }
     }
 
@@ -40,18 +40,18 @@ public class FirstStrikeDamageWatcher extends Watcher {
         firstStrikingCreatures.clear();
     }
 
-    public static boolean dealtFirstStrikeDamage(UUID creatureId, Game game) {
-        return game.getState()
-                .getWatcher(FirstStrikeDamageWatcher.class)
-                .firstStrikingCreatures
-                .contains(new MageObjectReference(creatureId, game));
-    }
-
     public static void recordFirstStrikingCreature(UUID creatureId, Game game)  {
         game.getState()
-                .getWatcher(FirstStrikeDamageWatcher.class)
+                .getWatcher(FirstStrikeWatcher.class)
                 .firstStrikingCreatures
                 .add(new MageObjectReference(creatureId, game));
+    }
+
+    public static boolean wasFirstStrikingCreature(UUID creatureId, Game game) {
+        return game.getState()
+                .getWatcher(FirstStrikeWatcher.class)
+                .firstStrikingCreatures
+                .contains(new MageObjectReference(creatureId, game));
     }
 
 }

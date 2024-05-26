@@ -15,7 +15,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.Copyable;
-import mage.watchers.common.FirstStrikeDamageWatcher;
+import mage.watchers.common.FirstStrikeWatcher;
 
 import java.io.Serializable;
 import java.util.*;
@@ -229,8 +229,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     /**
-     * Determines if permanent is to deal damage this step on whether it has first/double strike
-     * and whether it dealt damage during the first combat damage step of this phase
+     * Determines if permanent is to deal damage this step based on whether it has first/double strike
+     * and whether it did during the first combat damage step of this phase.
+     * Info is stored in FirstStrikeWatcher.
      *
      * @param perm  Permanent to check
      * @param first true for first strike damage step, false for normal damage step
@@ -242,12 +243,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
         if (first) {
             if (hasFirstOrDoubleStrike(perm)) {
-                FirstStrikeDamageWatcher.recordFirstStrikingCreature(perm.getId(), game);
+                FirstStrikeWatcher.recordFirstStrikingCreature(perm.getId(), game);
                 return true;
             }
             return false;
         } else { // 702.7c
-            return hasDoubleStrike(perm) || !FirstStrikeDamageWatcher.dealtFirstStrikeDamage(perm.getId(), game);
+            return hasDoubleStrike(perm) || !FirstStrikeWatcher.wasFirstStrikingCreature(perm.getId(), game);
         }
     }
 
