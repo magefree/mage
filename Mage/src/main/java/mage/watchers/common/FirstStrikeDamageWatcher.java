@@ -1,10 +1,8 @@
 package mage.watchers.common;
 
 import mage.MageObjectReference;
-import mage.constants.PhaseStep;
 import mage.constants.WatcherScope;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
@@ -31,12 +29,6 @@ public class FirstStrikeDamageWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
-            case DAMAGED_PERMANENT:
-            case DAMAGED_PLAYER:
-                if (((DamagedEvent) event).isCombatDamage() && game.getTurnStepType() == PhaseStep.FIRST_COMBAT_DAMAGE) {
-                    firstStrikingCreatures.add(new MageObjectReference(event.getSourceId(), game));
-                }
-                return;
             case COMBAT_PHASE_POST:
                 firstStrikingCreatures.clear();
         }
@@ -53,6 +45,13 @@ public class FirstStrikeDamageWatcher extends Watcher {
                 .getWatcher(FirstStrikeDamageWatcher.class)
                 .firstStrikingCreatures
                 .contains(new MageObjectReference(creatureId, game));
+    }
+
+    public static void recordFirstStrikingCreature(UUID creatureId, Game game)  {
+        game.getState()
+                .getWatcher(FirstStrikeDamageWatcher.class)
+                .firstStrikingCreatures
+                .add(new MageObjectReference(creatureId, game));
     }
 
 }

@@ -241,7 +241,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             return false;
         }
         if (first) {
-            return hasFirstOrDoubleStrike(perm);
+            if (hasFirstOrDoubleStrike(perm)) {
+                FirstStrikeDamageWatcher.recordFirstStrikingCreature(perm.getId(), game);
+                return true;
+            }
+            return false;
         } else { // 702.7c
             return hasDoubleStrike(perm) || !FirstStrikeDamageWatcher.dealtFirstStrikeDamage(perm.getId(), game);
         }
