@@ -109,7 +109,7 @@ public class CopyTokenFunction {
 
         // from another card (example: Embalm ability)
         Card sourceObj = CardUtil.getDefaultCardSideForBattlefield(game, source.getMainCard());
-        target.setCopySourceCard(source);
+        target.setCopySourceCard(sourceObj);
         // main side
         copyToToken(target, sourceObj, game);
         CardUtil.copySetAndCardNumber(target, sourceObj);
