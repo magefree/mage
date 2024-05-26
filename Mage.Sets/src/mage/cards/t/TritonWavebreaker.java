@@ -48,7 +48,7 @@ public final class TritonWavebreaker extends CardImpl {
         // Enchanted creature gets +1/+1 and has prowess.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 1));
         ability.addEffect(new GainAbilityAttachedEffect(
-                new ProwessAbility(), AttachmentType.EQUIPMENT
+                new ProwessAbility(), AttachmentType.AURA
         ).setText("and has prowess"));
         this.addAbility(ability);
     }

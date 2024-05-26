@@ -32,7 +32,7 @@ public final class HorridShadowspinner extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever Horrid Shadowspinner attacks, you may draw cards equal to its power. If you do, discard that many cards.
-        this.addAbility(new AttacksTriggeredAbility(new HorridShadowspinnerEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(new HorridShadowspinnerEffect(), true));
     }
 
     private HorridShadowspinner(final HorridShadowspinner card) {
