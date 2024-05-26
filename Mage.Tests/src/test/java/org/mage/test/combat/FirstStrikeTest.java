@@ -328,4 +328,51 @@ public class FirstStrikeTest extends CardTestPlayerBase {
         assertDamageReceived(playerB, hatchling, 3);
     }
 
+    @Test
+    public void firstStrikeDamagePrevented() {
+        String prevention = "Dazzling Reflection"; // 1W Instant
+        // You gain life equal to target creature’s power. The next time that creature would deal damage this turn, prevent that damage.
+
+        addCard(Zone.BATTLEFIELD, playerA, knight, 1);
+        addCard(Zone.BATTLEFIELD, playerA, ghoul, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, prevention);
+
+        attack(1, playerA, knight, playerB);
+        attack(1, playerA, ghoul, playerB);
+
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, prevention, knight);
+
+        checkLife("life gained", 1, PhaseStep.FIRST_COMBAT_DAMAGE, playerA, 22);
+        checkLife("damage prevented", 1, PhaseStep.FIRST_COMBAT_DAMAGE, playerB, 20);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 17);
+    }
+
+    @Test
+    public void firstStrikeZeroDamage() {
+        String rograkh = "Rograkh, Son of Rohgahh"; // 0/1 first strike
+        String battlegrowth = "Battlegrowth"; // G: put a +1/+1 counter on target creature
+
+        addCard(Zone.BATTLEFIELD, playerA, rograkh, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.HAND, playerA, battlegrowth);
+
+        attack(1, playerA, rograkh, playerB);
+
+        castSpell(1, PhaseStep.FIRST_COMBAT_DAMAGE, playerA, battlegrowth, rograkh);
+        // no combat damage should be dealt here
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 20);
+        assertPowerToughness(playerA, rograkh, 1, 2);
+    }
+
 }
