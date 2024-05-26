@@ -31,7 +31,7 @@ public final class SpitefulBanditry extends CardImpl {
                 new CreateTokenEffect(new TreasureToken())
                         .setText("you create a Treasure token"),
                 false, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
-        ).setTriggerPhrase("Whenever one or more creatures your opponents control die, ").setTriggersOnceEachTurn(true));
+        ).setTriggerPhrase("Whenever one or more creatures your opponents control die, ").setTriggersLimitEachTurn(1));
     }
 
     private SpitefulBanditry(final SpitefulBanditry card) {

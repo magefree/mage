@@ -29,7 +29,7 @@ public final class RavenOfFellOmens extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you commit a crime, each opponent loses 1 life and you gain 1 life. This ability triggers only once each turn.
-        Ability ability = new CommittedCrimeTriggeredAbility(new LoseLifeOpponentsEffect(1)).setTriggersOnceEachTurn(true);
+        Ability ability = new CommittedCrimeTriggeredAbility(new LoseLifeOpponentsEffect(1)).setTriggersLimitEachTurn(1);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
     }

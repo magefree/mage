@@ -33,7 +33,7 @@ public final class SarahJaneSmith extends CardImpl {
         // Whenever you cast a historic spell, investigate. This ability triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new InvestigateEffect(), filter, false
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
 
         // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());

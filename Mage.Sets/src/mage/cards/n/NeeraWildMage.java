@@ -36,7 +36,7 @@ public final class NeeraWildMage extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new NeeraWildMageEffect(), StaticFilters.FILTER_SPELL_A,
                 true, SetTargetPointer.SPELL
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
     }
 
     private NeeraWildMage(final NeeraWildMage card) {

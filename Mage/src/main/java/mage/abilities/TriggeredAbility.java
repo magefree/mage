@@ -27,13 +27,25 @@ public interface TriggeredAbility extends Ability {
      */
     boolean checkTrigger(GameEvent event, Game game);
 
-    boolean checkTriggeredAlready(Game game);
+    /**
+     * If the trigger is limited per turn, check if it can trigger again or the limit is met.
+     * true if unlimited
+     */
+    boolean checkTriggeredLimit(Game game);
 
     boolean checkUsedAlready(Game game);
 
-    TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce);
+    /**
+     * limit the number of triggers each turn
+     */
+    TriggeredAbility setTriggersLimitEachTurn(int limit);
 
-    boolean getTriggersOnceEachTurn();
+    /**
+     * Get the number of times the trigger may trigger this turn.
+     * e.g. 0, 1 or 2 for a trigger that is limited to trigger twice each turn.
+     * Integer.MAX_VALUE when no limit.
+     */
+    int getRemainingTriggersLimitEachTurn(Game game);
 
     TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce);
 
