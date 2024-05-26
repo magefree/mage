@@ -4,6 +4,7 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -373,6 +374,44 @@ public class FirstStrikeTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20);
         assertPowerToughness(playerA, rograkh, 1, 2);
+    }
+
+    @Test
+    public void ninjutsuTwice() {
+        /* If a creature in combat has first strike or double strike,
+         * you can activate the ninjutsu ability during the first-strike combat damage step.
+         * The Ninja will deal combat damage during the regular combat damage step, even if it has first strike.
+         */
+
+        String moonblade = "Moonblade Shinobi"; // 3/2, Ninjutsu 2U
+        // Whenever Moonblade Shinobi deals combat damage to a player, create a 1/1 blue Illusion creature token with flying.
+        String ambusher = "Mukotai Ambusher"; // 3/2 Lifelink; Ninjutsu 1B
+
+        addCard(Zone.BATTLEFIELD, playerA, moonblade, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 5);
+        addCard(Zone.HAND, playerA, ambusher);
+        addCard(Zone.BATTLEFIELD, playerA, "Celebrity Fencer");
+        //  Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Celebrity Fencer.
+        addCard(Zone.BATTLEFIELD, playerA, "Knighthood"); // Creatures you control have first strike
+
+        attack(1, playerA, moonblade, playerB);
+
+        checkLife("first strike damage dealt", 1, PhaseStep.FIRST_COMBAT_DAMAGE, playerB, 17);
+        activateAbility(1, PhaseStep.FIRST_COMBAT_DAMAGE, playerA, "Ninjutsu {1}{B}");
+        setChoice(playerA, moonblade);
+        waitStackResolved(1, PhaseStep.FIRST_COMBAT_DAMAGE);
+        activateAbility(1, PhaseStep.FIRST_COMBAT_DAMAGE, playerA, "Ninjutsu {2}{U}");
+        setChoice(playerA, ambusher);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        // the moonblade deals 3 damage each step because it is a different object after zone change
+        assertLife(playerA, 20);
+        assertLife(playerB, 14);
+        assertPermanentCount(playerA, "Illusion Token", 2);
+        assertCounterCount(playerA, "Celebrity Fencer", CounterType.P1P1, 4); // two tokens and both ninjutsu
     }
 
 }
