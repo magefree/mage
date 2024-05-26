@@ -50,6 +50,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private static final String ALL_TOKENS = "- TOKEN images";
     private static final String ALL_BASICS = "- BASIC LAND images";
 
+    private static final List<String> basicList = Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest");
+
     private static final int MAX_ERRORS_COUNT_BEFORE_CANCEL = 50;
 
     private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 10; // protect from wrong data save
@@ -330,7 +332,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         // find selected sets
         selectedSets.clear();
         boolean onlyTokens = false;
-		boolean onlyBasics = false;
+        boolean onlyBasics = false;
         List<String> formatSets;
         List<String> sourceSets = selectedSource.getSupportedSets();
         switch (selectedItem) {
@@ -390,12 +392,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         && selectedSource.isCardSource()
                         && selectedSource.isCardImageProvided(data.getSet(), data.getName())
                         && selectedSets.contains(data.getSet())) {
-					static final List<String> basicList = Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest");
-					if (!onlyBasics
-							|| basicList.contains(data.getName())) { 
-						numberCardImagesAvailable++;
-						cardsDownloadQueue.add(data);
-					}
+                    if (!onlyBasics
+                            || basicList.contains(data.getName())) { 
+                        numberCardImagesAvailable++;
+                        cardsDownloadQueue.add(data);
+                    }
                 }
             }
         }
