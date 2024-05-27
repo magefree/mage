@@ -13,16 +13,16 @@ public class ManaIncludesTest extends CardTestPlayerBase {
 
     private void assertFullyIncludes(boolean canPay, String cost, String pool) {
         // workaround to add {Any} mana by string param
-        String strictMain = pool.replace("{Any}", "");
-        String stringPart = cost.replace("{Any}", "");
+        String strictPool = pool.replace("{Any}", "");
+        String stringCost = cost.replace("{Any}", "");
 
-        Mana manaMain = new ManaCostsImpl<>(strictMain).getMana();
-        Mana manaPart = new ManaCostsImpl<>(stringPart).getMana();
+        Mana manaPool = new ManaCostsImpl<>(strictPool).getMana();
+        Mana manaCost = new ManaCostsImpl<>(stringCost).getMana();
 
-        manaMain.add(new Mana(0, 0, 0, 0, 0, 0, (pool.length() - strictMain.length()) / 5, 0));
-        manaPart.add(new Mana(0, 0, 0, 0, 0, 0, (cost.length() - stringPart.length()) / 5, 0));
+        manaPool.add(new Mana(0, 0, 0, 0, 0, 0, (pool.length() - strictPool.length()) / 5, 0));
+        manaCost.add(new Mana(0, 0, 0, 0, 0, 0, (cost.length() - stringCost.length()) / 5, 0));
 
-        Assert.assertEquals(canPay, manaMain.includesMana(manaPart));
+        Assert.assertEquals(canPay, manaPool.includesMana(manaCost));
     }
 
     @Test
