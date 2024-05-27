@@ -78,7 +78,7 @@ class MerenOfClanNelTothEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        boolean flag = card.getManaValue() <= player.getCounters().getCount(CounterType.EXPERIENCE);
+        boolean flag = card.getManaValue() <= player.getCountersCount(CounterType.EXPERIENCE);
         return player.moveCards(card, flag ? Zone.BATTLEFIELD : Zone.HAND, source, game);
     }
 }

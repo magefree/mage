@@ -2960,8 +2960,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Counters getCounters() {
-        return computerPlayer.getCounters();
+    public Counters getCopyCounters() {
+        return computerPlayer.getCopyCounters();
     }
 
     @Override
@@ -3440,8 +3440,23 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
-        computerPlayer.removeCounters(name, amount, source, game);
+    public void removeCounters(String counterName, int amount, Ability source, Game game) {
+        computerPlayer.removeCounters(counterName, amount, source, game);
+    }
+
+    @Override
+    public int getCountersCount(CounterType counterType) {
+        return computerPlayer.getCountersCount(counterType);
+    }
+
+    @Override
+    public int getCountersCount(String counterName) {
+        return computerPlayer.getCountersCount(counterName);
+    }
+
+    @Override
+    public int getCountersTotalCount() {
+        return computerPlayer.getCountersTotalCount();
     }
 
     @Override

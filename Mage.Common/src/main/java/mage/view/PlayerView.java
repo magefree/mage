@@ -64,7 +64,7 @@ public class PlayerView implements Serializable {
         this.controlled = player.getId().equals(createdForPlayerId);
         this.isHuman = player.isHuman();
         this.life = player.getLife();
-        this.counters = player.getCounters();
+        this.counters = player.getCopyCounters();
         this.wins = player.getMatchPlayer().getWins();
         this.winsNeeded = player.getMatchPlayer().getWinsNeeded();
         this.libraryCount = player.getLibrary().size();

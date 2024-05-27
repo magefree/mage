@@ -223,8 +223,8 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
-        leftHalfCard.removeCounters(name, amount, source, game);
+    public void removeCounters(String counterName, int amount, Ability source, Game game) {
+        leftHalfCard.removeCounters(counterName, amount, source, game);
     }
 
     @Override

@@ -63,7 +63,7 @@ class GalvanicDischargeEffect extends OneShotEffect {
             return false;
         }
         new GetEnergyCountersControllerEffect(3).apply(game, source);
-        int numberToPay = controller.getAmount(0, controller.getCounters().getCount(CounterType.ENERGY), "How many {E} do you like to pay?", game);
+        int numberToPay = controller.getAmount(0, controller.getCountersCount(CounterType.ENERGY), "How many {E} do you like to pay?", game);
         if (numberToPay <= 0) {
             return true;
         }

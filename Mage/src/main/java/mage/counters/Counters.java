@@ -91,6 +91,10 @@ public class Counters extends HashMap<String, Counter> implements Serializable, 
         return getCount(counterType) > 0;
     }
 
+    public int getTotalCount() {
+        return this.values().stream().mapToInt(Counter::getCount).sum();
+    }
+
     public int getCount(CounterType type) {
         if (this.containsKey(type.getName())) {
             return this.get(type.getName()).getCount();

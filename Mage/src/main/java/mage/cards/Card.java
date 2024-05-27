@@ -88,11 +88,13 @@ public interface Card extends MageObject, Ownerable {
 
     /**
      * Is this an extra deck card? (such as contraptions and attractions)
+     *
      * @return true if this is an extra deck card, false otherwise
      */
     default boolean isExtraDeckCard() {
         return false;
     }
+
     void assignNewId();
 
     void addInfo(String key, String value, Game game);
@@ -168,11 +170,11 @@ public interface Card extends MageObject, Ownerable {
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters);
 
-    default void removeCounters(String name, int amount, Ability source, Game game){
-        removeCounters(name, amount, source, game, false);
+    default void removeCounters(String counterName, int amount, Ability source, Game game) {
+        removeCounters(counterName, amount, source, game, false);
     }
 
-    void removeCounters(String name, int amount, Ability source, Game game, boolean damage);
+    void removeCounters(String counterName, int amount, Ability source, Game game, boolean damage);
 
     default void removeCounters(Counter counter, Ability source, Game game) {
         removeCounters(counter, source, game, false);

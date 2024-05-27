@@ -89,7 +89,7 @@ class VraskaBetrayalsStingEffect extends OneShotEffect {
         if (targetPlayer == null) {
             return false;
         }
-        int totalPoison = targetPlayer.getCounters().getCount(CounterType.POISON);
+        int totalPoison = targetPlayer.getCountersCount(CounterType.POISON);
         if (totalPoison < 9) {
             targetPlayer.addCounters(CounterType.POISON.createInstance(9 - totalPoison), source.getControllerId(), source, game);
         }

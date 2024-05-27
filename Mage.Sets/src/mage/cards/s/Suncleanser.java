@@ -1,18 +1,17 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -21,8 +20,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Suncleanser extends CardImpl {
@@ -92,7 +92,7 @@ class SuncleanserRemoveCountersEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            for (Counter counter : player.getCounters().copy().values()) { // copy to prevent ConcurrentModificationException
+            for (Counter counter : player.getCopyCounters().values()) { // copy to prevent ConcurrentModificationException
                 player.removeCounters(counter.getName(), counter.getCount(), source, game);
             }
             return true;

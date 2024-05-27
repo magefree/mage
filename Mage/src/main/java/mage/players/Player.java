@@ -15,6 +15,7 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
@@ -105,7 +106,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void addAbility(Ability ability);
 
-    Counters getCounters();
+    /**
+     * The counters should be manipulated (adding or removing counters) with the appropriate addCounters/removeCounters/getCounterCount methods.
+     * This returns a copy for specific usage, to make sure the Player's counters are not altered from there.
+     */
+    Counters getCopyCounters();
 
     int getLife();
 
@@ -834,7 +839,13 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
 
-    void removeCounters(String name, int amount, Ability source, Game game);
+    void removeCounters(String counterName, int amount, Ability source, Game game);
+
+    int getCountersCount(CounterType counterType);
+
+    int getCountersCount(String counterName);
+
+    int getCountersTotalCount();
 
     List<UUID> getAttachments();
 

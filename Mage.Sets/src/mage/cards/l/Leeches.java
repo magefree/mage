@@ -60,7 +60,7 @@ class LeechesEffect extends OneShotEffect {
             return false;
         }
 
-        int countPoisonCounters = targetPlayer.getCounters().getCount(CounterType.POISON);
+        int countPoisonCounters = targetPlayer.getCountersCount(CounterType.POISON);
         if (countPoisonCounters > 0) {
             targetPlayer.removeCounters(CounterType.POISON.getName(), countPoisonCounters, source, game);
             targetPlayer.damage(countPoisonCounters, source.getSourceId(), source, game);
