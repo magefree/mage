@@ -154,7 +154,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             // Ability already triggered this turn, so returning the limit minus the count this turn
             String keyLastTurnTriggeredCount = getKeyLastTurnTriggeredCount(game);
             int count = Optional.ofNullable((Integer) game.getState().getValue(keyLastTurnTriggeredCount)).orElse(0);
-            return triggerLimitEachTurn - count;
+            return Math.max(0, triggerLimitEachTurn - count);
         } else {
             // Ability did not trigger this turn, so returning the limit
             return triggerLimitEachTurn;
