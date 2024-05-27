@@ -24,7 +24,7 @@ import mage.target.targetpointer.EachTargetPointer;
 
 /**
  *
- * @author anonymous
+ * @author grimreap124
  */
 public final class HideousTaskmaster extends CardImpl {
 
