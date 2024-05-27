@@ -168,6 +168,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Witch Enchanter", 239, Rarity.UNCOMMON, mage.cards.w.WitchEnchanter.class));
         cards.add(new SetCardInfo("Wooded Foothills", 236, Rarity.RARE, mage.cards.w.WoodedFoothills.class));
         cards.add(new SetCardInfo("Worn Powerstone", 298, Rarity.UNCOMMON, mage.cards.w.WornPowerstone.class));
+        cards.add(new SetCardInfo("Wrath of the Skies", 49, Rarity.RARE, mage.cards.w.WrathOfTheSkies.class));
         cards.add(new SetCardInfo("Writhing Chrysalis", 208, Rarity.COMMON, mage.cards.w.WrithingChrysalis.class));
         cards.add(new SetCardInfo("Wumpus Aberration", 176, Rarity.UNCOMMON, mage.cards.w.WumpusAberration.class));
         cards.add(new SetCardInfo("Wurmcoil Larva", 112, Rarity.UNCOMMON, mage.cards.w.WurmcoilLarva.class));
