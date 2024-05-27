@@ -67,7 +67,7 @@ public final class TeysaOpulentOligarch extends CardImpl {
                 "Whenever a Clue you control is put into a graveyard from the battlefield, ",
                 false
         );
-        trigger.setTriggersOnceEachTurn(true);
+        trigger.setTriggersLimitEachTurn(1);
         this.addAbility(trigger);
     }
 

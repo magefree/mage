@@ -15,6 +15,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     private boolean optional;
     private boolean leavesTheBattlefieldTrigger;
-    private boolean triggersOnceEachTurn = false;
+    private int triggerLimitEachTurn = Integer.MAX_VALUE; // for "triggers only once|twice each turn"
     private boolean doOnlyOnceEachTurn = false;
     private boolean replaceRuleText = false; // if true, replace "{this}" with "it" in effect text
     private GameEvent triggerEvent = null;
@@ -54,7 +55,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         super(ability);
         this.optional = ability.optional;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
-        this.triggersOnceEachTurn = ability.triggersOnceEachTurn;
+        this.triggerLimitEachTurn = ability.triggerLimitEachTurn;
         this.doOnlyOnceEachTurn = ability.doOnlyOnceEachTurn;
         this.replaceRuleText = ability.replaceRuleText;
         this.triggerEvent = ability.triggerEvent;
@@ -70,13 +71,37 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
     }
 
+    // Used for triggers with a per-turn limit.
+    private String getKeyLastTurnTriggered(Game game) {
+        return CardUtil.getCardZoneString(
+                "lastTurnTriggered|" + getOriginalId(), getSourceId(), game
+        );
+    }
+
+    // Used for triggers with a per-turn limit.
+    private String getKeyLastTurnTriggeredCount(Game game) {
+        return CardUtil.getCardZoneString(
+                "lastTurnTriggeredCount|" + getOriginalId(), getSourceId(), game
+        );
+    }
+
     private void setLastTrigger(Game game) {
-        if (!triggersOnceEachTurn) {
+        if (triggerLimitEachTurn == Integer.MAX_VALUE) {
             return;
         }
-        game.getState().setValue(CardUtil.getCardZoneString(
-                "lastTurnTriggered" + getOriginalId(), sourceId, game
-        ), game.getTurnNum());
+        String keyLastTurnTriggered = getKeyLastTurnTriggered(game);
+        String keyLastTurnTriggeredCount = getKeyLastTurnTriggeredCount(game);
+        Integer lastTurn = (Integer) game.getState().getValue(keyLastTurnTriggered);
+        int currentTurn = game.getTurnNum();
+        if (lastTurn != null && lastTurn == currentTurn) {
+            // Ability already triggered this turn, incrementing the count.
+            int lastCount = Optional.ofNullable((Integer) game.getState().getValue(keyLastTurnTriggeredCount)).orElse(0);
+            game.getState().setValue(keyLastTurnTriggeredCount, lastCount + 1);
+        } else {
+            // first trigger for Ability this turn.
+            game.getState().setValue(keyLastTurnTriggered, currentTurn);
+            game.getState().setValue(keyLastTurnTriggeredCount, 1);
+        }
     }
 
     @Override
@@ -96,14 +121,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
-    public boolean checkTriggeredAlready(Game game) {
-        if (!triggersOnceEachTurn) {
-            return true;
-        }
-        Integer lastTurnTriggered = (Integer) game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnTriggered" + getOriginalId(), sourceId, game)
-        );
-        return lastTurnTriggered == null || lastTurnTriggered != game.getTurnNum();
+    public boolean checkTriggeredLimit(Game game) {
+        return getRemainingTriggersLimitEachTurn(game) > 0;
     }
 
     @Override
@@ -118,14 +137,28 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
-    public TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce) {
-        this.triggersOnceEachTurn = triggersOnce;
+    public TriggeredAbility setTriggersLimitEachTurn(int limit) {
+        this.triggerLimitEachTurn = limit;
         return this;
     }
 
     @Override
-    public boolean getTriggersOnceEachTurn() {
-        return this.triggersOnceEachTurn;
+    public int getRemainingTriggersLimitEachTurn(Game game) {
+        if (triggerLimitEachTurn == Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        String keyLastTurnTriggered = getKeyLastTurnTriggered(game);
+        Integer lastTurn = (Integer) game.getState().getValue(keyLastTurnTriggered);
+        int currentTurn = game.getTurnNum();
+        if (lastTurn != null && lastTurn == currentTurn) {
+            // Ability already triggered this turn, so returning the limit minus the count this turn
+            String keyLastTurnTriggeredCount = getKeyLastTurnTriggeredCount(game);
+            int count = Optional.ofNullable((Integer) game.getState().getValue(keyLastTurnTriggeredCount)).orElse(0);
+            return Math.max(0, triggerLimitEachTurn - count);
+        } else {
+            // Ability did not trigger this turn, so returning the limit
+            return triggerLimitEachTurn;
+        }
     }
 
     @Override
@@ -229,8 +262,20 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 superRule = superRule.replaceFirst("^((?:you may )?sacrifice |(put|remove) [^ ]+ [^ ]+ counters? (on|from) |return |transform |untap |regenerate )?\\{this\\}", "$1it");
             }
             sb.append(superRule);
-            if (triggersOnceEachTurn) {
-                sb.append(" This ability triggers only once each turn.");
+            if (triggerLimitEachTurn != Integer.MAX_VALUE) {
+                sb.append(" This ability triggers only ");
+                switch (triggerLimitEachTurn) {
+                    case 1:
+                        sb.append("once");
+                        break;
+                    case 2:
+                        sb.append("twice");
+                        break;
+                    default:
+                        // No card with that behavior yet, so feel free to change the text once one exist
+                        sb.append(CardUtil.numberToText(triggerLimitEachTurn) + " times");
+                }
+                sb.append(" each turn.");
             }
             if (doOnlyOnceEachTurn) {
                 sb.append(" Do this only once each turn.");
