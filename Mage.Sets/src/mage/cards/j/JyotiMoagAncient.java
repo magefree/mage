@@ -28,7 +28,7 @@ import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author grimreap124
  */
 public final class JyotiMoagAncient extends CardImpl {
 
