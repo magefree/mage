@@ -1,7 +1,5 @@
 package mage.cards.w;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -15,8 +13,9 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author DominionSpy
  */
 public final class WrathOfTheSkies extends CardImpl {
@@ -67,7 +66,7 @@ class WrathOfTheSkiesEffect extends OneShotEffect {
             new GetEnergyCountersControllerEffect(xValue).apply(game, source);
         }
 
-        int numberToPay = controller.getAmount(0, controller.getCounters().getCount(CounterType.ENERGY),
+        int numberToPay = controller.getAmount(0, controller.getCountersCount(CounterType.ENERGY),
                 "Pay any amount of {E}", game);
         Cost cost = new PayEnergyCost(numberToPay);
         if (cost.pay(source, game, source, source.getControllerId(), true)) {
