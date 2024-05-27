@@ -2765,7 +2765,7 @@ public class VerifyCardDataTest {
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
         Map<String, Integer> cardRates = new HashMap<>();
         for (Card card : cardsList) {
-            int curRate = RateCard.rateCard(card, null, false);
+            int curRate = RateCard.rateCard(card, Collections.emptyList(), false);
             int prevRate = cardRates.getOrDefault(card.getName(), 0);
             if (prevRate == 0) {
                 cardRates.putIfAbsent(card.getName(), curRate);

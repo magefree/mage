@@ -53,7 +53,6 @@ import mage.target.common.*;
 import mage.util.*;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
@@ -75,14 +74,17 @@ public class ComputerPlayer extends PlayerImpl {
 
     final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 1; // TODO: rework simulations logic to use multiple calcs instead one by one
 
-    private transient Map<Mana, Card> unplayable = new TreeMap<>();
-    private transient List<Card> playableNonInstant = new ArrayList<>();
-    private transient List<Card> playableInstant = new ArrayList<>();
-    private transient List<ActivatedAbility> playableAbilities = new ArrayList<>();
-    private transient List<PickedCard> pickedCards;
-    private transient List<ColoredManaSymbol> chosenColors;
+    private final transient Map<Mana, Card> unplayable = new TreeMap<>();
+    private final transient List<Card> playableNonInstant = new ArrayList<>();
+    private final transient List<Card> playableInstant = new ArrayList<>();
+    private final transient List<ActivatedAbility> playableAbilities = new ArrayList<>();
+    private final transient List<PickedCard> pickedCards = new ArrayList<>();
+    private final transient List<ColoredManaSymbol> chosenColors = new ArrayList<>();
 
-    private transient ManaCost currentUnpaidMana;
+    // keep current paying cost info for choose dialogs
+    // mana abilities must ask payment too, so keep full chain
+    // TODO: make sure it thread safe for AI simulations (all transient fields above and bottom)
+    private final transient Map<UUID, ManaCost> lastUnpaidMana = new LinkedHashMap<>();
 
     // For stopping infinite loops when trying to pay Phyrexian mana when the player can't spend life and no other sources are available
     private transient boolean alreadyTryingToPayPhyrexian;
@@ -94,7 +96,6 @@ public class ComputerPlayer extends PlayerImpl {
         userData.setAvatarId(64);
         userData.setGroupId(UserGroup.COMPUTER.getGroupId());
         userData.setFlagName("computer.png");
-        pickedCards = new ArrayList<>();
     }
 
     protected ComputerPlayer(UUID id) {
@@ -104,7 +105,6 @@ public class ComputerPlayer extends PlayerImpl {
         userData.setAvatarId(64);
         userData.setGroupId(UserGroup.COMPUTER.getGroupId());
         userData.setFlagName("computer.png");
-        pickedCards = new ArrayList<>();
     }
 
     public ComputerPlayer(final ComputerPlayer player) {
@@ -653,7 +653,7 @@ public class ComputerPlayer extends PlayerImpl {
                 while (!target.isChosen(game)
                         && !cardsInHand.isEmpty()
                         && target.getMaxNumberOfTargets() > target.getTargets().size()) {
-                    Card card = pickBestCard(cardsInHand, null, target, source, game);
+                    Card card = pickBestCard(cardsInHand, Collections.emptyList(), target, source, game);
                     if (card != null) {
                         if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
                             target.addTarget(card.getId(), source, game);
@@ -1139,9 +1139,9 @@ public class ComputerPlayer extends PlayerImpl {
         while (!cards.isEmpty()) {
 
             if (outcome.isGood()) {
-                card = pickBestCard(cards, null, target, source, game);
+                card = pickBestCard(cards, Collections.emptyList(), target, source, game);
             } else {
-                card = pickWorstCard(cards, null, target, source, game);
+                card = pickWorstCard(cards, Collections.emptyList(), target, source, game);
             }
             if (!target.getTargets().contains(card.getId())) {
                 if (source != null) {
@@ -1152,7 +1152,7 @@ public class ComputerPlayer extends PlayerImpl {
                     return card;
                 }
             }
-            cards.remove(card);
+            cards.remove(card);  // TODO: research parent code - is it depends on original list? Can be bugged
         }
         return null;
     }
@@ -1550,11 +1550,12 @@ public class ComputerPlayer extends PlayerImpl {
     @Override
     public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
-        currentUnpaidMana = unpaid;
+        lastUnpaidMana.put(ability.getId(), unpaid.copy());
         try {
             return playManaHandling(ability, unpaid, game);
         } finally {
-            currentUnpaidMana = null;
+
+            lastUnpaidMana.remove(ability.getId());
             payManaMode = false;
         }
     }
@@ -1575,19 +1576,27 @@ public class ComputerPlayer extends PlayerImpl {
             producers = this.getAvailableManaProducers(game);
             producers.addAll(this.getAvailableManaProducersWithCost(game));
         }
+
+        // use fully compatible colored mana producers first
         for (MageObject mageObject : producers) {
-            // use color producing mana abilities with costs first that produce all color manas that are needed to pay
-            // otherwise the computer may not be able to pay the cost for that source
             ManaAbility:
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
-                int colored = 0;
+                boolean canPayColoredMana = false;
                 for (Mana mana : manaAbility.getNetMana(game)) {
+                    // if mana ability can produce non-useful mana then ignore whole ability here (example: {R} or {G})
+                    // (AI can't choose a good mana option, so make sure any selection option will be compatible with cost)
+                    // AI support {Any} choice by lastUnpaidMana, so it can safly used in includesMana
                     if (!unpaid.getMana().includesMana(mana)) {
                         continue ManaAbility;
+                    } else if (mana.getAny() > 0) {
+                        throw new IllegalArgumentException("Wrong mana calculation: AI do not support color choosing from {Any}");
                     }
-                    colored = CardUtil.overflowInc(colored, mana.countColored());
+                    if (mana.countColored() > 0) {
+                        canPayColoredMana = true;
+                    }
                 }
-                if (colored > 1 && (cost instanceof ColoredManaCost)) {
+                // found compatible source - try to pay
+                if (canPayColoredMana && (cost instanceof ColoredManaCost)) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana)) {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
@@ -1605,6 +1614,7 @@ public class ComputerPlayer extends PlayerImpl {
             }
         }
 
+        // use any other mana produces
         for (MageObject mageObject : producers) {
             // pay all colored costs first
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
@@ -1723,6 +1733,7 @@ public class ComputerPlayer extends PlayerImpl {
         // pay phyrexian life costs
         if (cost.isPhyrexian()) {
             alreadyTryingToPayPhyrexian = true;
+            // TODO: make sure it's thread safe and protected from modifications (cost/unpaid can be shared between AI simulation threads?)
             boolean paidPhyrexian = cost.pay(ability, game, ability, playerId, false, null) || hasApprovingObject;
             alreadyTryingToPayPhyrexian = false;
             return paidPhyrexian;
@@ -1956,29 +1967,33 @@ public class ComputerPlayer extends PlayerImpl {
             chooseCreatureType(outcome, choice, game);
         }
 
-        // choose the correct color to pay a spell
-        if (outcome == Outcome.PutManaInPool && choice.isManaColorChoice() && currentUnpaidMana != null) {
-            if (currentUnpaidMana.containsColor(ColoredManaSymbol.W) && choice.getChoices().contains("White")) {
+        // choose the correct color to pay a spell (use last unpaid ability for color hint)
+        ManaCost unpaid = null;
+        if (!lastUnpaidMana.isEmpty()) {
+            unpaid = new ArrayList<>(lastUnpaidMana.values()).get(lastUnpaidMana.size() - 1);
+        }
+        if (outcome == Outcome.PutManaInPool && unpaid != null && choice.isManaColorChoice()) {
+            if (unpaid.containsColor(ColoredManaSymbol.W) && choice.getChoices().contains("White")) {
                 choice.setChoice("White");
                 return true;
             }
-            if (currentUnpaidMana.containsColor(ColoredManaSymbol.R) && choice.getChoices().contains("Red")) {
+            if (unpaid.containsColor(ColoredManaSymbol.R) && choice.getChoices().contains("Red")) {
                 choice.setChoice("Red");
                 return true;
             }
-            if (currentUnpaidMana.containsColor(ColoredManaSymbol.G) && choice.getChoices().contains("Green")) {
+            if (unpaid.containsColor(ColoredManaSymbol.G) && choice.getChoices().contains("Green")) {
                 choice.setChoice("Green");
                 return true;
             }
-            if (currentUnpaidMana.containsColor(ColoredManaSymbol.U) && choice.getChoices().contains("Blue")) {
+            if (unpaid.containsColor(ColoredManaSymbol.U) && choice.getChoices().contains("Blue")) {
                 choice.setChoice("Blue");
                 return true;
             }
-            if (currentUnpaidMana.containsColor(ColoredManaSymbol.B) && choice.getChoices().contains("Black")) {
+            if (unpaid.containsColor(ColoredManaSymbol.B) && choice.getChoices().contains("Black")) {
                 choice.setChoice("Black");
                 return true;
             }
-            if (currentUnpaidMana.getMana().getColorless() > 0 && choice.getChoices().contains("Colorless")) {
+            if (unpaid.getMana().getColorless() > 0 && choice.getChoices().contains("Colorless")) {
                 choice.setChoice("Colorless");
                 return true;
             }
@@ -2411,11 +2426,14 @@ public class ComputerPlayer extends PlayerImpl {
         int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 0;
 
         if (deck != null && deck.getMaindeckCards().size() < deckMinSize && !deck.getSideboard().isEmpty()) {
-            if (chosenColors == null) {
+            if (chosenColors.isEmpty()) {
                 for (Card card : deck.getSideboard()) {
-                    rememberPick(card, RateCard.rateCard(card, null));
+                    rememberPick(card, RateCard.rateCard(card, Collections.emptyList()));
                 }
-                chosenColors = chooseDeckColorsIfPossible();
+                List<ColoredManaSymbol> deckColors = chooseDeckColorsIfPossible();
+                if (deckColors != null) {
+                    chosenColors.addAll(deckColors);
+                }
             }
             deck = buildDeck(deckMinSize, new ArrayList<>(deck.getSideboard()), chosenColors);
         }
@@ -2525,7 +2543,7 @@ public class ComputerPlayer extends PlayerImpl {
             if (pickedCardRate <= 30) {
                 // if card is bad
                 // try to counter pick without any color restriction
-                Card counterPick = pickBestCard(cards, null);
+                Card counterPick = pickBestCard(cards, Collections.emptyList());
                 int counterPickScore = RateCard.getBaseCardScore(counterPick);
                 // card is really good
                 // take it!
@@ -2537,11 +2555,14 @@ public class ComputerPlayer extends PlayerImpl {
 
             String colors = "not chosen yet";
             // remember card if colors are not chosen yet
-            if (chosenColors == null) {
+            if (chosenColors.isEmpty()) {
                 rememberPick(bestCard, maxScore);
-                chosenColors = chooseDeckColorsIfPossible();
+                List<ColoredManaSymbol> chosen = chooseDeckColorsIfPossible();
+                if (chosen != null) {
+                    chosenColors.addAll(chosen);
+                }
             }
-            if (chosenColors != null) {
+            if (!chosenColors.isEmpty()) {
                 colors = "";
                 for (ColoredManaSymbol symbol : chosenColors) {
                     colors += symbol.toString();
@@ -2612,7 +2633,7 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                     if (colorsChosen.size() > 1) {
                         // no need to remember picks anymore
-                        pickedCards = null;
+                        pickedCards.clear();
                         return colorsChosen;
                     }
                 }
@@ -2913,14 +2934,6 @@ public class ComputerPlayer extends PlayerImpl {
                 }
             }
         }
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
-        unplayable = new TreeMap<>();
-        playableNonInstant = new ArrayList<>();
-        playableInstant = new ArrayList<>();
-        playableAbilities = new ArrayList<>();
     }
 
     @Override
