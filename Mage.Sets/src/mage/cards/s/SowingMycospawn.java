@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetLandPermanent;
 
@@ -47,7 +46,7 @@ public final class SowingMycospawn extends CardImpl {
         // When you cast this spell, if it was kicked, exile target land.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new CastSourceTriggeredAbility(new ExileTargetEffect()),
-                SowingMycospawnCondition.instance, "When you cast this spell, " +
+                KickedCondition.ONCE, "When you cast this spell, " +
                 "if it was kicked, exile target land."
         );
         ability.addTarget(new TargetLandPermanent());
@@ -61,14 +60,5 @@ public final class SowingMycospawn extends CardImpl {
     @Override
     public SowingMycospawn copy() {
         return new SowingMycospawn(this);
-    }
-}
-
-enum SowingMycospawnCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return KickerAbility.getSpellKickedCount(game, source.getSourceId()) > 0;
     }
 }
