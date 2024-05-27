@@ -841,6 +841,20 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void removeCounters(String counterName, int amount, Ability source, Game game);
 
+    /**
+     * Remove (Lose) all counters.
+     *
+     * @return the amount of counters removed this way.
+     */
+    int removeAllCounters(Ability source, Game game);
+
+    /**
+     * Remove (Lose) all counters of a specific kind.
+     *
+     * @return the amount of counters removed this way.
+     */
+    int removeAllCounters(String counterName, Ability source, Game game);
+
     int getCountersCount(CounterType counterType);
 
     int getCountersCount(String counterName);

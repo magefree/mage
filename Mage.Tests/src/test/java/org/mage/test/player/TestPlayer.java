@@ -3445,6 +3445,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int removeAllCounters(Ability source, Game game) {
+        return computerPlayer.removeAllCounters(source, game);
+    }
+
+    @Override
+    public int removeAllCounters(String counterName, Ability source, Game game) {
+        return computerPlayer.removeAllCounters(counterName, source, game);
+    }
+
+    @Override
     public int getCountersCount(CounterType counterType) {
         return computerPlayer.getCountersCount(counterType);
     }

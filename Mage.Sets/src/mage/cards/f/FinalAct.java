@@ -9,8 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.counters.Counter;
-import mage.counters.Counters;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -78,10 +76,7 @@ class FinalActEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            Counters counters = player.getCopyCounters();
-            for (Counter counter : counters.values()) {
-                player.removeCounters(counter.getName(), counter.getCount(), source, game);
-            }
+            player.removeAllCounters(source, game);
         }
         return true;
     }

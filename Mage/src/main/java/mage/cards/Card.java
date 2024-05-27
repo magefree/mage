@@ -182,6 +182,38 @@ public interface Card extends MageObject, Ownerable {
 
     void removeCounters(Counter counter, Ability source, Game game, boolean damage);
 
+    /**
+     * Remove all counters of any kind.
+     *
+     * @return the amount of counters removed this way.
+     */
+    default int removeAllCounters(Ability source, Game game) {
+        return removeAllCounters(source, game, false);
+    }
+
+    /**
+     * Remove all counters of any kind.
+     *
+     * @return the amount of counters removed this way.
+     */
+    int removeAllCounters(Ability source, Game game, boolean damage);
+
+    /**
+     * Remove all counters of a specific kind. Return the amount of counters removed this way.
+     *
+     * @return the amount of counters removed this way.
+     */
+    default int removeAllCounters(String counterName, Ability source, Game game) {
+        return removeAllCounters(counterName, source, game, false);
+    }
+
+    /**
+     * Remove all counters of a specific kind. Return the amount of counters removed this way.
+     *
+     * @return the amount of counters removed this way.
+     */
+    int removeAllCounters(String counterName, Ability source, Game game, boolean damage);
+
     @Override
     Card copy();
 

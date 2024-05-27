@@ -51,16 +51,6 @@ public class Counters extends HashMap<String, Counter> implements Serializable, 
         return false;
     }
 
-    public void removeAllCounters(CounterType counterType) {
-        removeAllCounters(counterType.getName());
-    }
-
-    public void removeAllCounters(String name) {
-        if (this.containsKey(name)) {
-            this.remove(name);
-        }
-    }
-
     public int getCount(String name) {
         if (this.containsKey(name)) {
             return this.get(name).getCount();

@@ -2424,6 +2424,24 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public int removeAllCounters(Ability source, Game game) {
+        int amountBefore = getCountersTotalCount();
+        for (Counter counter : getCopyCounters().values()) {
+            removeCounters(counter.getName(), counter.getCount(), source, game);
+        }
+        int amountAfter = getCountersTotalCount();
+        return Math.max(0, amountBefore - amountAfter);
+    }
+
+    @Override
+    public int removeAllCounters(String counterName, Ability source, Game game) {
+        int amountBefore = getCountersCount(counterName);
+        removeCounters(counterName, amountBefore, source, game);
+        int amountAfter = getCountersCount(counterName);
+        return Math.max(0, amountBefore - amountAfter);
+    }
+
+    @Override
     public int getCountersCount(CounterType counterType) {
         return counters.getCount(counterType);
     }

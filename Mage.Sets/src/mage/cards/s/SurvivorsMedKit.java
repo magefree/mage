@@ -79,11 +79,7 @@ class SurvivorsMedKitEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int count = player.getCountersCount(CounterType.RAD);
-        if (count > 0) {
-            player.removeCounters("rad", count, source, game);
-            return true;
-        }
-        return false;
+        player.removeAllCounters(CounterType.RAD.getName(), source, game);
+        return true;
     }
 }

@@ -59,18 +59,6 @@ public class CountersTest {
     }
 
     @Test
-    public void testRemoveAllCounter() {
-        // given
-        counters.addCounter(new Counter("test", 10));
-
-        // when
-        counters.removeAllCounters("test");
-
-        // then
-        assertFalse(counters.containsKey("test"));
-    }
-
-    @Test
     public void testGetCount() {
         // given
         counters.addCounter(new Counter("test1", 5));

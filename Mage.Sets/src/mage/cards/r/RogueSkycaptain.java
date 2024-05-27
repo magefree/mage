@@ -41,9 +41,7 @@ public class RogueSkycaptain extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // At the beginning of your upkeep, put a wage counter on Rogue Skycaptain. You
-        // may pay 2 for each wage counter on it. If you don't, remove all wage counters
-        // from Rogue Skycaptain and an opponent gains control of it.
+        // At the beginning of your upkeep, put a wage counter on Rogue Skycaptain. You may pay 2 for each wage counter on it. If you don't, remove all wage counters from Rogue Skycaptain and an opponent gains control of it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RogueSkycaptainEffect(), TargetController.YOU, false));
     }
 
@@ -62,7 +60,8 @@ class RogueSkycaptainEffect extends OneShotEffect {
 
     RogueSkycaptainEffect() {
         super(Outcome.GainControl);
-        staticText = "put a wage counter on {this}. You may pay {2} for each wage counter on it. If you don't, remove all wage counters from {this} and an opponent gains control of it";
+        staticText = "put a wage counter on {this}. You may pay {2} for each wage counter on it. "
+                + "If you don't, remove all wage counters from {this} and an opponent gains control of it";
     }
 
     private RogueSkycaptainEffect(final RogueSkycaptainEffect effect) {

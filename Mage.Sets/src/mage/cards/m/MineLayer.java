@@ -85,10 +85,7 @@ class RemoveAllMineCountersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.LAND, game)) {
             if (permanent != null) {
-                int numToRemove = permanent.getCounters(game).getCount(CounterType.MINE);
-                if (numToRemove > 0) {
-                    permanent.removeCounters(CounterType.MINE.getName(), numToRemove, source, game);
-                }
+                permanent.removeAllCounters(CounterType.MINE.getName(), source, game);
             }
         }
         return true;

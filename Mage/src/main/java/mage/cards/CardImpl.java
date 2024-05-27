@@ -848,6 +848,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
+    public int removeAllCounters(Ability source, Game game, boolean isDamage) {
+        int amountBefore = getCounters(game).getTotalCount();
+        for (Counter counter : getCounters(game).copy().values()) {
+            removeCounters(counter.getName(), counter.getCount(), source, game, isDamage);
+        }
+        int amountAfter = getCounters(game).getTotalCount();
+        return Math.max(0, amountBefore - amountAfter);
+    }
+
+    @Override
+    public int removeAllCounters(String counterName, Ability source, Game game, boolean isDamage) {
+        int amountBefore = getCounters(game).getCount(counterName);
+        removeCounters(counterName, amountBefore, source, game, isDamage);
+        int amountAfter = getCounters(game).getCount(counterName);
+        return Math.max(0, amountBefore - amountAfter);
+    }
+
+    @Override
     public String getLogName() {
         if (name.isEmpty()) {
             return GameLog.getNeutralColoredText(EmptyNames.FACE_DOWN_CREATURE.toString());

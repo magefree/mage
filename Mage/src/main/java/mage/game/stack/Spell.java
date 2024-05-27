@@ -1099,6 +1099,16 @@ public class Spell extends StackObjectImpl implements Card {
         card.removeCounters(counter, source, game, isDamage);
     }
 
+    @Override
+    public int removeAllCounters(Ability source, Game game, boolean isDamage) {
+        return card.removeAllCounters(source, game, isDamage);
+    }
+
+    @Override
+    public int removeAllCounters(String counterName, Ability source, Game game, boolean isDamage) {
+        return card.removeAllCounters(counterName, source, game, isDamage);
+    }
+
     public Card getCard() {
         return card;
     }

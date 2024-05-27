@@ -38,10 +38,7 @@ public class RemoveAllCountersSourceCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Permanent permanent = game.getPermanent(ability.getSourceId());
         if (permanent != null) {
-            this.removedCounters = permanent.getCounters(game).getCount(counterType);
-            if (this.removedCounters > 0) {
-                permanent.removeCounters(counterType.createInstance(this.removedCounters), source, game);
-            }
+            this.removedCounters = permanent.removeAllCounters(counterType.getName(), source, game);
         }
         this.paid = true;
         return true;

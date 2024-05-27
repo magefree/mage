@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -25,8 +24,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class VentifactBottle extends CardImpl {
@@ -45,8 +45,8 @@ public final class VentifactBottle extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2,
                 new SourceHasCounterCondition(CounterType.CHARGE, 1, Integer.MAX_VALUE),
                 "At the beginning of your precombat main phase, "
-                + "if {this} has a charge counter on it, tap it and remove all charge counters from it. "
-                + "Add {C} for each charge counter removed this way."));
+                        + "if {this} has a charge counter on it, tap it and remove all charge counters from it. "
+                        + "Add {C} for each charge counter removed this way."));
     }
 
     private VentifactBottle(final VentifactBottle card) {
@@ -79,11 +79,10 @@ class VentifactBottleEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (sourcePermanent != null && player != null) {
-            int chargeCounters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE);
-            sourcePermanent.removeCounters(CounterType.CHARGE.createInstance(chargeCounters), source, game);
+            int amountRemoved = sourcePermanent.removeAllCounters(CounterType.CHARGE.getName(), source, game);
             sourcePermanent.tap(source, game);
             Mana mana = new Mana();
-            mana.setColorless(chargeCounters);
+            mana.setColorless(amountRemoved);
             player.getManaPool().addMana(mana, game, source);
             return true;
         }
