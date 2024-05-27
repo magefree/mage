@@ -138,6 +138,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public boolean getUsesVariousArt() {
+        return false;
+    }
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        throw new IllegalStateException("Wrong code usage: you can't change usesVariousArt for the stack ability");
+    }
+
+    @Override
     public String getCardNumber() {
         return "";
     }

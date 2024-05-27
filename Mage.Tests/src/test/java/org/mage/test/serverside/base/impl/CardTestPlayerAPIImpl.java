@@ -1094,11 +1094,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert counter count on a permanent
      *
-     * @param player        Player who owns the card named cardName
-     * @param cardName      Name of the card that should be counted.
-     * @param counterName   Name of the counter that should be counted.
-     *                      (for custom ability counters, use getRule() from the ability)
-     * @param count         Expected count.
+     * @param player      Player who owns the card named cardName
+     * @param cardName    Name of the card that should be counted.
+     * @param counterName Name of the counter that should be counted.
+     *                    (for custom ability counters, use getRule() from the ability)
+     * @param count       Expected count.
      */
     public void assertCounterCount(Player player, String cardName, String counterName, int count) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
@@ -1607,6 +1607,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertTopCardRevealed(TestPlayer player, boolean isRevealed) {
         Assert.assertEquals(isRevealed, player.isTopCardRevealed());
     }
+
     /**
      * Asserts if, or if not, theAttachment is attached to thePermanent.
      *
@@ -1617,14 +1618,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 .filter(permanent -> permanent.isControlledBy(thePlayer.getId()))
                 .filter(permanent -> permanent.getName().equals(thePermanent))
                 .collect(Collectors.toList());
-        assertTrue(theAttachment + " was "+ (!isAttached ? "":"not") +" attached to " + thePermanent,
+        assertTrue(theAttachment + " was " + (!isAttached ? "" : "not") + " attached to " + thePermanent,
                 !isAttached ^
-                permanents.stream()
-                        .anyMatch(permanent -> permanent.getAttachments()
-                                .stream()
-                                .map(id -> currentGame.getCard(id))
-                                .map(MageObject::getName)
-                                .collect(Collectors.toList()).contains(theAttachment)));
+                        permanents.stream()
+                                .anyMatch(permanent -> permanent.getAttachments()
+                                        .stream()
+                                        .map(id -> currentGame.getCard(id))
+                                        .map(MageObject::getName)
+                                        .collect(Collectors.toList()).contains(theAttachment)));
     }
 
 

@@ -317,14 +317,14 @@ public final class CardUtil {
     /**
      * Adjusts spell or ability cost to be paid by colored and generic mana.
      *
-     * @param spellAbility
-     * @param manaCostsToReduce costs to reduce
+     * @param ability           spell or ability to reduce the cost of
+     * @param manaCostsToReduce reduces the spell or ability cost by that much
      * @param convertToGeneric  colored mana does reduce generic mana if no
      *                          appropriate colored mana is in the costs
      *                          included
      */
-    public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
-        ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
+    public static void adjustCost(Ability ability, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
+        ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
         ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
         // save X value (e.g. convoke ability)
         for (VariableCost vCost : previousCost.getVariableCosts()) {
@@ -474,8 +474,8 @@ public final class CardUtil {
             adjustedCost.add(new GenericManaCost(0)); // neede to check if cost was reduced to 0
         }
         adjustedCost.setSourceFilter(previousCost.getSourceFilter());  // keep mana source restrictions
-        spellAbility.clearManaCostsToPay();
-        spellAbility.addManaCostsToPay(adjustedCost);
+        ability.clearManaCostsToPay();
+        ability.addManaCostsToPay(adjustedCost);
     }
 
     /**
@@ -2173,19 +2173,17 @@ public final class CardUtil {
         String needImageFileName;
         int needImageNumber;
         boolean needUsesVariousArt = false;
-        if (copyFromObject instanceof Card) {
-            needUsesVariousArt = ((Card) copyFromObject).getUsesVariousArt();
-        }
 
         needSetCode = copyFromObject.getExpansionSetCode();
         needCardNumber = copyFromObject.getCardNumber();
         needImageFileName = copyFromObject.getImageFileName();
         needImageNumber = copyFromObject.getImageNumber();
+        needUsesVariousArt = copyFromObject.getUsesVariousArt();
 
         if (targetObject instanceof Permanent) {
             copySetAndCardNumber((Permanent) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber, needUsesVariousArt);
         } else if (targetObject instanceof Token) {
-            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber);
+            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber, needUsesVariousArt);
         } else if (targetObject instanceof Card) {
             copySetAndCardNumber((Card) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber, needUsesVariousArt);
         } else {
@@ -2197,28 +2195,34 @@ public final class CardUtil {
         if (targetPermanent instanceof PermanentCard
                 || targetPermanent instanceof PermanentToken) {
             targetPermanent.setExpansionSetCode(newSetCode);
+            targetPermanent.setUsesVariousArt(usesVariousArt);
             targetPermanent.setCardNumber(newCardNumber);
             targetPermanent.setImageFileName(newImageFileName);
             targetPermanent.setImageNumber(newImageNumber);
-            targetPermanent.setUsesVariousArt(usesVariousArt);
         } else {
             throw new IllegalArgumentException("Wrong code usage: un-supported target permanent type: " + targetPermanent.getClass().getSimpleName());
         }
     }
 
-    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber) {
+    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber, boolean newUsesVariousArt) {
         targetToken.setExpansionSetCode(newSetCode);
         targetToken.setCardNumber(newCardNumber);
         targetToken.setImageFileName(newImageFileName);
         targetToken.setImageNumber(newImageNumber);
+
+        // runtime check
+        if (newUsesVariousArt && newCardNumber.isEmpty()) {
+            throw new IllegalArgumentException("Wrong code usage: usesVariousArt can be used for token from card only");
+        }
+        targetToken.setUsesVariousArt(newUsesVariousArt);
     }
 
     private static void copySetAndCardNumber(Card targetCard, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber, boolean usesVariousArt) {
         targetCard.setExpansionSetCode(newSetCode);
+        targetCard.setUsesVariousArt(usesVariousArt);
         targetCard.setCardNumber(newCardNumber);
         targetCard.setImageFileName(newImageFileName);
         targetCard.setImageNumber(newImageNumber);
-        targetCard.setUsesVariousArt(usesVariousArt);
     }
 
     /**

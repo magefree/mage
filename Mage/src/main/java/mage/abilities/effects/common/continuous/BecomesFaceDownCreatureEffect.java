@@ -339,6 +339,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         TokenInfo faceDownInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(tokenName, object.getId());
         if (faceDownInfo != null) {
             faceDownToken.setExpansionSetCode(faceDownInfo.getSetCode());
+            faceDownToken.setUsesVariousArt(false);
             faceDownToken.setCardNumber("0");
             faceDownToken.setImageFileName(faceDownInfo.getName());
             faceDownToken.setImageNumber(faceDownInfo.getImageNumber());

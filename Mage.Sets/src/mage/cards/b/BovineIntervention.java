@@ -1,6 +1,6 @@
 package mage.cards.b;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +22,7 @@ public final class BovineIntervention extends CardImpl {
         // Destroy target artifact or creature. Its controller creates a 2/2 white Ox creature token.
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new Ox22Token()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new Ox22Token()));
     }
 
     private BovineIntervention(final BovineIntervention card) {

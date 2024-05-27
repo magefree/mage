@@ -54,6 +54,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Biomass Mutation", 212, Rarity.RARE, mage.cards.b.BiomassMutation.class));
         cards.add(new SetCardInfo("Black Market", 183, Rarity.RARE, mage.cards.b.BlackMarket.class));
         cards.add(new SetCardInfo("Blasphemous Act", 188, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
+        cards.add(new SetCardInfo("Bloatfly Swarm", 42, Rarity.UNCOMMON, mage.cards.b.BloatflySwarm.class));
         cards.add(new SetCardInfo("Bloodforged Battle-Axe", 226, Rarity.RARE, mage.cards.b.BloodforgedBattleAxe.class));
         cards.add(new SetCardInfo("Boomer Scrapper", 95, Rarity.RARE, mage.cards.b.BoomerScrapper.class));
         cards.add(new SetCardInfo("Bottle-Cap Blast", 55, Rarity.UNCOMMON, mage.cards.b.BottleCapBlast.class));
