@@ -76,8 +76,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     enum DownloadSources {
         WIZARDS("1. wizards.com - low quality CARDS, multi-language, slow download", WizardCardsImageSource.instance),
         TOKENS("2. tokens.mtg.onl - high quality TOKENS", TokensMtgImageSource.instance),
-        SCRYFALL("3. scryfall.com - high quality CARDS and TOKENS, multi-language", ScryfallImageSource.instance),
-        SCRYFALL_SMALL("3a. scryfall.com small images - low quality CARDS and TOKENS, multi-language", ScryfallImageSourceSmall.instance),
+        SCRYFALL("3. scryfall.com - high quality CARDS and TOKENS, multi-language", ScryfallImageSource.getInstance()),
+        SCRYFALL_SMALL("3a. scryfall.com small images - low quality CARDS and TOKENS, multi-language", ScryfallImageSourceSmall.getInstance()),
         MAGIDEX("4. magidex.com - high quality CARDS", MagidexImageSource.instance),
         GRAB_BAG("5. GrabBag - STAR WARS cards and tokens", GrabbagImageSource.instance),
         MYTHICSPOILER("6. mythicspoiler.com", MythicspoilerComSource.instance),
@@ -165,7 +165,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         // SOURCES - scryfall is default source
         uiDialog.getSourcesCombo().setModel(new DefaultComboBoxModel(DownloadSources.values()));
         uiDialog.getSourcesCombo().setSelectedItem(DownloadSources.SCRYFALL);
-        selectedSource = ScryfallImageSource.instance;
+        selectedSource = ScryfallImageSource.getInstance();
         uiDialog.getSourcesCombo().addItemListener((ItemEvent event) -> {
             if (event.getStateChange() == ItemEvent.SELECTED) {
                 comboboxSourceSelected(event);
