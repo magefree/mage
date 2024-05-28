@@ -21,9 +21,9 @@ import java.util.*;
 /**
  * @author JayDi85
  */
-public enum ScryfallImageSource implements CardImageSource {
+public class ScryfallImageSource implements CardImageSource {
 
-    instance;
+    private static final ScryfallImageSource instance = new ScryfallImageSource();
 
     private static final Logger logger = Logger.getLogger(ScryfallImageSource.class);
 
@@ -31,6 +31,14 @@ public enum ScryfallImageSource implements CardImageSource {
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
     private final Map<CardDownloadData, String> preparedUrls = new HashMap<>();
     private final int DOWNLOAD_TIMEOUT_MS = 100;
+
+    private Object readResolve() throws ObjectStreamException {
+        return instance;
+    }
+    
+    public static ScryfallImageSource getInstance() {
+        return instance;
+    }
 
     ScryfallImageSource() {
         // LANGUAGES
