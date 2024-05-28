@@ -11,6 +11,7 @@ import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.FileNotFoundException;
+import java.io.ObjectStreamException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Proxy;
