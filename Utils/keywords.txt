@@ -37,6 +37,7 @@ Double Strike|instance|
 Dredge|number|
 Echo|manaString|
 Embalm|cost, card|
+Emerge|card, manaString|
 Enchant|type|
 Encore|cost|
 Enlist|new|

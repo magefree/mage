@@ -182,6 +182,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Triton Wavebreaker", 74, Rarity.UNCOMMON, mage.cards.t.TritonWavebreaker.class));
         cards.add(new SetCardInfo("Tune the Narrative", 75, Rarity.COMMON, mage.cards.t.TuneTheNarrative.class));
         cards.add(new SetCardInfo("Twisted Landscape", 232, Rarity.COMMON, mage.cards.t.TwistedLandscape.class));
+        cards.add(new SetCardInfo("Twisted Riddlekeeper", 14, Rarity.UNCOMMON, mage.cards.t.TwistedRiddlekeeper.class));
         cards.add(new SetCardInfo("Ugin's Binding", 76, Rarity.MYTHIC, mage.cards.u.UginsBinding.class));
         cards.add(new SetCardInfo("Ugin's Labyrinth", 233, Rarity.MYTHIC, mage.cards.u.UginsLabyrinth.class));
         cards.add(new SetCardInfo("Ulamog, the Defiler", 15, Rarity.MYTHIC, mage.cards.u.UlamogTheDefiler.class));
