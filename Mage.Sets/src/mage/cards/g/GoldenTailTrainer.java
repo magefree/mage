@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllOfChosenCardTypeEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -20,7 +21,7 @@ import mage.constants.CardType;
 public final class GoldenTailTrainer extends CardImpl {
 
     private static final SourcePermanentPowerCount xValue = new SourcePermanentPowerCount(false);
-    private static final FilterCard filter = new FilterCard("Aura and Equipment spells");
+    private static final FilterCard filter = new FilterCard();
     static {
         filter.add(Predicates.or(SubType.AURA.getPredicate(), SubType.EQUIPMENT.getPredicate()));
     }
@@ -34,8 +35,8 @@ public final class GoldenTailTrainer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Aura and Equipment spells you cast cost {X} less to cast, where X is Golden-Tail Trainer's power.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new SpellsCostReductionAllOfChosenCardTypeEffect(filter, xValue, true)));
+        this.addAbility(
+                new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, xValue)));
         // Whenever Golden-Tail Trainer attacks, other modified creatures you control get +X/+X until end of turn, where X is Golden-Tail Trainer's power.
     }
 

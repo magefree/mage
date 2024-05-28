@@ -76,6 +76,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int reductionAmount = this.amount.calculate(game, source, this);
+        System.console().writer().println("SpellsCostReductionAllEffect.apply() reductionAmount: " + reductionAmount);
         if (upTo) {
             if (game.inCheckPlayableState()) {
                 CardUtil.reduceCost(abilityToModify, reductionAmount);
