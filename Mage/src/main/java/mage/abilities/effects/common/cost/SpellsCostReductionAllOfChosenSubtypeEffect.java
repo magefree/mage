@@ -1,6 +1,8 @@
 package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.cards.Card;
 import mage.constants.SubType;
@@ -17,6 +19,14 @@ public class SpellsCostReductionAllOfChosenSubtypeEffect extends SpellsCostReduc
     }
 
     public SpellsCostReductionAllOfChosenSubtypeEffect(FilterCard filter, int amount, boolean onlyControlled) {
+        super(filter, StaticValue.get(amount), false, onlyControlled);
+    }
+
+    public SpellsCostReductionAllOfChosenSubtypeEffect(FilterCard filter, DynamicValue amount) {
+        this(filter, amount, false);
+    }
+
+    public SpellsCostReductionAllOfChosenSubtypeEffect(FilterCard filter, DynamicValue amount, boolean onlyControlled) {
         super(filter, amount, false, onlyControlled);
     }
 
