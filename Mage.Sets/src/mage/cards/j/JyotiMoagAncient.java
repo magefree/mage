@@ -44,7 +44,9 @@ public final class JyotiMoagAncient extends CardImpl {
         // When Jyoti, Moag Ancient enters the battlefield, create a 1/1 green Forest Dryad land creature token
         // for each time you've cast your commander from the command zone this game.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new ForestDryadToken(), CommanderCastFromCommandZoneValue.instance)));
+                new CreateTokenEffect(new ForestDryadToken(), CommanderCastFromCommandZoneValue.instance).setText(
+                        "create a 1/1 green Forest Dryad land creature token for each time you've cast your commander from the command zone this game"))
+                .addHint(CommanderCastFromCommandZoneValue.getHint()));
 
         // At the beginning of each combat, land creatures you control get +X/+X until end of turn, where X is Jyoti's power.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
