@@ -1,10 +1,13 @@
-package mage.cards.k;
+package mage.cards.u;
 
-import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ExileAttachedEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,19 +23,21 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class KasminasTransmutation extends CardImpl {
+public final class UtterInsignificance extends CardImpl {
 
-    public KasminasTransmutation(UUID ownerId, CardSetInfo setInfo) {
+    public UtterInsignificance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         this.subtype.add(SubType.AURA);
 
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature loses all abilities and has base power and toughness 1/1.
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
@@ -40,14 +45,17 @@ public final class KasminasTransmutation extends CardImpl {
                 "and has base power and toughness 1/1", Duration.WhileOnBattlefield,
                 BecomesCreatureAttachedEffect.LoseType.ABILITIES
         )));
+
+        // {2}{C}: Exile enchanted creature.
+        this.addAbility(new SimpleActivatedAbility(new ExileAttachedEffect(), new ManaCostsImpl<>("{2}{C}")));
     }
 
-    private KasminasTransmutation(final KasminasTransmutation card) {
+    private UtterInsignificance(final UtterInsignificance card) {
         super(card);
     }
 
     @Override
-    public KasminasTransmutation copy() {
-        return new KasminasTransmutation(this);
+    public UtterInsignificance copy() {
+        return new UtterInsignificance(this);
     }
 }
