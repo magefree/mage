@@ -31,6 +31,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Drowner of Hope", 182, Rarity.RARE, mage.cards.d.DrownerOfHope.class));
         cards.add(new SetCardInfo("Final Act", 52, Rarity.RARE, mage.cards.f.FinalAct.class));
         cards.add(new SetCardInfo("Hideous Taskmaster", 57, Rarity.RARE, mage.cards.h.HideousTaskmaster.class));
+        cards.add(new SetCardInfo("Jyoti, Moag Ancient", 8, Rarity.MYTHIC, mage.cards.j.JyotiMoagAncient.class));
         cards.add(new SetCardInfo("March from Velis Vel", 48, Rarity.RARE, mage.cards.m.MarchFromVelisVel.class));
         cards.add(new SetCardInfo("Oblivion Sower", 158, Rarity.MYTHIC, mage.cards.o.OblivionSower.class));
         cards.add(new SetCardInfo("Siege-Gang Lieutenant", 61, Rarity.RARE, mage.cards.s.SiegeGangLieutenant.class));
