@@ -12,6 +12,7 @@ import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.dl.sources.ScryfallImageSource;
 
 import java.io.FileNotFoundException;
+import java.io.ObjectStreamException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Proxy;
@@ -23,6 +24,16 @@ import java.util.*;
  * @author tiera3
  */
 public class ScryfallImageSourceSmall extends ScryfallImageSource {
+
+    private static final ScryfallImageSourceSmall instanceSmall = new ScryfallImageSourceSmall();
+
+    private Object readResolve() throws ObjectStreamException {
+        return instanceSmall;
+    }
+    
+    public static ScryfallImageSource getInstance() {
+        return instanceSmall;
+    }
 
     private String innerModifyUrlString(String oneUrl) {
         return oneUrl.replaceFirst("/large/","/small/").replaceFirst("format=image","format=image&version=small");
