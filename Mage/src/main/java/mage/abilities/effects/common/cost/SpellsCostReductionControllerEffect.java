@@ -72,10 +72,10 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reductionAmount = this.amount.calculate(game, source, this);
         if (manaCostsToReduce != null) {
             CardUtil.adjustCost((SpellAbility) abilityToModify, manaCostsToReduce, false);
         } else {
+            int reductionAmount = this.amount.calculate(game, source, this);
             if (upTo) {
                 Mana mana = abilityToModify.getManaCostsToPay().getMana();
                 int reduceMax = mana.getGeneric();
