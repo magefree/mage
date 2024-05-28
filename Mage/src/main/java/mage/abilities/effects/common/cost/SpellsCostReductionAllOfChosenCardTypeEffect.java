@@ -1,8 +1,6 @@
 package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
@@ -14,19 +12,10 @@ import mage.game.Game;
 public class SpellsCostReductionAllOfChosenCardTypeEffect extends SpellsCostReductionAllEffect {
 
     public SpellsCostReductionAllOfChosenCardTypeEffect(FilterCard filter, int amount) {
-        this(filter, StaticValue.get(amount), false);
-    }
-
-    public SpellsCostReductionAllOfChosenCardTypeEffect(FilterCard filter, int amount, boolean onlyControlled) {
-        this(filter, StaticValue.get(amount), onlyControlled);
-    }
-
-    public SpellsCostReductionAllOfChosenCardTypeEffect(FilterCard filter, DynamicValue amount) {
         this(filter, amount, false);
     }
 
-    public SpellsCostReductionAllOfChosenCardTypeEffect(FilterCard filter, DynamicValue amount,
-            boolean onlyControlled) {
+    public SpellsCostReductionAllOfChosenCardTypeEffect(FilterCard filter, int amount, boolean onlyControlled) {
         super(filter, amount, false, onlyControlled);
     }
 
