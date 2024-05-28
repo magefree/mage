@@ -165,7 +165,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         // SOURCES - scryfall is default source
         uiDialog.getSourcesCombo().setModel(new DefaultComboBoxModel(DownloadSources.values()));
         uiDialog.getSourcesCombo().setSelectedItem(DownloadSources.SCRYFALL);
-        selectedSource = ScryfallImageSource.instance;
+        selectedSource = ScryfallImageSource.getInstance();
         uiDialog.getSourcesCombo().addItemListener((ItemEvent event) -> {
             if (event.getStateChange() == ItemEvent.SELECTED) {
                 comboboxSourceSelected(event);
