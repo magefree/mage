@@ -35,7 +35,8 @@ public final class BoggartTrawler extends ModalDoubleFacedCard {
 
         // As Boggart Bog enters the battlefield, you may pay 3 life. If you don’t, it enters the battlefield tapped.
         this.getRightHalfCard()
-                .addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(3))));
+                .addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
+                        "you may pay 3 life. If you don’t, it enters the battlefield tapped"));
         this.getRightHalfCard().addAbility(new BlackManaAbility());
 
     }
