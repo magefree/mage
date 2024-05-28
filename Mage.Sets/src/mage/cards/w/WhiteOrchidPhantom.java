@@ -36,7 +36,7 @@ public final class WhiteOrchidPhantom extends CardImpl {
 
         // When White Orchid Phantom enters the battlefield, destroy up to one target nonbasic land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetNonBasicLandPermanent());
+        ability.addTarget(new TargetNonBasicLandPermanent(0, 1));
         ability.addEffect(new SearchLibraryPutInPlayTargetControllerEffect(true));
         this.addAbility(ability);
     }

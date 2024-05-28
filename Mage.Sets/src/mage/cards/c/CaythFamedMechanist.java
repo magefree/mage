@@ -41,7 +41,7 @@ public final class CaythFamedMechanist extends CardImpl {
         // Other nontoken creatures you control have fabricate 1.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new FabricateAbility(1), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_CREATURES_NON_TOKEN
+                StaticFilters.FILTER_CREATURES_NON_TOKEN, true
         )));
 
         // {2}, {T}: Choose one --

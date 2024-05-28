@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class ArgentDais extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("another nonland permanent");
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("another target nonland permanent");
 
     static {
         filter.add(AnotherPredicate.instance);

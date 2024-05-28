@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.BestowAbility;
@@ -46,7 +46,7 @@ public final class TritonWavebreaker extends CardImpl {
         )));
 
         // Enchanted creature gets +1/+1 and has prowess.
-        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 1));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new ProwessAbility(), AttachmentType.AURA
         ).setText("and has prowess"));

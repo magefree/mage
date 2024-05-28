@@ -27,9 +27,7 @@ public final class StaticPrison extends CardImpl {
         // When Static Prison enters the battlefield, exile target nonland permanent an opponent controls until Static Prison leaves the battlefield. You get {E}{E}.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addEffect(new GetEnergyCountersControllerEffect(2));
-        ability.addTarget(new TargetPermanent(
-                0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND
-        ));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
         this.addAbility(ability);
 
         // At the beginning of your precombat main phase, sacrifice Static Prison unless you pay {E}.

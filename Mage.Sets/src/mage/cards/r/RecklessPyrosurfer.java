@@ -8,6 +8,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -29,7 +30,7 @@ public final class RecklessPyrosurfer extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Landfall -- Whenever a land enters the battlefield under your control, Reckless Pyrosurfer gains battle cry until end of turn.
-        this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(new BattleCryAbility())));
+        this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(new BattleCryAbility(), Duration.EndOfTurn)));
     }
 
     private RecklessPyrosurfer(final RecklessPyrosurfer card) {

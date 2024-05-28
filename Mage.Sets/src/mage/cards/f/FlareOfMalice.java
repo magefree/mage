@@ -44,7 +44,7 @@ public final class FlareOfMalice extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(filter)).setRuleAtTheTop(true));
 
         // Each opponent sacrifices a creature or planeswalker with the greatest converted mana value among creatures and planeswalkers they control.
-        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(filter));
+        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(filterCreatureOrPlaneswalker));
     }
 
     private FlareOfMalice(final FlareOfMalice card) {

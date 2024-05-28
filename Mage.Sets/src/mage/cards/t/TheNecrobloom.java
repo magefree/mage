@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -11,24 +10,25 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DredgeAbility;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.PlantToken;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Grath
  */
 public final class TheNecrobloom extends CardImpl {
 
     public TheNecrobloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}{G}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PLANT);
         this.power = new MageInt(2);
@@ -41,7 +41,7 @@ public final class TheNecrobloom extends CardImpl {
                 new CreateTokenEffect(new ZombieToken()),
                 new CreateTokenEffect(new PlantToken()),
                 TheNecrobloomCondition.instance, "create a 0/1 green Plant creature token. If you control " +
-                "seven or more lands with different names, create 2/2 black Zombie creature token instead"
+                "seven or more lands with different names, create a 2/2 black Zombie creature token instead"
         )));
 
         // Land cards in your graveyard have dredge 2.

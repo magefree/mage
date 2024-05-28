@@ -27,7 +27,7 @@ public final class ConsumingCorruption extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");
 
         // Consuming Corruption deals X damage to target creature or planeswalker and you gain X life, where X is the number of Swamps you control.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(xValue).setText("deals X damage to target creature or planeswalker"));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(xValue).setText("{this} deals X damage to target creature or planeswalker"));
         this.getSpellAbility().addEffect(new GainLifeEffect(xValue).setText("and you gain X life, where X is the number of Swamps you control"));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
         this.getSpellAbility().addHint(hint);

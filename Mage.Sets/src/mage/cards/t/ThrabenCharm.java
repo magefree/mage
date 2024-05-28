@@ -38,7 +38,7 @@ public final class ThrabenCharm extends CardImpl {
         // Choose one --
         // * Thraben Charm deals damage equal to twice the number of creatures you control to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(xValue)
-                .setText("{this} deals damage equal to the number of creatures you control to target creature or planeswalker"));
+                .setText("{this} deals damage equal to twice the number of creatures you control to target creature"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
 

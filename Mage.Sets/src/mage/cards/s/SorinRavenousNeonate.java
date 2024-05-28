@@ -69,7 +69,11 @@ public final class SorinRavenousNeonate extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FoodToken()), 2));
 
         // -1: Sorin, Ravenous Neonate deals damage equal to the amount of life you gained this turn to any target.
-        Ability ability = new LoyaltyAbility(new DamageTargetEffect(ControllerGainedLifeCount.instance), -1);
+        Ability ability = new LoyaltyAbility(
+                new DamageTargetEffect(ControllerGainedLifeCount.instance)
+                        .setText("{this} deals damage equal to the amount of life you gained this turn to any target"),
+                -1
+        );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
 

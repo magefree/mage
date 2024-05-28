@@ -41,7 +41,7 @@ public final class KamiOfJealousThirst extends CardImpl {
         );
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability.setMaxActivationsPerTurn(1);
-        ability.addEffect(new InfoEffect("This ability costs {4}{B} less to activate if you've drawn three or more cards this turn."));
+        ability.addEffect(new InfoEffect("This ability costs {4}{B} less to activate if you've drawn three or more cards this turn. Activate only once each turn."));
         ability.setCostAdjuster(KamiOfJealousThirstAdjuster.instance);
         this.addAbility(ability.addHint(CardsDrawnThisTurnDynamicValue.getHint()));
     }

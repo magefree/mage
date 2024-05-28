@@ -54,7 +54,7 @@ public final class AzlaskTheSwellingScourge extends CardImpl {
         // Scions and Spawns you control gain indestructible and annihilator 1 until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostControlledEffect(
                 SourceControllerCountersCount.EXPERIENCE, SourceControllerCountersCount.EXPERIENCE, Duration.EndOfTurn
-        ).setText("creatures you control get +X/+X until end of turn, where X is the number of the experience counters you have."), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
+        ).setText("creatures you control get +X/+X until end of turn, where X is the number of experience counters you have."), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
         ability.addEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, filter2)
                 .setText("Scions and Spawns you control gain indestructible"));
         ability.addEffect(new GainAbilityControlledEffect(new AnnihilatorAbility(1), Duration.EndOfTurn, filter2)

@@ -31,7 +31,7 @@ public final class RipplesOfUndeath extends CardImpl {
     public RipplesOfUndeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
-        // At the beginning of your precombat main phase, mill three cards. Then you may pay {1} and 3 life. If you do, put a card from among those cards into your hand.
+        // At the beginning of your precombat main phase, mill three cards. Then you may pay {1} and 3 life. If you do, put one of the cards milled this way into your hand.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
                 new RipplesOfUndeathEffect(), TargetController.YOU, false
         ));
@@ -51,7 +51,7 @@ class RipplesOfUndeathEffect extends OneShotEffect {
 
     RipplesOfUndeathEffect() {
         super(Outcome.Benefit);
-        staticText = "mill three cards. Then you may pay {1} and 3 life. If you do, put a card from among those cards into your hand.";
+        staticText = "mill three cards. Then you may pay {1} and 3 life. If you do, put one of the cards milled this way into your hand.";
     }
 
     private RipplesOfUndeathEffect(final RipplesOfUndeathEffect effect) {

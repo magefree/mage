@@ -76,7 +76,7 @@ class SuppressionRayTargetEffect extends OneShotEffect {
 
     SuppressionRayTargetEffect() {
         super(Outcome.Tap);
-        staticText = "Tap all creatures target player controls."
+        staticText = "Tap all creatures target player controls. "
                 + "You may pay X {E}, then choose up to X creatures tapped this way. "
                 + "Put a stun counter on each of them.";
     }
