@@ -38,7 +38,7 @@ public enum ScryfallImageSourceSmall implements CardImageSource {
     private CardImageUrls innerModifyUrl(CardImageUrls cardUrls) {
         List<String> downloadUrls = cardUrls.getDownloadList();
 
-        if (downloadUrls.size() > 2) {   // to be uncommented if ScryfallRework gets merged
+        if (downloadUrls.size() > 2) {   
             return new CardImageUrls(innerModifyUrlString(downloadUrls.get(0)), innerModifyUrlString(downloadUrls.get(1)), innerModifyUrlString(downloadUrls.get(2)));
         } 
         if (downloadUrls.size() > 1) {
