@@ -6,6 +6,8 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.cards.Card;
 import mage.choices.ChoiceImpl;
 import mage.constants.CostModificationType;
@@ -22,7 +24,7 @@ import mage.util.CardUtil;
 public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
 
     private final FilterCard filter;
-    private final int amount;
+    private final DynamicValue amount;
     private final boolean upTo;
     private final boolean onlyControlled;
     private UUID controllerId;
@@ -36,10 +38,18 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     }
 
     public SpellsCostReductionAllEffect(FilterCard filter, int amount, boolean upTo) {
+        this(filter, StaticValue.get(amount), upTo, false);
+    }
+
+    public SpellsCostReductionAllEffect(FilterCard filter, DynamicValue amount) {
+        this(filter, amount, false);
+    }
+
+    public SpellsCostReductionAllEffect(FilterCard filter, DynamicValue amount, boolean upTo) {
         this(filter, amount, upTo, false);
     }
 
-    public SpellsCostReductionAllEffect(FilterCard filter, int amount, boolean upTo, boolean onlyControlled) {
+    public SpellsCostReductionAllEffect(FilterCard filter, DynamicValue amount, boolean upTo, boolean onlyControlled) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = amount;
@@ -65,15 +75,16 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        int reductionAmount = this.amount.calculate(game, source, this);
         if (upTo) {
             if (game.inCheckPlayableState()) {
-                CardUtil.reduceCost(abilityToModify, this.amount);
+                CardUtil.reduceCost(abilityToModify, reductionAmount);
                 return true;
             }
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
             int reduceMax = mana.getGeneric();
-            if (reduceMax > this.amount) {
-                reduceMax = this.amount;
+            if (reduceMax > reductionAmount) {
+                reduceMax = reductionAmount;
             }
             if (reduceMax > 0) {
                 Player controller = game.getPlayer(abilityToModify.getControllerId());
@@ -95,7 +106,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
                 }
             }
         } else {
-            CardUtil.reduceCost(abilityToModify, this.amount);
+            CardUtil.reduceCost(abilityToModify, reductionAmount);
         }
         return true;
     }
