@@ -16,13 +16,12 @@ public class SummonersEggTest extends CardTestPlayerBase {
     /**
      * Summoner's Egg
      * Artifact Creature — Construct 0/4, 4 (4)
-     * Imprint — When Summoner's Egg enters the battlefield, you may exile a 
+     * Imprint — When Summoner's Egg enters the battlefield, you may exile a
      * card from your hand face down.
-     * When Summoner's Egg dies, turn the exiled card face up. If it's a creature 
+     * When Summoner's Egg dies, turn the exiled card face up. If it's a creature
      * card, put it onto the battlefield under your control.
-     * 
      */
-    
+
     // test that cards imprinted using Summoner's Egg are face down
     @Test
     public void testSummonersEggImprint() {
@@ -32,6 +31,10 @@ public class SummonersEggTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Summoner's Egg");
+        setChoice(playerA, true); // use imprint
+        setChoice(playerA, "Goblin Roughrider");
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -40,7 +43,7 @@ public class SummonersEggTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Goblin Roughrider", 0);
 
         assertExileCount("Goblin Roughrider", 1);
-        for (Card card :currentGame.getExile().getAllCards(currentGame)){
+        for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Goblin Roughrider")) {
                 Assert.assertTrue("Exiled card is not face down", card.isFaceDown(currentGame));
             }
@@ -57,23 +60,26 @@ public class SummonersEggTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.HAND, playerB, "Char");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
-        
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Summoner's Egg");
+        setChoice(playerA, true); // use imprint
+        setChoice(playerA, "Goblin Roughrider");
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Char", "Summoner's Egg");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
+
         assertHandCount(playerA, 1);
         assertHandCount(playerA, "Maritime Guard", 1);
         assertHandCount(playerA, "Goblin Roughrider", 0);
-        
+
         assertGraveyardCount(playerA, "Summoner's Egg", 1);
 
         assertExileCount("Goblin Roughrider", 0);
         assertPermanentCount(playerA, "Goblin Roughrider", 1);
-        for (Permanent p :currentGame.getBattlefield().getAllActivePermanents()){
+        for (Permanent p : currentGame.getBattlefield().getAllActivePermanents()) {
             if (p.getName().equals("Goblin Roughrider")) {
                 Assert.assertTrue("Permanent is not face up", !p.isFaceDown(currentGame));
             }
@@ -89,26 +95,29 @@ public class SummonersEggTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.HAND, playerB, "Char");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
-        
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Summoner's Egg");
+        setChoice(playerA, true); // use imprint
+        setChoice(playerA, "Forest");
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Char", "Summoner's Egg");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        
+
         assertHandCount(playerA, 1);
         assertHandCount(playerA, "Forest", 1);
-        
+
         assertGraveyardCount(playerA, "Summoner's Egg", 1);
 
         assertExileCount("Forest", 1);
-        for (Card card :currentGame.getExile().getAllCards(currentGame)){
+        for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Forest")) {
                 Assert.assertTrue("Exiled card is not face up", !card.isFaceDown(currentGame));
             }
         }
 
     }
-    
+
 }

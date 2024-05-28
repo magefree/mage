@@ -295,6 +295,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         playerList.add(player.getId());
     }
 
+    /**
+     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     */
     public String getValue(boolean useHidden) {
         StringBuilder sb = threadLocalBuilder.get();
 
@@ -333,6 +336,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         return sb.toString();
     }
 
+    /**
+     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     */
     public String getValue(boolean useHidden, Game game) {
         StringBuilder sb = threadLocalBuilder.get();
 
@@ -386,6 +392,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         return sb.toString();
     }
 
+    /**
+     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     */
     public String getValue(Game game, UUID playerId) {
         StringBuilder sb = threadLocalBuilder.get();
 
