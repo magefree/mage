@@ -1315,10 +1315,10 @@ public class ComputerPlayer extends PlayerImpl {
             }
             switch (game.getTurnStepType()) {
                 case UPKEEP:
+                    // TODO: is it needs here? Need research (e.g. for better choose in upkeep triggers)?
                     findPlayables(game);
                     break;
                 case DRAW:
-                    logState(game);
                     break;
                 case PRECOMBAT_MAIN:
                     findPlayables(game);
@@ -2871,12 +2871,6 @@ public class ComputerPlayer extends PlayerImpl {
             Collections.reverse(threats);
         }
         return threats;
-    }
-
-    protected void logState(Game game) {
-        if (log.isTraceEnabled()) {
-            logList("Computer player " + name + " hand: ", new ArrayList<MageObject>(hand.getCards(game)));
-        }
     }
 
     protected void logList(String message, List<MageObject> list) {
