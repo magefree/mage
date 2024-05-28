@@ -111,6 +111,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Null Elemental Blast", 12, Rarity.UNCOMMON, mage.cards.n.NullElementalBlast.class));
         cards.add(new SetCardInfo("Nulldrifter", 13, Rarity.RARE, mage.cards.n.Nulldrifter.class));
         cards.add(new SetCardInfo("Nyxborn Hydra", 164, Rarity.COMMON, mage.cards.n.NyxbornHydra.class));
+        cards.add(new SetCardInfo("Ocelot Pride", 38, Rarity.MYTHIC, mage.cards.o.OcelotPride.class));
         cards.add(new SetCardInfo("Ophiomancer", 276, Rarity.RARE, mage.cards.o.Ophiomancer.class));
         cards.add(new SetCardInfo("Orim's Chant", 265, Rarity.RARE, mage.cards.o.OrimsChant.class));
         cards.add(new SetCardInfo("Path of Annihilation", 165, Rarity.UNCOMMON, mage.cards.p.PathOfAnnihilation.class));
