@@ -12,6 +12,7 @@ import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.dl.sources.ScryfallImageSource;
 
 import java.io.FileNotFoundException;
+import java.io.ObjectStreamException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Proxy;
@@ -22,13 +23,16 @@ import java.util.*;
 /**
  * @author tiera3
  */
-public enum ScryfallImageSourceSmall implements CardImageSource {
-    instance;
-	
-    private CardImageSource baseSource = ScryfallImageSource.instance;
-    private static final Logger logger = Logger.getLogger(ScryfallImageSourceSmall.class);
+public class ScryfallImageSourceSmall extends ScryfallImageSource {
 
-    ScryfallImageSourceSmall() {
+    private static final ScryfallImageSourceSmall instanceSmall = new ScryfallImageSourceSmall();
+
+    private Object readResolve() throws ObjectStreamException {
+        return instanceSmall;
+    }
+    
+    public static ScryfallImageSource getInstance() {
+        return instanceSmall;
     }
 
     private String innerModifyUrlString(String oneUrl) {
@@ -51,88 +55,18 @@ public enum ScryfallImageSourceSmall implements CardImageSource {
     }
 
     @Override
-    public boolean prepareDownloadList(DownloadServiceInfo downloadServiceInfo, List<CardDownloadData> downloadList) {
-		return baseSource.prepareDownloadList(downloadServiceInfo, downloadList);
-	}	
-
-    @Override
     public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
-        return innerModifyUrl(baseSource.generateCardUrl(card));
+        return innerModifyUrl(super.generateCardUrl(card));
     }
 
     @Override
     public CardImageUrls generateTokenUrl(CardDownloadData card) throws Exception {
-        return innerModifyUrl(baseSource.generateTokenUrl(card));
-    }
-
-    @Override
-    public String getNextHttpImageUrl() {
-        return baseSource.getNextHttpImageUrl();
-    }
-
-    @Override
-    public String getFileForHttpImage(String httpImageUrl) {
-        return baseSource.getFileForHttpImage(httpImageUrl);
-    }
-
-    @Override
-    public String getSourceName() {
-        return baseSource.getSourceName();
+        return innerModifyUrl(super.generateTokenUrl(card));
     }
 
     @Override
     public float getAverageSize() {
         return 13; // initial estimate - TODO calculate a more accurate number
-    }
-
-    @Override
-    public int getTotalImages() {
-        return baseSource.getTotalImages();
-    }
-
-    @Override
-    public boolean isTokenSource() {
-        return baseSource.isTokenSource();
-    }
-
-    @Override
-    public boolean isCardSource() {
-        return baseSource.isCardSource();
-    }
-
-    @Override
-    public boolean isLanguagesSupport() {
-        return baseSource.isLanguagesSupport();
-    }
-
-    @Override
-    public void setCurrentLanguage(CardLanguage cardLanguage) {
-        baseSource.setCurrentLanguage(cardLanguage);
-    }
-
-    @Override
-    public CardLanguage getCurrentLanguage() {
-        return baseSource.getCurrentLanguage();
-    }
-
-    @Override
-    public void doPause(String httpImageUrl) {
-        baseSource.doPause(httpImageUrl);
-    }
-
-    @Override
-    public List<String> getSupportedSets() {
-        return baseSource.getSupportedSets();
-    }
-
-    @Override
-    public boolean isCardImageProvided(String setCode, String cardName) {
-        return baseSource.isCardImageProvided(setCode, cardName);
-    }
-
-    @Override
-    public boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
-        return baseSource.isTokenImageProvided(setCode, cardName, tokenNumber);
     }
 
 }
