@@ -7,6 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
+import mage.abilities.mana.BlackManaAbility;
 import mage.constants.SubType;
 import mage.target.TargetPlayer;
 import mage.cards.CardSetInfo;
@@ -35,6 +36,7 @@ public final class BoggartTrawler extends ModalDoubleFacedCard {
         // As Boggart Bog enters the battlefield, you may pay 3 life. If you don’t, it enters the battlefield tapped.
         this.getRightHalfCard()
                 .addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(3))));
+        this.getRightHalfCard().addAbility(new BlackManaAbility());
 
     }
 
