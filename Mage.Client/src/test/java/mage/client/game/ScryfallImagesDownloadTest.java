@@ -16,7 +16,7 @@ public class ScryfallImagesDownloadTest {
 
     @Test
     public void test_Cards_DownloadLinks() throws Exception {
-        CardImageSource imageSource = ScryfallImageSource.instance;
+        CardImageSource imageSource = ScryfallImageSource.getInstance();
 
         // normal card
         CardImageUrls urls = imageSource.generateCardUrl(new CardDownloadData("Grizzly Bears", "10E", "268", false, 0));
@@ -49,7 +49,7 @@ public class ScryfallImagesDownloadTest {
 /**
  * added same tests for small images
  */
-        CardImageSource imageSourceSmall = ScryfallImageSourceSmall.instance;
+        CardImageSource imageSourceSmall = ScryfallImageSourceSmall.getInstance();
 
         // normal card
         urls = imageSourceSmall.generateCardUrl(new CardDownloadData("Grizzly Bears", "10E", "268", false, 0));
