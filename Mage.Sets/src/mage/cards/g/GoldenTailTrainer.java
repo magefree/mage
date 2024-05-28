@@ -45,7 +45,7 @@ public final class GoldenTailTrainer extends CardImpl {
         this.addAbility(
                 new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, xValue)
                         .setText(
-                                "Aura and Equipment spells you cast cost {X} less to cast, where X is Golden-Tail Trainer's power")));
+                                "Aura and Equipment spells you cast cost {X} less to cast, where X is {this}'s power")));
 
         // Whenever Golden-Tail Trainer attacks, other modified creatures you control get +X/+X until end of turn, where X is Golden-Tail Trainer's power.
         this.addAbility(
