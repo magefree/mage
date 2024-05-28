@@ -837,28 +837,43 @@ public interface Player extends MageItem, Copyable<Player> {
 
     Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game originalGame);
 
+    /**
+     * add counter to the player (action verb is `get`, but not using that one to avoid ambiguity with getters)
+     */
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
 
-    void removeCounters(String counterName, int amount, Ability source, Game game);
+    /**
+     * lose {@param amount} counters of the specified kind.
+     */
+    void loseCounters(String counterName, int amount, Ability source, Game game);
 
     /**
-     * Remove (Lose) all counters.
+     * lose all counters of any kind.
      *
      * @return the amount of counters removed this way.
      */
-    int removeAllCounters(Ability source, Game game);
+    int loseAllCounters(Ability source, Game game);
 
     /**
-     * Remove (Lose) all counters of a specific kind.
+     * lose all counters of a specific kind.
      *
      * @return the amount of counters removed this way.
      */
-    int removeAllCounters(String counterName, Ability source, Game game);
+    int loseAllCounters(String counterName, Ability source, Game game);
 
+    /**
+     * @return the amount of counters of the specified kind the player has
+     */
     int getCountersCount(CounterType counterType);
 
+    /**
+     * @return the amount of counters of the specified kind the player has
+     */
     int getCountersCount(String counterName);
 
+    /**
+     * @return the amount of counters in total of any kind the player has
+     */
     int getCountersTotalCount();
 
     List<UUID> getAttachments();

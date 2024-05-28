@@ -108,7 +108,7 @@ class RadiationEffect extends OneShotEffect {
         if (countNonLand > 0) {
             // TODO: support gaining life instead with [[Strong, the Brutish Thespian]]
             player.loseLife(countNonLand, game, source, false);
-            player.removeCounters(CounterType.RAD.getName(), countNonLand, source, game);
+            player.loseCounters(CounterType.RAD.getName(), countNonLand, source, game);
         }
         return true;
     }

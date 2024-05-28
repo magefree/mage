@@ -37,7 +37,7 @@ public class PayEnergyCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
         if (player != null && player.getCountersCount(CounterType.ENERGY) >= amount) {
-            player.removeCounters(CounterType.ENERGY.getName(), amount, source, game);
+            player.loseCounters(CounterType.ENERGY.getName(), amount, source, game);
             paid = true;
         }
         return paid;

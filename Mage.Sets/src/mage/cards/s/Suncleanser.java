@@ -83,7 +83,7 @@ class SuncleanserRemoveCountersPlayerEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.removeAllCounters(source, game);
+        player.loseAllCounters(source, game);
         return true;
     }
 }

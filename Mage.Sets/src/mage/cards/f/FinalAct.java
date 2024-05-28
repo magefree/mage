@@ -76,7 +76,7 @@ class FinalActEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            player.removeAllCounters(source, game);
+            player.loseAllCounters(source, game);
         }
         return true;
     }

@@ -111,13 +111,13 @@ class PriceOfBetrayalEffect extends OneShotEffect {
                 String counterName = counter.getName();
                 if (controller.chooseUse(Outcome.Neutral, "Remove " + counterName + " counters?", source, game)) {
                     if (player.getCountersCount(counterName) == 1 || (toRemove - removed == 1)) {
-                        player.removeCounters(counterName, 1, source, game);
+                        player.loseCounters(counterName, 1, source, game);
                         removed++;
                     } else {
                         int amount = controller.getAmount(1, Math.min(player.getCountersCount(counterName), toRemove - removed), "How many?", game);
                         if (amount > 0) {
                             removed += amount;
-                            player.removeCounters(counterName, amount, source, game);
+                            player.loseCounters(counterName, amount, source, game);
                         }
                     }
                 }

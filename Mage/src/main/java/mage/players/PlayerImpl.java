@@ -2396,7 +2396,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void removeCounters(String counterName, int amount, Ability source, Game game) {
+    public void loseCounters(String counterName, int amount, Ability source, Game game) {
 
         GameEvent removeCountersEvent = new RemoveCountersEvent(counterName, this, source, amount, false);
         if (game.replaceEvent(removeCountersEvent)) {
@@ -2424,19 +2424,19 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int removeAllCounters(Ability source, Game game) {
+    public int loseAllCounters(Ability source, Game game) {
         int amountBefore = getCountersTotalCount();
         for (Counter counter : getCountersAsCopy().values()) {
-            removeCounters(counter.getName(), counter.getCount(), source, game);
+            loseCounters(counter.getName(), counter.getCount(), source, game);
         }
         int amountAfter = getCountersTotalCount();
         return Math.max(0, amountBefore - amountAfter);
     }
 
     @Override
-    public int removeAllCounters(String counterName, Ability source, Game game) {
+    public int loseAllCounters(String counterName, Ability source, Game game) {
         int amountBefore = getCountersCount(counterName);
-        removeCounters(counterName, amountBefore, source, game);
+        loseCounters(counterName, amountBefore, source, game);
         int amountAfter = getCountersCount(counterName);
         return Math.max(0, amountBefore - amountAfter);
     }

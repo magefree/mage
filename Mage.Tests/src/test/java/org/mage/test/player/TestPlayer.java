@@ -3440,18 +3440,18 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void removeCounters(String counterName, int amount, Ability source, Game game) {
-        computerPlayer.removeCounters(counterName, amount, source, game);
+    public void loseCounters(String counterName, int amount, Ability source, Game game) {
+        computerPlayer.loseCounters(counterName, amount, source, game);
     }
 
     @Override
-    public int removeAllCounters(Ability source, Game game) {
-        return computerPlayer.removeAllCounters(source, game);
+    public int loseAllCounters(Ability source, Game game) {
+        return computerPlayer.loseAllCounters(source, game);
     }
 
     @Override
-    public int removeAllCounters(String counterName, Ability source, Game game) {
-        return computerPlayer.removeAllCounters(counterName, source, game);
+    public int loseAllCounters(String counterName, Ability source, Game game) {
+        return computerPlayer.loseAllCounters(counterName, source, game);
     }
 
     @Override
