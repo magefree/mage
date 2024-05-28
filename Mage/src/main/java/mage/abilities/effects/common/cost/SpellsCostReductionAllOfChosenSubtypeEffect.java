@@ -37,5 +37,4 @@ public class SpellsCostReductionAllOfChosenSubtypeEffect extends SpellsCostReduc
         }
         return false;
     }
-
 }
