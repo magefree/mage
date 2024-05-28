@@ -110,7 +110,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * The counters should be manipulated (adding or removing counters) with the appropriate addCounters/removeCounters/getCounterCount methods.
      * This returns a copy for specific usage, to make sure the Player's counters are not altered from there.
      */
-    Counters getCopyCounters();
+    Counters getCountersAsCopy();
 
     int getLife();
 

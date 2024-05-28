@@ -158,7 +158,7 @@ public class PlayerView implements Serializable {
             this.designationNames.add(designation.getName());
         }
         this.counters = new ArrayList<>();
-        for (Counter counter : player.getCopyCounters().values()) {
+        for (Counter counter : player.getCountersAsCopy().values()) {
             counters.add(new CounterView(counter));
         }
     }

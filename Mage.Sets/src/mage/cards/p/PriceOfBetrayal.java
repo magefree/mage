@@ -107,7 +107,7 @@ class PriceOfBetrayalEffect extends OneShotEffect {
         if (player != null) {
             int toRemove = 5;
             int removed = 0;
-            for (Counter counter : player.getCopyCounters().values()) {
+            for (Counter counter : player.getCountersAsCopy().values()) {
                 String counterName = counter.getName();
                 if (controller.chooseUse(Outcome.Neutral, "Remove " + counterName + " counters?", source, game)) {
                     if (player.getCountersCount(counterName) == 1 || (toRemove - removed == 1)) {

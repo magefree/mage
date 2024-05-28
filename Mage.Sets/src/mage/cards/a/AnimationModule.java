@@ -148,7 +148,7 @@ class AnimationModuleEffect extends OneShotEffect {
             } else {
                 Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                 if (player != null) {
-                    Counters counters = player.getCopyCounters();
+                    Counters counters = player.getCountersAsCopy();
                     if (!counters.isEmpty()) {
                         if (counters.size() == 1) {
                             for (Counter counter : counters.values()) {

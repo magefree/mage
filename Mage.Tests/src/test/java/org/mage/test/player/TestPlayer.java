@@ -2960,8 +2960,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Counters getCopyCounters() {
-        return computerPlayer.getCopyCounters();
+    public Counters getCountersAsCopy() {
+        return computerPlayer.getCountersAsCopy();
     }
 
     @Override

@@ -337,7 +337,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.commandersIds = new HashSet<>(player.getCommandersIds());
 
         this.abilities = player.getAbilities().copy();
-        this.counters = player.getCopyCounters();
+        this.counters = player.getCountersAsCopy();
 
         this.landsPlayed = player.getLandsPlayed();
         this.landsPerTurn = player.getLandsPerTurn();
@@ -531,7 +531,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public Counters getCopyCounters() {
+    public Counters getCountersAsCopy() {
         return counters.copy();
     }
 
@@ -2426,7 +2426,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public int removeAllCounters(Ability source, Game game) {
         int amountBefore = getCountersTotalCount();
-        for (Counter counter : getCopyCounters().values()) {
+        for (Counter counter : getCountersAsCopy().values()) {
             removeCounters(counter.getName(), counter.getCount(), source, game);
         }
         int amountAfter = getCountersTotalCount();

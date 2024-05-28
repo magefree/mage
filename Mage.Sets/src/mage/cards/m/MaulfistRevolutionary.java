@@ -70,7 +70,7 @@ class MaulfistRevolutionaryEffect extends OneShotEffect {
         if (controller != null) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null) {
-                Counters counters = player.getCopyCounters();
+                Counters counters = player.getCountersAsCopy();
                 for (Counter counter : counters.values()) {
                     CounterType counterType = CounterType.findByName(counter.getName());
                     Counter counterToAdd;
