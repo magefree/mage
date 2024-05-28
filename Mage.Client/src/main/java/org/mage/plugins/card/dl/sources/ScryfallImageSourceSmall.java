@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * @author tiera3
  */
-public class ScryfallImageSourceSmall extends CardImageSource {
+public class ScryfallImageSourceSmall extends ScryfallImageSource {
 
     private String innerModifyUrlString(String oneUrl) {
         return oneUrl.replaceFirst("/large/","/small/").replaceFirst("format=image","format=image&version=small");
