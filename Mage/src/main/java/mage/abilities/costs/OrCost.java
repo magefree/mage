@@ -48,6 +48,10 @@ public class OrCost implements Cost {
         return description;
     }
 
+    public Cost getSelectedCost() {
+        return selectedCost;
+    }
+
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return costs.stream().anyMatch(cost -> cost.canPay(ability, source, controllerId, game));
@@ -90,8 +94,7 @@ public class OrCost implements Cost {
                         Outcome.Detriment, sb.toString(), null,
                         CardUtil.getTextWithFirstCharUpperCase(usable.get(0).getText()),
                         CardUtil.getTextWithFirstCharUpperCase(usable.get(1).getText()),
-                        ability, game
-                )) {
+                        ability, game)) {
                     selectedCost = usable.get(0);
                 } else {
                     selectedCost = usable.get(1);
@@ -110,8 +113,7 @@ public class OrCost implements Cost {
                         .collect(Collectors.toSet()));
                 controller.choose(Outcome.Neutral, choice, game);
                 selectedCost = costMap.getOrDefault(
-                        CardUtil.getTextWithFirstCharLowerCase(choice.getChoice()), null
-                );
+                        CardUtil.getTextWithFirstCharLowerCase(choice.getChoice()), null);
         }
         if (selectedCost == null) {
             return false;
