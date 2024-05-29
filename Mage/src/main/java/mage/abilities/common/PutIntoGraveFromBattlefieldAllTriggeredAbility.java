@@ -63,4 +63,11 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     public PutIntoGraveFromBattlefieldAllTriggeredAbility copy() {
         return new PutIntoGraveFromBattlefieldAllTriggeredAbility(this);
     }
+
+    // Not sure if needed?
+    //
+    //@Override
+    //public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+    //    return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+    //}
 }
