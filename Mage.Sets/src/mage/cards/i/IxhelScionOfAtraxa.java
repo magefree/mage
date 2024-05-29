@@ -79,7 +79,7 @@ class IxhelScionOfAtraxaEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         for (UUID opponentId : game.getOpponents(source.getControllerId(), true)) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent == null || opponent.getCounters().getCount(CounterType.POISON) < 3 || !opponent.getLibrary().hasCards()) {
+            if (opponent == null || opponent.getCountersCount(CounterType.POISON) < 3 || !opponent.getLibrary().hasCards()) {
                 continue;
             }
             Card card = opponent.getLibrary().getFromTop(game);

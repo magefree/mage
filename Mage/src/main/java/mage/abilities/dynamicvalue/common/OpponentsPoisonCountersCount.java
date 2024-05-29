@@ -20,7 +20,7 @@ public enum OpponentsPoisonCountersCount implements DynamicValue {
         for (UUID playerUUID : playerList) {
             Player player = game.getPlayer(playerUUID);
             if (player != null) {
-                amount += player.getCounters().getCount(CounterType.POISON);
+                amount += player.getCountersCount(CounterType.POISON);
             }
         }
         return amount;

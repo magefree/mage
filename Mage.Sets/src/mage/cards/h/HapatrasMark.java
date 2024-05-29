@@ -2,8 +2,9 @@
 package mage.cards.h;
 
 import java.util.UUID;
+
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.counter.RemoveAllCountersTargetEffect;
+import mage.abilities.effects.common.counter.RemoveAllCountersPermanentTargetEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,7 +14,6 @@ import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
- *
  * @author fireshoes
  */
 public final class HapatrasMark extends CardImpl {
@@ -23,7 +23,7 @@ public final class HapatrasMark extends CardImpl {
 
         // Target creature you control gains hexproof until end of turn. Remove all -1/-1 counters from it.
         getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
-        getSpellAbility().addEffect(new RemoveAllCountersTargetEffect(CounterType.M1M1));
+        getSpellAbility().addEffect(new RemoveAllCountersPermanentTargetEffect(CounterType.M1M1));
         getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 

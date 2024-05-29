@@ -10,9 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.counters.Counters;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
@@ -74,11 +72,7 @@ class ThiefOfBloodEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int countersRemoved = 0;
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            Counters counters = permanent.getCounters(game).copy();
-            for (Counter counter : counters.values()) {
-                permanent.removeCounters(counter.getName(), counter.getCount(), source, game);
-                countersRemoved += counter.getCount();
-            }
+            countersRemoved += permanent.removeAllCounters(source, game);
         }
         if (countersRemoved > 0) {
             Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());

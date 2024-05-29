@@ -372,7 +372,7 @@ public class Turn implements Serializable {
         int delimiter = game.getPlayers().size() - 1;
         for (Player gamePlayer : game.getPlayers().values()) {
             sb.append(gamePlayer.getLife());
-            int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
+            int poison = gamePlayer.getCountersCount(CounterType.POISON);
             if (poison > 0) {
                 sb.append("[P:").append(poison).append(']');
             }

@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,18 +17,18 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class DelayingShield extends CardImpl {
 
     public DelayingShield(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // If damage would be dealt to you, put that many delay counters on Delaying Shield instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DelayingShieldReplacementEffect()));
@@ -103,9 +102,8 @@ class DelayingShieldUpkeepEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            int numCounters = permanent.getCounters(game).getCount(CounterType.DELAY);
-            permanent.removeCounters(CounterType.DELAY.createInstance(numCounters), source, game);
-            for (int i = numCounters; i > 0; i--) {
+            int countersRemoved = permanent.removeAllCounters(CounterType.DELAY.getName(), source, game);
+            for (int i = countersRemoved; i > 0; i--) {
                 if (controller.chooseUse(Outcome.Benefit, "Pay {1}{W}? (" + i + " counters left to pay)", source, game)) {
                     Cost cost = new ManaCostsImpl<>("{1}{W}");
                     if (cost.pay(source, game, source, source.getControllerId(), false, null)) {

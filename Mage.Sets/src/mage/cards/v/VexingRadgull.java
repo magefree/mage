@@ -70,7 +70,7 @@ class VexingRadgullEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (!player.getCounters().containsKey(CounterType.RAD)) {
+        if (player.getCountersCount(CounterType.RAD) == 0) {
             return new AddCountersTargetEffect(CounterType.RAD.createInstance(2))
                     .setTargetPointer(getTargetPointer().copy())
                     .apply(game, source);

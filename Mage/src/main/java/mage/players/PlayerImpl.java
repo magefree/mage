@@ -337,7 +337,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.commandersIds = new HashSet<>(player.getCommandersIds());
 
         this.abilities = player.getAbilities().copy();
-        this.counters = player.getCounters().copy();
+        this.counters = player.getCountersAsCopy();
 
         this.landsPlayed = player.getLandsPlayed();
         this.landsPerTurn = player.getLandsPerTurn();
@@ -531,8 +531,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public Counters getCounters() {
-        return counters;
+    public Counters getCountersAsCopy() {
+        return counters.copy();
     }
 
     @Override
@@ -2369,7 +2369,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 );
                 addingOneEvent.setFlag(isEffectFlag);
                 if (!game.replaceEvent(addingOneEvent)) {
-                    getCounters().addCounter(eventCounter);
+                    counters.addCounter(eventCounter);
                     GameEvent addedOneEvent = GameEvent.getEvent(
                             GameEvent.EventType.COUNTER_ADDED, playerId, source,
                             playerAddingCounters, counter.getName(), 1
@@ -2396,9 +2396,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
+    public void loseCounters(String counterName, int amount, Ability source, Game game) {
 
-        GameEvent removeCountersEvent = new RemoveCountersEvent(name, this, source, amount, false);
+        GameEvent removeCountersEvent = new RemoveCountersEvent(counterName, this, source, amount, false);
         if (game.replaceEvent(removeCountersEvent)) {
             return;
         }
@@ -2406,20 +2406,54 @@ public abstract class PlayerImpl implements Player, Serializable {
         int finalAmount = 0;
         for (int i = 0; i < amount; i++) {
 
-            GameEvent event = new RemoveCounterEvent(name, this, source, false);
+            GameEvent event = new RemoveCounterEvent(counterName, this, source, false);
             if (game.replaceEvent(event)) {
                 continue;
             }
 
-            if (!counters.removeCounter(name, 1)) {
+            if (!counters.removeCounter(counterName, 1)) {
                 break;
             }
-            event = new CounterRemovedEvent(name, this, source, false);
+            event = new CounterRemovedEvent(counterName, this, source, false);
             game.fireEvent(event);
             finalAmount++;
         }
-        GameEvent event = new CountersRemovedEvent(name, this, source, finalAmount, false);
+
+        GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, false);
         game.fireEvent(event);
+    }
+
+    @Override
+    public int loseAllCounters(Ability source, Game game) {
+        int amountBefore = getCountersTotalCount();
+        for (Counter counter : getCountersAsCopy().values()) {
+            loseCounters(counter.getName(), counter.getCount(), source, game);
+        }
+        int amountAfter = getCountersTotalCount();
+        return Math.max(0, amountBefore - amountAfter);
+    }
+
+    @Override
+    public int loseAllCounters(String counterName, Ability source, Game game) {
+        int amountBefore = getCountersCount(counterName);
+        loseCounters(counterName, amountBefore, source, game);
+        int amountAfter = getCountersCount(counterName);
+        return Math.max(0, amountBefore - amountAfter);
+    }
+
+    @Override
+    public int getCountersCount(CounterType counterType) {
+        return counters.getCount(counterType);
+    }
+
+    @Override
+    public int getCountersCount(String counterName) {
+        return counters.getCount(counterName);
+    }
+
+    @Override
+    public int getCountersTotalCount() {
+        return counters.getTotalCount();
     }
 
     @Override

@@ -803,39 +803,40 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game, boolean isDamage) {
+    public void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
 
-        if (amount <= 0){
+        if (amount <= 0) {
             return;
         }
 
-        if (getCounters(game).getCount(name) <= 0){
+        if (getCounters(game).getCount(counterName) <= 0) {
             return;
         }
 
-        GameEvent removeCountersEvent = new RemoveCountersEvent(name, this, source, amount, isDamage);
-        if (game.replaceEvent(removeCountersEvent)){
+        GameEvent removeCountersEvent = new RemoveCountersEvent(counterName, this, source, amount, isDamage);
+        if (game.replaceEvent(removeCountersEvent)) {
             return;
         }
 
         int finalAmount = 0;
         for (int i = 0; i < removeCountersEvent.getAmount(); i++) {
 
-            GameEvent event = new RemoveCounterEvent(name, this, source, isDamage);
-            if (game.replaceEvent(event)){
+            GameEvent event = new RemoveCounterEvent(counterName, this, source, isDamage);
+            if (game.replaceEvent(event)) {
                 continue;
             }
 
-            if (!getCounters(game).removeCounter(name, 1)) {
+            if (!getCounters(game).removeCounter(counterName, 1)) {
                 break;
             }
 
-            event = new CounterRemovedEvent(name, this, source, isDamage);
+            event = new CounterRemovedEvent(counterName, this, source, isDamage);
             game.fireEvent(event);
 
             finalAmount++;
         }
-        GameEvent event = new CountersRemovedEvent(name, this, source, finalAmount, isDamage);
+
+        GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, isDamage);
         game.fireEvent(event);
     }
 
@@ -844,6 +845,24 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (counter != null) {
             removeCounters(counter.getName(), counter.getCount(), source, game, isDamage);
         }
+    }
+
+    @Override
+    public int removeAllCounters(Ability source, Game game, boolean isDamage) {
+        int amountBefore = getCounters(game).getTotalCount();
+        for (Counter counter : getCounters(game).copy().values()) {
+            removeCounters(counter.getName(), counter.getCount(), source, game, isDamage);
+        }
+        int amountAfter = getCounters(game).getTotalCount();
+        return Math.max(0, amountBefore - amountAfter);
+    }
+
+    @Override
+    public int removeAllCounters(String counterName, Ability source, Game game, boolean isDamage) {
+        int amountBefore = getCounters(game).getCount(counterName);
+        removeCounters(counterName, amountBefore, source, game, isDamage);
+        int amountAfter = getCounters(game).getCount(counterName);
+        return Math.max(0, amountBefore - amountAfter);
     }
 
     @Override

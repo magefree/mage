@@ -11,6 +11,8 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
+import java.util.UUID;
+
 /**
  * @author emerald000
  */
@@ -31,14 +33,14 @@ public class PayEnergyCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
-        return player != null && player.getCounters().getCount(CounterType.ENERGY) >= amount;
+        return player != null && player.getCountersCount(CounterType.ENERGY) >= amount;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
-        if (player != null && player.getCounters().getCount(CounterType.ENERGY) >= amount) {
-            player.getCounters().removeCounter(CounterType.ENERGY, amount);
+        if (player != null && player.getCountersCount(CounterType.ENERGY) >= amount) {
+            player.loseCounters(CounterType.ENERGY.getName(), amount, source, game);
             paid = true;
         }
         return paid;

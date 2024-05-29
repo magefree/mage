@@ -82,9 +82,7 @@ enum LumberingMegaslothValue implements DynamicValue {
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .map(Player::getCounters)
-                .flatMap(counters -> counters.values().stream())
-                .mapToInt(Counter::getCount)
+                .mapToInt(Player::getCountersTotalCount)
                 .sum();
         return onPermanents + onPlayers;
     }
