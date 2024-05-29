@@ -75,6 +75,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Port Town", 364, Rarity.RARE, mage.cards.p.PortTown.class));
         cards.add(new SetCardInfo("Prairie Stream", 365, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Professional Face-Breaker", 216, Rarity.RARE, mage.cards.p.ProfessionalFaceBreaker.class));
+        cards.add(new SetCardInfo("Salvation Colossus", 43, Rarity.RARE, mage.cards.s.SalvationColossus.class));
         cards.add(new SetCardInfo("Shivan Reef", 375, Rarity.RARE, mage.cards.s.ShivanReef.class));
         cards.add(new SetCardInfo("Siege-Gang Lieutenant", 61, Rarity.RARE, mage.cards.s.SiegeGangLieutenant.class));
         cards.add(new SetCardInfo("Skyclave Apparition", 172, Rarity.RARE, mage.cards.s.SkyclaveApparition.class));
