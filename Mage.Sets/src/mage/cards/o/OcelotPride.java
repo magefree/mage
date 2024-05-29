@@ -12,6 +12,7 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
+import mage.abilities.hint.common.CitysBlessingHint;
 import mage.abilities.keyword.AscendAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -76,7 +77,7 @@ public final class OcelotPride extends CardImpl {
                 CitysBlessingCondition.instance
         ).concatBy("Then"));
         ability.addHint(hint);
-        this.addAbility(ability, new PlayerGainedLifeWatcher());
+        this.addAbility(ability.addHint(CitysBlessingHint.instance), new PlayerGainedLifeWatcher());
     }
 
     private OcelotPride(final OcelotPride card) {

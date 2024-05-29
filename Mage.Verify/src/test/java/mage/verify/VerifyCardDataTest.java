@@ -144,6 +144,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
         skipListAddName(SKIP_LIST_TYPE, "MH3", "Echoes of Eternity"); // temporary, waiting for tribal -> kindred change
+        skipListAddName(SKIP_LIST_TYPE, "MH3", "Idol of False Gods"); // temporary, waiting for tribal -> kindred change
         skipListAddName(SKIP_LIST_TYPE, "MH3", "Expanding Ooze"); // temporary
 
         // subtype
