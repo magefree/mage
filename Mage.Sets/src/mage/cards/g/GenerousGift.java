@@ -1,6 +1,6 @@
 package mage.cards.g;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class GenerousGift extends CardImpl {
 
         // Destroy target permanent. Its controller creates a 3/3 green Elephant creature token.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new ElephantToken()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new ElephantToken()));
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 

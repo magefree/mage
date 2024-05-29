@@ -42,12 +42,6 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     }
 
     private boolean priorityPlay(Game game) {
-        if (lastLoggedTurn != game.getTurnNum()) {
-            lastLoggedTurn = game.getTurnNum();
-            logger.info("======================= Turn: " + game.getState().toString() + " [" + game.getPlayer(game.getActivePlayerId()).getName() + "] =========================================");
-        }
-        logState(game);
-        logger.debug("Priority -- Step: " + (game.getTurnStepType() + "                       ").substring(0, 25) + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
         switch (game.getTurnStepType()) {
@@ -59,10 +53,12 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 // 09.03.2020:
                 // in old version it passes opponent's pre-combat step (game.isActivePlayer(playerId) -> pass(game))
                 // why?!
-                printOutState(game);
+                printBattlefieldScore(game, "Sim PRIORITY on MAIN 1");
                 if (actions.isEmpty()) {
-                    logger.info("Sim Calculate pre combat main actions ----------------------------------------------------- ");
                     calculateActions(game);
+                } else {
+                    // TODO: is it possible non empty actions without calculation?!
+                    throw new IllegalStateException("wtf");
                 }
                 act(game);
                 return true;
@@ -70,17 +66,22 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 pass(game);
                 return false;
             case DECLARE_ATTACKERS:
-                printOutState(game);
+                printBattlefieldScore(game, "Sim PRIORITY on DECLARE ATTACKERS");
                 if (actions.isEmpty()) {
-                    logger.info("Sim Calculate declare attackers actions ----------------------------------------------------- ");
                     calculateActions(game);
+                } else {
+                    // TODO: is it possible non empty actions without calculation?!
+                    throw new IllegalStateException("wtf");
                 }
                 act(game);
                 return true;
             case DECLARE_BLOCKERS:
-                printOutState(game);
+                printBattlefieldScore(game, "Sim PRIORITY on DECLARE BLOCKERS");
                 if (actions.isEmpty()) {
                     calculateActions(game);
+                } else {
+                    // TODO: is it possible non empty actions without calculation?!
+                    throw new IllegalStateException("wtf");
                 }
                 act(game);
                 return true;
@@ -90,9 +91,12 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 pass(game);
                 return false;
             case POSTCOMBAT_MAIN:
-                printOutState(game);
+                printBattlefieldScore(game, "Sim PRIORITY on MAIN 2");
                 if (actions.isEmpty()) {
                     calculateActions(game);
+                } else {
+                    // TODO: is it possible non empty actions without calculation?!
+                    throw new IllegalStateException("wtf");
                 }
                 act(game);
                 return true;
@@ -107,6 +111,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     protected void calculateActions(Game game) {
         if (!getNextAction(game)) {
+            //logger.info("--- calculating possible actions for " + this.getName() + " on " + game.toString());
             Date startTime = new Date();
             currentScore = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
             Game sim = createSimulation(game);
@@ -116,6 +121,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             if (root != null && root.children != null && !root.children.isEmpty()) {
                 logger.trace("After add actions timed: root.children.size = " + root.children.size());
                 root = root.children.get(0);
+
                 // prevent repeating always the same action with no cost
                 boolean doThis = true;
                 if (root.abilities.size() == 1) {
@@ -128,9 +134,10 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                         }
                     }
                 }
+
                 if (doThis) {
                     actions = new LinkedList<>(root.abilities);
-                    combat = root.combat;
+                    combat = root.combat; // TODO: must use copy?!
                     for (Ability ability : actions) {
                         actionCache.add(ability.getRule() + '_' + ability.getSourceId());
                     }

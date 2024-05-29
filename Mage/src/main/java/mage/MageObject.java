@@ -35,6 +35,13 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     void setImageNumber(Integer imageNumber);
 
     /**
+     * Set contains multiple cards with same card name but different images (also used for token from card)
+     */
+    boolean getUsesVariousArt();
+
+    void setUsesVariousArt(boolean usesVariousArt);
+
+    /**
      * Get image file name
      * - empty for default name from a card
      * - non-empty for face down objects like Morph (GUI show empty name, but image must show some image)

@@ -2,6 +2,8 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -37,9 +39,13 @@ public class SplitSecondAbility extends SimpleStaticAbility {
     public SplitSecondAbility copy() {
         return new SplitSecondAbility(this);
     }
-}
 
-// Molten Disaster has a copy of this effect in it's class, so in case this effect has to be changed check also there
+    // For abilities that need the effect conditionally. Must set text manually.
+    public static ConditionalContinuousRuleModifyingEffect getSplitSecondEffectWithCondition(Condition condition) {
+        return new ConditionalContinuousRuleModifyingEffect(new SplitSecondEffect(), condition);
+    }
+
+}
 
 class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
 

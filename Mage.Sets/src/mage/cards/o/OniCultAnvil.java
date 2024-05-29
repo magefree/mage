@@ -23,7 +23,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ConstructToken;
 
 /**
- *
  * @author weirddan455
  */
 public final class OniCultAnvil extends CardImpl {
@@ -55,7 +54,7 @@ class OniCultAnvilTriggeredAbility extends TriggeredAbilityImpl {
 
     public OniCultAnvilTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ConstructToken()));
-        this.setTriggersOnceEachTurn(true);
+        this.setTriggersLimitEachTurn(1);
         setTriggerPhrase("Whenever one or more artifacts you control leave the battlefield during your turn, ");
     }
 

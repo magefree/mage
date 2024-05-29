@@ -37,6 +37,10 @@ public final class CardSetInfo implements Serializable, Copyable<CardSetInfo> {
         return this.expansionSetCode;
     }
 
+    public boolean getUsesVariousArt() {
+        return this.graphicInfo != null && this.graphicInfo.getUsesVariousArt();
+    }
+
     public String getCardNumber() {
         return this.cardNumber;
     }

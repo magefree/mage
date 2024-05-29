@@ -1,6 +1,6 @@
 package mage.cards.g;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class GetLost extends CardImpl {
 
         // Destroy target creature, enchantment, or planeswalker. Its controller creates two Map tokens.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new MapToken(), 2, false));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new MapToken(), 2, false));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 

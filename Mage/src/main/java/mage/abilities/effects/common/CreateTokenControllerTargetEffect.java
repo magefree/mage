@@ -5,8 +5,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -14,46 +14,78 @@ import mage.util.CardUtil;
 /**
  * @author Susucr
  * <p>
- * Have the Controller of target permanent (or LKI controller) create Tokens.
+ * Have the Controller of target object (permanent, or spell) create Tokens.
  */
-public class CreateTokenControllerTargetPermanentEffect extends OneShotEffect {
+public class CreateTokenControllerTargetEffect extends OneShotEffect {
     private final Token token;
     private final DynamicValue amount;
     private final boolean tapped;
 
-    public CreateTokenControllerTargetPermanentEffect(Token token) {
+    /**
+     * What the target is supposed to be, to retrieve its controller from
+     */
+    public enum TargetKind {
+        PERMANENT,
+        SPELL
+    }
+
+    private final TargetKind targetKind;
+
+    public CreateTokenControllerTargetEffect(Token token) {
         this(token, 1, false);
     }
 
-    public CreateTokenControllerTargetPermanentEffect(Token token, int amount, boolean tapped) {
+    public CreateTokenControllerTargetEffect(Token token, TargetKind targetKind) {
+        this(token, 1, false, targetKind);
+    }
+
+    public CreateTokenControllerTargetEffect(Token token, int amount, boolean tapped) {
         this(token, StaticValue.get(amount), tapped);
     }
 
-    public CreateTokenControllerTargetPermanentEffect(Token token, DynamicValue amount, boolean tapped) {
+    public CreateTokenControllerTargetEffect(Token token, int amount, boolean tapped, TargetKind targetKind) {
+        this(token, StaticValue.get(amount), tapped, targetKind);
+    }
+
+    public CreateTokenControllerTargetEffect(Token token, DynamicValue amount, boolean tapped) {
+        this(token, amount, tapped, TargetKind.PERMANENT);
+    }
+
+    public CreateTokenControllerTargetEffect(Token token, DynamicValue amount, boolean tapped, TargetKind targetKind) {
         super(Outcome.Neutral);
         this.token = token;
         this.amount = amount.copy();
         this.tapped = tapped;
         this.staticText = makeText();
+        this.targetKind = targetKind;
     }
 
-    protected CreateTokenControllerTargetPermanentEffect(final CreateTokenControllerTargetPermanentEffect effect) {
+    protected CreateTokenControllerTargetEffect(final CreateTokenControllerTargetEffect effect) {
         super(effect);
         this.token = effect.token.copy();
         this.amount = effect.amount.copy();
         this.tapped = effect.tapped;
+        this.targetKind = effect.targetKind;
     }
 
     @Override
-    public CreateTokenControllerTargetPermanentEffect copy() {
-        return new CreateTokenControllerTargetPermanentEffect(this);
+    public CreateTokenControllerTargetEffect copy() {
+        return new CreateTokenControllerTargetEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (permanent != null) {
-            Player controllerOfTarget = game.getPlayer(permanent.getControllerId());
+        Controllable controllable = null;
+        switch (targetKind) {
+            case PERMANENT:
+                controllable = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+                break;
+            case SPELL:
+                controllable = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
+                break;
+        }
+        if (controllable != null) {
+            Player controllerOfTarget = game.getPlayer(controllable.getControllerId());
             if (controllerOfTarget != null) {
                 int value = amount.calculate(game, source, this);
                 return token.putOntoBattlefield(value, game, source, controllerOfTarget.getId(), tapped, false);

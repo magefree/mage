@@ -51,7 +51,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected SpellAbility spellAbility;
     protected boolean flipCard;
     protected String flipCardName;
-    protected boolean usesVariousArt = false;
     protected boolean morphCard;
     protected List<UUID> attachments = new ArrayList<>();
     protected boolean extraDeckCard = false;
@@ -65,6 +64,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         this.rarity = setInfo.getRarity();
         this.setExpansionSetCode(setInfo.getExpansionSetCode());
+        this.setUsesVariousArt(setInfo.getUsesVariousArt());
         this.setCardNumber(setInfo.getCardNumber());
         this.setImageFileName(""); // use default
         this.setImageNumber(0);
@@ -86,7 +86,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         CardGraphicInfo graphicInfo = setInfo.getGraphicInfo();
         if (graphicInfo != null) {
-            this.usesVariousArt = graphicInfo.getUsesVariousArt();
             if (graphicInfo.getFrameColor() != null) {
                 this.frameColor = graphicInfo.getFrameColor().copy();
             }
@@ -145,7 +144,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         spellAbility = null; // will be set on first getSpellAbility call if card has one
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
-        usesVariousArt = card.usesVariousArt;
         morphCard = card.morphCard;
         extraDeckCard = card.extraDeckCard;
 
@@ -722,16 +720,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public String getFlipCardName() {
         return flipCardName;
-    }
-
-    @Override
-    public boolean getUsesVariousArt() {
-        return usesVariousArt;
-    }
-
-    @Override
-    public void setUsesVariousArt(boolean usesVariousArt) {
-        this.usesVariousArt = usesVariousArt;
     }
 
     @Override

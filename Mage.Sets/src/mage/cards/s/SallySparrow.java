@@ -39,7 +39,7 @@ public final class SallySparrow extends CardImpl {
         // Whenever one or more other creatures you control leave the battlefield, investigate. This ability triggers only once each turn.
         this.addAbility(new LeavesBattlefieldAllTriggeredAbility(
                 new InvestigateEffect(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES
-        ).setTriggersOnceEachTurn(true)
+        ).setTriggersLimitEachTurn(1)
                 .setTriggerPhrase("Whenever one or more other creatures you control leave the battlefield, "));
     }
 

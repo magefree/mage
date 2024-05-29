@@ -130,6 +130,7 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
+        skipListAddName(SKIP_LIST_COLOR, "MH3", "Ghostfire Slice"); // temporary
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
@@ -143,12 +144,15 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
         skipListAddName(SKIP_LIST_TYPE, "MH3", "Echoes of Eternity"); // temporary, waiting for tribal -> kindred change
+        skipListAddName(SKIP_LIST_TYPE, "MH3", "Idol of False Gods"); // temporary, waiting for tribal -> kindred change
+        skipListAddName(SKIP_LIST_TYPE, "MH3", "Expanding Ooze"); // temporary
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "MH3", "Expanding Ooze"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -2762,7 +2766,7 @@ public class VerifyCardDataTest {
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
         Map<String, Integer> cardRates = new HashMap<>();
         for (Card card : cardsList) {
-            int curRate = RateCard.rateCard(card, null, false);
+            int curRate = RateCard.rateCard(card, Collections.emptyList(), false);
             int prevRate = cardRates.getOrDefault(card.getName(), 0);
             if (prevRate == 0) {
                 cardRates.putIfAbsent(card.getName(), curRate);

@@ -160,7 +160,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         // - use random set code
         // - use default set code
 
-        // token from a card - must use card image instead (example: Embalm ability)
+        // token from a card - must use card image instead, no need to choose new image (example: Embalm ability, copy of card, etc)
         if (!token.getCardNumber().isEmpty()) {
             return new TokenInfo(TokenType.TOKEN, token.getName(), token.getExpansionSetCode(), 0);
         }
@@ -292,13 +292,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             // front side
             TokenInfo tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token, game, source == null ? null : source.getSourceId());
             token.setExpansionSetCode(tokenInfo.getSetCode());
-            //token.setCardNumber(""); // if token from a card then don't change a card number
             token.setImageNumber(tokenInfo.getImageNumber());
+            // if token from a card then keep card number and var art info
+            //token.setCardNumber("");
+            //token.setUsesVariousArt(false);
             if (token.getBackFace() != null) {
                 // back side
                 tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token.getBackFace(), game, source == null ? null : source.getSourceId());
                 token.getBackFace().setExpansionSetCode(tokenInfo.getSetCode());
                 token.getBackFace().setImageNumber(tokenInfo.getImageNumber());
+                //token.setCardNumber("");
+                //token.setUsesVariousArt(false);
             }
 
             List<Permanent> needTokens = new ArrayList<>();

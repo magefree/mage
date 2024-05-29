@@ -40,6 +40,7 @@ public class RadiationEmblem extends Emblem {
         TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_RADIATION, null);
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
             this.setCardNumber("");
             this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());

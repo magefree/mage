@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -15,11 +14,11 @@ import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class DuelistsHeritage extends CardImpl {
@@ -50,7 +49,7 @@ public final class DuelistsHeritage extends CardImpl {
 
 class DuelistsHeritageTriggeredAbility extends TriggeredAbilityImpl {
 
-    public DuelistsHeritageTriggeredAbility(Zone zone, Effect effect) {
+    DuelistsHeritageTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect, true);
     }
 

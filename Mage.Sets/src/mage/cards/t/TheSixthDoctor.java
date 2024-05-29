@@ -43,7 +43,7 @@ public final class TheSixthDoctor extends CardImpl {
                                 new RemoveTypeCopyApplier(SuperType.LEGENDARY)
                         ).setText("copy it, except the copy isn't legendary"),
                         filter, false, SetTargetPointer.SPELL
-                ).setTriggersOnceEachTurn(true).withFlavorWord("Time Lord's Prerogative")
+                ).setTriggersLimitEachTurn(1).withFlavorWord("Time Lord's Prerogative")
         );
     }
 
