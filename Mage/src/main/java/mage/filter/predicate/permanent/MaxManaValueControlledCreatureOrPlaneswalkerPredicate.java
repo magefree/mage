@@ -14,7 +14,7 @@ import java.util.Objects;
 /**
  * @author TheElk801
  */
-public enum MaxManaValueControlledPermanentPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+public enum MaxManaValueControlledCreatureOrPlaneswalkerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();

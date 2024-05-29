@@ -18,14 +18,14 @@ public class SimulationNode2 implements Serializable {
     protected static int nodeCount;
 
     protected Game game;
-    protected int gameValue;
+    protected int gameValue; // game state hash to monitor changes
     protected int score;
     protected List<Ability> abilities;
     protected int depth;
     protected List<SimulationNode2> children = new ArrayList<>();
     protected SimulationNode2 parent;
-    protected List<UUID> targets = new ArrayList<>();
-    protected List<String> choices = new ArrayList<>();
+    protected List<UUID> targets = new ArrayList<>(); // TODO: looks like it un-used by bugs (research and implement possible targets simulation for choices?)
+    protected List<String> choices = new ArrayList<>(); // TODO: un-used at all, maybe same history as targets above
     protected UUID playerId;
     protected Combat combat;
 

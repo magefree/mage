@@ -1,16 +1,17 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public class PayEnergyCost extends CostImpl {
@@ -19,7 +20,7 @@ public class PayEnergyCost extends CostImpl {
 
     public PayEnergyCost(int amount) {
         this.amount = amount;
-        setText();
+        this.text = makeText(amount);
     }
 
     public PayEnergyCost(PayEnergyCost cost) {
@@ -48,11 +49,16 @@ public class PayEnergyCost extends CostImpl {
         return new PayEnergyCost(this);
     }
 
-    private void setText() {
+    private static String makeText(int amount) {
         StringBuilder sb = new StringBuilder("pay ");
-        for (int i = 0; i < amount; i++) {
-            sb.append("{E}");
+        if (amount < 6) {
+            for (int i = 0; i < amount; i++) {
+                sb.append("{E}");
+            }
+        } else {
+            sb.append(CardUtil.numberToText(amount));
+            sb.append(" {E}");
         }
-        this.text = sb.toString();
+        return sb.toString();
     }
 }

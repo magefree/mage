@@ -28,7 +28,7 @@ public final class DuskLegionDuelist extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever one or more +1/+1 counters are put on Dusk Legion Duelist, draw a card. This ability triggers only once each turn.
-        this.addAbility(new OneOrMoreCountersAddedTriggeredAbility(new DrawCardSourceControllerEffect(1)).setTriggersOnceEachTurn(true));
+        this.addAbility(new OneOrMoreCountersAddedTriggeredAbility(new DrawCardSourceControllerEffect(1)).setTriggersLimitEachTurn(1));
     }
 
     private DuskLegionDuelist(final DuskLegionDuelist card) {

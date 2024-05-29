@@ -39,7 +39,7 @@ public final class VadmirNewBlood extends CardImpl {
         // Whenever you commit a crime, put a +1/+1 counter on Vadmir, New Blood. This ability triggers only once each turn.
         this.addAbility(new CommittedCrimeTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
 
         // As long as Vadmir has four or more +1/+1 counters on it, it has menace and lifelink.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(

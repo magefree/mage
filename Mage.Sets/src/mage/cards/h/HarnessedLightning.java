@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -17,8 +16,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HarnessedLightning extends CardImpl {
@@ -44,7 +44,7 @@ public final class HarnessedLightning extends CardImpl {
 class HarnessedLightningEffect extends OneShotEffect {
 
     HarnessedLightningEffect() {
-        super(Outcome.UnboostCreature);
+        super(Outcome.Damage);
         this.staticText = "Choose target creature. You get {E}{E}{E}, then you may pay any amount of {E}. {this} deals that much damage to that creature";
     }
 

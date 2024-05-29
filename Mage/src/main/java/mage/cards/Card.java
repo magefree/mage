@@ -148,13 +148,6 @@ public interface Card extends MageObject, Ownerable {
 
     List<Mana> getMana();
 
-    /**
-     * Set contains multiple cards with same card name but different images. Used for image path generation.
-     */
-    boolean getUsesVariousArt();
-
-    void setUsesVariousArt(boolean usesVariousArt);
-
     Counters getCounters(Game game);
 
     Counters getCounters(GameState state);

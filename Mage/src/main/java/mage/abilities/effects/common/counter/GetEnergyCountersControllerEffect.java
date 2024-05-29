@@ -49,17 +49,24 @@ public class GetEnergyCountersControllerEffect extends OneShotEffect {
 
         StringBuilder sb = new StringBuilder();
         sb.append("you get ");
-        int val = 1;
+        int val;
         if (value instanceof StaticValue) {
             val = ((StaticValue) value).getValue();
+        } else {
+            val = 1;
         }
-        for (int i = 0; i < val; i++) {
-            sb.append("{E}");
+        if (val < 6) {
+            for (int i = 0; i < val; i++) {
+                sb.append("{E}");
+            }
+        } else {
+            sb.append(CardUtil.numberToText(val));
+            sb.append(" {E}");
         }
         sb.append(" <i>(");
-        sb.append(CardUtil.getSimpleCountersText(val, "an",  "energy"));
+        sb.append(CardUtil.getSimpleCountersText(val, "an", "energy"));
         sb.append(")</i>");
-        if ((value instanceof StaticValue)) {
+        if (value instanceof StaticValue) {
             sb.append('.');
         } else {
             sb.append(" for each ");

@@ -90,7 +90,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Desolate Mire", 287, Rarity.RARE, mage.cards.d.DesolateMire.class));
         cards.add(new SetCardInfo("Dig Through Time", 95, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Diluvian Primordial", 96, Rarity.RARE, mage.cards.d.DiluvianPrimordial.class));
-        cards.add(new SetCardInfo("Dimir Aqueduct", 288, Rarity.COMMON, mage.cards.d.DimirAqueduct.class));
+        cards.add(new SetCardInfo("Dimir Aqueduct", 288, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 162, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 132, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
         cards.add(new SetCardInfo("Discreet Retreat", 20, Rarity.RARE, mage.cards.d.DiscreetRetreat.class));

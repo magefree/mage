@@ -155,9 +155,15 @@ public final class CardImageUtils {
             return "ERROR: empty image file name, object type - " + card.getMageObjectType();
         }
 
-        if (card.getMageObjectType().isUseTokensRepository()
-                || card.getExpansionSetCode().equals(TokenRepository.XMAGE_TOKENS_SET_CODE)) {
-            // token images or inner cards like face down
+        boolean isTokenRepository = card.getMageObjectType().isUseTokensRepository()
+                || card.getExpansionSetCode().equals(TokenRepository.XMAGE_TOKENS_SET_CODE);
+        // if token from a card then must use card repository instead
+        if (isTokenRepository && !card.getCardNumber().isEmpty()) {
+            isTokenRepository = false;
+        }
+
+        if (isTokenRepository) {
+            // images from tokens repository (token + xmage token)
             CardDownloadData cardData = new CardDownloadData(
                     imageFileName.replace(" Token", ""),
                     card.getExpansionSetCode(),
@@ -167,18 +173,7 @@ public final class CardImageUtils {
             cardData.setToken(true);
             imageFile = CardImageUtils.buildImagePathToCardOrToken(cardData);
         } else {
-            // card images
-            // workaround to find various art settings first
-            // TODO: no needs in workaround?! ?!
-            boolean usesVariousArt = false;
-            CardInfo cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber(
-                    card.getName(),
-                    card.getExpansionSetCode(),
-                    card.getCardNumber()
-            );
-            if (cardInfo != null) {
-                usesVariousArt = cardInfo.usesVariousArt();
-            }
+            // images from cards repository (card + token from cards)
             CardDownloadData cardData = new CardDownloadData(
                     imageFileName,
                     card.getExpansionSetCode(),

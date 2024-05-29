@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -20,7 +20,6 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class TransmogrifyingWand extends CardImpl {
@@ -40,7 +39,7 @@ public final class TransmogrifyingWand extends CardImpl {
                 new DestroyTargetEffect(),
                 new GenericManaCost(1)
         );
-        ability.addEffect(new CreateTokenControllerTargetPermanentEffect(new OxToken()));
+        ability.addEffect(new CreateTokenControllerTargetEffect(new OxToken()));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());

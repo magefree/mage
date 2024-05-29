@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class GallowsAtWillowHill extends CardImpl {
 
         // {3}, {tap}, Tap three untapped Humans you control: Destroy target creature. Its controller creates a 1/1 white Spirit creature token with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(3));
-        ability.addEffect(new CreateTokenControllerTargetPermanentEffect(new SpiritWhiteToken()));
+        ability.addEffect(new CreateTokenControllerTargetEffect(new SpiritWhiteToken()));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(3, 3, humanFilter, false)));
         ability.addTarget(new TargetCreaturePermanent());

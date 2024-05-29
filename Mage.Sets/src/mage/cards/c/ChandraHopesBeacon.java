@@ -41,7 +41,7 @@ public class ChandraHopesBeacon extends CardImpl {
                 new CopyTargetStackObjectEffect(true).withText("it"),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false, SetTargetPointer.SPELL
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
 
         //+2: Add two mana in any combination of colors.
         this.addAbility(new LoyaltyAbility(new AddManaInAnyCombinationEffect(2), 2));

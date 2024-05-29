@@ -42,7 +42,7 @@ public final class WellRested extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false, false);
         gainedAbility.addEffect(new GainLifeEffect(2).concatBy(", then"));
         gainedAbility.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
-        gainedAbility.setTriggersOnceEachTurn(true);
+        gainedAbility.setTriggersLimitEachTurn(1);
 
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)
                 .setText("Enchanted creature has \"Whenever this creature becomes untapped, " +

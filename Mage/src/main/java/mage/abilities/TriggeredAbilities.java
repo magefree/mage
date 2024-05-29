@@ -240,11 +240,11 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
                     }
                 }
 
-                if (ability.checkTrigger(event, game) && ability.checkTriggeredAlready(game) && !ability.checkUsedAlready(game)) {
+                if (ability.checkTrigger(event, game) && ability.checkTriggeredLimit(game) && !ability.checkUsedAlready(game)) {
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);
                     // event == null - state based triggers like StateTriggeredAbility, must be ignored for number event
                     if (event == null || !game.replaceEvent(numberOfTriggersEvent, ability)) {
-                        int numTriggers = ability.getTriggersOnceEachTurn() ? 1 : numberOfTriggersEvent.getAmount();
+                        int numTriggers = Integer.min(ability.getRemainingTriggersLimitEachTurn(game), numberOfTriggersEvent.getAmount());
                         for (int i = 0; i < numTriggers; i++) {
                             if (this.enableIntegrityLogs) {
                                 logger.info("trigger will be USED: " + ability);
