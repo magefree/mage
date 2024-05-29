@@ -112,7 +112,7 @@ enum SpymastersVaultCount implements DynamicValue {
     }
 }
 
-class CreaturesDiedThisTurnWatcher extends Watcher {
+class SpymastersVaultWatcher extends Watcher {
 
     public int getCreaturesDiedThisTurn() {
         return creaturesDiedThisTurn;
@@ -120,7 +120,7 @@ class CreaturesDiedThisTurnWatcher extends Watcher {
 
     private int creaturesDiedThisTurn = 0;
 
-    public CreaturesDiedThisTurnWatcher() {
+    public SpymastersVaultWatcher() {
         super(WatcherScope.GAME);
     }
 
