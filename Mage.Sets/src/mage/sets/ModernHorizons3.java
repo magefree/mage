@@ -24,6 +24,8 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani, Nacatl Avenger", 237, Rarity.MYTHIC, mage.cards.a.AjaniNacatlAvenger.class));
         cards.add(new SetCardInfo("Ajani, Nacatl Pariah", 237, Rarity.MYTHIC, mage.cards.a.AjaniNacatlPariah.class));
         cards.add(new SetCardInfo("Amphibian Downpour", 51, Rarity.RARE, mage.cards.a.AmphibianDownpour.class));
+        cards.add(new SetCardInfo("Angel of the Ruins", 262, Rarity.UNCOMMON, mage.cards.a.AngelOfTheRuins.class));
+        cards.add(new SetCardInfo("Annoyed Altisaur", 284, Rarity.UNCOMMON, mage.cards.a.AnnoyedAltisaur.class));
         cards.add(new SetCardInfo("Argent Dais", 20, Rarity.RARE, mage.cards.a.ArgentDais.class));
         cards.add(new SetCardInfo("Barbarian Ring", 299, Rarity.UNCOMMON, mage.cards.b.BarbarianRing.class));
         cards.add(new SetCardInfo("Basking Broodscale", 145, Rarity.COMMON, mage.cards.b.BaskingBroodscale.class));
@@ -33,6 +35,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Boggart Trawler", 243, Rarity.UNCOMMON, mage.cards.b.BoggartTrawler.class));
         cards.add(new SetCardInfo("Bountiful Landscape", 217, Rarity.COMMON, mage.cards.b.BountifulLandscape.class));
         cards.add(new SetCardInfo("Brainsurge", 53, Rarity.UNCOMMON, mage.cards.b.Brainsurge.class));
+        cards.add(new SetCardInfo("Branching Evolution", 285, Rarity.RARE, mage.cards.b.BranchingEvolution.class));
         cards.add(new SetCardInfo("Breaker of Creation", 1, Rarity.UNCOMMON, mage.cards.b.BreakerOfCreation.class));
         cards.add(new SetCardInfo("Breya, Etherium Shaper", 289, Rarity.MYTHIC, mage.cards.b.BreyaEtheriumShaper.class));
         cards.add(new SetCardInfo("Bridgeworks Battle", 249, Rarity.UNCOMMON, mage.cards.b.BridgeworksBattle.class));
