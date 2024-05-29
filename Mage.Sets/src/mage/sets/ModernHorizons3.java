@@ -26,6 +26,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Amphibian Downpour", 51, Rarity.RARE, mage.cards.a.AmphibianDownpour.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 262, Rarity.UNCOMMON, mage.cards.a.AngelOfTheRuins.class));
         cards.add(new SetCardInfo("Annoyed Altisaur", 284, Rarity.UNCOMMON, mage.cards.a.AnnoyedAltisaur.class));
+        cards.add(new SetCardInfo("Arcbound Condor", 81, Rarity.UNCOMMON, mage.cards.a.ArcboundCondor.class));
         cards.add(new SetCardInfo("Argent Dais", 20, Rarity.RARE, mage.cards.a.ArgentDais.class));
         cards.add(new SetCardInfo("Barbarian Ring", 299, Rarity.UNCOMMON, mage.cards.b.BarbarianRing.class));
         cards.add(new SetCardInfo("Basking Broodscale", 145, Rarity.COMMON, mage.cards.b.BaskingBroodscale.class));
