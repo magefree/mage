@@ -126,9 +126,6 @@ public class SerraParagonTest extends CardTestPlayerBase {
         Assert.assertEquals(message, expected, player.getCountersCount(CounterType.ENERGY));
     }
 
-    /**
-     * bug: short lived lki was not right for Aetherworks Marvel's trigger.
-     */
     @Test
     public void testAetherworksMarvel() {
         setStrictChooseMode(true);
