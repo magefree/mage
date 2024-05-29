@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author TheElk801
+ * @author TheElk801, Susucr
  */
 public class SerraParagonTest extends CardTestPlayerBase {
 
@@ -92,5 +92,29 @@ public class SerraParagonTest extends CardTestPlayerBase {
                 Assert.fail("Should have had error about not being able to cast spell, but got:\n" + e.getMessage());
             }
         }
+    }
+
+    /**
+     * bug: Chromatic Star was not triggering the gained trigger.
+     */
+    @Test
+    public void testChromaticStar() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, paragon);
+        addCard(Zone.GRAVEYARD, playerA, "Chromatic Star");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chromatic Star", true);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}, Sacrifice");
+        setChoice(playerA, "Red"); // mana added with Star
+        setChoice(playerA, "When this permanent is put into a graveyard from the battlefield, exile it and you gain 2 life."); // stack triggers
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, 1);
+        assertLife(playerA, 20 + 2);
     }
 }
