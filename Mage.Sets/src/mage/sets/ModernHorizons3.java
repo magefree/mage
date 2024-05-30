@@ -164,6 +164,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Ruby Medallion", 295, Rarity.RARE, mage.cards.r.RubyMedallion.class));
         cards.add(new SetCardInfo("Rush of Inspiration", 257, Rarity.UNCOMMON, mage.cards.r.RushOfInspiration.class));
         cards.add(new SetCardInfo("Sapphire Medallion", 296, Rarity.RARE, mage.cards.s.SapphireMedallion.class));
+        cards.add(new SetCardInfo("Sarpadian Simulacrum", 135, Rarity.COMMON, mage.cards.s.SarpadianSimulacrum.class));
         cards.add(new SetCardInfo("Scurrilous Sentry", 108, Rarity.COMMON, mage.cards.s.ScurrilousSentry.class));
         cards.add(new SetCardInfo("Scurry of Gremlins", 203, Rarity.UNCOMMON, mage.cards.s.ScurryOfGremlins.class));
         cards.add(new SetCardInfo("Seething Landscape", 225, Rarity.COMMON, mage.cards.s.SeethingLandscape.class));
