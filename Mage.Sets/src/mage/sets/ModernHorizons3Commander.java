@@ -32,6 +32,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Apex Devastator", 220, Rarity.MYTHIC, mage.cards.a.ApexDevastator.class));
         cards.add(new SetCardInfo("Arcane Signet", 283, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archon of Cruelty", 197, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
+        cards.add(new SetCardInfo("Aurora Shifter", 45, Rarity.RARE, mage.cards.a.AuroraShifter.class));
         cards.add(new SetCardInfo("Austere Command", 167, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Azlask, the Swelling Scourge", 5, Rarity.MYTHIC, mage.cards.a.AzlaskTheSwellingScourge.class));
         cards.add(new SetCardInfo("Azorius Chancery", 319, Rarity.COMMON, mage.cards.a.AzoriusChancery.class));
