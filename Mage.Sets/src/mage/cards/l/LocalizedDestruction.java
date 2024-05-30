@@ -81,8 +81,6 @@ class LocalizedDestructionEffect extends OneShotEffect {
         if (totalEnergy == 0) {
             return false;
         }
-        int numberToPay = controller.getAmount(1, totalEnergy,
-                "Pay one or more {E}", game);
 
         Cost cost = new PayEnergyCost(numberToPay);
         if (!controller.chooseUse(this.getOutcome(),
@@ -90,6 +88,10 @@ class LocalizedDestructionEffect extends OneShotEffect {
                 source, game)) {
             return false;
         }
+
+        int numberToPay = controller.getAmount(1, totalEnergy,
+        "Pay one or more {E}", game);
+        
         if (cost.pay(source, game, source, source.getControllerId(), true)) {
             FilterPermanent filter = new FilterPermanent();
             filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, numberToPay));
