@@ -40,18 +40,10 @@ public class ScryfallImageSourceSmall extends ScryfallImageSource {
     }
 
     private CardImageUrls innerModifyUrl(CardImageUrls cardUrls) {
-        List<String> downloadUrls = cardUrls.getDownloadList();
-
-        if (downloadUrls.size() > 2) {   
-            return new CardImageUrls(innerModifyUrlString(downloadUrls.get(0)), innerModifyUrlString(downloadUrls.get(1)), innerModifyUrlString(downloadUrls.get(2)));
-        } 
-        if (downloadUrls.size() > 1) {
-            return new CardImageUrls(innerModifyUrlString(downloadUrls.get(0)), innerModifyUrlString(downloadUrls.get(1)));
-        } 
-        if (downloadUrls.size() == 1) {
-            return new CardImageUrls(innerModifyUrlString(downloadUrls.get(0)));
-        } 
-        return cardUrls;
+        List<String> downloadUrls = cardUrls.getDownloadList().stream() 
+            .map(innerModifyUrlString)
+            .collect(Collectors.toList());
+        return new CardImageUrls(downloadUrls);
     }
 
     @Override
