@@ -21,12 +21,12 @@ public final class GiftOfTheViper extends CardImpl {
 
         // Put a +1/+1 counter, a reach counter, and a deathtouch counter on target creature. Untap it.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-                .setText("Put a +1/+1 counter").concatBy(","));
+                .setText("Put a +1/+1 counter"));
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.REACH.createInstance())
                 .setText("a reach counter").concatBy(","));
         this.getSpellAbility()
                 .addEffect(new AddCountersTargetEffect(CounterType.DEATHTOUCH.createInstance())
-                        .setText("deathtouch counter on target creature").concatBy(", and"));
+                        .setText("a deathtouch counter on target creature").concatBy(", and"));
         this.getSpellAbility().addEffect(new UntapTargetEffect("untap it"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
