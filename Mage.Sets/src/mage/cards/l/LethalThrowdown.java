@@ -41,8 +41,8 @@ public final class LethalThrowdown extends CardImpl {
                         new SacrificeTargetCost(filter).setText("sacrifice a modified creature")));
         // Destroy target creature or planeswalker. If the modified creature was sacrificed, draw a card.
         this.getSpellAbility().addEffect(new LethalThrowdownEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 
     private LethalThrowdown(final LethalThrowdown card) {
