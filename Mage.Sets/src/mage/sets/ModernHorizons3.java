@@ -114,6 +114,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Guide of Souls", 29, Rarity.RARE, mage.cards.g.GuideOfSouls.class));
         cards.add(new SetCardInfo("Harbinger of the Seas", 63, Rarity.RARE, mage.cards.h.HarbingerOfTheSeas.class));
         cards.add(new SetCardInfo("Hexgold Slith", 30, Rarity.COMMON, mage.cards.h.HexgoldSlith.class));
+        cards.add(new SetCardInfo("Hope-Ender Coatl", 64, Rarity.UNCOMMON, mage.cards.h.HopeEnderCoatl.class));
         cards.add(new SetCardInfo("Horrid Shadowspinner", 188, Rarity.UNCOMMON, mage.cards.h.HorridShadowspinner.class));
         cards.add(new SetCardInfo("Hydra Trainer", 159, Rarity.UNCOMMON, mage.cards.h.HydraTrainer.class));
         cards.add(new SetCardInfo("Idol of False Gods", 210, Rarity.UNCOMMON, mage.cards.i.IdolOfFalseGods.class));
