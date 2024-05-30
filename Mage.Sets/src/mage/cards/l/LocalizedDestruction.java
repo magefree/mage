@@ -58,7 +58,7 @@ class LocalizedDestructionEffect extends OneShotEffect {
 
     LocalizedDestructionEffect() {
         super(Outcome.AddAbility);
-        this.staticText = "then you may pay one or more {E}. If you do, each creature you control with power equal to the amount of paid this way gains indestructible until end of turn";
+        this.staticText = ", then you may pay one or more {E}. If you do, each creature you control with power equal to the amount of paid this way gains indestructible until end of turn";
     }
 
     private LocalizedDestructionEffect(final LocalizedDestructionEffect effect) {
@@ -76,7 +76,10 @@ class LocalizedDestructionEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-
+        if (!controller.chooseUse(this.getOutcome(),
+        "Pay 1 or more {E}? Each creature you control with power equal to the amount of paid this way gains indestructible until end of turn", source, game)) {
+            return false;
+        }
         int numberToPay = controller.getAmount(1, controller.getCountersCount(CounterType.ENERGY),
                 "Pay one or more {E}", game);
 
