@@ -95,6 +95,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Furnace Hellkite", 121, Rarity.UNCOMMON, mage.cards.f.FurnaceHellkite.class));
         cards.add(new SetCardInfo("Galvanic Discharge", 122, Rarity.COMMON, mage.cards.g.GalvanicDischarge.class));
         cards.add(new SetCardInfo("Ghostfire Slice", 123, Rarity.UNCOMMON, mage.cards.g.GhostfireSlice.class));
+        cards.add(new SetCardInfo("Gift of the Viper", 156, Rarity.COMMON, mage.cards.g.GiftOfTheViper.class));
         cards.add(new SetCardInfo("Glasswing Grace", 254, Rarity.UNCOMMON, mage.cards.g.GlasswingGrace.class));
         cards.add(new SetCardInfo("Gravedig", 96, Rarity.COMMON, mage.cards.g.Gravedig.class));
         cards.add(new SetCardInfo("Grim Servant", 97, Rarity.UNCOMMON, mage.cards.g.GrimServant.class));
