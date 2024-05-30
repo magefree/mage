@@ -78,6 +78,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Emperor of Bones", 90, Rarity.RARE, mage.cards.e.EmperorOfBones.class));
         cards.add(new SetCardInfo("Emrakul's Messenger", 61, Rarity.UNCOMMON, mage.cards.e.EmrakulsMessenger.class));
         cards.add(new SetCardInfo("Emrakul, the World Anew", 6, Rarity.MYTHIC, mage.cards.e.EmrakulTheWorldAnew.class));
+        cards.add(new SetCardInfo("Envoy of the Ancestors", 23, Rarity.UNCOMMON, mage.cards.e.EnvoyOfTheAncestors.class));
         cards.add(new SetCardInfo("Estrid's Invocation", 269, Rarity.RARE, mage.cards.e.EstridsInvocation.class));
         cards.add(new SetCardInfo("Eviscerator's Insight", 93, Rarity.COMMON, mage.cards.e.EvisceratorsInsight.class));
         cards.add(new SetCardInfo("Evolution Witness", 151, Rarity.COMMON, mage.cards.e.EvolutionWitness.class));
