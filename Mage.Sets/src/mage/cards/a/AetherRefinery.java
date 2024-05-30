@@ -92,7 +92,7 @@ class AetherRefineryTokenEffect extends OneShotEffect {
 
     AetherRefineryTokenEffect() {
         super(Outcome.Benefit);
-        this.staticText = "You get {E}, then you may pay one or more {E}. If you do, create an X/X black Aetherborn creature token, where X is the amount of {E} paid this way";
+        this.staticText = "then you may pay one or more {E}. If you do, create an X/X black Aetherborn creature token, where X is the amount of {E} paid this way";
     }
 
     private AetherRefineryTokenEffect(final AetherRefineryTokenEffect effect) {
@@ -108,6 +108,11 @@ class AetherRefineryTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+
+            if (!controller.chooseUse(this.getOutcome(),
+                    "Pay 1 or more {E} to create X/X black Aetherborn creature token", source, game)) {
+                return false;
+            }
             int numberToPay = controller.getAmount(1, controller.getCountersCount(CounterType.ENERGY),
                     "Pay one or more {E}", game);
 
