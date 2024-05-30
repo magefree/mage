@@ -36,9 +36,9 @@ public final class InfernalCaptor extends CardImpl {
 
         // When Infernal Captor exploits a creature, gain control of target artifact or creature until end of turn. Untap that permanent. It gains haste until end of turn.
         Ability ability = new ExploitCreatureTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn));
-        ability.addEffect(new UntapTargetEffect().setText("Untap it"));
+        ability.addEffect(new UntapTargetEffect().setText("Untap that permanent"));
         ability.addEffect(new GainAbilityTargetEffect(
-                HasteAbility.getInstance(), Duration.EndOfTurn));
+                HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
     }
