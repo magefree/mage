@@ -38,7 +38,7 @@ public final class GlyphElemental extends CardImpl {
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // Enchanted creature gets +1/+1 for each +1/+1 counter on Glyph Elemental.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(xValue, xValue)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(xValue, xValue)));
     }
 
     private GlyphElemental(final GlyphElemental card) {
