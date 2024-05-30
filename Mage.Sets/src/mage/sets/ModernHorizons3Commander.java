@@ -35,6 +35,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Austere Command", 167, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Azlask, the Swelling Scourge", 5, Rarity.MYTHIC, mage.cards.a.AzlaskTheSwellingScourge.class));
         cards.add(new SetCardInfo("Azorius Chancery", 319, Rarity.COMMON, mage.cards.a.AzoriusChancery.class));
+        cards.add(new SetCardInfo("Barrowgoyf", 50, Rarity.RARE, mage.cards.b.Barrowgoyf.class));
         cards.add(new SetCardInfo("Battlefield Forge", 321, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Bident of Thassa", 177, Rarity.RARE, mage.cards.b.BidentOfThassa.class));
         cards.add(new SetCardInfo("Bloodbraid Challenger", 70, Rarity.RARE, mage.cards.b.BloodbraidChallenger.class));

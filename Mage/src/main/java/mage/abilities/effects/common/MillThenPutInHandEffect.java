@@ -2,6 +2,8 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -24,7 +26,7 @@ import java.util.stream.Collectors;
  */
 public class MillThenPutInHandEffect extends OneShotEffect {
 
-    private final int amount;
+    private final DynamicValue amount;
     private final boolean optional;
     private final int maxAmountReturned; // maximum number of cards returned. e.g. 2 for "up to two"
     private final FilterCard filter;
@@ -63,6 +65,22 @@ public class MillThenPutInHandEffect extends OneShotEffect {
     }
 
     public MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect, boolean optional, int maxReturnedCard) {
+        this(StaticValue.get(amount), filter, otherwiseEffect, optional, maxReturnedCard);
+    }
+
+    public MillThenPutInHandEffect(DynamicValue amount, FilterCard filter) {
+        this(amount, filter, true);
+    }
+
+    public MillThenPutInHandEffect(DynamicValue amount, FilterCard filter, boolean optional) {
+        this(amount, filter, null, optional);
+    }
+
+    public MillThenPutInHandEffect(DynamicValue amount, FilterCard filter, Effect otherwiseEffect, boolean optional) {
+        this(amount, filter, otherwiseEffect, optional, 1);
+    }
+
+    public MillThenPutInHandEffect(DynamicValue amount, FilterCard filter, Effect otherwiseEffect, boolean optional, int maxReturnedCard) {
         super(Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
@@ -92,7 +110,8 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = player.millCards(amount, source, game);
+        int toMill = amount.calculate(game, source, this);
+        Cards cards = player.millCards(toMill, source, game);
         if (cards.isEmpty()) {
             return applyOtherwiseEffect(game, source);
         }
@@ -132,12 +151,9 @@ public class MillThenPutInHandEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder("mill ");
-        if (amount == 1) {
-            sb.append("a card. ");
-        } else {
-            sb.append(CardUtil.numberToText(amount));
-            sb.append(" cards. ");
-        }
+        String value = amount.toString();
+        sb.append(CardUtil.numberToText(value, "a"));
+        sb.append(value.equals("1") ? " card" : " cards");
         if (optional) {
             sb.append("You may put ");
         } else {
