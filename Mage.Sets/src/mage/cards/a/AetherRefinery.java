@@ -108,12 +108,17 @@ class AetherRefineryTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            int totalEnergy = controller.getCountersCount(CounterType.ENERGY);
+
+            if (totalEnergy == 0) {
+                return false;
+            }
 
             if (!controller.chooseUse(this.getOutcome(),
                     "Pay 1 or more {E} to create X/X black Aetherborn creature token", source, game)) {
-                return false;
+                return true;
             }
-            int numberToPay = controller.getAmount(1, controller.getCountersCount(CounterType.ENERGY),
+            int numberToPay = controller.getAmount(1, totalEnergy,
                     "Pay one or more {E}", game);
 
             Cost cost = new PayEnergyCost(numberToPay);
