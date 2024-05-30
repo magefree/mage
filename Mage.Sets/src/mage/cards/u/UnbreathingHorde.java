@@ -36,6 +36,7 @@ public final class UnbreathingHorde extends CardImpl {
         // If Unbreathing Horde would be dealt damage, prevent that damage and remove a +1/+1 counter from it.
         this.addAbility(new SimpleStaticAbility(
                 new PreventDamageAndRemoveCountersEffect(false, false, true)
+                        .setText("If {this} would be dealt damage, prevent that damage and remove a +1/+1 counter from it.")
         ), PreventDamageAndRemoveCountersEffect.createWatcher());
     }
 

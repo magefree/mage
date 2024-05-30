@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ public final class DeeprootHistorian extends CardImpl {
 
         // Merfolk and Druid cards in your graveyard have retrace.
         this.addAbility(new SimpleStaticAbility(
-                new GainRetraceYourGraveyardEffect(StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY)
+                new GainRetraceYourGraveyardEffect(filter)
         ));
     }
 

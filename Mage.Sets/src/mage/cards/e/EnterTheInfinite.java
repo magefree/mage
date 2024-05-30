@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import mage.abilities.Ability;
@@ -30,7 +29,8 @@ public final class EnterTheInfinite extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{8}{U}{U}{U}{U}");
 
         // Draw cards equal to the number of cards in your library,
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(CardsInControllerLibraryCount.instance));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(CardsInControllerLibraryCount.instance)
+                .setText("draw cards equal to the number of cards in your library"));
         //then put a card from your hand on top of your library.
         this.getSpellAbility().addEffect(new PutCardOnLibraryEffect());
         //You have no maximum hand size until your next turn.
@@ -51,7 +51,7 @@ class PutCardOnLibraryEffect extends OneShotEffect {
 
     PutCardOnLibraryEffect() {
         super(Outcome.DrawCard);
-        staticText = "Then put a card from your hand on top of your library";
+        staticText = ", then put a card from your hand on top of your library";
     }
 
     private PutCardOnLibraryEffect(final PutCardOnLibraryEffect effect) {
