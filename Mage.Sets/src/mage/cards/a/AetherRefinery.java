@@ -10,7 +10,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DoubleCountersSourceEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -21,7 +20,7 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.CorpseweftZombieToken;
+import mage.game.permanent.token.AetherbornToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -114,8 +113,7 @@ class AetherRefineryTokenEffect extends OneShotEffect {
 
             Cost cost = new PayEnergyCost(numberToPay);
             if (cost.pay(source, game, source, source.getControllerId(), true)) {
-                // TODO Update this to create the correct token
-                new CreateTokenEffect(new CorpseweftZombieToken(numberToPay, numberToPay)).apply(game, source);
+                new CreateTokenEffect(new AetherbornToken(numberToPay, numberToPay)).apply(game, source);
             }
             return true;
         }
