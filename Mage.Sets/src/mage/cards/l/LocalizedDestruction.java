@@ -82,7 +82,6 @@ class LocalizedDestructionEffect extends OneShotEffect {
             return false;
         }
 
-        Cost cost = new PayEnergyCost(numberToPay);
         if (!controller.chooseUse(this.getOutcome(),
                 "Pay 1 or more {E}? Each creature you control with power equal to the amount of paid this way gains indestructible until end of turn",
                 source, game)) {
@@ -91,6 +90,8 @@ class LocalizedDestructionEffect extends OneShotEffect {
 
         int numberToPay = controller.getAmount(1, totalEnergy,
         "Pay one or more {E}", game);
+        
+        Cost cost = new PayEnergyCost(numberToPay);
         
         if (cost.pay(source, game, source, source.getControllerId(), true)) {
             FilterPermanent filter = new FilterPermanent();
