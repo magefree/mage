@@ -17,7 +17,7 @@ public final class UnfathomableTruths extends CardImpl {
 
     public UnfathomableTruths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{U}");
-        
+
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
