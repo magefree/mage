@@ -128,6 +128,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Meteoric Mace", 283, Rarity.UNCOMMON, mage.cards.m.MeteoricMace.class));
         cards.add(new SetCardInfo("Mindless Conscription", 101, Rarity.UNCOMMON, mage.cards.m.MindlessConscription.class));
         cards.add(new SetCardInfo("Mogg Mob", 127, Rarity.UNCOMMON, mage.cards.m.MoggMob.class));
+        cards.add(new SetCardInfo("Monstrous Vortex", 162, Rarity.UNCOMMON, mage.cards.m.MonstrousVortex.class));
         cards.add(new SetCardInfo("Mountain", 307, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Nadier's Nightblade", 275, Rarity.COMMON, mage.cards.n.NadiersNightblade.class));
         cards.add(new SetCardInfo("Nadu, Winged Wisdom", 193, Rarity.RARE, mage.cards.n.NaduWingedWisdom.class));
