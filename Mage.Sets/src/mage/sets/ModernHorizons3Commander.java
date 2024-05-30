@@ -21,6 +21,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
 
         cards.add(new SetCardInfo("Adarkar Wastes", 316, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aether Hub", 317, Rarity.UNCOMMON, mage.cards.a.AetherHub.class));
+        cards.add(new SetCardInfo("Aether Refinery", 54, Rarity.RARE, mage.cards.a.AetherRefinery.class));
         cards.add(new SetCardInfo("Aethergeode Miner", 193, Rarity.RARE, mage.cards.a.AethergeodeMiner.class));
         cards.add(new SetCardInfo("Aethersphere Harvester", 280, Rarity.RARE, mage.cards.a.AethersphereHarvester.class));
         cards.add(new SetCardInfo("Aethersquall Ancient", 174, Rarity.RARE, mage.cards.a.AethersquallAncient.class));
