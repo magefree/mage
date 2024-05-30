@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -25,12 +26,11 @@ public final class HorrificAssault extends CardImpl {
     private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent(
             "creature or planeswalker you don't control");
 
-    private static final FilterPermanent eldraziFilter = new FilterPermanent("you control an Eldrazi");
+    private static final FilterPermanent eldraziFilter = new FilterControlledPermanent(SubType.ELDRAZI,
+            "you control an Eldrazi");
 
     static {
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
-        eldraziFilter.add(TargetController.YOU.getControllerPredicate());
-        eldraziFilter.add(SubType.ELDRAZI.getPredicate());
     }
 
     public HorrificAssault(UUID ownerId, CardSetInfo setInfo) {
