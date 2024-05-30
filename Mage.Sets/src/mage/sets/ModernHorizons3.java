@@ -164,6 +164,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Petrifying Meddler", 66, Rarity.COMMON, mage.cards.p.PetrifyingMeddler.class));
         cards.add(new SetCardInfo("Phelia, Exuberant Shepherd", 40, Rarity.RARE, mage.cards.p.PheliaExuberantShepherd.class));
         cards.add(new SetCardInfo("Phlage, Titan of Fire's Fury", 197, Rarity.MYTHIC, mage.cards.p.PhlageTitanOfFiresFury.class));
+        cards.add(new SetCardInfo("Phyrexian Ironworks", 130, Rarity.UNCOMMON, mage.cards.p.PhyrexianIronworks.class));
         cards.add(new SetCardInfo("Phyrexian Tower", 303, Rarity.MYTHIC, mage.cards.p.PhyrexianTower.class));
         cards.add(new SetCardInfo("Plains", 304, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Polluted Delta", 224, Rarity.RARE, mage.cards.p.PollutedDelta.class));
