@@ -9,6 +9,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 import java.util.UUID;
@@ -21,6 +22,7 @@ public final class MetastaticEvangel extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("another nontoken creature");
 
     static {
+        filter.add(AnotherPredicate.instance);
         filter.add(TokenPredicate.FALSE);
     }
 

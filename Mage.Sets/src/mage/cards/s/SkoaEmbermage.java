@@ -32,7 +32,7 @@ public final class SkoaEmbermage extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Skoa, Embermage enters the battlefield, deals 4 damage to any target.
+        // When Skoa, Embermage enters the battlefield, it deals 4 damage to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4, "it"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
