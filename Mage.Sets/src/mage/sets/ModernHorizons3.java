@@ -123,6 +123,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Horrific Assault", 157, Rarity.COMMON, mage.cards.h.HorrificAssault.class));
         cards.add(new SetCardInfo("Hydra Trainer", 159, Rarity.UNCOMMON, mage.cards.h.HydraTrainer.class));
         cards.add(new SetCardInfo("Idol of False Gods", 210, Rarity.UNCOMMON, mage.cards.i.IdolOfFalseGods.class));
+        cards.add(new SetCardInfo("Imskir Iron-Eater", 189, Rarity.RARE, mage.cards.i.ImskirIronEater.class));
         cards.add(new SetCardInfo("Indebted Spirit", 31, Rarity.UNCOMMON, mage.cards.i.IndebtedSpirit.class));
         cards.add(new SetCardInfo("Infernal Captor", 125, Rarity.COMMON, mage.cards.i.InfernalCaptor.class));
         cards.add(new SetCardInfo("Inspired Inventor", 32, Rarity.COMMON, mage.cards.i.InspiredInventor.class));
