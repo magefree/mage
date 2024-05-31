@@ -54,6 +54,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Consuming Corruption", 84, Rarity.UNCOMMON, mage.cards.c.ConsumingCorruption.class));
         cards.add(new SetCardInfo("Contaminated Landscape", 218, Rarity.COMMON, mage.cards.c.ContaminatedLandscape.class));
         cards.add(new SetCardInfo("Copycrook", 55, Rarity.UNCOMMON, mage.cards.c.Copycrook.class));
+        cards.add(new SetCardInfo("Corrupted Shapeshifter", 56, Rarity.COMMON, mage.cards.c.CorruptedShapeshifter.class));
         cards.add(new SetCardInfo("Crabomination", 85, Rarity.RARE, mage.cards.c.Crabomination.class));
         cards.add(new SetCardInfo("Cranial Ram", 180, Rarity.COMMON, mage.cards.c.CranialRam.class));
         cards.add(new SetCardInfo("Cursed Mirror", 279, Rarity.RARE, mage.cards.c.CursedMirror.class));
