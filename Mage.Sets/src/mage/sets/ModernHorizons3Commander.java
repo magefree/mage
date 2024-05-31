@@ -56,6 +56,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodbraid Elf", 256, Rarity.UNCOMMON, mage.cards.b.BloodbraidElf.class));
         cards.add(new SetCardInfo("Bonders' Enclave", 323, Rarity.RARE, mage.cards.b.BondersEnclave.class));
         cards.add(new SetCardInfo("Brawn", 224, Rarity.UNCOMMON, mage.cards.b.Brawn.class));
+        cards.add(new SetCardInfo("Broodmate Tyrant", 71, Rarity.RARE, mage.cards.b.BroodmateTyrant.class));
         cards.add(new SetCardInfo("Brudiclad, Telchor Engineer", 257, Rarity.MYTHIC, mage.cards.b.BrudicladTelchorEngineer.class));
         cards.add(new SetCardInfo("Brushland", 324, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Burnished Hart", 284, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
