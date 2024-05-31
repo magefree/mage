@@ -215,6 +215,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Skoa, Embermage", 138, Rarity.COMMON, mage.cards.s.SkoaEmbermage.class));
         cards.add(new SetCardInfo("Smelted Chargebug", 139, Rarity.COMMON, mage.cards.s.SmeltedChargebug.class));
         cards.add(new SetCardInfo("Snapping Voidcraw", 204, Rarity.COMMON, mage.cards.s.SnappingVoidcraw.class));
+        cards.add(new SetCardInfo("Sneaky Snacker", 205, Rarity.COMMON, mage.cards.s.SneakySnacker.class));
         cards.add(new SetCardInfo("Snow-Covered Wastes", 229, Rarity.UNCOMMON, mage.cards.s.SnowCoveredWastes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Solar Transformer", 211, Rarity.UNCOMMON, mage.cards.s.SolarTransformer.class));
         cards.add(new SetCardInfo("Solstice Zealot", 43, Rarity.COMMON, mage.cards.s.SolsticeZealot.class));
