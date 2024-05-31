@@ -6,11 +6,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.common.LandfallAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DoubleCountersTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -74,7 +71,6 @@ class FangsOfKaloniaEffect extends OneShotEffect {
             Permanent postP1P1Creature = game.getPermanent(target);
             if (postP1P1Creature != null) {
                 int postP1P1Count = postP1P1Creature.getCounters(game).getCount(CounterType.P1P1);
-
                 if (postP1P1Count > preP1P1Count) {
 
                     int doubled = (postP1P1Count - preP1P1Count);
@@ -127,7 +123,6 @@ class FangsOfKaloniaOverloadEffect extends OneShotEffect {
                 int postP1P1Count = creature.getCounters(game).getCount(CounterType.P1P1);
                 if (postP1P1Count > preP1P1Count) {
                     int doubled = (postP1P1Count - preP1P1Count);
-                    game.informPlayers("adding " + doubled + " +1/+1 counters to " + creature.getName());
                     creature.addCounters(CounterType.P1P1.createInstance(doubled), source.getControllerId(), source,
                             game);
                 }
