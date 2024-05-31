@@ -1,7 +1,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.s.SnappingVoidcraw;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 

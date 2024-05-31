@@ -7,13 +7,11 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -21,9 +19,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -87,8 +86,7 @@ class BirthingRitualEffect extends OneShotEffect {
         controller.lookAtCards(source, null, cards, game);
 
         // Then you may sacrifice a creature.
-        TargetPermanent sacrificeTarget = new TargetControlledCreaturePermanent(0, 1);
-        sacrificeTarget.withNotTarget(true);
+        TargetSacrifice sacrificeTarget = new TargetSacrifice(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE);
         controller.choose(Outcome.Sacrifice, sacrificeTarget, source, game);
         Permanent sacrificed = game.getPermanent(sacrificeTarget.getFirstTarget());
         if (sacrificed == null || !sacrificed.sacrifice(source, game)) {
@@ -96,12 +94,18 @@ class BirthingRitualEffect extends OneShotEffect {
         }
         int mv = 1 + sacrificed.getManaValue();
         // If you do, you may put a creature card with mana value X or less from among those cards onto the battlefield, where X is 1 plus the sacrificed creature's mana value.
-        FilterCard filter = new FilterCreatureCard("a creature card with mana value " + mv + " or less");
+        FilterCard filter = new FilterCreatureCard("creature card with mana value " + mv + " or less");
         filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, mv));
         TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, filter);
         target.withNotTarget(true);
-        controller.choose(Outcome.PutCreatureInPlay, target, source, game);
-        controller.moveCards(target.getTargets().stream().map(game::getCard).collect(Collectors.toSet()), Zone.BATTLEFIELD, source, game);
+        controller.choose(Outcome.PutCreatureInPlay, cards, target, source, game);
+        Set<Card> putIntoPlay = target
+                .getTargets()
+                .stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+        controller.moveCards(putIntoPlay, Zone.BATTLEFIELD, source, game);
         return endOfApply(cards, controller, game, source);
     }
 

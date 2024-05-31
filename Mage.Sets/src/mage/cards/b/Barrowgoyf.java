@@ -45,7 +45,8 @@ public final class Barrowgoyf extends CardImpl {
         // Whenever Barrowgoyf deals combat damage to a player, you may mill that many cards. If you do, you may put a creature card from among them into your hand.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new MillThenPutInHandEffect(SavedDamageValue.MANY, StaticFilters.FILTER_CARD_CREATURE)
-                        .setText("you may mill that many cards. If you do, you may put a creature card from among them into your hand")
+                        .setText("you may mill that many cards. If you do, you may put a creature card from among them into your hand"),
+                true
         ));
     }
 
