@@ -213,6 +213,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Ugin's Insight", 196, Rarity.RARE, mage.cards.u.UginsInsight.class));
         cards.add(new SetCardInfo("Ugin, the Ineffable", 160, Rarity.RARE, mage.cards.u.UginTheIneffable.class));
         cards.add(new SetCardInfo("Ulamog's Crusher", 161, Rarity.COMMON, mage.cards.u.UlamogsCrusher.class));
+        cards.add(new SetCardInfo("Ulamog's Dreadsire", 38, Rarity.RARE, mage.cards.u.UlamogsDreadsire.class));
         cards.add(new SetCardInfo("Ulamog's Nullifier", 275, Rarity.UNCOMMON, mage.cards.u.UlamogsNullifier.class));
         cards.add(new SetCardInfo("Ulvenwald Hydra", 250, Rarity.MYTHIC, mage.cards.u.UlvenwaldHydra.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 399, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
