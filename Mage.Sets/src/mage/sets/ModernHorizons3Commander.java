@@ -67,6 +67,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Jyoti, Moag Ancient", 8, Rarity.MYTHIC, mage.cards.j.JyotiMoagAncient.class));
         cards.add(new SetCardInfo("Legion Loyalty", 171, Rarity.MYTHIC, mage.cards.l.LegionLoyalty.class));
         cards.add(new SetCardInfo("Lightning Runner", 215, Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
+        cards.add(new SetCardInfo("Localized Destruction", 41, Rarity.RARE, mage.cards.l.LocalizedDestruction.class));
         cards.add(new SetCardInfo("March from Velis Vel", 48, Rarity.RARE, mage.cards.m.MarchFromVelisVel.class));
         cards.add(new SetCardInfo("Midnight Clock", 189, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Myr Battlesphere", 301, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
