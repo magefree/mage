@@ -1,4 +1,4 @@
-package mage.cards.m;
+package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -6,9 +6,11 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.CantBlockAttachedEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -25,14 +27,17 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author Susucr
  */
-public final class MishrasDomination extends CardImpl {
+public final class DogUmbra extends CardImpl {
 
-    public MishrasDomination(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+    public DogUmbra(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         this.subtype.add(SubType.AURA);
+
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -40,34 +45,36 @@ public final class MishrasDomination extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
 
-        // As long as you control enchanted creature, it gets +2/+2. Otherwise, it can't block.
-        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostEnchantedEffect(2, 2), MishrasDominationCondition.TRUE,
-                "as long as you control enchanted creature, it gets +2/+2"
+        // As long as another player controls enchanted creature, it can't attack or block. Otherwise, Dog Umbra has umbra armor.
+        Ability ability = new SimpleStaticAbility(new ConditionalRestrictionEffect(
+                new CantAttackBlockAttachedEffect(AttachmentType.AURA),
+                DogUmbraCondition.TRUE,
+                "As long as another player controls enchanted creature, it can't attack or block."
         ));
-        ability.addEffect(new ConditionalRestrictionEffect(
-                new CantBlockAttachedEffect(AttachmentType.AURA),
-                MishrasDominationCondition.FALSE, "otherwise, it can't block"
+        ability.addEffect(new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(new TotemArmorAbility()),
+                DogUmbraCondition.FALSE,
+                "Otherwise, Dog Umbra has umbra armor"
         ));
         this.addAbility(ability);
     }
 
-    private MishrasDomination(final MishrasDomination card) {
+    private DogUmbra(final DogUmbra card) {
         super(card);
     }
 
     @Override
-    public MishrasDomination copy() {
-        return new MishrasDomination(this);
+    public DogUmbra copy() {
+        return new DogUmbra(this);
     }
 }
 
-enum MishrasDominationCondition implements Condition {
+enum DogUmbraCondition implements Condition {
     TRUE(true),
     FALSE(false);
     private final boolean value;
 
-    MishrasDominationCondition(boolean value) {
+    DogUmbraCondition(boolean value) {
         this.value = value;
     }
 
@@ -80,6 +87,6 @@ enum MishrasDominationCondition implements Condition {
                 .map(Controllable::getControllerId)
                 .map(source::isControlledBy)
                 .orElse(false)
-                .equals(value);
+                .equals(!value);
     }
 }
