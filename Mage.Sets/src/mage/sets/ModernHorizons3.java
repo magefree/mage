@@ -221,6 +221,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Sowing Mycospawn", 170, Rarity.RARE, mage.cards.s.SowingMycospawn.class));
         cards.add(new SetCardInfo("Spawn-Gang Commander", 140, Rarity.UNCOMMON, mage.cards.s.SpawnGangCommander.class));
         cards.add(new SetCardInfo("Springheart Nantuko", 171, Rarity.RARE, mage.cards.s.SpringheartNantuko.class));
+        cards.add(new SetCardInfo("Spymaster's Vault", 230, Rarity.RARE, mage.cards.s.SpymastersVault.class));
         cards.add(new SetCardInfo("Static Prison", 44, Rarity.UNCOMMON, mage.cards.s.StaticPrison.class));
         cards.add(new SetCardInfo("Strength of the Harvest", 258, Rarity.UNCOMMON, mage.cards.s.StrengthOfTheHarvest.class));
         cards.add(new SetCardInfo("Strix Serenade", 71, Rarity.RARE, mage.cards.s.StrixSerenade.class));
