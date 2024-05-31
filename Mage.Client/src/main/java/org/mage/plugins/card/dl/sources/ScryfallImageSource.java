@@ -11,7 +11,6 @@ import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.FileNotFoundException;
-import java.io.ObjectStreamException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Proxy;
@@ -31,11 +30,7 @@ public class ScryfallImageSource implements CardImageSource {
     private final Map<CardLanguage, String> languageAliases;
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
     private final Map<CardDownloadData, String> preparedUrls = new HashMap<>();
-    private final int DOWNLOAD_TIMEOUT_MS = 100;
-
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
+    private static final int DOWNLOAD_TIMEOUT_MS = 100;
     
     public static ScryfallImageSource getInstance() {
         return instance;
@@ -153,11 +148,11 @@ public class ScryfallImageSource implements CardImageSource {
         String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
         if (apiUrl != null) {
             if (apiUrl.endsWith("*/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() -2) + "★/" ;
+                apiUrl = apiUrl.substring(0 , apiUrl.length() - 2) + "★/" ;
             } else if (apiUrl.endsWith("+/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() -2) + "†/" ;
+                apiUrl = apiUrl.substring(0 , apiUrl.length() - 2) + "†/" ;
             } else if (apiUrl.endsWith("Ph/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() -3) + "Φ/" ;
+                apiUrl = apiUrl.substring(0 , apiUrl.length() - 3) + "Φ/" ;
             }
             // BY DIRECT URL
             // direct links via hardcoded API path. Used for cards with non-ASCII collector numbers
