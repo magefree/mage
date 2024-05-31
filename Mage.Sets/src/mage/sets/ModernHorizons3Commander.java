@@ -66,6 +66,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Caves of Koilos", 328, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Cayth, Famed Mechanist", 6, Rarity.MYTHIC, mage.cards.c.CaythFamedMechanist.class));
         cards.add(new SetCardInfo("Chandra's Ignition", 209, Rarity.RARE, mage.cards.c.ChandrasIgnition.class));
+        cards.add(new SetCardInfo("Chittering Dispatcher", 63, Rarity.RARE, mage.cards.c.ChitteringDispatcher.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 285, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Cinder Glade", 329, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Cloudpost", 330, Rarity.COMMON, mage.cards.c.Cloudpost.class));
