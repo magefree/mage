@@ -62,6 +62,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Cyclops Superconductor", 182, Rarity.COMMON, mage.cards.c.CyclopsSuperconductor.class));
         cards.add(new SetCardInfo("Deceptive Landscape", 219, Rarity.COMMON, mage.cards.d.DeceptiveLandscape.class));
         cards.add(new SetCardInfo("Decree of Justice", 263, Rarity.UNCOMMON, mage.cards.d.DecreeOfJustice.class));
+        cards.add(new SetCardInfo("Deem Inferior", 57, Rarity.COMMON, mage.cards.d.DeemInferior.class));
         cards.add(new SetCardInfo("Deep Analysis", 268, Rarity.UNCOMMON, mage.cards.d.DeepAnalysis.class));
         cards.add(new SetCardInfo("Deserted Temple", 301, Rarity.RARE, mage.cards.d.DesertedTemple.class));
         cards.add(new SetCardInfo("Detective's Phoenix", 116, Rarity.RARE, mage.cards.d.DetectivesPhoenix.class));
