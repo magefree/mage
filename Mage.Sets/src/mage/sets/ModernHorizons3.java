@@ -251,6 +251,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Utter Insignificance", 78, Rarity.COMMON, mage.cards.u.UtterInsignificance.class));
         cards.add(new SetCardInfo("Victimize", 278, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Voltstorm Angel", 46, Rarity.UNCOMMON, mage.cards.v.VoltstormAngel.class));
+        cards.add(new SetCardInfo("Warped Tusker", 16, Rarity.COMMON, mage.cards.w.WarpedTusker.class));
         cards.add(new SetCardInfo("Warren Soultrader", 110, Rarity.RARE, mage.cards.w.WarrenSoultrader.class));
         cards.add(new SetCardInfo("Waterlogged Teachings", 261, Rarity.UNCOMMON, mage.cards.w.WaterloggedTeachings.class));
         cards.add(new SetCardInfo("White Orchid Phantom", 47, Rarity.RARE, mage.cards.w.WhiteOrchidPhantom.class));
