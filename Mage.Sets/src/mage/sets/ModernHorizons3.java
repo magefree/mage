@@ -74,6 +74,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Eladamri, Korvecdal", 149, Rarity.MYTHIC, mage.cards.e.EladamriKorvecdal.class));
         cards.add(new SetCardInfo("Eldrazi Linebreaker", 117, Rarity.RARE, mage.cards.e.EldraziLinebreaker.class));
         cards.add(new SetCardInfo("Eldrazi Ravager", 5, Rarity.UNCOMMON, mage.cards.e.EldraziRavager.class));
+        cards.add(new SetCardInfo("Eldrazi Repurposer", 150, Rarity.COMMON, mage.cards.e.EldraziRepurposer.class));
         cards.add(new SetCardInfo("Electrozoa", 60, Rarity.COMMON, mage.cards.e.Electrozoa.class));
         cards.add(new SetCardInfo("Emerald Medallion", 291, Rarity.RARE, mage.cards.e.EmeraldMedallion.class));
         cards.add(new SetCardInfo("Emissary of Soulfire", 183, Rarity.UNCOMMON, mage.cards.e.EmissaryOfSoulfire.class));
