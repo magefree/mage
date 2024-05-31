@@ -195,6 +195,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Impulse", 311, Rarity.UNCOMMON, mage.cards.t.TalismanOfImpulse.class));
         cards.add(new SetCardInfo("Talisman of Progress", 313, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Talisman of Resilience", 314, Rarity.UNCOMMON, mage.cards.t.TalismanOfResilience.class));
+        cards.add(new SetCardInfo("Talon Gates of Madara", 134, Rarity.RARE, mage.cards.t.TalonGatesOfMadara.class));
         cards.add(new SetCardInfo("Tatyova, Benthic Druid", 273, Rarity.UNCOMMON, mage.cards.t.TatyovaBenthicDruid.class));
         cards.add(new SetCardInfo("Tectonic Edge", 384, Rarity.UNCOMMON, mage.cards.t.TectonicEdge.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 386, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
