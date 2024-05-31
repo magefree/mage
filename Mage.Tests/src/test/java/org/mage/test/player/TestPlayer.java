@@ -2221,7 +2221,7 @@ public class TestPlayer implements Player {
                                 continue;
                             }
                             if (hasObjectTargetNameOrAlias(permanent, targetName)) {
-                                if (target.isNotTarget() || target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                                if (target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
@@ -2229,7 +2229,7 @@ public class TestPlayer implements Player {
                                     }
                                 }
                             } else if ((permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) { // TODO: remove search by exp code?
-                                if (target.isNotTarget() || target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                                if (target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
