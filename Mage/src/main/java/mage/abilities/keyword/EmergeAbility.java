@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
 import mage.game.Game;
@@ -33,17 +32,29 @@ public class EmergeAbility extends SpellAbility {
     public static final String EMERGE_ACTIVATION_CREATURE_REFERENCE = "emergeActivationMOR";
 
     private static final FilterPermanent SAC_FILTER = new FilterControlledCreaturePermanent();
+
     static {
         SAC_FILTER.add(CanBeSacrificedPredicate.instance);
     }
 
-    public EmergeAbility(Card card, String emergeString) {
+    private final String emergeFromText;
+    private final FilterPermanent filter;
+
+    public EmergeAbility(Card card, String emergeManaString) {
+        this(card, emergeManaString, SAC_FILTER, "");
+    }
+
+    public EmergeAbility(Card card, String emergeManaString, FilterPermanent filter, String emergeFromText) {
         super(card.getSpellAbility());
-        this.emergeCost = new ManaCostsImpl<>(emergeString);
+
+        this.filter = filter;
+        this.emergeFromText = emergeFromText;
+
+        this.emergeCost = new ManaCostsImpl<>(emergeManaString);
         this.newId(); // Set newId because cards spell ability is copied and needs own id
         this.setCardName(card.getName() + " with emerge");
-        zone = Zone.HAND;
-        spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.zone = Zone.HAND;
+        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
 
         this.clearManaCosts();
         this.clearManaCostsToPay();
@@ -52,9 +63,11 @@ public class EmergeAbility extends SpellAbility {
         this.setRuleAtTheTop(true);
     }
 
-    protected EmergeAbility(final EmergeAbility ability) {
+    private EmergeAbility(final EmergeAbility ability) {
         super(ability);
         this.emergeCost = ability.emergeCost.copy();
+        this.filter = ability.filter;
+        this.emergeFromText = ability.emergeFromText;
     }
 
     @Override
@@ -63,7 +76,7 @@ public class EmergeAbility extends SpellAbility {
             Player controller = game.getPlayer(this.getControllerId());
             if (controller != null) {
                 for (Permanent creature : game.getBattlefield().getActivePermanents(
-                        SAC_FILTER, this.getControllerId(), this, game)) {
+                        filter, this.getControllerId(), this, game)) {
                     ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getManaValue());
                     if (costToPay.canPay(this, this, this.getControllerId(), game)) {
                         return new ActivationStatus(new ApprovingObject(this, game));
@@ -98,7 +111,7 @@ public class EmergeAbility extends SpellAbility {
     public boolean activate(Game game, boolean noMana) {
         Player controller = game.getPlayer(this.getControllerId());
         if (controller != null) {
-            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_A_CREATURE);
+            TargetSacrifice target = new TargetSacrifice(filter);
             target.withChooseHint("to sacrifice for emerge");
             if (controller.choose(Outcome.Sacrifice, target, this, game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
@@ -131,6 +144,14 @@ public class EmergeAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        return "Emerge " + emergeCost.getText() + " <i>(You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)</i>";
+        String text = "Emerge ";
+        if (!emergeFromText.isEmpty()) {
+            text += emergeFromText + " ";
+        }
+        text += emergeCost.getText();
+        if (emergeFromText.isEmpty()) {
+            text += " <i>(You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)</i>";
+        }
+        return text;
     }
 }
