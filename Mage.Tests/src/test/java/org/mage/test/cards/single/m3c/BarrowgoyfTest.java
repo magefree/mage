@@ -31,6 +31,7 @@ public class BarrowgoyfTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Plains");
 
         attack(1, playerA, barrowgoyf, playerB);
+        setChoice(playerA, true);
         setChoice(playerA, "Baneslayer Angel"); // return this to hand.
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -40,6 +41,27 @@ public class BarrowgoyfTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 1);
         assertHandCount(playerA, "Baneslayer Angel", 1);
         assertPowerToughness(playerA, barrowgoyf, 3, 4);
+    }
+
+    @Test
+    public void test_Simple_NoMill() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, barrowgoyf);
+        addCard(Zone.GRAVEYARD, playerB, "Bitterblossom"); // Tribal Enchantment
+        addCard(Zone.LIBRARY, playerA, "Baneslayer Angel");
+        addCard(Zone.LIBRARY, playerA, "Plains");
+
+        attack(1, playerA, barrowgoyf, playerB);
+        setChoice(playerA, false);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 20 - 2);
+        assertGraveyardCount(playerA, 0);
+        assertPowerToughness(playerA, barrowgoyf, 2, 3);
     }
 
     @Test
@@ -53,6 +75,7 @@ public class BarrowgoyfTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Plains");
 
         attack(1, playerA, barrowgoyf, playerB);
+        setChoice(playerA, true);
         setChoice(playerA, TestPlayer.CHOICE_SKIP); // decide to not return.
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -76,6 +99,7 @@ public class BarrowgoyfTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Invasion of Zendikar");
 
         attack(1, playerA, barrowgoyf, playerB);
+        setChoice(playerA, true);
         setChoice(playerA, TestPlayer.CHOICE_SKIP); // decide to not return. There was no choice anyway.
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
