@@ -41,6 +41,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Brainsurge", 53, Rarity.UNCOMMON, mage.cards.b.Brainsurge.class));
         cards.add(new SetCardInfo("Branching Evolution", 285, Rarity.RARE, mage.cards.b.BranchingEvolution.class));
         cards.add(new SetCardInfo("Breaker of Creation", 1, Rarity.UNCOMMON, mage.cards.b.BreakerOfCreation.class));
+        cards.add(new SetCardInfo("Breathe Your Last", 82, Rarity.COMMON, mage.cards.b.BreatheYourLast.class));
         cards.add(new SetCardInfo("Breya, Etherium Shaper", 289, Rarity.MYTHIC, mage.cards.b.BreyaEtheriumShaper.class));
         cards.add(new SetCardInfo("Bridgeworks Battle", 249, Rarity.UNCOMMON, mage.cards.b.BridgeworksBattle.class));
         cards.add(new SetCardInfo("Buried Alive", 273, Rarity.UNCOMMON, mage.cards.b.BuriedAlive.class));
