@@ -5,6 +5,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
+import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -19,7 +20,13 @@ import java.util.UUID;
  */
 public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private final FilterSpell filter;
+    private final FilterStackObject filter;
+
+    public ManaSpentDelayedTriggeredAbility(Effect effect, FilterStackObject filter) {
+        super(effect, Duration.Custom, true, false);
+        this.filter = filter;
+        setTriggerPhrase("When you spend this mana to cast " + filter.getMessage() + ", ");
+    }
 
     public ManaSpentDelayedTriggeredAbility(Effect effect, FilterSpell filter) {
         super(effect, Duration.Custom, true, false);
