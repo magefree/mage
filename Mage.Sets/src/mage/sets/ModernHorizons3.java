@@ -142,6 +142,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("It That Heralds the End", 9, Rarity.UNCOMMON, mage.cards.i.ItThatHeraldsTheEnd.class));
         cards.add(new SetCardInfo("Izzet Generatorium", 191, Rarity.UNCOMMON, mage.cards.i.IzzetGeneratorium.class));
         cards.add(new SetCardInfo("Jet Medallion", 292, Rarity.RARE, mage.cards.j.JetMedallion.class));
+        cards.add(new SetCardInfo("Jolted Awake", 33, Rarity.COMMON, mage.cards.j.JoltedAwake.class));
         cards.add(new SetCardInfo("Junk Diver", 293, Rarity.UNCOMMON, mage.cards.j.JunkDiver.class));
         cards.add(new SetCardInfo("K'rrik, Son of Yawgmoth", 274, Rarity.RARE, mage.cards.k.KrrikSonOfYawgmoth.class));
         cards.add(new SetCardInfo("Kaalia of the Vast", 290, Rarity.MYTHIC, mage.cards.k.KaaliaOfTheVast.class));
