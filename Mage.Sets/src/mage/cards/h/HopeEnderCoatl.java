@@ -44,7 +44,8 @@ public final class HopeEnderCoatl extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When you cast this spell, counter target spell an opponent controls unless they pay {1}.
-        Ability ability = new CastSourceTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)));
+        Ability ability = new CastSourceTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1))
+                .setText("counter target spell an opponent controls unless they pay {1}"));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
 

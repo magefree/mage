@@ -13,7 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -21,6 +23,16 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class Dreadmobile extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("another artifact or creature");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+        filter.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+    }
 
     public Dreadmobile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{B}");
@@ -36,7 +48,7 @@ public final class Dreadmobile extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
 
         // Crew 1

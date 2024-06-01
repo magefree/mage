@@ -7,7 +7,6 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -36,8 +35,6 @@ import java.util.UUID;
  */
 public final class UlamogTheDefiler extends CardImpl {
 
-    private static final DynamicValue xValue = new CountersSourceCount(CounterType.P1P1);
-
     public UlamogTheDefiler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}");
 
@@ -52,7 +49,7 @@ public final class UlamogTheDefiler extends CardImpl {
         this.addAbility(ability);
 
         // Ward--Sacrifice two permanents.
-        this.addAbility(new WardAbility(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT)));
+        this.addAbility(new WardAbility(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENTS)));
 
         // Ulamog, the Defiler enters the battlefield with a number of +1/+1 counters on it equal to the greatest mana value among cards in exile.
         this.addAbility(

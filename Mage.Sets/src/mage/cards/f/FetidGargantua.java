@@ -26,7 +26,7 @@ public final class FetidGargantua extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{B}: Adapt 2.
-        this.addAbility(new AdaptAbility(1, "{2}{B}"));
+        this.addAbility(new AdaptAbility(2, "{2}{B}"));
 
         // Whenever one or more +1/+1 counters are put on Fetid Gargantua, you may draw two cards. If you do, you lose 2 life.
         Ability ability = new OneOrMoreCountersAddedTriggeredAbility(new DrawCardSourceControllerEffect(2), true);

@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class GhostfireSlice extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a multicolored permanent");
+    private static final FilterPermanent filter = new FilterPermanent("an opponent controls a multicolored permanent");
 
     static {
         filter.add(MulticoloredPredicate.instance);

@@ -41,7 +41,7 @@ public final class LocalizedDestruction extends CardImpl {
         this.getSpellAbility().addEffect(new LocalizedDestructionEffect());
 
         // Destroy all creatures.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES).concatBy("<br>"));
     }
 
     private LocalizedDestruction(final LocalizedDestruction card) {

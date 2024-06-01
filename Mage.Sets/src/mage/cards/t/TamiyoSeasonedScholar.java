@@ -50,7 +50,7 @@ public final class TamiyoSeasonedScholar extends CardImpl {
                         new AttacksAllTriggeredAbility(
                                 new BoostTargetEffect(-1, 0, Duration.EndOfTurn)
                                         .setText("it gets -1/-0 until end of turn"),
-                                false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE,
+                                false, StaticFilters.FILTER_PERMANENT_CREATURE,
                                 SetTargetPointer.PERMANENT, true
                         )
                 )
