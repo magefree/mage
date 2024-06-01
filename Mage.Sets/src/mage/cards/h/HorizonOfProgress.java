@@ -32,7 +32,7 @@ public final class HorizonOfProgress extends CardImpl {
 
         // {3}, {T}: You may put a land card from your hand onto the battlefield tapped.
         ability = new SimpleActivatedAbility(
-                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), new GenericManaCost(3)
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A, false, true), new GenericManaCost(3)
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

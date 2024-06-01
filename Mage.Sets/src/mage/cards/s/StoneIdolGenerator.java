@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
@@ -32,8 +33,9 @@ public final class StoneIdolGenerator extends CardImpl {
 
         // {T}, Pay six {E}: Create a 6/12 colorless Construct artifact creature token with trample. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                new CreateTokenEffect(new StoneIdolToken()), new PayEnergyCost(6)
+                new CreateTokenEffect(new StoneIdolToken()), new TapSourceCost()
         );
+        ability.addCost(new PayEnergyCost(6));
         this.addAbility(ability);
     }
 

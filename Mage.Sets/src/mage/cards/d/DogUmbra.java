@@ -54,7 +54,7 @@ public final class DogUmbra extends CardImpl {
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new TotemArmorAbility()),
                 DogUmbraCondition.FALSE,
-                "Otherwise, Dog Umbra has umbra armor"
+                "Otherwise, {this} has umbra armor"
         ));
         this.addAbility(ability);
     }

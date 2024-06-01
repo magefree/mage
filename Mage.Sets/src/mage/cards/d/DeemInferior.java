@@ -28,7 +28,7 @@ public final class DeemInferior extends CardImpl {
         // This spell costs {1} less to cast for each card you've drawn this turn.
         Ability ability = new SimpleStaticAbility(Zone.ALL,
                 new SpellCostReductionSourceEffect(CardsDrawnThisTurnDynamicValue.instance)
-                        .setText("this spell costs {1} less to cast for each card type among permanents you've sacrificed this turn")
+                        .setText("this spell costs {1} less to cast for each card you've drawn this turn")
         );
         this.addAbility(ability.addHint(CardsDrawnThisTurnDynamicValue.getHint()));
 
