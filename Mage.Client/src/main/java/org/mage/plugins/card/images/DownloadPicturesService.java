@@ -730,7 +730,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         DownloadTask(CardDownloadData card, String baseUrl, String actualFilename, int count) {
             this.card = card;
-            this.urls = new CardImageUrls(baseUrl, null);
+            this.urls = new CardImageUrls(baseUrl);
             this.count = count;
             this.actualFilename = actualFilename;
             this.useSpecifiedPaths = true;

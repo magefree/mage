@@ -3,7 +3,6 @@ package org.mage.plugins.card.dl.sources;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author JayDi85
@@ -29,7 +28,7 @@ public class CardImageUrls {
     }
 
     public List<String> getDownloadList() {
-        return urls.stream().distinct().collect(Collectors.toList());
+        return urls;
     }
 
     // for tests
@@ -38,10 +37,9 @@ public class CardImageUrls {
     }
 
     public void addUrl(String url) {
-        if (url != null && !url.isEmpty()) {
+        // ignore nulls and duplicates
+        if (url != null && !url.isEmpty() && !urls.contains(url)) {
             this.urls.add(url);
-        } else {
-            throw new IllegalArgumentException("Null or empty URL");
         }
     }
 }

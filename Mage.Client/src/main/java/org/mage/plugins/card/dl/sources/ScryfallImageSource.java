@@ -56,7 +56,7 @@ public class ScryfallImageSource implements CardImageSource {
     private CardImageUrls innerGenerateURL(CardDownloadData card, boolean isToken) {
         String prepared = preparedUrls.getOrDefault(card, null);
         if (prepared != null) {
-            return new CardImageUrls(prepared, null);
+            return new CardImageUrls(prepared);
         }
 
         String defaultCode = CardLanguage.ENGLISH.getCode();
