@@ -4,7 +4,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.target.TargetPlayer;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -24,7 +26,7 @@ import mage.constants.CardType;
  */
 public final class Trenchpost extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.LOCUS,
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.LOCUS,
             "Locus you control");
 
     public Trenchpost(UUID ownerId, CardSetInfo setInfo) {
