@@ -154,6 +154,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Legion Leadership", 255, Rarity.UNCOMMON, mage.cards.l.LegionLeadership.class));
         cards.add(new SetCardInfo("Lethal Throwdown", 99, Rarity.UNCOMMON, mage.cards.l.LethalThrowdown.class));
         cards.add(new SetCardInfo("Lion Umbra", 160, Rarity.UNCOMMON, mage.cards.l.LionUmbra.class));
+        cards.add(new SetCardInfo("Malevolent Rumble", 161, Rarity.COMMON, mage.cards.m.MalevolentRumble.class));
         cards.add(new SetCardInfo("Mandibular Kite", 34, Rarity.COMMON, mage.cards.m.MandibularKite.class));
         cards.add(new SetCardInfo("Marionette Apprentice", 100, Rarity.UNCOMMON, mage.cards.m.MarionetteApprentice.class));
         cards.add(new SetCardInfo("Meltdown", 282, Rarity.UNCOMMON, mage.cards.m.Meltdown.class));
