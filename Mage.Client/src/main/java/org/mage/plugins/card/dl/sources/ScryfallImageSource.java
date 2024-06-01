@@ -31,7 +31,7 @@ public class ScryfallImageSource implements CardImageSource {
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
     private final Map<CardDownloadData, String> preparedUrls = new HashMap<>();
     private static final int DOWNLOAD_TIMEOUT_MS = 100;
-    
+
     public static ScryfallImageSource getInstance() {
         return instance;
     }
@@ -61,7 +61,7 @@ public class ScryfallImageSource implements CardImageSource {
 
         String defaultCode = CardLanguage.ENGLISH.getCode();
         String localizedCode = languageAliases.getOrDefault(this.getCurrentLanguage(), defaultCode);
-        // loc example: https://api.scryfall.com/cards/xln/121/ru?format=image
+        // loc example: https://api.scryfall.com/cards/xln/121/ru?format=image&
 
         // WARNING, some cards haven't direct images and uses random GUID:
         // As example: Raging Ravine - https://scryfall.com/card/uma/249/raging-ravine
@@ -86,18 +86,18 @@ public class ScryfallImageSource implements CardImageSource {
             if (link != null) {
                 if (ScryfallImageSupportCards.isApiLink(link)) {
                     // api link - must prepare direct link
-                    baseUrl = link + localizedCode + "?format=image";
+                    baseUrl = link + localizedCode + "?format=image&";
                     // workaround to use cards without english images (some promos or special cards)
                     if (link.endsWith("/")) {
-                        alternativeUrl = link.substring(0,link.length()-1) + "?format=image";
+                        alternativeUrl = link.substring(0, link.length() - 1) + "?format=image&";
                     }
                 } else {
                     // direct link to image
                     baseUrl = link;
                     // workaround to use localization in direct links
-                    if (link.contains("/?format=image")){
-                        baseUrl = link.replaceFirst("\\?format=image" , localizedCode + "?format=image");
-                        alternativeUrl = link.replaceFirst("/\\?format=image" , "?format=image");
+                    if (link.contains("/?format=image")) {
+                        baseUrl = link.replaceFirst("\\?format=image", localizedCode + "?format=image");
+                        alternativeUrl = link.replaceFirst("/\\?format=image", "?format=image");
                     }
                 }
             }
@@ -115,27 +115,27 @@ public class ScryfallImageSource implements CardImageSource {
         }
 
         // basic cards by api call (redirect to img link)
-        // example: https://api.scryfall.com/cards/xln/121/en?format=image
+        // example: https://api.scryfall.com/cards/xln/121/en?format=image&
         if (baseUrl == null) {
-            String cn = ScryfallImageSupportCards.prepareCardNumber(card.getCollectorId()) ;
-            baseUrl = String.format("https://api.scryfall.com/cards/%s/%s/%s?format=image",
+            String cn = ScryfallImageSupportCards.prepareCardNumber(card.getCollectorId());
+            baseUrl = String.format("https://api.scryfall.com/cards/%s/%s/%s?format=image&",
                     formatSetName(card.getSet(), isToken),
                     cn,
                     localizedCode);
-            alternativeUrl = String.format("https://api.scryfall.com/cards/%s/%s?format=image",
+            alternativeUrl = String.format("https://api.scryfall.com/cards/%s/%s?format=image&",
                     formatSetName(card.getSet(), isToken),
                     cn);
             // with no localisation code, scryfall defaults to first available image - usually english, but may not be for some special cards
             // workaround to use cards without english images (some promos or special cards)
             // bug: https://github.com/magefree/mage/issues/6829
-            // example: Mysterious Egg from IKO https://api.scryfall.com/cards/iko/385/?format=image
+            // example: Mysterious Egg from IKO https://api.scryfall.com/cards/iko/385/?format=image&
 
         }
 
         // workaround to deal with the cards that scryfall has marked as variations that seem to sometimes fail
-        // eg https://api.scryfall.com/cards/4ed/134†?format=image fails
+        // eg https://api.scryfall.com/cards/4ed/134†?format=image& fails
         // eg https://api.scryfall.com/cards/4ed/134†?format=image&variation=true succeeds
-        return new CardImageUrls(baseUrl, alternativeUrl , alternativeUrl + "&variation=true");
+        return new CardImageUrls(baseUrl, alternativeUrl, alternativeUrl + "variation=true");
     }
 
     private String getFaceImageUrl(Proxy proxy, CardDownloadData card, boolean isToken) throws Exception {
@@ -148,11 +148,11 @@ public class ScryfallImageSource implements CardImageSource {
         String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
         if (apiUrl != null) {
             if (apiUrl.endsWith("*/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() - 2) + "★/" ;
+                apiUrl = apiUrl.substring(0, apiUrl.length() - 2) + "★/";
             } else if (apiUrl.endsWith("+/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() - 2) + "†/" ;
+                apiUrl = apiUrl.substring(0, apiUrl.length() - 2) + "†/";
             } else if (apiUrl.endsWith("Ph/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() - 3) + "Φ/" ;
+                apiUrl = apiUrl.substring(0, apiUrl.length() - 3) + "Φ/";
             }
             // BY DIRECT URL
             // direct links via hardcoded API path. Used for cards with non-ASCII collector numbers
@@ -168,7 +168,7 @@ public class ScryfallImageSource implements CardImageSource {
         } else {
             // BY CARD NUMBER
             // localized and default
-            String cn = ScryfallImageSupportCards.prepareCardNumber (card.getCollectorId()) ;
+            String cn = ScryfallImageSupportCards.prepareCardNumber(card.getCollectorId());
             needUrls.add(String.format("https://api.scryfall.com/cards/%s/%s/%s",
                     formatSetName(card.getSet(), isToken),
                     cn,
