@@ -40,8 +40,8 @@ public final class Trenchpost extends CardImpl {
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
+
         // {3}, {T}: Target player mills a card for each Locus you control.
-        
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new MillCardsTargetEffect(numLocus), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
