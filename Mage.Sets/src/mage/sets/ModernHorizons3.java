@@ -203,6 +203,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Reef Worm", 271, Rarity.UNCOMMON, mage.cards.r.ReefWorm.class));
         cards.add(new SetCardInfo("Refurbished Familiar", 105, Rarity.COMMON, mage.cards.r.RefurbishedFamiliar.class));
         cards.add(new SetCardInfo("Reiterating Bolt", 134, Rarity.UNCOMMON, mage.cards.r.ReiteratingBolt.class));
+        cards.add(new SetCardInfo("Retrofitted Transmogrant", 106, Rarity.COMMON, mage.cards.r.RetrofittedTransmogrant.class));
         cards.add(new SetCardInfo("Revitalizing Repast", 256, Rarity.UNCOMMON, mage.cards.r.RevitalizingRepast.class));
         cards.add(new SetCardInfo("Riddle Gate Gargoyle", 201, Rarity.COMMON, mage.cards.r.RiddleGateGargoyle.class));
         cards.add(new SetCardInfo("Ripples of Undeath", 107, Rarity.RARE, mage.cards.r.RipplesOfUndeath.class));
