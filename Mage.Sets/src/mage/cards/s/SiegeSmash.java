@@ -34,7 +34,7 @@ public final class SiegeSmash extends CardImpl {
         // * Target creature gets +3/+2 and gains trample until end of turn.
         Mode mode = new Mode(
                 new BoostTargetEffect(3, 2, Duration.EndOfTurn)
-                        .setText("Target creature gets +3/+3")
+                        .setText("Target creature gets +3/+2")
         );
         mode.addEffect(
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)

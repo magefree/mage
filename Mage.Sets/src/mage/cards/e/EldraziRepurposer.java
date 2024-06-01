@@ -36,8 +36,8 @@ public final class EldraziRepurposer extends CardImpl {
                 Zone.ALL,
                 new CreateTokenEffect(new EldraziSpawnToken()),
                 new CastSourceTriggeredAbility(null, false),
-                new DiesSourceTriggeredAbility(null, false))
-        );
+                new DiesSourceTriggeredAbility(null, false)
+        ).setTriggerPhrase("When you cast this spell and when {this} dies, "));
     }
 
     private EldraziRepurposer(final EldraziRepurposer card) {

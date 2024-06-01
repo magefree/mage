@@ -62,7 +62,11 @@ public final class TamiyoSeasonedScholar extends CardImpl {
         this.addAbility(ability);
 
         // -7: Draw cards equal to half the number of cards in your library, rounded up. You get an emblem with "You have no maximum hand size."
-        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(xValue), -7);
+        ability = new LoyaltyAbility(
+                new DrawCardSourceControllerEffect(xValue)
+                        .setText("Draw cards equal to half the number of cards in your library, rounded up."),
+                -7
+        );
         ability.addEffect(new GetEmblemEffect(new TamiyoSeasonedScholarEmblem()));
         this.addAbility(ability);
     }

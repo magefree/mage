@@ -39,7 +39,7 @@ public final class GlimpseTheImpossible extends CardImpl {
                                 new GlimpseTheImpossibleEffect(),
                                 TargetController.ANY,
                                 GlimpseTheImpossibleCondition.instance
-                        )
+                        ).setTriggerPhrase("At the beginning of the next end step, if any of those cards remain exiled, ")
                 )
         );
     }

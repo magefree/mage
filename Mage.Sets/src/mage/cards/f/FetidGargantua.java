@@ -30,7 +30,7 @@ public final class FetidGargantua extends CardImpl {
 
         // Whenever one or more +1/+1 counters are put on Fetid Gargantua, you may draw two cards. If you do, you lose 2 life.
         Ability ability = new OneOrMoreCountersAddedTriggeredAbility(new DrawCardSourceControllerEffect(2), true);
-        ability.addEffect(new LoseLifeSourceControllerEffect(2).concatBy("If you do, "));
+        ability.addEffect(new LoseLifeSourceControllerEffect(2).concatBy("If you do,"));
         this.addAbility(ability);
     }
 

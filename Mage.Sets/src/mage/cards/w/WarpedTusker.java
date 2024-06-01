@@ -1,30 +1,29 @@
 package mage.cards.w;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.permanent.token.EldraziSpawnToken;
-import mage.abilities.keyword.ReachAbility;
-import mage.abilities.meta.OrTriggeredAbility;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.keyword.ReachAbility;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.game.permanent.token.EldraziSpawnToken;
+
+import java.util.UUID;
 
 /**
- *
  * @author grimreap124
  */
 public final class WarpedTusker extends CardImpl {
 
     public WarpedTusker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}");
 
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.BOAR);
@@ -40,7 +39,8 @@ public final class WarpedTusker extends CardImpl {
                 Zone.ALL,
                 new CreateTokenEffect(new EldraziSpawnToken()),
                 new CastSourceTriggeredAbility(null, false),
-                new CycleTriggeredAbility(null, false)));
+                new CycleTriggeredAbility(null, false)
+        ).setTriggerPhrase("When you cast or cycle {this}, "));
 
         // Cycling {2}{G}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{G}")));

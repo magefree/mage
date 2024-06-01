@@ -36,7 +36,7 @@ public final class SneakySnacker extends CardImpl {
                 false,
                 TargetController.YOU,
                 3
-        ));
+        ).setTriggerPhrase("When you draw your third card in a turn, "));
     }
 
     private SneakySnacker(final SneakySnacker card) {

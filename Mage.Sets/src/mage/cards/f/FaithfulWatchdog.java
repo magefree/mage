@@ -30,7 +30,7 @@ public final class FaithfulWatchdog extends CardImpl {
         // Faithful Watchdog enters the battlefield with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
-                "{this} enters the battlefield with three +1/+1 counters on it"
+                "with three +1/+1 counters on it"
         ));
     }
 

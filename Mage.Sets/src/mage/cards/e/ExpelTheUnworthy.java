@@ -75,7 +75,7 @@ class ExpelTheUnworthyEffect extends OneShotEffect {
 
     ExpelTheUnworthyEffect() {
         super(Outcome.GainLife);
-        staticText = "Its controller gains 4 life";
+        staticText = ", then its controller gains life equal to its mana value";
     }
 
     private ExpelTheUnworthyEffect(final ExpelTheUnworthyEffect effect) {

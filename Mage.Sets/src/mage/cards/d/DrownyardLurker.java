@@ -39,7 +39,7 @@ public final class DrownyardLurker extends CardImpl {
                 new CreateTokenEffect(new EldraziSpawnToken()),
                 new CastSourceTriggeredAbility(null, false),
                 new CycleTriggeredAbility(null, false)
-        ));
+        ).setTriggerPhrase("When you cast or cycle {this}, "));
 
         // Cycling {2}{U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{U}")));
