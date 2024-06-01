@@ -248,7 +248,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Indulgence", 312, Rarity.UNCOMMON, mage.cards.t.TalismanOfIndulgence.class));
         cards.add(new SetCardInfo("Talisman of Progress", 313, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Talisman of Resilience", 314, Rarity.UNCOMMON, mage.cards.t.TalismanOfResilience.class));
-        cards.add(new SetCardInfo("Talon Gates of Madara", 134, Rarity.RARE, mage.cards.t.TalonGatesOfMadara.class));
+        cards.add(new SetCardInfo("Talon Gates of Madara", 82, Rarity.RARE, mage.cards.t.TalonGatesOfMadara.class));
         cards.add(new SetCardInfo("Tatyova, Benthic Druid", 273, Rarity.UNCOMMON, mage.cards.t.TatyovaBenthicDruid.class));
         cards.add(new SetCardInfo("Tectonic Edge", 384, Rarity.UNCOMMON, mage.cards.t.TectonicEdge.class));
         cards.add(new SetCardInfo("Temple of Abandon", 385, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
@@ -270,7 +270,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Tomb of the Spirit Dragon", 397, Rarity.UNCOMMON, mage.cards.t.TombOfTheSpiritDragon.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 398, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Treasure Cruise", 195, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
-        cards.add(new SetCardInfo("Trenchpost", 135, Rarity.RARE, mage.cards.t.Trenchpost.class));
+        cards.add(new SetCardInfo("Trenchpost", 83, Rarity.RARE, mage.cards.t.Trenchpost.class));
         cards.add(new SetCardInfo("Ugin's Insight", 196, Rarity.RARE, mage.cards.u.UginsInsight.class));
         cards.add(new SetCardInfo("Ugin, the Ineffable", 160, Rarity.RARE, mage.cards.u.UginTheIneffable.class));
         cards.add(new SetCardInfo("Ulamog's Crusher", 161, Rarity.COMMON, mage.cards.u.UlamogsCrusher.class));
