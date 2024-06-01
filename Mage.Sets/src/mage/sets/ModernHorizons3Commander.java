@@ -270,6 +270,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Tomb of the Spirit Dragon", 397, Rarity.UNCOMMON, mage.cards.t.TombOfTheSpiritDragon.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 398, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Treasure Cruise", 195, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
+        cards.add(new SetCardInfo("Trenchpost", 135, Rarity.RARE, mage.cards.t.Trenchpost.class));
         cards.add(new SetCardInfo("Ugin's Insight", 196, Rarity.RARE, mage.cards.u.UginsInsight.class));
         cards.add(new SetCardInfo("Ugin, the Ineffable", 160, Rarity.RARE, mage.cards.u.UginTheIneffable.class));
         cards.add(new SetCardInfo("Ulamog's Crusher", 161, Rarity.COMMON, mage.cards.u.UlamogsCrusher.class));
