@@ -2192,6 +2192,13 @@ public class VerifyCardDataTest {
         //  - multiple searches: name1;class2;name3
         String cardSearches = "Spark Double;AbandonedSarcophagus";
 
+        // command line support, e.g. task runner from Visual Studio Code
+        // see setup instructions in https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment#visual-studio-code-vsc
+        // example: mvn install test "-Dxmage.showCardInfo=${fileBasenameNoExtension}" "-Dsurefire.failIfNoSpecifiedTests=false" "-Dxmage.build.tests.treeViewRunnerShowAllLogs=true" -Dtest=VerifyCardDataTest#test_showCardInfo
+        if (System.getProperty("xmage.showCardInfo") != null) {
+            cardSearches = System.getProperty("xmage.showCardInfo");
+        }
+
         // prepare DBs
         CardScanner.scan();
         MtgJsonService.cards();
