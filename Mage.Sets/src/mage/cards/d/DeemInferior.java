@@ -7,7 +7,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsDrawnThisTurnDynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutIntoLibraryNFromTopTargetEffect;
-import mage.abilities.effects.common.PutOnTopOrBottomLibraryTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
@@ -81,7 +80,7 @@ class DeemInferiorEffect extends OneShotEffect {
                 "Second from the top", "Bottom", source, game)) {
             new PutIntoLibraryNFromTopTargetEffect(2).apply(game, source);
         } else {
-            new PutOnTopOrBottomLibraryTargetEffect(false).apply(game, source);
+            owner.putCardsOnBottomOfLibrary(target, game, source, false);
         }
         return true;
     }
