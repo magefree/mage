@@ -25,9 +25,13 @@ import mage.constants.CardType;
  * @author grimreap124
  */
 public final class Trenchpost extends CardImpl {
+    
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.LOCUS,
             "Locus you control");
+
+    private static final PermanentsOnBattlefieldCount numLocus = new PermanentsOnBattlefieldCount(filter);
+    private static final Hint hint = new ValueHint("Locus you control", numLocus);
 
     public Trenchpost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.LAND }, "");
@@ -37,12 +41,11 @@ public final class Trenchpost extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {3}, {T}: Target player mills a card for each Locus you control.
-        PermanentsOnBattlefieldCount numLocus = new PermanentsOnBattlefieldCount(filter);
+        
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new MillCardsTargetEffect(numLocus), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
-        Hint hint = new ValueHint("Locus you control", numLocus);
         ability.addHint(hint);
         this.addAbility(ability);
     }
