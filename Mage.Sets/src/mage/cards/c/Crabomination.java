@@ -10,10 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -26,12 +23,6 @@ import java.util.UUID;
  */
 public final class Crabomination extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledArtifactPermanent();
-
-    static {
-        filter.add(CanBeSacrificedPredicate.instance);
-    }
-
     public Crabomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
@@ -41,7 +32,7 @@ public final class Crabomination extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Emerge from artifact {5}{B}{B}
-        this.addAbility(new EmergeAbility(this, "{5}{B}{B}", filter, "from artifact"));
+        this.addAbility(new EmergeAbility(this, "{5}{B}{B}", StaticFilters.FILTER_PERMANENT_ARTIFACT, "from artifact"));
 
         // When Crabomination enters the battlefield, target opponent exiles the top card of their library, a card at random from their graveyard, and a card at random from their hand. You may cast a spell from among cards exiled this way without paying its mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CrabominationEffect());
