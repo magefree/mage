@@ -49,13 +49,13 @@ public final class DiscreetRetreat extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
-        // Enchanted land has "{T}: Add two mana of any one color. Spend this mana only to cast outlaw spells or activate abilities from outlaw sources."
+        // Enchanted land has "{T}: Add two mana of any one color. Spend this mana only to cast outlaw spells or activate abilities of outlaw sources."
         Ability gainedAbility = new ConditionalAnyColorManaAbility(
                 new TapSourceCost(), 2, new DiscreetRetreatManaBuilder()
         );
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
         effect.setText("Enchanted land has \"{T}: Add two mana of any one color. "
-                + "Spend this mana only to cast outlaw spells or activate abilities from outlaw sources.\"");
+                + "Spend this mana only to cast outlaw spells or activate abilities of outlaw sources.\"");
         this.addAbility(new SimpleStaticAbility(effect));
 
         // Whenever you cast your first outlaw spell each turn, you draw a card and you lose 1 life.

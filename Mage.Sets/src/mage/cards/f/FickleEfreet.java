@@ -34,7 +34,9 @@ public final class FickleEfreet extends CardImpl {
 
         // Whenever Fickle Efreet attacks or blocks, flip a coin at end of combat. If you lose the flip, an opponent gains control of Fickle Efreet.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new FickleEfreetChangeControlEffect()), true), false));
+                new AtTheEndOfCombatDelayedTriggeredAbility(new FickleEfreetChangeControlEffect())
+                        .setTriggerPhrase(""), true), false)
+                .setTriggerPhrase("Whenever {this} attacks or blocks, "));
     }
 
     private FickleEfreet(final FickleEfreet card) {

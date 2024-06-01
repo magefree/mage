@@ -57,7 +57,7 @@ public final class IncineratorOfTheGuilty extends CardImpl {
 
 class IncineratorOfTheGuiltyEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature and each planeswalker");
+    private static final FilterPermanent filter = new FilterPermanent("creature and planeswalker");
 
     static {
         filter.add(
@@ -69,7 +69,7 @@ class IncineratorOfTheGuiltyEffect extends OneShotEffect {
     IncineratorOfTheGuiltyEffect() {
         super(Outcome.Benefit);
         staticText = "you may collect evidence X. When you do, {this} deals X damage " +
-                "to each creature and each planeswalker that player controls.";
+                "to each creature and planeswalker that player controls.";
     }
 
     private IncineratorOfTheGuiltyEffect(final IncineratorOfTheGuiltyEffect effect) {
