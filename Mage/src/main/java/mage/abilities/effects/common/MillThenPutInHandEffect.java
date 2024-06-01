@@ -153,7 +153,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder("mill ");
         String value = amount.toString();
         sb.append(CardUtil.numberToText(value, "a"));
-        sb.append(value.equals("1") ? " card" : " cards");
+        sb.append(value.equals("1") ? " card. " : " cards. ");
         if (optional) {
             sb.append("You may put ");
         } else {
