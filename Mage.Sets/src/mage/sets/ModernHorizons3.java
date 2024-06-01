@@ -223,6 +223,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Sheltering Landscape", 227, Rarity.COMMON, mage.cards.s.ShelteringLandscape.class));
         cards.add(new SetCardInfo("Shifting Woodland", 228, Rarity.RARE, mage.cards.s.ShiftingWoodland.class));
         cards.add(new SetCardInfo("Shrieking Drake", 272, Rarity.UNCOMMON, mage.cards.s.ShriekingDrake.class));
+        cards.add(new SetCardInfo("Siege Smash", 136, Rarity.COMMON, mage.cards.s.SiegeSmash.class));
         cards.add(new SetCardInfo("Sink into Stupor", 241, Rarity.UNCOMMON, mage.cards.s.SinkIntoStupor.class));
         cards.add(new SetCardInfo("Six", 169, Rarity.RARE, mage.cards.s.Six.class));
         cards.add(new SetCardInfo("Skittering Precursor", 137, Rarity.UNCOMMON, mage.cards.s.SkitteringPrecursor.class));
