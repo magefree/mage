@@ -61,28 +61,20 @@ class FangsOfKaloniaEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID target = source.getTargets().getFirstTarget();
-        Permanent preP1P1Creature = game.getPermanent(target);
-        if (preP1P1Creature != null) {
+        Permanent creature = game.getPermanent(target);
+        if (creature != null) {
             // Put a +1/+1 counter on target creature you control
-            int preP1P1Count = preP1P1Creature.getCounters(game).getCount(CounterType.P1P1);
-            preP1P1Creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-            game.applyEffects();
-            // then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way
-            Permanent postP1P1Creature = game.getPermanent(target);
-            if (postP1P1Creature != null) {
-                int postP1P1Count = postP1P1Creature.getCounters(game).getCount(CounterType.P1P1);
-                if (postP1P1Count > preP1P1Count) {
+            int preP1P1Count = creature.getCounters(game).getCount(CounterType.P1P1);
+            creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
 
-                    int doubled = (postP1P1Count - preP1P1Count);
-                    game.informPlayers("post: " + postP1P1Count +
-                            " pre: " + preP1P1Count + "adding " + doubled + " +1/+1 counters to "
-                            + postP1P1Creature.getName());
-                    postP1P1Creature.addCounters(CounterType.P1P1.createInstance(doubled), source.getControllerId(),
-                            source, game);
-                }
+            // then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way
+            int postP1P1Count = creature.getCounters(game).getCount(CounterType.P1P1);
+            if (postP1P1Count > preP1P1Count) {
+                int doubled = (postP1P1Count - preP1P1Count);
+                creature.addCounters(CounterType.P1P1.createInstance(doubled), source.getControllerId(),
+                        source, game);
             }
         }
-
         return true;
     }
 
@@ -105,27 +97,22 @@ class FangsOfKaloniaOverloadEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> preP1P1Creatures = game.getBattlefield().getActivePermanents(
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game);
         Map<UUID, Integer> preP1P1Counts = new HashMap<>();
 
-        for (Permanent creature : preP1P1Creatures) {
+        for (Permanent creature : creatures) {
             preP1P1Counts.put(creature.getId(), creature.getCounters(game).getCount(CounterType.P1P1));
             creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
-        List<Permanent> postP1P1Creatures = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game);
 
-        for (Permanent creature : postP1P1Creatures) {
-
-            if (postP1P1Creatures != null) {
-                int preP1P1Count = preP1P1Counts.get(creature.getId());
-                int postP1P1Count = creature.getCounters(game).getCount(CounterType.P1P1);
-                if (postP1P1Count > preP1P1Count) {
-                    int doubled = (postP1P1Count - preP1P1Count);
-                    creature.addCounters(CounterType.P1P1.createInstance(doubled), source.getControllerId(), source,
-                            game);
-                }
+        for (Permanent creature : creatures) {
+            int preP1P1Count = preP1P1Counts.get(creature.getId());
+            int postP1P1Count = creature.getCounters(game).getCount(CounterType.P1P1);
+            if (postP1P1Count > preP1P1Count) {
+                int doubled = (postP1P1Count - preP1P1Count);
+                creature.addCounters(CounterType.P1P1.createInstance(doubled), source.getControllerId(), source,
+                        game);
             }
         }
         return true;
