@@ -46,7 +46,7 @@ public final class JayaBallardEmblem extends Emblem {
 class JayaBallardCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     JayaBallardCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast instant and sorcery spells from your graveyard";
     }
 

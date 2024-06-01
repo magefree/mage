@@ -33,7 +33,7 @@ public final class BloodHustler extends CardImpl {
         // Whenever you commit a crime, put a +1/+1 counter on Blood Hustler. This ability triggers only once each turn.
         this.addAbility(new CommittedCrimeTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
 
         // {3}{B}: Target opponent loses 1 life and you gain 1 life.
         Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(1), new ManaCostsImpl<>("{3}{B}"));

@@ -143,9 +143,9 @@ class FireballTargetCreatureOrPlayer extends TargetAnyTarget {
                     chosen = true;
                 }
 
-                if (!target.isChosen()) {
+                if (!target.isChosen(game)) {
                     Iterator<UUID> it2 = possibleTargets.iterator();
-                    while (it2.hasNext() && !target.isChosen()) {
+                    while (it2.hasNext() && !target.isChosen(game)) {
                         UUID nextTargetId = it2.next();
                         target.addTarget(nextTargetId, source, game, true);
 
@@ -155,7 +155,7 @@ class FireballTargetCreatureOrPlayer extends TargetAnyTarget {
 
                     }
                 }
-                if (target.isChosen()) {
+                if (target.isChosen(game)) {
                     options.add(target);
                 }
             }

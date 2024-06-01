@@ -47,7 +47,7 @@ public final class GenerousPlunderer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // At the beginning of your upkeep, you may create a Treasure token. When you do, target opponent creates a tapped Treasure token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GenerousPlundererEffect(), TargetController.YOU, true));

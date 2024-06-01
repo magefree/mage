@@ -90,9 +90,10 @@ public final class SystemUtil {
 
     private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
     private static final Pattern patternCommand = Pattern.compile("([\\w]+):([\\S ]+?):([\\S ]+):([\\d]+)"); // battlefield:Human:Island:10
-    private static final Pattern patternCardInfo = Pattern.compile("(^[\\dA-Z]{2,7})@([\\S ]+)" // XLN-Island
-            .replace("7", String.valueOf(CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH))
-            .replace("@", CardUtil.TESTS_SET_CODE_DELIMETER)
+    private static final Pattern patternCardInfo = Pattern.compile("(^[\\dA-Z]{MIN,MAX})DELIMETER([\\S ]+)" // XLN-Island
+            .replace("MIN", String.valueOf(CardUtil.TESTS_SET_CODE_MIN_LOOKUP_LENGTH))
+            .replace("MAX", String.valueOf(CardUtil.TESTS_SET_CODE_MAX_LOOKUP_LENGTH))
+            .replace("DELIMETER", CardUtil.TESTS_SET_CODE_DELIMETER)
     );
 
     // show ext info for special commands

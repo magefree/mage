@@ -123,10 +123,7 @@ public final class Aurification extends CardImpl {
         public boolean apply(Game game, Ability source) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game)) {
                 if (permanent != null) {
-                    int numToRemove = permanent.getCounters(game).getCount(CounterType.GOLD);
-                    if (numToRemove > 0) {
-                        permanent.removeCounters(CounterType.GOLD.getName(), numToRemove, source, game);
-                    }
+                    permanent.removeAllCounters(CounterType.GOLD.getName(), source, game);
                 }
             }
             return true;

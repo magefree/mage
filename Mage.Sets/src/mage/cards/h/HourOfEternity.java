@@ -10,13 +10,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.util.functions.CopyTokenFunction;
 
 import java.util.HashSet;
@@ -33,7 +32,8 @@ public final class HourOfEternity extends CardImpl {
 
         // Exile X target creature cards from your graveyard. For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.
         this.getSpellAbility().addEffect(new HourOfEternityEffect());
-        this.getSpellAbility().setTargetAdjuster(HourOfEternityAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
     }
 
     private HourOfEternity(final HourOfEternity card) {
@@ -43,18 +43,6 @@ public final class HourOfEternity extends CardImpl {
     @Override
     public HourOfEternity copy() {
         return new HourOfEternity(this);
-    }
-}
-
-enum HourOfEternityAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard((xValue != 1 ? " creature cards" : "creature card") + " from your graveyard"));
-        ability.addTarget(target);
     }
 }
 

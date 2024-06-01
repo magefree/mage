@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -27,8 +26,9 @@ import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Sporogenesis extends CardImpl {
@@ -152,7 +152,7 @@ class SporogenesisRemoveCountersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game)) {
-            permanent.removeCounters(CounterType.FUNGUS.createInstance(permanent.getCounters(game).getCount(CounterType.FUNGUS)), source, game);
+            permanent.removeAllCounters(CounterType.FUNGUS.getName(), source, game);
         }
         return true;
     }

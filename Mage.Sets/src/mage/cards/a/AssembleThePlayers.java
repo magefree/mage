@@ -56,7 +56,7 @@ public final class AssembleThePlayers extends CardImpl {
 class AssembleThePlayersPlayTopEffect extends AsThoughEffectImpl {
 
     AssembleThePlayersPlayTopEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may cast a creature spell with power 2 or less from the top of your library";
     }
 

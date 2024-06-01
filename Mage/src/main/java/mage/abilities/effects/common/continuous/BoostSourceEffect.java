@@ -54,7 +54,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             try {
                 affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
             } catch (IllegalArgumentException ex) {
@@ -68,7 +68,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target;
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             target = affectedObjectList.get(0).getPermanent(game);
         } else {
             target = game.getPermanent(source.getSourceId());

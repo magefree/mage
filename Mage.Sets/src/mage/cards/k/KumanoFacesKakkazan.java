@@ -99,7 +99,7 @@ class KumanoFacesKakkazanDamageEffect extends OneShotEffect {
 
 class KumanoFacesKakkazanTriggeredAbility extends DelayedTriggeredAbility {
 
-    public KumanoFacesKakkazanTriggeredAbility() {
+    KumanoFacesKakkazanTriggeredAbility() {
         super(null, Duration.EndOfTurn);
     }
 
@@ -132,7 +132,7 @@ class KumanoFacesKakkazanTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you cast your next creature spell this turn, that creature enters the battlefield with an additional +1/+1 counter on it.";
+        return "When you next cast a creature spell this turn, that creature enters the battlefield with an additional +1/+1 counter on it.";
     }
 }
 
@@ -140,7 +140,7 @@ class KumanoFacesKakkazanCounterEffect extends ReplacementEffectImpl {
 
     private final UUID spellCastId;
 
-    public KumanoFacesKakkazanCounterEffect(UUID spellCastId) {
+    KumanoFacesKakkazanCounterEffect(UUID spellCastId) {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
         this.spellCastId = spellCastId;
     }

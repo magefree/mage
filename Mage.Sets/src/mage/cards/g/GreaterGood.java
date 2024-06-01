@@ -29,7 +29,7 @@ public final class GreaterGood extends CardImpl {
         Effect effect = new DrawCardSourceControllerEffect(SacrificeCostCreaturesPower.instance);
         effect.setText("Draw cards equal to the sacrificed creature's power");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect,
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         effect = new DiscardControllerEffect(3);
         effect.setText(", then discard three cards");
         ability.addEffect(effect);

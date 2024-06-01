@@ -376,6 +376,24 @@ public abstract class MageTestPlayerBase {
     }
 
     /**
+     * Add target blink ability that can be called by text "target blink"
+     *
+     * @param controller
+     */
+    protected void addCustomEffect_BlinkTarget(TestPlayer controller) {
+        Ability ability = new SimpleActivatedAbility(
+                new ExileThenReturnTargetEffect(true, true).setText("target blink"),
+                new ManaCostsImpl<>("")
+        );
+        ability.addTarget(new TargetPermanent());
+        addCustomCardWithAbility(
+                "target blink for " + controller.getName(),
+                controller,
+                ability
+        );
+    }
+
+    /**
      * Return target card to hand that can be called by text "return from ..."
      *
      * @param controller

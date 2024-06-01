@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ruleModifying.LegendRuleDoesntApplyEffect;
@@ -109,7 +108,7 @@ class TheMasterMultipliedEffect extends ContinuousRuleModifyingEffectImpl {
 
         return controller != null && permanent != null
                 && filter.match(permanent, source.getControllerId(), source, game)
-                && stackAbility instanceof TriggeredAbility
+                && stackAbility.isTriggeredAbility()
                 && source.getControllerId().equals(eventSourceControllerId);
     }
 }

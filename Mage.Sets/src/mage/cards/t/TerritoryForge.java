@@ -89,7 +89,7 @@ class TerritoryForgeStaticEffect extends ContinuousEffectImpl {
         }
         for (Card card : exileZone.getCards(game)) {
             for (Ability ability : card.getAbilities(game)) {
-                if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.MANA) {
+                if (ability.isActivatedAbility()){
                     ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
                     permanent.addAbility(copyAbility, source.getSourceId(), game, true);
                 }

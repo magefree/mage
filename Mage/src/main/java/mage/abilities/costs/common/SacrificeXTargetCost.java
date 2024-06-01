@@ -14,7 +14,7 @@ import mage.target.common.TargetSacrifice;
  */
 public class SacrificeXTargetCost extends VariableCostImpl implements SacrificeCost {
 
-    protected final FilterPermanent filter;
+    private final FilterPermanent filter;
     private final int minValue;
 
     public SacrificeXTargetCost(FilterPermanent filter) {
@@ -29,7 +29,7 @@ public class SacrificeXTargetCost extends VariableCostImpl implements SacrificeC
         super(useAsAdditionalCost ? VariableCostType.ADDITIONAL : VariableCostType.NORMAL,
                 filter.getMessage() + " to sacrifice");
         this.text = (useAsAdditionalCost ? "as an additional cost to cast this spell, sacrifice " : "Sacrifice ") + xText + ' ' + filter.getMessage();
-        this.filter = filter;
+        this.filter = TargetSacrifice.makeFilter(filter);
         this.minValue = minValue;
     }
 

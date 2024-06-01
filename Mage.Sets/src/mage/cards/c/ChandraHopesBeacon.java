@@ -8,7 +8,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.cards.CardImpl;
@@ -38,10 +38,10 @@ public class ChandraHopesBeacon extends CardImpl {
         //Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy. This ability
         //triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect(true).withSpellName("it"),
+                new CopyTargetStackObjectEffect(true).withText("it"),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false, SetTargetPointer.SPELL
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
 
         //+2: Add two mana in any combination of colors.
         this.addAbility(new LoyaltyAbility(new AddManaInAnyCombinationEffect(2), 2));
@@ -108,7 +108,7 @@ class ChandraHopesBeaconPlayEffect extends AsThoughEffectImpl {
     private final Set<MageObjectReference> morSet = new HashSet<>();
 
     ChandraHopesBeaconPlayEffect(Cards cards, Game game) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.UntilEndOfYourNextTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.UntilEndOfYourNextTurn, Outcome.Benefit);
         cards.stream()
                 .map(uuid -> new MageObjectReference(uuid, game))
                 .forEach(morSet::add);

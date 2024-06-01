@@ -15,6 +15,7 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
@@ -105,7 +106,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void addAbility(Ability ability);
 
-    Counters getCounters();
+    /**
+     * The counters should be manipulated (adding or removing counters) with the appropriate addCounters/removeCounters/getCounterCount methods.
+     * This returns a copy for specific usage, to make sure the Player's counters are not altered from there.
+     */
+    Counters getCountersAsCopy();
 
     int getLife();
 
@@ -375,10 +380,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setTestMode(boolean value);
 
-    void addAction(String action);
-
-    int getActionCount();
-
     void setAllowBadMoves(boolean allowBadMoves);
 
     /**
@@ -493,6 +494,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param approvingObject reference to the ability that allows to play the card
      * @return
      */
+    // TODO: should have a version taking a PlayLandAbility or SpellAbility to handle MDFC/Zoetic Cavern/Adventure/etc...
     boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject);
 
     /**
@@ -504,6 +506,7 @@ public interface Player extends MageItem, Copyable<Player> {
      *                     of lands you already played.
      * @return
      */
+    // TODO: should have a version taking a PlayLandAbility to handle MDFC/Zoetic Cavern/etc...
     boolean playLand(Card card, Game game, boolean ignoreTiming);
 
     boolean activateAbility(ActivatedAbility ability, Game game);
@@ -820,7 +823,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void updateRange(Game game);
 
-    ManaOptions getManaAvailable(Game game);
+    ManaOptions getManaAvailable(Game originalGame);
 
     void addAvailableTriggeredMana(List<Mana> netManaAvailable);
 
@@ -832,11 +835,46 @@ public interface Player extends MageItem, Copyable<Player> {
 
     PlayableObjectsList getPlayableObjects(Game game, Zone zone);
 
-    Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game);
+    Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game originalGame);
 
+    /**
+     * add counter to the player (action verb is `get`, but not using that one to avoid ambiguity with getters)
+     */
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
 
-    void removeCounters(String name, int amount, Ability source, Game game);
+    /**
+     * lose {@param amount} counters of the specified kind.
+     */
+    void loseCounters(String counterName, int amount, Ability source, Game game);
+
+    /**
+     * lose all counters of any kind.
+     *
+     * @return the amount of counters removed this way.
+     */
+    int loseAllCounters(Ability source, Game game);
+
+    /**
+     * lose all counters of a specific kind.
+     *
+     * @return the amount of counters removed this way.
+     */
+    int loseAllCounters(String counterName, Ability source, Game game);
+
+    /**
+     * @return the amount of counters of the specified kind the player has
+     */
+    int getCountersCount(CounterType counterType);
+
+    /**
+     * @return the amount of counters of the specified kind the player has
+     */
+    int getCountersCount(String counterName);
+
+    /**
+     * @return the amount of counters in total of any kind the player has
+     */
+    int getCountersTotalCount();
 
     List<UUID> getAttachments();
 

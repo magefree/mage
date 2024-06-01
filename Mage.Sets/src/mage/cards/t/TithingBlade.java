@@ -21,7 +21,7 @@ public final class TithingBlade extends CardImpl {
 
         // When Tithing Blade enters the battlefield, each opponent sacrifices a creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE)
         ));
 
         // Craft with creature {4}{B}

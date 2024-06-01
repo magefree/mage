@@ -38,7 +38,7 @@ public final class AtKnifepoint extends CardImpl {
         )));
 
         // Whenever you commit a crime, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery." This ability triggers only once each turn.
-        this.addAbility(new CommittedCrimeTriggeredAbility(new CreateTokenEffect(new MercenaryToken())).setTriggersOnceEachTurn(true));
+        this.addAbility(new CommittedCrimeTriggeredAbility(new CreateTokenEffect(new MercenaryToken())).setTriggersLimitEachTurn(1));
     }
 
     private AtKnifepoint(final AtKnifepoint card) {

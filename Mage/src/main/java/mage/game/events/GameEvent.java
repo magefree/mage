@@ -43,7 +43,8 @@ public class GameEvent implements Serializable {
         PLAY_TURN, EXTRA_TURN,
         CHANGE_PHASE, PHASE_CHANGED,
         CHANGE_STEP, STEP_CHANGED,
-        BEGINNING_PHASE, BEGINNING_PHASE_PRE, BEGINNING_PHASE_POST,
+        BEGINNING_PHASE, BEGINNING_PHASE_PRE, BEGINNING_PHASE_POST, // The normal beginning phase -- at the beginning of turn
+        BEGINNING_PHASE_EXTRA, BEGINNING_PHASE_PRE_EXTRA, BEGINNING_PHASE_POST_EXTRA, // Extra beginning phase, 'as turn begun' watchers don't want to react on thoses.
         UNTAP_STEP_PRE, UNTAP_STEP, UNTAP_STEP_POST,
         UPKEEP_STEP_PRE, UPKEEP_STEP, UPKEEP_STEP_POST,
         DRAW_STEP_PRE, DRAW_STEP, DRAW_STEP_POST,
@@ -101,9 +102,27 @@ public class GameEvent implements Serializable {
          */
         CLASH, CLASHED,
         DAMAGE_PLAYER,
+
+        /* MILL_CARDS
+         playerId    the id of the player milling the card (not the source's controller)
+         targetId    the id of the card milled
+         */
         MILL_CARDS,
+        /* MILLED_CARDS
+         playerId    the id of the player milling the card (not the source's controller)
+         targetId    the id of the card milled
+         */
         MILLED_CARD,
-        MILLED_CARDS,
+        /* MILLED_CARDS_BATCH_FOR_ONE_PLAYER,
+         combines all MILLED_CARD events for a player milling card at the same time in a single batch
+         playerId    the id of the player whose batch it is
+         */
+        MILLED_CARDS_BATCH_FOR_ONE_PLAYER,
+        /* MILLED_CARDS_BATCH_FOR_ALL,
+         combines all MILLED_CARD events for any player in a single batch
+         */
+        MILLED_CARDS_BATCH_FOR_ALL,
+
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
@@ -128,6 +147,12 @@ public class GameEvent implements Serializable {
         includes all damage events, both permanent damage and player damage, in single batch event
          */
         DAMAGED_BATCH_FOR_ALL,
+        /* DAMAGED_BATCH_FIRED
+         * Does not contain any info on damage events, and can fire even when all damage is prevented.
+         * Fire any time a DAMAGED_BATCH_FOR_ALL could have fired (combat & noncombat).
+         * It is not a batch event (doesn't contain sub events), the name is a little ambiguous.
+         */
+        DAMAGED_BATCH_COULD_HAVE_FIRED,
 
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
@@ -516,7 +541,15 @@ public class GameEvent implements Serializable {
         STAY_ATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
-        COUNTER_REMOVED, COUNTERS_REMOVED,
+        /* REMOVE_COUNTER, REMOVE_COUNTERS, COUNTER_REMOVED, COUNTERS_REMOVED
+         targetId    id of the permanent or player losing counter(s)
+         sourceId    id of the ability removing them
+         playerId    player who controls the ability removing the counters
+         amount      number of counters being removed
+         data        name of the counter(s) being removed
+         */
+        REMOVE_COUNTER, COUNTER_REMOVED,
+        REMOVE_COUNTERS, COUNTERS_REMOVED,
         LOSE_CONTROL,
         /* LOST_CONTROL
          targetId    id of the creature that lost control
@@ -690,11 +723,13 @@ public class GameEvent implements Serializable {
     }
 
     private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, Ability source, UUID playerId, int amount, boolean flag, ApprovingObject approvingObject) {
+                      UUID targetId, Ability source, UUID playerId,
+                      int amount, boolean flag, ApprovingObject approvingObject
+    ) {
         this.type = type;
         this.customEventType = customEventType;
         this.targetId = targetId;
-        this.sourceId = source == null ? null : source.getSourceId();
+        this.sourceId = source == null ? null : source.getSourceId(); // We only keep the sourceId from the whole source.
         this.amount = amount;
         this.playerId = playerId;
         this.flag = flag;
@@ -844,7 +879,10 @@ public class GameEvent implements Serializable {
     }
 
     /**
-     * Custom sourceId setup for some events (use it in constructor). TODO: replace all custom sourceId to normal event classes
+     * Custom sourceId setup for some events (use it in constructor).
+     * TODO: replace all custom sourceId to normal event classes
+     *       for now, having the setter helps find all that do not provide an Ability source,
+     *       so keeping it is worthwhile until a thoughtfull cleanup.
      *
      * @param sourceId
      */

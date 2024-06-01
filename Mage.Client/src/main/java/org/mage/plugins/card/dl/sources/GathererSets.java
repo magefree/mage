@@ -100,7 +100,7 @@ public class GathererSets implements Iterable<DownloadJob> {
             "C19", "ELD", "MB1", "GN2", "J20", "THB", "UND", "C20", "IKO", "M21",
             "JMP", "2XM", "ZNR", "KLR", "CMR", "KHC", "KHM", "TSR", "STX", "STA",
             "C21", "MH2", "AFR", "AFC", "J21", "MID", "MIC", "VOW", "VOC", "YMID",
-            "NEC", "NEO", "SNC", "NCC", "CLB", "2X2", "DMU", "DMC", "40K", "GN3",
+            "NEC", "NEO", "SNC", "NCC", "CLB", "2X2", "DMU", "DMC", "YDMU", "40K", "GN3",
             "UNF", "BRO", "BRC", "BOT", "30A", "J22", "SCD", "DMR", "ONE", "ONC",
             "MOM", "MOC", "MUL", "MAT", "LTR", "CMM", "WOE", "WHO", "RVR", "WOT",
             "WOC", "SPG", "LCI", "LCC", "REX", "PIP", "MKM", "MKC", "CLU", "OTJ",

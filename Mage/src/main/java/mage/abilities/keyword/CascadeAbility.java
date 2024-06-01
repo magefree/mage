@@ -137,7 +137,7 @@ class CascadeEffect extends OneShotEffect {
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.CASCADE_LAND, source.getSourceId(), source, source.getControllerId(), 0);
         game.replaceEvent(event);
         if (event.getAmount() > 0) {
-            TargetCardInExile target = new TargetCardInExile(0, event.getAmount(), StaticFilters.FILTER_CARD_LAND, null, true);
+            TargetCardInExile target = new TargetCardInExile(0, event.getAmount(), StaticFilters.FILTER_CARD_LAND);
             target.withChooseHint("land to put onto battlefield tapped");
             controller.choose(Outcome.PutCardInPlay, cardsToExile, target, source, game);
             controller.moveCards(

@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.constants.Outcome;
@@ -89,7 +89,7 @@ class UnyieldingGatekeeperEffect extends OneShotEffect {
                     false, false, PutCards.BATTLEFIELD_TAPPED).apply(game, source);
         } else {
             new ExileTargetEffect().apply(game, source);
-            new CreateTokenControllerTargetPermanentEffect(new DetectiveToken()).apply(game, source);
+            new CreateTokenControllerTargetEffect(new DetectiveToken()).apply(game, source);
         }
         return true;
     }

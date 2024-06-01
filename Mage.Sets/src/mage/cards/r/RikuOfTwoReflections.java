@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
@@ -46,7 +46,7 @@ public final class RikuOfTwoReflections extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an instant or sorcery spell, you may pay {U}{R}. If you do, copy that spell. You may choose new targets for the copy.
-        Effect effect = new CopyTargetSpellEffect(true);
+        Effect effect = new CopyTargetStackObjectEffect(true);
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DoIfCostPaid(effect, new ManaCostsImpl<>("{U}{R}")),
                 filter, false, SetTargetPointer.SPELL

@@ -33,7 +33,7 @@ public final class FleshEaterImp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private FleshEaterImp(final FleshEaterImp card) {

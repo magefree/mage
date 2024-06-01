@@ -149,10 +149,8 @@ class HankyuCost extends UseAttachedCost {
             if (equipment == null) {
                 continue;
             }
-            int count = equipment.getCounters(game).getCount(CounterType.AIM);
-            equipment.removeCounters(CounterType.AIM.createInstance(count), source, game);
+            removedCounters = equipment.removeAllCounters(CounterType.AIM.getName(), source, game);
             paid = true;
-            removedCounters = count;
             break;
         }
 

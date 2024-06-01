@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -19,13 +18,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
 public final class OblivionStone extends CardImpl {
 
     public OblivionStone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {4}, {tap}: Put a fate counter on target permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FATE.createInstance()), new GenericManaCost(4));
@@ -62,15 +63,13 @@ class OblivionStoneEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent p : game.getBattlefield().getAllActivePermanents()) {
-            if (!(p.isLand(game) || p.getCounters(game).containsKey(CounterType.FATE))) {
-                p.destroy(source, game, false);
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+            if (!(permanent.isLand(game) || permanent.getCounters(game).containsKey(CounterType.FATE))) {
+                permanent.destroy(source, game, false);
             }
         }
-        for (Permanent p : game.getBattlefield().getAllActivePermanents()) {
-            if (p.getCounters(game).containsKey(CounterType.FATE)) {
-                p.removeCounters(CounterType.FATE.getName(), p.getCounters(game).getCount(CounterType.FATE), source, game);
-            }
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+            permanent.removeAllCounters(CounterType.FATE.getName(), source, game);
         }
         return true;
     }

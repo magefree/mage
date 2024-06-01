@@ -24,6 +24,7 @@ public enum MageIdentifier {
     HaukensInsightWatcher,
     IntrepidPaleontologistWatcher,
     KessDissidentMageWatcher,
+    IanMalcolmChaoticianWatcher,
     MuldrothaTheGravetideWatcher,
     ShareTheSpoilsWatcher,
     WishWatcher,
@@ -66,8 +67,8 @@ public enum MageIdentifier {
     WorldheartPhoenixAlternateCast,
     XandersPactAlternateCast,
     TheTombOfAclazotzWatcher,
-
-    MeTheImmortalAlternateCast;
+    MeTheImmortalAlternateCast,
+    WithoutPayingManaCostAlternateCast;
 
     /**
      * Additional text if there is need to differentiate two very similar effects

@@ -96,10 +96,9 @@ class SarulfRealmEaterEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        int counterCount = permanent.getCounters(game).getCount(CounterType.P1P1);
-        permanent.removeCounters(CounterType.P1P1.createInstance(counterCount), source, game);
+        int removedThisWay = permanent.removeAllCounters(CounterType.P1P1.getName(), source, game);
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, counterCount + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, removedThisWay));
         filter.add(AnotherPredicate.instance);
         Cards cards = new CardsImpl();
         game.getBattlefield()

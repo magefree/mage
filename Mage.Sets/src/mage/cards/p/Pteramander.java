@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -39,7 +38,11 @@ public final class Pteramander extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {7}{U}: Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard.
-        Ability ability = new SimpleActivatedAbility(new AdaptEffect(4).setText("Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard."), new ManaCostsImpl<>("{7}{U}"));
+        Ability ability = new SimpleActivatedAbility(
+                new AdaptEffect(4)
+                        .setText("Adapt 4. This ability costs {1} less to activate for each instant and sorcery card in your graveyard."),
+                new ManaCostsImpl<>("{7}{U}")
+        );
         ability.setCostAdjuster(PteramanderAdjuster.instance);
         this.addAbility(ability.addHint(PteramanderAdjuster.getHint()));
     }
@@ -68,10 +71,7 @@ enum PteramanderAdjuster implements CostAdjuster {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        if (controller != null) {
-            int count = cardsCount.calculate(game, ability, null);
-            CardUtil.reduceCost(ability, count);
-        }
+        int count = cardsCount.calculate(game, ability, null);
+        CardUtil.reduceCost(ability, count);
     }
 }

@@ -44,12 +44,12 @@ public abstract class TargetAmount extends TargetImpl {
     }
 
     @Override
-    public boolean isChosen() {
-        return doneChoosing();
+    public boolean isChosen(Game game) {
+        return doneChoosing(game);
     }
 
     @Override
-    public boolean doneChoosing() {
+    public boolean doneChoosing(Game game) {
         return amountWasSet
                 && (remainingAmount == 0
                 || (getMinNumberOfTargets() < getMaxNumberOfTargets()
@@ -104,7 +104,7 @@ public abstract class TargetAmount extends TargetImpl {
         if (!amountWasSet) {
             setAmount(source, game);
         }
-        chosen = isChosen();
+        chosen = isChosen(game);
         while (remainingAmount > 0) {
             if (!player.canRespond()) {
                 return chosen;
@@ -112,7 +112,7 @@ public abstract class TargetAmount extends TargetImpl {
             if (!getTargetController(game, playerId).chooseTargetAmount(outcome, this, source, game)) {
                 return chosen;
             }
-            chosen = isChosen();
+            chosen = isChosen(game);
         }
         return chosen;
     }

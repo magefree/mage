@@ -69,7 +69,7 @@ class SplitTheSpoilsEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(cards, Zone.EXILED, source, game);
-        TargetCard target = new TargetCardInExile(0, 5, StaticFilters.FILTER_CARD, null);
+        TargetCard target = new TargetCardInExile(0, 5, StaticFilters.FILTER_CARD);
         target.withChooseHint("To put in pile 1").withNotTarget(true);
         player.choose(outcome, cards, target, source, game);
         List<Card> pile1 = new ArrayList<>();

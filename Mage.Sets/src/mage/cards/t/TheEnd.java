@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.XorLessLifeCondition;
+import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.CardImpl;
@@ -28,12 +28,10 @@ public final class TheEnd extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
 
         // This spell costs {2} less to cast if your life total is 5 or less.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL,
-                new SpellCostReductionSourceEffect(
-                        2,
-                        new XorLessLifeCondition(XorLessLifeCondition.CheckType.CONTROLLER, 5)
-                ).setCanWorksOnStackOnly(true).setText("This spell costs {2} less to cast if your life total is 5 or less.")
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SpellCostReductionSourceEffect(2, FatefulHourCondition.instance)
+                        .setCanWorksOnStackOnly(true)
+                        .setText("This spell costs {2} less to cast if your life total is 5 or less.")
         ).setRuleAtTheTop(true));
 
         // Exile target creature or planeswalker. Search its controller's graveyard, hand, and library for any number of cards with the same name as that permanent and exile them. That player shuffles, then draws card for each card exiled from their hand this way.

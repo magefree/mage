@@ -13,10 +13,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -48,7 +47,8 @@ public final class GhostLitDrifter extends CardImpl {
                 FlyingAbility.getInstance(), Duration.EndOfTurn,
                 "X target creatures gain flying until end of turn"
         ));
-        ability.setTargetAdjuster(GhostLitDrifterAdjuster.instance);
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
@@ -59,15 +59,5 @@ public final class GhostLitDrifter extends CardImpl {
     @Override
     public GhostLitDrifter copy() {
         return new GhostLitDrifter(this);
-    }
-}
-
-enum GhostLitDrifterAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
     }
 }

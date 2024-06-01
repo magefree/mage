@@ -77,7 +77,7 @@ class DiscipleOfCaelusNinFirstEffect extends OneShotEffect {
             toKeep.add(source.getSourceId());
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(source.getControllerId());
+            Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }

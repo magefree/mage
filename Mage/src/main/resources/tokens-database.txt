@@ -129,6 +129,9 @@
 |Generate|EMBLEM:PH17|Emblem Inzerva|||InzervaMasterOfInsightsEmblem|
 |Generate|EMBLEM:LCC|Emblem Sorin|||SorinLordOfInnistradEmblem|
 |Generate|EMBLEM:RVR|Emblem Domri|||DomriRadeEmblem|
+|Generate|EMBLEM:SCD|Emblem Nixilis|||ObNixilisReignitedEmblem|
+|Generate|EMBLEM:SCD|Emblem Sarkhan|||SarkhanTheDragonspeakerEmblem|
+|Generate|EMBLEM:MH3|Emblem Tamiyo|||TamiyoSeasonedScholarEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2213,3 +2216,94 @@
 |Generate|TOK:MKC|Tiny|||TinyToken|
 |Generate|TOK:MKC|Treasure|||TreasureToken|
 |Generate|TOK:MKC|Zombie|||ZombieToken|
+
+# OTJ
+|Generate|TOK:OTJ|Angel|||Angel33Token|
+|Generate|TOK:OTJ|Beau|||BeauToken|
+|Generate|TOK:OTJ|Bird|||BlueBirdToken|
+|Generate|TOK:OTJ|Clue|||ClueArtifactToken|
+|Generate|TOK:OTJ|Dinosaur|||Dinosaur31Token|
+|Generate|TOK:OTJ|Elemental|||SeedGuardianToken|
+|Generate|TOK:OTJ|Elk|||ElkToken|
+|Generate|TOK:OTJ|Mercenary|||MercenaryToken|
+|Generate|TOK:OTJ|Meteorite|||MeteoriteToken|
+|Generate|TOK:OTJ|Ox|||Ox22Token|
+|Generate|TOK:OTJ|Scorpion Dragon|||ScorpionDragonToken|
+|Generate|TOK:OTJ|Sheep|||SheepWhiteToken|
+|Generate|TOK:OTJ|Spirit|||Spirit22Token|
+|Generate|TOK:OTJ|Treasure|||TreasureToken|
+|Generate|TOK:OTJ|Vampire Rogue|||VampireRogueToken|
+|Generate|TOK:OTJ|Varmint|||VarmintToken|
+|Generate|TOK:OTJ|Zombie Rogue|||ZombieRogueToken|
+
+# OTC
+|Generate|TOK:OTC|Angel|||AngelToken|
+|Generate|TOK:OTC|Ape|||ApeToken|
+|Generate|TOK:OTC|Assassin|||QueenMarchesaAssassinToken|
+|Generate|TOK:OTC|Bird Illusion|||BirdIllusionToken|
+|Generate|TOK:OTC|Blood|||BloodToken|
+|Generate|TOK:OTC|Boar|||Boar2Token|
+|Generate|TOK:OTC|Dragon|||DragonEggDragonToken|
+|Generate|TOK:OTC|Dragon Egg|||NestingDragonToken|
+|Generate|TOK:OTC|Dragon Elemental|||DragonElementalToken|
+|Generate|TOK:OTC|Drake|||DrakeToken|
+|Generate|TOK:OTC|Eldrazi|||EldraziToken|
+|Generate|TOK:OTC|Eldrazi Scion|||EldraziScionToken|
+|Generate|TOK:OTC|Elemental|1||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:OTC|Elemental|2||RedElementalToken|
+|Generate|TOK:OTC|Elemental|3||OmnathElementalToken|
+|Generate|TOK:OTC|Food|||FoodToken|
+|Generate|TOK:OTC|Inkling|||InklingToken|
+|Generate|TOK:OTC|Insect|||InsectToken|
+|Generate|TOK:OTC|Plant|||PlantToken|
+|Generate|TOK:OTC|Plant Warrior|||PlantWarriorToken|
+|Generate|TOK:OTC|Rat|||RatToken|
+|Generate|TOK:OTC|Rogue|||RogueToken|
+|Generate|TOK:OTC|Sand Warrior|||HazezonTamarSandWarriorToken|
+|Generate|TOK:OTC|Shark|||SharkToken|
+|Generate|TOK:OTC|Soldier|||SoldierArtifactToken|
+|Generate|TOK:OTC|Thopter|||ThopterColorlessToken|
+|Generate|TOK:OTC|Zombie|||ZombieToken|
+
+# BIG
+|Generate|TOK:BIG|Bat|||Bat21Token|
+|Generate|TOK:BIG|Blood|||BloodToken|
+|Generate|TOK:BIG|Construct|||KarnConstructToken|
+|Generate|TOK:BIG|Food|||FoodToken|
+|Generate|TOK:BIG|Gnome|||GnomeToken|
+|Generate|TOK:BIG|Golem|||GolemToken|
+|Generate|TOK:BIG|Map|||MapToken|
+
+# OTP
+|Generate|TOK:OTP|Food|||FoodToken|
+|Generate|TOK:OTP|Human Cleric|||OutlawsMerrimentClericToken|
+|Generate|TOK:OTP|Human Rogue|||OutlawsMerrimentRogueToken|
+|Generate|TOK:OTP|Human Warrior|||OutlawsMerrimentWarriorToken|
+|Generate|TOK:OTP|Pest|||Pest11GainLifeToken|
+
+# SCD
+|Generate|TOK:SCD|Beast|||BeastToken|
+|Generate|TOK:SCD|Bird|||BirdToken|
+|Generate|TOK:SCD|Cat|||CatToken|
+|Generate|TOK:SCD|Cat Beast|||CatBeastToken|
+|Generate|TOK:SCD|Cat Bird|||CatBirdToken|
+|Generate|TOK:SCD|Demon|||DemonFlyingToken|
+|Generate|TOK:SCD|Dragon|||DragonToken2|
+|Generate|TOK:SCD|Eldrazi|||EldraziToken|
+|Generate|TOK:SCD|Elephant|||ElephantToken|
+|Generate|TOK:SCD|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:SCD|Faerie|||FaerieToken|
+|Generate|TOK:SCD|Human Warrior|||HumanWarriorToken|
+|Generate|TOK:SCD|Insect|||InsectDeathToken|
+|Generate|TOK:SCD|Karox Bladewing|||KaroxBladewingDragonToken|
+|Generate|TOK:SCD|Ogre|||OgreToken|
+|Generate|TOK:SCD|Pegasus|||PegasusToken|
+|Generate|TOK:SCD|Saproling|||SaprolingToken|
+|Generate|TOK:SCD|Soldier|||SoldierLifelinkToken|
+|Generate|TOK:SCD|Spirit|||SpiritWhiteToken|
+|Generate|TOK:SCD|Thopter|1||ThopterColorlessToken|
+|Generate|TOK:SCD|Thopter|2||ThopterToken|
+|Generate|TOK:SCD|Treasure|||TreasureToken|
+|Generate|TOK:SCD|Zombie|||ZombieToken|
+|Generate|TOK:SCD|Zombie Army|||ZombieArmyToken|
+|Generate|TOK:SCD|Zombie Knight|||ZombieKnightToken|

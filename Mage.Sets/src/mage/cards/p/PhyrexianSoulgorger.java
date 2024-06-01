@@ -29,7 +29,7 @@ public final class PhyrexianSoulgorger extends CardImpl {
 
         // Cumulative upkeep-Sacrifice a creature.
         this.addAbility(new CumulativeUpkeepAbility(
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private PhyrexianSoulgorger(final PhyrexianSoulgorger card) {

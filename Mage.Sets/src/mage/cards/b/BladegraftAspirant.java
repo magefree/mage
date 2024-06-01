@@ -1,31 +1,24 @@
 package mage.cards.b;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
+import mage.filter.FilterCard;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author @stwalsh4118
  */
 public final class BladegraftAspirant extends CardImpl {
@@ -39,7 +32,7 @@ public final class BladegraftAspirant extends CardImpl {
 
     public BladegraftAspirant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        
+
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -52,7 +45,7 @@ public final class BladegraftAspirant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Activated abilities of Equipment you control that target Bladegraft Aspirant cost {1} less to activate.
-        
+
         this.addAbility(new SimpleStaticAbility(new BladegraftAspirantCostReductionEffect()));
 
     }
@@ -71,7 +64,7 @@ class BladegraftAspirantCostReductionEffect extends CostModificationEffectImpl {
 
     private static final String effectText = "Activated abilities of Equipment you control that target Bladegraft Aspirant cost {1} less to activate.";
 
-            BladegraftAspirantCostReductionEffect() {
+    BladegraftAspirantCostReductionEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = effectText;
     }
@@ -86,7 +79,7 @@ class BladegraftAspirantCostReductionEffect extends CostModificationEffectImpl {
         if (controller == null) {
             return false;
         }
-        int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 1, 0);        
+        int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 1, 0);
         if (reduceMax <= 0) {
             return true;
         }
@@ -97,15 +90,13 @@ class BladegraftAspirantCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() != AbilityType.ACTIVATED
-                && (abilityToModify.getAbilityType() != AbilityType.MANA
-                || !(abilityToModify instanceof ActivatedAbility))) {
+        if (!abilityToModify.getAbilityType().isActivatedAbility()) {
             return false;
         }
 
         Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
 
-        if(!(permanent != null && permanent.getSubtype(game).contains(SubType.EQUIPMENT) && permanent.isControlledBy(source.getControllerId()))) {
+        if (!(permanent != null && permanent.getSubtype(game).contains(SubType.EQUIPMENT) && permanent.isControlledBy(source.getControllerId()))) {
             return false;
         }
 

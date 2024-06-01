@@ -29,9 +29,7 @@ public final class LilianasTriumph extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Each opponent sacrifices a creature. If you control a Liliana planeswalker, each opponent also discards a card.
-        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        ));
+        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DiscardEachPlayerEffect(
                         StaticValue.get(1), false, TargetController.OPPONENT

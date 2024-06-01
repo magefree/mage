@@ -30,7 +30,7 @@ public class GoadAllEffect extends ContinuousEffectImpl {
     public GoadAllEffect(Duration duration, FilterPermanent filter, boolean affectedObjectsSet) {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
         this.filter = filter;
-        this.affectedObjectsSet = affectedObjectsSet;
+        this.setAffectedObjectsSet(affectedObjectsSet);
     }
 
     private GoadAllEffect(final GoadAllEffect effect) {
@@ -46,7 +46,7 @@ public class GoadAllEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             game.getBattlefield()
                     .getActivePermanents(
                             filter, source.getControllerId(), source, game
@@ -58,7 +58,7 @@ public class GoadAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             this.affectedObjectList.removeIf(mor -> !mor.zoneCounterIsCurrent(game)
                     || mor.getPermanent(game) == null);
             if (affectedObjectList.isEmpty()) {

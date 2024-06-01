@@ -1,18 +1,15 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.XorLessLifeCondition;
+import mage.abilities.condition.common.LifeCompareCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +28,7 @@ public final class RuthlessCullblade extends CardImpl {
         // Ruthless Cullblade gets +2/+1 as long as an opponent has 10 or less life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield),
-                new XorLessLifeCondition(XorLessLifeCondition.CheckType.AN_OPPONENT, 10),
+                new LifeCompareCondition(TargetController.OPPONENT, ComparisonType.OR_LESS, 10),
                 "{this} gets +2/+1 as long as an opponent has 10 or less life.")));
     }
 

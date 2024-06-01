@@ -23,6 +23,7 @@ public class OneOrMoreCountersAddedTriggeredAbility extends TriggeredAbilityImpl
         super(Zone.ALL, effect, optional);
         this.counterType = counterType;
         setTriggerPhrase("Whenever one or more " + counterType.getName() + " counters are put on {this}, ");
+        this.withRuleTextReplacement(true);
     }
 
     protected OneOrMoreCountersAddedTriggeredAbility(final OneOrMoreCountersAddedTriggeredAbility ability) {

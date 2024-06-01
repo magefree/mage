@@ -46,6 +46,7 @@ import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.command.emblems.EmblemOfCard;
+import mage.game.command.emblems.RadiationEmblem;
 import mage.game.command.emblems.TheRingEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
@@ -98,8 +99,10 @@ public abstract class GameImpl implements Game {
 
     private transient Object customData; // temporary data, used in AI simulations
     private transient Player losingPlayer; // temporary data, used in AI simulations
-    protected boolean simulation = false;
-    protected boolean checkPlayableState = false;
+
+    protected boolean simulation = false; // for inner simulations (game without user messages)
+    protected boolean aiGame = false; // for inner simulations (ai game, debug only)
+    protected boolean checkPlayableState = false; // for inner playable calculations (game without user dialogs)
 
     protected AtomicInteger totalErrorsCount = new AtomicInteger(); // for debug only: error stats
 
@@ -180,6 +183,7 @@ public abstract class GameImpl implements Game {
     protected GameImpl(final GameImpl game) {
         //this.customData = game.customData; // temporary data, no need on game copy
         //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
+        this.aiGame = game.aiGame;
         this.simulation = game.simulation;
         this.checkPlayableState = game.checkPlayableState;
 
@@ -248,13 +252,19 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void setSimulation(boolean simulation) {
-        this.simulation = simulation;
+    public Game createSimulationForAI() {
+        Game res = this.copy();
+        ((GameImpl) res).simulation = true;
+        ((GameImpl) res).aiGame = true;
+        return res;
     }
 
     @Override
-    public void setCheckPlayableState(boolean checkPlayableState) {
-        this.checkPlayableState = checkPlayableState;
+    public Game createSimulationForPlayableCalc() {
+        Game res = this.copy();
+        ((GameImpl) res).simulation = true;
+        ((GameImpl) res).checkPlayableState = true;
+        return res;
     }
 
     @Override
@@ -432,6 +442,11 @@ public abstract class GameImpl implements Game {
             for (Designation designation : state.getDesignations()) {
                 if (designation.getId().equals(objectId)) {
                     return designation;
+                }
+            }
+            for (Emblem emblem : state.getInherentEmblems()) {
+                if (emblem.getId().equals(objectId)) {
+                    return emblem;
                 }
             }
             // can be an ability of a sacrificed Token trying to get it's source object
@@ -1357,12 +1372,21 @@ public abstract class GameImpl implements Game {
                 }
             }
         }
+
+        // Rad counter mechanic for every player
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            // This is not a real emblem. Just a fake source for the
+            // inherent trigger ability related to Rad counters
+            // Faking a source just to display something on the stack ability.
+            state.addInherentEmblem(new RadiationEmblem(), playerId);
+        }
     }
 
     public void initGameDefaultWatchers() {
         List<Watcher> newWatchers = new ArrayList<>();
         newWatchers.add(new CastSpellLastTurnWatcher());
         newWatchers.add(new PlayerLostLifeWatcher());
+        newWatchers.add(new FirstStrikeWatcher()); // required for combat code
         newWatchers.add(new BlockedAttackerWatcher());
         newWatchers.add(new PlanarRollWatcher()); // needed for RollDiceTest (planechase code needs improves)
         newWatchers.add(new AttackedThisTurnWatcher());
@@ -1602,6 +1626,10 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
+        if (!this.isSimulation() && this.inCheckPlayableState()) {
+            throw new IllegalStateException("Wrong code usage. Only simulation games can be in CheckPlayableState");
+        }
+
         int priorityErrorsCount = 0;
         infiniteLoopCounter = 0;
         int rollbackBookmarkOnPriorityStart = 0;
@@ -1710,8 +1738,6 @@ public abstract class GameImpl implements Game {
                             // tests - try to fail fast
                             throw new MageException(UNIT_TESTS_ERROR_TEXT);
                         }
-                    } finally {
-                        setCheckPlayableState(false);
                     }
                     state.getPlayerList().getNext();
                 }
@@ -1730,7 +1756,6 @@ public abstract class GameImpl implements Game {
         } finally {
             resetLKI();
             clearAllBookmarks();
-            setCheckPlayableState(false);
         }
     }
 
@@ -1935,9 +1960,9 @@ public abstract class GameImpl implements Game {
         informPlayers("You have planeswalked to " + newPlane.getLogName());
 
         // Fire off the planeswalked event
-        GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), null, newPlane.getId(), 0, true);
+        GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), (Ability) null, newPlane.getId(), 0, true);
         if (!replaceEvent(event)) {
-            GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), null, newPlane.getId(), 0, true);
+            GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), (Ability) null, newPlane.getId(), 0, true);
             fireEvent(ge);
         }
 
@@ -2138,11 +2163,27 @@ public abstract class GameImpl implements Game {
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
         }
-        // return addDelayedTriggeredAbility(delayedAbility);
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
         if (source != null) {
-            newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+            // Relevant ruling:
+            // 603.7e If an activated or triggered ability creates a delayed triggered ability,
+            // the source of that delayed triggered ability is the same as the source of that other ability.
+            // The controller of that delayed triggered ability is the player who controlled that other ability as it resolved.
+            // 603.7f If a static ability generates a replacement effect which causes a delayed triggered ability to be created,
+            // the source of that delayed triggered ability is the object with that static ability.
+            // The controller of that delayed triggered ability is the same as the controller of that object at the time
+            // the replacement effect was applied.
+            //
+            // There are two possibility for the zcc:
+            // 1/ the source is an Ability with a valid (not 0) zcc, and we must use the same.
+            int zcc = source.getSourceObjectZoneChangeCounter();
+            if (zcc == 0) {
+                // 2/ the source has not a valid zcc (it is most likely a StaticAbility instantiated at beginning of game)
+                //    we use the source objects's zcc
+                zcc = getState().getZoneChangeCounter(source.getSourceId());
+            }
+            newAbility.setSourceObjectZoneChangeCounter(zcc);
             newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.init(this);
@@ -2152,8 +2193,18 @@ public abstract class GameImpl implements Game {
 
     @Override
     public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source) {
+        return fireReflexiveTriggeredAbility(reflexiveAbility, source, false);
+    }
+
+    @Override
+    public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source, boolean fireAsSimultaneousEvent) {
         UUID uuid = this.addDelayedTriggeredAbility(reflexiveAbility, source);
-        this.fireEvent(GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source, source.getControllerId()));
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source, source.getControllerId());
+        if (fireAsSimultaneousEvent) {
+            this.getState().addSimultaneousEvent(event, this);
+        } else {
+            this.fireEvent(event);
+        }
         return uuid;
     }
 
@@ -2249,7 +2300,7 @@ public abstract class GameImpl implements Game {
             if (!player.hasLost()
                     && ((player.getLife() <= 0 && player.canLoseByZeroOrLessLife())
                     || player.getLibrary().isEmptyDraw()
-                    || player.getCounters().getCount(CounterType.POISON) >= 10)) {
+                    || player.getCountersCount(CounterType.POISON) >= 10)) {
                 player.lost(this);
             }
         }
@@ -4045,8 +4096,24 @@ public abstract class GameImpl implements Game {
     @Override
     public String toString() {
         Player activePayer = this.getPlayer(this.getActivePlayerId());
+
+        // show non-standard game state (not part of the real game, e.g. AI or mana calculation)
+        List<String> simInfo = new ArrayList<>();
+        if (this.simulation) {
+            simInfo.add("SIMULATION");
+        }
+        if (this.aiGame) {
+            simInfo.add("AI");
+        }
+        if (this.checkPlayableState) {
+            simInfo.add("PLAYABLE CALC");
+        }
+        if (!ThreadUtils.isRunGameThread()) {
+            simInfo.add("NOT GAME THREAD");
+        }
+
         StringBuilder sb = new StringBuilder()
-                .append(this.isSimulation() ? "!!!SIMULATION!!! " : "")
+                .append(!simInfo.isEmpty() ? "!!!" + String.join(", ", simInfo) + "!!! " : "")
                 .append(this.getGameType().toString())
                 .append("; ").append(CardUtil.getTurnInfo(this))
                 .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))

@@ -1,13 +1,6 @@
 package mage.cards.m;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
@@ -17,6 +10,12 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -70,7 +69,7 @@ class MirranSafehouseEffect extends ContinuousEffectImpl {
                 .flatMap(Collection::stream)
                 .map(card -> card.getAbilities(game))
                 .flatMap(Collection::stream)
-                .filter(ActivatedAbility.class::isInstance)
+                .filter(Ability::isActivatedAbility)
                 .collect(Collectors.toSet());
         for (Ability ability : abilities) {
             permanent.addAbility(ability, source.getSourceId(), game, true);

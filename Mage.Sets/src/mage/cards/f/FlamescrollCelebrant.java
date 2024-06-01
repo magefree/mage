@@ -11,7 +11,6 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
@@ -97,7 +96,7 @@ class FlamescrollCelebrantTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
+        if (stackAbility.getStackAbility().isManaActivatedAbility()) {
             return false;
         }
         getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));

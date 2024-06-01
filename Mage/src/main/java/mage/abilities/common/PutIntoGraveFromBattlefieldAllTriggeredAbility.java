@@ -1,6 +1,7 @@
 
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -62,5 +63,10 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     @Override
     public PutIntoGraveFromBattlefieldAllTriggeredAbility copy() {
         return new PutIntoGraveFromBattlefieldAllTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

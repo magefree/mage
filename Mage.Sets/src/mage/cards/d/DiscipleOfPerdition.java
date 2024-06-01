@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.LifeCompareCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -12,9 +12,9 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.TargetController;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -36,7 +36,7 @@ public final class DiscipleOfPerdition extends CardImpl {
         // * You draw a card and you lose 1 life.
         Ability ability = new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), false);
         ability.getModes().setChooseText("choose one. If you have exactly 13 life, you may choose both.");
-        ability.getModes().setMoreCondition(DiscipleOfPerditionCondition.instance);
+        ability.getModes().setMoreCondition(new LifeCompareCondition(TargetController.YOU, ComparisonType.EQUAL_TO, 13));
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
 
         // * Exile target opponent's graveyard. That player loses 1 life.
@@ -54,15 +54,5 @@ public final class DiscipleOfPerdition extends CardImpl {
     @Override
     public DiscipleOfPerdition copy() {
         return new DiscipleOfPerdition(this);
-    }
-}
-
-enum DiscipleOfPerditionCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getLife() == 13;
     }
 }

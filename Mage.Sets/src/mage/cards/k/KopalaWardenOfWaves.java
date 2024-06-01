@@ -130,7 +130,7 @@ class KopalaWardenOfWavesCostModificationEffect2 extends CostModificationEffectI
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getAbilityType() == AbilityType.ACTIVATED
+        return abilityToModify.isActivatedAbility()
                 && KopalaWardenOfWaves.isAbilityCompatible(abilityToModify, source, game);
     }
 

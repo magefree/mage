@@ -12,10 +12,7 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
@@ -31,10 +28,8 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.SuperType;
 
 /**
- *
  * @author LevelX2
  */
 public final class TamiyoFieldResearcher extends CardImpl {
@@ -104,7 +99,7 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
                 creatures.add(new MageObjectReference(uuid, game));
             }
             if (!creatures.isEmpty()) {
-                DelayedTriggeredAbility delayedAbility = new TamiyoFieldResearcherDelayedTriggeredAbility(creatures, game.getTurnNum());
+                DelayedTriggeredAbility delayedAbility = new TamiyoFieldResearcherDelayedTriggeredAbility(creatures);
                 game.addDelayedTriggeredAbility(delayedAbility, source);
             }
             return true;
@@ -115,19 +110,16 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
 
 class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private int startingTurn;
     private List<MageObjectReference> creatures;
 
-    public TamiyoFieldResearcherDelayedTriggeredAbility(List<MageObjectReference> creatures, int startingTurn) {
-        super(new DrawCardSourceControllerEffect(1), Duration.Custom, false);
+    public TamiyoFieldResearcherDelayedTriggeredAbility(List<MageObjectReference> creatures) {
+        super(new DrawCardSourceControllerEffect(1), Duration.UntilYourNextTurn, false);
         this.creatures = creatures;
-        this.startingTurn = startingTurn;
     }
 
     private TamiyoFieldResearcherDelayedTriggeredAbility(final TamiyoFieldResearcherDelayedTriggeredAbility ability) {
         super(ability);
         this.creatures = ability.creatures;
-        this.startingTurn = ability.startingTurn;
     }
 
     @Override
@@ -144,11 +136,6 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean isInactive(Game game) {
-        return game.isActivePlayer(getControllerId()) && game.getTurnNum() != startingTurn;
     }
 
     @Override

@@ -115,7 +115,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                     TargetPermanent target = new TargetPermanent(filter);
                     target.withNotTarget(true);
                     if (target.canChoose(controller.getId(), source, game)) {
-                        while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+                        while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                             controller.chooseTarget(outcome, target, source, game);
                         }
                     } else {

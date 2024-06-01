@@ -39,7 +39,7 @@ public final class PoeticIngenuity extends CardImpl {
                 new CreateTokenEffect(new Dinosaur31Token()),
                 StaticFilters.FILTER_SPELL_AN_ARTIFACT,
                 false
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
     }
 
     private PoeticIngenuity(final PoeticIngenuity card) {

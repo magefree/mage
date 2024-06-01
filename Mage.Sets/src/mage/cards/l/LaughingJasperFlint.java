@@ -112,7 +112,7 @@ class LaughingJasperFlintEffect extends OneShotEffect {
         }
         controller.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
         }
         return true;
     }

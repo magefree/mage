@@ -78,7 +78,7 @@ class StolenStrategyEffect extends OneShotEffect {
                 if (!card.isLand(game) && card.getSpellAbility() != null) {
                     // allow to cast the card
                     // and you may spend mana as though it were mana of any color to cast it
-                    CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+                    CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
                 }
             }
         }

@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -16,8 +15,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SunkenHope extends CardImpl {
@@ -66,7 +66,7 @@ class SunkenHopeReturnToHandEffect extends OneShotEffect {
 
         Target target = new TargetControlledCreaturePermanent().withNotTarget(true);
         if (target.canChoose(player.getId(), source, game)) {
-            while (player.canRespond() && !target.isChosen()
+            while (player.canRespond() && !target.isChosen(game)
                     && target.canChoose(player.getId(), source, game)) {
                 player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             }

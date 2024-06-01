@@ -18,8 +18,8 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -78,8 +78,8 @@ class MegatronDestructiveForceEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(
-            0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT, true
+        TargetSacrifice target = new TargetSacrifice(
+            0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT
         );
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());

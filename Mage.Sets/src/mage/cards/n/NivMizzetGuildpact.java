@@ -1,9 +1,5 @@
 package mage.cards.n;
 
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -14,13 +10,13 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.Hint;
-import mage.abilities.keyword.HexproofFromMulticoloredAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HexproofFromMulticoloredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,8 +25,11 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.SecondTargetPointer;
 
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author DominionSpy
  */
 public final class NivMizzetGuildpact extends CardImpl {
@@ -50,11 +49,10 @@ public final class NivMizzetGuildpact extends CardImpl {
         // Hexproof from multicolored
         this.addAbility(HexproofFromMulticoloredAbility.getInstance());
 
-        // Whenever Niv-Mizzet, Guildpact deals combat damage to a player,
-        // it deals X damage to any target, target player draws X cards, and you gain X life,
-        // where X is the number of different color pairs among permanents you control that are exactly two colors.
+        // Whenever Niv-Mizzet, Guildpact deals combat damage to a player, it deals X damage to any target, target player draws X cards, and you gain X life, where X is the number of different color pairs among permanents you control that are exactly two colors.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DamageTargetEffect(NivMizzetGuildpactCount.instance)
+                        .setUseOnlyTargetPointer(true)
                         .setText("it deals X damage to any target"), false);
         ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new DrawCardTargetEffect(NivMizzetGuildpactCount.instance)

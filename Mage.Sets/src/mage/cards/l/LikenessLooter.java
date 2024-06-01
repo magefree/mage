@@ -15,15 +15,13 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -52,7 +50,8 @@ public final class LikenessLooter extends CardImpl {
                 new LikenessLooterEffect(),
                 new ManaCostsImpl<>("{X}")
         );
-        ability.setTargetAdjuster(LikenessLooterAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 
@@ -63,19 +62,6 @@ public final class LikenessLooter extends CardImpl {
     @Override
     public LikenessLooter copy() {
         return new LikenessLooter(this);
-    }
-}
-
-enum LikenessLooterAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterCard filterCard = new FilterCreatureCard("creature card in your graveyard  with mana value " + xValue);
-        filterCard.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        ability.getTargets().clear();
-        ability.getTargets().add(new TargetCardInYourGraveyard(filterCard));
     }
 }
 
@@ -130,7 +116,8 @@ class LikenessLooterCopyApplier extends CopyApplier {
                 new LikenessLooterEffect(),
                 new ManaCostsImpl<>("{X}")
         );
-        ability.setTargetAdjuster(LikenessLooterAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         blueprint.getAbilities().add(ability);
         return true;
     }

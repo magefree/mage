@@ -51,7 +51,7 @@ public final class GarrukTheVeilCursed extends CardImpl {
                         StaticFilters.FILTER_CARD_CREATURE_A
                 ), true),
                 null,
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 false
         ), -1));
 

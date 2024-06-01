@@ -58,7 +58,7 @@ public final class GisaTheHellraiser extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you commit a crime, create two tapped 2/2 blue and black Zombie Rogue creature tokens. This ability triggers only once each turn.
-        ability = new CommittedCrimeTriggeredAbility(new CreateTokenEffect(new ZombieRogueToken(), 2, true)).setTriggersOnceEachTurn(true);
+        ability = new CommittedCrimeTriggeredAbility(new CreateTokenEffect(new ZombieRogueToken(), 2, true)).setTriggersLimitEachTurn(1);
         this.addAbility(ability);
     }
 

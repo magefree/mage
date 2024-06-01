@@ -53,7 +53,7 @@ public final class ThreefoldThunderhulk extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 new GenericManaCost(2)
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT));
         this.addAbility(ability);
     }
 

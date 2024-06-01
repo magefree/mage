@@ -39,7 +39,7 @@ public class AllegiantGeneralPryde extends CardImpl {
         // Trooper creatures you control have "When this creature enters the battlefield, you may sacrifice a creature. If you do, draw two cards and lose 2 life."
         Ability gainedAbility = new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(2),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)
         ).addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and")))
                 .setTriggerPhrase("When this creature enters the battlefield, ");
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(gainedAbility, Duration.WhileOnBattlefield, filter)));

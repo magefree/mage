@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.MutatesSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MutateAbility;
@@ -52,7 +52,7 @@ public final class SawtuskDemolisher extends CardImpl {
 
         // Whenever this creature mutates, destroy target noncreature permanent. Its controller creates a 3/3 green Beast creature token.
         Ability ability = new MutatesSourceTriggeredAbility(new DestroyTargetEffect());
-        ability.addEffect(new CreateTokenControllerTargetPermanentEffect(new BeastToken()));
+        ability.addEffect(new CreateTokenControllerTargetEffect(new BeastToken()));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

@@ -70,7 +70,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "OTJ;BIG;OTC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "MH3;M3C"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -142,12 +142,16 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
+        skipListAddName(SKIP_LIST_TYPE, "MH3", "Echoes of Eternity"); // temporary, waiting for tribal -> kindred change
+        skipListAddName(SKIP_LIST_TYPE, "MH3", "Idol of False Gods"); // temporary, waiting for tribal -> kindred change
+        skipListAddName(SKIP_LIST_TYPE, "MH3", "Sneaky Snacker"); // temporary
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "MH3", "Sneaky Snacker"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -155,6 +159,7 @@ public class VerifyCardDataTest {
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
+        skipListAddName(SKIP_LIST_RARITY, "M3C", "Pyrogoyf"); // temporary
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
@@ -960,7 +965,9 @@ public class VerifyCardDataTest {
 
         // CHECK: wrong set name
         for (ExpansionSet set : sets) {
-            if (true) continue; // TODO: enable after merge of 40k's cards pull requests (needs before set rename)
+            if (true) {
+                continue; // TODO: enable after merge of 40k's cards pull requests (needs before set rename)
+            }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
                 // unofficial or inner set
@@ -978,7 +985,9 @@ public class VerifyCardDataTest {
 
         // CHECK: parent and block info
         for (ExpansionSet set : sets) {
-            if (true) continue; // TODO: comments it and run to find a problems
+            if (true) {
+                continue; // TODO: comments it and run to find a problems
+            }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
                 continue;
@@ -1011,7 +1020,9 @@ public class VerifyCardDataTest {
 
             // block info
             if (!Objects.equals(set.getBlockName(), jsonSet.block)) {
-                if (true) continue; // TODO: comments it and run to find a problems
+                if (true) {
+                    continue; // TODO: comments it and run to find a problems
+                }
                 errorsList.add(String.format("Error: set with wrong blockName settings: %s (blockName = %s, but must be %s)",
                         set.getCode() + " - " + set.getName(),
                         set.getBlockName(),
@@ -1063,9 +1074,12 @@ public class VerifyCardDataTest {
             }
 
             // CHECK: set code must be compatible with tests commands format like "SET-card"
-            // how-to fix: increase lookup lenth
-            if (set.getCode().length() + 1 > CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH) {
-                errorsList.add("Error: set code too big for test commads lookup: " + set.getCode() + ", lookup length: " + CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH);
+            // how-to fix: change min/max lookup length
+            if (set.getCode().length() < CardUtil.TESTS_SET_CODE_MIN_LOOKUP_LENGTH
+                    || set.getCode().length() > CardUtil.TESTS_SET_CODE_MAX_LOOKUP_LENGTH) {
+                errorsList.add("Error: set code un-supported by test commands lookup: " + set.getCode()
+                        + ", min length: " + CardUtil.TESTS_SET_CODE_MIN_LOOKUP_LENGTH
+                        + ", max length: " + CardUtil.TESTS_SET_CODE_MAX_LOOKUP_LENGTH);
             }
 
             boolean containsDoubleSideCards = false;
@@ -2178,6 +2192,13 @@ public class VerifyCardDataTest {
         //  - multiple searches: name1;class2;name3
         String cardSearches = "Spark Double;AbandonedSarcophagus";
 
+        // command line support, e.g. task runner from Visual Studio Code
+        // see setup instructions in https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment#visual-studio-code-vsc
+        // example: mvn install test "-Dxmage.showCardInfo=${fileBasenameNoExtension}" "-Dsurefire.failIfNoSpecifiedTests=false" "-Dxmage.build.tests.treeViewRunnerShowAllLogs=true" -Dtest=VerifyCardDataTest#test_showCardInfo
+        if (System.getProperty("xmage.showCardInfo") != null) {
+            cardSearches = System.getProperty("xmage.showCardInfo");
+        }
+
         // prepare DBs
         CardScanner.scan();
         MtgJsonService.cards();
@@ -2752,7 +2773,7 @@ public class VerifyCardDataTest {
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
         Map<String, Integer> cardRates = new HashMap<>();
         for (Card card : cardsList) {
-            int curRate = RateCard.rateCard(card, null, false);
+            int curRate = RateCard.rateCard(card, Collections.emptyList(), false);
             int prevRate = cardRates.getOrDefault(card.getName(), 0);
             if (prevRate == 0) {
                 cardRates.putIfAbsent(card.getName(), curRate);
@@ -2907,8 +2928,12 @@ public class VerifyCardDataTest {
         List<ExpansionSet.SetCardInfo> setInfo = Sets.getInstance().get(setCode).getSetCardInfo();
         for (ExpansionSet.SetCardInfo sci : setInfo) {
             int cn = sci.getCardNumberAsInt();
-            if (cn > maxCards) continue;
-            if (doExclude && excluded.contains(cn)) continue;
+            if (cn > maxCards) {
+                continue;
+            }
+            if (doExclude && excluded.contains(cn)) {
+                continue;
+            }
             listChangelog.add(cn);
         }
 

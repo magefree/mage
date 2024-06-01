@@ -28,22 +28,20 @@ import java.util.UUID;
  */
 public final class QuicksilverFountain extends CardImpl {
 
+    private static final Condition condition = new AllLandsAreSubtypeCondition(SubType.ISLAND);
+
     public QuicksilverFountain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // At the beginning of each player's upkeep, that player puts a flood 
-        // counter on target non-Island land they control of their choice. 
-        // That land is an Island for as long as it has a flood counter on it.
+        // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land they control of their choice. That land is an Island for as long as it has a flood counter on it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new QuicksilverFountainEffect(), TargetController.ANY, false, true);
         ability.addTarget(new TargetLandPermanent());
         ability.setTargetAdjuster(QuicksilverFountainAdjuster.instance);
         this.addAbility(ability);
 
-        // At the beginning of each end step, if all lands on the battlefield are 
-        // Islands, remove all flood counters from them.
+        // At the beginning of each end step, if all lands on the battlefield are Islands, remove all flood counters from them.
         // Note: This applies only if Quicksilver Fountain is on the battlefield
-        Condition condition = new AllLandsAreSubtypeCondition(SubType.ISLAND);
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
                 new QuicksilverFountainEffect2(), TargetController.ANY, condition, false));
     }
@@ -130,7 +128,7 @@ class QuicksilverFountainEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND, game)) {
-            land.removeCounters(CounterType.FLOOD.createInstance(land.getCounters(game).getCount(CounterType.FLOOD)), source, game);
+            land.removeAllCounters(CounterType.FLOOD.getName(), source, game);
         }
         return true;
     }

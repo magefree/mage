@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class RaffinesGuidance extends CardImpl {
 
     public RaffinesGuidance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -58,7 +58,7 @@ public final class RaffinesGuidance extends CardImpl {
 class RafinnesGuidancePlayEffect extends AsThoughEffectImpl {
 
     RafinnesGuidancePlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard by paying {2}{W} rather than paying its mana cost.";
     }
 

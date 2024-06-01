@@ -30,6 +30,7 @@ public enum CounterType {
     BOOK("book"),
     BORE("bore"),
     BOUNTY("bounty"),
+    BRAIN("brain"),
     BRIBERY("bribery"),
     BRICK("brick"),
     BURDEN("burden"),
@@ -70,6 +71,7 @@ public enum CounterType {
     ENERGY("energy"),
     ENLIGHTENED("enlightened"),
     EON("eon"),
+    EXALTED("exalted"),
     EXPERIENCE("experience"),
     EYEBALL("eyeball"),
     FADE("fade"),
@@ -306,6 +308,8 @@ public enum CounterType {
                 return new AbilityCounter(DeathtouchAbility.getInstance(), amount);
             case DOUBLE_STRIKE:
                 return new AbilityCounter(DoubleStrikeAbility.getInstance(), amount);
+            case EXALTED:
+                return new AbilityCounter(new ExaltedAbility(), amount);
             case FIRST_STRIKE:
                 return new AbilityCounter(FirstStrikeAbility.getInstance(), amount);
             case FLYING:

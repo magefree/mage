@@ -67,7 +67,7 @@ public class MageTextArea extends MageEditorPane {
             if (panelWidth > 0 && MageTextArea.this.getPreferredSize().getWidth() > panelWidth) {
                 String tooltip = "<html><center><body style='font-family:Dialog;font-size:"
                         + GUISizeHelper.gameDialogAreaFontSizeBig
-                        + ";color: #FFFFFF'><p width='500'>" + basicText + "</p></body></html>";
+                        + "pt;color: #FFFFFF'><p width='500'>" + basicText + "</p></body></html>";
                 MageTextArea.super.setToolTipText(tooltip);
             } else {
                 MageTextArea.super.setToolTipText(null);

@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
-import mage.abilities.effects.common.CopyTargetStackAbilityEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.SpreeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +39,7 @@ public final class ReturnTheFavor extends CardImpl {
         this.addAbility(new SpreeAbility(this));
 
         // + {1} -- Copy target instant spell, sorcery spell, activated ability, or triggered ability. You may choose new targets for the copy.
-        this.getSpellAbility().addEffect(new CopyTargetStackAbilityEffect());
+        this.getSpellAbility().addEffect(new CopyTargetStackObjectEffect());
         this.getSpellAbility().addTarget(new TargetStackObject(filter));
         this.getSpellAbility().withFirstModeCost(new GenericManaCost(1));
 

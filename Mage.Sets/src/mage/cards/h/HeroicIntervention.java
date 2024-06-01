@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HexproofAbility;
@@ -10,10 +9,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class HeroicIntervention extends CardImpl {
@@ -22,10 +22,10 @@ public final class HeroicIntervention extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Permanents you control gain hexproof and indestructible until end of turn.
-        Effect effect = new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, new FilterControlledPermanent(), false);
+        Effect effect = new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_PERMANENT, false);
         effect.setText("permanents you control gain hexproof");
         getSpellAbility().addEffect(effect);
-        effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledPermanent(), false);
+        effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_PERMANENT, false);
         effect.setText("and indestructible until end of turn");
         getSpellAbility().addEffect(effect);
     }

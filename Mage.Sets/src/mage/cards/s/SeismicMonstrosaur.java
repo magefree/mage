@@ -33,7 +33,7 @@ public final class SeismicMonstrosaur extends CardImpl {
 
         // {2}{R}, Sacrifice a land: Draw a card.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{R}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         this.addAbility(ability);
 
         // Mountaincycling {2}

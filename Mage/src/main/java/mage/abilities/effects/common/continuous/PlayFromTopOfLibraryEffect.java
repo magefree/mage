@@ -68,15 +68,15 @@ public class PlayFromTopOfLibraryEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         // can play lands/spells (must check specific part and allows specific part)
 
-        Card cardToCheck = game.getCard(objectId); // maybe this should be removed and only check SpellAbility characteristics
+        Card cardToCheck = game.getCard(objectId); // maybe this should be removed and only check SpellAbility characteristics -- No! don't forget PlayLandAbility
         if (cardToCheck == null) {
             return false;
         }
         if (affectedAbility instanceof SpellAbility) {
             SpellAbility spell = (SpellAbility) affectedAbility;
             cardToCheck = spell.getCharacteristics(game);
-            if (spell.getManaCosts().isEmpty()){
-                return false;
+            if (spell.getManaCosts().isEmpty()) {
+                return false;  // prevent casting cards without mana cost?
             }
         }
         // only permits you to cast

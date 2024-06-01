@@ -34,7 +34,7 @@ public final class SurvivorsMedKit extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.withFirstModeFlavorWord("Stimpak");
-        ability.getModes().setLimitUsageByOnce(true);
+        ability.getModes().setLimitUsageByOnce(false);
 
         // * Fancy Lads Snack Cakes -- Create a Food token.
         ability.addMode(new Mode(new CreateTokenEffect(new FoodToken())).withFlavorWord("Fancy Lads Snack Cakes"));
@@ -44,6 +44,7 @@ public final class SurvivorsMedKit extends CardImpl {
                 .addEffect(new SacrificeSourceEffect())
                 .addTarget(new TargetPlayer())
                 .withFlavorWord("RadAway"));
+        this.addAbility(ability);
     }
 
     private SurvivorsMedKit(final SurvivorsMedKit card) {
@@ -78,11 +79,7 @@ class SurvivorsMedKitEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int count = player.getCounters().getCount(CounterType.RAD);
-        if (count > 0) {
-            player.removeCounters("rad", count, source, game);
-            return true;
-        }
-        return false;
+        player.loseAllCounters(CounterType.RAD.getName(), source, game);
+        return true;
     }
 }
