@@ -140,7 +140,8 @@ public class CardPluginImpl implements CardPlugin {
         for (MageCard card : cards.values()) {
             MagePermanent perm = (MagePermanent) card.getMainPanel(); // all cards must be MagePermanent on battlefield
 
-            if (!rowType.isType(perm) || perm.getOriginalPermanent().isAttachedToPermanent()) {
+            if (!rowType.isType(perm) || perm.getOriginalPermanent().isAttachedToPermanent()
+                    || (perm.isCreature() && !rowType.equals(RowType.creature))) {
                 continue;
             }
 
