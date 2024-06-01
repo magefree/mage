@@ -24,7 +24,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  */
 public final class LethalThrowdown extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("sacrifice a modified creature");
+    private static final FilterPermanent filter = new FilterPermanent("a modified creature");
 
     static {
         filter.add(ModifiedPredicate.instance);
@@ -40,8 +40,8 @@ public final class LethalThrowdown extends CardImpl {
                                 .setText("sacrifice a creature"),
                         new SacrificeTargetCost(filter).setText("sacrifice a modified creature")));
         // Destroy target creature or planeswalker. If the modified creature was sacrificed, draw a card.
-        this.getSpellAbility().addEffect(new LethalThrowdownEffect());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new LethalThrowdownEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 
@@ -59,7 +59,7 @@ class LethalThrowdownEffect extends OneShotEffect {
 
     LethalThrowdownEffect() {
         super(Outcome.Benefit);
-        staticText = "Destroy target creature or planeswalker. If the modified creature was sacrificed, draw a card";
+        staticText = "If the modified creature was sacrificed, draw a card";
     }
 
     private LethalThrowdownEffect(final LethalThrowdownEffect effect) {
