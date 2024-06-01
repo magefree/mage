@@ -1,22 +1,19 @@
 package mage.cards.f;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoubleCountersTargetEffect;
+import mage.abilities.effects.common.counter.DoubleCounterOnEachPermanentEffect;
+import mage.abilities.effects.common.counter.AddCountersAllEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -29,12 +26,18 @@ public final class FangsOfKalonia extends CardImpl {
         super(ownerId, setInfo, new CardType[] { CardType.SORCERY }, "{1}{G}");
 
         // Put a +1/+1 counter on target creature you control, then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way.
-        this.getSpellAbility().addEffect(new FangsOfKaloniaEffect());
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        this.getSpellAbility().addEffect(new DoubleCountersTargetEffect(CounterType.P1P1).setText(
+                ", then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Overload {4}{G}{G}
-        this.addAbility(
-                new OverloadAbility(this, new FangsOfKaloniaOverloadEffect(), new ManaCostsImpl<>("{4}{G}{G}")));
+        Ability overloadAbility = new OverloadAbility(this, new AddCountersAllEffect(CounterType.P1P1.createInstance(1),
+                StaticFilters.FILTER_CONTROLLED_CREATURE), new ManaCostsImpl<>("{4}{G}{G}"));
+        overloadAbility.addEffect(new DoubleCounterOnEachPermanentEffect(CounterType.P1P1,
+                StaticFilters.FILTER_CONTROLLED_CREATURE).setText(
+                        ", then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way"));
+        this.addAbility(overloadAbility);
     }
 
     private FangsOfKalonia(final FangsOfKalonia card) {
@@ -44,82 +47,5 @@ public final class FangsOfKalonia extends CardImpl {
     @Override
     public FangsOfKalonia copy() {
         return new FangsOfKalonia(this);
-    }
-}
-
-class FangsOfKaloniaEffect extends OneShotEffect {
-
-    FangsOfKaloniaEffect() {
-        super(Outcome.Benefit);
-        staticText = "Put a +1/+1 counter on target creature you control, then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way";
-    }
-
-    private FangsOfKaloniaEffect(final FangsOfKaloniaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID target = source.getTargets().getFirstTarget();
-        Permanent creature = game.getPermanent(target);
-        if (creature != null) {
-            // Put a +1/+1 counter on target creature you control
-            int preP1P1Count = creature.getCounters(game).getCount(CounterType.P1P1);
-            creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-
-            // then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way
-            int postP1P1Count = creature.getCounters(game).getCount(CounterType.P1P1);
-            if (postP1P1Count > preP1P1Count) {
-                int doubled = (postP1P1Count - preP1P1Count);
-                creature.addCounters(CounterType.P1P1.createInstance(doubled), source.getControllerId(),
-                        source, game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public FangsOfKaloniaEffect copy() {
-        return new FangsOfKaloniaEffect(this);
-    }
-}
-
-class FangsOfKaloniaOverloadEffect extends OneShotEffect {
-
-    FangsOfKaloniaOverloadEffect() {
-        super(Outcome.Benefit);
-        staticText = "Put a +1/+1 counter on each creature you control, then double the number of +1/+1 counters on each creature that had a +1/+1 counter put on it this way";
-    }
-
-    private FangsOfKaloniaOverloadEffect(final FangsOfKaloniaOverloadEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game);
-        Map<UUID, Integer> preP1P1Counts = new HashMap<>();
-
-        for (Permanent creature : creatures) {
-            preP1P1Counts.put(creature.getId(), creature.getCounters(game).getCount(CounterType.P1P1));
-            creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-        }
-
-        for (Permanent creature : creatures) {
-            int preP1P1Count = preP1P1Counts.get(creature.getId());
-            int postP1P1Count = creature.getCounters(game).getCount(CounterType.P1P1);
-            if (postP1P1Count > preP1P1Count) {
-                int doubled = (postP1P1Count - preP1P1Count);
-                creature.addCounters(CounterType.P1P1.createInstance(doubled), source.getControllerId(), source,
-                        game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public FangsOfKaloniaOverloadEffect copy() {
-        return new FangsOfKaloniaOverloadEffect(this);
     }
 }
