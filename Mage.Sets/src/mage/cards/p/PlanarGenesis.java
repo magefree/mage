@@ -60,7 +60,7 @@ class PlanarGenesisEffect extends LookLibraryAndPickControllerEffect {
         boolean result = putPickedCards.moveCards(player, pickedCards, source, game);
         if (pickedCards.isEmpty()) {
             if (otherCards.size() >= 1) {
-                TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, filter);
+                TargetCard target = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_CARD);
                 target.withChooseHint("to put " + PutCards.HAND.getMessage(false, false));
                 if (player.chooseTarget(PutCards.HAND.getOutcome(), otherCards, target, source, game)) {
                     Cards toPutInHand = new CardsImpl(target.getTargets());
