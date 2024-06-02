@@ -1,8 +1,8 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
@@ -16,14 +16,18 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+import java.util.stream.Stream;
+
 /**
- *
  * @author TheElk801
  */
 public final class SowerOfDiscord extends CardImpl {
@@ -94,8 +98,8 @@ class SowerOfDiscordEntersBattlefieldEffect extends OneShotEffect {
         permanent.addInfo(
                 "chosen players",
                 "<font color = 'blue'>Chosen players: "
-                + player1.getName() + ", "
-                + player2.getName() + "</font>", game
+                        + player1.getName() + ", "
+                        + player2.getName() + "</font>", game
         );
         return true;
     }
@@ -107,7 +111,7 @@ class SowerOfDiscordEntersBattlefieldEffect extends OneShotEffect {
 
 }
 
-class SowerOfDiscordTriggeredAbility extends TriggeredAbilityImpl {
+class SowerOfDiscordTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     public SowerOfDiscordTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -128,18 +132,38 @@ class SowerOfDiscordTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        int damage = event.getAmount();
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
         Player player1 = (Player) game.getState().getValue(
                 this.getSourceId() + "_player1"
         );
         Player player2 = (Player) game.getState().getValue(
                 this.getSourceId() + "_player2"
         );
-        if (player1 == null || player2 == null || damage == 0) {
+        if (player1 == null || player2 == null) {
+            return Stream.empty();
+        }
+        return ((DamagedBatchForOnePlayerEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> e.getTargetId().equals(player1.getId()) || e.getTargetId().equals(player2.getId()))
+                .filter(e -> e.getAmount() > 0);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Player player1 = (Player) game.getState().getValue(
+                this.getSourceId() + "_player1"
+        );
+        Player player2 = (Player) game.getState().getValue(
+                this.getSourceId() + "_player2"
+        );
+        int amount = filterBatchEvent(event, game)
+                .mapToInt(DamagedPlayerEvent::getAmount)
+                .sum();
+        if (player1 == null || player2 == null || amount <= 0) {
             return false;
         }
-        Effect effect = new LoseLifeTargetEffect(damage);
+        Effect effect = new LoseLifeTargetEffect(amount);
         if (event.getTargetId().equals(player1.getId())) {
             this.getEffects().clear();
             effect.setTargetPointer(new FixedTarget(player2.getId()));

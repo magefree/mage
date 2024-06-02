@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -23,6 +24,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
@@ -30,6 +32,7 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author xenohedron
@@ -66,7 +69,7 @@ public final class ContestedGameBall extends CardImpl {
     }
 }
 
-class ContestedGameBallTriggeredAbility extends TriggeredAbilityImpl {
+class ContestedGameBallTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     ContestedGameBallTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ContestedGameBallEffect());
@@ -83,13 +86,23 @@ class ContestedGameBallTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForOnePlayerEvent) event)
+                .getEvents()
+                .stream()
+                .filter(DamagedPlayerEvent::isCombatDamage)
+                .filter(e -> getControllerId().equals(e.getTargetId()))
+                .filter(e -> e.getAmount() > 0);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedBatchForOnePlayerEvent) event).isCombatDamage() && event.getTargetId().equals(this.getControllerId())) {
-            this.getAllEffects().setTargetPointer(new FixedTarget(game.getActivePlayerId()));
-            // attacking player is active player
-            return true;
+        if (!filterBatchEvent(event, game).findAny().isPresent()) {
+            return false;
         }
-        return false;
+        // attacking player is active player
+        this.getAllEffects().setTargetPointer(new FixedTarget(game.getActivePlayerId()));
+        return true;
     }
 
     @Override

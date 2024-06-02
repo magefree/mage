@@ -2,6 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -73,7 +75,7 @@ public final class ZurgoAndOjutai extends CardImpl {
     }
 }
 
-class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl {
+class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {
 
     ZurgoAndOjutaiTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
@@ -96,23 +98,25 @@ class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        List<Permanent> permanents = ((DamagedBatchAllEvent) event)
+    public Stream<DamagedEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()
                 .filter(DamagedEvent::isCombatDamage)
-                .map(e -> {
+                .filter(e -> {
                     Permanent permanent = game.getPermanent(e.getSourceId());
                     Permanent defender = game.getPermanent(e.getTargetId());
-                    if (permanent != null
+                    return permanent != null
                             && permanent.hasSubtype(SubType.DRAGON, game)
                             && permanent.isControlledBy(this.getControllerId())
-                            && ((defender != null && defender.isBattle(game))
-                            || game.getPlayer(e.getTargetId()) != null)) {
-                        return permanent;
-                    }
-                    return null;
-                })
+                            && ((defender != null && defender.isBattle(game)) || game.getPlayer(e.getTargetId()) != null);
+                });
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        List<Permanent> permanents = filterBatchEvent(event, game)
+                .map(e -> game.getPermanent(e.getSourceId()))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         if (permanents.isEmpty()) {

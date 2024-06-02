@@ -2,6 +2,7 @@ package mage.cards.r;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -11,11 +12,14 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author cbrianhill
@@ -39,7 +43,7 @@ public final class Repercussion extends CardImpl {
     }
 }
 
-class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
+class RepercussionTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     static final String PLAYER_DAMAGE_AMOUNT_KEY = "playerDamage";
     static final String TRIGGERING_CREATURE_KEY = "triggeringCreature";
@@ -58,12 +62,26 @@ class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForOnePermanentEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> e.getAmount() > 0);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null || !permanent.isCreature(game)) {
             return false;
         }
-        getEffects().setValue(PLAYER_DAMAGE_AMOUNT_KEY, event.getAmount());
+        int amount = filterBatchEvent(event, game)
+                .mapToInt(GameEvent::getAmount)
+                .sum();
+        if (amount <= 0) {
+            return false;
+        }
+        getEffects().setValue(PLAYER_DAMAGE_AMOUNT_KEY, amount);
         getEffects().setValue(TRIGGERING_CREATURE_KEY, new MageObjectReference(event.getTargetId(), game));
         return true;
     }
