@@ -58,7 +58,7 @@ enum AllColorCondition implements Condition {
         FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonartifact creatures");
         filter.add(Predicates.not(CardType.ARTIFACT.getPredicate()));
         ObjectColor allColor = new ObjectColor("WUBRG");
-        for (Permanent thing : game.getBattlefield().getAllActivePermanents(filter, game)) {
+        for (Permanent thing : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             allColor = allColor.intersection(thing.getColor(game));
         }
         return !allColor.isColorless();
