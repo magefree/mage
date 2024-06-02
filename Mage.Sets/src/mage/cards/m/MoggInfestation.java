@@ -71,7 +71,7 @@ class MoggInfestationEffect extends OneShotEffect {
                 if (permanent.destroy(source, game, false)) {
                     if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD
                             || (permanent instanceof PermanentToken
-                            && !game.getState().getBattlefield().containsPermanent(permanent.getId()))) { // If a commander is replaced to command zone, the creature does not die
+                            && !game.getBattlefield().containsPermanent(permanent.getId()))) { // If a commander is replaced to command zone, the creature does not die
                         creaturesDied.add(permanent.getId());
                     }
                 }

@@ -81,7 +81,7 @@ class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
         if (player == null) {
             return false;
         }
-        for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     permanent.removeAllAbilities(source.getSourceId(), game);

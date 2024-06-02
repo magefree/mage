@@ -69,7 +69,7 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
         if (player == null) {
             return;
         }
-        for (Permanent perm : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
             affectedObjectList.add(new MageObjectReference(perm, game));
         }
     }
@@ -80,7 +80,7 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
         if (player == null) {
             return false;
         }
-        for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
             if (affectedObjectList.contains(new MageObjectReference(permanent, game))) {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
