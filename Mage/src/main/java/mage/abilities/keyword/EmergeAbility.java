@@ -14,7 +14,6 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -84,8 +83,8 @@ public class EmergeAbility extends SpellAbility {
     @Override
     public ManaOptions getMinimumCostToActivate(UUID playerId, Game game) {
         int maxCMC = 0;
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), playerId, this, game)) {
-            int cmc = creature.getManaValue();
+        for (Permanent permanentToSacrifice : game.getBattlefield().getActivePermanents(filter, playerId, this, game)) {
+            int cmc = permanentToSacrifice.getManaValue();
             if (cmc > maxCMC) {
                 maxCMC = cmc;
             }
