@@ -44,6 +44,7 @@ public final class EssenceReliquary extends CardImpl {
                 new TapSourceCost(), MyTurnCondition.instance
         );
         ability.addTarget(new TargetControlledPermanent(filter));
+        this.addAbility(ability);
     }
 
     private EssenceReliquary(final EssenceReliquary card) {
