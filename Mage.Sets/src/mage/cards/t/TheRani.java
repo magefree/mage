@@ -16,12 +16,11 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.GoadedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.MarkOfTheRaniToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,6 +35,10 @@ import mage.constants.SetTargetPointer;
 public final class TheRani extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a goaded creature");
+
+    static {
+        filter.add(GoadedPredicate.instance);
+    }
 
     public TheRani(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{1}{U}{B}{R}");

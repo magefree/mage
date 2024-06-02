@@ -1,9 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.GoadAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -11,9 +9,6 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -31,7 +26,7 @@ public final class MarkOfTheRaniToken extends TokenImpl {
         subtype.add(SubType.AURA);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetPermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         Ability ability = new EnchantAbility(auraTarget);
         ability.addTarget(auraTarget);
         ability.addEffect(new AttachEffect(Outcome.BoostCreature));
