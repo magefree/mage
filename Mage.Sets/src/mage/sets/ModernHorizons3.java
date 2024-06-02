@@ -267,6 +267,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("The Necrobloom", 194, Rarity.RARE, mage.cards.t.TheNecrobloom.class));
         cards.add(new SetCardInfo("Thraben Charm", 45, Rarity.COMMON, mage.cards.t.ThrabenCharm.class));
         cards.add(new SetCardInfo("Thriving Skyclaw", 141, Rarity.COMMON, mage.cards.t.ThrivingSkyclaw.class));
+        cards.add(new SetCardInfo("Titans' Vanguard", 206, Rarity.UNCOMMON, mage.cards.t.TitansVanguard.class));
         cards.add(new SetCardInfo("Toxic Deluge", 277, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
         cards.add(new SetCardInfo("Tranquil Landscape", 231, Rarity.COMMON, mage.cards.t.TranquilLandscape.class));
         cards.add(new SetCardInfo("Trickster's Elk", 175, Rarity.UNCOMMON, mage.cards.t.TrickstersElk.class));
