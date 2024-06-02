@@ -1,9 +1,7 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageToYouAllTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
@@ -12,11 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +32,8 @@ public final class Dread extends CardImpl {
         this.addAbility(FearAbility.getInstance());
         
         // Whenever a creature deals damage to you, destroy it.
-        this.addAbility(new DreadTriggeredAbility());
+        this.addAbility(new DealsDamageToYouAllTriggeredAbility(StaticFilters.FILTER_PERMANENT_CREATURE,
+                new DestroyTargetEffect().setText("destroy it")));
         
         // When Dread is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
@@ -49,43 +46,5 @@ public final class Dread extends CardImpl {
     @Override
     public Dread copy() {
         return new Dread(this);
-    }
-}
-
-class DreadTriggeredAbility extends TriggeredAbilityImpl {
-    
-    DreadTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
-    }
-    
-    private DreadTriggeredAbility(final DreadTriggeredAbility ability) {
-        super(ability);
-    }
-    
-    @Override
-    public DreadTriggeredAbility copy() {
-        return new DreadTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-    
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.isCreature(game)) {
-                this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    @Override
-    public String getRule() {
-        return "Whenever a creature deals damage to you, destroy it.";
     }
 }

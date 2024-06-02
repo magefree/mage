@@ -1,9 +1,8 @@
-
 package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageToYouAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -13,12 +12,9 @@ import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -29,6 +25,7 @@ import java.util.UUID;
 public final class MikaeusTheUnhallowed extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human creatures");
+    private static final FilterPermanent filterHuman = new FilterPermanent(SubType.HUMAN, "Human");
 
     static {
         filter.add(Predicates.not(SubType.HUMAN.getPredicate()));
@@ -44,8 +41,10 @@ public final class MikaeusTheUnhallowed extends CardImpl {
         this.toughness = new MageInt(5);
 
         this.addAbility(IntimidateAbility.getInstance());
+
         // Whenever a Human deals damage to you, destroy it.
-        this.addAbility(new MikaeusTheUnhallowedAbility());
+        this.addAbility(new DealsDamageToYouAllTriggeredAbility(filterHuman,
+                new DestroyTargetEffect().setText("destroy it")));
 
         // Other non-Human creatures you control get +1/+1 and have undying.
         Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true));
@@ -62,43 +61,5 @@ public final class MikaeusTheUnhallowed extends CardImpl {
     @Override
     public MikaeusTheUnhallowed copy() {
         return new MikaeusTheUnhallowed(this);
-    }
-}
-
-class MikaeusTheUnhallowedAbility extends TriggeredAbilityImpl {
-
-    public MikaeusTheUnhallowedAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
-    }
-
-    private MikaeusTheUnhallowedAbility(final MikaeusTheUnhallowedAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MikaeusTheUnhallowedAbility copy() {
-        return new MikaeusTheUnhallowedAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.controllerId)) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.hasSubtype(SubType.HUMAN, game)) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Human deals damage to you, destroy it.";
     }
 }
