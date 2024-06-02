@@ -48,6 +48,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Bridgeworks Battle", 249, Rarity.UNCOMMON, mage.cards.b.BridgeworksBattle.class));
         cards.add(new SetCardInfo("Buried Alive", 273, Rarity.UNCOMMON, mage.cards.b.BuriedAlive.class));
         cards.add(new SetCardInfo("Cephalid Coliseum", 300, Rarity.UNCOMMON, mage.cards.c.CephalidColiseum.class));
+        cards.add(new SetCardInfo("Charitable Levy", 21, Rarity.UNCOMMON, mage.cards.c.CharitableLevy.class));
         cards.add(new SetCardInfo("Chthonian Nightmare", 83, Rarity.RARE, mage.cards.c.ChthonianNightmare.class));
         cards.add(new SetCardInfo("Collective Resistance", 147, Rarity.UNCOMMON, mage.cards.c.CollectiveResistance.class));
         cards.add(new SetCardInfo("Colossal Dreadmask", 148, Rarity.COMMON, mage.cards.c.ColossalDreadmask.class));
