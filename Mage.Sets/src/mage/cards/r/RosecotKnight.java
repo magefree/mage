@@ -76,6 +76,7 @@ class RosecotKnightEffect extends LookLibraryAndPickControllerEffect {
     @Override
     protected boolean actionWithPickedCards(Game game, Ability source, Player player, Cards pickedCards, Cards otherCards) {
         super.actionWithPickedCards(game, source, player, pickedCards, otherCards);
+        game.getState().processAction(game);
         pickedCards.retainZone(Zone.HAND, game);
         if (pickedCards.isEmpty()) {
             new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);

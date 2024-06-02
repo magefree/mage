@@ -89,7 +89,7 @@ class RefurbishedFamiliarEffect extends OneShotEffect {
             int numberOfCardsToDiscard = Math.min(1, player.getHand().size());
             Cards cards = new CardsImpl();
             Target target = new TargetDiscard(numberOfCardsToDiscard, numberOfCardsToDiscard, StaticFilters.FILTER_CARD, playerId);
-            player.chooseTarget(outcome, target, source, game);
+            player.chooseTarget(Outcome.Discard, target, source, game);
             cards.addAll(target.getTargets());
             cardsToDiscard.put(playerId, cards);
         }
