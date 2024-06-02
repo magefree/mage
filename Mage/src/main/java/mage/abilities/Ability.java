@@ -12,6 +12,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
+import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -579,6 +580,15 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     MageObject getSourceObjectIfItStillExists(Game game);
+
+
+    /**
+     * See getSourceObjectIfItStillExists for details. Works with Card only.
+     *
+     * @param game
+     * @return
+     */
+    Card getSourceCardIfItStillExists(Game game);
 
     /**
      * See getSourceObjectIfItStillExists for details. Works with Permanent only.

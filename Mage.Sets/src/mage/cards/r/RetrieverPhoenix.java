@@ -79,12 +79,12 @@ class RetrieverPhoenixEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        Card card = source.getSourceCardIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
-        return sourceObject instanceof Card
+        return card != null
                 && player != null
-                && player.chooseUse(outcome, "Return " + sourceObject.getName() + " to the battlefield instead of learning?", source, game)
-                && player.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game);
+                && player.chooseUse(outcome, "Return " + card.getName() + " to the battlefield instead of learning?", source, game)
+                && player.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 
     @Override
