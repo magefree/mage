@@ -70,7 +70,7 @@ class MayaelsAriaEffect extends OneShotEffect {
         // put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater.
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 4));
-        if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
+        if (game.getBattlefield().countAll(filter, controller.getId(), game) > 0) {
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             }
@@ -80,14 +80,14 @@ class MayaelsAriaEffect extends OneShotEffect {
         // Then you gain 10 life if you control a creature with power 10 or greater.
         filter = new FilterCreaturePermanent();
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 9));
-        if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
+        if (game.getBattlefield().countAll(filter, controller.getId(), game) > 0) {
             controller.gainLife(10, game, source);
         }
 
         // Then you win the game if you control a creature with power 20 or greater.
         filter = new FilterCreaturePermanent();
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 19));
-        if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
+        if (game.getBattlefield().countAll(filter, controller.getId(), game) > 0) {
             controller.won(game);
         }
         return true;
