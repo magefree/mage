@@ -63,7 +63,7 @@ public final class HydroelectricSpecimen extends ModalDoubleFacedCard {
                 "you may pay 3 life. If you don't, it enters the battlefield tapped"
         ));
 
-        // {T}: Add {G}.
+        // {T}: Add {U}.
         this.getRightHalfCard().addAbility(new BlueManaAbility());
     }
 
