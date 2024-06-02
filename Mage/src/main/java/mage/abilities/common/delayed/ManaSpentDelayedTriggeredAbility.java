@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 
@@ -65,7 +66,12 @@ public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && filter.match(spell, spell.getControllerId(), this, game);
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+
+        // Need to check both the stackObject and the spell because a spell isnt always
+        // a ability
+        return spell != null && filter.match(spell, spell.getControllerId(), this, game)
+                || stackObject != null && filter.match(stackObject, stackObject.getControllerId(), this, game);
     }
 
     @Override

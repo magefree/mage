@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.Stack;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.SubType;
@@ -48,16 +49,19 @@ public final class SunkenPalace extends CardImpl {
         Ability ability = new BlueManaAbility();
 
         ability.addCost(new ManaCostsImpl<>("{1}{U}"));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(7)));
+
+        // ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(7)));
         // When you spend this mana to cast a spell or activate an ability, copy that spell or ability. You may choose new targets for the copy.
 
         Effect effect = new CopyTargetStackObjectEffect(true);
-        effect.setText("copy that spell or ability")
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new ManaSpentDelayedTriggeredAbility(
-                        new SunkenPalaceEffect(),
-                        // This filter doesnt seem to trigger on spending the mana on abilities 
-                        StaticFilters.FILTER_SPELL_OR_ABILITY)));
+        effect.setText("copy that spell or ability");
+        ManaSpentDelayedTriggeredAbility manaSpentDelayedTriggeredAbility = new ManaSpentDelayedTriggeredAbility(null,
+                StaticFilters.FILTER_SPELL_OR_ABILITY);
+
+        SunkenPalaceEffect sunkenPalaceEffect = new SunkenPalaceEffect(manaSpentDelayedTriggeredAbility);
+
+        manaSpentDelayedTriggeredAbility.addEffect(sunkenPalaceEffect);
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(manaSpentDelayedTriggeredAbility));
         this.addAbility(ability);
 
     }
@@ -74,8 +78,11 @@ public final class SunkenPalace extends CardImpl {
 
 class SunkenPalaceEffect extends OneShotEffect {
 
-    SunkenPalaceEffect() {
+    ManaSpentDelayedTriggeredAbility manaSpentDelayedTriggeredAbility;
+
+    SunkenPalaceEffect(ManaSpentDelayedTriggeredAbility manaSpentDelayedTriggeredAbility) {
         super(Outcome.Benefit);
+        this.manaSpentDelayedTriggeredAbility = manaSpentDelayedTriggeredAbility;
         staticText = "copy that spell or ability. You may choose new targets for the copy";
     }
 
@@ -90,14 +97,30 @@ class SunkenPalaceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.informPlayers("triggering " + source.toString());
 
+        // This is always null I need to get the sourceId of the stackObject that
+        // triggered this the manaSpentDelayedTriggeredAbility
+        if (manaSpentDelayedTriggeredAbility == null) {
+            game.informPlayers("manaspend ability null");
+            return false;
+        }
+
+        UUID triggeredSourceId = manaSpentDelayedTriggeredAbility.getSourceId();
+
+        game.getStack().stream().forEach(stackObject -> {
+            game.informPlayers("stackObject UUID: " + stackObject.getId() + " " + stackObject.getIdName());
+        });
         // This gets the Sunken Palace Mana used ability and not the spell that was cast with the mana
-        StackObject stackObject = game.getStack().getFirst();
+        if (triggeredSourceId == null) {
+            return false;
+        }
+        StackObject stackObject = game.getStack().getStackObject(triggeredSourceId);
+
         if (stackObject == null) {
             return false;
         }
-        game.informPlayers("creating copy");
+
+        game.informPlayers("creating copy" + stackObject.toString());
         stackObject.createCopyOnStack(game, source, source.getControllerId(), true);
         game.informPlayers("copy created");
 
