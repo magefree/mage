@@ -78,7 +78,7 @@ class MoorlandRescuerEffect extends OneShotEffect {
         TargetCard target = new MoorlandRescuerTarget(permanent.getPower().getValue(), source, game);
         player.choose(outcome, player.getGraveyard(), target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
-        Card sourceCard = (Card) source.getSourceObjectIfItStillExists(game);
+        Card sourceCard = source.getSourceCardIfItStillExists(game);
         if (sourceCard != null) {
             player.moveCards(sourceCard, Zone.EXILED, source, game);
         }

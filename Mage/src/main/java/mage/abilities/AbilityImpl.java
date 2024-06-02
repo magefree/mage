@@ -39,6 +39,7 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.*;
 
@@ -1352,6 +1353,15 @@ public abstract class AbilityImpl implements Ability {
                 || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
             // exists or lki from battlefield
             return game.getObject(getSourceId());
+        }
+        return null;
+    }
+
+    @Override
+    public Card getSourceCardIfItStillExists(Game game) {
+        MageObject mageObject = getSourceObjectIfItStillExists(game);
+        if (mageObject instanceof Card) {
+            return (Card) mageObject;
         }
         return null;
     }

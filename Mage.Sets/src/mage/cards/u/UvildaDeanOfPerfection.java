@@ -195,10 +195,10 @@ class UvildaDeanOfPerfectionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        MageObject sourceObject = getSourceObjectIfItStillExists(game);
+        Card card = getSourceCardIfItStillExists(game);
         return event.getTargetId().equals(this.getSourceId())
-                && sourceObject instanceof Card
-                && ((Card) sourceObject).getCounters(game).getCount(CounterType.HONE) == 0
+                && card != null
+                && card.getCounters(game).getCount(CounterType.HONE) == 0
                 && event.getAmount() > 0
                 && event.getData().equals(CounterType.HONE.getName());
     }
@@ -238,11 +238,10 @@ class UvildaDeanOfPerfectionCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (player == null || !(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (player == null || card == null) {
             return false;
         }
-        Card card = (Card) sourceObject;
         if (!player.chooseUse(outcome, "Cast " + card.getName() + '?', source, game)) {
             return false;
         }
