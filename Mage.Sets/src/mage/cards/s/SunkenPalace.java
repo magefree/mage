@@ -107,10 +107,6 @@ class SunkenPalaceEffect extends OneShotEffect {
 
         UUID triggeredSourceId = manaSpentDelayedTriggeredAbility.getSourceId();
 
-        game.getStack().stream().forEach(stackObject -> {
-            game.informPlayers("stackObject UUID: " + stackObject.getId() + " " + stackObject.getIdName());
-        });
-        // This gets the Sunken Palace Mana used ability and not the spell that was cast with the mana
         if (triggeredSourceId == null) {
             return false;
         }
@@ -119,11 +115,7 @@ class SunkenPalaceEffect extends OneShotEffect {
         if (stackObject == null) {
             return false;
         }
-
-        game.informPlayers("creating copy" + stackObject.toString());
         stackObject.createCopyOnStack(game, source, source.getControllerId(), true);
-        game.informPlayers("copy created");
-
         return true;
     }
 }
