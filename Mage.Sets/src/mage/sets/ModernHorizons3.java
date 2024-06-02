@@ -203,6 +203,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Propagator Drone", 167, Rarity.UNCOMMON, mage.cards.p.PropagatorDrone.class));
         cards.add(new SetCardInfo("Proud Pack-Rhino", 41, Rarity.UNCOMMON, mage.cards.p.ProudPackRhino.class));
         cards.add(new SetCardInfo("Psychic Frog", 199, Rarity.RARE, mage.cards.p.PsychicFrog.class));
+        cards.add(new SetCardInfo("Pyretic Rebirth", 200, Rarity.UNCOMMON, mage.cards.p.PyreticRebirth.class));
         cards.add(new SetCardInfo("Quest for the Necropolis", 104, Rarity.UNCOMMON, mage.cards.q.QuestForTheNecropolis.class));
         cards.add(new SetCardInfo("Ral and the Implicit Maze", 132, Rarity.UNCOMMON, mage.cards.r.RalAndTheImplicitMaze.class));
         cards.add(new SetCardInfo("Ral, Leyline Prodigy", 247, Rarity.MYTHIC, mage.cards.r.RalLeylineProdigy.class));
