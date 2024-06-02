@@ -14,6 +14,7 @@ import mage.abilities.common.delayed.ManaSpentDelayedTriggeredAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.ExileFromTopOfLibraryCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopySourceSpellEffect;
 import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
@@ -45,9 +46,13 @@ public final class SunkenPalace extends CardImpl {
         this.addAbility(new BlueManaAbility());
         // {1}{U}, {T}, Exile seven cards from your graveyard: Add {U}.
         Ability ability = new BlueManaAbility();
+
         ability.addCost(new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(7)));
         // When you spend this mana to cast a spell or activate an ability, copy that spell or ability. You may choose new targets for the copy.
+
+        Effect effect = new CopyTargetStackObjectEffect(true);
+        effect.setText("copy that spell or ability")
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new ManaSpentDelayedTriggeredAbility(
                         new SunkenPalaceEffect(),
