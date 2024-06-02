@@ -58,7 +58,7 @@ class ArmoryAutomatonEffect extends OneShotEffect {
         filter.add(SubType.EQUIPMENT.getPredicate());
     }
 
-    public ArmoryAutomatonEffect() {
+    ArmoryAutomatonEffect() {
         super(Outcome.Benefit);
         this.staticText = "attach any number of target Equipment to it";
     }
@@ -84,7 +84,7 @@ class ArmoryAutomatonEffect extends OneShotEffect {
             filterSourceId.add(new CardIdPredicate(source.getSourceId()));
             currentFilter.add(Predicates.not(new AttachedToPredicate(filterSourceId)));
 
-            int countBattlefield = game.getBattlefield().getAllActivePermanents(currentFilter, game).size();
+            int countBattlefield = game.getBattlefield().getActivePermanents(currentFilter, source.getControllerId(), source, game).size();
             while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.Benefit, "Select and attach a target Equipment?", source, game)) {
                 Target targetEquipment = new TargetPermanent(currentFilter);
                 targetEquipment.setRequired(false);
@@ -102,7 +102,7 @@ class ArmoryAutomatonEffect extends OneShotEffect {
                 } else {
                     break;
                 }
-                countBattlefield = game.getBattlefield().getAllActivePermanents(currentFilter, game).size();
+                countBattlefield = game.getBattlefield().getActivePermanents(currentFilter, source.getControllerId(), source, game).size();
             }
             return true;
         }
