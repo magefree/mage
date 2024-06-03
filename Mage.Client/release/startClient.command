@@ -2,4 +2,4 @@
 
 cd "`dirname "$0"`"
 
-java -Xms256m -Xmx512m -Dfile.encoding=UTF-8 -jar ./lib/mage-client-${project.version}.jar &
+java -Xmx1024m -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -jar ./lib/mage-client-${project.version}.jar &
