@@ -2193,9 +2193,9 @@ public class VerifyCardDataTest {
         //  - multiple searches: name1;class2;name3
         String cardSearches = "Spark Double;AbandonedSarcophagus";
 
-        // command line support, e.g. task runner from Visual Studio Code
-        // see setup instructions in https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment#visual-studio-code-vsc
-        // example: mvn install test "-Dxmage.showCardInfo=${fileBasenameNoExtension}" "-Dsurefire.failIfNoSpecifiedTests=false" "-Dxmage.build.tests.treeViewRunnerShowAllLogs=true" -Dtest=VerifyCardDataTest#test_showCardInfo
+        // command line support, e.g. check currently opened file
+        // compatible IDEs: IntelliJ IDEA, Visual Studio Code - see instructions in https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment
+        // example cmd: mvn install test "-Dxmage.showCardInfo=${fileBasenameNoExtension}" "-Dsurefire.failIfNoSpecifiedTests=false" "-Dxmage.build.tests.treeViewRunnerShowAllLogs=true" -Dtest=VerifyCardDataTest#test_showCardInfo
         if (System.getProperty("xmage.showCardInfo") != null) {
             cardSearches = System.getProperty("xmage.showCardInfo");
         }
@@ -2236,9 +2236,8 @@ public class VerifyCardDataTest {
             // search by class from non-set (must store in mage.cards.* package)
             if (foundClassName.isEmpty()) {
                 Reflections reflections = new Reflections(searchClass);
-                Set<Class<? extends CardImpl>> founded = null;
                 try {
-                    founded = reflections.getSubTypesOf(CardImpl.class);
+                    Set<Class<? extends CardImpl>> founded = reflections.getSubTypesOf(CardImpl.class);
                     if (!founded.isEmpty()) {
                         foundClassName = founded.stream().findFirst().get().getName();
                         foundCardName = searchClass;
@@ -2287,61 +2286,6 @@ public class VerifyCardDataTest {
         System.out.println(text);
     }
 
-
-    /*
-        for(String rule : card.getRules()) {
-            rule = rule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
-            // TODO: add Equip {3} checks
-            // TODO: add Raid and other words checks
-            String[] sl = rule.split(":");
-            if (sl.length == 2 && !sl[0].isEmpty()) {
-                String cardCost = sl[0]
-                        .replace("{this}", card.getName())
-                        //.replace("<i>", "")
-                        //.replace("</i>", "")
-                        .replace("&mdash;", "—");
-                String cardAbility = sl[1]
-                        .trim()
-                        .replace("{this}", card.getName())
-                        //.replace("<i>", "")
-                        //.replace("</i>", "")
-                        .replace("&mdash;", "—");
-
-                boolean found = false;
-                for (String refRule : refRules) {
-                    refRule = refRule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
-
-                    // fix for ref mana: ref card have xxx instead {T}: Add {xxx}, example: W
-                    if (refRule.length() == 1) {
-                        refRule = "{T}: Add {" + refRule + "}";
-                    }
-                    refRule = refRule
-                            .trim()
-                            //.replace("<i>", "")
-                            //.replace("</i>", "")
-                            .replace("&mdash;", "—");
-
-                    // normal
-                    if (refRule.startsWith(cardCost)) {
-                        found = true;
-                        break;
-                    }
-
-                    // ref card have (xxx) instead xxx, example: ({T}: Add {G}.)
-                    // ref card have <i>(xxx) instead xxx, example: <i>({T}: Add {G}.)</i>
-                    // TODO: delete?
-                    if (refRule.startsWith("(" + cardCost)) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    fail(card, "abilities", "card ability have cost, but can't find in ref [" + cardCost + ": " + cardAbility + "]");
-                }
-            }
-
-        }
-    }*/
     private static boolean compareText(String cardText, String refText, String name) {
         return cardText.equals(refText)
                 || cardText.replace(name, name.split(", ")[0])
