@@ -34,7 +34,7 @@ public final class SilverquillLecturer extends CardImpl {
         // Creature spells you cast have demonstrate.
         this.addAbility(
                 new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new DemonstrateAbility(), filter)
-                        .setText(" you cast have demonstrate.")));
+                        .setText("Creature spells you cast have demonstrate.")));
     }
 
     private SilverquillLecturer(final SilverquillLecturer card) {
