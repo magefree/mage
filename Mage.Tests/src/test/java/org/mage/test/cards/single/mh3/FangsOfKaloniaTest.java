@@ -27,8 +27,7 @@ public class FangsOfKaloniaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, grizzly);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs, grizzly);
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs, grizzly, true);
         checkPT("First Fangs", 1, PhaseStep.PRECOMBAT_MAIN, playerA, grizzly, 4, 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs, grizzly);
 
@@ -55,6 +54,49 @@ public class FangsOfKaloniaTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, arcbound, 10, 10);
     }
     @Test
+    public void test_Vorinclex() {
+        addCard(Zone.HAND, playerA, fangs, 2);
+        addCard(Zone.BATTLEFIELD, playerA, grizzly);
+        addCard(Zone.HAND, playerA, arcbound);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7+2+2);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Vorinclex, Monstrous Raider");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound, true);
+        checkPT("Played arcbound", 1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound, 2, 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs, grizzly, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs, arcbound);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, grizzly, 2, 2);
+        assertPowerToughness(playerA, arcbound, 2, 2);
+    }
+    @Test
+    public void test_HardenedScales() {
+        addCard(Zone.HAND, playerA, fangs, 2);
+        addCard(Zone.BATTLEFIELD, playerA, grizzly);
+        addCard(Zone.HAND, playerA, arcbound);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7+2+2);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Hardened Scales");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound, true);
+        checkPT("Played arcbound", 1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound, 5, 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs, grizzly, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs, arcbound);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, grizzly, 7, 7);
+        assertPowerToughness(playerA, arcbound, 15, 15);
+    }
+
+    @Test
     public void test_VorinclexOverload() {
         addCard(Zone.HAND, playerA, fangs);
         addCard(Zone.BATTLEFIELD, playerA, grizzly);
@@ -63,8 +105,7 @@ public class FangsOfKaloniaTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Vorinclex, Monstrous Raider");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound);
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound, true);
         checkPT("Played arcbound", 1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound, 2, 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs + " with overload");
@@ -76,7 +117,7 @@ public class FangsOfKaloniaTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, arcbound, 2, 2);
     }
     @Test
-    public void test_HardenedScales() {
+    public void test_HardenedScalesOverload() {
         addCard(Zone.HAND, playerA, fangs);
         addCard(Zone.BATTLEFIELD, playerA, grizzly);
         addCard(Zone.HAND, playerA, arcbound);
@@ -84,8 +125,7 @@ public class FangsOfKaloniaTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Hardened Scales");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound);
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound, true);
         checkPT("Played arcbound", 1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound, 5, 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs + " with overload");
@@ -95,6 +135,5 @@ public class FangsOfKaloniaTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, grizzly, 7, 7);
         assertPowerToughness(playerA, arcbound, 15, 15);
-
     }
 }
