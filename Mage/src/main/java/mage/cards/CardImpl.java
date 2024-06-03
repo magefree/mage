@@ -795,6 +795,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, source, playerAddingCounters, counter.getName(), amount);
                 addedAllEvent.setFlag(isEffectFlag);
                 game.fireEvent(addedAllEvent);
+            } else {
+                returnCode = false;
             }
         } else {
             returnCode = false;
