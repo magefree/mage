@@ -2188,7 +2188,8 @@ public class VerifyCardDataTest {
     public void test_showCardInfo() {
         // debug only: show direct card rules from a class file without db-recreate
         //  - search by card name: Spark Double
-        //  - search by class name: SparkDouble
+        //  - search by class name from set: SparkDouble
+        //  - search by class name from non-set: SparkDoubleFixedV1;SparkDoubleFixedV2
         //  - multiple searches: name1;class2;name3
         String cardSearches = "Spark Double;AbandonedSarcophagus";
 
@@ -2206,21 +2207,57 @@ public class VerifyCardDataTest {
         Arrays.stream(cardSearches.split(";")).forEach(searchName -> {
             // original card
             searchName = searchName.trim();
+            String searchClass = String.format("mage.cards.%s.%s",
+                    searchName.substring(0, 1).toLowerCase(Locale.ENGLISH),
+                    searchName);
+
+            String foundCardName = "";
+            String foundClassName = "";
+
+            // search by name
             CardInfo cardInfo = CardRepository.instance.findCard(searchName);
-            if (cardInfo == null) {
-                String searchClass = String.format("mage.cards.%s.%s",
-                        searchName.substring(0, 1).toLowerCase(Locale.ENGLISH),
-                        searchName);
+            if (cardInfo != null) {
+                foundCardName = cardInfo.getName();
+                foundClassName = cardInfo.getClassName();
+            }
+
+            // search by class from set
+            if (foundClassName.isEmpty()) {
                 cardInfo = CardRepository.instance.findCardsByClass(searchClass)
                         .stream()
                         .findFirst()
                         .orElse(null);
+                if (cardInfo != null) {
+                    foundCardName = cardInfo.getName();
+                    foundClassName = cardInfo.getClassName();
+                }
             }
-            if (cardInfo == null) {
+
+            // search by class from non-set (must store in mage.cards.* package)
+            if (foundClassName.isEmpty()) {
+                Reflections reflections = new Reflections(searchClass);
+                Set<Class<? extends CardImpl>> founded = null;
+                try {
+                    founded = reflections.getSubTypesOf(CardImpl.class);
+                    if (!founded.isEmpty()) {
+                        foundClassName = founded.stream().findFirst().get().getName();
+                        foundCardName = searchClass;
+                    }
+                } catch (Exception e) {
+                    if (!e.getMessage().contains("SubTypesScanner was not configured")) {
+                        // unknown error
+                        throw e;
+                    }
+                }
+            }
+
+            if (foundClassName.isEmpty()) {
                 Assert.fail("Can't find card by name or class: " + searchName);
             }
-            CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), "test", "123", Rarity.COMMON);
-            Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+
+            CardSetInfo testSet = new CardSetInfo(foundCardName, "test", "123", Rarity.COMMON);
+            Card card = CardImpl.createCard(foundClassName, testSet);
+            Assert.assertNotNull("Card can't be loaded: " + foundClassName, card);
 
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
