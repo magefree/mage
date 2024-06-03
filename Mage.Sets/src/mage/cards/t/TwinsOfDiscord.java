@@ -56,8 +56,6 @@ public final class TwinsOfDiscord extends CardImpl {
             new BloodthirstAbility(2),
                 Duration.WhileOnBattlefield,
                 colorlessCreatureFilter, true)));
-        
-        
     }
 
     private TwinsOfDiscord(final TwinsOfDiscord card) {
