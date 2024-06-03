@@ -5,14 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.j256.ormlite.field.types.IntegerObjectType;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoubleCountersTargetEffect;
-import mage.abilities.effects.common.counter.DoubleCounterOnEachPermanentEffect;
-import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
@@ -131,23 +127,6 @@ class FangsOfKaloniaOverloadEffect extends OneShotEffect {
                 creature.addCounters(CounterType.P1P1.createInstance(postP1P1Count), source.getControllerId(), source,
                         game);
             }
-        }
-
-        UUID targetId = source.getTargets().getFirstTarget();
-
-        if (targetId == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(targetId);
-        if (permanent == null) {
-            return false;
-        }
-
-        int preP1P1Count = permanent.getCounters(game).getCount(CounterType.P1P1);
-        new AddCountersTargetEffect(CounterType.P1P1.createInstance()).apply(game, source);
-        int postP1P1Count = permanent.getCounters(game).getCount(CounterType.P1P1);
-        if (postP1P1Count > preP1P1Count) {
-            new DoubleCountersTargetEffect(CounterType.P1P1).apply(game, source);
         }
         return true;
     }
