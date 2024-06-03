@@ -86,9 +86,9 @@ class HungerTideSacrificeSearchEffect extends OneShotEffect {
             return false;
         }
         int amount = 0;
-        TargetSacrifice sacrificeLand = new TargetSacrifice(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURES);
-        if (controller.choose(Outcome.Sacrifice, sacrificeLand, source, game)) {
-            for (UUID uuid : sacrificeLand.getTargets()) {
+        TargetSacrifice sacrifices = new TargetSacrifice(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURES);
+        if (controller.choose(Outcome.Sacrifice, sacrifices, source, game)) {
+            for (UUID uuid : sacrifices.getTargets()) {
                 Permanent land = game.getPermanent(uuid);
                 if (land != null) {
                     land.sacrifice(source, game);
