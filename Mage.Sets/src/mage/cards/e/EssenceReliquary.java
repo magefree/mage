@@ -61,7 +61,7 @@ class EssenceReliquaryTargetEffect extends OneShotEffect {
 
     EssenceReliquaryTargetEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Return target creature you control and all Auras you control attached to it to their owner's hand";
+        this.staticText = "Return another target permanent you control and all Auras you control attached to it to their owner's hand";
     }
 
     private EssenceReliquaryTargetEffect(final EssenceReliquaryTargetEffect effect) {

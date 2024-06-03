@@ -60,7 +60,7 @@ class DepthDefilerTriggeredAbility extends CastSourceTriggeredAbility {
         super(new ReturnToHandTargetEffect(), false);
         this.addTarget(new TargetCreaturePermanent());
         Mode mode = new Mode(new DrawCardTargetEffect(2));
-        mode.addEffect(new DiscardTargetEffect(1).concatBy(", then"));
+        mode.addEffect(new DiscardTargetEffect(1).setText(", then discards a card"));
         mode.addTarget(new TargetPlayer());
         this.addMode(mode);
         this.getModes().setChooseText(

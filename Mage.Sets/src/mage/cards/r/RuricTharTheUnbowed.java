@@ -42,7 +42,7 @@ public final class RuricTharTheUnbowed extends CardImpl {
 
         // Whenever a player casts a noncreature spell, Ruric Thar deals 6 damage to that player.
         this.addAbility(new SpellCastAllTriggeredAbility(
-                new DamageTargetEffect(6),
+                new DamageTargetEffect(6).withTargetDescription("that player"),
                 StaticFilters.FILTER_SPELL_A_NON_CREATURE,
                 false, SetTargetPointer.PLAYER
         ));

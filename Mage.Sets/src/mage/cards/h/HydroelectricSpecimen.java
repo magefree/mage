@@ -49,7 +49,7 @@ public final class HydroelectricSpecimen extends ModalDoubleFacedCard {
         // When Hydroelectric Specimen enters the battlefield, you may change the target of target instant or sorcery spell with a single target to Hydroelectric Specimen.
         Effect effect = new ChangeATargetOfTargetSpellAbilityToSourceEffect()
                 .setText("change the target of target instant or sorcery spell with a single target to {this}");
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
         ability.addTarget(new TargetSpell(filter));
         this.getLeftHalfCard().addAbility(ability);
 

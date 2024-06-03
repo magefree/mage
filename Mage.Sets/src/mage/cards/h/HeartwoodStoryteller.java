@@ -50,7 +50,7 @@ class HeartwoodStorytellerEffect extends OneShotEffect {
 
     HeartwoodStorytellerEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Each of that player's opponents may draw a card";
+        this.staticText = "each of that player's opponents may draw a card";
     }
 
     private HeartwoodStorytellerEffect(final HeartwoodStorytellerEffect effect) {
