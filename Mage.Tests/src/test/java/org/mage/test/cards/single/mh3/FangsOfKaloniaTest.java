@@ -95,6 +95,50 @@ public class FangsOfKaloniaTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, grizzly, 7, 7);
         assertPowerToughness(playerA, arcbound, 15, 15);
     }
+    @Test
+    public void test_DoubleReplacement1() {
+        addCard(Zone.HAND, playerA, fangs, 2);
+        addCard(Zone.HAND, playerA, arcbound);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7+2);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Hardened Scales");
+        addCard(Zone.BATTLEFIELD, playerB, "Vorinclex, Monstrous Raider");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound);
+        setChoice(playerA, "Hardened Scales"); //(4+1)/2 = 2
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPT("Played arcbound", 1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound, 2, 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs, arcbound);
+        setChoice(playerA, "Hardened Scales"); //adds (1+1)/2 = 1, success. Now 3 counters, double adds (3+1)/2 = 2
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, arcbound, 5, 5);
+    }
+    @Test
+    public void test_DoubleReplacement2() {
+        addCard(Zone.HAND, playerA, fangs, 2);
+        addCard(Zone.HAND, playerA, arcbound);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7+2);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Hardened Scales");
+        addCard(Zone.BATTLEFIELD, playerB, "Vorinclex, Monstrous Raider");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound);
+        setChoice(playerA, "Vorinclex, Monstrous Raider"); //(4/2)+1 = 3
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPT("Played arcbound", 1, PhaseStep.PRECOMBAT_MAIN, playerA, arcbound, 3, 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fangs, arcbound);
+        setChoice(playerA, "Vorinclex, Monstrous Raider"); // adds (1/2), then no placement action to add to
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, arcbound, 3, 3);
+    }
 
     @Test
     public void test_VorinclexOverload() {

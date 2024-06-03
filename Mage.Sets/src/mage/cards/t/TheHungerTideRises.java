@@ -39,7 +39,7 @@ public final class TheHungerTideRises extends CardImpl {
         // I, II, III -- Create a 1/1 black and green Insect creature token.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_III, new CreateTokenEffect(new IzoniInsectToken()));
 
-        // IIV -- Sacrifice any number of creatures. Search your library and/or graveyard for a creature card with mana value less than or equal to the number of creatures sacrificed this way and put it onto the battlefield. If you search your library this way, shuffle.
+        // IV -- Sacrifice any number of creatures. Search your library and/or graveyard for a creature card with mana value less than or equal to the number of creatures sacrificed this way and put it onto the battlefield. If you search your library this way, shuffle.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_IV, new HungerTideSacrificeSearchEffect());
         this.addAbility(sagaAbility);
     }
