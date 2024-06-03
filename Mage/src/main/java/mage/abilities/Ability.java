@@ -38,21 +38,11 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Assigns a new {@link java.util.UUID}
-     *
-     * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
-     * mage.game.Game)
-     * @see Game#addTriggeredAbility(TriggeredAbility, GameEvent)
-     * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newId();
 
     /**
      * Assigns a new {@link java.util.UUID}
-     *
-     * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
-     * mage.game.Game)
-     * @see Game#addTriggeredAbility(TriggeredAbility, GameEvent)
-     * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newOriginalId(); // TODO: delete newOriginalId???
 
@@ -205,7 +195,6 @@ public interface Ability extends Controllable, Serializable {
      * Retrieves the effects of the specified {@link EffectType type} that are
      * put into place by the resolution of this ability.
      *
-     * @param game
      * @param effectType The {@link EffectType type} to search for.
      * @return All {@link Effects} of the given {@link EffectType}.
      */
@@ -256,15 +245,11 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Retrieves the {@link Zone} that this ability is active within.
-     *
-     * @return
      */
     Zone getZone();
 
     /**
      * Retrieves whether or not this abilities activation will use the stack.
-     *
-     * @return
      */
     boolean isUsesStack();
 
@@ -284,15 +269,11 @@ public interface Ability extends Controllable, Serializable {
      * text if the all parameter is false.
      *
      * @param all True if costs are desired in the output, false otherwise.
-     * @return
      */
     String getRule(boolean all);
 
     /**
      * Retrieves the rule associated with the given source.
-     *
-     * @param source
-     * @return
      */
     String getRule(String source);
 
@@ -303,12 +284,6 @@ public interface Ability extends Controllable, Serializable {
      *               activated within.
      * @param noMana Whether or not {@link ManaCosts} have to be paid.
      * @return True if this ability was successfully activated.
-     * @see mage.players.PlayerImpl#cast(mage.abilities.SpellAbility,
-     * mage.game.Game, boolean)
-     * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
-     * mage.game.Game)
-     * @see mage.players.PlayerImpl#triggerAbility(mage.abilities.TriggeredAbility,
-     * mage.game.Game)
      */
     boolean activate(Game game, boolean noMana);
 
@@ -321,17 +296,11 @@ public interface Ability extends Controllable, Serializable {
      *
      * @param game The {@link Game} for which this ability resolves within.
      * @return Whether or not this ability successfully resolved.
-     * @see mage.players.PlayerImpl#playManaAbility(mage.abilities.mana.ManaAbility,
-     * mage.game.Game)
-     * @see mage.players.PlayerImpl#specialAction(mage.abilities.SpecialAction,
-     * mage.game.Game)
      */
     boolean resolve(Game game);
 
     /**
      * Used to reset the state of this ability.
-     *
-     * @param game
      */
     void reset(Game game);
 
@@ -339,7 +308,6 @@ public interface Ability extends Controllable, Serializable {
      * Overridden by triggered abilities with intervening if clauses - rule
      * 20110715 - 603.4
      *
-     * @param game
      * @return Whether or not the intervening if clause is satisfied
      */
     boolean checkIfClause(Game game);
@@ -363,8 +331,6 @@ public interface Ability extends Controllable, Serializable {
      * Gets the list of sub-abilities associated with this ability.
      * When copying, subabilities are copied separately and thus the list is desynced.
      * Do not interact with the subabilities list during a game!
-     *
-     * @return
      */
     List<Ability> getSubAbilities();
 
@@ -379,18 +345,11 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Add watcher blueprint (real watcher will be created on card/ability init)
-     *
-     * @param watcher
      */
     void addWatcher(Watcher watcher);
 
     /**
      * Returns true if this abilities source is in the zone for the ability
-     *
-     * @param game
-     * @param source
-     * @param event
-     * @return
      */
     boolean isInUseableZone(Game game, MageObject source, GameEvent event);
 
@@ -398,18 +357,11 @@ public interface Ability extends Controllable, Serializable {
      * Returns true if the source object has currently the ability (e.g. The
      * object can have lost all or some abilities for some time (e.g. Turn to
      * Frog)
-     *
-     * @param game
-     * @param source
-     * @param event
-     * @return
      */
     boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event);
 
     /**
      * Returns true if the ability has a tap itself in their costs
-     *
-     * @return
      */
     default boolean hasTapCost() {
         for (Cost cost : this.getCosts()) {
@@ -423,8 +375,6 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Returns true if this ability has to be shown as topmost of all the rules
      * of the object
-     *
-     * @return
      */
     boolean getRuleAtTheTop();
 
@@ -432,17 +382,12 @@ public interface Ability extends Controllable, Serializable {
      * Sets the value for the ruleAtTheTop attribute
      * <p>
      * true = show the rule at the top position of the rules
-     *
-     * @param ruleAtTheTop
-     * @return
      */
     Ability setRuleAtTheTop(boolean ruleAtTheTop);
 
     /**
      * Returns true if this ability has to work also with face down object (set
      * to not visible normally).
-     *
-     * @return
      */
     boolean getWorksFaceDown();
 
@@ -450,15 +395,11 @@ public interface Ability extends Controllable, Serializable {
      * Sets the value for the worksFaceDown flag
      * <p>
      * true = the ability works also if the object is face down
-     *
-     * @param worksFaceDown
      */
     void setWorksFaceDown(boolean worksFaceDown);
 
     /**
      * Returns true if this ability has to work also with phased out object.
-     *
-     * @return
      */
     boolean getWorksPhasedOut();
 
@@ -466,43 +407,31 @@ public interface Ability extends Controllable, Serializable {
      * Sets the value for the worksPhasedOut flag
      * <p>
      * true = the ability works also if the object is phased out
-     *
-     * @param worksPhasedOut
      */
     void setWorksPhasedOut(boolean worksPhasedOut);
 
     /**
      * Returns true if this ability's rule is visible on the card tooltip
-     *
-     * @return
      */
     boolean getRuleVisible();
 
     /**
      * Sets the value for the ruleVisible attribute
      * <p>
-     * true = rule will be shown for the card / permanent false = rule won't be
-     * shown
-     *
-     * @param ruleVisible
+     * true = rule will be shown for the card / permanent false = rule won't be shown
      */
     Ability setRuleVisible(boolean ruleVisible);
 
     /**
-     * Returns true if the additional costs of the abilitiy should be visible on
+     * Returns true if the additional costs of the ability should be visible on
      * the tooltip text
-     *
-     * @return
      */
     boolean getAdditionalCostsRuleVisible();
 
     /**
      * Sets the value for the additional costs rule attribute
      * <p>
-     * true = rule will be shown for the card / permanent false = rule won't be
-     * shown
-     *
-     * @param ruleAdditionalCostsVisible
+     * true = rule will be shown for the card / permanent false = rule won't be shown
      */
     void setAdditionalCostsRuleVisible(boolean ruleAdditionalCostsVisible);
 
@@ -519,51 +448,34 @@ public interface Ability extends Controllable, Serializable {
      * common functionality and does not imply any particular rules.
      * <p>
      * --- Not usable yet for rule text generation of triggered abilities ---
-     *
-     * @param abilityWord
      */
     Ability setAbilityWord(AbilityWord abilityWord);
 
     /**
      * Sets flavor word for whole ability
-     *
-     * @param flavorWord
-     * @return
      */
     Ability withFlavorWord(String flavorWord);
 
     /**
      * Sets flavor word for first mode
-     *
-     * @param flavorWord
-     * @return
      */
     Ability withFirstModeFlavorWord(String flavorWord);
 
     /**
      * Sets cost word for first mode
-     *
-     * @param cost
-     * @return
      */
     Ability withFirstModeCost(Cost cost);
 
     /**
      * Creates the message about the ability casting/triggering/activating to
      * post in the game log before the ability resolves.
-     *
-     * @param game
-     * @return
      */
     String getGameLogMessage(Game game);
 
     boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game);
 
     /**
-     * Return source object or LKI from battlefield
-     *
-     * @param game
-     * @return
+     * Finds the source object regardless of its zcc. Can be LKI from battlefield in some cases.
      */
     MageObject getSourceObject(Game game);
 
@@ -572,37 +484,24 @@ public interface Ability extends Controllable, Serializable {
     int getSourceObjectZoneChangeCounter();
 
     /**
-     * Returns exists source object:
+     * Finds the source object (Permanent, StackObject, Card, etc.) as long as its zcc has not changed, otherwise null
      * - for not activated ability - returns exists object
      * - for activated ability - returns exists object or LKI (if it triggers from non battlefield, e.g. sacrifice cost);
-     *
-     * @param game
-     * @return
      */
     MageObject getSourceObjectIfItStillExists(Game game);
 
-
     /**
-     * See getSourceObjectIfItStillExists for details. Works with Card only.
-     *
-     * @param game
-     * @return
+     * Finds the source object as long as it is a Card (can also be Permanent, Spell, etc.) and its zcc has not changed
      */
     Card getSourceCardIfItStillExists(Game game);
 
     /**
-     * See getSourceObjectIfItStillExists for details. Works with Permanent only.
-     *
-     * @param game
-     * @return
+     * Finds the source object as long as it is a Permanent and its zcc has not changed
      */
     Permanent getSourcePermanentIfItStillExists(Game game);
 
     /**
-     * Returns source permanent info (actual or from LKI)
-     *
-     * @param game
-     * @return
+     * Returns source permanent info (actual if it exists, otherwise from LKI)
      */
     Permanent getSourcePermanentOrLKI(Game game);
 
@@ -639,8 +538,6 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * For abilities with static icons
-     *
-     * @return
      */
     List<CardIcon> getIcons();
 
@@ -648,7 +545,6 @@ public interface Ability extends Controllable, Serializable {
      * For abilities with dynamic icons
      *
      * @param game can be null for static calls like copies
-     * @return
      */
     List<CardIcon> getIcons(Game game);
 
@@ -660,9 +556,6 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * For mtg's instances search, see rules example in 112.10b
-     *
-     * @param ability
-     * @return
      */
     boolean isSameInstance(Ability ability);
 

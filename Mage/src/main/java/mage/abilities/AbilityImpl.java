@@ -39,7 +39,6 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.*;
 
