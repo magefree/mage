@@ -24,6 +24,7 @@ public final class SpawnbedProtector extends CardImpl {
     private static final FilterPermanentCard filter = new FilterPermanentCard("Eldrazi creature");
     static {
         filter.add(SubType.ELDRAZI.getPredicate());
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     public SpawnbedProtector(UUID ownerId, CardSetInfo setInfo) {
