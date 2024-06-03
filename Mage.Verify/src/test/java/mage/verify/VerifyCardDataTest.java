@@ -2270,6 +2270,9 @@ public class VerifyCardDataTest {
             // ref card
             System.out.println();
             MtgJsonCard ref = MtgJsonService.card(card.getName());
+            if (ref == null) {
+                ref = MtgJsonService.cardByClassName(foundClassName);
+            }
             if (ref != null) {
                 System.out.println("ref: " + ref.getNameAsFace() + " " + ref.manaCost);
                 System.out.println(ref.text);
