@@ -20,7 +20,7 @@ public final class DissipationField extends CardImpl {
 
         // Whenever a permanent deals damage to you, return it to its owner's hand.
         this.addAbility(new DealsDamageToYouAllTriggeredAbility(StaticFilters.FILTER_PERMANENT,
-                new ReturnToHandTargetEffect().setText("return it to its owner's hand")));
+                new ReturnToHandTargetEffect().setText("return it to its owner's hand"), false));
     }
 
     private DissipationField(final DissipationField card) {

@@ -33,7 +33,7 @@ public final class Dread extends CardImpl {
         
         // Whenever a creature deals damage to you, destroy it.
         this.addAbility(new DealsDamageToYouAllTriggeredAbility(StaticFilters.FILTER_PERMANENT_CREATURE,
-                new DestroyTargetEffect().setText("destroy it")));
+                new DestroyTargetEffect().setText("destroy it"), false));
         
         // When Dread is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));

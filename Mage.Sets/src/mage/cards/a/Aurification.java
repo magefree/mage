@@ -37,7 +37,7 @@ public final class Aurification extends CardImpl {
 
         // Whenever a creature deals damage to you, put a gold counter on it.
         this.addAbility(new DealsDamageToYouAllTriggeredAbility(StaticFilters.FILTER_PERMANENT_CREATURE,
-                new AddCountersTargetEffect(CounterType.GOLD.createInstance()).setText("put a gold counter on it")));
+                new AddCountersTargetEffect(CounterType.GOLD.createInstance()).setText("put a gold counter on it"), false));
 
         // Each creature with a gold counter on it is a Wall in addition to its other creature types and has defender.
         BecomesSubtypeAllEffect becomesSubtypeAllEffect = new BecomesSubtypeAllEffect(Duration.WhileOnBattlefield, Arrays.asList(SubType.WALL), filter, false);

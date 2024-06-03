@@ -20,7 +20,7 @@ public final class NoMercy extends CardImpl {
 
         // Whenever a creature deals damage to you, destroy it.
         this.addAbility(new DealsDamageToYouAllTriggeredAbility(StaticFilters.FILTER_PERMANENT_CREATURE,
-                new DestroyTargetEffect().setText("destroy it")));
+                new DestroyTargetEffect().setText("destroy it"), false));
     }
 
     private NoMercy(final NoMercy card) {

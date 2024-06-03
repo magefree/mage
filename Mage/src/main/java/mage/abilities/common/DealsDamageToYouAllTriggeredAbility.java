@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -18,15 +19,18 @@ public class DealsDamageToYouAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterPermanent filter;
     private final boolean onlyCombat;
+    private final SetTargetPointer setTargetPointer;
 
-    public DealsDamageToYouAllTriggeredAbility(FilterPermanent filter, Effect effect) {
-        this(Zone.BATTLEFIELD, filter, effect, false, false);
+    public DealsDamageToYouAllTriggeredAbility(FilterPermanent filter, Effect effect, boolean onlyCombat) {
+        this(Zone.BATTLEFIELD, filter, effect, false, onlyCombat, SetTargetPointer.PERMANENT);
     }
 
-    public DealsDamageToYouAllTriggeredAbility(Zone zone, FilterPermanent filter, Effect effect, boolean optional, boolean onlyCombat) {
+    public DealsDamageToYouAllTriggeredAbility(Zone zone, FilterPermanent filter, Effect effect,
+                                               boolean optional, boolean onlyCombat, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.filter = filter;
         this.onlyCombat = onlyCombat;
+        this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " deals " + (onlyCombat ? "combat " : "") + "damage to you, ");
     }
 
@@ -34,6 +38,7 @@ public class DealsDamageToYouAllTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.filter = ability.filter;
         this.onlyCombat = ability.onlyCombat;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -59,7 +64,18 @@ public class DealsDamageToYouAllTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         this.getEffects().setValue("damage", event.getAmount());
-        this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+        switch (setTargetPointer) {
+            case NONE:
+                break;
+            case PERMANENT:
+                this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                break;
+            case PLAYER:
+                this.getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                break;
+            default:
+                throw new UnsupportedOperationException("SetTargetPointer not handled in DealsDamageToYouAllTriggeredAbility " + setTargetPointer);
+        }
         return true;
     }
 }

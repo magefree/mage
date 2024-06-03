@@ -44,7 +44,7 @@ public final class MikaeusTheUnhallowed extends CardImpl {
 
         // Whenever a Human deals damage to you, destroy it.
         this.addAbility(new DealsDamageToYouAllTriggeredAbility(filterHuman,
-                new DestroyTargetEffect().setText("destroy it")));
+                new DestroyTargetEffect().setText("destroy it"), false));
 
         // Other non-Human creatures you control get +1/+1 and have undying.
         Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true));
