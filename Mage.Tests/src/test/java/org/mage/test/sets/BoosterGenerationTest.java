@@ -514,7 +514,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
     @Ignore // debug only: collect info about cards in boosters, see https://github.com/magefree/mage/issues/8081
     @Test
     public void test_CollectBoosterStats() {
-        ExpansionSet setToAnalyse = OutlawsOfThunderJunction.getInstance();
+        ExpansionSet setToAnalyse = ModernHorizons3.getInstance();
         int openBoosters = 10000;
 
         Map<String, Integer> resRatio = new HashMap<>();
