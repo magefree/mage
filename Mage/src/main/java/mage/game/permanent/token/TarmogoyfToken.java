@@ -19,6 +19,7 @@ public final class TarmogoyfToken extends TokenImpl {
     public TarmogoyfToken() {
         super("Tarmogoyf Token",
                 "Tarmogoyf’s power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.");
+        manaCost = new ManaCostsImpl<>("{1}{G}");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.LHURGOYF);
