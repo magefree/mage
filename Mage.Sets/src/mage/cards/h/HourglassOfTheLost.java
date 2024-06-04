@@ -48,7 +48,8 @@ public final class HourglassOfTheLost extends CardImpl {
         ability.addEffect(new AddCountersSourceEffect(CounterType.TIME.createInstance()));
         this.addAbility(ability);
         // {T}, Remove X time counters from Hourglass of the Lost and exile it: Return each nonland permanent card with mana value X from your graveyard to the battlefield. Activate only as a sorcery.
-        Ability returnAbility = new ActivateAsSorceryActivatedAbility(new HourglassOfTheLostEffect(), new TapSourceCost());
+        Ability returnAbility = new ActivateAsSorceryActivatedAbility(new HourglassOfTheLostEffect(), null);
+        returnAbility.addCost(new TapSourceCost());
         returnAbility.addCost(new RemoveVariableCountersSourceCost(CounterType.TIME));
         returnAbility.addCost(new ExileSourceCost().setText("and exile it"));
         this.addAbility(returnAbility);
