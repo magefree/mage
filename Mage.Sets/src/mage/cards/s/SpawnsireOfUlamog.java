@@ -41,7 +41,7 @@ public final class SpawnsireOfUlamog extends CardImpl {
         this.addAbility(new AnnihilatorAbility(1));
 
         // {4}: Create two 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new EldraziSpawnToken(), 2), new GenericManaCost(4)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new EldraziSpawnToken(), 2).withTextOptions(true), new GenericManaCost(4)));
 
         // {20}: Cast any number of Eldrazi cards you own from outside the game without paying their mana costs.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,

@@ -29,6 +29,7 @@ public class CreateTokenEffect extends OneShotEffect {
     private final boolean tapped;
     private final boolean attacking;
     private String additionalRules;
+    private boolean oldPhrasing = false; // true for "token. It has " instead of "token with "
     private List<UUID> lastAddedTokenIds = new ArrayList<>();
     private CounterType counterType;
     private DynamicValue numberOfCounters;
@@ -72,6 +73,7 @@ public class CreateTokenEffect extends OneShotEffect {
         this.counterType = effect.counterType;
         this.numberOfCounters = effect.numberOfCounters;
         this.additionalRules = effect.additionalRules;
+        this.oldPhrasing = effect.oldPhrasing;
     }
 
     public CreateTokenEffect entersWithCounters(CounterType counterType, DynamicValue numberOfCounters) {
@@ -129,33 +131,50 @@ public class CreateTokenEffect extends OneShotEffect {
         }
     }
 
+    /**
+     * For adding reminder text to the effect
+     */
     public CreateTokenEffect withAdditionalRules(String additionalRules) {
         this.additionalRules = additionalRules;
         setText();
         return this;
     }
 
+    /**
+     * For older cards that use the phrasing "token. It has " rather than "token with ".
+     */
+    public CreateTokenEffect withTextOptions(boolean oldPhrasing) {
+        this.oldPhrasing = oldPhrasing;
+        setText();
+        return this;
+    }
+
     private void setText() {
-        if (token.getDescription().contains(", a legendary")) {
-            staticText = "create " + token.getDescription();
+        String tokenDescription = token.getDescription();
+        boolean singular = amount.toString().equals("1");
+        if (tokenDescription.contains(", a legendary")) {
+            staticText = "create " + tokenDescription;
             return;
         }
-
+        if (oldPhrasing) {
+            tokenDescription = tokenDescription.replace("token with \"",
+                    singular ? "token. It has \"" : "tokens. They have \"");
+        }
         StringBuilder sb = new StringBuilder("create ");
-        if (amount.toString().equals("1")) {
+        if (singular) {
             if (tapped && !attacking) {
                 sb.append("a tapped ");
-                sb.append(token.getDescription());
+                sb.append(tokenDescription);
             } else {
-                sb.append(CardUtil.addArticle(token.getDescription()));
+                sb.append(CardUtil.addArticle(tokenDescription));
             }
         } else {
             sb.append(CardUtil.numberToText(amount.toString())).append(' ');
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
-            sb.append(token.getDescription().replace("token. It has", "tokens. They have"));
-            if (token.getDescription().endsWith("token")) {
+            sb.append(tokenDescription);
+            if (tokenDescription.endsWith("token")) {
                 sb.append("s");
             }
             int tokenLocation = sb.indexOf("token ");
@@ -165,7 +184,7 @@ public class CreateTokenEffect extends OneShotEffect {
         }
 
         if (attacking) {
-            if (amount.toString().equals("1")) {
+            if (singular) {
                 sb.append(" that's");
             } else {
                 sb.append(" that are");

@@ -31,7 +31,7 @@ public final class CatacombSifter extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
         
         // When Catacomb Sifter enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziScionToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziScionToken()).withTextOptions(true)));
         
         // Whenever another creature you control dies, scry 1
         this.addAbility(new DiesCreatureTriggeredAbility(new ScryEffect(1), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
