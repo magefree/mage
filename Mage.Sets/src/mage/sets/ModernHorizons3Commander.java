@@ -207,6 +207,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Ruins of Oran-Rief", 370, Rarity.RARE, mage.cards.r.RuinsOfOranRief.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 243, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Salvation Colossus", 43, Rarity.RARE, mage.cards.s.SalvationColossus.class));
+        cards.add(new SetCardInfo("Satya, Aetherflux Genius", 3, Rarity.MYTHIC, mage.cards.s.SatyaAetherfluxGenius.class));
         cards.add(new SetCardInfo("Satyr Wayfinder", 244, Rarity.COMMON, mage.cards.s.SatyrWayfinder.class));
         cards.add(new SetCardInfo("Savage Lands", 371, Rarity.UNCOMMON, mage.cards.s.SavageLands.class));
         cards.add(new SetCardInfo("Scute Swarm", 245, Rarity.RARE, mage.cards.s.ScuteSwarm.class));
