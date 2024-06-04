@@ -285,6 +285,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Ugin's Labyrinth", 233, Rarity.MYTHIC, mage.cards.u.UginsLabyrinth.class));
         cards.add(new SetCardInfo("Ulamog, the Defiler", 15, Rarity.MYTHIC, mage.cards.u.UlamogTheDefiler.class));
         cards.add(new SetCardInfo("Unfathomable Truths", 77, Rarity.COMMON, mage.cards.u.UnfathomableTruths.class));
+        cards.add(new SetCardInfo("Unstable Amulet", 142, Rarity.UNCOMMON, mage.cards.u.UnstableAmulet.class));
         cards.add(new SetCardInfo("Urza's Cave", 234, Rarity.UNCOMMON, mage.cards.u.UrzasCave.class));
         cards.add(new SetCardInfo("Urza's Incubator", 297, Rarity.RARE, mage.cards.u.UrzasIncubator.class));
         cards.add(new SetCardInfo("Utter Insignificance", 78, Rarity.COMMON, mage.cards.u.UtterInsignificance.class));
