@@ -155,6 +155,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Kolaghan's Command", 268, Rarity.RARE, mage.cards.k.KolaghansCommand.class));
         cards.add(new SetCardInfo("Kozilek's Return", 214, Rarity.MYTHIC, mage.cards.k.KozileksReturn.class));
         cards.add(new SetCardInfo("Lair of the Hydra", 353, Rarity.RARE, mage.cards.l.LairOfTheHydra.class));
+        cards.add(new SetCardInfo("Lazotep Quarry", 79, Rarity.RARE, mage.cards.l.LazotepQuarry.class));
         cards.add(new SetCardInfo("Legion Loyalty", 171, Rarity.MYTHIC, mage.cards.l.LegionLoyalty.class));
         cards.add(new SetCardInfo("Lhurgoyf", 235, Rarity.RARE, mage.cards.l.Lhurgoyf.class));
         cards.add(new SetCardInfo("Lightning Greaves", 298, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
