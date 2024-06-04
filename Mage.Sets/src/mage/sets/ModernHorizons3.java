@@ -103,6 +103,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Faithful Watchdog", 185, Rarity.COMMON, mage.cards.f.FaithfulWatchdog.class));
         cards.add(new SetCardInfo("Fanatic of Rhonas", 152, Rarity.RARE, mage.cards.f.FanaticOfRhonas.class));
         cards.add(new SetCardInfo("Fanged Flames", 118, Rarity.COMMON, mage.cards.f.FangedFlames.class));
+        cards.add(new SetCardInfo("Fangs of Kalonia", 153, Rarity.UNCOMMON, mage.cards.f.FangsOfKalonia.class));
         cards.add(new SetCardInfo("Fell the Profane", 244, Rarity.UNCOMMON, mage.cards.f.FellTheProfane.class));
         cards.add(new SetCardInfo("Fetid Gargantua", 94, Rarity.COMMON, mage.cards.f.FetidGargantua.class));
         cards.add(new SetCardInfo("Flare of Cultivation", 154, Rarity.RARE, mage.cards.f.FlareOfCultivation.class));
@@ -265,6 +266,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Temperamental Oozewagg", 172, Rarity.COMMON, mage.cards.t.TemperamentalOozewagg.class));
         cards.add(new SetCardInfo("Tempest Harvester", 73, Rarity.COMMON, mage.cards.t.TempestHarvester.class));
         cards.add(new SetCardInfo("Territory Culler", 173, Rarity.UNCOMMON, mage.cards.t.TerritoryCuller.class));
+        cards.add(new SetCardInfo("The Hunger Tide Rises", 158, Rarity.UNCOMMON, mage.cards.t.TheHungerTideRises.class));
         cards.add(new SetCardInfo("The Necrobloom", 194, Rarity.RARE, mage.cards.t.TheNecrobloom.class));
         cards.add(new SetCardInfo("Thraben Charm", 45, Rarity.COMMON, mage.cards.t.ThrabenCharm.class));
         cards.add(new SetCardInfo("Thriving Skyclaw", 141, Rarity.COMMON, mage.cards.t.ThrivingSkyclaw.class));
@@ -289,6 +291,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Voltstorm Angel", 46, Rarity.UNCOMMON, mage.cards.v.VoltstormAngel.class));
         cards.add(new SetCardInfo("Warped Tusker", 16, Rarity.COMMON, mage.cards.w.WarpedTusker.class));
         cards.add(new SetCardInfo("Warren Soultrader", 110, Rarity.RARE, mage.cards.w.WarrenSoultrader.class));
+        cards.add(new SetCardInfo("Wastescape Battlemage", 17, Rarity.UNCOMMON, mage.cards.w.WastescapeBattlemage.class));
         cards.add(new SetCardInfo("Waterlogged Teachings", 261, Rarity.UNCOMMON, mage.cards.w.WaterloggedTeachings.class));
         cards.add(new SetCardInfo("White Orchid Phantom", 47, Rarity.RARE, mage.cards.w.WhiteOrchidPhantom.class));
         cards.add(new SetCardInfo("Wight of the Reliquary", 207, Rarity.RARE, mage.cards.w.WightOfTheReliquary.class));
