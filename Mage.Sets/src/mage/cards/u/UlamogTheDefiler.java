@@ -49,7 +49,7 @@ public final class UlamogTheDefiler extends CardImpl {
         this.addAbility(ability);
 
         // Ward--Sacrifice two permanents.
-        this.addAbility(new WardAbility(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENTS)));
+        this.addAbility(new WardAbility(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENTS), false));
 
         // Ulamog, the Defiler enters the battlefield with a number of +1/+1 counters on it equal to the greatest mana value among cards in exile.
         this.addAbility(

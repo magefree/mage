@@ -40,7 +40,7 @@ public final class UlamogsDreadsire extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Ward--Sacrifice a permanent with mana value 1 or greater.
-        this.addAbility(new WardAbility(new SacrificeTargetCost(filter)));
+        this.addAbility(new WardAbility(new SacrificeTargetCost(filter), false));
 
         // {T}: Create a 10/10 colorless Eldrazi creature token.
         this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new EldraziToken()), new TapSourceCost()));

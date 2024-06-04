@@ -42,7 +42,7 @@ public final class Dreadmobile extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // {1}, Sacrifice another artifact or creature: Put a +1/+1 counter on Dreadmobile.
         Ability ability = new SimpleActivatedAbility(
