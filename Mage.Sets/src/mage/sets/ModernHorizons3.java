@@ -267,6 +267,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Temperamental Oozewagg", 172, Rarity.COMMON, mage.cards.t.TemperamentalOozewagg.class));
         cards.add(new SetCardInfo("Tempest Harvester", 73, Rarity.COMMON, mage.cards.t.TempestHarvester.class));
         cards.add(new SetCardInfo("Territory Culler", 173, Rarity.UNCOMMON, mage.cards.t.TerritoryCuller.class));
+        cards.add(new SetCardInfo("The Creation of Avacyn", 86, Rarity.UNCOMMON, mage.cards.t.TheCreationOfAvacyn.class));
         cards.add(new SetCardInfo("The Hunger Tide Rises", 158, Rarity.UNCOMMON, mage.cards.t.TheHungerTideRises.class));
         cards.add(new SetCardInfo("The Necrobloom", 194, Rarity.RARE, mage.cards.t.TheNecrobloom.class));
         cards.add(new SetCardInfo("Thraben Charm", 45, Rarity.COMMON, mage.cards.t.ThrabenCharm.class));
