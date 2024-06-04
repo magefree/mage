@@ -145,6 +145,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "MH3", "Echoes of Eternity"); // temporary, waiting for tribal -> kindred change
         skipListAddName(SKIP_LIST_TYPE, "MH3", "Idol of False Gods"); // temporary, waiting for tribal -> kindred change
         skipListAddName(SKIP_LIST_TYPE, "M3C", "Tarmogoyf Nest"); // temporary, waiting for tribal -> kindred change
+        skipListAddName(SKIP_LIST_TYPE, "MH3", "Kozilek's Command"); // temporary, waiting for tribal -> kindred change
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
