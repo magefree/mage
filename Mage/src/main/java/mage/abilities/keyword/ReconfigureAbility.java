@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -17,14 +18,25 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class ReconfigureAbility extends ActivatedAbilityImpl {
 
-    private final String manaString;
+    private final Cost cost;
+//    private final String manaString;
 
     public ReconfigureAbility(String manaString) {
         super(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature), new ManaCostsImpl<>(manaString));
-        this.manaString = manaString;
+        this.cost = new ManaCostsImpl<>(manaString);
+        this.addTarget(new TargetControlledCreaturePermanent());
+        this.addSubAbility(new ReconfigureUnattachAbility(cost));
+        Ability ability = new SimpleStaticAbility(new ReconfigureTypeEffect());
+        ability.setRuleVisible(false);
+        this.addSubAbility(ability);
+    }
+
+    public ReconfigureAbility(Cost cost) {
+        super(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature), cost);
+        this.cost = cost;
         this.timing = TimingRule.SORCERY;
         this.addTarget(new TargetControlledCreaturePermanent());
-        this.addSubAbility(new ReconfigureUnattachAbility(manaString));
+        this.addSubAbility(new ReconfigureUnattachAbility(cost));
         Ability ability = new SimpleStaticAbility(new ReconfigureTypeEffect());
         ability.setRuleVisible(false);
         this.addSubAbility(ability);
@@ -32,7 +44,7 @@ public class ReconfigureAbility extends ActivatedAbilityImpl {
 
     private ReconfigureAbility(final ReconfigureAbility ability) {
         super(ability);
-        this.manaString = ability.manaString;
+        this.cost = ability.cost;
     }
 
     @Override
@@ -42,7 +54,7 @@ public class ReconfigureAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Reconfigure " + manaString + " (" + manaString
+        return "Reconfigure " + cost.getText() + " (" + cost.getText()
                 + ": Attach to target creature you control; " +
                 "or unattach from a creature. Reconfigure only as a sorcery. " +
                 "While attached, this isn't a creature.)";
@@ -51,8 +63,8 @@ public class ReconfigureAbility extends ActivatedAbilityImpl {
 
 class ReconfigureUnattachAbility extends ActivatedAbilityImpl {
 
-    protected ReconfigureUnattachAbility(String manaString) {
-        super(Zone.BATTLEFIELD, new ReconfigureUnattachEffect(), new ManaCostsImpl<>(manaString));
+    protected ReconfigureUnattachAbility(Cost cost) {
+        super(Zone.BATTLEFIELD, new ReconfigureUnattachEffect(), cost);
         this.condition = ReconfigureUnattachAbility::checkForCreature;
         this.timing = TimingRule.SORCERY;
         this.setRuleVisible(false);
