@@ -97,16 +97,12 @@ class GluttonousHellkiteEffect extends OneShotEffect {
         if (obj instanceof SpellAbility) {
             sacrificeAmount = ((SpellAbility) obj).getManaCostsToPay().getX();
         }
-
-        game.informPlayers("sacrificeAmount: " + sacrificeAmount);
         if (sacrificeAmount < 1) {
             return true;
         }
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-
             Player player = game.getPlayer(playerId);
             if (player != null) {
-
                 TargetSacrifice target = new TargetSacrifice(sacrificeAmount, StaticFilters.FILTER_PERMANENT_CREATURE);
                 if (target.canChoose(player.getId(), source, game)) {
                     player.choose(Outcome.Sacrifice, target, source, game);
@@ -158,17 +154,12 @@ class GluttonousHellkiteReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Object object = this.getValue("GluttonousHellkiteCounters");
 
-        game.informPlayers("triggered ETB");
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             permanent = game.getPermanentEntering(source.getSourceId());
         }
-        if (permanent == null) {
-            game.informPlayers("no perm");
-        }
         if (permanent != null && object instanceof Integer) {
             int amount = ((Integer) object);
-            game.informPlayers("Counter: " + amount);
             permanent.addCounters(CounterType.P1P1.createInstance(amount * 2), source.getControllerId(), source, game);
         }
         return false;
