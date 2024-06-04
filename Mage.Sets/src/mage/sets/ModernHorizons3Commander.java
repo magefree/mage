@@ -39,7 +39,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 283, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archon of Cruelty", 197, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
         cards.add(new SetCardInfo("Artisan of Kozilek", 153, Rarity.UNCOMMON, mage.cards.a.ArtisanOfKozilek.class));
-        cards.add(new SetCardInfo("Ash Barrens", 318, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Ash Barrens", 318, Rarity.COMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Austere Command", 167, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 221, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
         cards.add(new SetCardInfo("Awakening Zone", 222, Rarity.RARE, mage.cards.a.AwakeningZone.class));
@@ -97,7 +97,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Eldrazi Conscription", 155, Rarity.RARE, mage.cards.e.EldraziConscription.class));
         cards.add(new SetCardInfo("Eldrazi Displacer", 169, Rarity.RARE, mage.cards.e.EldraziDisplacer.class));
         cards.add(new SetCardInfo("Eldrazi Monument", 290, Rarity.MYTHIC, mage.cards.e.EldraziMonument.class));
-        cards.add(new SetCardInfo("Eldrazi Temple", 339, Rarity.UNCOMMON, mage.cards.e.EldraziTemple.class));
+        cards.add(new SetCardInfo("Eldrazi Temple", 339, Rarity.RARE, mage.cards.e.EldraziTemple.class));
         cards.add(new SetCardInfo("Elvish Rejuvenator", 226, Rarity.COMMON, mage.cards.e.ElvishRejuvenator.class));
         cards.add(new SetCardInfo("Endbringer", 156, Rarity.RARE, mage.cards.e.Endbringer.class));
         cards.add(new SetCardInfo("Era of Innovation", 183, Rarity.UNCOMMON, mage.cards.e.EraOfInnovation.class));
@@ -142,8 +142,8 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Horizon of Progress", 78, Rarity.RARE, mage.cards.h.HorizonOfProgress.class));
         cards.add(new SetCardInfo("Hour of Promise", 232, Rarity.RARE, mage.cards.h.HourOfPromise.class));
         cards.add(new SetCardInfo("Hydra Broodmaster", 233, Rarity.RARE, mage.cards.h.HydraBroodmaster.class));
-        cards.add(new SetCardInfo("Hydroid Krasis", 266, Rarity.MYTHIC, mage.cards.h.HydroidKrasis.class));
-        cards.add(new SetCardInfo("Idol of Oblivion", 297, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
+        cards.add(new SetCardInfo("Hydroid Krasis", 266, Rarity.RARE, mage.cards.h.HydroidKrasis.class));
+        cards.add(new SetCardInfo("Idol of Oblivion", 297, Rarity.UNCOMMON, mage.cards.i.IdolOfOblivion.class));
         cards.add(new SetCardInfo("Ignoble Hierarch", 234, Rarity.RARE, mage.cards.i.IgnobleHierarch.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 188, Rarity.RARE, mage.cards.i.ImprisonedInTheMoon.class));
         cards.add(new SetCardInfo("Izoni, Thousand-Eyed", 267, Rarity.RARE, mage.cards.i.IzoniThousandEyed.class));
@@ -195,7 +195,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Pyrogoyf", 59, Rarity.RARE, mage.cards.p.Pyrogoyf.class));
         cards.add(new SetCardInfo("Quandrix Campus", 366, Rarity.COMMON, mage.cards.q.QuandrixCampus.class));
         cards.add(new SetCardInfo("Raging Ravine", 367, Rarity.RARE, mage.cards.r.RagingRavine.class));
-        cards.add(new SetCardInfo("Rampaging Baloths", 239, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
+        cards.add(new SetCardInfo("Rampaging Baloths", 239, Rarity.MYTHIC, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Rampant Growth", 240, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Ramunap Excavator", 241, Rarity.RARE, mage.cards.r.RamunapExcavator.class));
         cards.add(new SetCardInfo("Reliquary Tower", 368, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
@@ -263,7 +263,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Terastodon", 249, Rarity.RARE, mage.cards.t.Terastodon.class));
         cards.add(new SetCardInfo("Terminate", 274, Rarity.COMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 394, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
-        cards.add(new SetCardInfo("Tezzeret's Gambit", 194, Rarity.RARE, mage.cards.t.TezzeretsGambit.class));
+        cards.add(new SetCardInfo("Tezzeret's Gambit", 194, Rarity.UNCOMMON, mage.cards.t.TezzeretsGambit.class));
         cards.add(new SetCardInfo("The Reaver Cleaver", 217, Rarity.RARE, mage.cards.t.TheReaverCleaver.class));
         cards.add(new SetCardInfo("Thespian's Stage", 395, Rarity.RARE, mage.cards.t.ThespiansStage.class));
         cards.add(new SetCardInfo("Thornwood Falls", 396, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
