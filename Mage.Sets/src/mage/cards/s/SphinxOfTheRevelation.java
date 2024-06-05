@@ -42,7 +42,7 @@ public final class SphinxOfTheRevelation extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever you gain life, you get that many {E}.
-        this.addAbility(new GainLifeControllerTriggeredAbility(new SphinxOfTheRevelationEffect()));
+        this.addAbility(new GainLifeControllerTriggeredAbility(new GetEnergyCountersControllerEffect(SavedGainedLifeValue.MANY)));
 
         // {W}{U}{U}, {T}, Pay X {E}: Draw X cards.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(GetXValue.instance),
