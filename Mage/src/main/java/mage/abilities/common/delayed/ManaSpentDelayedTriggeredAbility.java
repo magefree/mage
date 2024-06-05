@@ -27,7 +27,7 @@ public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("When you spend this mana to cast " + filter.getMessage() + ", ");
     }
 
-    private ManaSpentDelayedTriggeredAbility(final ManaSpentDelayedTriggeredAbility ability) {
+    protected ManaSpentDelayedTriggeredAbility(final ManaSpentDelayedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }
