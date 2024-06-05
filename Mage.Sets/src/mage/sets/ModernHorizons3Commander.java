@@ -233,6 +233,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Smoldering Marsh", 379, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 305, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 306, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Spawnbed Protector", 36, Rarity.RARE, mage.cards.s.SpawnbedProtector.class));
         cards.add(new SetCardInfo("Spawning Bed", 380, Rarity.UNCOMMON, mage.cards.s.SpawningBed.class));
         cards.add(new SetCardInfo("Stitcher's Supplier", 204, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Stone Idol Generator", 77, Rarity.RARE, mage.cards.s.StoneIdolGenerator.class));
