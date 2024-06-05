@@ -73,12 +73,12 @@ class FlameskullEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (player == null || !(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (player == null || card == null) {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getFromTop(game));
-        cards.add((Card) sourceObject);
+        cards.add(card);
         player.moveCards(cards, Zone.EXILED, source, game);
         game.addEffect(new FlameskullPlayEffect(cards, game), source);
         return true;

@@ -88,11 +88,13 @@ public interface Card extends MageObject, Ownerable {
 
     /**
      * Is this an extra deck card? (such as contraptions and attractions)
+     *
      * @return true if this is an extra deck card, false otherwise
      */
     default boolean isExtraDeckCard() {
         return false;
     }
+
     void assignNewId();
 
     void addInfo(String key, String value, Game game);
@@ -168,17 +170,64 @@ public interface Card extends MageObject, Ownerable {
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters);
 
-    default void removeCounters(String name, int amount, Ability source, Game game){
-        removeCounters(name, amount, source, game, false);
+    /**
+     * Remove {@param amount} counters of the specified kind.
+     */
+    default void removeCounters(String counterName, int amount, Ability source, Game game) {
+        removeCounters(counterName, amount, source, game, false);
     }
 
-    void removeCounters(String name, int amount, Ability source, Game game, boolean damage);
+    /**
+     * Remove {@param amount} counters of the specified kind.
+     *
+     * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     */
+    void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage);
 
     default void removeCounters(Counter counter, Ability source, Game game) {
         removeCounters(counter, source, game, false);
     }
 
-    void removeCounters(Counter counter, Ability source, Game game, boolean damage);
+    /**
+     * Remove all counters of any kind.
+     *
+     * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     */
+    void removeCounters(Counter counter, Ability source, Game game, boolean isDamage);
+
+    /**
+     * Remove all counters of any kind.
+     *
+     * @return the amount of counters removed this way.
+     */
+    default int removeAllCounters(Ability source, Game game) {
+        return removeAllCounters(source, game, false);
+    }
+
+    /**
+     * Remove all counters of any kind.
+     *
+     * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     * @return the amount of counters removed this way.
+     */
+    int removeAllCounters(Ability source, Game game, boolean isDamage);
+
+    /**
+     * Remove all counters of a specific kind. Return the amount of counters removed this way.
+     *
+     * @return the amount of counters removed this way.
+     */
+    default int removeAllCounters(String counterName, Ability source, Game game) {
+        return removeAllCounters(counterName, source, game, false);
+    }
+
+    /**
+     * Remove all counters of a specific kind. Return the amount of counters removed this way.
+     *
+     * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     * @return the amount of counters removed this way.
+     */
+    int removeAllCounters(String counterName, Ability source, Game game, boolean isDamage);
 
     @Override
     Card copy();

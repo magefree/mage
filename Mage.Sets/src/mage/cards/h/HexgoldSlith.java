@@ -34,11 +34,11 @@ public final class HexgoldSlith extends CardImpl {
         // When Hexgold Slith enters the battlefield, you get {E}{E}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
 
-        // Whenever Hexgold Slith attacks, you may pay {E}. If you do, it gains first strike until end of turn.
+        // Whenever Hexgold Slith attacks, you may pay {E}{E}. If you do, it gains first strike until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
                         .setText("it gains first strike until end of turn"),
-                new PayEnergyCost(1)
+                new PayEnergyCost(2)
         )));
 
         // Whenever Hexgold Slith deals combat damage to a player, put a +1/+1 counter on it.

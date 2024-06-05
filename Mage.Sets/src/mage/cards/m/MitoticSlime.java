@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.Ooze2Token;
+import mage.game.permanent.token.MitoticSlimeOozeToken;
 
 /**
  *
@@ -24,7 +24,7 @@ public final class MitoticSlime extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new Ooze2Token(), 2), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new MitoticSlimeOozeToken(), 2), false));
     }
 
     private MitoticSlime(final MitoticSlime card) {

@@ -140,7 +140,8 @@ public class CardPluginImpl implements CardPlugin {
         for (MageCard card : cards.values()) {
             MagePermanent perm = (MagePermanent) card.getMainPanel(); // all cards must be MagePermanent on battlefield
 
-            if (!rowType.isType(perm) || perm.getOriginalPermanent().isAttachedToPermanent()) {
+            if (!rowType.isType(perm) || perm.getOriginalPermanent().isAttachedToPermanent()
+                    || (perm.isCreature() && !rowType.equals(RowType.creature))) {
                 continue;
             }
 
@@ -185,7 +186,8 @@ public class CardPluginImpl implements CardPlugin {
                         ? firstPanelPerm.getOriginal().getRules()
                         : new ArrayList<>();
                 // Check the names are equal and are creatures with the same summoning sickness
-                if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
+                if (firstPanelPerm.getOriginal().isToken() == perm.getOriginal().isToken()
+                        && firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
                         && stackPower == cardPower && stackToughness == cardToughness
                         && stackAbilities.equals(cardAbilities) && stackCounters.equals(cardCounters)
                         && (!perm.isCreature() || firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm

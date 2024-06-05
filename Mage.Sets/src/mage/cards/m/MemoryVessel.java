@@ -51,7 +51,7 @@ class MemoryVesselExileEffect extends OneShotEffect {
     MemoryVesselExileEffect() {
         super(Outcome.Benefit);
         staticText = "each player exiles the top seven cards of their library. " +
-                "Until your next turn, players may play cards they exiled from their library this way";
+                "Until your next turn, players may play cards they exiled this way";
     }
 
     private MemoryVesselExileEffect(final MemoryVesselExileEffect effect) {

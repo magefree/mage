@@ -21,16 +21,20 @@ import java.util.*;
 /**
  * @author JayDi85
  */
-public enum ScryfallImageSource implements CardImageSource {
+public class ScryfallImageSource implements CardImageSource {
 
-    instance;
+    private static final ScryfallImageSource instance = new ScryfallImageSource();
 
     private static final Logger logger = Logger.getLogger(ScryfallImageSource.class);
 
     private final Map<CardLanguage, String> languageAliases;
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
     private final Map<CardDownloadData, String> preparedUrls = new HashMap<>();
-    private final int DOWNLOAD_TIMEOUT_MS = 100;
+    private static final int DOWNLOAD_TIMEOUT_MS = 100;
+    
+    public static ScryfallImageSource getInstance() {
+        return instance;
+    }
 
     ScryfallImageSource() {
         // LANGUAGES
@@ -52,7 +56,7 @@ public enum ScryfallImageSource implements CardImageSource {
     private CardImageUrls innerGenerateURL(CardDownloadData card, boolean isToken) {
         String prepared = preparedUrls.getOrDefault(card, null);
         if (prepared != null) {
-            return new CardImageUrls(prepared, null);
+            return new CardImageUrls(prepared);
         }
 
         String defaultCode = CardLanguage.ENGLISH.getCode();
@@ -144,11 +148,11 @@ public enum ScryfallImageSource implements CardImageSource {
         String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
         if (apiUrl != null) {
             if (apiUrl.endsWith("*/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() -2) + "★/" ;
+                apiUrl = apiUrl.substring(0 , apiUrl.length() - 2) + "★/" ;
             } else if (apiUrl.endsWith("+/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() -2) + "†/" ;
+                apiUrl = apiUrl.substring(0 , apiUrl.length() - 2) + "†/" ;
             } else if (apiUrl.endsWith("Ph/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() -3) + "Φ/" ;
+                apiUrl = apiUrl.substring(0 , apiUrl.length() - 3) + "Φ/" ;
             }
             // BY DIRECT URL
             // direct links via hardcoded API path. Used for cards with non-ASCII collector numbers

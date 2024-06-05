@@ -65,7 +65,7 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
         Set<UUID> lands = new HashSet<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if(player != null) {
+            if (player != null) {
                 for (SubType landName : Arrays.stream(SubType.values()).filter(p -> p.getSubTypeSet() == SubTypeSet.BasicLandType).collect(Collectors.toSet())) {
                     FilterControlledLandPermanent filter = new FilterControlledLandPermanent(landName + " you control");
                     filter.add(landName.getPredicate());
@@ -77,7 +77,7 @@ class GlobalRuinDestroyLandEffect extends OneShotEffect {
                 }
             }
         }
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LAND, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game)) {
             if (!lands.contains(permanent.getId())) {
                 permanent.sacrifice(source, game);
             }

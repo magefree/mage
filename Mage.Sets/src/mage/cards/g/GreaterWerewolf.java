@@ -70,7 +70,7 @@ class GreaterWerewolfEffect extends OneShotEffect {
         if (sourcePermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(Predicates.or(new BlockedByIdPredicate(sourcePermanent.getId()), new BlockingAttackerIdPredicate(sourcePermanent.getId())));
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 Effect effect = new AddCountersTargetEffect(CounterType.M0M2.createInstance(), Outcome.UnboostCreature);
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 effect.apply(game, source);

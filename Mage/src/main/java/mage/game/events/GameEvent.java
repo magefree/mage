@@ -548,8 +548,8 @@ public class GameEvent implements Serializable {
          amount      number of counters being removed
          data        name of the counter(s) being removed
          */
-        REMOVE_COUNTER, REMOVE_COUNTERS,
-        COUNTER_REMOVED, COUNTERS_REMOVED,
+        REMOVE_COUNTER, COUNTER_REMOVED,
+        REMOVE_COUNTERS, COUNTERS_REMOVED,
         LOSE_CONTROL,
         /* LOST_CONTROL
          targetId    id of the creature that lost control

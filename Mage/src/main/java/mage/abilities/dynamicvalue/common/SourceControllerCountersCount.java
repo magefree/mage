@@ -32,7 +32,7 @@ public enum SourceControllerCountersCount implements DynamicValue {
         int amount = 0;
         Player player = game.getPlayer(sourceAbility.getControllerId());
         if (player != null) {
-            amount = player.getCounters().getCount(counterType);
+            amount = player.getCountersCount(counterType);
         }
         return amount;
     }

@@ -40,7 +40,7 @@ class StormKingsThunderEffect extends OneShotEffect {
 
     StormKingsThunderEffect() {
         super(Outcome.Benefit);
-        staticText = "When you cast your next instant or sorcery spell this turn, " +
+        staticText = "When you next cast an instant or sorcery spell this turn, " +
                 "copy that spell X times. You may choose new targets for the copies.";
     }
 
@@ -95,7 +95,7 @@ class StormKingsThunderAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you cast your next instant or sorcery spell this turn, " +
+        return "When you next cast an instant or sorcery spell this turn, " +
                 "copy that spell X times. You may choose new targets for the copies.";
     }
 

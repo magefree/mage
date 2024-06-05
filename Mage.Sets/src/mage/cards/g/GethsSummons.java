@@ -64,7 +64,7 @@ enum GethsSummonsAdjuster implements TargetAdjuster {
         // corrupted opponents' graveyards
         for (UUID opponentId : game.getOpponents(ability.getControllerId(), true)) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent == null || opponent.getCounters().getCount(CounterType.POISON) < 3) {
+            if (opponent == null || opponent.getCountersCount(CounterType.POISON) < 3) {
                 continue;
             }
             FilterCard filter = new FilterCard("creature card from " + opponent.getLogName() + "'s graveyard");

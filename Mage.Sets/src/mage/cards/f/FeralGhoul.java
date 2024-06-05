@@ -34,7 +34,7 @@ public final class FeralGhoul extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever another creature you control dies, put a +1/+1 counter on Feral Ghoul.
         this.addAbility(new DiesCreatureTriggeredAbility(

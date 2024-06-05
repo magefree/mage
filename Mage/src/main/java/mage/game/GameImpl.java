@@ -2195,7 +2195,7 @@ public abstract class GameImpl implements Game {
     public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source) {
         return fireReflexiveTriggeredAbility(reflexiveAbility, source, false);
     }
-    
+
     @Override
     public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source, boolean fireAsSimultaneousEvent) {
         UUID uuid = this.addDelayedTriggeredAbility(reflexiveAbility, source);
@@ -2300,7 +2300,7 @@ public abstract class GameImpl implements Game {
             if (!player.hasLost()
                     && ((player.getLife() <= 0 && player.canLoseByZeroOrLessLife())
                     || player.getLibrary().isEmptyDraw()
-                    || player.getCounters().getCount(CounterType.POISON) >= 10)) {
+                    || player.getCountersCount(CounterType.POISON) >= 10)) {
                 player.lost(this);
             }
         }

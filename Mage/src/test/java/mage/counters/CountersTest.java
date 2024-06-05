@@ -16,7 +16,7 @@ public class CountersTest {
     @Test
     public void testCopyCounter() {
         // given
-        counters.addCounter("test", 4);
+        counters.addCounter(new Counter("test", 5));
 
         // when
         Counters copy = counters.copy();
@@ -29,8 +29,8 @@ public class CountersTest {
     @Test
     public void testRemoveCounter() {
         // given
-        counters.addCounter("test1", 5);
-        counters.addCounter("test2", 5);
+        counters.addCounter(new Counter("test1", 5));
+        counters.addCounter(new Counter("test2", 5));
 
         // when
 
@@ -45,35 +45,23 @@ public class CountersTest {
     @Test
     public void testAddCounterWithNewCounter() {
         // given
-        counters.addCounter("test1", 5);
+        counters.addCounter(new Counter("test1", 5));
 
         // when
-        counters.addCounter("test1", 10);
-        counters.addCounter("test2", 5);
+        counters.addCounter(new Counter("test1", 10));
+        counters.addCounter(new Counter("test2", 5));
 
         // then
-        assertNotEquals(15, counters.getCount("test1"));
-        assertEquals(16, counters.getCount("test1"));
+        assertTrue(counters.containsKey("test1"));
+        assertEquals(15, counters.getCount("test1"));
         assertTrue(counters.containsKey("test2"));
-        assertEquals(6, counters.getCount("test2"));
-    }
-
-    @Test
-    public void testRemoveAllCounter() {
-        // given
-        counters.addCounter("test", 10);
-
-        // when
-        counters.removeAllCounters("test");
-
-        // then
-        assertFalse(counters.containsKey("test"));
+        assertEquals(5, counters.getCount("test2"));
     }
 
     @Test
     public void testGetCount() {
         // given
-        counters.addCounter("test1", 5);
+        counters.addCounter(new Counter("test1", 5));
 
         // when
         int count1 = counters.getCount("test1");
@@ -81,13 +69,13 @@ public class CountersTest {
 
         // then
         assertEquals(0, count2);
-        assertEquals(6, count1);
+        assertEquals(5, count1);
     }
 
     @Test
     public void testContainsKey() {
         // given
-        counters.addCounter("test1", 5);
+        counters.addCounter(new Counter("test1", 5));
 
         // when
 

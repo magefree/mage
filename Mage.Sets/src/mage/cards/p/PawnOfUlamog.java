@@ -36,7 +36,8 @@ public final class PawnOfUlamog extends CardImpl {
 
         // Whenever Pawn of Ulamog or another nontoken creature you control dies, you may create a 0/1 colorless 
         // Eldrazi Spawn creature token. It has "Sacrifice this creature: Add {C}."
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), true, filter));
+        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+                new CreateTokenEffect(new EldraziSpawnToken()).withTextOptions(true), true, filter));
     }
 
     private PawnOfUlamog(final PawnOfUlamog card) {

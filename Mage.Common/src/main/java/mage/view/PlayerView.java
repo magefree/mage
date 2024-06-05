@@ -1,7 +1,7 @@
 package mage.view;
 
 import mage.cards.Card;
-import mage.counters.Counters;
+import mage.counters.Counter;
 import mage.designations.Designation;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -27,7 +27,7 @@ public class PlayerView implements Serializable {
     private final boolean controlled; // gui: player is current user
     private final boolean isHuman; // human or computer
     private final int life;
-    private final Counters counters;
+    private final List<CounterView> counters;
     private final int wins;
     private final int winsNeeded;
     private final int libraryCount;
@@ -64,7 +64,6 @@ public class PlayerView implements Serializable {
         this.controlled = player.getId().equals(createdForPlayerId);
         this.isHuman = player.isHuman();
         this.life = player.getLife();
-        this.counters = player.getCounters();
         this.wins = player.getMatchPlayer().getWins();
         this.winsNeeded = player.getMatchPlayer().getWinsNeeded();
         this.libraryCount = player.getLibrary().size();
@@ -158,6 +157,10 @@ public class PlayerView implements Serializable {
         for (Designation designation : player.getDesignations()) {
             this.designationNames.add(designation.getName());
         }
+        this.counters = new ArrayList<>();
+        for (Counter counter : player.getCountersAsCopy().values()) {
+            counters.add(new CounterView(counter));
+        }
     }
 
     private boolean showInBattlefield(Permanent permanent, GameState state) {
@@ -187,7 +190,7 @@ public class PlayerView implements Serializable {
         return this.life;
     }
 
-    public Counters getCounters() {
+    public List<CounterView> getCounters() {
         return this.counters;
     }
 

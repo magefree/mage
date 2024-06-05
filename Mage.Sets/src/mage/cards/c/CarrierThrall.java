@@ -25,8 +25,7 @@ public final class CarrierThrall extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Carrier Thrall dies, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature. Add {C}."
-        Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
+        Effect effect = new CreateTokenEffect(new EldraziScionToken()).withTextOptions(true);
         this.addAbility(new DiesSourceTriggeredAbility(effect, false));
 
     }
