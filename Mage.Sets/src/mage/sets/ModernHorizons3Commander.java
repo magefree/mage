@@ -76,6 +76,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 331, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Confiscation Coup", 178, Rarity.RARE, mage.cards.c.ConfiscationCoup.class));
         cards.add(new SetCardInfo("Conversion Apparatus", 76, Rarity.RARE, mage.cards.c.ConversionApparatus.class));
+        cards.add(new SetCardInfo("Copy Land", 47, Rarity.RARE, mage.cards.c.CopyLand.class));
         cards.add(new SetCardInfo("Corrupted Crossroads", 332, Rarity.RARE, mage.cards.c.CorruptedCrossroads.class));
         cards.add(new SetCardInfo("Coveted Jewel", 287, Rarity.RARE, mage.cards.c.CovetedJewel.class));
         cards.add(new SetCardInfo("Crib Swap", 168, Rarity.UNCOMMON, mage.cards.c.CribSwap.class));
