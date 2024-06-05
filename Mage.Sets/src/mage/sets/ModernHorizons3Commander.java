@@ -32,6 +32,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("All Is Dust", 152, Rarity.MYTHIC, mage.cards.a.AllIsDust.class));
         cards.add(new SetCardInfo("Altar of the Goyf", 282, Rarity.UNCOMMON, mage.cards.a.AltarOfTheGoyf.class));
         cards.add(new SetCardInfo("Ancient Stirrings", 219, Rarity.COMMON, mage.cards.a.AncientStirrings.class));
+        cards.add(new SetCardInfo("Angelic Aberration", 39, Rarity.RARE, mage.cards.a.AngelicAberration.class));
         cards.add(new SetCardInfo("Angel of Invention", 166, Rarity.MYTHIC, mage.cards.a.AngelOfInvention.class));
         cards.add(new SetCardInfo("Anger", 208, Rarity.UNCOMMON, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Apex Devastator", 220, Rarity.MYTHIC, mage.cards.a.ApexDevastator.class));
