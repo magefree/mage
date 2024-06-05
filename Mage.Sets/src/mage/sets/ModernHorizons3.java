@@ -183,6 +183,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Muster the Departed", 36, Rarity.UNCOMMON, mage.cards.m.MusterTheDeparted.class));
         cards.add(new SetCardInfo("Nadier's Nightblade", 275, Rarity.UNCOMMON, mage.cards.n.NadiersNightblade.class));
         cards.add(new SetCardInfo("Nadu, Winged Wisdom", 193, Rarity.RARE, mage.cards.n.NaduWingedWisdom.class));
+        cards.add(new SetCardInfo("Necrodominance", 102, Rarity.MYTHIC, mage.cards.n.Necrodominance.class));
         cards.add(new SetCardInfo("Nesting Grounds", 302, Rarity.UNCOMMON, mage.cards.n.NestingGrounds.class));
         cards.add(new SetCardInfo("Nethergoyf", 103, Rarity.MYTHIC, mage.cards.n.Nethergoyf.class));
         cards.add(new SetCardInfo("Nightshade Dryad", 163, Rarity.COMMON, mage.cards.n.NightshadeDryad.class));
