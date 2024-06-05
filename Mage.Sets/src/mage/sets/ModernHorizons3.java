@@ -240,6 +240,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Seething Landscape", 225, Rarity.COMMON, mage.cards.s.SeethingLandscape.class));
         cards.add(new SetCardInfo("Serum Visionary", 69, Rarity.COMMON, mage.cards.s.SerumVisionary.class));
         cards.add(new SetCardInfo("Sevinne's Reclamation", 267, Rarity.RARE, mage.cards.s.SevinnesReclamation.class));
+        cards.add(new SetCardInfo("Shadow of the Second Sun", 70, Rarity.MYTHIC, mage.cards.s.ShadowOfTheSecondSun.class));
         cards.add(new SetCardInfo("Shattered Landscape", 226, Rarity.COMMON, mage.cards.s.ShatteredLandscape.class));
         cards.add(new SetCardInfo("Sheltering Landscape", 227, Rarity.COMMON, mage.cards.s.ShelteringLandscape.class));
         cards.add(new SetCardInfo("Shifting Woodland", 228, Rarity.RARE, mage.cards.s.ShiftingWoodland.class));
