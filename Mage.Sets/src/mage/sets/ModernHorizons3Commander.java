@@ -76,6 +76,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 331, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Confiscation Coup", 178, Rarity.RARE, mage.cards.c.ConfiscationCoup.class));
         cards.add(new SetCardInfo("Conversion Apparatus", 76, Rarity.RARE, mage.cards.c.ConversionApparatus.class));
+        cards.add(new SetCardInfo("Copy Land", 47, Rarity.RARE, mage.cards.c.CopyLand.class));
         cards.add(new SetCardInfo("Corrupted Crossroads", 332, Rarity.RARE, mage.cards.c.CorruptedCrossroads.class));
         cards.add(new SetCardInfo("Coveted Jewel", 287, Rarity.RARE, mage.cards.c.CovetedJewel.class));
         cards.add(new SetCardInfo("Crib Swap", 168, Rarity.UNCOMMON, mage.cards.c.CribSwap.class));
@@ -99,6 +100,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Eldrazi Displacer", 169, Rarity.RARE, mage.cards.e.EldraziDisplacer.class));
         cards.add(new SetCardInfo("Eldrazi Monument", 290, Rarity.MYTHIC, mage.cards.e.EldraziMonument.class));
         cards.add(new SetCardInfo("Eldrazi Temple", 339, Rarity.RARE, mage.cards.e.EldraziTemple.class));
+        cards.add(new SetCardInfo("Eldritch Immunity", 33, Rarity.RARE, mage.cards.e.EldritchImmunity.class));
         cards.add(new SetCardInfo("Elvish Rejuvenator", 226, Rarity.COMMON, mage.cards.e.ElvishRejuvenator.class));
         cards.add(new SetCardInfo("Endbringer", 156, Rarity.RARE, mage.cards.e.Endbringer.class));
         cards.add(new SetCardInfo("Era of Innovation", 183, Rarity.UNCOMMON, mage.cards.e.EraOfInnovation.class));
@@ -231,6 +233,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Smoldering Marsh", 379, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 305, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 306, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Spawnbed Protector", 36, Rarity.RARE, mage.cards.s.SpawnbedProtector.class));
         cards.add(new SetCardInfo("Spawning Bed", 380, Rarity.UNCOMMON, mage.cards.s.SpawningBed.class));
         cards.add(new SetCardInfo("Stitcher's Supplier", 204, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Stone Idol Generator", 77, Rarity.RARE, mage.cards.s.StoneIdolGenerator.class));
