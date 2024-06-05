@@ -273,9 +273,16 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
      * Find spell's kicked stats. Must be used on stack only, e.g. for SPELL_CAST events
      */
     public static int getSpellKickedCount(Game game, UUID spellId) {
+        return getSpellKickedCountStrict(game, spellId, "");
+    }
+
+    /**
+     * Find spell's kicked stats. Must be used on stack only, e.g. for SPELL_CAST events
+     */
+    public static int getSpellKickedCountStrict(Game game, UUID spellId, String needKickerCost) {
         Spell spell = game.getSpellOrLKIStack(spellId);
         if (spell != null) {
-            return KickerAbility.getKickedCounter(game, spell.getSpellAbility());
+            return KickerAbility.getKickedCounterStrict(game, spell.getSpellAbility(), needKickerCost);
         }
         return 0;
     }

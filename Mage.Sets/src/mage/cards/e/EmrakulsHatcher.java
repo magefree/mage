@@ -26,7 +26,8 @@ public final class EmrakulsHatcher extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 3), false));
+        // When Emrakul’s Hatcher enters the battlefield, create three 0/1 colorless Eldrazi Spawn creature tokens. They have “Sacrifice this creature: Add {C}.”
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 3).withTextOptions(true), false));
     }
 
     private EmrakulsHatcher(final EmrakulsHatcher card) {

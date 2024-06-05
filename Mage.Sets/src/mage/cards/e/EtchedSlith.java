@@ -39,7 +39,7 @@ public final class EtchedSlith extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Etched Slith deals combat damage to a player, put a +1/+1 counter on it. When you do, you may remove a counter from another target permanent or opponent.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

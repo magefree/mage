@@ -36,7 +36,7 @@ public final class Drossclaw extends CardImpl {
         ));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private Drossclaw(final Drossclaw card) {

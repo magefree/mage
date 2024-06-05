@@ -38,7 +38,7 @@ public final class ColossalDreadmask extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}{G}{G}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{3}{G}{G}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{3}{G}{G}"), false));
     }
 
     private ColossalDreadmask(final ColossalDreadmask card) {

@@ -38,7 +38,7 @@ public final class SkitteringPrecursor extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you sacrifice a nontoken permanent, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
         this.addAbility(new SacrificePermanentTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), filter));
