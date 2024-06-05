@@ -99,6 +99,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Eldrazi Displacer", 169, Rarity.RARE, mage.cards.e.EldraziDisplacer.class));
         cards.add(new SetCardInfo("Eldrazi Monument", 290, Rarity.MYTHIC, mage.cards.e.EldraziMonument.class));
         cards.add(new SetCardInfo("Eldrazi Temple", 339, Rarity.RARE, mage.cards.e.EldraziTemple.class));
+        cards.add(new SetCardInfo("Eldritch Immunity", 33, Rarity.RARE, mage.cards.e.EldritchImmunity.class));
         cards.add(new SetCardInfo("Elvish Rejuvenator", 226, Rarity.COMMON, mage.cards.e.ElvishRejuvenator.class));
         cards.add(new SetCardInfo("Endbringer", 156, Rarity.RARE, mage.cards.e.Endbringer.class));
         cards.add(new SetCardInfo("Era of Innovation", 183, Rarity.UNCOMMON, mage.cards.e.EraOfInnovation.class));
