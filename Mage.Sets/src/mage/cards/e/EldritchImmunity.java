@@ -30,7 +30,7 @@ public final class EldritchImmunity extends CardImpl {
     }
 
     public EldritchImmunity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{C}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{C}");
 
         this.subtype.add(SubType.ELDRAZI);
 
