@@ -38,7 +38,7 @@ public final class PhlageTitanOfFiresFury extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PhlageTitanOfFiresFuryEffect()));
 
         // Whenever Phlage enters the battlefield or attacks, it deals 3 damage to any target and you gain 3 life.
-        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(3));
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(3, "it"));
         ability.addEffect(new GainLifeEffect(3).concatBy("and"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

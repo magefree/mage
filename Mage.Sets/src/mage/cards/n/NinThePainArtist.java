@@ -1,24 +1,22 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DrawCardTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,9 +34,12 @@ public final class NinThePainArtist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{U}{R}, {tap}: Nin, the Pain Artist deals X damage to target creature. That creature's controller draws X cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NinThePainArtistEffect(), new ManaCostsImpl<>("{X}{U}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}{U}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
+        ability.addEffect(new DrawCardTargetControllerEffect(ManacostVariableValue.REGULAR)
+                .setText("that creature's controller draws X cards"));
         this.addAbility(ability);
     }
 
@@ -49,36 +50,5 @@ public final class NinThePainArtist extends CardImpl {
     @Override
     public NinThePainArtist copy() {
         return new NinThePainArtist(this);
-    }
-}
-
-class NinThePainArtistEffect extends OneShotEffect {
-    
-    NinThePainArtistEffect() {
-        super(Outcome.Damage);
-        this.staticText = "{this} deals X damage to target creature. That creature's controller draws X cards.";
-    }
-    
-    private NinThePainArtistEffect(final NinThePainArtistEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public NinThePainArtistEffect copy() {
-        return new NinThePainArtistEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            permanent.damage(source.getManaCostsToPay().getX(), source.getSourceId(), source, game, false, true);
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                player.drawCards(source.getManaCostsToPay().getX(), source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

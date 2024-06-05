@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
@@ -17,8 +16,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class BountyOfTheLuxa extends CardImpl {
@@ -64,29 +64,25 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent bountyOfLuxa = game.getPermanent(source.getSourceId());
-        if (bountyOfLuxa != null && bountyOfLuxa.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter()) {
-            bountyOfLuxa = null;
-        }
         if (controller == null) {
             return false;
         }
-
-        if (bountyOfLuxa != null
-                && bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) > 0) {
-            bountyOfLuxa.removeCounters(CounterType.FLOOD.createInstance(bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD)), source, game);
-            if (bountyOfLuxa.getCounters(game).getCount(CounterType.FLOOD) == 0) {
-                Mana manaToAdd = new Mana();
-                manaToAdd.increaseColorless();
-                manaToAdd.increaseGreen();
-                manaToAdd.increaseBlue();
-                controller.getManaPool().addMana(manaToAdd, game, source);
-            }
-        } else {
-            if (bountyOfLuxa != null) {
-                new AddCountersSourceEffect(CounterType.FLOOD.createInstance()).apply(game, source);
-            }
+        Permanent bountyOfLuxa = source.getSourcePermanentIfItStillExists(game);
+        if (bountyOfLuxa == null) {
+            // No flood counters will be removed. Only the draw part of the effect will apply.
             controller.drawCards(1, source, game);
+            return true;
+        }
+        int amountRemoved = bountyOfLuxa.removeAllCounters(CounterType.FLOOD.getName(), source, game);
+        if (amountRemoved == 0) {
+            new AddCountersSourceEffect(CounterType.FLOOD.createInstance()).apply(game, source);
+            controller.drawCards(1, source, game);
+        } else {
+            Mana manaToAdd = new Mana();
+            manaToAdd.increaseColorless();
+            manaToAdd.increaseGreen();
+            manaToAdd.increaseBlue();
+            controller.getManaPool().addMana(manaToAdd, game, source);
         }
         return true;
     }

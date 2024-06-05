@@ -21,7 +21,6 @@ public class PersistTest extends CardTestPlayerBase {
     /**
      * Tests Safehold Elite don't returns from Persist if already a -1/-1
      * counter was put on it from another source
-     *
      */
     @Test
     public void testUndyingdoesntTriggerWithMinusCounter() {
@@ -48,7 +47,7 @@ public class PersistTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Safehold Elite", 1);
 
         // one poison counter from Virulent Wound
-        Assert.assertEquals(1, playerA.getCounters().getCount(CounterType.POISON));
+        Assert.assertEquals(1, playerA.getCountersCount(CounterType.POISON));
     }
 
     /**

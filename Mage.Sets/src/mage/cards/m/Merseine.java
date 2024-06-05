@@ -78,7 +78,7 @@ class MerseineActivatedAbility extends SimpleActivatedAbility {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
-        Permanent sourcePermanent = game.getBattlefield().getPermanent(this.getSourceId());
+        Permanent sourcePermanent = game.getPermanent(this.getSourceId());
         if (sourcePermanent != null) {
             Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
             if (attachedTo != null) {
@@ -116,7 +116,7 @@ class MerseineCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        Permanent sourcePermanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
             Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
             if (attachedTo != null) {
@@ -128,7 +128,7 @@ class MerseineCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent sourcePermanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
             Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
             if (attachedTo != null) {

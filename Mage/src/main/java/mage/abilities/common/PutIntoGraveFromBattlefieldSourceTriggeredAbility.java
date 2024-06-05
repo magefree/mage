@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -54,5 +55,10 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
         }
         this.getEffects().setValue("permanentWasCreature", permanent.isCreature(game));
         return true;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

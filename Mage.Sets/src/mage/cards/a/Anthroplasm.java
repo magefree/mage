@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -20,8 +19,9 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class Anthroplasm extends CardImpl {
@@ -73,7 +73,7 @@ class AnthroplasmEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             //Remove all +1/+1 counters
-            permanent.removeCounters(permanent.getCounters(game).get(CounterType.P1P1.getName()), source, game);
+            permanent.removeAllCounters(CounterType.P1P1.getName(), source, game);
             //put X +1/+1 counters
             permanent.addCounters(CounterType.P1P1.createInstance(source.getManaCostsToPay().getX()), source.getControllerId(), source, game);
             return true;

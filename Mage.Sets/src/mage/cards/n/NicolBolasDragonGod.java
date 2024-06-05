@@ -86,7 +86,7 @@ class NicolBolasDragonGodGainAbilitiesEffect extends ContinuousEffectImpl {
         if (perm == null) {
             return true;
         }
-        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 filter, source.getControllerId(), source, game
         )) {
             for (Ability ability : permanent.getAbilities()) {

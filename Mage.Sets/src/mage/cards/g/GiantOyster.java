@@ -12,7 +12,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
 import mage.abilities.effects.common.RemoveDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.effects.common.counter.RemoveAllCountersTargetEffect;
+import mage.abilities.effects.common.counter.RemoveAllCountersPermanentTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -127,7 +127,7 @@ class GiantOysterCreateDelayedTriggerEffects extends OneShotEffect {
 class GiantOysterLeaveUntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public GiantOysterLeaveUntapDelayedTriggeredAbility(UUID abilityToCancel) {
-        super(new RemoveAllCountersTargetEffect(CounterType.M1M1), Duration.EndOfGame, true, false);
+        super(new RemoveAllCountersPermanentTargetEffect(CounterType.M1M1), Duration.EndOfGame, true, false);
         this.addEffect(new RemoveDelayedTriggeredAbilityEffect(abilityToCancel));
     }
 

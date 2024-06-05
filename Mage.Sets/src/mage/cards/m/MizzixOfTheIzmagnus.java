@@ -69,7 +69,7 @@ class MizzixOfTheIzmagnusPredicate implements Predicate<MageObject> {
         if (spell != null) {
             Player controller = game.getPlayer(spell.getControllerId());
             if (controller != null) {
-                if (spell.getManaValue() > controller.getCounters().getCount(CounterType.EXPERIENCE)) {
+                if (spell.getManaValue() > controller.getCountersCount(CounterType.EXPERIENCE)) {
                     return true;
                 }
             }
@@ -99,7 +99,7 @@ class MizzixOfTheIzmagnusCostReductionEffect extends CostModificationEffectImpl 
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             SpellAbility spellAbility = (SpellAbility) abilityToModify;
-            CardUtil.adjustCost(spellAbility, controller.getCounters().getCount(CounterType.EXPERIENCE));
+            CardUtil.adjustCost(spellAbility, controller.getCountersCount(CounterType.EXPERIENCE));
             return true;
         }
         return false;

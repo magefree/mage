@@ -1,21 +1,22 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.PermanentHasCounterCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
+import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,9 +38,9 @@ public final class ChampionsDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Champion's Drake gets +3/+3 as long as you control a creature with three or more level counters on it.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
-                new PermanentHasCounterCondition(CounterType.LEVEL, 2, StaticFilters.FILTER_CONTROLLED_CREATURE, ComparisonType.MORE_THAN), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
+                ChampionsDrakeCondition.instance, rule)));
     }
 
     private ChampionsDrake(final ChampionsDrake card) {
@@ -50,4 +51,17 @@ public final class ChampionsDrake extends CardImpl {
     public ChampionsDrake copy() {
         return new ChampionsDrake(this);
     }
+}
+
+enum ChampionsDrakeCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game.getBattlefield()
+                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game)
+                .stream()
+                .anyMatch(p -> p.getCounters(game).getCount(CounterType.LEVEL) >= 3);
+    }
+
 }

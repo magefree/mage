@@ -13,6 +13,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 
@@ -28,6 +29,7 @@ public final class UginsBinding extends CardImpl {
 
     static {
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
+        filter2.add(ColorlessPredicate.instance);
         filter2.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 6));
     }
 

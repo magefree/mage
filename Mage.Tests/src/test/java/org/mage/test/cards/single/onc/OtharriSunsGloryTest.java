@@ -24,7 +24,7 @@ public class OtharriSunsGloryTest extends CardTestPlayerBase {
     private static final String otharri = "Otharri, Suns' Glory";
 
     private static void checkExperienceCounter(String message, Player player, int expected) {
-        Assert.assertEquals(message, expected, player.getCounters().getCount(CounterType.EXPERIENCE));
+        Assert.assertEquals(message, expected, player.getCountersCount(CounterType.EXPERIENCE));
     }
 
     @Test

@@ -19,11 +19,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.EnteredThisTurnPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -36,20 +32,12 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author Susucr"é"é
+ * @author Susucr
  */
 public final class OcelotPride extends CardImpl {
 
     private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
     private static final Hint hint = new ConditionHint(condition, "You gained life this turn");
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("other creature you control named Charmed Stray");
-
-    static {
-        filter.add(new NamePredicate("Charmed Stray"));
-        filter.add(AnotherPredicate.instance);
-    }
 
     public OcelotPride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

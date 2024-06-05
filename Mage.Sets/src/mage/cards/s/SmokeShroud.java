@@ -83,7 +83,7 @@ class SmokeShroudEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceCard = (Card) source.getSourceObjectIfItStillExists(game);
+        Card sourceCard = source.getSourceCardIfItStillExists(game);
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceCard != null && permanent != null && controller != null) {

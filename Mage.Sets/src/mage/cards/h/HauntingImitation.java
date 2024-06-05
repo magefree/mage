@@ -76,9 +76,9 @@ class HauntingImitationEffect extends OneShotEffect {
         }
         if (cards.isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
-            MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-            if (player != null && sourceObject instanceof Card) {
-                player.moveCards((Card) sourceObject, Zone.HAND, source, game);
+            Card card = source.getSourceCardIfItStillExists(game);
+            if (player != null && card != null) {
+                player.moveCards(card, Zone.HAND, source, game);
             }
             return true;
         }

@@ -65,7 +65,7 @@ class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        int amount = controller.getCounters().getCount(CounterType.EXPERIENCE);
+        int amount = controller.getCountersCount(CounterType.EXPERIENCE);
         permanent.getPower().setModifiedBaseValue(amount);
         permanent.getToughness().setModifiedBaseValue(amount);
         return true;

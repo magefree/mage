@@ -6,6 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.counters.Counter;
 import mage.filter.FilterOpponent;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentOrPlayer;
@@ -106,17 +107,17 @@ class PriceOfBetrayalEffect extends OneShotEffect {
         if (player != null) {
             int toRemove = 5;
             int removed = 0;
-            String[] counterNames = player.getCounters().keySet().toArray(new String[0]);
-            for (String counterName : counterNames) {
+            for (Counter counter : player.getCountersAsCopy().values()) {
+                String counterName = counter.getName();
                 if (controller.chooseUse(Outcome.Neutral, "Remove " + counterName + " counters?", source, game)) {
-                    if (player.getCounters().get(counterName).getCount() == 1 || (toRemove - removed == 1)) {
-                        player.removeCounters(counterName, 1, source, game);
+                    if (player.getCountersCount(counterName) == 1 || (toRemove - removed == 1)) {
+                        player.loseCounters(counterName, 1, source, game);
                         removed++;
                     } else {
-                        int amount = controller.getAmount(1, Math.min(player.getCounters().get(counterName).getCount(), toRemove - removed), "How many?", game);
+                        int amount = controller.getAmount(1, Math.min(player.getCountersCount(counterName), toRemove - removed), "How many?", game);
                         if (amount > 0) {
                             removed += amount;
-                            player.removeCounters(counterName, amount, source, game);
+                            player.loseCounters(counterName, amount, source, game);
                         }
                     }
                 }
