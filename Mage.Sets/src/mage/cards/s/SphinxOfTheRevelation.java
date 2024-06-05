@@ -2,6 +2,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
