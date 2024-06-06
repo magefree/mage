@@ -21,6 +21,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Abstruse Appropriation", 177, Rarity.RARE, mage.cards.a.AbstruseAppropriation.class));
         cards.add(new SetCardInfo("Accursed Marauder", 80, Rarity.COMMON, mage.cards.a.AccursedMarauder.class));
         cards.add(new SetCardInfo("Aerie Auxiliary", 18, Rarity.COMMON, mage.cards.a.AerieAuxiliary.class));
         cards.add(new SetCardInfo("Aether Revolt", 113, Rarity.RARE, mage.cards.a.AetherRevolt.class));
