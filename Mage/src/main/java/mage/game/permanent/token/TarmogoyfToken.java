@@ -3,7 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessPlusOneSourceEffect;
 import mage.constants.CardType;
@@ -15,10 +14,8 @@ import mage.constants.Zone;
  */
 public final class TarmogoyfToken extends TokenImpl {
 
-    private static final DynamicValue powerValue = CardTypesInGraveyardCount.ALL;
-
     public TarmogoyfToken() {
-        super("Tarmogoyf Token", "Tarmogoyf token");
+        super("Tarmogoyf", "Tarmogoyf token");
         manaCost = new ManaCostsImpl<>("{1}{G}");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -27,7 +24,7 @@ public final class TarmogoyfToken extends TokenImpl {
         toughness = new MageInt(1);
 
         // Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(powerValue)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(CardTypesInGraveyardCount.ALL)));
     }
 
     private TarmogoyfToken(final TarmogoyfToken token) {
