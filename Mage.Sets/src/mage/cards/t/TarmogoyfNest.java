@@ -5,7 +5,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -37,11 +36,13 @@ public final class TarmogoyfNest extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted land has "{1}{G}, {T}: Create a Tarmogoyf token."
-        Ability gainedAbility = new SimpleActivatedAbility(new CreateTokenEffect(new TarmogoyfToken()),
-                new TapSourceCost());
-        gainedAbility.addCost(new ManaCostsImpl<>("{1}{G}"));
-        Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, null, "land");
-        this.addAbility(new SimpleStaticAbility(effect));
+        Ability gainedAbility = new SimpleActivatedAbility(
+                new CreateTokenEffect(new TarmogoyfToken()), new ManaCostsImpl<>("{1}{G}")
+        );
+        gainedAbility.addCost(new TapSourceCost());
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
+                gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, null, "land"
+        )));
 
     }
 
