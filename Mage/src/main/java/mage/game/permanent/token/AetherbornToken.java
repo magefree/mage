@@ -5,7 +5,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- * @author spjspj
+ * @author grimreap124
  */
 public final class AetherbornToken extends TokenImpl {
 
