@@ -28,7 +28,6 @@ import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -126,17 +125,12 @@ class HalvarGodOfBattleEffect extends OneShotEffect {
         if (controller != null && attachment != null && creature != null && creature.isControlledBy(controller.getId())) {
             Permanent oldCreature = game.getPermanent(attachment.getAttachedTo());
             if (oldCreature != null && oldCreature.isControlledBy(controller.getId()) && !oldCreature.equals(creature)) {
-                boolean canAttach = true;
-                if (attachment.hasSubtype(SubType.AURA, game)) {
-                    Target auraTarget = attachment.getSpellAbility().getTargets().get(0);
-                    if (!auraTarget.canTarget(creature.getId(), game)) {
-                        canAttach = false;
-                    }
-                }
-                if (!canAttach) {
+                if (creature.cantBeAttachedBy(attachment, source, game, true)) {
                     game.informPlayers(attachment.getLogName() + " was not attached to " + creature.getLogName()
-                            + " because it's not a legal target for the aura");
-                } else if (controller.chooseUse(Outcome.BoostCreature, "Attach " + attachment.getLogName()
+                            + " because it's not a legal target");
+                    return false;
+                }
+                if (controller.chooseUse(Outcome.BoostCreature, "Attach " + attachment.getLogName()
                         + " to " + creature.getLogName() + "?", source, game)) {
                     oldCreature.removeAttachment(attachment.getId(), source, game);
                     creature.addAttachment(attachment.getId(), source, game);

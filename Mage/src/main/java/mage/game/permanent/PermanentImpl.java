@@ -21,7 +21,7 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.filter.FilterOpponent;
+import mage.filter.*;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.ZoneChangeInfo;
@@ -1355,7 +1355,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 return !ability.getDoesntRemoveControlled() || isControlledBy(game.getControllerId(attachment.getId()));
             }
         }
-        return game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);
+
+        boolean canAttach = true;
+        Permanent attachmentPermanent = game.getPermanent(attachment.getId());
+        if (attachment.hasSubtype(SubType.AURA, game)
+                && attachmentPermanent != null
+                && attachmentPermanent.getSpellAbility() != null
+                && !attachmentPermanent.getSpellAbility().getTargets().isEmpty()) {
+            canAttach = attachmentPermanent.getSpellAbility().getTargets().get(0).canTarget(attachmentPermanent.getControllerId(), this.getId(), source, game);
+        }
+
+        return !canAttach || game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);
     }
 
     @Override
