@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardTargetControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -15,9 +15,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -62,7 +59,7 @@ public final class TriadOfFates extends CardImpl {
         ability.addCost(new TapSourceCost());
         target = new TargetCreaturePermanent(filterCounter);
         ability.addTarget(target);
-        ability.addEffect(new DrawCardControllerTargetEffect());
+        ability.addEffect(new DrawCardTargetControllerEffect(2));
         this.addAbility(ability);
     }
 
@@ -73,34 +70,5 @@ public final class TriadOfFates extends CardImpl {
     @Override
     public TriadOfFates copy() {
         return new TriadOfFates(this);
-    }
-}
-
-class DrawCardControllerTargetEffect extends OneShotEffect {
-
-    DrawCardControllerTargetEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Its controller draws two cards";
-    }
-
-    private DrawCardControllerTargetEffect(final DrawCardControllerTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DrawCardControllerTargetEffect copy() {
-        return new DrawCardControllerTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
-        if (creature != null) {
-            Player controllerOfTarget = game.getPlayer(creature.getControllerId());
-            if (controllerOfTarget != null) {
-                controllerOfTarget.drawCards(2, source, game);
-            }
-        }
-        return false;
     }
 }

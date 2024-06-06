@@ -28,7 +28,7 @@ public class RedirectDamageFromSourceToTargetEffect extends RedirectionEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             if (event.getTargetId().equals(source.getSourceId())) {
                 if (getTargetPointer().getFirst(game, source) != null) {

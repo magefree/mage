@@ -1,26 +1,24 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.DrawCardTargetControllerEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetStackObject;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +27,7 @@ import mage.target.TargetStackObject;
 public final class ErtaiResurrected extends CardImpl {
 
     private static final FilterCreatureOrPlaneswalkerPermanent filter =
-            new FilterCreatureOrPlaneswalkerPermanent("another creature or planeswalker");
+            new FilterCreatureOrPlaneswalkerPermanent("another target creature or planeswalker");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -50,14 +48,17 @@ public final class ErtaiResurrected extends CardImpl {
 
         // When Ertai Resurrected enters the battlefield, choose up to one --
         // * Counter target spell, activated ability, or triggered ability. Its controller draws a card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ErtaiResurrectedCounterEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CounterTargetEffect()
+                .setText("Counter target spell, activated ability, or triggered ability"));
         ability.addTarget(new TargetStackObject());
+        ability.addEffect(new DrawCardTargetControllerEffect(1));
         ability.getModes().setMinModes(0);
         ability.getModes().setMaxModes(1);
 
         // * Destroy another target creature or planeswalker. Its controller draws a card.
-        Mode mode = new Mode(new ErtaiResurrectedDestroyEffect());
+        Mode mode = new Mode(new DestroyTargetEffect());
         mode.addTarget(new TargetPermanent(filter));
+        mode.addEffect(new DrawCardTargetControllerEffect(1));
         ability.addMode(mode);
         this.addAbility(ability);
     }
@@ -69,68 +70,5 @@ public final class ErtaiResurrected extends CardImpl {
     @Override
     public ErtaiResurrected copy() {
         return new ErtaiResurrected(this);
-    }
-}
-
-class ErtaiResurrectedCounterEffect extends OneShotEffect {
-
-    ErtaiResurrectedCounterEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Counter target spell, activated ability, or triggered ability. Its controller draws a card.";
-    }
-
-    private ErtaiResurrectedCounterEffect(final ErtaiResurrectedCounterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ErtaiResurrectedCounterEffect copy() {
-        return new ErtaiResurrectedCounterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        UUID targetId = source.getFirstTarget();
-        StackObject stackObject = game.getStack().getStackObject(targetId);
-        if (stackObject == null) {
-            return false;
-        }
-        Player player = game.getPlayer(stackObject.getControllerId());;
-        game.getStack().counter(targetId, source, game);
-        if (player != null) {
-            player.drawCards(1, source, game);
-        }
-        return true;
-    }
-}
-
-class ErtaiResurrectedDestroyEffect extends OneShotEffect {
-
-    ErtaiResurrectedDestroyEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy another target creature or planeswalker. Its controller draws a card.";
-    }
-
-    private ErtaiResurrectedDestroyEffect(final ErtaiResurrectedDestroyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ErtaiResurrectedDestroyEffect copy() {
-        return new ErtaiResurrectedDestroyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null) {
-            return false;
-        }
-        Player player = game.getPlayer(permanent.getControllerId());
-        permanent.destroy(source, game);
-        if (player != null) {
-            player.drawCards(1, source, game);
-        }
-        return true;
     }
 }

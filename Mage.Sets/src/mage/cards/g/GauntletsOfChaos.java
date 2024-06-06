@@ -90,7 +90,7 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
         MageObject targetSource = game.getObject(source);
         if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     for (CardType type : permanent.getCardType(game)) {
                         if (cardTypes.contains(type)) {
                             possibleTargets.add(permanent.getId());
@@ -159,7 +159,7 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
             MageObject targetSource = game.getObject(source);
             if (targetSource != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                         if (permanent.shareTypes(firstTarget, game)) {
                             possibleTargets.add(permanent.getId());
                         }

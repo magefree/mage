@@ -6,10 +6,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.targetpointer.FirstTargetPointer;
-import mage.target.targetpointer.SecondTargetPointer;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -53,9 +49,7 @@ public class DestroyTargetEffect extends OneShotEffect {
         int affectedTargets = 0;
         for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null
-                    && permanent.isPhasedIn()
-                    && !permanent.isPhasedOutIndirectly()) {
+            if (permanent != null && permanent.isPhasedIn()) {
                 permanent.destroy(source, game, noRegen);
                 affectedTargets++;
             }

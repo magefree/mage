@@ -74,7 +74,7 @@ class TargetPermanentsThatShareCardType extends TargetPermanent {
         MageObject targetSource = game.getObject(source);
         if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     for (CardType cardType : permanent.getCardType(game)) {
                         if (cardTypes.contains(cardType)) {
                             return true;

@@ -1,8 +1,6 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -30,9 +28,7 @@ public final class AdverseConditions extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
         // Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
-        Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziScionToken()).withTextOptions(true));
 
     }
 

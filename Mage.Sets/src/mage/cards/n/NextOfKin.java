@@ -67,7 +67,7 @@ class NextOfKinDiesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card nextOfKinCard = (Card) source.getSourceObjectIfItStillExists(game);
+        Card nextOfKinCard = source.getSourceCardIfItStillExists(game);
         Object object = getValue("attachedTo");
         if (controller == null || nextOfKinCard == null || !(object instanceof Permanent)) {
             return false;

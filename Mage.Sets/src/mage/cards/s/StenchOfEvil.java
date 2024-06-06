@@ -63,7 +63,7 @@ class StenchOfEvilEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent land : game.getBattlefield().getAllActivePermanents(filter, game)) {
+        for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             UUID landControllerId = land.getControllerId();
             if (land.destroy(source, game, false)) {
                 Cost cost = new ManaCostsImpl<>("{2}");

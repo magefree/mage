@@ -30,7 +30,7 @@ public class CompanionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = (Card) source.getSourceObjectIfItStillExists(game);
+        Card card = source.getSourceCardIfItStillExists(game);
         if (controller != null && card != null && game.getState().getZone(card.getId()) == Zone.OUTSIDE) {
             return controller.moveCards(card, Zone.HAND, source, game);
         }

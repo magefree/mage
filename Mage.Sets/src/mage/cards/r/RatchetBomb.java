@@ -59,7 +59,7 @@ class RatchetBombEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent p = game.getPermanent(source.getSourceId());
         if (p == null) {
             p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (p == null) {

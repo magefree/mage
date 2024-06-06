@@ -3027,8 +3027,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
-        return computerPlayer.canBeTargetedBy(source, sourceControllerId, game);
+    public boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game) {
+        return computerPlayer.canBeTargetedBy(sourceObject, sourceControllerId, source, game);
     }
 
     @Override

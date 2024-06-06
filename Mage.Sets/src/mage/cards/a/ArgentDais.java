@@ -7,21 +7,18 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardTargetControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
@@ -57,7 +54,7 @@ public final class ArgentDais extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.OIL.createInstance(2)));
         ability.addTarget(new TargetNonlandPermanent(filter));
-        ability.addEffect(new ArgentDaisTargetEffect());
+        ability.addEffect(new DrawCardTargetControllerEffect(2));
         this.addAbility(ability);
     }
 
@@ -95,36 +92,5 @@ class ArgentDaisTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.getCombat().getAttackers().size() >= 2;
-    }
-}
-
-class ArgentDaisTargetEffect extends OneShotEffect {
-
-    ArgentDaisTargetEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "its controller draws two cards";
-    }
-
-    private ArgentDaisTargetEffect(final ArgentDaisTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArgentDaisTargetEffect copy() {
-        return new ArgentDaisTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (permanent == null) {
-            return false;
-        }
-        Player controllerOfTarget = game.getPlayer(permanent.getControllerId());
-        if (controllerOfTarget == null) {
-            return false;
-        }
-        controllerOfTarget.drawCards(2, source, game);
-        return true;
     }
 }

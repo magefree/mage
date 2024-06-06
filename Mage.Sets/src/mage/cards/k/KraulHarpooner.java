@@ -26,7 +26,7 @@ import mage.target.TargetPermanent;
  */
 public final class KraulHarpooner extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying you don't control");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don’t control with flying");
 
     static {
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
@@ -67,8 +67,8 @@ class KraulHarpoonerEffect extends OneShotEffect {
 
     KraulHarpoonerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "choose up to one target creature with flying "
-                + "you don't control. {this} gets +X/+0 until end of turn, "
+        this.staticText = "choose up to one target creature you don't control with flying." +
+                " {this} gets +X/+0 until end of turn, "
                 + "where X is the number of creature cards in your graveyard, "
                 + "then you may have {this} fight that creature.";
     }

@@ -64,6 +64,6 @@ class DeathbringerRegentCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return CastFromHandSourcePermanentCondition.instance.apply(game, source)
-                && game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game).size() >= 6;
+                && game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game).size() >= 6;
     }
 }

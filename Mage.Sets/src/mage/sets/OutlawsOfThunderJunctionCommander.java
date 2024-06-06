@@ -118,6 +118,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Faithless Looting", 165, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Fallen Shinobi", 226, Rarity.RARE, mage.cards.f.FallenShinobi.class));
         cards.add(new SetCardInfo("Feed the Swarm", 134, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
+        cards.add(new SetCardInfo("Felix Five-Boots", 6, Rarity.MYTHIC, mage.cards.f.FelixFiveBoots.class));
         cards.add(new SetCardInfo("Fellwar Stone", 257, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Ferrous Lake", 294, Rarity.RARE, mage.cards.f.FerrousLake.class));
         cards.add(new SetCardInfo("Fetid Heath", 295, Rarity.RARE, mage.cards.f.FetidHeath.class));

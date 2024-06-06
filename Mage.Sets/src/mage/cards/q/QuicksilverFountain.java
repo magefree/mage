@@ -13,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -97,7 +98,7 @@ class QuicksilverFountainEffect extends OneShotEffect {
                     = new BecomesBasicLandTargetEffect(Duration.Custom, SubType.ISLAND);
             ConditionalContinuousEffect effect
                     = new ConditionalContinuousEffect(becomesBasicLandTargetEffect,
-                    new LandHasFloodCounterCondition(), staticText);
+                    LandHasFloodCounterCondition.instance, staticText);
             // Bug #6885 Fixed when owner/controller leaves the game the effect still applies
             SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
             gainAbility.setSourceId(landChosen.getId());
@@ -116,7 +117,7 @@ class QuicksilverFountainEffect extends OneShotEffect {
 
 class QuicksilverFountainEffect2 extends OneShotEffect {
 
-    public QuicksilverFountainEffect2() {
+    QuicksilverFountainEffect2() {
         super(Outcome.Neutral);
         staticText = "remove all flood counters from them";
     }
@@ -127,7 +128,7 @@ class QuicksilverFountainEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND, game)) {
+        for (Permanent land : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game)) {
             land.removeAllCounters(CounterType.FLOOD.getName(), source, game);
         }
         return true;
@@ -143,7 +144,7 @@ class AllLandsAreSubtypeCondition implements Condition {
 
     private final SubType subtype;
 
-    public AllLandsAreSubtypeCondition(SubType subtype) {
+    AllLandsAreSubtypeCondition(SubType subtype) {
         this.subtype = subtype;
     }
 
@@ -151,8 +152,8 @@ class AllLandsAreSubtypeCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         FilterLandPermanent filterLand = new FilterLandPermanent();
         filterLand.add(subtype.getPredicate());
-        int landCount = game.getBattlefield().getAllActivePermanents(CardType.LAND, game).size();
-        return game.getBattlefield().getAllActivePermanents(filterLand, game).size() == landCount;
+        int landCount = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game).size();
+        return game.getBattlefield().getActivePermanents(filterLand, source.getControllerId(), source, game).size() == landCount;
     }
 
     @Override
@@ -161,10 +162,8 @@ class AllLandsAreSubtypeCondition implements Condition {
     }
 }
 
-class LandHasFloodCounterCondition implements Condition {
-
-    public LandHasFloodCounterCondition() {
-    }
+enum LandHasFloodCounterCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

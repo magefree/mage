@@ -1,9 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,19 +8,17 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth & L_J
  */
 public final class Spawnbroker extends CardImpl {
@@ -31,12 +26,12 @@ public final class Spawnbroker extends CardImpl {
     private static final String rule = "you may exchange control of target creature you control and target creature with power less than or equal to that creature's power an opponent controls";
 
     public Spawnbroker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        
+
         // When Spawnbroker enters the battlefield, you may exchange control of target creature you control and target creature with power less than or equal to that creature's power an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExchangeControlTargetEffect(Duration.Custom, rule, false, true), true);
         ability.addTarget(new TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent());
@@ -72,9 +67,9 @@ class TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent extend
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(source);
-        if(targetSource != null) {
+        if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     possibleTargets.add(permanent.getId());
                 }
             }
@@ -122,9 +117,9 @@ class SpawnbrokerSecondTarget extends TargetPermanent {
         Set<UUID> possibleTargets = new HashSet<>();
         if (firstTarget != null) {
             MageObject targetSource = game.getObject(source);
-            if(targetSource != null) {
+            if (targetSource != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                         if (firstTarget.getPower().getValue() >= permanent.getPower().getValue()) {
                             possibleTargets.add(permanent.getId());
                         }

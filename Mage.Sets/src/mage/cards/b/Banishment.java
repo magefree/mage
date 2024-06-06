@@ -87,7 +87,7 @@ class BanishmentEffect extends OneShotEffect {
         FilterPermanent filter = new FilterNonlandPermanent();
         filter.add(new NamePredicate(targeted.getName()));
 
-        Set<Card> toExile = game.getBattlefield().getAllActivePermanents(filter, game)
+        Set<Card> toExile = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)
                 .stream().filter(p -> controller.hasOpponent(p.getControllerId(),game))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 

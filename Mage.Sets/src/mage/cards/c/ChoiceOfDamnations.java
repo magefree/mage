@@ -64,7 +64,7 @@ class ChoiceOfDamnationsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
-            int numberPermanents = game.getState().getBattlefield().countAll(new FilterPermanent(), targetPlayer.getId(), game);
+            int numberPermanents = game.getBattlefield().countAll(new FilterPermanent(), targetPlayer.getId(), game);
 
             // AI hint
             int amount;

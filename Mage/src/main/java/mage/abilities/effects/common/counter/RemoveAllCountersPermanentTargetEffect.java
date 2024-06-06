@@ -1,7 +1,7 @@
-
 package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
@@ -24,7 +24,6 @@ public class RemoveAllCountersPermanentTargetEffect extends OneShotEffect {
     public RemoveAllCountersPermanentTargetEffect(CounterType counterType) {
         super(Outcome.Neutral);
         this.counterType = counterType;
-        staticText = "remove all " + (counterType == null ? "" : counterType.getName() + " ") + "counters from it.";
     }
 
     public RemoveAllCountersPermanentTargetEffect(RemoveAllCountersPermanentTargetEffect effect) {
@@ -50,4 +49,14 @@ public class RemoveAllCountersPermanentTargetEffect extends OneShotEffect {
     public RemoveAllCountersPermanentTargetEffect copy() {
         return new RemoveAllCountersPermanentTargetEffect(this);
     }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "remove all " + (counterType == null ? "" : counterType.getName() + " ") + "counters from "
+                + getTargetPointer().describeTargets(mode.getTargets(), "it");
+    }
+
 }

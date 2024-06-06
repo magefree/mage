@@ -35,7 +35,7 @@ public class CleanupStep extends Step {
             activePlayer.discardToMax(game);
         }
         //20100423 - 514.2
-        game.getBattlefield().endOfTurn(activePlayerId, game);
+        game.getBattlefield().endOfTurn(game);
         game.getState().removeEotEffects(game);
     }
 

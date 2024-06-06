@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class ArcboundCondor extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterArtifactPermanent("another artifacr");
+    private static final FilterPermanent filter = new FilterArtifactPermanent("another artifact");
 
     static {
         filter.add(AnotherPredicate.instance);
