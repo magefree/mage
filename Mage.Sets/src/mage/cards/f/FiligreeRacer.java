@@ -6,10 +6,12 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.SacrificeCost;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.keyword.EscapeAbility;
@@ -50,8 +52,9 @@ public final class FiligreeRacer extends CardImpl {
         // When Filigree Racer enters the battlefield, you get {E}{E}{E}{E}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(4)));
         // Whenever Filigree Racer attacks, you may pay {E}{E}. When you do, target instant or sorcery card in your graveyard gains jump-start until end of turn.
-        Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new FiligreeRacerEffect(), new PayEnergyCost(2)).setText("you may pay {E}{E}. When you do, target instant or sorcery card in your graveyard gains jump-start until end of turn."), false);
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ReflexiveTriggeredAbility reflexiveTriggeredAbility = new ReflexiveTriggeredAbility(new FiligreeRacerEffect(), false );
+        reflexiveTriggeredAbility.addTarget(new TargetCardInYourGraveyard(filter));
+        Ability ability = new AttacksTriggeredAbility(new DoWhenCostPaid(reflexiveTriggeredAbility, new PayEnergyCost(2), "You may pay {E}{E}."), false);
         this.addAbility(ability);
         // Crew 1
         this.addAbility(new CrewAbility(1));
