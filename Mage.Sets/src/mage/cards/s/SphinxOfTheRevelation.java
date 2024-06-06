@@ -63,29 +63,3 @@ public final class SphinxOfTheRevelation extends CardImpl {
         return new SphinxOfTheRevelation(this);
     }
 }
-
-class SphinxOfTheRevelationEffect extends OneShotEffect {
-
-    SphinxOfTheRevelationEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "you get that many {E}";
-    }
-
-    private SphinxOfTheRevelationEffect(final SphinxOfTheRevelationEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SphinxOfTheRevelationEffect copy() {
-        return new SphinxOfTheRevelationEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int lifeGained = (Integer) this.getValue("gainedLife");
-        if (lifeGained > 0) {
-            return new GetEnergyCountersControllerEffect(lifeGained).apply(game, source);
-        }
-        return false;
-    }
-}
