@@ -3,6 +3,8 @@ package mage.cards.i;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.FlipCoinEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +26,12 @@ public final class InvertPolarity extends CardImpl {
 
         // Choose target spell, then flip a coin. If you win the flip, gain control of that spell and you may choose new targets for it. If you lose the flip, counter that spell.
         this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new InvertPolarityTargetEffect());
+        this.getSpellAbility().addEffect(new InfoEffect("Choose target spell"));
+        this.getSpellAbility().addEffect(new FlipCoinEffect(
+                new InvertPolarityGainControlTargetEffect(),
+                new CounterTargetEffect().setText("counter that spell"),
+                Outcome.Detriment
+        ).concatBy(", then"));
     }
 
     private InvertPolarity(final InvertPolarity card) {
@@ -37,46 +44,11 @@ public final class InvertPolarity extends CardImpl {
     }
 }
 
-class InvertPolarityTargetEffect extends OneShotEffect {
-
-    InvertPolarityTargetEffect() {
-        super(Outcome.Detriment);
-        staticText = "choose target spell, then flip a coin. If you win the flip, gain control of that spell "
-                + "and you may choose new targets for it. If you lose the flip, counter that spell";
-    }
-
-    private InvertPolarityTargetEffect(final InvertPolarityTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public InvertPolarityTargetEffect copy() {
-        return new InvertPolarityTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        if (player.flipCoin(source, game, true)) {
-            new InvertPolarityGainControlTargetEffect()
-                    .setTargetPointer(getTargetPointer().copy())
-                    .apply(game, source);
-        } else {
-            new CounterTargetEffect()
-                    .setTargetPointer(getTargetPointer().copy())
-                    .apply(game, source);
-        }
-        return true;
-    }
-}
-
 class InvertPolarityGainControlTargetEffect extends OneShotEffect {
 
     InvertPolarityGainControlTargetEffect() {
         super(Outcome.GainControl);
+        staticText = "gain control of that spell and you may choose new targets for it";
     }
 
     private InvertPolarityGainControlTargetEffect(final InvertPolarityGainControlTargetEffect effect) {

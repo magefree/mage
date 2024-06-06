@@ -43,7 +43,7 @@ public final class PearlEarImperialAdvisor extends CardImpl {
     );
 
     private static final FilterPermanent filterModified = new FilterControlledPermanent();
-    private static final FilterSpell filterAura = new FilterSpell("Aura spell that targets a modified permanent you control");
+    private static final FilterSpell filterAura = new FilterSpell("an Aura spell that targets a modified permanent you control");
 
     static {
         filterModified.add(ModifiedPredicate.instance);

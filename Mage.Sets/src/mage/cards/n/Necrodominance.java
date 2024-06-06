@@ -16,6 +16,8 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -130,6 +132,13 @@ class NecrodominanceReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         Card card = game.getCard(event.getTargetId());
-        return card != null && card.isOwnedBy(source.getControllerId());
+        if (card != null && card.isOwnedBy(source.getControllerId())) {
+            return true;
+        }
+        Permanent token = game.getPermanent(event.getTargetId());
+        if (token != null && token instanceof PermanentToken && token.isOwnedBy(source.getControllerId())) {
+            return true;
+        }
+        return false;
     }
 }

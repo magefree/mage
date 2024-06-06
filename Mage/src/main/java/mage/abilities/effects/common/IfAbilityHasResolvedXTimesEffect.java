@@ -23,10 +23,10 @@ public class IfAbilityHasResolvedXTimesEffect extends OneShotEffect {
         this(effect.getOutcome(), resolutionNumber, effect);
     }
 
-    public IfAbilityHasResolvedXTimesEffect(Outcome outcome, int resolutionNumber, Effect... effect) {
+    public IfAbilityHasResolvedXTimesEffect(Outcome outcome, int resolutionNumber, Effect... effects) {
         super(outcome);
         this.resolutionNumber = resolutionNumber;
-        this.effects = new Effects(effect);
+        this.effects = new Effects(effects);
     }
 
     private IfAbilityHasResolvedXTimesEffect(final IfAbilityHasResolvedXTimesEffect effect) {

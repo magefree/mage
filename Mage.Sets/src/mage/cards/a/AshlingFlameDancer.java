@@ -44,10 +44,11 @@ public final class AshlingFlameDancer extends CardImpl {
                 Outcome.Damage, 2,
                 new DamagePlayersEffect(2, TargetController.OPPONENT),
                 new DamageAllEffect(2, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE)
+                        .setText("and each creature they control")
         ));
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(
                 3, new BasicManaEffect(Mana.RedMana(4))
-        ));
+        ).setText("If it's the third time, add {R}{R}{R}{R}"));
         this.addAbility(ability, new AbilityResolvedWatcher());
     }
 

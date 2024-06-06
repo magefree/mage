@@ -51,7 +51,7 @@ public final class AmpedRaptor extends CardImpl {
         ability.addEffect(new ConditionalOneShotEffect(
                 new AmpedRaptorEffect(),
                 CastFromHandSourcePermanentCondition.instance
-        ));
+        ).concatBy("Then"));
         this.addAbility(ability, new CastFromHandWatcher());
     }
 

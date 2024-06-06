@@ -1,9 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.game.permanent.token.TarmogoyfToken;
-import mage.target.common.TargetLandPermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,22 +9,23 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
+import mage.constants.*;
+import mage.game.permanent.token.TarmogoyfToken;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author grimreap124
  */
 public final class TarmogoyfNest extends CardImpl {
 
     public TarmogoyfNest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.TRIBAL, CardType.ENCHANTMENT }, "{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{2}{G}");
 
         this.subtype.add(SubType.LHURGOYF);
         this.subtype.add(SubType.AURA);
@@ -43,7 +40,7 @@ public final class TarmogoyfNest extends CardImpl {
         Ability gainedAbility = new SimpleActivatedAbility(new CreateTokenEffect(new TarmogoyfToken()),
                 new TapSourceCost());
         gainedAbility.addCost(new ManaCostsImpl<>("{1}{G}"));
-        Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
+        Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, null, "land");
         this.addAbility(new SimpleStaticAbility(effect));
 
     }

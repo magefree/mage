@@ -1,7 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -23,14 +21,15 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author grimreap124
  */
 public final class LocalizedDestruction extends CardImpl {
 
     public LocalizedDestruction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.SORCERY }, "{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
 
         // You get {E}, then you may pay one or more {E}. If you do, each creature you control with power equal to the amount of paid this way gains indestructible until end of turn.
 
@@ -58,7 +57,7 @@ class LocalizedDestructionEffect extends OneShotEffect {
 
     LocalizedDestructionEffect() {
         super(Outcome.AddAbility);
-        this.staticText = ", then you may pay one or more {E}. If you do, each creature you control with power equal to the amount of paid this way gains indestructible until end of turn";
+        this.staticText = ", then you may pay one or more {E}. If you do, each creature you control with power equal to the amount of {E} paid this way gains indestructible until end of turn";
     }
 
     private LocalizedDestructionEffect(final LocalizedDestructionEffect effect) {
@@ -89,10 +88,10 @@ class LocalizedDestructionEffect extends OneShotEffect {
         }
 
         int numberToPay = controller.getAmount(1, totalEnergy,
-        "Pay one or more {E}", game);
-        
+                "Pay one or more {E}", game);
+
         Cost cost = new PayEnergyCost(numberToPay);
-        
+
         if (cost.pay(source, game, source, source.getControllerId(), true)) {
             FilterPermanent filter = new FilterPermanent();
             filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, numberToPay));
