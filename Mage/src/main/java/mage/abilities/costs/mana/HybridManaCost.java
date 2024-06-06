@@ -18,7 +18,7 @@ public class HybridManaCost extends ManaCostImpl {
     public HybridManaCost(ColoredManaSymbol mana1, ColoredManaSymbol mana2) {
         this.mana1 = mana1;
         this.mana2 = mana2;
-        this.cost = new Mana(mana1);
+        this.cost = mana1 == null ? Mana.ColorlessMana(1) : new Mana(mana1);
         this.cost.add(new Mana(mana2));
         addColoredOption(mana1);
         addColoredOption(mana2);
@@ -42,7 +42,7 @@ public class HybridManaCost extends ManaCostImpl {
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
-        if (assignColored(ability, game, pool, this.mana1, costToPay)) {
+        if (this.mana1 != null && assignColored(ability, game, pool, this.mana1, costToPay)) {
             return;
         }
         assignColored(ability, game, pool, this.mana2, costToPay);
@@ -79,6 +79,10 @@ public class HybridManaCost extends ManaCostImpl {
                 }
             case G:
                 if (testMana.getGreen() > 0 || testMana.getAny() > 0) {
+                    return true;
+                }
+            default:
+                if (testMana.getColorless() > 0) {
                     return true;
                 }
         }

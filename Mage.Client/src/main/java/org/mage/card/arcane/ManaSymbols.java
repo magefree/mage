@@ -73,12 +73,12 @@ public final class ManaSymbols {
     private static final String[] symbols = new String[]{
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
             "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-            "B", "BG", "BR", "BP", "2B",
-            "G", "GU", "GW", "GP", "2G",
-            "R", "RG", "RW", "RP", "2R",
+            "B", "BG", "BR", "BP", "2B", "CB",
+            "G", "GU", "GW", "GP", "2G", "CG",
+            "R", "RG", "RW", "RP", "2R", "CR",
             "S", "T", "Q",
-            "U", "UB", "UR", "UP", "2U",
-            "W", "WB", "WU", "WP", "2W",
+            "U", "UB", "UR", "UP", "2U", "CU",
+            "W", "WB", "WU", "WP", "2W", "CW",
             "X", "C", "E", "P",
             "BGP", "BRP", "GUP", "GWP", "RGP", "RWP", "UBP", "URP", "WBP", "WUP"};
 
