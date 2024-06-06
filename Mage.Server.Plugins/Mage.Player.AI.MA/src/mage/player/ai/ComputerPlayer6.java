@@ -714,7 +714,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         // TODO: add modal info
         // + (action.isModal() ? " Mode = " + action.getModes().getMode().toString() : "")
         if (ability.isModal()) {
-            throw new IllegalStateException("TODO: need implement");
+            //throw new IllegalStateException("TODO: need implement");
         }
         MageObject sourceObject = ability.getSourceObject(game);
         String abilityInfo = (sourceObject == null ? "" : sourceObject.getIdName() + ": ") + CardUtil.substring(ability.toString(), 30, "...");
