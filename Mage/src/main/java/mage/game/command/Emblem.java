@@ -68,6 +68,7 @@ public abstract class Emblem extends CommandObjectImpl {
         );
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
             this.setCardNumber("");
             this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());

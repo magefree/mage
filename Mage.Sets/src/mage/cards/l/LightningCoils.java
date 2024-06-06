@@ -34,9 +34,7 @@ public final class LightningCoils extends CardImpl {
                         new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true),
                         false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN));
 
-        // At the beginning of your upkeep, if Lightning Coils has five or more charge counters on it, remove all of them from it 
-        // and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. 
-        // Exile them at the beginning of the next end step.
+        // At the beginning of your upkeep, if Lightning Coils has five or more charge counters on it, remove all of them from it  and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LightningCoilsEffect(), TargetController.YOU, false));
     }
 
@@ -64,12 +62,12 @@ class LightningCoilsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null && controller != null) {
-            int counters = p.getCounters(game).getCount(CounterType.CHARGE);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && controller != null) {
+            int counters = permanent.getCounters(game).getCount(CounterType.CHARGE);
             if (counters >= 5) {
                 // remove all the counters and create that many tokens
-                p.removeCounters(CounterType.CHARGE.getName(), p.getCounters(game).getCount(CounterType.CHARGE), source, game);
+                permanent.removeAllCounters(CounterType.CHARGE.getName(), source, game);
                 CreateTokenEffect effect = new CreateTokenEffect(new ElementalTokenWithHaste(), counters);
                 effect.apply(game, source);
 

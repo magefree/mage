@@ -79,6 +79,6 @@ class OrochiSoulReaverManifestEffect extends OneShotEffect {
             return false;
         }
 
-        return ManifestEffect.doManifestCards(game, source, controller, targetPlayer.getLibrary().getTopCards(game, 1));
+        return !ManifestEffect.doManifestCards(game, source, controller, targetPlayer.getLibrary().getTopCards(game, 1)).isEmpty();
     }
 }

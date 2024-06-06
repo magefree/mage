@@ -85,7 +85,7 @@ class TidalFlatsEffect extends OneShotEffect {
         }
         Cost cost = new ManaCostsImpl<>("{1}");
         List<Permanent> affectedPermanents = new ArrayList<>();
-        for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
             cost.clearPaid();
             String message = "Pay " + cost.getText() + " for " + permanent.getLogName() + "? If you don't, creatures " + controller.getLogName() + " controls blocking it gain first strike until end of turn.";
             if (player.chooseUse(Outcome.Benefit, message, source, game)) {

@@ -112,10 +112,7 @@ class FrayingLineEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURE,
                 source.getControllerId(), source, game
         )) {
-            int counters = permanent.getCounters(game).getCount(CounterType.ROPE);
-            if (counters > 0) {
-                permanent.removeCounters(CounterType.ROPE.createInstance(counters), source, game);
-            }
+            permanent.removeAllCounters(CounterType.ROPE.getName(), source, game);
         }
         return true;
     }

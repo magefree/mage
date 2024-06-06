@@ -1,6 +1,6 @@
 package mage.cards.a;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,7 +11,6 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author Backfir3
  */
 public final class Afterlife extends CardImpl {
@@ -23,7 +22,7 @@ public final class Afterlife extends CardImpl {
         // 1/1 white Spirit creature token with flying.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new SpiritWhiteToken()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new SpiritWhiteToken()));
     }
 
     private Afterlife(final Afterlife card) {

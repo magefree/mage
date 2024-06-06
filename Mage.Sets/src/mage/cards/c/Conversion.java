@@ -12,6 +12,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -72,7 +73,7 @@ public final class Conversion extends CardImpl {
 
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-            for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND, game)) {
+            for (Permanent land : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (land.hasSubtype(SubType.MOUNTAIN, game)) {

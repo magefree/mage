@@ -515,4 +515,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         }
         return true;
     }
+
+    @Override
+    public ContinuousEffect setText(String staticText) {
+        super.setText(staticText);
+        return this;
+    }
 }

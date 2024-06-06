@@ -1,7 +1,5 @@
-
 package mage.abilities.keyword;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -21,7 +19,7 @@ import mage.players.Player;
 public class MeditateAbility extends ActivatedAbilityImpl {
 
     public MeditateAbility(Cost cost) {
-        super(Zone.BATTLEFIELD, new ReturnToHandEffect(), cost);
+        super(Zone.BATTLEFIELD, new MeditateEffect(), cost);
         this.timing = TimingRule.SORCERY;
     }
 
@@ -43,37 +41,33 @@ public class MeditateAbility extends ActivatedAbilityImpl {
 
 }
 
-class ReturnToHandEffect extends OneShotEffect {
+class MeditateEffect extends OneShotEffect {
 
-    public ReturnToHandEffect() {
+    MeditateEffect() {
         super(Outcome.ReturnToHand);
     }
 
-    protected ReturnToHandEffect(final ReturnToHandEffect effect) {
+    protected MeditateEffect(final MeditateEffect effect) {
         super(effect);
     }
 
     @Override
-    public ReturnToHandEffect copy() {
-        return new ReturnToHandEffect(this);
+    public MeditateEffect copy() {
+        return new MeditateEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            MageObject mageObject = source.getSourceObjectIfItStillExists(game);
-            if (mageObject != null) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    boolean ret = controller.moveCards(permanent, Zone.HAND, source, game);
-                    if (ret) {
-                        game.fireEvent(new GameEvent(GameEvent.EventType.MEDITATED, source.getSourceId(), source, controller.getId()));
-                    }
-                    return ret;
-                }
-            }
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+        boolean ret = controller.moveCards(permanent, Zone.HAND, source, game);
+        if (ret) {
+            game.fireEvent(new GameEvent(EventType.MEDITATED, source.getSourceId(), source, controller.getId()));
+        }
+        return ret;
     }
+
 }

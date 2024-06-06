@@ -1076,6 +1076,7 @@ public class TestPlayer implements Player {
         if (numberOfActions == actions.size()) {
             foundNoAction++;
             if (foundNoAction > maxCallsWithoutAction) {
+                // how-to fix: if you really need a long game with many turns then use prepare command TestPlayer.setMaxCallsWithoutAction
                 throw new AssertionError("Too much priority calls to " + getName()
                         + " without taking any action than allowed (" + maxCallsWithoutAction + ") on turn " + game.getTurnNum());
             }
@@ -2960,8 +2961,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Counters getCounters() {
-        return computerPlayer.getCounters();
+    public Counters getCountersAsCopy() {
+        return computerPlayer.getCountersAsCopy();
     }
 
     @Override
@@ -3026,8 +3027,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
-        return computerPlayer.canBeTargetedBy(source, sourceControllerId, game);
+    public boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game) {
+        return computerPlayer.canBeTargetedBy(sourceObject, sourceControllerId, source, game);
     }
 
     @Override
@@ -3440,8 +3441,33 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
-        computerPlayer.removeCounters(name, amount, source, game);
+    public void loseCounters(String counterName, int amount, Ability source, Game game) {
+        computerPlayer.loseCounters(counterName, amount, source, game);
+    }
+
+    @Override
+    public int loseAllCounters(Ability source, Game game) {
+        return computerPlayer.loseAllCounters(source, game);
+    }
+
+    @Override
+    public int loseAllCounters(String counterName, Ability source, Game game) {
+        return computerPlayer.loseAllCounters(counterName, source, game);
+    }
+
+    @Override
+    public int getCountersCount(CounterType counterType) {
+        return computerPlayer.getCountersCount(counterType);
+    }
+
+    @Override
+    public int getCountersCount(String counterName) {
+        return computerPlayer.getCountersCount(counterName);
+    }
+
+    @Override
+    public int getCountersTotalCount() {
+        return computerPlayer.getCountersTotalCount();
     }
 
     @Override

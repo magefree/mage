@@ -52,7 +52,7 @@ class MirrorShieldHopliteTriggeredAbility extends TriggeredAbilityImpl {
     MirrorShieldHopliteTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect());
         this.setTriggerPhrase("Whenever a creature you control becomes the target of a backup ability, ");
-        this.setTriggersOnceEachTurn(true);
+        this.setTriggersLimitEachTurn(1);
     }
 
     private MirrorShieldHopliteTriggeredAbility(final MirrorShieldHopliteTriggeredAbility ability) {

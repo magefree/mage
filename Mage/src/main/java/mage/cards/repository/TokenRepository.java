@@ -23,6 +23,7 @@ public enum TokenRepository {
     // - additional card name for controller like "Morph: face up name"
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL = "Face Down";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST = "Manifest";
+    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK = "Cloak";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MORPH = "Morph";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE = "Disguise";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL = "Foretell";
@@ -286,6 +287,10 @@ public enum TokenRepository {
         // Disguise
         // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
+
+        // Cloak
+        // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
 
         // Foretell
         // https://scryfall.com/search?q=Foretell+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name

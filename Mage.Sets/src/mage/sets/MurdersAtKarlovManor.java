@@ -92,6 +92,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Crimestopper Sprite", 49, Rarity.COMMON, mage.cards.c.CrimestopperSprite.class));
         cards.add(new SetCardInfo("Crowd-Control Warden", 193, Rarity.COMMON, mage.cards.c.CrowdControlWarden.class));
         cards.add(new SetCardInfo("Cryptex", 251, Rarity.RARE, mage.cards.c.Cryptex.class));
+        cards.add(new SetCardInfo("Cryptic Coat", 50, Rarity.RARE, mage.cards.c.CrypticCoat.class));
         cards.add(new SetCardInfo("Culvert Ambusher", 158, Rarity.UNCOMMON, mage.cards.c.CulvertAmbusher.class));
         cards.add(new SetCardInfo("Curious Cadaver", 194, Rarity.UNCOMMON, mage.cards.c.CuriousCadaver.class));
         cards.add(new SetCardInfo("Curious Inquiry", 51, Rarity.UNCOMMON, mage.cards.c.CuriousInquiry.class));

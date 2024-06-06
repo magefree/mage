@@ -18,7 +18,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.Set;
+import java.util.*;
 
 /**
  * Manifest
@@ -65,6 +65,7 @@ public class ManifestEffect extends OneShotEffect {
 
     private final DynamicValue amount;
     private final boolean isPlural;
+    private final boolean cloakNotManifest;
 
     public ManifestEffect(int amount) {
         this(StaticValue.get(amount), amount > 1);
@@ -75,9 +76,14 @@ public class ManifestEffect extends OneShotEffect {
     }
 
     private ManifestEffect(DynamicValue amount, boolean isPlural) {
+        this(amount, isPlural, false);
+    }
+
+    private ManifestEffect(DynamicValue amount, boolean isPlural, boolean cloakNotManifest) {
         super(Outcome.PutCreatureInPlay);
         this.amount = amount;
         this.isPlural = isPlural;
+        this.cloakNotManifest = cloakNotManifest;
         this.staticText = setText();
     }
 
@@ -85,6 +91,7 @@ public class ManifestEffect extends OneShotEffect {
         super(effect);
         this.amount = effect.amount;
         this.isPlural = effect.isPlural;
+        this.cloakNotManifest = effect.cloakNotManifest;
     }
 
     @Override
@@ -100,12 +107,16 @@ public class ManifestEffect extends OneShotEffect {
         }
 
         int manifestAmount = amount.calculate(game, source, this);
-        return doManifestCards(game, source, controller, controller.getLibrary().getTopCards(game, manifestAmount));
+        return !doManifestCards(game, source, controller, controller.getLibrary().getTopCards(game, manifestAmount), cloakNotManifest).isEmpty();
     }
 
-    public static boolean doManifestCards(Game game, Ability source, Player manifestPlayer, Set<Card> cardsToManifest) {
+    public static List<Permanent> doManifestCards(Game game, Ability source, Player manifestPlayer, Set<Card> cardsToManifest) {
+        return doManifestCards(game, source, manifestPlayer, cardsToManifest, false);
+    }
+
+    public static List<Permanent> doManifestCards(Game game, Ability source, Player manifestPlayer, Set<Card> cardsToManifest, boolean cloakNotManifest) {
         if (cardsToManifest.isEmpty()) {
-            return false;
+            return Collections.emptyList();
         }
 
         // prepare source ability
@@ -132,9 +143,10 @@ public class ManifestEffect extends OneShotEffect {
 
             // zcc + 1 for use case with Rally the Ancestors (see related test)
             MageObjectReference objectReference = new MageObjectReference(battlefieldCard.getId(), battlefieldCard.getZoneChangeCounter(game) + 1, game);
-            game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
+            game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, cloakNotManifest ? FaceDownType.CLOAKED : FaceDownType.MANIFESTED), newSource);
         }
 
+        List<Permanent> manifested = new ArrayList<>();
         // move cards to battlefield as face down
         // TODO: possible buggy for multiple cards, see rule 701.34e - it require manifest one by one (card to check: Omarthis, Ghostfire Initiate)
         manifestPlayer.moveCards(cardsToManifest, Zone.BATTLEFIELD, source, game, false, true, false, null);
@@ -145,18 +157,25 @@ public class ManifestEffect extends OneShotEffect {
             if (permanent != null) {
                 // TODO: permanent already has manifested status, so code can be deleted later
                 // TODO: add test with battlefield trigger/watcher (must not see normal card, must not see face down status without manifest)
-                permanent.setManifested(true);
+                if (cloakNotManifest) {
+                    permanent.setCloaked(true);
+                } else {
+                    permanent.setManifested(true);
+                }
+                manifested.add(permanent);
             } else {
                 // TODO: looks buggy, card can't be moved to battlefield, but face down effect already active
                 //  or it can be face down on another move to battlefield
             }
         }
 
-        return true;
+        return manifested;
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("manifest the top ");
+        StringBuilder sb = new StringBuilder();
+        sb.append(cloakNotManifest ? "cloak" : "manifest");
+        sb.append(" the top ");
         if (isPlural) {
             sb.append(CardUtil.numberToText(amount.toString())).append(" cards ");
         } else {

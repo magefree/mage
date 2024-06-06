@@ -72,6 +72,7 @@ public abstract class Plane extends CommandObjectImpl {
         TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(this.getClass().getName(), null);
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
             this.setCardNumber("");
             this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());

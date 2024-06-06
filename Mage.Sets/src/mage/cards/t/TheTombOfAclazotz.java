@@ -262,9 +262,9 @@ class AddCardSubTypeEnteringTargetEffect extends ContinuousEffectImpl {
             }
         }
         if (card != null
-                && game.getState().getBattlefield().getPermanent(card.getId()) != null
+                && game.getPermanent(card.getId()) != null
                 && game.getState().getZoneChangeCounter(card.getId()) == mor.getZoneChangeCounter() + 1) { // blinking, etc
-            game.getState().getBattlefield().getPermanent(card.getId()).addSubType(game, addedSubType);
+            game.getPermanent(card.getId()).addSubType(game, addedSubType);
         }
         return true;
     }

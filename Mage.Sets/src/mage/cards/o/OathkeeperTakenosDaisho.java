@@ -98,14 +98,14 @@ enum OathkeeperEquippedSamuraiCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
         if (permanent != null) {
             Permanent attachedTo = null;
             if (permanent.getAttachedTo() != null) {
-                attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
+                attachedTo = game.getPermanent(permanent.getAttachedTo());
                 if (attachedTo == null) {
                     attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
                 }

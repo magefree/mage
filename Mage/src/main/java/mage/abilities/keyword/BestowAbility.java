@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
@@ -15,6 +16,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  * 702.102. Bestow
@@ -109,7 +111,16 @@ public class BestowAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        return "Bestow " + getManaCostsToPay().getText() + " <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>";
+        StringBuilder sb = new StringBuilder("Bestow");
+        Costs costs = getCosts();
+        if (costs.size() > 0) {
+            sb.append("&mdash;").append(getManaCostsToPay().getText()).append(", ");
+            sb.append(CardUtil.getTextWithFirstCharUpperCase(costs.getText())).append('.');
+        } else {
+            sb.append(" ").append(getManaCostsToPay().getText());
+        }
+        sb.append(" <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>");
+        return sb.toString();
     }
 
     public static void becomeCreature(Permanent permanent, Game game) {

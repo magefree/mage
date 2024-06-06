@@ -1357,6 +1357,15 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public Card getSourceCardIfItStillExists(Game game) {
+        MageObject mageObject = getSourceObjectIfItStillExists(game);
+        if (mageObject instanceof Card) {
+            return (Card) mageObject;
+        }
+        return null;
+    }
+
+    @Override
     public Permanent getSourcePermanentIfItStillExists(Game game) {
         MageObject mageObject = getSourceObjectIfItStillExists(game);
         if (mageObject instanceof Permanent) {

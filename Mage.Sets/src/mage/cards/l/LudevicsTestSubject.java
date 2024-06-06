@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,21 +13,22 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class LudevicsTestSubject extends CardImpl {
 
     public LudevicsTestSubject(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.LIZARD, SubType.EGG);
 
         this.power = new MageInt(0);
@@ -67,13 +67,15 @@ class LudevicsTestSubjectEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null) {
-            if (p.getCounters(game).getCount(CounterType.HATCHLING) >= 5) {
-                p.removeCounters(CounterType.HATCHLING.getName(), p.getCounters(game).getCount(CounterType.HATCHLING), source, game);
-                TransformSourceEffect effect = new TransformSourceEffect();
-                return effect.apply(game, source);
-            }
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+
+        if (permanent.getCounters(game).getCount(CounterType.HATCHLING) >= 5) {
+            permanent.removeAllCounters(CounterType.HATCHLING.getName(), source, game);
+            TransformSourceEffect effect = new TransformSourceEffect();
+            return effect.apply(game, source);
         }
         return false;
     }

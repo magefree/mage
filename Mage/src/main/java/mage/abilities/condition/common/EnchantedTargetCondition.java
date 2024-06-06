@@ -22,7 +22,7 @@ public enum EnchantedTargetCondition implements Condition {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                 if (targetPermanent != null) {
                     for (UUID uuid : targetPermanent.getAttachments()) {
-                        Permanent attached = game.getBattlefield().getPermanent(uuid);
+                        Permanent attached = game.getPermanent(uuid);
                         if (attached != null && attached.isEnchantment(game)) {
                             return true;
                         }

@@ -39,8 +39,8 @@ public final class FlareOfFortitude extends CardImpl {
 
         // Until end of turn, your life total can't change, and permanents you control gain hexproof and indestructible.
         this.getSpellAbility().addEffect(
-                new LifeTotalCantChangeControllerEffect(Duration.UntilYourNextTurn)
-                        .setText("Until your next turn, your life total can't change")
+                new LifeTotalCantChangeControllerEffect(Duration.EndOfTurn)
+                        .setText("Until end of turn, your life total can't change")
         );
         this.getSpellAbility().addEffect(
                 new GainAbilityAllEffect(

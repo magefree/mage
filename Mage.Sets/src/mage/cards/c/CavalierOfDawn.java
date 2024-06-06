@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
@@ -41,7 +41,7 @@ public final class CavalierOfDawn extends CardImpl {
 
         // When Cavalier of Dawn enters the battlefield, destroy up to one target nonland permanent. Its controller creates a 3/3 colorless Golem artifact creature token.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addEffect(new CreateTokenControllerTargetPermanentEffect(new GolemToken()));
+        ability.addEffect(new CreateTokenControllerTargetEffect(new GolemToken()));
         ability.addTarget(new TargetNonlandPermanent(0, 1, false));
         this.addAbility(ability);
 

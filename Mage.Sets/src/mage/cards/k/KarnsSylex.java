@@ -100,7 +100,7 @@ class KarnsSylexDestroyEffect extends OneShotEffect {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
 
         boolean destroyed = false;
-        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             destroyed |= permanent.destroy(source, game);
         }
         return destroyed;

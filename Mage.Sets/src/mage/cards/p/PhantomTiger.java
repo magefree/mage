@@ -4,7 +4,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PhantomPreventionEffect;
+import mage.abilities.effects.PreventDamageAndRemoveCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,9 @@ public final class PhantomTiger extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
 
         // If damage would be dealt to Phantom Tiger, prevent that damage. Remove a +1/+1 counter from Phantom Tiger.
-        this.addAbility(new SimpleStaticAbility(new PhantomPreventionEffect()), PhantomPreventionEffect.createWatcher());
+        this.addAbility(new SimpleStaticAbility(
+                new PreventDamageAndRemoveCountersEffect(false, false, false).withPhantomText()
+        ), PreventDamageAndRemoveCountersEffect.createWatcher());
     }
 
     private PhantomTiger(final PhantomTiger card) {

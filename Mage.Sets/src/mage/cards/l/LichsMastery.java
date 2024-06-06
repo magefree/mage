@@ -1,27 +1,23 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.LoseGameSourceControllerEffect;
-import mage.constants.SuperType;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -35,8 +31,9 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class LichsMastery extends CardImpl {
@@ -53,7 +50,10 @@ public final class LichsMastery extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LichsMasteryCantLoseEffect()));
 
         // Whenever you gain life, draw that many cards.
-        this.addAbility(new GainLifeControllerTriggeredAbility(new LichsMasteryDrawCardsEffect(), false, true));
+        this.addAbility(new GainLifeControllerTriggeredAbility(
+                new DrawCardSourceControllerEffect(SavedGainedLifeValue.MANY),
+                false, true
+        ));
 
         // Whenever you lose life, for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard.
         this.addAbility(new LichsMasteryLoseLifeTriggeredAbility());
@@ -96,32 +96,6 @@ class LichsMasteryCantLoseEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(source.getControllerId());
-    }
-}
-
-class LichsMasteryDrawCardsEffect extends OneShotEffect {
-
-    LichsMasteryDrawCardsEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "draw that many cards";
-    }
-
-    private LichsMasteryDrawCardsEffect(final LichsMasteryDrawCardsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LichsMasteryDrawCardsEffect copy() {
-        return new LichsMasteryDrawCardsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int lifeGained = (Integer) this.getValue("gainedLife");
-        if (lifeGained > 0) {
-            return new DrawCardSourceControllerEffect(lifeGained).apply(game, source);
-        }
-        return false;
     }
 }
 

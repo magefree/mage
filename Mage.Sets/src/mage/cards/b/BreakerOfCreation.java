@@ -38,7 +38,10 @@ public final class BreakerOfCreation extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When you cast this spell, you gain 1 life for each colorless permanent you control.
-        this.addAbility(new CastSourceTriggeredAbility(new GainLifeEffect(xValue)));
+        this.addAbility(new CastSourceTriggeredAbility(
+                new GainLifeEffect(xValue)
+                        .setText("you gain 1 life for each colorless permanent you control")
+        ));
 
         // Hexproof from each color
         this.addAbility(HexproofFromEachColorAbility.getInstance());

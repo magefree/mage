@@ -73,7 +73,7 @@ class ThranTomeEffect extends OneShotEffect {
         // target an opponent, if able
         Player opponent;
         Set<UUID> opponents = game.getOpponents(controller.getId());
-        opponents.removeIf(opp -> !game.getPlayer(opp).canBeTargetedBy(sourceObject, source.getControllerId(), game));
+        opponents.removeIf(opp -> !game.getPlayer(opp).canBeTargetedBy(sourceObject, source.getControllerId(), source, game));
 
         if (opponents.isEmpty()) {
             return false;

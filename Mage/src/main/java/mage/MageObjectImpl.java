@@ -36,6 +36,7 @@ public abstract class MageObjectImpl implements MageObject {
 
     private String expansionSetCode = "";
     private String cardNumber = "";
+    private boolean usesVariousArt = false;
     private String imageFileName = "";
     private int imageNumber = 0;
 
@@ -77,6 +78,7 @@ public abstract class MageObjectImpl implements MageObject {
         frameColor = object.frameColor.copy();
         frameStyle = object.frameStyle;
         expansionSetCode = object.expansionSetCode;
+        usesVariousArt = object.usesVariousArt;
         cardNumber = object.cardNumber;
         imageFileName = object.imageFileName;
         imageNumber = object.imageNumber;
@@ -256,6 +258,16 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void setExpansionSetCode(String expansionSetCode) {
         this.expansionSetCode = expansionSetCode;
+    }
+
+    @Override
+    public boolean getUsesVariousArt() {
+        return usesVariousArt;
+    }
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        this.usesVariousArt = usesVariousArt;
     }
 
     @Override
