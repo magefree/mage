@@ -77,6 +77,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Detective's Phoenix", 116, Rarity.RARE, mage.cards.d.DetectivesPhoenix.class));
         cards.add(new SetCardInfo("Devourer of Destiny", 2, Rarity.RARE, mage.cards.d.DevourerOfDestiny.class));
         cards.add(new SetCardInfo("Disciple of Freyalise", 250, Rarity.UNCOMMON, mage.cards.d.DiscipleOfFreyalise.class));
+        cards.add(new SetCardInfo("Disruptor Flute", 209, Rarity.RARE, mage.cards.d.DisruptorFlute.class));
         cards.add(new SetCardInfo("Distinguished Conjurer", 264, Rarity.UNCOMMON, mage.cards.d.DistinguishedConjurer.class));
         cards.add(new SetCardInfo("Dog Umbra", 22, Rarity.COMMON, mage.cards.d.DogUmbra.class));
         cards.add(new SetCardInfo("Dreadmobile", 87, Rarity.UNCOMMON, mage.cards.d.Dreadmobile.class));
