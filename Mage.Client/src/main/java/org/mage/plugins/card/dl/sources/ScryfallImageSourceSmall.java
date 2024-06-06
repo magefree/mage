@@ -28,6 +28,11 @@ public class ScryfallImageSourceSmall extends ScryfallImageSource {
     }
 
     @Override
+    public String getSourceName() {
+        return "scryfall.com - small";
+    }
+
+    @Override
     public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
         return innerModifyUrl(super.generateCardUrl(card));
     }
