@@ -30,8 +30,8 @@ public class HourglassOfTheLostTest extends CardTestPlayerBase {
         assertCounterCount(playerA, hourglass, CounterType.TIME,1);
 
         showAvailableAbilities("Abilities: ", 3, PhaseStep.PRECOMBAT_MAIN, playerA);
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Remove X");
         setChoice(playerA, "X=1");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Remove X");
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
 
         execute();
