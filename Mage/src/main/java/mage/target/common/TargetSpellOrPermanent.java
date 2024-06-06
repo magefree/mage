@@ -89,7 +89,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
         if (permanent != null) {
             if (source != null) {
                 MageObject targetSource = game.getObject(source);
-                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game)
+                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), source, game)
                         && filter.match(permanent, source.getControllerId(), source, game);
             } else {
                 return filter.match(permanent, game);
@@ -132,7 +132,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceControllerId, source, game)) {
+            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game) && filter.match(permanent, sourceControllerId, source, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -189,7 +189,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceControllerId, source, game)) {
+            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game) && filter.match(permanent, sourceControllerId, source, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }

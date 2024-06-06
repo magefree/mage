@@ -50,7 +50,7 @@ public final class ScholarOfTheLostTrove extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Scholar of the Lost Trove enters the battlefield, you may cast target instant, sorcery, or artifact card from your graveyard without paying its mana cost. If an instant or sorcery spell cast this way would be put into your graveyard this turn, exile it instead.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ScholarOfTheLostTroveEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ScholarOfTheLostTroveEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

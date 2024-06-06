@@ -295,7 +295,7 @@ public class ScryfallImageSource implements CardImageSource {
 
     @Override
     public String getSourceName() {
-        return "scryfall.com";
+        return "scryfall.com - big";
     }
 
     @Override

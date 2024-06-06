@@ -67,7 +67,7 @@ public class TargetPlayer extends TargetImpl {
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && !player.hasLeft() && filter.match(player, sourceControllerId, source, game)) {
-                if (player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (player.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     count++;
                     if (count >= this.minNumberOfTargets) {
                         return true;
@@ -109,7 +109,7 @@ public class TargetPlayer extends TargetImpl {
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && !player.hasLeft() && filter.match(player, sourceControllerId, source, game)) {
-                if (isNotTarget() || player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (isNotTarget() || player.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     possibleTargets.add(playerId);
                 }
             }
@@ -149,7 +149,7 @@ public class TargetPlayer extends TargetImpl {
         Player player = game.getPlayer(id);
         if (player != null) {
             if (source != null) {
-                return (isNotTarget() || player.canBeTargetedBy(game.getObject(source), source.getControllerId(), game))
+                return (isNotTarget() || player.canBeTargetedBy(game.getObject(source), source.getControllerId(), source, game))
                         && filter.match(player, source.getControllerId(), source, game);
             } else {
                 return filter.match(player, game);

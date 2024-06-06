@@ -73,6 +73,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean renowned;
     protected boolean suspected;
     protected boolean manifested = false;
+    protected boolean cloaked = false;
     protected boolean morphed = false;
     protected boolean disguised = false;
     protected boolean ringBearerFlag = false;
@@ -189,6 +190,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.morphed = permanent.morphed;
         this.disguised = permanent.disguised;
         this.manifested = permanent.manifested;
+        this.cloaked = permanent.cloaked;
         this.createOrder = permanent.createOrder;
         this.prototyped = permanent.prototyped;
         this.canBeSacrificed = permanent.canBeSacrificed;
@@ -1300,8 +1302,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
-        if (source != null) {
+    public boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game) {
+        if (sourceObject != null) {
             if (abilities.containsKey(ShroudAbility.getInstance().getId())) {
                 if (game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, null, sourceControllerId, game).isEmpty()) {
                     return false;
@@ -1313,17 +1315,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     && abilities.stream()
                     .filter(HexproofBaseAbility.class::isInstance)
                     .map(HexproofBaseAbility.class::cast)
-                    .anyMatch(ability -> ability.checkObject(source, game))) {
+                    .anyMatch(ability -> ability.checkObject(sourceObject, source, game))) {
                 return false;
             }
 
-            if (hasProtectionFrom(source, game)) {
+            if (hasProtectionFrom(sourceObject, game)) {
                 return false;
             }
 
             // example: Fiendslayer Paladin tried to target with Ultimate Price
             return !game.getContinuousEffects().preventedByRuleModification(
-                    new TargetEvent(this, source.getId(), sourceControllerId),
+                    new TargetEvent(this, sourceObject.getId(), sourceControllerId),
                     null,
                     game,
                     true
@@ -1903,6 +1905,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setManifested(boolean value) {
         manifested = value;
+    }
+
+    @Override
+    public boolean isCloaked() {
+        return cloaked;
+    }
+
+    @Override
+    public void setCloaked(boolean value) {
+        cloaked = value;
     }
 
     @Override

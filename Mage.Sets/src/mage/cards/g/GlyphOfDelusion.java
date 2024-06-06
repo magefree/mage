@@ -81,7 +81,7 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
                 MageObject targetSource = game.getObject(source);
                 if (targetSource != null) {
                     for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, source, game)) {
-                        if (!targets.containsKey(creature.getId()) && creature.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                        if (!targets.containsKey(creature.getId()) && creature.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                             if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(firstTarget, game), game)) {
                                 possibleTargets.add(creature.getId());
                             }

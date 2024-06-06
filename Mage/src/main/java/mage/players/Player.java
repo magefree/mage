@@ -513,7 +513,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean triggerAbility(TriggeredAbility ability, Game game);
 
-    boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game);
+    boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game);
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
