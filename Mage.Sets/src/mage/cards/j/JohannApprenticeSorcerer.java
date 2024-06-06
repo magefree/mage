@@ -106,7 +106,7 @@ class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
         if (affectedAbility instanceof SpellAbility) {
             SpellAbility spellAbility = (SpellAbility) affectedAbility;
             if (spellAbility.getManaCosts().isEmpty()
-                    || !spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                    || !spellAbility.spellCanBeActivatedRegularlyNow(playerId, game).contains(MageIdentifier.Default)) {
                 return false;
             }
             Card cardToCheck = spellAbility.getCharacteristics(game);
