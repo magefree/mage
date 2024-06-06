@@ -90,6 +90,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Demolition Field", 335, Rarity.UNCOMMON, mage.cards.d.DemolitionField.class));
         cards.add(new SetCardInfo("Desert of the Indomitable", 336, Rarity.COMMON, mage.cards.d.DesertOfTheIndomitable.class));
         cards.add(new SetCardInfo("Desert of the Mindful", 337, Rarity.COMMON, mage.cards.d.DesertOfTheMindful.class));
+        cards.add(new SetCardInfo("Disa the Restless", 1, Rarity.MYTHIC, mage.cards.d.DisaTheRestless.class));
         cards.add(new SetCardInfo("Dreamroot Cascade", 338, Rarity.RARE, mage.cards.d.DreamrootCascade.class));
         cards.add(new SetCardInfo("Dreamstone Hedron", 289, Rarity.UNCOMMON, mage.cards.d.DreamstoneHedron.class));
         cards.add(new SetCardInfo("Drown in Dreams", 181, Rarity.RARE, mage.cards.d.DrownInDreams.class));
