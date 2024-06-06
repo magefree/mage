@@ -307,6 +307,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Vexing Bauble", 212, Rarity.UNCOMMON, mage.cards.v.VexingBauble.class));
         cards.add(new SetCardInfo("Victimize", 278, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Voidpouncer", 143, Rarity.COMMON, mage.cards.v.Voidpouncer.class));
+        cards.add(new SetCardInfo("Volatile Stormdrake", 79, Rarity.RARE, mage.cards.v.VolatileStormdrake.class));
         cards.add(new SetCardInfo("Voltstorm Angel", 46, Rarity.UNCOMMON, mage.cards.v.VoltstormAngel.class));
         cards.add(new SetCardInfo("Warped Tusker", 16, Rarity.COMMON, mage.cards.w.WarpedTusker.class));
         cards.add(new SetCardInfo("Warren Soultrader", 110, Rarity.RARE, mage.cards.w.WarrenSoultrader.class));

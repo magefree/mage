@@ -687,11 +687,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
+    public boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game) {
         if (this.hasLost() || this.hasLeft()) {
             return false;
         }
-        if (source != null) {
+        if (sourceObject != null) {
             if (abilities.containsKey(ShroudAbility.getInstance().getId())
                     && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, null, sourceControllerId, game).isEmpty()) {
                 return false;
@@ -703,17 +703,17 @@ public abstract class PlayerImpl implements Player, Serializable {
                     && abilities.stream()
                     .filter(HexproofBaseAbility.class::isInstance)
                     .map(HexproofBaseAbility.class::cast)
-                    .anyMatch(ability -> ability.checkObject(source, game))) {
+                    .anyMatch(ability -> ability.checkObject(sourceObject, source, game))) {
                 return false;
             }
 
-            if (hasProtectionFrom(source, game)) {
+            if (hasProtectionFrom(sourceObject, game)) {
                 return false;
             }
 
             // example: Peace Talks
             return !game.getContinuousEffects().preventedByRuleModification(
-                    new TargetEvent(this, source.getId(), sourceControllerId),
+                    new TargetEvent(this, sourceObject.getId(), sourceControllerId),
                     null,
                     game,
                     true
