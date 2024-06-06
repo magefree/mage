@@ -29,6 +29,8 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Aetherstorm Roc", 164, Rarity.RARE, mage.cards.a.AetherstormRoc.class));
         cards.add(new SetCardInfo("Aethertide Whale", 175, Rarity.RARE, mage.cards.a.AethertideWhale.class));
         cards.add(new SetCardInfo("Aetherworks Marvel", 281, Rarity.MYTHIC, mage.cards.a.AetherworksMarvel.class));
+        cards.add(new SetCardInfo("Aggressive Biomancy", 69, Rarity.RARE, mage.cards.a.AggressiveBiomancy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aggressive Biomancy", 121, Rarity.RARE, mage.cards.a.AggressiveBiomancy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Akroma's Will", 165, Rarity.RARE, mage.cards.a.AkromasWill.class));
         cards.add(new SetCardInfo("All Is Dust", 152, Rarity.MYTHIC, mage.cards.a.AllIsDust.class));
         cards.add(new SetCardInfo("Altar of the Goyf", 282, Rarity.UNCOMMON, mage.cards.a.AltarOfTheGoyf.class));
