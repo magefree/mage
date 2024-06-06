@@ -1,14 +1,10 @@
 package mage.cards.b;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.CardsInControllerLibraryCount;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
 import mage.game.permanent.token.FractalToken;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -22,7 +18,7 @@ public final class BodyOfResearch extends CardImpl {
 
         // Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of cards in your library.
         this.getSpellAbility().addEffect(FractalToken.getEffect(
-                BodyOfResearchValue.instance, "Put X +1/+1 counters on it, " +
+                CardsInControllerLibraryCount.instance, "Put X +1/+1 counters on it, " +
                         "where X is the number of cards in your library"
         ));
     }
@@ -34,25 +30,5 @@ public final class BodyOfResearch extends CardImpl {
     @Override
     public BodyOfResearch copy() {
         return new BodyOfResearch(this);
-    }
-}
-
-enum BodyOfResearchValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Player player = game.getPlayer(sourceAbility.getControllerId());
-        return player != null ? player.getLibrary().size() : 0;
-    }
-
-    @Override
-    public BodyOfResearchValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }

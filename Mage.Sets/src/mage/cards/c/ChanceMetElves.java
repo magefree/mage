@@ -25,7 +25,7 @@ public final class ChanceMetElves extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you scry, put a +1/+1 counter on Chance-Met Elves. This ability triggers only once each turn.
-        this.addAbility(new ScryTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())).setTriggersOnceEachTurn(true));
+        this.addAbility(new ScryTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())).setTriggersLimitEachTurn(1));
     }
 
     private ChanceMetElves(final ChanceMetElves card) {

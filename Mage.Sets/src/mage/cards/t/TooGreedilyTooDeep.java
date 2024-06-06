@@ -68,7 +68,7 @@ class TooGreedilyTooDeepEffect extends OneShotEffect {
         game.getState().processAction(game);
         Permanent returnedCreature = game.getPermanent(card.getId());
         if (returnedCreature != null && returnedCreature.getPower().getValue() > 0) {
-            for (Permanent creature : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 if (!creature.getId().equals(returnedCreature.getId())) {
                     creature.damage(returnedCreature.getPower().getValue(), returnedCreature.getId(), source, game, false, true);
                 }

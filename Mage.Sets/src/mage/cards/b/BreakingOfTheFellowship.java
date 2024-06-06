@@ -1,7 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -20,8 +18,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Susucr
  */
 public final class BreakingOfTheFellowship extends CardImpl {
@@ -113,7 +112,7 @@ class BreakingOfTheFellowshipFirstTarget extends TargetCreaturePermanent {
             int possibleTargets = 0;
             MageObject sourceObject = game.getObject(source.getId());
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllingPlayerId, game)) {
-                if (permanent.canBeTargetedBy(sourceObject, controllerId, game)) {
+                if (permanent.canBeTargetedBy(sourceObject, controllerId, source, game)) {
                     possibleTargets++;
                 }
             }
@@ -130,7 +129,7 @@ class BreakingOfTheFellowshipFirstTarget extends TargetCreaturePermanent {
                 int possibleTargets = 0;
                 MageObject sourceObject = game.getObject(source);
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                    if (permanent.canBeTargetedBy(sourceObject, controllingPlayerId, game)) {
+                    if (permanent.canBeTargetedBy(sourceObject, controllingPlayerId, source, game)) {
                         possibleTargets++;
                     }
                 }

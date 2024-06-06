@@ -122,7 +122,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
 
                     // add all permanents not targeted yet to the third pile
                     StringBuilder message = new StringBuilder(currentPlayer.getLogName()).append(" pile 3: ");
-                    for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(currentPlayer.getId())) {
+                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(currentPlayer.getId())) {
                         if (!playerPiles.get(1).contains(permanent.getId()) && !playerPiles.get(2).contains(permanent.getId())) {
                             playerPiles.get(3).add(permanent.getId());
                             message.append(permanent.getName()).append(' ');

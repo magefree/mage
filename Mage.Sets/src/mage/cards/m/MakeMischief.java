@@ -23,7 +23,7 @@ public final class MakeMischief extends CardImpl {
         // It has "When this creature dies, it deals 1 damage to any target."
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new DevilToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new DevilToken()).withTextOptions(true));
     }
 
     private MakeMischief(final MakeMischief card) {

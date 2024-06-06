@@ -61,7 +61,7 @@ class SharaeOfNumbingDepthsTriggeredAbility extends TriggeredAbilityImpl {
 
     SharaeOfNumbingDepthsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        this.setTriggersOnceEachTurn(true);
+        this.setTriggersLimitEachTurn(1);
         setTriggerPhrase("Whenever you tap one or more untapped creatures your opponents control, ");
     }
 

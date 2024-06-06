@@ -14,7 +14,6 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class ForgeBoss extends CardImpl {
@@ -36,7 +35,7 @@ public final class ForgeBoss extends CardImpl {
         // Whenever you sacrifice one or more other creatures, Forge Boss deals 2 damage to each opponent. This ability triggers only once each turn.
         this.addAbility(new SacrificePermanentTriggeredAbility(
                 new DamagePlayersEffect(2, TargetController.OPPONENT), filter
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
     }
 
     private ForgeBoss(final ForgeBoss card) {

@@ -49,7 +49,7 @@ public final class MirelurkQueen extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                         .concatBy(", then")
         );
-        triggeredAbility.setTriggersOnceEachTurn(true);
+        triggeredAbility.setTriggersLimitEachTurn(1);
         this.addAbility(triggeredAbility);
     }
 

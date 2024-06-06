@@ -75,6 +75,11 @@ public final class MtgJsonService {
         return findReference(CardHolder.cards, name);
     }
 
+    public static MtgJsonCard cardByClassName(String classFullName) {
+        String shortName = classFullName.replaceAll(".*\\.", "").toLowerCase(Locale.ENGLISH);
+        return findReference(CardHolder.cardsByClasses, shortName);
+    }
+
     public static List<MtgJsonCard> cardsFromSet(String setCode, String name) {
         MtgJsonSet set = findReference(SetHolder.sets, setCode);
         if (set == null) {
@@ -179,7 +184,8 @@ public final class MtgJsonService {
     }
 
     private static final class CardHolder {
-        private static final Map<String, MtgJsonCard> cards;
+        private static final Map<String, MtgJsonCard> cards; // key: card name like Grizzly Bears
+        private static final Map<String, MtgJsonCard> cardsByClasses; // key: short class name in lower case like grizzlybears
 
         static {
             try {
@@ -208,6 +214,14 @@ public final class MtgJsonService {
                 cards.keySet().removeAll(keysToDelete);
 
                 addAliases(cards);
+
+                // create index for class names searching
+                // lower case with ascii symbols without space
+                cardsByClasses = new HashMap<>(cards.size());
+                cards.forEach((name, card) -> {
+                    String className = name.replaceAll("[^ -~]|[ ]", "").toLowerCase(Locale.ENGLISH);
+                    cardsByClasses.put(className, card);
+                });
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -1,9 +1,5 @@
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -14,8 +10,12 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Topple extends CardImpl {
@@ -72,7 +72,7 @@ class ToppleTargetCreature extends TargetCreaturePermanent {
         List<Permanent> activePermanents = game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game);
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(source);
-        if(targetSource == null){
+        if (targetSource == null) {
             return possibleTargets;
         }
         for (Permanent permanent : activePermanents) {
@@ -81,7 +81,7 @@ class ToppleTargetCreature extends TargetCreaturePermanent {
             }
         }
         for (Permanent permanent : activePermanents) {
-            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                 if (permanent.getPower().getValue() == maxPower) {
                     possibleTargets.add(permanent.getId());
                 }

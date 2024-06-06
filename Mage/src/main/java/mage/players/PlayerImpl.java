@@ -337,7 +337,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.commandersIds = new HashSet<>(player.getCommandersIds());
 
         this.abilities = player.getAbilities().copy();
-        this.counters = player.getCounters().copy();
+        this.counters = player.getCountersAsCopy();
 
         this.landsPlayed = player.getLandsPlayed();
         this.landsPerTurn = player.getLandsPerTurn();
@@ -531,8 +531,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public Counters getCounters() {
-        return counters;
+    public Counters getCountersAsCopy() {
+        return counters.copy();
     }
 
     @Override
@@ -687,11 +687,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
+    public boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game) {
         if (this.hasLost() || this.hasLeft()) {
             return false;
         }
-        if (source != null) {
+        if (sourceObject != null) {
             if (abilities.containsKey(ShroudAbility.getInstance().getId())
                     && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, null, sourceControllerId, game).isEmpty()) {
                 return false;
@@ -703,17 +703,17 @@ public abstract class PlayerImpl implements Player, Serializable {
                     && abilities.stream()
                     .filter(HexproofBaseAbility.class::isInstance)
                     .map(HexproofBaseAbility.class::cast)
-                    .anyMatch(ability -> ability.checkObject(source, game))) {
+                    .anyMatch(ability -> ability.checkObject(sourceObject, source, game))) {
                 return false;
             }
 
-            if (hasProtectionFrom(source, game)) {
+            if (hasProtectionFrom(sourceObject, game)) {
                 return false;
             }
 
             // example: Peace Talks
             return !game.getContinuousEffects().preventedByRuleModification(
-                    new TargetEvent(this, source.getId(), sourceControllerId),
+                    new TargetEvent(this, sourceObject.getId(), sourceControllerId),
                     null,
                     game,
                     true
@@ -1886,8 +1886,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void phasing(Game game) {
         //20091005 - 502.1
-        List<Permanent> phasedOut = game.getBattlefield().getPhasedOut(game, playerId);
-        for (Permanent permanent : game.getBattlefield().getPhasedIn(game, playerId)) {
+        List<Permanent> phasedOut = game.getBattlefield().getPhasedOut(playerId);
+        for (Permanent permanent : game.getBattlefield().getPhasingOut(game, playerId)) {
             // 502.15i When a permanent phases out, any local enchantments or Equipment
             // attached to that permanent phase out at the same time. This alternate way of
             // phasing out is known as phasing out "indirectly." An enchantment or Equipment
@@ -2369,7 +2369,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 );
                 addingOneEvent.setFlag(isEffectFlag);
                 if (!game.replaceEvent(addingOneEvent)) {
-                    getCounters().addCounter(eventCounter);
+                    counters.addCounter(eventCounter);
                     GameEvent addedOneEvent = GameEvent.getEvent(
                             GameEvent.EventType.COUNTER_ADDED, playerId, source,
                             playerAddingCounters, counter.getName(), 1
@@ -2396,9 +2396,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
+    public void loseCounters(String counterName, int amount, Ability source, Game game) {
 
-        GameEvent removeCountersEvent = new RemoveCountersEvent(name, this, source, amount, false);
+        GameEvent removeCountersEvent = new RemoveCountersEvent(counterName, this, source, amount, false);
         if (game.replaceEvent(removeCountersEvent)) {
             return;
         }
@@ -2406,20 +2406,54 @@ public abstract class PlayerImpl implements Player, Serializable {
         int finalAmount = 0;
         for (int i = 0; i < amount; i++) {
 
-            GameEvent event = new RemoveCounterEvent(name, this, source, false);
+            GameEvent event = new RemoveCounterEvent(counterName, this, source, false);
             if (game.replaceEvent(event)) {
                 continue;
             }
 
-            if (!counters.removeCounter(name, 1)) {
+            if (!counters.removeCounter(counterName, 1)) {
                 break;
             }
-            event = new CounterRemovedEvent(name, this, source, false);
+            event = new CounterRemovedEvent(counterName, this, source, false);
             game.fireEvent(event);
             finalAmount++;
         }
-        GameEvent event = new CountersRemovedEvent(name, this, source, finalAmount, false);
+
+        GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, false);
         game.fireEvent(event);
+    }
+
+    @Override
+    public int loseAllCounters(Ability source, Game game) {
+        int amountBefore = getCountersTotalCount();
+        for (Counter counter : getCountersAsCopy().values()) {
+            loseCounters(counter.getName(), counter.getCount(), source, game);
+        }
+        int amountAfter = getCountersTotalCount();
+        return Math.max(0, amountBefore - amountAfter);
+    }
+
+    @Override
+    public int loseAllCounters(String counterName, Ability source, Game game) {
+        int amountBefore = getCountersCount(counterName);
+        loseCounters(counterName, amountBefore, source, game);
+        int amountAfter = getCountersCount(counterName);
+        return Math.max(0, amountBefore - amountAfter);
+    }
+
+    @Override
+    public int getCountersCount(CounterType counterType) {
+        return counters.getCount(counterType);
+    }
+
+    @Override
+    public int getCountersCount(String counterName) {
+        return counters.getCount(counterName);
+    }
+
+    @Override
+    public int getCountersTotalCount() {
+        return counters.getTotalCount();
     }
 
     @Override

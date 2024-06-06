@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -29,8 +28,7 @@ public final class EyelessWatcher extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         // When Eyeless Watcher enters the battlefield, create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
-        Effect effect = new CreateTokenEffect(new EldraziScionToken(), 2);
-        effect.setText("create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C}.\"");
+        Effect effect = new CreateTokenEffect(new EldraziScionToken(), 2).withTextOptions(true);
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 
     }

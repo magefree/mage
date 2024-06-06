@@ -41,6 +41,7 @@ public class MockCard extends CardImpl implements MockableCard {
     public MockCard(CardInfo card) {
         super(null, card.getName());
         this.setExpansionSetCode(card.getSetCode());
+        this.setUsesVariousArt(card.usesVariousArt());
         this.setCardNumber(card.getCardNumber());
         this.setImageFileName(""); // use default
         this.setImageNumber(0);
@@ -50,8 +51,6 @@ public class MockCard extends CardImpl implements MockableCard {
         this.cardType = card.getTypes();
         this.subtype = card.getSubTypes();
         this.supertype = card.getSupertypes();
-
-        this.usesVariousArt = card.usesVariousArt();
 
         //this.manaCost = new ManaCostsImpl<>(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
         this.manaCostLeftStr = card.getManaCosts(CardInfo.ManaCostSide.LEFT);

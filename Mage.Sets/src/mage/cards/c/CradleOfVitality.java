@@ -3,15 +3,13 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -26,7 +24,9 @@ public final class CradleOfVitality extends CardImpl {
 
         // Whenever you gain life, you may pay {1}{W}. If you do, put a +1/+1 counter on target creature for each 1 life you gained.
         Ability ability = new GainLifeControllerTriggeredAbility(new DoIfCostPaid(
-                new CradleOfVitalityEffect(), new ManaCostsImpl<>("{1}{W}")
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), SavedGainedLifeValue.MANY)
+                        .setText("put a +1/+1 counter on target creature for each 1 life you gained"),
+                new ManaCostsImpl<>("{1}{W}")
         ), false, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -39,33 +39,5 @@ public final class CradleOfVitality extends CardImpl {
     @Override
     public CradleOfVitality copy() {
         return new CradleOfVitality(this);
-    }
-}
-
-class CradleOfVitalityEffect extends OneShotEffect {
-
-    CradleOfVitalityEffect() {
-        super(Outcome.Benefit);
-        staticText = "put a +1/+1 counter on target creature for each 1 life you gained";
-    }
-
-    private CradleOfVitalityEffect(final CradleOfVitalityEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CradleOfVitalityEffect copy() {
-        return new CradleOfVitalityEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        int lifeGained = 0;
-        if (this.getValue("gainedLife") != null) {
-            lifeGained = (Integer) this.getValue("gainedLife");
-        }
-        return permanent != null && lifeGained > 0
-                && permanent.addCounters(CounterType.P1P1.createInstance(lifeGained), source.getControllerId(), source, game);
     }
 }

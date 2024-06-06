@@ -67,8 +67,8 @@ public class TargetPermanent extends TargetObject {
             // first for protection from spells or abilities (e.g. protection from colored spells, r1753)
             // second for protection from sources (e.g. protection from artifacts + equip ability)
             if (!isNotTarget()) {
-                if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
-                        || !permanent.canBeTargetedBy(game.getObject(source), controllerId, game)) {
+                if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, source, game)
+                        || !permanent.canBeTargetedBy(game.getObject(source), controllerId, source, game)) {
                     return false;
                 }
             }
@@ -108,7 +108,7 @@ public class TargetPermanent extends TargetObject {
         MageObject targetSource = game.getObject(source);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
             if (!targets.containsKey(permanent.getId())) {
-                if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     count++;
                     if (count >= remainingTargets) {
                         return true;
@@ -155,7 +155,7 @@ public class TargetPermanent extends TargetObject {
         MageObject targetSource = game.getObject(source);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
             if (!targets.containsKey(permanent.getId())) {
-                if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     possibleTargets.add(permanent.getId());
                 }
             }

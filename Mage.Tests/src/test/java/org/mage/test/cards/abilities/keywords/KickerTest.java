@@ -13,7 +13,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class KickerTest extends CardTestPlayerBase {
 
-    /**
+    /*
      * 702.32. Kicker 702.32a Kicker is a static ability that functions while
      * the spell with kicker is on the stack. “Kicker [cost]” means “You may pay
      * an additional [cost] as you cast this spell.” Paying a spell's kicker
@@ -722,4 +722,49 @@ public class KickerTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Brain in a Jar", 1);
     }
+
+    @Test
+    public void test_ConditionOnStackNotKicked() {
+        String scourge = "Scourge of the Skyclaves"; // 1B Creature
+        /* Kicker {4}{B}
+        When you cast this spell, if it was kicked, each player loses half their life, rounded up.
+        Scourge of the Skyclaves’s power and toughness are each equal to 20 minus the highest life total among players.
+         */
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, scourge);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, scourge);
+        setChoice(playerA, false); // no kicker
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, scourge, 1);
+    }
+
+    @Test
+    public void test_ConditionOnStackKicked() {
+        String scourge = "Scourge of the Skyclaves"; // 1B Creature
+        /* Kicker {4}{B}
+        When you cast this spell, if it was kicked, each player loses half their life, rounded up.
+        Scourge of the Skyclaves’s power and toughness are each equal to 20 minus the highest life total among players.
+         */
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.HAND, playerA, scourge);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, scourge);
+        setChoice(playerA, true); // kicked
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 10);
+        assertLife(playerB, 10);
+        assertPowerToughness(playerA, scourge, 10, 10);
+    }
+
 }

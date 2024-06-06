@@ -4,7 +4,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PhantomPreventionEffect;
+import mage.abilities.effects.PreventDamageAndRemoveCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,9 @@ public final class PhantomWurm extends CardImpl {
                 "with four +1/+1 counters on it"));
 
         // If damage would be dealt to Phantom Wurm, prevent that damage. Remove a +1/+1 counter from Phantom Wurm.
-        this.addAbility(new SimpleStaticAbility(new PhantomPreventionEffect()), PhantomPreventionEffect.createWatcher());
+        this.addAbility(new SimpleStaticAbility(
+                new PreventDamageAndRemoveCountersEffect(false, false, false).withPhantomText()
+        ), PreventDamageAndRemoveCountersEffect.createWatcher());
     }
 
     private PhantomWurm(final PhantomWurm card) {

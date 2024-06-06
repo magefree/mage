@@ -48,6 +48,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private static final String ALL_MODERN_IMAGES = "- MODERN images (can be slow)";
     private static final String ALL_STANDARD_IMAGES = "- STANDARD images";
     private static final String ALL_TOKENS = "- TOKEN images";
+    private static final String ALL_BASICS = "- BASIC LAND images";
+
+    private static final List<String> basicList = Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest");
 
     private static final int MAX_ERRORS_COUNT_BEFORE_CANCEL = 50;
 
@@ -71,15 +74,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private Proxy proxy = Proxy.NO_PROXY;
 
     enum DownloadSources {
-        WIZARDS("1. wizards.com - low quality CARDS, multi-language, slow download", WizardCardsImageSource.instance),
-        TOKENS("2. tokens.mtg.onl - high quality TOKENS", TokensMtgImageSource.instance),
-        SCRYFALL("3. scryfall.com - high quality CARDS and TOKENS, multi-language", ScryfallImageSource.instance),
-        MAGIDEX("4. magidex.com - high quality CARDS", MagidexImageSource.instance),
-        GRAB_BAG("5. GrabBag - STAR WARS cards and tokens", GrabbagImageSource.instance),
-        MYTHICSPOILER("6. mythicspoiler.com", MythicspoilerComSource.instance),
-        ALTERNATIVE("7. alternative.mtg.onl", AltMtgOnlTokensImageSource.instance),
-        COPYPASTE("8. Copy and Paste Image URLs", CopyPasteImageSource.instance);
-        // MTG_ONL("mtg.onl", MtgOnlTokensImageSource.instance), Not working correctly yet
+        WIZARDS("1. wizards.com - low quality, cards only, multi-language", WizardCardsImageSource.instance),
+        SCRYFALL_BIG("2a. scryfall.com - BIG: high quality, multi-language", ScryfallImageSource.getInstance()),
+        SCRYFALL_SMALL("2b. scryfall.com - small: low quality, multi-language", ScryfallImageSourceSmall.getInstance()),
+        GRAB_BAG("3. GrabBag - unofficial STAR WARS cards and tokens", GrabbagImageSource.instance),
+        COPYPASTE("4. Experimental - copy and paste image URLs", CopyPasteImageSource.instance); // TODO: need rework for user friendly GUI
 
         private final String text;
         private final CardImageSource source;
@@ -160,8 +159,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         // SOURCES - scryfall is default source
         uiDialog.getSourcesCombo().setModel(new DefaultComboBoxModel(DownloadSources.values()));
-        uiDialog.getSourcesCombo().setSelectedItem(DownloadSources.SCRYFALL);
-        selectedSource = ScryfallImageSource.instance;
+        uiDialog.getSourcesCombo().setSelectedItem(DownloadSources.SCRYFALL_BIG);
+        selectedSource = ScryfallImageSource.getInstance();
         uiDialog.getSourcesCombo().addItemListener((ItemEvent event) -> {
             if (event.getStateChange() == ItemEvent.SELECTED) {
                 comboboxSourceSelected(event);
@@ -303,6 +302,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             setNames.add(ALL_IMAGES);
             setNames.add(ALL_MODERN_IMAGES);
             setNames.add(ALL_STANDARD_IMAGES);
+            setNames.add(ALL_BASICS);
         }
         if (selectedSource.isTokenSource()) {
             setNames.add(ALL_TOKENS);
@@ -328,6 +328,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         // find selected sets
         selectedSets.clear();
         boolean onlyTokens = false;
+        boolean onlyBasics = false;
         List<String> formatSets;
         List<String> sourceSets = selectedSource.getSupportedSets();
         switch (selectedItem) {
@@ -350,6 +351,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         .forEachOrdered(selectedSets::add);
                 break;
 
+            case ALL_BASICS:
+                selectedSets.addAll(selectedSource.getSupportedSets());
+                onlyBasics = true;
+                break;
+
             case ALL_TOKENS:
                 selectedSets.addAll(selectedSource.getSupportedSets());
                 onlyTokens = true;
@@ -370,7 +376,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         int numberCardImagesAvailable = 0;
         for (CardDownloadData data : cardsMissing) {
             if (data.isToken()) {
-                if (selectedSource.isTokenSource()
+                if (!onlyBasics
+                        && selectedSource.isTokenSource()
                         && selectedSource.isTokenImageProvided(data.getSet(), data.getName(), data.getImageNumber())
                         && selectedSets.contains(data.getSet())) {
                     numberTokenImagesAvailable++;
@@ -381,8 +388,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         && selectedSource.isCardSource()
                         && selectedSource.isCardImageProvided(data.getSet(), data.getName())
                         && selectedSets.contains(data.getSet())) {
-                    numberCardImagesAvailable++;
-                    cardsDownloadQueue.add(data);
+                    if (!onlyBasics
+                            || basicList.contains(data.getName())) { 
+                        numberCardImagesAvailable++;
+                        cardsDownloadQueue.add(data);
+                    }
                 }
             }
         }
@@ -715,7 +725,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         DownloadTask(CardDownloadData card, String baseUrl, String actualFilename, int count) {
             this.card = card;
-            this.urls = new CardImageUrls(baseUrl, null);
+            this.urls = new CardImageUrls(baseUrl);
             this.count = count;
             this.actualFilename = actualFilename;
             this.useSpecifiedPaths = true;

@@ -33,7 +33,7 @@ public final class FreestriderLookout extends CardImpl {
         this.addAbility(new CommittedCrimeTriggeredAbility(new LookLibraryAndPickControllerEffect(
                 5, 1, StaticFilters.FILTER_CARD_LAND_A,
                 PutCards.BATTLEFIELD_TAPPED, PutCards.BOTTOM_RANDOM
-        )).setTriggersOnceEachTurn(true));
+        )).setTriggersLimitEachTurn(1));
     }
 
     private FreestriderLookout(final FreestriderLookout card) {

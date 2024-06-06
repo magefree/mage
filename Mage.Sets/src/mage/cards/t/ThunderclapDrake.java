@@ -53,7 +53,7 @@ public final class ThunderclapDrake extends CardImpl {
                         new CopyNextSpellDelayedTriggeredAbility(
                                 StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY,
                                 new ThunderclapDrakeEffect(),
-                                "When you cast your next instant or sorcery spell this turn, "
+                                "When you next cast an instant or sorcery spell this turn, "
                                         + "copy it for each time you've cast your commander from the command zone this game. "
                                         + "You may choose new targets for the copies."
                         )

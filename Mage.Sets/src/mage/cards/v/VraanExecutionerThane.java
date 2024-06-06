@@ -32,7 +32,7 @@ public final class VraanExecutionerThane extends CardImpl {
         Ability ability = new DiesCreatureTriggeredAbility(
                 new LoseLifeOpponentsEffect(2), false,
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        ).setTriggerPhrase("Whenever one or more other creatures you control die, ").setTriggersOnceEachTurn(true);
+        ).setTriggerPhrase("Whenever one or more other creatures you control die, ").setTriggersLimitEachTurn(1);
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);
     }

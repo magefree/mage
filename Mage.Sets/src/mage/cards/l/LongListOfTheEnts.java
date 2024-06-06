@@ -90,7 +90,7 @@ class LongListOfTheEntsEffect extends OneShotEffect {
 
     LongListOfTheEntsEffect() {
         super(Outcome.Benefit);
-        staticText = "note a creature type that hasn't been noted for {this}. When you cast your next creature spell " +
+        staticText = "note a creature type that hasn't been noted for {this}. When you next cast a creature spell " +
                 "of that type this turn, that creature enters the battlefield with an additional +1/+1 counter on it.";
     }
 

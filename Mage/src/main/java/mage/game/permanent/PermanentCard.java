@@ -145,10 +145,10 @@ public class PermanentCard extends PermanentImpl {
         this.rarity = card.getRarity();
 
         this.setExpansionSetCode(card.getExpansionSetCode());
+        this.setUsesVariousArt(card.getUsesVariousArt());
         this.setCardNumber(card.getCardNumber());
         this.setImageFileName(card.getImageFileName());
         this.setImageNumber(card.getImageNumber());
-        this.usesVariousArt = card.getUsesVariousArt();
 
         if (card.getSecondCardFace() != null) {
             this.secondSideCardClazz = card.getSecondCardFace().getClass();
@@ -188,6 +188,7 @@ public class PermanentCard extends PermanentImpl {
             setManifested(false);
             setMorphed(false);
             setDisguised(false);
+            setCloaked(false);
             return true;
         }
         return false;

@@ -42,7 +42,7 @@ public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (getAffectedObjectsSet() && game.getPlayer(source.getControllerId()) != null) {
-            for (Permanent perm : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
             }
         }
@@ -56,7 +56,7 @@ public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl {
         }
 
         if (!getAffectedObjectsSet()) {
-            game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).forEach(Permanent::switchPowerToughness);
+            game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).forEach(Permanent::switchPowerToughness);
         } else {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still gets boost
                 Permanent creature = it.next().getPermanent(game);

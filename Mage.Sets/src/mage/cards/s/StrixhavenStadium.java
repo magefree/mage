@@ -1,8 +1,8 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
+import mage.abilities.common.DealsDamageToYouAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
@@ -13,8 +13,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -34,7 +32,8 @@ public final class StrixhavenStadium extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a creature deals combat damage to you, remove a point counter from Strixhaven Stadium.
-        this.addAbility(new StrixhavenStadiumTriggeredAbility());
+        this.addAbility(new DealsDamageToYouAllTriggeredAbility(StaticFilters.FILTER_PERMANENT_CREATURE,
+                new RemoveCounterSourceEffect(CounterType.POINT.createInstance()), true));
 
         // Whenever a creature you control deals combat damage to an opponent, put a point counter on Strixhaven Stadium. Then if it has ten or more point counters on it, remove them all and that player loses the game.
         ability = new DealsDamageToAPlayerAllTriggeredAbility(
@@ -53,42 +52,6 @@ public final class StrixhavenStadium extends CardImpl {
     @Override
     public StrixhavenStadium copy() {
         return new StrixhavenStadium(this);
-    }
-}
-
-class StrixhavenStadiumTriggeredAbility extends TriggeredAbilityImpl {
-
-    StrixhavenStadiumTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.POINT.createInstance()));
-    }
-
-    private StrixhavenStadiumTriggeredAbility(final StrixhavenStadiumTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public StrixhavenStadiumTriggeredAbility copy() {
-        return new StrixhavenStadiumTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-        return isControlledBy(damageEvent.getTargetId())
-                && damageEvent.isCombatDamage()
-                && sourcePermanent != null
-                && sourcePermanent.isCreature(game);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature deals combat damage to you, remove a point counter from {this}.";
     }
 }
 

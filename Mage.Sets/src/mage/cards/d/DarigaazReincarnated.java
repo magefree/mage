@@ -147,19 +147,15 @@ class DarigaazReincarnatedReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (controller == null || card == null) {
             return false;
         }
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (sourceObject instanceof Card) {
-            Card card = (Card) sourceObject;
-            new RemoveCounterSourceEffect(CounterType.EGG.createInstance()).apply(game, source);
-            if (card.getCounters(game).getCount(CounterType.EGG) == 0) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            }
-            return true;
+        new RemoveCounterSourceEffect(CounterType.EGG.createInstance()).apply(game, source);
+        if (card.getCounters(game).getCount(CounterType.EGG) == 0) {
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
-        return false;
+        return true;
     }
 }
 

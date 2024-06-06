@@ -131,6 +131,7 @@
 |Generate|EMBLEM:RVR|Emblem Domri|||DomriRadeEmblem|
 |Generate|EMBLEM:SCD|Emblem Nixilis|||ObNixilisReignitedEmblem|
 |Generate|EMBLEM:SCD|Emblem Sarkhan|||SarkhanTheDragonspeakerEmblem|
+|Generate|EMBLEM:MH3|Emblem Tamiyo|||TamiyoSeasonedScholarEmblem|
 
 # ALL PLANES
 # Usage hints:

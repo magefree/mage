@@ -21,14 +21,13 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author Susucr
  */
 public final class BewitchingLeechcraft extends CardImpl {
 
     public BewitchingLeechcraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        
+
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -42,10 +41,10 @@ public final class BewitchingLeechcraft extends CardImpl {
 
         // Enchanted creature has "If this creature would untap during your untap step, remove a +1/+1 counter from it instead. If you do, untap it."
         this.addAbility(new SimpleStaticAbility(
-            new GainAbilityAttachedEffect(
-                new SimpleStaticAbility(new BewitchingLeechcraftReplacementEffect()),
-                AttachmentType.AURA
-            )
+                new GainAbilityAttachedEffect(
+                        new SimpleStaticAbility(new BewitchingLeechcraftReplacementEffect()),
+                        AttachmentType.AURA
+                )
         ));
     }
 
@@ -64,7 +63,7 @@ class BewitchingLeechcraftReplacementEffect extends ReplacementEffectImpl {
     BewitchingLeechcraftReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "If this creature would untap during your untap step, " +
-            "remove a +1/+1 counter from it instead. If you do, untap it.";
+                "remove a +1/+1 counter from it instead. If you do, untap it.";
     }
 
     private BewitchingLeechcraftReplacementEffect(final BewitchingLeechcraftReplacementEffect effect) {
@@ -84,18 +83,20 @@ class BewitchingLeechcraftReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanentUntapping = game.getPermanent(source.getSourceId());
-        if(!applies(event,source,game)){
+        if (!applies(event, source, game)) {
             return false;
         }
-
+        int amountBefore = permanentUntapping.getCounters(game).getCount(CounterType.P1P1);
+        permanentUntapping.removeCounters(CounterType.P1P1.getName(), 1, source, game);
+        int amountAfter = permanentUntapping.getCounters(game).getCount(CounterType.P1P1);
         // If we could not remove a counter, we are replacing the UNTAP event.
         // If we could remove a counter, we are not replacing the UNTAP, just adding to it.
-        return !permanentUntapping.getCounters(game).removeCounter(CounterType.P1P1, 1);
+        return amountBefore < amountAfter;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return game.getTurnStepType() == PhaseStep.UNTAP
-            && event.getTargetId().equals(source.getSourceId());
+                && event.getTargetId().equals(source.getSourceId());
     }
 }

@@ -40,6 +40,7 @@ public class RadiationEmblem extends Emblem {
         TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_RADIATION, null);
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
             this.setCardNumber("");
             this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());
@@ -65,7 +66,7 @@ enum RadiationCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getCounters().getCount(CounterType.RAD) > 0;
+        return player != null && player.getCountersCount(CounterType.RAD) > 0;
     }
 }
 
@@ -101,13 +102,13 @@ class RadiationEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int amount = player.getCounters().getCount(CounterType.RAD);
+        int amount = player.getCountersCount(CounterType.RAD);
         Cards milled = player.millCards(amount, source, game);
         int countNonLand = milled.count(StaticFilters.FILTER_CARD_NON_LAND, player.getId(), source, game);
         if (countNonLand > 0) {
             // TODO: support gaining life instead with [[Strong, the Brutish Thespian]]
             player.loseLife(countNonLand, game, source, false);
-            player.removeCounters(CounterType.RAD.getName(), countNonLand, source, game);
+            player.loseCounters(CounterType.RAD.getName(), countNonLand, source, game);
         }
         return true;
     }

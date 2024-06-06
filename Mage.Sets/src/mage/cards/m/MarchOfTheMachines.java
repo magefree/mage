@@ -67,7 +67,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
                     affectedObjectList.clear();
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                         if (permanent != null) {
                             affectedObjectList.add(new MageObjectReference(permanent, game));
                             permanent.addCardType(game, CardType.CREATURE);

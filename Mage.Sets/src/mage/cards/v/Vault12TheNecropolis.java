@@ -97,7 +97,7 @@ enum Vault12TheNecropolisValue implements DynamicValue {
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .mapToInt(p -> p.getCounters().getCount(CounterType.RAD))
+                .mapToInt(p -> p.getCountersCount(CounterType.RAD))
                 .sum();
     }
 

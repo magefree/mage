@@ -104,7 +104,7 @@ public class GathererSets implements Iterable<DownloadJob> {
             "UNF", "BRO", "BRC", "BOT", "30A", "J22", "SCD", "DMR", "ONE", "ONC",
             "MOM", "MOC", "MUL", "MAT", "LTR", "CMM", "WOE", "WHO", "RVR", "WOT",
             "WOC", "SPG", "LCI", "LCC", "REX", "PIP", "MKM", "MKC", "CLU", "OTJ",
-            "OTC", "OTP", "BIG", "MH3", "ACR", "BLB"
+            "OTC", "OTP", "BIG", "MH3", "M3C", "ACR", "BLB"
             // "HHO", "ANA" -- do not exist on gatherer
     };
 
