@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import java.util.List;
 import java.util.Stack;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -7,6 +8,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -104,26 +106,16 @@ class SunkenPalaceEffect extends OneShotEffect {
         game.informPlayers("sourceSouceId: " + sourceSouceId);
         game.informPlayers("sourceId: " + source.getId());
 
-        for (StackObject stackObject : game.getStack()) {
-            game.informPlayers("stackObject: " + stackObject.getId() + " " + stackObject.getName() 
-            + " stackobject sourceId: " + stackObject.getSourceId());
-            game.informPlayers("StackObject: " + stackObject.getStackAbility().getSourceId());
-            game.informPlayers("-------------------");
-        }
-
-        if (manaSpentDelayedTriggeredAbility == null) {
-            game.informPlayers("manaspend ability null");
+        List<UUID> target = getTargetPointer().getTargets(game, source);
+        if (target == null) {
+            game.informPlayers("manaspend ability null ");
             return false;
         }
-
-        UUID triggeredSourceId = manaSpentDelayedTriggeredAbility.getSourceId();
-
-        if (triggeredSourceId == null) {
-            return false;
-        }
-        StackObject stackObject = game.getStack().getStackObject(triggeredSourceId);
+        game.informPlayers("manaspend ability null "+ target.toString());
+        StackObject stackObject = game.getStack().getStackObject(target.get(0));
 
         if (stackObject == null) {
+            game.informPlayers("Stackobject null");
             return false;
         }
         stackObject.createCopyOnStack(game, source, source.getControllerId(), true);

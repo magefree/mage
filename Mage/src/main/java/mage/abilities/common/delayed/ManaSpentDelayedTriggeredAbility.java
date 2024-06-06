@@ -13,6 +13,7 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -67,6 +68,16 @@ public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
         StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+        for ( Effect effect : getEffects()) {
+            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+        }
+
+        if (spell != null) {
+            game.informPlayers("Spell name: " + spell.getName());
+        }
+        if (stackObject != null) {
+            game.informPlayers("Stack object: " + stackObject.getName());
+        }
 
         // Need to check both the stackObject and the spell because a spell isnt always
         // a ability
