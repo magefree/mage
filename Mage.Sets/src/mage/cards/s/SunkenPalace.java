@@ -57,12 +57,9 @@ public final class SunkenPalace extends CardImpl {
 
         Effect effect = new CopyTargetStackObjectEffect(true);
         effect.setText("copy that spell or ability");
-        ManaSpentDelayedTriggeredAbility manaSpentDelayedTriggeredAbility = new ManaSpentDelayedTriggeredAbility(null,
-                StaticFilters.FILTER_SPELL_OR_ABILITY);
+        ManaSpentDelayedTriggeredAbility manaSpentDelayedTriggeredAbility = new ManaSpentDelayedTriggeredAbility(new CopyTargetStackObjectEffect(),
+                StaticFilters.FILTER_SPELL_OR_ABILITY, true);
 
-        SunkenPalaceEffect sunkenPalaceEffect = new SunkenPalaceEffect(manaSpentDelayedTriggeredAbility);
-
-        manaSpentDelayedTriggeredAbility.addEffect(sunkenPalaceEffect);
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(manaSpentDelayedTriggeredAbility));
         this.addAbility(ability);
 
@@ -80,11 +77,8 @@ public final class SunkenPalace extends CardImpl {
 
 class SunkenPalaceEffect extends OneShotEffect {
 
-    ManaSpentDelayedTriggeredAbility manaSpentDelayedTriggeredAbility;
-
-    SunkenPalaceEffect(ManaSpentDelayedTriggeredAbility manaSpentDelayedTriggeredAbility) {
+    SunkenPalaceEffect() {
         super(Outcome.Benefit);
-        this.manaSpentDelayedTriggeredAbility = manaSpentDelayedTriggeredAbility;
         staticText = "copy that spell or ability. You may choose new targets for the copy";
     }
 
@@ -101,7 +95,6 @@ class SunkenPalaceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
 
         // This is always null I need to get the sourceId of the stackObject that
-        // triggered this the manaSpentDelayedTriggeredAbility
         UUID  sourceSouceId = source.getSourceId();
         game.informPlayers("sourceSouceId: " + sourceSouceId);
         game.informPlayers("sourceId: " + source.getId());

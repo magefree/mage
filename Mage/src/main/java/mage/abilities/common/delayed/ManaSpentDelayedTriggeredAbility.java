@@ -23,6 +23,7 @@ import java.util.UUID;
 public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private final FilterStackObject filter;
+    private boolean setTarget;
 
     public ManaSpentDelayedTriggeredAbility(Effect effect, FilterStackObject filter) {
         super(effect, Duration.Custom, true, false);
@@ -36,9 +37,17 @@ public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("When you spend this mana to cast " + filter.getMessage() + ", ");
     }
 
+    public ManaSpentDelayedTriggeredAbility(Effect effect, FilterStackObject filter, boolean setTarget) {
+        super(effect, Duration.Custom, true, false);
+        this.filter = filter;
+        this.setTarget = setTarget;
+        setTriggerPhrase("When you spend this mana to cast " + filter.getMessage() + ", ");
+    }
+
     private ManaSpentDelayedTriggeredAbility(final ManaSpentDelayedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
+        this.setTarget = ability.setTarget;
     }
 
     @Override
@@ -68,15 +77,11 @@ public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
         StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-        for ( Effect effect : getEffects()) {
-            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-        }
 
-        if (spell != null) {
-            game.informPlayers("Spell name: " + spell.getName());
-        }
-        if (stackObject != null) {
-            game.informPlayers("Stack object: " + stackObject.getName());
+        if (this.setTarget) {
+            for (Effect effect : getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+            }
         }
 
         // Need to check both the stackObject and the spell because a spell isnt always
