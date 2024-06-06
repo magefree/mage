@@ -43,11 +43,6 @@ public class ManaSymbols extends ArrayList<ManaSymbol> {
         put(ManaSymbol.HYBRID_UR, new HybridManaCost(ColoredManaSymbol.U, ColoredManaSymbol.R));
         put(ManaSymbol.HYBRID_WB, new HybridManaCost(ColoredManaSymbol.W, ColoredManaSymbol.B));
         put(ManaSymbol.HYBRID_WU, new HybridManaCost(ColoredManaSymbol.W, ColoredManaSymbol.U));
-        put(ManaSymbol.HYBRID_CW, new HybridManaCost(null, ColoredManaSymbol.W));
-        put(ManaSymbol.HYBRID_CU, new HybridManaCost(null, ColoredManaSymbol.U));
-        put(ManaSymbol.HYBRID_CB, new HybridManaCost(null, ColoredManaSymbol.B));
-        put(ManaSymbol.HYBRID_CR, new HybridManaCost(null, ColoredManaSymbol.R));
-        put(ManaSymbol.HYBRID_CG, new HybridManaCost(null, ColoredManaSymbol.G));
     }};
 
     /**

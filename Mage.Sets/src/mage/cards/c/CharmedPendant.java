@@ -143,6 +143,8 @@ class CharmedPendantManaEffect extends ManaEffect {
                                 }
                                 if (manaCost instanceof MonoHybridManaCost) {
                                     newManaCosts.add(new ColoredManaCost(((MonoHybridManaCost) manaCost).getManaColor()));
+                                } else if (manaCost instanceof ColorlessHybridManaCost) {
+                                    newManaCosts.add(new ColoredManaCost(((ColorlessHybridManaCost) manaCost).getManaColor()));
                                 } else {
                                     newManaCosts.add(manaCost.copy());
                                 }

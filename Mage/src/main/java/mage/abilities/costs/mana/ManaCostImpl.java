@@ -151,14 +151,15 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         return false;
     }
 
-    protected void assignColorless(Ability ability, Game game, ManaPool pool, int mana, Cost costToPay) {
+    protected boolean assignColorless(Ability ability, Game game, ManaPool pool, int mana, Cost costToPay) {
         int conditionalCount = pool.getConditionalCount(ability, game, null, costToPay);
-        while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
-            if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseColorless();
-            }
-            break;
+        if (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)
+                && pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+            this.payment.increaseColorless();
+            return true;
         }
+
+        return false;
     }
 
     protected boolean assignGeneric(Ability ability, Game game, ManaPool pool, int mana, FilterMana filterMana, Cost costToPay) {

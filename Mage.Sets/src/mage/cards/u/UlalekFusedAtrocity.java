@@ -91,7 +91,7 @@ class UlalekFusedAtrocityEffect extends OneShotEffect {
                 .stream()
                 .filter(obj -> !(obj instanceof Spell))
                 .filter(obj -> obj.isControlledBy(source.getControllerId()))
-                .filter(obj -> !obj.getId().equals(source.getSourceId()))
+                .filter(obj -> !obj.getId().equals(source.getId()))
                 .collect(Collectors.toList());
         for (StackObject obj : abilities) {
             obj.createCopyOnStack(game, source, source.getControllerId(), true);
