@@ -37,7 +37,8 @@ public final class ThrivingSkyclaw extends CardImpl {
 
         // Whenever Thriving Skyclaw attacks, you may pay {E}{E}{E}. If you do, put a +1/+1 counter on it.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new PayEnergyCost(3)
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on it"),
+                new PayEnergyCost(3)
         )));
     }
 

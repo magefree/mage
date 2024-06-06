@@ -92,10 +92,9 @@ class GiveControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = source.getSourceObjectIfItStillExists(game);
-        if (mageObject != null
-                && mageObject instanceof Permanent) {
-            return ((Permanent) mageObject).changeControllerId(source.getFirstTarget(), game, source);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent != null) {
+            return permanent.changeControllerId(source.getFirstTarget(), game, source);
         } else {
             discard();
         }
@@ -108,7 +107,7 @@ class CustodyBattleUnlessPaysEffect extends OneShotEffect {
 
     protected Cost cost;
 
-    public CustodyBattleUnlessPaysEffect(Cost cost) {
+    CustodyBattleUnlessPaysEffect(Cost cost) {
         super(Outcome.Sacrifice);
         staticText = "target opponent gains control of {this} unless you sacrifice a land";
         this.cost = cost;

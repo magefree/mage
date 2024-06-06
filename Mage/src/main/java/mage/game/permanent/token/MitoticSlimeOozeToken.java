@@ -9,10 +9,10 @@ import mage.constants.SubType;
 /**
  * @author spjspj
  */
-public final class Ooze2Token extends TokenImpl {
+public final class MitoticSlimeOozeToken extends TokenImpl {
 
-    public Ooze2Token() {
-        super("Ooze Token", "2/2 green Ooze creature token. It has \"When this creature dies, create two 1/1 green Ooze creature tokens.\"");
+    public MitoticSlimeOozeToken() {
+        super("Ooze Token", "2/2 green Ooze creature tokens. They have \"When this creature dies, create two 1/1 green Ooze creature tokens.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.OOZE);
         color.setGreen(true);
@@ -21,11 +21,11 @@ public final class Ooze2Token extends TokenImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new OozeToken(1, 1), 2), false));
     }
 
-    private Ooze2Token(final Ooze2Token token) {
+    private MitoticSlimeOozeToken(final MitoticSlimeOozeToken token) {
         super(token);
     }
 
-    public Ooze2Token copy() {
-        return new Ooze2Token(this);
+    public MitoticSlimeOozeToken copy() {
+        return new MitoticSlimeOozeToken(this);
     }
 }

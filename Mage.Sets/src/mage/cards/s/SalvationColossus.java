@@ -40,7 +40,7 @@ public final class SalvationColossus extends CardImpl {
         // Whenever you attack, other creatures you control get +2/+2 and gain indestructible until end of turn.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(new BoostControlledEffect(
                 2, 2, Duration.EndOfTurn, true
-        ).setText("other creatures you control get +1/+1"), 1);
+        ).setText("other creatures you control get +2/+2"), 1);
         ability.addEffect(new GainAbilityControlledEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE

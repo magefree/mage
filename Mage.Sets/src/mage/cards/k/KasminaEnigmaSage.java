@@ -85,7 +85,7 @@ class KasminaEnigmaSageGainAbilitiesEffect extends ContinuousEffectImpl {
                 .stream()
                 .filter(LoyaltyAbility.class::isInstance)
                 .collect(Collectors.toList());
-        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
                 source.getControllerId(), source, game
         )) {

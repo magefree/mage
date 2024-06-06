@@ -44,7 +44,7 @@ public final class TamiyoInquisitiveStudent extends CardImpl {
         this.addAbility(new DrawNthCardTriggeredAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.SHE),
                 false, 3
-        ));
+        ).setTriggerPhrase("When you draw your third card in a turn, "));
     }
 
     private TamiyoInquisitiveStudent(final TamiyoInquisitiveStudent card) {

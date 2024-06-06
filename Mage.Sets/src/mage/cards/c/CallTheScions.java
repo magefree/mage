@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -23,8 +22,7 @@ public final class CallTheScions extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // Create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: add {C}."
-        Effect effect = new CreateTokenEffect(new EldraziScionToken(), 2);
-        effect.setText("create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C}.\"");
+        Effect effect = new CreateTokenEffect(new EldraziScionToken(), 2).withTextOptions(true);
         this.getSpellAbility().addEffect(effect);
 
     }

@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -36,7 +36,7 @@ public final class SarpadianSimulacrum extends CardImpl {
                 new ManaCostsImpl<>("{3}{R}")
         );
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

@@ -99,12 +99,9 @@ public class DamageTargetEffect extends OneShotEffect {
         this.sourceName = effect.sourceName;
     }
 
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
+    public DamageTargetEffect withTargetDescription(String targetDescription) {
+        this.targetDescription = targetDescription;
+        return this;
     }
 
     // TODO: this should most likely be refactored to not be needed and always use target pointer.

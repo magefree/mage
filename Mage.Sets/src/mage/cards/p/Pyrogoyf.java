@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class Pyrogoyf extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.LHURGOYF, "{this} or another Lhurgoyf creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.LHURGOYF, "Lhurgoyf creature");
 
     private static final DynamicValue powerValue = CardTypesInGraveyardCount.ALL;
 

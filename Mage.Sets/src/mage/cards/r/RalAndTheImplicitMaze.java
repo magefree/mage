@@ -40,7 +40,8 @@ public final class RalAndTheImplicitMaze extends CardImpl {
         // II -- You may discard a card. If you do, exile the top two cards of your library. You may play them until the end of your next turn.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II,
-                new DoIfCostPaid(new ExileTopXMayPlayUntilEffect(2, Duration.UntilEndOfYourNextTurn), new DiscardCardCost())
+                new DoIfCostPaid(new ExileTopXMayPlayUntilEffect(2, Duration.UntilEndOfYourNextTurn)
+                        .withTextOptions("them", true), new DiscardCardCost())
         );
 
         // III -- Create a Spellgorger Weird token.

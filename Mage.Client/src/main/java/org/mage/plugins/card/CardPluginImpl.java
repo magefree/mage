@@ -186,7 +186,8 @@ public class CardPluginImpl implements CardPlugin {
                         ? firstPanelPerm.getOriginal().getRules()
                         : new ArrayList<>();
                 // Check the names are equal and are creatures with the same summoning sickness
-                if (firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
+                if (firstPanelPerm.getOriginal().isToken() == perm.getOriginal().isToken()
+                        && firstPanelPerm.getOriginal().getName().equals(perm.getOriginal().getName())
                         && stackPower == cardPower && stackToughness == cardToughness
                         && stackAbilities.equals(cardAbilities) && stackCounters.equals(cardCounters)
                         && (!perm.isCreature() || firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm

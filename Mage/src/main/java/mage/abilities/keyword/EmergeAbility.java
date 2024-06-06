@@ -13,8 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,23 +30,17 @@ public class EmergeAbility extends SpellAbility {
     private final ManaCosts<ManaCost> emergeCost;
     public static final String EMERGE_ACTIVATION_CREATURE_REFERENCE = "emergeActivationMOR";
 
-    private static final FilterPermanent SAC_FILTER = new FilterControlledCreaturePermanent();
-
-    static {
-        SAC_FILTER.add(CanBeSacrificedPredicate.instance);
-    }
-
     private final String emergeFromText;
     private final FilterPermanent filter;
 
     public EmergeAbility(Card card, String emergeManaString) {
-        this(card, emergeManaString, SAC_FILTER, "");
+        this(card, emergeManaString, StaticFilters.FILTER_PERMANENT_CREATURE, "");
     }
 
     public EmergeAbility(Card card, String emergeManaString, FilterPermanent filter, String emergeFromText) {
         super(card.getSpellAbility());
 
-        this.filter = filter;
+        this.filter = TargetSacrifice.makeFilter(filter);
         this.emergeFromText = emergeFromText;
 
         this.emergeCost = new ManaCostsImpl<>(emergeManaString);
@@ -90,8 +83,8 @@ public class EmergeAbility extends SpellAbility {
     @Override
     public ManaOptions getMinimumCostToActivate(UUID playerId, Game game) {
         int maxCMC = 0;
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), playerId, this, game)) {
-            int cmc = creature.getManaValue();
+        for (Permanent permanentToSacrifice : game.getBattlefield().getActivePermanents(filter, playerId, this, game)) {
+            int cmc = permanentToSacrifice.getManaValue();
             if (cmc > maxCMC) {
                 maxCMC = cmc;
             }

@@ -47,7 +47,7 @@ public class ExileSourceCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return source.getSourceObjectIfItStillExists(game) instanceof Card;
+        return source.getSourceCardIfItStillExists(game) != null;
     }
 
     @Override

@@ -80,11 +80,10 @@ class SproutbackTrudgeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (player == null || !(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (player == null || card == null) {
             return false;
         }
-        Card card = (Card) sourceObject;
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
         player.cast(
                 player.chooseAbilityForCast(card, game, false),

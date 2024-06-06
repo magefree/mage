@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -82,7 +83,7 @@ class KudzuEffect extends OneShotEffect {
                 if (game.getState().getZone(enchantedLand.getId()) == Zone.BATTLEFIELD) { // if 2 or more Kudzu's were on a land
                     enchantedLand.destroy(source, game, false);
                 }
-                if (!game.getBattlefield().getAllActivePermanents(CardType.LAND, game).isEmpty()) { //lands are available on the battlefield
+                if (game.getBattlefield().contains(StaticFilters.FILTER_LAND, source, game, 1)) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();
                     target.withNotTarget(true); //not a target, it is chosen
                     Card kudzuCard = game.getCard(source.getSourceId());

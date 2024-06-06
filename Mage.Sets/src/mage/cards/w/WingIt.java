@@ -29,7 +29,7 @@ public final class WingIt extends CardImpl {
                 new AddCountersTargetEffect(CounterType.FLYING.createInstance()).setText("put a flying counter on it"));
 
         // Scry 1.
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.getSpellAbility().addEffect(new ScryEffect(1, false));
     }
 
     private WingIt(final WingIt card) {

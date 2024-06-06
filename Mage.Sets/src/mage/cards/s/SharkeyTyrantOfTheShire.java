@@ -135,8 +135,7 @@ class SharkeyTyrantOfTheShireContinousEffect extends ContinuousEffectImpl {
         if (perm == null) {
             return false;
         }
-        for (Ability ability : game.getState()
-                .getBattlefield()
+        for (Ability ability : game.getBattlefield()
                 .getActivePermanents(filter, source.getControllerId(), source, game)
                 .stream()
                 .map(permanent -> permanent.getAbilities(game))

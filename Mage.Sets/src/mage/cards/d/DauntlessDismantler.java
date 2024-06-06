@@ -84,7 +84,7 @@ class DauntlessDismantlerEffect extends OneShotEffect {
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
 
         boolean destroyed = false;
-        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             destroyed |= permanent.destroy(source, game);
         }
         return destroyed;

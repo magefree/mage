@@ -48,7 +48,7 @@ public final class BespokeBattlewagon extends CardImpl {
         // Pay {E}{E}{E}{E}: Bespoke Battlewagon becomes an artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(new AddCardTypeSourceEffect(
                 Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
-        ), new PayEnergyCost(4)));
+        ).setText("{this} becomes an artifact creature until end of turn"), new PayEnergyCost(4)));
 
         // Crew 4
         this.addAbility(new CrewAbility(4));

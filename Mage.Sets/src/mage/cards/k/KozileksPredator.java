@@ -26,7 +26,7 @@ public final class KozileksPredator extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2).withTextOptions(true), false));
     }
 
     private KozileksPredator(final KozileksPredator card) {

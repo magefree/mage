@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -23,7 +23,7 @@ public final class PhyrexianIronworks extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{R}");
 
         // Whenever you attack, you get {E}.
-        this.addAbility(new AttacksTriggeredAbility(new GetEnergyCountersControllerEffect(1)));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new GetEnergyCountersControllerEffect(1), 1));
 
         // {T}, Pay {E}{E}{E}: Create a 3/3 colorless Phyrexian Golem artifact creature token. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new CreateTokenEffect(new PhyrexianGolemToken()), new TapSourceCost());

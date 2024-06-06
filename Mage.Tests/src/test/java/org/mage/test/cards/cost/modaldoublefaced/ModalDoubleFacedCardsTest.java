@@ -347,7 +347,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        Card card = currentGame.getState().getBattlefield().getAllPermanents()
+        Card card = currentGame.getBattlefield().getAllPermanents()
                 .stream()
                 .filter(p -> CardUtil.haveSameNames(p, "Akoum Warrior", currentGame))
                 .findFirst()
@@ -380,7 +380,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         execute();
 
         assertHandCount(playerA, 0);
-        Card card = currentGame.getState().getBattlefield().getAllPermanents()
+        Card card = currentGame.getBattlefield().getAllPermanents()
                 .stream()
                 .filter(p -> CardUtil.haveSameNames(p, "Ondu Skyruins", currentGame))
                 .findFirst()

@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -68,7 +69,7 @@ public class CopyNextSpellDelayedTriggeredAbility extends DelayedTriggeredAbilit
         if (rule != null && !rule.isEmpty()) {
             return rule;
         }
-        return "When you cast your next " + filter.getMessage() + " this turn, "
+        return "When you next cast " + CardUtil.addArticle(filter.getMessage()) + " this turn, "
                 + "copy that spell. You may choose new targets for the copy.";
     }
 }

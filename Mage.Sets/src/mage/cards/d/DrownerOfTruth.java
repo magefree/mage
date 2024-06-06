@@ -42,7 +42,7 @@ public final class DrownerOfTruth extends ModalDoubleFacedCard {
                 new CastSourceTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2)),
                 ManaWasSpentCondition.COLORLESS,
                 "When you cast this spell, if {C} was spent to cast it, "
-                        + "create two 0/1 colorless Eldrazi Spawn creature tokens with \"Sacrifice this creature: Add {C}.");
+                        + "create two 0/1 colorless Eldrazi Spawn creature tokens with \"Sacrifice this creature: Add {C}.\"");
         this.getLeftHalfCard().addAbility(ability);
 
         // 2.

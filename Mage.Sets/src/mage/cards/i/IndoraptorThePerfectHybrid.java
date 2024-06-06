@@ -50,7 +50,7 @@ public final class IndoraptorThePerfectHybrid extends CardImpl {
         ), new DamageDoneWatcher());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Enrage -- Whenever Indoraptor, the Perfect Hybrid is dealt damage, choose an opponent at random.
         // Indoraptor deals damage equal to its power to that player unless they sacrifice a nontoken creature.

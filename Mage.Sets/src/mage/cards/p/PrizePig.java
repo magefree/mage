@@ -3,7 +3,9 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +31,11 @@ public final class PrizePig extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you gain life, put that many ribbon counters on Prize Pig. Then if there are three or more ribbon counters on Prize Pig, remove those counters and untap it.
-        this.addAbility(new GainLifeControllerTriggeredAbility(new PrizePigEffect()));
+        Ability ability = new GainLifeControllerTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.RIBBON.createInstance(), SavedGainedLifeValue.MANY)
+        );
+        ability.addEffect(new PrizePigEffect());
+        this.addAbility(ability);
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
@@ -49,8 +55,7 @@ class PrizePigEffect extends OneShotEffect {
 
     PrizePigEffect() {
         super(Outcome.Benefit);
-        staticText = "put that many ribbon counters on {this}. Then if there are three " +
-                "or more ribbon counters on {this}, remove those counters and untap it";
+        staticText = "Then if there are three or more ribbon counters on {this}, remove those counters and untap it";
     }
 
     private PrizePigEffect(final PrizePigEffect effect) {
@@ -65,11 +70,9 @@ class PrizePigEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        int amount = (Integer) getValue("gainedLife");
-        if (permanent == null || amount < 1) {
+        if (permanent == null) {
             return false;
         }
-        permanent.addCounters(CounterType.RIBBON.createInstance(amount), source, game);
         int count = permanent.getCounters(game).getCount(CounterType.RIBBON);
         if (count >= 3) {
             permanent.removeCounters(CounterType.RIBBON.createInstance(count), source, game);

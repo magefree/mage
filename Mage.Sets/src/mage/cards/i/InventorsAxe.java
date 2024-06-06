@@ -39,7 +39,7 @@ public final class InventorsAxe extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0)));
 
         // Equip--Pay {E}{E}.
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new PayEnergyCost(2)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new PayEnergyCost(2), false));
     }
 
     private InventorsAxe(final InventorsAxe card) {

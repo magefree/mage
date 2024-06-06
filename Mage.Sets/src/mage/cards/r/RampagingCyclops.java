@@ -56,7 +56,7 @@ enum RampagingCyclopsCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null || !permanent.isAttacking()) {
             return false;
         }

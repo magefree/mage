@@ -6,6 +6,7 @@ import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,6 +29,7 @@ public final class AetherSpike extends CardImpl {
 
         // Choose target spell. You get {E}{E}, then you may pay any amount of {E}. Counter that spell unless its controller pays {1} for each {E} paid this way.
         this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new InfoEffect("Choose target spell."));
         this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
         this.getSpellAbility().addEffect(new AetherSpikeEffect());
     }

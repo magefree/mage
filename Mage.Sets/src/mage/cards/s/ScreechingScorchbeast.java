@@ -36,7 +36,7 @@ public final class ScreechingScorchbeast extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Screeching Scorchbeast attacks, each player gets two rad counters.
         this.addAbility(new AttacksTriggeredAbility(

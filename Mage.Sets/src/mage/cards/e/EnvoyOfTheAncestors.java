@@ -41,7 +41,7 @@ public final class EnvoyOfTheAncestors extends CardImpl {
 
         // Modified creatures you control have lifelink.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                LifelinkAbility.getInstance(), Duration.EndOfTurn, filter
+                LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter
         )));
     }
 

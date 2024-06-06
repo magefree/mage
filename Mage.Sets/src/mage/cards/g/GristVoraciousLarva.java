@@ -62,7 +62,7 @@ class GristVoraciousLarvaTriggeredAbility extends EntersBattlefieldThisOrAnother
                         new ManaCostsImpl<>("{G}")
                 ), StaticFilters.FILTER_PERMANENT_CREATURE, false, true);
         setTriggerPhrase("Whenever {this} or another creature enters the battlefield under your control, "
-                + "if it entered from your graveyard or was cast from your graveyard, ");
+                + "if it entered from your graveyard or you cast it from your graveyard, ");
     }
 
     private GristVoraciousLarvaTriggeredAbility(final GristVoraciousLarvaTriggeredAbility ability) {
