@@ -19,16 +19,9 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class ReconfigureAbility extends ActivatedAbilityImpl {
 
     private final Cost cost;
-//    private final String manaString;
 
     public ReconfigureAbility(String manaString) {
-        super(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature), new ManaCostsImpl<>(manaString));
-        this.cost = new ManaCostsImpl<>(manaString);
-        this.addTarget(new TargetControlledCreaturePermanent());
-        this.addSubAbility(new ReconfigureUnattachAbility(cost));
-        Ability ability = new SimpleStaticAbility(new ReconfigureTypeEffect());
-        ability.setRuleVisible(false);
-        this.addSubAbility(ability);
+        this(new ManaCostsImpl<>(manaString));
     }
 
     public ReconfigureAbility(Cost cost) {

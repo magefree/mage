@@ -9,7 +9,7 @@ import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CountersSourcePlayerCount;
+import mage.abilities.dynamicvalue.common.CountersControllerCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -31,7 +31,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class RazorfieldRipper extends CardImpl {
 
-    private static final DynamicValue xValue = new CountersSourcePlayerCount(CounterType.ENERGY);
+    private static final DynamicValue xValue = new CountersControllerCount(CounterType.ENERGY);
 
     public RazorfieldRipper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}");
@@ -43,7 +43,7 @@ public final class RazorfieldRipper extends CardImpl {
 
         // Whenever Razorfield Ripper or equipped creature attacks, you get {E}, then it gets +X/+X until end of turn, where X is the amount of {E} you have.
         Ability ability = new RazorfieldRipperTriggeredAbility(new GetEnergyCountersControllerEffect(1));
-        ability.addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
+        ability.addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn).setText("then it gets +X/+X until end of turn, where X is the amount of {E} you have.").concatBy(","));
         this.addAbility(ability);
 
         // Reconfigure--Pay {2} or {E}{E}{E}.
@@ -62,42 +62,11 @@ public final class RazorfieldRipper extends CardImpl {
     }
 }
 
-class RazorfieldRipperEffect extends OneShotEffect {
-
-    RazorfieldRipperEffect() {
-        super(Outcome.Benefit);
-    }
-
-    private RazorfieldRipperEffect(final RazorfieldRipperEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RazorfieldRipperEffect copy() {
-        return new RazorfieldRipperEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        game.informPlayers("Target: " + getTargetPointer().toString());
-        int xValue = player.getCountersCount(CounterType.ENERGY);
-        Effect boostEffect  = new BoostTargetEffect(xValue, 3, Duration.EndOfTurn);
-        boostEffect.setTargetPointer(getTargetPointer());
-        boostEffect.apply(game, source);
-        return true;
-    }
-}
-
 class RazorfieldRipperTriggeredAbility extends TriggeredAbilityImpl {
 
     RazorfieldRipperTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
-        setTriggerPhrase("Whenever {this} or equipped creature attacks");
+        setTriggerPhrase("Whenever {this} or equipped creature attacks, ");
     }
 
     private RazorfieldRipperTriggeredAbility(final RazorfieldRipperTriggeredAbility ability) {
@@ -127,13 +96,7 @@ class RazorfieldRipperTriggeredAbility extends TriggeredAbilityImpl {
         } else {
             attacker = getSourceId();
         }
-        game.informPlayers("Effects: " + getEffects().toString());
         getEffects().setTargetPointer(new FixedTarget(attacker, game));
         return attacker != null;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} or equipped creature attacks, you get {E}, then it gets +X/+X until end of turn, where X is the amount of {E} you have.";
     }
 }

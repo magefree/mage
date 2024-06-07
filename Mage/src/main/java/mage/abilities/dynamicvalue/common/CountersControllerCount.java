@@ -3,42 +3,30 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
 
-public class CountersSourcePlayerCount implements DynamicValue {
+public class CountersControllerCount implements DynamicValue {
 
     private final CounterType counterType;
 
     /**
-     * Number of counters of any type on the source permanent
+     * Number of counters of the specified type on the Controller of the source
      */
-    public CountersSourcePlayerCount() {
-        this((CounterType) null);
-    }
-
-    /**
-     * Number of counters of the specified type on the source permanent
-     */
-    public CountersSourcePlayerCount(CounterType counterType) {
+    public CountersControllerCount(CounterType counterType) {
         this.counterType = counterType;
     }
 
-    protected CountersSourcePlayerCount(final CountersSourcePlayerCount countersCount) {
+    protected CountersControllerCount(final CountersControllerCount countersCount) {
         this.counterType = countersCount.counterType;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         UUID controllerId = sourceAbility.getControllerId();
-        if (controllerId == null) {
-            return 0;
-        }
         Player player = game.getPlayer(controllerId);
         if (player == null) {
             return 0;
@@ -49,8 +37,8 @@ public class CountersSourcePlayerCount implements DynamicValue {
     }
 
     @Override
-    public CountersSourcePlayerCount copy() {
-        return new CountersSourcePlayerCount(this);
+    public CountersControllerCount copy() {
+        return new CountersControllerCount(this);
     }
 
     @Override
