@@ -14,6 +14,23 @@ import java.util.concurrent.Future;
  */
 public final class ThreadUtils {
 
+    // basic
+    public final static String THREAD_PREFIX_GAME = "GAME";
+    public final static String THREAD_PREFIX_AI_SIMULATION = "AI-SIM";
+    public final static String THREAD_PREFIX_CALL_REQUEST = "CALL";
+    public final static String THREAD_PREFIX_TOURNEY = "TOURNEY";
+    public final static String THREAD_PREFIX_TOURNEY_DRAFT = "TOURNEY DRAFT";
+
+    // services
+    public final static String THREAD_PREFIX_SERVICE_HEALTH = "XMAGE HEALTH";
+
+    // etc
+    public final static String THREAD_PREFIX_TIMEOUT = "XMAGE TIMEOUT";
+    public final static String THREAD_PREFIX_TIMEOUT_IDLE = "XMAGE TIMEOUT_IDLE";
+
+
+
+
     public static void sleep(int millis) {
         try {
             Thread.sleep(millis);
@@ -68,8 +85,11 @@ public final class ThreadUtils {
 
     public static boolean isRunGameThread() {
         String name = Thread.currentThread().getName();
-        if (name.startsWith("GAME ")) {
+        if (name.startsWith(THREAD_PREFIX_GAME)) {
             // server game
+            return true;
+        } else if (name.startsWith(THREAD_PREFIX_AI_SIMULATION)) {
+            // ai simulation
             return true;
         } else if (name.equals("main")) {
             // unit test
@@ -81,7 +101,7 @@ public final class ThreadUtils {
 
     public static void ensureRunInCallThread() {
         String name = Thread.currentThread().getName();
-        if (!name.startsWith("CALL")) {
+        if (!name.startsWith(THREAD_PREFIX_CALL_REQUEST)) {
             // how-to fix: something wrong in your code logic
             throw new IllegalArgumentException("Wrong code usage: client commands code must run in CALL threads, but used in " + name, new Throwable());
         }
