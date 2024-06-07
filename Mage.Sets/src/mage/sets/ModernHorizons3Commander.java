@@ -185,6 +185,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Morophon, the Boundless", 157, Rarity.MYTHIC, mage.cards.m.MorophonTheBoundless.class));
         cards.add(new SetCardInfo("Mortivore", 201, Rarity.RARE, mage.cards.m.Mortivore.class));
         cards.add(new SetCardInfo("Mossfire Valley", 357, Rarity.RARE, mage.cards.m.MossfireValley.class));
+        cards.add(new SetCardInfo("Mutated Cultist", 53, Rarity.RARE, mage.cards.m.MutatedCultist.class));
         cards.add(new SetCardInfo("Myr Battlesphere", 301, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
         cards.add(new SetCardInfo("Myriad Landscape", 358, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Forge", 302, Rarity.RARE, mage.cards.m.MysticForge.class));
