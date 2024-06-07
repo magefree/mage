@@ -100,6 +100,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Drowner of Hope", 182, Rarity.RARE, mage.cards.d.DrownerOfHope.class));
         cards.add(new SetCardInfo("Dryad of the Ilysian Grove", 225, Rarity.RARE, mage.cards.d.DryadOfTheIlysianGrove.class));
         cards.add(new SetCardInfo("Elder Deep-Fiend", 154, Rarity.RARE, mage.cards.e.ElderDeepFiend.class));
+        cards.add(new SetCardInfo("Eldrazi Confluence", 32, Rarity.RARE, mage.cards.e.EldraziConfluence.class));
         cards.add(new SetCardInfo("Eldrazi Conscription", 155, Rarity.RARE, mage.cards.e.EldraziConscription.class));
         cards.add(new SetCardInfo("Eldrazi Displacer", 169, Rarity.RARE, mage.cards.e.EldraziDisplacer.class));
         cards.add(new SetCardInfo("Eldrazi Monument", 290, Rarity.MYTHIC, mage.cards.e.EldraziMonument.class));
