@@ -234,6 +234,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Siege-Gang Lieutenant", 61, Rarity.RARE, mage.cards.s.SiegeGangLieutenant.class));
         cards.add(new SetCardInfo("Ulalek, Fused Atrocity", 4, Rarity.MYTHIC, mage.cards.u.UlalekFusedAtrocity.class));
         cards.add(new SetCardInfo("Sifter of Skulls", 203, Rarity.RARE, mage.cards.s.SifterOfSkulls.class));
+        cards.add(new SetCardInfo("Silverquill Lecturer", 44, Rarity.RARE, mage.cards.s.SilverquillLecturer.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 377, Rarity.COMMON, mage.cards.s.SimicGrowthChamber.class));
         cards.add(new SetCardInfo("Simic Guildgate", 378, Rarity.COMMON, mage.cards.s.SimicGuildgate.class));
         cards.add(new SetCardInfo("Sire of Stagnation", 272, Rarity.MYTHIC, mage.cards.s.SireOfStagnation.class));
