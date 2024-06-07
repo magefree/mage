@@ -1,4 +1,4 @@
-package org.mage.test.cards.continuous;
+package org.mage.test.cards.single.m3c;
 
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.PhaseStep;
