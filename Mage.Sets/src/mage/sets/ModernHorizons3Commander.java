@@ -198,6 +198,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Overflowing Basin", 362, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Path of Ancestry", 363, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Poison Dart Frog", 238, Rarity.COMMON, mage.cards.p.PoisonDartFrog.class));
+        cards.add(new SetCardInfo("Polygoyf", 65, Rarity.RARE, mage.cards.p.Polygoyf.class));
         cards.add(new SetCardInfo("Pongify", 190, Rarity.UNCOMMON, mage.cards.p.Pongify.class));
         cards.add(new SetCardInfo("Port Town", 364, Rarity.RARE, mage.cards.p.PortTown.class));
         cards.add(new SetCardInfo("Prairie Stream", 365, Rarity.RARE, mage.cards.p.PrairieStream.class));
