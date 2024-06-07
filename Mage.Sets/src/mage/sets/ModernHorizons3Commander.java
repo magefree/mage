@@ -230,6 +230,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Scute Swarm", 245, Rarity.RARE, mage.cards.s.ScuteSwarm.class));
         cards.add(new SetCardInfo("Secluded Courtyard", 372, Rarity.UNCOMMON, mage.cards.s.SecludedCourtyard.class));
         cards.add(new SetCardInfo("Seer's Sundial", 304, Rarity.RARE, mage.cards.s.SeersSundial.class));
+        cards.add(new SetCardInfo("Selective Obliteration", 35, Rarity.RARE, mage.cards.s.SelectiveObliteration.class));
         cards.add(new SetCardInfo("Selvala, Heart of the Wilds", 246, Rarity.MYTHIC, mage.cards.s.SelvalaHeartOfTheWilds.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 373, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 374, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
