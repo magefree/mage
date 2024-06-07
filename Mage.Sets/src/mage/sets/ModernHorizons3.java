@@ -35,6 +35,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Annoyed Altisaur", 284, Rarity.UNCOMMON, mage.cards.a.AnnoyedAltisaur.class));
         cards.add(new SetCardInfo("Arcbound Condor", 81, Rarity.UNCOMMON, mage.cards.a.ArcboundCondor.class));
         cards.add(new SetCardInfo("Archway of Innovation", 214, Rarity.RARE, mage.cards.a.ArchwayOfInnovation.class));
+        cards.add(new SetCardInfo("Arena of Glory", 215, Rarity.RARE, mage.cards.a.ArenaOfGlory.class));
         cards.add(new SetCardInfo("Argent Dais", 20, Rarity.RARE, mage.cards.a.ArgentDais.class));
         cards.add(new SetCardInfo("Arna Kennerud, Skycaptain", 178, Rarity.MYTHIC, mage.cards.a.ArnaKennerudSkycaptain.class));
         cards.add(new SetCardInfo("Ashling, Flame Dancer", 115, Rarity.MYTHIC, mage.cards.a.AshlingFlameDancer.class));
