@@ -21,6 +21,10 @@ public class Pauper extends Constructed {
         rarities.add(Rarity.COMMON);
         rarities.add(Rarity.LAND);
 
+        // All attractions & sticker cards are banned. (to add if/when implemented)
+        // this also includes the mtgo replacement "Name Sticker" Goblin.
+        banned.add("\"Name Sticker\" Goblin");
+
         banned.add("Aarakocra Sneak");
         banned.add("All That Glitters");
         banned.add("Arcum's Astrolabe");

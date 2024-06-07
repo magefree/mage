@@ -16,8 +16,10 @@ public class Legacy extends Constructed {
                 setCodes.add(set.getCode());
             }
         }
+        // All attractions & sticker cards are banned. (to add if/when implemented)
+        // this also includes the mtgo replacement "Name Sticker" Goblin.
         banned.add("\"Name Sticker\" Goblin");
-        
+
         banned.add("Ancestral Recall");
         banned.add("Arcum's Astrolabe");
         banned.add("Balance");
