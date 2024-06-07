@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.CopyNextSpellDelayedTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.CommanderCastFromCommandZoneValue;
+import mage.abilities.dynamicvalue.common.CommanderCastCountValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
@@ -61,7 +61,7 @@ public final class ThunderclapDrake extends CardImpl {
                 new ManaCostsImpl<>("{2}{U}")
         );
         ability.addCost(new SacrificeSourceCost());
-        ability.addHint(CommanderCastFromCommandZoneValue.getHint());
+        ability.addHint(CommanderCastCountValue.getHint());
         this.addAbility(ability);
     }
 
@@ -97,7 +97,7 @@ class ThunderclapDrakeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Spell spell = (Spell) this.getValue("spellCast");
-        int count = CommanderCastFromCommandZoneValue.instance.calculate(game, source, this);
+        int count = CommanderCastCountValue.instance.calculate(game, source, this);
         if (spell == null || player == null || count <= 0) {
             return false;
         }

@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CommanderCastFromCommandZoneValue;
+import mage.abilities.dynamicvalue.common.CommanderCastCountValue;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,9 +21,9 @@ public final class CommandersInsignia extends CardImpl {
         // Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game.
         this.addAbility(new SimpleStaticAbility(
                 new BoostControlledEffect(
-                        CommanderCastFromCommandZoneValue.instance, CommanderCastFromCommandZoneValue.instance, Duration.WhileOnBattlefield
+                        CommanderCastCountValue.instance, CommanderCastCountValue.instance, Duration.WhileOnBattlefield
                 ).setText("Creatures you control get +1/+1 for each time you've cast your commander from the command zone this game.")
-        ).addHint(CommanderCastFromCommandZoneValue.getHint()));
+        ).addHint(CommanderCastCountValue.getHint()));
     }
 
     private CommandersInsignia(final CommandersInsignia card) {

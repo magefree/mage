@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CommanderCastFromCommandZoneValue;
+import mage.abilities.dynamicvalue.common.CommanderCastCountValue;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,11 +29,11 @@ public final class CaptainVargusWrath extends CardImpl {
 
         // Whenever Captain Vargus Wrath attacks, Pirates you control get +1/+1 until end of turn for each time you've cast a commander from the command zone this game.
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(
-                CommanderCastFromCommandZoneValue.instance, CommanderCastFromCommandZoneValue.instance,
+                CommanderCastCountValue.instance, CommanderCastCountValue.instance,
                 Duration.EndOfTurn, filter, false), false,
                 "Whenever {this} attacks, Pirates you control get +1/+1 until end of turn " +
                         "for each time you've cast a commander from the command zone this game.")
-                .addHint(CommanderCastFromCommandZoneValue.getHint()));
+                .addHint(CommanderCastCountValue.getHint()));
     }
 
     private CaptainVargusWrath(final CaptainVargusWrath card) {
