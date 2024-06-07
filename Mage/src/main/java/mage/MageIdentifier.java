@@ -34,6 +34,7 @@ public enum MageIdentifier {
     KaghaShadowArchdruidWatcher,
     CourtOfLocthwainWatcher("Without paying manacost"),
     LaraCroftTombRaiderWatcher,
+    CoramTheUndertakerWatcher,
 
     // ----------------------------//
     //       alternate casts       //
