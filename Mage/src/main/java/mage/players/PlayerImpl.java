@@ -5232,7 +5232,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void signalPlayerConcede() {
+    public void signalPlayerConcede(boolean stopCurrentChooseDialog) {
     }
 
     @Override

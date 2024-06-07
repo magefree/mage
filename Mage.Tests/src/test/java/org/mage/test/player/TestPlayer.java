@@ -2919,8 +2919,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void signalPlayerConcede() {
-        computerPlayer.signalPlayerConcede();
+    public void signalPlayerConcede(boolean stopCurrentChooseDialog) {
+        computerPlayer.signalPlayerConcede(stopCurrentChooseDialog);
     }
 
     @Override

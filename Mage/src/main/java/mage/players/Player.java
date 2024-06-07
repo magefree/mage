@@ -563,7 +563,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void abortReset();
 
-    void signalPlayerConcede();
+    void signalPlayerConcede(boolean stopCurrentChooseDialog);
 
     void signalPlayerCheat();
 
