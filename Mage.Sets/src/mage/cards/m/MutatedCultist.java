@@ -20,9 +20,13 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
+import mage.filter.FilterOpponent;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterPermanentOrPlayer;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,6 +41,12 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  */
 public final class MutatedCultist extends CardImpl {
 
+    private static final FilterPermanentOrPlayer filter =
+            new FilterPermanentOrPlayer(
+                    "target permanent or opponent",
+                    new FilterPermanent(), new FilterOpponent()
+            );
+
     public MutatedCultist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         
@@ -50,7 +60,7 @@ public final class MutatedCultist extends CardImpl {
 
         // When you cast this spell, remove all counters from up to one target permanent or opponent. The next spell you cast this turn costs {1} less to cast for each counter removed this way.
         Ability ability = new CastSourceTriggeredAbility(new MutatedCultistEffect());
-        ability.addTarget(new TargetPermanentOrPlayer());
+        ability.addTarget(new TargetPermanentOrPlayer(filter));
         this.addAbility(ability);
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
@@ -68,12 +78,6 @@ public final class MutatedCultist extends CardImpl {
 }
 
 class MutatedCultistEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("permanent with a counter");
-
-    static {
-        filter.add(CounterAnyPredicate.instance);
-    }
 
     MutatedCultistEffect() {
         super(Outcome.BoostCreature);
@@ -93,9 +97,7 @@ class MutatedCultistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int countersRemoved = 0;
         UUID targetId = source.getTargets().getFirstTarget();
-        if (targetId == null) {
-            return false;
-        }
+
         Player targetedPlayer = game.getPlayer(targetId);
         if (targetedPlayer != null) {
             countersRemoved = targetedPlayer.loseAllCounters(source, game);
