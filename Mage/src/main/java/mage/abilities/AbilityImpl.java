@@ -941,7 +941,7 @@ public abstract class AbilityImpl implements Ability {
             // as list of costs
             Costs<Cost> list = (Costs<Cost>) cost;
             for (Cost single : list) {
-                addCost(single);
+                addCost(single, index);
             }
         } else {
             // as single cost
