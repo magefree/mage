@@ -153,6 +153,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Idol of Oblivion", 297, Rarity.UNCOMMON, mage.cards.i.IdolOfOblivion.class));
         cards.add(new SetCardInfo("Ignoble Hierarch", 234, Rarity.RARE, mage.cards.i.IgnobleHierarch.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 188, Rarity.RARE, mage.cards.i.ImprisonedInTheMoon.class));
+        cards.add(new SetCardInfo("Inversion Behemoth", 34, Rarity.RARE, mage.cards.i.InversionBehemoth.class));
         cards.add(new SetCardInfo("Izoni, Thousand-Eyed", 267, Rarity.RARE, mage.cards.i.IzoniThousandEyed.class));
         cards.add(new SetCardInfo("Izzet Boilerworks", 350, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Junji, the Midnight Sky", 199, Rarity.MYTHIC, mage.cards.j.JunjiTheMidnightSky.class));
