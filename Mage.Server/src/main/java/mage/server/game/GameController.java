@@ -1296,13 +1296,13 @@ public class GameController implements GameCallback {
             return "";
         }
 
-        logger.warn("FIX command was called by " + user.getName() + " for game " + game.getId() + " - players: " +
-                game.getPlayerList().stream()
-                        .map(game::getPlayer)
-                        .filter(Objects::nonNull)
-                        .map(p -> p.getName() + (p.isInGame() ? " (play)" : " (out)"))
-                        .collect(Collectors.joining(", ")));
-
+        String playersInfo = game.getPlayerList().stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(p -> p.getName() + (p.isInGame() ? " (play)" : " (out)"))
+                .collect(Collectors.joining(", "));
+        logger.warn("FIX command was called for game " + game.getId() + " by " + user.getName()
+                + "; players: " + playersInfo + "; " + game);
         StringBuilder sb = new StringBuilder();
         sb.append("<font color='red'>FIX command called by ").append(user.getName()).append("</font>");
         sb.append("<font size='-2'>"); // font resize start for all next logs
@@ -1361,7 +1361,7 @@ public class GameController implements GameCallback {
         sb.append("</font>"); // font resize end
         sb.append("<br>");
 
-        logger.warn("FIX command result for game " + game.getId() + ": " + appliedFixes);
+        logger.warn("FIX command result: " + appliedFixes);
 
         return sb.toString();
     }
