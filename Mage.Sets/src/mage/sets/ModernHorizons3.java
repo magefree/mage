@@ -347,7 +347,6 @@ public final class ModernHorizons3 extends ExpansionSet {
     @Override
     public List<Card> tryBooster() {
         // TODO: make part of this more generic, this is the second try at a play booster generation so we try to see what can be shared.
-        // TODO: Commanders should appear sometimes as wild cards, add them to generation once they are implemented.
         // source https://magic.wizards.com/en/news/feature/collecting-modern-horizons-3
 
         // We start by deciding the various slots.
@@ -378,36 +377,41 @@ public final class ModernHorizons3 extends ExpansionSet {
             }
         }
 
+        int commander = 0;
         // 1 slot is a wildcard:
         // 41.7% chance to be among 80 common
         // 41.7% chance to be among 101 uncommons
         // 7.8% chance to be among rare/mythic (with weight 2:1 individually)
-        // TODO: only that part has been generated (up to 91.2%).
+        // 4.2% chance to be among 8 Commander Mythic Rares (4.2% in total).
+        // TODO: only that part has been generated (up to 95.6%).
         //       miss some new to modern (not all) that have retro frames, (4.2%),
-        //       and the 8 Commander Mythic Rares (4.2% in total).
         //       some variants (0.4%), and full art snow covered wastes (<0.1%)
         {
-            double total = 0.417 * 2 + 0.078;
+            double total = 0.417 * 2 + 0.078 + 0.042;
             double rollWildcard = RandomUtil.nextDouble() * total;
             if (rollWildcard <= 0.417) {
                 common++;
             } else if (rollWildcard <= 0.417 * 2) {
                 uncommon++;
-            } else {
+            } else if (rollWildcard <= 0.417 * 2 + 0.078) {
                 rareOrMythic++;
+            } else {
+                commander++;
             }
         }
 
         // wildcard foil slot, reusing the previous wildcard slot, altough maybe it is different.
         {
-            double total = 0.417 * 2 + 0.078;
+            double total = 0.417 * 2 + 0.078 + 0.042;
             double rollWildcard = RandomUtil.nextDouble() * total;
             if (rollWildcard <= 0.417) {
                 common++;
             } else if (rollWildcard <= 0.417 * 2) {
                 uncommon++;
-            } else {
+            } else if (rollWildcard <= 0.417 * 2 + 0.078) {
                 rareOrMythic++;
+            } else {
+                commander++;
             }
         }
 
@@ -463,6 +467,11 @@ public final class ModernHorizons3 extends ExpansionSet {
                             return cn >= 39 && cn <= 48;
                         })
                         .collect(Collectors.toList());
+        List<CardInfo> list_M3C =
+                ModernHorizons3Commander.getInstance().getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 8)
+                        .collect(Collectors.toList());
 
         for (int i = 0; i < spg; i++) {
             addToBooster(booster, list_SPG);
@@ -474,6 +483,9 @@ public final class ModernHorizons3 extends ExpansionSet {
             } else {
                 addToBooster(booster, list_MH3_R);
             }
+        }
+        for (int i = 0; i < commander; i++) {
+            addToBooster(booster, list_M3C);
         }
         double ratioUncommonRTM = 0.75; // Uncommons relative to rare+mythic
         double ratioMythicRTM = (double) list_RTM_M.size() / (double) (list_RTM_M.size() + list_RTM_R.size() * 2); // mythics relative to rare
