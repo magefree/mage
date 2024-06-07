@@ -278,7 +278,6 @@ public enum SubType {
     MYR("Myr", SubTypeSet.CreatureType),
     MYSTIC("Mystic", SubTypeSet.CreatureType),
     // N
-    NAGA("Naga", SubTypeSet.CreatureType),
     NAUTILUS("Nautilus", SubTypeSet.CreatureType),
     NAUTOLAN("Nautolan", SubTypeSet.CreatureType, true), // Star Wars
     NECRON("Necron", SubTypeSet.CreatureType),
