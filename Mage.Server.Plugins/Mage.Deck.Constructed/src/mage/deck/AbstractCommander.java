@@ -872,7 +872,7 @@ public abstract class AbstractCommander extends Constructed {
             int thisMaxPower = 0;
             String cn = commander.getName().toLowerCase(Locale.ENGLISH);
             if (color == null) {
-                color = commander.getColor(null);
+                color = commander.getColor(null).copy();
             } else {
                 color = color.union(commander.getColor(null));
             }
