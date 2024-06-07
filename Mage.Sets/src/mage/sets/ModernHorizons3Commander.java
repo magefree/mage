@@ -211,6 +211,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Rampaging Baloths", 239, Rarity.MYTHIC, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Rampant Growth", 240, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Ramunap Excavator", 241, Rarity.RARE, mage.cards.r.RamunapExcavator.class));
+        cards.add(new SetCardInfo("Razorfield Ripper", 42, Rarity.RARE, mage.cards.r.RazorfieldRipper.class));
         cards.add(new SetCardInfo("Reliquary Tower", 368, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Replication Technique", 192, Rarity.RARE, mage.cards.r.ReplicationTechnique.class));
         cards.add(new SetCardInfo("Return of the Wildspeaker", 242, Rarity.RARE, mage.cards.r.ReturnOfTheWildspeaker.class));
