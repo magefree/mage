@@ -32,7 +32,7 @@ public final class NykthosParagon extends CardImpl {
                         CounterType.P1P1.createInstance(),
                         SavedGainedLifeValue.MANY,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
-                ), true, true
+                ).setText("put that many +1/+1 counters on each creature you control"), true, true
         ).setDoOnlyOnceEachTurn(true));
     }
 
