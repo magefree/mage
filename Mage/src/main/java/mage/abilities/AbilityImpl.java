@@ -954,7 +954,6 @@ public abstract class AbilityImpl implements Ability {
                 } else {
                     costs.add(index, cost);
                 }
-                costs.add(index, cost);
             }
         }
     }
