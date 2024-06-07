@@ -49,13 +49,13 @@ public final class SageOfTheMaze extends CardImpl {
         this.addAbility(ability);
 
         // {T}: Until end of turn, target land you control becomes an X/X Citizen creature with haste in addition to its other types, where X is twice the number of Gates you control. Activate only as a sorcery.
-        ability = new SimpleActivatedAbility(new SageOfTheMazeEffect(), new TapSourceCost());
+        ability = new ActivateAsSorceryActivatedAbility(new SageOfTheMazeEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
-
+        ability.addHint(SageOfTheMazeEffect.hint);
         this.addAbility(ability);
 
         // Tap an untapped Gate you control: Untap Sage of the Maze.
-        ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(1, filter)));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(1, filter)));
         this.addAbility(ability);
 
     }
@@ -76,7 +76,7 @@ class SageOfTheMazeEffect extends OneShotEffect {
             = new FilterControlledPermanent(SubType.GATE, "Gates you control");
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 2);
-    private static final Hint hint = new ValueHint("Gates you control", xValue);
+    static final Hint hint = new ValueHint("Gates you control", xValue);
 
     SageOfTheMazeEffect() {
         super(Outcome.Benefit);
