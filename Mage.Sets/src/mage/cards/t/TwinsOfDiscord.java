@@ -1,33 +1,24 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
-import mage.abilities.effects.common.continuous.CreaturesCantGetOrHaveAbilityEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.BloodthirstAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.ManaValueParityPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +46,7 @@ public final class TwinsOfDiscord extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
             new BloodthirstAbility(2),
                 Duration.WhileOnBattlefield,
-                colorlessCreatureFilter, true)));
+                colorlessCreatureFilter, true).setText("Each other colorless creature you control has bloodthirst 2")));
     }
 
     private TwinsOfDiscord(final TwinsOfDiscord card) {

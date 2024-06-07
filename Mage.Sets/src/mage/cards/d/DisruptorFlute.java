@@ -62,7 +62,7 @@ class DisruptorFluteCostIncreaseEffect extends CostModificationEffectImpl {
 
     DisruptorFluteCostIncreaseEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.INCREASE_COST);
-        this.staticText = "Spells with the chosen name cost 3 less to cast";
+        this.staticText = "Spells with the chosen name cost {3} more to cast";
     }
 
     private DisruptorFluteCostIncreaseEffect(DisruptorFluteCostIncreaseEffect effect) {

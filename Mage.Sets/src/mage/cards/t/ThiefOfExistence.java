@@ -70,7 +70,7 @@ class ThiefOfExistenceTargetEffect extends OneShotEffect {
     ThiefOfExistenceTargetEffect() {
         super(Outcome.Exile);
         staticText = "exile up to one target noncreature, nonland permanent an opponent controls with mana value 4 or less. "
-                + "If you do, Thief of Existence gains \"When this creature leaves the battlefield, target opponent draws a card\"";
+                + "If you do, {this} gains \"When this creature leaves the battlefield, target opponent draws a card.\"";
     }
 
     private ThiefOfExistenceTargetEffect(final ThiefOfExistenceTargetEffect effect) {

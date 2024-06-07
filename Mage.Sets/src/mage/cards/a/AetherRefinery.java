@@ -92,7 +92,7 @@ class AetherRefineryTokenEffect extends OneShotEffect {
 
     AetherRefineryTokenEffect() {
         super(Outcome.Benefit);
-        this.staticText = "then you may pay one or more {E}. If you do, create an X/X black Aetherborn creature token, where X is the amount of {E} paid this way";
+        this.staticText = ", then you may pay one or more {E}. If you do, create an X/X black Aetherborn creature token, where X is the amount of {E} paid this way";
     }
 
     private AetherRefineryTokenEffect(final AetherRefineryTokenEffect effect) {

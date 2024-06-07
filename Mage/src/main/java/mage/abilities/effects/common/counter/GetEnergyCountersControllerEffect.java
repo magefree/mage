@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
@@ -43,10 +42,13 @@ public class GetEnergyCountersControllerEffect extends OneShotEffect {
     }
 
     private void setText() {
-        if (!staticText.isEmpty()) {
+        if (staticText == null || !staticText.isEmpty()) {
             return;
         }
-
+        if (value.getMessage().equals("that many")) {
+            staticText = "that many {E}";
+            return;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("you get ");
         int val;

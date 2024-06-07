@@ -10,6 +10,7 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -929,7 +930,7 @@ public final class CardUtil {
         boolean xValue = amount.toString().equals("X");
         if (xValue) {
             sb.append("X ").append(counter.getName()).append(" counters");
-        } else if (amount == SavedDamageValue.MANY) {
+        } else if (amount == SavedDamageValue.MANY || amount == SavedGainedLifeValue.MANY) {
             sb.append("that many ").append(counter.getName()).append(" counters");
         } else {
             sb.append(counter.getDescription());
