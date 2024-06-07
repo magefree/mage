@@ -88,10 +88,7 @@ class KozilekTheBrokenRealityEffect extends OneShotEffect {
 
         boolean result = false;
         int toDraw = 0;
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            if (!getTargetPointer().getTargets(game, source).contains(playerId)) {
-                continue;
-            }
+        for (UUID playerId : getTargetPointer().getTargets(game, source)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
