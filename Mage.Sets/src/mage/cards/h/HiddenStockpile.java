@@ -34,7 +34,7 @@ public final class HiddenStockpile extends CardImpl {
                 new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new ServoToken()), false),
                 RevoltCondition.instance, "At the beginning of your end step, if a permanent you controlled " +
                 "left the battlefield this turn, create a 1/1 colorless Servo artifact creature token."
-        ).setAbilityWord(AbilityWord.REVOLT), new RevoltWatcher());
+        ).setAbilityWord(AbilityWord.REVOLT).addHint(RevoltCondition.getHint()), new RevoltWatcher());
 
         // {1}, Sacrifice a creature: Scry 1.
         Ability ability = new SimpleActivatedAbility(new ScryEffect(1, false), new GenericManaCost(1));
