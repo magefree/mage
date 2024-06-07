@@ -118,6 +118,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Expedition Map", 292, Rarity.COMMON, mage.cards.e.ExpeditionMap.class));
         cards.add(new SetCardInfo("Faithless Looting", 211, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Farewell", 170, Rarity.RARE, mage.cards.f.Farewell.class));
+        cards.add(new SetCardInfo("Filigree Racer", 56, Rarity.RARE, mage.cards.f.FiligreeRacer.class));
         cards.add(new SetCardInfo("Final Act", 52, Rarity.RARE, mage.cards.f.FinalAct.class));
         cards.add(new SetCardInfo("Finale of Revelation", 185, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
         cards.add(new SetCardInfo("Find // Finality", 261, Rarity.RARE, mage.cards.f.FindFinality.class));
