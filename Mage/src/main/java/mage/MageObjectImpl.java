@@ -323,10 +323,9 @@ public abstract class MageObjectImpl implements MageObject {
         if (value == null) {
             return false;
         }
-        if (value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes(game)) {
-            return true;
-        }
-        return getSubtype(game).contains(value);
+        return value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes(game)
+                || value.getSubTypeSet() == SubTypeSet.NonBasicLandType && isAllNonbasicLandTypes(game)
+                || getSubtype(game).contains(value);
     }
 
     @Override
@@ -373,6 +372,21 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
         this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal(game) || this.isCreature(game)));
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return this.getSubtype(game).isAllNonbasicLandTypes();
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+        this.getSubtype().setIsAllNonbasicLandTypes(value && this.isLand());
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+        this.getSubtype(game).setIsAllNonbasicLandTypes(value && this.isLand(game));
     }
 
     /**
