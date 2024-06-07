@@ -22,21 +22,23 @@ public class HourglassOfTheLostTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         addCard(Zone.BATTLEFIELD, playerA, hourglass);
-            addCard(Zone.GRAVEYARD, playerA, "Birds of Paradise"); // Tribal Enchantment
+        addCard(Zone.GRAVEYARD, playerA, "Birds of Paradise"); // Mana value 1
+        addCard(Zone.GRAVEYARD, playerA, "+2 Mace"); // Mana value 2
         
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
         assertCounterCount(playerA, hourglass, CounterType.TIME,1);
+        assertExileCount(playerA, 0);
+        assertGraveyardCount(playerA, 2);
 
-        showAvailableAbilities("Abilities: ", 3, PhaseStep.PRECOMBAT_MAIN, playerA);
-        setChoiceAmount(playerA, 1);
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Remove X");
+        setChoiceAmount(playerA, 1); // Remove 1 counter
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Remove X"); // Return all with mana value 1
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
 
         execute();
         assertExileCount(playerA, 1);
-        assertGraveyardCount(playerA, 0);
+        assertGraveyardCount(playerA, 1); // +2 Mace still in graveyard
         assertPermanentCount(playerA, "Birds of Paradise", 1);
 
     }
