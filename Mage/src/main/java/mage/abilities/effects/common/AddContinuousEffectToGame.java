@@ -36,6 +36,7 @@ public class AddContinuousEffectToGame extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Effect effect : this.effects) {
+            effect.setTargetPointer(this.getTargetPointer().copy());
             game.addEffect((ContinuousEffect) effect, source);
         }
         return true;
