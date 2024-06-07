@@ -96,7 +96,10 @@ class RazorfieldRipperTriggeredAbility extends TriggeredAbilityImpl {
         } else {
             attacker = getSourceId();
         }
+        if (attacker == null) {
+            return false;
+        }
         getEffects().setTargetPointer(new FixedTarget(attacker, game));
-        return attacker != null;
+        return true;
     }
 }
