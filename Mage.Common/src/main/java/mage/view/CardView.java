@@ -369,7 +369,7 @@ public class CardView extends SimpleCardView {
                 this.power = Integer.toString(card.getPower().getValue());
                 this.toughness = Integer.toString(card.getToughness().getValue());
                 this.cardTypes = new ArrayList<>(card.getCardType());
-                this.color = card.getColor(null);
+                this.color = card.getColor(null).copy();
                 this.superTypes = new ArrayList<>(card.getSuperType());
                 this.subTypes = card.getSubtype().copy();
                 this.rules = new ArrayList<>(card.getRules());
