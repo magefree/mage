@@ -158,7 +158,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
-    protected final List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
+    protected List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
 
     // TODO: rework turn controller to use single list (see other todos)
     //protected Stack<UUID> allTurnControllers = new Stack<>();
@@ -264,7 +264,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.payLifeCostLevel = player.payLifeCostLevel;
         this.sacrificeCostFilter = player.sacrificeCostFilter;
-        this.alternativeSourceCosts.addAll(player.alternativeSourceCosts);
+        this.alternativeSourceCosts = CardUtil.deepCopyObject(player.alternativeSourceCosts);
         this.storedBookmark = player.storedBookmark;
 
         this.topCardRevealed = player.topCardRevealed;
@@ -365,8 +365,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
-        this.alternativeSourceCosts.clear();
-        this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
+        this.alternativeSourceCosts = CardUtil.deepCopyObject(player.getAlternativeSourceCosts());
 
         this.topCardRevealed = player.isTopCardRevealed();
 
