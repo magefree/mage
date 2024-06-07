@@ -516,6 +516,8 @@ public class GameController implements GameCallback {
                     if (game.canRollbackTurns(turnsToRollback)) {
                         UUID playerId = getPlayerId(userId);
                         if (game.getPriorityPlayerId().equals(playerId)) {
+                            // rollback request on own priority - can stop current choose dialog
+                            // TODO: make it async on any priority like concede
                             requestsOpen = requestPermissionToRollback(userId, turnsToRollback);
                             if (requestsOpen == 0) {
                                 game.rollbackTurns(turnsToRollback);
@@ -926,7 +928,7 @@ public class GameController implements GameCallback {
     }
 
     private void informPersonal(UUID playerId, final String message) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).informPersonal(message));
+        perform(playerId, playerId1 -> getGameSession(playerId1).informPersonal(message), false);
     }
 
     private void error(String message, Exception ex) {
