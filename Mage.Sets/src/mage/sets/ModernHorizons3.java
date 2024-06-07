@@ -1,8 +1,15 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -19,7 +26,9 @@ public final class ModernHorizons3 extends ExpansionSet {
         super("Modern Horizons 3", "MH3", ExpansionSet.buildDate(2024, 6, 7), SetType.SUPPLEMENTAL_MODERN_LEGAL);
         this.blockName = "Modern Horizons 3";
         this.hasBasicLands = true;
-        this.hasBoosters = false; // temporary
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = 319;
+        this.numBoosterDoubleFaced = -1;
 
         cards.add(new SetCardInfo("Abstruse Appropriation", 177, Rarity.RARE, mage.cards.a.AbstruseAppropriation.class));
         cards.add(new SetCardInfo("Accursed Marauder", 80, Rarity.COMMON, mage.cards.a.AccursedMarauder.class));
@@ -333,5 +342,172 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Writhing Chrysalis", 208, Rarity.COMMON, mage.cards.w.WrithingChrysalis.class));
         cards.add(new SetCardInfo("Wumpus Aberration", 176, Rarity.UNCOMMON, mage.cards.w.WumpusAberration.class));
         cards.add(new SetCardInfo("Wurmcoil Larva", 112, Rarity.UNCOMMON, mage.cards.w.WurmcoilLarva.class));
+    }
+
+    @Override
+    public List<Card> tryBooster() {
+        // TODO: make part of this more generic, this is the second try at a play booster generation so we try to see what can be shared.
+        // source https://magic.wizards.com/en/news/feature/collecting-modern-horizons-3
+
+        // We start by deciding the various slots.
+        // some slots have guarantee rarity
+        int rareOrMythic = 1;
+        int newToModern = 1;
+        int uncommon = 3;
+        int common = 5; // 6 common slots, one being sometimes replaced by a secret guest
+
+        // Land Slot: 1/2 chance for a basic, 1/2 chance for a common
+        int basicLand = 0;
+        {
+            if (RandomUtil.nextDouble() <= 0.5) {
+                basicLand++;
+            } else {
+                common++;
+            }
+        }
+
+        // 1 slot is 1/64 chance to be spg, and 1/5 - 1/64 to be otp, 4/5 to be common
+        int spg = 0;
+        {
+            double rollSpg = RandomUtil.nextDouble();
+            if (rollSpg <= 1.0 / 64.0) { // know probability of 1/64 to be spg
+                spg++;
+            } else {
+                common++;
+            }
+        }
+
+        int commander = 0;
+        // 1 slot is a wildcard:
+        // 41.7% chance to be among 80 common
+        // 41.7% chance to be among 101 uncommons
+        // 7.8% chance to be among rare/mythic (with weight 2:1 individually)
+        // 4.2% chance to be among 8 Commander Mythic Rares (4.2% in total).
+        // TODO: only that part has been generated (up to 95.6%).
+        //       miss some new to modern (not all) that have retro frames, (4.2%),
+        //       some variants (0.4%), and full art snow covered wastes (<0.1%)
+        {
+            double total = 0.417 * 2 + 0.078 + 0.042;
+            double rollWildcard = RandomUtil.nextDouble() * total;
+            if (rollWildcard <= 0.417) {
+                common++;
+            } else if (rollWildcard <= 0.417 * 2) {
+                uncommon++;
+            } else if (rollWildcard <= 0.417 * 2 + 0.078) {
+                rareOrMythic++;
+            } else {
+                commander++;
+            }
+        }
+
+        // wildcard foil slot, reusing the previous wildcard slot, altough maybe it is different.
+        {
+            double total = 0.417 * 2 + 0.078 + 0.042;
+            double rollWildcard = RandomUtil.nextDouble() * total;
+            if (rollWildcard <= 0.417) {
+                common++;
+            } else if (rollWildcard <= 0.417 * 2) {
+                uncommon++;
+            } else if (rollWildcard <= 0.417 * 2 + 0.078) {
+                rareOrMythic++;
+            } else {
+                commander++;
+            }
+        }
+
+        // The booster we are building
+        List<Card> booster = new ArrayList<>();
+
+        // 1 -> 261 are the 261 regular common/uncommon/rare/mythic
+        // 262 -> 303 are the 42 new to modern reprint cards (uncommon/rare/mythic)
+        // 304 -> 319 are basics lands (with 309 being Snow-Covered Waste)
+        List<CardInfo> list_MH3_C =
+                getCardsByRarity(Rarity.COMMON).stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 261)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_MH3_U =
+                getCardsByRarity(Rarity.UNCOMMON).stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 261)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_MH3_R =
+                getCardsByRarity(Rarity.RARE)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 261)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_MH3_M =
+                getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 261)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_MH3_Basic =
+                getCardsByRarity(Rarity.LAND)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= maxCardNumberInBooster)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_RTM_U =
+                getCardsByRarity(Rarity.UNCOMMON)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() >= 262 && info.getCardNumberAsInt() <= 303)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_RTM_R =
+                getCardsByRarity(Rarity.RARE)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() >= 262 && info.getCardNumberAsInt() <= 303)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_RTM_M =
+                getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() >= 262 && info.getCardNumberAsInt() <= 303)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_SPG =
+                SpecialGuests.getInstance().getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> {
+                            int cn = info.getCardNumberAsInt();
+                            return cn >= 39 && cn <= 48;
+                        })
+                        .collect(Collectors.toList());
+        List<CardInfo> list_M3C =
+                ModernHorizons3Commander.getInstance().getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 8)
+                        .collect(Collectors.toList());
+
+        for (int i = 0; i < spg; i++) {
+            addToBooster(booster, list_SPG);
+        }
+        double ratioMythic = (double) list_MH3_M.size() / (double) (list_MH3_M.size() + list_MH3_R.size() * 2);
+        for (int i = 0; i < rareOrMythic; i++) {
+            if (RandomUtil.nextDouble() <= ratioMythic) {
+                addToBooster(booster, list_MH3_M);
+            } else {
+                addToBooster(booster, list_MH3_R);
+            }
+        }
+        for (int i = 0; i < commander; i++) {
+            addToBooster(booster, list_M3C);
+        }
+        double ratioUncommonRTM = 0.75; // Uncommons relative to rare+mythic
+        double ratioMythicRTM = (double) list_RTM_M.size() / (double) (list_RTM_M.size() + list_RTM_R.size() * 2); // mythics relative to rare
+        for (int i = 0; i < newToModern; i++) {
+            if (RandomUtil.nextDouble() <= ratioUncommonRTM) {
+                addToBooster(booster, list_RTM_U);
+            } else if (RandomUtil.nextDouble() <= ratioMythicRTM) {
+                addToBooster(booster, list_RTM_M);
+            } else {
+                addToBooster(booster, list_RTM_R);
+            }
+        }
+        for (int i = 0; i < uncommon; i++) {
+            addToBooster(booster, list_MH3_U);
+        }
+        for (int i = 0; i < common; i++) {
+            addToBooster(booster, list_MH3_C);
+        }
+        for (int i = 0; i < basicLand; i++) {
+            addToBooster(booster, list_MH3_Basic);
+        }
+
+        return booster;
     }
 }
