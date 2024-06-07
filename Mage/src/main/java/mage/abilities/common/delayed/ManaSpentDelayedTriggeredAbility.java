@@ -5,12 +5,15 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
+import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -19,7 +22,14 @@ import java.util.UUID;
  */
 public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private final FilterSpell filter;
+    private final FilterStackObject filter;
+    private boolean setTarget;
+
+    public ManaSpentDelayedTriggeredAbility(Effect effect, FilterStackObject filter) {
+        super(effect, Duration.Custom, true, false);
+        this.filter = filter;
+        setTriggerPhrase("When you spend this mana to cast " + filter.getMessage() + ", ");
+    }
 
     public ManaSpentDelayedTriggeredAbility(Effect effect, FilterSpell filter) {
         super(effect, Duration.Custom, true, false);
@@ -27,9 +37,17 @@ public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("When you spend this mana to cast " + filter.getMessage() + ", ");
     }
 
+    public ManaSpentDelayedTriggeredAbility(Effect effect, FilterStackObject filter, boolean setTarget) {
+        super(effect, Duration.Custom, true, false);
+        this.filter = filter;
+        this.setTarget = setTarget;
+        setTriggerPhrase("When you spend this mana to cast " + filter.getMessage() + ", ");
+    }
+
     private ManaSpentDelayedTriggeredAbility(final ManaSpentDelayedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
+        this.setTarget = ability.setTarget;
     }
 
     @Override
@@ -58,7 +76,18 @@ public class ManaSpentDelayedTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && filter.match(spell, spell.getControllerId(), this, game);
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+
+        if (this.setTarget) {
+            for (Effect effect : getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+            }
+        }
+
+        // Need to check both the stackObject and the spell because a spell isnt always
+        // a ability
+        return spell != null && filter.match(spell, spell.getControllerId(), this, game)
+                || stackObject != null && filter.match(stackObject, stackObject.getControllerId(), this, game);
     }
 
     @Override

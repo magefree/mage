@@ -245,6 +245,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Suffer the Past", 205, Rarity.UNCOMMON, mage.cards.s.SufferThePast.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 381, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
         cards.add(new SetCardInfo("Summary Dismissal", 193, Rarity.RARE, mage.cards.s.SummaryDismissal.class));
+        cards.add(new SetCardInfo("Sunken Palace", 133, Rarity.RARE, mage.cards.s.SunkenPalace.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 173, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Sylvan Scrying", 248, Rarity.UNCOMMON, mage.cards.s.SylvanScrying.class));
         cards.add(new SetCardInfo("Syphon Mind", 206, Rarity.COMMON, mage.cards.s.SyphonMind.class));
