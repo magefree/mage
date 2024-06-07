@@ -16,6 +16,8 @@ public class Legacy extends Constructed {
                 setCodes.add(set.getCode());
             }
         }
+        banned.add("\"Name Sticker\" Goblin");
+        
         banned.add("Ancestral Recall");
         banned.add("Arcum's Astrolabe");
         banned.add("Balance");

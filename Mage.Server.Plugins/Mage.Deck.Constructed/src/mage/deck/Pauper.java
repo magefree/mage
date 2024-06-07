@@ -21,6 +21,8 @@ public class Pauper extends Constructed {
         rarities.add(Rarity.COMMON);
         rarities.add(Rarity.LAND);
 
+        banned.add("Aarakocra Sneak");
+        banned.add("All That Glitters");
         banned.add("Arcum's Astrolabe");
         banned.add("Atog");
         banned.add("Bonder's Ornament");
@@ -28,6 +30,7 @@ public class Pauper extends Constructed {
         banned.add("Cloud of Faeries");
         banned.add("Cloudpost");
         banned.add("Cranial Plating");
+        banned.add("Cranial Ram");
         banned.add("Daze");
         banned.add("Disciple of the Vault");
         banned.add("Empty the Warrens");
@@ -45,8 +48,11 @@ public class Pauper extends Constructed {
         banned.add("Peregrine Drake");
         banned.add("Prophetic Prism");
         banned.add("Sinkhole");
+        banned.add("Stirring Bard");
         banned.add("Sojourner's Companion");
         banned.add("Temporal Fissure");
         banned.add("Treasure Cruise");
+        banned.add("Underdark Explorer");
+        banned.add("Vicious Battlerager");
     }
 }

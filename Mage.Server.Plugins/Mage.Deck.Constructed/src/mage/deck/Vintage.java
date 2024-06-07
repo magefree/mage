@@ -16,6 +16,8 @@ public class Vintage extends Constructed {
                 setCodes.add(set.getCode());
             }
         }
+        banned.add("\"Name Sticker\" Goblin");
+        
         restricted.add("Ancestral Recall");
         restricted.add("Balance");
         restricted.add("Black Lotus");
