@@ -10,7 +10,7 @@ import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -52,7 +52,7 @@ public final class DogUmbra extends CardImpl {
                 "As long as another player controls enchanted creature, it can't attack or block."
         ));
         ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new TotemArmorAbility()),
+                new GainAbilitySourceEffect(new UmbraArmorAbility()),
                 DogUmbraCondition.FALSE,
                 "Otherwise, {this} has umbra armor"
         ));

@@ -13,7 +13,7 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEf
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -60,8 +60,8 @@ public final class OctopusUmbra extends CardImpl {
                 + "you may tap target creature with power 8 or less.\""));
         this.addAbility(ability);
 
-        // Totem armor
-        this.addAbility(new TotemArmorAbility());
+        // Umbra armor
+        this.addAbility(new UmbraArmorAbility());
 
     }
 
