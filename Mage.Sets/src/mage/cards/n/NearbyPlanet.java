@@ -43,6 +43,11 @@ public final class NearbyPlanet extends CardImpl {
     public NearbyPlanet copy() {
         return new NearbyPlanet(this);
     }
+
+    @Override
+    public boolean hasSubTypeForDeckbuilding(SubType subType) {
+        return subType.getSubTypeSet().isLand() || super.hasSubTypeForDeckbuilding(subType);
+    }
 }
 
 class NearbyPlanetEffect extends ContinuousEffectImpl {

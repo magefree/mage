@@ -43,6 +43,11 @@ public final class PlanarNexus extends CardImpl {
     public PlanarNexus copy() {
         return new PlanarNexus(this);
     }
+
+    @Override
+    public boolean hasSubTypeForDeckbuilding(SubType subType) {
+        return subType.getSubTypeSet() == SubTypeSet.NonBasicLandType || super.hasSubTypeForDeckbuilding(subType);
+    }
 }
 
 class PlanarNexusEffect extends ContinuousEffectImpl {
