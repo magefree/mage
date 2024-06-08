@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author jimga150
+ * @author jimga150, Susucr
  */
 public class DeificationTests extends CardTestPlayerBase {
 
@@ -95,4 +95,56 @@ public class DeificationTests extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testDamagePrevention_NonCombat() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, "Deification");
+        addCard(Zone.HAND, playerB, "Burn Down the House");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Chandra, Dressed to Kill"); // 3 / Planeswalker type: Chandra
+        addCard(Zone.BATTLEFIELD, playerA, "Tibalt, the Fiend-Blooded"); // 2 / Planeswalker type: Tibalt
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1); // need a creature for Deification to work
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deification", true);
+        setChoice(playerA, "Chandra");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Burn Down the House");
+        setModeChoice(playerB, "1"); // {this} deals 5 damage to each creature and each planeswalker
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Memnite", 1);
+        assertGraveyardCount(playerA, "Tibalt, the Fiend-Blooded", 1);
+        assertGraveyardCount(playerA, "Chandra, Dressed to Kill", 0);
+        assertCounterCount(playerA, "Chandra, Dressed to Kill", CounterType.LOYALTY, 1);
+    }
+
+    @Test
+    public void testDamagePrevention_Combat() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, "Deification");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Chandra, Dressed to Kill"); // 3 / Planeswalker type: Chandra
+        addCard(Zone.BATTLEFIELD, playerA, "Tibalt, the Fiend-Blooded"); // 2 / Planeswalker type: Tibalt
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1); // need a creature for Deification to work
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deification", true);
+        setChoice(playerA, "Chandra");
+
+        attack(2, playerB, "Craw Wurm", "Chandra, Dressed to Kill");
+        attack(2, playerB, "Grizzly Bears", "Tibalt, the Fiend-Blooded");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Tibalt, the Fiend-Blooded", 1);
+        assertGraveyardCount(playerA, "Chandra, Dressed to Kill", 0);
+        assertCounterCount(playerA, "Chandra, Dressed to Kill", CounterType.LOYALTY, 1);
+    }
 }
