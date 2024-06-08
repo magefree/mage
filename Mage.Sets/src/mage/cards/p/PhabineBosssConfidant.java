@@ -5,8 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ParleyCount;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
@@ -109,7 +107,7 @@ class PhabineBosssConfidantParleyEffect extends OneShotEffect {
         if (landCount > 0) {
             Token citizenToken = new CitizenGreenWhiteToken();
             citizenToken.putOntoBattlefield(landCount, game, source, source.getControllerId(), false, false);
-            game.applyEffects();
+            game.getState().processAction(game);
         }
 
         if (nonLandCount > 0) {

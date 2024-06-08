@@ -92,7 +92,7 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
         if (!effect.apply(game, source)) {
             return false;
         }
-        game.getState().applyEffects(game);
+        game.getState().processAction(game);
 
         Set<Card> cards = permanents
                 .stream()
