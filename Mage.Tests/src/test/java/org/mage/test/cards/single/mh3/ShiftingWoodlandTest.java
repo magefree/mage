@@ -6,7 +6,6 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -71,7 +70,6 @@ public class ShiftingWoodlandTest extends CardTestPlayerBase {
         assertColor(playerA, woodland, "Green", false);
     }
 
-    @Ignore // CopyEffect is not discarded properly. See #12433
     @Test
     public void test_Copy_StopOnLTB() {
         setStrictChooseMode(true);
@@ -120,6 +118,37 @@ public class ShiftingWoodlandTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20 - 4);
         assertLife(playerB, 20 - 2);
+        assertGraveyardCount(playerA, woodland, 1);
+    }
+
+    @Test
+    public void test_Copy_StopOnLTB_DeathTrigger() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Yavimaya Coast", 4); // to be sure not to activate Woodland
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, woodland);
+        addCard(Zone.BATTLEFIELD, playerA, "Blood Artist");
+        addCard(Zone.HAND, playerA, "Shoot the Sheriff");
+        addCard(Zone.GRAVEYARD, playerA, "Anodet Lurker"); // When Anodet Lurker dies, you gain 3 life
+        addCard(Zone.GRAVEYARD, playerA, "Plains");
+        addCard(Zone.GRAVEYARD, playerA, "Memnite");
+        addCard(Zone.GRAVEYARD, playerA, "Divination");
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}. {this} deals 1 damage to you.", 4);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Delirium</i> &mdash; {2}{G}{G}:", "Anodet Lurker");
+
+        attack(1, playerA, "Anodet Lurker", playerB);
+
+        castSpell(1, PhaseStep.END_COMBAT, playerA, "Shoot the Sheriff", "Anodet Lurker", true);
+        setChoice(playerA, "When {this} dies");
+        addTarget(playerA, playerB);
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertLife(playerA, 20 - 4 + 3 + 1);
+        assertLife(playerB, 20 - 3 - 1);
         assertGraveyardCount(playerA, woodland, 1);
     }
 }
