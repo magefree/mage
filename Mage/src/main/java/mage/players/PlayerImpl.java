@@ -4779,10 +4779,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     }
                 }
-                // TODO: must be replaced by game.getState().processAction(game), see isInUseableZoneDiesTrigger comments
-                //  about short living LKI problem
-                //game.getState().processAction(game);
-                game.applyEffects();
+                game.applyEffects(); // without LKI reset
                 break;
             case HAND:
                 for (Card card : cards) {

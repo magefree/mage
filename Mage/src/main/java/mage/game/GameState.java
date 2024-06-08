@@ -682,7 +682,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         game.getState().getTriggers().checkStateTriggers(game);
     }
 
-    public void applyEffects(Game game) {
+    void applyEffects(Game game) {
         applyEffectsCounter++;
         for (Player player : players.values()) {
             player.reset();
