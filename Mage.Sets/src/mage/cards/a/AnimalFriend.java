@@ -24,7 +24,7 @@ import mage.cards.CardSetInfo;
 
 /**
  *
- * @author anonymous
+ * @author grimreap124
  */
 public final class AnimalFriend extends CardImpl {
 
