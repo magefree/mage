@@ -77,6 +77,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         WIZARDS("1. wizards.com - low quality, cards only, multi-language", WizardCardsImageSource.instance),
         SCRYFALL_BIG("2a. scryfall.com - BIG: high quality, multi-language", ScryfallImageSource.getInstance()),
         SCRYFALL_SMALL("2b. scryfall.com - small: low quality, multi-language", ScryfallImageSourceSmall.getInstance()),
+        SCRYFALL_NORM("2c. scryfall.com - normal: good quality, multi-language", ScryfallImageSourceNormal.getInstance()),
         GRAB_BAG("3. GrabBag - unofficial STAR WARS cards and tokens", GrabbagImageSource.instance),
         COPYPASTE("4. Experimental - copy and paste image URLs", CopyPasteImageSource.instance); // TODO: need rework for user friendly GUI
 
