@@ -677,6 +677,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      */
     public void processAction(Game game) {
         game.getState().handleSimultaneousEvent(game);
+        game.resetShortLivingLKI();
         game.applyEffects();
         game.getState().getTriggers().checkStateTriggers(game);
     }
