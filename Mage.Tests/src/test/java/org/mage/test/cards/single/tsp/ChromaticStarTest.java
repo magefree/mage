@@ -62,7 +62,6 @@ public class ChromaticStarTest extends CardTestPlayerBase {
         assertHandCount(playerA, 1);
     }
 
-    @Ignore // short living LKI bug -- see #12385
     @Test
     public void test_Star_ChainMana_Auto() {
         setStrictChooseMode(true);

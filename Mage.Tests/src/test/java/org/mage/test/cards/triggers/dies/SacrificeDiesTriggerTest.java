@@ -2,7 +2,6 @@ package org.mage.test.cards.triggers.dies;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -378,7 +377,6 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore // TODO: enable after shortLKI and move to battlefield will be fixed
     public void test_DiesTriggerWhileMultiStepsEffect_ShortLKI() {
         // see details on shortLKI problems in isInUseableZoneDiesTrigger
 
