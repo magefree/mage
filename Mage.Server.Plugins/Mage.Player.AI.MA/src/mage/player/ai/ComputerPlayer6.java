@@ -730,19 +730,24 @@ public class ComputerPlayer6 extends ComputerPlayer {
                         xInfo = "x" + target.getTargetAmount(selectedId) + " ";
                     }
 
-                    String targetInfo;
-
+                    String targetInfo = null;
                     Player player = game.getPlayer(selectedId);
-                    MageObject object = game.getObject(selectedId);
-                    mage.game.stack.Spell spell = game.getSpellOrLKIStack(selectedId);
-
                     if (player != null) {
                         targetInfo = player.getName();
-                    } else if (object != null) {
-                        targetInfo = object.getIdName();
-                    } else if (spell != null) {
-                        targetInfo = "spell - " + CardUtil.substring(spell.toString(), 20, "...");
-                    } else {
+                    }
+                    if (targetInfo == null) {
+                        MageObject object = game.getObject(selectedId);
+                        if (object != null) {
+                            targetInfo = object.getIdName();
+                        }
+                    }
+                    if (targetInfo == null) {
+                        StackObject stackObject = game.getState().getStack().getStackObject(selectedId);
+                        if (stackObject != null) {
+                            targetInfo = CardUtil.substring(stackObject.toString(), 20, "...");
+                        }
+                    }
+                    if (targetInfo == null) {
                         targetInfo = "unknown";
                     }
                     allTargetsInfo.add(xInfo + targetInfo);
