@@ -34,16 +34,24 @@ public class EmergeAbility extends SpellAbility {
     private final FilterPermanent filter;
 
     public EmergeAbility(Card card, String emergeManaString) {
-        this(card, emergeManaString, StaticFilters.FILTER_PERMANENT_CREATURE, "");
+        this(card, new ManaCostsImpl<>(emergeManaString), StaticFilters.FILTER_PERMANENT_CREATURE, "");
+    }
+
+    public EmergeAbility(Card card, ManaCosts<ManaCost> emergeCost) {
+        this(card, emergeCost, StaticFilters.FILTER_PERMANENT_CREATURE, "");
     }
 
     public EmergeAbility(Card card, String emergeManaString, FilterPermanent filter, String emergeFromText) {
+        this(card, new ManaCostsImpl<>(emergeManaString), filter, emergeFromText);
+    }
+
+    public EmergeAbility(Card card, ManaCosts<ManaCost> emergeCost, FilterPermanent filter, String emergeFromText) {
         super(card.getSpellAbility());
 
         this.filter = TargetSacrifice.makeFilter(filter);
         this.emergeFromText = emergeFromText;
 
-        this.emergeCost = new ManaCostsImpl<>(emergeManaString);
+        this.emergeCost = emergeCost;
         this.newId(); // Set newId because cards spell ability is copied and needs own id
         this.setCardName(card.getName() + " with emerge");
         this.zone = Zone.HAND;

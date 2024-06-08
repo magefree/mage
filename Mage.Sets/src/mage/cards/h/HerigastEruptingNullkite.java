@@ -93,25 +93,25 @@ class HerigastEruptingNullkiteEffect extends ContinuousEffectImpl {
         Ability ability;
         for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
             if (StaticFilters.FILTER_CARD_NON_LAND.match(card, game)) {
-                ability = new EmergeAbility(card, card.getManaCost().getText());
+                ability = new EmergeAbility(card, card.getManaCost());
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getLibrary().getCards(game)) {
             if (StaticFilters.FILTER_CARD_NON_LAND.match(card, game)) {
-                ability = new EmergeAbility(card, card.getManaCost().getText());
+                ability = new EmergeAbility(card, card.getManaCost());
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getHand().getCards(game)) {
             if (StaticFilters.FILTER_CARD_NON_LAND.match(card, game)) {
-                ability = new EmergeAbility(card, card.getManaCost().getText());
+                ability = new EmergeAbility(card, card.getManaCost());
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getGraveyard().getCards(game)) {
             if (StaticFilters.FILTER_CARD_NON_LAND.match(card, game)) {
-                ability = new EmergeAbility(card, card.getManaCost().getText());
+                ability = new EmergeAbility(card, card.getManaCost());
                 game.getState().addOtherAbility(card, ability);
             }
         }
@@ -119,7 +119,7 @@ class HerigastEruptingNullkiteEffect extends ContinuousEffectImpl {
                 .stream()
                 .filter(card -> StaticFilters.FILTER_CARD_NON_LAND.match(card, game))
                 .forEach(card -> {
-                    Ability cAbility = new EmergeAbility(card, card.getManaCost().getText());
+                    Ability cAbility = new EmergeAbility(card, card.getManaCost());
                     game.getState().addOtherAbility(card, cAbility);});
 
         return true;
