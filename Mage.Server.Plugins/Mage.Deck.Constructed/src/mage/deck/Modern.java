@@ -70,8 +70,8 @@ public class Modern extends Constructed {
         banned.add("Umezawa's Jitte");
         banned.add("Up the Beanstalk");
         banned.add("Uro, Titan of Nature's Wrath");
-        banned.add("Yorion, Sky Nomad");
         banned.add("Vault of Whispers");
         banned.add("Violent Outburst");
+        banned.add("Yorion, Sky Nomad");
     }
 }

@@ -41,31 +41,31 @@ public class ThreadExecutorImpl implements ThreadExecutor {
         callExecutor = new CachedThreadPoolWithException();
         ((ThreadPoolExecutor) callExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) callExecutor).allowCoreThreadTimeOut(true);
-        ((ThreadPoolExecutor) callExecutor).setThreadFactory(new XMageThreadFactory("CALL"));
+        ((ThreadPoolExecutor) callExecutor).setThreadFactory(new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CALL_REQUEST));
 
         //gameExecutor = Executors.newFixedThreadPool(config.getMaxGameThreads());
         gameExecutor = new FixedThreadPoolWithException(config.getMaxGameThreads());
         ((ThreadPoolExecutor) gameExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) gameExecutor).allowCoreThreadTimeOut(true);
-        ((ThreadPoolExecutor) gameExecutor).setThreadFactory(new XMageThreadFactory("GAME"));
+        ((ThreadPoolExecutor) gameExecutor).setThreadFactory(new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_GAME));
 
         //tourney = Executors.newFixedThreadPool(config.getMaxGameThreads() / GAMES_PER_TOURNEY_RATIO);
         tourneyExecutor = new FixedThreadPoolWithException(config.getMaxGameThreads() / GAMES_PER_TOURNEY_RATIO);
         ((ThreadPoolExecutor) tourneyExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) tourneyExecutor).allowCoreThreadTimeOut(true);
-        ((ThreadPoolExecutor) tourneyExecutor).setThreadFactory(new XMageThreadFactory("TOURNEY"));
+        ((ThreadPoolExecutor) tourneyExecutor).setThreadFactory(new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_TOURNEY));
 
         timeoutExecutor = Executors.newScheduledThreadPool(4);
         ((ThreadPoolExecutor) timeoutExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) timeoutExecutor).allowCoreThreadTimeOut(true);
-        ((ThreadPoolExecutor) timeoutExecutor).setThreadFactory(new XMageThreadFactory("XMAGE TIMEOUT"));
+        ((ThreadPoolExecutor) timeoutExecutor).setThreadFactory(new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_TIMEOUT));
 
         timeoutIdleExecutor = Executors.newScheduledThreadPool(4);
         ((ThreadPoolExecutor) timeoutIdleExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) timeoutIdleExecutor).allowCoreThreadTimeOut(true);
-        ((ThreadPoolExecutor) timeoutIdleExecutor).setThreadFactory(new XMageThreadFactory("XMAGE TIMEOUT_IDLE"));
+        ((ThreadPoolExecutor) timeoutIdleExecutor).setThreadFactory(new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_TIMEOUT_IDLE));
 
-        serverHealthExecutor = Executors.newSingleThreadScheduledExecutor(new XMageThreadFactory("HEALTH"));
+        serverHealthExecutor = Executors.newSingleThreadScheduledExecutor(new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_HEALTH));
     }
 
     static class CachedThreadPoolWithException extends ThreadPoolExecutor {
@@ -157,7 +157,8 @@ class XMageThreadFactory implements ThreadFactory {
     @Override
     public Thread newThread(Runnable r) {
         Thread thread = new Thread(r);
-        thread.setName(prefix + ' ' + thread.getThreadGroup().getName() + '-' + thread.getId());
+        // default name, but threads can change it (example: on game or tourney start)
+        thread.setName(prefix + " " + thread.getThreadGroup().getName() + "-" + thread.getId());
         return thread;
     }
 }

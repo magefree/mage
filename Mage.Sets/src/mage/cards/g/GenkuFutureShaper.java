@@ -49,24 +49,30 @@ public final class GenkuFutureShaper extends CardImpl {
 
         // Whenever another nontoken permanent you control leaves the battlefield, choose one that hasn't been chosen this turn. Create a creature token with those characteristics.
         // * 2/2 white Fox with vigilance.
-        // * 1/2 blue Moonfolk with flying.
-        // * 1/1 black Rat with lifelink.
         Ability ability = new LeavesBattlefieldAllTriggeredAbility(
-                new CreateTokenEffect(new Fox22VigilanceToken()), filter, false
+                new CreateTokenEffect(new Fox22VigilanceToken())
+                        .setText("2/2 white Fox with vigilance"),
+                filter, false
         );
         ability.setModeTag("2/2 white Fox with vigilance");
         ability.getModes().setLimitUsageByOnce(true);
 
-        // • Create a tapped Treasure token.
+        // * 1/2 blue Moonfolk with flying.
         ability.addMode(
-                new Mode(new CreateTokenEffect(new Moonfolk12FlyingToken()))
-                        .setModeTag("1/2 blue Moonfolk with flying")
+                new Mode(
+                        new CreateTokenEffect(new Moonfolk12FlyingToken())
+                                .setText("1/2 blue Moonfolk with flying")
+                ).setModeTag("1/2 blue Moonfolk with flying")
         );
-        // • You gain 2 life.
+
+        // * 1/1 black Rat with lifelink.
         ability.addMode(
-                new Mode(new CreateTokenEffect(new Rat11LifelinkToken()))
-                        .setModeTag("1/1 black Rat with lifelink")
+                new Mode(
+                        new CreateTokenEffect(new Rat11LifelinkToken())
+                                .setText("1/1 black Rat with flying")
+                ).setModeTag("1/1 black Rat with lifelink")
         );
+        ability.getModes().setChooseText("choose one that hasn't been chosen this turn. Create a creature token with those characteristics.");
         ability.addHint(ModesAlreadyUsedHint.instance);
         this.addAbility(ability);
 

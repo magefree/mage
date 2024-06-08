@@ -37,7 +37,7 @@ public final class CountlessGearsRenegade extends CardImpl {
                 "left the battlefield this turn, create a 1/1 colorless Servo artifact creature token."
         );
         ability.setAbilityWord(AbilityWord.REVOLT);
-        this.addAbility(ability, new RevoltWatcher());
+        this.addAbility(ability.addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private CountlessGearsRenegade(final CountlessGearsRenegade card) {

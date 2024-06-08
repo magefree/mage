@@ -11,9 +11,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /*
- * 702.87. Totem Armor
+ * 702.87. Umbra Armor
  *
- * 702.87a Totem armor is a static ability that appears on some Auras. "Totem armor" means "
+ * 702.87a Umbra armor is a static ability that appears on some Auras. "Umbra armor" means "
  * If enchanted permanent would be destroyed, instead remove all damage marked on it and
  * destroy this Aura."
  *
@@ -21,34 +21,34 @@ import mage.game.permanent.Permanent;
  *
  */
 
-public class TotemArmorAbility extends SimpleStaticAbility {
+public class UmbraArmorAbility extends SimpleStaticAbility {
 
-    public TotemArmorAbility() {
-        super(Zone.BATTLEFIELD, new TotemArmorEffect());
+    public UmbraArmorAbility() {
+        super(Zone.BATTLEFIELD, new UmbraArmorEffect());
     }
 
-    private TotemArmorAbility(final TotemArmorAbility ability) {
+    private UmbraArmorAbility(final UmbraArmorAbility ability) {
         super(ability);
     }
 
     @Override
-    public TotemArmorAbility copy() {
-        return new TotemArmorAbility(this);
+    public UmbraArmorAbility copy() {
+        return new UmbraArmorAbility(this);
     }
 
     @Override
     public String getRule() {
-        return "totem armor <i>(If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)</i>";
+        return "umbra armor <i>(If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)</i>";
     }
 }
 
-class TotemArmorEffect extends ReplacementEffectImpl {
+class UmbraArmorEffect extends ReplacementEffectImpl {
 
-    TotemArmorEffect() {
+    UmbraArmorEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
     }
 
-    private TotemArmorEffect(final TotemArmorEffect effect) {
+    private UmbraArmorEffect(final UmbraArmorEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class TotemArmorEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public TotemArmorEffect copy() {
-        return new TotemArmorEffect(this);
+    public UmbraArmorEffect copy() {
+        return new UmbraArmorEffect(this);
     }
 }

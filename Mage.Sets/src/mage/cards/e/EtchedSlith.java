@@ -14,8 +14,8 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.filter.FilterOpponent;
 import mage.filter.FilterPermanent;
-import mage.filter.FilterPlayer;
 import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -68,8 +68,8 @@ class EtchedSlithPutWhenDoEffect extends OneShotEffect {
 
     private static final FilterPermanentOrPlayer filter =
             new FilterPermanentOrPlayer(
-                    "another target permanent or player",
-                    filterPermanent, new FilterPlayer()
+                    "another target permanent or opponent",
+                    filterPermanent, new FilterOpponent()
             );
 
     EtchedSlithPutWhenDoEffect() {

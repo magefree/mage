@@ -36,7 +36,7 @@ public final class PegasusGuardian extends AdventureCard {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(new PegasusToken()), TargetController.YOU,
                 RevoltCondition.instance, false
-        ), new RevoltWatcher());
+        ).addHint(RevoltCondition.getHint()), new RevoltWatcher());
 
         // Rescue the Foal
         // Exile target creature you control, then return that card to the battlefield under its owner's control.

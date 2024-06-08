@@ -63,6 +63,7 @@ class DisaTheRestlessTriggeredAbility extends PutCardIntoGraveFromAnywhereAllTri
                 new ReturnFromGraveyardToBattlefieldTargetEffect().setText("put it onto the battlefield"),
                 false, filter, TargetController.YOU, SetTargetPointer.CARD
         );
+        setTriggerPhrase("Whenever a Lhurgoyf permanent card is put into your graveyard from anywhere other than the battlefield, ");
     }
 
     private DisaTheRestlessTriggeredAbility(final DisaTheRestlessTriggeredAbility ability) {

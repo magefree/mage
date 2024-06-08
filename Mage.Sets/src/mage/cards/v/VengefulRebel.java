@@ -41,7 +41,7 @@ public final class VengefulRebel extends CardImpl {
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.setAbilityWord(AbilityWord.REVOLT);
-        this.addAbility(ability, new RevoltWatcher());
+        this.addAbility(ability.addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private VengefulRebel(final VengefulRebel card) {

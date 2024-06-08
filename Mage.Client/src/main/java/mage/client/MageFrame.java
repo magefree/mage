@@ -107,6 +107,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private final ErrorDialog errorDialog;
     private static CallbackClient callbackClient;
     private static final Preferences PREFS = Preferences.userNodeForPackage(MageFrame.class);
+    private final JPanel fakeTopPanel;
     private JLabel title;
     private Rectangle titleRectangle;
     private static final MageVersion VERSION = new MageVersion(MageFrame.class);
@@ -332,7 +333,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         setAppIcon();
         MageTray.instance.install();
 
+        // transparent top panel to fix swing bugs with other panel drawing and events processing on some systems like macOS
+        fakeTopPanel = new JPanel();
+        fakeTopPanel.setVisible(true);
+        fakeTopPanel.setOpaque(false);
+        fakeTopPanel.setLayout(null);
+        desktopPane.add(fakeTopPanel, JLayeredPane.DRAG_LAYER);
+
         desktopPane.add(ArrowBuilder.getBuilder().getArrowsManagerPanel(), JLayeredPane.PALETTE_LAYER);
+
 
         desktopPane.addComponentListener(new ComponentAdapter() {
             @Override
@@ -347,6 +356,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 updateCurrentFrameSize();
 
                 ArrowBuilder.getBuilder().setSize(width, height);
+                fakeTopPanel.setSize(width, height);
 
                 if (title != null) {
                     title.setBounds((int) (width - titleRectangle.getWidth()) / 2, (int) (height - titleRectangle.getHeight()) / 2, titleRectangle.width, titleRectangle.height);

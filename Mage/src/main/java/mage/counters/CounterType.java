@@ -71,6 +71,7 @@ public enum CounterType {
     ENERGY("energy"),
     ENLIGHTENED("enlightened"),
     EON("eon"),
+    EVERYTHING("everything"),
     EXALTED("exalted"),
     EXPERIENCE("experience"),
     EYEBALL("eyeball"),

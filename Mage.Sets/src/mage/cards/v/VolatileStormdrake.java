@@ -106,7 +106,7 @@ class VolatileStormdrakeEffect extends OneShotEffect {
 
     VolatileStormdrakeEffect() {
         super(Outcome.GainControl);
-        this.staticText = "exchange control of {this} and up to one target creature an opponent controls. "
+        this.staticText = "exchange control of {this} and target creature an opponent controls. "
                 + "If you do, you get {E}{E}{E}{E}, then sacrifice that creature unless you pay an amount of {E} equal to its mana value";
     }
 

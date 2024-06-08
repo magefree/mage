@@ -23,6 +23,7 @@ import mage.server.User;
 import mage.server.draft.DraftController;
 import mage.server.managers.TableManager;
 import mage.server.managers.ManagerFactory;
+import mage.util.ThreadUtils;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
@@ -191,7 +192,7 @@ public class TournamentController {
     }
 
     private synchronized void startTournament() {
-        Thread.currentThread().setName("TOURNEY " + tableId);
+        Thread.currentThread().setName(ThreadUtils.THREAD_PREFIX_TOURNEY + " " + tableId);
         for (final TournamentSession tournamentSession : tournamentSessions.values()) {
             if (!tournamentSession.init()) {
                 logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());

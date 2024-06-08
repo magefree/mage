@@ -815,33 +815,71 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void setConcedingPlayer(UUID playerId) {
-        Player player = null;
-        if (state.getChoosingPlayerId() != null) {
-            player = getPlayer(state.getChoosingPlayerId());
-        } else if (state.getPriorityPlayerId() != null) {
-            player = getPlayer(state.getPriorityPlayerId());
+        // request to concede a player (can be called for any player at any moment by concede button, connection fail, etc)
+        // warning, it's important to process real concede in game thread only (on priority)
+
+        // concede queue (who requested concede)
+        if (!concedingPlayers.contains(playerId)) {
+            concedingPlayers.add(playerId);
         }
-        if (player != null) {
-            if (!player.hasLeft() && player.isHuman()) {
-                if (!concedingPlayers.contains(playerId)) {
-                    logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
-                    concedingPlayers.add(playerId);
-                    player.signalPlayerConcede(); // will be executed on next priority
-                }
-            } else {
-                // no asynchronous action so check directly
-                concedingPlayers.add(playerId);
-                checkConcede();
+
+        Player currentPriorityPlayer = null;
+        if (state.getPriorityPlayerId() != null) {
+            currentPriorityPlayer = getPlayer(state.getPriorityPlayerId()); // started game
+        } else if (state.getChoosingPlayerId() != null) {
+            currentPriorityPlayer = getPlayer(state.getChoosingPlayerId()); // not started game
+        }
+
+        // if something wrong with a game - it's not started, freeze, etc
+        if (currentPriorityPlayer == null) {
+            // try to stop
+            logger.warn("Game don't have priority player - checking game end: " + this);
+            if (!ThreadUtils.isRunGameThread()) {
+                // TODO: if server has that logs then it must be researched and fixed
+                logger.error("Non-game thread can't concede or end games - someone called it from freeze game?");
             }
-        } else {
-            checkConcede();
+            checkConcede(false);
             checkIfGameIsOver();
+            return;
+        }
+
+        // if someone requested concede
+        if (currentPriorityPlayer.getId().equals(playerId)) {
+            // concede for itself
+            // stop current player dialog and execute concede
+            currentPriorityPlayer.signalPlayerConcede(true);
+        } else {
+            // concede for another player
+            // allow current player to continue and check concede on any next priority
+            currentPriorityPlayer.signalPlayerConcede(false);
+        }
+
+        // game thread can call concede directly
+        if (ThreadUtils.isRunGameThread()) {
+            // TODO: is it normal use case? If yes then remove logs
+            Player player = this.getPlayer(playerId);
+            logger.info(String.format("Game thread used concede request for (%s): %s",
+                    player == null ? "null" : player.getName(),
+                    this
+            ));
+            checkConcede();
         }
     }
 
     public void checkConcede() {
-        while (!concedingPlayers.isEmpty()) {
-            leave(concedingPlayers.removeFirst());
+        checkConcede(true);
+    }
+
+    public void checkConcede(boolean mustRunInGameThread) {
+        // must run in game thread all the time
+        if (mustRunInGameThread) {
+            ThreadUtils.ensureRunInGameThread();
+        }
+
+        UUID playerId = concedingPlayers.poll();
+        while (playerId != null) {
+            leave(playerId);
+            playerId = concedingPlayers.poll();
         }
     }
 
@@ -3922,6 +3960,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public synchronized void rollbackTurns(int turnsToRollback) {
+        // TODO: need async command
         if (gameOptions.rollbackTurnsAllowed && !executingRollback) {
             int turnToGoTo = getTurnNum() - turnsToRollback;
             if (turnToGoTo < 1 || !gameStatesRollBack.containsKey(turnToGoTo)) {

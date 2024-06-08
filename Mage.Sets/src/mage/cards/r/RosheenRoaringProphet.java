@@ -51,7 +51,7 @@ public final class RosheenRoaringProphet extends CardImpl {
 
         // When Rosheen, Roaring Prophet enters the battlefield, mill six cards. You may put a card with {X} in its mana cost from among them into your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new MillThenPutInHandEffect(6, filter), true
+                new MillThenPutInHandEffect(6, filter), false
         ));
 
         // {T}: Reveal any number of cards with {X} in their mana cost in your hand. Add {C}{C} for each card revealed this way. Spend this mana only on costs that contain {X}.

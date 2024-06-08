@@ -31,6 +31,7 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
+import mage.util.ThreadUtils;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -61,7 +62,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
             new LinkedBlockingQueue<>(),
             r -> {
                 Thread thread = new Thread(r);
-                thread.setName("AI-SIM-" + thread.getId());
+                thread.setName(ThreadUtils.THREAD_PREFIX_AI_SIMULATION + "-" + thread.getId());
                 return thread;
             });
     protected int maxDepth;
@@ -714,7 +715,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         // TODO: add modal info
         // + (action.isModal() ? " Mode = " + action.getModes().getMode().toString() : "")
         if (ability.isModal()) {
-            throw new IllegalStateException("TODO: need implement");
+            //throw new IllegalStateException("TODO: need implement");
         }
         MageObject sourceObject = ability.getSourceObject(game);
         String abilityInfo = (sourceObject == null ? "" : sourceObject.getIdName() + ": ") + CardUtil.substring(ability.toString(), 30, "...");

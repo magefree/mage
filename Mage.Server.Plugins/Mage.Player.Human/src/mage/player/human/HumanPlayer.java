@@ -2725,12 +2725,17 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public void signalPlayerConcede() {
+    public void signalPlayerConcede(boolean stopCurrentChooseDialog) {
         // waitResponseOpen(); // concede is async event, will be processed on first priority
+
+        // may be executed in CALL, HEALTH, GAME and other threads
+        // so make sure another player can't break/stop currently choosing player
+
         synchronized (response) {
-            response.setAsyncWantConcede();
-            response.notifyAll();
-            logger.debug("Set check concede for waiting player: " + getId());
+            response.setAsyncWantConcede(); // tell game that it must check conceding players
+            if (stopCurrentChooseDialog) {
+                response.notifyAll(); // will force to stop a current waiting dialog (so game can continue)
+            }
         }
     }
 
