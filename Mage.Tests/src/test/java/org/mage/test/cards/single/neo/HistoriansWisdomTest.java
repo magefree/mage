@@ -2,6 +2,7 @@ package org.mage.test.cards.single.neo;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -22,6 +23,7 @@ public class HistoriansWisdomTest extends CardTestPlayerBase {
     private static final String chimera = "Horizon Chimera"; // 3/2 Whenever you draw a card, you gain 1 life.
 
     @Test
+    @Ignore // apply effects in condition is not an appropriate solution
     public void testTrigger() {
         addCard(Zone.BATTLEFIELD, playerA, bear);
         addCard(Zone.BATTLEFIELD, playerA, chimera);

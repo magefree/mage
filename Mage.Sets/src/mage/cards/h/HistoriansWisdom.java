@@ -75,8 +75,8 @@ enum HistoriansWisdomCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.applyEffects(); // Make sure +2/+1 buff gets applied first
-        // TODO: probably that should be getting handled deeper in the engine.
+        //game.applyEffects(); // Make sure +2/+1 buff gets applied first
+        // TODO: not appropriate to call here - investigate where in the engine to apply effects to solve bug
         Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment == null) {
             return false;
