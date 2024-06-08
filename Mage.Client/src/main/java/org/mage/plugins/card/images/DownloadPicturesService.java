@@ -54,7 +54,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     private static final int MAX_ERRORS_COUNT_BEFORE_CANCEL = 50;
 
-    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 10; // protect from wrong data save
+    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6; // protect from wrong data save
 
     private final DownloadImagesDialog uiDialog;
     private boolean needCancel;
