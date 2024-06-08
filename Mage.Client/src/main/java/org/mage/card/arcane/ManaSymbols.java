@@ -334,17 +334,17 @@ public final class ManaSymbols {
         // total errors
         String errorInfo = "";
         if (iconErrors.get(0) > 0) {
-            errorInfo += "SVG fails - " + iconErrors.get(0);
+            errorInfo += "SVG miss - " + iconErrors.get(0);
         }
         if (iconErrors.get(1) > 0) {
             if (!errorInfo.isEmpty()) {
                 errorInfo += ", ";
             }
-            errorInfo += "GIF fails - " + iconErrors.get(1);
+            errorInfo += "GIF miss - " + iconErrors.get(1);
         }
 
         if (!errorInfo.isEmpty()) {
-            logger.warn("Symbols can't be load for size " + size + ": " + errorInfo);
+            logger.warn("Symbols can't be loaded, make sure you download it by main menu - size " + size + ", " + errorInfo);
         }
 
         manaImages.put(size, sizedSymbols);
