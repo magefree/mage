@@ -3,12 +3,15 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.ExileHandCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
+import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.abilities.keyword.EmergeAbility;
@@ -16,8 +19,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.players.Player;
 
 /**
  * @author grimreap124
@@ -48,7 +53,8 @@ public final class HerigastEruptingNullkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Each creature spell you cast has emerge. The emerge cost is equal to its mana cost.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new HerigastEruptingNullkiteEffect(this), filter, false, SetTargetPointer.SPELL).setTriggerPhrase("Each creature spell you cast "));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                (new HerigastEruptingNullkiteEffect())));
     }
 
     private HerigastEruptingNullkite(final HerigastEruptingNullkite card) {
@@ -63,20 +69,14 @@ public final class HerigastEruptingNullkite extends CardImpl {
 
 class HerigastEruptingNullkiteEffect extends ContinuousEffectImpl {
 
-
-    private int zoneChangeCounter;
-    private UUID permanentId;
-
-    HerigastEruptingNullkiteEffect(Card card) {
-        super(Duration.OneUse, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+    HerigastEruptingNullkiteEffect() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "has emerge. The emerge cost is equal to its mana cost";
 
     }
 
     private HerigastEruptingNullkiteEffect(final HerigastEruptingNullkiteEffect effect) {
         super(effect);
-        this.zoneChangeCounter = effect.zoneChangeCounter;
-        this.permanentId = effect.permanentId;
     }
 
     @Override
@@ -85,24 +85,42 @@ class HerigastEruptingNullkiteEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        Spell object = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-        if (object != null) {
-            zoneChangeCounter = game.getState().getZoneChangeCounter(object.getSourceId()) + 1;
-            permanentId = object.getSourceId();
-        }
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-        if (spell != null) {
-            Card card = spell.getCard();
-            game.informPlayers("mana: " + spell.getManaCost().getText());
-            Ability ability = new EmergeAbility(card, spell.getManaCost().getText());
-            game.getState().addOtherAbility(spell.getCard(), ability, true);
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
+        Ability ability;
+        for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
+            if (StaticFilters.FILTER_CARD_NON_LAND.match(card, game)) {
+                ability = new EmergeAbility(card, card.getManaCost().getText());
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        for (Card card : player.getLibrary().getCards(game)) {
+            if (StaticFilters.FILTER_CARD_NON_LAND.match(card, game)) {
+                ability = new EmergeAbility(card, card.getManaCost().getText());
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        for (Card card : player.getHand().getCards(game)) {
+            if (StaticFilters.FILTER_CARD_NON_LAND.match(card, game)) {
+                ability = new EmergeAbility(card, card.getManaCost().getText());
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        for (Card card : player.getGraveyard().getCards(game)) {
+            if (StaticFilters.FILTER_CARD_NON_LAND.match(card, game)) {
+                ability = new EmergeAbility(card, card.getManaCost().getText());
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY)
+                .stream()
+                .filter(card -> StaticFilters.FILTER_CARD_NON_LAND.match(card, game))
+                .forEach(card -> {
+                    Ability cAbility = new EmergeAbility(card, card.getManaCost().getText());
+                    game.getState().addOtherAbility(card, cAbility);});
 
         return true;
     }
