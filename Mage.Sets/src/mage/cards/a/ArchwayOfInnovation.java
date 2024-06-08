@@ -1,23 +1,18 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.continuous.NextSpellCastHasAbilityEffect;
 import mage.abilities.keyword.ImproviseAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
@@ -27,17 +22,14 @@ import java.util.UUID;
  */
 public final class ArchwayOfInnovation extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ISLAND);
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ISLAND);
+    private static final YouControlPermanentCondition condition = new YouControlPermanentCondition(filter);
 
     public ArchwayOfInnovation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Archway of Innovation enters the battlefield tapped unless you control an Island.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
-                new TapSourceEffect(), condition
-        ), "tapped unless you control an Island"));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());
