@@ -4,14 +4,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.ExileHandCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
-import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.abilities.keyword.EmergeAbility;
@@ -21,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
