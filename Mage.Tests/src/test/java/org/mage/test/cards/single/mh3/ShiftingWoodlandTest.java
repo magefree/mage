@@ -6,7 +6,6 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -71,7 +70,6 @@ public class ShiftingWoodlandTest extends CardTestPlayerBase {
         assertColor(playerA, woodland, "Green", false);
     }
 
-    @Ignore // CopyEffect is not discarded properly. See #12433
     @Test
     public void test_Copy_StopOnLTB() {
         setStrictChooseMode(true);
