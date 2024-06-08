@@ -21,7 +21,7 @@ public final class HoodedBrawler extends CardImpl {
     public HoodedBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

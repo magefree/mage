@@ -28,7 +28,7 @@ public final class EyesOfTheWisent extends CardImpl {
     }
 
     public EyesOfTheWisent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{1}{G}");
         this.subtype.add(SubType.ELEMENTAL);
 
         // Whenever an opponent casts a blue spell during your turn, you may create a 4/4 green Elemental creature token.

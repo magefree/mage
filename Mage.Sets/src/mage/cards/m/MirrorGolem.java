@@ -116,8 +116,8 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
                         FilterCard filterCard;
                         if (cardType.equals(CardType.SORCERY)) {
                             filterCard = new FilterCard("sorceries");
-                        } else if (cardType.equals(CardType.TRIBAL)) {
-                            filterCard = new FilterCard("tribal");
+                        } else if (cardType.equals(CardType.KINDRED)) {
+                            filterCard = new FilterCard("kindred");
                         } else {
                             filterCard = new FilterCard(cardType.toString() + "s");
                         }

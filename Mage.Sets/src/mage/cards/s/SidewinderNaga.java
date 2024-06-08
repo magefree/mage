@@ -26,7 +26,7 @@ public final class SidewinderNaga extends CardImpl {
     public SidewinderNaga(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

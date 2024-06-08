@@ -32,7 +32,7 @@ import java.util.UUID;
 public final class KozileksCommand extends CardImpl {
 
     public KozileksCommand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{X}{C}{C}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{X}{C}{C}");
 
         this.subtype.add(SubType.ELDRAZI);
 

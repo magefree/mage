@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public final class RebellionOfTheFlamekin extends CardImpl {
 
     public RebellionOfTheFlamekin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{3}{R}");
         this.subtype.add(SubType.ELEMENTAL);
 
         // Whenever you clash, you may pay {1}. If you do create a 3/1 Red Elemental Shaman creature token in play. If you won that token gains haste

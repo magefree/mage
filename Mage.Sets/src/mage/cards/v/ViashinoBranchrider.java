@@ -26,7 +26,7 @@ public final class ViashinoBranchrider extends CardImpl {
     public ViashinoBranchrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

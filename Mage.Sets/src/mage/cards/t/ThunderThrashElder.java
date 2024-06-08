@@ -18,7 +18,7 @@ public final class ThunderThrashElder extends CardImpl {
 
     public ThunderThrashElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(1);

@@ -20,7 +20,7 @@ public final class RiveteersRequisitioner extends CardImpl {
     public RiveteersRequisitioner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

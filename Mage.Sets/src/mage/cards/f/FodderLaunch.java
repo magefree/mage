@@ -11,8 +11,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -23,7 +21,7 @@ public final class FodderLaunch extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent(SubType.GOBLIN, "a Goblin");
 
     public FodderLaunch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.SORCERY},"{3}{B}");
         this.subtype.add(SubType.GOBLIN);
 
         //As an additional cost to cast Fodder Launch, sacrifice a Goblin.

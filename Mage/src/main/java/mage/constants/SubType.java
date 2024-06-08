@@ -62,7 +62,7 @@ public enum SubType {
     POWERSTONE("Powerstone", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
-    // 205.3m : Creatures and tribals share their lists of subtypes; these subtypes are called creature types.
+    // 205.3m : Creatures and kindreds share their lists of subtypes; these subtypes are called creature types.
     // A
     ADVISOR("Advisor", SubTypeSet.CreatureType),
     AETHERBORN("Aetherborn", SubTypeSet.CreatureType),
@@ -278,7 +278,6 @@ public enum SubType {
     MYR("Myr", SubTypeSet.CreatureType),
     MYSTIC("Mystic", SubTypeSet.CreatureType),
     // N
-    NAGA("Naga", SubTypeSet.CreatureType),
     NAUTILUS("Nautilus", SubTypeSet.CreatureType),
     NAUTOLAN("Nautolan", SubTypeSet.CreatureType, true), // Star Wars
     NECRON("Necron", SubTypeSet.CreatureType),
@@ -413,7 +412,6 @@ public enum SubType {
     VAMPIRE("Vampire", SubTypeSet.CreatureType),
     VARMINT("Varmint", SubTypeSet.CreatureType),
     VEDALKEN("Vedalken", SubTypeSet.CreatureType),
-    VIASHINO("Viashino", SubTypeSet.CreatureType),
     VILLAIN("Villain", SubTypeSet.CreatureType, true), // Unstable
     VOLVER("Volver", SubTypeSet.CreatureType),
     // W
@@ -650,7 +648,7 @@ public enum SubType {
     public boolean canGain(Game game, MageObject mageObject) {
         switch (subTypeSet) {
             case CreatureType:
-                return mageObject.isCreature(game) || mageObject.isTribal(game);
+                return mageObject.isCreature(game) || mageObject.isKindred(game);
             case BasicLandType:
             case NonBasicLandType:
                 return mageObject.isLand(game);
