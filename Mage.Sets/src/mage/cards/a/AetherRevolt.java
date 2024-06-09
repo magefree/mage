@@ -127,6 +127,7 @@ class AetherRevoltTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().clear();
         this.getEffects().add(new DamageTargetEffect(amount));
+        this.getHints().clear();
         this.addHint(new StaticHint("Energy you got: " + amount));
         return true;
     }
