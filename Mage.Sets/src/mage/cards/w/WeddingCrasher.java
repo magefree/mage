@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.NightboundAbility;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class WeddingCrasher extends CardImpl {
         this.nightCard = true;
 
         // Whenever Wedding Crasher or another Wolf or Werewolf you control dies, draw a card.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false, filter
         ));
 

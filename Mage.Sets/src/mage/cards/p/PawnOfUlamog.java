@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class PawnOfUlamog extends CardImpl {
 
         // Whenever Pawn of Ulamog or another nontoken creature you control dies, you may create a 0/1 colorless 
         // Eldrazi Spawn creature token. It has "Sacrifice this creature: Add {C}."
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new EldraziSpawnToken()).withTextOptions(true), true, filter));
     }
 

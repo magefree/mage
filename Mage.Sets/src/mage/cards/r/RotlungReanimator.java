@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class RotlungReanimator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Rotlung Reanimator or another Cleric dies, create a 2/2 black Zombie creature token.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false, filter));
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false, filter));
     }
 
     private RotlungReanimator(final RotlungReanimator card) {
