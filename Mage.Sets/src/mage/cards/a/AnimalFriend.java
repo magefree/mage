@@ -40,8 +40,8 @@ public final class AnimalFriend extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has "Whenever this creature attacks, create a 1/1 green Squirrel creature token. Put a +1/+1 counter on that token for each Aura and Equipment attached to this creature other than Animal Friend."
-        Ability ability = new AttacksTriggeredAbility(new AnimalFriendEffect(), false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
+        Ability ability = new AttacksTriggeredAbility(new AnimalFriendEffect(), false).setTriggerPhrase("Whenever this creature attacks, ");
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
 
     }
 
@@ -77,6 +77,7 @@ class AnimalFriendEffect extends OneShotEffect {
         CreateTokenEffect effect = new CreateTokenEffect(new SquirrelToken());
         boolean result = effect.apply(game, source);
         int auraAmount = new AuraAttachedCount(1).calculate(game, source, this);
+        auraAmount = Math.max(0, auraAmount - 1);
         int equipAmount = new EquipmentAttachedCount(1).calculate(game, source, this);
         int xValue = auraAmount + equipAmount;
         if (xValue <= 0 || !result) {
