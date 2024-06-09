@@ -17,12 +17,8 @@ public class DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility extends Tri
 
     protected FilterCreatureOrPlaneswalkerPermanent filter;
 
-    public DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, new FilterCreatureOrPlaneswalkerPermanent());
-    }
-
     public DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility(Effect effect, boolean optional, FilterCreatureOrPlaneswalkerPermanent filter) {
-        super(Zone.ALL, effect, optional); // Needs "ALL" if the source itself should trigger or multiple (incl. source go to grave)
+        super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         setTriggerPhrase("Whenever {this} or another " + filter.getMessage() + " dies, ");
     }

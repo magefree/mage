@@ -23,7 +23,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     }
 
     public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
-        super(Zone.ALL, effect, optional); // Needs "ALL" if the source itself should trigger or multiple (incl. source go to grave)
+        super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         String filterMessage = filter.getMessage();
         if (filterMessage.startsWith("a ")) {
