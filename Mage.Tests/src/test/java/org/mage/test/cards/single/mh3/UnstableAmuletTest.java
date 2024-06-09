@@ -80,4 +80,69 @@ public class UnstableAmuletTest extends CardTestPlayerBase {
         assertExileCount(playerA, "Grizzly Bears", 1);
         assertPermanentCount(playerA, "Balduvian Bears", 1);
     }
+
+    @Test
+    public void test_Split() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 2);
+        addCard(Zone.HAND, playerA, amulet);
+        addCard(Zone.LIBRARY, playerA, "Fire // Ice");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, amulet, true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay {E}{E}");
+
+        checkPlayableAbility("No mana to cast Fire", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Fire", false);
+        checkPlayableAbility("No mana to cast Ice", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Ice", false);
+        checkExileCount("Fire // Ice in exile", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fire // Ice", 1);
+
+        checkPlayableAbility("Can play Fire", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fire", true);
+        checkPlayableAbility("Can play Ice", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ice", true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Ice", amulet);
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 20 - 1); // 1 damage from Amulet trigger
+        assertHandCount(playerA, 2); // 1 from turn 3 draw step, 1 from Ice
+        assertTapped(amulet, true);
+        assertTappedCount("Volcanic Island", true, 2);
+    }
+
+    @Test
+    public void test_Adventure() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Taiga", 2);
+        addCard(Zone.HAND, playerA, amulet);
+        addCard(Zone.LIBRARY, playerA, "Curious Pair");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, amulet, true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay {E}{E}");
+
+        checkPlayableAbility("1: No mana to cast Curious Pair", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("1: No mana to cast Treats to Share", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+        checkExileCount("1: Curious Pair in exile", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Curious Pair", 1);
+
+        checkPlayableAbility("2: Can play Curious Pair", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", true);
+        checkPlayableAbility("2: Can play Treats to Share", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+        checkPlayableAbility("3: No mana to cast Curious Pair", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("3: Can't cast Treats to Share (on an adventure)", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+        checkExileCount("3: Curious Pair in exile (on an adventure)", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Curious Pair", 1);
+
+        checkPlayableAbility("4: Can play Curious Pair", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", true);
+        checkPlayableAbility("4: Can't cast Treats to Share (on an adventure)", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+        castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+
+        setStopAt(5, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 20 - 2); // 1 damage per Amulet trigger
+        assertTappedCount("Taiga", true, 2);
+        assertPermanentCount(playerA, "Food Token", 1);
+        assertPermanentCount(playerA, "Curious Pair", 1);
+    }
 }

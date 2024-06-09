@@ -104,7 +104,7 @@ class UnstableAmuletEffect extends OneShotEffect {
         }
         // Allow the card to be played until it leaves that exile zone.
         ContinuousEffect effect = new UnstableAmuletPlayEffect(exileId);
-        effect.setTargetPointer(new FixedTarget(card, game));
+        effect.setTargetPointer(new FixedTarget(card.getMainCard(), game));
         game.addEffect(effect, source);
         // Clean the exile Zone from other cards, that can no longer be played.
         ExileZone exileZone = game.getExile().getExileZone(exileId);
@@ -113,7 +113,7 @@ class UnstableAmuletEffect extends OneShotEffect {
         }
         Set<Card> inExileZone = exileZone.getCards(game);
         for (Card cardInExile : inExileZone) {
-            if (cardInExile.getId().equals(card.getId())) {
+            if (cardInExile.getMainCard().getId().equals(card.getMainCard().getId())) {
                 continue;
             }
             game.getExile().moveToMainExileZone(cardInExile, game);
@@ -149,16 +149,22 @@ class UnstableAmuletPlayEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
+        Card mainTargetCard = game.getCard(getTargetPointer().getFirst(game, source));
+        if (mainTargetCard == null) {
             this.discard();
             return false;
         }
         ExileZone exileZone = game.getExile().getExileZone(exileId);
-        if (exileZone == null || !exileZone.contains(cardId)) {
+        if (exileZone == null || !exileZone.contains(mainTargetCard.getId())) {
+            // Clean the Continuous effect if the target card is no longer in the exile zone
             this.discard();
             return false;
         }
-        return cardId.equals(objectId) && affectedControllerId.equals(source.getControllerId());
+        Card objectCard = game.getCard(objectId);
+        if (objectCard == null) {
+            return false;
+        }
+        return mainTargetCard.getId().equals(objectCard.getMainCard().getId()) // using main card to work with split/mdfc/adventures
+                && affectedControllerId.equals(source.getControllerId());
     }
 }
