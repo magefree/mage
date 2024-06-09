@@ -1929,7 +1929,6 @@ public abstract class GameImpl implements Game {
 
     @Override
     public synchronized void applyEffects() {
-        resetShortLivingLKI();
         state.applyEffects(this);
     }
 

@@ -436,10 +436,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
             sourceObject = game.getPermanent(source.getSourceId());
         } else {
-            // TODO: multiple calls of ApplyEffects all around the code are breaking a short living lki idea
-            //  (PlayerImpl's call to move to battlefield do the worse thing)
-            //  -
-            //  Original idea: short living LKI must help to find a moment in the inner of resolve
+            //  The idea: short living LKI must help to find a moment in the inner of resolve
             //  -
             //  Example:
             //   --!---------------!-------------!-----!-----------!
@@ -455,15 +452,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             //   - ! empty stack   !  graveyard  ! no  !   no      ! no more to resolve
             //   --!---------------!-------------!-----!-----------!
             //  -
-            //  - Problem 1: move code (well, not only move) calls ApplyEffects in the middle of the resolve
-            //  - and reset short LKI (after short LKI reset dies trigger will not work)
-            //  - Example: Goblin Welder calls sacrifice and card move in the same effect - but move call do
-            //  - a reset and dies trigger ignored (trigger thinks that permanent already dies)
-            //  -
-            //  - Possible fix:
-            //  - replace ApplyEffects in the move code by game.getState().processAction(game);
-            //  - check and fix many broken (is it was a false positive test or something broken)
-            //sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (game.getShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
                 sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             }

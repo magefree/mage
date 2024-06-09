@@ -454,7 +454,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         CreatedTokensEvent.addEvents(allAddedTokens, source, game);
 
-        game.getState().applyEffects(game); // Needed to do it here without LKIReset i.e. do get SwordOfTheMeekTest running correctly.
+        game.applyEffects(); // without LKI reset
     }
 
     @Override
