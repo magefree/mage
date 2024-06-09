@@ -7,6 +7,7 @@ import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.StaticHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -126,6 +127,7 @@ class AetherRevoltTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().clear();
         this.getEffects().add(new DamageTargetEffect(amount));
+        this.addHint(new StaticHint("Energy you got: " + amount));
         return true;
     }
 
