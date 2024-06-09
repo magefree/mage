@@ -50,7 +50,7 @@ public final class VindictiveLich extends CardImpl {
         ));
         ability.getModes().setMinModes(1);
         ability.getModes().setMaxModes(3);
-        ability.getModes().setEachModeOnlyOnce(true);
+        ability.getModes().setLimitUsageByOnce(false);
         ability.getModes().setMaxModesFilter(filter0);
         ability.addTarget(new TargetPlayer(filter1).setTargetTag(1).withChooseHint("to sacrifice a creature"));
 

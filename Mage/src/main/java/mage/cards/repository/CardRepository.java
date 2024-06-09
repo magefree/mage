@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author North, JayDi85
@@ -27,6 +28,10 @@ public enum CardRepository {
     instance;
 
     private static final Logger logger = Logger.getLogger(CardRepository.class);
+
+    // fixes limit for out of memory problems
+    private static final AtomicInteger databaseFixes = new AtomicInteger();
+    private static final int MAX_DATABASE_FIXES = 3;
 
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE;IGNORECASE=TRUE";
     private static final String VERSION_ENTITY_NAME = "card";
@@ -61,8 +66,31 @@ public enum CardRepository {
 
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error creating card repository - ", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error creating card repository - " + e, e);
+            processMemoryErrors(e);
+        }
+    }
+
+    private void processMemoryErrors(Exception e) {
+        // TODO: implement same logic for set repository, users repository and other db sources?!
+        //   or delete workaround with that fix
+        // TODO: it's for small servers only (if one game/request can eat all memory), remove after auto-restart implements
+        if (e.toString().contains("file") || e.toString().contains("closed")) {
+            // errors:
+            // - java.lang.IllegalStateException: Reading from nio:xxx/Mage.Server/db/cards.h2.mv.db failed; file length -1 read length 384 at 9384925 [1.4.197/1]
+            // - java.lang.IllegalStateException: This store is closed [1.4.197/4]"; SQL statement: xxx
+            // reason:
+            // - no more free memory, DB can't read big amount of data and broke it
+            //
+            // steps to reproduce:
+            // - run server with low memory like -Xmx200m;
+            // - cast card with name choose dialog like Brain Pry;
+            // - now server can't add new cards to game (whole server, not current game);
+            //
+            // possible fix:
+            // - try to restart DB
+            checkDatabaseHealthAndFix();
         }
     }
 
@@ -79,8 +107,9 @@ public enum CardRepository {
                                 classNames.add(card.getClassName());
                             }
                         }
-                    } catch (SQLException ex) {
-                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB - ", ex);
+                    } catch (SQLException e) {
+                        Logger.getLogger(CardRepository.class).error("Error adding cards to DB - " + e, e);
+                        processMemoryErrors(e);
                     }
                 }
 
@@ -96,7 +125,7 @@ public enum CardRepository {
     }
 
     private void addNewNames(CardInfo card, Set<String> namesList) {
-        // require before call: qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName"...);
+        // require before call: qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName"...);
 
         // normal names
         int result = card.getName().indexOf(" // ");
@@ -111,11 +140,14 @@ public enum CardRepository {
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             namesList.add(card.getSecondSideName());
         }
-        if (card.getModalDoubleFacesSecondSideName() != null && !card.getModalDoubleFacesSecondSideName().isEmpty()) {
-            namesList.add(card.getModalDoubleFacesSecondSideName());
+        if (card.getModalDoubleFacedSecondSideName() != null && !card.getModalDoubleFacedSecondSideName().isEmpty()) {
+            namesList.add(card.getModalDoubleFacedSecondSideName());
         }
         if (card.getFlipCardName() != null && !card.getFlipCardName().isEmpty()) {
             namesList.add(card.getFlipCardName());
+        }
+        if (card.getMeldsToCardName() != null && !card.getMeldsToCardName().isEmpty()) {
+            namesList.add(card.getMeldsToCardName());
         }
     }
 
@@ -127,13 +159,14 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting names from DB : " + ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -142,15 +175,15 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             qb.where().not().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -159,7 +192,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("supertypes", '%' + SuperType.BASIC.name() + '%'),
@@ -169,9 +202,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -180,15 +213,15 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             qb.where().not().like("supertypes", new SelectArg('%' + SuperType.BASIC.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -197,15 +230,15 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             qb.where().like("types", new SelectArg('%' + CardType.CREATURE.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting creature names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting creature names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -214,15 +247,15 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             qb.where().like("types", new SelectArg('%' + CardType.ARTIFACT.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting artifact names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting artifact names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -231,7 +264,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.CREATURE.name() + '%'),
@@ -241,8 +274,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-land and non-creature names from DB : " + ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-land and non-creature names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -251,7 +285,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'),
@@ -261,9 +295,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 addNewNames(card, names);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting non-artifact non-land names from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting non-artifact non-land names from DB, possible low memory: " + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -284,14 +318,18 @@ public enum CardRepository {
                 queryBuilder.limit(1L).where()
                         .eq("setCode", new SelectArg(setCode))
                         .and().eq("cardNumber", new SelectArg(cardNumber));
+
+                // some double faced cards can use second side card with same number as main side
+                // (example: vow - 65 - Jacob Hauken, Inspector), so make priority for main side first
+                queryBuilder.orderBy("nightCard", true);
             }
             List<CardInfo> result = cardDao.query(queryBuilder.prepare());
             if (!result.isEmpty()) {
                 return result.get(0);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error finding card from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error finding card from DB: " + e, e);
+            processMemoryErrors(e);
         }
         return null;
     }
@@ -303,8 +341,9 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 names.add(card.getClassName());
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting classnames from DB : " + ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting classnames from DB, possible low memory:" + e, e);
+            processMemoryErrors(e);
         }
         return names;
     }
@@ -315,9 +354,9 @@ public enum CardRepository {
             queryBuilder.where().not().in("className", classNames);
 
             return cardDao.query(queryBuilder.prepare());
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting missing cards from DB : " + ex);
-
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting missing cards from DB: " + e, e);
+            processMemoryErrors(e);
         }
 
         return Collections.emptyList();
@@ -342,18 +381,13 @@ public enum CardRepository {
     }
 
     public CardInfo findPreferredCoreExpansionCard(String name) {
-        return findPreferredCoreExpansionCard(name, null);
+        return findPreferredCoreExpansionCard(name, "");
     }
 
     public CardInfo findPreferredCoreExpansionCard(String name, String preferredSetCode) {
         List<CardInfo> cards;
         cards = findCards(name);
 
-        return findPreferredOrLatestCard(cards, preferredSetCode);
-    }
-
-    public CardInfo findPreferredCoreExpansionCardByClassName(String canonicalClassName, String preferredSetCode) {
-        List<CardInfo> cards = findCardsByClass(canonicalClassName);
         return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
@@ -366,7 +400,7 @@ public enum CardRepository {
                 ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                 if (set != null) {
 
-                    if ((preferredSetCode != null) && (preferredSetCode.equals(set.getCode()))) {
+                    if (preferredSetCode.equals(set.getCode())) {
                         return cardinfo;
                     }
 
@@ -387,32 +421,36 @@ public enum CardRepository {
 
     /**
      * Function to find a card by name from a specific set.
-     * Used for building cubes, packs, and for ensuring that dual faces and split cards have sides/halves from the same set.
+     * Used for building cubes, packs, and for ensuring that dual faces and split cards have sides/halves from
+     * the same set and variant art.
      *
      * @param name                  name of the card, or side of the card, to find
      * @param expansion             the set name from which to find the card
+     * @param cardNumber            the card number for variant arts in one set
      * @param returnSplitCardHalf   whether to return a half of a split card or the corresponding full card.
      *                              Want this `false` when user is searching by either names in a split card so that
      *                              the full card can be found by either name.
      * @return
      */
-    public CardInfo findCardWPreferredSet(String name, String expansion, boolean returnSplitCardHalf) {
+    public CardInfo findCardWithPreferredSetAndNumber(String name, String expansion, String cardNumber, boolean returnSplitCardHalf) {
         List<CardInfo> cards;
 
-        cards = findCards(name, 0, returnSplitCardHalf);
+        cards = findCards(name, 0, returnSplitCardHalf, true);
+        CardInfo bestCard = cards.stream()
+                .filter(card -> expansion == null || expansion.equalsIgnoreCase(card.getSetCode()))
+                .filter(card -> cardNumber == null || cardNumber.equals(card.getCardNumber()))
+                .findFirst()
+                .orElse(null);
 
-        if (!cards.isEmpty()) {
-            for (CardInfo cardinfo : cards) {
-                if (cardinfo.getSetCode() != null && expansion != null && expansion.equalsIgnoreCase(cardinfo.getSetCode())) {
-                    return cardinfo;
-                }
-            }
+        if (bestCard != null) {
+            return bestCard;
+        } else {
+            return findPreferredCoreExpansionCard(name);
         }
-        return findPreferredCoreExpansionCard(name);
     }
 
-    public CardInfo findCardWPreferredSet(String name, String expansion) {
-        return findCardWPreferredSet(name, expansion, false);
+    public CardInfo findCardWithPreferredSetAndNumber(String name, String expansion, String cardNumber) {
+        return findCardWithPreferredSetAndNumber(name, expansion, cardNumber, false);
     }
 
     public List<CardInfo> findCards(String name) {
@@ -437,10 +475,11 @@ public enum CardRepository {
      *                              Want this `false` when user is searching by either names in a split card so that
      *                              the full card can be found by either name.
      *                              Want this `true` when the client is searching for info on both halves to display it.
+     * @canCheckDatabaseHealth      try to fix database on any errors (use true anytime except fix methods itself)
      * @return                      a list of the reprints of the card if it was found (up to limitByMaxAmount number),
      *                              or an empty list if the card was not found.
      */
-    public List<CardInfo> findCards(String name, long limitByMaxAmount, boolean returnSplitCardHalf) {
+    public List<CardInfo> findCards(String name, long limitByMaxAmount, boolean returnSplitCardHalf, boolean canCheckDatabaseHealth) {
         List<CardInfo> results;
         QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
         if (limitByMaxAmount > 0) {
@@ -472,7 +511,7 @@ public enum CardRepository {
                             .eq("flipCardName",                     new SelectArg(name)).or()
                             .eq("secondSideName",                   new SelectArg(name)).or()
                             .eq("adventureSpellName",               new SelectArg(name)).or()
-                            .eq("modalDoubleFacesSecondSideName",   new SelectArg(name));
+                            .eq("modalDoubleFacedSecondSideName",   new SelectArg(name));
                     results = cardDao.query(queryBuilder.prepare());
                 } else {
                     // Check that a full card was found and not a SplitCardHalf
@@ -502,15 +541,18 @@ public enum CardRepository {
                 }
             }
             return results;
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement: " + e, e);
+            if (canCheckDatabaseHealth) {
+                processMemoryErrors(e);
+            }
         }
 
         return Collections.emptyList();
     }
 
     public List<CardInfo> findCards(String name, long limitByMaxAmount) {
-        return findCards(name, limitByMaxAmount, false);
+        return findCards(name, limitByMaxAmount, false, true);
     }
 
     public List<CardInfo> findCardsByClass(String canonicalClassName) {
@@ -518,8 +560,9 @@ public enum CardRepository {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             queryBuilder.where().eq("className", new SelectArg(canonicalClassName));
             return cardDao.query(queryBuilder.prepare());
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of raw sql statement" + e, e);
+            processMemoryErrors(e);
         }
         return Collections.emptyList();
     }
@@ -527,6 +570,8 @@ public enum CardRepository {
     /**
      * Warning, don't use db functions in card's code - it generates heavy db loading in AI simulations. If you
      * need that feature then check for simulation mode. See https://github.com/magefree/mage/issues/7014
+     *
+     * Ignoring night cards by default
      *
      * @param criteria
      * @return
@@ -537,8 +582,9 @@ public enum CardRepository {
             criteria.buildQuery(queryBuilder);
 
             return cardDao.query(queryBuilder.prepare());
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error during execution of card repository query statement", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error during execution of card repository query statement: " + e, e);
+            processMemoryErrors(e);
         }
         return Collections.emptyList();
     }
@@ -578,8 +624,9 @@ public enum CardRepository {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             return RepositoryUtil.getDatabaseVersion(connectionSource, VERSION_ENTITY_NAME + "Content");
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting content version from DB - ", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting content version from DB - " + e, e);
+            processMemoryErrors(e);
         }
         return 0;
     }
@@ -588,8 +635,9 @@ public enum CardRepository {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME + "Content", version);
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error getting content version - ", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error getting content version - " + e, e);
+            processMemoryErrors(e);
         }
     }
 
@@ -603,16 +651,59 @@ public enum CardRepository {
                 DatabaseConnection conn = cardDao.getConnectionSource().getReadWriteConnection(cardDao.getTableName());
                 conn.executeStatement("shutdown compact", 0);
             }
-        } catch (SQLException ex) {
+        } catch (SQLException ignore) {
         }
     }
 
-    public void openDB() {
+    private void openDB() {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
-        } catch (SQLException ex) {
-            Logger.getLogger(CardRepository.class).error("Error opening card repository - ", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(CardRepository.class).error("Error opening card repository - " + e, e);
+        }
+    }
+
+    private static CardInfo safeFindKnownCard() {
+        // safe find of known card with memory/db fixes
+        return instance.findCards("Silvercoat Lion", 1, false, false)
+                .stream()
+                .findFirst()
+                .orElse(null);
+    }
+
+    public static boolean checkDatabaseHealthAndFix() {
+        // see details in processMemoryErrors
+
+        // card must exist
+        CardInfo cardInfo = safeFindKnownCard();
+        if (cardInfo != null) {
+            logger.info("Database: checking broken status... GOOD");
+            return true;
+        }
+
+        Logger.getLogger(CardRepository.class).error("Database: checking broken status... BAD");
+
+        if (databaseFixes.incrementAndGet() > MAX_DATABASE_FIXES) {
+            logger.error("Critical error: no more db memory fixes allows, server must be restarted");
+            return false;
+        }
+
+        // DB seems to have a problem - try to restart the DB (useless in 99% due out of memory problems)
+        instance.closeDB();
+        instance.openDB();
+        cardInfo = safeFindKnownCard();
+        if (cardInfo != null) {
+            logger.warn(String.format("Database: trying to restart (%d try)... GOOD - db fixed", databaseFixes.get()));
+            return true;
+        } else {
+            // TODO: add here:
+            //  - admin notification by email
+            //  - players notification by message,
+            //  - timer with auto-restart feature (restart java app, restart docker container - e.g. docker health check)
+            //  see related issue: https://github.com/magefree/mage/issues/8130
+            logger.warn(String.format("Database: trying to restart  (%d try)... FAIL - server must be restarted", databaseFixes.get()));
+            return false;
         }
     }
 }

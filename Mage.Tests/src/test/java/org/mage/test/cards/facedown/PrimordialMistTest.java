@@ -30,8 +30,7 @@ public class PrimordialMistTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Brine Elemental"); // Creature {5}{U}{U} (5/4)
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brine Elemental");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brine Elemental using Morph");
         
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
@@ -39,7 +38,6 @@ public class PrimordialMistTest extends CardTestPlayerBase {
         setChoice(playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Brine Elemental");
-        setChoice(playerA, false); // cast it face down as 2/2 creature
         
         setChoice(playerA, true);
                 

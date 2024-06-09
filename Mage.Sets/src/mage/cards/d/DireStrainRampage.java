@@ -60,7 +60,7 @@ public final class DireStrainRampage extends CardImpl {
 
 class DireStrainRampageEffect extends OneShotEffect {
 
-    public DireStrainRampageEffect() {
+    DireStrainRampageEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy target artifact, enchantment, or land. If a land was destroyed this way, " +
                 "its controller may search their library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. " +

@@ -14,6 +14,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,17 +44,19 @@ public final class ArgothSanctumOfNature extends CardImpl {
 
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
+    private static final Hint hint = new ConditionHint(condition, "You control a legendary green creature");
 
     public ArgothSanctumOfNature(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         this.meldsWithClazz = mage.cards.t.TitaniaVoiceOfGaea.class;
+        this.meldsToClazz = mage.cards.h.HanweirTheWrithingTownship.class;
 
         // Argoth, Sanctum of Nature enters the battlefield tapped unless you control a legendary green creature.
         this.addAbility(new EntersBattlefieldAbility(
                 new ConditionalOneShotEffect(new TapSourceEffect(), condition, ""),
                 "tapped unless you control a legendary green creature"
-        ));
+        ).addHint(hint));
 
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());

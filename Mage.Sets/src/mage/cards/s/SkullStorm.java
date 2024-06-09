@@ -46,13 +46,13 @@ public final class SkullStorm extends CardImpl {
 
 class SkullStormEffect extends OneShotEffect {
 
-    public SkullStormEffect() {
+    SkullStormEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each opponent sacrifices a creature. "
                 + "Each opponent who can't loses half their life, rounded up.";
     }
 
-    public SkullStormEffect(final SkullStormEffect effect) {
+    private SkullStormEffect(final SkullStormEffect effect) {
         super(effect);
     }
 

@@ -72,12 +72,12 @@ public final class NullhideFerox extends CardImpl {
 
 class NullhideFeroxCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public NullhideFeroxCantCastEffect() {
+    NullhideFeroxCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You can't cast noncreature spells";
     }
 
-    public NullhideFeroxCantCastEffect(final NullhideFeroxCantCastEffect effect) {
+    private NullhideFeroxCantCastEffect(final NullhideFeroxCantCastEffect effect) {
         super(effect);
     }
 
@@ -104,12 +104,12 @@ class NullhideFeroxCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
 class NullhideFeroxLoseAbilitiesEffect extends OneShotEffect {
 
-    public NullhideFeroxLoseAbilitiesEffect() {
+    NullhideFeroxLoseAbilitiesEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} loses all abilities until end of turn. Any player may activate this ability";
     }
 
-    public NullhideFeroxLoseAbilitiesEffect(final NullhideFeroxLoseAbilitiesEffect effect) {
+    private NullhideFeroxLoseAbilitiesEffect(final NullhideFeroxLoseAbilitiesEffect effect) {
         super(effect);
     }
 

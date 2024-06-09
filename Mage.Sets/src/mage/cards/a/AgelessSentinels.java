@@ -54,7 +54,7 @@ public final class AgelessSentinels extends CardImpl {
 
 class AgelessSentinelsEffect extends ContinuousEffectImpl {
 
-    public AgelessSentinelsEffect() {
+    AgelessSentinelsEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
         staticText = "it becomes a Bird Giant";
     }

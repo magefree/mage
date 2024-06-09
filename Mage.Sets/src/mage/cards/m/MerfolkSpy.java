@@ -49,18 +49,18 @@ public final class MerfolkSpy extends CardImpl {
 
 class MerfolkSpyEffect extends OneShotEffect {
 
-    public MerfolkSpyEffect() {
+    MerfolkSpyEffect() {
         super(Outcome.Detriment);
         staticText = "that player reveals a card at random from their hand";
     }
 
-    public MerfolkSpyEffect(final MerfolkSpyEffect effect) {
+    private MerfolkSpyEffect(final MerfolkSpyEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && !player.getHand().isEmpty()) {
             Cards revealed = new CardsImpl();
             revealed.add(player.getHand().getRandom(game));

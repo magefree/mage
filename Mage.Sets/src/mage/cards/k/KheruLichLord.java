@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -9,31 +8,23 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ReplacementEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.replacement.LeaveBattlefieldExileTargetReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,12 +57,12 @@ public final class KheruLichLord extends CardImpl {
 
 class KheruLichLordEffect extends OneShotEffect {
 
-    public KheruLichLordEffect() {
+    KheruLichLordEffect() {
         super(Outcome.Benefit);
         this.staticText = "return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of the next end step. If that card would leave the battlefield, exile it instead of putting it anywhere else";
     }
 
-    public KheruLichLordEffect(final KheruLichLordEffect effect) {
+    private KheruLichLordEffect(final KheruLichLordEffect effect) {
         super(effect);
     }
 
@@ -90,76 +81,32 @@ class KheruLichLordEffect extends OneShotEffect {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
-                    FixedTarget fixedTarget = new FixedTarget(permanent, game);
+                    FixedTarget blueprintTarget = new FixedTarget(permanent, game);
                     ContinuousEffect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(fixedTarget);
+                    effect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(effect, source);
 
                     effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(fixedTarget);
+                    effect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(effect, source);
 
                     effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                    effect.setTargetPointer(fixedTarget);
+                    effect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(effect, source);
 
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
-                    exileEffect.setTargetPointer(fixedTarget);
+                    exileEffect.setTargetPointer(blueprintTarget.copy());
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                     game.addDelayedTriggeredAbility(delayedAbility, source);
 
-                    KheruLichLordReplacementEffect replacementEffect = new KheruLichLordReplacementEffect();
-                    replacementEffect.setTargetPointer(fixedTarget);
+                    ReplacementEffect replacementEffect = new LeaveBattlefieldExileTargetReplacementEffect("that card");
+                    replacementEffect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(replacementEffect, source);
                 }
             }
             return true;
         }
 
-        return false;
-    }
-}
-
-class KheruLichLordReplacementEffect extends ReplacementEffectImpl {
-
-    KheruLichLordReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        staticText = "If that card would leave the battlefield, exile it instead of putting it anywhere else";
-    }
-
-    KheruLichLordReplacementEffect(final KheruLichLordReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KheruLichLordReplacementEffect copy() {
-        return new KheruLichLordReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && event.getTargetId().equals(getTargetPointer().getFirst(game, source))
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 }

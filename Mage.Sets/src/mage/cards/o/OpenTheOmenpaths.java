@@ -84,7 +84,7 @@ class OpenTheOmenpathsCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!(source instanceof SpellAbility)) {
+        if (!(source instanceof SpellAbility) || source.isActivated()) {
             return false;
         }
         MageObject object = game.getObject(source);

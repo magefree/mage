@@ -54,7 +54,7 @@ class RofellossGiftEffect extends OneShotEffect {
                 "Return an enchantment card from your graveyard to your hand for each card revealed this way.";
     }
 
-    public RofellossGiftEffect(final RofellossGiftEffect effect) {
+    private RofellossGiftEffect(final RofellossGiftEffect effect) {
         super(effect);
     }
 
@@ -70,30 +70,18 @@ class RofellossGiftEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filter1);
-        if (!player.choose(outcome, player.getHand(), targetCardInHand, game)) {
+        if (!player.choose(outcome, player.getHand(), targetCardInHand, source, game)) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        for (UUID cardId : targetCardInHand.getTargets()) {
-            Card card = game.getCard(cardId);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        player.revealCards(source, cards, game);
+        Cards revealedCards = new CardsImpl(targetCardInHand.getTargets());
+        player.revealCards(source, revealedCards, game);
         int enchantmentsToReturn = Math.min(player.getGraveyard().count(filter2, game), targetCardInHand.getTargets().size());
         TargetCardInYourGraveyard targetCardInYourGraveyard = new TargetCardInYourGraveyard(enchantmentsToReturn, filter2);
-        targetCardInYourGraveyard.setNotTarget(true);
+        targetCardInYourGraveyard.withNotTarget(true);
         if (!player.choose(outcome, targetCardInYourGraveyard, source, game)) {
             return false;
         }
-        cards = new CardsImpl();
-        for (UUID cardId : targetCardInYourGraveyard.getTargets()) {
-            Card card = game.getCard(cardId);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        return player.moveCards(cards, Zone.HAND, source, game);
+        Cards returnedCards = new CardsImpl(targetCardInYourGraveyard.getTargets());
+        return player.moveCards(returnedCards, Zone.HAND, source, game);
     }
 }

@@ -57,7 +57,7 @@ class StudentOfElementsHasFlyingAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new FlipSourceEffect(new TobitaMasterOfWinds()));
     }
 
-    public StudentOfElementsHasFlyingAbility(final StudentOfElementsHasFlyingAbility ability) {
+    private StudentOfElementsHasFlyingAbility(final StudentOfElementsHasFlyingAbility ability) {
         super(ability);
     }
 
@@ -86,7 +86,7 @@ class TobitaMasterOfWinds extends TokenImpl {
 
     TobitaMasterOfWinds() {
         super("Tobita, Master of Winds", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.HUMAN);
@@ -98,7 +98,7 @@ class TobitaMasterOfWinds extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
     }
-    public TobitaMasterOfWinds(final TobitaMasterOfWinds token) {
+    private TobitaMasterOfWinds(final TobitaMasterOfWinds token) {
         super(token);
     }
 

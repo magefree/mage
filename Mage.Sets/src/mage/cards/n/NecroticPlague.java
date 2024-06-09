@@ -92,13 +92,13 @@ enum NecroticPlagueAdjuster implements TargetAdjuster {
 
 class NecroticPlagueEffect extends OneShotEffect {
 
-    public NecroticPlagueEffect() {
+    NecroticPlagueEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "its controller chooses target creature one of their opponents controls. " +
                 "Return {this} from its owner's graveyard to the battlefield attached to that creature";
     }
 
-    public NecroticPlagueEffect(final NecroticPlagueEffect effect) {
+    private NecroticPlagueEffect(final NecroticPlagueEffect effect) {
         super(effect);
     }
 

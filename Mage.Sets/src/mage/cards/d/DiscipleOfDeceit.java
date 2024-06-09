@@ -61,7 +61,7 @@ class DiscipleOfDeceitEffect extends OneShotEffect {
         this.staticText = "you may discard a nonland card. If you do, search your library for a card with the same mana value as that card, reveal it, put it into your hand, then shuffle";
     }
     
-    public DiscipleOfDeceitEffect(final DiscipleOfDeceitEffect effect) {
+    private DiscipleOfDeceitEffect(final DiscipleOfDeceitEffect effect) {
         super(effect);
     }
     
@@ -87,7 +87,7 @@ class DiscipleOfDeceitEffect extends OneShotEffect {
                     String targetName = "card with mana value of " + card.getManaValue();
                     FilterCard filter = new FilterCard(targetName);
                     filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, card.getManaValue()));
-                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true).apply(game, source);                    
+                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true).apply(game, source);
                 }
             }
             return true;

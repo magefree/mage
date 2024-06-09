@@ -23,6 +23,9 @@ public class AttackedThisTurnWatcher extends Watcher {
     // issue with Robber of the Rich.  it needs to check the subtype of the LKI of the permanent on the battlefield and this fails with MageObjectReference
     private final Set<Permanent> attackedThisTurnCreaturesPermanentLKI = new HashSet<>();
 
+    /**
+     * Game default watcher
+     */
     public AttackedThisTurnWatcher() {
         super(WatcherScope.GAME);
     }

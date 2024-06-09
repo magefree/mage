@@ -41,7 +41,7 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
 
     public IbHalfheartGoblinTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.ADVISOR);
 
@@ -55,7 +55,7 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new GoblinToken(), 2),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
+                new SacrificeTargetCost(2, filter)));
 
     }
 
@@ -71,12 +71,12 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
 
 class IbHalfheartGoblinTacticianEffect extends OneShotEffect {
 
-    public IbHalfheartGoblinTacticianEffect() {
+    IbHalfheartGoblinTacticianEffect() {
         super(Outcome.Damage);
         this.staticText = "sacrifice it. If you do, it deals 4 damage to each creature blocking it";
     }
 
-    public IbHalfheartGoblinTacticianEffect(final IbHalfheartGoblinTacticianEffect effect) {
+    private IbHalfheartGoblinTacticianEffect(final IbHalfheartGoblinTacticianEffect effect) {
         super(effect);
     }
 

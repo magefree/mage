@@ -86,8 +86,8 @@ class ShadowKinEffect extends OneShotEffect {
         TargetCardInGraveyard target = new TargetCardInGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE
         );
-        target.setNotTarget(true);
-        controller.choose(outcome, cards, target, game);
+        target.withNotTarget(true);
+        controller.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (card == null || sourcePermanent == null) {
@@ -99,7 +99,6 @@ class ShadowKinEffect extends OneShotEffect {
         CopyApplier applier = new ShadowKinApplier();
         applier.apply(game, blueprint, source, sourcePermanent.getId());
         CopyEffect copyEffect = new CopyEffect(Duration.Custom, blueprint, sourcePermanent.getId());
-        copyEffect.newId();
         copyEffect.setApplier(applier);
         Ability newAbility = source.copy();
         copyEffect.init(newAbility, game);

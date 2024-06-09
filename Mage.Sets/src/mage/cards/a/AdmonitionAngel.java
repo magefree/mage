@@ -49,7 +49,8 @@ public final class AdmonitionAngel extends CardImpl {
         this.addAbility(ability);
 
         // When Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
+        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)
+                .setText("return all cards exiled with it to the battlefield under their owners' control"), false);
         this.addAbility(ability2);
     }
 

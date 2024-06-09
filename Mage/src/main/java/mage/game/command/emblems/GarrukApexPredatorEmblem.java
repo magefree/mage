@@ -11,8 +11,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -24,15 +22,22 @@ public final class GarrukApexPredatorEmblem extends Emblem {
      */
 
     public GarrukApexPredatorEmblem() {
-        setName("Emblem Garruk");
+        super("Emblem Garruk");
 
         Effect effect = new BoostTargetEffect(5, 5, Duration.EndOfTurn);
         effect.setText("it gets +5/+5");
         Ability ability = new AttackedByCreatureTriggeredAbility(Zone.COMMAND, effect, false, SetTargetPointer.PERMANENT);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        ability.addEffect(effect.concatBy("and"));
+        ability.addEffect(effect.setText("and gains trample until end of turn"));
         this.getAbilities().add(ability);
+    }
 
-        availableImageSetCodes = Arrays.asList("M15", "MED");
+    private GarrukApexPredatorEmblem(final GarrukApexPredatorEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public GarrukApexPredatorEmblem copy() {
+        return new GarrukApexPredatorEmblem(this);
     }
 }

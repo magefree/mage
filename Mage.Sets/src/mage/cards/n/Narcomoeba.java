@@ -47,7 +47,7 @@ class NarcomoebaAbility extends ZoneChangeTriggeredAbility {
         super(Zone.LIBRARY, Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), "",  true);
     }
 
-    public NarcomoebaAbility(final NarcomoebaAbility ability) {
+    private NarcomoebaAbility(final NarcomoebaAbility ability) {
         super(ability);
     }
 

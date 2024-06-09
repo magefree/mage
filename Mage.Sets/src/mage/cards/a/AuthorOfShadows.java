@@ -87,8 +87,8 @@ class AuthorOfShadowsEffect extends OneShotEffect {
         }
 
         TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD_A_NON_LAND);
-        target.setNotTarget(true);
-        controller.choose(outcome, cards, target, game);
+        target.withNotTarget(true);
+        controller.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return true;
@@ -100,7 +100,7 @@ class AuthorOfShadowsEffect extends OneShotEffect {
         ExileZone exileZone = game.getExile().createZone(exileZoneId, exileZoneName);
         game.getExile().moveToAnotherZone(card, game, exileZone);
 
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+        CardUtil.makeCardPlayable(game, source, card, true, Duration.Custom, true);
         return true;
     }
 }

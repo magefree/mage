@@ -26,10 +26,10 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
         this.setTargetPointer = setTargetPointer;
         this.attachedDescription = attachedDescription;
         setTriggerPhrase("Whenever " + attachedDescription + " deals "
-                              + (combatOnly ? "combat " : "") + "damage to a creature, ");
+                + (combatOnly ? "combat " : "") + "damage to a creature, ");
     }
 
-    public DealsDamageToACreatureAttachedTriggeredAbility(final DealsDamageToACreatureAttachedTriggeredAbility ability) {
+    protected DealsDamageToACreatureAttachedTriggeredAbility(final DealsDamageToACreatureAttachedTriggeredAbility ability) {
         super(ability);
         this.combatOnly = ability.combatOnly;
         this.setTargetPointer = ability.setTargetPointer;

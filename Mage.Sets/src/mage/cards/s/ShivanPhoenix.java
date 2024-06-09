@@ -27,7 +27,7 @@ public final class ShivanPhoenix extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Shivan Phoenix dies, return Shivan Phoenix to its owner's hand.
-        this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()).withRuleTextReplacement(false));
     }
 
     private ShivanPhoenix(final ShivanPhoenix card) {

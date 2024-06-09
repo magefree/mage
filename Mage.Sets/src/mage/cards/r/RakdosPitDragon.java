@@ -47,7 +47,7 @@ public final class RakdosPitDragon extends CardImpl {
         )).setAbilityWord(AbilityWord.HELLBENT));
     }
 
-    public RakdosPitDragon(final RakdosPitDragon card) {
+    private RakdosPitDragon(final RakdosPitDragon card) {
         super(card);
     }
 

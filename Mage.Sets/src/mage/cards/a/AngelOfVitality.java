@@ -1,22 +1,16 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.LifeCompareCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.replacement.GainPlusOneLifeReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -24,6 +18,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AngelOfVitality extends CardImpl {
+
+    private static final Condition condition = new LifeCompareCondition(TargetController.YOU, ComparisonType.OR_GREATER, 25);
 
     public AngelOfVitality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -36,12 +32,12 @@ public final class AngelOfVitality extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // If you would gain life, you gain that much life plus 1 instead.
-        this.addAbility(new SimpleStaticAbility(new AngelOfVitalityEffect()));
+        this.addAbility(new SimpleStaticAbility(new GainPlusOneLifeReplacementEffect()));
 
         // Angel of Vitality gets +2/+2 as long as you have 25 or more life.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
-                AngelOfVitalityCondition.instance, "{this} gets +2/+2 as long as you have 25 or more life"
+                condition, "{this} gets +2/+2 as long as you have 25 or more life"
         )));
     }
 
@@ -52,53 +48,5 @@ public final class AngelOfVitality extends CardImpl {
     @Override
     public AngelOfVitality copy() {
         return new AngelOfVitality(this);
-    }
-}
-
-class AngelOfVitalityEffect extends ReplacementEffectImpl {
-
-    AngelOfVitalityEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would gain life, you gain that much life plus 1 instead";
-    }
-
-    private AngelOfVitalityEffect(final AngelOfVitalityEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AngelOfVitalityEffect copy() {
-        return new AngelOfVitalityEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.GAIN_LIFE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.isControlledBy(event.getPlayerId());
-    }
-}
-
-enum AngelOfVitalityCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getLife() >= 25;
     }
 }

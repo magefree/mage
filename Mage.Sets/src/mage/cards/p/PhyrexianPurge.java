@@ -49,7 +49,7 @@ enum PhyrexianPurgeCostAdjuster implements CostAdjuster {
     public void adjustCosts(Ability ability, Game game) {
         int numTargets = ability.getTargets().get(0).getTargets().size();
         if (numTargets > 0) {
-            ability.getCosts().add(new PayLifeCost(numTargets * 3));
+            ability.addCost(new PayLifeCost(numTargets * 3));
         }
     }
 }

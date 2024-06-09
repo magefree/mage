@@ -43,6 +43,8 @@ public final class Constants {
     public static final int MAX_AVATAR_ID = 32;
     public static final int DEFAULT_AVATAR_ID = 10;
 
+    public static final int MAX_CHAT_MESSAGE_SIZE = 500; // ignore too big messages
+
     /**
      * Time each player has during the game to play using his\her priority.
      */
@@ -57,5 +59,6 @@ public final class Constants {
         public static final String ORIGINAL_ID = "originalId";
         public static final String SECOND_MESSAGE = "secondMessage";
         public static final String HINT_TEXT = "hintText";
+        public static final String AUTO_ANSWER_MESSAGE = "autoAnswerMessage";
     }
 }

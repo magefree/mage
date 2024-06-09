@@ -27,7 +27,7 @@ public class ChooseSecretOpponentEffect extends OneShotEffect {
         staticText = "secretly choose an opponent";
     }
 
-    public ChooseSecretOpponentEffect(final ChooseSecretOpponentEffect effect) {
+    protected ChooseSecretOpponentEffect(final ChooseSecretOpponentEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ public class ChooseSecretOpponentEffect extends OneShotEffect {
             return "" + source.getSourceId() + '_' + (game.getPermanentEntering(source.getSourceId()).getZoneChangeCounter(game) + 1);
         }
         if (game.getPermanentOrLKIBattlefield(source.getSourceId()) != null) { // Stalking Leonin
-        return "" + source.getSourceId() + '_' + (game.getPermanentOrLKIBattlefield(source.getSourceId()).getZoneChangeCounter(game));
+            return "" + source.getSourceId() + '_' + (game.getPermanentOrLKIBattlefield(source.getSourceId()).getZoneChangeCounter(game));
         }
         return "Does not exist";
     }

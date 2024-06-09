@@ -16,7 +16,7 @@ public class CanAttackOnlyAloneEffect extends RestrictionEffect {
         staticText = "{this} can only attack alone";
     }
 
-    public CanAttackOnlyAloneEffect(final CanAttackOnlyAloneEffect effect) {
+    protected CanAttackOnlyAloneEffect(final CanAttackOnlyAloneEffect effect) {
         super(effect);
     }
 

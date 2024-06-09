@@ -46,7 +46,7 @@ public final class ScrapyardRecombiner extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), new TapSourceCost()
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
     }
 

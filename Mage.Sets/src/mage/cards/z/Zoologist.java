@@ -51,12 +51,12 @@ public final class Zoologist extends CardImpl {
 
 class ZoologistEffect extends OneShotEffect {
 
-    public ZoologistEffect() {
+    ZoologistEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard";
     }
 
-    public ZoologistEffect(final ZoologistEffect effect) {
+    private ZoologistEffect(final ZoologistEffect effect) {
         super(effect);
     }
 

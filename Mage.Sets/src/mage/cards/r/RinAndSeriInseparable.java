@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.GreenCatToken;
 import mage.game.permanent.token.WhiteDogToken;
 import mage.target.common.TargetAnyTarget;
@@ -35,8 +35,8 @@ public final class RinAndSeriInseparable extends CardImpl {
     private static final FilterSpell dogSpellFilter = new FilterSpell("a Dog spell");
     private static final FilterSpell catSpellFilter = new FilterSpell("a Cat spell");
 
-    private static final FilterPermanent dogPermanentFilter = new FilterControlledCreaturePermanent("Dogs you control");
-    private static final FilterPermanent catPermanentFilter = new FilterControlledCreaturePermanent("Cats you control");
+    private static final FilterPermanent dogPermanentFilter = new FilterControlledPermanent("Dogs you control");
+    private static final FilterPermanent catPermanentFilter = new FilterControlledPermanent("Cats you control");
 
     static {
         dogSpellFilter.add(SubType.DOG.getPredicate());
@@ -49,7 +49,7 @@ public final class RinAndSeriInseparable extends CardImpl {
     public RinAndSeriInseparable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOG);
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(4);

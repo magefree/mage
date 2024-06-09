@@ -103,7 +103,7 @@ class OpalPalaceWatcher extends Watcher {
 
 class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public OpalPalaceEntersBattlefieldEffect() {
+    OpalPalaceEntersBattlefieldEffect() {
         super(Duration.EndOfGame, Outcome.BoostCreature, false);
         staticText = "If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it equal to the number of times it's been cast from the command zone this game";
     }

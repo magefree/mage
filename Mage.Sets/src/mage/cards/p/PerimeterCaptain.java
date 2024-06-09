@@ -55,7 +55,7 @@ class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control with defender blocks, ");
     }
 
-    public PerimeterCaptainTriggeredAbility(final PerimeterCaptainTriggeredAbility ability) {
+    private PerimeterCaptainTriggeredAbility(final PerimeterCaptainTriggeredAbility ability) {
         super(ability);
     }
 

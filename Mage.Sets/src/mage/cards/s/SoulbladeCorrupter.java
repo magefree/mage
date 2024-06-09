@@ -64,7 +64,7 @@ class SoulbladeCorrupterTriggeredAbility extends AttacksAllTriggeredAbility {
         ).setText("that creature gains deathtouch until end of turn"), false, StaticFilters.FILTER_CREATURE_P1P1, SetTargetPointer.PERMANENT, false);
     }
 
-    SoulbladeCorrupterTriggeredAbility(final SoulbladeCorrupterTriggeredAbility effect) {
+    private SoulbladeCorrupterTriggeredAbility(final SoulbladeCorrupterTriggeredAbility effect) {
         super(effect);
     }
 

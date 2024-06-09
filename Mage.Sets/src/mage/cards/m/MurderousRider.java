@@ -4,14 +4,15 @@ import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+
 import java.util.UUID;
-import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 
 /**
  * @author TheElk801
@@ -41,6 +42,8 @@ public final class MurderousRider extends AdventureCard {
                 new LoseLifeSourceControllerEffect(2).setText("You lose 2 life.")
         );
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
+
+        this.finalizeAdventure();
     }
 
     private MurderousRider(final MurderousRider card) {

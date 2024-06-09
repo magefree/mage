@@ -19,7 +19,7 @@ public final class SolveTheEquation extends CardImpl {
 
         // Search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY), true, true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY), true
         ));
     }
 

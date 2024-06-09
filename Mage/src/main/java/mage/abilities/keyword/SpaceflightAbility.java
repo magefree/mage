@@ -47,7 +47,7 @@ class SpaceFlightEffect extends RestrictionEffect implements MageSingleton {
         super(Duration.EndOfGame);
     }
 
-    public SpaceFlightEffect(final SpaceFlightEffect effect) {
+    protected SpaceFlightEffect(final SpaceFlightEffect effect) {
         super(effect);
     }
 

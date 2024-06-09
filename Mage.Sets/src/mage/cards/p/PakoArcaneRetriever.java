@@ -27,7 +27,7 @@ public final class PakoArcaneRetriever extends CardImpl {
     public PakoArcaneRetriever(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.DOG);
         this.power = new MageInt(3);

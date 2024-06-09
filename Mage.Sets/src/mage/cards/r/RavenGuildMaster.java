@@ -27,10 +27,10 @@ public final class RavenGuildMaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Raven Guild Master deals combat damage to a player, that player exiles the top ten cards of their library.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(10, "that player"), false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(10), false, true));
 
         // Morph {2}{U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{2}{U}{U}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{U}{U}")));
     }
 
     private RavenGuildMaster(final RavenGuildMaster card) {

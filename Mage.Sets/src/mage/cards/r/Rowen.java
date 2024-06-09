@@ -47,7 +47,7 @@ class RowenAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new InfoEffect(""), false);
     }
 
-    RowenAbility(final RowenAbility ability) {
+    private RowenAbility(final RowenAbility ability) {
         super(ability);
     }
 
@@ -72,7 +72,7 @@ class RowenAbility extends TriggeredAbilityImpl {
                     lastTriggeredTurn = game.getTurnNum();
                     controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
                     this.getEffects().clear();
-                    if (card.isLand(game) && card.isBasic()) {
+                    if (card.isLand(game) && card.isBasic(game)) {
                         this.addEffect(new DrawCardSourceControllerEffect(1));
                     }
                     return true;

@@ -6,7 +6,6 @@ import mage.abilities.effects.common.PreventAllDamageToAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -26,7 +25,7 @@ public final class EmmaraTandris extends CardImpl {
 
     public EmmaraTandris(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
 
@@ -34,7 +33,7 @@ public final class EmmaraTandris extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Prevent all damage that would be dealt to creature tokens you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURE_TOKENS)));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private EmmaraTandris(final EmmaraTandris card) {

@@ -2,7 +2,8 @@ package mage.abilities.keyword;
 
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.abilities.icon.abilities.TrampleAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
+import mage.abilities.icon.CardIconType;
 import mage.constants.Zone;
 
 import java.io.ObjectStreamException;
@@ -16,6 +17,7 @@ public class TrampleOverPlaneswalkersAbility extends StaticAbility implements Ma
 
     static {
         instance = new TrampleOverPlaneswalkersAbility();
+        instance.addIcon(new CardIconImpl(CardIconType.ABILITY_TRAMPLE, "Trample over planeswalkers"));
     }
 
     private Object readResolve() throws ObjectStreamException {

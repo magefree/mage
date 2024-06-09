@@ -55,12 +55,12 @@ public final class OrnateKanzashi extends CardImpl {
 
 class OrnateKanzashiEffect extends OneShotEffect {
 
-    public OrnateKanzashiEffect() {
+    OrnateKanzashiEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target opponent exiles the top card of their library. You may play that card this turn";
     }
 
-    public OrnateKanzashiEffect(final OrnateKanzashiEffect effect) {
+    private OrnateKanzashiEffect(final OrnateKanzashiEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class OrnateKanzashiEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && opponent != null) {
             if (opponent.getLibrary().hasCards()) {
@@ -92,12 +92,12 @@ class OrnateKanzashiEffect extends OneShotEffect {
 
 class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl {
 
-    public OrnateKanzashiCastFromExileEffect() {
+    OrnateKanzashiCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play that card from exile this turn";
     }
 
-    public OrnateKanzashiCastFromExileEffect(final OrnateKanzashiCastFromExileEffect effect) {
+    private OrnateKanzashiCastFromExileEffect(final OrnateKanzashiCastFromExileEffect effect) {
         super(effect);
     }
 

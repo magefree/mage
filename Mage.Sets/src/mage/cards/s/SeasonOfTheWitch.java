@@ -43,7 +43,6 @@ public final class SeasonOfTheWitch extends CardImpl {
 
         // At the beginning of the end step, destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new SeasonOfTheWitchEffect(), TargetController.ANY, false);
-        ability.addWatcher(new AttackedThisTurnWatcher());
         ability.addWatcher(new CouldAttackThisTurnWatcher());
         this.addAbility(ability);
     }
@@ -65,7 +64,7 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
         this.staticText = "destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack";
     }
 
-    SeasonOfTheWitchEffect(final SeasonOfTheWitchEffect effect) {
+    private SeasonOfTheWitchEffect(final SeasonOfTheWitchEffect effect) {
         super(effect);
     }
 
@@ -78,7 +77,7 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         if (activePlayer != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 // Noncreature cards are safe.
                 if (!permanent.isCreature(game)) {
                     continue;

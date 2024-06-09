@@ -52,7 +52,7 @@ class LoseControlTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When a player other than {this}'s owner controls it, ");
     }
 
-    public LoseControlTriggeredAbility(final LoseControlTriggeredAbility ability) {
+    private LoseControlTriggeredAbility(final LoseControlTriggeredAbility ability) {
         super(ability);
     }
 
@@ -81,12 +81,12 @@ class LoseControlTriggeredAbility extends TriggeredAbilityImpl {
 
 class BronzeBombshellEffect extends OneShotEffect {
 
-    public BronzeBombshellEffect() {
+    BronzeBombshellEffect() {
         super(Outcome.Damage);
         this.staticText = "that player sacrifices it. If the player does, {this} deals 7 damage to the player.";
     }
 
-    public BronzeBombshellEffect(final BronzeBombshellEffect effect) {
+    private BronzeBombshellEffect(final BronzeBombshellEffect effect) {
         super(effect);
     }
 

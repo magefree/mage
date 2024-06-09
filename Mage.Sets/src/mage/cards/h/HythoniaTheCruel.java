@@ -28,7 +28,7 @@ public final class HythoniaTheCruel extends CardImpl {
 
     public HythoniaTheCruel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GORGON);
 
         this.power = new MageInt(4);

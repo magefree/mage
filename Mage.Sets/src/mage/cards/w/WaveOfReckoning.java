@@ -38,12 +38,12 @@ public final class WaveOfReckoning extends CardImpl {
 
 class WaveOfReckoningDamageEffect extends OneShotEffect {
 
-    public WaveOfReckoningDamageEffect() {
+    WaveOfReckoningDamageEffect() {
             super(Outcome.Detriment);
             staticText = "each creature deals damage to itself equal to its power";
         }
 
-        public WaveOfReckoningDamageEffect(final WaveOfReckoningDamageEffect effect) {
+        private WaveOfReckoningDamageEffect(final WaveOfReckoningDamageEffect effect) {
             super(effect);
         }
 

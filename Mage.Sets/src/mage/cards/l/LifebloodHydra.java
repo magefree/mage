@@ -54,12 +54,12 @@ public final class LifebloodHydra extends CardImpl {
 
 class LifebloodHydraEffect extends OneShotEffect {
 
-    public LifebloodHydraEffect() {
+    LifebloodHydraEffect() {
         super(Outcome.Benefit);
         this.staticText = "you gain life and draw cards equal to its power";
     }
 
-    public LifebloodHydraEffect(final LifebloodHydraEffect effect) {
+    private LifebloodHydraEffect(final LifebloodHydraEffect effect) {
         super(effect);
     }
 

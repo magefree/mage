@@ -9,8 +9,8 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPlayerBatchEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,7 +29,7 @@ public final class BreechesBrazenPlunderer extends CardImpl {
     public BreechesBrazenPlunderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(3);
@@ -67,14 +67,13 @@ class BreechesBrazenPlundererTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerBatchEvent dEvent = (DamagedPlayerBatchEvent) event;
         Set<UUID> opponents = new HashSet<>();
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
+        for (DamagedEvent damagedEvent : ((DamagedBatchForPlayersEvent) event).getEvents()) {
             Permanent permanent = game.getPermanent(damagedEvent.getSourceId());
             if (permanent == null
                     || !permanent.isControlledBy(getControllerId())
@@ -84,7 +83,7 @@ class BreechesBrazenPlundererTriggeredAbility extends TriggeredAbilityImpl {
             }
             opponents.add(damagedEvent.getTargetId());
         }
-        if (opponents.size() < 1) {
+        if (opponents.isEmpty()) {
             return false;
         }
         this.getEffects().clear();
@@ -144,7 +143,7 @@ class BreechesBrazenPlundererEffect extends OneShotEffect {
             return false;
         }
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, true);
         }
         return true;
     }

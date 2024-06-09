@@ -44,7 +44,7 @@ public final class GrandMasterOfFlowers extends CardImpl {
     public GrandMasterOfFlowers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BAHAMUT);
         this.setStartingLoyalty(3);
 

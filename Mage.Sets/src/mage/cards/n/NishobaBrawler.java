@@ -30,7 +30,7 @@ public final class NishobaBrawler extends CardImpl {
 
         // Domain — Nishoba Brawler's power is equal to the number of basic land types among lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerSourceEffect(DomainValue.REGULAR, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(DomainValue.REGULAR)
         ).setAbilityWord(AbilityWord.DOMAIN).addHint(DomainHint.instance));
     }
 

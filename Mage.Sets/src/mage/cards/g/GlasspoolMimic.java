@@ -8,7 +8,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
@@ -20,7 +20,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class GlasspoolMimic extends ModalDoubleFacesCard {
+public final class GlasspoolMimic extends ModalDoubleFacedCard {
 
     public GlasspoolMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

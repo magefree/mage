@@ -45,7 +45,7 @@ class FalseCureTriggeredAbility extends DelayedTriggeredAbility {
         super(new LoseLifeTargetEffect(0), Duration.EndOfTurn, false);
     }
     
-    FalseCureTriggeredAbility(final FalseCureTriggeredAbility ability) {
+    private FalseCureTriggeredAbility(final FalseCureTriggeredAbility ability) {
         super(ability);
     }
     

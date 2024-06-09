@@ -50,7 +50,7 @@ class ImperialHovertankTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new GainLifeEffect(1));
     }
 
-    public ImperialHovertankTriggeredAbility(final ImperialHovertankTriggeredAbility ability) {
+    private ImperialHovertankTriggeredAbility(final ImperialHovertankTriggeredAbility ability) {
         super(ability);
     }
 

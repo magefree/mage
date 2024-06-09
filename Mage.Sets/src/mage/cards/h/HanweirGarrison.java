@@ -26,7 +26,9 @@ public final class HanweirGarrison extends CardImpl {
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
+
         this.meldsWithClazz = mage.cards.h.HanweirBattlements.class;
+        this.meldsToClazz = mage.cards.h.HanweirTheWrithingTownship.class;
 
         // Whenever Hanweir Garrison attacks, create two 1/1 red Human creature tokens tapped and attacking.
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new RedHumanToken(), 2, true, true), false));

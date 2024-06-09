@@ -1,38 +1,34 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
- *
- * @author jeffwadsworth
+ * @author TheElk801
  */
 public final class MercadiasDownfall extends CardImpl {
-    
-    private static String rule = "Each attacking creature gets +1/+0 until end of turn for each nonbasic land defending player controls";
 
     public MercadiasDownfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Each attacking creature gets +1/+0 until end of turn for each nonbasic land defending player controls.
-        this.getSpellAbility().addEffect(new BoostAllEffect(new DefendersNonBasicLandCount(), StaticValue.get(0), Duration.EndOfTurn, new FilterAttackingCreature(), true, rule));
-
+        this.getSpellAbility().addEffect(new MercadiasDownfallEffect());
     }
 
     private MercadiasDownfall(final MercadiasDownfall card) {
@@ -43,42 +39,42 @@ public final class MercadiasDownfall extends CardImpl {
     public MercadiasDownfall copy() {
         return new MercadiasDownfall(this);
     }
+}
 
-    static class DefendersNonBasicLandCount implements DynamicValue {
-        
-        @Override
-        public int calculate(Game game, Ability sourceAbility, Effect effect) {
-            UUID defenderId;
-            for (CombatGroup group : game.getCombat().getGroups()) {
-                defenderId = group.getDefenderId();
-                if (group.isDefenderIsPlaneswalker()) {
-                    Permanent permanent = game.getPermanent(defenderId);
-                    if (permanent != null) {
-                        defenderId = permanent.getControllerId();
-                    }
-                }
-                FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
-                filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
-                System.out.println("The number of nonbasic lands is " + game.getBattlefield().countAll(filter, defenderId, game));
-                return game.getBattlefield().countAll(filter, defenderId, game);
-            }
-            return 0;
-        }
+class MercadiasDownfallEffect extends OneShotEffect {
 
-        @Override
-        public DefendersNonBasicLandCount copy() {
-            return new DefendersNonBasicLandCount();
-        }
+    private static final FilterPermanent filter = new FilterLandPermanent();
 
-        @Override
-        public String toString() {
-            return "X";
-        }
-
-        @Override
-        public String getMessage() {
-            return "the number of nonbasic lands defending player controls";
-        }
+    static {
+        filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
     }
 
+    MercadiasDownfallEffect() {
+        super(Outcome.Benefit);
+        staticText = "each attacking creature gets +1/+0 until end of turn for each nonbasic land defending player controls";
+    }
+
+    private MercadiasDownfallEffect(final MercadiasDownfallEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MercadiasDownfallEffect copy() {
+        return new MercadiasDownfallEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_ATTACKING_CREATURE, source.getControllerId(), source, game
+        )) {
+            int count = game.getBattlefield().count(
+                    filter, game.getCombat().getDefendingPlayerId(permanent.getId(), game), source, game
+            );
+            game.addEffect(new BoostTargetEffect(
+                    count, 0, Duration.EndOfTurn
+            ).setTargetPointer(new FixedTarget(permanent, game)), source);
+        }
+        return true;
+    }
 }

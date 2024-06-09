@@ -59,11 +59,11 @@ public final class LoyalApprentice extends CardImpl {
 
 class LoyalApprenticeEffect extends OneShotEffect {
 
-    public LoyalApprenticeEffect() {
+    LoyalApprenticeEffect() {
         super(Outcome.Benefit);
     }
 
-    public LoyalApprenticeEffect(final LoyalApprenticeEffect effect) {
+    private LoyalApprenticeEffect(final LoyalApprenticeEffect effect) {
         super(effect);
     }
 

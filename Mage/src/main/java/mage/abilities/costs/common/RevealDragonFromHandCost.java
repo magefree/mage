@@ -27,6 +27,7 @@ public class RevealDragonFromHandCost extends RevealTargetFromHandCost {
 
     public RevealDragonFromHandCost() {
         super(new TargetCardInHand(0, 1, filter));
+        this.text = "you may reveal a Dragon card from your hand";
     }
 
     private RevealDragonFromHandCost(final RevealDragonFromHandCost cost) {

@@ -49,23 +49,18 @@ public final class BenevolentUnicorn extends CardImpl {
 
 class BenevolentUnicornEffect extends ReplacementEffectImpl {
 
-    public BenevolentUnicornEffect() {
+    BenevolentUnicornEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a spell would deal damage to a permanent or player, it deals that much damage minus 1 to that permanent or player instead.";
     }
 
-    public BenevolentUnicornEffect(final BenevolentUnicornEffect effect) {
+    private BenevolentUnicornEffect(final BenevolentUnicornEffect effect) {
         super(effect);
     }
 
     @Override
     public BenevolentUnicornEffect copy() {
         return new BenevolentUnicornEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

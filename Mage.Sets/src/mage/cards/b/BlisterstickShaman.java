@@ -30,7 +30,7 @@ public final class BlisterstickShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlisterstickShaman (final BlisterstickShaman card) {
+    private BlisterstickShaman(final BlisterstickShaman card) {
         super(card);
     }
 

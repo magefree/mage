@@ -17,7 +17,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -41,7 +41,7 @@ public final class HolyMantle extends CardImpl {
 
         // Enchanted creature gets +2/+2 and has protection from creatures.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilityAttachedEffect(new ProtectionAbility(FILTER_PERMANENT_CREATURES), AttachmentType.AURA, Duration.WhileOnBattlefield));
+        ability.addEffect(new GainAbilityAttachedEffect(new ProtectionAbility(StaticFilters.FILTER_PERMANENT_CREATURES), AttachmentType.AURA, Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 

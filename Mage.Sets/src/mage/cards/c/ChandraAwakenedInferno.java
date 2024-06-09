@@ -37,7 +37,7 @@ public final class ChandraAwakenedInferno extends CardImpl {
     public ChandraAwakenedInferno(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(6);
 
@@ -90,7 +90,7 @@ class ChandraAwakenedInfernoEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            game.addEmblem(new ChandraAwakenedInfernoEmblem(), source.getSourceObjectIfItStillExists(game), playerId);
+            game.addEmblem(new ChandraAwakenedInfernoEmblem(), source.getSourceObject(game), playerId);
         }
         return true;
     }

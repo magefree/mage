@@ -1,5 +1,3 @@
-
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -51,7 +49,7 @@ public final class HiredTorturer extends CardImpl {
 
     }
 
-    public HiredTorturer (final HiredTorturer card) {
+    private HiredTorturer(final HiredTorturer card) {
         super(card);
     }
 
@@ -64,18 +62,18 @@ public final class HiredTorturer extends CardImpl {
 
 class HiredTorturerEffect extends OneShotEffect {
 
-    public HiredTorturerEffect() {
+    HiredTorturerEffect() {
         super(Outcome.Detriment);
-        staticText = "and reveals a card at random from their hand";
+        staticText = ", then reveals a card at random from their hand";
     }
 
-    public HiredTorturerEffect(final HiredTorturerEffect effect) {
+    private HiredTorturerEffect(final HiredTorturerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && !player.getHand().isEmpty()) {
             Cards revealed = new CardsImpl();
             revealed.add(player.getHand().getRandom(game));

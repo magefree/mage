@@ -39,7 +39,7 @@ public final class AshcloudPhoenix extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new AshcloudPhoenixEffect()));
 
         // Morph {4}{R}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{R}{R}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{R}{R}")));
 
         // When Ashcloud Phoenix is turned face up, it deals 2 damage to each player.
         Effect effect = new DamagePlayersEffect(2, TargetController.ANY);
@@ -64,7 +64,7 @@ class AshcloudPhoenixEffect extends OneShotEffect {
         this.staticText = "return it to the battlefield face down under your control";
     }
 
-    AshcloudPhoenixEffect(final AshcloudPhoenixEffect effect) {
+    private AshcloudPhoenixEffect(final AshcloudPhoenixEffect effect) {
         super(effect);
     }
 

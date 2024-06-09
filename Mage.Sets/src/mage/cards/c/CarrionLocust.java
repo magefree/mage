@@ -55,7 +55,7 @@ public final class CarrionLocust extends CardImpl {
 
 class CarrionLocustEffect extends OneShotEffect {
 
-    public CarrionLocustEffect() {
+    CarrionLocustEffect() {
         super(Outcome.Exile);
         this.staticText = "exile target card from an opponent's graveyard. If it was a creature card, that player loses 1 life";
     }

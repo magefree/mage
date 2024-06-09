@@ -44,7 +44,7 @@ public final class DescendantsPath extends CardImpl {
 
 class DescendantsPathEffect extends OneShotEffect {
 
-    public DescendantsPathEffect() {
+    DescendantsPathEffect() {
         super(Outcome.Discard);
         this.staticText = "reveal the top card of your library. If it's a creature "
                 + "card that shares a creature type with a creature you control, "
@@ -52,7 +52,7 @@ class DescendantsPathEffect extends OneShotEffect {
                 "put it on the bottom of your library";
     }
 
-    public DescendantsPathEffect(final DescendantsPathEffect effect) {
+    private DescendantsPathEffect(final DescendantsPathEffect effect) {
         super(effect);
     }
 

@@ -69,7 +69,7 @@ public class ChampionAbility extends StaticAbility {
             case 1:
                 SubType subType = subTypes.get(0);
                 this.objectDescription = subType.getDescription();
-                filter = new FilterControlledPermanent(subType, "another " + subType + " you control");
+                filter = new FilterControlledPermanent(subType, "another " + subType);
                 filter.add(AnotherPredicate.instance);
                 break;
             case 2:
@@ -102,7 +102,7 @@ public class ChampionAbility extends StaticAbility {
         addSubAbility(ability2);
     }
 
-    public ChampionAbility(final ChampionAbility ability) {
+    protected ChampionAbility(final ChampionAbility ability) {
         super(ability);
         this.objectDescription = ability.objectDescription;
     }
@@ -134,10 +134,10 @@ class ChampionExileCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
-        if (controller == null || !targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
+        if (controller == null || !this.getTargets().choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
             return paid;
         }
-        for (UUID targetId : targets.get(0).getTargets()) {
+        for (UUID targetId : this.getTargets().get(0).getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {
                 return false;
@@ -156,7 +156,7 @@ class ChampionExileCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

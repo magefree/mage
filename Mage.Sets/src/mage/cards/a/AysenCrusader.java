@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -44,7 +43,7 @@ public final class AysenCrusader extends CardImpl {
 
         // Aysen Crusader's power and toughness are each equal to 2 plus the number of Soldiers and Warriors you control.
         DynamicValue value = new IntPlusDynamicValue(2, new PermanentsOnBattlefieldCount(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value)));
     }
 
     private AysenCrusader(final AysenCrusader card) {

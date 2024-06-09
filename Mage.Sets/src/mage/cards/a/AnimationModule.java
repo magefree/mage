@@ -1,9 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,6 +18,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -28,8 +26,11 @@ import mage.game.permanent.token.ServoToken;
 import mage.players.Player;
 import mage.target.common.TargetPermanentOrPlayer;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class AnimationModule extends CardImpl {
@@ -63,7 +64,7 @@ class AnimationModuleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new ServoToken()), new GenericManaCost(1)), false);
     }
 
-    AnimationModuleTriggeredAbility(final AnimationModuleTriggeredAbility ability) {
+    private AnimationModuleTriggeredAbility(final AnimationModuleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -102,7 +103,7 @@ class AnimationModuleEffect extends OneShotEffect {
         this.staticText = "Choose a counter on target permanent or player. Give that permanent or player another counter of that kind";
     }
 
-    AnimationModuleEffect(final AnimationModuleEffect effect) {
+    private AnimationModuleEffect(final AnimationModuleEffect effect) {
         super(effect);
     }
 
@@ -125,7 +126,7 @@ class AnimationModuleEffect extends OneShotEffect {
                         }
                     } else {
                         Choice choice = new ChoiceImpl(true);
-                        Set<String> choices = new HashSet<>(permanent.getCounters(game).size());
+                        Set<String> choices = new LinkedHashSet<>();
                         for (Counter counter : permanent.getCounters(game).values()) {
                             choices.add(counter.getName());
                         }
@@ -147,22 +148,23 @@ class AnimationModuleEffect extends OneShotEffect {
             } else {
                 Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                 if (player != null) {
-                    if (!player.getCounters().isEmpty()) {
-                        if (player.getCounters().size() == 1) {
-                            for (Counter counter : player.getCounters().values()) {
+                    Counters counters = player.getCountersAsCopy();
+                    if (!counters.isEmpty()) {
+                        if (counters.size() == 1) {
+                            for (Counter counter : counters.values()) {
                                 Counter newCounter = new Counter(counter.getName());
                                 player.addCounters(newCounter, source.getControllerId(), source, game);
                             }
                         } else {
                             Choice choice = new ChoiceImpl(true);
-                            Set<String> choices = new HashSet<>(player.getCounters().size());
-                            for (Counter counter : player.getCounters().values()) {
+                            Set<String> choices = new LinkedHashSet<>();
+                            for (Counter counter : counters.values()) {
                                 choices.add(counter.getName());
                             }
                             choice.setChoices(choices);
                             choice.setMessage("Choose a counter");
                             if (controller.choose(Outcome.Benefit, choice, game)) {
-                                for (Counter counter : player.getCounters().values()) {
+                                for (Counter counter : counters.values()) {
                                     if (counter.getName().equals(choice.getChoice())) {
                                         Counter newCounter = new Counter(counter.getName());
                                         player.addCounters(newCounter, source.getControllerId(), source, game);

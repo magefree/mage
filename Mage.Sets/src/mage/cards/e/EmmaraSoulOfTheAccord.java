@@ -20,7 +20,7 @@ public final class EmmaraSoulOfTheAccord extends CardImpl {
     public EmmaraSoulOfTheAccord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);

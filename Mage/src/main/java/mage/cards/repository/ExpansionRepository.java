@@ -56,14 +56,24 @@ public enum ExpansionRepository {
             instanceInitialized = true;
 
             eventSource.fireRepositoryDbLoaded();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            // TODO: add app close?
+            e.printStackTrace();
         }
 
     }
 
+    /**
+     * Warning, don't forget to unsubscribe due memory leak problems
+     *
+     * @param listener
+     */
     public void subscribe(Listener<RepositoryEvent> listener) {
         eventSource.addListener(listener);
+    }
+
+    public void unsubscribe(Listener<RepositoryEvent> listener) {
+        eventSource.removeListener(listener);
     }
 
     public void saveSets(final List<ExpansionInfo> newSets, final List<ExpansionInfo> updatedSets, long newContentVersion) {

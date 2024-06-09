@@ -63,7 +63,7 @@ class CalmingVerseEffect extends OneShotEffect {
         this.staticText = "Destroy all enchantments you don't control. Then if you control an untapped land, destroy all enchantments you control";
     }
 
-    public CalmingVerseEffect(final CalmingVerseEffect effect) {
+    private CalmingVerseEffect(final CalmingVerseEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class CalmingVerseEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
 
-            if (game.getState().getBattlefield().countAll(untappedLandFilter, controller.getId(), game) > 0) {
+            if (game.getBattlefield().countAll(untappedLandFilter, controller.getId(), game) > 0) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(controlledEnchantmentsFilter, source.getControllerId(), source, game)) {
                     permanent.destroy(source, game, false);
                 }

@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import mage.cards.action.TransferData;
 import mage.choices.Choice;
 import mage.choices.ChoiceHintType;
 import mage.client.MageFrame;
@@ -56,7 +57,7 @@ public class PickChoiceDialog extends MageDialog {
         cbSpecial.setToolTipText(choice.getSpecialHint());
 
         // 2 modes: string or key-values
-        // sore data in allItems for inremental filtering
+        // store data in allItems for inremental filtering
         // http://logicbig.com/tutorials/core-java-tutorial/swing/list-filter/
         this.allItems.clear();
         if (choice.isKeyChoice()) {
@@ -136,6 +137,9 @@ public class PickChoiceDialog extends MageDialog {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 if (e.getClickCount() == 2) {
                     doChoose();
                 }
@@ -235,6 +239,7 @@ public class PickChoiceDialog extends MageDialog {
                         CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(cardName)));
                         cardInfo.init(cardView, this.bigCard, this.gameId);
                     }
+                    cardInfo.setPopupAutoLocationMode(TransferData.PopupAutoLocationMode.PUT_NEAR_MOUSE_POSITION);
 
                     cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
                 } else {

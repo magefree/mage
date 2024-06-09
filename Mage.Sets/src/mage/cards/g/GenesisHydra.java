@@ -57,12 +57,12 @@ public final class GenesisHydra extends CardImpl {
 
 class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
 
-    public GenesisHydraPutOntoBattlefieldEffect() {
+    GenesisHydraPutOntoBattlefieldEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "reveal the top X cards of your library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield. Then shuffle the rest into your library";
     }
 
-    public GenesisHydraPutOntoBattlefieldEffect(final GenesisHydraPutOntoBattlefieldEffect effect) {
+    private GenesisHydraPutOntoBattlefieldEffect(final GenesisHydraPutOntoBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
                 TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
                 target1.setRequired(false);
                 if (cards.count(filter, source.getSourceId(), source, game) > 0) {
-                    if (controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
+                    if (controller.choose(Outcome.PutCardInPlay, cards, target1, source, game)) {
                         Card card = cards.get(target1.getFirstTarget(), game);
                         if (card != null) {
                             cards.remove(card);

@@ -35,7 +35,7 @@ public final class GhostLitRaider extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Channel - {3}{R}, Discard Ghost-Lit Raider: Ghost-Lit Raider deals 4 damage to target creature.
-        Ability ability2 = new ChannelAbility("{3}{R}", new DamageTargetEffect(4));
+        Ability ability2 = new ChannelAbility("{3}{R}", new DamageTargetEffect(4, "it"));
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }

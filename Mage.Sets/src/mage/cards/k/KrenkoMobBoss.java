@@ -7,6 +7,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +27,7 @@ public final class KrenkoMobBoss extends CardImpl {
 
     public KrenkoMobBoss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -37,7 +38,7 @@ public final class KrenkoMobBoss extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new CreateTokenEffect(new GoblinToken(), xValue).setText("create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control"),
                 new TapSourceCost()
-        ));
+        ).addHint(new ValueHint("Goblins you control", xValue)));
     }
 
     private KrenkoMobBoss(final KrenkoMobBoss card) {

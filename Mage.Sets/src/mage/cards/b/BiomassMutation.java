@@ -23,7 +23,7 @@ public final class BiomassMutation extends CardImpl {
 
         // Creatures you control have base power and toughness X/X until end of turn.
         DynamicValue variableMana = ManacostVariableValue.REGULAR;
-        this.getSpellAbility().addEffect(new SetBasePowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, true));
+        this.getSpellAbility().addEffect(new SetBasePowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES));
     }
 
     private BiomassMutation(final BiomassMutation card) {

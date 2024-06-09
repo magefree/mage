@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -12,6 +11,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -43,11 +43,11 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
         this.onlyCombat = onlyCombat;
         this.affectsDefendingPlayer = affectsDefendingPlayer;
         this.targetController = targetController;
-        setTriggerPhrase("Whenever " + filter.getMessage() + " deals " + (onlyCombat ? "combat " : "") + "damage to "
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " deals " + (onlyCombat ? "combat " : "") + "damage to "
                 + (targetController == TargetController.OPPONENT ? "an opponent" : "a player") + ", ");
     }
 
-    public DealsDamageToAPlayerAllTriggeredAbility(final DealsDamageToAPlayerAllTriggeredAbility ability) {
+    protected DealsDamageToAPlayerAllTriggeredAbility(final DealsDamageToAPlayerAllTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.filter = ability.filter;

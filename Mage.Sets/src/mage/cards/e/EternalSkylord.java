@@ -37,7 +37,7 @@ public final class EternalSkylord extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Eternal Skylord enters the batttlefield, amass 2.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(2, SubType.ZOMBIE)));
 
         // Zombie tokens you control have flying.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

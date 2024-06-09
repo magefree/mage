@@ -29,7 +29,7 @@ public class TargetEnchantmentPermanent extends TargetPermanent {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetEnchantmentPermanent(final TargetEnchantmentPermanent target) {
+    protected TargetEnchantmentPermanent(final TargetEnchantmentPermanent target) {
         super(target);
     }
 

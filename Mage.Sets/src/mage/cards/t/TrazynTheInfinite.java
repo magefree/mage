@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -27,7 +26,7 @@ public final class TrazynTheInfinite extends CardImpl {
     public TrazynTheInfinite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NECRON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
@@ -74,10 +73,10 @@ class TrazynTheInfiniteEffect extends ContinuousEffectImpl {
                 .stream()
                 .map(card -> card.getAbilities(game))
                 .flatMap(Collection::stream)
-                .filter(ActivatedAbility.class::isInstance)
+                .filter(Ability::isActivatedAbility)
                 .collect(Collectors.toSet());
         for (Ability ability : abilities) {
-            permanent.addAbility(ability, source.getSourceId(), game);
+            permanent.addAbility(ability, source.getSourceId(), game, true);
         }
         return true;
     }

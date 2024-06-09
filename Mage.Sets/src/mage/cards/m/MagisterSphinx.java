@@ -56,7 +56,7 @@ class MagisterSphinxEffect extends OneShotEffect {
         staticText = "target player's life total becomes 10";
     }
 
-    MagisterSphinxEffect(final MagisterSphinxEffect effect) {
+    private MagisterSphinxEffect(final MagisterSphinxEffect effect) {
         super(effect);
     }
 

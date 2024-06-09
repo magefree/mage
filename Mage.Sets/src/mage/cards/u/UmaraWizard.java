@@ -6,9 +6,8 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.BlueManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -19,7 +18,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class UmaraWizard extends ModalDoubleFacesCard {
+public final class UmaraWizard extends ModalDoubleFacedCard {
 
     public UmaraWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

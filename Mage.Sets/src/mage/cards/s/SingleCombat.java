@@ -81,7 +81,7 @@ class SingleCombatEffect extends OneShotEffect {
                 continue;
             }
             Target target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (player.choose(outcome, target, source, game)) {
                 filterSac.add(Predicates.not(new PermanentIdPredicate(target.getFirstTarget())));
             }
@@ -107,11 +107,6 @@ class SingleCombatRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public SingleCombatRestrictionEffect copy() {
         return new SingleCombatRestrictionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

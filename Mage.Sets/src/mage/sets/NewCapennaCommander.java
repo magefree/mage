@@ -91,7 +91,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Crumbling Necropolis", 397, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Cryptic Pursuit", 70, Rarity.RARE, mage.cards.c.CrypticPursuit.class));
         cards.add(new SetCardInfo("Crystalline Giant", 364, Rarity.RARE, mage.cards.c.CrystallineGiant.class));
-        cards.add(new SetCardInfo("Cultivate", 285, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Cultivate", 285, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Currency Converter", 81, Rarity.RARE, mage.cards.c.CurrencyConverter.class));
         cards.add(new SetCardInfo("Custodi Lich", 244, Rarity.RARE, mage.cards.c.CustodiLich.class));
         cards.add(new SetCardInfo("Damnable Pact", 245, Rarity.RARE, mage.cards.d.DamnablePact.class));
@@ -120,7 +120,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dusk // Dawn", 198, Rarity.RARE, mage.cards.d.DuskDawn.class));
         cards.add(new SetCardInfo("Esper Panorama", 399, Rarity.COMMON, mage.cards.e.EsperPanorama.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 268, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
-        cards.add(new SetCardInfo("Everflowing Chalice", 366, Rarity.COMMON, mage.cards.e.EverflowingChalice.class));
+        cards.add(new SetCardInfo("Everflowing Chalice", 366, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolution Sage", 287, Rarity.UNCOMMON, mage.cards.e.EvolutionSage.class));
         cards.add(new SetCardInfo("Evolutionary Leap", 288, Rarity.RARE, mage.cards.e.EvolutionaryLeap.class));
         cards.add(new SetCardInfo("Exotic Orchard", 400, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
@@ -172,7 +172,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Inferno Titan", 269, Rarity.MYTHIC, mage.cards.i.InfernoTitan.class));
         cards.add(new SetCardInfo("Inkfathom Witch", 342, Rarity.UNCOMMON, mage.cards.i.InkfathomWitch.class));
         cards.add(new SetCardInfo("Intangible Virtue", 204, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
-        cards.add(new SetCardInfo("Izzet Signet", 369, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Izzet Signet", 369, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
         cards.add(new SetCardInfo("Jailbreak", 17, Rarity.RARE, mage.cards.j.Jailbreak.class));
         cards.add(new SetCardInfo("Jenara, Asura of War", 343, Rarity.MYTHIC, mage.cards.j.JenaraAsuraOfWar.class));
         cards.add(new SetCardInfo("Jolene, the Plunder Queen", 73, Rarity.RARE, mage.cards.j.JoleneThePlunderQueen.class, NON_FULL_USE_VARIOUS));
@@ -280,7 +280,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Selvala, Explorer Returned", 350, Rarity.RARE, mage.cards.s.SelvalaExplorerReturned.class));
         cards.add(new SetCardInfo("Sever the Bloodline", 259, Rarity.RARE, mage.cards.s.SeverTheBloodline.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 426, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
-        cards.add(new SetCardInfo("Shadowmage Infiltrator", 351, Rarity.UNCOMMON, mage.cards.s.ShadowmageInfiltrator.class));
+        cards.add(new SetCardInfo("Shadowmage Infiltrator", 351, Rarity.RARE, mage.cards.s.ShadowmageInfiltrator.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 311, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
         cards.add(new SetCardInfo("Shield Broker", 29, Rarity.RARE, mage.cards.s.ShieldBroker.class));
         cards.add(new SetCardInfo("Silent-Blade Oni", 352, Rarity.RARE, mage.cards.s.SilentBladeOni.class));

@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -14,14 +13,15 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class CorruptedResolve extends CardImpl {
 
     public CorruptedResolve(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
 
         // Counter target spell if its controller is poisoned.
@@ -45,17 +45,18 @@ class CorruptedResolveEffect extends OneShotEffect {
         staticText = "Counter target spell if its controller is poisoned";
     }
 
-    CorruptedResolveEffect(final CorruptedResolveEffect effect) {
+    private CorruptedResolveEffect(final CorruptedResolveEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
-            if (player != null && player.getCounters().containsKey(CounterType.POISON))
-                return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
+            if (player != null && player.getCountersCount(CounterType.POISON) > 0) {
+                return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
+            }
         }
         return false;
     }

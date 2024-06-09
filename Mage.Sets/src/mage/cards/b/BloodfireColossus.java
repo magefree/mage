@@ -27,7 +27,7 @@ public final class BloodfireColossus extends CardImpl {
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(6), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(6, "it"), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

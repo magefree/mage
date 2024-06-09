@@ -45,7 +45,7 @@ public final class CombineChrysalis extends CardImpl {
                 new CreateTokenEffect(new BeastToken2()), new ManaCostsImpl<>("{2}{G}{U}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

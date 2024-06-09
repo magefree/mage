@@ -18,7 +18,12 @@ public class FreeformCommanderDuelMatch extends MatchImpl {
         int startLife = 40;
 
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        FreeformCommanderDuel game = new FreeformCommanderDuel(options.getAttackOption(), options.getRange(), mulligan, startLife);
+        startLife = options.isCustomStartLifeEnabled() ? options.getCustomStartLife() : startLife;
+        int startHandSize = options.isCustomStartHandSizeEnabled() ? options.getCustomStartHandSize() : 7;
+        FreeformCommanderDuel game = new FreeformCommanderDuel(
+                options.getAttackOption(), options.getRange(),
+                mulligan, startLife, startHandSize
+        );
         game.setCheckCommanderDamage(true);
         game.setStartMessage(this.createGameStartMessage());
         initGame(game);

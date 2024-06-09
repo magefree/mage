@@ -83,7 +83,7 @@ class CorpseAppraiserEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCardInLibrary();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(cards.get(target.getFirstTarget(), game), Zone.HAND, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.moveCards(cards, Zone.GRAVEYARD, source, game);

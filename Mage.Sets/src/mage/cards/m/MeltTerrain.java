@@ -28,7 +28,7 @@ public final class MeltTerrain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public MeltTerrain (final MeltTerrain card) {
+    private MeltTerrain(final MeltTerrain card) {
         super(card);
     }
 

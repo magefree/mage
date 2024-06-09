@@ -33,7 +33,7 @@ public final class ThryxTheSuddenStorm extends CardImpl {
     public ThryxTheSuddenStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.GIANT);
         this.power = new MageInt(4);

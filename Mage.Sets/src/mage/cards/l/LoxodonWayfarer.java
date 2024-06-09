@@ -24,7 +24,7 @@ public final class LoxodonWayfarer extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public LoxodonWayfarer (final LoxodonWayfarer card) {
+    private LoxodonWayfarer(final LoxodonWayfarer card) {
         super(card);
     }
 

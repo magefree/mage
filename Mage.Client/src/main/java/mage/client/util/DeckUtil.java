@@ -24,9 +24,10 @@ public final class DeckUtil {
 
     public static Deck construct(DeckView view) {
         Deck deck = new Deck();
+        deck.setName(view.getName());
         for (SimpleCardView cardView : view.getCards().values()) {
             CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
-            Card card = cardInfo != null ? cardInfo.getMockCard() : null;
+            Card card = cardInfo != null ? cardInfo.createMockCard() : null;
             if (card != null) {
                 deck.getCards().add(card);
             } else {
@@ -35,7 +36,7 @@ public final class DeckUtil {
         }
         for (SimpleCardView cardView : view.getSideboard().values()) {
             CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
-            Card card = cardInfo != null ? cardInfo.getMockCard() : null;
+            Card card = cardInfo != null ? cardInfo.createMockCard() : null;
             if (card != null) {
                 deck.getSideboard().add(card);
             } else {

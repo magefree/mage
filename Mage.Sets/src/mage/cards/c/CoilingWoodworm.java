@@ -9,7 +9,6 @@ import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -34,7 +33,7 @@ public final class CoilingWoodworm extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Coiling Woodworm's power is equal to the number of Forests on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(count, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(count)));
     }
 
     private CoilingWoodworm(final CoilingWoodworm card) {

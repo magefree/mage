@@ -63,7 +63,7 @@ class JhoirasTimebugEffect extends OneShotEffect {
         this.staticText = "Choose target permanent you control or suspended card you own. If that permanent or card has a time counter on it, you may remove a time counter from it or put another time counter on it";
     }
 
-    JhoirasTimebugEffect(final JhoirasTimebugEffect effect) {
+    private JhoirasTimebugEffect(final JhoirasTimebugEffect effect) {
         super(effect);
     }
 

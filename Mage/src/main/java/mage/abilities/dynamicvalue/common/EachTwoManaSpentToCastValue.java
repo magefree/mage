@@ -7,6 +7,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
+import mage.util.CardUtil;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
@@ -32,7 +33,7 @@ public enum EachTwoManaSpentToCastValue implements DynamicValue {
         Mana payment = game
                 .getState()
                 .getWatcher(ManaSpentToCastWatcher.class)
-                .getLastManaPayment(sourceAbility.getSourceId());
+                .getManaPayment(CardUtil.getSourceStackMomentReference(game, sourceAbility));
         if (payment == null) {
             return 0;
         }

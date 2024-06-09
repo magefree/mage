@@ -43,10 +43,10 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
         this.setTargetPointer = setTargetPointer;
         this.controller = controller;
         setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " attacks"
-                              + (attacksYouOrYourPlaneswalker ? " you or a planeswalker you control" : "") + ", ");
+                + (attacksYouOrYourPlaneswalker ? " you or a planeswalker you control" : "") + ", ");
     }
 
-    public AttacksAllTriggeredAbility(final AttacksAllTriggeredAbility ability) {
+    protected AttacksAllTriggeredAbility(final AttacksAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter; // TODO: Does this have to be a copy?
         this.attacksYouOrYourPlaneswalker = ability.attacksYouOrYourPlaneswalker;

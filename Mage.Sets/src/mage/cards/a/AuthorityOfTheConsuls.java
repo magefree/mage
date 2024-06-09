@@ -1,6 +1,6 @@
 package mage.cards.a;
 
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOpponentTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
@@ -23,9 +23,8 @@ public final class AuthorityOfTheConsuls extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES)));
 
         // Whenever a creature enters the battlefield under an opponent's control, you gain 1 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                new GainLifeEffect(1), StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES,
-                "Whenever a creature enters the battlefield under an opponent's control, you gain 1 life."
+        this.addAbility(new EntersBattlefieldOpponentTriggeredAbility(
+                new GainLifeEffect(1), StaticFilters.FILTER_PERMANENT_A_CREATURE, false
         ));
     }
 

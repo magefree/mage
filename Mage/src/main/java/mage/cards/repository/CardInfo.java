@@ -13,7 +13,9 @@ import mage.util.CardUtil;
 import mage.util.SubTypes;
 import org.apache.log4j.Logger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -51,6 +53,8 @@ public class CardInfo {
     protected String toughness;
     @DatabaseField
     protected String startingLoyalty;
+    @DatabaseField
+    protected String startingDefense;
     @DatabaseField
     protected int manaValue;
     @DatabaseField(dataType = DataType.ENUM_STRING)
@@ -93,8 +97,10 @@ public class CardInfo {
     protected boolean flipCard;
     @DatabaseField
     protected boolean doubleFaced;
-    @DatabaseField(indexName = "name_index")
+    @DatabaseField(indexName = "nightCard_index")
     protected boolean nightCard;
+    @DatabaseField
+    protected boolean meldCard;
     @DatabaseField
     protected String flipCardName;
     @DatabaseField
@@ -104,9 +110,13 @@ public class CardInfo {
     @DatabaseField
     protected String adventureSpellName;
     @DatabaseField
-    protected boolean modalDoubleFacesCard;
+    protected boolean modalDoubleFacedCard;
     @DatabaseField
-    protected String modalDoubleFacesSecondSideName;
+    protected String modalDoubleFacedSecondSideName;
+    @DatabaseField
+    protected String meldsToCardName;
+    @DatabaseField
+    protected boolean isExtraDeckCard;
 
     // if you add new field with card side name then update CardRepository.addNewNames too
 
@@ -134,8 +144,14 @@ public class CardInfo {
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
 
+        Card meldToCard = card.getMeldsToCard();
+        if (meldToCard != null) {
+            this.meldsToCardName = meldToCard.getName();
+        }
+
         this.doubleFaced = card.isTransformable() && card.getSecondCardFace() != null;
         this.nightCard = card.isNightCard();
+        this.meldCard = card instanceof MeldCard;
         Card secondSide = card.getSecondCardFace();
         if (secondSide != null) {
             this.secondSideName = secondSide.getName();
@@ -146,9 +162,9 @@ public class CardInfo {
             this.adventureSpellName = ((AdventureCard) card).getSpellCard().getName();
         }
 
-        if (card instanceof ModalDoubleFacesCard) {
-            this.modalDoubleFacesCard = true;
-            this.modalDoubleFacesSecondSideName = ((ModalDoubleFacesCard) card).getRightHalfCard().getName();
+        if (card instanceof ModalDoubleFacedCard) {
+            this.modalDoubleFacedCard = true;
+            this.modalDoubleFacedSecondSideName = ((ModalDoubleFacedCard) card).getRightHalfCard().getName();
         }
 
         this.frameStyle = card.getFrameStyle().toString();
@@ -169,9 +185,9 @@ public class CardInfo {
             List<String> manaCostLeft = ((SplitCard) card).getLeftHalfCard().getManaCostSymbols();
             List<String> manaCostRight = ((SplitCard) card).getRightHalfCard().getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
-        } else if (card instanceof ModalDoubleFacesCard) {
-            List<String> manaCostLeft = ((ModalDoubleFacesCard) card).getLeftHalfCard().getManaCostSymbols();
-            List<String> manaCostRight = ((ModalDoubleFacesCard) card).getRightHalfCard().getManaCostSymbols();
+        } else if (card instanceof ModalDoubleFacedCard) {
+            List<String> manaCostLeft = ((ModalDoubleFacedCard) card).getLeftHalfCard().getManaCostSymbols();
+            List<String> manaCostRight = ((ModalDoubleFacedCard) card).getRightHalfCard().getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else if (card instanceof AdventureCard) {
             List<String> manaCostLeft = ((AdventureCard) card).getSpellCard().getManaCostSymbols();
@@ -183,31 +199,14 @@ public class CardInfo {
 
         int length = 0;
         List<String> rulesList = new ArrayList<>();
-        if (card instanceof SplitCard) {
-            for (String rule : ((SplitCard) card).getLeftHalfCard().getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
-            for (String rule : ((SplitCard) card).getRightHalfCard().getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
-            for (String rule : card.getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
-        } else if (card instanceof ModalDoubleFacesCard) {
-            // mdf card return main side's rules only (GUI can toggle it to another side)
-            for (String rule : card.getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
-        } else {
-            for (String rule : card.getRules()) {
-                length += rule.length();
-                rulesList.add(rule);
-            }
+        // All cards must use getRules logic, so no special code here for rules, example:
+        // - split card: show all rules from both sides
+        // - mdf card: return main side's rules only (GUI can toggle it to another side)
+        for (String rule : card.getRules()) {
+            length += rule.length();
+            rulesList.add(rule);
         }
+
         if (length > MAX_RULE_LENGTH) {
             length = 0;
             List<String> shortRules = new ArrayList<>();
@@ -236,14 +235,23 @@ public class CardInfo {
         }
 
         // Starting loyalty
-        this.startingLoyalty = CardUtil.convertStartingLoyalty(card.getStartingLoyalty());
+        this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
+        this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
+
+        this.isExtraDeckCard = card.isExtraDeckCard();
     }
 
-    public Card getCard() {
+    /**
+     * Create normal card (with full abilities)
+     */
+    public Card createCard() {
         return CardImpl.createCard(className, new CardSetInfo(name, setCode, cardNumber, rarity, new CardGraphicInfo(FrameStyle.valueOf(frameStyle), variousArt)));
     }
 
-    public Card getMockCard() {
+    /**
+     * Create deck editor's mock card (with text only instead real abilities)
+     */
+    public Card createMockCard() {
         if (this.splitCard) {
             return new MockSplitCard(this);
         } else {
@@ -370,8 +378,8 @@ public class CardInfo {
         this.subtypes = joinList(subtypes);
     }
 
-    public final Set<SuperType> getSupertypes() {
-        Set<SuperType> list = EnumSet.noneOf(SuperType.class);
+    public final List<SuperType> getSupertypes() {
+        List<SuperType> list = new ArrayList<>();
         for (String type : this.supertypes.split(SEPARATOR)) {
             try {
                 list.add(SuperType.valueOf(type));
@@ -381,7 +389,7 @@ public class CardInfo {
         return list;
     }
 
-    public final void setSuperTypes(Set<SuperType> superTypes) {
+    public final void setSuperTypes(List<SuperType> superTypes) {
         StringBuilder sb = new StringBuilder();
         for (SuperType item : superTypes) {
             sb.append(item.name()).append(SEPARATOR);
@@ -395,6 +403,10 @@ public class CardInfo {
 
     public String getStartingLoyalty() {
         return startingLoyalty;
+    }
+
+    public String getStartingDefense() {
+        return startingDefense;
     }
 
     public String getSetCode() {
@@ -437,12 +449,20 @@ public class CardInfo {
         return flipCardName;
     }
 
+    public String getMeldsToCardName() {
+        return meldsToCardName;
+    }
+
     public boolean isDoubleFaced() {
         return doubleFaced;
     }
 
     public boolean isNightCard() {
         return nightCard;
+    }
+
+    public boolean isMeldCard() {
+        return meldCard;
     }
 
     public String getSecondSideName() {
@@ -457,12 +477,12 @@ public class CardInfo {
         return adventureSpellName;
     }
 
-    public boolean isModalDoubleFacesCard() {
-        return modalDoubleFacesCard;
+    public boolean isModalDoubleFacedCard() {
+        return modalDoubleFacedCard;
     }
 
-    public String getModalDoubleFacesSecondSideName() {
-        return modalDoubleFacesSecondSideName;
+    public String getModalDoubleFacedSecondSideName() {
+        return modalDoubleFacedSecondSideName;
     }
 
     @Override
@@ -478,5 +498,9 @@ public class CardInfo {
     @Override
     public String toString() {
         return String.format("%s (%s, %s)", getName(), getSetCode(), getCardNumber());
+    }
+
+    public boolean isExtraDeckCard() {
+        return isExtraDeckCard;
     }
 }

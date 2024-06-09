@@ -22,7 +22,7 @@ public final class IrenicussVileDuplication extends CardImpl {
                 .addAdditionalAbilities(FlyingAbility.getInstance())
                 .setIsntLegendary(true)
                 .setText("create a token that's a copy of target creature you control, " +
-                        "except the token has flying and isn't legendary if that creature is legendary"));
+                        "except the token has flying and it isn't legendary"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 

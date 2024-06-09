@@ -55,7 +55,7 @@ class CausticWaspsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    public CausticWaspsTriggeredAbility(final CausticWaspsTriggeredAbility ability) {
+    private CausticWaspsTriggeredAbility(final CausticWaspsTriggeredAbility ability) {
         super(ability);
     }
 

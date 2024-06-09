@@ -54,7 +54,7 @@ class GiftsUngivenEffect extends OneShotEffect {
                 "and the rest into your hand. Then shuffle";
     }
 
-    public GiftsUngivenEffect(final GiftsUngivenEffect effect) {
+    private GiftsUngivenEffect(final GiftsUngivenEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class GiftsUngivenEffect extends OneShotEffect {
             Cards cardsToKeep = new CardsImpl();
             cardsToKeep.addAll(cards);
             TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, filter2);
-            if (opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
+            if (opponent.choose(Outcome.Discard, cards, targetDiscard, source, game)) {
                 cardsToKeep.removeIf(targetDiscard.getTargets()::contains);
                 cards.removeAll(cardsToKeep);
             }

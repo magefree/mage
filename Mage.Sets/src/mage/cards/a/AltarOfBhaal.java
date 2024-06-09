@@ -37,6 +37,8 @@ public final class AltarOfBhaal extends AdventureCard {
         // Bone Offering
         // Create a tapped 4/1 black Skeleton creature token with menace.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new SkeletonMenaceToken(), 1, true, false));
+
+        this.finalizeAdventure();
     }
 
     private AltarOfBhaal(final AltarOfBhaal card) {

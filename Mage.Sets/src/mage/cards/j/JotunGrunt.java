@@ -54,7 +54,7 @@ class JotunGruntCost extends CostImpl {
     }
 
 
-    JotunGruntCost(final JotunGruntCost cost) {
+    private JotunGruntCost(final JotunGruntCost cost) {
         super(cost);
     }
 
@@ -62,8 +62,8 @@ class JotunGruntCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            if (targets.choose(Outcome.Removal, controllerId, source.getSourceId(), source, game)) {
-                for (UUID targetId: targets.get(0).getTargets()) {
+            if (this.getTargets().choose(Outcome.Removal, controllerId, source.getSourceId(), source, game)) {
+                for (UUID targetId: this.getTargets().get(0).getTargets()) {
                     Card card = game.getCard(targetId);
                     if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
                         return false;
@@ -78,7 +78,7 @@ class JotunGruntCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

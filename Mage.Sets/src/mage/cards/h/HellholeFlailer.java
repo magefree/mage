@@ -34,8 +34,9 @@ public final class HellholeFlailer extends CardImpl {
         // Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)
         this.addAbility(new UnleashAbility());
 
-        // {2}{B}{R}, Sacrifice Hellhole Flailer: Hellhole Flailer deals damage equal to its power to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new ManaCostsImpl<>("{2}{B}{R}"));
+        // {2}{B}{R}, Sacrifice Hellhole Flailer: Hellhole Flailer deals damage equal to its power to target player or planeswalker.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount())
+                .setText("{this} deals damage equal to its power to target player or planeswalker"), new ManaCostsImpl<>("{2}{B}{R}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

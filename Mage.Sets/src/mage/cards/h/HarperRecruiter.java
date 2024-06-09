@@ -76,7 +76,7 @@ class HarperRecruiterEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
         TargetCard target = new HarperRecruiterTarget();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl(target.getTargets());
         player.revealCards(source, toHand, game);
         player.moveCards(toHand, Zone.HAND, source, game);

@@ -16,7 +16,7 @@ public class CantAttackAloneSourceEffect extends RestrictionEffect {
         staticText = "{this} can't attack alone";
     }
 
-    public CantAttackAloneSourceEffect(final CantAttackAloneSourceEffect effect) {
+    protected CantAttackAloneSourceEffect(final CantAttackAloneSourceEffect effect) {
         super(effect);
     }
 

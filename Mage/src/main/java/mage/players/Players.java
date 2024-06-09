@@ -7,15 +7,15 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Players extends LinkedHashMap<UUID, Player> {
 
-    public Players() {}
+    public Players() {
+    }
 
-    public Players(final Players players) {
-        for (Entry<UUID, Player> entry: players.entrySet()) {
+    protected Players(final Players players) {
+        for (Entry<UUID, Player> entry : players.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
     }
@@ -25,7 +25,7 @@ public class Players extends LinkedHashMap<UUID, Player> {
     }
 
     public void resetPassed() {
-        for (Player player: this.values()) {
+        for (Player player : this.values()) {
             player.resetPassed();
         }
     }

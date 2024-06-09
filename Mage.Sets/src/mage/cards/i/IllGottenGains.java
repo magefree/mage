@@ -54,7 +54,7 @@ class IllGottenGainsEffect extends OneShotEffect {
         this.staticText = ", then returns up to three cards from their graveyard to their hand.";
     }
 
-    IllGottenGainsEffect(final IllGottenGainsEffect effect) {
+    private IllGottenGainsEffect(final IllGottenGainsEffect effect) {
         super(effect);
     }
 

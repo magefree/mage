@@ -9,6 +9,7 @@ import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -66,7 +67,7 @@ class BreakthroughEffect extends OneShotEffect {
         if (amountToKeep == 0) {
             player.discard(player.getHand(), false, source, game);
         } else if (amountToKeep < player.getHand().size()) {
-            TargetCardInHand target = new TargetCardInHand(amountToKeep, new FilterCard());
+            TargetCardInHand target = new TargetCardInHand(amountToKeep, StaticFilters.FILTER_CARD);
             target.setTargetName("cards to keep");
             target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), source, game);
             Cards cards = player.getHand().copy();

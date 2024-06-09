@@ -102,11 +102,6 @@ class CracklingEmergenceEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public CracklingEmergenceEffect copy() {
         return new CracklingEmergenceEffect(this);
     }

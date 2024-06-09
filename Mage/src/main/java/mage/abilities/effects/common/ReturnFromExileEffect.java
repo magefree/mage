@@ -34,7 +34,7 @@ public class ReturnFromExileEffect extends OneShotEffect {
         setText();
     }
 
-    public ReturnFromExileEffect(final ReturnFromExileEffect effect) {
+    protected ReturnFromExileEffect(final ReturnFromExileEffect effect) {
         super(effect);
         this.zone = effect.zone;
         this.tapped = effect.tapped;

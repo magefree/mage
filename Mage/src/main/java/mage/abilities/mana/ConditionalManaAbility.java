@@ -2,6 +2,7 @@ package mage.abilities.mana;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.decorator.ConditionalManaEffect;
@@ -9,7 +10,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class ConditionalManaAbility extends ActivatedManaAbilityImpl {
@@ -21,7 +21,7 @@ public class ConditionalManaAbility extends ActivatedManaAbilityImpl {
         this.conditionalManaEffect = effect;
     }
 
-    public ConditionalManaAbility(final ConditionalManaAbility ability) {
+    protected ConditionalManaAbility(final ConditionalManaAbility ability) {
         super(ability);
         this.conditionalManaEffect = ability.conditionalManaEffect;
     }

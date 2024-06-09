@@ -48,12 +48,12 @@ public final class LeylineOfTheVoid extends CardImpl {
 
 class LeylineOfTheVoidEffect extends ReplacementEffectImpl {
 
-    public LeylineOfTheVoidEffect() {
+    LeylineOfTheVoidEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a card would be put into an opponent's graveyard from anywhere, exile it instead";
     }
 
-    public LeylineOfTheVoidEffect(final LeylineOfTheVoidEffect effect) {
+    private LeylineOfTheVoidEffect(final LeylineOfTheVoidEffect effect) {
         super(effect);
     }
 

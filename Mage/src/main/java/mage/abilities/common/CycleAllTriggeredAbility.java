@@ -11,7 +11,6 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author LevelX2
  */
 public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
@@ -21,7 +20,7 @@ public class CycleAllTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player cycles a card, ");
     }
 
-    public CycleAllTriggeredAbility(final CycleAllTriggeredAbility ability) {
+    protected CycleAllTriggeredAbility(final CycleAllTriggeredAbility ability) {
         super(ability);
     }
 

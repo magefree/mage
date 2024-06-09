@@ -42,12 +42,12 @@ public final class DevastatingSummons extends CardImpl {
 
 class DevastatingSummonsEffect extends OneShotEffect {
 
-    public DevastatingSummonsEffect() {
+    DevastatingSummonsEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create two X/X red Elemental creature tokens";
     }
 
-    public DevastatingSummonsEffect(final DevastatingSummonsEffect effect) {
+    private DevastatingSummonsEffect(final DevastatingSummonsEffect effect) {
         super(effect);
     }
 

@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
  * Counts how many cards are put into each player's graveyard this turn.
  * Keeps track of the UUIDs of the cards that went to graveyard this turn.
  * from the battlefield, from anywhere other both from anywhere and from only the battlefield.
+ * <p>
+ * Can contain multiple instances of the same card (if it was moved multiple times per turn)
  *
  * @author LevelX2
  */
@@ -40,7 +42,8 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
         }
 
         UUID playerId = event.getPlayerId();
-        if (playerId == null || game.getCard(event.getTargetId()) == null) {
+        Card card = game.getCard(event.getTargetId());
+        if (playerId == null || card == null) {
             return;
         }
 
@@ -49,7 +52,7 @@ public class CardsPutIntoGraveyardWatcher extends Watcher {
         if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             cardsPutIntoGraveyardFromBattlefield.add(new MageObjectReference(((ZoneChangeEvent) event).getTarget(), game, 1));
         } else {
-            cardsPutIntoGraveyardFromEverywhereElse.add(new MageObjectReference(((ZoneChangeEvent) event).getTarget(), game, 1));
+            cardsPutIntoGraveyardFromEverywhereElse.add(new MageObjectReference(game.getCard(event.getTargetId()), game, 0));
         }
     }
 

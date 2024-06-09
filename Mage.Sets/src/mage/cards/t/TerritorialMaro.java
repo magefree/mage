@@ -29,7 +29,7 @@ public final class TerritorialMaro extends CardImpl {
 
         // Domain — Territorial Maro's power and toughness are each equal to twice the number of basic land types among lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)
                 .setText("{this}'s power and toughness are each equal to twice the number of basic land types among lands you control")
         ).setAbilityWord(AbilityWord.DOMAIN).addHint(DomainHint.instance));
     }

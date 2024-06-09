@@ -35,7 +35,7 @@ public final class AcolyteOfBahamut extends CardImpl {
     public AcolyteOfBahamut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "The first Dragon spell you cast each turn costs {2} less to cast."

@@ -25,7 +25,7 @@ public final class MyrSire extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new PhyrexianMyrToken())));
     }
 
-    public MyrSire(final MyrSire card) {
+    private MyrSire(final MyrSire card) {
         super(card);
     }
 

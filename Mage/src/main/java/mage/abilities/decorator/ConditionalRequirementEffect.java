@@ -30,13 +30,13 @@ public class ConditionalRequirementEffect extends RequirementEffect {
     }
 
     public ConditionalRequirementEffect(RequirementEffect effect, Condition condition, String text) {
-        this(effect.getDuration(), effect, condition, null, false);
+        this(effect.getDuration(), effect, condition, null);
         if (text != null) {
             setText(text);
         }
     }
 
-    public ConditionalRequirementEffect(Duration duration, RequirementEffect effect, Condition condition, RequirementEffect otherwiseEffect, boolean lockedInCondition) {
+    public ConditionalRequirementEffect(Duration duration, RequirementEffect effect, Condition condition, RequirementEffect otherwiseEffect) {
         super(duration);
         this.effectType = EffectType.REQUIREMENT;
         this.effect = effect;
@@ -44,7 +44,7 @@ public class ConditionalRequirementEffect extends RequirementEffect {
         this.otherwiseEffect = otherwiseEffect;
     }
 
-    public ConditionalRequirementEffect(final ConditionalRequirementEffect effect) {
+    protected ConditionalRequirementEffect(final ConditionalRequirementEffect effect) {
         super(effect);
         this.effect = (RequirementEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {
@@ -64,10 +64,10 @@ public class ConditionalRequirementEffect extends RequirementEffect {
         } else {
             condition = baseCondition;
         }
-        effect.setTargetPointer(this.targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         effect.init(source, game);
         if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             otherwiseEffect.init(source, game);
         }
         initDone = true;
@@ -80,10 +80,10 @@ public class ConditionalRequirementEffect extends RequirementEffect {
         }
         conditionState = condition.apply(game, source);
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.applies(permanent, source, game);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.applies(permanent, source, game);
         }
         if (!conditionState && effect.getDuration() == Duration.OneUse) {
@@ -126,6 +126,16 @@ public class ConditionalRequirementEffect extends RequirementEffect {
     }
 
     @Override
+    public boolean mustBlockAllAttackers(Game game) {
+        if (conditionState) {
+            return effect.mustBlockAllAttackers(game);
+        } else if (otherwiseEffect != null) {
+            return otherwiseEffect.mustBlockAllAttackers(game);
+        }
+        return false;
+    }
+
+    @Override
     public UUID mustAttackDefender(Ability source, Game game) {
         if (conditionState) {
             return effect.mustAttackDefender(source, game);
@@ -143,6 +153,26 @@ public class ConditionalRequirementEffect extends RequirementEffect {
             return otherwiseEffect.mustBlockAttacker(source, game);
         }
         return null;
+    }
+
+    @Override
+    public UUID mustBlockAttackerIfElseUnblocked(Ability source, Game game) {
+        if (conditionState) {
+            return effect.mustBlockAttackerIfElseUnblocked(source, game);
+        } else if (otherwiseEffect != null) {
+            return otherwiseEffect.mustBlockAttackerIfElseUnblocked(source, game);
+        }
+        return null;
+    }
+
+    @Override
+    public int getMinNumberOfBlockers() {
+        if (conditionState) {
+            return effect.getMinNumberOfBlockers();
+        } else if (otherwiseEffect != null) {
+            return otherwiseEffect.getMinNumberOfBlockers();
+        }
+        return super.getMinNumberOfBlockers();
     }
 
     @Override

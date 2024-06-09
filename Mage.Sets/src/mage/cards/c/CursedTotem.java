@@ -37,12 +37,12 @@ public final class CursedTotem extends CardImpl {
 
 class CursedTotemCantActivateEffect extends RestrictionEffect {
 
-    public CursedTotemCantActivateEffect() {
+    CursedTotemCantActivateEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Activated abilities of creatures can't be activated";
     }
 
-    public CursedTotemCantActivateEffect(final CursedTotemCantActivateEffect effect) {
+    private CursedTotemCantActivateEffect(final CursedTotemCantActivateEffect effect) {
         super(effect);
     }
 

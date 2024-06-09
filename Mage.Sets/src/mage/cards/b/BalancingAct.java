@@ -8,6 +8,7 @@ import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -128,7 +129,7 @@ class BalancingActDiscardEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            TargetCardInHand target = new TargetCardInHand(minCard, new FilterCard());
+            TargetCardInHand target = new TargetCardInHand(minCard, StaticFilters.FILTER_CARD);
             if (target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), source, game)) {
                 Cards cards = player.getHand().copy();
                 cards.removeIf(target.getTargets()::contains);

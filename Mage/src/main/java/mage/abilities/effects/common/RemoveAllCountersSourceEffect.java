@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LoneFox
  */
 public class RemoveAllCountersSourceEffect extends OneShotEffect {
@@ -22,7 +21,7 @@ public class RemoveAllCountersSourceEffect extends OneShotEffect {
         staticText = "remove all " + counterType.getName() + " counters from it.";
     }
 
-    public RemoveAllCountersSourceEffect(final RemoveAllCountersSourceEffect effect) {
+    protected RemoveAllCountersSourceEffect(final RemoveAllCountersSourceEffect effect) {
         super(effect);
         this.counterType = effect.counterType;
     }
@@ -36,8 +35,7 @@ public class RemoveAllCountersSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
-            int count = sourcePermanent.getCounters(game).getCount(counterType);
-            sourcePermanent.removeCounters(counterType.getName(), count, source, game);
+            sourcePermanent.removeAllCounters(counterType.getName(), source, game);
             return true;
         }
         return false;

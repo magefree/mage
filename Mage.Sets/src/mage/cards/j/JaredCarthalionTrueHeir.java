@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.BecomesMonarchTargetEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -26,7 +27,7 @@ public final class JaredCarthalionTrueHeir extends CardImpl {
     public JaredCarthalionTrueHeir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -37,6 +38,7 @@ public final class JaredCarthalionTrueHeir extends CardImpl {
                 .setText("target opponent becomes the monarch"));
         ability.addEffect(new JaredCarthalionTrueHeirMonarchEffect());
         ability.addTarget(new TargetOpponent());
+        ability.addHint(MonarchHint.instance);
         this.addAbility(ability);
 
         // If damage would be dealt to Jared Carthalion while you're the monarch, prevent that damage and put that many +1/+1 counters on it.

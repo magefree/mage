@@ -16,7 +16,6 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
     private final PutCards putIt;
 
     /**
-     *
      * @param putIt
      */
     public CounterTargetWithReplacementEffect(PutCards putIt) {
@@ -24,7 +23,7 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
         this.putIt = putIt;
     }
 
-    public CounterTargetWithReplacementEffect(final CounterTargetWithReplacementEffect effect) {
+    protected CounterTargetWithReplacementEffect(final CounterTargetWithReplacementEffect effect) {
         super(effect);
         this.putIt = effect.putIt;
     }

@@ -524,7 +524,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     private final CardTypeCounter planeswalkerCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.isPlanesWalker();
+            return card.isPlaneswalker();
+        }
+    };
+    private final CardTypeCounter battleCounter = new CardTypeCounter() {
+        @Override
+        protected boolean is(CardView card) {
+            return card.isBattle();
         }
     };
     private final CardTypeCounter tribalCounter = new CardTypeCounter() {
@@ -542,6 +548,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             instantCounter,
             planeswalkerCounter,
             sorceryCounter,
+            battleCounter,
             tribalCounter
     };
 
@@ -640,8 +647,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     private boolean separateCreatures = true;
 
     public enum Role {
-        MAINDECK("Maindeck"),
-        SIDEBOARD("Sideboard");
+        MAINDECK("Main deck"),
+        SIDEBOARD("Sideboard/commander");
 
         Role(String name) {
             this.name = name;
@@ -782,11 +789,12 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
             @Override
             public void mousePressed(MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
-                    isDragging = true;
-                    beginSelectionDrag(e.getX(), e.getY(), e.isShiftDown());
-                    updateSelectionDrag(e.getX(), e.getY());
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
                 }
+                isDragging = true;
+                beginSelectionDrag(e.getX(), e.getY(), e.isShiftDown());
+                updateSelectionDrag(e.getX(), e.getY());
             }
 
             @Override
@@ -966,6 +974,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             visibilityButton.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    if (!SwingUtilities.isLeftMouseButton(e)) {
+                        return;
+                    }
                     visPopup.show(e.getComponent(), 0, e.getComponent().getHeight());
                 }
             });
@@ -1694,7 +1705,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         java.util.List<CardInfo> cardPool = CardRepository.instance.findCards(cardCriteria);
 
                         if (!cardPool.isEmpty()) {
-                            Card acard = cardPool.get(RandomUtil.nextInt(cardPool.size())).getMockCard();
+                            Card acard = cardPool.get(RandomUtil.nextInt(cardPool.size())).createMockCard();
 
                             if (acard.getName().equals(card.getName())) {
                                 CardView pimpedCard = new CardView(acard);
@@ -1740,7 +1751,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 for (CardView card : stack) {
                     CardInfo oldestCardInfo = CardRepository.instance.findOldestNonPromoVersionCard(card.getName());
                     if (oldestCardInfo != null) {
-                        CardView oldestCardView = new CardView(oldestCardInfo.getMockCard());
+                        CardView oldestCardView = new CardView(oldestCardInfo.createMockCard());
                         this.removeCardView(card);
                         eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
                         this.addCardView(oldestCardView, false);
@@ -1850,9 +1861,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     List<CardView> gridStack = new ArrayList<>();
                     gridRow.add(gridStack);
                     for (DeckCardInfo info : stack) {
-                        if (trackedCards.containsKey(info.getSetCode()) && trackedCards.get(info.getSetCode()).containsKey(info.getCardNum())) {
+                        if (trackedCards.containsKey(info.getSetCode()) && trackedCards.get(info.getSetCode()).containsKey(info.getCardNumber())) {
                             List<CardView> candidates
-                                    = trackedCards.get(info.getSetCode()).get(info.getCardNum());
+                                    = trackedCards.get(info.getSetCode()).get(info.getCardNumber());
                             if (!candidates.isEmpty()) {
                                 gridStack.add(candidates.remove(0));
                                 thisMaxStackSize = Math.max(thisMaxStackSize, gridStack.size());
@@ -1913,7 +1924,15 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     }
 
     private void updateCounts() {
-        deckNameAndCountLabel.setText(role.getName() + " - " + allCards.size());
+        int extraDeckCount = allCards.stream()
+                        .filter(c -> c.isExtraDeckCard())
+                        .collect(Collectors.toSet())
+                        .size();
+        int maindeckCount = allCards.size() - extraDeckCount;
+        deckNameAndCountLabel.setText(role.getName() + " - " + maindeckCount + (
+                extraDeckCount > 0 ? " (" + extraDeckCount + ")"
+                : ""
+        ));
         creatureCountLabel.setText(String.valueOf(creatureCounter.get()));
         landCountLabel.setText(String.valueOf(landCounter.get()));
         for (CardType cardType : selectByTypeButtons.keySet()) {
@@ -1936,21 +1955,21 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     private void showCardRightClickMenu(@SuppressWarnings("unused") final CardView card, MouseEvent e) {
         JPopupMenu menu = new JPopupMenu();
-        JMenuItem hide = new JMenuItem("Hide");
+        JMenuItem hide = new JMenuItem("Hide (hidden in sideboard)");
         hide.addActionListener(e2 -> hideSelection());
         menu.add(hide);
 
-        JMenuItem invertSelection = new JMenuItem("Invert Selection");
+        JMenuItem invertSelection = new JMenuItem("Invert selection");
         invertSelection.addActionListener(e2 -> invertSelection());
         menu.add(invertSelection);
 
-        JMenuItem chooseMatching = new JMenuItem("Choose Matching");
+        JMenuItem chooseMatching = new JMenuItem("Select same cards");
         chooseMatching.addActionListener(e2 -> chooseMatching());
         menu.add(chooseMatching);
 
         // Show 'Duplicate Selection' for FREE_BUILDING
         if (this.mode == Constants.DeckEditorMode.FREE_BUILDING) {
-            JMenuItem duplicateSelection = new JMenuItem("Duplicate Selection");
+            JMenuItem duplicateSelection = new JMenuItem("Duplicate selected cards");
             duplicateSelection.addActionListener(e2 -> duplicateSelection());
             menu.add(duplicateSelection);
         }
@@ -2282,6 +2301,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         this.countLabelListener = new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
+                                if (!SwingUtilities.isLeftMouseButton(e)) {
+                                    return;
+                                }
                                 JLabel countLabel = (JLabel) e.getComponent();
                                 List<CardView> cards = findCardStackByCountLabel(countLabel);
                                 boolean selected = !cards.isEmpty() && cards.get(0).isSelected();

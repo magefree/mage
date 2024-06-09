@@ -15,12 +15,16 @@ public class DrawCardOpponentTriggeredAbility extends TriggeredAbilityImpl {
     private final boolean setTargetPointer;
 
     public DrawCardOpponentTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional, setTargetPointer);
+    }
+
+    public DrawCardOpponentTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean setTargetPointer) {
+        super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever an opponent draws a card, ");
     }
 
-    public DrawCardOpponentTriggeredAbility(final DrawCardOpponentTriggeredAbility ability) {
+    protected DrawCardOpponentTriggeredAbility(final DrawCardOpponentTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }

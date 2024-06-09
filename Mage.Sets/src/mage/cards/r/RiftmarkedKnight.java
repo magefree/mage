@@ -63,7 +63,7 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When the last time counter is removed from {this} while it's exiled, ");
     }
 
-    public RiftmarkedKnightTriggeredAbility(final RiftmarkedKnightTriggeredAbility ability) {
+    private RiftmarkedKnightTriggeredAbility(final RiftmarkedKnightTriggeredAbility ability) {
         super(ability);
     }
 

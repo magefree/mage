@@ -5,7 +5,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 
 /**
- *
  * @author TheElk801
  */
 public class FilterTeamPermanent extends FilterPermanent {
@@ -25,7 +24,7 @@ public class FilterTeamPermanent extends FilterPermanent {
         this.add(TargetController.TEAM.getControllerPredicate());
     }
 
-    public FilterTeamPermanent(final FilterTeamPermanent filter) {
+    protected FilterTeamPermanent(final FilterTeamPermanent filter) {
         super(filter);
     }
 

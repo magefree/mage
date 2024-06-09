@@ -72,7 +72,7 @@ class BeforeEndCombatCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PhaseStep phaseStep = game.getStep().getType();
+        PhaseStep phaseStep = game.getTurnStepType();
         if(phaseStep.getIndex() < PhaseStep.END_COMBAT.getIndex()) {
             return true;
         }

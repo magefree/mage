@@ -13,7 +13,7 @@ public class BattleCryAbility extends AttacksTriggeredAbility {
         super(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter, true), false);
     }
 
-    public BattleCryAbility(final BattleCryAbility ability) {
+    protected BattleCryAbility(final BattleCryAbility ability) {
         super(ability);
     }
 

@@ -26,14 +26,14 @@ public final class TheGoldenThrone extends CardImpl {
     public TheGoldenThrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Arcane Life-support -- If you would lose the game, instead exile The Golden Throne and your life total becomes 1.
         this.addAbility(new SimpleStaticAbility(new TheGoldenThroneEffect()).withFlavorWord("Arcane Life-support"));
 
         // A Thousand Souls Die Every Day -- {T}, Sacrifice a creature: Add three mana in any combination of colors.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaInAnyCombinationEffect(3), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability.withFlavorWord("A Thousand Souls Die Every Day"));
     }
 
@@ -49,12 +49,12 @@ public final class TheGoldenThrone extends CardImpl {
 
 class TheGoldenThroneEffect extends ReplacementEffectImpl {
 
-    public TheGoldenThroneEffect() {
+    TheGoldenThroneEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "if you would lose the game, instead exile {this} and your life total becomes 1";
     }
 
-    public TheGoldenThroneEffect(final TheGoldenThroneEffect effect) {
+    private TheGoldenThroneEffect(final TheGoldenThroneEffect effect) {
         super(effect);
     }
 

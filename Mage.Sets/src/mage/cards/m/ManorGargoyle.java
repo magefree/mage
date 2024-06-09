@@ -32,7 +32,7 @@ import mage.game.permanent.Permanent;
  */
 public final class ManorGargoyle extends CardImpl {
 
-    private static final String rule = "{this} is indestructible as long as it has defender.";
+    private static final String rule = "{this} has indestructible as long as it has defender.";
 
     public ManorGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

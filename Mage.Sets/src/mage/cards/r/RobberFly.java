@@ -47,13 +47,13 @@ public final class RobberFly extends CardImpl {
 
 class DrawCardsDefendingPlayerEffect extends OneShotEffect {
 
-    public DrawCardsDefendingPlayerEffect() {
+    DrawCardsDefendingPlayerEffect() {
         super(Outcome.Benefit);
         this.staticText = "defending player discards all the cards in their hand, "
                 + "then draws that many cards";
     }
 
-    public DrawCardsDefendingPlayerEffect(final DrawCardsDefendingPlayerEffect effect) {
+    private DrawCardsDefendingPlayerEffect(final DrawCardsDefendingPlayerEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class DrawCardsDefendingPlayerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player defendingPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player defendingPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null
                 && defendingPlayer != null) {
             int numberOfCardsInHand = defendingPlayer.getHand().size();

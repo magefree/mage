@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,14 +12,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
 public final class VoraciousVampire extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.VAMPIRE, "Vampire you control");
 
     public VoraciousVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -35,11 +37,12 @@ public final class VoraciousVampire extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // When Voracious Vampire enters the battlefield, target Vampire you control gets +1/+1 and gains menace until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn)
+                .setText("target Vampire you control gets +1/+1"), false);
         Effect effect = new GainAbilityTargetEffect(new MenaceAbility(), Duration.EndOfTurn);
         effect.setText("and gains menace until end of turn.");
         ability.addEffect(effect);
-        ability.addTarget(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent(SubType.VAMPIRE, "Vampire you control")));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

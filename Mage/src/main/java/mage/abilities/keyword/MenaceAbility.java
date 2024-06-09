@@ -20,7 +20,7 @@ public class MenaceAbility extends StaticAbility { // Menace may not be a Single
         this.showAbilityHint = showAbilityHint;
     }
 
-    public MenaceAbility(final MenaceAbility ability) {
+    protected MenaceAbility(final MenaceAbility ability) {
         super(ability);
         this.showAbilityHint = ability.showAbilityHint;
     }

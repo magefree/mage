@@ -41,7 +41,7 @@ public final class TheCircleOfLoyalty extends CardImpl {
     public TheCircleOfLoyalty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {1} less to cast for each Knight you control.
         DynamicValue xValue = new PermanentsOnBattlefieldCount(filterKnight);

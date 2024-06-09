@@ -23,7 +23,7 @@ public final class Contradict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
         
         // Draw a card.        
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Contradict(final Contradict card) {

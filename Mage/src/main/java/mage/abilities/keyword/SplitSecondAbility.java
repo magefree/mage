@@ -2,8 +2,9 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -14,11 +15,11 @@ import java.util.Optional;
 
 /**
  * Split Second
- *
+ * <p>
  * As long as this spell is on the stack, players can't cast other spells or activate abilities that aren't mana abilities.
  */
 
-public class SplitSecondAbility extends SimpleStaticAbility  {
+public class SplitSecondAbility extends SimpleStaticAbility {
 
     public SplitSecondAbility() {
         super(Zone.STACK, new SplitSecondEffect());
@@ -30,17 +31,21 @@ public class SplitSecondAbility extends SimpleStaticAbility  {
         return "Split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
     }
 
-    public SplitSecondAbility(SplitSecondAbility ability) {
+    protected SplitSecondAbility(final SplitSecondAbility ability) {
         super(ability);
     }
 
     @Override
-    public SimpleStaticAbility copy() {
-          return new SplitSecondAbility(this);
+    public SplitSecondAbility copy() {
+        return new SplitSecondAbility(this);
     }
-}
 
-// Molten Disaster has a copy of this effect in it's class, so in case this effect has to be changed check also there
+    // For abilities that need the effect conditionally. Must set text manually.
+    public static ConditionalContinuousRuleModifyingEffect getSplitSecondEffectWithCondition(Condition condition) {
+        return new ConditionalContinuousRuleModifyingEffect(new SplitSecondEffect(), condition);
+    }
+
+}
 
 class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
 
@@ -59,7 +64,8 @@ class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+        return event.getType() == GameEvent.EventType.CAST_SPELL
+                || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
     @Override
@@ -69,15 +75,10 @@ class SplitSecondEffect extends ContinuousRuleModifyingEffectImpl {
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
+            if (ability.isPresent() && !ability.get().isManaActivatedAbility()) {
                 return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

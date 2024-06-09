@@ -1,15 +1,16 @@
 package mage;
 
 
-
 /**
  * Enum representing the mana symbols.
  * <p>
- * 107.4. The mana symbols are {W}, {U}, {B}, {R}, {G}, and {X}; the numerals
- * {0}, {1}, {2}, {3}, {4}, and so on; the hybrid symbols {W/U}, {W/B}, {U/B},
- * {U/R}, {B/R}, {B/G}, {R/G}, {R/W}, {G/W}, and {G/U}; the monocolored hybrid
- * symbols {2/W}, {2/U}, {2/B}, {2/R}, and {2/G}; the Phyrexian mana symbols
- * {W/P}, {U/P}, {B/P}, {R/P}, and {G/P}; and the snow symbol {S}.
+ * 107.4. The mana symbols are {W}, {U}, {B}, {R}, {G}, and {C}; the numerical symbols
+ * {0}, {1}, {2}, {3}, {4}, and so on; the variable symbol {X}; the hybrid symbols
+ * {W/U}, {W/B}, {U/B}, {U/R}, {B/R}, {B/G}, {R/G}, {R/W}, {G/W}, and {G/U};
+ * the monocolored hybrid symbols {2/W}, {2/U}, {2/B}, {2/R}, and {2/G};
+ * the Phyrexian mana symbols {W/P}, {U/P}, {B/P}, {R/P}, and {G/P};
+ * the hybrid Phyrexian symbols {W/U/P}, {W/B/P}, {U/B/P}, {U/R/P},
+ * {B/R/P}, {B/G/P}, {R/G/P}, {R/W/P}, {G/W/P}, and {G/U/P}; and the snow mana symbol {S}. 
  * <p>
  * 107.4a. There are five primary colored mana symbols: {W} is white, {U} blue,
  * {B} black, {R} red, and {G} green. These symbols are used to represent colored
@@ -61,6 +62,7 @@ public enum ManaSymbol {
     B("{B}", Type.PRIMARY, Type.COLORED, Type.MONOCOLORED),
     R("{R}", Type.PRIMARY, Type.COLORED, Type.MONOCOLORED),
     G("{G}", Type.PRIMARY, Type.COLORED, Type.MONOCOLORED),
+    C("{C}", Type.COLORLESS),
     X("{X}", Type.GENERIC, Type.COLORLESS),
     NUMERIC("{N/A}", Type.GENERIC, Type.COLORLESS),
     HYBRID_WU("{W/U}", W, U, Type.HYBRID, Type.COLORED),
@@ -73,11 +75,21 @@ public enum ManaSymbol {
     HYBRID_RW("{R/W}", R, W, Type.HYBRID, Type.COLORED),
     HYBRID_GW("{G/W}", G, W, Type.HYBRID, Type.COLORED),
     HYBRID_GU("{G/U}", G, U, Type.HYBRID, Type.COLORED),
+    HYBRID_CW("{W/U}", W, U, Type.HYBRID, Type.COLORED),
+    HYBRID_CU("{W/U}", W, U, Type.HYBRID, Type.COLORED),
+    HYBRID_CB("{W/B}", W, B, Type.HYBRID, Type.COLORED),
+    HYBRID_CR("{U/R}", U, R, Type.HYBRID, Type.COLORED),
+    HYBRID_CG("{B/G}", B, G, Type.HYBRID, Type.COLORED),
     MONOCOLORED_HYBRID_W("{2/W}", W, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
     MONOCOLORED_HYBRID_U("{2/U}", U, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
     MONOCOLORED_HYBRID_B("{2/B}", B, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
     MONOCOLORED_HYBRID_R("{2/R}", R, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
     MONOCOLORED_HYBRID_G("{2/G}", G, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
+    COLORLESS_HYBRID_W("{C/W}", C, W, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
+    COLORLESS_HYBRID_U("{C/U}", C, U, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
+    COLORLESS_HYBRID_B("{C/B}", C, B, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
+    COLORLESS_HYBRID_R("{C/R}", C, R, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
+    COLORLESS_HYBRID_G("{C/G}", C, G, Type.HYBRID, Type.MONOCOLORED, Type.COLORED),
     PHYREXIAN_W("{W/P}", W, Type.PHYREXIAN, Type.COLORED, Type.MONOCOLORED),
     PHYREXIAN_G("{G/P}", G, Type.PHYREXIAN, Type.COLORED, Type.MONOCOLORED),
     PHYREXIAN_R("{R/P}", R, Type.PHYREXIAN, Type.COLORED, Type.MONOCOLORED),

@@ -63,7 +63,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SludgeStriderEffect(), new GenericManaCost(1)), false);
     }
 
-    public SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
+    private SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
         super(ability);
     }
 
@@ -112,7 +112,7 @@ class SludgeStriderEffect extends OneShotEffect {
         staticText = "target player loses 1 life and you gain 1 life";
     }
 
-    SludgeStriderEffect(final SludgeStriderEffect effect) {
+    private SludgeStriderEffect(final SludgeStriderEffect effect) {
         super(effect);
     }
 

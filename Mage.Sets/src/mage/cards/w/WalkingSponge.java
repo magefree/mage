@@ -62,7 +62,7 @@ class WalkingSpongeEffect extends OneShotEffect {
         this.staticText = "Target creature loses your choice of flying, first strike, or trample until end of turn";
     }
 
-    WalkingSpongeEffect(final WalkingSpongeEffect effect) {
+    private WalkingSpongeEffect(final WalkingSpongeEffect effect) {
         super(effect);
     }
 

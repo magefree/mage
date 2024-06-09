@@ -17,7 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -28,7 +28,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class GrafHarvest extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Zombies you control");
 
     static {
         filter.add(SubType.ZOMBIE.getPredicate());

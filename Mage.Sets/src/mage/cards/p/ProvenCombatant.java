@@ -25,7 +25,7 @@ public final class ProvenCombatant extends CardImpl {
         addAbility(new EternalizeAbility(new ManaCostsImpl<>("{4}{U}{U}"), this));
     }
 
-    public ProvenCombatant(final ProvenCombatant provenCombatant){
+    private ProvenCombatant(final ProvenCombatant provenCombatant){
         super(provenCombatant);
     }
 

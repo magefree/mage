@@ -51,12 +51,12 @@ public final class HellholeRats extends CardImpl {
 
 class HellholeRatsEffect extends OneShotEffect {
 
-    public HellholeRatsEffect() {
+    HellholeRatsEffect() {
         super(Outcome.Damage);
         this.staticText = "target player discards a card. {this} deals damage to that player equal to that card's mana value";
     }
 
-    public HellholeRatsEffect(final HellholeRatsEffect effect) {
+    private HellholeRatsEffect(final HellholeRatsEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class HellholeRatsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = 0;
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             Cards cards = targetPlayer.discard(1, false, false, source, game);
             if (!cards.isEmpty()) {

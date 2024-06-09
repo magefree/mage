@@ -41,7 +41,7 @@ public final class ForerunnerOfTheCoalition extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new SearchLibraryPutOnLibraryEffect(
                         new TargetCardInLibrary(new FilterBySubtypeCard(SubType.PIRATE)),
-                        true, true), true));
+                        true), true));
 
         // Whenever another Pirate enters the battlefield under your control, each opponent loses 1 life.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(

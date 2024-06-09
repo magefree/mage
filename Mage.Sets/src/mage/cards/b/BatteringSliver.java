@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -19,12 +20,6 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author KholdFuzion
  */
 public final class BatteringSliver extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all Sliver creatures");
-
-    static {
-        filter.add(SubType.SLIVER.getPredicate());
-    }
 
     public BatteringSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
@@ -35,8 +30,12 @@ public final class BatteringSliver extends CardImpl {
 
         // All Sliver creatures have trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(TrampleAbility.getInstance(),
-                        Duration.WhileOnBattlefield, filter)));
+                new GainAbilityAllEffect(
+                        TrampleAbility.getInstance(),
+                        Duration.WhileOnBattlefield,
+                        StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
+                )
+        ));
     }
 
     private BatteringSliver(final BatteringSliver card) {

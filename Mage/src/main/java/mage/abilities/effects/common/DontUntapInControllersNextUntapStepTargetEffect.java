@@ -4,6 +4,7 @@ package mage.abilities.effects.common;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -57,7 +58,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
         this.onlyIfControlledByPlayer = onlyIfControlledByPlayer;
     }
 
-    public DontUntapInControllersNextUntapStepTargetEffect(final DontUntapInControllersNextUntapStepTargetEffect effect) {
+    protected DontUntapInControllersNextUntapStepTargetEffect(final DontUntapInControllersNextUntapStepTargetEffect effect) {
         super(effect);
         this.targetName = effect.targetName;
         this.twoSteps = effect.twoSteps;
@@ -68,11 +69,6 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
     @Override
     public DontUntapInControllersNextUntapStepTargetEffect copy() {
         return new DontUntapInControllersNextUntapStepTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override
@@ -87,7 +83,8 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UNTAP_STEP || event.getType() == GameEvent.EventType.UNTAP;
+        return event.getType() == GameEvent.EventType.UNTAP_STEP
+                || event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override
@@ -120,7 +117,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
             }
         }
 
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             if (handledTargetsDuringTurn.containsKey(event.getTargetId())
                     && !handledTargetsDuringTurn.get(event.getTargetId())
                     && getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {

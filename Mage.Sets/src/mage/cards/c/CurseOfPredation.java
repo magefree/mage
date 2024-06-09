@@ -61,7 +61,7 @@ class CurseOfPredationTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public CurseOfPredationTriggeredAbility(final CurseOfPredationTriggeredAbility ability) {
+    private CurseOfPredationTriggeredAbility(final CurseOfPredationTriggeredAbility ability) {
         super(ability);
     }
 

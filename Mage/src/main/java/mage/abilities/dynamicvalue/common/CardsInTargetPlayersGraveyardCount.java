@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LoneFox
  */
 public class CardsInTargetPlayersGraveyardCount implements DynamicValue {
@@ -24,7 +23,7 @@ public class CardsInTargetPlayersGraveyardCount implements DynamicValue {
         this.filter = filter;
     }
 
-    public CardsInTargetPlayersGraveyardCount(final CardsInTargetPlayersGraveyardCount dynamicValue) {
+    protected CardsInTargetPlayersGraveyardCount(final CardsInTargetPlayersGraveyardCount dynamicValue) {
         this.filter = dynamicValue.filter;
     }
 

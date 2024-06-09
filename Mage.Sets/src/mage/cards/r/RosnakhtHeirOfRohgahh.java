@@ -21,7 +21,7 @@ public final class RosnakhtHeirOfRohgahh extends CardImpl {
     public RosnakhtHeirOfRohgahh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOBOLD);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(0);

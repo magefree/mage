@@ -56,7 +56,7 @@ class ReweaveEffect extends OneShotEffect {
         this.staticText = "Target permanent's controller sacrifices it. If the player does, they reveal cards from the top of their library until they reveal a permanent card that shares a card type with the sacrificed permanent, put that card onto the battlefield, then shuffle";
     }
 
-    public ReweaveEffect(final ReweaveEffect effect) {
+    private ReweaveEffect(final ReweaveEffect effect) {
         super(effect);
     }
 

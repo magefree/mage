@@ -18,7 +18,7 @@ public final class TresserhornSinks extends CardImpl {
 
     public TresserhornSinks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Tresserhorn Sinks enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

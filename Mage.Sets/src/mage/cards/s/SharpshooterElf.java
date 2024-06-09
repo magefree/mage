@@ -14,7 +14,6 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -51,7 +50,7 @@ public final class SharpshooterElf extends CardImpl {
 
         // Sharpshooter Elf's power is equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(CreaturesYouControlCount.instance)
         ));
 
         // When Sharpshooter Elf enters the battlefield, it deals damage equal to its power to target creature with flying an opponent controls.

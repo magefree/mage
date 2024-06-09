@@ -38,7 +38,7 @@ public final class FlowerFlourish extends SplitCard {
         // Search your library for a basic Forest or Plains card, reveal it, put it into your hand, then shuffle your library.
         this.getLeftHalfCard().getSpellAbility().addEffect(
                 new SearchLibraryPutInHandEffect(
-                        new TargetCardInLibrary(filter), true, true
+                        new TargetCardInLibrary(filter), true
                 )
         );
 

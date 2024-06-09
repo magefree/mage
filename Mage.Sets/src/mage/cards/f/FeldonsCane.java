@@ -48,7 +48,7 @@ class FeldonsCaneEffect extends OneShotEffect {
         this.staticText = "Shuffle your graveyard into your library";
     }
     
-    FeldonsCaneEffect(final FeldonsCaneEffect effect) {
+    private FeldonsCaneEffect(final FeldonsCaneEffect effect) {
         super(effect);
     }
     

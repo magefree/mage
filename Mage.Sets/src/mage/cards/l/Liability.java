@@ -46,12 +46,12 @@ public final class Liability extends CardImpl {
 
 class LiabilityEffect extends OneShotEffect {
 
-    public LiabilityEffect() {
+    LiabilityEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player loses 1 life.";
     }
 
-    public LiabilityEffect(final LiabilityEffect effect) {
+    private LiabilityEffect(final LiabilityEffect effect) {
         super(effect);
     }
 

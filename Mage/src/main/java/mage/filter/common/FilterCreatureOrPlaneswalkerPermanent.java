@@ -7,7 +7,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 
 /**
- *
  * @author LevelX2
  */
 public class FilterCreatureOrPlaneswalkerPermanent extends FilterPermanent {
@@ -23,7 +22,7 @@ public class FilterCreatureOrPlaneswalkerPermanent extends FilterPermanent {
                 CardType.PLANESWALKER.getPredicate()));
     }
 
-    public FilterCreatureOrPlaneswalkerPermanent(final FilterCreatureOrPlaneswalkerPermanent filter) {
+    protected FilterCreatureOrPlaneswalkerPermanent(final FilterCreatureOrPlaneswalkerPermanent filter) {
         super(filter);
     }
 

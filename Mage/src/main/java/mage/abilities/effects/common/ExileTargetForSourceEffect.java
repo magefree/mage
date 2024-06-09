@@ -37,7 +37,7 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         super(Outcome.Exile);
     }
 
-    public ExileTargetForSourceEffect(final ExileTargetForSourceEffect effect) {
+    protected ExileTargetForSourceEffect(final ExileTargetForSourceEffect effect) {
         super(effect);
     }
 
@@ -55,14 +55,14 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         }
 
         Set<UUID> objectsToMove = new LinkedHashSet<>();
-        if (this.targetPointer instanceof FirstTargetPointer
+        if (this.getTargetPointer() instanceof FirstTargetPointer
                 && source.getTargets().size() > 1) {
             for (Target target : source.getTargets()) {
                 objectsToMove.addAll(target.getTargets());
             }
         } else {
-            if (this.targetPointer != null && !this.targetPointer.getTargets(game, source).isEmpty()) {
-                objectsToMove.addAll(this.targetPointer.getTargets(game, source));
+            if (!this.getTargetPointer().getTargets(game, source).isEmpty()) {
+                objectsToMove.addAll(this.getTargetPointer().getTargets(game, source));
             } else {
                 // issue with Madness keyword  #6889
                 UUID fixedTargetId = null;
@@ -101,25 +101,6 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        String amountText = "";
-        if (mode.getTargets().get(0).getMinNumberOfTargets() < mode.getTargets().get(0).getMaxNumberOfTargets()) {
-            amountText = "up to " + CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()) + " ";
-        } else if (mode.getTargets().get(0).getMinNumberOfTargets() > 1) {
-            amountText = CardUtil.numberToText(mode.getTargets().get(0).getMinNumberOfTargets()) + " ";
-        }
-
-        String targetText = "";
-        if (mode.getTargets().get(0).getTargetName().contains("target ")) {
-            targetText = "";
-        } else {
-            targetText = "target ";
-        }
-
-        if (mode.getTargets().isEmpty()) {
-            return "exile it";
-        } else {
-            return "exile " + amountText + targetText + mode.getTargets().get(0).getTargetName();
-        }
+        return "exile " + getTargetPointer().describeTargets(mode.getTargets(), "it");
     }
 }

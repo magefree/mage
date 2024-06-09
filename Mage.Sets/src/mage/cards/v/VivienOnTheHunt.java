@@ -17,6 +17,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public final class VivienOnTheHunt extends CardImpl {
     public VivienOnTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
         this.setStartingLoyalty(4);
 
@@ -75,9 +76,7 @@ class VivienOnTheHuntSacrificeEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
-        );
+        TargetSacrifice target = new TargetSacrifice(0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE);
         player.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.sacrifice(source, game)) {
@@ -126,7 +125,7 @@ class VivienOnTheHuntMillEffect extends OneShotEffect {
         TargetCard target = new TargetCard(
                 0, Integer.MAX_VALUE, Zone.ALL, StaticFilters.FILTER_CARD_CREATURE
         );
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
         return true;
     }

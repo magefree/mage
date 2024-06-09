@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -6,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -30,7 +28,7 @@ public final class SkullbriarTheWalkingGrave extends CardImpl {
 
     public SkullbriarTheWalkingGrave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(1);
@@ -70,9 +68,9 @@ public final class SkullbriarTheWalkingGrave extends CardImpl {
         Counters copyFrom = null;
         if (skullBriarEffectApplied) {
             if (event.getTarget() != null && event.getFromZone() == Zone.BATTLEFIELD) {
-                copyFrom = new Counters(event.getTarget().getCounters(game));
+                copyFrom = event.getTarget().getCounters(game).copy();
             } else {
-                copyFrom = new Counters(this.getCounters(game));
+                copyFrom = this.getCounters(game).copy();
             }
         }
         super.updateZoneChangeCounter(game, event);
@@ -93,12 +91,13 @@ public final class SkullbriarTheWalkingGrave extends CardImpl {
 }
 
 class SkullbriarEffect extends ReplacementEffectImpl {
-    public SkullbriarEffect() {
+
+    SkullbriarEffect() {
         super(Duration.EndOfGame, Outcome.Benefit);
         staticText = "Counters remain on {this} as it moves to any zone other than a player's hand or library.";
     }
 
-    public SkullbriarEffect(SkullbriarEffect effect) {
+    private SkullbriarEffect(final SkullbriarEffect effect) {
         super(effect);
     }
 
@@ -118,7 +117,7 @@ class SkullbriarEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public SkullbriarEffect copy() {
         return new SkullbriarEffect(this);
     }
 }

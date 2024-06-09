@@ -44,7 +44,7 @@ public final class NogiDracoZealot extends CardImpl {
 
     public NogiDracoZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOBOLD, SubType.SHAMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -59,7 +59,7 @@ public final class NogiDracoZealot extends CardImpl {
                         new CreatureToken(5, 5, "Dragon with base power and toughness 5/5 and gains flying")
                                 .withSubType(SubType.DRAGON)
                                 .withAbility(FlyingAbility.getInstance()),
-                        "", Duration.EndOfTurn), false
+                        CardType.CREATURE, Duration.EndOfTurn), false
                 ), condition, "Whenever {this} attacks, if you control three or more Dragons, until end of turn, " +
                 "{this} becomes a Dragon with base power and toughness 5/5 and gains flying"
         );

@@ -58,12 +58,12 @@ public final class ManaVortex extends CardImpl {
 
 class CounterSourceEffect extends OneShotEffect {
 
-    public CounterSourceEffect() {
+    CounterSourceEffect() {
         super(Outcome.Detriment);
         this.staticText = "counter it unless you sacrifice a land";
     }
 
-    public CounterSourceEffect(final CounterSourceEffect effect) {
+    private CounterSourceEffect(final CounterSourceEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class CounterSourceEffect extends OneShotEffect {
         if(spell != null){
                 Player controller = game.getPlayer(source.getControllerId());
                 if(controller != null && controller.chooseUse(Outcome.Detriment, "Sacrifice a land to not counter " + spell.getName() + '?', source, game)){
-                    SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()));
+                    SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_LAND);
                     if(cost.pay(source, game, source, source.getControllerId(), false, null)){
                         game.informPlayers(controller.getLogName() + " sacrifices a land to not counter " + spell.getName() + '.');
                         return true;
@@ -106,7 +106,7 @@ class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When there are no lands on the battlefield, ");
     }
 
-    public ManaVortexStateTriggeredAbility(final ManaVortexStateTriggeredAbility ability) {
+    private ManaVortexStateTriggeredAbility(final ManaVortexStateTriggeredAbility ability) {
         super(ability);
     }
 

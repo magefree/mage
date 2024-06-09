@@ -10,6 +10,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,6 +36,7 @@ public final class DungeoneersPack extends CardImpl {
         ability.addEffect(new GainLifeEffect(3).setText(", gain 3 life"));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(","));
         ability.addEffect(new CreateTokenEffect(new TreasureToken()).concatBy(", and"));
+        ability.addHint(InitiativeHint.instance);
         this.addAbility(ability);
     }
 

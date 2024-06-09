@@ -25,7 +25,7 @@ public final class JayaVeneratedFiremage extends CardImpl {
     public JayaVeneratedFiremage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JAYA);
         this.setStartingLoyalty(5);
 
@@ -85,11 +85,6 @@ class JayaVeneratedFiremageEffect extends ReplacementEffectImpl {
                     && !sourceObject.getId().equals(source.getSourceId());
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

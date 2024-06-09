@@ -19,7 +19,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
@@ -73,7 +73,7 @@ enum AerialSurveyorCondition implements Condition {
     private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     @Override

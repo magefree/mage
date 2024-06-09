@@ -40,12 +40,12 @@ public final class TurnTheTables extends CardImpl {
 
 class TurnTheTablesEffect extends RedirectionEffect {
 
-    public TurnTheTablesEffect() {
+    TurnTheTablesEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ACCORDING_DURATION);
         staticText = "All combat damage that would be dealt to you this turn is dealt to target attacking creature instead";
     }
 
-    public TurnTheTablesEffect(final TurnTheTablesEffect effect) {
+    private TurnTheTablesEffect(final TurnTheTablesEffect effect) {
         super(effect);
     }
 

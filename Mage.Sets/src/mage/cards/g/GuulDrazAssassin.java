@@ -56,7 +56,7 @@ public final class GuulDrazAssassin extends LevelerCard {
         setMaxLevelCounters(4);
     }
 
-    public GuulDrazAssassin (final GuulDrazAssassin card) {
+    private GuulDrazAssassin(final GuulDrazAssassin card) {
         super(card);
     }
 

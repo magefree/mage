@@ -23,11 +23,10 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class NightfireGiant extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a Mountain");
+    private static final FilterPermanent filter = new FilterPermanent("Mountain");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
-
     }
 
     public NightfireGiant(UUID ownerId, CardSetInfo setInfo) {

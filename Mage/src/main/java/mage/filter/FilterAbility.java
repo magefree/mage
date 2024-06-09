@@ -21,7 +21,7 @@ public class FilterAbility extends FilterImpl<Ability> {
         super(name);
     }
 
-    public FilterAbility(FilterAbility filter) {
+    protected FilterAbility(final FilterAbility filter) {
         super(filter);
     }
 

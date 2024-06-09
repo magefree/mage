@@ -33,7 +33,7 @@ public final class RhysTheRedeemed extends CardImpl {
 
     public RhysTheRedeemed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G/W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
 
@@ -76,7 +76,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
         this.staticText = "For each creature token you control, create a token that's a copy of that creature";
     }
 
-    public RhysTheRedeemedEffect(final RhysTheRedeemedEffect effect) {
+    private RhysTheRedeemedEffect(final RhysTheRedeemedEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (permanent.isControlledBy(source.getControllerId())) {
                     CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(permanent, game));

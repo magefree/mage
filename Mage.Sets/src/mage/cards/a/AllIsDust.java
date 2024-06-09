@@ -41,7 +41,7 @@ class AllIsDustEffect extends OneShotEffect {
         staticText = "Each player sacrifices all permanents they control that are one or more colors";
     }
 
-    AllIsDustEffect(final AllIsDustEffect effect) {
+    private AllIsDustEffect(final AllIsDustEffect effect) {
         super(effect);
     }
 

@@ -52,9 +52,7 @@ public final class CoffinPuppets extends CardImpl {
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                new SacrificeTargetCost(
-                        new TargetControlledPermanent(2, 2, filter2, true)
-                ), condition
+                new SacrificeTargetCost(2, filter2), condition
         ));
     }
 

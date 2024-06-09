@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetSpell;
+import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
 
 import java.util.UUID;
 
@@ -31,6 +32,7 @@ public final class SilumgarsScorn extends CardImpl {
                 "If you revealed a Dragon card or controlled a Dragon as you cast this spell, counter that spell instead"
         ));
         this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addWatcher(new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
     }
 
     private SilumgarsScorn(final SilumgarsScorn card) {

@@ -38,12 +38,12 @@ public final class LavaBlister extends CardImpl {
 
 class LavaBlisterEffect extends OneShotEffect {
 
-    public LavaBlisterEffect() {
+    LavaBlisterEffect() {
         super(Outcome.Detriment);
         this.staticText = "Destroy target nonbasic land unless its controller has {this} deal 6 damage to them";
     }
 
-    public LavaBlisterEffect(final LavaBlisterEffect effect) {
+    private LavaBlisterEffect(final LavaBlisterEffect effect) {
         super(effect);
     }
 

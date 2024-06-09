@@ -24,7 +24,7 @@ public final class GontisAetherHeart extends CardImpl {
     public GontisAetherHeart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever Gonti's Aether Heart or another artifact enters the battlefield under your control, you get {E}{E} <i>(two energy counters).
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(

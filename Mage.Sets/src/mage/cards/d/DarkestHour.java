@@ -43,7 +43,7 @@ class DarkestHourEffect extends ContinuousEffectImpl {
         staticText = "All creatures are black";
     }
 
-    DarkestHourEffect(final DarkestHourEffect effect) {
+    private DarkestHourEffect(final DarkestHourEffect effect) {
         super(effect);
     }
 

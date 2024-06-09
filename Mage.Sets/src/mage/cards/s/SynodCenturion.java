@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -40,35 +39,32 @@ public final class SynodCenturion extends CardImpl {
         return new SynodCenturion(this);
     }
 
-    class SynodCenturionStateTriggeredAbility extends StateTriggeredAbility {
+}
 
-        public SynodCenturionStateTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
-        }
+class SynodCenturionStateTriggeredAbility extends StateTriggeredAbility {
 
-        public SynodCenturionStateTriggeredAbility(final SynodCenturionStateTriggeredAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public SynodCenturionStateTriggeredAbility copy() {
-            return new SynodCenturionStateTriggeredAbility(this);
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            for (Permanent perm : game.getBattlefield().getAllActivePermanents(controllerId)) {
-                if (!perm.getId().equals(this.getSourceId()) &&  perm.isArtifact(game)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        @Override
-        public String getRule() {
-            return "When you control no other artifacts, sacrifice {this}.";
-        }
-
+    SynodCenturionStateTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When you control no other artifacts, ");
     }
+
+    private SynodCenturionStateTriggeredAbility(final SynodCenturionStateTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public SynodCenturionStateTriggeredAbility copy() {
+        return new SynodCenturionStateTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents(controllerId)) {
+            if (!perm.getId().equals(this.getSourceId()) && perm.isArtifact(game)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

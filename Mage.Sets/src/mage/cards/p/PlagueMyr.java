@@ -27,7 +27,7 @@ public final class PlagueMyr extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public PlagueMyr (final PlagueMyr card) {
+    private PlagueMyr(final PlagueMyr card) {
         super(card);
     }
 

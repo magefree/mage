@@ -25,7 +25,7 @@ public final class LanternKami extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public LanternKami (final LanternKami card) {
+    private LanternKami(final LanternKami card) {
         super(card);
     }
 

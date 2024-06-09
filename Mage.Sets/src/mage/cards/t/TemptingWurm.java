@@ -1,11 +1,9 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -62,7 +60,7 @@ class TemptingWurmEffect extends OneShotEffect {
         ));
     }
     
-    public TemptingWurmEffect() {
+    TemptingWurmEffect() {
         super(Outcome.Detriment);
         this.staticText = "each opponent may put any number of artifact, creature, enchantment, and/or land cards from their hand onto the battlefield.";
     }
@@ -80,7 +78,7 @@ class TemptingWurmEffect extends OneShotEffect {
                 if (opponent != null){
                     Target target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
                     
-                    if(target.canChoose(opponent.getId(), source, game)) {
+                    if (target.canChoose(opponent.getId(), source, game)) {
                         if (opponent.chooseUse(Outcome.PutCardInPlay , "Put any artifact, creature, enchantment, and/or land cards cards from your hand onto the battlefield?", source, game)) {
                             if (target.chooseTarget(Outcome.PutCardInPlay, opponent.getId(), source, game)) {
                                 for (UUID cardId: target.getTargets()){
@@ -104,12 +102,12 @@ class TemptingWurmEffect extends OneShotEffect {
         return false;
     }
 
-    public TemptingWurmEffect(final TemptingWurmEffect effect) {
+    private TemptingWurmEffect(final TemptingWurmEffect effect) {
         super(effect);
     }
     
     @Override
-    public Effect copy() {
+    public TemptingWurmEffect copy() {
         return new TemptingWurmEffect(this);
     }
 }

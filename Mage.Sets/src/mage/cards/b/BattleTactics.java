@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -24,7 +25,7 @@ public final class BattleTactics extends CardImpl {
         Effect effect = new BoostControlledEffect(2, 1, Duration.EndOfTurn);
         effect.setText("Creatures you control get +2/+1");
         this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
+        effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("and gain lifelink until end of turn");
         this.getSpellAbility().addEffect(effect);
     }

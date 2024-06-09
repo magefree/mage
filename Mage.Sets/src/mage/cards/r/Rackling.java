@@ -41,12 +41,12 @@ public final class Rackling extends CardImpl {
 
 class RacklingEffect extends OneShotEffect {
 
-    public RacklingEffect() {
+    RacklingEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
 
-    public RacklingEffect(final RacklingEffect effect) {
+    private RacklingEffect(final RacklingEffect effect) {
         super(effect);
     }
 
@@ -57,7 +57,7 @@ class RacklingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int damage = 3 - player.getHand().size();
             if (damage > 0) {

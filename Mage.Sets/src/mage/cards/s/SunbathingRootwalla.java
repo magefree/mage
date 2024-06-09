@@ -28,7 +28,7 @@ public final class SunbathingRootwalla extends CardImpl {
         // Domain -- {3}{G}: Until end of turn, Sunbathing Rootwalla gets +1/+1 for each basic land type among lands you control. Activate only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD,
-                new BoostSourceEffect(DomainValue.REGULAR, DomainValue.REGULAR, Duration.EndOfTurn, true),
+                new BoostSourceEffect(DomainValue.REGULAR, DomainValue.REGULAR, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{3}{G}")
         );
         ability.setAbilityWord(AbilityWord.DOMAIN);

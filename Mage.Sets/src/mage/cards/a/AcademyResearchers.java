@@ -55,7 +55,7 @@ class AcademyResearchersEffect extends OneShotEffect {
         this.staticText = "you may put an Aura card from your hand onto the battlefield attached to {this}.";
     }
 
-    AcademyResearchersEffect(final AcademyResearchersEffect effect) {
+    private AcademyResearchersEffect(final AcademyResearchersEffect effect) {
         super(effect);
     }
 

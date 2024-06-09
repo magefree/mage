@@ -8,6 +8,8 @@ import mage.game.Game;
 import mage.watchers.common.PlayersAttackedThisTurnWatcher;
 
 /**
+ * Remember to add PlayersAttackedThisTurnWatcher to card init
+ *
  * @author JayDi85
  */
 public enum AttackedThisTurnOpponentsCount implements DynamicValue {

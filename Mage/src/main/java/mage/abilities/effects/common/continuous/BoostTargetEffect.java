@@ -7,7 +7,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,18 +30,17 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         this(StaticValue.get(power), StaticValue.get(toughness), duration);
     }
 
-    /**
-     * @param power
-     * @param toughness
-     * @param duration
-     */
+    public BoostTargetEffect(DynamicValue power, DynamicValue toughness) {
+        this(power, toughness, Duration.EndOfTurn);
+    }
+
     public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, CardUtil.getBoostOutcome(power, toughness));
         this.power = power;
         this.toughness = toughness;
     }
 
-    public BoostTargetEffect(final BoostTargetEffect effect) {
+    protected BoostTargetEffect(final BoostTargetEffect effect) {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();
@@ -56,7 +54,8 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
+            // Boost must be locked in (if it's a dynamic value) for non-static ability
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
         }
@@ -65,7 +64,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(permanentId);
             if (target != null && target.isCreature(game)) {
                 target.addPower(power.calculate(game, source, this));
@@ -82,7 +81,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         return getTargetPointer().describeTargets(mode.getTargets(), "it") +
-                (getTargetPointer().isPlural(mode.getTargets()) ? " get " : " gets ") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " each get " : " gets ") +
                 CardUtil.getBoostText(power, toughness, duration);
     }
 }

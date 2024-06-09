@@ -50,7 +50,7 @@ class CrystalChimesEffect extends OneShotEffect {
         this.staticText = "Return all enchantment cards from your graveyard to your hand";
     }
 
-    CrystalChimesEffect(final CrystalChimesEffect effect) {
+    private CrystalChimesEffect(final CrystalChimesEffect effect) {
         super(effect);
     }
 

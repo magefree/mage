@@ -30,7 +30,7 @@ public final class DromarTheBanisher extends CardImpl {
 
     public DromarTheBanisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(6);
@@ -60,7 +60,7 @@ class DromarTheBanisherEffect extends OneShotEffect {
         this.staticText = "choose a color, then return all creatures of that color to their owners' hands.";
     }
 
-    DromarTheBanisherEffect(final DromarTheBanisherEffect effect) {
+    private DromarTheBanisherEffect(final DromarTheBanisherEffect effect) {
         super(effect);
     }
 

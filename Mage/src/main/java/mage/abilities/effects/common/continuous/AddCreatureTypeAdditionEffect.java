@@ -21,11 +21,10 @@ public class AddCreatureTypeAdditionEffect extends ContinuousEffectImpl {
         updateText();
     }
 
-    public AddCreatureTypeAdditionEffect(final AddCreatureTypeAdditionEffect effect) {
+    protected AddCreatureTypeAdditionEffect(final AddCreatureTypeAdditionEffect effect) {
         super(effect);
         this.subType = effect.subType;
         this.giveBlackColor = effect.giveBlackColor;
-        updateText();
     }
 
     private void updateText() {

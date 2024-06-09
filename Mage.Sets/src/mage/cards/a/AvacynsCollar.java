@@ -62,7 +62,7 @@ class AvacynsCollarTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()));
     }
 
-    public AvacynsCollarTriggeredAbility(final AvacynsCollarTriggeredAbility ability) {
+    private AvacynsCollarTriggeredAbility(final AvacynsCollarTriggeredAbility ability) {
         super(ability);
     }
 

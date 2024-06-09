@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class OathswornVampire extends CardImpl {
         // You may cast Oathsworn Vampire from your graveyard if you gained life this turn.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new OathswornVampirePlayEffect()
-        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private OathswornVampire(final OathswornVampire card) {
@@ -50,7 +50,7 @@ public final class OathswornVampire extends CardImpl {
 class OathswornVampirePlayEffect extends AsThoughEffectImpl {
 
     OathswornVampirePlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard if you gained life this turn";
     }
 

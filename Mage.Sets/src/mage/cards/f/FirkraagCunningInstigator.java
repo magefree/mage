@@ -40,7 +40,7 @@ public final class FirkraagCunningInstigator extends CardImpl {
     public FirkraagCunningInstigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -85,9 +85,8 @@ enum FirkraagCunningInstigatorPredicate implements Predicate<Permanent> {
         return game
                 .getCombat()
                 .getCreaturesForcedToAttack()
-                .values()
+                .keySet()
                 .stream()
-                .flatMap(Collection::stream)
                 .anyMatch(input.getId()::equals);
     }
 }
@@ -126,6 +125,7 @@ class FirkraagCunningInstigatorTriggeredAbility extends TriggeredAbilityImpl {
             );
             filter.add(new ControllerIdPredicate(event.getTargetId()));
             this.addTarget(new TargetPermanent(filter));
+            return true;
         }
         return false;
     }

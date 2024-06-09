@@ -8,9 +8,9 @@ import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 
 public class CanadianHighlanderDuel extends GameCanadianHighlanderImpl {
-   
-    public CanadianHighlanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+
+    public CanadianHighlanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, startLife, startHandSize);
     }
 
     public CanadianHighlanderDuel(final CanadianHighlanderDuel game) {

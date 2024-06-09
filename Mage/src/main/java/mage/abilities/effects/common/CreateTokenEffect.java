@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -9,6 +8,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -29,7 +29,10 @@ public class CreateTokenEffect extends OneShotEffect {
     private final boolean tapped;
     private final boolean attacking;
     private String additionalRules;
+    private boolean oldPhrasing = false; // true for "token. It has " instead of "token with "
     private List<UUID> lastAddedTokenIds = new ArrayList<>();
+    private CounterType counterType;
+    private DynamicValue numberOfCounters;
 
     public CreateTokenEffect(Token token) {
         this(token, StaticValue.get(1));
@@ -60,14 +63,23 @@ public class CreateTokenEffect extends OneShotEffect {
         setText();
     }
 
-    public CreateTokenEffect(final CreateTokenEffect effect) {
+    protected CreateTokenEffect(final CreateTokenEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.token = effect.token.copy();
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
+        this.counterType = effect.counterType;
+        this.numberOfCounters = effect.numberOfCounters;
         this.additionalRules = effect.additionalRules;
+        this.oldPhrasing = effect.oldPhrasing;
+    }
+
+    public CreateTokenEffect entersWithCounters(CounterType counterType, DynamicValue numberOfCounters) {
+        this.counterType = counterType;
+        this.numberOfCounters = numberOfCounters;
+        return this;
     }
 
     @Override
@@ -80,6 +92,15 @@ public class CreateTokenEffect extends OneShotEffect {
         int value = amount.calculate(game, source, this);
         token.putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking);
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
+        // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
+        if (counterType != null) {
+            for (UUID tokenId : lastAddedTokenIds) {
+                Permanent tokenPermanent = game.getPermanent(tokenId);
+                if (tokenPermanent != null) {
+                    tokenPermanent.addCounters(counterType.createInstance(numberOfCounters.calculate(game, source, this)), source.getControllerId(), source, game);
+                }
+            }
+        }
 
         return true;
     }
@@ -110,33 +131,50 @@ public class CreateTokenEffect extends OneShotEffect {
         }
     }
 
+    /**
+     * For adding reminder text to the effect
+     */
     public CreateTokenEffect withAdditionalRules(String additionalRules) {
         this.additionalRules = additionalRules;
         setText();
         return this;
     }
 
+    /**
+     * For older cards that use the phrasing "token. It has " rather than "token with ".
+     */
+    public CreateTokenEffect withTextOptions(boolean oldPhrasing) {
+        this.oldPhrasing = oldPhrasing;
+        setText();
+        return this;
+    }
+
     private void setText() {
-        if (token.getDescription().contains(", a legendary")) {
-            staticText = "create " + token.getDescription();
+        String tokenDescription = token.getDescription();
+        boolean singular = amount.toString().equals("1");
+        if (tokenDescription.contains(", a legendary")) {
+            staticText = "create " + tokenDescription;
             return;
         }
-
+        if (oldPhrasing) {
+            tokenDescription = tokenDescription.replace("token with \"",
+                    singular ? "token. It has \"" : "tokens. They have \"");
+        }
         StringBuilder sb = new StringBuilder("create ");
-        if (amount.toString().equals("1")) {
+        if (singular) {
             if (tapped && !attacking) {
                 sb.append("a tapped ");
-                sb.append(token.getDescription());
+                sb.append(tokenDescription);
             } else {
-                sb.append(CardUtil.addArticle(token.getDescription()));
+                sb.append(CardUtil.addArticle(tokenDescription));
             }
         } else {
             sb.append(CardUtil.numberToText(amount.toString())).append(' ');
             if (tapped && !attacking) {
                 sb.append("tapped ");
             }
-            sb.append(token.getDescription().replace("token. It has", "tokens. They have"));
-            if (token.getDescription().endsWith("token")) {
+            sb.append(tokenDescription);
+            if (tokenDescription.endsWith("token")) {
                 sb.append("s");
             }
             int tokenLocation = sb.indexOf("token ");
@@ -146,7 +184,7 @@ public class CreateTokenEffect extends OneShotEffect {
         }
 
         if (attacking) {
-            if (amount.toString().equals("1")) {
+            if (singular) {
                 sb.append(" that's");
             } else {
                 sb.append(" that are");
@@ -160,7 +198,11 @@ public class CreateTokenEffect extends OneShotEffect {
         String message = amount.getMessage();
         if (!message.isEmpty()) {
             if (amount.toString().equals("X")) {
-                sb.append(", where X is ");
+                if (sb.toString().endsWith(".\"")) {
+                    sb.replace(sb.length() - 2, sb.length(), ",\" where X is ");
+                } else {
+                    sb.append(", where X is ");
+                }
             } else {
                 sb.append(" for each ");
             }
@@ -168,7 +210,7 @@ public class CreateTokenEffect extends OneShotEffect {
         sb.append(message);
 
         if (this.additionalRules != null) {
-            sb.append(" " + this.additionalRules);
+            sb.append(this.additionalRules);
         }
 
         staticText = sb.toString();

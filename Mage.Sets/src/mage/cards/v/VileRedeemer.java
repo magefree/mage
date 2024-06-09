@@ -61,12 +61,12 @@ public final class VileRedeemer extends CardImpl {
 
 class VileRedeemerEffect extends OneShotEffect {
 
-    public VileRedeemerEffect() {
+    VileRedeemerEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "create a 1/1 colorless Eldrazi Scion creature token for each nontoken creature that died under your control this turn. They have \"Sacrifice this creature: Add {C}";
+        this.staticText = "create a 1/1 colorless Eldrazi Scion creature token for each nontoken creature that died under your control this turn. Those tokens have \"Sacrifice this creature: Add {C}.\"";
     }
 
-    public VileRedeemerEffect(final VileRedeemerEffect effect) {
+    private VileRedeemerEffect(final VileRedeemerEffect effect) {
         super(effect);
     }
 

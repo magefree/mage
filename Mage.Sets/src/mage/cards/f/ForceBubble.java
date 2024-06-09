@@ -60,7 +60,7 @@ class ForceBubbleReplacementEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to you, put that many depletion counters on {this} instead";
     }
 
-    ForceBubbleReplacementEffect(final ForceBubbleReplacementEffect effect) {
+    private ForceBubbleReplacementEffect(final ForceBubbleReplacementEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class ForceBubbleStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public ForceBubbleStateTriggeredAbility(final ForceBubbleStateTriggeredAbility ability) {
+    private ForceBubbleStateTriggeredAbility(final ForceBubbleStateTriggeredAbility ability) {
         super(ability);
     }
 

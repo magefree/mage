@@ -27,7 +27,7 @@ public final class TeferiTimelessVoyager extends CardImpl {
     public TeferiTimelessVoyager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
         this.setStartingLoyalty(4);
 
@@ -125,11 +125,6 @@ class TeferiTimelessVoyagerPhaseEffect extends ContinuousRuleModifyingEffectImpl
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.PHASE_IN;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

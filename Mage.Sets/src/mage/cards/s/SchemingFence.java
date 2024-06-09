@@ -60,12 +60,12 @@ public final class SchemingFence extends CardImpl {
 
 class SchemingFenceChooseEffect extends OneShotEffect {
 
-    public SchemingFenceChooseEffect() {
+    SchemingFenceChooseEffect() {
         super(Outcome.UnboostCreature);
         this.staticText = "you may choose a nonland permanent";
     }
 
-    public SchemingFenceChooseEffect(final SchemingFenceChooseEffect effect) {
+    private SchemingFenceChooseEffect(final SchemingFenceChooseEffect effect) {
         super(effect);
     }
 
@@ -104,12 +104,12 @@ class SchemingFenceChooseEffect extends OneShotEffect {
 
 class SchemingFenceDisableEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SchemingFenceDisableEffect() {
+    SchemingFenceDisableEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "activated abilities of the chosen permanent can't be activated";
     }
 
-    public SchemingFenceDisableEffect(final SchemingFenceDisableEffect effect) {
+    private SchemingFenceDisableEffect(final SchemingFenceDisableEffect effect) {
         super(effect);
     }
 
@@ -119,18 +119,13 @@ class SchemingFenceDisableEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent == null) {
             return false;
         }
@@ -189,7 +184,7 @@ class SchemingFenceGainEffect extends ContinuousEffectImpl {
             if (!(ability instanceof LoyaltyAbility)) {
                 Ability copied = ability.copy();
                 ability.getEffects().setValue("schemingFence", source.getSourceId());
-                permanent.addAbility(copied, source.getSourceId(), game);
+                permanent.addAbility(copied, source.getSourceId(), game, true);
             }
         }
         return true;

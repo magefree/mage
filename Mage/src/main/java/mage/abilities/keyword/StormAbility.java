@@ -3,8 +3,11 @@ package mage.abilities.keyword;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -19,8 +22,15 @@ import org.apache.log4j.Logger;
  */
 public class StormAbility extends TriggeredAbilityImpl {
 
+    private static final Hint hint = new ValueHint("Spells cast this turn", SpellsCastThisTurnValue.instance);
+
+    public static Hint getHint() {
+        return hint;
+    }
+
     public StormAbility() {
         super(Zone.STACK, new StormEffect());
+        this.addHint(hint);
     }
 
     private StormAbility(final StormAbility ability) {
@@ -64,7 +74,7 @@ class StormEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    public StormEffect(final StormEffect effect) {
+    protected StormEffect(final StormEffect effect) {
         super(effect);
     }
 
@@ -95,5 +105,25 @@ class StormEffect extends OneShotEffect {
     @Override
     public StormEffect copy() {
         return new StormEffect(this);
+    }
+}
+
+enum SpellsCastThisTurnValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+        return watcher.getAmountOfSpellsCastOnCurrentTurn().values().stream().mapToInt(Integer::intValue).sum();
+    }
+
+    @Override
+    public SpellsCastThisTurnValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
     }
 }

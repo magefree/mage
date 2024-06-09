@@ -54,7 +54,7 @@ class FathomMageTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a +1/+1 counter is put on {this}, ");
     }
 
-    public FathomMageTriggeredAbility(FathomMageTriggeredAbility ability) {
+    private FathomMageTriggeredAbility(final FathomMageTriggeredAbility ability) {
         super(ability);
     }
 

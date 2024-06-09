@@ -72,7 +72,7 @@ class MajesticGenesisEffect extends OneShotEffect {
                 0, Integer.MAX_VALUE,
                 StaticFilters.FILTER_CARD_PERMANENT
         );
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);

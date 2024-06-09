@@ -28,7 +28,7 @@ public final class VarragothBloodskySire extends CardImpl {
     public VarragothBloodskySire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -55,7 +55,7 @@ public final class VarragothBloodskySire extends CardImpl {
 
 class VarragothBloodskySireEffect extends SearchEffect {
 
-    public VarragothBloodskySireEffect() {
+    VarragothBloodskySireEffect() {
         super(new TargetCardInLibrary(), Outcome.DrawCard);
         this.staticText = "Target player searches their library for a card, then shuffles and puts that card on top";
     }

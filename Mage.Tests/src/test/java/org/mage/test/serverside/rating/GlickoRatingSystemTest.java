@@ -18,7 +18,7 @@ public class GlickoRatingSystemTest {
         int count = 1000;
         for (int i = 0; i < count; i++) {
             double startRating = RandomUtil.nextDouble() * 2500 + 500;
-            double startRatingDeviation = Math.min(RandomUtil.nextDouble() * 300 + 100, GlickoRatingSystem.BaseRD);
+            double startRatingDeviation = Math.min(RandomUtil.nextDouble() * 300 + 100, GlickoRatingSystem.BASE_RD);
             GlickoRating player1 = new GlickoRating(startRating, startRatingDeviation, 1);
             GlickoRating player2 = new GlickoRating(startRating, startRatingDeviation, 1);
 
@@ -40,7 +40,7 @@ public class GlickoRatingSystemTest {
         for (int i = 0; i < count; i++) {
             double startRating1 = RandomUtil.nextDouble() * 2500 + 500;
             double startRating2 = RandomUtil.nextDouble() * 2500 + 500;
-            double startRatingDeviation = Math.min(RandomUtil.nextDouble() * 300 + 100, GlickoRatingSystem.BaseRD);
+            double startRatingDeviation = Math.min(RandomUtil.nextDouble() * 300 + 100, GlickoRatingSystem.BASE_RD);
             GlickoRating player1 = new GlickoRating(startRating1, startRatingDeviation, 1);
             GlickoRating player2 = new GlickoRating(startRating2, startRatingDeviation, 1);
 

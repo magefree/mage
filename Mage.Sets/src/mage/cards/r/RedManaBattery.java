@@ -41,7 +41,7 @@ public final class RedManaBattery extends CardImpl {
                 new TapSourceCost(),
                 "Add {R}, then add {R} for each charge counter removed this way",
                 true, new IntPlusDynamicValue(1, new CountersSourceCount(CounterType.CHARGE)));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance(),
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE,
                 "Remove any number of charge counters from {this}"));
         this.addAbility(ability);
     }

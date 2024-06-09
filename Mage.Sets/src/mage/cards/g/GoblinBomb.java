@@ -58,12 +58,12 @@ public final class GoblinBomb extends CardImpl {
 
 class GoblinBombEffect extends OneShotEffect {
 
-    public GoblinBombEffect() {
+    GoblinBombEffect() {
         super(Outcome.Damage);
         staticText = "flip a coin. If you win the flip, put a fuse counter on {this}. If you lose the flip, remove a fuse counter from {this}";
     }
 
-    public GoblinBombEffect(GoblinBombEffect effect) {
+    private GoblinBombEffect(final GoblinBombEffect effect) {
         super(effect);
     }
 

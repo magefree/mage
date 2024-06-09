@@ -49,7 +49,7 @@ public class ExileReturnBattlefieldOwnerNextEndStepSourceEffect extends OneShotE
         controller.moveCards(permanent, Zone.EXILED, source, game);
         //create delayed triggered ability and return it from every public zone it was next moved to
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                new ReturnToBattlefieldUnderOwnerControlTargetEffect(returnTapped, true)
+                new ReturnToBattlefieldUnderOwnerControlTargetEffect(returnTapped, false)
                         .setTargetPointer(new FixedTarget(permanent.getId(), game))
         ), source);
         return true;

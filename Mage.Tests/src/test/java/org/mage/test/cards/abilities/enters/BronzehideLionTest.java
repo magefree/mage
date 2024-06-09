@@ -27,7 +27,7 @@ public class BronzehideLionTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertGraveyardCount(playerA, lion, 0);
-        assertIsAttachedTo(playerA, lion, "Grizzly Bears");
+        assertAttachedTo(playerA, lion, "Grizzly Bears", true);
     }
 
 

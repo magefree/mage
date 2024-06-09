@@ -30,7 +30,8 @@ public final class Portent extends CardImpl {
         this.getSpellAbility().addEffect(new PortentEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Draw a card at the beginning of the next turn's upkeep.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
+                new DrawCardSourceControllerEffect(1)), false).concatBy("<br>"));
     }
 
     private Portent(final Portent card) {
@@ -45,12 +46,12 @@ public final class Portent extends CardImpl {
 
 class PortentEffect extends OneShotEffect {
 
-    public PortentEffect() {
+    PortentEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle";
     }
 
-    public PortentEffect(final PortentEffect effect) {
+    private PortentEffect(final PortentEffect effect) {
         super(effect);
     }
 

@@ -23,7 +23,7 @@ public final class ObeliskOfJund extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public ObeliskOfJund (final ObeliskOfJund card) {
+    private ObeliskOfJund(final ObeliskOfJund card) {
         super(card);
     }
 

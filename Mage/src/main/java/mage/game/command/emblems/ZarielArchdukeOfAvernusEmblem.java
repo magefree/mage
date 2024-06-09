@@ -17,9 +17,17 @@ public final class ZarielArchdukeOfAvernusEmblem extends Emblem {
 
     // −6: You get an emblem with "At the end of the first combat phase on your turn, untap target creature you control. After this phase, there is an additional combat phase."
     public ZarielArchdukeOfAvernusEmblem() {
-        this.setName("Emblem Zariel");
-        this.setExpansionSetCodeForImage("AFR");
+        super("Emblem Zariel");
         this.getAbilities().add(new ZarielArchdukeOfAvernusEmblemAbility());
+    }
+
+    private ZarielArchdukeOfAvernusEmblem(final ZarielArchdukeOfAvernusEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public ZarielArchdukeOfAvernusEmblem copy() {
+        return new ZarielArchdukeOfAvernusEmblem(this);
     }
 }
 

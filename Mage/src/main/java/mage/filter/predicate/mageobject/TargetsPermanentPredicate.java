@@ -1,6 +1,5 @@
 package mage.filter.predicate.mageobject;
 
-import mage.MageObject;
 import mage.abilities.Mode;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -15,7 +14,7 @@ import java.util.UUID;
 /**
  * @author LoneFox
  */
-public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<MageObject> {
+public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     private final FilterPermanent targetFilter;
 
@@ -24,7 +23,7 @@ public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<Ma
     }
 
     @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+    public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         StackObject object = game.getStack().getStackObject(input.getObject().getId());
         if (object != null) {
             for (UUID modeId : object.getStackAbility().getModes().getSelectedModes()) {

@@ -33,7 +33,7 @@ public final class Lifelink extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Lifelink (final Lifelink card) {
+    private Lifelink(final Lifelink card) {
         super(card);
     }
 

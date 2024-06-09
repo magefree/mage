@@ -1,15 +1,9 @@
 package mage.cards.g;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -21,6 +15,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +56,7 @@ class GuidedPassageEffect extends OneShotEffect {
         this.staticText = "Reveal the cards in your library. An opponent chooses from among them a creature card, a land card, and a noncreature, nonland card. You put the chosen cards into your hand. Then shuffle.";
     }
 
-    GuidedPassageEffect(final GuidedPassageEffect effect) {
+    private GuidedPassageEffect(final GuidedPassageEffect effect) {
         super(effect);
     }
 
@@ -81,7 +78,7 @@ class GuidedPassageEffect extends OneShotEffect {
             return true;
         }
         CardsImpl cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, libSize));
+        cards.addAllCards(controller.getLibrary().getTopCards(game, libSize));
         controller.revealCards(sourceObject.getIdName(), cards, game);
 
         Player opponent;
@@ -95,7 +92,7 @@ class GuidedPassageEffect extends OneShotEffect {
         }
         TargetCard target1 = new TargetCard(1, Zone.LIBRARY, StaticFilters.FILTER_CARD_CREATURE);
         TargetCard target2 = new TargetCard(1, Zone.LIBRARY, StaticFilters.FILTER_CARD_LAND);
-        TargetCard target3 = new TargetCard(1, Zone.LIBRARY, new FilterCard(filter));
+        TargetCard target3 = new TargetCard(1, Zone.LIBRARY, filter);
         opponent.chooseTarget(Outcome.Detriment, cards, target1, source, game);
         opponent.chooseTarget(Outcome.Detriment, cards, target2, source, game);
         opponent.chooseTarget(Outcome.Detriment, cards, target3, source, game);

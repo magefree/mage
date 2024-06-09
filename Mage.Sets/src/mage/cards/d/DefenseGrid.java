@@ -43,14 +43,14 @@ class DefenseGridCostModificationEffect extends CostModificationEffectImpl {
         staticText = "Each spell costs {3} more to cast except during its controller's turn";
     }
 
-    DefenseGridCostModificationEffect(DefenseGridCostModificationEffect effect) {
+    private DefenseGridCostModificationEffect(final DefenseGridCostModificationEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        spellAbility.getManaCostsToPay().add(new GenericManaCost(3));
+        spellAbility.addManaCostsToPay(new GenericManaCost(3));
         return true;
     }
 

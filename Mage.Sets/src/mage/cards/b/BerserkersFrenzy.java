@@ -68,8 +68,8 @@ enum BerserkersFrenzyCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getPhase().getType() == TurnPhase.COMBAT) {
-            return game.getStep().getType().isBefore(PhaseStep.DECLARE_BLOCKERS);
+        if (game.getTurnPhaseType() == TurnPhase.COMBAT) {
+            return game.getTurnStepType().isBefore(PhaseStep.DECLARE_BLOCKERS);
         }
         return !game.getTurn().isDeclareAttackersStepStarted();
     }
@@ -98,7 +98,7 @@ class BerserkersFrenzyEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetCreaturePermanent(0, Integer.MAX_VALUE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         game.addEffect(new BlocksIfAbleTargetEffect(Duration.EndOfTurn)
                 .setTargetPointer(new FixedTargets(new CardsImpl(target.getTargets()), game)), source);

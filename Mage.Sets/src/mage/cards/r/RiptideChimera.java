@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -12,19 +11,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class RiptideChimera extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment you control");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
 
     public RiptideChimera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{U}");
@@ -36,7 +29,7 @@ public final class RiptideChimera extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, return an enchantment you control to its owner's hand.
-        Effect effect = new ReturnToHandChosenControlledPermanentEffect(filter, 1);
+        Effect effect = new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT, 1);
         effect.setText("return an enchantment you control to its owner's hand");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
     }

@@ -25,7 +25,7 @@ public final class TishanaVoiceOfThunder extends CardImpl {
     public TishanaVoiceOfThunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(0);
@@ -33,7 +33,7 @@ public final class TishanaVoiceOfThunder extends CardImpl {
 
         // Tishana, Voice of Thunder's power and toughness are each equal to the number of cards in your hand.
         DynamicValue xValue = CardsInControllerHandCount.instance;
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
 
         // You have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);

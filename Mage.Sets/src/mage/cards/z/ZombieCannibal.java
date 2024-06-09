@@ -50,7 +50,7 @@ class ZombieCannibalTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ExileTargetEffect(null, "", Zone.GRAVEYARD), true);
     }
 
-    public ZombieCannibalTriggeredAbility(final ZombieCannibalTriggeredAbility ability) {
+    private ZombieCannibalTriggeredAbility(final ZombieCannibalTriggeredAbility ability) {
         super(ability);
     }
 

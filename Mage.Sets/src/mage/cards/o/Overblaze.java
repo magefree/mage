@@ -44,12 +44,12 @@ public final class Overblaze extends CardImpl {
 
 class OverblazeEffect extends ReplacementEffectImpl {
 
-    public OverblazeEffect() {
+    OverblazeEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
         staticText = "Each time target permanent would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.";
     }
 
-    public OverblazeEffect(final OverblazeEffect effect) {
+    private OverblazeEffect(final OverblazeEffect effect) {
         super(effect);
     }
 
@@ -67,11 +67,6 @@ class OverblazeEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getSourceId().equals(this.getTargetPointer().getFirst(game, source));
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

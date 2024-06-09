@@ -33,10 +33,10 @@ public final class SaidDone extends SplitCard {
         ));
 
         // Done
-        // Tap up to two target creatures. They don't untap during their controllers' next untap step.
+        // Tap up to two target creatures. Those creatures don't untap during their controllers' next untap step.
         this.getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
         this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
-        this.getRightHalfCard().getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("They"));
+        this.getRightHalfCard().getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
     }
 
     private SaidDone(final SaidDone card) {

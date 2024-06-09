@@ -76,7 +76,7 @@ enum SkyclaveShadeCondition implements Condition {
 class SkyclaveShadeEffect extends AsThoughEffectImpl {
 
     SkyclaveShadeEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 
     private SkyclaveShadeEffect(final SkyclaveShadeEffect effect) {

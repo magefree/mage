@@ -10,7 +10,8 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class AnotherEnchantedPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+public enum AnotherEnchantedPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {

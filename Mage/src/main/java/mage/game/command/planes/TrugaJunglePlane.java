@@ -34,7 +34,6 @@ public class TrugaJunglePlane extends Plane {
 
     public TrugaJunglePlane() {
         this.setPlaneType(Planes.PLANE_TRUGA_JUNGLE);
-        this.setExpansionSetCodeForImage("PCA");
 
         SimpleStaticAbility ability
                 = new SimpleStaticAbility(Zone.COMMAND, new ConditionalContinuousEffect(
@@ -57,5 +56,14 @@ public class TrugaJunglePlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private TrugaJunglePlane(final TrugaJunglePlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public TrugaJunglePlane copy() {
+        return new TrugaJunglePlane(this);
     }
 }

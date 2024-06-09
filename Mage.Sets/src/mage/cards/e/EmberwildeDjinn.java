@@ -62,7 +62,7 @@ class EmberwildeDjinnEffect extends OneShotEffect {
         this.staticText = "that player may pay {R}{R} or 2 life. If they do, the player gains control of {this}";
     }
 
-    EmberwildeDjinnEffect(final EmberwildeDjinnEffect effect) {
+    private EmberwildeDjinnEffect(final EmberwildeDjinnEffect effect) {
         super(effect);
     }
 

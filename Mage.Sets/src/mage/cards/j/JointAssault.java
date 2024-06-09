@@ -52,7 +52,7 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
         staticText = "Target creature gets +2/+2 until end of turn. If it's paired with a creature, that creature also gets +2/+2 until end of turn";
     }
 
-    public JointAssaultBoostTargetEffect(final JointAssaultBoostTargetEffect effect) {
+    private JointAssaultBoostTargetEffect(final JointAssaultBoostTargetEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
@@ -66,7 +66,7 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        UUID permanentId = targetPointer.getFirst(game, source);
+        UUID permanentId = getTargetPointer().getFirst(game, source);
         Permanent target = game.getPermanent(permanentId);
         if (target != null) {
             if (target.getPairedCard() != null) {
@@ -78,7 +78,7 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        UUID permanentId = targetPointer.getFirst(game, source);
+        UUID permanentId = getTargetPointer().getFirst(game, source);
 
         Permanent target = game.getPermanent(permanentId);
         if (target != null) {

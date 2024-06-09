@@ -50,12 +50,12 @@ public final class ProfanerOfTheDead extends CardImpl {
 
 class ProfanerOfTheDeadReturnEffect extends OneShotEffect {
 
-    public ProfanerOfTheDeadReturnEffect() {
+    ProfanerOfTheDeadReturnEffect() {
         super(Outcome.ReturnToHand);
         staticText = "return to their owners' hands all creatures your opponents control with toughness less than the exploited creature's toughness";
     }
 
-    public ProfanerOfTheDeadReturnEffect(final ProfanerOfTheDeadReturnEffect effect) {
+    private ProfanerOfTheDeadReturnEffect(final ProfanerOfTheDeadReturnEffect effect) {
         super(effect);
     }
 

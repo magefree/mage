@@ -8,6 +8,7 @@ import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -38,7 +39,7 @@ public final class CavesOfChaosAdventurer extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Caves of Chaos Adventurer enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // Whenever Caves of Chaos Adventurer attacks, exile the top card of your library. If you've completed a dungeon, you may play that card this turn without paying its mana cost. Otherwise, you may play this card this turn.
         this.addAbility(new AttacksTriggeredAbility(new CavesOfChaosAdventurerEffect())
@@ -86,10 +87,10 @@ class CavesOfChaosAdventurerEffect extends OneShotEffect {
         player.moveCards(card, Zone.EXILED, source, game);
         if (CompletedDungeonWatcher.checkPlayer(source.getControllerId(), game)) {
             game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(
-                    Zone.EXILED, TargetController.YOU, Duration.Custom, true
+                    Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true
             ).setTargetPointer(new FixedTarget(card, game)), source);
         } else {
-            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         }
         return true;
     }

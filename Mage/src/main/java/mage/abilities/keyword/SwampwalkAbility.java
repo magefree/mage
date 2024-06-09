@@ -6,7 +6,6 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SwampwalkAbility extends LandwalkAbility {
@@ -25,7 +24,7 @@ public class SwampwalkAbility extends LandwalkAbility {
         super(filter, withHintText);
     }
 
-    public SwampwalkAbility(final SwampwalkAbility ability) {
+    protected SwampwalkAbility(final SwampwalkAbility ability) {
         super(ability);
     }
 

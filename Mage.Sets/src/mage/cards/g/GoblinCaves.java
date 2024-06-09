@@ -60,7 +60,7 @@ class AttachedToBasicMountainCondition implements Condition {
         if (enchantment != null) {
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {
-                if (enchanted.hasSubtype(SubType.MOUNTAIN, game) && enchanted.isBasic()) {
+                if (enchanted.hasSubtype(SubType.MOUNTAIN, game) && enchanted.isBasic(game)) {
                     return true;
                 }
             }

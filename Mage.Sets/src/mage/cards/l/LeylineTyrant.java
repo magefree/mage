@@ -2,6 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -9,6 +10,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.continuous.YouDontLoseManaEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,7 +20,6 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
-import mage.abilities.common.DiesSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -36,7 +37,7 @@ public final class LeylineTyrant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // You don't lose unspent red mana as steps and phases end.
-        this.addAbility(new SimpleStaticAbility(new LeylineTyrantManaEffect()));
+        this.addAbility(new SimpleStaticAbility(new YouDontLoseManaEffect(ManaType.RED)));
 
         // When Leyline Tyrant dies, you may pay any amount of {R}. When you do, it deals that much damage to any target.
         this.addAbility(new DiesSourceTriggeredAbility(new LeylineTyrantDamageEffect()));

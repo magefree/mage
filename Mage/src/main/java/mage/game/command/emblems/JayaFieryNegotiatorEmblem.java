@@ -25,11 +25,19 @@ public final class JayaFieryNegotiatorEmblem extends Emblem {
 
     // −8: You get an emblem with "Whenever you cast a red instant or sorcery spell, copy it twice. You may choose new targets for the copies."
     public JayaFieryNegotiatorEmblem() {
-        this.setName("Emblem Jaya");
-        this.setExpansionSetCodeForImage("DMU");
+        super("Emblem Jaya");
         this.getAbilities().add(new SpellCastControllerTriggeredAbility(
                 new JayaFieryNegotiatorEmblemEffect(), filter, false
         ));
+    }
+
+    private JayaFieryNegotiatorEmblem(final JayaFieryNegotiatorEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public JayaFieryNegotiatorEmblem copy() {
+        return new JayaFieryNegotiatorEmblem(this);
     }
 }
 

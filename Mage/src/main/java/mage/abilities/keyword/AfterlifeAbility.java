@@ -14,7 +14,7 @@ public class AfterlifeAbility extends DiesSourceTriggeredAbility {
         this.tokenCount = tokenCount;
     }
 
-    public AfterlifeAbility(final AfterlifeAbility ability) {
+    protected AfterlifeAbility(final AfterlifeAbility ability) {
         super(ability);
         this.tokenCount = ability.tokenCount;
     }

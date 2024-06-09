@@ -46,7 +46,7 @@ public final class ShadowInTheWarp extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new ShadowInTheWarpWatcher());
 
         // Whenever an opponent casts their first noncreature spell each turn, Shadow in the Warp deals 2 damage to that player.
-        this.addAbility(new ShadowInTheWarpTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new ShadowInTheWarpTriggeredAbility());
     }
 
     private ShadowInTheWarp(final ShadowInTheWarp card) {

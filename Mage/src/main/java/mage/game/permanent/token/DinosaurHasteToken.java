@@ -18,7 +18,6 @@ public final class DinosaurHasteToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
-        setOriginalExpansionSetCode("IKO");
     }
 
     private DinosaurHasteToken(final DinosaurHasteToken token) {

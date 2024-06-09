@@ -26,7 +26,7 @@ public final class KaaliaOfTheVast extends CardImpl {
 
     public KaaliaOfTheVast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 
@@ -58,7 +58,7 @@ class KaaliaOfTheVastAttacksAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new KaaliaOfTheVastEffect(), false);
     }
 
-    public KaaliaOfTheVastAttacksAbility(final KaaliaOfTheVastAttacksAbility ability) {
+    private KaaliaOfTheVastAttacksAbility(final KaaliaOfTheVastAttacksAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
         this.staticText = "put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking that opponent.";
     }
 
-    public KaaliaOfTheVastEffect(final KaaliaOfTheVastEffect effect) {
+    private KaaliaOfTheVastEffect(final KaaliaOfTheVastEffect effect) {
         super(effect);
     }
 

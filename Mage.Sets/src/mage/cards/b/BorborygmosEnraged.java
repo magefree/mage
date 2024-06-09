@@ -30,7 +30,7 @@ public final class BorborygmosEnraged extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{G}{G}");
         this.subtype.add(SubType.CYCLOPS);
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

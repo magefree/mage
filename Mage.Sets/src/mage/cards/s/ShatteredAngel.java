@@ -1,31 +1,22 @@
-
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOpponentTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
 public final class ShatteredAngel extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterLandPermanent("a land");
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
 
     public ShatteredAngel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
@@ -37,12 +28,12 @@ public final class ShatteredAngel extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever a land enters the battlefield under an opponent's control, you may gain 3 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new GainLifeEffect(3), filter, true, "Whenever a land enters the battlefield under an opponent's control, you may gain 3 life."));
+        this.addAbility(new EntersBattlefieldOpponentTriggeredAbility(new GainLifeEffect(3), StaticFilters.FILTER_LAND_A, true));
     }
 
-    public ShatteredAngel (final ShatteredAngel card) {
+    private ShatteredAngel(final ShatteredAngel card) {
         super(card);
     }
 

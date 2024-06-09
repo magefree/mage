@@ -26,7 +26,7 @@ public class OrCost implements Cost {
         this.description = description;
     }
 
-    public OrCost(final OrCost cost) {
+    protected OrCost(final OrCost cost) {
         cost.costs.stream().map(Cost::copy).forEach(this.costs::add);
         this.description = cost.description;
         this.selectedCost = cost.selectedCost;
@@ -46,6 +46,10 @@ public class OrCost implements Cost {
     @Override
     public String getText() {
         return description;
+    }
+
+    public Cost getSelectedCost() {
+        return selectedCost;
     }
 
     @Override
@@ -90,8 +94,7 @@ public class OrCost implements Cost {
                         Outcome.Detriment, sb.toString(), null,
                         CardUtil.getTextWithFirstCharUpperCase(usable.get(0).getText()),
                         CardUtil.getTextWithFirstCharUpperCase(usable.get(1).getText()),
-                        ability, game
-                )) {
+                        ability, game)) {
                     selectedCost = usable.get(0);
                 } else {
                     selectedCost = usable.get(1);
@@ -110,8 +113,7 @@ public class OrCost implements Cost {
                         .collect(Collectors.toSet()));
                 controller.choose(Outcome.Neutral, choice, game);
                 selectedCost = costMap.getOrDefault(
-                        CardUtil.getTextWithFirstCharLowerCase(choice.getChoice()), null
-                );
+                        CardUtil.getTextWithFirstCharLowerCase(choice.getChoice()), null);
         }
         if (selectedCost == null) {
             return false;
@@ -127,7 +129,7 @@ public class OrCost implements Cost {
     @Override
     public void clearPaid() {
         selectedCost = null;
-        costs.stream().forEach(Cost::clearPaid);
+        costs.forEach(Cost::clearPaid);
     }
 
     @Override
@@ -142,11 +144,11 @@ public class OrCost implements Cost {
         if (selectedCost != null) {
             return selectedCost.getTargets();
         }
-        return null;
+        return new Targets().withReadOnly();
     }
 
     @Override
-    public Cost copy() {
+    public OrCost copy() {
         return new OrCost(this);
     }
 }

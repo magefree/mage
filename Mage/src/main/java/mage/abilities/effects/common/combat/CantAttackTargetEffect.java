@@ -16,13 +16,13 @@ public class CantAttackTargetEffect extends RestrictionEffect {
         super(duration);
     }
 
-    public CantAttackTargetEffect(final CantAttackTargetEffect effect) {
+    protected CantAttackTargetEffect(final CantAttackTargetEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(targetPointer.getFirst(game, source));
+        return permanent.getId().equals(getTargetPointer().getFirst(game, source));
     }
 
     @Override
@@ -40,12 +40,9 @@ public class CantAttackTargetEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        String text = "target " + mode.getTargets().get(0).getTargetName() + " can't attack";
-        if (this.duration == Duration.EndOfTurn) {
-            return text + " this turn";
-        } else if (this.duration == Duration.UntilYourNextTurn) {
-            return text + " until your next turn";
-        }
-        return text;
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                " can't attack" +
+                (duration == Duration.EndOfTurn ? " this turn" : "" ) +
+                (duration == Duration.UntilYourNextTurn ? " until your next turn" : "" );
     }
 }

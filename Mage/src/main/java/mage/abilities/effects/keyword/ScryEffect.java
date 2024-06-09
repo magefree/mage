@@ -26,7 +26,7 @@ public class ScryEffect extends OneShotEffect {
         this.setText();
     }
 
-    public ScryEffect(final ScryEffect effect) {
+    protected ScryEffect(final ScryEffect effect) {
         super(effect);
         this.scryNumber = effect.scryNumber;
         this.showEffectHint = effect.showEffectHint;
@@ -53,11 +53,11 @@ public class ScryEffect extends OneShotEffect {
             return;
         }
         if (scryNumber == 1) {
-            sb.append(". <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>");
+            sb.append(". <i>(Look at the top card of your library. You may put that card on the bottom.)</i>");
         } else {
             sb.append(". <i>(Look at the top ");
             sb.append(CardUtil.numberToText(scryNumber));
-            sb.append(" cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>");
+            sb.append(" cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>");
         }
         staticText = sb.toString();
     }

@@ -29,7 +29,8 @@ import mage.filter.common.FilterCreaturePermanent;
 
 
         // Creatures you control have menace. (They can't be blocked except by two or more creatures.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)
+                .setText("creatures you control have menace. <i>(They can't be blocked except by two or more creatures.)</i>")));
     }
 
     private GoblinWarDrums(final GoblinWarDrums card) {

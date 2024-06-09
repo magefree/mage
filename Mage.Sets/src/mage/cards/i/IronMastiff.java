@@ -13,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.players.Player;
 
 import java.util.Objects;
@@ -81,8 +82,11 @@ class IronMastiffEffect extends RollDieWithResultTableEffect {
         }
         int toRoll = game
                 .getCombat()
-                .getDefenders()
+                .getGroups()
                 .stream()
+                .map(CombatGroup::getDefenderId)
+                .filter(Objects::nonNull)
+                .distinct()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
                 .mapToInt(x -> 1)

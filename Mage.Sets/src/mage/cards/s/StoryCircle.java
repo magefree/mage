@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ChooseColorEffect;
@@ -22,15 +22,15 @@ import mage.game.Game;
 /**
  *
  * @author LoneFox
-
  */
+
 public final class StoryCircle extends CardImpl {
 
     public StoryCircle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
         // As Story Circle enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         // {W}: The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new StoryCircleEffect(), new ManaCostsImpl<>("{W}")));
     }
@@ -47,19 +47,19 @@ public final class StoryCircle extends CardImpl {
 
 class StoryCircleEffect extends PreventNextDamageFromChosenSourceToYouEffect {
 
-    public StoryCircleEffect() {
+    StoryCircleEffect() {
         super(Duration.EndOfTurn);
         staticText = "The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.";
     }
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         FilterObject filter = targetSource.getFilter();
         filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
-        super.init(source, game);
     }
 
-    public StoryCircleEffect(StoryCircleEffect effect) {
+    private StoryCircleEffect(final StoryCircleEffect effect) {
         super(effect);
     }
 

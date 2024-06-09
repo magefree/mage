@@ -19,7 +19,7 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
         staticText = "return {this} from your graveyard to your hand";
     }
 
-    public ReturnSourceFromGraveyardToHandEffect(final ReturnSourceFromGraveyardToHandEffect effect) {
+    protected ReturnSourceFromGraveyardToHandEffect(final ReturnSourceFromGraveyardToHandEffect effect) {
         super(effect);
     }
 
@@ -31,9 +31,9 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        Card card = source.getSourceCardIfItStillExists(game);
         return controller != null
-                && sourceObject instanceof Card
-                && controller.moveCards((Card) sourceObject, Zone.HAND, source, game);
+                && card != null
+                && controller.moveCards(card, Zone.HAND, source, game);
     }
 }

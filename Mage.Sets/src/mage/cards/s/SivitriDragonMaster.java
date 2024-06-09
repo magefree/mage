@@ -35,7 +35,7 @@ public final class SivitriDragonMaster extends CardImpl {
 
     public SivitriDragonMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SIVITRI);
 
         this.setStartingLoyalty(4);
@@ -43,16 +43,15 @@ public final class SivitriDragonMaster extends CardImpl {
         // +1: Until your next turn, creatures can’t attack you or planeswalkers you
         // control unless their controller pays 2 life for each of those creatures.
         ContinuousEffect effect = new CantAttackYouUnlessPayAllEffect(
-                new PayLifeCost(2), true
+            Duration.UntilYourNextTurn,
+            new PayLifeCost(2),
+            CantAttackYouUnlessPayAllEffect.Scope.YOU_AND_CONTROLLED_PLANESWALKERS
         );
-        effect.setDuration(Duration.UntilYourNextTurn);
-        effect.setText("until your next turn, creatures can't attack you or planeswalkers you control " +
-                "unless their controller pays 2 life for each of those creatures.");
         this.addAbility(new LoyaltyAbility(effect, 1));
 
         // -3: Search your library for a Dragon card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), -3));
 
         // -7: Destroy all non-Dragon creatures.

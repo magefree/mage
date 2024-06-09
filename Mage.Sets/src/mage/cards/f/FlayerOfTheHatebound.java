@@ -57,7 +57,7 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new FlayerEffect(), false);
     }
 
-    public FlayerTriggeredAbility(FlayerTriggeredAbility ability) {
+    private FlayerTriggeredAbility(final FlayerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -93,12 +93,12 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl {
 
 class FlayerEffect extends OneShotEffect {
 
-    public FlayerEffect() {
+    FlayerEffect() {
         super(Outcome.Damage);
         staticText = "that creature deals damage equal to its power to any target";
     }
 
-    public FlayerEffect(final FlayerEffect effect) {
+    private FlayerEffect(final FlayerEffect effect) {
         super(effect);
     }
 

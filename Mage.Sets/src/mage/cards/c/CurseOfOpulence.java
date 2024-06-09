@@ -22,7 +22,6 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.Zone;
 
 /**
  * @author Saga
@@ -72,12 +71,7 @@ class CurseOfOpulenceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }

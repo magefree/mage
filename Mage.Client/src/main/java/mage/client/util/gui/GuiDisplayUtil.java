@@ -2,22 +2,23 @@ package mage.client.util.gui;
 
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
+import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
 import mage.client.table.PlayersChatPanel;
 import mage.client.util.GUISizeHelper;
 import mage.constants.*;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
+import net.java.truevfs.access.TFile;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
-
-import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
 
 public final class GuiDisplayUtil {
 
@@ -313,11 +314,18 @@ public final class GuiDisplayUtil {
         }
         buffer.append("</td></tr></table>");
 
-        String pt = "";
+        String pt;
         if (card.isCreature()) {
             pt = card.getPower() + '/' + card.getToughness();
-        } else if (card.isPlanesWalker()) {
+        } else if (card.showPT()) {
+            // Vehicles have a P/T set to display even when not creatures.
+            pt = "<span color='gray'>(" + card.getPower() + '/' + card.getToughness() + ")</span>";
+        } else if (card.isPlaneswalker()) {
             pt = card.getLoyalty();
+        } else if (card.isBattle()) {
+            pt = card.getDefense();
+        } else {
+            pt = "";
         }
 
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%' valign='bottom'><tr><td><b>");
@@ -329,6 +337,9 @@ public final class GuiDisplayUtil {
             } else {
                 buffer.append("[only controlled] ");
             }
+        }
+        if (card instanceof PermanentView && ((PermanentView) card).isAttachedToDifferentlyControlledPermanent()) {
+            buffer.append('(').append(((PermanentView) card).getNameController()).append(") ");
         }
         if (card.getMageObjectType() != MageObjectType.NULL) {
             buffer.append(card.getMageObjectType().toString());
@@ -391,6 +402,15 @@ public final class GuiDisplayUtil {
         Zone zone = card.getZone();
         if (zone != null) {
             buffer.append("<p style='margin: 2px'><b>Card Zone:</b> ").append(zone).append("</p>");
+        }
+
+        // missing image info in card popup
+        boolean displayFullImagePath = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_FULL_IMAGE_PATH, "false").equals("true");
+        if (displayFullImagePath) {
+            String imageFile = CardImageUtils.buildImagePathToCardView(card);
+            if (imageFile.startsWith("ERROR") || !(new TFile(imageFile).exists())) {
+                buffer.append("<p style='margin: 2px'><b>Missing image:</b> ").append(imageFile).append("</p>");
+            }
         }
 
         buffer.append("<br></body></html>");

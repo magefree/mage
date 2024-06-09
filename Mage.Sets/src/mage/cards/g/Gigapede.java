@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -16,6 +15,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,18 +48,18 @@ public final class Gigapede extends CardImpl {
 }
 
 
-class GigapedeTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
-    
-    public GigapedeTriggerdAbility(){
+class GigapedeTriggerdAbility extends BeginningOfUpkeepTriggeredAbility {
+
+    GigapedeTriggerdAbility() {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new DiscardCardCost()), TargetController.YOU, false);
     }
 
-    public GigapedeTriggerdAbility(GigapedeTriggerdAbility ability) {
+    private GigapedeTriggerdAbility(final GigapedeTriggerdAbility ability) {
         super(ability);
     }
 
     @Override
-    public BeginningOfUpkeepTriggeredAbility copy() {
+    public GigapedeTriggerdAbility copy() {
         return new GigapedeTriggerdAbility(this);
     }
     

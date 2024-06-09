@@ -84,7 +84,7 @@ class StormOfSoulsReturnEffect extends OneShotEffect {
 
 class StormOfSoulsChangeCreatureEffect extends ContinuousEffectImpl {
 
-    public StormOfSoulsChangeCreatureEffect() {
+    StormOfSoulsChangeCreatureEffect() {
         super(Duration.Custom, Outcome.Benefit);
     }
 
@@ -100,7 +100,7 @@ class StormOfSoulsChangeCreatureEffect extends ContinuousEffectImpl {
         }
 
         // Each of them is a 1/1 Spirit with flying in addition to its other types
-        for (UUID cardID : targetPointer.getTargets(game, source)) {
+        for (UUID cardID : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(cardID);
             if (permanent == null) {
                 continue;

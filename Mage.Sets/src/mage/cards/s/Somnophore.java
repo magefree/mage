@@ -68,7 +68,7 @@ class SomnophoreTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetCreaturePermanent());
     }
 
-    public SomnophoreTriggeredAbility(final SomnophoreTriggeredAbility ability) {
+    private SomnophoreTriggeredAbility(final SomnophoreTriggeredAbility ability) {
         super(ability);
     }
 

@@ -52,7 +52,7 @@ public final class IntercessorsArrest extends CardImpl {
 
 class IntercessorsArrestEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public IntercessorsArrestEffect() {
+    IntercessorsArrestEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = ", or crew Vehicles. Its activated abilities can't be activated unless they're mana abilities";
     }
@@ -89,7 +89,7 @@ class IntercessorsArrestEffect extends ContinuousRuleModifyingEffectImpl {
             case ACTIVATE_ABILITY:
                 if (enchantment.isAttachedTo(event.getSourceId())) {
                     Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                    return ability.isPresent() && ability.get().getAbilityType() != AbilityType.MANA;
+                    return ability.isPresent() && ability.get().isNonManaActivatedAbility();
                 }
         }
         return false;

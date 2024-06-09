@@ -30,7 +30,7 @@ public class ChooseColorEffect extends OneShotEffect {
         staticText = "choose a color" + (exceptColor != null ? " other than " + exceptColor.toLowerCase(Locale.ENGLISH) : "");
     }
 
-    public ChooseColorEffect(final ChooseColorEffect effect) {
+    protected ChooseColorEffect(final ChooseColorEffect effect) {
         super(effect);
         this.exceptColor = effect.exceptColor;
     }

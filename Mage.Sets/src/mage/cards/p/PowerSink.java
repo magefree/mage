@@ -5,7 +5,6 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -46,12 +45,12 @@ public final class PowerSink extends CardImpl {
 
 class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
 
-    public PowerSinkCounterUnlessPaysEffect() {
+    PowerSinkCounterUnlessPaysEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana";
     }
 
-    public PowerSinkCounterUnlessPaysEffect(final PowerSinkCounterUnlessPaysEffect effect) {
+    private PowerSinkCounterUnlessPaysEffect(final PowerSinkCounterUnlessPaysEffect effect) {
         super(effect);
     }
 
@@ -62,7 +61,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject spell = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             Player controller = game.getPlayer(source.getControllerId());
@@ -87,7 +86,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
                     for (Permanent land : lands) {
                         Abilities<Ability> landAbilities = land.getAbilities();
                         for (Ability ability : landAbilities) {
-                            if (ability instanceof ActivatedManaAbilityImpl) {
+                            if (ability.isManaActivatedAbility()) {
                                 land.tap(source, game);
                                 break;
                             }

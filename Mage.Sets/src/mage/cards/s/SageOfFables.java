@@ -59,7 +59,7 @@ class SageOfFablesReplacementEffect extends ReplacementEffectImpl {
         staticText = "Each other Wizard creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    SageOfFablesReplacementEffect(SageOfFablesReplacementEffect effect) {
+    private SageOfFablesReplacementEffect(final SageOfFablesReplacementEffect effect) {
         super(effect);
     }
 
@@ -75,11 +75,6 @@ class SageOfFablesReplacementEffect extends ReplacementEffectImpl {
                 && creature.isCreature(game)
                 && creature.hasSubtype(SubType.WIZARD, game)
                 && !event.getTargetId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

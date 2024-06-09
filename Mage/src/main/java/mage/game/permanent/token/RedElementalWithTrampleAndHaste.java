@@ -23,7 +23,7 @@ public final class RedElementalWithTrampleAndHaste extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    public RedElementalWithTrampleAndHaste(final RedElementalWithTrampleAndHaste token) {
+    protected RedElementalWithTrampleAndHaste(final RedElementalWithTrampleAndHaste token) {
         super(token);
     }
 

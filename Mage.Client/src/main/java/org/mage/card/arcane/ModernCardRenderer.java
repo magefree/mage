@@ -1,5 +1,6 @@
 package org.mage.card.arcane;
 
+import mage.MageInt;
 import mage.ObjectColor;
 import mage.cards.ArtRect;
 import mage.cards.FrameStyle;
@@ -11,15 +12,13 @@ import mage.util.SubTypes;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
+import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
+import static org.mage.card.arcane.ModernCardResourceLoader.*;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import java.text.CharacterIterator;
@@ -27,73 +26,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
-
-
-/*
-    private void cardRendererBasedRender(Graphics2D g) {
-        // Prepare for draw
-        g.translate(cardXOffset, cardYOffset);
-        int cardWidth = this.cardWidth - cardXOffset;
-        int cardHeight = this.cardHeight - cardYOffset;
-
-        // AA on
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Renderer
-        CardRenderer render = new ModernCardRenderer(gameCard, transformed);
-        Image img = imagePanel.getSrcImage();
-        if (img != null) {
-            render.setArtImage(img);
-        }
-        render.draw(g, cardWidth, cardHeight);
-    }
- */
-
 /**
  * @author stravant@gmail.com, JayDi85
  * <p>
  * Base rendering class for new border cards
+ * M15 frame style, for another styles see https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
  */
 public class ModernCardRenderer extends CardRenderer {
 
     private static final Logger LOGGER = Logger.getLogger(ModernCardRenderer.class);
     private static final GlowText glowTextRenderer = new GlowText();
     public static final Color MANA_ICONS_TEXT_COLOR = Color.DARK_GRAY; // text color of missing mana icons in IMAGE render mode
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Textures for modern frame cards
-    private static TexturePaint loadBackgroundTexture(String name) {
-        URL url = ModernCardRenderer.class.getResource("/cardrender/background_texture_" + name + ".png");
-        ImageIcon icon = new ImageIcon(url);
-        BufferedImage img = CardRendererUtils.toBufferedImage(icon.getImage());
-        return new TexturePaint(img, new Rectangle(0, 0, img.getWidth(), img.getHeight()));
-    }
-
-    private static BufferedImage loadBackgroundImage(String name) {
-        URL url = ModernCardRenderer.class.getResource("/cardrender/background_texture_" + name + ".png");
-        ImageIcon icon = new ImageIcon(url);
-        BufferedImage img = CardRendererUtils.toBufferedImage(icon.getImage());
-        return img;
-    }
-
-    private static BufferedImage loadFramePart(String name) {
-        URL url = ModernCardRenderer.class.getResource("/cardrender/" + name + ".png");
-        ImageIcon icon = new ImageIcon(url);
-        return CardRendererUtils.toBufferedImage(icon.getImage());
-    }
-
-    private static Font loadFont(String name) {
-        try (InputStream in = ModernCardRenderer.class.getResourceAsStream("/cardrender/" + name + ".ttf")) {
-            return Font.createFont(
-                    Font.TRUETYPE_FONT, in);
-        } catch (IOException e) {
-            LOGGER.info("Failed to load font `" + name + "`, couldn't find resource.");
-        } catch (FontFormatException e) {
-            LOGGER.info("Failed to load font `" + name + "`, bad format.");
-        }
-        return new Font("Arial", Font.PLAIN, 1);
-    }
 
     // public static final Font BASE_BELEREN_FONT = loadFont("beleren-bold");
 
@@ -179,6 +122,8 @@ public class ModernCardRenderer extends CardRenderer {
 
     public static final Color ERROR_COLOR = new Color(255, 0, 255);
 
+    static String SUB_TYPE_ADVENTURE = "Adventure";
+
     ///////////////////////////////////////////////////////////////////////////
     // Layout metrics for modern border cards
     // How far the main box, art, and name / type line are inset from the
@@ -203,6 +148,7 @@ public class ModernCardRenderer extends CardRenderer {
     protected static final float TYPE_LINE_Y_FRAC = 0.57f; // x cardHeight
     protected static final float TYPE_LINE_Y_FRAC_TOKEN = 0.70f;
     protected static final float TYPE_LINE_Y_FRAC_FULL_ART = 0.74f;
+    protected static final float TYPE_LINE_Y_FRAC_BOTTOM = 0.89f;
     protected int typeLineY;
 
     // Possible sizes of rules text font
@@ -220,7 +166,10 @@ public class ModernCardRenderer extends CardRenderer {
     protected Font ptTextFont;
 
     // Processed mana cost string
-    protected final String manaCostString;
+    protected String manaCostString;
+
+    // Is an adventure
+    protected boolean isAdventure = false;
 
     public ModernCardRenderer(CardView card) {
         // Pass off to parent
@@ -228,6 +177,14 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Mana cost string
         manaCostString = ManaSymbols.getClearManaCost(cardView.getManaCostStr());
+
+        if (cardView.isSplitCard()) {
+            isAdventure = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE);
+        }
+    }
+
+    protected boolean isAdventure() {
+        return isAdventure;
     }
 
     @Override
@@ -306,10 +263,9 @@ public class ModernCardRenderer extends CardRenderer {
     @Override
     protected void drawBackground(Graphics2D g) {
         // Draw background, in 3 parts
-
         if (cardView.isFaceDown()) {
-            // Just draw a brown rectangle
-            drawCardBack(g);
+            // just draw a brown rectangle
+            drawCardBackTexture(g);
         } else {
             if (cardView.getFrameStyle() == FrameStyle.UST_FULL_ART_BASIC) {
                 return;
@@ -319,7 +275,7 @@ public class ModernCardRenderer extends CardRenderer {
             if (cardView.getExpansionSetCode().equals("EXP")) {
                 isExped = true;
             }
-            BufferedImage bg = getBackgroundImage(cardView.getColor(), cardView.getCardTypes(), cardView.getSubTypes(), isExped);
+            BufferedImage bg = getBackgroundTexture(cardView.getColor(), cardView.getCardTypes(), cardView.getSubTypes(), isExped);
             if (bg == null) {
                 return;
             }
@@ -359,6 +315,9 @@ public class ModernCardRenderer extends CardRenderer {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .84f);
         } else if (isUnstableFullArtLand()) {
             rect = new Rectangle2D.Float(.0f, .0f, 1.0f, 1.0f);
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT ||
+                cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            rect = cardView.getArtRect().rect;
         } else if (cardView.getFrameStyle().isFullArt() || (cardView.isToken())) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
         } else {
@@ -368,10 +327,13 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     private float getTypeLineYFrac() {
-        if (cardView.isToken() && cardView.getCardNumber() == null) {
+        if (cardView.isToken() && cardView.getCardNumber().isEmpty()) {
             return TYPE_LINE_Y_FRAC_TOKEN;
         } else if (cardView.getFrameStyle().isFullArt()) {
             return TYPE_LINE_Y_FRAC_FULL_ART;
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT ||
+                cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            return TYPE_LINE_Y_FRAC_BOTTOM;
         } else {
             return TYPE_LINE_Y_FRAC;
         }
@@ -408,16 +370,9 @@ public class ModernCardRenderer extends CardRenderer {
 
     @Override
     protected void drawArt(Graphics2D g) {
-        if ((artImage != null || faceArtImage != null) && !cardView.isFaceDown()) {
-
-            boolean useFaceArt = false;
-            if (faceArtImage != null && !isZendikarFullArtLand()) {
-                useFaceArt = true;
-            }
-
+        if (artImage != null) {
             // Invention rendering, art fills the entire frame
             if (useInventionFrame()) {
-                useFaceArt = false;
                 drawArtIntoRect(g,
                         borderWidth, borderWidth,
                         cardWidth - 2 * borderWidth, cardHeight - 2 * borderWidth,
@@ -428,34 +383,24 @@ public class ModernCardRenderer extends CardRenderer {
             Rectangle2D sourceRect = getArtRect();
 
             if (cardView.getMageObjectType() == MageObjectType.SPELL) {
-                useFaceArt = false;
                 ArtRect rect = cardView.getArtRect();
-                if (rect == ArtRect.SPLIT_FUSED) {
-                    // Special handling for fused, draw the art from both halves stacked on top of one and other
-                    // each filling half of the art rect
-                    drawArtIntoRect(g,
-                            totalContentInset + 1, totalContentInset + boxHeight,
-                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight) / 2,
-                            ArtRect.SPLIT_LEFT.rect, useInventionFrame());
-                    drawArtIntoRect(g,
-                            totalContentInset + 1, totalContentInset + boxHeight + (typeLineY - totalContentInset - boxHeight) / 2,
-                            contentWidth - 2, (typeLineY - totalContentInset - boxHeight) / 2,
-                            ArtRect.SPLIT_RIGHT.rect, useInventionFrame());
-                    return;
-                } else if (rect != ArtRect.NORMAL) {
+                if (rect != ArtRect.NORMAL) {
                     sourceRect = rect.rect;
                     shouldPreserveAspect = false;
                 }
             }
 
             // Normal drawing of art from a source part of the card frame into the rect
-            if (useFaceArt) {
-                int alternate_height = cardHeight - boxHeight * 2 - totalContentInset;
-                drawFaceArtIntoRect(g,
+            if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+                drawArtIntoRect(g,
+                        contentWidth / 2 + totalContentInset + 1, totalContentInset + boxHeight,
+                        contentWidth / 2 - 1, typeLineY - totalContentInset - boxHeight,
+                        sourceRect, false);
+            } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT) {
+                drawArtIntoRect(g,
                         totalContentInset + 1, totalContentInset + boxHeight,
-                        contentWidth - 2, typeLineY - totalContentInset - boxHeight,
-                        alternate_height,
-                        sourceRect, shouldPreserveAspect);
+                        contentWidth / 2 - 1, typeLineY - totalContentInset - boxHeight,
+                        sourceRect, false);
             } else if (!isZendikarFullArtLand()) {
                 drawArtIntoRect(g,
                         totalContentInset + 1, totalContentInset + boxHeight,
@@ -506,7 +451,13 @@ public class ModernCardRenderer extends CardRenderer {
             g.setPaint(textboxPaint);
         }
 
-        if (!isZenUst) {
+        if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            g.fillRect(totalContentInset + 2, totalContentInset + boxHeight,
+                    contentWidth / 2 - 2, typeLineY - totalContentInset - boxHeight + 2);
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT) {
+            g.fillRect(contentWidth / 2 + totalContentInset + 1, totalContentInset + boxHeight,
+                    contentWidth / 2 - 2, typeLineY - totalContentInset - boxHeight + 2);
+        } else if (!isZenUst) {
             if (cardView.getCardTypes().contains(CardType.LAND)) {
                 int total_height_of_box = cardHeight - borderWidth * 3 - typeLineY - 2 - boxHeight;
 
@@ -530,37 +481,37 @@ public class ModernCardRenderer extends CardRenderer {
                         g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), true));
 
                         // Horizontal bars
-                        g.fillRect(totalContentInset + 1                     , typeLineY + boxHeight + 1                                           , contentWidth - 2                      , height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 2*height_of_spiral, typeLineY + boxHeight + 1 + 2*height_of_spiral                      , contentWidth - 2 - 4*height_of_spiral , height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 4*height_of_spiral, typeLineY + boxHeight + 1 + 4*height_of_spiral                      , contentWidth - 2 - 8*height_of_spiral , height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 6*height_of_spiral, typeLineY + boxHeight + 1 + 6*height_of_spiral                      , contentWidth - 2 - 12*height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1, typeLineY + boxHeight + 1, contentWidth - 2, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, contentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, contentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, contentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
 
-                        g.fillRect(totalContentInset + 1 + 6*height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 7*height_of_spiral, contentWidth - 2 - 12*height_of_spiral, height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 4*height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 5*height_of_spiral, contentWidth - 2 - 8*height_of_spiral , height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 2*height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 3*height_of_spiral, contentWidth - 2 - 4*height_of_spiral , height_of_spiral);
-                        g.fillRect(totalContentInset + 1                     , typeLineY + boxHeight + 1 + total_height_of_box - height_of_spiral  , contentWidth - 2                      , height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 7 * height_of_spiral, contentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 5 * height_of_spiral, contentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 3 * height_of_spiral, contentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1, typeLineY + boxHeight + 1 + total_height_of_box - height_of_spiral, contentWidth - 2, height_of_spiral);
 
                         // Vertical bars
-                        g.fillRect(totalContentInset + 1                     , typeLineY + boxHeight + 1                     , height_of_spiral, total_height_spiral - 1                      );
-                        g.fillRect(totalContentInset + 1 + 2*height_of_spiral, typeLineY + boxHeight + 1 + 2*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4*height_of_spiral );
-                        g.fillRect(totalContentInset + 1 + 4*height_of_spiral, typeLineY + boxHeight + 1 + 4*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8*height_of_spiral );
-                        g.fillRect(totalContentInset + 1 + 6*height_of_spiral, typeLineY + boxHeight + 1 + 6*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12*height_of_spiral);
+                        g.fillRect(totalContentInset + 1, typeLineY + boxHeight + 1, height_of_spiral, total_height_spiral - 1);
+                        g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4 * height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8 * height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12 * height_of_spiral);
 
-                        g.fillRect(totalContentInset + contentWidth - 7*height_of_spiral, typeLineY + boxHeight + 1 + 6*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12*height_of_spiral);
-                        g.fillRect(totalContentInset + contentWidth - 5*height_of_spiral, typeLineY + boxHeight + 1 + 4*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8*height_of_spiral );
-                        g.fillRect(totalContentInset + contentWidth - 3*height_of_spiral, typeLineY + boxHeight + 1 + 2*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4*height_of_spiral );
-                        g.fillRect(totalContentInset + contentWidth - 1*height_of_spiral, typeLineY + boxHeight + 1 + 0*height_of_spiral, height_of_spiral, total_height_spiral - 1                      );
+                        g.fillRect(totalContentInset + contentWidth - 7 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12 * height_of_spiral);
+                        g.fillRect(totalContentInset + contentWidth - 5 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8 * height_of_spiral);
+                        g.fillRect(totalContentInset + contentWidth - 3 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4 * height_of_spiral);
+                        g.fillRect(totalContentInset + contentWidth - 1 * height_of_spiral, typeLineY + boxHeight + 1 + 0 * height_of_spiral, height_of_spiral, total_height_spiral - 1);
                     }
                 }
             } else {
                 g.fillRect(
-                    totalContentInset + 1, typeLineY,
-                    contentWidth - 2, cardHeight - borderWidth * 3 - typeLineY - 1);
+                        totalContentInset + 1, typeLineY,
+                        contentWidth - 2, cardHeight - borderWidth * 3 - typeLineY - 1);
             }
         }
 
         // If it's a planeswalker, extend the textbox left border by some
-        if (cardView.isPlanesWalker()) {
+        if (cardView.isPlaneswalker()) {
             g.setPaint(borderPaint);
             g.fillRect(
                     totalContentInset, typeLineY + boxHeight,
@@ -701,6 +652,18 @@ public class ModernCardRenderer extends CardRenderer {
             drawUSTCurves(g, image, x, y, w, h,
                     0, 0,
                     additionalBoxColor, borderPaint);
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+            drawRulesText(g, textboxKeywords, textboxRules,
+                    totalContentInset + 4, totalContentInset + boxHeight + 2,
+                    contentWidth / 2 - 8, typeLineY - totalContentInset - boxHeight - 6, false);
+        } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT) {
+            drawRulesText(g, textboxKeywords, textboxRules,
+                    contentWidth / 2 + totalContentInset + 4, totalContentInset + boxHeight + 2,
+                    contentWidth / 2 - 8, typeLineY - totalContentInset - boxHeight - 6, false);
+        } else if (isAdventure) {
+            drawRulesText(g, textboxKeywords, textboxRules,
+                    contentWidth / 2 + totalContentInset + 4, typeLineY + boxHeight + 2,
+                    contentWidth / 2 - 8, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3, false);
         } else if (!isZenUst) {
             drawRulesText(g, textboxKeywords, textboxRules,
                     totalContentInset + 2, typeLineY + boxHeight + 2,
@@ -713,27 +676,20 @@ public class ModernCardRenderer extends CardRenderer {
 
     public void drawZendikarCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
                                        Color boxColor, Paint paint) {
-
-        BufferedImage artToUse = faceArtImage;
-        boolean hadToUseFullArt = false;
-        if (faceArtImage == null) {
-            if (artImage == null) {
-                return;
-            }
-            hadToUseFullArt = true;
-            artToUse = artImage;
+        if (artImage == null) {
+            return;
         }
+
+        BufferedImage artToUse = artImage;
         int srcW = artToUse.getWidth();
         int srcH = artToUse.getHeight();
 
-        if (hadToUseFullArt) {
-            // Get a box based on the standard scan from gatherer.
-            // Width = 185/223 pixels (centered)
-            // Height = 220/310, 38 pixels from top
-            int subx = 19 * srcW / 223;
-            int suby = 38 * srcH / 310;
-            artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
-        }
+        // Get a box based on the standard scan from gatherer.
+        // Width = 185/223 pixels (centered)
+        // Height = 220/310, 38 pixels from top
+        int subx = 19 * srcW / 223;
+        int suby = 38 * srcH / 310;
+        artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
 
         Path2D.Double curve = new Path2D.Double();
 
@@ -762,26 +718,19 @@ public class ModernCardRenderer extends CardRenderer {
     public void drawBFZCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
                                   int topxdelta, int endydelta,
                                   Color boxColor, Paint paint) {
-        BufferedImage artToUse = faceArtImage;
-        boolean hadToUseFullArt = false;
-        if (faceArtImage == null) {
-            if (artImage == null) {
-                return;
-            }
-            hadToUseFullArt = true;
-            artToUse = artImage;
+        if (artImage == null) {
+            return;
         }
+        BufferedImage artToUse = artImage;
         int srcW = artToUse.getWidth();
         int srcH = artToUse.getHeight();
 
-        if (hadToUseFullArt) {
-            // Get a box based on the standard scan from gatherer.
-            // Width = 185/223 pixels (centered)
-            // Height = 220/310, 38 pixels from top
-            int subx = 19 * srcW / 223;
-            int suby = 38 * srcH / 310;
-            artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
-        }
+        // Get a box based on the standard scan from gatherer.
+        // Width = 185/223 pixels (centered)
+        // Height = 220/310, 38 pixels from top
+        int subx = 19 * srcW / 223;
+        int suby = 38 * srcH / 310;
+        artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
 
         Path2D.Double curve = new Path2D.Double();
         curve.moveTo(x + topxdelta, y);
@@ -907,23 +856,13 @@ public class ModernCardRenderer extends CardRenderer {
         int availableWidth = w - manaCostWidth + 2;
 
         // Draw the name
-        String nameStr;
-        if (cardView.isFaceDown()) {
-            if (cardView instanceof PermanentView && ((PermanentView) cardView).isManifested()) {
-                nameStr = "Manifest: " + cardView.getName();
-            } else {
-                nameStr = "Morph: " + cardView.getName();
-            }
-        } else {
-            nameStr = baseName;
-        }
-        if (!nameStr.isEmpty()) {
-            AttributedString str = new AttributedString(nameStr);
+        if (!baseName.isEmpty()) {
+            AttributedString str = new AttributedString(baseName);
             str.addAttribute(TextAttribute.FONT, boxTextFont);
             TextMeasurer measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
             int breakIndex = measure.getLineBreakIndex(0, availableWidth);
-            if (breakIndex < nameStr.length()) {
-                str = new AttributedString(nameStr);
+            if (breakIndex < baseName.length()) {
+                str = new AttributedString(baseName);
                 str.addAttribute(TextAttribute.FONT, boxTextFontNarrow);
                 measure = new TextMeasurer(str.getIterator(), g.getFontRenderContext());
                 breakIndex = measure.getLineBreakIndex(0, availableWidth);
@@ -962,6 +901,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Replace "Legendary" in type line if there's not enough space
         if (g.getFontMetrics().stringWidth(types) > availableWidth) {
+            types = types.replace("Token", "T.");
             types = types.replace("Legendary", "L.");
         }
 
@@ -1044,7 +984,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Is it a creature?
         boolean isVehicle = cardView.getSubTypes().contains(SubType.VEHICLE);
-        if (cardView.isCreature() || isVehicle) {
+        if (cardView.showPT()) {
 
             // draws p/t by parts
             int ptDeviderSpace = 1;  // Arial font is too narrow for devider (2/2) and needs extra space
@@ -1093,19 +1033,23 @@ public class ModernCardRenderer extends CardRenderer {
             g.setColor(defaultTextColor);
             g.setFont(ptTextFont);
 
+            // real PT info
+            MageInt currentPower = cardView.getOriginalPower();
+            MageInt currentToughness = cardView.getOriginalToughness();
+
             // draws
             int ptEmptySpace = (partBoxWidth - ptContentWidth) / 2;
             int ptPosStart1 = x + contentInset + ptEmptySpace;
             int ptPosStart2 = ptPosStart1 + ptTextWidth1 + ptDeviderSpace;
             int ptPosStart3 = ptPosStart2 + ptTextWidth2 + ptDeviderSpace;
             // p
-            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getPower(), false, defaultTextColor, defaultTextLight));
+            g.setColor(CardRendererUtils.getCardTextColor(currentPower, false, defaultTextColor, defaultTextLight));
             g.drawString(ptText1, ptPosStart1, curY - ptTextOffset - 1); // left
             // /
             g.setColor(defaultTextColor);
             g.drawString(ptText2, ptPosStart2, curY - ptTextOffset - 1); // center
             // t
-            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getToughness(), CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
+            g.setColor(CardRendererUtils.getCardTextColor(currentToughness, CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
             g.drawString(ptText3, ptPosStart3, curY - ptTextOffset - 1); // right
             //
             g.setColor(defaultTextColor);
@@ -1116,7 +1060,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Is it a walker? (But don't draw the box if it's a non-permanent view
         // of a walker without a starting loyalty (EG: Arlin Kord's flipped side).
-        if (cardView.isPlanesWalker()
+        if (cardView.isPlaneswalker()
                 && (cardView instanceof PermanentView || !cardView.getStartingLoyalty().equals("0"))) {
             // Draw the PW loyalty box
             int w = partBoxWidth;
@@ -1124,26 +1068,15 @@ public class ModernCardRenderer extends CardRenderer {
             int x = cardWidth - partBoxWidth - borderWidth;
             int y = curY - h;
 
-            Polygon symbol = new Polygon(
-                    new int[]{
-                            x + w / 2,
-                            (int) (x + w * 0.9),
-                            x + w,
-                            (int) (x + w * 0.6),
-                            x + w / 2,
-                            (int) (x + w * 0.4),
-                            x,
-                            (int) (x + w * 0.1),},
-                    new int[]{
-                            y + h,
-                            (int) (y + 0.8 * h),
-                            y,
-                            (int) (y - 0.2 * h),
-                            y,
-                            (int) (y - 0.2 * h),
-                            y,
-                            (int) (y + 0.8 * h),},
-                    8);
+            Polygon symbol = new Polygon();
+            symbol.addPoint(x + w / 2, y + h);
+            symbol.addPoint((int) (x + w * 0.9), (int) (y + 0.8 * h));
+            symbol.addPoint(x + w, y);
+            symbol.addPoint((int) (x + w * 0.6), (int) (y - 0.2 * h));
+            symbol.addPoint(x + w / 2, y);
+            symbol.addPoint((int) (x + w * 0.4), (int) (y - 0.2 * h));
+            symbol.addPoint(x, y);
+            symbol.addPoint((int) (x + w * 0.1), (int) (y + 0.8 * h));
 
             // Draw + stroke
             g.setColor(Color.black);
@@ -1165,6 +1098,59 @@ public class ModernCardRenderer extends CardRenderer {
             g.setColor(Color.white);
             int loyaltyWidth = g.getFontMetrics().stringWidth(loyalty);
             g.drawString(loyalty, x + (w - loyaltyWidth) / 2, y + ptTextHeight + (h - ptTextHeight) / 2);
+
+            // Advance
+            curY -= (int) (1.2 * y);
+        }
+
+        // Is it a battle?
+        if (cardView.isBattle()
+                && (cardView instanceof PermanentView || !cardView.getStartingDefense().equals("0"))) {
+            // Draw the PW loyalty box
+            int w = 3 * partBoxWidth / 4;
+            int h = 3 * partBoxWidth / 4;
+            int x = cardWidth - w - borderWidth;
+            int y = curY - h;
+
+            Polygon symbol = new Polygon();
+            symbol.addPoint(x + (0 * w) / 80, y + (2 * h) / 80);
+            symbol.addPoint(x + (12 * w) / 80, y + (30 * h) / 80);
+            symbol.addPoint(x + (3 * w) / 80, y + (40 * h) / 80);
+            symbol.addPoint(x + (12 * w) / 80, y + (50 * h) / 80);
+            symbol.addPoint(x + (0 * w) / 80, y + (78 * h) / 80);
+            symbol.addPoint(x + (30 * w) / 80, y + (71 * h) / 80);
+            symbol.addPoint(x + (40 * w) / 80, y + (80 * h) / 80);
+            symbol.addPoint(x + (50 * w) / 80, y + (71 * h) / 80);
+            symbol.addPoint(x + (80 * w) / 80, y + (78 * h) / 80);
+            symbol.addPoint(x + (68 * w) / 80, y + (50 * h) / 80);
+            symbol.addPoint(x + (77 * w) / 80, y + (40 * h) / 80);
+            symbol.addPoint(x + (68 * w) / 80, y + (30 * h) / 80);
+            symbol.addPoint(x + (80 * w) / 80, y + (2 * h) / 80);
+            symbol.addPoint(x + (48 * w) / 80, y + (9 * h) / 80);
+            symbol.addPoint(x + (40 * w) / 80, y + (0 * h) / 80);
+            symbol.addPoint(x + (32 * w) / 80, y + (9 * h) / 80);
+
+
+            // Draw + stroke
+            g.setColor(Color.black);
+            g.fillPolygon(symbol);
+            g.setColor(new Color(200, 200, 200));
+            g.setStroke(new BasicStroke(2));
+            g.drawPolygon(symbol);
+            g.setStroke(new BasicStroke(1));
+
+            // Loyalty number
+            String defense;
+            if (cardView instanceof PermanentView) {
+                defense = cardView.getDefense();
+            } else {
+                defense = cardView.getStartingDefense();
+            }
+
+            g.setFont(ptTextFont);
+            g.setColor(Color.white);
+            int defenseWidth = g.getFontMetrics().stringWidth(defense);
+            g.drawString(defense, x + 1 + (w - defenseWidth) / 2, y - 1 + ptTextHeight + (h - ptTextHeight) / 2);
 
             // Advance
             curY -= (int) (1.2 * y);
@@ -1553,7 +1539,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     // Determine which background image to use from a set of colors
     // and the current card.
-    protected static BufferedImage getBackgroundImage(ObjectColor colors, Collection<CardType> types, SubTypes subTypes, boolean isExped) {
+    protected static BufferedImage getBackgroundTexture(ObjectColor colors, Collection<CardType> types, SubTypes subTypes, boolean isExped) {
         if (subTypes.contains(SubType.VEHICLE)) {
             return BG_IMG_VEHICLE;
         } else if (types.contains(CardType.LAND)) {
@@ -1769,7 +1755,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     private static Color getLessOpaqueColor(Color color, boolean lessOpaqueRulesTextBox) {
         if (lessOpaqueRulesTextBox) {
-            Color lessOpaque = new Color (color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() - 50);
+            Color lessOpaque = new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() - 50);
             return lessOpaque;
         }
         return color;

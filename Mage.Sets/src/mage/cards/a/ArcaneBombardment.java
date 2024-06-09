@@ -99,8 +99,6 @@ class ArcaneBombardmentEffect extends OneShotEffect {
         Cards copies = new CardsImpl();
         for (Card card : exileZone.getCards(game)) {
             Card copiedCard = game.copyCard(card, source, source.getControllerId());
-            game.getExile().add(source.getSourceId(), "", copiedCard);
-            game.getState().setZone(copiedCard.getId(), Zone.EXILED);
             copies.add(copiedCard);
         }
         for (Card copiedCard : copies.getCards(game)) {

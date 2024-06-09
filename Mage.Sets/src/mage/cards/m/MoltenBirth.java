@@ -26,7 +26,7 @@ public final class MoltenBirth extends CardImpl {
 
         // Create two 1/1 red Elemental creature tokens. Then flip a coin. If you win the flip, return Molten Birth to its owner's hand.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RedElementalToken(), 2));
-        this.getSpellAbility().addEffect(new MoltenBirthEffect());
+        this.getSpellAbility().addEffect(new MoltenBirthEffect().concatBy(", then"));
     }
 
     private MoltenBirth(final MoltenBirth card) {
@@ -43,7 +43,7 @@ class MoltenBirthEffect extends OneShotEffect {
 
     MoltenBirthEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Then flip a coin. If you win the flip, return {this} to its owner's hand";
+        staticText = "flip a coin. If you win the flip, return {this} to its owner's hand";
     }
 
     private MoltenBirthEffect(final MoltenBirthEffect effect) {

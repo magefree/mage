@@ -30,7 +30,7 @@ public final class WingedCoatl extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public WingedCoatl (final WingedCoatl card) {
+    private WingedCoatl(final WingedCoatl card) {
         super(card);
     }
 

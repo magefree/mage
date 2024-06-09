@@ -36,7 +36,7 @@ public final class Gigantomancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Gigantomancer (final Gigantomancer card) {
+    private Gigantomancer(final Gigantomancer card) {
         super(card);
     }
 

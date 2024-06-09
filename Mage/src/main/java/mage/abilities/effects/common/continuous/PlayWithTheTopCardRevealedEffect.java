@@ -32,7 +32,7 @@ public class PlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
         }
     }
 
-    public PlayWithTheTopCardRevealedEffect(final PlayWithTheTopCardRevealedEffect effect) {
+    protected PlayWithTheTopCardRevealedEffect(final PlayWithTheTopCardRevealedEffect effect) {
         super(effect);
         this.allPlayers = effect.allPlayers;
     }

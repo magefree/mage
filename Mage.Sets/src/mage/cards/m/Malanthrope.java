@@ -77,7 +77,8 @@ class MalanthropeEffect extends OneShotEffect {
         int count = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
         player.moveCards(player.getGraveyard(), Zone.EXILED, source, game);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null) {
+        if (permanent != null && count > 0) {
+            game.getState().processAction(game);
             permanent.addCounters(CounterType.P1P1.createInstance(count), source, game);
         }
         return true;

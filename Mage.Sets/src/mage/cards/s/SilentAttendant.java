@@ -29,7 +29,7 @@ public final class SilentAttendant extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost()));
     }
 
-    public SilentAttendant (final SilentAttendant card) {
+    private SilentAttendant(final SilentAttendant card) {
         super(card);
     }
 

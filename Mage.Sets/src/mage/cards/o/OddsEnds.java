@@ -3,7 +3,7 @@ package mage.cards.o;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
@@ -47,12 +47,12 @@ public final class OddsEnds extends SplitCard {
 
 class OddsEffect extends OneShotEffect {
 
-    public OddsEffect() {
+    OddsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy";
     }
 
-    public OddsEffect(final OddsEffect effect) {
+    private OddsEffect(final OddsEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class OddsEffect extends OneShotEffect {
 
             } else {
                 game.informPlayers("Odds: Spell will be copied");
-                return new CopyTargetSpellEffect().apply(game, source);
+                return new CopyTargetStackObjectEffect().apply(game, source);
             }
         }
         return false;

@@ -71,7 +71,7 @@ class LedevChampionEffect extends OneShotEffect {
                 + "{this} gets +1/+1 until end of turn for each creature tapped this way.";
     }
 
-    public LedevChampionEffect(LedevChampionEffect effect) {
+    private LedevChampionEffect(final LedevChampionEffect effect) {
         super(effect);
     }
 

@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
@@ -18,7 +19,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -46,7 +47,7 @@ public final class AscentOfTheWorthy extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 new AscentOfTheWorthyReturnEffect(),
-                new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)
+                new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)
         );
 
         this.addAbility(sagaAbility);
@@ -86,7 +87,7 @@ class AscentOfTheWorthyEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
@@ -167,12 +168,14 @@ class AscentOfTheWorthyReturnEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
+        Counters countersToAdd = new Counters();
+        countersToAdd.addCounter(CounterType.FLYING.createInstance());
+        game.setEnterWithCounters(card.getId(), countersToAdd);
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent == null) {
             return false;
         }
-        permanent.addCounters(CounterType.FLYING.createInstance(), source.getControllerId(), source, game);
         game.addEffect(new AddCardSubTypeTargetEffect(
                 SubType.ANGEL, Duration.Custom
         ).setTargetPointer(new FixedTarget(permanent, game)), source);

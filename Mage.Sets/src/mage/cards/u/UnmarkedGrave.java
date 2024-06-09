@@ -51,7 +51,7 @@ class UnmarkedGraveEffect extends SearchEffect {
         staticText = "search your library for a nonlegendary card, put that card into your graveyard, then shuffle";
     }
 
-    public UnmarkedGraveEffect(final UnmarkedGraveEffect effect) {
+    private UnmarkedGraveEffect(final UnmarkedGraveEffect effect) {
         super(effect);
     }
 

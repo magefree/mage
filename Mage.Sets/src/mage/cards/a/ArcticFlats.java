@@ -18,7 +18,7 @@ public final class ArcticFlats extends CardImpl {
 
     public ArcticFlats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Arctic Flats enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.UUID;
 
 /**
+ * GUI: settings for message window that allows to choose additional action (can be used in game or outside)
+ *
  * @author LevelX2
  */
 public class UserRequestMessage implements Serializable {
@@ -14,6 +16,7 @@ public class UserRequestMessage implements Serializable {
 
     private final String title;
     private final String message;
+    private double windowSizeRatio = 1.0; // increase default window size for big messages or buttons
     private UUID relatedUserId;
     private String relatedUserName;
     private UUID matchId;
@@ -37,6 +40,14 @@ public class UserRequestMessage implements Serializable {
         this.button1Action = null;
         this.button2Action = null;
         this.button3Action = null;
+    }
+
+    public void setWindowSizeRatio(double windowSizeRatio) {
+        this.windowSizeRatio = windowSizeRatio;
+    }
+
+    public double getWindowSizeRatio() {
+        return this.windowSizeRatio;
     }
 
     public void setMatchId(UUID matchId) {

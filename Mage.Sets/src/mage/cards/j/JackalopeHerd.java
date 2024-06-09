@@ -26,7 +26,8 @@ public final class JackalopeHerd extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When you cast a spell, return Jackalope Herd to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.FILTER_SPELL_A, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.FILTER_SPELL_A, false)
+                .setTriggerPhrase("When you cast a spell, "));
     }
 
     private JackalopeHerd(final JackalopeHerd card) {

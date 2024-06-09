@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -22,8 +21,9 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class SpyNetwork extends CardImpl {
@@ -33,7 +33,7 @@ public final class SpyNetwork extends CardImpl {
 
         // Look at target player's hand, the top card of that player's library, and any face-down creatures they control. Look at the top four cards of your library, then put them back in any order.
         this.getSpellAbility().addEffect(new SpyNetworkLookAtTargetPlayerHandEffect());
-        this.getSpellAbility().addEffect(new LookLibraryTopCardTargetPlayerEffect().setText(" the top card of that player's library"));
+        this.getSpellAbility().addEffect(new LookLibraryTopCardTargetPlayerEffect().setText(" the top card of that player's library,"));
         this.getSpellAbility().addEffect(new SpyNetworkFaceDownEffect());
         this.getSpellAbility().addEffect(new LookLibraryControllerEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -52,12 +52,12 @@ public final class SpyNetwork extends CardImpl {
 
 class SpyNetworkLookAtTargetPlayerHandEffect extends OneShotEffect {
 
-    public SpyNetworkLookAtTargetPlayerHandEffect() {
+    SpyNetworkLookAtTargetPlayerHandEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at target player's hand,";
     }
 
-    public SpyNetworkLookAtTargetPlayerHandEffect(final SpyNetworkLookAtTargetPlayerHandEffect effect) {
+    private SpyNetworkLookAtTargetPlayerHandEffect(final SpyNetworkLookAtTargetPlayerHandEffect effect) {
         super(effect);
     }
 
@@ -82,12 +82,12 @@ class SpyNetworkLookAtTargetPlayerHandEffect extends OneShotEffect {
 
 class SpyNetworkFaceDownEffect extends OneShotEffect {
 
-    public SpyNetworkFaceDownEffect() {
+    SpyNetworkFaceDownEffect() {
         super(Outcome.Benefit);
         this.staticText = "and any face-down creatures they control";
     }
 
-    public SpyNetworkFaceDownEffect(final SpyNetworkFaceDownEffect effect) {
+    private SpyNetworkFaceDownEffect(final SpyNetworkFaceDownEffect effect) {
         super(effect);
     }
 
@@ -109,7 +109,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
             if (target.canChoose(controller.getId(), source, game)) {
                 while (controller.chooseUse(outcome, "Look at a face down creature controlled by " + player.getLogName() + "?", source, game)) {
                     target.clearChosen();
-                    while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+                    while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                         controller.chooseTarget(outcome, target, source, game);
                     }
                     Permanent faceDownCreature = game.getPermanent(target.getFirstTarget());

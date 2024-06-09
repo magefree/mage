@@ -1,6 +1,7 @@
 package mage.client.table;
 
 import mage.client.SessionHandler;
+import mage.components.table.TableModelWithTooltip;
 import mage.constants.SkillLevel;
 import mage.remote.MageRemoteException;
 import mage.view.TableView;
@@ -10,7 +11,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.Collection;
 import java.util.Date;
 
-public class TablesTableModel extends AbstractTableModel {
+public class TablesTableModel extends AbstractTableModel implements TableModelWithTooltip {
 
     // icons with tostring for tables hints
     final ImageIcon tourneyIcon = new ImageIcon(getClass().getResource("/tables/tourney_icon.png")) {
@@ -132,7 +133,7 @@ public class TablesTableModel extends AbstractTableModel {
             case 5:
                 return tables[rowIndex].getGameType();
             case 6:
-                return tables[rowIndex].getAdditionalInfo();
+                return tables[rowIndex].getAdditionalInfoShort();
             case 7:
                 return tables[rowIndex].getTableStateText();
             case 8:
@@ -188,6 +189,20 @@ public class TablesTableModel extends AbstractTableModel {
                 return tables[rowIndex].getTableId();
         }
         return "";
+    }
+
+    @Override
+    public String getTooltipAt(int rowIndex, int columnIndex) {
+        Object res;
+        switch (columnIndex) {
+            case COLUMN_INFO:
+                res = tables[rowIndex].getAdditionalInfoFull();
+                break;
+            default:
+                res = this.getValueAt(rowIndex, columnIndex);
+                break;
+        }
+        return res.toString();
     }
 
     @Override

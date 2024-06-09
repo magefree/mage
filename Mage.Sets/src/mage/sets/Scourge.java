@@ -81,6 +81,7 @@ public final class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Aberration", 118, Rarity.UNCOMMON, mage.cards.e.ElvishAberration.class));
         cards.add(new SetCardInfo("Enrage", 91, Rarity.UNCOMMON, mage.cards.e.Enrage.class));
         cards.add(new SetCardInfo("Eternal Dragon", 12, Rarity.RARE, mage.cards.e.EternalDragon.class));
+        cards.add(new SetCardInfo("Exiled Doomsayer", 13, Rarity.RARE, mage.cards.e.ExiledDoomsayer.class));
         cards.add(new SetCardInfo("Extra Arms", 92, Rarity.UNCOMMON, mage.cards.e.ExtraArms.class));
         cards.add(new SetCardInfo("Faces of the Past", 35, Rarity.RARE, mage.cards.f.FacesOfThePast.class));
         cards.add(new SetCardInfo("Fatal Mutation", 66, Rarity.UNCOMMON, mage.cards.f.FatalMutation.class));

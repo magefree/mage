@@ -1,9 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -21,8 +18,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author stevemarkham81
  */
 public final class KeeperOfTheLight extends CardImpl {
@@ -61,7 +61,7 @@ class KeeperOfTheLightTarget extends TargetPlayer {
         super(1, 1, false, new FilterOpponent("opponent that has more life than you"));
     }
 
-    public KeeperOfTheLightTarget(final KeeperOfTheLightTarget target) {
+    private KeeperOfTheLightTarget(final KeeperOfTheLightTarget target) {
         super(target);
     }
 
@@ -95,7 +95,7 @@ class KeeperOfTheLightTarget extends TargetPlayer {
                         && controller.getLife() < player.getLife()
                         && !player.hasLeft()
                         && filter.match(player, sourceControllerId, source, game)
-                        && player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                        && player.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     count++;
                     if (count >= this.minNumberOfTargets) {
                         return true;

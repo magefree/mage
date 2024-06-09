@@ -33,7 +33,7 @@ public final class RatchetFieldMedic extends CardImpl {
     public RatchetFieldMedic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROBOT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

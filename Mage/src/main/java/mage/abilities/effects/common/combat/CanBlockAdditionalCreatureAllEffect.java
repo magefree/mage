@@ -28,7 +28,7 @@ public class CanBlockAdditionalCreatureAllEffect extends ContinuousEffectImpl {
         staticText = setText();
     }
 
-    public CanBlockAdditionalCreatureAllEffect(final CanBlockAdditionalCreatureAllEffect effect) {
+    protected CanBlockAdditionalCreatureAllEffect(final CanBlockAdditionalCreatureAllEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter;

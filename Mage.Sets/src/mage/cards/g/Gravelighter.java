@@ -34,7 +34,7 @@ public final class Gravelighter extends CardImpl {
         // When Gravelighter enters the battlefield, draw a card if a creature died this turn. Otherwise, each player sacrifices a creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeAllEffect(1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
+                new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE),
                 MorbidCondition.instance, "draw a card if a creature died this turn. " +
                 "Otherwise, each player sacrifices a creature"
         )).addHint(MorbidHint.instance));

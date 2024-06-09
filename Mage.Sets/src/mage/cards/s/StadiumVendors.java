@@ -53,7 +53,7 @@ class StadiumVendorsEffect extends OneShotEffect {
         this.staticText = "choose a player. That player adds two mana of any one color they choose";
     }
 
-    StadiumVendorsEffect(final StadiumVendorsEffect effect) {
+    private StadiumVendorsEffect(final StadiumVendorsEffect effect) {
         super(effect);
     }
 

@@ -43,7 +43,7 @@ public final class KodamaOfTheEastTree extends CardImpl {
     public KodamaOfTheEastTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

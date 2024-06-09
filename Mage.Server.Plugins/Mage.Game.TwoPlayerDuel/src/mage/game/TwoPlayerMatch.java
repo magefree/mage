@@ -21,7 +21,12 @@ public class TwoPlayerMatch extends MatchImpl {
         // see comments from https://github.com/magefree/mage/commit/4874ad31c199ea573187ea2790268be3a4d4c95a
         boolean isLimitedDeck = options.isLimited() || "Limited".equals(options.getDeckType());
 
-        TwoPlayerDuel game = new TwoPlayerDuel(options.getAttackOption(), options.getRange(), mulligan, 20, isLimitedDeck ? 40 : 60);
+        int startLife = options.isCustomStartLifeEnabled() ? options.getCustomStartLife() : 20;
+        int startHandSize = options.isCustomStartHandSizeEnabled() ? options.getCustomStartHandSize() : 7;
+        TwoPlayerDuel game = new TwoPlayerDuel(
+                options.getAttackOption(), options.getRange(), mulligan,
+                isLimitedDeck ? 40 : 60, startLife, startHandSize
+        );
         // Sets a start message about the match score
         game.setStartMessage(this.createGameStartMessage());
         initGame(game);

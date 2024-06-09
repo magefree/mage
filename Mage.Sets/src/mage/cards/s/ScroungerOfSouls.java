@@ -22,7 +22,7 @@ public final class ScroungerOfSouls extends CardImpl {
 
     }
 
-    public ScroungerOfSouls(final ScroungerOfSouls scroungerOfSouls){
+    private ScroungerOfSouls(final ScroungerOfSouls scroungerOfSouls){
         super(scroungerOfSouls);
     }
     public ScroungerOfSouls copy(){

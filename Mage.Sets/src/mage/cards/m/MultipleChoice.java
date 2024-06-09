@@ -89,7 +89,7 @@ class MultipleChoiceEffect extends OneShotEffect {
             return true;
         }
         TargetPermanent targetPermanent = new TargetControlledCreaturePermanent();
-        targetPermanent.setNotTarget(true);
+        targetPermanent.withNotTarget(true);
         player.choose(Outcome.ReturnToHand, targetPermanent, source, game);
         Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());
         return permanent == null || player.moveCards(permanent, Zone.HAND, source, game);

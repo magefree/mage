@@ -97,7 +97,7 @@ class FrayingLineEffect extends OneShotEffect {
                 return true;
             }
             TargetPermanent target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
@@ -106,16 +106,13 @@ class FrayingLineEffect extends OneShotEffect {
             return true;
         }
         Cards cards = new CardsImpl(source.getSourcePermanentIfItStillExists(game));
-        cards.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
+        cards.addAllCards(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_PERMANENT_CREATURE,
                 source.getControllerId(), source, game
         )) {
-            int counters = permanent.getCounters(game).getCount(CounterType.ROPE);
-            if (counters > 0) {
-                permanent.removeCounters(CounterType.ROPE.createInstance(counters), source, game);
-            }
+            permanent.removeAllCounters(CounterType.ROPE.getName(), source, game);
         }
         return true;
     }

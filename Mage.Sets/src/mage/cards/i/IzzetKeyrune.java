@@ -31,8 +31,8 @@ public final class IzzetKeyrune extends CardImpl {
 
         // {U}{R}: Until end of turn, Izzet Keyrune becomes a 2/1 blue and red Elemental artifact creature.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new IzzetKeyruneToken(), "", Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{U}{R}")));
+                new IzzetKeyruneToken(), CardType.ARTIFACT, Duration.EndOfTurn
+        ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{U}{R}")));
 
         // Whenever Izzet Keyrune deals combat damage to a player, you may draw a card. If you do, discard a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

@@ -7,8 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,10 +18,13 @@ public final class ThrummingStone extends CardImpl {
 
     public ThrummingStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
-        // Spells you cast have Ripple 4
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new RippleAbility(4), new FilterCard("Spells"))));
+        // Spells you cast have ripple 4.
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new RippleAbility(4), StaticFilters.FILTER_CARD_NON_LAND)
+                .setText("Spells you cast have ripple 4. <i>(Whenever you cast a spell, you may reveal the top four cards " +
+                        "of your library. You may cast spells with the same name as that spell from among the revealed " +
+                        "cards without paying their mana costs. Put the rest on the bottom of your library.)</i>")));
     }
 
     private ThrummingStone(final ThrummingStone card) {

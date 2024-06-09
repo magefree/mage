@@ -66,12 +66,12 @@ public final class PortalMage extends CardImpl {
 
 class PortalMageEffect extends OneShotEffect {
 
-    public PortalMageEffect() {
+    PortalMageEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may reselect which player or planeswalker target attacking creature is attacking";
     }
 
-    public PortalMageEffect(final PortalMageEffect effect) {
+    private PortalMageEffect(final PortalMageEffect effect) {
         super(effect);
     }
 
@@ -108,9 +108,9 @@ class PortalMageEffect extends OneShotEffect {
                     }
                 }
                 // Select the new defender
-                TargetDefender target = new TargetDefender(defenders, null);
+                TargetDefender target = new TargetDefender(defenders);
                 if (controller.chooseTarget(Outcome.Damage, target, source, game)) {
-                    if (!combatGroupTarget.getDefenderId().equals(target.getFirstTarget())) {
+                    if (combatGroupTarget.getDefenderId() != null && !combatGroupTarget.getDefenderId().equals(target.getFirstTarget())) {
                         if (combatGroupTarget.changeDefenderPostDeclaration(target.getFirstTarget(), game)) {
                             String attacked = "";
                             Player player = game.getPlayer(target.getFirstTarget());

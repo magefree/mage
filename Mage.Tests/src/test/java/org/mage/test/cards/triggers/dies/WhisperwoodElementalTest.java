@@ -27,7 +27,7 @@ public class WhisperwoodElementalTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Until end of turn, face-up, nontoken creatures you control gain \"When this creature dies, manifest the top card of your library.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice {this}: Until end of turn, face-up");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.END_TURN);

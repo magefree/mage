@@ -4,6 +4,7 @@ package mage.abilities.effects.common;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -26,7 +27,7 @@ public class ChooseExpansionSetEffect extends OneShotEffect {
         staticText = "choose an expansion set";
     }
 
-    public ChooseExpansionSetEffect(final ChooseExpansionSetEffect effect) {
+    protected ChooseExpansionSetEffect(final ChooseExpansionSetEffect effect) {
         super(effect);
     }
 

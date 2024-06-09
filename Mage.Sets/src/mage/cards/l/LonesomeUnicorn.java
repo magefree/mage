@@ -29,6 +29,8 @@ public final class LonesomeUnicorn extends AdventureCard {
         // Rider in Need
         // Create a 2/2 white Knight creature token with vigilance.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken()));
+
+        this.finalizeAdventure();
     }
 
     private LonesomeUnicorn(final LonesomeUnicorn card) {

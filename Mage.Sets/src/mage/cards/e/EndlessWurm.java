@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -14,7 +13,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -22,7 +20,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class EndlessWurm extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledEnchantmentPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledEnchantmentPermanent("an enchantment");
 
     public EndlessWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
@@ -35,7 +33,7 @@ public final class EndlessWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice Endless Wurm unless you sacrifice an enchantment.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter))), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(filter)), TargetController.YOU, false));
 
     }
 

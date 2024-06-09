@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -31,7 +32,7 @@ public final class AvatarOfDiscord extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Avatar of Discord enters the battlefield, sacrifice it unless you discard two cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)))));
     }
 
     private AvatarOfDiscord(final AvatarOfDiscord card) {

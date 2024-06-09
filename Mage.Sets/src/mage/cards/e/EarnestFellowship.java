@@ -53,7 +53,7 @@ class EarnestFellowshipEffect extends ContinuousEffectImpl {
         this.staticText = "Each creature has protection from its colors";
     }
 
-    public EarnestFellowshipEffect(final EarnestFellowshipEffect effect) {
+    private EarnestFellowshipEffect(final EarnestFellowshipEffect effect) {
         super(effect);
     }
 

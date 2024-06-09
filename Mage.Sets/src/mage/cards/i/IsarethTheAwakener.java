@@ -8,7 +8,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.LeaveBattlefieldExileTargetReplacementEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -20,8 +20,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -35,7 +33,7 @@ public final class IsarethTheAwakener extends CardImpl {
     public IsarethTheAwakener(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -95,7 +93,7 @@ class IsarethTheAwakenerCreateReflexiveTriggerEffect extends OneShotEffect {
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new IsarethTheAwakenerEffect(), false, rule
         );
-        ability.addEffect(new IsarethTheAwakenerReplacementEffect());
+        ability.addEffect(new LeaveBattlefieldExileTargetReplacementEffect("that creature"));
         ability.addTarget(new TargetCardInYourGraveyard(makeFilter(costX)));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
@@ -139,47 +137,5 @@ class IsarethTheAwakenerEffect extends OneShotEffect {
         countersToAdd.addCounter(CounterType.CORPSE.createInstance());
         game.setEnterWithCounters(card.getId(), countersToAdd);
         return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-    }
-}
-
-class IsarethTheAwakenerReplacementEffect extends ReplacementEffectImpl {
-
-    IsarethTheAwakenerReplacementEffect() {
-        super(Duration.Custom, Outcome.Exile);
-    }
-
-    private IsarethTheAwakenerReplacementEffect(final IsarethTheAwakenerReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public IsarethTheAwakenerReplacementEffect copy() {
-        return new IsarethTheAwakenerReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getFirstTarget())
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 }

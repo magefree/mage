@@ -76,13 +76,14 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
         staticText = "The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to {this} instead";
     }
 
-    ShamanEnKorRedirectFromTargetEffect(final ShamanEnKorRedirectFromTargetEffect effect) {
+    private ShamanEnKorRedirectFromTargetEffect(final ShamanEnKorRedirectFromTargetEffect effect) {
         super(effect);
         sourceObject = effect.sourceObject;
     }
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetSource target = new TargetSource();
@@ -100,7 +101,7 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (sourceObject.equals(new MageObjectReference(event.getSourceId(), game))) {
@@ -111,11 +112,6 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

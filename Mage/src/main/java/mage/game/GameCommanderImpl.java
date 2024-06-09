@@ -16,7 +16,6 @@ import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
-import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -30,13 +29,15 @@ public abstract class GameCommanderImpl extends GameImpl {
     protected boolean alsoHand = true;    // replace commander going to hand
     protected boolean alsoLibrary = true; // replace commander going to library
 
+    // 103.7a  In a two-player game, the player who plays first skips the draw step
+    // (see rule 504, "Draw Step") of his or her first turn.
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int startingHandSize) {
-        super(attackOption, range, mulligan, startingLife, startingHandSize);
+    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int minimumDeckSize, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, minimumDeckSize, startLife, startHandSize);
     }
 
-    public GameCommanderImpl(final GameCommanderImpl game) {
+    protected GameCommanderImpl(final GameCommanderImpl game) {
         super(game);
         this.alsoHand = game.alsoHand;
         this.alsoLibrary = game.alsoLibrary;
@@ -79,11 +80,14 @@ public abstract class GameCommanderImpl extends GameImpl {
                         true, "Choose a color for " + commander.getName()
                 );
                 player.choose(Outcome.Neutral, choiceColor, this);
-                color = choiceColor.getColor();
+                color = choiceColor.getColor(); // can be null on disconnect
             } else {
                 color = iterator.next();
             }
-            commander.getColor().addColor(color);
+
+            if (color != null) {
+                commander.getColor().addColor(color);
+            }
         }
     }
 
@@ -128,7 +132,7 @@ public abstract class GameCommanderImpl extends GameImpl {
 
         super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
-            state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+            state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
         }
     }
 
@@ -170,7 +174,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         // Paris mulligan - no longer used by default for commander
 //        Player player = getPlayer(playerId);
 //        TargetCardInHand target = new TargetCardInHand(1, player.getHand().size(), new FilterCard("card to mulligan"));
-//        target.setNotTarget(true);
+//        target.withNotTarget(true);
 //        target.setRequired(false);
 //        if (player.choose(Outcome.Exile, player.getHand(), target, this)) {
 //            int numCards = target.getTargets().size();

@@ -38,9 +38,8 @@ public final class AugurOfSkulls extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
                 new DiscardTargetEffect(2),
                 new SacrificeSourceCost(),
-                new IsStepCondition(PhaseStep.UPKEEP),
-                null
-        );       
+                new IsStepCondition(PhaseStep.UPKEEP)
+        );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

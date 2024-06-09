@@ -108,7 +108,7 @@ class NamelessRaceEffect extends OneShotEffect {
         game.informPlayers((sourceCard != null ? sourceCard.getLogName() : "") + ": " + controller.getLogName() +
                 " pays " + payAmount + " life");
         game.addEffect(new SetBasePowerToughnessSourceEffect(
-                payAmount, payAmount, Duration.Custom, SubLayer.CharacteristicDefining_7a
+                payAmount, payAmount, Duration.Custom
         ), source);
         permanent.addInfo("life paid", CardUtil.addToolTipMarkTags("Life paid: " + payAmount), game);
         return true;

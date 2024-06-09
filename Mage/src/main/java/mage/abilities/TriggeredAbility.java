@@ -17,35 +17,48 @@ public interface TriggeredAbility extends Ability {
      * This check for the relevant event types is called at first to prevent
      * further actions if the current event is ignored from this triggered
      * ability
-     *
-     * @param event
-     * @param game
-     * @return
      */
     boolean checkEventType(GameEvent event, Game game);
 
     /**
-     * This method checks if the event has to trigger the ability. It's
-     * important to do nothing unique within this method, that can't be done
-     * multiple times. Because some abilities call this to check if an ability
-     * is relevant (e.g. Torpor Orb), so the method is called multiple times for
-     * the same event.
-     *
-     * @param event
-     * @param game
-     * @return
+     * This method checks if the event has to trigger the ability,
+     * and if it does trigger, may set targets and other values in associated effects
+     * before returning true.
      */
     boolean checkTrigger(GameEvent event, Game game);
 
-    boolean checkTriggeredAlready(Game game);
+    /**
+     * If the trigger is limited per turn, check if it can trigger again or the limit is met.
+     * true if unlimited
+     */
+    boolean checkTriggeredLimit(Game game);
 
     boolean checkUsedAlready(Game game);
 
-    TriggeredAbility setTriggersOnce(boolean triggersOnce);
+    /**
+     * limit the number of triggers each turn
+     */
+    TriggeredAbility setTriggersLimitEachTurn(int limit);
+
+    /**
+     * Get the number of times the trigger may trigger this turn.
+     * e.g. 0, 1 or 2 for a trigger that is limited to trigger twice each turn.
+     * Integer.MAX_VALUE when no limit.
+     */
+    int getRemainingTriggersLimitEachTurn(Game game);
+
+    TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce);
+
+    /**
+     * if true, replaces "{this}" with "it" in the effect text
+     */
+    TriggeredAbility withRuleTextReplacement(boolean replaceRuleText);
 
     boolean checkInterveningIfClause(Game game);
 
     boolean isOptional();
+
+    TriggeredAbility setOptional();
 
     boolean isLeavesTheBattlefieldTrigger();
 
@@ -57,13 +70,6 @@ public interface TriggeredAbility extends Ability {
     void setTriggerEvent(GameEvent event);
 
     GameEvent getTriggerEvent();
-
-    /**
-     * Don't override this. Use setTriggerPhrase instead and let the base class handle it.
-     * @return
-     */
-    @Deprecated
-    String getTriggerPhrase();
 
     TriggeredAbility setTriggerPhrase(String triggerPhrase);
 }

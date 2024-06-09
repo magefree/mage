@@ -15,7 +15,6 @@ import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesAuraAttachToManifestSourceEffect extends OneShotEffect {
@@ -25,7 +24,7 @@ public class BecomesAuraAttachToManifestSourceEffect extends OneShotEffect {
         this.staticText = "it becomes an Aura with enchant creature. Manifest the top card of your library and attach {this} to it";
     }
 
-    public BecomesAuraAttachToManifestSourceEffect(final BecomesAuraAttachToManifestSourceEffect effect) {
+    protected BecomesAuraAttachToManifestSourceEffect(final BecomesAuraAttachToManifestSourceEffect effect) {
         super(effect);
     }
 

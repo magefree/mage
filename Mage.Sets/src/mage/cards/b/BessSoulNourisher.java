@@ -35,7 +35,7 @@ public class BessSoulNourisher extends CardImpl {
     public BessSoulNourisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.HUMAN, SubType.CITIZEN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -53,7 +53,7 @@ public class BessSoulNourisher extends CardImpl {
         DynamicValue xValue = new CountersSourceCount(CounterType.P1P1);
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(
                 xValue, xValue, Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURE, true
+                filter, true
         ).setText("each other creature you control with base power and toughness 1/1 " +
                 "gets +X/+X until end of turn, where X is the number of +1/+1 counters on {this}"),
                 false));

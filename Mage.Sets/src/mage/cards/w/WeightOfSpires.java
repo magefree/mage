@@ -46,7 +46,7 @@ class WeightOfSpiresEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to target creature equal to the number of nonbasic lands that creature's controller controls";
     }
 
-    WeightOfSpiresEffect(final WeightOfSpiresEffect effect) {
+    private WeightOfSpiresEffect(final WeightOfSpiresEffect effect) {
         super(effect);
     }
 

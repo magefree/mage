@@ -22,7 +22,7 @@ public final class VeteranSoldier extends CardImpl {
     public VeteranSoldier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that that player, for each opponent, create a 1/1 white Soldier creature token that's tapped and attacking that player."
@@ -46,7 +46,7 @@ class VeteranSoldierEffect extends OneShotEffect {
 
     VeteranSoldierEffect() {
         super(Outcome.Benefit);
-        staticText = "for each opponent, create a 1/1 white Soldier creature token that's tapped and attacking that player";
+        staticText = "for each opponent, create a 1/1 white Soldier creature token that's tapped and attacking that opponent";
     }
 
     private VeteranSoldierEffect(final VeteranSoldierEffect effect) {
@@ -60,7 +60,7 @@ class VeteranSoldierEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId(), true)) {
             if (game.getPlayer(opponentId) != null) {
                 new SoldierToken().putOntoBattlefield(
                         1, game, source, source.getControllerId(),

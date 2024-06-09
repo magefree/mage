@@ -2,9 +2,10 @@
 package mage.cards.b;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.DefendingPlayerControlsCondition;
+import mage.abilities.condition.common.DefendingPlayerControlsSourceAttackingCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
@@ -16,13 +17,12 @@ import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 
 /**
- *
  * @author Backfir3
  */
 public final class BouncingBeebles extends CardImpl {
 
     public BouncingBeebles(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.BEEBLE);
 
         this.power = new MageInt(2);
@@ -31,7 +31,7 @@ public final class BouncingBeebles extends CardImpl {
         //Bouncing Beebles can't be blocked as long as defending player controls an artifact.
         Effect effect = new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(),
-                new DefendingPlayerControlsCondition(new FilterArtifactPermanent()));
+                new DefendingPlayerControlsSourceAttackingCondition(new FilterArtifactPermanent()));
         effect.setText("{this} can't be blocked as long as defending player controls an artifact");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

@@ -53,7 +53,7 @@ class SternJudgeEffect extends OneShotEffect {
         this.staticText = "Each player loses 1 life for each Swamp they control.";
     }
 
-    SternJudgeEffect(final SternJudgeEffect effect) {
+    private SternJudgeEffect(final SternJudgeEffect effect) {
         super(effect);
     }
 

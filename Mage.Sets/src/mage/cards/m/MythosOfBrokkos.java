@@ -84,7 +84,7 @@ class MythosOfBrokkosEffect extends OneShotEffect {
             }
         }
         TargetCard targetCard = new TargetCardInYourGraveyard(0, 2, filter, true);
-        player.choose(outcome, player.getGraveyard(), targetCard, game);
+        player.choose(outcome, player.getGraveyard(), targetCard, source, game);
         Cards cards = new CardsImpl(targetCard.getTargets());
         return player.moveCards(cards, Zone.HAND, source, game);
     }

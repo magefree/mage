@@ -57,7 +57,7 @@ class DesecrationDemonEffect extends OneShotEffect {
         staticText = "any opponent may sacrifice a creature. If a player does, tap {this} and put a +1/+1 counter on it";
     }
 
-    DesecrationDemonEffect(final DesecrationDemonEffect effect) {
+    private DesecrationDemonEffect(final DesecrationDemonEffect effect) {
         super(effect);
     }
 

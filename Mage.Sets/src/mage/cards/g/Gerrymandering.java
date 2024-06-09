@@ -50,7 +50,7 @@ class GerrymanderingEffect extends OneShotEffect {
         this.staticText = "Exile all lands. Give each player a number of those cards chosen at random equal to the number of those cards the player controlled. Each player returns those cards to the battlefield under their control";
     }
 
-    GerrymanderingEffect(final GerrymanderingEffect effect) {
+    private GerrymanderingEffect(final GerrymanderingEffect effect) {
         super(effect);
     }
 

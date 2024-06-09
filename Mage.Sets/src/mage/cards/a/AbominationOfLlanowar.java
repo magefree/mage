@@ -40,7 +40,7 @@ public final class AbominationOfLlanowar extends CardImpl {
     public AbominationOfLlanowar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(0);
@@ -54,7 +54,7 @@ public final class AbominationOfLlanowar extends CardImpl {
 
         // Abomination of Llanowar's power and toughness are each equal to the number of Elves you control plus the number of Elf cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)
         ));
     }
 

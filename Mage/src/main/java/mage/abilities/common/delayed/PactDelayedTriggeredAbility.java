@@ -49,7 +49,7 @@ class PactEffect extends OneShotEffect {
         staticText = "pay " + cost.getText() + ". If you don't, you lose the game";
     }
 
-    public PactEffect(final PactEffect effect) {
+    protected PactEffect(final PactEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

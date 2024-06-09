@@ -12,12 +12,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.Map;
 import java.util.Objects;
@@ -106,11 +106,6 @@ class DampingEngineEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = source.getSourceObject(game);
         if (mageObject != null) {
@@ -149,7 +144,7 @@ class DampingEngineSpecialAction extends SpecialAction {
 
     DampingEngineSpecialAction() {
         super(Zone.BATTLEFIELD);
-        this.addCost(new SacrificeTargetCost(new TargetControlledPermanent(), true));
+        this.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
         this.addEffect(new DampingEngineIgnoreEffect());
         this.setMayActivate(TargetController.ANY);
         this.setRuleVisible(false);

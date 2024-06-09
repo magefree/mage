@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -14,18 +13,15 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.EdgarMarkovToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class EdgarMarkov extends CardImpl {
@@ -41,7 +37,7 @@ public final class EdgarMarkov extends CardImpl {
     public EdgarMarkov(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(4);
@@ -49,7 +45,10 @@ public final class EdgarMarkov extends CardImpl {
 
         // Eminence - Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(Zone.ALL, new CreateTokenEffect(new EdgarMarkovToken()), filter2, false, false),
+                new SpellCastControllerTriggeredAbility(
+                        Zone.ALL, new CreateTokenEffect(new EdgarMarkovToken()),
+                        filter2, false, SetTargetPointer.NONE
+                ),
                 SourceOnBattlefieldOrCommandZoneCondition.instance,
                 "Whenever you cast another Vampire spell, if {this} is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.");
         ability.setAbilityWord(AbilityWord.EMINENCE);

@@ -35,7 +35,7 @@ public final class WildernessElemental extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Wilderness Elemental's power is equal to the number of nonbasic lands your opponents control.
-         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(filter))));
    }
 
     private WildernessElemental(final WildernessElemental card) {

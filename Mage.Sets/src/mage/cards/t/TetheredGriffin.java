@@ -11,6 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterEnchantmentPermanent;
 
 import java.util.UUID;
 
@@ -19,6 +20,9 @@ import java.util.UUID;
  * @author fireshoes
  */
 public final class TetheredGriffin extends CardImpl {
+
+    private static final FilterEnchantmentPermanent filter
+            = new FilterEnchantmentPermanent("no enchantments");
 
     public TetheredGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
@@ -31,7 +35,7 @@ public final class TetheredGriffin extends CardImpl {
 
         // When you control no enchantments, sacrifice Tethered Griffin.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                StaticFilters.FILTER_PERMANENT_ENCHANTMENT, ComparisonType.EQUAL_TO, 0,
+                filter, ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 

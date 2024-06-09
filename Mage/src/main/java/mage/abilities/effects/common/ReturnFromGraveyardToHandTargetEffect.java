@@ -9,8 +9,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 /**
  * @author jeff
@@ -21,7 +19,7 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect {
         super(Outcome.ReturnToHand);
     }
 
-    public ReturnFromGraveyardToHandTargetEffect(final ReturnFromGraveyardToHandTargetEffect effect) {
+    protected ReturnFromGraveyardToHandTargetEffect(final ReturnFromGraveyardToHandTargetEffect effect) {
         super(effect);
     }
 

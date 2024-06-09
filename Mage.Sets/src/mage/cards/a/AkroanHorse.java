@@ -60,7 +60,7 @@ public final class AkroanHorse extends CardImpl {
 
 class AkroanHorseChangeControlEffect extends OneShotEffect {
 
-    public AkroanHorseChangeControlEffect() {
+    AkroanHorseChangeControlEffect() {
         super(Outcome.Benefit);
         this.staticText = "an opponent gains control of it";
     }
@@ -81,7 +81,7 @@ class AkroanHorseChangeControlEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetOpponent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.chooseTarget(outcome, target, source, game);
         ContinuousEffect effect = new AkroanHorseGainControlEffect(Duration.Custom, target.getFirstTarget());
         effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
@@ -100,7 +100,7 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
         this.staticText = "Gain control of Akroan Horse";
     }
 
-    public AkroanHorseGainControlEffect(final AkroanHorseGainControlEffect effect) {
+    private AkroanHorseGainControlEffect(final AkroanHorseGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }
@@ -112,11 +112,9 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent;
-        if (targetPointer == null) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
             permanent = game.getPermanent(source.getFirstTarget());
-        } else {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
         }
         if (permanent == null) {
             return false;

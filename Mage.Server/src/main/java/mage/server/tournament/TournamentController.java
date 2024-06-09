@@ -2,6 +2,8 @@ package mage.server.tournament;
 
 import mage.MageException;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidator;
+import mage.cards.decks.DeckValidatorFactory;
 import mage.constants.TableState;
 import mage.constants.TournamentPlayerState;
 import mage.game.GameException;
@@ -21,6 +23,7 @@ import mage.server.User;
 import mage.server.draft.DraftController;
 import mage.server.managers.TableManager;
 import mage.server.managers.ManagerFactory;
+import mage.util.ThreadUtils;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
@@ -107,7 +110,7 @@ public class TournamentController {
                 (Listener<PlayerQueryEvent>) event -> {
                     try {
                         switch (event.getQueryType()) {
-                            case CONSTRUCT:
+                            case TOURNAMENT_CONSTRUCT:
                                 construct(event.getPlayerId(), event.getMax());
                                 break;
                         }
@@ -172,7 +175,7 @@ public class TournamentController {
 
     private void checkStart() {
         if (!started && allJoined()) {
-            managerFactory.threadExecutor().getCallExecutor().execute(this::startTournament);
+            managerFactory.threadExecutor().getTourneyExecutor().execute(this::startTournament);
         }
     }
 
@@ -189,6 +192,7 @@ public class TournamentController {
     }
 
     private synchronized void startTournament() {
+        Thread.currentThread().setName(ThreadUtils.THREAD_PREFIX_TOURNEY + " " + tableId);
         for (final TournamentSession tournamentSession : tournamentSessions.values()) {
             if (!tournamentSession.init()) {
                 logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
@@ -322,18 +326,22 @@ public class TournamentController {
         }
     }
 
-    public boolean updateDeck(UUID playerId, Deck deck) {
-        if (tournamentSessions.containsKey(playerId)) {
-            return tournamentSessions.get(playerId).updateDeck(deck);
+    public void updateDeck(UUID playerId, Deck deck) {
+        TournamentSession session = tournamentSessions.getOrDefault(playerId, null);
+        if (session == null) {
+            return;
         }
-        return false;
+
+        session.updateDeck(deck);
     }
 
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
             TournamentPlayer tournamentPlayer = tournament.getPlayer(userPlayerMap.get(userId));
             if (tournamentPlayer.getDeck() != null) {
-                tournament.autoSubmit(userPlayerMap.get(userId), tournamentPlayer.generateDeck());
+                DeckValidator deckValidator = DeckValidatorFactory.instance.createDeckValidator(tournament.getOptions().getMatchOptions().getDeckType());
+                int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 40;
+                tournament.autoSubmit(userPlayerMap.get(userId), tournamentPlayer.generateDeck(deckMinSize));
             } else {
                 StringBuilder sb = new StringBuilder();
                 managerFactory.userManager().getUser(userId).ifPresent(user

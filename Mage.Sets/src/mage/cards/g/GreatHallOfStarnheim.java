@@ -16,6 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.AngelWarriorVigilanceToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -44,7 +45,7 @@ public final class GreatHallOfStarnheim extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+        Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
         cost.setText("and a creature you control");
         ability.addCost(cost);
         this.addAbility(ability);

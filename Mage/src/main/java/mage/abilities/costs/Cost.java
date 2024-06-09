@@ -32,6 +32,10 @@ public interface Cost extends Serializable, Copyable<Cost> {
 
     void setPaid();
 
+    /**
+     * Warning, can return copied list in composite costs, so it will be un-changeable
+     * Use targets list modification only in CostAdjuster for single card/effect
+     */
     Targets getTargets();
 
     Cost copy();

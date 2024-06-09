@@ -33,7 +33,7 @@ public final class BladewingTheRisen extends CardImpl {
 
     public BladewingTheRisen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE, SubType.DRAGON);
 
         this.power = new MageInt(4);

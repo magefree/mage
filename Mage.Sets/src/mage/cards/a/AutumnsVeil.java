@@ -1,5 +1,3 @@
-
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -11,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -22,7 +20,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 public final class AutumnsVeil extends CardImpl {
 
     private static final FilterSpell filterTarget1 = new FilterSpell("spells you control");
-    private static final FilterControlledCreaturePermanent filterTarget2 = new FilterControlledCreaturePermanent();
     private static final FilterSpell filterSource = new FilterSpell("blue or black spells");
 
     static {
@@ -38,7 +35,8 @@ public final class AutumnsVeil extends CardImpl {
         this.getSpellAbility().addEffect(new CantBeCounteredControlledEffect(filterTarget1, filterSource, Duration.EndOfTurn));
 
         // and creatures you control can't be the targets of blue or black spells this turn.
-        this.getSpellAbility().addEffect(new CantBeTargetedAllEffect(filterTarget2, filterSource, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantBeTargetedAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, filterSource, Duration.EndOfTurn)
+                .concatBy(", and"));
     }
 
     private AutumnsVeil(final AutumnsVeil card) {
@@ -51,4 +49,3 @@ public final class AutumnsVeil extends CardImpl {
     }
 
 }
-

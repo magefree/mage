@@ -47,12 +47,12 @@ public final class RancidEarth extends CardImpl {
 
 class RancidEarthEffect extends OneShotEffect {
 
-    public RancidEarthEffect() {
+    RancidEarthEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy that land and Rancid Earth deals 1 damage to each creature and each player";
     }
 
-    public RancidEarthEffect(final RancidEarthEffect effect) {
+    private RancidEarthEffect(final RancidEarthEffect effect) {
         super(effect);
     }
 

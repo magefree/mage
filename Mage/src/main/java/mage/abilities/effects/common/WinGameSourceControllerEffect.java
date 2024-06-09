@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author plopman
  */
 
@@ -21,7 +20,7 @@ public class WinGameSourceControllerEffect extends OneShotEffect {
         this.staticText = "you win the game";
     }
 
-    public WinGameSourceControllerEffect(final WinGameSourceControllerEffect effect) {
+    protected WinGameSourceControllerEffect(final WinGameSourceControllerEffect effect) {
         super(effect);
     }
 

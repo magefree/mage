@@ -36,7 +36,7 @@ public final class NeurokInvisimancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NeurokInvisimancer (final NeurokInvisimancer card) {
+    private NeurokInvisimancer(final NeurokInvisimancer card) {
         super(card);
     }
 

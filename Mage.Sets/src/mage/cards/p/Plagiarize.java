@@ -46,7 +46,7 @@ class PlagiarizeEffect extends ReplacementEffectImpl {
         staticText = "Until end of turn, if target player would draw a card, instead that player skips that draw and you draw a card";
     }
     
-    public PlagiarizeEffect(final PlagiarizeEffect effect) {
+    private PlagiarizeEffect(final PlagiarizeEffect effect) {
         super(effect);
     }
     
@@ -54,12 +54,7 @@ class PlagiarizeEffect extends ReplacementEffectImpl {
     public PlagiarizeEffect copy() {
         return new PlagiarizeEffect(this);
     }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
+        
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());

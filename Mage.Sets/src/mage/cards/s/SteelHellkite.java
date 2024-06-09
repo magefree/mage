@@ -68,12 +68,12 @@ public final class SteelHellkite extends CardImpl {
 
 class SteelHellkiteDestroyEffect extends OneShotEffect {
 
-    public SteelHellkiteDestroyEffect() {
+    SteelHellkiteDestroyEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy each nonland permanent with mana value X whose controller was dealt combat damage by {this} this turn";
     }
 
-    public SteelHellkiteDestroyEffect(final SteelHellkiteDestroyEffect effect) {
+    private SteelHellkiteDestroyEffect(final SteelHellkiteDestroyEffect effect) {
         super(effect);
     }
 

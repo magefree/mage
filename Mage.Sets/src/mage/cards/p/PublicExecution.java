@@ -45,12 +45,12 @@ public final class PublicExecution extends CardImpl {
 
 class PublicExecutionEffect extends OneShotEffect {
 
-    public PublicExecutionEffect() {
+    PublicExecutionEffect() {
         super(Outcome.Benefit);
         staticText = "Each other creature that player controls gets -2/-0 until end of turn";
     }
 
-    public PublicExecutionEffect(final PublicExecutionEffect effect) {
+    private PublicExecutionEffect(final PublicExecutionEffect effect) {
         super(effect);
     }
 

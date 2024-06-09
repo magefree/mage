@@ -9,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.turn.CombatDamageStep;
 import mage.game.turn.EndOfCombatStep;
-import mage.game.turn.FirstCombatDamageStep;
 import mage.game.turn.Step;
 import mage.players.Player;
 import org.apache.log4j.Logger;
@@ -23,7 +22,7 @@ import java.util.*;
  */
 public final class CombatUtil {
 
-    private static final List<Permanent> emptyList = new ArrayList<>();
+    private static final List<Permanent> emptyList = Collections.unmodifiableList(new ArrayList<>());
 
     private static final Logger log = Logger.getLogger(CombatUtil.class);
 
@@ -58,7 +57,7 @@ public final class CombatUtil {
             return blockableAttackers;
         }
 
-        if (sumPoisonDamage(attackersThatWontBeBlocked, defender) >= 10 - defender.getCounters().getCount(CounterType.POISON)) {
+        if (sumPoisonDamage(attackersThatWontBeBlocked, defender) >= 10 - defender.getCountersCount(CounterType.POISON)) {
             blockableAttackers.addAll(unblockableAttackers);
             return blockableAttackers;
         }
@@ -199,9 +198,13 @@ public final class CombatUtil {
         return blockers;
     }
 
+    /**
+     * @deprecated TODO: unused, can be deleted?
+     */
     public static SurviveInfo willItSurvive(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
-        Game sim = game.copy();
+        Game sim = game.createSimulationForAI();
 
+        // TODO: bugged, miss combat.clear code (possible bugs - wrong blocker declare by AI on multiple options?)
         Combat combat = sim.getCombat();
         combat.setAttacker(attackingPlayerId);
         combat.setDefenders(sim);
@@ -220,8 +223,8 @@ public final class CombatUtil {
         }
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
 
-        simulateStep(sim, new FirstCombatDamageStep());
-        simulateStep(sim, new CombatDamageStep());
+        simulateStep(sim, new CombatDamageStep(true));
+        simulateStep(sim, new CombatDamageStep(false));
         simulateStep(sim, new EndOfCombatStep());
         // The following commented out call produces random freezes.
         //sim.checkStateAndTriggered();
@@ -231,40 +234,6 @@ public final class CombatUtil {
         }
 
         return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), !sim.getBattlefield().containsPermanent(blocker.getId()));
-    }
-
-    public static SurviveInfo getCombatInfo(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker) {
-        Game sim = game.copy();
-
-        Combat combat = sim.getCombat();
-        combat.setAttacker(attackingPlayerId);
-        combat.setDefenders(sim);
-
-        UUID defenderId = sim.getCombat().getDefenders().iterator().next();
-        boolean triggered = false;
-
-        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));
-
-        sim.checkStateAndTriggered();
-        while (!sim.getStack().isEmpty()) {
-            triggered = true;
-            sim.getStack().resolve(sim);
-            sim.applyEffects();
-        }
-        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
-
-        simulateStep(sim, new FirstCombatDamageStep());
-        simulateStep(sim, new CombatDamageStep());
-        simulateStep(sim, new EndOfCombatStep());
-        // The following commented out call produces random freezes.
-        //sim.checkStateAndTriggered();
-        while (!sim.getStack().isEmpty()) {
-            triggered = true;
-            sim.getStack().resolve(sim);
-            sim.applyEffects();
-        }
-
-        return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), false, sim.getPlayer(defenderId), triggered);
     }
 
     protected static void simulateStep(Game game, Step step) {
@@ -338,8 +307,9 @@ public final class CombatUtil {
 
     public static SurviveInfo willItSurvive2(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
 
-        Game sim = game.copy();
+        Game sim = game.createSimulationForAI();
 
+        // TODO: bugged, miss combat.clear code (possible bugs - wrong blocker declare by AI on multiple options?)
         Combat combat = sim.getCombat();
         combat.setAttacker(attackingPlayerId);
         combat.setDefenders(sim);

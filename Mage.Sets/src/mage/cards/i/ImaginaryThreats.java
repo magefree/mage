@@ -32,7 +32,6 @@ public final class ImaginaryThreats extends CardImpl {
 
         // Creatures target opponent controls attack this turn if able. During that player's next untap step, creatures they control don't untap.
         getSpellAbility().addEffect(new ImaginaryThreatsEffect());
-        getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
         getSpellAbility().addTarget(new TargetOpponent());
         getSpellAbility().addEffect(new DontUntapInPlayersNextUntapStepAllEffect(new FilterCreaturePermanent())
                 .setText("During that player's next untap step, creatures they control don't untap"));
@@ -53,12 +52,12 @@ public final class ImaginaryThreats extends CardImpl {
 
 class ImaginaryThreatsEffect extends OneShotEffect {
 
-    public ImaginaryThreatsEffect() {
+    ImaginaryThreatsEffect() {
         super(Outcome.Detriment);
         staticText = "Creatures target opponent controls attack this turn if able";
     }
 
-    public ImaginaryThreatsEffect(final ImaginaryThreatsEffect effect) {
+    private ImaginaryThreatsEffect(final ImaginaryThreatsEffect effect) {
         super(effect);
     }
 

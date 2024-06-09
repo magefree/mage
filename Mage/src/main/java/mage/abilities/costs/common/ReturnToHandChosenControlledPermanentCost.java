@@ -23,10 +23,10 @@ import java.util.UUID;
 public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
 
     public ReturnToHandChosenControlledPermanentCost(TargetControlledPermanent target) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
-            this.text = "Return " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' '
+            this.text = "return " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' '
                     + target.getTargetName()
                     + (target.getTargetName().endsWith(" you control") ? "" : " you control")
                     + " to their owner's hand";
@@ -37,7 +37,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
         }
     }
 
-    public ReturnToHandChosenControlledPermanentCost(ReturnToHandChosenControlledPermanentCost cost) {
+    private ReturnToHandChosenControlledPermanentCost(final ReturnToHandChosenControlledPermanentCost cost) {
         super(cost);
     }
 
@@ -45,9 +45,9 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            if (targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
+            if (this.getTargets().choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
                 Set<Card> permanentsToReturn = new HashSet<>();
-                for (UUID targetId : targets.get(0).getTargets()) {
+                for (UUID targetId : this.getTargets().get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent == null) {
                         return false;
@@ -63,7 +63,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

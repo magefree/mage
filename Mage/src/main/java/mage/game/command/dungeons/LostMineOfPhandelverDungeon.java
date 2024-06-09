@@ -21,7 +21,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class LostMineOfPhandelverDungeon extends Dungeon {
 
     public LostMineOfPhandelverDungeon() {
-        super("Lost Mine of Phandelver", "AFR");
+        super("Lost Mine of Phandelver");
         // (1) Cave Entrance — Scry 1. (→ 2a or 2b)
         DungeonRoom caveEntrance = new DungeonRoom(
                 "Cave Entrance", new ScryEffect(1, false)

@@ -46,12 +46,12 @@ public final class SenseisDiviningTop extends CardImpl {
 
 class SenseisDiviningTopEffect extends OneShotEffect {
 
-    public SenseisDiviningTopEffect() {
+    SenseisDiviningTopEffect() {
         super(Outcome.ReturnToHand);
         staticText = ", then put {this} on top of its owner's library";
     }
 
-    public SenseisDiviningTopEffect(final SenseisDiviningTopEffect effect) {
+    private SenseisDiviningTopEffect(final SenseisDiviningTopEffect effect) {
         super(effect);
     }
 

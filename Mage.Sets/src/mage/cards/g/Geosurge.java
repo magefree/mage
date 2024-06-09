@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -13,6 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,6 +44,15 @@ class GeosurgeConditionalMana extends ConditionalMana {
         super(Mana.RedMana(7));
         staticText = "Spend this mana only to cast artifact or creature spells";
         addCondition(new GeosurgeManaCondition());
+    }
+
+    private GeosurgeConditionalMana(final GeosurgeConditionalMana conditionalMana) {
+        super(conditionalMana);
+    }
+
+    @Override
+    public GeosurgeConditionalMana copy() {
+        return new GeosurgeConditionalMana(this);
     }
 }
 

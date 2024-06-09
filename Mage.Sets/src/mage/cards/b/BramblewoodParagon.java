@@ -62,7 +62,7 @@ class BramblewoodParagonReplacementEffect extends ReplacementEffectImpl {
         staticText = "Each other Warrior creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    BramblewoodParagonReplacementEffect(BramblewoodParagonReplacementEffect effect) {
+    private BramblewoodParagonReplacementEffect(final BramblewoodParagonReplacementEffect effect) {
         super(effect);
     }
 

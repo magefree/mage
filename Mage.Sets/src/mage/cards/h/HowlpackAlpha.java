@@ -22,10 +22,8 @@ import java.util.UUID;
  */
 public final class HowlpackAlpha extends CardImpl {
 
-    private static final String ruleText = "At the beginning of your end step, create a 2/2 green Wolf creature token";
-
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("Werewolf and Wolf creatures");
+            = new FilterCreaturePermanent("each other creature you control that's a Werewolf or a Wolf");
 
     static {
         filter.add(Predicates.or(

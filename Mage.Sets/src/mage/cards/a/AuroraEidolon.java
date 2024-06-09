@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,15 +11,13 @@ import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class AuroraEidolon extends CardImpl {
@@ -37,7 +34,12 @@ public final class AuroraEidolon extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // Whenever you cast a multicolored spell, you may return Aurora Eidolon from your graveyard to your hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToHandEffect(),
+                StaticFilters.FILTER_SPELL_A_MULTICOLORED,
+                true, SetTargetPointer.NONE
+        ));
     }
 
     private AuroraEidolon(final AuroraEidolon card) {

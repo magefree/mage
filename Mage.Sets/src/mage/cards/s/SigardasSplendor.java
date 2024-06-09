@@ -17,6 +17,7 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -55,9 +56,8 @@ public final class SigardasSplendor extends CardImpl {
         return new SigardasSplendor(this);
     }
 
-    static String getKey(Ability source, int offset) {
-        return "SigardasSplendor_" + source.getControllerId() + "_" + source.getSourceId()
-                + "_" + (source.getSourceObjectZoneChangeCounter() + offset);
+    static String getKey(Game game, Ability source, int offset) {
+        return "SigardasSplendor_" + source.getSourceId() + "_" + (offset + CardUtil.getActualSourceObjectZoneChangeCounter(game, source));
     }
 }
 
@@ -69,7 +69,7 @@ enum SigardasSplendorHint implements Hint {
         if (ability.getSourcePermanentIfItStillExists(game) == null) {
             return null;
         }
-        Object object = game.getState().getValue(SigardasSplendor.getKey(ability, 0));
+        Object object = game.getState().getValue(SigardasSplendor.getKey(game, ability, 0));
         return "Last noted life total: " + (object != null ? (Integer) object : "None");
     }
 
@@ -101,7 +101,8 @@ class SigardasSplendorNoteEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        game.getState().setValue(SigardasSplendor.getKey(source, -1), player.getLife());
+        game.informPlayers(player.getLogName() + " notes their life total of " + player.getLife());
+        game.getState().setValue(SigardasSplendor.getKey(game, source, 1), player.getLife());
         return true;
     }
 }
@@ -129,12 +130,13 @@ class SigardasSplendorDrawEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        String key = SigardasSplendor.getKey(source, 0);
+        String key = SigardasSplendor.getKey(game, source, 0);
         Object object = game.getState().getValue(key);
         int notedLife = object instanceof Integer ? (Integer) object : Integer.MIN_VALUE;
         if (player.getLife() >= notedLife) {
             player.drawCards(1, source, game);
         }
+        game.informPlayers(player.getLogName() + " notes their life total of " + player.getLife());
         game.getState().setValue(key, player.getLife());
         return true;
     }

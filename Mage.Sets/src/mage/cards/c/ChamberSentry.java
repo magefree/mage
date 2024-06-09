@@ -95,7 +95,7 @@ class ChamberSentryRemoveVariableCountersSourceCost extends VariableCostImpl {
         }
     }
 
-    public ChamberSentryRemoveVariableCountersSourceCost(final ChamberSentryRemoveVariableCountersSourceCost cost) {
+    private ChamberSentryRemoveVariableCountersSourceCost(final ChamberSentryRemoveVariableCountersSourceCost cost) {
         super(cost);
         this.minimalCountersToPay = cost.minimalCountersToPay;
         this.counterName = cost.counterName;

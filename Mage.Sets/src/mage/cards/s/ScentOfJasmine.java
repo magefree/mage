@@ -52,7 +52,7 @@ class ScentOfJasmineEffect extends OneShotEffect {
                 + "You gain 2 life for each card revealed this way";
     }
 
-    public ScentOfJasmineEffect(final ScentOfJasmineEffect effect) {
+    private ScentOfJasmineEffect(final ScentOfJasmineEffect effect) {
         super(effect);
     }
 

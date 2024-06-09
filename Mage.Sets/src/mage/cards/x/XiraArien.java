@@ -25,7 +25,7 @@ public final class XiraArien extends CardImpl {
 
     public XiraArien(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.INSECT);
         this.subtype.add(SubType.WIZARD);
 

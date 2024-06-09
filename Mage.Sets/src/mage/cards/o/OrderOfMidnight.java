@@ -36,6 +36,8 @@ public final class OrderOfMidnight extends AdventureCard {
         // Return target creature card from your graveyard to your hand.
         this.getSpellCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+
+        this.finalizeAdventure();
     }
 
     private OrderOfMidnight(final OrderOfMidnight card) {

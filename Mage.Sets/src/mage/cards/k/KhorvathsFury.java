@@ -46,7 +46,7 @@ class KhorvathsFuryEffect extends OneShotEffect {
                 + " {this} deals damage to each foe equal to the number of cards in their hand";
     }
 
-    KhorvathsFuryEffect(final KhorvathsFuryEffect effect) {
+    private KhorvathsFuryEffect(final KhorvathsFuryEffect effect) {
         super(effect);
     }
 
@@ -67,15 +67,16 @@ class KhorvathsFuryEffect extends OneShotEffect {
         for (Player player : choice.getFriends()) {
             if (player != null) {
                 int cardsInHand = player.getHand().size();
-                player.discard(cardsInHand, false, false, source, game);
                 if (cardsInHand > 0) {
+                    player.discard(cardsInHand, false, false, source, game);
                     cardsToDraw.put(player.getId(), cardsInHand);
                 }
             }
         }
         for (Player player : choice.getFriends()) {
             if (player != null) {
-                player.drawCards(cardsToDraw.get(player.getId()) + 1, source, game);
+                // If a friend has zero cards in hand, that player discards nothing and draws one card. (2018-06-08)
+                player.drawCards(cardsToDraw.getOrDefault(player.getId(), 0) + 1, source, game);
             }
         }
         for (Player player : choice.getFoes()) {

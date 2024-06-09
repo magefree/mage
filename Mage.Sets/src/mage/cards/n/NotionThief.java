@@ -53,23 +53,18 @@ public final class NotionThief extends CardImpl {
 
 class NotionThiefReplacementEffect extends ReplacementEffectImpl {
 
-    public NotionThiefReplacementEffect() {
+    NotionThiefReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If an opponent would draw a card except the first one they draw in each of their draw steps, instead that player skips that draw and you draw a card";
     }
 
-    public NotionThiefReplacementEffect(final NotionThiefReplacementEffect effect) {
+    private NotionThiefReplacementEffect(final NotionThiefReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public NotionThiefReplacementEffect copy() {
         return new NotionThiefReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -89,7 +84,7 @@ class NotionThiefReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            if (game.isActivePlayer(event.getPlayerId()) && game.getStep().getType() == PhaseStep.DRAW) {
+            if (game.isActivePlayer(event.getPlayerId()) && game.getTurnStepType() == PhaseStep.DRAW) {
                 CardsDrawnDuringDrawStepWatcher watcher = game.getState().getWatcher(CardsDrawnDuringDrawStepWatcher.class);
                 if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
                     return true;

@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -20,7 +19,7 @@ public class LoseGameTargetPlayerEffect extends OneShotEffect {
         this.staticText = "that player loses the game";
     }
 
-    public LoseGameTargetPlayerEffect(final LoseGameTargetPlayerEffect effect) {
+    protected LoseGameTargetPlayerEffect(final LoseGameTargetPlayerEffect effect) {
         super(effect);
     }
 

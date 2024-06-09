@@ -15,6 +15,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 
 import mage.client.util.Command;
@@ -45,7 +48,7 @@ public class HoverButton extends JPanel implements MouseListener {
 
     private String topText;
     private Image topTextImage;
-    private Image topTextImageRight;
+    private final List<Image> topTextImagesRight = new ArrayList<>();
     private String centerText;
 
     private boolean wasHovered = false;
@@ -57,6 +60,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command observer = null;
     private Command onHover = null;
     private Color textColor = Color.white;
+    private Color topTextColor = null;
     private final Rectangle centerTextArea = new Rectangle(5, 18, 75, 40);
     private Color centerTextColor = new Color(200, 210, 0, 200);
     private Color origCenterTextColor = new Color(200, 210, 0, 200);
@@ -152,14 +156,17 @@ public class HoverButton extends JPanel implements MouseListener {
             topTextOffsetX = calculateOffsetForTop(g2d, topText);
             g2d.setColor(textBGColor);
             g2d.drawString(topText, topTextOffsetX + 1, 14);
-            g2d.setColor(textColor);
+            g2d.setColor(topTextColor != null ? topTextColor : textColor);
             g2d.drawString(topText, topTextOffsetX, 13);
         }
         if (topTextImage != null) {
             g.drawImage(topTextImage, 4, 3, this);
         }
-        if (topTextImageRight != null) {
-            g.drawImage(topTextImageRight, this.getWidth() - 20, 3, this);
+
+        int offset = 0;
+        for (Image img : topTextImagesRight) {
+            g.drawImage(img, this.getWidth() - 20, 3 + offset, this);
+            offset += 20;
         }
 
         if (centerText != null) {
@@ -235,6 +242,15 @@ public class HoverButton extends JPanel implements MouseListener {
         this.textColor = textColor;
     }
 
+    /**
+     * Overrides textColor for the upper text if non-null.
+     * If null, return back to textColor.
+     * @param textColor
+     */
+    public void setTopTextColor(Color textColor) {
+        this.topTextColor = textColor;
+    }
+
     public void setOverlayImage(Image image) {
         this.overlayImage = image;
         this.overlayImageSize = new Dimension(image.getWidth(null), image.getHeight(null));
@@ -261,10 +277,11 @@ public class HoverButton extends JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (SwingUtilities.isLeftMouseButton(e)) {
-            if (isEnabled() && observer != null) {
-                observer.execute();
-            }
+        if (!SwingUtilities.isLeftMouseButton(e)) {
+            return;
+        }
+        if (isEnabled() && observer != null) {
+            observer.execute();
         }
     }
 
@@ -347,8 +364,12 @@ public class HoverButton extends JPanel implements MouseListener {
         this.textOffsetX = -1; // rest for new calculation
     }
 
-    public void setTopTextImageRight(Image topTextImage) {
-        this.topTextImageRight = topTextImage;
+    public void addTopTextImageRight(Image topTextImage) {
+        this.topTextImagesRight.add(topTextImage);
+    }
+
+    public void clearTopTextImagesRight() {
+        this.topTextImagesRight.clear();
     }
 
     public void setCenterText(String centerText) {

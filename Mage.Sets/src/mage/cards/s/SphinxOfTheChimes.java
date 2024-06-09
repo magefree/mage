@@ -60,7 +60,7 @@ class DiscardTwoNonlandCardsWithTheSameNameCost extends DiscardTargetCost {
         super(new TargetTwoNonLandCardsWithSameNameInHand());
     }
 
-    public DiscardTwoNonlandCardsWithTheSameNameCost(DiscardTwoNonlandCardsWithTheSameNameCost cost) {
+    private DiscardTwoNonlandCardsWithTheSameNameCost(final DiscardTwoNonlandCardsWithTheSameNameCost cost) {
         super(cost);
     }
 
@@ -74,10 +74,10 @@ class DiscardTwoNonlandCardsWithTheSameNameCost extends DiscardTargetCost {
 class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
 
     public TargetTwoNonLandCardsWithSameNameInHand() {
-        super(2, 2, new FilterNonlandCard("two nonland cards with the same name"));
+        super(2, 2, new FilterNonlandCard("nonland cards with the same name"));
     }
 
-    public TargetTwoNonLandCardsWithSameNameInHand(final TargetTwoNonLandCardsWithSameNameInHand target) {
+    private TargetTwoNonLandCardsWithSameNameInHand(final TargetTwoNonLandCardsWithSameNameInHand target) {
         super(target);
     }
 

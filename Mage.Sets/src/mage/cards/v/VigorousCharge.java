@@ -58,7 +58,7 @@ class VigorousChargeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public VigorousChargeTriggeredAbility(final VigorousChargeTriggeredAbility ability) {
+    private VigorousChargeTriggeredAbility(final VigorousChargeTriggeredAbility ability) {
         super(ability);
     }
 

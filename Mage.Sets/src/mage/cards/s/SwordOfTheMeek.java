@@ -42,7 +42,7 @@ public final class SwordOfTheMeek extends CardImpl {
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
         // Whenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.GRAVEYARD, new SwordOfTheMeekEffect(), filter, true, SetTargetPointer.PERMANENT, ""));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.GRAVEYARD, new SwordOfTheMeekEffect(), filter, true, SetTargetPointer.PERMANENT));
     }
 
     private SwordOfTheMeek(final SwordOfTheMeek card) {
@@ -57,12 +57,12 @@ public final class SwordOfTheMeek extends CardImpl {
 
 class SwordOfTheMeekEffect extends OneShotEffect {
 
-    public SwordOfTheMeekEffect() {
+    SwordOfTheMeekEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may return {this} from your graveyard to the battlefield, then attach it to that creature";
     }
 
-    public SwordOfTheMeekEffect(final SwordOfTheMeekEffect effect) {
+    private SwordOfTheMeekEffect(final SwordOfTheMeekEffect effect) {
         super(effect);
     }
 

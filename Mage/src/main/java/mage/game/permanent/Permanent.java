@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -75,6 +74,14 @@ public interface Permanent extends Card, Controllable {
 
     void setRenowned(boolean value);
 
+    boolean isSuspected();
+
+    void setSuspected(boolean value, Game game, Ability source);
+
+    boolean isPrototyped();
+
+    void setPrototyped(boolean value);
+
     int getClassLevel();
 
     /**
@@ -89,11 +96,21 @@ public interface Permanent extends Card, Controllable {
 
     Set<UUID> getGoadingPlayers();
 
+    void chooseProtector(Game game, Ability source);
+
+    void setProtectorId(UUID playerId);
+
+    UUID getProtectorId();
+
+    boolean isProtectedBy(UUID playerId);
+
+    void setCanBeSacrificed(boolean canBeSacrificed);
+
+    boolean canBeSacrificed();
+
     void setCardNumber(String cid);
 
     void setExpansionSetCode(String expansionSetCode);
-
-    void setRarity(Rarity rarity);
 
     void setFlipCard(boolean flipCard);
 
@@ -107,16 +124,16 @@ public interface Permanent extends Card, Controllable {
 
     int getAttachedToZoneChangeCounter();
 
-    void attachTo(UUID permanentId, Ability source, Game game);
+    void attachTo(UUID attachToObjectId, Ability source, Game game);
 
     void unattach(Game game);
 
-    boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
+    boolean canBeTargetedBy(MageObject sourceObject, UUID controllerId, Ability source, Game game);
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
     /**
-     * @param attachment
+     * @param attachment can be any object: card, permanent, token
      * @param source     can be null for default checks like state base
      * @param game
      * @param silentMode - use it to ignore warning message for users (e.g. for
@@ -174,7 +191,14 @@ public interface Permanent extends Card, Controllable {
 
     void reset(Game game);
 
-    MageObject getBasicMageObject(Game game);
+    /**
+     * Return original/blueprint/printable object (token or card)
+     * <p>
+     * Original object used on each game cycle for permanent reset and apply all active effects
+     * <p>
+     * Warning, all changes to the original object will be applied forever
+     */
+    MageObject getBasicMageObject();
 
     boolean destroy(Ability source, Game game);
 
@@ -201,10 +225,13 @@ public interface Permanent extends Card, Controllable {
      * Add abilities to the permanent, can be used in effects
      *
      * @param ability
-     * @param sourceId
+     * @param sourceId can be null
      * @param game
+     * @return can be null for exists abilities
      */
-    void addAbility(Ability ability, UUID sourceId, Game game);
+    Ability addAbility(Ability ability, UUID sourceId, Game game);
+
+    Ability addAbility(Ability ability, UUID sourceId, Game game, boolean fromExistingObject);
 
     void removeAllAbilities(UUID sourceId, Game game);
 
@@ -215,6 +242,8 @@ public interface Permanent extends Card, Controllable {
     void incrementLoyaltyActivationsAvailable();
 
     void incrementLoyaltyActivationsAvailable(int max);
+
+    void setLoyaltyActivationsAvailable(int loyaltyActivationsAvailable);
 
     void addLoyaltyUsed();
 
@@ -289,6 +318,16 @@ public interface Permanent extends Card, Controllable {
     boolean canBlock(UUID attackerId, Game game);
 
     boolean canBlockAny(Game game);
+
+    /**
+     * Fast check for attacking possibilities (is it possible to attack permanent/planeswalker/battle)
+     *
+     * @param attackerId        creature to attack, can be null
+     * @param defendingPlayerId defending player
+     * @param game
+     * @return
+     */
+    boolean canBeAttacked(UUID attackerId, UUID defendingPlayerId, Game game);
 
     /**
      * Checks by restriction effects if the permanent can use activated
@@ -403,9 +442,25 @@ public interface Permanent extends Card, Controllable {
 
     boolean isMorphed();
 
+    void setDisguised(boolean value);
+
+    boolean isDisguised();
+
     void setManifested(boolean value);
 
     boolean isManifested();
+
+    void setCloaked(boolean value);
+
+    boolean isCloaked();
+
+    boolean isRingBearer();
+
+    void setRingBearer(Game game, boolean value);
+
+    boolean isSolved();
+
+    boolean solve(Game game, Ability source);
 
     @Override
     Permanent copy();

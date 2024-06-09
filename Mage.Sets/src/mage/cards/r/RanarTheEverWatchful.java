@@ -31,7 +31,7 @@ public final class RanarTheEverWatchful extends CardImpl {
     public RanarTheEverWatchful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -80,8 +80,8 @@ class RanarTheEverWatchfulCostReductionEffect extends CostModificationEffectImpl
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        abilityToModify.getManaCostsToPay().clear();
-        abilityToModify.getManaCostsToPay().addAll(new ManaCostsImpl<>("{0}"));
+        abilityToModify.clearManaCostsToPay();
+        abilityToModify.addManaCostsToPay(new ManaCostsImpl<>("{0}"));
         return true;
     }
 
@@ -101,7 +101,7 @@ class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), false);
     }
 
-    RanarTheEverWatchfulTriggeredAbility(final RanarTheEverWatchfulTriggeredAbility ability) {
+    private RanarTheEverWatchfulTriggeredAbility(final RanarTheEverWatchfulTriggeredAbility ability) {
         super(ability);
     }
 

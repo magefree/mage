@@ -77,7 +77,7 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
         staticText = "Any player may cast creature cards with mana value 3 or less without paying their mana cost";
     }
 
-    public AlurenRuleEffect(final AlurenRuleEffect effect) {
+    private AlurenRuleEffect(final AlurenRuleEffect effect) {
         super(effect);
     }
 

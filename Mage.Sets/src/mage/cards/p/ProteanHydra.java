@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -19,16 +17,16 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class ProteanHydra extends CardImpl {
 
     public ProteanHydra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{G}");
         this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(0);
@@ -38,7 +36,9 @@ public final class ProteanHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageAndRemoveCountersEffect(true)));
+        this.addAbility(new SimpleStaticAbility(
+                new PreventDamageAndRemoveCountersEffect(true, false, true)
+        ), PreventDamageAndRemoveCountersEffect.createWatcher());
 
         // Whenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.
         this.addAbility(new ProteanHydraAbility());
@@ -54,70 +54,68 @@ public final class ProteanHydra extends CardImpl {
         return new ProteanHydra(this);
     }
 
-    class ProteanHydraAbility extends TriggeredAbilityImpl {
+}
 
-        public ProteanHydraAbility() {
-            super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), false);
-        }
+class ProteanHydraAbility extends TriggeredAbilityImpl {
 
-        public ProteanHydraAbility(final ProteanHydraAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public ProteanHydraAbility copy() {
-            return new ProteanHydraAbility(this);
-        }
-
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getData().equals("+1/+1") && event.getTargetId().equals(this.getSourceId())) {
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public String getRule() {
-            return "Whenever a +1/+1 counter is removed from {this}, put two +1/+1 counters on it at the beginning of the next end step.";
-        }
-
+    ProteanHydraAbility() {
+        super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), false);
     }
 
-    static class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility {
-
-        public ProteanHydraDelayedTriggeredAbility() {
-            super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
-        }
-
-        public ProteanHydraDelayedTriggeredAbility(final ProteanHydraDelayedTriggeredAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public ProteanHydraDelayedTriggeredAbility copy() {
-            return new ProteanHydraDelayedTriggeredAbility(this);
-        }
-
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            return true;
-        }
-
-        @Override
-        public String getRule() {
-            return "Put two +1/+1 counters on {this} at the beginning of the next end step";
-        }
-
+    private ProteanHydraAbility(final ProteanHydraAbility ability) {
+        super(ability);
     }
+
+    @Override
+    public ProteanHydraAbility copy() {
+        return new ProteanHydraAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER_REMOVED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getData().equals(CounterType.P1P1.getName()) && event.getTargetId().equals(this.getSourceId());
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a +1/+1 counter is removed from {this}, put two +1/+1 counters on it at the beginning of the next end step.";
+    }
+
+}
+
+class ProteanHydraDelayedTriggeredAbility extends DelayedTriggeredAbility {
+
+    ProteanHydraDelayedTriggeredAbility() {
+        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
+    }
+
+    private ProteanHydraDelayedTriggeredAbility(final ProteanHydraDelayedTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ProteanHydraDelayedTriggeredAbility copy() {
+        return new ProteanHydraDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "Put two +1/+1 counters on {this} at the beginning of the next end step";
+    }
+
 }

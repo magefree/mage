@@ -32,7 +32,7 @@ public final class ErtaisScorn extends CardImpl {
                         new ManaCostsImpl<>("{U}"),
                         ErtaisScornCondition.instance
                 )
-        ).setRuleAtTheTop(true), new CastSpellLastTurnWatcher());
+        ).setRuleAtTheTop(true));
 
         // Counter target spell.
         this.getSpellAbility().addTarget(new TargetSpell());

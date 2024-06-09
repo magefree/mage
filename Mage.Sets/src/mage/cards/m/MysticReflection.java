@@ -107,7 +107,7 @@ class MysticReflectionReplacementEffect extends ReplacementEffectImpl {
                 + "enter the battlefield this turn, they enter as copies of {this}";
     }
 
-    public MysticReflectionReplacementEffect(MysticReflectionReplacementEffect effect) {
+    private MysticReflectionReplacementEffect(final MysticReflectionReplacementEffect effect) {
         super(effect);
         this.enteredThisTurn = effect.enteredThisTurn;
         this.identifier = effect.identifier;
@@ -199,7 +199,7 @@ class MysticReflectionGainAbilityEffect extends ContinuousEffectImpl {
         this.ability = ability;
     }
 
-    public MysticReflectionGainAbilityEffect(final MysticReflectionGainAbilityEffect effect) {
+    private MysticReflectionGainAbilityEffect(final MysticReflectionGainAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability;
     }

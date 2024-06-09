@@ -43,7 +43,7 @@ class BattleStrainTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
-    public BattleStrainTriggeredAbility(final BattleStrainTriggeredAbility ability) {
+    private BattleStrainTriggeredAbility(final BattleStrainTriggeredAbility ability) {
         super(ability);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -16,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -27,7 +26,7 @@ import mage.target.common.TargetCardInLibrary;
 public final class GodoBanditWarlord extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Equipment card");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent(SubType.SAMURAI);
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.SAMURAI);
 
     static {
         filter.add(SubType.EQUIPMENT.getPredicate());
@@ -36,7 +35,7 @@ public final class GodoBanditWarlord extends CardImpl {
 
     public GodoBanditWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BARBARIAN);
 
@@ -44,7 +43,7 @@ public final class GodoBanditWarlord extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Godo, Bandit Warlord enters the battlefield, you may search your library for an Equipment card and put it onto the battlefield. If you do, shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false), true));
 
         // Whenever Godo attacks for the first time each turn, untap it and all Samurai you control. After this phase, there is an additional combat phase.
         Ability ability = new AttacksFirstTimeTriggeredAbility(new UntapSourceEffect().setText("untap it"), false);

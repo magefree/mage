@@ -7,10 +7,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CommanderCardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,8 +50,9 @@ public final class SkyfirePhoenix extends CardImpl {
 class SkyfirePhoenixTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
     SkyfirePhoenixTriggeredAbility() {
-        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), StaticFilters.FILTER_SPELL, false, false);
-        this.rule = "When you cast your commander, return {this} from your graveyard to the battlefield.";
+        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
+                StaticFilters.FILTER_SPELL, false, SetTargetPointer.NONE);
+        setTriggerPhrase("When you cast your commander, ");
     }
 
     private SkyfirePhoenixTriggeredAbility(final SkyfirePhoenixTriggeredAbility ability) {

@@ -11,7 +11,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.BoostCounter;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
@@ -61,12 +61,12 @@ public final class LesserWerewolf extends CardImpl {
 
 class LesserWerewolfEffect extends OneShotEffect {
 
-    public LesserWerewolfEffect() {
+    LesserWerewolfEffect() {
         super(Outcome.Detriment);
         this.staticText = "If {this}'s power is 1 or more, it gets -1/-0 until end of turn and put a -0/-1 counter on target creature blocking or blocked by {this}";
     }
 
-    public LesserWerewolfEffect(final LesserWerewolfEffect effect) {
+    private LesserWerewolfEffect(final LesserWerewolfEffect effect) {
         super(effect);
     }
 
@@ -79,13 +79,13 @@ class LesserWerewolfEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source)); // must be valid target
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source)); // must be valid target
         if (controller == null || sourcePermanent == null || targetPermanent == null) {
             return false;
         }
         if (sourcePermanent.getPower().getValue() >= 1) {
             game.addEffect(new BoostSourceEffect(-1, 0, Duration.EndOfTurn), source);
-            new AddCountersTargetEffect(new BoostCounter(0, -1), outcome).apply(game, source);
+            new AddCountersTargetEffect(CounterType.M0M1.createInstance(), outcome).apply(game, source);
         }
         return true;
     }

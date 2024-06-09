@@ -1,11 +1,10 @@
 package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.file.Paths;
-
-import static org.junit.Assert.assertEquals;
 
 public class CodDeckImportTest {
 
@@ -29,16 +28,14 @@ public class CodDeckImportTest {
                 errors,
                 false
         );
-        assertEquals("Deck Name", deck.getName());
+        Assert.assertEquals("Could not find card: '@#$NOT A REAL CARD NAME@#$'\n", errors.toString());
 
+        Assert.assertEquals("Deck Name", deck.getName());
         TestDeckChecker.checker()
                 .addMain("Forest", 12)
-                .addMain("Razorverge Thicket", 100)
+                .addMain("Razorverge Thicket", 5)
                 .addMain("Avacyn's Pilgrim", 1)
                 .addSide("War Priest of Thune", 3)
-                .verify(deck, 113, 3);
-
-        assertEquals("Could not find card: '@#$NOT A REAL CARD NAME@#$'\n", errors.toString());
+                .verify(deck, 18, 3);
     }
-
 }

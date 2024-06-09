@@ -52,7 +52,7 @@ class ClergyOfTheHolyNimbusReplacementEffect extends ReplacementEffectImpl {
         staticText = "If {this} would be destroyed, regenerate it";
     }
 
-    ClergyOfTheHolyNimbusReplacementEffect(ClergyOfTheHolyNimbusReplacementEffect effect) {
+    private ClergyOfTheHolyNimbusReplacementEffect(final ClergyOfTheHolyNimbusReplacementEffect effect) {
         super(effect);
     }
 

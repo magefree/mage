@@ -23,7 +23,7 @@ public final class Disperse extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public Disperse (final Disperse card) {
+    private Disperse(final Disperse card) {
         super(card);
     }
 

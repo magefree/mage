@@ -26,6 +26,23 @@
     <fileSets>
         <fileSet>
             <filtered>true</filtered>
+            <directory>../</directory>
+            <includes>
+                <include>LICENSE.txt</include>
+                <include>readme.md</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <filtered>true</filtered>
+            <directory>${project.build.directory}/docs/</directory>
+            <includes>
+                <include>readme.html</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <filtered>true</filtered>
             <directory>release/</directory>
             <excludes>
                 <exclude>*.sh</exclude>

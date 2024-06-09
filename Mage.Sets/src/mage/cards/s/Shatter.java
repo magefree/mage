@@ -21,7 +21,7 @@ public final class Shatter extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public Shatter (final Shatter card) {
+    private Shatter(final Shatter card) {
         super(card);
     }
 

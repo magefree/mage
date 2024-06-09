@@ -21,7 +21,7 @@ public final class Moonlace extends CardImpl {
 
         // Target spell or permanent becomes colorless.
         this.getSpellAbility().addTarget(new TargetSpellOrPermanent());
-        this.getSpellAbility().addEffect(new BecomesColorTargetEffect(new ObjectColor(), Duration.Custom));
+        this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.COLORLESS, Duration.Custom));
     }
 
     private Moonlace(final Moonlace card) {

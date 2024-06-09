@@ -43,7 +43,8 @@ public final class CorrosiveOoze extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Corrosive Ooze blocks or becomes blocked by an equipped creature, destroy all Equipment attached to that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new CorrosiveOozeEffect()), true);
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new CorrosiveOozeEffect())
+                .setTriggerPhrase(""), true);
         this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(effect, filter), new CorrosiveOozeCombatWatcher());
     }
 
@@ -59,12 +60,12 @@ public final class CorrosiveOoze extends CardImpl {
 
 class CorrosiveOozeEffect extends OneShotEffect {
 
-    public CorrosiveOozeEffect() {
+    CorrosiveOozeEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy all Equipment attached to that creature at end of combat";
     }
 
-    public CorrosiveOozeEffect(final CorrosiveOozeEffect effect) {
+    private CorrosiveOozeEffect(final CorrosiveOozeEffect effect) {
         super(effect);
     }
 
@@ -153,7 +154,7 @@ class CorrosiveOozeCombatWatcher extends Watcher {
 
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-                if (game.getTurn() != null && TurnPhase.COMBAT == game.getTurn().getPhaseType()) {
+                if (game.getTurn() != null && TurnPhase.COMBAT == game.getTurnPhaseType()) {
                     // Check if a previous blocked or blocked by creatures is leaving the battlefield
                     for (Map.Entry<MageObjectReference, Set<MageObjectReference>> entry : oozeBlocksOrBlocked.entrySet()) {
                         for (MageObjectReference mor : entry.getValue()) {

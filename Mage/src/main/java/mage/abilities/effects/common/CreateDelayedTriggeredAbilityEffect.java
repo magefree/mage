@@ -6,6 +6,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
+import mage.target.targetpointer.TargetPointer;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -31,7 +32,7 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         this.rulePrefix = rulePrefix;
     }
 
-    public CreateDelayedTriggeredAbilityEffect(final CreateDelayedTriggeredAbilityEffect effect) {
+    protected CreateDelayedTriggeredAbilityEffect(final CreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         this.copyTargets = effect.copyTargets;
@@ -48,7 +49,7 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         DelayedTriggeredAbility delayedAbility = ability.copy();
         if (this.copyTargets) {
             if (source.getTargets().isEmpty()) {
-                delayedAbility.getEffects().setTargetPointer(targetPointer);
+                delayedAbility.getEffects().setTargetPointer(this.getTargetPointer().copy());
             } else {
                 delayedAbility.getTargets().addAll(source.getTargets());
                 for (Effect effect : delayedAbility.getEffects()) {
@@ -76,5 +77,11 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
     public void setValue(String key, Object value) {
         ability.getEffects().setValue(key, value);
         super.setValue(key, value);
+    }
+
+    @Override
+    public Effect setTargetPointer(TargetPointer targetPointer) {
+        ability.getEffects().setTargetPointer(targetPointer);
+        return super.setTargetPointer(targetPointer);
     }
 }

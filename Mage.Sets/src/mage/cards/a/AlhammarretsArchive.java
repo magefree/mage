@@ -21,7 +21,7 @@ public final class AlhammarretsArchive extends CardImpl {
 
     public AlhammarretsArchive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // If you would gain life, you gain twice that much life instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AlhammarretsArchiveEffect()));
@@ -87,11 +87,6 @@ class AlhammarretsArchiveReplacementEffect extends ReplacementEffectImpl {
     @Override
     public AlhammarretsArchiveReplacementEffect copy() {
         return new AlhammarretsArchiveReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

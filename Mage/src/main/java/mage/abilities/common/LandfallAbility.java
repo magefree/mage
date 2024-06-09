@@ -37,7 +37,7 @@ public class LandfallAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a land enters the battlefield under your control, ");
     }
 
-    public LandfallAbility(final LandfallAbility ability) {
+    protected LandfallAbility(final LandfallAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.triggeringLand = ability.triggeringLand;

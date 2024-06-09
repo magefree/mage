@@ -56,7 +56,7 @@ public final class CanoptekWraith extends CardImpl {
                                 "pay {3} and sacrifice it"
                         )
                 ), false
-        ).withFlavorWord("Transdimensional Scout"));
+        ).setTriggerPhrase("When {this} deals combat damage to a player, ").withFlavorWord("Transdimensional Scout"));
     }
 
     private CanoptekWraith(final CanoptekWraith card) {
@@ -95,7 +95,7 @@ class CanoptekWraithEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {

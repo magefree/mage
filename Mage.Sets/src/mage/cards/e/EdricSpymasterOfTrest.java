@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -25,7 +24,7 @@ public final class EdricSpymasterOfTrest extends CardImpl {
 
     public EdricSpymasterOfTrest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ROGUE);
 
@@ -52,7 +51,7 @@ class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1, true), false);
     }
 
-    public EdricSpymasterOfTrestTriggeredAbility(final EdricSpymasterOfTrestTriggeredAbility ability) {
+    private EdricSpymasterOfTrestTriggeredAbility(final EdricSpymasterOfTrestTriggeredAbility ability) {
         super(ability);
     }
 
@@ -80,6 +79,6 @@ class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature deals combat damage to one of your opponents, its controller may draw a card";
+        return "Whenever a creature deals combat damage to one of your opponents, its controller may draw a card.";
     }
 }

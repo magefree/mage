@@ -2,7 +2,7 @@
 package mage.game;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 
@@ -16,13 +16,12 @@ public class GameStates implements Serializable {
     private final List<GameState> states;
 
     public GameStates() {
-        this.states = new LinkedList<>();
+        this.states = new ArrayList<>();
     }
 
     public void save(GameState gameState) {
-//        states.add(new Copier<GameState>().copyCompressed(gameState));
         states.add(gameState.copy());
-        logger.trace("Saved game state: " + states.size());
+        //logger.warn("states size: " + states.size());
     }
 
     public int getSize() {
@@ -35,7 +34,6 @@ public class GameStates implements Serializable {
                 states.remove(states.size() - 1);
             }
             logger.trace("Rolling back state: " + index);
-//            return new Copier<GameState>().uncompressCopy(states.get(index));
             return states.get(index);
         }
         return null;
@@ -52,7 +50,6 @@ public class GameStates implements Serializable {
 
     public GameState get(int index) {
         if (index < states.size()) {
-//             return new Copier<GameState>().uncompressCopy(states.get(index));
             return states.get(index);
         }
         return null;

@@ -29,7 +29,8 @@ public final class HuntersAmbush extends CardImpl {
 
 
         // Prevent all combat damage that would be dealt by nongreen creatures this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true)
+                .setText("prevent all combat damage that would be dealt by nongreen creatures this turn"));
     }
 
     private HuntersAmbush(final HuntersAmbush card) {

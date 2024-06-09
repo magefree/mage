@@ -138,9 +138,7 @@ class DauthiVoidwalkerPlayEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetCardInExile target = new TargetCardInExile(
-                0, 1, filter, null, true
-        );
+        TargetCardInExile target = new TargetCardInExile(0, 1, filter);
         player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
@@ -149,6 +147,7 @@ class DauthiVoidwalkerPlayEffect extends OneShotEffect {
         game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(
                 Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true, false
         ).setTargetPointer(new FixedTarget(card, game)), source);
+        game.informPlayers(player.getLogName() + " chose " + card.getLogName());
         return true;
     }
 }

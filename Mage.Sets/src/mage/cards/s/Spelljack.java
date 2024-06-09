@@ -48,7 +48,7 @@ class SpelljackEffect extends OneShotEffect {
         this.staticText = "Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may play it without paying its mana cost for as long as it remains exiled";
     }
 
-    SpelljackEffect(final SpelljackEffect effect) {
+    private SpelljackEffect(final SpelljackEffect effect) {
         super(effect);
     }
 
@@ -61,7 +61,7 @@ class SpelljackEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            UUID targetId = targetPointer.getFirst(game, source);
+            UUID targetId = getTargetPointer().getFirst(game, source);
             StackObject stackObject = game.getStack().getStackObject(targetId);
             if (stackObject != null && game.getStack().counter(targetId, source, game, PutCards.EXILED)) {
                 Card card = ((Spell) stackObject).getCard();

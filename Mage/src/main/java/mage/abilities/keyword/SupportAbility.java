@@ -10,7 +10,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  * 701.32. Support
- *
+ * <p>
  * 701.32a “Support N” on a permanent means “Put a +1/+1 counter on each of up
  * to N other target creatures.” “Support N” on an instant or sorcery spell
  * means “Put a +1/+1 counter on each of up to N target creatures.”
@@ -36,10 +36,12 @@ public class SupportAbility extends EntersBattlefieldTriggeredAbility {
     }
 
 
-    public SupportAbility(Card card, int amount){ this( card, amount, true); }
+    public SupportAbility(Card card, int amount) {
+        this(card, amount, true);
+    }
 
 
-    public SupportAbility(final SupportAbility ability) {
+    protected SupportAbility(final SupportAbility ability) {
         super(ability);
     }
 

@@ -24,6 +24,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ public final class ShiftingCeratops extends CardImpl {
 }
 
 class ShiftingCeratopsEffect extends OneShotEffect {
-    private static final Set<String> choices = new HashSet();
+    private static final Set<String> choices = new LinkedHashSet();
 
     static {
         choices.add("Reach");

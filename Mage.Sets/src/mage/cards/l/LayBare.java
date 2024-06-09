@@ -43,19 +43,19 @@ public final class LayBare extends CardImpl {
 
 class LayBareEffect extends OneShotEffect {
 
-    public LayBareEffect() {
+    LayBareEffect() {
         super(Outcome.Benefit);
         staticText = "Look at its controller's hand";
     }
 
-    public LayBareEffect(final LayBareEffect effect) {
+    private LayBareEffect(final LayBareEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Card target = (Card) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
+        Card target = (Card) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK);
         if (target != null) {
             Player controller = game.getPlayer(target.getOwnerId());
             if (controller != null && player != null) {

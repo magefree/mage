@@ -22,7 +22,7 @@ public final class CavernsOfDespair extends CardImpl {
     public CavernsOfDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // No more than two creatures can attack each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CavernsOfDespairAttackRestrictionEffect()));
@@ -43,12 +43,12 @@ public final class CavernsOfDespair extends CardImpl {
 
 class CavernsOfDespairAttackRestrictionEffect extends RestrictionEffect {
 
-    public CavernsOfDespairAttackRestrictionEffect() {
+    CavernsOfDespairAttackRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "No more than two creatures can attack each combat";
     }
 
-    public CavernsOfDespairAttackRestrictionEffect(final CavernsOfDespairAttackRestrictionEffect effect) {
+    private CavernsOfDespairAttackRestrictionEffect(final CavernsOfDespairAttackRestrictionEffect effect) {
         super(effect);
     }
 
@@ -70,12 +70,12 @@ class CavernsOfDespairAttackRestrictionEffect extends RestrictionEffect {
 
 class CavernsOfDespairBlockRestrictionEffect extends RestrictionEffect {
 
-    public CavernsOfDespairBlockRestrictionEffect() {
+    CavernsOfDespairBlockRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "No more than two creatures can block each combat";
     }
 
-    public CavernsOfDespairBlockRestrictionEffect(final CavernsOfDespairBlockRestrictionEffect effect) {
+    private CavernsOfDespairBlockRestrictionEffect(final CavernsOfDespairBlockRestrictionEffect effect) {
         super(effect);
     }
 

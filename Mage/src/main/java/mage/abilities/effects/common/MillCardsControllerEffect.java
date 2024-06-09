@@ -1,7 +1,6 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -28,7 +27,7 @@ public class MillCardsControllerEffect extends OneShotEffect {
         setText();
     }
 
-    public MillCardsControllerEffect(final MillCardsControllerEffect effect) {
+    private MillCardsControllerEffect(final MillCardsControllerEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
     }

@@ -30,7 +30,7 @@ public final class Heliophial extends CardImpl {
         this.addAbility(new SunburstAbility(this));
         // {2}, Sacrifice Heliophial: Heliophial deals damage equal to the number of charge counters on it to any target.
         Effect effect = new DamageTargetEffect(new CountersSourceCount(CounterType.CHARGE));
-        effect.setText("{this} deals damage equal to the number of charge counters on it to any target");
+        effect.setText("it deals damage equal to the number of charge counters on it to any target");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

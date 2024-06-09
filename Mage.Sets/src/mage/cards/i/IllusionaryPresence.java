@@ -67,7 +67,7 @@ class IllusionaryPresenceEffect extends OneShotEffect {
         this.staticText = "{this} gains landwalk of the chosen type until end of turn";
     }
 
-    public IllusionaryPresenceEffect(final IllusionaryPresenceEffect effect) {
+    private IllusionaryPresenceEffect(final IllusionaryPresenceEffect effect) {
         super(effect);
     }
 

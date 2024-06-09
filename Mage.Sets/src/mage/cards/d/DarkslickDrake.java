@@ -29,7 +29,7 @@ public final class DarkslickDrake extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public DarkslickDrake (final DarkslickDrake card) {
+    private DarkslickDrake(final DarkslickDrake card) {
         super(card);
     }
 

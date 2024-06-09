@@ -9,7 +9,6 @@ import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.Watcher;
@@ -74,20 +73,20 @@ public class CommanderInfoWatcher extends Watcher {
             if (playsCount > 0) {
                 sb.append(' ').append(playsCount).append(playsCount == 1 ? " time" : " times").append(" played from the command zone.");
             }
-            this.addInfo(object, "Commander", sb.toString(), game);
+            this.addInfoToObject(object, "Commander", sb.toString(), game);
 
             if (checkCommanderDamage) {
                 for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
                     Player damagedPlayer = game.getPlayer(entry.getKey());
                     sb.append("<b>").append(commanderTypeName).append("</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getLogName()).append('.');
-                    this.addInfo(object, "Commander" + entry.getKey(),
+                    this.addInfoToObject(object, "Commander" + entry.getKey(),
                             "<b>" + commanderTypeName + "</b> did " + entry.getValue() + " combat damage to player " + damagedPlayer.getLogName() + '.', game);
                 }
             }
         }
     }
 
-    private void addInfo(MageObject object, String key, String value, Game game) {
+    private void addInfoToObject(MageObject object, String key, String value, Game game) {
         ((Card) object).addInfo(key, value, game);
         if (object instanceof Permanent) {
             ((Permanent) object).addInfo(key, value, game);

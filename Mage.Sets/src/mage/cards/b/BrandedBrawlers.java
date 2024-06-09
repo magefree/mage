@@ -65,7 +65,7 @@ class BrandedBrawlersCantBlockEffect extends RestrictionEffect {
         staticText = "{this} can't block if you control " + filter.getMessage();
     }
 
-    public BrandedBrawlersCantBlockEffect(final BrandedBrawlersCantBlockEffect effect) {
+    private BrandedBrawlersCantBlockEffect(final BrandedBrawlersCantBlockEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

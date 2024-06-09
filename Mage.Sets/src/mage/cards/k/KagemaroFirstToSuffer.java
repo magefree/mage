@@ -30,7 +30,7 @@ public final class KagemaroFirstToSuffer extends CardImpl {
 
     public KagemaroFirstToSuffer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.SPIRIT);
 
@@ -39,7 +39,7 @@ public final class KagemaroFirstToSuffer extends CardImpl {
 
         DynamicValue xValue = CardsInControllerHandCount.instance;
         // Kagemaro, First to Suffer's power and toughness are each equal to the number of cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
         // {B}, Sacrifice Kagemaro: All creatures get -X/-X until end of turn, where X is the number of cards in your hand.
 
         DynamicValue xMinusValue = new SignInversionDynamicValue(xValue);

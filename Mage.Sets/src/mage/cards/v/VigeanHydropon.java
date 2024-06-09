@@ -47,12 +47,12 @@ public final class VigeanHydropon extends CardImpl {
 
 class VigeanHydroponEffect extends RestrictionEffect {
 
-    public VigeanHydroponEffect() {
+    VigeanHydroponEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block";
     }
 
-    public VigeanHydroponEffect(final VigeanHydroponEffect effect) {
+    private VigeanHydroponEffect(final VigeanHydroponEffect effect) {
         super(effect);
     }
 

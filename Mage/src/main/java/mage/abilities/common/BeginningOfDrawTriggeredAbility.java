@@ -31,7 +31,7 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public BeginningOfDrawTriggeredAbility(final BeginningOfDrawTriggeredAbility ability) {
+    protected BeginningOfDrawTriggeredAbility(final BeginningOfDrawTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
     }

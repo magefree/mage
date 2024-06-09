@@ -65,7 +65,7 @@ class VeteranBodyguardEffect extends PreventionEffectImpl {
         staticText = "all combat damage that would be dealt to you by unblocked creatures is dealt to {this} instead";
     }
 
-    VeteranBodyguardEffect(final VeteranBodyguardEffect effect) {
+    private VeteranBodyguardEffect(final VeteranBodyguardEffect effect) {
         super(effect);
     }
 

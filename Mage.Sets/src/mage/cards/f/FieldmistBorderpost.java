@@ -48,7 +48,7 @@ public final class FieldmistBorderpost extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public FieldmistBorderpost (final FieldmistBorderpost card) {
+    private FieldmistBorderpost(final FieldmistBorderpost card) {
         super(card);
     }
 

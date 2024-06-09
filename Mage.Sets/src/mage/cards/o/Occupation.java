@@ -56,7 +56,7 @@ class OccupationTapEffect extends ReplacementEffectImpl {
         staticText = "Creatures your opponents control enter the battlefield tapped";
     }
 
-    OccupationTapEffect(final OccupationTapEffect effect) {
+    private OccupationTapEffect(final OccupationTapEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class OccupationTapEffect extends ReplacementEffectImpl {
 
 class OccupationOneShotEffect extends OneShotEffect {
 
-    public OccupationOneShotEffect() {
+    OccupationOneShotEffect() {
         super(Outcome.LoseAbility);
     }
 
@@ -100,7 +100,7 @@ class OccupationOneShotEffect extends OneShotEffect {
         staticText = ruleText;
     }
 
-    public OccupationOneShotEffect(final OccupationOneShotEffect effect) {
+    private OccupationOneShotEffect(final OccupationOneShotEffect effect) {
         super(effect);
     }
 
@@ -119,12 +119,12 @@ class OccupationOneShotEffect extends OneShotEffect {
 
 class OccupationRestrictionEffect extends RestrictionEffect {
 
-    public OccupationRestrictionEffect() {
+    OccupationRestrictionEffect() {
         super(Duration.Custom);
         staticText = "";
     }
 
-    public OccupationRestrictionEffect(final OccupationRestrictionEffect effect) {
+    private OccupationRestrictionEffect(final OccupationRestrictionEffect effect) {
         super(effect);
     }
 
@@ -159,7 +159,7 @@ class OccupationRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

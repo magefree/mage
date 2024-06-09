@@ -13,10 +13,8 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
-import mage.game.Controllable;
+import mage.filter.predicate.permanent.DefendingPlayerControlsNoSourcePredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.BlockerDeclaredEvent;
@@ -37,7 +35,7 @@ public final class FalseOrders extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(FalseOrdersDefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsNoSourcePredicate.instance);
     }
 
     public FalseOrders(UUID ownerId, CardSetInfo setInfo) {
@@ -61,15 +59,6 @@ public final class FalseOrders extends CardImpl {
         return new FalseOrders(this);
     }
 
-}
-
-enum FalseOrdersDefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<Controllable> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
-        return game.getCombat().getPlayerDefenders(game).contains(input.getObject().getControllerId());
-    }
 }
 
 class FalseOrdersUnblockEffect extends OneShotEffect {
@@ -136,11 +125,11 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             return false;
         }
         FilterAttackingCreature filter = new FilterAttackingCreature("creature attacking " + targetsController.getLogName());
-        filter.add(new PermanentInListPredicate(list));
+        filter.add(new PermanentReferenceInCollectionPredicate(list, game));
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(controller.getId(), source, game)) {
-            while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+            while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                 controller.chooseTarget(outcome, target, source, game);
             }
         } else {

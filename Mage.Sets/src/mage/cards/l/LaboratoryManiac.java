@@ -49,23 +49,18 @@ public final class LaboratoryManiac extends CardImpl {
 
 class LaboratoryManiacEffect extends ReplacementEffectImpl {
 
-    public LaboratoryManiacEffect() {
+    LaboratoryManiacEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card while your library has no cards in it, you win the game instead";
     }
 
-    public LaboratoryManiacEffect(final LaboratoryManiacEffect effect) {
+    private LaboratoryManiacEffect(final LaboratoryManiacEffect effect) {
         super(effect);
     }
 
     @Override
     public LaboratoryManiacEffect copy() {
         return new LaboratoryManiacEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

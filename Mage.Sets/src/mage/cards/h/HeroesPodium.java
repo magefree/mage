@@ -38,7 +38,7 @@ public final class HeroesPodium extends CardImpl {
 
     public HeroesPodium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Each legendary creature you control gets +1/+1 for each other legendary creature you control.
         this.addAbility(new SimpleStaticAbility(

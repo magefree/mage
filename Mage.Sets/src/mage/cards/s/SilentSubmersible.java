@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
@@ -23,10 +23,10 @@ public final class SilentSubmersible extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever Silent Submarine deals combat damage to a player or planeswalker, draw a card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+        // Whenever Silent Submersible deals combat damage to a player or planeswalker, draw a card.
+        this.addAbility(new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false
-        ).setOrPlaneswalker(true));
+        ));
 
         // Crew 2
         this.addAbility(new CrewAbility(2));

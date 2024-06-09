@@ -11,7 +11,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.CommandObject;
 import mage.game.command.Commander;
@@ -130,7 +130,7 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
         }
         // creatures you control
         List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(
-                new FilterControlledCreaturePermanent(), source.getControllerId(), game);
+                StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), game);
         for (Permanent creature : creatures) {
             if (creature != null) {
                 creature.setIsAllCreatureTypes(game, true);

@@ -27,7 +27,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class FungalPlots extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card from your graveyard");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("two Saprolings");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Saprolings");
 
     static {
         filter2.add(SubType.SAPROLING.getPredicate());
@@ -47,7 +47,7 @@ public final class FungalPlots extends CardImpl {
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainLifeEffect(2),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter2, false))
+                new SacrificeTargetCost(2, filter2)
         );
         ability2.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
         this.addAbility(ability2);

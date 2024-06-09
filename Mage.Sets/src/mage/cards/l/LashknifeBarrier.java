@@ -44,23 +44,18 @@ public final class LashknifeBarrier extends CardImpl {
 
 class LashknifeBarrierEffect extends ReplacementEffectImpl {
 
-    public LashknifeBarrierEffect() {
+    LashknifeBarrierEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.";
     }
 
-    public LashknifeBarrierEffect(final LashknifeBarrierEffect effect) {
+    private LashknifeBarrierEffect(final LashknifeBarrierEffect effect) {
         super(effect);
     }
 
     @Override
     public LashknifeBarrierEffect copy() {
         return new LashknifeBarrierEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -76,8 +71,8 @@ class LashknifeBarrierEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
-        return creature != null && creature.isPlaneswalker(game) && creature.isControlledBy(source.getControllerId());
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && permanent.isCreature(game) && permanent.isControlledBy(source.getControllerId());
     }
 
 }

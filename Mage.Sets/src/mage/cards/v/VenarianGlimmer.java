@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -45,12 +44,12 @@ public final class VenarianGlimmer extends CardImpl {
 
 class VenarianGlimmerEffect extends OneShotEffect {
 
-    public VenarianGlimmerEffect() {
+    VenarianGlimmerEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player reveals their hand. You choose a nonland card with mana value X or less from it. That player discards that card";
     }
 
-    public VenarianGlimmerEffect(final VenarianGlimmerEffect effect) {
+    private VenarianGlimmerEffect(final VenarianGlimmerEffect effect) {
         super(effect);
     }
 
@@ -61,12 +60,12 @@ class VenarianGlimmerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             FilterCard filter = new FilterNonlandCard();
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
-            Effect effect = new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY);
-            effect.setTargetPointer(targetPointer);
+            Effect effect = new DiscardCardYouChooseTargetEffect(filter);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             effect.apply(game, source);
             return true;
         }

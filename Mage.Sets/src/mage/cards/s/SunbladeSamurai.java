@@ -43,7 +43,7 @@ public final class SunbladeSamurai extends CardImpl {
         Ability ability = new ChannelAbility(
                 "{2}",
                 new SearchLibraryPutInHandEffect(
-                        new TargetCardInLibrary(filter), true, true
+                        new TargetCardInLibrary(filter), true
                 )
         );
         ability.addEffect(new GainLifeEffect(2));

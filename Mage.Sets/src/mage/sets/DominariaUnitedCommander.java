@@ -110,7 +110,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Historian's Boon", 21, Rarity.RARE, mage.cards.h.HistoriansBoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Historian's Boon", 71, Rarity.RARE, mage.cards.h.HistoriansBoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Honor-Worn Shaku", 187, Rarity.UNCOMMON, mage.cards.h.HonorWornShaku.class));
-        cards.add(new SetCardInfo("Illuna, Apex of Wishes", 154, Rarity.MYTHIC, mage.cards.i.IllunaApexOfWishes.class));
+//        cards.add(new SetCardInfo("Illuna, Apex of Wishes", 154, Rarity.MYTHIC, mage.cards.i.IllunaApexOfWishes.class));
         cards.add(new SetCardInfo("Iridian Maelstrom", 12, Rarity.RARE, mage.cards.i.IridianMaelstrom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Iridian Maelstrom", 88, Rarity.RARE, mage.cards.i.IridianMaelstrom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jared Carthalion", 2, Rarity.MYTHIC, mage.cards.j.JaredCarthalion.class, NON_FULL_USE_VARIOUS));
@@ -148,7 +148,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Monastery", 221, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Naya Charm", 162, Rarity.UNCOMMON, mage.cards.n.NayaCharm.class));
         cards.add(new SetCardInfo("Neheb, Dreadhorde Champion", 125, Rarity.RARE, mage.cards.n.NehebDreadhordeChampion.class));
-        cards.add(new SetCardInfo("Nethroi, Apex of Death", 163, Rarity.MYTHIC, mage.cards.n.NethroiApexOfDeath.class));
+//        cards.add(new SetCardInfo("Nethroi, Apex of Death", 163, Rarity.MYTHIC, mage.cards.n.NethroiApexOfDeath.class));
         cards.add(new SetCardInfo("Night's Whisper", 115, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Nomad Outpost", 222, Rarity.UNCOMMON, mage.cards.n.NomadOutpost.class));
         cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 164, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));

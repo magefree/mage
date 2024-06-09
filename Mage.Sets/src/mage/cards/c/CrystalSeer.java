@@ -37,7 +37,7 @@ public final class CrystalSeer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{4}{U}")));
     }
 
-    public CrystalSeer (final CrystalSeer card) {
+    private CrystalSeer(final CrystalSeer card) {
         super(card);
     }
 

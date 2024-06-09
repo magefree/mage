@@ -66,7 +66,7 @@ class LicidEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent licid = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent licid = source.getSourcePermanentIfItStillExists(game);
         if (licid != null) {
             UUID messageId = UUID.randomUUID();
             LicidContinuousEffect effect = new LicidContinuousEffect(messageId);
@@ -103,7 +103,7 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent licid = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent licid = source.getSourcePermanentIfItStillExists(game);
         if (licid != null) {
             switch (layer) {
                 case TypeChangingEffects_4:

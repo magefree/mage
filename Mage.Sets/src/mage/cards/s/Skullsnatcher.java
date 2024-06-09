@@ -68,7 +68,7 @@ class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} deals combat damage to a player, ");
     }
 
-    SkullsnatcherTriggeredAbility(final SkullsnatcherTriggeredAbility ability) {
+    private SkullsnatcherTriggeredAbility(final SkullsnatcherTriggeredAbility ability) {
         super(ability);
     }
 

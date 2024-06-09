@@ -38,7 +38,8 @@ public final class OverchargedAmalgam extends CardImpl {
         this.addAbility(new ExploitAbility());
 
         // When Overcharged Amalgam exploits a creature, counter target spell, activated ability, or triggered ability.
-        Ability ability = new ExploitCreatureTriggeredAbility(new CounterTargetEffect());
+        Ability ability = new ExploitCreatureTriggeredAbility(new CounterTargetEffect()
+                .setText("counter target spell, activated ability, or triggered ability"));
         ability.addTarget(new TargetStackObject());
         this.addAbility(ability);
     }

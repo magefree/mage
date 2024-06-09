@@ -44,7 +44,7 @@ public final class AuraBarbs extends CardImpl {
             staticText = "Each enchantment deals 2 damage to its controller, then each Aura attached to a creature deals 2 damage to the creature it's attached to";
         }
 
-        public AuraBarbsEffect(final AuraBarbsEffect effect) {
+        private AuraBarbsEffect(final AuraBarbsEffect effect) {
             super(effect);
         }
 

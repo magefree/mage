@@ -1,4 +1,3 @@
-
 package mage.cards.z;
 
 import java.util.UUID;
@@ -15,20 +14,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class ZephyrScribe extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-    
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
     
     public ZephyrScribe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
@@ -42,7 +34,7 @@ public final class ZephyrScribe extends CardImpl {
         this.addAbility(ability);
         
         // Whenever you cast a noncreature spell, untap Zephyr Scribe.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));        
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false));
     }
 
     private ZephyrScribe(final ZephyrScribe card) {

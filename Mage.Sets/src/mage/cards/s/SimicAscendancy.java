@@ -19,7 +19,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public final class SimicAscendancy extends CardImpl {
 
         // {1}{G}{U}: Put a +1/+1 counter on target creature you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}{G}{U}"));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
         // Whenever one or more +1/+1 counters are put on a creature you control, put that many growth counters on Simic Ascendancy.

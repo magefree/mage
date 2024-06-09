@@ -44,7 +44,7 @@ class FightingChanceEffect extends OneShotEffect {
         staticText = "For each blocking creature, flip a coin. If you win the flip, prevent all combat damage that would be dealt by that creature this turn.";
     }
 
-    FightingChanceEffect(final FightingChanceEffect effect) {
+    private FightingChanceEffect(final FightingChanceEffect effect) {
         super(effect);
     }
 

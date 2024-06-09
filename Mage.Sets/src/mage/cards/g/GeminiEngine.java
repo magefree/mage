@@ -55,7 +55,7 @@ class GeminiEngineCreateTokenEffect extends OneShotEffect {
         this.staticText = "create a colorless Construct artifact creature token named Twin that's attacking. Its power is equal to {this}'s power and its toughness is equal to {this}'s toughness. Sacrifice the token at end of combat.";
     }
 
-    GeminiEngineCreateTokenEffect(final GeminiEngineCreateTokenEffect effect) {
+    private GeminiEngineCreateTokenEffect(final GeminiEngineCreateTokenEffect effect) {
         super(effect);
     }
 

@@ -45,12 +45,12 @@ public final class CentaurPeacemaker extends CardImpl {
 
 class CentaurMediatorEffect extends OneShotEffect {
 
-    public CentaurMediatorEffect() {
+    CentaurMediatorEffect() {
         super(Outcome.GainLife);
         staticText = "each player gains 4 life.";
     }
 
-    public CentaurMediatorEffect(final CentaurMediatorEffect effect) {
+    private CentaurMediatorEffect(final CentaurMediatorEffect effect) {
         super(effect);
     }
 

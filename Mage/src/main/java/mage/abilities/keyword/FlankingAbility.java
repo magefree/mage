@@ -19,7 +19,7 @@ public class FlankingAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false);
     }
 
-    public FlankingAbility(final FlankingAbility ability) {
+    protected FlankingAbility(final FlankingAbility ability) {
         super(ability);
     }
 

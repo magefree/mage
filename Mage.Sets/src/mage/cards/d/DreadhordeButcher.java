@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -34,9 +34,9 @@ public final class DreadhordeButcher extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Dreadhorde Butcher deals combat damage to a player or planeswalker, put a +1/+1 counter on Dreadhorde Butcher.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(
+        this.addAbility(new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance()
-        ), false).setOrPlaneswalker(true));
+        ), false));
 
         // When Dreadhorde Butcher dies, it deals damage equal to its power to any target.
         Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(

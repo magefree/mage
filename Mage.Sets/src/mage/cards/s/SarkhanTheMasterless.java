@@ -27,7 +27,7 @@ public final class SarkhanTheMasterless extends CardImpl {
     public SarkhanTheMasterless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
         this.setStartingLoyalty(5);
 
@@ -73,7 +73,7 @@ class SarkhanTheMasterlessDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creature == null) {
             return false;
         }

@@ -1,19 +1,20 @@
-
 package mage.game.turn;
+
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.players.Player;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class Phase implements Serializable {
@@ -33,7 +34,7 @@ public abstract class Phase implements Serializable {
     public Phase() {
     }
 
-    public Phase(final Phase phase) {
+    protected Phase(final Phase phase) {
         this.type = phase.type;
         this.event = phase.event;
         this.preEvent = phase.preEvent;
@@ -81,14 +82,24 @@ public abstract class Phase implements Serializable {
                 if (game.isPaused() || game.checkIfGameIsOver()) {
                     return false;
                 }
-                if (game.getTurn().isEndTurnRequested() && step.getType()!=PhaseStep.CLEANUP) {
+                if (game.getTurn().isEndTurnRequested() && step.getType() != PhaseStep.CLEANUP) {
                     continue;
                 }
                 currentStep = step;
-                if (!game.getState().getTurnMods().skipStep(activePlayerId, getStep().getType())) {
+                TurnMod skipStepMod = game.getState().getTurnMods().useNextSkipStep(activePlayerId, getStep().getType());
+                if (skipStepMod == null) {
                     playStep(game);
                     if (game.executingRollback()) {
                         return true;
+                    }
+                } else {
+                    Player player = game.getPlayer(skipStepMod.getPlayerId());
+                    if (player != null) {
+                        game.informPlayers(String.format("%s skips %s step%s",
+                                player.getLogName(),
+                                skipStepMod.getSkipStep().toString(),
+                                skipStepMod.getInfo()
+                        ));
                     }
                 }
                 if (!game.isSimulation() && checkStopOnStepOption(game)) {
@@ -135,10 +146,20 @@ public abstract class Phase implements Serializable {
                 return false;
             }
             currentStep = step;
-            if (!game.getState().getTurnMods().skipStep(activePlayerId, currentStep.getType())) {
+            TurnMod skipStepMod = game.getState().getTurnMods().useNextSkipStep(activePlayerId, currentStep.getType());
+            if (skipStepMod == null) {
                 playStep(game);
                 if (game.executingRollback()) {
                     return true;
+                }
+            } else {
+                Player player = game.getPlayer(skipStepMod.getPlayerId());
+                if (player != null) {
+                    game.informPlayers(String.format("%s skips %s step%s",
+                            player.getLogName(),
+                            skipStepMod.getSkipStep().toString(),
+                            skipStepMod.getInfo()
+                    ));
                 }
             }
         }
@@ -219,13 +240,42 @@ public abstract class Phase implements Serializable {
 
     private void playExtraSteps(Game game, PhaseStep afterStep) {
         while (true) {
-            Step extraStep = game.getState().getTurnMods().extraStep(activePlayerId, afterStep);
-            if (extraStep == null) {
+            TurnMod extraStepMod = game.getState().getTurnMods().useNextExtraStep(activePlayerId, afterStep);
+            if (extraStepMod == null) {
                 return;
             }
-            currentStep = extraStep;
-            playStep(game);
+            currentStep = extraStepMod.getExtraStep();
+            Player player = game.getPlayer(extraStepMod.getPlayerId());
+            if (player != null && player.canRespond()) {
+                game.informPlayers(String.format("%s takes an extra %s step%s",
+                        player.getLogName(),
+                        extraStepMod.getExtraStep().toString(),
+                        extraStepMod.getInfo()
+                ));
+                playStep(game);
+            } else {
+                return;
+            }
         }
     }
 
+    /**
+     * One card [[Okea, Splitter of Seconds]], adds extra beginning phases with
+     * all but upkeep steps skipped.
+     * To achieve that, this function is called right after creating the extra Phase,
+     * before running it.
+     */
+    public void keepOnlyStep(PhaseStep step) {
+        if (count != 0) {
+            throw new IllegalStateException("Wrong code usage: illegal Phase modification once it started running");
+        }
+        this.steps = this.steps.stream().filter(s -> s.getType().equals(step)).collect(Collectors.toList());
+        if (this.steps.isEmpty()) {
+            throw new IllegalStateException("Wrong code usage: keepOnlyStep should not remove all the steps in a phase - " + step);
+        }
+    }
+
+    public String toString() {
+        return type.toString();
+    }
 }

@@ -1,9 +1,5 @@
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -26,15 +22,18 @@ import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class MuseVessel extends CardImpl {
 
     public MuseVessel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        
+
 
         // {3}, {tap}: Target player exiles a card from their hand. Activate this ability only any time you could cast a sorcery.
         ActivateAsSorceryActivatedAbility tapAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new MuseVesselExileEffect(), new TapSourceCost());
@@ -60,18 +59,18 @@ public final class MuseVessel extends CardImpl {
 
 class MuseVesselExileEffect extends OneShotEffect {
 
-    public MuseVesselExileEffect() {
+    MuseVesselExileEffect() {
         super(Outcome.Exile);
         staticText = "target player exiles a card from their hand";
     }
 
-    public MuseVesselExileEffect(final MuseVesselExileEffect effect) {
+    private MuseVesselExileEffect(final MuseVesselExileEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject == null) {
             return false;
@@ -97,12 +96,12 @@ class MuseVesselExileEffect extends OneShotEffect {
 
 class MuseVesselMayPlayExiledEffect extends AsThoughEffectImpl {
 
-    public MuseVesselMayPlayExiledEffect() {
+    MuseVesselMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.staticText = "Choose a card exiled with {this}. You may play that card this turn";
     }
 
-    public MuseVesselMayPlayExiledEffect(final MuseVesselMayPlayExiledEffect effect) {
+    private MuseVesselMayPlayExiledEffect(final MuseVesselMayPlayExiledEffect effect) {
         super(effect);
     }
 
@@ -124,13 +123,14 @@ class MuseVesselMayPlayExiledEffect extends AsThoughEffectImpl {
 
 }
 
+// TODO: cleanup. there should be no need for custom Target there.
 class TargetCardInMuseVesselExile extends TargetCardInExile {
 
     public TargetCardInMuseVesselExile() {
-        super(1, 1, new FilterCard("card exiled with Muse Vessel"), null);
+        super(new FilterCard("card exiled with Muse Vessel"));
     }
 
-    public TargetCardInMuseVesselExile(final TargetCardInMuseVesselExile target) {
+    private TargetCardInMuseVesselExile(final TargetCardInMuseVesselExile target) {
         super(target);
     }
 

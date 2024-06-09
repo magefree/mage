@@ -70,7 +70,7 @@ public final class GenjuOfTheCedars extends CardImpl {
             toughness = new MageInt(4);
         }
 
-        public SpiritToken(final SpiritToken token) {
+        private SpiritToken(final SpiritToken token) {
             super(token);
         }
 

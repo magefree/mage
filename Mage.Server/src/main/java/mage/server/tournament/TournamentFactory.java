@@ -55,7 +55,14 @@ public enum TournamentFactory {
                     tournament.getOptions().getLimitedOptions().setDraftCube(draftCube);
                     tournament.setBoosterInfo(tournament.getOptions().getLimitedOptions().getDraftCubeName());
                 } else if (tournament.getTournamentType().isRandom()) {
-                    StringBuilder rv = new StringBuilder( "Random Draft using sets: ");
+                    StringBuilder rv = new StringBuilder( "Chaos Draft using sets: ");
+                    for (Map.Entry<String, Integer> entry: setInfo.entrySet()){
+                        rv.append(entry.getKey());
+                        rv.append(';');
+                    }
+                    tournament.setBoosterInfo(rv.toString());
+                } else if (tournament.getTournamentType().isRemixed()) {
+                    StringBuilder rv = new StringBuilder( "Chaos Remixed Draft using sets: ");
                     for (Map.Entry<String, Integer> entry: setInfo.entrySet()){
                         rv.append(entry.getKey());
                         rv.append(';');

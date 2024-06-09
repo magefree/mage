@@ -32,7 +32,7 @@ public final class MadrushCyclops extends CardImpl {
         )));
     }
 
-    public MadrushCyclops(final MadrushCyclops card) {
+    private MadrushCyclops(final MadrushCyclops card) {
         super(card);
     }
 

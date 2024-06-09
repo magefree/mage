@@ -51,7 +51,7 @@ public final class DauntlessDourbark extends CardImpl {
 
         // Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control.
         DynamicValue amount = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(amount, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(amount)));
         
         // Dauntless Dourbark has trample as long as you control another Treefolk.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter2), rule)));

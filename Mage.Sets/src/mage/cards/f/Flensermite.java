@@ -28,7 +28,7 @@ public final class Flensermite extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public Flensermite (final Flensermite card) {
+    private Flensermite(final Flensermite card) {
         super(card);
     }
 

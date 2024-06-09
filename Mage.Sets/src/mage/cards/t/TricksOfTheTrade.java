@@ -2,6 +2,8 @@
 package mage.cards.t;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
@@ -12,9 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -36,8 +36,9 @@ public final class TricksOfTheTrade extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +2/+0 and can't be blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 0));
+        ability.addEffect(new CantBeBlockedAttachedEffect(AttachmentType.AURA).setText("and can't be blocked"));
+        this.addAbility(ability);
     }
 
     private TricksOfTheTrade(final TricksOfTheTrade card) {

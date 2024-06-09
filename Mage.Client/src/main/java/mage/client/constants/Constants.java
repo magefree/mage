@@ -51,7 +51,6 @@ public final class Constants {
 
     // cards render
     public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
-    public static final Rectangle THUMBNAIL_SIZE_FULL = new Rectangle(102, 146);
 
     // resources - default images
     public static final String RESOURCE_PATH_DEFAULT_IMAGES = File.separator + "default";
@@ -102,11 +101,21 @@ public final class Constants {
     }
 
     public enum DeckEditorMode {
+        FREE_BUILDING(""),
+        LIMITED_BUILDING("building"),
+        LIMITED_SIDEBOARD_BUILDING("sideboard building"),
+        SIDEBOARDING("sideboarding"),
+        VIEW_LIMITED_DECK("view");
 
-        FREE_BUILDING,
-        LIMITED_BUILDING,
-        SIDEBOARDING,
-        VIEW_LIMITED_DECK
+        private String title;
+
+        DeckEditorMode(String title) {
+            this.title = title;
+        }
+
+        public String getTitle() {
+            return title;
+        }
     }
 
     public enum SortBy {

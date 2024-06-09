@@ -26,9 +26,9 @@ public final class HighwayRobber extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(2));
         ability.addTarget(new TargetOpponent());
-        ability.addEffect(new LoseLifeTargetEffect(2));
+        ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);
     }
 

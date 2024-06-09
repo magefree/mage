@@ -49,7 +49,7 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
         staticText = "If an instant or sorcery source you control would deal damage to a permanent or player, it deals that much damage plus 2 to that permanent or player instead";
     }
 
-    PyromancersSwathReplacementEffect(final PyromancersSwathReplacementEffect effect) {
+    private PyromancersSwathReplacementEffect(final PyromancersSwathReplacementEffect effect) {
         super(effect);
     }
 
@@ -71,11 +71,6 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
             return object != null && object.isInstantOrSorcery(game);
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

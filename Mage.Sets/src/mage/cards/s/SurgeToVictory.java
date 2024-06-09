@@ -144,7 +144,6 @@ class SurgeToVictoryCastEffect extends OneShotEffect {
         if (copiedCard == null) {
             return false;
         }
-        player.moveCards(copiedCard, Zone.EXILED, source, game);
         if (!player.chooseUse(outcome, "Cast the copy of the exiled card?", source, game)) {
             return false;
         }

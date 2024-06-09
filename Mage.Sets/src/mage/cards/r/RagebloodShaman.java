@@ -1,10 +1,9 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -35,8 +34,10 @@ public final class RagebloodShaman extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Other Minotaur creatures you control get +1/+1 and have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(StaticValue.get(1), StaticValue.get(1), Duration.WhileOnBattlefield, filter, true)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true));
+        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)
+                .setText("and have trample"));
+        this.addAbility(ability);
     }
 
     private RagebloodShaman(final RagebloodShaman card) {

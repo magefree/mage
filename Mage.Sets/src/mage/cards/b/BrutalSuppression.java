@@ -1,29 +1,22 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.AbilityType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class BrutalSuppression extends CardImpl {
@@ -48,12 +41,14 @@ public final class BrutalSuppression extends CardImpl {
 class BrutalSuppressionAdditionalCostEffect extends CostModificationEffectImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-    static{
+
+    static {
         filter.add(CardType.LAND.getPredicate());
     }
 
     private static final FilterPermanent filter2 = new FilterPermanent("nontoken Rebels");
-    static{
+
+    static {
         filter2.add(SubType.REBEL.getPredicate());
         filter.add(TokenPredicate.FALSE);
     }
@@ -63,21 +58,19 @@ class BrutalSuppressionAdditionalCostEffect extends CostModificationEffectImpl {
         this.staticText = "Activated abilities of nontoken Rebels cost an additional \"Sacrifice a land\" to activate";
     }
 
-    BrutalSuppressionAdditionalCostEffect(BrutalSuppressionAdditionalCostEffect effect) {
+    private BrutalSuppressionAdditionalCostEffect(final BrutalSuppressionAdditionalCostEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-        target.setRequired(false);
-        abilityToModify.addCost(new SacrificeTargetCost(target));
+        abilityToModify.addCost(new SacrificeTargetCost(filter));
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED || abilityToModify.getAbilityType() == AbilityType.MANA) {
+        if (abilityToModify.isActivatedAbility()){
             Permanent rebelPermanent = game.getPermanent(abilityToModify.getSourceId());
             if (rebelPermanent != null) {
                 return filter2.match(rebelPermanent, game);

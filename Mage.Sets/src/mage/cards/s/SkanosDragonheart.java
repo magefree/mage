@@ -38,7 +38,7 @@ public final class SkanosDragonheart extends CardImpl {
     public SkanosDragonheart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.RANGER);
         this.power = new MageInt(4);
@@ -47,7 +47,7 @@ public final class SkanosDragonheart extends CardImpl {
         // Whenever Skanos Dragonheart attacks, it gets +X/+X until end of turn, where X is the greatest power among Dragon cards in your graveyard or other Dragons you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
                 SkanosDragonheartValue.instance, SkanosDragonheartValue.instance,
-                Duration.EndOfTurn, true, "it"
+                Duration.EndOfTurn, "it"
         )).addHint(hint));
 
         // Choose a Background

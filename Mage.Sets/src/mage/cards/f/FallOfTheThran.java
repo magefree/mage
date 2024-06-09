@@ -56,12 +56,12 @@ public final class FallOfTheThran extends CardImpl {
 
 class FallOfTheThranReturnEffect extends OneShotEffect {
 
-    public FallOfTheThranReturnEffect() {
+    FallOfTheThranReturnEffect() {
         super(Outcome.PutLandInPlay);
         this.staticText = "each player returns two land cards from their graveyard to the battlefield";
     }
 
-    public FallOfTheThranReturnEffect(final FallOfTheThranReturnEffect effect) {
+    private FallOfTheThranReturnEffect(final FallOfTheThranReturnEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class FallOfTheThranReturnEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if(player != null) {
                     TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(2, 2, StaticFilters.FILTER_CARD_LAND);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     target.setTargetController(playerId);
                     if (target.canChoose(playerId, source, game)) {
                         player.choose(outcome, target, source, game);

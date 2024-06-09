@@ -9,9 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -20,13 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SanguinaryPriest extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public SanguinaryPriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -40,7 +31,7 @@ public final class SanguinaryPriest extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Blood Chalice -- Whenever another creature you control dies, Sanguinary Priest deals 1 damage to any target.
-        Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), false, filter);
+        Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.withFlavorWord("Blood Chalice"));
     }

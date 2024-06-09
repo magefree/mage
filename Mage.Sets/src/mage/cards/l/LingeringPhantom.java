@@ -8,6 +8,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -38,7 +39,7 @@ public final class LingeringPhantom extends CardImpl {
                 Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect()
                 .setText("return {this} from your graveyard to your hand. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
                 new ManaCostsImpl<>("{B}")),
-                filter, false, false
+                filter, false, SetTargetPointer.NONE
         ));
     }
 

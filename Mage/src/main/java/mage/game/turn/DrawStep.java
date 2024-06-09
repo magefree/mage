@@ -19,7 +19,7 @@ public class DrawStep extends Step {
         this.postStepEvent = EventType.DRAW_STEP_POST;
     }
 
-    public DrawStep(final DrawStep step) {
+    protected DrawStep(final DrawStep step) {
         super(step);
     }
 

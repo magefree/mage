@@ -30,7 +30,7 @@ public final class MuzzioVisionaryArchitect extends CardImpl {
 
     public MuzzioVisionaryArchitect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
@@ -54,12 +54,12 @@ public final class MuzzioVisionaryArchitect extends CardImpl {
 
 class MuzzioVisionaryArchitectEffect extends OneShotEffect {
 
-    public MuzzioVisionaryArchitectEffect() {
+    MuzzioVisionaryArchitectEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top X cards of your library, where X is the highest mana value among artifacts you control. You may put an artifact card from among them onto the battlefield. Put the rest on the bottom of your library in any order";
     }
 
-    public MuzzioVisionaryArchitectEffect(final MuzzioVisionaryArchitectEffect effect) {
+    private MuzzioVisionaryArchitectEffect(final MuzzioVisionaryArchitectEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class MuzzioVisionaryArchitectEffect extends OneShotEffect {
         controller.lookAtCards(source, null, cards, game);
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterArtifactCard("artifact card to put onto the battlefield"));
-            if (target.canChoose(controller.getId(), source, game) && controller.choose(Outcome.Benefit, cards, target, game)) {
+            if (target.canChoose(controller.getId(), source, game) && controller.choose(Outcome.Benefit, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.revealCards(source, new CardsImpl(card), game);

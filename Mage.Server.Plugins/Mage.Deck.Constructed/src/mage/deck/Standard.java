@@ -22,6 +22,9 @@ public class Standard extends Constructed {
         setCodes.addAll(makeLegalSets());
 
         banned.add("The Meathook Massacre");
+        banned.add("Fable of the Mirror-Breaker");
+        banned.add("Reckoner Bankbuster");
+        banned.add("Invoke Despair");
     }
 
     private static boolean isFallSet(ExpansionSet set) {
@@ -35,7 +38,7 @@ public class Standard extends Constructed {
 
     static List<String> makeLegalSets() {
         GregorianCalendar current = new GregorianCalendar();
-        // Get the second most recent fall set that's been released.
+        // Get the third most recent fall set that's been released.
         Date earliestDate = Sets
                 .getInstance()
                 .values()
@@ -43,7 +46,7 @@ public class Standard extends Constructed {
                 .filter(set -> !set.getReleaseDate().after(current.getTime()))
                 .filter(Standard::isFallSet)
                 .sorted(ExpansionSet.getComparator())
-                .skip(1)
+                .skip(2)
                 .findFirst()
                 .get()
                 .getReleaseDate();

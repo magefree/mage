@@ -20,7 +20,7 @@ public final class BorealGriffin extends CardImpl {
 
     public BorealGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.GRIFFIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

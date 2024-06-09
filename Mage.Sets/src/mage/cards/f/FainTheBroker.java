@@ -20,11 +20,9 @@ import mage.filter.StaticFilters;
 import mage.game.permanent.token.InklingToken;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -34,7 +32,7 @@ public final class FainTheBroker extends CardImpl {
     public FainTheBroker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(3);
@@ -44,22 +42,18 @@ public final class FainTheBroker extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), new TapSourceCost()
         );
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {T}, Remove a counter from a creature you control: Create a Treasure token.
         ability = new SimpleActivatedAbility(new CreateTokenEffect(new TreasureToken()), new TapSourceCost());
-        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true)));
+        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent().withNotTarget(true)));
         this.addAbility(ability);
 
         // {T}, Sacrifice an artifact: Create a 2/1 white and black Inkling creature token with flying.
         ability = new SimpleActivatedAbility(new CreateTokenEffect(new InklingToken()), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         this.addAbility(ability);
 
         // {3}{B}: Untap Fain, the Broker.

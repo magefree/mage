@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
@@ -36,7 +35,7 @@ public final class DeadGone extends SplitCard {
     }
 
     @Override
-    public Card copy() {
+    public DeadGone copy() {
         return new DeadGone(this);
     }
 }

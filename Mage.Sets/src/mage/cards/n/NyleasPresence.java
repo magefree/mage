@@ -53,7 +53,7 @@ public final class NyleasPresence extends CardImpl {
 
 class NyleasPresenceLandTypeEffect extends ContinuousEffectImpl {
 
-    public NyleasPresenceLandTypeEffect() {
+    NyleasPresenceLandTypeEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.staticText = "Enchanted land is every basic land type in addition to its other types";
         dependencyTypes.add(DependencyType.BecomePlains);
@@ -63,7 +63,7 @@ class NyleasPresenceLandTypeEffect extends ContinuousEffectImpl {
         dependencyTypes.add(DependencyType.BecomeForest);
     }
 
-    public NyleasPresenceLandTypeEffect(final NyleasPresenceLandTypeEffect effect) {
+    private NyleasPresenceLandTypeEffect(final NyleasPresenceLandTypeEffect effect) {
         super(effect);
     }
 

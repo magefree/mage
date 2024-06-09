@@ -13,11 +13,19 @@ public final class TezzeretBetrayerOfFleshEmblem extends Emblem {
 
     // −6: You get an emblem with "Whenever an artifact you control becomes tapped, draw a card."
     public TezzeretBetrayerOfFleshEmblem() {
-        this.setName("Emblem Tezzeret");
-        this.setExpansionSetCodeForImage("NEO");
+        super("Emblem Tezzeret");
         this.getAbilities().add(new BecomesTappedTriggeredAbility(
                 Zone.COMMAND, new DrawCardSourceControllerEffect(1), false,
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, false
         ));
+    }
+
+    private TezzeretBetrayerOfFleshEmblem(final TezzeretBetrayerOfFleshEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public TezzeretBetrayerOfFleshEmblem copy() {
+        return new TezzeretBetrayerOfFleshEmblem(this);
     }
 }

@@ -38,12 +38,12 @@ public final class Leeches extends CardImpl {
 
 class LeechesEffect extends OneShotEffect {
 
-    public LeechesEffect() {
+    LeechesEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target player loses all poison counters. Leeches deals that much damage to that player";
     }
 
-    public LeechesEffect(final LeechesEffect effect) {
+    private LeechesEffect(final LeechesEffect effect) {
         super(effect);
     }
 
@@ -60,9 +60,9 @@ class LeechesEffect extends OneShotEffect {
             return false;
         }
 
-        int countPoisonCounters = targetPlayer.getCounters().getCount(CounterType.POISON);
+        int countPoisonCounters = targetPlayer.getCountersCount(CounterType.POISON);
         if (countPoisonCounters > 0) {
-            targetPlayer.removeCounters(CounterType.POISON.getName(), countPoisonCounters, source, game);
+            targetPlayer.loseAllCounters(CounterType.POISON.getName(), source, game);
             targetPlayer.damage(countPoisonCounters, source.getSourceId(), source, game);
             return true;
         }

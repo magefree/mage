@@ -25,7 +25,7 @@ public final class JagwaspSwarm extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public JagwaspSwarm (final JagwaspSwarm card) {
+    private JagwaspSwarm(final JagwaspSwarm card) {
         super(card);
     }
 

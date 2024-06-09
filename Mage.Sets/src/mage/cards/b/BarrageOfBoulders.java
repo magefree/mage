@@ -15,8 +15,6 @@ import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
-
 /**
  * @author LevelX2
  */
@@ -30,7 +28,7 @@ public final class BarrageOfBoulders extends CardImpl {
         // Ferocious - If you control a creature with power 4 or greater, creatures can't block this turn
         Effect effect = new ConditionalRestrictionEffect(
                 Duration.EndOfTurn,
-                new CantBlockAllEffect(FILTER_PERMANENT_CREATURES, Duration.EndOfTurn),
+                new CantBlockAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn),
                 new LockedInCondition(FerociousCondition.instance), null);
         effect.setText("<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, creatures can't block this turn");
         this.getSpellAbility().addEffect(effect);

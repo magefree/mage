@@ -53,12 +53,12 @@ public final class PowderKeg extends CardImpl {
 
 class PowderKegEffect extends OneShotEffect {
 
-    public PowderKegEffect() {
+    PowderKegEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy each artifact and creature with mana value equal to the number of fuse counters on {this}";
     }
 
-    public PowderKegEffect(final PowderKegEffect effect) {
+    private PowderKegEffect(final PowderKegEffect effect) {
         super(effect);
     }
 

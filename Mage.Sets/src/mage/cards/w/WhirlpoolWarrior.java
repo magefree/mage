@@ -57,12 +57,12 @@ public final class WhirlpoolWarrior extends CardImpl {
 
 class WhirlpoolWarriorActivatedEffect extends OneShotEffect {
 
-    public WhirlpoolWarriorActivatedEffect() {
+    WhirlpoolWarriorActivatedEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each player shuffles the cards from their hand into their library, then draws that many cards";
     }
 
-    public WhirlpoolWarriorActivatedEffect(final WhirlpoolWarriorActivatedEffect effect) {
+    private WhirlpoolWarriorActivatedEffect(final WhirlpoolWarriorActivatedEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
         this.staticText = "Search target player's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way";
     }
 
-    LostLegacyEffect(final LostLegacyEffect effect) {
+    private LostLegacyEffect(final LostLegacyEffect effect) {
         super(effect);
     }
 
@@ -59,7 +59,7 @@ class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
             FilterCard filter = new FilterCard();
             filter.add(new NamePredicate(cardName));
             int cardsInHandBefore = targetPlayer.getHand().count(filter, game);
-            boolean result = super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
+            boolean result = super.applySearchAndExile(game, source, cardName, getTargetPointer().getFirst(game, source));
             int cardsExiled = cardsInHandBefore - targetPlayer.getHand().count(filter, game);
             if (cardsExiled > 0) {
                 targetPlayer.drawCards(cardsExiled, source, game);

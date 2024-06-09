@@ -2,6 +2,7 @@
 package mage.cards.f;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -58,7 +59,7 @@ public final class FlowstoneSculpture extends CardImpl {
 
 class FlowstoneSculptureEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("+1/+1 counter");
@@ -72,7 +73,7 @@ class FlowstoneSculptureEffect extends OneShotEffect {
         staticText = "Put a +1/+1 counter on {this} or {this} gains flying, first strike, or trample.";
     }
 
-    public FlowstoneSculptureEffect(final FlowstoneSculptureEffect effect) {
+    private FlowstoneSculptureEffect(final FlowstoneSculptureEffect effect) {
         super(effect);
     }
 

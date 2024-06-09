@@ -51,12 +51,12 @@ public final class BellowingFiend extends CardImpl {
 
 class BellowingFiendEffect extends OneShotEffect {
 
-    public BellowingFiendEffect() {
+    BellowingFiendEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this} deals 3 damage to that creature's controller";
     }
 
-    public BellowingFiendEffect(final BellowingFiendEffect effect) {
+    private BellowingFiendEffect(final BellowingFiendEffect effect) {
         super(effect);
     }
 

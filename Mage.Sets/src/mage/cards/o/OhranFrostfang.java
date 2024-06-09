@@ -21,7 +21,7 @@ public final class OhranFrostfang extends CardImpl {
     public OhranFrostfang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);

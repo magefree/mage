@@ -11,7 +11,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
- *
  * @author LevelX2
  */
 public class OutlastAbility extends ActivatedAbilityImpl {
@@ -22,7 +21,7 @@ public class OutlastAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public OutlastAbility(final OutlastAbility ability) {
+    protected OutlastAbility(final OutlastAbility ability) {
         super(ability);
     }
 
@@ -33,7 +32,7 @@ public class OutlastAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Outlast ").append(manaCosts.getText());
+        StringBuilder sb = new StringBuilder("Outlast ").append(getManaCosts().getText());
         sb.append(" <i>(").append(getManaCosts().getText()).append(", ").append(getCosts().getText()).append(":  Put a +1/+1 counter on this creature. Outlast only as a sorcery.)</i>");
         return sb.toString();
     }

@@ -78,7 +78,7 @@ class KaylasReconstructionEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 7));
         TargetCardInLibrary target = new TargetCardInLibrary(0, source.getManaCostsToPay().getX(), filter);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Cards toBattlefield = new CardsImpl(target.getTargets());
         player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);

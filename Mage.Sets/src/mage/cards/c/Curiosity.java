@@ -59,7 +59,7 @@ class CuriosityAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public CuriosityAbility(final CuriosityAbility ability) {
+    private CuriosityAbility(final CuriosityAbility ability) {
         super(ability);
     }
 

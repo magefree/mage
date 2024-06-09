@@ -23,13 +23,13 @@ public class DealsDamageToOneOrMoreCreaturesTriggeredAbility extends DealsDamage
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             // check that combat damage does only once trigger also if multiple creatures were damaged because they block or were blocked by source
-            if (game.getTurn().getStepType() == PhaseStep.COMBAT_DAMAGE
-                    || game.getTurn().getStepType() == PhaseStep.FIRST_COMBAT_DAMAGE) {
+            if (game.getTurnStepType() == PhaseStep.COMBAT_DAMAGE
+                    || game.getTurnStepType() == PhaseStep.FIRST_COMBAT_DAMAGE) {
                 String stepHash = (String) game.getState().getValue("damageStep" + getOriginalId());
-                String newStepHash = game.getStep().getType().toString() + game.getTurnNum();
+                String newStepHash = game.getTurnStepType().toString() + game.getTurnNum();
                 if (!newStepHash.equals(stepHash)) {
                     // this ability did not trigger during this damage step
-                    game.getState().setValue("damageStep" + getOriginalId(), game.getStep().getType().toString() + game.getTurnNum());
+                    game.getState().setValue("damageStep" + getOriginalId(), game.getTurnStepType().toString() + game.getTurnNum());
                     return true;
                 }
             } else {

@@ -39,7 +39,7 @@ public final class KorSanctifiers extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, destroy target artifact or enchantment."));
     }
 
-    public KorSanctifiers (final KorSanctifiers card) {
+    private KorSanctifiers(final KorSanctifiers card) {
         super(card);
     }
 

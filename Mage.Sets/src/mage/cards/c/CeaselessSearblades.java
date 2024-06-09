@@ -56,7 +56,7 @@ class CeaselessSearbladesTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you activate an ability of an Elemental, ");
     }
 
-    CeaselessSearbladesTriggeredAbility(final CeaselessSearbladesTriggeredAbility ability) {
+    private CeaselessSearbladesTriggeredAbility(final CeaselessSearbladesTriggeredAbility ability) {
         super(ability);
     }
 

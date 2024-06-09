@@ -1,57 +1,39 @@
-
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.game.Game;
 
 /**
- *  RENAME
- * @author Backfir3, noxx
+ * @author xenohedron
  */
-public class SetBaseToughnessSourceEffect extends ContinuousEffectImpl {
+public class SetBaseToughnessSourceEffect extends SetBasePowerToughnessSourceEffect {
 
-    private final DynamicValue amount;
-
-    public SetBaseToughnessSourceEffect(DynamicValue amount, Duration duration) {
-        this(amount, duration, SubLayer.CharacteristicDefining_7a);
-    }
-
-    public SetBaseToughnessSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
-        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
-        this.amount = amount;
+    /**
+     * @param amount Toughness to set as a characteristic-defining ability
+     */
+    public SetBaseToughnessSourceEffect(DynamicValue amount) {
+        super(null, amount, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a);
         staticText = "{this}'s toughness is equal to the number of " + amount.getMessage();
     }
 
-    public SetBaseToughnessSourceEffect(final SetBaseToughnessSourceEffect effect) {
+    /**
+     * @param amount Toughness to set in layer 7b
+     * @param duration Duration for the effect
+     */
+    public SetBaseToughnessSourceEffect(int amount, Duration duration) {
+        super(null, StaticValue.get(amount), duration, SubLayer.SetPT_7b);
+        staticText = "{this} has base toughness " + amount + ' ' + duration.toString();
+    }
+
+    protected SetBaseToughnessSourceEffect(final SetBaseToughnessSourceEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
     public SetBaseToughnessSourceEffect copy() {
         return new SetBaseToughnessSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source);
-        if (mageObject != null) {
-            int value = amount.calculate(game, source, this);
-            mageObject.getToughness().setModifiedBaseValue(value);
-            return true;
-        } else {
-            if (duration == Duration.Custom) {
-                discard();
-            }
-        }
-        return false;
     }
 
 }

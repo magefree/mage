@@ -1,13 +1,13 @@
 
 package org.mage.test.cards.control;
 
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
@@ -197,5 +197,34 @@ public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
 
         assertHandCount(playerB, "Ob Nixilis Reignited", 0);
         assertPermanentCount(playerB, "Ob Nixilis Reignited", 1);
+    }
+
+    @Test
+    public void test_ZoeticCavern_CanMorphButNotPlay() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        // Deathtouch
+        // When Gonti, Lord of Luxury enters the battlefield, look at the top four cards of target opponent's library, exile one of them face down,
+        // then put the rest on the bottom of that library in a random order. For as long as that card remains exiled,
+        // you may look at it, you may cast it, and you may spend mana as though it were mana of any type to cast it.
+        addCard(Zone.HAND, playerA, "Gonti, Lord of Luxury", 1); // Creature 2/3 {2}{B}{B}
+        addCard(Zone.HAND, playerA, "Mountain", 1); // just to have a positive check on checkPlayableAbility for a land.
+
+        // Land with Morph {3}
+        addCard(Zone.LIBRARY, playerB, "Zoetic Cavern");
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gonti, Lord of Luxury");
+        addTarget(playerA, playerB); // target for Gonti's trigger
+        setChoice(playerA, "Zoetic Cavern");
+        checkPlayableAbility("could play Mountain from hand", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Play Mountain", true);
+        checkPlayableAbility("cannot play Zoetic Cavern from exile", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Play Zoetic", false);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
+
+        setStopAt(4, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
     }
 }

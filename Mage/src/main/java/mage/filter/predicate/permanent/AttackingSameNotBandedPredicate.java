@@ -26,6 +26,7 @@ public class AttackingSameNotBandedPredicate implements Predicate<Permanent> {
         return combatGroup != null
                     && input.isAttacking()
                     && input.getBandedCards().isEmpty()
+                    && combatGroup.getDefenderId() != null
                     && combatGroup.getDefenderId().equals(defenderId);
     }
 }

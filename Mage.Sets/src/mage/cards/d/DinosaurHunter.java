@@ -48,7 +48,7 @@ class DinosaurHunterAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());
     }
 
-    DinosaurHunterAbility(final DinosaurHunterAbility ability) {
+    private DinosaurHunterAbility(final DinosaurHunterAbility ability) {
         super(ability);
     }
 

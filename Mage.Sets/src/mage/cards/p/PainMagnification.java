@@ -42,7 +42,7 @@ class PainMagnificationTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1), false);
     }
     
-    public PainMagnificationTriggeredAbility(final PainMagnificationTriggeredAbility ability) {
+    private PainMagnificationTriggeredAbility(final PainMagnificationTriggeredAbility ability) {
         super(ability);
     }
     

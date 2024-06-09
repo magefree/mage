@@ -80,6 +80,7 @@ public class DeckArea extends javax.swing.JPanel {
         deckList.setRole(DragCardGrid.Role.MAINDECK);
         sideboardList.setRole(DragCardGrid.Role.SIDEBOARD);
 
+        // card actions in main
         // When a selection happens in one pane, deselect the selection in the other
         deckList.addDragCardGridListener(new DragCardGrid.DragCardGridListener() {
             @Override
@@ -121,6 +122,8 @@ public class DeckArea extends javax.swing.JPanel {
                 }
             }
         });
+
+        // card actions in sideboard
         sideboardList.addDragCardGridListener(new DragCardGrid.DragCardGridListener() {
             @Override
             public void cardsSelected() {

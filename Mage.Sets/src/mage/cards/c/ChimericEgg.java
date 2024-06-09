@@ -45,7 +45,7 @@ public final class ChimericEgg extends CardImpl {
                         .withSubType(SubType.CONSTRUCT)
                         .withType(CardType.ARTIFACT)
                         .withAbility(TrampleAbility.getInstance()),
-                "", Duration.EndOfTurn), new RemoveCountersSourceCost(new Counter(CounterType.CHARGE.getName(), 3))));
+                CardType.ARTIFACT, Duration.EndOfTurn), new RemoveCountersSourceCost(new Counter(CounterType.CHARGE.getName(), 3))));
     }
 
     private ChimericEgg(final ChimericEgg card) {

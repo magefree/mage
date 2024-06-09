@@ -1,6 +1,7 @@
 package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.file.Paths;
@@ -26,12 +27,11 @@ public class O8dDeckImportTest {
                 false
         );
 
+        Assert.assertEquals("", errors.toString());
         TestDeckChecker.checker()
                 .addMain("Forest", 1)
                 .addSide("Island", 2)
                 .verify(deck, 1, 2);
-
-        assertEquals("", errors.toString());
     }
 
 }

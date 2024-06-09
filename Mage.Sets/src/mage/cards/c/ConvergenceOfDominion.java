@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlYourCommanderCondition;
@@ -76,7 +75,7 @@ class ConvergenceOfDominionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return ControlYourCommanderCondition.instance.apply(game, source)
-                && abilityToModify instanceof ActivatedAbility
+                && abilityToModify.isActivatedAbility()
                 && game.getState().getZone(abilityToModify.getSourceId()) == Zone.GRAVEYARD;
     }
 

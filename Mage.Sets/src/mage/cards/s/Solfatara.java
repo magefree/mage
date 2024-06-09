@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -32,7 +31,8 @@ public final class Solfatara extends CardImpl {
 
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false)
+                .concatBy("<br>"));
     }
 
     private Solfatara(final Solfatara card) {
@@ -47,23 +47,18 @@ public final class Solfatara extends CardImpl {
 
 class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SolfataraEffect() {
+    SolfataraEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "Target player can't play land cards this turn";
+        staticText = "Target player can't play lands this turn";
     }
 
-    public SolfataraEffect(final SolfataraEffect effect) {
+    private SolfataraEffect(final SolfataraEffect effect) {
         super(effect);
     }
 
     @Override
     public SolfataraEffect copy() {
         return new SolfataraEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -76,11 +71,12 @@ class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PLAY_LAND && event.getPlayerId().equals(source.getFirstTarget())) {
-            return true;
-        }
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PLAY_LAND;
     }
 
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getPlayerId().equals(source.getFirstTarget());
+    }
 }

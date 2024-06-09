@@ -31,7 +31,7 @@ public final class PilgrimsEye extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true), true));
     }
 
-    public PilgrimsEye(final PilgrimsEye card) {
+    private PilgrimsEye(final PilgrimsEye card) {
         super(card);
     }
 

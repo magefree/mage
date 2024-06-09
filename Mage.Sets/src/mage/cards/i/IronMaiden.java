@@ -1,7 +1,6 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -42,16 +41,16 @@ class IronMaidenEffect extends OneShotEffect {
 
     private IronMaidenEffect(final IronMaidenEffect effect) {
         super(effect);
-        this.staticText = "Iron Maiden deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
     public IronMaidenEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int amount = player.getHand().size() - 4;
             if (amount > 0) {

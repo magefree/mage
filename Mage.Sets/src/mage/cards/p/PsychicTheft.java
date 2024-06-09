@@ -69,7 +69,7 @@ class PsychicTheftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent == null) {
             return false;
         }
@@ -82,7 +82,7 @@ class PsychicTheftEffect extends OneShotEffect {
         Card chosenCard = null;
         if (cardsHand > 0) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
+            if (controller.choose(Outcome.Exile, opponent.getHand(), target, source, game)) {
                 chosenCard = opponent.getHand().get(target.getFirstTarget(), game);
             }
         }
@@ -91,7 +91,7 @@ class PsychicTheftEffect extends OneShotEffect {
         }
         controller.moveCardToExileWithInfo(chosenCard, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source), source, game, Zone.HAND, true);
 
-        CardUtil.makeCardPlayable(game, source, chosenCard, Duration.Custom, false);
+        CardUtil.makeCardPlayable(game, source, chosenCard, true, Duration.Custom, false);
 
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new ConditionalOneShotEffect(

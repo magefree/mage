@@ -35,7 +35,7 @@ public final class ThrashingMudspawn extends CardImpl {
         this.addAbility(ability);
 
         // Morph {1}{B}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{B}{B}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{B}{B}")));
 
     }
 
@@ -51,12 +51,12 @@ public final class ThrashingMudspawn extends CardImpl {
 
 class ThrashingMudspawnEffect extends OneShotEffect {
 
-    public ThrashingMudspawnEffect() {
+    ThrashingMudspawnEffect() {
         super(Outcome.Damage);
         this.staticText = "you lose that much life";
     }
 
-    public ThrashingMudspawnEffect(final ThrashingMudspawnEffect effect) {
+    private ThrashingMudspawnEffect(final ThrashingMudspawnEffect effect) {
         super(effect);
     }
 

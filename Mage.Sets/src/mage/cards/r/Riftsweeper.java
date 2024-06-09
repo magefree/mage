@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -9,8 +8,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.FaceDownPredicate;
@@ -18,8 +17,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Riftsweeper extends CardImpl {
@@ -40,7 +40,7 @@ public final class Riftsweeper extends CardImpl {
 
         // When Riftsweeper enters the battlefield, choose target face-up exiled card. Its owner shuffles it into their library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new RiftsweeperEffect(), false);
-        ability.addTarget(new TargetCardInExile(1, 1, filter, null, true));
+        ability.addTarget(new TargetCardInExile(filter));
         this.addAbility(ability);
     }
 
@@ -56,12 +56,12 @@ public final class Riftsweeper extends CardImpl {
 
 class RiftsweeperEffect extends OneShotEffect {
 
-    public RiftsweeperEffect() {
+    RiftsweeperEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose target face-up exiled card. Its owner shuffles it into their library";
     }
 
-    public RiftsweeperEffect(final RiftsweeperEffect effect) {
+    private RiftsweeperEffect(final RiftsweeperEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class RiftsweeperEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             // remove existing suspend counters
             card.getCounters(game).clear();

@@ -4,11 +4,9 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
-import mage.target.Target;
 
-import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * @author TheElk801
@@ -23,18 +21,16 @@ public class SourceTargetsPermanentCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject sourceSpell = game.getStack().getStackObject(source.getSourceId());
-        if (sourceSpell == null) {
+        StackObject stackObject = game.getStack().getStackObject(source.getSourceId());
+        if (stackObject == null) {
             return false;
         }
-        Iterator<Target> targets = sourceSpell.getStackAbility().getTargets().iterator();
-        while (targets.hasNext()) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(targets.next().getFirstTarget());
-            if (filter.match(permanent, source.getControllerId(), source, game)) {
-                return true;
-            }
-        }
-        return false;
+        return stackObject.getStackAbility().getTargets()
+                .stream()
+                .flatMap(t -> t.getTargets().stream())
+                .map(game::getPermanentOrLKIBattlefield)
+                .filter(Objects::nonNull)
+                .anyMatch(p -> filter.match(p, source.getControllerId(), source, game));
     }
 
     @Override

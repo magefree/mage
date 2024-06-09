@@ -1,18 +1,15 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -21,8 +18,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPermanentOrPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class MaulfistRevolutionary extends CardImpl {
@@ -57,12 +55,12 @@ public final class MaulfistRevolutionary extends CardImpl {
 
 class MaulfistRevolutionaryEffect extends OneShotEffect {
 
-    public MaulfistRevolutionaryEffect() {
+    MaulfistRevolutionaryEffect() {
         super(Outcome.Neutral);
         this.staticText = "for each kind of counter on target permanent or player, give that permanent or player another counter of that kind";
     }
 
-    public MaulfistRevolutionaryEffect(final MaulfistRevolutionaryEffect effect) {
+    private MaulfistRevolutionaryEffect(final MaulfistRevolutionaryEffect effect) {
         super(effect);
     }
 
@@ -72,7 +70,7 @@ class MaulfistRevolutionaryEffect extends OneShotEffect {
         if (controller != null) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null) {
-                Counters counters = player.getCounters().copy();
+                Counters counters = player.getCountersAsCopy();
                 for (Counter counter : counters.values()) {
                     CounterType counterType = CounterType.findByName(counter.getName());
                     Counter counterToAdd;
@@ -105,7 +103,7 @@ class MaulfistRevolutionaryEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public MaulfistRevolutionaryEffect copy() {
         return new MaulfistRevolutionaryEffect(this);
     }
 

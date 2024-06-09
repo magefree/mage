@@ -52,12 +52,12 @@ public final class SummonersEgg extends CardImpl {
 
 class SummonersEggImprintEffect extends OneShotEffect {
 
-    public SummonersEggImprintEffect() {
+    SummonersEggImprintEffect() {
         super(Outcome.Benefit);
         staticText = "exile a card from your hand face down";
     }
 
-    public SummonersEggImprintEffect(SummonersEggImprintEffect effect) {
+    private SummonersEggImprintEffect(final SummonersEggImprintEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class SummonersEggImprintEffect extends OneShotEffect {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD);
                 if (target.canChoose(source.getControllerId(), source, game)
-                        && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
+                        && controller.choose(Outcome.Benefit, controller.getHand(), target, source, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         card.setFaceDown(true, game);
@@ -95,12 +95,12 @@ class SummonersEggImprintEffect extends OneShotEffect {
 
 class SummonersEggPutOntoBattlefieldEffect extends OneShotEffect {
 
-    public SummonersEggPutOntoBattlefieldEffect() {
+    SummonersEggPutOntoBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control";
     }
 
-    public SummonersEggPutOntoBattlefieldEffect(final SummonersEggPutOntoBattlefieldEffect effect) {
+    private SummonersEggPutOntoBattlefieldEffect(final SummonersEggPutOntoBattlefieldEffect effect) {
         super(effect);
     }
 

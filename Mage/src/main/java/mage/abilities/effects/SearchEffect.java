@@ -19,7 +19,7 @@ public abstract class SearchEffect extends OneShotEffect {
         this.target = target;
     }
 
-    public SearchEffect(SearchEffect effect) {
+    protected SearchEffect(final SearchEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }

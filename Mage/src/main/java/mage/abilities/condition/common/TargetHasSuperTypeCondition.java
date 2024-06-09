@@ -23,7 +23,7 @@ public class TargetHasSuperTypeCondition implements Condition {
         if (!source.getTargets().isEmpty()) {
             MageObject mageObject = game.getObject(source.getFirstTarget());
             if (mageObject != null) {
-                return mageObject.getSuperType().contains(superType);
+                return mageObject.getSuperType(game).contains(superType);
             }
         }
         return false;

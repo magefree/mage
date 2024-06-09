@@ -33,7 +33,7 @@ public final class BodyOfKnowledge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerToughnessSourceEffect(
-                        CardsInControllerHandCount.instance, Duration.EndOfGame
+                        CardsInControllerHandCount.instance
                 )
         ));
 

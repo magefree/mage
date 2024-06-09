@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
+public class ComputerPlayerMCTS extends ComputerPlayer {
 
     private static final int THINK_MIN_RATIO = 40;
     private static final int THINK_MAX_RATIO = 100;
@@ -61,7 +61,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 
     @Override
     public boolean priority(Game game) {
-        if (game.getStep().getType() == PhaseStep.UPKEEP) {
+        if (game.getTurnStepType() == PhaseStep.UPKEEP) {
             if (!lastPhase.equals(game.getTurn().getValue(game.getTurnNum()))) {
                 logList(game.getTurn().getValue(game.getTurnNum()) + name + " hand: ", new ArrayList(hand.getCards(game)));
                 lastPhase = game.getTurn().getValue(game.getTurnNum());
@@ -236,7 +236,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         if (root.getNumChildren() > 0)
             nodeSizeRatio = root.getVisits() / root.getNumChildren();
 //        logger.info("Ratio: " + nodeSizeRatio);
-        PhaseStep curStep = game.getStep().getType();
+        PhaseStep curStep = game.getTurnStepType();
         if (action == NextAction.SELECT_ATTACKERS || action == NextAction.SELECT_BLOCKERS) {
             if (nodeSizeRatio < THINK_MIN_RATIO) {
                 thinkTime = maxThinkTime;
@@ -274,7 +274,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
      * @return a new game object with simulated players
      */
     protected Game createMCTSGame(Game game) {
-        Game mcts = game.copy();
+        Game mcts = game.createSimulationForAI();
 
         for (Player copyPlayer : mcts.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
@@ -295,7 +295,6 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
             }
             mcts.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
         }
-        mcts.setSimulation(true);
         mcts.resume();
         return mcts;
     }

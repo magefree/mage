@@ -44,7 +44,7 @@ class MemoricideEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
         super(true, "target player's", "any number of cards with that name");
     }
 
-    MemoricideEffect(final MemoricideEffect effect) {
+    private MemoricideEffect(final MemoricideEffect effect) {
         super(effect);
     }
 
@@ -54,7 +54,7 @@ class MemoricideEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
         if (cardName == null) {
             return false;
         }
-        return super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
+        return super.applySearchAndExile(game, source, cardName, getTargetPointer().getFirst(game, source));
     }
 
     @Override

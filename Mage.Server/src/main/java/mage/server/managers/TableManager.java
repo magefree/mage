@@ -83,4 +83,6 @@ public interface TableManager {
     void removeTable(UUID tableId);
 
     void debugServerState();
+
+    void checkHealth();
 }

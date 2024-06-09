@@ -51,12 +51,12 @@ public final class PhyrexianGrimoire extends CardImpl {
 
 class PhyrexianGrimoireEffect extends OneShotEffect {
 
-    public PhyrexianGrimoireEffect() {
+    PhyrexianGrimoireEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Target opponent chooses one of the top two cards of your graveyard. Exile that card and put the other one into your hand";
     }
 
-    public PhyrexianGrimoireEffect(final PhyrexianGrimoireEffect effect) {
+    private PhyrexianGrimoireEffect(final PhyrexianGrimoireEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class PhyrexianGrimoireEffect extends OneShotEffect {
                 
                 TargetCard target = new TargetCard(Zone.GRAVEYARD, new FilterCard());
                 target.setRequired(true);
-                if(opponent.choose(Outcome.Exile, cards, target, game))
+                if(opponent.choose(Outcome.Exile, cards, target, source, game))
                 {
                     Card card = game.getCard(target.getFirstTarget()); 
                     cards.remove(target.getFirstTarget());

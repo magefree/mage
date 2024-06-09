@@ -33,9 +33,7 @@ public final class BramblefortFink extends CardImpl {
         // {8}: Bramblefort Fink has base power and toughness 10/10 until end of turn. Activate this ability only if you control an Oko planeswalker.
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SetBasePowerToughnessSourceEffect(
-                        10, 10, Duration.EndOfTurn, SubLayer.SetPT_7b, true
-                ).setText("{this} has base power and toughness 10/10 until end of turn"),
+                new SetBasePowerToughnessSourceEffect(10, 10, Duration.EndOfTurn),
                 new GenericManaCost(8),
                 condition));
     }

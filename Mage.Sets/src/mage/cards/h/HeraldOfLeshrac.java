@@ -82,7 +82,7 @@ class HeraldOfLeshracCumulativeCost extends CostImpl {
         this.text = "Gain control of a land you don't control";
     }
 
-    HeraldOfLeshracCumulativeCost(final HeraldOfLeshracCumulativeCost cost) {
+    private HeraldOfLeshracCumulativeCost(final HeraldOfLeshracCumulativeCost cost) {
         super(cost);
     }
 
@@ -117,7 +117,7 @@ class HeraldOfLeshracLeavesEffect extends OneShotEffect {
         this.staticText = "each player gains control of each land they own that you control";
     }
 
-    HeraldOfLeshracLeavesEffect(final HeraldOfLeshracLeavesEffect effect) {
+    private HeraldOfLeshracLeavesEffect(final HeraldOfLeshracLeavesEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public AtTheBeginOfMainPhaseDelayedTriggeredAbility(final AtTheBeginOfMainPhaseDelayedTriggeredAbility ability) {
+    protected AtTheBeginOfMainPhaseDelayedTriggeredAbility(final AtTheBeginOfMainPhaseDelayedTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.phaseSelection = ability.phaseSelection;

@@ -93,7 +93,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
 
         setStrictChooseMode(true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-2");
-        setChoice(playerA, "Yes"); // For player this choice is "Hand" but tests require "Yes"
         setChoice(playerA, vorpal);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -113,7 +112,7 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
     public void testNissaCanPlay() {
         addCard(Zone.BATTLEFIELD, playerA, nissa);
         addCard(Zone.HAND, playerA, swift);  // {4}{B}{R}
-        addCard(Zone.HAND, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.HAND, playerA, "Mountain");
 
         setStrictChooseMode(true);
@@ -121,7 +120,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-5");
         setChoice(playerA, swift);
-        setChoice(playerA, "Yes"); // Say yes to Swift Warkite's ETB (no further choice needed since there are no possible options
 
         setStopAt(1, PhaseStep.END_TURN);
 
@@ -144,7 +142,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
         addCard(Zone.BATTLEFIELD, playerA, nissa);
         addCard(Zone.HAND, playerA, swift);  // {4}{B}{R}
         addCard(Zone.HAND, playerA, "Mountain");
-
 
         setStrictChooseMode(true);
 
@@ -174,7 +171,6 @@ public class PutCardFromOneOfTwoZonesOntoBattlefieldEffectTest extends CardTestP
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, swift);
-        setChoice(playerA, "Yes"); // Yes to activating Swift Warkite's ETB
         setChoice(playerA, sliver); // Pick the sliver for the ETB
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

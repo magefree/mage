@@ -34,7 +34,7 @@ public final class RakdosDrake extends CardImpl {
 
     }
 
-    public RakdosDrake (final RakdosDrake card) {
+    private RakdosDrake(final RakdosDrake card) {
         super(card);
     }
 

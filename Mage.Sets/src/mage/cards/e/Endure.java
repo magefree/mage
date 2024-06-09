@@ -6,7 +6,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -15,11 +15,11 @@ import java.util.UUID;
  */
 public final class Endure extends CardImpl {
 
-    private static final FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker("you and permanents you control");
+    private static final FilterPermanentOrPlayer filter = new FilterPermanentOrPlayer("you and permanents you control");
 
     static {
-        filter.getPermanentFilter().add(TargetController.YOU.getControllerPredicate());
         filter.getPlayerFilter().add(TargetController.YOU.getPlayerPredicate());
+        filter.getPermanentFilter().add(TargetController.YOU.getControllerPredicate());
     }
 
     public Endure(UUID ownerId, CardSetInfo setInfo) {
@@ -27,7 +27,6 @@ public final class Endure extends CardImpl {
 
         // Prevent all damage that would be dealt to you and permanents you control this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter));
-
     }
 
     private Endure(final Endure card) {

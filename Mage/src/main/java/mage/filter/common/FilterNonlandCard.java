@@ -7,7 +7,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterNonlandCard extends FilterCard {
@@ -21,7 +20,7 @@ public class FilterNonlandCard extends FilterCard {
         this.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
-    public FilterNonlandCard(final FilterNonlandCard filter) {
+    protected FilterNonlandCard(final FilterNonlandCard filter) {
         super(filter);
     }
 

@@ -2,8 +2,6 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnToHandFromGraveyardAllEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -11,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.card.PutIntoGraveFromBattlefieldThisTurnPredicate;
@@ -38,7 +35,6 @@ public final class Gleancrawler extends CardImpl {
         this.toughness = new MageInt(6);
 
         // <i>({B/G} can be paid with either {B} or {G}.)</i>
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("<i>({B/G} can be paid with either {B} or {G}.)</i>")));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

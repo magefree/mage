@@ -19,7 +19,7 @@ public class CanBlockOnlyFlyingAttachedEffect extends RestrictionEffect {
         this.staticText = attachmentType.verb() + " creature can block only creatures with flying";
     }
 
-    public CanBlockOnlyFlyingAttachedEffect(final CanBlockOnlyFlyingAttachedEffect effect) {
+    protected CanBlockOnlyFlyingAttachedEffect(final CanBlockOnlyFlyingAttachedEffect effect) {
         super(effect);
     }
 

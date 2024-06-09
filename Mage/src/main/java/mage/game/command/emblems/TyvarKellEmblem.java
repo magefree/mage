@@ -6,6 +6,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -24,16 +25,24 @@ public final class TyvarKellEmblem extends Emblem {
 
     // −6: You get an emblem with "Whenever you cast an Elf spell, it gains haste until end of turn and you draw two cards."
     public TyvarKellEmblem() {
-        this.setName("Emblem Tyvar");
-        this.setExpansionSetCodeForImage("KHM");
+        super("Emblem Tyvar");
 
         Ability ability = new SpellCastControllerTriggeredAbility(
                 Zone.COMMAND,
                 new GainAbilityTargetEffect(
                         HasteAbility.getInstance(), Duration.EndOfTurn, null, true
-                ).setText("it gains haste until end of turn"), filter, false, true, true
+                ).setText("it gains haste until end of turn"), filter, false, SetTargetPointer.CARD
         );
         ability.addEffect(new DrawCardSourceControllerEffect(2, "you").concatBy("and"));
         this.getAbilities().add(ability);
+    }
+
+    private TyvarKellEmblem(final TyvarKellEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public TyvarKellEmblem copy() {
+        return new TyvarKellEmblem(this);
     }
 }

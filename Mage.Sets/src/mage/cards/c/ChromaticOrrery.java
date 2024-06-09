@@ -27,7 +27,7 @@ public final class ChromaticOrrery extends CardImpl {
     public ChromaticOrrery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // You may spend mana as though it were mana of any color.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChromaticOrreryEffect()));

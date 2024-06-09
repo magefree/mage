@@ -31,7 +31,7 @@ public final class AzcantaTheSunkenRuin extends CardImpl {
     public AzcantaTheSunkenRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // this card is the second face of double-faced card
         this.nightCard = true;

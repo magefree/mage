@@ -23,7 +23,7 @@ public final class LadyCaleria extends CardImpl {
 
     public LadyCaleria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(3);

@@ -47,7 +47,7 @@ public final class RainbowVale extends CardImpl {
             staticText = "an opponent gains control of {this} at the beginning of the next end step";
         }
 
-        public RainbowValeEffect(final RainbowValeEffect effect) {
+        private RainbowValeEffect(final RainbowValeEffect effect) {
             super(effect);
         }
 
@@ -78,7 +78,7 @@ class OpponentGainControlEffect extends ContinuousEffectImpl {
         opponentId = null;
     }
 
-    public OpponentGainControlEffect(final OpponentGainControlEffect effect) {
+    private OpponentGainControlEffect(final OpponentGainControlEffect effect) {
         super(effect);
         this.opponentId = effect.opponentId;
     }

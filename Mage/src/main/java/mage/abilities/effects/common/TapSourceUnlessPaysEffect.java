@@ -12,7 +12,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TapSourceUnlessPaysEffect extends OneShotEffect {
@@ -25,7 +24,7 @@ public class TapSourceUnlessPaysEffect extends OneShotEffect {
         staticText = "tap {this} unless you " + CardUtil.addCostVerb(cost.getText());
     }
 
-    public TapSourceUnlessPaysEffect(final TapSourceUnlessPaysEffect effect) {
+    protected TapSourceUnlessPaysEffect(final TapSourceUnlessPaysEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

@@ -20,7 +20,7 @@ public final class WhitesunsPassage extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(5));
     }
 
-    public WhitesunsPassage (final WhitesunsPassage card) {
+    private WhitesunsPassage(final WhitesunsPassage card) {
         super(card);
     }
 

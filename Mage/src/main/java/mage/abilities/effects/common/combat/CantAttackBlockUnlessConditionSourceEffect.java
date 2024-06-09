@@ -20,7 +20,7 @@ public class CantAttackBlockUnlessConditionSourceEffect extends RestrictionEffec
         staticText = "{this} can't attack or block unless " + condition.toString();
     }
 
-    public CantAttackBlockUnlessConditionSourceEffect(final CantAttackBlockUnlessConditionSourceEffect effect) {
+    protected CantAttackBlockUnlessConditionSourceEffect(final CantAttackBlockUnlessConditionSourceEffect effect) {
         super(effect);
         this.condition = effect.condition;
     }

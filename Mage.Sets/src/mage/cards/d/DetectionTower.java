@@ -49,7 +49,7 @@ public final class DetectionTower extends CardImpl {
 
 class DetectionTowerEffect extends AsThoughEffectImpl {
 
-    public DetectionTowerEffect() {
+    DetectionTowerEffect() {
         super(AsThoughEffectType.HEXPROOF, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, your opponents and "
                 + "creatures with hexproof they control "
@@ -57,7 +57,7 @@ class DetectionTowerEffect extends AsThoughEffectImpl {
                 + "you control as though they didn't have hexproof";
     }
 
-    public DetectionTowerEffect(final DetectionTowerEffect effect) {
+    private DetectionTowerEffect(final DetectionTowerEffect effect) {
         super(effect);
     }
 

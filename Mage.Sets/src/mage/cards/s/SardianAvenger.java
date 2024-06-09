@@ -53,7 +53,7 @@ public final class SardianAvenger extends CardImpl {
 
         // Whenever Sardian Avenger attacks, it gets +X/+0 until end of turn, where X is the number of artifacts your opponents control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"
+                xValue, StaticValue.get(0), Duration.EndOfTurn, "it"
         )));
 
         // Whenever an artifact an opponent controls is put into a graveyard from the battlefield, Sardian Avenger deals 1 damage to that player.

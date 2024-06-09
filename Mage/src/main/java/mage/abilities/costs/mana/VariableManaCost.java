@@ -40,7 +40,7 @@ public final class VariableManaCost extends ManaCostImpl implements VariableCost
         options.add(new Mana());
     }
 
-    public VariableManaCost(final VariableManaCost manaCost) {
+    protected VariableManaCost(final VariableManaCost manaCost) {
         super(manaCost);
         this.costType = manaCost.costType;
         this.xInstancesCount = manaCost.xInstancesCount;

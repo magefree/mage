@@ -45,6 +45,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     private ManaCostsImpl(final ManaCostsImpl<T> costs) {
         this.id = costs.id;
         this.text = costs.text;
+        this.ensureCapacity(costs.size());
         for (T cost : costs) {
             this.add(cost.copy());
         }
@@ -291,7 +292,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     private boolean canPayColoredManaFromPool(ManaType needColor, ManaCost cost, ManaType canUseManaType, ManaPool pool) {
         if (canUseManaType == null || canUseManaType.equals(needColor)) {
             return cost.containsColor(CardUtil.manaTypeToColoredManaSymbol(needColor))
-                    && (pool.getColoredAmount(needColor) > 0 || pool.ConditionalManaHasManaType(needColor));
+                    && (pool.getColoredAmount(needColor) > 0 || pool.conditionalManaHasManaType(needColor));
         }
         return false;
     }
@@ -340,6 +341,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         // hybrid
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof HybridManaCost) {
+                cost.assignPayment(game, ability, pool, costToPay);
+                if (pool.isEmpty()) {
+                    return;
+                }
+            }
+        }
+
+        // Colorless hybrid
+        for (ManaCost cost : this) {
+            if (!cost.isPaid() && cost instanceof ColorlessHybridManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
                 if (pool.isEmpty()) {
                     return;
@@ -491,6 +502,8 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 ManaCost cost;
                 if (without.length() == 1) {
                     cost = new ColoredManaCost(ColoredManaSymbol.lookup(without.charAt(0)));
+                } else if (without.charAt(0) == 'C') {
+                    cost = new ColorlessHybridManaCost(ColoredManaSymbol.lookup(without.charAt(2)));
                 } else {
                     cost = new HybridManaCost(ColoredManaSymbol.lookup(without.charAt(0)), ColoredManaSymbol.lookup(without.charAt(2)));
                 }
@@ -600,15 +613,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public Targets getTargets() {
-        Targets targets = new Targets();
+        Targets res = new Targets();
         for (T cost : this) {
-            targets.addAll(cost.getTargets());
+            res.addAll(cost.getTargets());
         }
-        return targets;
+        return res.withReadOnly();
     }
 
     @Override
-    public ManaCosts<T> copy() {
+    public ManaCostsImpl<T> copy() {
         return new ManaCostsImpl<>(this);
     }
 

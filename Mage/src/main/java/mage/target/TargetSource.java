@@ -5,6 +5,7 @@ package mage.target;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -16,7 +17,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetSource extends TargetObject {
@@ -38,10 +38,10 @@ public class TargetSource extends TargetObject {
     public TargetSource(int minNumTargets, int maxNumTargets, FilterObject filter) {
         super(minNumTargets, maxNumTargets, Zone.ALL, true);
         this.filter = filter;
-        this.targetName = filter.getMessage();        
+        this.targetName = filter.getMessage();
     }
 
-    public TargetSource(final TargetSource target) {
+    protected TargetSource(final TargetSource target) {
         super(target);
         this.filter = target.filter.copy();
     }
@@ -62,15 +62,14 @@ public class TargetSource extends TargetObject {
             MageObject object = game.getObject(id);
             if (object instanceof StackObject) {
                 addTarget(((StackObject) object).getSourceId(), source, game, notTarget);
-            }
-            else {
+            } else {
                 addTarget(id, source, game, notTarget);
             }
-            if (object != null && !game.isSimulation()) {                
+            if (object != null && !game.isSimulation()) {
                 game.informPlayers("Selected " + object.getLogName() + " as source");
             }
         }
-        
+
     }
 
     @Override
@@ -86,7 +85,7 @@ public class TargetSource extends TargetObject {
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
         int count = 0;
-        for (StackObject stackObject: game.getStack()) {
+        for (StackObject stackObject : game.getStack()) {
             if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -94,7 +93,7 @@ public class TargetSource extends TargetObject {
                 }
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
             if (filter.match(permanent, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -131,12 +130,12 @@ public class TargetSource extends TargetObject {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        for (StackObject stackObject: game.getStack()) {
+        for (StackObject stackObject : game.getStack()) {
             if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId()) && filter.match(stackObject, game)) {
                 possibleTargets.add(stackObject.getId());
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
             if (filter.match(permanent, game)) {
                 possibleTargets.add(permanent.getId());
             }

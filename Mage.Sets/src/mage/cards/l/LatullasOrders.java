@@ -63,7 +63,7 @@ class LatullasOrdersTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    public LatullasOrdersTriggeredAbility(final LatullasOrdersTriggeredAbility ability) {
+    private LatullasOrdersTriggeredAbility(final LatullasOrdersTriggeredAbility ability) {
         super(ability);
     }
 

@@ -14,7 +14,7 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreatureEachColor;
+import mage.target.common.TargetSacrificeCreatureEachColor;
 
 import java.util.UUID;
 
@@ -43,7 +43,7 @@ public final class SphinxsHerald extends CardImpl {
                 new TargetCardInLibrary(filter)), new ManaCostsImpl<>("{2}{U}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreatureEachColor("WUB")));
+        ability.addCost(new SacrificeTargetCost(new TargetSacrificeCreatureEachColor("WUB")));
         this.addAbility(ability);
     }
 

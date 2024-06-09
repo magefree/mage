@@ -19,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -79,13 +80,12 @@ class CruelRealityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player cursedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player cursedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (cursedPlayer == null || controller == null) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        TargetSacrifice target = new TargetSacrifice(filter);
         if (target.canChoose(cursedPlayer.getId(), source, game)
                 && cursedPlayer.choose(Outcome.Sacrifice, target, source, game)) {
             Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());

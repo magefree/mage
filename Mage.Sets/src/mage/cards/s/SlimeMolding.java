@@ -37,12 +37,12 @@ public final class SlimeMolding extends CardImpl {
 
 class SlimeMoldingEffect extends OneShotEffect {
 
-    public SlimeMoldingEffect() {
+    SlimeMoldingEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X green Ooze creature token";
     }
 
-    public SlimeMoldingEffect(SlimeMoldingEffect ability) {
+    private SlimeMoldingEffect(final SlimeMoldingEffect ability) {
         super(ability);
     }
 

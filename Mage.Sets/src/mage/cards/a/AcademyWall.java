@@ -32,7 +32,7 @@ public final class AcademyWall extends CardImpl {
                 new DrawDiscardControllerEffect(true),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false
-        ).setTriggersOnce(true));
+        ).setTriggersLimitEachTurn(1));
     }
 
     private AcademyWall(final AcademyWall card) {

@@ -21,7 +21,7 @@ public final class PathOfAngersFlame extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         // Creatures you control get +2/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false));
     }
 
     private PathOfAngersFlame(final PathOfAngersFlame card) {

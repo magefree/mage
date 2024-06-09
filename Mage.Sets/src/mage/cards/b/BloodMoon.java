@@ -50,7 +50,7 @@ public final class BloodMoon extends CardImpl {
             this.dependendToTypes.add(DependencyType.BecomeNonbasicLand);
         }
 
-        BloodMoonEffect(final BloodMoonEffect effect) {
+        private BloodMoonEffect(final BloodMoonEffect effect) {
             super(effect);
         }
 

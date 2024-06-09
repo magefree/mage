@@ -17,7 +17,7 @@ public class RedManaAbility extends BasicManaAbility {
         this.netMana.add(new Mana(ColoredManaSymbol.R));
     }
 
-    public RedManaAbility(RedManaAbility ability) {
+    private RedManaAbility(final RedManaAbility ability) {
         super(ability);
     }
 

@@ -32,7 +32,7 @@ public final class MagnusTheRed extends CardImpl {
     public MagnusTheRed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.PRIMARCH);
         this.power = new MageInt(4);

@@ -53,7 +53,7 @@ class NetherShadowTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
         super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), TargetController.YOU, true);
     }
 
-    public NetherShadowTriggerdAbility(final NetherShadowTriggerdAbility effect) {
+    private NetherShadowTriggerdAbility(final NetherShadowTriggerdAbility effect) {
         super(effect);
     }    
     

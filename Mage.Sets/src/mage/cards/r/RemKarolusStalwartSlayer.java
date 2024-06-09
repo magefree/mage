@@ -28,7 +28,7 @@ public final class RemKarolusStalwartSlayer extends CardImpl {
     public RemKarolusStalwartSlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(2);
@@ -59,7 +59,7 @@ public final class RemKarolusStalwartSlayer extends CardImpl {
 
 class RemKarolusStalwartSlayerPreventionEffect extends PreventionEffectImpl {
 
-    public RemKarolusStalwartSlayerPreventionEffect() {
+    RemKarolusStalwartSlayerPreventionEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
         staticText = "If a spell would deal damage to you or another permanent you control, prevent that damage";
     }
@@ -99,7 +99,7 @@ class RemKarolusStalwartSlayerPreventionEffect extends PreventionEffectImpl {
 
 class RemKarolusStalwartSlayerReplacementEffect extends ReplacementEffectImpl {
 
-    public RemKarolusStalwartSlayerReplacementEffect() {
+    RemKarolusStalwartSlayerReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a spell would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead";
     }

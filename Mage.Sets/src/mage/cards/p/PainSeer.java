@@ -44,12 +44,12 @@ public final class PainSeer extends CardImpl {
 
 class PainSeerEffect extends OneShotEffect {
 
-    public PainSeerEffect() {
+    PainSeerEffect() {
         super(Outcome.DrawCard);
         this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to that card's mana value";
     }
 
-    public PainSeerEffect(final PainSeerEffect effect) {
+    private PainSeerEffect(final PainSeerEffect effect) {
         super(effect);
     }
 

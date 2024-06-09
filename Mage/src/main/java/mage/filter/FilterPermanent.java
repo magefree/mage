@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.constants.SubType;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author North
@@ -39,7 +41,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         }
     }
 
-    public FilterPermanent(final FilterPermanent filter) {
+    protected FilterPermanent(final FilterPermanent filter) {
         super(filter);
         this.extraPredicates.addAll(filter.extraPredicates);
     }
@@ -54,7 +56,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         if (!this.match(permanent, game) || !permanent.isPhasedIn()) {
             return false;
         }
-        ObjectSourcePlayer<Permanent> osp = new ObjectSourcePlayer<Permanent>(permanent, playerId, source);
+        ObjectSourcePlayer<Permanent> osp = new ObjectSourcePlayer<>(permanent, playerId, source);
         return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 
@@ -68,5 +70,10 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
     @Override
     public FilterPermanent copy() {
         return new FilterPermanent(this);
+    }
+
+    @Override
+    public List<Predicate> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
     }
 }

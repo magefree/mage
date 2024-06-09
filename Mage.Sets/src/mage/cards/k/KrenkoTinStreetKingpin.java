@@ -27,7 +27,7 @@ public final class KrenkoTinStreetKingpin extends CardImpl {
     public KrenkoTinStreetKingpin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

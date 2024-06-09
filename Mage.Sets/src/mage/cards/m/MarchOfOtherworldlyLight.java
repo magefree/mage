@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.costs.costadjusters.ExileCardsFromHandAdjuster;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
@@ -12,10 +11,8 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -26,8 +23,15 @@ public final class MarchOfOtherworldlyLight extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("white cards from your hand");
 
+    private static final FilterPermanent filter2 = new FilterPermanent("artifact, creature, or enchantment");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter2.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
+        ));
     }
 
     public MarchOfOtherworldlyLight(UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +44,8 @@ public final class MarchOfOtherworldlyLight extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect(
                 "exile target artifact, creature, or enchantment with mana value X or less"
         ));
-        this.getSpellAbility().setTargetAdjuster(MarchOfOtherworldlyLightAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter2));
     }
 
     private MarchOfOtherworldlyLight(final MarchOfOtherworldlyLight card) {
@@ -50,25 +55,5 @@ public final class MarchOfOtherworldlyLight extends CardImpl {
     @Override
     public MarchOfOtherworldlyLight copy() {
         return new MarchOfOtherworldlyLight(this);
-    }
-}
-
-enum MarchOfOtherworldlyLightAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent filter = new FilterPermanent(
-                "artifact, creature, or enchantment with mana value " + xValue + " or less"
-        );
-        filter.add(Predicates.or(
-                CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate(),
-                CardType.ENCHANTMENT.getPredicate()
-        ));
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(filter));
     }
 }

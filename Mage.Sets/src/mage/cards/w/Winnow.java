@@ -28,7 +28,7 @@ public final class Winnow extends CardImpl {
         this.getSpellAbility().addEffect(new WinnowEffect());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Winnow(final Winnow card) {
@@ -43,12 +43,12 @@ public final class Winnow extends CardImpl {
 
 class WinnowEffect extends DestroyTargetEffect {
 
-    public WinnowEffect() {
+    WinnowEffect() {
         super();
         staticText = "Destroy target nonland permanent if another permanent with the same name is on the battlefield";
     }
 
-    public WinnowEffect(final WinnowEffect effect) {
+    private WinnowEffect(final WinnowEffect effect) {
         super(effect);
     }
 

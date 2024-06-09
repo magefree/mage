@@ -37,7 +37,7 @@ public final class RavenousDemon extends CardImpl {
 
         // Sacrifice a Human: Transform Ravenous Demon. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new SacrificeTargetCost(filter)));
     }
 
     private RavenousDemon(final RavenousDemon card) {

@@ -14,7 +14,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class DiesReplacementEffect extends ReplacementEffectImpl {
@@ -27,7 +26,7 @@ public class DiesReplacementEffect extends ReplacementEffectImpl {
         staticText = "If that creature would die " + (duration == Duration.EndOfTurn ? "this turn" : "") + ", exile it instead";
     }
 
-    public DiesReplacementEffect(final DiesReplacementEffect effect) {
+    protected DiesReplacementEffect(final DiesReplacementEffect effect) {
         super(effect);
         this.objectRef = effect.objectRef;
     }
@@ -35,11 +34,6 @@ public class DiesReplacementEffect extends ReplacementEffectImpl {
     @Override
     public DiesReplacementEffect copy() {
         return new DiesReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

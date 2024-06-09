@@ -64,7 +64,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         this.staticText = text;
     }
 
-    public CopyPermanentEffect(final CopyPermanentEffect effect) {
+    protected CopyPermanentEffect(final CopyPermanentEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
         this.applier = effect.applier;
@@ -90,7 +90,7 @@ public class CopyPermanentEffect extends OneShotEffect {
             copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         } else {
             Target target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (target.canChoose(controller.getId(), source, game)) {
                 controller.choose(Outcome.Copy, target, source, game);
                 copyFromPermanent = game.getPermanent(target.getFirstTarget());
@@ -156,11 +156,16 @@ public class CopyPermanentEffect extends OneShotEffect {
         }
 
         // select new target
-        auraTarget.setNotTarget(true);
-        if (!controller.choose(auraOutcome, auraTarget, source, game)) {
-            return true;
+        auraTarget.withNotTarget(true);
+
+        UUID targetId = (UUID) game.getState().getValue("attachTo:" + sourcePermanent.getId());
+        if (targetId == null) {
+            if (!controller.choose(auraOutcome, auraTarget, source, game)) {
+                return true;
+            }
+            targetId = auraTarget.getFirstTarget();
         }
-        UUID targetId = auraTarget.getFirstTarget();
+
         Permanent targetPermanent = game.getPermanent(targetId);
         Player targetPlayer = game.getPlayer(targetId);
         if (targetPermanent != null) {

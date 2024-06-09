@@ -26,7 +26,7 @@ public final class BlueSunsZenith extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public BlueSunsZenith (final BlueSunsZenith card) {
+    private BlueSunsZenith(final BlueSunsZenith card) {
         super(card);
     }
 

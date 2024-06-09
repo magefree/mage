@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -9,24 +8,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class NinthBridgePatrol extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(AnotherPredicate.instance);
-    }
 
     public NinthBridgePatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -37,7 +27,7 @@ public final class NinthBridgePatrol extends CardImpl {
 
         // Whenever another creature you control leaves the battlefield, put a +1/+1 counter on Ninth Bridge Patrol.
         this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, null,
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL,
                 "Whenever another creature you control leaves the battlefield, ", false));
     }
 

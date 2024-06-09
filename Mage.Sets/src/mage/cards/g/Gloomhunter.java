@@ -25,7 +25,7 @@ public final class Gloomhunter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public Gloomhunter (final Gloomhunter card) {
+    private Gloomhunter(final Gloomhunter card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class ControlOfTheCourt extends CardImpl {
         // Draw four cards, then discard three cards at random.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
         Effect effect = new DiscardControllerEffect(3, true);
-        effect.setText("then discard three cards at random");
+        effect.concatBy(", then");
         this.getSpellAbility().addEffect(effect);
     }
 

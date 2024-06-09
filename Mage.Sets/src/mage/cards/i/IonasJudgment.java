@@ -32,7 +32,7 @@ public final class IonasJudgment extends CardImpl {
 
     }
 
-    public IonasJudgment (final IonasJudgment card) {
+    private IonasJudgment(final IonasJudgment card) {
         super(card);
     }
 

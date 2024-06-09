@@ -58,7 +58,7 @@ class TitaniasSongEffect extends ContinuousEffectImpl {
         staticText = "Each noncreature artifact loses its abilities and is an artifact creature with power and toughness each equal to its mana value";
     }
 
-    public TitaniasSongEffect(final TitaniasSongEffect effect) {
+    private TitaniasSongEffect(final TitaniasSongEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class TitaniasSongEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
                     affectedObjectList.clear();
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                         if (permanent != null) {
                             affectedObjectList.add(new MageObjectReference(permanent, game));
                             permanent.addCardType(game, CardType.CREATURE);

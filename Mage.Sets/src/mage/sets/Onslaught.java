@@ -78,6 +78,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Chain of Vapor", 73, Rarity.UNCOMMON, mage.cards.c.ChainOfVapor.class));
         cards.add(new SetCardInfo("Charging Slateback", 194, Rarity.COMMON, mage.cards.c.ChargingSlateback.class));
         cards.add(new SetCardInfo("Choking Tethers", 74, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
+        cards.add(new SetCardInfo("Circle of Solace", 13, Rarity.RARE, mage.cards.c.CircleOfSolace.class));
         cards.add(new SetCardInfo("Clone", 75, Rarity.RARE, mage.cards.c.Clone.class));
         cards.add(new SetCardInfo("Commando Raid", 195, Rarity.UNCOMMON, mage.cards.c.CommandoRaid.class));
         cards.add(new SetCardInfo("Complicate", 76, Rarity.UNCOMMON, mage.cards.c.Complicate.class));
@@ -200,6 +201,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Ixidor's Will", 90, Rarity.COMMON, mage.cards.i.IxidorsWill.class));
         cards.add(new SetCardInfo("Ixidor, Reality Sculptor", 89, Rarity.RARE, mage.cards.i.IxidorRealitySculptor.class));
         cards.add(new SetCardInfo("Jareth, Leonine Titan", 43, Rarity.RARE, mage.cards.j.JarethLeonineTitan.class));
+        cards.add(new SetCardInfo("Kaboom!", 214, Rarity.RARE, mage.cards.k.Kaboom.class));
         cards.add(new SetCardInfo("Kamahl, Fist of Krosa", 268, Rarity.RARE, mage.cards.k.KamahlFistOfKrosa.class));
         cards.add(new SetCardInfo("Kamahl's Summons", 269, Rarity.UNCOMMON, mage.cards.k.KamahlsSummons.class));
         cards.add(new SetCardInfo("Krosan Colossus", 270, Rarity.RARE, mage.cards.k.KrosanColossus.class));

@@ -7,6 +7,7 @@ import mage.abilities.common.AllianceAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,14 +33,19 @@ public final class GalaGreeters extends CardImpl {
         // Alliance — Whenever another creature enters the battlefield under your control, choose one that hasn't been chosen this turn—
         // • Put a +1/+1 counter on Gala Greeters.
         Ability ability = new AllianceAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        ability.getModes().setEachModeOnlyOnce(true);
-        ability.getModes().setResetEachTurn(true);
+        ability.setModeTag("put +1/+1 counter");
+        ability.getModes().setLimitUsageByOnce(true);
 
         // • Create a tapped Treasure token.
-        ability.addMode(new Mode(new CreateTokenEffect(new TreasureToken(), 1, true, false)));
+        ability.addMode(
+                new Mode(new CreateTokenEffect(new TreasureToken(), 1, true, false))
+                        .setModeTag("create tapped Treasure")
+        );
 
         // • You gain 2 life.
-        ability.addMode(new Mode(new GainLifeEffect(2)));
+        ability.addMode(new Mode(new GainLifeEffect(2)).setModeTag("gain life"));
+
+        ability.addHint(ModesAlreadyUsedHint.instance);
         this.addAbility(ability);
     }
 

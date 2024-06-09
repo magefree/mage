@@ -1,19 +1,19 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.ChoiceImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 import java.util.UUID;
 
 /**
@@ -42,7 +42,7 @@ public final class TrainingGrounds extends CardImpl {
 class TrainingGroundsEffect extends CostModificationEffectImpl {
 
     private static final String effectText = "Activated abilities of creatures you control "
-            + "cost up to {2} less to activate. "
+            + "cost {2} less to activate. "
             + "This effect can't reduce the mana in that cost to less than one mana";
 
     TrainingGroundsEffect() {
@@ -64,33 +64,13 @@ class TrainingGroundsEffect extends CostModificationEffectImpl {
         if (reduceMax <= 0) {
             return true;
         }
-        ChoiceImpl choice = new ChoiceImpl(true);
-        Set<String> set = new LinkedHashSet<>();
-
-        int reduce;
-        if (game.inCheckPlayableState()) {
-            reduce = reduceMax;
-        } else {
-            for (int i = 0; i <= reduceMax; i++) {
-                set.add(String.valueOf(i));
-            }
-            choice.setChoices(set);
-            choice.setMessage("Reduce ability cost");
-            if (!controller.choose(Outcome.Benefit, choice, game)) {
-                return false;
-            }
-            reduce = Integer.parseInt(choice.getChoice());
-        }
-        CardUtil.reduceCost(abilityToModify, reduce);
+        CardUtil.reduceCost(abilityToModify, reduceMax);
         return true;
-
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() != AbilityType.ACTIVATED
-                && (abilityToModify.getAbilityType() != AbilityType.MANA
-                || !(abilityToModify instanceof ActivatedAbility))) {
+        if (!abilityToModify.isActivatedAbility()) {
             return false;
         }
         //Activated abilities of creatures you control

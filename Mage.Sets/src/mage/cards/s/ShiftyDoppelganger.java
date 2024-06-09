@@ -53,7 +53,7 @@ public final class ShiftyDoppelganger extends CardImpl {
 
 class ShiftyDoppelgangerExileEffect extends OneShotEffect {
 
-    public ShiftyDoppelgangerExileEffect() {
+    ShiftyDoppelgangerExileEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "You may put a creature card from your hand onto the battlefield. If you do, " +
                 "that creature gains haste until end of turn. At the beginning of the next end step, " +
@@ -81,7 +81,7 @@ class ShiftyDoppelgangerExileEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
-        player.choose(Outcome.PutCreatureInPlay, player.getHand(), target, game);
+        player.choose(Outcome.PutCreatureInPlay, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

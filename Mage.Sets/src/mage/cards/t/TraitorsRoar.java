@@ -51,12 +51,12 @@ public final class TraitorsRoar extends CardImpl {
 
 class TraitorsRoarEffect extends OneShotEffect {
 
-    public TraitorsRoarEffect() {
+    TraitorsRoarEffect() {
         super(Outcome.Detriment);
         this.staticText = "Tap target untapped creature. It deals damage equal to its power to its controller";
     }
 
-    public TraitorsRoarEffect(final TraitorsRoarEffect effect) {
+    private TraitorsRoarEffect(final TraitorsRoarEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class TraitorsRoarEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
-        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             applied = targetCreature.tap(source, game);
             Player controller = game.getPlayer(targetCreature.getControllerId());

@@ -37,7 +37,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         this.copyToObjectId = copyToObjectId;
     }
 
-    public CopyEffect(final CopyEffect effect) {
+    protected CopyEffect(final CopyEffect effect) {
         super(effect);
         this.copyFromObject = effect.copyFromObject.copy();
         this.copyToObjectId = effect.copyToObjectId;
@@ -111,19 +111,19 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, copyFromObject);
 
-        permanent.getSuperType().clear();
-        for (SuperType type : copyFromObject.getSuperType()) {
-            permanent.addSuperType(type);
+        permanent.removeAllSuperTypes(game);
+        for (SuperType type : copyFromObject.getSuperType(game)) {
+            permanent.addSuperType(game, type);
         }
 
         permanent.removeAllAbilities(source.getSourceId(), game);
         if (copyFromObject instanceof Permanent) {
             for (Ability ability : ((Permanent) copyFromObject).getAbilities(game)) {
-                permanent.addAbility(ability, getSourceId(), game);
+                permanent.addAbility(ability, getSourceId(), game, true);
             }
         } else {
             for (Ability ability : copyFromObject.getAbilities()) {
-                permanent.addAbility(ability, getSourceId(), game);
+                permanent.addAbility(ability, getSourceId(), game, true);
             }
         }
 
@@ -133,22 +133,24 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.getPower().setModifiedBaseValue(copyFromObject.getPower().getModifiedBaseValue());
         permanent.getToughness().setModifiedBaseValue(copyFromObject.getToughness().getModifiedBaseValue());
         permanent.setStartingLoyalty(copyFromObject.getStartingLoyalty());
+        permanent.setStartingDefense(copyFromObject.getStartingDefense());
         if (copyFromObject instanceof Permanent) {
             Permanent targetPermanent = (Permanent) copyFromObject;
-            permanent.setTransformed(targetPermanent.isTransformed());
-            permanent.setSecondCardFace(targetPermanent.getSecondCardFace());
+            //707.2. When copying an object, the copy acquires the copiable values of the original object’s characteristics [..]
+            //110.5. A permanent's status is its physical state. There are four status categories, each of which has two possible values:
+            // tapped/untapped, flipped/unflipped, face up/face down, and phased in/phased out.
+            // Each permanent always has one of these values for each of these categories.
+            //110.5a Status is not a characteristic, though it may affect a permanent’s characteristics.
+            //Being transformed is not a copiable characteristic, nor is the back side of a DFC
+            //permanent.setTransformed(targetPermanent.isTransformed());
+            //permanent.setSecondCardFace(targetPermanent.getSecondCardFace());
             permanent.setFlipCard(targetPermanent.isFlipCard());
             permanent.setFlipCardName(targetPermanent.getFlipCardName());
+            permanent.setPrototyped(targetPermanent.isPrototyped());
         }
 
-        // to get the image of the copied permanent copy number und expansionCode
-        if (copyFromObject instanceof PermanentCard) {
-            permanent.setCardNumber(((PermanentCard) copyFromObject).getCard().getCardNumber());
-            permanent.setExpansionSetCode(((PermanentCard) copyFromObject).getCard().getExpansionSetCode());
-        } else if (copyFromObject instanceof PermanentToken || copyFromObject instanceof Card) {
-            permanent.setCardNumber(((Card) copyFromObject).getCardNumber());
-            permanent.setExpansionSetCode(((Card) copyFromObject).getExpansionSetCode());
-        }
+        CardUtil.copySetAndCardNumber(permanent, copyFromObject);
+
         return true;
     }
 
@@ -173,8 +175,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         return applier;
     }
 
-    public void setApplier(CopyApplier applier) {
+    public CopyEffect setApplier(CopyApplier applier) {
         this.applier = applier;
+        return this;
     }
 
 }

@@ -71,7 +71,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
         this.staticText = "As {this} enters the battlefield, sacrifice any number of creatures. {this}'s power becomes the total power of those creatures and its toughness becomes their total toughness";
     }
 
-    public DracoplasmEffect(final DracoplasmEffect effect) {
+    private DracoplasmEffect(final DracoplasmEffect effect) {
         super(effect);
     }
 
@@ -117,8 +117,8 @@ class DracoplasmEffect extends ReplacementEffectImpl {
                 toughness = CardUtil.overflowInc(toughness, targetCreature.getToughness().getValue());
             }
         }
-        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.Custom, SubLayer.SetPT_7b);
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.Custom);
         game.addEffect(effect, source);
-        return true;
+        return false;
     }
 }

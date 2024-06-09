@@ -17,7 +17,7 @@ public final class TheLadyOfTheMountain extends CardImpl {
 
     public TheLadyOfTheMountain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(5);

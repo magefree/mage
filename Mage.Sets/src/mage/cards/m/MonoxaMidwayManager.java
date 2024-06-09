@@ -28,7 +28,7 @@ public final class MonoxaMidwayManager extends CardImpl {
     public MonoxaMidwayManager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.EMPLOYEE);
         this.power = new MageInt(3);
@@ -77,7 +77,7 @@ class MonoxaMidwayManagerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         int result = ((DieRolledEvent) event).getResult();
-        if (!isControlledBy(event.getPlayerId()) || result < 3) {
+        if (!isControlledBy(event.getTargetId()) || result < 3) {
             return false;
         }
         this.getEffects().setValue("dieRoll", result);

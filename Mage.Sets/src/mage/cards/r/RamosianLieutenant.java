@@ -1,5 +1,3 @@
-
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -29,7 +27,7 @@ public final class RamosianLieutenant extends CardImpl {
 
     static {
         filter.add(SubType.REBEL.getPredicate());
-	filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
     }
 
     public RamosianLieutenant(UUID ownerId, CardSetInfo setInfo) {
@@ -42,7 +40,7 @@ public final class RamosianLieutenant extends CardImpl {
 
         // {4}, {T}: Search your library for a Rebel permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(4));
+        ability.addCost(new GenericManaCost(4));
         this.addAbility(ability);
     }
 

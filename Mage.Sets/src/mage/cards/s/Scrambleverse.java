@@ -43,12 +43,12 @@ public final class Scrambleverse extends CardImpl {
 
 class ScrambleverseEffect extends OneShotEffect {
 
-    public ScrambleverseEffect() {
+    ScrambleverseEffect() {
         super(Outcome.Damage);
         staticText = "For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which they were chosen. Untap those permanents";
     }
 
-    public ScrambleverseEffect(ScrambleverseEffect effect) {
+    private ScrambleverseEffect(final ScrambleverseEffect effect) {
         super(effect);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,20 +17,16 @@ import java.util.UUID;
  */
 public final class LivingLands extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Forests");
-
-    static {
-        filter.add(SubType.FOREST.getPredicate());
-    }
+    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.FOREST, "All Forests");
 
     public LivingLands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // All Forests are 1/1 creatures that are still lands.
         ContinuousEffect effect = new BecomesCreatureAllEffect(
-                new CreatureToken(1, 1),
+                new CreatureToken(1, 1, "1/1 creatures"),
                 "lands", filter, Duration.WhileOnBattlefield, false);
-        effect.getDependencyTypes().add(DependencyType.BecomeForest);
+        effect.getDependencyTypes().add(DependencyType.BecomeForest); // TODO: are these dependencies correct/complete?
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

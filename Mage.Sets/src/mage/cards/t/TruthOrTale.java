@@ -42,12 +42,12 @@ public final class TruthOrTale extends CardImpl {
 
 class TruthOrTaleEffect extends OneShotEffect {
 
-    public TruthOrTaleEffect() {
+    TruthOrTaleEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put a card from the chosen pile into your hand, then put all other cards revealed this way on the bottom of your library in any order";
     }
 
-    public TruthOrTaleEffect(final TruthOrTaleEffect effect) {
+    private TruthOrTaleEffect(final TruthOrTaleEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class TruthOrTaleEffect extends OneShotEffect {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
             List<Card> pile1 = new ArrayList<>();
             target.setRequired(false);
-            if (controller.choose(Outcome.Neutral, cards, target, game)) {
+            if (controller.choose(Outcome.Neutral, cards, target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = game.getCard(targetId);
@@ -103,7 +103,7 @@ class TruthOrTaleEffect extends OneShotEffect {
             if (!chosen.isEmpty()) {
                 Cards chosenCards = new CardsImpl(new HashSet<>(chosen));
                 TargetCard finalChosenCardTarget = new TargetCard(Zone.LIBRARY,new FilterCard("card to put into your hand"));
-                if (controller.choose(Outcome.DrawCard, chosenCards, finalChosenCardTarget, game)){
+                if (controller.choose(Outcome.DrawCard, chosenCards, finalChosenCardTarget, source, game)){
                     Card finalChosenCard = game.getCard(finalChosenCardTarget.getFirstTarget());
                     if (finalChosenCard != null) {
                         if (!game.isSimulation()) {

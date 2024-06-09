@@ -36,7 +36,7 @@ public final class SnappingThragg extends CardImpl {
         this.addAbility(new SnappingThraggTriggeredAbility());
 
         // Morph {4}{R}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{R}{R}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{R}{R}")));
 
     }
 
@@ -57,7 +57,7 @@ class SnappingThraggTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetCreaturePermanent());
     }
 
-    public SnappingThraggTriggeredAbility(final SnappingThraggTriggeredAbility ability) {
+    private SnappingThraggTriggeredAbility(final SnappingThraggTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,6 +86,6 @@ class SnappingThraggTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, you may have it deal 3 damage to target creature that player controls";
+        return "Whenever {this} deals combat damage to a player, you may have it deal 3 damage to target creature that player controls.";
     }
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
@@ -22,8 +21,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CoalitionRelic extends CardImpl {
@@ -51,12 +51,12 @@ public final class CoalitionRelic extends CardImpl {
 
 class CoalitionRelicEffect extends OneShotEffect {
 
-    public CoalitionRelicEffect() {
+    CoalitionRelicEffect() {
         super(Outcome.PutManaInPool);
         this.staticText = "remove all charge counters from Coalition Relic. Add one mana of any color for each charge counter removed this way";
     }
 
-    public CoalitionRelicEffect(final CoalitionRelicEffect effect) {
+    private CoalitionRelicEffect(final CoalitionRelicEffect effect) {
         super(effect);
     }
 
@@ -70,11 +70,10 @@ class CoalitionRelicEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (sourcePermanent != null && player != null) {
-            int chargeCounters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE);
-            sourcePermanent.removeCounters(CounterType.CHARGE.createInstance(chargeCounters), source, game);
+            int amountRemoved = sourcePermanent.removeAllCounters(CounterType.CHARGE.getName(), source, game);
             Mana mana = new Mana();
             ChoiceColor choice = new ChoiceColor();
-            for (int i = 0; i < chargeCounters; i++) {
+            for (int i = 0; i < amountRemoved; i++) {
                 if (!player.choose(outcome, choice, game)) {
                     return false;
                 }

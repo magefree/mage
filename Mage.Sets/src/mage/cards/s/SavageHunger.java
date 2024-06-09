@@ -42,7 +42,7 @@ public final class SavageHunger extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
-    public SavageHunger(final SavageHunger card) {
+    private SavageHunger(final SavageHunger card) {
         super(card);
     }
 

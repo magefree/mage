@@ -69,7 +69,7 @@ class WallOfLimbsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
     
-    WallOfLimbsTriggeredAbility(final WallOfLimbsTriggeredAbility ability) {
+    private WallOfLimbsTriggeredAbility(final WallOfLimbsTriggeredAbility ability) {
         super(ability);
     }
     

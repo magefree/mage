@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -20,8 +19,10 @@ public final class ArmedDangerous extends SplitCard {
 
         // Armed
         // Target creature gets +1/+1 and gains double strike until end of turn.
-        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
-        getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn)
+                .setText("target creature gets +1/+1"));
+        getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains double strike until end of turn"));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("+1/+1 and double strike"));
 
         // Dangerous

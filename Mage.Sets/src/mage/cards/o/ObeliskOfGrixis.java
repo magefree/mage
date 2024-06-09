@@ -23,7 +23,7 @@ public final class ObeliskOfGrixis extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public ObeliskOfGrixis (final ObeliskOfGrixis card) {
+    private ObeliskOfGrixis(final ObeliskOfGrixis card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class InquisitorEisenhorn extends CardImpl {
 
     public InquisitorEisenhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.INQUISITOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -57,13 +57,13 @@ public final class InquisitorEisenhorn extends CardImpl {
 
 class InquisitorEisenhornReplacementEffect extends ReplacementEffectImpl {
 
-    public InquisitorEisenhornReplacementEffect() {
+    InquisitorEisenhornReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or " +
                 "sorcery card this way, create Cherubael, a legendary 4/4 black Demon creature token with flying";
     }
 
-    public InquisitorEisenhornReplacementEffect(final InquisitorEisenhornReplacementEffect effect) {
+    private InquisitorEisenhornReplacementEffect(final InquisitorEisenhornReplacementEffect effect) {
         super(effect);
     }
 

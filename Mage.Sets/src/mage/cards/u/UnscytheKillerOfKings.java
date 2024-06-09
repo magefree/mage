@@ -33,7 +33,7 @@ public final class UnscytheKillerOfKings extends CardImpl {
 
     public UnscytheKillerOfKings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{U}{B}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+3 and has first strike.
@@ -67,7 +67,7 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature dealt damage by equipped creature this turn dies, ");
     }
 
-    public UnscytheKillerOfKingsTriggeredAbility(final UnscytheKillerOfKingsTriggeredAbility ability) {
+    private UnscytheKillerOfKingsTriggeredAbility(final UnscytheKillerOfKingsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -108,12 +108,12 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
 
 class UnscytheEffect extends OneShotEffect {
 
-    public UnscytheEffect() {
+    UnscytheEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "you may exile that card. If you do, create a 2/2 black Zombie creature token";
     }
 
-    public UnscytheEffect(final UnscytheEffect effect) {
+    private UnscytheEffect(final UnscytheEffect effect) {
         super(effect);
     }
 
@@ -128,7 +128,7 @@ class UnscytheEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card == null) {
             return false;
         }

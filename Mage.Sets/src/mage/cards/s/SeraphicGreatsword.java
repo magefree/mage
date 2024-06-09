@@ -59,7 +59,7 @@ class SeraphicGreatswordTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public SeraphicGreatswordTriggeredAbility(final SeraphicGreatswordTriggeredAbility abiltity) {
+    private SeraphicGreatswordTriggeredAbility(final SeraphicGreatswordTriggeredAbility abiltity) {
         super(abiltity);
     }
 

@@ -85,7 +85,7 @@ class InfernalDenizenEffect extends OneShotEffect {
                 + "for as long as {this} remains on the battlefield";
     }
 
-    InfernalDenizenEffect(final InfernalDenizenEffect effect) {
+    private InfernalDenizenEffect(final InfernalDenizenEffect effect) {
         super(effect);
     }
 

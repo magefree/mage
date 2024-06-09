@@ -1,29 +1,24 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.OpponentLostLifeCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SyggRiverCutthroat extends CardImpl {
 
     public SyggRiverCutthroat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}");
-        addSuperType(SuperType.LEGENDARY);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U/B}{U/B}");
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.ROGUE);
 
@@ -34,8 +29,12 @@ public final class SyggRiverCutthroat extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 TargetController.ANY,
-                new OpponentLostLifeCondition(ComparisonType.MORE_THAN, 2),
-                true));
+                new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3),
+                true
+        ).addHint(new ConditionHint(
+                new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3),
+                "An opponent lost 3 or more life this turn"
+        )));
     }
 
     private SyggRiverCutthroat(final SyggRiverCutthroat card) {

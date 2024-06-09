@@ -39,12 +39,12 @@ public final class Forget extends CardImpl {
 
 class ForgetEffect extends OneShotEffect {
 
-    public ForgetEffect() {
+    ForgetEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Target player discards two cards, then draws as many cards as they discarded this way";
     }
     
-    public ForgetEffect(final ForgetEffect effect) {
+    private ForgetEffect(final ForgetEffect effect) {
         super(effect);
     }
     

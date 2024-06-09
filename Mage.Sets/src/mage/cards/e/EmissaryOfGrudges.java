@@ -63,13 +63,13 @@ public class EmissaryOfGrudges extends CardImpl {
 
 class EmissaryOfGrudgesEffect extends OneShotEffect {
 
-    public EmissaryOfGrudgesEffect() {
+    EmissaryOfGrudgesEffect() {
         super(Outcome.Neutral);
         this.staticText = "Choose new targets for target spell or ability if it's controlled by the chosen player and"
                 + " if it targets you or a permanent you control. Activate only once.";
     }
 
-    public EmissaryOfGrudgesEffect(final EmissaryOfGrudgesEffect effect) {
+    private EmissaryOfGrudgesEffect(final EmissaryOfGrudgesEffect effect) {
         super(effect);
     }
 

@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ public final class ThoughtScour extends CardImpl {
 
         // Target player puts the top two cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(2));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(2));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));

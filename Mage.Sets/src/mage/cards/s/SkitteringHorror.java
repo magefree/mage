@@ -25,7 +25,8 @@ public final class SkitteringHorror extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When you cast a creature spell, sacrifice Skittering Horror.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false)
+                .setTriggerPhrase("When you cast a creature spell, "));
     }
 
     private SkitteringHorror(final SkitteringHorror card) {

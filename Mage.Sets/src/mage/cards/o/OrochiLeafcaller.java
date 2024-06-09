@@ -30,7 +30,7 @@ public final class OrochiLeafcaller extends CardImpl {
         this.addAbility(new AnyColorManaAbility(new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
-    public OrochiLeafcaller (final OrochiLeafcaller card) {
+    private OrochiLeafcaller(final OrochiLeafcaller card) {
         super(card);
     }
 

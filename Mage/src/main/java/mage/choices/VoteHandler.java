@@ -18,6 +18,7 @@ public abstract class VoteHandler<T> {
 
     protected final Map<UUID, List<T>> playerMap = new HashMap<>();
     protected VoteHandlerAI<T> aiVoteHint = null;
+    protected boolean secret = false;
 
     public void doVotes(Ability source, Game game) {
         doVotes(source, game, null);
@@ -28,6 +29,7 @@ public abstract class VoteHandler<T> {
         this.playerMap.clear();
         int stepCurrent = 0;
         int stepTotal = game.getState().getPlayersInRange(source.getControllerId(), game).size();
+        List<String> messages = new ArrayList<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             stepCurrent++;
             VoteEvent event = new VoteEvent(playerId, source);
@@ -70,18 +72,25 @@ public abstract class VoteHandler<T> {
                 if (!Objects.equals(player, decidingPlayer)) {
                     message += " (chosen by " + decidingPlayer.getName() + ')';
                 }
-                game.informPlayers(message);
+                if (secret) {
+                    messages.add(message);
+                } else {
+                    game.informPlayers(message);
+                }
                 this.playerMap.computeIfAbsent(playerId, x -> new ArrayList<>()).add(vote);
             }
         }
 
         // show final results to players
 
+        if (secret) {
+            for (String message : messages) {
+                game.informPlayers(message);
+            }
+        }
         Map<T, Integer> totalVotes = new LinkedHashMap<>();
         // fill by possible choices
-        this.getPossibleVotes(source, game).forEach(vote -> {
-            totalVotes.putIfAbsent(vote, 0);
-        });
+        this.getPossibleVotes(source, game).forEach(vote -> totalVotes.putIfAbsent(vote, 0));
         // fill by real choices
         playerMap.entrySet()
                 .stream()

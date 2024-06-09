@@ -4,6 +4,7 @@ import mage.cards.s.Storyweave;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -46,8 +47,14 @@ public class StoryweaveTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, intervention);
         addCard(Zone.HAND, playerA, fang);
 
+        // For scry, putting 2 cards on top.
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+        addCard(Zone.LIBRARY, playerA, "Elite Vanguard");
+
         addEffectToGame();
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, intervention, true);
+        addTarget(playerA, "Elite Vanguard"); // scry Vanguard on bottom
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, fang);
 
         setStrictChooseMode(true);
@@ -56,12 +63,12 @@ public class StoryweaveTest extends CardTestPlayerBase {
 
         assertCounterCount(playerA, fang, CounterType.P1P1, 0);
         assertPermanentCount(playerA, "Centaur Token", 2);
-        currentGame
+        Assert.assertTrue(currentGame
                 .getBattlefield()
                 .getAllActivePermanents()
                 .stream()
                 .filter(permanent -> "Centaur Token".equals(permanent.getName()))
-                .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 2);
+                .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 2));
     }
 
     @Test
@@ -70,9 +77,15 @@ public class StoryweaveTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, intervention);
         addCard(Zone.HAND, playerA, fang);
 
+        // For scry, putting 2 cards on top.
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+        addCard(Zone.LIBRARY, playerA, "Elite Vanguard");
+
         addEffectToGame();
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fang);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, intervention);
+        addTarget(playerA, "Elite Vanguard"); // scry Vanguard on bottom
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -80,11 +93,11 @@ public class StoryweaveTest extends CardTestPlayerBase {
 
         assertCounterCount(playerA, fang, CounterType.P1P1, 2);
         assertPermanentCount(playerA, "Centaur Token", 2);
-        currentGame
+        Assert.assertTrue(currentGame
                 .getBattlefield()
                 .getAllActivePermanents()
                 .stream()
                 .filter(permanent -> "Centaur Token".equals(permanent.getName()))
-                .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 0);
+                .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 0));
     }
 }

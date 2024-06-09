@@ -46,7 +46,7 @@ public class TournamentStub implements Tournament {
 
     @Override
     public ResultProtos.TourneyProto toProto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -85,8 +85,8 @@ public class TournamentStub implements Tournament {
     }
 
     @Override
-    public boolean updateDeck(UUID playerId, Deck deck) {
-        return true;
+    public void updateDeck(UUID playerId, Deck deck) {
+
     }
 
     @Override

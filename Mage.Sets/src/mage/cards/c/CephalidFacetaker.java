@@ -39,7 +39,7 @@ public final class CephalidFacetaker extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new CephalidFacetakerEffect(), TargetController.YOU, true
         );
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

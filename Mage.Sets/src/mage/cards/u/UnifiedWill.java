@@ -41,12 +41,12 @@ public final class UnifiedWill extends CardImpl {
 
 class UnifiedWillEffect extends OneShotEffect {
 
-    public UnifiedWillEffect() {
+    UnifiedWillEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell if you control more creatures than that spell's controller";
     }
 
-    public UnifiedWillEffect(final UnifiedWillEffect effect) {
+    private UnifiedWillEffect(final UnifiedWillEffect effect) {
         super(effect);
     }
 

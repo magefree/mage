@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -18,8 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -28,17 +26,12 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class ScrollOfTheMasters extends CardImpl {
 
-    private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
-
-    static {
-        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
-
     public ScrollOfTheMasters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Whenever you cast a noncreature spell, put a lore counter on Scroll of the Masters.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), filterNonCreature, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false));
 
         // {3}, {T}: Target creature you control gets +1/+1 until end of turn for each lore counter on Scroll of the Masters.
         DynamicValue xValue = new CountersSourceCount(CounterType.LORE);

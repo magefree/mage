@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.Effects;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -28,20 +28,19 @@ public final class SarkhanVol extends CardImpl {
 
     public SarkhanVol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
 
         this.setStartingLoyalty(4);
 
         // +1: Creatures you control get +1/+1 and gain haste until end of turn.
-        Effects effects1 = new Effects(new BoostControlledEffect(
-                1, 1, Duration.EndOfTurn
-        ).setText("creatures you control get +1/+1"));
-        effects1.add(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURES
-        ).setText("and gain haste until end of turn"));
-        this.addAbility(new LoyaltyAbility(effects1, 1));
+        Effect boostEffect = new BoostControlledEffect(1, 1, Duration.EndOfTurn)
+                .setText("creatures you control get +1/+1");
+        Effect hasteEffect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES)
+                .setText("and gain haste until end of turn");
+        LoyaltyAbility firstAbility = new LoyaltyAbility(boostEffect, 1);
+        firstAbility.addEffect(hasteEffect);
+        this.addAbility(firstAbility);
 
         // -2: Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
         LoyaltyAbility ability = new LoyaltyAbility(new GainControlTargetEffect(Duration.EndOfTurn), -2);

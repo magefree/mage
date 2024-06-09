@@ -24,7 +24,7 @@ public final class GormTheGreat extends CardImpl {
     public GormTheGreat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);

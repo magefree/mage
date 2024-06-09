@@ -49,7 +49,7 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
         this.staticText = "All nonland permanents are legendary";
     }
 
-    public SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
+    private SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
         super(effect);
     }
 
@@ -61,7 +61,7 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            permanent.addSuperType(SuperType.LEGENDARY);
+            permanent.addSuperType(game, SuperType.LEGENDARY);
         }
         return true;
     }

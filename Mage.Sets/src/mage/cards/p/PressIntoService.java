@@ -1,8 +1,6 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -31,7 +29,7 @@ public final class PressIntoService extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent()); // First target is used by Support
 
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn)
-                .setText("Gain control of target creature until end of turn")
+                .setText("Gain control of target creature until end of turn").concatBy("<br>")
                 .setTargetPointer(new SecondTargetPointer())
         );
         this.getSpellAbility().addEffect(new UntapTargetEffect()

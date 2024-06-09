@@ -51,7 +51,7 @@ class FaultLineEffect extends OneShotEffect {
         staticText = "{this} deals X damage to each creature without flying and each player";
     }
 
-    public FaultLineEffect(final FaultLineEffect effect) {
+    private FaultLineEffect(final FaultLineEffect effect) {
         super(effect);
     }
 

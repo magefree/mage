@@ -33,7 +33,7 @@ public final class EmrakulTheAeonsTorn extends CardImpl {
 
     public EmrakulTheAeonsTorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{15}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(15);
         this.toughness = new MageInt(15);

@@ -33,7 +33,7 @@ public final class SeethingPathblazer extends CardImpl {
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(
                 2, 0, Duration.EndOfTurn
-        ).setText("{this} gets +2/+0"), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ).setText("{this} gets +2/+0"), new SacrificeTargetCost(filter));
         ability.addEffect(new GainAbilitySourceEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains first strike until end of turn"));

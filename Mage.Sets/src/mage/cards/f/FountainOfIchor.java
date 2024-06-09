@@ -27,7 +27,7 @@ public final class FountainOfIchor extends CardImpl {
 
         // {3}: Fountain of Ichor becomes a 3/3 Dinosaur artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new FountainOfIchorToken(), "", Duration.EndOfTurn
+                new FountainOfIchorToken(), CardType.ARTIFACT, Duration.EndOfTurn
         ), new GenericManaCost(3)));
     }
 
@@ -45,8 +45,8 @@ class FountainOfIchorToken extends TokenImpl {
 
     FountainOfIchorToken() {
         super("", "3/3 Dinosaur artifact creature");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add(SubType.DINOSAUR);
         power = new MageInt(3);
         toughness = new MageInt(3);

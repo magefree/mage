@@ -25,22 +25,18 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class Torture extends CardImpl {
 
-    private static final String rule = "Testing rules";
-
     public Torture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
         this.subtype.add(SubType.AURA);
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // {1}{B}: Put a -1/-1 counter on enchanted creature.
-        //this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAttachedEffect(CounterType.M1M1.createInstance(), rule), new ManaCostsImpl<>("{[1}{B}}")));
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersAttachedEffect(CounterType.M1M1.createInstance(),"enchanted creature"),

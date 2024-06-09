@@ -53,6 +53,11 @@ public class CollectionViewerPane extends MagePane {
     }
 
     @Override
+    public boolean isActiveTable() {
+        return false;
+    }
+
+    @Override
     public void setVisible(boolean aFlag) {
         super.setVisible(aFlag);
         if (collectionViewerPanel != null) {

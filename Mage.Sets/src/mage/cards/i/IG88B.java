@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ public final class IG88B extends CardImpl {
 
     public IG88B(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DROID);
         this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(1);
@@ -39,10 +38,10 @@ public final class IG88B extends CardImpl {
 
         // <i>Bounty</i> &mdash; Whenever IF-88B deals combat damage to a player, that player loses life equal to the number of bounty counters on creatures they control.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new LoseLifeTargetEffect(new CountersOnDefendingPlayerCreaturesCount(CounterType.BOUNTY)),
+                new LoseLifeTargetEffect(new CountersOnDefendingPlayerCreaturesCount(CounterType.BOUNTY))
+                        .setText("that player loses life equal to the number of bounty counters on creatures they control"),
                 false,
-                "<i>Bounty</i> &mdash; Whenever {this} deals combat damage to a player, that player loses life equal to the number of bounty counters on creatures they control",
-                true)
+                true).withFlavorWord("Bounty")
         );
 
         // Repair 3

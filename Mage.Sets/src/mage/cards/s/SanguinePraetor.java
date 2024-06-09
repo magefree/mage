@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledPermanent;
@@ -37,7 +36,7 @@ public final class SanguinePraetor extends CardImpl {
 
         // {B}, Sacrifice a creature: Destroy each creature with the same converted mana cost as the sacrificed creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SanguinePraetorEffect(), new ManaCostsImpl<>("{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
 
     }
@@ -54,12 +53,12 @@ public final class SanguinePraetor extends CardImpl {
 
 class SanguinePraetorEffect extends OneShotEffect {
 
-    public SanguinePraetorEffect() {
+    SanguinePraetorEffect() {
         super(Outcome.Damage);
         staticText = "Destroy each creature with the same mana value as the sacrificed creature";
     }
 
-    public SanguinePraetorEffect(final SanguinePraetorEffect effect) {
+    private SanguinePraetorEffect(final SanguinePraetorEffect effect) {
         super(effect);
     }
 

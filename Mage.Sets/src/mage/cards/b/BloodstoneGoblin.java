@@ -61,7 +61,7 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a spell, if that spell was kicked, ");
     }
 
-    BloodstoneGoblinTriggeredAbility(final BloodstoneGoblinTriggeredAbility ability) {
+    private BloodstoneGoblinTriggeredAbility(final BloodstoneGoblinTriggeredAbility ability) {
         super(ability);
     }
 

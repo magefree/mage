@@ -6,7 +6,6 @@ import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
 /**
@@ -20,7 +19,7 @@ public final class Blackmail extends CardImpl {
 
 
         // Target player reveals three cards from their hand and you choose one of them. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, 3));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

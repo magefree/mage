@@ -55,12 +55,12 @@ public final class NantukoMentor extends CardImpl {
 
 class NantukoMentorEffect extends OneShotEffect {
 
-    public NantukoMentorEffect() {
+    NantukoMentorEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target creature gets +X/+X until end of turn, where X is that creature's power";
     }
 
-    public NantukoMentorEffect(final NantukoMentorEffect effect) {
+    private NantukoMentorEffect(final NantukoMentorEffect effect) {
         super(effect);
     }
 

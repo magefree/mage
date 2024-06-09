@@ -60,12 +60,12 @@ public final class VisionsOfBrutality extends CardImpl {
 
 class VisionsOfBrutalityEffect extends OneShotEffect {
 
-    public VisionsOfBrutalityEffect() {
+    VisionsOfBrutalityEffect() {
         super(Outcome.Benefit);
         this.staticText = "its controller loses that much life";
     }
 
-    public VisionsOfBrutalityEffect(final VisionsOfBrutalityEffect effect) {
+    private VisionsOfBrutalityEffect(final VisionsOfBrutalityEffect effect) {
         super(effect);
     }
 
@@ -77,28 +77,20 @@ class VisionsOfBrutalityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            // In the case that the enchantment is blinked
-            Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            if (enchantment == null) {
-                // It was not blinked, use the standard method
-                enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            }
-            if (enchantment != null 
-                    && enchantment.getAttachedTo() != null) {
-                Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-                if (enchanted != null) {
-                    Player controllerEnchanted = game.getPlayer(enchanted.getControllerId());
-                    if (controllerEnchanted != null) {
-                        int damage = (Integer) getValue("damage");
-                        if (damage > 0) {
-                            controllerEnchanted.loseLife(damage, game, source, false);
-                        }
-                    }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
+        if (controller == null || enchantment == null || enchantment.getAttachedTo() == null) {
+            return false;
+        }
+        Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
+        if (enchanted != null) {
+            Player controllerEnchanted = game.getPlayer(enchanted.getControllerId());
+            if (controllerEnchanted != null) {
+                int damage = (Integer) getValue("damage");
+                if (damage > 0) {
+                    controllerEnchanted.loseLife(damage, game, source, false);
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }

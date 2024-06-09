@@ -26,7 +26,7 @@ public final class LeoninSkyhunter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public LeoninSkyhunter (final LeoninSkyhunter card) {
+    private LeoninSkyhunter(final LeoninSkyhunter card) {
         super(card);
     }
 

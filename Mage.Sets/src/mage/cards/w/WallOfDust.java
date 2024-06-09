@@ -54,7 +54,7 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
         staticText = "that creature can't attack during its controller's next turn";
     }
 
-    public WallOfDustRestrictionEffect(final WallOfDustRestrictionEffect effect) {
+    private WallOfDustRestrictionEffect(final WallOfDustRestrictionEffect effect) {
         super(effect);
         this.targetPermanentReference = effect.targetPermanentReference;
     }
@@ -70,7 +70,7 @@ class WallOfDustRestrictionEffect extends RestrictionEffect {
             return true;
         }
 
-        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
+        return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override

@@ -63,7 +63,7 @@ class ViashinoBeyEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public ViashinoBeyEffect(final ViashinoBeyEffect effect) {
+    private ViashinoBeyEffect(final ViashinoBeyEffect effect) {
         super(effect);
     }
 

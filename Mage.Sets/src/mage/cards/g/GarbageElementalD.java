@@ -58,7 +58,7 @@ class GarbageElementalDEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die. {this} deals damage equal to the result to target opponent";
     }
 
-    GarbageElementalDEffect(final GarbageElementalDEffect effect) {
+    private GarbageElementalDEffect(final GarbageElementalDEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class GarbageElementalDEffect extends OneShotEffect {
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (controller != null && opponent != null) {
             int damage = controller.rollDice(outcome, source, game, 6);
-            return game.damagePlayerOrPlaneswalker(opponent.getId(), damage, source.getId(), source, game, false, true) > 0;
+            return game.damagePlayerOrPermanent(opponent.getId(), damage, source.getId(), source, game, false, true) > 0;
         }
         return false;
     }

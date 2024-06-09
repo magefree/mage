@@ -3,6 +3,7 @@ package mage.filter;
 import mage.abilities.Ability;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 
@@ -25,7 +26,7 @@ public class FilterStackObject extends FilterObject<StackObject> {
         super(name);
     }
 
-    public FilterStackObject(final FilterStackObject filter) {
+    protected FilterStackObject(final FilterStackObject filter) {
         super(filter);
         this.extraPredicates.addAll(filter.extraPredicates);
     }
@@ -48,5 +49,10 @@ public class FilterStackObject extends FilterObject<StackObject> {
     @Override
     public FilterStackObject copy() {
         return new FilterStackObject(this);
+    }
+
+    @Override
+    public List<Predicate> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
     }
 }

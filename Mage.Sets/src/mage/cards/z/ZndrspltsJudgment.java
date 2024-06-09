@@ -49,7 +49,7 @@ class ZndrspltsJudgmentEffect extends OneShotEffect {
         this.staticText = "For each player, choose friend or foe. Each friend creates a token that's a copy of a creature they control. Each foe returns a creature they control to its owner's hand";
     }
 
-    ZndrspltsJudgmentEffect(final ZndrspltsJudgmentEffect effect) {
+    private ZndrspltsJudgmentEffect(final ZndrspltsJudgmentEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class ZndrspltsJudgmentEffect extends OneShotEffect {
             }
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
             filter.add(new ControllerIdPredicate(player.getId()));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, true);
             if (!player.choose(Outcome.Copy, target, source, game)) {
                 continue;
             }
@@ -83,7 +83,7 @@ class ZndrspltsJudgmentEffect extends OneShotEffect {
         for (Player player : choice.getFoes()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
             filter.add(new ControllerIdPredicate(player.getId()));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, true);
             if (!player.choose(Outcome.ReturnToHand, target, source, game)) {
                 continue;
             }

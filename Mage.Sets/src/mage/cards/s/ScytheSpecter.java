@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -54,12 +53,12 @@ public final class ScytheSpecter extends CardImpl {
 
 class ScytheSpecterEffect extends OneShotEffect {
 
-    public ScytheSpecterEffect() {
+    ScytheSpecterEffect() {
         super(Outcome.Discard);
         this.staticText = "each opponent discards a card. Each player who discarded a card with the highest mana value among cards discarded this way loses life equal to that mana value";
     }
 
-    public ScytheSpecterEffect(final ScytheSpecterEffect effect) {
+    private ScytheSpecterEffect(final ScytheSpecterEffect effect) {
         super(effect);
     }
 
@@ -112,7 +111,7 @@ class ScytheSpecterEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public ScytheSpecterEffect copy() {
         return new ScytheSpecterEffect(this);
     }
 }

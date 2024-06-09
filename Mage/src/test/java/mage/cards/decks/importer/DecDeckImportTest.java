@@ -1,6 +1,7 @@
 package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.file.Paths;
@@ -26,6 +27,7 @@ public class DecDeckImportTest {
                 false
         );
 
+        Assert.assertEquals("", errors.toString());
         TestDeckChecker.checker()
                 .addMain("Masticore", 4)
                 .addMain("Metalworker", 4)
@@ -49,8 +51,6 @@ public class DecDeckImportTest {
                 .addSide("Mishra's Helix", 1)
                 .addSide("Rising Waters", 2)
                 .verify(deck, 60, 15);
-
-        assertEquals("", errors.toString());
     }
 
 }

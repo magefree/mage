@@ -30,7 +30,7 @@ public class FilterSpellOrPermanent extends FilterImpl<MageObject> implements Fi
         spellFilter = new FilterSpell();
     }
 
-    public FilterSpellOrPermanent(final FilterSpellOrPermanent filter) {
+    protected FilterSpellOrPermanent(final FilterSpellOrPermanent filter) {
         super(filter);
         this.permanentFilter = filter.permanentFilter.copy();
         this.spellFilter = filter.spellFilter.copy();

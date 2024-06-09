@@ -42,12 +42,12 @@ public final class SuddenDemise extends CardImpl {
 
 class SuddenDemiseDamageEffect extends OneShotEffect {
 
-    public SuddenDemiseDamageEffect() {
+    SuddenDemiseDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "Choose a color. {this} deals X damage to each creature of the chosen color";
     }
 
-    public SuddenDemiseDamageEffect(final SuddenDemiseDamageEffect effect) {
+    private SuddenDemiseDamageEffect(final SuddenDemiseDamageEffect effect) {
         super(effect);
     }
 

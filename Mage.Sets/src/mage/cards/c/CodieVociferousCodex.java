@@ -30,7 +30,7 @@ public final class CodieVociferousCodex extends CardImpl {
     public CodieVociferousCodex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
@@ -123,7 +123,7 @@ class CodieVociferousCodexDelayedTriggeredAbility extends DelayedTriggeredAbilit
 
     @Override
     public String getRule() {
-        return "When you cast your next spell this turn, exile cards from the top of your library "
+        return "When you next cast a spell this turn, exile cards from the top of your library "
                 + "until you exile an instant or sorcery card with lesser mana value. Until end of turn, "
                 + "you may cast that card without paying its mana cost. Put each other card exiled this way "
                 + "on the bottom of your library in a random order.";

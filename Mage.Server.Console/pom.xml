@@ -62,8 +62,16 @@
                     </descriptors>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.ruleoftech</groupId>
+                <artifactId>markdown-page-generator-plugin</artifactId>
+            </plugin>
         </plugins>
 
         <finalName>mage-serverconsole</finalName>
     </build>
+
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
 </project>

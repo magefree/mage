@@ -44,7 +44,7 @@ public final class CadricSoulKindler extends CardImpl {
     public CadricSoulKindler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);

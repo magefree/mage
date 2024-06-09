@@ -35,7 +35,7 @@ public final class BrothersYamazaki extends CardImpl {
 
     public BrothersYamazaki(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.SAMURAI);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
@@ -79,7 +79,7 @@ class BrothersYamazakiIgnoreLegendRuleEffectEffect extends ContinuousEffectImpl 
         staticText = "If there are exactly two permanents named Brothers Yamazaki on the battlefield, the \"legend rule\" doesn't apply to them";
     }
 
-    public BrothersYamazakiIgnoreLegendRuleEffectEffect(final BrothersYamazakiIgnoreLegendRuleEffectEffect effect) {
+    private BrothersYamazakiIgnoreLegendRuleEffectEffect(final BrothersYamazakiIgnoreLegendRuleEffectEffect effect) {
         super(effect);
     }
 

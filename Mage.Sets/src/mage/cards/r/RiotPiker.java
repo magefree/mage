@@ -35,7 +35,7 @@ public final class RiotPiker extends CardImpl {
 
     }
 
-    public RiotPiker (final RiotPiker card) {
+    private RiotPiker(final RiotPiker card) {
         super(card);
     }
 

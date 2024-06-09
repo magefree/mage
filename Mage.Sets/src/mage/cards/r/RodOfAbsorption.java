@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -167,10 +168,16 @@ class RodOfAbsorptionCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getExileZoneId(game, source)));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        if (exileZone == null || exileZone.isEmpty()) {
+            return false;
+        }
+
+        Cards cards = new CardsImpl(exileZone);
         if (player == null || cards.isEmpty()) {
             return false;
         }
+
         CardUtil.castMultipleWithAttributeForFree(
                 player, source, game, cards, StaticFilters.FILTER_CARD, Integer.MAX_VALUE,
                 new RodOfAbsorptionTracker(source.getManaCostsToPay().getX())

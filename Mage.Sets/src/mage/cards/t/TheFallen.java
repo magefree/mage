@@ -42,12 +42,12 @@ public final class TheFallen extends CardImpl {
 
 class TheFallenEffect extends OneShotEffect {
 
-    public TheFallenEffect() {
+    TheFallenEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals 1 damage to each opponent or planeswalker it has dealt damage to this game";
+        this.staticText = "{this} deals 1 damage to each opponent and planeswalker it has dealt damage to this game";
     }
 
-    public TheFallenEffect(final TheFallenEffect effect) {
+    private TheFallenEffect(final TheFallenEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class TheFallenEffect extends OneShotEffect {
         if (watcher != null && watcher.getPlayersAndWalkersDealtDamageThisGame(source.getSourceId()) != null) {
             for (UUID playerId : watcher.getPlayersAndWalkersDealtDamageThisGame(source.getSourceId())) {
                 if (!source.isControlledBy(playerId)) {
-                    game.damagePlayerOrPlaneswalker(playerId, 1, source.getSourceId(), source, game, false, true);
+                    game.damagePlayerOrPermanent(playerId, 1, source.getSourceId(), source, game, false, true);
                 }
             }
             return true;
@@ -73,7 +73,7 @@ class TheFallenEffect extends OneShotEffect {
 
 class TheFallenWatcher extends Watcher {
 
-    private Map<UUID, Set<UUID>> playersAndWalkersDealtDamageThisGame = new HashMap<>(); // Map<creatureId, Set<playerId>>
+    private final Map<UUID, Set<UUID>> playersAndWalkersDealtDamageThisGame = new HashMap<>(); // Map<creatureId, Set<playerId>>
 
     public TheFallenWatcher() {
         super(WatcherScope.GAME);

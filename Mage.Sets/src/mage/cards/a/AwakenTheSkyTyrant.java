@@ -44,7 +44,7 @@ class AwakenTheSkyTyrantTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When a source an opponent controls deals damage to you, ");
     }
 
-    public AwakenTheSkyTyrantTriggeredAbility(final AwakenTheSkyTyrantTriggeredAbility ability) {
+    private AwakenTheSkyTyrantTriggeredAbility(final AwakenTheSkyTyrantTriggeredAbility ability) {
         super(ability);
     }
 

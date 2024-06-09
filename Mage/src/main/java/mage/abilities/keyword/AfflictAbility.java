@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+
 import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.game.Game;
@@ -34,7 +35,7 @@ public class AfflictAbility extends BecomesBlockedSourceTriggeredAbility {
         return false;
     }
 
-    public AfflictAbility(final AfflictAbility afflictAbility) {
+    protected AfflictAbility(final AfflictAbility afflictAbility) {
         super(afflictAbility);
         lifeLoss = afflictAbility.lifeLoss;
     }

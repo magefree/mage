@@ -110,7 +110,7 @@ class BalorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(game.getActivePlayerId());
+        Player player = game.getPlayer(source.getFirstTarget());
         return player != null
                 && player.getHand().size() >= 1
                 && player.damage(player.getHand().size(), source.getSourceId(), source, game) > 0;

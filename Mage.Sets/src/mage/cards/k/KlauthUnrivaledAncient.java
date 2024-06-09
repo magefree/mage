@@ -33,7 +33,7 @@ public final class KlauthUnrivaledAncient extends CardImpl {
     public KlauthUnrivaledAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -94,7 +94,7 @@ class KlauthUnrivaledAncientEffect extends OneShotEffect {
                 .mapToInt(MageInt::getValue)
                 .sum();
         List<Integer> manaList = player.getMultiAmount(
-                outcome, manaSymbols, attackerPower, attackerPower, MultiAmountType.MANA, game
+                outcome, manaSymbols, 0, attackerPower, MultiAmountType.MANA, game
         );
         player.getManaPool().addMana(
                 new KlauthUnrivaledAncientConditionalMana(manaList), game, source, true
@@ -122,7 +122,7 @@ class KlauthUnrivaledAncientManaCondition extends ManaCondition implements Condi
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source instanceof SpellAbility;
+        return source instanceof SpellAbility && !source.isActivated();
     }
 
     @Override

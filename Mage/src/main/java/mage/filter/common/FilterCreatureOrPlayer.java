@@ -29,7 +29,7 @@ public class FilterCreatureOrPlayer extends FilterImpl<MageItem> implements Filt
         playerFilter = new FilterPlayer();
     }
 
-    public FilterCreatureOrPlayer(final FilterCreatureOrPlayer filter) {
+    protected FilterCreatureOrPlayer(final FilterCreatureOrPlayer filter) {
         super(filter);
         this.creatureFilter = filter.creatureFilter.copy();
         this.playerFilter = filter.playerFilter.copy();

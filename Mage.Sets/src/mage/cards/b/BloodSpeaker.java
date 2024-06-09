@@ -43,7 +43,7 @@ public final class BloodSpeaker extends CardImpl {
         // At the beginning of your upkeep, you may sacrifice Blood Speaker. If you do, search your library for a Demon card, reveal that card, and put it into your hand. Then shuffle your library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new DoIfCostPaid(
-                        new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true, "search your library for "),
+                        new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true),
                         new SacrificeSourceCost()
                 ),
                 TargetController.YOU,

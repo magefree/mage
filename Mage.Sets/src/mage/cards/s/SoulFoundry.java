@@ -69,8 +69,8 @@ enum SoulFoundryAdjuster implements CostAdjuster {
             if (!sourcePermanent.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
                 if (imprinted != null) {
-                    ability.getManaCostsToPay().clear();
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaValue()));
+                    ability.clearManaCostsToPay();
+                    ability.addManaCostsToPay(new GenericManaCost(imprinted.getManaValue()));
                 }
             }
         }
@@ -109,7 +109,7 @@ class SoulFoundryImprintEffect extends OneShotEffect {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
                 if (target.canChoose(source.getControllerId(), source, game)
-                        && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
+                        && controller.choose(Outcome.Benefit, controller.getHand(), target, source, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getIdName() + " (Imprint)", source, game, Zone.HAND, true);

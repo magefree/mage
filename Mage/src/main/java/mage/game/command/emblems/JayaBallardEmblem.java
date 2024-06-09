@@ -1,7 +1,5 @@
 package mage.game.command.emblems;
 
-import java.util.Arrays;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -19,27 +17,37 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.watchers.common.CastFromGraveyardWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class JayaBallardEmblem extends Emblem {
     // You get an emblem with "You may cast instant and sorcery cards from your graveyard. If a card cast this way would be put into your graveyard, exile it instead."
 
     public JayaBallardEmblem() {
-        setName("Emblem Jaya Ballard");
-        availableImageSetCodes = Arrays.asList("DOM", "MED");
+        super("Emblem Jaya Ballard");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new JayaBallardCastFromGraveyardEffect());
         ability.addEffect(new JayaBallardReplacementEffect());
+        ability.addWatcher(new CastFromGraveyardWatcher());
         this.getAbilities().add(ability);
+    }
+
+    private JayaBallardEmblem(final JayaBallardEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public JayaBallardEmblem copy() {
+        return new JayaBallardEmblem(this);
     }
 }
 
 class JayaBallardCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     JayaBallardCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may cast instant and sorcery cards from your graveyard";
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        staticText = "You may cast instant and sorcery spells from your graveyard";
     }
 
     JayaBallardCastFromGraveyardEffect(final JayaBallardCastFromGraveyardEffect effect) {
@@ -75,21 +83,16 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
 
     public JayaBallardReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Exile);
-        staticText = "If a card cast this way would be put into a graveyard this turn, exile it instead";
+        staticText = "If a spell cast this way would be put into a graveyard this turn, exile it instead";
     }
 
-    public JayaBallardReplacementEffect(final JayaBallardReplacementEffect effect) {
+    protected JayaBallardReplacementEffect(final JayaBallardReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public JayaBallardReplacementEffect copy() {
         return new JayaBallardReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -119,7 +122,7 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
                 CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
                 return watcher != null
                         && watcher.spellWasCastFromGraveyard(event.getTargetId(),
-                                game.getState().getZoneChangeCounter(event.getTargetId()));
+                        game.getState().getZoneChangeCounter(event.getTargetId()));
             }
         }
         return false;

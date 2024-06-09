@@ -1,9 +1,8 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.constants.SubType;
@@ -11,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -26,7 +24,6 @@ public final class RiverSneak extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.MERFOLK.getPredicate());
     }
 
@@ -41,8 +38,9 @@ public final class RiverSneak extends CardImpl {
         // River Sneak can't be blocked.
         this.addAbility(new CantBeBlockedSourceAbility());
 
-        // Whenever another Merfolk enters the battlefield under your control, River sneak gets +1/+1 until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false, null, true));
+        // Whenever another Merfolk enters the battlefield under your control, River Sneak gets +1/+1 until end of turn.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false));
     }
 
     private RiverSneak(final RiverSneak card) {

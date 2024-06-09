@@ -43,12 +43,12 @@ public final class TajuruPreserver extends CardImpl {
 
 class TajuruPreserverEffect extends ReplacementEffectImpl {
 
-    public TajuruPreserverEffect() {
+    TajuruPreserverEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Spells and abilities your opponents control can't cause you to sacrifice permanents";
     }
 
-    public TajuruPreserverEffect(final TajuruPreserverEffect effect) {
+    private TajuruPreserverEffect(final TajuruPreserverEffect effect) {
         super(effect);
     }
 

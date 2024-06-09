@@ -55,7 +55,7 @@ class TemperPreventDamageTargetEffect extends PreventionEffectImpl {
         staticText = "Prevent the next X damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature";
     }
 
-    public TemperPreventDamageTargetEffect(final TemperPreventDamageTargetEffect effect) {
+    private TemperPreventDamageTargetEffect(final TemperPreventDamageTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.dVal = effect.dVal;
@@ -65,11 +65,6 @@ class TemperPreventDamageTargetEffect extends PreventionEffectImpl {
     @Override
     public TemperPreventDamageTargetEffect copy() {
         return new TemperPreventDamageTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

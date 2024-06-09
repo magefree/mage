@@ -43,7 +43,7 @@ public final class GoShintaiOfHiddenCruelty extends CardImpl {
     public GoShintaiOfHiddenCruelty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

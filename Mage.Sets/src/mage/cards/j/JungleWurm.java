@@ -28,7 +28,7 @@ public final class JungleWurm extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Jungle Wurm becomes blocked, it gets -1/-1 until end of turn for each creature blocking it beyond the first.
-        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, "it"), false));
     }
 
     private JungleWurm(final JungleWurm card) {

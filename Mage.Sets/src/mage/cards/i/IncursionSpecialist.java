@@ -30,7 +30,7 @@ public final class IncursionSpecialist extends CardImpl {
         Ability ability = new CastSecondSpellTriggeredAbility(
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn)
         );
-        ability.addEffect(new CantBeBlockedSourceEffect().setText("and can't be blocked this turn"));
+        ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn).setText("and can't be blocked this turn"));
         this.addAbility(ability);
     }
 

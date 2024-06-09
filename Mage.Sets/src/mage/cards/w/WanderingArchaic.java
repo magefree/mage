@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class WanderingArchaic extends ModalDoubleFacesCard {
+public final class WanderingArchaic extends ModalDoubleFacedCard {
 
     public WanderingArchaic(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -80,7 +80,7 @@ class WanderingArchaicEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         Spell spell = (Spell) getValue("spellCast");
         if (controller == null || opponent == null || spell == null) {
             return false;
@@ -126,7 +126,7 @@ class ExploreTheVastlandsEffect extends OneShotEffect {
             }
             Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 5));
             TargetCard target = new ExploreTheVastlandsTarget();
-            player.choose(outcome, cards, target, game);
+            player.choose(outcome, cards, target, source, game);
             Cards toHand = new CardsImpl(target.getTargets());
             cards.removeIf(target.getTargets()::contains);
             player.revealCards(source, toHand, game);

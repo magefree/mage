@@ -7,13 +7,13 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.RandomUtil;
 
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -46,7 +46,22 @@ public class RemoveCountersSourceCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        return permanent != null && permanent.getCounters(game).getCount(name) >= amount;
+        if (permanent == null) {
+            return false;
+        }
+
+        if (this.name.isEmpty()) {
+            // any counter
+            return permanent
+                    .getCounters(game)
+                    .values()
+                    .stream()
+                    .map(Counter::getCount)
+                    .anyMatch(i -> i >= amount);
+        } else {
+            // specific counter
+            return permanent.getCounters(game).getCount(name) >= amount;
+        }
     }
 
     @Override
@@ -58,7 +73,7 @@ public class RemoveCountersSourceCost extends CostImpl {
         }
         String toRemove;
         if (name.isEmpty()) {
-            Set<String> toChoose = permanent.getCounters(game).keySet();
+            Set<String> toChoose = new LinkedHashSet<>(permanent.getCounters(game).keySet());
             switch (toChoose.size()) {
                 case 0:
                     return paid;

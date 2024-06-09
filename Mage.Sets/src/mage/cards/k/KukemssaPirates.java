@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.common.TargetArtifactPermanent;
 
 import java.util.UUID;
@@ -25,7 +25,7 @@ public final class KukemssaPirates extends CardImpl {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public KukemssaPirates(UUID ownerId, CardSetInfo setInfo) {

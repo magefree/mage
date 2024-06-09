@@ -32,7 +32,7 @@ public final class InsultInjury extends SplitCard {
         // Insult
         // Damage can't be prevented this turn. If a source you control would deal damage this turn it deals
         // double that damage instead.
-        getLeftHalfCard().getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn", true, false));
+        getLeftHalfCard().getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addEffect(new InsultDoubleDamageEffect());
 
         // to
@@ -56,12 +56,12 @@ public final class InsultInjury extends SplitCard {
 
 class InsultDoubleDamageEffect extends ReplacementEffectImpl {
 
-    public InsultDoubleDamageEffect() {
+    InsultDoubleDamageEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
-        staticText = "If a source you control would deal damage this turn, it deals double that damage to that permanent or player instead.";
+        staticText = "If a source you control would deal damage this turn, it deals double that damage instead.";
     }
 
-    public InsultDoubleDamageEffect(final InsultDoubleDamageEffect effect) {
+    private InsultDoubleDamageEffect(final InsultDoubleDamageEffect effect) {
         super(effect);
     }
 
@@ -82,11 +82,6 @@ class InsultDoubleDamageEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
         return false;
@@ -97,10 +92,10 @@ class InjuryEffect extends OneShotEffect {
 
     InjuryEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals 2 damage to target creature and 2 damage to target player";
+        this.staticText = "{this} deals 2 damage to target creature and 2 damage to target player or planeswalker";
     }
 
-    InjuryEffect(final InjuryEffect effect) {
+    private InjuryEffect(final InjuryEffect effect) {
         super(effect);
     }
 

@@ -10,8 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,12 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SpriteDragon extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public SpriteDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}");
@@ -42,7 +35,7 @@ public final class SpriteDragon extends CardImpl {
 
         // Whenever you cast a noncreature spell, put a +1/+1 counter on Sprite Dragon.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         ));
     }
 

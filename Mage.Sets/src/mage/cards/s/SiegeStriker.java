@@ -65,7 +65,7 @@ class SiegeStrikerEffect extends OneShotEffect {
                 + "{this} gets +1/+1 until end of turn for each creature tapped this way";
     }
 
-    public SiegeStrikerEffect(SiegeStrikerEffect effect) {
+    private SiegeStrikerEffect(final SiegeStrikerEffect effect) {
         super(effect);
     }
 

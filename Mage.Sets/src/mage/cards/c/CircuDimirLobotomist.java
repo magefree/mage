@@ -38,7 +38,7 @@ public final class CircuDimirLobotomist extends CardImpl {
     public CircuDimirLobotomist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -70,12 +70,12 @@ public final class CircuDimirLobotomist extends CardImpl {
 
 class CircuDimirLobotomistEffect extends OneShotEffect {
 
-    public CircuDimirLobotomistEffect() {
+    CircuDimirLobotomistEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile the top card of target player's library";
     }
 
-    public CircuDimirLobotomistEffect(final CircuDimirLobotomistEffect effect) {
+    private CircuDimirLobotomistEffect(final CircuDimirLobotomistEffect effect) {
         super(effect);
     }
 
@@ -101,12 +101,12 @@ class CircuDimirLobotomistEffect extends OneShotEffect {
 
 class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CircuDimirLobotomistRuleModifyingEffect() {
+    CircuDimirLobotomistRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Your opponents can't cast nonland cards with the same name as a card exiled with {this}";
+        staticText = "Your opponents can't cast spells with the same name as a card exiled with {this}";
     }
 
-    public CircuDimirLobotomistRuleModifyingEffect(final CircuDimirLobotomistRuleModifyingEffect effect) {
+    private CircuDimirLobotomistRuleModifyingEffect(final CircuDimirLobotomistRuleModifyingEffect effect) {
         super(effect);
     }
 
@@ -121,9 +121,13 @@ class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEff
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.CAST_SPELL
-                || !game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (!game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             return false;
         }
         MageObject object = game.getObject(event.getSourceId());

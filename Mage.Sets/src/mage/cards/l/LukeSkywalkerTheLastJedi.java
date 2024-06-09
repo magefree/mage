@@ -35,7 +35,7 @@ public final class LukeSkywalkerTheLastJedi extends CardImpl {
     public LukeSkywalkerTheLastJedi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LUKE);
         this.setStartingLoyalty(3);
 

@@ -18,7 +18,7 @@ public final class VampireKnightToken extends TokenImpl {
         addAbility(LifelinkAbility.getInstance());
     }
 
-    public VampireKnightToken(final VampireKnightToken token) {
+    private VampireKnightToken(final VampireKnightToken token) {
         super(token);
     }
 

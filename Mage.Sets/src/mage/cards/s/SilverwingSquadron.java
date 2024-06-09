@@ -13,7 +13,6 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.KnightToken;
@@ -41,7 +40,7 @@ public final class SilverwingSquadron extends CardImpl {
 
         // Silverwing Squadron's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance)
         ).addHint(CreaturesYouControlHint.instance));
 
         // Whenever Silverwing Squadron attacks, create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you have.

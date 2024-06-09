@@ -28,7 +28,7 @@ public final class ArceeSharpshooter extends CardImpl {
     public ArceeSharpshooter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROBOT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -46,7 +46,7 @@ public final class ArceeSharpshooter extends CardImpl {
                         .setText("it deals that much damage to target creature"),
                 new GenericManaCost(1)
         );
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance(), 1));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1, 1));
         ability.addEffect(new TransformSourceEffect().setText("convert {this}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -49,7 +49,7 @@ class ForkInTheRoadEffect extends OneShotEffect {
         staticText = "Search your library for up to two basic land cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle";
     }
 
-    public ForkInTheRoadEffect(final ForkInTheRoadEffect effect) {
+    private ForkInTheRoadEffect(final ForkInTheRoadEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class ForkInTheRoadEffect extends OneShotEffect {
                 controller.revealCards(sourceObject.getIdName(), revealed, game);
                 if (!target.getTargets().isEmpty()) {
                     TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
-                    controller.choose(Outcome.Benefit, revealed, target2, game);
+                    controller.choose(Outcome.Benefit, revealed, target2, source, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCards(card, Zone.HAND, source, game);

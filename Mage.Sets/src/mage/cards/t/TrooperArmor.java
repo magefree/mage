@@ -26,7 +26,7 @@ public final class TrooperArmor extends CardImpl {
 
         // Equiped creature gets +1/+1 and is a Trooper in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect(SubType.TROOPER, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect(SubType.TROOPER, AttachmentType.EQUIPMENT)));
 
         // Whenever a Trooper enters the battlefield under your control, you may attach {this} to it.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
@@ -34,8 +34,8 @@ public final class TrooperArmor extends CardImpl {
                 new AttachEffect(Outcome.BoostCreature, "attach {this} to it"),
                 new FilterPermanent(SubType.TROOPER, "Trooper"),
                 true,
-                SetTargetPointer.PERMANENT,
-                null));
+                SetTargetPointer.PERMANENT
+        ));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }

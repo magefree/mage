@@ -33,7 +33,7 @@ public final class TreefolkHarbinger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Treefolk Harbinger enters the battlefield, you may search your library for a Treefolk or Forest card, reveal it, then shuffle your library and put that card on top of it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true), true));
     }
 
     private TreefolkHarbinger(final TreefolkHarbinger card) {

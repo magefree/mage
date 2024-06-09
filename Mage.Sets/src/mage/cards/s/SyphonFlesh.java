@@ -10,11 +10,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -41,12 +43,12 @@ public final class SyphonFlesh extends CardImpl {
 
 class SyphonFleshEffect extends OneShotEffect {
 
-    public SyphonFleshEffect() {
+    SyphonFleshEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way.";
     }
 
-    public SyphonFleshEffect(final SyphonFleshEffect effect) {
+    private SyphonFleshEffect(final SyphonFleshEffect effect) {
         super(effect);
     }
 
@@ -63,10 +65,9 @@ class SyphonFleshEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !playerId.equals(source.getControllerId())) {
-                    TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                    target.setNotTarget(true);
+                    TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
                     if (target.canChoose(player.getId(), source, game)) {
-                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
                 }

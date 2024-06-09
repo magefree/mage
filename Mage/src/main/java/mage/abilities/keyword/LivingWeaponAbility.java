@@ -10,7 +10,7 @@ public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
         super(new CreateTokenAttachSourceEffect(new PhyrexianGermToken()));
     }
 
-    public LivingWeaponAbility(final LivingWeaponAbility ability) {
+    protected LivingWeaponAbility(final LivingWeaponAbility ability) {
         super(ability);
     }
 
@@ -21,7 +21,7 @@ public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
     }
 
     @Override
-    public EntersBattlefieldTriggeredAbility copy() {
+    public LivingWeaponAbility copy() {
         return new LivingWeaponAbility(this);
     }
 }

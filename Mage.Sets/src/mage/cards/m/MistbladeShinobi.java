@@ -58,7 +58,7 @@ class MistbladeShinobiTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD,  new ReturnToHandTargetEffect(), true);
     }
 
-    MistbladeShinobiTriggeredAbility(final MistbladeShinobiTriggeredAbility ability) {
+    private MistbladeShinobiTriggeredAbility(final MistbladeShinobiTriggeredAbility ability) {
         super(ability);
     }
 

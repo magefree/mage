@@ -56,7 +56,7 @@ class EmptyShrineKannushiProtectionAbility extends ProtectionAbility {
         super(new FilterCard());
     }
 
-    public EmptyShrineKannushiProtectionAbility(final EmptyShrineKannushiProtectionAbility ability) {
+    private EmptyShrineKannushiProtectionAbility(final EmptyShrineKannushiProtectionAbility ability) {
         super(ability);
     }
 

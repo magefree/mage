@@ -42,7 +42,7 @@ public final class LiberatorUrzasBattlethopter extends CardImpl {
 
     public LiberatorUrzasBattlethopter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.THOPTER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
@@ -62,9 +62,12 @@ public final class LiberatorUrzasBattlethopter extends CardImpl {
         // than Liberator, Urza's Battlethopter's power, put a +1/+1 counter on Liberator.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastControllerTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_SPELL_A, false, true
-                ), LiberatorUrzasBattlethopterCondition.instance, "Whenever you cast a spell, if the amount of mana spent to cast " +
-                "that spell is greater than {this}'s power, put a +1/+1 counter on {this}"
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                        StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL
+                ),
+                LiberatorUrzasBattlethopterCondition.instance,
+                "Whenever you cast a spell, if the amount of mana spent to cast "
+                        + "that spell is greater than {this}'s power, put a +1/+1 counter on {this}"
         ));
     }
 

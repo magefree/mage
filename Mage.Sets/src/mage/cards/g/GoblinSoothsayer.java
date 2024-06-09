@@ -28,11 +28,10 @@ import mage.target.common.TargetControlledPermanent;
 public final class GoblinSoothsayer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("goblin");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.GOBLIN, "Goblin");
     
-    static    {
+    static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter2.add(SubType.GOBLIN.getPredicate());
     }
     
     public GoblinSoothsayer(UUID ownerId, CardSetInfo setInfo) {
@@ -45,7 +44,7 @@ public final class GoblinSoothsayer extends CardImpl {
         // {R}, {T}, Sacrifice a Goblin: Red creatures get +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1,Duration.EndOfTurn, filter, false), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
         
     }

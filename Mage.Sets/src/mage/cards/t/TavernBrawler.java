@@ -25,7 +25,7 @@ public final class TavernBrawler extends CardImpl {
     public TavernBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "At the beginning of your upkeep, exile the top card of your library. This creature gets +X/+0 until end of turn, where X is that card's mana value. You may play that card this turn."
@@ -75,7 +75,7 @@ class TavernBrawlerEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.EXILED, source, game);
         game.addEffect(new BoostSourceEffect(card.getManaValue(), 0, Duration.EndOfTurn), source);
-        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+        CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         return true;
     }
 }

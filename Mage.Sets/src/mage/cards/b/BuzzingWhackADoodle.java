@@ -69,7 +69,7 @@ class BuzzingWhackADoodleEffect extends OneShotEffect {
         this.staticText = "You and an opponent each secretly choose Whack or Doodle. Then those choices are revealed. If the choices match, {this} has that ability. Otherwise it has Buzz";
     }
 
-    BuzzingWhackADoodleEffect(final BuzzingWhackADoodleEffect effect) {
+    private BuzzingWhackADoodleEffect(final BuzzingWhackADoodleEffect effect) {
         super(effect);
     }
 

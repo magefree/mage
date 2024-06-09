@@ -24,6 +24,7 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -54,7 +55,7 @@ public final class NaturesBlessing extends CardImpl {
 
 class NaturesBlessingEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
     private Ability gainedAbility;
 
     static {
@@ -69,7 +70,7 @@ class NaturesBlessingEffect extends OneShotEffect {
         this.staticText = "Put a +1/+1 counter on target creature or that creature gains banding, first strike, or trample";
     }
 
-    public NaturesBlessingEffect(final NaturesBlessingEffect effect) {
+    private NaturesBlessingEffect(final NaturesBlessingEffect effect) {
         super(effect);
     }
 

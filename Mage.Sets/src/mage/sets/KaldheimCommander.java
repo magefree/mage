@@ -103,9 +103,9 @@ public final class KaldheimCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Pride of the Perfect", 52, Rarity.UNCOMMON, mage.cards.p.PrideOfThePerfect.class));
         cards.add(new SetCardInfo("Prowess of the Fair", 53, Rarity.UNCOMMON, mage.cards.p.ProwessOfTheFair.class));
         cards.add(new SetCardInfo("Putrefy", 91, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
-        cards.add(new SetCardInfo("Ranar the Ever-Watchful", 2, Rarity.RARE, mage.cards.r.RanarTheEverWatchful.class));
+        cards.add(new SetCardInfo("Ranar the Ever-Watchful", 2, Rarity.MYTHIC, mage.cards.r.RanarTheEverWatchful.class));
         cards.add(new SetCardInfo("Reclamation Sage", 72, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
-        cards.add(new SetCardInfo("Restoration Angel", 31, Rarity.COMMON, mage.cards.r.RestorationAngel.class));
+        cards.add(new SetCardInfo("Restoration Angel", 31, Rarity.RARE, mage.cards.r.RestorationAngel.class));
         cards.add(new SetCardInfo("Return to Dust", 32, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Rhys the Exiled", 73, Rarity.RARE, mage.cards.r.RhysTheExiled.class));
         cards.add(new SetCardInfo("Ruthless Winnower", 10, Rarity.RARE, mage.cards.r.RuthlessWinnower.class));

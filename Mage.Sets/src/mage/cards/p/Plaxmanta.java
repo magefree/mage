@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -34,7 +34,7 @@ public final class Plaxmanta extends CardImpl {
 
         // When Plaxmanta enters the battlefield, creatures you control gain shroud until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES)));
+                new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES)));
 
         // When Plaxmanta enters the battlefield, sacrifice it unless {G} was spent to cast it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(ManaWasSpentCondition.GREEN), false));

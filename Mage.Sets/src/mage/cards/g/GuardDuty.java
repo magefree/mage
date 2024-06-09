@@ -39,7 +39,7 @@ public final class GuardDuty extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public GuardDuty (final GuardDuty card) {
+    private GuardDuty(final GuardDuty card) {
         super(card);
     }
 

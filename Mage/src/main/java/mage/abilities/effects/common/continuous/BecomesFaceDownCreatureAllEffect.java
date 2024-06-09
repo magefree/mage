@@ -15,10 +15,12 @@ import mage.game.permanent.Permanent;
 import java.util.*;
 
 /**
+ * TODO: must be reworked to use same face down logic as BecomesFaceDownCreatureEffect
+ *
  * @author LevelX2
  */
 
-public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
 
     protected Map<UUID, Ability> turnFaceUpAbilityMap = new HashMap<>();
     protected FilterPermanent filter;
@@ -29,7 +31,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
         staticText = "turn all " + filter.getMessage() + " face down. (They're 2/2 creatures.)";
     }
 
-    public BecomesFaceDownCreatureAllEffect(final BecomesFaceDownCreatureAllEffect effect) {
+    protected BecomesFaceDownCreatureAllEffect(final BecomesFaceDownCreatureAllEffect effect) {
         super(effect);
         for (Map.Entry<UUID, Ability> entry : effect.turnFaceUpAbilityMap.entrySet()) {
             this.turnFaceUpAbilityMap.put(entry.getKey(), entry.getValue());
@@ -45,6 +47,8 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+
+        // save permanents to become face down (one time usage on resolve)
         for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             if (!perm.isFaceDown(game) && !perm.isTransformable()) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
@@ -54,7 +58,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                 if (card != null) {
                     for (Ability ability : card.getAbilities(game)) {
                         if (ability instanceof MorphAbility) {
-                            this.turnFaceUpAbilityMap.put(card.getId(), new TurnFaceUpAbility(((MorphAbility) ability).getMorphCosts()));
+                            this.turnFaceUpAbilityMap.put(card.getId(), new TurnFaceUpAbility(((MorphAbility) ability).getFaceUpCosts()));
                         }
                     }
                 }
@@ -66,13 +70,14 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         boolean targetExists = false;
         for (MageObjectReference mor : affectedObjectList) {
+            // TODO: wtf, why it not use a BecomesFaceDownCreatureEffect.makeFaceDownObject and applied by layers?! Looks buggy
             Permanent permanent = mor.getPermanent(game);
             if (permanent != null && permanent.isFaceDown(game)) {
                 targetExists = true;
                 switch (layer) {
                     case TypeChangingEffects_4:
                         permanent.setName("");
-                        permanent.getSuperType().clear();
+                        permanent.removeAllSuperTypes(game);
                         permanent.removeAllCardTypes(game);
                         permanent.addCardType(game, CardType.CREATURE);
                         permanent.removeAllSubTypes(game);
@@ -119,7 +124,6 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                             permanent.getPower().setModifiedBaseValue(2);
                             permanent.getToughness().setModifiedBaseValue(2);
                         }
-
                 }
             }
         }

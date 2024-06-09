@@ -71,12 +71,12 @@ class GigantiformAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA));
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new SetBasePowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true)
+                new SetBasePowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield)
         );
         this.addEffect(new GainAbilityAttachedEffect(ability, AttachmentType.AURA));
     }
 
-    public GigantiformAbility(GigantiformAbility ability) {
+    private GigantiformAbility(final GigantiformAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class GigantiformEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
     }
 
-    public GigantiformEffect(final GigantiformEffect effect) {
+    private GigantiformEffect(final GigantiformEffect effect) {
         super(effect);
     }
 

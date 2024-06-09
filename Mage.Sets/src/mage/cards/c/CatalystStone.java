@@ -51,7 +51,7 @@ public final class CatalystStone extends CardImpl {
 
 class CatalystStoneCostReductionEffect extends CostModificationEffectImpl {
 
-    public CatalystStoneCostReductionEffect() {
+    CatalystStoneCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.staticText = "Flashback costs you pay cost up to {2} less";
     }
@@ -115,7 +115,7 @@ class CatalystStoneCostReductionEffect extends CostModificationEffectImpl {
 
 class CatalystStoneCostRaiseEffect extends CostModificationEffectImpl {
 
-    public CatalystStoneCostRaiseEffect() {
+    CatalystStoneCostRaiseEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         this.staticText = "Flashback costs your opponents pay cost {2} more";
     }

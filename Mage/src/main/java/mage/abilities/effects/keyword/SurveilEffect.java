@@ -26,7 +26,7 @@ public class SurveilEffect extends OneShotEffect {
         this.setText();
     }
 
-    public SurveilEffect(final SurveilEffect effect) {
+    protected SurveilEffect(final SurveilEffect effect) {
         super(effect);
         this.surveilNumber = effect.surveilNumber;
         this.showEffectHint = effect.showEffectHint;

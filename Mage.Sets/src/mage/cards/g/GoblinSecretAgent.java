@@ -50,12 +50,12 @@ public final class GoblinSecretAgent extends CardImpl {
 
 class GoblinSecretAgentEffect extends OneShotEffect {
 
-    public GoblinSecretAgentEffect() {
+    GoblinSecretAgentEffect() {
         super(Outcome.Detriment);
         this.staticText = "reveal a card from your hand at random";
     }
     
-    public GoblinSecretAgentEffect(final GoblinSecretAgentEffect effect) {
+    private GoblinSecretAgentEffect(final GoblinSecretAgentEffect effect) {
         super(effect);
     }
 

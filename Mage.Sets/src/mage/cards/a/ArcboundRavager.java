@@ -35,7 +35,7 @@ public final class ArcboundRavager extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Sacrifice an artifact: Put a +1/+1 counter on Arcbound Ravager.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new SacrificeTargetCost(filter)));
         // Modular 1
         this.addAbility(new ModularAbility(this, 1));
     }

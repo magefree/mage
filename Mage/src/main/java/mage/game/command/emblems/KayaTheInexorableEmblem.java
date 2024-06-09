@@ -29,12 +29,20 @@ public class KayaTheInexorableEmblem extends Emblem {
     // −7: You get an emblem with "At the beginning of your upkeep, you may cast a legendary spell from your hand, from your graveyard, or from among cards you own in exile without paying its mana cost."
     public KayaTheInexorableEmblem() {
 
-        this.setName("Emblem Kaya");
-        this.setExpansionSetCodeForImage("KHM");
+        super("Emblem Kaya");
         this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
                 Zone.COMMAND, new KayaTheInexorableEmblemEffect(),
                 TargetController.YOU, true, false
         ));
+    }
+
+    private KayaTheInexorableEmblem(final KayaTheInexorableEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public KayaTheInexorableEmblem copy() {
+        return new KayaTheInexorableEmblem(this);
     }
 }
 
@@ -86,7 +94,7 @@ class KayaTheInexorableEmblemEffect extends OneShotEffect {
                 cards.addAll(player.getGraveyard());
                 break;
             case "Exile":
-                cards.addAll(game.getExile().getCards(filter, game));
+                cards.addAllCards(game.getExile().getCards(filter, game));
                 break;
         }
         return CardUtil.castSpellWithAttributesForFree(player, source, game, cards, filter2);

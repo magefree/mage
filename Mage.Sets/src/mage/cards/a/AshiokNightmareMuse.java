@@ -31,7 +31,7 @@ public final class AshiokNightmareMuse extends CardImpl {
     public AshiokNightmareMuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ASHIOK);
         this.setStartingLoyalty(5);
 
@@ -86,7 +86,7 @@ class AshiokNightmareMuseBounceEffect extends OneShotEffect {
             return true;
         }
         TargetCardInHand target = new TargetCardInHand();
-        if (!player.choose(outcome, player.getHand(), target, game)) {
+        if (!player.choose(outcome, player.getHand(), target, source, game)) {
             return false;
         }
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.EXILED, source, game);

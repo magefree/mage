@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -21,10 +20,11 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -61,12 +61,13 @@ public final class SoulEcho extends CardImpl {
 
 class SoulEchoOpponentsChoiceEffect extends OneShotEffect {
 
-    public SoulEchoOpponentsChoiceEffect() {
+    SoulEchoOpponentsChoiceEffect() {
         super(Outcome.PreventDamage);
-        staticText = "target opponent may choose that for each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from {this} instead";
+        staticText = "target opponent may choose that for each 1 damage that would be dealt to you " +
+            "until your next upkeep, you remove an echo counter from {this} instead";
     }
 
-    public SoulEchoOpponentsChoiceEffect(final SoulEchoOpponentsChoiceEffect effect) {
+    private SoulEchoOpponentsChoiceEffect(final SoulEchoOpponentsChoiceEffect effect) {
         super(effect);
     }
 
@@ -79,7 +80,7 @@ class SoulEchoOpponentsChoiceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && opponent != null && permanent != null) {
             if (opponent.chooseUse(outcome, "Have all damage dealt to " + controller.getLogName() + " be decremented from echo counters on " + permanent.getLogName() + " until " + controller.getLogName() + "'s next upkeep instead?", source, game)) {
                 game.informPlayers("Until " + controller.getLogName() + "'s next upkeep, for each 1 damage that would be dealt to " + controller.getLogName() + ", an echo counter from " + permanent.getLogName() + " is removed instead");
@@ -92,27 +93,13 @@ class SoulEchoOpponentsChoiceEffect extends OneShotEffect {
 }
 
 class SoulEchoReplacementEffect extends ReplacementEffectImpl {
-    
-    private boolean sameStep = true;
 
     SoulEchoReplacementEffect() {
-        super(Duration.Custom, Outcome.PreventDamage);
+        super(Duration.UntilYourNextUpkeepStep, Outcome.PreventDamage);
     }
 
-    SoulEchoReplacementEffect(final SoulEchoReplacementEffect effect) {
+    private SoulEchoReplacementEffect(final SoulEchoReplacementEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (!sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
-                return true;
-            }
-        } else {
-            sameStep = false;
-        }
-        return false;
     }
 
     @Override

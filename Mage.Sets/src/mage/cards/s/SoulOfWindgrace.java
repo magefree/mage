@@ -32,7 +32,7 @@ public final class SoulOfWindgrace extends CardImpl {
     public SoulOfWindgrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(5);

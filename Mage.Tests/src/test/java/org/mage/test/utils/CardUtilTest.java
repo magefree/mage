@@ -2,6 +2,8 @@ package org.mage.test.utils;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.util.CardUtil;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -75,7 +77,7 @@ public class CardUtilTest extends CardTestPlayerBase {
     @Test
     public void testJadziPlayingLandAndCast() {
         addCard(Zone.BATTLEFIELD, playerA, jadzi);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1+1+1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1 + 1 + 1);
         addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
         addCard(Zone.LIBRARY, playerA, "Cragcrown Pathway");
         addCard(Zone.LIBRARY, playerA, akoumWarrior);
@@ -91,5 +93,33 @@ public class CardUtilTest extends CardTestPlayerBase {
         execute();
         assertPermanentCount(playerA, akoumWarrior, 1);
         assertPermanentCount(playerA, "Cragcrown Pathway", 1);
+    }
+
+    @Test
+    public void test_Substring() {
+        String str = "12345";
+        String ending = "...";
+
+        Assert.assertEquals("", CardUtil.substring(str, 0));
+        Assert.assertEquals("1", CardUtil.substring(str, 1));
+        Assert.assertEquals("12", CardUtil.substring(str, 2));
+        Assert.assertEquals("123", CardUtil.substring(str, 3));
+        Assert.assertEquals("1234", CardUtil.substring(str, 4));
+        Assert.assertEquals("12345", CardUtil.substring(str, 5));
+        Assert.assertEquals("12345", CardUtil.substring(str, 6));
+        Assert.assertEquals("12345", CardUtil.substring(str, 7));
+        Assert.assertEquals("12345", CardUtil.substring(str, 8));
+        Assert.assertEquals("12345", CardUtil.substring(str, 9));
+
+        Assert.assertEquals("", CardUtil.substring(str, 0, ending));
+        Assert.assertEquals(".", CardUtil.substring(str, 1, ending));
+        Assert.assertEquals("..", CardUtil.substring(str, 2, ending));
+        Assert.assertEquals("...", CardUtil.substring(str, 3, ending));
+        Assert.assertEquals("1...", CardUtil.substring(str, 4, ending));
+        Assert.assertEquals("12345", CardUtil.substring(str, 5, ending));
+        Assert.assertEquals("12345", CardUtil.substring(str, 6, ending));
+        Assert.assertEquals("12345", CardUtil.substring(str, 7, ending));
+        Assert.assertEquals("12345", CardUtil.substring(str, 8, ending));
+        Assert.assertEquals("12345", CardUtil.substring(str, 9, ending));
     }
 }

@@ -31,7 +31,7 @@ public class HorsemanshipAbility extends EvasionAbility implements MageSingleton
 
     @Override
     public String getRule() {
-        return "Horsemanship <i>(This creature can't be blocked except by creatures with horsemanship.)</i>";
+        return "horsemanship <i>(This creature can't be blocked except by creatures with horsemanship.)</i>";
     }
 
     @Override
@@ -47,7 +47,7 @@ class Horsemanship extends RestrictionEffect implements MageSingleton {
         super(Duration.EndOfGame);
     }
 
-    public Horsemanship(final Horsemanship effect) {
+    protected Horsemanship(final Horsemanship effect) {
         super(effect);
     }
 

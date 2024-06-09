@@ -28,7 +28,7 @@ public final class SorinMarkov extends CardImpl {
 
     public SorinMarkov(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
 
         this.setStartingLoyalty(4);
@@ -62,18 +62,18 @@ public final class SorinMarkov extends CardImpl {
 
 class SorinMarkovEffect extends OneShotEffect {
 
-    public SorinMarkovEffect() {
+    SorinMarkovEffect() {
         super(Outcome.Benefit);
         staticText = "Target opponent's life total becomes 10";
     }
 
-    public SorinMarkovEffect(SorinMarkovEffect effect) {
+    private SorinMarkovEffect(final SorinMarkovEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.setLife(10, game, source);
             return true;

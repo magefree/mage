@@ -31,7 +31,7 @@ public final class LilianaOfTheVeil extends CardImpl {
     
     public LilianaOfTheVeil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
         
         this.setStartingLoyalty(3);
@@ -67,7 +67,7 @@ class LilianaOfTheVeilEffect extends OneShotEffect {
         this.staticText = "Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of their choice";
     }
     
-    public LilianaOfTheVeilEffect(final LilianaOfTheVeilEffect effect) {
+    private LilianaOfTheVeilEffect(final LilianaOfTheVeilEffect effect) {
         super(effect);
     }
     

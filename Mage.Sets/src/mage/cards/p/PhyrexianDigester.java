@@ -25,7 +25,7 @@ public final class PhyrexianDigester extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public PhyrexianDigester (final PhyrexianDigester card) {
+    private PhyrexianDigester(final PhyrexianDigester card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ThornThallid extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
         // Remove three spore counters from Thorn Thallid: Thorn Thallid deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DamageTargetEffect(1),
+                new DamageTargetEffect(1, "it"),
                 new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

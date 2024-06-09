@@ -62,7 +62,7 @@ class ChoArrimAlchemistEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public ChoArrimAlchemistEffect(final ChoArrimAlchemistEffect effect) {
+    private ChoArrimAlchemistEffect(final ChoArrimAlchemistEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
@@ -73,12 +73,8 @@ class ChoArrimAlchemistEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 

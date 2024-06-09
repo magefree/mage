@@ -22,7 +22,7 @@ public final class CandlekeepSage extends CardImpl {
     public CandlekeepSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "When this creature enters or leaves the battlefield, draw a card."

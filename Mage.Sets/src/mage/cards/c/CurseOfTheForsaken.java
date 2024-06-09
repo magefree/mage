@@ -62,7 +62,7 @@ class CurseOfTheForsakenTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public CurseOfTheForsakenTriggeredAbility(final CurseOfTheForsakenTriggeredAbility ability) {
+    private CurseOfTheForsakenTriggeredAbility(final CurseOfTheForsakenTriggeredAbility ability) {
         super(ability);
     }
 

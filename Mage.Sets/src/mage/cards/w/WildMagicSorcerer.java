@@ -58,7 +58,7 @@ class WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect extends Continuo
         staticText = "The first spell you cast from exile each turn has cascade";
     }
 
-    public WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect(final WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect effect) {
+    private WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect(final WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect effect) {
         super(effect);
     }
 

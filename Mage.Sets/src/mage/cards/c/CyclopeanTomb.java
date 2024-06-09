@@ -13,7 +13,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.effects.common.counter.RemoveAllCountersTargetEffect;
+import mage.abilities.effects.common.counter.RemoveAllCountersPermanentTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -79,7 +79,7 @@ class BecomeSwampEffect extends BecomesBasicLandTargetEffect {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent land = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (land == null || land.getCounters(game).getCount(CounterType.MIRE) < 1) {
             this.discard();
             return false;
@@ -168,7 +168,7 @@ class CyclopeanTombEffect extends OneShotEffect {
             if (controller.chooseTarget(Outcome.Neutral, target, source, game)) {
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
                 if (chosenLand != null) {
-                    Effect effect = new RemoveAllCountersTargetEffect(CounterType.MIRE);
+                    Effect effect = new RemoveAllCountersPermanentTargetEffect(CounterType.MIRE);
                     effect.setTargetPointer(new FixedTarget(chosenLand, game));
                     effect.apply(game, source);
                     landRef.remove(new MageObjectReference(chosenLand, game));

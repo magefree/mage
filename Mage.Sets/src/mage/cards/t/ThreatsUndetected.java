@@ -42,7 +42,7 @@ public final class ThreatsUndetected extends CardImpl {
 
 class ThreatsUndetectedEffect extends OneShotEffect {
 
-    public ThreatsUndetectedEffect() {
+    ThreatsUndetectedEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for up to four creature cards with different powers and reveal them. An opponent chooses two of those cards. Shuffle the chosen cards into your library and put the rest into your hand.";
     }

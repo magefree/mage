@@ -58,7 +58,7 @@ class SelflessSquireTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public SelflessSquireTriggeredAbility(final SelflessSquireTriggeredAbility ability) {
+    private SelflessSquireTriggeredAbility(final SelflessSquireTriggeredAbility ability) {
         super(ability);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -73,11 +72,11 @@ class SayCost extends CostImpl {
 
     private String message;
 
-    public SayCost(String message) {
+    SayCost(String message) {
         this.message = message;
     }
 
-    public SayCost(SayCost cost) {
+    private SayCost(final SayCost cost) {
         super(cost);
         this.message = cost.message;
     }
@@ -98,7 +97,7 @@ class SayCost extends CostImpl {
     }
 
     @Override
-    public Cost copy() {
+    public SayCost copy() {
         return new SayCost(this);
     }
 }

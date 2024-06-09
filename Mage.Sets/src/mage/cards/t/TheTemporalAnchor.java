@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -29,7 +30,7 @@ public final class TheTemporalAnchor extends CardImpl {
     public TheTemporalAnchor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}{U}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your upkeep, scry 2.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
@@ -157,8 +158,11 @@ class TheTemporalAnchorPlayEffect extends AsThoughEffectImpl {
             return false;
         }
         UUID mainId = card.getMainCard().getId(); // for split cards
+        MageObject sourceObject = source.getSourceObject(game);
 
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
+                game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game)
+        ));
         return exileZone != null
                 && exileZone.contains(mainId)
                 && game.getCard(mainId) != null;

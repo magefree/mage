@@ -32,7 +32,7 @@ public final class ForbiddingWatchtower extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // {1}{W}: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ForbiddingWatchtowerToken(), "land", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ForbiddingWatchtowerToken(), CardType.LAND, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private ForbiddingWatchtower(final ForbiddingWatchtower card) {
@@ -55,7 +55,7 @@ class ForbiddingWatchtowerToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(5);
     }
-    public ForbiddingWatchtowerToken(final ForbiddingWatchtowerToken token) {
+    private ForbiddingWatchtowerToken(final ForbiddingWatchtowerToken token) {
         super(token);
     }
 

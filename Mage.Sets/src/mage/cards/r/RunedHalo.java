@@ -55,12 +55,12 @@ public final class RunedHalo extends CardImpl {
 
 class RunedHaloSetProtectionEffect extends OneShotEffect {
 
-    public RunedHaloSetProtectionEffect() {
+    RunedHaloSetProtectionEffect() {
         super(Outcome.Protect);
         staticText = "<br/><br/>You have protection from the chosen card name. <i>(You can't be targeted, dealt damage, or enchanted by anything with that name.)</i>";
     }
 
-    public RunedHaloSetProtectionEffect(final RunedHaloSetProtectionEffect effect) {
+    private RunedHaloSetProtectionEffect(final RunedHaloSetProtectionEffect effect) {
         super(effect);
     }
 

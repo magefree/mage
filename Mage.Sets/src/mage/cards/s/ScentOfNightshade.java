@@ -56,7 +56,7 @@ class ScentOfNightshadeEffect extends OneShotEffect {
                 + "where X is the number of cards revealed this way";
     }
 
-    public ScentOfNightshadeEffect(final ScentOfNightshadeEffect effect) {
+    private ScentOfNightshadeEffect(final ScentOfNightshadeEffect effect) {
         super(effect);
     }
 

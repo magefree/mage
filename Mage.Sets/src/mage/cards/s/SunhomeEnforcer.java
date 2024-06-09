@@ -55,7 +55,7 @@ class SunhomeEnforcerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
     
-    public SunhomeEnforcerTriggeredAbility(final SunhomeEnforcerTriggeredAbility ability) {
+    private SunhomeEnforcerTriggeredAbility(final SunhomeEnforcerTriggeredAbility ability) {
         super(ability);
     }
 

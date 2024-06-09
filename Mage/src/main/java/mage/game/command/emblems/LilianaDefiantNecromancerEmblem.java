@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -17,18 +16,24 @@ import mage.game.command.Emblem;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author spjspj
  */
 public final class LilianaDefiantNecromancerEmblem extends Emblem {
     // You get an emblem with "Whenever a creature you control dies, return it to the battlefield under your control at the beginning of the next end step."
 
     public LilianaDefiantNecromancerEmblem() {
-        this.setName("Emblem Liliana");
+        super("Emblem Liliana");
         Ability ability = new DiesCreatureTriggeredAbility(Zone.COMMAND, new LilianaDefiantNecromancerEmblemEffect(), false, StaticFilters.FILTER_PERMANENT_A_CREATURE, true);
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("ORI");
+    private LilianaDefiantNecromancerEmblem(final LilianaDefiantNecromancerEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public LilianaDefiantNecromancerEmblem copy() {
+        return new LilianaDefiantNecromancerEmblem(this);
     }
 }
 

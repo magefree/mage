@@ -3,11 +3,12 @@ package mage.cards.r;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
 
@@ -31,9 +32,11 @@ public final class ReflectionsOfLittjara extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Neutral)));
 
         // Whenever you cast a spell of the chosen type, copy that spell.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CopyTargetSpellEffect(
-                false, true, false
-        ).setText("copy that spell"), filter, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new CopyTargetStackObjectEffect(false, true, false)
+                        .setText("copy that spell"),
+                filter, false, SetTargetPointer.SPELL
+        ));
     }
 
     private ReflectionsOfLittjara(final ReflectionsOfLittjara card) {

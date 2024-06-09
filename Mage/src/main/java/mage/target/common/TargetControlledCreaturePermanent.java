@@ -4,7 +4,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetControlledCreaturePermanent extends TargetControlledPermanent {
@@ -29,7 +28,7 @@ public class TargetControlledCreaturePermanent extends TargetControlledPermanent
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetControlledCreaturePermanent(final TargetControlledCreaturePermanent target) {
+    protected TargetControlledCreaturePermanent(final TargetControlledCreaturePermanent target) {
         super(target);
     }
 

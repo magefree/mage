@@ -26,7 +26,7 @@ public final class ViviensArkbow extends CardImpl {
     public ViviensArkbow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {X}, {T}, Discard a card: Look at the top X cards of your library. You may put a creature card with converted mana cost X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(
@@ -79,7 +79,7 @@ class ViviensArkbowEffect extends OneShotEffect {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         TargetCard target = new TargetCardInLibrary(0, 1, filter);
 
-        if (player.choose(outcome, cards, target, game)) {
+        if (player.choose(outcome, cards, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 cards.remove(card);

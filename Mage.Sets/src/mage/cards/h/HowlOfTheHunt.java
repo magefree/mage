@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -44,7 +44,7 @@ public final class HowlOfTheHunt extends CardImpl {
 
         // When Howl of the Hunt enters the battlefield, if enchanted creature is a Wolf or Werewolf, untap that creature.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new UntapEnchantedEffect()),
+                new EntersBattlefieldTriggeredAbility(new UntapAttachedEffect()),
                 HowlOfTheHuntCondition.instance, "When {this} enters the battlefield, " +
                 "if enchanted creature is a Wolf or Werewolf, untap that creature."
         ));

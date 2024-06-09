@@ -6,6 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,7 +33,7 @@ public final class DocksideExtortionist extends CardImpl {
         // When Dockside Extortionist enters the battlefield, create X Treasure tokens, where X is the number of artifacts and enchantments your opponents control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(new TreasureToken(), DocksideExtortionistValue.instance)
-        ));
+        ).addHint(new ValueHint("Artifacts and enchantments your opponents control", DocksideExtortionistValue.instance)));
     }
 
     private DocksideExtortionist(final DocksideExtortionist card) {

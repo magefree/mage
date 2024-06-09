@@ -47,12 +47,12 @@ public final class SphinxSovereign extends CardImpl {
 
 class SphinxSovereignEffect extends OneShotEffect {
 
-    public SphinxSovereignEffect() {
+    SphinxSovereignEffect() {
         super(Outcome.Benefit);
         this.staticText = "you gain 3 life if {this} is untapped. Otherwise, each opponent loses 3 life";
     }
 
-    public SphinxSovereignEffect(final SphinxSovereignEffect effect) {
+    private SphinxSovereignEffect(final SphinxSovereignEffect effect) {
         super(effect);
     }
 

@@ -94,7 +94,7 @@ class VolatileRigEffect2 extends OneShotEffect {
         staticText = "flip a coin. If you lose the flip, it deals 4 damage to each creature and each player";
     }
 
-    VolatileRigEffect2(final VolatileRigEffect2 effect) {
+    private VolatileRigEffect2(final VolatileRigEffect2 effect) {
         super(effect);
     }
 

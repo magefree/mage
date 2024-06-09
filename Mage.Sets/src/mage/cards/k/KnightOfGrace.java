@@ -45,7 +45,7 @@ public final class KnightOfGrace extends CardImpl {
 
     }
 
-    public KnightOfGrace(final KnightOfGrace knightOfGrace){
+    private KnightOfGrace(final KnightOfGrace knightOfGrace){
         super(knightOfGrace);
     }
 

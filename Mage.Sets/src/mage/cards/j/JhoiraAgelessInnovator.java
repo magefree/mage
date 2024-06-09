@@ -28,7 +28,7 @@ public final class JhoiraAgelessInnovator extends CardImpl {
     public JhoiraAgelessInnovator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
@@ -52,7 +52,7 @@ public final class JhoiraAgelessInnovator extends CardImpl {
 
 class JhoiraAgelessInnovatorEffect extends OneShotEffect {
 
-    public JhoiraAgelessInnovatorEffect() {
+    JhoiraAgelessInnovatorEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = ", then you may put an artifact card with mana value X or less from your hand onto the battlefield, where X is the number of ingenuity counters on Jhoira.";
     }

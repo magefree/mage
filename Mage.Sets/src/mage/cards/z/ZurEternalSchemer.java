@@ -44,7 +44,7 @@ public final class ZurEternalSchemer extends CardImpl {
     public ZurEternalSchemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -75,13 +75,13 @@ public final class ZurEternalSchemer extends CardImpl {
 
 class ZurEternalSchemerEffect extends ContinuousEffectImpl {
 
-    public ZurEternalSchemerEffect() {
+    ZurEternalSchemerEffect() {
         super(Duration.EndOfGame, Outcome.BecomeCreature);
         staticText = "Target non-Aura enchantment you control becomes a creature in addition to its other types " +
                 "and has base power and base toughness each equal to its mana value.";
     }
 
-    public ZurEternalSchemerEffect(final ZurEternalSchemerEffect effect) {
+    private ZurEternalSchemerEffect(final ZurEternalSchemerEffect effect) {
         super(effect);
     }
 

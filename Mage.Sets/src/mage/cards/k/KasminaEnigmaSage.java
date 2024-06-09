@@ -34,7 +34,7 @@ public final class KasminaEnigmaSage extends CardImpl {
     public KasminaEnigmaSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KASMINA);
         this.setStartingLoyalty(2);
 
@@ -85,7 +85,7 @@ class KasminaEnigmaSageGainAbilitiesEffect extends ContinuousEffectImpl {
                 .stream()
                 .filter(LoyaltyAbility.class::isInstance)
                 .collect(Collectors.toList());
-        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
                 source.getControllerId(), source, game
         )) {
@@ -93,7 +93,7 @@ class KasminaEnigmaSageGainAbilitiesEffect extends ContinuousEffectImpl {
                 continue;
             }
             for (Ability ability : loyaltyAbilities) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game, true);
             }
         }
         return true;

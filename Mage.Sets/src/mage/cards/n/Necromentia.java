@@ -80,7 +80,7 @@ class NecromentiaEffect extends OneShotEffect {
             if (cardsCount > 0) {
                 filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getName());
                 TargetCard target = new TargetCard(0, cardsCount, Zone.GRAVEYARD, filter);
-                if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, game)) {
+                if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, source, game)) {
                     controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
                 }
             }
@@ -91,7 +91,7 @@ class NecromentiaEffect extends OneShotEffect {
             if (cardsCount > 0) {
                 filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getName());
                 TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
-                if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
+                if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, source, game)) {
                     numberOfCardsExiledFromHand = target.getTargets().size();
                     controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
                 }
@@ -101,12 +101,12 @@ class NecromentiaEffect extends OneShotEffect {
 
             // cards in Library
             Cards cardsInLibrary = new CardsImpl();
-            cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
+            cardsInLibrary.addAllCards(targetPlayer.getLibrary().getCards(game));
             cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
             if (cardsCount > 0) {
                 filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
                 TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsCount, filter);
-                if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, game)) {
+                if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, source, game)) {
                     controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);
                 }
             } else {

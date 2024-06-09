@@ -23,7 +23,7 @@ public abstract class TargetObject extends TargetImpl {
         this(numTargets, numTargets, zone, false);
     }
 
-    public TargetObject(final TargetObject target) {
+    protected TargetObject(final TargetObject target) {
         super(target);
     }
 

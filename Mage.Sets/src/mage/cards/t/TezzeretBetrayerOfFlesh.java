@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -35,7 +34,7 @@ public final class TezzeretBetrayerOfFlesh extends CardImpl {
     public TezzeretBetrayerOfFlesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
         this.setStartingLoyalty(4);
 
@@ -97,7 +96,7 @@ class TezzeretBetrayerOfFleshReductionEffect extends CostModificationEffectImpl 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify.isControlledBy(source.getControllerId())
-                && abilityToModify instanceof ActivatedAbility
+                && abilityToModify.isActivatedAbility()
                 && TezzeretBetrayerOfFleshWatcher.checkPlayer(game, abilityToModify);
     }
 }

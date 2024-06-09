@@ -47,7 +47,7 @@ class BlightningEffect extends OneShotEffect {
         this.staticText = "That player or that planeswalker's controller discards two cards.";
     }
 
-    BlightningEffect(final BlightningEffect effect) {
+    private BlightningEffect(final BlightningEffect effect) {
         super(effect);
     }
 

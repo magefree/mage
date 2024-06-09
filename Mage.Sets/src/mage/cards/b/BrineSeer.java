@@ -67,7 +67,7 @@ class BrineSeerEffect extends OneShotEffect {
                 + "Counter target spell unless its controller pays {1} for each card revealed this way";
     }
 
-    public BrineSeerEffect(final BrineSeerEffect effect) {
+    private BrineSeerEffect(final BrineSeerEffect effect) {
         super(effect);
     }
 

@@ -67,7 +67,7 @@ class PollenbrightWingsAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new PollenbrightWingsEffect());
     }
 
-    public PollenbrightWingsAbility(final PollenbrightWingsAbility ability) {
+    private PollenbrightWingsAbility(final PollenbrightWingsAbility ability) {
         super(ability);
     }
 
@@ -100,12 +100,12 @@ class PollenbrightWingsAbility extends TriggeredAbilityImpl {
 
 class PollenbrightWingsEffect extends OneShotEffect {
 
-    public PollenbrightWingsEffect() {
+    PollenbrightWingsEffect() {
         super(Outcome.Benefit);
         this.staticText = "create that many 1/1 green Saproling creature tokens";
     }
 
-    public PollenbrightWingsEffect(final PollenbrightWingsEffect effect) {
+    private PollenbrightWingsEffect(final PollenbrightWingsEffect effect) {
         super(effect);
     }
 

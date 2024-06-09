@@ -49,25 +49,20 @@ public final class RavenousSlime extends CardImpl {
 
 class RavenousSlimeEffect extends ReplacementEffectImpl {
 
-    public RavenousSlimeEffect() {
+    RavenousSlimeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a creature an opponent controls would die, "
                 + "instead exile it and put a number of +1/+1 counters "
                 + "equal to that creature's power on {this}";
     }
 
-    public RavenousSlimeEffect(final RavenousSlimeEffect effect) {
+    private RavenousSlimeEffect(final RavenousSlimeEffect effect) {
         super(effect);
     }
 
     @Override
     public RavenousSlimeEffect copy() {
         return new RavenousSlimeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

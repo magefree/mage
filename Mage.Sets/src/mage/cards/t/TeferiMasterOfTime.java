@@ -25,7 +25,7 @@ public final class TeferiMasterOfTime extends CardImpl {
     public TeferiMasterOfTime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
         this.setStartingLoyalty(3);
 
@@ -107,8 +107,8 @@ class TeferiMasterOfTimeTurnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+        game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
+        game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
         return true;
     }
 }

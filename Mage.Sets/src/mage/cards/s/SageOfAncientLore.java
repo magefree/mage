@@ -14,7 +14,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -38,7 +37,7 @@ public final class SageOfAncientLore extends CardImpl {
         // Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.
         DynamicValue xValue = CardsInControllerHandCount.instance;
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
-                new ConditionalContinuousEffect(new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame),
+                new ConditionalContinuousEffect(new SetBasePowerToughnessSourceEffect(xValue),
                         new TransformedCondition(true), "{this}'s power and toughness are each equal to the total number of cards in your hand")));
 
         // When Sage of Ancient Lore enters the battlefield, draw a card.

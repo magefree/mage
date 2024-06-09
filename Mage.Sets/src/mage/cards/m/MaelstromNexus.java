@@ -52,7 +52,7 @@ class MaelstromNexusGainCascadeFirstSpellEffect extends ContinuousEffectImpl {
         staticText = "The first spell you cast each turn has cascade";
     }
 
-    public MaelstromNexusGainCascadeFirstSpellEffect(final MaelstromNexusGainCascadeFirstSpellEffect effect) {
+    private MaelstromNexusGainCascadeFirstSpellEffect(final MaelstromNexusGainCascadeFirstSpellEffect effect) {
         super(effect);
     }
 

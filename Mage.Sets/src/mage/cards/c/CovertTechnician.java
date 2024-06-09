@@ -37,7 +37,7 @@ public final class CovertTechnician extends CardImpl {
 
         // Whenever Covert Technician deals combat damage to a player, you may put an artifact card with mana value less than or equal to that damage from your hand onto the battlefield.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new CovertTechnicianEffect(), false, true, false
+                new CovertTechnicianEffect(), false, true
         ));
     }
 

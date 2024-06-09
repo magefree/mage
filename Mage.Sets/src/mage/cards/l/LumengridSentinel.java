@@ -1,10 +1,8 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -12,11 +10,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class LumengridSentinel extends CardImpl {
@@ -32,7 +31,9 @@ public final class LumengridSentinel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever an artifact enters the battlefield under your control, you may tap target permanent.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new FilterControlledArtifactPermanent("an artifact"), true);
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new TapTargetEffect(), StaticFilters.FILTER_PERMANENT_ARTIFACT_AN, true
+        );
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

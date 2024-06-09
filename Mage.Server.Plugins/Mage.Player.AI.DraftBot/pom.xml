@@ -12,7 +12,7 @@
 
     <artifactId>mage-player-ai-draftbot</artifactId>
     <packaging>jar</packaging>
-    <name>Mage Player AI.DraftBot</name>
+    <name>Mage Player AI (draft bot)</name>
 
     <dependencies>
         <dependency>
@@ -50,6 +50,8 @@
         <finalName>mage-player-ai-draft-bot</finalName>
     </build>
 
-    <properties/>
+    <properties>
+        <root.dir>${project.basedir}/../..</root.dir>
+    </properties>
 
 </project>

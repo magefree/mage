@@ -51,12 +51,12 @@ public final class Meglonoth extends CardImpl {
 
 class MeglonothEffect extends OneShotEffect {
 
-    public MeglonothEffect() {
+    MeglonothEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage to that creature's controller equal to {this}'s power";
     }
 
-    public MeglonothEffect(final MeglonothEffect effect) {
+    private MeglonothEffect(final MeglonothEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class MeglonothEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent meglonoth = game.getPermanent(source.getSourceId());
-        Permanent blocked = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent blocked = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (blocked != null && meglonoth != null) {
             game.getPlayer(blocked.getControllerId()).damage(meglonoth.getPower().getValue(), source.getSourceId(), source, game);
             return true;

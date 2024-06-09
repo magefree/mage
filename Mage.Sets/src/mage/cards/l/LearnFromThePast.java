@@ -29,7 +29,7 @@ public final class LearnFromThePast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         
         // Draw a card
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private LearnFromThePast(final LearnFromThePast card) {
@@ -49,7 +49,7 @@ class LearnFromThePastEffect extends OneShotEffect {
         this.staticText = "Target player shuffles their graveyard into their library";
     }
     
-    LearnFromThePastEffect(final LearnFromThePastEffect effect) {
+    private LearnFromThePastEffect(final LearnFromThePastEffect effect) {
         super(effect);
     }
     

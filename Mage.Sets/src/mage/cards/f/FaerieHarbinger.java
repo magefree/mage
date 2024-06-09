@@ -37,7 +37,7 @@ public final class FaerieHarbinger extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Faerie Harbinger enters the battlefield, you may search your library for a Faerie card, reveal it, then shuffle your library and put that card on top of it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true), true));
     }
 
     private FaerieHarbinger(final FaerieHarbinger card) {

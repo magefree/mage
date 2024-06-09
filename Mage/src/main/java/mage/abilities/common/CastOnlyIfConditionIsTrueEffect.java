@@ -49,7 +49,7 @@ public class CastOnlyIfConditionIsTrueEffect extends ContinuousRuleModifyingEffe
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("cast this spell only ");
+        StringBuilder sb = new StringBuilder("cast this spell only if ");
         if (condition != null) {
             sb.append(condition);
         }

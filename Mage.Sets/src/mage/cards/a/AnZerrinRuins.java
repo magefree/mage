@@ -1,9 +1,7 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -29,7 +27,7 @@ public final class AnZerrinRuins extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));
 
         // Creatures of the chosen type don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnZerrinRuinsDontUntapEffect()));
+        this.addAbility(new SimpleStaticAbility(new AnZerrinRuinsDontUntapEffect()));
     }
 
     private AnZerrinRuins(final AnZerrinRuins card) {
@@ -44,12 +42,12 @@ public final class AnZerrinRuins extends CardImpl {
 
 class AnZerrinRuinsDontUntapEffect extends DontUntapInControllersUntapStepAllEffect {
 
-    public AnZerrinRuinsDontUntapEffect() {
+    AnZerrinRuinsDontUntapEffect() {
         super(Duration.WhileOnBattlefield, TargetController.ANY, new FilterCreaturePermanent());
         this.staticText = "Creatures of the chosen type don't untap during their controllers' untap steps";
     }
 
-    public AnZerrinRuinsDontUntapEffect(final AnZerrinRuinsDontUntapEffect effect) {
+    private AnZerrinRuinsDontUntapEffect(final AnZerrinRuinsDontUntapEffect effect) {
         super(effect);
     }
 

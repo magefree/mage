@@ -47,7 +47,7 @@ public final class DeadeyeHarpooner extends CardImpl {
         );
         ability.setAbilityWord(AbilityWord.REVOLT);
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability, new RevoltWatcher());
+        this.addAbility(ability.addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private DeadeyeHarpooner(final DeadeyeHarpooner card) {

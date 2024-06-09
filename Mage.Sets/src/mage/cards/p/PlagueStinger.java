@@ -29,7 +29,7 @@ public final class PlagueStinger extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public PlagueStinger (final PlagueStinger card) {
+    private PlagueStinger(final PlagueStinger card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class GoldmeadowHarrier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoldmeadowHarrier (final GoldmeadowHarrier card) {
+    private GoldmeadowHarrier(final GoldmeadowHarrier card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class DarigaazTheIgniter extends CardImpl {
 
     public DarigaazTheIgniter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -53,13 +53,13 @@ public final class DarigaazTheIgniter extends CardImpl {
 
 class DarigaazTheIgniterEffect extends OneShotEffect {
 
-    public DarigaazTheIgniterEffect() {
+    DarigaazTheIgniterEffect() {
         super(Outcome.Damage);
         staticText = "choose a color, then that player reveals their hand and {this} deals damage"
                 + " to the player equal to the number of cards of that color revealed this way";
     }
 
-    public DarigaazTheIgniterEffect(final DarigaazTheIgniterEffect effect) {
+    private DarigaazTheIgniterEffect(final DarigaazTheIgniterEffect effect) {
         super(effect);
     }
 

@@ -19,7 +19,7 @@ public final class FacelessOne extends CardImpl {
     public FacelessOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

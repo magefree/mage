@@ -40,7 +40,7 @@ public class TargetCard extends TargetObject {
         this.targetName = filter.getMessage();
     }
 
-    public TargetCard(final TargetCard target) {
+    protected TargetCard(final TargetCard target) {
         super(target);
         this.filter = target.filter.copy();
     }
@@ -211,8 +211,8 @@ public class TargetCard extends TargetObject {
         return possibleTargets;
     }
 
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
-        return cards.getCards(filter, game).stream().map(MageItem::getId).collect(Collectors.toSet());
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Ability source, Game game) {
+        return cards.getCards(filter, sourceControllerId, source, game).stream().map(MageItem::getId).collect(Collectors.toSet());
     }
 
     @Override

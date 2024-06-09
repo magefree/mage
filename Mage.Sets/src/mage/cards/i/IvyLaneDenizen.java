@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,10 +38,10 @@ public final class IvyLaneDenizen extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on target creature.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                filter, false, null, true);
+                filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -44,12 +44,12 @@ public final class HydraOmnivore extends CardImpl {
 
 class HydraOmnivoreEffect extends OneShotEffect {
 
-    public HydraOmnivoreEffect() {
+    HydraOmnivoreEffect() {
         super(Outcome.Benefit);
         this.staticText = "it deals that much damage to each other opponent";
     }
 
-    public HydraOmnivoreEffect(final HydraOmnivoreEffect effect) {
+    private HydraOmnivoreEffect(final HydraOmnivoreEffect effect) {
         super(effect);
     }
 

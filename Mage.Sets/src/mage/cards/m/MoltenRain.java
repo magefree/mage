@@ -43,12 +43,12 @@ public final class MoltenRain extends CardImpl {
 
 class MoltenRainEffect extends OneShotEffect {
 
-    public MoltenRainEffect() {
+    MoltenRainEffect() {
         super(Outcome.Damage);
         this.staticText = "If that land was nonbasic, Molten Rain deals 2 damage to the land's controller";
     }
 
-    public MoltenRainEffect(final MoltenRainEffect effect) {
+    private MoltenRainEffect(final MoltenRainEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class MoltenRainEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        if (permanent != null && !permanent.isBasic()) {
+        if (permanent != null && !permanent.isBasic(game)) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 player.damage(2, source.getSourceId(), source, game);

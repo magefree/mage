@@ -40,7 +40,7 @@ public class XmageDeckExporter extends DeckExporter {
             if (curAmount == 0) {
                 deckMain.add(card);
             }
-            amount.put(code, curAmount + card.getQuantity());
+            amount.put(code, curAmount + card.getAmount());
         }
         // sideboard
         for (DeckCardInfo card : deck.getSideboard()) {
@@ -49,15 +49,15 @@ public class XmageDeckExporter extends DeckExporter {
             if (curAmount == 0) {
                 deckSideboard.add(card);
             }
-            amount.put(code, curAmount + card.getQuantity());
+            amount.put(code, curAmount + card.getAmount());
         }
 
         // cards print
         for (DeckCardInfo card : deckMain) {
-            out.printf("%d [%s:%s] %s%n", amount.get("M@" + card.getCardKey()), card.getSetCode(), card.getCardNum(), card.getCardName());
+            out.printf("%d [%s:%s] %s%n", amount.get("M@" + card.getCardKey()), card.getSetCode(), card.getCardNumber(), card.getCardName());
         }
         for (DeckCardInfo card : deckSideboard) {
-            out.printf("SB: %d [%s:%s] %s%n", amount.get("S@" + card.getCardKey()), card.getSetCode(), card.getCardNum(), card.getCardName());
+            out.printf("SB: %d [%s:%s] %s%n", amount.get("S@" + card.getCardKey()), card.getSetCode(), card.getCardNumber(), card.getCardName());
         }
 
         // layout print
@@ -86,7 +86,7 @@ public class XmageDeckExporter extends DeckExporter {
                 out.print("(");
                 for (int i = 0; i < stack.size(); ++i) {
                     DeckCardInfo info = stack.get(i);
-                    out.printf("[%s:%s]", info.getSetCode(), info.getCardNum());
+                    out.printf("[%s:%s]", info.getSetCode(), info.getCardNumber());
                     if (i != stack.size() - 1) {
                         out.print(",");
                     }

@@ -13,7 +13,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class KickerTest extends CardTestPlayerBase {
 
-    /**
+    /*
      * 702.32. Kicker 702.32a Kicker is a static ability that functions while
      * the spell with kicker is on the stack. “Kicker [cost]” means “You may pay
      * an additional [cost] as you cast this spell.” Paying a spell's kicker
@@ -291,7 +291,6 @@ public class KickerTest extends CardTestPlayerBase {
         setChoice(playerA, true);  // use kicker {R} - 2 damage to any target
         setChoice(playerA, false); // not use kicker {W} - destroy target
         addTarget(playerA, playerB); // target for 2 damage
-        setChoice(playerA, true); // put counter on hallar
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -325,7 +324,7 @@ public class KickerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gatekeeper of Malakir");
         setChoice(playerA, true);  // use kicker
         addTarget(playerA, playerB); // trigger's target
-        addTarget(playerB, "Birds of Paradise"); // sacrifice
+        setChoice(playerB, "Birds of Paradise"); // sacrifice
 
         // return to hand
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Boomerang", "Gatekeeper of Malakir");
@@ -723,4 +722,49 @@ public class KickerTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Brain in a Jar", 1);
     }
+
+    @Test
+    public void test_ConditionOnStackNotKicked() {
+        String scourge = "Scourge of the Skyclaves"; // 1B Creature
+        /* Kicker {4}{B}
+        When you cast this spell, if it was kicked, each player loses half their life, rounded up.
+        Scourge of the Skyclaves’s power and toughness are each equal to 20 minus the highest life total among players.
+         */
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, scourge);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, scourge);
+        setChoice(playerA, false); // no kicker
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, scourge, 1);
+    }
+
+    @Test
+    public void test_ConditionOnStackKicked() {
+        String scourge = "Scourge of the Skyclaves"; // 1B Creature
+        /* Kicker {4}{B}
+        When you cast this spell, if it was kicked, each player loses half their life, rounded up.
+        Scourge of the Skyclaves’s power and toughness are each equal to 20 minus the highest life total among players.
+         */
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.HAND, playerA, scourge);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, scourge);
+        setChoice(playerA, true); // kicked
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 10);
+        assertLife(playerB, 10);
+        assertPowerToughness(playerA, scourge, 10, 10);
+    }
+
 }

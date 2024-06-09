@@ -37,7 +37,9 @@ public final class MidnightScavengers extends CardImpl {
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+
         this.meldsWithClazz = mage.cards.g.GrafRats.class;
+        this.meldsToClazz = mage.cards.c.ChitteringHost.class;
 
         // When Midnight Scavengers enters the battlefield, you may return target creature card with converted mana cost 3 or less from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);

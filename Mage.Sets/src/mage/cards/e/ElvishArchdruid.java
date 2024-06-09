@@ -8,14 +8,13 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -42,7 +41,7 @@ public final class ElvishArchdruid extends CardImpl {
         )));
 
         // {T}: Add {G} for each Elf you control.
-        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), xValue));
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), xValue).addHint(new ValueHint("Elves you control", xValue)));
     }
 
     private ElvishArchdruid(final ElvishArchdruid card) {

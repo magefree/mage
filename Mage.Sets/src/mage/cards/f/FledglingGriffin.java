@@ -28,7 +28,7 @@ public final class FledglingGriffin extends CardImpl {
         this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false));
     }
 
-    public FledglingGriffin (final FledglingGriffin card) {
+    private FledglingGriffin(final FledglingGriffin card) {
         super(card);
     }
 

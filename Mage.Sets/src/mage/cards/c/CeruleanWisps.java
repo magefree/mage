@@ -31,7 +31,7 @@ public final class CeruleanWisps extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
-    public CeruleanWisps (final CeruleanWisps card) {
+    private CeruleanWisps(final CeruleanWisps card) {
         super(card);
     }
 

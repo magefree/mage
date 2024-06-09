@@ -42,7 +42,7 @@ public final class DeathlessAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathlessAngel (final DeathlessAngel card) {
+    private DeathlessAngel(final DeathlessAngel card) {
         super(card);
     }
 

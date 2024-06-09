@@ -11,8 +11,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -21,8 +19,8 @@ import java.util.UUID;
  */
 public class SetBasePowerToughnessTargetEffect extends ContinuousEffectImpl {
 
-    private DynamicValue power;
-    private DynamicValue toughness;
+    private final DynamicValue power;
+    private final DynamicValue toughness;
 
     public SetBasePowerToughnessTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
@@ -34,7 +32,7 @@ public class SetBasePowerToughnessTargetEffect extends ContinuousEffectImpl {
         this(StaticValue.get(power), StaticValue.get(toughness), duration);
     }
 
-    public SetBasePowerToughnessTargetEffect(final SetBasePowerToughnessTargetEffect effect) {
+    protected SetBasePowerToughnessTargetEffect(final SetBasePowerToughnessTargetEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
@@ -69,28 +67,9 @@ public class SetBasePowerToughnessTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().get(0).getMinNumberOfTargets() == 0) {
-            if (!mode.getTargets().get(0).getTargetName().startsWith("any")) {
-                sb.append("up to ");
-                sb.append(CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()));
-                sb.append(' ');
-            }
-        }
-        if (!mode.getTargets().get(0).getTargetName().contains("target")) {
-            sb.append("target ");
-        }
-        sb.append(mode.getTargets().get(0).getTargetName());
-        if (mode.getTargets().stream().mapToInt(Target::getMaxNumberOfTargets).max().orElse(0) > 1) {
-            sb.append(" have");
-        } else {
-            sb.append(" has");
-        }
-        sb.append(" base power and toughness ");
-        sb.append(power).append('/').append(toughness);
-        if (!duration.toString().isEmpty()) {
-            sb.append(' ').append(duration.toString());
-        }
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "that creature")
+                + (getTargetPointer().isPlural(mode.getTargets()) ? " have" : " has")
+                + " base power and toughness " + power + '/' + toughness
+                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 }

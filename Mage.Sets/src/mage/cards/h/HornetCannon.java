@@ -47,12 +47,12 @@ public final class HornetCannon extends CardImpl {
 
 class HornetCannonEffect extends OneShotEffect {
 
-    public HornetCannonEffect() {
+    HornetCannonEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create a 1/1 colorless Insect artifact creature token with flying and haste named Hornet. Destroy it at the beginning of the next end step.";
     }
 
-    public HornetCannonEffect(final HornetCannonEffect effect) {
+    private HornetCannonEffect(final HornetCannonEffect effect) {
         super(effect);
     }
 

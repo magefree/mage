@@ -1,27 +1,20 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.common.SourceDealsDamageToThisTriggeredAbility;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
- * @author Loki
+ * @author xenohedron
  */
 public final class PhyrexianObliterator extends CardImpl {
 
@@ -37,7 +30,9 @@ public final class PhyrexianObliterator extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a source deals damage to Phyrexian Obliterator, that source's controller sacrifices that many permanents.
-        this.addAbility(new PhyrexianObliteratorTriggeredAbility());
+        this.addAbility(new SourceDealsDamageToThisTriggeredAbility(
+                new SacrificeEffect(StaticFilters.FILTER_PERMANENTS, SavedDamageValue.MANY, "that source's controller")
+        ));
     }
 
     private PhyrexianObliterator(final PhyrexianObliterator card) {
@@ -47,47 +42,5 @@ public final class PhyrexianObliterator extends CardImpl {
     @Override
     public PhyrexianObliterator copy() {
         return new PhyrexianObliterator(this);
-    }
-}
-
-class PhyrexianObliteratorTriggeredAbility extends TriggeredAbilityImpl {
-
-    PhyrexianObliteratorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 0, ""));
-    }
-
-    PhyrexianObliteratorTriggeredAbility(final PhyrexianObliteratorTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PhyrexianObliteratorTriggeredAbility copy() {
-        return new PhyrexianObliteratorTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.sourceId)) {
-            UUID controller = game.getControllerId(event.getSourceId());
-            if (controller != null) {
-                Player player = game.getPlayer(controller);
-                if (player != null) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                    ((SacrificeEffect) getEffects().get(0)).setAmount(StaticValue.get(event.getAmount()));
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a source deals damage to {this}, that source's controller sacrifices that many permanents";
     }
 }

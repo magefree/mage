@@ -27,7 +27,7 @@ public final class AscendantSpirit extends CardImpl {
     public AscendantSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -39,9 +39,7 @@ public final class AscendantSpirit extends CardImpl {
         ability.addEffect(new SetBasePowerToughnessSourceEffect(
                 2,
                 3,
-                Duration.WhileOnBattlefield,
-                SubLayer.SetPT_7b,
-                true
+                Duration.Custom
         ).setText("with base power and toughness 2/3"));
         this.addAbility(ability);
 
@@ -94,7 +92,7 @@ class AscendantSpiritWarriorEffect extends OneShotEffect {
                 Duration.Custom, SubType.SPIRIT, SubType.WARRIOR, SubType.ANGEL
         ), source);
         game.addEffect(new SetBasePowerToughnessSourceEffect(
-                4, 4, Duration.Custom, SubLayer.SetPT_7b, true
+                4, 4, Duration.Custom
         ), source);
         return true;
     }

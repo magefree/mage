@@ -62,7 +62,7 @@ class JacesDefeatEffect extends OneShotEffect {
         this.staticText = "Counter target blue spell. If it was a Jace planeswalker spell, scry 2.";
     }
 
-    public JacesDefeatEffect(final JacesDefeatEffect effect) {
+    private JacesDefeatEffect(final JacesDefeatEffect effect) {
         super(effect);
     }
 

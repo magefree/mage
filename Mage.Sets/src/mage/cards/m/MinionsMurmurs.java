@@ -42,7 +42,7 @@ public final class MinionsMurmurs extends CardImpl {
             this.staticText = "You draw X cards and you lose X life, where X is the number of creatures you control";
         }
 
-        public MinionsMurmursEffect(final MinionsMurmursEffect effect) {
+        private MinionsMurmursEffect(final MinionsMurmursEffect effect) {
             super(effect);
         }
 

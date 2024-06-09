@@ -56,7 +56,7 @@ class UrgeToFeedEffect extends OneShotEffect {
         staticText = "You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires";
     }
 
-    public UrgeToFeedEffect(UrgeToFeedEffect effect) {
+    private UrgeToFeedEffect(final UrgeToFeedEffect effect) {
         super(effect);
     }
 

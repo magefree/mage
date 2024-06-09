@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class IngestAbility extends DealsCombatDamageToAPlayerTriggeredAbility {
@@ -42,7 +41,7 @@ class IngestEffect extends OneShotEffect {
         this.staticText = "that player exiles the top card of their library";
     }
 
-    public IngestEffect(final IngestEffect effect) {
+    protected IngestEffect(final IngestEffect effect) {
         super(effect);
     }
 

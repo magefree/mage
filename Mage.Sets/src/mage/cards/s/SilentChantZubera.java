@@ -33,7 +33,7 @@ public final class SilentChantZubera extends CardImpl {
         this.addAbility(ability, new ZuberasDiedWatcher());
     }
 
-    public SilentChantZubera (final SilentChantZubera card) {
+    private SilentChantZubera(final SilentChantZubera card) {
         super(card);
     }
 

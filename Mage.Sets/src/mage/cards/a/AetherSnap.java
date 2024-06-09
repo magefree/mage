@@ -9,8 +9,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.counters.Counter;
-import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -42,12 +40,12 @@ public final class AetherSnap extends CardImpl {
 
 class AetherSnapEffect extends OneShotEffect {
 
-    public AetherSnapEffect() {
+    AetherSnapEffect() {
         super(Outcome.Benefit);
         this.staticText = "Remove all counters from all permanents and exile all tokens";
     }
 
-    public AetherSnapEffect(final AetherSnapEffect effect) {
+    private AetherSnapEffect(final AetherSnapEffect effect) {
         super(effect);
     }
 
@@ -63,17 +61,11 @@ class AetherSnapEffect extends OneShotEffect {
             return false;
         }
         Cards tokens = new CardsImpl();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent instanceof PermanentToken) {
                 tokens.add(permanent);
             }
-            if (permanent.getCounters(game).isEmpty()) {
-                continue;
-            }
-            Counters counters = permanent.getCounters(game).copy();
-            for (Counter counter : counters.values()) {
-                permanent.removeCounters(counter, source, game);
-            }
+            permanent.removeAllCounters(source, game);
         }
         controller.moveCards(tokens, Zone.EXILED, source, game);
         return true;

@@ -26,7 +26,9 @@ public final class GrafRats extends CardImpl {
         this.subtype.add(SubType.RAT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
         this.meldsWithClazz = mage.cards.m.MidnightScavengers.class;
+        this.meldsToClazz = mage.cards.c.ChitteringHost.class;
 
         // At the beginning of combat on your turn, if you both own and control Graf Rats and a creature named Midnight Scavengers, exile them, then meld them into Chittering Host.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

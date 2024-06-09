@@ -24,7 +24,7 @@ public final class EruthTormentedProphet extends CardImpl {
     public EruthTormentedProphet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -62,11 +62,6 @@ class EruthTormentedProphetEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player == null) {
@@ -75,7 +70,7 @@ class EruthTormentedProphetEffect extends ReplacementEffectImpl {
         Set<Card> cards = player.getLibrary().getTopCards(game, 2);
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         }
         return true;
     }

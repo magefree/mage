@@ -34,7 +34,7 @@ public final class YisanTheWandererBard extends CardImpl {
 
     public YisanTheWandererBard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.subtype.add(SubType.BARD);
@@ -61,12 +61,12 @@ public final class YisanTheWandererBard extends CardImpl {
 
 class YisanTheWandererBardEffect extends OneShotEffect {
 
-    public YisanTheWandererBardEffect() {
+    YisanTheWandererBardEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for a creature card with mana value equal to the number of verse counters on {this}, put it onto the battlefield, then shuffle";
     }
 
-    public YisanTheWandererBardEffect(final YisanTheWandererBardEffect effect) {
+    private YisanTheWandererBardEffect(final YisanTheWandererBardEffect effect) {
         super(effect);
     }
 

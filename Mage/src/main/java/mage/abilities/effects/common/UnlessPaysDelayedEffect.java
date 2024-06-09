@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -15,7 +16,6 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LoneFox (based on Quenchable Fire code by
  * BetaSteward_at_googlemail.com)
  */
@@ -36,7 +36,7 @@ public class UnlessPaysDelayedEffect extends OneShotEffect {
                 + " with a special action before that step.</i>";
     }
 
-    public UnlessPaysDelayedEffect(final UnlessPaysDelayedEffect effect) {
+    protected UnlessPaysDelayedEffect(final UnlessPaysDelayedEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
         this.effect = effect.effect.copy();
@@ -96,7 +96,7 @@ class UnlessPaysDelayedEffectTriggeredAbility extends DelayedTriggeredAbility {
         this.specialActionId = specialActionId;
     }
 
-    public UnlessPaysDelayedEffectTriggeredAbility(final UnlessPaysDelayedEffectTriggeredAbility ability) {
+    protected UnlessPaysDelayedEffectTriggeredAbility(final UnlessPaysDelayedEffectTriggeredAbility ability) {
         super(ability);
         this.turnPlayer = ability.turnPlayer;
         this.step = ability.step;
@@ -142,7 +142,7 @@ class UnlessPaysDelayedEffectAction extends SpecialAction {
         super();
     }
 
-    public UnlessPaysDelayedEffectAction(final UnlessPaysDelayedEffectAction ability) {
+    protected UnlessPaysDelayedEffectAction(final UnlessPaysDelayedEffectAction ability) {
         super(ability);
     }
 

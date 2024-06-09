@@ -51,7 +51,7 @@ class AvalancheTuskerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat), false);
     }
 
-    public AvalancheTuskerAbility(final AvalancheTuskerAbility ability) {
+    private AvalancheTuskerAbility(final AvalancheTuskerAbility ability) {
         super(ability);
     }
 

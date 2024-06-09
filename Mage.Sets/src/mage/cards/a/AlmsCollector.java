@@ -50,23 +50,18 @@ public final class AlmsCollector extends CardImpl {
 
 class AlmsCollectorReplacementEffect extends ReplacementEffectImpl {
 
-    public AlmsCollectorReplacementEffect() {
+    AlmsCollectorReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.DrawCard);
         staticText = "If an opponent would draw two or more cards, instead you and that player each draw a card";
     }
 
-    public AlmsCollectorReplacementEffect(final AlmsCollectorReplacementEffect effect) {
+    private AlmsCollectorReplacementEffect(final AlmsCollectorReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public AlmsCollectorReplacementEffect copy() {
         return new AlmsCollectorReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

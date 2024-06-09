@@ -15,11 +15,11 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,12 +59,12 @@ public final class MechanizedProduction extends CardImpl {
 
 class MechanizedProductionEffect extends OneShotEffect {
 
-    public MechanizedProductionEffect() {
+    MechanizedProductionEffect() {
         super(Outcome.Benefit);
         this.staticText = "create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game";
     }
 
-    public MechanizedProductionEffect(final MechanizedProductionEffect effect) {
+    private MechanizedProductionEffect(final MechanizedProductionEffect effect) {
         super(effect);
     }
 
@@ -79,8 +79,7 @@ class MechanizedProductionEffect extends OneShotEffect {
         if (sourceObject != null && sourceObject.getAttachedTo() != null) {
             Permanent enchantedArtifact = game.getPermanentOrLKIBattlefield(sourceObject.getAttachedTo());
             if (enchantedArtifact != null) {
-                EmptyToken token = new EmptyToken();
-                CardUtil.copyTo(token).from(enchantedArtifact, game);
+                Token token = CopyTokenFunction.createTokenCopy(enchantedArtifact, game);
                 token.putOntoBattlefield(1, game, source, source.getControllerId());
             }
             Map<String, Integer> countNames = new HashMap<>();

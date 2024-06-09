@@ -1,11 +1,9 @@
 package mage.cards.m;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.token.TreasureAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,9 +24,7 @@ public final class Mimic extends CardImpl {
         this.subtype.add(SubType.TREASURE);
 
         // {T}, Sacrifice Mimic: Add one mana of any color.
-        Ability ability = new AnyColorManaAbility();
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new TreasureAbility(true));
 
         // {2}: Mimic becomes a Shapeshifter artifact creature with base power and toughness 3/3 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(

@@ -80,6 +80,10 @@ class NecronMonolithEffect extends OneShotEffect {
         int count = player
                 .millCards(3, source, game)
                 .count(StaticFilters.FILTER_CARD_CREATURE, game);
-        return count > 0 && new NecronWarriorToken().putOntoBattlefield(count, game, source);
+        if (count > 0) {
+            game.getState().processAction(game);
+            new NecronWarriorToken().putOntoBattlefield(count, game, source);
+        }
+        return true;
     }
 }

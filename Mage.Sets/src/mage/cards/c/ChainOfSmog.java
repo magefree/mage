@@ -47,7 +47,7 @@ class ChainOfSmogEffect extends OneShotEffect {
         this.staticText = "Target player discards two cards. That player may copy this spell and may choose a new target for that copy.";
     }
 
-    ChainOfSmogEffect(final ChainOfSmogEffect effect) {
+    private ChainOfSmogEffect(final ChainOfSmogEffect effect) {
         super(effect);
     }
 

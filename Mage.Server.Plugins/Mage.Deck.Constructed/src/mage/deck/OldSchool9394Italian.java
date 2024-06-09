@@ -30,6 +30,9 @@ public class OldSchool9394Italian extends Constructed {
         setCodes.add(mage.sets.TheDark.getInstance().getCode());
         setCodes.add(mage.sets.RevisedEdition.getInstance().getCode());
 
+        // unban chaos orb, we allow it (restricted) for the xmage-errated version in Old School Constructed.
+        banned.removeIf(name -> name.equals("Chaos Orb"));
+
         restricted.add("Ancestral Recall");
         restricted.add("Balance");
         restricted.add("Black Lotus");

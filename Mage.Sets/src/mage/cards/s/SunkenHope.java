@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -10,15 +9,15 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SunkenHope extends CardImpl {
@@ -42,12 +41,12 @@ public final class SunkenHope extends CardImpl {
 
 class SunkenHopeReturnToHandEffect extends OneShotEffect {
 
-    public SunkenHopeReturnToHandEffect() {
+    SunkenHopeReturnToHandEffect() {
         super(Outcome.ReturnToHand);
         staticText = "that player returns a creature they control to its owner's hand";
     }
 
-    public SunkenHopeReturnToHandEffect(final SunkenHopeReturnToHandEffect effect) {
+    private SunkenHopeReturnToHandEffect(final SunkenHopeReturnToHandEffect effect) {
         super(effect);
     }
 
@@ -60,14 +59,14 @@ class SunkenHopeReturnToHandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean result = false;
 
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player == null) {
             return false;
         }
 
-        Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+        Target target = new TargetControlledCreaturePermanent().withNotTarget(true);
         if (target.canChoose(player.getId(), source, game)) {
-            while (player.canRespond() && !target.isChosen()
+            while (player.canRespond() && !target.isChosen(game)
                     && target.canChoose(player.getId(), source, game)) {
                 player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             }

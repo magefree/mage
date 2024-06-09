@@ -49,7 +49,7 @@ public final class OrdealOfNylea extends CardImpl {
         this.addAbility(ability);
         // When you sacrifice Ordeal of Nylea, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
         ability = new SacrificeSourceTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_CARD_BASIC_LANDS),true, true),false);
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_CARD_BASIC_LANDS),true),false);
         this.addAbility(ability);
     }
 

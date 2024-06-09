@@ -53,7 +53,7 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} or another creature enters the battlefield under your control, ");
     }
 
-    public VerdantSunsAvatarTriggeredAbility(VerdantSunsAvatarTriggeredAbility ability) {
+    private VerdantSunsAvatarTriggeredAbility(final VerdantSunsAvatarTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,12 +86,12 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
 
 class VerdantSunsAvatarEffect extends OneShotEffect {
 
-    public VerdantSunsAvatarEffect() {
+    VerdantSunsAvatarEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to that creature's toughness";
     }
 
-    public VerdantSunsAvatarEffect(final VerdantSunsAvatarEffect effect) {
+    private VerdantSunsAvatarEffect(final VerdantSunsAvatarEffect effect) {
         super(effect);
     }
 

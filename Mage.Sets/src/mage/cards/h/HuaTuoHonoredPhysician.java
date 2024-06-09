@@ -25,7 +25,7 @@ public final class HuaTuoHonoredPhysician extends CardImpl {
 
     public HuaTuoHonoredPhysician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
 
         this.power = new MageInt(1);

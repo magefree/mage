@@ -47,7 +47,7 @@ class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    CityOfTraitorsTriggeredAbility(CityOfTraitorsTriggeredAbility ability) {
+    private CityOfTraitorsTriggeredAbility(final CityOfTraitorsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -72,6 +72,6 @@ class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When you play another land, sacrifice {this}";
+        return "When you play another land, sacrifice {this}.";
     }
 }

@@ -2,12 +2,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.mage</groupId>
     <artifactId>mage-root</artifactId>
     <version>1.4.50</version>
     <packaging>pom</packaging>
     <name>Mage Root</name>
     <description>Mage Root POM</description>
+
+    <properties>
+        <!-- app: game must be able to run under java 8 -->
+        <java.version>1.8</java.version>
+        <root.dir>${project.basedir}</root.dir>
+
+        <!-- TODO: research and optimize version in modules (version change for modules and server configs must be changeable by one line instead perl script -->
+        <mage-version>1.4.50</mage-version>
+        <argLine>-Dfile.encoding=UTF-8</argLine>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
+
+        <!-- build: logs settings for maven tests and travis ci builds -->
+        <xmage.build.tests.treeViewRunnerShowAllLogs>false</xmage.build.tests.treeViewRunnerShowAllLogs>
+
+        <!--
+            report: code coverage tools (disabled by default)
+
+            Output file formats:
+              * exec-files - generates in any runs, can be used by IntelliJ IDEA in show coverage data dialog: ./module_name/target/jacoco.exec
+              * XML - used by sonar for analysis and upload: ./Mage.Reports/target/site/jacoco-aggregate/jacoco.xml
+              * HTML - used by devs for offline view: ./Mage.Reports/target/site/jacoco-aggregate/index.html
+              * CSV - for something else: ./Mage.Reports/target/site/jacoco-aggregate/jacoco.csv
+
+            How to generate execute stats and reports:
+              * for IDE or sonar usage: mvn install -Djacoco.formats=XML -Djacoco.skip=false -Dmaven.test.failure.ignore=true
+              * for offline report: mvn install -Djacoco.skip=false -Dmaven.test.failure.ignore=true
+        -->
+        <jacoco.formats>XML,HTML</jacoco.formats>
+        <jacoco.skip>true</jacoco.skip>
+
+        <!--
+            report: sonar settings for code static analysis and coverage report
+            Actual analys visible on https://sonarcloud.io/project/overview?id=magefree_mage
+
+            How to analyse and upload to the server (warning, it can takes 15+ hours):
+              1. Collect code coverage data in xml format (see jacoco above);
+              2. mvn -e sonar:sonar -Dsonar.projectKey=magefree_mage -Dsonar.organization=magefree -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=xxx
+        -->
+        <sonar.coverage.jacoco.xmlReportPaths>${root.dir}/Mage.Reports/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    </properties>
 
     <build>
         <plugins>
@@ -37,33 +79,19 @@
                 </configuration>
             </plugin>
 
-            <!-- JaCoCo Code Coverage report generation -->
-            <!-- Examples: http://tdongsi.github.io/blog/2017/09/23/jacoco-in-maven-project/ -->
+            <!--
+                JaCoCo Code Coverage support
+                Agent must be injected for all modules, but real report generates in Mage.Reports
+            -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>0.8.11</version>
                 <executions>
                     <execution>
                         <!-- prepare command line to inject in java agent (collect code executing stats) -->
                         <goals>
                             <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <!-- generate current module's report -->
-                        <id>generate-code-coverage-report</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <!-- generate combined report (current and dependency modules) -->
-                        <id>report-aggregate</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report-aggregate</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -90,15 +118,69 @@
                     </configuration>
                 </plugin>
                 <plugin>
+                    <!-- test runner for maven, travis-ci (IDE uses own test runner) -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
-                    <!--
-                    for compatible with jacoco code coverage - argLine moved to properties section
+                    <version>3.1.2</version>
+                    <dependencies>
+                        <!-- tree reporter deps -->
+                        <dependency>
+                            <groupId>me.fabriciorby</groupId>
+                            <artifactId>maven-surefire-junit5-tree-reporter</artifactId>
+                            <version>1.2.1</version>
+                        </dependency>
+                    </dependencies>
                     <configuration>
+                        <!-- ******************** -->
+                        <!-- default plain report -->
+                        <!-- ******************** -->
+                        <!--
+                            printSummary: print elapsed time and other stats per test file
+                            - if you disable this, you will not be able to trace the name of the test
+                              from where the logs are printed
+                            - failed tests will be shown anyway
+                        -->
+                        <printSummary>true</printSummary>
+
+                        <!--
+                            reportFormat: summary format
+                            - brief: print total elapsed time only
+                            - plain: print brief + elapsed time for each test name
+                        -->
+                        <reportFormat>brief</reportFormat>
+
+                        <!--
+                            useFile: enable txt and xml reports in .\target\surefire-reports
+                            - useless, so disable it for more performance
+                        -->
+                        <useFile>false</useFile>
+
+                        <!-- **************** -->
+                        <!-- tree view report -->
+                        <!-- **************** -->
+                        <!-- for full logs: use xmage.build.tests.treeViewRunnerShowAllLogs -->
+                        <!-- for ai logs in ci build: use .travis/log4j.properties -->
+                        <!-- for default maven logs: delete or comment all settings below -->
+                        <consoleOutputReporter>
+                            <disable>true</disable>
+                        </consoleOutputReporter>
+                        <statelessTestsetInfoReporter
+                                implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
+                            <theme>ASCII</theme>
+                            <printStacktraceOnError>true</printStacktraceOnError>
+                            <printStacktraceOnFailure>true</printStacktraceOnFailure>
+                            <printStdoutOnError>true</printStdoutOnError>
+                            <printStdoutOnFailure>true</printStdoutOnFailure>
+                            <printStdoutOnSuccess>${xmage.build.tests.treeViewRunnerShowAllLogs}</printStdoutOnSuccess>
+                            <printStderrOnError>true</printStderrOnError>
+                            <printStderrOnFailure>true</printStderrOnFailure>
+                            <printStderrOnSuccess>${xmage.build.tests.treeViewRunnerShowAllLogs}</printStderrOnSuccess>
+                        </statelessTestsetInfoReporter>
+
+                        <!-- for compatible with jacoco code coverage - argLine moved to properties section
                         <argLine>-Dfile.encoding=UTF-8</argLine>
+                        -->
                     </configuration>
-                    -->
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -116,10 +198,33 @@
                     <version>2.7</version>
                 </plugin>
 
+                <!-- devs only: allows to run apps from command line by exec:java command -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>3.0.0</version>
+                </plugin>
+
+                <!-- generate readable readme file for releases -->
+                <!-- results uses in distribution.xml -->
+                <!-- https://github.com/walokra/markdown-page-generator-plugin -->
+                <plugin>
+                    <groupId>com.ruleoftech</groupId>
+                    <artifactId>markdown-page-generator-plugin</artifactId>
+                    <version>2.4.0</version>
+                    <executions>
+                        <execution>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <inputDirectory>../</inputDirectory>
+                        <inputFileExtensions>md</inputFileExtensions>
+                        <outputDirectory>${project.build.directory}/docs</outputDirectory>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -136,6 +241,7 @@
         <module>Mage.Server.Console</module>
         <module>Mage.Tests</module>
         <module>Mage.Verify</module>
+        <module>Mage.Reports</module>
     </modules>
 
     <repositories>
@@ -156,33 +262,6 @@
             <url>file://${basedir}/repository</url>
         </repository>
     </repositories>
-
-    <properties>
-        <!--
-            java.version dictates what version of Java to build for.
-            This sets the minimum java version required to run the game.
-        -->
-        <java.version>1.8</java.version>
-        <mage-version>1.4.50</mage-version>
-        <argLine>-Dfile.encoding=UTF-8</argLine>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
-
-        <!--
-            JaCoCo code coverage disabled by default. If you need to generate
-            execute stats and reports then run tests by maven command
-            like "mvn install -Djacoco.skip=false".
-            Stats:
-            - load coverage data for IntelliJ IDEA from ./target/jacoco.exec
-            - web report in ./target/site/jacoco/index.html
-            - for sonar support see below
-        -->
-        <jacoco.skip>true</jacoco.skip>
-
-        <!-- Sonar settings for code coverage. Must be only one report for all modules (use report-aggregate goal report from JaCoCo) -->
-        <aggregate.report.dir>Mage.Verify/target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
-    </properties>
 
     <dependencies>
         <!-- GLOBAL dependencies - used in all xmage modules (no need to add it to child modules) -->
@@ -289,6 +368,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.12.0</version>
+            </dependency>
+            <dependency>
+                <!-- scraping lib to download and parse html/symbols/images/svg -->
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.14.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

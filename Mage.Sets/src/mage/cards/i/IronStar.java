@@ -44,7 +44,7 @@ class IronStarAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);
     }
 
-    public IronStarAbility(final IronStarAbility ability) {
+    private IronStarAbility(final IronStarAbility ability) {
         super(ability);
     }
 

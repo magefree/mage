@@ -44,7 +44,7 @@ class BakisCurseEffect extends OneShotEffect {
             staticText = "Baki's Curse deals 2 damage to each creature for each Aura attached to that creature.";
     }
 
-    public BakisCurseEffect(final BakisCurseEffect effect) {
+    private BakisCurseEffect(final BakisCurseEffect effect) {
         super(effect);
     }
 

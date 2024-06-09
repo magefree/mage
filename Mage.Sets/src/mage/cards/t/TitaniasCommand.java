@@ -92,7 +92,7 @@ class TitaniasCommandEffect extends OneShotEffect {
         }
         controller.moveCards(cards, Zone.EXILED, source, game);
         cards.retainZone(Zone.EXILED, game);
-        player.gainLife(cards.size(), game, source);
+        controller.gainLife(cards.size(), game, source);
         return true;
     }
 }

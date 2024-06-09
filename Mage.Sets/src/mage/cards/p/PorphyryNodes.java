@@ -60,7 +60,7 @@ class PorphyryNodesEffect extends OneShotEffect {
         this.staticText = "destroy the creature with the least power. It can't be regenerated. If two or more creatures are tied for least power, you choose one of them";
     }
     
-    public PorphyryNodesEffect(final PorphyryNodesEffect effect) {
+    private PorphyryNodesEffect(final PorphyryNodesEffect effect) {
         super(effect);
     }
     
@@ -92,7 +92,7 @@ class PorphyryNodesEffect extends OneShotEffect {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("one of the creatures with the least power");
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, leastPower));
                 Target target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.canChoose(source.getControllerId(), source, game)) {
                     if (controller.choose(outcome, target, source, game)) {
                         permanentToDestroy = game.getPermanent(target.getFirstTarget());
@@ -117,7 +117,7 @@ class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When there are no creatures on the battlefield, " );
     }
 
-    public PorphyryNodesStateTriggeredAbility(final PorphyryNodesStateTriggeredAbility ability) {
+    private PorphyryNodesStateTriggeredAbility(final PorphyryNodesStateTriggeredAbility ability) {
         super(ability);
     }
 

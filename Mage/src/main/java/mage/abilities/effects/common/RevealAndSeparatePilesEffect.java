@@ -92,7 +92,11 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
                     Target targetOpponent = new TargetOpponent(true);
                     controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game);
                     opponent = game.getPlayer(targetOpponent.getFirstTarget());
-                    game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to " + message);
+                    if (opponent != null) {
+                        game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to " + message);
+                    } else {
+                        game.informPlayers(controller.getLogName() + " chose nothing" + " to " + message);
+                    }
                 }
                 return opponent;
         }
@@ -103,20 +107,25 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, toReveal));
         controller.revealCards(source, cards, game);
 
-        Player separatingPlayer = this.getExecutingPlayer(controller, game, source, playerWhoSeparates, "separate the revealed cards");
+        Player separatingPlayer = getExecutingPlayer(controller, game, source, playerWhoSeparates, "separate the revealed cards");
+        if (separatingPlayer == null) {
+            return false;
+        }
         TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, filter);
         List<Card> pile1 = new ArrayList<>();
-        separatingPlayer.choose(Outcome.Neutral, cards, target, game);
+        separatingPlayer.choose(Outcome.Neutral, cards, target, source, game);
         target.getTargets()
                 .stream()
                 .map(game::getCard)
                 .filter(Objects::nonNull)
                 .forEach(pile1::add);
         cards.removeIf(target.getTargets()::contains);
-        List<Card> pile2 = new ArrayList<>();
-        pile2.addAll(cards.getCards(game));
+        List<Card> pile2 = new ArrayList<>(cards.getCards(game));
 
-        Player choosingPlayer = this.getExecutingPlayer(controller, game, source, playerWhoChooses, "choose the piles");
+        Player choosingPlayer = getExecutingPlayer(controller, game, source, playerWhoChooses, "choose the piles");
+        if (choosingPlayer == null) {
+            return false;
+        }
         boolean choice = choosingPlayer.choosePile(outcome, "Choose a pile to put into hand.", pile1, pile2, game);
 
         Zone pile1Zone = choice ? Zone.HAND : targetZone;
@@ -124,7 +133,7 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
 
         game.informPlayers("Pile 1, going to " + pile1Zone + ": " + (pile1.isEmpty() ? " (none)" : pile1.stream().map(MageObject::getName).collect(Collectors.joining(", "))));
         cards.clear();
-        cards.addAll(pile1);
+        cards.addAllCards(pile1);
         if (pile1Zone == Zone.LIBRARY) {
             controller.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
         } else {
@@ -133,7 +142,7 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
 
         game.informPlayers("Pile 2, going to " + pile2Zone + ": " + (pile2.isEmpty() ? " (none)" : pile2.stream().map(MageObject::getName).collect(Collectors.joining(", "))));
         cards.clear();
-        cards.addAll(pile2);
+        cards.addAllCards(pile2);
         if (pile2Zone == Zone.LIBRARY) {
             controller.putCardsOnBottomOfLibrary(cards, game, source, anyOrder);
         } else {

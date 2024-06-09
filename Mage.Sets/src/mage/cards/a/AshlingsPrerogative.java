@@ -61,7 +61,7 @@ class AshlingsPrerogativeIncorrectOddityEffect extends PermanentsEnterBattlefiel
         staticText = "Each creature without mana value of the chosen quality enters the battlefield tapped.";
     }
     
-    public AshlingsPrerogativeIncorrectOddityEffect(final AshlingsPrerogativeIncorrectOddityEffect effect) {
+    private AshlingsPrerogativeIncorrectOddityEffect(final AshlingsPrerogativeIncorrectOddityEffect effect) {
         super(effect);   
     }
 
@@ -95,7 +95,7 @@ class AshlingsPrerogativeCorrectOddityEffect extends GainAbilityAllEffect {
         super(HasteAbility.getInstance(), Duration.WhileOnBattlefield, creaturefilter);
         staticText = "Each creature with mana value of the chosen quality has haste.";
     }
-    public AshlingsPrerogativeCorrectOddityEffect(final AshlingsPrerogativeCorrectOddityEffect effect) {
+    private AshlingsPrerogativeCorrectOddityEffect(final AshlingsPrerogativeCorrectOddityEffect effect) {
         super(effect);   
     }
 

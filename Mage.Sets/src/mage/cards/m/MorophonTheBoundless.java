@@ -34,7 +34,7 @@ public final class MorophonTheBoundless extends CardImpl {
     public MorophonTheBoundless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

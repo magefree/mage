@@ -36,7 +36,7 @@ public final class RefractionTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay Refraction Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}"), RefractionTrapCondition.instance), new SpellsCastWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}"), RefractionTrapCondition.instance));
 
         // Prevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, Refraction Trap deals that much damage to any target.
         this.getSpellAbility().addEffect(new RefractionTrapPreventDamageEffect(Duration.EndOfTurn, 3));
@@ -93,7 +93,7 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
         staticText = "The next " + amount + " damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to any target";
     }
 
-    public RefractionTrapPreventDamageEffect(final RefractionTrapPreventDamageEffect effect) {
+    private RefractionTrapPreventDamageEffect(final RefractionTrapPreventDamageEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.target = effect.target.copy();
@@ -106,13 +106,8 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override
@@ -156,11 +151,9 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
             // check target
             //   check permanent first
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                if (permanent.isControlledBy(source.getControllerId())) {
-                    // it's your permanent
-                    return true;
-                }
+            if (permanent != null && (permanent.isControlledBy(source.getControllerId()))) {
+                // it's your permanent
+                return true;
             }
             //   check player
             Player player = game.getPlayer(event.getTargetId());

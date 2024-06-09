@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -13,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -22,11 +20,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author emerald000
  */
 public final class MistfireAdept extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public MistfireAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
@@ -39,7 +32,8 @@ public final class MistfireAdept extends CardImpl {
         this.addAbility(new ProwessAbility());
         
         // Whenever you cast a noncreature spell, target creature gains flying until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

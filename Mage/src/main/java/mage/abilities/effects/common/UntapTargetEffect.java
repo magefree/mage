@@ -6,8 +6,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -27,7 +25,7 @@ public class UntapTargetEffect extends OneShotEffect {
         }
     }
 
-    public UntapTargetEffect(final UntapTargetEffect effect) {
+    protected UntapTargetEffect(final UntapTargetEffect effect) {
         super(effect);
     }
 
@@ -38,7 +36,7 @@ public class UntapTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID target : targetPointer.getTargets(game, source)) {
+        for (UUID target : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
                 permanent.untap(game);
@@ -52,31 +50,6 @@ public class UntapTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        if (mode.getTargets().isEmpty()) {
-            return "untap target permanent"; // TODO: add exeption about missing targets setup?
-        }
-
-        Target target = mode.getTargets().get(0);
-        StringBuilder sb = new StringBuilder();
-        sb.append("untap ");
-        if (target.getNumberOfTargets() == 0) {
-            sb.append("up to ");
-        }
-
-        boolean haveTargetWord = target.getTargetName().contains("target");
-        if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
-            sb.append(haveTargetWord ? " " : " target ");
-            sb.append(target.getTargetName());
-            if (!target.getTargetName().endsWith("s")) {
-                sb.append('s');
-            }
-        } else {
-            sb.append(haveTargetWord ? "" : "target ");
-            sb.append(target.getTargetName());
-        }
-
-        return sb.toString();
+        return "untap " + getTargetPointer().describeTargets(mode.getTargets(), "that permanent");
     }
 }

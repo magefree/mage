@@ -6,6 +6,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.RaidCondition;
+import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -18,9 +19,7 @@ import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
 import mage.game.command.emblems.KaitoShizukiEmblem;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.NinjaToken;
 import mage.watchers.common.PlayerAttackedWatcher;
 
@@ -32,21 +31,21 @@ import java.util.UUID;
 public final class KaitoShizuki extends CardImpl {
 
     private static final Hint hint = new ConditionHint(
-            KaitoShizukiCondition.instance, "This permanent entered the battlefield this turn"
+            SourceEnteredThisTurnCondition.instance, "This permanent entered the battlefield this turn"
     );
     private static final Condition condition = new InvertCondition(RaidCondition.instance);
 
     public KaitoShizuki(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAITO);
         this.setStartingLoyalty(3);
 
         // At the beginning of your end step, if Kaito Shizuki entered the battlefield this turn, he phases out.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new PhaseOutSourceEffect().setText("he phases out"),
-                TargetController.YOU, KaitoShizukiCondition.instance, false
+                TargetController.YOU, SourceEnteredThisTurnCondition.instance, false
         ).addHint(hint));
 
         // +1: Draw a card. Then discard a card unless you attacked this turn.
@@ -71,20 +70,5 @@ public final class KaitoShizuki extends CardImpl {
     @Override
     public KaitoShizuki copy() {
         return new KaitoShizuki(this);
-    }
-}
-
-enum KaitoShizukiCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        return permanent != null && permanent.getTurnsOnBattlefield() == 0;
-    }
-
-    @Override
-    public String toString() {
-        return "if {this} entered the battlefield this turn";
     }
 }

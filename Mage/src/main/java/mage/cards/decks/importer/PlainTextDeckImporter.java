@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * Deck import: helper class for all text base formats
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class PlainTextDeckImporter extends DeckImporter {

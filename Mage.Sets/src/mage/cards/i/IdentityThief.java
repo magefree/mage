@@ -67,7 +67,7 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public IdentityThiefAbility(final IdentityThiefAbility ability) {
+    private IdentityThiefAbility(final IdentityThiefAbility ability) {
         super(ability);
     }
 
@@ -89,13 +89,13 @@ class IdentityThiefAbility extends TriggeredAbilityImpl {
 
 class IdentityThiefEffect extends OneShotEffect {
 
-    public IdentityThiefEffect() {
+    IdentityThiefEffect() {
         super(Outcome.Detriment);
         staticText = "you may exile another target nontoken creature. If you do, {this} becomes a copy of that creature until end of turn. "
                 + "Return the exiled card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public IdentityThiefEffect(final IdentityThiefEffect effect) {
+    private IdentityThiefEffect(final IdentityThiefEffect effect) {
         super(effect);
     }
 
@@ -110,6 +110,7 @@ class IdentityThiefEffect extends OneShotEffect {
             ContinuousEffect copyEffect = new CopyEffect(Duration.EndOfTurn, targetPermanent, source.getSourceId());
             copyEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
             game.addEffect(copyEffect, source);
+
             UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (controller.moveCardsToExile(targetPermanent, source, game, true, exileZoneId, sourcePermanent.getName())) {
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);

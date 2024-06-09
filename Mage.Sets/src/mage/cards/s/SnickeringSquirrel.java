@@ -48,7 +48,7 @@ class SnickeringSquirrelEffect extends ReplacementEffectImpl {
         staticText = "You may tap {this} to increase the result of a die any player rolled by 1";
     }
 
-    SnickeringSquirrelEffect(final SnickeringSquirrelEffect effect) {
+    private SnickeringSquirrelEffect(final SnickeringSquirrelEffect effect) {
         super(effect);
     }
 
@@ -82,11 +82,6 @@ class SnickeringSquirrelEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

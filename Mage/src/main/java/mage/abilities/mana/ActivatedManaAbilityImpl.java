@@ -22,7 +22,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
     protected boolean poolDependant;
 
     public ActivatedManaAbilityImpl(Zone zone, ManaEffect effect, Cost cost) {
-        super(AbilityType.MANA, zone);
+        super(AbilityType.ACTIVATED_MANA, zone);
         this.usesStack = false;
         this.undoPossible = true;
         if (effect != null) {
@@ -33,7 +33,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
         }
     }
 
-    public ActivatedManaAbilityImpl(final ActivatedManaAbilityImpl ability) {
+    protected ActivatedManaAbilityImpl(final ActivatedManaAbilityImpl ability) {
         super(ability);
         this.netMana.addAll(ability.netMana);
         this.undoPossible = ability.undoPossible;
@@ -102,7 +102,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
                     }
                 }
             }
-            return poolDependantNetMana;            
+            return poolDependantNetMana;
         }
         return getNetMana(game);
     }

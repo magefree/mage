@@ -52,14 +52,14 @@ public final class MetathranAerostat extends CardImpl {
 
 class MetathranAerostatEffect extends OneShotEffect {
 
-    public MetathranAerostatEffect() {
+    MetathranAerostatEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may put a creature card with mana value "
                 + "X from your hand onto the battlefield. "
                 + "If you do, return {this} to its owner's hand";
     }
 
-    public MetathranAerostatEffect(final MetathranAerostatEffect effect) {
+    private MetathranAerostatEffect(final MetathranAerostatEffect effect) {
         super(effect);
     }
 

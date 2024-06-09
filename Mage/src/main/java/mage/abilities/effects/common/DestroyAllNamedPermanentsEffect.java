@@ -20,7 +20,7 @@ public class DestroyAllNamedPermanentsEffect extends OneShotEffect {
         super(Outcome.DestroyPermanent);
     }
 
-    public DestroyAllNamedPermanentsEffect(final DestroyAllNamedPermanentsEffect effect) {
+    protected DestroyAllNamedPermanentsEffect(final DestroyAllNamedPermanentsEffect effect) {
         super(effect);
     }
 
@@ -49,7 +49,8 @@ public class DestroyAllNamedPermanentsEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "Destroy target " + mode.getTargets().get(0).getTargetName() + " and all other permanents with the same name as that permanent";
+        return "Destroy " + getTargetPointer().describeTargets(mode.getTargets(), "that permanent")
+                + " and all other permanents with the same name as that permanent";
     }
 
 }

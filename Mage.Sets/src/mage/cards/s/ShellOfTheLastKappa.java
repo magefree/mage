@@ -16,6 +16,7 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -43,7 +44,7 @@ public final class ShellOfTheLastKappa extends CardImpl {
 
     public ShellOfTheLastKappa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {3}, {tap}: Exile target instant or sorcery spell that targets you.
         Ability ability = new SimpleActivatedAbility(
@@ -76,12 +77,12 @@ public final class ShellOfTheLastKappa extends CardImpl {
 
 class ShellOfTheLastKappaEffect extends OneShotEffect {
 
-    public ShellOfTheLastKappaEffect() {
+    ShellOfTheLastKappaEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target instant or sorcery spell that targets you";
     }
 
-    public ShellOfTheLastKappaEffect(final ShellOfTheLastKappaEffect effect) {
+    private ShellOfTheLastKappaEffect(final ShellOfTheLastKappaEffect effect) {
         super(effect);
     }
 
@@ -92,7 +93,7 @@ class ShellOfTheLastKappaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent == null) {
@@ -114,12 +115,12 @@ class ShellOfTheLastKappaEffect extends OneShotEffect {
 
 class ShellOfTheLastKappaCastEffect extends OneShotEffect {
 
-    public ShellOfTheLastKappaCastEffect() {
+    ShellOfTheLastKappaCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "You may cast a spell from among cards exiled with {this} without paying its mana cost";
     }
 
-    public ShellOfTheLastKappaCastEffect(final ShellOfTheLastKappaCastEffect effect) {
+    private ShellOfTheLastKappaCastEffect(final ShellOfTheLastKappaCastEffect effect) {
         super(effect);
     }
 
@@ -132,10 +133,12 @@ class ShellOfTheLastKappaCastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller == null || sourcePermanent == null) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        if (controller == null || sourcePermanent == null || exileZone == null) {
             return false;
         }
-        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getExileZoneId(game, source)));
+
+        Cards cards = new CardsImpl(exileZone);
         return CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);
     }
 }

@@ -3,6 +3,7 @@
 package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.constants.Duration;
@@ -11,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
@@ -25,7 +25,7 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
         staticText = "target creature blocks {this} this turn if able";
     }
 
-    public MustBeBlockedByTargetSourceEffect(final MustBeBlockedByTargetSourceEffect effect) {
+    protected MustBeBlockedByTargetSourceEffect(final MustBeBlockedByTargetSourceEffect effect) {
         super(effect);
     }
 
@@ -33,14 +33,14 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(this.getTargetPointer().getFirst(game, source))) {
             Permanent blocker = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-            if (blocker != null && blocker.canBlock(source.getSourceId(), game)) {              
-                Permanent attacker = (Permanent) source.getSourceObjectIfItStillExists(game);
+            if (blocker != null && blocker.canBlock(source.getSourceId(), game)) {
+                Permanent attacker = source.getSourcePermanentIfItStillExists(game);
                 if (attacker != null) {
                     BlockedAttackerWatcher blockedAttackerWatcher = game.getState().getWatcher(BlockedAttackerWatcher.class);
                     if (blockedAttackerWatcher != null && blockedAttackerWatcher.creatureHasBlockedAttacker(attacker, blocker, game)) {
                         // has already blocked this turn, so no need to do again
                         return false;
-                    }                
+                    }
                     return true;
                 } else {
                     discard();
@@ -61,7 +61,7 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
     }
 
     @Override
-    public UUID mustBlockAttacker(Ability source, Game game) {  
+    public UUID mustBlockAttacker(Ability source, Game game) {
         return source.getSourceId();
     }
 

@@ -25,7 +25,7 @@ public final class Anaconda extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public Anaconda (final Anaconda card) {
+    private Anaconda(final Anaconda card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class Carom extends CardImpl {
         target2.setTargetTag(2);
         this.getSpellAbility().addTarget(target2);
 
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Carom(final Carom card) {
@@ -61,7 +61,7 @@ class CaromEffect extends RedirectionEffect {
         staticText = "The next " + amount + " damage that would be dealt to target creature this turn is dealt to another target creature instead";
     }
 
-    public CaromEffect(final CaromEffect effect) {
+    private CaromEffect(final CaromEffect effect) {
         super(effect);
     }
 

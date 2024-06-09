@@ -30,7 +30,7 @@ public final class MaskOfGriselbrand extends CardImpl {
     public MaskOfGriselbrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has flying and lifelink.
@@ -57,7 +57,7 @@ public final class MaskOfGriselbrand extends CardImpl {
 
 class MaskOfGriselbrandEffect extends OneShotEffect {
 
-    public MaskOfGriselbrandEffect() {
+    MaskOfGriselbrandEffect() {
         super(Outcome.DrawCard);
         staticText = "you may pay X life, where X is its power. If you do, draw X cards";
     }

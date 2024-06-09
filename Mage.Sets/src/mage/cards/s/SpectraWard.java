@@ -57,7 +57,8 @@ public final class SpectraWard extends CardImpl {
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2, Duration.WhileOnBattlefield));
         ProtectionAbility protectionAbility = new ProtectionAbility(filter);
         protectionAbility.setRemovesAuras(false);
-        ability.addEffect(new GainAbilityAttachedEffect(protectionAbility, AttachmentType.AURA, Duration.WhileOnBattlefield));
+        ability.addEffect(new GainAbilityAttachedEffect(protectionAbility, AttachmentType.AURA, Duration.WhileOnBattlefield)
+                .setText("and has protection from all colors. This effect doesn't remove Auras"));
         this.addAbility(ability);
 
     }

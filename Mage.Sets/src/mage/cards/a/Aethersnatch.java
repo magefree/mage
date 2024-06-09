@@ -44,7 +44,7 @@ class AethersnatchEffect extends OneShotEffect {
         this.staticText = "Gain control of target spell. You may choose new targets for it";
     }
     
-    AethersnatchEffect(final AethersnatchEffect effect) {
+    private AethersnatchEffect(final AethersnatchEffect effect) {
         super(effect);
     }
     

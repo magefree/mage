@@ -55,7 +55,7 @@ class VeilingOddityTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When the last time counter is removed from {this} while it's exiled, ");
     }
 
-    public VeilingOddityTriggeredAbility(final VeilingOddityTriggeredAbility ability) {
+    private VeilingOddityTriggeredAbility(final VeilingOddityTriggeredAbility ability) {
         super(ability);
     }
 

@@ -12,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
 
 /**
  *
@@ -21,11 +20,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class GoblinTurncoat extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
-
-    static {
-        filter.add(SubType.GOBLIN.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.GOBLIN, "a Goblin");
 
     public GoblinTurncoat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
@@ -37,7 +32,7 @@ public final class GoblinTurncoat extends CardImpl {
 
 		// Sacrifice a Goblin: Regenerate Goblin Turncoat.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-			new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+			new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

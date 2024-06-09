@@ -58,10 +58,10 @@ class GreaterGargadonAbility extends ActivatedAbilityImpl {
     }
 
     public GreaterGargadonAbility() {
-        super(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        super(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), new SacrificeTargetCost(filter));
     }
 
-    public GreaterGargadonAbility(final GreaterGargadonAbility ability) {
+    private GreaterGargadonAbility(final GreaterGargadonAbility ability) {
         super(ability);
     }
 

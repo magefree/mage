@@ -72,7 +72,7 @@ class KhalniGemReturnToHandTargetEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(
                 Math.min(landCount, 2), StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
     }

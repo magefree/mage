@@ -36,7 +36,7 @@ public class AddManaToManaPoolTargetControllerEffect extends ManaEffect {
         this.staticText = (textManaPoolOwner.equals("their") ? "that player adds " : "add ") + mana.toString();
     }
 
-    public AddManaToManaPoolTargetControllerEffect(final AddManaToManaPoolTargetControllerEffect effect) {
+    protected AddManaToManaPoolTargetControllerEffect(final AddManaToManaPoolTargetControllerEffect effect) {
         super(effect);
         this.mana = effect.mana.copy();
         this.emptyOnlyOnTurnsEnd = effect.emptyOnlyOnTurnsEnd;

@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author jeffwadsworth
  */
 
@@ -19,18 +18,13 @@ public class SkipCombatStepEffect extends ReplacementEffectImpl {
         staticText = "that player skips their next combat phase";
     }
 
-    public SkipCombatStepEffect(final SkipCombatStepEffect effect) {
+    protected SkipCombatStepEffect(final SkipCombatStepEffect effect) {
         super(effect);
     }
 
     @Override
     public SkipCombatStepEffect copy() {
         return new SkipCombatStepEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -45,6 +39,6 @@ public class SkipCombatStepEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(targetPointer.getFirst(game, source));
+        return event.getPlayerId().equals(getTargetPointer().getFirst(game, source));
     }
 }

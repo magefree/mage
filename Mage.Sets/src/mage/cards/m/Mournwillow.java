@@ -56,12 +56,12 @@ public final class Mournwillow extends CardImpl {
 
 class MournwillowEffect extends RestrictionEffect {
 
-    public MournwillowEffect() {
+    MournwillowEffect() {
         super(Duration.EndOfTurn);
         staticText = "creatures with power 2 or less can't block this turn";
     }
 
-    public MournwillowEffect(final MournwillowEffect effect) {
+    private MournwillowEffect(final MournwillowEffect effect) {
         super(effect);
     }
 

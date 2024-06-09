@@ -89,7 +89,7 @@ class BrightlingEffect extends OneShotEffect {
         this.staticText = "{this} gets +1/-1 or -1/+1 until end of turn";
     }
 
-    BrightlingEffect(final BrightlingEffect effect) {
+    private BrightlingEffect(final BrightlingEffect effect) {
         super(effect);
     }
 

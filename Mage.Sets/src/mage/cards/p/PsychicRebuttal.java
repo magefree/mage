@@ -55,13 +55,13 @@ public final class PsychicRebuttal extends CardImpl {
 
 class PsychicRebuttalEffect extends OneShotEffect {
 
-    public PsychicRebuttalEffect() {
+    PsychicRebuttalEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target instant or sorcery spell that targets you."
                 + "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy";
     }
 
-    public PsychicRebuttalEffect(final PsychicRebuttalEffect effect) {
+    private PsychicRebuttalEffect(final PsychicRebuttalEffect effect) {
         super(effect);
     }
 

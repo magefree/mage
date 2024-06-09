@@ -4,7 +4,9 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -12,10 +14,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -31,8 +33,9 @@ public final class EmeriaTheSkyRuin extends CardImpl {
         // Emeria, the Sky Ruin enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // At the beginning of your upkeep, if you control seven or more Plains, you may return target creature card from your graveyard to the battlefield.
-        this.addAbility(new EmeriaTheSkyRuinTriggeredAbility());
-        // {tap}: Add {W}.
+        this.addAbility(new EmeriaTheSkyRuinTriggeredAbility()
+                .addHint(new ValueHint("Plains you control", new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.PLAINS)))));
+        // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
     }
 
@@ -59,7 +62,7 @@ class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public EmeriaTheSkyRuinTriggeredAbility(final EmeriaTheSkyRuinTriggeredAbility ability) {
+    private EmeriaTheSkyRuinTriggeredAbility(final EmeriaTheSkyRuinTriggeredAbility ability) {
         super(ability);
     }
 

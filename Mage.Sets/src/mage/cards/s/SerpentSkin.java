@@ -41,7 +41,7 @@ public final class SerpentSkin extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA),new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
-    public SerpentSkin (final SerpentSkin card) {
+    private SerpentSkin(final SerpentSkin card) {
         super(card);
     }
 

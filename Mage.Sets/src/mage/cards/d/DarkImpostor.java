@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -109,8 +108,8 @@ class DarkImpostorContinuousEffect extends ContinuousEffectImpl {
         }
         for (Card card : exileZone.getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
             for (Ability ability : card.getAbilities(game)) {
-                if (ability instanceof ActivatedAbility) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
+                if (ability.isActivatedAbility()) {
+                    permanent.addAbility(ability, source.getSourceId(), game, true);
                 }
             }
         }

@@ -42,7 +42,7 @@ public final class KotoseTheSilentSpider extends CardImpl {
 
     public KotoseTheSilentSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.NINJA);
 
@@ -67,7 +67,7 @@ public final class KotoseTheSilentSpider extends CardImpl {
 
 class KotoseTheSilentSpiderEffect extends OneShotEffect {
 
-    public KotoseTheSilentSpiderEffect() {
+    KotoseTheSilentSpiderEffect() {
         super(Outcome.Exile);
         this.staticText = "exile target card other than a basic land card from an opponent's graveyard. " +
                 "Search that player's graveyard, hand, and library for any number of cards with the same name " +
@@ -75,7 +75,7 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
                 "play one of the exiled cards, and you may spend mana as though it were mana of any color to cast it";
     }
 
-    public KotoseTheSilentSpiderEffect(final KotoseTheSilentSpiderEffect effect) {
+    private KotoseTheSilentSpiderEffect(final KotoseTheSilentSpiderEffect effect) {
         super(effect);
     }
 
@@ -103,12 +103,12 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
         filter.add(new NamePredicate(card.getName()));
 
         TargetCardInGraveyard targetCardInGraveyard = new TargetCardInGraveyard(0, Integer.MAX_VALUE, filter);
-        controller.choose(outcome, opponent.getGraveyard(), targetCardInGraveyard, game);
+        controller.choose(outcome, opponent.getGraveyard(), targetCardInGraveyard, source, game);
         cards.addAll(targetCardInGraveyard.getTargets());
 
         filter.setMessage("cards named " + card.getName() + " from " + opponent.getName() + "'s hand");
         TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-        controller.choose(outcome, opponent.getHand(), targetCardInHand, game);
+        controller.choose(outcome, opponent.getHand(), targetCardInHand, source, game);
         cards.addAll(targetCardInHand.getTargets());
 
         filter.setMessage("cards named " + card.getName() + " from " + opponent.getName() + "'s library");
@@ -129,7 +129,7 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
         KotoseTheSilentSpiderWatcher.addCards(source, cardSet, game);
         for (Card exiledCard : cardSet) {
             CardUtil.makeCardPlayable(
-                    game, source, exiledCard, Duration.WhileControlled, true,
+                    game, source, exiledCard, false, Duration.WhileControlled, true,
                     null, new KotoseTheSilentSpiderCondition(exiledCard, game)
             );
         }
@@ -166,7 +166,7 @@ class KotoseTheSilentSpiderWatcher extends Watcher {
             morMap.values()
                     .stream()
                     .flatMap(Collection::stream)
-                    .map(set -> set.removeIf(mor -> !mor.zoneCounterIsCurrent(game)));
+                    .forEach(set -> set.removeIf(mor -> !mor.zoneCounterIsCurrent(game)));
             morMap.values().removeIf(Set::isEmpty);
             return;
         }

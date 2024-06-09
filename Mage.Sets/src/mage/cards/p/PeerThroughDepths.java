@@ -34,7 +34,7 @@ public final class PeerThroughDepths extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(5, 1, filter, PutCards.HAND, PutCards.BOTTOM_ANY));
     }
 
-    public PeerThroughDepths (final PeerThroughDepths card) {
+    private PeerThroughDepths(final PeerThroughDepths card) {
         super(card);
     }
 

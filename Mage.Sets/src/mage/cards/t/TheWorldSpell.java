@@ -88,7 +88,7 @@ class TheWorldSpellEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(0, 2, filter);
-        player.choose(outcome, player.getHand(), target, game);
+        player.choose(outcome, player.getHand(), target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
     }
 }

@@ -25,7 +25,7 @@ public final class TraxosScourgeOfKroog extends CardImpl {
     public TraxosScourgeOfKroog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

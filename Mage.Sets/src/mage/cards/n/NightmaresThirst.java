@@ -1,7 +1,7 @@
 package mage.cards.n;
 
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class NightmaresThirst extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(ControllerGotLifeCount.instance);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(ControllerGainedLifeCount.instance);
 
     public NightmaresThirst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
@@ -29,7 +29,7 @@ public final class NightmaresThirst extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addWatcher(new PlayerGainedLifeWatcher());
-        this.getSpellAbility().addHint(ControllerGotLifeCount.getHint());
+        this.getSpellAbility().addHint(ControllerGainedLifeCount.getHint());
     }
 
     private NightmaresThirst(final NightmaresThirst card) {

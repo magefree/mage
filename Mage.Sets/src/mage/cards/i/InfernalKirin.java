@@ -25,7 +25,7 @@ public final class InfernalKirin extends CardImpl {
 
     public InfernalKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN);
         this.subtype.add(SubType.SPIRIT);
 
@@ -36,7 +36,10 @@ public final class InfernalKirin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a Spirit or Arcane spell, target player reveals their hand and discards all cards with that spell's converted mana cost.
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new InfernalKirinEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new InfernalKirinEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD,
+                false, SetTargetPointer.SPELL
+        );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

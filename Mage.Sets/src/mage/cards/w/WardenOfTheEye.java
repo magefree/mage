@@ -1,7 +1,5 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -10,24 +8,22 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
-import mage.target.TargetCard;
+import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class WardenOfTheEye extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature, nonland card from your graveyard");
+    private static final FilterCard filter = new FilterNonlandCard("noncreature, nonland card from your graveyard");
 
     static {
-        filter.add(TargetController.YOU.getOwnerPredicate());
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     public WardenOfTheEye(UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +36,7 @@ public final class WardenOfTheEye extends CardImpl {
 
         // When Warden of the Eye enters the battlefield, return target noncreature, nonland card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
-        ability.addTarget(new TargetCard(Zone.GRAVEYARD, filter));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 

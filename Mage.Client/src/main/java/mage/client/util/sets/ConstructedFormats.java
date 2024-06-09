@@ -3,10 +3,12 @@ package mage.client.util.sets;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.cards.repository.RepositoryEvent;
+import mage.cards.repository.TokenRepository;
 import mage.constants.SetType;
 import mage.deck.Standard;
 import mage.game.events.Listener;
 
+import javax.swing.*;
 import java.util.*;
 
 /**
@@ -26,6 +28,7 @@ public final class ConstructedFormats {
     public static final String HISTORIC = "- Historic";
     public static final String JOKE = "- Joke Sets";
     public static final String CUSTOM = "- Custom";
+    public static final String XMAGE_SETS = "- XMAGE"; // inner sets like XMAGE (special tokens)
     public static final Standard STANDARD_CARDS = new Standard();
 
     // Attention -Month is 0 Based so Feb = 1 for example. //
@@ -54,14 +57,22 @@ public final class ConstructedFormats {
                 }
             }
         };
+        // it's a static, so no needs to unsubscribe later
         ExpansionRepository.instance.subscribe(setsDbListener);
     }
 
     private ConstructedFormats() {
     }
 
-    public static String[] getTypes() {
-        return formats.toArray(new String[0]);
+    /**
+     * @param includeInnerSets add XMAGE set with inner cards/tokens like morph
+     */
+    public static List<String> getTypes(boolean includeInnerSets) {
+        List<String> res = new ArrayList<>(formats);
+        if (!includeInnerSets) {
+            res.removeIf(s -> s.equals(XMAGE_SETS));
+        }
+        return res;
     }
 
     public static String getDefault() {
@@ -76,12 +87,14 @@ public final class ConstructedFormats {
     }
 
     public static void ensureLists() {
-        if (underlyingSetCodesPerFormat.isEmpty()) {
+        if (underlyingSetCodesPerFormat.isEmpty()
+                || underlyingSetCodesPerFormat.values().stream().findFirst().get().isEmpty()) {
             buildLists();
         }
     }
 
     public static void buildLists() {
+        underlyingSetCodesPerFormat.clear();
         underlyingSetCodesPerFormat.put(STANDARD, new ArrayList<>());
         underlyingSetCodesPerFormat.put(EXTENDED, new ArrayList<>());
         underlyingSetCodesPerFormat.put(FRONTIER, new ArrayList<>());
@@ -91,6 +104,7 @@ public final class ConstructedFormats {
         underlyingSetCodesPerFormat.put(HISTORIC, new ArrayList<>());
         underlyingSetCodesPerFormat.put(JOKE, new ArrayList<>());
         underlyingSetCodesPerFormat.put(CUSTOM, new ArrayList<>());
+        underlyingSetCodesPerFormat.put(XMAGE_SETS, new ArrayList<>());
         final Map<String, ExpansionInfo> expansionInfo = new HashMap<>();
         formats.clear(); // prevent NPE on sorting if this is not the first try
 
@@ -99,6 +113,9 @@ public final class ConstructedFormats {
         if (!ExpansionRepository.instance.instanceInitialized) {
             return;
         }
+
+        // inner sets
+        underlyingSetCodesPerFormat.get(XMAGE_SETS).add(TokenRepository.XMAGE_TOKENS_SET_CODE);
 
         // build formats list for deck validators
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
@@ -262,6 +279,7 @@ public final class ConstructedFormats {
         });
 
         if (!formats.isEmpty()) {
+            formats.add(0, XMAGE_SETS);
             formats.add(0, CUSTOM);
             formats.add(0, JOKE);
             formats.add(0, HISTORIC);

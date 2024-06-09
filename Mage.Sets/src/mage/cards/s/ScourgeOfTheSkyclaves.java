@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -37,14 +37,14 @@ public final class ScourgeOfTheSkyclaves extends CardImpl {
 
         // When you cast this spell, if it was kicked, each player loses half their life, rounded up.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new CastSourceTriggeredAbility(new ScourgeOfTheSkyclavesEffect()), ScourgeOfTheSkyclavesCondition.instance,
+                new CastSourceTriggeredAbility(new ScourgeOfTheSkyclavesEffect()), KickedCondition.ONCE,
                 "When you cast this spell, if it was kicked, each player loses half their life, rounded up."
         ));
 
         // Scourge of the Skyclaves's power and toughness are each equal to 20 minus the highest life total among players.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SetBasePowerToughnessSourceEffect(
-                ScourgeOfTheSkyclavesValue.instance, Duration.EndOfGame
+                ScourgeOfTheSkyclavesValue.instance
         ).setText("{this}'s power and toughness are each equal to 20 minus the highest life total among players.")));
     }
 
@@ -55,15 +55,6 @@ public final class ScourgeOfTheSkyclaves extends CardImpl {
     @Override
     public ScourgeOfTheSkyclaves copy() {
         return new ScourgeOfTheSkyclaves(this);
-    }
-}
-
-enum ScourgeOfTheSkyclavesCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return KickerAbility.getSpellKickedCount(game, source.getSourceId()) > 0;
     }
 }
 

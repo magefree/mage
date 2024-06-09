@@ -67,12 +67,12 @@ public class WorldChampionshipDecks1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Helix", "kb302sb", Rarity.RARE, mage.cards.m.MishrasHelix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mishra's Helix", "kb302", Rarity.RARE, mage.cards.m.MishrasHelix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mogg Fanatic", "mlp190", Rarity.COMMON, mage.cards.m.MoggFanatic.class));
-        cards.add(new SetCardInfo("Mountain", "mlp346b", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", "mlp346a", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", "kb346", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", "mlp344", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", "kb344", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", "kb343", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "kb344", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "kb346", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "mlp343", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "mlp344", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", "mlp346", Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overrun", "ml243sb", Rarity.UNCOMMON, mage.cards.o.Overrun.class));
         cards.add(new SetCardInfo("Perish", "js147sb", Rarity.UNCOMMON, mage.cards.p.Perish.class));
         cards.add(new SetCardInfo("Persecute", "js146sb", Rarity.RARE, mage.cards.p.Persecute.class));

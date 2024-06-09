@@ -42,7 +42,7 @@ class BraidOfFireCost extends CostImpl {
         this.text = "Add {R}";
     }
 
-    public BraidOfFireCost(BraidOfFireCost cost) {
+    private BraidOfFireCost(final BraidOfFireCost cost) {
         super(cost);
     }
 

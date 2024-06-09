@@ -30,7 +30,7 @@ public class DiscardTargetCost extends CostImpl {
     public DiscardTargetCost(TargetCardInHand target, boolean randomDiscard) {
         this.addTarget(target);
         this.randomDiscard = randomDiscard;
-        this.text = "discard " + target.getTargetName();
+        this.text = "discard " + target.getDescription();
     }
 
     public DiscardTargetCost(DiscardTargetCost cost) {
@@ -42,7 +42,7 @@ public class DiscardTargetCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         this.cards.clear();
-        this.targets.clearChosen();
+        this.getTargets().clearChosen();
         Player player = game.getPlayer(controllerId);
         if (player == null) {
             return false;
@@ -50,9 +50,9 @@ public class DiscardTargetCost extends CostImpl {
         int amount = this.getTargets().get(0).getNumberOfTargets();
         if (randomDiscard) {
             this.cards.addAll(player.discard(amount, true, true, source, game).getCards(game));
-        } else if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
+        } else if (this.getTargets().choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
             Cards toDiscard = new CardsImpl();
-            toDiscard.addAll(targets.get(0).getTargets());
+            toDiscard.addAll(this.getTargets().get(0).getTargets());
             Cards discarded = player.discard(toDiscard, true, source, game);
             if (!discarded.isEmpty()) {
                 cards.addAll(discarded.getCards(game));
@@ -66,12 +66,11 @@ public class DiscardTargetCost extends CostImpl {
     public void clearPaid() {
         super.clearPaid();
         this.cards.clear();
-        this.targets.clearChosen();
     }
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

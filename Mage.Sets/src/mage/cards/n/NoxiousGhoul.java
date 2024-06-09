@@ -36,7 +36,7 @@ public final class NoxiousGhoul extends CardImpl {
         // Whenever Noxious Ghoul or another Zombie enters the battlefield, all non-Zombie creatures get -1/-1 until end of turn.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new BoostAllEffect(
                 -1, -1, Duration.EndOfTurn, filter, false
-        ), filter2, false, true));
+        ), filter2, false, false));
     }
 
     private NoxiousGhoul(final NoxiousGhoul card) {

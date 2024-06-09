@@ -44,12 +44,12 @@ public final class GoblinCadets extends CardImpl {
 
 class GoblinCadetsChangeControlEffect extends ContinuousEffectImpl {
 
-    public GoblinCadetsChangeControlEffect() {
+    GoblinCadetsChangeControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "target opponent gains control of it. <i>(This removes {this} from combat.)</i>";
     }
 
-    public GoblinCadetsChangeControlEffect(final GoblinCadetsChangeControlEffect effect) {
+    private GoblinCadetsChangeControlEffect(final GoblinCadetsChangeControlEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class GoblinCadetsChangeControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             return permanent.changeControllerId(source.getFirstTarget(), game, source);
         } else {

@@ -31,7 +31,9 @@ public final class TriarchPraetorian extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Dynastic Codes -- When Triarch Praetorian enters the battlefield from a graveyard, you draw two cards and you lose 2 life.
-        Ability ability = new EntersBattlefieldFromGraveyardTriggeredAbility(new DrawCardSourceControllerEffect(2));
+        Ability ability = new EntersBattlefieldFromGraveyardTriggeredAbility(
+                new DrawCardSourceControllerEffect(2, "you")
+        );
         ability.addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"));
         this.addAbility(ability.withFlavorWord("Dynastic Codes"));
 

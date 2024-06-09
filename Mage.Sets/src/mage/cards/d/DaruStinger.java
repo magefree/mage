@@ -33,7 +33,8 @@ public final class DaruStinger extends CardImpl {
         // Amplify 1
         this.addAbility(new AmplifyAbility(AmplifyEffect.AmplifyFactor.Amplify1));
         // {tap}: Daru Stinger deals damage equal to the number of +1/+1 counters on it to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1))
+                .setText("{this} deals damage equal to the number of +1/+1 counters on it to target attacking or blocking creature"), new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);
     }

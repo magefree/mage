@@ -46,14 +46,14 @@ public final class GruulSpellbreaker extends CardImpl {
                         new GainAbilityControllerEffect(
                                 HexproofAbility.getInstance(),
                                 Duration.WhileOnBattlefield
-                        ), MyTurnCondition.instance, "As long as it's your turn, you and"
+                        ), MyTurnCondition.instance, "As long as it's your turn, you"
                 )
         );
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(
                         HexproofAbility.getInstance(),
                         Duration.WhileOnBattlefield
-                ), MyTurnCondition.instance, "{this} have hexproof."
+                ), MyTurnCondition.instance, "and {this} have hexproof."
         ));
         ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);

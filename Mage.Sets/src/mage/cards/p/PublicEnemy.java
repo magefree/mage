@@ -75,6 +75,14 @@ class PublicEnemyEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
+        if (enchantment == null || enchantedCreature == null) {
+            return false;
+        }
+        if (permanent.isControlledBy(enchantedCreature.getControllerId())) {
+            return false;
+        }
         return true;
     }
 

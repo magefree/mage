@@ -78,21 +78,15 @@ public class StrefanMaurerProgenitor extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(
                 new DoIfCostPaid(
                         new StrefanMaurerProgenitorPlayVampireEffect(),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                2,
-                                2,
-                                bloodTokenFilter,
-                                true)
-                        )),
-                false
-                )
+                        new SacrificeTargetCost(2, bloodTokenFilter)
+                ), false)
         );
     }
 
     private StrefanMaurerProgenitor(final StrefanMaurerProgenitor card) { super(card);}
 
     @Override
-    public Card copy() {
+    public StrefanMaurerProgenitor copy() {
         return new StrefanMaurerProgenitor(this);
     }
 }
@@ -113,18 +107,26 @@ class StrefanMaurerProgenitorPlayVampireEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) { return false; }
+        if (player == null) {
+            return false;
+        }
 
         TargetCard target = new TargetCardInHand(0, 1, vampireCardFilter);
-        if (!player.choose(outcome, player.getHand(), target, game)) { return false; }
+        if (!player.choose(outcome, player.getHand(), target, source, game)) {
+            return false;
+        }
 
         Card card = game.getCard(target.getFirstTarget());
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
 
         Permanent permanent = game.getPermanent(card.getId());
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         game.getCombat().addAttackingCreature(permanent.getId(), game);
 

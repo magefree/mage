@@ -15,7 +15,7 @@ public class ColorlessManaAbility extends BasicManaAbility {
         this.netMana.add(Mana.ColorlessMana(1));
     }
 
-    public ColorlessManaAbility(ColorlessManaAbility ability) {
+    private ColorlessManaAbility(final ColorlessManaAbility ability) {
         super(ability);
     }
 

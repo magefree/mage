@@ -39,12 +39,12 @@ public final class ChandrasIgnition extends CardImpl {
 
 class ChandrasIgnitionEffect extends OneShotEffect {
 
-    public ChandrasIgnitionEffect() {
+    ChandrasIgnitionEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target creature you control deals damage equal to its power to each other creature and each opponent";
     }
 
-    public ChandrasIgnitionEffect(final ChandrasIgnitionEffect effect) {
+    private ChandrasIgnitionEffect(final ChandrasIgnitionEffect effect) {
         super(effect);
     }
 
@@ -57,7 +57,7 @@ class ChandrasIgnitionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null && targetCreature.getPower().getValue() > 0) {
-            for (Permanent creature : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 if (!creature.getId().equals(targetCreature.getId())) {
                     creature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), source, game, false, true);
                 }

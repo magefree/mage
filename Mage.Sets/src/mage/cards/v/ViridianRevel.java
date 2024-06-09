@@ -29,7 +29,7 @@ public final class ViridianRevel extends CardImpl {
         this.addAbility(new ViridianRevelTriggeredAbility());
     }
 
-    public ViridianRevel (final ViridianRevel card) {
+    private ViridianRevel(final ViridianRevel card) {
         super(card);
     }
 
@@ -44,7 +44,7 @@ class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    ViridianRevelTriggeredAbility(final ViridianRevelTriggeredAbility ability) {
+    private ViridianRevelTriggeredAbility(final ViridianRevelTriggeredAbility ability) {
         super(ability);
     }
 

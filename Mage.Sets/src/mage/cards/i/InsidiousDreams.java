@@ -44,12 +44,12 @@ public final class InsidiousDreams extends CardImpl {
 
 class InsidiousDreamsEffect extends OneShotEffect {
 
-    public InsidiousDreamsEffect() {
+    InsidiousDreamsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for up to X cards. Then shuffle and put those cards on top of it in any order";
     }
 
-    public InsidiousDreamsEffect(final InsidiousDreamsEffect effect) {
+    private InsidiousDreamsEffect(final InsidiousDreamsEffect effect) {
         super(effect);
     }
 
@@ -68,8 +68,7 @@ class InsidiousDreamsEffect extends OneShotEffect {
                 0, GetXValue.instance.calculate(game, source, this), StaticFilters.FILTER_CARD_CARDS
         );
         controller.searchLibrary(target, source, game);
-        Cards chosen = new CardsImpl();
-        target.getTargets().stream().forEach(cardId -> controller.getLibrary().getCard(cardId, game));
+        Cards chosen = new CardsImpl(target.getTargets());
         controller.shuffleLibrary(source, game);
         controller.putCardsOnTopOfLibrary(chosen, game, source, true);
         return true;

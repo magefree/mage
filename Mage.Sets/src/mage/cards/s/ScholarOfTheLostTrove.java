@@ -1,27 +1,27 @@
 package mage.cards.s;
 
+import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -50,7 +50,7 @@ public final class ScholarOfTheLostTrove extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Scholar of the Lost Trove enters the battlefield, you may cast target instant, sorcery, or artifact card from your graveyard without paying its mana cost. If an instant or sorcery spell cast this way would be put into your graveyard this turn, exile it instead.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ScholarOfTheLostTroveEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ScholarOfTheLostTroveEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
@@ -70,7 +70,7 @@ class ScholarOfTheLostTroveEffect extends OneShotEffect {
     ScholarOfTheLostTroveEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast target instant, sorcery, or artifact card from your graveyard without paying its mana cost. " +
-                "If an instant or sorcery spell cast this way would be put into your graveyard this turn, exile it instead";
+                "If an instant or sorcery spell cast this way would be put into your graveyard, exile it instead";
     }
 
     private ScholarOfTheLostTroveEffect(final ScholarOfTheLostTroveEffect effect) {
@@ -96,59 +96,16 @@ class ScholarOfTheLostTroveEffect extends OneShotEffect {
             return true;
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+        boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                 game, true, new ApprovingObject(source, game));
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
         if (!cardWasCast || !card.isInstantOrSorcery(game)) {
             return true;
         }
-        ContinuousEffect effect = new ScholarOfTheLostTroveReplacementEffect(card.getId());
-        effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
+        ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(true);
+        effect.setTargetPointer(new FixedTarget(card, game));
+        effect.setText("If an instant or sorcery spell cast this way would be put into your graveyard this turn, exile it instead");
         game.addEffect(effect, source);
         return true;
-    }
-}
-
-class ScholarOfTheLostTroveReplacementEffect extends ReplacementEffectImpl {
-
-    private final UUID cardId;
-
-    ScholarOfTheLostTroveReplacementEffect(UUID cardId) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardId = cardId;
-        staticText = "If an instant or sorcery spell cast this way would be put into your graveyard this turn, exile it instead";
-    }
-
-    private ScholarOfTheLostTroveReplacementEffect(final ScholarOfTheLostTroveReplacementEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public ScholarOfTheLostTroveReplacementEffect copy() {
-        return new ScholarOfTheLostTroveReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(this.cardId);
-        if (controller == null || card == null) {
-            return false;
-        }
-        controller.moveCards(card, Zone.EXILED, source, game);
-        return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTargetId().equals(this.cardId);
     }
 }

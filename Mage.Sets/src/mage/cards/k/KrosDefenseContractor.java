@@ -13,8 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -27,17 +26,10 @@ import java.util.UUID;
  */
 public final class KrosDefenseContractor extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
-
     public KrosDefenseContractor(UUID ownerID, CardSetInfo setInfo) {
         super(ownerID, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);
@@ -50,7 +42,7 @@ public final class KrosDefenseContractor extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you put one or more counters on a creature you don't control, tap that creature and goad it. It gains trample until your next turn.
-        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new KrosDefenseContractorEffect(), null, filter, true));
+        this.addAbility(new PutCounterOnCreatureTriggeredAbility(new KrosDefenseContractorEffect(), null, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, true));
     }
 
     private KrosDefenseContractor(final KrosDefenseContractor card) {

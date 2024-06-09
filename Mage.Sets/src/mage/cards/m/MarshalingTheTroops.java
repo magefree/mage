@@ -49,12 +49,12 @@ public final class MarshalingTheTroops extends CardImpl {
 
 class MarshalingTheTroopsEffect extends OneShotEffect {
 
-    public MarshalingTheTroopsEffect() {
+    MarshalingTheTroopsEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way";
     }
 
-    public MarshalingTheTroopsEffect(MarshalingTheTroopsEffect effect) {
+    private MarshalingTheTroopsEffect(final MarshalingTheTroopsEffect effect) {
         super(effect);
     }
 

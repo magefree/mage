@@ -34,7 +34,7 @@ public final class FierceEmpath extends CardImpl {
 
         // When Fierce Empath enters the battlefield, you may search your library for a creature card with converted mana cost 6 or greater, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true)
+                new TargetCardInLibrary(filter), true)
                     .setText("search your library for a creature card with mana value 6 or greater, reveal it, put it into your hand, then shuffle"),
                 true));
     }

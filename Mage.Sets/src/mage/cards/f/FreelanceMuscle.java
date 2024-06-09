@@ -38,7 +38,7 @@ public final class FreelanceMuscle extends CardImpl {
         // Whenever Freelance Muscle attacks or blocks, it gets +X/+X until end of turn, where X is the greatest power and/or toughness among other creatures you control.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new BoostSourceEffect(
                 FreelanceMuscleValue.instance, FreelanceMuscleValue.instance,
-                Duration.EndOfTurn, true, "it"
+                Duration.EndOfTurn, "it"
         ), false).addHint(hint));
     }
 

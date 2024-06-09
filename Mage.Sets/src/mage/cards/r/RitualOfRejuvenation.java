@@ -20,7 +20,7 @@ public final class RitualOfRejuvenation extends CardImpl {
         // You gain 4 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private RitualOfRejuvenation(final RitualOfRejuvenation card) {

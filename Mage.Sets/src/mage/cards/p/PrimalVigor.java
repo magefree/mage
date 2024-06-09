@@ -9,10 +9,12 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -43,12 +45,12 @@ public final class PrimalVigor extends CardImpl {
 
 class PrimalVigorTokenEffect extends ReplacementEffectImpl {
 
-    public PrimalVigorTokenEffect() {
+    PrimalVigorTokenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy);
         staticText = "If one or more tokens would be created, twice that many of those tokens are created instead";
     }
 
-    public PrimalVigorTokenEffect(final PrimalVigorTokenEffect effect) {
+    private PrimalVigorTokenEffect(final PrimalVigorTokenEffect effect) {
         super(effect);
     }
 
@@ -68,14 +70,9 @@ class PrimalVigorTokenEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (event instanceof CreateTokenEvent) {
-            ((CreateTokenEvent) event).doubleTokens();
+            ((CreateTokenEvent) event).multiplyTokens(2);
         }
         return false;
     }
@@ -89,13 +86,13 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
         staticText = "If one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead";
     }
 
-    PrimalVigorCounterEffect(final PrimalVigorCounterEffect effect) {
+    private PrimalVigorCounterEffect(final PrimalVigorCounterEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() * 2, true);
+        event.setAmountForCounters(CardUtil.overflowMultiply(event.getAmount(), 2), true);
         return false;
     }
 
@@ -111,12 +108,7 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
         return permanent != null && event.getAmount() > 0 && permanent.isCreature(game)
-                && event.getData() != null && event.getData().equals("+1/+1");
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+                && event.getData() != null && event.getData().equals(CounterType.P1P1.getName());
     }
 
     @Override

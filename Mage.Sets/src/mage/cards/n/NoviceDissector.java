@@ -34,9 +34,7 @@ public final class NoviceDissector extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

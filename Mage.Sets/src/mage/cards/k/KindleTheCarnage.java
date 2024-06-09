@@ -40,12 +40,12 @@ public final class KindleTheCarnage extends CardImpl {
 
 class KindleTheCarnageEffect extends OneShotEffect {
 
-    public KindleTheCarnageEffect() {
+    KindleTheCarnageEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "Discard a card at random. If you do, {this} deals damage equal to that card's mana value to each creature. You may repeat this process any number of times";
     }
 
-    public KindleTheCarnageEffect(final KindleTheCarnageEffect effect) {
+    private KindleTheCarnageEffect(final KindleTheCarnageEffect effect) {
         super(effect);
     }
 

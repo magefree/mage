@@ -1,9 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -20,8 +17,11 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class PucasMischief extends CardImpl {
@@ -29,7 +29,7 @@ public final class PucasMischief extends CardImpl {
     private static final String rule = "you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser mana value";
 
     public PucasMischief(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ExchangeControlTargetEffect(Duration.EndOfGame, rule, false, true), TargetController.YOU, true);
@@ -58,7 +58,7 @@ class TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent extends
         setTargetName("nonland permanent you control");
     }
 
-    public TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent(final TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent target) {
+    private TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent(final TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent target) {
         super(target);
     }
 
@@ -66,9 +66,9 @@ class TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent extends
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(source);
-        if(targetSource != null) {
+        if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     possibleTargets.add(permanent.getId());
                 }
             }
@@ -94,7 +94,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
         setTargetName("permanent an opponent controls with an equal or lesser mana value");
     }
 
-    public PucasMischiefSecondTarget(final PucasMischiefSecondTarget target) {
+    private PucasMischiefSecondTarget(final PucasMischiefSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }
@@ -118,7 +118,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
             MageObject targetSource = game.getObject(source);
             if (targetSource != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                         if (firstTarget.getManaValue() >= permanent.getManaValue()) {
                             possibleTargets.add(permanent.getId());
                         }

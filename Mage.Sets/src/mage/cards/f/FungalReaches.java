@@ -41,7 +41,7 @@ public final class FungalReaches extends CardImpl {
                 new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance,
                         new CountersSourceCount(CounterType.STORAGE), ColoredManaSymbol.R, ColoredManaSymbol.G),
                 new GenericManaCost(1));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE));
         this.addAbility(ability);
 
     }

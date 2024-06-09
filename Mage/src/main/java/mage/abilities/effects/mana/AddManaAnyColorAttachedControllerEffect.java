@@ -20,7 +20,7 @@ public class AddManaAnyColorAttachedControllerEffect extends ManaEffect {
         staticText = "its controller adds an additional one mana of any color";
     }
 
-    public AddManaAnyColorAttachedControllerEffect(final AddManaAnyColorAttachedControllerEffect effect) {
+    protected AddManaAnyColorAttachedControllerEffect(final AddManaAnyColorAttachedControllerEffect effect) {
         super(effect);
     }
 

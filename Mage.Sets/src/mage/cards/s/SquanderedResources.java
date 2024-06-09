@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.constants.CardType;
 import mage.constants.ManaType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -35,7 +36,7 @@ public final class SquanderedResources extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
 
         // Sacrifice a land: Add one mana of any type the sacrificed land could produce.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(filter)));
     }
 
     private SquanderedResources(final SquanderedResources card) {
@@ -50,12 +51,12 @@ public final class SquanderedResources extends CardImpl {
 
 class SquanderedResourcesEffect extends ManaEffect {
 
-    public SquanderedResourcesEffect() {
+    SquanderedResourcesEffect() {
         super();
         staticText = "Add one mana of any type the sacrificed land could produce";
     }
 
-    public SquanderedResourcesEffect(final SquanderedResourcesEffect effect) {
+    private SquanderedResourcesEffect(final SquanderedResourcesEffect effect) {
         super(effect);
     }
 
@@ -100,7 +101,7 @@ class SquanderedResourcesEffect extends ManaEffect {
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else {
-                if (!player.choose(outcome, choice, game)) {
+                if (!player.choose(Outcome.PutManaInPool, choice, game)) {
                     return mana;
                 }
             }

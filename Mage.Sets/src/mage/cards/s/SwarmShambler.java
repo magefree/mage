@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTargetAnyTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -13,14 +13,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
+import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.InsectToken;
-import mage.game.stack.Spell;
 
 import java.util.UUID;
 
@@ -28,6 +25,11 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SwarmShambler extends CardImpl {
+
+    private static final FilterSpell filter = new FilterSpell("a spell an opponent controls");
+    static {
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+    }
 
     public SwarmShambler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
@@ -44,7 +46,8 @@ public final class SwarmShambler extends CardImpl {
         ));
 
         // Whenever a creature you control with a +1/+1 counter on it becomes the target of a spell an opponent controls, create a 1/1 green Insect creature token.
-        this.addAbility(new SwarmShamblerTriggeredAbility());
+        this.addAbility(new BecomesTargetAnyTriggeredAbility(new CreateTokenEffect(new InsectToken()),
+                StaticFilters.FILTER_A_CONTROLLED_CREATURE_P1P1, filter));
 
         // {1}, {T}: Put a +1/+1 counter on Swarm Shambler.
         Ability ability = new SimpleActivatedAbility(
@@ -61,42 +64,5 @@ public final class SwarmShambler extends CardImpl {
     @Override
     public SwarmShambler copy() {
         return new SwarmShambler(this);
-    }
-}
-
-class SwarmShamblerTriggeredAbility extends TriggeredAbilityImpl {
-
-    SwarmShamblerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken()), false);
-    }
-
-    private SwarmShamblerTriggeredAbility(final SwarmShamblerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SwarmShamblerTriggeredAbility copy() {
-        return new SwarmShamblerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell sourceObject = game.getSpell(event.getSourceId());
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        return sourceObject != null
-                && permanent != null
-                && StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1.match(permanent, getControllerId(), this, game)
-                && StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS.match(sourceObject, getControllerId(), this, game);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature you control with a +1/+1 counter on it " +
-                "becomes the target of a spell an opponent controls, create a 1/1 green Insect creature token.";
     }
 }

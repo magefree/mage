@@ -36,7 +36,7 @@ public final class NeedleSpires extends CardImpl {
         this.addAbility(new WhiteManaAbility());
         
         // {2}{R}{W}: Needle Spires becomes a 2/1 red and white Elemental creature with double strike until end of turn. It's still a land.
-        Effect effect = new BecomesCreatureSourceEffect(new NeedleSpiresToken(), "land", Duration.EndOfTurn);
+        Effect effect = new BecomesCreatureSourceEffect(new NeedleSpiresToken(), CardType.LAND, Duration.EndOfTurn);
         effect.setText("{this} becomes a 2/1 red and white Elemental creature with double strike until end of turn. It's still a land");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{R}{W}")));
     }
@@ -63,7 +63,7 @@ class NeedleSpiresToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(DoubleStrikeAbility.getInstance());
     }
-    public NeedleSpiresToken(final NeedleSpiresToken token) {
+    private NeedleSpiresToken(final NeedleSpiresToken token) {
         super(token);
     }
 

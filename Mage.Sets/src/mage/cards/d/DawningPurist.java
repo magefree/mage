@@ -37,7 +37,7 @@ public final class DawningPurist extends CardImpl {
         this.addAbility(new DawningPuristTriggeredAbility());
 
         // Morph {1}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{W}")));
     }
 
     private DawningPurist(final DawningPurist card) {
@@ -56,7 +56,7 @@ class DawningPuristTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    DawningPuristTriggeredAbility(final DawningPuristTriggeredAbility ability) {
+    private DawningPuristTriggeredAbility(final DawningPuristTriggeredAbility ability) {
         super(ability);
     }
 

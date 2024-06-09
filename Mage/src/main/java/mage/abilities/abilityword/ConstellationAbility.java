@@ -36,7 +36,7 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
                 + " enchantment enters the battlefield under your control, ");
     }
 
-    public ConstellationAbility(final ConstellationAbility ability) {
+    protected ConstellationAbility(final ConstellationAbility ability) {
         super(ability);
         this.thisOr = ability.thisOr;
     }

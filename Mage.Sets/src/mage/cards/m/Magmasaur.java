@@ -69,7 +69,7 @@ class MagmasaurEffect extends OneShotEffect {
         this.staticText = "you may remove a +1/+1 counter from {this}. If you don't, sacrifice {this} and it deals damage equal to the number of +1/+1 counters on it to each creature without flying and each player";
     }
 
-    public MagmasaurEffect(final MagmasaurEffect effect) {
+    private MagmasaurEffect(final MagmasaurEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class MagmasaurEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject != null && controller != null) {
             if (controller.chooseUse(outcome, "Remove a +1/+1 counter from " + sourceObject.getLogName() + '?', source, game)) {
                 sourceObject.removeCounters(CounterType.P1P1.getName(), 1, source, game);

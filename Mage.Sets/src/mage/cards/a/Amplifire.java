@@ -83,9 +83,7 @@ class AmplifireEffect extends OneShotEffect {
             SetBasePowerToughnessSourceEffect setBasePowerToughnessSourceEffect = new SetBasePowerToughnessSourceEffect(
                     2*lastCard.getPower().getValue(),
                     2*lastCard.getToughness().getValue(),
-                    Duration.UntilYourNextTurn,
-                    SubLayer.SetPT_7b,
-                    true
+                    Duration.UntilYourNextTurn
             );
             game.addEffect(setBasePowerToughnessSourceEffect, source);
         }

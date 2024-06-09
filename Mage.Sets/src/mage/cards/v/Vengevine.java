@@ -52,7 +52,7 @@ class VengevineAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true);
     }
 
-    public VengevineAbility(final VengevineAbility ability) {
+    private VengevineAbility(final VengevineAbility ability) {
         super(ability);
     }
 

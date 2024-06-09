@@ -45,12 +45,12 @@ public final class Pyroblast extends CardImpl {
 
 class PyroblastCounterTargetEffect extends OneShotEffect {
 
-    public PyroblastCounterTargetEffect() {
+    PyroblastCounterTargetEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target spell if it's blue";
     }
 
-    public PyroblastCounterTargetEffect(final PyroblastCounterTargetEffect effect) {
+    private PyroblastCounterTargetEffect(final PyroblastCounterTargetEffect effect) {
         super(effect);
     }
 
@@ -71,12 +71,12 @@ class PyroblastCounterTargetEffect extends OneShotEffect {
 
 class PyroblastDestroyTargetEffect extends OneShotEffect {
 
-    public PyroblastDestroyTargetEffect() {
+    PyroblastDestroyTargetEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target permanent if it's blue";
     }
 
-    public PyroblastDestroyTargetEffect(final PyroblastDestroyTargetEffect effect) {
+    private PyroblastDestroyTargetEffect(final PyroblastDestroyTargetEffect effect) {
         super(effect);
     }
 

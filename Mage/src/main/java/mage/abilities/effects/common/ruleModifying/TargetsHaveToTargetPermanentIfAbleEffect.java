@@ -2,7 +2,6 @@ package mage.abilities.effects.common.ruleModifying;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
@@ -86,7 +85,7 @@ public class TargetsHaveToTargetPermanentIfAbleEffect extends ContinuousRuleModi
             }
             Ability stackAbility = stackObject.getStackAbility();
             // Ensure that this ability is activated or a cast spell, because Flag Bearer effects don't require triggered abilities to choose a Standard Bearer
-            if (!(stackAbility instanceof ActivatedAbility) &&
+            if (!(stackAbility.isActivatedAbility()) &&
                     !(stackAbility instanceof SpellAbility)) {
                 return false;
             }
@@ -94,9 +93,10 @@ public class TargetsHaveToTargetPermanentIfAbleEffect extends ContinuousRuleModi
             if (!stackAbility.isControlledBy(targetingPlayer.getId())) {
                 return false;
             }
-            Ability ability = (Ability) getValue("targetAbility");
-            if (ability != null) {
+            Ability targetAbility = (Ability) getValue("targetAbility");
+            if (targetAbility != null) {
                 // Get all the allowed permanents on the battlefield in range of the abilities controller
+                Ability ability = targetAbility.copy(); // must use a copy for diff modes checking
                 List<Permanent> allowedPermanents = game.getBattlefield().getActivePermanents(filter, event.getPlayerId(), source, game);
                 if (!allowedPermanents.isEmpty()) {
                     boolean canTargetAllowedPermanent = false;

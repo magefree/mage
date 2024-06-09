@@ -70,5 +70,41 @@ public class EchoTest extends CardTestPlayerBase {
         assertTappedCount("Mountain", true, 0);
     }
 
+    //Deranged Hermit has been cloned with Phantasmal Image.
+    //The Phantasmal Image version of the Deranged Hermit had to pay the echo cost multiple times.
+    @Test
+    public void testEchoTriggerClone() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 15);
+        // Deranged Hermit {3}{G}{G}
+        // Echo
+        addCard(Zone.HAND, playerA, "Deranged Hermit");
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deranged Hermit");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Deranged Hermit");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true);
+        setChoice(playerA, "Deranged Hermit");
+
+        setChoice(playerA, ""); //stack triggers
+        setChoice(playerA, "");
+
+        setChoice(playerA, true); //Pay echo costs
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Deranged Hermit", 3);
+        assertTappedCount("Tropical Island", true, 15);
+
+    }
 
 }

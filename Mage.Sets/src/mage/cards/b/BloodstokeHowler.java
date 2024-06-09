@@ -20,11 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class BloodstokeHowler extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Beast creatures you control");
-
-    static {
-        filter.add(SubType.BEAST.getPredicate());
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.BEAST, "Beast creatures");
 
     public BloodstokeHowler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
@@ -34,7 +30,7 @@ public final class BloodstokeHowler extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {6}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{6}{R}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{6}{R}")));
 
         // When Bloodstoke Howler is turned face up, Beast creatures you control get +3/+0 until end of turn.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(3, 0, Duration.EndOfTurn, filter)));

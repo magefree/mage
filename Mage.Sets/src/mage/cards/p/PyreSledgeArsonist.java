@@ -48,7 +48,7 @@ public final class PyreSledgeArsonist extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(ability.addHint(hint));
+        this.addAbility(ability.addHint(hint), new PyreSledgeArsonistWatcher());
     }
 
     private PyreSledgeArsonist(final PyreSledgeArsonist card) {

@@ -24,7 +24,7 @@ public final class ItlimocCradleOfTheSun extends CardImpl {
     public ItlimocCradleOfTheSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // (Transforms from Growing Rites of Itlimoc.)/
         this.nightCard = true;

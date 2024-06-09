@@ -65,18 +65,18 @@ public final class DementiaSliver extends CardImpl {
 
 class DementiaSliverEffect extends OneShotEffect {
 
-    public DementiaSliverEffect() {
+    DementiaSliverEffect() {
         super(Outcome.Damage);
         staticText = "Target opponent reveals a card at random from their hand. If that card has the chose name, that player discards it";
     }
 
-    public DementiaSliverEffect(final DementiaSliverEffect effect) {
+    private DementiaSliverEffect(final DementiaSliverEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = game.getObject(source);
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (opponent != null && sourceObject != null && cardName != null && !cardName.isEmpty()) {

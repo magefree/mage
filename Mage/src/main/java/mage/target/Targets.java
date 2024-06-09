@@ -4,32 +4,41 @@ import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.targetpointer.*;
+import mage.util.Copyable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Targets extends ArrayList<Target> {
+public class Targets extends ArrayList<Target> implements Copyable<Targets> {
 
-    public Targets(Target... targets) {
-        for (Target target : targets) {
-            this.add(target);
-        }
+    private boolean isReadOnly = false; // runtime protect from not working targets modification, e.g. in composite costs
+
+    public Targets() {
+        // fast constructor
     }
 
-    public Targets(final Targets targets) {
+    public Targets(Target... targets) {
+        this.addAll(Arrays.asList(targets));
+    }
+
+    protected Targets(final Targets targets) {
+        this.ensureCapacity(targets.size());
         for (Target target : targets) {
             this.add(target.copy());
         }
+        this.isReadOnly = targets.isReadOnly;
     }
 
-    public List<Target> getUnchosen() {
-        return stream().filter(target -> !target.isChosen()).collect(Collectors.toList());
+    public Targets withReadOnly() {
+        this.isReadOnly = true;
+        return this;
+    }
+
+    public List<Target> getUnchosen(Game game) {
+        return stream().filter(target -> !target.isChosen(game)).collect(Collectors.toList());
     }
 
     public void clearChosen() {
@@ -38,8 +47,8 @@ public class Targets extends ArrayList<Target> {
         }
     }
 
-    public boolean isChosen() {
-        return stream().allMatch(Target::isChosen);
+    public boolean isChosen(Game game) {
+        return stream().allMatch(t -> t.isChosen(game));
     }
 
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game) {
@@ -47,8 +56,8 @@ public class Targets extends ArrayList<Target> {
             if (!canChoose(playerId, source, game)) {
                 return false;
             }
-            while (!isChosen()) {
-                Target target = this.getUnchosen().get(0);
+            while (!isChosen(game)) {
+                Target target = this.getUnchosen(game).get(0);
                 if (!target.choose(outcome, playerId, sourceId, source, game)) {
                     return false;
                 }
@@ -64,8 +73,8 @@ public class Targets extends ArrayList<Target> {
             }
 
             //int state = game.bookmarkState();
-            while (!isChosen()) {
-                Target target = this.getUnchosen().get(0);
+            while (!isChosen(game)) {
+                Target target = this.getUnchosen(game).get(0);
                 UUID targetController = playerId;
 
                 // some targets can have controller different than ability controller
@@ -88,7 +97,7 @@ public class Targets extends ArrayList<Target> {
                     return false;
                 }
                 // Check if there are some rules for targets are violated, if so reset the targets and start again
-                if (this.getUnchosen().isEmpty()
+                if (this.getUnchosen(game).isEmpty()
                         && game.replaceEvent(new GameEvent(GameEvent.EventType.TARGETS_VALID, source.getSourceId(), source, source.getControllerId()), source)) {
                     //game.restoreState(state, "Targets");
                     clearChosen();
@@ -144,7 +153,44 @@ public class Targets extends ArrayList<Target> {
         return null;
     }
 
+    @Override
     public Targets copy() {
         return new Targets(this);
+    }
+
+    private void checkReadOnlyModification() {
+        if (this.isReadOnly) {
+            throw new IllegalArgumentException("Wrong code usage: you can't modify read only targets list, e.g. from composite costs");
+        }
+    }
+
+    @Override
+    public boolean add(Target target) {
+        checkReadOnlyModification();
+        return super.add(target);
+    }
+
+    @Override
+    public void add(int index, Target element) {
+        checkReadOnlyModification();
+        super.add(index, element);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends Target> c) {
+        checkReadOnlyModification();
+        return super.addAll(c);
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends Target> c) {
+        checkReadOnlyModification();
+        return super.addAll(index, c);
+    }
+
+    @Override
+    public void clear() {
+        checkReadOnlyModification();
+        super.clear();
     }
 }

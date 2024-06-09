@@ -1,6 +1,7 @@
 package mage.abilities.effects;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
@@ -22,7 +23,7 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
         this.effectType = EffectType.RESTRICTION;
     }
 
-    public RestrictionEffect(final RestrictionEffect effect) {
+    protected RestrictionEffect(final RestrictionEffect effect) {
         super(effect);
     }
 
@@ -41,8 +42,8 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
 
     /**
      * @param attacker
-     * @param defenderId id of planeswalker or player to attack, can be empty
-     * for general checks
+     * @param defenderId          id of planeswalker or player to attack, can be empty
+     *                            for general checks
      * @param source
      * @param game
      * @param canUseChooseDialogs
@@ -57,7 +58,7 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
     }
 
     /**
-     * @param attacker can be empty for general checks
+     * @param attacker            can be empty for general checks
      * @param blocker
      * @param source
      * @param game

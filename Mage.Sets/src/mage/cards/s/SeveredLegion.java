@@ -25,7 +25,7 @@ public final class SeveredLegion extends CardImpl {
         this.addAbility(FearAbility.getInstance());
     }
 
-    public SeveredLegion (final SeveredLegion card) {
+    private SeveredLegion(final SeveredLegion card) {
         super(card);
     }
 

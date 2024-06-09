@@ -87,6 +87,7 @@ class GraveyardTrespasserEffect extends OneShotEffect {
         if (amount < 1) {
             return true;
         }
+        game.getState().processAction(game);
         player.gainLife(amount, game, source);
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);

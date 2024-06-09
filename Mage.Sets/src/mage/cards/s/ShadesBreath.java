@@ -50,12 +50,12 @@ public final class ShadesBreath extends CardImpl {
 
 class ShadesBreathSetColorEffect extends ContinuousEffectImpl {
 
-    public ShadesBreathSetColorEffect() {
+    ShadesBreathSetColorEffect() {
         super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         staticText = "Until end of turn, each creature you control becomes a black";
     }
 
-    public ShadesBreathSetColorEffect(final ShadesBreathSetColorEffect effect) {
+    private ShadesBreathSetColorEffect(final ShadesBreathSetColorEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class ShadesBreathSetSubtypeEffect extends ContinuousEffectImpl {
 
     ShadesBreathSetSubtypeEffect() {
         super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        staticText = "Shade";
+        staticText = " Shade";
     }
 
     private ShadesBreathSetSubtypeEffect(final ShadesBreathSetSubtypeEffect effect) {

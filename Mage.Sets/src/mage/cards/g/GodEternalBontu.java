@@ -19,7 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -31,7 +31,7 @@ public final class GodEternalBontu extends CardImpl {
     public GodEternalBontu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
@@ -85,7 +85,7 @@ class GodEternalBontuEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
+        Target target = new TargetSacrifice(0, Integer.MAX_VALUE, filter);
         if (!player.choose(outcome, target, source, game)) {
             return false;
         }

@@ -14,11 +14,10 @@ public final class AvatarToken2 extends TokenImpl {
         subtype.add(SubType.AVATAR);
         power = new MageInt(4);
         toughness = new MageInt(4);
-        setOriginalExpansionSetCode("M19");
         addAbility(FlyingAbility.getInstance());
     }
 
-    public AvatarToken2(final AvatarToken2 token) {
+    protected AvatarToken2(final AvatarToken2 token) {
         super(token);
     }
 

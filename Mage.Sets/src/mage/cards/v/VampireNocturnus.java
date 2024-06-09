@@ -76,7 +76,7 @@ class VampireNocturnusAbility extends StaticAbility {
                 new VampireNocturnusCondition(), ""));
     }
 
-    public VampireNocturnusAbility(VampireNocturnusAbility ability) {
+    private VampireNocturnusAbility(final VampireNocturnusAbility ability) {
         super(ability);
     }
 

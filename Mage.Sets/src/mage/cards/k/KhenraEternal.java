@@ -23,7 +23,7 @@ public final class KhenraEternal extends CardImpl {
 
     }
 
-    public KhenraEternal(final KhenraEternal khenraEternal) {
+    private KhenraEternal(final KhenraEternal khenraEternal) {
         super(khenraEternal);
     }
 

@@ -51,7 +51,7 @@ class ScuteMobAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)));
     }
 
-    public ScuteMobAbility(final ScuteMobAbility ability) {
+    private ScuteMobAbility(final ScuteMobAbility ability) {
         super(ability);
     }
 

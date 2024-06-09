@@ -1,5 +1,4 @@
 
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -24,10 +23,9 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author LevelX2
  */
 
-
 public final class WeaponSurge extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures you control");
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
     }
@@ -35,10 +33,9 @@ public final class WeaponSurge extends CardImpl {
     public WeaponSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
-
         // Target creature you control gets +1/+0 and gains first strike until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1,0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1,0, Duration.EndOfTurn).setText("target creature you control gets +1/+0"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn).setText("and gains first strike until end of turn"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Overload {1}{R}

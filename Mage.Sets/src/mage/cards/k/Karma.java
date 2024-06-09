@@ -54,15 +54,15 @@ class KarmaDamageTargetEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to that player equal to the number of Swamps they control";
     }
 
-    public KarmaDamageTargetEffect(KarmaDamageTargetEffect copy) {
+    private KarmaDamageTargetEffect(final KarmaDamageTargetEffect copy) {
         super(copy);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            int damage = game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game).size();
+            int damage = game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game).size();
             player.damage(damage, source.getSourceId(), source, game);
             return true;
         }

@@ -23,7 +23,7 @@ public final class GoneMissing extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
 
         // Investigate.
-        this.getSpellAbility().addEffect(new InvestigateEffect());
+        this.getSpellAbility().addEffect(new InvestigateEffect().concatBy("<br>"));
     }
 
     private GoneMissing(final GoneMissing card) {

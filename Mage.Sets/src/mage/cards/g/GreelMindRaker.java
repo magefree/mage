@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 
@@ -24,12 +25,10 @@ import java.util.UUID;
  */
 public final class GreelMindRaker extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two cards");
-
     public GreelMindRaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HORROR);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);
@@ -40,7 +39,7 @@ public final class GreelMindRaker extends CardImpl {
                 ManacostVariableValue.REGULAR, true
         ), new ManaCostsImpl<>("{X}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, filter)));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

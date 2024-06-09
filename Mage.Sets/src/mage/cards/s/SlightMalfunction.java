@@ -48,7 +48,7 @@ class SlightMalfunctionEffect extends OneShotEffect {
 
     SlightMalfunctionEffect() {
         super(Outcome.Benefit);
-        staticText = "roll a six-side die. When you do, {this} deals 1 damage " +
+        staticText = "roll a six-sided die. When you do, {this} deals 1 damage " +
                 "to each of up to X target creatures, where X is the result";
     }
 

@@ -12,6 +12,7 @@ import mage.target.TargetCard;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.filter.StaticFilters;
 
 /**
@@ -33,10 +34,10 @@ public class TargetCardInHand extends TargetCard {
 
     public TargetCardInHand(int minNumTargets, int maxNumTargets, FilterCard filter) {
         super(minNumTargets, maxNumTargets, Zone.HAND, filter);
-        setNotTarget(true);
+        withNotTarget(true);
     }
 
-    public TargetCardInHand(final TargetCardInHand target) {
+    protected TargetCardInHand(final TargetCardInHand target) {
         super(target);
     }
 

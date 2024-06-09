@@ -42,12 +42,12 @@ public final class RhysticStudy extends CardImpl {
 
 class RhysticStudyDrawEffect extends OneShotEffect {
 
-    public RhysticStudyDrawEffect() {
+    RhysticStudyDrawEffect() {
         super(Outcome.DrawCard);
         this.staticText = "you may draw a card unless that player pays {1}";
     }
 
-    public RhysticStudyDrawEffect(final RhysticStudyDrawEffect effect) {
+    private RhysticStudyDrawEffect(final RhysticStudyDrawEffect effect) {
         super(effect);
     }
 
@@ -59,7 +59,7 @@ class RhysticStudyDrawEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && opponent != null && sourceObject != null) {
             if (controller.chooseUse(Outcome.DrawCard, "Draw a card (" + sourceObject.getLogName() + ')', source, game)) {

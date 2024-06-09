@@ -42,12 +42,12 @@ public final class CompellingDeterrence extends CardImpl {
 
 class CompellingDeterrenceEffect extends OneShotEffect {
 
-    public CompellingDeterrenceEffect() {
+    CompellingDeterrenceEffect() {
         super(Outcome.Detriment);
         this.staticText = "return target nonland permanent to its owner's hand. Then that player discards a card if you control a Zombie";
     }
 
-    public CompellingDeterrenceEffect(final CompellingDeterrenceEffect effect) {
+    private CompellingDeterrenceEffect(final CompellingDeterrenceEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class CompellingDeterrenceEffect extends OneShotEffect {
             game.getState().processAction(game);
             FilterPermanent zombieFilter = new FilterPermanent();
             zombieFilter.add(SubType.ZOMBIE.getPredicate());
-            if (game.getState().getBattlefield().countAll(zombieFilter, controller.getId(), game) > 0) {
+            if (game.getBattlefield().countAll(zombieFilter, controller.getId(), game) > 0) {
                 player.discard(1, false, false, source, game);
             }
             return true;

@@ -1,11 +1,10 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -41,7 +40,7 @@ public final class EmbalmersTools extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmbalmersToolsEffect()));
 
         // Tap an untapped Zombie you control: Target player puts the top card of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -70,7 +69,7 @@ class EmbalmersToolsEffect extends CostModificationEffectImpl {
         staticText = effectText;
     }
 
-    public EmbalmersToolsEffect(final EmbalmersToolsEffect effect) {
+    private EmbalmersToolsEffect(final EmbalmersToolsEffect effect) {
         super(effect);
     }
 
@@ -86,8 +85,7 @@ class EmbalmersToolsEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
+        if (abilityToModify.isActivatedAbility()){
             // Activated abilities of creatures
             Card card = game.getCard(abilityToModify.getSourceId());
             if (filter.match(card, source.getControllerId(), source, game) && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {

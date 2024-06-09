@@ -50,12 +50,12 @@ public final class VaporousDjinn extends CardImpl {
 
 class VaporousDjinnEffect extends OneShotEffect {
 
-    public VaporousDjinnEffect() {
+    VaporousDjinnEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} phases out unless you pay {U}{U}";
     }
 
-    public VaporousDjinnEffect(final VaporousDjinnEffect effect) {
+    private VaporousDjinnEffect(final VaporousDjinnEffect effect) {
         super(effect);
     }
 

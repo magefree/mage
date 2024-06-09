@@ -7,8 +7,24 @@ import mage.server.game.ReplayManagerImpl;
 import mage.server.managers.*;
 import mage.server.tournament.TournamentManagerImpl;
 import mage.server.util.ThreadExecutorImpl;
+import org.apache.log4j.Logger;
 
+import java.util.concurrent.TimeUnit;
+
+/**
+ * @author Burato, JayDi85
+ */
 public class MainManagerFactory implements ManagerFactory {
+
+    private final Logger logger = Logger.getLogger(MainManagerFactory.class);
+
+    // defines how often checking process should be run on server (in minutes)
+    // TODO: WARNING, it's can be very buggy but very rare (quit players for no reason, e.g. empty deck bug in sideboard)
+    //  main reason - health code can run in the moment of game move from one stage to another (e.g. on sideboarding prepare)
+    // TODO: add debug menu like "call server health in 10 seconds"
+    // TODO: add debug menu like "call server side disconnect in 10 seconds"
+    // TODO: add debug menu like "call client side disconnect in 10 seconds"
+    private static final int SERVER_HEALTH_CHECK_TIMEOUT_MINS = 10;
 
     private final ConfigSettings configSettings;
     private final ThreadExecutor threadExecutor;
@@ -23,7 +39,6 @@ public class MainManagerFactory implements ManagerFactory {
     private final TableManager tableManager;
     private final UserManager userManager;
     private final TournamentManager tournamentManager;
-
 
     public MainManagerFactory(ConfigSettings configSettings) {
         this.configSettings = configSettings;
@@ -47,6 +62,7 @@ public class MainManagerFactory implements ManagerFactory {
         this.gamesRoomManager = gamesRoomManager;
         this.tableManager = tableManager;
         this.userManager = userManager;
+
         // execute the initialisation block of the relevant manager (they start the executor services)
         startThreads(gamesRoomManager, tableManager, userManager);
     }
@@ -55,6 +71,21 @@ public class MainManagerFactory implements ManagerFactory {
         userManager.init();
         tableManager.init();
         gamesRoomManager.init();
+
+        threadExecutor().getServerHealthExecutor().scheduleAtFixedRate(() -> {
+            try {
+                //logger.info("---");
+                //logger.info("Server health check started");
+                this.tableManager().checkHealth();
+                this.chatManager().checkHealth();
+                this.userManager().checkHealth();
+                this.sessionManager().checkHealth();
+            } catch (Exception ex) {
+                logger.fatal("Server health check: catch unknown error - " + ex, ex);
+            }
+            //logger.info("Server health check end");
+            //logger.info("---");
+        }, SERVER_HEALTH_CHECK_TIMEOUT_MINS, SERVER_HEALTH_CHECK_TIMEOUT_MINS, TimeUnit.MINUTES);
     }
 
     @Override

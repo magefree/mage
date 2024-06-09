@@ -31,14 +31,14 @@ public class Limited extends DeckValidator {
         boolean valid = true;
         errorsList.clear();
         //20091005 - 100.2b
-        if (deck.getCards().size() < getDeckMinSize()) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getCards().size() + " cards");
+        if (deck.getMaindeckCards().size() < getDeckMinSize()) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getMaindeckCards().size() + " cards");
             valid = false;
         }
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > 7 && entry.getKey().equals("Seven Dwarves")) {
+            if (entry.getValue() > getMaxCopies(entry.getKey(), Integer.MAX_VALUE)) {
                 addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue(), true);
                 valid = false;
             }

@@ -9,7 +9,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -28,8 +27,8 @@ public final class IncreasingAmbition extends CardImpl {
 
         // Search your library for a card and put that card into your hand. If this spell was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(2, StaticFilters.FILTER_CARD)),
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary()),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(2, StaticFilters.FILTER_CARD), false),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false),
                 IncreasingAmbitionCondition.instance, "Search your library for a card " +
                 "and put that card into your hand. If this spell was cast from a graveyard, " +
                 "instead search your library for two cards and put those cards into your hand. " +

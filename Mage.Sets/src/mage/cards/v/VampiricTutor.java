@@ -20,7 +20,7 @@ public final class VampiricTutor extends CardImpl {
 
 
         // Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
-        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(), false, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(), false));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 

@@ -25,7 +25,7 @@ public final class VeteransReflexes extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public VeteransReflexes (final VeteransReflexes card) {
+    private VeteransReflexes(final VeteransReflexes card) {
         super(card);
     }
 

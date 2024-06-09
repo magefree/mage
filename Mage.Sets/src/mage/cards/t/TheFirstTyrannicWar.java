@@ -85,7 +85,7 @@ class TheFirstTyrannicWarFirstEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_CREATURE);
-        player.choose(outcome, player.getHand(), target, game);
+        player.choose(outcome, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;
@@ -104,7 +104,7 @@ class TheFirstTyrannicWarReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    TheFirstTyrannicWarReplacementEffect(TheFirstTyrannicWarReplacementEffect effect) {
+    private TheFirstTyrannicWarReplacementEffect(final TheFirstTyrannicWarReplacementEffect effect) {
         super(effect);
     }
 
@@ -116,11 +116,6 @@ class TheFirstTyrannicWarReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

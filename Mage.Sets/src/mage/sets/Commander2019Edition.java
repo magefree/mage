@@ -107,6 +107,8 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Flamerush Rider", 143, Rarity.RARE, mage.cards.f.FlamerushRider.class));
         cards.add(new SetCardInfo("Flayer of the Hatebound", 144, Rarity.RARE, mage.cards.f.FlayerOfTheHatebound.class));
         cards.add(new SetCardInfo("Forest", 300, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 301, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 302, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Cave", 243, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Foul Orchard", 244, Rarity.UNCOMMON, mage.cards.f.FoulOrchard.class));
         cards.add(new SetCardInfo("Fresh Meat", 166, Rarity.RARE, mage.cards.f.FreshMeat.class));
@@ -154,6 +156,8 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Increasing Vengeance", 147, Rarity.RARE, mage.cards.i.IncreasingVengeance.class));
         cards.add(new SetCardInfo("Intangible Virtue", 67, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Island", 291, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 292, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 293, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ixidron", 87, Rarity.RARE, mage.cards.i.Ixidron.class));
         cards.add(new SetCardInfo("Izzet Boilerworks", 252, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Izzet Guildgate", 253, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
@@ -184,6 +188,8 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Momentous Fall", 173, Rarity.RARE, mage.cards.m.MomentousFall.class));
         cards.add(new SetCardInfo("Mortuary Mire", 260, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
         cards.add(new SetCardInfo("Mountain", 297, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 298, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 299, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murderous Compulsion", 122, Rarity.COMMON, mage.cards.m.MurderousCompulsion.class));
         cards.add(new SetCardInfo("Myriad Landscape", 261, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Monastery", 262, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
@@ -203,6 +209,8 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Rebirth", 68, Rarity.RARE, mage.cards.p.PhyrexianRebirth.class));
         cards.add(new SetCardInfo("Plaguecrafter", 126, Rarity.UNCOMMON, mage.cards.p.Plaguecrafter.class));
         cards.add(new SetCardInfo("Plains", 288, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 289, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 290, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prairie Stream", 265, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Pramikon, Sky Rampart", 47, Rarity.MYTHIC, mage.cards.p.PramikonSkyRampart.class));
         cards.add(new SetCardInfo("Prismatic Strands", 69, Rarity.COMMON, mage.cards.p.PrismaticStrands.class));
@@ -270,6 +278,8 @@ public final class Commander2019Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Sungrass Prairie", 277, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 278, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Swamp", 294, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 295, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 296, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 279, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
         cards.add(new SetCardInfo("Tahngarth, First Mate", 50, Rarity.RARE, mage.cards.t.TahngarthFirstMate.class));
         cards.add(new SetCardInfo("Talrand, Sky Summoner", 97, Rarity.RARE, mage.cards.t.TalrandSkySummoner.class));

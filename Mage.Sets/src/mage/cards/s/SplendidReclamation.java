@@ -43,7 +43,7 @@ class ReplenishEffect extends OneShotEffect {
         this.staticText = "Return all land cards from your graveyard to the battlefield tapped";
     }
 
-    ReplenishEffect(final ReplenishEffect effect) {
+    private ReplenishEffect(final ReplenishEffect effect) {
         super(effect);
     }
 

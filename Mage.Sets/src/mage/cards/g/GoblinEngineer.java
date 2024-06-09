@@ -56,7 +56,7 @@ public final class GoblinEngineer extends CardImpl {
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{R}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
     }

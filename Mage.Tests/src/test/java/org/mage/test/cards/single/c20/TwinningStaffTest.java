@@ -85,4 +85,21 @@ public class TwinningStaffTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, bear, 1);
         assertGraveyardCount(playerA, elite, 1);
     }
+
+    @Test
+    public void testThousandYearStormZeroCopies() {
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Thousand-Year Storm");
+        addCard(Zone.BATTLEFIELD, playerA, staff);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Lightning Bolt", playerB);
+        checkLife("before", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setStrictChooseMode(false);
+        checkLife("copy", 1, PhaseStep.END_COMBAT, playerB, 20 - 3 - 3 * 3);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
 }

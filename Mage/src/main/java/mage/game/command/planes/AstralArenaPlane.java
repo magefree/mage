@@ -33,7 +33,6 @@ public class AstralArenaPlane extends Plane {
 
     public AstralArenaPlane() {
         this.setPlaneType(Planes.PLANE_ASTRAL_ARENA);
-        this.setExpansionSetCodeForImage("PCA");
 
         // No more than one creature can attack each turn.  No more than one creature can block each turn.
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.COMMAND, new AstralArenaAttackRestrictionEffect());
@@ -57,6 +56,15 @@ public class AstralArenaPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private AstralArenaPlane(final AstralArenaPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public AstralArenaPlane copy() {
+        return new AstralArenaPlane(this);
     }
 }
 

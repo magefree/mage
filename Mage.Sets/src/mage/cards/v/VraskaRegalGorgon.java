@@ -31,7 +31,7 @@ public final class VraskaRegalGorgon extends CardImpl {
     public VraskaRegalGorgon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VRASKA);
         this.setStartingLoyalty(5);
 
@@ -66,13 +66,13 @@ public final class VraskaRegalGorgon extends CardImpl {
 
 class VraskaRegalGorgonEffect extends OneShotEffect {
 
-    public VraskaRegalGorgonEffect() {
+    VraskaRegalGorgonEffect() {
         super(Outcome.Benefit);
         this.staticText = "For each creature card in your graveyard, "
                 + "put a +1/+1 counter on each creature you control.";
     }
 
-    public VraskaRegalGorgonEffect(final VraskaRegalGorgonEffect effect) {
+    private VraskaRegalGorgonEffect(final VraskaRegalGorgonEffect effect) {
         super(effect);
     }
 

@@ -48,12 +48,12 @@ public final class DiscipleOfBolas extends CardImpl {
 
 class DiscipleOfBolasEffect extends OneShotEffect {
 
-    public DiscipleOfBolasEffect() {
+    DiscipleOfBolasEffect() {
         super(Outcome.Benefit);
         this.staticText = "sacrifice another creature. You gain X life and draw X cards, where X is that creature's power";
     }
 
-    public DiscipleOfBolasEffect(final DiscipleOfBolasEffect effect) {
+    private DiscipleOfBolasEffect(final DiscipleOfBolasEffect effect) {
         super(effect);
     }
 

@@ -68,7 +68,7 @@ class TenuousTruceAttackTriggeredAbility extends TriggeredAbilityImpl {
                 "or when they attack you or a planeswalker you control, ");
     }
 
-    TenuousTruceAttackTriggeredAbility(final TenuousTruceAttackTriggeredAbility ability) {
+    private TenuousTruceAttackTriggeredAbility(final TenuousTruceAttackTriggeredAbility ability) {
         super(ability);
     }
 
@@ -91,7 +91,7 @@ class TenuousTruceAttackTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        Set<UUID> defenderIds = game.getCombat().getDefenders();
+        Set<UUID> defenderIds = game.getCombat().getPlayerDefenders(game, true);
         if (controller.equals(attacker)) {
             return TenuousTruceAttackTriggeredAbility.playerOneAttackingPlayerBOrTheirPlaneswalker(controller.getId(), enchantedPlayer.getId(), defenderIds, game);
         } else if (enchantedPlayer.equals(attacker)) {

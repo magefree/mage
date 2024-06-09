@@ -30,7 +30,7 @@ public final class KedissEmberclawFamiliar extends CardImpl {
     public KedissEmberclawFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(1);
@@ -38,8 +38,8 @@ public final class KedissEmberclawFamiliar extends CardImpl {
 
         // Whenever a commander you control deals combat damage to an opponent, it deals that much damage to each other opponent.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                new KedissEmberclawFamiliarEffect(), filter, false,
-                SetTargetPointer.PLAYER, true, true
+                Zone.BATTLEFIELD, new KedissEmberclawFamiliarEffect(), filter, false,
+                SetTargetPointer.PLAYER, true, true, TargetController.OPPONENT
         ));
 
         // Partner

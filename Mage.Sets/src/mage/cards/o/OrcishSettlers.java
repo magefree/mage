@@ -54,12 +54,12 @@ public final class OrcishSettlers extends CardImpl {
 
 class OrcishSettlersEffect extends OneShotEffect {
 
-    public OrcishSettlersEffect() {
+    OrcishSettlersEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy X target lands";
     }
 
-    public OrcishSettlersEffect(final OrcishSettlersEffect effect) {
+    private OrcishSettlersEffect(final OrcishSettlersEffect effect) {
         super(effect);
     }
 

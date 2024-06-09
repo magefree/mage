@@ -35,12 +35,15 @@ public final class ProTourPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Emrakul, the Aeons Torn", 2017, Rarity.MYTHIC, mage.cards.e.EmrakulTheAeonsTorn.class));
         cards.add(new SetCardInfo("Eternal Dragon", 2007, Rarity.RARE, mage.cards.e.EternalDragon.class));
         //cards.add(new SetCardInfo("Experimental Frenzy", "2019-2", Rarity.RARE, mage.cards.e.ExperimentalFrenzy.class));
+        cards.add(new SetCardInfo("Lava Spike", "2022-1", Rarity.RARE, mage.cards.l.LavaSpike.class));
         cards.add(new SetCardInfo("Liliana of the Veil", 2015, Rarity.MYTHIC, mage.cards.l.LilianaOfTheVeil.class));
         cards.add(new SetCardInfo("Mirari's Wake", 2008, Rarity.RARE, mage.cards.m.MirarisWake.class));
         cards.add(new SetCardInfo("Noble Hierarch", 2018, Rarity.RARE, mage.cards.n.NobleHierarch.class));
+        cards.add(new SetCardInfo("Nykthos, Shrine to Nyx", "2022-3", Rarity.RARE, mage.cards.n.NykthosShrineToNyx.class));
         //cards.add(new SetCardInfo("Pteramander", "2019-1", Rarity.UNCOMMON, mage.cards.p.Pteramander.class));
         cards.add(new SetCardInfo("Snapcaster Mage", 2016, Rarity.MYTHIC, mage.cards.s.SnapcasterMage.class));
-        cards.add(new SetCardInfo("Surgical Extraction", "2020-2", Rarity.RARE, mage.cards.s.SurgicalExtraction.class));
+        //cards.add(new SetCardInfo("Surgical Extraction", "2020-2", Rarity.RARE, mage.cards.s.SurgicalExtraction.class));
+        cards.add(new SetCardInfo("Teferi, Hero of Dominaria", "2022-2", Rarity.MYTHIC, mage.cards.t.TeferiHeroOfDominaria.class));
         cards.add(new SetCardInfo("Treva, the Renewer", 2009, Rarity.RARE, mage.cards.t.TrevaTheRenewer.class));
         //cards.add(new SetCardInfo("Vraska, Golgari Queen", "2019-3", Rarity.MYTHIC, mage.cards.v.VraskaGolgariQueen.class));
     }

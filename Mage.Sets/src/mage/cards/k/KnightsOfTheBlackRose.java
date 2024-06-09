@@ -8,6 +8,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +36,7 @@ public final class KnightsOfTheBlackRose extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Knights of the Black Rose enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Whenever an opponent becomes the monarch, if you were the monarch as the turn began, that player loses 2 life and you gain 2 life.
         Ability ability = new KnightsOfTheBlackRoseTriggeredAbility(new LoseLifeTargetEffect(2));
@@ -60,7 +61,7 @@ class KnightsOfTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent becomes the monarch, if you were the monarch as the turn began, ");
     }
 
-    public KnightsOfTheBlackRoseTriggeredAbility(final KnightsOfTheBlackRoseTriggeredAbility ability) {
+    private KnightsOfTheBlackRoseTriggeredAbility(final KnightsOfTheBlackRoseTriggeredAbility ability) {
         super(ability);
     }
 

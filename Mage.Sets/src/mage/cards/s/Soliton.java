@@ -27,7 +27,7 @@ public final class Soliton extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{U}")));
     }
 
-    public Soliton (final Soliton card) {
+    private Soliton(final Soliton card) {
         super(card);
     }
 

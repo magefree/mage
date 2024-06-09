@@ -47,12 +47,12 @@ public final class ViashinoSandswimmer extends CardImpl {
 
 class ViashinoSandswimmerEffect extends OneShotEffect {
 
-    public ViashinoSandswimmerEffect() {
+    ViashinoSandswimmerEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, return {this} to its owner's hand. If you lose the flip, sacrifice {this}";
     }
 
-    public ViashinoSandswimmerEffect(ViashinoSandswimmerEffect effect) {
+    private ViashinoSandswimmerEffect(final ViashinoSandswimmerEffect effect) {
         super(effect);
     }
 

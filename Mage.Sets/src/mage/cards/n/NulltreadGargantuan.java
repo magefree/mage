@@ -33,7 +33,7 @@ public final class NulltreadGargantuan extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new NulltreadGargantuanEffect()));
     }
 
-    public NulltreadGargantuan(final NulltreadGargantuan card) {
+    private NulltreadGargantuan(final NulltreadGargantuan card) {
         super(card);
     }
 
@@ -62,13 +62,13 @@ class NulltreadGargantuanEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !game.getState().getBattlefield().contains(
+        if (player == null || !game.getBattlefield().contains(
                 StaticFilters.FILTER_CONTROLLED_CREATURE, source, game, 1
         )) {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && player.putCardsOnTopOfLibrary(permanent, game, source, false);

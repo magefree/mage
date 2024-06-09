@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -11,8 +10,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
  *
@@ -31,9 +28,8 @@ public final class Overburden extends CardImpl {
                 new ReturnToHandChosenPermanentEffect(RETURN_FILTER),
                 StaticFilters.FILTER_CREATURE_NON_TOKEN,
                 false,
-                SetTargetPointer.PLAYER,
-                "Whenever a player puts a nontoken creature onto the battlefield,"
-                + " that player returns a land they control to its owner's hand."));
+                SetTargetPointer.PLAYER
+        ).setTriggerPhrase("Whenever a player puts a nontoken creature onto the battlefield, "));
     }
 
     private Overburden(final Overburden card) {

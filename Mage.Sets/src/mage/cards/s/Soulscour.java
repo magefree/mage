@@ -30,7 +30,7 @@ public final class Soulscour extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Soulscour (final Soulscour card) {
+    private Soulscour(final Soulscour card) {
         super(card);
     }
 

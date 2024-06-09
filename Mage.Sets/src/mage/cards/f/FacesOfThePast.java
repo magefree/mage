@@ -40,12 +40,12 @@ public final class FacesOfThePast extends CardImpl {
 
 class FacesOfThePastEffect extends OneShotEffect {
 
-    public FacesOfThePastEffect() {
+    FacesOfThePastEffect() {
         super(Outcome.Benefit);
         this.staticText = "tap all untapped creatures that share a creature type with it or untap all tapped creatures that share a creature type with it";
     }
 
-    public FacesOfThePastEffect(final FacesOfThePastEffect effect) {
+    private FacesOfThePastEffect(final FacesOfThePastEffect effect) {
         super(effect);
     }
 
@@ -61,13 +61,13 @@ class FacesOfThePastEffect extends OneShotEffect {
             Player controller = game.getPlayer(targetPermanent.getControllerId());
             if (controller != null) {
                 if (controller.chooseUse(outcome, "Tap all untapped creatures that share a creature type with " + targetPermanent.getLogName() + "? (Otherwise, untaps all tapped)", source, game)) {
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                         if (!permanent.isTapped() && targetPermanent.shareCreatureTypes(game, permanent)) {
                             permanent.tap(source, game);
                         }
                     }
                 } else {
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                         if (permanent.isTapped() && targetPermanent.shareCreatureTypes(game, permanent)) {
                             permanent.untap(game);
                         }

@@ -60,7 +60,7 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature enters the battlefield under enchanted player's control, ");
     }
 
-    public TrespassersCurseTriggeredAbility(final TrespassersCurseTriggeredAbility ability) {
+    private TrespassersCurseTriggeredAbility(final TrespassersCurseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -72,10 +72,12 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.sourceId);
+        Permanent permanent = game.getPermanent(event.getTargetId());
         if (enchantment != null
+                && permanent != null
                 && enchantment.getAttachedTo() != null
-                && game.getControllerId(event.getTargetId()).equals(enchantment.getAttachedTo())
-                && game.getPermanent(event.getTargetId()).isCreature(game)) {
+                && permanent.getControllerId().equals(enchantment.getAttachedTo())
+                && permanent.isCreature(game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(enchantment.getAttachedTo(), game));
             }
@@ -92,12 +94,12 @@ class TrespassersCurseTriggeredAbility extends TriggeredAbilityImpl {
 
 class TrespassersCurseEffect extends OneShotEffect {
 
-    public TrespassersCurseEffect() {
+    TrespassersCurseEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player loses 1 life and you gain 1 life.";
     }
 
-    public TrespassersCurseEffect(final TrespassersCurseEffect effect) {
+    private TrespassersCurseEffect(final TrespassersCurseEffect effect) {
         super(effect);
     }
 

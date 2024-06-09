@@ -21,7 +21,7 @@ public final class Unmake extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Unmake (final Unmake card) {
+    private Unmake(final Unmake card) {
         super(card);
     }
 

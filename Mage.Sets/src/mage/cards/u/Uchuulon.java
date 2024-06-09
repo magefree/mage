@@ -51,7 +51,7 @@ public final class Uchuulon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Uchuulon's power is equal to the number of Crabs, Oozes, and/or Horrors you control.
-        this.addAbility(new SimpleStaticAbility(new SetBasePowerSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerSourceEffect(xValue)));
 
         // Horrific Symbiosis — At the beginning of your end step, exile up to one target creature card from an opponent's graveyard. If you, create a token that's a copy of Uchuulon.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
@@ -78,7 +78,7 @@ class UchuulonEffect extends OneShotEffect {
     UchuulonEffect() {
         super(Outcome.Benefit);
         staticText = "exile up to one target creature card from an opponent's graveyard. " +
-                "If you, create a token that's a copy of {this}";
+                "If you do, create a token that's a copy of {this}";
     }
 
     private UchuulonEffect(final UchuulonEffect effect) {

@@ -59,7 +59,7 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
         this.setColor = setColor;
     }
 
-    public BecomesColorSourceEffect(final BecomesColorSourceEffect effect) {
+    protected BecomesColorSourceEffect(final BecomesColorSourceEffect effect) {
         super(effect);
         this.setColor = effect.setColor;
     }
@@ -71,8 +71,11 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
+            discard();
             return;
         }
         if (setColor == null) {
@@ -86,7 +89,6 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
                 game.informPlayers(controller.getLogName() + " has chosen the color: " + setColor.toString());
             }
         }
-        super.init(source, game);
     }
 
     @Override
@@ -113,6 +115,6 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
             return staticText;
         }
         return "{this} becomes " + (setColor == null ? "the color of your choice" : setColor.getDescription())
-                + (' ' + duration.toString()).trim();
+                + (duration.toString().isEmpty() ? "" : " " + duration.toString());
     }
 }

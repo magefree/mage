@@ -1,4 +1,3 @@
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -23,7 +22,8 @@ public final class UnityOfPurpose extends CardImpl {
 
         // Untap each creature you control with a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(
-                StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1, "Untap each creature you control with a +1/+1 counter on it"));
+                StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1, "Untap each creature you control with a +1/+1 counter on it")
+                .concatBy("<br>"));
     }
 
     private UnityOfPurpose(final UnityOfPurpose card) {

@@ -12,8 +12,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -21,6 +21,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -29,8 +30,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class PlagueReaver extends CardImpl {
-
-    private static final FilterCard filter = new FilterCard("two cards");
 
     public PlagueReaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -46,9 +45,10 @@ public final class PlagueReaver extends CardImpl {
 
         // Discard two cards, Sacrifice Plague Reaver: Choose target opponent. Return Plague Reaver to the battlefield under that player's control at the beginning of their next upkeep.
         Ability ability = new SimpleActivatedAbility(
-                new PlagueReaverTriggerEffect(), new DiscardTargetCost(new TargetCardInHand(2, filter))
+                new PlagueReaverTriggerEffect(), new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS))
         );
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
@@ -128,7 +128,7 @@ class PlagueReaverDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     PlagueReaverDelayedTriggeredAbility(UUID playerId, Ability source) {
         super(new PlagueReaverReturnEffect(playerId).setTargetPointer(
-                new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter())
+                new FixedTarget(source.getSourceId(), source.getSourceObjectZoneChangeCounter() + 1)
         ), Duration.Custom, true, false);
         this.playerId = playerId;
     }
@@ -182,7 +182,7 @@ class PlagueReaverReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(playerId);
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         return player != null
                 && card != null
                 && player.moveCards(card, Zone.BATTLEFIELD, source, game);

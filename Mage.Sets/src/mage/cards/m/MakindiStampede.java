@@ -4,7 +4,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class MakindiStampede extends ModalDoubleFacesCard {
+public final class MakindiStampede extends ModalDoubleFacedCard {
 
     public MakindiStampede(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

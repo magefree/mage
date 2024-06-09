@@ -34,7 +34,7 @@ public final class BaronVonCount extends CardImpl {
 
     public BaronVonCount(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.VILLAIN);
         this.power = new MageInt(3);
@@ -62,12 +62,12 @@ public final class BaronVonCount extends CardImpl {
 
 class BaronVonCountPutCounterEffect extends OneShotEffect {
 
-    public BaronVonCountPutCounterEffect() {
+    BaronVonCountPutCounterEffect() {
         super(Outcome.Benefit);
         staticText = "with a doom counter on \"5.\"";
     }
 
-    public BaronVonCountPutCounterEffect(final BaronVonCountPutCounterEffect effect) {
+    private BaronVonCountPutCounterEffect(final BaronVonCountPutCounterEffect effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a spell with the indicated numeral in its mana cost, text box, power, or toughness, ");
     }
 
-    public BaronVonCountTriggeredAbility(final BaronVonCountTriggeredAbility abiltity) {
+    private BaronVonCountTriggeredAbility(final BaronVonCountTriggeredAbility abiltity) {
         super(abiltity);
     }
 
@@ -141,7 +141,7 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
                         || String.valueOf(spell.getToughness().getBaseValue()).contains(doomString)) {
                     return true;
                 } else {
-                    for (String string : spell.getCard().getRules()) {
+                    for (String string : spell.getCard().getRules(game)) {
                         if (string.contains(doomString)) {
                             return true;
                         }
@@ -155,12 +155,12 @@ class BaronVonCountTriggeredAbility extends TriggeredAbilityImpl {
 
 class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
 
-    public BaronVonCountMoveDoomCounterEffect() {
+    BaronVonCountMoveDoomCounterEffect() {
         super(Outcome.Neutral);
         staticText = "move the doom counter one numeral to the left";
     }
 
-    public BaronVonCountMoveDoomCounterEffect(final BaronVonCountMoveDoomCounterEffect effect) {
+    private BaronVonCountMoveDoomCounterEffect(final BaronVonCountMoveDoomCounterEffect effect) {
         super(effect);
     }
 
@@ -202,7 +202,7 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When the doom counter moves from \"1,\" ");
     }
 
-    public BaronVonCountSecondTriggeredAbility(BaronVonCountSecondTriggeredAbility ability) {
+    private BaronVonCountSecondTriggeredAbility(final BaronVonCountSecondTriggeredAbility ability) {
         super(ability);
     }
 
@@ -224,12 +224,12 @@ class BaronVonCountSecondTriggeredAbility extends TriggeredAbilityImpl {
 
 class BaronVonCountDestroyPlayerEffect extends OneShotEffect {
 
-    public BaronVonCountDestroyPlayerEffect() {
+    BaronVonCountDestroyPlayerEffect() {
         super(Outcome.Neutral);
         staticText = "destroy target player and put that doom counter on \"5.\"";
     }
 
-    public BaronVonCountDestroyPlayerEffect(final BaronVonCountDestroyPlayerEffect effect) {
+    private BaronVonCountDestroyPlayerEffect(final BaronVonCountDestroyPlayerEffect effect) {
         super(effect);
     }
 

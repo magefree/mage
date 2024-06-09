@@ -10,7 +10,6 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
- *
  * @author LevelX2
  */
 public class AttacksIfAbleAllEffect extends RequirementEffect {
@@ -39,7 +38,7 @@ public class AttacksIfAbleAllEffect extends RequirementEffect {
         }
     }
 
-    public AttacksIfAbleAllEffect(final AttacksIfAbleAllEffect effect) {
+    protected AttacksIfAbleAllEffect(final AttacksIfAbleAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.eachCombat = effect.eachCombat;

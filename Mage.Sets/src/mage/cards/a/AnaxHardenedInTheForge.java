@@ -34,7 +34,7 @@ public final class AnaxHardenedInTheForge extends CardImpl {
     public AnaxHardenedInTheForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMIGOD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
@@ -42,7 +42,7 @@ public final class AnaxHardenedInTheForge extends CardImpl {
         // Anax's power is equal to your devotion to red.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerSourceEffect(DevotionCount.R, Duration.EndOfGame)
+                new SetBasePowerSourceEffect(DevotionCount.R)
                         .setText("{this}'s power is equal to your devotion to red")
         ).addHint(DevotionCount.R.getHint()));
 

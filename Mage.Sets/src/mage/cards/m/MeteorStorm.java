@@ -27,7 +27,7 @@ public final class MeteorStorm extends CardImpl {
 
         // {2}{R}{G}, Discard two cards at random: Meteor Storm deals 4 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl<>("{2}{R}{G}"));
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards at random")), true));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("cards at random")), true));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

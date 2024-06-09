@@ -68,7 +68,7 @@ class ExtractBrainEffect extends OneShotEffect {
         TargetCardInHand target = new TargetCardInHand(
                 Math.min(opponent.getHand().size(), xValue), StaticFilters.FILTER_CARD
         );
-        opponent.choose(Outcome.Detriment, opponent.getHand(), target, game);
+        opponent.choose(Outcome.Detriment, opponent.getHand(), target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         controller.lookAtCards(source, null, cards, game);
         CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);

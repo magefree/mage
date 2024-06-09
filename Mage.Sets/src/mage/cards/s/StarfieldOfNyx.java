@@ -100,7 +100,7 @@ public final class StarfieldOfNyx extends CardImpl {
 
         }
 
-        public StarfieldOfNyxEffect(final StarfieldOfNyxEffect effect) {
+        private StarfieldOfNyxEffect(final StarfieldOfNyxEffect effect) {
             super(effect);
         }
 

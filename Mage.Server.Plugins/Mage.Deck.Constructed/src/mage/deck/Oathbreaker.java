@@ -84,8 +84,8 @@ public class Oathbreaker extends Constructed {
         boolean valid = true;
         errorsList.clear();
 
-        if (deck.getCards().size() + deck.getSideboard().size() != 60) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + 60 + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        if (deck.getMaindeckCards().size() + deck.getSideboard().size() != 60) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + 60 + " cards: has " + (deck.getMaindeckCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 

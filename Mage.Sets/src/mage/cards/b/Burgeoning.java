@@ -42,7 +42,7 @@ class BurgeoningTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
     }
 
-    BurgeoningTriggeredAbility(BurgeoningTriggeredAbility ability) {
+    private BurgeoningTriggeredAbility(final BurgeoningTriggeredAbility ability) {
         super(ability);
     }
 

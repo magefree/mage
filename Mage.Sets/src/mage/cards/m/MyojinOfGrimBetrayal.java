@@ -40,7 +40,7 @@ public class MyojinOfGrimBetrayal extends CardImpl {
     public MyojinOfGrimBetrayal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);
@@ -61,9 +61,9 @@ public class MyojinOfGrimBetrayal extends CardImpl {
         ability.addWatcher(new CardsPutIntoGraveyardWatcher());
         this.addAbility(ability);
     }
-    
+
     private MyojinOfGrimBetrayal(final MyojinOfGrimBetrayal card) { super(card); }
-    
+
     @Override
     public MyojinOfGrimBetrayal copy() {return new MyojinOfGrimBetrayal(this); }
 }
@@ -88,9 +88,11 @@ class MyojinOfGrimBetrayalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         CardsPutIntoGraveyardWatcher watcher = game.getState().getWatcher(CardsPutIntoGraveyardWatcher.class);
-        if (controller == null || watcher == null) { return false; }
+        if (controller == null || watcher == null) {
+            return false;
+        }
 
-        Cards cards = new CardsImpl(watcher.getCardsPutIntoGraveyardFromBattlefield(game));
+        Cards cards = new CardsImpl(watcher.getCardsPutIntoGraveyardFromAnywhere(game));
         cards.removeIf(uuid -> !game.getCard(uuid).isCreature(game));
 
         return controller.moveCards(cards, Zone.BATTLEFIELD, source, game);

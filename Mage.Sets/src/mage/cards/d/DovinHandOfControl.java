@@ -33,7 +33,7 @@ public final class DovinHandOfControl extends CardImpl {
     public DovinHandOfControl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W/U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOVIN);
         this.setStartingLoyalty(5);
 
@@ -41,12 +41,10 @@ public final class DovinHandOfControl extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(1, filter, TargetController.OPPONENT)));
 
         // -1: Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls.
-        Ability ability = new LoyaltyAbility(new PreventDamageToTargetEffect(
-                Duration.UntilYourNextTurn
-        ).setText("Until your next turn, prevent all damage that would be dealt to"), -1);
-        ability.addEffect(new PreventDamageByTargetEffect(
-                Duration.UntilYourNextTurn
-        ).setText("and dealt by target permanent an opponent controls"));
+        Ability ability = new LoyaltyAbility(new PreventDamageToTargetEffect(Duration.UntilYourNextTurn)
+                .setText("Until your next turn, prevent all damage that would be dealt to"), -1);
+        ability.addEffect(new PreventDamageByTargetEffect(Duration.UntilYourNextTurn, false)
+                .setText("and dealt by target permanent an opponent controls"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT));
         this.addAbility(ability);
     }

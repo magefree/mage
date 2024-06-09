@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.abilities.keyword.UndauntedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class CoastalBreach extends CardImpl {
         // Undaunted
         this.addAbility(new UndauntedAbility());
         // Return all nonland permanents to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent()));
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_PERMANENTS_NON_LAND));
     }
 
     private CoastalBreach(final CoastalBreach card) {

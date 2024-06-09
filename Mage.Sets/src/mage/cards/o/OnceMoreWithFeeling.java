@@ -53,12 +53,12 @@ public final class OnceMoreWithFeeling extends CardImpl {
 
 class OnceMoreWithFeelingEffect extends OneShotEffect {
 
-    public OnceMoreWithFeelingEffect() {
+    OnceMoreWithFeelingEffect() {
         super(Outcome.Detriment);
         staticText = "Exile all permanents and all cards from all graveyards. Each player shuffles their hand into their library";
     }
 
-    public OnceMoreWithFeelingEffect(final OnceMoreWithFeelingEffect effect) {
+    private OnceMoreWithFeelingEffect(final OnceMoreWithFeelingEffect effect) {
         super(effect);
     }
 

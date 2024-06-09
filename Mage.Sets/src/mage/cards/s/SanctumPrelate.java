@@ -49,12 +49,12 @@ public final class SanctumPrelate extends CardImpl {
 
 class ChooseNumberEffect extends OneShotEffect {
 
-    public ChooseNumberEffect() {
+    ChooseNumberEffect() {
         super(Outcome.Detriment);
         staticText = "choose a number";
     }
 
-    public ChooseNumberEffect(final ChooseNumberEffect effect) {
+    private ChooseNumberEffect(final ChooseNumberEffect effect) {
         super(effect);
     }
 
@@ -83,20 +83,13 @@ class ChooseNumberEffect extends OneShotEffect {
 
 class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    Integer choiceValue;
-
-    public SanctumPrelateReplacementEffect() {
+    SanctumPrelateReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Noncreature spells with mana value equal to the chosen number can't be cast";
     }
 
-    public SanctumPrelateReplacementEffect(final SanctumPrelateReplacementEffect effect) {
+    private SanctumPrelateReplacementEffect(final SanctumPrelateReplacementEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -120,10 +113,10 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        choiceValue = (Integer) game.getState().getValue(source.getSourceId().toString());
+        Integer choiceValue = (Integer) game.getState().getValue(source.getSourceId().toString());
         Spell spell = game.getStack().getSpell(event.getTargetId());
 
-        if (spell != null && !spell.isCreature(game)) {
+        if (spell != null && !spell.isCreature(game) && choiceValue != null) {
             return spell.getManaValue() == choiceValue;
         }
         return false;

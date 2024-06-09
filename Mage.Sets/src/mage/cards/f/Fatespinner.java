@@ -1,10 +1,8 @@
 
 package mage.cards.f;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -50,7 +48,7 @@ public final class Fatespinner extends CardImpl {
 
 class FatespinnerChooseEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("Draw step");
@@ -60,10 +58,10 @@ class FatespinnerChooseEffect extends OneShotEffect {
 
     public FatespinnerChooseEffect() {
         super(Outcome.Detriment);
-        staticText = "At the beginning of each opponent's upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.";
+        staticText = "that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.";
     }
 
-    public FatespinnerChooseEffect(final FatespinnerChooseEffect effect) {
+    private FatespinnerChooseEffect(final FatespinnerChooseEffect effect) {
         super(effect);
     }
 
@@ -100,7 +98,7 @@ class FatespinnerSkipEffect extends ReplacementEffectImpl {
         this.phase = phase;
     }
 
-    public FatespinnerSkipEffect(final FatespinnerSkipEffect effect) {
+    private FatespinnerSkipEffect(final FatespinnerSkipEffect effect) {
         super(effect);
         this.phase = effect.phase;
     }
@@ -108,11 +106,6 @@ class FatespinnerSkipEffect extends ReplacementEffectImpl {
     @Override
     public FatespinnerSkipEffect copy() {
         return new FatespinnerSkipEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

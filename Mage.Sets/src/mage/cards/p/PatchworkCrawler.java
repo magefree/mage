@@ -2,7 +2,6 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -76,8 +75,8 @@ class PatchworkCrawlerEffect extends ContinuousEffectImpl {
         }
         for (Card card : exileZone.getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
             for (Ability ability : card.getAbilities(game)) {
-                if (ability instanceof ActivatedAbility) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
+                if (ability.isActivatedAbility()) {
+                    permanent.addAbility(ability, source.getSourceId(), game, true);
                 }
             }
         }

@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -8,7 +7,7 @@ import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -22,9 +21,8 @@ public final class BeholdTheBeyond extends CardImpl {
 
         // Discard your hand. Search your library for three cards and put those cards into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new DiscardHandControllerEffect());
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCard("cards"));
-        Effect effect = new SearchLibraryPutInHandEffect(target);
-        effect.setText("Search your library for three cards, put those cards into your hand, then shuffle");
+        TargetCardInLibrary target = new TargetCardInLibrary(3, 3, StaticFilters.FILTER_CARD_CARDS);
+        Effect effect = new SearchLibraryPutInHandEffect(target, false);
         this.getSpellAbility().addEffect(effect);
     }
 

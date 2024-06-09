@@ -62,7 +62,7 @@ public final class ClashOfRealities extends CardImpl {
             super(Zone.BATTLEFIELD, effect, rule, true);
         }
 
-        public ClashOfRealitiesTriggeredAbility(ClashOfRealitiesTriggeredAbility ability) {
+        private ClashOfRealitiesTriggeredAbility(final ClashOfRealitiesTriggeredAbility ability) {
             super(ability);
         }
 

@@ -61,12 +61,12 @@ public final class ScreamsFromWithin extends CardImpl {
 
 class ScreamsFromWithinEffect extends OneShotEffect {
 
-    public ScreamsFromWithinEffect() {
+    ScreamsFromWithinEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "return {this} from your graveyard to the battlefield";
     }
 
-    public ScreamsFromWithinEffect(final ScreamsFromWithinEffect effect) {
+    private ScreamsFromWithinEffect(final ScreamsFromWithinEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class ScreamsFromWithinEffect extends OneShotEffect {
         Card aura = game.getCard(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (aura != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD && player != null && player.getGraveyard().contains(source.getSourceId())) {
-            for (Permanent creaturePermanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
+            for (Permanent creaturePermanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 for (Target target : aura.getSpellAbility().getTargets()) {
                     if (target.canTarget(creaturePermanent.getId(), game)) {
                         return player.moveCards(aura, Zone.BATTLEFIELD, source, game);

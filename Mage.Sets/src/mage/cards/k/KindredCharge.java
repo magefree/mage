@@ -48,13 +48,13 @@ public final class KindredCharge extends CardImpl {
 
 class KindredChargeEffect extends OneShotEffect {
 
-    public KindredChargeEffect() {
+    KindredChargeEffect() {
         super(Outcome.Copy);
         this.staticText = "For each creature you control of the chosen type, create a token that's a copy of that creature. "
                 + "Those tokens gain haste. Exile them at the beginning of the next end step";
     }
 
-    public KindredChargeEffect(final KindredChargeEffect effect) {
+    private KindredChargeEffect(final KindredChargeEffect effect) {
         super(effect);
     }
 

@@ -76,6 +76,7 @@ class RareBGoneEffect extends OneShotEffect {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterPermanent, playerId, game)) {
                 permanent.sacrifice(source, game);
             }
+            game.getState().processAction(game);
             Cards cards = player.getHand();
             player.revealCards(source, cards, game);
             player.discard(new CardsImpl(cards.getCards(filterCard, game)), false, source, game);

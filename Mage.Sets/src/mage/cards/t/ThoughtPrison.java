@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -32,8 +31,6 @@ import java.util.UUID;
  * @author spjspj
  */
 public final class ThoughtPrison extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("spell cast");
 
     public ThoughtPrison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
@@ -68,10 +65,10 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
 
     public ThoughtPrisonImprintEffect() {
         super(Outcome.Benefit);
-        staticText = "exile a nonland card from target player's hand";
+        staticText = "have target player reveal their hand. If you do, choose a nonland card from it and exile that card";
     }
 
-    public ThoughtPrisonImprintEffect(ThoughtPrisonImprintEffect effect) {
+    private ThoughtPrisonImprintEffect(final ThoughtPrisonImprintEffect effect) {
         super(effect);
     }
 
@@ -84,7 +81,7 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
             targetPlayer.revealCards("Thought Prison ", targetPlayer.getHand(), game);
 
             TargetCard target = new TargetCard(1, Zone.HAND, filter);
-            if (player.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+            if (player.choose(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = targetPlayer.getHand().get(targetId, game);
@@ -118,7 +115,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player casts a spell that shares a color or mana value with the exiled card, ");
     }
 
-    public ThoughtPrisonTriggeredAbility(final ThoughtPrisonTriggeredAbility ability) {
+    private ThoughtPrisonTriggeredAbility(final ThoughtPrisonTriggeredAbility ability) {
         super(ability);
     }
 
@@ -177,12 +174,12 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
 
 class ThoughtPrisonDamageEffect extends OneShotEffect {
 
-    public ThoughtPrisonDamageEffect() {
+    ThoughtPrisonDamageEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to that player";
     }
 
-    public ThoughtPrisonDamageEffect(final ThoughtPrisonDamageEffect effect) {
+    private ThoughtPrisonDamageEffect(final ThoughtPrisonDamageEffect effect) {
         super(effect);
     }
 
@@ -193,7 +190,7 @@ class ThoughtPrisonDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             targetPlayer.damage(2, source.getSourceId(), source, game);
             return true;

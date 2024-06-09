@@ -52,7 +52,7 @@ class ConsecratedSphinxTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), true);
     }
 
-    ConsecratedSphinxTriggeredAbility(final ConsecratedSphinxTriggeredAbility ability) {
+    private ConsecratedSphinxTriggeredAbility(final ConsecratedSphinxTriggeredAbility ability) {
         super(ability);
     }
 

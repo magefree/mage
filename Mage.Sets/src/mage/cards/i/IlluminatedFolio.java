@@ -52,14 +52,14 @@ public final class IlluminatedFolio extends CardImpl {
 
 class IlluminatedFolioTarget extends TargetCardInHand {
 
-    private static final FilterCard filter = new FilterCard("two cards from your hand that share a color");
+    private static final FilterCard filter = new FilterCard("cards from your hand that share a color");
 
     static {
         filter.add(Predicates.not(ColorlessPredicate.instance));
     }
 
     public IlluminatedFolioTarget() {
-        super(2, 2, filter);
+        super(2, filter);
     }
 
     private IlluminatedFolioTarget(final IlluminatedFolioTarget target) {

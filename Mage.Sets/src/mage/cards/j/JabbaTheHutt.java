@@ -44,7 +44,7 @@ public final class JabbaTheHutt extends CardImpl {
 
     public JabbaTheHutt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUTT);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(6);
@@ -78,12 +78,12 @@ public final class JabbaTheHutt extends CardImpl {
 
 class JabbaTheHuttEffect extends OneShotEffect {
 
-    public JabbaTheHuttEffect() {
+    JabbaTheHuttEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a tapped 4/4 red Hunter creature token. It fights another target creature an opponent control with a bounty counter on it";
     }
 
-    public JabbaTheHuttEffect(final JabbaTheHuttEffect effect) {
+    private JabbaTheHuttEffect(final JabbaTheHuttEffect effect) {
         super(effect);
     }
 

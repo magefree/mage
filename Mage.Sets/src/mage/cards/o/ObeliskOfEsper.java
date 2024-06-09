@@ -23,7 +23,7 @@ public final class ObeliskOfEsper extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public ObeliskOfEsper (final ObeliskOfEsper card) {
+    private ObeliskOfEsper(final ObeliskOfEsper card) {
         super(card);
     }
 

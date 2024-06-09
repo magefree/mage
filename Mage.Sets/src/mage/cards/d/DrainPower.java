@@ -1,13 +1,6 @@
-
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -18,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.ManaPoolItem;
@@ -26,8 +19,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 
+import java.util.*;
+
 /**
- *
  * @author L_J
  */
 public final class DrainPower extends CardImpl {
@@ -59,7 +53,7 @@ class DrainPowerEffect extends OneShotEffect {
         this.staticText = "Target player activates a mana ability of each land they control. Then that player loses all unspent mana and you add the mana lost this way";
     }
 
-    public DrainPowerEffect(final DrainPowerEffect effect) {
+    private DrainPowerEffect(final DrainPowerEffect effect) {
         super(effect);
     }
 
@@ -85,7 +79,7 @@ class DrainPowerEffect extends OneShotEffect {
                         List<ActivatedManaAbilityImpl> manaAbilities = new ArrayList<>();
                         abilitySearch:
                         for (Ability ability : permanent.getAbilities()) {
-                            if (ability instanceof ActivatedAbility && ability.getAbilityType() == AbilityType.MANA) {
+                            if (AbilityType.ACTIVATED_MANA.equals(ability.getAbilityType())) {
                                 ActivatedManaAbilityImpl manaAbility = (ActivatedManaAbilityImpl) ability;
                                 if (manaAbility.canActivate(targetPlayer.getId(), game).canActivate()) {
                                     // canActivate can't check for mana abilities that require a mana cost, if the payment isn't possible (Cabal Coffers etc)
@@ -112,9 +106,9 @@ class DrainPowerEffect extends OneShotEffect {
                 Permanent permanent;
                 if (permList.size() > 1 || target != null) {
                     FilterLandPermanent filter2 = new FilterLandPermanent("land you control to tap for mana (remaining: " + permList.size() + ')');
-                    filter2.add(new PermanentInListPredicate(permList));
+                    filter2.add(new PermanentReferenceInCollectionPredicate(permList, game));
                     target = new TargetPermanent(1, 1, filter2, true);
-                    while (!target.isChosen() && target.canChoose(targetPlayer.getId(), source, game) && targetPlayer.canRespond()) {
+                    while (!target.isChosen(game) && target.canChoose(targetPlayer.getId(), source, game) && targetPlayer.canRespond()) {
                         targetPlayer.chooseTarget(Outcome.Neutral, target, source, game);
                     }
                     permanent = game.getPermanent(target.getFirstTarget());
@@ -127,7 +121,7 @@ class DrainPowerEffect extends OneShotEffect {
                         i++;
                         if (manaAbilitiesMap.get(permanent).size() <= i
                                 || targetPlayer.chooseUse(Outcome.Neutral, "Activate mana ability \"" + manaAbility.getRule() + "\" of " + permanent.getLogName()
-                                        + "? (Choose \"no\" to activate next mana ability)", source, game)) {
+                                + "? (Choose \"no\" to activate next mana ability)", source, game)) {
                             boolean originalCanUndo = manaAbility.isUndoPossible();
                             manaAbility.setUndoPossible(false); // prevents being able to undo Drain Power
                             if (targetPlayer.activateAbility(manaAbility, game)) {

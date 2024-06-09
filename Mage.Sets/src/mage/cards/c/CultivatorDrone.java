@@ -1,13 +1,11 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -24,14 +22,15 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CultivatorDrone extends CardImpl {
 
     public CultivatorDrone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.DRONE);
         this.power = new MageInt(2);
@@ -79,13 +78,13 @@ class CultivatorDroneManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
-        if (source instanceof SpellAbility) {
+        if (source instanceof SpellAbility && !source.isActivated()) {
             MageObject object = game.getObject(source);
             if (object != null && object.getColor(game).isColorless()) {
                 return true;
             }
         }
-        if (source instanceof ActivatedAbility) {
+        if (source.isActivatedAbility() && !source.isActivated()) {
             Permanent object = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (object != null && object.getColor(game).isColorless()) {
                 return true;

@@ -72,7 +72,7 @@ class SealedFateEffect extends OneShotEffect {
             return controller.moveCards(cards, Zone.EXILED, source, game);
         }
         TargetCard targetCard = new TargetCardInLibrary();
-        controller.choose(outcome, cards, targetCard, game);
+        controller.choose(outcome, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card != null) {
             controller.moveCards(card, Zone.EXILED, source, game);

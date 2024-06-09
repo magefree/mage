@@ -26,7 +26,7 @@ public final class GolgariSignet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GolgariSignet (final GolgariSignet card) {
+    private GolgariSignet(final GolgariSignet card) {
         super(card);
     }
 

@@ -20,7 +20,7 @@ public class LivingMetalAbility extends SimpleStaticAbility {
         this.addHint(MyTurnHint.instance);
     }
 
-    public LivingMetalAbility(final LivingMetalAbility ability) {
+    protected LivingMetalAbility(final LivingMetalAbility ability) {
         super(ability);
     }
 

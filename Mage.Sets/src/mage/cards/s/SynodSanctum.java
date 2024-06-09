@@ -71,7 +71,7 @@ class SynodSanctumEffect extends OneShotEffect {
         staticText = "Exile target permanent you control";
     }
 
-    SynodSanctumEffect(SynodSanctumEffect effect) {
+    private SynodSanctumEffect(final SynodSanctumEffect effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class SynodSanctumEffect2 extends OneShotEffect {
         staticText = "Return all cards exiled with {this} to the battlefield under your control";
     }
 
-    SynodSanctumEffect2(SynodSanctumEffect2 effect) {
+    private SynodSanctumEffect2(final SynodSanctumEffect2 effect) {
         super(effect);
     }
 

@@ -79,11 +79,17 @@ class AllHallowsEveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card allHallowsEveCard = (Card) source.getSourceObject(game);
-        if (allHallowsEveCard == null)  { return false; }
+        if (allHallowsEveCard == null) {
+            return false;
+        }
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
-        if (allHallowsEveCard.getCounters(game).getCount(CounterType.SCREAM) > 0) { return false; }
+        if (allHallowsEveCard.getCounters(game).getCount(CounterType.SCREAM) > 0) {
+            return false;
+        }
 
         controller.moveCards(allHallowsEveCard, Zone.GRAVEYARD, source, game);
         Cards allCreatureCardsInGraveyards = new CardsImpl();

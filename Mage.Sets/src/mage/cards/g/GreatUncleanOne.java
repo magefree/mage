@@ -37,7 +37,7 @@ public final class GreatUncleanOne extends CardImpl {
         );
         ability.addEffect(new CreateTokenEffect(
                 new PlaguebearerOfNurgleToken(), GreatUncleanOneValue.instance
-        ).setText("then for each opponent who has less life than you, " +
+        ).setText("Then for each opponent who has less life than you, " +
                 "create a 1/3 black Demon creature token named Plaguebearer of Nurgle"));
         this.addAbility(ability.withFlavorWord("Reverberating Summons"));
     }
@@ -63,7 +63,7 @@ enum GreatUncleanOneValue implements DynamicValue {
         }
         int life = player.getLife();
         return game
-                .getOpponents(player.getId())
+                .getOpponents(player.getId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

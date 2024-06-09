@@ -52,12 +52,12 @@ public final class SifterWurm extends CardImpl {
 
 class SifterWurmEffect extends OneShotEffect {
 
-    public SifterWurmEffect() {
+    SifterWurmEffect() {
         super(Outcome.DrawCard);
         this.staticText = "scry 3, then reveal the top card of your library. You gain life equal to that card's mana value.";
     }
 
-    public SifterWurmEffect(final SifterWurmEffect effect) {
+    private SifterWurmEffect(final SifterWurmEffect effect) {
         super(effect);
     }
 

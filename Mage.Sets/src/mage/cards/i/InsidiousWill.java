@@ -4,7 +4,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class InsidiousWill extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
-        mode = new Mode(new CopyTargetSpellEffect());
+        mode = new Mode(new CopyTargetStackObjectEffect());
         mode.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.getSpellAbility().getModes().addMode(mode);
     }

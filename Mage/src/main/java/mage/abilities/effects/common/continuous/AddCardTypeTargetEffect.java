@@ -32,7 +32,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
 
     }
 
-    public AddCardTypeTargetEffect(final AddCardTypeTargetEffect effect) {
+    protected AddCardTypeTargetEffect(final AddCardTypeTargetEffect effect) {
         super(effect);
         this.addedCardTypes.addAll(effect.addedCardTypes);
     }
@@ -40,7 +40,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(targetId);
             if (target != null) {
                 for (CardType cardType : addedCardTypes) {
@@ -67,8 +67,8 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ");
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "it"));
+        sb.append(getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes ");
         boolean article = false;
         for (CardType cardType : addedCardTypes) {
             if (!article) {

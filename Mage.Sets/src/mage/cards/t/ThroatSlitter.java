@@ -60,7 +60,7 @@ class ThroatSlitterTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
 
-    ThroatSlitterTriggeredAbility(final ThroatSlitterTriggeredAbility ability) {
+    private ThroatSlitterTriggeredAbility(final ThroatSlitterTriggeredAbility ability) {
         super(ability);
     }
 

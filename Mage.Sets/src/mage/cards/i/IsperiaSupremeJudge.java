@@ -22,7 +22,7 @@ public final class IsperiaSupremeJudge extends CardImpl {
     public IsperiaSupremeJudge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{U}{U}");
         this.subtype.add(SubType.SPHINX);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         
 
 

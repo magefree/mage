@@ -56,12 +56,12 @@ public final class IncreasingVengeance extends CardImpl {
 
 class IncreasingVengeanceEffect extends OneShotEffect {
 
-    public IncreasingVengeanceEffect() {
+    IncreasingVengeanceEffect() {
         super(Outcome.BoostCreature);
         staticText = "Copy target instant or sorcery spell you control. If this spell was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies";
     }
 
-    public IncreasingVengeanceEffect(final IncreasingVengeanceEffect effect) {
+    private IncreasingVengeanceEffect(final IncreasingVengeanceEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class IncreasingVengeanceEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell == null) {
             return false;
         }

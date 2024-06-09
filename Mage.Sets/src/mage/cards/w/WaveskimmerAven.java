@@ -29,7 +29,7 @@ public final class WaveskimmerAven extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public WaveskimmerAven (final WaveskimmerAven card) {
+    private WaveskimmerAven(final WaveskimmerAven card) {
         super(card);
     }
 

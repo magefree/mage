@@ -2,7 +2,7 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,8 +27,9 @@ public final class VoraciousWurm extends CardImpl {
 
         // Voracious Wurm enters the battlefield with X +1/+1 counters on it, where X is the amount of life you've gained this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance(0), ControllerGotLifeCount.instance, true
-        )).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+                CounterType.P1P1.createInstance(0), ControllerGainedLifeCount.instance, true
+        ), "with X +1/+1 counters on it, where X is the amount of life you've gained this turn")
+                .addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private VoraciousWurm(final VoraciousWurm card) {

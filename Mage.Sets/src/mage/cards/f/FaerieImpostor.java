@@ -11,8 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,16 +51,9 @@ public final class FaerieImpostor extends CardImpl {
 
 class FaerieImpostorEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
-    private static final String effectText = "sacrifice it unless you return another creature you control to its owner's hand";
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     FaerieImpostorEffect() {
         super(Outcome.ReturnToHand);
-        staticText = effectText;
+        staticText = "sacrifice it unless you return another creature you control to its owner's hand";
     }
 
     private FaerieImpostorEffect(FaerieImpostorEffect effect) {
@@ -74,7 +66,7 @@ class FaerieImpostorEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(1, 1, filter, true);
+        TargetPermanent target = new TargetPermanent(1, 1, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, true);
         if (target.canChoose(controller.getId(), source, game)
                 && controller.chooseUse(outcome, "Return another creature you control to its owner's hand?", source, game)) {
             controller.chooseTarget(Outcome.ReturnToHand, target, source, game);

@@ -44,7 +44,7 @@ class PredatoryFocusEffect extends AsThoughEffectImpl {
         this.staticText = "You may have creatures you control assign their combat damage this turn as though they weren't blocked.";
     }
 
-    public PredatoryFocusEffect(PredatoryFocusEffect effect) {
+    private PredatoryFocusEffect(final PredatoryFocusEffect effect) {
         super(effect);
     }
 

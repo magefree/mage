@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -140,9 +141,12 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         }
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
+            if (player == null) {
+                return mana;
+            }
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
-            } else if (player == null || !player.choose(outcome, choice, game)) {
+            } else if (!player.choose(Outcome.PutManaInPool, choice, game)) {
                 return mana;
             }
             if (choice.getChoice() != null) {

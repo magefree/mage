@@ -46,7 +46,7 @@ class CerebralEruptionEffect extends OneShotEffect {
         staticText = "Target opponent reveals the top card of their library. {this} deals damage equal to the revealed card's mana value to that player and each creature they control. If a land card is revealed this way, return {this} to its owner's hand";
     }
 
-    CerebralEruptionEffect(final CerebralEruptionEffect effect) {
+    private CerebralEruptionEffect(final CerebralEruptionEffect effect) {
         super(effect);
     }
 

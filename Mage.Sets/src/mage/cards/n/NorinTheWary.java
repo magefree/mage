@@ -22,7 +22,7 @@ public final class NorinTheWary extends CardImpl {
 
     public NorinTheWary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -51,7 +51,7 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When a player casts a spell or a creature attacks, ");
     }
 
-    public NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {
+    private NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {
         super(ability);
     }
 

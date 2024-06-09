@@ -16,7 +16,8 @@ public enum CardIconColor {
 
     DEFAULT(),
     YELLOW(new Color(231, 203, 18), new Color(76, 76, 76), new Color(0, 0, 0)),
-    RED(new Color(255, 31, 75), new Color(76, 76, 76), new Color(229, 228, 228));
+    RED(new Color(255, 31, 75), new Color(76, 76, 76), new Color(229, 228, 228)),
+    GOLD(new Color(186, 105, 19), new Color(76, 76, 76), new Color(229, 228, 228));
 
     private final Color fillColor;
     private final Color strokeColor;

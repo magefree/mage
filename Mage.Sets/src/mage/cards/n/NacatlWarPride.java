@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,8 +42,9 @@ public final class NacatlWarPride extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Nacatl War-Pride must be blocked by exactly one creature if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
+        Ability blockAbility = new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield).setText("{this} must be blocked"));
+        blockAbility.addEffect(new CantBeBlockedByMoreThanOneSourceEffect().setText(" by exactly one creature if able"));
+        this.addAbility(blockAbility);
 
         // Whenever Nacatl War-Pride attacks, create X tokens that are copies of Nacatl War-Pride tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.
         Ability ability = new AttacksTriggeredAbility(new NacatlWarPrideEffect(), false);
@@ -65,12 +65,12 @@ public final class NacatlWarPride extends CardImpl {
 
 class NacatlWarPrideEffect extends OneShotEffect {
 
-    public NacatlWarPrideEffect() {
+    NacatlWarPrideEffect() {
         super(Outcome.Benefit);
-        this.staticText = "create X tokens that are copies of {this} tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step";
+        this.staticText = "create X tokens that are copies of {this} and that are tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step";
     }
 
-    public NacatlWarPrideEffect(final NacatlWarPrideEffect effect) {
+    private NacatlWarPrideEffect(final NacatlWarPrideEffect effect) {
         super(effect);
     }
 
@@ -108,9 +108,9 @@ class NacatlWarPrideEffect extends OneShotEffect {
         copies.addAll(effect.getAddedPermanents());
         
         if (!copies.isEmpty()) {
-            FixedTargets fixedTargets = new FixedTargets(copies, game);
+            FixedTargets blueprintTarget = new FixedTargets(copies, game);
             ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(fixedTargets).setText("exile the tokens");
+            exileEffect.setTargetPointer(blueprintTarget.copy()).setText("exile the tokens");
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
             return true;
         }

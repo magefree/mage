@@ -30,7 +30,7 @@ public final class AvenTrailblazer extends CardImpl {
 
         // Domain - Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBaseToughnessSourceEffect(DomainValue.REGULAR, Duration.EndOfGame)
+                Zone.ALL, new SetBaseToughnessSourceEffect(DomainValue.REGULAR)
                 .setText("{this}'s toughness is equal to the number of basic land types among lands you control")
         ).addHint(DomainHint.instance).setAbilityWord(AbilityWord.DOMAIN));
     }

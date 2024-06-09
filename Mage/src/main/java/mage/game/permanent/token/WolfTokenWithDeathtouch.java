@@ -1,17 +1,11 @@
-
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.util.RandomUtil;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author nantuko
  */
 public final class WolfTokenWithDeathtouch extends TokenImpl {
@@ -25,20 +19,9 @@ public final class WolfTokenWithDeathtouch extends TokenImpl {
         toughness = new MageInt(1);
 
         addAbility(DeathtouchAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("ISD");
     }
 
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ISD")) {
-            this.setTokenType(1);
-        }
-    }
-
-    public WolfTokenWithDeathtouch(final WolfTokenWithDeathtouch token) {
+    protected WolfTokenWithDeathtouch(final WolfTokenWithDeathtouch token) {
         super(token);
     }
 

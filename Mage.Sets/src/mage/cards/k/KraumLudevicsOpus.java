@@ -23,7 +23,7 @@ public final class KraumLudevicsOpus extends CardImpl {
     public KraumLudevicsOpus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);

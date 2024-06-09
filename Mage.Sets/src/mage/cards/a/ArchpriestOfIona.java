@@ -36,7 +36,7 @@ public final class ArchpriestOfIona extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerSourceEffect(
-                        PartyCount.instance, Duration.EndOfGame
+                        PartyCount.instance
                 ).setText("{this}'s power is equal to the number of creatures in your party. " + PartyCount.getReminder())
         ).addHint(PartyCountHint.instance));
 

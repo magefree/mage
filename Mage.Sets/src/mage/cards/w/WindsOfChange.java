@@ -39,12 +39,12 @@ public final class WindsOfChange extends CardImpl {
 
 class WindsOfChangeEffect extends OneShotEffect {
 
-    public WindsOfChangeEffect() {
+    WindsOfChangeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each player shuffles the cards from their hand into their library, then draws that many cards";
     }
 
-    public WindsOfChangeEffect(final WindsOfChangeEffect effect) {
+    private WindsOfChangeEffect(final WindsOfChangeEffect effect) {
         super(effect);
     }
 

@@ -14,7 +14,6 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -28,7 +27,7 @@ import mage.target.common.TargetCardInHand;
  */
 public final class AllosaurusRider extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two green cards");
+    private static final FilterCard filter = new FilterCard("green cards");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
@@ -47,7 +46,7 @@ public final class AllosaurusRider extends CardImpl {
 
         // Allosaurus Rider's power and toughness are each equal to 1 plus the number of lands you control.
         DynamicValue onePlusControlledLands = new IntPlusDynamicValue(1, new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent("lands you control")));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(onePlusControlledLands, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(onePlusControlledLands)));
 
     }
 

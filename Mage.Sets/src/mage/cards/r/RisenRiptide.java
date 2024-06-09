@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
@@ -27,7 +26,7 @@ public final class RisenRiptide extends CardImpl {
 
         // Whenever you cast a kicked spell, Risen Riptide has base power and toughness 5/5 until end of turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new SetBasePowerToughnessSourceEffect(5, 5, Duration.EndOfTurn, SubLayer.SetPT_7b, true)
+                new SetBasePowerToughnessSourceEffect(5, 5, Duration.EndOfTurn)
                         .setText("{this} has base power and toughness 5/5 until end of turn"),
                 StaticFilters.FILTER_SPELL_KICKED_A,
                 false)

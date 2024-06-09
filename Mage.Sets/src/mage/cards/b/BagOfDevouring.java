@@ -13,9 +13,7 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
@@ -26,7 +24,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
-import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -59,12 +56,14 @@ public final class BagOfDevouring extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{B}");
 
         // Whenever you sacrifice another nontoken artifact or creature, exile it.
-        this.addAbility(new SacrificePermanentTriggeredAbility(new ExileTargetForSourceEffect().setText("exile it"), filter, true));
+        this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
+                new ExileTargetForSourceEffect().setText("exile it"), filter,
+                TargetController.YOU, SetTargetPointer.PERMANENT, false));
 
         // {2}, {T}, Sacrifice another artifact or creature: Draw a card.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
 
         // {3}, {T}, Sacrifice Bag of Devouring: Roll a d10. Return up to X cards from among cards exiled with Bag of Devouring to their owners' hands, where X is the result.
@@ -112,7 +111,7 @@ class BagOfDevouringEffect extends OneShotEffect {
                 0, result, StaticFilters.FILTER_CARD,
                 CardUtil.getExileZoneId(game, source)
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
         return true;

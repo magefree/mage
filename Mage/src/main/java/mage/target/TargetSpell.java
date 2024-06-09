@@ -15,7 +15,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetSpell extends TargetObject {
@@ -43,7 +42,7 @@ public class TargetSpell extends TargetObject {
         this.targetName = filter.getMessage();
     }
 
-    public TargetSpell(final TargetSpell target) {
+    protected TargetSpell(final TargetSpell target) {
         super(target);
         this.filter = target.filter.copy();
         this.sourceIds.addAll(target.sourceIds);

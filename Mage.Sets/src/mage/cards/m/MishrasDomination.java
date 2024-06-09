@@ -6,21 +6,21 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.CantBlockSourceEffect;
+import mage.abilities.effects.common.combat.CantBlockAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,7 +46,7 @@ public final class MishrasDomination extends CardImpl {
                 "as long as you control enchanted creature, it gets +2/+2"
         ));
         ability.addEffect(new ConditionalRestrictionEffect(
-                new CantBlockSourceEffect(Duration.WhileOnBattlefield),
+                new CantBlockAttachedEffect(AttachmentType.AURA),
                 MishrasDominationCondition.FALSE, "otherwise, it can't block"
         ));
         this.addAbility(ability);
@@ -75,9 +75,11 @@ enum MishrasDominationCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return Optional
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanentOrLKIBattlefield)
                 .map(Controllable::getControllerId)
                 .map(source::isControlledBy)
+                .orElse(false)
                 .equals(value);
     }
 }

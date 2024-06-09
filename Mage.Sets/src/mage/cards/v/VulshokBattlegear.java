@@ -27,7 +27,7 @@ public final class VulshokBattlegear extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));
     }
 
-    public VulshokBattlegear (final VulshokBattlegear card) {
+    private VulshokBattlegear(final VulshokBattlegear card) {
         super(card);
     }
 

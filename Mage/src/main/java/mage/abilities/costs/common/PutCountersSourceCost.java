@@ -1,14 +1,13 @@
-
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -16,25 +15,16 @@ import mage.util.CardUtil;
  */
 public class PutCountersSourceCost extends CostImpl {
 
-    private final int amount;
-    private final String name;
     private final Counter counter;
 
     public PutCountersSourceCost(Counter counter) {
         this.counter = counter.copy();
-        this.amount = counter.getCount();
-        this.name = counter.getName();
-        this.text = new StringBuilder("Put ").append((amount == 1 ? "a" : CardUtil.numberToText(amount)))
-                .append(' ').append(name).append(" counter").append((amount != 1 ? "s" : ""))
-                .append(" on {this}").toString();
-
+        this.text = "put " + counter.getDescription() + " on {this}";
     }
 
     public PutCountersSourceCost(PutCountersSourceCost cost) {
         super(cost);
         this.counter = cost.counter;
-        this.amount = cost.amount;
-        this.name = cost.name;
     }
 
     @Override

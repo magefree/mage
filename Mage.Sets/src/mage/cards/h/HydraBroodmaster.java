@@ -48,12 +48,12 @@ public final class HydraBroodmaster extends CardImpl {
 
 class HydraBroodmasterEffect extends OneShotEffect {
 
-    public HydraBroodmasterEffect() {
+    HydraBroodmasterEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create X X/X green Hydra creature tokens";
     }
 
-    public HydraBroodmasterEffect(final HydraBroodmasterEffect effect) {
+    private HydraBroodmasterEffect(final HydraBroodmasterEffect effect) {
         super(effect);
     }
 

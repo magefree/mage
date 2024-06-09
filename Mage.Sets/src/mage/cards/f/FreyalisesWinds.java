@@ -52,7 +52,7 @@ class FreyalisesWindsReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a permanent with a wind counter on it would untap during its controller's untap step, remove all wind counters from it instead";
     }
 
-    FreyalisesWindsReplacementEffect(final FreyalisesWindsReplacementEffect effect) {
+    private FreyalisesWindsReplacementEffect(final FreyalisesWindsReplacementEffect effect) {
         super(effect);
     }
 
@@ -62,15 +62,10 @@ class FreyalisesWindsReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanentUntapping = game.getPermanent(event.getTargetId());
         if (permanentUntapping != null) {
-            permanentUntapping.getCounters(game).removeAllCounters(CounterType.WIND);
+            permanentUntapping.removeAllCounters(CounterType.WIND.getName(), source, game);
             return true;
         }
         return false;

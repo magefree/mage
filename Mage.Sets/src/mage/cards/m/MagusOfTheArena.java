@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -38,7 +38,7 @@ public final class MagusOfTheArena extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagusOfTheArenaEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterControlledCreaturePermanent(), false));
+        ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE, false));
         this.addAbility(ability);
     }
 
@@ -60,7 +60,7 @@ class MagusOfTheArenaEffect extends OneShotEffect {
                 "Those creatures fight each other. <i>(Each deals damage equal to its power to the other.)</i>";
     }
 
-    MagusOfTheArenaEffect(final MagusOfTheArenaEffect effect) {
+    private MagusOfTheArenaEffect(final MagusOfTheArenaEffect effect) {
         super(effect);
     }
 

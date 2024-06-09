@@ -55,7 +55,7 @@ class ProteusStaffEffect extends OneShotEffect {
         this.staticText = "Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order.";
     }
 
-    ProteusStaffEffect(final ProteusStaffEffect effect) {
+    private ProteusStaffEffect(final ProteusStaffEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class ProteusStaffEffect extends OneShotEffect {
                         }
                     } else {
                         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on bottom of your library (last chosen will be on bottom)"));
-                        controller.choose(Outcome.Neutral, cards, target, game);
+                        controller.choose(Outcome.Neutral, cards, target, source, game);
                         Card card = cards.get(target.getFirstTarget(), game);
                         if (card != null) {
                             controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, false, false);

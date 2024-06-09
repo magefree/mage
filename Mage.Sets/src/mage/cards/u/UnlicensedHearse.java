@@ -15,7 +15,6 @@ import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -82,7 +81,7 @@ public final class UnlicensedHearse extends CardImpl {
         this.addAbility(
                 new SimpleStaticAbility(
                         Zone.ALL,
-                        new SetBasePowerToughnessSourceEffect(UnlicensedHearseValue.instance, Duration.EndOfGame)
+                        new SetBasePowerToughnessSourceEffect(UnlicensedHearseValue.instance)
                 ).addHint(hint)
         );
 

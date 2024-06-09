@@ -45,12 +45,12 @@ public final class CandlesOfLeng extends CardImpl {
 
 class CandlesOfLengEffect extends OneShotEffect {
 
-    public CandlesOfLengEffect() {
+    CandlesOfLengEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top card of your library. If it has the same name as a card in your graveyard, put it into your graveyard. Otherwise, draw a card";
     }
 
-    public CandlesOfLengEffect(final CandlesOfLengEffect effect) {
+    private CandlesOfLengEffect(final CandlesOfLengEffect effect) {
         super(effect);
     }
 

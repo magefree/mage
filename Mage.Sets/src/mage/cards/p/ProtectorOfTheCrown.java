@@ -8,6 +8,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +36,7 @@ public final class ProtectorOfTheCrown extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Protector of the Crown enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // All damage would be dealt to you is dealt to Protector of the Crown instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectorOfTheCrownEffect()));
@@ -58,7 +59,7 @@ class ProtectorOfTheCrownEffect extends ReplacementEffectImpl {
         staticText = "All damage that would be dealt to you is dealt to {this} instead";
     }
 
-    ProtectorOfTheCrownEffect(final ProtectorOfTheCrownEffect effect) {
+    private ProtectorOfTheCrownEffect(final ProtectorOfTheCrownEffect effect) {
         super(effect);
     }
 

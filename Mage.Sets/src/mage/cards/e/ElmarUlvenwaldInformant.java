@@ -24,7 +24,7 @@ public final class ElmarUlvenwaldInformant extends CardImpl {
     public ElmarUlvenwaldInformant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

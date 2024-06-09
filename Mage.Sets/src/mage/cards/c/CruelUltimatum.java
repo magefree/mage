@@ -51,13 +51,13 @@ public final class CruelUltimatum extends CardImpl {
 
 class CruelUltimatumEffect extends OneShotEffect {
 
-    public CruelUltimatumEffect() {
+    CruelUltimatumEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "You return a creature card from your graveyard "
                 + "to your hand, draw three cards, then gain 5 life";
     }
 
-    public CruelUltimatumEffect(final CruelUltimatumEffect effect) {
+    private CruelUltimatumEffect(final CruelUltimatumEffect effect) {
         super(effect);
     }
 

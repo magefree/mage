@@ -14,6 +14,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -65,7 +66,7 @@ class BackdraftHellkiteEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (!this.affectedObjectsSet) {
+        if (!getAffectedObjectsSet()) {
             return;
         }
         Player player = game.getPlayer(source.getControllerId());
@@ -74,8 +75,9 @@ class BackdraftHellkiteEffect extends ContinuousEffectImpl {
         }
         player.getGraveyard()
                 .stream()
-                .map((cardId) -> game.getCard(cardId))
-                .filter(card1 -> card1.isInstantOrSorcery(game))
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .filter(card -> card.isInstantOrSorcery(game))
                 .forEachOrdered(card -> affectedObjectList.add(new MageObjectReference(card, game)));
     }
 

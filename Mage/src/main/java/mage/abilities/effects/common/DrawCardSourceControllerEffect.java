@@ -36,7 +36,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         createStaticText(whoDrawCard);
     }
 
-    public DrawCardSourceControllerEffect(final DrawCardSourceControllerEffect effect) {
+    protected DrawCardSourceControllerEffect(final DrawCardSourceControllerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }

@@ -32,7 +32,7 @@ public final class InstrumentOfTheBards extends CardImpl {
     public InstrumentOfTheBards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your upkeep, you may put a harmony counter on Instrument of Bards.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
@@ -60,7 +60,7 @@ public final class InstrumentOfTheBards extends CardImpl {
 
 class InstrumentOfTheBardsEffect extends OneShotEffect {
 
-    public InstrumentOfTheBardsEffect() {
+    InstrumentOfTheBardsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Search your library for a creature card with mana value equal to the number of harmony " +
                 "counters on {this}, reveal it, and put it into your hand. " +
@@ -92,7 +92,7 @@ class InstrumentOfTheBardsEffect extends OneShotEffect {
             if (card != null) {
                 controller.revealCards(permanent.getIdName(), new CardsImpl(card), game);
                 controller.moveCards(card, Zone.HAND, source, game);
-                if (card.isLegendary()) {
+                if (card.isLegendary(game)) {
                     new TreasureToken().putOntoBattlefield(1, game, source, source.getControllerId());
                 }
             }

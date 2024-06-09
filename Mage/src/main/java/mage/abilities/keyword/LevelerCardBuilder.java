@@ -11,7 +11,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.Duration;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -55,7 +54,7 @@ public class LevelerCardBuilder {
             staticAbility.setRuleVisible(false);
             constructed.add(staticAbility);
         }
-        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true);
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield);
         ConditionalContinuousEffect ptEffect = new ConditionalContinuousEffect(effect, condition, rule);
         constructed.add(new SimpleStaticAbility(Zone.BATTLEFIELD, ptEffect));
 

@@ -33,7 +33,6 @@ public final class HuntDown extends CardImpl {
         this.getSpellAbility().addEffect(new HuntDownEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterMustBlock));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterToBeBlocked));
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
         
     }
 
@@ -49,7 +48,7 @@ public final class HuntDown extends CardImpl {
 
 class HuntDownEffect extends RequirementEffect {
 
-    public HuntDownEffect() {
+    HuntDownEffect() {
         this(Duration.EndOfTurn);
     }
 
@@ -58,7 +57,7 @@ class HuntDownEffect extends RequirementEffect {
         staticText = "Target creature blocks target creature this turn if able";
     }
 
-    public HuntDownEffect(final HuntDownEffect effect) {
+    private HuntDownEffect(final HuntDownEffect effect) {
         super(effect);
     }
 

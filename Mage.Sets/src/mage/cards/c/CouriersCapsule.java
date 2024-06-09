@@ -30,7 +30,7 @@ public final class CouriersCapsule extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CouriersCapsule (final CouriersCapsule card) {
+    private CouriersCapsule(final CouriersCapsule card) {
         super(card);
     }
 

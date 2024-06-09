@@ -63,11 +63,6 @@ class UnpredictableCycloneReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
