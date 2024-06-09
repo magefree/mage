@@ -430,6 +430,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return this;
     }
 
+    /**
+     * For triggered abilities that function from the battlefield that must trigger when the source permanent dies
+     * and/or for any other events that happen simultaneously to the source permanent dying.
+     * (Similar logic must be used for any leaves-the-battlefield, but this method assumes to graveyard only.)
+     * NOTE: If your ability functions from another zone (not battlefield) then must use standard logic, not this.
+     */
     public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {
         // Get the source permanent of the ability
         MageObject sourceObject = null;
