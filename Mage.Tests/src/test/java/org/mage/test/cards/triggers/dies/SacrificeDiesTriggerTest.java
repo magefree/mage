@@ -412,4 +412,33 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
         // from end step trigger
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
+
+    // bug #9688
+    @Test
+    public void testIndustrialAdvancement() {
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerA, "Industrial Advancement");
+        // At the beginning of your end step, you may sacrifice a creature. If you do, look at the top X cards of your
+        // library, where X is that creature’s mana value. You may put a creature card from among them onto the
+        // battlefield. Put the rest on the bottom of your library in a random order.
+        addCard(Zone.BATTLEFIELD, playerA, "Guardian Automaton"); // 3/3 gain 3 life when it dies
+        addCard(Zone.LIBRARY, playerA, "Lone Missionary"); // etb gain 4 life
+        addCard(Zone.LIBRARY, playerA, "Horned Turtle");
+        addCard(Zone.LIBRARY, playerA, "Maritime Guard");
+        addCard(Zone.LIBRARY, playerA, "Kraken Hatchling");
+
+        setChoice(playerA, "Guardian Automaton"); // sacrifice on end step
+        setChoice(playerA, "Lone Missionary"); // put onto battlefield
+        setChoice(playerA, "When {this} dies"); // choose trigger order
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Lone Missionary", 1);
+        assertGraveyardCount(playerA, "Guardian Automaton", 1);
+        assertLife(playerA, 27);
+
+    }
+
 }
