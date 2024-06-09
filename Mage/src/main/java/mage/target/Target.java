@@ -108,7 +108,7 @@ public interface Target extends Serializable {
      */
     String getTargetName();
 
-    void setTargetName(String name);
+    Target setTargetName(String name);
 
     String getTargetedName(Game game);
 

@@ -177,8 +177,9 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public void setTargetName(String name) {
+    public TargetImpl setTargetName(String name) {
         this.targetName = name;
+        return this;
     }
 
     @Override
