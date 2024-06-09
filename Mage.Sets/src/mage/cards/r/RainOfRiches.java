@@ -8,6 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,6 +47,9 @@ public class RainOfRiches extends CardImpl {
                 new SimpleStaticAbility(Zone.BATTLEFIELD, new RainOfRichesGainsCascadeEffect()),
                 new RainOfRichesWatcher()
         );
+
+        this.addAbility(new SimpleStaticAbility(new InfoEffect(
+                "The cascade will not work if you only pay the last mana with treasure - please pay for the first mana with a treasure.")));
     }
 
     private RainOfRiches(final RainOfRiches card) {

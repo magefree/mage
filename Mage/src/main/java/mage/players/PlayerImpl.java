@@ -1288,7 +1288,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 castEvent.setZone(fromZone);
                 game.fireEvent(castEvent);
                 if (spell.activate(game, noMana)) {
-                    game.getState().processAction(game);
+                    // game.getState().processAction(game); // TODO: some cards (such as RainOfRiches) need information about mana paid in their static effect
                     GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
                             ability.getId(), ability, playerId, approvingObject);
                     castedEvent.setZone(fromZone);
