@@ -503,15 +503,18 @@ public class TableController {
     }
 
     private void updateDeck(UUID userId, UUID playerId, Deck deck) {
+        // strict mode - players can't add any lands while sideboarding in single game
+        // ignore mode - players can add any lands while construction/sideboarding in draft tourney
+        boolean ignoreMainBasicLands = table.isTournament() || table.isTournamentSubTable();
         if (table.isTournament()) {
             if (tournament != null) {
                 // TODO: is it possible to update from direct call command in game?!
-                managerFactory.tournamentManager().updateDeck(tournament.getId(), playerId, deck);
+                managerFactory.tournamentManager().updateDeck(tournament.getId(), playerId, deck, ignoreMainBasicLands);
             } else {
                 logger.fatal("Tournament == null  table: " + table.getId() + " userId: " + userId);
             }
         } else if (table.getState() == TableState.SIDEBOARDING) {
-            match.updateDeck(playerId, deck);
+            match.updateDeck(playerId, deck, ignoreMainBasicLands);
         } else {
             // deck was meanwhile submitted so the autoupdate can be ignored
             // TODO: need research

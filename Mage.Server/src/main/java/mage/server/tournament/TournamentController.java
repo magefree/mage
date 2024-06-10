@@ -326,13 +326,13 @@ public class TournamentController {
         }
     }
 
-    public void updateDeck(UUID playerId, Deck deck) {
+    public void updateDeck(UUID playerId, Deck deck, boolean ignoreMainBasicLands) {
         TournamentSession session = tournamentSessions.getOrDefault(playerId, null);
         if (session == null) {
             return;
         }
 
-        session.updateDeck(deck);
+        session.updateDeck(deck, ignoreMainBasicLands);
     }
 
     public void timeout(UUID userId) {

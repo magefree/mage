@@ -49,7 +49,7 @@ public interface Tournament {
 
     void submitDeck(UUID playerId, Deck deck);
 
-    void updateDeck(UUID playerId, Deck deck);
+    void updateDeck(UUID playerId, Deck deck, boolean ignoreMainBasicLands);
 
     void autoSubmit(UUID playerId, Deck deck);
 
