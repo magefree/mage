@@ -856,12 +856,7 @@ public abstract class GameImpl implements Game {
 
         // game thread can call concede directly
         if (ThreadUtils.isRunGameThread()) {
-            // TODO: is it normal use case? If yes then remove logs
-            Player player = this.getPlayer(playerId);
-            logger.info(String.format("Game thread used concede request for (%s): %s",
-                    player == null ? "null" : player.getName(),
-                    this
-            ));
+            // example: forced lost due state base actions check
             checkConcede();
         }
     }
