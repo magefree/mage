@@ -1687,7 +1687,7 @@ public class TablesPanel extends javax.swing.JPanel {
             DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile, false);
 
             PlayerType aiType = useMonteCarloAI ? PlayerType.COMPUTER_MONTE_CARLO : PlayerType.COMPUTER_MAD;
-            int numSeats = gameName.contains("2") ? 2 : 4;
+            int numSeats = gameName.contains("2") || gameName.contains("Monte Carlo") ? 2 : 4;
             boolean multiPlayer = numSeats > 2;
 
             MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer, numSeats);
