@@ -454,7 +454,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         CreatedTokensEvent.addEvents(allAddedTokens, source, game);
 
-        game.applyEffects(); // without LKI reset
+        //game.applyEffects(); // without LKI reset
     }
 
     @Override
