@@ -94,8 +94,10 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
             root = new MCTSNode(playerId, sim);
         }
         applyMCTS(game, action);
-        root = root.bestChild();
-        root.emancipate();
+        if (root != null && root.bestChild() != null) {
+            root = root.bestChild();
+            root.emancipate();
+        }
     }
 
     protected void getNextAction(Game game, NextAction nextAction) {
