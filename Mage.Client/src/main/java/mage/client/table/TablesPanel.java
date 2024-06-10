@@ -639,6 +639,10 @@ public class TablesPanel extends javax.swing.JPanel {
         buttonNextMessage.setFont(GUISizeHelper.menuFont);
         labelMessageHeader.setFont(new Font(GUISizeHelper.menuFont.getName(), Font.BOLD, GUISizeHelper.menuFont.getSize()));
         labelMessageText.setFont(GUISizeHelper.menuFont);
+
+        btnQuickStart2Player.setFont(GUISizeHelper.menuFont);
+        btnQuickStart4Player.setFont(GUISizeHelper.menuFont);
+        btnQuickStartMCTS.setFont(GUISizeHelper.menuFont);
     }
 
     private void saveDividerLocations() {
