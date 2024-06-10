@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -47,7 +47,7 @@ public final class PashalikMons extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Pashalik Mons or another Goblin you control dies, Pashalik Mons deals 1 damage to any target.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(
                 new DamageTargetEffect(1), false, filter
         );
         ability.addTarget(new TargetAnyTarget());

@@ -13,17 +13,17 @@ import mage.game.events.ZoneChangeEvent;
 /**
  * @author noxx
  */
-public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityImpl {
+public class DiesThisOrAnotherTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterPermanent filter;
     private boolean applyFilterOnSource = false;
 
-    public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional) {
+    public DiesThisOrAnotherTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE);
     }
 
-    public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
-        super(Zone.ALL, effect, optional); // Needs "ALL" if the source itself should trigger or multiple (incl. source go to grave)
+    public DiesThisOrAnotherTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
+        super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         String filterMessage = filter.getMessage();
         if (filterMessage.startsWith("a ")) {
@@ -32,20 +32,20 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
         setTriggerPhrase("Whenever {this} or another " + filterMessage + " dies, ");
     }
 
-    protected DiesThisOrAnotherCreatureTriggeredAbility(final DiesThisOrAnotherCreatureTriggeredAbility ability) {
+    protected DiesThisOrAnotherTriggeredAbility(final DiesThisOrAnotherTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.applyFilterOnSource = ability.applyFilterOnSource;
     }
 
-    public DiesThisOrAnotherCreatureTriggeredAbility setApplyFilterOnSource(boolean applyFilterOnSource) {
+    public DiesThisOrAnotherTriggeredAbility setApplyFilterOnSource(boolean applyFilterOnSource) {
         this.applyFilterOnSource = applyFilterOnSource;
         return this;
     }
 
     @Override
-    public DiesThisOrAnotherCreatureTriggeredAbility copy() {
-        return new DiesThisOrAnotherCreatureTriggeredAbility(this);
+    public DiesThisOrAnotherTriggeredAbility copy() {
+        return new DiesThisOrAnotherTriggeredAbility(this);
     }
 
     @Override
@@ -59,6 +59,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
         if (zEvent.isDiesEvent()) {
             if (zEvent.getTarget() != null) {
                 if (!applyFilterOnSource && zEvent.getTarget().getId().equals(this.getSourceId())) {
+                    // TODO: remove this workaround for Basri's Lieutenant
                     return true;
                 } else {
                     if (filter.match(zEvent.getTarget(), getControllerId(), this, game)) {
