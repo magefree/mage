@@ -4779,7 +4779,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     }
                 }
-                game.applyEffects(); // without LKI reset
+                game.getState().processAction(game);
                 break;
             case HAND:
                 for (Card card : cards) {
