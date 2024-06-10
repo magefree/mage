@@ -81,7 +81,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         }
         Permanent permanent = affectedObjectList.get(0).getPermanent(game);
         if (permanent == null) {
-            if (!game.getShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
+            if (!game.checkShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
                 discard();
                 return false;
             }

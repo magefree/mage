@@ -3587,7 +3587,7 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public boolean getShortLivingLKI(UUID objectId, Zone zone) {
+    public boolean checkShortLivingLKI(UUID objectId, Zone zone) {
         Set<UUID> idSet = lkiShortLiving.get(zone);
         if (idSet != null) {
             return idSet.contains(objectId);

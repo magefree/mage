@@ -452,7 +452,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             //   - ! empty stack   !  graveyard  ! no  !   no      ! no more to resolve
             //   --!---------------!-------------!-----!-----------!
             //  -
-            if (game.getShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
+            if (game.checkShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
                 sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             }
         }

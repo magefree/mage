@@ -286,7 +286,10 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     MageObject getLastKnownInformation(UUID objectId, Zone zone, int zoneChangeCounter);
 
-    boolean getShortLivingLKI(UUID objectId, Zone zone);
+    /**
+     * For checking if an object was in a zone during the resolution of an effect
+     */
+    boolean checkShortLivingLKI(UUID objectId, Zone zone);
 
     void rememberLKI(UUID objectId, Zone zone, MageObject object);
 

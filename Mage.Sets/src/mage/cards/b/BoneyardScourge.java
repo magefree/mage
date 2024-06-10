@@ -95,7 +95,7 @@ class DiesWhileInGraveyardTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         for (Zone z : Zone.values()) {
-            if (game.getShortLivingLKI(sourceId, z) && z != Zone.GRAVEYARD) {
+            if (game.checkShortLivingLKI(sourceId, z) && z != Zone.GRAVEYARD) {
                 return false;
             }
         }
