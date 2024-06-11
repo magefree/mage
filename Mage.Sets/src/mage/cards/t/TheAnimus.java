@@ -92,7 +92,13 @@ class TheAnimusEffect extends OneShotEffect {
         }
 
         Card card = game.getCard(targetId);
+        if (card == null) {
+            return false;
+        }
         controller.moveCards(card, Zone.EXILED, source, game);
+        if (game.getState().getZone(card.getId()) != Zone.EXILED) {
+            return false;
+        }
         card.addCounters(CounterType.MEMORY.createInstance(), source.getControllerId(), source, game);
         return true;
     }
