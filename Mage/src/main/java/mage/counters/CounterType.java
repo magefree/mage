@@ -134,6 +134,7 @@ public enum CounterType {
     MANIFESTATION("manifestation"),
     MANNEQUIN("mannequin"),
     MATRIX("matrix"),
+    MEMORY("memory"),
     MENACE("menace"),
     M0M1(new BoostCounter(-0, -1).name),
     M0M2(new BoostCounter(-0, -2).name),
