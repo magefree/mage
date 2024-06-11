@@ -505,13 +505,29 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source, boolean fireAsSimultaneousEvent);
 
     /**
-     * Inner game engine call to reset game objects to actual versions
-     * (reset all objects and apply all effects due layer system)
-     * <p>
-     * Warning, if you need to process object moves in the middle of the effect/ability
-     * then call game.getState().processAction(game) instead
+     * Inner engine call to reset all game objects and re-apply all layered continuous effects.
+     * Do NOT use indiscriminately. See processAction() instead.
      */
+    @Deprecated
     void applyEffects();
+
+    /**
+     * Handles simultaneous events for triggers and then re-applies all layered continuous effects.
+     * Must be called between sequential steps of a resolving one-shot effect.
+     * <p>
+     * 608.2e. Some spells and abilities have multiple steps or actions, denoted by separate sentences or clauses,
+     * that involve multiple players. In these cases, the choices for the first action are made in APNAP order,
+     * and then the first action is processed simultaneously. Then the choices for the second action are made in
+     * APNAP order, and then that action is processed simultaneously, and so on. See rule 101.4.
+     * <p>
+     * 608.2f. Some spells and abilities include actions taken on multiple players and/or objects. In most cases,
+     * each such action is processed simultaneously. If the action can't be processed simultaneously, it's instead
+     * processed considering each affected player or object individually. APNAP order is used to make the primary
+     * determination of the order of those actions. Secondarily, if the action is to be taken on both a player
+     * and an object they control or on multiple objects controlled by the same player, the player who controls
+     * the resolving spell or ability chooses the relative order of those actions.
+     */
+    void processAction();
 
     @Deprecated // TODO: must research usage and remove it from all non engine code (example: Bestow ability, ProcessActions must be used instead)
     boolean checkStateAndTriggered();
