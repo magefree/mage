@@ -116,7 +116,7 @@ public class ExploreSourceEffect extends OneShotEffect {
             // the exploring creature receives a +1/+1 counter.
             addCounter(game, permanent, source);
         }
-        game.getState().processAction(game);
+        game.processAction();
         // 701.40b A permanent “explores” after the process described in rule 701.40a is complete, even if some or all of
         // those actions were impossible.
         game.fireEvent(new ExploredEvent(permanent, source, card));

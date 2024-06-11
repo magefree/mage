@@ -91,7 +91,7 @@ class KraulHarpoonerEffect extends OneShotEffect {
         }
         int xValue = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
         game.addEffect(new BoostSourceEffect(xValue, 0, Duration.EndOfTurn), source);
-        game.getState().processAction(game);
+        game.processAction();
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature == null || !player.chooseUse(outcome, "Have " + sourcePerm.getLogName() + " fight " + creature.getLogName() + "?", source, game)) {
             return true;

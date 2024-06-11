@@ -248,7 +248,7 @@ public abstract class AbilityImpl implements Ability {
              * abilities with replacement effects deactivated too late Example:
              * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
              */
-            game.getState().processAction(game);
+            game.processAction();
         }
         return result;
     }

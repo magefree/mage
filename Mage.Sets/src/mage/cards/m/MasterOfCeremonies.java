@@ -113,7 +113,7 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
             Token treasureOpponent = new TreasureToken();
             treasureOpponent.putOntoBattlefield(1, game, source, opponentId);
         }
-        game.getState().processAction(game);
+        game.processAction();
 
         // Friends - You and that player each create a 1/1 green and white Citizen creature token.
         for (UUID opponentId : friendChoosers) {
@@ -123,7 +123,7 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
             Token citizenOpponent = new CitizenGreenWhiteToken();
             citizenOpponent.putOntoBattlefield(1, game, source, opponentId);
         }
-        game.getState().processAction(game);
+        game.processAction();
 
         // Secrets - You and that player each draw a card.
         for (UUID opponentId : secretsChoosers) {

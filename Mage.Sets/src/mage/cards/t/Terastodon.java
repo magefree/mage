@@ -88,7 +88,7 @@ class TerastodonEffect extends OneShotEffect {
                 }
             }
         }
-        game.getState().processAction(game);
+        game.processAction();
         ElephantToken elephantToken = new ElephantToken();
         for (Entry<UUID, Integer> entry : destroyedPermanents.entrySet()) {
             elephantToken.putOntoBattlefield(entry.getValue(), game, source, entry.getKey());
