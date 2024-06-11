@@ -5,6 +5,7 @@ import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.stack.StackObject;
+import mage.util.CardUtil;
 
 import java.util.Objects;
 
@@ -25,9 +26,8 @@ public class SourceTargetsPermanentCondition implements Condition {
         if (stackObject == null) {
             return false;
         }
-        return stackObject.getStackAbility().getTargets()
+        return CardUtil.getAllSelectedTargets(stackObject.getStackAbility(), game)
                 .stream()
-                .flatMap(t -> t.getTargets().stream())
                 .map(game::getPermanentOrLKIBattlefield)
                 .filter(Objects::nonNull)
                 .anyMatch(p -> filter.match(p, source.getControllerId(), source, game));
