@@ -30,6 +30,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Blade", 73, Rarity.UNCOMMON, mage.cards.h.HiddenBlade.class));
         cards.add(new SetCardInfo("Sword of Feast and Famine", 99, Rarity.MYTHIC, mage.cards.s.SwordOfFeastAndFamine.class));
         cards.add(new SetCardInfo("Temporal Trespass", 86, Rarity.MYTHIC, mage.cards.t.TemporalTrespass.class));
+        cards.add(new SetCardInfo("The Animus", 69, Rarity.RARE, mage.cards.t.TheAnimus.class));
         cards.add(new SetCardInfo("The Spear of Leonidas", 165, Rarity.RARE, mage.cards.t.TheSpearOfLeonidas.class));
     }
 }
