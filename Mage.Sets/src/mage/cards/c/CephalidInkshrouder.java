@@ -24,7 +24,7 @@ public final class CephalidInkshrouder extends CardImpl {
     public CephalidInkshrouder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
