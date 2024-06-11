@@ -1054,10 +1054,8 @@ public final class CardUtil {
             if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
                 continue;
             }
-            for (Target target : stackAbility.getTargets()) {
-                if (target.getTargets().contains(event.getTargetId())) {
-                    return stackObject;
-                }
+            if (CardUtil.getAllSelectedTargets(stackAbility, game).contains(event.getTargetId())) {
+                return stackObject;
             }
         }
         return null;
