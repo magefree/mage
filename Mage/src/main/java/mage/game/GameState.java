@@ -666,22 +666,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.gameOver = true;
     }
 
-    /**
-     * Must be called between effects/steps in the ability's resolve
-     * <p>
-     * 608.2e
-     * Some spells and abilities have multiple steps or actions, denoted by separate sentences or clauses,
-     * that involve multiple players. In these cases, the choices for the first action are made in APNAP order,
-     * and then the first action is processed simultaneously. Then the choices for the second action are made in
-     * APNAP order, and then that action is processed simultaneously, and so on. See rule 101.4.
-     */
-    public void processAction(Game game) {
-        game.getState().handleSimultaneousEvent(game);
-        game.resetShortLivingLKI();
-        game.applyEffects();
-        game.getState().getTriggers().checkStateTriggers(game);
-    }
-
     void applyEffects(Game game) {
         applyEffectsCounter++;
         for (Player player : players.values()) {
