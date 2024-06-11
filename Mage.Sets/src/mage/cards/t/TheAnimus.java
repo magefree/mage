@@ -8,7 +8,9 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.CounterType;
@@ -21,6 +23,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.target.common.*;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.EmptyCopyApplier;
 
 /**
@@ -83,15 +86,14 @@ class TheAnimusEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-//        TheAnimusWatcher watcher = game.getState().getWatcher(TheAnimusWatcher.class);
-        if (controller == null) {
+        UUID targetId = getTargetPointer().getFirst(game, source);
+        if (controller == null || targetId == null) {
             return false;
         }
 
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        Card card = game.getCard(targetId);
         controller.moveCards(card, Zone.EXILED, source, game);
         card.addCounters(CounterType.MEMORY.createInstance(), source.getControllerId(), source, game);
-//        watcher.addCard(controller.getId(), card, game)
         return true;
     }
 }
@@ -100,7 +102,7 @@ class TheAnimusCopyEffect extends OneShotEffect {
 
     TheAnimusCopyEffect() {
         super(Outcome.Copy);
-        this.staticText = "target legendary creature you control becomes a copy of target creature card in exile with a memory counter on it";
+        this.staticText = "Until your next turn, target legendary creature you control becomes a copy of target creature card in exile with a memory counter on it";
     }
 
     private TheAnimusCopyEffect(final TheAnimusCopyEffect effect) {
@@ -118,8 +120,6 @@ class TheAnimusCopyEffect extends OneShotEffect {
         Targets targets = source.getTargets();
 
         if (targets.size() != 2) {
-            game.informPlayers("Target size: " + targets.size());
-            game.informPlayers("source target size " + source.getTargets().size());
             return false;
         }
         UUID target1Id = source.getTargets().get(0).getFirstTarget();
@@ -129,22 +129,15 @@ class TheAnimusCopyEffect extends OneShotEffect {
         if (target2Id == null || target1Id == null) {
             return false;
         }
-        game.informPlayers("Targets are good");
-        Permanent copyToPermanent = game.getPermanent(target1Id);
-
         Card copyFromPermanent = game.getCard(target2Id);
-
-        if (copyFromPermanent == null) {
-            game.informPlayers("copyFromPermanent is null");
-        }
         if (sourcePermanent == null || copyFromPermanent == null) {
-            game.informPlayers("can't get perms");
             return false;
         }
 
-        game.informPlayers("copyFromPermanent: " + copyFromPermanent.getName() + " copyToPermanent: " + copyToPermanent.getName());
-        game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, copyToPermanent.getId(), source, new EmptyCopyApplier());
-
+        ContinuousEffect copyEffect = new CopyEffect(Duration.EndOfTurn, copyFromPermanent.getMainCard(), target1Id);
+        game.addEffect(copyEffect, source);
         return true;
+
+
     }
 }
