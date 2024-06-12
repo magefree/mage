@@ -25,7 +25,7 @@ public final class CephalidSage extends CardImpl {
 
     public CephalidSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

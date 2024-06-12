@@ -34,7 +34,7 @@ public final class CallousOppressor extends CardImpl {
 
     public CallousOppressor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
