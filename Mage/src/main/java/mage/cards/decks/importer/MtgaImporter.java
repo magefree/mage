@@ -12,8 +12,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static mage.cards.decks.CardNameUtil.CARD_NAME_PATTERN;
-
 /**
  * Deck import: MTGA official app
  */
@@ -23,7 +21,7 @@ public class MtgaImporter extends PlainTextDeckImporter {
     private static final Pattern MTGA_PATTERN = Pattern.compile(
             "(\\p{Digit}+)" +
                     "\\p{javaWhitespace}+" +
-                    "(" + CARD_NAME_PATTERN.pattern() + ")" +
+                    "(" + CardNameUtil.CARD_NAME_PATTERN.pattern() + ")" +
                     "(?:\\p{javaWhitespace}+\\()?" +
                     "(\\p{Alnum}+)?" +
                     "(?:\\)\\p{javaWhitespace}+)?" +

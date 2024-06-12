@@ -91,7 +91,7 @@ class WheelOfPotentialEffect extends OneShotEffect {
             player.drawCards(numberPaid, source, game);
         }
         if (numberPaid >= 7) {
-            game.getState().processAction(game);
+            game.processAction();
             cardsExiled.removeIf(cardId -> {
                 Card card = game.getCard(cardId);
                 return card == null || !card.getOwnerId().equals(controller.getId());

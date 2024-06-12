@@ -92,7 +92,7 @@ class BillFernyEffect extends OneShotEffect {
         game.addEffect(new GainControlTargetEffect(
                 Duration.Custom, true, opponentToGainControl
         ).setTargetPointer(new FixedTarget(permanent.getId(), game)), source);
-        game.getState().processAction(game);
+        game.processAction();
         if (permanent.isControlledBy(opponentToGainControl)) {
             removeFromCombat.apply(game, source);
             create3TreasureTokens.apply(game, source);

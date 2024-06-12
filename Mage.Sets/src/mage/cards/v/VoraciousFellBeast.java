@@ -105,7 +105,7 @@ class VoraciousFellBeastEffect extends OneShotEffect {
             }
         }
         if (sacrificeCount > 0) {
-            game.getState().processAction(game);
+            game.processAction();
             new CreateTokenEffect(new FoodToken(), sacrificeCount).apply(game, source);
         }
         return true;

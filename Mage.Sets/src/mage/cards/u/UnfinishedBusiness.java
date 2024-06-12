@@ -73,7 +73,7 @@ class UnfinishedBusinessEffect extends OneShotEffect{
 
         if (targetCreature != null){
             controller.moveCards(targetCreature, Zone.BATTLEFIELD, source, game);
-            game.getState().processAction(game);
+            game.processAction();
         }
         Permanent permanentCreature = targetCreature == null ? null : game.getPermanent(targetCreature.getId());
 

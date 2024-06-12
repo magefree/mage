@@ -70,7 +70,7 @@ class PresumedDeadEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
-        game.getState().processAction(game);
+        game.processAction();
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent != null) {
             permanent.setSuspected(true, game, source);

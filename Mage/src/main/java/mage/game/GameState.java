@@ -1,6 +1,5 @@
 package mage.game;
 
-import static java.util.Collections.emptyList;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -664,22 +663,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void endGame() {
         this.gameOver = true;
-    }
-
-    /**
-     * Must be called between effects/steps in the ability's resolve
-     * <p>
-     * 608.2e
-     * Some spells and abilities have multiple steps or actions, denoted by separate sentences or clauses,
-     * that involve multiple players. In these cases, the choices for the first action are made in APNAP order,
-     * and then the first action is processed simultaneously. Then the choices for the second action are made in
-     * APNAP order, and then that action is processed simultaneously, and so on. See rule 101.4.
-     */
-    public void processAction(Game game) {
-        game.getState().handleSimultaneousEvent(game);
-        game.resetShortLivingLKI();
-        game.applyEffects();
-        game.getState().getTriggers().checkStateTriggers(game);
     }
 
     void applyEffects(Game game) {
@@ -1655,7 +1638,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public List<FilterCreaturePermanent> getActivePowerInsteadOfToughnessForDamageLethalityFilters() {
-        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? emptyList() : getBattlefield().getAllActivePermanents().stream()
+        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? Collections.emptyList() : getBattlefield().getAllActivePermanents().stream()
                 .map(Card::getId)
                 .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
                 .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)

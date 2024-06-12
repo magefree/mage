@@ -98,7 +98,7 @@ class CovetedFalconEffect extends OneShotEffect {
                     source);
         }
 
-        game.getState().processAction(game);
+        game.processAction();
 
         int cardsToDraw = 0;
         for (UUID permanentId : targetPermanentIds) {

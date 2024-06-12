@@ -90,7 +90,7 @@ class CrabominationEffect extends OneShotEffect {
             cards.add(fromHand);
         }
         opponent.moveCardsToExile(cards.getCards(game), source, game, true, null, "");
-        game.getState().processAction(game);
+        game.processAction();
         cards.retainZone(Zone.EXILED, game);
         CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);
         return true;

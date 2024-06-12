@@ -123,7 +123,7 @@ class TheStoneBrainEffect extends OneShotEffect {
                 targetPlayer.shuffleLibrary(source, game);
 
                 if (numberOfCardsExiledFromHand > 0) {
-                    game.getState().processAction(game);
+                    game.processAction();
                     targetPlayer.drawCards(numberOfCardsExiledFromHand, source, game);
                 }
             }

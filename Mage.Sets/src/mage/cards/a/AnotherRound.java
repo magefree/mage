@@ -77,7 +77,7 @@ class AnotherRoundEffect extends OneShotEffect {
                                     .map(id -> new MageObjectReference(id, game))
                                     .collect(Collectors.toList())
                     )).apply(game, source);
-            game.getState().processAction(game);
+            game.processAction();
         }
         return true;
     }

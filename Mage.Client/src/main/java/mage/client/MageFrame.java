@@ -1411,7 +1411,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public static void main(final String[] args) {
         // Workaround for #451
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        LOGGER.info("Starting MAGE client version " + VERSION);
+        LOGGER.info("Starting MAGE CLIENT version: " + VERSION);
+        LOGGER.info("Java version: " + System.getProperty("java.version"));
         LOGGER.info("Logging level: " + LOGGER.getEffectiveLevel());
         LOGGER.info("Default charset: " + Charset.defaultCharset());
         if (!Charset.defaultCharset().toString().equals("UTF-8")) {

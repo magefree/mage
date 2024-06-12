@@ -97,7 +97,7 @@ class PheliaExuberantShepherdEffect extends OneShotEffect {
         }
         Set<Card> cards = exileZone.getCards(game);
         player.moveCards(cards, Zone.BATTLEFIELD, source, game, false, false, true, null);
-        game.getState().processAction(game);
+        game.processAction();
 
         Permanent phelia = source.getSourcePermanentIfItStillExists(game);
         if (phelia == null) {

@@ -1928,6 +1928,14 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public void processAction() {
+        state.handleSimultaneousEvent(this);
+        resetShortLivingLKI();
+        applyEffects();
+        state.getTriggers().checkStateTriggers(this);
+    }
+
+    @Override
     public void addEffect(ContinuousEffect continuousEffect, Ability source) {
         Ability newAbility = source.copy();
         newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
@@ -2241,20 +2249,17 @@ public abstract class GameImpl implements Game {
     }
 
     /**
-     * 116.5. Each time a player would get priority, the game first performs all
+     * 117.5. Each time a player would get priority, the game first performs all
      * applicable state-based actions as a single event (see rule 704,
      * “State-Based Actions”), then repeats this process until no state-based
      * actions are performed. Then triggered abilities are put on the stack (see
      * rule 603, “Handling Triggered Abilities”). These steps repeat in order
      * until no further state-based actions are performed and no abilities
      * trigger. Then the player who would have received priority does so.
-     *
-     * @return
      */
     @Override
     public boolean checkStateAndTriggered() {
         boolean somethingHappened = false;
-        //20091005 - 115.5
         while (!isPaused() && !checkIfGameIsOver()) {
             if (!checkStateBasedActions()) {
                 // nothing happened so check triggers
@@ -2263,7 +2268,7 @@ public abstract class GameImpl implements Game {
                     break;
                 }
             }
-            this.getState().processAction(this); // needed e.g if boost effects end and cause creatures to die
+            processAction(); // needed e.g if boost effects end and cause creatures to die
             somethingHappened = true;
         }
         checkConcede();
@@ -2273,10 +2278,8 @@ public abstract class GameImpl implements Game {
     /**
      * Sets the waiting triggered abilities (if there are any) to the stack in
      * the chosen order by player
-     *
-     * @return
      */
-    public boolean checkTriggered() {
+    boolean checkTriggered() {
         boolean played = false;
         state.getTriggers().checkStateTriggers(this);
         for (UUID playerId : state.getPlayerList(state.getActivePlayerId())) {
@@ -2314,15 +2317,13 @@ public abstract class GameImpl implements Game {
     }
 
     /**
-     * 116.5. Each time a player would get priority, the game first performs all
+     * 117.5. Each time a player would get priority, the game first performs all
      * applicable state-based actions as a single event (see rule 704,
      * “State-Based Actions”), then repeats this process until no state-based
      * actions are performed. Then triggered abilities are put on the stack (see
      * rule 603, “Handling Triggered Abilities”). These steps repeat in order
      * until no further state-based actions are performed and no abilities
      * trigger. Then the player who would have received priority does so.
-     *
-     * @return
      */
     protected boolean checkStateBasedActions() {
         boolean somethingHappened = false;

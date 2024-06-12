@@ -114,7 +114,7 @@ public class DevourEffect extends ReplacementEffectImpl {
                 + filterDevoured.getMessage() + (devouredCreatures > 1 ? "s" : "")
         );
         
-        game.getState().processAction(game); // need for multistep effects
+        game.processAction(); // need for multistep effects
 
         int amountCounters;
         if (devourFactor == Integer.MAX_VALUE) {

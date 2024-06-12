@@ -107,7 +107,7 @@ class PhabineBosssConfidantParleyEffect extends OneShotEffect {
         if (landCount > 0) {
             Token citizenToken = new CitizenGreenWhiteToken();
             citizenToken.putOntoBattlefield(landCount, game, source, source.getControllerId(), false, false);
-            game.getState().processAction(game);
+            game.processAction();
         }
 
         if (nonLandCount > 0) {
