@@ -1,18 +1,16 @@
 package mage.cards;
 
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.ExileAdventureSpellEffect;
-import mage.constants.CardType;
-import mage.constants.SpellAbilityType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.ExileZone;
+import mage.constants.*;
 import mage.game.Game;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -138,16 +136,29 @@ class AdventureCardSpellAbility extends SpellAbility {
     }
 
     @Override
-    public ActivationStatus canActivate(UUID playerId, Game game) {
-        ExileZone adventureExileZone = game.getExile().getExileZone(ExileAdventureSpellEffect.adventureExileId(playerId, game));
+    public ActivationStatus canActivate(SpellAbilityCastMode castMode, UUID playerId, Game game) {
         Card spellCard = game.getCard(this.getSourceId());
-        if (spellCard instanceof AdventureCardSpell) {
-            Card card = ((AdventureCardSpell) spellCard).getParentCard();
-            if (adventureExileZone != null && adventureExileZone.contains(card.getId())) {
-                return ActivationStatus.getFalse();
-            }
+        if (spellCard == null) {
+            return ActivationStatus.getFalse();
         }
-        return super.canActivate(playerId, game);
+        ActivationStatus activationStatus = super.canActivate(castMode, playerId, game);
+        if (Zone.HAND.equals(game.getState().getZone(spellCard.getMainCard().getId()))
+                || Zone.COMMAND.equals(game.getState().getZone(spellCard.getMainCard().getId())) // It is possible to use an Adventure from the Command Zone
+        ) {
+            return activationStatus;
+        } else {
+            if (!getSpellAbilityCastMode().equals(castMode)) {
+                // For cases where there is a cast mode modifier that is looking if it can be activated its way.
+                // We do want to return this ability as a valid Approving Object.
+                // One such example is Plot.
+                return activationStatus;
+            }
+            // If cast from non-hand, we need to ensure there is a different Approving Object (e.g. Future Sight).
+            Set<ApprovingObject> approvers = activationStatus.getApprovingObjects();
+            approvers.removeIf(approvingObject ->
+                    approvingObject.getApprovingAbility().getId().equals(getId()));
+            return new ActivationStatus(approvers);
+        }
     }
 
     public void setName(CardType[] cardTypes, String name, String costs) {
