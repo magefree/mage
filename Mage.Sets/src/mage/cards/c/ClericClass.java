@@ -97,7 +97,7 @@ class ClericClassReturnEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        game.getState().processAction(game);
+        game.processAction();
         Permanent permanent = game.getPermanent(card.getId());
         int toughness = permanent != null ? permanent.getToughness().getValue() : card.getToughness().getValue();
         player.gainLife(toughness, game, source);

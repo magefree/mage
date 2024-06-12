@@ -78,7 +78,7 @@ class DisorderInTheCourtEffect extends OneShotEffect {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
         if (!toExile.isEmpty()) {
             controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
-            game.getState().processAction(game);
+            game.processAction();
         }
         new InvestigateEffect(ManacostVariableValue.REGULAR).apply(game, source);
         if (!toExile.isEmpty()) {

@@ -69,7 +69,7 @@ class HourOfGloryEffect extends OneShotEffect {
             if (targetCreature != null) {
                 controller.moveCards(targetCreature, Zone.EXILED, source, game);
                 if (targetCreature.hasSubtype(SubType.GOD, game)) {
-                    game.getState().processAction(game);
+                    game.processAction();
                     Player targetController = game.getPlayer(targetCreature.getControllerId());
                     if (targetController != null) {
                         targetController.revealCards(sourceObject.getIdName(), targetController.getHand(), game);

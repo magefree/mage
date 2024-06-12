@@ -101,7 +101,7 @@ class JodahTheUnifierEffect extends OneShotEffect {
         for (Card card : controller.getLibrary().getCards(game)) {
             exiledCards.add(card);
             controller.moveCards(card, Zone.EXILED, source, game);
-            game.getState().processAction(game);
+            game.processAction();
             if (card.isLegendary(game) && !card.isLand(game) && card.getManaValue() < manaValue) {
                 CardUtil.castSpellWithAttributesForFree(controller, source, game, card);
                 break;

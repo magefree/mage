@@ -90,7 +90,7 @@ class ThoughtDissectorEffect extends OneShotEffect {
             }
             targetOpponent.revealCards(source, reveal, game);
             if (artifact != null) {
-                game.getState().processAction(game);
+                game.processAction();
                 controller.moveCards(artifact, Zone.BATTLEFIELD, source, game);
                 Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
                 if (sourcePermanent != null) {

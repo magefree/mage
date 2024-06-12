@@ -62,7 +62,7 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
             return false;
         }
         controller.moveCards(targetEnchantment, Zone.EXILED, source, game);
-        game.getState().processAction(game);
+        game.processAction();
 
         // 4/26/2014
         // Deicide looks at the card in exile, not the permanent that was exiled, to determine

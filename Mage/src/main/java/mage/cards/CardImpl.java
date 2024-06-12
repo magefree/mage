@@ -610,7 +610,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             // This is somewhat a band-aid on the special action nature of turning a permanent face up.
             // 708.8. As a face-down permanent is turned face up, its copiable values revert to its normal copiable values.
             // Any effects that have been applied to the face-down permanent still apply to the face-up permanent.
-            game.getState().processAction(game);
+            game.processAction();
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNED_FACE_UP, getId(), source, playerId));
             return true;
         }

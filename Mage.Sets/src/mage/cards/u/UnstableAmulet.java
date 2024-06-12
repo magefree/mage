@@ -98,7 +98,7 @@ class UnstableAmuletEffect extends OneShotEffect {
         UUID exileId = CardUtil.getExileZoneId(game, source);
         String exileName = CardUtil.getSourceIdName(game, source);
         controller.moveCardsToExile(card, source, game, true, exileId, exileName);
-        game.getState().processAction(game);
+        game.processAction();
         if (!Zone.EXILED.equals(game.getState().getZone(card.getId()))) {
             return true;
         }

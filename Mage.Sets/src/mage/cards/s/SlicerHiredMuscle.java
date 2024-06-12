@@ -98,7 +98,7 @@ class SlicerHiredMuscleUpkeepEffect extends OneShotEffect {
                     .setTargetPointer(new FixedTarget(sourcePermanent, game)), source);
 
             // process action so that untap effects the new controller
-            game.getState().processAction(game);
+            game.processAction();
 
             // Untap
             sourcePermanent.untap(game);

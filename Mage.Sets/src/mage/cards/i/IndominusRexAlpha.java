@@ -125,7 +125,7 @@ class IndominusRexAlphaCountersEffect extends OneShotEffect {
         controller.discard(new CardsImpl(target.getTargets()), false, source, game);
 
         //allow cards to move to graveyard before checking for abilities
-        game.getState().processAction(game);
+        game.processAction();
 
         // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
         List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");

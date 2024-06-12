@@ -71,7 +71,7 @@ class FromTheAshesEffect extends OneShotEffect {
                 playerAmount.merge(controllerId, 1, Integer::sum);
             }
         }
-        game.getState().processAction(game);
+        game.processAction();
 
         // For each land destroyed this way, its controller may search their library for a basic land card and put it onto the battlefield.
         for (Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
@@ -91,7 +91,7 @@ class FromTheAshesEffect extends OneShotEffect {
                 entry.setValue(0); // no search no shuffling
             }
         }
-        game.getState().processAction(game);
+        game.processAction();
 
         // Then each player who searched their library this way shuffles. 
         for (Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
