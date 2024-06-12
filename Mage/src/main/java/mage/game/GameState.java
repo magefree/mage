@@ -671,7 +671,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             String message = "Warning, found " + simultaneousEvents.size() + " unhandled events while calling applyEffects: "
                     + simultaneousEvents.stream().map(Objects::toString).collect(Collectors.joining(", "))
                     + " --- Stack: " + stack.toString();
-            throw new IllegalStateException(message);
+            throw new AssertionError(message);
         }
         applyEffectsCounter++;
         for (Player player : players.values()) {
