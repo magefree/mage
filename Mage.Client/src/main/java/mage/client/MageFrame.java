@@ -47,9 +47,6 @@ import mage.util.DebugUtil;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
-import net.java.balloontip.BalloonTip;
-import net.java.balloontip.positioners.LeftAbovePositioner;
-import net.java.balloontip.styles.EdgedBalloonStyle;
 import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
@@ -136,8 +133,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static UpdateMemUsageTask updateMemUsageTask;
 
     private static long startTime;
-
-    private final BalloonTip balloonTip;
 
     /**
      * @return the session
@@ -363,11 +358,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
             }
         });
-
-        // balloonTip = new BalloonTip(desktopPane, "", new ModernBalloonStyle(0, 0, Color.WHITE, Color.YELLOW, Color.BLUE), false);
-        balloonTip = new BalloonTip(desktopPane, "", new EdgedBalloonStyle(Color.WHITE, Color.BLUE), false);
-        balloonTip.setPositioner(new LeftAbovePositioner(0, 0));
-        balloonTip.setVisible(false);
 
         // tooltips delay in ms
         ToolTipManager.sharedInstance().setDismissDelay(Constants.TOOLTIPS_DELAY_MS);
@@ -1824,7 +1814,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 component.setMaximumSize(d);
             }
         }
-        balloonTip.setFont(GUISizeHelper.balloonTooltipFont);
 
         updateTooltipContainerSizes();
     }
