@@ -21,7 +21,6 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.utils.CardImageUtils;
-import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +34,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
  * @author JayDi85
@@ -74,10 +75,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private Proxy proxy = Proxy.NO_PROXY;
 
     enum DownloadSources {
-        WIZARDS("1. wizards.com - low quality, cards only, multi-language", WizardCardsImageSource.instance),
-        SCRYFALL_BIG("2a. scryfall.com - BIG: high quality, multi-language", ScryfallImageSource.getInstance()),
-        SCRYFALL_SMALL("2b. scryfall.com - small: low quality, multi-language", ScryfallImageSourceSmall.getInstance()),
-        SCRYFALL_NORM("2c. scryfall.com - normal: good quality, multi-language", ScryfallImageSourceNormal.getInstance()),
+        WIZARDS("1. wizards.com - low quality, cards only", WizardCardsImageSource.instance),
+        SCRYFALL_BIG("2a. scryfall.com - BIG: high quality (~15 GB)", ScryfallImageSource.getInstance()),
+        SCRYFALL_NORM("2b. scryfall.com - normal: good quality (~10 GB)", ScryfallImageSourceNormal.getInstance()),
+        SCRYFALL_SMALL("2c. scryfall.com - small: low quality, unreadable text (~1.5 GB)", ScryfallImageSourceSmall.getInstance()),
         GRAB_BAG("3. GrabBag - unofficial STAR WARS cards and tokens", GrabbagImageSource.instance),
         COPYPASTE("4. Experimental - copy and paste image URLs", CopyPasteImageSource.instance); // TODO: need rework for user friendly GUI
 
@@ -160,7 +161,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         // SOURCES - scryfall is default source
         uiDialog.getSourcesCombo().setModel(new DefaultComboBoxModel(DownloadSources.values()));
-        uiDialog.getSourcesCombo().setSelectedItem(DownloadSources.SCRYFALL_BIG);
+        uiDialog.getSourcesCombo().setSelectedItem(DownloadSources.SCRYFALL_NORM);
         selectedSource = ScryfallImageSource.getInstance();
         uiDialog.getSourcesCombo().addItemListener((ItemEvent event) -> {
             if (event.getStateChange() == ItemEvent.SELECTED) {
@@ -390,7 +391,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         && selectedSource.isCardImageProvided(data.getSet(), data.getName())
                         && selectedSets.contains(data.getSet())) {
                     if (!onlyBasics
-                            || basicList.contains(data.getName())) { 
+                            || basicList.contains(data.getName())) {
                         numberCardImagesAvailable++;
                         cardsDownloadQueue.add(data);
                     }
@@ -427,12 +428,17 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         uiDialog.setCurrentInfo("Missing: " + missingCardsCount + " card images / " + missingTokensCount + " token images");
         int imageSum = cardCount + tokenCount;
-        float mb = (imageSum * selectedSource.getAverageSize()) / 1024;
-        updateProgressMessage(String.format(
-                cardIndex == imageSum
-                        ? "%d of %d (%d cards/%d tokens) image downloads finished! Please close!"
-                        : "%d of %d (%d cards/%d tokens) image downloads finished! Please wait! [%.1f Mb]",
-                0, imageSum, cardCount, tokenCount, mb
+        float mb = (imageSum * selectedSource.getAverageSizeKb()) / 1024;
+        String statusEnd;
+        if (imageSum == 0) {
+            statusEnd = "you have all images. Please close.";
+        } else if (cardIndex == 0) {
+            statusEnd = "image download NOT STARTED. Please start.";
+        } else {
+            statusEnd = String.format("image downloading... Please wait [%.1f Mb left].", mb);
+        }
+        updateProgressMessage(String.format("%d of %d (%d cards and %d tokens) %s",
+                0, imageSum, cardCount, tokenCount, statusEnd
         ), 0, imageSum);
     }
 
@@ -930,11 +936,12 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         if (cardIndex < needDownloadCount) {
             // downloading
-            float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSize()) / 1024;
-            updateProgressMessage(String.format("%d of %d image downloads finished! Please wait! [%.1f Mb]",
+            float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSizeKb()) / 1024;
+            updateProgressMessage(String.format("%d of %d image downloading... Please wait [%.1f Mb left].",
                     lastCardIndex, needDownloadCount, mb), lastCardIndex, needDownloadCount);
         } else {
             // finished
+            updateProgressMessage("Image download DONE, refreshing stats... Please wait.");
             List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());
             DownloadPicturesService.this.cardsMissing.parallelStream().forEach(cardDownloadData -> {
                 TFile file = new TFile(CardImageUtils.buildImagePathToCardOrToken(cardDownloadData));
@@ -949,7 +956,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
             if (this.cardsDownloadQueue.isEmpty()) {
                 // stop download
-                updateProgressMessage("0 images remaining. Please close.");
+                updateProgressMessage("Nothing to download. Please close.");
             } else {
                 // try download again
             }

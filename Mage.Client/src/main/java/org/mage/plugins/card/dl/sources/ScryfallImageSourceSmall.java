@@ -43,8 +43,9 @@ public class ScryfallImageSourceSmall extends ScryfallImageSource {
     }
 
     @Override
-    public float getAverageSize() {
-        return 14; // 1,035,907,575 bytes / 73,637 files = 14,068 bytes/file (or 13.78kb/file)
+    public float getAverageSizeKb() {
+        // June 2024: MH3 set - 4500 Kb / 332 = 14 Kb
+        return 14f;
     }
 
 }

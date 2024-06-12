@@ -299,9 +299,9 @@ public class ScryfallImageSource implements CardImageSource {
     }
 
     @Override
-    public float getAverageSize() {
-        // March 2020: 46_354 image files with total size 9_545_168 KiB
-        return 206;
+    public float getAverageSizeKb() {
+        // June 2024: MH3 set - 46450 Kb / 332 = 140 Kb
+        return 140f;
     }
 
     @Override
