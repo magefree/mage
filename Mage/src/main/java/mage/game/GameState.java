@@ -1,6 +1,5 @@
 package mage.game;
 
-import static java.util.Collections.emptyList;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -1639,7 +1638,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public List<FilterCreaturePermanent> getActivePowerInsteadOfToughnessForDamageLethalityFilters() {
-        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? emptyList() : getBattlefield().getAllActivePermanents().stream()
+        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? Collections.emptyList() : getBattlefield().getAllActivePermanents().stream()
                 .map(Card::getId)
                 .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
                 .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)
