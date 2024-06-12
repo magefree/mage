@@ -667,6 +667,12 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     void applyEffects(Game game) {
+        if (hasSimultaneousEvents()) {
+            String message = "Warning, found " + simultaneousEvents.size() + " unhandled events while calling applyEffects: "
+                    + simultaneousEvents.stream().map(Objects::toString).collect(Collectors.joining(", "))
+                    + " --- Stack: " + stack.toString();
+            throw new IllegalStateException(message);
+        }
         applyEffectsCounter++;
         for (Player player : players.values()) {
             player.reset();
