@@ -112,7 +112,7 @@ public interface Target extends Serializable {
      * Overwrites the name automatically generated from the filter text.
      * If you want to add additional info for usability, use `withChooseHint` instead.
      */
-    Target setTargetName(String name);
+    Target withTargetName(String name);
 
     String getTargetedName(Game game);
 

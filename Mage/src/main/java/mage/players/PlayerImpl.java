@@ -2957,7 +2957,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         boolean casted = false;
         TargetCard targetCard = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_CARD);
-        targetCard.setTargetName("card to cast from library");
+        targetCard.withTargetName("card to cast from library");
         targetCard.withNotTarget(true);
         while (!castableCards.isEmpty()) {
             targetCard.clearChosen();

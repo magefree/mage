@@ -1276,7 +1276,7 @@ public abstract class GameImpl implements Game {
         Player choosingPlayer = null;
         if (startingPlayerId == null) {
             TargetPlayer targetPlayer = new TargetPlayer();
-            targetPlayer.setTargetName("starting player");
+            targetPlayer.withTargetName("starting player");
             if (choosingPlayerId != null) {
                 choosingPlayer = this.getPlayer(choosingPlayerId);
                 if (choosingPlayer != null && !choosingPlayer.canRespond()) {
@@ -2869,7 +2869,7 @@ public abstract class GameImpl implements Game {
                 }
                 Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
                 targetLegendaryToKeep.withNotTarget(true);
-                targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
+                targetLegendaryToKeep.withTargetName(legend.getName() + " to keep (Legendary Rule)?");
                 controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
                 for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                     if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {

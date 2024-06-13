@@ -64,7 +64,7 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
 
     public GlyphOfDelusionSecondTarget() {
         super();
-        setTargetName("target creature that target Wall blocked this turn");
+        withTargetName("target creature that target Wall blocked this turn");
     }
 
     private GlyphOfDelusionSecondTarget(final GlyphOfDelusionSecondTarget target) {

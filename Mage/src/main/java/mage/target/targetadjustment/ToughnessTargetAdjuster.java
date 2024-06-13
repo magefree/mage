@@ -43,7 +43,7 @@ public class ToughnessTargetAdjuster implements TargetAdjuster {
         int amount = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
         Filter<MageObject> filter = newTarget.getFilter();
         filter.add(new ToughnessPredicate(comparison, amount));
-        newTarget.setTargetName(filter.getMessage() + " (Toughness " + comparison + " " + amount + ")");
+        newTarget.withTargetName(filter.getMessage() + " (Toughness " + comparison + " " + amount + ")");
         ability.getTargets().clear();
         ability.addTarget(newTarget);
     }
