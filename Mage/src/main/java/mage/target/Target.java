@@ -108,6 +108,10 @@ public interface Target extends Serializable {
      */
     String getTargetName();
 
+    /**
+     * Overwrites the name automatically generated from the filter text.
+     * If you want to add additional info for usability, use `withChooseHint` instead.
+     */
     Target setTargetName(String name);
 
     String getTargetedName(Game game);
@@ -172,6 +176,10 @@ public interface Target extends Serializable {
     // used for cards like Spellskite
     void setTargetAmount(UUID targetId, int amount, Game game);
 
+    /**
+     * Adds a clarification during target selection (in parentheses).
+     * Useful for abilities that have multiple targets and different effects.
+     */
     Target withChooseHint(String chooseHint);
 
     String getChooseHint();
