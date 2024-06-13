@@ -33,7 +33,7 @@ public final class AetherRefinery extends CardImpl {
     public AetherRefinery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT }, "{4}{R}{R}");
 
-        // If you would get one or more {E}, you get twice that many instead.
+        // If you would get one or more {E}, you get twice that many {E} instead.
         this.addAbility(new SimpleStaticAbility(new AetherRefineryEffect()));
 
         // {T}: You get {E}, then you may pay one or more {E}. If you do, create an X/X black Aetherborn creature token, where X is the amount of {E} paid this way.
@@ -56,7 +56,7 @@ class AetherRefineryEffect extends ReplacementEffectImpl {
 
     AetherRefineryEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, false);
-        staticText = "If you would get one or more {E}, you get twice that many instead";
+        staticText = "If you would get one or more {E}, you get twice that many {E} instead";
     }
 
     private AetherRefineryEffect(final AetherRefineryEffect effect) {

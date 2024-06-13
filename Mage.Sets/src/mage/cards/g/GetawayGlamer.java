@@ -41,13 +41,13 @@ public final class GetawayGlamer extends CardImpl {
         // + {1} -- Exile target nontoken creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(false));
         this.getSpellAbility().addTarget(
-                new TargetCreaturePermanent(filter).setTargetName("a nontoken creature to exile")
+                new TargetCreaturePermanent(filter).withChooseHint("to exile")
         );
         this.getSpellAbility().withFirstModeCost(new GenericManaCost(1));
 
         // + {2} -- Destroy target creature if no other creature has greater power.
         this.getSpellAbility().addMode(new Mode(new GetawayGlamerEffect())
-                .addTarget(new TargetCreaturePermanent().setTargetName("a creature (to destroy if no other creature has greater power)"))
+                .addTarget(new TargetCreaturePermanent().withChooseHint("to destroy if no other creature has greater power"))
                 .withCost(new GenericManaCost(2)));
     }
 
