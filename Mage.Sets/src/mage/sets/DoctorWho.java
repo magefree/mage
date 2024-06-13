@@ -153,6 +153,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Myriad Landscape", 290, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Monastery", 291, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Ominous Cemetery", 189, Rarity.UNCOMMON, mage.cards.o.OminousCemetery.class));
+        cards.add(new SetCardInfo("Osgood, Operation Double", 191, Rarity.RARE, mage.cards.o.OsgoodOperationDouble.class));
         cards.add(new SetCardInfo("Out of Time", 209, Rarity.RARE, mage.cards.o.OutOfTime.class));
         cards.add(new SetCardInfo("Overgrown Farmland", 292, Rarity.RARE, mage.cards.o.OvergrownFarmland.class));
         cards.add(new SetCardInfo("Past in Flames", 565, Rarity.RARE, mage.cards.p.PastInFlames.class));
@@ -169,6 +170,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Regenerations Restored", 151, Rarity.RARE, mage.cards.r.RegenerationsRestored.class));
         cards.add(new SetCardInfo("Reliquary Tower", 296, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Renegade Silent", 53, Rarity.UNCOMMON, mage.cards.r.RenegadeSilent.class));
+        cards.add(new SetCardInfo("Return the Past", 92, Rarity.RARE, mage.cards.r.ReturnThePast.class));
         cards.add(new SetCardInfo("Return to Dust", 211, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Reverse the Polarity", 54, Rarity.RARE, mage.cards.r.ReverseThePolarity.class));
         cards.add(new SetCardInfo("River of Tears", 297, Rarity.RARE, mage.cards.r.RiverOfTears.class));
