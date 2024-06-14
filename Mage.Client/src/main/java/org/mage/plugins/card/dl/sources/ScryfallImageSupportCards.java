@@ -622,6 +622,10 @@ public class ScryfallImageSupportCards {
             // normal cards
             put("SLD/Viscera Seer/99999VS", "https://api.scryfall.com/cards/sld/VS/"); // see issue 11157
         
+            // UST
+            put("UST/Very Cryptic Command B", "https://api.scryfall.com/cards/ust/49b/");
+            put("UST/Very Cryptic Command D", "https://api.scryfall.com/cards/ust/49d/");
+		
             // CALC - custom alchemy version of cards.
             put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");
 
