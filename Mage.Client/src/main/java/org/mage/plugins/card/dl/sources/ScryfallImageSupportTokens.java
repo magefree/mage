@@ -2406,6 +2406,36 @@ public class ScryfallImageSupportTokens {
             put("MH3/Zombie", "https://api.scryfall.com/cards/tmh3/21/en?format=image");
             put("MH3/Zombie Army", "https://api.scryfall.com/cards/tmh3/22/en?format=image");
 
+            // M3C
+            put("M3C/Aetherborn", "https://api.scryfall.com/cards/tm3c/9/en?format=image");
+            put("M3C/Ape", "https://api.scryfall.com/cards/tm3c/14/en?format=image");
+            put("M3C/Beast/1", "https://api.scryfall.com/cards/tm3c/10/en?format=image");
+            put("M3C/Beast/2", "https://api.scryfall.com/cards/tm3c/15/en?format=image");
+            put("M3C/Beast/3", "https://api.scryfall.com/cards/tm3c/16/en?format=image");
+            put("M3C/Boar", "https://api.scryfall.com/cards/tm3c/17/en?format=image");
+            put("M3C/Construct", "https://api.scryfall.com/cards/tm3c/24/en?format=image");
+            put("M3C/Dragon", "https://api.scryfall.com/cards/tm3c/12/en?format=image");
+            put("M3C/Eldrazi", "https://api.scryfall.com/cards/tm3c/1/en?format=image");
+            put("M3C/Eldrazi Angel", "https://api.scryfall.com/cards/tm3c/2/en?format=image");
+            put("M3C/Eldrazi Scion", "https://api.scryfall.com/cards/tm3c/3/en?format=image");
+            put("M3C/Elephant", "https://api.scryfall.com/cards/tm3c/18/en?format=image");
+            put("M3C/Forest Dryad", "https://api.scryfall.com/cards/tm3c/19/en?format=image");
+            put("M3C/Emblem Garruk", "https://api.scryfall.com/cards/tm3c/27/en?format=image");
+            put("M3C/Goblin", "https://api.scryfall.com/cards/tm3c/13/en?format=image");
+            put("M3C/Hydra", "https://api.scryfall.com/cards/tm3c/20/en?format=image");
+            put("M3C/Illusion", "https://api.scryfall.com/cards/tm3c/6/en?format=image");
+            put("M3C/Marit Lage", "https://api.scryfall.com/cards/tm3c/11/en?format=image");
+            put("M3C/Myr", "https://api.scryfall.com/cards/tm3c/25/en?format=image");
+            put("M3C/Phyrexian Myr", "https://api.scryfall.com/cards/tm3c/7/en?format=image");
+            put("M3C/Sand Warrior", "https://api.scryfall.com/cards/tm3c/23/en?format=image");
+            put("M3C/Saproling", "https://api.scryfall.com/cards/tm3c/21/en?format=image");
+            put("M3C/Shapeshifter/1", "https://api.scryfall.com/cards/tm3c/4/en?format=image");
+            put("M3C/Shapeshifter/2", "https://api.scryfall.com/cards/tm3c/8/en?format=image");
+            put("M3C/Spirit", "https://api.scryfall.com/cards/tm3c/5/en?format=image");
+            put("M3C/Tarmogoyf", "https://api.scryfall.com/cards/tm3c/22/en?format=image");
+            put("M3C/Thopter", "https://api.scryfall.com/cards/tm3c/26/en?format=image");
+            put("M3C/Emblem Vivien", "https://api.scryfall.com/cards/tm3c/28/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

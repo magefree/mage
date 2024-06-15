@@ -132,6 +132,8 @@
 |Generate|EMBLEM:SCD|Emblem Nixilis|||ObNixilisReignitedEmblem|
 |Generate|EMBLEM:SCD|Emblem Sarkhan|||SarkhanTheDragonspeakerEmblem|
 |Generate|EMBLEM:MH3|Emblem Tamiyo|||TamiyoSeasonedScholarEmblem|
+|Generate|EMBLEM:M3C|Emblem Garruk|||GarrukApexPredatorEmblem|
+|Generate|EMBLEM:M3C|Emblem Vivien|||VivienReidEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2341,3 +2343,31 @@
 |Generate|TOK:MH3|Whale|||ReefWormWhaleToken|
 |Generate|TOK:MH3|Zombie|||ZombieToken|
 |Generate|TOK:MH3|Zombie Army|||ZombieArmyToken|
+
+# M3C
+|Generate|TOK:M3C|Aetherborn|||AetherbornToken|
+|Generate|TOK:M3C|Ape|||ApeToken|
+|Generate|TOK:M3C|Beast|1||GarrukApexPredatorBeastToken|
+|Generate|TOK:M3C|Beast|2||BeastToken|
+|Generate|TOK:M3C|Beast|3||BeastToken2|
+|Generate|TOK:M3C|Boar|||Boar2Token|
+|Generate|TOK:M3C|Construct|||StoneIdolToken|
+|Generate|TOK:M3C|Dragon|||DragonToken2|
+|Generate|TOK:M3C|Eldrazi|||EldraziToken|
+|Generate|TOK:M3C|Eldrazi Angel|||EldraziAngelToken|
+|Generate|TOK:M3C|Eldrazi Scion|||EldraziScionToken|
+|Generate|TOK:M3C|Elephant|||ElephantToken|
+|Generate|TOK:M3C|Forest Dryad|||ForestDryadToken|
+|Generate|TOK:M3C|Goblin|||GoblinToken|
+|Generate|TOK:M3C|Hydra|||HydraBroodmasterToken|
+|Generate|TOK:M3C|Illusion|||CustomIllusionToken|
+|Generate|TOK:M3C|Marit Lage|||MaritLageToken|
+|Generate|TOK:M3C|Myr|||MyrToken|
+|Generate|TOK:M3C|Phyrexian Myr|||BrudicladTelchorMyrToken|
+|Generate|TOK:M3C|Sand Warrior|||SandWarriorToken|
+|Generate|TOK:M3C|Saproling|||SaprolingToken|
+|Generate|TOK:M3C|Shapeshifter|1||CribSwapShapeshifterWhiteToken|
+|Generate|TOK:M3C|Shapeshifter|2||ShapeshifterBlueToken|
+|Generate|TOK:M3C|Spirit|||UginTheIneffableToken|
+|Generate|TOK:M3C|Tarmogoyf|||TarmogoyfToken|
+|Generate|TOK:M3C|Thopter|||ThopterColorlessToken|
