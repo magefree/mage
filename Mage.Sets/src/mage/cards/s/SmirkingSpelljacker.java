@@ -117,7 +117,7 @@ class SmirkingSpelljackerEffect extends OneShotEffect {
             return false;
         }
         FilterCard filter = new FilterCard("card exiled with " + CardUtil.getSourceLogName(game, source));
-        TargetCard target = new TargetCardInExile(1, 1, filter, CardUtil.getExileZoneId(game, source));
+        TargetCard target = new TargetCardInExile(filter, CardUtil.getExileZoneId(game, source));
         target.withNotTarget(true);
         controller.choose(Outcome.PlayForFree, target, source, game);
         new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST)

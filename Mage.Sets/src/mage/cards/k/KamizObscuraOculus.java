@@ -33,7 +33,7 @@ public final class KamizObscuraOculus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
 
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CEPHALID, SubType.ROGUE);
+        this.subtype.add(SubType.OCTOPUS, SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

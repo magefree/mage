@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -107,9 +106,7 @@ class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl 
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-
-        return (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || abilityToModify instanceof SpellAbility)
+        return (abilityToModify.isActivatedAbility() || abilityToModify.getAbilityType() == AbilityType.SPELL)
                 && game.getState().getPlayersInRange(source.getControllerId(), game).contains(abilityToModify.getControllerId());
     }
 

@@ -68,7 +68,7 @@ class GoblinWarCryEffect extends OneShotEffect {
         filter.add(new ControllerIdPredicate(player.getId()));
         Target target = new TargetPermanent(1, 1, filter, true);
         if (target.canChoose(player.getId(), source, game)) {
-            while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+            while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
                 player.chooseTarget(Outcome.DestroyPermanent, target, source, game);
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());

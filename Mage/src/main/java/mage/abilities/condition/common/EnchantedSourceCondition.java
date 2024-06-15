@@ -36,11 +36,11 @@ public class EnchantedSourceCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         int numberOfFoundEnchantments = 0;
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
-                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                Permanent attached = game.getPermanent(uuid);
                 if (attached != null && attached.isEnchantment(game) && (!aurasOnly || attached.hasSubtype(SubType.AURA, game))) {
                     numberOfFoundEnchantments += 1;
                 }

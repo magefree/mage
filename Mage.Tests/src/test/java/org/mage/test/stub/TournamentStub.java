@@ -85,8 +85,7 @@ public class TournamentStub implements Tournament {
     }
 
     @Override
-    public void updateDeck(UUID playerId, Deck deck) {
-
+    public void updateDeck(UUID playerId, Deck deck, boolean ignoreMainBasicLands) {
     }
 
     @Override

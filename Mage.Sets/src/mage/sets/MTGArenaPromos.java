@@ -16,7 +16,7 @@ public class MTGArenaPromos extends ExpansionSet {
     }
 
     private MTGArenaPromos() {
-        super("MTG Arena Promos", "PANA", ExpansionSet.buildDate(2020, 2, 15), SetType.MAGIC_ONLINE);
+        super("MTG Arena Promos", "PANA", ExpansionSet.buildDate(2020, 2, 15), SetType.MAGIC_ARENA);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

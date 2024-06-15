@@ -122,7 +122,7 @@ class BombSquadDamgeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (creature != null) {
-            creature.removeCounters(CounterType.FUSE.getName(), creature.getCounters(game).getCount(CounterType.FUSE), source, game);
+            creature.removeAllCounters(CounterType.FUSE.getName(), source, game);
             creature.destroy(source, game, false);
         }
         if (creature == null) {

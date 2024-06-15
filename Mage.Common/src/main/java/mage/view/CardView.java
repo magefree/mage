@@ -369,7 +369,7 @@ public class CardView extends SimpleCardView {
                 this.power = Integer.toString(card.getPower().getValue());
                 this.toughness = Integer.toString(card.getToughness().getValue());
                 this.cardTypes = new ArrayList<>(card.getCardType());
-                this.color = card.getColor(null);
+                this.color = card.getColor(null).copy();
                 this.superTypes = new ArrayList<>(card.getSuperType());
                 this.subTypes = card.getSubtype().copy();
                 this.rules = new ArrayList<>(card.getRules());
@@ -1147,7 +1147,7 @@ public class CardView extends SimpleCardView {
 
         // from normal targets
         for (Target target : targets) {
-            if (target.isChosen()) {
+            if (target.isChosen(game)) {
                 newTargets.addAll(target.getTargets());
             }
         }
@@ -1573,8 +1573,8 @@ public class CardView extends SimpleCardView {
         return cardTypes.contains(CardType.ARTIFACT);
     }
 
-    public boolean isTribal() {
-        return cardTypes.contains(CardType.TRIBAL);
+    public boolean isKindred() {
+        return cardTypes.contains(CardType.KINDRED);
     }
 
     public void setInViewerOnly(boolean inViewerOnly) {

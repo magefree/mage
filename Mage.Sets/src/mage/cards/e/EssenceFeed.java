@@ -21,9 +21,10 @@ public final class EssenceFeed extends CardImpl {
     public EssenceFeed (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
 
+        // Target player loses 3 life. You gain 3 life and create three 0/1 colorless Eldrazi Spawn creature tokens. They have “Sacrifice this creature: Add {C}.”
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 3).concatBy("and"));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 3).withTextOptions(true).concatBy("and"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

@@ -1,7 +1,6 @@
 package mage.util;
 
-import mage.cards.decks.Deck;
-import mage.players.Player;
+import mage.cards.decks.DeckValidator;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
@@ -22,10 +21,22 @@ public final class DeckUtil {
     /**
      * Find deck hash (main + sideboard)
      * It must be same after sideboard (do not depend on main/sb structure)
+     *
+     * @param ignoreMainBasicLands - drafts allow to use any basic lands, so ignore it for hash calculation
      */
-    public static long getDeckHash(List<String> mainCards, List<String> sideboardCards) {
+    public static long getDeckHash(List<String> mainCards, List<String> sideboardCards, boolean ignoreMainBasicLands) {
         List<String> all = new ArrayList<>(mainCards);
         all.addAll(sideboardCards);
+
+        // related rules:
+        // 7.2 Card Use in Limited Tournaments
+        // Players may add an unlimited number of cards named Plains, Island, Swamp, Mountain, or Forest to their
+        // deck and sideboard. They may not add additional snow basic land cards (e.g., Snow-Covered Forest, etc)
+        // or Wastes basic land cards, even in formats in which they are legal.
+        if (ignoreMainBasicLands) {
+            all.removeIf(DeckValidator.MAIN_BASIC_LAND_NAMES::contains);
+        }
+
         Collections.sort(all);
         return getStringHash(all.toString());
     }
@@ -57,28 +68,5 @@ public final class DeckUtil {
             StreamUtils.closeQuietly(bw);
         }
         return null;
-    }
-
-    /**
-     * make sure it's the same deck (player do not add or remove something)
-     *
-     * @param newDeck will be clear on cheating
-     */
-    public boolean checkDeckForModification(String checkInfo, Player player, Deck oldDeck, Deck newDeck) {
-        boolean isGood = (oldDeck.getDeckHash() == newDeck.getDeckHash());
-        if (!isGood) {
-            String message = String.format("Found cheating player [%s] in [%s] with changed deck, main %d -> %d, side %d -> %d",
-                    player.getName(),
-                    checkInfo,
-                    oldDeck.getCards().size(),
-                    newDeck.getCards().size(),
-                    oldDeck.getSideboard().size(),
-                    newDeck.getSideboard().size()
-            );
-            logger.error(message);
-            newDeck.getCards().clear();
-            newDeck.getSideboard().clear();
-        }
-        return isGood;
     }
 }

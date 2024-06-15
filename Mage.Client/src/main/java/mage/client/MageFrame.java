@@ -47,9 +47,6 @@ import mage.util.DebugUtil;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
-import net.java.balloontip.BalloonTip;
-import net.java.balloontip.positioners.LeftAbovePositioner;
-import net.java.balloontip.styles.EdgedBalloonStyle;
 import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
@@ -107,6 +104,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private final ErrorDialog errorDialog;
     private static CallbackClient callbackClient;
     private static final Preferences PREFS = Preferences.userNodeForPackage(MageFrame.class);
+    private final JPanel fakeTopPanel;
     private JLabel title;
     private Rectangle titleRectangle;
     private static final MageVersion VERSION = new MageVersion(MageFrame.class);
@@ -135,8 +133,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static UpdateMemUsageTask updateMemUsageTask;
 
     private static long startTime;
-
-    private final BalloonTip balloonTip;
 
     /**
      * @return the session
@@ -332,7 +328,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         setAppIcon();
         MageTray.instance.install();
 
-        desktopPane.add(ArrowBuilder.getBuilder().getArrowsManagerPanel(), JLayeredPane.DRAG_LAYER);
+        // transparent top panel to fix swing bugs with other panel drawing and events processing on some systems like macOS
+        fakeTopPanel = new JPanel();
+        fakeTopPanel.setVisible(true);
+        fakeTopPanel.setOpaque(false);
+        fakeTopPanel.setLayout(null);
+        desktopPane.add(fakeTopPanel, JLayeredPane.DRAG_LAYER);
+
+        desktopPane.add(ArrowBuilder.getBuilder().getArrowsManagerPanel(), JLayeredPane.PALETTE_LAYER);
+
 
         desktopPane.addComponentListener(new ComponentAdapter() {
             @Override
@@ -347,17 +351,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 updateCurrentFrameSize();
 
                 ArrowBuilder.getBuilder().setSize(width, height);
+                fakeTopPanel.setSize(width, height);
 
                 if (title != null) {
                     title.setBounds((int) (width - titleRectangle.getWidth()) / 2, (int) (height - titleRectangle.getHeight()) / 2, titleRectangle.width, titleRectangle.height);
                 }
             }
         });
-
-        // balloonTip = new BalloonTip(desktopPane, "", new ModernBalloonStyle(0, 0, Color.WHITE, Color.YELLOW, Color.BLUE), false);
-        balloonTip = new BalloonTip(desktopPane, "", new EdgedBalloonStyle(Color.WHITE, Color.BLUE), false);
-        balloonTip.setPositioner(new LeftAbovePositioner(0, 0));
-        balloonTip.setVisible(false);
 
         // tooltips delay in ms
         ToolTipManager.sharedInstance().setDismissDelay(Constants.TOOLTIPS_DELAY_MS);
@@ -438,7 +438,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             return;
         }
         cardInfoPane.setLocation(40, 40);
-        cardInfoPane.setBackground(new Color(0, 0, 0, 0));
+        cardInfoPane.setBackground(new Color(0, 0, 0, 255)); // use non-transparent background to full draw, see bug example in #12261
         UI.addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
 
         MageRoundPane popupContainer = new MageRoundPane();
@@ -681,25 +681,29 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (activeFrame != null) {
             activeFrame.deactivated();
         }
+        activeFrame = null;
 
-        // If null, no new frame to activate, return early
+        // clean resources
+        ArrowBuilder.getBuilder().hideAllPanels();
+        MusicPlayer.stopBGM();
+
+        // if no new frame to activate (example: disconnection)
         if (frame == null) {
-            activeFrame = null;
             return;
         }
+
         LOGGER.debug("Setting " + frame.getTitle() + " active");
+
         activeFrame = frame;
-        desktopPane.moveToFront(frame);
+        desktopPane.moveToFront(activeFrame);
         activeFrame.setBounds(0, 0, desktopPane.getWidth(), desktopPane.getHeight());
         activeFrame.revalidate();
         activeFrame.activated();
         activeFrame.setVisible(true);
-        ArrowBuilder.getBuilder().hideAllPanels();
-        if (frame instanceof GamePane) {
-            ArrowBuilder.getBuilder().showPanel(((GamePane) frame).getGameId());
+
+        if (activeFrame instanceof GamePane) {
+            ArrowBuilder.getBuilder().showPanel(((GamePane) activeFrame).getGameId());
             MusicPlayer.playBGM();
-        } else {
-            MusicPlayer.stopBGM();
         }
     }
 
@@ -941,6 +945,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         jMemUsageLabel = new javax.swing.JLabel();
 
         menuDebugTestModalDialog.setText("Test Modal Dialogs");
+        menuDebugTestModalDialog.setFont(GUISizeHelper.menuFont);
         menuDebugTestModalDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestModalDialogActionPerformed(evt);
@@ -949,6 +954,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupDebug.add(menuDebugTestModalDialog);
 
         menuDebugTestCardRenderModesDialog.setText("Test Card Render Modes");
+        menuDebugTestCardRenderModesDialog.setFont(GUISizeHelper.menuFont);
         menuDebugTestCardRenderModesDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestCardRenderModesDialogActionPerformed(evt);
@@ -1395,7 +1401,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public static void main(final String[] args) {
         // Workaround for #451
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        LOGGER.info("Starting MAGE client version " + VERSION);
+        LOGGER.info("Starting MAGE CLIENT version: " + VERSION);
+        LOGGER.info("Java version: " + System.getProperty("java.version"));
         LOGGER.info("Logging level: " + LOGGER.getEffectiveLevel());
         LOGGER.info("Default charset: " + Charset.defaultCharset());
         if (!Charset.defaultCharset().toString().equals("UTF-8")) {
@@ -1807,7 +1814,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 component.setMaximumSize(d);
             }
         }
-        balloonTip.setFont(GUISizeHelper.balloonTooltipFont);
 
         updateTooltipContainerSizes();
     }

@@ -163,6 +163,31 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public boolean isActivatedAbility() {
+        return this.abilityType.isActivatedAbility();
+    }
+
+    @Override
+    public boolean isTriggeredAbility() {
+        return this.abilityType.isTriggeredAbility();
+    }
+
+    @Override
+    public boolean isNonManaActivatedAbility() {
+        return this.abilityType.isNonManaActivatedAbility();
+    }
+
+    @Override
+    public boolean isManaActivatedAbility() {
+        return this.abilityType.isManaActivatedAbility();
+    }
+
+    @Override
+    public boolean isManaAbility() {
+        return this.abilityType.isManaAbility();
+    }
+
+    @Override
     public boolean resolve(Game game) {
         boolean result = true;
         //20100716 - 117.12
@@ -193,7 +218,7 @@ public abstract class AbilityImpl implements Ability {
                 boolean effectResult = effect.apply(game, this);
                 result &= effectResult;
                 if (logger.isDebugEnabled()) {
-                    if (this.getAbilityType() != AbilityType.MANA) {
+                    if (!this.isManaAbility()) {
                         if (!effectResult) {
                             if (this.getSourceId() != null) {
                                 MageObject mageObject = game.getObject(this.getSourceId());
@@ -223,7 +248,7 @@ public abstract class AbilityImpl implements Ability {
              * abilities with replacement effects deactivated too late Example:
              * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
              */
-            game.getState().processAction(game);
+            game.processAction();
         }
         return result;
     }
@@ -351,7 +376,7 @@ public abstract class AbilityImpl implements Ability {
             // and/or zones become the target of a spell trigger at this point; they'll wait to be put on
             // the stack until the spell has finished being cast.)
 
-            if (this.getAbilityType() != AbilityType.TRIGGERED) { // triggered abilities check this already in playerImpl.triggerAbility
+            if (!this.getAbilityType().isTriggeredAbility()) { // triggered abilities check this already in playerImpl.triggerAbility
                 adjustTargets(game);
             }
 
@@ -359,6 +384,7 @@ public abstract class AbilityImpl implements Ability {
                 Outcome outcome = getEffects().getOutcome(this);
 
                 // only activated abilities can be canceled by human user (not triggered)
+                // Note: ActivatedAbility does include SpellAbility & PlayLandAbility, but those should be able to be canceled too.
                 boolean canCancel = this instanceof ActivatedAbility && controller.isHuman();
                 if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, canCancel)) {
                     // was canceled during targer selection
@@ -1052,7 +1078,7 @@ public abstract class AbilityImpl implements Ability {
             parameterSourceId = getSourceId();
         }
         // check against shortLKI for effects that move multiple object at the same time (e.g. destroy all)
-        if (game.getShortLivingLKI(getSourceId(), getZone())) {
+        if (game.checkShortLivingLKI(getSourceId(), getZone())) {
             return true;
         }
         // check against current state
@@ -1326,6 +1352,15 @@ public abstract class AbilityImpl implements Ability {
                 || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
             // exists or lki from battlefield
             return game.getObject(getSourceId());
+        }
+        return null;
+    }
+
+    @Override
+    public Card getSourceCardIfItStillExists(Game game) {
+        MageObject mageObject = getSourceObjectIfItStillExists(game);
+        if (mageObject instanceof Card) {
+            return (Card) mageObject;
         }
         return null;
     }

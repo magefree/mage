@@ -23,6 +23,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -88,6 +89,8 @@ class AzraOddsmakerEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
+        game.informPlayers(player.getLogName() + " chose " + permanent.getLogName() + ". "
+                + CardUtil.getSourceLogName(game, source));
         game.addDelayedTriggeredAbility(new AzraOddsmakerDelayedTriggeredAbility(
                 new MageObjectReference(permanent, game),
                 permanent.getName()

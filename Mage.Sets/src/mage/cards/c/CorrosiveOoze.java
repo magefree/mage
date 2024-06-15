@@ -43,7 +43,8 @@ public final class CorrosiveOoze extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Corrosive Ooze blocks or becomes blocked by an equipped creature, destroy all Equipment attached to that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new CorrosiveOozeEffect()), true);
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new CorrosiveOozeEffect())
+                .setTriggerPhrase(""), true);
         this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(effect, filter), new CorrosiveOozeCombatWatcher());
     }
 

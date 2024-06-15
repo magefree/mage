@@ -61,7 +61,7 @@ class ShowstoppingSurpriseEffect extends OneShotEffect {
         }
         if (permanent.isFaceDown(game)) {
             permanent.turnFaceUp(source, game, source.getControllerId());
-            game.applyEffects();
+            game.processAction();
         }
         int power = permanent.getPower().getValue();
         if (power < 1) {

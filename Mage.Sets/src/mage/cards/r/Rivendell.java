@@ -2,22 +2,15 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -30,18 +23,13 @@ import java.util.UUID;
  */
 public final class Rivendell extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("you control a legendary creature");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a legendary creature");
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
-    private static final Condition condition2
-            = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint( new InvertCondition(condition), "You control a legendary creature");
+    private static final YouControlPermanentCondition condition = new YouControlPermanentCondition(filter);
 
     public Rivendell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -49,10 +37,7 @@ public final class Rivendell extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Rivendell enters the battlefield tapped unless you control a legendary creature.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new TapSourceEffect(), condition, ""),
-                "tapped unless you control a legendary creature"
-        ).addHint(hint));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());
@@ -61,7 +46,7 @@ public final class Rivendell extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ScryEffect(2, false),
-                new ManaCostsImpl<>("{1}{U}"), condition2
+                new ManaCostsImpl<>("{1}{U}"), condition
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

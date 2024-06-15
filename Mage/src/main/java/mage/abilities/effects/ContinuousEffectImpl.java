@@ -524,5 +524,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
         return Collections.emptyList();
+
+    @Override
+    public ContinuousEffect setText(String staticText) {
+        super.setText(staticText);
+        return this;
+
     }
 }

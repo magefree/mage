@@ -86,7 +86,7 @@ class TwilightProphetEffect extends OneShotEffect {
             if (card != null) {
                 controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
                 controller.moveCards(card, Zone.HAND, source, game);
-                game.getState().processAction(game);
+                game.processAction();
                 int amount = card.getManaValue();
                 if (amount > 0) {
                     new LoseLifeOpponentsEffect(amount).apply(game, source);

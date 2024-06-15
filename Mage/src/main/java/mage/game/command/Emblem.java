@@ -36,7 +36,7 @@ public abstract class Emblem extends CommandObjectImpl {
     protected MageObject sourceObject; // can be null
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
-    private FrameStyle frameStyle;
+    protected FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
 
     public Emblem(String name) {
@@ -68,6 +68,7 @@ public abstract class Emblem extends CommandObjectImpl {
         );
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
             this.setCardNumber("");
             this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());
@@ -243,6 +244,19 @@ public abstract class Emblem extends CommandObjectImpl {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return false;
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
     }
 
     public void discardEffects() {

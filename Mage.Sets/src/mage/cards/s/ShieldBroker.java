@@ -17,7 +17,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CommanderPredicate;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -36,7 +35,7 @@ public class ShieldBroker extends CardImpl {
     public ShieldBroker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        this.addSubType(SubType.CEPHALID, SubType.ADVISOR);
+        this.addSubType(SubType.OCTOPUS, SubType.ADVISOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

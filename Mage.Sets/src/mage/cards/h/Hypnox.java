@@ -7,6 +7,7 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -48,7 +48,8 @@ public final class Hypnox extends CardImpl {
         this.addAbility(ability, new CastFromHandWatcher());
 
         // When Hypnox leaves the battlefield, return the exiled cards to their owner's hand.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new HypnoxReturnEffect(), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND)
+                .withText(true, false, false), false));
     }
 
     private Hypnox(final Hypnox card) {
@@ -88,29 +89,5 @@ class HypnoxExileEffect extends OneShotEffect {
     @Override
     public HypnoxExileEffect copy() {
         return new HypnoxExileEffect(this);
-    }
-}
-
-class HypnoxReturnEffect extends OneShotEffect {
-
-    HypnoxReturnEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "return the exiled cards to their owner's hand";
-    }
-
-    private HypnoxReturnEffect(final HypnoxReturnEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HypnoxReturnEffect copy() {
-        return new HypnoxReturnEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        return controller != null && exZone != null && controller.moveCards(exZone, Zone.HAND, source, game);
     }
 }

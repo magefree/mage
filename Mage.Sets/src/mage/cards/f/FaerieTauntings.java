@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class FaerieTauntings extends CardImpl {
 
     public FaerieTauntings(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{2}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ENCHANTMENT},"{2}{B}");
         this.subtype.add(SubType.FAERIE);
 
         // Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life

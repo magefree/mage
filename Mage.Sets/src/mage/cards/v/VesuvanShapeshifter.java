@@ -114,7 +114,7 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
                 if (copyFromCreature != null) {
                     game.copyPermanent(Duration.Custom, copyFromCreature, copyToCreature.getId(), source, new VesuvanShapeShifterFaceUpCopyApplier());
                     source.getTargets().clear();
-                    game.getState().processAction(game); // needed to get effects ready if copy happens in replacment and the copied abilities react of the same event (e.g. turn face up)
+                    game.processAction(); // needed to get effects ready if copy happens in replacment and the copied abilities react of the same event (e.g. turn face up)
                     return true;
                 }
             }
@@ -162,6 +162,7 @@ class VesuvanShapeshifterFaceDownEffect extends OneShotEffect {
         permanent.turnFaceDown(source, game, source.getControllerId());
         permanent.setManifested(false);
         permanent.setDisguised(false);
+        permanent.setCloaked(false);
         permanent.setMorphed(true); // cause it morph card TODO: smells bad
         return permanent.isFaceDown(game);
 

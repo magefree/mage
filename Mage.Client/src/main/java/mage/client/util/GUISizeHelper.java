@@ -40,7 +40,6 @@ public final class GUISizeHelper {
 
     public static Font chatFont = new java.awt.Font("Arial", 0, 12);
     public static Font tableFont = new java.awt.Font("Arial", 0, 12);
-    public static Font balloonTooltipFont = new java.awt.Font("Arial", 0, 12);
     public static Font menuFont = new java.awt.Font("Arial", 0, 12);
 
     public static Font gameRequestsFont = new java.awt.Font("Arial", 0, 12);
@@ -98,7 +97,6 @@ public final class GUISizeHelper {
         tableHeaderHeight = tableFontSize + 10;
         symbolTableSize = tableFontSize;
         flagHeight = tableFontSize - 2;
-        balloonTooltipFont = new Font("Arial", 0, tableFontSize);
         if (tableFontSize > 15) {
             symbolEditorSize = tableFontSize - 5;
             dividerBarSize = 10 + (tableFontSize / 4);

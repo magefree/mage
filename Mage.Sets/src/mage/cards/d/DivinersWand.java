@@ -30,7 +30,7 @@ public final class DivinersWand extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.WIZARD, "a Wizard creature");
 
     public DivinersWand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.WIZARD);
         this.subtype.add(SubType.EQUIPMENT);
 

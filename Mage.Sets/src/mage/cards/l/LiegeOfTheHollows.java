@@ -84,7 +84,7 @@ class LiegeOfTheHollowsEffect extends OneShotEffect {
                     token.putOntoBattlefield(entry.getValue(), game, source, player.getId());
                 }
             }
-            game.getState().processAction(game);
+            game.processAction();
             
             // prevent undo
             controller.resetStoredBookmark(game);

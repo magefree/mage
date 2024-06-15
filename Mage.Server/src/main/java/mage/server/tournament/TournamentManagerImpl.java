@@ -62,8 +62,8 @@ public class TournamentManagerImpl implements TournamentManager {
     }
 
     @Override
-    public void updateDeck(UUID tournamentId, UUID playerId, Deck deck) {
-        controllers.get(tournamentId).updateDeck(playerId, deck);
+    public void updateDeck(UUID tournamentId, UUID playerId, Deck deck, boolean ignoreMainBasicLands) {
+        controllers.get(tournamentId).updateDeck(playerId, deck, ignoreMainBasicLands);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package mage.cards.v;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +15,9 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author North
@@ -61,7 +62,7 @@ enum PoisonedCondition implements Condition {
             Player opponent = game.getPlayer(opponentUuid);
             if (opponent != null
                     && opponent.isInGame()
-                    && opponent.getCounters().getCount(CounterType.POISON) > 0) {
+                    && opponent.getCountersCount(CounterType.POISON) > 0) {
                 return true;
             }
         }

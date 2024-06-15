@@ -103,9 +103,10 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     }
 
     @Override
-    public String toString(){
-        return "("+zoneChangeCounter+"|"+sourceId.toString().substring(0,3)+")";
+    public String toString() {
+        return "(" + zoneChangeCounter + "|" + sourceId.toString().substring(0, 3) + ")";
     }
+
     public UUID getSourceId() {
         return sourceId;
     }
@@ -181,6 +182,14 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
         Card card = game.getCard(sourceId);
         if (card != null && card.getZoneChangeCounter(game) == zoneChangeCounter) {
             return card;
+        }
+        return null;
+    }
+
+    public Spell getSpell(Game game) {
+        Spell spell = game.getSpell(sourceId);
+        if (spell != null && spell.getZoneChangeCounter(game) == zoneChangeCounter) {
+            return spell;
         }
         return null;
     }

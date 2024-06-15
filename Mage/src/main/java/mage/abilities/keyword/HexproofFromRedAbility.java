@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.MageObject;
+import mage.abilities.Ability;
 import mage.game.Game;
 
 import java.io.ObjectStreamException;
@@ -32,8 +33,8 @@ public class HexproofFromRedAbility extends HexproofBaseAbility {
     }
 
     @Override
-    public boolean checkObject(MageObject source, Game game) {
-        return source.getColor(game).isRed();
+    public boolean checkObject(MageObject sourceObject, Ability source, Game game) {
+        return sourceObject.getColor(game).isRed();
     }
 
     @Override

@@ -21,7 +21,7 @@ public final class Corpsehatch extends CardImpl {
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 2).withTextOptions(true));
     }
 
     private Corpsehatch(final Corpsehatch card) {

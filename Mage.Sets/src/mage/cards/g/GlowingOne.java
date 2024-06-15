@@ -38,7 +38,8 @@ public final class GlowingOne extends CardImpl {
 
         // Whenever Glowing One deals combat damage to a player, they get four rad counters.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.RAD.createInstance(4)), false, true)
+                new AddCountersTargetEffect(CounterType.RAD.createInstance(4))
+                        .setText("they get four rad counters"), false, true)
         );
 
         // Whenever a player mills a nonland card, you gain 1 life.

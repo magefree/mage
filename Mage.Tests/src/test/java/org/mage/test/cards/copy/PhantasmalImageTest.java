@@ -638,7 +638,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testAnimatedTribal() {
+    public void testAnimatedKindred() {
         addCard(Zone.BATTLEFIELD, playerB, "Cloak and Dagger");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.HAND, playerA, "Karn's Touch");
@@ -654,7 +654,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         Permanent cloakA = getPermanent("Cloak and Dagger", playerA);
         assertTrue("Phantasmal Image should be an artifact", cloakA.isArtifact(currentGame));
-        assertTrue("Phantasmal Image should be tribal", cloakA.isTribal(currentGame));
+        assertTrue("Phantasmal Image should be kindred", cloakA.isKindred(currentGame));
         assertTrue("Phantasmal Image should not be a creature", !cloakA.isCreature(currentGame));
         assertTrue("Phantasmal Image should be a Rogue", cloakA.hasSubtype(SubType.ROGUE, currentGame));
         assertTrue("Phantasmal Image should be an Illusion", cloakA.hasSubtype(SubType.ILLUSION, currentGame));
@@ -664,7 +664,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         Permanent cloakB = getPermanent("Cloak and Dagger", playerB);
         assertTrue("Cloak and Dagger should be an artifact", cloakB.isArtifact(currentGame));
         assertTrue("Cloak and Dagger should be a creature", cloakB.isCreature(currentGame));
-        assertTrue("Cloak and Dagger should be tribal", cloakB.isTribal(currentGame));
+        assertTrue("Cloak and Dagger should be kindred", cloakB.isKindred(currentGame));
         assertTrue("Cloak and Dagger should be a Rogue", cloakB.hasSubtype(SubType.ROGUE, currentGame));
         assertTrue("Cloak and Dagger should be an Equipment", cloakB.hasSubtype(SubType.EQUIPMENT, currentGame));
     }

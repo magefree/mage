@@ -9,8 +9,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- * @author nantuko
+ * @author nantuko, Susucr
  */
 public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
 
@@ -28,15 +30,20 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target != null) {
-            target.addSubType(game, addedSubType);
-        } else {
-            if (duration == Duration.Custom) {
-                discard();
+        boolean result = false;
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent target = game.getPermanent(targetId);
+            if (target != null) {
+                target.addSubType(game, addedSubType);
+                result = true;
             }
         }
-        return false;
+        if (!result) {
+            if (this.getDuration() == Duration.Custom) {
+                this.discard();
+            }
+        }
+        return result;
     }
 
     @Override

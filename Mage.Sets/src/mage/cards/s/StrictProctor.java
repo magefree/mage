@@ -70,7 +70,7 @@ class StrictProctorTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Ability ability = stackObject.getStackAbility();
-        if (!(ability instanceof TriggeredAbility)) {
+        if (!ability.isTriggeredAbility()) {
             return false;
         }
         GameEvent triggerEvent = ((TriggeredAbility) ability).getTriggerEvent();

@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -17,8 +16,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ImperialEdict extends CardImpl {
@@ -67,7 +67,7 @@ class ImperialEdictEffect extends OneShotEffect {
         filter.add(new ControllerIdPredicate(player.getId()));
         Target target = new TargetPermanent(1, 1, filter, true);
         if (target.canChoose(player.getId(), source, game)) {
-            while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+            while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
                 player.chooseTarget(Outcome.DestroyPermanent, target, source, game);
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());

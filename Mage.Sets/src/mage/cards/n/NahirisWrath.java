@@ -1,7 +1,5 @@
 package mage.cards.n;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.dynamicvalue.common.DiscardCostCardManaValue;
 import mage.abilities.effects.Effect;
@@ -10,10 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.game.Game;
 import mage.target.common.TargetCreatureOrPlaneswalker;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -32,7 +28,8 @@ public final class NahirisWrath extends CardImpl {
         Effect effect = new DamageTargetEffect(DiscardCostCardManaValue.instance);
         effect.setText("{this} deals damage equal to the total mana value of the discarded cards to each of up to X target creatures and/or planeswalkers");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(NahirisWrathAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1));
     }
 
     private NahirisWrath(final NahirisWrath card) {
@@ -42,24 +39,5 @@ public final class NahirisWrath extends CardImpl {
     @Override
     public NahirisWrath copy() {
         return new NahirisWrath(this);
-    }
-}
-
-enum NahirisWrathAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int numTargets = 0;
-        for (VariableCost cost : ability.getCosts().getVariableCosts()) {
-            if (cost instanceof DiscardXTargetCost) {
-                numTargets = cost.getAmount();
-                break;
-            }
-        }
-        if (numTargets > 0) {
-            ability.addTarget(new TargetCreatureOrPlaneswalker(0, numTargets, new FilterCreatureOrPlaneswalkerPermanent(), false));
-        }
     }
 }

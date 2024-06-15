@@ -389,14 +389,14 @@ public abstract class MatchImpl implements Match {
     }
 
     @Override
-    public void updateDeck(UUID playerId, Deck deck) {
+    public void updateDeck(UUID playerId, Deck deck, boolean ignoreMainBasicLands) {
         // used for auto-save deck
         MatchPlayer player = getPlayer(playerId);
         if (player == null) {
             return;
         }
 
-        player.updateDeck(deck);
+        player.updateDeck(deck, ignoreMainBasicLands);
     }
 
     protected String createGameStartMessage() {

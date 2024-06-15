@@ -29,7 +29,7 @@ public class RadCounterTriggerTest extends CardTestPlayerBase {
     private static final String fallout = "Nuclear Fallout";
 
     private static void checkRadCounterCount(String message, Player player, int expected) {
-        Assert.assertEquals(message, expected, player.getCounters().getCount(CounterType.RAD));
+        Assert.assertEquals(message, expected, player.getCountersCount(CounterType.RAD));
     }
 
     private static void checkGraveyardSize(String message, Player player, int expected) {

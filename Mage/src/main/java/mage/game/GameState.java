@@ -1,6 +1,5 @@
 package mage.game;
 
-import static java.util.Collections.emptyList;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -295,6 +294,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         playerList.add(player.getId());
     }
 
+    /**
+     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     */
     public String getValue(boolean useHidden) {
         StringBuilder sb = threadLocalBuilder.get();
 
@@ -333,6 +335,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         return sb.toString();
     }
 
+    /**
+     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     */
     public String getValue(boolean useHidden, Game game) {
         StringBuilder sb = threadLocalBuilder.get();
 
@@ -386,6 +391,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         return sb.toString();
     }
 
+    /**
+     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     */
     public String getValue(Game game, UUID playerId) {
         StringBuilder sb = threadLocalBuilder.get();
 
@@ -657,22 +665,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.gameOver = true;
     }
 
-    /**
-     * Must be called between effects/steps in the ability's resolve
-     * <p>
-     * 608.2e
-     * Some spells and abilities have multiple steps or actions, denoted by separate sentences or clauses,
-     * that involve multiple players. In these cases, the choices for the first action are made in APNAP order,
-     * and then the first action is processed simultaneously. Then the choices for the second action are made in
-     * APNAP order, and then that action is processed simultaneously, and so on. See rule 101.4.
-     */
-    public void processAction(Game game) {
-        game.getState().handleSimultaneousEvent(game);
-        game.applyEffects();
-        game.getState().getTriggers().checkStateTriggers(game);
-    }
-
-    public void applyEffects(Game game) {
+    void applyEffects(Game game) {
         applyEffectsCounter++;
         for (Player player : players.values()) {
             player.reset();
@@ -697,6 +690,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         delayed.removeEndOfTurnAbilities(game);
         exile.cleanupEndOfTurnZones(game);
         game.applyEffects();
+    }
+
+    public void removeTurnStartEffect(Game game) {
+        delayed.removeStartOfNewTurn(game);
     }
 
     public void addEffect(ContinuousEffect effect, Ability source) {
@@ -818,6 +815,18 @@ public class GameState implements Serializable, Copyable<GameState> {
         return !simultaneousEvents.isEmpty();
     }
 
+    // There might be no damage dealt, but we want to fire that damage (in a batch) could have been dealt.
+    // Of note, DamagedBatchCouldHaveFiredEvent is not a batch event in the sense it doesn't contain sub events.
+    public void addBatchDamageCouldHaveBeenFired(boolean combat, Game game) {
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchCouldHaveFiredEvent
+                    && ((DamagedBatchCouldHaveFiredEvent) event).isCombat() == combat) {
+                return;
+            }
+        }
+        addSimultaneousEvent(new DamagedBatchCouldHaveFiredEvent(combat), game);
+    }
+
     public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
         // Combine multiple damage events in the single event (batch)
         // Note: one event can be stored in multiple batches
@@ -888,6 +897,33 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         if (!isBatchUsed) {
             addSimultaneousEvent(new DamagedBatchAllEvent(damagedEvent), game);
+        }
+    }
+
+    public void addSimultaneousMilledCardToBatch(MilledCardEvent milledEvent, Game game) {
+        // Combine multiple mill cards events in the single event (batch)
+        // see GameEvent.MILLED_CARDS_BATCH_FOR_ONE_PLAYER and GameEvent.MILLED_CARDS_BATCH_FOR_ALL
+
+        // existing batch
+        boolean isBatchUsed = false;
+        boolean isBatchForPlayerUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof MilledBatchAllEvent) {
+                ((MilledBatchAllEvent) event).addEvent(milledEvent);
+                isBatchUsed = true;
+            } else if (event instanceof MilledBatchForOnePlayerEvent
+                    && event.getPlayerId().equals(milledEvent.getPlayerId())) {
+                ((MilledBatchForOnePlayerEvent) event).addEvent(milledEvent);
+                isBatchForPlayerUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new MilledBatchAllEvent(milledEvent), game);
+        }
+        if (!isBatchForPlayerUsed) {
+            addSimultaneousEvent(new MilledBatchForOnePlayerEvent(milledEvent), game);
         }
     }
 
@@ -1602,7 +1638,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public List<FilterCreaturePermanent> getActivePowerInsteadOfToughnessForDamageLethalityFilters() {
-        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? emptyList() : getBattlefield().getAllActivePermanents().stream()
+        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? Collections.emptyList() : getBattlefield().getAllActivePermanents().stream()
                 .map(Card::getId)
                 .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
                 .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)

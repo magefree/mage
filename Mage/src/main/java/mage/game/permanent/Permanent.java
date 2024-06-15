@@ -78,10 +78,6 @@ public interface Permanent extends Card, Controllable {
 
     void setSuspected(boolean value, Game game, Ability source);
 
-    boolean isSaddled();
-
-    void setSaddled(boolean value);
-
     boolean isPrototyped();
 
     void setPrototyped(boolean value);
@@ -132,7 +128,7 @@ public interface Permanent extends Card, Controllable {
 
     void unattach(Game game);
 
-    boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
+    boolean canBeTargetedBy(MageObject sourceObject, UUID controllerId, Ability source, Game game);
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
@@ -453,6 +449,10 @@ public interface Permanent extends Card, Controllable {
     void setManifested(boolean value);
 
     boolean isManifested();
+
+    void setCloaked(boolean value);
+
+    boolean isCloaked();
 
     boolean isRingBearer();
 

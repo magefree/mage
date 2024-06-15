@@ -27,6 +27,7 @@ public class SacrificeAllEffect extends OneShotEffect {
 
     /**
      * Each player sacrifices a permanent
+     *
      * @param filter can be generic, will automatically add article and necessary sacrifice predicates
      */
     public SacrificeAllEffect(FilterPermanent filter) {
@@ -35,6 +36,7 @@ public class SacrificeAllEffect extends OneShotEffect {
 
     /**
      * Each player sacrifices N permanents
+     *
      * @param filter can be generic, will automatically add necessary sacrifice predicates
      */
     public SacrificeAllEffect(int amount, FilterPermanent filter) {
@@ -43,6 +45,7 @@ public class SacrificeAllEffect extends OneShotEffect {
 
     /**
      * Each player sacrifices X permanents
+     *
      * @param filter can be generic, will automatically add necessary sacrifice predicates
      */
     public SacrificeAllEffect(DynamicValue amount, FilterPermanent filter) {
@@ -91,7 +94,7 @@ public class SacrificeAllEffect extends OneShotEffect {
                 continue;
             }
             TargetSacrifice target = new TargetSacrifice(numTargets, filter);
-            while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+            while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
                 player.choose(Outcome.Sacrifice, target, source, game);
             }
             perms.addAll(target.getTargets());

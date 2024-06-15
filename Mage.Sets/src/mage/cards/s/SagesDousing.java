@@ -27,7 +27,7 @@ public final class SagesDousing extends CardImpl {
     }
 
     public SagesDousing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{U}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.INSTANT},"{2}{U}");
         this.subtype.add(SubType.WIZARD);
 
         // Counter target spell unless its controller pays {3}. 

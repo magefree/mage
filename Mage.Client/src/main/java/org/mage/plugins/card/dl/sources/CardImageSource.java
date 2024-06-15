@@ -24,7 +24,7 @@ public interface CardImageSource {
 
     String getSourceName();
 
-    float getAverageSize();
+    float getAverageSizeKb();
 
     int getTotalImages();
 

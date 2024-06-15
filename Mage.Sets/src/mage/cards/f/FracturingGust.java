@@ -62,12 +62,12 @@ class FracturingGustDestroyEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int destroyedPermanents = 0;
-            for (Permanent permanent: game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (permanent.destroy(source, game, false)) {
                     ++destroyedPermanents;
                 }
             }
-            game.getState().processAction(game); // needed in case a destroyed permanent did prevent life gain
+            game.processAction(); // needed in case a destroyed permanent did prevent life gain
             if (destroyedPermanents > 0) {
                 controller.gainLife(2 * destroyedPermanents, game, source);
             }

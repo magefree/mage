@@ -70,7 +70,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "OTJ;BIG;OTC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "MH3;M3C"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -960,7 +960,9 @@ public class VerifyCardDataTest {
 
         // CHECK: wrong set name
         for (ExpansionSet set : sets) {
-            if (true) continue; // TODO: enable after merge of 40k's cards pull requests (needs before set rename)
+            if (true) {
+                continue; // TODO: enable after merge of 40k's cards pull requests (needs before set rename)
+            }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
                 // unofficial or inner set
@@ -978,7 +980,9 @@ public class VerifyCardDataTest {
 
         // CHECK: parent and block info
         for (ExpansionSet set : sets) {
-            if (true) continue; // TODO: comments it and run to find a problems
+            if (true) {
+                continue; // TODO: comments it and run to find a problems
+            }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
                 continue;
@@ -1011,7 +1015,9 @@ public class VerifyCardDataTest {
 
             // block info
             if (!Objects.equals(set.getBlockName(), jsonSet.block)) {
-                if (true) continue; // TODO: comments it and run to find a problems
+                if (true) {
+                    continue; // TODO: comments it and run to find a problems
+                }
                 errorsList.add(String.format("Error: set with wrong blockName settings: %s (blockName = %s, but must be %s)",
                         set.getCode() + " - " + set.getName(),
                         set.getBlockName(),
@@ -1063,9 +1069,12 @@ public class VerifyCardDataTest {
             }
 
             // CHECK: set code must be compatible with tests commands format like "SET-card"
-            // how-to fix: increase lookup lenth
-            if (set.getCode().length() + 1 > CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH) {
-                errorsList.add("Error: set code too big for test commads lookup: " + set.getCode() + ", lookup length: " + CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH);
+            // how-to fix: change min/max lookup length
+            if (set.getCode().length() < CardUtil.TESTS_SET_CODE_MIN_LOOKUP_LENGTH
+                    || set.getCode().length() > CardUtil.TESTS_SET_CODE_MAX_LOOKUP_LENGTH) {
+                errorsList.add("Error: set code un-supported by test commands lookup: " + set.getCode()
+                        + ", min length: " + CardUtil.TESTS_SET_CODE_MIN_LOOKUP_LENGTH
+                        + ", max length: " + CardUtil.TESTS_SET_CODE_MAX_LOOKUP_LENGTH);
             }
 
             boolean containsDoubleSideCards = false;
@@ -2174,9 +2183,17 @@ public class VerifyCardDataTest {
     public void test_showCardInfo() {
         // debug only: show direct card rules from a class file without db-recreate
         //  - search by card name: Spark Double
-        //  - search by class name: SparkDouble
+        //  - search by class name from set: SparkDouble
+        //  - search by class name from non-set: SparkDoubleFixedV1;SparkDoubleFixedV2
         //  - multiple searches: name1;class2;name3
         String cardSearches = "Spark Double;AbandonedSarcophagus";
+
+        // command line support, e.g. check currently opened file
+        // compatible IDEs: IntelliJ IDEA, Visual Studio Code - see instructions in https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment
+        // example cmd: mvn install test "-Dxmage.showCardInfo=${fileBasenameNoExtension}" "-Dsurefire.failIfNoSpecifiedTests=false" "-Dxmage.build.tests.treeViewRunnerShowAllLogs=true" -Dtest=VerifyCardDataTest#test_showCardInfo
+        if (System.getProperty("xmage.showCardInfo") != null) {
+            cardSearches = System.getProperty("xmage.showCardInfo");
+        }
 
         // prepare DBs
         CardScanner.scan();
@@ -2185,21 +2202,56 @@ public class VerifyCardDataTest {
         Arrays.stream(cardSearches.split(";")).forEach(searchName -> {
             // original card
             searchName = searchName.trim();
+            String searchClass = String.format("mage.cards.%s.%s",
+                    searchName.substring(0, 1).toLowerCase(Locale.ENGLISH),
+                    searchName);
+
+            String foundCardName = "";
+            String foundClassName = "";
+
+            // search by name
             CardInfo cardInfo = CardRepository.instance.findCard(searchName);
-            if (cardInfo == null) {
-                String searchClass = String.format("mage.cards.%s.%s",
-                        searchName.substring(0, 1).toLowerCase(Locale.ENGLISH),
-                        searchName);
+            if (cardInfo != null) {
+                foundCardName = cardInfo.getName();
+                foundClassName = cardInfo.getClassName();
+            }
+
+            // search by class from set
+            if (foundClassName.isEmpty()) {
                 cardInfo = CardRepository.instance.findCardsByClass(searchClass)
                         .stream()
                         .findFirst()
                         .orElse(null);
+                if (cardInfo != null) {
+                    foundCardName = cardInfo.getName();
+                    foundClassName = cardInfo.getClassName();
+                }
             }
-            if (cardInfo == null) {
+
+            // search by class from non-set (must store in mage.cards.* package)
+            if (foundClassName.isEmpty()) {
+                Reflections reflections = new Reflections(searchClass);
+                try {
+                    Set<Class<? extends CardImpl>> founded = reflections.getSubTypesOf(CardImpl.class);
+                    if (!founded.isEmpty()) {
+                        foundClassName = founded.stream().findFirst().get().getName();
+                        foundCardName = searchClass;
+                    }
+                } catch (Exception e) {
+                    if (!e.getMessage().contains("SubTypesScanner was not configured")) {
+                        // unknown error
+                        throw e;
+                    }
+                }
+            }
+
+            if (foundClassName.isEmpty()) {
                 Assert.fail("Can't find card by name or class: " + searchName);
             }
-            CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), "test", "123", Rarity.COMMON);
-            Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+
+            CardSetInfo testSet = new CardSetInfo(foundCardName, "test", "123", Rarity.COMMON);
+            Card card = CardImpl.createCard(foundClassName, testSet);
+            Assert.assertNotNull("Card can't be loaded: " + foundClassName, card);
 
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
@@ -2212,6 +2264,9 @@ public class VerifyCardDataTest {
             // ref card
             System.out.println();
             MtgJsonCard ref = MtgJsonService.card(card.getName());
+            if (ref == null) {
+                ref = MtgJsonService.cardByClassName(foundClassName);
+            }
             if (ref != null) {
                 System.out.println("ref: " + ref.getNameAsFace() + " " + ref.manaCost);
                 System.out.println(ref.text);
@@ -2226,61 +2281,6 @@ public class VerifyCardDataTest {
         System.out.println(text);
     }
 
-
-    /*
-        for(String rule : card.getRules()) {
-            rule = rule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
-            // TODO: add Equip {3} checks
-            // TODO: add Raid and other words checks
-            String[] sl = rule.split(":");
-            if (sl.length == 2 && !sl[0].isEmpty()) {
-                String cardCost = sl[0]
-                        .replace("{this}", card.getName())
-                        //.replace("<i>", "")
-                        //.replace("</i>", "")
-                        .replace("&mdash;", "—");
-                String cardAbility = sl[1]
-                        .trim()
-                        .replace("{this}", card.getName())
-                        //.replace("<i>", "")
-                        //.replace("</i>", "")
-                        .replace("&mdash;", "—");
-
-                boolean found = false;
-                for (String refRule : refRules) {
-                    refRule = refRule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
-
-                    // fix for ref mana: ref card have xxx instead {T}: Add {xxx}, example: W
-                    if (refRule.length() == 1) {
-                        refRule = "{T}: Add {" + refRule + "}";
-                    }
-                    refRule = refRule
-                            .trim()
-                            //.replace("<i>", "")
-                            //.replace("</i>", "")
-                            .replace("&mdash;", "—");
-
-                    // normal
-                    if (refRule.startsWith(cardCost)) {
-                        found = true;
-                        break;
-                    }
-
-                    // ref card have (xxx) instead xxx, example: ({T}: Add {G}.)
-                    // ref card have <i>(xxx) instead xxx, example: <i>({T}: Add {G}.)</i>
-                    // TODO: delete?
-                    if (refRule.startsWith("(" + cardCost)) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    fail(card, "abilities", "card ability have cost, but can't find in ref [" + cardCost + ": " + cardAbility + "]");
-                }
-            }
-
-        }
-    }*/
     private static boolean compareText(String cardText, String refText, String name) {
         return cardText.equals(refText)
                 || cardText.replace(name, name.split(", ")[0])
@@ -2752,7 +2752,7 @@ public class VerifyCardDataTest {
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
         Map<String, Integer> cardRates = new HashMap<>();
         for (Card card : cardsList) {
-            int curRate = RateCard.rateCard(card, null, false);
+            int curRate = RateCard.rateCard(card, Collections.emptyList(), false);
             int prevRate = cardRates.getOrDefault(card.getName(), 0);
             if (prevRate == 0) {
                 cardRates.putIfAbsent(card.getName(), curRate);
@@ -2907,8 +2907,12 @@ public class VerifyCardDataTest {
         List<ExpansionSet.SetCardInfo> setInfo = Sets.getInstance().get(setCode).getSetCardInfo();
         for (ExpansionSet.SetCardInfo sci : setInfo) {
             int cn = sci.getCardNumberAsInt();
-            if (cn > maxCards) continue;
-            if (doExclude && excluded.contains(cn)) continue;
+            if (cn > maxCards) {
+                continue;
+            }
+            if (doExclude && excluded.contains(cn)) {
+                continue;
+            }
             listChangelog.add(cn);
         }
 

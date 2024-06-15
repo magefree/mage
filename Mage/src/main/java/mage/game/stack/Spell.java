@@ -1090,13 +1090,23 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
-        card.removeCounters(name, amount, source, game);
+    public void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
+        card.removeCounters(counterName, amount, source, game, isDamage);
     }
 
     @Override
-    public void removeCounters(Counter counter, Ability source, Game game) {
-        card.removeCounters(counter, source, game);
+    public void removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
+        card.removeCounters(counter, source, game, isDamage);
+    }
+
+    @Override
+    public int removeAllCounters(Ability source, Game game, boolean isDamage) {
+        return card.removeAllCounters(source, game, isDamage);
+    }
+
+    @Override
+    public int removeAllCounters(String counterName, Ability source, Game game, boolean isDamage) {
+        return card.removeAllCounters(counterName, source, game, isDamage);
     }
 
     public Card getCard() {
@@ -1169,6 +1179,21 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
         card.setIsAllCreatureTypes(game, value);
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return card.isAllNonbasicLandTypes(game);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+        card.setIsAllNonbasicLandTypes(value);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+        card.setIsAllNonbasicLandTypes(game, value);
     }
 
     @Override

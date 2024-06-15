@@ -18,4 +18,8 @@ public abstract class MagePermanent extends MageCard {
         return getOriginal().isLand();
     }
 
+    public boolean isToken() {
+        return getOriginal().isToken();
+    }
+
 }

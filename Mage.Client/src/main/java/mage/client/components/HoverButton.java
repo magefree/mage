@@ -15,6 +15,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 
 import mage.client.util.Command;
@@ -45,7 +48,7 @@ public class HoverButton extends JPanel implements MouseListener {
 
     private String topText;
     private Image topTextImage;
-    private Image topTextImageRight;
+    private final List<Image> topTextImagesRight = new ArrayList<>();
     private String centerText;
 
     private boolean wasHovered = false;
@@ -159,8 +162,11 @@ public class HoverButton extends JPanel implements MouseListener {
         if (topTextImage != null) {
             g.drawImage(topTextImage, 4, 3, this);
         }
-        if (topTextImageRight != null) {
-            g.drawImage(topTextImageRight, this.getWidth() - 20, 3, this);
+
+        int offset = 0;
+        for (Image img : topTextImagesRight) {
+            g.drawImage(img, this.getWidth() - 20, 3 + offset, this);
+            offset += 20;
         }
 
         if (centerText != null) {
@@ -358,8 +364,12 @@ public class HoverButton extends JPanel implements MouseListener {
         this.textOffsetX = -1; // rest for new calculation
     }
 
-    public void setTopTextImageRight(Image topTextImage) {
-        this.topTextImageRight = topTextImage;
+    public void addTopTextImageRight(Image topTextImage) {
+        this.topTextImagesRight.add(topTextImage);
+    }
+
+    public void clearTopTextImagesRight() {
+        this.topTextImagesRight.clear();
     }
 
     public void setCenterText(String centerText) {

@@ -77,8 +77,9 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            game.getState().setZone(getLeftHalfCard().getId(), toZone);
-            game.getState().setZone(getRightHalfCard().getId(), toZone);
+            Zone currentZone = game.getState().getZone(getId());
+            game.getState().setZone(getLeftHalfCard().getId(), currentZone);
+            game.getState().setZone(getRightHalfCard().getId(), currentZone);
             return true;
         }
         return false;

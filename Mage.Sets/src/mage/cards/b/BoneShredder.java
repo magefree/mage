@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -16,7 +15,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,9 +43,7 @@ public final class BoneShredder extends CardImpl {
 
         //When Bone Shredder enters the battlefield, destroy target nonartifact, nonblack creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(false));
-        Target target = new TargetCreaturePermanent(filter);
-        target.setTargetName("nonartifact, nonblack creature");
-        ability.addTarget(target);
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 

@@ -64,6 +64,6 @@ enum NightkinAmbusherCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player defendingPlayer = game.getPlayer(game.getCombat().getDefendingPlayerId(source.getSourceId(), game));
-        return defendingPlayer != null && defendingPlayer.getCounters().getCount(CounterType.RAD) >= 1;
+        return defendingPlayer != null && defendingPlayer.getCountersCount(CounterType.RAD) >= 1;
     }
 }

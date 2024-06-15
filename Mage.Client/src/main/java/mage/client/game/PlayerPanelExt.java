@@ -16,8 +16,6 @@ import mage.components.ImagePanelStyle;
 import mage.constants.CardType;
 import static mage.constants.Constants.*;
 import mage.constants.ManaType;
-import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.designations.DesignationType;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
@@ -186,6 +184,18 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         return false;
     }
 
+    // Not the most optimized, but we just query a few counterName here.
+    // More optimized would use a Map<String, CounterView>
+    private static int counterOfName(PlayerView player, String name) {
+        return player
+                .getCounters()
+                .stream()
+                .filter(counter -> counter.getName().equals(name))
+                .map(CounterView::getCount)
+                .findFirst()
+                .orElse(0);
+    }
+
     public void update(GameView game, PlayerView player, Set<UUID> possibleTargets) {
         this.player = player;
         int pastLife = player.getLife();
@@ -226,10 +236,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             changedFontLife = false;
         }
         setTextForLabel("life", lifeLabel, life, playerLife, true);
-        setTextForLabel("poison", poisonLabel, poison, player.getCounters().getCount(CounterType.POISON), false);
-        setTextForLabel("energy", energyLabel, energy, player.getCounters().getCount(CounterType.ENERGY), false);
-        setTextForLabel("experience", experienceLabel, experience, player.getCounters().getCount(CounterType.EXPERIENCE), false);
-        setTextForLabel("rad", radLabel, rad, player.getCounters().getCount(CounterType.RAD), false);
+        setTextForLabel("poison", poisonLabel, poison, counterOfName(player, "poison"), false);
+        setTextForLabel("energy", energyLabel, energy, counterOfName(player, "energy"), false);
+        setTextForLabel("experience", experienceLabel, experience, counterOfName(player, "experience"), false);
+        setTextForLabel("rad", radLabel, rad, counterOfName(player, "rad"), false);
         setTextForLabel("hand zone", handLabel, hand, player.getHandCount(), true);
         int libraryCards = player.getLibraryCount();
         if (libraryCards > 99) {
@@ -400,24 +410,24 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         tooltipText.append("<br/>Match time remaining: ").append(getPriorityTimeLeftString(player));
 
         // designations
-        this.avatar.setTopTextImageRight(null);
+        this.avatar.clearTopTextImagesRight();
         for (String name : player.getDesignationNames()) {
             tooltipText.append("<br/>").append(name);
             if (DesignationType.CITYS_BLESSING.toString().equals(name)) {
-                this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/city_blessing.png"));
+                this.avatar.addTopTextImageRight(ImageHelper.getImageFromResources("/info/city_blessing.png"));
             }
         }
         if (player.isMonarch()) {
             tooltipText.append("<br/>").append("The Monarch");
-            this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/crown.png"));
+            this.avatar.addTopTextImageRight(ImageHelper.getImageFromResources("/info/crown.png"));
         }
         if (player.isInitiative()) {
             tooltipText.append("<br/>").append("Have the Initiative");
-            this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/initiative.png"));
+            this.avatar.addTopTextImageRight(ImageHelper.getImageFromResources("/info/initiative.png"));
         }
 
         // counters
-        for (Counter counter : player.getCounters().values()) {
+        for (CounterView counter : player.getCounters()) {
             tooltipText.append("<br/>").append(counter.getName()).append(" counters: ").append(counter.getCount());
         }
 
@@ -754,12 +764,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         gl_panelBackground.setHorizontalGroup(
                 gl_panelBackground.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                .addGap(6)
+                                .addGap(7)
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addComponent(btnPlayer, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(timerLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(avatar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
-                                .addGap(8))
+                                .addGap(6))
                         .addGroup(gl_panelBackground.createSequentialGroup()
                                 .addGap(9)
                                 // The left column of icon+label

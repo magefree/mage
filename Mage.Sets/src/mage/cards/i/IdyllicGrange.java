@@ -1,12 +1,9 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.common.EntersBattlefieldUntappedTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
@@ -28,13 +25,14 @@ import java.util.UUID;
 public final class IdyllicGrange extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent(SubType.PLAINS);
+            = new FilterControlledPermanent(SubType.PLAINS, "other Plains");
 
     static {
         filter.add(AnotherPredicate.instance);
     }
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 3);
+
+    private static final YouControlPermanentCondition condition
+            = new YouControlPermanentCondition(filter, ComparisonType.OR_GREATER, 3);
 
     public IdyllicGrange(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -45,10 +43,7 @@ public final class IdyllicGrange extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // Idyllic Grange enters the battlefield tapped unless you control three or more other Plains.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new TapSourceEffect(), condition),
-                "tapped unless you control three or more other Plains"
-        ));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // When Idyllic Grange enters the battlefield untapped, put a +1/+1 counter on target creature you control.
         Ability ability = new EntersBattlefieldUntappedTriggeredAbility(

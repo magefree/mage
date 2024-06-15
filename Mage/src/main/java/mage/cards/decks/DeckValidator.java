@@ -11,12 +11,15 @@ import java.util.stream.Collectors;
  */
 public abstract class DeckValidator implements Serializable {
 
-    protected static final List<String> basicLandNames = Arrays.asList(
+    public static final HashSet<String> MAIN_BASIC_LAND_NAMES = new HashSet<>(Arrays.asList(
             "Plains",
             "Island",
             "Swamp",
             "Mountain",
-            "Forest",
+            "Forest"
+    ));
+
+    public static final HashSet<String> ADDITIONAL_BASIC_LAND_NAMES = new HashSet<>(Arrays.asList(
             "Wastes",
             "Snow-Covered Plains",
             "Snow-Covered Island",
@@ -24,11 +27,19 @@ public abstract class DeckValidator implements Serializable {
             "Snow-Covered Mountain",
             "Snow-Covered Forest",
             "Snow-Covered Wastes"
-    );
+    ));
+
+    public static final HashSet<String> ALL_BASIC_LAND_NAMES = new HashSet<>();
+    {
+        ALL_BASIC_LAND_NAMES.addAll(MAIN_BASIC_LAND_NAMES);
+        ALL_BASIC_LAND_NAMES.addAll(ADDITIONAL_BASIC_LAND_NAMES);
+    }
+
     protected static final Map<String, Integer> maxCopiesMap = new HashMap<>();
 
     static {
-        basicLandNames.stream().forEach(s -> maxCopiesMap.put(s, Integer.MAX_VALUE));
+        MAIN_BASIC_LAND_NAMES.forEach(s -> maxCopiesMap.put(s, Integer.MAX_VALUE));
+        ADDITIONAL_BASIC_LAND_NAMES.forEach(s -> maxCopiesMap.put(s, Integer.MAX_VALUE));
         maxCopiesMap.put("Relentless Rats", Integer.MAX_VALUE);
         maxCopiesMap.put("Shadowborn Apostle", Integer.MAX_VALUE);
         maxCopiesMap.put("Rat Colony", Integer.MAX_VALUE);

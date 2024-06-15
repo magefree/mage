@@ -19,7 +19,7 @@ public final class RevisedEdition extends ExpansionSet {
     }
 
     private RevisedEdition() {
-        super("Revised Edition", "3ED", ExpansionSet.buildDate(1994, 3, 1), SetType.CORE);
+        super("Revised Edition", "3ED", ExpansionSet.buildDate(1994, 4, 11), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

@@ -261,6 +261,9 @@ public final class ManaUtil {
             } else if (symbols.contains(ManaSymbol.HYBRID_WB)) {
                 chosenManaAbilityForHybrid = ability;
                 countColored.add(ManaSymbol.HYBRID_WB);
+            } else if (symbols.contains(ManaSymbol.HYBRID_CB)) {
+                chosenManaAbilityForHybrid = ability;
+                countColored.add(ManaSymbol.HYBRID_CB);
             }
         }
 
@@ -282,6 +285,9 @@ public final class ManaUtil {
             } else if (symbols.contains(ManaSymbol.HYBRID_UR)) {
                 chosenManaAbilityForHybrid = ability;
                 countColored.add(ManaSymbol.HYBRID_UR);
+            } else if (symbols.contains(ManaSymbol.HYBRID_CR)) {
+                chosenManaAbilityForHybrid = ability;
+                countColored.add(ManaSymbol.HYBRID_CR);
             }
         }
         return chosenManaAbilityForHybrid;
@@ -302,6 +308,9 @@ public final class ManaUtil {
             } else if (symbols.contains(ManaSymbol.HYBRID_GU)) {
                 chosenManaAbilityForHybrid = ability;
                 countColored.add(ManaSymbol.HYBRID_GU);
+            } else if (symbols.contains(ManaSymbol.HYBRID_CU)) {
+                chosenManaAbilityForHybrid = ability;
+                countColored.add(ManaSymbol.HYBRID_CU);
             }
         }
         return chosenManaAbilityForHybrid;
@@ -322,6 +331,9 @@ public final class ManaUtil {
             } else if (symbols.contains(ManaSymbol.HYBRID_RW)) {
                 chosenManaAbilityForHybrid = ability;
                 countColored.add(ManaSymbol.HYBRID_RW);
+            } else if (symbols.contains(ManaSymbol.HYBRID_CW)) {
+                chosenManaAbilityForHybrid = ability;
+                countColored.add(ManaSymbol.HYBRID_CW);
             }
         }
         return chosenManaAbilityForHybrid;
@@ -342,6 +354,9 @@ public final class ManaUtil {
             } else if (symbols.contains(ManaSymbol.HYBRID_RG)) {
                 chosenManaAbilityForHybrid = ability;
                 countColored.add(ManaSymbol.HYBRID_RG);
+            } else if (symbols.contains(ManaSymbol.HYBRID_CG)) {
+                chosenManaAbilityForHybrid = ability;
+                countColored.add(ManaSymbol.HYBRID_CG);
             }
         }
         return chosenManaAbilityForHybrid;

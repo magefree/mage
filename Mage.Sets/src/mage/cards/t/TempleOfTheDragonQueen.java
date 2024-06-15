@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -23,8 +21,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class TempleOfTheDragonQueen extends CardImpl {
@@ -110,6 +109,7 @@ class TempleOfTheDragonQueenEffect extends OneShotEffect {
                 }
             }
             if (entersTapped) {
+                // Intentional use of Permanent::setTapped, to not cause any trigger
                 land.setTapped(true);
                 return true;
             }

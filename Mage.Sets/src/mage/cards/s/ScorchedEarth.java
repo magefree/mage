@@ -13,11 +13,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
-import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public final class ScorchedEarth extends CardImpl {
         effect.setText("Destroy X target lands");
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(ScorchedEarthTargetAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().setCostAdjuster(ScorchedEarthCostAdjuster.instance);
     }
 
@@ -50,17 +49,6 @@ public final class ScorchedEarth extends CardImpl {
     @Override
     public ScorchedEarth copy() {
         return new ScorchedEarth(this);
-    }
-}
-
-enum ScorchedEarthTargetAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        ability.addTarget(new TargetLandPermanent(xValue, xValue, new FilterLandPermanent(), false));
     }
 }
 

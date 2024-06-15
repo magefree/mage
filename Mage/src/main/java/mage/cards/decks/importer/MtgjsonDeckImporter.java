@@ -42,6 +42,11 @@ public class MtgjsonDeckImporter extends JsonDeckImporter {
         JsonArray sideBoard = JsonUtil.getAsArray(data, "sideBoard");
         List<mage.cards.decks.DeckCardInfo> sideDeckList = deckList.getSideboard();
         addBoardToList(sideBoard, sideDeckList, deckSet);
+
+        // commander go to sideboard too
+        JsonArray commander = JsonUtil.getAsArray(data, "commander");
+        List<mage.cards.decks.DeckCardInfo> commanderDeckList = deckList.getSideboard();
+        addBoardToList(commander, commanderDeckList, deckSet);
     }
 
     private void addBoardToList(JsonArray board, List<mage.cards.decks.DeckCardInfo> list, String deckSet) {

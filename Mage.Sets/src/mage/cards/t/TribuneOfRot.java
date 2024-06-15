@@ -70,7 +70,7 @@ class TribuneOfRotEffect extends OneShotEffect {
                     .millCards(2, source, game)
                     .count(StaticFilters.FILTER_CARD_CREATURE, game);
             if (numOfCreatureCardsMilled > 0) {
-                game.getState().processAction(game);
+                game.processAction();
                 token.putOntoBattlefield(numOfCreatureCardsMilled, game, source, source.getControllerId(), false, false);
             }
             return true;

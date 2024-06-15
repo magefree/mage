@@ -83,8 +83,8 @@ public class TournamentSession {
         tournament.submitDeck(playerId, deck);
     }
 
-    public void updateDeck(Deck deck) {
-        tournament.updateDeck(playerId, deck);
+    public void updateDeck(Deck deck, boolean ignoreMainBasicLands) {
+        tournament.updateDeck(playerId, deck, ignoreMainBasicLands);
     }
 
     public void setKilled() {

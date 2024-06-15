@@ -46,7 +46,7 @@ public final class JunkJet extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private JunkJet(final JunkJet card) {

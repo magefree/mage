@@ -36,7 +36,7 @@ public final class NightMarketAeronaut extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false,
                 RevoltCondition.instance, "<i>Revolt</i> &mdash; {this} enters the battlefield with " +
                 "a +1/+1 counter on it if a permanent you controlled left the battlefield this turn.", null
-        ), new RevoltWatcher());
+        ).addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private NightMarketAeronaut(final NightMarketAeronaut card) {

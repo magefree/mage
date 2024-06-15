@@ -38,7 +38,7 @@ public final class SefrisOfTheHiddenWays extends CardImpl {
         // Whenever one or more creature cards are put into your graveyard from anywhere, venture into the dungeon. This ability triggers only once each turn.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new VentureIntoTheDungeonEffect(), false, filter, TargetController.YOU
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
 
         // Create Undead — Whenever you complete a dungeon, return target creature card from your graveyard to the battlefield.
         Ability ability = new CompletedDungeonTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());

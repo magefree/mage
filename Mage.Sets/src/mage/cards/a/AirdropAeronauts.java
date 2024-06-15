@@ -39,7 +39,7 @@ public final class AirdropAeronauts extends CardImpl {
                 "if a permanent you controlled left the battlefield this turn, you gain 5 life."
         );
         ability.setAbilityWord(AbilityWord.REVOLT);
-        this.addAbility(ability, new RevoltWatcher());
+        this.addAbility(ability.addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private AirdropAeronauts(final AirdropAeronauts card) {

@@ -20,7 +20,7 @@ public final class ViashinoRacketeer extends CardImpl {
 
     public ViashinoRacketeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(2);

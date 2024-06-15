@@ -57,7 +57,7 @@ public final class CombatUtil {
             return blockableAttackers;
         }
 
-        if (sumPoisonDamage(attackersThatWontBeBlocked, defender) >= 10 - defender.getCounters().getCount(CounterType.POISON)) {
+        if (sumPoisonDamage(attackersThatWontBeBlocked, defender) >= 10 - defender.getCountersCount(CounterType.POISON)) {
             blockableAttackers.addAll(unblockableAttackers);
             return blockableAttackers;
         }

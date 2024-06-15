@@ -33,7 +33,7 @@ import java.util.stream.IntStream;
  */
 public final class GavelOfTheRighteous extends CardImpl {
 
-    private static final DynamicValue xValue = new CountersSourceCount(null);
+    private static final DynamicValue xValue = new CountersSourceCount();
 
     public GavelOfTheRighteous(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

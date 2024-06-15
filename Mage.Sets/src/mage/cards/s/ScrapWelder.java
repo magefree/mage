@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,18 +13,20 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterArtifactCard;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,8 @@ public final class ScrapWelder extends CardImpl {
         // {T}, Sacrifice an artifact with mana value X: Return target artifact card with mana value less than X from your graveyard to the battlefield. It gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(new ScrapWelderEffect(), new TapSourceCost());
         ability.addCost(new ScrapWelderCost());
-        ability.setTargetAdjuster(ScrapWelderTargetAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.FEWER_THAN));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 
@@ -113,24 +115,5 @@ class ScrapWelderCost extends VariableCostImpl {
         FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("an artifact with mana value " + xValue);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         return new SacrificeTargetCost(filter);
-    }
-}
-
-enum ScrapWelderTargetAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = 0;
-        for (Cost cost : ability.getCosts()) {
-            if (cost instanceof ScrapWelderCost) {
-                xValue = ((ScrapWelderCost) cost).getAmount();
-                break;
-            }
-        }
-        FilterArtifactCard filter = new FilterArtifactCard("artifact card with mana value less than " + xValue + " from your graveyard");
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
     }
 }

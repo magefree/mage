@@ -67,7 +67,7 @@ public class CollectEvidenceCost extends CostImpl {
         // TODO: require target to have minimum selected total mana value (requires refactor)
         Target target = new TargetCardInYourGraveyard(1, Integer.MAX_VALUE) {
             @Override
-            public String getMessage() {
+            public String getMessage(Game game) {
                 // shows selected mana value
                 int totalMV = this
                         .getTargets()
@@ -76,7 +76,7 @@ public class CollectEvidenceCost extends CostImpl {
                         .filter(Objects::nonNull)
                         .mapToInt(MageObject::getManaValue)
                         .sum();
-                return super.getMessage() + HintUtils.prepareText(
+                return super.getMessage(game) + HintUtils.prepareText(
                         " (selected mana value " + totalMV + " of " + amount + ")",
                         totalMV >= amount ? Color.GREEN : Color.RED
                 );
