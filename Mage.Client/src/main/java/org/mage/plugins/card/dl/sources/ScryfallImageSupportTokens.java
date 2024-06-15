@@ -2371,6 +2371,41 @@ public class ScryfallImageSupportTokens {
             put("SCD/Zombie Army", "https://api.scryfall.com/cards/tscd/14/en?format=image");
             put("SCD/Zombie Knight", "https://api.scryfall.com/cards/tscd/15/en?format=image");
 
+            // MH3
+            put("MH3/Angel", "https://api.scryfall.com/cards/tmh3/3/en?format=image");
+            put("MH3/Bird", "https://api.scryfall.com/cards/tmh3/9/en?format=image");
+            put("MH3/Blood", "https://api.scryfall.com/cards/tmh3/29/en?format=image");
+            put("MH3/Cat", "https://api.scryfall.com/cards/tmh3/4/en?format=image");
+            put("MH3/Cat Warrior", "https://api.scryfall.com/cards/tmh3/5/en?format=image");
+            put("MH3/Clue", "https://api.scryfall.com/cards/tmh3/30/en?format=image");
+            put("MH3/Eldrazi Spawn", "https://api.scryfall.com/cards/tmh3/2/en?format=image");
+            put("MH3/Fish", "https://api.scryfall.com/cards/tmh3/10/en?format=image");
+            put("MH3/Food", "https://api.scryfall.com/cards/tmh3/31/en?format=image");
+            put("MH3/Fox", "https://api.scryfall.com/cards/tmh3/6/en?format=image");
+            put("MH3/Gremlin", "https://api.scryfall.com/cards/tmh3/23/en?format=image");
+            put("MH3/Insect/1", "https://api.scryfall.com/cards/tmh3/27/en?format=image");
+            put("MH3/Insect/2", "https://api.scryfall.com/cards/tmh3/25/en?format=image");
+            put("MH3/Kraken", "https://api.scryfall.com/cards/tmh3/11/en?format=image");
+            put("MH3/Moonfolk", "https://api.scryfall.com/cards/tmh3/12/en?format=image");
+            put("MH3/Phyrexian Germ", "https://api.scryfall.com/cards/tmh3/16/en?format=image");
+            put("MH3/Phyrexian Golem", "https://api.scryfall.com/cards/tmh3/32/en?format=image");
+            put("MH3/Phyrexian Wurm/1", "https://api.scryfall.com/cards/tmh3/17/en?format=image");
+            put("MH3/Phyrexian Wurm/2", "https://api.scryfall.com/cards/tmh3/18/en?format=image");
+            put("MH3/Plant", "https://api.scryfall.com/cards/tmh3/26/en?format=image");
+            put("MH3/Rat", "https://api.scryfall.com/cards/tmh3/19/en?format=image");
+            put("MH3/Servo", "https://api.scryfall.com/cards/tmh3/33/en?format=image");
+            put("MH3/Snake", "https://api.scryfall.com/cards/tmh3/20/en?format=image");
+            put("MH3/Soldier", "https://api.scryfall.com/cards/tmh3/7/en?format=image");
+            put("MH3/Spellgorger Weird", "https://api.scryfall.com/cards/tmh3/24/en?format=image");
+            put("MH3/Spirit/1", "https://api.scryfall.com/cards/tmh3/8/en?format=image");
+            put("MH3/Spirit/2", "https://api.scryfall.com/cards/tmh3/28/en?format=image");
+            put("MH3/Emblem Tamiyo", "https://api.scryfall.com/cards/tmh3/35/en?format=image");
+            put("MH3/Thopter", "https://api.scryfall.com/cards/tmh3/13/en?format=image");
+            put("MH3/Treasure", "https://api.scryfall.com/cards/tmh3/34/en?format=image");
+            put("MH3/Whale", "https://api.scryfall.com/cards/tmh3/14/en?format=image");
+            put("MH3/Zombie", "https://api.scryfall.com/cards/tmh3/21/en?format=image");
+            put("MH3/Zombie Army", "https://api.scryfall.com/cards/tmh3/22/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

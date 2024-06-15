@@ -2307,3 +2307,37 @@
 |Generate|TOK:SCD|Zombie|||ZombieToken|
 |Generate|TOK:SCD|Zombie Army|||ZombieArmyToken|
 |Generate|TOK:SCD|Zombie Knight|||ZombieKnightToken|
+
+# MH3
+|Generate|TOK:MH3|Angel|||AngelToken|
+|Generate|TOK:MH3|Bird|||SwanSongBirdToken|
+|Generate|TOK:MH3|Blood|||BloodToken|
+|Generate|TOK:MH3|Cat|||CatToken3|
+|Generate|TOK:MH3|Cat Warrior|||CatWarrior21Token|
+|Generate|TOK:MH3|Clue|||ClueArtifactToken|
+|Generate|TOK:MH3|Eldrazi Spawn|||EldraziSpawnToken|
+|Generate|TOK:MH3|Fish|||ReefWormFishToken|
+|Generate|TOK:MH3|Food|||FoodToken|
+|Generate|TOK:MH3|Fox|||Fox22VigilanceToken|
+|Generate|TOK:MH3|Gremlin|||Gremlin11Token|
+|Generate|TOK:MH3|Insect|1||IzoniInsectToken|
+|Generate|TOK:MH3|Insect|2||InsectToken|
+|Generate|TOK:MH3|Kraken|||Kraken99Token|
+|Generate|TOK:MH3|Moonfolk|||Moonfolk12FlyingToken|
+|Generate|TOK:MH3|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:MH3|Phyrexian Golem|||PhyrexianGolemToken|
+|Generate|TOK:MH3|Phyrexian Wurm|1||PhyrexianWurm12DeathtouchToken|
+|Generate|TOK:MH3|Phyrexian Wurm|2||PhyrexianWurm21LifelinkToken|
+|Generate|TOK:MH3|Plant|||PlantToken|
+|Generate|TOK:MH3|Rat|||Rat11LifelinkToken|
+|Generate|TOK:MH3|Servo|||ServoToken|
+|Generate|TOK:MH3|Snake|||OphiomancerSnakeToken|
+|Generate|TOK:MH3|Soldier|||SoldierToken|
+|Generate|TOK:MH3|Spellgorger Weird|||SpellgorgerWeirdToken|
+|Generate|TOK:MH3|Spirit|1||SpiritWhiteToken|
+|Generate|TOK:MH3|Spirit|2||WhiteBlackSpiritToken|
+|Generate|TOK:MH3|Thopter|||ThopterToken|
+|Generate|TOK:MH3|Treasure|||TreasureToken|
+|Generate|TOK:MH3|Whale|||ReefWormWhaleToken|
+|Generate|TOK:MH3|Zombie|||ZombieToken|
+|Generate|TOK:MH3|Zombie Army|||ZombieArmyToken|
