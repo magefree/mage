@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -213,6 +212,16 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Wrap in Flames", 158, Rarity.COMMON, mage.cards.w.WrapInFlames.class));
         cards.add(new SetCardInfo("Wrap in Vigor", 183, Rarity.COMMON, mage.cards.w.WrapInVigor.class));
         cards.add(new SetCardInfo("Zombie Goliath", 135, Rarity.COMMON, mage.cards.z.ZombieGoliath.class));
+
+        // draftmatters cards - draftmatters ability not implemented
+        cards.add(new SetCardInfo("Agent of Acquisitions", 54, Rarity.UNCOMMON, mage.cards.a.AgentOfAcquisitions.class));
+        cards.add(new SetCardInfo("Canal Dredger", 55, Rarity.RARE, mage.cards.c.CanalDredger.class));
+        cards.add(new SetCardInfo("Cogwork Librarian", 58, Rarity.COMMON, mage.cards.c.CogworkLibrarian.class));
+        cards.add(new SetCardInfo("Cogwork Spy", 59, Rarity.COMMON, mage.cards.c.CogworkSpy.class));
+        cards.add(new SetCardInfo("Deal Broker", 61, Rarity.RARE, mage.cards.d.DealBroker.class));
+        cards.add(new SetCardInfo("Lore Seeker", 62, Rarity.RARE, mage.cards.l.Lore Seeker.class));
+        cards.add(new SetCardInfo("Whispergear Sneak", 64, Rarity.COMMON, mage.cards.w.WhispergearSneak.class));
+		
     }
 
 }

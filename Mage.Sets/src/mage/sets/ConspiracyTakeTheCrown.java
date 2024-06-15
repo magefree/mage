@@ -221,6 +221,11 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Windborne Charge", 100, Rarity.UNCOMMON, mage.cards.w.WindborneCharge.class));
         cards.add(new SetCardInfo("Wings of the Guard", 26, Rarity.COMMON, mage.cards.w.WingsOfTheGuard.class));
         cards.add(new SetCardInfo("Zealous Strike", 101, Rarity.COMMON, mage.cards.z.ZealousStrike.class));
+
+        // draftmatters cards - draftmatters ability not implemented
+        cards.add(new SetCardInfo("Illusionary Informant", 32, Rarity.COMMON, mage.cards.i.IllusionaryInformant.class));
+        cards.add(new SetCardInfo("Archdemon of Paliano", 39, Rarity.RARE, mage.cards.a.ArchdemonOfPaliano.class));
+        cards.add(new SetCardInfo("Leovold's Operative", 66, Rarity.COMMON, mage.cards.l.LeovoldsOperative.class));
     }
 
 }
