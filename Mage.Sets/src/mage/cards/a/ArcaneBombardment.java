@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import java.util.ArrayList;
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -10,22 +11,23 @@ import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
-import mage.util.RandomUtil;
 import mage.watchers.Watcher;
-import org.apache.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.MageObjectReference;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.target.TargetCard;
 
 /**
  * @author TheElk801
@@ -42,7 +44,9 @@ public final class ArcaneBombardment extends CardImpl {
     public ArcaneBombardment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
 
-        // Whenever you cast your first instant or sorcery spell each turn, exile an instant or sorcery card at random from your graveyard. Then copy each card exiled with Arcane Bombardment. You may cast any number of the copies without paying their mana costs.
+        // Whenever you cast your first instant or sorcery spell each turn, exile an instant or sorcery card at 
+        // random from your graveyard. Then copy each card exiled with Arcane Bombardment. 
+        // You may cast any number of the copies without paying their mana costs.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new ArcaneBombardmentEffect(), filter, false
         ), new ArcaneBombardmentWatcher());
@@ -60,10 +64,10 @@ public final class ArcaneBombardment extends CardImpl {
 
 class ArcaneBombardmentEffect extends OneShotEffect {
 
-    ArcaneBombardmentEffect() {
-        super(Outcome.Benefit);
-        staticText = "exile an instant or sorcery card at random from your graveyard. Then copy each " +
-                "card exiled with {this}. You may cast any number of the copies without paying their mana costs";
+    public ArcaneBombardmentEffect() {
+        super(Outcome.PlayForFree);
+        this.staticText = "exile an instant or sorcery card at random from your graveyard. "
+                + "Then copy each card exiled with [this], and you may cast any number of the copies without paying their mana costs.";
     }
 
     private ArcaneBombardmentEffect(final ArcaneBombardmentEffect effect) {
@@ -81,40 +85,54 @@ class ArcaneBombardmentEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        UUID exileId = CardUtil.getExileZoneId(game, source);
-        Card toExile = RandomUtil.randomFromCollection(
-                player.getGraveyard().getCards(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game)
-        );
-        if (toExile != null) {
-            player.moveCardsToExile(
-                    toExile, source, game, true,
-                    exileId, CardUtil.getSourceName(game, source)
-            );
-        }
-        ExileZone exileZone = game.getExile().getExileZone(exileId);
-        if (exileZone == null || exileZone.isEmpty()) {
+
+        // Exile a card at random from graveyard
+        Cards cardsInGraveyard = new CardsImpl(player.getGraveyard().getCards(new FilterInstantOrSorceryCard(), game));
+        if (cardsInGraveyard.isEmpty()) {
             return false;
         }
 
-        Cards copies = new CardsImpl();
-        for (Card card : exileZone.getCards(game)) {
-            Card copiedCard = game.copyCard(card, source, source.getControllerId());
-            copies.add(copiedCard);
+        Card cardToExile = cardsInGraveyard.getRandom(game);
+        if (cardToExile == null) {
+            return false;
         }
-        for (Card copiedCard : copies.getCards(game)) {
-            if (!player.chooseUse(outcome, "Cast the copied card?", source, game)) {
-                continue;
+
+        player.moveCards(cardToExile, Zone.EXILED, source, game);
+        MageObjectReference mor = new MageObjectReference(cardToExile, game);
+
+        // Get the list of exiled cards from the game state or create a new one
+        List<MageObjectReference> exiledCards = (List<MageObjectReference>) game.getState().getValue(source.getSourceId() + "_exiledCards");
+        if (exiledCards == null) {
+            exiledCards = new ArrayList<>();
+            game.getState().setValue(source.getSourceId() + "_exiledCards", exiledCards);
+        }
+        exiledCards.add(mor);
+
+        // Copy the exiled cards
+        Cards copies = new CardsImpl();
+        for (MageObjectReference reference : exiledCards) {
+            Card card = reference.getCard(game);
+            if (card != null) {
+                Card copiedCard = game.copyCard(card, source, source.getControllerId());
+                copies.add(copiedCard);
             }
-            if (copiedCard.getSpellAbility() != null) {
-                game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
-                player.cast(
-                        player.chooseAbilityForCast(copiedCard, game, true),
-                        game, true, new ApprovingObject(source, game)
-                );
-                game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
-            } else {
-                Logger.getLogger(ArcaneBombardmentEffect.class).error("Arcane Bombardment: "
-                        + "spell ability == null " + copiedCard.getName());
+        }
+
+        // Allow player to choose the order and cast the copies
+        if (!copies.isEmpty()) {
+            TargetCard target = new TargetCard(0, copies.size(), Zone.EXILED, new FilterCard("copies to cast"));
+            player.choose(Outcome.PlayForFree, copies, target, source, game);
+            List<UUID> targets = target.getTargets();
+
+            for (UUID targetId : targets) {
+                Card copiedCard = game.getCard(targetId);
+                if (copiedCard != null && copiedCard.getSpellAbility() != null) {
+                    if (player.chooseUse(Outcome.PlayForFree, "Cast the copy of " + copiedCard.getLogName() + "?", source, game)) {
+                        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
+                        player.cast(player.chooseAbilityForCast(copiedCard, game, true), game, true, new ApprovingObject(source, game));
+                        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
+                    }
+                }
             }
         }
         return true;
@@ -149,8 +167,7 @@ class ArcaneBombardmentWatcher extends Watcher {
     static boolean checkSpell(StackObject input, Game game) {
         return game
                 .getState()
-                .getWatcher(ArcaneBombardmentWatcher.class)
-                .playerMap
+                .getWatcher(ArcaneBombardmentWatcher.class).playerMap
                 .getOrDefault(input.getControllerId(), 0) < 2;
     }
 }
