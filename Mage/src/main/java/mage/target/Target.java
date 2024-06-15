@@ -190,7 +190,7 @@ public interface Target extends Serializable {
 
     boolean contains(UUID targetId);
 
-    void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, Integer zcc);
+    void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, int zcc);
 
     /**
      * This function tries to auto-choose the next target.

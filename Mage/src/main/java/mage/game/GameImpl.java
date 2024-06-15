@@ -4180,7 +4180,7 @@ public abstract class GameImpl implements Game {
             state.getTriggers().removeAbilitiesOfSource(newPermanent.getId());
             for (Ability ability : newPermanent.getAbilities()) {
                 for (Target target : ability.getTargets()) {
-                    target.replaceMutatedTarget(permanentId, permanent.getId(), null);
+                    target.replaceMutatedTarget(permanentId, permanent.getId(), permanent.getZoneChangeCounter(this));
                 }
                 if (ability instanceof TriggeredAbility) {
                     state.getTriggers().add((TriggeredAbility) ability, null, permanent);
@@ -4238,7 +4238,7 @@ public abstract class GameImpl implements Game {
             for (Permanent underPermanent : newPermanent.getMutatedOverList()) {
                 for (Ability ability : underPermanent.getAbilities()) {
                     for (Target target : ability.getTargets()) {
-                        target.replaceMutatedTarget(permanentId, newPermanent.getId(), null);
+                        target.replaceMutatedTarget(permanentId, newPermanent.getId(), newPermanent.getZoneChangeCounter(this));
                     }
                     if (ability instanceof TriggeredAbility) {
                         state.getTriggers().add((TriggeredAbility) ability, null, newPermanent);

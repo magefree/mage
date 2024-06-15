@@ -48,6 +48,8 @@ public class MutateTest extends CardTestPlayerBase {
     private static final String NIGHTMARE_SHEPHERD = "Nightmare Shepherd"; // {2}{B}{B} - 4/4 - Whenever another nontoken creature you control dies, you may exile it. If you do, creata a token that's a copy of that creature, except it's 1/1 and it's a Nightmare in addition to its other types.
     private static final String ETRATA_THE_SILENCER = "Etrata, the Silencer"; // {2}{U}{B} - 3/5 - Whenever this deals combat damage to a player, exile target creature that player controls and put a hit counter on that card. That player loses the game if they own three or more exiled cards with hit counters on them.
     private static final String INSATIABLE_HEMOPHAGE = "Insatiable Hemophage"; // {3}{B} - 3/3 - Mutate {2}{B} - Deathtouch - Whenever mutates, opponents lose X life and you gain X life where X is the number of times this has mutated.
+    private static final String ALMIGHTY_BRUSHWAGG = "Almighty Brushwagg"; // {G} - 1/1 - Trample - {3}{G}: Almighty Brushwagg gets +3/+3 until end of turn.
+
 
     // Spells
     private static final String MURDER = "Murder"; // {1}{B}{B} - Destroy target creature
@@ -986,6 +988,38 @@ public class MutateTest extends CardTestPlayerBase {
     @Test
     public void testMutateCardOverCardAttachment() {
         setupTestMutateAttachment(false);
+    }
+
+    /**
+     * test for continuous effects that use the source permanent
+     */
+    public void setupTestMutateBoostedSource(boolean mutateUnder) {
+        setupLands(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, ALMIGHTY_BRUSHWAGG);
+        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{G}: ");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, ALMIGHTY_BRUSHWAGG);
+        setChoice(playerA, mutateUnder);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        String creature = mutateUnder ? ALMIGHTY_BRUSHWAGG : DREAMTAIL_HERON;
+        assertPermanentCount(playerA, creature, 1);
+        assertAbility(playerA, creature, TrampleAbility.getInstance(), true);
+        assertPowerToughness(playerA, creature, 3 + (mutateUnder ? 1 : 3), 3 + (mutateUnder ? 1 : 4));
+    }
+    @Test
+    public void testMutateCardUnderCardBoostedSource() {
+        setupTestMutateBoostedSource(true);
+    }
+    @Test
+    public void testMutateCardOverCardBoostedSource() {
+        setupTestMutateBoostedSource(false);
     }
 
 //    /**
