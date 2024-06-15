@@ -87,10 +87,6 @@ public class MutateAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        if (getZone().equals(Zone.GRAVEYARD)) {
-            // Special-case: Casting from graveyard. See Brokkos, Apex of Forever.
-            return "You may cast " + getCardName() + " from your graveyard using its mutate ability.";
-        }
         return MUTATE_KEYWORD + " " + getManaCostsToPay().getText() + MUTATE_REMINDER;
     }
 
