@@ -219,7 +219,7 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Cogwork Librarian", 58, Rarity.COMMON, mage.cards.c.CogworkLibrarian.class));
         cards.add(new SetCardInfo("Cogwork Spy", 59, Rarity.COMMON, mage.cards.c.CogworkSpy.class));
         cards.add(new SetCardInfo("Deal Broker", 61, Rarity.RARE, mage.cards.d.DealBroker.class));
-        cards.add(new SetCardInfo("Lore Seeker", 62, Rarity.RARE, mage.cards.l.Lore Seeker.class));
+        cards.add(new SetCardInfo("Lore Seeker", 62, Rarity.RARE, mage.cards.l.LoreSeeker.class));
         cards.add(new SetCardInfo("Whispergear Sneak", 64, Rarity.COMMON, mage.cards.w.WhispergearSneak.class));
 		
     }
