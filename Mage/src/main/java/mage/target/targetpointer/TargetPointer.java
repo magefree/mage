@@ -63,4 +63,6 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
     TargetPointer withData(String key, String value);
 
     String getData(String key);
+
+    void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, Game game);
 }

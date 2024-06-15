@@ -14,7 +14,8 @@ public enum Zone {
     EXILED(true),
     ALL(false),
     OUTSIDE(false),
-    COMMAND(true);
+    COMMAND(true),
+    MUTATE(true);
 
     private final boolean isPublic;
 
@@ -23,7 +24,7 @@ public enum Zone {
     }
 
     public boolean match(Zone zone) {
-        return (this == zone || this == ALL || zone == ALL);
+        return (this == zone || this == ALL || zone == ALL || (this == BATTLEFIELD && zone == MUTATE));
     }
 
     @Override

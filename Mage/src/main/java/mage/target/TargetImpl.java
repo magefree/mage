@@ -653,6 +653,26 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
+    public void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId) {
+        if (targets.containsKey(originalTargetId)) {
+            Integer value = targets.get(originalTargetId);
+            targets.remove(originalTargetId);
+            targets.put(newTargetId, value);
+        }
+        if (zoneChangeCounters.containsKey(originalTargetId)) {
+            Integer value = zoneChangeCounters.get(originalTargetId);
+            zoneChangeCounters.remove(originalTargetId);
+            zoneChangeCounters.put(newTargetId, value);
+        }
+        if (targetController != null && targetController.equals(originalTargetId)) {
+            targetController = newTargetId;
+        }
+        if (abilityController != null && abilityController.equals(originalTargetId)) {
+            abilityController = newTargetId;
+        }
+    }
+
+    @Override
     public UUID tryToAutoChoose(UUID abilityControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = possibleTargets(abilityControllerId, source, game);
         possibleTargets.removeAll(this.targets.keySet());

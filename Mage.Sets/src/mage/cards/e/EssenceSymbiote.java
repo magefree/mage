@@ -15,6 +15,9 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -65,14 +68,26 @@ class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        // TODO: Implement this
-        //return event.getType() == GameEvent.EventType.CREATURE_MUTATED;
-        return false;
+        return event.getType() == GameEvent.EventType.CREATURE_MUTATED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // TODO: Implement this
+        Permanent sourcePermanent = game.getPermanent(event.getSourceId());
+        Permanent targetPermanent = game.getPermanent(event.getTargetId());
+        if (sourcePermanent != null && targetPermanent != null) {
+            Player controller = game.getPlayer(targetPermanent.getControllerId());
+            if (controller != null
+                    && event.getTargetId().equals(targetPermanent.getId())
+                    && controller.getId().equals(sourcePermanent.getControllerId())
+                    && this.isControlledBy(controller.getId())) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setValue("targetId", targetPermanent.getId());
+                    effect.setTargetPointer(new FixedTarget(targetPermanent.getId(), targetPermanent.getZoneChangeCounter(game)));
+                }
+                return true;
+            }
+        }
         return false;
     }
 }

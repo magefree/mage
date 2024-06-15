@@ -538,6 +538,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         removed = game.getState().getCommand().remove(lkiObject);
                     }
                     break;
+                case MUTATE:
                 case OUTSIDE:
                     if (game.getPlayer(ownerId).getSideboard().contains(this.getId())) {
                         game.getPlayer(ownerId).getSideboard().remove(this.getId());
@@ -561,7 +562,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
         if (removed) {
-            if (fromZone != Zone.OUTSIDE) {
+            if (fromZone != Zone.OUTSIDE && fromZone != Zone.MUTATE) {
                 game.rememberLKI(fromZone, lkiObject != null ? lkiObject : this);
             }
         } else {
