@@ -653,16 +653,16 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, Integer zcc) {
+    public void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, int zcc) {
         if (targets.containsKey(originalTargetId)) {
-            Integer value = targets.get(originalTargetId);
+            // Integer value = targets.get(originalTargetId);
             targets.remove(originalTargetId);
-            targets.put(newTargetId, zcc == null ? value : zcc);
+            targets.put(newTargetId, zcc);
         }
         if (zoneChangeCounters.containsKey(originalTargetId)) {
-            Integer value = zoneChangeCounters.get(originalTargetId);
+            // Integer value = zoneChangeCounters.get(originalTargetId);
             zoneChangeCounters.remove(originalTargetId);
-            zoneChangeCounters.put(newTargetId, zcc == null ? value : zcc);
+            zoneChangeCounters.put(newTargetId, zcc);
         }
         if (targetController != null && targetController.equals(originalTargetId)) {
             targetController = newTargetId;

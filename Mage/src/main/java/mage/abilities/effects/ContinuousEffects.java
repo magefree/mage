@@ -2,6 +2,7 @@ package mage.abilities.effects;
 
 import mage.ApprovingObject;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
@@ -1489,8 +1490,21 @@ public class ContinuousEffects implements Serializable {
                         ability.setSourceId(newId);
                     }
                     for (Target target : ability.getTargets()) {
-                        target.replaceMutatedTarget(originalId, newId, null);
+                        target.replaceMutatedTarget(originalId, newId, game.getState().getZoneChangeCounter(newId));
                     }
+                }
+                // also replace locked in
+                ContinuousEffectImpl cEffect = (ContinuousEffectImpl) effect;
+                if (cEffect.getAffectedObjectsSet()) {
+                    List<MageObjectReference> newMors = new ArrayList<>();
+                    for (Iterator<MageObjectReference> it = cEffect.affectedObjectList.iterator(); it.hasNext(); ) {
+                        MageObjectReference mor = it.next();
+                        if (mor.getSourceId().equals(originalId)) {
+                            it.remove();
+                            newMors.add(new MageObjectReference(newId, game.getState().getZoneChangeCounter(newId), game));
+                        }
+                    }
+                    cEffect.affectedObjectList.addAll(newMors);
                 }
             }
         }
