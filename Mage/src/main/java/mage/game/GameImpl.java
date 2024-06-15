@@ -50,7 +50,6 @@ import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
 import mage.game.permanent.*;
-import mage.game.permanent.token.EmptyToken;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackAbility;
@@ -4181,7 +4180,7 @@ public abstract class GameImpl implements Game {
             state.getTriggers().removeAbilitiesOfSource(newPermanent.getId());
             for (Ability ability : newPermanent.getAbilities()) {
                 for (Target target : ability.getTargets()) {
-                    target.replaceMutatedTarget(permanentId, permanent.getId());
+                    target.replaceMutatedTarget(permanentId, permanent.getId(), null);
                 }
                 if (ability instanceof TriggeredAbility) {
                     state.getTriggers().add((TriggeredAbility) ability, null, permanent);
@@ -4223,12 +4222,11 @@ public abstract class GameImpl implements Game {
             // TODO: card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)
 
             // Replace any targets on the stack pointing to the old permanent to the new permanent
-            for (Iterator<StackObject> it = state.getStack().iterator(); it.hasNext();) {
-                StackObject stackObject = it.next();
+            for (StackObject stackObject : state.getStack()) {
                 for (Target targets : stackObject.getStackAbility().getTargets()) {
                     for (UUID target : targets.getTargets()) {
                         if (target.equals(permanentId)) {
-                            targets.replaceMutatedTarget(permanentId, newPermanent.getId());
+                            targets.replaceMutatedTarget(permanentId, newPermanent.getId(), newPermanent.getZoneChangeCounter(this));
                             break;
                         }
                     }
@@ -4240,7 +4238,7 @@ public abstract class GameImpl implements Game {
             for (Permanent underPermanent : newPermanent.getMutatedOverList()) {
                 for (Ability ability : underPermanent.getAbilities()) {
                     for (Target target : ability.getTargets()) {
-                        target.replaceMutatedTarget(permanentId, newPermanent.getId());
+                        target.replaceMutatedTarget(permanentId, newPermanent.getId(), null);
                     }
                     if (ability instanceof TriggeredAbility) {
                         state.getTriggers().add((TriggeredAbility) ability, null, newPermanent);
