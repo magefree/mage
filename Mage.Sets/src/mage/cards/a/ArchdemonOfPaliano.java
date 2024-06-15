@@ -31,7 +31,7 @@ public final class ArchdemonOfPaliano extends CardImpl {
 
         // As long as Archdemon of Paliano is face up during the draft, you can’t look at booster packs and must draft cards at random. After you draft three cards this way, turn Archdemon of Paliano face down.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("As long as Archdemon of Paliano is face up during the draft, "
-                + "you can’t look at booster packs and must draft cards at random. "
+                + "you can't look at booster packs and must draft cards at random. "
 				+ "After you draft three cards this way, turn Archdemon of Paliano face down. - not implemented.")));
 
         // Flying
