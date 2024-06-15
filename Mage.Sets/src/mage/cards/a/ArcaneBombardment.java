@@ -1,7 +1,7 @@
 package mage.cards.a;
 
-import java.util.ArrayList;
 import mage.ApprovingObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -10,24 +10,20 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import mage.MageObjectReference;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.target.TargetCard;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -64,10 +60,10 @@ public final class ArcaneBombardment extends CardImpl {
 
 class ArcaneBombardmentEffect extends OneShotEffect {
 
-    public ArcaneBombardmentEffect() {
+    ArcaneBombardmentEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "exile an instant or sorcery card at random from your graveyard. "
-                + "Then copy each card exiled with [this], and you may cast any number of the copies without paying their mana costs.";
+                + "Then copy each card exiled with {this}, and you may cast any number of the copies without paying their mana costs.";
     }
 
     private ArcaneBombardmentEffect(final ArcaneBombardmentEffect effect) {
