@@ -6,6 +6,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.InfoEffect;
 
 import java.util.UUID;
 
@@ -22,6 +24,14 @@ public final class IllusionaryInformant extends CardImpl {
         this.subtype.add(SubType.ILLUSION);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
+
+        // TODO: Draft specific abilities not implemented
+        // Draft Illusionary Informant face up.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Illusionary Informant face up - not implemented.")));
+
+        // During the draft, you may turn Illusionary Informant face down. If you do, look at the next card drafted by a player of your choice.
+		this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("During the draft, you may turn Illusionary Informant face down. If you do, "
+		        + "look at the next card drafted by a player of your choice - not implemented.")));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
