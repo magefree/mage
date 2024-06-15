@@ -37,6 +37,7 @@ public enum ImageManagerImpl implements ImageManager {
     private static BufferedImage imageSickness;
     private static BufferedImage imageDay;
     private static BufferedImage imageNight;
+    private static BufferedImage imageMutate;
 
     private static BufferedImage imageTokenIcon;
     private static BufferedImage triggeredAbilityIcon;
@@ -193,6 +194,15 @@ public enum ImageManagerImpl implements ImageManager {
             imageNight = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
         }
         return imageNight;
+    }
+
+    @Override
+    public BufferedImage getMutateImage() {
+        if (imageMutate == null) {
+            Image image = getImageFromResourceTransparent("/card/mutate.png", Color.WHITE, new Rectangle(20, 20));
+            imageMutate = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageMutate;
     }
 
     @Override

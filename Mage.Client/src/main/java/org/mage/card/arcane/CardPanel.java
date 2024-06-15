@@ -3,15 +3,13 @@ package org.mage.card.arcane;
 import mage.cards.*;
 import mage.cards.action.ActionCallback;
 import mage.cards.action.TransferData;
+import mage.client.components.ext.dlg.DialogManager;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.constants.*;
-import mage.view.AbilityView;
-import mage.view.CardView;
-import mage.view.PermanentView;
-import mage.view.StackAbilityView;
+import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
@@ -61,6 +59,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
     public final JPanel buttonPanel;
     private JButton dayNightButton;
     private JButton showCopySourceButton;
+    private JButton showMutateButton;
+
+    private MutateView mutateView;
 
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
@@ -141,7 +142,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         // Set to requested size
         this.setCardBounds(0, 0, dimension.width, dimension.height);
 
-        // Create button panel for Transform and Show Source (copied cards)
+        // Create button panel for Transform and Show Source (copied cards) and Show Mutate (cards under)
         buttonPanel = new JPanel();
         buttonPanel.setLayout(null);
         buttonPanel.setOpaque(false);
@@ -180,11 +181,12 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
         // Both card rendering implementations have a view copy source button
         if (this.getGameCard() instanceof PermanentView) {
+            PermanentView permanentView = (PermanentView) this.getGameCard();
             // Create the show source button
             showCopySourceButton = new JButton("");
             showCopySourceButton.setSize(32, 32);
             showCopySourceButton.setToolTipText("This permanent is copying a target. To see original card, push this button or turn mouse wheel down while hovering with the mouse pointer over the permanent.");
-            showCopySourceButton.setVisible(((PermanentView) this.getGameCard()).isCopy());
+            showCopySourceButton.setVisible(permanentView.isCopy());
             showCopySourceButton.setIcon(new ImageIcon(ImageManagerImpl.instance.getCopyInformIconImage()));
             showCopySourceButton.addActionListener(e -> {
                 ActionCallback callback1 = Plugins.instance.getActionCallback();
@@ -193,6 +195,21 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
             // Add it
             buttonPanel.add(showCopySourceButton);
+
+            mutateView = permanentView.getMutateView();
+
+            showMutateButton = new JButton("");
+            showMutateButton.setSize(32, 32);
+            showMutateButton.setToolTipText("This permanent is mutated. To see the cards that are under this permanent, push this button or move mouse wheel down while hovering over it.");
+            showMutateButton.setVisible(permanentView.isMutatedOver());
+            showMutateButton.setIcon(new ImageIcon(ImageManagerImpl.instance.getMutateImage()));
+            showMutateButton.addActionListener(e -> {
+                if (!DialogManager.getManager(gameId).isVisible() && !isTapped()) {
+                    DialogManager.getManager(gameId).showMutateDialog(mutateView, null, gameId);
+                }
+            });
+
+            buttonPanel.add(showMutateButton);
         }
 
         // JPanel setup
@@ -231,6 +248,11 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         }
         if (showCopySourceButton != null) {
             showCopySourceButton.setLocation(x, y);
+            y += 25;
+            y += 5;
+        }
+        if (showMutateButton != null) {
+            showMutateButton.setLocation(x, y);
         }
     }
 
@@ -252,6 +274,11 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         if (dayNightButton != null) {
             for (ActionListener al : dayNightButton.getActionListeners()) {
                 dayNightButton.removeActionListener(al);
+            }
+        }
+        if (showMutateButton != null) {
+            for (ActionListener al : showMutateButton.getActionListeners()) {
+                showMutateButton.removeActionListener(al);
             }
         }
         for (MouseListener ml : this.getMouseListeners()) {
@@ -536,7 +563,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             this.setUpdateCard(card);
         }
 
-        // Animation update
+        // Animation and Mutate update
         if (isPermanent && (card instanceof PermanentView)) {
             boolean needsTapping = isTapped() != ((PermanentView) card).isTapped();
             boolean needsFlipping = isFlipped() != ((PermanentView) card).isFlipped();
@@ -549,6 +576,10 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             boolean needsTranforming = isTransformed() != card.isTransformed();
             if (needsTranforming && !animationInProgress) {
                 Animation.transformCard(this);
+            }
+            mutateView = ((PermanentView) card).getMutateView();
+            if (showMutateButton != null) {
+                showMutateButton.setVisible(((PermanentView) card).isMutatedOver());
             }
         }
 

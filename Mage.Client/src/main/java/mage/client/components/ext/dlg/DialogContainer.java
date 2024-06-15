@@ -87,6 +87,16 @@ public class DialogContainer extends JPanel {
                 dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
                 break;
             }
+
+            case MUTATE: {
+                backgroundColor = new Color(250, 250, 250, 50);
+                alpha = 0;
+                ChoiceDialog dlg = new ChoiceDialog(params, "Mutate");
+                add(dlg);
+                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+                dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+                break;
+            }
         }
     }
 

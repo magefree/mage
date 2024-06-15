@@ -24,6 +24,8 @@ public interface ImageManager {
 
     Image getNightImage();
 
+    Image getMutateImage();
+
     Image getTokenIconImage();
 
     Image getTriggeredAbilityImage();
