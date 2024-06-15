@@ -6,11 +6,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.InfoEffect;
 
 import java.util.UUID;
 
 /**
- * @author tiera3 - based on ChardalynDragon
+ * @author tiera3 - based on ChardalynDragon and CanalDredger
  * note - draftmatters ability not implemented
  */
 public final class CogworkSpy extends CardImpl {
@@ -22,6 +24,11 @@ public final class CogworkSpy extends CardImpl {
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
+        // TODO: Draft specific abilities not implemented
+        // Reveal Cogwork Spy as you draft it. You may look at the next card drafted from this booster pack.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Reveal Cogwork Spy as you draft it. "
+		        + "You may look at the next card drafted from this booster pack - not implemented.")));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
