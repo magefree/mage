@@ -60,11 +60,7 @@ public class MutateAbility extends SpellAbility {
             + "They mutate into the creature on top plus all abilities from under it.)</i>";
 
     public MutateAbility(Card card, String mutateCosts) {
-        this(card, mutateCosts, Zone.HAND);
-    }
-
-    public MutateAbility(Card card, String mutateCosts, Zone zone) {
-        super(new ManaCostsImpl<>(mutateCosts), card.getName() + " using mutate", zone,
+        super(new ManaCostsImpl<>(mutateCosts), card.getName(), Zone.HAND,
                 SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.MUTATE);
         this.timing = TimingRule.SORCERY;
         this.addTarget(new TargetCreaturePermanent(filter));
