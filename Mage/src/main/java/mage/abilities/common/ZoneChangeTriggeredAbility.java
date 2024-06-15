@@ -9,6 +9,10 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * Is applied when the {@link Permanent} with this ability instance changes
  * zones.
@@ -19,6 +23,9 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
 
     protected final Zone fromZone;
     protected final Zone toZone;
+
+    // Required for some zone changing abilities like Persist and Undying
+    protected List<UUID> mutatedSourceIds = new ArrayList<>();
 
     public ZoneChangeTriggeredAbility(Zone fromZone, Zone toZone, Effect effect, String triggerPhrase, boolean optional) {
         this(toZone == null ? Zone.ALL : toZone, fromZone, toZone, effect, triggerPhrase, optional);
@@ -45,6 +52,7 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.fromZone = ability.fromZone;
         this.toZone = ability.toZone;
+        this.mutatedSourceIds.addAll(ability.mutatedSourceIds);
     }
 
     @Override
@@ -74,5 +82,23 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
 
     public Zone getToZone() {
         return toZone;
+    }
+
+    public void addMutatedSourceId(UUID sourceId) {
+        if (!hasMutatedSourceId(sourceId)) {
+            mutatedSourceIds.add(sourceId);
+        }
+    }
+
+    public boolean removeMutatedSourceId(UUID sourceId) {
+        return mutatedSourceIds.remove(sourceId);
+    }
+
+    public boolean hasMutatedSourceId(UUID sourceId) {
+        return mutatedSourceIds.contains(sourceId);
+    }
+
+    public List<UUID> getMutatedSourceIds() {
+        return new ArrayList<>(mutatedSourceIds);
     }
 }

@@ -9,10 +9,7 @@ import mage.filter.FilterCard;
 import mage.game.command.Commander;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.events.ZoneChangeGroupEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentMeld;
-import mage.game.permanent.PermanentToken;
+import mage.game.permanent.*;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -323,6 +320,17 @@ public final class ZonesHandler {
             }
             // We arbitrarily prefer the bottom half card. This should never be relevant.
             meld.updateZoneChangeCounter(game, unmelded.additionalMoves.get(unmelded.additionalMoves.size() - 1).event);
+            return true;
+        }
+
+        if (event.getFromZone().equals(Zone.MUTATE)) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (game.getState().containsPermanentInMutateZone(event.getTargetId())) {
+                game.getState().removePermanentFromMutateZone(event.getTargetId());
+            }
+            if (permanent != null) {
+                permanent.setMutatedUnder(null);
+            }
             return true;
         }
 
