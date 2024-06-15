@@ -60,6 +60,8 @@ public class MutateTest extends CardTestPlayerBase {
     private static final String BACKSLIDE = "Backslide"; // {1}{U} Turn target creature with morph face down. Cycling {U}
     private static final String BRAINGEYSER = "Braingeyser"; // {X}{U}{U} Target player draws X cards
     private static final String SEEDS_OF_STRENGTH = "Seeds of Strength"; // {G}{W} Target creature gets +1/+1 until EOT (x3)
+    private static final String FLICKER = "Flicker"; // Exile target nontoken permanent, then return it to the battlefield under its owner’s control.
+    private static final String EERIE_INTERLUDE = "Eerie Interlude"; // Exile any number of target creatures you control. Return those cards to the battlefield under their owner’s control at the beginning of the next end step.
 
     // Enchantment
     private static final String OBLIVION_RING = "Oblivion Ring"; // {2}{W} - When ~ enters the battlefield, exile target permanent. When ~ leaves the battlefield, return exiled card to battlefield.
@@ -1020,6 +1022,73 @@ public class MutateTest extends CardTestPlayerBase {
     @Test
     public void testMutateCardOverCardBoostedSource() {
         setupTestMutateBoostedSource(false);
+    }
+
+    /**
+     * test immediate flicker
+     */
+    public void setupTestMutateFlicker(boolean mutateUnder) {
+        setupLands(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, ALMIGHTY_BRUSHWAGG);
+        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
+        addCard(Zone.HAND, playerA, FLICKER);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, ALMIGHTY_BRUSHWAGG);
+        setChoice(playerA, mutateUnder);
+        String creature = mutateUnder ? ALMIGHTY_BRUSHWAGG : DREAMTAIL_HERON;
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, FLICKER, creature);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, ALMIGHTY_BRUSHWAGG, 1, 1);
+        assertPowerToughness(playerA, DREAMTAIL_HERON, 3, 4);
+    }
+    @Test
+    public void testMutateCardUnderCardFlicker() {
+        setupTestMutateFlicker(true);
+    }
+    @Test
+    public void testMutateCardOverCardFlicker() {
+        setupTestMutateFlicker(false);
+    }
+
+    /**
+     * test slow flicker
+     */
+    public void setupTestMutateSlowFlicker(boolean mutateUnder) {
+        setupLands(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, ALMIGHTY_BRUSHWAGG);
+        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
+        addCard(Zone.HAND, playerA, EERIE_INTERLUDE);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, ALMIGHTY_BRUSHWAGG);
+        setChoice(playerA, mutateUnder);
+        String creature = mutateUnder ? ALMIGHTY_BRUSHWAGG : DREAMTAIL_HERON;
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, EERIE_INTERLUDE, creature);
+
+        checkExileCount("exiled", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, ALMIGHTY_BRUSHWAGG, 1);
+        checkExileCount("exiled", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, DREAMTAIL_HERON, 1);
+
+        setStopAt(2, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, ALMIGHTY_BRUSHWAGG, 1, 1);
+        assertPowerToughness(playerA, DREAMTAIL_HERON, 3, 4);
+    }
+    @Test
+    public void testMutateCardUnderCardSlowFlicker() {
+        setupTestMutateSlowFlicker(true);
+    }
+    @Test
+    public void testMutateCardOverCardSlowFlicker() {
+        setupTestMutateSlowFlicker(false);
     }
 
 //    /**
