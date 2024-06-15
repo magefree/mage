@@ -1482,14 +1482,14 @@ public class ContinuousEffects implements Serializable {
     public void replaceMutatedObjects(UUID originalId, UUID newId, Game game) {
         for (ContinuousEffectsList<?> effectsList : allEffectsLists) {
             for (ContinuousEffect effect : effectsList) {
-                effect.getTargetPointer().replaceMutatedTarget(originalId, newId, game);
+                //effect.getTargetPointer().replaceMutatedTarget(originalId, newId, game);
                 Set<Ability> abilities = effectsList.getAbility(effect.getId());
                 for (Ability ability : abilities) {
                     if (ability.getSourceId() != null && ability.getSourceId().equals(originalId)) {
                         ability.setSourceId(newId);
                     }
                     for (Target target : ability.getTargets()) {
-                        target.replaceMutatedTarget(originalId, newId);
+                        target.replaceMutatedTarget(originalId, newId, null);
                     }
                 }
             }
