@@ -6,7 +6,12 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * @author NinthWorld
@@ -88,4 +93,14 @@ public class MutateAbility extends SpellAbility {
         }
         return MUTATE_KEYWORD + " " + getManaCostsToPay().getText() + MUTATE_REMINDER;
     }
+
+    public static Set<Card> getAllCardsFromPermanentLeftBattlefield(Collection<Permanent> targets) {
+        Set<Card> toReturn = new LinkedHashSet<>();
+        targets.forEach(card -> {
+            toReturn.add(card.getMainCard());
+            card.getMutatedOverList().stream().map(Card::getMainCard).forEach(toReturn::add);
+        });
+        return toReturn;
+    }
+
 }
