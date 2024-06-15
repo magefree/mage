@@ -101,6 +101,8 @@ public enum SpellAbilityCastMode {
             case TRANSFORMED:
                 // TODO: research - why TRANSFORMED here - is it used in this.isTransformed code?!
                 break;
+            case MUTATE:
+                break; // no idea if something special needs to be done here
             default:
                 throw new IllegalArgumentException("Un-supported ability cast mode: " + this);
         }
