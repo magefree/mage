@@ -6,13 +6,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
 
 import java.util.UUID;
 
 /**
- * @author tiera3 - based on ChardalynDragon
+ * @author tiera3 - based on ChardalynDragon and CanalDredger
  * note - draftmatters ability not implemented
  */
 public final class IllusionaryInformant extends CardImpl {
