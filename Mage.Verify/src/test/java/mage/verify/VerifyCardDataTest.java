@@ -1980,10 +1980,6 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "legendary nonpermanent cards need to have LegendarySpellAbility");
         }
 
-        if (card.getAbilities().containsClass(MutateAbility.class)) {
-            fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
-        }
-
         // special check: duplicated words in ability text (wrong target/filter usage)
         // example: You may exile __two two__ blue cards
         // possible fixes:
