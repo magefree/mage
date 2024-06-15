@@ -95,7 +95,8 @@ public final class Main {
 
     public static void main(String[] args) {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        logger.info("Starting MAGE server version " + version);
+        logger.info("Starting MAGE SERVER version: " + version);
+        logger.info("Java version: " + System.getProperty("java.version"));
         logger.info("Logging level: " + logger.getEffectiveLevel());
         logger.info("Default charset: " + Charset.defaultCharset());
         String adminPassword = "";

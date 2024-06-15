@@ -90,7 +90,7 @@ class DeclarationInStoneEffect extends OneShotEffect {
             }
         }
         controller.moveCards(cardsToExile, Zone.EXILED, source, game);
-        game.getState().processAction(game);
+        game.processAction();
         if (nonTokenCount > 0) {
             new InvestigateTargetEffect(nonTokenCount)
                     .setTargetPointer(new FixedTarget(targetPermanent.getControllerId()))

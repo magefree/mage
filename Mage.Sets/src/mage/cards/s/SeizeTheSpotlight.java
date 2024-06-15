@@ -107,7 +107,7 @@ class SeizeTheSpotlightEffect extends OneShotEffect {
             FilterPermanent affectedFilter = new FilterPermanent();
             affectedFilter.add(new PermanentReferenceInCollectionPredicate(permanents, game));
             new GainControlAllEffect(Duration.EndOfTurn, affectedFilter).apply(game, source);
-            game.getState().processAction(game);
+            game.processAction();
             new UntapAllEffect(affectedFilter).apply(game, source);
             game.addEffect(new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, affectedFilter), source);
         }

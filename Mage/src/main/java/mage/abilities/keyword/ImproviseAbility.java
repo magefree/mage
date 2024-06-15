@@ -89,7 +89,7 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
                 specialAction.setSourceId(source.getSourceId());
                 // create filter for possible artifacts to tap
                 Target target = new TargetControlledPermanent(1, unpaid.getMana().getGeneric(), filterUntapped, true);
-                target.setTargetName("artifact to tap as Improvise's pay");
+                target.withTargetName("artifact to tap as Improvise's pay");
                 specialAction.addTarget(target);
                 if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);

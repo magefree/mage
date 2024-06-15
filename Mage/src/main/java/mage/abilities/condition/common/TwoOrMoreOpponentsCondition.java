@@ -9,21 +9,20 @@ import java.util.Objects;
 /**
  * @author TheElk801
  */
-public enum OneOpponentCondition implements Condition {
-
+public enum TwoOrMoreOpponentsCondition implements Condition {
     instance;
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
         return game.getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .count() <= 1;
+                .count() >= 2;
     }
 
     @Override
     public String toString() {
-        return "you have one opponent";
+        return "you have two or more opponents";
     }
 }

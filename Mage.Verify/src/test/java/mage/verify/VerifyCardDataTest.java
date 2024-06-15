@@ -142,11 +142,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "MH3", "Echoes of Eternity"); // temporary, waiting for tribal -> kindred change
-        skipListAddName(SKIP_LIST_TYPE, "MH3", "Idol of False Gods"); // temporary, waiting for tribal -> kindred change
-        skipListAddName(SKIP_LIST_TYPE, "M3C", "Tarmogoyf Nest"); // temporary, waiting for tribal -> kindred change
-        skipListAddName(SKIP_LIST_TYPE, "MH3", "Kozilek's Command"); // temporary, waiting for tribal -> kindred change
-        skipListAddName(SKIP_LIST_TYPE, "M3C", "Eldritch Immunity"); // temporary, waiting for tribal -> kindred change
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
@@ -160,7 +155,7 @@ public class VerifyCardDataTest {
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
-        
+
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
 

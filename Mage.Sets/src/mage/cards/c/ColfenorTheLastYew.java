@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.MageObjectReference;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -57,7 +57,7 @@ public final class ColfenorTheLastYew extends CardImpl {
     }
 }
 
-class ColfenorTheLastYewTriggeredAbility extends DiesThisOrAnotherCreatureTriggeredAbility {
+class ColfenorTheLastYewTriggeredAbility extends DiesThisOrAnotherTriggeredAbility {
 
     ColfenorTheLastYewTriggeredAbility() {
         super(new ReturnFromGraveyardToHandTargetEffect(), false, StaticFilters.FILTER_CONTROLLED_CREATURE);
@@ -68,7 +68,7 @@ class ColfenorTheLastYewTriggeredAbility extends DiesThisOrAnotherCreatureTrigge
     }
 
     @Override
-    public DiesThisOrAnotherCreatureTriggeredAbility copy() {
+    public DiesThisOrAnotherTriggeredAbility copy() {
         return new ColfenorTheLastYewTriggeredAbility(this);
     }
 

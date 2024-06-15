@@ -1,15 +1,12 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.Card;
@@ -34,8 +31,7 @@ import java.util.UUID;
 public final class ShiftingWoodland extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.FOREST);
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
+    private static final YouControlPermanentCondition condition = new YouControlPermanentCondition(filter);
 
     private static final FilterCard filterCard = new FilterPermanentCard("permanent card in your graveyard");
 
@@ -43,9 +39,7 @@ public final class ShiftingWoodland extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Shifting Woodland enters the battlefield tapped unless you control a Forest.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
-                new TapSourceEffect(), condition
-        ), "tapped unless you control a Forest"));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());

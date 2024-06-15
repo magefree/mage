@@ -91,7 +91,7 @@ class ThievingSkydiverEffect extends OneShotEffect {
                 || !artifact.hasSubtype(SubType.EQUIPMENT, game)) {
             return false;
         }
-        game.getState().processAction(game);
+        game.processAction();
         permanent.addAttachment(artifact.getId(), source, game);
         return true;
     }

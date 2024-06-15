@@ -856,12 +856,7 @@ public abstract class GameImpl implements Game {
 
         // game thread can call concede directly
         if (ThreadUtils.isRunGameThread()) {
-            // TODO: is it normal use case? If yes then remove logs
-            Player player = this.getPlayer(playerId);
-            logger.info(String.format("Game thread used concede request for (%s): %s",
-                    player == null ? "null" : player.getName(),
-                    this
-            ));
+            // example: forced lost due state base actions check
             checkConcede();
         }
     }
@@ -1281,7 +1276,7 @@ public abstract class GameImpl implements Game {
         Player choosingPlayer = null;
         if (startingPlayerId == null) {
             TargetPlayer targetPlayer = new TargetPlayer();
-            targetPlayer.setTargetName("starting player");
+            targetPlayer.withTargetName("starting player");
             if (choosingPlayerId != null) {
                 choosingPlayer = this.getPlayer(choosingPlayerId);
                 if (choosingPlayer != null && !choosingPlayer.canRespond()) {
@@ -1929,8 +1924,15 @@ public abstract class GameImpl implements Game {
 
     @Override
     public synchronized void applyEffects() {
-        resetShortLivingLKI();
         state.applyEffects(this);
+    }
+
+    @Override
+    public void processAction() {
+        state.handleSimultaneousEvent(this);
+        resetShortLivingLKI();
+        applyEffects();
+        state.getTriggers().checkStateTriggers(this);
     }
 
     @Override
@@ -2247,20 +2249,17 @@ public abstract class GameImpl implements Game {
     }
 
     /**
-     * 116.5. Each time a player would get priority, the game first performs all
+     * 117.5. Each time a player would get priority, the game first performs all
      * applicable state-based actions as a single event (see rule 704,
      * “State-Based Actions”), then repeats this process until no state-based
      * actions are performed. Then triggered abilities are put on the stack (see
      * rule 603, “Handling Triggered Abilities”). These steps repeat in order
      * until no further state-based actions are performed and no abilities
      * trigger. Then the player who would have received priority does so.
-     *
-     * @return
      */
     @Override
     public boolean checkStateAndTriggered() {
         boolean somethingHappened = false;
-        //20091005 - 115.5
         while (!isPaused() && !checkIfGameIsOver()) {
             if (!checkStateBasedActions()) {
                 // nothing happened so check triggers
@@ -2269,7 +2268,7 @@ public abstract class GameImpl implements Game {
                     break;
                 }
             }
-            this.getState().processAction(this); // needed e.g if boost effects end and cause creatures to die
+            processAction(); // needed e.g if boost effects end and cause creatures to die
             somethingHappened = true;
         }
         checkConcede();
@@ -2279,10 +2278,8 @@ public abstract class GameImpl implements Game {
     /**
      * Sets the waiting triggered abilities (if there are any) to the stack in
      * the chosen order by player
-     *
-     * @return
      */
-    public boolean checkTriggered() {
+    boolean checkTriggered() {
         boolean played = false;
         state.getTriggers().checkStateTriggers(this);
         for (UUID playerId : state.getPlayerList(state.getActivePlayerId())) {
@@ -2320,15 +2317,13 @@ public abstract class GameImpl implements Game {
     }
 
     /**
-     * 116.5. Each time a player would get priority, the game first performs all
+     * 117.5. Each time a player would get priority, the game first performs all
      * applicable state-based actions as a single event (see rule 704,
      * “State-Based Actions”), then repeats this process until no state-based
      * actions are performed. Then triggered abilities are put on the stack (see
      * rule 603, “Handling Triggered Abilities”). These steps repeat in order
      * until no further state-based actions are performed and no abilities
      * trigger. Then the player who would have received priority does so.
-     *
-     * @return
      */
     protected boolean checkStateBasedActions() {
         boolean somethingHappened = false;
@@ -2874,7 +2869,7 @@ public abstract class GameImpl implements Game {
                 }
                 Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
                 targetLegendaryToKeep.withNotTarget(true);
-                targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
+                targetLegendaryToKeep.withTargetName(legend.getName() + " to keep (Legendary Rule)?");
                 controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
                 for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                     if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
@@ -3588,7 +3583,7 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public boolean getShortLivingLKI(UUID objectId, Zone zone) {
+    public boolean checkShortLivingLKI(UUID objectId, Zone zone) {
         Set<UUID> idSet = lkiShortLiving.get(zone);
         if (idSet != null) {
             return idSet.contains(objectId);

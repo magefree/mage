@@ -176,7 +176,7 @@ class TheCreationOfAvacynThreeEffect extends OneShotEffect {
         if (creatureCard) {
             if (controller.chooseUse(Outcome.PutCreatureInPlay, "Put the permanent in play?", source, game)) {
                 controller.moveCards(exileZone, Zone.BATTLEFIELD, source, game);
-                game.getState().processAction(game);
+                game.processAction();
             }
         }
         controller.moveCards(exileZone, Zone.HAND, source, game);

@@ -27,7 +27,7 @@ public final class SidisiBroodTyrant extends CardImpl {
     public SidisiBroodTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);

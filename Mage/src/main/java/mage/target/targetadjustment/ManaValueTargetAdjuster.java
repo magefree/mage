@@ -38,7 +38,7 @@ public class ManaValueTargetAdjuster implements TargetAdjuster {
         int amount = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
         Filter<MageObject> filter = newTarget.getFilter();
         filter.add(new ManaValuePredicate(comparison, amount));
-        newTarget.setTargetName(filter.getMessage() + " (Mana Value " + comparison + " " + amount + ")");
+        newTarget.withTargetName(filter.getMessage() + " (Mana Value " + comparison + " " + amount + ")");
         ability.getTargets().clear();
         ability.addTarget(newTarget);
     }

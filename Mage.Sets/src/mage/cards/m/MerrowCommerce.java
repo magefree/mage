@@ -23,7 +23,7 @@ public final class MerrowCommerce extends CardImpl {
     }
 
     public MerrowCommerce(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ENCHANTMENT},"{1}{U}");
         this.subtype.add(SubType.MERFOLK);
 
 

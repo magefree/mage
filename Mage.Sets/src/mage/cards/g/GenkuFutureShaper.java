@@ -69,7 +69,7 @@ public final class GenkuFutureShaper extends CardImpl {
         ability.addMode(
                 new Mode(
                         new CreateTokenEffect(new Rat11LifelinkToken())
-                                .setText("1/1 black Rat with flying")
+                                .setText("1/1 black Rat with lifelink")
                 ).setModeTag("1/1 black Rat with lifelink")
         );
         ability.getModes().setChooseText("choose one that hasn't been chosen this turn. Create a creature token with those characteristics.");

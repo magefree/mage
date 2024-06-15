@@ -639,6 +639,10 @@ public class TablesPanel extends javax.swing.JPanel {
         buttonNextMessage.setFont(GUISizeHelper.menuFont);
         labelMessageHeader.setFont(new Font(GUISizeHelper.menuFont.getName(), Font.BOLD, GUISizeHelper.menuFont.getSize()));
         labelMessageText.setFont(GUISizeHelper.menuFont);
+
+        btnQuickStart2Player.setFont(GUISizeHelper.menuFont);
+        btnQuickStart4Player.setFont(GUISizeHelper.menuFont);
+        btnQuickStartMCTS.setFont(GUISizeHelper.menuFont);
     }
 
     private void saveDividerLocations() {
@@ -1683,7 +1687,7 @@ public class TablesPanel extends javax.swing.JPanel {
             DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile, false);
 
             PlayerType aiType = useMonteCarloAI ? PlayerType.COMPUTER_MONTE_CARLO : PlayerType.COMPUTER_MAD;
-            int numSeats = gameName.contains("2") ? 2 : 4;
+            int numSeats = gameName.contains("2") || gameName.contains("Monte Carlo") ? 2 : 4;
             boolean multiPlayer = numSeats > 2;
 
             MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer, numSeats);

@@ -28,7 +28,7 @@ public final class TinStreetGossip extends CardImpl {
     public TinStreetGossip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

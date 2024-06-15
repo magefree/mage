@@ -674,7 +674,7 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public float getAverageSize() {
+    public float getAverageSizeKb() {
         return 60.0f;
     }
 

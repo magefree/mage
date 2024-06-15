@@ -21,7 +21,7 @@ public final class SinuousStriker extends CardImpl {
 
     public SinuousStriker(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        subtype.add(SubType.NAGA);
+        subtype.add(SubType.SNAKE);
         subtype.add(SubType.WARRIOR);
 
         power = new MageInt(2);

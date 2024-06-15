@@ -23,7 +23,7 @@ public final class QuezaAugurOfAgonies extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
 
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class SelhoffOccultist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Selhoff Occultist or another creature dies, target player puts the top card of their library into their graveyard.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new MillCardsTargetEffect(1), false);
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(new MillCardsTargetEffect(1), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

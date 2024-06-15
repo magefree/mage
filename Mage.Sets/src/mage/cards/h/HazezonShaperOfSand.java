@@ -14,7 +14,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandCard;
-import mage.game.permanent.token.HazezonTamarSandWarriorToken;
+import mage.game.permanent.token.SandWarriorToken;
 
 import java.util.UUID;
 
@@ -50,7 +50,7 @@ public final class HazezonShaperOfSand extends CardImpl {
 
         // Whenever a Desert enters the battlefield under your control create two 1/1 red, green, and white Sand Warrior creature tokens.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new CreateTokenEffect(
-                new HazezonTamarSandWarriorToken(), 2), filter3
+                new SandWarriorToken(), 2), filter3
         ));
     }
 

@@ -68,7 +68,7 @@ public class DiscoverEffect extends OneShotEffect {
         for (Card card : player.getLibrary().getCards(game)) {
             cards.add(card);
             player.moveCards(card, Zone.EXILED, source, game);
-            game.getState().processAction(game);
+            game.processAction();
             if (filter.match(card, game)) {
                 return card;
             }

@@ -248,7 +248,7 @@ public abstract class AbilityImpl implements Ability {
              * abilities with replacement effects deactivated too late Example:
              * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
              */
-            game.getState().processAction(game);
+            game.processAction();
         }
         return result;
     }
@@ -1078,7 +1078,7 @@ public abstract class AbilityImpl implements Ability {
             parameterSourceId = getSourceId();
         }
         // check against shortLKI for effects that move multiple object at the same time (e.g. destroy all)
-        if (game.getShortLivingLKI(getSourceId(), getZone())) {
+        if (game.checkShortLivingLKI(getSourceId(), getZone())) {
             return true;
         }
         // check against current state

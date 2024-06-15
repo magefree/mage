@@ -92,11 +92,11 @@ public class TournamentPlayer {
         this.setState(TournamentPlayerState.WAITING);
     }
 
-    public boolean updateDeck(Deck deck) {
+    public boolean updateDeck(Deck deck, boolean ignoreMainBasicLands) {
         // used for auto-save deck
 
         // make sure it's the same deck (player do not add or remove something)
-        boolean isGood = (this.getDeck().getDeckHash() == deck.getDeckHash());
+        boolean isGood = (this.getDeck().getDeckHash(ignoreMainBasicLands) == deck.getDeckHash(ignoreMainBasicLands));
         if (!isGood) {
             logger.error("Found cheating tourney player " + player.getName()
                     + " with changed deck, main " + deck.getCards().size() + ", side " + deck.getSideboard().size());

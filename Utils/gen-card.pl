@@ -78,8 +78,7 @@ $cardTypes{'Instant'} = 'CardType.INSTANT';
 $cardTypes{'Land'} = 'CardType.LAND';
 $cardTypes{'Sorcery'} = 'CardType.SORCERY';
 $cardTypes{'Planeswalker'} = 'CardType.PLANESWALKER';
-$cardTypes{'Tribal'} = 'CardType.TRIBAL';
-$cardTypes{'Kindred'} = 'CardType.TRIBAL';
+$cardTypes{'Kindred'} = 'CardType.KINDRED';
 $cardTypes{'Battle'} = 'CardType.BATTLE';
 
 my %raritiesConversion;

@@ -78,7 +78,7 @@ class ReignOfTerrorEffect extends OneShotEffect {
                 .mapToInt(permanent -> permanent.destroy(source, game, true) ? 1 : 0)
                 .sum();
         if (died > 0) {
-            game.getState().processAction(game);
+            game.processAction();
             player.loseLife(2 * died, game, source, false);
             return true;
         }

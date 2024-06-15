@@ -32,7 +32,7 @@ public final class CephalidRetainer extends CardImpl {
 
     public CephalidRetainer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

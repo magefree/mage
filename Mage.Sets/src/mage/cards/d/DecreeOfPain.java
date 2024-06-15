@@ -72,7 +72,7 @@ class DecreeOfPainEffect extends OneShotEffect {
                 }
             }
             if (destroyedCreature > 0) {
-                game.getState().processAction(game);
+                game.processAction();
                 controller.drawCards(destroyedCreature, source, game);
             }
             return true;

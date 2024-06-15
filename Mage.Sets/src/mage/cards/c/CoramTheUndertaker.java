@@ -122,7 +122,7 @@ class CoramTheUndertakerStaticAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "During each of your turns, you may play a land and cast a spell from among cards in graveyards that were put there from libraries this turn";
+        return "During each of your turns, you may play a land and cast a spell from among cards in graveyards that were put there from libraries this turn.";
     }
 }
 
@@ -223,7 +223,7 @@ class CoramTheUndertakerWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zce = (ZoneChangeEvent) event;
-            if (zce == null || !Zone.LIBRARY.equals(zce.getFromZone()) || !Zone.GRAVEYARD.equals(zce.getToZone())) {
+            if (!Zone.LIBRARY.equals(zce.getFromZone()) || !Zone.GRAVEYARD.equals(zce.getToZone())) {
                 return;
             }
             Card card = game.getCard(zce.getTargetId());

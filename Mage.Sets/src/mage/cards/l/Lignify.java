@@ -25,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class Lignify extends CardImpl {
 
     public Lignify(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ENCHANTMENT},"{1}{G}");
         this.subtype.add(SubType.TREEFOLK);
         this.subtype.add(SubType.AURA);
 

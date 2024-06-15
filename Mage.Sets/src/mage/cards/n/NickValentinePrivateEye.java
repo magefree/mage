@@ -3,7 +3,7 @@ package mage.cards.n;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
@@ -46,7 +46,7 @@ public final class NickValentinePrivateEye extends CardImpl {
                 new CantBeBlockedByCreaturesSourceEffect(filterNonArtifact, Duration.WhileOnBattlefield)));
 
         // Whenever Nick Valentine or another artifact creature you control dies, you may investigate.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new InvestigateEffect()
                         .setText("investigate. <i>(To investigate, create a Clue token. " +
                                 "It's an artifact with \"{2}, Sacrifice this artifact: Draw a card.\")</i>"),

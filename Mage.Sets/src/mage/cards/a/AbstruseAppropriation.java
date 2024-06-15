@@ -73,7 +73,7 @@ class AbstruseAppropriationEffect extends OneShotEffect {
                 .setToSourceExileZone(true)
                 .setTargetPointer(getTargetPointer().copy())
                 .apply(game, source);
-        game.getState().processAction(game);
+        game.processAction();
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card == null || !game.getState().getZone(card.getId()).equals(Zone.EXILED)) {
             return true;

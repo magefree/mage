@@ -98,7 +98,7 @@ class PartyThrasherEffect extends OneShotEffect {
             return false;
         }
         controller.moveCardsToExile(cards.getCards(game), source, game, true, null, "");
-        game.getState().processAction(game);
+        game.processAction();
         cards.retainZone(Zone.EXILED, game);
         if (cards.isEmpty()) {
             return true;

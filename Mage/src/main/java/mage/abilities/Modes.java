@@ -536,13 +536,13 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             return this.getMode().getEffects().getText(this.getMode());
         }
         StringBuilder sb = new StringBuilder();
-        if (mayChooseNone) {
-            sb.append("you may ");
-        }
         if (this.chooseText == null) {
             if (chooseController == TargetController.OPPONENT) {
                 sb.append("an opponent chooses ");
             } else {
+                if (mayChooseNone) {
+                    sb.append("you may ");
+                }
                 sb.append("choose ");
             }
             if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
@@ -562,15 +562,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             if (isRandom) {
                 sb.append(" at random");
             }
+            if (isLimitUsageByOnce() && this.getMaxModesFilter() == null) {
+                sb.append(" that hasn't been chosen");
+            }
+            if (isLimitUsageResetOnNewTurn()) {
+                sb.append(" this turn");
+            }
         } else {
             sb.append(chooseText);
-        }
-
-        if (isLimitUsageByOnce() && this.getMaxModesFilter() == null) {
-            sb.append(" that hasn't been chosen");
-        }
-        if (isLimitUsageResetOnNewTurn()) {
-            sb.append(" this turn");
         }
 
         if (this.getMaxModesFilter() != null) {

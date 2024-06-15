@@ -1989,7 +1989,7 @@ public class HumanPlayer extends PlayerImpl {
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null) {
                     sb.append(" (").append(attacker.getName()).append(')');
-                    target.setTargetName(sb.toString());
+                    target.withTargetName(sb.toString());
                 }
             }
             if (chooseTarget(Outcome.Damage, target, null, game)) {
@@ -2181,7 +2181,7 @@ public class HumanPlayer extends PlayerImpl {
             Target target = new TargetAnyTarget();
             target.withNotTarget(true);
             if (singleTargetName != null) {
-                target.setTargetName(singleTargetName);
+                target.withTargetName(singleTargetName);
             }
             this.choose(Outcome.Damage, target, source, game);
             if (targets.isEmpty() || targets.contains(target.getFirstTarget())) {

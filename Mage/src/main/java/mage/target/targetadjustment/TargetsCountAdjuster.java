@@ -36,9 +36,9 @@ public class TargetsCountAdjuster implements TargetAdjuster {
         Filter filter = newTarget.getFilter();
         if (blueprintTarget.getMinNumberOfTargets() != 0) {
             newTarget.setMinNumberOfTargets(count);
-            newTarget.setTargetName(filter.getMessage() + " (" + count + " targets)");
+            newTarget.withTargetName(filter.getMessage() + " (" + count + " targets)");
         } else {
-            newTarget.setTargetName(filter.getMessage() + " (up to " + count + " targets)");
+            newTarget.withTargetName(filter.getMessage() + " (up to " + count + " targets)");
         }
         ability.getTargets().clear();
         if (count > 0) {

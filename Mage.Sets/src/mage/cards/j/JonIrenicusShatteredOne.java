@@ -93,7 +93,7 @@ class JonIrenicusShatteredOneEffect extends OneShotEffect {
         ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, opponent.getId());
         effect.setTargetPointer(new FixedTarget(creature, game));
         game.addEffect(effect, source);
-        game.getState().processAction(game);
+        game.processAction();
         creature.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
         creature.tap(source, game);
         game.addEffect(new GoadTargetEffect()

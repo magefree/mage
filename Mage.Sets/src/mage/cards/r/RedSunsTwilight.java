@@ -78,7 +78,7 @@ class RedSunsTwilightEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
                 if (permanent.destroy(source, game, false)) {
-                    game.getState().processAction(game);
+                    game.processAction();
                     // Note which were destroyed
                     destroyedArtifacts.add(permanent);
                 }

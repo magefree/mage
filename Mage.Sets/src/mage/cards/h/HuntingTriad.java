@@ -17,7 +17,7 @@ import java.util.UUID;
 public final class HuntingTriad extends CardImpl {
 
     public HuntingTriad(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{3}{G}");
         this.subtype.add(SubType.ELF);
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfWarriorToken(), 3));

@@ -7,9 +7,9 @@ import mage.constants.SubType;
 /**
  * @author spjspj
  */
-public final class HazezonTamarSandWarriorToken extends TokenImpl {
+public final class SandWarriorToken extends TokenImpl {
 
-    public HazezonTamarSandWarriorToken() {
+    public SandWarriorToken() {
         super("Sand Warrior Token", "1/1 red, green, and white Sand Warrior creature tokens");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -21,11 +21,11 @@ public final class HazezonTamarSandWarriorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    private HazezonTamarSandWarriorToken(final HazezonTamarSandWarriorToken token) {
+    private SandWarriorToken(final SandWarriorToken token) {
         super(token);
     }
 
-    public HazezonTamarSandWarriorToken copy() {
-        return new HazezonTamarSandWarriorToken(this);
+    public SandWarriorToken copy() {
+        return new SandWarriorToken(this);
     }
 }

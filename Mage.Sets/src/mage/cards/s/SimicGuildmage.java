@@ -190,7 +190,7 @@ class MoveAuraEffect extends OneShotEffect {
             Filter filterChoice = chosenPermanentToAttachAuras.getFilter();
             filterChoice.add(new ControllerIdPredicate(fromPermanent.getControllerId()));
             filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));
-            chosenPermanentToAttachAuras.setTargetName("a different " + filterChoice.getMessage() + " with the same controller as the " + filterChoice.getMessage() + " the target aura is attached to");
+            chosenPermanentToAttachAuras.withTargetName("a different " + filterChoice.getMessage() + " with the same controller as the " + filterChoice.getMessage() + " the target aura is attached to");
             if (chosenPermanentToAttachAuras.canChoose(source.getControllerId(), source, game)
                     && controller.choose(Outcome.Neutral, chosenPermanentToAttachAuras, source, game)) {
                 Permanent permanentToAttachAura = game.getPermanent(chosenPermanentToAttachAuras.getFirstTarget());

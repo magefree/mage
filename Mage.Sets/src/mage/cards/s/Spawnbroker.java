@@ -56,7 +56,7 @@ class TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent extend
         super();
         this.filter = this.filter.copy();
         filter.add(CardType.CREATURE.getPredicate());
-        setTargetName("creature you control");
+        withTargetName("creature you control");
     }
 
     private TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent(final TargetControlledCreatureWithPowerGreaterOrLessThanOpponentPermanent target) {
@@ -92,7 +92,7 @@ class SpawnbrokerSecondTarget extends TargetPermanent {
         this.filter = this.filter.copy();
         filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(CardType.CREATURE.getPredicate());
-        setTargetName("creature with power less than or equal to that creature's power an opponent controls");
+        withTargetName("creature with power less than or equal to that creature's power an opponent controls");
     }
 
     private SpawnbrokerSecondTarget(final SpawnbrokerSecondTarget target) {

@@ -47,9 +47,6 @@ import mage.util.DebugUtil;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
-import net.java.balloontip.BalloonTip;
-import net.java.balloontip.positioners.LeftAbovePositioner;
-import net.java.balloontip.styles.EdgedBalloonStyle;
 import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
@@ -136,8 +133,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static UpdateMemUsageTask updateMemUsageTask;
 
     private static long startTime;
-
-    private final BalloonTip balloonTip;
 
     /**
      * @return the session
@@ -363,11 +358,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
             }
         });
-
-        // balloonTip = new BalloonTip(desktopPane, "", new ModernBalloonStyle(0, 0, Color.WHITE, Color.YELLOW, Color.BLUE), false);
-        balloonTip = new BalloonTip(desktopPane, "", new EdgedBalloonStyle(Color.WHITE, Color.BLUE), false);
-        balloonTip.setPositioner(new LeftAbovePositioner(0, 0));
-        balloonTip.setVisible(false);
 
         // tooltips delay in ms
         ToolTipManager.sharedInstance().setDismissDelay(Constants.TOOLTIPS_DELAY_MS);
@@ -955,6 +945,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         jMemUsageLabel = new javax.swing.JLabel();
 
         menuDebugTestModalDialog.setText("Test Modal Dialogs");
+        menuDebugTestModalDialog.setFont(GUISizeHelper.menuFont);
         menuDebugTestModalDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestModalDialogActionPerformed(evt);
@@ -963,6 +954,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupDebug.add(menuDebugTestModalDialog);
 
         menuDebugTestCardRenderModesDialog.setText("Test Card Render Modes");
+        menuDebugTestCardRenderModesDialog.setFont(GUISizeHelper.menuFont);
         menuDebugTestCardRenderModesDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestCardRenderModesDialogActionPerformed(evt);
@@ -1409,7 +1401,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public static void main(final String[] args) {
         // Workaround for #451
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        LOGGER.info("Starting MAGE client version " + VERSION);
+        LOGGER.info("Starting MAGE CLIENT version: " + VERSION);
+        LOGGER.info("Java version: " + System.getProperty("java.version"));
         LOGGER.info("Logging level: " + LOGGER.getEffectiveLevel());
         LOGGER.info("Default charset: " + Charset.defaultCharset());
         if (!Charset.defaultCharset().toString().equals("UTF-8")) {
@@ -1821,7 +1814,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 component.setMaximumSize(d);
             }
         }
-        balloonTip.setFont(GUISizeHelper.balloonTooltipFont);
 
         updateTooltipContainerSizes();
     }
