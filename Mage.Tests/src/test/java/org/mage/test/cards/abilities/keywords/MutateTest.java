@@ -63,12 +63,14 @@ public class MutateTest extends CardTestPlayerBase {
     private static final String SEEDS_OF_STRENGTH = "Seeds of Strength"; // {G}{W} Target creature gets +1/+1 until EOT (x3)
     private static final String FLICKER = "Flicker"; // Exile target nontoken permanent, then return it to the battlefield under its owner’s control.
     private static final String EERIE_INTERLUDE = "Eerie Interlude"; // Exile any number of target creatures you control. Return those cards to the battlefield under their owner’s control at the beginning of the next end step.
+    private static final String NATURALIZE = "Naturalize"; // {1}{G} - Instant - Destroy target artifact or enchantment.
 
     // Enchantment
     private static final String OBLIVION_RING = "Oblivion Ring"; // {2}{W} - When ~ enters the battlefield, exile target permanent. When ~ leaves the battlefield, return exiled card to battlefield.
     private static final String ALPHA_AUTHORITY = "Alpha Authority"; // {1}{G} - Aura - Enchanted creature has hexproof and ...
     private static final String SHORT_SWORD = "Short Sword"; // {1} - Equip - Equip {1} - Equipped gets +1/+1, When creature transforms, transform this into Ashmouth Blade
     private static final String ASHMOUTH_BLADE = "Ashmouth Blade"; // Equip {3} - Equipped gets +3/+3 and first strike
+    private static final String MYSTIC_SUBDUAL = "Mystic Subdual"; // {1}{U} - Aura - Enchanted creature gets -2/-0 and loses all abilities
 
     // Artifact
     private static final String SOL_RING = "Sol Ring"; // You know what it does....
@@ -1125,6 +1127,88 @@ public class MutateTest extends CardTestPlayerBase {
     @Test
     public void testMutateCardOverCardLuminousBroodmoth() {
         setupTestMutateLuminousBroodmoth(false);
+    }
+
+    /**
+     * Test losing abilities (Mystic Subdual)
+     */
+    public void setupTestMutateLoseAbilities(boolean mutateUnder, boolean secondUnder) {
+        setupLands(playerA);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, ALMIGHTY_BRUSHWAGG);
+        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
+        addCard(Zone.HAND, playerA, MAJESTIC_AURICORN);
+        addCard(Zone.HAND, playerA, MYSTIC_SUBDUAL);
+        addCard(Zone.HAND, playerA, NATURALIZE);
+        addCard(Zone.LIBRARY, playerA, SHORT_SWORD); // must not draw it
+
+        String topCreature = ALMIGHTY_BRUSHWAGG;
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MAJESTIC_AURICORN + USING_MUTATE, ALMIGHTY_BRUSHWAGG);
+        setChoice(playerA, mutateUnder);
+        if (!mutateUnder) {
+            topCreature = MAJESTIC_AURICORN;
+        }
+
+        checkLife("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, 24); // mutated
+        checkAbility("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, topCreature, TrampleAbility.class, true);
+        checkAbility("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, topCreature, VigilanceAbility.class, true);
+        checkAbility("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, topCreature, FlyingAbility.class, false);
+        checkPT("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, topCreature, mutateUnder ? 1 : 4, mutateUnder ? 1 : 4);
+
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, MYSTIC_SUBDUAL, topCreature);
+
+        checkPermanentCount("1.EC", 1, PhaseStep.END_COMBAT, playerA, MYSTIC_SUBDUAL, 1);
+        checkAbility("1.EC", 1, PhaseStep.END_COMBAT, playerA, topCreature, TrampleAbility.class, false);
+        checkAbility("1.EC", 1, PhaseStep.END_COMBAT, playerA, topCreature, VigilanceAbility.class, false);
+        checkAbility("1.EC", 1, PhaseStep.END_COMBAT, playerA, topCreature, FlyingAbility.class, false);
+        checkPT("1.EC", 1, PhaseStep.END_COMBAT, playerA, topCreature, (mutateUnder ? 1 : 4) - 2, mutateUnder ? 1 : 4);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, topCreature);
+        setChoice(playerA, secondUnder);
+        if (!secondUnder) {
+            topCreature = DREAMTAIL_HERON;
+        }
+
+        checkLife("1.ET", 1, PhaseStep.END_TURN, playerA, 24); // no additional trigger
+        checkAbility("1.ET", 1, PhaseStep.END_TURN, playerA, topCreature, TrampleAbility.class, false);
+        checkAbility("1.ET", 1, PhaseStep.END_TURN, playerA, topCreature, VigilanceAbility.class, false);
+        checkAbility("1.ET", 1, PhaseStep.END_TURN, playerA, topCreature, FlyingAbility.class, false);
+        checkPT("1.ET", 1, PhaseStep.END_TURN, playerA, topCreature,
+                (secondUnder ? (mutateUnder ? 1 : 4) : 3) - 2,
+                mutateUnder && secondUnder ? 1 : 4
+        );
+
+        castSpell(2, PhaseStep.UPKEEP, playerA, NATURALIZE, MYSTIC_SUBDUAL);
+
+        setStopAt(2, PhaseStep.DRAW);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, MYSTIC_SUBDUAL, 1);
+        assertGraveyardCount(playerA, NATURALIZE, 1);
+        assertLibraryCount(playerA, SHORT_SWORD, 1);
+        assertPowerToughness(playerA, topCreature, (secondUnder ? (mutateUnder ? 1 : 4) : 3), mutateUnder && secondUnder ? 1 : 4);
+        assertAbility(playerA, topCreature, TrampleAbility.getInstance(), true);
+        assertAbility(playerA, topCreature, VigilanceAbility.getInstance(), true);
+        assertAbility(playerA, topCreature, FlyingAbility.getInstance(), true);
+    }
+    @Test
+    public void testLoseAbilitiesMutateCardUnderTwice() {
+        setupTestMutateLoseAbilities(true, true);
+    }
+    @Test
+    public void testLoseAbilitiesMutateCardOverThenUnder() {
+        setupTestMutateLoseAbilities(false, true);
+    }
+    @Test
+    public void testLoseAbilitiesMutateCardUnderThenOver() {
+        setupTestMutateLoseAbilities(true, false);
+    }
+    @Test
+    public void testLoseAbilitiesMutateCardOverTwice() {
+        setupTestMutateLoseAbilities(false, false);
     }
 
 //    /**
