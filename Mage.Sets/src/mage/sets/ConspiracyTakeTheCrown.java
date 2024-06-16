@@ -32,6 +32,7 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Affa Guard Hound", 81, Rarity.UNCOMMON, mage.cards.a.AffaGuardHound.class));
         cards.add(new SetCardInfo("Akroan Hoplite", 197, Rarity.UNCOMMON, mage.cards.a.AkroanHoplite.class));
         cards.add(new SetCardInfo("Altar's Reap", 127, Rarity.COMMON, mage.cards.a.AltarsReap.class));
+        cards.add(new SetCardInfo("Archdemon of Paliano", 39, Rarity.RARE, mage.cards.a.ArchdemonOfPaliano.class)); // draftmatters ability not implemented
         cards.add(new SetCardInfo("Ascended Lawmage", 198, Rarity.UNCOMMON, mage.cards.a.AscendedLawmage.class));
         cards.add(new SetCardInfo("Avatar of Woe", 128, Rarity.MYTHIC, mage.cards.a.AvatarOfWoe.class));
         cards.add(new SetCardInfo("Ballot Broker", 13, Rarity.COMMON, mage.cards.b.BallotBroker.class));
@@ -124,6 +125,7 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Hurly-Burly", 165, Rarity.COMMON, mage.cards.h.HurlyBurly.class));
         cards.add(new SetCardInfo("Ill-Tempered Cyclops", 166, Rarity.COMMON, mage.cards.i.IllTemperedCyclops.class));
         cards.add(new SetCardInfo("Illusion of Choice", 31, Rarity.UNCOMMON, mage.cards.i.IllusionOfChoice.class));
+        cards.add(new SetCardInfo("Illusionary Informant", 32, Rarity.COMMON, mage.cards.i.IllusionaryInformant.class)); // draftmatters ability not implemented
         cards.add(new SetCardInfo("Infest", 139, Rarity.UNCOMMON, mage.cards.i.Infest.class));
         cards.add(new SetCardInfo("Inquisition of Kozilek", 140, Rarity.RARE, mage.cards.i.InquisitionOfKozilek.class));
         cards.add(new SetCardInfo("Into the Void", 112, Rarity.UNCOMMON, mage.cards.i.IntoTheVoid.class));
@@ -141,6 +143,7 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Knights of the Black Rose", 76, Rarity.UNCOMMON, mage.cards.k.KnightsOfTheBlackRose.class));
         cards.add(new SetCardInfo("Lace with Moonglove", 184, Rarity.COMMON, mage.cards.l.LaceWithMoonglove.class));
         cards.add(new SetCardInfo("Lay of the Land", 185, Rarity.COMMON, mage.cards.l.LayOfTheLand.class));
+        cards.add(new SetCardInfo("Leovold's Operative", 66, Rarity.COMMON, mage.cards.l.LeovoldsOperative.class)); // draftmatters ability not implemented
         cards.add(new SetCardInfo("Leovold, Emissary of Trest", 77, Rarity.MYTHIC, mage.cards.l.LeovoldEmissaryOfTrest.class));
         cards.add(new SetCardInfo("Lieutenants of the Guard", 16, Rarity.COMMON, mage.cards.l.LieutenantsOfTheGuard.class));
         cards.add(new SetCardInfo("Manaplasm", 186, Rarity.UNCOMMON, mage.cards.m.Manaplasm.class));
