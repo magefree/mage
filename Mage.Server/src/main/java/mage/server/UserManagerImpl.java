@@ -4,6 +4,7 @@ import mage.server.managers.ManagerFactory;
 import mage.server.managers.UserManager;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
+import mage.server.util.ServerMessagesUtil;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 
@@ -309,7 +310,9 @@ public class UserManagerImpl implements UserManager {
             // max users online stats
             if (currentOnlineCount > maxUsersOnline) {
                 maxUsersOnline = currentOnlineCount;
+                // TODO: if server get too much logs after restart (on massive reconnect) then add logs timeout here
                 logger.info(String.format("New max users online: %d", maxUsersOnline));
+                ServerMessagesUtil.instance.setMaxUsersOnline(maxUsersOnline); // update online stats for news panel
             }
         } catch (Exception ex) {
             handleException(ex);
