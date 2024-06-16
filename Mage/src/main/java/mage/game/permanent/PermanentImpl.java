@@ -2235,9 +2235,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.deathtouched = permanentImpl.deathtouched;
             this.markedLifelink = permanentImpl.markedLifelink;
 
-            for (Map.Entry<String, List<UUID>> entry : permanentImpl.connectedCards.entrySet()) {
-                this.connectedCards.put(entry.getKey(), entry.getValue());
-            }
+            this.connectedCards.putAll(permanentImpl.connectedCards);
             permanentImpl.connectedCards.clear();
 
             if (permanentImpl.dealtDamageByThisTurn != null) {

@@ -4155,14 +4155,15 @@ public abstract class GameImpl implements Game {
 
     @Override
     public boolean mutatePermanent(Card card, UUID permanentId, Spell source) {
-        if (!getBattlefield().containsPermanent(permanentId)) {
+        Player controller = getPlayer(source.getControllerId());
+        if (!getBattlefield().containsPermanent(permanentId) || controller == null) {
             return false;
         }
 
         final Permanent permanent = getBattlefield().getPermanent(permanentId);
         final Permanent newPermanent = new PermanentCard(card, card.getOwnerId(), this);
 
-        final boolean shouldMutateUnder = getPlayer(source.getControllerId()).chooseUse(Outcome.Neutral,
+        final boolean shouldMutateUnder = controller.chooseUse(Outcome.Neutral,
                 "Select whether to mutate " + source.getLogName() + " UNDER or OVER " + permanent.getLogName(),
                 null, "Under", "Over", source.getSpellAbility(), this);
 
@@ -4188,19 +4189,6 @@ public abstract class GameImpl implements Game {
             }
             state.getContinuousEffects().replaceMutatedObjects(newPermanent.getId(), permanent.getId(), this);
 
-            for (TriggeredAbility ability : state.getTriggers().values()) {
-                if (ability instanceof ZoneChangeTriggeredAbility && ability.getSourceId().equals(permanent.getId())) {
-                    ((ZoneChangeTriggeredAbility) ability).addMutatedSourceId(permanent.getId());
-                    ((ZoneChangeTriggeredAbility) ability).addMutatedSourceId(newPermanent.getId());
-                }
-            }
-            for (Ability ability : permanent.getAbilities()) {
-                if (ability instanceof ZoneChangeTriggeredAbility) {
-                    ((ZoneChangeTriggeredAbility) ability).addMutatedSourceId(permanent.getId());
-                    ((ZoneChangeTriggeredAbility) ability).addMutatedSourceId(newPermanent.getId());
-                }
-            }
-
             fireEvent(GameEvent.getEvent(
                     GameEvent.EventType.CREATURE_MUTATED, permanentId,
                     source.getSpellAbility(), source.getControllerId()
@@ -4217,9 +4205,6 @@ public abstract class GameImpl implements Game {
             if (!source.isCopy()) {
                 getState().updateZoneChangeCounter(permanentId);
             }
-
-            // TODO: Zone Change counter is incorrect for FirstTargetPointer.getTargets()
-            // TODO: card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)
 
             // Replace any targets on the stack pointing to the old permanent to the new permanent
             for (StackObject stackObject : state.getStack()) {
@@ -4246,23 +4231,6 @@ public abstract class GameImpl implements Game {
                 }
             }
             state.getContinuousEffects().replaceMutatedObjects(permanentId, newPermanent.getId(), this);
-
-            for (TriggeredAbility ability : state.getTriggers().values()) {
-                if (ability instanceof ZoneChangeTriggeredAbility && ability.getSourceId().equals(newPermanent.getId())) {
-                    ((ZoneChangeTriggeredAbility) ability).addMutatedSourceId(newPermanent.getId());
-                    for (Permanent underPermanent : newPermanent.getMutatedOverList()) {
-                        ((ZoneChangeTriggeredAbility) ability).addMutatedSourceId(underPermanent.getId());
-                    }
-                }
-            }
-            for (Ability ability : permanent.getAbilities()) {
-                if (ability instanceof ZoneChangeTriggeredAbility) {
-                    ((ZoneChangeTriggeredAbility) ability).addMutatedSourceId(newPermanent.getId());
-                    for (Permanent underPermanent : newPermanent.getMutatedOverList()) {
-                        ((ZoneChangeTriggeredAbility) ability).addMutatedSourceId(underPermanent.getId());
-                    }
-                }
-            }
 
             fireEvent(GameEvent.getEvent(
                     GameEvent.EventType.CREATURE_MUTATED, newPermanent.getId(),
