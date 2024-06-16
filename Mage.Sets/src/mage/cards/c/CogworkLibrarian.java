@@ -30,9 +30,9 @@ public final class CogworkLibrarian extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Cogwork Librarian face up - not implemented.")));
 
         // As you draft a card, you may draft an additional card from that booster pack. If you do, put Cogwork Librarian into that booster pack.
-		this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("As you draft a card, "
-		        + "you may draft an additional card from that booster pack. If you do, "
-		        + "put Cogwork Librarian into that booster pack - not implemented.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("As you draft a card, "
+                + "you may draft an additional card from that booster pack. If you do, "
+                + "put Cogwork Librarian into that booster pack - not implemented.")));
     }
 
     private CogworkLibrarian(final CogworkLibrarian card) {
