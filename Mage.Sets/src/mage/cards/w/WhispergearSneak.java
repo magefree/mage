@@ -29,8 +29,8 @@ public final class WhispergearSneak extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Whispergear Sneak face up - not implemented.")));
 
         // During the draft, you may turn Whispergear Sneak face down. If you do, look at any unopened booster pack in the draft or any booster pack not being looked at by another player.
-		this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("During the draft, you may turn Whispergear Sneak face down. If you do, "
-		        + "look at any unopened booster pack in the draft or any booster pack not being looked at by another player - not implemented.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("During the draft, you may turn Whispergear Sneak face down. If you do, "
+                + "look at any unopened booster pack in the draft or any booster pack not being looked at by another player - not implemented.")));
     }
 
     private WhispergearSneak(final WhispergearSneak card) {
