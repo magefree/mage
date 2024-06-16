@@ -3,7 +3,7 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.LookAtFaceDownCreaturesAnyTimeEffect;
+import mage.abilities.effects.common.continuous.LookAtOpponentFaceDownCreaturesAnyTimeEffect;
 import mage.abilities.keyword.DisguiseAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class LumberingLaundry extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {2}: Until end of turn, you may look at face-down creatures you don't control any time.
-        this.addAbility(new SimpleActivatedAbility(new LookAtFaceDownCreaturesAnyTimeEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
+        this.addAbility(new SimpleActivatedAbility(new LookAtOpponentFaceDownCreaturesAnyTimeEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
 
         // Disguise {5}
         this.addAbility(new DisguiseAbility(this, new ManaCostsImpl<>("{5}")));

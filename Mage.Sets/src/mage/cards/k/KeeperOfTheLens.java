@@ -3,7 +3,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.LookAtFaceDownCreaturesAnyTimeEffect;
+import mage.abilities.effects.common.continuous.LookAtOpponentFaceDownCreaturesAnyTimeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,7 +23,7 @@ public final class KeeperOfTheLens extends CardImpl {
         this.toughness = new MageInt(2);
 
         // You may look at face-down creatures you don't control.
-        this.addAbility(new SimpleStaticAbility(new LookAtFaceDownCreaturesAnyTimeEffect()));
+        this.addAbility(new SimpleStaticAbility(new LookAtOpponentFaceDownCreaturesAnyTimeEffect()));
     }
 
     private KeeperOfTheLens(final KeeperOfTheLens card) {

@@ -13,24 +13,24 @@ import mage.players.Player;
 /**
  * @author notgreat
  */
-public class LookAtFaceDownCreaturesAnyTimeEffect extends ContinuousEffectImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creatures you don’t control");
+public class LookAtOpponentFaceDownCreaturesAnyTimeEffect extends ContinuousEffectImpl {
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creatures you don't control");
 
     static {
         filter.add(FaceDownPredicate.instance);
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
     }
 
-    public LookAtFaceDownCreaturesAnyTimeEffect() {
+    public LookAtOpponentFaceDownCreaturesAnyTimeEffect() {
         this(Duration.WhileOnBattlefield);
     }
 
-    public LookAtFaceDownCreaturesAnyTimeEffect(Duration duration) {
+    public LookAtOpponentFaceDownCreaturesAnyTimeEffect(Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = (duration.toString().isEmpty() ? "" : duration.toString() + ", ") + "you may look at face-down creatures you don’t control any time";
+        staticText = (duration.toString().isEmpty() ? "" : duration.toString() + ", ") + "you may look at face-down creatures you don't control any time";
     }
 
-    protected LookAtFaceDownCreaturesAnyTimeEffect(final LookAtFaceDownCreaturesAnyTimeEffect effect) {
+    protected LookAtOpponentFaceDownCreaturesAnyTimeEffect(final LookAtOpponentFaceDownCreaturesAnyTimeEffect effect) {
         super(effect);
     }
 
@@ -53,7 +53,7 @@ public class LookAtFaceDownCreaturesAnyTimeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public LookAtFaceDownCreaturesAnyTimeEffect copy() {
-        return new LookAtFaceDownCreaturesAnyTimeEffect(this);
+    public LookAtOpponentFaceDownCreaturesAnyTimeEffect copy() {
+        return new LookAtOpponentFaceDownCreaturesAnyTimeEffect(this);
     }
 }

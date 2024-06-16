@@ -3,7 +3,7 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.LookAtFaceDownCreaturesAnyTimeEffect;
+import mage.abilities.effects.common.continuous.LookAtOpponentFaceDownCreaturesAnyTimeEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +22,7 @@ public final class LensOfClarity extends CardImpl {
 
         // You may look at the top card of your library and at face-down creatures you don't control.
         Ability ability = new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect().setText("you may look at the top card of your library"));
-        ability.addEffect(new LookAtFaceDownCreaturesAnyTimeEffect().setText("at face-down creatures you don’t control any time").concatBy(" and "));
+        ability.addEffect(new LookAtOpponentFaceDownCreaturesAnyTimeEffect().setText("at face-down creatures you don't control any time").concatBy(" and "));
         this.addAbility(ability);
     }
 
