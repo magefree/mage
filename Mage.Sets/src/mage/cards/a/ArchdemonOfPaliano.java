@@ -24,7 +24,7 @@ public final class ArchdemonOfPaliano extends CardImpl {
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
-		
+
         // TODO: Draft specific abilities not implemented
         // Draft Archdemon of Paliano face up.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Archdemon of Paliano face up - not implemented.")));
@@ -32,7 +32,7 @@ public final class ArchdemonOfPaliano extends CardImpl {
         // As long as Archdemon of Paliano is face up during the draft, you can’t look at booster packs and must draft cards at random. After you draft three cards this way, turn Archdemon of Paliano face down.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("As long as Archdemon of Paliano is face up during the draft, "
                 + "you can't look at booster packs and must draft cards at random. "
-				+ "After you draft three cards this way, turn Archdemon of Paliano face down. - not implemented.")));
+                + "After you draft three cards this way, turn Archdemon of Paliano face down. - not implemented.")));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
