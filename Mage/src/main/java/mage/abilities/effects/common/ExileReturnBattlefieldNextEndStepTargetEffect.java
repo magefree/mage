@@ -74,7 +74,7 @@ public class ExileReturnBattlefieldNextEndStepTargetEffect extends OneShotEffect
         Effect effect = yourControl
                 ? new ReturnToBattlefieldUnderYourControlTargetEffect(exiledOnly)
                 : new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, exiledOnly);
-        effect.setTargetPointer(new FixedTargets(MutateAbility.getAllCardsFromPermanentLeftBattlefield(toExile), game));
+        effect.setTargetPointer(new FixedTargets(MutateAbility.getAllCardsFromPermanentsLeftBattlefield(toExile), game));
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
         return true;
     }

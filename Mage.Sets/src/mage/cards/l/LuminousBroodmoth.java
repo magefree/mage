@@ -5,9 +5,11 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.MutateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -19,9 +21,12 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -75,18 +80,13 @@ class LuminousBroodmothTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getTarget() == null
-                || zEvent.getTarget().getId().equals(this.getSourceId())) {
-            return false;
-        }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTarget().getId());
-
+        Permanent permanent = zEvent.getTarget();
         if (permanent != null
                 && zEvent.isDiesEvent()
                 && permanent.isCreature(game)
                 && !permanent.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                 && permanent.isControlledBy(this.controllerId)) {
-            this.getEffects().setTargetPointer(new FixedTarget(zEvent.getTargetId()));
+            this.getEffects().setTargetPointer(new FixedTargets(MutateAbility.getAllCardsFromPermanentLeftBattlefield(permanent), game));
             return true;
         }
         return false;
@@ -116,17 +116,17 @@ class LuminousBroodmothEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card == null || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        Player player = game.getPlayer(card.getOwnerId());
-        if (player == null) {
-            return false;
+        Set<Card> toReturn = new CardsImpl(getTargetPointer().getTargets(game, source)).getCards(game)
+                .stream()
+                .filter(card -> game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        for (Card card: toReturn) {
+            game.setEnterWithCounters(card.getId(), new Counters().addCounter(CounterType.FLYING.createInstance()));
         }
-        Counters countersToAdd = new Counters();
-        countersToAdd.addCounter(CounterType.FLYING.createInstance());
-        game.setEnterWithCounters(card.getId(), countersToAdd);
-        return player.moveCards(card, Zone.BATTLEFIELD, source, game);
+        return controller.moveCards(toReturn, Zone.BATTLEFIELD, source, game, false, false, true, null);
     }
 }

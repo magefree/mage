@@ -49,6 +49,7 @@ public class MutateTest extends CardTestPlayerBase {
     private static final String ETRATA_THE_SILENCER = "Etrata, the Silencer"; // {2}{U}{B} - 3/5 - Whenever this deals combat damage to a player, exile target creature that player controls and put a hit counter on that card. That player loses the game if they own three or more exiled cards with hit counters on them.
     private static final String INSATIABLE_HEMOPHAGE = "Insatiable Hemophage"; // {3}{B} - 3/3 - Mutate {2}{B} - Deathtouch - Whenever mutates, opponents lose X life and you gain X life where X is the number of times this has mutated.
     private static final String ALMIGHTY_BRUSHWAGG = "Almighty Brushwagg"; // {G} - 1/1 - Trample - {3}{G}: Almighty Brushwagg gets +3/+3 until end of turn.
+    private static final String LUMINOUS_BROODMOTH = "Luminous Broodmoth"; // {2}{W}{W} - 3/4 - Flying - Whenever a creature you control without flying dies, return it to the battlefield under its owner’s control with a flying counter on it
 
 
     // Spells
@@ -1089,6 +1090,41 @@ public class MutateTest extends CardTestPlayerBase {
     @Test
     public void testMutateCardOverCardSlowFlicker() {
         setupTestMutateSlowFlicker(false);
+    }
+
+    /**
+     * test Luminous Broodmoth
+     */
+    public void setupTestMutateLuminousBroodmoth(boolean mutateUnder) {
+        setupLands(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, ALMIGHTY_BRUSHWAGG);
+        addCard(Zone.BATTLEFIELD, playerA, LUMINOUS_BROODMOTH);
+        addCard(Zone.HAND, playerA, MAJESTIC_AURICORN);
+        addCard(Zone.HAND, playerA, MURDER);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MAJESTIC_AURICORN + USING_MUTATE, ALMIGHTY_BRUSHWAGG);
+        setChoice(playerA, mutateUnder);
+        String creature = mutateUnder ? ALMIGHTY_BRUSHWAGG : MAJESTIC_AURICORN;
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, MURDER, creature);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, ALMIGHTY_BRUSHWAGG, 1, 1);
+        assertAbility(playerA, ALMIGHTY_BRUSHWAGG, FlyingAbility.getInstance(), true);
+        assertPowerToughness(playerA, MAJESTIC_AURICORN, 4, 4);
+        assertCounterCount(playerA, MAJESTIC_AURICORN, CounterType.FLYING, 1);
+    }
+    @Test
+    public void testMutateCardUnderCardLuminousBroodmoth() {
+        setupTestMutateLuminousBroodmoth(true);
+    }
+    @Test
+    public void testMutateCardOverCardLuminousBroodmoth() {
+        setupTestMutateLuminousBroodmoth(false);
     }
 
 //    /**

@@ -9,9 +9,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author NinthWorld
@@ -90,7 +88,11 @@ public class MutateAbility extends SpellAbility {
         return MUTATE_KEYWORD + " " + getManaCostsToPay().getText() + MUTATE_REMINDER;
     }
 
-    public static Set<Card> getAllCardsFromPermanentLeftBattlefield(Collection<Permanent> targets) {
+    public static Set<Card> getAllCardsFromPermanentLeftBattlefield(Permanent target) {
+        return getAllCardsFromPermanentsLeftBattlefield(Collections.singletonList(target));
+    }
+
+    public static Set<Card> getAllCardsFromPermanentsLeftBattlefield(Collection<Permanent> targets) {
         Set<Card> toReturn = new LinkedHashSet<>();
         targets.forEach(card -> {
             toReturn.add(card.getMainCard());
