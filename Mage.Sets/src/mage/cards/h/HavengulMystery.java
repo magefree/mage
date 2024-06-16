@@ -25,6 +25,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -37,16 +38,18 @@ public final class HavengulMystery extends CardImpl {
 
         this.nightCard = true;
 
-        // When this land transforms into The Upside Down, return target creature card from your graveyard to the battlefield.
-        this.addAbility(new HavengulMysteryTransformAbility());
+        // When this land transforms into Havengul Mystery, return target creature card from your graveyard to the battlefield.
+        Ability ability = new TransformIntoSourceTriggeredAbility(new HavengulMysteryEffect());
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.addAbility(ability);
 
-        // When the creature put onto the battlefield with The Upside Down leaves the battlefield, transform The Upside Down.
+        // When the creature put onto the battlefield with Havengul Mystery leaves the battlefield, transform Havengul Mystery.
         this.addAbility(new HavengulMysteryLeavesAbility());
 
         // {T}, Pay 1 life: Add {B}.
-        Ability ability = new BlackManaAbility();
-        ability.addCost(new PayLifeCost(1));
-        this.addAbility(ability);
+        Ability ability2 = new BlackManaAbility();
+        ability2.addCost(new PayLifeCost(1));
+        this.addAbility(ability2);
     }
 
     private HavengulMystery(final HavengulMystery card) {
@@ -63,47 +66,11 @@ public final class HavengulMystery extends CardImpl {
     }
 }
 
-class HavengulMysteryTransformAbility extends TriggeredAbilityImpl {
-
-    public HavengulMysteryTransformAbility() {
-        super(Zone.BATTLEFIELD, new HavengulMysteryEffect(), false);
-        this.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-    }
-
-    private HavengulMysteryTransformAbility(final HavengulMysteryTransformAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public HavengulMysteryTransformAbility copy() {
-        return new HavengulMysteryTransformAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TRANSFORMED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getTargetId().equals(this.getSourceId())) {
-            return false;
-        }
-        Permanent permanent = getSourcePermanentIfItStillExists(game);
-        return permanent != null && !permanent.isTransformed();
-    }
-
-    @Override
-    public String getRule() {
-        return "When this land transforms into {this}, " +
-                "return target creature card from your graveyard to the battlefield.";
-    }
-}
-
 class HavengulMysteryEffect extends OneShotEffect {
 
     HavengulMysteryEffect() {
         super(Outcome.Benefit);
+        staticText = "return target creature card from your graveyard to the battlefield";
     }
 
     private HavengulMysteryEffect(final HavengulMysteryEffect effect) {
