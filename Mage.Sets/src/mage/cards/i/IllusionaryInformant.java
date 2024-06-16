@@ -31,8 +31,8 @@ public final class IllusionaryInformant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Illusionary Informant face up - not implemented.")));
 
         // During the draft, you may turn Illusionary Informant face down. If you do, look at the next card drafted by a player of your choice.
-		this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("During the draft, you may turn Illusionary Informant face down. If you do, "
-		        + "look at the next card drafted by a player of your choice - not implemented.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("During the draft, you may turn Illusionary Informant face down. If you do, "
+                + "look at the next card drafted by a player of your choice - not implemented.")));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
