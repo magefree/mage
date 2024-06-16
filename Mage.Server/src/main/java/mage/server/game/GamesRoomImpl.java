@@ -81,8 +81,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         matchView = matchList;
         List<UsersView> users = new ArrayList<>();
         for (User user : managerFactory.userManager().getUsers()) {
-            if (user.getUserState() != User.UserState.Offline
-                    && !user.getName().equals(User.ADMIN_NAME)) {
+            if (user.isOnlineUser()) {
                 try {
                     users.add(new UsersView(user.getUserData().getFlagName(), user.getName(),
                             user.getMatchHistory(), user.getMatchQuitRatio(), user.getTourneyHistory(),

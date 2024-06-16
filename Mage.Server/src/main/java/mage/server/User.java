@@ -41,7 +41,7 @@ public class User {
         Created, // Used if user is created an not connected to the session
         Connected, // Used if user is correctly connected
         Disconnected, // Used if the user lost connection
-        Offline // set if the user was disconnected and expired or regularly left XMage. Removed is the user later after some time
+        Offline // Used if user was disconnected too long, offline users removes from users list by service routines
     }
 
     private final ManagerFactory managerFactory;
@@ -853,5 +853,10 @@ public class User {
             authorizedUser.active = this.active;
             AuthorizedUserRepository.getInstance().update(authorizedUser);
         }
+    }
+
+    public boolean isOnlineUser() {
+        return this.getUserState() != User.UserState.Offline
+                && !this.getName().equals(User.ADMIN_NAME);
     }
 }

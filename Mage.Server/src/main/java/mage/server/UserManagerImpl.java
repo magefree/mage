@@ -34,6 +34,7 @@ public class UserManagerImpl implements UserManager {
     protected final ScheduledExecutorService userListExecutor = Executors.newSingleThreadScheduledExecutor();
 
     private List<UserView> userInfoList = new ArrayList<>(); // all users list for main room/chat
+    private int maxUsersOnline = 0;
     private final ManagerFactory managerFactory;
 
 
@@ -283,6 +284,7 @@ public class UserManagerImpl implements UserManager {
     private void updateUserInfoList() {
         try {
             List<UserView> newUserInfoList = new ArrayList<>();
+            int currentOnlineCount = 0;
             for (User user : getUsers()) {
                 newUserInfoList.add(new UserView(
                         user.getName(),
@@ -297,8 +299,18 @@ public class UserManagerImpl implements UserManager {
                         user.getEmail(),
                         user.getUserIdStr()
                 ));
+
+                if (user.isOnlineUser()) {
+                    currentOnlineCount++;
+                }
             }
             userInfoList = newUserInfoList;
+
+            // max users online stats
+            if (currentOnlineCount > maxUsersOnline) {
+                maxUsersOnline = currentOnlineCount;
+                logger.info(String.format("New max users online: %d", maxUsersOnline));
+            }
         } catch (Exception ex) {
             handleException(ex);
         }
