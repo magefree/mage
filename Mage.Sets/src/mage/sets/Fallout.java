@@ -103,6 +103,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Darkwater Catacombs", 260, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Deadly Dispute", 184, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Desolate Mire", 146, Rarity.RARE, mage.cards.d.DesolateMire.class));
+        cards.add(new SetCardInfo("Diamond City", 147, Rarity.RARE, mage.cards.d.DiamondCity.class));
         cards.add(new SetCardInfo("Dispatch", 159, Rarity.UNCOMMON, mage.cards.d.Dispatch.class));
         cards.add(new SetCardInfo("Dogmeat, Ever Loyal", 2, Rarity.MYTHIC, mage.cards.d.DogmeatEverLoyal.class));
         cards.add(new SetCardInfo("Dr. Madison Li", 3, Rarity.MYTHIC, mage.cards.d.DrMadisonLi.class));
