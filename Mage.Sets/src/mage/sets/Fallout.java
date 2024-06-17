@@ -282,6 +282,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Robobrain War Mind", 38, Rarity.UNCOMMON, mage.cards.r.RobobrainWarMind.class));
         cards.add(new SetCardInfo("Rogue's Passage", 283, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Rootbound Crag", 284, Rarity.RARE, mage.cards.r.RootboundCrag.class));
+        cards.add(new SetCardInfo("Rose, Cutthroat Raider", 66, Rarity.RARE, mage.cards.r.RoseCutthroatRaider.class));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 220, Rarity.RARE, mage.cards.r.RuinousUltimatum.class));
         cards.add(new SetCardInfo("Rustvale Bridge", 285, Rarity.COMMON, mage.cards.r.RustvaleBridge.class));
         cards.add(new SetCardInfo("Ruthless Radrat", 48, Rarity.UNCOMMON, mage.cards.r.RuthlessRadrat.class));
