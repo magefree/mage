@@ -1,23 +1,23 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.SubType;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,21 +73,11 @@ class EssenceSymbioteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent sourcePermanent = game.getPermanent(event.getSourceId());
         Permanent targetPermanent = game.getPermanent(event.getTargetId());
-        if (sourcePermanent != null && targetPermanent != null) {
-            Player controller = game.getPlayer(targetPermanent.getControllerId());
-            if (controller != null
-                    && event.getTargetId().equals(targetPermanent.getId())
-                    && controller.getId().equals(sourcePermanent.getControllerId())
-                    && this.isControlledBy(controller.getId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("targetId", targetPermanent.getId());
-                    effect.setTargetPointer(new FixedTarget(targetPermanent.getId(), targetPermanent.getZoneChangeCounter(game)));
-                }
-                return true;
-            }
+        if (targetPermanent == null || !isControlledBy(targetPermanent.getControllerId())) {
+            return false;
         }
-        return false;
+        this.getEffects().setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
+        return true;
     }
 }
