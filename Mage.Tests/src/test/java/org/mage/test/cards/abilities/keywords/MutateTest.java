@@ -52,6 +52,7 @@ public class MutateTest extends CardTestPlayerBase {
     private static final String ALMIGHTY_BRUSHWAGG = "Almighty Brushwagg"; // {G} - 1/1 - Trample - {3}{G}: Almighty Brushwagg gets +3/+3 until end of turn.
     private static final String LUMINOUS_BROODMOTH = "Luminous Broodmoth"; // {2}{W}{W} - 3/4 - Flying - Whenever a creature you control without flying dies, return it to the battlefield under its owner’s control with a flying counter on it
     private static final String ESSENCE_SYMBIOTE = "Essence Symbiote"; // {1}{G} - 2/2 - Whenever a creature you control mutates, put a +1/+1 counter on that creature and you gain 2 life.
+    private static final String SPELLEATER_WOLVERINE = "Spelleater Wolverine"; // {2}{R} - 3/2 - Spelleater Wolverine has double strike as long as there are three or more instant and/or sorcery cards in your graveyard.
 
 
     // Spells
@@ -666,6 +667,42 @@ public class MutateTest extends CardTestPlayerBase {
     @Test
     public void testMutateCardOverCardTriggered() {
         setupTestMutateTriggered(false);
+    }
+
+    /**
+     * conditional static ability mutate test
+     */
+    public void setupTestMutateConditional(boolean mutateUnder, boolean conditionMet) {
+        setupLands(playerA);
+
+        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
+        addCard(Zone.BATTLEFIELD, playerA, SPELLEATER_WOLVERINE);
+        addCard(Zone.GRAVEYARD, playerA, MURDER, conditionMet ? 3 : 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, SPELLEATER_WOLVERINE);
+        setChoice(playerA, mutateUnder);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertAbility(playerA, mutateUnder ? SPELLEATER_WOLVERINE : DREAMTAIL_HERON, DoubleStrikeAbility.getInstance(), conditionMet);
+    }
+    @Test
+    public void testMutateCardUnderCardConditionalTrue() {
+        setupTestMutateConditional(true, true);
+    }
+    @Test
+    public void testMutateCardOverCardConditionalTrue() {
+        setupTestMutateConditional(false, true);
+    }
+    @Test
+    public void testMutateCardUnderCardConditionalFalse() {
+        setupTestMutateConditional(true, false);
+    }
+    @Test
+    public void testMutateCardOverCardConditionalFalse() {
+        setupTestMutateConditional(false, false);
     }
 
     // No IKO cards with copy spell, transform, imprint, phasing, morph, soulbond, so not attempting those yet
