@@ -50,6 +50,7 @@ public class MutateTest extends CardTestPlayerBase {
     private static final String INSATIABLE_HEMOPHAGE = "Insatiable Hemophage"; // {3}{B} - 3/3 - Mutate {2}{B} - Deathtouch - Whenever mutates, opponents lose X life and you gain X life where X is the number of times this has mutated.
     private static final String ALMIGHTY_BRUSHWAGG = "Almighty Brushwagg"; // {G} - 1/1 - Trample - {3}{G}: Almighty Brushwagg gets +3/+3 until end of turn.
     private static final String LUMINOUS_BROODMOTH = "Luminous Broodmoth"; // {2}{W}{W} - 3/4 - Flying - Whenever a creature you control without flying dies, return it to the battlefield under its owner’s control with a flying counter on it
+    private static final String ESSENCE_SYMBIOTE = "Essence Symbiote"; // {1}{G} - 2/2 - Whenever a creature you control mutates, put a +1/+1 counter on that creature and you gain 2 life.
 
 
     // Spells
@@ -180,6 +181,65 @@ public class MutateTest extends CardTestPlayerBase {
     @Test
     public void testMutateCardOverTokenBasic() {
         setupTestMutateBasic(true, false);
+    }
+
+    /**
+     * Same as above but add Essence Symbiote to check trigger
+     */
+    public void setupTestMutateSymbiote(boolean withToken, boolean mutateUnder) {
+        setupLands(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, ESSENCE_SYMBIOTE);
+        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
+        addCard(Zone.HAND, playerA, LEAD_ASTRAY);
+        if (withToken) {
+            addCard(Zone.HAND, playerA, ADVENT_OF_THE_WURM);
+            castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ADVENT_OF_THE_WURM);
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        } else {
+            addCard(Zone.BATTLEFIELD, playerA, BEASTCALLER_SAVANT);
+        }
+        addCounters(1, PhaseStep.BEGIN_COMBAT, playerA, withToken ? WURM : BEASTCALLER_SAVANT, CounterType.TIME, 1);
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, LEAD_ASTRAY, withToken ? WURM : BEASTCALLER_SAVANT);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, withToken ? WURM : BEASTCALLER_SAVANT);
+        setChoice(playerA, mutateUnder);
+        setChoice(playerA, "Whenever a creature you control mutates, "); // order triggers
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 22);
+        assertHandCount(playerA, DREAMTAIL_HERON, 0);
+        assertPermanentCount(playerA, withToken ? WURM : BEASTCALLER_SAVANT, mutateUnder ? 1 : 0);
+        assertPermanentCount(playerA, DREAMTAIL_HERON, mutateUnder ? 0 : 1);
+        String creature = mutateUnder ? withToken ? WURM : BEASTCALLER_SAVANT : DREAMTAIL_HERON;
+        assertAbility(playerA, creature, withToken ? TrampleAbility.getInstance() : HasteAbility.getInstance(), true);
+        assertAbility(playerA, creature, FlyingAbility.getInstance(), true);
+        assertPowerToughness(playerA, creature,
+                1 + (mutateUnder ? withToken ? 5 : 1 : 3),
+                1 + (mutateUnder ? withToken ? 5 : 1 : 4));
+        assertCounterCount(playerA, creature, CounterType.TIME, 1);
+        assertCounterCount(playerA, creature, CounterType.P1P1, 1);
+        assertTapped(creature, true);
+    }
+    @Test
+    public void testMutateCardUnderCardSymbiote() {
+        setupTestMutateSymbiote(false, true);
+    }
+    @Test
+    public void testMutateCardOverCardSymbiote() {
+        setupTestMutateSymbiote(false, false);
+    }
+    @Test
+    public void testMutateCardUnderTokenSymbiote() {
+        setupTestMutateSymbiote(true, true);
+    }
+    @Test
+    public void testMutateCardOverTokenSymbiote() {
+        setupTestMutateSymbiote(true, false);
     }
 
     /**
