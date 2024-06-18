@@ -1,9 +1,7 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.IsDealtDamageAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -13,22 +11,16 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedBatchForPermanentsEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author zeffirojoe
  */
 public final class Fiendlash extends CardImpl {
@@ -44,9 +36,12 @@ public final class Fiendlash extends CardImpl {
                 .setText("and has reach"));
         this.addAbility(staticAbility);
 
-        // Whenever equipped creature is dealt damage, it deals damage equal to its
-        // power to target player or planeswalker.
-        this.addAbility(new FiendlashTriggeredAbility());
+        // Whenever equipped creature is dealt damage, it deals damage equal to its power to target player or planeswalker.
+        Ability ability = new IsDealtDamageAttachedTriggeredAbility(
+                Zone.BATTLEFIELD, new FiendlashEffect(), false, "equipped", SetTargetPointer.PERMANENT
+        );
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
+        this.addAbility(ability);
 
         // Equip {2}{R}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}"), new TargetControlledCreaturePermanent(), false));
@@ -59,62 +54,6 @@ public final class Fiendlash extends CardImpl {
     @Override
     public Fiendlash copy() {
         return new Fiendlash(this);
-    }
-}
-
-class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
-
-    FiendlashTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new FiendlashEffect(), false);
-        this.addTarget(new TargetPlayerOrPlaneswalker());
-    }
-
-    private FiendlashTriggeredAbility(final FiendlashTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FiendlashTriggeredAbility copy() {
-        return new FiendlashTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent equipment = game.getPermanent(this.getSourceId());
-        if (equipment == null) {
-            return false;
-        }
-
-        UUID attachedCreature = equipment.getAttachedTo();
-        if (attachedCreature == null) {
-            return false;
-        }
-
-        game.getState().setValue("Fiendlash" + equipment.getId(), attachedCreature);
-
-        DamagedBatchForPermanentsEvent dEvent = (DamagedBatchForPermanentsEvent) event;
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
-            UUID targetID = damagedEvent.getTargetId();
-            if (targetID == null) {
-                continue;
-            }
-
-            if (targetID == attachedCreature) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever equipped creature is dealt damage, it deals damage equal to its power to target player or planeswalker.";
     }
 }
 
@@ -135,8 +74,7 @@ class FiendlashEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game
-                .getPermanentOrLKIBattlefield((UUID) game.getState().getValue("Fiendlash" + source.getSourceId()));
+        Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (creature == null) {
             return false;
         }

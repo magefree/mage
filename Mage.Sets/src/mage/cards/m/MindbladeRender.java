@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -10,15 +11,15 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
- *
  * @author TheElk801
  */
 public final class MindbladeRender extends CardImpl {
@@ -45,7 +46,7 @@ public final class MindbladeRender extends CardImpl {
     }
 }
 
-class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
+class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     public MindbladeRenderTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
@@ -67,30 +68,28 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Player controller = game.getPlayer(getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-
-        if (!controller.hasOpponent(dEvent.getTargetId(), game)){
-            return false;
-        }
-        if (!dEvent.isCombatDamage()) {
-            return false;
-        }
-
-        int warriorDamage = dEvent.getEvents()
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForPlayersEvent) event)
+                .getEvents()
                 .stream()
-                .filter(ev -> {
-                    Permanent attacker = game.getPermanentOrLKIBattlefield(ev.getSourceId());
-                    return attacker != null && attacker.hasSubtype(SubType.WARRIOR, game);
-                })
+                .filter(DamagedPlayerEvent::isCombatDamage)
+                .filter(e -> e.getAmount() > 0)
+                .filter(e -> game.getOpponents(getControllerId()).contains(e.getTargetId()))
+                .filter(e -> Optional
+                        .of(e)
+                        .map(DamagedPlayerEvent::getSourceId)
+                        .map(game::getPermanentOrLKIBattlefield)
+                        .filter(p -> p.hasSubtype(SubType.WARRIOR, game))
+                        .isPresent()
+                );
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int amount = filterBatchEvent(event, game)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
-
-        return warriorDamage > 0;
+        return amount > 0;
     }
 
     @Override
