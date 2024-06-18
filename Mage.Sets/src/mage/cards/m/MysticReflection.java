@@ -131,7 +131,8 @@ class MysticReflectionReplacementEffect extends ReplacementEffectImpl {
         Permanent targetedPermanent = (Permanent) game.getState().getValue("MysticReflection" + identifier);
         return permanentEnteringTheBattlefield != null
                 && targetedPermanent != null
-                && permanentEnteringTheBattlefield.isCreature(game);
+                && permanentEnteringTheBattlefield.isCreature(game)
+                || permanentEnteringTheBattlefield.isPlaneswalker(game);
     }
 
     @Override
