@@ -1,5 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.Ability;
 import mage.abilities.keyword.*;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -65,6 +66,7 @@ public class MutateTest extends CardTestPlayerBase {
     private static final String FLICKER = "Flicker"; // Exile target nontoken permanent, then return it to the battlefield under its owner’s control.
     private static final String EERIE_INTERLUDE = "Eerie Interlude"; // Exile any number of target creatures you control. Return those cards to the battlefield under their owner’s control at the beginning of the next end step.
     private static final String NATURALIZE = "Naturalize"; // {1}{G} - Instant - Destroy target artifact or enchantment.
+    private static final String RITE_OF_REPLICATION = "Rite of Replication"; // {2}{U}{U} - Sorcery - Create a token that's a copy of target creature. Kicker {5}
 
     // Enchantment
     private static final String OBLIVION_RING = "Oblivion Ring"; // {2}{W} - When ~ enters the battlefield, exile target permanent. When ~ leaves the battlefield, return exiled card to battlefield.
@@ -541,7 +543,9 @@ public class MutateTest extends CardTestPlayerBase {
         assertHandCount(playerA, DREAMTAIL_HERON, 0);
         assertPermanentCount(playerA, creature, 0);
         assertGraveyardCount(playerA, DREAMTAIL_HERON, 1);
-        if (!withToken) assertGraveyardCount(playerA, BEASTCALLER_SAVANT, 1);
+        if (!withToken) {
+            assertGraveyardCount(playerA, BEASTCALLER_SAVANT, 1);
+        }
 
         assertPermanentCount(playerB, creature, 1);
         assertAbility(playerB, creature, withToken ? TrampleAbility.getInstance() : HasteAbility.getInstance(), true);
@@ -578,6 +582,64 @@ public class MutateTest extends CardTestPlayerBase {
     }
 
     /**
+     * Check that creating a token copy of a mutated creature has all abilities
+     */
+    public void setupTestMutateTokenCopy(boolean withToken, boolean mutateUnder) {
+        setupLands(playerA);
+        setupLands(playerB);
+
+        addCard(Zone.HAND, playerB, RITE_OF_REPLICATION);
+
+        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
+        if (withToken) {
+            addCard(Zone.HAND, playerA, ADVENT_OF_THE_WURM);
+            castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ADVENT_OF_THE_WURM);
+            waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        } else {
+            addCard(Zone.BATTLEFIELD, playerA, BEASTCALLER_SAVANT);
+        }
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, withToken ? WURM : BEASTCALLER_SAVANT);
+        setChoice(playerA, mutateUnder);
+
+        String creature = mutateUnder ? withToken ? WURM : BEASTCALLER_SAVANT : DREAMTAIL_HERON;
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, RITE_OF_REPLICATION);
+        setChoice(playerB, false); // no kicker
+        addTarget(playerB, creature);
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerB, RITE_OF_REPLICATION, 1);
+        assertPermanentCount(playerA, creature, 1);
+        assertPermanentCount(playerB, creature, 1);
+        assertAbility(playerA, creature, withToken ? TrampleAbility.getInstance() : HasteAbility.getInstance(), true);
+        assertAbility(playerB, creature, withToken ? TrampleAbility.getInstance() : HasteAbility.getInstance(), true);
+        assertAbility(playerA, creature, FlyingAbility.getInstance(), true);
+        assertAbility(playerB, creature, FlyingAbility.getInstance(), true);
+        assertPowerToughness(playerA, creature, mutateUnder ? withToken ? 5 : 1 : 3, mutateUnder ? withToken ? 5 : 1 : 4);
+        assertPowerToughness(playerB, creature, mutateUnder ? withToken ? 5 : 1 : 3, mutateUnder ? withToken ? 5 : 1 : 4);
+    }
+    @Test
+    public void testTokenCopyMutateCardUnderCard() {
+        setupTestMutateTokenCopy(false, true);
+    }
+    @Test
+    public void testTokenCopyMutateCardOverCard() {
+        setupTestMutateTokenCopy(false, false);
+    }
+    @Test
+    public void testTokenCopyMutateCardUnderToken() {
+        setupTestMutateTokenCopy(true, true);
+    }
+    @Test
+    public void testTokenCopyMutateCardOverToken() {
+        setupTestMutateTokenCopy(true, false);
+    }
+
+    /**
      * Triggered ability mutate test
      */
     public void setupTestMutateTriggered(boolean mutateUnder) {
@@ -605,6 +667,8 @@ public class MutateTest extends CardTestPlayerBase {
     public void testMutateCardOverCardTriggered() {
         setupTestMutateTriggered(false);
     }
+
+    // No IKO cards with copy spell, transform, imprint, phasing, morph, soulbond, so not attempting those yet
 
 //    /**
 //     * Copy spell mutate test
@@ -914,105 +978,105 @@ public class MutateTest extends CardTestPlayerBase {
 //        setupTestMutateSoulbond(true, false);
 //    }
 
-//    /**
-//     * Monstrous mutate test
-//     */
-//    public void setupTestMutateMonstrous(boolean monstrous, boolean mutateUnder) {
-//        setupLands(playerA);
-//
-//        final Ability monstrousAbility = new MonstrosityAbility("{3}{G}{W}", 1);
-//
-//        addCard(Zone.BATTLEFIELD, playerA, FLEECEMANE_LION);
-//        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
-//
-//        if (monstrous) {
-//            activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, monstrousAbility.getRule());
-//        }
-//
-//        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, FLEECEMANE_LION);
-//        setChoice(playerA, mutateUnder);
-//
-//        if (!monstrous) {
-//            activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, monstrousAbility.getRule());
-//        }
-//
-//        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-//        setStrictChooseMode(true);
-//        execute();
-//
-//        String creature = mutateUnder ? FLEECEMANE_LION : DREAMTAIL_HERON;
-//        assertAbility(playerA, creature, HexproofAbility.getInstance(), true);
-//        assertAbility(playerA, creature, IndestructibleAbility.getInstance(), true);
-//        assertAbility(playerA, creature, FlyingAbility.getInstance(), true);
-//        assertCounterCount(playerA, creature, CounterType.P1P1, 1);
-//
-//        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, monstrousAbility.getRule());
-//        setStopAt(3, PhaseStep.BEGIN_COMBAT);
-//        setStrictChooseMode(false);
-//        execute();
-//
-//        assertCounterCount(playerA, creature, CounterType.P1P1, 1);
-//    }
-//    @Test
-//    public void testMutateCardUnderCardMonstrous() {
-//        setupTestMutateMonstrous(false, true);
-//    }
-//    @Test
-//    public void testMutateCardOverCardMonstrous() {
-//        setupTestMutateMonstrous(false, false);
-//    }
-//    @Test
-//    public void testMutateCardUnderMonstrousCardMonstrous() {
-//        setupTestMutateMonstrous(true, true);
-//    }
-//    @Test
-//    public void testMutateCardOverMonstrousCardMonstrous() {
-//        setupTestMutateMonstrous(true, false);
-//    }
-//
-//    /**
-//     * Renowned mutate test
-//     */
-//    public void setupTestMutateRenown(boolean renowned, boolean mutateUnder) {
-//        setupLands(playerA);
-//
-//        addCard(Zone.BATTLEFIELD, playerA, GOBLIN_GLORY_CHASER);
-//        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
-//
-//        if (renowned) {
-//            attack(1, playerA, GOBLIN_GLORY_CHASER);
-//        }
-//
-//        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, GOBLIN_GLORY_CHASER);
-//        setChoice(playerA, mutateUnder);
-//
-//        attack(3, playerA, mutateUnder ? GOBLIN_GLORY_CHASER : DREAMTAIL_HERON);
-//
-//        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
-//        setStrictChooseMode(true);
-//        execute();
-//
-//        String creature = mutateUnder ? GOBLIN_GLORY_CHASER : DREAMTAIL_HERON;
-//        assertAbility(playerA, creature, new MenaceAbility(), true);
-//        assertAbility(playerA, creature, FlyingAbility.getInstance(), true);
-//        assertCounterCount(playerA, creature, CounterType.P1P1, 1);
-//    }
-//    @Test
-//    public void testMutateCardUnderCardRenown() {
-//        setupTestMutateRenown(false, true);
-//    }
-//    @Test
-//    public void testMutateCardOverCardRenown() {
-//        setupTestMutateRenown(false, false);
-//    }
-//    @Test
-//    public void testMutateCardUnderRenownedCardRenown() {
-//        setupTestMutateRenown(true, true);
-//    }
-//    @Test
-//    public void testMutateCardOverRenownedCardRenown() {
-//        setupTestMutateRenown(true, false);
-//    }
+    /**
+     * Monstrous mutate test
+     */
+    public void setupTestMutateMonstrous(boolean monstrous, boolean mutateUnder) {
+        setupLands(playerA);
+
+        final Ability monstrousAbility = new MonstrosityAbility("{3}{G}{W}", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, FLEECEMANE_LION);
+        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
+
+        if (monstrous) {
+            activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, monstrousAbility.getRule());
+        }
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, FLEECEMANE_LION);
+        setChoice(playerA, mutateUnder);
+
+        if (!monstrous) {
+            activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, monstrousAbility.getRule());
+        }
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        execute();
+
+        String creature = mutateUnder ? FLEECEMANE_LION : DREAMTAIL_HERON;
+        assertAbility(playerA, creature, HexproofAbility.getInstance(), true);
+        assertAbility(playerA, creature, IndestructibleAbility.getInstance(), true);
+        assertAbility(playerA, creature, FlyingAbility.getInstance(), true);
+        assertCounterCount(playerA, creature, CounterType.P1P1, 1);
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, monstrousAbility.getRule());
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(false);
+        execute();
+
+        assertCounterCount(playerA, creature, CounterType.P1P1, 1);
+    }
+    @Test
+    public void testMutateCardUnderCardMonstrous() {
+        setupTestMutateMonstrous(false, true);
+    }
+    @Test
+    public void testMutateCardOverCardMonstrous() {
+        setupTestMutateMonstrous(false, false);
+    }
+    @Test
+    public void testMutateCardUnderMonstrousCardMonstrous() {
+        setupTestMutateMonstrous(true, true);
+    }
+    @Test
+    public void testMutateCardOverMonstrousCardMonstrous() {
+        setupTestMutateMonstrous(true, false);
+    }
+
+    /**
+     * Renowned mutate test
+     */
+    public void setupTestMutateRenown(boolean renowned, boolean mutateUnder) {
+        setupLands(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, GOBLIN_GLORY_CHASER);
+        addCard(Zone.HAND, playerA, DREAMTAIL_HERON);
+
+        if (renowned) {
+            attack(1, playerA, GOBLIN_GLORY_CHASER);
+        }
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, GOBLIN_GLORY_CHASER);
+        setChoice(playerA, mutateUnder);
+
+        attack(3, playerA, mutateUnder ? GOBLIN_GLORY_CHASER : DREAMTAIL_HERON);
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        execute();
+
+        String creature = mutateUnder ? GOBLIN_GLORY_CHASER : DREAMTAIL_HERON;
+        assertAbility(playerA, creature, new MenaceAbility(), true);
+        assertAbility(playerA, creature, FlyingAbility.getInstance(), true);
+        assertCounterCount(playerA, creature, CounterType.P1P1, 1);
+    }
+    @Test
+    public void testMutateCardUnderCardRenown() {
+        setupTestMutateRenown(false, true);
+    }
+    @Test
+    public void testMutateCardOverCardRenown() {
+        setupTestMutateRenown(false, false);
+    }
+    @Test
+    public void testMutateCardUnderRenownedCardRenown() {
+        setupTestMutateRenown(true, true);
+    }
+    @Test
+    public void testMutateCardOverRenownedCardRenown() {
+        setupTestMutateRenown(true, false);
+    }
 
     /**
      * Attachments (aura, equip) mutate test
@@ -1271,6 +1335,8 @@ public class MutateTest extends CardTestPlayerBase {
         setupTestMutateLoseAbilities(false, false);
     }
 
+    // Flip, regen, persist, undying not accounted for (original implementation used specific hacks)
+
 //    /**
 //     * Flip mutate test
 //     */
@@ -1488,6 +1554,8 @@ public class MutateTest extends CardTestPlayerBase {
     public void testSpellMultipleSameTargetOnStackMutateOver() {
         setupTestSpellMultipleSameTargetMutateOver(true);
     }
+
+    // The tests below are specific hacks, so not implemented
 
 //    /**
 //     * Q: What happens if I turn a mutated pile face down?
@@ -1735,10 +1803,10 @@ public class MutateTest extends CardTestPlayerBase {
 //    }
 
     private void setupLands(TestPlayer player) {
-        addCard(Zone.BATTLEFIELD, player, ISLAND, 20);
-        addCard(Zone.BATTLEFIELD, player, PLAINS, 20);
-        addCard(Zone.BATTLEFIELD, player, FOREST, 20);
-        addCard(Zone.BATTLEFIELD, player, MOUNTAIN, 20);
-        addCard(Zone.BATTLEFIELD, player, SWAMP, 20);
+        addCard(Zone.BATTLEFIELD, player, ISLAND, 10);
+        addCard(Zone.BATTLEFIELD, player, PLAINS, 10);
+        addCard(Zone.BATTLEFIELD, player, FOREST, 10);
+        addCard(Zone.BATTLEFIELD, player, MOUNTAIN, 10);
+        addCard(Zone.BATTLEFIELD, player, SWAMP, 10);
     }
 }
