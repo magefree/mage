@@ -24,6 +24,8 @@ public class MutateTest extends CardTestPlayerBase {
     private static final String BROKKOS_APEX_OF_FOREVER = "Brokkos, Apex of Forever"; // {2}{B}{G}{U} - 6/6 - Mutate {2}{U/B}{G}{G} - Trample - You may cast from graveyard using mutate ability.
     private static final String DREAMTAIL_HERON = "Dreamtail Heron"; // {4}{U} - Mutate {3}{U} - 3/4 - Flying - Whenever this creature mutates, draw a card
     private static final String MAJESTIC_AURICORN = "Majestic Auricorn"; // {4}{W} - Mutate {3}{W} - 4/4 - Vigilance - Whenever this creature mutates, you gain 4 life.
+    private static final String BONEYARD_LURKER = "Boneyard Lurker"; // {2}{B}{G} - Mutate {2}{B/G}{B/G} - 4/4 - Whenever this creature mutates, return target permanent card from your graveyard to your hand.
+    private static final String VULPIKEET = "Vulpikeet"; // {3}{W} - Mutate {2}{W} - 4/4 - Vigilance - Whenever this creature mutates, put a +1/+1 counter on it.
     private static final String SEADASHER_OCTOPUS = "Sea-Dasher Octopus"; // {1}{U}{U} - Mutate {1}{U} - Flash
     private static final String BEASTCALLER_SAVANT = "Beastcaller Savant"; // {1}{G} - 1/1 - Haste - {T}: Add mana
     private static final String BANEHOUND = "Banehound"; // {B} - 1/1 - Lifelink, Haste
@@ -1375,6 +1377,101 @@ public class MutateTest extends CardTestPlayerBase {
     @Test
     public void testLoseAbilitiesMutateCardOverTwice() {
         setupTestMutateLoseAbilities(false, false);
+    }
+
+    /**
+     * Test large mutate stack, including two of the same card
+     */
+    public void setupTestTripleMutate(boolean mutateUnder, boolean secondUnder, boolean thirdUnder) {
+        setupLands(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, BONEYARD_LURKER);
+        addCard(Zone.GRAVEYARD, playerA, VULPIKEET); // return via boneyard lurker
+        addCard(Zone.HAND, playerA, MAJESTIC_AURICORN, 2);
+        addCard(Zone.GRAVEYARD, playerA, SPELLEATER_WOLVERINE); // 2nd return
+        addCard(Zone.GRAVEYARD, playerA, SHORT_SWORD); // 3rd return
+
+        String topCreature = BONEYARD_LURKER;
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, MAJESTIC_AURICORN + USING_MUTATE, topCreature);
+        setChoice(playerA, mutateUnder);
+        if (!mutateUnder) {
+            topCreature = MAJESTIC_AURICORN;
+        }
+        setChoice(playerA, "Whenever this creature mutates, return"); // order triggers
+        // gain 4 life
+        addTarget(playerA, VULPIKEET); //trigger to return
+
+        checkPermanentCounters("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, topCreature, CounterType.P1P1, 0);
+        checkHandCardCount("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, VULPIKEET, 1);
+        checkLife("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, 24);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, VULPIKEET + USING_MUTATE, topCreature);
+        setChoice(playerA, secondUnder);
+        if (!secondUnder) {
+            topCreature = VULPIKEET;
+        }
+        setChoice(playerA, "Whenever this creature mutates, return"); // order triggers
+        setChoice(playerA, "Whenever this creature mutates, put"); // order triggers
+        // gain 4 life
+        addTarget(playerA, SPELLEATER_WOLVERINE); //trigger to return
+
+        checkPermanentCounters("1.ET", 1, PhaseStep.END_TURN, playerA, topCreature, CounterType.P1P1, 1);
+        checkHandCardCount("1.ET", 1, PhaseStep.END_TURN, playerA, SPELLEATER_WOLVERINE, 1);
+        checkLife("1.ET", 1, PhaseStep.END_TURN, playerA, 28);
+
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, MAJESTIC_AURICORN + USING_MUTATE, topCreature);
+        setChoice(playerA, thirdUnder);
+        if (!thirdUnder) {
+            topCreature = MAJESTIC_AURICORN;
+        }
+        setChoice(playerA, "Whenever this creature mutates, return"); // order triggers
+        setChoice(playerA, "Whenever this creature mutates, put"); // order triggers
+        setChoice(playerA, "Whenever this creature mutates, you gain"); // order triggers
+        // gain 4 life again
+        addTarget(playerA, SHORT_SWORD); //trigger to return
+
+        checkPermanentCounters("3.BC", 3, PhaseStep.BEGIN_COMBAT, playerA, topCreature, CounterType.P1P1, 2);
+        checkHandCardCount("3.BC", 3, PhaseStep.BEGIN_COMBAT, playerA, SHORT_SWORD, 1);
+        checkLife("3.BC", 3, PhaseStep.BEGIN_COMBAT, playerA, 36);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, 0);
+    }
+    @Test
+    public void testTripleMutateUnderUnderUnder() {
+        setupTestTripleMutate(true, true, true);
+    }
+    @Test
+    public void testTripleMutateOverUnderUnder() {
+        setupTestTripleMutate(false, true, true);
+    }
+    @Test
+    public void testTripleMutateUnderOverUnder() {
+        setupTestTripleMutate(true, false, true);
+    }
+    @Test
+    public void testTripleMutateOverOverUnder() {
+        setupTestTripleMutate(false, false, true);
+    }
+    @Test
+    public void testTripleMutateUnderUnderOver() {
+        setupTestTripleMutate(true, true, false);
+    }
+    @Test
+    public void testTripleMutateOverUnderOver() {
+        setupTestTripleMutate(false, true, false);
+    }
+    @Test
+    public void testTripleMutateUnderOverOver() {
+        setupTestTripleMutate(true, false, false);
+    }
+    @Test
+    public void testTripleMutateOverOverOver() {
+        setupTestTripleMutate(false, false, false);
     }
 
     // Flip, regen, persist, undying not accounted for (original implementation used specific hacks)
