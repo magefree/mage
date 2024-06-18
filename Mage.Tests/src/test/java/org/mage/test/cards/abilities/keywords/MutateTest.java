@@ -1316,6 +1316,7 @@ public class MutateTest extends CardTestPlayerBase {
         checkAbility("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, topCreature, TrampleAbility.class, true);
         checkAbility("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, topCreature, VigilanceAbility.class, true);
         checkAbility("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, topCreature, FlyingAbility.class, false);
+        checkPlayableAbility("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, "{3}{G}: ", true);
         checkPT("1.BC", 1, PhaseStep.BEGIN_COMBAT, playerA, topCreature, mutateUnder ? 1 : 4, mutateUnder ? 1 : 4);
 
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, MYSTIC_SUBDUAL, topCreature);
@@ -1324,6 +1325,7 @@ public class MutateTest extends CardTestPlayerBase {
         checkAbility("1.EC", 1, PhaseStep.END_COMBAT, playerA, topCreature, TrampleAbility.class, false);
         checkAbility("1.EC", 1, PhaseStep.END_COMBAT, playerA, topCreature, VigilanceAbility.class, false);
         checkAbility("1.EC", 1, PhaseStep.END_COMBAT, playerA, topCreature, FlyingAbility.class, false);
+        checkPlayableAbility("1.EC", 1, PhaseStep.END_COMBAT, playerA, "{3}{G}: ", false);
         checkPT("1.EC", 1, PhaseStep.END_COMBAT, playerA, topCreature, (mutateUnder ? 1 : 4) - 2, mutateUnder ? 1 : 4);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, DREAMTAIL_HERON + USING_MUTATE, topCreature);
@@ -1336,6 +1338,7 @@ public class MutateTest extends CardTestPlayerBase {
         checkAbility("1.ET", 1, PhaseStep.END_TURN, playerA, topCreature, TrampleAbility.class, false);
         checkAbility("1.ET", 1, PhaseStep.END_TURN, playerA, topCreature, VigilanceAbility.class, false);
         checkAbility("1.ET", 1, PhaseStep.END_TURN, playerA, topCreature, FlyingAbility.class, false);
+        checkPlayableAbility("1.ET", 1, PhaseStep.END_TURN, playerA, "{3}{G}: ", false);
         checkPT("1.ET", 1, PhaseStep.END_TURN, playerA, topCreature,
                 (secondUnder ? (mutateUnder ? 1 : 4) : 3) - 2,
                 mutateUnder && secondUnder ? 1 : 4
@@ -1343,7 +1346,9 @@ public class MutateTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.UPKEEP, playerA, NATURALIZE, MYSTIC_SUBDUAL);
 
-        setStopAt(2, PhaseStep.DRAW);
+        checkPlayableAbility("2.DR", 2, PhaseStep.DRAW, playerA, "{3}{G}: ", true);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
 
