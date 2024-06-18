@@ -248,6 +248,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.loyaltyActivationsAvailable = 1;
         this.legendRuleApplies = true;
         this.canBeSacrificed = true;
+        this.getMutatedOverList().stream()
+                .flatMap(p -> ((PermanentImpl) p).abilities.stream())
+                .forEach(a -> a.setSourceId(getId())); // must be fixed since mutate zone reset before battlefield
     }
 
     @Override
