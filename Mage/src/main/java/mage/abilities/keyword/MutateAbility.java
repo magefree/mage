@@ -1,11 +1,15 @@
 package mage.abilities.keyword;
 
+import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.SourceMutatedCount;
+import mage.abilities.hint.ValueHint;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -67,6 +71,7 @@ public class MutateAbility extends SpellAbility {
                 SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.MUTATE);
         this.timing = TimingRule.SORCERY;
         this.addTarget(new TargetCreaturePermanent(filter));
+        this.addHint(MutateCountHint.instance);
     }
 
     private MutateAbility(final MutateAbility ability) {
@@ -99,6 +104,24 @@ public class MutateAbility extends SpellAbility {
             card.getMutatedOverList().stream().map(Card::getMainCard).forEach(toReturn::add);
         });
         return toReturn;
+    }
+
+}
+
+class MutateCountHint extends ValueHint {
+
+    static final MutateCountHint instance = new MutateCountHint();
+
+    private MutateCountHint() {
+        super("Number of times {this} has mutated", SourceMutatedCount.instance);
+    }
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        if (game.getPermanent(ability.getSourceId()) == null) {
+            return ""; // only visible on battlefield
+        }
+        return super.getText(game, ability);
     }
 
 }
