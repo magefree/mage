@@ -1,6 +1,6 @@
-package mage.abilities.dynamicvalue.common;
+package mage.abilities.assignment.common;
 
-import mage.abilities.dynamicvalue.RoleAssignment;
+import mage.abilities.assignment.RoleAssignment;
 import mage.cards.Card;
 import mage.constants.SubType;
 import mage.game.Game;

@@ -1,4 +1,4 @@
-package mage.abilities.dynamicvalue;
+package mage.abilities.assignment;
 
 import mage.cards.Card;
 import mage.cards.Cards;

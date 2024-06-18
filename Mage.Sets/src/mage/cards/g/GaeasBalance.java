@@ -2,20 +2,17 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
