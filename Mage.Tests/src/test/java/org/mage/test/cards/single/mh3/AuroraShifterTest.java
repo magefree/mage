@@ -37,25 +37,24 @@ public class AuroraShifterTest extends CardTestPlayerBase {
 //        Combat 1
         attack(1, playerA, shifter, playerB);
         runCode("energy counter is 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 1));
-
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
 //        Combat 2
         attack(3, playerA, shifter, playerB);
         runCode("energy counter is 2", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));
-
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
 //        Combat 3 - can pay for copy
-        attack(5, playerA, shifter, playerB);
         addTarget(playerA, "Grizzly Bears"); // Aurora Shifter becomes a copy of another target creature you control
         setChoice(playerA, true); // you may pay {E}{E}.
-        runCode("energy counter is 0", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 0));
-
-//        Combat 4
-        attack(7, playerA, "Grizzly Bears[only copy]", playerB);
-        runCode("energy counter is 2", 7, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));
-        setStopAt(7, PhaseStep.END_TURN);
+        showBattlefield("BEGIN_COMBAT", 5, PhaseStep.BEGIN_COMBAT, playerA);
+        showBattlefield("DECLARE_ATTACKERS", 5, PhaseStep.DECLARE_ATTACKERS, playerA);
+        attack(5, playerA, "Grizzly Bears", playerB);
+        runCode("energy counter is 0", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));
+        setStopAt(5, PhaseStep.END_TURN);
         execute();
-
-        assertLife(playerB, 20 - 1 - 1 - 1 - 2);
-        assertCounterCount(playerA, CounterType.ENERGY, 2);
+        assertLife(playerB, 20 - 1 - 1 - 2); // 1 damage from being shifter, 1 from shifter, 2 from transforming into Grizzly Bears
+        assertCounterCount(playerA, CounterType.ENERGY, 2); // 2 Energy from being a Grizzly Bears
     }
 
 }
