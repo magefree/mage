@@ -700,6 +700,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Player player : players.values()) {
             player.reset();
         }
+        mutateZone.values().forEach(p -> p.reset(game)); // required since affected by removeAllAbilities
         battlefield.reset(game);
         combat.reset(game);
         this.reset();
