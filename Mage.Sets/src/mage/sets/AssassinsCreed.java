@@ -41,6 +41,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Royal Assassin", 93, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
         cards.add(new SetCardInfo("Silent Clearing", 115, Rarity.RARE, mage.cards.s.SilentClearing.class));
         cards.add(new SetCardInfo("Sunbaked Canyon", 111, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
+        cards.add(new SetCardInfo("Surtr, Fiery Jotun", 293, Rarity.RARE, mage.cards.s.SurtrFieryJotun.class));
         cards.add(new SetCardInfo("Sword of Feast and Famine", 99, Rarity.MYTHIC, mage.cards.s.SwordOfFeastAndFamine.class));
         cards.add(new SetCardInfo("Sword of Light and Shadow", 100, Rarity.MYTHIC, mage.cards.s.SwordOfLightAndShadow.class));
         cards.add(new SetCardInfo("Temporal Trespass", 86, Rarity.MYTHIC, mage.cards.t.TemporalTrespass.class));
