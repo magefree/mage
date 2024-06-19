@@ -35,6 +35,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Islet", 112, Rarity.RARE, mage.cards.f.FieryIslet.class));
         cards.add(new SetCardInfo("Haystack", 5, Rarity.UNCOMMON, mage.cards.h.Haystack.class));
         cards.add(new SetCardInfo("Hidden Blade", 73, Rarity.UNCOMMON, mage.cards.h.HiddenBlade.class));
+        cards.add(new SetCardInfo("Hunter's Bow", 41, Rarity.UNCOMMON, mage.cards.h.HuntersBow.class));
         cards.add(new SetCardInfo("Mary Read and Anne Bonny", 61, Rarity.RARE, mage.cards.m.MaryReadAndAnneBonny.class));
         cards.add(new SetCardInfo("Murder", 92, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Nurturing Peatland", 114, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
