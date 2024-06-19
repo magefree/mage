@@ -30,6 +30,7 @@ public abstract class DeckValidator implements Serializable {
     ));
 
     public static final HashSet<String> ALL_BASIC_LAND_NAMES = new HashSet<>();
+
     {
         ALL_BASIC_LAND_NAMES.addAll(MAIN_BASIC_LAND_NAMES);
         ALL_BASIC_LAND_NAMES.addAll(ADDITIONAL_BASIC_LAND_NAMES);
@@ -46,6 +47,7 @@ public abstract class DeckValidator implements Serializable {
         maxCopiesMap.put("Persistent Petitioners", Integer.MAX_VALUE);
         maxCopiesMap.put("Dragon's Approach", Integer.MAX_VALUE);
         maxCopiesMap.put("Slime Against Humanity", Integer.MAX_VALUE);
+        maxCopiesMap.put("Templar Knight", Integer.MAX_VALUE);
         maxCopiesMap.put("Once More with Feeling", 1);
         maxCopiesMap.put("Seven Dwarves", 7);
         maxCopiesMap.put("Nazgul", 9);
