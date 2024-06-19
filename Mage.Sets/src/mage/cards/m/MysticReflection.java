@@ -96,10 +96,10 @@ class MysticReflectionEffect extends OneShotEffect {
 
 class MysticReflectionReplacementEffect extends ReplacementEffectImpl {
 
-    final private int enteredThisTurn;
-    final private String identifier;
+    private final int enteredThisTurn;
+    private final String identifier;
 
-    public MysticReflectionReplacementEffect(int enteredThisTurn, String identifier) {
+    MysticReflectionReplacementEffect(int enteredThisTurn, String identifier) {
         super(Duration.EndOfTurn, Outcome.Copy, false);
         this.enteredThisTurn = enteredThisTurn;
         this.identifier = identifier;
@@ -131,8 +131,8 @@ class MysticReflectionReplacementEffect extends ReplacementEffectImpl {
         Permanent targetedPermanent = (Permanent) game.getState().getValue("MysticReflection" + identifier);
         return permanentEnteringTheBattlefield != null
                 && targetedPermanent != null
-                && permanentEnteringTheBattlefield.isCreature(game)
-                || permanentEnteringTheBattlefield.isPlaneswalker(game);
+                && (permanentEnteringTheBattlefield.isCreature(game)
+                || permanentEnteringTheBattlefield.isPlaneswalker(game));
     }
 
     @Override
@@ -193,9 +193,9 @@ class MysticReflectionWatcher extends Watcher {
 
 class MysticReflectionGainAbilityEffect extends ContinuousEffectImpl {
 
-    final private Ability ability;
+    private final Ability ability;
 
-    public MysticReflectionGainAbilityEffect(Ability ability) {
+    MysticReflectionGainAbilityEffect(Ability ability) {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
     }
