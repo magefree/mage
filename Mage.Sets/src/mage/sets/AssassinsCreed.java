@@ -21,6 +21,7 @@ public final class AssassinsCreed extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
+        cards.add(new SetCardInfo("Abstergo Entertainment", 79, Rarity.RARE, mage.cards.a.AbstergoEntertainment.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 166, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
         cards.add(new SetCardInfo("Aya of Alexandria", 48, Rarity.RARE, mage.cards.a.AyaOfAlexandria.class));
         cards.add(new SetCardInfo("Basim Ibn Ishaq", 49, Rarity.RARE, mage.cards.b.BasimIbnIshaq.class));
