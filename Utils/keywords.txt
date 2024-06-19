@@ -59,6 +59,7 @@ Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
 For Mirrodin!|new|
+Freerunning|manaString|
 Friends forever|instance|
 Haste|instance|
 Hexproof|instance|

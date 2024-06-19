@@ -22,15 +22,18 @@ public final class AssassinsCreed extends ExpansionSet {
         this.hasBoosters = false;
 
         cards.add(new SetCardInfo("Abstergo Entertainment", 79, Rarity.RARE, mage.cards.a.AbstergoEntertainment.class));
+        cards.add(new SetCardInfo("Achilles Davenport", 294, Rarity.RARE, mage.cards.a.AchillesDavenport.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 166, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
         cards.add(new SetCardInfo("Aya of Alexandria", 48, Rarity.RARE, mage.cards.a.AyaOfAlexandria.class));
         cards.add(new SetCardInfo("Basim Ibn Ishaq", 49, Rarity.RARE, mage.cards.b.BasimIbnIshaq.class));
         cards.add(new SetCardInfo("Bayek of Siwa", 50, Rarity.RARE, mage.cards.b.BayekOfSiwa.class));
         cards.add(new SetCardInfo("Cathartic Reunion", 94, Rarity.UNCOMMON, mage.cards.c.CatharticReunion.class));
+        cards.add(new SetCardInfo("Chain Assassination", 23, Rarity.UNCOMMON, mage.cards.c.ChainAssassination.class));
         cards.add(new SetCardInfo("Cleopatra, Exiled Pharaoh", 52, Rarity.MYTHIC, mage.cards.c.CleopatraExiledPharaoh.class));
         cards.add(new SetCardInfo("Coastal Piracy", 84, Rarity.UNCOMMON, mage.cards.c.CoastalPiracy.class));
         cards.add(new SetCardInfo("Conspiracy", 88, Rarity.RARE, mage.cards.c.Conspiracy.class));
         cards.add(new SetCardInfo("Cover of Darkness", 89, Rarity.RARE, mage.cards.c.CoverOfDarkness.class));
+        cards.add(new SetCardInfo("Eagle Vision", 17, Rarity.UNCOMMON, mage.cards.e.EagleVision.class));
         cards.add(new SetCardInfo("Eivor, Battle-Ready", 274, Rarity.MYTHIC, mage.cards.e.EivorBattleReady.class));
         cards.add(new SetCardInfo("Escarpment Fortress", 278, Rarity.RARE, mage.cards.e.EscarpmentFortress.class));
         cards.add(new SetCardInfo("Ezio, Blade of Vengeance", 275, Rarity.MYTHIC, mage.cards.e.EzioBladeOfVengeance.class));
@@ -46,6 +49,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Raven Clan War-Axe", 297, Rarity.RARE, mage.cards.r.RavenClanWarAxe.class));
         cards.add(new SetCardInfo("Reconstruct History", 97, Rarity.UNCOMMON, mage.cards.r.ReconstructHistory.class));
         cards.add(new SetCardInfo("Rest in Peace", 83, Rarity.RARE, mage.cards.r.RestInPeace.class));
+        cards.add(new SetCardInfo("Restart Sequence", 30, Rarity.UNCOMMON, mage.cards.r.RestartSequence.class));
         cards.add(new SetCardInfo("Royal Assassin", 93, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
         cards.add(new SetCardInfo("Silent Clearing", 115, Rarity.RARE, mage.cards.s.SilentClearing.class));
         cards.add(new SetCardInfo("Sunbaked Canyon", 111, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
