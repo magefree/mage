@@ -51,7 +51,7 @@ public class FreerunningTest extends CardTestCommanderDuelBase {
 
     @Test
     public void testCommander() {
-        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 2 + 1);
         addCard(Zone.COMMAND, playerA, goblin);
         addCard(Zone.HAND, playerA, vision);
 
@@ -67,5 +67,25 @@ public class FreerunningTest extends CardTestCommanderDuelBase {
         execute();
 
         assertHandCount(playerA, 3);
+    }
+
+    @Test
+    public void testNeither() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 5 + 1);
+        addCard(Zone.HAND, playerA, goblin);
+        addCard(Zone.HAND, playerA, vision);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblin);
+
+        attack(1, playerA, goblin, playerB);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, vision);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 3);
+        assertTappedCount("Volcanic Island", true, 5 + 1);
     }
 }
