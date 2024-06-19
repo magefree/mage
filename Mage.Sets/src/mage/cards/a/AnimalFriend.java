@@ -6,16 +6,15 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.AuraAttachedCount;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityWithAttachmentEffect;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SquirrelToken;
@@ -32,6 +31,8 @@ import mage.cards.CardSetInfo;
  */
 public final class AnimalFriend extends CardImpl {
 
+
+
     public AnimalFriend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         
@@ -44,8 +45,6 @@ public final class AnimalFriend extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has "Whenever this creature attacks, create a 1/1 green Squirrel creature token. Put a +1/+1 counter on that token for each Aura and Equipment attached to this creature other than Animal Friend."
-//        Ability ability = new AttacksTriggeredAbility(new AnimalFriendEffect(), false).setTriggerPhrase("Whenever this creature attacks, ");
-//        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
         this.addAbility(new SimpleStaticAbility(new AnimalFriendEffect()));
 
     }
@@ -60,52 +59,16 @@ public final class AnimalFriend extends CardImpl {
     }
 }
 
-class AuraAttachedNotThisCount implements DynamicValue {
-
-    private final UUID ignoreUUID;
-
-    public AuraAttachedNotThisCount(UUID ignoreUUID) {
-        this.ignoreUUID = ignoreUUID;
-    }
-
-    protected AuraAttachedNotThisCount(final AuraAttachedNotThisCount dynamicValue) {
-        this.ignoreUUID = dynamicValue.ignoreUUID;
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int count = 0;
-        Permanent p = game.getPermanent(sourceAbility.getSourceId());
-        if (p != null) {
-            List<UUID> attachments = p.getAttachments();
-            for (UUID attachmentId : attachments) {
-                Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.hasSubtype(SubType.AURA, game)) {
-                    count++;
-                }
-            }
-
-        }
-        return count;
-    }
-
-    @Override
-    public AuraAttachedNotThisCount copy() {
-        return new AuraAttachedNotThisCount(this);
-    }
-
-    @Override
-    public String getMessage() {
-        return "Aura attached to it other than Animal Friend";
-    }
-
-}
-
 class AnimalFriendEffect extends GainAbilityWithAttachmentEffect {
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.AURA);
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     AnimalFriendEffect() {
-        super("create a 1/1 green Squirrel creature token." +
-                        " Put a +1/+1 counter on that token for each Aura and Equipment attached to this creature other than Animal Friend.",
+        super("Enchanted creature has \"Whenever this creature attacks, create a 1/1 green Squirrel creature token. " +
+                        "Put a +1/+1 counter on that token for each Aura and Equipment attached to this creature other than Animal Friend.\"",
                 (Effect) null, null, null);
     }
 
@@ -120,24 +83,27 @@ class AnimalFriendEffect extends GainAbilityWithAttachmentEffect {
 
     @Override
     protected Ability makeAbility(Game game, Ability source) {
-        return new AttacksTriggeredAbility(new AnimalFriendTokenEffect(source.getId()), false).setTriggerPhrase("Whenever this creature attacks, ");
+        if (source == null || game == null) {
+            return null;
+        }
+        return new AttacksTriggeredAbility(new AnimalFriendTokenEffect(source.getSourceId()), false, "");
     }
 }
 
 class AnimalFriendTokenEffect extends OneShotEffect {
 
-    UUID ignoreUUID;
+    UUID auraId;
 
-    AnimalFriendTokenEffect(UUID ignoreUUID) {
+    AnimalFriendTokenEffect(UUID auraId) {
         super(Outcome.PutCreatureInPlay);
+        this.auraId = auraId;
         staticText = "create a 1/1 green Squirrel creature token." +
                 " Put a +1/+1 counter on that token for each Aura and Equipment attached to this creature other than Animal Friend.";
-        this.ignoreUUID = ignoreUUID;
     }
 
     private AnimalFriendTokenEffect(final AnimalFriendTokenEffect effect) {
         super(effect);
-        this.ignoreUUID = effect.ignoreUUID;
+        this.auraId = effect.auraId;
     }
 
     @Override
@@ -147,9 +113,22 @@ class AnimalFriendTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+
         CreateTokenEffect effect = new CreateTokenEffect(new SquirrelToken());
         boolean result = effect.apply(game, source);
-        int auraAmount = new AuraAttachedNotThisCount(ignoreUUID).calculate(game, source, this);
+
+        Permanent p = game.getPermanent(source.getSourceId());
+        int auraAmount = 0;
+        if (p != null) {
+            List<UUID> attachments = p.getAttachments();
+            for (UUID attachmentId : attachments) {
+                Permanent attached = game.getPermanent(attachmentId);
+                if (attached != null && attached.hasSubtype(SubType.AURA, game) && !attachmentId.equals(this.auraId)) {
+                    auraAmount++;
+                }
+            }
+
+        }
         int equipAmount = new EquipmentAttachedCount(1).calculate(game, source, this);
         int xValue = auraAmount + equipAmount;
         if (xValue <= 0 || !result) {
