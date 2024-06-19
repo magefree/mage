@@ -36,6 +36,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Blade", 73, Rarity.UNCOMMON, mage.cards.h.HiddenBlade.class));
         cards.add(new SetCardInfo("Murder", 92, Rarity.COMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Nurturing Peatland", 114, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
+        cards.add(new SetCardInfo("Origin of the Hidden Ones", 36, Rarity.UNCOMMON, mage.cards.o.OriginOfTheHiddenOnes.class));
         cards.add(new SetCardInfo("Raven Clan War-Axe", 297, Rarity.RARE, mage.cards.r.RavenClanWarAxe.class));
         cards.add(new SetCardInfo("Reconstruct History", 97, Rarity.UNCOMMON, mage.cards.r.ReconstructHistory.class));
         cards.add(new SetCardInfo("Rest in Peace", 83, Rarity.RARE, mage.cards.r.RestInPeace.class));
