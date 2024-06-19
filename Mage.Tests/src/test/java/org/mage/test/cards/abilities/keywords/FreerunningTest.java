@@ -24,7 +24,7 @@ public class FreerunningTest extends CardTestCommanderDuelBase {
         execute();
 
         assertHandCount(playerA, 3);
-        assertTapped("Island", true);
+        assertTappedCount("Island", true, 5);
     }
 
     private static final String poisoner = "Hired Poisoner";
