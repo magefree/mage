@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  */
 public abstract class DeckValidator implements Serializable {
 
-    public static final HashSet<String> MAIN_BASIC_LAND_NAMES = new HashSet<>(Arrays.asList(
+    public static final Set<String> MAIN_BASIC_LAND_NAMES = new HashSet<>(Arrays.asList(
             "Plains",
             "Island",
             "Swamp",
@@ -19,7 +19,7 @@ public abstract class DeckValidator implements Serializable {
             "Forest"
     ));
 
-    public static final HashSet<String> ADDITIONAL_BASIC_LAND_NAMES = new HashSet<>(Arrays.asList(
+    public static final Set<String> ADDITIONAL_BASIC_LAND_NAMES = new HashSet<>(Arrays.asList(
             "Wastes",
             "Snow-Covered Plains",
             "Snow-Covered Island",
@@ -29,9 +29,9 @@ public abstract class DeckValidator implements Serializable {
             "Snow-Covered Wastes"
     ));
 
-    public static final HashSet<String> ALL_BASIC_LAND_NAMES = new HashSet<>();
+    public static final Set<String> ALL_BASIC_LAND_NAMES = new HashSet<>();
 
-    {
+    static {
         ALL_BASIC_LAND_NAMES.addAll(MAIN_BASIC_LAND_NAMES);
         ALL_BASIC_LAND_NAMES.addAll(ADDITIONAL_BASIC_LAND_NAMES);
     }
@@ -57,7 +57,7 @@ public abstract class DeckValidator implements Serializable {
     protected String shortName;
     protected List<DeckValidatorError> errorsList = new ArrayList<>();
 
-    public DeckValidator(String name, String shortName) {
+    protected DeckValidator(String name, String shortName) {
         setName(name, shortName);
     }
 
@@ -94,34 +94,29 @@ public abstract class DeckValidator implements Serializable {
 
     /**
      * Get errors list sorted by error type and texts
-     *
-     * @return
      */
     public List<DeckValidatorError> getErrorsListSorted(int maxErrors) {
         List<DeckValidatorError> list = new ArrayList<>(this.getErrorsList());
 
-        list.sort(new Comparator<DeckValidatorError>() {
-            @Override
-            public int compare(DeckValidatorError e1, DeckValidatorError e2) {
-                int res = 0;
+        list.sort((e1, e2) -> {
+            int res = 0;
 
-                // sort by error type
-                Integer order1 = e1.getErrorType().getSortOrder();
-                Integer order2 = e2.getErrorType().getSortOrder();
-                res = order1.compareTo(order2);
+            // sort by error type
+            Integer order1 = e1.getErrorType().getSortOrder();
+            Integer order2 = e2.getErrorType().getSortOrder();
+            res = order1.compareTo(order2);
 
-                // sort by group
-                if (res == 0) {
-                    res = e1.getGroup().compareTo(e2.getGroup());
-                }
-
-                // sort by message
-                if (res == 0) {
-                    res = e1.getMessage().compareTo(e2.getMessage());
-                }
-
-                return res;
+            // sort by group
+            if (res == 0) {
+                res = e1.getGroup().compareTo(e2.getGroup());
             }
+
+            // sort by message
+            if (res == 0) {
+                res = e1.getMessage().compareTo(e2.getMessage());
+            }
+
+            return res;
         });
 
         if (list.size() <= maxErrors) {
@@ -163,7 +158,7 @@ public abstract class DeckValidator implements Serializable {
     }
 
     public boolean isPartlyValid() {
-        return errorsList.size() == 0 || !errorsList.stream().anyMatch(e -> !e.getErrorType().isPartlyLegal());
+        return errorsList.isEmpty() || errorsList.stream().allMatch(e -> e.getErrorType().isPartlyLegal());
     }
 
     protected void countCards(Map<String, Integer> counts, Collection<Card> cards) {
@@ -184,7 +179,7 @@ public abstract class DeckValidator implements Serializable {
 
     public abstract int getSideboardMinSize();
 
-    protected static final int getMaxCopies(String name, int defaultAmount) {
+    protected static int getMaxCopies(String name, int defaultAmount) {
         return maxCopiesMap.getOrDefault(name, defaultAmount);
     }
 }
