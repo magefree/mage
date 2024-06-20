@@ -23,7 +23,6 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author grimreap124
  */
 public final class LeonardoDaVinci extends CardImpl {
