@@ -34,6 +34,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Coastal Piracy", 84, Rarity.UNCOMMON, mage.cards.c.CoastalPiracy.class));
         cards.add(new SetCardInfo("Conspiracy", 88, Rarity.RARE, mage.cards.c.Conspiracy.class));
         cards.add(new SetCardInfo("Cover of Darkness", 89, Rarity.RARE, mage.cards.c.CoverOfDarkness.class));
+        cards.add(new SetCardInfo("Desynchronization", 16, Rarity.RARE, mage.cards.d.Desynchronization.class));
         cards.add(new SetCardInfo("Eagle Vision", 17, Rarity.UNCOMMON, mage.cards.e.EagleVision.class));
         cards.add(new SetCardInfo("Eivor, Battle-Ready", 274, Rarity.MYTHIC, mage.cards.e.EivorBattleReady.class));
         cards.add(new SetCardInfo("Escarpment Fortress", 278, Rarity.RARE, mage.cards.e.EscarpmentFortress.class));
