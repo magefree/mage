@@ -1,25 +1,18 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -53,10 +46,10 @@ public final class SurgicalExtraction extends CardImpl {
     }
 }
 
-class SurgicalExtractionEffect extends OneShotEffect {
+class SurgicalExtractionEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
     SurgicalExtractionEffect() {
-        super(Outcome.Detriment);
+        super(true, "its owner's", "any number of cards with the same name as that card");
         this.staticText = "Choose target card in a graveyard other than a basic land card. "
                 + "Search its owner's graveyard, hand, and library for any number of cards "
                 + "with the same name as that card and exile them. Then that player shuffles";
@@ -73,68 +66,10 @@ class SurgicalExtractionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // 6/1/2011 	"Any number of cards" means just that. If you wish, you can choose to
-        //              leave some or all of the cards with the same name as the targeted card,
-        //              including that card, in the zone they're in.
-
-        Card chosenCard = game.getCard(source.getFirstTarget());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (chosenCard != null && controller != null) {
-            Player owner = game.getPlayer(chosenCard.getOwnerId());
-            if (owner != null) {
-                String nameToSearch = CardUtil.getCardNameForSameNameSearch(chosenCard);
-                FilterCard filterNamedCard = new FilterCard("card named " + nameToSearch);
-                filterNamedCard.add(new NamePredicate(nameToSearch));
-
-                // cards in Graveyard
-                int cardsCount = owner.getGraveyard().count(filterNamedCard, game);
-                if (cardsCount > 0) {
-                    filterNamedCard.setMessage("card named " + nameToSearch
-                            + " in the graveyard of " + owner.getName());
-                    TargetCardInGraveyard target = new TargetCardInGraveyard(0, cardsCount, filterNamedCard);
-                    if (controller.chooseTarget(Outcome.Exile, owner.getGraveyard(), target, source, game)) {
-                        List<UUID> targets = target.getTargets();
-                        for (UUID targetId : targets) {
-                            Card targetCard = owner.getGraveyard().get(targetId, game);
-                            if (targetCard != null) {
-                                controller.moveCardToExileWithInfo(targetCard, null,
-                                        "", source, game, Zone.GRAVEYARD, true);
-                            }
-                        }
-                    }
-                }
-
-                // cards in Hand
-                filterNamedCard.setMessage("card named " + nameToSearch + " in the hand of " + owner.getName());
-                TargetCard targetCardInHand = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, filterNamedCard);
-                targetCardInHand.withNotTarget(true);
-                if (controller.chooseTarget(Outcome.Exile, owner.getHand(), targetCardInHand, source, game)) {
-                    List<UUID> targets = targetCardInHand.getTargets();
-                    for (UUID targetId : targets) {
-                        Card targetCard = owner.getHand().get(targetId, game);
-                        if (targetCard != null) {
-                            controller.moveCardToExileWithInfo(targetCard, null, "", source, game, Zone.HAND, true);
-                        }
-                    }
-                }
-
-                // cards in Library
-                filterNamedCard.setMessage("card named " + nameToSearch + " in the library of " + owner.getName());
-                TargetCardInLibrary targetCardInLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCard);
-                if (controller.searchLibrary(targetCardInLibrary, source, game, owner.getId())) {
-                    List<UUID> targets = targetCardInLibrary.getTargets();
-                    for (UUID targetId : targets) {
-                        Card targetCard = owner.getLibrary().getCard(targetId, game);
-                        if (targetCard != null) {
-                            controller.moveCardToExileWithInfo(targetCard, null, "", source, game, Zone.LIBRARY, true);
-                        }
-                    }
-                }
-                owner.shuffleLibrary(source, game);
-                return true;
-            }
+        Card chosenCard = game.getCard(getTargetPointer().getFirst(game, source));
+        if (chosenCard != null) {
+            return applySearchAndExile(game, source, CardUtil.getCardNameForSameNameSearch(chosenCard), chosenCard.getOwnerId());
         }
-
         return false;
     }
 }

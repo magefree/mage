@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -11,6 +10,8 @@ import mage.game.stack.StackObject;
 import mage.target.TargetSpell;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -20,11 +21,15 @@ public class CounterTargetAndSearchGraveyardHandLibraryEffect extends SearchTarg
 
 
     public CounterTargetAndSearchGraveyardHandLibraryEffect() {
-        this(false,"its controller's", "all cards with the same name as that spell" );
+        this(false, "its controller's", "all cards with the same name as that spell");
     }
 
     public CounterTargetAndSearchGraveyardHandLibraryEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText) {
         super(graveyardExileOptional, searchWhatText, searchForText);
+    }
+
+    public CounterTargetAndSearchGraveyardHandLibraryEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText, boolean drawForEachHandCard) {
+        super(graveyardExileOptional, searchWhatText, searchForText, drawForEachHandCard, false);
     }
 
     protected CounterTargetAndSearchGraveyardHandLibraryEffect(final CounterTargetAndSearchGraveyardHandLibraryEffect effect) {
