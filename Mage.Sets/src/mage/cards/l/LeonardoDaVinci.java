@@ -46,7 +46,9 @@ public final class LeonardoDaVinci extends CardImpl {
 
         DynamicValue xValue = CardsInControllerHandCount.instance;
         // {3}{U}{U}: Until end of turn, Thopters you control have base power and toughness X/X, where X is the number of cards in your hand.
-        this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, filter, false),
+        this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, filter, false).setText(
+                "Until end of turn, Thopters you control have base power and toughness X/X, where X is the number of cards in your hand."
+        ),
                 new ManaCostsImpl<>("{3}{U}{U}")));
 
         // {2}{U}, {T}: Draw a card, then discard a card. If the discarded card was an artifact card, exile it from your graveyard.
