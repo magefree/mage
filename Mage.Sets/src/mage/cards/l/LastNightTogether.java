@@ -4,8 +4,8 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.combat.CantAttackAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -18,13 +18,16 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TurnPhase;
 import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -58,6 +61,7 @@ public final class LastNightTogether extends CardImpl {
     }
 }
 
+//Based on AddCombatAndMainPhaseEffect
 class LastNightTogetherEffect extends OneShotEffect {
 
     LastNightTogetherEffect() {
@@ -83,7 +87,7 @@ class LastNightTogetherEffect extends OneShotEffect {
             TurnMod combat = new TurnMod(game.getState().getActivePlayerId()).withExtraPhase(TurnPhase.COMBAT);
             game.getState().getTurnMods().add(combat);
             List<UUID> targets = source.getTargets().get(0).getTargets();
-            DelayedCantAttackAbility delayedTriggeredAbility = new DelayedCantAttackAbility(targets, game, combat.getId());
+            LastNightTogetherDelayedCantAttackAbility delayedTriggeredAbility = new LastNightTogetherDelayedCantAttackAbility(targets, game, combat.getId());
             game.addDelayedTriggeredAbility(delayedTriggeredAbility, source);
             return true;
         }
@@ -92,24 +96,28 @@ class LastNightTogetherEffect extends OneShotEffect {
 
 }
 
-class DelayedCantAttackAbility extends DelayedTriggeredAbility {
+class LastNightTogetherDelayedCantAttackAbility extends DelayedTriggeredAbility {
 
-    private UUID connectedTurnMod;
+    private final UUID connectedTurnMod;
 
-    public DelayedCantAttackAbility(List<UUID> targets, Game game, UUID connectedTurnMod) {
-        super(new LastNightTogetherRestrictionEffect(targets, game), Duration.EndOfCombat);
+    public LastNightTogetherDelayedCantAttackAbility(List<UUID> targets, Game game, UUID connectedTurnMod) {
+        super(null, Duration.EndOfTurn);
+        FilterCreaturePermanent filterRestriction = new FilterCreaturePermanent();
+        Set<MageObjectReference> targetRefs = targets.stream().map(x -> new MageObjectReference(x, game)).collect(Collectors.toSet());
+        filterRestriction.add(Predicates.not(new PermanentReferenceInCollectionPredicate(targetRefs)));
+        this.addEffect(new CantAttackAllEffect(Duration.EndOfCombat, filterRestriction));
         this.usesStack = false; // don't show this to the user
         this.connectedTurnMod = connectedTurnMod;
     }
 
-    public DelayedCantAttackAbility(DelayedCantAttackAbility ability) {
+    public LastNightTogetherDelayedCantAttackAbility(LastNightTogetherDelayedCantAttackAbility ability) {
         super(ability);
         this.connectedTurnMod = ability.connectedTurnMod;
     }
 
     @Override
-    public DelayedCantAttackAbility copy() {
-        return new DelayedCantAttackAbility(this);
+    public LastNightTogetherDelayedCantAttackAbility copy() {
+        return new LastNightTogetherDelayedCantAttackAbility(this);
     }
 
     @Override
@@ -126,36 +134,4 @@ class DelayedCantAttackAbility extends DelayedTriggeredAbility {
     public String getRule() {
         return "Only the chosen creatures can attack during that combat phase";
     }
-}
-
-class LastNightTogetherRestrictionEffect extends RestrictionEffect {
-
-    private final List<MageObjectReference> targets;
-
-    public LastNightTogetherRestrictionEffect(List<UUID> targets, Game game) {
-        super(Duration.EndOfCombat, Outcome.Benefit);
-        this.targets = targets.stream().map(x -> new MageObjectReference(x, game)).collect(Collectors.toList());
-        staticText = "Only the chosen creatures can attack during that combat phase";
-    }
-
-    private LastNightTogetherRestrictionEffect(final LastNightTogetherRestrictionEffect effect) {
-        super(effect);
-        this.targets = effect.targets;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return targets.stream().noneMatch(x -> x.refersTo(permanent, game));
-    }
-
-    @Override
-    public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        return false;
-    }
-
-    @Override
-    public LastNightTogetherRestrictionEffect copy() {
-        return new LastNightTogetherRestrictionEffect(this);
-    }
-
 }
