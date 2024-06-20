@@ -2212,7 +2212,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         mutatedOverList.addAll(prevMutatedOverList);
-        applyMutateUnder(permanent, game);
+
+        permanent.setMutatedUnder(this);
+        mutatedOverList.add(0, permanent);
+        if (permanent instanceof PermanentImpl) {
+            for (Ability ability : ((PermanentImpl) permanent).abilities) {
+                ability.setSourceId(getId());
+            }
+        }
 
         ownerId = permanent.getOwnerId();
         spellAbility = null; // will be set on first getSpellAbility call if card has one
