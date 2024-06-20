@@ -4,6 +4,8 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 import mage.watchers.common.PlayersAttackedThisTurnWatcher;
 
@@ -14,6 +16,7 @@ import mage.watchers.common.PlayersAttackedThisTurnWatcher;
  */
 public enum AttackedThisTurnOpponentsCount implements DynamicValue {
     instance;
+    private static final Hint hint = new ValueHint("the number of opponents you attacked this turn", instance);
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -37,5 +40,9 @@ public enum AttackedThisTurnOpponentsCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "the number of opponents you attacked this turn";
+    }
+
+    public static Hint getHint() {
+        return hint;
     }
 }

@@ -10,7 +10,6 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.AttackedThisTurnOpponentsCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.mana.AddManaToManaPoolSourceControllerEffect;
-import mage.abilities.hint.common.RaidHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,7 +51,7 @@ public final class RoseCutthroatRaider extends CardImpl {
                 new CreateTokenEffect(new JunkToken(), AttackedThisTurnOpponentsCount.instance), false), RaidCondition.instance,
                 "At end of combat on your turn, if you attacked this turn, create a Junk token for each opponent you attacked.");
         ability.setAbilityWord(AbilityWord.RAID);
-        ability.addHint(RaidHint.instance);
+        ability.addHint(AttackedThisTurnOpponentsCount.getHint());
         ability.addWatcher(new PlayerAttackedWatcher());
         ability.addWatcher(new PlayersAttackedThisTurnWatcher());
         this.addAbility(ability);
