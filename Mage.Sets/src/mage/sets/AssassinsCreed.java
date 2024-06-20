@@ -45,6 +45,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Islet", 112, Rarity.RARE, mage.cards.f.FieryIslet.class));
         cards.add(new SetCardInfo("Go for the Throat", 91, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Haystack", 5, Rarity.UNCOMMON, mage.cards.h.Haystack.class));
+        cards.add(new SetCardInfo("Headsplitter", 289, Rarity.COMMON, mage.cards.h.Headsplitter.class));
         cards.add(new SetCardInfo("Hidden Blade", 73, Rarity.UNCOMMON, mage.cards.h.HiddenBlade.class));
         cards.add(new SetCardInfo("Hired Blade", 299, Rarity.COMMON, mage.cards.h.HiredBlade.class));
         cards.add(new SetCardInfo("Hookblade Veteran", 283, Rarity.COMMON, mage.cards.h.HookbladeVeteran.class));
