@@ -97,6 +97,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Curious Cadaver", 194, Rarity.UNCOMMON, mage.cards.c.CuriousCadaver.class));
         cards.add(new SetCardInfo("Curious Inquiry", 51, Rarity.UNCOMMON, mage.cards.c.CuriousInquiry.class));
         cards.add(new SetCardInfo("Deadly Complication", 195, Rarity.UNCOMMON, mage.cards.d.DeadlyComplication.class));
+        cards.add(new SetCardInfo("Deadly Cover-Up", 83, Rarity.RARE, mage.cards.d.DeadlyCoverUp.class));
         cards.add(new SetCardInfo("Deduce", 52, Rarity.COMMON, mage.cards.d.Deduce.class));
         cards.add(new SetCardInfo("Defenestrated Phantom", 11, Rarity.COMMON, mage.cards.d.DefenestratedPhantom.class));
         cards.add(new SetCardInfo("Delney, Streetwise Lookout", 12, Rarity.MYTHIC, mage.cards.d.DelneyStreetwiseLookout.class));
