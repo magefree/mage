@@ -491,7 +491,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // TODO: what about triggered abilities? See addAbility above -- triggers adds to GameState
         abilities.clear();
         getMutatedOverList().forEach(p -> ((PermanentImpl) p).abilities.clear());
-        game.getState().getTriggers().removeAbilitiesOfSource(this.getId()); // required to remove mutate triggers
     }
 
     @Override
