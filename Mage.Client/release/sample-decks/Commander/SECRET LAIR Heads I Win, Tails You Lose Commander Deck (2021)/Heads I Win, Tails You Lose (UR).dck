@@ -1,0 +1,89 @@
+1 [TSP:269] Academy Ruins
+1 [ELD:331] Arcane Signet
+1 [ISD:130] Blasphemous Act
+1 [VOC:144] Bloodsworn Steward
+1 [CMM:371] Boompile
+1 [M12:224] Buried Ruin
+1 [EVE:175] Cascade Bluffs
+1 [ODY:182] Chance Encounter
+1 [ORI:137] Chandra's Ignition
+1 [OTC:160] Chaos Warp
+1 [ELD:333] Command Tower
+1 [CMR:305] Commander's Plate
+1 [7ED:67] Counterspell
+1 [MMQ:291] Crooked Scales
+1 [CMM:213] Daretti, Scrap Savant
+1 [AVR:227] Desolate Lighthouse
+1 [ELD:120] Embercleave
+1 [CON:142] Exotic Orchard
+1 [M10:52] Fabricate
+1 [MRD:90] Fiery Gambit
+1 [CM2:251] Flamekin Village
+1 [IKO:118] Footfall Crater
+1 [PLC:157] Frenetic Sliver
+1 [USG:188] Gamble
+1 [DST:63] Goblin Archaeologist
+1 [J21:458] Goblin Engineer
+1 [M15:144] Goblin Kaboomist
+1 [MRD:282] Great Furnace
+1 [ODY:197] Impulsive Maneuvers
+1 [KLD:247] Inventors' Fair
+7 [OTJ:273] Island
+1 [CLU:239] Izzet Boilerworks
+1 [CLU:224] Izzet Signet
+1 [CSP:86] Karplusan Minotaur
+1 [MRD:190] Krark's Thumb
+1 [CMR:189] Krark, the Thumbless
+1 [MRD:199] Lightning Greaves
+1 [SCG:38] Long-Term Plans
+1 [10E:335] Mind Stone
+1 [RNA:108] Mirror March
+1 [EXO:88] Mogg Assassin
+8 [BLB:274] Mountain
+1 [RAV:60] Muddle the Mixture
+1 [M3C:358] Myriad Landscape
+1 [MOM:68] Negate
+1 [GRN:192] Niv-Mizzet, Parun
+1 [M3C:363] Path of Ancestry
+1 [JUD:97] Planar Chaos
+1 [M12:73] Ponder
+1 [M11:70] Preordain
+1 [TMP:80] Propaganda
+1 [DGM:94] Ral Zarek
+1 [M19:254] Reliquary Tower
+1 [DST:31] Reshape
+1 [ONS:223] Risky Move
+1 [ORI:250] Rogue's Passage
+1 [SOK:53] Sakashima the Impostor
+1 [ODY:220] Seize the Day
+1 [5DN:36] Serum Visions
+1 [THB:236] Shadowspear
+1 [DMU:255] Shivan Reef
+1 [OGW:47] Slip Through Space
+1 [SUM:274] Sol Ring
+1 [WAR:68] Spark Double
+1 [LRW:274] Spinerock Knoll
+1 [APC:123] Squee's Revenge
+1 [GPT:132] Stitch in Time
+1 [DOM:247] Sulfur Falls
+1 [M12:219] Swiftfoot Boots
+1 [M11:216] Sword of Vengeance
+1 [M3C:308] Talisman of Creativity
+1 [MH2:144] Tavern Scoundrel
+1 [M21:252] Temple of Epiphany
+1 [SCG:143] Temple of the False God
+1 [FRF:116] Temur Battle Rage
+1 [HOU:139] The Locust God
+1 [PIP:251] Thought Vessel
+1 [FUT:173] Tolaria West
+1 [CMM:434] Training Center
+1 [H1R:10] Tribute Mage
+1 [RTR:111] Vandalblast
+1 [OGW:182] Wandering Fumarole
+1 [AER:49] Whir of Invention
+1 [M11:221] Whispersilk Cloak
+1 [MH2:218] Yusri, Fortune's Flame
+SB: 1 [SLD:380] Okaun, Eye of Chaos
+SB: 1 [SLD:379] Zndrsplt, Eye of Wisdom
+LAYOUT MAIN:(1,8)(CARD_TYPE,false,61)|([MRD:282])([ELD:331],[CMM:371],[CMR:305],[MMQ:291],[ELD:120],[CLU:224],[MRD:190],[MRD:199],[10E:335],[THB:236],[SUM:274],[M12:219],[M11:216],[M3C:308],[PIP:251],[M11:221])([VOC:144],[PLC:157],[DST:63],[J21:458],[M15:144],[CSP:86],[CMR:189],[EXO:88],[GRN:192],[SOK:53],[WAR:68],[MH2:144],[HOU:139],[H1R:10],[MH2:218])([ODY:182],[IKO:118],[ODY:197],[RNA:108],[JUD:97],[TMP:80],[ONS:223])([OTC:160],[7ED:67],[SCG:38],[RAV:60],[MOM:68],[FRF:116],[AER:49])([TSP:269],[M12:224],[EVE:175],[ELD:333],[AVR:227],[CON:142],[CM2:251],[KLD:247],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[CLU:239],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[M3C:358],[M3C:363],[M19:254],[ORI:250],[DMU:255],[LRW:274],[DOM:247],[M21:252],[SCG:143],[FUT:173],[CMM:434],[OGW:182])([CMM:213],[DGM:94])([ISD:130],[ORI:137],[M10:52],[MRD:90],[USG:188],[M12:73],[M11:70],[DST:31],[ODY:220],[5DN:36],[OGW:47],[APC:123],[GPT:132],[RTR:111])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([SLD:380],[SLD:379])
