@@ -75,6 +75,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Settlement Blacksmith", 280, Rarity.UNCOMMON, mage.cards.s.SettlementBlacksmith.class));
         cards.add(new SetCardInfo("Silent Clearing", 115, Rarity.RARE, mage.cards.s.SilentClearing.class));
         cards.add(new SetCardInfo("Smoke Bomb", 75, Rarity.UNCOMMON, mage.cards.s.SmokeBomb.class));
+        cards.add(new SetCardInfo("Spartan Veteran", 292, Rarity.COMMON, mage.cards.s.SpartanVeteran.class));
         cards.add(new SetCardInfo("Stone Quarry", 300, Rarity.UNCOMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Submerged Boneyard", 301, Rarity.UNCOMMON, mage.cards.s.SubmergedBoneyard.class));
         cards.add(new SetCardInfo("Sunbaked Canyon", 111, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
