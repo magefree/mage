@@ -3,15 +3,8 @@ package mage.cards.t;
 import java.util.UUID;
 
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.FightTargetsEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.constants.Duration;
 import mage.constants.SagaChapter;
@@ -21,8 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
@@ -30,9 +21,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -72,9 +61,8 @@ public final class TheRevelationsOfEzio extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 ability -> {
-                    ability.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+                    ability.addEffect(new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.P1P1.createInstance(), true));
                     ability.addTarget(new TargetCardInYourGraveyard(assassinFilter).withTargetName(assassinFilter.getMessage() + " from your graveyard"));
-                    ability.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("with an additional +1/+1 counter on it"));
                 }
         );
 
