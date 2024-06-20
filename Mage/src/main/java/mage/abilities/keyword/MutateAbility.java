@@ -71,7 +71,7 @@ public class MutateAbility extends SpellAbility {
                 SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.MUTATE);
         this.timing = TimingRule.SORCERY;
         this.addTarget(new TargetCreaturePermanent(filter));
-        this.addHint(MutateCountHint.instance);
+        this.addHint(new MutateCountHint());
     }
 
     private MutateAbility(final MutateAbility ability) {
@@ -110,9 +110,7 @@ public class MutateAbility extends SpellAbility {
 
 class MutateCountHint extends ValueHint {
 
-    static final MutateCountHint instance = new MutateCountHint();
-
-    private MutateCountHint() {
+    MutateCountHint() {
         super("Number of times {this} has mutated", SourceMutatedCount.instance);
     }
 
@@ -122,6 +120,15 @@ class MutateCountHint extends ValueHint {
             return ""; // only visible on battlefield
         }
         return super.getText(game, ability);
+    }
+
+    private MutateCountHint(final MutateCountHint hint) {
+        super(hint);
+    }
+
+    @Override
+    public MutateCountHint copy() {
+        return new MutateCountHint(this);
     }
 
 }
