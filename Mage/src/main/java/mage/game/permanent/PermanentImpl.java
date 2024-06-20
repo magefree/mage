@@ -2182,6 +2182,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return mutatedUnder;
     }
 
+    /**
+     * Mutates the given permanent underneath this one, reassigning all its abilities to this
+     */
     @Override
     public boolean applyMutateUnder(Permanent permanent, Game game) {
         permanent.setMutatedUnder(this);
@@ -2194,11 +2197,19 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return true;
     }
 
+    /**
+     * Mutates this permanent on top of the given permanent, reassigning all its abilities/qualities to this
+     */
     @Override
     public boolean applyMutateOver(Permanent permanent, Game game) {
         List<Permanent> prevMutatedOverList = permanent.getMutatedOverList();
         for (Permanent under : prevMutatedOverList) {
             under.setMutatedUnder(this); // This will also clear the previous permanent's mutatedOverList
+            if (under instanceof PermanentImpl) {
+                for (Ability ability : ((PermanentImpl) under).abilities) {
+                    ability.setSourceId(getId()); // need to transfer abilities from permanents under that one at this time
+                }
+            }
         }
         mutatedOverList.addAll(prevMutatedOverList);
         applyMutateUnder(permanent, game);
@@ -2208,7 +2219,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         attachments.addAll(permanent.getAttachments());
         permanent.getAttachments().clear();
-
         for (UUID attachmentId : attachments) {
             Permanent attachment = game.getPermanent(attachmentId);
             if (attachment instanceof PermanentImpl) {
@@ -2221,12 +2231,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         if (permanent instanceof PermanentImpl) {
             PermanentImpl permanentImpl = (PermanentImpl) permanent;
-
-            for (Ability ability : permanentImpl.abilities) {
-                ability.setSourceId(getId());
-            }
-
-            morphCard = permanentImpl.morphCard;
 
             this.tapped = permanentImpl.tapped;
             this.originalControllerId = permanentImpl.originalControllerId;
@@ -2277,8 +2281,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
 
             this.attachedToZoneChangeCounter = permanentImpl.attachedToZoneChangeCounter;
-            this.minBlockedBy = permanentImpl.minBlockedBy;
-            this.maxBlockedBy = permanentImpl.maxBlockedBy;
             this.monstrous = permanentImpl.monstrous;
             this.renowned = permanentImpl.renowned;
             this.classLevel = permanentImpl.classLevel;
@@ -2294,9 +2296,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
             this.bandedCards.addAll(permanentImpl.bandedCards);
             permanentImpl.bandedCards.clear();
-
-            this.goadingPlayers.addAll(permanentImpl.goadingPlayers);
-            permanentImpl.goadingPlayers.clear();
         }
 
         return true;
