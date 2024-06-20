@@ -20,6 +20,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.game.permanent.token.JunkToken;
+import mage.watchers.common.PlayerAttackedWatcher;
 import mage.watchers.common.PlayersAttackedThisTurnWatcher;
 
 import java.util.UUID;
@@ -29,7 +30,7 @@ import java.util.UUID;
  */
 public final class RoseCutthroatRaider extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a junk");
+    private static final FilterPermanent filter = new FilterPermanent("a Junk");
 
     static {
         filter.add(SubType.JUNK.getPredicate());
@@ -52,7 +53,9 @@ public final class RoseCutthroatRaider extends CardImpl {
                 "At end of combat on your turn, if you attacked this turn, create a Junk token for each opponent you attacked.");
         ability.setAbilityWord(AbilityWord.RAID);
         ability.addHint(RaidHint.instance);
-        this.addAbility(ability, new PlayersAttackedThisTurnWatcher());
+        ability.addWatcher(new PlayerAttackedWatcher());
+        ability.addWatcher(new PlayersAttackedThisTurnWatcher());
+        this.addAbility(ability);
 
         // Whenever you sacrifice a Junk, add {R}.
         this.addAbility(new SacrificePermanentTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(Mana.RedMana(1)), filter));

@@ -59,7 +59,7 @@ class ReturnThePastEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || game.getActivePlayerId() == source.getControllerId()) {
+        if (player == null || game.getActivePlayerId() != source.getControllerId()) {
             return false;
         }
         for (Card card : player.getGraveyard().getCards(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, game)) {

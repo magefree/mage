@@ -24,10 +24,9 @@ public final class NanogeneConversion extends CardImpl {
 
     public NanogeneConversion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
-        
 
         // Choose target creature you control. Each other creature becomes a copy of that creature until end of turn, except it isn't legendary.
-
+        this.getSpellAbility().addEffect(new NanogeneConversionEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
