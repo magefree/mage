@@ -14,7 +14,7 @@ import mage.game.command.Emblem;
 public final class TheCapitolineTriadEmblem extends Emblem {
 
     public TheCapitolineTriadEmblem() {
-        super("Emblem The Capitoline Triad");
+        super("Emblem Capitoline Triad");
         // You get an emblem with "Creatures you control have base power and toughness 9/9."
         Ability ability = new SimpleStaticAbility(Zone.COMMAND,
                 new SetBasePowerToughnessAllEffect(9, 9, Duration.EndOfGame, StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED).setText("Creatures you control have base power and toughness 9/9."));
