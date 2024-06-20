@@ -3,27 +3,61 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.hint.ConditionHint;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
-import mage.watchers.common.CelebrationWatcher;
+import mage.game.permanent.Permanent;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
+
+import java.util.List;
 
 /**
  * @author Susucr
  */
 public enum CelebrationCondition implements Condition {
     instance;
-    private static final Hint hint = new ConditionHint(instance, "You had two or more nonland permanents enter this turn");
+    private static final Hint hint = new ValueHint("Creatures that entered under your control this turn", CelebrationNonlandsThatEnteredThisTurnCount.instance);
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CelebrationWatcher watcher = game.getState().getWatcher(CelebrationWatcher.class);
-        return watcher != null && watcher.celebrationActive(source.getControllerId());
+        return CelebrationNonlandsThatEnteredThisTurnCount.instance.calculate(game, source, null) >= 2;
     }
 
     @Override
     public String toString() {
         return "two or more nonland permanents entered the battlefield under your control this turn";
+    }
+
+    public static Hint getHint() {
+        return hint;
+    }
+}
+
+enum CelebrationNonlandsThatEnteredThisTurnCount implements DynamicValue {
+    instance;
+
+    private static final Hint hint = new ValueHint("Nonland permanents that entered under your control this turn", instance);
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        PermanentsEnteredBattlefieldWatcher watcher = game.getState().getWatcher(PermanentsEnteredBattlefieldWatcher.class);
+        if (watcher != null) {
+            List<Permanent> list = watcher.getThisTurnEnteringPermanents(sourceAbility.getControllerId());
+            return (int) list.stream().filter(x -> !x.isLand(game)).count();
+        }
+        return 0;
+    }
+
+    @Override
+    public DynamicValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "creatures that attacked this turn";
     }
 
     public static Hint getHint() {
