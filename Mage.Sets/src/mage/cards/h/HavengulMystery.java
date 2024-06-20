@@ -40,7 +40,7 @@ public final class HavengulMystery extends CardImpl {
 
         // When this land transforms into Havengul Mystery, return target creature card from your graveyard to the battlefield.
         Ability ability = new TransformIntoSourceTriggeredAbility(new HavengulMysteryEffect())
-                .setTriggerPhrase("When this land transforms into {this}");
+                .setTriggerPhrase("When this land transforms into {this}, ");
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
