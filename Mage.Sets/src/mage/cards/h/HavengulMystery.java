@@ -3,6 +3,7 @@ package mage.cards.h;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -25,7 +26,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 
 /**
  * @author TheElk801
@@ -39,7 +39,8 @@ public final class HavengulMystery extends CardImpl {
         this.nightCard = true;
 
         // When this land transforms into Havengul Mystery, return target creature card from your graveyard to the battlefield.
-        Ability ability = new TransformIntoSourceTriggeredAbility(new HavengulMysteryEffect());
+        Ability ability = new TransformIntoSourceTriggeredAbility(new HavengulMysteryEffect())
+                .setTriggerPhrase("When this land transforms into {this}");
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
 

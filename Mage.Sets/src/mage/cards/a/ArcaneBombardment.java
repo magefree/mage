@@ -63,7 +63,7 @@ class ArcaneBombardmentEffect extends OneShotEffect {
     ArcaneBombardmentEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "exile an instant or sorcery card at random from your graveyard. "
-                + "Then copy each card exiled with {this}, and you may cast any number of the copies without paying their mana costs.";
+                + "Then copy each card exiled with {this}. You may cast any number of the copies without paying their mana costs.";
     }
 
     private ArcaneBombardmentEffect(final ArcaneBombardmentEffect effect) {
