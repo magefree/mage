@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.AssassinToken3;
+import mage.game.permanent.token.AssassinMenaceToken;
 
 /**
  *
@@ -21,7 +21,7 @@ public final class RooftopBypass extends CardImpl {
         
 
         // Whenever one or more nontoken creatures you control deal combat damage to a player, create a 1/1 black Assassin creature token with menace.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new CreateTokenEffect(new AssassinToken3()),
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new CreateTokenEffect(new AssassinMenaceToken()),
                 StaticFilters.FILTER_CONTROLLED_CREATURES_NON_TOKEN));
     }
 
