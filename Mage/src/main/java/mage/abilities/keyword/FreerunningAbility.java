@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeSourceCostsImpl;
+import mage.abilities.costs.Cost;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.constants.SubType;
@@ -29,6 +30,13 @@ public class FreerunningAbility extends AlternativeSourceCostsImpl {
 
     public FreerunningAbility(String manaString) {
         super(FREERUNNING_KEYWORD, FREERUNNING_REMINDER, manaString);
+        this.setRuleAtTheTop(true);
+        this.addWatcher(new FreerunningWatcher());
+        this.addHint(FreerunningCondition.getHint());
+    }
+
+    public FreerunningAbility(Cost cost) {
+        super(FREERUNNING_KEYWORD, FREERUNNING_REMINDER, cost);
         this.setRuleAtTheTop(true);
         this.addWatcher(new FreerunningWatcher());
         this.addHint(FreerunningCondition.getHint());
