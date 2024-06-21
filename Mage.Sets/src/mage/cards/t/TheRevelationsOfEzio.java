@@ -33,7 +33,7 @@ public final class TheRevelationsOfEzio extends CardImpl {
     private static final FilterCreaturePermanent filter
             = new FilterOpponentsCreaturePermanent("tapped creature an opponent controls");
     private static final FilterCard assassinFilter
-            = new FilterCreatureCard("Assassin creature card");
+            = new FilterCreatureCard("Assassin creature card from your graveyard");
 
     static {
         assassinFilter.add(SubType.ASSASSIN.getPredicate());
@@ -62,7 +62,7 @@ public final class TheRevelationsOfEzio extends CardImpl {
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 ability -> {
                     ability.addEffect(new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.P1P1.createInstance(), true));
-                    ability.addTarget(new TargetCardInYourGraveyard(assassinFilter).withTargetName(assassinFilter.getMessage() + " from your graveyard"));
+                    ability.addTarget(new TargetCardInYourGraveyard(assassinFilter));
                 }
         );
 
