@@ -83,6 +83,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getName());
                     TargetCard target = new TargetCard((graveyardExileOptional ? 0 : cardsCount), cardsCount, Zone.GRAVEYARD, filter);
+                    target.withNotTarget(true);
                     if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, source, game)) {
                         maxRemaining -= target.getTargets().size();
                         controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
@@ -93,6 +94,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 cardsCount = Math.min(targetPlayer.getHand().count(filter, game), maxRemaining);
                 filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getName());
                 TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
+                target.withNotTarget(true);
                 if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, source, game)) {
                     maxRemaining -= target.getTargets().size();
                     if (drawForEachHandCard) {
@@ -107,6 +109,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 cardsCount = Math.min(cardsInLibrary.count(filter, game), maxRemaining);
                 filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
                 TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsCount, filter);
+                target.withNotTarget(true);
                 if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, source, game)) {
                     maxRemaining -= target.getTargets().size();
                     controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);

@@ -35,9 +35,9 @@ public class SurgicalExtractionTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Surgical Extraction", "Breaking // Entering");
         setChoice(playerA, "Yes"); // Pay 2 life to cast instead of {B}
-        addTarget(playerA, "Breaking // Entering^Breaking // Entering"); // Graveyard
-        addTarget(playerA, "Breaking // Entering"); // Hand
-        addTarget(playerA, "Breaking // Entering"); // Library
+        setChoice(playerA, "Breaking // Entering^Breaking // Entering"); // Graveyard
+        setChoice(playerA, "Breaking // Entering"); // Hand
+        setChoice(playerA, "Breaking // Entering"); // Library
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
