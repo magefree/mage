@@ -41,7 +41,7 @@ public final class LostLegacy extends CardImpl {
 class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
     LostLegacyEffect() {
-        super(true, "target player's", "any number of cards with that name", true, false);
+        super(true, "target player's", "any number of cards with that name", true);
     }
 
     private LostLegacyEffect(final LostLegacyEffect effect) {

@@ -10,6 +10,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -51,7 +52,7 @@ public final class DeadlyCoverUp extends CardImpl {
 class DeadlyCoverUpEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
     DeadlyCoverUpEffect() {
-        super(true, "its owner's", "any number of cards with the same name as that card");
+        super(true, "its owner's", "any number of cards with the same name as that card", true);
         this.staticText = "exile a card from an opponent's graveyard. Then search its owner's "
                 + "graveyard, hand, and library for any number of cards with that name and exile them. "
                 + "That player shuffles, then draws a card for each card exiled from their hand this way.";
@@ -71,12 +72,14 @@ class DeadlyCoverUpEffect extends SearchTargetGraveyardHandLibraryForCardNameAnd
         Player player = game.getPlayer(source.getControllerId());
         TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(StaticFilters.FILTER_CARD);
         target.withNotTarget(true);
-        Card cardToExile = game.getCard(target.getFirstTarget());
-        if (player == null || cardToExile == null) {
-            return false;
+        if (player != null && player.chooseTarget(Outcome.Exile, target, source, game)) {
+            Card cardToExile = game.getCard(target.getFirstTarget());
+            if (cardToExile == null) {
+                return false;
+            }
+            player.moveCards(cardToExile, Zone.EXILED, source, game);
+            this.applySearchAndExile(game, source, cardToExile.getName(), cardToExile.getOwnerId());
         }
-        player.moveCards(cardToExile, Zone.EXILED, source, game);
-        this.applySearchAndExile(game, source, cardToExile.getName(), cardToExile.getOwnerId());
         return true;
     }
 }

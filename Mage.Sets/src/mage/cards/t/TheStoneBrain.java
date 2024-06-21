@@ -50,7 +50,7 @@ public final class TheStoneBrain extends CardImpl {
 class TheStoneBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
     TheStoneBrainEffect() {
-        super(true, "target opponent's", "up to four cards with that name", true, true);
+        super(true, "target opponent's", "up to four cards with that name", true, 4);
     }
 
     private TheStoneBrainEffect(final TheStoneBrainEffect effect) {

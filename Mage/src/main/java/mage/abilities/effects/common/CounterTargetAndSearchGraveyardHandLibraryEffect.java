@@ -29,7 +29,7 @@ public class CounterTargetAndSearchGraveyardHandLibraryEffect extends SearchTarg
     }
 
     public CounterTargetAndSearchGraveyardHandLibraryEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText, boolean drawForEachHandCard) {
-        super(graveyardExileOptional, searchWhatText, searchForText, drawForEachHandCard, false);
+        super(graveyardExileOptional, searchWhatText, searchForText, drawForEachHandCard);
     }
 
     protected CounterTargetAndSearchGraveyardHandLibraryEffect(final CounterTargetAndSearchGraveyardHandLibraryEffect effect) {

@@ -31,19 +31,22 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
      */
     protected boolean graveyardExileOptional;
     protected boolean drawForEachHandCard;
-    protected boolean maxFour;
+    protected int maxAmount;
 
     protected SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText) {
-        this(graveyardExileOptional, searchWhatText, searchForText, false, false);
+        this(graveyardExileOptional, searchWhatText, searchForText, false);
     }
 
-    protected SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText, boolean drawForEachHandCard, boolean maxFour) {
+    protected SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText, boolean drawForEachHandCard) {
+        this(graveyardExileOptional, searchWhatText, searchForText, drawForEachHandCard, Integer.MAX_VALUE);
+    }
+    protected SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText, boolean drawForEachHandCard, int maxAmount) {
         super(Outcome.Exile);
         this.searchWhatText = searchWhatText;
         this.searchForText = searchForText;
         this.graveyardExileOptional = graveyardExileOptional;
         this.drawForEachHandCard = drawForEachHandCard;
-        this.maxFour = maxFour;
+        this.maxAmount = maxAmount;
         this.staticText = "search " + searchWhatText + " graveyard, hand, and library for " + searchForText + " and exile them. " +
                 (drawForEachHandCard ? "That player shuffles, then draws a card for each card exiled from their hand this way" : "Then that player shuffles");
     }
@@ -54,7 +57,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
         this.searchForText = effect.searchForText;
         this.graveyardExileOptional = effect.graveyardExileOptional;
         this.drawForEachHandCard = effect.drawForEachHandCard;
-        this.maxFour = effect.maxFour;
+        this.maxAmount = effect.maxAmount;
     }
 
     /**
@@ -71,7 +74,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
             Player targetPlayer = game.getPlayer(targetPlayerId);
             if (targetPlayer != null) {
                 int handCards = 0;
-                int maxRemaining = maxFour ? 4 : Integer.MAX_VALUE;
+                int maxRemaining = maxAmount;
                 FilterCard filter = new FilterCard("card named \"" + cardName + "\"");
                 filter.add(new NamePredicate(cardName));
 

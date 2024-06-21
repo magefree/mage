@@ -19,7 +19,7 @@ public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTarget
     }
 
     public ExileTargetAndSearchGraveyardHandLibraryEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText, boolean drawForEachHandCard) {
-        super(graveyardExileOptional, searchWhatText, searchForText, drawForEachHandCard, false);
+        super(graveyardExileOptional, searchWhatText, searchForText, drawForEachHandCard);
         this.staticText = ""; // since parent class overrides static text but we need to use a target
     }
 
