@@ -93,6 +93,7 @@ class BirthingRitualEffect extends OneShotEffect {
             return endOfApply(cards, controller, game, source);
         }
         int mv = 1 + sacrificed.getManaValue();
+        game.processAction();
         // If you do, you may put a creature card with mana value X or less from among those cards onto the battlefield, where X is 1 plus the sacrificed creature's mana value.
         FilterCard filter = new FilterCreatureCard("creature card with mana value " + mv + " or less");
         filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, mv));
