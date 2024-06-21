@@ -47,13 +47,12 @@ public final class LeonardoDaVinci extends CardImpl {
         // {3}{U}{U}: Until end of turn, Thopters you control have base power and toughness X/X, where X is the number of cards in your hand.
         this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, filter, false).setText(
                 "Until end of turn, Thopters you control have base power and toughness X/X, where X is the number of cards in your hand."
-        ),
-                new ManaCostsImpl<>("{3}{U}{U}")));
+        ), new ManaCostsImpl<>("{3}{U}{U}")));
 
         // {2}{U}, {T}: Draw a card, then discard a card. If the discarded card was an artifact card, exile it from your graveyard.
         // If you do, create a token that's a copy of it, except it's a 0/2 Thopter artifact creature with flying in addition to its other types.
-        Ability ability = new SimpleActivatedAbility(new LeonardoDaVinciEffect(), new TapSourceCost());
-        ability.addCost(new ManaCostsImpl<>("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(new LeonardoDaVinciEffect(), new ManaCostsImpl<>("{2}{U}"));
+        ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
@@ -94,7 +93,7 @@ class LeonardoDaVinciEffect extends OneShotEffect {
         player.drawCards(1, source, game);
         Card card = player.discardOne(false, false, source, game);
 
-        if (card.isArtifact()) {
+        if (card.isArtifact(game)) {
             player.moveCards(card, Zone.EXILED, source, game);
             // If you do, create a token that's a copy of it, except it's a 0/2 Thopter artifact creature with flying in addition to its other types.
             new CreateTokenCopyTargetEffect()
@@ -102,7 +101,6 @@ class LeonardoDaVinciEffect extends OneShotEffect {
                         token.addCardType(CardType.CREATURE);
                         token.addSubType(SubType.THOPTER);
                         token.addCardType(CardType.ARTIFACT);
-                        token.setColor(ObjectColor.COLORLESS);
                         token.setPower(0);
                         token.setToughness(2);
                         token.addAbility(FlyingAbility.getInstance());
