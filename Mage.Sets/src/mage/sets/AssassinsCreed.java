@@ -88,6 +88,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Temporal Trespass", 86, Rarity.MYTHIC, mage.cards.t.TemporalTrespass.class));
         cards.add(new SetCardInfo("Terminate", 98, Rarity.UNCOMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("The Animus", 69, Rarity.RARE, mage.cards.t.TheAnimus.class));
+        cards.add(new SetCardInfo("The Revelations of Ezio", 31, Rarity.UNCOMMON, mage.cards.t.TheRevelationsOfEzio.class));
         cards.add(new SetCardInfo("The Spear of Leonidas", 38, Rarity.RARE, mage.cards.t.TheSpearOfLeonidas.class));
         cards.add(new SetCardInfo("Towering Viewpoint", 77, Rarity.UNCOMMON, mage.cards.t.ToweringViewpoint.class));
         cards.add(new SetCardInfo("Tranquilize", 284, Rarity.COMMON, mage.cards.t.Tranquilize.class));
