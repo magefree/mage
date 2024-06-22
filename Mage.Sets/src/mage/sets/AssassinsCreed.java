@@ -57,6 +57,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Hookblade Veteran", 283, Rarity.COMMON, mage.cards.h.HookbladeVeteran.class));
         cards.add(new SetCardInfo("Hookblade", 6, Rarity.UNCOMMON, mage.cards.h.Hookblade.class));
         cards.add(new SetCardInfo("Hunter's Bow", 41, Rarity.UNCOMMON, mage.cards.h.HuntersBow.class));
+        cards.add(new SetCardInfo("Jackdaw", 58, Rarity.RARE, mage.cards.j.Jackdaw.class));
         cards.add(new SetCardInfo("Keen-Eyed Raven", 279, Rarity.UNCOMMON, mage.cards.k.KeenEyedRaven.class));
         cards.add(new SetCardInfo("Labyrinth Adversary", 290, Rarity.UNCOMMON, mage.cards.l.LabyrinthAdversary.class));
         cards.add(new SetCardInfo("Leonardo da Vinci", 20, Rarity.MYTHIC, mage.cards.l.LeonardoDaVinci.class));
