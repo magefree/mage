@@ -112,6 +112,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Eliminate the Impossible", 54, Rarity.UNCOMMON, mage.cards.e.EliminateTheImpossible.class));
         cards.add(new SetCardInfo("Escape Tunnel", 261, Rarity.COMMON, mage.cards.e.EscapeTunnel.class));
         cards.add(new SetCardInfo("Essence of Antiquity", 15, Rarity.UNCOMMON, mage.cards.e.EssenceOfAntiquity.class));
+        cards.add(new SetCardInfo("Etrata, Deadly Fugitive", 200, Rarity.MYTHIC, mage.cards.e.EtrataDeadlyFugitive.class));
         cards.add(new SetCardInfo("Evidence Examiner", 201, Rarity.UNCOMMON, mage.cards.e.EvidenceExaminer.class));
         cards.add(new SetCardInfo("Exit Specialist", 55, Rarity.UNCOMMON, mage.cards.e.ExitSpecialist.class));
         cards.add(new SetCardInfo("Expedited Inheritance", 123, Rarity.MYTHIC, mage.cards.e.ExpeditedInheritance.class));
