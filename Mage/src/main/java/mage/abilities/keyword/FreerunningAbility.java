@@ -4,6 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeSourceCostsImpl;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.constants.SubType;
@@ -29,10 +31,7 @@ public class FreerunningAbility extends AlternativeSourceCostsImpl {
             "if you dealt combat damage to a player this turn with an Assassin or commander";
 
     public FreerunningAbility(String manaString) {
-        super(FREERUNNING_KEYWORD, FREERUNNING_REMINDER, manaString);
-        this.setRuleAtTheTop(true);
-        this.addWatcher(new FreerunningWatcher());
-        this.addHint(FreerunningCondition.getHint());
+        this(new ManaCostsImpl<>(manaString));
     }
 
     public FreerunningAbility(Cost cost) {
