@@ -19,7 +19,7 @@ public enum LegendaryEquippedPredicate implements Predicate<Permanent> {
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .allMatch(attachment -> attachment.hasSubtype(SubType.EQUIPMENT, game) && attachment.isLegendary());
+                .allMatch(attachment -> attachment.hasSubtype(SubType.EQUIPMENT, game) && attachment.isLegendary(game));
 
     }
 
