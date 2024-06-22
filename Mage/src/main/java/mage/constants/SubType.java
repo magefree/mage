@@ -7,7 +7,7 @@ import mage.game.Game;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public enum SubType {
+public enum SubType implements MagicType {
 
     //205.3k Instants and sorceries share their lists of subtypes; these subtypes are called spell types.
     ADVENTURE("Adventure", SubTypeSet.SpellType),
@@ -576,6 +576,11 @@ public enum SubType {
         this.subTypeSet = subTypeSet;
         this.customSet = customSet;
         this.predicate = new SubTypePredicate(this);
+    }
+
+    @Override
+    public boolean checkObject(MageObject mageObject, Game game) {
+        return mageObject != null && mageObject.hasSubtype(this, game);
     }
 
     public String getDescription() {

@@ -7,7 +7,7 @@ import mage.game.Game;
 /**
  * Created by IGOUDT on 26-3-2017.
  */
-public enum SuperType {
+public enum SuperType implements MagicType {
 
     BASIC("Basic"),
     ELITE("Elite"),
@@ -50,5 +50,10 @@ public enum SuperType {
 
     public SuperTypePredicate getPredicate() {
         return predicate;
+    }
+
+    @Override
+    public boolean checkObject(MageObject mageObject, Game game) {
+        return mageObject != null && mageObject.getSuperType(game).contains(this);
     }
 }

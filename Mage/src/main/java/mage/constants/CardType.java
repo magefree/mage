@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author North
  */
-public enum CardType {
+public enum CardType implements MagicType {
     ARTIFACT("Artifact", true, true),
     BATTLE("Battle", true, true),
     CONSPIRACY("Conspiracy", false, false),
@@ -47,6 +47,11 @@ public enum CardType {
 
     public String getPluralName() {
         return text.endsWith("y") ? text.substring(0, text.length() - 1) + "ies" : text + 's';
+    }
+
+    @Override
+    public boolean checkObject(MageObject mageObject, Game game) {
+        return mageObject != null && mageObject.getCardType(game).contains(this);
     }
 
     public static CardType fromString(String value) {
