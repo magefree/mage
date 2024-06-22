@@ -48,6 +48,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Ezio, Blade of Vengeance", 275, Rarity.MYTHIC, mage.cards.e.EzioBladeOfVengeance.class));
         cards.add(new SetCardInfo("Fatal Push", 90, Rarity.UNCOMMON, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Fiery Islet", 112, Rarity.RARE, mage.cards.f.FieryIslet.class));
+        cards.add(new SetCardInfo("Forest", 109, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Go for the Throat", 91, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Haystack", 5, Rarity.UNCOMMON, mage.cards.h.Haystack.class));
         cards.add(new SetCardInfo("Headsplitter", 289, Rarity.COMMON, mage.cards.h.Headsplitter.class));
@@ -58,6 +59,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Hookblade Veteran", 283, Rarity.COMMON, mage.cards.h.HookbladeVeteran.class));
         cards.add(new SetCardInfo("Hookblade", 6, Rarity.UNCOMMON, mage.cards.h.Hookblade.class));
         cards.add(new SetCardInfo("Hunter's Bow", 41, Rarity.UNCOMMON, mage.cards.h.HuntersBow.class));
+        cards.add(new SetCardInfo("Island", 103, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jackdaw", 58, Rarity.RARE, mage.cards.j.Jackdaw.class));
         cards.add(new SetCardInfo("Keen-Eyed Raven", 279, Rarity.UNCOMMON, mage.cards.k.KeenEyedRaven.class));
         cards.add(new SetCardInfo("Labyrinth Adversary", 290, Rarity.UNCOMMON, mage.cards.l.LabyrinthAdversary.class));
@@ -66,10 +68,12 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Mary Read and Anne Bonny", 61, Rarity.RARE, mage.cards.m.MaryReadAndAnneBonny.class));
         cards.add(new SetCardInfo("Merciless Harlequin", 287, Rarity.COMMON, mage.cards.m.MercilessHarlequin.class));
         cards.add(new SetCardInfo("Mortify", 96, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
+        cards.add(new SetCardInfo("Mountain", 107, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Murder", 92, Rarity.UNCOMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Nurturing Peatland", 114, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
         cards.add(new SetCardInfo("Origin of the Hidden Ones", 36, Rarity.UNCOMMON, mage.cards.o.OriginOfTheHiddenOnes.class));
         cards.add(new SetCardInfo("Path to Exile", 81, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
+        cards.add(new SetCardInfo("Plains", 101, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Poison-Blade Mentor", 288, Rarity.UNCOMMON, mage.cards.p.PoisonBladeMentor.class));
         cards.add(new SetCardInfo("Propaganda", 85, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Raven Clan War-Axe", 297, Rarity.RARE, mage.cards.r.RavenClanWarAxe.class));
@@ -87,6 +91,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Submerged Boneyard", 301, Rarity.UNCOMMON, mage.cards.s.SubmergedBoneyard.class));
         cards.add(new SetCardInfo("Sunbaked Canyon", 111, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
         cards.add(new SetCardInfo("Surtr, Fiery Jotun", 293, Rarity.RARE, mage.cards.s.SurtrFieryJotun.class));
+        cards.add(new SetCardInfo("Swamp", 105, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Sword of Feast and Famine", 99, Rarity.MYTHIC, mage.cards.s.SwordOfFeastAndFamine.class));
         cards.add(new SetCardInfo("Sword of Light and Shadow", 100, Rarity.MYTHIC, mage.cards.s.SwordOfLightAndShadow.class));
         cards.add(new SetCardInfo("Tax Collector", 9, Rarity.UNCOMMON, mage.cards.t.TaxCollector.class));
