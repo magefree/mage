@@ -24,7 +24,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Abstergo Entertainment", 79, Rarity.RARE, mage.cards.a.AbstergoEntertainment.class));
         cards.add(new SetCardInfo("Achilles Davenport", 294, Rarity.RARE, mage.cards.a.AchillesDavenport.class));
         cards.add(new SetCardInfo("Assassin Den", 281, Rarity.UNCOMMON, mage.cards.a.AssassinDen.class));
-        cards.add(new SetCardInfo("Assassin's Trophy", 166, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
+        cards.add(new SetCardInfo("Assassin's Trophy", 95, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
         cards.add(new SetCardInfo("Aya of Alexandria", 48, Rarity.RARE, mage.cards.a.AyaOfAlexandria.class));
         cards.add(new SetCardInfo("Basim Ibn Ishaq", 49, Rarity.RARE, mage.cards.b.BasimIbnIshaq.class));
         cards.add(new SetCardInfo("Bayek of Siwa", 50, Rarity.RARE, mage.cards.b.BayekOfSiwa.class));
@@ -51,8 +51,8 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Hidden Blade", 73, Rarity.UNCOMMON, mage.cards.h.HiddenBlade.class));
         cards.add(new SetCardInfo("Hidden Footblade", 34, Rarity.UNCOMMON, mage.cards.h.HiddenFootblade.class));
         cards.add(new SetCardInfo("Hired Blade", 299, Rarity.COMMON, mage.cards.h.HiredBlade.class));
-        cards.add(new SetCardInfo("Hookblade", 6, Rarity.UNCOMMON, mage.cards.h.Hookblade.class));
         cards.add(new SetCardInfo("Hookblade Veteran", 283, Rarity.COMMON, mage.cards.h.HookbladeVeteran.class));
+        cards.add(new SetCardInfo("Hookblade", 6, Rarity.UNCOMMON, mage.cards.h.Hookblade.class));
         cards.add(new SetCardInfo("Hunter's Bow", 41, Rarity.UNCOMMON, mage.cards.h.HuntersBow.class));
         cards.add(new SetCardInfo("Keen-Eyed Raven", 279, Rarity.UNCOMMON, mage.cards.k.KeenEyedRaven.class));
         cards.add(new SetCardInfo("Labyrinth Adversary", 290, Rarity.UNCOMMON, mage.cards.l.LabyrinthAdversary.class));
@@ -61,7 +61,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Mary Read and Anne Bonny", 61, Rarity.RARE, mage.cards.m.MaryReadAndAnneBonny.class));
         cards.add(new SetCardInfo("Merciless Harlequin", 287, Rarity.COMMON, mage.cards.m.MercilessHarlequin.class));
         cards.add(new SetCardInfo("Mortify", 96, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
-        cards.add(new SetCardInfo("Murder", 92, Rarity.COMMON, mage.cards.m.Murder.class));
+        cards.add(new SetCardInfo("Murder", 92, Rarity.UNCOMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Nurturing Peatland", 114, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
         cards.add(new SetCardInfo("Origin of the Hidden Ones", 36, Rarity.UNCOMMON, mage.cards.o.OriginOfTheHiddenOnes.class));
         cards.add(new SetCardInfo("Path to Exile", 81, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
