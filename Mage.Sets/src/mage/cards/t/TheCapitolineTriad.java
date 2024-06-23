@@ -16,6 +16,7 @@ import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.ExileManaValueFromGraveyardCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.dynamicvalue.common.ManaValueInGraveyard;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
@@ -42,6 +43,8 @@ import mage.util.CardUtil;
 public final class TheCapitolineTriad extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("historic card");
+    private static final DynamicValue costXValue = new CardsInControllerGraveyardCount(filter);
+    private static final DynamicValue manaValueGraveyard = new ManaValueInGraveyard(filter);
 
     static {
         filter.add(HistoricPredicate.instance);
@@ -60,12 +63,14 @@ public final class TheCapitolineTriad extends CardImpl {
         DynamicValue xValue = new CardsInControllerGraveyardCount(filter);
         Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue));
         ability.setRuleAtTheTop(true);
-        ability.addHint(new ValueHint("Historic cards in your graveyard", xValue));
+        ability.addHint(new ValueHint("Historic cards in your graveyard", costXValue));
         ability.withFlavorWord("Those Who Came Before");
         this.addAbility(ability);
 
+
         // Exile any number of historic cards from your graveyard with total mana value 30 or greater: You get an emblem with "Creatures you control have base power and toughness 9/9."
         ability = new SimpleActivatedAbility(new GetEmblemEffect(new TheCapitolineTriadEmblem()), new ExileManaValueFromGraveyardCost(new TheCapitolineTriadTarget(), 30));
+        ability.addHint(new ValueHint("Mana value of selected cards", manaValueGraveyard));
         this.addAbility(ability);
     }
 
