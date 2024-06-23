@@ -44,6 +44,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Crystal Skull, Isu Spyglass", 15, Rarity.RARE, mage.cards.c.CrystalSkullIsuSpyglass.class));
         cards.add(new SetCardInfo("Desynchronization", 16, Rarity.RARE, mage.cards.d.Desynchronization.class));
         cards.add(new SetCardInfo("Detained by Legionnaires", 277, Rarity.COMMON, mage.cards.d.DetainedByLegionnaires.class));
+        cards.add(new SetCardInfo("Distract the Guards", 3, Rarity.UNCOMMON, mage.cards.d.DistractTheGuards.class));
         cards.add(new SetCardInfo("Eagle Vision", 17, Rarity.UNCOMMON, mage.cards.e.EagleVision.class));
         cards.add(new SetCardInfo("Eivor, Battle-Ready", 274, Rarity.MYTHIC, mage.cards.e.EivorBattleReady.class));
         cards.add(new SetCardInfo("Escape Detection", 18, Rarity.UNCOMMON, mage.cards.e.EscapeDetection.class));
