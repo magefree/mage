@@ -32,10 +32,11 @@ public final class DesmondMiles extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Assassin card in your graveyard");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.ASSASSIN);
-
+    private static final AdditiveDynamicValue assassinsCount;
     static {
         filter2.add(AnotherPredicate.instance);
         filter.add(SubType.ASSASSIN.getPredicate());
+        assassinsCount = new AdditiveDynamicValue(new CardsInControllerGraveyardCount(), new PermanentsOnBattlefieldCount(filter2));
     }
 
     public DesmondMiles(UUID ownerId, CardSetInfo setInfo) {
@@ -50,7 +51,6 @@ public final class DesmondMiles extends CardImpl {
         // Menace
         this.addAbility(new MenaceAbility());
 
-        AdditiveDynamicValue assassinsCount = new AdditiveDynamicValue(new CardsInControllerGraveyardCount(), new PermanentsOnBattlefieldCount(filter2));
         // Desmond Miles gets +1/+0 for each other Assassin you control and each Assassin card in your graveyard.
         Ability ability = new SimpleStaticAbility(new BoostSourceEffect(assassinsCount, StaticValue.get(0), Duration.WhileOnBattlefield)
                 .setText("{this} gets +1/+0 for each other Assassin you control and each Assassin card in your graveyard"));
