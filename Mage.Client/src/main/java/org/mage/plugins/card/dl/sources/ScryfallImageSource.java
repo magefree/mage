@@ -134,6 +134,8 @@ public class ScryfallImageSource implements CardImageSource {
             // eg https://api.scryfall.com/cards/4ed/134†?format=image&include_variations=true succeeds
 
         }
+
+        return new CardImageUrls(baseUrl, alternativeUrl );
     }
 
     private String getFaceImageUrl(Proxy proxy, CardDownloadData card, boolean isToken) throws Exception {
