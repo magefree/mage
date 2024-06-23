@@ -88,7 +88,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final Logger LOGGER = Logger.getLogger(MageFrame.class);
     private static final String LITE_MODE_ARG = "-lite";
     private static final String GRAY_MODE_ARG = "-gray";
-    private static final String FILL_SCREEN_ARG = "-fullscreen";
+    private static final String FULL_SCREEN_PROP = "xmage.fullScreen"; // -Dxmage.fullScreen=false
     private static final String SKIP_DONE_SYMBOLS = "-skipDoneSymbols";
     private static final String USER_ARG = "-user";
     private static final String PASSWORD_ARG = "-pw";
@@ -113,7 +113,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static boolean liteMode = false;
     //TODO: make gray theme, implement theme selector in preferences dialog
     private static boolean grayMode = false;
-    private static boolean fullscreenMode = false;
+    private static boolean macOsFullScreenEnabled = true;
     private static boolean skipSmallSymbolGenerationForExisting = false;
     private static String startUser = null;
     private static String startPassword = "";
@@ -202,6 +202,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         setWindowTitle();
+
+        // mac os only: enable full screen support in java 8 (java 11+ try to use it all the time)
+        if (MacFullscreenUtil.isMacOSX() && macOsFullScreenEnabled) {
+            MacFullscreenUtil.enableMacOSFullScreenMode(this);
+            MacFullscreenUtil.toggleMacOSFullScreenMode(this);
+        }
 
         EDTExceptionHandler.registerExceptionHandler();
         addWindowListener(new WindowAdapter() {
@@ -387,13 +393,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
             setWindowTitle();
         });
-
-        if (MacFullscreenUtil.isMacOSX()) {
-            MacFullscreenUtil.enableMacOSFullScreenMode(this);
-            if (fullscreenMode) {
-                MacFullscreenUtil.toggleMacOSFullScreenMode(this);
-            }
-        }
     }
 
     private void bootstrapSetsAndFormats() {
@@ -1423,8 +1422,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 if (arg.startsWith(GRAY_MODE_ARG)) {
                     grayMode = true;
                 }
-                if (arg.startsWith(FILL_SCREEN_ARG)) {
-                    fullscreenMode = true;
+                if (System.getProperty(FULL_SCREEN_PROP) != null) {
+                    macOsFullScreenEnabled = Boolean.parseBoolean(System.getProperty(FULL_SCREEN_PROP));
                 }
                 if (arg.startsWith(SKIP_DONE_SYMBOLS)) {
                     skipSmallSymbolGenerationForExisting = true;
