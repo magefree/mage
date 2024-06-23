@@ -18,7 +18,7 @@ public final class AssassinsCreed extends ExpansionSet {
     private AssassinsCreed() {
         super("Assassin's Creed", "ACR", ExpansionSet.buildDate(2024, 7, 5), SetType.EXPANSION);
         this.blockName = "Assassin's Creed"; // for sorting in GUI
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = false;
 
         cards.add(new SetCardInfo("Abstergo Entertainment", 79, Rarity.RARE, mage.cards.a.AbstergoEntertainment.class));
