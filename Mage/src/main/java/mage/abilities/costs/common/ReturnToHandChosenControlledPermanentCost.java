@@ -55,7 +55,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
                     if (permanent == null) {
                         return false;
                     }
-                    addSacrificeTarget(game, permanent);
+                    addReturnTarget(game, permanent);
                     permanentsToReturn.add(permanent);
                 }
                 controller.moveCards(permanentsToReturn, Zone.HAND, ability, game);
@@ -65,7 +65,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
         return paid;
     }
 
-    protected void addSacrificeTarget(Game game, Permanent permanent) {
+    protected void addReturnTarget(Game game, Permanent permanent) {
         permanents.add(permanent.copy());
     }
 

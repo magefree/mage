@@ -83,12 +83,13 @@ class WonderscapeSageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        new DrawCardSourceControllerEffect(1).apply(game, source);
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
-        for (Cost cost :source.getCosts()) {
+        player.drawCards(1, source, game);
+
+        for (Cost cost : source.getCosts()) {
             if (cost instanceof ReturnToHandChosenControlledPermanentCost) {
                 List<Permanent> permanents = ((ReturnToHandChosenControlledPermanentCost) cost).getPermanents();
                 if (permanents.size() == 1) {
@@ -96,14 +97,12 @@ class WonderscapeSageEffect extends OneShotEffect {
                     if (permanent.getCardType().contains(CardType.LAND) && permanent.getSubtype().stream()
                             .filter(subType -> !(subType == SubType.PLAINS || subType == SubType.ISLAND || subType == SubType.SWAMP
                                     || subType == SubType.MOUNTAIN || subType == SubType.FOREST)).count() > 0) {
-                            return true;
+                        return true;
                     }
                 }
             }
-                player.discardOne(false, false, source, game);
-                return true;
         }
-
+        player.discardOne(false, false, source, game);
         return true;
     }
 }
