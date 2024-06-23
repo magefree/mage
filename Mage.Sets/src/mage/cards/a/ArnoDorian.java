@@ -37,7 +37,7 @@ public final class ArnoDorian extends CardImpl {
 
         // Other Assassins you control get +2/+0.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
-                1, 0, Duration.WhileOnBattlefield, filter, true
+                2, 0, Duration.WhileOnBattlefield, filter, true
         )));
 
         // Disguise {B}{R}
