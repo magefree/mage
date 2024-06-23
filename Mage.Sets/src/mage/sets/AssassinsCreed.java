@@ -69,6 +69,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Keen-Eyed Raven", 279, Rarity.UNCOMMON, mage.cards.k.KeenEyedRaven.class));
         cards.add(new SetCardInfo("Labyrinth Adversary", 290, Rarity.UNCOMMON, mage.cards.l.LabyrinthAdversary.class));
         cards.add(new SetCardInfo("Leonardo da Vinci", 20, Rarity.MYTHIC, mage.cards.l.LeonardoDaVinci.class));
+        cards.add(new SetCardInfo("Loyal Inventor", 21, Rarity.UNCOMMON, mage.cards.l.LoyalInventor.class));
         cards.add(new SetCardInfo("Lydia Frye", 60, Rarity.UNCOMMON, mage.cards.l.LydiaFrye.class));
         cards.add(new SetCardInfo("Mary Read and Anne Bonny", 61, Rarity.RARE, mage.cards.m.MaryReadAndAnneBonny.class));
         cards.add(new SetCardInfo("Merciless Harlequin", 287, Rarity.COMMON, mage.cards.m.MercilessHarlequin.class));
