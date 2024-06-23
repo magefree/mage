@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /**
- * Util method to work with threads.
+ * Helper class to work with threads
  *
  * @author ayrat, JayDi85
  */
@@ -16,20 +16,37 @@ public final class ThreadUtils {
 
     // basic
     public final static String THREAD_PREFIX_GAME = "GAME";
-    public final static String THREAD_PREFIX_AI_SIMULATION = "AI-SIM";
+    public final static String THREAD_PREFIX_AI_SIMULATION_MAD = "AI-SIM-MAD";
+    public final static String THREAD_PREFIX_AI_SIMULATION_MCTS = "AI-SIM-MCTS";
     public final static String THREAD_PREFIX_CALL_REQUEST = "CALL";
     public final static String THREAD_PREFIX_TOURNEY = "TOURNEY";
     public final static String THREAD_PREFIX_TOURNEY_DRAFT = "TOURNEY DRAFT";
+    public final static String THREAD_PREFIX_TOURNEY_BOOSTERS_SEND = "TOURNEY BOOSTERS SEND";
+
+    // game
+    public final static String THREAD_PREFIX_GAME_JOIN_WAITING = "XMAGE game join waiting";
 
     // services
-    public final static String THREAD_PREFIX_SERVICE_HEALTH = "XMAGE HEALTH";
+    public final static String THREAD_PREFIX_SERVICE_HEALTH = "XMAGE service health";
+    public final static String THREAD_PREFIX_SERVICE_USERS_LIST_REFRESH = "XMAGE users list refresh";
+    public final static String THREAD_PREFIX_SERVICE_CONNECTION_EXPIRED_CHECK = "XMAGE connection expired check";
+    public final static String THREAD_PREFIX_SERVICE_LOBBY_REFRESH = "XMAGE lobby refresh";
+    public final static String THREAD_PREFIX_SERVICE_NEWS_REFRESH = "XMAGE news refresh";
 
     // etc
-    public final static String THREAD_PREFIX_TIMEOUT = "XMAGE TIMEOUT";
-    public final static String THREAD_PREFIX_TIMEOUT_IDLE = "XMAGE TIMEOUT_IDLE";
+    public final static String THREAD_PREFIX_TIMEOUT = "XMAGE timeout";
+    public final static String THREAD_PREFIX_TIMEOUT_IDLE = "XMAGE timeout_idle";
 
+    // client
+    // TODO: replace single GUI tasks by swing thread (invoke later) or by single executor like (like CALL for server side)
+    public final static String THREAD_PREFIX_CLIENT_SYMBOLS_DOWNLOADER = "XMAGE symbols downloader";
+    public final static String THREAD_PREFIX_CLIENT_IMAGES_DOWNLOADER = "XMAGE images downloader";
+    public final static String THREAD_PREFIX_CLIENT_PING_SENDER = "XMAGE ping sender";
+    public final static String THREAD_PREFIX_CLIENT_SUBMIT_TIMER = "XMAGE submit timer";
+    public final static String THREAD_PREFIX_CLIENT_AUTO_CLOSE_TIMER = "XMAGE auto-close timer";
 
-
+    // tests
+    public final static String THREAD_PREFIX_TESTS_AI_VS_AI_GAMES = "XMAGE tests ai vs ai";
 
     public static void sleep(int millis) {
         try {
@@ -88,7 +105,7 @@ public final class ThreadUtils {
         if (name.startsWith(THREAD_PREFIX_GAME)) {
             // server game
             return true;
-        } else if (name.startsWith(THREAD_PREFIX_AI_SIMULATION)) {
+        } else if (name.startsWith(THREAD_PREFIX_AI_SIMULATION_MAD)) {
             // ai simulation
             return true;
         } else if (name.equals("main")) {

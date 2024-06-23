@@ -4,11 +4,12 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.dialog.MageDialog;
-import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.PlayerAction;
 import mage.constants.TurnPhase;
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -43,7 +44,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private Map<String, Serializable> lastOptions = new HashMap<>();
 
     private static final int AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS = 8;
-    private static final ScheduledExecutorService WORKER = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService AUTO_CLOSE_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_AUTO_CLOSE_TIMER)
+    );
 
     /**
      * Creates new form FeedbackPanel
@@ -158,6 +161,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
      * Close game window by pressing OK button after 8 seconds
      */
     private void endWithTimeout() {
+        // TODO: add auto-close disable, e.g. keep opened game and chat for longer period like 5 minutes
         Runnable task = () -> {
             SwingUtilities.invokeLater(() -> {
                 LOGGER.info("Ending game...");
@@ -170,7 +174,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 }
             });
         };
-        WORKER.schedule(task, AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS, TimeUnit.SECONDS);
+        AUTO_CLOSE_EXECUTOR.schedule(task, AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS, TimeUnit.SECONDS);
     }
 
     public void updateOptions(Map<String, Serializable> options) {

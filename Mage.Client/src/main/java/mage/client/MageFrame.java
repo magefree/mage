@@ -44,6 +44,8 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.util.DebugUtil;
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
@@ -79,6 +81,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
 
 /**
+ * Client app
+ *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class MageFrame extends javax.swing.JFrame implements MageClient {
@@ -129,7 +133,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final Map<UUID, DraftPanel> DRAFTS = new HashMap<>();
     private static final MageUI UI = new MageUI();
 
-    private static final ScheduledExecutorService PING_TASK_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService PING_SENDER_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_PING_SENDER)
+    );
     private static UpdateMemUsageTask updateMemUsageTask;
 
     private static long startTime;
@@ -317,7 +323,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         desktopPane.add(errorDialog, JLayeredPane.MODAL_LAYER);
         UI.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
-        PING_TASK_EXECUTOR.scheduleAtFixedRate(() -> SessionHandler.ping(), TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
+        PING_SENDER_EXECUTOR.scheduleAtFixedRate(SessionHandler::ping, TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
 
         updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
 

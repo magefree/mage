@@ -3,6 +3,7 @@ package mage.server.util;
 import mage.server.managers.ConfigSettings;
 import mage.server.managers.ThreadExecutor;
 import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import org.apache.log4j.Logger;
 
 import java.util.concurrent.*;
@@ -146,19 +147,3 @@ public class ThreadExecutorImpl implements ThreadExecutor {
     }
 }
 
-class XMageThreadFactory implements ThreadFactory {
-
-    private final String prefix;
-
-    XMageThreadFactory(String prefix) {
-        this.prefix = prefix;
-    }
-
-    @Override
-    public Thread newThread(Runnable r) {
-        Thread thread = new Thread(r);
-        // default name, but threads can change it (example: on game or tourney start)
-        thread.setName(prefix + " " + thread.getThreadGroup().getName() + "-" + thread.getId());
-        return thread;
-    }
-}

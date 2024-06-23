@@ -5,6 +5,8 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 
@@ -29,7 +31,9 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     private static final Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
     private static final MageVersion version = new MageVersion(ConsoleFrame.class);
 
-    private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService PING_SENDER_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_PING_SENDER)
+    );
 
     /**
      * @return the session
@@ -75,7 +79,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             logger.fatal("", ex);
         }
 
-        pingTaskExecutor.scheduleAtFixedRate(() -> session.ping(), 20, 20, TimeUnit.SECONDS);
+        PING_SENDER_EXECUTOR.scheduleAtFixedRate(() -> session.ping(), 20, 20, TimeUnit.SECONDS);
     }
 
     public boolean connect(Connection connection) {

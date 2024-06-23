@@ -1,5 +1,7 @@
 package mage.server.util;
 
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
 
@@ -44,8 +46,10 @@ public enum ServerMessagesUtil {
     private static final AtomicInteger reconnects = new AtomicInteger(0);
 
     ServerMessagesUtil() {
-        ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
-        updateExecutor.scheduleAtFixedRate(this::reloadMessages, 5, SERVER_MSG_REFRESH_RATE_SECS, TimeUnit.SECONDS);
+        ScheduledExecutorService NEWS_MESSAGES_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+                new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_NEWS_REFRESH)
+        );
+        NEWS_MESSAGES_EXECUTOR.scheduleAtFixedRate(this::reloadMessages, 5, SERVER_MSG_REFRESH_RATE_SECS, TimeUnit.SECONDS);
     }
 
     public List<String> getMessages() {

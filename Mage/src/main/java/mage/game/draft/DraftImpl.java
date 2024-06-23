@@ -1,6 +1,5 @@
 package mage.game.draft;
 
-import java.util.*;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.game.draft.DraftOptions.TimingOption;
@@ -8,15 +7,17 @@ import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.players.Player;
 import mage.players.PlayerList;
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import org.apache.log4j.Logger;
 
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class DraftImpl implements Draft {
@@ -41,9 +42,9 @@ public abstract class DraftImpl implements Draft {
 
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
-    
+
     protected ScheduledFuture<?> boosterLoadingHandle;
-    protected final ScheduledExecutorService boosterLoadingExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected ScheduledExecutorService boosterLoadingExecutor = null;
 
     public DraftImpl(DraftOptions options, List<ExpansionSet> sets) {
         id = UUID.randomUUID();
@@ -240,13 +241,20 @@ public abstract class DraftImpl implements Draft {
         cardNum++;
         return true;
     }
-    
+
     protected void setupBoosterLoadingHandle() {
         cancelBoosterLoadingHandle();
         boosterLoadingCounter = 0;
+
+        if (this.boosterLoadingExecutor == null) {
+            this.boosterLoadingExecutor = Executors.newSingleThreadScheduledExecutor(
+                    new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_TOURNEY_BOOSTERS_SEND)
+            );
+        }
+
         boosterLoadingHandle = boosterLoadingExecutor.scheduleAtFixedRate(() -> {
             try {
-                if (loadBoosters() == true) {
+                if (loadBoosters()) {
                     cancelBoosterLoadingHandle();
                 } else {
                     boosterLoadingCounter++;
@@ -256,14 +264,14 @@ public abstract class DraftImpl implements Draft {
             }
         }, 0, BOOSTER_LOADING_INTERVAL, TimeUnit.SECONDS);
     }
-    
+
     protected void cancelBoosterLoadingHandle() {
         if (boosterLoadingHandle != null) {
             boosterLoadingHandle.cancel(true);
         }
     }
-    
-    protected boolean loadBoosters () {
+
+    protected boolean loadBoosters() {
         boolean allBoostersLoaded = true;
         for (DraftPlayer player : players.values()) {
             if (player.isPicking() && !player.isBoosterLoaded()) {
@@ -273,7 +281,7 @@ public abstract class DraftImpl implements Draft {
         }
         return allBoostersLoaded;
     }
-    
+
     protected boolean donePicking() {
         if (isAbort()) {
             return true;
@@ -345,7 +353,7 @@ public abstract class DraftImpl implements Draft {
         }
         return !player.isPicking();
     }
-    
+
     @Override
     public void setBoosterLoaded(UUID playerId) {
         DraftPlayer player = players.get(playerId);
