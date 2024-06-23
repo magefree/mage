@@ -324,9 +324,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         // create default server lobby and hide it until connect
         tablesPane = new TablesPane();
         desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        SwingUtilities.invokeLater(() -> {
-            this.hideServerLobby();
-        });
+        SwingUtilities.invokeLater(this::hideServerLobby);
 
         addTooltipContainer();
         setBackground();
@@ -1608,8 +1606,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void disconnected(final boolean askToReconnect) {
+    public void disconnected(boolean askToReconnect, boolean keepMySessionActive) {
         if (SwingUtilities.isEventDispatchThread()) {
+            // TODO: need research, it can generate wrong logs due diff threads source (doInBackground, swing, server events, etc)
             // REMOTE task, e.g. connecting
             LOGGER.info("Disconnected from server side");
         } else {
@@ -1617,11 +1616,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             LOGGER.info("Disconnected from client side");
         }
 
-        SwingUtilities.invokeLater(() -> {
+        Runnable runOnExit = () -> {
             // user already disconnected, can't do any online actions like quite chat
             // but try to keep session
             // TODO: why it ignore askToReconnect here, but use custom reconnect dialog later?! Need research
-            SessionHandler.disconnect(false, true);
+            SessionHandler.disconnect(false, keepMySessionActive);
             setConnectButtonText(NOT_CONNECTED_BUTTON);
             disableButtons();
             hideGames();
@@ -1632,7 +1631,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
                 showUserRequestDialog(message);
             }
-        });
+        };
+
+        if (SwingUtilities.isEventDispatchThread()) {
+            runOnExit.run();
+        } else {
+            SwingUtilities.invokeLater(runOnExit);
+        }
     }
 
     @Override
