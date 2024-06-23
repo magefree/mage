@@ -34,6 +34,9 @@ public class DebugUtil {
     // game
     public static boolean GUI_GAME_DRAW_BATTLEFIELD_BORDER = false;
     public static boolean GUI_GAME_DRAW_HAND_AND_STACK_BORDER = false;
+    public static boolean GUI_GAME_DRAW_PLAYER_PANEL_BORDER = true;
+
+    // game dialogs
     public static boolean GUI_GAME_DIALOGS_DRAW_CARDS_AREA_BORDER = false;
 
     public static String getMethodNameWithSource(final int depth) {
