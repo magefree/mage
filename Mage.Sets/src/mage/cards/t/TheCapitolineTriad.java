@@ -70,7 +70,7 @@ public final class TheCapitolineTriad extends CardImpl {
 
         // Exile any number of historic cards from your graveyard with total mana value 30 or greater: You get an emblem with "Creatures you control have base power and toughness 9/9."
         ability = new SimpleActivatedAbility(new GetEmblemEffect(new TheCapitolineTriadEmblem()), new ExileManaValueFromGraveyardCost(new TheCapitolineTriadTarget(), 30));
-        ability.addHint(new ValueHint("Mana value of selected cards", manaValueGraveyard));
+        ability.addHint(new ValueHint("Mana value of historic cards in graveyard", manaValueGraveyard));
         this.addAbility(ability);
     }
 
