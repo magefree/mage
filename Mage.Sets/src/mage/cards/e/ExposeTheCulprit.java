@@ -40,7 +40,6 @@ public final class ExposeTheCulprit extends CardImpl {
     public ExposeTheCulprit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-
         // Choose one or both --
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(2);
@@ -50,7 +49,6 @@ public final class ExposeTheCulprit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
 
         // * Exile any number of face-up creatures you control with disguise in a face-down pile, shuffle that pile, then cloak them.
-
         Mode mode = new Mode(new ExposeTheCulpritEffect());
         this.getSpellAbility().addMode(mode);
     }
