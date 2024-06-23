@@ -91,6 +91,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Rooftop Bypass", 298, Rarity.RARE, mage.cards.r.RooftopBypass.class));
         cards.add(new SetCardInfo("Royal Assassin", 93, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
         cards.add(new SetCardInfo("Settlement Blacksmith", 280, Rarity.UNCOMMON, mage.cards.s.SettlementBlacksmith.class));
+        cards.add(new SetCardInfo("Shao Jun", 63, Rarity.UNCOMMON, mage.cards.s.ShaoJun.class));
         cards.add(new SetCardInfo("Silent Clearing", 115, Rarity.RARE, mage.cards.s.SilentClearing.class));
         cards.add(new SetCardInfo("Smoke Bomb", 75, Rarity.UNCOMMON, mage.cards.s.SmokeBomb.class));
         cards.add(new SetCardInfo("Spartan Veteran", 292, Rarity.COMMON, mage.cards.s.SpartanVeteran.class));
