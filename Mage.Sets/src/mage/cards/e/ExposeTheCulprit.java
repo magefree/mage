@@ -88,8 +88,7 @@ class ExposeTheCulpritEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller == null || targetPlayer == null) {
+        if (controller == null) {
             return false;
         }
         Target creatures = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
@@ -107,7 +106,7 @@ class ExposeTheCulpritEffect extends OneShotEffect {
                 Collections.shuffle(cardsToCloak);
                 game.informPlayers(controller.getLogName() + " shuffles the face-down pile");
                 game.processAction();
-                ManifestEffect.doManifestCards(game, source, controller, new LinkedHashSet<>(cardsToCloak));
+                ManifestEffect.doManifestCards(game, source, controller, new LinkedHashSet<>(cardsToCloak), true);
             }
         }
         return true;

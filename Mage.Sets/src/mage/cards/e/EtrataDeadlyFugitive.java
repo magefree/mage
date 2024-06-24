@@ -120,6 +120,7 @@ class EtrataFlipEffect extends OneShotEffect {
             if (!success) {
                 Card card = permanent.getMainCard();
                 player.moveCards(card, Zone.EXILED, source, game);
+                game.processAction();
                 CardUtil.castSpellWithAttributesForFree(player, source, game, card);
             }
         }

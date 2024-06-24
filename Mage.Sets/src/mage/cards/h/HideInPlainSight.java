@@ -59,7 +59,7 @@ class HideInPlainSightEffect extends LookLibraryAndPickControllerEffect {
     @Override
     public boolean actionWithPickedCards(Game game, Ability source, Player player, Cards pickedCards, Cards otherCards) {
         Set<Card> cards =  pickedCards.stream().map(game::getCard).filter(Objects::nonNull).collect(Collectors.toSet());
-        boolean result = !(ManifestEffect.doManifestCards(game, source, player, cards)).isEmpty();
+        boolean result = !(ManifestEffect.doManifestCards(game, source, player, cards, true)).isEmpty();
         result |= putLookedCards.moveCards(player, otherCards, source, game);
         return result;
     }

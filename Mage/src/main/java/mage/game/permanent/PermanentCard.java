@@ -181,6 +181,9 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public boolean turnFaceUp(Ability source, Game game, UUID playerId) {
+        if (!this.getBasicMageObject().isPermanent()){
+            return false;
+        }
         if (super.turnFaceUp(source, game, playerId)) {
             // TODO: miss types, abilities, color and other things for restore?!
             power.setModifiedBaseValue(power.getBaseValue());
