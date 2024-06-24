@@ -9,10 +9,8 @@ import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.*;
 
-import mage.abilities.effects.common.SurveilXEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.effects.keyword.SurveilEffect;
 import mage.constants.*;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
@@ -21,7 +19,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -57,7 +54,7 @@ public final class DesmondMiles extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Desmond Miles deals combat damage to a player, surveil X, where X is the amount of damage it dealt to that player.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SurveilXEffect(SavedDamageValue.MANY,
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DesmondMilesEffect(SavedDamageValue.MANY,
                 "where X is the amount of damage it dealt to that player.")));
     }
 
@@ -71,3 +68,45 @@ public final class DesmondMiles extends CardImpl {
     }
 }
 
+class DesmondMilesEffect extends OneShotEffect {
+
+    protected final DynamicValue amount;
+
+    public DesmondMilesEffect(int amount) {
+        this(amount, "");
+    }
+
+    public DesmondMilesEffect(int amount, String message) {
+        this(StaticValue.get(amount), message);
+    }
+
+    public DesmondMilesEffect(DynamicValue amount) {
+        this(amount, "");
+    }
+
+    public DesmondMilesEffect(DynamicValue amount, String message) {
+        super(Outcome.Benefit);
+        this.amount = amount;
+        this.staticText = "surveil X" + (message.isEmpty() ? "" : ", ") + message;
+    }
+
+    private DesmondMilesEffect(final DesmondMilesEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
+
+    @Override
+    public DesmondMilesEffect copy() {
+        return new DesmondMilesEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        int xValue = amount.calculate(game, source, this);
+        return player.surveil(xValue, source, game);
+    }
+}
