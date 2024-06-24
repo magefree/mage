@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * GUI component. Image button with hover support and GUI scale support
+ * GUI component. Image button with mouse hover and GUI scale support
  *
  * @author nantuko, JayDi85
  */
@@ -309,10 +309,16 @@ public class HoverButton extends JPanel implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
 
+    /**
+     * Set on click action
+     */
     public void setObserver(Command observer) {
         this.observer = observer;
     }
 
+    /**
+     * Set on mouse entered action
+     */
     public void setOnHover(Command onHover) {
         this.onHover = onHover;
     }
