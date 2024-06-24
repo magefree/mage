@@ -30,11 +30,13 @@ public final class ExcaliburSwordOfEden extends CardImpl {
     private static final FilterControlledCreaturePermanent filterLegendary
             = new FilterControlledCreaturePermanent("legendary creature");
     private static final FilterControlledPermanent historicFilter = new FilterControlledPermanent("historic permanents you control");
-    private static final TotalPermanentsManaValue xValue = new TotalPermanentsManaValue(historicFilter);
+
     static {
         filterLegendary.add(SuperType.LEGENDARY.getPredicate());
         historicFilter.add(HistoricPredicate.instance);
     }
+    
+    private static final TotalPermanentsManaValue xValue = new TotalPermanentsManaValue(historicFilter);
 
     public ExcaliburSwordOfEden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{12}");
