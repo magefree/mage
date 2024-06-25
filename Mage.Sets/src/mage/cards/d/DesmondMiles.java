@@ -33,7 +33,7 @@ public final class DesmondMiles extends CardImpl {
     static {
         filter2.add(AnotherPredicate.instance);
         filter.add(SubType.ASSASSIN.getPredicate());
-        assassinsCount = new AdditiveDynamicValue(new CardsInControllerGraveyardCount(), new PermanentsOnBattlefieldCount(filter2));
+        assassinsCount = new AdditiveDynamicValue(new CardsInControllerGraveyardCount(filter), new PermanentsOnBattlefieldCount(filter2));
     }
 
     public DesmondMiles(UUID ownerId, CardSetInfo setInfo) {
@@ -71,18 +71,6 @@ public final class DesmondMiles extends CardImpl {
 class DesmondMilesEffect extends OneShotEffect {
 
     protected final DynamicValue amount;
-
-    public DesmondMilesEffect(int amount) {
-        this(amount, "");
-    }
-
-    public DesmondMilesEffect(int amount, String message) {
-        this(StaticValue.get(amount), message);
-    }
-
-    public DesmondMilesEffect(DynamicValue amount) {
-        this(amount, "");
-    }
 
     public DesmondMilesEffect(DynamicValue amount, String message) {
         super(Outcome.Benefit);
