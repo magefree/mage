@@ -3,6 +3,7 @@ package mage.cards.a;
 import java.util.List;
 import java.util.UUID;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -31,8 +32,6 @@ import mage.cards.CardSetInfo;
  */
 public final class AnimalFriend extends CardImpl {
 
-
-
     public AnimalFriend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         
@@ -60,11 +59,6 @@ public final class AnimalFriend extends CardImpl {
 }
 
 class AnimalFriendEffect extends GainAbilityWithAttachmentEffect {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.AURA);
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     AnimalFriendEffect() {
         super("Enchanted creature has \"Whenever this creature attacks, create a 1/1 green Squirrel creature token. " +
@@ -86,24 +80,26 @@ class AnimalFriendEffect extends GainAbilityWithAttachmentEffect {
         if (source == null || game == null) {
             return null;
         }
-        return new AttacksTriggeredAbility(new AnimalFriendTokenEffect(source.getSourceId()), false, "");
+        MageObjectReference thing = new MageObjectReference(source.getSourceObject(game), game);
+        Permanent perm = game.getPermanent(source.getSourceId());
+        return new AttacksTriggeredAbility(new AnimalFriendTokenEffect(thing, perm.getName()), false, "");
     }
 }
 
 class AnimalFriendTokenEffect extends OneShotEffect {
 
-    UUID auraId;
+    MageObjectReference aura;
 
-    AnimalFriendTokenEffect(UUID auraId) {
+    AnimalFriendTokenEffect(MageObjectReference aura, String name) {
         super(Outcome.PutCreatureInPlay);
-        this.auraId = auraId;
+        this.aura = aura;
         staticText = "create a 1/1 green Squirrel creature token." +
-                " Put a +1/+1 counter on that token for each Aura and Equipment attached to this creature other than Animal Friend.";
+                " Put a +1/+1 counter on that token for each Aura and Equipment attached to this creature other than " + name + ".";
     }
 
     private AnimalFriendTokenEffect(final AnimalFriendTokenEffect effect) {
         super(effect);
-        this.auraId = effect.auraId;
+        this.aura = effect.aura;
     }
 
     @Override
@@ -123,7 +119,7 @@ class AnimalFriendTokenEffect extends OneShotEffect {
             List<UUID> attachments = p.getAttachments();
             for (UUID attachmentId : attachments) {
                 Permanent attached = game.getPermanent(attachmentId);
-                if (attached != null && attached.hasSubtype(SubType.AURA, game) && !attachmentId.equals(this.auraId)) {
+                if (attached != null && attached.hasSubtype(SubType.AURA, game) && !attachmentId.equals(aura.getSourceId())) {
                     auraAmount++;
                 }
             }
