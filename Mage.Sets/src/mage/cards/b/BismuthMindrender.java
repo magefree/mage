@@ -14,6 +14,7 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileCardsFromTopOfLibraryTargetEffect;
@@ -84,11 +85,9 @@ class BismuthMindrenderEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
 
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer == null) {
-            game.informPlayers("Player is null");
             return false;
         }
         Card cardToCast = null;
@@ -102,40 +101,37 @@ class BismuthMindrenderEffect extends OneShotEffect {
         if (cardToCast == null) {
             return false;
         }
-        List<Card> partsToCast = CardUtil.getCastableComponents(cardToCast, StaticFilters.FILTER_CARD, source, targetPlayer, game, null, false);
-        String partsInfo = partsToCast
+
+        List<Card> castableComponents = CardUtil.getCastableComponents(cardToCast, null, source, controller, game, null, false);
+        if (castableComponents.isEmpty()) {
+            return true;
+        }
+        String partsInfo = castableComponents
                 .stream()
                 .map(MageObject::getLogName)
                 .collect(Collectors.joining(" or "));
-        if (partsToCast.isEmpty()
-                || !controller.chooseUse(
-                Outcome.PlayForFree, "Cast spell by paying life equal to its mana value rather than paying its mana cost (" + partsInfo + ")?", source, game
-        )) {
+        if (!controller.chooseUse(Outcome.PlayForFree, "Cast spell by paying life instead of mana (" + partsInfo + ")?", source, game)) {
             return true;
         }
-        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
-
-        // pay life
-        // copied from BolassCitadelPlayTheTopCardEffect.applies
-        PayLifeCost lifeCost = new PayLifeCost(cardToCast.getSpellAbility().getManaCosts().manaValue()); // TODO: Cost is most likely wrong for multi part cards. See Amped Raptor way for a rework.
-        Costs<Cost> newCosts = new CostsImpl<>();
-        newCosts.add(lifeCost);
-        newCosts.addAll(cardToCast.getSpellAbility().getCosts());
-        controller.setCastSourceIdWithAlternateMana(cardToCast.getId(), null, newCosts);
-
-        SpellAbility chosenAbility;
-        chosenAbility = controller.chooseAbilityForCast(cardToCast, game, true);
-        boolean result = false;
+        castableComponents.forEach(partCard -> game.getState().setValue("PlayFromNotOwnHandZone" + partCard.getId(), Boolean.TRUE));
+        SpellAbility chosenAbility = controller.chooseAbilityForCast(cardToCast, game, true);
         if (chosenAbility != null) {
-            result = controller.cast(
-                    chosenAbility,
-                    game, true, new ApprovingObject(source, game)
-            );
+            Card faceCard = game.getCard(chosenAbility.getSourceId());
+            if (faceCard != null) {
+                // pay life instead of mana cost
+                PayLifeCost lifeCost = new PayLifeCost(faceCard.getManaValue());
+                Costs<Cost> newCosts = new CostsImpl<>();
+                newCosts.add(lifeCost);
+                newCosts.addAll(chosenAbility.getCosts());
+                controller.setCastSourceIdWithAlternateMana(faceCard.getId(), null, newCosts);
+                controller.cast(
+                    chosenAbility, game, true,
+                    new ApprovingObject(source, game)
+                );
+            }
         }
-        partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
-        if (controller.isComputer() && !result) {
-            cards.remove(cardToCast);
-        }
-        return result;
+        castableComponents.forEach(partCard -> game.getState().setValue("PlayFromNotOwnHandZone" + partCard.getId(), null));
+
+        return true;
     }
 }
