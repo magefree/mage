@@ -6,7 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.hint.ValueConditionHint;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 public enum CelebrationCondition implements Condition {
     instance;
-    private static final Hint hint = new ValueHint("Creatures that entered under your control this turn", CelebrationNonlandsThatEnteredThisTurnCount.instance);
+    private static final Hint hint = new ValueConditionHint("Nonland permanents that entered under your control this turn", CelebrationNonlandsThatEnteredThisTurnCount.instance, instance);
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -38,7 +38,6 @@ public enum CelebrationCondition implements Condition {
 enum CelebrationNonlandsThatEnteredThisTurnCount implements DynamicValue {
     instance;
 
-    private static final Hint hint = new ValueHint("Nonland permanents that entered under your control this turn", instance);
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -57,10 +56,7 @@ enum CelebrationNonlandsThatEnteredThisTurnCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "creatures that attacked this turn";
+        return "nonland permanents that entered under your control this turn";
     }
 
-    public static Hint getHint() {
-        return hint;
-    }
 }

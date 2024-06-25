@@ -11,7 +11,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.MoveCountersFromSourceToTargetEffect;
 import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.hint.ValueConditionHint;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class DiamondCity extends CardImpl {
     public DiamondCity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // Dapper Shieldmate enters the battlefield with a shield counter on it.
+        // Diamond City enters the battlefield with a shield counter on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.SHIELD.createInstance(1)),
                 "with a shield counter on it. <i>(If it would be dealt damage " +
@@ -80,7 +80,7 @@ enum DiamondCityCondition implements Condition {
 enum DiamondCityCreaturesThatEnteredThisTurnCount implements DynamicValue {
     instance;
 
-    private static final Hint hint = new ValueHint("Creatures that entered under your control this turn", instance);
+    private static final Hint hint = new ValueConditionHint("Creatures that entered under your control this turn", instance, DiamondCityCondition.instance);
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

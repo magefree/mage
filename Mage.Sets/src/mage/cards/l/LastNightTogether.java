@@ -100,7 +100,7 @@ class LastNightTogetherDelayedCantAttackAbility extends DelayedTriggeredAbility 
 
     private final UUID connectedTurnMod;
 
-    public LastNightTogetherDelayedCantAttackAbility(List<UUID> targets, Game game, UUID connectedTurnMod) {
+    LastNightTogetherDelayedCantAttackAbility(List<UUID> targets, Game game, UUID connectedTurnMod) {
         super(null, Duration.EndOfTurn);
         FilterCreaturePermanent filterRestriction = new FilterCreaturePermanent();
         Set<MageObjectReference> targetRefs = targets.stream().map(x -> new MageObjectReference(x, game)).collect(Collectors.toSet());
@@ -110,7 +110,7 @@ class LastNightTogetherDelayedCantAttackAbility extends DelayedTriggeredAbility 
         this.connectedTurnMod = connectedTurnMod;
     }
 
-    public LastNightTogetherDelayedCantAttackAbility(LastNightTogetherDelayedCantAttackAbility ability) {
+    LastNightTogetherDelayedCantAttackAbility(LastNightTogetherDelayedCantAttackAbility ability) {
         super(ability);
         this.connectedTurnMod = ability.connectedTurnMod;
     }
@@ -122,7 +122,7 @@ class LastNightTogetherDelayedCantAttackAbility extends DelayedTriggeredAbility 
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.PHASE_CHANGED || event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE;
+        return event.getType() == GameEvent.EventType.PHASE_CHANGED;
     }
 
     @Override

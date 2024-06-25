@@ -60,7 +60,7 @@ class NanogeneConversionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent copyFrom = game.getPermanent(source.getFirstTarget());
         if (copyFrom != null) {
-            game.getBattlefield().getAllActivePermanents(source.getControllerId()).stream()
+            game.getBattlefield().getActivePermanents(source.getControllerId(), game).stream()
                     .filter(permanent -> permanent.isCreature(game) && !permanent.getId().equals(copyFrom.getId()))
                     .forEach(copyTo -> game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new CopyApplier() {
                         @Override

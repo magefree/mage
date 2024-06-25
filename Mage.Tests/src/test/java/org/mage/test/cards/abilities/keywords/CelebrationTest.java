@@ -58,7 +58,7 @@ public class CelebrationTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 1);
     }
     @Test
-    @Ignore
+    @Ignore //Currently failing due to PermanentsEnteredBattlefieldWatcher not storing permanents' current state
     public void testContinuousModifier2() {
         addCard(Zone.BATTLEFIELD, playerA, "Ashaya, Soul of the Wild");
         addCard(Zone.HAND, playerA, "Armory Mice");
