@@ -25,6 +25,6 @@ public enum LegendaryEquippedPredicate implements Predicate<Permanent> {
 
     @Override
     public String toString() {
-        return "equipped";
+        return "legendary Equipment attached";
     }
 }
