@@ -109,9 +109,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 cardsCount = Math.min(cardsInLibrary.count(filter, game), maxRemaining);
                 filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
                 TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsCount, filter);
-                target.withNotTarget(true);
                 if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, source, game)) {
-                    maxRemaining -= target.getTargets().size();
                     controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);
                 }
                 targetPlayer.shuffleLibrary(source, game);
