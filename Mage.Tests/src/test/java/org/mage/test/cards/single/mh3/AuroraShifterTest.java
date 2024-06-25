@@ -38,12 +38,12 @@ public class AuroraShifterTest extends CardTestPlayerBase {
         attack(1, playerA, shifter, playerB);
         runCode("energy counter is 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 1));
         setStopAt(1, PhaseStep.END_TURN);
-        execute();
+
 //        Combat 2
         attack(3, playerA, shifter, playerB);
         runCode("energy counter is 2", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));
         setStopAt(3, PhaseStep.END_TURN);
-        execute();
+
 //        Combat 3 - can pay for copy
         addTarget(playerA, "Grizzly Bears"); // Aurora Shifter becomes a copy of another target creature you control
         setChoice(playerA, true); // you may pay {E}{E}.

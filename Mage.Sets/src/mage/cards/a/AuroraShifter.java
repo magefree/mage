@@ -100,7 +100,7 @@ class AuroraShifterCopyApplier extends CopyApplier {
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
 
         blueprint.getAbilities().add(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new GetEnergyCountersControllerEffect(SavedDamageValue.MUCH)));
+                new GetEnergyCountersControllerEffect(SavedDamageValue.MANY)));
         return true;
     }
 }
