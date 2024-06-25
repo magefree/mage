@@ -26,8 +26,6 @@ public class CollectEvidenceAbility extends StaticAbility implements OptionalAdd
 
     protected OptionalAdditionalCost additionalCost;
 
-    //private static final Hint hint = new ConditionHint(CollectedEvidenceCondition.instance, "evidence was collected");
-
     public static OptionalAdditionalCost makeCost(int amount) {
         OptionalAdditionalCost cost = new OptionalAdditionalCostImpl(
                 keywordText + amount,
