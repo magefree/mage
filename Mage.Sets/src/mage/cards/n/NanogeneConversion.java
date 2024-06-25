@@ -39,7 +39,7 @@ public final class NanogeneConversion extends CardImpl {
         return new NanogeneConversion(this);
     }
 }
-//Exact copy of Augmenter Pugilist's EchoingEquationEffect
+//Based on Augmenter Pugilist's EchoingEquationEffect
 class NanogeneConversionEffect extends OneShotEffect {
 
     NanogeneConversionEffect() {

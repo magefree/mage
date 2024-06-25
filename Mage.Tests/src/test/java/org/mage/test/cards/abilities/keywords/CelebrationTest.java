@@ -71,7 +71,8 @@ public class CelebrationTest extends CardTestPlayerBase {
         setChoice(playerA, "White");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Armory Mice", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swords to Plowshares", "Ashaya, Soul of the Wild", true);
-
+        //Even though the Ashaya is now gone, the Armory Mice entered as a land
+        //Thus only the only nonland permanent that ETB this turn is Black Lotus, and Celebration should not be on
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
