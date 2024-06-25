@@ -3,11 +3,9 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.condition.common.CollectedEvidenceCondition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.CollectEvidenceCost;
-import mage.abilities.hint.ConditionTrueHint;
-import mage.abilities.hint.Hint;
+import mage.abilities.hint.common.EvidenceHint;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -28,7 +26,7 @@ public class CollectEvidenceAbility extends StaticAbility implements OptionalAdd
 
     protected OptionalAdditionalCost additionalCost;
 
-    private static final Hint hint = new ConditionTrueHint(CollectedEvidenceCondition.instance, "evidence was collected");
+    //private static final Hint hint = new ConditionHint(CollectedEvidenceCondition.instance, "evidence was collected");
 
     public static OptionalAdditionalCost makeCost(int amount) {
         OptionalAdditionalCost cost = new OptionalAdditionalCostImpl(
@@ -43,12 +41,13 @@ public class CollectEvidenceAbility extends StaticAbility implements OptionalAdd
     public CollectEvidenceAbility(int amount) {
         this(amount, null);
     }
+
     public CollectEvidenceAbility(int amount, String extraInfoText) {
         super(Zone.STACK, null);
         this.additionalCost = makeCost(amount);
         this.rule = additionalCost.getName() + ". " + (extraInfoText == null ? "" : extraInfoText + ". ") + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
-        this.addHint(hint);
+        this.addHint(new EvidenceHint(amount));
         this.amount = amount;
     }
 

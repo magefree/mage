@@ -1241,6 +1241,7 @@ public final class CardUtil {
             }
 
             // restrict hints only for permanents, not cards
+
             // total hints
             if (!abilityHints.isEmpty()) {
                 rules.add(HintUtils.HINT_START_MARK);

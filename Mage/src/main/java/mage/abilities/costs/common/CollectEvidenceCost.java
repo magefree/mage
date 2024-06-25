@@ -47,14 +47,21 @@ public class CollectEvidenceCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        return getAvailableEvidence(controllerId, game) >= amount;
+    }
+
+    public static int getAvailableEvidence(UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
-        return player != null && player
+        if (player == null) {
+            return 0;
+        }
+        return player
                 .getGraveyard()
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
                 .mapToInt(MageObject::getManaValue)
-                .sum() >= amount;
+                .sum();
     }
 
     @Override
