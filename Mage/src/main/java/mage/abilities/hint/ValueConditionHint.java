@@ -8,31 +8,28 @@ import mage.game.Game;
 /**
  * @author notgreat
  */
-public class ValueConditionHint implements Hint {
+public class ValueConditionHint extends ConditionHint {
 
-    private final String name;
     private final DynamicValue value;
-    private final ConditionHint subHint;
 
-    public ValueConditionHint(String name, DynamicValue value, Condition condition) {
-        this(name, value, new ConditionHint(condition, condition.toString()));
+    public ValueConditionHint(DynamicValue value, Condition condition) {
+        super(condition, condition.toString());
+        this.value = value;
     }
 
-    public ValueConditionHint(String name, DynamicValue value, ConditionHint subHint) {
-        this.name = name;
+    public ValueConditionHint(String name, DynamicValue value, Condition condition) {
+        super(condition, name);
         this.value = value;
-        this.subHint = subHint;
     }
 
     private ValueConditionHint(final ValueConditionHint hint) {
-        this.name = hint.name;
+        super(hint);
         this.value = hint.value.copy();
-        this.subHint = hint.subHint.copy();
     }
 
     @Override
     public String getText(Game game, Ability ability) {
-        return subHint.getText(game, ability) + " (current: " + value.calculate(game, ability, null) + ")";
+        return super.getText(game, ability) + " (current: " + value.calculate(game, ability, null) + ")";
     }
 
     @Override

@@ -80,7 +80,7 @@ enum DiamondCityCondition implements Condition {
 enum DiamondCityCreaturesThatEnteredThisTurnCount implements DynamicValue {
     instance;
 
-    private static final Hint hint = new ValueConditionHint("Creatures that entered under your control this turn", instance, DiamondCityCondition.instance);
+    private static final Hint hint = new ValueConditionHint(instance, DiamondCityCondition.instance);
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

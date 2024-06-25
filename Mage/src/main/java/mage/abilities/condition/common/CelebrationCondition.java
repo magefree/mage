@@ -18,7 +18,7 @@ import java.util.List;
  */
 public enum CelebrationCondition implements Condition {
     instance;
-    private static final Hint hint = new ValueConditionHint("Nonland permanents that entered under your control this turn", CelebrationNonlandsThatEnteredThisTurnCount.instance, instance);
+    private static final Hint hint = new ValueConditionHint(CelebrationNonlandsThatEnteredThisTurnCount.instance, instance);
 
     @Override
     public boolean apply(Game game, Ability source) {
