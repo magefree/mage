@@ -14,7 +14,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * Search its owner’s graveyard, hand, and library for any number of cards with the same name as that card and exile them.
  * Then that player shuffles.
  *
- * @author LevelX2
+ * @author LevelX2, notgreat
  */
 public class SearchNameExileTests extends CardTestPlayerBase {
     /**
@@ -67,12 +67,11 @@ public class SearchNameExileTests extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerB, "Ready // Willing", 1);
         addCard(Zone.HAND, playerB, "Ready // Willing", 2);
         addCard(Zone.LIBRARY, playerB, "Ready // Willing", 1);
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
-        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "fused Ready // Willing");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Test of Talents", "Ready // Willing", "Ready // Willing");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Ready");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Test of Talents", "Ready", "Ready");
         setChoice(playerA, "Ready // Willing^Ready // Willing"); // Should be 2 in Graveyard now, take both
         setChoice(playerA, "Ready // Willing"); // Hand
         setChoice(playerA, "Ready // Willing"); // Library
@@ -120,7 +119,7 @@ public class SearchNameExileTests extends CardTestPlayerBase {
         assertExileCount(playerB, "Flamescroll Celebrant", 0);
     }
 
-    //Asserts "exile all possible" behavior for MDFC test above
+    //Asserts "exile all possible" behavior for MDFC test above, also tests fused split card
     @Test
     public void testSearchAndExileSplitSpellNonstrict() {
         addCard(Zone.HAND, playerA, "Test of Talents", 1);
