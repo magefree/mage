@@ -14,7 +14,7 @@ public class EvidenceHint extends ConditionHint {
     private final int needAmount;
 
     public EvidenceHint(int needAmount) {
-        super(CollectedEvidenceCondition.instance, "evidence was collected");
+        super(CollectedEvidenceCondition.instance);
         this.needAmount = needAmount;
     }
 
