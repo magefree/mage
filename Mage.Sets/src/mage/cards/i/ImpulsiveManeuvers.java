@@ -1,11 +1,16 @@
 
 package mage.cards.i;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,6 +19,7 @@ import mage.constants.SetTargetPointer;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.filter.StaticFilters;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -59,6 +65,9 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         this.wonFlip = game.getPlayer(source.getControllerId()).flipCoin(source, game, true);
+        game.informPlayers("The next time " + game.getObject(getTargetPointer().getFirst(game, source)).getLogName()
+                + " would deal combat damage this turn, "
+                + (wonFlip ? "it deals double that damage instead." : "prevent that damage.)"));
     }
 
     @Override
@@ -102,5 +111,24 @@ class ImpulsiveManeuversEffect extends PreventionEffectImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    static StaticHint wonHint = new StaticHint(
+            "The next time {this} would deal combat damage this turn, it deals double that damage instead.");
+    static StaticHint lostHint = new StaticHint(
+            "The next time {this} would deal combat damage this turn, prevent that damage.");
+
+    @Override
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
+        if (!permanent.getId().equals(this.getTargetPointer().getFirst(game, source))) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.asList(wonFlip ? wonHint : lostHint);
     }
 }
