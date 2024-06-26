@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
@@ -23,6 +24,7 @@ public class TolarianContemptTest extends CardTestCommander4Players {
 
         addTarget(playerA, "Raging Goblin");
         addTarget(playerA, "Memnite");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
         setChoice(playerD, true);
         setChoice(playerC, true);
 
