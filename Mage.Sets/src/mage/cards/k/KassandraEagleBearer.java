@@ -6,6 +6,7 @@ import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryGraveyardHandPutOntoBattlefieldEffect;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.abilities.keyword.HasteAbility;
@@ -46,7 +47,7 @@ public final class KassandraEagleBearer extends CardImpl {
         // When Kassandra enters the battlefield, search your graveyard, hand, and library for a card named The Spear of Leonidas, put it onto the battlefield, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardHandPutOntoBattlefieldEffect(filter), false));
         // Whenever a creature you control with a legendary Equipment attached to it deals combat damage to a player, draw a card.
-        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(new DrawCardSourceControllerEffect(1), equipFilter, false, null, true));
+        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(new DrawCardSourceControllerEffect(1), equipFilter, false, SetTargetPointer.NONE, true));
     }
 
     private KassandraEagleBearer(final KassandraEagleBearer card) {
