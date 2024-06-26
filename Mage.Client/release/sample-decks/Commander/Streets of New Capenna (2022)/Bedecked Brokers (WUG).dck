@@ -1,0 +1,91 @@
+1 [NCC:66] Agent's Toolkit
+1 [AER:127] Ajani Unyielding
+1 [NCC:12] Angelic Sleuth
+1 [ELD:331] Arcane Signet
+1 [M3C:318] Ash Barrens
+1 [NCC:22] Aven Courier
+1 [ARB:2] Aven Mimeomancer
+1 [NCC:194] Avenging Huntbonder
+1 [ALA:155] Bant Charm
+1 [ALA:221] Bant Panorama
+1 [NCC:55] Bribe Taker
+1 [SNC:171] Brokers Charm
+1 [NCC:68] Brokers Confluence
+1 [SNC:248] Brokers Hideout
+1 [BFZ:234] Canopy Vista
+1 [ELD:333] Command Tower
+1 [LCC:301] Commander's Sphere
+1 [NCC:14] Contractual Safeguard
+1 [IKO:234] Crystalline Giant
+1 [NCC:15] Damning Verdict
+1 [SOI:12] Declaration in Stone
+1 [NCC:71] Denry Klin, Editor in Chief
+1 [SHM:110] Devoted Druid
+1 [WWK:123] Everflowing Chalice
+1 [WAR:159] Evolution Sage
+1 [CON:142] Exotic Orchard
+1 [SNC:185] Exotic Pets
+1 [NCC:59] Family's Favor
+1 [GTC:162] Fathom Mage
+1 [9ED:297] Fellwar Stone
+1 [EVE:177] Flooded Grove
+5 [OTJ:276] Forest
+1 [SCG:120] Forgotten Ancient
+1 [SOI:274] Fortified Village
+1 [NCC:83] Gavel of the Righteous
+1 [ISD:239] Gavony Township
+1 [LCC:128] Generous Gift
+1 [WAR:17] Grateful Apparition
+1 [LRW:21] Hoofprints of the Stag
+1 [RNA:131] Incubation Druid
+4 [OTJ:273] Island
+1 [ARB:128] Jenara, Asura of War
+1 [WAR:248] Karn's Bastion
+1 [NCC:7] Kros, Defense Contractor
+1 [KHM:264] Littjara Mirrorlake
+1 [FUT:171] Llanowar Reborn
+1 [ZNR:24] Luminarch Aspirant
+1 [ELD:346] Midnight Clock
+1 [M3C:358] Myriad Landscape
+1 [MH3:302] Nesting Grounds
+1 [MRD:222] Oblivion Stone
+1 [AKH:234] Oracle's Vault
+1 [NCC:63] Park Heights Maverick
+1 [M3C:363] Path of Ancestry
+5 [OTJ:272] Plains
+1 [BFZ:42] Planar Outburst
+1 [SOI:278] Port Town
+1 [MRD:229] Power Conduit
+1 [BFZ:241] Prairie Stream
+1 [IKO:200] Primal Empathy
+1 [NCC:19] Resourceful Defense
+1 [AER:123] Rishkar's Expertise
+1 [AER:122] Rishkar, Peema Renegade
+1 [WAR:213] Roalesk, Apex Hybrid
+1 [M21:204] Scavenging Ooze
+1 [ALA:229] Seaside Citadel
+1 [NCC:29] Shield Broker
+1 [NCC:20] Skyboon Evangelist
+1 [ODY:327] Skycloud Expanse
+1 [AER:46] Skyship Plunderer
+1 [NCC:312] Slippery Bogbonder
+1 [SUM:274] Sol Ring
+1 [ELD:322] Steelbane Hydra
+1 [NCC:32] Storm of Forms
+1 [ODY:328] Sungrass Prairie
+1 [M12:219] Swiftfoot Boots
+1 [M21:254] Temple of Mystery
+1 [NPH:47] Tezzeret's Gambit
+1 [ONE:288] Thrummingbird
+1 [MOC:212] Together Forever
+1 [GTC:204] Urban Evolution
+1 [LRW:276] Vivid Creek
+1 [LRW:277] Vivid Grove
+1 [LRW:279] Vivid Meadow
+1 [DGM:115] Vorel of the Hull Clade
+1 [TSB:89] Wall of Roots
+1 [EVE:80] Wickerbough Elder
+1 [IKO:72] Wingspan Mentor
+SB: 1 [NCC:5] Perrie, the Pulverizer
+LAYOUT MAIN:(1,9)(CARD_TYPE,false,61)|([IKO:234])([NCC:66],[ELD:331],[LCC:301],[WWK:123],[9ED:297],[NCC:83],[ELD:346],[MRD:222],[AKH:234],[MRD:229],[SUM:274],[M12:219])([NCC:12],[NCC:22],[ARB:2],[NCC:194],[NCC:55],[NCC:71],[SHM:110],[WAR:159],[GTC:162],[SCG:120],[WAR:17],[RNA:131],[ARB:128],[NCC:7],[ZNR:24],[NCC:63],[AER:122],[WAR:213],[M21:204],[NCC:29],[NCC:20],[AER:46],[NCC:312],[ELD:322],[ONE:288],[DGM:115],[TSB:89],[EVE:80],[IKO:72])([NCC:59],[IKO:200],[NCC:19],[MOC:212])([ALA:155],[SNC:171],[NCC:68],[NCC:14],[SNC:185],[LCC:128],[NCC:32])([M3C:318],[ALA:221],[SNC:248],[BFZ:234],[ELD:333],[CON:142],[EVE:177],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[SOI:274],[ISD:239],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[WAR:248],[KHM:264],[FUT:171],[M3C:358],[MH3:302],[M3C:363],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[SOI:278],[BFZ:241],[ALA:229],[ODY:327],[ODY:328],[M21:254],[LRW:276],[LRW:277],[LRW:279])([AER:127])([NCC:15],[SOI:12],[BFZ:42],[AER:123],[NPH:47],[GTC:204])([LRW:21])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([NCC:5])

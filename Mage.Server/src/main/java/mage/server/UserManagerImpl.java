@@ -5,6 +5,8 @@ import mage.server.managers.UserManager;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.server.util.ServerMessagesUtil;
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 
@@ -27,12 +29,16 @@ public class UserManagerImpl implements UserManager {
     private static final int USER_CONNECTION_TIMEOUT_SESSION_EXPIRE_AFTER_SECS = 3 * 60; // session expire - remove from all tables and chats (can't reconnect after it)
     private static final int USER_CONNECTION_TIMEOUT_REMOVE_FROM_SERVER_SECS = 8 * 60; // removes from users list
 
-    private static final int SERVER_USERS_LIST_UPDATE_SECS = 4; // server side updates (client use own timeouts to request users list)
+    private static final int SERVER_USERS_LIST_UPDATE_SECS = 10; // server side updates (client use own timeouts to request users list)
 
     private static final Logger logger = Logger.getLogger(UserManagerImpl.class);
 
-    protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
-    protected final ScheduledExecutorService userListExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected final ScheduledExecutorService CONNECTION_EXPIRED_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_CONNECTION_EXPIRED_CHECK)
+    );
+    protected final ScheduledExecutorService USERS_LIST_REFRESH_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_USERS_LIST_REFRESH)
+    );
 
     private List<UserView> userInfoList = new ArrayList<>(); // all users list for main room/chat
     private int maxUsersOnline = 0;
@@ -50,8 +56,8 @@ public class UserManagerImpl implements UserManager {
 
     public void init() {
         USER_EXECUTOR = managerFactory.threadExecutor().getCallExecutor();
-        expireExecutor.scheduleAtFixedRate(this::checkExpired, USER_CONNECTION_TIMEOUTS_CHECK_SECS, USER_CONNECTION_TIMEOUTS_CHECK_SECS, TimeUnit.SECONDS);
-        userListExecutor.scheduleAtFixedRate(this::updateUserInfoList, SERVER_USERS_LIST_UPDATE_SECS, SERVER_USERS_LIST_UPDATE_SECS, TimeUnit.SECONDS);
+        CONNECTION_EXPIRED_EXECUTOR.scheduleAtFixedRate(this::checkExpired, USER_CONNECTION_TIMEOUTS_CHECK_SECS, USER_CONNECTION_TIMEOUTS_CHECK_SECS, TimeUnit.SECONDS);
+        USERS_LIST_REFRESH_EXECUTOR.scheduleAtFixedRate(this::updateUserInfoList, SERVER_USERS_LIST_UPDATE_SECS, SERVER_USERS_LIST_UPDATE_SECS, TimeUnit.SECONDS);
     }
 
     @Override

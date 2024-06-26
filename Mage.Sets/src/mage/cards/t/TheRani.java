@@ -1,32 +1,22 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.combat.GoadTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.GoadedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.MarkOfTheRaniToken;
 import mage.target.common.TargetCreaturePermanent;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +47,6 @@ public final class TheRani extends CardImpl {
 
         // Whenever a goaded creature deals combat damage to one of your opponents, investigate.
         Ability damageDealtAbility = new DealsDamageToAPlayerAllTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new InvestigateEffect(),
                 filter, false, SetTargetPointer.NONE,
                 true, false, TargetController.OPPONENT)

@@ -25,6 +25,8 @@ import mage.components.CardInfoPane;
 import mage.game.GameException;
 import mage.remote.Session;
 import mage.util.DeckUtil;
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
@@ -1493,11 +1495,14 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void btnSubmitTimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitTimerActionPerformed
 
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor(
+                new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_SUBMIT_TIMER)
+        );
         timeToSubmit = 60;
         this.btnSubmitTimer.setEnabled(false);
 
-        scheduledExecutorService.schedule(() -> {
+        // TODO: need code and feature review. It sends deck every minute -- is it useless? There is another feature with auto-save
+        executorService.schedule(() -> {
             if (updateDeckTask != null) {
                 updateDeckTask.cancel(true);
             }

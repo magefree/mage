@@ -193,4 +193,25 @@ public final class GUISizeHelper {
     public static int getCardsScrollbarUnitInc(int cardSize) {
         return Math.max(8, cardSize / 4);
     }
+
+    /**
+     * Scale GUI size values due scale coeff
+     */
+    public static int guiSizeScale(int value, float scaleMod) {
+        // must keep 1 instead 0 on too small values
+        if (value == 0) {
+            return 0;
+        } else if (value < 0) {
+            return Math.min(-1, Math.round(value * scaleMod));
+        } else {
+            return Math.max(1, Math.round(value * scaleMod));
+        }
+    }
+
+    /**
+     * Scale GUI size values due scale coeff
+     */
+    public static float guiSizeScale(float value, float scaleMod) {
+        return value * scaleMod;
+    }
 }

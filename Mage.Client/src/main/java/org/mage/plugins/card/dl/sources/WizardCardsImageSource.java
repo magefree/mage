@@ -508,7 +508,6 @@ public enum WizardCardsImageSource implements CardImageSource {
 
     private Map<String, String> getSetLinks(String cardSet) {
         LinkedHashMap<String, String> setLinks = new LinkedHashMap<>();
-        ExecutorService executor = Executors.newFixedThreadPool(10);
         try {
             String setNames = setsAliases.get(cardSet);
             if (setNames == null) {
@@ -561,15 +560,6 @@ public enum WizardCardsImageSource implements CardImageSource {
             }
         } catch (IOException ex) {
             logger.error("Exception when parsing the wizards page: " + ex.getMessage());
-        }
-
-        executor.shutdown();
-
-        while (!executor.isTerminated()) {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException ie) {
-            }
         }
 
         return setLinks;

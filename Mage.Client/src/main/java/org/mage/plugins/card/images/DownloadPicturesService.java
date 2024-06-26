@@ -13,6 +13,8 @@ import mage.client.util.CardLanguage;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
@@ -38,6 +40,8 @@ import java.util.stream.Collectors;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
+ * Images downloader
+ *
  * @author JayDi85
  */
 public class DownloadPicturesService extends DefaultBoundedRangeModel implements DownloadServiceInfo, Runnable {
@@ -629,7 +633,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             }
         }
 
-        int downloadThreadsAmount = Integer.parseInt((String) uiDialog.getDownloadThreadsCombo().getSelectedItem());
+        int downloadThreadsAmount = Math.max(1, Integer.parseInt((String) uiDialog.getDownloadThreadsCombo().getSelectedItem()));
 
         if (proxy != null) {
             logger.info("Started download of " + cardsDownloadQueue.size() + " images"
@@ -639,7 +643,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             updateProgressMessage("Preparing download list...");
             if (selectedSource.prepareDownloadList(this, cardsDownloadQueue)) {
                 update(0, cardsDownloadQueue.size());
-                ExecutorService executor = Executors.newFixedThreadPool(downloadThreadsAmount);
+                ExecutorService executor = Executors.newFixedThreadPool(
+                        downloadThreadsAmount,
+                        new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_IMAGES_DOWNLOADER, false)
+                );
                 for (int i = 0; i < cardsDownloadQueue.size() && !this.isNeedCancel(); i++) {
                     try {
                         CardDownloadData card = cardsDownloadQueue.get(i);
