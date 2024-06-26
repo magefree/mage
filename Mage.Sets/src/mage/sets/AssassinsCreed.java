@@ -16,7 +16,7 @@ public final class AssassinsCreed extends ExpansionSet {
     }
 
     private AssassinsCreed() {
-        super("Assassin's Creed", "ACR", ExpansionSet.buildDate(2024, 7, 5), SetType.EXPANSION);
+        super("Assassin's Creed", "ACR", ExpansionSet.buildDate(2024, 7, 5), SetType.SUPPLEMENTAL_MODERN_LEGAL);
         this.blockName = "Assassin's Creed"; // for sorting in GUI
         this.hasBasicLands = true;
         this.hasBoosters = false;
