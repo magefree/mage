@@ -99,6 +99,18 @@ class AuroraShifterCopyApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
 
+        // At the beginning of combat on your turn, you may pay {E}{E}. When you do, Aurora Shifter becomes a copy of another target creature you control, except it has this ability and "Whenever this creature deals combat damage to a player, you get that many {E}."
+        ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
+                new AuroraShifterCopyEffect(),
+                false);
+        reflexive.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+
+        blueprint.getAbilities().add(new BeginningOfCombatTriggeredAbility(
+                new DoWhenCostPaid(reflexive, new PayEnergyCost(2),
+                        "Pay {E}{E}? When you do, {this} becomes a copy of another target creature you control, except it has this ability and \"Whenever this creature deals combat damage to a player, you get that many {E}.\""),
+                TargetController.YOU, false));
+
+
         blueprint.getAbilities().add(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new GetEnergyCountersControllerEffect(SavedDamageValue.MANY)));
         return true;
