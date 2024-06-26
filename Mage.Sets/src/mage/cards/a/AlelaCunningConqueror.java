@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.FirstSpellOpponentsTurnTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -13,6 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.FaerieRogueToken;
+import mage.target.TargetPermanent;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -22,6 +24,8 @@ import java.util.UUID;
 public final class AlelaCunningConqueror extends CardImpl {
 
     private static final FilterCreaturePermanent faerieFilter = new FilterCreaturePermanent(SubType.FAERIE, "Faeries");
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("creature that player controls");
 
     public AlelaCunningConqueror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
@@ -42,8 +46,11 @@ public final class AlelaCunningConqueror extends CardImpl {
 
         // Whenever one or more Faeries you control deal combat damage to a player, goad target creature that player controls.
         Effect effect = new GoadTargetEffect().setText("goad target creature that player controls");
-        TriggeredAbility trigger = new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, effect, faerieFilter, SetTargetPointer.PLAYER, false);
-        this.addAbility(trigger);
+        Ability ability = new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, effect, faerieFilter, SetTargetPointer.PLAYER, false);
+        ability.addTarget(new TargetPermanent(filter));
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+
+        this.addAbility(ability);
     }
 
     private AlelaCunningConqueror(final AlelaCunningConqueror card) {
