@@ -122,6 +122,8 @@ class EtrataFlipEffect extends OneShotEffect {
                 player.moveCards(card, Zone.EXILED, source, game);
                 game.processAction();
                 CardUtil.castSpellWithAttributesForFree(player, source, game, card);
+                // Not sure why, but the client asks if you want to cast a face-down creature instead of the actual spell
+                // It plays correctly and casts the instant/sorcery spell anyway
             }
         }
         return false;
