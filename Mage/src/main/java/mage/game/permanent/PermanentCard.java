@@ -181,6 +181,13 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public boolean turnFaceUp(Ability source, Game game, UUID playerId) {
+        if (!this.getBasicMageObject().isPermanent()){
+            // 701.34g. If a manifested permanent that's represented by an instant or sorcery card would turn face up,
+            //   its controller reveals it and leaves it face down. Abilities that trigger whenever a permanent
+            //   is turned face up won't trigger.
+            // TODO: add reveal effect
+            return false;
+        }
         if (super.turnFaceUp(source, game, playerId)) {
             // TODO: miss types, abilities, color and other things for restore?!
             power.setModifiedBaseValue(power.getBaseValue());
