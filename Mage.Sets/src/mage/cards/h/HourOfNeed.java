@@ -75,7 +75,7 @@ class HourOfNeedExileEffect extends OneShotEffect {
         if (tokenCounts.values().stream().noneMatch(i -> (i > 0))) {
             return false;
         }
-        game.getState().processAction(game);
+        game.processAction();
         Token token = new HourOfNeedSphinxToken();
         for (Map.Entry<UUID, Integer> playerTokenCount : tokenCounts.entrySet()) {
             token.putOntoBattlefield(playerTokenCount.getValue(), game, source, playerTokenCount.getKey());

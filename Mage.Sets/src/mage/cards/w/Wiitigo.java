@@ -71,7 +71,7 @@ class BlockedOrBeenBlockedSinceYourLastUpkeepCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent wiitigo = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent wiitigo = game.getPermanent(source.getSourceId());
         BlockedOrBeenBlockedSinceYourLastUpkeepWatcher watcher = game.getState().getWatcher(
                 BlockedOrBeenBlockedSinceYourLastUpkeepWatcher.class);
         if (wiitigo != null

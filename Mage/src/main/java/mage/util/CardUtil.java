@@ -10,6 +10,7 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -929,7 +930,7 @@ public final class CardUtil {
         boolean xValue = amount.toString().equals("X");
         if (xValue) {
             sb.append("X ").append(counter.getName()).append(" counters");
-        } else if (amount == SavedDamageValue.MANY) {
+        } else if (amount == SavedDamageValue.MANY || amount == SavedGainedLifeValue.MANY) {
             sb.append("that many ").append(counter.getName()).append(" counters");
         } else {
             sb.append(counter.getDescription());
@@ -1053,10 +1054,8 @@ public final class CardUtil {
             if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
                 continue;
             }
-            for (Target target : stackAbility.getTargets()) {
-                if (target.getTargets().contains(event.getTargetId())) {
-                    return stackObject;
-                }
+            if (CardUtil.getAllSelectedTargets(stackAbility, game).contains(event.getTargetId())) {
+                return stackObject;
             }
         }
         return null;
@@ -1242,6 +1241,7 @@ public final class CardUtil {
             }
 
             // restrict hints only for permanents, not cards
+
             // total hints
             if (!abilityHints.isEmpty()) {
                 rules.add(HintUtils.HINT_START_MARK);
@@ -1732,11 +1732,27 @@ public final class CardUtil {
      */
     public static Map<String, Object> getSourceCostsTagsMap(Game game, Ability source) {
         Map<String, Object> costTags;
+
+        // from spell ability - direct access
         costTags = source.getCostsTagMap();
-        if (costTags == null && source.getSourcePermanentOrLKI(game) != null) {
-            costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
+        if (costTags != null) {
+            return costTags;
         }
-        return costTags;
+
+        // from any ability after resolve - access by permanent
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        if (permanent != null) {
+            costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
+            return costTags;
+        }
+
+        // from any ability before resolve (on stack) - access by spell ability
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject instanceof Spell) {
+            return ((Spell) sourceObject).getSpellAbility().getCostsTagMap();
+        }
+
+        return null;
     }
 
     /**

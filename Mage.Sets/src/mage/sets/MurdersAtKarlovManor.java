@@ -92,10 +92,12 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Crimestopper Sprite", 49, Rarity.COMMON, mage.cards.c.CrimestopperSprite.class));
         cards.add(new SetCardInfo("Crowd-Control Warden", 193, Rarity.COMMON, mage.cards.c.CrowdControlWarden.class));
         cards.add(new SetCardInfo("Cryptex", 251, Rarity.RARE, mage.cards.c.Cryptex.class));
+        cards.add(new SetCardInfo("Cryptic Coat", 50, Rarity.RARE, mage.cards.c.CrypticCoat.class));
         cards.add(new SetCardInfo("Culvert Ambusher", 158, Rarity.UNCOMMON, mage.cards.c.CulvertAmbusher.class));
         cards.add(new SetCardInfo("Curious Cadaver", 194, Rarity.UNCOMMON, mage.cards.c.CuriousCadaver.class));
         cards.add(new SetCardInfo("Curious Inquiry", 51, Rarity.UNCOMMON, mage.cards.c.CuriousInquiry.class));
         cards.add(new SetCardInfo("Deadly Complication", 195, Rarity.UNCOMMON, mage.cards.d.DeadlyComplication.class));
+        cards.add(new SetCardInfo("Deadly Cover-Up", 83, Rarity.RARE, mage.cards.d.DeadlyCoverUp.class));
         cards.add(new SetCardInfo("Deduce", 52, Rarity.COMMON, mage.cards.d.Deduce.class));
         cards.add(new SetCardInfo("Defenestrated Phantom", 11, Rarity.COMMON, mage.cards.d.DefenestratedPhantom.class));
         cards.add(new SetCardInfo("Delney, Streetwise Lookout", 12, Rarity.MYTHIC, mage.cards.d.DelneyStreetwiseLookout.class));
@@ -184,6 +186,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Long Goodbye", 92, Rarity.UNCOMMON, mage.cards.l.LongGoodbye.class));
         cards.add(new SetCardInfo("Lost in the Maze", 64, Rarity.RARE, mage.cards.l.LostInTheMaze.class));
         cards.add(new SetCardInfo("Loxodon Eavesdropper", 168, Rarity.COMMON, mage.cards.l.LoxodonEavesdropper.class));
+        cards.add(new SetCardInfo("Lumbering Laundry", 253, Rarity.UNCOMMON, mage.cards.l.LumberingLaundry.class));
         cards.add(new SetCardInfo("Lush Portico", 263, Rarity.RARE, mage.cards.l.LushPortico.class));
         cards.add(new SetCardInfo("Macabre Reconstruction", 93, Rarity.COMMON, mage.cards.m.MacabreReconstruction.class));
         cards.add(new SetCardInfo("Magnetic Snuffler", 254, Rarity.UNCOMMON, mage.cards.m.MagneticSnuffler.class));

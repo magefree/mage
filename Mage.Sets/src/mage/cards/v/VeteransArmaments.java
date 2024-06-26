@@ -30,7 +30,7 @@ public final class VeteransArmaments extends CardImpl {
     private static final DynamicValue xValue = new AttackingCreatureCount();
 
     public VeteransArmaments(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.SOLDIER);
         this.subtype.add(SubType.EQUIPMENT);
 

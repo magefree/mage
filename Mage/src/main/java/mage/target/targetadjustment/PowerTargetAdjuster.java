@@ -43,7 +43,7 @@ public class PowerTargetAdjuster implements TargetAdjuster {
         int amount = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
         Filter<MageObject> filter = newTarget.getFilter();
         filter.add(new PowerPredicate(comparison, amount));
-        newTarget.setTargetName(filter.getMessage() + " (Power " + comparison + " " + amount + ")");
+        newTarget.withTargetName(filter.getMessage() + " (Power " + comparison + " " + amount + ")");
         ability.getTargets().clear();
         ability.addTarget(newTarget);
     }

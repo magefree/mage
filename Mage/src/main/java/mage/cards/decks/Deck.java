@@ -254,10 +254,11 @@ public class Deck implements Serializable, Copyable<Deck> {
         return new Deck(this);
     }
 
-    public long getDeckHash() {
+    public long getDeckHash(boolean ignoreMainBasicLands) {
         return DeckUtil.getDeckHash(
                 this.cards.stream().map(MageObject::getName).collect(Collectors.toList()),
-                this.sideboard.stream().map(MageObject::getName).collect(Collectors.toList())
+                this.sideboard.stream().map(MageObject::getName).collect(Collectors.toList()),
+                ignoreMainBasicLands
         );
     }
 }

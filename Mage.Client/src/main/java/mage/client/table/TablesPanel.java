@@ -30,8 +30,6 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRendererUtils;
 import org.ocpsoft.prettytime.Duration;
 import org.ocpsoft.prettytime.PrettyTime;
-import org.ocpsoft.prettytime.TimeFormat;
-import org.ocpsoft.prettytime.units.JustNow;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -639,10 +637,30 @@ public class TablesPanel extends javax.swing.JPanel {
         buttonNextMessage.setFont(GUISizeHelper.menuFont);
         labelMessageHeader.setFont(new Font(GUISizeHelper.menuFont.getName(), Font.BOLD, GUISizeHelper.menuFont.getSize()));
         labelMessageText.setFont(GUISizeHelper.menuFont);
+
+        btnQuickStart2Player.setFont(GUISizeHelper.menuFont);
+        btnQuickStart4Player.setFont(GUISizeHelper.menuFont);
+        btnQuickStartMCTS.setFont(GUISizeHelper.menuFont);
+    }
+
+    private void restoreDividerLocations() {
+        Rectangle currentBounds = MageFrame.getDesktop().getBounds();
+        if (currentBounds != null) {
+            String firstDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_1, null);
+            String tableDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_2, null);
+            String chatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_3, null);
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, firstDivider, jSplitPane1);
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, tableDivider, jSplitPaneTables);
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, chatDivider, chatPanelMain);
+        }
     }
 
     private void saveDividerLocations() {
-        // save divider locations and divider saveDividerLocations
+        // save divider locations
+        if (this.jSplitPane1.getDividerLocation() == -1) {
+            // server lobby hidden by default, so ignore that settings
+            return;
+        }
         GuiDisplayUtil.saveCurrentBoundsToPrefs();
         GuiDisplayUtil.saveDividerLocationToPrefs(KEY_TABLES_DIVIDER_LOCATION_1, this.jSplitPane1.getDividerLocation());
         GuiDisplayUtil.saveDividerLocationToPrefs(KEY_TABLES_DIVIDER_LOCATION_2, this.jSplitPaneTables.getDividerLocation());
@@ -657,18 +675,6 @@ public class TablesPanel extends javax.swing.JPanel {
     private void saveGuiSettings() {
         TableUtil.saveActiveFiltersToPrefs(KEY_TABLES_FILTER_SETTINGS, filterButtons);
         TableUtil.saveColumnWidthAndOrderToPrefs(tableTables, KEY_TABLES_COLUMNS_WIDTH, KEY_TABLES_COLUMNS_ORDER);
-    }
-
-    private void restoreDividers() {
-        Rectangle currentBounds = MageFrame.getDesktop().getBounds();
-        if (currentBounds != null) {
-            String firstDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_1, null);
-            String tableDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_2, null);
-            String chatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_3, null);
-            GuiDisplayUtil.restoreDividerLocations(currentBounds, firstDivider, jSplitPane1);
-            GuiDisplayUtil.restoreDividerLocations(currentBounds, tableDivider, jSplitPaneTables);
-            GuiDisplayUtil.restoreDividerLocations(currentBounds, chatDivider, chatPanelMain);
-        }
     }
 
     public Map<String, JComponent> getUIComponents() {
@@ -774,12 +780,9 @@ public class TablesPanel extends javax.swing.JPanel {
         //tableModel.setSession(session);
 
         reloadServerMessages();
-
         MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
 
-        // divider locations have to be set with delay else values set are overwritten with system defaults
-        Executors.newSingleThreadScheduledExecutor().schedule(() -> restoreDividers(), 300, TimeUnit.MILLISECONDS);
-
+        restoreDividerLocations();
     }
 
     protected void reloadServerMessages() {
@@ -1683,7 +1686,7 @@ public class TablesPanel extends javax.swing.JPanel {
             DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile, false);
 
             PlayerType aiType = useMonteCarloAI ? PlayerType.COMPUTER_MONTE_CARLO : PlayerType.COMPUTER_MAD;
-            int numSeats = gameName.contains("2") ? 2 : 4;
+            int numSeats = gameName.contains("2") || gameName.contains("Monte Carlo") ? 2 : 4;
             boolean multiPlayer = numSeats > 2;
 
             MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer, numSeats);

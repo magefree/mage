@@ -16,6 +16,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
+import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.*;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
@@ -643,6 +644,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public Card getSourceCardIfItStillExists(Game game) {
+        return this.ability.getSourceCardIfItStillExists(game);
+    }
+
+    @Override
     public Permanent getSourcePermanentIfItStillExists(Game game) {
         return this.ability.getSourcePermanentIfItStillExists(game);
     }
@@ -732,6 +738,19 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return false;
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
     }
 
     @Override

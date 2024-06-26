@@ -26,7 +26,7 @@ public final class ScurrilousSentry extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Scurrilous Sentry enters the battlefield or attacks, it connives.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ConniveSourceEffect()));

@@ -1,8 +1,5 @@
 package mage.cards.k;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -10,10 +7,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterOpponent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -21,15 +18,18 @@ import mage.game.permanent.token.BeastToken4;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author noahg
  */
 public final class KeeperOfTheBeasts extends CardImpl {
 
     public KeeperOfTheBeasts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -90,7 +90,7 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
                         < game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)
                         && !player.hasLeft()
                         && filter.match(player, sourceControllerId, source, game)
-                        && player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                        && player.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     count++;
                     if (count >= this.minNumberOfTargets) {
                         return true;

@@ -1652,6 +1652,26 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
+            // pay colorless - more restrictive than hybrid (think of it like colored)
+            for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
+                if (cost instanceof ColorlessManaCost) {
+                    for (Mana netMana : manaAbility.getNetMana(game)) {
+                        if (cost.testPay(netMana) || hasApprovingObject) {
+                            if (netMana instanceof ConditionalMana
+                                    && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
+                                continue;
+                            }
+                            if (hasApprovingObject && !canUseAsThoughManaToPayManaCost(cost, ability, netMana,
+                                    manaAbility, mageObject, game)) {
+                                continue;
+                            }
+                            if (activateAbility(manaAbility, game)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
             // then pay hybrid
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
                 if (cost instanceof HybridManaCost) {
@@ -1670,9 +1690,9 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
-            // then pay mono hybrid
+            // then pay colorless hybrid - more restrictive than mono hybrid
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
-                if (cost instanceof MonoHybridManaCost) {
+                if (cost instanceof ColorlessHybridManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || hasApprovingObject) {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
@@ -1688,9 +1708,9 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
-            // pay colorless
+            // then pay mono hybrid
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
-                if (cost instanceof ColorlessManaCost) {
+                if (cost instanceof MonoHybridManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || hasApprovingObject) {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {

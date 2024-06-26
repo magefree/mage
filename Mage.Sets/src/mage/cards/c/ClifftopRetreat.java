@@ -2,12 +2,8 @@
 
 package mage.cards.c;
 
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
@@ -24,19 +20,24 @@ import java.util.UUID;
  */
 public final class ClifftopRetreat extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain or a Plains");
 
     static {
         filter.add(Predicates.or(SubType.MOUNTAIN.getPredicate(), SubType.PLAINS.getPredicate()));
     }
 
-    public ClifftopRetreat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+    private static final YouControlPermanentCondition condition = new YouControlPermanentCondition(filter);
 
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter));
-        String abilityText = " tapped unless you control a Mountain or a Plains";
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+    public ClifftopRetreat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
+
+        // Clifftop Retreat enters the battlefield tapped unless you control a Mountain or a Plains.
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
+
+        // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
+
+        // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
     }
 

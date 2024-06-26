@@ -30,7 +30,7 @@ public final class DreamThiefsBandana extends CardImpl {
         ));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private DreamThiefsBandana(final DreamThiefsBandana card) {
@@ -42,4 +42,3 @@ public final class DreamThiefsBandana extends CardImpl {
         return new DreamThiefsBandana(this);
     }
 }
-

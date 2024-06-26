@@ -34,7 +34,7 @@ public final class Vrock extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new LoseLifeOpponentsEffect(3), TargetController.YOU,
                 RevoltCondition.instance, false
-        ).withFlavorWord("Toxic Spores"), new RevoltWatcher());
+        ).withFlavorWord("Toxic Spores").addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private Vrock(final Vrock card) {

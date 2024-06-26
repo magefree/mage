@@ -50,7 +50,7 @@ public final class CaythFamedMechanist extends CardImpl {
         ability.addCost(new TapSourceCost());
 
         // * Proliferate.
-        ability.addMode(new Mode(new ProliferateEffect()));
+        ability.addMode(new Mode(new ProliferateEffect(false)));
         this.addAbility(ability);
     }
 

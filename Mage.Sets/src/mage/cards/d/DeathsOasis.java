@@ -17,12 +17,9 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -67,7 +64,7 @@ public final class DeathsOasis extends CardImpl {
 class DeathsOasisTriggeredAbility extends DiesCreatureTriggeredAbility {
 
     DeathsOasisTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, false);
+        super(null, false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, false);
     }
 
     private DeathsOasisTriggeredAbility(final DeathsOasisTriggeredAbility ability) {

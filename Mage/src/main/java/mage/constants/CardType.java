@@ -25,7 +25,7 @@ public enum CardType {
     PLANESWALKER("Planeswalker", true, true),
     SCHEME("Scheme", false, false),
     SORCERY("Sorcery", false, true),
-    TRIBAL("Tribal", false, false),
+    KINDRED("Kindred", false, false),
     VANGUARD("Vanguard", false, false);
 
     private final String text;

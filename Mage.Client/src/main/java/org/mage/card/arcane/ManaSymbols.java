@@ -73,12 +73,12 @@ public final class ManaSymbols {
     private static final String[] symbols = new String[]{
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
             "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-            "B", "BG", "BR", "BP", "2B",
-            "G", "GU", "GW", "GP", "2G",
-            "R", "RG", "RW", "RP", "2R",
+            "B", "BG", "BR", "BP", "2B", "CB",
+            "G", "GU", "GW", "GP", "2G", "CG",
+            "R", "RG", "RW", "RP", "2R", "CR",
             "S", "T", "Q",
-            "U", "UB", "UR", "UP", "2U",
-            "W", "WB", "WU", "WP", "2W",
+            "U", "UB", "UR", "UP", "2U", "CU",
+            "W", "WB", "WU", "WP", "2W", "CW",
             "X", "C", "E", "P",
             "BGP", "BRP", "GUP", "GWP", "RGP", "RWP", "UBP", "URP", "WBP", "WUP"};
 
@@ -334,17 +334,17 @@ public final class ManaSymbols {
         // total errors
         String errorInfo = "";
         if (iconErrors.get(0) > 0) {
-            errorInfo += "SVG fails - " + iconErrors.get(0);
+            errorInfo += "SVG miss - " + iconErrors.get(0);
         }
         if (iconErrors.get(1) > 0) {
             if (!errorInfo.isEmpty()) {
                 errorInfo += ", ";
             }
-            errorInfo += "GIF fails - " + iconErrors.get(1);
+            errorInfo += "GIF miss - " + iconErrors.get(1);
         }
 
         if (!errorInfo.isEmpty()) {
-            logger.warn("Symbols can't be load for size " + size + ": " + errorInfo);
+            logger.warn("Symbols can't be loaded, make sure you download it by main menu - size " + size + ", " + errorInfo);
         }
 
         manaImages.put(size, sizedSymbols);

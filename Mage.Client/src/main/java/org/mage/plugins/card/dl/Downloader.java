@@ -1,5 +1,7 @@
 package org.mage.plugins.card.dl;
 
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import org.apache.log4j.Logger;
 import org.jetlang.channels.Channel;
 import org.jetlang.channels.MemoryChannel;
@@ -22,7 +24,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Downloader
+ * Symbols downloader
  *
  * @author Clemens Koza, JayDi85
  */
@@ -34,7 +36,9 @@ public class Downloader extends AbstractLaternaBean {
     private final Channel<DownloadJob> jobsQueue = new MemoryChannel<>();
     private CountDownLatch worksCount = null;
 
-    private final ExecutorService pool = Executors.newCachedThreadPool();
+    private final ExecutorService pool = Executors.newCachedThreadPool(
+            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_SYMBOLS_DOWNLOADER, false)
+    );
     private final List<Fiber> fibers = new ArrayList<>();
 
     public Downloader() {

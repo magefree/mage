@@ -20,7 +20,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class BoundInSilence extends CardImpl {
 
     public BoundInSilence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ENCHANTMENT},"{2}{W}");
         this.subtype.add(SubType.REBEL, SubType.AURA);
 
 

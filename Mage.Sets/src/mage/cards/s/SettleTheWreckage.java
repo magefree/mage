@@ -71,7 +71,7 @@ class SettleTheWreckageEffect extends OneShotEffect {
             return true;
         }
         controller.moveCards(toExile, Zone.EXILED, source, game);
-        game.getState().processAction(game);
+        game.processAction();
 
         TargetCardInLibrary target = new TargetCardInLibrary(0, attackers,
                 attackers > 1 ? StaticFilters.FILTER_CARD_BASIC_LANDS : StaticFilters.FILTER_CARD_BASIC_LAND

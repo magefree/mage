@@ -125,7 +125,7 @@ class SchemingFenceDisableEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getState().getPermanent(source.getSourceId());
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent == null) {
             return false;
         }

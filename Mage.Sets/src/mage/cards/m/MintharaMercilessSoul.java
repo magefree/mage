@@ -41,7 +41,7 @@ public final class MintharaMercilessSoul extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new AddCountersPlayersEffect(CounterType.EXPERIENCE.createInstance(), TargetController.YOU),
                 TargetController.YOU, RevoltCondition.instance, false
-        ), new RevoltWatcher());
+        ).addHint(RevoltCondition.getHint()), new RevoltWatcher());
 
         // Creatures you control get +1/+0 for each experience counter you have.
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(

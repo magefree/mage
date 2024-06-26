@@ -93,7 +93,7 @@ class AngrathMinotaurPirateThirdAbilityEffect extends OneShotEffect {
                 permanent.destroy(source, game, false);
                 powerSum += permanent.getPower().getValue();
             }
-            game.getState().processAction(game);
+            game.processAction();
             targetOpponent.damage(powerSum, source.getSourceId(), source, game);
         }
         return true;

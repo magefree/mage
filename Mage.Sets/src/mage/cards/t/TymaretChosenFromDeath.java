@@ -97,7 +97,7 @@ class TymaretChosenFromDeathEffect extends OneShotEffect {
                 .mapToInt(x -> 1)
                 .sum();
         if (lifeGain > 0) {
-            game.getState().processAction(game);
+            game.processAction();
             player.gainLife(lifeGain, game, source);
         }
         return true;

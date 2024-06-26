@@ -38,7 +38,7 @@ public final class MandibularKite extends CardImpl {
         this.addAbility(ability);
 
         // Equip {3}{W}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{3}{W}")));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{3}{W}"), false));
     }
 
     private MandibularKite(final MandibularKite card) {

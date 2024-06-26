@@ -46,7 +46,7 @@ public final class RenegadeRallier extends CardImpl {
                 "left the battlefield this turn, return target permanent card with mana value 2 or less from your graveyard to the battlefield."
         ).setAbilityWord(AbilityWord.REVOLT);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
-        this.addAbility(ability, new RevoltWatcher());
+        this.addAbility(ability.addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private RenegadeRallier(final RenegadeRallier card) {

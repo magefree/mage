@@ -31,6 +31,8 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -59,11 +61,8 @@ public class ComputerPlayer6 extends ComputerPlayer {
             0L,
             TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>(),
-            r -> {
-                Thread thread = new Thread(r);
-                thread.setName("AI-SIM-" + thread.getId());
-                return thread;
-            });
+            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_AI_SIMULATION_MAD)
+    );
     protected int maxDepth;
     protected int maxNodes;
     protected int maxThinkTimeSecs;
@@ -714,7 +713,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
         // TODO: add modal info
         // + (action.isModal() ? " Mode = " + action.getModes().getMode().toString() : "")
         if (ability.isModal()) {
-            throw new IllegalStateException("TODO: need implement");
+            //throw new IllegalStateException("TODO: need implement");
         }
         MageObject sourceObject = ability.getSourceObject(game);
         String abilityInfo = (sourceObject == null ? "" : sourceObject.getIdName() + ": ") + CardUtil.substring(ability.toString(), 30, "...");
@@ -729,19 +728,24 @@ public class ComputerPlayer6 extends ComputerPlayer {
                         xInfo = "x" + target.getTargetAmount(selectedId) + " ";
                     }
 
-                    String targetInfo;
-
+                    String targetInfo = null;
                     Player player = game.getPlayer(selectedId);
-                    MageObject object = game.getObject(selectedId);
-                    mage.game.stack.Spell spell = game.getSpellOrLKIStack(selectedId);
-
                     if (player != null) {
                         targetInfo = player.getName();
-                    } else if (object != null) {
-                        targetInfo = object.getIdName();
-                    } else if (spell != null) {
-                        targetInfo = "spell - " + CardUtil.substring(spell.toString(), 20, "...");
-                    } else {
+                    }
+                    if (targetInfo == null) {
+                        MageObject object = game.getObject(selectedId);
+                        if (object != null) {
+                            targetInfo = object.getIdName();
+                        }
+                    }
+                    if (targetInfo == null) {
+                        StackObject stackObject = game.getState().getStack().getStackObject(selectedId);
+                        if (stackObject != null) {
+                            targetInfo = CardUtil.substring(stackObject.toString(), 20, "...");
+                        }
+                    }
+                    if (targetInfo == null) {
                         targetInfo = "unknown";
                     }
                     allTargetsInfo.add(xInfo + targetInfo);

@@ -85,7 +85,7 @@ class RalMonsoonMageEffect extends OneShotEffect {
     RalMonsoonMageEffect() {
         super(Outcome.Benefit);
         staticText = "flip a coin. If you lose the flip, {this} deals 1 damage to you. " +
-                "If you win the flip, you may exile {this}. If you do, return him to the battlefield transformed under his owner control";
+                "If you win the flip, you may exile {this}. If you do, return him to the battlefield transformed under his owner's control";
     }
 
     private RalMonsoonMageEffect(final RalMonsoonMageEffect effect) {

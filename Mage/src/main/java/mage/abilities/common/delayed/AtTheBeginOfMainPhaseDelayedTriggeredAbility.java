@@ -18,7 +18,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
     public enum PhaseSelection {
 
         NEXT_PRECOMBAT_MAIN("next precombat main phase"),
-        NEXT_POSTCOMAT_MAIN("next postcombat main phase"),
+        NEXT_POSTCOMBAT_MAIN("next postcombat main phase"),
         NEXT_MAIN("next main phase"),
         NEXT_MAIN_THIS_TURN("next main phase this turn", Duration.EndOfTurn);
 
@@ -92,7 +92,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
             case NEXT_MAIN:
             case NEXT_MAIN_THIS_TURN:
                 return EventType.PRECOMBAT_MAIN_PHASE_PRE == eventType || EventType.POSTCOMBAT_MAIN_PHASE_PRE == eventType;
-            case NEXT_POSTCOMAT_MAIN:
+            case NEXT_POSTCOMBAT_MAIN:
                 return EventType.POSTCOMBAT_MAIN_PHASE_PRE == eventType;
             case NEXT_PRECOMBAT_MAIN:
                 return EventType.PRECOMBAT_MAIN_PHASE_PRE == eventType;

@@ -21,16 +21,20 @@ import java.util.*;
 /**
  * @author JayDi85
  */
-public enum ScryfallImageSource implements CardImageSource {
+public class ScryfallImageSource implements CardImageSource {
 
-    instance;
+    private static final ScryfallImageSource instance = new ScryfallImageSource();
 
     private static final Logger logger = Logger.getLogger(ScryfallImageSource.class);
 
     private final Map<CardLanguage, String> languageAliases;
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
     private final Map<CardDownloadData, String> preparedUrls = new HashMap<>();
-    private final int DOWNLOAD_TIMEOUT_MS = 100;
+    private static final int DOWNLOAD_TIMEOUT_MS = 100;
+    
+    public static ScryfallImageSource getInstance() {
+        return instance;
+    }
 
     ScryfallImageSource() {
         // LANGUAGES
@@ -52,7 +56,7 @@ public enum ScryfallImageSource implements CardImageSource {
     private CardImageUrls innerGenerateURL(CardDownloadData card, boolean isToken) {
         String prepared = preparedUrls.getOrDefault(card, null);
         if (prepared != null) {
-            return new CardImageUrls(prepared, null);
+            return new CardImageUrls(prepared);
         }
 
         String defaultCode = CardLanguage.ENGLISH.getCode();
@@ -118,20 +122,20 @@ public enum ScryfallImageSource implements CardImageSource {
                     formatSetName(card.getSet(), isToken),
                     cn,
                     localizedCode);
-            alternativeUrl = String.format("https://api.scryfall.com/cards/%s/%s?format=image",
+            alternativeUrl = String.format("https://api.scryfall.com/cards/%s/%s?format=image&include_variations=true",
                     formatSetName(card.getSet(), isToken),
                     cn);
             // with no localisation code, scryfall defaults to first available image - usually english, but may not be for some special cards
             // workaround to use cards without english images (some promos or special cards)
             // bug: https://github.com/magefree/mage/issues/6829
             // example: Mysterious Egg from IKO https://api.scryfall.com/cards/iko/385/?format=image
+            // include_variations=true added to deal with the cards that scryfall has marked as variations that seem to sometimes fail
+            // eg https://api.scryfall.com/cards/4ed/134†?format=image fails
+            // eg https://api.scryfall.com/cards/4ed/134†?format=image&include_variations=true succeeds
 
         }
 
-        // workaround to deal with the cards that scryfall has marked as variations that seem to sometimes fail
-        // eg https://api.scryfall.com/cards/4ed/134†?format=image fails
-        // eg https://api.scryfall.com/cards/4ed/134†?format=image&variation=true succeeds
-        return new CardImageUrls(baseUrl, alternativeUrl , alternativeUrl + "&variation=true");
+        return new CardImageUrls(baseUrl, alternativeUrl );
     }
 
     private String getFaceImageUrl(Proxy proxy, CardDownloadData card, boolean isToken) throws Exception {
@@ -144,11 +148,11 @@ public enum ScryfallImageSource implements CardImageSource {
         String apiUrl = ScryfallImageSupportCards.findDirectDownloadLink(card.getSet(), card.getName(), card.getCollectorId());
         if (apiUrl != null) {
             if (apiUrl.endsWith("*/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() -2) + "★/" ;
+                apiUrl = apiUrl.substring(0 , apiUrl.length() - 2) + "★/" ;
             } else if (apiUrl.endsWith("+/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() -2) + "†/" ;
+                apiUrl = apiUrl.substring(0 , apiUrl.length() - 2) + "†/" ;
             } else if (apiUrl.endsWith("Ph/")) {
-                apiUrl = apiUrl.substring(0 , apiUrl.length() -3) + "Φ/" ;
+                apiUrl = apiUrl.substring(0 , apiUrl.length() - 3) + "Φ/" ;
             }
             // BY DIRECT URL
             // direct links via hardcoded API path. Used for cards with non-ASCII collector numbers
@@ -291,13 +295,13 @@ public enum ScryfallImageSource implements CardImageSource {
 
     @Override
     public String getSourceName() {
-        return "scryfall.com";
+        return "scryfall.com - big";
     }
 
     @Override
-    public float getAverageSize() {
-        // March 2020: 46_354 image files with total size 9_545_168 KiB
-        return 206;
+    public float getAverageSizeKb() {
+        // June 2024: MH3 set - 46450 Kb / 332 = 140 Kb
+        return 140f;
     }
 
     @Override

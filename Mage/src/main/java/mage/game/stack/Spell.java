@@ -1182,6 +1182,21 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return card.isAllNonbasicLandTypes(game);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+        card.setIsAllNonbasicLandTypes(value);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+        card.setIsAllNonbasicLandTypes(game, value);
+    }
+
+    @Override
     public List<UUID> getAttachments() {
         throw new UnsupportedOperationException("Not supported.");
     }

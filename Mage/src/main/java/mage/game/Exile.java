@@ -117,6 +117,10 @@ public class Exile implements Serializable, Copyable<Exile> {
         exileZone.add(card);
     }
 
+    public void moveToMainExileZone(Card card, Game game) {
+        moveToAnotherZone(card, game, getExileZone(PERMANENT));
+    }
+
     @Override
     public Exile copy() {
         return new Exile(this);

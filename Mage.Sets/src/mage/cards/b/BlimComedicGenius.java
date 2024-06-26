@@ -86,7 +86,7 @@ class BlimComedicGeniusEffect extends OneShotEffect {
         game.addEffect(new GainControlTargetEffect(
                 Duration.Custom, true, getTargetPointer().getFirst(game, source)
         ).setTargetPointer(new FixedTarget(source.getFirstTarget(), game)), source);
-        game.getState().processAction(game);
+        game.processAction();
         Map<UUID, Cards> cardsMap = new HashMap<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);

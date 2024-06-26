@@ -158,7 +158,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
-    protected final List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
+    protected List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
 
     // TODO: rework turn controller to use single list (see other todos)
     //protected Stack<UUID> allTurnControllers = new Stack<>();
@@ -264,7 +264,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         this.payLifeCostLevel = player.payLifeCostLevel;
         this.sacrificeCostFilter = player.sacrificeCostFilter;
-        this.alternativeSourceCosts.addAll(player.alternativeSourceCosts);
+        this.alternativeSourceCosts = CardUtil.deepCopyObject(player.alternativeSourceCosts);
         this.storedBookmark = player.storedBookmark;
 
         this.topCardRevealed = player.topCardRevealed;
@@ -365,8 +365,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
-        this.alternativeSourceCosts.clear();
-        this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
+        this.alternativeSourceCosts = CardUtil.deepCopyObject(player.getAlternativeSourceCosts());
 
         this.topCardRevealed = player.isTopCardRevealed();
 
@@ -687,11 +686,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
+    public boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game) {
         if (this.hasLost() || this.hasLeft()) {
             return false;
         }
-        if (source != null) {
+        if (sourceObject != null) {
             if (abilities.containsKey(ShroudAbility.getInstance().getId())
                     && game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, null, sourceControllerId, game).isEmpty()) {
                 return false;
@@ -703,17 +702,17 @@ public abstract class PlayerImpl implements Player, Serializable {
                     && abilities.stream()
                     .filter(HexproofBaseAbility.class::isInstance)
                     .map(HexproofBaseAbility.class::cast)
-                    .anyMatch(ability -> ability.checkObject(source, game))) {
+                    .anyMatch(ability -> ability.checkObject(sourceObject, source, game))) {
                 return false;
             }
 
-            if (hasProtectionFrom(source, game)) {
+            if (hasProtectionFrom(sourceObject, game)) {
                 return false;
             }
 
             // example: Peace Talks
             return !game.getContinuousEffects().preventedByRuleModification(
-                    new TargetEvent(this, source.getId(), sourceControllerId),
+                    new TargetEvent(this, sourceObject.getId(), sourceControllerId),
                     null,
                     game,
                     true
@@ -1886,8 +1885,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void phasing(Game game) {
         //20091005 - 502.1
-        List<Permanent> phasedOut = game.getBattlefield().getPhasedOut(game, playerId);
-        for (Permanent permanent : game.getBattlefield().getPhasedIn(game, playerId)) {
+        List<Permanent> phasedOut = game.getBattlefield().getPhasedOut(playerId);
+        for (Permanent permanent : game.getBattlefield().getPhasingOut(game, playerId)) {
             // 502.15i When a permanent phases out, any local enchantments or Equipment
             // attached to that permanent phase out at the same time. This alternate way of
             // phasing out is known as phasing out "indirectly." An enchantment or Equipment
@@ -2958,7 +2957,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         boolean casted = false;
         TargetCard targetCard = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_CARD);
-        targetCard.setTargetName("card to cast from library");
+        targetCard.withTargetName("card to cast from library");
         targetCard.withNotTarget(true);
         while (!castableCards.isEmpty()) {
             targetCard.clearChosen();
@@ -4780,10 +4779,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                     }
                 }
-                // TODO: must be replaced by game.getState().processAction(game), see isInUseableZoneDiesTrigger comments
-                //  about short living LKI problem
-                //game.getState().processAction(game);
-                game.applyEffects();
+                game.applyEffects(); // without LKI reset
                 break;
             case HAND:
                 for (Card card : cards) {
@@ -5232,7 +5228,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void signalPlayerConcede() {
+    public void signalPlayerConcede(boolean stopCurrentChooseDialog) {
     }
 
     @Override

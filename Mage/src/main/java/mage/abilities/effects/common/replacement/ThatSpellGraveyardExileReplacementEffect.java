@@ -20,7 +20,7 @@ public class ThatSpellGraveyardExileReplacementEffect extends ReplacementEffectI
     public static final String RULE_YOUR = "If that spell would be put into your graveyard, exile it instead.";
 
     /**
-     * If that spell would be put into a graveyard, exiles it instead.
+     * If that spell would be put into a graveyard, exile it instead.
      * Must set target pointer to fixed target.
      */
     public ThatSpellGraveyardExileReplacementEffect(boolean yourGraveyard) {
@@ -56,7 +56,8 @@ public class ThatSpellGraveyardExileReplacementEffect extends ReplacementEffectI
         }
         Card cardMoving = game.getCard(zEvent.getTargetId());
         Card cardTarget = game.getCard(((FixedTarget) getTargetPointer()).getTarget());
-        if (cardMoving == null || cardTarget == null) {
+        if (cardMoving == null 
+                || cardTarget == null) {
             return false;
         }
         // for MDFC.
@@ -65,7 +66,7 @@ public class ThatSpellGraveyardExileReplacementEffect extends ReplacementEffectI
         return mainCardMoving != null
                 && mainCardTarget != null
                 && mainCardMoving.getId().equals(mainCardTarget.getId())
-                && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1
-                == game.getState().getZoneChangeCounter(mainCardMoving.getId());
+                && game.getState().getZoneChangeCounter(mainCardTarget.getId()) 
+                == (game.getState().getZoneChangeCounter(mainCardMoving.getId()));
     }
 }

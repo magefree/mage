@@ -437,19 +437,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_CARD_COUNTERS, cardName, counterType.toString(), count.toString());
     }
 
-    public void checkExileCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+    public void checkExileCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
-        check(checkName, turnNum, step, player, CHECK_COMMAND_EXILE_COUNT, permanentName, count.toString());
+        check(checkName, turnNum, step, player, CHECK_COMMAND_EXILE_COUNT, cardName, count.toString());
     }
 
-    public void checkGraveyardCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+    public void checkGraveyardCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
-        check(checkName, turnNum, step, player, CHECK_COMMAND_GRAVEYARD_COUNT, permanentName, count.toString());
+        check(checkName, turnNum, step, player, CHECK_COMMAND_GRAVEYARD_COUNT, cardName, count.toString());
     }
 
-    public void checkLibraryCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+    public void checkLibraryCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
-        check(checkName, turnNum, step, player, CHECK_COMMAND_LIBRARY_COUNT, permanentName, count.toString());
+        check(checkName, turnNum, step, player, CHECK_COMMAND_LIBRARY_COUNT, cardName, count.toString());
     }
 
     public void checkHandCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer count) {

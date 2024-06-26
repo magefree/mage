@@ -40,7 +40,6 @@ public final class GUISizeHelper {
 
     public static Font chatFont = new java.awt.Font("Arial", 0, 12);
     public static Font tableFont = new java.awt.Font("Arial", 0, 12);
-    public static Font balloonTooltipFont = new java.awt.Font("Arial", 0, 12);
     public static Font menuFont = new java.awt.Font("Arial", 0, 12);
 
     public static Font gameRequestsFont = new java.awt.Font("Arial", 0, 12);
@@ -98,7 +97,6 @@ public final class GUISizeHelper {
         tableHeaderHeight = tableFontSize + 10;
         symbolTableSize = tableFontSize;
         flagHeight = tableFontSize - 2;
-        balloonTooltipFont = new Font("Arial", 0, tableFontSize);
         if (tableFontSize > 15) {
             symbolEditorSize = tableFontSize - 5;
             dividerBarSize = 10 + (tableFontSize / 4);
@@ -194,5 +192,26 @@ public final class GUISizeHelper {
      */
     public static int getCardsScrollbarUnitInc(int cardSize) {
         return Math.max(8, cardSize / 4);
+    }
+
+    /**
+     * Scale GUI size values due scale coeff
+     */
+    public static int guiSizeScale(int value, float scaleMod) {
+        // must keep 1 instead 0 on too small values
+        if (value == 0) {
+            return 0;
+        } else if (value < 0) {
+            return Math.min(-1, Math.round(value * scaleMod));
+        } else {
+            return Math.max(1, Math.round(value * scaleMod));
+        }
+    }
+
+    /**
+     * Scale GUI size values due scale coeff
+     */
+    public static float guiSizeScale(float value, float scaleMod) {
+        return value * scaleMod;
     }
 }

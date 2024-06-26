@@ -25,7 +25,7 @@ public final class GuardianNaga extends AdventureCard {
     public GuardianNaga(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{5}{W}{W}", "Banishing Coils", "{2}{W}");
 
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

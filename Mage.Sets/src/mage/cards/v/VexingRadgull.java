@@ -52,7 +52,8 @@ class VexingRadgullEffect extends OneShotEffect {
 
     VexingRadgullEffect() {
         super(Outcome.Benefit);
-        staticText = "that player gets two rad counters if they don't have any rad counters. Otherwise, proliferate.";
+        staticText = "that player gets two rad counters if they don't have any rad counters. Otherwise, proliferate." +
+                " <i>(Choose any number of permanents and/or players, then give each another counter of each kind already there.)</i>";
     }
 
     private VexingRadgullEffect(final VexingRadgullEffect effect) {

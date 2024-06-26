@@ -4,7 +4,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -42,7 +42,7 @@ public final class OmnathLocusOfRage extends CardImpl {
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new OmnathElementalToken()), false));
 
         // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to any target.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new DamageTargetEffect(3), false, filter);
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(new DamageTargetEffect(3), false, filter);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

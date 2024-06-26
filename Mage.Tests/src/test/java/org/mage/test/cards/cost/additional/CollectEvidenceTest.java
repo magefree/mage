@@ -1,8 +1,14 @@
 package org.mage.test.cards.cost.additional;
 
+import mage.abilities.Ability;
+import mage.abilities.condition.common.CollectedEvidenceCondition;
+import mage.abilities.keyword.CollectEvidenceAbility;
+import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.stack.StackObject;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -22,6 +28,7 @@ public class CollectEvidenceTest extends CardTestPlayerBase {
     private static final String sprite = "Crimestopper Sprite";
     private static final String monitor = "Surveillance Monitor";
     private static final String unraveler = "Conspiracy Unraveler";
+    private static final String bite = "Bite Down on Crime";
 
     @Test
     public void testNoPay() {
@@ -309,5 +316,51 @@ public class CollectEvidenceTest extends CardTestPlayerBase {
 
         assertExileCount(ogre, 4);
         assertPermanentCount(playerA, "Colossal Dreadmaw", 1);
+    }
+
+    @Test
+    public void testNonDirectConditionalOnStack() {
+        // evidence conditional must work on stack from non spell abilities too
+        // cost tags related bug: https://github.com/magefree/mage/issues/12522
+
+        // As an additional cost to cast this spell, you may collect evidence 6. This spell costs {2} less to cast if evidence was collected.
+        // Target creature you control gets +2/+0 until end of turn.
+        // It deals damage equal to its power to target creature you don't control.
+        addCard(Zone.HAND, playerA, bite); // {3}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+        addCard(Zone.BATTLEFIELD, playerB, "Augmenting Automaton");
+        addCard(Zone.GRAVEYARD, playerA, ogre, 2); // {2}{R}
+
+        // before
+        runCode("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Card card = playerA.getHand().getCards(game).stream().filter(c -> c.getName().equals(bite)).findFirst().orElse(null);
+            Assert.assertNotNull(card);
+            Ability ability = card.getAbilities(game).stream().filter(a -> a instanceof CollectEvidenceAbility).findFirst().orElse(null);
+            Assert.assertNotNull(ability);
+            Assert.assertFalse("Evidence must not be collected before usage", CollectedEvidenceCondition.instance.apply(game, ability));
+        });
+
+        // on cast
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bite);
+        setChoice(playerA, true); // use alternative cast from bite
+        addTarget(playerA, "Grizzly Bears"); // boost
+        addTarget(playerA, "Augmenting Automaton"); // damage target
+        setChoice(playerA, ogre, 2); // pay for collect evidence
+        runCode("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            StackObject object = game.getStack().peekFirst();
+            Assert.assertNotNull(object);
+            Ability ability = object.getAbilities().stream().filter(a -> a instanceof CollectEvidenceAbility).findFirst().orElse(null);
+            Assert.assertNotNull(ability);
+            Assert.assertTrue("Evidence must be collected on stack", CollectedEvidenceCondition.instance.apply(game, ability));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(ogre, 2);
+        assertPermanentCount(playerA, "Grizzly Bears", 1);
+        assertGraveyardCount(playerB, "Augmenting Automaton", 1);
     }
 }

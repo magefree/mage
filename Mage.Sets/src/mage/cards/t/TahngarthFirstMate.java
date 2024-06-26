@@ -135,7 +135,7 @@ class TahngarthFirstMateEffect extends OneShotEffect {
         ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfCombat, player.getId());
         effect.setTargetPointer(new FixedTarget(permanent, game));
         game.addEffect(effect, source);
-        game.getState().processAction(game);
+        game.processAction();
         return game.getCombat().addAttackerToCombat(permanent.getId(), target.getFirstTarget(), game);
     }
 }

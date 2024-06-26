@@ -61,7 +61,7 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate(),
                 CardType.LAND.getPredicate()));
-        setTargetName("artifact, creature, or land you control");
+        withTargetName("artifact, creature, or land you control");
     }
 
     private GauntletsOfChaosFirstTarget(final GauntletsOfChaosFirstTarget target) {
@@ -90,7 +90,7 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
         MageObject targetSource = game.getObject(source);
         if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     for (CardType type : permanent.getCardType(game)) {
                         if (cardTypes.contains(type)) {
                             possibleTargets.add(permanent.getId());
@@ -131,7 +131,7 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
         super();
         this.filter = this.filter.copy();
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        setTargetName("permanent an opponent controls that shares one of those types with it");
+        withTargetName("permanent an opponent controls that shares one of those types with it");
     }
 
     private GauntletsOfChaosSecondTarget(final GauntletsOfChaosSecondTarget target) {
@@ -159,7 +159,7 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
             MageObject targetSource = game.getObject(source);
             if (targetSource != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                         if (permanent.shareTypes(firstTarget, game)) {
                             possibleTargets.add(permanent.getId());
                         }

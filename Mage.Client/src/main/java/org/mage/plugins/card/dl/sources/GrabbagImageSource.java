@@ -28,7 +28,7 @@ public enum GrabbagImageSource implements CardImageSource {
     }
 
     @Override
-    public float getAverageSize() {
+    public float getAverageSizeKb() {
         return 74.8f;
     }
 

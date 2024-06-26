@@ -141,7 +141,7 @@ class ElrondOfWhiteCouncilEffect extends OneShotEffect {
         ).setTargetPointer(blueprintTarget.copy()), source);
 
         // Need to process the control change.
-        game.getState().processAction(game);
+        game.processAction();
 
         // Then for each aid vote, put a +1/+1 counter on each creature you control.
         int countAid = vote.getVoteCount(false);

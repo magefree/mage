@@ -77,7 +77,7 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         if (activePlayer != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 // Noncreature cards are safe.
                 if (!permanent.isCreature(game)) {
                     continue;

@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -46,7 +47,7 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
-            this.getEffects().setValue("gainedLife", event.getAmount());
+            this.getEffects().setValue(SavedGainedLifeValue.VALUE_KEY, event.getAmount());
             if (setTargetPointer) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
             }

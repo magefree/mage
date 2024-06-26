@@ -5,21 +5,19 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
 import mage.target.TargetPermanent;
 
@@ -57,7 +55,9 @@ public final class TreebeardGraciousHost extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FoodToken(), 2)));
 
         // Whenever you gain life, put that many +1/+1 counters on target Halfling or Treefolk.
-        Ability ability = new GainLifeControllerTriggeredAbility(new TreebeardGraciousHostEffect());
+        Ability ability = new GainLifeControllerTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), SavedGainedLifeValue.MANY)
+        );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
@@ -69,30 +69,5 @@ public final class TreebeardGraciousHost extends CardImpl {
     @Override
     public TreebeardGraciousHost copy() {
         return new TreebeardGraciousHost(this);
-    }
-}
-
-class TreebeardGraciousHostEffect extends OneShotEffect {
-
-    TreebeardGraciousHostEffect() {
-        super(Outcome.Benefit);
-        staticText = "put that many +1/+1 counters on target Halfling or Treefolk";
-    }
-
-    private TreebeardGraciousHostEffect(final TreebeardGraciousHostEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TreebeardGraciousHostEffect copy() {
-        return new TreebeardGraciousHostEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        int amount = (Integer) getValue("gainedLife");
-        return permanent != null && amount > 0
-                && permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
     }
 }

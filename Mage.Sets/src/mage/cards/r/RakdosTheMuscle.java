@@ -95,7 +95,7 @@ class RakdosTheMuscleEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
-        Permanent sacrificed = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent sacrificed = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (player == null || controller == null || sacrificed == null) {
             return false;
         }

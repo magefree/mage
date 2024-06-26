@@ -348,6 +348,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             }
         }
 
+        // Colorless hybrid
+        for (ManaCost cost : this) {
+            if (!cost.isPaid() && cost instanceof ColorlessHybridManaCost) {
+                cost.assignPayment(game, ability, pool, costToPay);
+                if (pool.isEmpty()) {
+                    return;
+                }
+            }
+        }
+
         // monohybrid
         // try to pay colored part
         for (ManaCost cost : this) {
@@ -492,6 +502,8 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 ManaCost cost;
                 if (without.length() == 1) {
                     cost = new ColoredManaCost(ColoredManaSymbol.lookup(without.charAt(0)));
+                } else if (without.charAt(0) == 'C') {
+                    cost = new ColorlessHybridManaCost(ColoredManaSymbol.lookup(without.charAt(2)));
                 } else {
                     cost = new HybridManaCost(ColoredManaSymbol.lookup(without.charAt(0)), ColoredManaSymbol.lookup(without.charAt(2)));
                 }

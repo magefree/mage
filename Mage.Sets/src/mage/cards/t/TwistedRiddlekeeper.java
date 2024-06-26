@@ -35,7 +35,7 @@ public final class TwistedRiddlekeeper extends CardImpl {
 
         // When you cast this spell, tap up to two target permanents. Put a stun counter on each of them.
         Ability ability = new CastSourceTriggeredAbility(new TapTargetEffect());
-        ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance()).setText("and put a stun counter on each of them"));
+        ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance()).setText("Put a stun counter on each of them"));
         ability.addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_PERMANENTS));
         this.addAbility(ability);
 

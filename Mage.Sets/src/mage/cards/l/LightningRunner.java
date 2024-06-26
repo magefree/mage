@@ -61,7 +61,7 @@ class LightningRunnerEffect extends OneShotEffect {
 
     LightningRunnerEffect() {
         super(Outcome.Benefit);
-        staticText = "you get {E}{E}, then you may pay {E}{E}{E}{E}{E}{E}{E}{E}. If you pay, "
+        staticText = "you get {E}{E}, then you may pay eight {E}. If you pay, "
                 + "untap all creatures you control, and after this phase, there is an additional combat phase";
     }
 
@@ -77,7 +77,7 @@ class LightningRunnerEffect extends OneShotEffect {
             if (controller.getCountersCount(CounterType.ENERGY) > 7) {
                 Cost cost = new PayEnergyCost(8);
                 if (controller.chooseUse(outcome,
-                        "Pay {E}{E}{E}{E}{E}{E}{E}{E} to use this? ",
+                        "Pay eight {E} to use this? ",
                         "Untap all creatures you control and after this phase, there is an additional combat phase.",
                         "Yes", "No", source, game)
                         && cost.pay(source, game, source, source.getControllerId(), true)) {

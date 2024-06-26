@@ -34,7 +34,7 @@ public final class ZirilanOfTheClaw extends CardImpl {
     public ZirilanOfTheClaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VIASHINO, SubType.SHAMAN);
+        this.subtype.add(SubType.LIZARD, SubType.SHAMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

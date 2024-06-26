@@ -1,5 +1,6 @@
 package mage.players;
 
+import com.google.common.collect.Iterables;
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -33,8 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.google.common.collect.Iterables.getOnlyElement;
-
 /**
  * Empty player, do nothing, used for tests only
  */
@@ -61,7 +60,7 @@ public class StubPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        UUID cardId = getOnlyElement(cards.getCards(game)).getId();
+        UUID cardId = Iterables.getOnlyElement(cards.getCards(game)).getId();
         if (chooseScry(game, cardId)) {
             target.add(cardId, game);
             return true;

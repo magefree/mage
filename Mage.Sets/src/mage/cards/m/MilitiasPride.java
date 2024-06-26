@@ -26,7 +26,7 @@ public final class MilitiasPride extends CardImpl {
     }
 
     public MilitiasPride(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add(SubType.KITHKIN);
 
         // Whenever a nontoken creature you control attacks, you may pay {W}. If you do, create a 1/1 white Kithkin Soldier creature token that’s tapped and attacking.

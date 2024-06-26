@@ -1,7 +1,7 @@
 package mage.target.common;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.PredicateCardAssignment;
+import mage.abilities.assignment.common.PredicateCardAssignment;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
