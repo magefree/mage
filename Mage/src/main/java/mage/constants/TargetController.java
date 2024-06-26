@@ -171,8 +171,6 @@ public enum TargetController {
                     return object.isControlledBy(input.getSource().getControllerId());
                 case SOURCE_TARGETS:
                     return object.isControlledBy(input.getSource().getFirstTarget());
-                case SOURCE_EFFECT_TARGET_POINTER:
-                    return object.isControlledBy(input.getSource().getEffects().get(0).getTargetPointer().getFirst(game, input.getSource()));
                 case MONARCH:
                     return object.isControlledBy(game.getMonarchId());
                 case ANY:
