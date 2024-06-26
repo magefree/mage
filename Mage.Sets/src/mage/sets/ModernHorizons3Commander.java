@@ -138,6 +138,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Glimmer of Genius", 187, Rarity.UNCOMMON, mage.cards.g.GlimmerOfGenius.class));
         cards.add(new SetCardInfo("Glimmerpost", 346, Rarity.COMMON, mage.cards.g.Glimmerpost.class));
         cards.add(new SetCardInfo("Goldspan Dragon", 212, Rarity.MYTHIC, mage.cards.g.GoldspanDragon.class));
+        cards.add(new SetCardInfo("Gluttonous Hellkite", 73, Rarity.RARE, mage.cards.g.GluttonousHellkite.class));
         cards.add(new SetCardInfo("Gonti's Aether Heart", 294, Rarity.MYTHIC, mage.cards.g.GontisAetherHeart.class));
         cards.add(new SetCardInfo("Grapple with the Past", 230, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Graveshifter", 198, Rarity.UNCOMMON, mage.cards.g.Graveshifter.class));
