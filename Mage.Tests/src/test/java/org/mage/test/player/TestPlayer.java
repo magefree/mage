@@ -41,6 +41,7 @@ import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
+import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.tournament.Tournament;
 import mage.player.ai.ComputerPlayer;
@@ -54,13 +55,14 @@ import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
  * Basic implementation of testable player
@@ -430,10 +432,12 @@ public class TestPlayer implements Player {
         }
 
         // two search mode: for cards/permanents (strict) and for abilities (like)
-        if (object instanceof Ability) {
-            return object.getName().startsWith(nameOrAlias);
-        } else if (object instanceof Spell) {
+        if (object instanceof Spell) {
             return ((Spell) object).getSpellAbility().getName().startsWith(nameOrAlias);
+        } else if (object instanceof StackAbility) {
+            return object.toString().startsWith(nameOrAlias);
+        } else if (object instanceof Ability) {
+            return object.getName().startsWith(nameOrAlias);
         } else {
             return object.getName().equals(nameOrAlias);
         }
@@ -2643,7 +2647,10 @@ public class TestPlayer implements Player {
             }
 
             // stack
-            if (target.getOriginalTarget() instanceof TargetSpell) {
+            // TODO: AI code uses same code, so it must support it, search by getOriginalTarget() instanceof TargetSpell
+            if (target.getOriginalTarget() instanceof TargetSpell
+                    || target.getOriginalTarget() instanceof TargetSpellOrPermanent
+                    || target.getOriginalTarget() instanceof TargetStackObject) {
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     checkTargetDefinitionMarksSupport(target, targetDefinition, "^");
                     String[] targetList = targetDefinition.split("\\^");
