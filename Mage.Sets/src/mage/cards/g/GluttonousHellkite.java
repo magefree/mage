@@ -30,6 +30,7 @@ import mage.players.Player;
 import mage.target.TargetImpl;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
+import mage.watchers.common.PermanentsSacrificedWatcher;
 
 /**
  *
@@ -107,7 +108,9 @@ class GluttonousHellkiteEffect extends OneShotEffect {
             if (player != null) {
                 TargetSacrifice target = new TargetSacrifice(sacrificeAmount, StaticFilters.FILTER_PERMANENT_CREATURE);
                 if (target.canChoose(player.getId(), source, game)) {
-                    player.choose(Outcome.Sacrifice, target, source, game);
+                    while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+                        player.choose(Outcome.Sacrifice, target, source, game);
+                    }
                     target.getTargets().stream().map(game::getPermanent).filter(Objects::nonNull).forEach(sacPermanents::add);
                 }
             }
