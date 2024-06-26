@@ -1,9 +1,10 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.MonstrousCondition;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.abilities.keyword.ProtectionAbility;
@@ -12,26 +13,24 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.players.Player;
+import mage.filter.common.FilterEnchantmentCard;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
- * @author LevelX2
+ * @author LevelX2, notgreat
  */
 public final class PolisCrusher extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("enchantments");
+    private static final FilterCard filterCard = new FilterEnchantmentCard("enchantments");
+    private static final FilterEnchantmentPermanent filterPermanent = new FilterEnchantmentPermanent("enchantment that player controls");
 
     static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
+        filterCard.add(CardType.ENCHANTMENT.getPredicate());
     }
 
     public PolisCrusher(UUID ownerId, CardSetInfo setInfo) {
@@ -45,13 +44,18 @@ public final class PolisCrusher extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // protection from enchantments
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(new ProtectionAbility(filterCard));
 
         // {4}{R}{G}: Monstrosity 3.
         this.addAbility(new MonstrosityAbility("{4}{R}{G}", 3));
 
         // Whenever Polis Crusher deals combat damage to a player, if Polis Crusher is monstrous, destroy target enchantment that player controls.
-        this.addAbility(new PolisCrusherTriggeredAbility());
+        TriggeredAbility ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true);
+        ability.addTarget(new TargetPermanent(filterPermanent));
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MonstrousCondition.instance,
+                "Whenever {this} deals combat damage to a player, if {this} is monstrous, destroy target enchantment that player controls."));
     }
 
     private PolisCrusher(final PolisCrusher card) {
@@ -61,53 +65,5 @@ public final class PolisCrusher extends CardImpl {
     @Override
     public PolisCrusher copy() {
         return new PolisCrusher(this);
-    }
-}
-
-class PolisCrusherTriggeredAbility extends TriggeredAbilityImpl {
-
-    public PolisCrusherTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
-    }
-
-    private PolisCrusherTriggeredAbility(final PolisCrusherTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PolisCrusherTriggeredAbility copy() {
-        return new PolisCrusherTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        return MonstrousCondition.instance.apply(game, this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.sourceId) && ((DamagedPlayerEvent) event).isCombatDamage()) {
-            Player player = game.getPlayer(event.getTargetId());
-            if (player != null) {
-                FilterPermanent filter = new FilterPermanent("an enchantment controlled by " + player.getLogName());
-                filter.add(CardType.ENCHANTMENT.getPredicate());
-                filter.add(new ControllerIdPredicate(event.getTargetId()));
-                this.getTargets().clear();
-                this.addTarget(new TargetPermanent(filter));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player,"
-                + " if {this} is monstrous, destroy target enchantment that player controls.";
     }
 }
