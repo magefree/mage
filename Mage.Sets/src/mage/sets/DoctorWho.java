@@ -137,6 +137,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Karvanista, Loyal Lupari", 106, Rarity.RARE, mage.cards.k.KarvanistaLoyalLupari.class));
         cards.add(new SetCardInfo("Kate Stewart", 139, Rarity.RARE, mage.cards.k.KateStewart.class));
         cards.add(new SetCardInfo("Laser Screwdriver", 178, Rarity.UNCOMMON, mage.cards.l.LaserScrewdriver.class));
+        cards.add(new SetCardInfo("Last Night Together", 140, Rarity.RARE, mage.cards.l.LastNightTogether.class));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 289, Rarity.RARE, mage.cards.l.LavaclawReaches.class));
         cards.add(new SetCardInfo("Leela, Sevateem Warrior", 107, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leela, Sevateem Warrior", 398, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
@@ -152,6 +153,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 202, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myriad Landscape", 290, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Monastery", 291, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
+        cards.add(new SetCardInfo("Nanogene Conversion", 49, Rarity.RARE, mage.cards.n.NanogeneConversion.class));
         cards.add(new SetCardInfo("Ominous Cemetery", 189, Rarity.UNCOMMON, mage.cards.o.OminousCemetery.class));
         cards.add(new SetCardInfo("Out of Time", 209, Rarity.RARE, mage.cards.o.OutOfTime.class));
         cards.add(new SetCardInfo("Overgrown Farmland", 292, Rarity.RARE, mage.cards.o.OvergrownFarmland.class));
@@ -169,6 +171,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Regenerations Restored", 151, Rarity.RARE, mage.cards.r.RegenerationsRestored.class));
         cards.add(new SetCardInfo("Reliquary Tower", 296, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Renegade Silent", 53, Rarity.UNCOMMON, mage.cards.r.RenegadeSilent.class));
+        cards.add(new SetCardInfo("Return the Past", 92, Rarity.RARE, mage.cards.r.ReturnThePast.class));
         cards.add(new SetCardInfo("Return to Dust", 211, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Reverse the Polarity", 54, Rarity.RARE, mage.cards.r.ReverseThePolarity.class));
         cards.add(new SetCardInfo("River of Tears", 297, Rarity.RARE, mage.cards.r.RiverOfTears.class));

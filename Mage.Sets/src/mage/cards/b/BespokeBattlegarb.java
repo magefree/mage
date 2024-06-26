@@ -13,7 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.common.CelebrationWatcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 import java.util.UUID;
 
@@ -46,7 +46,7 @@ public final class BespokeBattlegarb extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         ability.setAbilityWord(AbilityWord.CELEBRATION);
         ability.addHint(CelebrationCondition.getHint());
-        this.addAbility(ability, new CelebrationWatcher());
+        this.addAbility(ability, new PermanentsEnteredBattlefieldWatcher());
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
