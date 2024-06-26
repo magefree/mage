@@ -56,6 +56,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Beast Within", 223, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Benthic Anomaly", 46, Rarity.RARE, mage.cards.b.BenthicAnomaly.class));
         cards.add(new SetCardInfo("Bident of Thassa", 177, Rarity.RARE, mage.cards.b.BidentOfThassa.class));
+        cards.add(new SetCardInfo("Bismuth Mindrender", 51, Rarity.RARE, mage.cards.b.BismuthMindrender.class));
         cards.add(new SetCardInfo("Bituminous Blast", 255, Rarity.UNCOMMON, mage.cards.b.BituminousBlast.class));
         cards.add(new SetCardInfo("Blast Zone", 322, Rarity.RARE, mage.cards.b.BlastZone.class));
         cards.add(new SetCardInfo("Bloodbraid Challenger", 70, Rarity.RARE, mage.cards.b.BloodbraidChallenger.class));
