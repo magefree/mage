@@ -2,6 +2,7 @@ package mage.cards.g;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import mage.MageInt;
@@ -22,6 +23,7 @@ import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -106,22 +108,19 @@ class GluttonousHellkiteEffect extends OneShotEffect {
                 TargetSacrifice target = new TargetSacrifice(sacrificeAmount, StaticFilters.FILTER_PERMANENT_CREATURE);
                 if (target.canChoose(player.getId(), source, game)) {
                     player.choose(Outcome.Sacrifice, target, source, game);
-                    sacPermanents.add(game.getPermanent(target.getFirstTarget()));
+                    target.getTargets().stream().map(game::getPermanent).filter(Objects::nonNull).forEach(sacPermanents::add);
                 }
             }
         }
-        for (Permanent permanent : sacPermanents) {
-            if (permanent != null) {
-                if (!permanent.sacrifice(source, game)) {
-                    sacPermanents.remove(permanent);
-                }
-            }
-        }
+        int counters = sacPermanents
+                .stream()
+                .mapToInt(p -> p.sacrifice(source, game) ? 2 : 0)
+                .sum();
 
 
         for (Effect effect : source.getEffects()) {
             if (effect instanceof GluttonousHellkiteReplacementEffect) {
-                effect.setValue("GluttonousHellkiteCounters", sacPermanents.size() * 2);
+                effect.setValue("GluttonousHellkiteCounters", counters);
             }
         }
         return true;
@@ -151,17 +150,13 @@ class GluttonousHellkiteReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Object object = this.getValue("GluttonousHellkiteCounters");
 
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            permanent = game.getPermanentEntering(source.getSourceId());
-        }
-        if (permanent != null && object instanceof Integer) {
-            int amount = ((Integer) object);
-            permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
-        }
-        return false;
+        Object object = this.getValue("GluttonousHellkiteCounters");
+        int amount = ((Integer) object);
+        ((EntersTheBattlefieldEvent) event).getTarget().addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
+            game.getBattlefield().addPermanent(((EntersTheBattlefieldEvent) event).getTarget());
+
+        return true;
     }
 
     @Override
