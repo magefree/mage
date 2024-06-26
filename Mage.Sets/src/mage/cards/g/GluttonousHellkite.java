@@ -87,7 +87,7 @@ class GluttonousHellkiteEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        List<TargetSacrifice> sacTargets = new ArrayList<>();
+        List<Permanent> sacPermanents = new ArrayList<>();
         Player controller = game.getPlayer(source.getControllerId());
         Object obj = getValue(CastSourceTriggeredAbility.SOURCE_CAST_SPELL_ABILITY);
         int sacrificeAmount = 0;
@@ -106,23 +106,22 @@ class GluttonousHellkiteEffect extends OneShotEffect {
                 TargetSacrifice target = new TargetSacrifice(sacrificeAmount, StaticFilters.FILTER_PERMANENT_CREATURE);
                 if (target.canChoose(player.getId(), source, game)) {
                     player.choose(Outcome.Sacrifice, target, source, game);
-                    sacTargets.add(target);
+                    sacPermanents.add(game.getPermanent(target.getFirstTarget()));
                 }
             }
         }
-        for (TargetSacrifice sacTarget : sacTargets) {
-            for (UUID targetId : sacTarget.getTargets()) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    permanent.sacrifice(source, game);
+        for (Permanent permanent : sacPermanents) {
+            if (permanent != null) {
+                if (!permanent.sacrifice(source, game)) {
+                    sacPermanents.remove(permanent);
                 }
             }
         }
 
-        int sacrificeCount = sacTargets.stream().map(TargetImpl::getTargets).map(List::size).reduce(0, Integer::sum);
+
         for (Effect effect : source.getEffects()) {
             if (effect instanceof GluttonousHellkiteReplacementEffect) {
-                effect.setValue("GluttonousHellkiteCounters", sacrificeCount);
+                effect.setValue("GluttonousHellkiteCounters", sacPermanents.size() * 2);
             }
         }
         return true;
@@ -160,7 +159,7 @@ class GluttonousHellkiteReplacementEffect extends ReplacementEffectImpl {
         }
         if (permanent != null && object instanceof Integer) {
             int amount = ((Integer) object);
-            permanent.addCounters(CounterType.P1P1.createInstance(amount * 2), source.getControllerId(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
         }
         return false;
     }
