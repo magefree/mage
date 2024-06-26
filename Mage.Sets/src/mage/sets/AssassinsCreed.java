@@ -42,6 +42,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Conspiracy", 88, Rarity.RARE, mage.cards.c.Conspiracy.class));
         cards.add(new SetCardInfo("Cover of Darkness", 89, Rarity.RARE, mage.cards.c.CoverOfDarkness.class));
         cards.add(new SetCardInfo("Crystal Skull, Isu Spyglass", 15, Rarity.RARE, mage.cards.c.CrystalSkullIsuSpyglass.class));
+        cards.add(new SetCardInfo("Desmond Miles", 24, Rarity.RARE, mage.cards.d.DesmondMiles.class));
         cards.add(new SetCardInfo("Desynchronization", 16, Rarity.RARE, mage.cards.d.Desynchronization.class));
         cards.add(new SetCardInfo("Detained by Legionnaires", 277, Rarity.COMMON, mage.cards.d.DetainedByLegionnaires.class));
         cards.add(new SetCardInfo("Distract the Guards", 3, Rarity.UNCOMMON, mage.cards.d.DistractTheGuards.class));
