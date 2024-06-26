@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.FaceDownPredicate;
@@ -30,7 +29,6 @@ public final class TimeReaper extends CardImpl {
 
     static {
         filter.add(Predicates.not(FaceDownPredicate.instance));
-        filter.add(TargetController.SOURCE_EFFECT_TARGET_POINTER.getOwnerPredicate());
     }
 
     public TimeReaper(UUID ownerId, CardSetInfo setInfo) {

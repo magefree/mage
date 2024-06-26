@@ -28,8 +28,7 @@ public enum TargetController {
     ENCHANTED,
     SOURCE_TARGETS,
     MONARCH,
-    SOURCE_CONTROLLER,
-    SOURCE_EFFECT_TARGET_POINTER;
+    SOURCE_CONTROLLER;
 
     private final OwnerPredicate ownerPredicate;
     private final PlayerPredicate playerPredicate;
@@ -84,8 +83,6 @@ public enum TargetController {
                     return card.isOwnedBy(input.getSource().getControllerId());
                 case SOURCE_TARGETS:
                     return card.isOwnedBy(input.getSource().getFirstTarget());
-                case SOURCE_EFFECT_TARGET_POINTER:
-                    return card.isOwnedBy(input.getSource().getEffects().get(0).getTargetPointer().getFirst(game, input.getSource()));
                 case MONARCH:
                     return card.isOwnedBy(game.getMonarchId());
                 case ANY:
