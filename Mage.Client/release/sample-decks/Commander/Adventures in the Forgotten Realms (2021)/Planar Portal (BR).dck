@@ -1,0 +1,77 @@
+1 [M19:129] Apex of Power
+1 [ELD:331] Arcane Signet
+1 [AFC:21] Bag of Devouring
+1 [RNA:157] Bedevil
+1 [ARB:34] Bituminous Blast
+1 [WWK:132] Bojuka Bog
+1 [AFC:57] Bucknard's Everfull Purse
+1 [AFR:136] Chaos Channeler
+1 [M19:228] Chaos Wand
+1 [OTC:160] Chaos Warp
+1 [ELD:319] Chittering Witch
+1 [ELD:333] Command Tower
+1 [LCC:301] Commander's Sphere
+1 [DTK:131] Commune with Lava
+1 [ROE:101] Consuming Vapors
+1 [AFC:22] Danse Macabre
+1 [M19:134] Dark-Dweller Oracle
+1 [RIX:66] Dead Man's Chest
+1 [AFC:23] Death Tyrant
+1 [RIX:99] Dire Fleet Daredevil
+1 [MKC:151] Disrupt Decorum
+1 [SCD:139] Dream Pillager
+1 [AFC:60] Ebony Fly
+1 [RIX:100] Etali, Primal Storm
+1 [CON:142] Exotic Orchard
+1 [9ED:297] Fellwar Stone
+1 [AFC:316] Fevered Suspicion
+1 [DKA:62] Fiend of the Shadows
+1 [CMM:221] Fiendlash
+1 [SOI:272] Foreboding Ruins
+1 [KLD:84] Gonti, Lord of Luxury
+1 [CLB:755] Grim Hireling
+1 [AFC:26] Hellish Rebuke
+1 [RAV:89] Hex
+1 [AFC:318] Hurl Through Hell
+1 [CLB:797] Ignite the Future
+1 [CLB:798] Izzet Chemister
+1 [AFC:319] Karazikar, the Eye Tyrant
+1 [CLU:140] Light Up the Stage
+1 [AFC:27] Lorcan, Warlock Collector
+1 [PIP:190] Loyal Apprentice
+1 [KLD:90] Marionette Master
+1 [10E:335] Mind Stone
+1 [BFZ:240] Mortuary Mire
+13 [BLB:274] Mountain
+1 [GTC:74] Ogre Slumlord
+1 [RIX:181] Orazca Relic
+1 [TSP:122] Phthisis
+1 [ELD:100] Piper of the Swarm
+1 [DGM:27] Pontiff of Blight
+1 [CLU:243] Rakdos Carnarium
+1 [RTR:184] Rakdos Charm
+1 [CLU:226] Rakdos Signet
+1 [AFC:302] Reckless Endeavor
+1 [ODY:326] Shadowblood Ridge
+1 [AFC:303] Share the Spoils
+1 [CLU:147] Shiny Impetus
+1 [BFZ:247] Smoldering Marsh
+1 [SUM:274] Sol Ring
+1 [LRW:274] Spinerock Knoll
+14 [OTJ:274] Swamp
+1 [TOR:142] Tainted Peak
+1 [MRD:255] Talisman of Indulgence
+1 [THB:158] Tectonic Giant
+1 [ARB:46] Terminate
+1 [RNA:213] Theater of Horrors
+1 [WHO:227] Throes of Chaos
+1 [AFC:62] Underdark Rift
+1 [CMM:416] Unstable Obelisk
+1 [RTR:111] Vandalblast
+1 [AFR:125] Warlock Class
+1 [CLB:816] Wild-Magic Sorcerer
+1 [AFR:169] You Find Some Prisoners
+1 [DOM:249] Zhalfirin Void
+SB: 1 [AFC:2] Prosper, Tome-Bound
+LAYOUT MAIN:(1,6)(CARD_TYPE,false,55)|([ELD:331],[AFC:21],[AFC:57],[M19:228],[LCC:301],[AFC:60],[9ED:297],[CMM:221],[10E:335],[RIX:181],[CLU:226],[SUM:274],[MRD:255],[CMM:416])([AFR:136],[ELD:319],[M19:134],[AFC:23],[RIX:99],[SCD:139],[RIX:100],[DKA:62],[KLD:84],[CLB:755],[CLB:798],[AFC:319],[AFC:27],[PIP:190],[KLD:90],[GTC:74],[ELD:100],[DGM:27],[THB:158],[CLB:816])([RIX:66],[AFC:303],[CLU:147],[RNA:213],[AFR:125])([RNA:157],[ARB:34],[OTC:160],[DTK:131],[AFC:26],[AFC:318],[RTR:184],[ARB:46],[AFR:169])([WWK:132],[ELD:333],[CON:142],[SOI:272],[BFZ:240],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[CLU:243],[ODY:326],[BFZ:247],[LRW:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[TOR:142],[AFC:62],[DOM:249])([M19:129],[ROE:101],[AFC:22],[MKC:151],[AFC:316],[RAV:89],[CLB:797],[CLU:140],[TSP:122],[AFC:302],[WHO:227],[RTR:111])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([AFC:2])

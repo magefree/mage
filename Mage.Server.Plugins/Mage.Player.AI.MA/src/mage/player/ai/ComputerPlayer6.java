@@ -32,6 +32,7 @@ import mage.target.TargetCard;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -60,11 +61,8 @@ public class ComputerPlayer6 extends ComputerPlayer {
             0L,
             TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>(),
-            r -> {
-                Thread thread = new Thread(r);
-                thread.setName(ThreadUtils.THREAD_PREFIX_AI_SIMULATION + "-" + thread.getId());
-                return thread;
-            });
+            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_AI_SIMULATION_MAD)
+    );
     protected int maxDepth;
     protected int maxNodes;
     protected int maxThinkTimeSecs;

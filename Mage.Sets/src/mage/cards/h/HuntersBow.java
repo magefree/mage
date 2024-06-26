@@ -13,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
@@ -25,6 +26,8 @@ public final class HuntersBow extends CardImpl {
 
     public HuntersBow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{G}");
+
+        this.subtype.add(SubType.EQUIPMENT);
 
         // When Hunter's Bow enters the battlefield, attach it to target creature you control. That creature deals damage equal to its power to up to one target creature you don't control.
         Ability ability = new EntersBattlefieldAttachToTarget();

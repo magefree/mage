@@ -50,13 +50,13 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     }
 
     /**
-     * @param cost      alternate cost to pay
+     * @param cost alternate cost to pay
      * @param condition only if the condition is true it's possible to use the
-     *                  alternate costs
-     * @param rule      if != null used as rule text
-     * @param filter    filters the cards this alternate cost can be applied to
-     * @param onlyMana  if true only the mana costs are replaced by this costs,
-     *                  other costs stay untouched
+     * alternate costs
+     * @param rule if != null used as rule text
+     * @param filter filters the cards this alternate cost can be applied to
+     * @param onlyMana if true only the mana costs are replaced by this costs,
+     * other costs stay untouched
      */
     public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule, FilterCard filter, boolean onlyMana) {
         super(Zone.ALL, null);
@@ -153,7 +153,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                     }
                     for (AlternativeCost alternateCost : alternativeCostsToCheck) {
                         alternateCost.activate();
-                        for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext(); ) {
+                        for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext();) {
                             Cost costDetailed = (Cost) it.next();
                             if (costDetailed instanceof ManaCost) {
                                 ability.addManaCostsToPay((ManaCost) costDetailed.copy());
@@ -211,13 +211,14 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     /**
      * Search activated status of alternative cost.
      * <p>
-     * If you need it on resolve then use current ZCC (on stack)
-     * If you need it on battlefield then use previous ZCC (-1)
+     * If you need it on resolve then use current ZCC (on stack) If you need it
+     * on battlefield then use previous ZCC (-1)
      *
      * @param game
      * @param source
-     * @param alternativeCostOriginalId you must save originalId on card's creation
-     * @param searchPrevZCC             true on battlefield, false on stack
+     * @param alternativeCostOriginalId you must save originalId on card's
+     * creation
+     * @param searchPrevZCC true on battlefield, false on stack
      * @return
      */
     public static boolean getActivatedStatus(Game game, Ability source, UUID alternativeCostOriginalId, boolean searchPrevZCC) {
@@ -232,21 +233,20 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     @Override
     public boolean isActivated(Ability source, Game game) {
-        Costs<AlternativeCost> alternativeCostsToCheck;
-        if (dynamicCost != null) {
-            alternativeCostsToCheck = (Costs<AlternativeCost>) game.getState().getValue(getDynamicCostActivatedKey(source));
-            if (alternativeCostsToCheck == null) {
-                return false;
-            }
-        } else {
-            alternativeCostsToCheck = this.alternateCosts;
+        Costs<AlternativeCost> alternativeCostsToCheck = dynamicCost != null
+                ? (Costs<AlternativeCost>) game.getState().getValue(getDynamicCostActivatedKey(source))
+                : this.alternateCosts;
+
+        if (alternativeCostsToCheck == null) {
+            return false;
         }
+
         for (AlternativeCost cost : alternativeCostsToCheck) {
             if (cost.isActivated(game)) {
                 return true;
             }
         }
-        return false;
+        return onlyMana && alternativeCostsToCheck.isEmpty();
     }
 
     @Override
@@ -280,8 +280,8 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         sb.append(CardUtil.concatWithAnd(alternateCosts
                 .stream()
                 .map(cost -> cost.getCost() instanceof ManaCost
-                        ? "pay " + cost.getText(true)
-                        : cost.getText(true))
+                ? "pay " + cost.getText(true)
+                : cost.getText(true))
                 .map(CardUtil::getTextWithFirstCharLowerCase)
                 .collect(Collectors.toList())));
         if (condition == null || alternateCosts.size() == 1) {

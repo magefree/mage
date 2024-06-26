@@ -11,6 +11,8 @@ import mage.players.PlayerType;
 import mage.server.RoomImpl;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
@@ -25,18 +27,21 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(GamesRoomImpl.class);
 
-    private static final int MAX_FINISHED_TABLES = 50;
+    private static final int MAX_FINISHED_TABLES = 25;
 
-    private static final ScheduledExecutorService UPDATE_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
-    private static List<TableView> tableView = new ArrayList<>();
-    private static List<MatchView> matchView = new ArrayList<>();
-    private static List<RoomUsersView> roomUsersView = new ArrayList<>();
+    // server's lobby
+    private static List<TableView> lobbyTables = new ArrayList<>();
+    private static List<MatchView> lobbyMatches = new ArrayList<>();
+    private static List<RoomUsersView> lobbyUsers = new ArrayList<>();
+    private static final ScheduledExecutorService UPDATE_LOBBY_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_LOBBY_REFRESH)
+    );
 
     private final ManagerFactory managerFactory;
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
@@ -44,9 +49,11 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     public GamesRoomImpl(ManagerFactory managerFactory) {
         super(managerFactory.chatManager());
         this.managerFactory = managerFactory;
-        UPDATE_EXECUTOR.scheduleAtFixedRate(() -> {
+
+        // update lobby's data
+        UPDATE_LOBBY_EXECUTOR.scheduleAtFixedRate(() -> {
             try {
-                update();
+                updateLobby();
             } catch (Exception e) {
                 LOGGER.fatal("Games room update error: " + e.getMessage(), e);
             }
@@ -56,10 +63,11 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     @Override
     public List<TableView> getTables() {
-        return tableView;
+        return lobbyTables;
     }
 
-    private void update() {
+    private void updateLobby() {
+        // tables and matches
         List<Table> allTables = new ArrayList<>(tables.values());
         allTables.sort(new TableListSorter());
         List<MatchView> matchList = new ArrayList<>();
@@ -77,8 +85,10 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                 this.removeTable(table.getId());
             }
         }
-        tableView = tableList;
-        matchView = matchList;
+        lobbyTables = tableList;
+        lobbyMatches = matchList;
+
+        // users
         List<UsersView> users = new ArrayList<>();
         for (User user : managerFactory.userManager().getUsers()) {
             if (user.isOnlineUser()) {
@@ -105,7 +115,6 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                 }
             }
         }
-
         users.sort((one, two) -> one.getUserName().compareToIgnoreCase(two.getUserName()));
         List<RoomUsersView> roomUserInfo = new ArrayList<>();
         roomUserInfo.add(new RoomUsersView(users,
@@ -113,12 +122,12 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                 managerFactory.threadExecutor().getActiveThreads(managerFactory.threadExecutor().getGameExecutor()),
                 managerFactory.configSettings().getMaxGameThreads()
         ));
-        roomUsersView = roomUserInfo;
+        lobbyUsers = roomUserInfo;
     }
 
     @Override
     public List<MatchView> getFinished() {
-        return matchView;
+        return lobbyMatches;
     }
 
     @Override
@@ -190,7 +199,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     @Override
     public List<RoomUsersView> getRoomUsersInfo() {
-        return roomUsersView;
+        return lobbyUsers;
     }
 
 }

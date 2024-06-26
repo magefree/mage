@@ -85,7 +85,7 @@ class UglukOfTheWhiteHandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent deadCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent deadCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
 
         boolean wasOrcOrGoblin = false;
         if (deadCreature != null) {

@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import mage.abilities.Ability;
@@ -21,8 +20,10 @@ public final class LensOfClarity extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // You may look at the top card of your library and at face-down creatures you don't control.
-        Ability ability = new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect().setText("you may look at the top card of your library"));
-        ability.addEffect(new LookAtOpponentFaceDownCreaturesAnyTimeEffect().setText("at face-down creatures you don't control any time").concatBy(" and "));
+        Ability ability = new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()
+                .setText("you may look at the top card of your library"));
+        ability.addEffect(new LookAtOpponentFaceDownCreaturesAnyTimeEffect()
+                .setText("and at face-down creatures you don't control any time"));
         this.addAbility(ability);
     }
 

@@ -1,16 +1,16 @@
 package mage.client.util.gui.countryBox;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.ImageIcon;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- *
  * @author LevelX2
  */
 public final class CountryUtil {
@@ -37,22 +37,6 @@ public final class CountryUtil {
                 FLAG_ICON_CACHE.put(countryCode, flagIcon);
             } else {
                 FLAG_ICON_CACHE.put(countryCode, flagIcon);
-            }
-        }
-        return flagIcon;
-    }
-
-    public static ImageIcon getCountryFlagIconSize(String countryCode, int height) {
-        ImageIcon flagIcon = null;
-        Image flagImage = ImageHelper.getImageFromResources("/flags/" + countryCode + (countryCode.endsWith(".png") ? "" : ".png"));
-        if (flagImage != null) {
-
-            if (height > 11) {
-                int width = Math.round(height * flagImage.getWidth(null) / flagImage.getHeight(null));
-                BufferedImage resized = ImageHelper.scale((BufferedImage) flagImage, BufferedImage.TYPE_4BYTE_ABGR, width, height);
-                flagIcon = new ImageIcon(resized);
-            } else {
-                flagIcon = new ImageIcon(flagImage);
             }
         }
         return flagIcon;

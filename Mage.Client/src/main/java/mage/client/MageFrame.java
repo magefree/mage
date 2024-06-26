@@ -44,6 +44,8 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.util.DebugUtil;
+import mage.util.ThreadUtils;
+import mage.util.XMageThreadFactory;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
@@ -79,6 +81,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
 
 /**
+ * Client app
+ *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class MageFrame extends javax.swing.JFrame implements MageClient {
@@ -88,7 +92,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final Logger LOGGER = Logger.getLogger(MageFrame.class);
     private static final String LITE_MODE_ARG = "-lite";
     private static final String GRAY_MODE_ARG = "-gray";
-    private static final String FILL_SCREEN_ARG = "-fullscreen";
+    private static final String FULL_SCREEN_PROP = "xmage.fullScreen"; // -Dxmage.fullScreen=false
     private static final String SKIP_DONE_SYMBOLS = "-skipDoneSymbols";
     private static final String USER_ARG = "-user";
     private static final String PASSWORD_ARG = "-pw";
@@ -113,7 +117,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static boolean liteMode = false;
     //TODO: make gray theme, implement theme selector in preferences dialog
     private static boolean grayMode = false;
-    private static boolean fullscreenMode = false;
+    private static boolean macOsFullScreenEnabled = true;
     private static boolean skipSmallSymbolGenerationForExisting = false;
     private static String startUser = null;
     private static String startPassword = "";
@@ -129,7 +133,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final Map<UUID, DraftPanel> DRAFTS = new HashMap<>();
     private static final MageUI UI = new MageUI();
 
-    private static final ScheduledExecutorService PING_TASK_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService PING_SENDER_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_PING_SENDER)
+    );
     private static UpdateMemUsageTask updateMemUsageTask;
 
     private static long startTime;
@@ -202,6 +208,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         setWindowTitle();
+
+        // mac os only: enable full screen support in java 8 (java 11+ try to use it all the time)
+        if (MacFullscreenUtil.isMacOSX() && macOsFullScreenEnabled) {
+            MacFullscreenUtil.enableMacOSFullScreenMode(this);
+            MacFullscreenUtil.toggleMacOSFullScreenMode(this);
+        }
 
         EDTExceptionHandler.registerExceptionHandler();
         addWindowListener(new WindowAdapter() {
@@ -311,16 +323,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         desktopPane.add(errorDialog, JLayeredPane.MODAL_LAYER);
         UI.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
-        PING_TASK_EXECUTOR.scheduleAtFixedRate(() -> SessionHandler.ping(), TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
+        PING_SENDER_EXECUTOR.scheduleAtFixedRate(SessionHandler::ping, TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
 
         updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
 
         // create default server lobby and hide it until connect
         tablesPane = new TablesPane();
         desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        SwingUtilities.invokeLater(() -> {
-            this.hideServerLobby();
-        });
+        SwingUtilities.invokeLater(this::hideServerLobby);
 
         addTooltipContainer();
         setBackground();
@@ -387,13 +397,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
             setWindowTitle();
         });
-
-        if (MacFullscreenUtil.isMacOSX()) {
-            MacFullscreenUtil.enableMacOSFullScreenMode(this);
-            if (fullscreenMode) {
-                MacFullscreenUtil.toggleMacOSFullScreenMode(this);
-            }
-        }
     }
 
     private void bootstrapSetsAndFormats() {
@@ -1423,8 +1426,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 if (arg.startsWith(GRAY_MODE_ARG)) {
                     grayMode = true;
                 }
-                if (arg.startsWith(FILL_SCREEN_ARG)) {
-                    fullscreenMode = true;
+                if (System.getProperty(FULL_SCREEN_PROP) != null) {
+                    macOsFullScreenEnabled = Boolean.parseBoolean(System.getProperty(FULL_SCREEN_PROP));
                 }
                 if (arg.startsWith(SKIP_DONE_SYMBOLS)) {
                     skipSmallSymbolGenerationForExisting = true;
@@ -1609,8 +1612,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void disconnected(final boolean askToReconnect) {
+    public void disconnected(boolean askToReconnect, boolean keepMySessionActive) {
         if (SwingUtilities.isEventDispatchThread()) {
+            // TODO: need research, it can generate wrong logs due diff threads source (doInBackground, swing, server events, etc)
             // REMOTE task, e.g. connecting
             LOGGER.info("Disconnected from server side");
         } else {
@@ -1618,11 +1622,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             LOGGER.info("Disconnected from client side");
         }
 
-        SwingUtilities.invokeLater(() -> {
+        Runnable runOnExit = () -> {
             // user already disconnected, can't do any online actions like quite chat
             // but try to keep session
             // TODO: why it ignore askToReconnect here, but use custom reconnect dialog later?! Need research
-            SessionHandler.disconnect(false, true);
+            SessionHandler.disconnect(false, keepMySessionActive);
             setConnectButtonText(NOT_CONNECTED_BUTTON);
             disableButtons();
             hideGames();
@@ -1633,7 +1637,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 message.setButton2("Yes", PlayerAction.CLIENT_RECONNECT);
                 showUserRequestDialog(message);
             }
-        });
+        };
+
+        if (SwingUtilities.isEventDispatchThread()) {
+            runOnExit.run();
+        } else {
+            SwingUtilities.invokeLater(runOnExit);
+        }
     }
 
     @Override
