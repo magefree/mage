@@ -20,8 +20,8 @@ public final class WordOfBinding extends CardImpl {
 
         // Tap X target creatures.
         this.getSpellAbility().addEffect(new TapTargetEffect("tap X target creatures"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private WordOfBinding(final WordOfBinding card) {

@@ -24,8 +24,8 @@ public final class SpellBurst extends CardImpl {
 
         // Counter target spell with converted mana cost X.
         this.getSpellAbility().addEffect(new CounterTargetEffect().setText("counter target spell with mana value X"));
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
     }
 
     private SpellBurst(final SpellBurst card) {

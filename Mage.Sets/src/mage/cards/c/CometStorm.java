@@ -31,8 +31,8 @@ public final class CometStorm extends CardImpl {
         // Choose any target, then choose another any target for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
         this.getSpellAbility().addEffect(new CometStormEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget(1));
-        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(new IntPlusDynamicValue(1, MultikickerCount.instance)));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(new IntPlusDynamicValue(1, MultikickerCount.instance)));
     }
 
     private CometStorm(final CometStorm card) {

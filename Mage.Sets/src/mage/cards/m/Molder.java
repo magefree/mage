@@ -24,8 +24,8 @@ public final class Molder extends CardImpl {
         // Destroy target artifact or enchantment with converted mana cost X. It can't be regenerated. You gain X life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target artifact or enchantment with mana value X. It can't be regenerated", true));
         this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
     }
 
     private Molder(final Molder card) {

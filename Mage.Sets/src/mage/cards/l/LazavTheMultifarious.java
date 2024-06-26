@@ -47,8 +47,8 @@ public final class LazavTheMultifarious extends CardImpl {
                 new LazavTheMultifariousEffect(),
                 new ManaCostsImpl<>("{X}")
         );
-        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 
@@ -115,8 +115,8 @@ class LazavTheMultifariousCopyApplier extends CopyApplier {
                 new LazavTheMultifariousEffect(),
                 new ManaCostsImpl<>("{X}")
         );
-        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         blueprint.getAbilities().add(ability);
         blueprint.setName("Lazav, the Multifarious");
         blueprint.addSuperType(SuperType.LEGENDARY);

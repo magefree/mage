@@ -42,8 +42,8 @@ public final class SontaranGeneral extends CardImpl {
                 .setText("for each opponent, goad up to one target creature that player controls."));
         ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
                 .setText("Those creatures can't block this turn."));
-        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         this.addAbility(ability);
     }
 

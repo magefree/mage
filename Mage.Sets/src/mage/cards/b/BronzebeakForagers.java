@@ -46,8 +46,8 @@ public final class BronzebeakForagers extends CardImpl {
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, exile up to one target nonland permanent that player controls until {this} leaves the battlefield")
         );
-        etbAbility.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         etbAbility.addTarget(new TargetNonlandPermanent(0, 1));
+        etbAbility.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         this.addAbility(etbAbility);
 
         // {X}{W}: Put target card with mana value X exiled with Bronzebeak Foragers into its owner's graveyard.

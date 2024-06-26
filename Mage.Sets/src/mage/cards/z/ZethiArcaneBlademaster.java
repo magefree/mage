@@ -44,8 +44,8 @@ public final class ZethiArcaneBlademaster extends CardImpl {
 
         // When Chun-Li enters the battlefield, exile up to X target instant cards from your graveyard, where X is the number of times Chun-Li was kicked. Put a kick counter on each of them.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ZethiArcaneBlademasterExileEffect());
-        ability.setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
         this.addAbility(ability);
 
 

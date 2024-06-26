@@ -47,8 +47,8 @@ public final class GhostLitDrifter extends CardImpl {
                 FlyingAbility.getInstance(), Duration.EndOfTurn,
                 "X target creatures gain flying until end of turn"
         ));
-        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability);
     }
 

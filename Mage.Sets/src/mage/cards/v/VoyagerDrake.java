@@ -43,8 +43,8 @@ public final class VoyagerDrake extends CardImpl {
                 ).setText("up to X target creatures gain flying until end of turn, " +
                         "where X is the number of times {this} was kicked.")
         );
-        ability.setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
         this.addAbility(ability);
     }
 

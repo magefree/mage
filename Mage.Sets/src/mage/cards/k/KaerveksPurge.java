@@ -25,8 +25,8 @@ public final class KaerveksPurge extends CardImpl {
 
         // Destroy target creature with converted mana cost X. If that creature dies this way, Kaervek's Purge deals damage equal to the creature's power to the creature's controller.
         this.getSpellAbility().addEffect(new KaerveksPurgeEffect());
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
     }
 
     private KaerveksPurge(final KaerveksPurge card) {

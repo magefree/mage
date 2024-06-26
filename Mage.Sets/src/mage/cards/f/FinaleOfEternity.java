@@ -28,8 +28,8 @@ public final class FinaleOfEternity extends CardImpl {
         // Destroy up to three target creatures with toughness X or less. If X is 10 or more, return all creature cards from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new DestroyTargetEffect().setText("destroy up to three target creatures with toughness X or less"));
         this.getSpellAbility().addEffect(new FinaleOfEternityEffect());
-        this.getSpellAbility().setTargetAdjuster(new ToughnessTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 3, StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().setTargetAdjuster(new ToughnessTargetAdjuster(ComparisonType.OR_LESS));
     }
 
     private FinaleOfEternity(final FinaleOfEternity card) {

@@ -21,8 +21,8 @@ public final class EntreatTheDead extends CardImpl {
 
         // Return X target creature cards from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect().setText("return X target creature cards from your graveyard to the battlefield"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
         // Miracle {X}{B}{B}
         this.addAbility(new MiracleAbility("{X}{B}{B}"));

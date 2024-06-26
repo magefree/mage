@@ -38,8 +38,8 @@ public final class WaxmaneBaku extends CardImpl {
         // {1}, Remove X ki counters from Waxmane Baku: Tap X target creatures.
         Ability ability = new SimpleActivatedAbility(new TapTargetEffect("tap X target creatures"), new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI));
-        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability);
     }
 

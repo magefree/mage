@@ -54,8 +54,8 @@ public final class AryelKnightOfWindgrace extends CardImpl {
                 .setText("Destroy target creature with power X or less"), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapVariableTargetCost(filter));
-        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         this.addAbility(ability);
     }
 

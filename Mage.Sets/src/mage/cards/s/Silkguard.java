@@ -43,8 +43,8 @@ public final class Silkguard extends CardImpl {
         // Put a +1/+1 counter on each of up to X target creatures you control.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                 .setText("put a +1/+1 counter on each of up to X target creatures you control"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
         // Auras, Equipment, and modified creatures you control gain hexproof until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(

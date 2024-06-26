@@ -29,8 +29,8 @@ public final class TheBattleOfNaboo extends CardImpl {
         effect.setText("Return X target creatures to their owner's hands");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new TheBattleOfNabooEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private TheBattleOfNaboo(final TheBattleOfNaboo card) {

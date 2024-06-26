@@ -50,8 +50,8 @@ public final class LikenessLooter extends CardImpl {
                 new LikenessLooterEffect(),
                 new ManaCostsImpl<>("{X}")
         );
-        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 
@@ -116,8 +116,8 @@ class LikenessLooterCopyApplier extends CopyApplier {
                 new LikenessLooterEffect(),
                 new ManaCostsImpl<>("{X}")
         );
-        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         blueprint.getAbilities().add(ability);
         return true;
     }

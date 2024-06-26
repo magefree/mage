@@ -26,8 +26,8 @@ public final class GangUp extends CardImpl {
 
         // Destroy target creature with power X or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("destroy target creature with power X or less"));
-        this.getSpellAbility().setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
     }
 
     private GangUp(final GangUp card) {

@@ -24,8 +24,8 @@ public final class Doppelgang extends CardImpl {
 
         // For each of X target permanents, create X tokens that are copies of that permanent.
         this.getSpellAbility().addEffect(new DoppelgangEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private Doppelgang(final Doppelgang card) {
