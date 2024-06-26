@@ -19,7 +19,8 @@ public class DamagedPlayerControlsTargetAdjuster implements TargetAdjuster {
     private TargetPermanent blueprintTarget = null;
     private boolean owner;
     /**
-     * Use with DealsCombatDamageToAPlayerTriggeredAbility with setTargetPointer enabled.
+     * Use with {@link mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility} with setTargetPointer enabled,
+     * or {@link mage.abilities.common.OneOrMoreDealDamageTriggeredAbility} with "SetTargetPointer.PLAYER".
      * Adjusts the target to only target something the damaged player controls (or owns with alternative constructor)
      * And then removes the effects' target pointer that the triggered ability set
      */
