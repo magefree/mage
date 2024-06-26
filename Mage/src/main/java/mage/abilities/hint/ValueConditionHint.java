@@ -13,8 +13,7 @@ public class ValueConditionHint extends ConditionHint {
     private final DynamicValue value;
 
     public ValueConditionHint(DynamicValue value, Condition condition) {
-        super(condition, condition.toString());
-        this.value = value;
+        this(condition.toString(), value, condition);
     }
 
     public ValueConditionHint(String name, DynamicValue value, Condition condition) {
