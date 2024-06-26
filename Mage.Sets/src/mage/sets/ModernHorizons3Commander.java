@@ -44,6 +44,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Archon of Cruelty", 197, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
         cards.add(new SetCardInfo("Artisan of Kozilek", 153, Rarity.UNCOMMON, mage.cards.a.ArtisanOfKozilek.class));
         cards.add(new SetCardInfo("Ash Barrens", 318, Rarity.COMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Aurora Shifter", 45, Rarity.RARE, mage.cards.a.AuroraShifter.class));
         cards.add(new SetCardInfo("Austere Command", 167, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 221, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
         cards.add(new SetCardInfo("Awakening Zone", 222, Rarity.RARE, mage.cards.a.AwakeningZone.class));
