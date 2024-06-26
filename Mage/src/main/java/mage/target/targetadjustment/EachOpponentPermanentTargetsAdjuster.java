@@ -37,10 +37,8 @@ public class EachOpponentPermanentTargetsAdjuster implements TargetAdjuster {
             TargetPermanent newTarget = blueprintTarget.copy();
             Filter<Permanent> filter = newTarget.getFilter();
             filter.add(new ControllerIdPredicate(opponentId));
-            if (!newTarget.possibleTargets(ability.getControllerId(), ability, game).isEmpty()) {
-                newTarget.withTargetName(filter.getMessage() + " controlled by " + opponent.getLogName());
-                ability.addTarget(newTarget);
-            }
+            newTarget.withTargetName(filter.getMessage() + " controlled by " + opponent.getLogName());
+            ability.addTarget(newTarget);
         }
     }
 }
