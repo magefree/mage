@@ -16,7 +16,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
@@ -119,7 +119,7 @@ class RalLeylineProdigyCostReductionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SpellsCostReductionAllEffect effect = new SpellsCostReductionAllEffect(filter, 1);
+        SpellsCostReductionControllerEffect effect = new SpellsCostReductionControllerEffect(filter, 1);
         effect.setDuration(Duration.UntilYourNextTurn);
         game.addEffect(effect, source);
         return true;

@@ -44,6 +44,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Archon of Cruelty", 197, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
         cards.add(new SetCardInfo("Artisan of Kozilek", 153, Rarity.UNCOMMON, mage.cards.a.ArtisanOfKozilek.class));
         cards.add(new SetCardInfo("Ash Barrens", 318, Rarity.COMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Aurora Shifter", 45, Rarity.RARE, mage.cards.a.AuroraShifter.class));
         cards.add(new SetCardInfo("Austere Command", 167, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 221, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
         cards.add(new SetCardInfo("Awakening Zone", 222, Rarity.RARE, mage.cards.a.AwakeningZone.class));
@@ -55,6 +56,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Beast Within", 223, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Benthic Anomaly", 46, Rarity.RARE, mage.cards.b.BenthicAnomaly.class));
         cards.add(new SetCardInfo("Bident of Thassa", 177, Rarity.RARE, mage.cards.b.BidentOfThassa.class));
+        cards.add(new SetCardInfo("Bismuth Mindrender", 51, Rarity.RARE, mage.cards.b.BismuthMindrender.class));
         cards.add(new SetCardInfo("Bituminous Blast", 255, Rarity.UNCOMMON, mage.cards.b.BituminousBlast.class));
         cards.add(new SetCardInfo("Blast Zone", 322, Rarity.RARE, mage.cards.b.BlastZone.class));
         cards.add(new SetCardInfo("Bloodbraid Challenger", 70, Rarity.RARE, mage.cards.b.BloodbraidChallenger.class));
@@ -136,6 +138,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Glimmer of Genius", 187, Rarity.UNCOMMON, mage.cards.g.GlimmerOfGenius.class));
         cards.add(new SetCardInfo("Glimmerpost", 346, Rarity.COMMON, mage.cards.g.Glimmerpost.class));
         cards.add(new SetCardInfo("Goldspan Dragon", 212, Rarity.MYTHIC, mage.cards.g.GoldspanDragon.class));
+        cards.add(new SetCardInfo("Gluttonous Hellkite", 73, Rarity.RARE, mage.cards.g.GluttonousHellkite.class));
         cards.add(new SetCardInfo("Gonti's Aether Heart", 294, Rarity.MYTHIC, mage.cards.g.GontisAetherHeart.class));
         cards.add(new SetCardInfo("Grapple with the Past", 230, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Graveshifter", 198, Rarity.UNCOMMON, mage.cards.g.Graveshifter.class));

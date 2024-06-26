@@ -122,20 +122,20 @@ public class ScryfallImageSource implements CardImageSource {
                     formatSetName(card.getSet(), isToken),
                     cn,
                     localizedCode);
-            alternativeUrl = String.format("https://api.scryfall.com/cards/%s/%s?format=image",
+            alternativeUrl = String.format("https://api.scryfall.com/cards/%s/%s?format=image&include_variations=true",
                     formatSetName(card.getSet(), isToken),
                     cn);
             // with no localisation code, scryfall defaults to first available image - usually english, but may not be for some special cards
             // workaround to use cards without english images (some promos or special cards)
             // bug: https://github.com/magefree/mage/issues/6829
             // example: Mysterious Egg from IKO https://api.scryfall.com/cards/iko/385/?format=image
+            // include_variations=true added to deal with the cards that scryfall has marked as variations that seem to sometimes fail
+            // eg https://api.scryfall.com/cards/4ed/134†?format=image fails
+            // eg https://api.scryfall.com/cards/4ed/134†?format=image&include_variations=true succeeds
 
         }
 
-        // workaround to deal with the cards that scryfall has marked as variations that seem to sometimes fail
-        // eg https://api.scryfall.com/cards/4ed/134†?format=image fails
-        // eg https://api.scryfall.com/cards/4ed/134†?format=image&variation=true succeeds
-        return new CardImageUrls(baseUrl, alternativeUrl , alternativeUrl + "&variation=true");
+        return new CardImageUrls(baseUrl, alternativeUrl );
     }
 
     private String getFaceImageUrl(Proxy proxy, CardDownloadData card, boolean isToken) throws Exception {

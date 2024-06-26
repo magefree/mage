@@ -36,8 +36,6 @@ public class TargetsCountAdjuster extends GenericTargetAdjuster {
             newTarget.withTargetName(filter.getMessage() + " (up to " + count + " targets)");
         }
         ability.getTargets().clear();
-        if (count > 0) {
-            ability.addTarget(newTarget);
-        }
+        ability.addTarget(newTarget);
     }
 }

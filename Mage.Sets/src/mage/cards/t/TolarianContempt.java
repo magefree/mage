@@ -34,7 +34,7 @@ public final class TolarianContempt extends CardImpl {
             = new FilterCreaturePermanent("creature with a rejection counter on it");
 
     static {
-        filter.add(CounterType.REJECTION.getPredicate());
+        filterRejection.add(CounterType.REJECTION.getPredicate());
     }
 
     public TolarianContempt(UUID ownerId, CardSetInfo setInfo) {

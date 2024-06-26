@@ -601,24 +601,39 @@ public class ScryfallImageSupportCards {
             put("SOI/Tamiyo's Journal/265+e", "https://api.scryfall.com/cards/soi/265†e/");
             // SLD
             // fake double faced cards
+            put("SLD/Adrix and Nev, Twincasters/1544b", "https://api.scryfall.com/cards/sld/1544/en?format=image&face=back");
             put("SLD/Ajani Goldmane/1453b", "https://api.scryfall.com/cards/sld/1453/en?format=image&face=back");
+            put("SLD/Anointed Procession/1511b", "https://api.scryfall.com/cards/sld/1453/en?format=image&face=back");
             put("SLD/Blightsteel Colossus/1079b", "https://api.scryfall.com/cards/sld/1079/en?format=image&face=back");
             put("SLD/Chandra Nalaar/1456b", "https://api.scryfall.com/cards/sld/1456/en?format=image&face=back");
             put("SLD/Darksteel Colossus/1081b", "https://api.scryfall.com/cards/sld/1081/en?format=image&face=back");
+            put("SLD/Death Baron/1458b", "https://api.scryfall.com/cards/sld/1458/en?format=image&face=back");
             put("SLD/Doubling Cube/1080b", "https://api.scryfall.com/cards/sld/1080/en?format=image&face=back");
             put("SLD/Etali, Primal Storm/1123b", "https://api.scryfall.com/cards/sld/1123/en?format=image&face=back");
             put("SLD/Garruk Wildspeaker/1457b", "https://api.scryfall.com/cards/sld/1457/en?format=image&face=back");
             put("SLD/Ghalta, Primal Hunger/1124b", "https://api.scryfall.com/cards/sld/1124/en?format=image&face=back");
+            put("SLD/Grimgrin, Corpse-Born/1461b", "https://api.scryfall.com/cards/sld/1461/en?format=image&face=back");
             put("SLD/Jace Beleren/1454b", "https://api.scryfall.com/cards/sld/1454/en?format=image&face=back");
+            put("SLD/Jetmir, Nexus of Revels/1509b", "https://api.scryfall.com/cards/sld/1509/en?format=image&face=back");
+            put("SLD/Jinnie Fay, Jetmir's Second/1510b", "https://api.scryfall.com/cards/sld/1510/en?format=image&face=back");
             put("SLD/Krark's Thumb/383b", "https://api.scryfall.com/cards/sld/383/en?format=image&face=back");
+            put("SLD/Krark, the Thumbless/1543b", "https://api.scryfall.com/cards/sld/1543/en?format=image&face=back");
             put("SLD/Liliana Vess/1455b", "https://api.scryfall.com/cards/sld/1455/en?format=image&face=back");
+            put("SLD/Noxious Ghoul/1459b", "https://api.scryfall.com/cards/sld/1459/en?format=image&face=back");
             put("SLD/Okaun, Eye of Chaos/380b", "https://api.scryfall.com/cards/sld/380/en?format=image&face=back");
             put("SLD/Okaun, Eye of Chaos/380b*", "https://api.scryfall.com/cards/sld/380★/en?format=image&face=back");
             put("SLD/Propaganda/381b", "https://api.scryfall.com/cards/sld/381/en?format=image&face=back");
+            put("SLD/Rin and Seri, Inseparable/1508b", "https://api.scryfall.com/cards/sld/1508/en?format=image&face=back");
+            put("SLD/Sakashima of a Thousand Faces/1541b", "https://api.scryfall.com/cards/sld/1541/en?format=image&face=back");
+            put("SLD/Sol Ring/1512b", "https://api.scryfall.com/cards/sld/1512/en?format=image&face=back");
             put("SLD/Stitch in Time/382b", "https://api.scryfall.com/cards/sld/382/en?format=image&face=back");
+            put("SLD/Terror/750b", "https://api.scryfall.com/cards/sld/750/en?format=image&face=back");
             put("SLD/Ulamog, the Ceaseless Hunger/1122b", "https://api.scryfall.com/cards/sld/1122/en?format=image&face=back");
+            put("SLD/Unholy Grotto/1462b", "https://api.scryfall.com/cards/sld/1462/en?format=image&face=back");
+            put("SLD/Yargle, Glutton of Urborg/1542b", "https://api.scryfall.com/cards/sld/1542/en?format=image&face=back");
             put("SLD/Zndrsplt, Eye of Wisdom/379b", "https://api.scryfall.com/cards/sld/379/en?format=image&face=back");
             put("SLD/Zndrsplt, Eye of Wisdom/379b*", "https://api.scryfall.com/cards/sld/379★/en?format=image&face=back");
+            put("SLD/Zombie Master/1460b", "https://api.scryfall.com/cards/sld/1460/en?format=image&face=back");
             // normal cards
             put("SLD/Viscera Seer/99999VS", "https://api.scryfall.com/cards/sld/VS/"); // see issue 11157
         

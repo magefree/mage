@@ -1245,6 +1245,7 @@ public final class CardUtil {
             }
 
             // restrict hints only for permanents, not cards
+
             // total hints
             if (!abilityHints.isEmpty()) {
                 rules.add(HintUtils.HINT_START_MARK);
@@ -1735,11 +1736,27 @@ public final class CardUtil {
      */
     public static Map<String, Object> getSourceCostsTagsMap(Game game, Ability source) {
         Map<String, Object> costTags;
+
+        // from spell ability - direct access
         costTags = source.getCostsTagMap();
-        if (costTags == null && source.getSourcePermanentOrLKI(game) != null) {
-            costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
+        if (costTags != null) {
+            return costTags;
         }
-        return costTags;
+
+        // from any ability after resolve - access by permanent
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        if (permanent != null) {
+            costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
+            return costTags;
+        }
+
+        // from any ability before resolve (on stack) - access by spell ability
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject instanceof Spell) {
+            return ((Spell) sourceObject).getSpellAbility().getCostsTagMap();
+        }
+
+        return null;
     }
 
     /**

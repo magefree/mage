@@ -15,7 +15,7 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.watchers.common.CelebrationWatcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 import java.util.UUID;
 
@@ -46,7 +46,7 @@ public final class TuinvaleGuide extends CardImpl {
                 + "permanents entered the battlefield under your control this turn"
         ));
         ability.addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION);
-        this.addAbility(ability, new CelebrationWatcher());
+        this.addAbility(ability, new PermanentsEnteredBattlefieldWatcher());
     }
 
     private TuinvaleGuide(final TuinvaleGuide card) {

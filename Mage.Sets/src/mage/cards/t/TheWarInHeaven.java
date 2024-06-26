@@ -6,7 +6,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldWithCounterTargetEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.cards.*;
 import mage.constants.*;
@@ -18,12 +17,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetpointer.FixedTargets;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
@@ -72,9 +69,9 @@ class TheWarInHeavenEffect extends OneShotEffect {
 
     TheWarInHeavenEffect() {
         super(Outcome.Benefit);
-        staticText = "choose up to three target creature cards with total mana value 8 or less in your graveyard. " +
-                "Return each of them to the battlefield with a necrodermis counter on it. " +
-                "They're artifacts in addition to their other types";
+        staticText = "choose up to three target creature cards with total mana value 8 or less in your graveyard. "
+                + "Return each of them to the battlefield with a necrodermis counter on it. "
+                + "They\'re artifacts in addition to their other types";
     }
 
     private TheWarInHeavenEffect(final TheWarInHeavenEffect effect) {
@@ -92,19 +89,18 @@ class TheWarInHeavenEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
-        new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(
-                CounterType.NECRODERMIS.createInstance()
-        ).apply(game, source);
-        List<Permanent> permanents = cards
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-        if (!permanents.isEmpty()) {
-            game.addEffect(new AddCardTypeTargetEffect(
-                    Duration.Custom, CardType.ARTIFACT
-            ).setTargetPointer(new FixedTargets(permanents, game)), source);
+        List<UUID> targetIds = this.getTargetPointer().getTargets(game, source);
+        for (UUID targetId : targetIds) {
+            Card card = game.getCard(targetId);
+            if (card != null) {
+                card.moveToZone(Zone.BATTLEFIELD, source, game, false);
+                Permanent permanent = game.getPermanent(card.getId());
+                if (permanent != null) {
+                    permanent.addCounters(CounterType.NECRODERMIS.createInstance(), source, game);
+                    game.addEffect(new AddCardTypeTargetEffect(Duration.Custom, CardType.ARTIFACT)
+                            .setTargetPointer(new FixedTarget(permanent, game)), source);
+                }
+            }
         }
         return true;
     }
@@ -138,8 +134,8 @@ class TheWarInHeavenTarget extends TargetCardInYourGraveyard {
             return false;
         }
         Card card = game.getCard(id);
-        return card != null &&
-                this.getTargets()
+        return card != null
+                && this.getTargets()
                         .stream()
                         .map(game::getCard)
                         .mapToInt(Card::getManaValue)

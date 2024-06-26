@@ -12,18 +12,18 @@ import mage.players.Player;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class SacrificeAllEffect extends OneShotEffect {
 
     private final DynamicValue amount;
     private final FilterPermanent filter;
     private final boolean onlyOpponents;
+
+    private static final String VALUE_KEY = "sacrificeAllEffect_permanentsList";
 
     /**
      * Each player sacrifices a permanent
@@ -52,9 +52,6 @@ public class SacrificeAllEffect extends OneShotEffect {
         this(amount, filter, false);
     }
 
-    /**
-     * Internal use for this and SacrificeOpponentsEffect
-     */
     protected SacrificeAllEffect(DynamicValue amount, FilterPermanent filter, boolean onlyOpponents) {
         super(Outcome.Sacrifice);
         this.amount = amount;
@@ -99,13 +96,30 @@ public class SacrificeAllEffect extends OneShotEffect {
             }
             perms.addAll(target.getTargets());
         }
+
+        List<Permanent> sacraficedPermanents = new ArrayList<>();
         for (UUID permID : perms) {
             Permanent permanent = game.getPermanent(permID);
-            if (permanent != null) {
-                permanent.sacrifice(source, game);
+            if (permanent != null && permanent.sacrifice(source, game)) {
+                sacraficedPermanents.add(permanent.copy());
             }
         }
+        saveSacrificedPermanentsList(source.getSourceId(), game, sacraficedPermanents);
+
         return true;
+    }
+
+    public static void saveSacrificedPermanentsList(UUID sourceObjectId, Game game, List<Permanent> list) {
+        game.getState().setValue(CardUtil.getCardZoneString(VALUE_KEY, sourceObjectId, game), list);
+    }
+
+    /**
+     * Get detailed list of sacrificed permanents
+     *
+     * @param previous if you need to look in detailed list on battlefield, then use previous param to find data from a stack moment
+     */
+    public static List<Permanent> getSacrificedPermanentsList(UUID sourceObjectId, Game game, boolean previous) {
+        return (List<Permanent>) game.getState().getValue(CardUtil.getCardZoneString(VALUE_KEY, sourceObjectId, game, previous));
     }
 
     private void setText() {

@@ -97,6 +97,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Curious Cadaver", 194, Rarity.UNCOMMON, mage.cards.c.CuriousCadaver.class));
         cards.add(new SetCardInfo("Curious Inquiry", 51, Rarity.UNCOMMON, mage.cards.c.CuriousInquiry.class));
         cards.add(new SetCardInfo("Deadly Complication", 195, Rarity.UNCOMMON, mage.cards.d.DeadlyComplication.class));
+        cards.add(new SetCardInfo("Deadly Cover-Up", 83, Rarity.RARE, mage.cards.d.DeadlyCoverUp.class));
         cards.add(new SetCardInfo("Deduce", 52, Rarity.COMMON, mage.cards.d.Deduce.class));
         cards.add(new SetCardInfo("Defenestrated Phantom", 11, Rarity.COMMON, mage.cards.d.DefenestratedPhantom.class));
         cards.add(new SetCardInfo("Delney, Streetwise Lookout", 12, Rarity.MYTHIC, mage.cards.d.DelneyStreetwiseLookout.class));
@@ -112,9 +113,11 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Eliminate the Impossible", 54, Rarity.UNCOMMON, mage.cards.e.EliminateTheImpossible.class));
         cards.add(new SetCardInfo("Escape Tunnel", 261, Rarity.COMMON, mage.cards.e.EscapeTunnel.class));
         cards.add(new SetCardInfo("Essence of Antiquity", 15, Rarity.UNCOMMON, mage.cards.e.EssenceOfAntiquity.class));
+        cards.add(new SetCardInfo("Etrata, Deadly Fugitive", 200, Rarity.MYTHIC, mage.cards.e.EtrataDeadlyFugitive.class));
         cards.add(new SetCardInfo("Evidence Examiner", 201, Rarity.UNCOMMON, mage.cards.e.EvidenceExaminer.class));
         cards.add(new SetCardInfo("Exit Specialist", 55, Rarity.UNCOMMON, mage.cards.e.ExitSpecialist.class));
         cards.add(new SetCardInfo("Expedited Inheritance", 123, Rarity.MYTHIC, mage.cards.e.ExpeditedInheritance.class));
+        cards.add(new SetCardInfo("Expose the Culprit", 124, Rarity.UNCOMMON, mage.cards.e.ExposeTheCulprit.class));
         cards.add(new SetCardInfo("Extract a Confession", 84, Rarity.COMMON, mage.cards.e.ExtractAConfession.class));
         cards.add(new SetCardInfo("Ezrim, Agency Chief", 202, Rarity.RARE, mage.cards.e.EzrimAgencyChief.class));
         cards.add(new SetCardInfo("Fae Flight", 56, Rarity.UNCOMMON, mage.cards.f.FaeFlight.class));
@@ -149,6 +152,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Harried Dronesmith", 131, Rarity.UNCOMMON, mage.cards.h.HarriedDronesmith.class));
         cards.add(new SetCardInfo("Hedge Maze", 262, Rarity.RARE, mage.cards.h.HedgeMaze.class));
         cards.add(new SetCardInfo("Hedge Whisperer", 165, Rarity.UNCOMMON, mage.cards.h.HedgeWhisperer.class));
+        cards.add(new SetCardInfo("Hide in Plain Sight", 166, Rarity.RARE, mage.cards.h.HideInPlainSight.class));
         cards.add(new SetCardInfo("Homicide Investigator", 86, Rarity.RARE, mage.cards.h.HomicideInvestigator.class));
         cards.add(new SetCardInfo("Hotshot Investigators", 60, Rarity.COMMON, mage.cards.h.HotshotInvestigators.class));
         cards.add(new SetCardInfo("Hunted Bonebrute", 87, Rarity.RARE, mage.cards.h.HuntedBonebrute.class));
@@ -185,6 +189,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Long Goodbye", 92, Rarity.UNCOMMON, mage.cards.l.LongGoodbye.class));
         cards.add(new SetCardInfo("Lost in the Maze", 64, Rarity.RARE, mage.cards.l.LostInTheMaze.class));
         cards.add(new SetCardInfo("Loxodon Eavesdropper", 168, Rarity.COMMON, mage.cards.l.LoxodonEavesdropper.class));
+        cards.add(new SetCardInfo("Lumbering Laundry", 253, Rarity.UNCOMMON, mage.cards.l.LumberingLaundry.class));
         cards.add(new SetCardInfo("Lush Portico", 263, Rarity.RARE, mage.cards.l.LushPortico.class));
         cards.add(new SetCardInfo("Macabre Reconstruction", 93, Rarity.COMMON, mage.cards.m.MacabreReconstruction.class));
         cards.add(new SetCardInfo("Magnetic Snuffler", 254, Rarity.UNCOMMON, mage.cards.m.MagneticSnuffler.class));
@@ -292,6 +297,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Unyielding Gatekeeper", 35, Rarity.RARE, mage.cards.u.UnyieldingGatekeeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unyielding Gatekeeper", 392, Rarity.RARE, mage.cards.u.UnyieldingGatekeeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urgent Necropsy", 240, Rarity.MYTHIC, mage.cards.u.UrgentNecropsy.class));
+        cards.add(new SetCardInfo("Vannifar, Evolved Enigma", 241, Rarity.MYTHIC, mage.cards.v.VannifarEvolvedEnigma.class));
         cards.add(new SetCardInfo("Vein Ripper", 110, Rarity.MYTHIC, mage.cards.v.VeinRipper.class));
         cards.add(new SetCardInfo("Vengeful Creeper", 182, Rarity.COMMON, mage.cards.v.VengefulCreeper.class));
         cards.add(new SetCardInfo("Vengeful Tracker", 147, Rarity.UNCOMMON, mage.cards.v.VengefulTracker.class));

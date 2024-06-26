@@ -56,7 +56,7 @@ class BreatheYourLastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         Player controller = game.getPlayer(source.getControllerId());
         if (permanent == null || controller == null) {
             return false;
