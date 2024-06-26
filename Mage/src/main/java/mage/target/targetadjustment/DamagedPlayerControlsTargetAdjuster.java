@@ -7,7 +7,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetPermanent;
 import mage.target.targetpointer.FirstTargetPointer;
 
 import java.util.UUID;
@@ -16,7 +15,7 @@ import java.util.UUID;
  * @author notgreat
  */
 public class DamagedPlayerControlsTargetAdjuster implements TargetAdjuster {
-    private TargetPermanent blueprintTarget = null;
+    private Target blueprintTarget = null;
     private boolean owner;
     /**
      * Use with {@link mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility} with setTargetPointer enabled,
@@ -34,7 +33,7 @@ public class DamagedPlayerControlsTargetAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (blueprintTarget == null) {
-            blueprintTarget = (TargetPermanent) ability.getTargets().get(0).copy();
+            blueprintTarget = ability.getTargets().get(0).copy();
         }
         UUID opponentId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
         Player opponent = game.getPlayer(opponentId);
