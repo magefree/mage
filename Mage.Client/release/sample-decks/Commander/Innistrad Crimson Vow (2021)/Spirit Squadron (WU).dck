@@ -1,0 +1,81 @@
+1 [ISD:2] Angel of Flight Alabaster
+1 [ALL:22a] Arcane Denial
+1 [ELD:331] Arcane Signet
+1 [CLU:229] Azorius Chancery
+1 [RNA:231] Azorius Locket
+1 [CLU:219] Azorius Signet
+1 [VOC:78] Benevolent Offering
+1 [VOC:79] Boreas Charger
+1 [VOC:11] Breath of the Sleepless
+1 [SOI:8] Bygone Bishop
+1 [ELD:333] Command Tower
+1 [LCC:301] Commander's Sphere
+1 [GRN:7] Crush Contraband
+1 [VOC:82] Custodi Soulbinders
+1 [CMM:19] Custodi Squire
+1 [CMM:21] Darksteel Mutation
+1 [MKC:209] Disorder in the Court
+1 [MOR:32] Distant Melody
+1 [VOC:3] Donal, Herald of Wings
+1 [RNA:167] Dovin, Grand Arbiter
+1 [DKA:136] Drogskol Captain
+1 [VOC:43] Drogskol Reinforcements
+1 [MKC:105] Ethereal Investigator
+1 [CON:142] Exotic Orchard
+1 [OTP:1] Fell the Mighty
+1 [TMP:18] Field of Souls
+1 [M20:59] Flood of Tears
+1 [ISD:213] Geist of Saint Traft
+1 [M21:350] Ghostly Pilferer
+1 [CHK:10] Ghostly Prison
+1 [VOC:88] Hallowed Spiritkeeper
+1 [M20:22] Hanged Executioner
+1 [VOC:44] Haunted Library
+1 [VOC:13] Haunting Imitation
+1 [EMN:65] Imprisoned in the Moon
+11 [OTJ:273] Island
+1 [SOK:42] Kami of the Crescent Moon
+1 [ULG:11] Karmic Guide
+1 [ODY:28] Kirtar's Wrath
+1 [ORI:21] Knight of the White Orchid
+1 [7ED:306] Marble Diamond
+1 [M19:27] Mentor of the Meek
+1 [ELD:346] Midnight Clock
+1 [LRW:31] Mirror Entity
+1 [ISD:244] Moorland Haunt
+1 [M3C:358] Myriad Landscape
+1 [EMN:71] Nebelgast Herald
+1 [VOC:14] Occult Epiphany
+1 [BOK:18] Oyobi, Who Split the Heavens
+1 [M3C:363] Path of Ancestry
+12 [OTJ:272] Plains
+1 [SOI:278] Port Town
+1 [BFZ:241] Prairie Stream
+1 [VOC:45] Priest of the Blessed Graf
+1 [SOK:24] Promise of Bunrei
+1 [SOI:81] Rattlechains
+1 [IKO:65] Reconnaissance Mission
+1 [M19:33] Remorseful Cleric
+1 [VOC:46] Rhoda, Geist Avenger
+1 [M21:353] Shacklegeist
+1 [CHK:85] Sire of the Storm
+1 [7ED:316] Sky Diamond
+1 [ODY:327] Skycloud Expanse
+1 [SUM:274] Sol Ring
+1 [VOC:15] Spectral Arcanist
+1 [M20:76] Spectral Sailor
+1 [SOI:38] Spectral Shepherd
+1 [VOC:47] Storm of Souls
+1 [VOC:10] Sudden Salvation
+1 [M19:76] Supreme Phantom
+1 [ICE:54] Swords to Plowshares
+1 [THB:246] Temple of Enlightenment
+1 [SCG:143] Temple of the False God
+1 [VOC:16] Timin, Youthful Geist
+1 [RAV:33] Twilight Drover
+1 [XLN:258] Unclaimed Territory
+1 [RNA:58] Verity Circle
+1 [10E:60] Windborn Muse
+SB: 1 [VOC:1] Millicent, Restless Revenant
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,61)|([ELD:331],[RNA:231],[CLU:219],[LCC:301],[7ED:306],[ELD:346],[7ED:316],[SUM:274])([ISD:2],[VOC:79],[SOI:8],[VOC:82],[CMM:19],[VOC:3],[DKA:136],[VOC:43],[MKC:105],[ISD:213],[M21:350],[VOC:88],[M20:22],[SOK:42],[ULG:11],[ORI:21],[M19:27],[LRW:31],[EMN:71],[BOK:18],[VOC:45],[SOI:81],[M19:33],[VOC:46],[M21:353],[CHK:85],[VOC:15],[M20:76],[SOI:38],[M19:76],[VOC:16],[RAV:33],[10E:60])([VOC:11],[CMM:21],[TMP:18],[CHK:10],[VOC:44],[EMN:65],[SOK:24],[IKO:65],[RNA:58])([ALL:22a],[VOC:78],[GRN:7],[MKC:209],[VOC:14],[VOC:10],[ICE:54])([CLU:229],[ELD:333],[CON:142],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[ISD:244],[M3C:358],[M3C:363],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[SOI:278],[BFZ:241],[ODY:327],[THB:246],[SCG:143],[XLN:258])([RNA:167])([MOR:32],[OTP:1],[M20:59],[VOC:13],[ODY:28],[VOC:47])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([VOC:1])

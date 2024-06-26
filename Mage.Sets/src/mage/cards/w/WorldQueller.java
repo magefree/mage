@@ -61,7 +61,7 @@ class WorldQuellerEffect extends OneShotEffect {
         choice.add(CardType.LAND.toString());
         choice.add(CardType.PLANESWALKER.toString());
         choice.add(CardType.SORCERY.toString());
-        choice.add(CardType.TRIBAL.toString());
+        choice.add(CardType.KINDRED.toString());
     }
 
     public WorldQuellerEffect() {
@@ -105,8 +105,8 @@ class WorldQuellerEffect extends OneShotEffect {
                 type = CardType.SORCERY;
             } else if (chosenType.equals(CardType.PLANESWALKER.toString())) {
                 type = CardType.PLANESWALKER;
-            } else if (chosenType.equals(CardType.TRIBAL.toString())) {
-                type = CardType.TRIBAL;
+            } else if (chosenType.equals(CardType.KINDRED.toString())) {
+                type = CardType.KINDRED;
             }
             if (type != null) {
                 FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control of type " + type.toString());

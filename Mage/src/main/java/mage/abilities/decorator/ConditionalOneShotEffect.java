@@ -5,6 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -27,8 +28,18 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         this(effect, null, condition, text);
     }
 
+    private static Outcome generateOutcome(OneShotEffect effect, OneShotEffect otherwiseEffect) {
+        if (effect != null) {
+            return effect.getOutcome();
+        }
+        if (otherwiseEffect != null) {
+            return Outcome.inverse(otherwiseEffect.getOutcome());
+        }
+        throw new IllegalArgumentException("Wrong code usage: ConditionalOneShot should start with an effect to generate Outcome.");
+    }
+
     public ConditionalOneShotEffect(OneShotEffect effect, OneShotEffect otherwiseEffect, Condition condition, String text) {
-        super(effect.getOutcome());
+        super(generateOutcome(effect, otherwiseEffect));
         if (effect != null) {
             this.effects.add(effect);
         }

@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -17,6 +16,7 @@ import mage.constants.Zone;
 /**
  * 
  * @author L_J
+ * note - draftmatters ability not implemented
  */
 public final class DealBroker extends CardImpl {
 
@@ -32,7 +32,7 @@ public final class DealBroker extends CardImpl {
 
         // Immediately after the draft, you may reveal a card in your card pool. Each other player may offer you one card in their card pool in exchange. You may accept any one offer.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Immediately after the draft, you may reveal a card in your card pool. "
-                + "Each other player may offer you one card in their card pool in exchange. You may accept any one offer.")));
+                + "Each other player may offer you one card in their card pool in exchange. You may accept any one offer - not implemented.")));
 
         // {T}: Draw a card, then discard a card.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));

@@ -533,10 +533,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             return card.isBattle();
         }
     };
-    private final CardTypeCounter tribalCounter = new CardTypeCounter() {
+    private final CardTypeCounter kindredCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.isTribal();
+            return card.isKindred();
         }
     };
 
@@ -549,7 +549,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             planeswalkerCounter,
             sorceryCounter,
             battleCounter,
-            tribalCounter
+            kindredCounter
     };
 
     // Listener
@@ -1914,8 +1914,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     return planeswalkerCounter.get();
                 case SORCERY:
                     return sorceryCounter.get();
-                case TRIBAL:
-                    return tribalCounter.get();
+                case KINDRED:
+                    return kindredCounter.get();
                 default:
                     break;
             }

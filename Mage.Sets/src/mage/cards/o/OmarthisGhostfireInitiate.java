@@ -38,7 +38,7 @@ public final class OmarthisGhostfireInitiate extends CardImpl {
         
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

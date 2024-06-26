@@ -4,7 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.keyword.CraftAbility;
 import mage.cards.Card;

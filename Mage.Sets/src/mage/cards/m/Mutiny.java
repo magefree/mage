@@ -109,7 +109,7 @@ class MutinyFirstTarget extends TargetCreaturePermanent {
             int possibleTargets = 0;
             MageObject sourceObject = game.getObject(source.getId());
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllingPlayerId, game)) {
-                if (permanent.canBeTargetedBy(sourceObject, controllerId, game)) {
+                if (permanent.canBeTargetedBy(sourceObject, controllerId, source, game)) {
                     possibleTargets++;
                 }
             }
@@ -126,7 +126,7 @@ class MutinyFirstTarget extends TargetCreaturePermanent {
                 int possibleTargets = 0;
                 MageObject sourceObject = game.getObject(source);
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                    if (permanent.canBeTargetedBy(sourceObject, controllingPlayerId, game)) {
+                    if (permanent.canBeTargetedBy(sourceObject, controllingPlayerId, source, game)) {
                         possibleTargets++;
                     }
                 }

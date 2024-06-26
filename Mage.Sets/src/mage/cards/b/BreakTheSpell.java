@@ -63,7 +63,7 @@ class BreakTheSpellEffect extends OneShotEffect {
         boolean followupEffect = permanent.isControlledBy(source.getControllerId())
                 || StaticFilters.FILTER_PERMANENT_TOKEN.match(permanent, game);
         boolean destroyed = permanent.destroy(source, game, false);
-        game.getState().processAction(game);
+        game.processAction();
 
         if (followupEffect && destroyed) {
             new DrawCardSourceControllerEffect(1).apply(game, source);

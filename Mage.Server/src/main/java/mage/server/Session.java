@@ -25,8 +25,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static mage.server.DisconnectReason.LostConnection;
-
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
@@ -456,13 +454,13 @@ public class Session {
 
             // do not send data anymore (user must reconnect)
             this.valid = false;
-            managerFactory.sessionManager().disconnect(sessionId, LostConnection, true);
+            managerFactory.sessionManager().disconnect(sessionId, DisconnectReason.LostConnection, true);
         } catch (Throwable ex) {
             logger.error("SESSION CALLBACK UNKNOWN EXCEPTION - " + ThreadUtils.findRootException(ex) + ", userId " + userId + ", messageId: " + call.getMessageId(), ex);
 
             // do not send data anymore (user must reconnect)
             this.valid = false;
-            managerFactory.sessionManager().disconnect(sessionId, LostConnection, true);
+            managerFactory.sessionManager().disconnect(sessionId, DisconnectReason.LostConnection, true);
         } finally {
             if (lockSet) {
                 callBackLock.unlock();

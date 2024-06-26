@@ -14,8 +14,8 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.filter.FilterOpponent;
 import mage.filter.FilterPermanent;
-import mage.filter.FilterPlayer;
 import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -68,8 +68,8 @@ class EtchedSlithPutWhenDoEffect extends OneShotEffect {
 
     private static final FilterPermanentOrPlayer filter =
             new FilterPermanentOrPlayer(
-                    "another target permanent or player",
-                    filterPermanent, new FilterPlayer()
+                    "another target permanent or opponent",
+                    filterPermanent, new FilterOpponent()
             );
 
     EtchedSlithPutWhenDoEffect() {
@@ -95,7 +95,7 @@ class EtchedSlithPutWhenDoEffect extends OneShotEffect {
         }
         int beforeP1P1 = permanent.getCounters(game).getCount(CounterType.P1P1);
         new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);
-        game.getState().processAction(game);
+        game.processAction();
         int afterP1P1 = permanent.getCounters(game).getCount(CounterType.P1P1);
         for (int i = beforeP1P1 + 1; i <= afterP1P1; ++i) {
             // Releases notes rulling:

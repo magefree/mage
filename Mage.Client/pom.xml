@@ -133,13 +133,6 @@
         </dependency>
         <!-- music player END -->
 
-        <dependency>
-            <!-- GUI lib for balloon popup TODO: unused and can be deleted? -->
-            <groupId>net.java.balloontip</groupId>
-            <artifactId>balloontip</artifactId>
-            <version>1.2.4.1</version>
-        </dependency>
-
         <!-- svg support START -->
         <!--
             for "SAX2 driver class org.apache.crimson.parser.XMLReaderImpl not found" error looks here:

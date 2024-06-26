@@ -21,8 +21,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
-import static mage.cards.l.LostInThought.keyString;
-
 /**
  *
  * @author xenohedron
@@ -175,7 +173,7 @@ class LostInThoughtIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String key = source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter() + keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
+        String key = source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter() + LostInThought.keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
         game.getState().setValue(key, true);
         return true;
     }

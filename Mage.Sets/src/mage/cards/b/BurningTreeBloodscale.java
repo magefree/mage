@@ -25,7 +25,7 @@ public final class BurningTreeBloodscale extends CardImpl {
 
     public BurningTreeBloodscale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
-        this.subtype.add(SubType.VIASHINO, SubType.BERSERKER);
+        this.subtype.add(SubType.LIZARD, SubType.BERSERKER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

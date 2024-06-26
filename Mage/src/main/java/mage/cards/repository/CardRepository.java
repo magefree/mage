@@ -636,7 +636,7 @@ public enum CardRepository {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME + "Content", version);
         } catch (SQLException e) {
-            Logger.getLogger(CardRepository.class).error("Error getting content version - " + e, e);
+            Logger.getLogger(CardRepository.class).error("Error setting content version - " + e, e);
             processMemoryErrors(e);
         }
     }

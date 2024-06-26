@@ -111,7 +111,7 @@ class SporogenesisCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(effect.getTargetPointer().getFirst(game, sourceAbility));
+        Permanent permanent = effect.getTargetPointer().getFirstTargetPermanentOrLKI(game, sourceAbility);
         if (permanent != null) {
             return permanent.getCounters(game).getCount(CounterType.FUNGUS);
         }

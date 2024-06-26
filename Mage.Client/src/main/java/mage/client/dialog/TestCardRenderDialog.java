@@ -23,6 +23,10 @@ import mage.client.util.Listener;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.counters.Counter;
+import mage.counters.CounterType;
+import mage.designations.CitysBlessing;
+import mage.designations.Monarch;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameImpl;
@@ -62,6 +66,7 @@ public class TestCardRenderDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(TestCardRenderDialog.class);
     float cardSizeMod = 1.0f;
+    float playerSizeMod = 1.0f;
     private Match match = null;
     private Game game = null;
     private BigCard bigCard = null;
@@ -100,7 +105,7 @@ public class TestCardRenderDialog extends MageDialog {
         // init player panel
         player = new PlayerPanelExt();
         this.playerPanel.setLayout(new BorderLayout(5, 5));
-        this.playerPanel.add(player, BorderLayout.NORTH);
+        this.playerPanel.add(player, BorderLayout.CENTER);
 
         // render cards
         reloadCardsAndPlayer();
@@ -265,6 +270,9 @@ public class TestCardRenderDialog extends MageDialog {
         this.game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
         Deck deck = new Deck();
         Player playerYou = new StubPlayer("player1", RangeOfInfluence.ALL);
+        playerYou.addDesignation(new CitysBlessing());
+        game.getState().setMonarchId(playerYou.getId());
+        playerYou.addCounters(new Counter(CounterType.POISON.toString(), 10), playerYou.getId(), null, game);
         this.match.addPlayer(playerYou, deck);
         this.game.addPlayer(playerYou, deck);
         Player playerOpponent = new StubPlayer("player2", RangeOfInfluence.ALL);
@@ -316,8 +324,14 @@ public class TestCardRenderDialog extends MageDialog {
             possibleTargets.add(playerYou.getId());
         }
 
-        this.player.cleanUp();
-        this.player.changeGUISize();
+        // need re-create panel, because it can't change size in real time
+        this.playerPanel.removeAll();
+        this.playerPanel.setPreferredSize(new java.awt.Dimension(Math.round(100 * this.playerSizeMod), 10));
+        this.playerPanel.setLayout(new BorderLayout(5, 5));
+        this.player = new PlayerPanelExt(this.playerSizeMod);
+        this.playerPanel.add(player, BorderLayout.CENTER);
+        //this.player.cleanUp();
+        //this.player.changeGUISize();
         GameView gameView = new GameView(this.game.getState(), this.game, controlledId, null);
         PlayerView currentPlayerView = gameView.getPlayers()
                 .stream()
@@ -870,6 +884,7 @@ public class TestCardRenderDialog extends MageDialog {
         float sliderFrac = ((float) (sliderSize.getValue() - 50)) / 50;
         // Convert to frac in [0.5, 2.0] exponentially
         cardSizeMod = (float) Math.pow(2, sliderFrac);
+        playerSizeMod = (float) Math.pow(2, sliderFrac);
         reloadCardsAndPlayer();
     }//GEN-LAST:event_sliderSizeStateChanged
 

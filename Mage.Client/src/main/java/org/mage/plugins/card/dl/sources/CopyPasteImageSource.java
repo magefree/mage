@@ -35,7 +35,7 @@ public enum CopyPasteImageSource implements CardImageSource {
     }
 
     @Override
-    public float getAverageSize() {
+    public float getAverageSizeKb() {
         return 260.7f;
     }
 

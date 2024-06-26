@@ -1,0 +1,89 @@
+1 [MKC:145] Agitator Ant
+1 [THB:165] Arasta of the Endless Web
+1 [ELD:331] Arcane Signet
+1 [INV:231] Artifact Mutation
+1 [M3C:318] Ash Barrens
+1 [GTC:142] Assemble the Legion
+1 [INV:232] Aura Mutation
+1 [ROE:176] Awakening Zone
+1 [NPH:103] Beast Within
+1 [ZEN:159] Beastmaster Ascension
+1 [NCC:67] Bess, Soul Nourisher
+1 [MKC:225] Bloodthirsty Blade
+1 [GTC:148] Boros Charm
+1 [NCC:13] Boss's Chauffeur
+1 [SNC:173] Cabaretti Charm
+1 [NCC:69] Cabaretti Confluence
+1 [SNC:249] Cabaretti Courtyard
+1 [ONC:60] Call the Coppercoats
+1 [GRN:157] Camaraderie
+1 [BFZ:234] Canopy Vista
+1 [ELD:238] Castle Ardenvale
+1 [ELD:239] Castle Embereth
+1 [AVR:171] Champion of Lambholt
+1 [BFZ:235] Cinder Glade
+1 [ELD:333] Command Tower
+1 [LCC:301] Commander's Sphere
+1 [NCC:57] Crash the Party
+1 [M21:177] Cultivate
+1 [MKC:60] Duelist's Heritage
+1 [CON:142] Exotic Orchard
+1 [NCC:82] False Floor
+1 [ZNR:16] Felidar Retreat
+1 [OTP:1] Fell the Mighty
+1 [9ED:297] Fellwar Stone
+8 [OTJ:276] Forest
+1 [SOI:274] Fortified Village
+1 [NCC:340] Gahiji, Honored One
+1 [SOI:276] Game Trail
+1 [NCC:16] Grand Crescendo
+1 [PLC:149] Harmonize
+1 [M3C:297] Idol of Oblivion
+1 [NCC:46] Indulge // Excess
+1 [ISD:19] Intangible Virtue
+1 [ALA:226] Jungle Shrine
+1 [WWK:84] Kazuul, Tyrant of the Cliffs
+1 [MKC:174] Killer Service
+1 [M20:178] Leafkin Druid
+1 [NCC:48] Life of the Party
+1 [CMM:241] Magus of the Wheel
+1 [GRN:188] March of the Multitudes
+1 [CON:11] Martial Coup
+1 [NCC:18] Master of Ceremonies
+1 [ODY:321] Mossfire Valley
+4 [BLB:274] Mountain
+1 [M3C:358] Myriad Landscape
+1 [ALA:227] Naya Panorama
+1 [MKC:77] Orzhov Advokist
+1 [FRF:110] Outpost Siege
+1 [M3C:363] Path of Ancestry
+1 [CON:15] Path to Exile
+1 [NCC:9] Phabine, Boss's Confidant
+4 [OTJ:272] Plains
+1 [NCC:78] Prosperous Partnership
+1 [NCC:51] Rose Room Treasurer
+1 [EVE:178] Rugged Prairie
+1 [SNC:29] Rumor Gatherer
+1 [CHK:239] Sakura-Tribe Elder
+1 [AKH:183] Sandwurm Convergence
+1 [NCC:64] Scepter of Celebration
+1 [ZNR:203] Scute Swarm
+1 [OTC:179] Seize the Spotlight
+1 [MKC:218] Selvala, Explorer Returned
+1 [FRF:138] Shamanic Revelation
+1 [SNC:123] Sizzling Soloist
+1 [SUM:274] Sol Ring
+1 [ODY:328] Sungrass Prairie
+1 [LTC:261] Sylvan Offering
+1 [M21:256] Temple of Triumph
+1 [CLU:249] Thriving Bluff
+1 [CLU:250] Thriving Grove
+1 [CLU:251] Thriving Heath
+1 [SCD:213] Thunderfoot Baloth
+1 [NCC:65] Vivien's Stampede
+1 [LRW:281] Windbrisk Heights
+1 [9ED:283] Wood Elves
+1 [NCC:278] Zurzoth, Chaos Rider
+SB: 1 [NCC:4] Kitt Kanto, Mayhem Diva
+LAYOUT MAIN:(1,8)(CARD_TYPE,false,61)|([ELD:331],[MKC:225],[LCC:301],[NCC:82],[9ED:297],[M3C:297],[NCC:64],[SUM:274])([MKC:145],[NCC:67],[NCC:13],[AVR:171],[NCC:340],[WWK:84],[M20:178],[NCC:48],[CMM:241],[NCC:18],[MKC:77],[NCC:9],[NCC:51],[SNC:29],[CHK:239],[ZNR:203],[MKC:218],[SNC:123],[SCD:213],[9ED:283],[NCC:278])([THB:165])([GTC:142],[ROE:176],[ZEN:159],[MKC:60],[ZNR:16],[ISD:19],[MKC:174],[FRF:110],[NCC:78],[AKH:183])([INV:231],[INV:232],[NPH:103],[GTC:148],[SNC:173],[ONC:60],[NCC:57],[NCC:16],[GRN:188],[CON:15])([M3C:318],[SNC:249],[BFZ:234],[ELD:238],[ELD:239],[BFZ:235],[ELD:333],[CON:142],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[SOI:274],[SOI:276],[ALA:226],[ODY:321],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[M3C:358],[ALA:227],[M3C:363],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[EVE:178],[ODY:328],[M21:256],[CLU:249],[CLU:250],[CLU:251],[LRW:281])([NCC:46])([NCC:69],[GRN:157],[M21:177],[OTP:1],[PLC:149],[CON:11],[OTC:179],[FRF:138],[LTC:261],[NCC:65])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([NCC:4])

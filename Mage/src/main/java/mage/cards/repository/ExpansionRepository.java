@@ -27,7 +27,7 @@ public enum ExpansionRepository {
 
     private static final Logger logger = Logger.getLogger(ExpansionRepository.class);
 
-    private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
+    private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE;IGNORECASE=TRUE";
     private static final String VERSION_ENTITY_NAME = "expansion";
     private static final long EXPANSION_DB_VERSION = 5;
     private static final long EXPANSION_CONTENT_VERSION = 18;
@@ -87,7 +87,7 @@ public enum ExpansionRepository {
                             expansionDao.create(exp);
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(CardRepository.class).error("Error adding expansions to DB - ", ex);
+                        logger.error("Error adding expansions to DB - ", ex);
                     }
                 }
 
@@ -99,7 +99,7 @@ public enum ExpansionRepository {
                             expansionDao.update(exp);
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(CardRepository.class).error("Error adding expansions to DB - ", ex);
+                        logger.error("Error adding expansions to DB - ", ex);
                     }
                 }
 
@@ -230,8 +230,8 @@ public enum ExpansionRepository {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
             RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME + "Content", version);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            logger.error("Error setting content version - " + e, e);
         }
     }
 

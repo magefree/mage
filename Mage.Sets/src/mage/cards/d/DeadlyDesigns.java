@@ -74,7 +74,7 @@ class DeadlyDesignsTriggerAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When there are five or more plot counters on {this}, sacrifice it. If you do, destroy up to two target creatures";
+        return "When there are five or more plot counters on {this}, sacrifice it. If you do, destroy up to two target creatures.";
     }
 }
 

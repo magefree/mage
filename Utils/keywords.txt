@@ -59,6 +59,7 @@ Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
 For Mirrodin!|new|
+Freerunning|manaString|
 Friends forever|instance|
 Haste|instance|
 Hexproof|instance|
@@ -123,7 +124,7 @@ Sunburst|new|
 Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
-Totem armor|new|
+Umbra armor|new|
 Toxic|number|
 Training|new|
 Trample|instance|

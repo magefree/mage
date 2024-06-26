@@ -1,6 +1,7 @@
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
+import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.cards.Cards;

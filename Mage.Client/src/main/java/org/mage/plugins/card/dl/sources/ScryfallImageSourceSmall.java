@@ -28,6 +28,11 @@ public class ScryfallImageSourceSmall extends ScryfallImageSource {
     }
 
     @Override
+    public String getSourceName() {
+        return "scryfall.com - small";
+    }
+
+    @Override
     public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
         return innerModifyUrl(super.generateCardUrl(card));
     }
@@ -38,8 +43,9 @@ public class ScryfallImageSourceSmall extends ScryfallImageSource {
     }
 
     @Override
-    public float getAverageSize() {
-        return 13; // initial estimate - TODO calculate a more accurate number
+    public float getAverageSizeKb() {
+        // June 2024: MH3 set - 4500 Kb / 332 = 14 Kb
+        return 14f;
     }
 
 }

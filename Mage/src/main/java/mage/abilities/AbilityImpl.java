@@ -248,7 +248,7 @@ public abstract class AbilityImpl implements Ability {
              * abilities with replacement effects deactivated too late Example:
              * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
              */
-            game.getState().processAction(game);
+            game.processAction();
         }
         return result;
     }
@@ -1078,7 +1078,7 @@ public abstract class AbilityImpl implements Ability {
             parameterSourceId = getSourceId();
         }
         // check against shortLKI for effects that move multiple object at the same time (e.g. destroy all)
-        if (game.getShortLivingLKI(getSourceId(), getZone())) {
+        if (game.checkShortLivingLKI(getSourceId(), getZone())) {
             return true;
         }
         // check against current state
@@ -1288,6 +1288,7 @@ public abstract class AbilityImpl implements Ability {
         StringBuilder sb = new StringBuilder(); // threadLocal StringBuilder can't be used because calling method already uses it
         if (!targets.isEmpty()) {
             String usedVerb = null;
+            boolean isFirstTarget = true;
             for (Target target : targets) {
                 if (!target.getTargets().isEmpty()) {
                     String targetHintInfo = target.getChooseHint() == null ? "" : " (" + target.getChooseHint() + ")";
@@ -1300,6 +1301,12 @@ public abstract class AbilityImpl implements Ability {
                         usedVerb = " choosing ";
                         sb.append(usedVerb);
                     }
+
+                    if (!isFirstTarget) {
+                        sb.append(", ");
+                    }
+                    isFirstTarget = false;
+
                     sb.append(target.getTargetedName(game));
                     sb.append(targetHintInfo);
                 }

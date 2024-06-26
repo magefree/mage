@@ -491,7 +491,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private void sizeToScreen() {
         Rectangle rect = this.getBounds();
 
-        if (rect.height < 720) {
+        if (rect.height < 770) {
             if (!smallMode) {
                 smallMode = true;
                 Dimension bbDimension = new Dimension(128, 184);

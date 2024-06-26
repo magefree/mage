@@ -1,8 +1,15 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -19,19 +26,28 @@ public final class ModernHorizons3 extends ExpansionSet {
         super("Modern Horizons 3", "MH3", ExpansionSet.buildDate(2024, 6, 7), SetType.SUPPLEMENTAL_MODERN_LEGAL);
         this.blockName = "Modern Horizons 3";
         this.hasBasicLands = true;
-        this.hasBoosters = false; // temporary
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = 319;
+        this.numBoosterDoubleFaced = -1;
 
+        cards.add(new SetCardInfo("Abstruse Appropriation", 177, Rarity.RARE, mage.cards.a.AbstruseAppropriation.class));
         cards.add(new SetCardInfo("Accursed Marauder", 80, Rarity.COMMON, mage.cards.a.AccursedMarauder.class));
         cards.add(new SetCardInfo("Aerie Auxiliary", 18, Rarity.COMMON, mage.cards.a.AerieAuxiliary.class));
+        cards.add(new SetCardInfo("Aether Revolt", 113, Rarity.RARE, mage.cards.a.AetherRevolt.class));
         cards.add(new SetCardInfo("Aether Spike", 50, Rarity.COMMON, mage.cards.a.AetherSpike.class));
         cards.add(new SetCardInfo("Ajani Fells the Godsire", 19, Rarity.UNCOMMON, mage.cards.a.AjaniFellsTheGodsire.class));
         cards.add(new SetCardInfo("Ajani, Nacatl Avenger", 237, Rarity.MYTHIC, mage.cards.a.AjaniNacatlAvenger.class));
         cards.add(new SetCardInfo("Ajani, Nacatl Pariah", 237, Rarity.MYTHIC, mage.cards.a.AjaniNacatlPariah.class));
+        cards.add(new SetCardInfo("Amped Raptor", 114, Rarity.UNCOMMON, mage.cards.a.AmpedRaptor.class));
         cards.add(new SetCardInfo("Amphibian Downpour", 51, Rarity.RARE, mage.cards.a.AmphibianDownpour.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 262, Rarity.UNCOMMON, mage.cards.a.AngelOfTheRuins.class));
         cards.add(new SetCardInfo("Annoyed Altisaur", 284, Rarity.UNCOMMON, mage.cards.a.AnnoyedAltisaur.class));
         cards.add(new SetCardInfo("Arcbound Condor", 81, Rarity.UNCOMMON, mage.cards.a.ArcboundCondor.class));
+        cards.add(new SetCardInfo("Archway of Innovation", 214, Rarity.RARE, mage.cards.a.ArchwayOfInnovation.class));
+        cards.add(new SetCardInfo("Arena of Glory", 215, Rarity.RARE, mage.cards.a.ArenaOfGlory.class));
         cards.add(new SetCardInfo("Argent Dais", 20, Rarity.RARE, mage.cards.a.ArgentDais.class));
+        cards.add(new SetCardInfo("Arna Kennerud, Skycaptain", 178, Rarity.MYTHIC, mage.cards.a.ArnaKennerudSkycaptain.class));
+        cards.add(new SetCardInfo("Ashling, Flame Dancer", 115, Rarity.MYTHIC, mage.cards.a.AshlingFlameDancer.class));
         cards.add(new SetCardInfo("Barbarian Ring", 299, Rarity.UNCOMMON, mage.cards.b.BarbarianRing.class));
         cards.add(new SetCardInfo("Basking Broodscale", 145, Rarity.COMMON, mage.cards.b.BaskingBroodscale.class));
         cards.add(new SetCardInfo("Bespoke Battlewagon", 52, Rarity.UNCOMMON, mage.cards.b.BespokeBattlewagon.class));
@@ -72,6 +88,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Detective's Phoenix", 116, Rarity.RARE, mage.cards.d.DetectivesPhoenix.class));
         cards.add(new SetCardInfo("Devourer of Destiny", 2, Rarity.RARE, mage.cards.d.DevourerOfDestiny.class));
         cards.add(new SetCardInfo("Disciple of Freyalise", 250, Rarity.UNCOMMON, mage.cards.d.DiscipleOfFreyalise.class));
+        cards.add(new SetCardInfo("Disruptor Flute", 209, Rarity.RARE, mage.cards.d.DisruptorFlute.class));
         cards.add(new SetCardInfo("Distinguished Conjurer", 264, Rarity.UNCOMMON, mage.cards.d.DistinguishedConjurer.class));
         cards.add(new SetCardInfo("Dog Umbra", 22, Rarity.COMMON, mage.cards.d.DogUmbra.class));
         cards.add(new SetCardInfo("Dreadmobile", 87, Rarity.UNCOMMON, mage.cards.d.Dreadmobile.class));
@@ -120,6 +137,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Frogmyr Enforcer", 120, Rarity.UNCOMMON, mage.cards.f.FrogmyrEnforcer.class));
         cards.add(new SetCardInfo("Furnace Hellkite", 121, Rarity.UNCOMMON, mage.cards.f.FurnaceHellkite.class));
         cards.add(new SetCardInfo("Galvanic Discharge", 122, Rarity.COMMON, mage.cards.g.GalvanicDischarge.class));
+        cards.add(new SetCardInfo("Genku, Future Shaper", 186, Rarity.RARE, mage.cards.g.GenkuFutureShaper.class));
         cards.add(new SetCardInfo("Ghostfire Slice", 123, Rarity.UNCOMMON, mage.cards.g.GhostfireSlice.class));
         cards.add(new SetCardInfo("Gift of the Viper", 156, Rarity.COMMON, mage.cards.g.GiftOfTheViper.class));
         cards.add(new SetCardInfo("Glaring Fleshraker", 7, Rarity.UNCOMMON, mage.cards.g.GlaringFleshraker.class));
@@ -134,6 +152,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Guardian of the Forgotten", 28, Rarity.UNCOMMON, mage.cards.g.GuardianOfTheForgotten.class));
         cards.add(new SetCardInfo("Guide of Souls", 29, Rarity.RARE, mage.cards.g.GuideOfSouls.class));
         cards.add(new SetCardInfo("Harbinger of the Seas", 63, Rarity.RARE, mage.cards.h.HarbingerOfTheSeas.class));
+        cards.add(new SetCardInfo("Herigast, Erupting Nullkite", 8, Rarity.MYTHIC, mage.cards.h.HerigastEruptingNullkite.class));
         cards.add(new SetCardInfo("Hexgold Slith", 30, Rarity.COMMON, mage.cards.h.HexgoldSlith.class));
         cards.add(new SetCardInfo("Hope-Ender Coatl", 64, Rarity.UNCOMMON, mage.cards.h.HopeEnderCoatl.class));
         cards.add(new SetCardInfo("Horrid Shadowspinner", 188, Rarity.UNCOMMON, mage.cards.h.HorridShadowspinner.class));
@@ -146,6 +165,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Captor", 125, Rarity.COMMON, mage.cards.i.InfernalCaptor.class));
         cards.add(new SetCardInfo("Inspired Inventor", 32, Rarity.COMMON, mage.cards.i.InspiredInventor.class));
         cards.add(new SetCardInfo("Inventor's Axe", 126, Rarity.COMMON, mage.cards.i.InventorsAxe.class));
+        cards.add(new SetCardInfo("Invert Polarity", 190, Rarity.RARE, mage.cards.i.InvertPolarity.class));
         cards.add(new SetCardInfo("Island", 305, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("It That Heralds the End", 9, Rarity.UNCOMMON, mage.cards.i.ItThatHeraldsTheEnd.class));
         cards.add(new SetCardInfo("Izzet Generatorium", 191, Rarity.UNCOMMON, mage.cards.i.IzzetGeneratorium.class));
@@ -156,7 +176,9 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Kaalia of the Vast", 290, Rarity.MYTHIC, mage.cards.k.KaaliaOfTheVast.class));
         cards.add(new SetCardInfo("Kami of Jealous Thirst", 98, Rarity.COMMON, mage.cards.k.KamiOfJealousThirst.class));
         cards.add(new SetCardInfo("Kappa Cannoneer", 270, Rarity.RARE, mage.cards.k.KappaCannoneer.class));
+        cards.add(new SetCardInfo("Kozilek's Command", 11, Rarity.RARE, mage.cards.k.KozileksCommand.class));
         cards.add(new SetCardInfo("Kozilek's Unsealing", 65, Rarity.UNCOMMON, mage.cards.k.KozileksUnsealing.class));
+        cards.add(new SetCardInfo("Kozilek, the Broken Reality", 10, Rarity.MYTHIC, mage.cards.k.KozilekTheBrokenReality.class));
         cards.add(new SetCardInfo("Kudo, King Among Bears", 192, Rarity.RARE, mage.cards.k.KudoKingAmongBears.class));
         cards.add(new SetCardInfo("Laelia, the Blade Reforged", 281, Rarity.RARE, mage.cards.l.LaeliaTheBladeReforged.class));
         cards.add(new SetCardInfo("Legion Leadership", 255, Rarity.UNCOMMON, mage.cards.l.LegionLeadership.class));
@@ -172,10 +194,12 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Mogg Mob", 127, Rarity.UNCOMMON, mage.cards.m.MoggMob.class));
         cards.add(new SetCardInfo("Molten Gatekeeper", 128, Rarity.COMMON, mage.cards.m.MoltenGatekeeper.class));
         cards.add(new SetCardInfo("Monstrous Vortex", 162, Rarity.UNCOMMON, mage.cards.m.MonstrousVortex.class));
+        cards.add(new SetCardInfo("Monumental Henge", 222, Rarity.RARE, mage.cards.m.MonumentalHenge.class));
         cards.add(new SetCardInfo("Mountain", 307, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Muster the Departed", 36, Rarity.UNCOMMON, mage.cards.m.MusterTheDeparted.class));
         cards.add(new SetCardInfo("Nadier's Nightblade", 275, Rarity.UNCOMMON, mage.cards.n.NadiersNightblade.class));
         cards.add(new SetCardInfo("Nadu, Winged Wisdom", 193, Rarity.RARE, mage.cards.n.NaduWingedWisdom.class));
+        cards.add(new SetCardInfo("Necrodominance", 102, Rarity.MYTHIC, mage.cards.n.Necrodominance.class));
         cards.add(new SetCardInfo("Nesting Grounds", 302, Rarity.UNCOMMON, mage.cards.n.NestingGrounds.class));
         cards.add(new SetCardInfo("Nethergoyf", 103, Rarity.MYTHIC, mage.cards.n.Nethergoyf.class));
         cards.add(new SetCardInfo("Nightshade Dryad", 163, Rarity.COMMON, mage.cards.n.NightshadeDryad.class));
@@ -188,8 +212,10 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Ondu Knotmaster", 196, Rarity.UNCOMMON, mage.cards.o.OnduKnotmaster.class));
         cards.add(new SetCardInfo("Ophiomancer", 276, Rarity.RARE, mage.cards.o.Ophiomancer.class));
         cards.add(new SetCardInfo("Orim's Chant", 265, Rarity.RARE, mage.cards.o.OrimsChant.class));
+        cards.add(new SetCardInfo("Party Thrasher", 129, Rarity.RARE, mage.cards.p.PartyThrasher.class));
         cards.add(new SetCardInfo("Path of Annihilation", 165, Rarity.UNCOMMON, mage.cards.p.PathOfAnnihilation.class));
         cards.add(new SetCardInfo("Pearl Medallion", 294, Rarity.RARE, mage.cards.p.PearlMedallion.class));
+        cards.add(new SetCardInfo("Pearl-Ear, Imperial Advisor", 39, Rarity.RARE, mage.cards.p.PearlEarImperialAdvisor.class));
         cards.add(new SetCardInfo("Perilous Landscape", 223, Rarity.COMMON, mage.cards.p.PerilousLandscape.class));
         cards.add(new SetCardInfo("Petrifying Meddler", 66, Rarity.COMMON, mage.cards.p.PetrifyingMeddler.class));
         cards.add(new SetCardInfo("Phelia, Exuberant Shepherd", 40, Rarity.RARE, mage.cards.p.PheliaExuberantShepherd.class));
@@ -200,6 +226,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 304, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Planar Genesis", 198, Rarity.UNCOMMON, mage.cards.p.PlanarGenesis.class));
         cards.add(new SetCardInfo("Polluted Delta", 224, Rarity.RARE, mage.cards.p.PollutedDelta.class));
+        cards.add(new SetCardInfo("Powerbalance", 131, Rarity.RARE, mage.cards.p.Powerbalance.class));
         cards.add(new SetCardInfo("Priest of Titania", 286, Rarity.UNCOMMON, mage.cards.p.PriestOfTitania.class));
         cards.add(new SetCardInfo("Propagator Drone", 167, Rarity.UNCOMMON, mage.cards.p.PropagatorDrone.class));
         cards.add(new SetCardInfo("Proud Pack-Rhino", 41, Rarity.UNCOMMON, mage.cards.p.ProudPackRhino.class));
@@ -221,6 +248,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Ripples of Undeath", 107, Rarity.RARE, mage.cards.r.RipplesOfUndeath.class));
         cards.add(new SetCardInfo("Roil Cartographer", 67, Rarity.UNCOMMON, mage.cards.r.RoilCartographer.class));
         cards.add(new SetCardInfo("Rosecot Knight", 42, Rarity.COMMON, mage.cards.r.RosecotKnight.class));
+        cards.add(new SetCardInfo("Rosheen, Roaring Prophet", 202, Rarity.RARE, mage.cards.r.RosheenRoaringProphet.class));
         cards.add(new SetCardInfo("Ruby Medallion", 295, Rarity.RARE, mage.cards.r.RubyMedallion.class));
         cards.add(new SetCardInfo("Rush of Inspiration", 257, Rarity.UNCOMMON, mage.cards.r.RushOfInspiration.class));
         cards.add(new SetCardInfo("Sage of the Unknowable", 68, Rarity.COMMON, mage.cards.s.SageOfTheUnknowable.class));
@@ -231,9 +259,11 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Seething Landscape", 225, Rarity.COMMON, mage.cards.s.SeethingLandscape.class));
         cards.add(new SetCardInfo("Serum Visionary", 69, Rarity.COMMON, mage.cards.s.SerumVisionary.class));
         cards.add(new SetCardInfo("Sevinne's Reclamation", 267, Rarity.RARE, mage.cards.s.SevinnesReclamation.class));
+        cards.add(new SetCardInfo("Shadow of the Second Sun", 70, Rarity.MYTHIC, mage.cards.s.ShadowOfTheSecondSun.class));
         cards.add(new SetCardInfo("Shattered Landscape", 226, Rarity.COMMON, mage.cards.s.ShatteredLandscape.class));
         cards.add(new SetCardInfo("Sheltering Landscape", 227, Rarity.COMMON, mage.cards.s.ShelteringLandscape.class));
         cards.add(new SetCardInfo("Shifting Woodland", 228, Rarity.RARE, mage.cards.s.ShiftingWoodland.class));
+        cards.add(new SetCardInfo("Shilgengar, Sire of Famine", 109, Rarity.RARE, mage.cards.s.ShilgengarSireOfFamine.class));
         cards.add(new SetCardInfo("Shrieking Drake", 272, Rarity.UNCOMMON, mage.cards.s.ShriekingDrake.class));
         cards.add(new SetCardInfo("Siege Smash", 136, Rarity.COMMON, mage.cards.s.SiegeSmash.class));
         cards.add(new SetCardInfo("Signature Slam", 168, Rarity.UNCOMMON, mage.cards.s.SignatureSlam.class));
@@ -261,13 +291,16 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Suppression Ray", 260, Rarity.UNCOMMON, mage.cards.s.SuppressionRay.class));
         cards.add(new SetCardInfo("Swamp", 306, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Sylvan Safekeeper", 287, Rarity.RARE, mage.cards.s.SylvanSafekeeper.class));
+        cards.add(new SetCardInfo("Tamiyo Meets the Story Circle", 72, Rarity.UNCOMMON, mage.cards.t.TamiyoMeetsTheStoryCircle.class));
         cards.add(new SetCardInfo("Tamiyo, Inquisitive Student", 242, Rarity.MYTHIC, mage.cards.t.TamiyoInquisitiveStudent.class));
         cards.add(new SetCardInfo("Tamiyo, Seasoned Scholar", 242, Rarity.MYTHIC, mage.cards.t.TamiyoSeasonedScholar.class));
         cards.add(new SetCardInfo("Temperamental Oozewagg", 172, Rarity.COMMON, mage.cards.t.TemperamentalOozewagg.class));
         cards.add(new SetCardInfo("Tempest Harvester", 73, Rarity.COMMON, mage.cards.t.TempestHarvester.class));
         cards.add(new SetCardInfo("Territory Culler", 173, Rarity.UNCOMMON, mage.cards.t.TerritoryCuller.class));
+        cards.add(new SetCardInfo("The Creation of Avacyn", 86, Rarity.UNCOMMON, mage.cards.t.TheCreationOfAvacyn.class));
         cards.add(new SetCardInfo("The Hunger Tide Rises", 158, Rarity.UNCOMMON, mage.cards.t.TheHungerTideRises.class));
         cards.add(new SetCardInfo("The Necrobloom", 194, Rarity.RARE, mage.cards.t.TheNecrobloom.class));
+        cards.add(new SetCardInfo("Thief of Existence", 174, Rarity.RARE, mage.cards.t.ThiefOfExistence.class));
         cards.add(new SetCardInfo("Thraben Charm", 45, Rarity.COMMON, mage.cards.t.ThrabenCharm.class));
         cards.add(new SetCardInfo("Thriving Skyclaw", 141, Rarity.COMMON, mage.cards.t.ThrivingSkyclaw.class));
         cards.add(new SetCardInfo("Titans' Vanguard", 206, Rarity.UNCOMMON, mage.cards.t.TitansVanguard.class));
@@ -282,17 +315,20 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Ugin's Labyrinth", 233, Rarity.MYTHIC, mage.cards.u.UginsLabyrinth.class));
         cards.add(new SetCardInfo("Ulamog, the Defiler", 15, Rarity.MYTHIC, mage.cards.u.UlamogTheDefiler.class));
         cards.add(new SetCardInfo("Unfathomable Truths", 77, Rarity.COMMON, mage.cards.u.UnfathomableTruths.class));
+        cards.add(new SetCardInfo("Unstable Amulet", 142, Rarity.UNCOMMON, mage.cards.u.UnstableAmulet.class));
         cards.add(new SetCardInfo("Urza's Cave", 234, Rarity.UNCOMMON, mage.cards.u.UrzasCave.class));
         cards.add(new SetCardInfo("Urza's Incubator", 297, Rarity.RARE, mage.cards.u.UrzasIncubator.class));
         cards.add(new SetCardInfo("Utter Insignificance", 78, Rarity.COMMON, mage.cards.u.UtterInsignificance.class));
         cards.add(new SetCardInfo("Vexing Bauble", 212, Rarity.UNCOMMON, mage.cards.v.VexingBauble.class));
         cards.add(new SetCardInfo("Victimize", 278, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Voidpouncer", 143, Rarity.COMMON, mage.cards.v.Voidpouncer.class));
+        cards.add(new SetCardInfo("Volatile Stormdrake", 79, Rarity.RARE, mage.cards.v.VolatileStormdrake.class));
         cards.add(new SetCardInfo("Voltstorm Angel", 46, Rarity.UNCOMMON, mage.cards.v.VoltstormAngel.class));
         cards.add(new SetCardInfo("Warped Tusker", 16, Rarity.COMMON, mage.cards.w.WarpedTusker.class));
         cards.add(new SetCardInfo("Warren Soultrader", 110, Rarity.RARE, mage.cards.w.WarrenSoultrader.class));
         cards.add(new SetCardInfo("Wastescape Battlemage", 17, Rarity.UNCOMMON, mage.cards.w.WastescapeBattlemage.class));
         cards.add(new SetCardInfo("Waterlogged Teachings", 261, Rarity.UNCOMMON, mage.cards.w.WaterloggedTeachings.class));
+        cards.add(new SetCardInfo("Wheel of Potential", 144, Rarity.RARE, mage.cards.w.WheelOfPotential.class));
         cards.add(new SetCardInfo("White Orchid Phantom", 47, Rarity.RARE, mage.cards.w.WhiteOrchidPhantom.class));
         cards.add(new SetCardInfo("Wight of the Reliquary", 207, Rarity.RARE, mage.cards.w.WightOfTheReliquary.class));
         cards.add(new SetCardInfo("Windswept Heath", 235, Rarity.RARE, mage.cards.w.WindsweptHeath.class));
@@ -307,5 +343,172 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Writhing Chrysalis", 208, Rarity.COMMON, mage.cards.w.WrithingChrysalis.class));
         cards.add(new SetCardInfo("Wumpus Aberration", 176, Rarity.UNCOMMON, mage.cards.w.WumpusAberration.class));
         cards.add(new SetCardInfo("Wurmcoil Larva", 112, Rarity.UNCOMMON, mage.cards.w.WurmcoilLarva.class));
+    }
+
+    @Override
+    public List<Card> tryBooster() {
+        // TODO: make part of this more generic, this is the second try at a play booster generation so we try to see what can be shared.
+        // source https://magic.wizards.com/en/news/feature/collecting-modern-horizons-3
+
+        // We start by deciding the various slots.
+        // some slots have guarantee rarity
+        int rareOrMythic = 1;
+        int newToModern = 1;
+        int uncommon = 3;
+        int common = 5; // 6 common slots, one being sometimes replaced by a secret guest
+
+        // Land Slot: 1/2 chance for a basic, 1/2 chance for a common
+        int basicLand = 0;
+        {
+            if (RandomUtil.nextDouble() <= 0.5) {
+                basicLand++;
+            } else {
+                common++;
+            }
+        }
+
+        // 1 slot is 1/64 chance to be spg, and 1/5 - 1/64 to be otp, 4/5 to be common
+        int spg = 0;
+        {
+            double rollSpg = RandomUtil.nextDouble();
+            if (rollSpg <= 1.0 / 64.0) { // know probability of 1/64 to be spg
+                spg++;
+            } else {
+                common++;
+            }
+        }
+
+        int commander = 0;
+        // 1 slot is a wildcard:
+        // 41.7% chance to be among 80 common
+        // 41.7% chance to be among 101 uncommons
+        // 7.8% chance to be among rare/mythic (with weight 2:1 individually)
+        // 4.2% chance to be among 8 Commander Mythic Rares (4.2% in total).
+        // TODO: only that part has been generated (up to 95.6%).
+        //       miss some new to modern (not all) that have retro frames, (4.2%),
+        //       some variants (0.4%), and full art snow covered wastes (<0.1%)
+        {
+            double total = 0.417 * 2 + 0.078 + 0.042;
+            double rollWildcard = RandomUtil.nextDouble() * total;
+            if (rollWildcard <= 0.417) {
+                common++;
+            } else if (rollWildcard <= 0.417 * 2) {
+                uncommon++;
+            } else if (rollWildcard <= 0.417 * 2 + 0.078) {
+                rareOrMythic++;
+            } else {
+                commander++;
+            }
+        }
+
+        // wildcard foil slot, reusing the previous wildcard slot, altough maybe it is different.
+        {
+            double total = 0.417 * 2 + 0.078 + 0.042;
+            double rollWildcard = RandomUtil.nextDouble() * total;
+            if (rollWildcard <= 0.417) {
+                common++;
+            } else if (rollWildcard <= 0.417 * 2) {
+                uncommon++;
+            } else if (rollWildcard <= 0.417 * 2 + 0.078) {
+                rareOrMythic++;
+            } else {
+                commander++;
+            }
+        }
+
+        // The booster we are building
+        List<Card> booster = new ArrayList<>();
+
+        // 1 -> 261 are the 261 regular common/uncommon/rare/mythic
+        // 262 -> 303 are the 42 new to modern reprint cards (uncommon/rare/mythic)
+        // 304 -> 319 are basics lands (with 309 being Snow-Covered Waste)
+        List<CardInfo> list_MH3_C =
+                getCardsByRarity(Rarity.COMMON).stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 261)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_MH3_U =
+                getCardsByRarity(Rarity.UNCOMMON).stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 261)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_MH3_R =
+                getCardsByRarity(Rarity.RARE)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 261)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_MH3_M =
+                getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 261)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_MH3_Basic =
+                getCardsByRarity(Rarity.LAND)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= maxCardNumberInBooster)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_RTM_U =
+                getCardsByRarity(Rarity.UNCOMMON)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() >= 262 && info.getCardNumberAsInt() <= 303)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_RTM_R =
+                getCardsByRarity(Rarity.RARE)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() >= 262 && info.getCardNumberAsInt() <= 303)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_RTM_M =
+                getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() >= 262 && info.getCardNumberAsInt() <= 303)
+                        .collect(Collectors.toList());
+        List<CardInfo> list_SPG =
+                SpecialGuests.getInstance().getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> {
+                            int cn = info.getCardNumberAsInt();
+                            return cn >= 39 && cn <= 48;
+                        })
+                        .collect(Collectors.toList());
+        List<CardInfo> list_M3C =
+                ModernHorizons3Commander.getInstance().getCardsByRarity(Rarity.MYTHIC)
+                        .stream()
+                        .filter(info -> info.getCardNumberAsInt() <= 8)
+                        .collect(Collectors.toList());
+
+        for (int i = 0; i < spg; i++) {
+            addToBooster(booster, list_SPG);
+        }
+        double ratioMythic = (double) list_MH3_M.size() / (double) (list_MH3_M.size() + list_MH3_R.size() * 2);
+        for (int i = 0; i < rareOrMythic; i++) {
+            if (RandomUtil.nextDouble() <= ratioMythic) {
+                addToBooster(booster, list_MH3_M);
+            } else {
+                addToBooster(booster, list_MH3_R);
+            }
+        }
+        for (int i = 0; i < commander; i++) {
+            addToBooster(booster, list_M3C);
+        }
+        double ratioUncommonRTM = 0.75; // Uncommons relative to rare+mythic
+        double ratioMythicRTM = (double) list_RTM_M.size() / (double) (list_RTM_M.size() + list_RTM_R.size() * 2); // mythics relative to rare
+        for (int i = 0; i < newToModern; i++) {
+            if (RandomUtil.nextDouble() <= ratioUncommonRTM) {
+                addToBooster(booster, list_RTM_U);
+            } else if (RandomUtil.nextDouble() <= ratioMythicRTM) {
+                addToBooster(booster, list_RTM_M);
+            } else {
+                addToBooster(booster, list_RTM_R);
+            }
+        }
+        for (int i = 0; i < uncommon; i++) {
+            addToBooster(booster, list_MH3_U);
+        }
+        for (int i = 0; i < common; i++) {
+            addToBooster(booster, list_MH3_C);
+        }
+        for (int i = 0; i < basicLand; i++) {
+            addToBooster(booster, list_MH3_Basic);
+        }
+
+        return booster;
     }
 }

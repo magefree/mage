@@ -70,7 +70,7 @@ class AnotherChanceEffect extends OneShotEffect {
         }
 
         // Make sure the mill has been processed.
-        game.getState().processAction(game);
+        game.processAction();
 
         TargetCard target = new TargetCardInYourGraveyard(
                 0, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD, true

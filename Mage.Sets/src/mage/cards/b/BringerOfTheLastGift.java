@@ -95,7 +95,7 @@ class BringerOfTheLastGiftEffect extends OneShotEffect {
         }
 
         // Make sure the sacrifices are processed.
-        game.getState().processAction(game);
+        game.processAction();
 
         Set<Card> toReturn = new HashSet<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

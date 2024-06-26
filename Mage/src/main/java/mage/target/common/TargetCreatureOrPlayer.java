@@ -71,10 +71,10 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         if (source != null) {
             MageObject targetSource = game.getObject(source);
             if (permanent != null) {
-                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getControllerId(), source, game);
+                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), source, game) && filter.match(permanent, source.getControllerId(), source, game);
             }
             if (player != null) {
-                return player.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(player, game);
+                return player.canBeTargetedBy(targetSource, source.getControllerId(), source, game) && filter.match(player, game);
             }
         }
 
@@ -100,7 +100,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         MageObject targetSource = game.getObject(source);
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
-            if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(player, game)) {
+            if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, source, game) && filter.match(player, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -108,7 +108,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceControllerId, source, game)) {
+            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game) && filter.match(permanent, sourceControllerId, source, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -157,13 +157,13 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null
-                    && player.canBeTargetedBy(targetSource, sourceControllerId, game)
+                    && player.canBeTargetedBy(targetSource, sourceControllerId, source, game)
                     && filter.getPlayerFilter().match(player, sourceControllerId, source, game)) {
                 possibleTargets.add(playerId);
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
+            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)
                     && filter.getCreatureFilter().match(permanent, sourceControllerId, source, game)) {
                 possibleTargets.add(permanent.getId());
             }

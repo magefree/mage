@@ -75,7 +75,7 @@ class CallForAidEffect extends OneShotEffect {
 
         //"Gain control of all creatures target opponent controls until end of turn"
         new GainControlAllEffect(Duration.EndOfTurn, filter).apply(game, source);
-        game.getState().processAction(game);
+        game.processAction();
 
         //"Untap those creatures".
         new UntapAllEffect(filter).apply(game, source);

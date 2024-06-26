@@ -32,6 +32,10 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
         this(Zone.BATTLEFIELD, effect, filter, optional, setTargetPointer, onlyCombat, affectsDefendingPlayer);
     }
 
+    public DealsDamageToAPlayerAllTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyCombat, boolean affectsDefendingPlayer, TargetController targetController) {
+        this(Zone.BATTLEFIELD, effect, filter, optional, setTargetPointer, onlyCombat, affectsDefendingPlayer, targetController);
+    }
+
     public DealsDamageToAPlayerAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyCombat, boolean affectsDefendingPlayer) {
         this(zone, effect, filter, optional, setTargetPointer, onlyCombat, affectsDefendingPlayer, TargetController.ANY);
     }

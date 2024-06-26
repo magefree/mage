@@ -132,7 +132,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
                     filter.add(Predicates.or(colorPredicates));
                 }
                 Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-                target.setTargetName("creature to tap for convoke");
+                target.withTargetName("creature to tap for convoke");
                 specialAction.addTarget(target);
                 if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);

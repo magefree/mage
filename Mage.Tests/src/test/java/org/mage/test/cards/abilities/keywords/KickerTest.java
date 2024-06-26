@@ -767,4 +767,51 @@ public class KickerTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, scourge, 10, 10);
     }
 
+    @Test
+    public void testSkizzikNotKicked() {
+        String skizzik = "Skizzik"; // 3R Creature 5/3 trample haste
+        // Kicker {R} At the beginning of the end step, if Skizzik wasn’t kicked, sacrifice it.
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, skizzik);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, skizzik);
+        setChoice(playerA, false); // not kicked
+
+        attack(1, playerA, skizzik, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 15);
+        assertPermanentCount(playerA, skizzik, 0);
+        assertGraveyardCount(playerA, skizzik, 1);
+    }
+
+    @Test
+    public void testSkizzikKicked() {
+        String skizzik = "Skizzik"; // 3R Creature 5/3 trample haste
+        // Kicker {R} At the beginning of the end step, if Skizzik wasn’t kicked, sacrifice it.
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, skizzik);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, skizzik);
+        setChoice(playerA, true);
+
+        attack(1, playerA, skizzik, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 15);
+        assertPermanentCount(playerA, skizzik, 1);
+        assertGraveyardCount(playerA, skizzik, 0);
+        assertTappedCount("Mountain", true, 5);
+    }
+
 }

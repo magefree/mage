@@ -1,9 +1,8 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
@@ -34,7 +33,7 @@ public final class CruelCelebrant extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Cruel Celebrant or another creature or planeswalker you control dies, each opponent loses 1 life and you gain 1 life.
-        Ability ability = new DiesThisOrAnotherCreatureOrPlaneswalkerTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter);
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
 

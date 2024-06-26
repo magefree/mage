@@ -25,8 +25,6 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
-import static mage.cards.v.VolrathsCurse.keyString;
-
 /**
  * @author LevelX2
  */
@@ -82,7 +80,7 @@ class VolrathsCurseRestrictionEffect extends RestrictionEffect {
         Permanent attachment = game.getPermanent(source.getSourceId());
         if (attachment != null && attachment.getAttachedTo() != null
                 && permanent.getId().equals(attachment.getAttachedTo())) {
-            String key = source.getSourceId().toString() + attachment.getZoneChangeCounter(game) + keyString + game.getTurnNum() + permanent.getControllerId();
+            String key = source.getSourceId().toString() + attachment.getZoneChangeCounter(game) + VolrathsCurse.keyString + game.getTurnNum() + permanent.getControllerId();
             return game.getState().getValue(key) == null;
         }
         return false;
@@ -132,7 +130,7 @@ class VolrathsCurseCantActivateAbilitiesEffect extends ContinuousRuleModifyingEf
             if (event.getSourceId().equals(enchantment.getAttachedTo())) {
                 Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
                 if (enchanted != null) {
-                    String key = source.getSourceId().toString() + enchantment.getZoneChangeCounter(game) + keyString + game.getTurnNum() + enchanted.getControllerId();
+                    String key = source.getSourceId().toString() + enchantment.getZoneChangeCounter(game) + VolrathsCurse.keyString + game.getTurnNum() + enchanted.getControllerId();
                     return game.getState().getValue(key) == null;
                 }
             }
@@ -146,7 +144,7 @@ class VolrathsCurseSpecialAction extends SpecialAction {
     public VolrathsCurseSpecialAction() {
         super(Zone.BATTLEFIELD);
         this.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
-        this.addEffect(new VolrathsCurseIgnoreEffect(keyString));
+        this.addEffect(new VolrathsCurseIgnoreEffect(VolrathsCurse.keyString));
         this.setMayActivate(TargetController.CONTROLLER_ATTACHED_TO);
     }
 
@@ -178,7 +176,7 @@ class VolrathsCurseIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String key = source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter() + keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
+        String key = source.getSourceId().toString() + source.getSourceObjectZoneChangeCounter() + VolrathsCurse.keyString + game.getTurnNum() + ((ActivatedAbilityImpl) source).getActivatorId();
         game.getState().setValue(key, true);
         return true;
     }

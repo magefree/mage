@@ -14,7 +14,7 @@ import mage.client.util.ImageCaches;
 import mage.client.util.SoftValuesLoadingCache;
 
 /**
- * Mage round pane with transparency. Used for tooltips.
+ * GUI component. Mage round pane with transparency. Used for tooltips and player panels.
  *
  * @author nantuko
  */
