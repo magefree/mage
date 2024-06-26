@@ -16,6 +16,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.FaceDownPredicate;
 import mage.target.common.TargetCardInExile;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -50,6 +51,7 @@ public final class TimeReaper extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new PutOnLibraryTargetEffect(false));
         ability.addEffect(new GainLifeEffect(3)); //I don't think the move can fail?
         ability.addTarget(new TargetCardInExile(filter));
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
         ability.withFlavorWord("Consume Anomaly");
     }
 

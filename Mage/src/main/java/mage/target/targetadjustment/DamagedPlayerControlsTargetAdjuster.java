@@ -46,10 +46,10 @@ public class DamagedPlayerControlsTargetAdjuster implements TargetAdjuster {
         Filter filter = newTarget.getFilter();
         if (owner) {
             filter.add(new OwnerIdPredicate(opponentId));
-            newTarget.withTargetName(filter.getMessage() + " owned by " + opponent.getLogName());
+            newTarget.withTargetName(filter.getMessage() + " (owned by " + opponent.getLogName() + ")");
         } else {
             filter.add(new ControllerIdPredicate(opponentId));
-            newTarget.withTargetName(filter.getMessage() + " controlled by " + opponent.getLogName());
+            newTarget.withTargetName(filter.getMessage() + " (controlled by " + opponent.getLogName() + ")");
         }
         ability.addTarget(newTarget);
     }
