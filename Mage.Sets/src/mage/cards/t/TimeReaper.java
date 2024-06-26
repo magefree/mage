@@ -49,7 +49,7 @@ public final class TimeReaper extends CardImpl {
 
         // Consume Anomaly -- Whenever Time Reaper deals combat damage to a player, put target face-up card they own in exile on the bottom of their library. If you do, you gain 3 life.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new PutOnLibraryTargetEffect(false));
-        ability.addEffect(new GainLifeEffect(3)); //I don't think the move can fail?
+        ability.addEffect(new GainLifeEffect(3)); //I don't think the move can fail? If there's no target then the trigger won't happen
         ability.addTarget(new TargetCardInExile(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
         ability.withFlavorWord("Consume Anomaly");
