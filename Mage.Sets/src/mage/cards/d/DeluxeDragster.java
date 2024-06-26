@@ -54,7 +54,7 @@ public final class DeluxeDragster extends CardImpl {
                 + ThatSpellGraveyardExileReplacementEffect.RULE_A);
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetCardInGraveyard(filterCard));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
         this.addAbility(ability);
 
         // Crew 2

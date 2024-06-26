@@ -50,7 +50,7 @@ public final class WrexialTheRisenDeep extends CardImpl {
                 + ThatSpellGraveyardExileReplacementEffect.RULE_A);
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetCardInGraveyard(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
         this.addAbility(ability);
     }
 

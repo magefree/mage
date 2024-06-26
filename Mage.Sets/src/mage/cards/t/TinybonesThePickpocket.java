@@ -48,7 +48,7 @@ public final class TinybonesThePickpocket extends CardImpl {
         OneShotEffect effect = new MayCastTargetCardEffect(CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, false);
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetCardInGraveyard(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
         this.addAbility(ability);
     }
 

@@ -1,8 +1,8 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
@@ -14,19 +14,19 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.card.OwnerIdPredicate;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.players.Player;
+import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
- * @author LevelX2
+ * @author notgreat
  */
 public final class InkEyesServantOfOni extends CardImpl {
+
+    private static final FilterCreatureCard filter
+            = new FilterCreatureCard("creature card from that player's graveyard");
 
     public InkEyesServantOfOni(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
@@ -41,7 +41,10 @@ public final class InkEyesServantOfOni extends CardImpl {
         this.addAbility(new NinjutsuAbility("{3}{B}{B}"));
 
         // Whenever Ink-Eyes, Servant of Oni deals combat damage to a player, you may put target creature card from that player's graveyard onto the battlefield under your control.
-        this.addAbility(new InkEyesServantOfOniTriggeredAbility());
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true, true);
+        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
+        this.addAbility(ability);
 
         // {1}{B}: Regenerate Ink-Eyes.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
@@ -54,51 +57,5 @@ public final class InkEyesServantOfOni extends CardImpl {
     @Override
     public InkEyesServantOfOni copy() {
         return new InkEyesServantOfOni(this);
-    }
-}
-
-class InkEyesServantOfOniTriggeredAbility extends TriggeredAbilityImpl {
-
-    public InkEyesServantOfOniTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
-    }
-
-    private InkEyesServantOfOniTriggeredAbility(final InkEyesServantOfOniTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public InkEyesServantOfOniTriggeredAbility copy() {
-        return new InkEyesServantOfOniTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(this.sourceId) || !((DamagedPlayerEvent) event).isCombatDamage()) {
-            return false;
-        }
-        Player damagedPlayer = game.getPlayer(event.getTargetId());
-        if (damagedPlayer == null) {
-            return false;
-        }
-        FilterCard filter = new FilterCard("creature in " + damagedPlayer.getName() + "'s graveyard");
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
-        TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-        this.getTargets().clear();
-        this.addTarget(target);
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, "
-                + "you may put target creature card from that player's "
-                + "graveyard onto the battlefield under your control.";
     }
 }
