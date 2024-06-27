@@ -556,6 +556,7 @@ public class ScryfallImageSupportCards {
             add("M3C"); // Modern Horizons 3
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
+            add("DSK"); // Duskmourn: House of Horror
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
@@ -636,7 +637,7 @@ public class ScryfallImageSupportCards {
             put("SLD/Zombie Master/1460b", "https://api.scryfall.com/cards/sld/1460/en?format=image&face=back");
             // normal cards
             put("SLD/Viscera Seer/99999VS", "https://api.scryfall.com/cards/sld/VS/"); // see issue 11157
-        
+
             // CALC - custom alchemy version of cards.
             put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");
 
@@ -680,14 +681,14 @@ public class ScryfallImageSupportCards {
 
     public static String prepareCardNumber(String xmageCardNumber) {
         if (xmageCardNumber.endsWith("*")) {
-                return xmageCardNumber.substring(0 , xmageCardNumber.length() -1) + "★" ;
+            return xmageCardNumber.substring(0, xmageCardNumber.length() - 1) + "★";
         }
         if (xmageCardNumber.endsWith("+")) {
-                return xmageCardNumber.substring(0 , xmageCardNumber.length() -1) + "†" ;
+            return xmageCardNumber.substring(0, xmageCardNumber.length() - 1) + "†";
         }
         if (xmageCardNumber.endsWith("Ph")) {
-                return xmageCardNumber.substring(0 , xmageCardNumber.length() -2) + "Φ" ;
-	}
+            return xmageCardNumber.substring(0, xmageCardNumber.length() - 2) + "Φ";
+        }
         return xmageCardNumber;
     }
 

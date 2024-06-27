@@ -82,6 +82,7 @@ Duel Decks: Nissa vs. Ob Nixilis|DDR|
 Duel Decks: Mind vs. Might|DDS|
 Duel Decks: Merfolk vs. Goblins|DDT|
 Duels of the Planeswalkers|DPA|
+Duskmourn: House of Horror|DSK|
 Dragon's Maze|DGM|
 Dissension|DIS|
 Dark Ascension|DKA|
