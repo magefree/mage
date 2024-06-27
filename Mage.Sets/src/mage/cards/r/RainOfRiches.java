@@ -2,17 +2,20 @@ package mage.cards.r;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ManaPaidEvent;
 import mage.game.permanent.token.TreasureToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
@@ -22,6 +25,7 @@ import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -43,6 +47,9 @@ public class RainOfRiches extends CardImpl {
                 new SimpleStaticAbility(Zone.BATTLEFIELD, new RainOfRichesGainsCascadeEffect()),
                 new RainOfRichesWatcher()
         );
+
+        this.addAbility(new SimpleStaticAbility(new InfoEffect(
+                "The cascade will not work if you only pay the last mana with treasure - please pay for the first mana with a treasure.")));
     }
 
     private RainOfRiches(final RainOfRiches card) {
@@ -127,19 +134,30 @@ class RainOfRichesWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.CAST_SPELL) {
+        if (event.getType() != GameEvent.EventType.MANA_PAID) {
             return;
         }
-        Spell spell = game.getSpell(event.getSourceId());
-        if (spell == null) {
-            return;
-        }
-        int manaPaid = ManaPaidSourceWatcher.getTreasurePaid(spell.getId(), game);
-        if (manaPaid < 1) {
+        ManaPaidEvent manaEvent = (ManaPaidEvent) event;
+
+        if (!manaEvent.getSourceObject().hasSubtype(SubType.TREASURE, game)) {
             return;
         }
 
-        playerMap.computeIfAbsent(event.getPlayerId(), x -> new MageObjectReference(spell.getMainCard(), game));
+        Optional<Ability> opt = game.getAbility(manaEvent.getTargetId(), manaEvent.getSourcePaidId());
+
+        if (!opt.isPresent()) {
+            return;
+        }
+
+        Ability ability = opt.get();
+
+        if (!(ability instanceof SpellAbility)) {
+            return;
+        }
+
+        playerMap.computeIfAbsent(event.getPlayerId(),
+                x -> new MageObjectReference(((Spell) ((SpellAbility) ability).getSourceObject(game)).getMainCard(),
+                        game));
     }
 
     @Override
