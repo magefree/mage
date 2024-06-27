@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -19,5 +20,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         this.blockName = "Duskmourn: House of Horror"; // for sorting in GUI
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
+
+        cards.add(new SetCardInfo("Enduring Tenacity", 390, Rarity.MYTHIC, mage.cards.e.EnduringTenacity.class));
     }
 }
