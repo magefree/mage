@@ -18,9 +18,14 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
     private DuskmournHouseOfHorror() {
         super("Duskmourn: House of Horror", "DSK", ExpansionSet.buildDate(2024, 9, 27), SetType.EXPANSION);
         this.blockName = "Duskmourn: House of Horror"; // for sorting in GUI
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
-        cards.add(new SetCardInfo("Enduring Tenacity", 390, Rarity.MYTHIC, mage.cards.e.EnduringTenacity.class));
+        cards.add(new SetCardInfo("Enduring Tenacity", 95, Rarity.RARE, mage.cards.e.EnduringTenacity.class));
+        cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
     }
 }
