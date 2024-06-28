@@ -7,6 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.EnergySpentOrLostThisTurnCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -20,6 +21,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
+import mage.watchers.common.EnergySpentOrLostWatcher;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +33,7 @@ import java.util.UUID;
 public final class IzzetGeneratorium extends CardImpl {
 
     private static final Condition condition = new IzzetGeneratoriumCondition();
-    private static final Hint hint = new ValueHint("{E} paid or lost this turn", IzzetGeneratoriumValue.instance);
+    private static final Hint hint = new ValueHint("{E} paid or lost this turn", EnergySpentOrLostThisTurnCount.instance);
 
     public IzzetGeneratorium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{U}{R}");
@@ -44,7 +46,7 @@ public final class IzzetGeneratorium extends CardImpl {
                 new DrawCardSourceControllerEffect(1),
                 new TapSourceCost(),
                 condition
-        ).addHint(hint), new IzzetGeneratoriumWatcher());
+        ).addHint(hint), new EnergySpentOrLostWatcher());
     }
 
     private IzzetGeneratorium(final IzzetGeneratorium card) {
@@ -100,71 +102,11 @@ class IzzetGeneratoriumCondition extends IntCompareCondition {
 
     @Override
     protected int getInputValue(Game game, Ability source) {
-        return IzzetGeneratoriumValue.instance.calculate(game, source, null);
+        return EnergySpentOrLostThisTurnCount.instance.calculate(game, source, null);
     }
 
     @Override
     public String toString() {
         return "if you've paid or lost four or more {E} this turn";
-    }
-}
-
-enum IzzetGeneratoriumValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return IzzetGeneratoriumWatcher.getAmountEnergyLostOrSpentThisTurn(game, sourceAbility.getControllerId());
-    }
-
-    @Override
-    public IzzetGeneratoriumValue copy() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "{E} spent or lost this turn";
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-}
-
-class IzzetGeneratoriumWatcher extends Watcher {
-
-    // player -> amount of energy spent or lost this turn
-    private final Map<UUID, Integer> energyLostOrSpent = new HashMap<>();
-
-    IzzetGeneratoriumWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.COUNTERS_REMOVED) {
-            return;
-        }
-        if (!event.getData().equals(CounterType.ENERGY.getName())) {
-            return;
-        }
-        int amount = event.getAmount();
-        if (amount <= 0) {
-            return;
-        }
-        energyLostOrSpent.compute(event.getTargetId(), (k, i) -> i == null ? amount : Integer.sum(i, amount));
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        energyLostOrSpent.clear();
-    }
-
-    public static int getAmountEnergyLostOrSpentThisTurn(Game game, UUID playerId) {
-        IzzetGeneratoriumWatcher watcher = game.getState().getWatcher(IzzetGeneratoriumWatcher.class);
-        return watcher == null ? 0 : watcher.energyLostOrSpent.getOrDefault(playerId, 0);
     }
 }
