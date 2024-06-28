@@ -553,10 +553,11 @@ public class ScryfallImageSupportCards {
             add("OTP"); // Breaking News
             add("BIG"); // The Big Score
             add("MH3"); // Modern Horizons 3
-            add("M3C"); // Modern Horizons 3
+            add("M3C"); // Modern Horizons 3 Commander
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
             add("DSK"); // Duskmourn: House of Horror
+            add("FDN"); // Foundations
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards

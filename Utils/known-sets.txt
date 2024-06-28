@@ -94,6 +94,7 @@ Fallen Empires|FallenEmpires|
 Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
 Fifth Edition|FifthEdition|
+Foundations|Foundations|
 Fourth Edition|FourthEdition|
 Friday Night Magic|FridayNightMagic|
 From the Vault: Angels|FromTheVaultAngels|

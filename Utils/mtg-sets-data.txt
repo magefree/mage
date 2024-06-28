@@ -109,6 +109,7 @@ Fallout|PIP|
 Fallen Empires|FEM|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
+Foundations|FDN|
 Future Sight|FUT|
 Global Series: Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|
