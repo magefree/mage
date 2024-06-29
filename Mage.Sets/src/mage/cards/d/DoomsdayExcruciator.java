@@ -86,7 +86,7 @@ class DoomsdayExcruciatorEffect extends OneShotEffect {
             }
             int amount = player.getLibrary().size() - 6;
             if (amount > 0) {
-                player.getLibrary().getTopCards(game, amount);
+                cards.addAllCards(player.getLibrary().getTopCards(game, amount));
             }
         }
         controller.moveCards(cards, Zone.EXILED, source, game);

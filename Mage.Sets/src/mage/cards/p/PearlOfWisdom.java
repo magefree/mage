@@ -10,7 +10,6 @@ import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -24,8 +23,7 @@ import java.util.UUID;
 public final class PearlOfWisdom extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.OTTER, "you control an Otter");
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1);
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
     private static final Hint hint = new ConditionHint(condition, "You control an Otter");
 
     public PearlOfWisdom(UUID ownerId, CardSetInfo setInfo) {
