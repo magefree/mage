@@ -1,7 +1,8 @@
-package mage.abilities.effects;
+package mage.abilities.effects.common;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.MeldCard;
 import mage.constants.Outcome;
@@ -11,6 +12,7 @@ import mage.counters.Counters;
 import mage.game.Game;
 import mage.players.Player;
 
+// TODO: refactor into ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect
 public class ReturnMORToBattlefieldUnderOwnerControlWithCounterEffect extends OneShotEffect {
 
     private final MageObjectReference objectToReturn;
