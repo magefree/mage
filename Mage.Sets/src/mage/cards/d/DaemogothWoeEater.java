@@ -36,7 +36,7 @@ public final class DaemogothWoeEater extends CardImpl {
 
         // When you sacrifice Daemogoth Woe-Eater, each opponent discards a card, you draw a card, and you gain 2 life.
         Ability ability = new SacrificeSourceTriggeredAbility(
-                new DiscardEachPlayerEffect(TargetController.OPPONENT), false
+                new DiscardEachPlayerEffect(TargetController.OPPONENT)
         );
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", you"));
         ability.addEffect(new GainLifeEffect(2).concatBy(", and"));
