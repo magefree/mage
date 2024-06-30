@@ -41,4 +41,34 @@ public class SalvationSwanTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Grizzly Bears", 1);
         assertCounterCount(playerA, "Grizzly Bears", CounterType.FLYING, 1);
     }
+
+    @Test
+    public void test_Meld() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 4 + 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Hanweir Battlements");
+        addCard(Zone.BATTLEFIELD, playerA, "Hanweir Garrison");
+        addCard(Zone.HAND, playerA, swan);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{R}{R}, {T}: If you both own and control");
+        setChoice(playerA, "Hanweir Garrison");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, swan);
+        addTarget(playerA, "Hanweir, the Writhing Township");
+
+        checkExileCount("Battlements in exile", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hanweir Battlements", 1);
+        checkExileCount("Garrison in exile", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hanweir Garrison", 1);
+
+        // Only 1 trigger to return both meld parts.
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertPermanentCount(playerA, "Hanweir Battlements", 1);
+        assertCounterCount(playerA, "Hanweir Battlements", CounterType.FLYING, 1);
+        assertPermanentCount(playerA, "Hanweir Garrison", 1);
+        assertCounterCount(playerA, "Hanweir Garrison", CounterType.FLYING, 1);
+    }
 }

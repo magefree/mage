@@ -41,8 +41,8 @@ public class ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect extends
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            game.setEnterWithCounters(targetId, counters.copy());
+        for (UUID cardId : getCardsToReturn(game, source)) {
+            game.setEnterWithCounters(cardId, counters.copy());
         }
         return super.apply(game, source);
     }
