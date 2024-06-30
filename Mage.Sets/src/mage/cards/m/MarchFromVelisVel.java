@@ -81,7 +81,7 @@ class MarchFromVelisVelEffect extends OneShotEffect {
         choice.setMessage("Choose a nonbasic land type");
         choice.setChoices(SubType.getNonbasicLandTypes().stream().map(SubType::toString).collect(Collectors.toSet()));
         player.choose(outcome, choice, game);
-        SubType subType = SubType.fromString(choice.getChoice());
+        SubType subType = SubType.byDescription(choice.getChoice());
         if (subType == null) {
             return false;
         }

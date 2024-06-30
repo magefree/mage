@@ -125,7 +125,7 @@ class ChooseHumanMerfolkOrGoblinEffect extends OneShotEffect {
         controller.choose(outcome, choice, game);
         game.informPlayers(permanent.getName() + ": " + controller.getLogName() + " has secretly chosen a creature type.");
 
-        SubType chosenType = SubType.fromString(choice.getChoice());
+        SubType chosenType = SubType.byDescription(choice.getChoice());
         setSecretCreatureType(chosenType, source, game);
         setSecretOwner(source.getControllerId(), source, game);
         return true;
