@@ -78,8 +78,8 @@ class LavabrinkFloodgatesEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        Choice choice = new ChoiceImpl();
-        choice.setChoices(new HashSet(Arrays.asList(
+        Choice choice = new ChoiceImpl(false);
+        choice.setChoices(new HashSet<>(Arrays.asList(
                 "Add a doom counter",
                 "Remove a doom counter",
                 "Do nothing"

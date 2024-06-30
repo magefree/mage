@@ -36,10 +36,6 @@ public class ChoiceImpl implements Choice {
 
     protected boolean manaColorChoice = false; // set true to allow automatic choosing with Outcome.PutManaInPool
 
-    public ChoiceImpl() {
-        this(false);
-    }
-
     public ChoiceImpl(boolean required) {
         this(required, ChoiceHintType.TEXT);
     }

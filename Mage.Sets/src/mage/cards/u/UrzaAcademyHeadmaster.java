@@ -486,7 +486,7 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game);
-            Choice manaChoice = new ChoiceImpl();
+            Choice manaChoice = new ChoiceImpl(false);
             Set<String> choices = new LinkedHashSet<>();
             choices.add("White");
             choices.add("Blue");

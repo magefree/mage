@@ -114,7 +114,7 @@ class ChooseHumanMerfolkOrGoblinEffect extends OneShotEffect {
             return false;
         }
 
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceImpl(true);
         Set<String> choices = new LinkedHashSet<>();
         choices.add("Human");
         choices.add("Merfolk");

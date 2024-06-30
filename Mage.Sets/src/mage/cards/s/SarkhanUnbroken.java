@@ -85,7 +85,7 @@ class SarkhanUnbrokenAbility1 extends OneShotEffect {
 
             game.fireUpdatePlayersEvent();
 
-            Choice manaChoice = new ChoiceImpl();
+            Choice manaChoice = new ChoiceImpl(false);
             Set<String> choices = new LinkedHashSet<>();
             choices.add("White");
             choices.add("Blue");

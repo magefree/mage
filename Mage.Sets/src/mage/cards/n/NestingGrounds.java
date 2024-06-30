@@ -103,7 +103,7 @@ class NestingGroundsEffect extends OneShotEffect {
             return true;
         }
 
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceImpl(false);
         Set<String> possibleChoices = new LinkedHashSet<>(fromPermanent.getCounters(game).keySet());
         choice.setChoices(possibleChoices);
         choice.setMessage("Choose a counter");
