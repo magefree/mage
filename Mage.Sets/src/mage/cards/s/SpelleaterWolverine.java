@@ -5,7 +5,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,6 +25,8 @@ public final class SpelleaterWolverine extends CardImpl {
     private static final Condition condition = new CardsInControllerGraveyardCondition(
             3, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
     );
+    private static final ValueHint hint = new ValueHint("Instant and/or sorcery cards in your graveyard",
+            new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY));
 
     public SpelleaterWolverine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -36,7 +40,7 @@ public final class SpelleaterWolverine extends CardImpl {
                 new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance()),
                 condition, "{this} has double strike as long as there are " +
                 "three or more instant and/or sorcery cards in your graveyard"
-        )));
+        )).addHint(hint));
     }
 
     private SpelleaterWolverine(final SpelleaterWolverine card) {
