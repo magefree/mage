@@ -1,18 +1,23 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -31,6 +36,8 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class SalvationSwan extends CardImpl {
+
+    static final String VALUE_PREFIX = "SalvationSwanExile";
 
     private static final FilterControlledPermanent filterBird = new FilterControlledPermanent(SubType.BIRD, "Bird you control");
     private static final FilterControlledCreaturePermanent filterWithoutFlying = new FilterControlledCreaturePermanent("creature you control without flying");
@@ -93,28 +100,38 @@ class SalvationSwanTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (permanent == null || sourceObject == null) {
             return false;
         }
-        // We want a unique exile zone for each time this effect resolves.
-        UUID exileId = UUID.randomUUID();
-        String exileName = CardUtil.getSourceIdName(game, source);
-        permanent.moveToExile(exileId, exileName, source, game);
 
-        OneShotEffect effect = new ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(
+        // exile card
+        // use workaround with temp zone to get all moved objects like melded parts
+        ExileZone tempExileZone = game.getExile().createZone(UUID.randomUUID(), "temp");
+        permanent.moveToExile(tempExileZone.getId(), tempExileZone.getName(), source, game);
+        // TODO: delete temp zone somehow?
+
+        // return it on next end turn
+        Cards cardsToReturn = new CardsImpl(tempExileZone.getCards(game));
+        cardsToReturn.retainZone(Zone.EXILED, game);
+        Effect effect = new ReturnToBattlefieldUnderOwnerControlWithCounterTargetEffect(
                 CounterType.FLYING.createInstance(), true
         );
-
-        ExileZone exile = game.getExile().getExileZone(exileId);
-        if (exile != null) {
-            exile.setCleanupOnEndTurn(true);
-            effect.setTargetPointer(new FixedTargets(exile.getCards(game), game));
-        }
-
+        effect.setTargetPointer(new FixedTargets(cardsToReturn.getCards(game), game));
         // create delayed triggered ability, of note the trigger is created even if no card would be returned.
-        // TODO: There is currently no way to know which cards will be returned by the trigger.
-        //       Maybe we need a hint to refer to the content of an exile zone?
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
+
+        // move exiled cards to shared zone for better UX
+        String exileKey = SalvationSwan.VALUE_PREFIX + "_" + source.getSourceId() + "_" + source.getSourceObjectZoneChangeCounter();
+        ExileZone sharedExileZone = game.getExile().createZone(
+                CardUtil.getExileZoneId(exileKey, game),
+                sourceObject.getIdName()
+        );
+        sharedExileZone.setCleanupOnEndTurn(true);
+        tempExileZone.getCards(game).forEach(card -> {
+            game.getState().getExile().moveToAnotherZone(card, game, sharedExileZone);
+        });
+
         return true;
     }
 }
