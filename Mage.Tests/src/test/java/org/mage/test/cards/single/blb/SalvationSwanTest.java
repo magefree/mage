@@ -46,11 +46,12 @@ public class SalvationSwanTest extends CardTestPlayerBase {
     public void test_Meld() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 4 + 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 4 + 5); // gives {R} or {W}
         addCard(Zone.BATTLEFIELD, playerA, "Hanweir Battlements");
         addCard(Zone.BATTLEFIELD, playerA, "Hanweir Garrison");
-        addCard(Zone.HAND, playerA, swan);
+        addCard(Zone.HAND, playerA, swan); // {3}{W}
 
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 5);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{R}{R}, {T}: If you both own and control");
         setChoice(playerA, "Hanweir Garrison");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
