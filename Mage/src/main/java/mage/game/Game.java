@@ -158,31 +158,42 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Player getPlayerOrPlaneswalkerController(UUID playerId);
 
+    /**
+     * Static players list from start of the game. Use it to find player by ID.
+     */
     Players getPlayers();
 
+    /**
+     * Static players list from start of the game. Use it to interate by starting turn order.
+     * WARNING, it's ignore range and leaved players, so use it game engine only
+     */
     PlayerList getPlayerList();
 
+    /**
+     *  Returns opponents list in range for the given playerId. Use it to interate by starting turn order.
+     *  Warning, it will return dead players until end of turn.
+     */
     default Set<UUID> getOpponents(UUID playerId) {
         return getOpponents(playerId, false);
     }
 
     /**
-     * Returns a Set of opponents in range for the given playerId
+     *  Returns opponents list in range for the given playerId. Use it to interate by starting turn order.
+     *  Warning, it will return dead players until end of turn.
      *
-     * @param playerId
-     * @param excludeDeadPlayers Determines if players who have lost are excluded from the list
-     * @return
+     * @param excludeDeadPlayers exclude dead player immediately without waiting range update on next turn
      */
     default Set<UUID> getOpponents(UUID playerId, boolean excludeDeadPlayers) {
         Player player = getPlayer(playerId);
         if (player == null) {
-            return new HashSet<>();
+            return new LinkedHashSet<>();
         }
 
-        return player.getInRange().stream()
+        return this.getPlayerList().stream()
                 .filter(opponentId -> !opponentId.equals(playerId))
+                .filter(player::hasPlayerInRange)
                 .filter(opponentId -> !excludeDeadPlayers || !getPlayer(opponentId).hasLost())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     default boolean isActivePlayer(UUID playerId) {

@@ -54,7 +54,6 @@ import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.junit.Ignore;
 
 import java.io.Serializable;
 import java.util.*;
@@ -69,7 +68,6 @@ import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
  *
  * @author BetaSteward_at_googlemail.com, Simown, JayDi85
  */
-@Ignore
 public class TestPlayer implements Player {
 
     private static final Logger LOGGER = Logger.getLogger(TestPlayer.class);
@@ -89,6 +87,8 @@ public class TestPlayer implements Player {
 
     private int maxCallsWithoutAction = 400;
     private int foundNoAction = 0;
+
+    // warning, test player do not restore own data by game rollback
 
     // full playable AI, TODO: can be deleted?
     private boolean AIPlayer;
@@ -2600,7 +2600,7 @@ public class TestPlayer implements Player {
                 targetCardZonesChecked.add(Zone.GRAVEYARD);
                 TargetCard targetFull = (TargetCard) target.getOriginalTarget();
 
-                List<UUID> needPlayers = game.getState().getPlayersInRange(this.getId(), game).toList();
+                List<UUID> needPlayers = new ArrayList<>(game.getState().getPlayersInRange(this.getId(), game));
                 // fix for opponent graveyard
                 if (target.getOriginalTarget() instanceof TargetCardInOpponentsGraveyard) {
                     // current player remove
@@ -2947,8 +2947,12 @@ public class TestPlayer implements Player {
 
     @Override
     public void restore(Player player) {
-        // no rollback for test player meta data (modesSet, actions, choices, targets, aliases)
-        computerPlayer.restore(player);
+        if (!(player instanceof TestPlayer)) {
+            throw new IllegalArgumentException("Wrong code usage: can't restore from player class " + player.getClass().getName());
+        }
+
+        // no rollback for test player metadata (modesSet, actions, choices, targets, aliases, etc)
+        computerPlayer.restore(player.getRealPlayer());
     }
 
     @Override
@@ -2984,8 +2988,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Set<UUID> getInRange() {
-        return computerPlayer.getInRange();
+    public boolean hasPlayerInRange(UUID checkingPlayerId) {
+        return computerPlayer.hasPlayerInRange(checkingPlayerId);
     }
 
     @Override
@@ -4618,5 +4622,10 @@ public class TestPlayer implements Player {
         // TODO: enable fail checks and fix tests, it's a part of setStrictChooseMode's implementation to all tests
         //Assert.fail("Wrong choice command: " + choice);
         LOGGER.warn("Wrong choice command: " + choice);
+    }
+
+    @Override
+    public Player getRealPlayer() {
+        return this.computerPlayer;
     }
 }

@@ -3183,8 +3183,6 @@ public abstract class GameImpl implements Game {
 
     /**
      * Return a list of all players ignoring the range of visible players
-     *
-     * @return
      */
     @Override
     public PlayerList getPlayerList() {

@@ -62,8 +62,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     // warning, do not use another keys with same starting text cause copy code search and clean all related values
     public static final String COPIED_CARD_KEY = "CopiedCard";
 
-    private final Players players;
-    private final PlayerList playerList;
+    private final Players players; // full players by ID (static list, table added order)
+    private final PlayerList playerList; // full players (static list, turn order e.g. apnap)
     private UUID choosingPlayerId; // player that makes a choice at game start
 
     // revealed cards <Name, <Cards>>, will be reset if all players pass priority
@@ -719,8 +719,6 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
-     *
-     * @return playerList
      */
     public PlayerList getPlayerList() {
         return playerList;
@@ -761,8 +759,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         PlayerList newPlayerList = new PlayerList();
         Player currentPlayer = game.getPlayer(playerId);
         if (currentPlayer != null) {
+            // must fill PlayerList by table added order (same as main game)
             for (Player player : players.values()) {
-                if (player.isInGame() && currentPlayer.getInRange().contains(player.getId())) {
+                if (player.isInGame() && currentPlayer.hasPlayerInRange(player.getId())) {
                     newPlayerList.add(player.getId());
                 }
             }
