@@ -3,17 +3,16 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -21,6 +20,9 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class TempleOfTheDead extends CardImpl {
+
+    private static final Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 2, null, TargetController.ANY);
+    private static final Hint hint = new ConditionHint(condition, "any player has one or fewer cards in hand");
 
     public TempleOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -36,10 +38,11 @@ public final class TempleOfTheDead extends CardImpl {
                 Zone.BATTLEFIELD,
                 new TransformSourceEffect(),
                 new ManaCostsImpl<>("{2}{B}"),
-                TempleOfTheDeadCondition.instance,
+                condition,
                 TimingRule.SORCERY
         );
         ability.addCost(new TapSourceCost());
+        ability.addHint(hint);
         this.addAbility(ability);
     }
 
@@ -50,28 +53,5 @@ public final class TempleOfTheDead extends CardImpl {
     @Override
     public TempleOfTheDead copy() {
         return new TempleOfTheDead(this);
-    }
-}
-
-enum TempleOfTheDeadCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        return player
-                .getInRange()
-                .stream()
-                .map(game::getPlayer)
-                .anyMatch(p -> p != null && p.getHand().size() <= 1);
-    }
-
-    @Override
-    public String toString() {
-        return "if a player has one or fewer cards in hand";
     }
 }
