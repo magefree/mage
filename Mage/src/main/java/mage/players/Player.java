@@ -277,6 +277,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void idleTimeout(Game game);
 
+    // TODO: research usage of !hasLeft() && !hasLost() replace it by isInGame() if possible
     boolean hasLeft();
 
     /**

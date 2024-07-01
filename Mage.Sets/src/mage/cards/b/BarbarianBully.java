@@ -66,7 +66,7 @@ class BarbarianBullyEffect extends OneShotEffect {
             return false;
         }
         boolean costPaid = false;
-        for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;

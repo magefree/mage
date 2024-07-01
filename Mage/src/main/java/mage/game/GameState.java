@@ -719,6 +719,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
+     *
+     * Warning, it's ignore range, must be used by game engine only.
      */
     public PlayerList getPlayerList() {
         return playerList;
@@ -728,13 +730,12 @@ public class GameState implements Serializable, Copyable<GameState> {
      * Returns a list of all active players of the game, setting the playerId to
      * the current player of the list.
      *
-     * @param playerId
-     * @return playerList
+     * Warning, it's ignore range, must be used by game engine only.
      */
     public PlayerList getPlayerList(UUID playerId) {
         PlayerList newPlayerList = new PlayerList();
         for (Player player : players.values()) {
-            if (!player.hasLeft() && !player.hasLost()) {
+            if (player.isInGame()) {
                 newPlayerList.add(player.getId());
             }
         }
@@ -742,26 +743,29 @@ public class GameState implements Serializable, Copyable<GameState> {
         return newPlayerList;
     }
 
+    // TODO: check usage of getPlayersInRange in cards and replace with correct call of excludeLeavedPlayers
+    public PlayerList getPlayersInRange(UUID playerId, Game game) {
+        return getPlayersInRange(playerId, game, false);
+    }
+
     /**
      * Returns a list of all active players of the game in range of playerId,
      * also setting the playerId to the first/current player of the list. Also
      * returning the other players in turn order.
      * <p>
-     * Not safe for continuous effects, see rule 800.4k (effects must work until
-     * end of turn even after player leaves) Use Player.InRange() to find active
-     * players list at the start of the turn
+     * Continuous effects, triggers and other must include leaved players, see rule 800.4k (effects must work until
+     * end of turn even after player leaves). But one short effects and dialogs must use actual players list.
      *
-     * @param playerId
-     * @param game
-     * @return playerList
+     * @param excludeLeavedPlayers - true for dialogs and one short effects, false for triggers and continuous effects
      */
-    public PlayerList getPlayersInRange(UUID playerId, Game game) {
+    public PlayerList getPlayersInRange(UUID playerId, Game game, boolean excludeLeavedPlayers) {
         PlayerList newPlayerList = new PlayerList();
         Player currentPlayer = game.getPlayer(playerId);
         if (currentPlayer != null) {
             // must fill PlayerList by table added order (same as main game)
             for (Player player : players.values()) {
-                if (player.isInGame() && currentPlayer.hasPlayerInRange(player.getId())) {
+                if ((!excludeLeavedPlayers || player.isInGame())
+                        && currentPlayer.hasPlayerInRange(player.getId())) {
                     newPlayerList.add(player.getId());
                 }
             }

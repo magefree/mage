@@ -159,20 +159,23 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     Player getPlayerOrPlaneswalkerController(UUID playerId);
 
     /**
-     * Static players list from start of the game. Use it to find player by ID.
+     * Static players list from start of the game. Use it to find player by ID or in game engine.
      */
     Players getPlayers();
 
     /**
      * Static players list from start of the game. Use it to interate by starting turn order.
-     * WARNING, it's ignore range and leaved players, so use it game engine only
+     * WARNING, it's ignore range and leaved players, so use it by game engine only
      */
+    // TODO: check usage of getPlayerList in cards and replace by game.getState().getPlayersInRange
     PlayerList getPlayerList();
 
     /**
      *  Returns opponents list in range for the given playerId. Use it to interate by starting turn order.
-     *  Warning, it will return dead players until end of turn.
+     *
+     *  Warning, it will return leaved players until end of turn. For dialogs and one shot effects use excludeLeavedPlayers
      */
+    // TODO: check usage of getOpponents in cards and replace with correct call of excludeLeavedPlayers
     default Set<UUID> getOpponents(UUID playerId) {
         return getOpponents(playerId, false);
     }
@@ -181,9 +184,9 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      *  Returns opponents list in range for the given playerId. Use it to interate by starting turn order.
      *  Warning, it will return dead players until end of turn.
      *
-     * @param excludeDeadPlayers exclude dead player immediately without waiting range update on next turn
+     * @param excludeLeavedPlayers exclude dead player immediately without waiting range update on next turn
      */
-    default Set<UUID> getOpponents(UUID playerId, boolean excludeDeadPlayers) {
+    default Set<UUID> getOpponents(UUID playerId, boolean excludeLeavedPlayers) {
         Player player = getPlayer(playerId);
         if (player == null) {
             return new LinkedHashSet<>();
@@ -192,7 +195,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
         return this.getPlayerList().stream()
                 .filter(opponentId -> !opponentId.equals(playerId))
                 .filter(player::hasPlayerInRange)
-                .filter(opponentId -> !excludeDeadPlayers || !getPlayer(opponentId).hasLost())
+                .filter(opponentId -> !excludeLeavedPlayers || getPlayer(opponentId).isInGame())
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
