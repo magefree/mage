@@ -484,4 +484,18 @@ public interface Permanent extends Card, Controllable {
         this.getPower().setBoostedValue(this.getToughness().getValue());
         this.getToughness().setBoostedValue(power);
     }
+
+    boolean isMutateOver();
+
+    boolean isMutatedUnder();
+
+    void setMutatedUnder(Permanent permanent);
+
+    Permanent getMutatedUnder();
+
+    boolean applyMutateUnder(Permanent permanent, Game game);
+
+    boolean applyMutateOver(Permanent permanent, Game game);
+
+    List<Permanent> getMutatedOverList();
 }

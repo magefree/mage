@@ -3,10 +3,12 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- * @author TheElk801
+ * @author TheElk801, NinthWorld
  */
 public enum SourceMutatedCount implements DynamicValue {
 
@@ -14,7 +16,19 @@ public enum SourceMutatedCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        // TODO: Implement this
+        Permanent sourcePermanent = game.getPermanent(sourceAbility.getSourceId());
+        if (sourcePermanent == null) {
+            sourcePermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);
+        }
+        if (sourcePermanent != null) {
+            Permanent mutatedOver =
+                    sourcePermanent.isMutatedUnder() ? sourcePermanent.getMutatedUnder() :
+                    sourcePermanent.isMutateOver() ? sourcePermanent :
+                    null;
+            if (mutatedOver != null) {
+                return sourcePermanent.getMutatedOverList().size();
+            }
+        }
         return 0;
     }
 

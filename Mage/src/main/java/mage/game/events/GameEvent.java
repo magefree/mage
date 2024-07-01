@@ -662,6 +662,8 @@ public class GameEvent implements Serializable {
          playerId   owner of the plotted card (the one able to cast the card)
          */
         BECOME_PLOTTED,
+        /* mutate */
+        CREATURE_MUTATED,
         //custom events
         CUSTOM_EVENT
     }

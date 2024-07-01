@@ -13,39 +13,6 @@ import java.util.List;
  */
 public final class IkoriaLairOfBehemoths extends ExpansionSet {
 
-    public static final List<String> mutateNames = Arrays.asList(
-            "Archipelagore",
-            "Auspicious Starrix",
-            "Boneyard Lurker",
-            "Brokkos, Apex of Forever",
-            "Cavern Whisperer",
-            "Chittering Harvester",
-            "Cloudpiercer",
-            "Cubwarden",
-            "Dirge Bat",
-            "Dreamtail Heron",
-            "Everquill Phoenix",
-            "Gemrazer",
-            "Glowstone Recluse",
-            "Huntmaster Liger",
-            "Illuna, Apex of Wishes",
-            "Insatiable Hemophage",
-            "Lore Drakkis",
-            "Majestic Auricorn",
-            "Migratory Greathorn",
-            "Necropanther",
-            "Nethroi, Apex of Death",
-            "Parcelbeast",
-            "Porcuparrot",
-            "Pouncing Shoreshark",
-            "Regal Leosaur",
-            "Sea-Dasher Octopus",
-            "Snapdax, Apex of the Hunt",
-            "Trumpeting Gnarr",
-            "Vadrok, Apex of Thunder",
-            "Vulpikeet"
-    );
-
     private static final IkoriaLairOfBehemoths instance = new IkoriaLairOfBehemoths();
 
     public static IkoriaLairOfBehemoths getInstance() {
@@ -97,6 +64,9 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Boon of the Wish-Giver", 43, Rarity.UNCOMMON, mage.cards.b.BoonOfTheWishGiver.class));
         cards.add(new SetCardInfo("Boot Nipper", 76, Rarity.COMMON, mage.cards.b.BootNipper.class));
         cards.add(new SetCardInfo("Bristling Boar", 146, Rarity.COMMON, mage.cards.b.BristlingBoar.class));
+        cards.add(new SetCardInfo("Brokkos, Apex of Forever", 179, Rarity.MYTHIC, mage.cards.b.BrokkosApexOfForever.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brokkos, Apex of Forever", 299, Rarity.MYTHIC, mage.cards.b.BrokkosApexOfForever.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brokkos, Apex of Forever", 378, Rarity.MYTHIC, mage.cards.b.BrokkosApexOfForever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bushmeat Poacher", 77, Rarity.COMMON, mage.cards.b.BushmeatPoacher.class));
         cards.add(new SetCardInfo("Call of the Death-Dweller", 78, Rarity.UNCOMMON, mage.cards.c.CallOfTheDeathDweller.class));
         cards.add(new SetCardInfo("Capture Sphere", 44, Rarity.COMMON, mage.cards.c.CaptureSphere.class));
@@ -108,11 +78,11 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Checkpoint Officer", 5, Rarity.COMMON, mage.cards.c.CheckpointOfficer.class));
         cards.add(new SetCardInfo("Chevill, Bane of Monsters", 181, Rarity.MYTHIC, mage.cards.c.ChevillBaneOfMonsters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chevill, Bane of Monsters", 330, Rarity.MYTHIC, mage.cards.c.ChevillBaneOfMonsters.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Chittering Harvester", 288, Rarity.UNCOMMON, mage.cards.c.ChitteringHarvester.class));
-        cards.add(new SetCardInfo("Chittering Harvester", 80, Rarity.UNCOMMON, mage.cards.c.ChitteringHarvester.class));
+        cards.add(new SetCardInfo("Chittering Harvester", 288, Rarity.UNCOMMON, mage.cards.c.ChitteringHarvester.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chittering Harvester", 80, Rarity.UNCOMMON, mage.cards.c.ChitteringHarvester.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clash of Titans", 111, Rarity.UNCOMMON, mage.cards.c.ClashOfTitans.class));
-        cards.add(new SetCardInfo("Cloudpiercer", 112, Rarity.COMMON, mage.cards.c.Cloudpiercer.class));
-        cards.add(new SetCardInfo("Cloudpiercer", 291, Rarity.COMMON, mage.cards.c.Cloudpiercer.class));
+        cards.add(new SetCardInfo("Cloudpiercer", 112, Rarity.COMMON, mage.cards.c.Cloudpiercer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cloudpiercer", 291, Rarity.COMMON, mage.cards.c.Cloudpiercer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colossification", 148, Rarity.RARE, mage.cards.c.Colossification.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colossification", 327, Rarity.RARE, mage.cards.c.Colossification.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colossification", 364, Rarity.RARE, mage.cards.c.Colossification.class, NON_FULL_USE_VARIOUS));
@@ -216,9 +186,9 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Humble Naturalist", 160, Rarity.COMMON, mage.cards.h.HumbleNaturalist.class));
         cards.add(new SetCardInfo("Hunted Nightmare", 322, Rarity.RARE, mage.cards.h.HuntedNightmare.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hunted Nightmare", 92, Rarity.RARE, mage.cards.h.HuntedNightmare.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Huntmaster Liger", 16, Rarity.UNCOMMON, mage.cards.h.HuntmasterLiger.class));
-        cards.add(new SetCardInfo("Huntmaster Liger", 280, Rarity.UNCOMMON, mage.cards.h.HuntmasterLiger.class));
-        cards.add(new SetCardInfo("Huntmaster Liger", 370, Rarity.UNCOMMON, mage.cards.h.HuntmasterLiger.class));
+        cards.add(new SetCardInfo("Huntmaster Liger", 16, Rarity.UNCOMMON, mage.cards.h.HuntmasterLiger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Huntmaster Liger", 280, Rarity.UNCOMMON, mage.cards.h.HuntmasterLiger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Huntmaster Liger", 370, Rarity.UNCOMMON, mage.cards.h.HuntmasterLiger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Illuna, Apex of Wishes", 190, Rarity.MYTHIC, mage.cards.i.IllunaApexOfWishes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Illuna, Apex of Wishes", 300, Rarity.MYTHIC, mage.cards.i.IllunaApexOfWishes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Illuna, Apex of Wishes", 379, Rarity.MYTHIC, mage.cards.i.IllunaApexOfWishes.class, NON_FULL_USE_VARIOUS));
@@ -226,8 +196,8 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Indatha Crystal", 235, Rarity.UNCOMMON, mage.cards.i.IndathaCrystal.class));
         cards.add(new SetCardInfo("Indatha Triome", 248, Rarity.RARE, mage.cards.i.IndathaTriome.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Indatha Triome", 309, Rarity.RARE, mage.cards.i.IndathaTriome.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Insatiable Hemophage", 290, Rarity.UNCOMMON, mage.cards.i.InsatiableHemophage.class));
-        cards.add(new SetCardInfo("Insatiable Hemophage", 93, Rarity.UNCOMMON, mage.cards.i.InsatiableHemophage.class));
+        cards.add(new SetCardInfo("Insatiable Hemophage", 290, Rarity.UNCOMMON, mage.cards.i.InsatiableHemophage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Insatiable Hemophage", 93, Rarity.UNCOMMON, mage.cards.i.InsatiableHemophage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inspired Ultimatum", 191, Rarity.RARE, mage.cards.i.InspiredUltimatum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inspired Ultimatum", 337, Rarity.RARE, mage.cards.i.InspiredUltimatum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -258,8 +228,8 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Lavabrink Venturer", 315, Rarity.RARE, mage.cards.l.LavabrinkVenturer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lead the Stampede", 163, Rarity.UNCOMMON, mage.cards.l.LeadTheStampede.class));
         cards.add(new SetCardInfo("Light of Hope", 20, Rarity.COMMON, mage.cards.l.LightOfHope.class));
-        cards.add(new SetCardInfo("Lore Drakkis", 194, Rarity.UNCOMMON, mage.cards.l.LoreDrakkis.class));
-        cards.add(new SetCardInfo("Lore Drakkis", 301, Rarity.UNCOMMON, mage.cards.l.LoreDrakkis.class));
+        cards.add(new SetCardInfo("Lore Drakkis", 194, Rarity.UNCOMMON, mage.cards.l.LoreDrakkis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lore Drakkis", 301, Rarity.UNCOMMON, mage.cards.l.LoreDrakkis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lukka, Coppercoat Outcast", 125, Rarity.MYTHIC, mage.cards.l.LukkaCoppercoatOutcast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lukka, Coppercoat Outcast", 276, Rarity.MYTHIC, mage.cards.l.LukkaCoppercoatOutcast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Luminous Broodmoth", 21, Rarity.MYTHIC, mage.cards.l.LuminousBroodmoth.class, NON_FULL_USE_VARIOUS));
@@ -300,8 +270,8 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Mythos of Vadrok", 324, Rarity.RARE, mage.cards.m.MythosOfVadrok.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Narset of the Ancient Way", 195, Rarity.MYTHIC, mage.cards.n.NarsetOfTheAncientWay.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Narset of the Ancient Way", 278, Rarity.MYTHIC, mage.cards.n.NarsetOfTheAncientWay.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Necropanther", 196, Rarity.UNCOMMON, mage.cards.n.Necropanther.class));
-        cards.add(new SetCardInfo("Necropanther", 302, Rarity.UNCOMMON, mage.cards.n.Necropanther.class));
+        cards.add(new SetCardInfo("Necropanther", 196, Rarity.UNCOMMON, mage.cards.n.Necropanther.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Necropanther", 302, Rarity.UNCOMMON, mage.cards.n.Necropanther.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nethroi, Apex of Death", 197, Rarity.MYTHIC, mage.cards.n.NethroiApexOfDeath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nethroi, Apex of Death", 303, Rarity.MYTHIC, mage.cards.n.NethroiApexOfDeath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nethroi, Apex of Death", 380, Rarity.MYTHIC, mage.cards.n.NethroiApexOfDeath.class, NON_FULL_USE_VARIOUS));
@@ -407,8 +377,8 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Titans' Nest", 212, Rarity.RARE, mage.cards.t.TitansNest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Titans' Nest", 347, Rarity.RARE, mage.cards.t.TitansNest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tranquil Cove", 257, Rarity.COMMON, mage.cards.t.TranquilCove.class));
-        cards.add(new SetCardInfo("Trumpeting Gnarr", 213, Rarity.UNCOMMON, mage.cards.t.TrumpetingGnarr.class));
-        cards.add(new SetCardInfo("Trumpeting Gnarr", 307, Rarity.UNCOMMON, mage.cards.t.TrumpetingGnarr.class));
+        cards.add(new SetCardInfo("Trumpeting Gnarr", 213, Rarity.UNCOMMON, mage.cards.t.TrumpetingGnarr.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trumpeting Gnarr", 307, Rarity.UNCOMMON, mage.cards.t.TrumpetingGnarr.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umori, the Collector", 231, Rarity.RARE, mage.cards.u.UmoriTheCollector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umori, the Collector", 358, Rarity.RARE, mage.cards.u.UmoriTheCollector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unbreakable Bond", 101, Rarity.UNCOMMON, mage.cards.u.UnbreakableBond.class));
@@ -426,8 +396,8 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Void Beckoner", 373, Rarity.UNCOMMON, mage.cards.v.VoidBeckoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Voracious Greatshark", 320, Rarity.RARE, mage.cards.v.VoraciousGreatshark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Voracious Greatshark", 70, Rarity.RARE, mage.cards.v.VoraciousGreatshark.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Vulpikeet", 282, Rarity.COMMON, mage.cards.v.Vulpikeet.class));
-        cards.add(new SetCardInfo("Vulpikeet", 37, Rarity.COMMON, mage.cards.v.Vulpikeet.class));
+        cards.add(new SetCardInfo("Vulpikeet", 282, Rarity.COMMON, mage.cards.v.Vulpikeet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vulpikeet", 37, Rarity.COMMON, mage.cards.v.Vulpikeet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weaponize the Monsters", 140, Rarity.UNCOMMON, mage.cards.w.WeaponizeTheMonsters.class));
         cards.add(new SetCardInfo("Whirlwind of Thought", 215, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whirlwind of Thought", 348, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class, NON_FULL_USE_VARIOUS));
@@ -452,8 +422,6 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Zilortha, Strength Incarnate", 275, Rarity.MYTHIC, mage.cards.z.ZilorthaStrengthIncarnate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zirda, the Dawnwaker", 233, Rarity.RARE, mage.cards.z.ZirdaTheDawnwaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zirda, the Dawnwaker", 360, Rarity.RARE, mage.cards.z.ZirdaTheDawnwaker.class, NON_FULL_USE_VARIOUS));
-
-        cards.removeIf(setCardInfo -> mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
     }
 
     @Override
