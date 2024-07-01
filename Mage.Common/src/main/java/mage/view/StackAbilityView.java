@@ -92,9 +92,7 @@ public class StackAbilityView extends CardView {
                 List<UUID> targetList = new ArrayList<>();
                 for (Effect effect : mode.getEffects()) {
                     TargetPointer targetPointer = effect.getTargetPointer();
-                    if (targetPointer instanceof FixedTarget) {
-                        targetList.add(((FixedTarget) targetPointer).getTarget());
-                    }
+                    targetList.addAll(targetPointer.getTargets(game, ability));
                 }
                 if (!targetList.isEmpty()) {
                     overrideTargets(targetList);

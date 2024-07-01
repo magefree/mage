@@ -9,6 +9,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.HideawayPlayEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.HideawayAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
@@ -25,7 +27,8 @@ import java.util.UUID;
 public final class HowltoothHollow extends CardImpl {
 
     private static final Condition condition
-            = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, null, TargetController.ANY);
+            = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, null, TargetController.EACH_PLAYER);
+    private static final Hint hint = new ConditionHint(condition, "Each player has no cards in hand");
 
     public HowltoothHollow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -43,6 +46,7 @@ public final class HowltoothHollow extends CardImpl {
                 "without paying its mana cost if each player has no cards in hand"
         ), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
+        ability.addHint(hint);
         this.addAbility(ability);
     }
 

@@ -5,7 +5,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReturnMORToBattlefieldUnderOwnerControlWithCounterEffect;
+import mage.abilities.effects.common.ReturnMORToBattlefieldUnderOwnerControlWithCounterEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

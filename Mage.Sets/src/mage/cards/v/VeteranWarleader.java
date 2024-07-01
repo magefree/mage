@@ -88,7 +88,7 @@ class VeteranWarleaderEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
-            Choice abilityChoice = new ChoiceImpl();
+            Choice abilityChoice = new ChoiceImpl(true);
             abilityChoice.setMessage("Choose an ability to add");
 
             Set<String> abilities = new HashSet<>();

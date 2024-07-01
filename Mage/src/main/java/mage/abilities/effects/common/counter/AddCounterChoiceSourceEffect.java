@@ -60,7 +60,7 @@ public class AddCounterChoiceSourceEffect extends OneShotEffect {
             return false;
         }
 
-        Choice counterChoice = new ChoiceImpl();
+        Choice counterChoice = new ChoiceImpl(true);
         counterChoice.setMessage("Choose counter type");
         counterChoice.setChoices(
                 this.counterTypes

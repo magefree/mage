@@ -35,6 +35,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final boolean AI_SIMULATE_ALL_BAD_AND_GOOD_TARGETS = false; // TODO: enable and do performance test (it's increase calculations by x2, but is it useful?)
 
+    // warning, simulated player do not restore own data by game rollback
     private final boolean isSimulatedPlayer;
     private transient ConcurrentLinkedQueue<Ability> allActions; // all possible abilities to play (copies with already selected targets)
     private final Player originalPlayer; // copy of the original player, source of choices/results in tests
@@ -52,6 +53,17 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
         this.isSimulatedPlayer = player.isSimulatedPlayer;
         // this.allActions = player.allActions; // dynamic, no need to copy
         this.originalPlayer = player.originalPlayer.copy();
+    }
+
+    @Override
+    public void restore(Player player) {
+        // simulated player can be created from any player type
+        if (!originalPlayer.getClass().equals(player.getClass())) {
+            throw new IllegalArgumentException("Wrong code usage: simulated player must use same player class all the time. Need "
+                    + originalPlayer.getClass().getSimpleName() + ", but try to restore " + player.getClass().getSimpleName());
+        }
+
+        super.restore(player.getRealPlayer());
     }
 
     @Override

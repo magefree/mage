@@ -80,7 +80,7 @@ class TazriStalwartSurvivorManaAbility extends ActivatedManaAbilityImpl {
                     && permanent
                     .getAbilities(game)
                     .stream()
-                    .filter(ability -> ability.isActivatedAbility())
+                    .filter(Ability::isActivatedAbility)
                     .map(Ability::getOriginalId)
                     .anyMatch(abilityId -> !source.getOriginalId().equals(abilityId));
         }
@@ -190,7 +190,7 @@ class TazriStalwartSurvivorManaEffect extends ManaEffect {
         if (controller == null || permanent == null) {
             return new Mana();
         }
-        Choice choice = new ChoiceImpl().setManaColorChoice(true);
+        Choice choice = new ChoiceImpl(false).setManaColorChoice(true);
         choice.setMessage("Pick a mana color");
         ObjectColor color = permanent.getColor(game);
         if (color.isWhite()) {

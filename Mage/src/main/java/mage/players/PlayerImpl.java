@@ -146,7 +146,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean idleTimeout;
 
     protected RangeOfInfluence range;
-    protected Set<UUID> inRange = new HashSet<>(); // players list in current range of influence (updates each turn)
+    protected Set<UUID> inRange = new HashSet<>(); // players list in current range of influence (updates each turn due rules)
 
     protected boolean isTestMode = false;
     protected boolean canGainLife = true;
@@ -309,6 +309,10 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public void restore(Player player) {
+        if (!(player instanceof PlayerImpl)) {
+            throw new IllegalArgumentException("Wrong code usage: can't restore from player class " + player.getClass().getName());
+        }
+
         this.name = player.getName();
         this.human = player.isHuman();
         this.life = player.getLife();
@@ -357,7 +361,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.attachments.addAll(player.getAttachments());
 
         this.inRange.clear();
-        this.inRange.addAll(player.getInRange());
+        this.inRange.addAll(((PlayerImpl) player).inRange);
         this.payLifeCostLevel = player.getPayLifeCostLevel();
         this.sacrificeCostFilter = player.getSacrificeCostFilter() != null
                 ? player.getSacrificeCostFilter().copy() : null;
@@ -579,16 +583,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public Set<UUID> getInRange() {
+    public boolean hasPlayerInRange(UUID checkingPlayerId) {
         if (inRange.isEmpty()) {
             // runtime check: inRange filled on beginTurn, but unit tests adds cards by cheat engine before game starting,
             // so inRange will be empty and some ETB effects can be broken (example: Spark Double puts direct to battlefield).
             // Cheat engine already have a workaround, so that error must not be visible in normal situation.
             // TODO: that's error possible on GameView call before real game start (too laggy players on starting???)
-            throw new IllegalStateException("Wrong code usage (game is not started, but you call getInRange in some effects).");
+            throw new IllegalStateException("Wrong code usage (game is not started, but you call hasPlayerInRange in some effects).");
         }
 
-        return inRange;
+        return inRange.contains(checkingPlayerId);
     }
 
     @Override
@@ -5130,7 +5134,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean hasOpponent(UUID playerToCheckId, Game game) {
         return !this.getId().equals(playerToCheckId)
                 && game.isOpponent(this, playerToCheckId)
-                && getInRange().contains(playerToCheckId);
+                && hasPlayerInRange(playerToCheckId);
     }
 
     @Override
@@ -5469,5 +5473,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public String toString() {
         return getName() + " (" + super.getClass().getSimpleName() + ")";
+    }
+
+    @Override
+    public Player getRealPlayer() {
+        return this;
     }
 }

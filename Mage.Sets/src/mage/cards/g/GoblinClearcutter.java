@@ -92,7 +92,7 @@ class GoblinClearCutterManaEffect extends ManaEffect {
         }
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Choice manaChoice = new ChoiceImpl();
+            Choice manaChoice = new ChoiceImpl(false);
             Set<String> choices = new LinkedHashSet<>();
             choices.add("Red");
             choices.add("Green");

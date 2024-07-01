@@ -440,7 +440,7 @@ public final class SystemUtil {
                             choices.put(ability.getId().toString(), object.getName() + ": " + ability.toString());
                         });
                         // TODO: set priority for us?
-                        Choice choice = new ChoiceImpl();
+                        Choice choice = new ChoiceImpl(false);
                         choice.setMessage("Choose playable ability to activate by opponent " + opponent.getName());
                         choice.setKeyChoices(choices);
                         if (feedbackPlayer.choose(Outcome.Detriment, choice, game) && choice.getChoiceKey() != null) {

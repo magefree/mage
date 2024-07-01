@@ -11,7 +11,7 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- * Cards in controller hand condition. This condition can decorate other
+ * Cards in hand condition. This condition can decorate other
  * conditions as well as be used standalone.
  *
  * @author LevelX
@@ -58,6 +58,16 @@ public class CardsInHandCondition implements Condition {
                     }
                     break;
                 case ANY:
+                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                        player = game.getPlayer(playerId);
+                        if (player != null) {
+                            if (ComparisonType.compare(player.getHand().size(), type, this.count)) {
+                                conditionApplies = true;
+                            }
+                        }
+                    }
+                    break;
+                case EACH_PLAYER:
                     boolean conflict = false;
                     for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                         player = game.getPlayer(playerId);

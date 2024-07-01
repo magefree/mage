@@ -4,6 +4,8 @@ syntax: glob
 **/db
 **/saved
 **/target
+#un-ignore target implementations
+!Mage/src/main/java/mage/target
 
 # logs and logs rotation
 *.log

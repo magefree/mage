@@ -993,7 +993,6 @@ public class CardView extends SimpleCardView {
                 && a.getManaCostStr().equals(b.getManaCostStr())
                 && a.getRules().equals(b.getRules())
                 && Objects.equals(a.getRarity(), b.getRarity())
-
                 && a.getFrameStyle() == b.getFrameStyle()
                 && Objects.equals(a.getCounters(), b.getCounters())
                 && a.isFaceDown() == b.isFaceDown())) {
@@ -1004,6 +1003,7 @@ public class CardView extends SimpleCardView {
                 && Objects.equals(a.getCardNumber(), b.getCardNumber())
                 && Objects.equals(a.getImageNumber(), b.getImageNumber())
                 && Objects.equals(a.getImageFileName(), b.getImageFileName())
+                && Objects.equals(a.getUsesVariousArt(), b.getUsesVariousArt())
         )) {
             return false;
         }

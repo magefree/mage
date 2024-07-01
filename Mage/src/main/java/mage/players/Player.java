@@ -277,6 +277,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void idleTimeout(Game game);
 
+    // TODO: research usage of !hasLeft() && !hasLost() replace it by isInGame() if possible
     boolean hasLeft();
 
     /**
@@ -296,7 +297,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     ManaPool getManaPool();
 
-    Set<UUID> getInRange();
+    /**
+     * Is checking player in range of current player.
+     * Warning, range list updates on start of the turn due rules.
+     */
+    boolean hasPlayerInRange(UUID checkingPlayerId);
 
     boolean isTopCardRevealed();
 
@@ -1250,4 +1255,10 @@ public interface Player extends MageItem, Copyable<Player> {
     }
 
     public UserData getControllingPlayersUserData(Game game);
+
+    /**
+     * Some player implementations (TestPlayer, Simulated) uses facade structure with hidden player object,
+     * so that's method helps to find real player that used by a game (in most use cases it's a PlayerImpl)
+     */
+    Player getRealPlayer();
 }
