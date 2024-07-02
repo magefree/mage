@@ -2,11 +2,12 @@ package mage.target.targetadjustment;
 
 import mage.abilities.Ability;
 import mage.filter.Filter;
+import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.TargetCard;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -15,6 +16,7 @@ import java.util.UUID;
  * @author notgreat
  */
 public class EachOpponentPermanentTargetsAdjuster extends GenericTargetAdjuster {
+    private final boolean owner;
 
     /**
      * Duplicates the permanent target for each opponent.
@@ -22,13 +24,18 @@ public class EachOpponentPermanentTargetsAdjuster extends GenericTargetAdjuster 
      * do not pass a blueprint target with a controller restriction filter/predicate.
      */
     public EachOpponentPermanentTargetsAdjuster() {
+        this(false);
+    }
+
+    public EachOpponentPermanentTargetsAdjuster(boolean owner) {
+        this.owner = owner;
     }
 
     @Override
     public void addDefaultTargets(Ability ability) {
         super.addDefaultTargets(ability);
-        if (!(blueprintTarget instanceof TargetPermanent)) {
-            throw new IllegalArgumentException("EachOpponentPermanentTargetsAdjuster must use Permanent target - " + blueprintTarget);
+        if (blueprintTarget instanceof TargetCard && !owner) {
+            throw new IllegalArgumentException("EachOpponentPermanentTargetsAdjuster has TargetCard but checking for Controller instead of Owner - " + blueprintTarget);
         }
         CardUtil.AssertNoControllerOwnerPredicates(blueprintTarget);
     }
@@ -43,8 +50,13 @@ public class EachOpponentPermanentTargetsAdjuster extends GenericTargetAdjuster 
             }
             Target newTarget = blueprintTarget.copy();
             Filter filter = newTarget.getFilter();
-            filter.add(new ControllerIdPredicate(opponentId));
-            newTarget.withTargetName(filter.getMessage() + " controlled by " + opponent.getLogName());
+            if (owner) {
+                filter.add(new OwnerIdPredicate(opponentId));
+                newTarget.withTargetName(filter.getMessage() + " (owned by " + opponent.getLogName() + ")");
+            } else {
+                filter.add(new ControllerIdPredicate(opponentId));
+                newTarget.withTargetName(filter.getMessage() + " (controlled by " + opponent.getLogName() + ")");
+            }
             ability.addTarget(newTarget);
         }
     }
