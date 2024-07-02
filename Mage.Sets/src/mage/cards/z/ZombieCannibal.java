@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class ZombieCannibal extends CardImpl {
 
-    private static final FilterCard filterGraveyardCard = new FilterCard("cards from that player's graveyard");
+    private static final FilterCard filterGraveyardCard = new FilterCard("card from that player's graveyard");
     public ZombieCannibal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add(SubType.ZOMBIE);

@@ -2,7 +2,7 @@ package mage.cards.q;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -54,7 +54,7 @@ public final class QuestingBeast extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new QuestingBeastPreventionEffect()));
 
         // Whenever Questing Beast deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DamageTargetEffect(SavedDamageValue.MUCH), false, true);
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(new DamageTargetEffect(SavedDamageValue.MUCH), false, true, true);
         ability.addTarget(new TargetPlaneswalkerPermanent(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
         this.addAbility(ability);

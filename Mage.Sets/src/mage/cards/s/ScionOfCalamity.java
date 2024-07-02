@@ -34,7 +34,7 @@ public final class ScionOfCalamity extends CardImpl {
         this.addAbility(new MyriadAbility(true));
 
         // Whenever Scion of Calamity deals combat damage to a player, destroy target artifact or enchantment that player controls.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), true, true);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true);
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
         this.addAbility(ability);

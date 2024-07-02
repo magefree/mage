@@ -51,6 +51,7 @@ public final class TimeReaper extends CardImpl {
         ability.addTarget(new TargetCardInExile(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
         ability.withFlavorWord("Consume Anomaly");
+        this.addAbility(ability);
     }
 
     private TimeReaper(final TimeReaper card) {

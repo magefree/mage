@@ -42,7 +42,7 @@ public final class EtrataTheSilencer extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
 
         // Whenever Etrata deals combat damage to a player, exile target creature that player controls and put a hit counter on that card. That player loses the game if they own three or more exiled card with hit counters on them. Etrata's owner shuffles Etrata into their library.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new EtrataTheSilencerEffect(), true, true);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new EtrataTheSilencerEffect(), false, true);
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
 

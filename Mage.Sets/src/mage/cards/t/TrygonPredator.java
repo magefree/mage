@@ -34,7 +34,7 @@ public final class TrygonPredator extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Trygon Predator deals combat damage to a player, you may destroy target artifact or enchantment that player controls.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), true, true);
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
         this.addAbility(ability);

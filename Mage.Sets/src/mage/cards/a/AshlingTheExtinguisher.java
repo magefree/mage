@@ -29,7 +29,7 @@ public final class AshlingTheExtinguisher extends CardImpl {
         // Whenever Ashling, the Extinguisher deals combat damage to a player, choose target creature that player controls. they sacrifice that creature.
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        Effect effect = new SacrificeTargetEffect().setText("choose target creature that player controls. they sacrifice that creature");
+        Effect effect = new SacrificeTargetEffect().setText("choose target creature that player controls. The player sacrifices that creature");
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetCreaturePermanent());
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
