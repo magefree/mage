@@ -23,8 +23,8 @@ public final class ReleaseTheGremlins extends CardImpl {
 
         // Destroy X target artifacts. 
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy X target artifacts"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
         // Create X 2/2 red Gremlin creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GremlinToken(), ManacostVariableValue.REGULAR));

@@ -33,6 +33,7 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.Targets;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.targetadjustment.GenericTargetAdjuster;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
 import mage.util.GameLog;
@@ -1430,7 +1431,11 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public AbilityImpl setTargetAdjuster(TargetAdjuster targetAdjuster) {
+        if (targetAdjuster instanceof GenericTargetAdjuster && this.getTargets().isEmpty()) {
+            throw new IllegalStateException("Target adjuster being added but no targets are set!");
+        }
         this.targetAdjuster = targetAdjuster;
+        this.targetAdjuster.addDefaultTargets(this);
         return this;
     }
 

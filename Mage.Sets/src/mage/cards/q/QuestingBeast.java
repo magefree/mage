@@ -2,8 +2,9 @@ package mage.cards.q;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DauntAbility;
@@ -13,23 +14,21 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.PreventDamageEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetPlaneswalkerPermanent;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author TheElk801, notgreat
  */
 public final class QuestingBeast extends CardImpl {
+    private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("planeswalker that player controls");
 
     public QuestingBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
@@ -55,7 +54,10 @@ public final class QuestingBeast extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new QuestingBeastPreventionEffect()));
 
         // Whenever Questing Beast deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls.
-        this.addAbility(new QuestingBeastTriggeredAbility());
+        Ability ability = new DealsDamageToOpponentTriggeredAbility(new DamageTargetEffect(SavedDamageValue.MUCH), false, true, true);
+        ability.addTarget(new TargetPlaneswalkerPermanent(filter));
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        this.addAbility(ability);
     }
 
     private QuestingBeast(final QuestingBeast card) {
@@ -98,50 +100,5 @@ class QuestingBeastPreventionEffect extends ContinuousRuleModifyingEffectImpl {
         return permanent != null
                 && permanent.isCreature(game)
                 && permanent.isControlledBy(source.getControllerId());
-    }
-}
-
-class QuestingBeastTriggeredAbility extends TriggeredAbilityImpl {
-
-    QuestingBeastTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, true);
-    }
-
-    private QuestingBeastTriggeredAbility(final QuestingBeastTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public QuestingBeastTriggeredAbility copy() {
-        return new QuestingBeastTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Player opponent = game.getPlayer(event.getPlayerId());
-        if (opponent == null
-                || !event.getSourceId().equals(this.getSourceId())
-                || !opponent.hasOpponent(this.getControllerId(), game)
-                || !((DamagedEvent) event).isCombatDamage()) {
-            return false;
-        }
-        this.getEffects().clear();
-        this.addEffect(new DamageTargetEffect(event.getAmount()));
-        FilterPermanent filter = new FilterPlaneswalkerPermanent("planeswalker " + opponent.getLogName() + " controls");
-        filter.add(new ControllerIdPredicate(opponent.getId()));
-        this.getTargets().clear();
-        this.addTarget(new TargetPermanent(filter));
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to an opponent, " +
-                "it deals that much damage to target planeswalker that player controls.";
     }
 }

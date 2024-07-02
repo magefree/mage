@@ -22,8 +22,8 @@ public final class StirTheGrave extends CardImpl {
 
         // Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect().setText("return target creature card with mana value X or less from your graveyard to the battlefield"));
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
     }
 
     private StirTheGrave(final StirTheGrave card) {

@@ -32,8 +32,8 @@ public final class IcyBlast extends CardImpl {
                 new LockedInCondition(FerociousCondition.instance));
         effect.setText("<br/><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 

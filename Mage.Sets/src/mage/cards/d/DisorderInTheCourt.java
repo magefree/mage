@@ -35,8 +35,8 @@ public final class DisorderInTheCourt extends CardImpl {
 
         // Exile X target creatures, then investigate X times. Return the exiled cards to the battlefield tapped under their owners' control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new DisorderInTheCourtEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private DisorderInTheCourt(final DisorderInTheCourt card) {

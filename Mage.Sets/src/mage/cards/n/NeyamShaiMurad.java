@@ -1,22 +1,19 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.constants.CardType;
-import mage.constants.Outcome;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +35,7 @@ public final class NeyamShaiMurad extends CardImpl {
 
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NeyamShaiMuradEffect(), true, true)
             .withFlavorWord("Rogue Trader")
-        );
+        ); //TODO: The first should target when triggered, not on resolution
     }
 
     private NeyamShaiMurad(final NeyamShaiMurad card) {

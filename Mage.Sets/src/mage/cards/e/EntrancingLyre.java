@@ -33,8 +33,8 @@ public final class EntrancingLyre extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
-        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         this.addAbility(ability);
     }
 

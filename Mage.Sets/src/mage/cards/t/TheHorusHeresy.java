@@ -57,8 +57,8 @@ public final class TheHorusHeresy extends CardImpl {
         // I -- For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as The Horus Heresy remains on the battlefield.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, ability -> {
             ability.addEffect(new TheHorusHeresyControlEffect());
-            ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
             ability.addTarget(new TargetPermanent(0, 1, filterNonlegendary));
+            ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         });
 
         // II -- Draw a card for each creature you control but don't own.

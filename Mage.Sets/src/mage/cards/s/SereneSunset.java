@@ -21,8 +21,8 @@ public final class SereneSunset extends CardImpl {
         // Prevent all combat damage X target creatures would deal this turn.
         this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true)
                 .setText("prevent all combat damage X target creatures would deal this turn"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private SereneSunset(final SereneSunset card) {

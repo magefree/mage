@@ -13,8 +13,7 @@ import mage.target.Target;
 /**
  * @author TheElk801, notgreat
  */
-public class PowerTargetAdjuster implements TargetAdjuster {
-    private Target blueprintTarget = null;
+public class PowerTargetAdjuster extends GenericTargetAdjuster {
     private final DynamicValue dynamicValue;
     private final ComparisonType comparison;
 
@@ -33,12 +32,9 @@ public class PowerTargetAdjuster implements TargetAdjuster {
         this(ManacostVariableValue.REGULAR, comparison);
     }
 
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (blueprintTarget == null) {
-            blueprintTarget = ability.getTargets().get(0).copy();
-            blueprintTarget.clearChosen();
-        }
         Target newTarget = blueprintTarget.copy();
         int amount = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
         Filter<MageObject> filter = newTarget.getFilter();

@@ -515,6 +515,10 @@ public interface Ability extends Controllable, Serializable {
 
     boolean canFizzle();
 
+    /**
+     * Adds a target adjuster to this ability.
+     * If using a generic adjuster, only use after adding the blueprint target!
+     */
     Ability setTargetAdjuster(TargetAdjuster targetAdjuster);
 
     TargetAdjuster getTargetAdjuster();

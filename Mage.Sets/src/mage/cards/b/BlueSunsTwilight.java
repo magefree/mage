@@ -31,8 +31,8 @@ public final class BlueSunsTwilight extends CardImpl {
                 new CreateTokenCopyTargetEffect(), BlueSunsTwilightCondition.instance,
                 "If X is 5 or more, create a token that's a copy of that creature"
         ));
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
     }
 
     private BlueSunsTwilight(final BlueSunsTwilight card) {

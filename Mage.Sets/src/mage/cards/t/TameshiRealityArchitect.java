@@ -56,8 +56,8 @@ public final class TameshiRealityArchitect extends CardImpl {
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(
                 new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND)
         ));
-        ability.setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactOrEnchantmentCard()));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.addAbility(ability);
     }
 

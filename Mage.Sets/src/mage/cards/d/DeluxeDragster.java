@@ -1,34 +1,36 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.card.OwnerIdPredicate;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801, Grath, xenohedron
+ * @author TheElk801, Grath, xenohedron, notgreat
  */
 public final class DeluxeDragster extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Vehicles");
+    private static final FilterCard filterCard = new FilterInstantOrSorceryCard("instant or sorcery card from that player's graveyard");
 
     static {
         filter.add(Predicates.not(SubType.VEHICLE.getPredicate()));
@@ -46,7 +48,14 @@ public final class DeluxeDragster extends CardImpl {
 
         // Whenever Deluxe Dragster deals combat damage to a player, you may cast target instant or sorcery card from
         // that player’s graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.
-        this.addAbility(new DeluxeDragsterTriggeredAbility());
+        OneShotEffect effect = new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true);
+        effect.setText("you may cast target instant or sorcery card from "
+                + "that player's graveyard without paying its mana cost. "
+                + ThatSpellGraveyardExileReplacementEffect.RULE_A);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
+        ability.addTarget(new TargetCardInGraveyard(filterCard));
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
+        this.addAbility(ability);
 
         // Crew 2
         this.addAbility(new CrewAbility(2));
@@ -59,51 +68,5 @@ public final class DeluxeDragster extends CardImpl {
     @Override
     public DeluxeDragster copy() {
         return new DeluxeDragster(this);
-    }
-}
-
-class DeluxeDragsterTriggeredAbility extends TriggeredAbilityImpl {
-
-    DeluxeDragsterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true)
-                .setText("you may cast target instant or sorcery card from "
-                        + "that player's graveyard without paying its mana cost. "
-                        + ThatSpellGraveyardExileReplacementEffect.RULE_A), false);
-        setTriggerPhrase("Whenever {this} deals combat damage to a player, ");
-    }
-
-    private DeluxeDragsterTriggeredAbility(final DeluxeDragsterTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DeluxeDragsterTriggeredAbility copy() {
-        return new DeluxeDragsterTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(this.sourceId) || !((DamagedPlayerEvent) event).isCombatDamage()) {
-            return false;
-        }
-        Player damagedPlayer = game.getPlayer(event.getTargetId());
-        if (damagedPlayer == null) {
-            return false;
-        }
-        FilterCard filter = new FilterCard("instant or sorcery card from that player's graveyard");
-        filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
-        filter.add(Predicates.or(
-                CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()
-        ));
-        Target target = new TargetCardInGraveyard(filter);
-        this.getTargets().clear();
-        this.addTarget(target);
-        return true;
     }
 }

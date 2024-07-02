@@ -35,8 +35,8 @@ public final class OpenSeason extends CardImpl {
         Effect effect = new AddCountersTargetEffect(CounterType.BOUNTY.createInstance());
         effect.setText("for each opponent, put a bounty counter on target creature that player controls");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);
-        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         this.addAbility(ability);
 
         // Creatures your opponent control with bounty counters on them can't activate abilities

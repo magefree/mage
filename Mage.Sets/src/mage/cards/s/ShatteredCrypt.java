@@ -27,8 +27,8 @@ public final class ShatteredCrypt extends CardImpl {
         effect.setText("Return X target creature cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private ShatteredCrypt(final ShatteredCrypt card) {

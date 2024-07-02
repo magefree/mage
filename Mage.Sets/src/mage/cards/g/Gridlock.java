@@ -20,8 +20,8 @@ public final class Gridlock extends CardImpl {
 
         // Tap X target nonland permanents.
         this.getSpellAbility().addEffect(new TapTargetEffect("tap X target nonland permanents"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private Gridlock(final Gridlock card) {

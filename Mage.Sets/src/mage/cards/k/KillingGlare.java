@@ -21,8 +21,8 @@ public final class KillingGlare extends CardImpl {
 
         // Destroy target creature with power X or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("destroy target creature with power X or less"));
-        this.getSpellAbility().setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
     }
 
     private KillingGlare(final KillingGlare card) {

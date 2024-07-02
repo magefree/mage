@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
 /**
@@ -13,7 +14,6 @@ public class TolarianContemptTest extends CardTestCommander4Players {
 
     @Test
     public void testEachOpponent() {
-
         addCard(Zone.HAND, playerA, "Tolarian Contempt");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerD, "Raging Goblin");
@@ -21,8 +21,9 @@ public class TolarianContemptTest extends CardTestCommander4Players {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tolarian Contempt", true);
 
-        addTarget(playerA, "Raging Goblin");
-        addTarget(playerA, "Memnite");
+        addTarget(playerA, "Raging Goblin"); //target playerD
+        addTarget(playerA, "Memnite"); //target playerC
+        addTarget(playerA, TestPlayer.TARGET_SKIP); //target playerB
         setChoice(playerD, true);
         setChoice(playerC, true);
 

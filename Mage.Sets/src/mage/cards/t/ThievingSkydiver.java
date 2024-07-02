@@ -51,8 +51,8 @@ public final class ThievingSkydiver extends CardImpl {
                 "If that artifact is an Equipment, attach it to {this}."
         );
         ability.addEffect(new ThievingSkydiverEffect());
-        ability.setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         ability.addTarget(new TargetArtifactPermanent());
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.addAbility(ability);
     }
 

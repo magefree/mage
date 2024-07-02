@@ -30,8 +30,8 @@ public final class CurseOfTheSwine extends CardImpl {
         this.getSpellAbility().addEffect(new CurseOfTheSwineEffect());
 
         // Correct number of targets will be set in adjustTargets
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
     }
 

@@ -1,36 +1,33 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Mode;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
- * @author TheElk801
+ * @author TheElk801. notgreat
  */
 public final class EtrataTheSilencer extends CardImpl {
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("creature that player controls");
 
     public EtrataTheSilencer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
@@ -45,7 +42,11 @@ public final class EtrataTheSilencer extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
 
         // Whenever Etrata deals combat damage to a player, exile target creature that player controls and put a hit counter on that card. That player loses the game if they own three or more exiled card with hit counters on them. Etrata's owner shuffles Etrata into their library.
-        this.addAbility(new EtrataTheSilencerTriggeredAbility());
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new EtrataTheSilencerEffect(), false, true);
+        ability.addTarget(new TargetPermanent(filter));
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+
+        this.addAbility(ability);
     }
 
     private EtrataTheSilencer(final EtrataTheSilencer card) {
@@ -55,53 +56,6 @@ public final class EtrataTheSilencer extends CardImpl {
     @Override
     public EtrataTheSilencer copy() {
         return new EtrataTheSilencer(this);
-    }
-}
-
-class EtrataTheSilencerTriggeredAbility extends TriggeredAbilityImpl {
-
-    public EtrataTheSilencerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new EtrataTheSilencerEffect());
-    }
-
-    private EtrataTheSilencerTriggeredAbility(final EtrataTheSilencerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EtrataTheSilencerTriggeredAbility copy() {
-        return new EtrataTheSilencerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
-            Player opponent = game.getPlayer(event.getPlayerId());
-            if (opponent != null) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
-                filter.add(new ControllerIdPredicate(opponent.getId()));
-                this.getTargets().clear();
-                this.addTarget(new TargetCreaturePermanent(filter));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, "
-                + "exile target creature that player controls "
-                + "and put a hit counter on that card. "
-                + "That player loses the game if they own three or more "
-                + "exiled cards with hit counters on them. "
-                + "{this}'s owner shuffles {this} into their library.";
     }
 }
 
@@ -156,5 +110,14 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         }
         controller.shuffleLibrary(source, game);
         return true;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return "exile target creature that player controls "
+                + "and put a hit counter on that card. "
+                + "That player loses the game if they own three or more "
+                + "exiled cards with hit counters on them. "
+                + "{this}'s owner shuffles {this} into their library";
     }
 }

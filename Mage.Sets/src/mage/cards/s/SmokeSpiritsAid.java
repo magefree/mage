@@ -23,8 +23,8 @@ public final class SmokeSpiritsAid extends CardImpl {
 
         // For each of up to X target creatures, create a red Aura enchantment token named Smoke Blessing attached to that creature. Those tokens have enchant creature and "When enchanted creature dies, it deals 1 damage to its controller and you create a Treasure token."
         this.getSpellAbility().addEffect(new SmokeSpiritsAidEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private SmokeSpiritsAid(final SmokeSpiritsAid card) {

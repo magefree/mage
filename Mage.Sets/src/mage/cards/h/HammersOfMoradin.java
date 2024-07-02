@@ -37,8 +37,8 @@ public final class HammersOfMoradin extends CardImpl {
                         .setTargetPointer(new EachTargetPointer())
                         .setText("for each opponent, tap up to one target creature that player controls")
         );
-        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         ability.addTarget(new TargetCreaturePermanent(0,1));
+        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         this.addAbility(ability);
     }
 

@@ -29,8 +29,8 @@ public final class BackInTown extends CardImpl {
         // Return X target outlaw creature cards from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("return X target outlaw creature cards from your graveyard to the battlefield"));
-        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(ManacostVariableValue.REGULAR));
     }
 
     private BackInTown(final BackInTown card) {

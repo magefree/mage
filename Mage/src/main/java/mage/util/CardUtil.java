@@ -26,7 +26,11 @@ import mage.counters.Counter;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.GameState;
@@ -2077,6 +2081,15 @@ public final class CardUtil {
 
     public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
         return stream.filter(clazz::isInstance).map(clazz::cast).filter(Objects::nonNull);
+    }
+
+    public static void AssertNoControllerOwnerPredicates(Target target) {
+        List<Predicate> list = new ArrayList<>();
+        Predicates.collectAllComponents(target.getFilter().getPredicates(), target.getFilter().getExtraPredicates(), list);
+        if (list.stream().anyMatch(p -> p instanceof TargetController.ControllerPredicate || p instanceof TargetController.OwnerPredicate
+                || p instanceof OwnerIdPredicate || p instanceof ControllerIdPredicate)) {
+            throw new IllegalArgumentException("Wrong code usage: target adjuster will add controller/owner predicate, but target's filter already has one - " + target);
+        }
     }
 
     /**
