@@ -15,12 +15,11 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +29,7 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class SepulchralPrimordial extends CardImpl {
+    private static final FilterCard filter = new FilterCreatureCard("creature card from that player's graveyard");
 
     public SepulchralPrimordial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
@@ -44,7 +44,8 @@ public final class SepulchralPrimordial extends CardImpl {
         // When Sepulchral Primordial enters the battlefield, for each opponent, you may put up to one
         // target creature card from that player's graveyard onto the battlefield under your control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SepulchralPrimordialEffect(), false);
-        ability.setTargetAdjuster(SepulchralPrimordialAdjuster.instance);
+        ability.addTarget(new TargetCardInOpponentsGraveyard(0, 1, filter));
+        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(true));
         this.addAbility(ability);
     }
 
@@ -55,24 +56,6 @@ public final class SepulchralPrimordial extends CardImpl {
     @Override
     public SepulchralPrimordial copy() {
         return new SepulchralPrimordial(this);
-    }
-}
-
-enum SepulchralPrimordialAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
-                FilterCard filter = new FilterCreatureCard("creature card from " + opponent.getName() + "'s graveyard");
-                filter.add(new OwnerIdPredicate(opponentId));
-                TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(0, 1, filter);
-                ability.addTarget(target);
-            }
-        }
     }
 }
 

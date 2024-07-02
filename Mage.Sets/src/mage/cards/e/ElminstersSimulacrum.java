@@ -10,7 +10,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -26,7 +26,7 @@ public final class ElminstersSimulacrum extends CardImpl {
         // For each opponent, you create a token that's a copy of up to one target creature that player controls.
         this.getSpellAbility().addEffect(new ElminstersSimulacrumAdjusterEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,1));
-        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
     }
 
     private ElminstersSimulacrum(final ElminstersSimulacrum card) {

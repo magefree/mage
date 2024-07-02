@@ -5,7 +5,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetNonlandPermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -24,7 +24,7 @@ public final class WindgracesJudgment extends CardImpl {
                 .setText("For any number of opponents, destroy target nonland permanent that player controls")
         );
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(0, 1));
-        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
     }
 
     private WindgracesJudgment(final WindgracesJudgment card) {

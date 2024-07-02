@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -38,7 +38,7 @@ public final class HammersOfMoradin extends CardImpl {
                         .setText("for each opponent, tap up to one target creature that player controls")
         );
         ability.addTarget(new TargetCreaturePermanent(0,1));
-        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         this.addAbility(ability);
     }
 

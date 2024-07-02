@@ -49,7 +49,7 @@ public final class TimeReaper extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new PutOnLibraryTargetEffect(false), false, true);
         ability.addEffect(new GainLifeEffect(3)); //I don't think the move can fail? If there's no target then the trigger won't happen
         ability.addTarget(new TargetCardInExile(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
         ability.withFlavorWord("Consume Anomaly");
         this.addAbility(ability);
     }
