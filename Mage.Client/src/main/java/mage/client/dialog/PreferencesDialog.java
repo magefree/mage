@@ -13,6 +13,8 @@ import mage.client.util.ImageHelper;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.BufferedImageBuilder;
 import static mage.constants.Constants.*;
+
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
@@ -299,7 +301,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_PROXY_REMEMBER = "proxyRemember";
     public static final String KEY_PROXY_TYPE = "proxyType";
     public static final String KEY_PROXY_PSWD = "proxyPassword";
-    public static final String KEY_CONNECTION_URL_SERVER_LIST = "connectionURLServerList";
 
     // news
     public static final String KEY_NEWS_PAGE_LAST_VERSION = "newsPageLastVersion";
@@ -592,13 +593,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel32 = new javax.swing.JPanel();
         jPanel33 = new javax.swing.JPanel();
         tabConnection = new javax.swing.JPanel();
-        connection_servers = new javax.swing.JPanel();
-        lblURLServerList = new javax.swing.JLabel();
-        txtURLServerList = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        lblProxyType = new javax.swing.JLabel();
+        connection_Proxy = new javax.swing.JPanel();
         cbProxyType = new javax.swing.JComboBox<>();
-        pnlProxySettings = new javax.swing.JPanel();
         pnlProxy = new javax.swing.JPanel();
         lblProxyServer = new javax.swing.JLabel();
         txtProxyServer = new javax.swing.JTextField();
@@ -694,7 +690,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tooltipDelayLabel.setText("Delay in milliseconds for showing the card tooltip text (0 value will disable tooltip)");
         tooltipDelayLabel.setToolTipText("<HTML>The time the appearance of the tooltip window for a card is delayed.<br>\nIf set to zero, the tooltip window won't be shown at all.");
 
-        tooltipDelay.setMajorTickSpacing(1000);
+        tooltipDelay.setMajorTickSpacing(500);
         tooltipDelay.setMaximum(5000);
         tooltipDelay.setMinorTickSpacing(100);
         tooltipDelay.setPaintLabels(true);
@@ -2336,56 +2332,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Avatars", tabAvatars);
 
-        connection_servers.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Servers"));
-
-        lblURLServerList.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblURLServerList.setText("URL server list:");
-        lblURLServerList.setToolTipText("");
-        lblURLServerList.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        lblURLServerList.setPreferredSize(new java.awt.Dimension(110, 16));
-        lblURLServerList.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        txtURLServerList.setToolTipText("The URL XMage tries to read a server list from.");
-        txtURLServerList.setPreferredSize(new java.awt.Dimension(300, 22));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
-        jLabel17.setText("e.g.: http://XMage.de/files/server-list.txt");
-
-        org.jdesktop.layout.GroupLayout connection_serversLayout = new org.jdesktop.layout.GroupLayout(connection_servers);
-        connection_servers.setLayout(connection_serversLayout);
-        connection_serversLayout.setHorizontalGroup(
-            connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(connection_serversLayout.createSequentialGroup()
-                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(connection_serversLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(lblURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(txtURLServerList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 370, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(connection_serversLayout.createSequentialGroup()
-                        .add(141, 141, 141)
-                        .add(jLabel17)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        connection_serversLayout.setVerticalGroup(
-            connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(connection_serversLayout.createSequentialGroup()
-                .add(connection_serversLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(lblURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(txtURLServerList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel17))
-        );
-
-        lblProxyType.setText("Proxy:");
+        connection_Proxy.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proxy for server connection and images download"));
 
         cbProxyType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbProxyTypeActionPerformed(evt);
             }
         });
-
-        pnlProxySettings.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblProxyServer.setText("Server:");
 
@@ -2408,24 +2361,28 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(pnlProxyLayout.createSequentialGroup()
-                        .add(rememberPswd)
-                        .add(47, 47, 47)
-                        .add(jLabel11)
-                        .add(34, 34, 34))
+                        .add(lblProxyServer)
+                        .add(39, 39, 39)
+                        .add(txtProxyServer))
                     .add(pnlProxyLayout.createSequentialGroup()
                         .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(lblProxyPort)
-                            .add(lblProxyPassword)
-                            .add(lblProxyServer)
-                            .add(lblProxyUserName))
-                        .add(19, 19, 19)
-                        .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(txtProxyPort, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 58, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, txtPasswordField)
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, txtProxyUserName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 148, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(txtProxyServer))
-                        .addContainerGap())))
+                            .add(pnlProxyLayout.createSequentialGroup()
+                                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(lblProxyPort)
+                                    .add(lblProxyPassword)
+                                    .add(lblProxyUserName))
+                                .add(19, 19, 19)
+                                .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(txtProxyPort, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 58, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, txtPasswordField)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, txtProxyUserName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 148, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                            .add(pnlProxyLayout.createSequentialGroup()
+                                .add(rememberPswd)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(jLabel11)))
+                        .add(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pnlProxyLayout.setVerticalGroup(
             pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2446,26 +2403,33 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(txtPasswordField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(lblProxyPassword))
-                .add(18, 18, 18)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(pnlProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(rememberPswd)
                     .add(jLabel11))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        org.jdesktop.layout.GroupLayout pnlProxySettingsLayout = new org.jdesktop.layout.GroupLayout(pnlProxySettings);
-        pnlProxySettings.setLayout(pnlProxySettingsLayout);
-        pnlProxySettingsLayout.setHorizontalGroup(
-            pnlProxySettingsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlProxySettingsLayout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout connection_ProxyLayout = new org.jdesktop.layout.GroupLayout(connection_Proxy);
+        connection_Proxy.setLayout(connection_ProxyLayout);
+        connection_ProxyLayout.setHorizontalGroup(
+            connection_ProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(connection_ProxyLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(pnlProxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(connection_ProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(connection_ProxyLayout.createSequentialGroup()
+                        .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(0, 629, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlProxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        pnlProxySettingsLayout.setVerticalGroup(
-            pnlProxySettingsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlProxySettingsLayout.createSequentialGroup()
-                .add(pnlProxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        connection_ProxyLayout.setVerticalGroup(
+            connection_ProxyLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(connection_ProxyLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(pnlProxy, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -2473,34 +2437,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabConnection.setLayout(tabConnectionLayout);
         tabConnectionLayout.setHorizontalGroup(
             tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, tabConnectionLayout.createSequentialGroup()
+            .add(tabConnectionLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(pnlProxySettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, tabConnectionLayout.createSequentialGroup()
-                        .add(lblProxyType)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(connection_servers, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(connection_Proxy, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         tabConnectionLayout.setVerticalGroup(
             tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabConnectionLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(connection_servers, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(tabConnectionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblProxyType)
-                    .add(cbProxyType, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(pnlProxySettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(connection_Proxy, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
-
-        tabsPanel.addTab("Connection", tabConnection);
+        tabsPanel.addTab("Proxy", tabConnection);
 
         labelNextTurn.setText("Next Turn:");
 
@@ -2872,7 +2821,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
             char[] input = txtPasswordField.getPassword();
             prefs.put(KEY_PROXY_PSWD, new String(input));
         }
-        save(prefs, dialog.txtURLServerList, KEY_CONNECTION_URL_SERVER_LIST);
 
         // controls
         save(prefs, dialog.keyConfirm);
@@ -3110,17 +3058,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
         switch (proxyType) {
-            case SOCKS:
-                this.pnlProxy.setVisible(true);
-                this.pnlProxySettings.setVisible(true);
-                break;
             case HTTP:
-                this.pnlProxy.setVisible(true);
-                this.pnlProxySettings.setVisible(true);
+            case SOCKS:
+                GuiDisplayUtil.setPanelEnabled(this.pnlProxy, true);
                 break;
             case NONE:
-                this.pnlProxy.setVisible(false);
-                this.pnlProxySettings.setVisible(false);
+                GuiDisplayUtil.setPanelEnabled(this.pnlProxy, false);
                 break;
             default:
                 break;
@@ -3383,7 +3326,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (dialog.rememberPswd.isSelected()) {
             load(prefs, dialog.txtPasswordField, KEY_PROXY_PSWD, "");
         }
-        load(prefs, dialog.txtURLServerList, KEY_CONNECTION_URL_SERVER_LIST, "http://XMage.de/files/server-list.txt");
     }
 
     private static void loadControlSettings(Preferences prefs) {
@@ -3900,7 +3842,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxMainYou;
     private javax.swing.JCheckBox checkBoxUpkeepOthers;
     private javax.swing.JCheckBox checkBoxUpkeepYou;
-    private javax.swing.JPanel connection_servers;
+    private javax.swing.JPanel connection_Proxy;
     private javax.swing.JLabel controlsDescriptionLabel;
     private javax.swing.JCheckBox displayLifeOnAvatar;
     private javax.swing.JButton exitButton;
@@ -3909,7 +3851,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel guiSizeGame;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabelBeforeCombat;
     private javax.swing.JLabel jLabelDraw;
     private javax.swing.JLabel jLabelEndOfTurn;
@@ -3986,10 +3927,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblProxyPassword;
     private javax.swing.JLabel lblProxyPort;
     private javax.swing.JLabel lblProxyServer;
-    private javax.swing.JLabel lblProxyType;
     private javax.swing.JLabel lblProxyUserName;
     private javax.swing.JLabel lblTargetAutoChoose;
-    private javax.swing.JLabel lblURLServerList;
     private javax.swing.JLabel lebelSkip;
     private javax.swing.JPanel main_battlefield;
     private javax.swing.JPanel main_card;
@@ -4001,7 +3940,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel panelCardStyles;
     private javax.swing.JPanel phases_stopSettings;
     private javax.swing.JPanel pnlProxy;
-    private javax.swing.JPanel pnlProxySettings;
     private javax.swing.JCheckBox rememberPswd;
     private javax.swing.JButton saveButton;
     private javax.swing.JCheckBox showAbilityPickerForced;
@@ -4044,7 +3982,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtProxyPort;
     private javax.swing.JTextField txtProxyServer;
     private javax.swing.JTextField txtProxyUserName;
-    private javax.swing.JTextField txtURLServerList;
     // End of variables declaration//GEN-END:variables
 
     private static final PreferencesDialog dialog = new PreferencesDialog(new javax.swing.JFrame(), true);
