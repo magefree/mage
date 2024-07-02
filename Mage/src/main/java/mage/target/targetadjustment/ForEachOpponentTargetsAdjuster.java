@@ -15,7 +15,7 @@ import java.util.UUID;
 /**
  * @author notgreat
  */
-public class EachOpponentPermanentTargetsAdjuster extends GenericTargetAdjuster {
+public class ForEachOpponentTargetsAdjuster extends GenericTargetAdjuster {
     private final boolean owner;
 
     /**
@@ -23,11 +23,11 @@ public class EachOpponentPermanentTargetsAdjuster extends GenericTargetAdjuster 
      * Filtering of permanent's controllers will be handled inside, so
      * do not pass a blueprint target with a controller restriction filter/predicate.
      */
-    public EachOpponentPermanentTargetsAdjuster() {
+    public ForEachOpponentTargetsAdjuster() {
         this(false);
     }
 
-    public EachOpponentPermanentTargetsAdjuster(boolean owner) {
+    public ForEachOpponentTargetsAdjuster(boolean owner) {
         this.owner = owner;
     }
 

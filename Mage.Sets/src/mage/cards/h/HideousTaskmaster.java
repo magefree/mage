@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -42,7 +42,7 @@ public final class HideousTaskmaster extends CardImpl {
                 new GainControlTargetEffect(Duration.EndOfTurn).setTargetPointer(new EachTargetPointer()).setText(
                         "for each opponent, gain control of up to one target creature that player controls until end of turn"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
-        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         ability.addEffect(
                 new UntapTargetEffect().setTargetPointer(new EachTargetPointer()).setText("Untap those creatures"));
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)

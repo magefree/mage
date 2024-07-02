@@ -22,7 +22,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.HashSet;
@@ -58,7 +58,7 @@ public final class TheHorusHeresy extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, ability -> {
             ability.addEffect(new TheHorusHeresyControlEffect());
             ability.addTarget(new TargetPermanent(0, 1, filterNonlegendary));
-            ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+            ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         });
 
         // II -- Draw a card for each creature you control but don't own.

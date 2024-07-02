@@ -9,7 +9,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -32,7 +32,7 @@ public final class TemptedByTheOriq extends CardImpl {
                 .setText("for each opponent, gain control of up to one target creature " +
                         "or planeswalker that player controls with mana value 3 or less"));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter));
-        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
     }
 
     private TemptedByTheOriq(final TemptedByTheOriq card) {

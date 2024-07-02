@@ -19,7 +19,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -52,7 +52,7 @@ public final class TheBalrogOfMoria extends CardImpl {
             false
         );
         reflexiveAbility.addTarget(new TargetCreaturePermanent(0,1));
-        reflexiveAbility.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        reflexiveAbility.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
 
         this.addAbility(new DiesSourceTriggeredAbility(
             new DoWhenCostPaid(
