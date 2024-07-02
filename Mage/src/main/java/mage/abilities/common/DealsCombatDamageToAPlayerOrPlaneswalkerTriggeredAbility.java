@@ -7,20 +7,29 @@ import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author xenohedron
  */
 public class DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility extends TriggeredAbilityImpl {
 
+    protected final boolean setTargetPointer;
+
     public DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, false);
+    }
+
+    public DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         setTriggerPhrase("Whenever {this} deals combat damage to a player or planeswalker, ");
+        this.setTargetPointer = setTargetPointer;
     }
 
 
     protected DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(final DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility ability) {
         super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -47,6 +56,9 @@ public class DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility extends Tr
             }
         }
         getAllEffects().setValue("damage", event.getAmount());
+        if (setTargetPointer) {
+            getAllEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+        }
         return true;
     }
 
