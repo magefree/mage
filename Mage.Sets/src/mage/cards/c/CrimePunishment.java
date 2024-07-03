@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -15,6 +14,9 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 public final class CrimePunishment extends SplitCard {
 
@@ -69,7 +71,7 @@ class PunishmentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (permanent != null
-                    && permanent.getManaValue() == source.getManaCostsToPay().getX()
+                    && permanent.getManaValue() == CardUtil.getSourceCostsTag(game, source, "X", 0)
                     && (permanent.isArtifact(game)
                     || permanent.isCreature(game)
                     || permanent.isEnchantment(game))) {

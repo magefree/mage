@@ -12,6 +12,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -63,7 +64,7 @@ class FinaleOfRevelationEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         if (xValue < 10) {
             player.drawCards(xValue, source, game);

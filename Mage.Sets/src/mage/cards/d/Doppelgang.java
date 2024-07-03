@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -56,7 +57,7 @@ class DoppelgangEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (xValue < 1) {
             return false;
         }

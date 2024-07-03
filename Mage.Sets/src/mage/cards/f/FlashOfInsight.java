@@ -16,6 +16,7 @@ import mage.constants.PutCards;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -58,7 +59,7 @@ enum FlashOfInsightValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int xValue = sourceAbility.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
         for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof ExileXFromYourGraveCost) {
                 xValue = ((ExileXFromYourGraveCost) cost).getAmount();

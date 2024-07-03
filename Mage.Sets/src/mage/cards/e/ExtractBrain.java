@@ -61,7 +61,7 @@ class ExtractBrainEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (controller == null || opponent == null || opponent.getHand().isEmpty() || xValue < 1) {
             return false;
         }

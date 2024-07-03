@@ -15,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
+import mage.util.CardUtil;
 import mage.util.ManaUtil;
 
 import java.util.List;
@@ -67,7 +68,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
             Player controller = game.getPlayer(source.getControllerId());
             MageObject sourceObject = game.getObject(source);
             if (player != null && controller != null && sourceObject != null) {
-                int amount = source.getManaCostsToPay().getX();
+                int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
                 if (amount > 0) {
                     Cost cost = ManaUtil.createManaCost(amount, true);
                     if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to prevent?", source, game)) {

@@ -25,6 +25,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -128,6 +129,6 @@ class ChamberSentryRemoveVariableCountersSourceCost extends VariableCostImpl {
 
     @Override
     public int announceXValue(Ability source, Game game) {
-        return source.getManaCostsToPay().getX();
+        return CardUtil.getSourceCostsTag(game, source, "X", 0);
     }
 }

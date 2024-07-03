@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -55,7 +56,7 @@ class StormKingsThunderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.addDelayedTriggeredAbility(new StormKingsThunderAbility(source.getManaCostsToPay().getX()), source);
+        game.addDelayedTriggeredAbility(new StormKingsThunderAbility(CardUtil.getSourceCostsTag(game, source, "X", 0)), source);
         return true;
     }
 }

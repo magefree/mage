@@ -15,6 +15,7 @@ import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -61,7 +62,7 @@ enum HeliodsInterventionAdjuster implements TargetAdjuster {
         }
         mode.getTargets().clear();
         mode.addTarget(new TargetPermanent(
-                ability.getManaCostsToPay().getX(), StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT
+                CardUtil.getSourceCostsTag(game, ability, "X", 0), StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT
         ));
     }
 }

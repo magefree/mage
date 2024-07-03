@@ -14,6 +14,7 @@ import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.InklingToken;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -56,6 +57,6 @@ enum BlotOutTheSkyCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.getManaCostsToPay().getX() >= 6;
+        return CardUtil.getSourceCostsTag(game, source, "X", 0) >= 6;
     }
 }

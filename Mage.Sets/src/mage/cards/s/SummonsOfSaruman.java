@@ -56,7 +56,7 @@ enum SummonsOfSarumanVariableValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int xValue = sourceAbility.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
         for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof ExileXFromYourGraveCost) {
                 xValue = ((ExileXFromYourGraveCost) cost).getAmount();

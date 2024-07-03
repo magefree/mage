@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,6 +9,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.OozeToken;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,7 +50,7 @@ class SlimeMoldingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int count = source.getManaCostsToPay().getX();
+        int count = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         OozeToken oozeToken = new OozeToken();
         oozeToken.setPower(count);
