@@ -31,6 +31,7 @@ import mage.client.tournament.TournamentPane;
 import mage.client.util.*;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.ArrowBuilder;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.client.util.sets.ConstructedFormats;
 import mage.client.util.stats.UpdateMemUsageTask;
@@ -229,33 +230,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         config.setArchiveDetector(new TArchiveDetector("zip"));
         config.setAccessPreference(FsAccessOption.STORE, true);
 
-        try {
-            UIManager.put("desktop", new Color(0, 0, 0, 0));
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        // apply current theme
+        GUISizeHelper.calculateGUISizes();
+        GuiDisplayUtil.refreshThemeSettings();
 
-            UIManager.put("nimbusBlueGrey", PreferencesDialog.getCurrentTheme().getNimbusBlueGrey()); // buttons, scrollbar background, disabled inputs
-            UIManager.put("control", PreferencesDialog.getCurrentTheme().getControl()); // window bg
-            UIManager.put("nimbusLightBackground", PreferencesDialog.getCurrentTheme().getNimbusLightBackground()); // inputs, table rows
-            UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
-            UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
-
-            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            // stop JSplitPane from eating F6 and F8 or any other function keys
-            {
-                Object value = UIManager.get("SplitPane.ancestorInputMap");
-
-                if (value instanceof InputMap) {
-                    InputMap map = (InputMap) value;
-                    for (int vk = KeyEvent.VK_F2; vk <= KeyEvent.VK_F12; ++vk) {
-                        map.remove(KeyStroke.getKeyStroke(vk, 0));
-                    }
-                }
+        // workaround to stop JSplitPane from eating F6 and F8 or any other function keys
+        Object value = UIManager.get("SplitPane.ancestorInputMap");
+        if (value instanceof InputMap) {
+            InputMap map = (InputMap) value;
+            for (int vk = KeyEvent.VK_F2; vk <= KeyEvent.VK_F12; ++vk) {
+                map.remove(KeyStroke.getKeyStroke(vk, 0));
             }
-
-            GUISizeHelper.calculateGUISizes();
-            // UIManager.put("Table.rowHeight", GUISizeHelper.tableRowHeight);
-        } catch (Exception ex) {
-            LOGGER.fatal(null, ex);
         }
 
         // other settings
@@ -1529,7 +1514,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         // Needed to layout the tooltbar after text length change
         // TODO: need research, is it actual?
-        GUISizeHelper.refreshGUIAndCards();
+        GUISizeHelper.refreshGUIAndCards(false);
 
         this.btnConnect.repaint();
         this.btnConnect.revalidate();

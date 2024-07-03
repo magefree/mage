@@ -344,16 +344,23 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static ThemeType currentTheme = null;
 
-    private static boolean ignoreGUISizeSliderStateChangedEvent = false;
+    // prevent fast settings apply on form loading
+    private static boolean isLoadingSizes = false;
+    private static boolean isLoadingTheme = false;
 
     public static ThemeType getCurrentTheme() {
         if (currentTheme == null) {
-            currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default"));
-            logger.info("Using GUI theme: " + currentTheme.getName());
-            currentTheme.reload();
+            // first init
+            loadTheme();
         }
 
         return currentTheme;
+    }
+
+    private static void loadTheme() {
+        currentTheme = ThemeType.valueByName(getCachedValue(KEY_THEME, "Default"));
+        logger.info("Using GUI theme: " + currentTheme.getName());
+        currentTheme.reload();
     }
 
     /**
@@ -362,8 +369,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
      * @param newTheme
      */
     public static void setCurrentTheme(ThemeType newTheme) {
+        boolean needReload = currentTheme != newTheme;
         currentTheme = newTheme;
-        currentTheme.reload();
+        if (needReload) {
+            currentTheme.reload();
+        }
     }
 
     private final JFileChooser fc = new JFileChooser();
@@ -2603,13 +2613,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
         themesCategory.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Themes"));
 
         lbSelectLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbSelectLabel.setText("Select a theme:");
+        lbSelectLabel.setText("Color style:");
         lbSelectLabel.setToolTipText("");
         lbSelectLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         lbSelectLabel.setPreferredSize(new java.awt.Dimension(110, 16));
         lbSelectLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        lbThemeHint.setText("Requires a restart to apply new theme.");
+        cbTheme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbThemeActionPerformed(evt);
+            }
+        });
+
+        lbThemeHint.setText("WARNING, some color settings will be applied after app RESTART");
 
         org.jdesktop.layout.GroupLayout themesCategoryLayout = new org.jdesktop.layout.GroupLayout(themesCategory);
         themesCategory.setLayout(themesCategoryLayout);
@@ -2618,45 +2634,41 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(themesCategoryLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(lbSelectLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(lbThemeHint)
-                    .add(cbTheme, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 303, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(360, Short.MAX_VALUE))
+                    .add(cbTheme, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 313, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         themesCategoryLayout.setVerticalGroup(
             themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(themesCategoryLayout.createSequentialGroup()
+                .addContainerGap()
                 .add(themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(cbTheme, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(lbSelectLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(lbThemeHint)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(lbThemeHint))
         );
 
         org.jdesktop.layout.GroupLayout tabThemesLayout = new org.jdesktop.layout.GroupLayout(tabThemes);
         tabThemes.setLayout(tabThemesLayout);
         tabThemesLayout.setHorizontalGroup(
             tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 807, Short.MAX_VALUE)
-            .add(tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(tabThemesLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .add(themesCategory, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, tabThemesLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(themesCategory, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         tabThemesLayout.setVerticalGroup(
             tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 556, Short.MAX_VALUE)
-            .add(tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(tabThemesLayout.createSequentialGroup()
-                    .add(21, 21, 21)
-                    .add(themesCategory, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(460, Short.MAX_VALUE)))
+            .add(tabThemesLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(themesCategory, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        tabsPanel.addTab("Themes", tabThemes);
+        tabsPanel.addTab("GUI theme", tabThemes);
 
         saveButton.setLabel("Save");
         saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
@@ -2747,7 +2759,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         }
 
-        saveGUISize();
+        saveGUISize(false, false);
 
         // Phases & Priority
         save(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
@@ -2811,7 +2823,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             MusicPlayer.stopBGM();
         }
 
-        // connection
+        // proxy
         save(prefs, dialog.cbProxyType, KEY_PROXY_TYPE);
         save(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS);
         save(prefs, dialog.txtProxyPort, KEY_PROXY_PORT);
@@ -2836,7 +2848,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.keySwitchChat);
 
         // Themes
-        save(prefs, dialog.cbTheme, KEY_THEME);
+        saveTheme(false);
 
         // Avatar
         if (selectedAvatarId < MIN_AVATAR_ID || selectedAvatarId > MAX_AVATAR_ID) {
@@ -2845,6 +2857,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         prefs.put(KEY_AVATAR, String.valueOf(selectedAvatarId));
         updateCache(KEY_AVATAR, String.valueOf(selectedAvatarId));
 
+        // refresh full GUI
+        GUISizeHelper.refreshGUIAndCards(true);
+
+        // send server side settings
         try {
             SessionHandler.updatePreferencesForServer(getUserData());
             prefs.flush();
@@ -2858,7 +2874,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
         dialog.setVisible(false);
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void saveGUISize() {
+    private void saveTheme(boolean refreshTheme) {
+        Preferences prefs = MageFrame.getPreferences();
+        save(prefs, dialog.cbTheme, KEY_THEME);
+
+        if (refreshTheme) {
+            loadTheme();
+        }
+    }
+
+    private void saveGUISize(boolean refreshGUI, boolean refreshTheme) {
         Preferences prefs = MageFrame.getPreferences();
 
         // GUI Size
@@ -2876,8 +2901,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.sliderCardSizeMinBattlefield, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.sliderCardSizeMaxBattlefield, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, "true", "false", UPDATE_CACHE_POLICY);
 
-        // refresh full GUI with new settings
-        GUISizeHelper.refreshGUIAndCards();
+        // refresh full GUI with new settings (except theme)
+        if (refreshGUI) {
+            GUISizeHelper.refreshGUIAndCards(refreshTheme);
+        }
     }
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -3048,12 +3075,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cbUseDefaultImageFolderActionPerformed
 
     private void sliderGUISizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderGUISizeStateChanged
-        // This prevents this event from firing during the initial
-        // setting of the sliders from pref values
-        if (!ignoreGUISizeSliderStateChangedEvent) {
-            saveGUISize();
+        if (!isLoadingSizes) {
+            saveGUISize(true, false); // do not refresh theme cause it heavy and stop active slider
         }
     }//GEN-LAST:event_sliderGUISizeStateChanged
+
+    private void cbThemeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbThemeActionPerformed
+        if (!isLoadingTheme) {
+            saveTheme(true);
+        }
+    }//GEN-LAST:event_cbThemeActionPerformed
 
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
@@ -3128,7 +3159,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 // Sounds
                 loadSoundSettings(prefs);
 
-                // Connection
+                // Proxy
                 loadProxySettings(prefs);
 
                 // Controls
@@ -3221,21 +3252,24 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadGuiSize(Preferences prefs) {
-        ignoreGUISizeSliderStateChangedEvent = true;
-        load(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "14");
-        load(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "14");
-        load(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "14");
-        load(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "14");
-        load(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "14");
-        load(prefs, dialog.sliderEnlargedImageSize, KEY_GUI_ENLARGED_IMAGE_SIZE, "20");
-        load(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "14");
-        load(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "14");
-        load(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "14");
-        load(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "14");
-        load(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "14");
-        load(prefs, dialog.sliderCardSizeMinBattlefield, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, "10");
-        load(prefs, dialog.sliderCardSizeMaxBattlefield, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, "14");
-        ignoreGUISizeSliderStateChangedEvent = false;
+        isLoadingSizes = true;
+        try {
+            load(prefs, dialog.sliderFontSize, KEY_GUI_TABLE_FONT_SIZE, "14");
+            load(prefs, dialog.sliderChatFontSize, KEY_GUI_CHAT_FONT_SIZE, "14");
+            load(prefs, dialog.sliderCardSizeHand, KEY_GUI_CARD_HAND_SIZE, "14");
+            load(prefs, dialog.sliderEditorCardSize, KEY_GUI_CARD_EDITOR_SIZE, "14");
+            load(prefs, dialog.sliderEditorCardOffset, KEY_GUI_CARD_OFFSET_SIZE, "14");
+            load(prefs, dialog.sliderEnlargedImageSize, KEY_GUI_ENLARGED_IMAGE_SIZE, "20");
+            load(prefs, dialog.sliderStackWidth, KEY_GUI_STACK_WIDTH, "14");
+            load(prefs, dialog.sliderDialogFont, KEY_GUI_DIALOG_FONT_SIZE, "14");
+            load(prefs, dialog.sliderTooltipSize, KEY_GUI_TOOLTIP_SIZE, "14");
+            load(prefs, dialog.sliderGameFeedbackArea, KEY_GUI_FEEDBACK_AREA_SIZE, "14");
+            load(prefs, dialog.sliderCardSizeOtherZones, KEY_GUI_CARD_OTHER_ZONES_SIZE, "14");
+            load(prefs, dialog.sliderCardSizeMinBattlefield, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, "10");
+            load(prefs, dialog.sliderCardSizeMaxBattlefield, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, "14");
+        } finally {
+            isLoadingSizes = false;
+        }
     }
 
     private static void loadImagesSettings(Preferences prefs) {
@@ -3343,7 +3377,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadThemeSettings(Preferences prefs) {
-        dialog.cbTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
+        isLoadingTheme = true;
+        try {
+            dialog.cbTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
+        } finally {
+            isLoadingTheme = false;
+        }
     }
 
     private static void loadSelectedAvatar(Preferences prefs) {

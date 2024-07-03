@@ -2,14 +2,16 @@ package mage.client.util;
 
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.util.gui.GuiDisplayUtil;
 import org.mage.card.arcane.CardRenderer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
 
 /**
- * @author LevelX2
+ * Helper class for GUI
+ *
+ * @author LevelX2, JayDi85
  */
 public final class GUISizeHelper {
 
@@ -83,8 +85,17 @@ public final class GUISizeHelper {
         return new Font("Arial", Font.PLAIN, 14);
     }
 
-    public static void refreshGUIAndCards() {
+    /**
+     * Reset all caches and reload all GUI with actual settings.
+     * Use it after GUI settings change like colors/fonts/sizes.
+     *
+     * @param reloadTheme use it after theme changes only
+     */
+    public static void refreshGUIAndCards(boolean reloadTheme) {
         calculateGUISizes();
+        if (reloadTheme) {
+            GuiDisplayUtil.refreshThemeSettings();
+        }
         if (MageFrame.getInstance() != null) {
             MageFrame.getInstance().refreshGUIAndCards();
         }

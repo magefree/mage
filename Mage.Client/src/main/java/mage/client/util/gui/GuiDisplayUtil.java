@@ -2,7 +2,6 @@ package mage.client.util.gui;
 
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
-import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
 import mage.client.table.PlayersChatPanel;
 import mage.client.util.GUISizeHelper;
 import mage.constants.*;
@@ -10,6 +9,7 @@ import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 import net.java.truevfs.access.TFile;
+import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
@@ -19,8 +19,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
+import java.util.stream.Collectors;
 
+import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
+
+/**
+ * Helper class for GUI
+ *
+ * @author JayDi85
+ */
 public final class GuiDisplayUtil {
+
+    private static final Logger logger = Logger.getLogger(GuiDisplayUtil.class);
 
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
     private static final Insets DEFAULT_INSETS = new Insets(0, 0, 70, 25);
@@ -451,5 +461,63 @@ public final class GuiDisplayUtil {
             }
             component.setEnabled(isEnabled);
         }
+    }
+
+    /**
+     * Fast refresh of GUI settings after theme change.
+     * Warning, use it for:
+     * - startup (before any components create)
+     * - preview only (for settings dialog)
+     * Existing hidden components can miss new settings (will render with old colors), so only app restart can help.
+     */
+    public static void refreshThemeSettings() {
+        // apply Nimbus's look and fill
+        // possible settings:
+        // https://docs.oracle.com/en%2Fjava%2Fjavase%2F17%2Fdocs%2Fapi%2F%2F/java.desktop/javax/swing/plaf/nimbus/doc-files/properties.html
+
+        // enable nimbus
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException
+                 | InstantiationException
+                 | IllegalAccessException
+                 | UnsupportedLookAndFeelException e) {
+            logger.error("Can't apply current theme: " + PreferencesDialog.getCurrentTheme() + " - " + e, e);
+        }
+
+        // enable new style from current theme
+        //UIManager.put("desktop", new Color(0, 0, 0, 0));
+        UIManager.put("nimbusBlueGrey", PreferencesDialog.getCurrentTheme().getNimbusBlueGrey()); // buttons, scrollbar background, disabled inputs
+        UIManager.put("control", PreferencesDialog.getCurrentTheme().getControl()); // window bg
+        UIManager.put("nimbusLightBackground", PreferencesDialog.getCurrentTheme().getNimbusLightBackground()); // inputs, table rows
+        UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
+        UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
+
+        //UIManager.put("nimbusDisabledText", Color.green); // TODO: improve disabled color
+        //UIManager.put("Table.rowHeight", GUISizeHelper.tableRowHeight);
+
+        // for debug only - print full LaF params
+        if (false) {
+            System.out.println("");
+            System.out.println(UIManager.getLookAndFeel().getDefaults().size());
+            String s = UIManager.getLookAndFeel().getDefaults().keySet().stream()
+                    .map(key -> key + " = " + UIManager.getLookAndFeel().getDefaults().get(key))
+                    .sorted()
+                    .collect(Collectors.joining("\n"));
+            System.out.println("");
+            System.out.println(s);
+        }
+
+        // re-render existing components with new style
+        for (Frame frame : Frame.getFrames()) {
+            refreshLookAndFill(frame);
+        }
+    }
+
+    private static void refreshLookAndFill(Window window) {
+        for (Window childWindow : window.getOwnedWindows()) {
+            refreshLookAndFill(childWindow);
+        }
+        SwingUtilities.updateComponentTreeUI(window);
     }
 }

@@ -163,15 +163,6 @@ public final class UI {
         }
     }
 
-    public static void setSystemLookAndFeel() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            System.err.println("Error setting look and feel:");
-            ex.printStackTrace();
-        }
-    }
-
     public static void setDefaultFont(Font font) {
         for (Object key : Collections.list(UIManager.getDefaults().keys())) {
             Object value = UIManager.get(key);

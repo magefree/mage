@@ -713,7 +713,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         enableDialogButtons();
 
         // reset GUI and cards to use new images
-        GUISizeHelper.refreshGUIAndCards();
+        GUISizeHelper.refreshGUIAndCards(false);
     }
 
     static String convertStreamToString(InputStream is) {
