@@ -556,14 +556,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbCardRenderShowReminderText = new javax.swing.JCheckBox();
         cbCardRenderHideSetSymbol = new javax.swing.JCheckBox();
         cbCardRenderShowAbilityTextOverlay = new javax.swing.JCheckBox();
-        panelBackgroundImages = new javax.swing.JPanel();
-        cbUseDefaultBackground = new javax.swing.JCheckBox();
-        txtBackgroundImagePath = new javax.swing.JTextField();
-        btnBrowseBackgroundImage = new javax.swing.JButton();
-        txtBattlefieldImagePath = new javax.swing.JTextField();
-        btnBrowseBattlefieldImage = new javax.swing.JButton();
-        cbUseDefaultBattleImage = new javax.swing.JCheckBox();
-        cbUseRandomBattleImage = new javax.swing.JCheckBox();
         tabSounds = new javax.swing.JPanel();
         sounds_clips = new javax.swing.JPanel();
         cbEnableGameSounds = new javax.swing.JCheckBox();
@@ -646,6 +638,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
         lbSelectLabel = new javax.swing.JLabel();
         cbTheme = new javax.swing.JComboBox<>();
         lbThemeHint = new javax.swing.JLabel();
+        panelBackgroundImages = new javax.swing.JPanel();
+        cbUseDefaultBackground = new javax.swing.JCheckBox();
+        txtBackgroundImagePath = new javax.swing.JTextField();
+        btnBrowseBackgroundImage = new javax.swing.JButton();
+        txtBattlefieldImagePath = new javax.swing.JTextField();
+        btnBrowseBattlefieldImage = new javax.swing.JButton();
+        cbUseDefaultBattleImage = new javax.swing.JCheckBox();
+        cbUseRandomBattleImage = new javax.swing.JCheckBox();
         saveButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
@@ -1644,7 +1644,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                         .add(cbNumberOfDownloadThreads, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                         .add(labelHint1)))))
-                        .add(0, 0, Short.MAX_VALUE)))
+                        .add(0, 122, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelCardImagesLayout.setVerticalGroup(
@@ -1689,83 +1689,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbCardRenderShowAbilityTextOverlay.setText("Show ability text as overlay in big card view");
         panelCardStyles.add(cbCardRenderShowAbilityTextOverlay);
 
-        panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images"));
-
-        cbUseDefaultBackground.setText("Use default location for backgrounds");
-        cbUseDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUseDefaultBackgroundActionPerformed(evt);
-            }
-        });
-
-        btnBrowseBackgroundImage.setText("Browse...");
-        btnBrowseBackgroundImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBrowseBackgroundImageActionPerformed(evt);
-            }
-        });
-
-        btnBrowseBattlefieldImage.setText("Browse...");
-        btnBrowseBattlefieldImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBrowseBattlefieldImageActionPerformed(evt);
-            }
-        });
-
-        cbUseDefaultBattleImage.setText("Use default battlefield image");
-        cbUseDefaultBattleImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUseDefaultBattleImageActionPerformed(evt);
-            }
-        });
-
-        cbUseRandomBattleImage.setText("Use random background");
-        cbUseRandomBattleImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUseRandomBattleImageActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout panelBackgroundImagesLayout = new org.jdesktop.layout.GroupLayout(panelBackgroundImages);
-        panelBackgroundImages.setLayout(panelBackgroundImagesLayout);
-        panelBackgroundImagesLayout.setHorizontalGroup(
-            panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelBackgroundImagesLayout.createSequentialGroup()
-                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(panelBackgroundImagesLayout.createSequentialGroup()
-                        .add(cbUseDefaultBackground)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(txtBackgroundImagePath)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(btnBrowseBackgroundImage))
-                    .add(panelBackgroundImagesLayout.createSequentialGroup()
-                        .add(cbUseRandomBattleImage)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(txtBattlefieldImagePath)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(btnBrowseBattlefieldImage))
-                    .add(panelBackgroundImagesLayout.createSequentialGroup()
-                        .add(cbUseDefaultBattleImage)
-                        .add(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        panelBackgroundImagesLayout.setVerticalGroup(
-            panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelBackgroundImagesLayout.createSequentialGroup()
-                .add(cbUseDefaultBattleImage)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(cbUseDefaultBackground)
-                    .add(txtBackgroundImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnBrowseBackgroundImage))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(cbUseRandomBattleImage)
-                    .add(txtBattlefieldImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(btnBrowseBattlefieldImage))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         org.jdesktop.layout.GroupLayout tabImagesLayout = new org.jdesktop.layout.GroupLayout(tabImages);
         tabImages.setLayout(tabImagesLayout);
         tabImagesLayout.setHorizontalGroup(
@@ -1774,8 +1697,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .add(tabImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(panelCardImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(panelCardStyles, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(panelCardStyles, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabImagesLayout.setVerticalGroup(
@@ -1785,9 +1707,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(panelCardStyles, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
@@ -2613,7 +2533,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         themesCategory.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Themes"));
 
         lbSelectLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbSelectLabel.setText("Color style:");
+        lbSelectLabel.setText("GUI color style:");
         lbSelectLabel.setToolTipText("");
         lbSelectLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         lbSelectLabel.setPreferredSize(new java.awt.Dimension(110, 16));
@@ -2625,7 +2545,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        lbThemeHint.setText("WARNING, some color settings will be applied after app RESTART");
+        lbThemeHint.setText("<html><b>WARNING</b>, some color settings and images will be applied after app RESTART");
 
         org.jdesktop.layout.GroupLayout themesCategoryLayout = new org.jdesktop.layout.GroupLayout(themesCategory);
         themesCategory.setLayout(themesCategoryLayout);
@@ -2636,7 +2556,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(lbSelectLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 96, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(themesCategoryLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lbThemeHint)
+                    .add(lbThemeHint, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(cbTheme, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 313, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -2648,16 +2568,101 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(cbTheme, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(lbSelectLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(lbThemeHint))
+                .add(lbThemeHint, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        );
+
+        panelBackgroundImages.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images"));
+
+        cbUseDefaultBackground.setText("Use default app's background");
+        cbUseDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseDefaultBackgroundActionPerformed(evt);
+            }
+        });
+
+        btnBrowseBackgroundImage.setText("Browse...");
+        btnBrowseBackgroundImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrowseBackgroundImageActionPerformed(evt);
+            }
+        });
+
+        btnBrowseBattlefieldImage.setText("Browse...");
+        btnBrowseBattlefieldImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrowseBattlefieldImageActionPerformed(evt);
+            }
+        });
+
+        cbUseDefaultBattleImage.setText("Use default battlefield's background (from theme)");
+        cbUseDefaultBattleImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseDefaultBattleImageActionPerformed(evt);
+            }
+        });
+
+        cbUseRandomBattleImage.setText("Use random background from path .\\xmage\\mage-client\\backgrounds");
+        cbUseRandomBattleImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUseRandomBattleImageActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout panelBackgroundImagesLayout = new org.jdesktop.layout.GroupLayout(panelBackgroundImages);
+        panelBackgroundImages.setLayout(panelBackgroundImagesLayout);
+        panelBackgroundImagesLayout.setHorizontalGroup(
+            panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelBackgroundImagesLayout.createSequentialGroup()
+                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(panelBackgroundImagesLayout.createSequentialGroup()
+                        .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(cbUseDefaultBackground)
+                            .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                .add(cbUseDefaultBattleImage)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(cbUseRandomBattleImage)))
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(panelBackgroundImagesLayout.createSequentialGroup()
+                        .add(21, 21, 21)
+                        .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                .add(txtBattlefieldImagePath)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(btnBrowseBattlefieldImage))
+                            .add(panelBackgroundImagesLayout.createSequentialGroup()
+                                .add(txtBackgroundImagePath)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(btnBrowseBackgroundImage)))))
+                .addContainerGap())
+        );
+        panelBackgroundImagesLayout.setVerticalGroup(
+            panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelBackgroundImagesLayout.createSequentialGroup()
+                .add(cbUseDefaultBackground)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(txtBackgroundImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnBrowseBackgroundImage))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(cbUseDefaultBattleImage)
+                    .add(cbUseRandomBattleImage))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panelBackgroundImagesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(txtBattlefieldImagePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnBrowseBattlefieldImage))
+                .addContainerGap())
         );
 
         org.jdesktop.layout.GroupLayout tabThemesLayout = new org.jdesktop.layout.GroupLayout(tabThemes);
         tabThemes.setLayout(tabThemesLayout);
         tabThemesLayout.setHorizontalGroup(
             tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, tabThemesLayout.createSequentialGroup()
+            .add(tabThemesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(themesCategory, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(tabThemesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, themesCategory, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabThemesLayout.setVerticalGroup(
@@ -2665,10 +2670,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .add(tabThemesLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(themesCategory, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        tabsPanel.addTab("GUI theme", tabThemes);
+        tabsPanel.addTab("GUI Theme", tabThemes);
 
         saveButton.setLabel("Save");
         saveButton.setMaximumSize(new java.awt.Dimension(100, 30));
