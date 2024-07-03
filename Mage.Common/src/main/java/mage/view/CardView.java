@@ -743,18 +743,10 @@ public class CardView extends SimpleCardView {
         }
 
         // icon - x cost
-        if (showCard != null
-                && showCard.getManaCost().containsX()
-                && showAbility != null
+        if (showCard != null && showAbility != null
+                && (showCard.getManaCost().containsX() || CardUtil.checkSourceCostsTagExists(game, showAbility, "X"))
                 && (showZone.match(Zone.BATTLEFIELD) || showZone.match(Zone.STACK))) {
-            int costX;
-            if (showCard instanceof Permanent) {
-                // permanent on battlefield (can show x icon multiple turns, so use end_game source)
-                costX = ManacostVariableValue.instance.calculate(game, showAbility, null);
-            } else {
-                // other like Stack (can show x icon on stack only, so use normal source)
-                costX = ManacostVariableValue.instance.calculate(game, showAbility, null);
-            }
+            int costX = ManacostVariableValue.instance.calculate(game, showAbility, null);
             this.cardIcons.add(CardIconImpl.variableCost(costX));
         }
 
