@@ -462,17 +462,18 @@ public enum ImageManagerImpl implements ImageManager {
     private static BufferedImage imageDlgNextButton;
     private static BufferedImage imageDlgActiveNextButton;
 
-    private static BufferedImage imageCancelSkipButton;
-    private static BufferedImage imageSwitchHandsButton;
-    private static BufferedImage imageStopWatchingButton;
-    private static BufferedImage imageConcedeButton;
-    private static BufferedImage imageSkipNextTurnButton;
-    private static BufferedImage imageSkipToEndTurnButton;
-    private static BufferedImage imageSkipToMainButton;
-    private static BufferedImage imageSkipStackButton;
-    private static BufferedImage imageSkipUntilEndStepBeforeYourTurnButton;
-    private static BufferedImage imageSkipYourNextTurnButton;
-    private static BufferedImage imageToggleRecordMacroButton;
+    // TODO: enable buttons and related GUI refresh on theme change
+    private static BufferedImage imageCancelSkipButton; // theme depends
+    private static BufferedImage imageSwitchHandsButton; // theme depends
+    private static BufferedImage imageStopWatchingButton; // theme depends
+    private static BufferedImage imageConcedeButton; // theme depends
+    private static BufferedImage imageSkipNextTurnButton; // theme depends
+    private static BufferedImage imageSkipToEndTurnButton; // theme depends
+    private static BufferedImage imageSkipToMainButton; // theme depends
+    private static BufferedImage imageSkipStackButton; // theme depends
+    private static BufferedImage imageSkipUntilEndStepBeforeYourTurnButton; // theme depends
+    private static BufferedImage imageSkipYourNextTurnButton; // theme depends
+    private static BufferedImage imageToggleRecordMacroButton; // theme depends
 
-    private static Map<String, Image> phasesImages;
+    private static Map<String, Image> phasesImages; // theme depends
 }

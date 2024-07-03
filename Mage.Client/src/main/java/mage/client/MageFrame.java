@@ -306,7 +306,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         errorDialog = new ErrorDialog();
         errorDialog.setLocation(100, 100);
         desktopPane.add(errorDialog, JLayeredPane.MODAL_LAYER);
-        UI.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
         PING_SENDER_EXECUTOR.scheduleAtFixedRate(SessionHandler::ping, TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
 
@@ -316,6 +315,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         tablesPane = new TablesPane();
         desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
         SwingUtilities.invokeLater(this::hideServerLobby);
+
+        // save links for global/shared components
+        UI.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
+        UI.addComponent(MageComponents.DESKTOP_TOOLBAR, mageToolbar);
 
         addTooltipContainer();
         setBackground();

@@ -1,6 +1,7 @@
 package mage.client.util.gui;
 
 import mage.client.MageFrame;
+import mage.client.components.MageComponents;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.table.PlayersChatPanel;
 import mage.client.util.GUISizeHelper;
@@ -512,6 +513,17 @@ public final class GuiDisplayUtil {
         for (Frame frame : Frame.getFrames()) {
             refreshLookAndFill(frame);
         }
+
+        // re-render hidden/shared components
+        Arrays.stream(MageComponents.values()).forEach(compName -> {
+            try {
+                Component comp = MageFrame.getUI().getComponent(compName, false);
+                if (comp != null) {
+                    SwingUtilities.updateComponentTreeUI(comp);
+                }
+            } catch (InterruptedException ignore) {
+            }
+        });
     }
 
     private static void refreshLookAndFill(Window window) {
