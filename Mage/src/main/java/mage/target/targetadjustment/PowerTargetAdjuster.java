@@ -29,7 +29,7 @@ public class PowerTargetAdjuster extends GenericTargetAdjuster {
     }
 
     public PowerTargetAdjuster(ComparisonType comparison) {
-        this(ManacostVariableValue.REGULAR, comparison);
+        this(ManacostVariableValue.instance, comparison);
     }
 
 

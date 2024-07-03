@@ -80,7 +80,7 @@ class DisorderInTheCourtEffect extends OneShotEffect {
             controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
             game.processAction();
         }
-        new InvestigateEffect(ManacostVariableValue.REGULAR).apply(game, source);
+        new InvestigateEffect(ManacostVariableValue.instance).apply(game, source);
         if (!toExile.isEmpty()) {
             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, true);
             effect.setTargetPointer(new FixedTargets(toExile

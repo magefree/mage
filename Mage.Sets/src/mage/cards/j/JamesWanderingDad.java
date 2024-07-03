@@ -45,7 +45,7 @@ public final class JamesWanderingDad extends AdventureCard {
         // Instant — Adventure
         // Investigate X times.
         this.getSpellCard().getSpellAbility().addEffect(
-                new InvestigateEffect(ManacostVariableValue.REGULAR)
+                new InvestigateEffect(ManacostVariableValue.instance)
                         .setText("Investigate X times")
         );
 

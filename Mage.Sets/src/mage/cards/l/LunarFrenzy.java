@@ -24,7 +24,7 @@ public final class LunarFrenzy extends CardImpl {
 
         // Target creature you control gets +X/+0 and gains first strike and trample until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn
+                ManacostVariableValue.instance, StaticValue.get(0), Duration.EndOfTurn
         ).setText("target creature you control gets +X/+0"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn

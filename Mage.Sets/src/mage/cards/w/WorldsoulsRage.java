@@ -31,7 +31,7 @@ public final class WorldsoulsRage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{G}");
 
         // Worldsoul's Rage deals X damage to any target. Put up to X land cards from your hand and/or graveyard onto the battlefield tapped.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addEffect(new WorldsoulsRageEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

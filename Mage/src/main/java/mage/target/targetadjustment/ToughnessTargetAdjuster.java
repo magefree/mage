@@ -29,7 +29,7 @@ public class ToughnessTargetAdjuster extends GenericTargetAdjuster {
     }
 
     public ToughnessTargetAdjuster(ComparisonType comparison) {
-        this(ManacostVariableValue.REGULAR, comparison);
+        this(ManacostVariableValue.instance, comparison);
     }
 
     @Override

@@ -27,7 +27,7 @@ public final class ReleaseTheGremlins extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
         // Create X 2/2 red Gremlin creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new GremlinToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new GremlinToken(), ManacostVariableValue.instance));
 
     }
 

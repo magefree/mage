@@ -22,8 +22,8 @@ public final class CutOfTheProfits extends CardImpl {
         this.addAbility(new CasualtyAbility(3));
 
         // You draw X cards and you lose X life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR, "you"));
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.REGULAR).concatBy("and"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance, "you"));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.instance).concatBy("and"));
     }
 
     private CutOfTheProfits(final CutOfTheProfits card) {

@@ -34,7 +34,7 @@ public final class TheManaRig extends CardImpl {
 
         // {X}{X}{X}, {T}: Look at the top X cards of your library. Put up to two of them into your hand and the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
-                ManacostVariableValue.REGULAR, 2, PutCards.HAND, PutCards.BOTTOM_RANDOM, true
+                ManacostVariableValue.instance, 2, PutCards.HAND, PutCards.BOTTOM_RANDOM, true
                 ).setText("Look at the top X cards of your library. " +
                 "Put up to two of them into your hand and the rest on the bottom of your library in a random order"),
                 new ManaCostsImpl<>("{X}{X}{X}")

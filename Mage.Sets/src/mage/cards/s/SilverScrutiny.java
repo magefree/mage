@@ -30,7 +30,7 @@ public final class SilverScrutiny extends CardImpl {
         ));
 
         // Draw X cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
     }
 
     private SilverScrutiny(final SilverScrutiny card) {

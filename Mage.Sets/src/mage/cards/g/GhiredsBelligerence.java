@@ -31,7 +31,7 @@ public final class GhiredsBelligerence extends CardImpl {
 
         // Ghired's Belligerence deals X damage divided as you choose among any number of target creatures. Whenever a creature dealt damage this way dies this turn, populate.
         this.getSpellAbility().addEffect(new GhiredsBelligerenceEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(ManacostVariableValue.instance));
     }
 
     private GhiredsBelligerence(final GhiredsBelligerence card) {
@@ -46,7 +46,7 @@ public final class GhiredsBelligerence extends CardImpl {
 
 class GhiredsBelligerenceEffect extends OneShotEffect {
 
-    private static final DamageMultiEffect effect = new DamageMultiEffect(ManacostVariableValue.REGULAR);
+    private static final DamageMultiEffect effect = new DamageMultiEffect(ManacostVariableValue.instance);
 
     GhiredsBelligerenceEffect() {
         super(Outcome.Benefit);

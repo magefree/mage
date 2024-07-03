@@ -58,7 +58,7 @@ public final class BronzebeakForagers extends CardImpl {
                 new ManaCostsImpl<>("{X}{W}")
         );
         dissolveAbility.setTargetAdjuster(BronzebeakForagerDissolveAdjuster.instance);
-        dissolveAbility.addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        dissolveAbility.addEffect(new GainLifeEffect(ManacostVariableValue.instance));
         this.addAbility(dissolveAbility);
     }
 

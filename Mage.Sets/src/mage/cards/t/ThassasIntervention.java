@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class ThassasIntervention extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.instance, 2);
 
     public ThassasIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
@@ -27,7 +27,7 @@ public final class ThassasIntervention extends CardImpl {
         // Choose one-
         // • Look at the top X cards of your library. Put up to two of them into your hand and the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                ManacostVariableValue.REGULAR, 2, PutCards.HAND, PutCards.BOTTOM_RANDOM, true));
+                ManacostVariableValue.instance, 2, PutCards.HAND, PutCards.BOTTOM_RANDOM, true));
 
         // • Counter target spell unless its controller pays twice {X}.
         Mode mode = new Mode(new CounterUnlessPaysEffect(xValue)

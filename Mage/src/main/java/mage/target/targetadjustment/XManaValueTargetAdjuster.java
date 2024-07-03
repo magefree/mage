@@ -9,10 +9,10 @@ import mage.constants.ComparisonType;
 public class XManaValueTargetAdjuster extends ManaValueTargetAdjuster {
 
     public XManaValueTargetAdjuster() {
-        super(ManacostVariableValue.REGULAR, ComparisonType.EQUAL_TO);
+        super(ManacostVariableValue.instance, ComparisonType.EQUAL_TO);
     }
 
     public XManaValueTargetAdjuster(ComparisonType comparison) {
-        super(ManacostVariableValue.REGULAR, comparison);
+        super(ManacostVariableValue.instance, comparison);
     }
 }

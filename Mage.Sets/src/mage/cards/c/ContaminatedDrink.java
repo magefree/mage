@@ -21,9 +21,9 @@ public final class ContaminatedDrink extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{B}");
 
         // Draw X cards, then you get half X rad counters, rounded up.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
         this.getSpellAbility().addEffect(new AddCountersPlayersEffect(
-                CounterType.RAD.createInstance(), new HalfValue(ManacostVariableValue.REGULAR, true), TargetController.YOU
+                CounterType.RAD.createInstance(), new HalfValue(ManacostVariableValue.instance, true), TargetController.YOU
         ).setText(", then you get half X rad counters, rounded up"));
     }
 

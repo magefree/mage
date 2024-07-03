@@ -32,7 +32,7 @@ public final class SequenceEngine extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(FractalToken.getEffect(
-                ManacostVariableValue.REGULAR, "Put X +1/+1 counters on it"
+                ManacostVariableValue.instance, "Put X +1/+1 counters on it"
         ));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         ability.setTargetAdjuster(new XManaValueTargetAdjuster());

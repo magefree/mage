@@ -70,7 +70,7 @@ class SporocystEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
+        int xValue = ManacostVariableValue.instance.calculate(game, source, this);
         return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
                 0, xValue, StaticFilters.FILTER_CARD_BASIC_LANDS
         ), true).apply(game, source);

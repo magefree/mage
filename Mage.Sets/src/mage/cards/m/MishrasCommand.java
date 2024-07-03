@@ -41,17 +41,17 @@ public final class MishrasCommand extends CardImpl {
 
         // * This spell deals X damage to target creature.
         this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(
-                ManacostVariableValue.REGULAR, "this spell"
+                ManacostVariableValue.instance, "this spell"
         )).addTarget(new TargetCreaturePermanent()));
 
         // * This spell deals X damage to target planeswalker.
         this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(
-                ManacostVariableValue.REGULAR, "this spell"
+                ManacostVariableValue.instance, "this spell"
         )).addTarget(new TargetPlaneswalkerPermanent()));
 
         // * Target creature gets +X/+0 and gains haste until end of turn.
         this.getSpellAbility().addMode(new Mode(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn
+                ManacostVariableValue.instance, StaticValue.get(0), Duration.EndOfTurn
         ).setText("target creature gets +X/+0")).addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains haste until end of turn")).addTarget(new TargetCreaturePermanent()));

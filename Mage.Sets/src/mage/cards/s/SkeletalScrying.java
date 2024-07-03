@@ -40,10 +40,10 @@ public final class SkeletalScrying extends CardImpl {
 
         // You draw X cards and you lose X life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
-                ManacostVariableValue.REGULAR
+                ManacostVariableValue.instance
         ).setText("you draw X cards"));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(
-                ManacostVariableValue.REGULAR
+                ManacostVariableValue.instance
         ).concatBy("and"));
     }
 

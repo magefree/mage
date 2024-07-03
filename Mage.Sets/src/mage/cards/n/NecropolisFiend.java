@@ -54,7 +54,7 @@ public final class NecropolisFiend extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {X}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
-        DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+        DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.instance);
         Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn);
         effect.setText("Target creature gets -X/-X until end of turn");
         Ability ability = new SimpleActivatedAbility(

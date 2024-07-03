@@ -45,7 +45,7 @@ public final class MoltenDisaster extends CardImpl {
         this.addAbility(new KickerAbility("{R}"));
 
         // Molten Disaster deals X damage to each creature without flying and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.REGULAR, filter));
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.instance, filter));
     }
 
     private MoltenDisaster(final MoltenDisaster card) {

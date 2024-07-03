@@ -22,7 +22,7 @@ public final class LuxuriousLibation extends CardImpl {
 
         // Target creature gets +X/+X until end of turn. Create a 1/1 green and white Citizen creature token.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR, Duration.EndOfTurn
+                ManacostVariableValue.instance, ManacostVariableValue.instance, Duration.EndOfTurn
         ));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CitizenGreenWhiteToken()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

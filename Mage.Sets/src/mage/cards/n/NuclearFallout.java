@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class NuclearFallout extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, -2);
+    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.instance, -2);
 
     public NuclearFallout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
@@ -31,7 +31,7 @@ public final class NuclearFallout extends CardImpl {
                 "Each creature gets twice -X/-X until end of turn"
         ));
         this.getSpellAbility().addEffect(
-                new AddCountersPlayersEffect(CounterType.RAD.createInstance(), ManacostVariableValue.REGULAR, TargetController.ANY)
+                new AddCountersPlayersEffect(CounterType.RAD.createInstance(), ManacostVariableValue.instance, TargetController.ANY)
         );
     }
 

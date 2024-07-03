@@ -76,7 +76,7 @@ class KnickknackOuphePutOntoBattlefieldEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int count = ManacostVariableValue.ETB.calculate(game, source, null);
+            int count = ManacostVariableValue.instance.calculate(game, source, null);
             if (count > 0) {
                 Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, count));
                 controller.revealCards(source, cards, game);

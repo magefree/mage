@@ -750,10 +750,10 @@ public class CardView extends SimpleCardView {
             int costX;
             if (showCard instanceof Permanent) {
                 // permanent on battlefield (can show x icon multiple turns, so use end_game source)
-                costX = ManacostVariableValue.END_GAME.calculate(game, showAbility, null);
+                costX = ManacostVariableValue.instance.calculate(game, showAbility, null);
             } else {
                 // other like Stack (can show x icon on stack only, so use normal source)
-                costX = ManacostVariableValue.REGULAR.calculate(game, showAbility, null);
+                costX = ManacostVariableValue.instance.calculate(game, showAbility, null);
             }
             this.cardIcons.add(CardIconImpl.variableCost(costX));
         }

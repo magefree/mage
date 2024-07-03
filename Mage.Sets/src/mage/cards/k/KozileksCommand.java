@@ -42,11 +42,11 @@ public final class KozileksCommand extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // * Target player creates X 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."
-        this.getSpellAbility().addEffect(new CreateTokenTargetEffect(new EldraziSpawnToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenTargetEffect(new EldraziSpawnToken(), ManacostVariableValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("create tokens"));
 
         // * Target player scries X, then draws a card.
-        Mode mode = new Mode(new ScryTargetEffect(ManacostVariableValue.REGULAR));
+        Mode mode = new Mode(new ScryTargetEffect(ManacostVariableValue.instance));
         mode.addEffect(new DrawCardTargetEffect(1).setText(", then draws a card"));
         mode.addTarget(new TargetPlayer().withChooseHint("scries then draw"));
         this.getSpellAbility().addMode(mode);

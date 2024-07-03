@@ -108,7 +108,7 @@ class BaneFireEffect extends OneShotEffect {
 
 class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private Condition condition = new testCondition(ManacostVariableValue.REGULAR, 5);
+    private Condition condition = new testCondition(ManacostVariableValue.instance, 5);
 
     public BanefireCantCounterEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit);

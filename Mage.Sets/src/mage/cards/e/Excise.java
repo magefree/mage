@@ -28,7 +28,7 @@ public final class Excise extends CardImpl {
 
         // Excise target nonwhite attacking creature unless its controller pays {X}. 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new ExileTargetEffect(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new ExileTargetEffect(), ManacostVariableValue.instance));
     }
 
     private Excise(final Excise card) {

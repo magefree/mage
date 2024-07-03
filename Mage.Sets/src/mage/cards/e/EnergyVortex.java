@@ -56,7 +56,7 @@ public final class EnergyVortex extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(
                         CounterType.VORTEX.createInstance(),
-                        ManacostVariableValue.REGULAR, true
+                        ManacostVariableValue.instance, true
                 ), new ManaCostsImpl<>("{X}"),
                 new IsStepCondition(PhaseStep.UPKEEP)
         ));

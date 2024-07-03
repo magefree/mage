@@ -75,7 +75,7 @@ class AbuelosAwakeningEffect extends ReturnFromGraveyardToBattlefieldTargetEffec
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int counterAmount = ManacostVariableValue.REGULAR.calculate(game, source, this);
+        int counterAmount = ManacostVariableValue.instance.calculate(game, source, this);
         for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             AbuelosAwakeningContinuousEffect continuousEffect = new AbuelosAwakeningContinuousEffect();
             continuousEffect.setTargetPointer(new FixedTarget(targetId, game));

@@ -81,7 +81,7 @@ class ProgenitorExarchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
+        int xValue = ManacostVariableValue.instance.calculate(game, source, this);
         if (xValue < 1) {
             return false;
         }

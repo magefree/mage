@@ -32,8 +32,8 @@ public final class MarchOfWretchedSorrow extends CardImpl {
         ExileCardsFromHandAdjuster.addAdjusterAndMessage(this, filter);
 
         // March of Wretched Sorrow deals X damage to target creature or planeswalker and you gain X life.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR).concatBy("and"));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance).concatBy("and"));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 

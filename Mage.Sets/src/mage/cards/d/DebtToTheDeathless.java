@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public final class DebtToTheDeathless extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.instance, 2);
 
     public DebtToTheDeathless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{W}{W}{B}{B}");

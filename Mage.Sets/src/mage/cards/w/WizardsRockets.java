@@ -29,7 +29,7 @@ public final class WizardsRockets extends CardImpl {
 
         // {X}, {T}, Sacrifice Wizard's Rockets: Add X mana in any combination of colors.
         Ability ability = new DynamicManaAbility(
-                Mana.AnyMana(1), ManacostVariableValue.REGULAR,
+                Mana.AnyMana(1), ManacostVariableValue.instance,
                 new ManaCostsImpl<>("{X}"), "Add X mana in any combination of colors."
         );
         ability.addCost(new TapSourceCost());

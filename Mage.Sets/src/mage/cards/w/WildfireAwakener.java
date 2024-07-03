@@ -30,7 +30,7 @@ public final class WildfireAwakener extends CardImpl {
         // When Wildfire Awakener enters the battlefield, create X 1/1 red Elemental creature tokens
         // with "Whenever this creature becomes tapped, it deals 1 damage to target player."
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new WildfireAwakenerToken(), ManacostVariableValue.ETB)
+                new CreateTokenEffect(new WildfireAwakenerToken(), ManacostVariableValue.instance)
         ));
     }
 

@@ -26,7 +26,7 @@ public final class UnwillingRecruit extends CardImpl {
         // Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn)
+        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.instance, StaticValue.get(0), Duration.EndOfTurn)
                 .setText("It gets +X/+0"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains haste until end of turn."));

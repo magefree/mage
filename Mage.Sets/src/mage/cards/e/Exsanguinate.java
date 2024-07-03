@@ -18,7 +18,7 @@ public final class Exsanguinate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
         // Each opponent loses X life. You gain life equal to the life lost this way.
-        this.getSpellAbility().addEffect(new LoseLifeOpponentsYouGainLifeLostEffect(ManacostVariableValue.REGULAR, "X life"));
+        this.getSpellAbility().addEffect(new LoseLifeOpponentsYouGainLifeLostEffect(ManacostVariableValue.instance, "X life"));
     }
 
     private Exsanguinate(final Exsanguinate card) {

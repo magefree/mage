@@ -38,7 +38,7 @@ public final class AwakenedAwareness extends CardImpl {
 
         // When Awakened Awareness enters the battlefield, put X +1/+1 counters on enchanted permanent.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), ManacostVariableValue.ETB, "enchanted permanent")
+                new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), ManacostVariableValue.instance, "enchanted permanent")
         ));
 
         // As long as enchanted permanent is a creature, it has base power and toughness 1/1.
