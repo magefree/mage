@@ -814,4 +814,37 @@ public class KickerTest extends CardTestPlayerBase {
         assertTappedCount("Mountain", true, 5);
     }
 
+    @Test
+    public void testWastescapeBattlemage() {
+        String battlemage = "Wastescape Battlemage"; // 1C + kickers G (exile artifact/enchantment) + 1U (bounce creature)
+
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 3);
+        addCard(Zone.HAND, playerA, battlemage, 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Darksteel Relic", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Squire", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, battlemage);
+        setChoice(playerA, true);
+        setChoice(playerA, false);
+        addTarget(playerA, "Darksteel Relic");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("Darksteel Relic count", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Darksteel Relic", 1);
+        checkPermanentCount("Squire count", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Squire", 2);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, battlemage);
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setChoice(playerA, "When you cast this spell, if it was kicked with its {G} kicker, exile");
+        addTarget(playerA, "Darksteel Relic");
+        addTarget(playerA, "Squire");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerB, "Darksteel Relic", 0);
+        assertPermanentCount(playerB, "Squire", 1);
+        assertExileCount(playerB, 2);
+        assertHandCount(playerB, "Squire", 1);
+    }
 }
