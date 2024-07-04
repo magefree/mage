@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -23,6 +24,7 @@ import mage.players.Player;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -81,31 +83,21 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
         }
         // Creature cards you own that aren't on the battlefield
         // in graveyard
-        for (UUID cardId : controller.getGraveyard()) {
-            Card card = game.getCard(cardId);
-            if (card != null && card.isCreature(game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
-            }
-        }
+        controller.getGraveyard().stream().map(game::getCard).filter(Objects::nonNull).filter(card -> card.isCreature(game))
+                .map(card -> game.getObject(card.getId())).filter(Objects::nonNull).forEach(card -> card.setIsAllCreatureTypes(game, true));
+
         // on Hand
-        for (UUID cardId : controller.getHand()) {
-            Card card = game.getCard(cardId);
-            if (card != null && card.isCreature(game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
-            }
-        }
+        controller.getHand().stream().map(game::getCard).filter(Objects::nonNull).filter(card -> card.isCreature(game))
+                .map(card -> game.getObject(card.getId())).filter(Objects::nonNull).forEach(card -> card.setIsAllCreatureTypes(game, true));
+
         // in Exile
-        for (Card card : game.getState().getExile().getAllCards(game)) {
-            if (card.isCreature(game) && card.isOwnedBy(controller.getId())) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
-            }
-        }
+        game.getState().getExile().getAllCards(game).stream().filter(card -> card.isOwnedBy(controller.getId()) && card.isCreature(game))
+                .map(card -> game.getObject(card.getId())).filter(Objects::nonNull).forEach(card -> card.setIsAllCreatureTypes(game, true));
+
         // in Library (e.g. for Mystical Teachings)
-        for (Card card : controller.getLibrary().getCards(game)) {
-            if (card.isOwnedBy(controller.getId()) && card.isCreature(game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
-            }
-        }
+        controller.getLibrary().getCards(game).stream().filter(card -> card.isOwnedBy(controller.getId()) && card.isCreature(game))
+                .map(card -> game.getObject(card.getId())).filter(Objects::nonNull).forEach(card -> card.setIsAllCreatureTypes(game, true));
+
         // commander in command zone
         for (CommandObject commandObject : game.getState().getCommand()) {
             if (!(commandObject instanceof Commander)) {
@@ -115,7 +107,10 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
             if (card != null
                     && card.isOwnedBy(controller.getId())
                     && card.isCreature(game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().setIsAllCreatureTypes(true);
+                MageObject object = game.getObject(card.getId());
+                if (object != null) {
+                    object.setIsAllCreatureTypes(game, true);
+                }
             }
         }
         // creature spells you control
