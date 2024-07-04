@@ -82,12 +82,6 @@ class GlacianPowerstoneEngineerEffect extends OneShotEffect {
             return false;
         }
         int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof GlacianPowerstoneEngineerCost) {
-                xValue = ((GlacianPowerstoneEngineerCost) cost).getAmount();
-                break;
-            }
-        }
         if (xValue < 1) {
             return false;
         }

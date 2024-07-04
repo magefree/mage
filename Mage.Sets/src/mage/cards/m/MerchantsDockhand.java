@@ -82,13 +82,6 @@ class MerchantsDockhandEffect extends OneShotEffect {
 
         int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof TapXTargetCost) {
-                xValue = ((TapXTargetCost) cost).getAmount();
-                break;
-            }
-        }
-
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         controller.lookAtCards(sourceObject.getIdName(), cards, game);
 

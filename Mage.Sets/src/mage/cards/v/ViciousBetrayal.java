@@ -1,17 +1,13 @@
 package mage.cards.v;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeXTargetCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -39,33 +35,5 @@ public final class ViciousBetrayal extends CardImpl {
     @Override
     public ViciousBetrayal copy() {
         return new ViciousBetrayal(this);
-    }
-}
-
-enum GetXValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        for (VariableCost cost : sourceAbility.getCosts().getVariableCosts()) {
-            amount += cost.getAmount();
-        }
-        return 2 * amount;
-    }
-
-    @Override
-    public GetXValue copy() {
-        return GetXValue.instance;
-    }
-
-    @Override
-    public String toString() {
-        return "2";
-    }
-
-    @Override
-    public String getMessage() {
-        return "creature sacrificed this way";
     }
 }
