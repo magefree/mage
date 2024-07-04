@@ -7,7 +7,7 @@ import mage.game.Game;
 import mage.util.CardUtil;
 
 public enum ManacostVariableValue implements DynamicValue {
-    //TODO: This, GetXValue, GetKickerXValue, and GetXLoyaltyValue use the same logic
+    //TODO: This, GetXValue, GetKickerXValue, GetXLoyaltyValue, and RemovedCountersForCostValue use the same logic
     // and should be consolidated into a single instance
     instance;
 

@@ -1,11 +1,10 @@
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -15,12 +14,7 @@ public enum RemovedCountersForCostValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (Cost cost : sourceAbility.getCosts()) {
-            if (cost instanceof RemoveVariableCountersSourceCost) {
-                return ((RemoveVariableCountersSourceCost) cost).getAmount();
-            }
-        }
-        return 0;
+        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
     }
 
     @Override
