@@ -1736,6 +1736,9 @@ public final class CardUtil {
      */
     public static Map<String, Object> getSourceCostsTagsMap(Game game, Ability source) {
         Map<String, Object> costTags;
+        if (game == null) {
+            return null;
+        }
 
         // from spell ability - direct access
         costTags = source.getCostsTagMap();
