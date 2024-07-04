@@ -9,7 +9,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.DynamicManaAbility;
@@ -39,7 +39,7 @@ public final class MageRingNetwork extends CardImpl {
         // {T}, Remove any number of storage counters from Mage-Ring Network: Add {C} for each storage counter removed this way.
         ability = new DynamicManaAbility(
                 Mana.ColorlessMana(1),
-                RemovedCountersForCostValue.instance,
+                GetXValue.instance,
                 new TapSourceCost(),
                 "Add {C} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));

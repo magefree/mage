@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -58,7 +58,7 @@ public final class BronzebeakForagers extends CardImpl {
                 new ManaCostsImpl<>("{X}{W}")
         );
         dissolveAbility.setTargetAdjuster(BronzebeakForagerDissolveAdjuster.instance);
-        dissolveAbility.addEffect(new GainLifeEffect(ManacostVariableValue.instance));
+        dissolveAbility.addEffect(new GainLifeEffect(GetXValue.instance));
         this.addAbility(dissolveAbility);
     }
 

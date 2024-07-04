@@ -8,7 +8,7 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.HintUtils;
@@ -746,7 +746,7 @@ public class CardView extends SimpleCardView {
         if (showCard != null && showAbility != null
                 && (showCard.getManaCost().containsX() || CardUtil.checkSourceCostsTagExists(game, showAbility, "X"))
                 && (showZone.match(Zone.BATTLEFIELD) || showZone.match(Zone.STACK))) {
-            int costX = ManacostVariableValue.instance.calculate(game, showAbility, null);
+            int costX = GetXValue.instance.calculate(game, showAbility, null);
             this.cardIcons.add(CardIconImpl.variableCost(costX));
         }
 

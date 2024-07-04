@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class TribalUnity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{2}{G}");
 
         // Creatures of the creature type of your choice get +X/+X until end of turn.
-        this.getSpellAbility().addEffect(new TribalUnityEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new TribalUnityEffect(GetXValue.instance));
     }
 
     private TribalUnity(final TribalUnity card) {

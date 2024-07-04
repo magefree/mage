@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -34,7 +34,7 @@ public final class TheBattleOfEndor extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{G}{G}{G}");
 
         // Create X 1/1 green Ewok creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new EwokToken(), ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EwokToken(), GetXValue.instance));
 
         // Put X +1/+1 counters on each creature you control.
         this.getSpellAbility().addEffect(new TheBattleOfEndorEffect());

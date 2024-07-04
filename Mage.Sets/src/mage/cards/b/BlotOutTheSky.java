@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class BlotOutTheSky extends CardImpl {
 
         // Create X tapped 2/1 white and black Inkling creature tokens with flying. If X is 6 or more, destroy all noncreature, nonland permanents.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new InklingToken(), ManacostVariableValue.instance, true, false
+                new InklingToken(), GetXValue.instance, true, false
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DestroyAllEffect(filter), BlotOutTheSkyCondition.instance,

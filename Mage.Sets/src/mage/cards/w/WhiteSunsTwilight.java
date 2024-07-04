@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class WhiteSunsTwilight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
 
         // You gain X life. Create X 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block." If X is 5 or more, destroy all other creatures.
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new WhiteSunsTwilightEffect());
     }
 

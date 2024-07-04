@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.ExileFromGraveCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -40,10 +40,10 @@ public final class SkeletalScrying extends CardImpl {
 
         // You draw X cards and you lose X life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
-                ManacostVariableValue.instance
+                GetXValue.instance
         ).setText("you draw X cards"));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(
-                ManacostVariableValue.instance
+                GetXValue.instance
         ).concatBy("and"));
     }
 

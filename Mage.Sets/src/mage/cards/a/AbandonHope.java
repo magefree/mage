@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.discard.LookTargetHandChooseDiscardEffect;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class AbandonHope extends CardImpl {
         this.addAbility(ability);
 
         // Look at target opponent's hand and choose X cards from it. That player discards those cards.
-        this.getSpellAbility().addEffect(new LookTargetHandChooseDiscardEffect(false, ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new LookTargetHandChooseDiscardEffect(false, GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().setCostAdjuster(AbandonHopeAdjuster.instance);
     }

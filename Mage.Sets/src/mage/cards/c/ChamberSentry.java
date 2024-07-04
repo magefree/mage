@@ -11,7 +11,7 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -46,7 +46,7 @@ public final class ChamberSentry extends CardImpl {
                 "with a +1/+1 counter on it for each color of mana spent to cast it"));
 
         // {X}, {T}, Remove X +1/+1 counters from Chamber Sentry: It deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.instance)
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(GetXValue.instance)
                 .setText("It deals X damage to any target"),
                 new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());

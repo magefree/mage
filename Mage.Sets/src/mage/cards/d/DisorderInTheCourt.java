@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
@@ -80,7 +80,7 @@ class DisorderInTheCourtEffect extends OneShotEffect {
             controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
             game.processAction();
         }
-        new InvestigateEffect(ManacostVariableValue.instance).apply(game, source);
+        new InvestigateEffect(GetXValue.instance).apply(game, source);
         if (!toExile.isEmpty()) {
             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, true);
             effect.setTargetPointer(new FixedTargets(toExile

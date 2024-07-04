@@ -1,7 +1,7 @@
 
 package mage.cards.r;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class ReleaseTheGremlins extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
         // Create X 2/2 red Gremlin creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new GremlinToken(), ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new GremlinToken(), GetXValue.instance));
 
     }
 

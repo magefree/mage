@@ -3,7 +3,7 @@ package mage.cards.k;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.common.ControlACommanderCondition;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -43,7 +43,7 @@ public final class KlauthsWill extends CardImpl {
         this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
 
         // • Breathe Flame — Klauth's Will deals X damage to each creature without flying.
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, filter));
         this.getSpellAbility().withFirstModeFlavorWord("Breathe Flame");
 
         // • Smash Relics — Destroy up to X target artifacts and/or enchantments.

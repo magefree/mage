@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.common.CastAsThoughItHadFlashIfConditionAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class SilverScrutiny extends CardImpl {
         ));
 
         // Draw X cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance));
     }
 
     private SilverScrutiny(final SilverScrutiny card) {

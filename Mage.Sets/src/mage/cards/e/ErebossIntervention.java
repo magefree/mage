@@ -3,7 +3,7 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -31,9 +31,9 @@ public final class ErebossIntervention extends CardImpl {
 
         // Choose one —
         // • Target creature gets -X/-X until end of turn. You gain X life.
-        DynamicValue x = new SignInversionDynamicValue(ManacostVariableValue.instance);
+        DynamicValue x = new SignInversionDynamicValue(GetXValue.instance);
         this.getSpellAbility().addEffect(new BoostTargetEffect(x,x,Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance)
+        this.getSpellAbility().addEffect(new GainLifeEffect(GetXValue.instance)
                 .setText("You gain X life"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 

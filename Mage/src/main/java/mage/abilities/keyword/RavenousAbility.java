@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.counters.CounterType;
@@ -48,6 +48,6 @@ enum RavenousAbilityCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return ManacostVariableValue.instance.calculate(game, source, null) >= 5;
+        return GetXValue.instance.calculate(game, source, null) >= 5;
     }
 }

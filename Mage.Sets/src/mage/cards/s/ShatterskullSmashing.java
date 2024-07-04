@@ -7,7 +7,7 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.RedManaAbility;
@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class ShatterskullSmashing extends ModalDoubleFacedCard {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.instance, 2);
+    private static final DynamicValue xValue = new MultipliedValue(GetXValue.instance, 2);
 
     public ShatterskullSmashing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -42,7 +42,7 @@ public final class ShatterskullSmashing extends ModalDoubleFacedCard {
 
         // Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, Shatterskull Smashing deals twice X damage divided as you choose among them instead.
         this.getLeftHalfCard().getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageMultiEffect(xValue), new DamageMultiEffect(ManacostVariableValue.instance),
+                new DamageMultiEffect(xValue), new DamageMultiEffect(GetXValue.instance),
                 ShatterskullSmashingCondition.instance, "{this} deals X damage divided as you choose " +
                 "among up to two target creatures and/or planeswalkers. If X is 6 or more, " +
                 "{this} deals twice X damage divided as you choose among them instead."

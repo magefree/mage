@@ -3,7 +3,7 @@ package mage.target.targetadjustment;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.constants.ComparisonType;
 import mage.filter.Filter;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -29,7 +29,7 @@ public class PowerTargetAdjuster extends GenericTargetAdjuster {
     }
 
     public PowerTargetAdjuster(ComparisonType comparison) {
-        this(ManacostVariableValue.instance, comparison);
+        this(GetXValue.instance, comparison);
     }
 
 
