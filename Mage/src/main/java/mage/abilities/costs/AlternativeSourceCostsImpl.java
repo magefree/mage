@@ -1,11 +1,9 @@
 package mage.abilities.costs;
 
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -21,8 +19,9 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
     protected final AlternativeCost alternativeCost;
     protected final String reminderText;
     protected final String activationKey;
-    protected static String getActivationKey(String name){
-        return name+"ActivationKey";
+
+    protected static String getActivationKey(String name) {
+        return name + "ActivationKey";
     }
 
     protected AlternativeSourceCostsImpl(String name, String reminderText, String manaString) {
@@ -44,24 +43,21 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
         this.activationKey = ability.activationKey;
     }
 
+
     @Override
-    public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        if (ability instanceof SpellAbility) {
-            handleActivatingAlternativeCosts(ability, game);
-        }
-        return isActivated(ability, game);
+    public boolean canActivateAlternativeCostsNow(Ability ability, Game game) {
+        Player player = game.getPlayer(ability.getControllerId());
+        return player != null && alternativeCost.canPay(ability, this, player.getId(), game);
     }
 
-    protected boolean handleActivatingAlternativeCosts(Ability ability, Game game) {
-        Player player = game.getPlayer(ability.getControllerId());
-        if (player == null) {
-            return false;
-        }
+    @Override
+    public String getAlternativeCostText(Ability ability, Game game) {
+        return this.name + " cost (" + alternativeCost.getText(true) + ") (from " + CardUtil.getSourceIdName(game, this) + ")";
+    }
+
+    @Override
+    public boolean activateAlternativeCosts(Ability ability, Game game) {
         this.resetCost();
-        if (!alternativeCost.canPay(ability, this, player.getId(), game)
-                || !player.chooseUse(Outcome.Benefit, "Cast this for its " + this.name + " cost? (" + alternativeCost.getText(true) + ')', ability, game)) {
-            return false;
-        }
         ability.setCostsTag(activationKey, null);
         alternativeCost.activate();
 

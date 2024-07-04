@@ -90,7 +90,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
     /**
      * @return the set of cast method MageIdentifer that are allowed to be cast at this time (if MageIdentifier.Default is in it, there is no restriction)
      */
-    public Set<MageIdentifier> spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
+    public Set<MageIdentifier> spellCanBeActivatedNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
         if (object == null) {
             return Collections.emptySet();
@@ -144,7 +144,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
     public ActivationStatus canActivate(UUID playerId, Game game) {
         // spells can be cast from non hand zones, so must use custom check
         // no super.canActivate() call
-        Set<MageIdentifier> allowedIdentifiers = this.spellCanBeActivatedRegularlyNow(playerId, game);
+        Set<MageIdentifier> allowedIdentifiers = this.spellCanBeActivatedNow(playerId, game);
         if (!allowedIdentifiers.isEmpty()) {
             if (spellAbilityType == SpellAbilityType.SPLIT
                     || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {

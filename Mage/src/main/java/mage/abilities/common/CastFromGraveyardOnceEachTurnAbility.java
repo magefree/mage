@@ -95,7 +95,7 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
             if (spellAbility.getManaCosts().isEmpty()) {
                 return false;
             }
-            Set<MageIdentifier> allowedToBeCastNow = spellAbility.spellCanBeActivatedRegularlyNow(playerId, game);
+            Set<MageIdentifier> allowedToBeCastNow = spellAbility.spellCanBeActivatedNow(playerId, game);
             if (allowedToBeCastNow.contains(MageIdentifier.Default)) {
                 return filter.match(cardToCheck, playerId, source, game);
             }

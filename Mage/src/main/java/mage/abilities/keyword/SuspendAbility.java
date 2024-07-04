@@ -218,7 +218,7 @@ public class SuspendAbility extends SpecialAction {
         if (card == null) {
             return ActivationStatus.getFalse();
         }
-        Set<MageIdentifier> allowedToBeCastNow = card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game);
+        Set<MageIdentifier> allowedToBeCastNow = card.getSpellAbility().spellCanBeActivatedNow(playerId, game);
         if (!allowedToBeCastNow.contains(MageIdentifier.Default) && !allowedToBeCastNow.contains(card.getSpellAbility().getIdentifier())) {
             return ActivationStatus.getFalse();
         }

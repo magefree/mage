@@ -1231,6 +1231,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // Use ability copy to avoid problems with targets and costs on recast (issue https://github.com/magefree/mage/issues/5189).
         SpellAbility ability = originalAbility.copy();
+        Set<MageIdentifier> allowedIdentifiers = originalAbility.spellCanBeActivatedNow(getId(), game);
         ability.setControllerId(getId());
         ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
 
@@ -1265,7 +1266,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 MageIdentifier identifier = approvingObject == null
                         ? MageIdentifier.Default
                         : approvingObject.getApprovingAbility().getIdentifier();
-
                 if (!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(identifier)) {
                     // identifier has no alternate cast entry for that sourceId, using Default instead.
                     identifier = MageIdentifier.Default;
@@ -1291,7 +1291,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
                 castEvent.setZone(fromZone);
                 game.fireEvent(castEvent);
-                if (spell.activate(game, noMana)) {
+                if (spell.activate(game, allowedIdentifiers, noMana)) {
                     GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
                             ability.getId(), ability, playerId, approvingObject);
                     castedEvent.setZone(fromZone);
@@ -1673,7 +1673,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @return
      */
     public static Map<UUID, SpellAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
-        // it uses simple check from spellCanBeActivatedRegularlyNow
+        // it uses simple check from spellCanBeActivatedNow
         // reason: no approved info here (e.g. forced to choose spell ability from cast card)
         LinkedHashMap<UUID, SpellAbility> useable = new LinkedHashMap<>();
         Abilities<Ability> allAbilities;
@@ -1695,7 +1695,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     // If the card has any mandatory additional costs, those must be paid to cast the spell.
                     // (2021-02-05)
                     if (!noMana) {
-                        Set<MageIdentifier> allowedToBeCastNow = spellAbility.spellCanBeActivatedRegularlyNow(playerId, game);
+                        Set<MageIdentifier> allowedToBeCastNow = spellAbility.spellCanBeActivatedNow(playerId, game);
                         if (allowedToBeCastNow.contains(MageIdentifier.Default) || allowedToBeCastNow.contains(spellAbility.getIdentifier())) {
                             useable.put(spellAbility.getId(), spellAbility);  // example: Chandra, Torch of Defiance +1 loyal ability
                         }
@@ -1737,7 +1737,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                     return useable;
                 default: {
-                    Set<MageIdentifier> allowedToBeCastNow = spellAbility.spellCanBeActivatedRegularlyNow(playerId, game);
+                    Set<MageIdentifier> allowedToBeCastNow = spellAbility.spellCanBeActivatedNow(playerId, game);
                     if (allowedToBeCastNow.contains(MageIdentifier.Default) || allowedToBeCastNow.contains(spellAbility.getIdentifier())) {
                         useable.put(spellAbility.getId(), spellAbility);
                     }
@@ -3633,7 +3633,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     // including an effect that allows a player to cast a spell without paying its mana cost, the alternative cost may be paid.
                     canBeCastRegularly = false;
                 }
-                allowedIdentifiers = ((SpellAbility) copy).spellCanBeActivatedRegularlyNow(playerId, game);
+                allowedIdentifiers = ((SpellAbility) copy).spellCanBeActivatedNow(playerId, game);
                 if (!allowedIdentifiers.contains(MageIdentifier.Default)) {
                     // If the timing restriction is lifted only for specific MageIdentifier, the default cast can not be used.
                     canBeCastRegularly = false;
@@ -3784,12 +3784,12 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         Ability copyAbility; // for alternative cost and reduce tries
-        Set<MageIdentifier> allowedIdentifier = null;
+        Set<MageIdentifier> allowedIdentifiers = null;
         if (ability instanceof SpellAbility) {
             // This returns the set of MageIdentifier that allow to play the card at that timing.
             // If MageIdentifier.Default is in the set, everything is allowed to be cast at this time.
             // If not, then only the AlternativeSourceCosts with a matching MageIdentifier are allowed at this time.
-            allowedIdentifier = ((SpellAbility) ability).spellCanBeActivatedRegularlyNow(getId(), game);
+            allowedIdentifiers = ((SpellAbility) ability).spellCanBeActivatedNow(getId(), game);
         }
         // Try the source specific AlternativeSourceCosts
         for (Ability alternateSourceCostsAbility : sourceObject.getAbilities(game)) {
@@ -3803,8 +3803,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!alternateSourceCostsAbility.getCosts().canPay(ability, ability, playerId, game)) {
                 continue;
             }
-            if (allowedIdentifier != null && !allowedIdentifier.contains(MageIdentifier.Default)
-                    && !allowedIdentifier.contains(alternateSourceCostsAbility.getIdentifier())) {
+            if (allowedIdentifiers != null && !allowedIdentifiers.contains(MageIdentifier.Default)
+                    && !allowedIdentifiers.contains(alternateSourceCostsAbility.getIdentifier())) {
                 continue;
             }
             ManaCostsImpl manaCosts = new ManaCostsImpl<>();
@@ -3859,8 +3859,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!((Ability) alternateSourceCosts).getCosts().canPay(ability, ability, playerId, game)) {
                 continue;
             }
-            if (allowedIdentifier != null && !allowedIdentifier.contains(MageIdentifier.Default)
-                    && !allowedIdentifier.contains(((Ability) alternateSourceCosts).getIdentifier())) {
+            if (allowedIdentifiers != null && !allowedIdentifiers.contains(MageIdentifier.Default)
+                    && !allowedIdentifiers.contains(((Ability) alternateSourceCosts).getIdentifier())) {
                 continue;
             }
             ManaCostsImpl manaCosts = new ManaCostsImpl<>();

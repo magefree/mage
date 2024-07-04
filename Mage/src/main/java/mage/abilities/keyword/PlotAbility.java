@@ -80,7 +80,7 @@ public class PlotAbility extends SpecialAction {
             // Not Allowed from other zones
             return ActivationStatus.getFalse();
         }
-        Set<MageIdentifier> allowedToBeCastNow = card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game);
+        Set<MageIdentifier> allowedToBeCastNow = card.getSpellAbility().spellCanBeActivatedNow(playerId, game);
         if (!allowedToBeCastNow.contains(MageIdentifier.Default) && !allowedToBeCastNow.contains(card.getSpellAbility().getIdentifier())) {
             return ActivationStatus.getFalse();
         }

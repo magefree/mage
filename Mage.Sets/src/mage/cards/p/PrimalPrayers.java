@@ -69,7 +69,7 @@ class PrimalPrayersCastEffect extends ContinuousEffectImpl {
     private final AlternativeCostSourceAbility alternativeCastingCostAbility;
 
     public PrimalPrayersCastEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "you may cast creature cards with mana value 3 or less by paying {E} rather than paying their mana costs";
         alternativeCastingCostAbility = new AlternativeCostSourceAbility(
                 new PayEnergyCost(1), SourceIsSpellCondition.instance, null, filter, true
@@ -94,22 +94,12 @@ class PrimalPrayersCastEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+        return true;
     }
 }

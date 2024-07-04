@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
@@ -10,6 +11,7 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -53,9 +55,9 @@ public class SpectacleAbility extends SpellAbility {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (super.activate(game, noMana)) {
-                this.setCostsTag(SPECTACLE_ACTIVATION_VALUE_KEY,null);
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (super.activate(game, allowedIdentifiers, noMana)) {
+            this.setCostsTag(SPECTACLE_ACTIVATION_VALUE_KEY, null);
             return true;
         }
         return false;
