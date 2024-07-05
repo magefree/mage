@@ -9,7 +9,6 @@ import mage.view.CardView;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileInputStream;
 import org.apache.log4j.Logger;
-import org.mage.card.arcane.CardPanelRenderModeImage;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.utils.CardImageUtils;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -25,6 +24,8 @@ import java.util.regex.Pattern;
  * This class stores ALL card images in a cache with soft values. This means
  * that the images may be garbage collected when they are not needed any more,
  * but will be kept as long as possible.
+ * <p>
+ * It used to refresh themes at runtime too. Use GUISizeHelper.refreshGUIAndCards()
  *
  * @author JayDi85
  */
@@ -160,7 +161,8 @@ public final class ImageCache {
         }
     }
 
-    /** Find image for current side
+    /**
+     * Find image for current side
      */
     public static ImageCacheData getCardImageOriginal(CardView card) {
         return getCardImage(getKey(card, card.getName(), 0));

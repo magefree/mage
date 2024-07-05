@@ -353,6 +353,10 @@ public class HoverButton extends JPanel implements MouseListener {
         this.isSelected = !this.isSelected;
     }
 
+    public String getText() {
+        return this.text;
+    }
+
     public void setText(String text) {
         this.text = text;
     }
@@ -365,13 +369,17 @@ public class HoverButton extends JPanel implements MouseListener {
         this.drawSet = true;
     }
 
+    public void update(String text, Image image) {
+        update(text, image, this.hoverImage, this.selectedImage, this.disabledImage, this.imageSize);
+    }
+
     public void update(String text, Image image, Image hover, Image selected, Image disabled, Rectangle size) {
+        this.text = text;
         this.image = image;
         this.hoverImage = hover;
         this.selectedImage = selected;
         this.disabledImage = disabled;
         this.imageSize = size;
-        this.text = text;
         repaint();
     }
 

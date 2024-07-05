@@ -2,6 +2,8 @@ package org.mage.plugins.card.utils.impl;
 
 import mage.abilities.icon.CardIconColor;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.util.ImageCaches;
+import mage.client.util.SoftValuesLoadingCache;
 import mage.client.util.gui.BufferedImageBuilder;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.SvgUtils;
@@ -16,32 +18,109 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
+/**
+ * GUI plugin: images and icons with theme support
+ *
+ * @author JayDi85
+ */
 public enum ImageManagerImpl implements ImageManager {
     instance;
 
     private static final Logger logger = Logger.getLogger(ImageManagerImpl.class);
 
-    ImageManagerImpl() {
-        init();
+    private static BufferedImage appImage;
+    private static BufferedImage appSmallImage;
+    private static BufferedImage appImageFlashed;
+
+    private static BufferedImage imageSickness;
+    private static BufferedImage imageDay;
+    private static BufferedImage imageNight;
+
+    private static BufferedImage imageTokenIcon;
+    private static BufferedImage triggeredAbilityIcon;
+    private static BufferedImage activatedAbilityIcon;
+    private static BufferedImage lookedAtIcon;
+    private static BufferedImage revealedIcon;
+    private static BufferedImage exileIcon;
+    private static BufferedImage imageCopyIcon;
+    private static BufferedImage imageCounterGreen;
+    private static BufferedImage imageCounterGrey;
+    private static BufferedImage imageCounterRed;
+    private static BufferedImage imageCounterViolet;
+
+    private static BufferedImage imageDlgAcceptButton;
+    private static BufferedImage imageDlgActiveAcceptButton;
+    private static BufferedImage imageDlgCancelButton;
+    private static BufferedImage imageDlgActiveCancelButton;
+    private static BufferedImage imageDlgPrevButton;
+    private static BufferedImage imageDlgActivePrevButton;
+    private static BufferedImage imageDlgNextButton;
+    private static BufferedImage imageDlgActiveNextButton;
+
+    private static final SoftValuesLoadingCache<Key, BufferedImage> THEME_BUTTON_IMAGES_CACHE;
+    private static final SoftValuesLoadingCache<Key, Image> PHASE_THEME_BUTTON_IMAGES_CACHE;
+    static {
+        THEME_BUTTON_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(ImageManagerImpl::createThemeButtonImage));
+        PHASE_THEME_BUTTON_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(ImageManagerImpl::createPhaseThemeButtonImage));
     }
 
-    public void init() {
-        String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
-                "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
-                "Main2", "Cleanup", "Next_Turn"};
-        phasesImages = new HashMap<>();
-        for (String name : phases) {
-            Image image = getImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getPhasePath("phase_" + name.toLowerCase(Locale.ENGLISH) + ".png"),
-                    new Rectangle(36, 36));
-            phasesImages.put(name, image);
+    private static final class Key {
+
+        final String resourceName;
+
+        public Key(String resourceName) {
+            this.resourceName = resourceName;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 3;
+            hash = 53 * hash + Objects.hashCode(this.resourceName);
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final ImageManagerImpl.Key other = (ImageManagerImpl.Key) obj;
+            if (!this.resourceName.equals(other.resourceName)) {
+                return false;
+            }
+            return true;
         }
     }
 
+    private static BufferedImage createThemeButtonImage(ImageManagerImpl.Key key) {
+        return getBufferedImageFromResource(PreferencesDialog.getCurrentTheme().getButtonPath(key.resourceName));
+    }
+
+    private static Image createPhaseThemeButtonImage(ImageManagerImpl.Key key) {
+        return getImageFromResource(
+                PreferencesDialog.getCurrentTheme().getPhasePath("phase_" + key.resourceName.toLowerCase(Locale.ENGLISH) + ".png"),
+                new Rectangle(36, 36)
+        );
+    }
+
+    ImageManagerImpl() {
+    }
+
+    public BufferedImage getThemeButton(String resourceName) {
+        return THEME_BUTTON_IMAGES_CACHE.getOrThrow(new ImageManagerImpl.Key(resourceName));
+    }
+
     @Override
-    public Image getPhaseImage(String phase) {
-        return phasesImages.get(phase);
+    public Image getPhaseImage(String phaseName) {
+        return PHASE_THEME_BUTTON_IMAGES_CACHE.getOrThrow(new ImageManagerImpl.Key(phaseName));
     }
 
     @Override
@@ -266,101 +345,57 @@ public enum ImageManagerImpl implements ImageManager {
 
     @Override
     public Image getConcedeButtonImage() {
-        if (imageConcedeButton == null) {
-            imageConcedeButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("concede.png"));
-        }
-        return imageConcedeButton;
+        return getThemeButton("concede.png");
     }
 
     @Override
     public Image getSwitchHandsButtonImage() {
-        if (imageSwitchHandsButton == null) {
-            imageSwitchHandsButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("switch_hands.png"));
-        }
-        return imageSwitchHandsButton;
+        return getThemeButton("switch_hands.png");
     }
 
     @Override
     public Image getStopWatchButtonImage() {
-        if (imageStopWatchingButton == null) {
-            imageStopWatchingButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("stop_watching.png"));
-        }
-        return imageStopWatchingButton;
+        return getThemeButton("stop_watching.png");
     }
 
     @Override
     public Image getCancelSkipButtonImage() {
-        if (imageCancelSkipButton == null) {
-            imageCancelSkipButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("cancel_skip.png"));
-        }
-        return imageCancelSkipButton;
+        return getThemeButton("cancel_skip.png");
     }
 
     @Override
     public Image getSkipNextTurnButtonImage() {
-        if (imageSkipNextTurnButton == null) {
-            imageSkipNextTurnButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_turn.png"));
-        }
-        return imageSkipNextTurnButton;
+        return getThemeButton("skip_turn.png");
     }
 
     @Override
     public Image getSkipEndTurnButtonImage() {
-        if (imageSkipToEndTurnButton == null) {
-            imageSkipToEndTurnButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_to_end.png"));
-        }
-        return imageSkipToEndTurnButton;
+        return getThemeButton("skip_to_end.png");
     }
 
     @Override
     public Image getSkipMainButtonImage() {
-        if (imageSkipToMainButton == null) {
-            imageSkipToMainButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_to_main.png"));
-        }
-        return imageSkipToMainButton;
+        return getThemeButton("skip_to_main.png");
     }
 
     @Override
     public Image getSkipStackButtonImage() {
-        if (imageSkipStackButton == null) {
-            imageSkipStackButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_stack.png"));
-        }
-        return imageSkipStackButton;
+        return getThemeButton("skip_stack.png");
     }
 
     @Override
     public Image getSkipEndStepBeforeYourTurnButtonImage() {
-        if (imageSkipUntilEndStepBeforeYourTurnButton == null) {
-            imageSkipUntilEndStepBeforeYourTurnButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_to_previous_end.png"));
-        }
-        return imageSkipUntilEndStepBeforeYourTurnButton;
+        return getThemeButton("skip_to_previous_end.png");
     }
 
     @Override
     public Image getSkipYourNextTurnButtonImage() {
-        if (imageSkipYourNextTurnButton == null) {
-            imageSkipYourNextTurnButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("skip_all.png"));
-        }
-        return imageSkipYourNextTurnButton;
+        return getThemeButton("skip_all.png");
     }
 
     @Override
     public Image getToggleRecordMacroButtonImage() {
-        if (imageToggleRecordMacroButton == null) {
-            imageToggleRecordMacroButton = getBufferedImageFromResource(
-                    PreferencesDialog.getCurrentTheme().getButtonPath("toggle_macro.png"));
-        }
-        return imageToggleRecordMacroButton;
+        return getThemeButton("toggle_macro.png");
     }
 
     @Override
@@ -432,48 +467,4 @@ public enum ImageManagerImpl implements ImageManager {
         WritableRaster raster = bi.copyData(null);
         return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
     }
-
-    private static BufferedImage appImage;
-    private static BufferedImage appSmallImage;
-    private static BufferedImage appImageFlashed;
-
-    private static BufferedImage imageSickness;
-    private static BufferedImage imageDay;
-    private static BufferedImage imageNight;
-
-    private static BufferedImage imageTokenIcon;
-    private static BufferedImage triggeredAbilityIcon;
-    private static BufferedImage activatedAbilityIcon;
-    private static BufferedImage lookedAtIcon;
-    private static BufferedImage revealedIcon;
-    private static BufferedImage exileIcon;
-    private static BufferedImage imageCopyIcon;
-    private static BufferedImage imageCounterGreen;
-    private static BufferedImage imageCounterGrey;
-    private static BufferedImage imageCounterRed;
-    private static BufferedImage imageCounterViolet;
-
-    private static BufferedImage imageDlgAcceptButton;
-    private static BufferedImage imageDlgActiveAcceptButton;
-    private static BufferedImage imageDlgCancelButton;
-    private static BufferedImage imageDlgActiveCancelButton;
-    private static BufferedImage imageDlgPrevButton;
-    private static BufferedImage imageDlgActivePrevButton;
-    private static BufferedImage imageDlgNextButton;
-    private static BufferedImage imageDlgActiveNextButton;
-
-    // TODO: enable buttons and related GUI refresh on theme change
-    private static BufferedImage imageCancelSkipButton; // theme depends
-    private static BufferedImage imageSwitchHandsButton; // theme depends
-    private static BufferedImage imageStopWatchingButton; // theme depends
-    private static BufferedImage imageConcedeButton; // theme depends
-    private static BufferedImage imageSkipNextTurnButton; // theme depends
-    private static BufferedImage imageSkipToEndTurnButton; // theme depends
-    private static BufferedImage imageSkipToMainButton; // theme depends
-    private static BufferedImage imageSkipStackButton; // theme depends
-    private static BufferedImage imageSkipUntilEndStepBeforeYourTurnButton; // theme depends
-    private static BufferedImage imageSkipYourNextTurnButton; // theme depends
-    private static BufferedImage imageToggleRecordMacroButton; // theme depends
-
-    private static Map<String, Image> phasesImages; // theme depends
 }

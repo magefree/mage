@@ -106,7 +106,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private final Map<String, Card> loadedCards = new HashMap<>();
 
     private int storedHeight;
-    private Map<String, HoverButton> hoverButtons;
+    private final Map<String, HoverButton> phaseButtons = new LinkedHashMap<>(); // phase name, phase button
 
     private MageDialogState choiceWindowState;
 
@@ -452,6 +452,39 @@ public final class GamePanel extends javax.swing.JPanel {
         pnlShortCuts.setPreferredSize(newDimension);
         pnlShortCuts.setMinimumSize(newDimension);
         pnlShortCuts.setMaximumSize(newDimension);
+
+        reloadThemeRelatedGraphic();
+    }
+
+    private void reloadThemeRelatedGraphic() {
+        // skip buttons
+        btnCancelSkip.setIcon(new ImageIcon(ImageManagerImpl.instance.getCancelSkipButtonImage()));
+        btnSkipToNextTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipNextTurnButtonImage()));
+        btnSkipToEndTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEndTurnButtonImage()));
+        btnSkipToEndStepBeforeYourTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEndStepBeforeYourTurnButtonImage()));
+        btnSkipToYourTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipYourNextTurnButtonImage()));
+        btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipMainButtonImage()));
+        btnSkipStack.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipStackButtonImage()));
+        btnConcede.setIcon(new ImageIcon(ImageManagerImpl.instance.getConcedeButtonImage()));
+        btnToggleMacro.setIcon(new ImageIcon(ImageManagerImpl.instance.getToggleRecordMacroButtonImage()));
+        btnSwitchHands.setIcon(new ImageIcon(ImageManagerImpl.instance.getSwitchHandsButtonImage()));
+        btnStopWatching.setIcon(new ImageIcon(ImageManagerImpl.instance.getStopWatchButtonImage()));
+
+        // hotkeys for skip buttons
+        boolean displayButtonText = PreferencesDialog.getCurrentTheme().isShortcutsVisibleForSkipButtons();
+        btnCancelSkip.setShowKey(displayButtonText);
+        btnSkipToNextTurn.setShowKey(displayButtonText);
+        btnSkipToEndTurn.setShowKey(displayButtonText);
+        btnSkipToEndStepBeforeYourTurn.setShowKey(displayButtonText);
+        btnSkipToYourTurn.setShowKey(displayButtonText);
+        btnSkipToNextMain.setShowKey(displayButtonText);
+        btnSkipStack.setShowKey(displayButtonText);
+        btnToggleMacro.setShowKey(displayButtonText);
+
+        // phase buttons
+        phaseButtons.forEach((phaseName, phaseButton) -> {
+            phaseButton.update(phaseButton.getText(), ImageManagerImpl.instance.getPhaseImage(phaseName));
+        });
     }
 
     private void saveDividerLocations() {
@@ -1260,8 +1293,8 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void updateButton(String name) {
-        if (hoverButtons.containsKey(name)) {
-            currentStep = hoverButtons.get(name);
+        if (phaseButtons.containsKey(name)) {
+            currentStep = phaseButtons.get(name);
             prevPoint = currentStep.getLocation();
             currentStep.setLocation(prevPoint.x - 15, prevPoint.y);
         }
@@ -1979,7 +2012,6 @@ public final class GamePanel extends javax.swing.JPanel {
         txtHoldPriority.setVisible(false);
 
         boolean displayButtonText = PreferencesDialog.getCurrentTheme().isShortcutsVisibleForSkipButtons();
-
         btnToggleMacro = new KeyboundButton(KEY_CONTROL_TOGGLE_MACRO, displayButtonText);
         btnCancelSkip = new KeyboundButton(KEY_CONTROL_CANCEL_SKIP, displayButtonText); // F3
         btnSkipToNextTurn = new KeyboundButton(KEY_CONTROL_NEXT_TURN, displayButtonText); // F4
@@ -2081,7 +2113,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnToggleMacro.setContentAreaFilled(false);
         btnToggleMacro.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnToggleMacro.setIcon(new ImageIcon(ImageManagerImpl.instance.getToggleRecordMacroButtonImage()));
         btnToggleMacro.setToolTipText("Toggle Record Macro ("
                 + getCachedKeyText(KEY_CONTROL_TOGGLE_MACRO) + ").");
         btnToggleMacro.setFocusable(false);
@@ -2109,10 +2140,10 @@ public final class GamePanel extends javax.swing.JPanel {
         });
 
         // SKIP BUTTONS (button's hint/state is dynamic)
+        // button icons setup in setGUISize
 
         btnCancelSkip.setContentAreaFilled(false);
         btnCancelSkip.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnCancelSkip.setIcon(new ImageIcon(ImageManagerImpl.instance.getCancelSkipButtonImage()));
         btnCancelSkip.setToolTipText("CANCEL all skips");
         btnCancelSkip.setFocusable(false);
         btnCancelSkip.addMouseListener(new FirstButtonMousePressedAction(e ->
@@ -2120,7 +2151,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipToNextTurn.setContentAreaFilled(false);
         btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipToNextTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipNextTurnButtonImage()));
         btnSkipToNextTurn.setToolTipText("dynamic");
         btnSkipToNextTurn.setFocusable(false);
         btnSkipToNextTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
@@ -2138,7 +2168,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipToEndTurn.setContentAreaFilled(false);
         btnSkipToEndTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipToEndTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEndTurnButtonImage()));
         btnSkipToEndTurn.setToolTipText("dynamic");
         btnSkipToEndTurn.setFocusable(false);
         btnSkipToEndTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
@@ -2166,7 +2195,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipToNextMain.setContentAreaFilled(false);
         btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipMainButtonImage()));
         btnSkipToNextMain.setToolTipText("dynamic");
         btnSkipToNextMain.setFocusable(false);
         btnSkipToNextMain.addMouseListener(new FirstButtonMousePressedAction(e ->
@@ -2184,7 +2212,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipToYourTurn.setContentAreaFilled(false);
         btnSkipToYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipToYourTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipYourNextTurnButtonImage()));
         btnSkipToYourTurn.setToolTipText("dynamic");
         btnSkipToYourTurn.setFocusable(false);
         btnSkipToYourTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
@@ -2202,7 +2229,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipToEndStepBeforeYourTurn.setContentAreaFilled(false);
         btnSkipToEndStepBeforeYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipToEndStepBeforeYourTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEndStepBeforeYourTurnButtonImage()));
         btnSkipToEndStepBeforeYourTurn.setToolTipText("dynamic");
         btnSkipToEndStepBeforeYourTurn.setFocusable(false);
         btnSkipToEndStepBeforeYourTurn.addMouseListener(new FirstButtonMousePressedAction(e ->
@@ -2220,7 +2246,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSkipStack.setContentAreaFilled(false);
         btnSkipStack.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnSkipStack.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipStackButtonImage()));
         btnSkipStack.setToolTipText("dynamic");
         btnSkipStack.setFocusable(false);
         btnSkipStack.addMouseListener(new FirstButtonMousePressedAction(e ->
@@ -2238,7 +2263,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnConcede.setContentAreaFilled(false);
         btnConcede.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        btnConcede.setIcon(new ImageIcon(ImageManagerImpl.instance.getConcedeButtonImage()));
         btnConcede.setToolTipText("CONCEDE current game");
         btnConcede.setFocusable(false);
         btnConcede.addMouseListener(new FirstButtonMousePressedAction(e ->
@@ -2368,7 +2392,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnSwitchHands.setContentAreaFilled(false);
         btnSwitchHands.setBorder(new EmptyBorder(0, 0, 0, 0));
-        btnSwitchHands.setIcon(new ImageIcon(ImageManagerImpl.instance.getSwitchHandsButtonImage()));
         btnSwitchHands.setFocusable(false);
         btnSwitchHands.setToolTipText("Switch between your hand cards and hand cards of controlled players.");
         btnSwitchHands.addMouseListener(new FirstButtonMousePressedAction(e ->
@@ -2376,7 +2399,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         btnStopWatching.setContentAreaFilled(false);
         btnStopWatching.setBorder(new EmptyBorder(0, 0, 0, 0));
-        btnStopWatching.setIcon(new ImageIcon(ImageManagerImpl.instance.getStopWatchButtonImage()));
         btnStopWatching.setFocusable(false);
         btnStopWatching.setToolTipText("Stop watching this game.");
         btnStopWatching.addMouseListener(new FirstButtonMousePressedAction(e ->
@@ -2506,14 +2528,13 @@ public final class GamePanel extends javax.swing.JPanel {
         }
 
         int i = 0;
-        for (String name : hoverButtons.keySet()) {
-            HoverButton hoverButton = hoverButtons.get(name);
+        for (String name : phaseButtons.keySet()) {
+            HoverButton hoverButton = phaseButtons.get(name);
             hoverButton.setAlignmentX(LEFT_ALIGNMENT);
             hoverButton.setBounds(X_PHASE_WIDTH - 36, i * 36, 36, 36);
             jPhases.add(hoverButton);
             i++;
         }
-        jPhases.addMouseListener(phasesMouseAdapter);
 
         pnlReplay.setOpaque(false);
 
@@ -2657,8 +2678,8 @@ public final class GamePanel extends javax.swing.JPanel {
         for (MouseListener ml : this.jPhases.getMouseListeners()) {
             this.jPhases.removeMouseListener(ml);
         }
-        for (String name : hoverButtons.keySet()) {
-            HoverButton hoverButton = hoverButtons.get(name);
+        for (String name : phaseButtons.keySet()) {
+            HoverButton hoverButton = phaseButtons.get(name);
             for (MouseListener ml : hoverButton.getMouseListeners()) {
                 hoverButton.removeMouseListener(ml);
             }
@@ -2878,15 +2899,12 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void createPhaseButton(String name, MouseAdapter mouseAdapter) {
-        if (hoverButtons == null) {
-            hoverButtons = new LinkedHashMap<>();
-        }
         Rectangle rect = new Rectangle(36, 36);
         HoverButton button = new HoverButton("", ImageManagerImpl.instance.getPhaseImage(name), rect);
         button.setToolTipText(name.replaceAll("_", " "));
         button.setPreferredSize(new Dimension(36, 36));
         button.addMouseListener(mouseAdapter);
-        hoverButtons.put(name, button);
+        phaseButtons.put(name, button);
     }
 
     // Event listener for the ShowCardsDialog
@@ -3047,7 +3065,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private mage.client.components.ability.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
 
-    //    private JPanel cancelSkipPanel;
     private KeyboundButton btnToggleMacro;
     private KeyboundButton btnCancelSkip;
     private KeyboundButton btnSkipToNextTurn; // F4
