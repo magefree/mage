@@ -57,7 +57,7 @@ public class PrimalPrayersTest extends CardTestPlayerBase {
         checkPlayableAbility("2: able to use alternative cast at instant timing", 1, PhaseStep.BEGIN_COMBAT, playerA,
                 "Cast Grizzly Bears", true);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Grizzly Bears", true);
-        setChoice(playerA, "Pay {E}");
+        setChoice(playerA, "Cast with alternative cost: Pay {E}");
 
         runCode("energy counter is 1", 1, PhaseStep.BEGIN_COMBAT, playerA, (info, player, game) -> checkEnergyCount(info, player, 1));
 
@@ -79,11 +79,11 @@ public class PrimalPrayersTest extends CardTestPlayerBase {
         runCode("1: energy counter is 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", true);
-        setChoice(playerA, "Pay {E}"); // alternative cost chosen
+        setChoice(playerA, "Cast with alternative cost: Pay {E}"); // alternative cost chosen
         runCode("2: energy counter is 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 1));
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", true);
-        setChoice(playerA, "Pay {E}"); // alternative cost chosen
+        setChoice(playerA, "Cast with alternative cost: Pay {E}"); // alternative cost chosen
         checkPlayableAbility("no more energy to cast third Bears", 1, PhaseStep.BEGIN_COMBAT, playerA,
                 "Cast Grizzly Bears", false);
         runCode("3: energy counter is 0", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 0));
@@ -107,7 +107,7 @@ public class PrimalPrayersTest extends CardTestPlayerBase {
         runCode("1: energy counter is 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", true);
-        setChoice(playerA, TestPlayer.CHOICE_REGULAR_COST);
+        setChoice(playerA, TestPlayer.CHOICE_NORMAL_COST);
         runCode("2: energy counter is still 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));
 
         setStopAt(1, PhaseStep.END_COMBAT);
@@ -127,7 +127,7 @@ public class PrimalPrayersTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, prayers, true);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Grizzly Bears");
-        setChoice(playerA, TestPlayer.CHOICE_REGULAR_COST); // is not a valid choice
+        setChoice(playerA, TestPlayer.CHOICE_NORMAL_COST); // is not a valid choice
         runCode("energy counter is 2", 1, PhaseStep.BEGIN_COMBAT, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));
 
         setStopAt(1, PhaseStep.END_COMBAT);

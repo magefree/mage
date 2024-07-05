@@ -75,7 +75,7 @@ public class TestPlayer implements Player {
 
     public static final String TARGET_SKIP = "[target_skip]"; // stop/skip targeting
     public static final String CHOICE_SKIP = "[choice_skip]"; // stop/skip choice
-    public static final String CHOICE_REGULAR_COST = "Pay the regular cost"; // when there is the possibility for an alternative cost, use the regular cost instead.
+    public static final String CHOICE_NORMAL_COST = "Cast with no alternative cost: "; // when there is the possibility for an alternative cost, use the normal cost instead.
     public static final String MANA_CANCEL = "[mana_cancel]"; // cancel payment
     public static final String SKIP_FAILED_COMMAND = "[skip_failed_command]"; // skip next command in player's queue (can remove cast commands after try to activate)
     public static final String BLOCK_SKIP = "[block_skip]";

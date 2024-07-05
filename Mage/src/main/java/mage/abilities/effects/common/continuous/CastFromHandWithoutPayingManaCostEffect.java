@@ -16,8 +16,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-
 public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImpl {
 
     private final AlternativeCostSourceAbility alternativeCastingCostAbility;
@@ -55,17 +53,12 @@ public class CastFromHandWithoutPayingManaCostEffect extends ContinuousEffectImp
     }
 
     @Override
-    public void init(Ability source, Game game, UUID activePlayerId) {
-        super.init(source, game, activePlayerId);
-        alternativeCastingCostAbility.setSourceId(source.getSourceId());
-    }
-
-    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
         controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
         return true;
     }

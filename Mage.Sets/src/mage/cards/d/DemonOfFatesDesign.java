@@ -43,6 +43,7 @@ import java.util.UUID;
 public final class DemonOfFatesDesign extends CardImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("another enchantment");
+
     static {
         filter.add(AnotherPredicate.instance);
     }
@@ -131,8 +132,7 @@ enum DemonOfFatesDesignCost implements DynamicCost {
 
     @Override
     public String getText(Ability ability, Game game) {
-        return "Pay " + ability.getManaCosts().manaValue() + " life rather than "
-                + ability.getManaCosts().getText() + '?';
+        return "Pay " + ability.getManaCosts().manaValue() + " life";
     }
 }
 

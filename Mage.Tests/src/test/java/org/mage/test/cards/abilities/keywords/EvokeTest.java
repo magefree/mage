@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -30,6 +29,8 @@ public class EvokeTest extends CardTestPlayerBase {
 
     @Test
     public void testCreatureComesIntoPlay() {
+        setStrictChooseMode(true);
+
         // Check that Lion goes to graveyard from evoke ability
         // Check that evoke does not trigger again to sacrifice Shriekmaw if it's exhumed
 
@@ -40,16 +41,15 @@ public class EvokeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shriekmaw");
-        setChoice(playerA, true);
-        setChoice(playerA, "When {this} enters the battlefield, destroy"); //Stack triggers
-        addTarget(playerA, "Silvercoat Lion"); // Destroy
-
+        setChoice(playerA, "Cast with Evoke alternative cost: {1}{B} (Shriekmaw");
+        setChoice(playerA, "Sacrifice"); // stack triggers
+        addTarget(playerA, "Silvercoat Lion"); // choice for Shriekmaw Destroy trigger
+        
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Exhume");
-        addTarget(playerA, "Shriekmaw");
-        addTarget(playerB, "Silvercoat Lion"); //Return
-
-        addTarget(playerA, "Silvercoat Lion"); // Destroy
-
+        addTarget(playerB, "Silvercoat Lion"); // Exhume choice
+        addTarget(playerA, "Shriekmaw"); // Exhume choice
+        addTarget(playerA, "Silvercoat Lion"); // choice for Shriekmaw Destroy trigger
+        
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();

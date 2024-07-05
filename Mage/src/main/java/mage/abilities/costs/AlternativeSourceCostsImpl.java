@@ -52,7 +52,7 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
 
     @Override
     public String getAlternativeCostText(Ability ability, Game game) {
-        return this.name + " cost (" + alternativeCost.getText(true) + ") (from " + CardUtil.getSourceIdName(game, this) + ")";
+        return "Cast with " + this.name + " alternative cost: " + alternativeCost.getText(true) + " (" + CardUtil.getSourceIdName(game, this) + ")";
     }
 
     @Override

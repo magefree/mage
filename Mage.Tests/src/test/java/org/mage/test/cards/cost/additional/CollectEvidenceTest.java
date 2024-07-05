@@ -307,7 +307,7 @@ public class CollectEvidenceTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, ogre, 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Colossal Dreadmaw");
-        setChoice(playerA, true); // use alternative cast from unraveler
+        setChoice(playerA, "Cast with alternative cost: Collect evidence 10 (Conspiracy Unraveler"); // use alternative cast from unraveler
         setChoice(playerA, ogre, 4); // pay for collect evidence
 
         setStrictChooseMode(true);

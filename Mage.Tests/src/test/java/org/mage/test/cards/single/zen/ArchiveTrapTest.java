@@ -37,7 +37,7 @@ public class ArchiveTrapTest extends CardTestPlayerBase {
         // must able to cast trap for {0}
         checkPlayableAbility("must able to cast", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cast Archive Trap", true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Archive Trap");
-        setChoice(playerB, true); // use alternative cost
+        setChoice(playerB, "Cast with alternative cost: {0}"); // use alternative cost
         addTarget(playerB, playerA);
 
         setStrictChooseMode(true);

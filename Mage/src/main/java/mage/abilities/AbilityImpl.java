@@ -559,7 +559,7 @@ public abstract class AbilityImpl implements Ability {
             }
             if (!mustChooseAlternative) {
                 // add the non-alternative cast as the last option.
-                list.put(Integer.toString(i + 1), "Pay the regular cost");
+                list.put(Integer.toString(i + 1), "Cast with no alternative cost: " + this.getManaCosts().getText());
                 sort.put(Integer.toString(i + 1), i);
             }
             choice.setKeyChoices(list);
