@@ -1,26 +1,70 @@
 package mage.client.dialog;
 
+import mage.client.MageFrame;
+import mage.client.util.AppUtil;
+import mage.client.util.GUISizeHelper;
+import mage.util.CardUtil;
+
 /**
- * Game GUI: error dialog
+ * GUI: error dialog with copyable error message
  *
- * @author BetaSteward_at_googlemail.com
+ * @author JayDi85
  */
 public class ErrorDialog extends MageDialog {
 
-    /** Creates new form ErrorDialog */
+    private final String GITHUB_ISSUES_PAGE = "https://github.com/magefree/mage/issues";
+
     public ErrorDialog() {
         initComponents();
     }
 
-    public void showDialog(String title, String message) {
-        this.setTitle(title);
-        this.lblMessage.setText(message);
-        this.lblMessage.setCaretPosition(0);
+    public void showDialog(String errorType, String errorTitle, String errorText) {
+        this.textInfo.setText("You can report bugs and create new feature requests at github: " + GITHUB_ISSUES_PAGE);
+        this.textInfo.setCaretPosition(0);
+
+        String fullTitle = errorType + " - " + errorTitle;
+        this.setTitle(fullTitle);
+
+        // add additional info
+        String fullError = "Error type: " + fullTitle + "\n"
+                + "Client version: " + MageFrame.getInstance().getVersion().toString() + "\n"
+                + "\n"
+                + errorText;
+        this.textError.setText(fullError);
+        this.textError.setCaretPosition(0);
+
+        this.changeGUISize();
+
         this.pack();
         this.revalidate();
         this.repaint();
         this.setModal(true);
         this.setVisible(true);
+    }
+
+    @Override
+    public void changeGUISize() {
+        super.changeGUISize();
+
+        this.textError.setFont(GUISizeHelper.menuFont);
+        this.textInfo.setFont(GUISizeHelper.menuFont);
+        this.btnCopyToClipboard.setFont(GUISizeHelper.menuFont);
+        this.btnOpenGithub.setFont(GUISizeHelper.menuFont);
+        this.btnOK.setFont(GUISizeHelper.menuFont);
+    }
+
+    private void openGithub() {
+        // create new issue on github with predefined fields
+        String title = this.getTitle();
+        String body = this.textError.getText();
+        String labels = "bug";
+        String url = String.format("%s/new?labels=%s&title=%s&body=%s",
+                GITHUB_ISSUES_PAGE,
+                CardUtil.urlEncode(labels),
+                CardUtil.urlEncode(title),
+                CardUtil.urlEncode(body)
+        );
+        AppUtil.openUrlInBrowser(url);
     }
 
     /** This method is called from within the constructor to
@@ -33,31 +77,53 @@ public class ErrorDialog extends MageDialog {
     private void initComponents() {
 
         btnOK = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lblMessage = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        pnlError = new javax.swing.JScrollPane();
+        textError = new javax.swing.JTextArea();
+        pnlInfo = new javax.swing.JScrollPane();
+        textInfo = new javax.swing.JTextArea();
+        btnCopyToClipboard = new javax.swing.JButton();
+        btnOpenGithub = new javax.swing.JButton();
 
         setResizable(true);
         setTitle("Error");
 
-        btnOK.setText("OK");
-        btnOK.addActionListener(this::btnOKActionPerformed);
+        btnOK.setText("Close");
+        btnOK.setMaximumSize(new java.awt.Dimension(59, 33));
+        btnOK.setMinimumSize(new java.awt.Dimension(59, 33));
+        btnOK.setPreferredSize(new java.awt.Dimension(59, 33));
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
 
-        lblMessage.setColumns(20);
-        lblMessage.setEditable(false);
-        lblMessage.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        lblMessage.setLineWrap(true);
-        lblMessage.setRows(5);
-        lblMessage.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(lblMessage);
+        textError.setEditable(false);
+        textError.setColumns(20);
+        textError.setLineWrap(true);
+        textError.setRows(5);
+        textError.setWrapStyleWord(true);
+        pnlError.setViewportView(textError);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setEditable(false);
-        jTextArea1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jTextArea1.setRows(2);
-        jTextArea1.setText("An error has occurred on the MAGE server. Your last action will be rollbacked.\nPlease post the following report here: https://github.com/magefree/mage/issues");
-        jScrollPane2.setViewportView(jTextArea1);
+        textInfo.setEditable(false);
+        textInfo.setLineWrap(true);
+        textInfo.setText("[bug report instructions]");
+        pnlInfo.setViewportView(textInfo);
+
+        btnCopyToClipboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/copy_24.png"))); // NOI18N
+        btnCopyToClipboard.setText("Copy error to clipboard");
+        btnCopyToClipboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCopyToClipboardActionPerformed(evt);
+            }
+        });
+
+        btnOpenGithub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
+        btnOpenGithub.setText("Open github and create bug report");
+        btnOpenGithub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpenGithubActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,25 +132,28 @@ public class ErrorDialog extends MageDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(pnlInfo)
+                    .addComponent(pnlError)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(btnCopyToClipboard, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnOpenGithub)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addComponent(pnlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlError, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnOK)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCopyToClipboard)
+                    .addComponent(btnOpenGithub))
                 .addGap(12, 12, 12))
         );
 
@@ -95,13 +164,23 @@ public class ErrorDialog extends MageDialog {
         this.hideDialog();
     }//GEN-LAST:event_btnOKActionPerformed
 
+    private void btnCopyToClipboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopyToClipboardActionPerformed
+        AppUtil.setClipboardData(textError.getText());
+    }//GEN-LAST:event_btnCopyToClipboardActionPerformed
+
+    private void btnOpenGithubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenGithubActionPerformed
+        openGithub();
+    }//GEN-LAST:event_btnOpenGithubActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCopyToClipboard;
     private javax.swing.JButton btnOK;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea lblMessage;
+    private javax.swing.JButton btnOpenGithub;
+    private javax.swing.JScrollPane pnlError;
+    private javax.swing.JScrollPane pnlInfo;
+    private javax.swing.JTextArea textError;
+    private javax.swing.JTextArea textInfo;
     // End of variables declaration//GEN-END:variables
 
 }

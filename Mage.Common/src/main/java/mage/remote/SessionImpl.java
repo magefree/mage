@@ -1648,12 +1648,12 @@ public class SessionImpl implements Session {
 
     private void handleMageException(MageException ex) {
         logger.fatal("Server error", ex);
-        client.showError(ex.getMessage());
+        client.showError("Server error: " + ex.getMessage());
     }
 
     private void handleGameException(GameException ex) {
         logger.warn(ex.getMessage());
-        client.showError(ex.getMessage());
+        client.showError("Game error: " + ex.getMessage());
     }
 
     @Override

@@ -53,8 +53,7 @@ public class URLHandler {
                         try {
                             URI uri = new URI(url);
                             desktop.browse(uri);
-                        } catch (IOException | URISyntaxException ex) {
-                            // do nothing
+                        } catch (IOException | URISyntaxException ignore) {
                         }
                     }
                 }
