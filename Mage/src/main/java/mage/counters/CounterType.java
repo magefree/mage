@@ -180,6 +180,7 @@ public enum CounterType {
     REJECTION("rejection"),
     REPAIR("repair"),
     REPRIEVE("reprieve"),
+    REV("rev"),
     RIBBON("ribbon"),
     RITUAL("ritual"),
     ROPE("rope"),
