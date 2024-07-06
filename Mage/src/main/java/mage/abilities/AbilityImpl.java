@@ -539,7 +539,8 @@ public abstract class AbilityImpl implements Ability {
             // No controller to activate.
             return false;
         }
-        Choice choice = new ChoiceImpl(false); // not required, cancelling would default to the
+        Choice choice = new ChoiceImpl(false); // not required, cancelling will cancel the cast (as you could do once in the pay mana mode).
+        choice.setSubMessage("for casting " + CardUtil.getSourceLogName(game, "", this, "", ""));
         AlternativeSourceCosts alternativeChosen = null;
         if (!possibleAlternatives.isEmpty()) {
             // At least one alternative cost is available.

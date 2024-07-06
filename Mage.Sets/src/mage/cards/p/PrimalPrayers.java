@@ -90,7 +90,6 @@ class PrimalPrayersCastEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game, UUID activePlayerId) {
         super.init(source, game, activePlayerId);
-        alternativeCastingCostAbility.setSourceId(source.getSourceId());
     }
 
     @Override
@@ -99,6 +98,7 @@ class PrimalPrayersCastEffect extends ContinuousEffectImpl {
         if (controller == null) {
             return false;
         }
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
         controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
         return true;
     }

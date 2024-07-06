@@ -101,11 +101,6 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
     }
 
     @Override
-    public String getAlternativeCostText(Ability ability, Game game) {
-        return "Use " + CardUtil.getSourceIdName(game, this) + " to pay {0} for this spell";
-    }
-
-    @Override
     public boolean activateAlternativeCosts(Ability ability, Game game) {
         if (!super.activateAlternativeCosts(ability, game)) {
             return false;

@@ -92,17 +92,12 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game, UUID activePlayerId) {
-        super.init(source, game, activePlayerId);
-        alternativeCastingCostAbility.setSourceId(source.getSourceId());
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

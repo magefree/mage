@@ -201,11 +201,6 @@ class ApexObservatoryAlternativeCostAbility extends AlternativeCostSourceAbility
     }
 
     @Override
-    public String getAlternativeCostText(Ability ability, Game game) {
-        return "Use " + CardUtil.getSourceIdName(game, this) + " to pay no mana costs for this spell";
-    }
-
-    @Override
     public boolean activateAlternativeCosts(Ability ability, Game game) {
         if (!super.activateAlternativeCosts(ability, game)) {
             return false;

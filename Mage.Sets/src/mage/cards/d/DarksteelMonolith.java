@@ -18,7 +18,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -94,11 +93,6 @@ class DarksteelMonolithAlternativeCost extends AlternativeCostSourceAbility {
     @Override
     public DarksteelMonolithAlternativeCost copy() {
         return new DarksteelMonolithAlternativeCost(this);
-    }
-
-    @Override
-    public String getAlternativeCostText(Ability ability, Game game) {
-        return "Use " + CardUtil.getSourceIdName(game, this) + " to pay {0} for this spell";
     }
 
     @Override
