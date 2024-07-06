@@ -77,20 +77,20 @@ public class DashTest extends CardTestPlayerBase {
     }
 
     /**
-     * Also dash returns creatures to your hand at end of turn even if they died
-     * that turn.
+     * If a dashed creature dies, it is not returned to hand.
      */
     @Test
     public void testDashedCreatureDiesInCombat() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2); // enough for Dash, can't cast normal way.
         addCard(Zone.HAND, playerA, "Screamreach Brawler"); // 2/3
 
         addCard(Zone.BATTLEFIELD, playerB, "Geist of the Moors", 1); // 3/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
         setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (Screamreach Brawler");
+
         attack(1, playerA, "Screamreach Brawler");
         block(1, playerB, "Geist of the Moors", "Screamreach Brawler");
 
@@ -112,7 +112,7 @@ public class DashTest extends CardTestPlayerBase {
     public void testDashedCreatureDiesInCombatAndIsLaterRecast() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2); // enough for Dash, can't cast normal way.
         addCard(Zone.HAND, playerA, "Screamreach Brawler"); // 2/3
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
@@ -120,7 +120,7 @@ public class DashTest extends CardTestPlayerBase {
         attack(1, playerA, "Screamreach Brawler");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, TestPlayer.CHOICE_NORMAL_COST);
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (Screamreach Brawler");
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 

@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -46,6 +47,9 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
 
     @Override
     public boolean canActivateAlternativeCostsNow(Ability ability, Game game) {
+        if (ability == null || !AbilityType.SPELL.equals(ability.getAbilityType())) {
+            return isActivated(ability, game);
+        }
         Player player = game.getPlayer(ability.getControllerId());
         return player != null && alternativeCost.canPay(ability, this, player.getId(), game);
     }
