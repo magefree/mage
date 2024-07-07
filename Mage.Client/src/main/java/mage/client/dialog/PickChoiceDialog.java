@@ -13,6 +13,7 @@ import mage.choices.ChoiceHintType;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.VirtualCardInfo;
+import mage.client.components.MageEditorPane;
 import mage.client.util.gui.MageDialogState;
 import mage.game.command.Dungeon;
 import mage.view.CardView;
@@ -47,9 +48,12 @@ public class PickChoiceDialog extends MageDialog {
         this.bigCard = bigCard;
         this.gameId = objectId;
 
-        setLabelText(this.labelMessage, choice.getMessage());
-        setLabelText(this.labelSubMessage, choice.getSubMessage());
+        setMessageText(this.textMessage, choice.getMessage(), false);
+        setMessageText(this.textSubMessage, choice.getSubMessage(), true);
+
         btCancel.setEnabled(!choice.isRequired());
+
+        // popup support in headers
 
         // special choice (example: auto-choose answer next time)
         cbSpecial.setVisible(choice.isSpecialEnabled());
@@ -311,13 +315,16 @@ public class PickChoiceDialog extends MageDialog {
         }
     }
 
-    private void setLabelText(JLabel label, String text) {
+    private void setMessageText(MageEditorPane editor, String text, boolean useBoldFont) {
+        editor.setGameData(this.gameId, this.bigCard);
+
         if ((text != null) && !text.equals("")) {
-            label.setText(String.format(HTML_HEADERS_TEMPLATE, text));
-            label.setVisible(true);
+            String realText = useBoldFont ? "<b>" + text + "<b>" : text;
+            editor.setText(String.format(HTML_HEADERS_TEMPLATE, realText));
+            editor.setVisible(true);
         } else {
-            label.setText("");
-            label.setVisible(false);
+            editor.setText("");
+            editor.setVisible(false);
         }
     }
 
@@ -355,6 +362,12 @@ public class PickChoiceDialog extends MageDialog {
      */
     public PickChoiceDialog() {
         initComponents();
+
+        this.textMessage.enableHyperlinksAndCardPopups();
+        this.textMessage.enableTextLabelMode();
+        this.textSubMessage.enableHyperlinksAndCardPopups();
+        this.textSubMessage.enableTextLabelMode();
+
         this.listChoices.setModel(dataModel);
         this.setModal(true);
     }
@@ -433,8 +446,8 @@ public class PickChoiceDialog extends MageDialog {
     private void initComponents() {
 
         panelHeader = new javax.swing.JPanel();
-        labelMessage = new javax.swing.JLabel();
-        labelSubMessage = new javax.swing.JLabel();
+        textMessage = new mage.client.components.MageEditorPane();
+        textSubMessage = new mage.client.components.MageEditorPane();
         panelSearch = new javax.swing.JPanel();
         labelSearch = new javax.swing.JLabel();
         editSearch = new javax.swing.JTextField();
@@ -447,31 +460,23 @@ public class PickChoiceDialog extends MageDialog {
 
         setResizable(true);
 
-        labelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMessage.setText("<html><div style='text-align: center;'>example long message example long message example long message example long message example long message</div></html>");
+        panelHeader.setLayout(new java.awt.BorderLayout());
 
-        labelSubMessage.setFont(labelSubMessage.getFont().deriveFont((labelSubMessage.getFont().getStyle() | java.awt.Font.ITALIC) | java.awt.Font.BOLD));
-        labelSubMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelSubMessage.setText("<html><div style='text-align: center;'>example long message example long</div></html>");
+        textMessage.setEditable(false);
+        textMessage.setBorder(null);
+        textMessage.setText("<html><div style='text-align: center;'>example long message example long message example long message example long message example long message</div></html>");
+        textMessage.setAutoscrolls(false);
+        textMessage.setFocusable(false);
+        textMessage.setOpaque(false);
+        panelHeader.add(textMessage, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
-        panelHeader.setLayout(panelHeaderLayout);
-        panelHeaderLayout.setHorizontalGroup(
-            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelHeaderLayout.createSequentialGroup()
-                .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                    .addComponent(labelSubMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
-        );
-        panelHeaderLayout.setVerticalGroup(
-            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelHeaderLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(labelMessage)
-                .addGap(0, 0, 0)
-                .addComponent(labelSubMessage))
-        );
+        textSubMessage.setEditable(false);
+        textSubMessage.setBorder(null);
+        textSubMessage.setText("<html><div style='text-align: center;'>example long message example long</div></html>");
+        textSubMessage.setAutoscrolls(false);
+        textSubMessage.setFocusable(false);
+        textSubMessage.setOpaque(false);
+        panelHeader.add(textSubMessage, java.awt.BorderLayout.SOUTH);
 
         labelSearch.setText("Search:");
 
@@ -558,7 +563,7 @@ public class PickChoiceDialog extends MageDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrollList, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelCommands, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                     .addComponent(panelSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -570,7 +575,7 @@ public class PickChoiceDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -599,13 +604,13 @@ public class PickChoiceDialog extends MageDialog {
     private javax.swing.JButton btOK;
     private javax.swing.JCheckBox cbSpecial;
     private javax.swing.JTextField editSearch;
-    private javax.swing.JLabel labelMessage;
     private javax.swing.JLabel labelSearch;
-    private javax.swing.JLabel labelSubMessage;
     private javax.swing.JList listChoices;
     private javax.swing.JPanel panelCommands;
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelSearch;
     private javax.swing.JScrollPane scrollList;
+    private mage.client.components.MageEditorPane textMessage;
+    private mage.client.components.MageEditorPane textSubMessage;
     // End of variables declaration//GEN-END:variables
 }

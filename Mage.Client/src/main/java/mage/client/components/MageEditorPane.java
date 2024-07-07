@@ -25,6 +25,14 @@ import java.util.*;
 
 /**
  * GUI: improved editor pane with html, hyperlinks/popup support
+ * <p>
+ * Can be used as:
+ * - read only text panel (example: chats and game logs)
+ * - read only text label (example: header messages in choice dialogs)
+ * <p>
+ * Call in form's constructor or show dialog:
+ * - xxx.enableTextLabelMode to enable text label mode
+ * - xxx.enableHyperlinksAndCardPopups + xxx.setGameData to enable card popup support
  *
  * @author JayDi85
  */
@@ -36,7 +44,6 @@ public class MageEditorPane extends JEditorPane {
     final HTMLEditorKit kit = new HTMLEditorKit();
     final HTMLDocument doc;
 
-
     public MageEditorPane() {
         super();
         // merge with UI.setHTMLEditorKit
@@ -45,6 +52,17 @@ public class MageEditorPane extends JEditorPane {
 
         // improved style: browser's url style with underline on mouse over and hand cursor
         kit.getStyleSheet().addRule(" a { text-decoration: none; } ");
+    }
+
+    /**
+     * Simulate JLabel (non-editable and transparent background)
+     */
+    public void enableTextLabelMode() {
+        this.setOpaque(false);
+        this.setFocusable(false);
+        this.setBorder(null);
+        this.setAutoscrolls(false);
+        this.setBackground(new Color(0, 0, 0, 0)); // transparent background
     }
 
     // cards popup info
