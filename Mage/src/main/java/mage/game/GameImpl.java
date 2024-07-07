@@ -714,12 +714,6 @@ public abstract class GameImpl implements Game {
             // SyrCarahTheBoldTest.java for an example of when this check is relevant.
             if (obj instanceof Spell) {
                 spell = (Spell) obj;
-            } else if (obj != null) {
-                logger.error(String.format(
-                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                                obj.getClass().getName(), obj.getName()),
-                        new Throwable()
-                );
             }
         }
         return spell;
