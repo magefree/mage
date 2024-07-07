@@ -7,6 +7,7 @@ import org.mage.card.arcane.CardRenderer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
 
 /**
  * Helper class for GUI
@@ -54,6 +55,7 @@ public final class GUISizeHelper {
     public static int gameDialogAreaButtonHigh = 16;
 
     public static Font gameDialogAreaFont = new java.awt.Font("Arial", 0, 12);
+    public static float gameDialogAreaDefaultFontSize = gameDialogAreaFont.getSize2D();
     public static int gameDialogButtonHeight;
     public static int gameDialogButtonWidth;
 
@@ -224,5 +226,12 @@ public final class GUISizeHelper {
      */
     public static float guiSizeScale(float value, float scaleMod) {
         return value * scaleMod;
+    }
+
+    public static String textToHtmlWithSize(String text, Font font) {
+        if (text != null && !text.toLowerCase(Locale.ENGLISH).startsWith("<html>")) {
+            return "<html><p style=\"font-size: " + font.getSize() + "pt;\">" + text + "</p>";
+        }
+        return text;
     }
 }

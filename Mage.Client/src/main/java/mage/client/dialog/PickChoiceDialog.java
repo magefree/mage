@@ -14,10 +14,12 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.VirtualCardInfo;
 import mage.client.components.MageEditorPane;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.MageDialogState;
 import mage.game.command.Dungeon;
 import mage.view.CardView;
 import mage.view.DungeonView;
+import org.mage.card.arcane.ManaSymbols;
 
 /**
  * GUI: choosing one of the list's item. Uses in game's and non game's GUI like fast search
@@ -39,6 +41,25 @@ public class PickChoiceDialog extends MageDialog {
 
     final private static String HTML_HEADERS_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
+    public PickChoiceDialog() {
+        initComponents();
+
+        this.textMessage.enableHyperlinksAndCardPopups();
+        this.textMessage.enableTextLabelMode();
+        this.textSubMessage.enableHyperlinksAndCardPopups();
+        this.textSubMessage.enableTextLabelMode();
+
+        // pick choice shared in multiple dialogs, so modify window size only one time
+        // TODO: implement global window size settings and runtime theme support by gui scale logic (interface like MageThemeSupported:onSizeChanged,onThemeChanged,etc)
+        float guiScale = GUISizeHelper.gameDialogAreaFont.getSize2D() / GUISizeHelper.gameDialogAreaDefaultFontSize;
+        int newWidth = GUISizeHelper.guiSizeScale(this.getSize().width, guiScale);
+        int newHeight = GUISizeHelper.guiSizeScale(this.getSize().height, guiScale);
+        this.setSize(newWidth, newHeight);
+
+        this.listChoices.setModel(dataModel);
+        this.setModal(true);
+    }
+
     public void showDialog(Choice choice, String startSelectionValue) {
         showDialog(choice, startSelectionValue, null, null, null);
     }
@@ -48,8 +69,10 @@ public class PickChoiceDialog extends MageDialog {
         this.bigCard = bigCard;
         this.gameId = objectId;
 
-        setMessageText(this.textMessage, choice.getMessage(), false);
-        setMessageText(this.textSubMessage, choice.getSubMessage(), true);
+        changeGUISize();
+
+        setMessageText(this.textMessage, choice.getMessage());
+        setMessageText(this.textSubMessage, choice.getSubMessage());
 
         btCancel.setEnabled(!choice.isRequired());
 
@@ -92,7 +115,7 @@ public class PickChoiceDialog extends MageDialog {
             this.editSearch.setText("");
         }
 
-        // listeners for inremental filtering
+        // listeners for incremental filtering
         editSearch.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -226,6 +249,20 @@ public class PickChoiceDialog extends MageDialog {
         this.setVisible(true);
     }
 
+    @Override
+    public void changeGUISize() {
+        super.changeGUISize();
+
+        this.textMessage.setFont(GUISizeHelper.gameDialogAreaFont);
+        this.textSubMessage.setFont(GUISizeHelper.gameDialogAreaFont);
+        this.labelSearch.setFont(GUISizeHelper.gameDialogAreaFont);
+        this.editSearch.setFont(GUISizeHelper.gameDialogAreaFont);
+        this.cbSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
+        this.listChoices.setFont(GUISizeHelper.tableFont);
+        this.btOK.setFont(GUISizeHelper.gameDialogAreaFont);
+        this.btCancel.setFont(GUISizeHelper.gameDialogAreaFont);
+    }
+
     private void choiceHintShow(int modelIndex) {
 
         switch (choice.getHintType()) {
@@ -258,10 +295,13 @@ public class PickChoiceDialog extends MageDialog {
             case TEXT: {
                 // as popup text
                 if (lastModelIndex != modelIndex) {
-                    // new hint
+                    // new hint with GUI size and mana symbols support
                     listChoices.setToolTipText(null);
                     KeyValueItem item = (KeyValueItem) listChoices.getModel().getElementAt(modelIndex);
-                    listChoices.setToolTipText(item.getValue());
+                    String hint =  item.getValue();
+                    hint = ManaSymbols.replaceSymbolsWithHTML(hint, ManaSymbols.Type.DIALOG);
+                    hint = GUISizeHelper.textToHtmlWithSize(hint, listChoices.getFont());
+                    listChoices.setToolTipText(hint);
                 }
                 lastModelIndex = modelIndex;
                 break;
@@ -315,11 +355,11 @@ public class PickChoiceDialog extends MageDialog {
         }
     }
 
-    private void setMessageText(MageEditorPane editor, String text, boolean useBoldFont) {
+    private void setMessageText(MageEditorPane editor, String text) {
         editor.setGameData(this.gameId, this.bigCard);
 
         if ((text != null) && !text.equals("")) {
-            String realText = useBoldFont ? "<b>" + text + "<b>" : text;
+            String realText = ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.DIALOG);
             editor.setText(String.format(HTML_HEADERS_TEMPLATE, realText));
             editor.setVisible(true);
         } else {
@@ -355,21 +395,6 @@ public class PickChoiceDialog extends MageDialog {
         this.listChoices.clearSelection();
         this.choice.clearChoice();
         hideDialog();
-    }
-
-    /**
-     * Creates new form PickChoiceDialog
-     */
-    public PickChoiceDialog() {
-        initComponents();
-
-        this.textMessage.enableHyperlinksAndCardPopups();
-        this.textMessage.enableTextLabelMode();
-        this.textSubMessage.enableHyperlinksAndCardPopups();
-        this.textSubMessage.enableTextLabelMode();
-
-        this.listChoices.setModel(dataModel);
-        this.setModal(true);
     }
 
     public boolean setChoice() {
