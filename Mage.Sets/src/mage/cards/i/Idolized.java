@@ -49,16 +49,13 @@ public final class Idolized extends CardImpl {
 
         // Enchanted creature has "Whenever this creature attacks alone, it gets +X/+X until end of turn, where X is the number of nonland permanents you control."
         Ability attacksAloneAbility = new AttacksAloneSourceTriggeredAbility(
-                new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn)).addHint(hint);
+                new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn)
+        ).setTriggerPhrase("Whenever this creature attacks alone, ").addHint(hint);
+
         this.addAbility(
                 new SimpleStaticAbility(
                         Zone.BATTLEFIELD,
-                        new GainAbilityAttachedEffect(
-                                attacksAloneAbility,
-                                AttachmentType.AURA,
-                                Duration.WhileOnBattlefield,
-                                "Enchanted creature has \"Whenever this creature attacks alone, it gets +X/+X " +
-                                        "until end of turn, where X is the number of nonland permanents you control.\"")
+                        new GainAbilityAttachedEffect(attacksAloneAbility, AttachmentType.AURA)
                 ).addHint(hint));
     }
 
