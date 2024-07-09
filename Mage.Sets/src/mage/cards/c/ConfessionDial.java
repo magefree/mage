@@ -68,10 +68,13 @@ class ConfessionDialEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card == null) {
+        if (card == null || card.getManaCost().getText().isEmpty()) {
             return false;
         }
-        game.getState().addOtherAbility(card, new EscapeAbility(card, card.getManaCost().getText(), 3));
+        Ability ability = new EscapeAbility(card, card.getManaCost().getText(), 3);
+        ability.setSourceId(card.getId());
+        ability.setControllerId(card.getOwnerId());
+        game.getState().addOtherAbility(card, ability);
         return true;
     }
 
