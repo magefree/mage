@@ -34,6 +34,7 @@ Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
 Bloomburrow|BLB|
+Bloomburrow Commander|BLC|
 Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
 Commander 2015 Edition|C15|

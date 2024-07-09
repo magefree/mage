@@ -20,6 +20,7 @@ Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|
 Betrayers of Kamigawa|BetrayersOfKamigawa|
 Bloomburrow|Bloomburrow|
+Bloomburrow Commander|BloomburrowCommander|
 Born of the Gods|BornOfTheGods|
 Champions of Kamigawa|ChampionsOfKamigawa|
 Champs|Champs|
