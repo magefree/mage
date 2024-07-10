@@ -23,11 +23,11 @@ public enum ThresholdCondition implements Condition {
                 .map(game::getPlayer)
                 .map(Player::getGraveyard)
                 .map(HashSet::size)
-                .orElse(0) > 0;
+                .orElse(0) >= 7;
     }
 
     @Override
     public String toString() {
-        return "there are seven or more cards in your graveyard";
+        return "seven or more cards are in your graveyard";
     }
 }
