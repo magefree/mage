@@ -66,6 +66,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Tempest Angler", 235, Rarity.COMMON, mage.cards.t.TempestAngler.class));
         cards.add(new SetCardInfo("Tender Wildguide", 196, Rarity.RARE, mage.cards.t.TenderWildguide.class));
         cards.add(new SetCardInfo("Thundertrap Trainer", 78, Rarity.RARE, mage.cards.t.ThundertrapTrainer.class));
+        cards.add(new SetCardInfo("Veteran Guardmouse", 237, Rarity.COMMON, mage.cards.v.VeteranGuardmouse.class));
         cards.add(new SetCardInfo("Warren Warleader", 38, Rarity.MYTHIC, mage.cards.w.WarrenWarleader.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
