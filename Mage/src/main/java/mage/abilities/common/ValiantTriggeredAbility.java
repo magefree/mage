@@ -18,12 +18,14 @@ public class ValiantTriggeredAbility extends BecomesTargetSourceFirstTimeTrigger
     }
 
     public ValiantTriggeredAbility(Effect effect) {
-        this(effect, false);
-        this.setAbilityWord(AbilityWord.VALIANT);
+        this(effect, SetTargetPointer.NONE, false);
+
     }
 
-    public ValiantTriggeredAbility(Effect effect, boolean optional) {
-        super(effect, filter, SetTargetPointer.NONE, false);
+    public ValiantTriggeredAbility(Effect effect, SetTargetPointer setTargetPointer, boolean optional) {
+        super(effect, filter, setTargetPointer, optional);
+        this.setAbilityWord(AbilityWord.VALIANT);
+        this.withRuleTextReplacement(true);
     }
 
     private ValiantTriggeredAbility(final ValiantTriggeredAbility ability) {
