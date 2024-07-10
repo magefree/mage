@@ -28,8 +28,8 @@ public final class TheEnd extends CardImpl {
                         .setText("This spell costs {2} less to cast if your life total is 5 or less.")
         ).setRuleAtTheTop(true));
 
-        // Exile target creature or planeswalker. Search its controller's graveyard, hand, and library for any number of cards with the same name as that permanent and exile them. That player shuffles, then draws card for each card exiled from their hand this way.
-        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(true, "its controller's", "any number of cards with the same name as that permanent"));
+        // Exile target creature or planeswalker. Search its controller's graveyard, hand, and library for any number of cards with the same name as that permanent and exile them. That player shuffles, then draws a card for each card exiled from their hand this way.
+        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(true, "its controller's", "any number of cards with the same name as that permanent", true));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 
