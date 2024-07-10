@@ -36,6 +36,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Lumra, Bellow of the Woods", 183, Rarity.MYTHIC, mage.cards.l.LumraBellowOfTheWoods.class));
         cards.add(new SetCardInfo("Lupinflower Village", 256, Rarity.UNCOMMON, mage.cards.l.LupinflowerVillage.class));
         cards.add(new SetCardInfo("Mabel, Heir to Cragflame", 224, Rarity.RARE, mage.cards.m.MabelHeirToCragflame.class));
+        cards.add(new SetCardInfo("Maha, Its Feathers Night", 100, Rarity.MYTHIC, mage.cards.m.MahaItsFeathersNight.class));
         cards.add(new SetCardInfo("Might of the Meek", 144, Rarity.COMMON, mage.cards.m.MightOfTheMeek.class));
         cards.add(new SetCardInfo("Mind Drill Assailant", 225, Rarity.COMMON, mage.cards.m.MindDrillAssailant.class));
         cards.add(new SetCardInfo("Moonrise Cleric", 226, Rarity.COMMON, mage.cards.m.MoonriseCleric.class));
