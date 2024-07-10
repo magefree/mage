@@ -3,8 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -23,8 +22,6 @@ import java.util.UUID;
  */
 public final class MindDrillAssailant extends CardImpl {
 
-    private static final Condition condition = new CardsInControllerGraveyardCondition(7);
-
     public MindDrillAssailant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U/B}{U/B}");
 
@@ -35,8 +32,8 @@ public final class MindDrillAssailant extends CardImpl {
 
         // Threshold -- As long as seven or more cards are in your graveyard, Mind Drill Assailant gets +3/+0.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield),
-                condition, "as long as seven or more cards are in your graveyard, {this} gets +3/+0"
+                new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield), ThresholdCondition.instance,
+                "as long as seven or more cards are in your graveyard, {this} gets +3/+0"
         )).setAbilityWord(AbilityWord.THRESHOLD));
 
         // {2}{U/B}: Surveil 1.
