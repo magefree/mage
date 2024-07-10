@@ -392,6 +392,8 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Vault 21: House Gambit", 69, Rarity.RARE, mage.cards.v.Vault21HouseGambit.class));
         cards.add(new SetCardInfo("Vault 75: Middle School", 27, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 75: Middle School", 555, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vault 87: Forced Evolution", 122, Rarity.RARE, mage.cards.v.Vault87ForcedEvolution.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vault 87: Forced Evolution", 650, Rarity.RARE, mage.cards.v.Vault87ForcedEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 70, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 395, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 598, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
