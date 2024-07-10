@@ -45,7 +45,7 @@ class ReturnThePastEffect extends ContinuousEffectImpl {
     ReturnThePastEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "As long as it's your turn, each instant and sorcery card in your graveyard has flashback. " +
-                "Its flashback cost is equal to that card's mana cost";
+                "Its flashback cost is equal to its mana cost";
     }
 
     private ReturnThePastEffect(final ReturnThePastEffect effect) {

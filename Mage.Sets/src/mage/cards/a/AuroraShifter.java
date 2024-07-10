@@ -40,7 +40,7 @@ public final class AuroraShifter extends CardImpl {
 
         // Whenever Aurora Shifter deals combat damage to a player, you get that many {E}.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new GetEnergyCountersControllerEffect(SavedDamageValue.MUCH)));
+                new GetEnergyCountersControllerEffect(SavedDamageValue.MANY)));
 
         // At the beginning of combat on your turn, you may pay {E}{E}. When you do, Aurora Shifter becomes a copy of another target creature you control, except it has this ability and "Whenever this creature deals combat damage to a player, you get that many {E}."
         ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(

@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class TimeReaper extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("face-up exiled card");
+    private static final FilterCard filter = new FilterCard("face-up card they own in exile");
 
     static {
         filter.add(Predicates.not(FaceDownPredicate.instance));
@@ -47,7 +47,7 @@ public final class TimeReaper extends CardImpl {
 
         // Consume Anomaly -- Whenever Time Reaper deals combat damage to a player, put target face-up card they own in exile on the bottom of their library. If you do, you gain 3 life.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new PutOnLibraryTargetEffect(false), false, true);
-        ability.addEffect(new GainLifeEffect(3)); //I don't think the move can fail? If there's no target then the trigger won't happen
+        ability.addEffect(new GainLifeEffect(3).concatBy("If you do,")); //I don't think the move can fail? If there's no target then the trigger won't happen
         ability.addTarget(new TargetCardInExile(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
         ability.withFlavorWord("Consume Anomaly");

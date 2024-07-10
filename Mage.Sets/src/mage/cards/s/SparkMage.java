@@ -32,7 +32,9 @@ public final class SparkMage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Spark Mage deals combat damage to a player, you may have Spark Mage deal 1 damage to target creature that player controls.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DamageTargetEffect(1, "it"), true, true);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DamageTargetEffect(1), true, true
+        ).withRuleTextReplacement(false);
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
         this.addAbility(ability);
