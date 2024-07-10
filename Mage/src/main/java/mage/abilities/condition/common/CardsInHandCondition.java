@@ -72,8 +72,6 @@ public class CardsInHandCondition implements Condition {
                 default:
                     throw new UnsupportedOperationException("Value of TargetController not supported for this class.");
             }
-
-            //If a decorated condition exists, check it as well and apply them together.
         }
 
         return conditionApplies;
