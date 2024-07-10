@@ -11,34 +11,23 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- * Cards in hand condition. This condition can decorate other
- * conditions as well as be used standalone.
+ * Cards in hand condition
  *
  * @author LevelX
  */
 public class CardsInHandCondition implements Condition {
 
-    private final Condition condition;
     private final ComparisonType type;
     private final int count;
     private final TargetController targetController;
 
-    public CardsInHandCondition() {
-        this(ComparisonType.EQUAL_TO, 0);
-    }
-
     public CardsInHandCondition(ComparisonType type, int count) {
-        this(type, count, null);
+        this(type, count, TargetController.YOU);
     }
 
-    public CardsInHandCondition(ComparisonType type, int count, Condition conditionToDecorate) {
-        this(type, count, conditionToDecorate, TargetController.YOU);
-    }
-
-    public CardsInHandCondition(ComparisonType type, int count, Condition conditionToDecorate, TargetController targetController) {
+    public CardsInHandCondition(ComparisonType type, int count, TargetController targetController) {
         this.type = type;
         this.count = count;
-        this.condition = conditionToDecorate;
         this.targetController = targetController;
     }
 
@@ -85,9 +74,6 @@ public class CardsInHandCondition implements Condition {
             }
 
             //If a decorated condition exists, check it as well and apply them together.
-            if (this.condition != null) {
-                conditionApplies = conditionApplies && this.condition.apply(game, source);
-            }
         }
 
         return conditionApplies;
@@ -95,13 +81,19 @@ public class CardsInHandCondition implements Condition {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("if");
+        StringBuilder sb = new StringBuilder("if ");
         switch (targetController) {
             case YOU:
-                sb.append(" you have ");
+                sb.append("you have ");
+                break;
+            case ACTIVE:
+                sb.append("that player has ");
+                break;
+            case EACH_PLAYER:
+                sb.append("each player has ");
                 break;
             case ANY:
-                sb.append(" each player has ");
+                sb.append("a player has ");
                 break;
         }
         switch (this.type) {
@@ -111,6 +103,14 @@ public class CardsInHandCondition implements Condition {
                 break;
             case MORE_THAN:
                 sb.append(CardUtil.numberToText(count + 1));
+                sb.append(" or more ");
+                break;
+            case OR_LESS:
+                sb.append(CardUtil.numberToText(count));
+                sb.append(" or fewer ");
+                break;
+            case OR_GREATER:
+                sb.append(CardUtil.numberToText(count));
                 sb.append(" or more ");
                 break;
             case EQUAL_TO:
