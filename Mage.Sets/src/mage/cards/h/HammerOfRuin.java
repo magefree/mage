@@ -37,7 +37,7 @@ public final class HammerOfRuin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
 
         // Whenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.
-        Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(new DestroyTargetEffect(), "equipped creature", false, true);
+        Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(new DestroyTargetEffect(), "equipped creature", true, true);
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
         this.addAbility(ability);
