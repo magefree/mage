@@ -163,6 +163,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Hour of Reckoning", 161, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 344, Rarity.RARE, mage.cards.h.HullbreakerHorror.class));
         cards.add(new SetCardInfo("Ian the Reckless", 59, Rarity.UNCOMMON, mage.cards.i.IanTheReckless.class));
+        cards.add(new SetCardInfo("Idolized", 17, Rarity.RARE, mage.cards.i.Idolized.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idolized", 327, Rarity.RARE, mage.cards.i.Idolized.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idolized", 545, Rarity.RARE, mage.cards.i.Idolized.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idolized", 855, Rarity.RARE, mage.cards.i.Idolized.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Impassioned Orator", 162, Rarity.COMMON, mage.cards.i.ImpassionedOrator.class));
         cards.add(new SetCardInfo("Inexorable Tide", 177, Rarity.RARE, mage.cards.i.InexorableTide.class));
         cards.add(new SetCardInfo("Infesting Radroach", 46, Rarity.UNCOMMON, mage.cards.i.InfestingRadroach.class));
