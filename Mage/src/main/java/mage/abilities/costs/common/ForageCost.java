@@ -28,6 +28,11 @@ public class ForageCost extends OrCost {
     }
 
     @Override
+    public ForageCost copy() {
+        return new ForageCost(this);
+    }
+
+    @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         if (!super.pay(ability, game, source, controllerId, noMana, costToPay)) {
             return false;
