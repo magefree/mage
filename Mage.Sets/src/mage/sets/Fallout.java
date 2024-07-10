@@ -102,6 +102,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 196, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 260, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Deadly Dispute", 184, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
+        cards.add(new SetCardInfo("Desdemona, Freedom's Edge", 101, Rarity.RARE, mage.cards.d.DesdemonaFreedomsEdge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desdemona, Freedom's Edge", 412, Rarity.RARE, mage.cards.d.DesdemonaFreedomsEdge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desdemona, Freedom's Edge", 629, Rarity.RARE, mage.cards.d.DesdemonaFreedomsEdge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desdemona, Freedom's Edge", 940, Rarity.RARE, mage.cards.d.DesdemonaFreedomsEdge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desolate Mire", 146, Rarity.RARE, mage.cards.d.DesolateMire.class));
         cards.add(new SetCardInfo("Diamond City", 147, Rarity.RARE, mage.cards.d.DiamondCity.class));
         cards.add(new SetCardInfo("Dispatch", 159, Rarity.UNCOMMON, mage.cards.d.Dispatch.class));
