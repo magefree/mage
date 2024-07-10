@@ -29,7 +29,7 @@ public final class DeadlyCoverUp extends CardImpl {
 
 
         // As an additional cost to cast this spell, you may collect evidence 6.
-        this.addAbility(new CollectEvidenceAbility(8));
+        this.addAbility(new CollectEvidenceAbility(6));
 
         // Destroy all creatures. If evidence was collected, exile a card from an opponent's graveyard. Then search its owner's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way.
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
