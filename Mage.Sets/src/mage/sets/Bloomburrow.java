@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class Bloomburrow extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Flowerfoot Swordmaster", "Iridescent Vinelasher", "Manifold Mouse", "Tender Wildguide", "Thundertrap Trainer", "Warren Warleader");
+    private static final List<String> unfinished = Arrays.asList("Flowerfoot Swordmaster", "Iridescent Vinelasher", "Manifold Mouse", "Splash Lasher", "Tender Wildguide", "Thundertrap Trainer", "Warren Warleader");
     private static final Bloomburrow instance = new Bloomburrow();
 
     public static Bloomburrow getInstance() {
