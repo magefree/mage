@@ -33,7 +33,7 @@ public final class FlowerfootSwordmaster extends CardImpl {
 
         // Valiant -- Whenever this creature becomes the target of a spell or ability you control for the first time each turn, Mice you control get +1/+0 until end of turn.
         this.addAbility(new ValiantTriggeredAbility(new BoostControlledEffect(
-                1, 1, Duration.EndOfTurn, filter
+                1, 0, Duration.EndOfTurn, filter
         )));
     }
 
