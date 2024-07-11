@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.MageInt;
@@ -6,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -18,7 +17,10 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -39,20 +41,17 @@ public final class TreacherousVampire extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Treacherous Vampire attacks or blocks, sacrifice it unless you exile a card from your graveyard.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(
-                new DoUnlessControllerPaysEffect(
-                        new SacrificeSourceEffect(),
-                        new ExileFromGraveCost(new TargetCardInYourGraveyard())
-                ).setText("sacrifice it unless you exile a card from your graveyard"), false
-        ));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new DoUnlessControllerPaysEffect(
+                new SacrificeSourceEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard())
+        ).setText("sacrifice it unless you exile a card from your graveyard"), false));
 
         // Threshold - As long as seven or more cards are in your graveyard, Treacherous Vampire gets +2/+2 and has "When Treacherous Vampire dies, you lose 6 life."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), ThresholdCondition.instance,
                 "As long as seven or more cards are in your graveyard, {this} gets +2/+2"));
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new LoseLifeSourceControllerEffect(6))),
-                new CardsInControllerGraveyardCondition(7), "and has \"When {this} dies, you lose 6 life.\""
+                ThresholdCondition.instance, "and has \"When {this} dies, you lose 6 life.\""
         );
         ability.addEffect(effect);
         ability.setAbilityWord(AbilityWord.THRESHOLD);

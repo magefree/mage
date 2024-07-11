@@ -91,6 +91,7 @@ Mutate|card, manaString|
 Myriad|new|
 Nightbound|new|
 Ninjutsu|manaString|
+Offspring|manaString|
 Outlast|cost|
 Partner|instance|
 Persist|new|

@@ -1,38 +1,40 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author anonymous
  */
 public final class RancidEarth extends CardImpl {
 
     public RancidEarth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // Destroy target land.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetLandPermanent());
+
         // Threshold - If seven or more cards are in your graveyard, instead destroy that land and Rancid Earth deals 1 damage to each creature and each player.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new RancidEarthEffect(),
-                new DestroyTargetEffect(),
-                new CardsInControllerGraveyardCondition(7),
-                "Destroy target land.<br/><br/><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, instead destroy that land and Rancid Earth deals 1 damage to each creature and each player."));
-        this.getSpellAbility().addTarget(new TargetLandPermanent());
+                new DamageAllEffect(1, StaticFilters.FILTER_PERMANENT_CREATURE),
+                ThresholdCondition.instance, "<br>" + AbilityWord.THRESHOLD.formatWord() + "If seven or more " +
+                "cards are in your graveyard, instead destroy that land and {this} deals 1 damage to each creature"
+        ));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new DamagePlayersEffect(1), ThresholdCondition.instance, "and each player"
+        ));
     }
 
     private RancidEarth(final RancidEarth card) {
@@ -42,29 +44,5 @@ public final class RancidEarth extends CardImpl {
     @Override
     public RancidEarth copy() {
         return new RancidEarth(this);
-    }
-}
-
-class RancidEarthEffect extends OneShotEffect {
-
-    RancidEarthEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "destroy that land and Rancid Earth deals 1 damage to each creature and each player";
-    }
-
-    private RancidEarthEffect(final RancidEarthEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RancidEarthEffect copy() {
-        return new RancidEarthEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Effect effect1 = new DestroyTargetEffect("destroy that land");
-        effect1.apply(game, source);
-        return new DamageEverythingEffect(1).apply(game, source);
     }
 }

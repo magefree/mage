@@ -1,8 +1,7 @@
 package mage.cards.k;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantAttackAttachedEffect;
@@ -30,20 +29,16 @@ public final class KirtarsDesire extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAttachedEffect(AttachmentType.AURA)));
 
         // Threshold - Enchanted creature can't block as long as seven or more cards are in your graveyard.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalRestrictionEffect(
-                new CantAttackBlockAttachedEffect(AttachmentType.AURA),
-                new CardsInControllerGraveyardCondition(7),
-                "Enchanted creature can't block as long as seven or more cards are in your graveyard"));
-        ability.setAbilityWord(AbilityWord.THRESHOLD);
-        this.addAbility(ability);
-
+        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
+                new CantAttackBlockAttachedEffect(AttachmentType.AURA), ThresholdCondition.instance,
+                "Enchanted creature can't block as long as seven or more cards are in your graveyard"
+        )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 
     private KirtarsDesire(final KirtarsDesire card) {

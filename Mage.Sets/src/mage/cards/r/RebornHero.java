@@ -1,27 +1,24 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class RebornHero extends CardImpl {
@@ -38,20 +35,13 @@ public final class RebornHero extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Threshold - As long as seven or more cards are in your graveyard, Reborn Hero has "When Reborn Hero dies, you may pay {W}{W}. If you do, return Reborn Hero to the battlefield under your control."
-        Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(
-                        new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new DoIfCostPaid(
-                                new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{W}{W}")
-                        ))),
-                        new CardsInControllerGraveyardCondition(7),
-                        "As long as seven or more cards are in your graveyard, "
-                        + "{this} has \"When {this} dies, you may pay {W}{W}. "
-                        + "If you do, return {this} to the battlefield under your control.\""
-                )
-        );
-        ability.setAbilityWord(AbilityWord.THRESHOLD);
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new DoIfCostPaid(
+                        new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{W}{W}")
+                ))), ThresholdCondition.instance, "As long as seven or more cards are in " +
+                "your graveyard, {this} has \"When {this} dies, you may pay {W}{W}. If you do, " +
+                "return {this} to the battlefield under your control.\""
+        )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 
     private RebornHero(final RebornHero card) {
