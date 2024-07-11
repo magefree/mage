@@ -34,7 +34,7 @@ public final class BrazenCollector extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Whenever Brazen Collector attacks, add {R}. Until end of turn, you don't lose this mana as steps and phases end.
-        this.addAbility(new AttacksTriggeredAbility(new BirgiGodOfStorytellingManaEffect()));
+        this.addAbility(new AttacksTriggeredAbility(new BrazenCollectorEffect()));
     }
 
     private BrazenCollector(final BrazenCollector card) {
