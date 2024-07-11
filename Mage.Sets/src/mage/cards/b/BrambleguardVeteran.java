@@ -33,9 +33,12 @@ public final class BrambleguardVeteran extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you expend 4, Raccoons you control get +1/+1 and gain vigilance until end of turn.
-        Ability ability = new ExpendTriggeredAbility(new BoostControlledEffect(
-                1, 1, Duration.EndOfTurn, filter
-        ).setText("Raccoons you control get +1/+1"), 4);
+        Ability ability = new ExpendTriggeredAbility(
+                new BoostControlledEffect(
+                        1, 1, Duration.EndOfTurn, filter
+                ).setText("Raccoons you control get +1/+1"),
+                ExpendTriggeredAbility.Expend.FOUR
+        );
         ability.addEffect(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn, filter2
         ).setText("and gain vigilance until end of turn"));

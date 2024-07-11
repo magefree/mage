@@ -29,7 +29,10 @@ public final class JunkbladeBruiser extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever you expend 4, Junkblade Bruiser gets +2/+1 until end of turn.
-        this.addAbility(new ExpendTriggeredAbility(new BoostSourceEffect(2, 1, Duration.EndOfTurn), 4));
+        this.addAbility(new ExpendTriggeredAbility(
+                new BoostSourceEffect(2, 1, Duration.EndOfTurn),
+                ExpendTriggeredAbility.Expend.FOUR
+        ));
     }
 
     private JunkbladeBruiser(final JunkbladeBruiser card) {

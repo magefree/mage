@@ -28,7 +28,8 @@ public final class WandertaleMentor extends CardImpl {
 
         // Whenever you expend 4, put a +1/+1 counter on Wandertale Mentor.
         this.addAbility(new ExpendTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), 4
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                ExpendTriggeredAbility.Expend.FOUR
         ));
 
         // {T}: Add {R} or {G}.
