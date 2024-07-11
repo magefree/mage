@@ -81,11 +81,11 @@ class OmoQueenOfVesuvaLandEffect extends ContinuousEffectImpl {
     public OmoQueenOfVesuvaLandEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.staticText = "each land with an everything counter on it is every land type in addition to its other types";
-        dependencyTypes.add(DependencyType.BecomeMountain);
-        dependencyTypes.add(DependencyType.BecomeForest);
-        dependencyTypes.add(DependencyType.BecomeSwamp);
-        dependencyTypes.add(DependencyType.BecomeIsland);
-        dependencyTypes.add(DependencyType.BecomePlains);
+        this.dependendToTypes.add(DependencyType.BecomeMountain);
+        this.dependendToTypes.add(DependencyType.BecomeForest);
+        this.dependendToTypes.add(DependencyType.BecomeSwamp);
+        this.dependendToTypes.add(DependencyType.BecomeIsland);
+        this.dependendToTypes.add(DependencyType.BecomePlains);
     }
 
     private OmoQueenOfVesuvaLandEffect(final OmoQueenOfVesuvaLandEffect effect) {
@@ -139,7 +139,7 @@ class OmoQueenOfVesuvaCreatureEffect extends ContinuousEffectImpl {
     public OmoQueenOfVesuvaCreatureEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.staticText = "each nonland creature with an everything counter on it is every creature type";
-        dependencyTypes.add(DependencyType.AddingCreatureType);
+        this.dependendToTypes.add(DependencyType.BecomeCreature);
     }
 
     private OmoQueenOfVesuvaCreatureEffect(final OmoQueenOfVesuvaCreatureEffect effect) {
