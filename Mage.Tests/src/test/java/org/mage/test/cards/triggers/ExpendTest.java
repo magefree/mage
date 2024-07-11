@@ -20,8 +20,18 @@ public class ExpendTest extends CardTestPlayerBase {
      */
     private static final String mentor = "Wandertale Mentor";
 
+    /**
+     * {@link mage.cards.m.MuerraTrashTactician Muerra, Trash Tactician} {1}{R}{G}
+     * Legendary Creature — Raccoon Warrior
+     * At the beginning of your first main phase, add {R} or {G} for each Raccoon you control.
+     * Whenever you expend 4, you gain 3 life. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+     * Whenever you expend 8, exile the top two cards of your library. Until the end of your next turn, you may play those cards.
+     * 2/4
+     */
+    private static final String muerra = "Muerra, Trash Tactician";
+
     @Test
-    public void test_OnPayingSingleSpell_4Mana_Trigger() {
+    public void test_Expend4_OnPayingSingleSpell_4Mana_Trigger() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, mentor);
@@ -37,7 +47,7 @@ public class ExpendTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_OnPayingSingleSpell_5Mana_Trigger() {
+    public void test_Expend4_OnPayingSingleSpell_5Mana_Trigger() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, mentor);
@@ -53,7 +63,7 @@ public class ExpendTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_OnPayingSingleSpell_3Mana_NoTrigger() {
+    public void test_Expend4_OnPayingSingleSpell_3Mana_NoTrigger() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, mentor);
@@ -203,7 +213,7 @@ public class ExpendTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_XSpell_4_Trigger() {
+    public void test_Expend4_XSpell_4_Trigger() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, mentor);
@@ -221,7 +231,7 @@ public class ExpendTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_XSpell_3_NoTrigger() {
+    public void test_Expend4_XSpell_3_NoTrigger() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, mentor);
@@ -253,5 +263,47 @@ public class ExpendTest extends CardTestPlayerBase {
         execute();
 
         assertCounterCount(playerA, mentor, CounterType.P1P1, 2);
+    }
+
+    @Test
+    public void test_Expend8_Cast8Drop_Trigger() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, muerra);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+        addCard(Zone.HAND, playerA, "Scaled Wurm"); // {7}{G} vanilla
+
+        setChoice(playerA, "X=1"); // choice for mana-producing trigger
+        setChoice(playerA, "X=0"); // choice for mana-producing trigger
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scaled Wurm");
+        setChoice(playerA, "Whenever you expend 8"); // order the 2 triggers
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertExileCount(playerA, 2);
+        assertLife(playerA, 20 + 3);
+    }
+
+    @Test
+    public void test_Expend8_Cast7Drop_NoTrigger() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, muerra);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.HAND, playerA, "Axebane Beast"); // {6}{G} vanilla
+
+        setChoice(playerA, "X=1"); // choice for mana-producing trigger
+        setChoice(playerA, "X=0"); // choice for mana-producing trigger
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Axebane Beast");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertExileCount(playerA, 0);
+        assertLife(playerA, 20 + 3);
     }
 }
