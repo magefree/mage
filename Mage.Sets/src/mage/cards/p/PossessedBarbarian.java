@@ -1,17 +1,14 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -21,15 +18,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class PossessedBarbarian extends CardImpl {
@@ -41,7 +38,7 @@ public final class PossessedBarbarian extends CardImpl {
     }
 
     public PossessedBarbarian(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BARBARIAN);
         this.subtype.add(SubType.HORROR);
@@ -50,22 +47,24 @@ public final class PossessedBarbarian extends CardImpl {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
+
         // Threshold - As long as seven or more cards are in your graveyard, Possessed Barbarian gets +1/+1, is black, and has "{2}{B}, {tap}: Destroy target red creature."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
-            "As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), ThresholdCondition.instance,
+                "As long as seven or more cards are in your graveyard, {this} gets +1/+1"
+        ));
 
-        Effect effect = new ConditionalContinuousEffect(new BecomesColorSourceEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield),
-            new CardsInControllerGraveyardCondition(7), ", is black");
-        ability.addEffect(effect);
-
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
+        ability.addEffect(new ConditionalContinuousEffect(
+                new BecomesColorSourceEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield),
+                ThresholdCondition.instance, ", is black"
+        ));
+        Ability gainedAbility = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         gainedAbility.addCost(new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent(filter));
-        effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(gainedAbility),
-            new CardsInControllerGraveyardCondition(7), ", and has \"{2}{B}, {T}: Destroy target red creature.\"");
-        ability.addEffect(effect);
-
+        ability.addEffect(new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(gainedAbility), ThresholdCondition.instance,
+                ", and has \"{2}{B}, {T}: Destroy target red creature.\""
+        ));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }
