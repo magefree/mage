@@ -12,6 +12,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -50,7 +51,7 @@ public final class DecayingSoil extends CardImpl {
                 ThresholdCondition.instance, "as long as seven or more cards are in your graveyard, " +
                 "{this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, " +
                 "you may pay {1}. If you do, return that card to your hand.\""
-        )));
+        )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 
     private DecayingSoil(final DecayingSoil card) {

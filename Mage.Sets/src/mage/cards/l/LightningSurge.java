@@ -28,7 +28,7 @@ public final class LightningSurge extends CardImpl {
                 new DamageTargetEffect(6, false), new DamageTargetEffect(4),
                 ThresholdCondition.instance, "{this} deals 4 damage to any target.<br>" +
                 AbilityWord.THRESHOLD.formatWord() + "If seven or more cards are in your graveyard, " +
-                "instead {this} deals 6 damage to that creature or player and the damage can't be prevented"
+                "instead {this} deals 6 damage to that permanent or player and the damage can't be prevented"
         );
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(effect);

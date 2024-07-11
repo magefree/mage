@@ -6,6 +6,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -29,7 +30,8 @@ public final class SwirlingSandstorm extends CardImpl {
 
         // Threshold - Swirling Sandstorm deals 5 damage to each creature without flying if seven or more cards are in your graveyard.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageAllEffect(5, filter), ThresholdCondition.instance, "{this} deals " +
+                new DamageAllEffect(5, filter), ThresholdCondition.instance,
+                AbilityWord.THRESHOLD.formatWord() + "{this} deals " +
                 "5 damage to each creature without flying if seven or more cards are in your graveyard."
         ));
     }
