@@ -419,6 +419,7 @@ public enum SubType {
     WALRUS("Walrus", SubTypeSet.CreatureType),
     WARLOCK("Warlock", SubTypeSet.CreatureType),
     WARRIOR("Warrior", SubTypeSet.CreatureType),
+    WEASEL("Weasel", SubTypeSet.CreatureType),
     WEEQUAY("Weequay", SubTypeSet.CreatureType, true),
     WEIRD("Weird", SubTypeSet.CreatureType),
     WEREWOLF("Werewolf", SubTypeSet.CreatureType),
