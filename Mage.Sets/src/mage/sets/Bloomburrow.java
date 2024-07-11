@@ -55,6 +55,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plumecreed Mentor", 228, Rarity.UNCOMMON, mage.cards.p.PlumecreedMentor.class));
         cards.add(new SetCardInfo("Pond Prophet", 229, Rarity.COMMON, mage.cards.p.PondProphet.class));
+        cards.add(new SetCardInfo("Quaketusk Boar", 146, Rarity.UNCOMMON, mage.cards.q.QuaketuskBoar.class));
         cards.add(new SetCardInfo("Repel Calamity", 27, Rarity.UNCOMMON, mage.cards.r.RepelCalamity.class));
         cards.add(new SetCardInfo("Rockface Village", 259, Rarity.UNCOMMON, mage.cards.r.RockfaceVillage.class));
         cards.add(new SetCardInfo("Run Away Together", 67, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
