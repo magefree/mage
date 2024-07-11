@@ -83,19 +83,19 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
         // Creature cards you own that aren't on the battlefield
         // in graveyard
         Set<Card> affectedCards =
-                controller.getGraveyard().stream().map(game::getCard).filter(Objects::nonNull).filter(card -> card.isOwnedBy(controller.getId()) && card.isCreature(game)).collect(Collectors.toSet());
+                controller.getGraveyard().stream().map(game::getCard).filter(Objects::nonNull).filter(card -> card.isOwnedBy(controller.getId())).collect(Collectors.toSet());
 
         // on Hand
         affectedCards.addAll(
-            controller.getHand().stream().map(game::getCard).filter(Objects::nonNull).filter(card -> card.isOwnedBy(controller.getId()) && card.isCreature(game)).collect(Collectors.toSet()));
+            controller.getHand().stream().map(game::getCard).filter(Objects::nonNull).filter(card -> card.isOwnedBy(controller.getId())).collect(Collectors.toSet()));
 
         // in Exile
         affectedCards.addAll(
-            game.getState().getExile().getAllCards(game, controller.getId()).stream().filter(card -> card.isOwnedBy(controller.getId()) && card.isCreature(game)).collect(Collectors.toSet()));
+            game.getState().getExile().getAllCards(game, controller.getId()).stream().filter(card -> card.isOwnedBy(controller.getId())).collect(Collectors.toSet()));
 
         // in Library (e.g. for Mystical Teachings)
         affectedCards.addAll(
-                controller.getLibrary().getCards(game).stream().filter(card -> card.isOwnedBy(controller.getId()) && card.isCreature(game)).collect(Collectors.toSet()));
+                controller.getLibrary().getCards(game).stream().filter(card -> card.isOwnedBy(controller.getId())).collect(Collectors.toSet()));
 
         // commander in command zone
         for (CommandObject commandObject : game.getState().getCommand()) {
@@ -125,7 +125,9 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
                     game.getState().getCreateMageObjectAttribute(mageObject, game).getSubtype().setIsAllCreatureTypes(true);
                     CardUtil.getObjectParts(mageObject).stream().filter(Objects::nonNull).forEach(objectId ->{
                                 MageObject partObject = game.getObject(objectId);
-                                game.getState().getCreateMageObjectAttribute(partObject, game).getSubtype().setIsAllCreatureTypes(true);
+                                if (partObject != null && partObject.isCreature(game)) {
+                                    game.getState().getCreateMageObjectAttribute(partObject, game).getSubtype().setIsAllCreatureTypes(true);
+                                }
                             });
                 });
 
