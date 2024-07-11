@@ -88,7 +88,6 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
         // on Hand
         affectedCards.addAll(
             controller.getHand().stream().map(game::getCard).filter(Objects::nonNull).filter(card -> card.isOwnedBy(controller.getId()) && card.isCreature(game)).collect(Collectors.toSet()));
-        affectedCards.forEach(card -> game.informPlayers(card.getName()));
 
         // in Exile
         affectedCards.addAll(
@@ -135,7 +134,6 @@ class MaskwoodNexusEffect extends ContinuousEffectImpl {
                 StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), game);
         for (Permanent creature : creatures) {
             if (creature != null) {
-                game.informPlayers("controlled: " + creature.getName());
                 creature.setIsAllCreatureTypes(game, true);
             }
         }
