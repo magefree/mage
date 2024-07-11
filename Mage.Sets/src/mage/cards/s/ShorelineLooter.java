@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class ShorelineLooter extends CardImpl {
 
-    private static final Condition condition = new InvertCondition(new CardsInControllerGraveyardCondition(7));
+    private static final Condition condition = new InvertCondition(ThresholdCondition.instance);
 
     public ShorelineLooter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
