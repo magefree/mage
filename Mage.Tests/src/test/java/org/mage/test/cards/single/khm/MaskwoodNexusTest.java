@@ -19,7 +19,7 @@ public class MaskwoodNexusTest extends CardTestPlayerBase {
     private static final String maskwood = "Maskwood Nexus";
     private static final String magda = "Magda, Brazen Outlaw";
     private static final String pMonk = "Pinnacle Monk";
-    private static final String strike = "Strike It Rich";
+    private static final String jadeOrb = "Jade Orb of Dragonkind";
 
     @Test
     public void magdaSearch() {
@@ -41,6 +41,23 @@ public class MaskwoodNexusTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, pMonk, 1);
         assertPermanentCount(playerA, magda, 1);
 
+    }
+
+    public void comboMowuAndMaskwoodNexus() {
+        addCard(Zone.HAND, playerA, pMonk);
+        addCard(Zone.BATTLEFIELD, playerA, maskwood, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, jadeOrb);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pMonk);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertTapped(jadeOrb, true);
+        assertCounterCount(pMonk, CounterType.P1P1, 1);
+        assertAbility(playerA, pMonk, HexproofAbility.getInstance(), true);
     }
 
 }
