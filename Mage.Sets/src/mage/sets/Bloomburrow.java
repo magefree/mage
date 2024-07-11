@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class Bloomburrow extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Flowerfoot Swordmaster", "Iridescent Vinelasher", "Manifold Mouse", "Tender Wildguide", "Thundertrap Trainer", "Warren Warleader");
+    private static final List<String> unfinished = Arrays.asList("Brambleguard Veteran", "Flowerfoot Swordmaster", "Iridescent Vinelasher", "Junkblade Bruiser", "Manifold Mouse", "Muerra, Trash Tactician", "Tender Wildguide", "Thundertrap Trainer", "Wandertale Mentor", "Warren Warleader");
     private static final Bloomburrow instance = new Bloomburrow();
 
     public static Bloomburrow getInstance() {
@@ -78,6 +78,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Thundertrap Trainer", 78, Rarity.RARE, mage.cards.t.ThundertrapTrainer.class));
         cards.add(new SetCardInfo("Valley Rotcaller", 119, Rarity.RARE, mage.cards.v.ValleyRotcaller.class));
         cards.add(new SetCardInfo("Veteran Guardmouse", 237, Rarity.COMMON, mage.cards.v.VeteranGuardmouse.class));
+        cards.add(new SetCardInfo("Wandertale Mentor", 240, Rarity.UNCOMMON, mage.cards.w.WandertaleMentor.class));
         cards.add(new SetCardInfo("Warren Warleader", 38, Rarity.MYTHIC, mage.cards.w.WarrenWarleader.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
