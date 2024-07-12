@@ -33,6 +33,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Brazen Collector", 128, Rarity.UNCOMMON, mage.cards.b.BrazenCollector.class));
         cards.add(new SetCardInfo("Bria, Riptide Rogue", 379, Rarity.MYTHIC, mage.cards.b.BriaRiptideRogue.class));
         cards.add(new SetCardInfo("Brightblade Stoat", 4, Rarity.UNCOMMON, mage.cards.b.BrightbladeStoat.class));
+        cards.add(new SetCardInfo("Burrowguard Mentor", 206, Rarity.UNCOMMON, mage.cards.b.BurrowguardMentor.class));
         cards.add(new SetCardInfo("Byrke, Long Ear of the Law", 380, Rarity.MYTHIC, mage.cards.b.ByrkeLongEarOfTheLaw.class));
         cards.add(new SetCardInfo("Byway Barterer", 129, Rarity.RARE, mage.cards.b.BywayBarterer.class));
         cards.add(new SetCardInfo("Cache Grab", 167, Rarity.COMMON, mage.cards.c.CacheGrab.class));
