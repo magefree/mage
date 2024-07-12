@@ -140,6 +140,7 @@ class OmoQueenOfVesuvaCreatureEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.staticText = "each nonland creature with an everything counter on it is every creature type";
         this.dependendToTypes.add(DependencyType.BecomeCreature);
+        this.dependencyTypes.add(DependencyType.AddingCreatureType);
     }
 
     private OmoQueenOfVesuvaCreatureEffect(final OmoQueenOfVesuvaCreatureEffect effect) {
