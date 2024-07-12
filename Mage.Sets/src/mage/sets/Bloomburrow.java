@@ -59,6 +59,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Head of the Homestead", 216, Rarity.COMMON, mage.cards.h.HeadOfTheHomestead.class));
         cards.add(new SetCardInfo("Hearthborn Battler", 139, Rarity.RARE, mage.cards.h.HearthbornBattler.class));
         cards.add(new SetCardInfo("Hidden Grotto", 254, Rarity.COMMON, mage.cards.h.HiddenGrotto.class));
+        cards.add(new SetCardInfo("Hivespine Wolverine", 177, Rarity.UNCOMMON, mage.cards.h.HivespineWolverine.class));
         cards.add(new SetCardInfo("Hop to It", 16, Rarity.UNCOMMON, mage.cards.h.HopToIt.class));
         cards.add(new SetCardInfo("Hugs, Grisly Guardian", 218, Rarity.MYTHIC, mage.cards.h.HugsGrislyGuardian.class));
         cards.add(new SetCardInfo("Hunter's Talent", 179, Rarity.UNCOMMON, mage.cards.h.HuntersTalent.class));
