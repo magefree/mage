@@ -40,6 +40,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Corpseberry Cultivator", 210, Rarity.COMMON, mage.cards.c.CorpseberryCultivator.class));
         cards.add(new SetCardInfo("Coruscation Mage", 131, Rarity.UNCOMMON, mage.cards.c.CoruscationMage.class));
         cards.add(new SetCardInfo("Diresight", 91, Rarity.COMMON, mage.cards.d.Diresight.class));
+        cards.add(new SetCardInfo("Downwind Ambusher", 92, Rarity.UNCOMMON, mage.cards.d.DownwindAmbusher.class));
         cards.add(new SetCardInfo("Dreamdew Entrancer", 211, Rarity.RARE, mage.cards.d.DreamdewEntrancer.class));
         cards.add(new SetCardInfo("Early Winter", 93, Rarity.COMMON, mage.cards.e.EarlyWinter.class));
         cards.add(new SetCardInfo("Feather of Flight", 13, Rarity.UNCOMMON, mage.cards.f.FeatherOfFlight.class));
