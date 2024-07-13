@@ -46,7 +46,7 @@ public final class CrestedSunmare extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new CreateTokenEffect(new CrestedSunmareToken()),
                         TargetController.ANY, false
-                ), new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0),
+                ), new YouGainedLifeCondition(),
                 "At the beginning of each end step, if you gained life this turn, " +
                         "create a 5/5 white Horse creature token."
         ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
