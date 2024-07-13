@@ -33,7 +33,7 @@ public final class NettleGuard extends CardImpl {
 
         // Valiant -- Whenever Nettle Guard becomes the target of a spell or ability you control for the first time each turn, it gets +0/+2 until end of turn.
         this.addAbility(new ValiantTriggeredAbility(new BoostSourceEffect(
-                0, 1, Duration.EndOfTurn, "it"
+                0, 2, Duration.EndOfTurn, "it"
         )));
 
         // {1}, Sacrifice Nettle Guard: Destroy target artifact or enchantment.
