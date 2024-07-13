@@ -120,6 +120,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Vinereap Mentor", 238, Rarity.UNCOMMON, mage.cards.v.VinereapMentor.class));
         cards.add(new SetCardInfo("Wandertale Mentor", 240, Rarity.UNCOMMON, mage.cards.w.WandertaleMentor.class));
         cards.add(new SetCardInfo("Warren Warleader", 38, Rarity.MYTHIC, mage.cards.w.WarrenWarleader.class));
+        cards.add(new SetCardInfo("Whiskervale Forerunner", 40, Rarity.RARE, mage.cards.w.WhiskervaleForerunner.class));
         cards.add(new SetCardInfo("Zoraline, Cosmos Caller", 242, Rarity.RARE, mage.cards.z.ZoralineCosmosCaller.class));
     }
 }
