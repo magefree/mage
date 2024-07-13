@@ -31,7 +31,7 @@ public final class BywayBarterer extends CardImpl {
 
         // Whenever you expend 4, you may discard your hand. If you do, draw two cards.
         this.addAbility(new ExpendTriggeredAbility(new DoIfCostPaid(
-                new DrawCardSourceControllerEffect(1), new DiscardHandCost()
+                new DrawCardSourceControllerEffect(2), new DiscardHandCost()
         ), ExpendTriggeredAbility.Expend.FOUR));
     }
 
