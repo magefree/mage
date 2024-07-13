@@ -4,15 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class Bloomburrow extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Coruscation Mage", "Darkstar Augur", "Finch Formation", "Flowerfoot Swordmaster", "Iridescent Vinelasher", "Manifold Mouse", "Splash Lasher", "Steampath Charger", "Tender Wildguide", "Thundertrap Trainer", "Warren Warleader");
     private static final Bloomburrow instance = new Bloomburrow();
 
     public static Bloomburrow getInstance() {
@@ -120,7 +116,5 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Wandertale Mentor", 240, Rarity.UNCOMMON, mage.cards.w.WandertaleMentor.class));
         cards.add(new SetCardInfo("Warren Warleader", 38, Rarity.MYTHIC, mage.cards.w.WarrenWarleader.class));
         cards.add(new SetCardInfo("Zoraline, Cosmos Caller", 242, Rarity.RARE, mage.cards.z.ZoralineCosmosCaller.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }
