@@ -80,7 +80,6 @@ public final class StarseerMentor extends CardImpl {
         );
         ability.addTarget(new TargetOpponent());
         ability.addWatcher(new PlayerGainedLifeWatcher());
-        ability.addWatcher(new PlayerLostLifeWatcher());
         ability.addHint(hint);
         this.addAbility(ability);
     }
