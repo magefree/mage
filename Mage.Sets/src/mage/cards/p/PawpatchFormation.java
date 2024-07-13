@@ -29,7 +29,7 @@ public final class PawpatchFormation extends CardImpl {
     }
 
     public PawpatchFormation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
         // Choose one --
         // * Destroy target creature with flying.
