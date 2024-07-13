@@ -23,7 +23,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public class PromiseGiftAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
+public class GiftAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Gift";
     private static final String reminderText = "You may promise an opponent a gift as you cast this spell. If you do, ";
@@ -39,7 +39,7 @@ public class PromiseGiftAbility extends StaticAbility implements OptionalAdditio
                 giftType.getDescription() + (isPermanent ? "." : " before its other effects.");
     }
 
-    public PromiseGiftAbility(Card card, GiftType giftType) {
+    public GiftAbility(Card card, GiftType giftType) {
         super(Zone.STACK, null);
         this.additionalCost = new OptionalAdditionalCostImpl(
                 keywordText + ' ' + giftType,
@@ -61,7 +61,7 @@ public class PromiseGiftAbility extends StaticAbility implements OptionalAdditio
         }
     }
 
-    private PromiseGiftAbility(final PromiseGiftAbility ability) {
+    private GiftAbility(final GiftAbility ability) {
         super(ability);
         this.rule = ability.rule;
         this.additionalCost = ability.additionalCost.copy();
@@ -69,8 +69,8 @@ public class PromiseGiftAbility extends StaticAbility implements OptionalAdditio
     }
 
     @Override
-    public PromiseGiftAbility copy() {
-        return new PromiseGiftAbility(this);
+    public GiftAbility copy() {
+        return new GiftAbility(this);
     }
 
     @Override
@@ -133,7 +133,7 @@ class PromiseGiftCost extends CostImpl {
         if (opponent == null) {
             return paid;
         }
-        source.setCostsTag(PromiseGiftAbility.GIFT_ACTIVATION_VALUE_KEY, opponent.getId());
+        source.setCostsTag(GiftAbility.GIFT_ACTIVATION_VALUE_KEY, opponent.getId());
         paid = true;
         return paid;
     }
@@ -167,7 +167,7 @@ class PromiseGiftEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(CardUtil.getSourceCostsTag(
-                game, source, PromiseGiftAbility.GIFT_ACTIVATION_VALUE_KEY, (UUID) null
+                game, source, GiftAbility.GIFT_ACTIVATION_VALUE_KEY, (UUID) null
         ));
         return player != null && giftType.applyGift(player, game, source);
     }

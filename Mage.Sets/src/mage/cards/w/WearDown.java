@@ -3,7 +3,7 @@ package mage.cards.w;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.GiftWasPromisedCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.PromiseGiftAbility;
+import mage.abilities.keyword.GiftAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,12 +24,13 @@ public final class WearDown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Gift a card
-        this.addAbility(new PromiseGiftAbility(this, GiftType.CARD));
+        this.addAbility(new GiftAbility(this, GiftType.CARD));
 
         // Destroy target artifact or enchantment. If the gift was promised, instead destroy two target artifacts and/or enchantments.
         this.getSpellAbility().addEffect(new DestroyTargetEffect().setText("destroy target artifact or enchantment. " +
                 "If the gift was promised, instead destroy two target artifacts and/or enchantments"));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getSpellAbility().setTargetAdjuster(WearDownAdjuster.instance);
     }
 
     private WearDown(final WearDown card) {
