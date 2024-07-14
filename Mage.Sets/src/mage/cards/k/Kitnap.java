@@ -18,6 +18,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.GiftType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -34,6 +35,8 @@ public final class Kitnap extends CardImpl {
     public Kitnap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 
+        this.subtype.add(SubType.AURA);
+
         // Gift a card
         this.addAbility(new GiftAbility(this, GiftType.CARD));
 
@@ -49,6 +52,7 @@ public final class Kitnap extends CardImpl {
                 new AddCountersAttachedEffect(CounterType.STUN.createInstance(3), ""),
                 condition, "if the gift wasn't promised, put three stun counters on it"
         ));
+        this.addAbility(ability);
 
         // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));

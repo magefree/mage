@@ -54,7 +54,7 @@ public class GiftAbility extends StaticAbility implements OptionalAdditionalSour
             this.addSubAbility(new ConditionalInterveningIfTriggeredAbility(
                     new EntersBattlefieldTriggeredAbility(new PromiseGiftEffect(giftType)),
                     GiftWasPromisedCondition.instance, "When this permanent enters, " +
-                    "if the gift was promised, they " + giftType + '.'
+                    "if the gift was promised, they " + giftType.getDescription() + '.'
             ).setRuleVisible(false));
         } else {
             card.getSpellAbility().addEffect(new PromiseGiftEffect(giftType));

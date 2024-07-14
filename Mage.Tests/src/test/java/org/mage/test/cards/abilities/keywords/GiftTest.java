@@ -4,6 +4,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -46,6 +47,51 @@ public class GiftTest extends CardTestPlayerBase {
 
         assertAbility(playerA, "Plains", HexproofAbility.getInstance(), true, 2);
         assertAbility(playerA, "Plains", IndestructibleAbility.getInstance(), true, 2);
+        assertHandCount(playerB, 1);
+    }
+
+    private static final String kitnap = "Kitnap";
+    private static final String bear = "Grizzly Bears";
+
+    @Test
+    public void testPermanentNoGift() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerB, bear);
+        addCard(Zone.HAND, playerA, kitnap);
+
+        setChoice(playerA, false);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, kitnap, bear);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, kitnap, 1);
+        assertPermanentCount(playerA, bear, 1);
+        assertTapped(bear, true);
+        assertCounterCount(bear, CounterType.STUN, 3);
+        assertHandCount(playerB, 0);
+    }
+
+    @Test
+    public void testPermanentGift() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerB, bear);
+        addCard(Zone.HAND, playerA, kitnap);
+
+        setChoice(playerA, true);
+        setChoice(playerA, playerB.getName());
+        setChoice(playerA, "When");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, kitnap, bear);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, kitnap, 1);
+        assertPermanentCount(playerA, bear, 1);
+        assertTapped(bear, true);
+        assertCounterCount(bear, CounterType.STUN, 0);
         assertHandCount(playerB, 1);
     }
 }
