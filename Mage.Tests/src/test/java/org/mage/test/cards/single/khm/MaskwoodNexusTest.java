@@ -13,6 +13,15 @@ import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ * {@link mage.cards.m.MaskwoodNexus Maskwood Nexus}
+ * {4}
+ * Artifact
+ * Creatures you control are every creature type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
+ * {3}, {T}: Create a 2/2 blue Shapeshifter creature token with changeling.
+ * @author TheElk801
+ */
+
 public class MaskwoodNexusTest extends CardTestPlayerBase {
 
 
@@ -24,6 +33,7 @@ public class MaskwoodNexusTest extends CardTestPlayerBase {
     @Test
     public void magdaSearch() {
         addCard(Zone.BATTLEFIELD, playerA, magda);
+        addCard(Zone.LIBRARY, playerA, "Sol Ring");
         addCard(Zone.BATTLEFIELD, playerA, maskwood);
         addCard(Zone.LIBRARY, playerA, pMonk);
         // create 5 treasures
@@ -33,9 +43,10 @@ public class MaskwoodNexusTest extends CardTestPlayerBase {
         setChoice(playerA, "X=5");
 
         // activate Magda and select Pinnicle Monk
+        setChoice(playerA, "Treasure Token", 5);
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice five Treasures:");
-
-
+        setChoice(playerA, pMonk);
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertPermanentCount(playerA, pMonk, 1);
