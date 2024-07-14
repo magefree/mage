@@ -1791,7 +1791,7 @@ public final class CardUtil {
             if (value == null) {
                 throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type null but is trying to be read. Use checkSourceCostsTagExists");
             }
-            if (value.getClass() != defaultValue.getClass()) {
+            if (defaultValue != null && value.getClass() != defaultValue.getClass()) {
                 throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type " + value.getClass().getName() + " different from default of type " + defaultValue.getClass().getName());
             }
             return (T) value;
