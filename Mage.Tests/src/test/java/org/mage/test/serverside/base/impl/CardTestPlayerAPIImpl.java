@@ -54,7 +54,7 @@ import java.util.stream.Collectors;
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
 
     // DEBUG only, enable it to fast startup tests without database create (delete \db\ folder to force db recreate)
-    private static final boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = false;
+    private static final boolean FAST_SCAN_WITHOUT_DATABASE_CREATE = true;
 
     private static final boolean SHOW_EXECUTE_TIME_PER_TEST = false;
 

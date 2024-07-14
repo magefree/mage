@@ -81,6 +81,11 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Game object. It must contain static data (e.g. no changeable in the game like game settings)
@@ -1141,6 +1146,7 @@ public abstract class GameImpl implements Game {
     }
 
     private boolean playTurn(Player player) {
+        this.state.clearTurnActions();
         boolean skipTurn = false;
         do {
             if (executingRollback) {
@@ -4152,5 +4158,50 @@ public abstract class GameImpl implements Game {
                 .append("; stack: ").append(this.getStack().toString())
                 .append(this.getState().isGameOver() ? "; FINISHED: " + this.getWinner() : "");
         return sb.toString();
+    }
+
+    public String getFullState() {
+        return this.state.getFullGameState(this);
+    }
+
+    public int getActionFromAgent(int actionSize, boolean started, String state) {
+        if (state.isEmpty()) state = this.state.getFullGameState(this);
+        try {
+            URL url = new URL("http://127.0.0.1:8000/mage/" + this.id);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Accept", "application/json");
+            con.setDoOutput(true);
+
+            String jsonInputString = String.format("{\"state\": \"%s\", \"started\": %b, \"actionSize\": %d}", state, started, actionSize);
+
+            try (OutputStream os = con.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            int responseCode = con.getResponseCode();
+            int response = -1;
+
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+                String responseLine = null;
+
+                while ((responseLine = in.readLine()) != null) {
+                    response = Integer.parseInt(responseLine.trim());
+                }
+                in.close();
+            }
+            con.disconnect();
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public void logTurnAction(String action){
+        this.state.logTurnAction(action);
     }
 }

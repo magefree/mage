@@ -7,6 +7,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.cards.*;
+import mage.counters.Counters;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
@@ -33,6 +34,7 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.target.Target;
+import mage.target.TargetAmount;
 import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
@@ -115,6 +117,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean reverseTurnOrder = false;
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
+    private StringBuilder turnActions = new StringBuilder();
 
     public GameState() {
         players = new Players();
@@ -188,6 +191,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
         this.reverseTurnOrder = state.reverseTurnOrder;
+        this.turnActions = state.turnActions;
     }
 
     public void clearOnGameRestart() {
@@ -1695,5 +1699,144 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public boolean getReverseTurnOrder() {
         return this.reverseTurnOrder;
+    }
+
+    public String getFullGameState(Game game) {
+        StringBuilder sb = threadLocalBuilder.get();
+        sb.append(game.getTurnStepType() + "\\n");
+
+        // Get Players
+        Collection<Player> players = this.players.values();
+        Iterator<Player> playerIterator = players.iterator();
+        while (playerIterator.hasNext()) {
+            Player currentPlayer = playerIterator.next();
+            sb.append(currentPlayer.getName() + "\\n");
+
+            // Get Hand
+            String handCardInfo = currentPlayer.getHand().getCards(game).stream()
+            .map(card -> card.getName())
+            .collect(Collectors.joining("; "));
+            if (priorityPlayerId != currentPlayer.getId()){
+            handCardInfo = currentPlayer.getHand().size() + "";
+            }
+            sb.append("Hand: [" + handCardInfo + "]\\n");
+
+            // Get Permanents
+            /*
+             * List of cards that can be played are ordered by hand then permanents.
+            */
+            Iterator<Permanent> permIterator = this.battlefield.getAllActivePermanents(currentPlayer.getId()).iterator();
+            sb.append("Permanents: [");
+            while (permIterator.hasNext()) {
+                Permanent permanent = permIterator.next();
+                Counters counters = permanent.getCounters(this);
+                StringBuilder permInfo = threadLocalBuilder.get();
+                if (permanent.isCreature()) permInfo.append(", " + permanent.getPower().getValue() + "/" + permanent.getToughness().getValue());
+                if (permanent.isCopy()) permInfo.append(", copy");
+                if (permanent.isTapped()) permInfo.append(", tapped");
+                if (!counters.isEmpty()) permInfo.append(", " + counters);
+                if (permanent.getDamage() > 0) permInfo.append(", " + permanent.getDamage() + " damage");
+                sb.append("(" + permanent.getIdName() + permInfo.toString() + "), ");
+            }
+            sb.append("]\\n");
+
+            // Get Graveyard
+            String graveCardInfo = currentPlayer.getGraveyard().getCards(game).stream()
+                .map(card -> card.getName())
+                .collect(Collectors.joining("; "));
+            sb.append("Graveyard: [" + graveCardInfo + "]\\n");
+
+            // Get Exile
+            String exiledCardInfo = this.exile.getAllCards(game, currentPlayer.getId()).stream()
+                .map(card -> card.getIdName() + ", " + card.getCounters(game))
+                .collect(Collectors.joining("; "));
+            sb.append("Exile: [" + exiledCardInfo + "]\\n");
+
+            // Get Library
+            UUID priorityPlayerId = game.getPriorityPlayerId();
+            List<Card> libraryCards = currentPlayer.getLibrary().getCards(game);
+            String libraryCardInfo = libraryCards.size() + "";
+            if (priorityPlayerId == currentPlayer.getId()){
+                libraryCards.sort(new Comparator<Card>() {
+                    @Override
+                    public int compare(Card p1, Card p2) {
+                        return p1.getName().compareTo(p2.getName());
+                    }
+                });
+                libraryCardInfo = libraryCards.stream().map(card -> card.getName()).collect(Collectors.joining("; "));
+            }
+            sb.append("Library: [" + libraryCardInfo + "]\\n");
+        }
+
+        // Get stack
+        sb.append("Stack: [" + this.getFullStackState(game) + "]\\n");
+
+        // Get a list of actions players have done this turn
+        String actions = this.turnActions.toString();
+        if (!actions.isEmpty()){
+            sb.append("Actions:\\n" + actions);
+        }
+
+        return sb.toString();
+    }
+
+    private String getFullStackState(Game game) {
+        Iterator<StackObject> iterator = game.getStack().iterator();
+        StringBuilder sb = new StringBuilder();
+        while(iterator.hasNext()){
+            StackObject object = iterator.next();
+            Ability ability = object.getStackAbility();
+            sb.append("(" + this.getAbilityAndSourceInfo(game, ability, true) + "), ");
+        }
+        return sb.toString();
+    }
+
+    private String getAbilityAndSourceInfo(Game game, Ability ability, boolean showTargets) {
+        MageObject sourceObject = ability.getSourceObject(game);
+        String abilityInfo = (sourceObject == null ? "" : sourceObject.getIdName() + ": ") + CardUtil.substring(ability.toString(), 30, "...");
+        String targetsInfo = "";
+        if (showTargets) {
+            List<String> allTargetsInfo = new ArrayList<>();
+            ability.getAllSelectedTargets().forEach(target -> {
+                target.getTargets().forEach(selectedId -> {
+                    String xInfo = "";
+                    if (target instanceof TargetAmount) {
+                        xInfo = "x" + target.getTargetAmount(selectedId) + " ";
+                    }
+
+                    String targetInfo = null;
+                    Player player = game.getPlayer(selectedId);
+                    if (player != null) {
+                        targetInfo = player.getName();
+                    }
+                    if (targetInfo == null) {
+                        MageObject object = game.getObject(selectedId);
+                        if (object != null) {
+                            targetInfo = object.getIdName();
+                        }
+                    }
+                    if (targetInfo == null) {
+                        StackObject stackObject = game.getState().getStack().getStackObject(selectedId);
+                        if (stackObject != null) {
+                            targetInfo = CardUtil.substring(stackObject.toString(), 20, "...");
+                        }
+                    }
+                    if (targetInfo == null) {
+                        targetInfo = "unknown";
+                    }
+                    allTargetsInfo.add(xInfo + targetInfo);
+                });
+            });
+            targetsInfo = String.join(" + ", allTargetsInfo);
+        }
+        return abilityInfo + (targetsInfo.isEmpty() ? "" : " -> " + targetsInfo);
+    }
+
+    public void logTurnAction(String action){
+        this.turnActions.append(action + "\\n");
+    }
+
+    public void clearTurnActions(){
+        this.turnActions.setLength(0);
     }
 }

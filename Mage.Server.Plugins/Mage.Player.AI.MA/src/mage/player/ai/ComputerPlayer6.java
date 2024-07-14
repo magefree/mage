@@ -170,10 +170,9 @@ public class ComputerPlayer6 extends ComputerPlayer {
             while (actions.peek() != null) {
                 Ability ability = actions.poll();
                 // example: ===> SELECTED ACTION for PlayerA: Play Swamp
-                logger.info(String.format("===> SELECTED ACTION for %s: %s",
-                        getName(),
-                        getAbilityAndSourceInfo(game, ability, true)
-                ));
+                String action = getName() + ": " + getAbilityAndSourceInfo(game, ability, true);
+                if (ability.toString() != "Pass") game.logTurnAction(action);
+                logger.info(String.format("===> SELECTED ACTION for %s", action));
                 if (!ability.getTargets().isEmpty()) {
                     for (Target target : ability.getTargets()) {
                         for (UUID id : target.getTargets()) {

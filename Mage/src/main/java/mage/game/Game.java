@@ -787,4 +787,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     boolean isGameStopped();
 
     boolean isTurnOrderReversed();
+
+    String getFullState();
+    int getActionFromAgent(int actionSize, boolean started, String state);
+    void logTurnAction(String action);
 }
