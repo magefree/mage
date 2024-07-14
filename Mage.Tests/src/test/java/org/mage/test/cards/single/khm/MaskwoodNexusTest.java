@@ -54,7 +54,7 @@ public class MaskwoodNexusTest extends CardTestPlayerBase {
 
     }
 
-    public void comboMowuAndMaskwoodNexus() {
+    public void maskwoodAndJadeOrbCounterTest() {
         addCard(Zone.HAND, playerA, pMonk);
         addCard(Zone.BATTLEFIELD, playerA, maskwood, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
