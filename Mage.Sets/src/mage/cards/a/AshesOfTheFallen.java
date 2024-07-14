@@ -67,7 +67,9 @@ class AshesOfTheFallenEffect extends ContinuousEffectImpl {
                         MageObject mageObject = game.getObject(card.getId());
                         if (mageObject != null) {
                             CardUtil.getObjectPartsAsObjects(mageObject).forEach(objectPart ->{
-                                game.getState().getCreateMageObjectAttribute(objectPart, game).getSubtype().add(subType);
+                                if (objectPart.isCreature(game)) {
+                                    game.getState().getCreateMageObjectAttribute(objectPart, game).getSubtype().add(subType);
+                                }
                             });
                         }
                     }
