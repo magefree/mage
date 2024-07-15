@@ -70,6 +70,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Iridescent Vinelasher", 99, Rarity.RARE, mage.cards.i.IridescentVinelasher.class));
         cards.add(new SetCardInfo("Island", 266, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Junkblade Bruiser", 220, Rarity.COMMON, mage.cards.j.JunkbladeBruiser.class));
+        cards.add(new SetCardInfo("Kitsa, Otterball Elite", 54, Rarity.MYTHIC, mage.cards.k.KitsaOtterballElite.class));
         cards.add(new SetCardInfo("Knightfisher", 55, Rarity.UNCOMMON, mage.cards.k.Knightfisher.class));
         cards.add(new SetCardInfo("Lifecreed Duo", 20, Rarity.COMMON, mage.cards.l.LifecreedDuo.class));
         cards.add(new SetCardInfo("Lightshell Duo", 56, Rarity.COMMON, mage.cards.l.LightshellDuo.class));
