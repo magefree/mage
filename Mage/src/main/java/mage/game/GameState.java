@@ -1769,7 +1769,7 @@ public class GameState implements Serializable, Copyable<GameState> {
                 for (Map.Entry<String, Integer> entry : cardCount.entrySet()) {
                     String cardName = entry.getKey();
                     Integer count = entry.getValue();
-                    libraryBuilder.append(cardName + " * " + count + "\\n");
+                    libraryBuilder.append(cardName + " * " + count + ";");
                 }
                 libraryCardInfo = libraryBuilder.toString();
             }
