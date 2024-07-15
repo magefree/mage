@@ -60,6 +60,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Glidedive Duo", 96, Rarity.COMMON, mage.cards.g.GlidediveDuo.class));
         cards.add(new SetCardInfo("Harnesser of Storms", 137, Rarity.UNCOMMON, mage.cards.h.HarnesserOfStorms.class));
         cards.add(new SetCardInfo("Harvestrite Host", 15, Rarity.UNCOMMON, mage.cards.h.HarvestriteHost.class));
+        cards.add(new SetCardInfo("Hazel's Nocturne", 97, Rarity.UNCOMMON, mage.cards.h.HazelsNocturne.class));
         cards.add(new SetCardInfo("Head of the Homestead", 216, Rarity.COMMON, mage.cards.h.HeadOfTheHomestead.class));
         cards.add(new SetCardInfo("Hearthborn Battler", 139, Rarity.RARE, mage.cards.h.HearthbornBattler.class));
         cards.add(new SetCardInfo("Hidden Grotto", 254, Rarity.COMMON, mage.cards.h.HiddenGrotto.class));
