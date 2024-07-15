@@ -1703,7 +1703,9 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public String getFullGameState(Game game) {
         StringBuilder sb = threadLocalBuilder.get();
-        sb.append(game.getTurnStepType() + "\\n");
+        String turnPlayer = game.getPlayer(this.getActivePlayerId()).getName();
+        String priorityPlayer = game.getPlayer(game.getPriorityPlayerId()).getName();
+        sb.append(turnPlayer + "'s turn: " + game.getTurnStepType() + ", Priority on " + priorityPlayer + "\\n");
 
         // Get Players
         Collection<Player> players = this.players.values();
@@ -1730,13 +1732,13 @@ public class GameState implements Serializable, Copyable<GameState> {
             while (permIterator.hasNext()) {
                 Permanent permanent = permIterator.next();
                 Counters counters = permanent.getCounters(this);
-                StringBuilder permInfo = threadLocalBuilder.get();
-                if (permanent.isCreature()) permInfo.append(", " + permanent.getPower().getValue() + "/" + permanent.getToughness().getValue());
-                if (permanent.isCopy()) permInfo.append(", copy");
-                if (permanent.isTapped()) permInfo.append(", tapped");
-                if (!counters.isEmpty()) permInfo.append(", " + counters);
-                if (permanent.getDamage() > 0) permInfo.append(", " + permanent.getDamage() + " damage");
-                sb.append("(" + permanent.getIdName() + permInfo.toString() + "), ");
+                String permInfo = "";
+                if (permanent.isCreature()) permInfo += ", " + permanent.getPower().getValue() + "/" + permanent.getToughness().getValue();
+                if (permanent.isCopy()) permInfo += ", copy";
+                if (permanent.isTapped()) permInfo += ", tapped";
+                if (!counters.isEmpty()) permInfo += ", " + counters;
+                if (permanent.getDamage() > 0) permInfo += ", " + permanent.getDamage() + " damage";
+                sb.append("(" + permanent.getIdName() + permInfo + "), ");
             }
             sb.append("]\\n");
 
