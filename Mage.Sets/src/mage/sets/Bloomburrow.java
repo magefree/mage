@@ -90,6 +90,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Nettle Guard", 23, Rarity.COMMON, mage.cards.n.NettleGuard.class));
         cards.add(new SetCardInfo("Oakhollow Village", 258, Rarity.UNCOMMON, mage.cards.o.OakhollowVillage.class));
         cards.add(new SetCardInfo("Overprotect", 185, Rarity.UNCOMMON, mage.cards.o.Overprotect.class));
+        cards.add(new SetCardInfo("Patchwork Banner", 247, Rarity.UNCOMMON, mage.cards.p.PatchworkBanner.class));
         cards.add(new SetCardInfo("Pawpatch Formation", 186, Rarity.UNCOMMON, mage.cards.p.PawpatchFormation.class));
         cards.add(new SetCardInfo("Pearl of Wisdom", 64, Rarity.COMMON, mage.cards.p.PearlOfWisdom.class));
         cards.add(new SetCardInfo("Pileated Provisioner", 25, Rarity.COMMON, mage.cards.p.PileatedProvisioner.class));
