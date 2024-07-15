@@ -1757,15 +1757,21 @@ public class GameState implements Serializable, Copyable<GameState> {
             // Get Library
             UUID priorityPlayerId = game.getPriorityPlayerId();
             List<Card> libraryCards = currentPlayer.getLibrary().getCards(game);
+            HashMap<String, Integer> cardCount = new HashMap<>();
+            for (Card card : libraryCards) {
+                String cardName = card.getName();
+                if (cardCount.get(cardName) == null) cardCount.put(cardName, 1);
+                else cardCount.replace(cardName, cardCount.get(cardName) + 1);
+            }
             String libraryCardInfo = libraryCards.size() + "";
             if (priorityPlayerId == currentPlayer.getId()){
-                libraryCards.sort(new Comparator<Card>() {
-                    @Override
-                    public int compare(Card p1, Card p2) {
-                        return p1.getName().compareTo(p2.getName());
-                    }
-                });
-                libraryCardInfo = libraryCards.stream().map(card -> card.getName()).collect(Collectors.joining("; "));
+                StringBuilder libraryBuilder = new StringBuilder();
+                for (Map.Entry<String, Integer> entry : cardCount.entrySet()) {
+                    String cardName = entry.getKey();
+                    Integer count = entry.getValue();
+                    libraryBuilder.append(cardName + " * " + count + "\\n");
+                }
+                libraryCardInfo = libraryBuilder.toString();
             }
             sb.append("Library: [" + libraryCardInfo + "]\\n");
         }
