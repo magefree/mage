@@ -73,11 +73,11 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
         addCard(Zone.LIBRARY, playerA, "Skullcrack", 2);
         addCard(Zone.LIBRARY, playerA, "Boros Charm", 4);
         addCard(Zone.LIBRARY, playerA, "Searing Blaze", 3);
-        addCard(Zone.LIBRARY, playerA, "Flare of Duplication", 4);
+        addCard(Zone.LIBRARY, playerA, "Flare of Duplication", 1);
         addCard(Zone.LIBRARY, playerA, "Lava Spike", 4);
         addCard(Zone.LIBRARY, playerA, "Rift Bolt", 4);
         addCard(Zone.LIBRARY, playerA, "Skewer the Critics", 4);
-        addCard(Zone.LIBRARY, playerA, "Underworld Breach", 4);
+        addCard(Zone.LIBRARY, playerA, "Underworld Breach", 2);
         addCard(Zone.LIBRARY, playerA, "Mountain", 4);
         addCard(Zone.LIBRARY, playerA, "Inspiring Vantage", 4);
         addCard(Zone.LIBRARY, playerA, "Sacred Foundry", 2);
@@ -94,11 +94,11 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
         addCard(Zone.LIBRARY, playerB, "Skullcrack", 2);
         addCard(Zone.LIBRARY, playerB, "Boros Charm", 4);
         addCard(Zone.LIBRARY, playerB, "Searing Blaze", 3);
-        addCard(Zone.LIBRARY, playerB, "Flare of Duplication", 4);
+        addCard(Zone.LIBRARY, playerB, "Flare of Duplication", 1);
         addCard(Zone.LIBRARY, playerB, "Lava Spike", 4);
         addCard(Zone.LIBRARY, playerB, "Rift Bolt", 4);
         addCard(Zone.LIBRARY, playerB, "Skewer the Critics", 4);
-        addCard(Zone.LIBRARY, playerB, "Underworld Breach", 4);
+        addCard(Zone.LIBRARY, playerB, "Underworld Breach", 2);
         addCard(Zone.LIBRARY, playerB, "Mountain", 4);
         addCard(Zone.LIBRARY, playerB, "Inspiring Vantage", 4);
         addCard(Zone.LIBRARY, playerB, "Sacred Foundry", 2);
