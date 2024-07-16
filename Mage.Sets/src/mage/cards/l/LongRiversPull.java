@@ -48,7 +48,7 @@ enum LongRiversPullAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (GiftWasPromisedCondition.instance.apply(game, ability)) {
+        if (GiftWasPromisedCondition.TRUE.apply(game, ability)) {
             ability.getTargets().clear();
             ability.addTarget(new TargetSpell());
         }

@@ -3,8 +3,6 @@ package mage.cards.k;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.GiftWasPromisedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -30,8 +28,6 @@ import java.util.UUID;
  */
 public final class Kitnap extends CardImpl {
 
-    private static final Condition condition = new InvertCondition(GiftWasPromisedCondition.instance);
-
     public Kitnap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 
@@ -50,7 +46,7 @@ public final class Kitnap extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());
         ability.addEffect(new ConditionalOneShotEffect(
                 new AddCountersAttachedEffect(CounterType.STUN.createInstance(3), ""),
-                condition, "if the gift wasn't promised, put three stun counters on it"
+                GiftWasPromisedCondition.FALSE, "if the gift wasn't promised, put three stun counters on it"
         ));
         this.addAbility(ability);
 

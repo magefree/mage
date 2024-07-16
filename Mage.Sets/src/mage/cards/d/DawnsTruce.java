@@ -28,14 +28,16 @@ public final class DawnsTruce extends CardImpl {
         this.addAbility(new GiftAbility(this, GiftType.CARD));
 
         // You and permanents you control gain hexproof until end of turn. If the gift was promised, permanents you control also gain indestructible until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControllerEffect(HexproofAbility.getInstance()).setText("you"));
+        this.getSpellAbility().addEffect(new GainAbilityControllerEffect(
+                HexproofAbility.getInstance(), Duration.EndOfTurn
+        ).setText("you"));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 HexproofAbility.getInstance(), Duration.EndOfTurn
         ).concatBy("and"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new GainAbilityControlledEffect(
                         IndestructibleAbility.getInstance(), Duration.EndOfTurn
-                )), GiftWasPromisedCondition.instance, "if the gift was promised, " +
+                )), GiftWasPromisedCondition.TRUE, "if the gift was promised, " +
                 "permanents you control also gain indestructible until end of turn"
         ));
     }

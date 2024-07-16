@@ -49,7 +49,7 @@ enum PeerlessRecyclingAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (GiftWasPromisedCondition.instance.apply(game, ability)) {
+        if (GiftWasPromisedCondition.TRUE.apply(game, ability)) {
             ability.getTargets().clear();
             ability.addTarget(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_PERMANENTS));
         }

@@ -34,7 +34,7 @@ public final class ValleyRally extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance())),
-                GiftWasPromisedCondition.instance, "If the gift was promised, target creature " +
+                GiftWasPromisedCondition.TRUE, "If the gift was promised, target creature " +
                 "you control gains first strike until end of turn"
         ));
         this.getSpellAbility().setTargetAdjuster(ValleyRallyAdjuster.instance);
@@ -55,7 +55,7 @@ enum ValleyRallyAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (GiftWasPromisedCondition.instance.apply(game, ability)) {
+        if (GiftWasPromisedCondition.TRUE.apply(game, ability)) {
             ability.getTargets().clear();
             ability.addTarget(new TargetControlledCreaturePermanent());
         }

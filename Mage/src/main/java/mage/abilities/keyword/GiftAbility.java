@@ -53,7 +53,7 @@ public class GiftAbility extends StaticAbility implements OptionalAdditionalSour
         if (card.isPermanent()) {
             this.addSubAbility(new ConditionalInterveningIfTriggeredAbility(
                     new EntersBattlefieldTriggeredAbility(new PromiseGiftEffect(giftType)),
-                    GiftWasPromisedCondition.instance, "When this permanent enters, " +
+                    GiftWasPromisedCondition.TRUE, "When this permanent enters, " +
                     "if the gift was promised, they " + giftType.getDescription() + '.'
             ).setRuleVisible(false));
         } else {
@@ -139,7 +139,7 @@ class PromiseGiftCost extends CostImpl {
     }
 
     @Override
-    public Cost copy() {
+    public PromiseGiftCost copy() {
         return new PromiseGiftCost(this);
     }
 
