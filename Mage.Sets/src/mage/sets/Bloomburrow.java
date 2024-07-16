@@ -21,6 +21,7 @@ public final class Bloomburrow extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Agate Assault", 122, Rarity.COMMON, mage.cards.a.AgateAssault.class));
         cards.add(new SetCardInfo("Bakersbane Duo", 163, Rarity.COMMON, mage.cards.b.BakersbaneDuo.class));
         cards.add(new SetCardInfo("Banishing Light", 1, Rarity.COMMON, mage.cards.b.BanishingLight.class));
         cards.add(new SetCardInfo("Bark-Knuckle Boxer", 164, Rarity.UNCOMMON, mage.cards.b.BarkKnuckleBoxer.class));
