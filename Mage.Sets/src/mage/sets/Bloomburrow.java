@@ -36,6 +36,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Byrke, Long Ear of the Law", 380, Rarity.MYTHIC, mage.cards.b.ByrkeLongEarOfTheLaw.class));
         cards.add(new SetCardInfo("Byway Barterer", 129, Rarity.RARE, mage.cards.b.BywayBarterer.class));
         cards.add(new SetCardInfo("Cache Grab", 167, Rarity.COMMON, mage.cards.c.CacheGrab.class));
+        cards.add(new SetCardInfo("Calamitous Tide", 43, Rarity.UNCOMMON, mage.cards.c.CalamitousTide.class));
         cards.add(new SetCardInfo("Carrot Cake", 7, Rarity.COMMON, mage.cards.c.CarrotCake.class));
         cards.add(new SetCardInfo("Cindering Cutthroat", 208, Rarity.COMMON, mage.cards.c.CinderingCutthroat.class));
         cards.add(new SetCardInfo("Clifftop Lookout", 168, Rarity.UNCOMMON, mage.cards.c.ClifftopLookout.class));
