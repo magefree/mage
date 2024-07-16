@@ -4,15 +4,14 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.OpponentLostLifeCondition;
+import mage.abilities.condition.common.OpponentsLostLifeCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.OpponentsLostLifeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -27,7 +26,6 @@ import java.util.UUID;
 public final class HiredClaw extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.LIZARD, "Lizards");
-    private static final Condition condition = new OpponentLostLifeCondition(ComparisonType.MORE_THAN, 0);
 
     public HiredClaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
@@ -47,8 +45,8 @@ public final class HiredClaw extends CardImpl {
         // {1}{R}: Put a +1/+1 counter on Hired Claw. Activate this ability only if an opponent has lost life this turn and only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new ManaCostsImpl<>("{1}{R}"), 1, condition
-        ));
+                new ManaCostsImpl<>("{1}{R}"), 1, OpponentsLostLifeCondition.instance
+        ).addHint(OpponentsLostLifeHint.instance));
     }
 
     private HiredClaw(final HiredClaw card) {
