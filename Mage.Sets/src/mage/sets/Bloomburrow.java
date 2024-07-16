@@ -134,6 +134,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Sinister Monolith", 113, Rarity.UNCOMMON, mage.cards.s.SinisterMonolith.class));
         cards.add(new SetCardInfo("Splash Lasher", 73, Rarity.UNCOMMON, mage.cards.s.SplashLasher.class));
         cards.add(new SetCardInfo("Stargaze", 114, Rarity.UNCOMMON, mage.cards.s.Stargaze.class));
+        cards.add(new SetCardInfo("Starscape Cleric", 116, Rarity.UNCOMMON, mage.cards.s.StarscapeCleric.class));
         cards.add(new SetCardInfo("Starseer Mentor", 233, Rarity.UNCOMMON, mage.cards.s.StarseerMentor.class));
         cards.add(new SetCardInfo("Steampath Charger", 153, Rarity.COMMON, mage.cards.s.SteampathCharger.class));
         cards.add(new SetCardInfo("Stickytongue Sentinel", 193, Rarity.COMMON, mage.cards.s.StickytongueSentinel.class));
