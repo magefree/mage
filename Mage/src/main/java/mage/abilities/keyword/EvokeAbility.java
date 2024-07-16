@@ -25,7 +25,7 @@ public class EvokeAbility extends AlternativeSourceCostsImpl {
     public EvokeAbility(Cost cost) {
         super(EVOKE_KEYWORD, REMINDER_TEXT, cost);
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()),
+                new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect(true)),
                 EvokedCondition.instance, "Sacrifice {this} when it enters the battlefield and was evoked.");
         ability.setRuleVisible(false);
         addSubAbility(ability);
