@@ -62,6 +62,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Flame Lash", 391, Rarity.COMMON, mage.cards.f.FlameLash.class));
         cards.add(new SetCardInfo("Flowerfoot Swordmaster", 14, Rarity.UNCOMMON, mage.cards.f.FlowerfootSwordmaster.class));
         cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Fountainport", 253, Rarity.RARE, mage.cards.f.Fountainport.class));
         cards.add(new SetCardInfo("Fountainport Bell", 245, Rarity.COMMON, mage.cards.f.FountainportBell.class));
         cards.add(new SetCardInfo("Galewind Moose", 173, Rarity.UNCOMMON, mage.cards.g.GalewindMoose.class));
         cards.add(new SetCardInfo("Giant Growth", 393, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
