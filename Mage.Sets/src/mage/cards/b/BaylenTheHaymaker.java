@@ -12,6 +12,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
@@ -57,7 +58,7 @@ public final class BaylenTheHaymaker extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
                 new TapTargetCost(new TargetControlledPermanent(4, filter))
         );
-        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance())
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
                 .setText("it gains trample until end of turn"));
         this.addAbility(ability);
     }

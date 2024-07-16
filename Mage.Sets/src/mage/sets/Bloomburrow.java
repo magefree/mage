@@ -36,6 +36,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Byrke, Long Ear of the Law", 380, Rarity.MYTHIC, mage.cards.b.ByrkeLongEarOfTheLaw.class));
         cards.add(new SetCardInfo("Byway Barterer", 129, Rarity.RARE, mage.cards.b.BywayBarterer.class));
         cards.add(new SetCardInfo("Cache Grab", 167, Rarity.COMMON, mage.cards.c.CacheGrab.class));
+        cards.add(new SetCardInfo("Calamitous Tide", 43, Rarity.UNCOMMON, mage.cards.c.CalamitousTide.class));
         cards.add(new SetCardInfo("Carrot Cake", 7, Rarity.COMMON, mage.cards.c.CarrotCake.class));
         cards.add(new SetCardInfo("Cindering Cutthroat", 208, Rarity.COMMON, mage.cards.c.CinderingCutthroat.class));
         cards.add(new SetCardInfo("Clifftop Lookout", 168, Rarity.UNCOMMON, mage.cards.c.ClifftopLookout.class));
@@ -50,7 +51,9 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Dreamdew Entrancer", 211, Rarity.RARE, mage.cards.d.DreamdewEntrancer.class));
         cards.add(new SetCardInfo("Early Winter", 93, Rarity.COMMON, mage.cards.e.EarlyWinter.class));
         cards.add(new SetCardInfo("Emberheart Challenger", 133, Rarity.RARE, mage.cards.e.EmberheartChallenger.class));
+        cards.add(new SetCardInfo("Fabled Passage", 252, Rarity.RARE, mage.cards.f.FabledPassage.class));
         cards.add(new SetCardInfo("Feather of Flight", 13, Rarity.UNCOMMON, mage.cards.f.FeatherOfFlight.class));
+        cards.add(new SetCardInfo("Feed the Cycle", 94, Rarity.UNCOMMON, mage.cards.f.FeedTheCycle.class));
         cards.add(new SetCardInfo("Fell", 95, Rarity.UNCOMMON, mage.cards.f.Fell.class));
         cards.add(new SetCardInfo("Finch Formation", 50, Rarity.COMMON, mage.cards.f.FinchFormation.class));
         cards.add(new SetCardInfo("Finneas, Ace Archer", 212, Rarity.RARE, mage.cards.f.FinneasAceArcher.class));
@@ -61,9 +64,13 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Glidedive Duo", 96, Rarity.COMMON, mage.cards.g.GlidediveDuo.class));
         cards.add(new SetCardInfo("Harnesser of Storms", 137, Rarity.UNCOMMON, mage.cards.h.HarnesserOfStorms.class));
         cards.add(new SetCardInfo("Harvestrite Host", 15, Rarity.UNCOMMON, mage.cards.h.HarvestriteHost.class));
+        cards.add(new SetCardInfo("Hazardroot Herbalist", 174, Rarity.UNCOMMON, mage.cards.h.HazardrootHerbalist.class));
+        cards.add(new SetCardInfo("Hazel's Nocturne", 97, Rarity.UNCOMMON, mage.cards.h.HazelsNocturne.class));
         cards.add(new SetCardInfo("Head of the Homestead", 216, Rarity.COMMON, mage.cards.h.HeadOfTheHomestead.class));
+        cards.add(new SetCardInfo("Heartfire Hero", 138, Rarity.UNCOMMON, mage.cards.h.HeartfireHero.class));
         cards.add(new SetCardInfo("Hearthborn Battler", 139, Rarity.RARE, mage.cards.h.HearthbornBattler.class));
         cards.add(new SetCardInfo("Hidden Grotto", 254, Rarity.COMMON, mage.cards.h.HiddenGrotto.class));
+        cards.add(new SetCardInfo("Hired Claw", 140, Rarity.RARE, mage.cards.h.HiredClaw.class));
         cards.add(new SetCardInfo("Hivespine Wolverine", 177, Rarity.UNCOMMON, mage.cards.h.HivespineWolverine.class));
         cards.add(new SetCardInfo("Hop to It", 16, Rarity.UNCOMMON, mage.cards.h.HopToIt.class));
         cards.add(new SetCardInfo("Hugs, Grisly Guardian", 218, Rarity.MYTHIC, mage.cards.h.HugsGrislyGuardian.class));
@@ -72,6 +79,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Iridescent Vinelasher", 99, Rarity.RARE, mage.cards.i.IridescentVinelasher.class));
         cards.add(new SetCardInfo("Island", 266, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Junkblade Bruiser", 220, Rarity.COMMON, mage.cards.j.JunkbladeBruiser.class));
+        cards.add(new SetCardInfo("Kindlespark Duo", 142, Rarity.COMMON, mage.cards.k.KindlesparkDuo.class));
         cards.add(new SetCardInfo("Kitnap", 53, Rarity.RARE, mage.cards.k.Kitnap.class));
         cards.add(new SetCardInfo("Kitsa, Otterball Elite", 54, Rarity.MYTHIC, mage.cards.k.KitsaOtterballElite.class));
         cards.add(new SetCardInfo("Knightfisher", 55, Rarity.UNCOMMON, mage.cards.k.Knightfisher.class));
@@ -85,6 +93,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Maha, Its Feathers Night", 100, Rarity.MYTHIC, mage.cards.m.MahaItsFeathersNight.class));
         cards.add(new SetCardInfo("Might of the Meek", 144, Rarity.COMMON, mage.cards.m.MightOfTheMeek.class));
         cards.add(new SetCardInfo("Mind Drill Assailant", 225, Rarity.COMMON, mage.cards.m.MindDrillAssailant.class));
+        cards.add(new SetCardInfo("Mindwhisker", 60, Rarity.UNCOMMON, mage.cards.m.Mindwhisker.class));
         cards.add(new SetCardInfo("Moonrise Cleric", 226, Rarity.COMMON, mage.cards.m.MoonriseCleric.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mouse Trapper", 22, Rarity.UNCOMMON, mage.cards.m.MouseTrapper.class));
@@ -93,6 +102,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Nettle Guard", 23, Rarity.COMMON, mage.cards.n.NettleGuard.class));
         cards.add(new SetCardInfo("Oakhollow Village", 258, Rarity.UNCOMMON, mage.cards.o.OakhollowVillage.class));
         cards.add(new SetCardInfo("Overprotect", 185, Rarity.UNCOMMON, mage.cards.o.Overprotect.class));
+        cards.add(new SetCardInfo("Patchwork Banner", 247, Rarity.UNCOMMON, mage.cards.p.PatchworkBanner.class));
         cards.add(new SetCardInfo("Pawpatch Formation", 186, Rarity.UNCOMMON, mage.cards.p.PawpatchFormation.class));
         cards.add(new SetCardInfo("Pearl of Wisdom", 64, Rarity.COMMON, mage.cards.p.PearlOfWisdom.class));
         cards.add(new SetCardInfo("Peerless Recycling", 188, Rarity.UNCOMMON, mage.cards.p.PeerlessRecycling.class));
@@ -122,6 +132,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Sunspine Lynx", 155, Rarity.RARE, mage.cards.s.SunspineLynx.class));
         cards.add(new SetCardInfo("Swamp", 270, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Take Out the Trash", 156, Rarity.COMMON, mage.cards.t.TakeOutTheTrash.class));
+        cards.add(new SetCardInfo("Teapot Slinger", 157, Rarity.UNCOMMON, mage.cards.t.TeapotSlinger.class));
         cards.add(new SetCardInfo("Tempest Angler", 235, Rarity.COMMON, mage.cards.t.TempestAngler.class));
         cards.add(new SetCardInfo("Tender Wildguide", 196, Rarity.RARE, mage.cards.t.TenderWildguide.class));
         cards.add(new SetCardInfo("Thistledown Players", 35, Rarity.COMMON, mage.cards.t.ThistledownPlayers.class));

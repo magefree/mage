@@ -30,8 +30,8 @@ public final class GlidediveDuo extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Glidedive Duo enters, each opponent loses 2 life and you gain 2 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(1));
-        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(2));
+        ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);
     }
 
