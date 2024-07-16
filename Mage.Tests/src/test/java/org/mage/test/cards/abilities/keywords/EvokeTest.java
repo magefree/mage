@@ -41,7 +41,7 @@ public class EvokeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shriekmaw");
         setChoice(playerA, true);
-        setChoice(playerA, ""); //Stack triggers
+        setChoice(playerA, "When {this} enters the battlefield, destroy"); //Stack triggers
         addTarget(playerA, "Silvercoat Lion"); // Destroy
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Exhume");
@@ -75,7 +75,7 @@ public class EvokeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mulldrifter");
         setChoice(playerA, true);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
-        setChoice(playerA, ""); //Stack triggers
+        setChoice(playerA, "When {this} enters the battlefield, draw"); //Stack triggers
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wrong Turn");
         addTarget(playerA, playerB);
