@@ -94,4 +94,43 @@ public class GiftTest extends CardTestPlayerBase {
         assertCounterCount(bear, CounterType.STUN, 0);
         assertHandCount(playerB, 1);
     }
+
+    private static final String hunger = "Nocturnal Hunger";
+
+    @Test
+    public void testNoGiftToken() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerB, bear);
+        addCard(Zone.HAND, playerA, hunger);
+
+        setChoice(playerA, false);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hunger, bear);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, hunger, 1);
+        assertGraveyardCount(playerB, bear, 1);
+        assertPermanentCount(playerB, "Food Token", 0);
+    }
+
+    @Test
+    public void testGiftToken() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerB, bear);
+        addCard(Zone.HAND, playerA, hunger);
+
+        setChoice(playerA, true);
+        setChoice(playerA, playerB.getName());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hunger, bear);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, hunger, 1);
+        assertGraveyardCount(playerB, bear, 1);
+        assertPermanentCount(playerB, "Food Token", 1);
+    }
 }
