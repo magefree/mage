@@ -21,9 +21,9 @@ public final class HazelsNocturne extends CardImpl {
 
         // Return up to two target creature cards from your graveyard to your hand. Each opponent loses 2 life and you gain 2 life.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
         this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(2));
-        this.getSpellAbility().addEffect(new GainLifeEffect(2));
+        this.getSpellAbility().addEffect(new GainLifeEffect(2).concatBy("and"));
     }
 
     private HazelsNocturne(final HazelsNocturne card) {
