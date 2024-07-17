@@ -29,6 +29,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Barkform Harvester", 243, Rarity.COMMON, mage.cards.b.BarkformHarvester.class));
         cards.add(new SetCardInfo("Baylen, the Haymaker", 205, Rarity.RARE, mage.cards.b.BaylenTheHaymaker.class));
         cards.add(new SetCardInfo("Bellowing Crier", 42, Rarity.COMMON, mage.cards.b.BellowingCrier.class));
+        cards.add(new SetCardInfo("Blossoming Sands", 396, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bonecache Overseer", 85, Rarity.UNCOMMON, mage.cards.b.BonecacheOverseer.class));
         cards.add(new SetCardInfo("Brambleguard Captain", 127, Rarity.UNCOMMON, mage.cards.b.BrambleguardCaptain.class));
         cards.add(new SetCardInfo("Brambleguard Veteran", 165, Rarity.UNCOMMON, mage.cards.b.BrambleguardVeteran.class));
@@ -68,8 +69,8 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Flame Lash", 391, Rarity.COMMON, mage.cards.f.FlameLash.class));
         cards.add(new SetCardInfo("Flowerfoot Swordmaster", 14, Rarity.UNCOMMON, mage.cards.f.FlowerfootSwordmaster.class));
         cards.add(new SetCardInfo("Forest", 278, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Fountainport", 253, Rarity.RARE, mage.cards.f.Fountainport.class));
         cards.add(new SetCardInfo("Fountainport Bell", 245, Rarity.COMMON, mage.cards.f.FountainportBell.class));
+        cards.add(new SetCardInfo("Fountainport", 253, Rarity.RARE, mage.cards.f.Fountainport.class));
         cards.add(new SetCardInfo("Galewind Moose", 173, Rarity.UNCOMMON, mage.cards.g.GalewindMoose.class));
         cards.add(new SetCardInfo("Giant Growth", 393, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Glidedive Duo", 96, Rarity.COMMON, mage.cards.g.GlidediveDuo.class));
@@ -148,6 +149,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Sunshower Druid", 195, Rarity.COMMON, mage.cards.s.SunshowerDruid.class));
         cards.add(new SetCardInfo("Sunspine Lynx", 155, Rarity.RARE, mage.cards.s.SunspineLynx.class));
         cards.add(new SetCardInfo("Swamp", 270, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swiftwater Cliffs", 397, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
         cards.add(new SetCardInfo("Sword of Vengeance", 395, Rarity.RARE, mage.cards.s.SwordOfVengeance.class));
         cards.add(new SetCardInfo("Take Out the Trash", 156, Rarity.COMMON, mage.cards.t.TakeOutTheTrash.class));
         cards.add(new SetCardInfo("Teapot Slinger", 157, Rarity.UNCOMMON, mage.cards.t.TeapotSlinger.class));
