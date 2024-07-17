@@ -134,6 +134,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Rust-Shield Rampager", 190, Rarity.COMMON, mage.cards.r.RustShieldRampager.class));
         cards.add(new SetCardInfo("Salvation Swan", 28, Rarity.RARE, mage.cards.s.SalvationSwan.class));
         cards.add(new SetCardInfo("Scales of Shale", 110, Rarity.COMMON, mage.cards.s.ScalesOfShale.class));
+        cards.add(new SetCardInfo("Scavenger's Talent", 111, Rarity.RARE, mage.cards.s.ScavengersTalent.class));
         cards.add(new SetCardInfo("Seasoned Warrenguard", 30, Rarity.UNCOMMON, mage.cards.s.SeasonedWarrenguard.class));
         cards.add(new SetCardInfo("Seedglaive Mentor", 231, Rarity.UNCOMMON, mage.cards.s.SeedglaiveMentor.class));
         cards.add(new SetCardInfo("Seedpod Squire", 232, Rarity.COMMON, mage.cards.s.SeedpodSquire.class));
