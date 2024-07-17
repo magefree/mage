@@ -29,6 +29,7 @@ public class GiftAbility extends StaticAbility implements OptionalAdditionalSour
     private static final String reminderText = "You may promise an opponent a gift as you cast this spell. If you do, ";
     private final String rule;
 
+    // this is set to null first when the player chooses to use it then set to the playerId later once the player is chosen
     public static final String GIFT_ACTIVATION_VALUE_KEY = "giftPromisedActivation";
 
     protected OptionalAdditionalCost additionalCost;
