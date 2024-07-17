@@ -1,5 +1,6 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.PhaseStep;
@@ -131,6 +132,46 @@ public class GiftTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, hunger, 1);
         assertGraveyardCount(playerB, bear, 1);
+        assertPermanentCount(playerB, "Food Token", 1);
+    }
+
+    private static final String rally = "Valley Rally";
+
+    @Test
+    public void testNoGiftExtraTarget() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.HAND, playerA, rally);
+
+        setChoice(playerA, false);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, rally);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, bear, 2 + 2, 2 + 0);
+        assertAbility(playerA, bear, FirstStrikeAbility.getInstance(), false);
+        assertPermanentCount(playerB, "Food Token", 0);
+    }
+
+    @Test
+    public void testGiftExtraTarget() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, bear);
+        addCard(Zone.HAND, playerA, rally);
+
+        setChoice(playerA, true);
+        setChoice(playerA, playerB.getName());
+        addTarget(playerA, bear);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, rally);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, bear, 2 + 2, 2 + 0);
+        assertAbility(playerA, bear, FirstStrikeAbility.getInstance(), true);
         assertPermanentCount(playerB, "Food Token", 1);
     }
 }
