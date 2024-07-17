@@ -127,6 +127,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Rabbit Response", 26, Rarity.COMMON, mage.cards.r.RabbitResponse.class));
         cards.add(new SetCardInfo("Rabid Bite", 394, Rarity.COMMON, mage.cards.r.RabidBite.class));
         cards.add(new SetCardInfo("Repel Calamity", 27, Rarity.UNCOMMON, mage.cards.r.RepelCalamity.class));
+        cards.add(new SetCardInfo("Reptilian Recruiter", 149, Rarity.UNCOMMON, mage.cards.r.ReptilianRecruiter.class));
         cards.add(new SetCardInfo("Rockface Village", 259, Rarity.UNCOMMON, mage.cards.r.RockfaceVillage.class));
         cards.add(new SetCardInfo("Run Away Together", 67, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Rust-Shield Rampager", 190, Rarity.COMMON, mage.cards.r.RustShieldRampager.class));
