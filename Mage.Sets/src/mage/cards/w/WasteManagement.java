@@ -17,7 +17,7 @@ import mage.game.permanent.token.RogueToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInASingleGraveyard;
-import mage.target.targetadjustment.ReplacingTargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public final class WasteManagement extends CardImpl {
         // Exile up to two target cards from a single graveyard. If this spell was kicked, instead exile target player's graveyard. Create a 2/2 black Rogue creature token for each creature card exiled this way.
         this.getSpellAbility().addEffect(new WasteManagementEffect());
         this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD));
-        this.getSpellAbility().setTargetAdjuster(new ReplacingTargetAdjuster(KickedCondition.ONCE,
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
                 new TargetPlayer()));
     }
 

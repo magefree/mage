@@ -8,7 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.ReplacingTargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class BloodBeckoning extends CardImpl {
                 .setText("return target creature card from your graveyard to your hand. If this spell was kicked, " +
                         "instead return two target creature cards from your graveyard to your hand"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
-        this.getSpellAbility().setTargetAdjuster(new ReplacingTargetAdjuster(KickedCondition.ONCE,
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
                 new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_CREATURE)));
 
     }

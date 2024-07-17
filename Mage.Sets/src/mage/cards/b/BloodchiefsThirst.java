@@ -12,7 +12,7 @@ import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
-import mage.target.targetadjustment.ReplacingTargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public final class BloodchiefsThirst extends CardImpl {
                         "If this spell was kicked, instead destroy target creature or planeswalker."
         ));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().setTargetAdjuster(new ReplacingTargetAdjuster(KickedCondition.ONCE,
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
                 new TargetCreatureOrPlaneswalker()));
     }
 
