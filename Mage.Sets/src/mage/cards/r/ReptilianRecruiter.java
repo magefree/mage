@@ -89,6 +89,7 @@ class ReptilianRecruiterEffect extends OneShotEffect {
         }
         game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn)
                 .setTargetPointer(new FixedTarget(permanent, game)), source);
+        game.processAction();
         permanent.untap(game);
         game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
                 .setTargetPointer(new FixedTarget(permanent, game)), source);
