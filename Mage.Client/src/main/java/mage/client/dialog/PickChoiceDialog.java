@@ -105,12 +105,17 @@ public class PickChoiceDialog extends MageDialog {
             }
         }
 
-        // sorting
+        // custom sorting
         if (choice.isSortEnabled()) {
             this.allItems.sort((o1, o2) -> {
                 Integer n1 = choice.getSortData().get(o1.getKey());
                 Integer n2 = choice.getSortData().get(o2.getKey());
-                return Integer.compare(n1, n2);
+                if (n1.equals(n2)) {
+                    // default sorting by value
+                    return o1.value.compareTo(o2.value);
+                } else {
+                    return Integer.compare(n1, n2);
+                }
             });
         }
 

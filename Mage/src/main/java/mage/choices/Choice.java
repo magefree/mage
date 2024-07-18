@@ -1,11 +1,14 @@
 package mage.choices;
 
+import mage.game.Game;
+import mage.players.Player;
 import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -107,4 +110,11 @@ public interface Choice extends Serializable, Copyable<Choice> {
     void setRandomChoice();
 
     boolean setChoiceByAnswers(List<String> answers, boolean removeSelectAnswerFromList);
+
+    /**
+     * Run additional code before player start to choose (example: add info and hints for choosing player)
+     */
+    void onChooseStart(Game game, UUID choosingPlayerId);
+
+    void onChooseEnd(Game game, UUID choosingPlayerId, String choiceResult);
 }

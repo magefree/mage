@@ -1,5 +1,6 @@
 package mage.choices;
 
+import mage.game.Game;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
@@ -399,5 +400,15 @@ public class ChoiceImpl implements Choice {
             this.required = false;
             logger.error("Empty choice dialog in " + this.getClass().getCanonicalName(), new Throwable());
         }
+    }
+
+    @Override
+    public void onChooseStart(Game game, UUID choosingPlayerId) {
+        // nothing to do
+    }
+
+    @Override
+    public void onChooseEnd(Game game, UUID choosingPlayerId, String choiceResult) {
+        // nothing to do
     }
 }

@@ -77,16 +77,14 @@ class BecomesChosenCreatureTypeControlledEffect extends OneShotEffect {
         Card card = game.getCard(source.getSourceId());
         String chosenType = "";
         if (player != null && card != null) {
-            Choice typeChoice = new ChoiceCreatureType();
-            String msg = "Choose a creature type";
-            typeChoice.setMessage(msg);
+            Choice typeChoice = new ChoiceCreatureType(game, source);
             while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;
                 }
             }
-            game.informPlayers(card.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            chosenType = typeChoice.getChoice();
+            game.informPlayers(card.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
+            chosenType = typeChoice.getChoiceKey();
             if (chosenType != null && !chosenType.isEmpty()) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                     ContinuousEffect effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.byDescription(chosenType));

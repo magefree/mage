@@ -547,6 +547,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
+                replacementEffectChoice.onChooseStart(game, playerId);
                 game.fireChooseChoiceEvent(playerId, replacementEffectChoice);
             }
             waitForResponse(game);
@@ -571,6 +572,7 @@ public class HumanPlayer extends PlayerImpl {
                     int index = 0;
                     for (String key : effectsMap.keySet()) {
                         if (replacementEffectChoice.getChoiceKey().equals(key)) {
+                            replacementEffectChoice.onChooseEnd(game, playerId, replacementEffectChoice.getChoiceKey());
                             return index;
                         }
                         index++;
@@ -624,6 +626,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
+                choice.onChooseStart(game, playerId);
                 game.fireChooseChoiceEvent(playerId, choice);
             }
             waitForResponse(game);
@@ -635,9 +638,11 @@ public class HumanPlayer extends PlayerImpl {
                 } else {
                     choice.setChoice(val);
                 }
+                choice.onChooseEnd(game, playerId, val);
                 return true;
             } else if (!choice.isRequired()) {
                 // cancel
+                choice.onChooseEnd(game, playerId, null);
                 return false;
             }
         }

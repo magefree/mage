@@ -55,11 +55,11 @@ enum SelectiveSnareAdjuster implements TargetAdjuster {
         if (player == null) {
             return;
         }
-        Choice choice = new ChoiceCreatureType();
+        Choice choice = new ChoiceCreatureType(game, ability);
         if (!player.choose(Outcome.Benefit, choice, game)) {
             return;
         }
-        SubType subType = SubType.byDescription(choice.getChoice());
+        SubType subType = SubType.byDescription(choice.getChoiceKey());
         int xValue = ability.getManaCostsToPay().getX();
         FilterPermanent filter = new FilterCreaturePermanent(subType.toString() + " creatures");
         filter.add(subType.getPredicate());
