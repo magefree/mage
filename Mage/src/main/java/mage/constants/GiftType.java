@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.token.FishNoAbilityToken;
 import mage.game.permanent.token.FoodToken;
+import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 
 /**
@@ -17,6 +18,10 @@ public enum GiftType {
     FOOD(
             "a Food", "create a Food token",
             (p, g, s) -> new FoodToken().putOntoBattlefield(1, g, s, p.getId())
+    ),
+    TREASURE(
+            "a Treasure", "create a Treasure token",
+            (p, g, s) -> new TreasureToken().putOntoBattlefield(1, g, s, p.getId())
     ),
     TAPPED_FISH(
             "a tapped Fish", "create a tapped 1/1 blue Fish creature token",
