@@ -42,7 +42,7 @@ public final class StarCharter extends CardImpl {
                 new LookLibraryAndPickControllerEffect(
                         4, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM
                 ), TargetController.YOU, YouGainedOrLostLifeCondition.instance, false
-        ), new PlayerGainedLifeWatcher());
+        ).addHint(YouGainedOrLostLifeCondition.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private StarCharter(final StarCharter card) {

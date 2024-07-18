@@ -3,18 +3,13 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.OrCondition;
-import mage.abilities.condition.common.YouGainedLifeCondition;
-import mage.abilities.condition.common.YouLostLifeCondition;
+import mage.abilities.condition.common.YouGainedOrLostLifeCondition;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -26,7 +21,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
-import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.UUID;
 
@@ -34,14 +28,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class StarseerMentor extends CardImpl {
-
-    private static final Condition condition =
-            new OrCondition(
-                    "if you gained or lost life this turn",
-                    new YouGainedLifeCondition(),
-                    new YouLostLifeCondition()
-            );
-    private static final Hint hint = new ConditionHint(condition);
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent");
 
@@ -75,12 +61,12 @@ public final class StarseerMentor extends CardImpl {
                                 ),
                                 "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
                         ), TargetController.YOU, false
-                ), condition, "At the beginning of your end step, if you gained or lost life this turn, "
+                ), YouGainedOrLostLifeCondition.instance, "At the beginning of your end step, if you gained or lost life this turn, "
                 + "target opponent loses 3 life unless they sacrifice a nonland permanent or discard a card."
         );
         ability.addTarget(new TargetOpponent());
         ability.addWatcher(new PlayerGainedLifeWatcher());
-        ability.addHint(hint);
+        ability.addHint(YouGainedOrLostLifeCondition.getHint());
         this.addAbility(ability);
     }
 

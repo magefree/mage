@@ -34,7 +34,7 @@ public final class StarlitSoothsayer extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new SurveilEffect(1), TargetController.YOU,
                 YouGainedOrLostLifeCondition.instance, false
-        ), new PlayerGainedLifeWatcher());
+        ).addHint(YouGainedOrLostLifeCondition.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private StarlitSoothsayer(final StarlitSoothsayer card) {
