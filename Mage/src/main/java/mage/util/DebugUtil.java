@@ -40,7 +40,7 @@ public class DebugUtil {
     public static boolean GUI_GAME_DIALOGS_DRAW_CARDS_AREA_BORDER = false;
 
     // database - show additional info about cache and memory settings
-    public static boolean DATABASE_SHOW_CACHE_AND_MEMORY_STATS_ON_STARTUP = true;
+    public static boolean DATABASE_SHOW_CACHE_AND_MEMORY_STATS_ON_STARTUP = false;
 
     // database - collect sql queries and stats
     // how-to use:
