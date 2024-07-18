@@ -62,7 +62,7 @@ class EngulfingSlagwurmEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (creature != null && controller != null) {
-            controller.gainLife(creature.getPower().getValue(), game, source);
+            controller.gainLife(creature.getToughness().getValue(), game, source);
         }
         return false;
     }
