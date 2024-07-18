@@ -91,6 +91,18 @@ public interface Choice extends Serializable, Copyable<Choice> {
 
     Map<String, Integer> getSortData();
 
+    // custom hints
+    void setHintData(Map<String, List<String>> hintData);
+
+    Map<String, List<String>> getHintData();
+
+    // builder
+
+    /**
+     * Fast add single key item. Use null value to ignore sort or hint data
+     */
+    Choice withItem(String key, String value, Integer sort, ChoiceHintType hintType, String hintValue);
+
     // random choice (for AI usage)
     void setRandomChoice();
 

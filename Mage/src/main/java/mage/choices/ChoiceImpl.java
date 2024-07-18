@@ -7,7 +7,11 @@ import org.apache.log4j.Logger;
 import java.util.*;
 
 /**
- * @author BetaSteward_at_googlemail.com, JayDi85
+ * Game's choose dialog to select one item from a list
+ * <p>
+ * Support GUI related features like headers, sorting, tooltips/popups
+ *
+ * @author JayDi85
  */
 public class ChoiceImpl implements Choice {
 
@@ -21,6 +25,7 @@ public class ChoiceImpl implements Choice {
     protected Set<String> choices = new LinkedHashSet<>();
     protected Map<String, String> keyChoices = new LinkedHashMap<>();
     protected Map<String, Integer> sortData = new LinkedHashMap<>();
+    protected Map<String, List<String>> hintData = new LinkedHashMap<>(); // value -> [type, hint]
     protected String message;
     protected String subMessage;
     protected boolean searchEnabled = true; // enable for all windows by default
@@ -40,6 +45,9 @@ public class ChoiceImpl implements Choice {
         this(required, ChoiceHintType.TEXT);
     }
 
+    /**
+     * @param hintType enable card popup hint (each value will be used as card/dungeon name)
+     */
     public ChoiceImpl(boolean required, ChoiceHintType hintType) {
         this.required = required;
         this.hintType = hintType;
@@ -226,6 +234,40 @@ public class ChoiceImpl implements Choice {
     @Override
     public Map<String, Integer> getSortData() {
         return this.sortData;
+    }
+
+    @Override
+    public Map<String, List<String>> getHintData() {
+        return this.hintData;
+    }
+
+    @Override
+    public Choice withItem(String key, String value, Integer sort, ChoiceHintType hintType, String hintValue) {
+        this.keyChoices.put(key, value);
+        if (sort != null) {
+            this.sortData.put(key, sort);
+        }
+        if (hintType != null) {
+            this.hintData.put(key, Arrays.asList(hintType.toString(), hintValue));
+        }
+        return this;
+    }
+
+    @Override
+    public void setHintData(Map<String, List<String>> hintData) {
+        // runtime check
+        hintData.forEach((key, info) -> {
+            try {
+                ChoiceHintType hintType = ChoiceHintType.valueOf(info.get(0));
+                if (hintType == ChoiceHintType.GAME_OBJECT) {
+                    UUID objectId = UUID.fromString(info.get(1));
+                }
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Wrong code usage: hints info must contains valid data, but found - " + info);
+            }
+        });
+
+        this.hintData = hintData;
     }
 
     @Override

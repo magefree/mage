@@ -1,12 +1,5 @@
 package mage.client.dialog;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import mage.cards.action.TransferData;
 import mage.choices.Choice;
 import mage.choices.ChoiceHintType;
@@ -14,12 +7,21 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.VirtualCardInfo;
 import mage.client.components.MageEditorPane;
+import mage.client.game.GamePanel;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.MageDialogState;
 import mage.game.command.Dungeon;
 import mage.view.CardView;
 import mage.view.DungeonView;
 import org.mage.card.arcane.ManaSymbols;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.List;
+import java.util.*;
 
 /**
  * GUI: choosing one of the list's item. Uses in game's and non game's GUI like fast search
@@ -89,11 +91,17 @@ public class PickChoiceDialog extends MageDialog {
         this.allItems.clear();
         if (choice.isKeyChoice()) {
             for (Map.Entry<String, String> entry : choice.getKeyChoices().entrySet()) {
-                this.allItems.add(new KeyValueItem(entry.getKey(), entry.getValue(), choice.getHintType()));
+                // default hints
+                String hintValue = entry.getValue();
+                ChoiceHintType hintType = choice.getHintType();
+                this.allItems.add(new KeyValueItem(entry.getKey(), entry.getValue(), hintValue, hintType));
             }
         } else {
             for (String value : choice.getChoices()) {
-                this.allItems.add(new KeyValueItem(value, value, choice.getHintType()));
+                // default hints
+                String hintValue = value;
+                ChoiceHintType hintType = choice.getHintType();
+                this.allItems.add(new KeyValueItem(value, value, hintValue, hintType));
             }
         }
 
@@ -103,6 +111,17 @@ public class PickChoiceDialog extends MageDialog {
                 Integer n1 = choice.getSortData().get(o1.getKey());
                 Integer n2 = choice.getSortData().get(o2.getKey());
                 return Integer.compare(n1, n2);
+            });
+        }
+
+        // custom hints (per item)
+        if (!choice.getHintData().isEmpty()) {
+            this.allItems.forEach(item -> {
+                List<String> info = choice.getHintData().getOrDefault(item.key, null);
+                if (info != null) {
+                    item.hintType = ChoiceHintType.valueOf(info.get(0));
+                    item.hint = info.get(1);
+                }
             });
         }
 
@@ -264,41 +283,52 @@ public class PickChoiceDialog extends MageDialog {
     }
 
     private void choiceHintShow(int modelIndex) {
+        // close old hint
+        if (lastModelIndex != modelIndex) {
+            cardInfo.onMouseExited();
+            listChoices.setToolTipText(null);
+        }
 
-        switch (choice.getHintType()) {
+        KeyValueItem item = (KeyValueItem) listChoices.getModel().getElementAt(modelIndex);
+        switch (item.getHintType()) {
             case CARD:
-            case CARD_DUNGEON: {
+            case CARD_DUNGEON:
+            case GAME_OBJECT: {
                 // as popup card
                 if (lastModelIndex != modelIndex) {
-                    // new card
-                    KeyValueItem item = (KeyValueItem) listChoices.getModel().getElementAt(modelIndex);
-                    String cardName = item.getValue();
-
-                    if (choice.getHintType() == ChoiceHintType.CARD) {
-                        cardInfo.init(cardName, this.bigCard, this.gameId);
-                    } else if (choice.getHintType() == ChoiceHintType.CARD_DUNGEON) {
-                        CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(cardName)));
+                    // NEW
+                    if (item.getHintType() == ChoiceHintType.CARD) {
+                        // as card name
+                        cardInfo.init(item.getHint(), this.bigCard, this.gameId);
+                    } else if (item.getHintType() == ChoiceHintType.CARD_DUNGEON) {
+                        // as card name
+                        CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(item.getHint())));
                         cardInfo.init(cardView, this.bigCard, this.gameId);
+                    } else if (item.getHintType() == ChoiceHintType.GAME_OBJECT) {
+                        // as object
+                        GamePanel game = MageFrame.getGame(this.gameId);
+                        if (game != null) {
+                            UUID objectId = UUID.fromString(item.getHint());
+                            CardView cardView = game.getLastGameData().findCard(objectId);
+                            if (cardView != null) {
+                                cardInfo.init(cardView, this.bigCard, this.gameId);
+                            }
+                        }
                     }
                     cardInfo.setPopupAutoLocationMode(TransferData.PopupAutoLocationMode.PUT_NEAR_MOUSE_POSITION);
-
                     cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
                 } else {
-                    // old card
+                    // OLD - keep it opened
                     cardInfo.onMouseMoved(MouseInfo.getPointerInfo().getLocation());
                 }
                 lastModelIndex = modelIndex;
                 break;
             }
 
-            default:
             case TEXT: {
                 // as popup text
                 if (lastModelIndex != modelIndex) {
-                    // new hint with GUI size and mana symbols support
-                    listChoices.setToolTipText(null);
-                    KeyValueItem item = (KeyValueItem) listChoices.getModel().getElementAt(modelIndex);
-                    String hint =  item.getValue();
+                    String hint = item.getHint();
                     hint = ManaSymbols.replaceSymbolsWithHTML(hint, ManaSymbols.Type.DIALOG);
                     hint = GUISizeHelper.textToHtmlWithSize(hint, listChoices.getFont());
                     listChoices.setToolTipText(hint);
@@ -306,26 +336,16 @@ public class PickChoiceDialog extends MageDialog {
                 lastModelIndex = modelIndex;
                 break;
             }
+
+            default: {
+                throw new IllegalArgumentException("Unsupported hint type " + item.getHintType());
+            }
         }
     }
 
     private void choiceHintHide() {
-        switch (choice.getHintType()) {
-            case CARD:
-            case CARD_DUNGEON: {
-                // as popup card
-                cardInfo.onMouseExited();
-                break;
-            }
-
-            default:
-            case TEXT: {
-                // as popup text
-                listChoices.setToolTipText(null);
-                break;
-            }
-        }
-
+        cardInfo.onMouseExited();
+        listChoices.setToolTipText(null);
         lastModelIndex = -1;
     }
 
@@ -401,7 +421,7 @@ public class PickChoiceDialog extends MageDialog {
         KeyValueItem item = (KeyValueItem) this.listChoices.getSelectedValue();
         boolean isSpecial = choice.isSpecialEnabled() && cbSpecial.isSelected();
 
-        // auto select one item (after incemental filtering)
+        // auto select one item (after incremental filtering)
         if ((item == null) && (this.listChoices.getModel().getSize() == 1)) {
             this.listChoices.setSelectedIndex(0);
             item = (KeyValueItem) this.listChoices.getSelectedValue();
@@ -434,13 +454,15 @@ public class PickChoiceDialog extends MageDialog {
     static class KeyValueItem {
 
         protected final String key;
-        protected final String value;
-        protected final ChoiceHintType hint;
+        protected String value;
+        protected String hint;
+        protected ChoiceHintType hintType;
 
-        public KeyValueItem(String key, String value, ChoiceHintType hint) {
+        public KeyValueItem(String key, String value, String hint, ChoiceHintType hintType) {
             this.key = key;
             this.value = value;
             this.hint = hint;
+            this.hintType = hintType;
         }
 
         public String getKey() {
@@ -451,13 +473,17 @@ public class PickChoiceDialog extends MageDialog {
             return this.value;
         }
 
-        public ChoiceHintType getHint() {
+        public String getHint() {
             return this.hint;
+        }
+
+        public ChoiceHintType getHintType() {
+            return this.hintType;
         }
 
         @Override
         public String toString() {
-            return this.value;
+            return "<html>" + ManaSymbols.replaceSymbolsWithHTML(this.getValue(), ManaSymbols.Type.TABLE);
         }
     }
 
@@ -510,28 +536,34 @@ public class PickChoiceDialog extends MageDialog {
         javax.swing.GroupLayout panelSearchLayout = new javax.swing.GroupLayout(panelSearch);
         panelSearch.setLayout(panelSearchLayout);
         panelSearchLayout.setHorizontalGroup(
-            panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSearchLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(labelSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editSearch)
-                .addGap(0, 0, 0))
+                panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSearchLayout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addComponent(labelSearch)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editSearch)
+                                .addGap(0, 0, 0))
         );
         panelSearchLayout.setVerticalGroup(
-            panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSearchLayout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addGroup(panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelSearch)
-                    .addComponent(editSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3))
+                panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSearchLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addGroup(panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(labelSearch)
+                                        .addComponent(editSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(3, 3, 3))
         );
 
         listChoices.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "item1", "item2", "item3" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            String[] strings = {"item1", "item2", "item3"};
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
         });
         scrollList.setViewportView(listChoices);
 
@@ -554,27 +586,27 @@ public class PickChoiceDialog extends MageDialog {
         javax.swing.GroupLayout panelCommandsLayout = new javax.swing.GroupLayout(panelCommands);
         panelCommands.setLayout(panelCommandsLayout);
         panelCommandsLayout.setHorizontalGroup(
-            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCommandsLayout.createSequentialGroup()
-                .addComponent(cbSpecial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btOK)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCommandsLayout.createSequentialGroup()
+                                .addComponent(cbSpecial)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btOK)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
-        panelCommandsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancel, btOK});
+        panelCommandsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[]{btCancel, btOK});
 
         panelCommandsLayout.setVerticalGroup(
-            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCommandsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCancel)
-                    .addComponent(btOK)
-                    .addComponent(cbSpecial))
-                .addContainerGap())
+                panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCommandsLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btCancel)
+                                        .addComponent(btOK)
+                                        .addComponent(cbSpecial))
+                                .addContainerGap())
         );
 
         getRootPane().setDefaultButton(btOK);
@@ -582,28 +614,28 @@ public class PickChoiceDialog extends MageDialog {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollList, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelCommands, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-                    .addComponent(panelSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(scrollList, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(panelCommands, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                                        .addComponent(panelSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
         pack();
