@@ -39,6 +39,18 @@ public class DebugUtil {
     // game dialogs
     public static boolean GUI_GAME_DIALOGS_DRAW_CARDS_AREA_BORDER = false;
 
+    // database - show additional info about cache and memory settings
+    public static boolean DATABASE_SHOW_CACHE_AND_MEMORY_STATS_ON_STARTUP = true;
+
+    // database - collect sql queries and stats
+    // how-to use:
+    // - clean db folders or delete all *.trace.db files
+    // - run tests or real server to collect some stats
+    // - download h2 files for ver 1.4.197 from https://h2database.com/h2-2018-03-18.zip and open tools folder like xxx\H2\bin
+    // - execute command: java -cp "h2-1.4.196.jar;%H2DRIVERS%;%CLASSPATH%" org.h2.tools.ConvertTraceFile -traceFile "xxx\Mage.Tests\db\cards.h2.trace.db" -script "xxx\Mage.Tests\db\cards.h2.trace.sql"
+    // - open *.sql file for all sql-queries and exec stats
+    public static boolean DATABASE_PROFILE_SQL_QUERIES_TO_FILE = false;
+
     public static String getMethodNameWithSource(final int depth) {
         return TraceHelper.getMethodNameWithSource(depth);
     }

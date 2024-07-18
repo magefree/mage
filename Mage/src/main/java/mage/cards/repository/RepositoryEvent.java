@@ -10,6 +10,7 @@ import java.util.EventObject;
  */
 public class RepositoryEvent extends EventObject implements ExternalEvent, Serializable {
 
+    // TODO: db changed on update only, events can be deleted
     public enum RepositoryEventType {
         DB_LOADED, DB_UPDATED
     }
