@@ -41,8 +41,16 @@ public class EvokeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shriekmaw");
         setChoice(playerA, true);
-        // addTarget(playerA, "Silvercoat Lion"); Autochosen, only target
+        setChoice(playerA, "When {this} enters the battlefield, destroy"); //Stack triggers
+        addTarget(playerA, "Silvercoat Lion"); // Destroy
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Exhume");
+        addTarget(playerA, "Shriekmaw");
+        addTarget(playerB, "Silvercoat Lion"); //Return
+
+        addTarget(playerA, "Silvercoat Lion"); // Destroy
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -55,5 +63,31 @@ public class EvokeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Shriekmaw", 1);
     }
 
+    @Test
+    public void testControllerSacrifices() {
 
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        addCard(Zone.HAND, playerA, "Wrong Turn");
+        addCard(Zone.HAND, playerA, "Mulldrifter");
+        addCard(Zone.BATTLEFIELD, playerB, "Proper Burial");
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mulldrifter");
+        setChoice(playerA, true);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        setChoice(playerA, "When {this} enters the battlefield, draw"); //Stack triggers
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wrong Turn");
+        addTarget(playerA, playerB);
+        addTarget(playerA, "Mulldrifter");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Mulldrifter", 1);
+        assertGraveyardCount(playerA, "Wrong Turn", 1);
+        assertLife(playerB, 22);
+        assertHandCount(playerA, 2);
+    }
 }
