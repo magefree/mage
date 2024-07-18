@@ -47,8 +47,8 @@ public final class ForTheCommonGood extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 IndestructibleAbility.getInstance(),
-                Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_TOKEN
-        ));
+                Duration.UntilYourNextTurn, StaticFilters.FILTER_PERMANENT_TOKENS
+        ).concatBy("Then"));
         this.getSpellAbility().addEffect(new GainLifeEffect(xValue));
         this.getSpellAbility().addHint(hint);
     }
