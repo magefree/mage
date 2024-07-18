@@ -61,7 +61,7 @@ enum BonecacheOverseerCondition implements Condition {
     instance;
     private static final Hint hint = new ConditionHint(
             instance, "Three or more cards left your graveyard " +
-            "this turn or if you've sacrificed a Food this turn"
+            "this turn or you've sacrificed a Food this turn"
     );
 
     public static Hint getHint() {

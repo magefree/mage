@@ -33,7 +33,7 @@ public final class Stormsplitter extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Whenever you cast an instant or sorcery spell, create a token that's a copy of Stormsplitter. Exile those copies at the beginning of the next end step.
+        // Whenever you cast an instant or sorcery spell, create a token that's a copy of Stormsplitter. Exile that token at the beginning of the next end step.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new StormsplitterEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         ));
@@ -54,7 +54,7 @@ class StormsplitterEffect extends OneShotEffect {
     StormsplitterEffect() {
         super(Outcome.Benefit);
         staticText = "create a token that's a copy of {this}. " +
-                "Exile those copies at the beginning of the next end step";
+                "Exile that token at the beginning of the next end step";
     }
 
     private StormsplitterEffect(final StormsplitterEffect effect) {
