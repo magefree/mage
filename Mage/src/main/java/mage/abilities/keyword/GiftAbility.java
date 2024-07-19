@@ -13,6 +13,7 @@ import mage.constants.GiftType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponent;
@@ -170,6 +171,13 @@ class PromiseGiftEffect extends OneShotEffect {
         Player player = game.getPlayer(CardUtil.getSourceCostsTag(
                 game, source, GiftAbility.GIFT_ACTIVATION_VALUE_KEY, (UUID) null
         ));
-        return player != null && giftType.applyGift(player, game, source);
+        if (player != null && giftType.applyGift(player, game, source)) {
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.GAVE_GIFT, player.getId(),
+                    source, source.getControllerId()
+            ));
+            return true;
+        }
+        return false;
     }
 }
