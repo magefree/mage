@@ -21,7 +21,7 @@ public class ConditionalTargetAdjuster implements TargetAdjuster {
      * @param replacementTarget The target to use if the condition is true.
      */
     public ConditionalTargetAdjuster(Condition condition, Target replacementTarget) {
-        this(condition, true, new Targets(replacementTarget));
+        this(condition, false, new Targets(replacementTarget));
     }
 
     /**
