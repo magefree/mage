@@ -9,7 +9,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.Objects;
