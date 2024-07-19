@@ -100,6 +100,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Hunter's Talent", 179, Rarity.UNCOMMON, mage.cards.h.HuntersTalent.class));
         cards.add(new SetCardInfo("Innkeeper's Talent", 180, Rarity.RARE, mage.cards.i.InnkeepersTalent.class));
         cards.add(new SetCardInfo("Into the Flood Maw", 52, Rarity.UNCOMMON, mage.cards.i.IntoTheFloodMaw.class));
+        cards.add(new SetCardInfo("Intrepid Rabbit", 17, Rarity.COMMON, mage.cards.i.IntrepidRabbit.class));
         cards.add(new SetCardInfo("Iridescent Vinelasher", 99, Rarity.RARE, mage.cards.i.IridescentVinelasher.class));
         cards.add(new SetCardInfo("Island", 266, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jolly Gerbils", 19, Rarity.UNCOMMON, mage.cards.j.JollyGerbils.class));
