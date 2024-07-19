@@ -39,7 +39,6 @@ public class PickChoiceDialog extends MageDialog {
     UUID gameId;
 
     java.util.List<KeyValueItem> allItems = new ArrayList<>();
-    DefaultListModel<KeyValueItem> dataModel = new DefaultListModel<>();
 
     final private static String HTML_HEADERS_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
@@ -58,7 +57,7 @@ public class PickChoiceDialog extends MageDialog {
         int newHeight = GUISizeHelper.guiSizeScale(this.getSize().height, guiScale);
         this.setSize(newWidth, newHeight);
 
-        this.listChoices.setModel(dataModel);
+        this.listChoices.setModel(new DefaultListModel<KeyValueItem>());
         this.setModal(true);
     }
 
@@ -372,12 +371,15 @@ public class PickChoiceDialog extends MageDialog {
         }
         filter = filter.toLowerCase(Locale.ENGLISH);
 
-        this.dataModel.clear();
+        // make changes to new model instead current, so it can help with GUI freeze on fast text deleting
+        // https://github.com/magefree/mage/issues/8671
+        DefaultListModel<KeyValueItem> newModel = new DefaultListModel<>();
         for (KeyValueItem item : this.allItems) {
             if (!choice.isSearchEnabled() || item.getValue().toLowerCase(Locale.ENGLISH).contains(filter)) {
-                this.dataModel.addElement(item);
+                newModel.addElement(item);
             }
         }
+        this.listChoices.setModel(newModel);
     }
 
     private void setMessageText(MageEditorPane editor, String text) {
