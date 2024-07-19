@@ -70,6 +70,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Second Harvest", 123, Rarity.RARE, mage.cards.s.SecondHarvest.class));
         cards.add(new SetCardInfo("Sol Ring", 129, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Squirrel Mob", 85, Rarity.RARE, mage.cards.s.SquirrelMob.class));
+        cards.add(new SetCardInfo("Steelburr Champion", 12, Rarity.RARE, mage.cards.s.SteelburrChampion.class));
         cards.add(new SetCardInfo("Sunbird's Invocation", 116, Rarity.RARE, mage.cards.s.SunbirdsInvocation.class));
         cards.add(new SetCardInfo("Swarmyard", 133, Rarity.RARE, mage.cards.s.Swarmyard.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 109, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
