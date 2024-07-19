@@ -64,6 +64,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rapid Hybridization", 111, Rarity.UNCOMMON, mage.cards.r.RapidHybridization.class));
         cards.add(new SetCardInfo("Rites of Flourishing", 122, Rarity.RARE, mage.cards.r.RitesOfFlourishing.class));
         cards.add(new SetCardInfo("Saw in Half", 113, Rarity.RARE, mage.cards.s.SawInHalf.class));
+        cards.add(new SetCardInfo("Scurry of Squirrels", 33, Rarity.RARE, mage.cards.s.ScurryOfSquirrels.class));
         cards.add(new SetCardInfo("Second Harvest", 123, Rarity.RARE, mage.cards.s.SecondHarvest.class));
         cards.add(new SetCardInfo("Sol Ring", 129, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Squirrel Mob", 85, Rarity.RARE, mage.cards.s.SquirrelMob.class));
