@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.GiftWasPromisedCondition;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.GiftAbility;
@@ -9,9 +8,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.GiftType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -31,7 +29,8 @@ public final class PeerlessRecycling extends CardImpl {
                 .setText("return target permanent from your graveyard to your hand. If the gift was promised, " +
                         "instead return two target permanent cards from your graveyard to your hand"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT));
-        this.getSpellAbility().setTargetAdjuster(PeerlessRecyclingAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(GiftWasPromisedCondition.TRUE,
+                new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_PERMANENTS)));
     }
 
     private PeerlessRecycling(final PeerlessRecycling card) {
@@ -41,17 +40,5 @@ public final class PeerlessRecycling extends CardImpl {
     @Override
     public PeerlessRecycling copy() {
         return new PeerlessRecycling(this);
-    }
-}
-
-enum PeerlessRecyclingAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (GiftWasPromisedCondition.TRUE.apply(game, ability)) {
-            ability.getTargets().clear();
-            ability.addTarget(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_PERMANENTS));
-        }
     }
 }
