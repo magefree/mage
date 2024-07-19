@@ -19,6 +19,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         super("Bloomburrow Commander", "BLC", ExpansionSet.buildDate(2024, 8, 2), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Agate Instigator", 21, Rarity.RARE, mage.cards.a.AgateInstigator.class));
         cards.add(new SetCardInfo("Ant Queen", 80, Rarity.RARE, mage.cards.a.AntQueen.class));
         cards.add(new SetCardInfo("Arcane Signet", 127, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Baleful Strix", 86, Rarity.RARE, mage.cards.b.BalefulStrix.class));
