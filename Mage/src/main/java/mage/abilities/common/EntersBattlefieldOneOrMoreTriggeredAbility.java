@@ -53,12 +53,12 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
 
         switch (this.targetController) {
             case YOU:
-                if (!controller.getId().equals(zEvent.getPlayerId())) {
+                if (zEvent.getTokens().stream().noneMatch(token -> token.getControllerId().equals(controller.getId()))) {
                     return false;
                 }
                 break;
             case OPPONENT:
-                if (!controller.hasOpponent(zEvent.getPlayerId(), game)) {
+                if (zEvent.getTokens().stream().noneMatch(token -> controller.hasOpponent(token.getControllerId(), game))) {
                     return false;
                 }
                 break;
