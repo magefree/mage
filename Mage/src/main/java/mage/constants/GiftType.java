@@ -5,6 +5,7 @@ import mage.game.Game;
 import mage.game.permanent.token.FishNoAbilityToken;
 import mage.game.permanent.token.FoodToken;
 import mage.game.permanent.token.TreasureToken;
+import mage.game.turn.TurnMod;
 import mage.players.Player;
 
 /**
@@ -26,6 +27,10 @@ public enum GiftType {
     TAPPED_FISH(
             "a tapped Fish", "create a tapped 1/1 blue Fish creature token",
             (p, g, s) -> new FishNoAbilityToken().putOntoBattlefield(1, g, s, p.getId(), true, false)
+    ),
+    EXTRA_TURN(
+            "an extra turn", "take an extra turn after this one",
+            (p, g, s) -> g.getState().getTurnMods().add(new TurnMod(p.getId()).withExtraTurn())
     );
 
     private interface GiftResolver {
