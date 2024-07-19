@@ -162,6 +162,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Rockface Village", 259, Rarity.UNCOMMON, mage.cards.r.RockfaceVillage.class));
         cards.add(new SetCardInfo("Run Away Together", 67, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Rust-Shield Rampager", 190, Rarity.COMMON, mage.cards.r.RustShieldRampager.class));
+        cards.add(new SetCardInfo("Ruthless Negotiation", 108, Rarity.UNCOMMON, mage.cards.r.RuthlessNegotiation.class));
         cards.add(new SetCardInfo("Salvation Swan", 28, Rarity.RARE, mage.cards.s.SalvationSwan.class));
         cards.add(new SetCardInfo("Savor", 109, Rarity.COMMON, mage.cards.s.Savor.class));
         cards.add(new SetCardInfo("Scales of Shale", 110, Rarity.COMMON, mage.cards.s.ScalesOfShale.class));

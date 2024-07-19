@@ -1,7 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CastFromGraveyardSourceCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
@@ -9,10 +8,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.stack.Spell;
 
 import java.util.UUID;
 
@@ -26,7 +21,7 @@ public final class SecretsOfTheKey extends CardImpl {
 
         // Investigate. If this spell was cast from a graveyard, investigate twice instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new InvestigateEffect(2), new InvestigateEffect(), SecretsOfTheKeyCondition.instance,
+                new InvestigateEffect(2), new InvestigateEffect(), CastFromGraveyardSourceCondition.instance,
                 "Investigate. If this spell was cast from a graveyard, investigate twice instead."
         ));
 
@@ -41,15 +36,5 @@ public final class SecretsOfTheKey extends CardImpl {
     @Override
     public SecretsOfTheKey copy() {
         return new SecretsOfTheKey(this);
-    }
-}
-
-enum SecretsOfTheKeyCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(source.getSourceId());
-        return spell != null && spell.getFromZone() == Zone.GRAVEYARD;
     }
 }
