@@ -1774,7 +1774,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void doClientShutdownAndExit() {
         tablesPane.cleanUp();
-        CardRepository.instance.closeDB();
+        CardRepository.instance.closeDB(true);
         Plugins.instance.shutdown();
         dispose();
         System.exit(0);

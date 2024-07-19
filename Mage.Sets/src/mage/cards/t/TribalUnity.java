@@ -64,14 +64,14 @@ class TribalUnityEffect extends OneShotEffect {
             return false;
         }
         Player player = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(sourceObject);
+        Choice typeChoice = new ChoiceCreatureType(game, source);
         if (player != null && player.choose(outcome, typeChoice, game)) {
             int boost = amount.calculate(game, source, this);
-            if (typeChoice.getChoice() != null) {
-                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
+            if (typeChoice.getChoiceKey() != null) {
+                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoiceKey());
             }
             FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
-            filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
+            filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
             game.addEffect(new BoostAllEffect(
                     boost, boost, Duration.EndOfTurn, filterCreaturePermanent, false), source);
             return true;

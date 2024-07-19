@@ -2192,7 +2192,7 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     @Override
-    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
         log.debug("chooseReplacementEffect");
         //TODO: implement this
         return 0;
