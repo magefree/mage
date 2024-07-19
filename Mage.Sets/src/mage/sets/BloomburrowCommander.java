@@ -59,6 +59,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Martial Impetus", 108, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Narset, Parter of Veils", 76, Rarity.RARE, mage.cards.n.NarsetParterOfVeils.class));
         cards.add(new SetCardInfo("Nissa, Who Shakes the World", 84, Rarity.RARE, mage.cards.n.NissaWhoShakesTheWorld.class));
+        cards.add(new SetCardInfo("Pollywog Prodigy", 15, Rarity.RARE, mage.cards.p.PollywogProdigy.class));
         cards.add(new SetCardInfo("Prosperous Innkeeper", 121, Rarity.UNCOMMON, mage.cards.p.ProsperousInnkeeper.class));
         cards.add(new SetCardInfo("Rapid Hybridization", 111, Rarity.UNCOMMON, mage.cards.r.RapidHybridization.class));
         cards.add(new SetCardInfo("Rites of Flourishing", 122, Rarity.RARE, mage.cards.r.RitesOfFlourishing.class));
