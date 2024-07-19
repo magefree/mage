@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class TreeguardDuo extends CardImpl {
 
     public TreeguardDuo(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
         this.subtype.add(SubType.FROG);
         this.subtype.add(SubType.RABBIT);
