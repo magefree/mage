@@ -27,6 +27,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Birds of Paradise", 81, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
         cards.add(new SetCardInfo("Blasphemous Act", 114, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Boros Signet", 128, Rarity.UNCOMMON, mage.cards.b.BorosSignet.class));
+        cards.add(new SetCardInfo("Calamity of Cinders", 23, Rarity.RARE, mage.cards.c.CalamityOfCinders.class));
         cards.add(new SetCardInfo("Casualties of War", 125, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class));
         cards.add(new SetCardInfo("Chaos Warp", 115, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chart a Course", 110, Rarity.UNCOMMON, mage.cards.c.ChartACourse.class));
