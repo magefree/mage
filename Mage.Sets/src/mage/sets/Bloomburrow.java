@@ -224,6 +224,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("War Squeak", 160, Rarity.COMMON, mage.cards.w.WarSqueak.class));
         cards.add(new SetCardInfo("Warren Elder", 37, Rarity.COMMON, mage.cards.w.WarrenElder.class));
         cards.add(new SetCardInfo("Warren Warleader", 38, Rarity.MYTHIC, mage.cards.w.WarrenWarleader.class));
+        cards.add(new SetCardInfo("Wax-Wane Witness", 39, Rarity.COMMON, mage.cards.w.WaxWaneWitness.class));
         cards.add(new SetCardInfo("Wear Down", 203, Rarity.UNCOMMON, mage.cards.w.WearDown.class));
         cards.add(new SetCardInfo("Whiskerquill Scribe", 161, Rarity.COMMON, mage.cards.w.WhiskerquillScribe.class));
         cards.add(new SetCardInfo("Whiskervale Forerunner", 40, Rarity.RARE, mage.cards.w.WhiskervaleForerunner.class));
