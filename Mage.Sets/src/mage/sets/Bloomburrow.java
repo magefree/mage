@@ -204,6 +204,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Tender Wildguide", 196, Rarity.RARE, mage.cards.t.TenderWildguide.class));
         cards.add(new SetCardInfo("Thieving Otter", 390, Rarity.COMMON, mage.cards.t.ThievingOtter.class));
         cards.add(new SetCardInfo("Thistledown Players", 35, Rarity.COMMON, mage.cards.t.ThistledownPlayers.class));
+        cards.add(new SetCardInfo("Thornplate Intimidator", 117, Rarity.COMMON, mage.cards.t.ThornplateIntimidator.class));
         cards.add(new SetCardInfo("Thornvault Forager", 197, Rarity.RARE, mage.cards.t.ThornvaultForager.class));
         cards.add(new SetCardInfo("Three Tree Mascot", 251, Rarity.COMMON, mage.cards.t.ThreeTreeMascot.class));
         cards.add(new SetCardInfo("Three Tree Rootweaver", 198, Rarity.COMMON, mage.cards.t.ThreeTreeRootweaver.class));

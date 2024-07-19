@@ -17,8 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -28,12 +27,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class StarseerMentor extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent");
-
-    static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
 
     public StarseerMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
@@ -56,7 +49,7 @@ public final class StarseerMentor extends CardImpl {
                                 new LoseLifeTargetEffect(3),
                                 new OrCost(
                                         "sacrifice a nonland permanent or discard a card",
-                                        new SacrificeTargetCost(filter),
+                                        new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_NON_LAND),
                                         new DiscardCardCost()
                                 ),
                                 "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"

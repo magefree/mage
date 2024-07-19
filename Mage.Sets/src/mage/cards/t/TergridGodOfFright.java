@@ -17,8 +17,7 @@ import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -33,12 +32,6 @@ import java.util.UUID;
  * @author jeffwadsworth
  */
 public final class TergridGodOfFright extends ModalDoubleFacedCard {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent");
-
-    static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
 
     public TergridGodOfFright(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -68,7 +61,7 @@ public final class TergridGodOfFright extends ModalDoubleFacedCard {
                         new LoseLifeTargetEffect(3),
                         new OrCost(
                                 "sacrifice a nonland permanent or discard a card",
-                                new SacrificeTargetCost(filter),
+                                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_NON_LAND),
                                 new DiscardCardCost()
                         ),
                         "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
