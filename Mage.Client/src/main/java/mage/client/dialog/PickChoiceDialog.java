@@ -39,6 +39,7 @@ public class PickChoiceDialog extends MageDialog {
     UUID gameId;
 
     java.util.List<KeyValueItem> allItems = new ArrayList<>();
+    KeyValueItem biggestItem = null; // for render optimization
 
     final private static String HTML_HEADERS_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
@@ -88,19 +89,24 @@ public class PickChoiceDialog extends MageDialog {
         // store data in allItems for inremental filtering
         // http://logicbig.com/tutorials/core-java-tutorial/swing/list-filter/
         this.allItems.clear();
+        this.biggestItem = null;
         if (choice.isKeyChoice()) {
             for (Map.Entry<String, String> entry : choice.getKeyChoices().entrySet()) {
-                // default hints
-                String hintValue = entry.getValue();
-                ChoiceHintType hintType = choice.getHintType();
-                this.allItems.add(new KeyValueItem(entry.getKey(), entry.getValue(), hintValue, hintType));
+                // with default hints
+                KeyValueItem newItem = new KeyValueItem(entry.getKey(), entry.getValue(), entry.getValue(), choice.getHintType());
+                this.allItems.add(newItem);
+                if (this.biggestItem == null || newItem.valueAsHtml.length() > this.biggestItem.valueAsHtml.length()) {
+                    biggestItem = newItem;
+                }
             }
         } else {
             for (String value : choice.getChoices()) {
-                // default hints
-                String hintValue = value;
-                ChoiceHintType hintType = choice.getHintType();
-                this.allItems.add(new KeyValueItem(value, value, hintValue, hintType));
+                // with default hints
+                KeyValueItem newItem =new KeyValueItem(value, value, value, choice.getHintType());
+                this.allItems.add(newItem);
+                if (this.biggestItem == null || newItem.valueAsHtml.length() > this.biggestItem.valueAsHtml.length()) {
+                    biggestItem = newItem;
+                }
             }
         }
 
@@ -128,6 +134,10 @@ public class PickChoiceDialog extends MageDialog {
                 }
             });
         }
+
+        // render optimization (use the biggest cell for one time size calculation)
+        // can help with slow search in big lists like choose card name dialog
+        this.listChoices.setPrototypeCellValue(this.biggestItem);
 
         // search
         if (choice.isSearchEnabled()) {
@@ -371,7 +381,7 @@ public class PickChoiceDialog extends MageDialog {
         }
         filter = filter.toLowerCase(Locale.ENGLISH);
 
-        // make changes to new model instead current, so it can help with GUI freeze on fast text deleting
+        // render fix: make changes to new model instead current, so it can help with GUI freeze on fast text deleting
         // https://github.com/magefree/mage/issues/8671
         DefaultListModel<KeyValueItem> newModel = new DefaultListModel<>();
         for (KeyValueItem item : this.allItems) {
@@ -379,6 +389,7 @@ public class PickChoiceDialog extends MageDialog {
                 newModel.addElement(item);
             }
         }
+
         this.listChoices.setModel(newModel);
     }
 
@@ -462,12 +473,14 @@ public class PickChoiceDialog extends MageDialog {
 
         protected final String key;
         protected String value;
+        protected String valueAsHtml; // final html view
         protected String hint;
         protected ChoiceHintType hintType;
 
         public KeyValueItem(String key, String value, String hint, ChoiceHintType hintType) {
             this.key = key;
             this.value = value;
+            this.valueAsHtml = "<html>" + ManaSymbols.replaceSymbolsWithHTML(value, ManaSymbols.Type.TABLE);
             this.hint = hint;
             this.hintType = hintType;
         }
@@ -480,6 +493,10 @@ public class PickChoiceDialog extends MageDialog {
             return this.value;
         }
 
+        public String getValueAsHtml() {
+            return this.valueAsHtml;
+        }
+
         public String getHint() {
             return this.hint;
         }
@@ -490,7 +507,7 @@ public class PickChoiceDialog extends MageDialog {
 
         @Override
         public String toString() {
-            return "<html>" + ManaSymbols.replaceSymbolsWithHTML(this.getValue(), ManaSymbols.Type.TABLE);
+            return valueAsHtml;
         }
     }
 
