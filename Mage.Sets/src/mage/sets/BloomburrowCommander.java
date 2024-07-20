@@ -46,6 +46,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Birds of Paradise", 81, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
         cards.add(new SetCardInfo("Blade Splicer", 136, Rarity.RARE, mage.cards.b.BladeSplicer.class));
         cards.add(new SetCardInfo("Blasphemous Act", 114, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
+        cards.add(new SetCardInfo("Bloodroot Apothecary", 27, Rarity.RARE, mage.cards.b.BloodrootApothecary.class));
         cards.add(new SetCardInfo("Body of Knowledge", 163, Rarity.RARE, mage.cards.b.BodyOfKnowledge.class));
         cards.add(new SetCardInfo("Bojuka Bog", 294, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Bootleggers' Stash", 207, Rarity.MYTHIC, mage.cards.b.BootleggersStash.class));
