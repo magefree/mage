@@ -174,4 +174,45 @@ public class GiftTest extends CardTestPlayerBase {
         assertAbility(playerA, bear, FirstStrikeAbility.getInstance(), true);
         assertPermanentCount(playerB, "Food Token", 1);
     }
+
+    private static final String gerbils = "Jolly Gerbils";
+
+    @Test
+    public void testGerbilNoGift() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, gerbils);
+        addCard(Zone.HAND, playerA, truce);
+
+        setChoice(playerA, false);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, truce);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertAbility(playerA, "Plains", HexproofAbility.getInstance(), true, 2);
+        assertAbility(playerA, "Plains", IndestructibleAbility.getInstance(), false, 2);
+        assertHandCount(playerA, 0);
+        assertHandCount(playerB, 0);
+    }
+
+    @Test
+    public void testGerbilGift() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, gerbils);
+        addCard(Zone.HAND, playerA, truce);
+
+        setChoice(playerA, true);
+        setChoice(playerA, playerB.getName());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, truce);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertAbility(playerA, "Plains", HexproofAbility.getInstance(), true, 2);
+        assertAbility(playerA, "Plains", IndestructibleAbility.getInstance(), true, 2);
+        assertHandCount(playerA, 1);
+        assertHandCount(playerB, 1);
+    }
 }
