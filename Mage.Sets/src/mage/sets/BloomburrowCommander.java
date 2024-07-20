@@ -167,6 +167,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Maskwood Nexus", 279, Rarity.RARE, mage.cards.m.MaskwoodNexus.class));
         cards.add(new SetCardInfo("Mind Stone", 280, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Moldervine Reclamation", 255, Rarity.UNCOMMON, mage.cards.m.MoldervineReclamation.class));
+        cards.add(new SetCardInfo("Moonstone Eulogist", 19, Rarity.RARE, mage.cards.m.MoonstoneEulogist.class));
         cards.add(new SetCardInfo("Morbid Opportunist", 183, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Mossfire Valley", 316, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 317, Rarity.RARE, mage.cards.m.MosswortBridge.class));
