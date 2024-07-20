@@ -32,6 +32,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Barkform Harvester", 243, Rarity.COMMON, mage.cards.b.BarkformHarvester.class));
         cards.add(new SetCardInfo("Baylen, the Haymaker", 205, Rarity.RARE, mage.cards.b.BaylenTheHaymaker.class));
         cards.add(new SetCardInfo("Bellowing Crier", 42, Rarity.COMMON, mage.cards.b.BellowingCrier.class));
+        cards.add(new SetCardInfo("Blacksmith's Talent", 125, Rarity.UNCOMMON, mage.cards.b.BlacksmithsTalent.class));
         cards.add(new SetCardInfo("Blooming Blast", 126, Rarity.UNCOMMON, mage.cards.b.BloomingBlast.class));
         cards.add(new SetCardInfo("Blossoming Sands", 396, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bonebind Orator", 84, Rarity.COMMON, mage.cards.b.BonebindOrator.class));
