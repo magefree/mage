@@ -84,6 +84,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Nurturing Peatland", 114, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
         cards.add(new SetCardInfo("Origin of the Hidden Ones", 36, Rarity.UNCOMMON, mage.cards.o.OriginOfTheHiddenOnes.class));
         cards.add(new SetCardInfo("Path to Exile", 81, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
+        cards.add(new SetCardInfo("Phantom Blade", 29, Rarity.UNCOMMON, mage.cards.p.PhantomBlade.class));
         cards.add(new SetCardInfo("Plains", 101, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Poison-Blade Mentor", 288, Rarity.UNCOMMON, mage.cards.p.PoisonBladeMentor.class));
         cards.add(new SetCardInfo("Propaganda", 85, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
