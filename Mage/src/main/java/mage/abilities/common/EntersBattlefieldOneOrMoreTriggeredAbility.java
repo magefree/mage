@@ -9,9 +9,11 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -50,26 +52,29 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
             return false;
         }
 
-        switch (this.targetController) {
-            case YOU:
-                if (zEvent.getTokens().stream().noneMatch(token -> token.getControllerId().equals(controller.getId()))) {
-                    return false;
-                }
-                break;
-            case OPPONENT:
-                if (zEvent.getTokens().stream().noneMatch(token -> controller.hasOpponent(token.getControllerId(), game))) {
-                    return false;
-                }
-                break;
-        }
-
-        return Stream.concat(
+        // Use Supplier for stream reuse
+        Supplier<Stream<Permanent>> enteringPermanentsSupplier = () -> Stream.concat(
                 zEvent.getTokens().stream(),
                 zEvent.getCards().stream()
                         .map(MageItem::getId)
                         .map(game::getPermanent)
                         .filter(Objects::nonNull)
-        ).anyMatch(permanent -> filterPermanent.match(permanent, this.controllerId, this, game));
+        );
+
+        switch (this.targetController) {
+            case YOU:
+                if (enteringPermanentsSupplier.get().noneMatch(permanent -> permanent.getControllerId().equals(controller.getId()))) {
+                    return false;
+                }
+                break;
+            case OPPONENT:
+                if (enteringPermanentsSupplier.get().noneMatch(permanent -> controller.hasOpponent(permanent.getControllerId(), game))) {
+                    return false;
+                }
+                break;
+        }
+
+        return enteringPermanentsSupplier.get().anyMatch(permanent -> filterPermanent.match(permanent, this.controllerId, this, game));
     }
 
     @Override
