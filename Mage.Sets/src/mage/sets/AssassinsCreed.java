@@ -30,6 +30,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Aya of Alexandria", 48, Rarity.RARE, mage.cards.a.AyaOfAlexandria.class));
         cards.add(new SetCardInfo("Ballad of the Black Flag", 13, Rarity.UNCOMMON, mage.cards.b.BalladOfTheBlackFlag.class));
         cards.add(new SetCardInfo("Basim Ibn Ishaq", 49, Rarity.RARE, mage.cards.b.BasimIbnIshaq.class));
+        cards.add(new SetCardInfo("Battlefield Improvisation", 276, Rarity.COMMON, mage.cards.b.BattlefieldImprovisation.class));
         cards.add(new SetCardInfo("Bayek of Siwa", 50, Rarity.RARE, mage.cards.b.BayekOfSiwa.class));
         cards.add(new SetCardInfo("Black Market Connections", 87, Rarity.RARE, mage.cards.b.BlackMarketConnections.class));
         cards.add(new SetCardInfo("Brotherhood Ambushers", 285, Rarity.UNCOMMON, mage.cards.b.BrotherhoodAmbushers.class));
