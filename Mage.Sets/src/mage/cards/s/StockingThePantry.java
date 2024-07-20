@@ -68,7 +68,7 @@ class StockingThePantryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getData().equals(CounterType.P1P1.getName())) {
+        if (!event.getData().equals(CounterType.P1P1.getName()) || !isControlledBy(event.getPlayerId())) {
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
