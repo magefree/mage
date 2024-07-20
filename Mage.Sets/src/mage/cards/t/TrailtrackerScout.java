@@ -34,7 +34,7 @@ public final class TrailtrackerScout extends CardImpl {
         Ability ability = new ExpendTriggeredAbility(
                 new ReturnFromGraveyardToHandTargetEffect(), ExpendTriggeredAbility.Expend.EIGHT
         );
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_PERMANENT));
         this.addAbility(ability);
     }
 
