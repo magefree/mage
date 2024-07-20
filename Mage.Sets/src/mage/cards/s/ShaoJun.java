@@ -14,7 +14,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -23,6 +24,13 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ShaoJun extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifacts you control");
+
+    static {
+        filter.add(CardType.ARTIFACT.getPredicate());
+        filter.add(TappedPredicate.UNTAPPED);
+    }
 
     public ShaoJun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
@@ -47,7 +55,7 @@ public final class ShaoJun extends CardImpl {
         // Rope Dart -- Tap two untapped artifacts you control: Shao Jun deals 1 damage to each opponent.
         this.addAbility(new SimpleActivatedAbility(
                 new DamagePlayersEffect(1, TargetController.OPPONENT),
-                new TapTargetCost(new TargetControlledPermanent(2, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS))
+                new TapTargetCost(new TargetControlledPermanent(2, filter))
         ).withFlavorWord("Rope Dart"));
     }
 

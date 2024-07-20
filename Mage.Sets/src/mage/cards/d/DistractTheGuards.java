@@ -21,7 +21,7 @@ public final class DistractTheGuards extends CardImpl {
         this.addAbility(new FreerunningAbility("{1}{W}"));
 
         // Create three 1/1 white Human Rogue creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new HumanRogueToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new HumanRogueToken(), 3));
     }
 
     private DistractTheGuards(final DistractTheGuards card) {
