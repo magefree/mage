@@ -140,6 +140,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ishai, Ojutai Dragonspeaker", 89, Rarity.MYTHIC, mage.cards.i.IshaiOjutaiDragonspeaker.class));
         cards.add(new SetCardInfo("Izzet Signet", 278, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
         cards.add(new SetCardInfo("Jace, the Mind Sculptor", 75, Rarity.MYTHIC, mage.cards.j.JaceTheMindSculptor.class));
+        cards.add(new SetCardInfo("Jacked Rabbit", 9, Rarity.RARE, mage.cards.j.JackedRabbit.class));
         cards.add(new SetCardInfo("Jazal Goldmane", 142, Rarity.RARE, mage.cards.j.JazalGoldmane.class));
         cards.add(new SetCardInfo("Jolrael, Mwonvuli Recluse", 225, Rarity.RARE, mage.cards.j.JolraelMwonvuliRecluse.class));
         cards.add(new SetCardInfo("Jungle Hollow", 313, Rarity.COMMON, mage.cards.j.JungleHollow.class));
