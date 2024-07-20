@@ -284,6 +284,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Time Wipe", 262, Rarity.RARE, mage.cards.t.TimeWipe.class));
         cards.add(new SetCardInfo("Tireless Provisioner", 243, Rarity.UNCOMMON, mage.cards.t.TirelessProvisioner.class));
         cards.add(new SetCardInfo("Toski, Bearer of Secrets", 244, Rarity.RARE, mage.cards.t.ToskiBearerOfSecrets.class));
+        cards.add(new SetCardInfo("Trailtracker Scout", 35, Rarity.RARE, mage.cards.t.TrailtrackerScout.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 350, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Triskaidekaphile", 178, Rarity.RARE, mage.cards.t.Triskaidekaphile.class));
         cards.add(new SetCardInfo("Twilight Mire", 351, Rarity.RARE, mage.cards.t.TwilightMire.class));
