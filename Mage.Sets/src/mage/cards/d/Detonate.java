@@ -2,7 +2,6 @@
 package mage.cards.d;
 
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -25,9 +24,7 @@ public final class Detonate extends CardImpl {
         // Destroy target artifact with converted mana cost X. It can't be regenerated. Detonate deals X damage to that artifact's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetArtifactPermanent(new FilterArtifactPermanent("artifact with mana value X")));
-        Effect effect = new DamageTargetControllerEffect(ManacostVariableValue.REGULAR);
-        effect.setText("{this} deals X damage to that artifact's controller");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DamageTargetControllerEffect(ManacostVariableValue.REGULAR, "artifact"));
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
     }
