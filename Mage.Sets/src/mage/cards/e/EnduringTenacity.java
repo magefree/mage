@@ -6,8 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -16,7 +15,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,8 +27,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class EnduringTenacity extends CardImpl {
-
-    private static final Condition condition = new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_CREATURE);
 
     public EnduringTenacity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{B}{B}");
@@ -46,10 +42,10 @@ public final class EnduringTenacity extends CardImpl {
         this.addAbility(ability);
 
         // When Enduring Tenacity dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment.
-        this.addAbility(new ConditionalTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesSourceTriggeredAbility(new EnduringTenacityReturnEffect()),
-                condition, "When {this} dies, if it was a creature, " +
-                "return it to the battlefield under its owner's control. It's an enchantment."
+                EnduringTenacityCondition.instance,
+                "When {this} dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment"
         ));
     }
 
@@ -60,6 +56,16 @@ public final class EnduringTenacity extends CardImpl {
     @Override
     public EnduringTenacity copy() {
         return new EnduringTenacity(this);
+    }
+}
+
+enum EnduringTenacityCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = (Permanent) source.getEffects().get(0).getValue("permanentLeftBattlefield");
+        return permanent != null && permanent.isCreature(game);
     }
 }
 
@@ -82,8 +88,7 @@ class EnduringTenacityReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
-        if (player == null || card == null
-                || card.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter() + 1) {
+        if (player == null || card == null) {
             return false;
         }
         game.addEffect(new EnduringTenacityTypeEffect()
