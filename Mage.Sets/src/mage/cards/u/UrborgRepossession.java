@@ -42,7 +42,7 @@ public final class UrborgRepossession extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         this.getSpellAbility().addEffect(new InfoEffect("If this spell was kicked, " +
                 "return another target permanent card from your graveyard to your hand"));
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD).setTargetTag(1));
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE, true,
                 new TargetCardInYourGraveyard(filter).setTargetTag(2)));
     }
