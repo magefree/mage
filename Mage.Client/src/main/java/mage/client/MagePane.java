@@ -37,11 +37,9 @@
      }
 
      public void activated() {
-
      }
 
      public void deactivated() {
-
      }
 
      public void handleEvent(AWTEvent event) {

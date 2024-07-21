@@ -131,6 +131,7 @@ public class HoverButton extends JPanel implements MouseListener {
 
     @Override
     public void paintComponent(Graphics g) {
+        // must ignore look and fill, so no calls of super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         if (isEnabled()) {
             if (isHovered || textAlwaysVisible) {

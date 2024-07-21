@@ -46,7 +46,8 @@ public class PlayerView implements Serializable {
     private final List<CommandObjectView> commandList = new ArrayList<>();
     private final List<UUID> attachments = new ArrayList<>();
     private final int statesSavedSize;
-    private final int priorityTimeLeft;
+    private final long priorityTimeSavedTimeMs;
+    private final int priorityTimeLeftSecs;
     private final int bufferTimeLeft;
     private final boolean passedTurn; // F4
     private final boolean passedUntilEndOfTurn; // F5
@@ -71,7 +72,8 @@ public class PlayerView implements Serializable {
         this.manaPool = new ManaPoolView(player.getManaPool());
         this.isActive = (player.getId().equals(state.getActivePlayerId()));
         this.hasPriority = player.getId().equals(state.getPriorityPlayerId());
-        this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.priorityTimeLeftSecs = player.getPriorityTimeLeft();
+        this.priorityTimeSavedTimeMs = System.currentTimeMillis();
         this.bufferTimeLeft = player.getBufferTimeLeft();
         this.timerActive = (this.hasPriority && player.isGameUnderControl())
                 || (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId()))
@@ -270,8 +272,10 @@ public class PlayerView implements Serializable {
         return statesSavedSize;
     }
 
-    public int getPriorityTimeLeft() {
-        return priorityTimeLeft;
+    public int getPriorityTimeLeftSecs() {
+        // workaround to find real time
+        int secsAfterUpdate = (int) ((System.currentTimeMillis() - this.priorityTimeSavedTimeMs) / 1000);
+        return Math.max(0, this.priorityTimeLeftSecs - secsAfterUpdate);
     }
 
     public int getBufferTimeLeft() {
