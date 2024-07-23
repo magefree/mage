@@ -1,8 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
@@ -11,6 +9,8 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,9 +29,7 @@ public final class StructuralDistortion extends CardImpl {
 
         // Exile target artifact or land. Structural Distortion deals 2 damage to that permanent's controller.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        Effect effect = new DamageTargetControllerEffect(2);
-        effect.setText("{this} deals 2 damage to that permanent's controller");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DamageTargetControllerEffect(2, "permanent"));
         this.getSpellAbility().addTarget(new TargetPermanent(FILTER));
     }
 

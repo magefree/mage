@@ -107,7 +107,7 @@ class SigurdJarlOfRavensthorpeTriggeredAbility extends TriggeredAbilityImpl {
 
     SigurdJarlOfRavensthorpeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
+        this.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.setTriggerPhrase("Whenever you put a lore counter on a Saga you control, ");
     }
 

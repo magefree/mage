@@ -15,11 +15,16 @@ import mage.players.Player;
  */
 public class DamageTargetControllerEffect extends OneShotEffect {
 
-    protected DynamicValue amount;
-    protected boolean preventable;
+    protected final DynamicValue amount;
+    protected final boolean preventable;
+    protected final String name;
 
     public DamageTargetControllerEffect(int amount) {
         this(StaticValue.get(amount), true);
+    }
+
+    public DamageTargetControllerEffect(int amount, String name) {
+        this(StaticValue.get(amount), true, name);
     }
 
     public DamageTargetControllerEffect(int amount, boolean preventable) {
@@ -30,16 +35,26 @@ public class DamageTargetControllerEffect extends OneShotEffect {
         this(amount, true);
     }
 
+    public DamageTargetControllerEffect(DynamicValue amount, String name) {
+        this(amount, true, name);
+    }
+
     public DamageTargetControllerEffect(DynamicValue amount, boolean preventable) {
+        this(amount, preventable, "creature");
+    }
+
+    public DamageTargetControllerEffect(DynamicValue amount, boolean preventable, String name) {
         super(Outcome.Damage);
         this.amount = amount;
         this.preventable = preventable;
+        this.name = name;
     }
 
     protected DamageTargetControllerEffect(final DamageTargetControllerEffect effect) {
         super(effect);
-        amount = effect.amount.copy();
-        preventable = effect.preventable;
+        this.amount = effect.amount.copy();
+        this.preventable = effect.preventable;
+        this.name = effect.name;
     }
 
     @Override
@@ -65,9 +80,12 @@ public class DamageTargetControllerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "{this} deals " + amount.getMessage() + " damage to "
-                + getTargetPointer().describeTargets(mode.getTargets(), "that creature")
-                + "'s controller"
+        String message = amount.getMessage();
+        if (message.isEmpty()) {
+            message = amount.toString();
+        }
+        return "{this} deals " + message + " damage to that "
+                + name + "'s controller"
                 + (preventable ? "" : ". The damage can't be prevented");
     }
 }
