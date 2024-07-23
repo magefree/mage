@@ -869,28 +869,14 @@ public final class CardUtil {
         // sign fix for zero values
         // -1/+0 must be -1/-0
         // +0/-1 must be -0/-1
-        String p = Integer.toString(power.getMultiplier());
-        String t = Integer.toString(toughness.getMultiplier());
-
+        String p = power.toString();
+        String t = toughness.toString();
         if (!p.startsWith("-")) {
             p = t.startsWith("-") && p.equals("0") ? "-0" : "+" + p;
         }
         if (!t.startsWith("-")) {
             t = p.startsWith("-") && t.equals("0") ? "-0" : "+" + t;
         }
-
-        //Replace 1s with Xs, using Y if necessary
-        if (p.substring(1).equals("1")){
-            p = p.replace("1", "X");
-        }
-        if (t.substring(1).equals("1")){
-            if (p.contains("X") && (!power.getClass().equals(toughness.getClass()))){
-                t = t.replace("1", "Y");
-            } else {
-                t = t.replace("1", "X");
-            }
-        }
-
         return p + "/" + t;
     }
 
@@ -908,21 +894,13 @@ public final class CardUtil {
                 sb.append(' ').append(d);
             }
         }
-
-        if (boostCount.contains("X")) {
-
-            String powerMessage = power.getMessage(DynamicValue.Phrasing.NUMBER_OF, true);
-            String toughnessMessage = toughness.getMessage(DynamicValue.Phrasing.NUMBER_OF, true);
-
-            sb.append(", where X is ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
-            if (boostCount.contains("Y")) {
-                sb.append(", and Y is ").append(toughnessMessage);
-            }
-        } else {
-            String powerMessage = power.getMessage(DynamicValue.Phrasing.FOR_EACH);
-            sb.append(" ").append(powerMessage.isEmpty() ? toughness.getMessage(DynamicValue.Phrasing.FOR_EACH) : powerMessage);
+        String message = power.getMessage();
+        if (message.isEmpty()) {
+            message = toughness.getMessage();
         }
-
+        if (!message.isEmpty()) {
+            sb.append(boostCount.contains("X") ? ", where X is " : " for each ").append(message);
+        }
         return sb.toString();
     }
 

@@ -6,25 +6,21 @@ import mage.abilities.effects.Effect;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 
-import java.util.Objects;
-
 /**
  * @author JayDi85
  */
-public class CreaturesYouControlCount extends DynamicValue {
+public enum CreaturesYouControlCount implements DynamicValue {
+
+    instance;
 
     @Override
-    public int calculateBase(Game game, Ability sourceAbility, Effect effect) {
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURES, sourceAbility.getControllerId(), sourceAbility, game);
-    }
-
-    protected CreaturesYouControlCount(final CreaturesYouControlCount other) {
-        super(other);
     }
 
     @Override
     public CreaturesYouControlCount copy() {
-        return new CreaturesYouControlCount(this);
+        return instance;
     }
 
     @Override
@@ -33,10 +29,7 @@ public class CreaturesYouControlCount extends DynamicValue {
     }
 
     @Override
-    public String getMessage(Phrasing phrasing, boolean useMultiplier) {
-        if (Objects.requireNonNull(phrasing) == Phrasing.NUMBER_OF) {
-            return (useMultiplier && multiplier > 1 ? getMultiplierAsWord() + " times " : "") + "the number of creatures you control";
-        }
-        return "for each creature you control";
+    public String getMessage() {
+        return "creatures you control";
     }
 }

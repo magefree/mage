@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class StaticValue extends DynamicValue {
+public class StaticValue implements DynamicValue {
 
     private static final List<StaticValue> staticValues = new ArrayList();
 
@@ -19,13 +19,15 @@ public class StaticValue extends DynamicValue {
                 .forEachOrdered(staticValues::add);
     }
 
+    private final int value;
+
     private StaticValue(int value) {
-        super(value);
+        this.value = value;
     }
 
     @Override
-    public int calculateBase(Game game, Ability sourceAbility, Effect effect) {
-        return multiplier;
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return value;
     }
 
     @Override
@@ -35,21 +37,21 @@ public class StaticValue extends DynamicValue {
 
     @Override
     public String toString() {
-        return Integer.toString(multiplier);
+        return Integer.toString(value);
     }
 
     @Override
-    public String getSingleMessage() {
+    public String getMessage() {
         return "";
     }
 
     @Override
-    public String getPluralMessage() {
-        return "";
+    public int getSign() {
+        return value;
     }
 
     public int getValue() {
-        return multiplier;
+        return value;
     }
 
     public static StaticValue get(int value) {
