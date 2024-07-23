@@ -1,6 +1,8 @@
 package mage.cards.v;
 
 import mage.abilities.costs.common.SacrificeXTargetCost;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -17,6 +19,8 @@ import java.util.UUID;
  */
 public final class ViciousBetrayal extends CardImpl {
 
+    private static final DynamicValue xValue = new MultipliedValue(GetXValue.instance, 2);
+
     public ViciousBetrayal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
@@ -25,7 +29,8 @@ public final class ViciousBetrayal extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledCreaturePermanent(), true));
         // Target creature gets +2/+2 until end of turn for each creature sacrificed this way.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(GetXValue.instance, GetXValue.instance, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn)
+                .setText("target creature gets +2/+2 until end of turn for each creature sacrificed this way"));
     }
 
     private ViciousBetrayal(final ViciousBetrayal card) {
