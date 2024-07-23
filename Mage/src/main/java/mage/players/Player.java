@@ -731,11 +731,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean shuffleCardsToLibrary(Card card, Game game, Ability source);
 
     // set the value for X mana spells and abilities
-    default int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        return announceXMana(min, max, 1, message, game, ability);
-    }
-
-    int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability);
+    int announceXMana(int min, int max, String message, Game game, Ability ability);
 
     // set the value for non mana X costs
     int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost);

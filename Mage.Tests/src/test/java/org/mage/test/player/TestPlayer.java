@@ -2816,7 +2816,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
             for (String choice : choices) {
@@ -2830,7 +2830,7 @@ public class TestPlayer implements Player {
 
         this.chooseStrictModeFailed("choice", game, getInfo(ability, game)
                 + "\nMessage: " + message);
-        return computerPlayer.announceXMana(min, max, multiplier, message, game, ability);
+        return computerPlayer.announceXMana(min, max, message, game, ability);
     }
 
     @Override
