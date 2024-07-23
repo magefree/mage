@@ -1,24 +1,17 @@
 package mage.cards.i;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.CastFromGraveyardSourceCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -53,4 +46,3 @@ public final class IncreasingConfusion extends CardImpl {
         return new IncreasingConfusion(this);
     }
 }
-
