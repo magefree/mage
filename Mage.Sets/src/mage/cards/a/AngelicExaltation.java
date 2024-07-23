@@ -16,12 +16,14 @@ import java.util.UUID;
  */
 public final class AngelicExaltation extends CardImpl {
 
+    private static CreaturesYouControlCount xValue;
+
     public AngelicExaltation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of creatures you control.
         this.addAbility(new AttacksAloneControlledTriggeredAbility(
-                new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn),
+                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn),
                 true, false).addHint(CreaturesYouControlHint.instance));
     }
 
