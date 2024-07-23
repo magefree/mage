@@ -12,7 +12,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -31,6 +31,7 @@ import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -53,7 +54,7 @@ public final class NecropolisFiend extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {X}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
-        DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+        DynamicValue xValue = new SignInversionDynamicValue(GetXValue.instance);
         Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn);
         effect.setText("Target creature gets -X/-X until end of turn");
         Ability ability = new SimpleActivatedAbility(
@@ -103,7 +104,7 @@ enum NecropolisFiendTargetAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         for (Cost cost : ability.getCosts()) {
             if (!(cost instanceof ExileFromGraveCost)) {
                 continue;

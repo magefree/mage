@@ -1,6 +1,6 @@
 package mage.cards.a;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,7 +18,7 @@ public final class AwakenTheWoods extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
 
         // Create X 1/1 green Forest Dryad land creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ForestDryadToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ForestDryadToken(), GetXValue.instance));
     }
 
     private AwakenTheWoods(final AwakenTheWoods card) {

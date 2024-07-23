@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,6 +11,9 @@ import mage.game.Game;
 import mage.game.permanent.token.Elemental11HasteToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ class TemptWithVengeanceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (controller != null && xValue > 0) {
 
             Token tokenCopy = new Elemental11HasteToken();

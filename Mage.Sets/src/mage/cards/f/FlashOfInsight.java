@@ -2,11 +2,9 @@ package mage.cards.f;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
@@ -15,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.PutCards;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -35,7 +32,7 @@ public final class FlashOfInsight extends CardImpl {
 
         // Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                FlashOfInsightValue.instance, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
+                GetXValue.instance, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
 
         // Flashback-{1}{U}, Exile X blue cards from your graveyard.
         Ability ability = new FlashbackAbility(this, new ManaCostsImpl<>("{1}{U}"));
@@ -50,35 +47,5 @@ public final class FlashOfInsight extends CardImpl {
     @Override
     public FlashOfInsight copy() {
         return new FlashOfInsight(this);
-    }
-}
-
-enum FlashOfInsightValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int xValue = sourceAbility.getManaCostsToPay().getX();
-        for (Cost cost : sourceAbility.getCosts()) {
-            if (cost instanceof ExileXFromYourGraveCost) {
-                xValue = ((ExileXFromYourGraveCost) cost).getAmount();
-            }
-        }
-        return xValue;
-    }
-
-    @Override
-    public FlashOfInsightValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }

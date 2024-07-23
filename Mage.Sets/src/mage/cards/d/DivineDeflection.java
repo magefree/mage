@@ -12,6 +12,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -108,7 +109,7 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
             if (amountToPrevent == Integer.MIN_VALUE) {
-                amountToPrevent = source.getManaCostsToPay().getX();
+                amountToPrevent = CardUtil.getSourceCostsTag(game, source, "X", 0);
             }
             //   check permanent first
             Permanent permanent = game.getPermanent(event.getTargetId());

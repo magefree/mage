@@ -13,6 +13,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -69,7 +70,7 @@ class OldStickfingersEffect extends OneShotEffect {
         if (!(obj instanceof SpellAbility)) {
             return false;
         }
-        int xValue = ((SpellAbility) obj).getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ((SpellAbility) obj), "X", 0);
         if (xValue < 1) {
             return false;
         }

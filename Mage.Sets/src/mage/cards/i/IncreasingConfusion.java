@@ -5,7 +5,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
@@ -20,14 +20,14 @@ import java.util.UUID;
  */
 public final class IncreasingConfusion extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(GetXValue.instance, 2);
 
     public IncreasingConfusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}");
 
         // Target player puts the top X cards of their library into their graveyard. If this spell was cast from a graveyard, that player puts twice that many cards into their graveyard instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new MillCardsTargetEffect(xValue), new MillCardsTargetEffect(ManacostVariableValue.REGULAR),
+                new MillCardsTargetEffect(xValue), new MillCardsTargetEffect(GetXValue.instance),
                 CastFromGraveyardSourceCondition.instance, "target player mills X cards. " +
                 "If this spell was cast from a graveyard, that player mills twice that many cards"
         ));

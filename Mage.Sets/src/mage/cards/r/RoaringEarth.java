@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.ChannelAbility;
@@ -46,7 +46,7 @@ public final class RoaringEarth extends CardImpl {
 
         // Channel — {X}{G}{G}, Discard Roaring Earth; Put X +1/+1 counters on target land you control. It becomes a 0/0 green Spirit creature with haste. It's still a land.
         ability = new ChannelAbility("{X}{G}{G}", new AddCountersTargetEffect(
-                CounterType.P1P1.createInstance(0), ManacostVariableValue.REGULAR
+                CounterType.P1P1.createInstance(0), GetXValue.instance
         ).setText("Put X +1/+1 counters on target land you control."));
         ability.addEffect(new BecomesCreatureTargetEffect(
                 new CreatureToken(0, 0)

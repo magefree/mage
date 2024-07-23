@@ -5,7 +5,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
@@ -48,7 +48,7 @@ public final class GadwickTheWizened extends CardImpl {
 
         // When Gadwick, the Wizened enters the battlefield, draw X cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(ManacostVariableValue.ETB)
+                new DrawCardSourceControllerEffect(GetXValue.instance)
         ));
 
         // Whenever you cast a blue spell, tap target nonland permanent an opponent controls.

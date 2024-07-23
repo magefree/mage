@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
@@ -36,7 +36,7 @@ public final class FolioOfFancies extends CardImpl {
 
         // {X}{X}, {T}: Each player draws X cards.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardAllEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}{X}")
+                new DrawCardAllEffect(GetXValue.instance), new ManaCostsImpl<>("{X}{X}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

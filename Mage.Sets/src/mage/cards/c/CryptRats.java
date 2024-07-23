@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class CryptRats extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}: Crypt Rats deals X damage to each creature and each player. Spend only black mana on X.
-        Effect effect = new DamageEverythingEffect(ManacostVariableValue.REGULAR);
+        Effect effect = new DamageEverythingEffect(GetXValue.instance);
         effect.setText("{this} deals X damage to each creature and each player. Spend only black mana on X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect,new ManaCostsImpl<>("{X}"));
         VariableCost variableCost = ability.getManaCostsToPay().getVariableCosts().get(0);

@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -63,7 +64,7 @@ class TheBattleOfNabooEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int x = source.getManaCostsToPay().getX();
+            int x = CardUtil.getSourceCostsTag(game, source, "X", 0);
             if (x > 0) {
                 player.drawCards(2 * x, source, game);
             }

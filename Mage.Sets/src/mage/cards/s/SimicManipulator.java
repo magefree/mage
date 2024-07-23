@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.EvolveAbility;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public final class SimicManipulator extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.Custom, true), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1, 1, "Remove one or more +1/+1 counters from {this}"));
-        ability.setTargetAdjuster(new PowerTargetAdjuster(RemovedCountersForCostValue.instance, ComparisonType.OR_LESS));
+        ability.setTargetAdjuster(new PowerTargetAdjuster(GetXValue.instance, ComparisonType.OR_LESS));
         this.addAbility(ability);
     }
 

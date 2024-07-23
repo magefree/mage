@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
@@ -45,7 +45,7 @@ public final class JamesWanderingDad extends AdventureCard {
         // Instant — Adventure
         // Investigate X times.
         this.getSpellCard().getSpellAbility().addEffect(
-                new InvestigateEffect(ManacostVariableValue.REGULAR)
+                new InvestigateEffect(GetXValue.instance)
                         .setText("Investigate X times")
         );
 

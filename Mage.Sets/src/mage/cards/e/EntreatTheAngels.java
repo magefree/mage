@@ -1,6 +1,6 @@
 package mage.cards.e;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
@@ -19,7 +19,7 @@ public final class EntreatTheAngels extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");
 
         // Create X 4/4 white Angel creature tokens with flying.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), GetXValue.instance));
 
         // Miracle {X}{W}{W}
         this.addAbility(new MiracleAbility("{X}{W}{W}"));

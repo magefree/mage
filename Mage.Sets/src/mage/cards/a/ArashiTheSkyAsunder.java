@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.ChannelAbility;
@@ -43,13 +43,13 @@ public final class ArashiTheSkyAsunder extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {X}{G}, {tap}: Arashi, the Sky Asunder deals X damage to target creature with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Channel - {X}{G}{G}, Discard Arashi: Arashi deals X damage to each creature with flying.
-        this.addAbility(new ChannelAbility("{X}{G}{G}", new DamageAllEffect(ManacostVariableValue.REGULAR, filter)));
+        this.addAbility(new ChannelAbility("{X}{G}{G}", new DamageAllEffect(GetXValue.instance, filter)));
     }
 
     private ArashiTheSkyAsunder(final ArashiTheSkyAsunder card) {

@@ -1,10 +1,7 @@
 package mage.cards.w;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -16,6 +13,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PhyrexianMiteToken;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -26,7 +27,7 @@ public final class WhiteSunsTwilight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{W}{W}");
 
         // You gain X life. Create X 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block." If X is 5 or more, destroy all other creatures.
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new GainLifeEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new WhiteSunsTwilightEffect());
     }
 
@@ -59,7 +60,7 @@ class WhiteSunsTwilightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Token token = new PhyrexianMiteToken();
         token.putOntoBattlefield(xValue, game, source);
         if (xValue < 5) {

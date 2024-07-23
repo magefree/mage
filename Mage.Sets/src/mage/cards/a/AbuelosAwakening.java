@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -75,7 +75,7 @@ class AbuelosAwakeningEffect extends ReturnFromGraveyardToBattlefieldTargetEffec
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int counterAmount = ManacostVariableValue.REGULAR.calculate(game, source, this);
+        int counterAmount = GetXValue.instance.calculate(game, source, this);
         for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             AbuelosAwakeningContinuousEffect continuousEffect = new AbuelosAwakeningContinuousEffect();
             continuousEffect.setTargetPointer(new FixedTarget(targetId, game));

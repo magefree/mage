@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.RavenousAbility;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class Broodlord extends CardImpl {
 
         // Brood Telepathy -- When Broodlord enters the battlefield, distribute X +1/+1 counters among any number of other target creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BroodlordEffect());
-        ability.addTarget(new TargetPermanentAmount(ManacostVariableValue.ETB, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addTarget(new TargetPermanentAmount(GetXValue.instance, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability.withFlavorWord("Brood Telepathy"));
     }
 

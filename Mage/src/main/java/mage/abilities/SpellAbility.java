@@ -3,8 +3,6 @@ package mage.abilities;
 import mage.ApprovingObject;
 import mage.MageIdentifier;
 import mage.MageObject;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.keyword.FlashAbility;
@@ -251,7 +249,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
     public int getConvertedXManaCost(Card card) {
         int xMultiplier = 0;
-        int amount = 0;
         if (card == null) {
             return 0;
         }
@@ -265,18 +262,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
         }
 
         // mana cost final X value
-        boolean hasNonManaXCost = false;
-        for (Cost cost : getCosts()) {
-            if (cost instanceof VariableCost) {
-                hasNonManaXCost = true;
-                amount = ((VariableCost) cost).getAmount();
-                break;
-            }
+        Map<String, Object> tagMap = this.getCostsTagMap();
+        if (tagMap == null) {
+            return 0;
         }
-
-        if (!hasNonManaXCost) {
-            amount = getManaCostsToPay().getX();
-        }
+        int amount = (int) tagMap.getOrDefault("X", 0);
         return amount * xMultiplier;
     }
 
