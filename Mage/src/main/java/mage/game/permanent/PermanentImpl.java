@@ -1358,7 +1358,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 && attachmentPermanent != null
                 && attachmentPermanent.getSpellAbility() != null
                 && !attachmentPermanent.getSpellAbility().getTargets().isEmpty()) {
-            canAttach = attachmentPermanent.getSpellAbility().getTargets().get(0).canTarget(attachmentPermanent.getControllerId(), this.getId(), source, game);
+            canAttach = attachmentPermanent.getSpellAbility().getTargets().get(0).withNotTarget(true).stillLegalTarget(attachmentPermanent.getControllerId(), this.getId(), source, game);
         }
 
         return !canAttach || game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);
