@@ -190,6 +190,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Short Bow", 248, Rarity.UNCOMMON, mage.cards.s.ShortBow.class));
         cards.add(new SetCardInfo("Shrike Force", 31, Rarity.UNCOMMON, mage.cards.s.ShrikeForce.class));
         cards.add(new SetCardInfo("Sinister Monolith", 113, Rarity.UNCOMMON, mage.cards.s.SinisterMonolith.class));
+        cards.add(new SetCardInfo("Skyskipper Duo", 71, Rarity.COMMON, mage.cards.s.SkyskipperDuo.class));
         cards.add(new SetCardInfo("Sonar Strike", 32, Rarity.COMMON, mage.cards.s.SonarStrike.class));
         cards.add(new SetCardInfo("Spellgyre", 72, Rarity.UNCOMMON, mage.cards.s.Spellgyre.class));
         cards.add(new SetCardInfo("Splash Lasher", 73, Rarity.UNCOMMON, mage.cards.s.SplashLasher.class));
