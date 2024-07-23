@@ -26,7 +26,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aetherize", 161, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
         cards.add(new SetCardInfo("Agate Instigator", 21, Rarity.RARE, mage.cards.a.AgateInstigator.class));
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 170, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
-        cards.add(new SetCardInfo("Angel of the Ruins", 134, Rarity.UNCOMMON, mage.cards.a.AngelOfTheRuins.class));
+        cards.add(new SetCardInfo("Angel of the Ruins", 134, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class));
         cards.add(new SetCardInfo("Ant Queen", 80, Rarity.RARE, mage.cards.a.AntQueen.class));
         cards.add(new SetCardInfo("Arasta of the Endless Web", 205, Rarity.RARE, mage.cards.a.ArastaOfTheEndlessWeb.class));
         cards.add(new SetCardInfo("Arcane Signet", 127, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
@@ -160,7 +160,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Luminous Broodmoth", 74, Rarity.MYTHIC, mage.cards.l.LuminousBroodmoth.class));
         cards.add(new SetCardInfo("Maelstrom Pulse", 126, Rarity.RARE, mage.cards.m.MaelstromPulse.class));
         cards.add(new SetCardInfo("Managorger Hydra", 230, Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
-        cards.add(new SetCardInfo("Mangara, the Diplomat", 145, Rarity.RARE, mage.cards.m.MangaraTheDiplomat.class));
+        cards.add(new SetCardInfo("Mangara, the Diplomat", 145, Rarity.MYTHIC, mage.cards.m.MangaraTheDiplomat.class));
         cards.add(new SetCardInfo("Marrow-Gnawer", 79, Rarity.RARE, mage.cards.m.MarrowGnawer.class));
         cards.add(new SetCardInfo("Martial Coup", 146, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Martial Impetus", 108, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
