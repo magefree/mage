@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
@@ -23,6 +23,7 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -41,11 +42,11 @@ public final class KozileksCommand extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // * Target player creates X 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."
-        this.getSpellAbility().addEffect(new CreateTokenTargetEffect(new EldraziSpawnToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenTargetEffect(new EldraziSpawnToken(), GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("create tokens"));
 
         // * Target player scries X, then draws a card.
-        Mode mode = new Mode(new ScryTargetEffect(ManacostVariableValue.REGULAR));
+        Mode mode = new Mode(new ScryTargetEffect(GetXValue.instance));
         mode.addEffect(new DrawCardTargetEffect(1).setText(", then draws a card"));
         mode.addTarget(new TargetPlayer().withChooseHint("scries then draw"));
         this.getSpellAbility().addMode(mode);
@@ -82,7 +83,7 @@ enum KozileksCommandAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         // adjust targets is called for every selected mode
         Mode mode = ability.getModes().getMode();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         for (Effect effect : mode.getEffects()) {
             if (effect instanceof ExileTargetEffect) {
                 Target target = mode.getTargets().get(0);

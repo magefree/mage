@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.GiftWasPromisedCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.GiftAbility;
@@ -9,9 +8,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.GiftType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -30,7 +28,8 @@ public final class WearDown extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect().setText("destroy target artifact or enchantment. " +
                 "If the gift was promised, instead destroy two target artifacts and/or enchantments"));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
-        this.getSpellAbility().setTargetAdjuster(WearDownAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(GiftWasPromisedCondition.TRUE,
+                new TargetPermanent(2, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT)));
     }
 
     private WearDown(final WearDown card) {
@@ -40,17 +39,5 @@ public final class WearDown extends CardImpl {
     @Override
     public WearDown copy() {
         return new WearDown(this);
-    }
-}
-
-enum WearDownAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (GiftWasPromisedCondition.TRUE.apply(game, ability)) {
-            ability.getTargets().clear();
-            ability.addTarget(new TargetPermanent(2, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
-        }
     }
 }

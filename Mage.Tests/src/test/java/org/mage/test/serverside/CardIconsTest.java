@@ -265,7 +265,7 @@ public class CardIconsTest extends CardTestPlayerBase {
             GameView gameView = getGameView(player);
             Assert.assertEquals("ability activated - must have 1 card in stack", 1, gameView.getStack().values().size());
             CardView cardView = gameView.getStack().values().stream().findFirst().get();
-            Assert.assertEquals("ability activated - must have x cost card icons in stack", 1, cardView.getCardIcons().size());
+            Assert.assertTrue("ability activated - must have x cost card icons in stack", cardView.getCardIcons().stream().anyMatch(x -> x.getText().equals("x=2")));
         });
 
         // battlefield (ability activated, not visible)

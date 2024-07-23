@@ -3,7 +3,7 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -35,7 +35,7 @@ public final class HugsGrislyGuardian extends CardImpl {
 
         // When Hugs, Grisly Guardian enters, exile the top X cards of your library. Until the end of your next turn, you may play those cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileTopXMayPlayUntilEffect(
-                ManacostVariableValue.ETB, Duration.UntilEndOfYourNextTurn
+                GetXValue.instance, Duration.UntilEndOfYourNextTurn
         )));
 
         // You may play an additional land on each of your turns.

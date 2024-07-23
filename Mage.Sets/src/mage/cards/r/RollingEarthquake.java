@@ -2,7 +2,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class RollingEarthquake extends CardImpl {
 
 
         // Rolling Earthquake deals X damage to each creature without horsemanship and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.REGULAR, filter));
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(GetXValue.instance, filter));
     }
 
     private RollingEarthquake(final RollingEarthquake card) {

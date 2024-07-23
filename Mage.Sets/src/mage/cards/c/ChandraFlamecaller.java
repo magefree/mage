@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -39,7 +39,7 @@ public final class ChandraFlamecaller extends CardImpl {
 
         // -X: Chandra, Flamecaller deals X damage to each creature.
         this.addAbility(new LoyaltyAbility(new DamageAllEffect(
-                GetXLoyaltyValue.instance, StaticFilters.FILTER_PERMANENT_CREATURE
+                GetXValue.instance, StaticFilters.FILTER_PERMANENT_CREATURE
         )));
     }
 

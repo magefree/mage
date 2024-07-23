@@ -1,6 +1,6 @@
 package mage.cards.e;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.LoseLifeOpponentsYouGainLifeLostEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,7 +18,7 @@ public final class Exsanguinate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
         // Each opponent loses X life. You gain life equal to the life lost this way.
-        this.getSpellAbility().addEffect(new LoseLifeOpponentsYouGainLifeLostEffect(ManacostVariableValue.REGULAR, "X life"));
+        this.getSpellAbility().addEffect(new LoseLifeOpponentsYouGainLifeLostEffect(GetXValue.instance, "X life"));
     }
 
     private Exsanguinate(final Exsanguinate card) {

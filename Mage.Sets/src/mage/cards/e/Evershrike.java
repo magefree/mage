@@ -21,6 +21,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -79,7 +80,7 @@ class EvershrikeEffect extends OneShotEffect {
         if (controller == null || evershrikeCard == null) {
             return false;
         }
-        int xAmount = source.getManaCostsToPay().getX();
+        int xAmount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         controller.moveCards(evershrikeCard, Zone.BATTLEFIELD, source, game);
         Permanent evershrikePermanent = game.getPermanent(evershrikeCard.getId());
         if (evershrikePermanent == null) {

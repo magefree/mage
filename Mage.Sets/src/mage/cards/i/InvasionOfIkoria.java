@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SiegeAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.search.SearchLibraryGraveyardPutOntoBattlefieldEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -60,6 +60,6 @@ enum InvasionOfIkoriaPredicate implements ObjectSourcePlayerPredicate<Card> {
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         return input.getObject().getManaValue()
-                <= ManacostVariableValue.ETB.calculate(game, input.getSource(), null);
+                <= GetXValue.instance.calculate(game, input.getSource(), null);
     }
 }

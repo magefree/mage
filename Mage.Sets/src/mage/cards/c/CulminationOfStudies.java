@@ -18,6 +18,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -75,7 +76,7 @@ class CulminationOfStudiesEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         player.moveCards(cards, Zone.EXILED, source, game);
         cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.EXILED);
         int landCards = cards.count(StaticFilters.FILTER_CARD_LAND, game);

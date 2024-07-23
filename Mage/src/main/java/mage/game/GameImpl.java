@@ -714,12 +714,6 @@ public abstract class GameImpl implements Game {
             // SyrCarahTheBoldTest.java for an example of when this check is relevant.
             if (obj instanceof Spell) {
                 spell = (Spell) obj;
-            } else if (obj != null) {
-                logger.error(String.format(
-                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                                obj.getClass().getName(), obj.getName()),
-                        new Throwable()
-                );
             }
         }
         return spell;
@@ -1801,7 +1795,6 @@ public abstract class GameImpl implements Game {
         } finally {
             if (top != null) {
                 state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
-                rememberLKI(top.getSourceId(), Zone.STACK, top);
                 checkInfiniteLoop(top.getSourceId());
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
@@ -3320,7 +3313,7 @@ public abstract class GameImpl implements Game {
             }
         }
         for (Card card : toOutside) {
-            rememberLKI(card.getId(), Zone.BATTLEFIELD, card);
+            rememberLKI(Zone.BATTLEFIELD, card);
         }
         // needed to send event that permanent leaves the battlefield to allow non stack effects to execute
         player.moveCards(toOutside, Zone.OUTSIDE, null, this);
@@ -3592,12 +3585,12 @@ public abstract class GameImpl implements Game {
     /**
      * Remembers object state to be used as Last Known Information.
      *
-     * @param objectId
      * @param zone
      * @param object
      */
     @Override
-    public void rememberLKI(UUID objectId, Zone zone, MageObject object) {
+    public void rememberLKI(Zone zone, MageObject object) {
+        UUID objectId = object.getId();
         if (object instanceof Permanent || object instanceof StackObject) {
             MageObject copy = object.copy();
 

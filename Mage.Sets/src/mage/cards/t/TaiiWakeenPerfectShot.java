@@ -116,7 +116,7 @@ class TaiiWakeenPerfectShotEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.overflowInc(event.getAmount(), source.getManaCostsToPay().getX()));
+        event.setAmount(CardUtil.overflowInc(event.getAmount(), CardUtil.getSourceCostsTag(game, source, "X", 0)));
         return false;
     }
 

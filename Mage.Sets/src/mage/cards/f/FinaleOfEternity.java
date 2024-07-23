@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.ToughnessTargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ class FinaleOfEternityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getManaCostsToPay().getX() < 10) {
+        if (CardUtil.getSourceCostsTag(game, source, "X", 0) < 10) {
             return true;
         }
         Player player = game.getPlayer(source.getControllerId());

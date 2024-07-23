@@ -13,6 +13,7 @@ import mage.constants.Duration;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XManaValueTargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -50,6 +51,6 @@ enum BlueSunsTwilightCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.getManaCostsToPay().getX() >= 5;
+        return CardUtil.getSourceCostsTag(game, source, "X", 0) >= 5;
     }
 }

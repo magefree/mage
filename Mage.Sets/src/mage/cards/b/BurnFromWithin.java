@@ -17,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -69,7 +70,7 @@ class BurnFromWithinEffect extends OneShotEffect {
             return false;
         }
 
-        int amount = source.getManaCostsToPay().getX();
+        int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         // Target is a creature
         Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));

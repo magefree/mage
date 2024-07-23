@@ -3,7 +3,7 @@ package mage.cards.r;
 import java.util.UUID;
 
 import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class RepulsiveMutation extends CardImpl {
 
         // Put X +1/+1 counters on target creature you control.
         getSpellAbility().addEffect(new AddCountersTargetEffect(
-                CounterType.P1P1.createInstance(), ManacostVariableValue.REGULAR));
+                CounterType.P1P1.createInstance(), GetXValue.instance));
         getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Then counter up to one target spell unless its controller pays mana equal to the greatest power among creatures you control.

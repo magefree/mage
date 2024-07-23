@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -9,13 +8,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -61,7 +61,7 @@ class ReadTheRunesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int drawnCards = controller.drawCards(source.getManaCostsToPay().getX(), source, game);
+            int drawnCards = controller.drawCards(CardUtil.getSourceCostsTag(game, source, "X", 0), source, game);
             Target target = new TargetSacrifice(0, drawnCards, StaticFilters.FILTER_PERMANENT);
             controller.choose(Outcome.Sacrifice, target, source, game);
             int sacrificedPermanents = 0;

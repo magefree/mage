@@ -73,7 +73,7 @@ class FrostAugurEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards("", card, game);
+        player.lookAtCards("Top card of library", card, game);
         if (card.isSnow(game) && player.chooseUse(
                 outcome, "Reveal " + card.getName() + " and put it into your hand?", source, game
         )) {

@@ -2,9 +2,12 @@ package mage.cards.e;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,11 +17,9 @@ import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
 
 /**
  * @author TheElk801
@@ -30,9 +31,9 @@ public final class ErebossIntervention extends CardImpl {
 
         // Choose one —
         // • Target creature gets -X/-X until end of turn. You gain X life.
-        DynamicValue x = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+        DynamicValue x = new SignInversionDynamicValue(GetXValue.instance);
         this.getSpellAbility().addEffect(new BoostTargetEffect(x,x,Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR)
+        this.getSpellAbility().addEffect(new GainLifeEffect(GetXValue.instance)
                 .setText("You gain X life"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
@@ -63,7 +64,7 @@ enum ErebossInterventionAdjuster implements TargetAdjuster {
         }
         mode.getTargets().clear();
         mode.addTarget(new TargetCardInGraveyard(
-                0, 2 * ability.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD_CARDS
+                0, 2 * CardUtil.getSourceCostsTag(game, ability, "X", 0), StaticFilters.FILTER_CARD_CARDS
         ));
     }
 }

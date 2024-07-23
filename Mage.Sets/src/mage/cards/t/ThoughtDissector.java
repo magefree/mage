@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public final class ThoughtDissector extends CardImpl {
 
 class ThoughtDissectorEffect extends OneShotEffect {
 
-    private static final ManacostVariableValue amount = ManacostVariableValue.REGULAR;
+    private static final GetXValue amount = GetXValue.instance;
 
     public ThoughtDissectorEffect() {
         super(Outcome.Detriment);

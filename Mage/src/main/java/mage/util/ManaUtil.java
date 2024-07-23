@@ -10,7 +10,7 @@ import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
 import mage.cards.AdventureCard;
@@ -689,7 +689,7 @@ public final class ManaUtil {
 
     public static ManaCost createManaCost(DynamicValue genericManaCount, Game game, Ability sourceAbility, Effect effect) {
         int costValue = genericManaCount.calculate(game, sourceAbility, effect);
-        if (genericManaCount instanceof ManacostVariableValue) {
+        if (genericManaCount instanceof GetXValue) {
             // variable (X must be final value after all events and effects)
             return createManaCost(costValue, true);
         } else {

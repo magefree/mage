@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -34,7 +34,7 @@ public final class KessigWolfRun extends CardImpl {
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("Target creature gets +X/+0"), new ManaCostsImpl<>("{X}{R}{G}"));
         ability.addEffect(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn
+                GetXValue.instance, StaticValue.get(0), Duration.EndOfTurn
         ).setText("and gains trample until end of turn"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

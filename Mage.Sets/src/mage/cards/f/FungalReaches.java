@@ -7,7 +7,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -38,7 +38,7 @@ public final class FungalReaches extends CardImpl {
 
         // {1}, Remove X storage counters from Fungal Reaches: Add X mana in any combination of {R} and/or {G}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance,
+                new AddManaInAnyCombinationEffect(GetXValue.instance,
                         new CountersSourceCount(CounterType.STORAGE), ColoredManaSymbol.R, ColoredManaSymbol.G),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE));

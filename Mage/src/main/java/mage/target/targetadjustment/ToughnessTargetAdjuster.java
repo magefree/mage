@@ -3,7 +3,7 @@ package mage.target.targetadjustment;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.constants.ComparisonType;
 import mage.filter.Filter;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -29,7 +29,7 @@ public class ToughnessTargetAdjuster extends GenericTargetAdjuster {
     }
 
     public ToughnessTargetAdjuster(ComparisonType comparison) {
-        this(ManacostVariableValue.REGULAR, comparison);
+        this(GetXValue.instance, comparison);
     }
 
     @Override

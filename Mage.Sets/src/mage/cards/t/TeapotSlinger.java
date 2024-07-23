@@ -26,7 +26,7 @@ public final class TeapotSlinger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you expend 4, Teapot Slinger deals 2 damage to each opponent.
         this.addAbility(new ExpendTriggeredAbility(

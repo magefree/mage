@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
@@ -10,11 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.Game;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -33,7 +29,9 @@ public final class MagmaBurst extends CardImpl {
         Effect effect = new DamageTargetEffect(3);
         effect.setText("{this} deals 3 damage to any target. If this spell was kicked, it deals 3 damage to another target.");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(MagmaBurstAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
+                new TargetAnyTarget(2)));
     }
 
     private MagmaBurst(final MagmaBurst card) {
@@ -43,14 +41,5 @@ public final class MagmaBurst extends CardImpl {
     @Override
     public MagmaBurst copy() {
         return new MagmaBurst(this);
-    }
-}
-
-enum MagmaBurstAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.addTarget(new TargetAnyTarget(KickedCondition.ONCE.apply(game, ability) ? 2 : 1));
     }
 }

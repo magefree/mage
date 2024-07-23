@@ -2,7 +2,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
@@ -20,7 +20,7 @@ public final class PullFromTomorrow extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
 
         // Draw X cards, then discard a card.
-        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance));
         Effect effect = new DiscardControllerEffect(1);
         effect.setText(", then discard a card");
         getSpellAbility().addEffect(effect);

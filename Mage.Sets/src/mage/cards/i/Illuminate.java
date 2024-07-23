@@ -4,7 +4,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.abilities.condition.common.KickedCostCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -28,14 +28,14 @@ public final class Illuminate extends CardImpl {
         kickerAbility.addKickerCost("{3}{U}");
         this.addAbility(kickerAbility);
         // Illuminate deals X damage to target creature. If Illuminate was kicked with its {2}{R} kicker, it deals X damage to that creature's controller. If Illuminate was kicked with its {3}{U} kicker, you draw X cards.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetControllerEffect(ManacostVariableValue.REGULAR),
+                new DamageTargetControllerEffect(GetXValue.instance),
                 new KickedCostCondition("{2}{R}"),
                 "if this spell was kicked with its {2}{R} kicker, it deals X damage to that creature's controller."));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR),
+                new DrawCardSourceControllerEffect(GetXValue.instance),
                 new KickedCostCondition("{3}{U}"),
                 " if this spell was kicked with its {3}{U} kicker, you draw X cards."));
 

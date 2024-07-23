@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -40,7 +40,7 @@ public final class WakerOfTheWilds extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(
                         CounterType.P1P1.createInstance(0),
-                        ManacostVariableValue.REGULAR
+                        GetXValue.instance
                 ).setText("Put X +1/+1 counters on target land you control."),
                 new ManaCostsImpl<>("{X}{G}{G}")
         );
