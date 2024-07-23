@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
@@ -19,7 +18,8 @@ public final class VitalizingCascade extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}{W}");
 
         // You gain X plus 3 life.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new IntPlusDynamicValue(3, GetXValue.instance)));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new IntPlusDynamicValue(3, GetXValue.instance))
+                .setText("you gain X plus 3 life"));
     }
 
     private VitalizingCascade(final VitalizingCascade card) {
