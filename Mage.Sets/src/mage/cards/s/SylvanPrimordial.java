@@ -20,7 +20,7 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ public final class SylvanPrimordial extends CardImpl {
         // When Sylvan Primordial enters the battlefield, for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SylvanPrimordialEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         this.addAbility(ability);
     }
 

@@ -1,13 +1,11 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
@@ -16,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -32,19 +29,15 @@ public final class StoneTongueBasilisk extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Stone-Tongue Basilisk deals combat damage to a creature, destroy that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
-        effect.setText("destroy that creature at end of combat");
-        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(effect, false, true));
+        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true
+        ).setText("destroy that creature at end of combat"), false, true));
 
         // Threshold - As long as seven or more cards are in your graveyard, all creatures able to block Stone-Tongue Basilisk do so.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalRequirementEffect(
-                new MustBeBlockedByAllSourceEffect(),
-                new CardsInControllerGraveyardCondition(7),
-                "As long as seven or more cards are in your graveyard,  all creatures able to block {this} do so"
-        ));
-        ability.setAbilityWord(AbilityWord.THRESHOLD);
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new ConditionalRequirementEffect(
+                new MustBeBlockedByAllSourceEffect(), ThresholdCondition.instance, "As long as seven " +
+                "or more cards are in your graveyard,  all creatures able to block {this} do so"
+        )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 
     private StoneTongueBasilisk(final StoneTongueBasilisk card) {

@@ -721,7 +721,7 @@ public class CardPluginImpl implements CardPlugin {
                         LOGGER.info("Symbols download finished");
                         dialog.dispose();
                         ManaSymbols.loadImages();
-                        GUISizeHelper.refreshGUIAndCards();
+                        GUISizeHelper.refreshGUIAndCards(false);
                     }
                 }
             }

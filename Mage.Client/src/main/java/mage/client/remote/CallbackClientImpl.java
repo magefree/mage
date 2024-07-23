@@ -29,6 +29,8 @@ import java.awt.event.KeyEvent;
 import java.util.*;
 
 /**
+ * Client side implementation (process commands from a server)
+ *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class CallbackClientImpl implements CallbackClient {
@@ -266,7 +268,7 @@ public class CallbackClientImpl implements CallbackClient {
                     }
 
                     case GAME_ERROR: {
-                        frame.showErrorDialog("Game Error", (String) callback.getData());
+                        frame.showErrorDialog("SERVER", "game error", (String) callback.getData());
                         break;
                     }
 
@@ -693,12 +695,8 @@ public class CallbackClientImpl implements CallbackClient {
         });
     }
 
-    private void handleException(Exception ex) {
-        logger.fatal("Client error\n", ex);
-        String errorMessage = ex.getMessage();
-        if (errorMessage == null || errorMessage.isEmpty() || errorMessage.equals("Null")) {
-            errorMessage = ex.getClass().getSimpleName() + " - look at server or client logs for more details";
-        }
-        frame.showError("Server's error: " + errorMessage);
+    private void handleException(Exception e) {
+        logger.fatal("General error\n", e);
+        frame.showErrorDialog("General error", e);
     }
 }

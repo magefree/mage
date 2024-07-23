@@ -69,9 +69,9 @@ public final class InallaArchmageRitualist extends CardImpl {
                         filter, false, SetTargetPointer.PERMANENT),
                 SourceOnBattlefieldOrCommandZoneCondition.instance,
                 "Whenever another nontoken Wizard enters the battlefield under your control, "
-                + "{this} is in the command zone or on the battlefield, "
+                + "if {this} is in the command zone or on the battlefield, "
                 + "you may pay {1}. If you do, create a token that's a copy of that Wizard. "
-                + "That token gains haste. Exile it at the beginning of the next end step");
+                + "The token gains haste. Exile it at the beginning of the next end step");
         ability.setAbilityWord(AbilityWord.EMINENCE);
         this.addAbility(ability);
 

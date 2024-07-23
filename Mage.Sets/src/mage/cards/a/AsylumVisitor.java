@@ -34,7 +34,7 @@ public final class AsylumVisitor extends CardImpl {
         // At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), TargetController.ANY, false),
-                new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, null, TargetController.ACTIVE),
+                new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, TargetController.ACTIVE),
                 "At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.");
         Effect effect = new LoseLifeSourceControllerEffect(1);
         ability.addEffect(effect);

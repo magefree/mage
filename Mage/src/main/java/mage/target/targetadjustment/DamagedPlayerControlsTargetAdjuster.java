@@ -7,6 +7,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetCard;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.util.CardUtil;
 
@@ -35,6 +36,9 @@ public class DamagedPlayerControlsTargetAdjuster extends GenericTargetAdjuster {
     @Override
     public void addDefaultTargets(Ability ability) {
         super.addDefaultTargets(ability);
+        if (blueprintTarget instanceof TargetCard && !owner) {
+            throw new IllegalArgumentException("DamagedPlayerControlsTargetAdjuster has TargetCard but checking for Controller instead of Owner - " + blueprintTarget);
+        }
         CardUtil.AssertNoControllerOwnerPredicates(blueprintTarget);
     }
 

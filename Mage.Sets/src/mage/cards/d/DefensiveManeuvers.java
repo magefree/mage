@@ -63,10 +63,10 @@ class DefensiveManeuversEffect extends OneShotEffect {
         if (player == null || sourceObject == null) {
             return false;
         }
-        Choice choice = new ChoiceCreatureType(sourceObject);
+        Choice choice = new ChoiceCreatureType(game, source);
         SubType subType = null;
         if (player.choose(outcome, choice, game)) {
-            subType = SubType.byDescription(choice.getChoice());
+            subType = SubType.byDescription(choice.getChoiceKey());
         }
         if (subType == null) {
             return false;

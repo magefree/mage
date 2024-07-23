@@ -786,9 +786,9 @@ public class NewTableDialog extends MageDialog {
         this.repaint();
     }
 
-    private void handleError(Exception ex) {
-        logger.fatal("Error loading deck", ex);
-        MageFrame.getInstance().showErrorDialog("Error loading deck", ex.getMessage());
+    private void handleError(Exception e) {
+        logger.fatal("Can't join table due " + e, e);
+        MageFrame.getInstance().showErrorDialog("CLIENT - error on join table", e);
     }
 
     public void showDialog(UUID roomId) {

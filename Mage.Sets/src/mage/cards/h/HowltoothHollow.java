@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class HowltoothHollow extends CardImpl {
 
     private static final Condition condition
-            = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, null, TargetController.EACH_PLAYER);
+            = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, TargetController.EACH_PLAYER);
     private static final Hint hint = new ConditionHint(condition, "Each player has no cards in hand");
 
     public HowltoothHollow(UUID ownerId, CardSetInfo setInfo) {

@@ -41,7 +41,9 @@ public final class LatullasOrders extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature deals combat damage to defending player, you may destroy target artifact that player controls.
-        Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(new DestroyTargetEffect(), "enchanted creature", true, true);
+        Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
+                new DestroyTargetEffect(), "enchanted creature", true, true
+        ).setTriggerPhrase("Whenever enchanted creature deals combat damage to defending player, ");
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
         this.addAbility(ability);

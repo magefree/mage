@@ -5,10 +5,9 @@ import mage.cards.decks.DeckFormats;
 import mage.cards.decks.exporter.DeckExporter;
 import mage.client.MageFrame;
 import mage.client.dialog.MageDialog;
+import mage.client.util.AppUtil;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -62,15 +61,6 @@ public class DeckExportClipboardDialog extends MageDialog {
         this.setVisible(true);
     }
 
-    private void setClipboardStringData(String text) {
-        try {
-            StringSelection data = new StringSelection(text);
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(data, data);
-        } catch (HeadlessException e) {
-            //e.printStackTrace();
-        }
-    }
-
     private void onOK() {
         onCopyToClipboard();
         this.removeDialog();
@@ -95,7 +85,7 @@ public class DeckExportClipboardDialog extends MageDialog {
     }
 
     private void onCopyToClipboard() {
-        setClipboardStringData(editData.getText());
+        AppUtil.setClipboardData(editData.getText());
     }
 
     /**

@@ -40,11 +40,12 @@ public final class NanogeneConversion extends CardImpl {
     }
 }
 //Based on Augmenter Pugilist's EchoingEquationEffect
+//TODO: Refactor both into EachOtherBecomesCopyOfTargetEffect(FilterPermanent filter, Duration duration, CopyApplier applier)
 class NanogeneConversionEffect extends OneShotEffect {
 
     NanogeneConversionEffect() {
         super(Outcome.Benefit);
-        staticText = "choose target creature you control. Each other creature you control becomes a copy of it until end of turn, except those creatures aren't legendary";
+        staticText = "choose target creature you control. Each other creature becomes a copy of that creature until end of turn, except it isn't legendary";
     }
 
     private NanogeneConversionEffect(final NanogeneConversionEffect effect) {

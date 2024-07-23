@@ -580,9 +580,8 @@ public final class ManaSymbols {
     }
 
 
-
     public enum Type {
-        TABLE,
+        TABLE, // TODO: merge TABLE and DIALOG into WINDOW
         CHAT,
         DIALOG,
         TOOLTIP,

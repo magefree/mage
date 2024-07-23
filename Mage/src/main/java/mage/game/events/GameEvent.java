@@ -662,6 +662,18 @@ public class GameEvent implements Serializable {
          playerId   owner of the plotted card (the one able to cast the card)
          */
         BECOME_PLOTTED,
+        /* the player foraged
+         targetId   same as sourceId
+         sourceId   of the ability
+         playerId   player who foraged
+         */
+        FORAGED,
+        /* gave a gift
+         targetId   the player who received the gift
+         sourceId   of the ability
+         playerId   player who gave the gift
+         */
+        GAVE_GIFT,
         //custom events
         CUSTOM_EVENT
     }

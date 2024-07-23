@@ -7,6 +7,7 @@ import mage.abilities.keyword.AfflictAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -34,7 +35,7 @@ public final class WildfireEternal extends CardImpl {
 
         // Whenever Wildfire Eternal attacks and isn't blocked, you may cast an instant or sorcery card from your hand without paying its mana cost.
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(
-                new CastFromHandForFreeEffect(filter), false, true
+                new CastFromHandForFreeEffect(filter), false, SetTargetPointer.PLAYER
         ));
     }
 

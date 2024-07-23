@@ -21,8 +21,8 @@ import java.util.UUID;
  */
 public final class TempleOfTheDead extends CardImpl {
 
-    private static final Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 2, null, TargetController.ANY);
-    private static final Hint hint = new ConditionHint(condition, "any player has one or fewer cards in hand");
+    private static final Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 2, TargetController.ANY);
+    private static final Hint hint = new ConditionHint(condition, "a player has one or fewer cards in hand");
 
     public TempleOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

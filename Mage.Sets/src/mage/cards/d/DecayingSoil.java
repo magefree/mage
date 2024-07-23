@@ -3,8 +3,7 @@ package mage.cards.d;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -13,6 +12,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -34,23 +34,24 @@ public final class DecayingSoil extends CardImpl {
         filter.add(TokenPredicate.FALSE);
     }
 
-    private static final Condition condition = new CardsInControllerGraveyardCondition(7);
-
     public DecayingSoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
 
         // At the beginning of your upkeep, exile a card from your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, false
-        ).setText("exile a card from your graveyard"), TargetController.YOU, false, true));
+                Zone.BATTLEFIELD,
+                new ExileFromZoneTargetEffect(Zone.GRAVEYARD, false)
+                        .setText("exile a card from your graveyard"),
+                TargetController.YOU, false, true
+        ));
 
         // Threshold - As long as seven or more cards are in your graveyard, Decaying Soil has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new DecayingSoilTriggeredAbility()),
-                condition, "<i>Threshold</i> &mdash; As long as seven or more cards are in your graveyard, " +
+                ThresholdCondition.instance, "as long as seven or more cards are in your graveyard, " +
                 "{this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, " +
                 "you may pay {1}. If you do, return that card to your hand.\""
-        )));
+        )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 
     private DecayingSoil(final DecayingSoil card) {

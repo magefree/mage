@@ -19,7 +19,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetNonlandPermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.util.CardUtil;
@@ -47,7 +47,7 @@ public final class BronzebeakForagers extends CardImpl {
                 .setText("for each opponent, exile up to one target nonland permanent that player controls until {this} leaves the battlefield")
         );
         etbAbility.addTarget(new TargetNonlandPermanent(0, 1));
-        etbAbility.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        etbAbility.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         this.addAbility(etbAbility);
 
         // {X}{W}: Put target card with mana value X exiled with Bronzebeak Foragers into its owner's graveyard.

@@ -14,12 +14,11 @@ import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Demon33Token;
 import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.util.CardUtil;
 
@@ -31,6 +30,7 @@ import java.util.UUID;
 public final class TashaTheWitchQueen extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a spell you don't own");
+    private static final FilterCard filterCard = new FilterInstantOrSorceryCard("instant or sorcery card from that player's graveyard");
 
     static {
         filter.add(TargetController.NOT_YOU.getOwnerPredicate());
@@ -49,7 +49,8 @@ public final class TashaTheWitchQueen extends CardImpl {
         // +1: Draw a card. For each opponent, exile up to one target instant or sorcery card from that player's graveyard and put a page counter on it.
         Ability ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);
         ability.addEffect(new TashaTheWitchQueenExileEffect());
-        ability.setTargetAdjuster(TashaTheWitchQueenAdjuster.instance);
+        ability.addTarget(new TargetCardInOpponentsGraveyard(0, 1, filterCard));
+        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(true));
         this.addAbility(ability);
 
         // −3: You may cast a spell from among cards in exile with page counters on them without paying its mana cost.
@@ -66,25 +67,6 @@ public final class TashaTheWitchQueen extends CardImpl {
     @Override
     public TashaTheWitchQueen copy() {
         return new TashaTheWitchQueen(this);
-    }
-}
-
-enum TashaTheWitchQueenAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from " + opponent.getLogName() + "'s graveyard");
-            filter.add(new OwnerIdPredicate(opponentId));
-            TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(0, 1, filter);
-            ability.addTarget(target);
-        }
     }
 }
 

@@ -14,7 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +34,7 @@ public final class DecoyGambit extends CardImpl {
         // then return that creature to its owner's hand unless its controller has you draw a card.
         this.getSpellAbility().addEffect(new DecoyGambitEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,1));
-        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
     }
 
     private DecoyGambit(final DecoyGambit card) {

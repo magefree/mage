@@ -17,7 +17,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlaneswalker;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.Collection;
@@ -47,7 +47,7 @@ public final class TheTrueScriptures extends CardImpl {
                     ability.addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer())
                             .setText("for each opponent, destroy up to one target creature or planeswalker that player controls"));
                     ability.addTarget(new TargetCreatureOrPlaneswalker(0,1));
-                    ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+                    ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
                 }
         );
 

@@ -24,7 +24,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetNonlandPermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -57,7 +57,7 @@ public final class VronosMaskedInquisitor extends CardImpl {
         LoyaltyAbility ability2 = new LoyaltyAbility(new ReturnToHandTargetEffect().setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, return up to one target nonland permanent that player controls to its owner's hand"), -2);
         ability2.addTarget(new TargetNonlandPermanent(0,1));
-        ability2.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
+        ability2.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         this.addAbility(ability2);
 
         // −7: Target artifact you control becomes a 9/9 Construct artifact creature and gains vigilance, indestructible, and "This creature can't be blocked."

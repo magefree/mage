@@ -988,6 +988,14 @@ public final class StaticFilters {
         FILTER_PERMANENT_TOKEN.setLockedFilter(true);
     }
 
+
+    public static final FilterPermanent FILTER_PERMANENT_TOKENS = new FilterPermanent("tokens");
+
+    static {
+        FILTER_PERMANENT_TOKENS.add(TokenPredicate.TRUE);
+        FILTER_PERMANENT_TOKENS.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKEN = new FilterCreaturePermanent("creature token");
 
     static {

@@ -65,6 +65,7 @@ import java.util.*;
 public class TestCardRenderDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(TestCardRenderDialog.class);
+
     float cardSizeMod = 1.0f;
     float playerSizeMod = 1.0f;
     private Match match = null;
@@ -108,7 +109,7 @@ public class TestCardRenderDialog extends MageDialog {
         this.playerPanel.add(player, BorderLayout.CENTER);
 
         // render cards
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
 
         // windows settings
         MageFrame.getDesktop().remove(this);
@@ -260,9 +261,16 @@ public class TestCardRenderDialog extends MageDialog {
         return cardView;
     }
 
-    private void reloadCardsAndPlayer() {
+    private void reloadCardsAndPlayer(boolean refreshTheme) {
+        // it contains GUI reload feature (must re-render all frames with new look and fill style),
+        // so call it for theme combobox only
+        // bug example: null errors on card size slider usage
+
         // apply selected theme (warning, it will be applied for all app, so can be bugged in other dialogs - but it's ok for debug)
-        PreferencesDialog.setCurrentTheme((ThemeType) comboTheme.getSelectedItem());
+        // bug example: render part of elements with old colors
+        if (refreshTheme) {
+            PreferencesDialog.setCurrentTheme((ThemeType) comboTheme.getSelectedItem());
+        }
 
         // prepare fake game and players without real match
         // it's a workaround with minimum code and data init
@@ -868,13 +876,13 @@ public class TestCardRenderDialog extends MageDialog {
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void buttonReloadCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadCardsActionPerformed
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(true);
     }//GEN-LAST:event_buttonReloadCardsActionPerformed
 
     private void comboRenderModeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboRenderModeItemStateChanged
         // render modes are loading on show dialog, so must ignore change event on startup
         if (this.isVisible()) {
-            reloadCardsAndPlayer();
+            reloadCardsAndPlayer(false);
         }
     }//GEN-LAST:event_comboRenderModeItemStateChanged
 
@@ -885,57 +893,57 @@ public class TestCardRenderDialog extends MageDialog {
         // Convert to frac in [0.5, 2.0] exponentially
         cardSizeMod = (float) Math.pow(2, sliderFrac);
         playerSizeMod = (float) Math.pow(2, sliderFrac);
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_sliderSizeStateChanged
 
     private void checkBoxGenerateManyCardsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBoxGenerateManyCardsItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_checkBoxGenerateManyCardsItemStateChanged
 
     private void comboCardIconsPositionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardIconsPositionItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_comboCardIconsPositionItemStateChanged
 
     private void spinnerCardIconsMaxVisibleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerCardIconsMaxVisibleStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_spinnerCardIconsMaxVisibleStateChanged
 
     private void spinnerCardIconsAdditionalAmountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerCardIconsAdditionalAmountStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_spinnerCardIconsAdditionalAmountStateChanged
 
     private void comboCardIconsOrderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardIconsOrderItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_comboCardIconsOrderItemStateChanged
 
     private void comboThemeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboThemeItemStateChanged
         // themes list are loading on show dialog, so must ignore change event on startup
         if (this.isVisible()) {
-            reloadCardsAndPlayer();
+            reloadCardsAndPlayer(true);
         }
     }//GEN-LAST:event_comboThemeItemStateChanged
 
     private void comboCardColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardColorItemStateChanged
         // card icon colors list are loading on show dialog, so must ignore change event on startup
         if (this.isVisible()) {
-            reloadCardsAndPlayer();
+            reloadCardsAndPlayer(false);
         }
     }//GEN-LAST:event_comboCardColorItemStateChanged
 
     private void comboPlayerStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPlayerStatusItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_comboPlayerStatusItemStateChanged
 
     private void comboPlayerControllerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPlayerControllerItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_comboPlayerControllerItemStateChanged
 
     private void checkPlayerSmallModeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkPlayerSmallModeItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_checkPlayerSmallModeItemStateChanged
 
     private void checkPlayerAsTargetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkPlayerAsTargetItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_checkPlayerAsTargetItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

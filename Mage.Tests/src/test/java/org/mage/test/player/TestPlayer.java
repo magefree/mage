@@ -2140,8 +2140,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
-        if (rEffects.size() <= 1) {
+    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
+        if (effectsMap.size() <= 1) {
             return 0;
         }
         assertAliasSupportInChoices(false);
@@ -2149,7 +2149,7 @@ public class TestPlayer implements Player {
             String choice = choices.get(0);
 
             int index = 0;
-            for (Map.Entry<String, String> entry : rEffects.entrySet()) {
+            for (Map.Entry<String, String> entry : effectsMap.entrySet()) {
                 if (entry.getValue().startsWith(choice)) {
                     choices.remove(0);
                     return index;
@@ -2160,8 +2160,8 @@ public class TestPlayer implements Player {
             assertWrongChoiceUsage(choice);
         }
 
-        this.chooseStrictModeFailed("choice", game, String.join("\n", rEffects.values()));
-        return computerPlayer.chooseReplacementEffect(rEffects, game);
+        this.chooseStrictModeFailed("choice", game, String.join("\n", effectsMap.values()));
+        return computerPlayer.chooseReplacementEffect(effectsMap, objectsMap, game);
     }
 
     @Override

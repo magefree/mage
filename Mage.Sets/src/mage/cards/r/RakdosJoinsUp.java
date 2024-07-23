@@ -32,6 +32,9 @@ public final class RakdosJoinsUp extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("a legendary creature you control");
+    static {
+        filter.add(SuperType.LEGENDARY.getPredicate());
+    }
 
     public RakdosJoinsUp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{R}");

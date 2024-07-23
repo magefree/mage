@@ -16,10 +16,9 @@ import mage.abilities.mana.ManaAbility;
 import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -56,6 +55,9 @@ import java.util.List;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
+
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 
 /**
  * Human: server side logic to exchange game data between server app and another player's app
@@ -485,12 +487,12 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
         if (gameInCheckPlayableState(game, true)) { // ignore warning logs until double call for TAPPED_FOR_MANA will be fix
             return 0;
         }
 
-        if (rEffects.size() <= 1) {
+        if (effectsMap.size() <= 1) {
             return 0;
         }
 
@@ -505,8 +507,8 @@ public class HumanPlayer extends PlayerImpl {
             for (String autoText : autoSelectReplacementEffects) {
                 int count = 0;
                 // find effect with same saved text
-                for (String effectKey : rEffects.keySet()) {
-                    String currentText = prepareReplacementText(rEffects.get(effectKey), useSameSettings);
+                for (String effectKey : effectsMap.keySet()) {
+                    String currentText = prepareReplacementText(effectsMap.get(effectKey), useSameSettings);
                     if (currentText.equals(autoText)) {
                         return count;
                     }
@@ -517,7 +519,17 @@ public class HumanPlayer extends PlayerImpl {
 
         replacementEffectChoice.clearChoice();
         replacementEffectChoice.getChoices().clear();
-        replacementEffectChoice.setKeyChoices(rEffects);
+        replacementEffectChoice.getKeyChoices().clear();
+        effectsMap.forEach((key, value) -> {
+            MageObject object = objectsMap.getOrDefault(key, null);
+            replacementEffectChoice.withItem(
+                    key,
+                    value,
+                    null,
+                    object != null ? ChoiceHintType.GAME_OBJECT : null,
+                    object != null ? object.getId().toString() : null
+            );
+        });
 
         // if same choices then select first
         int differentChoices = 0;
@@ -535,6 +547,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
+                replacementEffectChoice.onChooseStart(game, playerId);
                 game.fireChooseChoiceEvent(playerId, replacementEffectChoice);
             }
             waitForResponse(game);
@@ -557,8 +570,9 @@ public class HumanPlayer extends PlayerImpl {
 
                 if (replacementEffectChoice.getChoiceKey() != null) {
                     int index = 0;
-                    for (String key : rEffects.keySet()) {
+                    for (String key : effectsMap.keySet()) {
                         if (replacementEffectChoice.getChoiceKey().equals(key)) {
+                            replacementEffectChoice.onChooseEnd(game, playerId, replacementEffectChoice.getChoiceKey());
                             return index;
                         }
                         index++;
@@ -612,6 +626,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
+                choice.onChooseStart(game, playerId);
                 game.fireChooseChoiceEvent(playerId, choice);
             }
             waitForResponse(game);
@@ -623,9 +638,11 @@ public class HumanPlayer extends PlayerImpl {
                 } else {
                     choice.setChoice(val);
                 }
+                choice.onChooseEnd(game, playerId, val);
                 return true;
             } else if (!choice.isRequired()) {
                 // cancel
+                choice.onChooseEnd(game, playerId, null);
                 return false;
             }
         }

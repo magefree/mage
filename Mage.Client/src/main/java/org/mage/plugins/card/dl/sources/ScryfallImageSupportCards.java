@@ -556,6 +556,7 @@ public class ScryfallImageSupportCards {
             add("M3C"); // Modern Horizons 3 Commander
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
+            add("BLC"); // Bloomburrow Commander
             add("DSK"); // Duskmourn: House of Horror
             add("FDN"); // Foundations
 

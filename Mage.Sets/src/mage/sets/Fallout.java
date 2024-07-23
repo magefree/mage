@@ -102,6 +102,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Cultivate", 196, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 260, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Deadly Dispute", 184, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
+        cards.add(new SetCardInfo("Desdemona, Freedom's Edge", 101, Rarity.RARE, mage.cards.d.DesdemonaFreedomsEdge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desdemona, Freedom's Edge", 412, Rarity.RARE, mage.cards.d.DesdemonaFreedomsEdge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desdemona, Freedom's Edge", 629, Rarity.RARE, mage.cards.d.DesdemonaFreedomsEdge.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Desdemona, Freedom's Edge", 940, Rarity.RARE, mage.cards.d.DesdemonaFreedomsEdge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Desolate Mire", 146, Rarity.RARE, mage.cards.d.DesolateMire.class));
         cards.add(new SetCardInfo("Diamond City", 147, Rarity.RARE, mage.cards.d.DiamondCity.class));
         cards.add(new SetCardInfo("Dispatch", 159, Rarity.UNCOMMON, mage.cards.d.Dispatch.class));
@@ -159,6 +163,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Hour of Reckoning", 161, Rarity.RARE, mage.cards.h.HourOfReckoning.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 344, Rarity.RARE, mage.cards.h.HullbreakerHorror.class));
         cards.add(new SetCardInfo("Ian the Reckless", 59, Rarity.UNCOMMON, mage.cards.i.IanTheReckless.class));
+        cards.add(new SetCardInfo("Idolized", 17, Rarity.RARE, mage.cards.i.Idolized.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idolized", 327, Rarity.RARE, mage.cards.i.Idolized.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idolized", 545, Rarity.RARE, mage.cards.i.Idolized.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idolized", 855, Rarity.RARE, mage.cards.i.Idolized.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Impassioned Orator", 162, Rarity.COMMON, mage.cards.i.ImpassionedOrator.class));
         cards.add(new SetCardInfo("Inexorable Tide", 177, Rarity.RARE, mage.cards.i.InexorableTide.class));
         cards.add(new SetCardInfo("Infesting Radroach", 46, Rarity.UNCOMMON, mage.cards.i.InfestingRadroach.class));
@@ -388,6 +396,8 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Vault 21: House Gambit", 69, Rarity.RARE, mage.cards.v.Vault21HouseGambit.class));
         cards.add(new SetCardInfo("Vault 75: Middle School", 27, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 75: Middle School", 555, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vault 87: Forced Evolution", 122, Rarity.RARE, mage.cards.v.Vault87ForcedEvolution.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vault 87: Forced Evolution", 650, Rarity.RARE, mage.cards.v.Vault87ForcedEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 70, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 395, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Veronica, Dissident Scribe", 598, Rarity.RARE, mage.cards.v.VeronicaDissidentScribe.class, NON_FULL_USE_VARIOUS));

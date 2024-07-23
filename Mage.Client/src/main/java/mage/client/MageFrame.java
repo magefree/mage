@@ -1,6 +1,7 @@
 package mage.client;
 
 import mage.MageException;
+import mage.cards.RateCard;
 import mage.cards.action.ActionCallback;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardRepository;
@@ -31,13 +32,13 @@ import mage.client.tournament.TournamentPane;
 import mage.client.util.*;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.ArrowBuilder;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.countryBox.CountryUtil;
 import mage.client.util.sets.ConstructedFormats;
 import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.PlayerAction;
-import mage.cards.RateCard;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
@@ -71,14 +72,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+import java.util.stream.Collectors;
 
 /**
  * Client app
@@ -229,33 +229,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         config.setArchiveDetector(new TArchiveDetector("zip"));
         config.setAccessPreference(FsAccessOption.STORE, true);
 
-        try {
-            UIManager.put("desktop", new Color(0, 0, 0, 0));
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        // apply current theme
+        GUISizeHelper.calculateGUISizes();
+        GuiDisplayUtil.refreshThemeSettings();
 
-            UIManager.put("nimbusBlueGrey", PreferencesDialog.getCurrentTheme().getNimbusBlueGrey()); // buttons, scrollbar background, disabled inputs
-            UIManager.put("control", PreferencesDialog.getCurrentTheme().getControl()); // window bg
-            UIManager.put("nimbusLightBackground", PreferencesDialog.getCurrentTheme().getNimbusLightBackground()); // inputs, table rows
-            UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
-            UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
-
-            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            // stop JSplitPane from eating F6 and F8 or any other function keys
-            {
-                Object value = UIManager.get("SplitPane.ancestorInputMap");
-
-                if (value instanceof InputMap) {
-                    InputMap map = (InputMap) value;
-                    for (int vk = KeyEvent.VK_F2; vk <= KeyEvent.VK_F12; ++vk) {
-                        map.remove(KeyStroke.getKeyStroke(vk, 0));
-                    }
-                }
+        // workaround to stop JSplitPane from eating F6 and F8 or any other function keys
+        Object value = UIManager.get("SplitPane.ancestorInputMap");
+        if (value instanceof InputMap) {
+            InputMap map = (InputMap) value;
+            for (int vk = KeyEvent.VK_F2; vk <= KeyEvent.VK_F12; ++vk) {
+                map.remove(KeyStroke.getKeyStroke(vk, 0));
             }
-
-            GUISizeHelper.calculateGUISizes();
-            // UIManager.put("Table.rowHeight", GUISizeHelper.tableRowHeight);
-        } catch (Exception ex) {
-            LOGGER.fatal(null, ex);
         }
 
         // other settings
@@ -321,7 +305,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         errorDialog = new ErrorDialog();
         errorDialog.setLocation(100, 100);
         desktopPane.add(errorDialog, JLayeredPane.MODAL_LAYER);
-        UI.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
         PING_SENDER_EXECUTOR.scheduleAtFixedRate(SessionHandler::ping, TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
 
@@ -331,6 +314,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         tablesPane = new TablesPane();
         desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
         SwingUtilities.invokeLater(this::hideServerLobby);
+
+        // save links for global/shared components
+        UI.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
+        UI.addComponent(MageComponents.DESKTOP_TOOLBAR, mageToolbar);
 
         addTooltipContainer();
         setBackground();
@@ -1368,11 +1355,52 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         userRequestDialog.showDialog(userRequestMessage);
     }
 
-    public void showErrorDialog(final String title, final String message) {
+    public void showErrorDialog(String errorType, Exception e) {
+        String errorMessage = e.getMessage();
+        if (errorMessage == null || errorMessage.isEmpty() || errorMessage.equals("Null")) {
+            errorMessage = e.getClass().getSimpleName() + " - look at server or client logs for more details";
+        }
+
+        int maxLines = 10;
+        String newLine = "\n";
+
+        // main error
+        String mainError = Arrays.stream(e.getStackTrace())
+                .map(StackTraceElement::toString)
+                .limit(maxLines)
+                .collect(Collectors.joining(newLine));
+        if (e.getStackTrace().length > maxLines) {
+            mainError += newLine + "and other " + (e.getStackTrace().length - maxLines) + " lines";
+        }
+
+        // root error
+        String rootError = "";
+        Throwable root = ThreadUtils.findRootException(e);
+        if (root != e) {
+            rootError = Arrays.stream(root.getStackTrace())
+                    .map(StackTraceElement::toString)
+                    .limit(maxLines)
+                    .collect(Collectors.joining(newLine));
+            if (root.getStackTrace().length > maxLines) {
+                rootError += newLine + "and other " + (root.getStackTrace().length - maxLines) + " lines";
+            }
+        }
+
+        String allErrors = mainError;
+        if (!rootError.isEmpty()) {
+            allErrors += newLine + "Root caused by:" + newLine + rootError;
+        }
+        showErrorDialog(errorType,
+                e.getClass().getSimpleName(),
+                errorMessage + newLine + newLine + "Stack trace:" + newLine + allErrors
+        );
+    }
+
+    public void showErrorDialog(String errorType, String errorTitle, String errorText) {
         if (SwingUtilities.isEventDispatchThread()) {
-            errorDialog.showDialog(title, message);
+            errorDialog.showDialog(errorType, errorTitle, errorText);
         } else {
-            SwingUtilities.invokeLater(() -> errorDialog.showDialog(title, message));
+            SwingUtilities.invokeLater(() -> errorDialog.showDialog(errorType, errorTitle, errorText));
         }
     }
 
@@ -1529,7 +1557,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         // Needed to layout the tooltbar after text length change
         // TODO: need research, is it actual?
-        GUISizeHelper.refreshGUIAndCards();
+        GUISizeHelper.refreshGUIAndCards(false);
 
         this.btnConnect.repaint();
         this.btnConnect.revalidate();
@@ -1599,7 +1627,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 .filter(Component::isVisible)
                 .filter(p -> p instanceof MagePane)
                 .map(p -> (MagePane) p)
-                .filter(p-> !onlyActive || p.isActiveTable())
+                .filter(p -> !onlyActive || p.isActiveTable())
                 .count();
     }
 
@@ -1746,7 +1774,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void doClientShutdownAndExit() {
         tablesPane.cleanUp();
-        CardRepository.instance.closeDB();
+        CardRepository.instance.closeDB(true);
         Plugins.instance.shutdown();
         dispose();
         System.exit(0);
@@ -1825,21 +1853,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         }
 
+        this.connectDialog.changeGUISize();
+        this.errorDialog.changeGUISize();
+
         updateTooltipContainerSizes();
     }
 
     public static void showWhatsNewDialog() {
-        try {
-            URI newsURI = new URI("https://jaydi85.github.io/xmage-web-news/news.html");
-            Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-            if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-                desktop.browse(newsURI);
-            }
-        } catch (URISyntaxException e) {
-            LOGGER.error("URI Syntax error when creating news link", e);
-        } catch (IOException e) {
-            LOGGER.error("IOException while loading news page", e);
-        }
+        AppUtil.openUrlInBrowser("https://jaydi85.github.io/xmage-web-news/news.html");
     }
 
     public boolean isGameFrameActive(UUID gameId) {

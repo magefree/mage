@@ -74,12 +74,12 @@ class BloodlineShamanEffect extends OneShotEffect {
             return false;
         }
 
-        Choice typeChoice = new ChoiceCreatureType(sourceObject);
+        Choice typeChoice = new ChoiceCreatureType(game, source);
         if (!controller.choose(outcome, typeChoice, game)) {
             return false;
         }
-        SubType subType = SubType.byDescription(typeChoice.getChoice());
-        game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
+        SubType subType = SubType.byDescription(typeChoice.getChoiceKey());
+        game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoiceKey());
 
         // Reveal the top card of your library.
         if (controller.getLibrary().hasCards()) {
