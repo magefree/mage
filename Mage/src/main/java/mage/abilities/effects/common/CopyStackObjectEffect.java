@@ -13,8 +13,12 @@ import mage.players.Player;
 public class CopyStackObjectEffect extends OneShotEffect {
 
     public CopyStackObjectEffect() {
+        this("that ability");
+    }
+
+    public CopyStackObjectEffect(String name) {
         super(Outcome.Copy);
-        staticText = "copy that ability. You may choose new targets for the copy";
+        staticText = "copy "+ name + ". You may choose new targets for the copy";
     }
 
     private CopyStackObjectEffect(final CopyStackObjectEffect effect) {
