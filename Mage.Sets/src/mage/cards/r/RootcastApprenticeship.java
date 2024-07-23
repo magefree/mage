@@ -17,6 +17,7 @@ import mage.game.permanent.token.SquirrelToken;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -52,7 +53,7 @@ public final class RootcastApprenticeship extends CardImpl {
         this.getSpellAbility().addMode(new Mode(new CreateTokenTargetEffect(new SquirrelToken())).addTarget(new TargetPlayer()));
 
         // * Target opponent sacrifices a nontoken artifact.
-        this.getSpellAbility().addMode(new Mode(new SacrificeEffect(filter2, 1, "target opponent")));
+        this.getSpellAbility().addMode(new Mode(new SacrificeEffect(filter2, 1, "target opponent")).addTarget(new TargetOpponent()));
     }
 
     private RootcastApprenticeship(final RootcastApprenticeship card) {
