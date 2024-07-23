@@ -24,8 +24,7 @@ public enum KickedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return KickerAbility.getKickedCounter(game, source) >= kickedCount // for on battlefield
-                || KickerAbility.getSpellKickedCount(game, source.getSourceId()) >= kickedCount; // for on stack
+        return KickerAbility.getKickedCounter(game, source) >= kickedCount;
     }
 
     @Override
