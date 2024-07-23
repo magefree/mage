@@ -562,7 +562,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         if (removed) {
             if (fromZone != Zone.OUTSIDE) {
-                game.rememberLKI(lkiObject != null ? lkiObject.getId() : objectId, fromZone, lkiObject != null ? lkiObject : this);
+                game.rememberLKI(fromZone, lkiObject != null ? lkiObject : this);
             }
         } else {
             logger.warn("Couldn't find card in fromZone, card=" + getIdName() + ", fromZone=" + fromZone);
