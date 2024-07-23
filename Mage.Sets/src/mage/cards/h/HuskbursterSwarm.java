@@ -43,7 +43,7 @@ public final class HuskbursterSwarm extends CardImpl {
         ).setRuleAtTheTop(true).addHint(HuskbursterSwarmValue.getHint()));
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());

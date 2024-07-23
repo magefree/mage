@@ -27,7 +27,7 @@ public final class BywayBarterer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever you expend 4, you may discard your hand. If you do, draw two cards.
         this.addAbility(new ExpendTriggeredAbility(new DoIfCostPaid(

@@ -38,7 +38,7 @@ public final class MahaItsFeathersNight extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward--Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost()));
+        this.addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Creatures your opponents control have base toughness 1.
         this.addAbility(new SimpleStaticAbility(new MahaItsFeathersNightEffect()));

@@ -50,7 +50,7 @@ public final class ValleyRotcaller extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Valley Rotcaller attacks, each opponent loses X life and you gain X life, where X is the number of other Squirrels, Bats, Lizards, and Rats you control.
         Ability ability = new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(xValue)
@@ -59,7 +59,7 @@ public final class ValleyRotcaller extends CardImpl {
                 xValue, "and you gain X life, where X is the number " +
                 "of other Squirrels, Bats, Lizards, and Rats you control"
         ));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(hint));
     }
 
     private ValleyRotcaller(final ValleyRotcaller card) {
