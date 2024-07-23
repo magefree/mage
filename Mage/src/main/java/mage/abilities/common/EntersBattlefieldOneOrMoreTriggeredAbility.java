@@ -1,6 +1,5 @@
 package mage.abilities.common;
 
-import mage.MageItem;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
@@ -8,12 +7,12 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.Objects;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -41,40 +40,31 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
+
         Player controller = game.getPlayer(this.controllerId);
-        if (zEvent.getToZone() != Zone.BATTLEFIELD || controller == null) {
+        if (controller == null) {
             return false;
         }
 
-        // Use Supplier for stream reuse
-        Supplier<Stream<Permanent>> enteringPermanentsSupplier = () -> Stream.concat(
-                zEvent.getTokens().stream(),
-                zEvent.getCards().stream()
-                        .map(MageItem::getId)
-                        .map(game::getPermanent)
-                        .filter(Objects::nonNull)
-        );
+        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
+        Stream<Permanent> enteringPermanents = zEvent.getEvents().stream()
+                .filter(z -> z.getToZone() == Zone.BATTLEFIELD)
+                .map(ZoneChangeEvent::getTarget)
+                .filter(Objects::nonNull)
+                .filter(permanent -> filterPermanent.match(permanent, this.controllerId, this, game));
 
         switch (this.targetController) {
             case YOU:
-                if (enteringPermanentsSupplier.get().noneMatch(permanent -> permanent.getControllerId().equals(controller.getId()))) {
-                    return false;
-                }
-                break;
+                return enteringPermanents.anyMatch(permanent -> permanent.getControllerId().equals(this.controllerId));
             case OPPONENT:
-                if (enteringPermanentsSupplier.get().noneMatch(permanent -> controller.hasOpponent(permanent.getControllerId(), game))) {
-                    return false;
-                }
-                break;
+                return enteringPermanents.anyMatch(permanent -> controller.hasOpponent(this.controllerId, game));
         }
-
-        return enteringPermanentsSupplier.get().anyMatch(permanent -> filterPermanent.match(permanent, this.controllerId, this, game));
+        return false;
     }
 
     @Override
