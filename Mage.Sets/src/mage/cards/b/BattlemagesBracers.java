@@ -55,6 +55,7 @@ class BattlemagesBracersTriggeredAbility extends TriggeredAbilityImpl {
 
     BattlemagesBracersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new GenericManaCost(1)));
+        setTriggerPhrase("Whenever an ability of equipped creature is activated, if it isn't a mana ability");
     }
 
     private BattlemagesBracersTriggeredAbility(final BattlemagesBracersTriggeredAbility ability) {
@@ -83,11 +84,5 @@ class BattlemagesBracersTriggeredAbility extends TriggeredAbilityImpl {
         }
         getEffects().setValue("stackObject", stackAbility);
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an ability of equipped creature is activated, if it isn't a mana ability, you may pay {1}. " +
-                "If you do, copy that ability. You may choose new targets for the copy.";
     }
 }

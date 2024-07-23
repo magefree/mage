@@ -47,6 +47,7 @@ class IllusionistsBracersTriggeredAbility extends TriggeredAbilityImpl {
 
     IllusionistsBracersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect());
+        setTriggerPhrase("Whenever an ability of equipped creature is activated, if it isn't a mana ability");
     }
 
     private IllusionistsBracersTriggeredAbility(final IllusionistsBracersTriggeredAbility ability) {
@@ -75,11 +76,5 @@ class IllusionistsBracersTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("stackObject", stackAbility);
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an ability of equipped creature is activated, if it isn't a mana ability, " +
-                "copy that ability. You may choose new targets for the copy.";
     }
 }

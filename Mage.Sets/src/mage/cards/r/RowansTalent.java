@@ -72,6 +72,7 @@ class RowansTalentTriggeredAbility extends TriggeredAbilityImpl {
 
     RowansTalentTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect());
+        setTriggerPhrase("Whenever you activate a loyalty ability of enchanted planeswalker");
     }
 
     private RowansTalentTriggeredAbility(final RowansTalentTriggeredAbility ability) {
@@ -102,11 +103,5 @@ class RowansTalentTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("stackObject", stackObject);
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate a loyalty ability of enchanted planeswalker, " +
-                "copy that ability. You may choose new targets for the copy.";
     }
 }

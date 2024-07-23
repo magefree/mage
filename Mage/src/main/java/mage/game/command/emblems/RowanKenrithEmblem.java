@@ -32,7 +32,8 @@ public final class RowanKenrithEmblem extends Emblem {
 class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
     RowanKenrithEmblemTriggeredAbility() {
-        super(Zone.COMMAND, new CopyStackObjectEffect(), false);
+        super(Zone.COMMAND, new CopyStackObjectEffect("it"), false);
+        setTriggerPhrase("Whenever you activate an ability that isn't a mana ability");
     }
 
     private RowanKenrithEmblemTriggeredAbility(final RowanKenrithEmblemTriggeredAbility ability) {
@@ -60,10 +61,5 @@ class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("stackObject", stackAbility);
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy.";
     }
 }

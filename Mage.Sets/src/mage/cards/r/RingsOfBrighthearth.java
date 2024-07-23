@@ -40,6 +40,7 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
 
     RingsOfBrighthearthTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new GenericManaCost(2)));
+        setTriggerPhrase("Whenever you activate an ability, if it isn't a mana ability");
     }
 
     private RingsOfBrighthearthTriggeredAbility(final RingsOfBrighthearthTriggeredAbility ability) {
@@ -67,11 +68,5 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("stackObject", stackAbility);
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. " +
-                "If you do, copy that ability. You may choose new targets for the copy.";
     }
 }

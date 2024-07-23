@@ -53,6 +53,8 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
 
     AshnodTheUncaringTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect(), true);
+        setTriggerPhrase("Whenever you activate an ability of an artifact or creature that isn't a mana ability, " +
+                "if one or more permanents were sacrificed to activate it");
     }
 
     private AshnodTheUncaringTriggeredAbility(final AshnodTheUncaringTriggeredAbility ability) {
@@ -90,12 +92,5 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("stackObject", stackAbility);
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate an ability of an artifact or creature that isn't a mana ability, " +
-                "if one or more permanents were sacrificed to activate it, " +
-                "you may copy that ability. You may choose new targets for the copy.";
     }
 }

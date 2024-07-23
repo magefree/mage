@@ -91,6 +91,7 @@ class DynaheirInvokerAdeptTriggeredAbility extends DelayedTriggeredAbility {
 
     DynaheirInvokerAdeptTriggeredAbility() {
         super(new CopyStackObjectEffect(), Duration.EndOfTurn, true);
+        setTriggerPhrase("When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it");
     }
 
     private DynaheirInvokerAdeptTriggeredAbility(final DynaheirInvokerAdeptTriggeredAbility ability) {
@@ -120,11 +121,5 @@ class DynaheirInvokerAdeptTriggeredAbility extends DelayedTriggeredAbility {
         }
         this.getEffects().setValue("stackObject", stackAbility);
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, " +
-                "copy that ability. You may choose new targets for the copy.";
     }
 }

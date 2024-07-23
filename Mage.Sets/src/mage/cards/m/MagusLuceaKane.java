@@ -65,7 +65,9 @@ public final class MagusLuceaKane extends CardImpl {
 class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
 
     MagusLuceaKaneTriggeredAbility() {
-        super(new CopyStackObjectEffect(), Duration.EndOfTurn, true, false);
+        super(new CopyStackObjectEffect("that spell or ability"), Duration.EndOfTurn, true, false);
+        setTriggerPhrase("When you next cast a spell with {X} in its mana cost " +
+                "or activate an ability with {X} in its activation cost this turn");
     }
 
     private MagusLuceaKaneTriggeredAbility(final MagusLuceaKaneTriggeredAbility ability) {
@@ -109,11 +111,5 @@ class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When you next cast a spell with {X} in its mana cost or activate an ability with {X} in its "
-                + "activation cost this turn, copy that spell or ability. You may choose new targets for the copy.";
     }
 }

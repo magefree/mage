@@ -114,6 +114,7 @@ class LeoriSparktouchedHunterTriggeredAbility extends DelayedTriggeredAbility {
         super(new CopyStackObjectEffect(), Duration.EndOfTurn, false);
         this.subType = subType;
         this.addHint(new StaticHint("Chosen Subtype: " + subType));
+        setTriggerPhrase("Whenever you activate an ability of a planeswalker of the chosen type");
     }
 
     private LeoriSparktouchedHunterTriggeredAbility(final LeoriSparktouchedHunterTriggeredAbility ability) {
@@ -148,11 +149,5 @@ class LeoriSparktouchedHunterTriggeredAbility extends DelayedTriggeredAbility {
         }
         this.getEffects().setValue("stackObject", stackAbility);
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate an ability of a planeswalker of the chosen type, copy that ability. " +
-                "You may choose new targets for the copies.";
     }
 }
