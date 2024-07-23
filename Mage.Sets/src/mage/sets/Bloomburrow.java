@@ -176,6 +176,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Ruthless Negotiation", 108, Rarity.UNCOMMON, mage.cards.r.RuthlessNegotiation.class));
         cards.add(new SetCardInfo("Salvation Swan", 28, Rarity.RARE, mage.cards.s.SalvationSwan.class));
         cards.add(new SetCardInfo("Savor", 109, Rarity.COMMON, mage.cards.s.Savor.class));
+        cards.add(new SetCardInfo("Sazacap's Brew", 151, Rarity.COMMON, mage.cards.s.SazacapsBrew.class));
         cards.add(new SetCardInfo("Scales of Shale", 110, Rarity.COMMON, mage.cards.s.ScalesOfShale.class));
         cards.add(new SetCardInfo("Scavenger's Talent", 111, Rarity.RARE, mage.cards.s.ScavengersTalent.class));
         cards.add(new SetCardInfo("Scrapshooter", 191, Rarity.RARE, mage.cards.s.Scrapshooter.class));
