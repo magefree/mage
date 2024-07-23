@@ -224,6 +224,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Thought-Stalker Warlock", 118, Rarity.UNCOMMON, mage.cards.t.ThoughtStalkerWarlock.class));
         cards.add(new SetCardInfo("Three Tree Mascot", 251, Rarity.COMMON, mage.cards.t.ThreeTreeMascot.class));
         cards.add(new SetCardInfo("Three Tree Rootweaver", 198, Rarity.COMMON, mage.cards.t.ThreeTreeRootweaver.class));
+        cards.add(new SetCardInfo("Three Tree Scribe", 199, Rarity.UNCOMMON, mage.cards.t.ThreeTreeScribe.class));
         cards.add(new SetCardInfo("Thundertrap Trainer", 78, Rarity.RARE, mage.cards.t.ThundertrapTrainer.class));
         cards.add(new SetCardInfo("Tidecaller Mentor", 236, Rarity.UNCOMMON, mage.cards.t.TidecallerMentor.class));
         cards.add(new SetCardInfo("Treeguard Duo", 200, Rarity.COMMON, mage.cards.t.TreeguardDuo.class));
