@@ -54,7 +54,7 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
     AshnodTheUncaringTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect(), true);
         setTriggerPhrase("Whenever you activate an ability of an artifact or creature that isn't a mana ability, " +
-                "if one or more permanents were sacrificed to activate it");
+                "if one or more permanents were sacrificed to activate it, ");
     }
 
     private AshnodTheUncaringTriggeredAbility(final AshnodTheUncaringTriggeredAbility ability) {

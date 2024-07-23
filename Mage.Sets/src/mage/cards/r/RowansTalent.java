@@ -72,7 +72,7 @@ class RowansTalentTriggeredAbility extends TriggeredAbilityImpl {
 
     RowansTalentTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect());
-        setTriggerPhrase("Whenever you activate a loyalty ability of enchanted planeswalker");
+        setTriggerPhrase("Whenever you activate a loyalty ability of enchanted planeswalker, ");
     }
 
     private RowansTalentTriggeredAbility(final RowansTalentTriggeredAbility ability) {

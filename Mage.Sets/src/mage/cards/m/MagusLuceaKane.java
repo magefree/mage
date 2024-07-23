@@ -67,7 +67,7 @@ class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
     MagusLuceaKaneTriggeredAbility() {
         super(new CopyStackObjectEffect("that spell or ability"), Duration.EndOfTurn, true, false);
         setTriggerPhrase("When you next cast a spell with {X} in its mana cost " +
-                "or activate an ability with {X} in its activation cost this turn");
+                "or activate an ability with {X} in its activation cost this turn, ");
     }
 
     private MagusLuceaKaneTriggeredAbility(final MagusLuceaKaneTriggeredAbility ability) {

@@ -33,7 +33,7 @@ class RowanKenrithEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
     RowanKenrithEmblemTriggeredAbility() {
         super(Zone.COMMAND, new CopyStackObjectEffect("it"), false);
-        setTriggerPhrase("Whenever you activate an ability that isn't a mana ability");
+        setTriggerPhrase("Whenever you activate an ability that isn't a mana ability, ");
     }
 
     private RowanKenrithEmblemTriggeredAbility(final RowanKenrithEmblemTriggeredAbility ability) {

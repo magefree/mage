@@ -91,7 +91,7 @@ class DynaheirInvokerAdeptTriggeredAbility extends DelayedTriggeredAbility {
 
     DynaheirInvokerAdeptTriggeredAbility() {
         super(new CopyStackObjectEffect(), Duration.EndOfTurn, true);
-        setTriggerPhrase("When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it");
+        setTriggerPhrase("When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, ");
     }
 
     private DynaheirInvokerAdeptTriggeredAbility(final DynaheirInvokerAdeptTriggeredAbility ability) {

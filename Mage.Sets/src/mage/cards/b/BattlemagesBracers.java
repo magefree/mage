@@ -55,7 +55,7 @@ class BattlemagesBracersTriggeredAbility extends TriggeredAbilityImpl {
 
     BattlemagesBracersTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new GenericManaCost(1)));
-        setTriggerPhrase("Whenever an ability of equipped creature is activated, if it isn't a mana ability");
+        setTriggerPhrase("Whenever an ability of equipped creature is activated, if it isn't a mana ability, ");
     }
 
     private BattlemagesBracersTriggeredAbility(final BattlemagesBracersTriggeredAbility ability) {

@@ -40,7 +40,7 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
 
     RingsOfBrighthearthTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new GenericManaCost(2)));
-        setTriggerPhrase("Whenever you activate an ability, if it isn't a mana ability");
+        setTriggerPhrase("Whenever you activate an ability, if it isn't a mana ability, ");
     }
 
     private RingsOfBrighthearthTriggeredAbility(final RingsOfBrighthearthTriggeredAbility ability) {

@@ -81,7 +81,7 @@ class UnboundFlourishingDoubleXEffect extends OneShotEffect {
 
     UnboundFlourishingDoubleXEffect() {
         super(Outcome.Benefit);
-        this.staticText = ", double the value of X";
+        this.staticText = "double the value of X";
     }
 
     private UnboundFlourishingDoubleXEffect(final UnboundFlourishingDoubleXEffect effect) {
@@ -115,7 +115,7 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
     UnboundFlourishingCopyAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect("that spell or ability"), false);
         setTriggerPhrase("Whenever you cast an instant or sorcery spell or activate an ability, " +
-                "if that spell's mana cost or that ability's activation cost contains {X}");
+                "if that spell's mana cost or that ability's activation cost contains {X}, ");
     }
 
     private UnboundFlourishingCopyAbility(final UnboundFlourishingCopyAbility ability) {
