@@ -134,6 +134,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Manifold Mouse", 143, Rarity.RARE, mage.cards.m.ManifoldMouse.class));
         cards.add(new SetCardInfo("Might of the Meek", 144, Rarity.COMMON, mage.cards.m.MightOfTheMeek.class));
         cards.add(new SetCardInfo("Mind Drill Assailant", 225, Rarity.COMMON, mage.cards.m.MindDrillAssailant.class));
+        cards.add(new SetCardInfo("Mind Spiral", 59, Rarity.COMMON, mage.cards.m.MindSpiral.class));
         cards.add(new SetCardInfo("Mind Spring", 389, Rarity.RARE, mage.cards.m.MindSpring.class));
         cards.add(new SetCardInfo("Mindwhisker", 60, Rarity.UNCOMMON, mage.cards.m.Mindwhisker.class));
         cards.add(new SetCardInfo("Mistbreath Elder", 184, Rarity.RARE, mage.cards.m.MistbreathElder.class));
