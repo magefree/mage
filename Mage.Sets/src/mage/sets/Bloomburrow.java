@@ -43,6 +43,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Brazen Collector", 128, Rarity.UNCOMMON, mage.cards.b.BrazenCollector.class));
         cards.add(new SetCardInfo("Bria, Riptide Rogue", 379, Rarity.MYTHIC, mage.cards.b.BriaRiptideRogue.class));
         cards.add(new SetCardInfo("Brightblade Stoat", 4, Rarity.UNCOMMON, mage.cards.b.BrightbladeStoat.class));
+        cards.add(new SetCardInfo("Builder's Talent", 5, Rarity.UNCOMMON, mage.cards.b.BuildersTalent.class));
         cards.add(new SetCardInfo("Bumbleflower's Sharepot", 244, Rarity.COMMON, mage.cards.b.BumbleflowersSharepot.class));
         cards.add(new SetCardInfo("Burrowguard Mentor", 206, Rarity.UNCOMMON, mage.cards.b.BurrowguardMentor.class));
         cards.add(new SetCardInfo("Bushy Bodyguard", 166, Rarity.UNCOMMON, mage.cards.b.BushyBodyguard.class));
