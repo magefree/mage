@@ -2,23 +2,20 @@ package mage.cards.u;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -32,7 +29,7 @@ public final class UnboundFlourishing extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Whenever you cast a permanent spell with a mana cost that contains {X}, double the value of X.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnboundFlourishingDoubleXEffect()));
+        this.addAbility(new UnboundFlourishingDoubleXAbility());
 
         // Whenever you cast an instant or sorcery spell or activate an ability,
         // if that spell’s mana cost or that ability’s activation cost contains {X}, copy that spell or ability.
@@ -50,11 +47,49 @@ public final class UnboundFlourishing extends CardImpl {
     }
 }
 
-class UnboundFlourishingDoubleXEffect extends ReplacementEffectImpl {
+class UnboundFlourishingDoubleXAbility extends TriggeredAbilityImpl {
+
+    UnboundFlourishingDoubleXAbility() {
+        super(Zone.BATTLEFIELD, new UnboundFlourishingDoubleXEffect(), false);
+        setTriggerPhrase("Whenever you cast a permanent spell with a mana cost that contains {X}");
+    }
+
+    private UnboundFlourishingDoubleXAbility(final UnboundFlourishingDoubleXAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public UnboundFlourishingDoubleXAbility copy() {
+        return new UnboundFlourishingDoubleXAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.getPlayerId().equals(getControllerId())) {
+            return false;
+        }
+        
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && spell.isPermanent(game)) {
+            if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
+                game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, spell);
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class UnboundFlourishingDoubleXEffect extends OneShotEffect {
 
     UnboundFlourishingDoubleXEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, false);
-        staticText = "Whenever you cast a permanent spell with a mana cost that contains {X}, double the value of X";
+        super(Outcome.Benefit);
+        this.staticText = ", double the value of X";
     }
 
     private UnboundFlourishingDoubleXEffect(final UnboundFlourishingDoubleXEffect effect) {
@@ -62,25 +97,22 @@ class UnboundFlourishingDoubleXEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.X_MANA_ANNOUNCE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Spell spell = game.getSpell(event.getTargetId());
-        return spell != null && spell.isPermanent(game) && spell.isControlledBy(source.getControllerId());
-    }
-
-    @Override
     public UnboundFlourishingDoubleXEffect copy() {
         return new UnboundFlourishingDoubleXEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (player != null && controller != null) {
+            Spell needObject = (Spell) game.getState().getValue(source.getSourceId() + UnboundFlourishing.needPrefix);
+            Map<String, Object> tagsMap = CardUtil.getSourceCostsTagsMap(game, needObject.getSpellAbility());
+            if (tagsMap.containsKey("X")) {
+                tagsMap.put("X", ((int)tagsMap.get("X"))*2);
+            }
+        }
+        return false;
     }
 }
 
@@ -158,7 +190,6 @@ class UnboundFlourishingCopyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && controller != null) {
             Object needObject = game.getState().getValue(source.getSourceId() + UnboundFlourishing.needPrefix);
 

@@ -47,10 +47,10 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Endless One", 1); // {X}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
-        // cast with X=3, but double it
+        // cast with X=3, but double it twice
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Endless One");
-        setChoice(playerA, "Unbound Flourishing"); // choose replacement effects
         setChoice(playerA, "X=3");
+        setChoice(playerA, ""); //stack triggers
         checkPermanentCounters("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Endless One", CounterType.P1P1, 3 * 2 * 2);
 
         setStrictChooseMode(true);
