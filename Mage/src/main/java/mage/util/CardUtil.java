@@ -865,12 +865,34 @@ public final class CardUtil {
         }
     }
 
-    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness) {
+    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness, boolean useX) {
+
+        String p = useX ? "X" : "1";
+
+        if (power instanceof StaticValue){
+            //Static values get a number literal
+            p = Integer.toString(((StaticValue)power).getValue());
+        } else if (power.getSign() < 0){
+            //Non-static values will need their minus sign manually inserted
+            p = "-" + p;
+        }
+
+        String t = useX ? "X" : "1";
+
+        if (useX && p.contains("X") && !power.getClass().equals(toughness.getClass())){
+            //Different value, different variable
+            t = "Y";
+        }
+
+        if (toughness instanceof StaticValue){
+            t = Integer.toString(((StaticValue)toughness).getValue());
+        } else if (toughness.getSign() < 0){
+            t = "-" + t;
+        }
+
         // sign fix for zero values
         // -1/+0 must be -1/-0
         // +0/-1 must be -0/-1
-        String p = power.toString();
-        String t = toughness.toString();
         if (!p.startsWith("-")) {
             p = t.startsWith("-") && p.equals("0") ? "-0" : "+" + p;
         }
@@ -881,11 +903,11 @@ public final class CardUtil {
     }
 
     public static String getBoostCountAsStr(int power, int toughness) {
-        return getBoostCountAsStr(StaticValue.get(power), StaticValue.get(toughness));
+        return getBoostCountAsStr(StaticValue.get(power), StaticValue.get(toughness), false);
     }
 
-    public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration) {
-        String boostCount = getBoostCountAsStr(power, toughness);
+    public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration, boolean useX) {
+        String boostCount = getBoostCountAsStr(power, toughness, useX);
         StringBuilder sb = new StringBuilder(boostCount);
         // don't include "for the rest of the game" for emblems, etc.
         if (duration != Duration.EndOfGame) {
@@ -894,12 +916,20 @@ public final class CardUtil {
                 sb.append(' ').append(d);
             }
         }
-        String message = power.getMessage();
-        if (message.isEmpty()) {
-            message = toughness.getMessage();
-        }
-        if (!message.isEmpty()) {
-            sb.append(boostCount.contains("X") ? ", where X is " : " for each ").append(message);
+
+        if (!(power instanceof StaticValue) || !(toughness instanceof StaticValue)) {
+            if (useX && boostCount.contains("X")){
+                String powerMessage = power.getMessage(DynamicValue.Phrasing.NUMBER_OF);
+                String toughnessMessage = toughness.getMessage(DynamicValue.Phrasing.NUMBER_OF);
+                sb.append(", where X is ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
+                if (boostCount.contains("Y")){
+                    sb.append(", and Y is ").append(toughnessMessage);
+                }
+            } else {
+                String powerMessage = power.getMessage(DynamicValue.Phrasing.FOR_EACH);
+                String toughnessMessage = toughness.getMessage(DynamicValue.Phrasing.FOR_EACH);
+                sb.append(" for each ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
+            }
         }
         return sb.toString();
     }

@@ -29,7 +29,12 @@ public enum CreaturesYouControlCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage() {
-        return "creatures you control";
+    public String getMessage(Phrasing phrasing) {
+        switch (phrasing) {
+            case FOR_EACH:
+                return "for each creature you control";
+            default:
+                return "the number of creatures you control";
+        }
     }
 }

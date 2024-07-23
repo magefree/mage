@@ -1,6 +1,7 @@
 package mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
@@ -9,6 +10,10 @@ import mage.game.Game;
  * @author LevelX2
  */
 public class MultipliedValue implements DynamicValue {
+
+    private static final String[] numberWords = {
+            "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"
+    };
 
     private final DynamicValue value;
     private final int multiplier;
@@ -33,23 +38,43 @@ public class MultipliedValue implements DynamicValue {
         return new MultipliedValue(this);
     }
 
+//    @Override
+//    public String toString() {
+//        if (value.toString().equals("1")) {
+//            return Integer.toString(multiplier);
+//        }
+//        StringBuilder sb = new StringBuilder();
+//        if (multiplier == 2) {
+//            sb.append("twice ");
+//        } else {
+//            sb.append(multiplier).append(" * ");
+//        }
+//        return sb.append(value.toString()).toString();
+//    }
+
+    public int getMultiplier(){
+        return multiplier;
+    }
+
+    public String getMultiplierAsWord(){
+        if (multiplier >= numberWords.length){
+            return Integer.toString(multiplier);
+        }
+        return numberWords[multiplier];
+    }
+
     @Override
-    public String toString() {
-        if (value.toString().equals("1")) {
+    public String getMessage(Phrasing phrasing) {
+        if (value instanceof StaticValue) {
             return Integer.toString(multiplier);
         }
         StringBuilder sb = new StringBuilder();
         if (multiplier == 2) {
             sb.append("twice ");
         } else {
-            sb.append(multiplier).append(" * ");
+            sb.append(getMultiplierAsWord()).append(" times ");
         }
-        return sb.append(value.toString()).toString();
-    }
-
-    @Override
-    public String getMessage() {
-        return value.getMessage();
+        return sb.append(value.getMessage(phrasing)).toString();
     }
 
     @Override
