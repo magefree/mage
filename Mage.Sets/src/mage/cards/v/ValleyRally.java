@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.GiftWasPromisedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
@@ -13,9 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.GiftType;
-import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -37,7 +35,8 @@ public final class ValleyRally extends CardImpl {
                 GiftWasPromisedCondition.TRUE, "If the gift was promised, target creature " +
                 "you control gains first strike until end of turn"
         ));
-        this.getSpellAbility().setTargetAdjuster(ValleyRallyAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(GiftWasPromisedCondition.TRUE,
+                new TargetControlledCreaturePermanent()));
     }
 
     private ValleyRally(final ValleyRally card) {
@@ -47,17 +46,5 @@ public final class ValleyRally extends CardImpl {
     @Override
     public ValleyRally copy() {
         return new ValleyRally(this);
-    }
-}
-
-enum ValleyRallyAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (GiftWasPromisedCondition.TRUE.apply(game, ability)) {
-            ability.getTargets().clear();
-            ability.addTarget(new TargetControlledCreaturePermanent());
-        }
     }
 }

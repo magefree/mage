@@ -1,6 +1,5 @@
 package mage.cards.i;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.GiftWasPromisedCondition;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.GiftAbility;
@@ -9,10 +8,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.GiftType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -32,7 +30,8 @@ public final class IntoTheFloodMaw extends CardImpl {
                 .setText("return target creature an opponent controls to its owner's hand. If the gift was promise, " +
                         "instead return target nonland permanent an opponent controls to its owner's hand"));
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(IntoTheFloodMawAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(GiftWasPromisedCondition.TRUE,
+                new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND)));
     }
 
     private IntoTheFloodMaw(final IntoTheFloodMaw card) {
@@ -42,17 +41,5 @@ public final class IntoTheFloodMaw extends CardImpl {
     @Override
     public IntoTheFloodMaw copy() {
         return new IntoTheFloodMaw(this);
-    }
-}
-
-enum IntoTheFloodMawAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (GiftWasPromisedCondition.TRUE.apply(game, ability)) {
-            ability.getTargets().clear();
-            ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
-        }
     }
 }
