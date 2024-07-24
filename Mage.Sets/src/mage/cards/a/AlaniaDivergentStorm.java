@@ -69,8 +69,6 @@ public final class AlaniaDivergentStorm extends CardImpl {
 // Based on MarathWillOfTheWildRemoveCountersCost
 class AlaniaDivergentStormCost extends CostImpl {
 
-    private static final Logger logger = Logger.getLogger(AlaniaDivergentStormCost.class);
-
     AlaniaDivergentStormCost() {
         this.text = "have target opponent draw a card";
         this.addTarget(new TargetOpponent());
@@ -82,9 +80,6 @@ class AlaniaDivergentStormCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        if (!game.isSimulation()){
-            logger.info("entering canPay()");
-        }
         Player player = game.getPlayer(controllerId);
         if (player == null) {
             return false;
@@ -103,9 +98,6 @@ class AlaniaDivergentStormCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (!game.isSimulation()) {
-            logger.info("entering pay()");
-        }
         this.getTargets().clearChosen();
         paid = false;
         if (this.getTargets().choose(Outcome.DrawCard, controllerId, source.getSourceId(), source, game)) {
@@ -128,18 +120,10 @@ class AlaniaDivergentStormCost extends CostImpl {
 enum AlaniaDivergentStormCondition implements Condition {
     instance;
 
-    private static final Logger logger = Logger.getLogger(AlaniaDivergentStormCost.class);
-
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!game.isSimulation()) {
-            logger.info("entering apply()");
-        }
         Spell spell = (Spell) source.getEffects().get(0).getValue("spellCast");
         if (spell == null) {
-            if (!game.isSimulation()) {
-                logger.info("spell is null, returning false");
-            }
             return false;
         }
         AlaniaDivergentStormWatcher watcher = game.getState().getWatcher(AlaniaDivergentStormWatcher.class);
@@ -151,8 +135,6 @@ enum AlaniaDivergentStormCondition implements Condition {
 
 // Based on FirstSpellCastThisTurnWatcher
 class AlaniaDivergentStormWatcher extends Watcher {
-
-    private static final Logger logger = Logger.getLogger(AlaniaDivergentStormCost.class);
 
     private final Map<UUID, UUID> playerFirstInstantCast = new HashMap<>();
     private final Map<UUID, UUID> playerFirstSorceryCast = new HashMap<>();
@@ -167,35 +149,20 @@ class AlaniaDivergentStormWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.SPELL_CAST) {
             return;
         }
-        if (!game.isSimulation()) {
-            logger.info("SPELL_CAST event detected");
-        }
         Spell spell = (Spell) game.getObject(event.getTargetId());
         if (spell == null) {
-            if (!game.isSimulation()) {
-                logger.info("spell is null, returning false");
-            }
             return;
         }
         if (spell.getCardType(game).contains(CardType.INSTANT) &&
                 !playerFirstInstantCast.containsKey(spell.getControllerId())) {
-            if (!game.isSimulation()) {
-                logger.info("Adding instant spell");
-            }
             playerFirstInstantCast.put(spell.getControllerId(), spell.getId());
         }
         if (spell.getCardType(game).contains(CardType.SORCERY) &&
                 !playerFirstSorceryCast.containsKey(spell.getControllerId())) {
-            if (!game.isSimulation()) {
-                logger.info("Adding sorcery spell");
-            }
             playerFirstSorceryCast.put(spell.getControllerId(), spell.getId());
         }
         if (spell.getSubtype(game).contains(SubType.OTTER) &&
                 !playerFirstOtterCast.containsKey(spell.getControllerId())) {
-            if (!game.isSimulation()) {
-                logger.info("Adding otter spell");
-            }
             playerFirstOtterCast.put(spell.getControllerId(), spell.getId());
         }
 
@@ -204,7 +171,6 @@ class AlaniaDivergentStormWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        logger.info("resetting watcher...");
         playerFirstInstantCast.clear();
         playerFirstSorceryCast.clear();
         playerFirstOtterCast.clear();
