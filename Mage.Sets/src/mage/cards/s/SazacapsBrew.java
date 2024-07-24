@@ -14,6 +14,7 @@ import mage.constants.GiftType;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetadjustment.ConditionalTargetAdjuster;
+import mage.target.targetpointer.SecondTargetPointer;
 
 import java.util.UUID;
 
@@ -38,7 +39,7 @@ public final class SazacapsBrew extends CardImpl {
                 new AddContinuousEffectToGame(new BoostTargetEffect(2, 0)),
                 GiftWasPromisedCondition.TRUE, "if the gift was promised, " +
                 "target creature you control gets +2/+0 until end of turn"
-        ));
+        ).setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(
                 GiftWasPromisedCondition.TRUE, true, new TargetControlledCreaturePermanent()
         ));

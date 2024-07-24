@@ -64,6 +64,8 @@ enum WaterspoutWardenCondition implements Condition {
 
 class WaterspoutWardenWatcher extends Watcher {
 
+    // Key: Player id
+    // Value: set of all creatures that entered under that player's control this turn
     private final Map<UUID, Set<MageObjectReference>> map = new HashMap<>();
 
     WaterspoutWardenWatcher() {
