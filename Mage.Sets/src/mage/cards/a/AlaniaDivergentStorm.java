@@ -46,7 +46,9 @@ public final class AlaniaDivergentStorm extends CardImpl {
                 new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
                         new CopyTargetStackObjectEffect(true),
                         new AlaniaDivergentStormCost()
-                ), null, false, SetTargetPointer.SPELL),
+                ), null, false, SetTargetPointer.SPELL)
+                .setTriggerPhrase("Whenever you cast a spell, if it's the first instant spell, the first sorcery " +
+                        "spell, or the first Otter spell other than Alania you've cast this turn, "),
                 AlaniaDivergentStormCondition.instance, ""
         );
         ability.addWatcher(new AlaniaDivergentStormWatcher());
