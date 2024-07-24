@@ -4,16 +4,13 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  *
  * @author LevelX2
  */
 public class MultipliedValue implements DynamicValue {
-
-    private static final String[] numberWords = {
-            "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"
-    };
 
     private final DynamicValue value;
     private final int multiplier;
@@ -56,11 +53,8 @@ public class MultipliedValue implements DynamicValue {
         return multiplier;
     }
 
-    public String getMultiplierAsWord(){
-        if (multiplier >= numberWords.length){
-            return Integer.toString(multiplier);
-        }
-        return numberWords[multiplier];
+    public String getMultiplierText(){
+        return CardUtil.numberToText(multiplier);
     }
 
     @Override
@@ -72,7 +66,7 @@ public class MultipliedValue implements DynamicValue {
         if (multiplier == 2) {
             sb.append("twice ");
         } else {
-            sb.append(getMultiplierAsWord()).append(" times ");
+            sb.append(getMultiplierText()).append(" times ");
         }
         return sb.append(value.getMessage(phrasing)).toString();
     }
