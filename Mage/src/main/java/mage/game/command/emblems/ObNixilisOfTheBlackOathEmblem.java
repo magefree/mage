@@ -11,7 +11,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import mage.filter.StaticFilters;
 
@@ -28,9 +27,8 @@ public final class ObNixilisOfTheBlackOathEmblem extends Emblem {
         effect.setText("You gain X life");
         Ability ability = new SimpleActivatedAbility(Zone.COMMAND, effect, new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
-        effect = new DrawCardSourceControllerEffect(xValue);
-        effect.setText("and draw X cards, where X is the sacrificed creature's power");
-        ability.addEffect(effect);
+        effect = new DrawCardSourceControllerEffect(xValue, DrawCardSourceControllerEffect.DrawCardsPhrasing.X_WHERE);
+        ability.addEffect(effect.concatBy("and"));
         this.getAbilities().add(ability);
     }
 
