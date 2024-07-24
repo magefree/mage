@@ -62,13 +62,19 @@ public class MultipliedValue implements DynamicValue {
         if (value instanceof StaticValue) {
             return Integer.toString(multiplier);
         }
-        StringBuilder sb = new StringBuilder();
-        if (multiplier == 2) {
-            sb.append("twice ");
-        } else {
-            sb.append(getMultiplierText()).append(" times ");
+        switch (phrasing) {
+            case FOR_EACH:
+                return value.getMessage(Phrasing.FOR_EACH);
+            default:
+                StringBuilder sb = new StringBuilder();
+                if (multiplier == 2) {
+                    sb.append("twice ");
+                } else {
+                    sb.append(getMultiplierText()).append(" times ");
+                }
+                return sb.append(value.getMessage(Phrasing.NUMBER_OF)).toString();
         }
-        return sb.append(value.getMessage(phrasing)).toString();
+
     }
 
     @Override
