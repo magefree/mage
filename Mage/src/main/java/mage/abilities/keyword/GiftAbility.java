@@ -44,7 +44,7 @@ public class GiftAbility extends StaticAbility implements OptionalAdditionalSour
     public GiftAbility(Card card, GiftType giftType) {
         super(Zone.STACK, null);
         this.additionalCost = new OptionalAdditionalCostImpl(
-                keywordText + ' ' + giftType,
+                keywordText + ' ' + giftType.getName(),
                 makeReminderText(giftType, card.isPermanent()),
                 new PromiseGiftCost(giftType)
         );
