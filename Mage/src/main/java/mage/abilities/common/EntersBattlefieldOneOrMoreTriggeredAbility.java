@@ -8,12 +8,9 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.UUID;
 
 /**
  * "Whenever one or more {filter} enter the battlefield under {target controller} control,
@@ -52,20 +49,20 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
         }
 
         ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
-        Stream<Permanent> enteringPermanents = zEvent.getEvents().stream()
+        return zEvent.getEvents().stream()
                 .filter(z -> z.getToZone() == Zone.BATTLEFIELD)
-                .map(ZoneChangeEvent::getTarget)
-                .filter(Objects::nonNull)
-                .filter(permanent -> filterPermanent.match(permanent, this.controllerId, this, game));
-
-        switch (this.targetController) {
-            case YOU:
-                return enteringPermanents.anyMatch(permanent -> permanent.getControllerId().equals(this.controllerId));
-            case OPPONENT:
-                return enteringPermanents.anyMatch(permanent -> controller.hasOpponent(permanent.getControllerId(), game));
-            default:
-                throw new IllegalArgumentException("Unsupported target: " + this.targetController);
-        }
+                .filter(z -> filterPermanent.match(z.getTarget(), this.controllerId, this, game))
+                .anyMatch(z -> {
+                    UUID enteringPermanantControllerID = z.getTarget().getControllerId();
+                    switch (this.targetController) {
+                        case YOU:
+                            return enteringPermanantControllerID.equals(this.controllerId);
+                        case OPPONENT:
+                            return controller.hasOpponent(enteringPermanantControllerID, game);
+                        default:
+                            throw new IllegalArgumentException("Unsupported target: " + this.targetController);
+                    }
+                });
     }
 
     @Override
