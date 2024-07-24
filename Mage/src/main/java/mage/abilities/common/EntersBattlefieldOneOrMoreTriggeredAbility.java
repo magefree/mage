@@ -63,8 +63,9 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
                 return enteringPermanents.anyMatch(permanent -> permanent.getControllerId().equals(this.controllerId));
             case OPPONENT:
                 return enteringPermanents.anyMatch(permanent -> controller.hasOpponent(permanent.getControllerId(), game));
+            default:
+                throw new IllegalArgumentException("Unsupported target: " + this.targetController);
         }
-        return false;
     }
 
     @Override
