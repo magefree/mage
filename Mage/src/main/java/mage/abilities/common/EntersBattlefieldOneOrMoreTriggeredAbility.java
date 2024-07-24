@@ -62,7 +62,7 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
             case YOU:
                 return enteringPermanents.anyMatch(permanent -> permanent.getControllerId().equals(this.controllerId));
             case OPPONENT:
-                return enteringPermanents.anyMatch(permanent -> controller.hasOpponent(this.controllerId, game));
+                return enteringPermanents.anyMatch(permanent -> controller.hasOpponent(permanent.getControllerId(), game));
         }
         return false;
     }
