@@ -24,6 +24,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Agate Assault", 122, Rarity.COMMON, mage.cards.a.AgateAssault.class));
         cards.add(new SetCardInfo("Agate-Blade Assassin", 82, Rarity.COMMON, mage.cards.a.AgateBladeAssassin.class));
         cards.add(new SetCardInfo("Alania's Pathmaker", 123, Rarity.COMMON, mage.cards.a.AlaniasPathmaker.class));
+        cards.add(new SetCardInfo("Alania, Divergent Storm", 204, Rarity.RARE, mage.cards.a.AlaniaDivergentStorm.class));
         cards.add(new SetCardInfo("Artist's Talent", 124, Rarity.RARE, mage.cards.a.ArtistsTalent.class));
         cards.add(new SetCardInfo("Azure Beastbinder", 41, Rarity.RARE, mage.cards.a.AzureBeastbinder.class));
         cards.add(new SetCardInfo("Bakersbane Duo", 163, Rarity.COMMON, mage.cards.b.BakersbaneDuo.class));
