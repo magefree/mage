@@ -3,6 +3,7 @@ package org.mage.test.cards.rules;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -266,5 +267,93 @@ public class AttachmentTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Arcane Flight", 1);
+    }
+
+    /**
+     * Tests that when an aura tries to move from a player's hand without being cast, and
+     * it has no legal objects to attach to, it instead remains in the player's hand.
+     */
+    @Test
+    public void testAuraMoveFromHandWithNoAttachableObject() {
+        addCard(Zone.HAND, playerA, "Show and Tell"); // Puts an aura from hand onto the battlefield without casting
+        addCard(Zone.HAND, playerA, "Aether Tunnel"); // Enchant creature
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Show and Tell");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Aether Tunnel", 0);
+        assertHandCount(playerA, "Aether Tunnel", 1);
+    }
+
+    /**
+     * Tests that when an aura tries to move from a player's graveyard without being cast, and
+     * it has no legal objects to attach to, it instead remains in the player's graveyard.
+     */
+    @Test
+    public void testAuraMoveFromGraveyardWithNoAttachableObject() {
+        addCard(Zone.HAND, playerA, "Replenish"); // Put all enchantments from graveyard onto battlefield
+        addCard(Zone.GRAVEYARD, playerA, "Divine Favor"); // Enchant creature, gain 3 life on ETB
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Replenish");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Divine Favor", 1);
+        assertLife(playerA, 20);
+    }
+
+    /**
+     * Tests that when an aura tries to move from exile without being cast, and
+     * it has no legal objects to attach to, it instead remains in exile.
+     */
+    @Test
+    public void testAuraMoveFromExileWithNoAttachableObject() {
+        addCard(Zone.HAND, playerA, "Sudden Disappearance"); // Exile nonland permanents, return at end of turn
+        addCard(Zone.HAND, playerA, "Spiritual Visit"); // Create a 1/1 token
+        addCard(Zone.HAND, playerA, "Divine Favor"); // Enchant creature, gain 3 life on ETB
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 9);
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spiritual Visit");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Divine Favor", "Spirit Token");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sudden Disappearance", playerA);
+        waitStackResolved(1, PhaseStep.END_TURN, playerA);
+
+        setStopAt(2, PhaseStep.UNTAP);
+        execute();
+
+        assertGraveyardCount(playerA, "Divine Favor", 0);
+        assertExileCount(playerA, "Divine Favor", 1);
+        assertLife(playerA, 23);
+    }
+
+    /**
+     * Tests that Dream Leash can correctly attach to untapped permanents when it enters through non-casting means (e.g., via Show and Tell)
+     */
+    @Ignore
+    @Test
+    public void testDreamLeashNoUntappedPermanents() {
+        addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
+        // Enchant permanent
+        // You can't choose an untapped permanent as Dream Leash's target as you cast Dream Leash.
+        // You control enchanted permanent.
+        addCard(Zone.HAND, playerA, "Dream Leash");
+        addCard(Zone.HAND, playerA, "Show and Tell"); // Puts a permanent directly into play without casting
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Show and Tell");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Dream Leash", 0);
+        assertAttachedTo(playerA, "Dream Leash", "Omniscience", true);
+        assertHandCount(playerA, "Dream Leash", 0);
     }
 }
