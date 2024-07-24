@@ -58,6 +58,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Clifftop Lookout", 168, Rarity.UNCOMMON, mage.cards.c.ClifftopLookout.class));
         cards.add(new SetCardInfo("Colossification", 392, Rarity.RARE, mage.cards.c.Colossification.class));
         cards.add(new SetCardInfo("Conduct Electricity", 130, Rarity.COMMON, mage.cards.c.ConductElectricity.class));
+        cards.add(new SetCardInfo("Consumed by Greed", 87, Rarity.UNCOMMON, mage.cards.c.ConsumedByGreed.class));
         cards.add(new SetCardInfo("Corpseberry Cultivator", 210, Rarity.COMMON, mage.cards.c.CorpseberryCultivator.class));
         cards.add(new SetCardInfo("Coruscation Mage", 131, Rarity.UNCOMMON, mage.cards.c.CoruscationMage.class));
         cards.add(new SetCardInfo("Cruelclaw's Heist", 88, Rarity.RARE, mage.cards.c.CruelclawsHeist.class));
