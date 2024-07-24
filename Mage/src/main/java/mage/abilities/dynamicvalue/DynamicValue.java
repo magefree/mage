@@ -2,6 +2,7 @@ package mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 import mage.util.Copyable;
 
@@ -37,6 +38,15 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
      *      "the sacrificed creature's power" (non-discreet)
      */
     String getMessage(Phrasing phrasing);
+
+    /**
+     *
+     * @return A ValueHint with a shortened descriptor of this DynamicValue
+     * example:
+     *      getMessage(NUMBER_OF) -> the number of card types among cards in your graveyard
+     *      getHint() -> ValueHint("card types in your graveyard", this)
+     */
+    ValueHint getHint();
 
     /**
      *

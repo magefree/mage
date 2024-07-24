@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 
@@ -36,5 +37,10 @@ public enum CreaturesYouControlCount implements DynamicValue {
             default:
                 return "the number of creatures you control";
         }
+    }
+
+    @Override
+    public ValueHint getHint() {
+        return new ValueHint("creatures you control", this);
     }
 }
