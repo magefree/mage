@@ -16,6 +16,9 @@ public class MultipliedValue implements DynamicValue {
     private final int multiplier;
 
     public MultipliedValue(DynamicValue value, int multiplier) {
+        if (value instanceof StaticValue) {
+            throw new IllegalArgumentException("Don't pass StaticValue into MultipliedValue, just make a StaticValue with the multiplied result");
+        }
         this.value = value.copy();
         this.multiplier = multiplier;
     }
@@ -59,9 +62,6 @@ public class MultipliedValue implements DynamicValue {
 
     @Override
     public String getMessage(Phrasing phrasing) {
-        if (value instanceof StaticValue) {
-            return Integer.toString(multiplier);
-        }
         switch (phrasing) {
             case FOR_EACH:
                 return value.getMessage(Phrasing.FOR_EACH);
