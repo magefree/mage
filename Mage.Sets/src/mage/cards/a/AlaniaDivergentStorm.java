@@ -93,7 +93,7 @@ class AlaniaDivergentStormCost extends CostImpl {
                 return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
