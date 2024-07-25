@@ -131,16 +131,19 @@ public final class ImageCache {
             int cornerSizeBorder = Math.max(4, Math.round(image.getWidth() * ROUNDED_CORNER_SIZE));
 
             // corner mask
-            Graphics2D gg = cornerImage.createGraphics();
-            gg.setComposite(AlphaComposite.Src);
-            gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            gg.setColor(Color.white);
-            gg.fill(new RoundRectangle2D.Float(0, 0, cornerImage.getWidth(), cornerImage.getHeight(), cornerSizeBorder, cornerSizeBorder));
+            Graphics2D g2 = cornerImage.createGraphics();
+            try {
+                g2.setComposite(AlphaComposite.Src);
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(Color.white);
+                g2.fill(new RoundRectangle2D.Float(0, 0, cornerImage.getWidth(), cornerImage.getHeight(), cornerSizeBorder, cornerSizeBorder));
 
-            // image draw to buffer
-            gg.setComposite(AlphaComposite.SrcAtop);
-            gg.drawImage(image, 0, 0, null);
-            gg.dispose();
+                // image draw to buffer
+                g2.setComposite(AlphaComposite.SrcAtop);
+                g2.drawImage(image, 0, 0, null);
+            } finally {
+                g2.dispose();
+            }
 
             return cornerImage;
         } else {
@@ -152,9 +155,12 @@ public final class ImageCache {
         // TODO: can be removed?
         if (image != null && image.getWidth() == 265 && image.getHeight() == 370) {
             BufferedImage crop = new BufferedImage(256, 360, BufferedImage.TYPE_INT_RGB);
-            Graphics2D graphics2D = crop.createGraphics();
-            graphics2D.drawImage(image, 0, 0, 255, 360, 5, 5, 261, 365, null);
-            graphics2D.dispose();
+            Graphics2D g2 = crop.createGraphics();
+            try {
+                g2.drawImage(image, 0, 0, 255, 360, 5, 5, 261, 365, null);
+            } finally {
+                g2.dispose();
+            }
             return crop;
         } else {
             return image;

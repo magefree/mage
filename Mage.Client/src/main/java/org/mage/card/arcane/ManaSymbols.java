@@ -488,6 +488,7 @@ public final class ManaSymbols {
         BufferedImage image = new BufferedImage(d.width, d.height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gg = image.createGraphics();
         manaPanel.paint(gg);
+        gg.dispose()
         g.drawImage(image, x, y, null);
          */
         // OLD version with custom draw
@@ -539,10 +540,14 @@ public final class ManaSymbols {
                 // render component to new position
                 // need to copy graphics, overvise it draw at top left corner
                 // https://stackoverflow.com/questions/4974268/java-paint-problem
-                Graphics2D labelG = (Graphics2D) g.create(x, y, symbolWidth, symbolWidth);
-                labelG.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                labelG.fillOval(x + 1, y + 1, symbolWidth - 2, symbolWidth - 2);
-                labelRender.paint(labelG);
+                Graphics2D g2 = (Graphics2D) g.create(x, y, symbolWidth, symbolWidth);
+                try {
+                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    g2.fillOval(x + 1, y + 1, symbolWidth - 2, symbolWidth - 2);
+                    labelRender.paint(g2);
+                } finally {
+                    g2.dispose();
+                }
             } else {
                 // ICON draw
                 g.drawImage(image, x, y, null);
