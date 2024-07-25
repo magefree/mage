@@ -58,6 +58,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Clifftop Lookout", 168, Rarity.UNCOMMON, mage.cards.c.ClifftopLookout.class));
         cards.add(new SetCardInfo("Colossification", 392, Rarity.RARE, mage.cards.c.Colossification.class));
         cards.add(new SetCardInfo("Conduct Electricity", 130, Rarity.COMMON, mage.cards.c.ConductElectricity.class));
+        cards.add(new SetCardInfo("Consumed by Greed", 87, Rarity.UNCOMMON, mage.cards.c.ConsumedByGreed.class));
         cards.add(new SetCardInfo("Corpseberry Cultivator", 210, Rarity.COMMON, mage.cards.c.CorpseberryCultivator.class));
         cards.add(new SetCardInfo("Coruscation Mage", 131, Rarity.UNCOMMON, mage.cards.c.CoruscationMage.class));
         cards.add(new SetCardInfo("Cruelclaw's Heist", 88, Rarity.RARE, mage.cards.c.CruelclawsHeist.class));
@@ -104,6 +105,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Hazardroot Herbalist", 174, Rarity.UNCOMMON, mage.cards.h.HazardrootHerbalist.class));
         cards.add(new SetCardInfo("Hazel's Nocturne", 97, Rarity.UNCOMMON, mage.cards.h.HazelsNocturne.class));
         cards.add(new SetCardInfo("Head of the Homestead", 216, Rarity.COMMON, mage.cards.h.HeadOfTheHomestead.class));
+        cards.add(new SetCardInfo("Heaped Harvest", 175, Rarity.COMMON, mage.cards.h.HeapedHarvest.class));
         cards.add(new SetCardInfo("Heartfire Hero", 138, Rarity.UNCOMMON, mage.cards.h.HeartfireHero.class));
         cards.add(new SetCardInfo("Hearthborn Battler", 139, Rarity.RARE, mage.cards.h.HearthbornBattler.class));
         cards.add(new SetCardInfo("Hidden Grotto", 254, Rarity.COMMON, mage.cards.h.HiddenGrotto.class));
@@ -135,6 +137,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Lumra, Bellow of the Woods", 183, Rarity.MYTHIC, mage.cards.l.LumraBellowOfTheWoods.class));
         cards.add(new SetCardInfo("Lunar Convocation", 223, Rarity.RARE, mage.cards.l.LunarConvocation.class));
         cards.add(new SetCardInfo("Lupinflower Village", 256, Rarity.UNCOMMON, mage.cards.l.LupinflowerVillage.class));
+        cards.add(new SetCardInfo("Mabel's Mettle", 21, Rarity.UNCOMMON, mage.cards.m.MabelsMettle.class));
         cards.add(new SetCardInfo("Mabel, Heir to Cragflame", 224, Rarity.RARE, mage.cards.m.MabelHeirToCragflame.class));
         cards.add(new SetCardInfo("Maha, Its Feathers Night", 100, Rarity.MYTHIC, mage.cards.m.MahaItsFeathersNight.class));
         cards.add(new SetCardInfo("Manifold Mouse", 143, Rarity.RARE, mage.cards.m.ManifoldMouse.class));
@@ -226,6 +229,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Thistledown Players", 35, Rarity.COMMON, mage.cards.t.ThistledownPlayers.class));
         cards.add(new SetCardInfo("Thornplate Intimidator", 117, Rarity.COMMON, mage.cards.t.ThornplateIntimidator.class));
         cards.add(new SetCardInfo("Thornvault Forager", 197, Rarity.RARE, mage.cards.t.ThornvaultForager.class));
+        cards.add(new SetCardInfo("Thought Shucker", 77, Rarity.COMMON, mage.cards.t.ThoughtShucker.class));
         cards.add(new SetCardInfo("Thought-Stalker Warlock", 118, Rarity.UNCOMMON, mage.cards.t.ThoughtStalkerWarlock.class));
         cards.add(new SetCardInfo("Three Tree Mascot", 251, Rarity.COMMON, mage.cards.t.ThreeTreeMascot.class));
         cards.add(new SetCardInfo("Three Tree Rootweaver", 198, Rarity.COMMON, mage.cards.t.ThreeTreeRootweaver.class));
