@@ -121,6 +121,8 @@ class AlaniaDivergentStormCost extends CostImpl {
 enum AlaniaDivergentStormCondition implements Condition {
     instance;
 
+    private static final Logger logger = Logger.getLogger(AlaniaDivergentStormCondition.class);
+
     @Override
     public boolean apply(Game game, Ability source) {
         if (!game.isSimulation()){
@@ -131,6 +133,10 @@ enum AlaniaDivergentStormCondition implements Condition {
             return false;
         }
         Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
+        if (!game.isSimulation()){
+            logger.info("sourcePermanent: " + sourcePermanent);
+            logger.info("name: " + sourcePermanent.getName());
+        }
         // Get source permanent MOR from when it was on the stack
         MageObjectReference sourceSpellMOR = new MageObjectReference(sourcePermanent, game, -1);
         AlaniaDivergentStormWatcher watcher = game.getState().getWatcher(AlaniaDivergentStormWatcher.class);
@@ -213,7 +219,7 @@ class AlaniaDivergentStormWatcher extends Watcher {
             logger.info("firstOtterMOR: " + firstOtterMOR.getSourceId());
             logger.info("spell: " + spell.getSourceId());
             logger.info("AlaniaMOR: " + AlaniaMOR.getSourceId());
-            logger.info(AlaniaMOR.getCard(game).getName());
+//            logger.info(AlaniaMOR.getCard(game).getName());
         }
 
         if (firstOtterMOR != null && firstOtterMOR.equals(AlaniaMOR)) {
