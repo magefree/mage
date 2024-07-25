@@ -77,6 +77,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Druid of the Spade", 170, Rarity.COMMON, mage.cards.d.DruidOfTheSpade.class));
         cards.add(new SetCardInfo("Early Winter", 93, Rarity.COMMON, mage.cards.e.EarlyWinter.class));
         cards.add(new SetCardInfo("Eddymurk Crab", 48, Rarity.UNCOMMON, mage.cards.e.EddymurkCrab.class));
+        cards.add(new SetCardInfo("Eluge, the Shoreless Sea", 49, Rarity.MYTHIC, mage.cards.e.ElugeTheShorelessSea.class));
         cards.add(new SetCardInfo("Emberheart Challenger", 133, Rarity.RARE, mage.cards.e.EmberheartChallenger.class));
         cards.add(new SetCardInfo("Essence Channeler", 12, Rarity.RARE, mage.cards.e.EssenceChanneler.class));
         cards.add(new SetCardInfo("Fabled Passage", 252, Rarity.RARE, mage.cards.f.FabledPassage.class));
