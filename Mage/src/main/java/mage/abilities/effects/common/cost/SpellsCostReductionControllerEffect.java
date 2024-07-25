@@ -50,10 +50,8 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.manaCostsToReduce = manaCostsToReduce;
         this.upTo = false;
         this.convertToGeneric = convertToGeneric;
-        //TODO: move to a createStaticText function, and add "for each" clause (See #12596 and #12595)
-        this.staticText = filter.getMessage() + " you cast cost "  + manaCostsToReduce.getText() +
-                (convertToGeneric ? " (<i>or {1}</i>)" : "") + " less to cast" +
-                (convertToGeneric ? "" : ". This effect reduces only the amount of colored mana you pay");
+
+        createStaticText();
     }
 
     public SpellsCostReductionControllerEffect(FilterCard filter, int amount) {
@@ -74,9 +72,8 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.amount = amount;
         this.upTo = upTo;
         this.convertToGeneric = false;
-        this.staticText = (filter.getMessage().contains("you cast") ? filter.getMessage()
-                : filter.getMessage() + " you cast")
-                + " cost " + (upTo ? "up to " : "") + '{' + amount + "} less to cast";
+
+        createStaticText();
     }
 
     protected SpellsCostReductionControllerEffect(final SpellsCostReductionControllerEffect effect) {
@@ -86,13 +83,11 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.manaCostsToReduce = effect.manaCostsToReduce;
         this.upTo = effect.upTo;
         this.convertToGeneric = effect.convertToGeneric;
+        this.staticText = effect.staticText;
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        if (!game.isSimulation()){
-            int x = 3;
-        }
         int reductionAmount = this.amount.calculate(game, source, this);
         if (manaCostsToReduce != null) {
             ManaCosts<ManaCost> calculatedManaCostsToReduce = new ManaCostsImpl<>();;
@@ -151,6 +146,37 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
             }
         }
         return false;
+    }
+
+    private void createStaticText(){
+        StringBuilder sb = new StringBuilder(filter.getMessage());
+        if (!sb.toString().contains("you cast")){
+            sb.append(" you cast");
+        }
+        if (sb.toString().contains("spells")){
+            sb.append(" cost ");
+        } else {
+            sb.append(" costs ");
+        }
+        if (upTo){
+            sb.append("up to ");
+        }
+        if (manaCostsToReduce != null) {
+            sb.append(manaCostsToReduce.getText());
+            if (convertToGeneric){
+                sb.append(" (<i>or {1}</i>)");
+            }
+        } else {
+            sb.append("{").append(amount).append("}");
+        }
+        sb.append(" less to cast");
+        if (!(amount instanceof StaticValue)){
+            sb.append(" for each ").append(amount.getMessage());
+        }
+        if (!convertToGeneric && manaCostsToReduce != null){
+            sb.append(". This effect reduces only the amount of colored mana you pay");
+        }
+        staticText = sb.toString();
     }
 
     @Override

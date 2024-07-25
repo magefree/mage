@@ -41,7 +41,7 @@ import mage.watchers.Watcher;
 public final class ElugeTheShorelessSea extends CardImpl {
 
     private static final FilterControlledPermanent islandFilter = new FilterControlledPermanent("Islands you control");
-    private static final FilterCard spellFilter = new FilterInstantOrSorceryCard("the first instant or sorcery spell");
+    private static final FilterCard spellFilter = new FilterInstantOrSorceryCard("the first instant or sorcery spell you cast each turn");
     private static final FilterControlledLandPermanent floodLandFilter = new FilterControlledLandPermanent("land you control with a flood counter on it.");
 
     static {
@@ -78,10 +78,7 @@ public final class ElugeTheShorelessSea extends CardImpl {
 
         // The first instant or sorcery spell you cast each turn costs {U} (or {1}) less to cast for each land you
         // control with a flood counter on it.
-        // TODO: fix so that it can reduce blue or colorless mana costs (currently only colorless)
         Effect effect = new SpellsCostReductionControllerEffect(spellFilter, new ManaCostsImpl<>("{U}"), new PermanentsOnBattlefieldCount(floodLandFilter), true);
-//        effect.setText("The first instant or sorcery spell you cast each turn costs {U} (<i>or {1}</i>) less to cast" +
-//                " for each land you control with a flood counter on it.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect),
                 new ElugeTheShorelessSeaWatcher());
     }
