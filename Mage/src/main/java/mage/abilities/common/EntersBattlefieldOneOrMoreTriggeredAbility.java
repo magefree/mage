@@ -53,12 +53,12 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
                 .filter(z -> z.getToZone() == Zone.BATTLEFIELD)
                 .filter(z -> filterPermanent.match(z.getTarget(), this.controllerId, this, game))
                 .anyMatch(z -> {
-                    UUID enteringPermanantControllerID = z.getTarget().getControllerId();
+                    UUID enteringPermanentControllerID = z.getTarget().getControllerId();
                     switch (this.targetController) {
                         case YOU:
-                            return enteringPermanantControllerID.equals(this.controllerId);
+                            return enteringPermanentControllerID.equals(this.controllerId);
                         case OPPONENT:
-                            return controller.hasOpponent(enteringPermanantControllerID, game);
+                            return controller.hasOpponent(enteringPermanentControllerID, game);
                         default:
                             throw new IllegalArgumentException("Unsupported target: " + this.targetController);
                     }
