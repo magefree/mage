@@ -288,7 +288,7 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Regression", "j5z0TOE.jpeg");
         singleLinks.put("SWS/Republic Frigate", "LzNpjxP.jpeg");
         singleLinks.put("SWS/Repurpose", "BvRMy3f.jpeg");
-        singleLinks.put("SWS/Revenge", "xkKzMRX.jpeg");
+        singleLinks.put("SWS/Revenge (Star Wars)", "xkKzMRX.jpeg");
         singleLinks.put("SWS/Riding Ronto", "xECBi7G.jpeg");
         singleLinks.put("SWS/Rocket Trooper", "94wUTH5.jpeg");
         singleLinks.put("SWS/Rogue's Passage", "UunpJPZ.jpeg");
@@ -466,7 +466,7 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Training Droid", "JCY9KOM.jpeg");
         singleLinks.put("SWS/Unpleasant Discovery", "lDKoeAu.jpeg");
         singleLinks.put("SWS/Vexis", "cNQX9Ue.jpeg");
-        singleLinks.put("SWS/War Room", "pqQ9kzt.jpeg");
+        singleLinks.put("SWS/War Room (Star Wars)", "pqQ9kzt.jpeg");
         singleLinks.put("SWS/Xyston Star Destroyer", "oqbHtUC.jpeg");
         singleLinks.put("SWS/Zorii Bliss", "vOyNE39.jpeg");
 
