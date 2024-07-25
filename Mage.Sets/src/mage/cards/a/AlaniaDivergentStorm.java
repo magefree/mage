@@ -18,6 +18,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -122,23 +123,32 @@ enum AlaniaDivergentStormCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (!game.isSimulation()){
+            int x = 3;
+        }
         Spell spell = (Spell) source.getEffects().get(0).getValue("spellCast");
         if (spell == null) {
             return false;
         }
+        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
+        // Get source permanent MOR from when it was on the stack
+        MageObjectReference sourceSpellMOR = new MageObjectReference(sourcePermanent, game, -1);
         AlaniaDivergentStormWatcher watcher = game.getState().getWatcher(AlaniaDivergentStormWatcher.class);
-        return spell.getId().equals(watcher.getIdOfFirstInstantCast(source.getControllerId())) ||
-                spell.getId().equals(watcher.getIdOfFirstSorceryCast(source.getControllerId())) ||
-                spell.getId().equals(watcher.getIdOfFirstOtterCast(source.getControllerId()));
+        UUID spellControllerID = spell.getControllerId();
+        MageObjectReference spellMOR = new MageObjectReference(spell, game);
+        return watcher.spellIsFirstISOCast(spellControllerID, spellMOR, sourceSpellMOR, game);
     }
 }
 
 // Based on FirstSpellCastThisTurnWatcher
 class AlaniaDivergentStormWatcher extends Watcher {
 
-    private final Map<UUID, UUID> playerFirstInstantCast = new HashMap<>();
-    private final Map<UUID, UUID> playerFirstSorceryCast = new HashMap<>();
-    private final Map<UUID, UUID> playerFirstOtterCast = new HashMap<>();
+    private final Map<UUID, MageObjectReference> playerFirstInstantCast = new HashMap<>();
+    private final Map<UUID, MageObjectReference> playerFirstSorceryCast = new HashMap<>();
+    private final Map<UUID, MageObjectReference> playerFirstOtterCast = new HashMap<>();
+    private final Map<UUID, MageObjectReference> playerSecondOtterCast = new HashMap<>();
+
+    private static final Logger logger = Logger.getLogger(AlaniaDivergentStormWatcher.class);
 
     public AlaniaDivergentStormWatcher() {
         super(WatcherScope.GAME);
@@ -153,19 +163,37 @@ class AlaniaDivergentStormWatcher extends Watcher {
         if (spell == null) {
             return;
         }
+        if (!game.isSimulation()){
+//            int x = 3;
+            logger.info("Spell cast: " + spell.getName());
+            logger.info("Spell ID: " + spell.getId());
+        }
+        UUID spellControllerID = spell.getControllerId();
+        MageObjectReference spellMOR = new MageObjectReference(spell, game);
         if (spell.getCardType(game).contains(CardType.INSTANT) &&
-                !playerFirstInstantCast.containsKey(spell.getControllerId())) {
-            playerFirstInstantCast.put(spell.getControllerId(), spell.getId());
+                !playerFirstInstantCast.containsKey(spellControllerID)) {
+            playerFirstInstantCast.put(spellControllerID, spellMOR);
         }
         if (spell.getCardType(game).contains(CardType.SORCERY) &&
-                !playerFirstSorceryCast.containsKey(spell.getControllerId())) {
-            playerFirstSorceryCast.put(spell.getControllerId(), spell.getId());
+                !playerFirstSorceryCast.containsKey(spellControllerID)) {
+            playerFirstSorceryCast.put(spellControllerID, spellMOR);
         }
-        if (spell.getSubtype(game).contains(SubType.OTTER) &&
-                !playerFirstOtterCast.containsKey(spell.getControllerId())) {
-            playerFirstOtterCast.put(spell.getControllerId(), spell.getId());
+        if (spell.getSubtype(game).contains(SubType.OTTER)){
+            if (!game.isSimulation()){
+                logger.info("Is Otter!");
+            }
+            if (!playerFirstOtterCast.containsKey(spellControllerID)) {
+                playerFirstOtterCast.put(spellControllerID, spellMOR);
+                if (!game.isSimulation()){
+                    logger.info("Is First");
+                }
+            } else if (!playerSecondOtterCast.containsKey(spellControllerID)) {
+                playerSecondOtterCast.put(spellControllerID, spellMOR);
+                if (!game.isSimulation()){
+                    logger.info("Is Second");
+                }
+            }
         }
-
     }
 
     @Override
@@ -174,17 +202,30 @@ class AlaniaDivergentStormWatcher extends Watcher {
         playerFirstInstantCast.clear();
         playerFirstSorceryCast.clear();
         playerFirstOtterCast.clear();
+        playerSecondOtterCast.clear();
     }
 
-    public UUID getIdOfFirstInstantCast(UUID playerId) {
-        return playerFirstInstantCast.get(playerId);
+    public boolean spellIsFirstISOCast(UUID controllerID, MageObjectReference spell, MageObjectReference AlaniaMOR, Game game) {
+
+        MageObjectReference firstOtterMOR = playerFirstOtterCast.get(controllerID);
+
+        if (!game.isSimulation()){
+            logger.info("firstOtterMOR: " + firstOtterMOR.getSourceId());
+            logger.info("spell: " + spell.getSourceId());
+            logger.info("AlaniaMOR: " + AlaniaMOR.getSourceId());
+            logger.info(AlaniaMOR.getCard(game).getName());
+        }
+
+        if (firstOtterMOR != null && firstOtterMOR.equals(AlaniaMOR)) {
+            firstOtterMOR = playerSecondOtterCast.get(controllerID);
+            if (!game.isSimulation()){
+                logger.info("oops, that was Alania. ACTUAL firstOtterMOR: " + firstOtterMOR);
+            }
+        }
+
+        return spell.equals(playerFirstInstantCast.get(controllerID)) ||
+                spell.equals(playerFirstSorceryCast.get(controllerID)) ||
+                (spell.equals(firstOtterMOR));
     }
 
-    public UUID getIdOfFirstSorceryCast(UUID playerId) {
-        return playerFirstSorceryCast.get(playerId);
-    }
-
-    public UUID getIdOfFirstOtterCast(UUID playerId) {
-        return playerFirstOtterCast.get(playerId);
-    }
 }
