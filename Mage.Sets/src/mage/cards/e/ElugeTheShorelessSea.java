@@ -7,6 +7,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
@@ -78,9 +79,9 @@ public final class ElugeTheShorelessSea extends CardImpl {
         // The first instant or sorcery spell you cast each turn costs {U} (or {1}) less to cast for each land you
         // control with a flood counter on it.
         // TODO: fix so that it can reduce blue or colorless mana costs (currently only colorless)
-        Effect effect = new SpellsCostReductionControllerEffect(spellFilter, new PermanentsOnBattlefieldCount(floodLandFilter));
-        effect.setText("The first instant or sorcery spell you cast each turn costs {U} (<i>or {1}</i>) less to cast" +
-                " for each land you control with a flood counter on it.");
+        Effect effect = new SpellsCostReductionControllerEffect(spellFilter, new ManaCostsImpl<>("{U}"), new PermanentsOnBattlefieldCount(floodLandFilter), true);
+//        effect.setText("The first instant or sorcery spell you cast each turn costs {U} (<i>or {1}</i>) less to cast" +
+//                " for each land you control with a flood counter on it.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect),
                 new ElugeTheShorelessSeaWatcher());
     }
