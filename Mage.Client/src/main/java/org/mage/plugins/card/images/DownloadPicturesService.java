@@ -16,6 +16,7 @@ import mage.remote.Connection;
 import mage.util.ThreadUtils;
 import mage.util.XMageThreadFactory;
 import net.java.truevfs.access.TFile;
+import net.java.truevfs.access.TFileInputStream;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
 import net.java.truevfs.kernel.spec.FsSyncException;
@@ -24,9 +25,11 @@ import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.utils.CardImageUtils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
 import java.nio.file.AccessDeniedException;
@@ -35,6 +38,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
@@ -59,7 +63,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     private static final int MAX_ERRORS_COUNT_BEFORE_CANCEL = 50;
 
-    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6; // protect from wrong data save
+    // protect from wrong data save
+    // there are possible land images with small sizes, so must research content in check
+    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6; // broken
+    private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 15; // possible broken (need content check)
 
     private final DownloadImagesDialog uiDialog;
     private boolean needCancel;
@@ -577,6 +584,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         // find missing files
         List<CardDownloadData> cardsToDownload = Collections.synchronizedList(new ArrayList<>());
+        AtomicInteger badContentChecks = new AtomicInteger();
         allCardsUrls.parallelStream().forEach(card -> {
             if (redownloadMode) {
                 // need all cards
@@ -588,12 +596,31 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 if (!file.exists()) {
                     cardsToDownload.add(card);
                 } else if (file.length() < MIN_FILE_SIZE_OF_GOOD_IMAGE) {
+                    // too small, e.g. contains http error page instead image data
                     // how-to fix: if it really downloads image data then set lower file size
-                    logger.error("Found broken file: " + imagePath);
+                    logger.error("Found broken file (small size): " + imagePath);
                     cardsToDownload.add(card);
+                } else if (file.length() < MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE) {
+                    // bad image format, e.g. contains redirected site page
+                    badContentChecks.incrementAndGet();
+                    try {
+                        try (TFileInputStream inputStream = new TFileInputStream(file)) {
+                            BufferedImage image = ImageIO.read(inputStream);
+                            if (image.getWidth() <= 0) {
+                                throw new IOException("bad format");
+                            }
+                        }
+                    } catch (Exception e) {
+                        logger.error("Found broken file (bad format): " + imagePath);
+                        cardsToDownload.add(card);
+                    }
                 }
             }
         });
+
+        if (badContentChecks.get() > 10000) {
+            logger.warn("Wrong code usage: too many file content checks (" + badContentChecks.get() + ") - try to decrease min file size");
+        }
 
         return Collections.synchronizedList(new ArrayList<>(cardsToDownload));
     }
@@ -819,18 +846,23 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 for (String currentUrl : downloadUrls) {
                     URL url = new URL(currentUrl);
 
-                    // on download cancel need to stop
+                    // fast stop on cancel
                     if (DownloadPicturesService.getInstance().isNeedCancel()) {
                         return;
                     }
 
-                    // download
-                    selectedSource.doPause(url.getPath());
+                    // timeout before each request
+                    selectedSource.doPause(url.toString());
 
                     httpConn = url.openConnection(proxy);
                     if (httpConn != null) {
 
-                        httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+                        // custom headers like user agent
+                        Map<String, String> headers = selectedSource.getHttpRequestHeaders(url.toString());
+                        for (String key : headers.keySet()) {
+                            httpConn.setRequestProperty(key, headers.get(key));
+                        }
+
                         try {
                             httpConn.connect();
                         } catch (SocketException e) {
@@ -902,8 +934,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             out.write(buf, 0, len);
                         }
                     }
-                    // TODO: add two faces card correction? (WTF)
+
                     // SAVE final data
+                    // TODO: add image data check here instead use it on download dialog?
                     if (fileTempImage.exists()) {
                         if (!destFile.getParentFile().exists()) {
                             destFile.getParentFile().mkdirs();
