@@ -367,7 +367,7 @@
                 <!-- lib with useful code and utils -->
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.12.0</version>
+                <version>3.14.0</version>
             </dependency>
             <dependency>
                 <!-- scraping lib to download and parse html/symbols/images/svg -->
