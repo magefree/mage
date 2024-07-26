@@ -29,10 +29,21 @@ import java.util.Set;
  */
 public class SpellsCostReductionControllerEffect extends CostModificationEffectImpl {
 
+    // Which spells to apply cost reduction to
     private final FilterCard filter;
+
+    // Number of times to apply cost reduction
+    // When just reducing colorless mana, (constructors without a ManaCosts<ManaCost> argument)
+    // this is the amount of colorless mana to reduce by
     private final DynamicValue amount;
+
+    // adds "up to" sliding scale for mana reduction (only available for generic mana cost reduction)
     private final boolean upTo;
+
     private ManaCosts<ManaCost> manaCostsToReduce = null;
+
+    // true when colored mana can also reduce generic mana if no more mana of that color remains in the cost
+    // See CardUtil.adjustCost
     private final boolean convertToGeneric;
 
     public SpellsCostReductionControllerEffect(FilterCard filter, ManaCosts<ManaCost> manaCostsToReduce) {
