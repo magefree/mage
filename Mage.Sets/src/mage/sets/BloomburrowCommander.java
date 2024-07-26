@@ -102,6 +102,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flubs, the Fool", 356, Rarity.MYTHIC, mage.cards.f.FlubsTheFool.class));
         cards.add(new SetCardInfo("Forgotten Ancient", 217, Rarity.RARE, mage.cards.f.ForgottenAncient.class));
         cards.add(new SetCardInfo("Forgotten Cave", 305, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
+        cards.add(new SetCardInfo("Fortune Teller's Talent", 14, Rarity.RARE, mage.cards.f.FortuneTellersTalent.class));
         cards.add(new SetCardInfo("Game Trail", 306, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Garruk's Packleader", 218, Rarity.UNCOMMON, mage.cards.g.GarruksPackleader.class));
         cards.add(new SetCardInfo("Garruk's Uprising", 219, Rarity.UNCOMMON, mage.cards.g.GarruksUprising.class));
