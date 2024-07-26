@@ -275,11 +275,16 @@ public class AttachmentTest extends CardTestPlayerBase {
      */
     @Test
     public void testAuraMoveFromHandWithNoAttachableObject() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Show and Tell"); // Puts an aura from hand onto the battlefield without casting
         addCard(Zone.HAND, playerA, "Aether Tunnel"); // Enchant creature
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Show and Tell");
+        setChoice(playerA, true);
+        setChoice(playerB, false);
+        addTarget(playerA, "Aether Tunnel");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -294,6 +299,8 @@ public class AttachmentTest extends CardTestPlayerBase {
      */
     @Test
     public void testAuraMoveFromGraveyardWithNoAttachableObject() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Replenish"); // Put all enchantments from graveyard onto battlefield
         addCard(Zone.GRAVEYARD, playerA, "Divine Favor"); // Enchant creature, gain 3 life on ETB
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
@@ -313,6 +320,8 @@ public class AttachmentTest extends CardTestPlayerBase {
      */
     @Test
     public void testAuraMoveFromExileWithNoAttachableObject() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Sudden Disappearance"); // Exile nonland permanents, return at end of turn
         addCard(Zone.HAND, playerA, "Spiritual Visit"); // Create a 1/1 token
         addCard(Zone.HAND, playerA, "Divine Favor"); // Enchant creature, gain 3 life on ETB
@@ -340,6 +349,8 @@ public class AttachmentTest extends CardTestPlayerBase {
     @Ignore
     @Test
     public void testDreamLeashNoUntappedPermanents() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
         // Enchant permanent
         // You can't choose an untapped permanent as Dream Leash's target as you cast Dream Leash.
@@ -348,6 +359,10 @@ public class AttachmentTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Show and Tell"); // Puts a permanent directly into play without casting
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Show and Tell");
+        setChoice(playerA, true, 2); // 1. Cast without paying cost? 2. Put permanent into play?
+        setChoice(playerB, false); // Put permanent into play?
+        addTarget(playerA, "Dream Leash"); // Show and Tell's target
+        setChoice(playerA, "Omniscience"); // Dream Leash's choice
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

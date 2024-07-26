@@ -1354,11 +1354,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         boolean canAttach = true;
         Permanent attachmentPermanent = game.getPermanent(attachment.getId());
+        // If attachment is an aura, ensures this permanent can still be legally enchanted, according to the enchantment's Enchant ability
         if (attachment.hasSubtype(SubType.AURA, game)
                 && attachmentPermanent != null
                 && attachmentPermanent.getSpellAbility() != null
                 && !attachmentPermanent.getSpellAbility().getTargets().isEmpty()) {
-            canAttach = attachmentPermanent.getSpellAbility().getTargets().get(0).withNotTarget(true).stillLegalTarget(attachmentPermanent.getControllerId(), this.getId(), source, game);
+            // Line of code below functionally gets the target of the aura's Enchant ability, then compares to this permanent. Enchant improperly implemented in XMage, see #9583
+            // Note: stillLegalTarget used exclusively to account for Dream Leash. Can be made canTarget in the event that that card is rewritten (and "stillLegalTarget" removed from TargetImpl).
+            canAttach = attachmentPermanent.getSpellAbility().copy().getTargets().get(0).withNotTarget(true).stillLegalTarget(attachmentPermanent.getControllerId(), this.getId(), source, game);
         }
 
         return !canAttach || game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);

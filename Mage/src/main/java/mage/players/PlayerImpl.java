@@ -4722,7 +4722,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (card.hasSubtype(SubType.AURA, game)
                             && card.getSpellAbility() != null
                             && !card.getSpellAbility().getTargets().isEmpty()
-                            && !card.getSpellAbility().getTargets().get(0).withNotTarget(true).canChoose(byOwner ? card.getOwnerId() : getId(), game)) {
+                            && !card.getSpellAbility().copy().getTargets().get(0).withNotTarget(true).canChoose(byOwner ? card.getOwnerId() : getId(), game)) {
                         continue;
                     }
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source,
