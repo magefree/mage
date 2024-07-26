@@ -94,7 +94,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
             for (int i = 0; i < reductionAmount; i++) {
                 calculatedManaCostsToReduce.add(this.manaCostsToReduce.copy());
             }
-            CardUtil.adjustCost((SpellAbility) abilityToModify, calculatedManaCostsToReduce, convertToGeneric);
+            CardUtil.adjustCost(abilityToModify, calculatedManaCostsToReduce, convertToGeneric);
         } else {
             if (upTo) {
                 Mana mana = abilityToModify.getManaCostsToPay().getMana();
