@@ -153,7 +153,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         if (!sb.toString().contains("you cast")){
             sb.append(" you cast");
         }
-        if (sb.toString().contains("spells")){
+        if (sb.toString().toLowerCase().contains("spells")){
             sb.append(" cost ");
         } else {
             sb.append(" costs ");
