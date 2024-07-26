@@ -2,6 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -9,6 +10,7 @@ import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -23,16 +25,26 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
     private final boolean yourControl;
     private final boolean textThatCard;
     private final PutCards putCards;
+    private final Effect afterEffect;
 
     public ExileThenReturnTargetEffect(boolean yourControl, boolean textThatCard) {
         this(yourControl, textThatCard, PutCards.BATTLEFIELD);
     }
 
     public ExileThenReturnTargetEffect(boolean yourControl, boolean textThatCard, PutCards putCards) {
+        this(yourControl, textThatCard, putCards, null);
+    }
+
+    public ExileThenReturnTargetEffect(boolean yourControl, boolean textThatCard, Effect afterEffect) {
+        this(yourControl, textThatCard, PutCards.BATTLEFIELD, afterEffect);
+    }
+
+    public ExileThenReturnTargetEffect(boolean yourControl, boolean textThatCard, PutCards putCards, Effect afterEffect) {
         super(Outcome.Benefit);
         this.yourControl = yourControl;
         this.textThatCard = textThatCard;
         this.putCards = putCards;
+        this.afterEffect = afterEffect;
     }
 
     protected ExileThenReturnTargetEffect(final ExileThenReturnTargetEffect effect) {
@@ -40,6 +52,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         this.putCards = effect.putCards;
         this.yourControl = effect.yourControl;
         this.textThatCard = effect.textThatCard;
+        this.afterEffect = effect.afterEffect;
     }
 
     @Override
@@ -68,6 +81,10 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
                     yourControl ? controller : game.getPlayer(card.getOwnerId()),
                     card.getMainCard(), source, game, "card");
         }
+        if (afterEffect != null){
+            afterEffect.setTargetPointer(new FixedTargets(toFlicker, game));
+            afterEffect.apply(game, source);
+        }
         return true;
     }
 
@@ -91,6 +108,9 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
             sb.append(this.yourControl ? "your" : "its owner's");
         }
         sb.append(" control");
+        if (afterEffect != null){
+            sb.append(". ").append(afterEffect.getText(null));
+        }
         return sb.toString();
     }
 
