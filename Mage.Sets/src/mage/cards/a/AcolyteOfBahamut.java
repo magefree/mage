@@ -40,10 +40,9 @@ public final class AcolyteOfBahamut extends CardImpl {
 
         // Commander creatures you own have "The first Dragon spell you cast each turn costs {2} less to cast."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
-                new SimpleStaticAbility(
-                        new SpellsCostReductionControllerEffect(filter, 2)
-//                                .setText("the first Dragon spell you cast each turn costs {2} less to cast")
-                ), Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
+                new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)),
+                Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
         ).withForceQuotes()), new AcolyteOfBahamutWatcher());
     }
 

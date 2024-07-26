@@ -41,7 +41,7 @@ import java.util.UUID;
  */
 public final class UginTheIneffable extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("Colorless spells you cast");
     private static final FilterPermanent filter2 = new FilterPermanent("permanent that's one or more colors");
 
     static {
@@ -57,9 +57,7 @@ public final class UginTheIneffable extends CardImpl {
         this.setStartingLoyalty(4);
 
         // Colorless spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(
-                filter, 2
-        ).setText("Colorless spells you cast cost {2} less to cast.")));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
 
         // +1: Exile the top card of your library face down and look at it. Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, put the exiled card into your hand.
         this.addAbility(new LoyaltyAbility(new UginTheIneffableEffect(), 1));
