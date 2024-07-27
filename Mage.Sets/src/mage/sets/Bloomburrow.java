@@ -113,6 +113,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("High Stride", 176, Rarity.COMMON, mage.cards.h.HighStride.class));
         cards.add(new SetCardInfo("Hired Claw", 140, Rarity.RARE, mage.cards.h.HiredClaw.class));
         cards.add(new SetCardInfo("Hivespine Wolverine", 177, Rarity.UNCOMMON, mage.cards.h.HivespineWolverine.class));
+        cards.add(new SetCardInfo("Hoarder's Overflow", 141, Rarity.UNCOMMON, mage.cards.h.HoardersOverflow.class));
         cards.add(new SetCardInfo("Honored Dreyleader", 178, Rarity.UNCOMMON, mage.cards.h.HonoredDreyleader.class));
         cards.add(new SetCardInfo("Hop to It", 16, Rarity.UNCOMMON, mage.cards.h.HopToIt.class));
         cards.add(new SetCardInfo("Hugs, Grisly Guardian", 218, Rarity.MYTHIC, mage.cards.h.HugsGrislyGuardian.class));
