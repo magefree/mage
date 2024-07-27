@@ -357,7 +357,7 @@
                      String description = comparator.getCategoryName(card);
                      DragCardGrid.updateCountLabel(lastCountLabel, curRow + 1, description);
 
-                     rectangle.setLocation(curColumn * cardDimension.width, curRow * cardOffsetInStack + DragCardGrid.COUNT_LABEL_HEIGHT);
+                     rectangle.setLocation(curColumn * cardDimension.width, curRow * cardOffsetInStack + DragCardGrid.getCountLabelHeight());
                      setCardBounds(mageCards.get(card.getId()), rectangle);
 
                      curRow++;
@@ -389,7 +389,7 @@
          this.countLabels.add(label);
          cardArea.add(label, (Integer) 0); // draw on background
          label.setLocation(columnNumber * cardDimension.width, 5);
-         label.setSize(cardDimension.width, DragCardGrid.COUNT_LABEL_HEIGHT);
+         label.setSize(cardDimension.width, DragCardGrid.getCountLabelHeight());
          label.setVisible(true);
          return label;
      }
