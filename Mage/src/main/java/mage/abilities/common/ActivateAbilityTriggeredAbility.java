@@ -51,7 +51,8 @@ public class ActivateAbilityTriggeredAbility extends TriggeredAbilityImpl {
         if (stackAbility == null) {
             return false;
         }
-        if (!filter.match(stackAbility, event.getPlayerId(), stackAbility, game)) {
+
+        if (!filter.match(stackAbility, event.getPlayerId(), this, game)) {
             return false;
         }
 
