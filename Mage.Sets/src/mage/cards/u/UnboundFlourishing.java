@@ -1,10 +1,11 @@
 package mage.cards.u;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.ActivateAbilityTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyStackObjectEffect;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -12,10 +13,12 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
+import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -30,23 +33,33 @@ import java.util.UUID;
  */
 public final class UnboundFlourishing extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a permanent spell with a mana cost that contains {X}");
+    private static final FilterSpell filterPermanent = new FilterSpell("a permanent spell with a mana cost that contains {X}");
+    private static final FilterSpell filterInstantSorcery = new FilterInstantOrSorcerySpell("an instant or sorcery spell with a mana cost that contains {X}");
+    private static final FilterStackObject filterAbility = new FilterActivatedOrTriggeredAbility("an activated ability with an activation cost that contains {X}");
 
     static {
-        filter.add(PermanentPredicate.instance);
-        filter.add(UnboundFlourishingSpellContainsXPredicate.instance);
+        filterPermanent.add(PermanentPredicate.instance);
+        filterPermanent.add(UnboundFlourishingCostContainsXPredicate.instance);
+        filterInstantSorcery.add(UnboundFlourishingCostContainsXPredicate.instance);
+        filterAbility.add(UnboundFlourishingCostContainsXPredicate.instance);
     }
 
     public UnboundFlourishing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Whenever you cast a permanent spell with a mana cost that contains {X}, double the value of X.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new UnboundFlourishingDoubleXEffect(), filter, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UnboundFlourishingDoubleXEffect(), filterPermanent, false, SetTargetPointer.SPELL));
 
         // Whenever you cast an instant or sorcery spell or activate an ability,
         // if that spell’s mana cost or that ability’s activation cost contains {X}, copy that spell or ability.
         // You may choose new targets for the copy.
-        this.addAbility(new UnboundFlourishingCopyAbility());
+        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD,
+                new CopyStackObjectEffect("that spell or ability"), false,
+                "Whenever you cast an instant or sorcery spell or activate an ability, " +
+                        "if that spell's mana cost or that ability's activation cost contains {X}, ",
+                new SpellCastControllerTriggeredAbility(null, filterInstantSorcery, false, SetTargetPointer.SPELL),
+                new ActivateAbilityTriggeredAbility(null, filterAbility)
+        ));
     }
 
     private UnboundFlourishing(final UnboundFlourishing card) {
@@ -59,13 +72,18 @@ public final class UnboundFlourishing extends CardImpl {
     }
 }
 
-enum UnboundFlourishingSpellContainsXPredicate implements Predicate<StackObject> {
+enum UnboundFlourishingCostContainsXPredicate implements Predicate<StackObject> {
     instance;
 
     @Override
     public boolean apply(StackObject input, Game game) {
+        game.debugMessage("checking " + input.getName() + " / " + input.getId());
         if (input instanceof Spell) {
+            game.debugMessage("spell good " + ((Spell) input).getSpellAbility().getManaCostsToPay().containsX());
             return ((Spell) input).getSpellAbility().getManaCostsToPay().containsX();
+        } else if (input instanceof StackAbility) {
+            game.debugMessage("ability good " + input.getStackAbility().getManaCostsToPay().containsX());
+            return input.getStackAbility().getManaCostsToPay().containsX();
         } else {
             return false;
         }
@@ -103,60 +121,6 @@ class UnboundFlourishingDoubleXEffect extends OneShotEffect {
                 Map<String, Object> tagsMap = CardUtil.getSourceCostsTagsMap(game, needObject.getSpellAbility());
                 if (tagsMap.containsKey("X")) {
                     tagsMap.put("X", ((int) tagsMap.get("X")) * 2);
-                }
-            }
-        }
-        return false;
-    }
-}
-
-class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
-
-    UnboundFlourishingCopyAbility() {
-        super(Zone.BATTLEFIELD, new CopyStackObjectEffect("that spell or ability"), false);
-        setTriggerPhrase("Whenever you cast an instant or sorcery spell or activate an ability, " +
-                "if that spell's mana cost or that ability's activation cost contains {X}, ");
-    }
-
-    private UnboundFlourishingCopyAbility(final UnboundFlourishingCopyAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public UnboundFlourishingCopyAbility copy() {
-        return new UnboundFlourishingCopyAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY
-                || event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(getControllerId())) {
-            return false;
-        }
-
-        // activated ability
-        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility != null && !stackAbility.getStackAbility().isManaActivatedAbility()) {
-                if (stackAbility.getManaCostsToPay().containsX()) {
-                    this.getEffects().setValue("stackObject", stackAbility);
-                    return true;
-                }
-            }
-        }
-
-        // spell
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isInstantOrSorcery(game)) {
-                if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                    this.getEffects().setValue("stackObject", spell);
-                    return true;
                 }
             }
         }
