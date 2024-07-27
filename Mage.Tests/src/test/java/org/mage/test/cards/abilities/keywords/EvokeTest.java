@@ -41,15 +41,15 @@ public class EvokeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shriekmaw");
-        setChoice(playerA, "Cast with Evoke alternative cost: {1}{B} (Shriekmaw");
-        setChoice(playerA, "Sacrifice"); // stack triggers
+        setChoice(playerA, "Cast with Evoke alternative cost: {1}{B} (source: Shriekmaw");
+        setChoice(playerA, "When this permanent enters the battlefield, if its evoke cost was paid, its controller sacrifices it."); // stack triggers
         addTarget(playerA, "Silvercoat Lion"); // choice for Shriekmaw Destroy trigger
-        
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Exhume");
         addTarget(playerB, "Silvercoat Lion"); // Exhume choice
         addTarget(playerA, "Shriekmaw"); // Exhume choice
         addTarget(playerA, "Silvercoat Lion"); // choice for Shriekmaw Destroy trigger
-        
+
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -73,7 +73,7 @@ public class EvokeTest extends CardTestPlayerBase {
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mulldrifter");
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast with Evoke alternative cost: {2}{U} (source: Mulldrifter");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
         setChoice(playerA, "When {this} enters the battlefield, draw"); //Stack triggers
 

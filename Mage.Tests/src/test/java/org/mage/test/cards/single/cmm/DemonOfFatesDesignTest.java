@@ -212,9 +212,9 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Absolute Law"); // Enchantment {1}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem", true);
-        setChoice(playerA, "Cast with alternative cost: Pay 3 life (Sakashima the Impostor");
+        setChoice(playerA, "Cast with alternative cost: Pay 3 life (source: Sakashima the Impostor");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Absolute Law");
-        setChoice(playerA, "Cast with alternative cost: Pay 2 life (" + demon);
+        setChoice(playerA, "Cast with alternative cost: Pay 2 life (source: " + demon);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -240,9 +240,9 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Absolute Law"); // Enchantment {1}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem", true);
-        setChoice(playerA, "Cast with alternative cost: Pay 3 life (" + demon);
+        setChoice(playerA, "Cast with alternative cost: Pay 3 life (source: " + demon);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Absolute Law");
-        setChoice(playerA, "Cast with alternative cost: Pay 2 life (Sakashima the Impostor");
+        setChoice(playerA, "Cast with alternative cost: Pay 2 life (source: Sakashima the Impostor");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

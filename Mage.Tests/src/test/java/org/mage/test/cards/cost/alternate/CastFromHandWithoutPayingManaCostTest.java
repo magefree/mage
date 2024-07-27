@@ -18,7 +18,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Gray Ogre", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -70,7 +70,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Beseech the Queen", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Beseech the Queen");
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
         addTarget(playerA, "Mountain");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -90,7 +90,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Reality Smasher", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reality Smasher");
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -114,7 +114,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -139,7 +139,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Fire // Ice");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire", playerB);
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
         addTargetAmount(playerA, playerB, 2);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -170,7 +170,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Shrapnel Blast", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shrapnel Blast");
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
         setChoice(playerA, "Ornithopter"); // sacrifice cost
         addTarget(playerA, playerB);
 
@@ -186,7 +186,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
     /**
      * Spell get cast for 0 if Omniscience is being in play. But with
-     * Trinisphere it costs at least {3}. Cost/alternate cost (Omniscience) +
+     * Trinisphere it costs at least {3}. Cost/alternate cost (source: Omniscience) +
      * additional costs - cost reductions + minimum cost (Trinishpere) = total
      * cost.
      */
@@ -204,7 +204,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Trinisphere", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -241,7 +241,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Far // Away");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Far // Away");
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
         addTarget(playerA, "Silvercoat Lion");
         addTarget(playerA, playerB);
         setChoice(playerB, "Pillarfield Ox");
@@ -312,7 +312,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Bog Wraith", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
         setChoice(playerA, true); // pay Entwine
         addTarget(playerA, "Bog Wraith"); // target form mode 1
         addTarget(playerA, playerB); // target for mode 2
@@ -353,7 +353,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Vision", playerA);
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -389,10 +389,10 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Bog Wraith", 1); // Creature {3}{B} (3/3)
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience", true);
-        setChoice(playerA, "Cast with alternative cost: {W}{U}{B}{R}{G} (Jodah, Archmage Eternal");
+        setChoice(playerA, "Cast with alternative cost: {W}{U}{B}{R}{G} (source: Jodah, Archmage Eternal");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bog Wraith");
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

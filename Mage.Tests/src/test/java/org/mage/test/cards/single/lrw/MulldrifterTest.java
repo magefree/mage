@@ -49,9 +49,9 @@ public class MulldrifterTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mulldrifter");
-        setChoice(playerA, "Cast with Evoke alternative cost: {2}{U} (Mulldrifter");
+        setChoice(playerA, "Cast with Evoke alternative cost: {2}{U} (source: Mulldrifter");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        setChoice(playerA, "Sacrifice"); // stack triggers
+        setChoice(playerA, "When this permanent enters the battlefield, if its evoke cost was paid, its controller sacrifices it"); // stack triggers
 
         execute();
 

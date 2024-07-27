@@ -33,7 +33,7 @@ public class ForceOfWillTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thoughtseize", playerB);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Force of Will", "Thoughtseize");
-        setChoice(playerB, "Cast with alternative cost: Pay 1 life, Exile a blue card from your hand (Force of Will");
+        setChoice(playerB, "Cast with alternative cost: Pay 1 life, Exile a blue card from your hand (source: Force of Will");
         setChoice(playerB, "Remand");
 
         setStopAt(1, PhaseStep.CLEANUP);

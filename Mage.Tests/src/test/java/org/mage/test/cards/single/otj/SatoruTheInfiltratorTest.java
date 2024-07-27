@@ -103,7 +103,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, commando);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, commando);
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -120,7 +120,7 @@ public class SatoruTheInfiltratorTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, satoru);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, satoru);
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

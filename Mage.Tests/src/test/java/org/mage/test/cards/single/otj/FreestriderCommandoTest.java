@@ -60,7 +60,7 @@ public class FreestriderCommandoTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, commando);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, commando);
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();

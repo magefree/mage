@@ -110,7 +110,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nourishing Shoal");
         // activate splice: yes -> card with splice ability -> new target for spliced ability
         setChoice(playerA, true);
-        setChoice(playerA, "Cast with alternative cost: Exile a green card with mana value X from your hand (Nourishing Shoal");
+        setChoice(playerA, "Cast with alternative cost: Exile a green card with mana value X from your hand (source: Nourishing Shoal");
         setChoice(playerA, "Giant Growth"); // Exiled for Shoal alternative cost
         addTarget(playerA, "Through the Breach");
         setChoice(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield

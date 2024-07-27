@@ -34,7 +34,7 @@ public class RefractionTrapTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Refraction Trap", "Silvercoat Lion", "Lightning Bolt");
-        setChoice(playerB, "Cast with alternative cost: {W} (Refraction Trap");
+        setChoice(playerB, "Cast with alternative cost: {W} (source: Refraction Trap");
         setChoice(playerB, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -22,7 +22,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre"); // Cast Orgre by discarding the Lightning Bolt
-        setChoice(playerA, "Cast with alternative cost: Discard a card that shares a color with that spell (Dream Halls");
+        setChoice(playerA, "Cast with alternative cost: Discard a card that shares a color with that spell (source: Dream Halls");
         setChoice(playerA, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -71,7 +71,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre"); // Cast Orgre by discarding the Lightning Bolt
-        setChoice(playerA, "Cast with alternative cost: Discard a card that shares a color with that spell (Dream Halls");
+        setChoice(playerA, "Cast with alternative cost: Discard a card that shares a color with that spell (source: Dream Halls");
         setChoice(playerA, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -97,7 +97,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
 
         checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", "Alpha Myr");
-        setChoice(playerA, "Cast with alternative cost: Discard a Plains card (Abolish"); // use alternative cost
+        setChoice(playerA, "Cast with alternative cost: Discard a Plains card (source: Abolish"); // use alternative cost
         setChoice(playerA, "Plains");
 
         setStrictChooseMode(true);
@@ -121,7 +121,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
 
         checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", "Alpha Myr");
-        setChoice(playerA, "Cast with alternative cost: Discard a Plains card (Abolish"); // use alternative cost
+        setChoice(playerA, "Cast with alternative cost: Discard a Plains card (source: Abolish"); // use alternative cost
         setChoice(playerA, "Plains");
 
         setStrictChooseMode(true);
@@ -159,7 +159,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invigorate", "Silvercoat Lion");
-        setChoice(playerA, "Cast with alternative cost: An opponent gains 3 life (Invigorate"); // use alternative cost
+        setChoice(playerA, "Cast with alternative cost: An opponent gains 3 life (source: Invigorate"); // use alternative cost
         addTarget(playerA, playerB); // Opponent to gain live
 
         setStrictChooseMode(true);

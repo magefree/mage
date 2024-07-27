@@ -42,7 +42,7 @@ public class DashTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Screamreach Brawler");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (Screamreach Brawler");
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (source: Screamreach Brawler");
         attack(1, playerA, "Screamreach Brawler");
 
         setStopAt(2, PhaseStep.UNTAP);
@@ -89,7 +89,7 @@ public class DashTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Geist of the Moors", 1); // 3/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (Screamreach Brawler");
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (source: Screamreach Brawler");
 
         attack(1, playerA, "Screamreach Brawler");
         block(1, playerB, "Geist of the Moors", "Screamreach Brawler");
@@ -116,11 +116,11 @@ public class DashTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Screamreach Brawler"); // 2/3
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (Screamreach Brawler");
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (source: Screamreach Brawler");
         attack(1, playerA, "Screamreach Brawler");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (Screamreach Brawler");
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (source: Screamreach Brawler");
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -140,7 +140,7 @@ public class DashTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warbringer");
-        setChoice(playerA, "Cast with Dash alternative cost: {2}{R} (Warbringer");
+        setChoice(playerA, "Cast with Dash alternative cost: {2}{R} (source: Warbringer");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -158,7 +158,7 @@ public class DashTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (Screamreach Brawler");
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (source: Screamreach Brawler");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

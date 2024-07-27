@@ -35,7 +35,7 @@ public class DefenseGridTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mindbreak Trap", "Lightning Bolt^Lightning Bolt^Lightning Bolt");
-        setChoice(playerB, "Cast with alternative cost: {0} (Mindbreak Trap");
+        setChoice(playerB, "Cast with alternative cost: {0} (source: Mindbreak Trap");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

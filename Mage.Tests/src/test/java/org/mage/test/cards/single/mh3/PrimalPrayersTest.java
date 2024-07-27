@@ -151,10 +151,10 @@ public class PrimalPrayersTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, prayers, true);
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience"); // can choose Omniscience at sorcery speed.
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience"); // can choose Omniscience at sorcery speed.
         runCode("energy counter is 2", 1, PhaseStep.BEGIN_COMBAT, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Grizzly Bears", true);
-        //setChoice(playerA, "Cast without paying its mana cost (Omniscience"); // can not choose Omniscience at instant speed.
+        //setChoice(playerA, "Cast without paying its mana cost (source: Omniscience"); // can not choose Omniscience at instant speed.
 
         setStopAt(1, PhaseStep.END_COMBAT);
         try {

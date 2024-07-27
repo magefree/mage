@@ -43,7 +43,7 @@ public class MindbreakTrapTest extends CardTestPlayerBase {
 
         waitStackResolved(2, PhaseStep.POSTCOMBAT_MAIN, 1); // Let the storm ability resolve to put the copies on the stack
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, mindBreakTrap, "Grapeshot^Grapeshot^Grapeshot");
-        setChoice(playerA, "Cast with alternative cost: {0} (Mindbreak Trap");
+        setChoice(playerA, "Cast with alternative cost: {0} (source: Mindbreak Trap");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();

@@ -76,7 +76,7 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         // Trample
         addCard(Zone.HAND, playerA, "Colossal Dreadmaw");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Colossal Dreadmaw");
-        setChoice(playerA, "Cast without paying its mana cost (Omniscience");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
