@@ -327,8 +327,10 @@ public class CardIconsPanel extends JPanel {
             BufferedImage iconImageWithText = ImageManagerImpl.deepCopy(iconImageCached); // must copy cached value before modify
 
             // text
+            String hint = ManaSymbols.replaceSymbolsWithHTML(icon.getHint(), ManaSymbols.Type.CARD_ICON_HINT);
+            hint = GUISizeHelper.textToHtmlWithSize(hint, GUISizeHelper.cardTooltipFontSize);
             JLabel label = new JLabel();
-            label.setToolTipText("<html>" + ManaSymbols.replaceSymbolsWithHTML(icon.getHint(), ManaSymbols.Type.CARD_ICON_HINT));
+            label.setToolTipText("<html>" + hint);
             if (!icon.getText().isEmpty()) {
                 Graphics2D g2 = iconImageWithText.createGraphics();
                 try {

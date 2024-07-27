@@ -621,9 +621,9 @@ public final class ManaSymbols {
                 symbolSize = GUISizeHelper.symbolDialogSize;
                 break;
             case TOOLTIP:
+            case CARD_ICON_HINT:
                 symbolSize = GUISizeHelper.symbolTooltipSize;
                 break;
-            case CARD_ICON_HINT:
             default:
                 symbolSize = 11;
                 break;

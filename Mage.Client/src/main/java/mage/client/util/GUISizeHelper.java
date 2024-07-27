@@ -149,6 +149,9 @@ public final class GUISizeHelper {
         cardTooltipFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TOOLTIP_SIZE, 14);
         symbolTooltipSize = cardTooltipFontSize;
 
+        // control's tooltip on mouse move
+        UIManager.put("ToolTip.font", getCardFont().deriveFont(cardTooltipFontSize * 1.0f));
+
         int handCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_HAND_SIZE, 14);
         handCardDimension = new Dimension(CARD_IMAGE_WIDTH * handCardSize / 42, CARD_IMAGE_HEIGHT * handCardSize / 42);
         stackWidth = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_STACK_WIDTH, 30);
@@ -238,8 +241,12 @@ public final class GUISizeHelper {
     }
 
     public static String textToHtmlWithSize(String text, Font font) {
+        return textToHtmlWithSize(text, font.getSize());
+    }
+
+    public static String textToHtmlWithSize(String text, int fontSize) {
         if (text != null && !text.toLowerCase(Locale.ENGLISH).startsWith("<html>")) {
-            return "<html><p style=\"font-size: " + font.getSize() + "pt;\">" + text + "</p>";
+            return "<html><p style=\"font-size: " + fontSize + "pt;\">" + text + "</p>";
         }
         return text;
     }

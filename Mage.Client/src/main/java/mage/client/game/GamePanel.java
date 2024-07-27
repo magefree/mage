@@ -1997,7 +1997,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        abilityPicker = new mage.client.components.ability.AbilityPicker();
+        abilityPicker = new mage.client.components.ability.AbilityPicker(GUISizeHelper.dialogsGuiScale);
         jSplitPane1 = new javax.swing.JSplitPane();
         jSplitPane0 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();

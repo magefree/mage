@@ -97,17 +97,13 @@ public class PlayerView implements Serializable {
                 sideboard.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId)));
             }
         }
-
-        try {
-            for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
-                if (showInBattlefield(permanent, state)) {
-                    PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()), createdForPlayerId, game);
-                    battlefield.put(view.getId(), view);
-                }
+        for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
+            if (showInBattlefield(permanent, state)) {
+                PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()), createdForPlayerId, game);
+                battlefield.put(view.getId(), view);
             }
-        } catch (ConcurrentModificationException e) {
-            // can happen as a player left battlefield while PlayerView is created
         }
+
         Card cardOnTop = (player.isTopCardRevealed() && player.getLibrary().hasCards())
                 ? player.getLibrary().getFromTop(game) : null;
         this.topCard = cardOnTop != null ? new CardView(cardOnTop, game) : null;

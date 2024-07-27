@@ -568,7 +568,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         createSizeSetting(4, KEY_GUI_CARD_EDITOR_SIZE,14, false, "Size of cards in editor and draft panels", "The size of the card in editor and the picked zone of the draft panel ");
         createSizeSetting(5, KEY_GUI_CARD_OFFSET_SIZE,14, false, "Offset of card's image", "The vertical offset of card images in editor areas "); // TODO: delete
         createSizeSetting(6, KEY_GUI_ENLARGED_IMAGE_SIZE, 20, false, "Size of popup card hint (image mode by mouse wheel)", "The size of the image shown for the card your mouse pointer<br>is located over while you turn the mouse wheel");
-        createSizeSetting(7, KEY_GUI_TOOLTIP_SIZE,14, false, "Size of popup card hint (text mode)", "The size of the tooltip window for cards or permanents"); // TODO: share with popup image
+        createSizeSetting(7, KEY_GUI_TOOLTIP_SIZE,14, true, "Size of popup card hint (text mode)", "The size of the tooltip window for cards or permanents"); // TODO: share with popup image
         // game
         createSizeSetting(8, KEY_GUI_PLAYER_PANEL_SIZE,14, false, "Size of player panel", "The size of the player panels on battlefield");
         createSizeSetting(9, KEY_GUI_CARD_HAND_SIZE,14, false, "Size of cards in hand and stack", "The size of the card images in hand and on the stack");
