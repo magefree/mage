@@ -46,11 +46,11 @@ public class ErrorDialog extends MageDialog {
     public void changeGUISize() {
         super.changeGUISize();
 
-        this.textError.setFont(GUISizeHelper.gameDialogAreaFont);
-        this.textInfo.setFont(GUISizeHelper.gameDialogAreaFont);
-        this.btnCopyToClipboard.setFont(GUISizeHelper.gameDialogAreaFont);
-        this.btnOpenGithub.setFont(GUISizeHelper.gameDialogAreaFont);
-        this.btnOK.setFont(GUISizeHelper.gameDialogAreaFont);
+        this.textError.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.textInfo.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.btnCopyToClipboard.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.btnOpenGithub.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.btnOK.setFont(GUISizeHelper.gameFeedbackPanelFont);
     }
 
     private void openGithub() {

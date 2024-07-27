@@ -413,7 +413,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             return;
         }
 
-        int height = GUISizeHelper.enlargedImageHeight;
+        int height = GUISizeHelper.cardTooltipLargeImageHeight;
         int width = (int) ((float) height * (float) 0.64);
         bigCard.setSize(width, height);
         cardPreviewContainer.setBounds(0, 0, width + 80, height + 30);
@@ -474,7 +474,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void setGUISizeTooltipContainer() {
         try {
-            int height = GUISizeHelper.enlargedImageHeight;
+            int height = GUISizeHelper.cardTooltipLargeImageHeight;
             int width = (int) ((float) height * (float) 0.64);
 
             JPanel cardPreviewContainer = (JPanel) UI.getComponent(MageComponents.CARD_PREVIEW_CONTAINER);
@@ -610,7 +610,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 MagePane window = (MagePane) windows[i];
                 if (window.isVisible()) {
                     menuItem = new MagePaneMenuItem(window);
-                    menuItem.setFont(GUISizeHelper.menuFont);
+                    menuItem.setFont(GUISizeHelper.dialogFont);
                     menuItem.setState(i == 0);
                     menuItem.addActionListener(ae -> {
                         MagePane frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
@@ -935,7 +935,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         jMemUsageLabel = new javax.swing.JLabel();
 
         menuDebugTestModalDialog.setText("Test Modal Dialogs");
-        menuDebugTestModalDialog.setFont(GUISizeHelper.menuFont);
+        menuDebugTestModalDialog.setFont(GUISizeHelper.dialogFont);
         menuDebugTestModalDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestModalDialogActionPerformed(evt);
@@ -944,7 +944,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupDebug.add(menuDebugTestModalDialog);
 
         menuDebugTestCardRenderModesDialog.setText("Test Card Render Modes");
-        menuDebugTestCardRenderModesDialog.setFont(GUISizeHelper.menuFont);
+        menuDebugTestCardRenderModesDialog.setFont(GUISizeHelper.dialogFont);
         menuDebugTestCardRenderModesDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestCardRenderModesDialogActionPerformed(evt);
@@ -1830,7 +1830,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void setGUISize() {
-        Font font = GUISizeHelper.menuFont;
+        Font font = GUISizeHelper.dialogFont;
         mageToolbar.setFont(font);
         int newHeight = font.getSize() + 6;
         Dimension mageToolbarDimension = mageToolbar.getPreferredSize();

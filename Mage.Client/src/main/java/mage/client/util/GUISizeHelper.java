@@ -23,12 +23,13 @@ public final class GUISizeHelper {
     static final int CARD_IMAG_VALUE = 42;
 
     public static String basicSymbolSize = "small";
+    static final int MIN_FONT_SIZE = 7;
 
     public static int symbolCardSize = 15;
     public static int symbolTableSize = 15;
     public static int symbolChatSize = 15;
     public static int symbolDialogSize = 15;
-    public static int symbolTooltipSize = 15;
+    public static int symbolTooltipSize = 15; // TODO: replace all symbolXXXSize by fontXXX usage
     public static int symbolPaySize = 15;
     public static int symbolEditorSize = 15;
 
@@ -38,33 +39,29 @@ public final class GUISizeHelper {
     public static int dividerBarSize;
     public static int scrollBarSize;
 
-    public static int flagHeight;
-
-    public static int cardTooltipFontSize = 15;
+    public static int tableFlagHeight;
 
     public static Font chatFont = new java.awt.Font("Arial", 0, 12);
     public static Font tableFont = new java.awt.Font("Arial", 0, 12);
-    public static Font menuFont = new java.awt.Font("Arial", 0, 12);
+    public static Font dialogFont = new java.awt.Font("Arial", 0, 12);
+    public static Font cardTooltipFont = new java.awt.Font("Arial", 0, 12);
 
-    public static Font gameRequestsFont = new java.awt.Font("Arial", 0, 12);
-
-    public static int gameDialogAreaFontSizeBig = 16;
-    public static int gameDialogAreaFontSizeTooltip = 14;
-    public static int gameDialogAreaFontSizeSmall = 11;
-    public static int gameDialogAreaTextHeight = 0;
+    public static int gameFeedbackPanelMainMessageFontSize = 16;
+    public static int gameFeedbackPanelExtraMessageFontSize = 11;
+    public static int gameFeedbackPanelMaxHeight = 0;
 
     public static int gameDialogAreaButtonHigh = 16;
 
-    public static Font gameDialogAreaFont = new java.awt.Font("Arial", 0, 12);
-    public static float gameDialogAreaDefaultFontSize = gameDialogAreaFont.getSize2D();
-    public static int gameDialogButtonHeight;
-    public static int gameDialogButtonWidth;
+    public static Font gameFeedbackPanelFont = new java.awt.Font("Arial", 0, 12);
+    public static float gameDialogAreaDefaultFontSize = gameFeedbackPanelFont.getSize2D();
+    public static int gameFeedbackPanelButtonHeight;
+    public static int gameFeedbackPanelButtonWidth;
 
     public static Dimension handCardDimension;
     public static int stackWidth; // percent
 
     public static float playerPanelGuiScale;
-    public static float dialogsGuiScale;
+    public static float dialogGuiScale;
 
     public static Dimension otherZonesCardDimension;
     public static int otherZonesCardVerticalOffset;
@@ -74,17 +71,9 @@ public final class GUISizeHelper {
 
     public static Dimension editorCardDimension;
     public static int editorCardVertOffsetInStack;
-    public static int enlargedImageHeight;
-
-    public static int getTableRowHeight() {
-        int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
-        return fontSize + 6;
-    }
-
-    public static Font getTabFont() {
-        int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
-        return new java.awt.Font("Arial", 0, fontSize);
-    }
+    public static int cardTooltipLargeImageHeight;
+    public static int cardTooltipLargeTextHeight;
+    public static int cardTooltipLargeTextWidth;
 
     public static Font getCardFont() {
         // default font type for some card panels (each render mode uses it's own font sizes)
@@ -108,58 +97,58 @@ public final class GUISizeHelper {
     }
 
     public static void calculateGUISizes() {
-        int tableFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
-        tableFont = new java.awt.Font("Arial", 0, tableFontSize);
-        tableRowHeight = tableFontSize + 4;
-        tableHeaderHeight = tableFontSize + 10;
-        symbolTableSize = tableFontSize;
-        flagHeight = tableFontSize - 2;
-        if (tableFontSize > 15) {
-            symbolEditorSize = tableFontSize - 5;
-            dividerBarSize = 10 + (tableFontSize / 4);
-            scrollBarSize = 14 + (tableFontSize / 4);
+        // app - dialogs and menus
+        int dialogFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, 14);
+        dialogFont = new Font("Arial", 0, dialogFontSize);
+        symbolDialogSize = dialogFontSize;
+        // for auto-sizeable dialogs - use scale logic (example: player panel, pick choice, pick ability, etc)
+        dialogGuiScale = dialogFontSize / 14.0f;
+
+        // app - tables
+        tableFont = new java.awt.Font("Arial", 0, dialogFontSize);
+        tableRowHeight = dialogFontSize + 4;
+        tableHeaderHeight = dialogFontSize + 10;
+        symbolTableSize = dialogFontSize;
+        tableFlagHeight = dialogFontSize - 2;
+        if (dialogFontSize > 15) {
+            symbolEditorSize = dialogFontSize - 5;
+            dividerBarSize = 10 + (dialogFontSize / 4);
+            scrollBarSize = 14 + (dialogFontSize / 4);
         } else {
-            symbolEditorSize = tableFontSize;
+            symbolEditorSize = dialogFontSize;
             dividerBarSize = 10;
             scrollBarSize = 14;
         }
 
-        // used for popup menus
-        int dialogFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, 14);
-        menuFont = new Font("Arial", 0, dialogFontSize);
-        gameRequestsFont = new Font("Arial", 0, dialogFontSize);
+        // game - feedback panel
+        gameFeedbackPanelFont = new Font("Arial", 0, dialogFontSize);
+        gameFeedbackPanelMainMessageFontSize = dialogFontSize;
+        gameFeedbackPanelExtraMessageFontSize = Math.max(MIN_FONT_SIZE, dialogFontSize / 2 + 2);
+        gameFeedbackPanelMaxHeight = 20 + 2 * gameFeedbackPanelMainMessageFontSize + 2 * gameFeedbackPanelExtraMessageFontSize;
+        gameFeedbackPanelButtonHeight = dialogFontSize + 6;
+        gameFeedbackPanelButtonWidth = dialogFontSize * 2 + 40;
 
-        // used in the feedback area of the game panel
-        int feedbackFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_FEEDBACK_FONT_SIZE, 14);
-        gameDialogAreaFontSizeBig = feedbackFontSize;
-        gameDialogAreaFontSizeTooltip = feedbackFontSize - 2;
-        gameDialogAreaFontSizeSmall = (feedbackFontSize / 2) + 2;
-        gameDialogAreaTextHeight = GUISizeHelper.gameDialogAreaFontSizeBig + GUISizeHelper.gameDialogAreaFontSizeSmall + 30;
-
-        gameDialogAreaButtonHigh = feedbackFontSize;
-        gameDialogAreaFont = new Font("Arial", 0, feedbackFontSize);
-        gameDialogButtonHeight = feedbackFontSize + 6;
-        gameDialogButtonWidth = feedbackFontSize * 2 + 40;
-        symbolDialogSize = feedbackFontSize;
-
+        // app - chats and game logs
         int chatFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CHAT_FONT_SIZE, 14);
         chatFont = new java.awt.Font("Arial", 0, chatFontSize);
         symbolChatSize = chatFontSize;
 
-        cardTooltipFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TOOLTIP_SIZE, 14);
-        symbolTooltipSize = cardTooltipFontSize;
+        // app - card popup and control's tooltip (e.g. mouse move over menu)
+        int tooltipFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TOOLTIP_SIZE, 17);
+        cardTooltipFont = new java.awt.Font("Arial", 0, tooltipFontSize);
+        symbolTooltipSize = tooltipFontSize;
+        cardTooltipLargeImageHeight = 30 * tooltipFontSize;
+        cardTooltipLargeTextWidth = Math.max(150, 20 * tooltipFontSize - 50);
+        cardTooltipLargeTextHeight = Math.max(100, 12 * tooltipFontSize - 20);
+        UIManager.put("ToolTip.font", cardTooltipFont);
 
-        // control's tooltip on mouse move
-        UIManager.put("ToolTip.font", getCardFont().deriveFont(cardTooltipFontSize * 1.0f));
+        // game - player panel
+        playerPanelGuiScale = (float) (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_PLAYER_PANEL_SIZE, 14) / 14.0);
 
+        // game - hand
         int handCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_HAND_SIZE, 14);
         handCardDimension = new Dimension(CARD_IMAGE_WIDTH * handCardSize / 42, CARD_IMAGE_HEIGHT * handCardSize / 42);
         stackWidth = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_STACK_WIDTH, 30);
-
-        playerPanelGuiScale = (float) (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_PLAYER_PANEL_SIZE, 14) / 14.0);
-
-        // no needs in special size settings - compare dialog font size to find gui scale
-        dialogsGuiScale = (float) (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, 14) / 14.0);
 
         int otherZonesCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OTHER_ZONES_SIZE, 14);
         otherZonesCardDimension = new Dimension(CARD_IMAGE_WIDTH * otherZonesCardSize / 42, CARD_IMAGE_HEIGHT * otherZonesCardSize / 42);
@@ -176,33 +165,37 @@ public final class GUISizeHelper {
         int battlefieldCardMaxSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, 14);
         battlefieldCardMaxDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldCardMaxSize / 42, CARD_IMAGE_HEIGHT * battlefieldCardMaxSize / 42);
 
+        // app - deck editor and draft
         int editorCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_EDITOR_SIZE, 14);
         editorCardDimension = new Dimension(CARD_IMAGE_WIDTH * editorCardSize / 42, CARD_IMAGE_HEIGHT * editorCardSize / 42);
-        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false").equals("false")) {
+        // make free space for card names in deck editor's stacks
+        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_IMAGE_MODE, "false").equals("false")) {
+            // mtgo render
             editorCardVertOffsetInStack = CardRenderer.getCardTopHeight(editorCardDimension.width);
         } else {
-            editorCardVertOffsetInStack = 2 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OFFSET_SIZE, 14) - 10;
+            // image render
+            editorCardVertOffsetInStack = Math.round(1.3f * GUISizeHelper.getImageRendererTitleFontSize(editorCardDimension.height));
         }
-
-        enlargedImageHeight = 25 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_ENLARGED_IMAGE_SIZE, 20);
     }
 
-    public static int getTooltipCardWidth() {
-        return 20 * GUISizeHelper.cardTooltipFontSize - 50;
+    public static int getImageRendererMainFontSize(int cardHeight) {
+        // startup font size (it same size on all zoom levels)
+        return cardHeight / 13;
     }
 
-    public static int getTooltipCardHeight() {
-        return 12 * GUISizeHelper.cardTooltipFontSize - 20;
+    public static int getImageRendererTitleFontSize(int cardHeight) {
+        // extracted from image renderer file cause title size used in deck editor
+        return Math.max(13, getImageRendererMainFontSize(cardHeight));
     }
 
     public static void changePopupMenuFont(JPopupMenu popupMenu) {
         for (Component comp : popupMenu.getComponents()) {
             if (comp instanceof JMenuItem) {
-                comp.setFont(GUISizeHelper.menuFont);
+                comp.setFont(GUISizeHelper.dialogFont);
                 if (comp instanceof JMenu) {
-                    comp.setFont(GUISizeHelper.menuFont);
+                    comp.setFont(GUISizeHelper.dialogFont);
                     for (Component subComp : ((JMenu) comp).getMenuComponents()) {
-                        subComp.setFont(GUISizeHelper.menuFont);
+                        subComp.setFont(GUISizeHelper.dialogFont);
                     }
                 }
             }

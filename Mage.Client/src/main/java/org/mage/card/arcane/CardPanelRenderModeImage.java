@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.cards.MageCardLocation;
 import mage.cards.action.ActionCallback;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageCaches;
 import mage.client.util.ImageHelper;
 import mage.client.util.SoftValuesLoadingCache;
@@ -46,7 +47,6 @@ public class CardPanelRenderModeImage extends CardPanel {
     private static final float TEXT_GLOW_INTENSITY = 3f;
 
     // text min size for image render mode
-    private static final int CARD_TITLE_FONT_MIN_SIZE = 13;
     private static final int CARD_PT_FONT_MIN_SIZE = 17;
 
     public final ScaledImagePanel imagePanel;
@@ -429,13 +429,14 @@ public class CardPanelRenderModeImage extends CardPanel {
         fullImageText.setVisible(fullImagePath != null);
 
         if (showText) {
-            int fontSize = cardHeight / 13; // startup font size (it same size on all zoom levels)
-            titleText.setFont(getFont().deriveFont(Font.BOLD, Math.max(CARD_TITLE_FONT_MIN_SIZE, fontSize)));
+            int mainFontSize = GUISizeHelper.getImageRendererMainFontSize(cardHeight);
+            int titleFontSize = GUISizeHelper.getImageRendererTitleFontSize(cardHeight);
+            titleText.setFont(getFont().deriveFont(Font.BOLD, titleFontSize));
 
             // margins from card black border to text, not need? text show up good without margins
             int titleMarginLeft = 0; //Math.round(28f / 672f * cardWidth);
             int titleMarginRight = 0;
-            int titleMarginTop = Math.round(getCardCaptionTopOffset() / 100f * cardHeight);//Math.round(28f / 936f * cardHeight);
+            int titleMarginTop = 0; //Math.round(getCardCaptionTopOffset() / 100f * cardHeight);//Math.round(28f / 936f * cardHeight);
             int titleMarginBottom = 0;
             titleText.setBounds(
                     imagePanel.getX() + titleMarginLeft,
@@ -444,7 +445,8 @@ public class CardPanelRenderModeImage extends CardPanel {
                     imagePanel.getBounds().height - titleMarginTop - titleMarginBottom
             );
 
-            fullImageText.setFont(getFont().deriveFont(Font.PLAIN, 10));
+            int missImageFontSize = Math.max(10, Math.round(0.5f * mainFontSize));
+            fullImageText.setFont(getFont().deriveFont(Font.PLAIN, missImageFontSize));
             fullImageText.setBounds(titleText.getX(), titleText.getY(), titleText.getBounds().width, titleText.getBounds().height);
 
             // PT (font as title)
@@ -454,9 +456,9 @@ public class CardPanelRenderModeImage extends CardPanel {
                 MageInt currentPower = cardView.getOriginalPower();
                 MageInt currentToughness = cardView.getOriginalToughness();
 
-                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentPower, false);
-                prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), null, false);
-                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentToughness, CardRendererUtils.isCardWithDamage(cardView));
+                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), currentPower, false);
+                prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), null, false);
+                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), currentToughness, CardRendererUtils.isCardWithDamage(cardView));
 
                 // right bottom corner with margin (sizes from any sample card)
                 int ptMarginRight = Math.round(64f / 672f * cardWidth);

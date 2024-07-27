@@ -328,7 +328,7 @@ public class CardIconsPanel extends JPanel {
 
             // text
             String hint = ManaSymbols.replaceSymbolsWithHTML(icon.getHint(), ManaSymbols.Type.CARD_ICON_HINT);
-            hint = GUISizeHelper.textToHtmlWithSize(hint, GUISizeHelper.cardTooltipFontSize);
+            hint = GUISizeHelper.textToHtmlWithSize(hint, GUISizeHelper.cardTooltipFont.getSize());
             JLabel label = new JLabel();
             label.setToolTipText("<html>" + hint);
             if (!icon.getText().isEmpty()) {

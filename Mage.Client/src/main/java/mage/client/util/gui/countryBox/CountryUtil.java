@@ -24,9 +24,9 @@ public final class CountryUtil {
         if (flagIcon == null) {
             Image flagImage = ImageHelper.getImageFromResources("/flags/" + countryCode + (countryCode.endsWith(".png") ? "" : ".png"));
             if (flagImage != null) {
-                if (GUISizeHelper.flagHeight > 11) {
-                    int width = Math.round(GUISizeHelper.flagHeight * flagImage.getWidth(null) / flagImage.getHeight(null));
-                    BufferedImage resized = ImageHelper.scale((BufferedImage) flagImage, BufferedImage.TYPE_4BYTE_ABGR, width, GUISizeHelper.flagHeight);
+                if (GUISizeHelper.tableFlagHeight > 11) {
+                    int width = Math.round(GUISizeHelper.tableFlagHeight * flagImage.getWidth(null) / flagImage.getHeight(null));
+                    BufferedImage resized = ImageHelper.scale((BufferedImage) flagImage, BufferedImage.TYPE_4BYTE_ABGR, width, GUISizeHelper.tableFlagHeight);
                     flagIcon = new ImageIcon(resized);
                 } else {
                     flagIcon = new ImageIcon(flagImage);

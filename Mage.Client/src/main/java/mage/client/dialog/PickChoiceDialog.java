@@ -53,7 +53,7 @@ public class PickChoiceDialog extends MageDialog {
 
         // pick choice shared in multiple dialogs, so modify window size only one time
         // TODO: implement global window size settings and runtime theme support by gui scale logic (interface like MageThemeSupported:onSizeChanged,onThemeChanged,etc)
-        float guiScale = GUISizeHelper.gameDialogAreaFont.getSize2D() / GUISizeHelper.gameDialogAreaDefaultFontSize;
+        float guiScale = GUISizeHelper.gameFeedbackPanelFont.getSize2D() / GUISizeHelper.gameDialogAreaDefaultFontSize;
         int newWidth = GUISizeHelper.guiSizeScale(this.getSize().width, guiScale);
         int newHeight = GUISizeHelper.guiSizeScale(this.getSize().height, guiScale);
         this.setSize(newWidth, newHeight);
@@ -286,14 +286,14 @@ public class PickChoiceDialog extends MageDialog {
     public void changeGUISize() {
         super.changeGUISize();
 
-        this.textMessage.setFont(GUISizeHelper.gameDialogAreaFont);
-        this.textSubMessage.setFont(GUISizeHelper.gameDialogAreaFont);
-        this.labelSearch.setFont(GUISizeHelper.gameDialogAreaFont);
-        this.editSearch.setFont(GUISizeHelper.gameDialogAreaFont);
-        this.cbSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
+        this.textMessage.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.textSubMessage.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.labelSearch.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.editSearch.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.cbSpecial.setFont(GUISizeHelper.gameFeedbackPanelFont);
         this.listChoices.setFont(GUISizeHelper.tableFont);
-        this.btOK.setFont(GUISizeHelper.gameDialogAreaFont);
-        this.btCancel.setFont(GUISizeHelper.gameDialogAreaFont);
+        this.btOK.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.btCancel.setFont(GUISizeHelper.gameFeedbackPanelFont);
     }
 
     private void choiceHintShow(int modelIndex) {

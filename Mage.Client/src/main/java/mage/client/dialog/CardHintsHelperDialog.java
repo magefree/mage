@@ -511,7 +511,7 @@ public class CardHintsHelperDialog extends MageDialog implements MageDesktopIcon
 
     @Override
     public void changeGUISize() {
-        setGUISize(GUISizeHelper.chatFont);
+        setGUISize(GUISizeHelper.dialogFont);
         this.validate();
         this.repaint();
     }

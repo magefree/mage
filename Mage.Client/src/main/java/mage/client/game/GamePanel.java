@@ -421,7 +421,7 @@ public final class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
 
-        txtHoldPriority.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
+        txtHoldPriority.setFont(new Font(GUISizeHelper.gameFeedbackPanelFont.getFontName(), Font.BOLD, GUISizeHelper.gameFeedbackPanelFont.getSize()));
         GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
 
         // hand + stack panels
@@ -502,7 +502,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // as workaround: can change size for closed ability picker only
         if (this.abilityPicker != null && !this.abilityPicker.isVisible()) {
-            this.abilityPicker.fullRefresh(GUISizeHelper.dialogsGuiScale);
+            this.abilityPicker.fullRefresh(GUISizeHelper.dialogGuiScale);
             this.abilityPicker.init(gameId, bigCard);
         }
     }
@@ -1997,7 +1997,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        abilityPicker = new mage.client.components.ability.AbilityPicker(GUISizeHelper.dialogsGuiScale);
+        abilityPicker = new mage.client.components.ability.AbilityPicker(GUISizeHelper.dialogGuiScale);
         jSplitPane1 = new javax.swing.JSplitPane();
         jSplitPane0 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();

@@ -51,6 +51,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static final Logger logger = Logger.getLogger(PreferencesDialog.class);
 
+    // WARNING, do not change const values - it must be same for compatibility with user's saved settings
     public static final String KEY_SHOW_TOOLTIPS_DELAY = "showTooltipsDelay";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
     public static final String KEY_SHOW_FULL_IMAGE_PATH = "showFullImagePath";
@@ -66,16 +67,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE = "battlefieldFeedbackColorizingMode";
 
     // size settings
-    public static final String KEY_GUI_TABLE_FONT_SIZE = "guiTableFontSize";
     public static final String KEY_GUI_CHAT_FONT_SIZE = "guiChatFontSize";
     public static final String KEY_GUI_CARD_HAND_SIZE = "guiCardHandSize";
     public static final String KEY_GUI_CARD_EDITOR_SIZE = "guiCardEditorSize";
-    public static final String KEY_GUI_CARD_OFFSET_SIZE = "guiCardOffsetSize";
-    public static final String KEY_GUI_ENLARGED_IMAGE_SIZE = "guiEnlargedImageSize";
     public static final String KEY_GUI_STACK_WIDTH = "guiStackWidth";
     public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
     public static final String KEY_GUI_DIALOG_FONT_SIZE = "guiDialogFontSize";
-    public static final String KEY_GUI_FEEDBACK_FONT_SIZE = "guiFeedbackAreaSize";
     public static final String KEY_GUI_CARD_OTHER_ZONES_SIZE = "guiCardOtherZonesSize";
     public static final String KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE = "guiCardBattlefieldMinSize";
     public static final String KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE = "guiCardBattlefieldMaxSize";
@@ -94,7 +91,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferredImageLaguage";
 
-    public static final String KEY_CARD_RENDERING_FALLBACK = "cardRenderingFallback";
+    public static final String KEY_CARD_RENDERING_IMAGE_MODE = "cardRenderingFallback";
     public static final String KEY_CARD_RENDERING_ICONS_FOR_ABILITIES = "cardRenderingIconsForAbilities";
     public static final String KEY_CARD_RENDERING_ICONS_FOR_PLAYABLE = "cardRenderingIconsForPlayable";
     public static final String KEY_CARD_RENDERING_REMINDER_TEXT = "cardRenderingReminderText";
@@ -561,22 +558,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         // prepare size table (you can change settings order by new position index)
         // warning, if you change default values then make sure calculateGUISizes uses same
-        // basic
-        createSizeSetting(1, KEY_GUI_TABLE_FONT_SIZE,14, true, "Font in tables", "The size of the font used to display table text.");
-        createSizeSetting(2, KEY_GUI_DIALOG_FONT_SIZE, 14, true, "Font in messages and menu", "The size of the font of messages and menues");
-        createSizeSetting(3, KEY_GUI_CHAT_FONT_SIZE, 14, true, "Font in chat", "The size of the font used to display the chat text");
-        createSizeSetting(4, KEY_GUI_CARD_EDITOR_SIZE,14, false, "Size of cards in editor and draft panels", "The size of the card in editor and the picked zone of the draft panel ");
-        createSizeSetting(5, KEY_GUI_CARD_OFFSET_SIZE,14, false, "Offset of card's image", "The vertical offset of card images in editor areas "); // TODO: delete
-        createSizeSetting(6, KEY_GUI_ENLARGED_IMAGE_SIZE, 20, false, "Size of popup card hint (image mode by mouse wheel)", "The size of the image shown for the card your mouse pointer<br>is located over while you turn the mouse wheel");
-        createSizeSetting(7, KEY_GUI_TOOLTIP_SIZE,14, true, "Size of popup card hint (text mode)", "The size of the tooltip window for cards or permanents"); // TODO: share with popup image
-        // game
+        // App's elements (from position 1)
+        createSizeSetting(1, KEY_GUI_DIALOG_FONT_SIZE, 14, true, "Font in dialogs and menu", "The size of the font of messages, menu, dialogs and other windows");
+        createSizeSetting(2, KEY_GUI_CHAT_FONT_SIZE, 14, true, "Font in logs and chats", "The size of the font used to display the chat text");
+        createSizeSetting(3, KEY_GUI_CARD_EDITOR_SIZE,14, false, "Size of cards in editor and draft panels", "The size of the card in editor and the picked zone of the draft panel ");
+        createSizeSetting(4, KEY_GUI_TOOLTIP_SIZE,17, true, "Size of popup card hint", "The size of the tooltip window for cards or permanents (use mouse wheel to switch text/image mode)");
+        // Game's elements (from position 8)
         createSizeSetting(8, KEY_GUI_PLAYER_PANEL_SIZE,14, false, "Size of player panel", "The size of the player panels on battlefield");
         createSizeSetting(9, KEY_GUI_CARD_HAND_SIZE,14, false, "Size of cards in hand and stack", "The size of the card images in hand and on the stack");
-        createSizeSetting(10, KEY_GUI_FEEDBACK_FONT_SIZE,14, true, "Font size of feedback panel (top of the hand)", "The size of the game feedback area (buttons and messages above the hand area)");
-        createSizeSetting(11, KEY_GUI_STACK_WIDTH,14, false, "Size of stack zone (right of the hand)", "The % size of the stack object area in relation to the hand card area size."); // TODO: delete
-        createSizeSetting(12, KEY_GUI_CARD_OTHER_ZONES_SIZE,14, false, "Size of cards in other zones", "The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
-        createSizeSetting(13, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE,10, false, "Size of permanents (min)", "The minimum size of permanents on the battlefield");
-        createSizeSetting(14, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE,14, false, "Size of permanents (max)", "The maximum size of permanents on the battlefield");
+        createSizeSetting(10, KEY_GUI_STACK_WIDTH,14, false, "Size of stack zone (right of the hand)", "The % size of the stack object area in relation to the hand card area size."); // TODO: delete
+        createSizeSetting(11, KEY_GUI_CARD_OTHER_ZONES_SIZE,14, false, "Size of cards in other zones", "The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
+        createSizeSetting(12, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE,10, false, "Size of permanents (min)", "The minimum size of permanents on the battlefield");
+        createSizeSetting(13, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE,14, false, "Size of permanents (max)", "The maximum size of permanents on the battlefield");
 
         // hide unused controls
         hideUnusedSizeSettings();
@@ -2916,7 +2909,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbUseRandomBattleImage, KEY_BATTLEFIELD_IMAGE_RANDOM, "true", "false", UPDATE_CACHE_POLICY);
 
         // rendering
-        save(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_IMAGE_MODE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbCardRenderIconsForAbilities, KEY_CARD_RENDERING_ICONS_FOR_ABILITIES, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbCardRenderIconsForPlayable, KEY_CARD_RENDERING_ICONS_FOR_PLAYABLE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbCardRenderHideSetSymbol, KEY_CARD_RENDERING_SET_SYMBOL, "true", "false", UPDATE_CACHE_POLICY);
@@ -3376,7 +3369,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         dialog.cbPreferredImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
-        load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_FALLBACK, "true", "false");
+        load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_IMAGE_MODE, "true", "false");
         load(prefs, dialog.cbCardRenderIconsForAbilities, KEY_CARD_RENDERING_ICONS_FOR_ABILITIES, "true", "true");
         load(prefs, dialog.cbCardRenderIconsForPlayable, KEY_CARD_RENDERING_ICONS_FOR_PLAYABLE, "true", "true");
         load(prefs, dialog.cbCardRenderHideSetSymbol, KEY_CARD_RENDERING_SET_SYMBOL, "true");
@@ -3687,7 +3680,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static int getRenderMode() {
-        if (getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false").equals("false")) {
+        if (getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_IMAGE_MODE, "false").equals("false")) {
             return 0; // mtgo
         } else {
             return 1; // image

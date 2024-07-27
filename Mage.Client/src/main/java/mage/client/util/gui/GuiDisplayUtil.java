@@ -251,7 +251,7 @@ public final class GuiDisplayUtil {
         }
 
         String fontFamily = "tahoma";
-        int fontSize = GUISizeHelper.cardTooltipFontSize;
+        int fontSize = GUISizeHelper.cardTooltipFont.getSize();
 
         /*if (prefs.fontFamily == CardFontFamily.arial)
          fontFamily = "arial";
@@ -271,14 +271,14 @@ public final class GuiDisplayUtil {
             buffer.append(" [").append(card.getId().toString(), 0, 3).append(']');
         }
         buffer.append("</b></td><td align='right' valign='top' style='width:");
-        buffer.append(symbolCount * GUISizeHelper.cardTooltipFontSize);
+        buffer.append(symbolCount * fontSize);
         buffer.append("px'>");
         if (!card.isSplitCard()) {
             buffer.append(castingCost);
         }
         buffer.append("</td></tr></table>");
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td style='margin-left: 1px'>");
-        String imageSize = " width=" + GUISizeHelper.cardTooltipFontSize + " height=" + GUISizeHelper.cardTooltipFontSize + '>';
+        String imageSize = " width=" + fontSize + " height=" + fontSize + '>';
         if (card.getColor().isWhite()) {
             buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W' ").append(imageSize);
         }

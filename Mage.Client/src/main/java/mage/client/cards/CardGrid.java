@@ -215,7 +215,7 @@
          this.countLabels.add(label);
          this.add(label, (Integer) 0); // draw on background
          label.setLocation(columnNumber * cardDimension.width, 5);
-         label.setSize(cardDimension.width, DragCardGrid.COUNT_LABEL_HEIGHT);
+         label.setSize(cardDimension.width, DragCardGrid.COUNT_LABEL_HEIGHT); // TODO: add here?
          label.setVisible(true);
          return label;
      }
