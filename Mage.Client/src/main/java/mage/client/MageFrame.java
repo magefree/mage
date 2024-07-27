@@ -1487,9 +1487,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (!liteMode) {
                 final SplashScreen splash = SplashScreen.getSplashScreen();
                 if (splash != null) {
-                    Graphics2D g = splash.createGraphics();
-                    if (g != null) {
-                        renderSplashFrame(g);
+                    Graphics2D g2 = splash.createGraphics();
+                    try {
+                        renderSplashFrame(g2);
+                    } finally {
+                        g2.dispose();
                     }
                     splash.update();
                 }

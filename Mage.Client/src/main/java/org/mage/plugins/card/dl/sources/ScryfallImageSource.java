@@ -335,7 +335,7 @@ public class ScryfallImageSource implements CardImageSource {
     }
 
     @Override
-    public void doPause(String httpImageUrl) {
+    public void doPause(String fullUrl) {
         waitBeforeRequest();
     }
 

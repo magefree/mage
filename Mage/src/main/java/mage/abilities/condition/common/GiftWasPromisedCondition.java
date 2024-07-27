@@ -25,6 +25,6 @@ public enum GiftWasPromisedCondition implements Condition {
 
     @Override
     public String toString() {
-        return "Gift was " + (flag ? "" : "not ") + "promised";
+        return "the gift was " + (flag ? "" : "not ") + "promised";
     }
 }

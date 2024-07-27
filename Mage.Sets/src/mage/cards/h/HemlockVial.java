@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class HemlockVial extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent("Each equipped creature and Equipment you control");
 
     static {
         filter.add(Predicates.or(

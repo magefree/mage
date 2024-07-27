@@ -248,12 +248,14 @@ public final class GamePanel extends javax.swing.JPanel {
 
         resizeTimer = new Timer(1000, evt -> SwingUtilities.invokeLater(() -> {
             resizeTimer.stop();
-            setGUISize();
+            setGUISize(false);
             feedbackPanel.changeGUISize();
         }));
 
         pnlHelperHandButtonsStackArea.addComponentListener(componentAdapterPlayField);
         initComponents = false;
+
+        setGUISize(true);
     }
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
@@ -377,7 +379,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void changeGUISize() {
         initComponents = true;
-        setGUISize();
+        setGUISize(true);
         stackObjects.changeGUISize();
         feedbackPanel.changeGUISize();
         handContainer.changeGUISize();
@@ -418,7 +420,7 @@ public final class GamePanel extends javax.swing.JPanel {
         initComponents = false;
     }
 
-    private void setGUISize() {
+    private void setGUISize(boolean themeReload) {
         jSplitPane0.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
@@ -453,7 +455,9 @@ public final class GamePanel extends javax.swing.JPanel {
         pnlShortCuts.setMinimumSize(newDimension);
         pnlShortCuts.setMaximumSize(newDimension);
 
-        reloadThemeRelatedGraphic();
+        if (themeReload) {
+            reloadThemeRelatedGraphic();
+        }
     }
 
     private void reloadThemeRelatedGraphic() {
@@ -485,6 +489,20 @@ public final class GamePanel extends javax.swing.JPanel {
         phaseButtons.forEach((phaseName, phaseButton) -> {
             phaseButton.update(phaseButton.getText(), ImageManagerImpl.instance.getPhaseImage(phaseName));
         });
+
+        // player panels
+        if (lastGameData.game != null) {
+            lastGameData.game.getPlayers().forEach(player -> {
+                PlayAreaPanel playPanel = this.players.getOrDefault(player.getPlayerId(), null);
+                if (playPanel != null) {
+                    // see test render dialog for refresh commands order
+                    playPanel.getPlayerPanel().fullRefresh(GUISizeHelper.playerPanelGuiScale);
+                    playPanel.init(player, bigCard, gameId, player.getPriorityTimeLeftSecs());
+                    playPanel.update(lastGameData.game, player, lastGameData.targets);
+                    playPanel.getPlayerPanel().sizePlayerPanel(isSmallMode());
+                }
+            });
+        }
     }
 
     private void saveDividerLocations() {
@@ -521,7 +539,13 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
+    private boolean isSmallMode() {
+        // TODO: no needs on gui scale?
+        return this.getBounds().height < 770;
+    }
+
     private void sizeToScreen() {
+        // on resize frame
         Rectangle rect = this.getBounds();
 
         if (rect.height < 770) {
@@ -534,7 +558,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 pnlShortCuts.revalidate();
                 pnlShortCuts.repaint();
                 for (PlayAreaPanel p : players.values()) {
-                    p.setSizeMode(smallMode);
+                    p.getPlayerPanel().sizePlayerPanel(smallMode);
                 }
             }
         } else if (smallMode) {
@@ -546,7 +570,7 @@ public final class GamePanel extends javax.swing.JPanel {
             pnlShortCuts.revalidate();
             pnlShortCuts.repaint();
             for (PlayAreaPanel p : players.values()) {
-                p.setSizeMode(smallMode);
+                p.getPlayerPanel().sizePlayerPanel(smallMode);
             }
         }
 
@@ -667,6 +691,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public synchronized void init(int messageId, GameView game, boolean callGameUpdateAfterInit) {
         addPlayers(game);
+
         // default menu states
         setMenuStates(
                 PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
@@ -772,8 +797,10 @@ public final class GamePanel extends javax.swing.JPanel {
                 break;
             }
         }
+
+        // set init sizes
         for (PlayAreaPanel p : players.values()) {
-            p.setSizeMode(smallMode);
+            p.getPlayerPanel().sizePlayerPanel(isSmallMode());
         }
 
         GridBagConstraints panelC = new GridBagConstraints();
@@ -785,21 +812,6 @@ public final class GamePanel extends javax.swing.JPanel {
         this.pnlBattlefield.add(topPanel, panelC);
         panelC.gridy = 1;
         this.pnlBattlefield.add(bottomPanel, panelC);
-
-        // TODO: combat arrows aren't visible on re-connect, must click on avatar to update correctrly
-        //  reason: panels aren't visible/located here, so battlefieldpanel see wrong sizes
-        // recalc all component sizes and update permanents/arrows positions
-        // if you don't do it here then will catch wrong arrows drawing on re-connect (no sortLayout calls)
-        /*
-        this.validate();
-        for (Map.Entry<UUID, PlayAreaPanel> p : players.entrySet()) {
-            PlayerView playerView = game.getPlayers().stream().filter(view -> view.getPlayerId().equals(p.getKey())).findFirst().orElse(null);
-            if (playerView != null) {
-                p.getValue().getBattlefieldPanel().updateSize();
-                p.getValue().update(null, playerView, null);
-            }
-        }
-         */
     }
 
     public synchronized void updateGame(int messageId, GameView game) {
@@ -2422,8 +2434,6 @@ public final class GamePanel extends javax.swing.JPanel {
         btnPreviousPlay.addActionListener(evt -> btnPreviousPlayActionPerformed(evt));
 
         initPopupMenuTriggerOrder();
-
-        setGUISize();
 
         // Replay panel to control replay of games
         javax.swing.GroupLayout gl_pnlReplay = new javax.swing.GroupLayout(pnlReplay);

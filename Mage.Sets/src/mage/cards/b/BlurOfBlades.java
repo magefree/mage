@@ -1,8 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -10,6 +8,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,9 +22,7 @@ public final class BlurOfBlades extends CardImpl {
         
         // Put a -1/-1 counter on target creature. Blur of Blades deals 2 damage to that creature's controller.
         getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance(1)));
-        Effect effect = new DamageTargetControllerEffect(2);
-        effect.setText("{this} deals 2 damage to that creature's controller");
-        getSpellAbility().addEffect(effect);
+        getSpellAbility().addEffect(new DamageTargetControllerEffect(2));
         getSpellAbility().addTarget(new TargetCreaturePermanent());
         
     }

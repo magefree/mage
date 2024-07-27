@@ -45,7 +45,7 @@ public final class MoonstoneEulogist extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT_AN
         );
-        ability.addEffect(new GainLifeEffect(2).concatBy("and"));
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 

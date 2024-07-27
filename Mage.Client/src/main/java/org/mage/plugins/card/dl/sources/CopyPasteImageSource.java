@@ -239,10 +239,6 @@ public enum CopyPasteImageSource implements CardImageSource {
     }
 
     @Override
-    public void doPause(String httpImageUrl) {
-    }
-
-    @Override
     public boolean isCardImageProvided(String setCode, String cardName) {
         missingCards.add(setCode + "/" + cardName);
 

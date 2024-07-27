@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.abilities.keyword.ToxicAbility;
 import mage.cards.CardImpl;
@@ -45,7 +46,7 @@ public final class BloodrootApothecary extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(new TreasureToken()).setText("you")
         );
-        ability.addEffect(new CreateTokenEffect(new TreasureToken())
+        ability.addEffect(new CreateTokenTargetEffect(new TreasureToken())
                 .setText("and target opponent each create a Treasure token"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

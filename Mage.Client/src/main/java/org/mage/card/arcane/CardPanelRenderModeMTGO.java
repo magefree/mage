@@ -309,18 +309,19 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // Create image to render to
         BufferedImage image
                 = GraphicsUtilities.createCompatibleTranslucentImage(cardWidth, cardHeight);
-        Graphics2D g2d = image.createGraphics();
+        Graphics2D g2 = image.createGraphics();
+        try {
+            // Render with Antialialsing
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-        // Render with Antialialsing
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            // Draw card itself
+            cardRenderer.draw(g2, getAttributes(), image);
+        } finally {
+            g2.dispose();
+        }
 
-        // Draw card itself
-        cardRenderer.draw(g2d, getAttributes(), image);
-
-        // Done
-        g2d.dispose();
         return image;
     }
 }

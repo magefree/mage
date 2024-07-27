@@ -40,6 +40,7 @@ public class KeyboundButton extends JButton {
 
     @Override
     protected void paintComponent(Graphics g) {
+        // must ignore look and fill, so no calls of super.paintComponent(g);
         if (ui != null && g != null) {
             Graphics sg = g.create();
             try {

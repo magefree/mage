@@ -230,6 +230,7 @@ public final class CardImageUtils {
 
     public static void checkAndFixImageFiles() {
         // search broken, temp or outdated files and delete it
+        // real images check is slow, so it used on images download only (not here)
         Path rootPath = new File(CardImageUtils.getImagesDir()).toPath();
         if (!Files.exists(rootPath)) {
             return;

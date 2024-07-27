@@ -7,6 +7,7 @@ import org.mage.card.arcane.CardRenderer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Field;
 import java.util.Locale;
 
 /**
@@ -61,6 +62,8 @@ public final class GUISizeHelper {
 
     public static Dimension handCardDimension;
     public static int stackWidth; // percent
+
+    public static float playerPanelGuiScale;
 
     public static Dimension otherZonesCardDimension;
     public static int otherZonesCardVerticalOffset;
@@ -126,7 +129,7 @@ public final class GUISizeHelper {
         gameRequestsFont = new Font("Arial", 0, dialogFontSize);
 
         // used in the feedback area of the game panel
-        int feedbackFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_FEEDBACK_AREA_SIZE, 14);
+        int feedbackFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_FEEDBACK_FONT_SIZE, 14);
         gameDialogAreaFontSizeBig = feedbackFontSize;
         gameDialogAreaFontSizeTooltip = feedbackFontSize - 2;
         gameDialogAreaFontSizeSmall = (feedbackFontSize / 2) + 2;
@@ -148,6 +151,8 @@ public final class GUISizeHelper {
         int handCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_HAND_SIZE, 14);
         handCardDimension = new Dimension(CARD_IMAGE_WIDTH * handCardSize / 42, CARD_IMAGE_HEIGHT * handCardSize / 42);
         stackWidth = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_STACK_WIDTH, 30);
+
+        playerPanelGuiScale = (float) (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_PLAYER_PANEL_SIZE, 14) / 14.0);
 
         int otherZonesCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OTHER_ZONES_SIZE, 14);
         otherZonesCardDimension = new Dimension(CARD_IMAGE_WIDTH * otherZonesCardSize / 42, CARD_IMAGE_HEIGHT * otherZonesCardSize / 42);
@@ -233,5 +238,23 @@ public final class GUISizeHelper {
             return "<html><p style=\"font-size: " + font.getSize() + "pt;\">" + text + "</p>";
         }
         return text;
+    }
+
+    /**
+     * Swing don't store name in the component, so it allow to find component by field's name instead
+     */
+    static public <T extends Component> T getComponentByFieldName(Window dialog, String name) {
+        for (Field field : dialog.getClass().getDeclaredFields()) {
+            try {
+                field.setAccessible(true);
+                if (name.equals(field.getName())) {
+                    final Object potentialMatch = field.get(dialog);
+                    return (T) potentialMatch;
+                }
+
+            } catch (SecurityException | IllegalArgumentException | IllegalAccessException ignore) {
+            }
+        }
+        return null;
     }
 }

@@ -699,10 +699,6 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public void doPause(String httpImageUrl) {
-    }
-
-    @Override
     public List<String> getSupportedSets() {
         return new ArrayList<>(supportedSets);
     }
