@@ -7,15 +7,13 @@ import mage.client.components.ColorPane;
 import mage.client.dialog.MageDialog;
 import mage.client.game.GamePanel;
 import mage.client.util.ImageHelper;
-import mage.remote.Session;
+import mage.util.CardUtil;
 import mage.view.AbilityPickerView;
 import org.apache.log4j.Logger;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 import org.jdesktop.swingx.JXPanel;
-import org.jsoup.Jsoup;
 import org.mage.card.arcane.ManaSymbols;
-import org.mage.card.arcane.UI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,11 +22,13 @@ import java.util.List;
 import java.util.*;
 
 /**
- * GUI: Dialog for choosing abilities (list)
+ * GUI: dialog for choosing abilities (list). Example: ability for activate/cast
  *
  * @author nantuko, JayDi85
  */
 public class AbilityPicker extends JXPanel implements MouseWheelListener {
+
+    // TODO: add gui scale support (form file lost, so it's ok for scale, see PlayerPanelExt)
 
     private static final String DEFAULT_MESSAGE = "Choose spell or ability to play (single-click)";
     private static final int DIALOG_WIDTH = 440;
@@ -100,7 +100,8 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         boolean wasCancelButton = false;
         for (Map.Entry<UUID, String> choice : choices.getChoices().entrySet()) {
             wasCancelButton = wasCancelButton || choice.getKey().equals(Modes.CHOOSE_OPTION_CANCEL_ID);
-            this.choices.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
+            String htmlText = "<html>" + ManaSymbols.replaceSymbolsWithHTML(CardUtil.getTextWithFirstCharUpperCase(choice.getValue()), ManaSymbols.Type.TABLE);
+            this.choices.add(new AbilityPickerAction(choice.getKey(), htmlText));
         }
         if (!wasCancelButton) {
             this.choices.add(new AbilityPickerAction(null, "Cancel"));
@@ -190,7 +191,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                                 layout.createSequentialGroup().add(title).addPreferredGap(LayoutStyle.RELATED, 5, Short.MAX_VALUE).add(1, 1, 1)).add(
                                 GroupLayout.LEADING,
                                 layout.createSequentialGroup().add(layout.createParallelGroup(GroupLayout.LEADING)
-                                )
+                                        )
                                         .addPreferredGap(LayoutStyle.RELATED)
                                         .add(
                                                 layout.createParallelGroup(GroupLayout.TRAILING)
@@ -199,16 +200,16 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.LEADING).add(
                 layout.createSequentialGroup().add(
-                        layout.createParallelGroup(GroupLayout.LEADING).add(
-                                layout.createSequentialGroup().add(title, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
-                                        .add(5, 5, 5)
-                                        .add(
-                                                layout.createParallelGroup(GroupLayout.BASELINE)
-                                        )
-                        ).add(layout.createSequentialGroup().add(8, 8, 8)))
+                                layout.createParallelGroup(GroupLayout.LEADING).add(
+                                        layout.createSequentialGroup().add(title, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
+                                                .add(5, 5, 5)
+                                                .add(
+                                                        layout.createParallelGroup(GroupLayout.BASELINE)
+                                                )
+                                ).add(layout.createSequentialGroup().add(8, 8, 8)))
                         .addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(
-                        layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.LEADING)).addPreferredGap(
-                        LayoutStyle.RELATED).add(jScrollPane2, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE).addContainerGap(23, Short.MAX_VALUE)));
+                                layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.LEADING)).addPreferredGap(
+                                LayoutStyle.RELATED).add(jScrollPane2, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE).addContainerGap(23, Short.MAX_VALUE)));
     }
 
     @Override
@@ -355,15 +356,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         public AbilityPickerAction(UUID id, String choice) {
             this.id = id;
-            putValue(Action.NAME, capitalizeFirstLetter(choice));
-        }
-
-        private String capitalizeFirstLetter(String choice) {
-            if (choice == null || choice.isEmpty()) {
-                return choice;
-            }
-            choice = Jsoup.parse(choice).text(); // decode HTML entities and strip tags
-            return choice.substring(0, 1).toUpperCase(Locale.ENGLISH) + choice.substring(1);
+            putValue(Action.NAME, choice);
         }
 
         @Override

@@ -1520,8 +1520,7 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorText() {
-        String colorText = getColor().getDescription();
-        return colorText.substring(0, 1).toUpperCase(Locale.ENGLISH) + colorText.substring(1);
+        return CardUtil.getTextWithFirstCharUpperCase(getColor().getDescription());
     }
 
     public String getTypeText() {

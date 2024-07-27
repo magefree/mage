@@ -983,7 +983,7 @@ public final class CardUtil {
     }
 
     public static String getTextWithFirstCharUpperCase(String text) {
-        if (text != null && text.length() >= 1) {
+        if (text != null && !text.isEmpty()) {
             return Character.toUpperCase(text.charAt(0)) + text.substring(1);
         } else {
             return text;
@@ -991,7 +991,7 @@ public final class CardUtil {
     }
 
     public static String getTextWithFirstCharLowerCase(String text) {
-        if (text != null && text.length() >= 1) {
+        if (text != null && !text.isEmpty()) {
             return Character.toLowerCase(text.charAt(0)) + text.substring(1);
         } else {
             return text;
