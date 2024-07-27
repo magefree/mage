@@ -75,6 +75,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Dour Port-Mage", 47, Rarity.RARE, mage.cards.d.DourPortMage.class));
         cards.add(new SetCardInfo("Downwind Ambusher", 92, Rarity.UNCOMMON, mage.cards.d.DownwindAmbusher.class));
         cards.add(new SetCardInfo("Dreamdew Entrancer", 211, Rarity.RARE, mage.cards.d.DreamdewEntrancer.class));
+        cards.add(new SetCardInfo("Driftgloom Coyote", 11, Rarity.UNCOMMON, mage.cards.d.DriftgloomCoyote.class));
         cards.add(new SetCardInfo("Druid of the Spade", 170, Rarity.COMMON, mage.cards.d.DruidOfTheSpade.class));
         cards.add(new SetCardInfo("Early Winter", 93, Rarity.COMMON, mage.cards.e.EarlyWinter.class));
         cards.add(new SetCardInfo("Eddymurk Crab", 48, Rarity.UNCOMMON, mage.cards.e.EddymurkCrab.class));
