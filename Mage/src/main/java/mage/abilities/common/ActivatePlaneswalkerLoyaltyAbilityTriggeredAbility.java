@@ -17,9 +17,6 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
     private final SubType planeswalkerSubType;
     protected final SetTargetPointer setTargetPointer;
 
-    public ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(Effect effect, SubType planeswalkerSubType) {
-        this(effect, planeswalkerSubType, SetTargetPointer.NONE);
-    }
     public ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(Effect effect, SubType planeswalkerSubType, SetTargetPointer setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, false);
         this.planeswalkerSubType = planeswalkerSubType;
@@ -65,6 +62,9 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
                 getAllEffects().setTargetPointer(new FixedTarget(getControllerId(), game));
                 break;
             case SPELL:
+                getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                break;
+            case PERMANENT:
                 getAllEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
                 break;
             default:

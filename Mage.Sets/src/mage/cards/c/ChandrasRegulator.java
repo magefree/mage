@@ -14,6 +14,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
@@ -43,7 +44,9 @@ public final class ChandrasRegulator extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever you activate a loyalty ability of a Chandra planeswalker, you may pay {1}. If you do, copy that ability. You may choose new targets for the copy.
-        this.addAbility(new ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(new DoIfCostPaid(new CopyStackObjectEffect(), new ManaCostsImpl<>("{1}")), SubType.CHANDRA));
+        this.addAbility(new ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(
+                new DoIfCostPaid(new CopyStackObjectEffect(), new ManaCostsImpl<>("{1}")),
+                SubType.CHANDRA, SetTargetPointer.SPELL));
 
         // {1}, {T}, Discard a Mountain card or a red card: Draw a card.
         Ability ability = new SimpleActivatedAbility(

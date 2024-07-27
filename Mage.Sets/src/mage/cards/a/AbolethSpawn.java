@@ -93,7 +93,6 @@ class AbolethSpawnTriggeredAbility extends TriggeredAbilityImpl {
         if (triggerEvent.getSourceId() != permanent.getId()) {
             return false; // only triggered abilities of that creature
         }
-        // CopyStackObjectEffect needs value set
         getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
