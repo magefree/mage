@@ -11,7 +11,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public interface AlternativeSourceCosts {
+public interface AlternativeSourceCosts extends Ability {
 
     /**
      * If non-Default, allow to link this cost to permission abilities

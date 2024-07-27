@@ -142,7 +142,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     @Override
     public String getAlternativeCostText(Ability ability, Game game) {
         if (dynamicCost != null) {
-            return "Cast with alternative cost: " + dynamicCost.getText(ability, game) + " (" + CardUtil.getSourceIdName(game, this) + ")";
+            return "Cast with alternative cost: " + dynamicCost.getText(ability, game) + CardUtil.getSourceLogName(game, this);
         } else {
             Costs<AlternativeCost> alternativeCostsToCheck;
             if (dynamicCost != null) {
@@ -152,8 +152,8 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                 alternativeCostsToCheck = this.alternateCosts;
             }
             return alternativeCostsToCheck.isEmpty()
-                    ? "Cast without paying its mana cost (" + CardUtil.getSourceIdName(game, this) + ")"
-                    : "Cast with alternative cost: " + alternativeCostsToCheck.getText() + " (" + CardUtil.getSourceIdName(game, this) + ")";
+                    ? "Cast without paying its mana cost" + CardUtil.getSourceLogName(game, this)
+                    : "Cast with alternative cost: " + alternativeCostsToCheck.getText() + CardUtil.getSourceLogName(game, this);
         }
     }
 

@@ -20,6 +20,7 @@ import mage.abilities.icon.CardIcon;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
@@ -551,20 +552,33 @@ public abstract class AbilityImpl implements Ability {
                             ? "Choose an alternative cost"
                             : "You may choose an alternative cost"
             );
-            Map<String, String> list = new LinkedHashMap<>();
             Map<String, Integer> sort = new LinkedHashMap<>();
             int i;
             for (i = 0; i < possibleAlternatives.size(); i++) {
-                list.put(Integer.toString(i + 1), possibleAlternatives.get(i).getAlternativeCostText(this, game));
-                sort.put(Integer.toString(i + 1), i);
+                String key = Integer.toString(i + 1);
+                sort.put(key, i);
+                AlternativeSourceCosts alternative = possibleAlternatives.get(i);
+                MageObject object = alternative.getSourceObject(game);
+                choice.withItem(
+                        key,
+                        possibleAlternatives.get(i).getAlternativeCostText(this, game),
+                        i,
+                        object != null ? ChoiceHintType.GAME_OBJECT : null,
+                        object != null ? object.getId().toString() : null
+                );
             }
             if (!mustChooseAlternative) {
                 // add the non-alternative cast as the last option.
-                list.put(Integer.toString(i + 1), "Cast with no alternative cost: " + this.getManaCosts().getText());
-                sort.put(Integer.toString(i + 1), i);
+                String key = Integer.toString(i + 1);
+                sort.put(key, i);
+                choice.withItem(
+                        key,
+                        "Cast with no alternative cost: " + this.getManaCosts().getText(),
+                        i,
+                        ChoiceHintType.GAME_OBJECT,
+                        sourceObject.getId().toString()
+                );
             }
-            choice.setKeyChoices(list);
-            choice.setSortData(sort);
             if (!player.choose(Outcome.Benefit, choice, game)) {
                 return false;
             }
