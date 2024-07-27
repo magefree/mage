@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -54,6 +55,6 @@ public class GetEmblemTargetPlayerEffect extends OneShotEffect {
             return staticText;
         }
         return getTargetPointer().describeTargets(mode.getTargets(), "that player")
-                + " gets an emblem with \"" + String.join("; ", emblem.getAbilities().getRules(null)) + "\"";
+                + " gets an emblem with \"" + String.join("; ", emblem.getAbilities().getRules()) + "\"";
     }
 }

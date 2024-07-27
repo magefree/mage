@@ -230,13 +230,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public List<String> getRules() {
         Abilities<Ability> sourceAbilities = this.getAbilities();
-        return CardUtil.getCardRulesWithAdditionalInfo(this.getId(), this.getName(), sourceAbilities, sourceAbilities);
+        return CardUtil.getCardRulesWithAdditionalInfo(this, sourceAbilities, sourceAbilities);
     }
 
     @Override
     public List<String> getRules(Game game) {
         Abilities<Ability> sourceAbilities = this.getAbilities(game);
-        return CardUtil.getCardRulesWithAdditionalInfo(game, this.getId(), this.getName(), sourceAbilities, sourceAbilities);
+        return CardUtil.getCardRulesWithAdditionalInfo(game, this, sourceAbilities, sourceAbilities);
     }
 
     /**

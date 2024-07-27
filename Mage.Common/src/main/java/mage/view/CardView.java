@@ -821,7 +821,7 @@ public class CardView extends SimpleCardView {
             this.mageObjectType = MageObjectType.EMBLEM;
             Emblem emblem = (Emblem) object;
             this.rarity = Rarity.SPECIAL;
-            this.rules = new ArrayList<>(emblem.getAbilities().getRules(emblem.getName()));
+            this.rules = new ArrayList<>(emblem.getAbilities().getRules(game, emblem));
         } else if (object instanceof Dungeon) {
             this.mageObjectType = MageObjectType.DUNGEON;
             Dungeon dungeon = (Dungeon) object;
@@ -834,14 +834,14 @@ public class CardView extends SimpleCardView {
             this.frameStyle = FrameStyle.M15_NORMAL;
             // Display in landscape/rotated/on its side
             this.rotate = true;
-            this.rules = new ArrayList<>(plane.getAbilities().getRules(plane.getName()));
+            this.rules = new ArrayList<>(plane.getAbilities().getRules(game, plane));
         } else if (object instanceof Designation) {
             this.mageObjectType = MageObjectType.DESIGNATION;
             Designation designation = (Designation) object;
             this.rarity = Rarity.SPECIAL;
             this.frameStyle = FrameStyle.M15_NORMAL;
             // Display in landscape/rotated/on its side
-            this.rules = new ArrayList<>(designation.getAbilities().getRules(designation.getName()));
+            this.rules = new ArrayList<>(designation.getAbilities().getRules(game, designation));
         }
         if (this.rarity == null && object instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) object;
@@ -1106,7 +1106,7 @@ public class CardView extends SimpleCardView {
         this.name = token.getName();
         this.displayName = token.getName();
         this.displayFullName = token.getName();
-        this.rules = new ArrayList<>(token.getAbilities().getRules(this.name));
+        this.rules = new ArrayList<>(token.getAbilities().getRules(game, token));
         this.power = token.getPower().toString();
         this.toughness = token.getToughness().toString();
         this.loyalty = "";

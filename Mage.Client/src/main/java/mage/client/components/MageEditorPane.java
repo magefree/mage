@@ -152,7 +152,7 @@ public class MageEditorPane extends JEditorPane {
                 if (cardView == null) {
                     Plane plane = Plane.createPlaneByFullName(cardName);
                     if (plane != null) {
-                        cardView = new CardView(new PlaneView(plane));
+                        cardView = new CardView(new PlaneView(plane, null));
                     }
                 }
 

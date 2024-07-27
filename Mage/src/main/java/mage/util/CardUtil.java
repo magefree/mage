@@ -1207,9 +1207,9 @@ public final class CardUtil {
         }
     }
 
-    public static List<String> getCardRulesWithAdditionalInfo(UUID cardId, String cardName,
+    public static List<String> getCardRulesWithAdditionalInfo(MageObject object,
                                                               Abilities<Ability> rulesSource, Abilities<Ability> hintAbilities) {
-        return getCardRulesWithAdditionalInfo(null, cardId, cardName, rulesSource, hintAbilities);
+        return getCardRulesWithAdditionalInfo(null, object, rulesSource, hintAbilities);
     }
 
     /**
@@ -1218,10 +1218,10 @@ public final class CardUtil {
      * @param rulesSource abilities list to show as rules
      * @param hintsSource abilities list to show as card hints only (you can add additional hints here; example: from second or transformed side)
      */
-    public static List<String> getCardRulesWithAdditionalInfo(Game game, UUID cardId, String cardName,
+    public static List<String> getCardRulesWithAdditionalInfo(Game game, MageObject object,
                                                               Abilities<Ability> rulesSource, Abilities<Ability> hintsSource) {
         try {
-            List<String> rules = rulesSource.getRules(cardName);
+            List<String> rules = rulesSource.getRules();
 
             if (game == null || game.getPhase() == null) {
                 // dynamic hints for started game only
@@ -1229,7 +1229,10 @@ public final class CardUtil {
             }
 
             // additional effect's info from card.addInfo methods
-            rules.addAll(game.getState().getCardState(cardId).getInfo().values());
+            CardState cardState = game.getState().getCardState(object.getId());
+            if (cardState != null) {
+                rules.addAll(cardState.getInfo().values());
+            }
 
             // ability hints
             List<String> abilityHints = new ArrayList<>();
@@ -1254,7 +1257,7 @@ public final class CardUtil {
 
             return rules;
         } catch (Exception e) {
-            logger.error("Exception in rules generation for card: " + cardName, e);
+            logger.error("Exception in rules generation for object: " + object.getName(), e);
         }
         return RULES_ERROR_INFO;
     }

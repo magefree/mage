@@ -48,6 +48,7 @@ import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.command.emblems.EmblemOfCard;
 import mage.game.command.emblems.RadiationEmblem;
 import mage.game.command.emblems.TheRingEmblem;
+import mage.game.command.emblems.XmageHelperEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -444,7 +445,7 @@ public abstract class GameImpl implements Game {
                     return designation;
                 }
             }
-            for (Emblem emblem : state.getInherentEmblems()) {
+            for (Emblem emblem : state.getHelperEmblems()) {
                 if (emblem.getId().equals(objectId)) {
                     return emblem;
                 }
@@ -1400,13 +1401,7 @@ public abstract class GameImpl implements Game {
             }
         }
 
-        // Rad counter mechanic for every player
-        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
-            // This is not a real emblem. Just a fake source for the
-            // inherent trigger ability related to Rad counters
-            // Faking a source just to display something on the stack ability.
-            state.addInherentEmblem(new RadiationEmblem(), playerId);
-        }
+        initGameDefaultHelperEmblems();
     }
 
     public void initGameDefaultWatchers() {
@@ -1445,6 +1440,22 @@ public abstract class GameImpl implements Game {
         BloodthirstWatcher bloodthirstWatcher = new BloodthirstWatcher();
         bloodthirstWatcher.setControllerId(playerId);
         getState().addWatcher(bloodthirstWatcher);
+    }
+
+    public void initGameDefaultHelperEmblems() {
+
+        // Rad Counter's trigger source
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            // This is not a real emblem. Just a fake source for the
+            // inherent trigger ability related to Rad counters
+            // Faking a source just to display something on the stack ability.
+            state.addHelperEmblem(new RadiationEmblem(), playerId);
+        }
+
+        // global card hints for better UX
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            state.addHelperEmblem(new XmageHelperEmblem().withCardHint("storm counter", StormAbility.getHint()), playerId);
+        }
     }
 
     protected void sendStartMessage(Player choosingPlayer, Player startingPlayer) {

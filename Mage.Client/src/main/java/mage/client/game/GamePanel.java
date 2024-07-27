@@ -145,6 +145,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
 
             this.game.getMyHand().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getMyHelperEmblems().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
             this.game.getStack().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
             this.game.getExile()
                     .stream()
