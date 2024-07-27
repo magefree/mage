@@ -80,7 +80,7 @@ class MirrorShieldHopliteTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null || !permanent.isCreature(game) || !permanent.isControlledBy(this.getControllerId())) {
             return false;
         }
-        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
         return true;
     }
 }
