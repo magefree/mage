@@ -65,6 +65,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Crumb and Get It", 8, Rarity.COMMON, mage.cards.c.CrumbAndGetIt.class));
         cards.add(new SetCardInfo("Curious Forager", 169, Rarity.UNCOMMON, mage.cards.c.CuriousForager.class));
         cards.add(new SetCardInfo("Daggerfang Duo", 89, Rarity.COMMON, mage.cards.d.DaggerfangDuo.class));
+        cards.add(new SetCardInfo("Daring Waverider", 44, Rarity.UNCOMMON, mage.cards.d.DaringWaverider.class));
         cards.add(new SetCardInfo("Darkstar Augur", 90, Rarity.RARE, mage.cards.d.DarkstarAugur.class));
         cards.add(new SetCardInfo("Dawn's Truce", 9, Rarity.RARE, mage.cards.d.DawnsTruce.class));
         cards.add(new SetCardInfo("Dazzling Denial", 45, Rarity.COMMON, mage.cards.d.DazzlingDenial.class));
