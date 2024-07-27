@@ -62,7 +62,7 @@ public class ActivateAbilityTriggeredAbility extends TriggeredAbilityImpl {
                 getAllEffects().setTargetPointer(new FixedTarget(getControllerId(), game));
                 break;
             case SPELL:
-                getAllEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
+                getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 break;
             default:
                 throw new UnsupportedOperationException("Unexpected setTargetPointer in ActivateAbilityTriggeredAbility: " + setTargetPointer);
