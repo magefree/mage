@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import mage.MageObject;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ProtectionAbility;
@@ -7,6 +8,7 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaAbility;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.util.CardUtil;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
 
@@ -44,12 +46,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     }
 
     @Override
-    public List<String> getRules(String source) {
-        return getRules(source, true);
+    public List<String> getRules() {
+        return getRules(true);
     }
 
     @Override
-    public List<String> getRules(String source, boolean capitalize) {
+    public List<String> getRules(boolean capitalize) {
         List<String> rules = new ArrayList<>();
 
         for (T ability : this) {
@@ -100,6 +102,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         }
 
         return rules;
+    }
+
+    @Override
+    public List<String> getRules(Game game, MageObject object) {
+        Abilities<Ability> sourceAbilities = this.getAllAbilities();
+        return CardUtil.getCardRulesWithAdditionalInfo(game, object, sourceAbilities, sourceAbilities);
     }
 
     /**
@@ -191,6 +199,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 .filter(ProtectionAbility.class::isInstance)
                 .map(ProtectionAbility.class::cast)
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
+    }
+
+    @Override
+    public Abilities<Ability> getAllAbilities() {
+        return stream().collect(Collectors.toCollection(AbilitiesImpl::new));
     }
 
     @Override

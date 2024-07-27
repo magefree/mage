@@ -134,7 +134,7 @@ public abstract class AdventureCard extends CardImpl {
     public List<String> getSharedRules(Game game) {
         // rules without spellcard
         Abilities<Ability> sourceAbilities = this.getSharedAbilities(game);
-        return CardUtil.getCardRulesWithAdditionalInfo(game, this.getId(), this.getName(), sourceAbilities, sourceAbilities);
+        return CardUtil.getCardRulesWithAdditionalInfo(game, this, sourceAbilities, sourceAbilities);
     }
 
     @Override

@@ -163,7 +163,7 @@ public class CardHintsHelperDialog extends MageDialog implements MageDesktopIcon
         settings.add(this.currentGroup.toString());
 
         // from search
-        if (this.currentSearch.length() > 0 && !this.currentSearch.equals(SEARCH_EMPTY_TEXT)) {
+        if (!this.currentSearch.isEmpty() && !this.currentSearch.equals(SEARCH_EMPTY_TEXT)) {
             settings.add(this.currentSearch);
         }
 
@@ -233,6 +233,11 @@ public class CardHintsHelperDialog extends MageDialog implements MageDesktopIcon
         // hand
         this.lastGameView.getMyHand().values().forEach(card -> {
             this.lastHints.add(new CardHintInfo(currentPlayer, "hand", card));
+        });
+
+        // helper emblems for better UX
+        this.lastGameView.getMyHelperEmblems().values().forEach(card -> {
+            this.lastHints.add(new CardHintInfo(currentPlayer, "xmage", card));
         });
 
         // stack

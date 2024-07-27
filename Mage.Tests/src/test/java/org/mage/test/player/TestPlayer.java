@@ -2892,7 +2892,7 @@ public class TestPlayer implements Player {
                         break;
                     }
                 }
-                Assert.fail(String.format("Missing choice in multi amount: %s (pos %d - %s)", type.getHeader(), i + 1, messages.get(i)));
+                Assert.fail(String.format("Missing choice in multi amount: %s (pos %d - %s)", type.getHeader(), i, messages));
             }
 
             // extra check

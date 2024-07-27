@@ -658,7 +658,7 @@ public final class ManaUtil {
         return getColorIdentity(
                 token.getColor(),
                 String.join("", token.getManaCostSymbols()),
-                token.getAbilities().getRules(token.getName()),
+                token.getAbilities().getRules(),
                 token.getBackFace() == null ? null : token.getBackFace().getCopySourceCard()
         );
     }

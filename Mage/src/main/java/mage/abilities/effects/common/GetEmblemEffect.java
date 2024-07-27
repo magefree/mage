@@ -46,7 +46,7 @@ public class GetEmblemEffect extends OneShotEffect {
     public String getText() {
         StringBuilder sb = new StringBuilder();
         sb.append("you get an emblem with \"");
-        List<String> rules = emblem.getAbilities().getRules(null);
+        List<String> rules = emblem.getAbilities().getRules();
         sb.append(rules.get(0));
         if (rules.size() == 2) {
             sb.append("\" and \"");

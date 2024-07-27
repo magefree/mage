@@ -192,7 +192,7 @@ public class LevelerCardBuilder {
             sb.append(power);
             sb.append('/');
             sb.append(toughness);
-            List<String> abilityText = abilities.getRules("{this}");
+            List<String> abilityText = abilities.getRules();
             if (!abilityText.isEmpty()) {
                 sb.append("<br>");
                 sb.append(abilityText.stream().collect(Collectors.joining("<br>")));

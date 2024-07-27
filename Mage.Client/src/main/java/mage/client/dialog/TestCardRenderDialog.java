@@ -223,20 +223,20 @@ public class TestCardRenderDialog extends MageDialog {
         return cardView;
     }
 
-    private AbilityView createEmblem(Emblem emblem) {
-        AbilityView emblemView = new AbilityView(emblem.getAbilities().get(0), emblem.getName(), new CardView(new EmblemView(emblem)));
+    private AbilityView createEmblem(Game game, Emblem emblem) {
+        AbilityView emblemView = new AbilityView(emblem.getAbilities().get(0), emblem.getName(), new CardView(new EmblemView(emblem, game)));
         emblemView.setName(emblem.getName());
         return emblemView;
     }
 
-    private AbilityView createDungeon(Dungeon dungeon) {
+    private AbilityView createDungeon(Game game, Dungeon dungeon) {
         AbilityView emblemView = new AbilityView(dungeon.getAbilities().get(0), dungeon.getName(), new CardView(new DungeonView(dungeon)));
         emblemView.setName(dungeon.getName());
         return emblemView;
     }
 
-    private AbilityView createPlane(Plane plane) {
-        AbilityView planeView = new AbilityView(plane.getAbilities().get(0), plane.getName(), new CardView(new PlaneView(plane)));
+    private AbilityView createPlane(Game game, Plane plane) {
+        AbilityView planeView = new AbilityView(plane.getAbilities().get(0), plane.getName(), new CardView(new PlaneView(plane, game)));
         planeView.setName(plane.getName());
         return planeView;
     }
