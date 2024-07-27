@@ -41,11 +41,6 @@ public class CopyStackObjectEffect extends OneShotEffect {
         if (object == null) {
             object = (StackObject) game.getLastKnownInformation(id, Zone.STACK);
         }
-        if (object == null) {
-            game.debugMessage("copying " + id + " not found");
-        } else {
-            game.debugMessage("copying " + id + " found " + object.getId());
-        }
         if (controller == null || object == null) {
             return false;
         }

@@ -77,12 +77,9 @@ enum UnboundFlourishingCostContainsXPredicate implements Predicate<StackObject> 
 
     @Override
     public boolean apply(StackObject input, Game game) {
-        game.debugMessage("checking " + input.getName() + " / " + input.getId());
         if (input instanceof Spell) {
-            game.debugMessage("spell good " + ((Spell) input).getSpellAbility().getManaCostsToPay().containsX());
             return ((Spell) input).getSpellAbility().getManaCostsToPay().containsX();
         } else if (input instanceof StackAbility) {
-            game.debugMessage("ability good " + input.getStackAbility().getManaCostsToPay().containsX());
             return input.getStackAbility().getManaCostsToPay().containsX();
         } else {
             return false;
