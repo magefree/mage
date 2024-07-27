@@ -80,7 +80,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private String basicTooltipText;
     private static final Map<UUID, Integer> playerLives = new HashMap<>();
 
-    private Font defaultFont = null;
+    private final Font defaultFont;
 
     private PriorityTimer timer;
 
@@ -102,6 +102,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         this.cleanUp();
         this.removeAll();
         this.createAllComponents(guiScaleMod);
+        this.invalidate();
     }
 
     public void createAllComponents(float guiScaleMod) {

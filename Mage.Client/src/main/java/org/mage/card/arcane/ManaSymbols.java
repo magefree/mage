@@ -604,18 +604,13 @@ public final class ManaSymbols {
     }
 
     /**
-     * Replace images/icons code by real html links. Uses in many places.
-     *
-     * @param value
-     * @param type
-     * @return
+     * Replace images/icons code by real html images. Client side code.
      */
-    public static synchronized String replaceSymbolsWithHTML(String value, Type type) {
-
+    public static String replaceSymbolsWithHTML(String value, Type destType) {
         // mana cost to HTML images (urls to files)
-        // do not use it for new code - try to suppotr svg render
+        // do not use it for new code - try to support svg render
         int symbolSize;
-        switch (type) {
+        switch (destType) {
             case TABLE:
                 symbolSize = GUISizeHelper.symbolTableSize;
                 break;
@@ -634,15 +629,13 @@ public final class ManaSymbols {
                 break;
         }
 
-        // auto size
-        ResourceSymbolSize needSize = null;
-        if (symbolSize <= 15) {
-            needSize = ResourceSymbolSize.SMALL;
-        } else if (symbolSize <= 25) {
-            needSize = ResourceSymbolSize.MEDIUM;
-        } else {
-            needSize = ResourceSymbolSize.LARGE;
-        }
+        return replaceSymbolsWithHTML(value, symbolSize);
+    }
+
+    /**
+     * Replace images/icons code by real html images. Client side code.
+     */
+    public static String replaceSymbolsWithHTML(String value, int symbolsSize) {
 
         // replace every {symbol} to <img> link
         // ignore data backup
@@ -658,26 +651,26 @@ public final class ManaSymbols {
         replaced = replaced.replace(CardInfo.SPLIT_MANA_SEPARATOR_FULL, CardInfo.SPLIT_MANA_SEPARATOR_RENDER);
         replaced = REPLACE_SYMBOLS_PATTERN.matcher(replaced).replaceAll(
                 "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2$3" + ".png' alt='$1$2$3' width="
-                        + symbolSize + " height=" + symbolSize + '>');
+                        + symbolsSize + " height=" + symbolsSize + '>');
 
         // replace hint icons
         if (replaced.contains(HintUtils.HINT_ICON_GOOD)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_GOOD, GuiDisplayUtil.getHintIconHtml("good", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_GOOD, GuiDisplayUtil.getHintIconHtml("good", symbolsSize) + "&nbsp;");
         }
         if (replaced.contains(HintUtils.HINT_ICON_BAD)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_BAD, GuiDisplayUtil.getHintIconHtml("bad", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_BAD, GuiDisplayUtil.getHintIconHtml("bad", symbolsSize) + "&nbsp;");
         }
         if (replaced.contains(HintUtils.HINT_ICON_RESTRICT)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_RESTRICT, GuiDisplayUtil.getHintIconHtml("restrict", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_RESTRICT, GuiDisplayUtil.getHintIconHtml("restrict", symbolsSize) + "&nbsp;");
         }
         if (replaced.contains(HintUtils.HINT_ICON_REQUIRE)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_REQUIRE, GuiDisplayUtil.getHintIconHtml("require", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_REQUIRE, GuiDisplayUtil.getHintIconHtml("require", symbolsSize) + "&nbsp;");
         }
         if (replaced.contains(HintUtils.HINT_ICON_DUNGEON_ROOM_CURRENT)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_DUNGEON_ROOM_CURRENT, GuiDisplayUtil.getHintIconHtml("arrow-right-square-fill-green", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_DUNGEON_ROOM_CURRENT, GuiDisplayUtil.getHintIconHtml("arrow-right-square-fill-green", symbolsSize) + "&nbsp;");
         }
         if (replaced.contains(HintUtils.HINT_ICON_DUNGEON_ROOM_NEXT)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_DUNGEON_ROOM_NEXT, GuiDisplayUtil.getHintIconHtml("arrow-down-right-square fill-yellow", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_DUNGEON_ROOM_NEXT, GuiDisplayUtil.getHintIconHtml("arrow-down-right-square fill-yellow", symbolsSize) + "&nbsp;");
         }
 
         // ignored data restore

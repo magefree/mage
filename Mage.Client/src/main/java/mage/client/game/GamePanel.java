@@ -290,12 +290,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.players.clear();
         this.playersWhoLeft.clear();
 
-        if (jLayeredPane != null) {
-            jLayeredPane.remove(abilityPicker);
-            jLayeredPane.remove(DialogManager.getManager(gameId));
-        }
-        this.abilityPicker.cleanUp();
-        DialogManager.removeGame(gameId);
+        uninstallComponents();
 
         if (pickNumber != null) {
             pickNumber.removeDialog();
@@ -503,6 +498,12 @@ public final class GamePanel extends javax.swing.JPanel {
                     playPanel.getPlayerPanel().sizePlayerPanel(isSmallMode());
                 }
             });
+        }
+
+        // as workaround: can change size for closed ability picker only
+        if (this.abilityPicker != null && !this.abilityPicker.isVisible()) {
+            this.abilityPicker.fullRefresh(GUISizeHelper.dialogsGuiScale);
+            this.abilityPicker.init(gameId, bigCard);
         }
     }
 
@@ -2904,9 +2905,29 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void installComponents() {
         jLayeredPane.setOpaque(false);
-        jLayeredPane.add(abilityPicker, JLayeredPane.MODAL_LAYER);
         jLayeredPane.add(DialogManager.getManager(gameId), JLayeredPane.MODAL_LAYER, 0);
+        installAbilityPicker();
+    }
+
+    private void installAbilityPicker() {
+        jLayeredPane.add(abilityPicker, JLayeredPane.MODAL_LAYER);
         abilityPicker.setVisible(false);
+    }
+
+    private void uninstallComponents() {
+        if (jLayeredPane != null) {
+            jLayeredPane.remove(DialogManager.getManager(gameId));
+        }
+        DialogManager.removeGame(gameId);
+        uninstallAbilityPicker();
+    }
+
+    private void uninstallAbilityPicker() {
+        abilityPicker.setVisible(false);
+        if (jLayeredPane != null) {
+            jLayeredPane.remove(abilityPicker);
+        }
+        this.abilityPicker.cleanUp();
     }
 
     private void createPhaseButton(String name, MouseAdapter mouseAdapter) {

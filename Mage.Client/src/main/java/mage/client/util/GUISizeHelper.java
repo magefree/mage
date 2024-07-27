@@ -64,6 +64,7 @@ public final class GUISizeHelper {
     public static int stackWidth; // percent
 
     public static float playerPanelGuiScale;
+    public static float dialogsGuiScale;
 
     public static Dimension otherZonesCardDimension;
     public static int otherZonesCardVerticalOffset;
@@ -153,6 +154,9 @@ public final class GUISizeHelper {
         stackWidth = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_STACK_WIDTH, 30);
 
         playerPanelGuiScale = (float) (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_PLAYER_PANEL_SIZE, 14) / 14.0);
+
+        // no needs in special size settings - compare dialog font size to find gui scale
+        dialogsGuiScale = (float) (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_DIALOG_FONT_SIZE, 14) / 14.0);
 
         int otherZonesCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OTHER_ZONES_SIZE, 14);
         otherZonesCardDimension = new Dimension(CARD_IMAGE_WIDTH * otherZonesCardSize / 42, CARD_IMAGE_HEIGHT * otherZonesCardSize / 42);

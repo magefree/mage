@@ -64,7 +64,7 @@ public final class Constants {
     public static final String RESOURCE_SYMBOL_FOLDER_PNG = "png";
 
     public enum ResourceSymbolSize {
-        SMALL,
+        SMALL, // TODO: delete SMALL, MEDIUM and LARGE as outdated (svg or generated png works fine)
         MEDIUM,
         LARGE,
         SVG,
