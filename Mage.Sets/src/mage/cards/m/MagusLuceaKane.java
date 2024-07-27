@@ -18,8 +18,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -94,9 +94,9 @@ class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
         // activated ability
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility != null && !stackAbility.getStackAbility().isManaActivatedAbility()) {
+            if (stackAbility != null) {
                 if (stackAbility.getManaCostsToPay().containsX()) {
-                    this.getEffects().setValue("stackObject", (StackObject) stackAbility);
+                    getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
                     return true;
                 }
             }
@@ -106,7 +106,7 @@ class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                this.getEffects().setValue("stackObject", (StackObject) spell);
+                getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 return true;
             }
         }

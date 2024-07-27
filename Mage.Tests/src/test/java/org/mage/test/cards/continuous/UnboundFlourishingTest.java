@@ -164,6 +164,36 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_OnActivatedAbility_MustCopy2Counter() {
+        addCard(Zone.BATTLEFIELD, playerA, "Unbound Flourishing", 1);
+        //
+        // {X}{R}, {T}, Sacrifice Cinder Elemental: It deals X damage to any target.
+        addCard(Zone.BATTLEFIELD, playerA, "Cinder Elemental", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        //
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        addCard(Zone.HAND, playerB, "Stifle", 1);
+
+        // activate with X=3 and make copy with another target, not double X
+        checkLife("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{R}", playerA);
+        setChoice(playerA, "X=3");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Stifle"); //Counter the original ability, copy must still work
+        addTarget(playerB, "stack ability ({X}{R}, {T}, Sacrifice");
+
+        setChoice(playerA, true); // change target
+        addTarget(playerA, playerB); // change to B
+        checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20); // original damage is countered
+        checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerB, 20 - 3); // copy damage
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
     public void test_VariableManaCost() {
         // VariableManaCost contains:
         // - number of {X} instances (1, 2, 3)

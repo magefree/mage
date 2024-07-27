@@ -22,6 +22,7 @@ import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlaneswalkerPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -101,7 +102,7 @@ class RowansTalentTriggeredAbility extends TriggeredAbilityImpl {
         if (stackObject == null || !(stackObject.getStackAbility() instanceof LoyaltyAbility)) {
             return false;
         }
-        this.getEffects().setValue("stackObject", stackObject);
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 }

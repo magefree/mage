@@ -19,6 +19,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -147,7 +148,7 @@ class LeoriSparktouchedHunterTriggeredAbility extends DelayedTriggeredAbility {
         if (permanent == null || !permanent.isPlaneswalker(game) || !permanent.hasSubtype(subType, game)) {
             return false;
         }
-        this.getEffects().setValue("stackObject", stackAbility);
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 }

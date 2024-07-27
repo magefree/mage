@@ -58,7 +58,7 @@ public final class UnboundFlourishing extends CardImpl {
                 "Whenever you cast an instant or sorcery spell or activate an ability, " +
                         "if that spell's mana cost or that ability's activation cost contains {X}, ",
                 new SpellCastControllerTriggeredAbility(null, filterInstantSorcery, false, SetTargetPointer.SPELL),
-                new ActivateAbilityTriggeredAbility(null, filterAbility)
+                new ActivateAbilityTriggeredAbility(null, filterAbility, SetTargetPointer.SPELL)
         ));
     }
 

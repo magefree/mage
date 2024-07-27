@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
@@ -119,7 +120,7 @@ class DynaheirInvokerAdeptTriggeredAbility extends DelayedTriggeredAbility {
                 || ManaPaidSourceWatcher.getTotalPaid(stackAbility.getId(), game) < 4) {
             return false;
         }
-        this.getEffects().setValue("stackObject", stackAbility);
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 }
