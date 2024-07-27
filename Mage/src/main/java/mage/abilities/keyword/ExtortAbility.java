@@ -28,7 +28,8 @@ public class ExtortAbility extends TriggeredAbilityImpl {
     public ExtortAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(
                 new LoseLifeOpponentsYouGainLifeLostEffect(1),
-                new ManaCostsImpl<>("{W/B}")));
+                new ManaCostsImpl<>("{W/B}"),
+                "Pay {WB} to Extort?"));
     }
 
     protected ExtortAbility(final ExtortAbility ability) {
