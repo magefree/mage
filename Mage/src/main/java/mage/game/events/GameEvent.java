@@ -247,6 +247,7 @@ public class GameEvent implements Serializable {
          */
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
+         WARNING, do not use choose dialogs inside, can be calls multiple types, e.g. on playable checking
          targetId    id of the ability to activate / use
          sourceId    sourceId of the object with that ability
          playerId    player that tries to use this ability

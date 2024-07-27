@@ -10,6 +10,7 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.CommandObject;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -136,6 +137,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         if (!getCosts().canPay(this, this, playerId, game)
                 || !canChooseTarget(game, playerId)) {
             return ActivationStatus.getFalse();
+        }
+
+        // activate restrictions by replacement effects (example: Sharkey, Tyrant of the Shire)
+        if (this.isActivatedAbility()) {
+            if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, this.getId(), this, playerId))) {
+                return ActivationStatus.getFalse();
+            }
         }
 
         // all fine, can be activated

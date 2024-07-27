@@ -22,7 +22,7 @@ public class SimpleCardView implements Serializable, SelectableObjectView {
 
     protected boolean isChoosable;
     protected boolean isSelected;
-    protected PlayableObjectStats playableStats = new PlayableObjectStats();
+    protected PlayableObjectStats playableStats = new PlayableObjectStats(); // filled on client side from GameView
 
     public SimpleCardView(final SimpleCardView view) {
         this.id = view.id;

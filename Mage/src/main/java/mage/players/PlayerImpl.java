@@ -1447,58 +1447,52 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
-
     protected boolean playManaAbility(ActivatedManaAbilityImpl ability, Game game) {
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY,
-                ability.getId(), ability, playerId))) {
-            int bookmark = game.bookmarkState();
-            if (ability.activate(game, false) && ability.resolve(game)) {
-                if (ability.isUndoPossible()) {
-                    if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. useful for undo Nykthos, Shrine to Nyx
-                        setStoredBookmark(bookmark);
-                    }
-                } else {
-                    resetStoredBookmark(game);
+        int bookmark = game.bookmarkState();
+        if (ability.activate(game, false) && ability.resolve(game)) {
+            if (ability.isUndoPossible()) {
+                if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. useful for undo Nykthos, Shrine to Nyx
+                    setStoredBookmark(bookmark);
                 }
-                return true;
+            } else {
+                resetStoredBookmark(game);
             }
-            restoreState(bookmark, ability.getRule(), game);
+            return true;
         }
+        restoreState(bookmark, ability.getRule(), game);
         return false;
     }
 
     protected boolean playAbility(ActivatedAbility ability, Game game) {
         //20091005 - 602.2a
+        int bookmark = game.bookmarkState();
         if (ability.isUsesStack()) {
-            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY,
-                    ability.getId(), ability, playerId))) {
-                int bookmark = game.bookmarkState();
-                setStoredBookmark(bookmark); // move global bookmark to current state (if you activated mana before then you can't rollback it)
-                ability.newId();
-                ability.setControllerId(playerId);
-                game.getStack().push(new StackAbility(ability, playerId));
-                if (ability.activate(game, false)) {
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY,
-                            ability.getId(), ability, playerId));
-                    if (!game.isSimulation()) {
-                        game.informPlayers(getLogName() + ability.getGameLogMessage(game));
-                    }
-                    game.removeBookmark(bookmark);
-                    resetStoredBookmark(game);
-                    return true;
+            // put to stack
+            setStoredBookmark(bookmark); // move global bookmark to current state (if you activated mana before then you can't rollback it)
+            ability.newId();
+            ability.setControllerId(playerId);
+            game.getStack().push(new StackAbility(ability, playerId));
+            if (ability.activate(game, false)) {
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY,
+                        ability.getId(), ability, playerId));
+                if (!game.isSimulation()) {
+                    game.informPlayers(getLogName() + ability.getGameLogMessage(game));
                 }
-                restoreState(bookmark, ability.getRule(), game);
+                game.removeBookmark(bookmark);
+                resetStoredBookmark(game);
+                return true;
             }
+            restoreState(bookmark, ability.getRule(), game);
         } else {
-            int bookmark = game.bookmarkState();
+            // resolve without stack
             if (ability.activate(game, false)) {
                 ability.resolve(game);
                 game.removeBookmark(bookmark);
                 resetStoredBookmark(game);
                 return true;
             }
-            restoreState(bookmark, ability.getRule(), game);
         }
+        restoreState(bookmark, ability.getRule(), game);
         return false;
     }
 
