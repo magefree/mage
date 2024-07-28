@@ -341,6 +341,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Swiftfoot Boots", 242, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 173, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Synth Eradicator", 67, Rarity.RARE, mage.cards.s.SynthEradicator.class));
+        cards.add(new SetCardInfo("Synth Infiltrator", 40, Rarity.RARE, mage.cards.s.SynthInfiltrator.class));
         cards.add(new SetCardInfo("T-45 Power Armor", 145, Rarity.RARE, mage.cards.t.T45PowerArmor.class));
         cards.add(new SetCardInfo("Tainted Field", 298, Rarity.UNCOMMON, mage.cards.t.TaintedField.class));
         cards.add(new SetCardInfo("Tainted Isle", 299, Rarity.UNCOMMON, mage.cards.t.TaintedIsle.class));
