@@ -276,6 +276,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Puresteel Paladin", 170, Rarity.RARE, mage.cards.p.PuresteelPaladin.class));
         cards.add(new SetCardInfo("Putrefy", 219, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Radstorm", 37, Rarity.RARE, mage.cards.r.Radstorm.class));
+        cards.add(new SetCardInfo("Rampaging Yao Guai", 82, Rarity.RARE, mage.cards.r.RampagingYaoGuai.class));
         cards.add(new SetCardInfo("Rampant Growth", 204, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Rancor", 205, Rarity.UNCOMMON, mage.cards.r.Rancor.class));
         cards.add(new SetCardInfo("Raul, Trouble Shooter", 115, Rarity.UNCOMMON, mage.cards.r.RaulTroubleShooter.class));
