@@ -436,6 +436,7 @@ public final class GamePanel extends javax.swing.JPanel {
         handContainer.setPreferredSize(newDimension);
         handContainer.setMaximumSize(newDimension);
 
+        // stack
         newDimension = new Dimension(
                 newStackWidth,
                 MageActionCallback.getHandOrStackMargins(Zone.STACK).getHeight() + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize
@@ -446,6 +447,11 @@ public final class GamePanel extends javax.swing.JPanel {
         stackObjects.setMaximumSize(newDimension);
         stackObjects.changeGUISize(); // must call to cards fit
 
+        // game logs and chat
+        userChatPanel.changeGUISize(GUISizeHelper.chatFont);
+        gameChatPanel.changeGUISize(GUISizeHelper.chatFont);
+
+        // skip buttons
         newDimension = new Dimension(newStackWidth, (int) pnlShortCuts.getPreferredSize().getHeight());
         pnlShortCuts.setPreferredSize(newDimension);
         pnlShortCuts.setMinimumSize(newDimension);
@@ -1401,6 +1407,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // open new
         CardHintsHelperDialog newDialog = new CardHintsHelperDialog();
+        newDialog.setSize(GUISizeHelper.dialogGuiScaleSize(newDialog.getSize()));
         newDialog.setGameData(this.lastGameData.game, this.gameId, this.bigCard);
         cardHintsWindows.put(code + UUID.randomUUID(), newDialog);
         MageFrame.getDesktop().add(newDialog, JLayeredPane.PALETTE_LAYER);

@@ -125,6 +125,10 @@ public class PlayersChatPanel extends javax.swing.JPanel {
 
         jTabbedPaneText.setFont(GUISizeHelper.tableFont);
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+
+        // chats and logs
+        colorPaneSystem.changeGUISize(GUISizeHelper.chatFont);
+        jScrollPaneTalk.changeGUISize(GUISizeHelper.chatFont);
     }
 
     public void setSplitDividerLocation(int location) {

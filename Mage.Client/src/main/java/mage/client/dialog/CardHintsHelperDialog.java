@@ -517,7 +517,15 @@ public class CardHintsHelperDialog extends MageDialog implements MageDesktopIcon
     }
 
     private void setGUISize(Font font) {
-        this.hintsView.setFont(font);
+        this.comboFilterBy.setFont(font);
+        this.comboGroupBy.setFont(font);
+        this.search.setFont(font);
+        this.searchClear.setFont(font);
+        // workaround to auto-size button
+        // TODO: add support of big/HQ button image
+        this.searchClear.setPreferredSize(GUISizeHelper.dialogGuiScaleSize(this.searchClear.getPreferredSize()));
+
+        this.hintsView.changeGUISize(font);
         this.scrollView.setFont(font);
         this.scrollView.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         this.scrollView.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));

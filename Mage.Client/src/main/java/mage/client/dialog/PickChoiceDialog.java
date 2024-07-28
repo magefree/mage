@@ -52,11 +52,7 @@ public class PickChoiceDialog extends MageDialog {
         this.textSubMessage.enableTextLabelMode();
 
         // pick choice shared in multiple dialogs, so modify window size only one time
-        // TODO: implement global window size settings and runtime theme support by gui scale logic (interface like MageThemeSupported:onSizeChanged,onThemeChanged,etc)
-        float guiScale = GUISizeHelper.gameFeedbackPanelFont.getSize2D() / GUISizeHelper.gameDialogAreaDefaultFontSize;
-        int newWidth = GUISizeHelper.guiSizeScale(this.getSize().width, guiScale);
-        int newHeight = GUISizeHelper.guiSizeScale(this.getSize().height, guiScale);
-        this.setSize(newWidth, newHeight);
+        this.setSize(GUISizeHelper.dialogGuiScaleSize(this.getSize()));
 
         this.listChoices.setModel(new DefaultListModel<KeyValueItem>());
         this.setModal(true);

@@ -104,6 +104,10 @@ public final class GUISizeHelper {
         // for auto-sizeable dialogs - use scale logic (example: player panel, pick choice, pick ability, etc)
         dialogGuiScale = dialogFontSize / 14.0f;
 
+        // app - frame/window title
+        // nimbus's LaF limited to static title size, so font can't be too big (related code in SynthInternalFrameTitlePane, BasicInternalFrameTitlePane)
+        UIManager.put("InternalFrame.titleFont", dialogFont.deriveFont(Font.BOLD, Math.min(17, 0.8f * dialogFont.getSize())));
+
         // app - tables
         tableFont = new java.awt.Font("Arial", 0, dialogFontSize);
         tableRowHeight = dialogFontSize + 4;
@@ -231,6 +235,14 @@ public final class GUISizeHelper {
      */
     public static float guiSizeScale(float value, float scaleMod) {
         return value * scaleMod;
+    }
+
+    public static int dialogGuiScaleSize(int value) {
+        return guiSizeScale(value, dialogGuiScale);
+    }
+
+    public static Dimension dialogGuiScaleSize(Dimension dimension) {
+        return new Dimension(dialogGuiScaleSize(dimension.width), dialogGuiScaleSize(dimension.height));
     }
 
     public static String textToHtmlWithSize(String text, Font font) {
