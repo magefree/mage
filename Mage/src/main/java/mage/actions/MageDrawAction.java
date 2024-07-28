@@ -44,7 +44,7 @@ public class MageDrawAction extends MageAction {
      *
      * @param source
      * @param game     Game context.
-     * @return
+     * @return Number of cards drawn
      */
     @Override
     public int doAction(Ability source, Game game) {
