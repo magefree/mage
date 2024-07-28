@@ -248,6 +248,8 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Valley Rotcaller", 119, Rarity.RARE, mage.cards.v.ValleyRotcaller.class));
         cards.add(new SetCardInfo("Veteran Guardmouse", 237, Rarity.COMMON, mage.cards.v.VeteranGuardmouse.class));
         cards.add(new SetCardInfo("Vinereap Mentor", 238, Rarity.UNCOMMON, mage.cards.v.VinereapMentor.class));
+        cards.add(new SetCardInfo("Vren, the Relentless", 239, Rarity.RARE, mage.cards.v.VrenTheRelentless.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vren, the Relentless", 354, Rarity.RARE, mage.cards.v.VrenTheRelentless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wandertale Mentor", 240, Rarity.UNCOMMON, mage.cards.w.WandertaleMentor.class));
         cards.add(new SetCardInfo("War Squeak", 160, Rarity.COMMON, mage.cards.w.WarSqueak.class));
         cards.add(new SetCardInfo("Warren Elder", 37, Rarity.COMMON, mage.cards.w.WarrenElder.class));
