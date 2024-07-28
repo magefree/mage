@@ -176,6 +176,9 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Rabid Bite", 394, Rarity.COMMON, mage.cards.r.RabidBite.class));
         cards.add(new SetCardInfo("Rabid Gnaw", 147, Rarity.UNCOMMON, mage.cards.r.RabidGnaw.class));
         cards.add(new SetCardInfo("Raccoon Rallier", 148, Rarity.COMMON, mage.cards.r.RaccoonRallier.class));
+        cards.add(new SetCardInfo("Ral, Crackling Wit", 230, Rarity.MYTHIC, mage.cards.r.RalCracklingWit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ral, Crackling Wit", 341, Rarity.MYTHIC, mage.cards.r.RalCracklingWit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ral, Crackling Wit", 353, Rarity.MYTHIC, mage.cards.r.RalCracklingWit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ravine Raider", 106, Rarity.COMMON, mage.cards.r.RavineRaider.class));
         cards.add(new SetCardInfo("Repel Calamity", 27, Rarity.UNCOMMON, mage.cards.r.RepelCalamity.class));
         cards.add(new SetCardInfo("Reptilian Recruiter", 149, Rarity.UNCOMMON, mage.cards.r.ReptilianRecruiter.class));
