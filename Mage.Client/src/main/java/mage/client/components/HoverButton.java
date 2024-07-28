@@ -78,7 +78,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private boolean doGainFade = true;
 
     public HoverButton(String text, Image image, Rectangle size) {
-        this(text, image, image, null, image, size);
+        this(text, image, image, image, image, size);
         if (image == null) {
             throw new IllegalArgumentException("Image can't be null");
         }
@@ -370,10 +370,6 @@ public class HoverButton extends JPanel implements MouseListener {
         this.drawSet = true;
     }
 
-    public void update(String text, Image image) {
-        update(text, image, this.hoverImage, this.selectedImage, this.disabledImage, this.imageSize);
-    }
-
     public void update(String text, Image image, Image hover, Image selected, Image disabled, Rectangle size) {
         this.text = text;
         this.image = image;
@@ -381,7 +377,7 @@ public class HoverButton extends JPanel implements MouseListener {
         this.selectedImage = selected;
         this.disabledImage = disabled;
         this.imageSize = size;
-        repaint();
+        this.invalidate();
     }
 
     public void execute() {

@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * GUI plugin: images and icons with theme support
+ * GUI: images source for GUI components like buttons. With theme supports.
  *
  * @author JayDi85
  */
@@ -61,6 +61,7 @@ public enum ImageManagerImpl implements ImageManager {
 
     private static final SoftValuesLoadingCache<Key, BufferedImage> THEME_BUTTON_IMAGES_CACHE;
     private static final SoftValuesLoadingCache<Key, Image> PHASE_THEME_BUTTON_IMAGES_CACHE;
+
     static {
         THEME_BUTTON_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(ImageManagerImpl::createThemeButtonImage));
         PHASE_THEME_BUTTON_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(ImageManagerImpl::createPhaseThemeButtonImage));
@@ -69,15 +70,21 @@ public enum ImageManagerImpl implements ImageManager {
     private static final class Key {
 
         final String resourceName;
+        final int width;
+        final int height;
 
-        public Key(String resourceName) {
+        public Key(String resourceName, int width, int height) {
             this.resourceName = resourceName;
+            this.width = width;
+            this.height = height;
         }
 
         @Override
         public int hashCode() {
             int hash = 3;
             hash = 53 * hash + Objects.hashCode(this.resourceName);
+            hash = 53 * hash + this.width;
+            hash = 53 * hash + this.height;
             return hash;
         }
 
@@ -96,31 +103,40 @@ public enum ImageManagerImpl implements ImageManager {
             if (!this.resourceName.equals(other.resourceName)) {
                 return false;
             }
+            if (this.width != other.width) {
+                return false;
+            }
+            if (this.height != other.height) {
+                return false;
+            }
             return true;
         }
     }
 
     private static BufferedImage createThemeButtonImage(ImageManagerImpl.Key key) {
-        return getBufferedImageFromResource(PreferencesDialog.getCurrentTheme().getButtonPath(key.resourceName));
+        String resName = PreferencesDialog.getCurrentTheme().getButtonPath(key.resourceName);
+        return getBufferedImageFromResource(resName, key.width, key.height);
     }
 
     private static Image createPhaseThemeButtonImage(ImageManagerImpl.Key key) {
-        return getImageFromResource(
-                PreferencesDialog.getCurrentTheme().getPhasePath("phase_" + key.resourceName.toLowerCase(Locale.ENGLISH) + ".png"),
-                new Rectangle(36, 36)
-        );
+        String resName = PreferencesDialog.getCurrentTheme().getPhasePath("phase_" + key.resourceName.toLowerCase(Locale.ENGLISH) + ".png");
+        return getImageFromResource(resName, key.width, key.height);
     }
 
     ImageManagerImpl() {
     }
 
-    public BufferedImage getThemeButton(String resourceName) {
-        return THEME_BUTTON_IMAGES_CACHE.getOrThrow(new ImageManagerImpl.Key(resourceName));
+    private BufferedImage getThemeButton(String resourceName, int height) {
+        // all command buttons are 64 x 32
+        // TODO: add theme support with any proportion buttons
+        return THEME_BUTTON_IMAGES_CACHE.getOrThrow(new ImageManagerImpl.Key(resourceName, 2 * height, height));
     }
 
     @Override
-    public Image getPhaseImage(String phaseName) {
-        return PHASE_THEME_BUTTON_IMAGES_CACHE.getOrThrow(new ImageManagerImpl.Key(phaseName));
+    public Image getPhaseImage(String phaseName, int size) {
+        // all phase buttons are 36 x 36
+        // TODO: add theme support with any proportion buttons
+        return PHASE_THEME_BUTTON_IMAGES_CACHE.getOrThrow(new ImageManagerImpl.Key(phaseName, size, size));
     }
 
     @Override
@@ -344,58 +360,58 @@ public enum ImageManagerImpl implements ImageManager {
     }
 
     @Override
-    public Image getConcedeButtonImage() {
-        return getThemeButton("concede.png");
+    public Image getConcedeButtonImage(int height) {
+        return getThemeButton("concede.png", height);
     }
 
     @Override
-    public Image getSwitchHandsButtonImage() {
-        return getThemeButton("switch_hands.png");
+    public Image getSwitchHandsButtonImage(int height) {
+        return getThemeButton("switch_hands.png", height);
     }
 
     @Override
-    public Image getStopWatchButtonImage() {
-        return getThemeButton("stop_watching.png");
+    public Image getStopWatchButtonImage(int height) {
+        return getThemeButton("stop_watching.png", height);
     }
 
     @Override
-    public Image getCancelSkipButtonImage() {
-        return getThemeButton("cancel_skip.png");
+    public Image getCancelSkipButtonImage(int height) {
+        return getThemeButton("cancel_skip.png", height);
     }
 
     @Override
-    public Image getSkipNextTurnButtonImage() {
-        return getThemeButton("skip_turn.png");
+    public Image getSkipNextTurnButtonImage(int height) {
+        return getThemeButton("skip_turn.png", height);
     }
 
     @Override
-    public Image getSkipEndTurnButtonImage() {
-        return getThemeButton("skip_to_end.png");
+    public Image getSkipEndTurnButtonImage(int height) {
+        return getThemeButton("skip_to_end.png", height);
     }
 
     @Override
-    public Image getSkipMainButtonImage() {
-        return getThemeButton("skip_to_main.png");
+    public Image getSkipMainButtonImage(int height) {
+        return getThemeButton("skip_to_main.png", height);
     }
 
     @Override
-    public Image getSkipStackButtonImage() {
-        return getThemeButton("skip_stack.png");
+    public Image getSkipStackButtonImage(int height) {
+        return getThemeButton("skip_stack.png", height);
     }
 
     @Override
-    public Image getSkipEndStepBeforeYourTurnButtonImage() {
-        return getThemeButton("skip_to_previous_end.png");
+    public Image getSkipEndStepBeforeYourTurnButtonImage(int height) {
+        return getThemeButton("skip_to_previous_end.png", height);
     }
 
     @Override
-    public Image getSkipYourNextTurnButtonImage() {
-        return getThemeButton("skip_all.png");
+    public Image getSkipYourNextTurnButtonImage(int height) {
+        return getThemeButton("skip_all.png", height);
     }
 
     @Override
-    public Image getToggleRecordMacroButtonImage() {
-        return getThemeButton("toggle_macro.png");
+    public Image getToggleRecordMacroButtonImage(int height) {
+        return getThemeButton("toggle_macro.png", height);
     }
 
     @Override
@@ -414,51 +430,62 @@ public enum ImageManagerImpl implements ImageManager {
         }
     }
 
-    protected static Image getImageFromResourceTransparent(String path, Color mask, Rectangle rec) {
-        BufferedImage image;
-        Image imageCardTransparent;
-        Image resized = null;
+    private static Image getImageFromResourceTransparent(String path, Color mask, Rectangle rec) {
+        Image res = null;
 
         URL imageURL = ImageManager.class.getResource(path);
-
         try {
-            image = ImageIO.read(imageURL);
-            imageCardTransparent = Transparency.makeColorTransparent(image, mask);
-
-            resized = imageCardTransparent.getScaledInstance(rec.width, rec.height, java.awt.Image.SCALE_SMOOTH);
+            BufferedImage original = ImageIO.read(imageURL);
+            Image transparent = Transparency.makeColorTransparent(original, mask);
+            res = transparent.getScaledInstance(rec.width, rec.height, java.awt.Image.SCALE_SMOOTH);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return resized;
+        return res;
     }
 
-    protected static Image getImageFromResource(String path, Rectangle rec) {
-        Image resized = null;
+    private static Image getImageFromResource(String path) {
+        return getImageFromResource(path, 0, 0);
+    }
+
+    private static Image getImageFromResource(String path, int width, int height) {
+        Image res = null;
 
         URL imageURL = ImageManager.class.getResource(path);
 
         try {
             BufferedImage image = ImageIO.read(imageURL);
-            resized = image.getScaledInstance(rec.width, rec.height, java.awt.Image.SCALE_SMOOTH);
+            if (width > 0 && height > 0) {
+                // use new size
+                res = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+            } else {
+                // keep file size
+                res = image;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return resized;
+        return res;
     }
 
-    protected static BufferedImage getBufferedImageFromResource(String path) {
-        URL imageURL = ImageManager.class.getResource(path);
-        BufferedImage image = null;
+    private static BufferedImage getBufferedImageFromResource(String path) {
+        return getBufferedImageFromResource(path, 0, 0);
+    }
 
+    private static BufferedImage getBufferedImageFromResource(String path, int width, int height) {
+        Image original = getImageFromResource(path, width, height);
+
+        BufferedImage output = new BufferedImage(original.getWidth(null), original.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = output.createGraphics();
         try {
-            image = ImageIO.read(imageURL);
-        } catch (Exception e) {
-            e.printStackTrace();
+            g2.drawImage(original, 0, 0, null);
+        } finally {
+            g2.dispose();
         }
 
-        return image;
+        return output;
     }
 
     public static BufferedImage deepCopy(BufferedImage bi) {

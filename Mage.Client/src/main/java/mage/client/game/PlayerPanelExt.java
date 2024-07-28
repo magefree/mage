@@ -370,9 +370,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                     path = "/avatars/special/" + avatarId + ".gif";
                 }
                 Image image = ImageHelper.getImageFromResources(path);
-                Rectangle r = new Rectangle(sizeMod(80), sizeMod(80));
-                BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                this.avatar.update(this.player.getName(), resized, resized, resized, resized, r);
+                Rectangle buttonRect = new Rectangle(sizeMod(80), sizeMod(80));
+                BufferedImage buttonImage = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), buttonRect);
+                this.avatar.update(this.player.getName(), buttonImage, buttonImage, buttonImage, buttonImage, buttonRect);
             }
         }
         if (this.timer != null) {

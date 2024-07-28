@@ -50,10 +50,10 @@ public final class GUISizeHelper {
     public static int gameFeedbackPanelExtraMessageFontSize = 11;
     public static int gameFeedbackPanelMaxHeight = 0;
 
-    public static int gameDialogAreaButtonHigh = 16;
+    public static int gamePhaseButtonSize = 36;
+    public static int gameCommandButtonHeight = 32;
 
     public static Font gameFeedbackPanelFont = new java.awt.Font("Arial", 0, 12);
-    public static float gameDialogAreaDefaultFontSize = gameFeedbackPanelFont.getSize2D();
     public static int gameFeedbackPanelButtonHeight;
     public static int gameFeedbackPanelButtonWidth;
 
@@ -131,6 +131,10 @@ public final class GUISizeHelper {
         gameFeedbackPanelMaxHeight = 20 + 2 * gameFeedbackPanelMainMessageFontSize + 2 * gameFeedbackPanelExtraMessageFontSize;
         gameFeedbackPanelButtonHeight = dialogFontSize + 6;
         gameFeedbackPanelButtonWidth = dialogFontSize * 2 + 40;
+
+        // game - phase and command buttons
+        gamePhaseButtonSize = dialogGuiScaleSize(36);
+        gameCommandButtonHeight = dialogGuiScaleSize(32);
 
         // app - chats and game logs
         int chatFontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CHAT_FONT_SIZE, 14);
