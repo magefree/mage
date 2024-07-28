@@ -61,7 +61,7 @@ class PaladinElizabethTaggerdyEffect extends OneShotEffect {
 
     public PaladinElizabethTaggerdyEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may put a creature card with mana value X or less from your hand onto the battlefield tapped and attacking, where X is Paladin Elizabeth Taggerdy's power";
+        this.staticText = "you may put a creature card with mana value X or less from your hand onto the battlefield tapped and attacking, where X is {this}'s power";
     }
 
     private PaladinElizabethTaggerdyEffect(final PaladinElizabethTaggerdyEffect effect) {
