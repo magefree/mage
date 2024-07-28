@@ -258,6 +258,8 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Whiskerquill Scribe", 161, Rarity.COMMON, mage.cards.w.WhiskerquillScribe.class));
         cards.add(new SetCardInfo("Whiskervale Forerunner", 40, Rarity.RARE, mage.cards.w.WhiskervaleForerunner.class));
         cards.add(new SetCardInfo("Wick's Patrol", 121, Rarity.UNCOMMON, mage.cards.w.WicksPatrol.class));
+        cards.add(new SetCardInfo("Wick, the Whorled Mind", 120, Rarity.RARE, mage.cards.w.WickTheWhorledMind.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wick, the Whorled Mind", 314, Rarity.RARE, mage.cards.w.WickTheWhorledMind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wildfire Howl", 162, Rarity.UNCOMMON, mage.cards.w.WildfireHowl.class));
         cards.add(new SetCardInfo("Zoraline, Cosmos Caller", 242, Rarity.RARE, mage.cards.z.ZoralineCosmosCaller.class));
     }
