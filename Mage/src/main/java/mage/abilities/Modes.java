@@ -32,9 +32,11 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     private final List<UUID> selectedModes = new ArrayList<>(); // all selected modes (this + duplicate), use getSelectedModes all the time to keep modes order
     private final Map<UUID, Mode> selectedDuplicateModes = new LinkedHashMap<>(); // for 2x selects: additional selected modes
     private final Map<UUID, UUID> selectedDuplicateToOriginalModeRefs = new LinkedHashMap<>(); // for 2x selects: stores ref from duplicate to original mode
+    private int selectedPawPrints = 0;
 
     private int minModes;
     private int maxModes;
+    private int maxPawPrints;
     private Filter maxModesFilter; // calculates the max number of available modes
     private Condition moreCondition; // allows multiple modes choose (example: choose one... if condition, you may choose both)
 
@@ -53,6 +55,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         this.put(currentMode.getId(), currentMode);
         this.minModes = 1;
         this.maxModes = 1;
+        this.maxPawPrints = -1;
         this.addSelectedMode(currentMode.getId());
         this.chooseController = TargetController.YOU;
     }
@@ -65,9 +68,11 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             selectedDuplicateModes.put(entry.getKey(), entry.getValue().copy());
         }
         selectedDuplicateToOriginalModeRefs.putAll(modes.selectedDuplicateToOriginalModeRefs);
+        this.selectedPawPrints = modes.selectedPawPrints;
 
         this.minModes = modes.minModes;
         this.maxModes = modes.maxModes;
+        this.maxPawPrints = modes.maxPawPrints;
         this.maxModesFilter = modes.maxModesFilter; // can't change so no copy needed
         this.moreCondition = modes.moreCondition;
 
@@ -166,6 +171,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         this.selectedModes.clear();
         this.selectedDuplicateModes.clear();
         this.selectedDuplicateToOriginalModeRefs.clear();
+        this.selectedPawPrints = 0;
     }
 
     public int getSelectedStats(UUID modeId) {
@@ -192,6 +198,10 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         }
 
         return count;
+    }
+
+    public int getSelectedPawPrints(){
+        return selectedPawPrints;
     }
 
     public void setMinModes(int minModes) {
@@ -256,6 +266,14 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         return realMaxModes;
     }
 
+    public void setMaxPawPrints(int maxPawPrints) {
+        this.maxPawPrints = maxPawPrints;
+    }
+
+    public int getMaxPawPrints() {
+        return this.maxPawPrints;
+    }
+
     public void setChooseController(TargetController chooseController) {
         this.chooseController = chooseController;
     }
@@ -317,7 +335,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             return isSelectedValid(source, game);
         }
 
-        // modal spells must show choose dialog even for 1 option, so check this.size instead evailableModes.size here
+        // modal spells must show choose dialog even for 1 option, so check this.size instead availableModes.size here
         if (this.size() > 1) {
             // multiple modes
 
@@ -375,7 +393,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             this.currentMode = null;
             int currentMaxModes = this.getMaxModes(game, source);
 
-            while (this.selectedModes.size() < currentMaxModes) {
+            while ((this.selectedModes.size() < currentMaxModes && maxPawPrints < 0) ||
+                    (selectedPawPrints < maxPawPrints && maxPawPrints >= 0)) {
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
                     // user press cancel/stop in choose dialog or nothing to choose
@@ -437,8 +456,19 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             throw new IllegalArgumentException("Unknown modeId to select");
         }
 
+        Mode mode = get(modeId);
+
+        if (mode.getPawPrintValue() < 0 && this.getMaxPawPrints() >= 0){
+            throw new RuntimeException("Selected mode has no pawprint value, but this Modes object requires pawprint modes!");
+        }
+        if (mode.getPawPrintValue() >= 0 && this.getMaxPawPrints() < 0) {
+            throw new RuntimeException("Selected mode has a pawprint value, but this Modes object has no pawprints!");
+        }
+
+        selectedPawPrints += mode.pawPrintValue;
+
         if (selectedModes.contains(modeId) && mayChooseSameModeMoreThanOnce) {
-            Mode duplicateMode = get(modeId).copy();
+            Mode duplicateMode = mode.copy();
             UUID originalId = modeId;
             duplicateMode.setRandomId();
             modeId = duplicateMode.getId();
@@ -545,7 +575,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                 }
                 sb.append("choose ");
             }
-            if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
+            if (this.getMaxPawPrints() >= 0){
+                sb.append("up to ").append(CardUtil.numberToText(this.getMaxPawPrints())).append(" {P} worth of modes");
+            } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
                 sb.append("up to one");
             } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) > 2) {
                 sb.append("any number");

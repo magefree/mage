@@ -2217,6 +2217,10 @@ public class ComputerPlayer extends PlayerImpl {
                     continue AvailableMode;
                 }
             }
+            if (modes.getMaxPawPrints() >= 0 && modes.getSelectedPawPrints() + mode.getPawPrintValue() > modes.getMaxPawPrints()){
+                // Choosing this mode would exceed the number of pawprints available for this mode set.
+                continue;
+            }
             if (mode.getTargets().canChoose(source.getControllerId(), source, game)) { // and where targets are available
                 return mode;
             }

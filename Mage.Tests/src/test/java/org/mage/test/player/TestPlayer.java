@@ -2082,6 +2082,10 @@ public class TestPlayer implements Player {
             int needMode = Integer.parseInt(modesSet.get(0));
             int i = 1;
             for (Mode mode : modes.getAvailableModes(source, game)) {
+                if (modes.getMaxPawPrints() >= 0 && modes.getSelectedPawPrints() + mode.getPawPrintValue() > modes.getMaxPawPrints()){
+                    // Choosing this mode would exceed the number of pawprints available for this mode set.
+                    continue;
+                }
                 if (i == needMode) {
                     modesSet.remove(0);
                     return mode;

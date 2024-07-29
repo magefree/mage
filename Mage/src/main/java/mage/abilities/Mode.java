@@ -19,6 +19,7 @@ public class Mode implements Serializable {
     protected final Effects effects;
     protected String flavorWord;
     protected Cost cost = null;
+    protected int pawPrintValue = -1;
     /**
      * Optional Tag to distinguish this mode from others.
      * In the case of modes that players can only choose once,
@@ -42,6 +43,7 @@ public class Mode implements Serializable {
         this.flavorWord = mode.flavorWord;
         this.modeTag = mode.modeTag;
         this.cost = mode.cost != null ? mode.cost.copy() : null;
+        this.pawPrintValue = mode.pawPrintValue;
     }
 
     public UUID setRandomId() {
@@ -118,5 +120,18 @@ public class Mode implements Serializable {
 
     public Cost getCost() {
         return cost;
+    }
+
+    public void setPawPrintValue(int pawPrintValue) {
+        this.pawPrintValue = pawPrintValue;
+    }
+
+    public Mode withPawPrintValue(int pawPrintValue) {
+        this.setPawPrintValue(pawPrintValue);
+        return this;
+    }
+
+    public int getPawPrintValue() {
+        return pawPrintValue;
     }
 }
