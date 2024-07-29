@@ -11,8 +11,7 @@ import mage.constants.SubType;
 public final class WallWhiteToken extends TokenImpl {
 
     public WallWhiteToken() {
-        super("Wall Token", "0/4 white Wall artifact creature token with defender");
-        cardType.add(CardType.ARTIFACT);
+        super("Wall Token", "0/4 white Wall creature token with defender");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.WALL);
         color.setWhite(true);
