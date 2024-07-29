@@ -74,6 +74,8 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Coiling Oracle", 250, Rarity.COMMON, mage.cards.c.CoilingOracle.class));
         cards.add(new SetCardInfo("Combat Celebrant", 194, Rarity.MYTHIC, mage.cards.c.CombatCelebrant.class));
         cards.add(new SetCardInfo("Command Tower", 130, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Communal Brewing", 29, Rarity.RARE, mage.cards.c.CommunalBrewing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Communal Brewing", 63, Rarity.RARE, mage.cards.c.CommunalBrewing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Copperline Gorge", 301, Rarity.RARE, mage.cards.c.CopperlineGorge.class));
         cards.add(new SetCardInfo("Coveted Jewel", 268, Rarity.RARE, mage.cards.c.CovetedJewel.class));
         cards.add(new SetCardInfo("Cultivate", 212, Rarity.COMMON, mage.cards.c.Cultivate.class));
