@@ -14,8 +14,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SnailToken;
@@ -29,8 +29,8 @@ import java.util.UUID;
  */
 public final class WickTheWhorledMind extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.RAT, "Rat");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent(SubType.SNAIL, "Snail");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.RAT, "Rat");
+    private static final FilterPermanent filter2 = new FilterPermanent(SubType.SNAIL, "Snail");
 
     public WickTheWhorledMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -87,7 +87,7 @@ class WickTheWhorledMindEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.SNAIL, "Snail");
+        FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SNAIL, "Snail");
 
         if (game.getBattlefield().contains(filter, source.getControllerId(), source, game, 1)) {
             TargetPermanent target = new TargetPermanent(filter);

@@ -81,7 +81,7 @@ class CommunalBrewingEffect extends OneShotEffect {
             }
             count += opponent.drawCards(1, source, game); // Known issue with Teferi's Ageless Insight. See #12616
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;
         }
@@ -121,10 +121,6 @@ class CommunalBrewingCountersEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (permanent == null || creature == null) {
-            return false;
-        }
-        Spell spell = game.getSpellOrLKIStack(creature.getId());
-        if (spell == null) {
             return false;
         }
         creature.addCounters(CounterType.P1P1.createInstance(
