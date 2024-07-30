@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author weirddan455
  */
 public class WardTest extends CardTestPlayerBase {
@@ -19,7 +18,7 @@ public class WardTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Solitude");
-        setChoice(playerA, "Yes"); // Use alternate casting cost
+        setChoice(playerA, "Cast with Evoke alternative cost: Exile a white card from your hand (source: Solitude");
         setChoice(playerA, "Healer's Hawk");
         setChoice(playerA, "When {this} enters the battlefield, exile up to one other target creature"); // Put exile trigger on the stack first (evoke trigger will resolve first)
         addTarget(playerA, "Waterfall Aerialist");

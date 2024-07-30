@@ -76,7 +76,7 @@ public class PrimevalSpawnTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, omniscience);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, spawn);
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

@@ -19,6 +19,8 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
      */
     @Test
     public void testSpliceThroughTheBreach() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         // Sorcery - Arcane  {R}
         // Lava Spike deals 3 damage to target player.
@@ -49,6 +51,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
 
     @Test
     public void testSpliceTorrentOfStone() {
+        setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         // Sorcery - Arcane  {R}
@@ -64,8 +67,9 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Spike", playerB);
         // activate splice: yes -> card with splice ability -> new target for spliced ability
         setChoice(playerA, true);
+        setChoice(playerA, "Mountain", 2); // sacrifice 2 Mountain
         addTarget(playerA, "Torrent of Stone");
-        // Silvercoat Lion is auto-chosen is only possible target
+        addTarget(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -91,6 +95,8 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
      */
     @Test
     public void testSpliceThroughTheBreach2() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         // You may exile a green card with converted mana cost X from your hand rather than pay Nourishing Shoal's mana cost.
         // You gain X life.
@@ -104,6 +110,8 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nourishing Shoal");
         // activate splice: yes -> card with splice ability -> new target for spliced ability
         setChoice(playerA, true);
+        setChoice(playerA, "Cast with alternative cost: Exile a green card with mana value X from your hand (source: Nourishing Shoal");
+        setChoice(playerA, "Giant Growth"); // Exiled for Shoal alternative cost
         addTarget(playerA, "Through the Breach");
         setChoice(playerA, "Silvercoat Lion"); // target for spliced ability: put from hand to battlefield
 
@@ -154,6 +162,7 @@ public class SpliceOnArcaneTest extends CardTestPlayerBase {
     @Test
     @Ignore
     public void testCounteredBecauseOfNoLegalTarget() {
+        setStrictChooseMode(true);
         // TODO: rewrite test, it's wrong and misleading-- user report about Griselbrand was destroyed by Terminate after splice announce, but tests don't use it at all (Griselbrand legal target all the time)
 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);

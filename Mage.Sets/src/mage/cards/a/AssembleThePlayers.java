@@ -104,7 +104,7 @@ class AssembleThePlayersPlayTopEffect extends AsThoughEffectImpl {
         if (affectedAbility instanceof SpellAbility) {
             SpellAbility spellAbility = (SpellAbility) affectedAbility;
             if (spellAbility.getManaCosts().isEmpty()
-                    || !spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                    || !spellAbility.spellCanBeActivatedNow(playerId, game).contains(MageIdentifier.Default)) {
                 return false;
             }
             Card cardToCheck = spellAbility.getCharacteristics(game);

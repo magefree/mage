@@ -135,7 +135,7 @@ public class KickerWithAnyNumberModesAbilityTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Inscription of Abundance");
-        setChoice(playerA, true); // use free cast
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience"); // use free cast
         setChoice(playerA, true); // use kicker
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "1");

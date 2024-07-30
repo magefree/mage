@@ -29,7 +29,7 @@ public class ProwlTest extends CardTestPlayerBase {
 
         checkPlayableAbility("must play", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Auntie's Snitch", true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Auntie's Snitch");
-        setChoice(playerA, true); // choosing to pay prowl cost
+        setChoice(playerA, "Cast with Prowl alternative cost: {1}{B} (source: Auntie's Snitch"); // choosing to pay prowl cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -64,7 +64,7 @@ public class ProwlTest extends CardTestPlayerBase {
 
         checkPlayableAbility("must play", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Auntie's Snitch", true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Auntie's Snitch"); // should only cost {B} with Warchief discount
-        setChoice(playerA, true); // choosing to pay prowl cost
+        setChoice(playerA, "Cast with Prowl alternative cost: {1}{B} (source: Auntie's Snitch"); // choosing to pay prowl cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -94,7 +94,7 @@ public class ProwlTest extends CardTestPlayerBase {
 
         checkPlayableAbility("must play", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Thrasta", true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Thrasta, Tempest's Roar");
-        setChoice(playerA, true); // choosing to pay prowl cost
+        setChoice(playerA, "Cast with Prowl alternative cost: {2}{R} (source: Thrasta, Tempest's Roar"); // choosing to pay prowl cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
