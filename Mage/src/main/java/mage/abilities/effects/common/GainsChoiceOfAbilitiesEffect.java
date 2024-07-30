@@ -25,16 +25,26 @@ import java.util.*;
 public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
 
     private final Map<String, Ability> abilityMap = new LinkedHashMap<>();
-    private final boolean affectSource;
+    private final boolean affectSource, includeEnd;
     private final String targetDescription;
 
-    public GainsChoiceOfAbilitiesEffect(boolean affectSource, Ability... abilities) {
-        this(affectSource, null, abilities);
+    public GainsChoiceOfAbilitiesEffect(Ability... abilities) {
+        this(false, null, true, abilities);
     }
-    public GainsChoiceOfAbilitiesEffect(boolean affectSource, String targetDescription, Ability... abilities) {
+
+    public GainsChoiceOfAbilitiesEffect(String targetDescription, Ability... abilities) {
+        this(false, targetDescription, true, abilities);
+    }
+
+    public GainsChoiceOfAbilitiesEffect(boolean affectSource, Ability... abilities) {
+        this(affectSource, null, true, abilities);
+    }
+
+    public GainsChoiceOfAbilitiesEffect(boolean affectSource, String targetDescription, boolean includeEnd, Ability... abilities) {
         super(Outcome.AddAbility);
         this.affectSource = affectSource;
         this.targetDescription = targetDescription;
+        this.includeEnd = includeEnd;
         for (Ability ability : abilities) {
             this.abilityMap.put(ability.getRule(), ability);
         }
@@ -45,6 +55,7 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         this.affectSource = effect.affectSource;
         this.abilityMap.putAll(effect.abilityMap);
         this.targetDescription = effect.targetDescription;
+        this.includeEnd = effect.includeEnd;
     }
 
     @Override
@@ -56,7 +67,9 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         List<Permanent> permanents = new ArrayList<>();
-        permanents.add(source.getSourcePermanentIfItStillExists(game));
+        if (affectSource) {
+            permanents.add(source.getSourcePermanentIfItStillExists(game));
+        }
         for (UUID p : getTargetPointer().getTargets(game, source)) {
             permanents.add(game.getPermanent(p));
         }
@@ -85,11 +98,11 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         if (targetDescription != null){
             sb.append(targetDescription);
         } else if (affectSource){
-            sb.append("{this}");
+            sb.append("{this} ");
         } else {
-            sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that creature"));
+            sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that creature")).append(" ");
         }
-        sb.append(" gains your choice of ");
+        sb.append("gains your choice of ");
         String[] abilitiesText = abilityMap.keySet().toArray(new String[0]);
         if (abilityMap.size() == 2) {
             sb.append(abilitiesText[0]).append(" or ").append(abilitiesText[1]);
@@ -101,8 +114,9 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         } else {
             throw new IllegalStateException("Only one ability found in GainsChoiceOfAbilitiesEffect");
         }
-
-        sb.append(" until end of turn");
+        if (includeEnd) {
+            sb.append(" until end of turn");
+        }
         return sb.toString();
     }
 }

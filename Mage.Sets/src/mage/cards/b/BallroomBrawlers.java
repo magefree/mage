@@ -4,9 +4,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainsChoiceOfAbilitiesEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,7 +39,10 @@ public final class BallroomBrawlers extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Ballroom Brawlers attacks, Ballroom Brawlers and up to one other target creature you control each gain your choice of first strike or lifelink until end of turn.
-        Ability ability = new AttacksTriggeredAbility(new BallroomBrawlersEffect()).withRuleTextReplacement(false);
+        Ability ability = new AttacksTriggeredAbility(new GainsChoiceOfAbilitiesEffect(true,
+                FirstStrikeAbility.getInstance(), LifelinkAbility.getInstance())
+                .setText("{this} and up to one other target creature you control both gain your choice of " +
+                        "first strike or lifelink until end of turn")).withRuleTextReplacement(false);
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
@@ -58,8 +61,6 @@ class BallroomBrawlersEffect extends OneShotEffect {
 
     BallroomBrawlersEffect() {
         super(Outcome.Benefit);
-        staticText = "{this} and up to one other target creature you control " +
-                "both gain your choice of first strike or lifelink until end of turn";
     }
 
     private BallroomBrawlersEffect(final BallroomBrawlersEffect effect) {
