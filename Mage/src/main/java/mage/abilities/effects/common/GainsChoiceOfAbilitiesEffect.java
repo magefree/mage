@@ -70,8 +70,10 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         if (affectSource) {
             permanents.add(source.getSourcePermanentIfItStillExists(game));
         }
-        for (UUID p : getTargetPointer().getTargets(game, source)) {
-            permanents.add(game.getPermanent(p));
+        if (getTargetPointer().isInitialized()) {
+            for (UUID p : getTargetPointer().getTargets(game, source)) {
+                permanents.add(game.getPermanent(p));
+            }
         }
         permanents.removeIf(Objects::isNull);
         if (player == null || permanents.isEmpty()) {
