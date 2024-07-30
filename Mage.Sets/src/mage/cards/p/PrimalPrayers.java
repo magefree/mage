@@ -79,7 +79,7 @@ class PrimalPrayersCastEffect extends ContinuousEffectImpl {
 
     private PrimalPrayersCastEffect(final PrimalPrayersCastEffect effect) {
         super(effect);
-        this.alternativeCastingCostAbility = effect.alternativeCastingCostAbility;
+        this.alternativeCastingCostAbility = effect.alternativeCastingCostAbility.copy();
     }
 
     @Override

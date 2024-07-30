@@ -83,7 +83,7 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
 
     private AlurenRuleEffect(final AlurenRuleEffect effect) {
         super(effect);
-        this.alternativeCastingCostAbility = effect.alternativeCastingCostAbility;
+        this.alternativeCastingCostAbility = effect.alternativeCastingCostAbility.copy();
     }
 
     @Override
