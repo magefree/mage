@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -23,7 +22,7 @@ import java.util.UUID;
  */
 public final class ArbaazMir extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("nontoken historic permanent");
+    private static final FilterPermanent filter = new FilterPermanent("nontoken historic permanent");
 
     static {
         filter.add(HistoricPredicate.instance);
