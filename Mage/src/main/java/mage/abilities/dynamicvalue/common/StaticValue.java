@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 
 import java.util.ArrayList;
@@ -48,6 +49,10 @@ public class StaticValue implements DynamicValue {
     @Override
     public int getSign() {
         return value;
+    }
+
+    public ValueHint getHint(){
+        return null;
     }
 
     public int getValue() {

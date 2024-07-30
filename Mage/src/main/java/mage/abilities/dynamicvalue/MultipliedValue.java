@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -75,6 +76,10 @@ public class MultipliedValue implements DynamicValue {
                 return sb.append(value.getMessage(Phrasing.NUMBER_OF)).toString();
         }
 
+    }
+
+    public ValueHint getHint(){
+        return value.getHint();
     }
 
     @Override
