@@ -3,7 +3,9 @@ package mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  *
@@ -35,15 +37,19 @@ public class IntPlusDynamicValue implements DynamicValue {
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(baseValue).append(" plus ");
-        return sb.append(value.toString()).toString();
+    public String getMessage(EffectPhrasing phrasing) {
+        if (phrasing == EffectPhrasing.X_HIDDEN){
+            return "";
+        }
+        if (phrasing == EffectPhrasing.FOR_EACH){
+            throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in IntPlusDynamicValue");
+        }
+        return CardUtil.numberToText(baseValue) + " plus " + value.getMessage(phrasing);
     }
 
     @Override
-    public String getMessage() {
-        return value.getMessage();
+    public ValueHint getHint() {
+        return value.getHint();
     }
 
     @Override

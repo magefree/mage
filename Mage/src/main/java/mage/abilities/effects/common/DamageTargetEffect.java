@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -14,6 +15,7 @@ import mage.target.Target;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import java.util.concurrent.SynchronousQueue;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -22,6 +24,7 @@ import java.util.UUID;
 public class DamageTargetEffect extends OneShotEffect {
 
     protected DynamicValue amount;
+    protected DynamicValue.EffectPhrasing phrasing;
     protected boolean preventable;
     protected String targetDescription;
     protected boolean useOnlyTargetPointer; // TODO: investigate why do we ignore targetPointer by default??
@@ -57,8 +60,17 @@ public class DamageTargetEffect extends OneShotEffect {
         this(amount, true);
     }
 
+    public DamageTargetEffect(DynamicValue amount, DynamicValue.EffectPhrasing phrasing) {
+        this(amount, true, phrasing);
+    }
+
     public DamageTargetEffect(DynamicValue amount, String whoDealDamageName) {
         this(amount, true);
+        this.sourceName = whoDealDamageName;
+    }
+
+    public DamageTargetEffect(DynamicValue amount, String whoDealDamageName, DynamicValue.EffectPhrasing phrasing) {
+        this(amount, true, phrasing);
         this.sourceName = whoDealDamageName;
     }
 
@@ -66,16 +78,29 @@ public class DamageTargetEffect extends OneShotEffect {
         this(amount, preventable, "");
     }
 
+    public DamageTargetEffect(DynamicValue amount, boolean preventable, DynamicValue.EffectPhrasing phrasing) {
+        this(amount, preventable, "", phrasing);
+    }
+
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription) {
-        this(amount, preventable, targetDescription, false);
+        this(amount, preventable, targetDescription, false, DynamicValue.EffectPhrasing.EQUAL_TO);
+    }
+
+    public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, DynamicValue.EffectPhrasing phrasing) {
+        this(amount, preventable, targetDescription, false, phrasing);
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer) {
+        this(amount, preventable, targetDescription, useOnlyTargetPointer, DynamicValue.EffectPhrasing.EQUAL_TO);
+    }
+
+    public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer, DynamicValue.EffectPhrasing phrasing) {
         super(Outcome.Damage);
         this.amount = amount;
         this.preventable = preventable;
         this.targetDescription = targetDescription;
         this.useOnlyTargetPointer = useOnlyTargetPointer;
+        this.phrasing = phrasing;
     }
 
     public int getAmount() {
@@ -154,8 +179,14 @@ public class DamageTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
-        if (message.isEmpty() || !message.equals("1")) {
-            sb.append(amount);
+        if (amount instanceof StaticValue) {
+            sb.append(((StaticValue)amount).getValue());
+        } else if (phrasing == DynamicValue.EffectPhrasing.X_IS || phrasing == DynamicValue.EffectPhrasing.X_HIDDEN) {
+            sb.append("X");
+        } else if (phrasing == DynamicValue.EffectPhrasing.EQUAL_TO) {
+            // do nothing
+        } else if (amount instanceof MultipliedValue) {
+            sb.append(((MultipliedValue)amount).getMultiplierText());
         }
         if (!sb.toString().endsWith(" ")) {
             sb.append(' ');
@@ -189,17 +220,24 @@ public class DamageTargetEffect extends OneShotEffect {
                 sb.append("that target");
             }
         }
-        if (!message.isEmpty()) {
-            if (message.equals("1")) {
-                sb.append(" equal to the number of ");
-            } else {
-                if (message.startsWith("the") || message.startsWith("that") || message.startsWith("twice")) {
+        if (!(amount instanceof StaticValue)) {
+            switch (phrasing) {
+                case X_IS:
+                    sb.append(", where X is ");
+                    break;
+                case X_HIDDEN:
+                    // No additional text
+                    break;
+                case EQUAL_TO:
                     sb.append(" equal to ");
-                } else {
+                    break;
+                case FOR_EACH:
                     sb.append(" for each ");
-                }
+                    break;
+                default:
+                    throw new IllegalArgumentException("DynamicValue.EffectPhrasing enum not implemented: " + phrasing);
             }
-            sb.append(message);
+            sb.append(amount.getMessage(phrasing));
         }
         if (!preventable) {
             sb.append(". The damage can't be prevented");
