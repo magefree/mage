@@ -27,7 +27,7 @@ public final class ClockworkFox extends CardImpl {
 
         // When leaves Clockwork Fox the battlefield, you draw two cards and each opponent draws a card.
         Ability ability = new LeavesBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(2).setText("you draw two cards"), false
+                new DrawCardSourceControllerEffect(2, true), false
         );
         ability.addEffect(new DrawCardAllEffect(1, TargetController.OPPONENT).concatBy("and"));
         this.addAbility(ability);

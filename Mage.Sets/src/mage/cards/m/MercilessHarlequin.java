@@ -30,7 +30,7 @@ public final class MercilessHarlequin extends CardImpl {
         this.addAbility(new FreerunningAbility("{1}{B}"));
 
         // When Merciless Harlequin enters the battlefield, you draw a card and you lose 1 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1, true));
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
