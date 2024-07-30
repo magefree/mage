@@ -71,9 +71,9 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     protected final String getTriggerPhraseFromFilter() {
         String filterMessage = filter.getMessage();
         if (filterMessage.startsWith("one or more")) {
-            return getWhen() + filterMessage + " enter the battlefield";
+            return getWhen() + filterMessage + " enter";
         }
-        return getWhen() + CardUtil.addArticle(filterMessage) + " enters the battlefield";
+        return getWhen() + CardUtil.addArticle(filterMessage) + " enters";
     }
 
     @Override
