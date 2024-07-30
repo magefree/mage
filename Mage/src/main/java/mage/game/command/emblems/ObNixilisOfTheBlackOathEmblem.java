@@ -27,7 +27,7 @@ public final class ObNixilisOfTheBlackOathEmblem extends Emblem {
         effect.setText("You gain X life");
         Ability ability = new SimpleActivatedAbility(Zone.COMMAND, effect, new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
-        effect = new DrawCardSourceControllerEffect(xValue, DrawCardSourceControllerEffect.DrawCardsPhrasing.X_WHERE);
+        effect = new DrawCardSourceControllerEffect(xValue, DynamicValue.EffectPhrasing.X_IS);
         ability.addEffect(effect.concatBy("and"));
         this.getAbilities().add(ability);
     }

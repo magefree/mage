@@ -42,7 +42,7 @@ public class StaticValue implements DynamicValue {
 //    }
 
     @Override
-    public String getMessage(Phrasing phrasing) {
+    public String getMessage(EffectPhrasing phrasing) {
         return "";
     }
 

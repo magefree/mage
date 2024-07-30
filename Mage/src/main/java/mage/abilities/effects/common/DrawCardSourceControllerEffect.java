@@ -15,12 +15,6 @@ import mage.util.CardUtil;
  */
 public class DrawCardSourceControllerEffect extends OneShotEffect {
 
-    public enum DrawCardsPhrasing {
-        EQUAL_TO,
-        X_WHERE,
-        FOR_EACH
-    }
-
     protected DynamicValue amount;
 
     public DrawCardSourceControllerEffect(int amount) {
@@ -35,15 +29,15 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         this(amount, false);
     }
 
-    public DrawCardSourceControllerEffect(DynamicValue amount, DrawCardsPhrasing phrasing) {
+    public DrawCardSourceControllerEffect(DynamicValue amount, DynamicValue.EffectPhrasing phrasing) {
         this(amount, false, phrasing);
     }
 
     public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw) {
-        this(amount, youDraw, DrawCardsPhrasing.FOR_EACH);
+        this(amount, youDraw, DynamicValue.EffectPhrasing.FOR_EACH);
     }
 
-    public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw, DrawCardsPhrasing phrasing) {
+    public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw, DynamicValue.EffectPhrasing phrasing) {
         super(Outcome.DrawCard);
         this.amount = amount.copy();
         createStaticText(youDraw, phrasing);
@@ -70,34 +64,35 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         return false;
     }
 
-    private void createStaticText(boolean youDraw, DrawCardsPhrasing drawCardsPhrasing) {
+    private void createStaticText(boolean youDraw, DynamicValue.EffectPhrasing phrasing) {
         StringBuilder sb = new StringBuilder(youDraw ? "you " : "");
         sb.append("draw");
         String value = " a";
         if (amount instanceof StaticValue) {
             value = " " + CardUtil.numberToText(((StaticValue)amount).getValue(), "a");
-        } else if (drawCardsPhrasing == DrawCardsPhrasing.X_WHERE) {
+        } else if (phrasing == DynamicValue.EffectPhrasing.X_IS) {
             value = " X";
-        } else if (drawCardsPhrasing == DrawCardsPhrasing.EQUAL_TO) {
+        } else if (phrasing == DynamicValue.EffectPhrasing.EQUAL_TO) {
             value = "";
         } else if (amount instanceof MultipliedValue) {
             value = " " + ((MultipliedValue)amount).getMultiplierText();
         }
         sb.append(value).append(value.equals(" a") ? " card" : " cards");
         if (!(amount instanceof StaticValue)) {
-            switch (drawCardsPhrasing) {
-                case X_WHERE:
-                    sb.append(", where X is ").append(amount.getMessage(DynamicValue.Phrasing.NUMBER_OF));
+            switch (phrasing) {
+                case X_IS:
+                    sb.append(", where X is ");
                     break;
                 case EQUAL_TO:
-                    sb.append(" equal to ").append(amount.getMessage(DynamicValue.Phrasing.NUMBER_OF));
+                    sb.append(" equal to ");
                     break;
                 case FOR_EACH:
-                    sb.append(" for each ").append(amount.getMessage(DynamicValue.Phrasing.FOR_EACH));
+                    sb.append(" for each ");
                     break;
                 default:
-                    throw new IllegalArgumentException("drawCardsPhrasing enum not implemented: " + drawCardsPhrasing);
+                    throw new IllegalArgumentException("DynamicValue.EffectPhrasing enum not implemented: " + phrasing);
             }
+            sb.append(amount.getMessage(phrasing));
         }
         staticText = sb.toString();
     }

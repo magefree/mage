@@ -62,10 +62,10 @@ public class MultipliedValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(Phrasing phrasing) {
+    public String getMessage(EffectPhrasing phrasing) {
         switch (phrasing) {
             case FOR_EACH:
-                return value.getMessage(Phrasing.FOR_EACH);
+                return value.getMessage(EffectPhrasing.FOR_EACH);
             default:
                 StringBuilder sb = new StringBuilder();
                 if (multiplier == 2) {
@@ -73,7 +73,7 @@ public class MultipliedValue implements DynamicValue {
                 } else {
                     sb.append(getMultiplierText()).append(" times ");
                 }
-                return sb.append(value.getMessage(Phrasing.NUMBER_OF)).toString();
+                return sb.append(value.getMessage(phrasing)).toString();
         }
 
     }

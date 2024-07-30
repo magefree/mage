@@ -14,8 +14,30 @@ import java.io.Serializable;
  */
 public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
 
-    enum Phrasing {
-        NUMBER_OF,
+    // Below are all the phrasings that different Effects employing the DynamicValue interface use in oracle text.
+    // The only impact these have on getMessage() is the plurality of the returned value.
+    // However, Effects will often need to cater to multiple phrasings to produce oracle text accurate to WOTC's whims.
+    enum EffectPhrasing {
+        // Plural
+        // <do effects> equal to [the number of] <values>
+        // i.e. Draw cards equal to the number of cards in your hand.
+        // OR, with a modifier:
+        // Haunting Apparition’s power is equal to 1 plus the number of green creature cards in the chosen player’s graveyard.
+        EQUAL_TO,
+
+        // Plural
+        // <do effect with X>, where X is [the number of] <values>
+        // i.e. draw X cards, where X is the number of spite counters on Curse of Vengeance.
+        // OR, with a modifier:
+        // Look at the top X cards of your library, where X is twice the number of lands you control.
+        X_IS,
+
+        // Singular
+        // <do effect> for each <value>
+        // i.e. Equipped creature gets +1/+0 for each artifact you control.
+        // This phrasing can be used with multipliers, including being negative, but addition and subtraction don't work here.
+        // example with multiplier of 3:
+        // You gain 3 life for each creature attacking you.
         FOR_EACH
     }
 
@@ -24,26 +46,26 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
     DynamicValue copy();
 
     default String getMessage(){
-        return getMessage(Phrasing.NUMBER_OF);
+        return getMessage(EffectPhrasing.FOR_EACH);
     }
 
     /**
      *
      * @return A description of what this Dynamic Value represents.
-     * Factor in the Phrasing, which changes the grammar slightly too.
+     * Factor in the Phrasing, which changes the plurality (see EffectPhrasing)
      * If this value represents something that isn't normally phrased like a discreet count, feel free to ignore the phrasing argument.
      * For example:
      *      "the number of creatures you control" or "for each creature you control" (discreet count)
      *      vs
      *      "the sacrificed creature's power" (non-discreet)
      */
-    String getMessage(Phrasing phrasing);
+    String getMessage(EffectPhrasing phrasing);
 
     /**
      *
      * @return A ValueHint with a shortened descriptor of this DynamicValue
      * example:
-     *      getMessage(NUMBER_OF) -> the number of card types among cards in your graveyard
+     *      getMessage(EQUAL_TO) -> the number of card types among cards in your graveyard
      *      getHint() -> ValueHint("card types in your graveyard", this)
      */
     ValueHint getHint();

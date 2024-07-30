@@ -919,15 +919,15 @@ public final class CardUtil {
 
         if (!(power instanceof StaticValue) || !(toughness instanceof StaticValue)) {
             if (useX && boostCount.contains("X")){
-                String powerMessage = power.getMessage(DynamicValue.Phrasing.NUMBER_OF);
-                String toughnessMessage = toughness.getMessage(DynamicValue.Phrasing.NUMBER_OF);
+                String powerMessage = power.getMessage(DynamicValue.EffectPhrasing.X_IS);
+                String toughnessMessage = toughness.getMessage(DynamicValue.EffectPhrasing.X_IS);
                 sb.append(", where X is ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
                 if (boostCount.contains("Y")){
                     sb.append(", and Y is ").append(toughnessMessage);
                 }
             } else {
-                String powerMessage = power.getMessage(DynamicValue.Phrasing.FOR_EACH);
-                String toughnessMessage = toughness.getMessage(DynamicValue.Phrasing.FOR_EACH);
+                String powerMessage = power.getMessage(DynamicValue.EffectPhrasing.FOR_EACH);
+                String toughnessMessage = toughness.getMessage(DynamicValue.EffectPhrasing.FOR_EACH);
                 sb.append(" for each ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
             }
         }
