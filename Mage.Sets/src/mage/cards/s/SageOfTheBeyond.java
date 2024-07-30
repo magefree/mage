@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class SageOfTheBeyond extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("Spells you cast from anywhere other than your hand");
 
     static {
         filter.add(SpellCastFromAnywhereOtherThanHand.instance);
@@ -37,8 +37,7 @@ public final class SageOfTheBeyond extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Spells you cast from anywhere other than your hand cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)
-                .setText("Spells you cast from anywhere other than your hand cost {2} less to cast.")));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
 
         // Foretell {4}{U}
         this.addAbility(new ForetellAbility(this, "{4}{U}"));

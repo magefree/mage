@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class BalladOfTheBlackFlag extends CardImpl {
 
-    private static final FilterCard filter = new FilterHistoricCard();
+    private static final FilterCard filter = new FilterHistoricCard("historic spells you cast this turn");
 
     public BalladOfTheBlackFlag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
@@ -38,7 +38,6 @@ public final class BalladOfTheBlackFlag extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_IV,
                 new SpellsCostReductionControllerEffect(filter, 2)
-                        .setText("historic spells you cast this turn cost {2} less to cast")
         );
 
         this.addAbility(sagaAbility);

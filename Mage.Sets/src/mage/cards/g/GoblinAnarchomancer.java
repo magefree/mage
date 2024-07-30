@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class GoblinAnarchomancer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("each spell you cast that's red or green");
 
     static {
         filter.add(Predicates.or(
@@ -37,8 +37,7 @@ public final class GoblinAnarchomancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Each spell you cast that's red or green costs {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
-                .setText("each spell you cast that's red or green costs {1} less to cast")));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private GoblinAnarchomancer(final GoblinAnarchomancer card) {
