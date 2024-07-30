@@ -20,18 +20,6 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
     private final DynamicValue toughness;
 
     /**
-     * This constructor is called by the other more specific constructors which set text for appropriate usages.
-     * @param power can be null, if only toughness is to be modified
-     * @param toughness can be null, if only power is to be modified
-     */
-    protected SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer) {
-        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
-        setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
-        this.power = power;
-        this.toughness = toughness;
-    }
-
-    /**
      * @param amount Power and toughness to set as a characteristic-defining ability
      */
     public SetBasePowerToughnessSourceEffect(DynamicValue amount) {
@@ -56,6 +44,16 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
      * @param power set in layer 7b
      * @param toughness set in layer 7b
      * @param duration Duration for the effect
+     */
+    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration) {
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, SubLayer.SetPT_7b);
+        this.staticText = "{this} has base power and toughness " + power + '/' + toughness + ' ' + duration.toString();
+    }
+
+    /**
+     * @param power set in layer 7b
+     * @param toughness set in layer 7b
+     * @param duration Duration for the effect
      * @param text Text to set as staticText
      */
     public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, String text) {
@@ -64,13 +62,15 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
     }
 
     /**
-     * @param power set in layer 7b
-     * @param toughness set in layer 7b
-     * @param duration Duration for the effect
+     * This constructor is called by the other more specific constructors which set text for appropriate usages.
+     * @param power can be null, if only toughness is to be modified
+     * @param toughness can be null, if only power is to be modified
      */
-    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, SubLayer.SetPT_7b);
-        this.staticText = "{this} has base power and toughness " + power + '/' + toughness + ' ' + duration.toString();
+    protected SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer) {
+        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
+        setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
+        this.power = power;
+        this.toughness = toughness;
     }
 
     protected SetBasePowerToughnessSourceEffect(final SetBasePowerToughnessSourceEffect effect) {
@@ -107,4 +107,6 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         }
         return true;
     }
+
+    void setStaticText(String text) {}
 }
