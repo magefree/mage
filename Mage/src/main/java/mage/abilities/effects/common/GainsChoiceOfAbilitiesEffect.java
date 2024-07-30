@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.*;
 
@@ -24,7 +25,7 @@ import java.util.*;
  */
 public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
 
-    private final Map<String, Ability> abilityMap = new LinkedHashMap<>();
+    private final Map<String, Ability> abilityMap;
     private final boolean affectSource, includeEnd;
     private final String targetDescription;
 
@@ -41,6 +42,7 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         this.affectSource = affectSource;
         this.targetDescription = targetDescription;
         this.includeEnd = includeEnd;
+        this.abilityMap = new LinkedHashMap<>();
         for (Ability ability : abilities) {
             this.abilityMap.put(ability.getRule(), ability);
         }
@@ -49,7 +51,7 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
     protected GainsChoiceOfAbilitiesEffect(final GainsChoiceOfAbilitiesEffect effect) {
         super(effect);
         this.affectSource = effect.affectSource;
-        this.abilityMap.putAll(effect.abilityMap);
+        this.abilityMap = CardUtil.deepCopyObject(effect.abilityMap);
         this.targetDescription = effect.targetDescription;
         this.includeEnd = effect.includeEnd;
     }
@@ -76,10 +78,10 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
             return false;
         }
         Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Choose an ability");
+        choice.setMessage("Choose an ability to gain");
         choice.setChoices(new HashSet<>(abilityMap.keySet()));
         player.choose(outcome, choice, game);
-        Ability ability = abilityMap.getOrDefault(choice.getChoice(), null);
+        Ability ability = abilityMap.get(choice.getChoice());
         if (ability != null) {
             game.addEffect(new GainAbilityTargetEffect(ability, Duration.EndOfTurn)
                     .setTargetPointer(new FixedTargets(permanents, game)), source);
