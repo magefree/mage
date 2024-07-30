@@ -2,6 +2,7 @@ package mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 
 import java.util.Arrays;
@@ -43,7 +44,18 @@ public class AdditiveDynamicValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage() {
-        return this.dynamicValues.stream().map(DynamicValue::getMessage).collect(Collectors.joining(" "));
+    public String getMessage(EffectPhrasing phrasing) {
+        if (phrasing == EffectPhrasing.X_HIDDEN){
+            return "";
+        }
+        if (phrasing == EffectPhrasing.FOR_EACH){
+            throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in AdditiveDynamicValue");
+        }
+        return this.dynamicValues.stream().map(dv -> dv.getMessage(phrasing)).collect(Collectors.joining(" plus "));
+    }
+
+    @Override
+    public ValueHint getHint() {
+        return new ValueHint("total", this);
     }
 }

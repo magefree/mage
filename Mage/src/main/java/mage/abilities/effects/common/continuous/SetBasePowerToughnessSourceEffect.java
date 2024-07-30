@@ -24,7 +24,6 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
      */
     public SetBasePowerToughnessSourceEffect(DynamicValue amount) {
         this(amount, amount, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a);
-        this.staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
     }
 
     /**
@@ -33,11 +32,6 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
      */
     public SetBasePowerToughnessSourceEffect(DynamicValue amount, Duration duration) {
         this(amount, amount, duration, SubLayer.SetPT_7b);
-        if (duration.toString().isEmpty()) {
-            staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
-        } else {
-            staticText = "{this} has base power and toughness each equal to the number of " + amount.getMessage() + " " + duration;
-        }
     }
 
     /**
@@ -47,7 +41,6 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
      */
     public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration) {
         this(StaticValue.get(power), StaticValue.get(toughness), duration, SubLayer.SetPT_7b);
-        this.staticText = "{this} has base power and toughness " + power + '/' + toughness + ' ' + duration.toString();
     }
 
     /**
@@ -71,6 +64,14 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
         this.power = power;
         this.toughness = toughness;
+        if (power == null && toughness == null){
+            throw new IllegalArgumentException("Power and Toughness cannot both be null");
+        }
+        if ((power instanceof StaticValue && !(toughness instanceof StaticValue)) ||
+                (!(power instanceof StaticValue) && toughness instanceof StaticValue)){
+            throw new IllegalArgumentException("Power and Toughness must both be static or both be dynamic. Use the static constructor for the former.");
+        }
+        setStaticText(duration);
     }
 
     protected SetBasePowerToughnessSourceEffect(final SetBasePowerToughnessSourceEffect effect) {
@@ -108,5 +109,90 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    void setStaticText(String text) {}
+    void setStaticText(Duration duration) {
+
+        if (power == null){
+            staticText = getSingleStatText(toughness, "toughness", duration);
+            return;
+        }
+        if (toughness == null){
+            staticText = getSingleStatText(power, "power", duration);
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder("{this}");
+
+        if (duration.toString().isEmpty()) {
+            sb.append("'s power ");
+        } else {
+            sb.append(" has base power ");
+        }
+
+        // Relies on StaticValue messages all being empty
+        String powerMessage = power.getMessage(DynamicValue.EffectPhrasing.EQUAL_TO);
+        String toughnessMessage = toughness.getMessage(DynamicValue.EffectPhrasing.EQUAL_TO);
+
+        if (toughnessMessage.equals(powerMessage)) {
+            if (duration.toString().isEmpty()) {
+                sb.append("and toughness ");
+            } else {
+                sb.append("and base toughness ");
+            }
+        }
+
+        if (power instanceof StaticValue) {
+            // Assume that if one is static, the other is static too
+            sb.append(((StaticValue)power).getValue()).append("/").append(((StaticValue)toughness).getValue());
+        } else {
+            if (duration.toString().isEmpty()) {
+                if (toughnessMessage.equals(powerMessage)) {
+                    sb.append("are ");
+                } else {
+                    sb.append("is ");
+                }
+            }
+
+            if (toughnessMessage.equals(powerMessage)){
+                sb.append("each ");
+            }
+            sb.append("equal to ").append(powerMessage);
+            if (!toughnessMessage.equals(powerMessage)) {
+                if (duration.toString().isEmpty()) {
+                    sb.append("and {this}'s toughness is equal to ").append(toughnessMessage);
+                } else {
+                    sb.append("and toughness equal to ").append(toughnessMessage);
+                }
+            }
+        }
+
+        sb.append(duration);
+
+        staticText = sb.toString();
+    }
+
+    private String getSingleStatText(DynamicValue value, String statName, Duration duration){
+        StringBuilder sb = new StringBuilder("{this}");
+
+        if (duration.toString().isEmpty()) {
+            sb.append("'s ");
+        } else {
+            sb.append(" has base ");
+        }
+
+        sb.append(statName).append(" ");
+
+        if (duration.toString().isEmpty()) {
+            sb.append("is ");
+        }
+
+        if (value instanceof StaticValue) {
+            sb.append(((StaticValue)value).getValue());
+            return sb.toString();
+        }
+
+        sb.append("equal to ").append(value.getMessage(DynamicValue.EffectPhrasing.EQUAL_TO));
+        sb.append(duration);
+
+        return sb.toString();
+    }
 }
