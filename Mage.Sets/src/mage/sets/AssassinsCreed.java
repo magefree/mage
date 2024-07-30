@@ -36,6 +36,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Black Market Connections", 87, Rarity.RARE, mage.cards.b.BlackMarketConnections.class));
         cards.add(new SetCardInfo("Brotherhood Ambushers", 285, Rarity.UNCOMMON, mage.cards.b.BrotherhoodAmbushers.class));
         cards.add(new SetCardInfo("Brotherhood Patriarch", 286, Rarity.COMMON, mage.cards.b.BrotherhoodPatriarch.class));
+        cards.add(new SetCardInfo("Brotherhood Regalia", 71, Rarity.UNCOMMON, mage.cards.b.BrotherhoodRegalia.class));
         cards.add(new SetCardInfo("Brotherhood Spy", 282, Rarity.UNCOMMON, mage.cards.b.BrotherhoodSpy.class));
         cards.add(new SetCardInfo("Bureau Headmaster", 296, Rarity.UNCOMMON, mage.cards.b.BureauHeadmaster.class));
         cards.add(new SetCardInfo("Cathartic Reunion", 94, Rarity.UNCOMMON, mage.cards.c.CatharticReunion.class));
