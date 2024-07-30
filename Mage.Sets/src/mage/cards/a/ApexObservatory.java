@@ -112,7 +112,14 @@ class ChooseCardTypeEffect extends OneShotEffect {
                     sharedCardTypes.add(entry.getKey());
                 }
             }
-
+            // handle situations like the double-faced instant/land Jwari Disruption // Jwari Ruins
+            if (sharedCardTypes.isEmpty()) {
+                game.informPlayers(mageObject.getIdName() + " No exiled cards shared a type in exile, so nothing is done.");
+                if (mageObject instanceof Permanent) {
+                    ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("No exiled cards have the same card type."), game);
+                }
+                return false;
+            }
             cardTypeChoice.getChoices().retainAll(sharedCardTypes);
             if (controller.choose(Outcome.Benefit, cardTypeChoice, game)) {
                 if (!game.isSimulation()) {
