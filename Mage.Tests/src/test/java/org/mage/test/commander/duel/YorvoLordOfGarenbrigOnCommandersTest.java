@@ -63,7 +63,7 @@ public class YorvoLordOfGarenbrigOnCommandersTest extends CardTestCommanderDuelB
 
         // order triggers to remove commander first
         setChoice(playerA, "Whenever {this} enters the battlefield or attacks"); // draw trigger
-        setChoice(playerA, "Whenever another green creature enters the battlefield"); // get counters trigger
+        setChoice(playerA, "Whenever another green creature enters"); // get counters trigger
         //setChoice(playerA, "When {this} enters the battlefield, sacrifice it"); // sacrifice trigger must be on top
 
         setChoice(playerA, true); // return commander to command zone

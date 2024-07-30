@@ -35,7 +35,7 @@ public class FortuneLoyalSteedTest extends CardTestPlayerBase {
 
         setChoice(playerA, "Lone Missionary"); // Choose to blink Lone Missionary
 
-        setChoice(playerA, "When {this} enters the battlefield, you gain 4 life"); // stack triggers
+        setChoice(playerA, "When {this} enters, you gain 4 life"); // stack triggers
         addTarget(playerA, "Taiga"); // for the scry trigger
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

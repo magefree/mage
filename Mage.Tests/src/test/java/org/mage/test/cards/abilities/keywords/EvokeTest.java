@@ -75,7 +75,7 @@ public class EvokeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mulldrifter");
         setChoice(playerA, "Cast with Evoke alternative cost: {2}{U} (source: Mulldrifter");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
-        setChoice(playerA, "When {this} enters the battlefield, draw"); //Stack triggers
+        setChoice(playerA, "When {this} enters, draw"); //Stack triggers
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wrong Turn");
         addTarget(playerA, playerB);
