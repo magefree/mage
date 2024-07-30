@@ -32,10 +32,6 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         this(false, null, true, abilities);
     }
 
-    public GainsChoiceOfAbilitiesEffect(String targetDescription, Ability... abilities) {
-        this(false, targetDescription, true, abilities);
-    }
-
     public GainsChoiceOfAbilitiesEffect(boolean affectSource, Ability... abilities) {
         this(affectSource, null, true, abilities);
     }

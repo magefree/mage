@@ -21,7 +21,7 @@ public final class AlchemistsGift extends CardImpl {
 
         // Target creature gets +1/+1 and gains your choice of deathtouch or lifelink until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1).setText("Target creature gets +1/+1"));
-        this.getSpellAbility().addEffect(new GainsChoiceOfAbilitiesEffect("",
+        this.getSpellAbility().addEffect(new GainsChoiceOfAbilitiesEffect(false, "", true,
                 DeathtouchAbility.getInstance(), LifelinkAbility.getInstance()).concatBy("and"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

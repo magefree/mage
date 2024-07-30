@@ -9,6 +9,7 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainsChoiceOfAbilitiesEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
@@ -58,8 +59,9 @@ public final class VeteranWarleader extends CardImpl {
                 .addHint(CreaturesYouControlHint.instance));
 
         // Tap another untapped Ally you control: Veteran Warleader gains your choice of first strike, vigilance, or trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new VeteranWarleaderEffect(), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainsChoiceOfAbilitiesEffect(true,
+                FirstStrikeAbility.getInstance(), VigilanceAbility.getInstance(), TrampleAbility.getInstance()),
+                new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
     }
 
     private VeteranWarleader(final VeteranWarleader card) {
