@@ -34,6 +34,8 @@ public enum CreaturesYouControlCount implements DynamicValue {
         switch (phrasing) {
             case FOR_EACH:
                 return "for each creature you control";
+            case X_HIDDEN:
+                return "";
             default:
                 return "the number of creatures you control";
         }

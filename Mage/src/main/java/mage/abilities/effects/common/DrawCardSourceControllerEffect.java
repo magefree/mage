@@ -70,7 +70,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         String value = " a";
         if (amount instanceof StaticValue) {
             value = " " + CardUtil.numberToText(((StaticValue)amount).getValue(), "a");
-        } else if (phrasing == DynamicValue.EffectPhrasing.X_IS) {
+        } else if (phrasing == DynamicValue.EffectPhrasing.X_IS || phrasing == DynamicValue.EffectPhrasing.X_HIDDEN) {
             value = " X";
         } else if (phrasing == DynamicValue.EffectPhrasing.EQUAL_TO) {
             value = "";
@@ -82,6 +82,9 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
             switch (phrasing) {
                 case X_IS:
                     sb.append(", where X is ");
+                    break;
+                case X_HIDDEN:
+                    // No additional text
                     break;
                 case EQUAL_TO:
                     sb.append(" equal to ");

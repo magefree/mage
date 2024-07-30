@@ -66,6 +66,8 @@ public class MultipliedValue implements DynamicValue {
         switch (phrasing) {
             case FOR_EACH:
                 return value.getMessage(EffectPhrasing.FOR_EACH);
+            case X_HIDDEN:
+                return "";
             default:
                 StringBuilder sb = new StringBuilder();
                 if (multiplier == 2) {

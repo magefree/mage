@@ -32,6 +32,13 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
         // Look at the top X cards of your library, where X is twice the number of lands you control.
         X_IS,
 
+        // Plural
+        // Same as X_IS, except the value explanation is skipped (cases where a subsequent effect or other context explains what X is)
+        // <do effect with X>
+        // i.e. you gain X life
+        // getMessage() behavior for this should ALWAYS be to return an empty string
+        X_HIDDEN,
+
         // Singular
         // <do effect> for each <value>
         // i.e. Equipped creature gets +1/+0 for each artifact you control.
