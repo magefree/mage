@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
 import java.util.UUID;
@@ -22,10 +21,10 @@ import java.util.UUID;
  */
 public final class PalazzoArchers extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature without flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with flying");
 
     static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public PalazzoArchers(UUID ownerId, CardSetInfo setInfo) {
