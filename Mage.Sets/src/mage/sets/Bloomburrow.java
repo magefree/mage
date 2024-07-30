@@ -65,6 +65,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Crumb and Get It", 8, Rarity.COMMON, mage.cards.c.CrumbAndGetIt.class));
         cards.add(new SetCardInfo("Curious Forager", 169, Rarity.UNCOMMON, mage.cards.c.CuriousForager.class));
         cards.add(new SetCardInfo("Daggerfang Duo", 89, Rarity.COMMON, mage.cards.d.DaggerfangDuo.class));
+        cards.add(new SetCardInfo("Daring Waverider", 44, Rarity.UNCOMMON, mage.cards.d.DaringWaverider.class));
         cards.add(new SetCardInfo("Darkstar Augur", 90, Rarity.RARE, mage.cards.d.DarkstarAugur.class));
         cards.add(new SetCardInfo("Dawn's Truce", 9, Rarity.RARE, mage.cards.d.DawnsTruce.class));
         cards.add(new SetCardInfo("Dazzling Denial", 45, Rarity.COMMON, mage.cards.d.DazzlingDenial.class));
@@ -74,6 +75,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Dour Port-Mage", 47, Rarity.RARE, mage.cards.d.DourPortMage.class));
         cards.add(new SetCardInfo("Downwind Ambusher", 92, Rarity.UNCOMMON, mage.cards.d.DownwindAmbusher.class));
         cards.add(new SetCardInfo("Dreamdew Entrancer", 211, Rarity.RARE, mage.cards.d.DreamdewEntrancer.class));
+        cards.add(new SetCardInfo("Driftgloom Coyote", 11, Rarity.UNCOMMON, mage.cards.d.DriftgloomCoyote.class));
         cards.add(new SetCardInfo("Druid of the Spade", 170, Rarity.COMMON, mage.cards.d.DruidOfTheSpade.class));
         cards.add(new SetCardInfo("Early Winter", 93, Rarity.COMMON, mage.cards.e.EarlyWinter.class));
         cards.add(new SetCardInfo("Eddymurk Crab", 48, Rarity.UNCOMMON, mage.cards.e.EddymurkCrab.class));
@@ -113,6 +115,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("High Stride", 176, Rarity.COMMON, mage.cards.h.HighStride.class));
         cards.add(new SetCardInfo("Hired Claw", 140, Rarity.RARE, mage.cards.h.HiredClaw.class));
         cards.add(new SetCardInfo("Hivespine Wolverine", 177, Rarity.UNCOMMON, mage.cards.h.HivespineWolverine.class));
+        cards.add(new SetCardInfo("Hoarder's Overflow", 141, Rarity.UNCOMMON, mage.cards.h.HoardersOverflow.class));
         cards.add(new SetCardInfo("Honored Dreyleader", 178, Rarity.UNCOMMON, mage.cards.h.HonoredDreyleader.class));
         cards.add(new SetCardInfo("Hop to It", 16, Rarity.UNCOMMON, mage.cards.h.HopToIt.class));
         cards.add(new SetCardInfo("Hugs, Grisly Guardian", 218, Rarity.MYTHIC, mage.cards.h.HugsGrislyGuardian.class));
@@ -133,6 +136,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Lifecreed Duo", 20, Rarity.COMMON, mage.cards.l.LifecreedDuo.class));
         cards.add(new SetCardInfo("Lightshell Duo", 56, Rarity.COMMON, mage.cards.l.LightshellDuo.class));
         cards.add(new SetCardInfo("Lilypad Village", 255, Rarity.UNCOMMON, mage.cards.l.LilypadVillage.class));
+        cards.add(new SetCardInfo("Lilysplash Mentor", 222, Rarity.UNCOMMON, mage.cards.l.LilysplashMentor.class));
         cards.add(new SetCardInfo("Long River's Pull", 58, Rarity.UNCOMMON, mage.cards.l.LongRiversPull.class));
         cards.add(new SetCardInfo("Longstalk Brawl", 182, Rarity.COMMON, mage.cards.l.LongstalkBrawl.class));
         cards.add(new SetCardInfo("Lumra, Bellow of the Woods", 183, Rarity.MYTHIC, mage.cards.l.LumraBellowOfTheWoods.class));
