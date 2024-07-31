@@ -39,20 +39,6 @@ public class MultipliedValue implements DynamicValue {
         return new MultipliedValue(this);
     }
 
-//    @Override
-//    public String toString() {
-//        if (value.toString().equals("1")) {
-//            return Integer.toString(multiplier);
-//        }
-//        StringBuilder sb = new StringBuilder();
-//        if (multiplier == 2) {
-//            sb.append("twice ");
-//        } else {
-//            sb.append(multiplier).append(" * ");
-//        }
-//        return sb.append(value.toString()).toString();
-//    }
-
     public int getMultiplier(){
         return multiplier;
     }
