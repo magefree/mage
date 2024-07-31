@@ -32,7 +32,6 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     private final List<UUID> selectedModes = new ArrayList<>(); // all selected modes (this + duplicate), use getSelectedModes all the time to keep modes order
     private final Map<UUID, Mode> selectedDuplicateModes = new LinkedHashMap<>(); // for 2x selects: additional selected modes
     private final Map<UUID, UUID> selectedDuplicateToOriginalModeRefs = new LinkedHashMap<>(); // for 2x selects: stores ref from duplicate to original mode
-    private int selectedPawPrints = 0;
 
     private int minModes;
     private int maxModes;
@@ -68,7 +67,6 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             selectedDuplicateModes.put(entry.getKey(), entry.getValue().copy());
         }
         selectedDuplicateToOriginalModeRefs.putAll(modes.selectedDuplicateToOriginalModeRefs);
-        this.selectedPawPrints = modes.selectedPawPrints;
 
         this.minModes = modes.minModes;
         this.maxModes = modes.maxModes;
@@ -171,7 +169,6 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         this.selectedModes.clear();
         this.selectedDuplicateModes.clear();
         this.selectedDuplicateToOriginalModeRefs.clear();
-        this.selectedPawPrints = 0;
     }
 
     public int getSelectedStats(UUID modeId) {
@@ -201,7 +198,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     }
 
     public int getSelectedPawPrints(){
-        return selectedPawPrints;
+        return this.selectedModes.stream()
+                .mapToInt(modeID -> get(modeID).getPawPrintValue())
+                .sum();
     }
 
     public void setMinModes(int minModes) {
@@ -400,7 +399,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             int currentMaxModes = this.getMaxModes(game, source);
 
             while ((this.selectedModes.size() < currentMaxModes && maxPawPrints == 0) ||
-                    (selectedPawPrints < maxPawPrints && maxPawPrints > 0)) {
+                    (this.getSelectedPawPrints() < maxPawPrints && maxPawPrints > 0)) {
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
                     // user press cancel/stop in choose dialog or nothing to choose
@@ -463,8 +462,6 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         }
 
         Mode mode = get(modeId);
-
-        selectedPawPrints += mode.pawPrintValue;
 
         if (selectedModes.contains(modeId) && mayChooseSameModeMoreThanOnce) {
             Mode duplicateMode = mode.copy();
