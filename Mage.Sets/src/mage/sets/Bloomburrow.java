@@ -19,6 +19,7 @@ public final class Bloomburrow extends ExpansionSet {
         super("Bloomburrow", "BLB", ExpansionSet.buildDate(2024, 8, 2), SetType.EXPANSION);
         this.blockName = "Bloomburrow"; // for sorting in GUI
         this.hasBasicLands = true;
+        this.rotationSet = true;
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Agate Assault", 122, Rarity.COMMON, mage.cards.a.AgateAssault.class));
