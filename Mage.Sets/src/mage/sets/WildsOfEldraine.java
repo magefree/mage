@@ -24,7 +24,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         this.blockName = "Wilds of Eldraine";
         this.hasBoosters = true;
         this.hasBasicLands = true;
-        this.isRotationSet = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;

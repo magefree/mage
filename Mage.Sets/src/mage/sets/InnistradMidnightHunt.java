@@ -28,7 +28,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
         this.blockName = "Innistrad: Midnight Hunt";
         this.hasBoosters = true;
         this.hasBasicLands = true;
-        this.isRotationSet = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;
