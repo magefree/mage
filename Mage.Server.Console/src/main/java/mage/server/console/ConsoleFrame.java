@@ -6,7 +6,7 @@ import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 
@@ -32,7 +32,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     private static final MageVersion version = new MageVersion(ConsoleFrame.class);
 
     private static final ScheduledExecutorService PING_SENDER_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
-            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_PING_SENDER)
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_PING_SENDER)
     );
 
     /**

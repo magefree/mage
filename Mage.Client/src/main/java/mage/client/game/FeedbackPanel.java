@@ -9,7 +9,7 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.constants.PlayerAction;
 import mage.constants.TurnPhase;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -45,7 +45,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     private static final int AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS = 8;
     private static final ScheduledExecutorService AUTO_CLOSE_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
-            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_AUTO_CLOSE_TIMER)
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_AUTO_CLOSE_TIMER)
     );
 
     /**

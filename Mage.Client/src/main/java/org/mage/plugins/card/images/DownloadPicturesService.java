@@ -9,12 +9,12 @@ import mage.cards.repository.TokenRepository;
 import mage.client.MageFrame;
 import mage.client.dialog.DownloadImagesDialog;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.remote.XmageURLConnection;
 import mage.client.util.CardLanguage;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.sets.ConstructedFormats;
-import mage.remote.Connection;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileInputStream;
 import net.java.truevfs.access.TFileOutputStream;
@@ -31,7 +31,8 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.*;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.*;
@@ -83,7 +84,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private static CardImageSource selectedSource;
 
     private final Object sync = new Object();
-    private Proxy proxy = Proxy.NO_PROXY;
 
     enum DownloadSources {
         WIZARDS("1. wizards.com - low quality, cards only", WizardCardsImageSource.instance),
@@ -635,96 +635,71 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             base.mkdir();
         }
 
-        Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
-        Proxy.Type type = Proxy.Type.DIRECT;
-        switch (configProxyType) {
-            case HTTP:
-                type = Proxy.Type.HTTP;
-                break;
-            case SOCKS:
-                type = Proxy.Type.SOCKS;
-                break;
-            case NONE:
-            default:
-                proxy = Proxy.NO_PROXY;
-                break;
-        }
-
-        if (type != Proxy.Type.DIRECT) {
-            try {
-                String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
-                Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
-                proxy = new Proxy(type, new InetSocketAddress(address, port));
-            } catch (Exception ex) {
-                throw new RuntimeException("Gui_DownloadPicturesService : error 1 - " + ex);
-            }
-        }
-
         int downloadThreadsAmount = Math.max(1, Integer.parseInt((String) uiDialog.getDownloadThreadsCombo().getSelectedItem()));
 
-        if (proxy != null) {
-            logger.info("Started download of " + cardsDownloadQueue.size() + " images"
-                    + " from source: " + selectedSource.getSourceName()
-                    + ", language: " + selectedSource.getCurrentLanguage().getCode()
-                    + ", threads: " + downloadThreadsAmount);
-            updateProgressMessage("Preparing download list...");
-            if (selectedSource.prepareDownloadList(this, cardsDownloadQueue)) {
-                update(0, cardsDownloadQueue.size());
-                ExecutorService executor = Executors.newFixedThreadPool(
-                        downloadThreadsAmount,
-                        new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_IMAGES_DOWNLOADER, false)
-                );
-                for (int i = 0; i < cardsDownloadQueue.size() && !this.isNeedCancel(); i++) {
-                    try {
-                        CardDownloadData card = cardsDownloadQueue.get(i);
 
-                        logger.debug("Downloading image: " + card.getName() + " (" + card.getSet() + ')');
+        logger.info("Started download of " + cardsDownloadQueue.size() + " images"
+                + " from source: " + selectedSource.getSourceName()
+                + ", language: " + selectedSource.getCurrentLanguage().getCode()
+                + ", threads: " + downloadThreadsAmount);
+        updateProgressMessage("Preparing download list...");
+        if (selectedSource.prepareDownloadList(this, cardsDownloadQueue)) {
+            update(0, cardsDownloadQueue.size());
+            ExecutorService executor = Executors.newFixedThreadPool(
+                    downloadThreadsAmount,
+                    new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_IMAGES_DOWNLOADER, false)
+            );
+            for (int i = 0; i < cardsDownloadQueue.size() && !this.isNeedCancel(); i++) {
+                try {
+                    CardDownloadData card = cardsDownloadQueue.get(i);
 
-                        CardImageUrls urls;
-                        if (card.isToken()) {
-                            if (!"0".equals(card.getCollectorId())) {
-                                continue;
-                            }
-                            urls = selectedSource.generateTokenUrl(card);
-                        } else {
-                            urls = selectedSource.generateCardUrl(card);
+                    logger.debug("Downloading image: " + card.getName() + " (" + card.getSet() + ')');
+
+                    CardImageUrls urls;
+                    if (card.isToken()) {
+                        if (!"0".equals(card.getCollectorId())) {
+                            continue;
                         }
-
-                        if (urls == null) {
-                            String imageRef = selectedSource.getNextHttpImageUrl();
-                            String fileName = selectedSource.getFileForHttpImage(imageRef);
-                            if (imageRef != null && fileName != null) {
-                                imageRef = selectedSource.getSourceName() + imageRef;
-                                try {
-                                    card.setToken(selectedSource.isTokenSource());
-                                    Runnable task = new DownloadTask(card, imageRef, fileName, selectedSource.getTotalImages());
-                                    executor.execute(task);
-                                } catch (Exception ex) {
-                                }
-                            } else if (selectedSource.getTotalImages() == -1) {
-                                logger.info("Image not available on " + selectedSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ')');
-                                synchronized (sync) {
-                                    update(cardIndex + 1, cardsDownloadQueue.size());
-                                }
-                            }
-                        } else {
-                            Runnable task = new DownloadTask(card, urls, cardsDownloadQueue.size());
-                            executor.execute(task);
-                        }
-                    } catch (Exception ex) {
-                        logger.error(ex, ex);
+                        urls = selectedSource.generateTokenUrl(card);
+                    } else {
+                        urls = selectedSource.generateCardUrl(card);
                     }
+
+                    if (urls == null) {
+                        String imageRef = selectedSource.getNextHttpImageUrl();
+                        String fileName = selectedSource.getFileForHttpImage(imageRef);
+                        if (imageRef != null && fileName != null) {
+                            imageRef = selectedSource.getSourceName() + imageRef;
+                            try {
+                                card.setToken(selectedSource.isTokenSource());
+                                Runnable task = new DownloadTask(card, imageRef, fileName, selectedSource.getTotalImages());
+                                executor.execute(task);
+                            } catch (Exception ex) {
+                            }
+                        } else if (selectedSource.getTotalImages() == -1) {
+                            logger.info("Image not available on " + selectedSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ')');
+                            synchronized (sync) {
+                                update(cardIndex + 1, cardsDownloadQueue.size());
+                            }
+                        }
+                    } else {
+                        Runnable task = new DownloadTask(card, urls, cardsDownloadQueue.size());
+                        executor.execute(task);
+                    }
+                } catch (Exception ex) {
+                    logger.error(ex, ex);
                 }
+            }
 
-                executor.shutdown();
-                while (!executor.isTerminated()) {
-                    try {
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException ignore) {
-                    }
+            executor.shutdown();
+            while (!executor.isTerminated()) {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException ignore) {
                 }
             }
         }
+
 
         try {
             TVFS.umount();
@@ -741,11 +716,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         // reset GUI and cards to use new images
         GUISizeHelper.refreshGUIAndCards(false);
-    }
-
-    static String convertStreamToString(InputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
     }
 
     private final class DownloadTask implements Runnable {
@@ -834,17 +804,17 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
                 // can download images from many alternative urls
                 List<String> downloadUrls;
+                XmageURLConnection connection = null;
                 if (this.urls != null) {
                     downloadUrls = this.urls.getDownloadList();
                 } else {
                     downloadUrls = new ArrayList<>();
                 }
 
+                // try to find first workable link
                 boolean isDownloadOK = false;
-                URLConnection httpConn = null;
                 List<String> errorsList = new ArrayList<>();
                 for (String currentUrl : downloadUrls) {
-                    URL url = new URL(currentUrl);
 
                     // fast stop on cancel
                     if (DownloadPicturesService.getInstance().isNeedCancel()) {
@@ -852,29 +822,27 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     }
 
                     // timeout before each request
-                    selectedSource.doPause(url.toString());
+                    selectedSource.doPause(currentUrl);
 
-                    httpConn = url.openConnection(proxy);
-                    if (httpConn != null) {
+                    connection = new XmageURLConnection(currentUrl);
+                    connection.startConnection();
+                    if (connection.isConnected()) {
 
-                        // custom headers like user agent
-                        Map<String, String> headers = selectedSource.getHttpRequestHeaders(url.toString());
-                        for (String key : headers.keySet()) {
-                            httpConn.setRequestProperty(key, headers.get(key));
-                        }
+                        // custom headers (ues
+                        connection.setRequestHeaders(selectedSource.getHttpRequestHeaders(currentUrl));
 
                         try {
-                            httpConn.connect();
+                            connection.connect();
                         } catch (SocketException e) {
                             incErrorCount();
-                            errorsList.add("Wrong image URL or java app is not allowed to use network. Check your firewall or proxy settings. Error: " + e.getMessage() + ". Image URL: " + url.toString());
+                            errorsList.add("Wrong image URL or java app is not allowed to use network. Check your firewall or proxy settings. Error: " + e.getMessage() + ". Image URL: " + currentUrl);
                             break;
                         } catch (UnknownHostException e) {
                             incErrorCount();
-                            errorsList.add("Unknown site. Check your DNS settings. Error: " + e.getMessage() + ". Image URL: " + url.toString());
+                            errorsList.add("Unknown site. Check your DNS settings. Error: " + e.getMessage() + ". Image URL: " + currentUrl);
                             break;
                         }
-                        int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
+                        int responseCode = connection.getResponseCode();
 
                         // check result
                         if (responseCode != 200) {
@@ -883,13 +851,13 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                     card.getSet(),
                                     card.getName(),
                                     responseCode,
-                                    url
+                                    currentUrl
                             );
                             errorsList.add(info);
 
                             if (logger.isDebugEnabled()) {
                                 // Shows the returned html from the request to the web server
-                                logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                                logger.debug("Returned HTML ERROR:\n" + connection.getErrorResponseAsString());
                             }
 
                             // go to next try
@@ -902,12 +870,12 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     }
                 }
 
-                // can save result
-                if (isDownloadOK && httpConn != null) {
+                // if workable link found then save result
+                if (isDownloadOK && connection.isConnected()) {
                     // save data to temp
-                    try (InputStream in = new BufferedInputStream(httpConn.getInputStream());
-                         OutputStream tfileout = new TFileOutputStream(fileTempImage);
-                         OutputStream out = new BufferedOutputStream(tfileout)) {
+                    try (InputStream in = new BufferedInputStream(connection.getGoodResponseAsStream());
+                         OutputStream tempFileStream = new TFileOutputStream(fileTempImage);
+                         OutputStream out = new BufferedOutputStream(tempFileStream)) {
                         byte[] buf = new byte[1024];
                         int len;
                         while ((len = in.read(buf)) != -1) {
@@ -931,6 +899,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 }
                                 return;
                             }
+
+                            // all fine, can save data part
                             out.write(buf, 0, len);
                         }
                     }
@@ -947,7 +917,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         } catch (Exception e) {
                             logger.error("Can't delete temp file: " + e.getMessage(), e);
                         }
-
                     }
                 } else {
                     // download errors
@@ -1011,11 +980,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         uiDialog.getRedownloadCheckbox().setSelected(false); // reset re-download button after finished
         uiDialog.enableActionControls(true);
         uiDialog.getStartButton().setEnabled(true);
-    }
-
-    @Override
-    public Proxy getProxy() {
-        return proxy;
     }
 
     @Override

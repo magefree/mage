@@ -46,7 +46,7 @@ import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.util.DebugUtil;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
@@ -134,7 +134,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final MageUI UI = new MageUI();
 
     private static final ScheduledExecutorService PING_SENDER_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
-            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_PING_SENDER)
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_PING_SENDER)
     );
     private static UpdateMemUsageTask updateMemUsageTask;
 

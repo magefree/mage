@@ -14,7 +14,7 @@ import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.util.RandomUtil;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -328,9 +328,9 @@ public class LoadTest {
 
         ExecutorService executerService;
         if (isRunParallel) {
-            executerService = Executors.newFixedThreadPool(gamesAmount, new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_TESTS_AI_VS_AI_GAMES));
+            executerService = Executors.newFixedThreadPool(gamesAmount, new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TESTS_AI_VS_AI_GAMES));
         } else {
-            executerService = Executors.newSingleThreadExecutor(new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_TESTS_AI_VS_AI_GAMES));
+            executerService = Executors.newSingleThreadExecutor(new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TESTS_AI_VS_AI_GAMES));
         }
 
         // save random seeds for repeated results (in decks generating)

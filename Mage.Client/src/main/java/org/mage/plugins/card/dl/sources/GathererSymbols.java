@@ -8,15 +8,15 @@ import java.io.File;
 import java.util.Iterator;
 
 import static java.lang.String.format;
-import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
- * The class GathererSymbols.
+ * Download: mana symbols download from wizards web size
+ * <p>
+ * Warning, it's outdated source with low quality images. Use scryfall source as primary.
  *
- * @author Clemens Koza
- * @version V0.0 25.08.2010
+ * @author Clemens Koza, JayDi85
  */
 public class GathererSymbols implements Iterable<DownloadJob> {
 
@@ -125,8 +125,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                     }
 
                     String url = format(urlFmt, sizes[modSizeIndex], symbol);
-
-                    return new DownloadJob(sym, fromURL(url), toFile(dst), false);
+                    return new DownloadJob(sym, url, toFile(dst), false);
                 }
             }
         };

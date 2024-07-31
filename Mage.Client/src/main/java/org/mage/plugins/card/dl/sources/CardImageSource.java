@@ -54,13 +54,10 @@ public interface CardImageSource {
     }
 
     /**
-     * Set additional http headers like user agent, referer, cookies, etc
+     * Set additional headers like user agent, referer, cookies, etc
      */
     default Map<String, String> getHttpRequestHeaders(String fullUrl) {
-        Map<String, String> headers = new LinkedHashMap<>();
-        // TODO: add xmage name and client version here
-        headers.put("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-        return headers;
+        return new LinkedHashMap<>();
     }
 
     default List<String> getSupportedSets() {
