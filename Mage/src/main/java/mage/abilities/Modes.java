@@ -55,7 +55,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         this.put(currentMode.getId(), currentMode);
         this.minModes = 1;
         this.maxModes = 1;
-        this.maxPawPrints = -1;
+        this.maxPawPrints = 0; // 0 = does not use pawprints
         this.addSelectedMode(currentMode.getId());
         this.chooseController = TargetController.YOU;
     }
@@ -293,6 +293,12 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     }
 
     public void addMode(Mode mode) {
+        if (this.maxPawPrints > 0 && mode.getPawPrintValue() == 0){
+            throw new IllegalArgumentException("Mode must have nonzero pawprints value in a pawprints mode set.");
+        }
+        if (this.maxPawPrints == 0 && mode.getPawPrintValue() > 0){
+            throw new IllegalArgumentException("Cannot add pawprints mode to non-pawprints mode set.");
+        }
         this.put(mode.getId(), mode);
     }
 
@@ -393,8 +399,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             this.currentMode = null;
             int currentMaxModes = this.getMaxModes(game, source);
 
-            while ((this.selectedModes.size() < currentMaxModes && maxPawPrints < 0) ||
-                    (selectedPawPrints < maxPawPrints && maxPawPrints >= 0)) {
+            while ((this.selectedModes.size() < currentMaxModes && maxPawPrints == 0) ||
+                    (selectedPawPrints < maxPawPrints && maxPawPrints > 0)) {
                 Mode choice = player.chooseMode(this, source, game);
                 if (choice == null) {
                     // user press cancel/stop in choose dialog or nothing to choose
@@ -457,13 +463,6 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         }
 
         Mode mode = get(modeId);
-
-        if (mode.getPawPrintValue() < 0 && this.getMaxPawPrints() >= 0){
-            throw new RuntimeException("Selected mode has no pawprint value, but this Modes object requires pawprint modes!");
-        }
-        if (mode.getPawPrintValue() >= 0 && this.getMaxPawPrints() < 0) {
-            throw new RuntimeException("Selected mode has a pawprint value, but this Modes object has no pawprints!");
-        }
 
         selectedPawPrints += mode.pawPrintValue;
 
@@ -575,7 +574,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                 }
                 sb.append("choose ");
             }
-            if (this.getMaxPawPrints() >= 0){
+            if (this.getMaxPawPrints() > 0){
                 sb.append("up to ").append(CardUtil.numberToText(this.getMaxPawPrints())).append(" {P} worth of modes");
             } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
                 sb.append("up to one");

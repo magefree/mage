@@ -19,7 +19,7 @@ public class Mode implements Serializable {
     protected final Effects effects;
     protected String flavorWord;
     protected Cost cost = null;
-    protected int pawPrintValue = -1;
+    protected int pawPrintValue = 0; //0 = does not use pawprints
     /**
      * Optional Tag to distinguish this mode from others.
      * In the case of modes that players can only choose once,
