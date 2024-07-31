@@ -122,12 +122,8 @@ public class Mode implements Serializable {
         return cost;
     }
 
-    public void setPawPrintValue(int pawPrintValue) {
-        this.pawPrintValue = pawPrintValue;
-    }
-
     public Mode withPawPrintValue(int pawPrintValue) {
-        this.setPawPrintValue(pawPrintValue);
+        this.pawPrintValue = pawPrintValue;
         return this;
     }
 
