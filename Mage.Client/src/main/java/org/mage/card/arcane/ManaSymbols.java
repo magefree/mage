@@ -81,13 +81,13 @@ public final class ManaSymbols {
             "S", "T", "Q",
             "U", "UB", "UR", "UP", "2U", "CU",
             "W", "WB", "WU", "WP", "2W", "CW",
-            "X", "C", "E", "P",
+            "X", "C", "E", "P", "H",
             "BGP", "BRP", "GUP", "GWP", "RGP", "RWP", "UBP", "URP", "WBP", "WUP"};
 
     private static final JLabel labelRender = new JLabel(); // render mana text
 
     public static void loadImages() {
-        logger.info("Loading symbols...");
+        logger.info("Symbols: loading...");
 
         // TODO: delete files rename jpg->gif (it was for backward compatibility for one of the old version?)
         renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.SMALL));
@@ -221,6 +221,8 @@ public final class ManaSymbols {
             } catch (Exception e) {
             }
         }
+
+        logger.info("Symbols: done");
     }
 
     public static File getSymbolFileNameAsSVG(String symbol) {
