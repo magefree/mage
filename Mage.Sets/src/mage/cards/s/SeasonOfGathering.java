@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.ControlledCreaturesGreatestPower;
+import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -52,7 +52,7 @@ public final class SeasonOfGathering extends CardImpl {
 
         // {P}{P}{P} -- Draw cards equal to the greatest power among creatures you control.
         Mode mode3 = new Mode(
-                new DrawCardSourceControllerEffect(ControlledCreaturesGreatestPower.instance)
+                new DrawCardSourceControllerEffect(GreatestPowerAmongControlledCreaturesValue.instance)
                         .setText("Draw cards equal to the greatest power among creatures you control.")
         );
         this.getSpellAbility().addMode(mode3.withPawPrintValue(3));
