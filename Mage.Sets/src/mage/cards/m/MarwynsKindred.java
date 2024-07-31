@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.CardUtil;
-
 import java.util.UUID;
 
 /**
