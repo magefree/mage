@@ -45,13 +45,17 @@ public class AdditiveDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage(EffectPhrasing phrasing) {
-        if (phrasing == EffectPhrasing.X_HIDDEN){
-            return "";
+        switch(phrasing){
+            case X_HIDDEN:
+                return "";
+            case FOR_EACH:
+                throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in AdditiveDynamicValue");
+            case X_IS:
+            case EQUAL_TO:
+                return this.dynamicValues.stream().map(dv -> dv.getMessage(phrasing)).collect(Collectors.joining(" plus "));
+            default:
+                throw new IllegalArgumentException("enum " + phrasing + " is not supported in AdditiveDynamicValue");
         }
-        if (phrasing == EffectPhrasing.FOR_EACH){
-            throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in AdditiveDynamicValue");
-        }
-        return this.dynamicValues.stream().map(dv -> dv.getMessage(phrasing)).collect(Collectors.joining(" plus "));
     }
 
     @Override

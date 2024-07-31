@@ -7,6 +7,8 @@ import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.stream.Collectors;
+
 /**
  *
  * @author LevelX2
@@ -38,13 +40,17 @@ public class IntPlusDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage(EffectPhrasing phrasing) {
-        if (phrasing == EffectPhrasing.X_HIDDEN){
-            return "";
+        switch(phrasing){
+            case X_HIDDEN:
+                return "";
+            case FOR_EACH:
+                throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in AdditiveDynamicValue");
+            case X_IS:
+            case EQUAL_TO:
+                return CardUtil.numberToText(baseValue) + " plus " + value.getMessage(phrasing);
+            default:
+                throw new IllegalArgumentException("enum " + phrasing + " is not supported in AdditiveDynamicValue");
         }
-        if (phrasing == EffectPhrasing.FOR_EACH){
-            throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in IntPlusDynamicValue");
-        }
-        return CardUtil.numberToText(baseValue) + " plus " + value.getMessage(phrasing);
     }
 
     @Override
