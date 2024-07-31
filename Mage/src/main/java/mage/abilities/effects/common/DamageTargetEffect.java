@@ -15,7 +15,6 @@ import mage.target.Target;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import java.util.concurrent.SynchronousQueue;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -60,17 +59,8 @@ public class DamageTargetEffect extends OneShotEffect {
         this(amount, true);
     }
 
-    public DamageTargetEffect(DynamicValue amount, DynamicValue.EffectPhrasing phrasing) {
-        this(amount, true, phrasing);
-    }
-
     public DamageTargetEffect(DynamicValue amount, String whoDealDamageName) {
         this(amount, true);
-        this.sourceName = whoDealDamageName;
-    }
-
-    public DamageTargetEffect(DynamicValue amount, String whoDealDamageName, DynamicValue.EffectPhrasing phrasing) {
-        this(amount, true, phrasing);
         this.sourceName = whoDealDamageName;
     }
 
@@ -78,16 +68,8 @@ public class DamageTargetEffect extends OneShotEffect {
         this(amount, preventable, "");
     }
 
-    public DamageTargetEffect(DynamicValue amount, boolean preventable, DynamicValue.EffectPhrasing phrasing) {
-        this(amount, preventable, "", phrasing);
-    }
-
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription) {
         this(amount, preventable, targetDescription, false, DynamicValue.EffectPhrasing.EQUAL_TO);
-    }
-
-    public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, DynamicValue.EffectPhrasing phrasing) {
-        this(amount, preventable, targetDescription, false, phrasing);
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer) {
@@ -126,6 +108,11 @@ public class DamageTargetEffect extends OneShotEffect {
 
     public DamageTargetEffect withTargetDescription(String targetDescription) {
         this.targetDescription = targetDescription;
+        return this;
+    }
+
+    public DamageTargetEffect withPhrasing(DynamicValue.EffectPhrasing phrasing) {
+        this.phrasing = phrasing;
         return this;
     }
 
