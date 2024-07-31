@@ -23,6 +23,7 @@ public final class AlchemyDominaria extends ExpansionSet {
 
         cards.add(new SetCardInfo("Ancestral Recall", 32, Rarity.MYTHIC, mage.cards.a.AncestralRecall.class));
         cards.add(new SetCardInfo("Black Lotus", 35, Rarity.MYTHIC, mage.cards.b.BlackLotus.class));
+        cards.add(new SetCardInfo("Marwyn's Kindred", 16, Rarity.MYTHIC, mage.cards.m.MarwynsKindred.class));
         cards.add(new SetCardInfo("Mox Emerald", 36, Rarity.MYTHIC, mage.cards.m.MoxEmerald.class));
         cards.add(new SetCardInfo("Mox Jet", 37, Rarity.MYTHIC, mage.cards.m.MoxJet.class));
         cards.add(new SetCardInfo("Mox Pearl", 38, Rarity.MYTHIC, mage.cards.m.MoxPearl.class));
@@ -32,6 +33,7 @@ public final class AlchemyDominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Time Walk", 33, Rarity.MYTHIC, mage.cards.t.TimeWalk.class));
         cards.add(new SetCardInfo("Timetwister", 34, Rarity.MYTHIC, mage.cards.t.Timetwister.class));
         cards.add(new SetCardInfo("Vinesoul Spider", 18, Rarity.UNCOMMON, mage.cards.v.VinesoulSpider.class));
+        cards.add(new SetCardInfo("Wandering Treefolk", 19, Rarity.UNCOMMON, mage.cards.w.WanderingTreefolk.class));
 
 
 
