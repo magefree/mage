@@ -113,6 +113,7 @@ public abstract class ExpansionSet implements Serializable {
     protected boolean hasBasicLands = true;
 
     protected String blockName; // used to group sets in some GUI dialogs like choose set dialog
+    protected boolean isRotationSet = false;
     protected boolean hasBoosters = false;
     protected int numBoosterSpecial;
 
@@ -503,6 +504,10 @@ public abstract class ExpansionSet implements Serializable {
 
     public boolean hasBasicLands() {
         return hasBasicLands;
+    }
+
+    public boolean isRotationSet() {
+        return isRotationSet;
     }
 
     /**
