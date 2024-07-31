@@ -552,6 +552,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             if (isLimitUsageByOnce() && nonAvailableModes.contains(mode.getId())) {
                 continue;
             }
+            if (getMaxPawPrints() > 0 && getSelectedPawPrints() + mode.getPawPrintValue() > getMaxPawPrints()){
+                continue;
+            }
             availableModes.add(mode);
         }
         return availableModes;
