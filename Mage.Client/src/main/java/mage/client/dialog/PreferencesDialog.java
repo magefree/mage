@@ -51,6 +51,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static final Logger logger = Logger.getLogger(PreferencesDialog.class);
 
+    private static PreferencesDialog instance; // shared dialog instance
+
     // WARNING, do not change const values - it must be same for compatibility with user's saved settings
     public static final String KEY_SHOW_TOOLTIPS_DELAY = "showTooltipsDelay";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
@@ -478,6 +480,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
+    public static PreferencesDialog getInstance() {
+        if (instance == null) {
+            instance = new PreferencesDialog(new javax.swing.JFrame(), true);
+        }
+        return instance;
+    }
+
     public static ThemeType getCurrentTheme() {
         if (currentTheme == null) {
             // first init
@@ -551,6 +560,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public PreferencesDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setResizable(false);
+
         txtImageFolderPath.setEditable(false);
         cbProxyType.setModel(new DefaultComboBoxModel<>(Connection.ProxyType.values()));
         cbTheme.setModel(new DefaultComboBoxModel<>(ThemeType.values()));
@@ -2828,6 +2839,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         Preferences prefs = MageFrame.getPreferences();
 
         // main
@@ -2984,7 +2996,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void saveTheme(boolean refreshTheme) {
         Preferences prefs = MageFrame.getPreferences();
-        save(prefs, dialog.cbTheme, KEY_THEME);
+        save(prefs, getInstance().cbTheme, KEY_THEME);
 
         if (refreshTheme) {
             loadTheme();
@@ -2992,6 +3004,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void saveGUISize(boolean refreshGUI, boolean refreshTheme) {
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         Preferences prefs = MageFrame.getPreferences();
         dialog.sizeSettings.values().forEach(setting -> {
             save(prefs, setting.slider, setting.key, UPDATE_CACHE_POLICY);
@@ -3004,7 +3017,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        dialog.setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void useDefaultPath() {
@@ -3015,7 +3028,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void useConfigurablePath() {
         String path = CACHE.get(KEY_CARD_IMAGES_PATH);
-        dialog.txtImageFolderPath.setText(path);
+        txtImageFolderPath.setText(path);
         txtImageFolderPath.setEnabled(true);
         btnBrowseImageLocation.setEnabled(true);
     }
@@ -3050,7 +3063,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void useSelectBackgroundImage() {
         String path = CACHE.get(KEY_BACKGROUND_IMAGE);
-        dialog.txtBackgroundImagePath.setText(path);
+        txtBackgroundImagePath.setText(path);
         txtBackgroundImagePath.setEnabled(true);
         btnBrowseBackgroundImage.setEnabled(true);
     }
@@ -3233,6 +3246,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         }
         final int openedTab = param;
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         java.awt.EventQueue.invokeLater(() -> {
             if (!dialog.isVisible()) {
                 Preferences prefs = MageFrame.getPreferences();
@@ -3275,6 +3289,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadPhases(Preferences prefs) {
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         load(prefs, dialog.tooltipDelay, KEY_SHOW_TOOLTIPS_DELAY, "300");
         load(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true");
         load(prefs, dialog.showFullImagePath, KEY_SHOW_FULL_IMAGE_PATH, "true");
@@ -3344,7 +3359,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static void loadGuiSize(Preferences prefs) {
         isLoadingSizes = true;
         try {
-            dialog.sizeSettings.values().forEach(setting -> {
+            getInstance().sizeSettings.values().forEach(setting -> {
                 load(prefs, setting.slider, setting.key, setting.defaultValue.toString());
             });
         } finally {
@@ -3353,6 +3368,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadImagesSettings(Preferences prefs) {
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         String prop = prefs.get(KEY_CARD_IMAGES_USE_DEFAULT, "true");
         if (prop.equals("true")) {
             dialog.cbUseDefaultImageFolder.setSelected(true);
@@ -3375,7 +3391,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbCardRenderHideSetSymbol, KEY_CARD_RENDERING_SET_SYMBOL, "true");
         load(prefs, dialog.cbCardRenderShowReminderText, KEY_CARD_RENDERING_REMINDER_TEXT, "true");
         load(prefs, dialog.cbCardRenderShowAbilityTextOverlay, KEY_CARD_RENDERING_ABILITY_TEXT_OVERLAY, "true");
-
 
         //add background load precedure
         prop = prefs.get(KEY_BACKGROUND_IMAGE_DEFAULT, "true");
@@ -3414,6 +3429,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadSoundSettings(Preferences prefs) {
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         dialog.cbEnableGameSounds.setSelected(prefs.get(KEY_SOUNDS_GAME_ON, "true").equals("true"));
         dialog.cbEnableDraftSounds.setSelected(prefs.get(KEY_SOUNDS_DRAFT_ON, "true").equals("true"));
         dialog.cbEnableSkipButtonsSounds.setSelected(prefs.get(KEY_SOUNDS_SKIP_BUTTONS_ON, "true").equals("true"));
@@ -3431,6 +3447,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadProxySettings(Preferences prefs) {
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase(Locale.ENGLISH)));
 
         load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, ClientDefaultSettings.serverName);
@@ -3443,6 +3460,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadControlSettings(Preferences prefs) {
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         load(prefs, dialog.keyConfirm);
         load(prefs, dialog.keyCancelSkip);
         load(prefs, dialog.keyNextTurn);
@@ -3459,7 +3477,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static void loadThemeSettings(Preferences prefs) {
         isLoadingTheme = true;
         try {
-            dialog.cbTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
+            getInstance().cbTheme.setSelectedItem(PreferencesDialog.getCurrentTheme());
         } finally {
             isLoadingTheme = false;
         }
@@ -3467,7 +3485,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static void loadSelectedAvatar(Preferences prefs) {
         getSelectedAvatar();
-        dialog.setSelectedId(selectedAvatarId);
+        getInstance().setSelectedId(selectedAvatarId);
     }
 
     public static int getSelectedAvatar() {
@@ -3484,6 +3502,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static UserSkipPrioritySteps getUserSkipPrioritySteps() {
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         if (!dialog.isVisible()) {
             loadPhases(MageFrame.getPreferences());
         }
@@ -3518,7 +3537,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static void openTab(int index) {
         try {
             if (index > 0) {
-                dialog.tabsPanel.setSelectedIndex(index);
+                getInstance().tabsPanel.setSelectedIndex(index);
             }
         } catch (Exception e) {
             logger.error("Error during open tab", e);
@@ -3526,6 +3545,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void saveImagesPath(Preferences prefs) {
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         if (!dialog.cbUseDefaultImageFolder.isSelected()) {
             String path = dialog.txtImageFolderPath.getText();
             prefs.put(KEY_CARD_IMAGES_PATH, path);
@@ -3545,7 +3565,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void saveSoundPath(Preferences prefs) {
-        String path = dialog.txtBattlefieldIBGMPath.getText();
+        String path = getInstance().txtBattlefieldIBGMPath.getText();
         prefs.put(KEY_SOUNDS_MATCH_MUSIC_PATH, path);
         updateCache(KEY_SOUNDS_MATCH_MUSIC_PATH, path);
     }
@@ -3605,6 +3625,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static void setPrefValue(String key, boolean value) {
+        PreferencesDialog dialog = PreferencesDialog.getInstance();
         switch (key) {
             case KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS:
                 dialog.cbAllowRequestToShowHandCards.setSelected(value);
@@ -4147,10 +4168,4 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtProxyServer;
     private javax.swing.JTextField txtProxyUserName;
     // End of variables declaration//GEN-END:variables
-
-    private static final PreferencesDialog dialog = new PreferencesDialog(new javax.swing.JFrame(), true);
-
-    static {
-        dialog.setResizable(false);
-    }
 }
