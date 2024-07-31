@@ -18,7 +18,7 @@ public class MultipliedValue implements DynamicValue {
 
     public MultipliedValue(DynamicValue value, int multiplier) {
         if (value instanceof StaticValue) {
-            throw new IllegalArgumentException("Don't pass StaticValue into MultipliedValue, just make a StaticValue with the multiplied result");
+            throw new IllegalArgumentException("Wrong code usage: Don't pass StaticValue into MultipliedValue, just make a StaticValue with the multiplied result");
         }
         this.value = value.copy();
         this.multiplier = multiplier;
