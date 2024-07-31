@@ -2591,7 +2591,7 @@ public class HumanPlayer extends PlayerImpl {
                         modeText = Character.toUpperCase(modeText.charAt(0)) + modeText.substring(1);
                     }
                     StringBuilder sb = new StringBuilder();
-                    if (modes.getMaxPawPrints() >= 0){
+                    if (mode.getPawPrintValue() > 0){
                         for (int i = 0; i < mode.getPawPrintValue(); ++i){
                             sb.append("{P}");
                         }
