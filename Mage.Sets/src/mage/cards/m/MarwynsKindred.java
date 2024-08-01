@@ -62,6 +62,6 @@ class MarwynsKindredEffect extends OneShotEffect {
         ConjureCardEffect conjureElvesCardEffect = new ConjureCardEffect("Llanowar Elves",
                 Zone.BATTLEFIELD, amount);
 
-        return conjureMarwynCardEffect.apply(game, source) && conjureElvesCardEffect.apply(game, source) ;
+        return conjureMarwynCardEffect.apply(game, source) && conjureElvesCardEffect.apply(game, source);
     }
 }
