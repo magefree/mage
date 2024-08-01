@@ -13,8 +13,8 @@ import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.Proxy;
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author JayDi85
@@ -28,7 +28,9 @@ public class ScryfallImageSource implements CardImageSource {
     private final Map<CardLanguage, String> languageAliases;
     private CardLanguage currentLanguage = CardLanguage.ENGLISH; // working language
     private final Map<CardDownloadData, String> preparedUrls = new HashMap<>();
-    private static final int DOWNLOAD_TIMEOUT_MS = 100;
+
+    private static final ReentrantLock waitBeforeRequestLock = new ReentrantLock();
+    private static final int DOWNLOAD_TIMEOUT_MS = 300;
 
     public static ScryfallImageSource getInstance() {
         return instance;
@@ -330,15 +332,22 @@ public class ScryfallImageSource implements CardImageSource {
 
     @Override
     public void doPause(String fullUrl) {
+        // scryfall recommends 300 ms timeout per each request to API to work under a rate limit
+        // possible error: 429 Too Many Requests
+        // TODO: add diff endpoint supports (api calls with timeout, cdn/direct calls without timeout)
         waitBeforeRequest();
     }
 
     private void waitBeforeRequest() {
-        // scryfall recommends 50-100 ms timeout per each request to API to work under a rate limit
-        // possible error: 429 Too Many Requests
         try {
-            Thread.sleep(DOWNLOAD_TIMEOUT_MS);
-        } catch (InterruptedException ignored) {
+            // single wait queue for all threads - it's guarantee min timeout before each api call
+            waitBeforeRequestLock.lock();
+            try {
+                Thread.sleep(DOWNLOAD_TIMEOUT_MS);
+            } finally {
+                waitBeforeRequestLock.unlock();
+            }
+        } catch (InterruptedException ignore) {
         }
     }
 
