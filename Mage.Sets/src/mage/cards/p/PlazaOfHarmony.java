@@ -40,7 +40,7 @@ public final class PlazaOfHarmony extends CardImpl {
         // When Plaza of Harmony enters the battlefield, if you control two or more Gates, you gain 3 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)),
-                condition, "When {this} enters the battlefield, " +
+                condition, "When {this} enters, " +
                 "if you control two or more Gates, you gain 3 life."
         ).addHint(new ConditionHint(condition, "You control two or more Gates")));
 

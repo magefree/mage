@@ -48,7 +48,7 @@ public final class RoccoCabarettiCaterer extends CardImpl {
                         true
                 ),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, " +
+                "When {this} enters, " +
                 "if you cast it, you may search your library for a creature card with mana value X or less, " +
                 "put it onto the battlefield, then shuffle.")
         );

@@ -36,7 +36,7 @@ public final class EarwigSquad extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new SearchLibraryAndExileTargetEffect(3, true), false
-                ), ProwlCostWasPaidCondition.instance, "When {this} enters the battlefield, " +
+                ), ProwlCostWasPaidCondition.instance, "When {this} enters, " +
                 "if its prowl cost was paid, search target opponent's library for three cards " +
                 "and exile them. Then that player shuffles."
         );

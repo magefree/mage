@@ -29,7 +29,7 @@ public final class BatWhisperer extends CardImpl {
         // When Bat Whisperer enters the battlefield, if an opponent lost life this turn, create a 1/1 black Bat creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BatToken())),
-                OpponentsLostLifeCondition.instance, "When {this} enters the battlefield, " +
+                OpponentsLostLifeCondition.instance, "When {this} enters, " +
                 "if an opponent lost life this turn, create a 1/1 black Bat creature token with flying."
         ).addHint(OpponentsLostLifeHint.instance));
     }

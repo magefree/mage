@@ -55,7 +55,7 @@ public final class SoShiny extends CardImpl {
         // When So Shiny enters the battlefield, if you control a token, tap enchanted creature, then scry 2.
         ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()),
-                condition, "When {this} enters the battlefield, " +
+                condition, "When {this} enters, " +
                 "if you control a token, tap enchanted creature, then scry 2."
         );
         ability.addEffect(new ScryEffect(2));
