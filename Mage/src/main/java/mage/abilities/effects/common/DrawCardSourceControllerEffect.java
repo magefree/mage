@@ -64,7 +64,9 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         }
         String value = amount.toString();
         sb.append(CardUtil.numberToText(value, "a"));
-        sb.append(value.equals("1") ? " card" : " cards");
+        if (!value.contains("card")) {
+            sb.append(value.equals("1") ? " card" : " cards");
+        }
         String message = amount.getMessage();
         if (!message.isEmpty()) {
             sb.append(value.equals("X") ? ", where X is " : " for each ");

@@ -28,6 +28,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Artist's Talent", 124, Rarity.RARE, mage.cards.a.ArtistsTalent.class));
         cards.add(new SetCardInfo("Azure Beastbinder", 41, Rarity.RARE, mage.cards.a.AzureBeastbinder.class));
         cards.add(new SetCardInfo("Bakersbane Duo", 163, Rarity.COMMON, mage.cards.b.BakersbaneDuo.class));
+        cards.add(new SetCardInfo("Bandit's Talent", 83, Rarity.UNCOMMON, mage.cards.b.BanditsTalent.class));
         cards.add(new SetCardInfo("Banishing Light", 1, Rarity.COMMON, mage.cards.b.BanishingLight.class));
         cards.add(new SetCardInfo("Bark-Knuckle Boxer", 164, Rarity.UNCOMMON, mage.cards.b.BarkKnuckleBoxer.class));
         cards.add(new SetCardInfo("Barkform Harvester", 243, Rarity.COMMON, mage.cards.b.BarkformHarvester.class));
