@@ -2,6 +2,7 @@ package mage.client.remote;
 
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
+import mage.util.DebugUtil;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 
@@ -13,7 +14,12 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Network: proxy class to set up and use network connections like URLConnection
@@ -38,6 +44,9 @@ public class XmageURLConnection {
 
     private static final int CONNECTION_STARTING_TIMEOUT_MS = 10000;
     private static final int CONNECTION_READING_TIMEOUT_MS = 60000;
+
+    private static final AtomicLong debugLastRequestTimeMs = new AtomicLong(0);
+    private static final ReentrantLock debugLogsWriterlock = new ReentrantLock();
 
     final String url;
     Proxy proxy = null;
@@ -135,7 +144,40 @@ public class XmageURLConnection {
     public void connect() throws IOException {
         makeSureConnectionStarted();
 
+        // debug: take time before send real request
+        long diffTime = 0;
+        if (DebugUtil.NETWORK_PROFILE_REQUESTS) {
+            long currentTime = System.currentTimeMillis();
+            long oldTime = debugLastRequestTimeMs.getAndSet(currentTime);
+            if (oldTime > 0) {
+                diffTime = currentTime - oldTime;
+            }
+        }
+
+        // send request
         this.connection.connect();
+
+        // wait response
+        this.connection.getResponseCode();
+
+        // debug: save stats, can be called from diff threads
+        if (DebugUtil.NETWORK_PROFILE_REQUESTS) {
+            String debugInfo = String.format("+%d %d %s %s",
+                    diffTime,
+                    this.connection.getResponseCode(),
+                    this.connection.getResponseMessage(),
+                    this.url
+            ) + System.lineSeparator();
+            debugLogsWriterlock.lock();
+            try {
+                // it's simple and slow save without write buffer, but it's ok for images download process
+                Files.write(Paths.get(DebugUtil.NETWORK_PROFILE_REQUESTS_DUMP_FILE_NAME), debugInfo.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            } finally {
+                debugLogsWriterlock.unlock();
+            }
+        }
+
+        // print error logs
         printHttpResult();
     }
 

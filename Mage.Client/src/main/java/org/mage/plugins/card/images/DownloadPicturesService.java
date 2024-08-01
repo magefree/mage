@@ -960,6 +960,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             });
 
             // remove all downloaded cards, missing must be remains
+            // TODO: too slow on finished, must be reworked (e.g. run full check instead remove)
             this.cardsDownloadQueue.removeAll(downloadedCards);
             this.cardsMissing.removeAll(downloadedCards);
 

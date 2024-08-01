@@ -53,6 +53,10 @@ public class DebugUtil {
     // - open *.sql file for all sql-queries and exec stats
     public static boolean DATABASE_PROFILE_SQL_QUERIES_TO_FILE = false;
 
+    // network
+    public static boolean NETWORK_PROFILE_REQUESTS = false; // collect diff time between requests, http status and url into special log file
+    public static String NETWORK_PROFILE_REQUESTS_DUMP_FILE_NAME = "httpRequests.log";
+
     public static String getMethodNameWithSource(final int depth) {
         return TraceHelper.getMethodNameWithSource(depth);
     }
