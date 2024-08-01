@@ -43,7 +43,7 @@ public final class AureliaTheLawAbove extends CardImpl {
 
         // Whenever a player attacks with three or more creatures, you draw a card.
         this.addAbility(new AureliaTheLawAboveTriggeredAbility(
-                new DrawCardSourceControllerEffect(1, "you"), 3
+                new DrawCardSourceControllerEffect(1, true), 3
         ));
 
         // Whenever a player attacks with five or more creatures, Aurelia, the Law Above deals 3 damage to each of your opponents and you gain 3 life.

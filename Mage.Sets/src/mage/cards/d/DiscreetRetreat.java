@@ -75,7 +75,7 @@ public final class DiscreetRetreat extends CardImpl {
 class DiscreetRetreatTriggeredAbility extends TriggeredAbilityImpl {
 
     DiscreetRetreatTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, "you"));
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, true));
         addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         setTriggerPhrase("Whenever you cast your first outlaw spell each turn, ");
     }

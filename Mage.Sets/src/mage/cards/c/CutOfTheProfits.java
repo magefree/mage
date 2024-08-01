@@ -22,7 +22,7 @@ public final class CutOfTheProfits extends CardImpl {
         this.addAbility(new CasualtyAbility(3));
 
         // You draw X cards and you lose X life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance, "you"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance, true));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(GetXValue.instance).concatBy("and"));
     }
 

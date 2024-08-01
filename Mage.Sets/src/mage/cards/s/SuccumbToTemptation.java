@@ -18,7 +18,7 @@ public final class SuccumbToTemptation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{B}");
 
         // You draw two cards and you lose 2 life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, "you"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, true));
         Effect effect = new LoseLifeSourceControllerEffect(2);
         effect.setText("and you lose 2 life");
         this.getSpellAbility().addEffect(effect);
