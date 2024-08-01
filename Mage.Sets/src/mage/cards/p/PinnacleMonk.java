@@ -46,10 +46,10 @@ public final class PinnacleMonk extends ModalDoubleFacedCard {
         // Mystic Peak
         // Land
 
-        // As Mystic Peak enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As Mystic Peak enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(
                 new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
-                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+                "you may pay 3 life. If you don't, it enters tapped"
         ));
 
         // {T}: Add {R}.

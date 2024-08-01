@@ -13,7 +13,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class NayaSoulbeastTest extends CardTestPlayerBase {
     
     /*
-    Reported bug: I am finding an issue with Naya Soulbeast, it enters the battlefield and the effect that makes the players reveal 
+    Reported bug: I am finding an issue with Naya Soulbeast, it enters and the effect that makes the players reveal
     the top of their library work, my issue is that it doesn't gain the +1/+1 counters even if there are non-land cards revealed, 
     and since it is a 0/0 it is destroyed as it enters battlefield unless you have a permanent grants creatures you control +1/+1 
     and even in that situation, it doesn't gain the +1/+1 counters.

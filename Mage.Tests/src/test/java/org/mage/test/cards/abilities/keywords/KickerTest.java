@@ -46,7 +46,7 @@ public class KickerTest extends CardTestPlayerBase {
     /**
      * Aether Figment Creature — Illusion 1/1, 1U (2) Kicker {3} (You may pay an
      * additional {3} as you cast this spell.) Aether Figment can't be blocked.
-     * If Aether Figment was kicked, it enters the battlefield with two +1/+1
+     * If Aether Figment was kicked, it enters with two +1/+1
      * counters on it.
      */
     @Test
@@ -459,7 +459,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         //
         // Kicker {4}
-        // If Academy Drake was kicked, it enters the battlefield with two +1/+1 counters on it.
+        // If Academy Drake was kicked, it enters with two +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Academy Drake", 1); // {2}{U}, 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4 + 4 + 3);
         //
@@ -666,7 +666,7 @@ public class KickerTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         // Kicker {2}
-        // If Ardent Soldier was kicked, it enters the battlefield with a +1/+1 counter on it.
+        // If Ardent Soldier was kicked, it enters with a +1/+1 counter on it.
         addCard(Zone.LIBRARY, playerA, "Ardent Soldier", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2); // for kicker cost
         //

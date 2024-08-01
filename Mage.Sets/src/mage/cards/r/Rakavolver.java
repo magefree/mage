@@ -35,14 +35,14 @@ public final class Rakavolver extends CardImpl {
         KickerAbility kickerAbility = new KickerAbility("{1}{W}");
         kickerAbility.addKickerCost("{U}");
         this.addAbility(kickerAbility);
-        // If Rakavolver was kicked with its {1}{W} kicker, it enters the battlefield with two +1/+1 counters on it and with "Whenever Rakavolver deals damage, you gain that much life."
+        // If Rakavolver was kicked with its {1}{W} kicker, it enters with two +1/+1 counters on it and with "Whenever Rakavolver deals damage, you gain that much life."
         Ability ability = new  EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-            new KickedCostCondition("{1}{W}"), "If {this} was kicked with its {1}{W} kicker, it enters the battlefield with two +1/+1 counters on it and with \"Whenever {this} deals damage, you gain that much life.\"", "");
+            new KickedCostCondition("{1}{W}"), "If {this} was kicked with its {1}{W} kicker, it enters with two +1/+1 counters on it and with \"Whenever {this} deals damage, you gain that much life.\"", "");
         ability.addEffect(new GainAbilitySourceEffect(new DealsDamageGainLifeSourceTriggeredAbility(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
-        // If Rakavolver was kicked with its {U} kicker, it enters the battlefield with a +1/+1 counter on it and with flying.
+        // If Rakavolver was kicked with its {U} kicker, it enters with a +1/+1 counter on it and with flying.
         ability = new  EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            new KickedCostCondition("{U}"), "If {this} was kicked with its {U} kicker, it enters the battlefield with a +1/+1 counter on it and with flying.", "");
+            new KickedCostCondition("{U}"), "If {this} was kicked with its {U} kicker, it enters with a +1/+1 counter on it and with flying.", "");
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
 

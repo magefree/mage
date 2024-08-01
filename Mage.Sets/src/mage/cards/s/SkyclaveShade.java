@@ -38,10 +38,10 @@ public final class SkyclaveShade extends CardImpl {
         // Skyclave Shade can't block.
         this.addAbility(new CantBlockAbility());
 
-        // If Skyclave Shade was kicked, it enters the battlefield with two +1/+1 counters on it.
+        // If Skyclave Shade was kicked, it enters with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.ONCE,
-                "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""
+                "If {this} was kicked, it enters with two +1/+1 counters on it.", ""
         ));
 
         // Landfall — Whenever a land enters the battlefield under your control, if Skyclave Shade is in your graveyard and it's your turn, you may cast it from your graveyard this turn.
