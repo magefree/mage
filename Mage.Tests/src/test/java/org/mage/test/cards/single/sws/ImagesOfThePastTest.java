@@ -37,7 +37,7 @@ public class ImagesOfThePastTest extends CardTestPlayerBase {
         // activate and rise 2x dies triggers (adds 2x Spirit)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Images of the Past", "Balduvian Bears^Silvercoat Lion");
         setChoice(playerA, "Whenever another creature dies", 2); // 2x triggers from Syr
-        setChoice(playerA, "Whenever another creature enters"); // 2x triggers from Healer
+        setChoice(playerA, "Whenever another creature you control enters"); // 2x triggers from Healer
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         //
         checkExileCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Balduvian Bears", 1);
