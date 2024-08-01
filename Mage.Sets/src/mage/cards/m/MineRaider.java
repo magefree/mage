@@ -50,7 +50,7 @@ public final class MineRaider extends CardImpl {
         // When Mine Raider enters the battlefield, if you control another outlaw, create a Treasure token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())), condition,
-                "When {this} enters the battlefield, if you control another outlaw, create a Treasure token."
+                "When {this} enters, if you control another outlaw, create a Treasure token."
         ).addHint(hint));
     }
 

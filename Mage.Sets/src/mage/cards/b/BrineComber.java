@@ -38,7 +38,7 @@ public final class BrineComber extends CardImpl {
 
         // Whenever Brine Comber enters the battlefield or becomes the target of an Aura spell, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new OrTriggeredAbility(Zone.ALL, new CreateTokenEffect(new SpiritWhiteToken()), false,
-                "Whenever {this} enters the battlefield or becomes the target of an Aura spell, ",
+                "Whenever {this} enters or becomes the target of an Aura spell, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new BecomesTargetSourceTriggeredAbility(null, filter)));
 

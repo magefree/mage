@@ -42,7 +42,7 @@ public final class FlameWreathedPhoenix extends CardImpl {
         Effect effect = new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
         ability.addEffect(effect);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
-                "When {this} enters the battlefield, if tribute wasn't paid, it gains haste and \"When this creature dies, return it to its owner's hand.\""));
+                "When {this} enters, if tribute wasn't paid, it gains haste and \"When this creature dies, return it to its owner's hand.\""));
 
     }
 

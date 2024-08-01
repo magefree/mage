@@ -188,8 +188,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
         // Kicker {1}{G} and/or {2}{U}
-        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
-        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
@@ -211,8 +211,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
         // Kicker {1}{G} and/or {2}{U}
-        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
-        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise", 2);
@@ -239,8 +239,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
         // Kicker {1}{G} and/or {2}{U}
-        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
-        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise", 1);
@@ -253,7 +253,7 @@ public class KickerTest extends CardTestPlayerBase {
         setChoice(playerA, true);  // use kicker {1}{G} - destroy target creature with flying
         setChoice(playerA, true); // use kicker {2}{U} - draw two cards
         // spell must be countered, so no chooses
-        //setChoice(playerA, "When "); // two triggers rised: When {this} enters the battlefield, if it was kicked...
+        //setChoice(playerA, "When "); // two triggers rised: When {this} enters, if it was kicked...
         //addTarget(playerA, "Birds of Paradise"); // target for {1}{G} trigger
 
         // counter kicked spell

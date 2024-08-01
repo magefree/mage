@@ -44,7 +44,7 @@ public final class FrontierSiege extends CardImpl {
 
         // As Frontier Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
-                "As {this} enters the battlefield, choose Khans or Dragons.", ""));
+                "As {this} enters, choose Khans or Dragons.", ""));
 
         // * Khans - At the beginning of each of your main phases, add {G}{G}.
         this.addAbility(new ConditionalTriggeredAbility(

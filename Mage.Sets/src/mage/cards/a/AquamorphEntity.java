@@ -58,7 +58,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
     AquamorphEntityReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "as {this} enters the battlefield or is turned face up, it becomes your choice of 5/1 or 1/5";
+        staticText = "as {this} enters or is turned face up, it becomes your choice of 5/1 or 1/5";
     }
 
     private AquamorphEntityReplacementEffect(AquamorphEntityReplacementEffect effect) {

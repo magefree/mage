@@ -39,7 +39,7 @@ public class OrcishBowmasters extends CardImpl {
                 new OrTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "{this}"),
                     new EntersBattlefieldTriggeredAbility(null, false),
                     new OpponentDrawCardExceptFirstCardDrawStepTriggeredAbility(Zone.BATTLEFIELD, null, false)
-                ).setTriggerPhrase("When {this} enters the battlefield and whenever an opponent draws a card " +
+                ).setTriggerPhrase("When {this} enters and whenever an opponent draws a card " +
                     "except the first one they draw in each of their draw steps, ");
         triggeredAbility.addTarget(new TargetAnyTarget());
 

@@ -41,7 +41,7 @@ public final class PhyrexianWarhorse extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken())),
                 KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, create a 1/1 white Soldier creature token."
+                "When {this} enters, if it was kicked, create a 1/1 white Soldier creature token."
         ));
 
         // {1}, Sacrifice another creature: Phyrexian Warhorse gets +2/+1 until end of turn.

@@ -29,7 +29,7 @@ public final class CrackInTime extends CardImpl {
 
         // When Crack in Time enters the battlefield and at the beginning of your precombat main phase, exile target creature an opponent controls until Crack in Time leaves the battlefield.
         Ability ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect(), false,
-                "When {this} enters the battlefield and at the beginning of your precombat main phase, ",
+                "When {this} enters and at the beginning of your precombat main phase, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new BeginningOfPreCombatMainTriggeredAbility(null, TargetController.YOU, false)
         );

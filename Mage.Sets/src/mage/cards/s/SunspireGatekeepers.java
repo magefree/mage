@@ -44,7 +44,7 @@ public final class SunspireGatekeepers extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken())),
                 gatesCondition,
-                "When {this} enters the battlefield, if you control two or more Gates, create a 2/2 white Knight creature token with vigilance.")
+                "When {this} enters, if you control two or more Gates, create a 2/2 white Knight creature token with vigilance.")
                 .addHint(new ConditionHint(gatesCondition, "you control two or more Gates")));
     }
 

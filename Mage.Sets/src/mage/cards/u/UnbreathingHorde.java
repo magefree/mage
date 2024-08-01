@@ -62,7 +62,7 @@ class UnbreathingHordeEntersEffect extends OneShotEffect {
 
     public UnbreathingHordeEntersEffect() {
         super(Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard";
+        staticText = "{this} enters with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard";
     }
 
     private UnbreathingHordeEntersEffect(final UnbreathingHordeEntersEffect effect) {

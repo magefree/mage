@@ -43,7 +43,7 @@ public final class MirrodinBesieged extends CardImpl {
         // As Mirrodin Besieged enters the battlefield, choose Mirran or Phyrexian.
         this.addAbility(new EntersBattlefieldAbility(
                 new ChooseModeEffect("Mirran or Phyrexian?", "Mirran", "Phyrexian"),
-                null, "As {this} enters the battlefield, choose Mirran or Phyrexian.", ""
+                null, "As {this} enters, choose Mirran or Phyrexian.", ""
         ));
 
         // • Mirran — Whenever you cast an artifact spell, create a 1/1 colorless Myr artifact creature token.

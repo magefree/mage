@@ -32,7 +32,7 @@ public class AbilityOwnershipTest extends CardTestPlayerBase {
         // - SO Obelisk Spider must triggers 3x times
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rise of the Dark Realms");
         setChoice(playerA, "When "); // two triggers
-        // * Ability: Soul Snuffers - EntersBattlefieldTriggeredAbility: When {this} enters the battlefield, put a -1/-1 counter on each creature.
+        // * Ability: Soul Snuffers - EntersBattlefieldTriggeredAbility: When {this} enters, put a -1/-1 counter on each creature.
         // * Ability: Minister of Pain - ExploitAbility: Exploit <i>(When this creature enters the battlefield, you may sacrifice a creature.)</i>
         setChoice(playerA, false); // no exploit
         // 3x life triggers

@@ -55,7 +55,7 @@ public final class SproutingGoblin extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true)),
                 KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, search your library for a land card with a basic land type, reveal it, put it into your hand, then shuffle."
+                "When {this} enters, if it was kicked, search your library for a land card with a basic land type, reveal it, put it into your hand, then shuffle."
         ));
 
         // {R}, {T}, Sacrifice a land: Draw a card.

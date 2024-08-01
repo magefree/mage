@@ -29,7 +29,7 @@ public final class GeologicalAppraiser extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DiscoverEffect(3)),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it, discover 3."
+                "When {this} enters, if you cast it, discover 3."
         ));
     }
 
