@@ -37,7 +37,7 @@ public final class TinybonesJoinsUp extends CardImpl {
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
         this.addAbility(ability);
 
-        // Whenever a legendary creature enters the battlefield under your control, any number of target players each mill a card and lose 1 life.
+        // Whenever a legendary creature you control enters, any number of target players each mill a card and lose 1 life.
         ability = new EntersBattlefieldControlledTriggeredAbility(
                 new MillCardsTargetEffect(1).setText("any number of target players each mill a card"),
                 filter

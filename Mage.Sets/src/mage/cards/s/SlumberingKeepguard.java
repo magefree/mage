@@ -34,7 +34,7 @@ public final class SlumberingKeepguard extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever an enchantment enters the battlefield under your control, scry 1.
+        // Whenever an enchantment you control enters, scry 1.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ScryEffect(1, false), new FilterEnchantmentPermanent("an enchantment")));
         // {2}{W}: Slumbering Keepguard gets +1/+1 until end of turn for each enchantment you control.
         this.addAbility(new SimpleActivatedAbility(

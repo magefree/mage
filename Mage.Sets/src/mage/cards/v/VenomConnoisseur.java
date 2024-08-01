@@ -31,7 +31,7 @@ public final class VenomConnoisseur extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, Venom Connoisseur gains deathtouch until end of turn. If this is the second time this ability has resolved this turn, all creatures you control gain deathtouch until end of turn.
+        // Alliance — Whenever another creature you control enters, Venom Connoisseur gains deathtouch until end of turn. If this is the second time this ability has resolved this turn, all creatures you control gain deathtouch until end of turn.
         Ability ability = new AllianceAbility(new GainAbilitySourceEffect(
                 DeathtouchAbility.getInstance(), Duration.EndOfTurn
         ));

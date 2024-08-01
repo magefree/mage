@@ -43,7 +43,7 @@ public class JadeOrbOfDragonkindTest extends CardTestPlayerBase {
     addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
     addCard(Zone.BATTLEFIELD, playerA, jadeOrb);
     addCard(Zone.BATTLEFIELD, playerA, "Kronch Wrangler");
-    // Whenever a creature with power 4 or greater enters the battlefield under your control, put a +1/+1 counter on Kronch Wrangler.
+    // Whenever a creature with power 4 or greater you control enters, put a +1/+1 counter on Kronch Wrangler.
 
     castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcades);
 

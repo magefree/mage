@@ -38,7 +38,7 @@ public final class MarketwatchPhantom extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature with power 2 or less enters the battlefield under your control, Marketwatch Phantom gains flying until end of turn.
+        // Whenever another creature with power 2 or less you control enters, Marketwatch Phantom gains flying until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filter
         ));

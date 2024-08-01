@@ -41,7 +41,7 @@ public final class ScourgeOfValkas extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Scourge of Valkas or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
+        // Whenever Scourge of Valkas or another Dragon you control enters, it deals X damage to any target, where X is the number of Dragons you control.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new ScourgeOfValkasDamageEffect(), filter, false, true
         );

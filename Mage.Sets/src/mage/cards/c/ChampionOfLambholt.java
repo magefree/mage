@@ -32,7 +32,7 @@ public final class ChampionOfLambholt extends CardImpl {
         // Creatures with power less than Champion of Lambholt's power can't block creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChampionOfLambholtEffect()));
 
-        // Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Champion of Lambholt.
+        // Whenever another creature you control enters, put a +1/+1 counter on Champion of Lambholt.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 StaticFilters.FILTER_ANOTHER_CREATURE, false));

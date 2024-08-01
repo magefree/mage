@@ -53,7 +53,7 @@ public class ReturnToHandTest extends CardTestPlayerBase {
     @Test
     public void VeilbornGhoulTest1() {
         // Veilborn Ghoul can't block.
-        // Whenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.
+        // Whenever a Swamp you control enters, you may return Veilborn Ghoul from your graveyard to your hand.
         addCard(Zone.GRAVEYARD, playerA, "Veilborn Ghoul");
         addCard(Zone.HAND, playerA, "Swamp");
 
@@ -74,7 +74,7 @@ public class ReturnToHandTest extends CardTestPlayerBase {
     @Test
     public void VeilbornGhoulTest2() {
         // Veilborn Ghoul can't block.
-        // Whenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.
+        // Whenever a Swamp you control enters, you may return Veilborn Ghoul from your graveyard to your hand.
         addCard(Zone.GRAVEYARD, playerA, "Veilborn Ghoul");
         addCard(Zone.HAND, playerA, "Flood Plain");
 

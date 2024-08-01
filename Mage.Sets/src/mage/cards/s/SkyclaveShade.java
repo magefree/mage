@@ -44,11 +44,11 @@ public final class SkyclaveShade extends CardImpl {
                 "If {this} was kicked, it enters with two +1/+1 counters on it.", ""
         ));
 
-        // Landfall — Whenever a land enters the battlefield under your control, if Skyclave Shade is in your graveyard and it's your turn, you may cast it from your graveyard this turn.
+        // Landfall — Whenever a land you control enters, if Skyclave Shade is in your graveyard and it's your turn, you may cast it from your graveyard this turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new LandfallAbility(Zone.GRAVEYARD, new SkyclaveShadeEffect(), false),
                 SkyclaveShadeCondition.instance, "<i>Landfall</i> &mdash; Whenever a land " +
-                "enters the battlefield under your control, if {this} is in your graveyard and it's your turn, " +
+                "you control enters, if {this} is in your graveyard and it's your turn, " +
                 "you may cast it from your graveyard this turn."
         ));
     }

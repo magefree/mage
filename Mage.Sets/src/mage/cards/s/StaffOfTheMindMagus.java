@@ -33,9 +33,9 @@ public final class StaffOfTheMindMagus extends CardImpl {
     public StaffOfTheMindMagus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // Whenever you cast a blue spell or an Island enters the battlefield under your control, you gain 1 life.
+        // Whenever you cast a blue spell or an Island you control enters, you gain 1 life.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), false,
-                "Whenever you cast a blue spell or an Island enters the battlefield under your control, ",
+                "Whenever you cast a blue spell or an Island you control enters, ",
                 new SpellCastControllerTriggeredAbility(null, filterSpell,false),
                 new EntersBattlefieldControlledTriggeredAbility(null, filterLand)));
     }

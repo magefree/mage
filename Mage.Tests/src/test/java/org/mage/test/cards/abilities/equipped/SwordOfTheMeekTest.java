@@ -38,7 +38,7 @@ public class SwordOfTheMeekTest extends CardTestPlayerBase {
 
         // Equipped creature gets +1/+2.
         // Equip {2}
-        // Whenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
+        // Whenever a 1/1 creature you control enters, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
         addCard(Zone.GRAVEYARD, playerA, "Sword of the Meek");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chromatic Star");

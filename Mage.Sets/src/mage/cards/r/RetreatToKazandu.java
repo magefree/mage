@@ -21,7 +21,7 @@ public final class RetreatToKazandu extends CardImpl {
     public RetreatToKazandu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
-        // <i>Landfall</i>-Whenever a land enters the battlefield under your control, choose one - Put a +1/+1 counter on target creature; or You gain 2 life.
+        // <i>Landfall</i>-Whenever a land you control enters, choose one - Put a +1/+1 counter on target creature; or You gain 2 life.
         LandfallAbility ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
         ability.addTarget(new TargetCreaturePermanent());
         Mode mode = new Mode(new GainLifeEffect(2));

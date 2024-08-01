@@ -26,7 +26,7 @@ public final class SetessanChampion extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Constellation — Whenever an enchantment enters the battlefield under your control, put a +1/+1 counter on Setessan Champion and draw a card.
+        // Constellation — Whenever an enchantment you control enters, put a +1/+1 counter on Setessan Champion and draw a card.
         Ability ability = new ConstellationAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, false
         );

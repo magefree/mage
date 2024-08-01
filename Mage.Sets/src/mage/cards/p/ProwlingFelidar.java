@@ -28,7 +28,7 @@ public final class ProwlingFelidar extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Landfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on Prowling Felidar.
+        // Landfall — Whenever a land you control enters, put a +1/+1 counter on Prowling Felidar.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 

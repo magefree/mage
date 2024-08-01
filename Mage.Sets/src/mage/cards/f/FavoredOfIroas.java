@@ -25,7 +25,7 @@ public final class FavoredOfIroas extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Constellation - Whenever an enchantment enters the battlefield under your control, Favored of Iroas gains double strike until end of turn.
+        // Constellation - Whenever an enchantment you control enters, Favored of Iroas gains double strike until end of turn.
         this.addAbility(new ConstellationAbility(new GainAbilitySourceEffect(
                 DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
         ), false, false));

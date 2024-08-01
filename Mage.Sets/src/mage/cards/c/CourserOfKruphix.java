@@ -36,7 +36,7 @@ public final class CourserOfKruphix extends CardImpl {
         // You may play lands from the top of your library.
         this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
-        // Whenever a land enters the battlefield under your control, you gain 1 life.
+        // Whenever a land you control enters, you gain 1 life.
         this.addAbility(new LandfallAbility(new GainLifeEffect(1)));
     }
 

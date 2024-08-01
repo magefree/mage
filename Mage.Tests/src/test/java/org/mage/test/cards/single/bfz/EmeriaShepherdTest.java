@@ -20,7 +20,7 @@ public class EmeriaShepherdTest extends CardTestPlayerBase {
          *
          * Emeria Shepherd (5)(W)(W)
             Flying 4/4 Creature Angel
-            Landfall — Whenever a land enters the battlefield under your control, you may return target nonland permanent card from your graveyard to your hand.
+            Landfall — Whenever a land you control enters, you may return target nonland permanent card from your graveyard to your hand.
             If that land is a Plains, you may return that nonland permanent card to the battlefield instead.
          */
         String emeria = "Emeria Shepherd";

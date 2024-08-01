@@ -38,7 +38,7 @@ public final class DeeprootElite extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever another Merfolk enters the battlefield under your control, put a +1/+1 counter on target Merfolk you control.
+        // Whenever another Merfolk you control enters, put a +1/+1 counter on target Merfolk you control.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), filterYourAnotherMerfolk);
         ability.addTarget(new TargetControlledPermanent(filterYourAnyMerfolk));
         this.addAbility(ability);

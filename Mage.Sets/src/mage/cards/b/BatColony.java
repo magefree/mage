@@ -52,7 +52,7 @@ public final class BatColony extends CardImpl {
                 new BatColonyWatcher()
         );
 
-        // Whenever a Cave enters the battlefield under your control, put a +1/+1 counter on target creature you control.
+        // Whenever a Cave you control enters, put a +1/+1 counter on target creature you control.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 filter

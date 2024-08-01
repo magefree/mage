@@ -33,7 +33,7 @@ public final class BattlewandOak extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Whenever a Forest enters the battlefield under your control, Battlewand Oak gets +2/+2 until end of turn.
+        // Whenever a Forest you control enters, Battlewand Oak gets +2/+2 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filterForest));
         
         // Whenever you cast a Treefolk spell, Battlewand Oak gets +2/+2 until end of turn.

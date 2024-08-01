@@ -40,7 +40,7 @@ public final class KellanJoinsUp extends CardImpl {
         // When Kellan Joins Up enters the battlefield, you may exile a nonland card with mana value 3 or less from your hand. If you do, it becomes plotted.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MayExileCardFromHandPlottedEffect(filterCard)));
 
-        // Whenever a legendary creature enters the battlefield under your control, put a +1/+1 counter on each creature you control.
+        // Whenever a legendary creature you control enters, put a +1/+1 counter on each creature you control.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(),

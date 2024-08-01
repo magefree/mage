@@ -30,7 +30,7 @@ public final class KapshoKitefins extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Kapsho Kitefins or another creature enters the battlefield under your control, tap target creature an opponent controls.
+        // Whenever Kapsho Kitefins or another creature you control enters, tap target creature an opponent controls.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new TapTargetEffect(), StaticFilters.FILTER_PERMANENT_CREATURE, false, true
         );

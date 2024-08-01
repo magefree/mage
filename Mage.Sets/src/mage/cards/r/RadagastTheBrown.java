@@ -41,7 +41,7 @@ public final class RadagastTheBrown extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
-        // Whenever Radagast the Brown or another nontoken creature enters the battlefield under your control, look at the top X cards of your library, where X is that creature's mana value. You may reveal a creature card from among them that doesn't share a creature type with a creature you control and put it into your hand. Put the rest on the bottom of your library in a random order.
+        // Whenever Radagast the Brown or another nontoken creature you control enters, look at the top X cards of your library, where X is that creature's mana value. You may reveal a creature card from among them that doesn't share a creature type with a creature you control and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(
                         PermanentEnteringBattlefieldManaValue.instance, 1,

@@ -55,7 +55,7 @@ public final class OmnathLocusOfTheRoil extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
-        // Whenever a land enters the battlefield under your control, put a +1/+1 counter on target Elemental you control. If you control eight or more lands, draw a card.
+        // Whenever a land you control enters, put a +1/+1 counter on target Elemental you control. If you control eight or more lands, draw a card.
         ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), condition,

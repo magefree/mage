@@ -28,7 +28,7 @@ public final class KruinStriker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever another creature enters the battlefield under your control, Kruin Striker gets +1/+0 and gains trample until end of turn.
+        // Whenever another creature you control enters, Kruin Striker gets +1/+0 and gains trample until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("{this} gets +1/+0"),
                 StaticFilters.FILTER_ANOTHER_CREATURE);

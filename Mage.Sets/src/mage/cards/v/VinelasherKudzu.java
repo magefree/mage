@@ -23,7 +23,7 @@ public final class VinelasherKudzu extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever a land enters the battlefield under your control, put a +1/+1 counter on Vinelasher Kudzu.
+        // Whenever a land you control enters, put a +1/+1 counter on Vinelasher Kudzu.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 

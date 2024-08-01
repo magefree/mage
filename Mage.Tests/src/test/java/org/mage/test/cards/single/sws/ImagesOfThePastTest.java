@@ -25,7 +25,7 @@ public class ImagesOfThePastTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt");
         //
         // Healer of the Pride
-        // Whenever another creature enters the battlefield under your control, you gain 2 life.
+        // Whenever another creature you control enters, you gain 2 life.
         addCard(Zone.BATTLEFIELD, playerA, "Healer of the Pride", 1);
         //
         // Syr Konrad, the Grim

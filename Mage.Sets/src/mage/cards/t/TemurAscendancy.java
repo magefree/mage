@@ -35,7 +35,7 @@ public final class TemurAscendancy extends CardImpl {
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
         
-        // Whenever a creature with power 4 or greater enters the battlefield under your control, you may draw a card.
+        // Whenever a creature with power 4 or greater you control enters, you may draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 

@@ -20,7 +20,7 @@ public final class KothFireOfResistanceEmblem extends Emblem {
         filterMountain.add(SubType.MOUNTAIN.getPredicate());
     }
 
-    // −7: You get an emblem with "Whenever a Mountain enters the battlefield under your control, this emblem deals 4 damage to any target."
+    // −7: You get an emblem with "Whenever a Mountain you control enters, this emblem deals 4 damage to any target."
     public KothFireOfResistanceEmblem() {
         super("Emblem Koth");
 

@@ -28,7 +28,7 @@ public final class SeraphSanctuary extends CardImpl {
 
         // When Seraph Sanctuary enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        // Whenever an Angel enters the battlefield under your control, you gain 1 life.
+        // Whenever an Angel you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

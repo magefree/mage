@@ -389,7 +389,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new GetEmblemEffect(new VenserTheSojournerEmblem()));
                                 break;
                             case 13: // KIORA MASTER OF THE DEPTHS 3
-                                sb.append("You get an emblem with “Whenever a creature enters the battlefield under your control, you may have it fight target creature.” Then create three 8/8 blue Octopus creature tokens.");
+                                sb.append("You get an emblem with “Whenever a creature you control enters, you may have it fight target creature.” Then create three 8/8 blue Octopus creature tokens.");
                                 effects.add(new CreateTokenEffect(new OctopusToken(), 3));
                                 effects.add(new GetEmblemEffect(new KioraMasterOfTheDepthsEmblem()));
                                 break;

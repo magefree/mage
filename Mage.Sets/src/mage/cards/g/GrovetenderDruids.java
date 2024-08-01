@@ -26,7 +26,7 @@ public final class GrovetenderDruids extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // <i>Rally</i>-Whenever Grovetender Druids or another Ally enters the battlefield under your control, you may pay {1}.
+        // <i>Rally</i>-Whenever Grovetender Druids or another Ally you control enters, you may pay {1}.
         // If you do, create a 1/1 green Plant creature token.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenEffect(new GrovetenderDruidsPlantToken()), new GenericManaCost(1)

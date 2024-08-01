@@ -36,7 +36,7 @@ public final class AnafenzaKinTreeSpirit extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another nontoken creature enters the battlefield under your control, bolster 1.
+        // Whenever another nontoken creature you control enters, bolster 1.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BolsterEffect(1), filter, false));
     }
 

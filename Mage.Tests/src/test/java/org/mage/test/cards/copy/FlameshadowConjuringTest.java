@@ -26,7 +26,7 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
     public void testCopyAndItsEffectsRemoved() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
-        // Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, put a token onto the battlefield that's a copy of that creature.
+        // Whenever a nontoken creature you control enters, you may pay {R}. If you do, put a token onto the battlefield that's a copy of that creature.
         // That token gains haste. Exile it at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Flameshadow Conjuring", 1);
 
@@ -52,7 +52,7 @@ public class FlameshadowConjuringTest extends CardTestPlayerBase {
     @Test
     public void testWurmcoilEngine() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
-        // Whenever a nontoken creature enters the battlefield under your control, you may pay {R}. If you do, put a token onto the battlefield that's a copy of that creature.
+        // Whenever a nontoken creature you control enters, you may pay {R}. If you do, put a token onto the battlefield that's a copy of that creature.
         // That token gains haste. Exile it at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Flameshadow Conjuring", 1);
         // Deathtouch, lifelink

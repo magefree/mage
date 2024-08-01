@@ -50,7 +50,7 @@ public final class BloodSpeaker extends CardImpl {
                 false);
         this.addAbility(ability);
 
-        // Whenever a Demon enters the battlefield under your control, return Blood Speaker from your graveyard to your hand.
+        // Whenever a Demon you control enters, return Blood Speaker from your graveyard to your hand.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter, false));
     }
 

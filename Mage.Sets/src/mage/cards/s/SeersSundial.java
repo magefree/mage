@@ -19,7 +19,7 @@ public final class SeersSundial extends CardImpl {
     public SeersSundial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // Landfall - Whenever a land enters the battlefield under your control, you may pay {2}. If you do, draw a card.
+        // Landfall - Whenever a land you control enters, you may pay {2}. If you do, draw a card.
         this.addAbility(new LandfallAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}")), false)); // optional = false because DoIfCost is already optonal
     }
 

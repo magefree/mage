@@ -769,7 +769,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
 
         // Kazandu Mammoth
         // creature 3/3
-        // Landfall — Whenever a land enters the battlefield under your control, Kazandu Mammoth gets +2/+2 until end of turn.
+        // Landfall — Whenever a land you control enters, Kazandu Mammoth gets +2/+2 until end of turn.
         //
         // Kazandu Valley
         // land
