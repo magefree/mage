@@ -115,6 +115,7 @@ public enum CounterType {
     INFECTION("infection"),
     INFLUENCE("influence"),
     INGENUITY("ingenuity"),
+    INGREDIENT("ingredient"),
     INTEL("intel"),
     INTERVENTION("intervention"),
     INVITATION("invitation"),

@@ -33,7 +33,7 @@ public final class RowansGrimSearch extends CardImpl {
         ));
 
         // You draw two cards and you lose 2 life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, "you").concatBy("<br>"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, true).concatBy("<br>"));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"));
     }
 

@@ -20,7 +20,7 @@ public final class BadDeal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
         // You draw two cards and each opponent discards two cards. Each player loses 2 life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("You draw two cards"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, true));
         this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(
                 StaticValue.get(2), false, TargetController.OPPONENT
         ).concatBy("and"));

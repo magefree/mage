@@ -9,11 +9,13 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -269,21 +271,4 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         return sb.toString();
     }
 
-    /**
-     * Find spell's kicked stats. Must be used on stack only, e.g. for SPELL_CAST events
-     */
-    public static int getSpellKickedCount(Game game, UUID spellId) {
-        return getSpellKickedCountStrict(game, spellId, "");
-    }
-
-    /**
-     * Find spell's kicked stats. Must be used on stack only, e.g. for SPELL_CAST events
-     */
-    public static int getSpellKickedCountStrict(Game game, UUID spellId, String needKickerCost) {
-        Spell spell = game.getSpellOrLKIStack(spellId);
-        if (spell != null) {
-            return KickerAbility.getKickedCounterStrict(game, spell.getSpellAbility(), needKickerCost);
-        }
-        return 0;
-    }
 }

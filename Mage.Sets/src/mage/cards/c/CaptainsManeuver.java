@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -73,7 +73,7 @@ class CaptainsManeuverEffect extends RedirectionEffect {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        amountToRedirect = ManacostVariableValue.REGULAR.calculate(game, source, this);
+        amountToRedirect = GetXValue.instance.calculate(game, source, this);
         redirectToObject = new MageObjectReference(source.getTargets().get(1).getFirstTarget(), game);
     }
 

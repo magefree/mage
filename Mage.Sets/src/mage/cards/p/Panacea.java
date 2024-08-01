@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class Panacea extends CardImpl {
 
         // {X}{X}, {tap}: Prevent the next X damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(
-                new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, ManacostVariableValue.REGULAR),
+                new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, GetXValue.instance),
                 new ManaCostsImpl<>("{X}{X}")
         );
         ability.addCost(new TapSourceCost());

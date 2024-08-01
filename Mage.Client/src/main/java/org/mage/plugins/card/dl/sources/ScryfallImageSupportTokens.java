@@ -2436,6 +2436,21 @@ public class ScryfallImageSupportTokens {
             put("M3C/Thopter", "https://api.scryfall.com/cards/tm3c/26/en?format=image");
             put("M3C/Emblem Vivien", "https://api.scryfall.com/cards/tm3c/28/en?format=image");
 
+            // BLB
+            put("BLB/Bat", "https://api.scryfall.com/cards/tblb/10/en?format=image");
+            put("BLB/Cragflame", "https://api.scryfall.com/cards/tblb/26/en?format=image");
+            put("BLB/Fish", "https://api.scryfall.com/cards/tblb/7/en?format=image");
+            put("BLB/Food", "https://api.scryfall.com/cards/tblb/27/en?format=image");
+            put("BLB/Otter", "https://api.scryfall.com/cards/tblb/25/en?format=image");
+            put("BLB/Rabbit", "https://api.scryfall.com/cards/tblb/3/en?format=image");
+            put("BLB/Emblem Ral", "https://api.scryfall.com/cards/tblb/30/en?format=image");
+            put("BLB/Rat", "https://api.scryfall.com/cards/tblb/13/en?format=image");
+            put("BLB/Snail", "https://api.scryfall.com/cards/tblb/14/en?format=image");
+            put("BLB/Squirrel", "https://api.scryfall.com/cards/tblb/23/en?format=image");
+            put("BLB/Sword", "https://api.scryfall.com/cards/tblb/28/en?format=image");
+            put("BLB/Treasure", "https://api.scryfall.com/cards/tblb/29/en?format=image");
+            put("BLB/Wall", "https://api.scryfall.com/cards/tblb/4/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

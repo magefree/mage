@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,6 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.common.TargetAnyTargetAmount;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +57,7 @@ class AvacynsJudgmentManacostVariableValue implements DynamicValue {
         if (manaCosts.getVariableCosts().isEmpty()) {
             return 2;
         }
-        return sourceAbility.getManaCostsToPay().getX();
+        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
     }
 
     @Override

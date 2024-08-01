@@ -2,7 +2,7 @@
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -20,11 +20,11 @@ public final class Overrule extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{U}");
 
         // Counter target spell unless its controller pays {X}.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // You gain X life.
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new GainLifeEffect(GetXValue.instance));
     }
 
     private Overrule(final Overrule card) {

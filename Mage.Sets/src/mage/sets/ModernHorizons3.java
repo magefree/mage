@@ -228,6 +228,7 @@ public final class ModernHorizons3 extends ExpansionSet {
         cards.add(new SetCardInfo("Polluted Delta", 224, Rarity.RARE, mage.cards.p.PollutedDelta.class));
         cards.add(new SetCardInfo("Powerbalance", 131, Rarity.RARE, mage.cards.p.Powerbalance.class));
         cards.add(new SetCardInfo("Priest of Titania", 286, Rarity.UNCOMMON, mage.cards.p.PriestOfTitania.class));
+        cards.add(new SetCardInfo("Primal Prayers", 166, Rarity.RARE, mage.cards.p.PrimalPrayers.class));
         cards.add(new SetCardInfo("Propagator Drone", 167, Rarity.UNCOMMON, mage.cards.p.PropagatorDrone.class));
         cards.add(new SetCardInfo("Proud Pack-Rhino", 41, Rarity.UNCOMMON, mage.cards.p.ProudPackRhino.class));
         cards.add(new SetCardInfo("Psychic Frog", 199, Rarity.RARE, mage.cards.p.PsychicFrog.class));

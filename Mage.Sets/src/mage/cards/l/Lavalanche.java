@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class Lavalanche extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}{G}");
 
         // Lavalanche deals X damage to target player and each creature they control.
-        this.getSpellAbility().addEffect(new LavalancheEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new LavalancheEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
 
     }

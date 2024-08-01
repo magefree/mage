@@ -7,7 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 
-@SuppressWarnings("serial")
+/**
+ * GUI component: JPanel with background image
+ */
 public class ImagePanel extends JPanel {
 
 
@@ -24,6 +26,8 @@ public class ImagePanel extends JPanel {
         this.image = image;
         this.style = style;
         setLayout(new BorderLayout());
+
+        setOpaque(true);
     }
 
     public void setImageAlignmentX(float alignmentX) {
@@ -55,7 +59,6 @@ public class ImagePanel extends JPanel {
 
         super.add(component, constraints);
     }
-
 
     @Override
     protected void paintComponent(Graphics g) {

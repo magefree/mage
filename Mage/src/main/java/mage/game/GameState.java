@@ -85,7 +85,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean isPlaneChase;
     private List<String> seenPlanes = new ArrayList<>();
     private List<Designation> designations = new ArrayList<>();
-    private List<Emblem> inherentEmblems = new ArrayList<>();
+    private List<Emblem> helperEmblems = new ArrayList<>(); // fake emblems for inner usage like better UX
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
@@ -158,7 +158,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes.addAll(state.seenPlanes);
         this.designations.addAll(state.designations);
-        this.inherentEmblems = CardUtil.deepCopyObject(state.inherentEmblems);
+        this.helperEmblems = CardUtil.deepCopyObject(state.helperEmblems);
         this.exile = state.exile.copy();
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
@@ -206,7 +206,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         exile.clear();
         command.clear();
         designations.clear();
-        inherentEmblems.clear();
+        helperEmblems.clear();
         seenPlanes.clear();
         isPlaneChase = false;
         revealed.clear();
@@ -248,7 +248,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes = state.seenPlanes;
         this.designations = state.designations;
-        this.inherentEmblems = state.inherentEmblems;
+        this.helperEmblems = state.helperEmblems;
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
@@ -519,12 +519,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         return designations;
     }
 
-    public List<Emblem> getInherentEmblems() {
-        return inherentEmblems;
+    public List<Emblem> getHelperEmblems() {
+        return helperEmblems;
     }
 
     public Plane getCurrentPlane() {
-        if (command != null && command.size() > 0) {
+        if (command != null && !command.isEmpty()) {
             for (CommandObject cobject : command) {
                 if (cobject instanceof Plane) {
                     return (Plane) cobject;
@@ -1184,16 +1184,13 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Inherent triggers (Rad counters) in the rules have no source.
-     * However to fit better with the engine, we make a fake emblem source,
-     * which is not displayed in any game zone. That allows the trigger to
-     * have a source, which helps with a bunch of situation like hosting,
-     * rather than having a  trigger.
+     * Add fake/helper emblems for hidden source of inherent triggers like Rad counters,
+     * additional card hints like storm counter, etc. See GameImpl.initGameDefaultHelperEmblems
      * <p>
-     * Should not be used except in very specific situations
+     * It allows game and GUI find and show full card object in stack's triggers, logs and hints popup.
      */
-    public void addInherentEmblem(Emblem emblem, UUID controllerId) {
-        getInherentEmblems().add(emblem);
+    public void addHelperEmblem(Emblem emblem, UUID controllerId) {
+        helperEmblems.add(emblem);
         emblem.setControllerId(controllerId);
         for (Ability ability : emblem.getInitAbilities()) {
             ability.setControllerId(controllerId);

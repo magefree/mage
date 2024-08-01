@@ -423,7 +423,7 @@ public class MageBook extends JComponent {
     }
 
     private void addEmblem(Emblem emblem, BigCard bigCard, UUID gameId, Rectangle rectangle) {
-        CardView cardView = new CardView(new EmblemView(emblem));
+        CardView cardView = new CardView(new EmblemView(emblem, null));
         addCard(cardView, bigCard, gameId, rectangle, false);
     }
 
@@ -433,7 +433,7 @@ public class MageBook extends JComponent {
     }
 
     private void addPlane(Plane plane, BigCard bigCard, UUID gameId, Rectangle rectangle) {
-        CardView cardView = new CardView(new PlaneView(plane));
+        CardView cardView = new CardView(new PlaneView(plane, null));
         addCard(cardView, bigCard, gameId, rectangle, false);
     }
 

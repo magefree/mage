@@ -29,6 +29,7 @@ import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
 import mage.players.PlayableObjectStats;
 import mage.players.PlayableObjectsList;
+import mage.util.DebugUtil;
 import mage.util.MultiAmountMessage;
 import mage.view.*;
 import org.apache.log4j.Logger;
@@ -64,7 +65,12 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class);
     private static final String YOUR_HAND = "Your hand";
-    private static final int X_PHASE_WIDTH = 55;
+
+    private static final int SKIP_BUTTONS_SPACE_H = 3;
+    private static final int SKIP_BUTTONS_SPACE_V = 3;
+
+    private static final int PHASE_BUTTONS_SPACE_H = 3;
+    private static final int PHASE_BUTTONS_SPACE_V = 3;
 
     private static final String CMD_AUTO_ORDER_FIRST = "cmdAutoOrderFirst";
     private static final String CMD_AUTO_ORDER_LAST = "cmdAutoOrderLast";
@@ -145,6 +151,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
 
             this.game.getMyHand().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
+            this.game.getMyHelperEmblems().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
             this.game.getStack().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
             this.game.getExile()
                     .stream()
@@ -186,6 +193,27 @@ public final class GamePanel extends javax.swing.JPanel {
     public GamePanel() {
         initComponents = true;
         initComponents();
+
+        // prepare commands buttons panel with flow layout (instead custom from IDE)
+        // size changes in helper method at the end
+        // TODO: remove IDE form file (it useless anyway due many custom code in init)
+        if (DebugUtil.GUI_GAME_DRAW_COMMAND_BUTTONS_PANEL_BORDER) {
+            pnlShortCuts.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
+        pnlShortCuts.removeAll();
+        pnlShortCuts.setLayout(null); // real layout on size settings
+        pnlShortCuts.add(btnSkipToNextTurn);
+        pnlShortCuts.add(btnSkipToEndTurn);
+        pnlShortCuts.add(btnSkipToNextMain);
+        pnlShortCuts.add(btnSkipToYourTurn);
+        pnlShortCuts.add(btnSkipStack);
+        pnlShortCuts.add(btnSkipToEndStepBeforeYourTurn);
+        pnlShortCuts.add(txtHoldPriority);
+        //pnlShortCuts.add(btnToggleMacro);
+        pnlShortCuts.add(btnSwitchHands);
+        pnlShortCuts.add(btnCancelSkip);
+        pnlShortCuts.add(btnConcede);
+        pnlShortCuts.add(btnStopWatching);
 
         pickNumber = new PickNumberDialog();
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
@@ -248,12 +276,14 @@ public final class GamePanel extends javax.swing.JPanel {
 
         resizeTimer = new Timer(1000, evt -> SwingUtilities.invokeLater(() -> {
             resizeTimer.stop();
-            setGUISize();
+            setGUISize(false);
             feedbackPanel.changeGUISize();
         }));
 
         pnlHelperHandButtonsStackArea.addComponentListener(componentAdapterPlayField);
         initComponents = false;
+
+        setGUISize(true);
     }
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
@@ -287,12 +317,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.players.clear();
         this.playersWhoLeft.clear();
 
-        if (jLayeredPane != null) {
-            jLayeredPane.remove(abilityPicker);
-            jLayeredPane.remove(DialogManager.getManager(gameId));
-        }
-        this.abilityPicker.cleanUp();
-        DialogManager.removeGame(gameId);
+        uninstallComponents();
 
         if (pickNumber != null) {
             pickNumber.removeDialog();
@@ -377,7 +402,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void changeGUISize() {
         initComponents = true;
-        setGUISize();
+        setGUISize(true);
         stackObjects.changeGUISize();
         feedbackPanel.changeGUISize();
         handContainer.changeGUISize();
@@ -418,17 +443,17 @@ public final class GamePanel extends javax.swing.JPanel {
         initComponents = false;
     }
 
-    private void setGUISize() {
+    private void setGUISize(boolean themeReload) {
         jSplitPane0.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
 
-        txtHoldPriority.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
+        txtHoldPriority.setFont(new Font(GUISizeHelper.gameFeedbackPanelFont.getFontName(), Font.BOLD, GUISizeHelper.gameFeedbackPanelFont.getSize()));
         GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
 
         // hand + stack panels
         // the stack takes up a portion of the possible space (GUISizeHelper.stackWidth)
-
+        // TODO: research and delete rare used settings
         int newStackWidth = pnlHelperHandButtonsStackArea.getWidth() * GUISizeHelper.stackWidth / 100;
         newStackWidth = Math.max(410, newStackWidth);
         Dimension newDimension = new Dimension(
@@ -438,6 +463,7 @@ public final class GamePanel extends javax.swing.JPanel {
         handContainer.setPreferredSize(newDimension);
         handContainer.setMaximumSize(newDimension);
 
+        // stack
         newDimension = new Dimension(
                 newStackWidth,
                 MageActionCallback.getHandOrStackMargins(Zone.STACK).getHeight() + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize
@@ -448,27 +474,72 @@ public final class GamePanel extends javax.swing.JPanel {
         stackObjects.setMaximumSize(newDimension);
         stackObjects.changeGUISize(); // must call to cards fit
 
-        newDimension = new Dimension(newStackWidth, (int) pnlShortCuts.getPreferredSize().getHeight());
+        // game logs and chat
+        userChatPanel.changeGUISize(GUISizeHelper.chatFont);
+        gameChatPanel.changeGUISize(GUISizeHelper.chatFont);
+
+        // skip buttons - sizes
+        // must be able to put controls in 2 rows
+        float guiScale = GUISizeHelper.dialogGuiScale;
+        int hGap = GUISizeHelper.guiSizeScale(SKIP_BUTTONS_SPACE_H, guiScale);
+        int vGap = GUISizeHelper.guiSizeScale(SKIP_BUTTONS_SPACE_V, guiScale);
+        newDimension = new Dimension(newStackWidth, (4 * vGap) + (2 * GUISizeHelper.gameCommandButtonHeight));
+        pnlShortCuts.setLayout(new FlowLayout(FlowLayout.RIGHT, hGap, vGap));
         pnlShortCuts.setPreferredSize(newDimension);
         pnlShortCuts.setMinimumSize(newDimension);
         pnlShortCuts.setMaximumSize(newDimension);
+        // skip buttons - sizes
+        Dimension strictSize = new Dimension(2 * GUISizeHelper.gameCommandButtonHeight, GUISizeHelper.gameCommandButtonHeight);
+        setSkipButtonSize(btnCancelSkip, guiScale, strictSize);
+        setSkipButtonSize(btnSkipToNextTurn, guiScale, strictSize);
+        setSkipButtonSize(btnSkipToEndTurn, guiScale, strictSize);
+        setSkipButtonSize(btnSkipToEndStepBeforeYourTurn, guiScale, strictSize);
+        setSkipButtonSize(btnSkipToYourTurn, guiScale, strictSize);
+        setSkipButtonSize(btnSkipToNextMain, guiScale, strictSize);
+        setSkipButtonSize(btnSkipStack, guiScale, strictSize);
+        setSkipButtonSize(btnConcede, guiScale, strictSize);
+        setSkipButtonSize(btnToggleMacro, guiScale, strictSize);
+        setSkipButtonSize(btnSwitchHands, guiScale, strictSize);
+        setSkipButtonSize(btnStopWatching, guiScale, strictSize);
+        pnlShortCuts.invalidate();
 
-        reloadThemeRelatedGraphic();
+        // phase buttons - sizes
+        int buttonSize = GUISizeHelper.gamePhaseButtonSize;
+        guiScale = GUISizeHelper.dialogGuiScale;
+        hGap = GUISizeHelper.guiSizeScale(PHASE_BUTTONS_SPACE_H, guiScale);
+        vGap = GUISizeHelper.guiSizeScale(PHASE_BUTTONS_SPACE_V, guiScale);
+        BoxLayout layout = new BoxLayout(jPhases, BoxLayout.Y_AXIS);
+        jPhases.setLayout(layout);
+        int fullPhaseWidth = Math.round(1.5f * GUISizeHelper.gamePhaseButtonSize);
+        jPhases.setPreferredSize(new Dimension(fullPhaseWidth, (vGap * phaseButtons.size()) + (buttonSize * phaseButtons.size())));
+        jPhases.setMaximumSize(new Dimension(fullPhaseWidth, Short.MAX_VALUE));
+        phaseButtons.forEach((phaseName, phaseButton) -> {
+            phaseButton.setPreferredSize(new Dimension(buttonSize, buttonSize));
+        });
+        // phase buttons - active size
+        if (lastGameData.game != null) {
+            updateActivePhase(lastGameData.game.getStep());
+        }
+
+        if (themeReload) {
+            reloadThemeRelatedGraphic();
+        }
     }
 
     private void reloadThemeRelatedGraphic() {
-        // skip buttons
-        btnCancelSkip.setIcon(new ImageIcon(ImageManagerImpl.instance.getCancelSkipButtonImage()));
-        btnSkipToNextTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipNextTurnButtonImage()));
-        btnSkipToEndTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEndTurnButtonImage()));
-        btnSkipToEndStepBeforeYourTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipEndStepBeforeYourTurnButtonImage()));
-        btnSkipToYourTurn.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipYourNextTurnButtonImage()));
-        btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipMainButtonImage()));
-        btnSkipStack.setIcon(new ImageIcon(ImageManagerImpl.instance.getSkipStackButtonImage()));
-        btnConcede.setIcon(new ImageIcon(ImageManagerImpl.instance.getConcedeButtonImage()));
-        btnToggleMacro.setIcon(new ImageIcon(ImageManagerImpl.instance.getToggleRecordMacroButtonImage()));
-        btnSwitchHands.setIcon(new ImageIcon(ImageManagerImpl.instance.getSwitchHandsButtonImage()));
-        btnStopWatching.setIcon(new ImageIcon(ImageManagerImpl.instance.getStopWatchButtonImage()));
+        // skip buttons - images
+        int buttonHeight = GUISizeHelper.gameCommandButtonHeight;
+        setSkipButtonImage(btnCancelSkip, ImageManagerImpl.instance.getCancelSkipButtonImage(buttonHeight));
+        setSkipButtonImage(btnSkipToNextTurn, ImageManagerImpl.instance.getSkipNextTurnButtonImage(buttonHeight));
+        setSkipButtonImage(btnSkipToEndTurn, ImageManagerImpl.instance.getSkipEndTurnButtonImage(buttonHeight));
+        setSkipButtonImage(btnSkipToEndStepBeforeYourTurn, ImageManagerImpl.instance.getSkipEndStepBeforeYourTurnButtonImage(buttonHeight));
+        setSkipButtonImage(btnSkipToYourTurn, ImageManagerImpl.instance.getSkipYourNextTurnButtonImage(buttonHeight));
+        setSkipButtonImage(btnSkipToNextMain, ImageManagerImpl.instance.getSkipMainButtonImage(buttonHeight));
+        setSkipButtonImage(btnSkipStack, ImageManagerImpl.instance.getSkipStackButtonImage(buttonHeight));
+        setSkipButtonImage(btnConcede, ImageManagerImpl.instance.getConcedeButtonImage(buttonHeight));
+        setSkipButtonImage(btnToggleMacro, ImageManagerImpl.instance.getToggleRecordMacroButtonImage(buttonHeight));
+        setSkipButtonImage(btnSwitchHands, ImageManagerImpl.instance.getSwitchHandsButtonImage(buttonHeight));
+        setSkipButtonImage(btnStopWatching, ImageManagerImpl.instance.getStopWatchButtonImage(buttonHeight));
 
         // hotkeys for skip buttons
         boolean displayButtonText = PreferencesDialog.getCurrentTheme().isShortcutsVisibleForSkipButtons();
@@ -483,8 +554,46 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // phase buttons
         phaseButtons.forEach((phaseName, phaseButton) -> {
-            phaseButton.update(phaseButton.getText(), ImageManagerImpl.instance.getPhaseImage(phaseName));
+            Image buttonImage = ImageManagerImpl.instance.getPhaseImage(phaseName, GUISizeHelper.gamePhaseButtonSize);
+            Rectangle buttonRect = new Rectangle(buttonImage.getWidth(null), buttonImage.getHeight(null));
+            phaseButton.update(phaseButton.getText(), buttonImage, buttonImage, buttonImage, buttonImage, buttonRect);
         });
+
+        // player panels
+        if (lastGameData.game != null) {
+            lastGameData.game.getPlayers().forEach(player -> {
+                PlayAreaPanel playPanel = this.players.getOrDefault(player.getPlayerId(), null);
+                if (playPanel != null) {
+                    // see test render dialog for refresh commands order
+                    playPanel.getPlayerPanel().fullRefresh(GUISizeHelper.playerPanelGuiScale);
+                    playPanel.init(player, bigCard, gameId, player.getPriorityTimeLeftSecs());
+                    playPanel.update(lastGameData.game, player, lastGameData.targets);
+                    playPanel.getPlayerPanel().sizePlayerPanel(isSmallMode());
+                }
+            });
+        }
+
+        // as workaround: can change size for closed ability picker only
+        if (this.abilityPicker != null && !this.abilityPicker.isVisible()) {
+            this.abilityPicker.fullRefresh(GUISizeHelper.dialogGuiScale);
+            this.abilityPicker.init(gameId, bigCard);
+        }
+    }
+
+    private void setSkipButtonImage(JButton button, Image image) {
+        button.setIcon(new ImageIcon(image));
+    }
+
+    private void setSkipButtonSize(JComponent button, float guiScale, Dimension size) {
+        if (button instanceof KeyboundButton) {
+            ((KeyboundButton) button).updateGuiScale(guiScale);
+        }
+
+        // no needs in size - it controlled by button's icon
+        if (true) return;
+        button.setMinimumSize(size);
+        button.setPreferredSize(size);
+        button.setMaximumSize(size);
     }
 
     private void saveDividerLocations() {
@@ -521,7 +630,13 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
+    private boolean isSmallMode() {
+        // TODO: no needs on gui scale?
+        return this.getBounds().height < 770;
+    }
+
     private void sizeToScreen() {
+        // on resize frame
         Rectangle rect = this.getBounds();
 
         if (rect.height < 770) {
@@ -532,9 +647,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 bigCard.setMinimumSize(bbDimension);
                 bigCard.setPreferredSize(bbDimension);
                 pnlShortCuts.revalidate();
-                pnlShortCuts.repaint();
                 for (PlayAreaPanel p : players.values()) {
-                    p.setSizeMode(smallMode);
+                    p.getPlayerPanel().sizePlayerPanel(smallMode);
                 }
             }
         } else if (smallMode) {
@@ -544,9 +658,8 @@ public final class GamePanel extends javax.swing.JPanel {
             bigCard.setMinimumSize(bbDimension);
             bigCard.setPreferredSize(bbDimension);
             pnlShortCuts.revalidate();
-            pnlShortCuts.repaint();
             for (PlayAreaPanel p : players.values()) {
-                p.setSizeMode(smallMode);
+                p.getPlayerPanel().sizePlayerPanel(smallMode);
             }
         }
 
@@ -667,6 +780,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public synchronized void init(int messageId, GameView game, boolean callGameUpdateAfterInit) {
         addPlayers(game);
+
         // default menu states
         setMenuStates(
                 PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
@@ -772,8 +886,10 @@ public final class GamePanel extends javax.swing.JPanel {
                 break;
             }
         }
+
+        // set init sizes
         for (PlayAreaPanel p : players.values()) {
-            p.setSizeMode(smallMode);
+            p.getPlayerPanel().sizePlayerPanel(isSmallMode());
         }
 
         GridBagConstraints panelC = new GridBagConstraints();
@@ -785,21 +901,6 @@ public final class GamePanel extends javax.swing.JPanel {
         this.pnlBattlefield.add(topPanel, panelC);
         panelC.gridy = 1;
         this.pnlBattlefield.add(bottomPanel, panelC);
-
-        // TODO: combat arrows aren't visible on re-connect, must click on avatar to update correctrly
-        //  reason: panels aren't visible/located here, so battlefieldpanel see wrong sizes
-        // recalc all component sizes and update permanents/arrows positions
-        // if you don't do it here then will catch wrong arrows drawing on re-connect (no sortLayout calls)
-        /*
-        this.validate();
-        for (Map.Entry<UUID, PlayAreaPanel> p : players.entrySet()) {
-            PlayerView playerView = game.getPlayers().stream().filter(view -> view.getPlayerId().equals(p.getKey())).findFirst().orElse(null);
-            if (playerView != null) {
-                p.getValue().getBattlefieldPanel().updateSize();
-                p.getValue().update(null, playerView, null);
-            }
-        }
-         */
     }
 
     public synchronized void updateGame(int messageId, GameView game) {
@@ -873,7 +974,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
 
         if (lastGameData.game.getStep() != null) {
-            updatePhases(lastGameData.game.getStep());
+            updateActivePhase(lastGameData.game.getStep());
             this.txtStep.setText(lastGameData.game.getStep().toString());
         } else {
             logger.debug("Step is empty");
@@ -1241,63 +1342,63 @@ public final class GamePanel extends javax.swing.JPanel {
         this.stackObjects.loadCards(game.getStack(), bigCard, gameId, true);
     }
 
-    /**
-     * Update phase buttons\labels.
-     */
-    private void updatePhases(PhaseStep step) {
-        if (step == null) {
-            logger.warn("step is null");
+    private void updateActivePhase(PhaseStep currentStep) {
+        if (currentStep == null) {
             return;
         }
-        if (currentStep != null) {
-            currentStep.setLocation(prevPoint);
-        }
-        switch (step) {
+
+        switch (currentStep) {
             case UNTAP:
-                updateButton("Untap");
+                updatePhaseButtons("Untap");
                 break;
             case UPKEEP:
-                updateButton("Upkeep");
+                updatePhaseButtons("Upkeep");
                 break;
             case DRAW:
-                updateButton("Draw");
+                updatePhaseButtons("Draw");
                 break;
             case PRECOMBAT_MAIN:
-                updateButton("Main1");
+                updatePhaseButtons("Main1");
                 break;
             case BEGIN_COMBAT:
-                updateButton("Combat_Start");
+                updatePhaseButtons("Combat_Start");
                 break;
             case DECLARE_ATTACKERS:
-                updateButton("Combat_Attack");
+                updatePhaseButtons("Combat_Attack");
                 break;
             case DECLARE_BLOCKERS:
-                updateButton("Combat_Block");
+                updatePhaseButtons("Combat_Block");
                 break;
             case FIRST_COMBAT_DAMAGE:
             case COMBAT_DAMAGE:
-                updateButton("Combat_Damage");
+                updatePhaseButtons("Combat_Damage");
                 break;
             case END_COMBAT:
-                updateButton("Combat_End");
+                updatePhaseButtons("Combat_End");
                 break;
             case POSTCOMBAT_MAIN:
-                updateButton("Main2");
+                updatePhaseButtons("Main2");
                 break;
             case END_TURN:
-                updateButton("Cleanup");
+            case CLEANUP:
+                updatePhaseButtons("Cleanup");
                 break;
             default:
                 break;
         }
     }
 
-    private void updateButton(String name) {
-        if (phaseButtons.containsKey(name)) {
-            currentStep = phaseButtons.get(name);
-            prevPoint = currentStep.getLocation();
-            currentStep.setLocation(prevPoint.x - 15, prevPoint.y);
-        }
+    private void updatePhaseButtons(String currentPhaseName) {
+        phaseButtons.forEach((phaseName, phaseButton) -> {
+            if (phaseName.equals(currentPhaseName)) {
+                //phaseButton.setBorder(this.phaseButtonBorderActive);
+                phaseButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+            } else {
+                //phaseButton.setBorder(this.phaseButtonBorderInactive);
+                phaseButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+            }
+        });
+        jPhases.invalidate();
     }
 
     // Called if the game frame is deactivated because the tabled the deck editor or other frames go to foreground
@@ -1387,6 +1488,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // open new
         CardHintsHelperDialog newDialog = new CardHintsHelperDialog();
+        newDialog.setSize(GUISizeHelper.dialogGuiScaleSize(newDialog.getSize()));
         newDialog.setGameData(this.lastGameData.game, this.gameId, this.bigCard);
         cardHintsWindows.put(code + UUID.randomUUID(), newDialog);
         MageFrame.getDesktop().add(newDialog, JLayeredPane.PALETTE_LAYER);
@@ -1983,7 +2085,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        abilityPicker = new mage.client.components.ability.AbilityPicker();
+        abilityPicker = new mage.client.components.ability.AbilityPicker(GUISizeHelper.dialogGuiScale);
         jSplitPane1 = new javax.swing.JSplitPane();
         jSplitPane0 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
@@ -2423,8 +2525,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         initPopupMenuTriggerOrder();
 
-        setGUISize();
-
         // Replay panel to control replay of games
         javax.swing.GroupLayout gl_pnlReplay = new javax.swing.GroupLayout(pnlReplay);
         pnlReplay.setLayout(gl_pnlReplay);
@@ -2511,8 +2611,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         jPhases = new JPanel();
         jPhases.setBackground(new Color(0, 0, 0, 0));
-        jPhases.setLayout(null);
-        jPhases.setPreferredSize(new Dimension(X_PHASE_WIDTH, 435));
+        // layout on gui size
 
         MouseAdapter phasesMouseAdapter = new MouseAdapter() {
             @Override
@@ -2520,20 +2619,16 @@ public final class GamePanel extends javax.swing.JPanel {
                 mouseClickPhaseBar(evt);
             }
         };
+
+        /// phase buttons
+        if (DebugUtil.GUI_GAME_DRAW_PHASE_BUTTONS_PANEL_BORDER) {
+            jPhases.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
                 "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
                 "Main2", "Cleanup", "Next_Turn"};
         for (String name : phases) {
             createPhaseButton(name, phasesMouseAdapter);
-        }
-
-        int i = 0;
-        for (String name : phaseButtons.keySet()) {
-            HoverButton hoverButton = phaseButtons.get(name);
-            hoverButton.setAlignmentX(LEFT_ALIGNMENT);
-            hoverButton.setBounds(X_PHASE_WIDTH - 36, i * 36, 36, 36);
-            jPhases.add(hoverButton);
-            i++;
         }
 
         pnlReplay.setOpaque(false);
@@ -2893,18 +2988,40 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void installComponents() {
         jLayeredPane.setOpaque(false);
-        jLayeredPane.add(abilityPicker, JLayeredPane.MODAL_LAYER);
         jLayeredPane.add(DialogManager.getManager(gameId), JLayeredPane.MODAL_LAYER, 0);
+        installAbilityPicker();
+    }
+
+    private void installAbilityPicker() {
+        jLayeredPane.add(abilityPicker, JLayeredPane.MODAL_LAYER);
         abilityPicker.setVisible(false);
     }
 
+    private void uninstallComponents() {
+        if (jLayeredPane != null) {
+            jLayeredPane.remove(DialogManager.getManager(gameId));
+        }
+        DialogManager.removeGame(gameId);
+        uninstallAbilityPicker();
+    }
+
+    private void uninstallAbilityPicker() {
+        abilityPicker.setVisible(false);
+        if (jLayeredPane != null) {
+            jLayeredPane.remove(abilityPicker);
+        }
+        this.abilityPicker.cleanUp();
+    }
+
     private void createPhaseButton(String name, MouseAdapter mouseAdapter) {
-        Rectangle rect = new Rectangle(36, 36);
-        HoverButton button = new HoverButton("", ImageManagerImpl.instance.getPhaseImage(name), rect);
+        int buttonSize = GUISizeHelper.gamePhaseButtonSize;
+        Rectangle rect = new Rectangle(buttonSize, buttonSize);
+        HoverButton button = new HoverButton("", ImageManagerImpl.instance.getPhaseImage(name, buttonSize), rect);
         button.setToolTipText(name.replaceAll("_", " "));
-        button.setPreferredSize(new Dimension(36, 36));
+        button.setPreferredSize(new Dimension(buttonSize, buttonSize));
         button.addMouseListener(mouseAdapter);
         phaseButtons.put(name, button);
+        jPhases.add(button);
     }
 
     // Event listener for the ShowCardsDialog
@@ -3116,9 +3233,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private JPanel jPhases;
     private JPanel phasesContainer;
     private javax.swing.JLabel txtHoldPriority;
-
-    private HoverButton currentStep;
-    private Point prevPoint;
 
     private boolean imagePanelState;
 

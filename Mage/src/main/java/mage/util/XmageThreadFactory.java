@@ -8,13 +8,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author JayDi85
  */
-public class XMageThreadFactory implements ThreadFactory {
+public class XmageThreadFactory implements ThreadFactory {
 
     private final String prefix;
     private final AtomicInteger counter = new AtomicInteger();
     private final boolean isDaemon;
 
-    public XMageThreadFactory(String prefix) {
+    public XmageThreadFactory(String prefix) {
         this(prefix, true);
     }
 
@@ -22,7 +22,7 @@ public class XMageThreadFactory implements ThreadFactory {
      * @param prefix   thread's starting name (can be changed by thread itself later)
      * @param isDaemon mark thread as daemon on non-writeable tasks (e.g. can be terminated at any time without data loss)
      */
-    public XMageThreadFactory(String prefix, boolean isDaemon) {
+    public XmageThreadFactory(String prefix, boolean isDaemon) {
         this.prefix = prefix;
         this.isDaemon = isDaemon;
     }

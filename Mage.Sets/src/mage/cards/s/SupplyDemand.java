@@ -2,7 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class SupplyDemand extends SplitCard {
 
         // Supply
         // create X 1/1 green Saproling creature tokens.
-        getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), ManacostVariableValue.REGULAR));
+        getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), GetXValue.instance));
 
         // Demand
         // Search your library for a multicolored card, reveal it, and put it into your hand. Then shuffle your library.

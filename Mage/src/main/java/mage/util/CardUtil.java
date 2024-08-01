@@ -1013,7 +1013,7 @@ public final class CardUtil {
     }
 
     public static String getTextWithFirstCharUpperCase(String text) {
-        if (text != null && text.length() >= 1) {
+        if (text != null && !text.isEmpty()) {
             return Character.toUpperCase(text.charAt(0)) + text.substring(1);
         } else {
             return text;
@@ -1021,7 +1021,7 @@ public final class CardUtil {
     }
 
     public static String getTextWithFirstCharLowerCase(String text) {
-        if (text != null && text.length() >= 1) {
+        if (text != null && !text.isEmpty()) {
             return Character.toLowerCase(text.charAt(0)) + text.substring(1);
         } else {
             return text;
@@ -1237,9 +1237,9 @@ public final class CardUtil {
         }
     }
 
-    public static List<String> getCardRulesWithAdditionalInfo(UUID cardId, String cardName,
+    public static List<String> getCardRulesWithAdditionalInfo(MageObject object,
                                                               Abilities<Ability> rulesSource, Abilities<Ability> hintAbilities) {
-        return getCardRulesWithAdditionalInfo(null, cardId, cardName, rulesSource, hintAbilities);
+        return getCardRulesWithAdditionalInfo(null, object, rulesSource, hintAbilities);
     }
 
     /**
@@ -1248,10 +1248,10 @@ public final class CardUtil {
      * @param rulesSource abilities list to show as rules
      * @param hintsSource abilities list to show as card hints only (you can add additional hints here; example: from second or transformed side)
      */
-    public static List<String> getCardRulesWithAdditionalInfo(Game game, UUID cardId, String cardName,
+    public static List<String> getCardRulesWithAdditionalInfo(Game game, MageObject object,
                                                               Abilities<Ability> rulesSource, Abilities<Ability> hintsSource) {
         try {
-            List<String> rules = rulesSource.getRules(cardName);
+            List<String> rules = rulesSource.getRules();
 
             if (game == null || game.getPhase() == null) {
                 // dynamic hints for started game only
@@ -1259,7 +1259,10 @@ public final class CardUtil {
             }
 
             // additional effect's info from card.addInfo methods
-            rules.addAll(game.getState().getCardState(cardId).getInfo().values());
+            CardState cardState = game.getState().getCardState(object.getId());
+            if (cardState != null) {
+                rules.addAll(cardState.getInfo().values());
+            }
 
             // ability hints
             List<String> abilityHints = new ArrayList<>();
@@ -1284,7 +1287,7 @@ public final class CardUtil {
 
             return rules;
         } catch (Exception e) {
-            logger.error("Exception in rules generation for card: " + cardName, e);
+            logger.error("Exception in rules generation for object: " + object.getName(), e);
         }
         return RULES_ERROR_INFO;
     }
@@ -1757,7 +1760,8 @@ public final class CardUtil {
     /**
      * Returns the entire cost tags map of either the source ability, or the permanent source of the ability. May be null.
      * Works in any moment (even before source ability activated)
-     * Usually you should use one of the single tag functions instead: getSourceCostsTag() or checkSourceCostsTagExists()
+     * <p>
+     * Usually you should use one of the single tag functions instead: getSourceCostsTag() or checkSourceCostsTagExists().
      * Use this function with caution, as it directly exposes the backing data structure.
      *
      * @param game
@@ -1766,6 +1770,9 @@ public final class CardUtil {
      */
     public static Map<String, Object> getSourceCostsTagsMap(Game game, Ability source) {
         Map<String, Object> costTags;
+        if (game == null) {
+            return null;
+        }
 
         // from spell ability - direct access
         costTags = source.getCostsTagMap();
@@ -1781,9 +1788,9 @@ public final class CardUtil {
         }
 
         // from any ability before resolve (on stack) - access by spell ability
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject instanceof Spell) {
-            return ((Spell) sourceObject).getSpellAbility().getCostsTagMap();
+        Spell sourceObject = game.getSpellOrLKIStack(source.getSourceId());
+        if (sourceObject != null) {
+            return sourceObject.getSpellAbility().getCostsTagMap();
         }
 
         return null;

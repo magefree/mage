@@ -1,8 +1,5 @@
 package mage.cards.w;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -17,6 +14,11 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +64,7 @@ class WeirdHarvestEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
-            int xValue = source.getManaCostsToPay().getX();
+            int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
             if (xValue > 0) {
                 List<Player> usingPlayers = new ArrayList<>();
                 this.chooseAndSearchLibrary(usingPlayers, controller, xValue, source, sourceObject, game);

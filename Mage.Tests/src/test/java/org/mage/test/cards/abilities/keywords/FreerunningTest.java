@@ -37,8 +37,8 @@ public class FreerunningTest extends CardTestCommanderDuelBase {
 
         attack(1, playerA, poisoner, playerB);
 
-        setChoice(playerA, true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, vision);
+        setChoice(playerA, "Cast with Freerunning alternative cost: {1}{U} (source: Eagle Vision");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -59,8 +59,8 @@ public class FreerunningTest extends CardTestCommanderDuelBase {
 
         attack(1, playerA, goblin, playerB);
 
-        setChoice(playerA, true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, vision);
+        setChoice(playerA, "Cast with Freerunning alternative cost: {1}{U} (source: Eagle Vision");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

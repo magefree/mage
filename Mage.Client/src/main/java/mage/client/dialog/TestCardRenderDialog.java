@@ -223,20 +223,20 @@ public class TestCardRenderDialog extends MageDialog {
         return cardView;
     }
 
-    private AbilityView createEmblem(Emblem emblem) {
-        AbilityView emblemView = new AbilityView(emblem.getAbilities().get(0), emblem.getName(), new CardView(new EmblemView(emblem)));
+    private AbilityView createEmblem(Game game, Emblem emblem) {
+        AbilityView emblemView = new AbilityView(emblem.getAbilities().get(0), emblem.getName(), new CardView(new EmblemView(emblem, game)));
         emblemView.setName(emblem.getName());
         return emblemView;
     }
 
-    private AbilityView createDungeon(Dungeon dungeon) {
+    private AbilityView createDungeon(Game game, Dungeon dungeon) {
         AbilityView emblemView = new AbilityView(dungeon.getAbilities().get(0), dungeon.getName(), new CardView(new DungeonView(dungeon)));
         emblemView.setName(dungeon.getName());
         return emblemView;
     }
 
-    private AbilityView createPlane(Plane plane) {
-        AbilityView planeView = new AbilityView(plane.getAbilities().get(0), plane.getName(), new CardView(new PlaneView(plane)));
+    private AbilityView createPlane(Game game, Plane plane) {
+        AbilityView planeView = new AbilityView(plane.getAbilities().get(0), plane.getName(), new CardView(new PlaneView(plane, game)));
         planeView.setName(plane.getName());
         return planeView;
     }
@@ -332,14 +332,18 @@ public class TestCardRenderDialog extends MageDialog {
             possibleTargets.add(playerYou.getId());
         }
 
-        // need re-create panel, because it can't change size in real time
-        this.playerPanel.removeAll();
+        // player's panel
+        if (this.player == null) {
+            // create new panel
+            this.playerPanel.setLayout(new BorderLayout(5, 5));
+            this.player = new PlayerPanelExt(this.playerSizeMod);
+            this.playerPanel.add(player, BorderLayout.CENTER);
+        } else {
+            // update existing panel (recreate all inner components)
+            this.player.fullRefresh(this.playerSizeMod);
+        }
         this.playerPanel.setPreferredSize(new java.awt.Dimension(Math.round(100 * this.playerSizeMod), 10));
-        this.playerPanel.setLayout(new BorderLayout(5, 5));
-        this.player = new PlayerPanelExt(this.playerSizeMod);
-        this.playerPanel.add(player, BorderLayout.CENTER);
-        //this.player.cleanUp();
-        //this.player.changeGUISize();
+        // update data in player's panel
         GameView gameView = new GameView(this.game.getState(), this.game, controlledId, null);
         PlayerView currentPlayerView = gameView.getPlayers()
                 .stream()
@@ -348,7 +352,7 @@ public class TestCardRenderDialog extends MageDialog {
                 .orElse(null);
         this.player.init(this.game.getId(), playerYou.getId(), isMe, this.bigCard, 0);
         this.player.update(gameView, currentPlayerView, possibleTargets);
-        PlayAreaPanel.sizePlayerPanel(this.player, isMe, smallMode);
+        this.player.sizePlayerPanel(smallMode);
 
         // update CARDS
 

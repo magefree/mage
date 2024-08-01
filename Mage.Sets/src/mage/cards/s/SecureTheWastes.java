@@ -2,7 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +19,7 @@ public final class SecureTheWastes extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
 
         // create X 1/1 white Warrior creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new WarriorToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new WarriorToken(), GetXValue.instance));
     }
 
     private SecureTheWastes(final SecureTheWastes card) {

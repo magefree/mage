@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public abstract class ManaEffect extends OneShotEffect {
 
-    public ManaEffect() {
+    protected ManaEffect() {
         super(Outcome.PutManaInPool);
     }
 

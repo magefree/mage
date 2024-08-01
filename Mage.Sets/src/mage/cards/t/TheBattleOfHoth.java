@@ -2,7 +2,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +19,7 @@ public final class TheBattleOfHoth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");
 
         // Create X 5/5 white artifact AT-AT creature tokens wiht "When this creature dies, create two 1/1 white Trooper creature tokens."
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ATATToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ATATToken(), GetXValue.instance));
     }
 
     private TheBattleOfHoth(final TheBattleOfHoth card) {

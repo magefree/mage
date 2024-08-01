@@ -2258,7 +2258,7 @@ public class VerifyCardDataTest {
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
             if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
-                card.getAbilities().getRules(card.getName()).forEach(this::printAbilityText);
+                card.getAbilities().getRules().forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
             }

@@ -1,6 +1,6 @@
 package mage.cards.f;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,7 +18,7 @@ public final class FormAPosse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{W}");
 
         // Create X 1/1 red Mercenary creature tokens with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new MercenaryToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new MercenaryToken(), GetXValue.instance));
     }
 
     private FormAPosse(final FormAPosse card) {

@@ -19,6 +19,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.util.CardUtil;
 import mage.util.SubTypes;
 
 import java.util.Collections;
@@ -37,7 +38,7 @@ public abstract class Emblem extends CommandObjectImpl {
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
     protected FrameStyle frameStyle;
-    private Abilities<Ability> abilites = new AbilitiesImpl<>();
+    private Abilities<Ability> abilities = new AbilitiesImpl<>();
 
     public Emblem(String name) {
         super(name);
@@ -50,7 +51,7 @@ public abstract class Emblem extends CommandObjectImpl {
         this.sourceObject = emblem.sourceObject;
         this.copy = emblem.copy;
         this.copyFrom = emblem.copyFrom;
-        this.abilites = emblem.abilites.copy();
+        this.abilities = emblem.abilities.copy();
     }
 
     @Override
@@ -73,7 +74,7 @@ public abstract class Emblem extends CommandObjectImpl {
             this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());
         } else {
-            // how-to fix: add emblem to the tokens-database
+            // how-to fix: add emblem to tokens-database.txt
             throw new IllegalArgumentException("Wrong code usage: can't find token info for the emblem: " + this.getClass().getName());
         }
     }
@@ -98,7 +99,7 @@ public abstract class Emblem extends CommandObjectImpl {
 
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
-        this.abilites.setControllerId(controllerId);
+        this.abilities.setControllerId(controllerId);
     }
 
     @Override
@@ -152,7 +153,7 @@ public abstract class Emblem extends CommandObjectImpl {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return abilites;
+        return abilities;
     }
 
     @Override
@@ -260,7 +261,7 @@ public abstract class Emblem extends CommandObjectImpl {
     }
 
     public void discardEffects() {
-        for (Ability ability : abilites) {
+        for (Ability ability : abilities) {
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof ContinuousEffect) {
                     ((ContinuousEffect) effect).discard();

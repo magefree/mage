@@ -60,7 +60,7 @@ class CommuneWithLavaEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null && sourceCard != null) {
-            int amount = source.getManaCostsToPay().getX();
+            int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
             Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
             controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard.getIdName());
 

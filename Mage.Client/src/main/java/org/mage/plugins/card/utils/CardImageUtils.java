@@ -6,6 +6,7 @@ import mage.cards.repository.TokenRepository;
 import mage.client.MageFrame;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.remote.XmageURLConnection;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.view.CardView;
@@ -201,35 +202,9 @@ public final class CardImageUtils {
         return null;
     }
 
-    public static Document downloadHtmlDocument(String urlString) throws NumberFormatException, IOException {
-        Preferences prefs = MageFrame.getPreferences();
-        Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
-        Document doc;
-        if (proxyType == ProxyType.NONE) {
-            doc = Jsoup.connect(urlString).timeout(60 * 1000).get();
-        } else {
-            String proxyServer = prefs.get("proxyAddress", "");
-            int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
-            URL url = new URL(urlString);
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
-            HttpURLConnection uc = (HttpURLConnection) url.openConnection(proxy);
-            uc.setConnectTimeout(10000);
-            uc.setReadTimeout(60000);
-            uc.connect();
-
-            String line;
-            StringBuffer tmp = new StringBuffer();
-            BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
-            while ((line = in.readLine()) != null) {
-                tmp.append(line);
-            }
-            doc = Jsoup.parse(String.valueOf(tmp));
-        }
-        return doc;
-    }
-
     public static void checkAndFixImageFiles() {
         // search broken, temp or outdated files and delete it
+        // real images check is slow, so it used on images download only (not here)
         Path rootPath = new File(CardImageUtils.getImagesDir()).toPath();
         if (!Files.exists(rootPath)) {
             return;

@@ -1,8 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -17,6 +15,10 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SubterraneanTremorsLizardToken;
+import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +70,7 @@ class SubterraneanTremorsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int damage = source.getManaCostsToPay().getX();
+        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0);
         UUID sourceId = source != null ? source.getSourceId() : null;
         UUID controllerId = source.getControllerId();
 

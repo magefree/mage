@@ -17,7 +17,10 @@ import mage.view.PlaneView;
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.*;
-import javax.swing.text.html.*;
+import javax.swing.text.html.CSS;
+import javax.swing.text.html.HTML;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -52,6 +55,19 @@ public class MageEditorPane extends JEditorPane {
 
         // improved style: browser's url style with underline on mouse over and hand cursor
         kit.getStyleSheet().addRule(" a { text-decoration: none; } ");
+
+        changeGUISize(this.getFont());
+    }
+
+    public void changeGUISize(Font font) {
+        this.setFont(font);
+
+        // workaround to change editor's font at runtime
+        String bodyRule = "body { "
+                + " font-family: " + font.getFamily() + "; "
+                + " font-size: " + font.getSize() + "pt; "
+                + "}";
+        kit.getStyleSheet().addRule(bodyRule);
     }
 
     /**
@@ -152,7 +168,7 @@ public class MageEditorPane extends JEditorPane {
                 if (cardView == null) {
                     Plane plane = Plane.createPlaneByFullName(cardName);
                     if (plane != null) {
-                        cardView = new CardView(new PlaneView(plane));
+                        cardView = new CardView(new PlaneView(plane, null));
                     }
                 }
 
@@ -264,6 +280,4 @@ public class MageEditorPane extends JEditorPane {
         hyperlinkEnabled = true;
         addHyperlinkHandlers();
     }
-
-
 }

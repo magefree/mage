@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class SliceFromTheShadows extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(GetXValue.instance);
 
     public SliceFromTheShadows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{B}");

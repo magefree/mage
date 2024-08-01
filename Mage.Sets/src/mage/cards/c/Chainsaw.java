@@ -44,7 +44,7 @@ public final class Chainsaw extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, StaticValue.get(0))));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private Chainsaw(final Chainsaw card) {

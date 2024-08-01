@@ -12,7 +12,7 @@ import mage.server.RoomImpl;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
@@ -40,7 +40,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private static List<MatchView> lobbyMatches = new ArrayList<>();
     private static List<RoomUsersView> lobbyUsers = new ArrayList<>();
     private static final ScheduledExecutorService UPDATE_LOBBY_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
-            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_LOBBY_REFRESH)
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_LOBBY_REFRESH)
     );
 
     private final ManagerFactory managerFactory;

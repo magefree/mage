@@ -3,10 +3,12 @@ package mage.abilities.decorator;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 
 /**
@@ -108,6 +110,13 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         }
         return effects.getText(mode) + ". If " + conditionText + ", "
                 + CardUtil.getTextWithFirstCharLowerCase(otherwiseEffects.getText(mode));
+    }
+
+    @Override
+    public Effect setTargetPointer(TargetPointer targetPointer) {
+        effects.setTargetPointer(targetPointer);
+        otherwiseEffects.setTargetPointer(targetPointer);
+        return super.setTargetPointer(targetPointer);
     }
 
     @Override

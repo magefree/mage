@@ -1,6 +1,6 @@
 package mage.target.targetadjustment;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 
 /**
  * @author notgreat
@@ -8,6 +8,6 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 public class XTargetsCountAdjuster extends TargetsCountAdjuster {
 
     public XTargetsCountAdjuster() {
-        super(ManacostVariableValue.REGULAR);
+        super(GetXValue.instance);
     }
 }

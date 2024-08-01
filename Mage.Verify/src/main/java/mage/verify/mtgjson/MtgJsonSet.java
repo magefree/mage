@@ -2,10 +2,17 @@ package mage.verify.mtgjson;
 
 import java.util.List;
 
+/**
+ * MTGJSON v5: set class
+ * <p>
+ * Contains set info and related cards list
+ * Only used fields, if you need more for tests then just add it here
+ * <p>
+ * API docs <a href="https://mtgjson.com/data-models/set/">here</a>
+ *
+ * @author JayDi85
+ */
 public final class MtgJsonSet {
-    // v5 support
-    // https://mtgjson.com/data-models/card-atomic/
-    // contains only used fields, if you need more for tests then just add it here
 
     public List<MtgJsonCard> cards;
     public String code;

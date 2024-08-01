@@ -1338,7 +1338,7 @@ public class ContinuousEffects implements Serializable {
                         effectsMap.put(key, object.getIdName() + ": " + ability.getRule(object.getName()));
                         objectsMap.put(key, object);
                     } else {
-                        effectsMap.put(key, entry.getKey().getText(null));
+                        effectsMap.put(key, entry.getKey().getText(ability.getModes().getMode()));
                         objectsMap.put(key, null);
                     }
                 }

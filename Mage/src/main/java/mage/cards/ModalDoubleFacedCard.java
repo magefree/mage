@@ -358,8 +358,7 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
         // rules must show only main side (another side visible by toggle/transform button in GUI)
         // card hints from both sides
         return CardUtil.getCardRulesWithAdditionalInfo(
-                this.getId(),
-                this.getName(),
+                this,
                 this.getInnerAbilities(true, false),
                 this.getInnerAbilities(true, true)
         );
@@ -371,8 +370,7 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
         // card hints from both sides
         return CardUtil.getCardRulesWithAdditionalInfo(
                 game,
-                this.getId(),
-                this.getName(),
+                this,
                 this.getInnerAbilities(game, true, false),
                 this.getInnerAbilities(game, true, true)
         );

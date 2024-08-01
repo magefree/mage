@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ClashEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
@@ -25,7 +25,7 @@ public final class BrokenAmbitions extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new BrokenAmbitionsEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }

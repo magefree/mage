@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.common.TargetCardWithDifferentNameInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ class BeginTheInvasionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         return new SearchLibraryPutInPlayEffect(
                 new TargetCardWithDifferentNameInLibrary(0, xValue, filter), false
         ).apply(game, source);

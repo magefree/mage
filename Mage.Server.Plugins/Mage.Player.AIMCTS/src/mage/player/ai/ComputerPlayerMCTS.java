@@ -13,7 +13,7 @@ import mage.game.combat.CombatGroup;
 import mage.player.ai.MCTSPlayer.NextAction;
 import mage.players.Player;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -173,7 +173,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
                             0L,
                             TimeUnit.MILLISECONDS,
                             new LinkedBlockingQueue<>(),
-                            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_AI_SIMULATION_MCTS) // TODO: add player/game to thread name?
+                            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_AI_SIMULATION_MCTS) // TODO: add player/game to thread name?
                     );
                 }
 

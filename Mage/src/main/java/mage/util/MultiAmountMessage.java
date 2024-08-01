@@ -2,8 +2,11 @@ package mage.util;
 
 import java.io.Serializable;
 
-// Author: alexander-novo
-// A helper class for facilitating the multi-choose dialog
+/**
+ * A helper class for facilitating the multi-choose dialog
+ *
+ * @author alexander-novo
+ */
 public class MultiAmountMessage implements Serializable {
     public String message;
     public int min;
@@ -19,5 +22,10 @@ public class MultiAmountMessage implements Serializable {
         this.min = min;
         this.max = max;
         this.defaultValue = defaultValue;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s - from %d to %d - default %d", message, min, max, defaultValue);
     }
 }

@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.GetKickerXValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SunburstCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.InfoEffect;
@@ -66,7 +66,7 @@ enum EmblazonedGolemKickerValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int sunburst = SunburstCount.instance.calculate(game, sourceAbility, effect); // the amount of different colors spent on casting this
-        int kickerX = GetKickerXValue.instance.calculate(game, sourceAbility, effect);
+        int kickerX = GetXValue.instance.calculate(game, sourceAbility, effect);
         
         Spell spell = game.getSpellOrLKIStack(sourceAbility.getSourceId());
         if (spell == null || spell.getSpellAbility() == null) {

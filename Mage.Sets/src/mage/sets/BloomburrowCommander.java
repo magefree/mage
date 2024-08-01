@@ -26,7 +26,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aetherize", 161, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
         cards.add(new SetCardInfo("Agate Instigator", 21, Rarity.RARE, mage.cards.a.AgateInstigator.class));
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 170, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
-        cards.add(new SetCardInfo("Angel of the Ruins", 134, Rarity.UNCOMMON, mage.cards.a.AngelOfTheRuins.class));
+        cards.add(new SetCardInfo("Angel of the Ruins", 134, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class));
         cards.add(new SetCardInfo("Ant Queen", 80, Rarity.RARE, mage.cards.a.AntQueen.class));
         cards.add(new SetCardInfo("Arasta of the Endless Web", 205, Rarity.RARE, mage.cards.a.ArastaOfTheEndlessWeb.class));
         cards.add(new SetCardInfo("Arcane Signet", 127, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
@@ -74,6 +74,8 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Coiling Oracle", 250, Rarity.COMMON, mage.cards.c.CoilingOracle.class));
         cards.add(new SetCardInfo("Combat Celebrant", 194, Rarity.MYTHIC, mage.cards.c.CombatCelebrant.class));
         cards.add(new SetCardInfo("Command Tower", 130, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Communal Brewing", 29, Rarity.RARE, mage.cards.c.CommunalBrewing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Communal Brewing", 63, Rarity.RARE, mage.cards.c.CommunalBrewing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Copperline Gorge", 301, Rarity.RARE, mage.cards.c.CopperlineGorge.class));
         cards.add(new SetCardInfo("Coveted Jewel", 268, Rarity.RARE, mage.cards.c.CovetedJewel.class));
         cards.add(new SetCardInfo("Cultivate", 212, Rarity.COMMON, mage.cards.c.Cultivate.class));
@@ -102,6 +104,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flubs, the Fool", 356, Rarity.MYTHIC, mage.cards.f.FlubsTheFool.class));
         cards.add(new SetCardInfo("Forgotten Ancient", 217, Rarity.RARE, mage.cards.f.ForgottenAncient.class));
         cards.add(new SetCardInfo("Forgotten Cave", 305, Rarity.COMMON, mage.cards.f.ForgottenCave.class));
+        cards.add(new SetCardInfo("Fortune Teller's Talent", 14, Rarity.RARE, mage.cards.f.FortuneTellersTalent.class));
         cards.add(new SetCardInfo("Game Trail", 306, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Garruk's Packleader", 218, Rarity.UNCOMMON, mage.cards.g.GarruksPackleader.class));
         cards.add(new SetCardInfo("Garruk's Uprising", 219, Rarity.UNCOMMON, mage.cards.g.GarruksUprising.class));
@@ -112,15 +115,15 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gilded Goose", 83, Rarity.RARE, mage.cards.g.GildedGoose.class));
         cards.add(new SetCardInfo("Gilded Lotus", 271, Rarity.RARE, mage.cards.g.GildedLotus.class));
         cards.add(new SetCardInfo("Glacial Fortress", 307, Rarity.RARE, mage.cards.g.GlacialFortress.class));
-        cards.add(new SetCardInfo("Golgari Rot Farm", 308, Rarity.COMMON, mage.cards.g.GolgariRotFarm.class));
-        cards.add(new SetCardInfo("Golgari Signet", 272, Rarity.COMMON, mage.cards.g.GolgariSignet.class));
-        cards.add(new SetCardInfo("Goreclaw, Terror of Qal Sisma", 222, Rarity.UNCOMMON, mage.cards.g.GoreclawTerrorOfQalSisma.class));
+        cards.add(new SetCardInfo("Golgari Rot Farm", 308, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
+        cards.add(new SetCardInfo("Golgari Signet", 272, Rarity.UNCOMMON, mage.cards.g.GolgariSignet.class));
+        cards.add(new SetCardInfo("Goreclaw, Terror of Qal Sisma", 222, Rarity.RARE, mage.cards.g.GoreclawTerrorOfQalSisma.class));
         cards.add(new SetCardInfo("Gratuitous Violence", 197, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
         cards.add(new SetCardInfo("Greater Good", 223, Rarity.RARE, mage.cards.g.GreaterGood.class));
         cards.add(new SetCardInfo("Grim Backwoods", 309, Rarity.RARE, mage.cards.g.GrimBackwoods.class));
         cards.add(new SetCardInfo("Grothama, All-Devouring", 224, Rarity.MYTHIC, mage.cards.g.GrothamaAllDevouring.class));
         cards.add(new SetCardInfo("Grumgully, the Generous", 253, Rarity.UNCOMMON, mage.cards.g.GrumgullyTheGenerous.class));
-        cards.add(new SetCardInfo("Gruul Signet", 273, Rarity.COMMON, mage.cards.g.GruulSignet.class));
+        cards.add(new SetCardInfo("Gruul Signet", 273, Rarity.UNCOMMON, mage.cards.g.GruulSignet.class));
         cards.add(new SetCardInfo("Gruul Turf", 310, Rarity.COMMON, mage.cards.g.GruulTurf.class));
         cards.add(new SetCardInfo("Hanged Executioner", 139, Rarity.RARE, mage.cards.h.HangedExecutioner.class));
         cards.add(new SetCardInfo("Harmonize", 120, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
@@ -133,12 +136,12 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Idol of Oblivion", 277, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
         cards.add(new SetCardInfo("Illusionist's Gambit", 166, Rarity.RARE, mage.cards.i.IllusionistsGambit.class));
         cards.add(new SetCardInfo("Illusory Ambusher", 167, Rarity.UNCOMMON, mage.cards.i.IllusoryAmbusher.class));
-        cards.add(new SetCardInfo("Inferno Titan", 198, Rarity.RARE, mage.cards.i.InfernoTitan.class));
+        cards.add(new SetCardInfo("Inferno Titan", 198, Rarity.MYTHIC, mage.cards.i.InfernoTitan.class));
         cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 77, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class));
         cards.add(new SetCardInfo("Inspiring Overseer", 141, Rarity.COMMON, mage.cards.i.InspiringOverseer.class));
         cards.add(new SetCardInfo("Intellectual Offering", 168, Rarity.RARE, mage.cards.i.IntellectualOffering.class));
         cards.add(new SetCardInfo("Ishai, Ojutai Dragonspeaker", 89, Rarity.MYTHIC, mage.cards.i.IshaiOjutaiDragonspeaker.class));
-        cards.add(new SetCardInfo("Izzet Signet", 278, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Izzet Signet", 278, Rarity.UNCOMMON, mage.cards.i.IzzetSignet.class));
         cards.add(new SetCardInfo("Jace, the Mind Sculptor", 75, Rarity.MYTHIC, mage.cards.j.JaceTheMindSculptor.class));
         cards.add(new SetCardInfo("Jacked Rabbit", 9, Rarity.RARE, mage.cards.j.JackedRabbit.class));
         cards.add(new SetCardInfo("Jazal Goldmane", 142, Rarity.RARE, mage.cards.j.JazalGoldmane.class));
@@ -160,7 +163,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Luminous Broodmoth", 74, Rarity.MYTHIC, mage.cards.l.LuminousBroodmoth.class));
         cards.add(new SetCardInfo("Maelstrom Pulse", 126, Rarity.RARE, mage.cards.m.MaelstromPulse.class));
         cards.add(new SetCardInfo("Managorger Hydra", 230, Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
-        cards.add(new SetCardInfo("Mangara, the Diplomat", 145, Rarity.RARE, mage.cards.m.MangaraTheDiplomat.class));
+        cards.add(new SetCardInfo("Mangara, the Diplomat", 145, Rarity.MYTHIC, mage.cards.m.MangaraTheDiplomat.class));
         cards.add(new SetCardInfo("Marrow-Gnawer", 79, Rarity.RARE, mage.cards.m.MarrowGnawer.class));
         cards.add(new SetCardInfo("Martial Coup", 146, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Martial Impetus", 108, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
@@ -201,7 +204,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Putrefy", 257, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Raging Ravine", 324, Rarity.RARE, mage.cards.r.RagingRavine.class));
         cards.add(new SetCardInfo("Rain of Riches", 200, Rarity.RARE, mage.cards.r.RainOfRiches.class));
-        cards.add(new SetCardInfo("Rampaging Baloths", 233, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
+        cards.add(new SetCardInfo("Rampaging Baloths", 233, Rarity.MYTHIC, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Rampant Growth", 234, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Rapid Hybridization", 111, Rarity.UNCOMMON, mage.cards.r.RapidHybridization.class));
         cards.add(new SetCardInfo("Ravenous Squirrel", 258, Rarity.UNCOMMON, mage.cards.r.RavenousSquirrel.class));
@@ -279,7 +282,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tetsuko Umezawa, Fugitive", 177, Rarity.UNCOMMON, mage.cards.t.TetsukoUmezawaFugitive.class));
         cards.add(new SetCardInfo("The Gitrog Monster", 88, Rarity.MYTHIC, mage.cards.t.TheGitrogMonster.class));
         cards.add(new SetCardInfo("Thopter Engineer", 204, Rarity.UNCOMMON, mage.cards.t.ThopterEngineer.class));
-        cards.add(new SetCardInfo("Thought Vessel", 289, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
+        cards.add(new SetCardInfo("Thought Vessel", 289, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Thran Dynamo", 290, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
         cards.add(new SetCardInfo("Thriving Bluff", 346, Rarity.COMMON, mage.cards.t.ThrivingBluff.class));
         cards.add(new SetCardInfo("Thriving Grove", 347, Rarity.COMMON, mage.cards.t.ThrivingGrove.class));

@@ -54,14 +54,13 @@ import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
  * Basic implementation of testable player
@@ -76,6 +75,7 @@ public class TestPlayer implements Player {
 
     public static final String TARGET_SKIP = "[target_skip]"; // stop/skip targeting
     public static final String CHOICE_SKIP = "[choice_skip]"; // stop/skip choice
+    public static final String CHOICE_NORMAL_COST = "Cast with no alternative cost: "; // when there is the possibility for an alternative cost, use the normal cost instead.
     public static final String MANA_CANCEL = "[mana_cancel]"; // cancel payment
     public static final String SKIP_FAILED_COMMAND = "[skip_failed_command]"; // skip next command in player's queue (can remove cast commands after try to activate)
     public static final String BLOCK_SKIP = "[block_skip]";
@@ -2892,7 +2892,7 @@ public class TestPlayer implements Player {
                         break;
                     }
                 }
-                Assert.fail(String.format("Missing choice in multi amount: %s (pos %d - %s)", type.getHeader(), i + 1, messages.get(i)));
+                Assert.fail(String.format("Missing choice in multi amount: %s (pos %d - %s)", type.getHeader(), i, messages));
             }
 
             // extra check

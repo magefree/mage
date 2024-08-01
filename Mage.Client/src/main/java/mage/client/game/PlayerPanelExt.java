@@ -64,35 +64,50 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final int PANEL_HEIGHT_SMALL = 218; // small mode (with avatar button) // TODO: no need in small mode after GUI scale added
     private static final int PANEL_HEIGHT_EXTRA_FOR_ME = 25; // hints button
 
-    private final Border GREEN_BORDER;
-    private final Border RED_BORDER;
-    private final Border YELLOW_BORDER;
-    private final Border EMPTY_BORDER;
+    private Border GREEN_BORDER;
+    private Border RED_BORDER;
+    private Border YELLOW_BORDER;
+    private Border EMPTY_BORDER;
 
     float guiScaleMod = 1.0f;
 
-    private final Color activeValueColor = new Color(244, 9, 47);
-    private final Font fontValuesZero;
-    private final Font fontValuesNonZero;
+    private Color activeValueColor = new Color(244, 9, 47);
+    private Font fontValuesZero;
+    private Font fontValuesNonZero;
 
     private int avatarId = -1;
     private String flagName;
     private String basicTooltipText;
     private static final Map<UUID, Integer> playerLives = new HashMap<>();
 
+    private final Font defaultFont;
+
     private PriorityTimer timer;
 
-    /**
-     * Creates new form PlayerPanel
-     */
     public PlayerPanelExt() {
         this(1.0f);
     }
 
     public PlayerPanelExt(float guiScaleMod) {
-        // gui scale
+        // save default font cause panel can be recreated manually
+        this.defaultFont = this.getFont();
+
+        createAllComponents(guiScaleMod);
+    }
+
+    /**
+     * Refresh full panel's components due actual GUI settings
+     */
+    public void fullRefresh(float guiScaleMod) {
+        this.cleanUp();
+        this.removeAll();
+        this.createAllComponents(guiScaleMod);
+        this.invalidate();
+    }
+
+    public void createAllComponents(float guiScaleMod) {
         this.guiScaleMod = guiScaleMod;
-        this.setFont(this.getFont().deriveFont(sizeMod(this.getFont().getSize2D())));
+        this.setFont(this.defaultFont.deriveFont(sizeMod(this.defaultFont.getSize2D())));
         this.fontValuesZero = this.getFont().deriveFont(Font.PLAIN);
         this.fontValuesNonZero = this.getFont().deriveFont(Font.BOLD);
         this.GREEN_BORDER = new LineBorder(Color.green, sizeMod(3));
@@ -123,7 +138,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         toolHintsHelper.setVisible(this.isMe);
         toolHintsHelper.setFocusable(false);
         flagName = null;
-        if (priorityTime > 0) {
+        avatarId = -1;
+        if (priorityTime > 0 && priorityTime != Integer.MAX_VALUE) {
             long delay = 1000L;
 
             timer = new PriorityTimer(priorityTime, delay, () -> {
@@ -354,15 +370,15 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                     path = "/avatars/special/" + avatarId + ".gif";
                 }
                 Image image = ImageHelper.getImageFromResources(path);
-                Rectangle r = new Rectangle(sizeMod(80), sizeMod(80));
-                BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                this.avatar.update(this.player.getName(), resized, resized, resized, resized, r);
+                Rectangle buttonRect = new Rectangle(sizeMod(80), sizeMod(80));
+                BufferedImage buttonImage = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), buttonRect);
+                this.avatar.update(this.player.getName(), buttonImage, buttonImage, buttonImage, buttonImage, buttonRect);
             }
         }
         if (this.timer != null) {
-            if (player.getPriorityTimeLeft() != Integer.MAX_VALUE) {
+            if (player.getPriorityTimeLeftSecs() != Integer.MAX_VALUE) {
                 String priorityTimeValue = getPriorityTimeLeftString(player);
-                this.timer.setCount(player.getPriorityTimeLeft());
+                this.timer.setCount(player.getPriorityTimeLeftSecs());
                 this.timer.setBufferCount(player.getBufferTimeLeft());
                 this.avatar.setTopText(priorityTimeValue);
                 this.timerLabel.setText(priorityTimeValue);
@@ -372,7 +388,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 if (player.getBufferTimeLeft() > 0) {
                     textColor = Color.GREEN;
                     foregroundColor = Color.GREEN.darker().darker();
-                } else if (player.getPriorityTimeLeft() < 300) { // visual indication for under 5 minutes
+                } else if (player.getPriorityTimeLeftSecs() < 300) { // visual indication for under 5 minutes
                     textColor = Color.RED;
                     foregroundColor = Color.RED.darker().darker();
                 } else {
@@ -476,7 +492,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private String getPriorityTimeLeftString(PlayerView player) {
-        int priorityTimeLeft = player.getPriorityTimeLeft() + player.getBufferTimeLeft();
+        int priorityTimeLeft = player.getPriorityTimeLeftSecs() + player.getBufferTimeLeft();
         return getPriorityTimeLeftString(priorityTimeLeft);
     }
 
@@ -975,7 +991,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
-    protected void sizePlayerPanel(boolean smallMode) {
+    public void sizePlayerPanel(boolean smallMode) {
         int extraForMe = this.isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
         if (smallMode) {
             avatar.setVisible(false);

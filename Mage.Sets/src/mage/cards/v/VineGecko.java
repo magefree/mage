@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public final class VineGecko extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("The first kicked spell you cast each turn");
 
     static {
         filter.add(VineGeckoPredicate.instance);
@@ -47,8 +47,10 @@ public final class VineGecko extends CardImpl {
         this.toughness = new MageInt(2);
 
         // The first kicked spell you cast each turn costs {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
-                .setText("the first kicked spell you cast each turn costs {1} less to cast")), new VineGeckoWatcher());
+        this.addAbility(new SimpleStaticAbility(
+                new SpellsCostReductionControllerEffect(filter, 1)),
+                new VineGeckoWatcher()
+        );
 
         // Whenever you cast a kicked spell, put a +1/+1 counter on Vine Gecko.
         this.addAbility(new SpellCastControllerTriggeredAbility(

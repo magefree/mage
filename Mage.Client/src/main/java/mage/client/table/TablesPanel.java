@@ -52,7 +52,6 @@ import java.util.List;
 import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static mage.client.dialog.PreferencesDialog.*;
@@ -590,11 +589,11 @@ public class TablesPanel extends javax.swing.JPanel {
     private void setGUISize() {
         tableTables.getTableHeader().setFont(GUISizeHelper.tableFont);
         tableTables.setFont(GUISizeHelper.tableFont);
-        tableTables.setRowHeight(GUISizeHelper.getTableRowHeight());
+        tableTables.setRowHeight(GUISizeHelper.tableRowHeight);
 
         tableCompleted.getTableHeader().setFont(GUISizeHelper.tableFont);
         tableCompleted.setFont(GUISizeHelper.tableFont);
-        tableCompleted.setRowHeight(GUISizeHelper.getTableRowHeight());
+        tableCompleted.setRowHeight(GUISizeHelper.tableRowHeight);
 
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPaneTables.setDividerSize(GUISizeHelper.dividerBarSize);
@@ -603,20 +602,20 @@ public class TablesPanel extends javax.swing.JPanel {
 
         ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/state_waiting.png"));
         Image img = icon.getImage();
-        Image newimg = img.getScaledInstance(GUISizeHelper.menuFont.getSize(), GUISizeHelper.menuFont.getSize(), java.awt.Image.SCALE_SMOOTH);
+        Image newimg = img.getScaledInstance(GUISizeHelper.dialogFont.getSize(), GUISizeHelper.dialogFont.getSize(), java.awt.Image.SCALE_SMOOTH);
         btnStateWaiting.setIcon(new ImageIcon(newimg));
 
         icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/state_active.png"));
         img = icon.getImage();
-        newimg = img.getScaledInstance(GUISizeHelper.menuFont.getSize(), GUISizeHelper.menuFont.getSize(), java.awt.Image.SCALE_SMOOTH);
+        newimg = img.getScaledInstance(GUISizeHelper.dialogFont.getSize(), GUISizeHelper.dialogFont.getSize(), java.awt.Image.SCALE_SMOOTH);
         btnStateActive.setIcon(new ImageIcon(newimg));
 
         icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"));
         img = icon.getImage();
-        newimg = img.getScaledInstance(GUISizeHelper.menuFont.getSize(), GUISizeHelper.menuFont.getSize(), java.awt.Image.SCALE_SMOOTH);
+        newimg = img.getScaledInstance(GUISizeHelper.dialogFont.getSize(), GUISizeHelper.dialogFont.getSize(), java.awt.Image.SCALE_SMOOTH);
         btnStateFinished.setIcon(new ImageIcon(newimg));
 
-        int iconSize = 48 + GUISizeHelper.menuFont.getSize() * 2 - 15;
+        int iconSize = 48 + GUISizeHelper.dialogFont.getSize() * 2 - 15;
         icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/match_new.png"));
         img = icon.getImage();
         newimg = img.getScaledInstance(iconSize, iconSize, java.awt.Image.SCALE_SMOOTH);
@@ -628,19 +627,19 @@ public class TablesPanel extends javax.swing.JPanel {
         btnNewTournament.setIcon(new ImageIcon(newimg));
 
         for (JToggleButton component : filterButtons) {
-            component.setFont(GUISizeHelper.menuFont);
+            component.setFont(GUISizeHelper.dialogFont);
         }
-        Dimension newDimension = new Dimension((int) jPanelBottom.getPreferredSize().getWidth(), GUISizeHelper.menuFont.getSize() + 28);
+        Dimension newDimension = new Dimension((int) jPanelBottom.getPreferredSize().getWidth(), GUISizeHelper.dialogFont.getSize() + 28);
         jPanelBottom.setMinimumSize(newDimension);
         jPanelBottom.setPreferredSize(newDimension);
-        buttonWhatsNew.setFont(GUISizeHelper.menuFont);
-        buttonNextMessage.setFont(GUISizeHelper.menuFont);
-        labelMessageHeader.setFont(new Font(GUISizeHelper.menuFont.getName(), Font.BOLD, GUISizeHelper.menuFont.getSize()));
-        labelMessageText.setFont(GUISizeHelper.menuFont);
+        buttonWhatsNew.setFont(GUISizeHelper.dialogFont);
+        buttonNextMessage.setFont(GUISizeHelper.dialogFont);
+        labelMessageHeader.setFont(new Font(GUISizeHelper.dialogFont.getName(), Font.BOLD, GUISizeHelper.dialogFont.getSize()));
+        labelMessageText.setFont(GUISizeHelper.dialogFont);
 
-        btnQuickStart2Player.setFont(GUISizeHelper.menuFont);
-        btnQuickStart4Player.setFont(GUISizeHelper.menuFont);
-        btnQuickStartMCTS.setFont(GUISizeHelper.menuFont);
+        btnQuickStart2Player.setFont(GUISizeHelper.dialogFont);
+        btnQuickStart4Player.setFont(GUISizeHelper.dialogFont);
+        btnQuickStartMCTS.setFont(GUISizeHelper.dialogFont);
     }
 
     private void restoreDividerLocations() {

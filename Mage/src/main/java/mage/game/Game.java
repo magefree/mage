@@ -305,7 +305,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      */
     boolean checkShortLivingLKI(UUID objectId, Zone zone);
 
-    void rememberLKI(UUID objectId, Zone zone, MageObject object);
+    void rememberLKI(Zone zone, MageObject object);
 
     void resetLKI();
 

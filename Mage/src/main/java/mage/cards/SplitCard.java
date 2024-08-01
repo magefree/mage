@@ -189,8 +189,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
     public List<String> getRules() {
         Abilities<Ability> sourceAbilities = this.getAbilities();
         List<String> res = CardUtil.getCardRulesWithAdditionalInfo(
-                this.getId(),
-                this.getName(),
+                this,
                 sourceAbilities,
                 sourceAbilities
         );
@@ -205,8 +204,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         Abilities<Ability> sourceAbilities = this.getAbilities(game);
         List<String> res = CardUtil.getCardRulesWithAdditionalInfo(
                 game,
-                this.getId(),
-                this.getName(),
+                this,
                 sourceAbilities,
                 sourceAbilities
         );

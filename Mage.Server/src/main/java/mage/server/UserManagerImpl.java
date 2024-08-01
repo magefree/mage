@@ -6,7 +6,7 @@ import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
 import mage.server.util.ServerMessagesUtil;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 
@@ -34,10 +34,10 @@ public class UserManagerImpl implements UserManager {
     private static final Logger logger = Logger.getLogger(UserManagerImpl.class);
 
     protected final ScheduledExecutorService CONNECTION_EXPIRED_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
-            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_CONNECTION_EXPIRED_CHECK)
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_CONNECTION_EXPIRED_CHECK)
     );
     protected final ScheduledExecutorService USERS_LIST_REFRESH_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
-            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_USERS_LIST_REFRESH)
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_USERS_LIST_REFRESH)
     );
 
     private List<UserView> userInfoList = new ArrayList<>(); // all users list for main room/chat

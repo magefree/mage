@@ -1347,7 +1347,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                     break;
                 case MULTIPLE:
-                    attackablePlayers.addAll(game.getOpponents(attackingPlayerId));
+                    attackablePlayers.addAll(game.getOpponents(attackingPlayerId, true));
                     break;
             }
         }

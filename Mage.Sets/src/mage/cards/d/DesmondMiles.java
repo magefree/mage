@@ -46,7 +46,7 @@ public final class DesmondMiles extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Desmond Miles gets +1/+0 for each other Assassin you control and each Assassin card in your graveyard.
         Ability ability = new SimpleStaticAbility(new BoostSourceEffect(assassinsCount, StaticValue.get(0), Duration.WhileOnBattlefield)

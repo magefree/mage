@@ -1,11 +1,5 @@
 package mage.cards.a;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -22,11 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceCardType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.common.FilterOwnedCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -34,8 +24,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class ApexObservatory extends CardImpl {
@@ -120,7 +112,14 @@ class ChooseCardTypeEffect extends OneShotEffect {
                     sharedCardTypes.add(entry.getKey());
                 }
             }
-
+            // handle situations like the double-faced instant/land Jwari Disruption // Jwari Ruins
+            if (sharedCardTypes.isEmpty()) {
+                game.informPlayers(mageObject.getIdName() + " No exiled cards shared a type in exile, so nothing is done.");
+                if (mageObject instanceof Permanent) {
+                    ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("No exiled cards have the same card type."), game);
+                }
+                return false;
+            }
             cardTypeChoice.getChoices().retainAll(sharedCardTypes);
             if (controller.choose(Outcome.Benefit, cardTypeChoice, game)) {
                 if (!game.isSimulation()) {
@@ -209,20 +208,15 @@ class ApexObservatoryAlternativeCostAbility extends AlternativeCostSourceAbility
     }
 
     @Override
-    public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        Card apexObservatory = game.getCard(this.getSourceId());
-        if (controller != null
-                && apexObservatory != null) {
-            if (controller.chooseUse(Outcome.Benefit, "Use "
-                    + apexObservatory.getLogName() + " to pay no mana costs for this spell?", ability, game)) {
-                wasActivated = super.askToActivateAlternativeCosts(ability, game);
-                if (wasActivated) {
-                    game.getState().setValue(apexObservatory.getId().toString(), true);
-                }
-            }
+    public boolean activateAlternativeCosts(Ability ability, Game game) {
+        if (!super.activateAlternativeCosts(ability, game)) {
+            return false;
         }
-        return wasActivated;
+        Card apexObservatory = game.getCard(this.getSourceId());
+        if (apexObservatory != null) {
+            game.getState().setValue(apexObservatory.getId().toString(), true);
+        }
+        return true;
     }
 }
 

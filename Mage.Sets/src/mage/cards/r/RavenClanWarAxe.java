@@ -35,7 +35,7 @@ public final class RavenClanWarAxe extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // When Raven Clan War-Axe enters the battlefield, you may search your library and/or graveyard for a card named Eivor, Battle-Ready, reveal it, and put it into your hand. If you search your library this way, shuffle.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(filter)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(filter, false, true)));
 
         // Equipped creature gets +2/+0 and has trample.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 0));
@@ -45,7 +45,7 @@ public final class RavenClanWarAxe extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private RavenClanWarAxe(final RavenClanWarAxe card) {

@@ -46,7 +46,7 @@ import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.util.DebugUtil;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import mage.view.UserRequestMessage;
@@ -134,7 +134,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final MageUI UI = new MageUI();
 
     private static final ScheduledExecutorService PING_SENDER_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
-            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_PING_SENDER)
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_PING_SENDER)
     );
     private static UpdateMemUsageTask updateMemUsageTask;
 
@@ -413,7 +413,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             return;
         }
 
-        int height = GUISizeHelper.enlargedImageHeight;
+        int height = GUISizeHelper.cardTooltipLargeImageHeight;
         int width = (int) ((float) height * (float) 0.64);
         bigCard.setSize(width, height);
         cardPreviewContainer.setBounds(0, 0, width + 80, height + 30);
@@ -474,7 +474,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void setGUISizeTooltipContainer() {
         try {
-            int height = GUISizeHelper.enlargedImageHeight;
+            int height = GUISizeHelper.cardTooltipLargeImageHeight;
             int width = (int) ((float) height * (float) 0.64);
 
             JPanel cardPreviewContainer = (JPanel) UI.getComponent(MageComponents.CARD_PREVIEW_CONTAINER);
@@ -610,7 +610,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 MagePane window = (MagePane) windows[i];
                 if (window.isVisible()) {
                     menuItem = new MagePaneMenuItem(window);
-                    menuItem.setFont(GUISizeHelper.menuFont);
+                    menuItem.setFont(GUISizeHelper.dialogFont);
                     menuItem.setState(i == 0);
                     menuItem.addActionListener(ae -> {
                         MagePane frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
@@ -935,7 +935,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         jMemUsageLabel = new javax.swing.JLabel();
 
         menuDebugTestModalDialog.setText("Test Modal Dialogs");
-        menuDebugTestModalDialog.setFont(GUISizeHelper.menuFont);
+        menuDebugTestModalDialog.setFont(GUISizeHelper.dialogFont);
         menuDebugTestModalDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestModalDialogActionPerformed(evt);
@@ -944,7 +944,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupDebug.add(menuDebugTestModalDialog);
 
         menuDebugTestCardRenderModesDialog.setText("Test Card Render Modes");
-        menuDebugTestCardRenderModesDialog.setFont(GUISizeHelper.menuFont);
+        menuDebugTestCardRenderModesDialog.setFont(GUISizeHelper.dialogFont);
         menuDebugTestCardRenderModesDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestCardRenderModesDialogActionPerformed(evt);
@@ -1487,9 +1487,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (!liteMode) {
                 final SplashScreen splash = SplashScreen.getSplashScreen();
                 if (splash != null) {
-                    Graphics2D g = splash.createGraphics();
-                    if (g != null) {
-                        renderSplashFrame(g);
+                    Graphics2D g2 = splash.createGraphics();
+                    try {
+                        renderSplashFrame(g2);
+                    } finally {
+                        g2.dispose();
                     }
                     splash.update();
                 }
@@ -1828,7 +1830,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void setGUISize() {
-        Font font = GUISizeHelper.menuFont;
+        Font font = GUISizeHelper.dialogFont;
         mageToolbar.setFont(font);
         int newHeight = font.getSize() + 6;
         Dimension mageToolbarDimension = mageToolbar.getPreferredSize();

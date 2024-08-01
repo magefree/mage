@@ -181,7 +181,7 @@ public class SpendOnlyManaProducedByTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, rapaciousDragon);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, securityRhox);
-        setChoice(playerA, true); // pay alternative cost
+        setChoice(playerA, "Cast with alternative cost: {R}{G} (source: Security Rhox"); // pay alternative cost
         setChoice(playerA, "Red");
         setChoice(playerA, "Green");
 
@@ -199,7 +199,7 @@ public class SpendOnlyManaProducedByTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Taiga", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, securityRhox);
-        setChoice(playerA, true); // pay alternative cost
+        setChoice(playerA, "Cast with alternative cost: {R}{G} (source: Security Rhox"); // pay alternative cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -73,6 +73,6 @@ enum RoccoCabarettiCatererPredicate implements ObjectSourcePlayerPredicate<Card>
             return false;
         }
         return input.getObject().getManaValue()
-                <= ManacostVariableValue.ETB.calculate(game, input.getSource(), null);
+                <= GetXValue.instance.calculate(game, input.getSource(), null);
     }
 }

@@ -33,7 +33,7 @@ public final class TyvarKellEmblem extends Emblem {
                         HasteAbility.getInstance(), Duration.EndOfTurn, null, true
                 ).setText("it gains haste until end of turn"), filter, false, SetTargetPointer.CARD
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(2, "you").concatBy("and"));
+        ability.addEffect(new DrawCardSourceControllerEffect(2, true).concatBy("and"));
         this.getAbilities().add(ability);
     }
 

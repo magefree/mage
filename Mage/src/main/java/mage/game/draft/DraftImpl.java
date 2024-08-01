@@ -8,7 +8,7 @@ import mage.game.events.TableEvent.EventType;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -248,7 +248,7 @@ public abstract class DraftImpl implements Draft {
 
         if (this.boosterLoadingExecutor == null) {
             this.boosterLoadingExecutor = Executors.newSingleThreadScheduledExecutor(
-                    new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_TOURNEY_BOOSTERS_SEND)
+                    new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TOURNEY_BOOSTERS_SEND)
             );
         }
 

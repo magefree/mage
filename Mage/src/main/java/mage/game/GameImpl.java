@@ -48,6 +48,7 @@ import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.command.emblems.EmblemOfCard;
 import mage.game.command.emblems.RadiationEmblem;
 import mage.game.command.emblems.TheRingEmblem;
+import mage.game.command.emblems.XmageHelperEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -444,7 +445,7 @@ public abstract class GameImpl implements Game {
                     return designation;
                 }
             }
-            for (Emblem emblem : state.getInherentEmblems()) {
+            for (Emblem emblem : state.getHelperEmblems()) {
                 if (emblem.getId().equals(objectId)) {
                     return emblem;
                 }
@@ -714,12 +715,6 @@ public abstract class GameImpl implements Game {
             // SyrCarahTheBoldTest.java for an example of when this check is relevant.
             if (obj instanceof Spell) {
                 spell = (Spell) obj;
-            } else if (obj != null) {
-                logger.error(String.format(
-                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                                obj.getClass().getName(), obj.getName()),
-                        new Throwable()
-                );
             }
         }
         return spell;
@@ -1406,13 +1401,7 @@ public abstract class GameImpl implements Game {
             }
         }
 
-        // Rad counter mechanic for every player
-        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
-            // This is not a real emblem. Just a fake source for the
-            // inherent trigger ability related to Rad counters
-            // Faking a source just to display something on the stack ability.
-            state.addInherentEmblem(new RadiationEmblem(), playerId);
-        }
+        initGameDefaultHelperEmblems();
     }
 
     public void initGameDefaultWatchers() {
@@ -1451,6 +1440,22 @@ public abstract class GameImpl implements Game {
         BloodthirstWatcher bloodthirstWatcher = new BloodthirstWatcher();
         bloodthirstWatcher.setControllerId(playerId);
         getState().addWatcher(bloodthirstWatcher);
+    }
+
+    public void initGameDefaultHelperEmblems() {
+
+        // Rad Counter's trigger source
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            // This is not a real emblem. Just a fake source for the
+            // inherent trigger ability related to Rad counters
+            // Faking a source just to display something on the stack ability.
+            state.addHelperEmblem(new RadiationEmblem(), playerId);
+        }
+
+        // global card hints for better UX
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            state.addHelperEmblem(new XmageHelperEmblem().withCardHint("storm counter", StormAbility.getHint()), playerId);
+        }
     }
 
     protected void sendStartMessage(Player choosingPlayer, Player startingPlayer) {
@@ -1801,7 +1806,6 @@ public abstract class GameImpl implements Game {
         } finally {
             if (top != null) {
                 state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
-                rememberLKI(top.getSourceId(), Zone.STACK, top);
                 checkInfiniteLoop(top.getSourceId());
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
@@ -3320,7 +3324,7 @@ public abstract class GameImpl implements Game {
             }
         }
         for (Card card : toOutside) {
-            rememberLKI(card.getId(), Zone.BATTLEFIELD, card);
+            rememberLKI(Zone.BATTLEFIELD, card);
         }
         // needed to send event that permanent leaves the battlefield to allow non stack effects to execute
         player.moveCards(toOutside, Zone.OUTSIDE, null, this);
@@ -3592,12 +3596,12 @@ public abstract class GameImpl implements Game {
     /**
      * Remembers object state to be used as Last Known Information.
      *
-     * @param objectId
      * @param zone
      * @param object
      */
     @Override
-    public void rememberLKI(UUID objectId, Zone zone, MageObject object) {
+    public void rememberLKI(Zone zone, MageObject object) {
+        UUID objectId = object.getId();
         if (object instanceof Permanent || object instanceof StackObject) {
             MageObject copy = object.copy();
 

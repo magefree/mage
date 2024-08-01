@@ -388,8 +388,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        return ability.activate(game, noMana);
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        return ability.activate(game, allowedIdentifiers, noMana);
     }
 
     @Override
@@ -584,7 +584,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
+    public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, Set<MageIdentifier> allowedIdentifiers, boolean noMana, Player controller, Game game) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

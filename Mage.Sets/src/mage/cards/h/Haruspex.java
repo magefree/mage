@@ -8,7 +8,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public final class Haruspex extends CardImpl {
 
         // Devouring Monster -- {T}, Remove X +1/+1 counters from Haruspex: Add X mana of any one color.
         Ability ability = new DynamicManaAbility(
-                Mana.AnyMana(1), RemovedCountersForCostValue.instance, new TapSourceCost(),
+                Mana.AnyMana(1), GetXValue.instance, new TapSourceCost(),
                 "Add X mana of any one color", true, xValue
         );
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1));

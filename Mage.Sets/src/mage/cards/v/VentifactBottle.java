@@ -10,7 +10,7 @@ import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class VentifactBottle extends CardImpl {
 
         // {X}{1}, {tap}: Put X charge counters on Ventifact Bottle. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), ManacostVariableValue.REGULAR, true),
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), GetXValue.instance, true),
                 new ManaCostsImpl<>("{X}{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

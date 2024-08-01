@@ -2,7 +2,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class Magmaquake extends CardImpl {
 
 
         // Magmaquake deals X damage to each creature without flying and each planeswalker.
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, filter));
     }
 
     private Magmaquake(final Magmaquake card) {

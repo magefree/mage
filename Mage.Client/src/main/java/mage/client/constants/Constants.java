@@ -42,7 +42,7 @@ public final class Constants {
     public static final int POWBOX_TEXT_MAX_LEFT = 212;
     public static final int DAMAGE_MAX_LEFT = 180;
 
-    // tooltip hints delay in ms (need more time to display long hints withour hiding)
+    // tooltip hints delay in ms (need more time to display long hints without hiding)
     public static final int TOOLTIPS_DELAY_MS = 60 * 1000;
 
     public static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2, 2, 2, 2);
@@ -64,7 +64,7 @@ public final class Constants {
     public static final String RESOURCE_SYMBOL_FOLDER_PNG = "png";
 
     public enum ResourceSymbolSize {
-        SMALL,
+        SMALL, // TODO: delete SMALL, MEDIUM and LARGE as outdated (svg or generated png works fine)
         MEDIUM,
         LARGE,
         SVG,

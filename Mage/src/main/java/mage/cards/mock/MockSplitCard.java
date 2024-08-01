@@ -119,8 +119,7 @@ public class MockSplitCard extends SplitCard implements MockableCard {
         // so a MockSplitCard must ignore it (duplicate fix)
         Abilities<Ability> sourceAbilities = this.getAbilities();
         return CardUtil.getCardRulesWithAdditionalInfo(
-                this.getId(),
-                this.getName(),
+                this,
                 sourceAbilities,
                 sourceAbilities
         );

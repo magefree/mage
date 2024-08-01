@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.cards.MageCardLocation;
 import mage.cards.action.ActionCallback;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageCaches;
 import mage.client.util.ImageHelper;
 import mage.client.util.SoftValuesLoadingCache;
@@ -46,7 +47,6 @@ public class CardPanelRenderModeImage extends CardPanel {
     private static final float TEXT_GLOW_INTENSITY = 3f;
 
     // text min size for image render mode
-    private static final int CARD_TITLE_FONT_MIN_SIZE = 13;
     private static final int CARD_PT_FONT_MIN_SIZE = 17;
 
     public final ScaledImagePanel imagePanel;
@@ -183,50 +183,52 @@ public class CardPanelRenderModeImage extends CardPanel {
         int cardYOffset = key.cardYOffset;
 
         BufferedImage image = GraphicsUtilities.createCompatibleTranslucentImage(renderWidth, renderHeight);
-        Graphics2D g2d = image.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        Graphics2D g2 = image.createGraphics();
+        try {
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // card full size = select border + black border + real card
-        CardSizes sizes = new CardSizes(componentBorder, cardXOffset, cardYOffset, renderWidth, renderHeight);
+            // card full size = select border + black border + real card
+            CardSizes sizes = new CardSizes(componentBorder, cardXOffset, cardYOffset, renderWidth, renderHeight);
 
-        // corners for selection and for border
-        int cornerSizeSelection = Math.max(4, Math.round(sizes.rectSelection.width * ROUNDED_CORNER_SIZE));
-        int cornerSizeBorder = Math.max(4, Math.round(sizes.rectBorder.width * ROUNDED_CORNER_SIZE));
+            // corners for selection and for border
+            int cornerSizeSelection = Math.max(4, Math.round(sizes.rectSelection.width * ROUNDED_CORNER_SIZE));
+            int cornerSizeBorder = Math.max(4, Math.round(sizes.rectBorder.width * ROUNDED_CORNER_SIZE));
 
-        // DRAW ORDER from big to small: select -> select info -> border -> card
+            // DRAW ORDER from big to small: select -> select info -> border -> card
 
-        // draw selection
-        if (key.isSelected) {
-            // TODO: add themes color support
-            g2d.setColor(Color.green);
-            g2d.fillRoundRect(sizes.rectSelection.x + 1, sizes.rectSelection.y + 1, sizes.rectSelection.width - 2, sizes.rectSelection.height - 2, cornerSizeSelection, cornerSizeSelection);
-        } else if (key.isChoosable) {
-            g2d.setColor(new Color(250, 250, 0, 230));
-            g2d.fillRoundRect(sizes.rectSelection.x + 1, sizes.rectSelection.y + 1, sizes.rectSelection.width - 2, sizes.rectSelection.height - 2, cornerSizeSelection, cornerSizeSelection);
-        } else if (key.isPlayable) {
-            g2d.setColor(new Color(153, 102, 204, 200));
-            g2d.fillRoundRect(sizes.rectSelection.x, sizes.rectSelection.y, sizes.rectSelection.width, sizes.rectSelection.height, cornerSizeSelection, cornerSizeSelection);
-        }
+            // draw selection
+            if (key.isSelected) {
+                // TODO: add themes color support
+                g2.setColor(Color.green);
+                g2.fillRoundRect(sizes.rectSelection.x + 1, sizes.rectSelection.y + 1, sizes.rectSelection.width - 2, sizes.rectSelection.height - 2, cornerSizeSelection, cornerSizeSelection);
+            } else if (key.isChoosable) {
+                g2.setColor(new Color(250, 250, 0, 230));
+                g2.fillRoundRect(sizes.rectSelection.x + 1, sizes.rectSelection.y + 1, sizes.rectSelection.width - 2, sizes.rectSelection.height - 2, cornerSizeSelection, cornerSizeSelection);
+            } else if (key.isPlayable) {
+                g2.setColor(new Color(153, 102, 204, 200));
+                g2.fillRoundRect(sizes.rectSelection.x, sizes.rectSelection.y, sizes.rectSelection.width, sizes.rectSelection.height, cornerSizeSelection, cornerSizeSelection);
+            }
 
-        // draw attack or block border (?inner part of a selection?)
-        if (key.canAttack || key.canBlock) {
-            g2d.setColor(new Color(255, 50, 50, 230));
-            g2d.fillRoundRect(sizes.rectSelection.x + 1, sizes.rectSelection.y + 1, sizes.rectSelection.width - 2, sizes.rectSelection.height - 2, cornerSizeSelection, cornerSizeSelection);
-        }
+            // draw attack or block border (?inner part of a selection?)
+            if (key.canAttack || key.canBlock) {
+                g2.setColor(new Color(255, 50, 50, 230));
+                g2.fillRoundRect(sizes.rectSelection.x + 1, sizes.rectSelection.y + 1, sizes.rectSelection.width - 2, sizes.rectSelection.height - 2, cornerSizeSelection, cornerSizeSelection);
+            }
 
-        // draw empty card with border
-        if (!key.hasImage) {
-            // gray 1 px border
-            g2d.setColor(new Color(125, 125, 125, 255));
-            g2d.fillRoundRect(sizes.rectBorder.x, sizes.rectBorder.y, sizes.rectBorder.width, sizes.rectBorder.height, cornerSizeBorder, cornerSizeBorder);
-            // color plate
-            g2d.setColor(new Color(30, 200, 200, 200));
-            g2d.fillRoundRect(sizes.rectBorder.x + 1, sizes.rectBorder.y + 1, sizes.rectBorder.width - 2, sizes.rectBorder.height - 2, cornerSizeBorder, cornerSizeBorder);
+            // draw empty card with border
+            if (!key.hasImage) {
+                // gray 1 px border
+                g2.setColor(new Color(125, 125, 125, 255));
+                g2.fillRoundRect(sizes.rectBorder.x, sizes.rectBorder.y, sizes.rectBorder.width, sizes.rectBorder.height, cornerSizeBorder, cornerSizeBorder);
+                // color plate
+                g2.setColor(new Color(30, 200, 200, 200));
+                g2.fillRoundRect(sizes.rectBorder.x + 1, sizes.rectBorder.y + 1, sizes.rectBorder.width - 2, sizes.rectBorder.height - 2, cornerSizeBorder, cornerSizeBorder);
+            }
+        } finally {
+            g2.dispose();
         }
 
         // draw real card by component (see imagePanel and other layout's items)
-        g2d.dispose();
-
         return image;
     }
 
@@ -241,10 +243,15 @@ public class CardPanelRenderModeImage extends CardPanel {
         } else {
             newImage = ImageHelper.getResizedImage(image, 20, 20);
         }
-        Graphics graphics = newImage.getGraphics();
-        graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("Arial Black", amount > 100 ? Font.PLAIN : Font.BOLD, fontSize));
-        graphics.drawString(Integer.toString(amount), xOffset * factor, 11 * factor);
+        Graphics g2 = newImage.createGraphics();
+        try {
+            g2.setColor(Color.BLACK);
+            g2.setFont(new Font("Arial Black", amount > 100 ? Font.PLAIN : Font.BOLD, fontSize));
+            g2.drawString(Integer.toString(amount), xOffset * factor, 11 * factor);
+        } finally {
+            g2.dispose();
+        }
+
         return new ImageIcon(newImage);
     }
 
@@ -422,13 +429,14 @@ public class CardPanelRenderModeImage extends CardPanel {
         fullImageText.setVisible(fullImagePath != null);
 
         if (showText) {
-            int fontSize = cardHeight / 13; // startup font size (it same size on all zoom levels)
-            titleText.setFont(getFont().deriveFont(Font.BOLD, Math.max(CARD_TITLE_FONT_MIN_SIZE, fontSize)));
+            int mainFontSize = GUISizeHelper.getImageRendererMainFontSize(cardHeight);
+            int titleFontSize = GUISizeHelper.getImageRendererTitleFontSize(cardHeight);
+            titleText.setFont(getFont().deriveFont(Font.BOLD, titleFontSize));
 
             // margins from card black border to text, not need? text show up good without margins
             int titleMarginLeft = 0; //Math.round(28f / 672f * cardWidth);
             int titleMarginRight = 0;
-            int titleMarginTop = Math.round(getCardCaptionTopOffset() / 100f * cardHeight);//Math.round(28f / 936f * cardHeight);
+            int titleMarginTop = 0; //Math.round(getCardCaptionTopOffset() / 100f * cardHeight);//Math.round(28f / 936f * cardHeight);
             int titleMarginBottom = 0;
             titleText.setBounds(
                     imagePanel.getX() + titleMarginLeft,
@@ -437,7 +445,8 @@ public class CardPanelRenderModeImage extends CardPanel {
                     imagePanel.getBounds().height - titleMarginTop - titleMarginBottom
             );
 
-            fullImageText.setFont(getFont().deriveFont(Font.PLAIN, 10));
+            int missImageFontSize = Math.max(10, Math.round(0.5f * mainFontSize));
+            fullImageText.setFont(getFont().deriveFont(Font.PLAIN, missImageFontSize));
             fullImageText.setBounds(titleText.getX(), titleText.getY(), titleText.getBounds().width, titleText.getBounds().height);
 
             // PT (font as title)
@@ -447,9 +456,9 @@ public class CardPanelRenderModeImage extends CardPanel {
                 MageInt currentPower = cardView.getOriginalPower();
                 MageInt currentToughness = cardView.getOriginalToughness();
 
-                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentPower, false);
-                prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), null, false);
-                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentToughness, CardRendererUtils.isCardWithDamage(cardView));
+                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), currentPower, false);
+                prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), null, false);
+                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), currentToughness, CardRendererUtils.isCardWithDamage(cardView));
 
                 // right bottom corner with margin (sizes from any sample card)
                 int ptMarginRight = Math.round(64f / 672f * cardWidth);

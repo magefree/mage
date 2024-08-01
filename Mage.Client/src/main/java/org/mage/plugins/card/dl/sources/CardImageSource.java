@@ -4,8 +4,7 @@ import mage.client.util.CardLanguage;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author North, JayDi85
@@ -48,11 +47,18 @@ public interface CardImageSource {
     }
 
     /**
-     * Pause before each http request (must use for services with rate limits)
-     *
-     * @param httpImageUrl
+     * Timeout before each http request (must use for services with rate limits)
      */
-    void doPause(String httpImageUrl);
+    default void doPause(String fullUrl) {
+        // nothing
+    }
+
+    /**
+     * Set additional headers like user agent, referer, cookies, etc
+     */
+    default Map<String, String> getHttpRequestHeaders(String fullUrl) {
+        return new LinkedHashMap<>();
+    }
 
     default List<String> getSupportedSets() {
         return new ArrayList<>();

@@ -34,7 +34,7 @@ import java.util.UUID;
  */
 public final class ArtificerClass extends CardImpl {
 
-    private static final FilterCard filter = new FilterArtifactCard();
+    private static final FilterCard filter = new FilterArtifactCard("the first artifact spell you cast each turn");
 
     static {
         filter.add(ArtificerClassPredicate.instance);
@@ -49,10 +49,10 @@ public final class ArtificerClass extends CardImpl {
         this.addAbility(new ClassReminderAbility());
 
         // The first artifact spell you cast each turn costs {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(
-                new SpellsCostReductionControllerEffect(filter, 1)
-                        .setText("the first artifact spell you cast each turn costs {1} less to cast")
-        ), new ArtificerClassWatcher());
+        this.addAbility(
+                new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)),
+                new ArtificerClassWatcher()
+        );
 
         // {1}{U}: Level 2
         this.addAbility(new ClassLevelAbility(2, "{1}{U}"));

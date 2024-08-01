@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
@@ -24,9 +24,9 @@ public final class LanternFlare extends CardImpl {
 
         // Cleave {X}{R}{W}
         Ability ability = new CleaveAbility(
-                this, new DamageTargetEffect(ManacostVariableValue.REGULAR), "{X}{R}{W}"
+                this, new DamageTargetEffect(GetXValue.instance), "{X}{R}{W}"
         );
-        ability.addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        ability.addEffect(new GainLifeEffect(GetXValue.instance));
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability);
 

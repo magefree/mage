@@ -1,6 +1,6 @@
 package mage.target.targetadjustment;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.constants.ComparisonType;
 
 /**
@@ -9,10 +9,10 @@ import mage.constants.ComparisonType;
 public class XManaValueTargetAdjuster extends ManaValueTargetAdjuster {
 
     public XManaValueTargetAdjuster() {
-        super(ManacostVariableValue.REGULAR, ComparisonType.EQUAL_TO);
+        super(GetXValue.instance, ComparisonType.EQUAL_TO);
     }
 
     public XManaValueTargetAdjuster(ComparisonType comparison) {
-        super(ManacostVariableValue.REGULAR, comparison);
+        super(GetXValue.instance, comparison);
     }
 }

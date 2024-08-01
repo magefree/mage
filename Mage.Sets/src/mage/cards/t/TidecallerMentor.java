@@ -30,7 +30,7 @@ public final class TidecallerMentor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Threshold -- When Tidecaller Mentor enters, if seven or more cards are in your graveyard, return up to one target nonland permanent to its owner's hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(

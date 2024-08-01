@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -61,7 +62,7 @@ class WrathOfTheSkiesEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (xValue > 0) {
             new GetEnergyCountersControllerEffect(xValue).apply(game, source);
         }

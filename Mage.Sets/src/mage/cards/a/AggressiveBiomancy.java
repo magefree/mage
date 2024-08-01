@@ -1,7 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -18,6 +16,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author Cguy7777
@@ -72,7 +73,7 @@ class AggressiveBiomancyEffect extends OneShotEffect {
                 source.getControllerId(),
                 null,
                 false,
-                source.getManaCostsToPay().getX());
+                CardUtil.getSourceCostsTag(game, source, "X", 0));
         effect.addAdditionalAbilities(fightAbility);
         effect.setTargetPointer(new FixedTarget(creatureToCopy, game));
         return effect.apply(game, source);

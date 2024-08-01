@@ -101,18 +101,18 @@ public class HelperPanel extends JPanel {
 
     private void setGUISize() {
         //this.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
-        textAreaScrollPane.setMaximumSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
-        textAreaScrollPane.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
+        textAreaScrollPane.setMaximumSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameFeedbackPanelMaxHeight));
+        textAreaScrollPane.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameFeedbackPanelMaxHeight));
 
 //        dialogTextArea.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
 //        dialogTextArea.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
 //        buttonContainer.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogButtonHeight + 4));
 //        buttonContainer.setMinimumSize(new Dimension(160, GUISizeHelper.gameDialogButtonHeight + 20));
 //        buttonContainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, GUISizeHelper.gameDialogButtonHeight + 4));
-        btnLeft.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnRight.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnUndo.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnLeft.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnRight.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnSpecial.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnUndo.setFont(GUISizeHelper.gameFeedbackPanelFont);
 
         this.redrawMessages();
 
@@ -414,9 +414,10 @@ public class HelperPanel extends JPanel {
         }
 
         // search max const size
-        int constButtonSizeW = GUISizeHelper.gameDialogButtonWidth * 200 / 100;
+        // TODO: research and test sizing - need improve (e.g. for long messages)?
+        int constButtonSizeW = GUISizeHelper.gameFeedbackPanelButtonWidth * 200 / 100;
         int constGridSizeW = buttons.size() * constButtonSizeW + BUTTONS_H_GAP * (buttons.size() - 1);
-        int constGridSizeH = Math.round(GUISizeHelper.gameDialogButtonHeight * 150 / 100);
+        int constGridSizeH = Math.round(GUISizeHelper.gameFeedbackPanelButtonHeight * 150 / 100);
 
         if (needButtonSizeW < constButtonSizeW) {
             // same size mode (grid)
@@ -450,7 +451,7 @@ public class HelperPanel extends JPanel {
     private void redrawMessages() {
         String panelText = this.basicMessage;
         if (this.secondaryMessage != null) {
-            panelText += "<div style='font-size:" + GUISizeHelper.gameDialogAreaFontSizeSmall + "pt'>" + secondaryMessage + "</div>";
+            panelText += "<div style='font-size:" + GUISizeHelper.gameFeedbackPanelExtraMessageFontSize + "pt'>" + secondaryMessage + "</div>";
         }
         this.dialogTextArea.setText(panelText, this.getWidth());
     }
