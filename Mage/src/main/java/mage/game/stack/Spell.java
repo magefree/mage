@@ -190,14 +190,16 @@ public class Spell extends StackObjectImpl implements Card {
         return true;
     }
 
-    public String getActivatedMessage(Game game) {
+    public String getActivatedMessage(Game game, Zone fromZone) {
         StringBuilder sb = new StringBuilder();
+        sb.append(" casts ");
         if (isCopy()) {
-            sb.append(" copies ");
-        } else {
-            sb.append(" casts ");
+            sb.append("a copied ");
         }
-        return sb.append(ability.getGameLogMessage(game)).toString();
+        sb.append(ability.getGameLogMessage(game));
+        sb.append(" from ");
+        sb.append(fromZone.toString().toLowerCase(Locale.ENGLISH));
+        return sb.toString();
     }
 
     public String getSpellCastText(Game game) {
