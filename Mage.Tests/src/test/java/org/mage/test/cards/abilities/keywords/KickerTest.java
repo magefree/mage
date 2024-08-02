@@ -46,7 +46,7 @@ public class KickerTest extends CardTestPlayerBase {
     /**
      * Aether Figment Creature — Illusion 1/1, 1U (2) Kicker {3} (You may pay an
      * additional {3} as you cast this spell.) Aether Figment can't be blocked.
-     * If Aether Figment was kicked, it enters the battlefield with two +1/+1
+     * If Aether Figment was kicked, it enters with two +1/+1
      * counters on it.
      */
     @Test
@@ -188,8 +188,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
         // Kicker {1}{G} and/or {2}{U}
-        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
-        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
@@ -211,8 +211,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
         // Kicker {1}{G} and/or {2}{U}
-        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
-        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise", 2);
@@ -239,8 +239,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
         // Kicker {1}{G} and/or {2}{U}
-        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
-        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise", 1);
@@ -253,7 +253,7 @@ public class KickerTest extends CardTestPlayerBase {
         setChoice(playerA, true);  // use kicker {1}{G} - destroy target creature with flying
         setChoice(playerA, true); // use kicker {2}{U} - draw two cards
         // spell must be countered, so no chooses
-        //setChoice(playerA, "When "); // two triggers rised: When {this} enters the battlefield, if it was kicked...
+        //setChoice(playerA, "When "); // two triggers rised: When {this} enters, if it was kicked...
         //addTarget(playerA, "Birds of Paradise"); // target for {1}{G} trigger
 
         // counter kicked spell
@@ -459,7 +459,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         //
         // Kicker {4}
-        // If Academy Drake was kicked, it enters the battlefield with two +1/+1 counters on it.
+        // If Academy Drake was kicked, it enters with two +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Academy Drake", 1); // {2}{U}, 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4 + 4 + 3);
         //
@@ -666,7 +666,7 @@ public class KickerTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         // Kicker {2}
-        // If Ardent Soldier was kicked, it enters the battlefield with a +1/+1 counter on it.
+        // If Ardent Soldier was kicked, it enters with a +1/+1 counter on it.
         addCard(Zone.LIBRARY, playerA, "Ardent Soldier", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2); // for kicker cost
         //

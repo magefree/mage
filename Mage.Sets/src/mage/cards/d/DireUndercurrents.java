@@ -32,13 +32,13 @@ public final class DireUndercurrents extends CardImpl {
     public DireUndercurrents(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U/B}{U/B}");
 
-        // Whenever a blue creature enters the battlefield under your control, you may have target player draw a card.
+        // Whenever a blue creature you control enters, you may have target player draw a card.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1)
                 .setText("you may have target player draw a card"), filterBlue, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
-        // Whenever a black creature enters the battlefield under your control, you may have target player discard a card.
+        // Whenever a black creature you control enters, you may have target player discard a card.
         Ability ability2 = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), filterBlack, true);
         ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);

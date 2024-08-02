@@ -32,7 +32,7 @@ public final class ArrogantOutlaw extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new LoseLifeOpponentsEffect(2), false
-                ), OpponentsLostLifeCondition.instance, "When {this} enters the battlefield, " +
+                ), OpponentsLostLifeCondition.instance, "When {this} enters, " +
                 "if an opponent lost life this turn, each opponent loses 2 life and you gain 2 life."
         );
         ability.addEffect(new GainLifeEffect(2));

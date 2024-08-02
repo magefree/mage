@@ -42,7 +42,7 @@ public final class CaptainOfTheMists extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever another Human enters the battlefield under your control, untap Captain of the Mists.
+        // Whenever another Human you control enters, untap Captain of the Mists.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new UntapSourceEffect(), filter));
 
         // {1}{U}, {tap}: You may tap or untap target permanent.

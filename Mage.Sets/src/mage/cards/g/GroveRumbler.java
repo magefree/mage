@@ -27,7 +27,7 @@ public final class GroveRumbler extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // <i>Landfall</i>-Whenever a land enters the battlefield under your control, Grove Rumbler gets +2/+2 until end of turn.
+        // <i>Landfall</i>-Whenever a land you control enters, Grove Rumbler gets +2/+2 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 

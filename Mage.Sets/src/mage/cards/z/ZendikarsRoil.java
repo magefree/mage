@@ -17,7 +17,7 @@ public final class ZendikarsRoil extends CardImpl {
     public ZendikarsRoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
 
-        // Whenever a land enters the battlefield under your control, create a 2/2 green Elemental creature token.
+        // Whenever a land you control enters, create a 2/2 green Elemental creature token.
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new ZendikarsRoilElementalToken())));
     }
 

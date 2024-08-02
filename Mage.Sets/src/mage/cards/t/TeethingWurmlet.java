@@ -43,7 +43,7 @@ public final class TeethingWurmlet extends CardImpl {
                 "{this} has deathtouch as long as you control three or more artifacts"
         )));
 
-        // Whenever an artifact enters the battlefield under your control, you gain 1 life. If this is the
+        // Whenever an artifact you control enters, you gain 1 life. If this is the
         // first time this ability has resolved this turn, put a +1/+1 counter on Teething Wurmlet.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new GainLifeEffect(1), StaticFilters.FILTER_PERMANENT_ARTIFACT_AN

@@ -72,7 +72,7 @@ class FortifiedBeachheadEffect extends OneShotEffect {
 
     public FortifiedBeachheadEffect() {
         super(Outcome.Tap);
-        this.staticText = "you may reveal a Soldier card from your hand. {this} enters the battlefield tapped unless you revealed a Soldier card this way or you control a Soldier.";
+        this.staticText = "you may reveal a Soldier card from your hand. {this} enters tapped unless you revealed a Soldier card this way or you control a Soldier.";
     }
 
     private FortifiedBeachheadEffect(final FortifiedBeachheadEffect effect) {

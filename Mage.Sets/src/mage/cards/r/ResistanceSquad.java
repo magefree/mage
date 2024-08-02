@@ -43,7 +43,7 @@ public final class ResistanceSquad extends CardImpl {
         // When Resistance Squad enters the battlefield, if you control another Human, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new DrawCardSourceControllerEffect(1)),
-                condition, "When {this} enters the battlefield, " +
+                condition, "When {this} enters, " +
                 "if you control another Human, draw a card."
         ).addHint(hint));
     }

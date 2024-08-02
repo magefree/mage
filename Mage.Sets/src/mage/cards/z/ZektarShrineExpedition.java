@@ -27,7 +27,7 @@ public final class ZektarShrineExpedition extends CardImpl {
     public ZektarShrineExpedition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
-        // Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Zektar Shrine Expedition.
+        // Landfall - Whenever a land you control enters, you may put a quest counter on Zektar Shrine Expedition.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
         // Remove three quest counters from Zektar Shrine Expedition and sacrifice it: Create a 7/1 red Elemental creature token with trample and haste. Exile it at the beginning of the next end step.
         this.addAbility(new SimpleActivatedAbility(

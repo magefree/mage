@@ -34,9 +34,9 @@ public final class KavuPrimarch extends CardImpl {
         this.addAbility(new ConvokeAbility());
 
 
-        // If Kavu Primarch was kicked, it enters the battlefield with four +1/+1 counters on it.
+        // If Kavu Primarch was kicked, it enters with four +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)),KickedCondition.ONCE,
-                "If Kavu Primarch was kicked, it enters the battlefield with four +1/+1 counters on it.", ""));
+                "If Kavu Primarch was kicked, it enters with four +1/+1 counters on it.", ""));
     }
 
     private KavuPrimarch(final KavuPrimarch card) {

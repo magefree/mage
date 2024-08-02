@@ -37,7 +37,7 @@ public final class KappaCannoneer extends CardImpl {
         // Ward {4}
         this.addAbility(new WardAbility(new GenericManaCost(4), false));
 
-        // Whenever Kappa Cannoneer or another artifact enters the battlefield under your control, put a +1/+1 counter on Kappa Cannoneer and it can't be blocked this turn.
+        // Whenever Kappa Cannoneer or another artifact you control enters, put a +1/+1 counter on Kappa Cannoneer and it can't be blocked this turn.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT, false, true

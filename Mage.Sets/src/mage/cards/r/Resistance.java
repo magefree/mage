@@ -27,7 +27,7 @@ public final class Resistance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{W}");
         
 
-        // Whenever a creature enters the battlefield under your control, Resistance deals 1 damage to each opponent.
+        // Whenever a creature you control enters, Resistance deals 1 damage to each opponent.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), StaticFilters.FILTER_PERMANENT_CREATURE, false));
 
         // {R}{W}: Target creature gains haste until end of turn and must attack or block this turn if able.

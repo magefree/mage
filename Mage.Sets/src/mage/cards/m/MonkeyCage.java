@@ -29,7 +29,7 @@ public final class MonkeyCage extends CardImpl {
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new SacrificeSourceEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 false, SetTargetPointer.PERMANENT
-        ).setTriggerPhrase("When a creature enters the battlefield, ");
+        ).setTriggerPhrase("When a creature enters, ");
         ability.addEffect(new MonkeyCageEffect());
         this.addAbility(ability);
     }

@@ -23,7 +23,7 @@ public final class EidolonOfBlossoms extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Constellation - Whenever Eidolon of Blossoms or another enchantment enters the battlefield under your control, draw a card.
+        // Constellation - Whenever Eidolon of Blossoms or another enchantment you control enters, draw a card.
         this.addAbility(new ConstellationAbility(new DrawCardSourceControllerEffect(1)));
     }
 

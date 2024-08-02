@@ -21,7 +21,7 @@ public class EntersBattlefieldOrTurnedFaceUpTriggeredAbility extends TriggeredAb
     public EntersBattlefieldOrTurnedFaceUpTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setWorksFaceDown(true);
-        this.setTriggerPhrase("When {this} enters the battlefield or is turned face up, ");
+        this.setTriggerPhrase("When {this} enters or is turned face up, ");
     }
 
     private EntersBattlefieldOrTurnedFaceUpTriggeredAbility(final EntersBattlefieldOrTurnedFaceUpTriggeredAbility ability) {

@@ -34,7 +34,7 @@ public final class CoerciveRecruiter extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // Whenever Coercive Recruiter or another Pirate enters the battlefield under your control, gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and becomes a Pirate in addition to its other types.
+        // Whenever Coercive Recruiter or another Pirate you control enters, gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and becomes a Pirate in addition to its other types.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GainControlTargetEffect(Duration.EndOfTurn), filter, false, true
         );

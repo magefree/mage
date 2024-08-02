@@ -43,7 +43,7 @@ public final class AyulaQueenAmongBears extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another Bear enters the battlefield under your control, choose one —
+        // Whenever another Bear you control enters, choose one —
         // • Put two +1/+1 counters on target Bear.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), filter

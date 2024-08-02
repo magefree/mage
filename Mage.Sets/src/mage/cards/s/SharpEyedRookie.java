@@ -33,7 +33,7 @@ public final class SharpEyedRookie extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Whenever a creature enters the battlefield under your control, if its power is greater than Sharp-Eyed Rookie's power or its toughness is greater than Sharp-Eyed Rookie's toughness, put a +1/+1 counter on Sharp-Eyed Rookie and investigate.
+        // Whenever a creature you control enters, if its power is greater than Sharp-Eyed Rookie's power or its toughness is greater than Sharp-Eyed Rookie's toughness, put a +1/+1 counter on Sharp-Eyed Rookie and investigate.
         this.addAbility(new SharpEyedRookieTriggeredAbility());
     }
 
@@ -52,7 +52,7 @@ class SharpEyedRookieTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
     SharpEyedRookieTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_CONTROLLED_CREATURE, false);
         this.addEffect(new InvestigateEffect().concatBy("and"));
-        setTriggerPhrase("Whenever a creature enters the battlefield under your control, " +
+        setTriggerPhrase("Whenever a creature you control enters, " +
                 "if its power is greater than {this}'s power or its toughness is greater than {this}'s toughness, ");
     }
 

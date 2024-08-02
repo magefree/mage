@@ -25,7 +25,7 @@ public final class DoomwakeGiant extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 
-        // Constellation - When Doomwake Giant or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
+        // Constellation - When Doomwake Giant or another enchantment you control enters, creatures your opponents control get -1/-1 until end of turn.
         this.addAbility(new ConstellationAbility(new BoostAllEffect(-1, -1, Duration.EndOfTurn, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false)));
     }
 

@@ -33,10 +33,10 @@ public final class GnarlidColony extends CardImpl {
         // Kicker {2}{G}
         this.addAbility(new KickerAbility("{2}{G}"));
 
-        // If Gnarlid Colony was kicked, it enters the battlefield with two +1/+1 counters on it.
+        // If Gnarlid Colony was kicked, it enters with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.ONCE,
-                "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""
+                "If {this} was kicked, it enters with two +1/+1 counters on it.", ""
         ));
 
         // Each creature you control with a +1/+1 counter on it has trample.

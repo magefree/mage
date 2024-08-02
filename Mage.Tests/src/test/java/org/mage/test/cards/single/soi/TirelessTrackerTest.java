@@ -8,7 +8,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  * 2G
 Creature - Human Scout
-Whenever a land enters the battlefield under your control, investigate. 
+Whenever a land you control enters, investigate. 
 
 Whenever you sacrifice a Clue, put a +1/+1 counter on Tireless Tracker. 
 * 

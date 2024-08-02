@@ -45,7 +45,7 @@ public final class EonFrolicker extends CardImpl {
         // When Eon Frolicker enters the battlefield, if you cast it, target opponent takes an extra turn after this one. Until your next turn, you and planeswalkers you control gain protection from that player.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new EonFrolickerEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
+                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
                 "if you cast it, target opponent takes an extra turn after this one. Until your next turn, " +
                 "you and planeswalkers you control gain protection from that player."
         );

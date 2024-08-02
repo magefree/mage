@@ -37,7 +37,7 @@ public final class WeddingRing extends CardImpl {
         // When Wedding Ring enters the battlefield, if it was cast, target opponent creates a token that's a copy of it.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new WeddingRingEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
+                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
                 "if it was cast, target opponent creates a token that's a copy of it."
         );
         ability.addTarget(new TargetOpponent());

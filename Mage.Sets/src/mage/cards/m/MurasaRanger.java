@@ -27,7 +27,7 @@ public final class MurasaRanger extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, you may pay {3}{G}. IF you do, put two +1/+1 counters on Murasa Ranger.
+        // <i>Landfall</i> &mdash; Whenever a land you control enters, you may pay {3}{G}. IF you do, put two +1/+1 counters on Murasa Ranger.
         this.addAbility(new LandfallAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{3}{G}")), false));
     }
 

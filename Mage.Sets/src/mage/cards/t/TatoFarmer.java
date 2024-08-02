@@ -41,7 +41,7 @@ public final class TatoFarmer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // Landfall -- Whenever a land enters the battlefield under your control, you may get two rad counters.
+        // Landfall -- Whenever a land you control enters, you may get two rad counters.
         this.addAbility(new LandfallAbility(
                 new AddCountersPlayersEffect(CounterType.RAD.createInstance(2), TargetController.YOU), true
         ));
@@ -64,4 +64,3 @@ public final class TatoFarmer extends CardImpl {
         return new TatoFarmer(this);
     }
 }
-

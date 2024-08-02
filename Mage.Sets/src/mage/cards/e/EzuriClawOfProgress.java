@@ -43,7 +43,7 @@ public final class EzuriClawOfProgress extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever a creature with power 2 or less enters the battlefield under your control, you get an experience counter.
+        // Whenever a creature with power 2 or less you control enters, you get an experience counter.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersPlayersEffect(
                 CounterType.EXPERIENCE.createInstance(), TargetController.YOU
         ), filter));

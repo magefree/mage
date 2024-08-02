@@ -29,7 +29,7 @@ public final class RecklessPyrosurfer extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Landfall -- Whenever a land enters the battlefield under your control, Reckless Pyrosurfer gains battle cry until end of turn.
+        // Landfall -- Whenever a land you control enters, Reckless Pyrosurfer gains battle cry until end of turn.
         this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(new BattleCryAbility(), Duration.EndOfTurn)));
     }
 

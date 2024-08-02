@@ -53,7 +53,7 @@ class CankerAbominationEffect extends OneShotEffect {
 
     CankerAbominationEffect() {
         super(Outcome.Neutral);
-        this.staticText = "choose an opponent. {this} enters the battlefield with a -1/-1 counter on it for each creature that player controls";
+        this.staticText = "choose an opponent. {this} enters with a -1/-1 counter on it for each creature that player controls";
     }
 
     private CankerAbominationEffect(final CankerAbominationEffect effect) {

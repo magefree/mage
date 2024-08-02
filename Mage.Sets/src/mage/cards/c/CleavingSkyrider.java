@@ -44,7 +44,7 @@ public final class CleavingSkyrider extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new AttackingCreatureCount())),
                 KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, it deals X damage to any target, where X is the number of attacking creatures."
+                "When {this} enters, if it was kicked, it deals X damage to any target, where X is the number of attacking creatures."
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

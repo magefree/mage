@@ -93,7 +93,7 @@ class FblthpTheLostTriggeredAbility extends EntersBattlefieldTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield, draw a card. " +
+        return "When {this} enters, draw a card. " +
                 "If it entered from your library or was cast from your library, draw two cards instead.";
     }
 }

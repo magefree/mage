@@ -27,7 +27,7 @@ public final class RiteOfHarmony extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{W}");
         
 
-        // Whenever a creature or enchantment enters the battlefield under your control this turn, draw a card.
+        // Whenever a creature or enchantment you control enters this turn, draw a card.
         getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new RiteOfHarmonyTriggeredAbility()));
 
         // Flashback {2}{G}{W}
@@ -80,6 +80,6 @@ class RiteOfHarmonyTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever a creature or enchantment enters the battlefield under your control this turn, draw a card.";
+        return "Whenever a creature or enchantment you control enters this turn, draw a card.";
     }
 }

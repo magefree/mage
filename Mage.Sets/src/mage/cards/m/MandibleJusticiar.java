@@ -37,7 +37,7 @@ public final class MandibleJusticiar extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // Whenever another artifact enters the battlefield under your control, Mandible Justiciar gets +1/+1 until end of turn.
+        // Whenever another artifact you control enters, Mandible Justiciar gets +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter
         ));

@@ -35,7 +35,7 @@ public final class SettlementBlacksmith extends CardImpl {
         // When Settlement Blacksmith enters the battlefield, if you control an Equipment, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                condition, "When {this} enters the battlefield, if you control an Equipment, draw a card."
+                condition, "When {this} enters, if you control an Equipment, draw a card."
         ).addHint(hint));
     }
 

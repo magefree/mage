@@ -291,7 +291,7 @@ public class CardIconsTest extends CardTestPlayerBase {
         //
         // Agadeem, the Undercrypt
         // Land
-        // As Agadeem, the Undercrypt enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As Agadeem, the Undercrypt enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         addCard(Zone.HAND, playerA, "Agadeem's Awakening", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
 

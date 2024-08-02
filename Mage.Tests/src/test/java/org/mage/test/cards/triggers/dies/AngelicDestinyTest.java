@@ -28,7 +28,7 @@ public class AngelicDestinyTest extends CardTestPlayerBase {
         // When enchanted creature dies, return Angelic Destiny to its owner's hand.
         addCard(Zone.HAND, playerA, "Angelic Destiny", 1);
         // Champion of the Parish
-        // Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Champion of the Parish.
+        // Whenever another Human you control enters, put a +1/+1 counter on Champion of the Parish.
         addCard(Zone.BATTLEFIELD, playerA, "Champion of the Parish", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);

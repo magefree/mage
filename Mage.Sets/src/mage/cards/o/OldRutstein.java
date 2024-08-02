@@ -76,7 +76,7 @@ class OldRutsteinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or at the beginning of your upkeep, mill a card. " +
+        return "When {this} enters or at the beginning of your upkeep, mill a card. " +
                 "If a land card is milled this way, create a Treasure token. " +
                 "If a creature card is milled this way, create a 1/1 green Insect creature token. " +
                 "If a noncreature, nonland card is milled this way, create a Blood token.";

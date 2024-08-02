@@ -26,7 +26,7 @@ public final class GylwainCastingDirector extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever Gylwain, Casting Director or another nontoken creature enters the battlefield under your control, choose one --
+        // Whenever Gylwain, Casting Director or another nontoken creature you control enters, choose one --
         // * Create a Royal Role token attached to that creature.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new CreateRoleAttachedTargetEffect(RoleType.ROYAL),

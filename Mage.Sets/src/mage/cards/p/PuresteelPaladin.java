@@ -34,7 +34,7 @@ public final class PuresteelPaladin extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever an Equipment enters the battlefield under your control, you may draw a card.
+        // Whenever an Equipment you control enters, you may draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true
         ));

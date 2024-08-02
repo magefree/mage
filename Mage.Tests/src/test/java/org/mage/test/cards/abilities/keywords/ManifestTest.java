@@ -365,7 +365,7 @@ public class ManifestTest extends CardTestPlayerBase {
         // 4/1
         addCard(Zone.LIBRARY, playerA, "Gore Swine");
 
-        // Whenever another red creature enters the battlefield under your control, Foundry Street Denizen gets +1/+0 until end of turn.
+        // Whenever another red creature you control enters, Foundry Street Denizen gets +1/+0 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Foundry Street Denizen");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
@@ -405,7 +405,7 @@ public class ManifestTest extends CardTestPlayerBase {
         // 4/1
         addCard(Zone.LIBRARY, playerA, "Gore Swine");
 
-        // Whenever another red creature enters the battlefield under your control, Foundry Street Denizen gets +1/+0 until end of turn.
+        // Whenever another red creature you control enters, Foundry Street Denizen gets +1/+0 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
         skipInitShuffling();
@@ -559,7 +559,7 @@ public class ManifestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
         // Play with the top card of your library revealed.
         // You may play the top card of your library if it's a land card.
-        // Whenever a land enters the battlefield under your control, you gain 1 life.
+        // Whenever a land you control enters, you gain 1 life.
         addCard(Zone.BATTLEFIELD, playerB, "Courser of Kruphix", 1);
 
         // {1}{B}, {T}, Sacrifice another creature: Manifest the top card of your library.

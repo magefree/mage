@@ -25,7 +25,7 @@ public final class TajuruWarcaller extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // <i>Rally</i>-Whenever Tajuru Warcaller or another Ally enters the battlefield under your control, creatures you control get +2/+2 until end of turn.
+        // <i>Rally</i>-Whenever Tajuru Warcaller or another Ally you control enters, creatures you control get +2/+2 until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new BoostControlledEffect(2, 2, Duration.EndOfTurn), false));
     }
 

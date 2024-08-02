@@ -34,7 +34,7 @@ public class SidisiBroodTyrantTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sidisi, Brood Tyrant");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Sidisi, Brood Tyrant", "Whenever {this} enters the battlefield");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Sidisi, Brood Tyrant", "Whenever {this} enters");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

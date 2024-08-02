@@ -25,7 +25,7 @@ public final class LlanowarStalker extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever another creature enters the battlefield under your control, Llanowar Stalker gets +1/+0 until end of turn.
+        // Whenever another creature you control enters, Llanowar Stalker gets +1/+0 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE

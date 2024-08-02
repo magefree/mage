@@ -42,7 +42,7 @@ public final class MaceOfTheValiant extends CardImpl {
         ).setText("and has vigilance"));
         this.addAbility(ability);
 
-        // Whenever a creature enters the battlefield under your control, put a charge counter on Mace of the Valiant.
+        // Whenever a creature you control enters, put a charge counter on Mace of the Valiant.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE

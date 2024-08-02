@@ -34,7 +34,7 @@ public final class CitanulWoodreaders extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2)),
                 KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, draw two cards."
+                "When {this} enters, if it was kicked, draw two cards."
         ));
     }
 

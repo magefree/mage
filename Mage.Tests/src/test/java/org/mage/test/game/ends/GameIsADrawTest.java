@@ -123,7 +123,7 @@ public class GameIsADrawTest extends CardTestPlayerBase {
     public void GameDrawByInfiniteLoopNot() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 43);
 
-        // Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
+        // Whenever a creature you control enters, you gain life equal to its toughness.
         addCard(Zone.BATTLEFIELD, playerA, "Angelic Chorus", 1); // Enchantment {5}
 
         // Create X 4/4 white Angel creature tokens with flying.

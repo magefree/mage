@@ -23,7 +23,7 @@ public final class ValakutPredator extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, Valakut Predator gets +2/+2 until end of turn.
+        // <i>Landfall</i> &mdash; Whenever a land you control enters, Valakut Predator gets +2/+2 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 

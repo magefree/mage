@@ -15,7 +15,7 @@ public final class HuatliRadiantChampionEmblem extends Emblem {
     public HuatliRadiantChampionEmblem() {
         super("Emblem Huatli");
 
-        // Whenever a creature enters the battlefield under your control, you may draw a card.
+        // Whenever a creature you control enters, you may draw a card.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.COMMAND,
                 new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_CONTROLLED_A_CREATURE, true);
         this.getAbilities().add(ability);

@@ -37,7 +37,7 @@ public final class FrostboilSnarl extends CardImpl {
                 new TapSourceUnlessPaysEffect(
                         new RevealTargetFromHandCost(new TargetCardInHand(filter))
                 ), "you may reveal an Island or Mountain card from your hand. " +
-                "If you don't, {this} enters the battlefield tapped"
+                "If you don't, {this} enters tapped"
         ));
 
         // {T}: Add {U} or {R}.

@@ -37,7 +37,7 @@ public final class SoultetherGolem extends CardImpl {
         // Vanishing 1
         this.addAbility(new VanishingAbility(1));
 
-        // Whenever another creature enters the battlefield under your control, put a time counter on Soultether Golem.
+        // Whenever another creature you control enters, put a time counter on Soultether Golem.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.TIME.createInstance(1)),

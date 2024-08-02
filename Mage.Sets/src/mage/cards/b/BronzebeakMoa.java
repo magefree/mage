@@ -26,7 +26,7 @@ public final class BronzebeakMoa extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature enters the battlefield under your control, Bronzebeak Moa gets +3/+3 until end of turn.
+        // Whenever another creature you control enters, Bronzebeak Moa gets +3/+3 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(3,3, Duration.EndOfTurn), StaticFilters.FILTER_ANOTHER_CREATURE));
     }

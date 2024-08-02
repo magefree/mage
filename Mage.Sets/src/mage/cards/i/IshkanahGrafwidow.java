@@ -47,7 +47,7 @@ public final class IshkanahGrafwidow extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiderToken(), 3), false),
                 DeliriumCondition.instance,
-                "<i>Delirium</i> &mdash; When {this} enters the battlefield, if there are four or more card types among cards in your graveyard, "
+                "<i>Delirium</i> &mdash; When {this} enters, if there are four or more card types among cards in your graveyard, "
                         + "create three 1/2 green Spider creature tokens with reach.");
         ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);

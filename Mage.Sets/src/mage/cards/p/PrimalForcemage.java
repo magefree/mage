@@ -36,7 +36,7 @@ public final class PrimalForcemage extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature enters the battlefield under your control, that creature gets +3/+3 until end of turn.
+        // Whenever another creature you control enters, that creature gets +3/+3 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn).setText("that creature gets +3/+3 until end of turn"),

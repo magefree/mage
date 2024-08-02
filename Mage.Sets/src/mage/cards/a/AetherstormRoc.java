@@ -45,7 +45,7 @@ public final class AetherstormRoc extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Aetherstorm Roc or another creature enters the battlefield under your control, you get {E}.
+        // Whenever Aetherstorm Roc or another creature you control enters, you get {E}.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GetEnergyCountersControllerEffect(1),
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, true

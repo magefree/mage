@@ -27,7 +27,7 @@ public final class DragonsHoard extends CardImpl {
     public DragonsHoard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // Whenever a Dragon enters the battlefield under your control, put a gold counter on Dragon's Hoard.
+        // Whenever a Dragon you control enters, put a gold counter on Dragon's Hoard.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.GOLD.createInstance()), filter
         ));

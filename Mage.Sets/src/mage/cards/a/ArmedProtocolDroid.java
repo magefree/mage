@@ -35,7 +35,7 @@ public final class ArmedProtocolDroid extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // When {this} enters the battlefield, target nonartifact creature gets -2/-0 until end of turn.
+        // When {this} enters, target nonartifact creature gets -2/-0 until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, 0, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
