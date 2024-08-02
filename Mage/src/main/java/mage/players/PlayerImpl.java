@@ -1297,7 +1297,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     castedEvent.setZone(fromZone);
                     game.fireEvent(castedEvent);
                     if (!game.isSimulation()) {
-                        game.informPlayers(getLogName() + spell.getActivatedMessage(game));
+                        game.informPlayers(getLogName() + spell.getActivatedMessage(game, fromZone));
                     }
                     game.removeBookmark(bookmark);
                     resetStoredBookmark(game);
