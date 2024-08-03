@@ -1343,7 +1343,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Steelshaper's Gift", 1632, Rarity.RARE, mage.cards.s.SteelshapersGift.class));
         cards.add(new SetCardInfo("Propaganda", 1633, Rarity.RARE, mage.cards.p.Propaganda.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elixir of Immortality", 1634, Rarity.RARE, mage.cards.e.ElixirOfImmortality.class));
-        cards.add(new SetCardInfo("Council's Judgement", 1635, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
+        cards.add(new SetCardInfo("Council's Judgment", 1635, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
         cards.add(new SetCardInfo("Idyllic Tutor", 1636, Rarity.RARE, mage.cards.i.IdyllicTutor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anger", 1637, Rarity.RARE, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Lightning Bolt", 1638, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
