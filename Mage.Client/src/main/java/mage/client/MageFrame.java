@@ -1355,7 +1355,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         userRequestDialog.showDialog(userRequestMessage);
     }
 
-    public void showErrorDialog(String errorType, Exception e) {
+    public void showErrorDialog(String errorType, Throwable e) {
         String errorMessage = e.getMessage();
         if (errorMessage == null || errorMessage.isEmpty() || errorMessage.equals("Null")) {
             errorMessage = e.getClass().getSimpleName() + " - look at server or client logs for more details";

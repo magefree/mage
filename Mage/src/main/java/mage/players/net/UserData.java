@@ -26,7 +26,7 @@ public class UserData implements Serializable {
     protected int autoTargetLevel;
     protected boolean useSameSettingsForReplacementEffects;
     protected boolean useFirstManaAbility = false;
-    private String userIdStr;
+    private String userIdStr; // TODO: delete as un-used or use for hardware id instead?
     protected Map<UUID, Set<UUID>> requestedHandPlayersList; // game -> players list
 
     protected String matchHistory;

@@ -681,19 +681,6 @@ public class ScryfallImageSupportCards {
         return null;
     }
 
-    public static String prepareCardNumber(String xmageCardNumber) {
-        if (xmageCardNumber.endsWith("*")) {
-            return xmageCardNumber.substring(0, xmageCardNumber.length() - 1) + "★";
-        }
-        if (xmageCardNumber.endsWith("+")) {
-            return xmageCardNumber.substring(0, xmageCardNumber.length() - 1) + "†";
-        }
-        if (xmageCardNumber.endsWith("Ph")) {
-            return xmageCardNumber.substring(0, xmageCardNumber.length() - 2) + "Φ";
-        }
-        return xmageCardNumber;
-    }
-
     public static String findDirectDownloadLink(String setCode, String cardName, String cardNumber) {
         String key = findDirectDownloadKey(setCode, cardName, cardNumber);
         return directDownloadLinks.get(key);

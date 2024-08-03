@@ -756,7 +756,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Mystic", 805, Rarity.RARE, mage.cards.e.ElvishMystic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snapcaster Mage", 808, Rarity.MYTHIC, mage.cards.s.SnapcasterMage.class));
         cards.add(new SetCardInfo("Thrun, the Last Troll", 810, Rarity.MYTHIC, mage.cards.t.ThrunTheLastTroll.class));
-        //cards.add(new SetCardInfo("Elesh Norn, Grand Cenobite", 811, Rarity.MYTHIC, mage.cards.e.EleshNornGrandCenobite.class, NON_FULL_USE_VARIOUS)); // BUG: breaks download of card 209
+        cards.add(new SetCardInfo("Elesh Norn, Grand Cenobite", 811, Rarity.MYTHIC, mage.cards.e.EleshNornGrandCenobite.class, NON_FULL_USE_VARIOUS)); // BUG: breaks download of card 209
         cards.add(new SetCardInfo("Arcane Signet", 820, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Norin the Wary", 827, Rarity.RARE, mage.cards.n.NorinTheWary.class));
         cards.add(new SetCardInfo("The Scarab God", 900, Rarity.MYTHIC, mage.cards.t.TheScarabGod.class));

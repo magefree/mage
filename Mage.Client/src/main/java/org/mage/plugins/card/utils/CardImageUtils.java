@@ -1,28 +1,16 @@
 package org.mage.plugins.card.utils;
 
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.cards.repository.TokenRepository;
-import mage.client.MageFrame;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.remote.XmageURLConnection;
-import mage.remote.Connection;
-import mage.remote.Connection.ProxyType;
 import mage.view.CardView;
+import net.java.truevfs.access.TVFS;
+import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.mage.plugins.card.images.CardDownloadData;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,7 +19,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
-import java.util.prefs.Preferences;
 
 public final class CardImageUtils {
 
@@ -191,19 +178,16 @@ public final class CardImageUtils {
         return getImagesDir() + File.separator + "FACE" + File.separator + fixSetNameForWindows(setCode) + File.separator + prepareCardNameForFile(cardName) + ".jpg";
     }
 
-    public static Proxy getProxyFromPreferences() {
-        Preferences prefs = MageFrame.getPreferences();
-        Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
-        if (proxyType != ProxyType.NONE) {
-            String proxyServer = prefs.get("proxyAddress", "");
-            int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
-            return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
-        }
-        return null;
-    }
-
     public static void checkAndFixImageFiles() {
         // search broken, temp or outdated files and delete it
+
+        // make sure all archives was closed (e.g. on second call of download dialog)
+        try {
+            TVFS.umount();
+        } catch (FsSyncException e) {
+            LOGGER.fatal("Couldn't unmount zip files on searching broken images " + e, e);
+        }
+
         // real images check is slow, so it used on images download only (not here)
         Path rootPath = new File(CardImageUtils.getImagesDir()).toPath();
         if (!Files.exists(rootPath)) {

@@ -52,6 +52,7 @@ public class XmageURLConnection {
     Proxy proxy = null;
     HttpURLConnection connection = null;
     HttpLoggingType loggingType = HttpLoggingType.ERRORS;
+    boolean forceGZipEncoding = false;
 
     public XmageURLConnection(String url) {
         this.url = url;
@@ -73,6 +74,10 @@ public class XmageURLConnection {
         for (String key : additionalHeaders.keySet()) {
             this.connection.setRequestProperty(key, additionalHeaders.get(key));
         }
+    }
+
+    public void setForceGZipEncoding(boolean enable) {
+        this.forceGZipEncoding = enable;
     }
 
     /**
@@ -130,7 +135,11 @@ public class XmageURLConnection {
     }
 
     private void initDefaultHeaders() {
-        // warning, do not add Accept-Encoding - it processing inside URLConnection for http/https links (trying to use gzip by default)
+        // warning, Accept-Encoding processing inside URLConnection for http/https links (trying to use gzip by default)
+        // use force encoding for special use cases (example: download big text file as zip file)
+        if (forceGZipEncoding) {
+            this.connection.setRequestProperty("Accept-Encoding", "gzip");
+        }
 
         // user agent due standard notation User-Agent: <product> / <product-version> <comment>
         // warning, dot not add os, language and other details
@@ -290,13 +299,18 @@ public class XmageURLConnection {
         return "";
     }
 
+    public static InputStream downloadBinary(String resourceUrl) {
+        return downloadBinary(resourceUrl, false);
+    }
+
     /**
      * Fast download of binary data
      *
      * @return stream on OK 200 response or null on any other errors
      */
-    public static InputStream downloadBinary(String resourceUrl) {
+    public static InputStream downloadBinary(String resourceUrl, boolean downloadAsGZip) {
         XmageURLConnection con = new XmageURLConnection(resourceUrl);
+        con.setForceGZipEncoding(downloadAsGZip);
         con.startConnection();
         if (con.isConnected()) {
             try {

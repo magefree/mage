@@ -66,8 +66,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     // protect from wrong data save
     // there are possible land images with small sizes, so must research content in check
-    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6; // broken
-    private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 15; // possible broken (need content check)
+    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6; // smaller files will be mark as broken
+    private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 8; // smaller files will be checked for possible broken mark (slow)
 
     private final DownloadImagesDialog uiDialog;
     private boolean needCancel;
@@ -77,8 +77,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private List<CardInfo> cardsAll;
     private List<CardDownloadData> cardsMissing;
     private final List<CardDownloadData> cardsDownloadQueue;
-    private int missingCardsCount = 0;
-    private int missingTokensCount = 0;
 
     private final List<String> selectedSets = new ArrayList<>();
     private static CardImageSource selectedSource;
@@ -429,13 +427,13 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     }
 
     private void updateProgressText(int cardCount, int tokenCount) {
-        missingTokensCount = 0;
+        int missingTokensCount = 0;
         for (CardDownloadData card : cardsMissing) {
             if (card.isToken()) {
                 missingTokensCount++;
             }
         }
-        missingCardsCount = cardsMissing.size() - missingTokensCount;
+        int missingCardsCount = cardsMissing.size() - missingTokensCount;
 
         uiDialog.setCurrentInfo("Missing: " + missingCardsCount + " card images / " + missingTokensCount + " token images");
         int imageSum = cardCount + tokenCount;
@@ -446,7 +444,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         } else if (cardIndex == 0) {
             statusEnd = "image download NOT STARTED. Please start.";
         } else {
-            statusEnd = String.format("image downloading... Please wait [%.1f Mb left].", mb);
+            statusEnd = String.format("image downloading... Please wait [%.1f MB left].", mb);
         }
         updateProgressMessage(String.format("%d of %d (%d cards and %d tokens) %s",
                 0, imageSum, cardCount, tokenCount, statusEnd
@@ -618,7 +616,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             }
         });
 
-        if (badContentChecks.get() > 10000) {
+        if (badContentChecks.get() > 1000) {
+            // how-to fix: download full small images and run checks -- make sure it finds fewer files to check
             logger.warn("Wrong code usage: too many file content checks (" + badContentChecks.get() + ") - try to decrease min file size");
         }
 
@@ -630,85 +629,92 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.cardIndex = 0;
         this.resetErrorCount();
 
-        File base = new File(getImagesDir());
-        if (!base.exists()) {
-            base.mkdir();
-        }
-
-        int downloadThreadsAmount = Math.max(1, Integer.parseInt((String) uiDialog.getDownloadThreadsCombo().getSelectedItem()));
-
-
-        logger.info("Started download of " + cardsDownloadQueue.size() + " images"
-                + " from source: " + selectedSource.getSourceName()
-                + ", language: " + selectedSource.getCurrentLanguage().getCode()
-                + ", threads: " + downloadThreadsAmount);
-        updateProgressMessage("Preparing download list...");
-        if (selectedSource.prepareDownloadList(this, cardsDownloadQueue)) {
-            update(0, cardsDownloadQueue.size());
-            ExecutorService executor = Executors.newFixedThreadPool(
-                    downloadThreadsAmount,
-                    new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_IMAGES_DOWNLOADER, false)
-            );
-            for (int i = 0; i < cardsDownloadQueue.size() && !this.isNeedCancel(); i++) {
-                try {
-                    CardDownloadData card = cardsDownloadQueue.get(i);
-
-                    logger.debug("Downloading image: " + card.getName() + " (" + card.getSet() + ')');
-
-                    CardImageUrls urls;
-                    if (card.isToken()) {
-                        if (!"0".equals(card.getCollectorId())) {
-                            continue;
-                        }
-                        urls = selectedSource.generateTokenUrl(card);
-                    } else {
-                        urls = selectedSource.generateCardUrl(card);
-                    }
-
-                    if (urls == null) {
-                        String imageRef = selectedSource.getNextHttpImageUrl();
-                        String fileName = selectedSource.getFileForHttpImage(imageRef);
-                        if (imageRef != null && fileName != null) {
-                            imageRef = selectedSource.getSourceName() + imageRef;
-                            try {
-                                card.setToken(selectedSource.isTokenSource());
-                                Runnable task = new DownloadTask(card, imageRef, fileName, selectedSource.getTotalImages());
-                                executor.execute(task);
-                            } catch (Exception ex) {
-                            }
-                        } else if (selectedSource.getTotalImages() == -1) {
-                            logger.info("Image not available on " + selectedSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ')');
-                            synchronized (sync) {
-                                update(cardIndex + 1, cardsDownloadQueue.size());
-                            }
-                        }
-                    } else {
-                        Runnable task = new DownloadTask(card, urls, cardsDownloadQueue.size());
-                        executor.execute(task);
-                    }
-                } catch (Exception ex) {
-                    logger.error(ex, ex);
-                }
-            }
-
-            executor.shutdown();
-            while (!executor.isTerminated()) {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException ignore) {
-                }
-            }
-        }
-
-
         try {
-            TVFS.umount();
-        } catch (FsSyncException e) {
-            logger.fatal("Couldn't unmount zip files", e);
-            JOptionPane.showMessageDialog(null, "Couldn't unmount zip files", "Error", JOptionPane.ERROR_MESSAGE);
+            File base = new File(getImagesDir());
+            if (!base.exists()) {
+                base.mkdir();
+            }
+
+            int downloadThreadsAmount = Math.max(1, Integer.parseInt((String) uiDialog.getDownloadThreadsCombo().getSelectedItem()));
+
+            logger.info("Started download of " + cardsDownloadQueue.size() + " images"
+                    + " from source: " + selectedSource.getSourceName()
+                    + ", language: " + selectedSource.getCurrentLanguage().getCode()
+                    + ", threads: " + downloadThreadsAmount);
+            updateProgressMessage("Preparing download list...");
+            if (selectedSource.prepareDownloadList(this, cardsDownloadQueue)) {
+                update(0, cardsDownloadQueue.size());
+                ExecutorService executor = Executors.newFixedThreadPool(
+                        downloadThreadsAmount,
+                        new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_IMAGES_DOWNLOADER, false)
+                );
+                for (int i = 0; i < cardsDownloadQueue.size() && !this.isNeedCancel(); i++) {
+                    try {
+                        CardDownloadData card = cardsDownloadQueue.get(i);
+
+                        logger.debug("Downloading image: " + card.getName() + " (" + card.getSet() + ')');
+
+                        CardImageUrls urls;
+                        if (card.isToken()) {
+                            if (!"0".equals(card.getCollectorId())) {
+                                continue;
+                            }
+                            urls = selectedSource.generateTokenUrl(card);
+                        } else {
+                            urls = selectedSource.generateCardUrl(card);
+                        }
+
+                        if (urls == null) {
+                            String imageRef = selectedSource.getNextHttpImageUrl();
+                            String fileName = selectedSource.getFileForHttpImage(imageRef);
+                            if (imageRef != null && fileName != null) {
+                                imageRef = selectedSource.getSourceName() + imageRef;
+                                try {
+                                    card.setToken(selectedSource.isTokenSource());
+                                    Runnable task = new DownloadTask(card, imageRef, fileName, selectedSource.getTotalImages());
+                                    executor.execute(task);
+                                } catch (Exception ex) {
+                                }
+                            } else if (selectedSource.getTotalImages() == -1) {
+                                logger.info("Image not available on " + selectedSource.getSourceName() + ": " + card.getName() + " (" + card.getSet() + ')');
+                                synchronized (sync) {
+                                    update(cardIndex + 1, cardsDownloadQueue.size());
+                                }
+                            }
+                        } else {
+                            Runnable task = new DownloadTask(card, urls, cardsDownloadQueue.size());
+                            executor.execute(task);
+                        }
+                    } catch (Exception ex) {
+                        logger.error(ex, ex);
+                    }
+                }
+
+                executor.shutdown();
+                while (!executor.isTerminated()) {
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException ignore) {
+                    }
+                }
+            }
+        } catch (Throwable e) {
+            logger.error("Catch unknown error while downloading: " + e, e);
+            MageFrame.getInstance().showErrorDialog("Catch unknown error while downloading " + e, e);
         } finally {
-            //
+            // must close all active archives anyway
+            try {
+                TVFS.umount();
+            } catch (FsSyncException e) {
+                logger.fatal("Couldn't unmount zip files " + e, e);
+                MageFrame.getInstance().showErrorDialog("Couldn't unmount zip files " + e, e);
+            }
         }
+
+        // cleanup resources
+        Arrays.stream(DownloadSources.values()).forEach(resource -> {
+            resource.source.onFinished();
+        });
 
         // stop
         reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
@@ -882,16 +888,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                             // user cancelled
                             if (DownloadPicturesService.getInstance().isNeedCancel()) {
                                 // stop download, save current state and exit
-                                TFile archive = destFile.getTopLevelArchive();
-                                ///* not need to unmout/close - it's auto action
-                                if (archive != null && archive.exists()) {
-                                    logger.info("User canceled download. Closing archive file: " + destFile.toString());
-                                    try {
-                                        TVFS.umount(archive);
-                                    } catch (Exception e) {
-                                        logger.error("Can't close archive file: " + e.getMessage(), e);
-                                    }
-                                }
+                                // real archives save will be done on download service finish
                                 try {
                                     TFile.rm(fileTempImage);
                                 } catch (Exception e) {
@@ -946,11 +943,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         if (cardIndex < needDownloadCount) {
             // downloading
             float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSizeKb()) / 1024;
-            updateProgressMessage(String.format("%d of %d image downloading... Please wait [%.1f Mb left].",
+            updateProgressMessage(String.format("%d of %d image downloading... Please wait [%.1f MB left].",
                     lastCardIndex, needDownloadCount, mb), lastCardIndex, needDownloadCount);
         } else {
             // finished
-            updateProgressMessage("Image download DONE, refreshing stats... Please wait.");
+            updateProgressMessage("Image download DONE, saving last files and refreshing stats... Please wait.");
             List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());
             DownloadPicturesService.this.cardsMissing.parallelStream().forEach(cardDownloadData -> {
                 TFile file = new TFile(CardImageUtils.buildImagePathToCardOrToken(cardDownloadData));
