@@ -1,16 +1,20 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A triggered ability for whenever one or more creatures deal combat damage to
@@ -19,7 +23,8 @@ import java.util.UUID;
  *
  * @author alexander-novo
  */
-public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl {
+// TODO Susucr: rename to DealsCombatDamageOneOrMoreToYouTriggeredAbility after merge for some consistency
+public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     // Whether the ability should set a target targetting the opponent who
     // controls the creatures who dealt damage to you
@@ -71,20 +76,25 @@ public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForPlayersEvent) event)
+                .getEvents()
+                .stream()
+                .filter(DamagedPlayerEvent::isCombatDamage)
+                .filter(e -> e.getPlayerId() == getControllerId());
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
         boolean isDamaged = false;
         UUID damageSourceControllerID = null;
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
-            if (damagedEvent.isCombatDamage() && damagedEvent.getPlayerId() == this.controllerId) {
-                isDamaged = true;
-                // TODO: current code support only one controller
-                //  (it's can be potentially bugged in team mode with multiple attack players)
-                Permanent damageSource = game.getPermanent(damagedEvent.getSourceId());
-                if (damageSource != null) {
-                    damageSourceControllerID = damageSource.getControllerId();
-                }
+        for (DamagedEvent damagedEvent : filterBatchEvent(event, game).collect(Collectors.toList())) {
+            isDamaged = true;
+            // TODO: current code support only one controller
+            //  (it's can be potentially bugged in team mode with multiple attack players)
+            Permanent damageSource = game.getPermanent(damagedEvent.getSourceId());
+            if (damageSource != null) {
+                damageSourceControllerID = damageSource.getControllerId();
             }
         }
 

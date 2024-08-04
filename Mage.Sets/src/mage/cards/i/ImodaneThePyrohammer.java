@@ -2,10 +2,9 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValuePositiveHint;
@@ -17,11 +16,13 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.other.HasOnlySingleTargetPermanentPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForPermanentsEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author Susucr
@@ -51,7 +52,7 @@ public final class ImodaneThePyrohammer extends CardImpl {
     }
 }
 
-class ImodaneThePyrohammerTriggeredAbility extends TriggeredAbilityImpl {
+class ImodaneThePyrohammerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell you control that targets only a single creature");
 
@@ -60,10 +61,10 @@ class ImodaneThePyrohammerTriggeredAbility extends TriggeredAbilityImpl {
         filter.add(new HasOnlySingleTargetPermanentPredicate(StaticFilters.FILTER_PERMANENT_CREATURE));
     }
 
-    private static final Hint hint = new ValuePositiveHint("Damage dealt to the target", ImodaneThePyrohammerDynamicValue.instance);
+    private static final Hint hint = new ValuePositiveHint("Damage dealt to the target", SavedDamageValue.MUCH);
 
     ImodaneThePyrohammerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamagePlayersEffect(Outcome.Damage, ImodaneThePyrohammerDynamicValue.instance, TargetController.OPPONENT)
+        super(Zone.BATTLEFIELD, new DamagePlayersEffect(Outcome.Damage, SavedDamageValue.MUCH, TargetController.OPPONENT)
                 .setText("{this} deals that much damage to each opponent"), false);
         setTriggerPhrase("Whenever an instant or sorcery spell you control that targets only a single creature deals damage to that creature, ");
         addHint(hint);
@@ -84,9 +85,8 @@ class ImodaneThePyrohammerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPermanentsEvent dEvent = (DamagedBatchForPermanentsEvent) event;
-        int damage = dEvent
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForPermanentsEvent) event)
                 .getEvents()
                 .stream()
                 .filter(damagedEvent -> {
@@ -100,45 +100,19 @@ class ImodaneThePyrohammerTriggeredAbility extends TriggeredAbilityImpl {
                             && filter.match((StackObject) sourceObject, controllerId, this, game)
                             && target.getId().equals(((StackObject) sourceObject).getStackAbility().getFirstTarget());
                 })
+                .filter(e -> e.getAmount() > 0);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int amount = filterBatchEvent(event, game)
                 .mapToInt(GameEvent::getAmount)
                 .sum();
-        if (damage < 1) {
+        if (amount <= 0) {
             return false;
         }
 
-        this.getEffects().setValue(ImodaneThePyrohammerDynamicValue.IMODANE_VALUE_KEY, damage);
+        this.getEffects().setValue("damage", amount);
         return true;
-    }
-}
-
-enum ImodaneThePyrohammerDynamicValue implements DynamicValue {
-    instance;
-
-    static final String IMODANE_VALUE_KEY = "Imodane-Damage-Amount";
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        StackObject source = game.getStack().getStackObject(sourceAbility.getSourceId());
-        if (source == null) {
-            return 0;
-        }
-
-        Integer value = (Integer) sourceAbility.getEffects().get(0).getValue(IMODANE_VALUE_KEY);
-        return value == null ? 0 : value;
-    }
-
-    @Override
-    public ImodaneThePyrohammerDynamicValue copy() {
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "that much damage";
     }
 }

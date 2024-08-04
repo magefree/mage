@@ -1,10 +1,10 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
@@ -21,18 +21,22 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+import java.util.stream.Stream;
+
 /**
- *
  * @author LevelX2
  */
 public final class Arcbond extends CardImpl {
 
     public Arcbond(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ArcbondDelayedTriggeredAbility()));
@@ -49,7 +53,7 @@ public final class Arcbond extends CardImpl {
     }
 }
 
-class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
+class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     MageObjectReference targetObject;
 
@@ -88,15 +92,24 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForOnePermanentEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> e.getTargetId().equals(targetObject.getSourceId()) && targetObject.getPermanentOrLKIBattlefield(game) != null)
+                .filter(e -> e.getAmount() > 0);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(targetObject.getSourceId())
-                && targetObject.getPermanentOrLKIBattlefield(game) != null) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("damage", event.getAmount());
-            }
-            return true;
+        int amount = filterBatchEvent(event, game)
+                .mapToInt(DamagedPermanentEvent::getAmount)
+                .sum();
+        if (amount <= 0) {
+            return false;
         }
-        return false;
+        getEffects().setValue("damage", amount);
+        return true;
     }
 
     @Override

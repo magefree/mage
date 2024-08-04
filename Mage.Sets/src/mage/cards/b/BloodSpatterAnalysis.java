@@ -21,7 +21,9 @@ import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author Cguy7777

@@ -3,6 +3,7 @@ package mage.cards.t;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -18,16 +19,18 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.command.emblems.TamiyoFieldResearcherEmblem;
+import mage.game.events.DamagedBatchBySourceEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author LevelX2
@@ -108,7 +111,10 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
     }
 }
 
-class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbility {
+// batch per source:
+// > If Tamiyo’s first ability targets two creatures, and both deal combat damage at the same time, the delayed triggered ability triggers twice.
+// > (2016-08-23)
+class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedEvent> {
 
     private List<MageObjectReference> creatures;
 
@@ -124,18 +130,27 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event instanceof DamagedEvent;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_BY_SOURCE;
+    }
+
+    @Override
+    public Stream<DamagedEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchBySourceEvent) event)
+                .getEvents()
+                .stream()
+                .filter(DamagedEvent::isCombatDamage)
+                .filter(e -> Optional
+                        .of(e)
+                        .map(DamagedEvent::getSourceId)
+                        .map(id -> new MageObjectReference(id, game))
+                        .filter(mor -> creatures.contains(mor))
+                        .isPresent())
+                .filter(e -> e.getAmount() > 0);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedEvent) event).isCombatDamage()) {
-            Permanent damageSource = game.getPermanent(event.getSourceId());
-            if (damageSource != null) {
-                return creatures.contains(new MageObjectReference(damageSource, game));
-            }
-        }
-        return false;
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 
     @Override

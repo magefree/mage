@@ -4,9 +4,7 @@ import com.google.common.base.CharMatcher;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.AbilityImpl;
-import mage.abilities.Mode;
+import mage.abilities.*;
 import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -35,6 +33,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
+import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
@@ -62,6 +61,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author JayDi85
@@ -1719,6 +1719,10 @@ public class VerifyCardDataTest {
                     }
                 }
 
+                if (obj1 instanceof Ability) {
+                    checkAbility(originalCard, (Ability) obj1, msg);
+                }
+
                 //System.out.println(msg);
                 Class class1 = obj1.getClass();
                 Class class2 = obj2.getClass();
@@ -1852,6 +1856,35 @@ public class VerifyCardDataTest {
             }
         }
     }
+
+    // One (fake) event per batch event type
+    private static Set<GameEvent> fakeBatchEvents;
+
+    static {
+        fakeBatchEvents = Stream
+                .of(GameEvent.EventType.values())
+                .filter(GameEvent.EventType::isBatch)
+                .map(eventType -> new GameEvent(eventType, null, null, null))
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Perform checks on abilities
+     */
+    private void checkAbility(Card originalCard, Ability ability, String msg) {
+        if (ability instanceof TriggeredAbility) {
+            // Checks that non-batched triggered ability don't accept batch events.
+            if (!(ability instanceof BatchTriggeredAbility)) {
+                for (GameEvent event : fakeBatchEvents) {
+                    if (((TriggeredAbility) ability).checkEventType(event, null)) {
+                        fail(originalCard, "checkAbility", "unexpected non-BatchTriggeredAbility accepting "
+                                + event.getType() + " " + msg + "<" + ability.getClass() + ">");
+                    }
+                }
+            }
+        }
+    }
+
 
     private void checkSubtypes(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_SUBTYPE, card.getExpansionSetCode(), card.getName())) {

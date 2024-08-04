@@ -1,9 +1,8 @@
 package mage.cards.e;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -14,14 +13,20 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Stream;
+
 /**
- *
  * @author kleese
  */
 public final class ExpeditedInheritance extends CardImpl {
@@ -43,7 +48,7 @@ public final class ExpeditedInheritance extends CardImpl {
     }
 }
 
-class ExpeditedInheritanceTriggeredAbility extends TriggeredAbilityImpl {
+class ExpeditedInheritanceTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     static final String IMPULSE_DRAW_AMOUNT_KEY = "playerDamage";
     static final String TRIGGERING_CREATURE_KEY = "triggeringCreature";
@@ -62,12 +67,30 @@ class ExpeditedInheritanceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((DamagedBatchForOnePermanentEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> e.getAmount() > 0)
+                .filter(e -> Optional
+                        .of(e)
+                        .map(DamagedPermanentEvent::getTargetId)
+                        .map(game::getPermanentOrLKIBattlefield)
+                        .filter(p -> p.isCreature(game))
+                        .isPresent()
+                );
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.isCreature(game)) {
+        int amount = filterBatchEvent(event, game)
+                .mapToInt(DamagedPermanentEvent::getAmount)
+                .sum();
+        if (permanent == null || amount <= 0) {
             return false;
         }
-        getEffects().setValue(IMPULSE_DRAW_AMOUNT_KEY, event.getAmount());
+        getEffects().setValue(IMPULSE_DRAW_AMOUNT_KEY, amount);
         getEffects().setValue(TRIGGERING_CREATURE_KEY, new MageObjectReference(event.getTargetId(), game));
         return true;
     }
@@ -111,7 +134,7 @@ class ExpeditedInheritanceExileEffect extends OneShotEffect {
                     Set<Card> cards = player.getLibrary().getTopCards(game, impulseDrawAmount);
                     if (!cards.isEmpty()) {
                         player.moveCards(cards, Zone.EXILED, source, game);
-                        for (Card card:cards){
+                        for (Card card : cards) {
                             ContinuousEffect effect = new ExpeditedInheritanceMayPlayEffect(playerId);
                             effect.setTargetPointer(new FixedTarget(card.getId(), game));
                             game.addEffect(effect, source);

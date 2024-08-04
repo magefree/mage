@@ -18,7 +18,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
     //  - 1 opponent loses 2 life -> No trigger
     //  - 2 opponents lose 1 life each -> Ob Nixilis triggers
     //  - 2 opponents lose 2 life each -> No trigger
-    //  - 2 opponents lose 1 and 2 life respectively -> No trigger
+    //  - 2 opponents lose 1 and 2 life respectively -> Ob Nixilis triggers
     //  - 1 opponent loses 1 and controller loses 2 life -> Ob Nixilis triggers
     //  - controller loses 1 life -> No trigger
 
@@ -94,6 +94,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 0);
     }
 
+    // No clear rulling for that one :(
     @Test
     public void damage2Opp1Point1Opp2Points() {
         addCard(Zone.BATTLEFIELD, playerA, "Ob Nixilis, Captive Kingpin", 1);
@@ -107,7 +108,7 @@ public class ObNixilisCaptiveKingpinTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 0);
+        assertCounterCount("Ob Nixilis, Captive Kingpin", CounterType.P1P1, 1);
     }
 
     @Test

@@ -1,6 +1,7 @@
 
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.SavedMilledValue;
 import mage.abilities.effects.Effect;
@@ -9,11 +10,15 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.MilledBatchAllEvent;
+import mage.game.events.MilledCardEvent;
+
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author Susucr
  */
-public class OneOrMoreMilledTriggeredAbility extends TriggeredAbilityImpl {
+public class OneOrMoreMilledTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<MilledCardEvent> {
 
     private final FilterCard filter;
 
@@ -43,8 +48,22 @@ public class OneOrMoreMilledTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public Stream<MilledCardEvent> filterBatchEvent(GameEvent event, Game game) {
+        return ((MilledBatchAllEvent) event)
+                .getEvents()
+                .stream()
+                .filter(e -> Optional
+                        .of(e)
+                        .map(mce -> mce.getCard(game))
+                        .filter(card -> filter.match(card, getControllerId(), this, game))
+                        .isPresent());
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int count = ((MilledBatchAllEvent) event).getCards(game).count(filter, getControllerId(), this, game);
+        int count = filterBatchEvent(event, game)
+                .mapToInt(k -> 1)
+                .sum();
         if (count <= 0) {
             return false;
         }
