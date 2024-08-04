@@ -47,7 +47,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Grief", 51, Rarity.MYTHIC, mage.cards.g.Grief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kalamax, the Stormsire", 13, Rarity.MYTHIC, mage.cards.k.KalamaxTheStormsire.class));
         cards.add(new SetCardInfo("Kindred Charge", 58, Rarity.MYTHIC, mage.cards.k.KindredCharge.class));
-        cards.add(new SetCardInfo("Ledger Shredder", 55, Rarity.RARE, mage.cards.l.LedgerShredder.class));
+        cards.add(new SetCardInfo("Ledger Shredder", 55, Rarity.MYTHIC, mage.cards.l.LedgerShredder.class));
         cards.add(new SetCardInfo("Lord Windgrace", 14, Rarity.MYTHIC, mage.cards.l.LordWindgrace.class));
         cards.add(new SetCardInfo("Lord of Atlantis", 1, Rarity.RARE, mage.cards.l.LordOfAtlantis.class));
         cards.add(new SetCardInfo("Malcolm, Keen-Eyed Navigator", 2, Rarity.UNCOMMON, mage.cards.m.MalcolmKeenEyedNavigator.class));
