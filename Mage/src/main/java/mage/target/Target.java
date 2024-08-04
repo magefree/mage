@@ -73,7 +73,7 @@ public interface Target extends Serializable {
      */
     boolean canTarget(UUID id, Ability source, Game game);
 
-    boolean stillLegalTarget(UUID id, Ability source, Game game);
+    boolean stillLegalTarget(UUID playerId, UUID id, Ability source, Game game);
 
     boolean canTarget(UUID playerId, UUID id, Ability source, Game game);
 
