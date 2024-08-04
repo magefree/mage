@@ -47,7 +47,7 @@ public class AppUtil {
         }
     }
 
-    public static void openUrlInBrowser(String url) {
+    public static void openUrlInSystemBrowser(String url) {
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
         if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
             try {

@@ -72,6 +72,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -109,6 +111,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static CallbackClient callbackClient;
     private static final Preferences PREFS = Preferences.userNodeForPackage(MageFrame.class);
     private final JPanel fakeTopPanel;
+    private WhatsNewDialog whatsNewDialog; // can be null
     private JLabel title;
     private Rectangle titleRectangle;
     private static final MageVersion VERSION = new MageVersion(MageFrame.class);
@@ -306,6 +309,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         errorDialog.setLocation(100, 100);
         desktopPane.add(errorDialog, JLayeredPane.MODAL_LAYER);
 
+        try {
+            this.whatsNewDialog = new WhatsNewDialog();
+        } catch (Throwable e) {
+            // example: JavaFX is not supported on old MacOS with OpenJDK
+            // https://bugs.openjdk.java.net/browse/JDK-8202132
+            LOGGER.error("JavaFX is not supported by your system. What's new page will be disabled.", e);
+            this.whatsNewDialog = null;
+        }
+
         PING_SENDER_EXECUTOR.scheduleAtFixedRate(SessionHandler::ping, TablesPanel.PING_SERVER_SECS, TablesPanel.PING_SERVER_SECS, TimeUnit.SECONDS);
 
         updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
@@ -383,6 +395,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 connectDialog.showDialog();
             }
             setWindowTitle();
+        });
+
+        // run what's new checks (loading in background)
+        SwingUtilities.invokeLater(() -> {
+            showWhatsNewDialog(false);
         });
     }
 
@@ -1861,8 +1878,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         updateTooltipContainerSizes();
     }
 
-    public static void showWhatsNewDialog() {
-        AppUtil.openUrlInBrowser("https://jaydi85.github.io/xmage-web-news/news.html");
+    public void showWhatsNewDialog(boolean forceToShowPage) {
+        if (whatsNewDialog != null) {
+            // build-in browser
+            whatsNewDialog.checkUpdatesAndShow(forceToShowPage);
+        } else {
+            // system browser
+            AppUtil.openUrlInSystemBrowser(WhatsNewDialog.WHATS_NEW_PAGE);
+        }
     }
 
     public boolean isGameFrameActive(UUID gameId) {
