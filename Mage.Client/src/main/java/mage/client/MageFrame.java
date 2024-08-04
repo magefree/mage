@@ -929,6 +929,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupDebug = new javax.swing.JPopupMenu();
         menuDebugTestModalDialog = new javax.swing.JMenuItem();
         menuDebugTestCardRenderModesDialog = new javax.swing.JMenuItem();
+        popupDownload = new javax.swing.JPopupMenu();
+        menuDownloadSymbols = new javax.swing.JMenuItem();
+        menuDownloadImages = new javax.swing.JMenuItem();
         desktopPane = new MageJDesktop();
         mageToolbar = new javax.swing.JToolBar();
         btnPreferences = new javax.swing.JButton();
@@ -941,10 +944,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         jSeparator5 = new javax.swing.JToolBar.Separator();
         btnSendFeedback = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
-        btnSymbols = new javax.swing.JButton();
+        btnDownload = new javax.swing.JButton();
         jSeparatorSymbols = new javax.swing.JToolBar.Separator();
-        btnImages = new javax.swing.JButton();
-        jSeparatorImages = new javax.swing.JToolBar.Separator();
         btnAbout = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
         btnDebug = new javax.swing.JButton();
@@ -952,7 +953,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         jMemUsageLabel = new javax.swing.JLabel();
 
         menuDebugTestModalDialog.setText("Test Modal Dialogs");
-        menuDebugTestModalDialog.setFont(GUISizeHelper.dialogFont);
         menuDebugTestModalDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestModalDialogActionPerformed(evt);
@@ -961,7 +961,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupDebug.add(menuDebugTestModalDialog);
 
         menuDebugTestCardRenderModesDialog.setText("Test Card Render Modes");
-        menuDebugTestCardRenderModesDialog.setFont(GUISizeHelper.dialogFont);
         menuDebugTestCardRenderModesDialog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDebugTestCardRenderModesDialogActionPerformed(evt);
@@ -969,8 +968,24 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         });
         popupDebug.add(menuDebugTestCardRenderModesDialog);
 
+        menuDownloadSymbols.setText("Download mana symbols");
+        menuDownloadSymbols.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDownloadSymbolsActionPerformed(evt);
+            }
+        });
+        popupDownload.add(menuDownloadSymbols);
+
+        menuDownloadImages.setText("Download card images");
+        menuDownloadImages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDownloadImagesActionPerformed(evt);
+            }
+        });
+        popupDownload.add(menuDownloadImages);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1024, 500));
+        setMinimumSize(new java.awt.Dimension(1000, 500));
 
         desktopPane.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -1045,31 +1060,18 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         mageToolbar.add(btnSendFeedback);
         mageToolbar.add(jSeparator6);
 
-        btnSymbols.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/symbol.png"))); // NOI18N
-        btnSymbols.setText("Symbols");
-        btnSymbols.setToolTipText("<HTML>Load the mana and other card symbols from the internet.<br>\nOtherwise you only see the replacement sequence like {U} for blue mana symbol.<br>\nYou need to do that only once.");
-        btnSymbols.setFocusable(false);
-        btnSymbols.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnSymbols.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSymbolsActionPerformed(evt);
+        btnDownload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/images.png"))); // NOI18N
+        btnDownload.setText("Download");
+        btnDownload.setToolTipText("Download cards images and mana symbols");
+        btnDownload.setFocusable(false);
+        btnDownload.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnDownload.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDownloadMouseClicked(evt);
             }
         });
-        mageToolbar.add(btnSymbols);
+        mageToolbar.add(btnDownload);
         mageToolbar.add(jSeparatorSymbols);
-
-        btnImages.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/images.png"))); // NOI18N
-        btnImages.setText("Images");
-        btnImages.setToolTipText("<HTML>Load card images from external sources.");
-        btnImages.setFocusable(false);
-        btnImages.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnImages.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImagesActionPerformed(evt);
-            }
-        });
-        mageToolbar.add(btnImages);
-        mageToolbar.add(jSeparatorImages);
 
         btnAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/about.png"))); // NOI18N
         btnAbout.setText("About");
@@ -1090,12 +1092,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnDebug.setFocusable(false);
         btnDebug.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnDebug.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (!SwingUtilities.isLeftMouseButton(e)) {
-                    return;
-                }
-                btnDebugMouseClicked(e);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDebugMouseClicked(evt);
             }
         });
         mageToolbar.add(btnDebug);
@@ -1111,21 +1109,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-                        .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
         );
-
-        if (PreferencesDialog.getCurrentTheme().getMageToolbar() != null) {
-            mageToolbar.getParent().setBackground(PreferencesDialog.getCurrentTheme().getMageToolbar());
-        }
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1172,10 +1166,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         FeedbackDialog.main(new String[]{});
     }//GEN-LAST:event_btnSendFeedbackActionPerformed
 
-    private void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSymbolsActionPerformed
-        downloadAdditionalResources();
-    }//GEN-LAST:event_btnSymbolsActionPerformed
-
     public void downloadAdditionalResources() {
         UserRequestMessage message = new UserRequestMessage("Download additional resources", "Do you want to download game symbols and additional image files?");
         message.setButton1("No", null);
@@ -1183,16 +1173,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         showUserRequestDialog(message);
     }
 
-    private void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagesActionPerformed
-        downloadImages();
-    }//GEN-LAST:event_btnImagesActionPerformed
-
     private void menuDebugTestModalDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDebugTestModalDialogActionPerformed
         final TestModalDialog dialog = new TestModalDialog();
         dialog.showDialog();
     }//GEN-LAST:event_menuDebugTestModalDialogActionPerformed
 
     private void btnDebugMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDebugMouseClicked
+        if (!SwingUtilities.isLeftMouseButton(evt)) {
+            return;
+        }
         popupDebug.show(evt.getComponent(), 0, evt.getComponent().getHeight());
     }//GEN-LAST:event_btnDebugMouseClicked
 
@@ -1200,6 +1189,21 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         final TestCardRenderDialog dialog = new TestCardRenderDialog();
         dialog.showDialog();
     }//GEN-LAST:event_menuDebugTestCardRenderModesDialogActionPerformed
+
+    private void btnDownloadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDownloadMouseClicked
+        if (!SwingUtilities.isLeftMouseButton(evt)) {
+            return;
+        }
+        popupDownload.show(evt.getComponent(), 0, evt.getComponent().getHeight());
+    }//GEN-LAST:event_btnDownloadMouseClicked
+
+    private void menuDownloadSymbolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDownloadSymbolsActionPerformed
+        downloadAdditionalResources();
+    }//GEN-LAST:event_menuDownloadSymbolsActionPerformed
+
+    private void menuDownloadImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDownloadImagesActionPerformed
+        downloadImages();
+    }//GEN-LAST:event_menuDownloadImagesActionPerformed
 
     public void downloadImages() {
         DownloadPicturesService.startDownload();
@@ -1546,10 +1550,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnDebug;
     private javax.swing.JButton btnDeckEditor;
-    private javax.swing.JButton btnImages;
+    private javax.swing.JButton btnDownload;
     private javax.swing.JButton btnPreferences;
     private javax.swing.JButton btnSendFeedback;
-    private javax.swing.JButton btnSymbols;
     private static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JLabel jMemUsageLabel;
     private javax.swing.JToolBar.Separator jSeparator1;
@@ -1558,12 +1561,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
-    private javax.swing.JToolBar.Separator jSeparatorImages;
     private javax.swing.JToolBar.Separator jSeparatorSymbols;
     private javax.swing.JToolBar mageToolbar;
     private javax.swing.JMenuItem menuDebugTestCardRenderModesDialog;
     private javax.swing.JMenuItem menuDebugTestModalDialog;
+    private javax.swing.JMenuItem menuDownloadImages;
+    private javax.swing.JMenuItem menuDownloadSymbols;
     private javax.swing.JPopupMenu popupDebug;
+    private javax.swing.JPopupMenu popupDownload;
     private javax.swing.JToolBar.Separator separatorDebug;
     // End of variables declaration//GEN-END:variables
 
@@ -1874,6 +1879,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         this.connectDialog.changeGUISize();
         this.errorDialog.changeGUISize();
+
+        menuDownloadSymbols.setFont(font);
+        menuDownloadImages.setFont(font);
+        menuDebugTestModalDialog.setFont(font);
+        menuDebugTestCardRenderModesDialog.setFont(font);
+
+        mageToolbar.getParent().setBackground(PreferencesDialog.getCurrentTheme().getMageToolbar());
 
         updateTooltipContainerSizes();
     }
