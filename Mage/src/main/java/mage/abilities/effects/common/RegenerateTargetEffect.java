@@ -1,8 +1,14 @@
 package mage.abilities.effects.common;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;

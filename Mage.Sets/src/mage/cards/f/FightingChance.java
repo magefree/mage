@@ -62,6 +62,9 @@ class FightingChanceEffect extends OneShotEffect {
                     PreventDamageByTargetEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
                     effect.setTargetPointer(new FixedTarget(blocker, game));
                     game.addEffect(effect, source);
+                    game.informPlayers(
+                            "Prevent all combat damage that would be dealt by " + game.getObject(blocker).getLogName()
+                                    + " this turn.");
                 }
             }
             return true;

@@ -1,13 +1,18 @@
 
 package mage.cards.d;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -75,6 +80,9 @@ class DesperateGambitEffect extends PreventionEffectImpl {
 
         this.target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game);
         this.wonFlip = you.flipCoin(source, game, true);
+        game.informPlayers("The next time " + game.getObject(target.getFirstTarget()).getLogName()
+                + " would deal combat damage this turn, "
+                + (wonFlip ? "it deals double that damage instead." : "prevent that damage.)"));
     }
 
     @Override
@@ -119,6 +127,25 @@ class DesperateGambitEffect extends PreventionEffectImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    static StaticHint wonHint = new StaticHint(
+            "The next time {this} would deal combat damage this turn, it deals double that damage instead.");
+    static StaticHint lostHint = new StaticHint(
+            "The next time {this} would deal combat damage this turn, prevent that damage.");
+
+    @Override
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
+        if (!permanent.getId().equals(target.getFirstTarget())) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.asList(wonFlip ? wonHint : lostHint);
     }
 }
 
