@@ -5,6 +5,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -13,12 +14,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * function while the card with dash is on the stack, one of which may
  * create a delayed triggered ability, and a static ability that functions
  * while the object with dash is on the battlefield.
- *
+ * <p>
  * “Dash [cost]” means “You may cast this card by paying [cost] rather that
  * its mana cost,” “If this spell's dash cost was paid, return the permanent this
  * spell becomes to its owner's hand at the beginning of the next end step,”
  * and “As long as this permanent's dash cost was paid, it has haste.”
- *
+ * <p>
  * Paying a card's dash cost follows the rules for paying alternative costs
  * in rules 601.2b and 601.2e–g.
  *
@@ -29,17 +30,19 @@ public class DashTest extends CardTestPlayerBase {
      * Screamreach Brawler
      * Creature — Orc Berserker 2/3
      * {2}{R}
-     *
+     * <p>
      * Dash {1}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned
      * from the battlefield to its owner's hand at the beginning of the next end step.)
      */
     @Test
     public void testDash() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.HAND, playerA, "Screamreach Brawler");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (source: Screamreach Brawler");
         attack(1, playerA, "Screamreach Brawler");
 
         setStopAt(2, PhaseStep.UNTAP);
@@ -53,11 +56,13 @@ public class DashTest extends CardTestPlayerBase {
 
     @Test
     public void testNoDash() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.HAND, playerA, "Screamreach Brawler");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, false);
+        setChoice(playerA, TestPlayer.CHOICE_NORMAL_COST);
         checkPlayableAbility("attack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "attack: Scream", false);
 
         setStopAt(2, PhaseStep.UNTAP);
@@ -72,18 +77,20 @@ public class DashTest extends CardTestPlayerBase {
     }
 
     /**
-     * Also dash returns creatures to your hand at end of turn even if they died
-     * that turn.
+     * If a dashed creature dies, it is not returned to hand.
      */
     @Test
     public void testDashedCreatureDiesInCombat() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2); // enough for Dash, can't cast normal way.
         addCard(Zone.HAND, playerA, "Screamreach Brawler"); // 2/3
 
         addCard(Zone.BATTLEFIELD, playerB, "Geist of the Moors", 1); // 3/1
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (source: Screamreach Brawler");
+
         attack(1, playerA, "Screamreach Brawler");
         block(1, playerB, "Geist of the Moors", "Screamreach Brawler");
 
@@ -103,14 +110,17 @@ public class DashTest extends CardTestPlayerBase {
      */
     @Test
     public void testDashedCreatureDiesInCombatAndIsLaterRecast() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2); // enough for Dash, can't cast normal way.
         addCard(Zone.HAND, playerA, "Screamreach Brawler"); // 2/3
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (source: Screamreach Brawler");
         attack(1, playerA, "Screamreach Brawler");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (source: Screamreach Brawler");
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -122,13 +132,15 @@ public class DashTest extends CardTestPlayerBase {
 
     @Test
     public void testWarbringerCostReduction() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Warbringer");
         addCard(Zone.HAND, playerA, "Warbringer");
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warbringer");
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast with Dash alternative cost: {2}{R} (source: Warbringer");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -138,13 +150,15 @@ public class DashTest extends CardTestPlayerBase {
 
     @Test
     public void testRegularCostReduction() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Ruby Medallion");
         addCard(Zone.HAND, playerA, "Screamreach Brawler");
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast with Dash alternative cost: {1}{R} (source: Screamreach Brawler");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

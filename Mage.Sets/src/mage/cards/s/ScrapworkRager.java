@@ -29,7 +29,7 @@ public final class ScrapworkRager extends CardImpl {
 
         // When Scrapwork Rager enters the battlefield, you draw a card and you lose 1 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(1, "you"), false
+                new DrawCardSourceControllerEffect(1, true), false
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

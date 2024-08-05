@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,6 +9,9 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author nick.myers
@@ -56,7 +58,7 @@ class ForcedMarchEffect extends OneShotEffect {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE,
                 source.getControllerId(),
                 source, game)) {
-            if (permanent.getManaValue() <= source.getManaCostsToPay().getX()) {
+            if (permanent.getManaValue() <= CardUtil.getSourceCostsTag(game, source, "X", 0)) {
                 permanent.destroy(source, game, false);
             }
         }

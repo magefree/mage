@@ -27,7 +27,7 @@ public final class Peppersmoke extends CardImpl {
     }
 
     public Peppersmoke(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.INSTANT},"{B}");
         this.subtype.add(SubType.FAERIE);
 
 

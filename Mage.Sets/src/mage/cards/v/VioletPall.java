@@ -18,7 +18,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class VioletPall extends CardImpl {
 
     public VioletPall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{4}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.INSTANT},"{4}{B}");
         this.subtype.add(SubType.FAERIE);
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

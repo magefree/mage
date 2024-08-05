@@ -8,7 +8,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.condition.common.SolvedSourceCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
 import mage.cards.CardImpl;
@@ -43,7 +43,7 @@ public final class CaseOfTheShiftingVisage extends CardImpl {
         Condition toSolveCondition = new CardsInControllerGraveyardCondition(15);
         // Solved — Whenever you cast a nonlegendary creature spell, copy that spell.
         Ability solvedAbility = new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect(true).setText("copy that spell. <i>(The copy becomes a token.)</i>"), filter, false, SetTargetPointer.SPELL
+                new CopyTargetStackObjectEffect(true).setText("copy that spell. <i>(The copy becomes a token.)</i>"), filter, false, SetTargetPointer.SPELL
         ), SolvedSourceCondition.SOLVED, null);
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)

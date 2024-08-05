@@ -94,7 +94,7 @@ class AgrusKosEternalSoldierTriggeredAbility extends TriggeredAbilityImpl {
         if (targetingObject == null || targetingObject instanceof Spell) {
             return false;
         }
-        if (CardUtil.checkTargetedEventAlreadyUsed(this.id.toString(), targetingObject, event, game)) {
+        if (CardUtil.checkTargetedEventAlreadyUsed(this.getId().toString(), targetingObject, event, game)) {
             return false;
         }
         Set<UUID> targets = targetingObject

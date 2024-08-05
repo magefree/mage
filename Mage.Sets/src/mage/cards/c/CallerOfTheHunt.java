@@ -139,16 +139,16 @@ class ChooseCreatureTypeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source);
-        Choice typeChoice = new ChoiceCreatureType(mageObject);
+        Choice typeChoice = new ChoiceCreatureType(game, source);
         if (controller != null
                 && mageObject != null
                 && controller.choose(outcome, typeChoice, game)) {
             if (!game.isSimulation()) {
                 game.informPlayers(mageObject.getName() + ": "
-                        + controller.getLogName() + " has chosen " + typeChoice.getChoice());
+                        + controller.getLogName() + " has chosen " + typeChoice.getChoiceKey());
             }
             game.getState().setValue(mageObject.getId()
-                    + "_type", SubType.byDescription(typeChoice.getChoice()));
+                    + "_type", SubType.byDescription(typeChoice.getChoiceKey()));
             return true;
         }
         return false;

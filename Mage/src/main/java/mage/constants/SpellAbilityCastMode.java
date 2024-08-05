@@ -17,12 +17,12 @@ public enum SpellAbilityCastMode {
     FLASHBACK("Flashback"),
     BESTOW("Bestow"),
     PROTOTYPE("Prototype"),
-    MORPH("Morph", false, true),
-    MEGAMORPH("Megamorph", false, true),
+    MORPH("Morph", false, true), // and megamorph
     DISGUISE("Disguise", false, true),
     TRANSFORMED("Transformed", true),
     DISTURB("Disturb", true),
-    MORE_THAN_MEETS_THE_EYE("More than Meets the Eye", true);
+    MORE_THAN_MEETS_THE_EYE("More than Meets the Eye", true),
+    PLOT("Plot");
 
     private final String text;
 
@@ -75,7 +75,6 @@ public enum SpellAbilityCastMode {
                 cardCopy = ((PrototypeAbility) spellAbility).prototypeCardSpell(cardCopy);
                 break;
             case MORPH:
-            case MEGAMORPH:
             case DISGUISE:
                 if (cardCopy instanceof Spell) {
                     //Spell doesn't support setName, so make a copy of the card (we're blowing it away anyway)
@@ -93,6 +92,7 @@ public enum SpellAbilityCastMode {
             case MADNESS:
             case FLASHBACK:
             case DISTURB:
+            case PLOT:
             case MORE_THAN_MEETS_THE_EYE:
                 // it changes only cost, so keep other characteristics
                 // TODO: research - why TRANSFORMED here - is it used in this.isTransformed code?!

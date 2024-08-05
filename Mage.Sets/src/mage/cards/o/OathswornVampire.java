@@ -50,7 +50,7 @@ public final class OathswornVampire extends CardImpl {
 class OathswornVampirePlayEffect extends AsThoughEffectImpl {
 
     OathswornVampirePlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard if you gained life this turn";
     }
 

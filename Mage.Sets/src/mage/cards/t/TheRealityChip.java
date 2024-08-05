@@ -6,7 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.keyword.ReconfigureAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,7 @@ public final class TheRealityChip extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // As long as The Reality Chip is attached to a creature, you may play lands and cast spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new ConditionalAsThoughEffect(new PlayTheTopCardEffect(), condition)
+        this.addAbility(new SimpleStaticAbility(new ConditionalAsThoughEffect(new PlayFromTopOfLibraryEffect(), condition)
                 .setText("as long as {this} is attached to a creature, you may play lands and cast spells from the top of your library")));
 
         // Reconfigure {2}{U}

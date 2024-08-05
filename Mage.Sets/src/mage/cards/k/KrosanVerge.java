@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.*;

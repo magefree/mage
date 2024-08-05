@@ -91,7 +91,7 @@ class CovetousUrgeEffect extends OneShotEffect {
         if (card.getSpellAbility() == null) {
             return true;
         }
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+        CardUtil.makeCardPlayable(game, source, card, true, Duration.Custom, true);
         return true;
     }
 }

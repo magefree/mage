@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,8 +36,8 @@ public final class UmbraMystic extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Auras attached to permanents you control have totem armor.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new TotemArmorAbility(), Duration.WhileOnBattlefield, filter, false)));
+        // Auras attached to permanents you control have umbra armor.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new UmbraArmorAbility(), Duration.WhileOnBattlefield, filter, false)));
     }
 
     private UmbraMystic(final UmbraMystic card) {

@@ -69,14 +69,14 @@ class ElvishSoultillerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source);
         if (controller != null && mageObject != null) {
-            Choice typeChoice = new ChoiceCreatureType(mageObject);
+            Choice typeChoice = new ChoiceCreatureType(game, source);
             if (controller.choose(outcome, typeChoice, game)) {
                 if (!game.isSimulation()) {
-                    game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoice());
+                    game.informPlayers(mageObject.getName() + ": " + controller.getLogName() + " has chosen " + typeChoice.getChoiceKey());
                 }
                 Cards cardsToLibrary = new CardsImpl();
                 FilterCreatureCard filter = new FilterCreatureCard();
-                filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
+                filter.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
                 cardsToLibrary.addAllCards(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game));
                 controller.putCardsOnTopOfLibrary(cardsToLibrary, game, source, false);
                 controller.shuffleLibrary(source, game);

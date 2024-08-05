@@ -2,7 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class StreamOfLife extends CardImpl {
 
 
         // Target player gains X life.
-        this.getSpellAbility().addEffect(new GainLifeTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

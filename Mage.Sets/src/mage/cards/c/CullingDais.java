@@ -31,7 +31,7 @@ public final class CullingDais extends CardImpl {
     public CullingDais(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CullingDaisEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());

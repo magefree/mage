@@ -49,7 +49,7 @@ public final class HistoriansWisdom extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 HistoriansWisdomCondition.instance,
-                "When {this} enters the battlefield, if enchanted permanent is a creature with the greatest power among creatures on the battlefield, draw a card."
+                "When {this} enters, if enchanted permanent is a creature with the greatest power among creatures on the battlefield, draw a card."
         ));
 
         // As long as enchanted permanent is a creature, it gets +2/+1.
@@ -75,7 +75,8 @@ enum HistoriansWisdomCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.applyEffects(); // Make sure +2/+1 buff gets applied first
+        //game.applyEffects(); // Make sure +2/+1 buff gets applied first
+        // TODO: not appropriate to call here - investigate where in the engine to apply effects to solve bug
         Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment == null) {
             return false;

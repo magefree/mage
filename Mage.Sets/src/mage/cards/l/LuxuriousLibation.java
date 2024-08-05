@@ -1,6 +1,6 @@
 package mage.cards.l;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ public final class LuxuriousLibation extends CardImpl {
 
         // Target creature gets +X/+X until end of turn. Create a 1/1 green and white Citizen creature token.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR, Duration.EndOfTurn
+                GetXValue.instance, GetXValue.instance, Duration.EndOfTurn
         ));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CitizenGreenWhiteToken()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

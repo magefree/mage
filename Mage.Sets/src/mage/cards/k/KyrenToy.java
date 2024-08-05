@@ -3,12 +3,11 @@ package mage.cards.k;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,6 +17,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,12 +85,7 @@ public final class KyrenToy extends CardImpl {
             if (player == null) {
                 return mana;
             }
-            int numberOfMana = 0;
-            for (Cost cost : source.getCosts()) {
-                if (cost instanceof RemoveVariableCountersSourceCost) {
-                    numberOfMana = ((RemoveVariableCountersSourceCost) cost).getAmount();
-                }
-            }
+            int numberOfMana = CardUtil.getSourceCostsTag(game, source, "X", 0);
             return Mana.ColorlessMana(numberOfMana + 1);
         }
 

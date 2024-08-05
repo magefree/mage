@@ -21,7 +21,7 @@ public final class ViashinoSandstalker extends CardImpl {
 
     public ViashinoSandstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(4);

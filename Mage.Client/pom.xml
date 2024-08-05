@@ -133,13 +133,6 @@
         </dependency>
         <!-- music player END -->
 
-        <dependency>
-            <!-- GUI lib for balloon popup TODO: unused and can be deleted? -->
-            <groupId>net.java.balloontip</groupId>
-            <artifactId>balloontip</artifactId>
-            <version>1.2.4.1</version>
-        </dependency>
-
         <!-- svg support START -->
         <!--
             for "SAX2 driver class org.apache.crimson.parser.XMLReaderImpl not found" error looks here:
@@ -152,12 +145,23 @@
         </dependency>
         <!-- svg support END -->
 
+        <!-- JavaFX support (build-in browser) START -->
         <dependency>
-            <!-- time lib for GUI time info -->
-            <groupId>org.ocpsoft.prettytime</groupId>
-            <artifactId>prettytime</artifactId>
-            <version>4.0.6.Final</version>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>11.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>11.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>11.0.2</version>
+        </dependency>
+        <!-- JavaFX support (build-in browser) END -->
     </dependencies>
 
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->

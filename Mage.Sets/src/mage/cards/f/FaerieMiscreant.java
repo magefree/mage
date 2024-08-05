@@ -47,7 +47,7 @@ public final class FaerieMiscreant extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new DrawCardSourceControllerEffect(1), false
-                ), condition, "When {this} enters the battlefield, " +
+                ), condition, "When {this} enters, " +
                 "if you control another creature named Faerie Miscreant, draw a card."
         ));
     }

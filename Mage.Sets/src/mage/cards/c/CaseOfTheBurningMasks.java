@@ -1,12 +1,5 @@
 package mage.cards.c;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.CaseAbility;
@@ -18,17 +11,8 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -38,6 +22,8 @@ import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  * Case of the Burning Masks {1}{R}{R}
@@ -64,7 +50,7 @@ public final class CaseOfTheBurningMasks extends CardImpl {
                 new SacrificeSourceCost().setText("sacrifice this Case"), SolvedSourceCondition.SOLVED);
 
         this.addAbility(new CaseAbility(initialAbility, CaseOfTheBurningMasksCondition.instance, solvedAbility)
-                .addHint(new CaseOfTheBurningMasksHint()),
+                        .addHint(new CaseOfTheBurningMasksHint()),
                 new CaseOfTheBurningMasksWatcher());
     }
 
@@ -189,7 +175,7 @@ class CaseOfTheBurningMasksEffect extends OneShotEffect {
                 card = game.getCard(target.getFirstTarget());
         }
         if (card != null) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         }
         return true;
     }

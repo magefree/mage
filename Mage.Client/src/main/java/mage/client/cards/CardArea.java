@@ -18,15 +18,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Panel with cards list, can show cards in two modes:
  *  - cards one by one in the line;
- *  - stacked and multicolumns (if many cards);
+ *  - stacked and multi-columns (if many cards);
  *
- *  Uses in some dialogs like pile choose and cards choosing
+ *  Used in some dialogs like pile choose, cards choosing/targeting and test render
  */
 public class CardArea extends JPanel implements CardEventProducer {
 
@@ -34,7 +37,10 @@ public class CardArea extends JPanel implements CardEventProducer {
 
     protected final CardEventSource cardEventSource = new CardEventSource();
 
-    private static int MAX_CARDS_PER_COLUMN = 20; // max cards amount in one column
+    private static final int MAX_CARDS_PER_COLUMN = 20; // max cards amount in one column
+
+    // TODO: add fast search and sort by card zones
+    private static final boolean SORTED_BY_CARD_NAME = true;
 
     private boolean reloaded = false;
     private final javax.swing.JLayeredPane cardArea;
@@ -160,10 +166,20 @@ public class CardArea extends JPanel implements CardEventProducer {
         fixDialogSize();
     }
 
+    private List<CardView> getSortedList(CardsView showCards) {
+        if (SORTED_BY_CARD_NAME) {
+            return showCards.values().stream()
+                    .sorted(Comparator.comparing(CardView::getName))
+                    .collect(Collectors.toList());
+        } else {
+            return new ArrayList<>(showCards.values());
+        }
+    }
+
     private void loadCardsFew(CardsView showCards, BigCard bigCard, UUID gameId) {
         Rectangle rectangle = new Rectangle(cardDimension.width, cardDimension.height);
         int cardsAdded = 0;
-        for (CardView card : showCards.values()) {
+        for (CardView card : getSortedList(showCards)) {
             if (cardsAdded > 0) {
                 rectangle.translate(cardDimension.width + xOffsetBetweenCardsOrColumns, 0);
             }
@@ -219,7 +235,7 @@ public class CardArea extends JPanel implements CardEventProducer {
         if (showCards != null && !showCards.isEmpty()) {
             Rectangle rectangle = new Rectangle(cardDimension.width, cardDimension.height);
             int count = 0;
-            for (CardView card : showCards.values()) {
+            for (CardView card : getSortedList(showCards)) {
                 addCard(card, bigCard, gameId, rectangle);
                 if (count >= MAX_CARDS_PER_COLUMN) {
                     rectangle.translate(cardDimension.width + xOffsetBetweenCardsOrColumns, -(MAX_CARDS_PER_COLUMN * verticalCardOffset));

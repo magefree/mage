@@ -42,7 +42,7 @@ public final class GhituJourneymage extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "When {this} enters the battlefield, if you control another Wizard, {this} deals 2 damage to each opponent."
+                "When {this} enters, if you control another Wizard, {this} deals 2 damage to each opponent."
         ));
     }
 

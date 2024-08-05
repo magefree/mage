@@ -65,7 +65,7 @@ class RescuerSphinxEffect extends OneShotEffect {
     RescuerSphinxEffect() {
         super(Outcome.Benefit);
         staticText = "you may return a nonland permanent you control to its owner's hand. " +
-                "If you do, {this} enters the battlefield with a +1/+1 counter on it.";
+                "If you do, {this} enters with a +1/+1 counter on it.";
     }
 
     private RescuerSphinxEffect(final RescuerSphinxEffect effect) {

@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -18,7 +19,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
- *
  * @author weirddan455
  */
 public final class CourierBat extends CardImpl {
@@ -36,8 +36,8 @@ public final class CourierBat extends CardImpl {
         // When Courier Bat enters the battlefield, if you gained life this turn, return up to one target creature card from your graveyard to your hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
-                new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0),
-                "When {this} enters the battlefield, if you gained life this turn, return up to one target creature card from your graveyard to your hand."
+                new YouGainedLifeCondition(),
+                "When {this} enters, if you gained life this turn, return up to one target creature card from your graveyard to your hand."
         );
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability, new PlayerGainedLifeWatcher());

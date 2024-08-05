@@ -33,7 +33,7 @@ public final class ImpassionedOrator extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature enters the battlefield under your control, you gain 1 life.
+        // Whenever another creature you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
     }
 

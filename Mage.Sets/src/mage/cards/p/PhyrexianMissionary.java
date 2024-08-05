@@ -40,7 +40,7 @@ public final class PhyrexianMissionary extends CardImpl {
         // When Phyrexian Missionary enters the battlefield, if it was kicked, return target creature card from your graveyard to your hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
-                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
                 "return target creature card from your graveyard to your hand."
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));

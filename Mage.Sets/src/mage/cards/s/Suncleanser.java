@@ -1,19 +1,18 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
+import mage.abilities.effects.common.counter.RemoveAllCountersPermanentTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.counters.Counter;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -21,8 +20,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Suncleanser extends CardImpl {
@@ -38,13 +38,13 @@ public final class Suncleanser extends CardImpl {
         // When Suncleanser enters the battlefield, choose one —
         // • Remove all counters from target creature. It can't have counters put on it for as long as Suncleanser remains on the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new SuncleanserRemoveCountersEffect(false), false
+                new RemoveAllCountersPermanentTargetEffect(), false
         );
         ability.addEffect(new SuncleanserPreventCountersEffect(false));
         ability.addTarget(new TargetCreaturePermanent());
 
         // • Target opponent loses all counters. That player can't get counters for as long as Suncleanser remains on the battlefield.
-        Mode mode = new Mode(new SuncleanserRemoveCountersEffect(true));
+        Mode mode = new Mode(new SuncleanserRemoveCountersPlayerEffect());
         mode.addEffect(new SuncleanserPreventCountersEffect(true));
         mode.addTarget(new TargetOpponent());
         ability.addMode(mode);
@@ -61,45 +61,31 @@ public final class Suncleanser extends CardImpl {
     }
 }
 
-class SuncleanserRemoveCountersEffect extends OneShotEffect {
+class SuncleanserRemoveCountersPlayerEffect extends OneShotEffect {
 
-    SuncleanserRemoveCountersEffect(boolean player) {
-        super(Outcome.Benefit);
-        if (player) {
-            staticText = "Target opponent loses all counters";
-        } else {
-            staticText = "Remove all counters from target creature";
-        }
+    SuncleanserRemoveCountersPlayerEffect() {
+        super(Outcome.Detriment);
+        staticText = "Target opponent loses all counters";
     }
 
-    private SuncleanserRemoveCountersEffect(final SuncleanserRemoveCountersEffect effect) {
+    private SuncleanserRemoveCountersPlayerEffect(final SuncleanserRemoveCountersPlayerEffect effect) {
         super(effect);
     }
 
     @Override
-    public SuncleanserRemoveCountersEffect copy() {
-        return new SuncleanserRemoveCountersEffect(this);
+    public SuncleanserRemoveCountersPlayerEffect copy() {
+        return new SuncleanserRemoveCountersPlayerEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            for (Counter counter : permanent.getCounters(game).copy().values()) { // copy to prevent ConcurrentModificationException
-                permanent.removeCounters(counter, source, game);
-            }
-            return true;
-        }
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            for (Counter counter : player.getCounters().copy().values()) { // copy to prevent ConcurrentModificationException
-                player.removeCounters(counter.getName(), counter.getCount(), source, game);
-            }
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        player.loseAllCounters(source, game);
+        return true;
     }
-
 }
 
 class SuncleanserPreventCountersEffect extends ContinuousRuleModifyingEffectImpl {

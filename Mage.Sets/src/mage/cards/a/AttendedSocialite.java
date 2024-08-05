@@ -24,7 +24,7 @@ public final class AttendedSocialite extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, Attended Socialite gets +1/+1 until end of turn.
+        // Alliance — Whenever another creature you control enters, Attended Socialite gets +1/+1 until end of turn.
         this.addAbility(new AllianceAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn)));
     }
 

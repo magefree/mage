@@ -7,11 +7,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -25,7 +25,8 @@ public final class Doppelgang extends CardImpl {
 
         // For each of X target permanents, create X tokens that are copies of that permanent.
         this.getSpellAbility().addEffect(new DoppelgangEffect());
-        this.getSpellAbility().setTargetAdjuster(DoppelgangAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private Doppelgang(final Doppelgang card) {
@@ -35,16 +36,6 @@ public final class Doppelgang extends CardImpl {
     @Override
     public Doppelgang copy() {
         return new Doppelgang(this);
-    }
-}
-
-enum DoppelgangAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(ability.getManaCostsToPay().getX(), StaticFilters.FILTER_PERMANENTS));
     }
 }
 
@@ -66,7 +57,7 @@ class DoppelgangEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (xValue < 1) {
             return false;
         }

@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -14,8 +13,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BlazingHope extends CardImpl {
@@ -53,8 +53,8 @@ class BlazingHopeTarget extends TargetCreaturePermanent {
         Permanent permanent = game.getPermanent(id);
         if (permanent != null) {
             if (!isNotTarget()) {
-                if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
-                        || !permanent.canBeTargetedBy(game.getObject(source), controllerId, game)) {
+                if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, source, game)
+                        || !permanent.canBeTargetedBy(game.getObject(source), controllerId, source, game)) {
                     return false;
                 }
             }
@@ -75,10 +75,10 @@ class BlazingHopeTarget extends TargetCreaturePermanent {
         int count = 0;
         Player controller = game.getPlayer(sourceControllerId);
         MageObject targetSource = game.getObject(source);
-        if(targetSource != null) {
+        if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
                 if (!targets.containsKey(permanent.getId())) {
-                    if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                         if (controller != null && permanent.getPower().getValue() >= controller.getLife()) {
                             count++;
                             if (count >= remainingTargets) {

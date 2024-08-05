@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.ReachAbility;
@@ -50,7 +50,7 @@ public final class PolukranosEngineOfRuin extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever Polukranos, Engine of Ruin or another nontoken Hydra you control dies, create a 3/3 green and white Phyrexian Hydra creature token with reach and a 3/3 green and white Phyrexian Hydra creature token with lifelink.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new PhyrexianHydraWithReachToken()), false, filter
         );
         ability.addEffect(new CreateTokenEffect(new PhyrexianHydraWithLifelinkToken())

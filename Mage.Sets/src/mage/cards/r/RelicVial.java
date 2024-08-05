@@ -41,7 +41,7 @@ public final class RelicVial extends CardImpl {
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // As long as you control a Cleric, Relic Vial has "Whenever a creature you control dies, each opponent loses 1 life and you gain 1 life."

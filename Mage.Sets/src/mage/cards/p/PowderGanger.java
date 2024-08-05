@@ -3,6 +3,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.SquadAbility;
 import mage.cards.CardImpl;
@@ -27,7 +28,7 @@ public final class PowderGanger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Squad {2}
-        this.addAbility(new SquadAbility());
+        this.addAbility(new SquadAbility(new GenericManaCost(2)));
 
         // When Powder Ganger enters the battlefield, destroy up to one target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());

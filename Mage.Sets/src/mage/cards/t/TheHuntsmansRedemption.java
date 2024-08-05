@@ -57,7 +57,7 @@ public final class TheHuntsmansRedemption extends CardImpl {
                 this, SagaChapter.CHAPTER_II,
                 new DoIfCostPaid(
                         new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
-                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                        new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)
                 )
         );
 

@@ -61,7 +61,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final int tokenPower;
     private final int tokenToughness;
     private boolean useLKI = false;
-    private PermanentModifier permanentModifier = null; // TODO: miss copy constructor? Make serializable?
+    private PermanentModifier permanentModifier = null;
 
     // TODO: These constructors are a mess. Copy effects need to be reworked altogether, hopefully clean it up then.
 
@@ -154,6 +154,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.tokenPower = effect.tokenPower;
         this.tokenToughness = effect.tokenToughness;
         this.useLKI = effect.useLKI;
+        this.permanentModifier = effect.permanentModifier;
     }
 
     @Override
@@ -204,7 +205,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
 
         // create token and modify all attributes permanently (without game usage)
-        Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
+        Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefield triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, targetId);
         if (becomesArtifact) {
             token.addCardType(CardType.ARTIFACT);

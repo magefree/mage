@@ -2,7 +2,6 @@ package org.mage.test.cards.single.ncc;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -74,13 +73,12 @@ public class SyrixCarrierOfTheFlameTest extends CardTestPlayerBase {
 
     }
 
-    @Ignore("Usable zone issue, see #10550")
     @Test
     public void testCast() {
         addCard(Zone.GRAVEYARD, playerA, syrix);
         addCard(Zone.BATTLEFIELD, playerA, phoenix);
         addCard(Zone.HAND, playerA, shock);
-        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, shock, phoenix);
         // phoenix dies, syrix ability triggers
@@ -95,7 +93,7 @@ public class SyrixCarrierOfTheFlameTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, syrix, 3, 3);
         assertGraveyardCount(playerA, phoenix, 1);
         assertGraveyardCount(playerA, shock, 1);
-        assertTappedCount("Badlands", true, 6);
+        assertTappedCount("Badlands", true, 5);
 
     }
 

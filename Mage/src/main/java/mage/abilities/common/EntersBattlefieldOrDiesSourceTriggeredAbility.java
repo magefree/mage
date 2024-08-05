@@ -22,7 +22,7 @@ public class EntersBattlefieldOrDiesSourceTriggeredAbility extends TriggeredAbil
         super(Zone.BATTLEFIELD, effect, optional);
         this.diesText = diesText;
         setLeavesTheBattlefieldTrigger(true);
-        setTriggerPhrase("When {this} enters the battlefield or " +
+        setTriggerPhrase("When {this} enters or " +
                 (diesText ? "dies" : "is put into a graveyard from the battlefield") + ", ");
     }
 

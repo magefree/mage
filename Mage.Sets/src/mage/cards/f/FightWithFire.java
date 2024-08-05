@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
@@ -10,11 +8,11 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
-import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAnyTargetAmount;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,11 +32,12 @@ public final class FightWithFire extends CardImpl {
                 new DamageTargetEffect(5),
                 KickedCondition.ONCE,
                 "{this} deals 5 damage to target creature. If this spell was kicked, "
-                + "it deals 10 damage divided as you choose among any number of targets instead."
-                + "<i> (Those targets can include players and planeswalkers.)</i>"
+                        + "it deals 10 damage divided as you choose among any number of targets instead."
+                        + "<i> (Those targets can include players and planeswalkers.)</i>"
         ));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().setTargetAdjuster(FightWithFireAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
+                new TargetAnyTargetAmount(10)));
     }
 
     private FightWithFire(final FightWithFire card) {
@@ -48,19 +47,5 @@ public final class FightWithFire extends CardImpl {
     @Override
     public FightWithFire copy() {
         return new FightWithFire(this);
-    }
-}
-
-enum FightWithFireAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        if (KickedCondition.ONCE.apply(game, ability)) {
-            ability.addTarget(new TargetAnyTargetAmount(10));
-        } else {
-            ability.addTarget(new TargetCreaturePermanent());
-        }
     }
 }

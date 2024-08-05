@@ -15,7 +15,6 @@ import mage.players.Player;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -101,39 +100,43 @@ class VolosJournalTokenEffect extends OneShotEffect {
 
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
-            return true;
+            return false;
         }
 
         Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
 
-        Set<String> types = VolosJournalToken.getNotedTypes(game, permanent);
+        Set<String> notedTypes = VolosJournalToken.getNotedTypes(game, permanent);
 
-        ChoiceCreatureType choice = new ChoiceCreatureType();
+        ChoiceCreatureType choice = new ChoiceCreatureType(game, source);
 
         // By default ChoiceCreatureType pre-populates all creatures into choices
         // Limit the available choices to those on the creature being cast
         if (!spell.isAllCreatureTypes(game)) {
-            choice.setChoices(
-                    spell.getSubtype(game)
-                            .stream()
-                            .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
-                            .map(SubType::getDescription)
-                            .collect(Collectors.toSet())
-            );
+            choice.getKeyChoices().clear();
+            spell.getSubtype(game)
+                    .stream()
+                    .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
+                    .map(SubType::getDescription)
+                    .forEach(subType -> {
+                        choice.withItem(subType, subType, null, null, null);
+                    });
         }
         // Remove from the possible choices the subtypes which have already been chosen.
-        choice.getChoices().removeIf(types::contains);
+        choice.getKeyChoices().keySet().removeIf(notedTypes::contains);
 
-        switch (choice.getChoices().size()) {
+        switch (choice.getKeyChoices().size()) {
             case 0:
                 return false;
             case 1:
-                types.add(choice.getChoices().stream().findFirst().get());
+                notedTypes.add(choice.getKeyChoices().keySet().stream().findFirst().get());
                 return true;
         }
 
         player.choose(outcome, choice, game);
-        types.add(choice.getChoice());
+        notedTypes.add(choice.getChoiceKey());
         return true;
     }
 }

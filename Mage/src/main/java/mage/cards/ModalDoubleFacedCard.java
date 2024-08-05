@@ -116,7 +116,8 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            setSideZones(toZone, game);
+            Zone currentZone = game.getState().getZone(getId());
+            setSideZones(currentZone, game);
             return true;
         }
         return false;
@@ -131,7 +132,8 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     @Override
     public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         if (super.moveToExile(exileId, name, source, game, appliedEffects)) {
-            setSideZones(Zone.EXILED, game);
+            Zone currentZone = game.getState().getZone(getId());
+            setSideZones(currentZone, game);
             return true;
         }
         return false;
@@ -221,8 +223,8 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
-        leftHalfCard.removeCounters(name, amount, source, game);
+    public void removeCounters(String counterName, int amount, Ability source, Game game) {
+        leftHalfCard.removeCounters(counterName, amount, source, game);
     }
 
     @Override
@@ -233,10 +235,12 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
             case MODAL_RIGHT:
                 return this.rightHalfCard.cast(game, fromZone, ability, controllerId);
             default:
-                if (this.leftHalfCard.getSpellAbility() != null)
+                if (this.leftHalfCard.getSpellAbility() != null) {
                     this.leftHalfCard.getSpellAbility().setControllerId(controllerId);
-                if (this.rightHalfCard.getSpellAbility() != null)
+                }
+                if (this.rightHalfCard.getSpellAbility() != null) {
                     this.rightHalfCard.getSpellAbility().setControllerId(controllerId);
+                }
                 return super.cast(game, fromZone, ability, controllerId);
         }
     }
@@ -354,8 +358,7 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
         // rules must show only main side (another side visible by toggle/transform button in GUI)
         // card hints from both sides
         return CardUtil.getCardRulesWithAdditionalInfo(
-                this.getId(),
-                this.getName(),
+                this,
                 this.getInnerAbilities(true, false),
                 this.getInnerAbilities(true, true)
         );
@@ -367,8 +370,7 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
         // card hints from both sides
         return CardUtil.getCardRulesWithAdditionalInfo(
                 game,
-                this.getId(),
-                this.getName(),
+                this,
                 this.getInnerAbilities(game, true, false),
                 this.getInnerAbilities(game, true, true)
         );

@@ -7,7 +7,7 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ExileCardsFromTopOfLibraryControllerEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,7 +40,7 @@ public final class MysticForge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast artifact spells and colorless spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
         // {T}, Pay 1 life: Exile the top card of your library.
         Ability ability = new SimpleActivatedAbility(new ExileCardsFromTopOfLibraryControllerEffect(1), new TapSourceCost());

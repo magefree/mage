@@ -101,7 +101,7 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
             Target target4 = new TargetControlledPermanent(1, 1, filterPlaneswalker, true);
 
             if (target1.canChoose(player.getId(), source, game)) {
-                while (player.canRespond() && !target1.isChosen() && target1.canChoose(player.getId(), source, game)) {
+                while (player.canRespond() && !target1.isChosen(game) && target1.canChoose(player.getId(), source, game)) {
                     player.chooseTarget(Outcome.Benefit, target1, source, game);
                 }
                 Permanent artifact = game.getPermanent(target1.getFirstTarget());
@@ -112,7 +112,7 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
             }
 
             if (target2.canChoose(player.getId(), source, game)) {
-                while (player.canRespond() && !target2.isChosen() && target2.canChoose(player.getId(), source, game)) {
+                while (player.canRespond() && !target2.isChosen(game) && target2.canChoose(player.getId(), source, game)) {
                     player.chooseTarget(Outcome.Benefit, target2, source, game);
                 }
                 Permanent creature = game.getPermanent(target2.getFirstTarget());
@@ -123,7 +123,7 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
             }
 
             if (target3.canChoose(player.getId(), source, game)) {
-                while (player.canRespond() && !target3.isChosen() && target3.canChoose(player.getId(), source, game)) {
+                while (player.canRespond() && !target3.isChosen(game) && target3.canChoose(player.getId(), source, game)) {
                     player.chooseTarget(Outcome.Benefit, target3, source, game);
                 }
                 Permanent enchantment = game.getPermanent(target3.getFirstTarget());
@@ -134,7 +134,7 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
             }
 
             if (target4.canChoose(player.getId(), source, game)) {
-                while (player.canRespond() && !target4.isChosen() && target4.canChoose(player.getId(), source, game)) {
+                while (player.canRespond() && !target4.isChosen(game) && target4.canChoose(player.getId(), source, game)) {
                     player.chooseTarget(Outcome.Benefit, target4, source, game);
                 }
                 Permanent planeswalker = game.getPermanent(target4.getFirstTarget());

@@ -43,7 +43,7 @@ public final class GreensleevesMaroSorcerer extends CardImpl {
                 Zone.ALL, new SetBasePowerToughnessSourceEffect(LandsYouControlCount.instance)
         ));
 
-        // Whenever a land enters the battlefield under your control, create a 3/3 green Badger creature token.
+        // Whenever a land you control enters, create a 3/3 green Badger creature token.
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new BadgerToken())));
     }
 

@@ -15,6 +15,7 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ class FinaleOfDevastationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (xValue >= 10) {
             ContinuousEffect effect1 = new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn);
             game.addEffect(effect1, source);

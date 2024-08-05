@@ -2,7 +2,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +19,7 @@ public final class GoblinOffensive extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{1}{R}{R}");
 
         // create X 1/1 red Goblin creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), GetXValue.instance));
     }
 
     private GoblinOffensive(final GoblinOffensive card) {

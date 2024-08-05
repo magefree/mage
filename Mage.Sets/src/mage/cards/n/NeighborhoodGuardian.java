@@ -36,7 +36,7 @@ public final class NeighborhoodGuardian extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature with power 2 or less enters the battlefield under your control, target creature you control gets +1/+1 until end of turn.
+        // Whenever another creature with power 2 or less you control enters, target creature you control gets +1/+1 until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoostTargetEffect(1, 1), filter);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

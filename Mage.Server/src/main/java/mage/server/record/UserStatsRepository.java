@@ -8,6 +8,7 @@ import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
+import mage.cards.repository.DatabaseUtils;
 import mage.cards.repository.RepositoryUtil;
 import mage.game.result.ResultProtos;
 import mage.server.rating.GlickoRating;
@@ -22,12 +23,11 @@ public enum UserStatsRepository {
 
     instance;
 
-    private static final String JDBC_URL = "jdbc:sqlite:./db/user_stats.db";
     private static final String VERSION_ENTITY_NAME = "user_stats";
     // raise this if db structure was changed
     private static final long DB_VERSION = 0;
 
-    private Dao<UserStats, Object> dao;
+    private Dao<UserStats, Object> statsDao;
 
     UserStatsRepository() {
         File file = new File("db");
@@ -35,7 +35,7 @@ public enum UserStatsRepository {
             file.mkdirs();
         }
         try {
-            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            ConnectionSource connectionSource = new JdbcConnectionSource(DatabaseUtils.prepareSqliteConnection(DatabaseUtils.DB_NAME_STATS));
             boolean obsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, DB_VERSION);
 
             if (obsolete) {
@@ -43,7 +43,7 @@ public enum UserStatsRepository {
             }
 
             TableUtils.createTableIfNotExists(connectionSource, UserStats.class);
-            dao = DaoManager.createDao(connectionSource, UserStats.class);
+            statsDao = DaoManager.createDao(connectionSource, UserStats.class);
         } catch (SQLException ex) {
             Logger.getLogger(UserStatsRepository.class).error("Error creating user_stats repository - ", ex);
         }
@@ -51,7 +51,7 @@ public enum UserStatsRepository {
 
     public void add(UserStats userStats) {
         try {
-            dao.create(userStats);
+            statsDao.create(userStats);
         } catch (SQLException ex) {
             Logger.getLogger(UserStatsRepository.class).error("Error adding a user_stats to DB - ", ex);
         }
@@ -59,7 +59,7 @@ public enum UserStatsRepository {
 
     public void update(UserStats userStats) {
         try {
-            dao.update(userStats);
+            statsDao.update(userStats);
         } catch (SQLException ex) {
             Logger.getLogger(UserStatsRepository.class).error("Error updating a user_stats in DB - ", ex);
         }
@@ -67,9 +67,9 @@ public enum UserStatsRepository {
 
     public UserStats getUser(String userName) {
         try {
-            QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
+            QueryBuilder<UserStats, Object> qb = statsDao.queryBuilder();
             qb.limit(1L).where().eq("userName", new SelectArg(userName));
-            List<UserStats> users = dao.query(qb.prepare());
+            List<UserStats> users = statsDao.query(qb.prepare());
             if (!users.isEmpty()) {
                 return users.get(0);
             }
@@ -81,8 +81,8 @@ public enum UserStatsRepository {
 
     public List<UserStats> getAllUsers() {
         try {
-            QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
-            return dao.query(qb.prepare());
+            QueryBuilder<UserStats, Object> qb = statsDao.queryBuilder();
+            return statsDao.query(qb.prepare());
         } catch (SQLException ex) {
             Logger.getLogger(UserStatsRepository.class).error("Error getting all users from DB - ", ex);
         }
@@ -91,9 +91,9 @@ public enum UserStatsRepository {
 
     public long getLatestEndTimeMs() {
         try {
-            QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
+            QueryBuilder<UserStats, Object> qb = statsDao.queryBuilder();
             qb.orderBy("endTimeMs", false).limit(1L);
-            List<UserStats> users = dao.query(qb.prepare());
+            List<UserStats> users = statsDao.query(qb.prepare());
             if (!users.isEmpty()) {
                 return users.get(0).getEndTimeMs();
             }
@@ -366,9 +366,10 @@ public enum UserStatsRepository {
 
     public void closeDB() {
         try {
-            if (dao != null && dao.getConnectionSource() != null) {
-                DatabaseConnection conn = dao.getConnectionSource().getReadWriteConnection(dao.getTableName());
-                conn.executeStatement("shutdown compact", 0);
+            if (statsDao != null && statsDao.getConnectionSource() != null) {
+                DatabaseConnection conn = statsDao.getConnectionSource().getReadWriteConnection(statsDao.getTableName());
+                conn.executeStatement("SHUTDOWN IMMEDIATELY", DatabaseConnection.DEFAULT_RESULT_FLAGS);
+                statsDao.getConnectionSource().releaseConnection(conn);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserStatsRepository.class).error("Error closing user_stats repository - ", ex);

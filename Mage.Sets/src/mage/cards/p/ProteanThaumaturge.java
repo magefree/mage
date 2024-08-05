@@ -38,7 +38,7 @@ public final class ProteanThaumaturge extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Constellation — Whenever an enchantment enters the battlefield under your control, you may have Protean Thaumaturge become a copy of another target creature, except it has this ability.
+        // Constellation — Whenever an enchantment you control enters, you may have Protean Thaumaturge become a copy of another target creature, except it has this ability.
         this.addAbility(createAbility());
     }
 

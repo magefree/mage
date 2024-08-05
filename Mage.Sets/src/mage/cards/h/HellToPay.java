@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -59,9 +60,9 @@ class HellToPayEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        int damage = source.getManaCostsToPay().getX();
+        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0);
         int lethal = Math.min(permanent.getLethalDamage(source.getSourceId(), game), damage);
-        permanent.damage(lethal, source.getSourceId(), source, game);
+        permanent.damage(damage, source.getSourceId(), source, game);
         if (damage > lethal) {
             new TreasureToken().putOntoBattlefield(
                     damage - lethal, game, source, source.getControllerId(), true, false

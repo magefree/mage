@@ -13,6 +13,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -76,15 +77,12 @@ class OjerAxonilDeepestMightTransformEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (!(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (controller == null || card == null) {
             return false;
         }
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game, true, false, true, null);
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
         return true;
     }
 }
@@ -132,9 +130,19 @@ class OjerAxonilDeepestMightReplacementEffect extends ReplacementEffectImpl {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (sourcePermanent == null) {
             sourceObject = game.getObject(event.getSourceId());
+            if (sourceObject == null
+                    || !(sourceObject instanceof Controllable)
+                    || !((Controllable) sourceObject).isControlledBy(controller.getId())
+            ) {
+                return false; // Only source you control.
+            }
         } else {
+            if (!sourcePermanent.isControlledBy(controller.getId())) {
+                return false;  // Only source you control.
+            }
             sourceObject = sourcePermanent;
         }
+
         Permanent ojer = source.getSourcePermanentIfItStillExists(game);
         DamageEvent dmgEvent = (DamageEvent) event;
 

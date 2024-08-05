@@ -17,7 +17,7 @@ public final class CephalidAristocrat extends CardImpl {
 
     public CephalidAristocrat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        this.subtype.add(SubType.CEPHALID, SubType.NOBLE);
+        this.subtype.add(SubType.OCTOPUS, SubType.NOBLE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

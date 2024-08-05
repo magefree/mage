@@ -22,7 +22,7 @@ import mage.filter.StaticFilters;
  */
 public final class FoundryHornet extends CardImpl {
 
-    private static final String rule = "When {this} enters the battlefield, if you control a creature with a +1/+1 counter on it, creatures your opponents control get -1/-1 until end of turn.";
+    private static final String rule = "When {this} enters, if you control a creature with a +1/+1 counter on it, creatures your opponents control get -1/-1 until end of turn.";
 
     public FoundryHornet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

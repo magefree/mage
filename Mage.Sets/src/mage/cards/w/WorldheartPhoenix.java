@@ -22,13 +22,12 @@ import mage.watchers.Watcher;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class WorldheartPhoenix extends CardImpl {
 
     public WorldheartPhoenix(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.PHOENIX);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -37,7 +36,7 @@ public final class WorldheartPhoenix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost.
-        // If you do, it enters the battlefield with two +1/+1 counters on it.
+        // If you do, it enters with two +1/+1 counters on it.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new WorldheartPhoenixPlayEffect())
                 .setIdentifier(MageIdentifier.WorldheartPhoenixAlternateCast);
         ability.addWatcher(new WorldheartPhoenixWatcher());
@@ -58,9 +57,9 @@ public final class WorldheartPhoenix extends CardImpl {
 class WorldheartPhoenixPlayEffect extends AsThoughEffectImpl {
 
     WorldheartPhoenixPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. " +
-                "If you do, it enters the battlefield with two +1/+1 counters on it";
+                "If you do, it enters with two +1/+1 counters on it";
     }
 
     private WorldheartPhoenixPlayEffect(final WorldheartPhoenixPlayEffect effect) {

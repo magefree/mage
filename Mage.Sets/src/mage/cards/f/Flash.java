@@ -45,7 +45,7 @@ class FlashEffect extends OneShotEffect {
 
     private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
 
-    public FlashEffect() {
+    FlashEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "You may put a creature card from your hand onto the battlefield. If you do, sacrifice it unless you pay its mana cost reduced by up to {2}.";
     }
@@ -72,13 +72,14 @@ class FlashEffect extends OneShotEffect {
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 ManaCosts<ManaCost> reducedCost = ManaCosts.removeVariableManaCost(CardUtil.reduceCost(card.getManaCost(), 2));
-                if (controller.chooseUse(Outcome.Benefit, String.valueOf("Pay " + reducedCost.getText()) + Character.toString('?'), source, game)) {
+                if (controller.chooseUse(Outcome.Benefit, "Pay " + reducedCost.getText() + '?', source, game)) {
                     reducedCost.clearPaid();
                     if (reducedCost.pay(source, game, source, source.getControllerId(), false, null)) {
                         return true;
                     }
                 }
 
+                game.processAction();
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
                     permanent.sacrifice(source, game);

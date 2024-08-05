@@ -46,7 +46,7 @@ public final class JaceTheLivingGuildpact extends CardImpl {
 
         // -8: Each player shuffles their hand and graveyard into their library. You draw seven cards.
         ability = new LoyaltyAbility(new ShuffleHandGraveyardAllEffect(), -8);
-        ability.addEffect(new DrawCardSourceControllerEffect(7, "you"));
+        ability.addEffect(new DrawCardSourceControllerEffect(7, true));
         this.addAbility(ability);
     }
 

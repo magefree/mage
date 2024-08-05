@@ -28,7 +28,7 @@ public final class EvolutionSage extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Whenever a land enters the battlefield under your control, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+        // Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
         this.addAbility(new LandfallAbility(new ProliferateEffect()));
     }
 

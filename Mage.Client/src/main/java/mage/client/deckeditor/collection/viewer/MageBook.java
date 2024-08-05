@@ -39,9 +39,8 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -399,7 +398,7 @@ public class MageBook extends JComponent {
             draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
             if (card.getMageObjectType().equals(MageObjectType.CARD)) {
                 // card
-                draftRating.setText("draft rating: " + RateCard.rateCard(card, null));
+                draftRating.setText("draft rating: " + RateCard.rateCard(card, Collections.emptyList()));
             } else {
                 // token
                 draftRating.setText("");
@@ -424,7 +423,7 @@ public class MageBook extends JComponent {
     }
 
     private void addEmblem(Emblem emblem, BigCard bigCard, UUID gameId, Rectangle rectangle) {
-        CardView cardView = new CardView(new EmblemView(emblem));
+        CardView cardView = new CardView(new EmblemView(emblem, null));
         addCard(cardView, bigCard, gameId, rectangle, false);
     }
 
@@ -434,7 +433,7 @@ public class MageBook extends JComponent {
     }
 
     private void addPlane(Plane plane, BigCard bigCard, UUID gameId, Rectangle rectangle) {
-        CardView cardView = new CardView(new PlaneView(plane));
+        CardView cardView = new CardView(new PlaneView(plane, null));
         addCard(cardView, bigCard, gameId, rectangle, false);
     }
 

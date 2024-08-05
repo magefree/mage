@@ -18,7 +18,7 @@ public final class Unglued extends ExpansionSet {
     }
 
     private Unglued() {
-        super("Unglued", "UGL", ExpansionSet.buildDate(1998, 8, 11), SetType.JOKESET);
+        super("Unglued", "UGL", ExpansionSet.buildDate(1998, 8, 11), SetType.JOKE_SET);
 
         cards.add(new SetCardInfo("Burning Cinder Fury of Crimson Chaos Fire", 40, Rarity.RARE, mage.cards.b.BurningCinderFuryOfCrimsonChaosFire.class));
         cards.add(new SetCardInfo("Checks and Balances", 16, Rarity.UNCOMMON, mage.cards.c.ChecksAndBalances.class));

@@ -1,3 +1,4 @@
+Alchemy: Dominaria|AlchemyDominaria|
 Alchemy: Innistrad|AlchemyInnistrad|
 Adventures in the Forgotten Realms|AdventuresInTheForgottenRealms|
 Forgotten Realms Commander|ForgottenRealmsCommander|
@@ -19,6 +20,7 @@ Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|
 Betrayers of Kamigawa|BetrayersOfKamigawa|
 Bloomburrow|Bloomburrow|
+Bloomburrow Commander|BloomburrowCommander|
 Born of the Gods|BornOfTheGods|
 Champions of Kamigawa|ChampionsOfKamigawa|
 Champs|Champs|
@@ -80,6 +82,7 @@ Duel Decks: Speed vs. Cunning|DuelDecksSpeedVsCunning|
 Duel Decks: Venser vs. Koth|DuelDecksVenserVsKoth|
 Duel Decks: Zendikar vs. Eldrazi|DuelDecksZendikarVsEldrazi|
 Duels of the Planeswalkers|DuelsOfThePlaneswalkers|
+Duskmourn: House of Horror|DuskmournHouseOfHorror|
 Eighth Edition|EighthEdition|
 Eldritch Moon|EldritchMoon|
 Eternal Masters|EternalMasters|
@@ -92,6 +95,7 @@ Fallen Empires|FallenEmpires|
 Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
 Fifth Edition|FifthEdition|
+Foundations|Foundations|
 Fourth Edition|FourthEdition|
 Friday Night Magic|FridayNightMagic|
 From the Vault: Angels|FromTheVaultAngels|
@@ -181,6 +185,7 @@ Mirrodin Besieged|MirrodinBesieged|
 Modern Horizons|ModernHorizons|
 Modern Horizons 2|ModernHorizons2|
 Modern Horizons 3|ModernHorizons3|
+Modern Horizons 3 Commander|ModernHorizons3Commander|
 Modern Masters|ModernMasters|
 Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|
@@ -195,6 +200,7 @@ Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
 Outlaws of Thunder Junction|OutlawsOfThunderJunction|
+Outlaws of Thunder Junction Commander|OutlawsOfThunderJunctionCommander|
 The Big Score|TheBigScore|
 Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
 Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|

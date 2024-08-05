@@ -53,7 +53,6 @@ import mage.target.common.*;
 import mage.util.*;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
@@ -75,14 +74,17 @@ public class ComputerPlayer extends PlayerImpl {
 
     final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 1; // TODO: rework simulations logic to use multiple calcs instead one by one
 
-    private transient Map<Mana, Card> unplayable = new TreeMap<>();
-    private transient List<Card> playableNonInstant = new ArrayList<>();
-    private transient List<Card> playableInstant = new ArrayList<>();
-    private transient List<ActivatedAbility> playableAbilities = new ArrayList<>();
-    private transient List<PickedCard> pickedCards;
-    private transient List<ColoredManaSymbol> chosenColors;
+    private final transient Map<Mana, Card> unplayable = new TreeMap<>();
+    private final transient List<Card> playableNonInstant = new ArrayList<>();
+    private final transient List<Card> playableInstant = new ArrayList<>();
+    private final transient List<ActivatedAbility> playableAbilities = new ArrayList<>();
+    private final transient List<PickedCard> pickedCards = new ArrayList<>();
+    private final transient List<ColoredManaSymbol> chosenColors = new ArrayList<>();
 
-    private transient ManaCost currentUnpaidMana;
+    // keep current paying cost info for choose dialogs
+    // mana abilities must ask payment too, so keep full chain
+    // TODO: make sure it thread safe for AI simulations (all transient fields above and bottom)
+    private final transient Map<UUID, ManaCost> lastUnpaidMana = new LinkedHashMap<>();
 
     // For stopping infinite loops when trying to pay Phyrexian mana when the player can't spend life and no other sources are available
     private transient boolean alreadyTryingToPayPhyrexian;
@@ -94,7 +96,6 @@ public class ComputerPlayer extends PlayerImpl {
         userData.setAvatarId(64);
         userData.setGroupId(UserGroup.COMPUTER.getGroupId());
         userData.setFlagName("computer.png");
-        pickedCards = new ArrayList<>();
     }
 
     protected ComputerPlayer(UUID id) {
@@ -104,7 +105,6 @@ public class ComputerPlayer extends PlayerImpl {
         userData.setAvatarId(64);
         userData.setGroupId(UserGroup.COMPUTER.getGroupId());
         userData.setFlagName("computer.png");
-        pickedCards = new ArrayList<>();
     }
 
     public ComputerPlayer(final ComputerPlayer player) {
@@ -117,7 +117,7 @@ public class ComputerPlayer extends PlayerImpl {
         if (hand.size() < 6
                 || isTestsMode() // ignore mulligan in tests
                 || game.getClass().getName().contains("Momir") // ignore mulligan in Momir games
-                ) {
+        ) {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
@@ -169,11 +169,12 @@ public class ComputerPlayer extends PlayerImpl {
 
         if (target.getOriginalTarget() instanceof TargetDiscard) {
             findPlayables(game);
+            // discard not playable first
             if (!unplayable.isEmpty()) {
                 for (int i = unplayable.size() - 1; i >= 0; i--) {
                     if (target.canTarget(abilityControllerId, unplayable.values().toArray(new Card[0])[i].getId(), null, game)) {
                         target.add(unplayable.values().toArray(new Card[0])[i].getId(), game);
-                        if (target.isChosen()) {
+                        if (target.isChosen(game)) {
                             return true;
                         }
                     }
@@ -183,7 +184,7 @@ public class ComputerPlayer extends PlayerImpl {
                 for (int i = 0; i < hand.size(); i++) {
                     if (target.canTarget(abilityControllerId, hand.toArray(new UUID[0])[i], null, game)) {
                         target.add(hand.toArray(new UUID[0])[i], game);
-                        if (target.isChosen()) {
+                        if (target.isChosen(game)) {
                             return true;
                         }
                     }
@@ -251,12 +252,12 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                     // add the target
                     target.add(permanent.getId(), game);
-                    if (target.doneChoosing()) {
+                    if (target.doneChoosing(game)) {
                         return true;
                     }
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetCardInHand
@@ -268,7 +269,7 @@ public class ComputerPlayer extends PlayerImpl {
                     cards.add(card);
                 }
             }
-            while ((outcome.isGood() ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
+            while ((outcome.isGood() ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen(game))
                     && !cards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, cards, outcome, target, null, game);
                 if (pick != null) {
@@ -276,7 +277,7 @@ public class ComputerPlayer extends PlayerImpl {
                     cards.remove(pick);
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetAnyTarget) {
@@ -409,7 +410,7 @@ public class ComputerPlayer extends PlayerImpl {
 
             // exile cost workaround: exile is bad, but exile from graveyard in most cases is good (more exiled -- more good things you get, e.g. delve's pay)
             boolean isRealGood = outcome.isGood() || outcome == Outcome.Exile;
-            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
+            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen(game))
                     && !cards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, cards, outcome, target, null, game);
                 if (pick != null) {
@@ -420,7 +421,7 @@ public class ComputerPlayer extends PlayerImpl {
                 }
             }
 
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetCardInGraveyard
@@ -436,7 +437,7 @@ public class ComputerPlayer extends PlayerImpl {
 
             // exile cost workaround: exile is bad, but exile from graveyard in most cases is good (more exiled -- more good things you get, e.g. delve's pay)
             boolean isRealGood = outcome.isGood() || outcome == Outcome.Exile;
-            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen())
+            while ((isRealGood ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen(game))
                     && !cards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, cards, outcome, target, null, game);
                 if (pick != null) {
@@ -447,7 +448,7 @@ public class ComputerPlayer extends PlayerImpl {
                 }
             }
 
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard
@@ -459,7 +460,7 @@ public class ComputerPlayer extends PlayerImpl {
                 Card card = pickTarget(abilityControllerId, cards, outcome, target, null, game);
                 if (card != null && alreadyTargeted != null && !alreadyTargeted.contains(card.getId())) {
                     target.add(card.getId(), game);
-                    if (target.isChosen()) {
+                    if (target.isChosen(game)) {
                         return true;
                     }
                 }
@@ -484,7 +485,7 @@ public class ComputerPlayer extends PlayerImpl {
                 Card card = pickTarget(abilityControllerId, cards, outcome, target, null, game);
                 if (card != null && alreadyTargeted != null && !alreadyTargeted.contains(card.getId())) {
                     target.add(card.getId(), game);
-                    if (target.isChosen()) {
+                    if (target.isChosen(game)) {
                         return true;
                     }
                 }
@@ -516,14 +517,14 @@ public class ComputerPlayer extends PlayerImpl {
         if (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard) {
             Cards cards = new CardsImpl(possibleTargets);
             List<Card> possibleCards = new ArrayList<>(cards.getCards(game));
-            while (!target.isChosen() && !possibleCards.isEmpty()) {
+            while (!target.isChosen(game) && !possibleCards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, possibleCards, outcome, target, null, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);
                     possibleCards.remove(pick);
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetCard
@@ -536,14 +537,14 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
-            while (!target.isChosen() && !cardsInCommandZone.isEmpty()) {
+            while (!target.isChosen(game) && !cardsInCommandZone.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, cardsInCommandZone, outcome, target, null, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);
                     cardsInCommandZone.remove(pick);
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         throw new IllegalStateException("Target wasn't handled in computer's choose method: " + target.getClass().getCanonicalName());
@@ -640,7 +641,7 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetDiscard
@@ -649,15 +650,15 @@ public class ComputerPlayer extends PlayerImpl {
                 // good
                 Cards cards = new CardsImpl(possibleTargets);
                 List<Card> cardsInHand = new ArrayList<>(cards.getCards(game));
-                while (!target.isChosen()
+                while (!target.isChosen(game)
                         && !cardsInHand.isEmpty()
                         && target.getMaxNumberOfTargets() > target.getTargets().size()) {
-                    Card card = pickBestCard(cardsInHand, null, target, source, game);
+                    Card card = pickBestCard(cardsInHand, Collections.emptyList(), target, source, game);
                     if (card != null) {
                         if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
                             target.addTarget(card.getId(), source, game);
                             cardsInHand.remove(card);
-                            if (target.isChosen()) {
+                            if (target.isChosen(game)) {
                                 return true;
                             }
                         }
@@ -670,7 +671,7 @@ public class ComputerPlayer extends PlayerImpl {
                     if (possibleTargets.contains(card.getId())
                             && target.canTarget(abilityControllerId, card.getId(), source, game)) {
                         target.addTarget(card.getId(), source, game);
-                        if (target.isChosen()) {
+                        if (target.isChosen(game)) {
                             return true;
                         }
                     }
@@ -680,7 +681,7 @@ public class ComputerPlayer extends PlayerImpl {
                         if (possibleTargets.contains(card.getId())
                                 && target.canTarget(abilityControllerId, card.getId(), source, game)) {
                             target.addTarget(card.getId(), source, game);
-                            if (target.isChosen()) {
+                            if (target.isChosen(game)) {
                                 return true;
                             }
                         }
@@ -706,7 +707,7 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
 
         }
 
@@ -748,7 +749,7 @@ public class ComputerPlayer extends PlayerImpl {
                     target.addTarget(permanent.getId(), source, game);
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
@@ -955,14 +956,14 @@ public class ComputerPlayer extends PlayerImpl {
 
         if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard) {
             List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards((FilterCard) target.getFilter(), game));
-            while (!target.isChosen() && !cards.isEmpty()) {
+            while (!target.isChosen(game) && !cards.isEmpty()) {
                 Card card = pickTarget(abilityControllerId, cards, outcome, target, source, game);
                 if (card != null) {
                     target.addTarget(card.getId(), source, game);
                     cards.remove(card); // pickTarget don't remove cards (only on second+ tries)
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetSpell
@@ -1033,7 +1034,7 @@ public class ComputerPlayer extends PlayerImpl {
         if (target.getOriginalTarget() instanceof TargetDefender) {
             UUID randomDefender = RandomUtil.randomFromCollection(possibleTargets);
             target.addTarget(randomDefender, source, game);
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
@@ -1041,14 +1042,14 @@ public class ComputerPlayer extends PlayerImpl {
             for (Player player : game.getPlayers().values()) {
                 cards.addAll(player.getGraveyard().getCards(game));
             }
-            while (!target.isChosen() && !cards.isEmpty()) {
+            while (!target.isChosen(game) && !cards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, cards, outcome, target, source, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), source, game);
                     cards.remove(pick); // pickTarget don't remove cards (only on second+ tries)
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetCardInExile) {
@@ -1069,14 +1070,14 @@ public class ComputerPlayer extends PlayerImpl {
                     cards.add(card);
                 }
             }
-            while (!target.isChosen() && !cards.isEmpty()) {
+            while (!target.isChosen(game) && !cards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, cards, outcome, target, source, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), source, game);
                     cards.remove(pick); // pickTarget don't remove cards (only on second+ tries)
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetActivatedAbility) {
@@ -1087,22 +1088,22 @@ public class ComputerPlayer extends PlayerImpl {
                     stackObjects.add(stackObject);
                 }
             }
-            while (!target.isChosen() && !stackObjects.isEmpty()) {
+            while (!target.isChosen(game) && !stackObjects.isEmpty()) {
                 StackObject pick = stackObjects.get(0);
                 if (pick != null) {
                     target.addTarget(pick.getId(), source, game);
                     stackObjects.remove(0);
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbility) {
             Iterator<UUID> iterator = target.possibleTargets(source.getControllerId(), source, game).iterator();
-            while (!target.isChosen() && iterator.hasNext()) {
+            while (!target.isChosen(game) && iterator.hasNext()) {
                 target.addTarget(iterator.next(), source, game);
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         if (target.getOriginalTarget() instanceof TargetCardInGraveyardBattlefieldOrStack) {
@@ -1120,14 +1121,14 @@ public class ComputerPlayer extends PlayerImpl {
         if (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard) {
             Cards cards = new CardsImpl(possibleTargets);
             List<Card> possibleCards = new ArrayList<>(cards.getCards(game));
-            while (!target.isChosen() && !possibleCards.isEmpty()) {
+            while (!target.isChosen(game) && !possibleCards.isEmpty()) {
                 Card pick = pickTarget(abilityControllerId, possibleCards, outcome, target, source, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), source, game);
                     possibleCards.remove(pick);
                 }
             }
-            return target.isChosen();
+            return target.isChosen(game);
         }
 
         throw new IllegalStateException("Target wasn't handled in computer's chooseTarget method: " + target.getClass().getCanonicalName());
@@ -1138,9 +1139,9 @@ public class ComputerPlayer extends PlayerImpl {
         while (!cards.isEmpty()) {
 
             if (outcome.isGood()) {
-                card = pickBestCard(cards, null, target, source, game);
+                card = pickBestCard(cards, Collections.emptyList(), target, source, game);
             } else {
-                card = pickWorstCard(cards, null, target, source, game);
+                card = pickWorstCard(cards, Collections.emptyList(), target, source, game);
             }
             if (!target.getTargets().contains(card.getId())) {
                 if (source != null) {
@@ -1151,7 +1152,7 @@ public class ComputerPlayer extends PlayerImpl {
                     return card;
                 }
             }
-            cards.remove(card);
+            cards.remove(card);  // TODO: research parent code - is it depends on original list? Can be bugged
         }
         return null;
     }
@@ -1314,10 +1315,10 @@ public class ComputerPlayer extends PlayerImpl {
             }
             switch (game.getTurnStepType()) {
                 case UPKEEP:
+                    // TODO: is it needs here? Need research (e.g. for better choose in upkeep triggers)?
                     findPlayables(game);
                     break;
                 case DRAW:
-                    logState(game);
                     break;
                 case PRECOMBAT_MAIN:
                     findPlayables(game);
@@ -1498,7 +1499,7 @@ public class ComputerPlayer extends PlayerImpl {
         // TODO: wtf?! change to player.getPlayable
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
             for (ActivatedAbility ability : permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
-                if (!(ability instanceof ActivatedManaAbilityImpl) && ability.canActivate(playerId, game).canActivate()) {
+                if (!ability.isManaActivatedAbility() && ability.canActivate(playerId, game).canActivate()) {
                     if (ability instanceof EquipAbility && permanent.getAttachedTo() != null) {
                         continue;
                     }
@@ -1549,11 +1550,12 @@ public class ComputerPlayer extends PlayerImpl {
     @Override
     public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
-        currentUnpaidMana = unpaid;
+        lastUnpaidMana.put(ability.getId(), unpaid.copy());
         try {
             return playManaHandling(ability, unpaid, game);
         } finally {
-            currentUnpaidMana = null;
+
+            lastUnpaidMana.remove(ability.getId());
             payManaMode = false;
         }
     }
@@ -1574,19 +1576,27 @@ public class ComputerPlayer extends PlayerImpl {
             producers = this.getAvailableManaProducers(game);
             producers.addAll(this.getAvailableManaProducersWithCost(game));
         }
+
+        // use fully compatible colored mana producers first
         for (MageObject mageObject : producers) {
-            // use color producing mana abilities with costs first that produce all color manas that are needed to pay
-            // otherwise the computer may not be able to pay the cost for that source
             ManaAbility:
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
-                int colored = 0;
+                boolean canPayColoredMana = false;
                 for (Mana mana : manaAbility.getNetMana(game)) {
+                    // if mana ability can produce non-useful mana then ignore whole ability here (example: {R} or {G})
+                    // (AI can't choose a good mana option, so make sure any selection option will be compatible with cost)
+                    // AI support {Any} choice by lastUnpaidMana, so it can safly used in includesMana
                     if (!unpaid.getMana().includesMana(mana)) {
                         continue ManaAbility;
+                    } else if (mana.getAny() > 0) {
+                        throw new IllegalArgumentException("Wrong mana calculation: AI do not support color choosing from {Any}");
                     }
-                    colored = CardUtil.overflowInc(colored, mana.countColored());
+                    if (mana.countColored() > 0) {
+                        canPayColoredMana = true;
+                    }
                 }
-                if (colored > 1 && (cost instanceof ColoredManaCost)) {
+                // found compatible source - try to pay
+                if (canPayColoredMana && (cost instanceof ColoredManaCost)) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana)) {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
@@ -1604,6 +1614,7 @@ public class ComputerPlayer extends PlayerImpl {
             }
         }
 
+        // use any other mana produces
         for (MageObject mageObject : producers) {
             // pay all colored costs first
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
@@ -1641,6 +1652,26 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
+            // pay colorless - more restrictive than hybrid (think of it like colored)
+            for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
+                if (cost instanceof ColorlessManaCost) {
+                    for (Mana netMana : manaAbility.getNetMana(game)) {
+                        if (cost.testPay(netMana) || hasApprovingObject) {
+                            if (netMana instanceof ConditionalMana
+                                    && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
+                                continue;
+                            }
+                            if (hasApprovingObject && !canUseAsThoughManaToPayManaCost(cost, ability, netMana,
+                                    manaAbility, mageObject, game)) {
+                                continue;
+                            }
+                            if (activateAbility(manaAbility, game)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
             // then pay hybrid
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
                 if (cost instanceof HybridManaCost) {
@@ -1659,9 +1690,9 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
-            // then pay mono hybrid
+            // then pay colorless hybrid - more restrictive than mono hybrid
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
-                if (cost instanceof MonoHybridManaCost) {
+                if (cost instanceof ColorlessHybridManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || hasApprovingObject) {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
@@ -1677,9 +1708,9 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                 }
             }
-            // pay colorless
+            // then pay mono hybrid
             for (ActivatedManaAbilityImpl manaAbility : getManaAbilitiesSortedByManaCount(mageObject, game)) {
-                if (cost instanceof ColorlessManaCost) {
+                if (cost instanceof MonoHybridManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || hasApprovingObject) {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
@@ -1722,6 +1753,7 @@ public class ComputerPlayer extends PlayerImpl {
         // pay phyrexian life costs
         if (cost.isPhyrexian()) {
             alreadyTryingToPayPhyrexian = true;
+            // TODO: make sure it's thread safe and protected from modifications (cost/unpaid can be shared between AI simulation threads?)
             boolean paidPhyrexian = cost.pay(ability, game, ability, playerId, false, null) || hasApprovingObject;
             alreadyTryingToPayPhyrexian = false;
             return paidPhyrexian;
@@ -1955,29 +1987,33 @@ public class ComputerPlayer extends PlayerImpl {
             chooseCreatureType(outcome, choice, game);
         }
 
-        // choose the correct color to pay a spell
-        if (outcome == Outcome.PutManaInPool && choice.isManaColorChoice() && currentUnpaidMana != null) {
-            if (currentUnpaidMana.containsColor(ColoredManaSymbol.W) && choice.getChoices().contains("White")) {
+        // choose the correct color to pay a spell (use last unpaid ability for color hint)
+        ManaCost unpaid = null;
+        if (!lastUnpaidMana.isEmpty()) {
+            unpaid = new ArrayList<>(lastUnpaidMana.values()).get(lastUnpaidMana.size() - 1);
+        }
+        if (outcome == Outcome.PutManaInPool && unpaid != null && choice.isManaColorChoice()) {
+            if (unpaid.containsColor(ColoredManaSymbol.W) && choice.getChoices().contains("White")) {
                 choice.setChoice("White");
                 return true;
             }
-            if (currentUnpaidMana.containsColor(ColoredManaSymbol.R) && choice.getChoices().contains("Red")) {
+            if (unpaid.containsColor(ColoredManaSymbol.R) && choice.getChoices().contains("Red")) {
                 choice.setChoice("Red");
                 return true;
             }
-            if (currentUnpaidMana.containsColor(ColoredManaSymbol.G) && choice.getChoices().contains("Green")) {
+            if (unpaid.containsColor(ColoredManaSymbol.G) && choice.getChoices().contains("Green")) {
                 choice.setChoice("Green");
                 return true;
             }
-            if (currentUnpaidMana.containsColor(ColoredManaSymbol.U) && choice.getChoices().contains("Blue")) {
+            if (unpaid.containsColor(ColoredManaSymbol.U) && choice.getChoices().contains("Blue")) {
                 choice.setChoice("Blue");
                 return true;
             }
-            if (currentUnpaidMana.containsColor(ColoredManaSymbol.B) && choice.getChoices().contains("Black")) {
+            if (unpaid.containsColor(ColoredManaSymbol.B) && choice.getChoices().contains("Black")) {
                 choice.setChoice("Black");
                 return true;
             }
-            if (currentUnpaidMana.getMana().getColorless() > 0 && choice.getChoices().contains("Colorless")) {
+            if (unpaid.getMana().getColorless() > 0 && choice.getChoices().contains("Colorless")) {
                 choice.setChoice("Colorless");
                 return true;
             }
@@ -2062,7 +2098,7 @@ public class ComputerPlayer extends PlayerImpl {
 
         // we still use playerId when getting cards even if they don't control the search
         List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), playerId, source, game));
-        while (!target.doneChoosing()) {
+        while (!target.doneChoosing(game)) {
             Card card = pickTarget(abilityControllerId, cardChoices, outcome, target, source, game);
             if (card != null) {
                 target.addTarget(card.getId(), source, game);
@@ -2093,7 +2129,7 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), abilityControllerId, source, game));
-        while (!target.doneChoosing()) {
+        while (!target.doneChoosing(game)) {
             Card card = pickTarget(abilityControllerId, cardChoices, outcome, target, source, game);
             if (card != null) {
                 target.add(card.getId(), game);
@@ -2156,7 +2192,7 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     @Override
-    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
         log.debug("chooseReplacementEffect");
         //TODO: implement this
         return 0;
@@ -2220,7 +2256,7 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-            int min, int max, MultiAmountType type, Game game) {
+                                                                 int min, int max, MultiAmountType type, Game game) {
         log.debug("getMultiAmount");
 
         int needCount = messages.size();
@@ -2410,11 +2446,14 @@ public class ComputerPlayer extends PlayerImpl {
         int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 0;
 
         if (deck != null && deck.getMaindeckCards().size() < deckMinSize && !deck.getSideboard().isEmpty()) {
-            if (chosenColors == null) {
+            if (chosenColors.isEmpty()) {
                 for (Card card : deck.getSideboard()) {
-                    rememberPick(card, RateCard.rateCard(card, null));
+                    rememberPick(card, RateCard.rateCard(card, Collections.emptyList()));
                 }
-                chosenColors = chooseDeckColorsIfPossible();
+                List<ColoredManaSymbol> deckColors = chooseDeckColorsIfPossible();
+                if (deckColors != null) {
+                    chosenColors.addAll(deckColors);
+                }
             }
             deck = buildDeck(deckMinSize, new ArrayList<>(deck.getSideboard()), chosenColors);
         }
@@ -2524,7 +2563,7 @@ public class ComputerPlayer extends PlayerImpl {
             if (pickedCardRate <= 30) {
                 // if card is bad
                 // try to counter pick without any color restriction
-                Card counterPick = pickBestCard(cards, null);
+                Card counterPick = pickBestCard(cards, Collections.emptyList());
                 int counterPickScore = RateCard.getBaseCardScore(counterPick);
                 // card is really good
                 // take it!
@@ -2536,11 +2575,14 @@ public class ComputerPlayer extends PlayerImpl {
 
             String colors = "not chosen yet";
             // remember card if colors are not chosen yet
-            if (chosenColors == null) {
+            if (chosenColors.isEmpty()) {
                 rememberPick(bestCard, maxScore);
-                chosenColors = chooseDeckColorsIfPossible();
+                List<ColoredManaSymbol> chosen = chooseDeckColorsIfPossible();
+                if (chosen != null) {
+                    chosenColors.addAll(chosen);
+                }
             }
-            if (chosenColors != null) {
+            if (!chosenColors.isEmpty()) {
                 colors = "";
                 for (ColoredManaSymbol symbol : chosenColors) {
                     colors += symbol.toString();
@@ -2611,7 +2653,7 @@ public class ComputerPlayer extends PlayerImpl {
                     }
                     if (colorsChosen.size() > 1) {
                         // no need to remember picks anymore
-                        pickedCards = null;
+                        pickedCards.clear();
                         return colorsChosen;
                     }
                 }
@@ -2767,7 +2809,7 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     protected void findBestPermanentTargets(Outcome outcome, UUID abilityControllerId, UUID sourceId, Ability source, FilterPermanent filter, Game game, Target target,
-            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
+                                            List<Permanent> goodList, List<Permanent> badList, List<Permanent> allList) {
         // searching for most valuable/powerfull permanents
         goodList.clear();
         badList.clear();
@@ -2851,12 +2893,6 @@ public class ComputerPlayer extends PlayerImpl {
         return threats;
     }
 
-    protected void logState(Game game) {
-        if (log.isTraceEnabled()) {
-            logList("Computer player " + name + " hand: ", new ArrayList<MageObject>(hand.getCards(game)));
-        }
-    }
-
     protected void logList(String message, List<MageObject> list) {
         StringBuilder sb = new StringBuilder();
         sb.append(message).append(": ");
@@ -2912,14 +2948,6 @@ public class ComputerPlayer extends PlayerImpl {
                 }
             }
         }
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
-        unplayable = new TreeMap<>();
-        playableNonInstant = new ArrayList<>();
-        playableInstant = new ArrayList<>();
-        playableAbilities = new ArrayList<>();
     }
 
     @Override

@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -70,7 +71,7 @@ class HexParasiteEffect extends OneShotEffect {
             return false;
         }
 
-        int toRemove = source.getManaCostsToPay().getX();
+        int toRemove = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (toRemove == 0) {
             return true;
         }

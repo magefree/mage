@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.BlitzAbility;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class CaldaiaGuardian extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Caldaia Guardian or another creature you control with mana value 4 or greater dies, create two 1/1 green and white Citizen creature tokens.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new CitizenGreenWhiteToken(), 2), false, filter
         ));
 

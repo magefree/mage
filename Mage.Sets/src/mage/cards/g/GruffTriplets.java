@@ -49,13 +49,13 @@ public final class GruffTriplets extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenCopySourceEffect(2)),
                 new SourceMatchesFilterCondition(filterNonToken),
-                "When {this} enters the battlefield, if it isn't a token, create two tokens that are copies of it."
+                "When {this} enters, if it isn't a token, create two tokens that are copies of it."
         ));
 
         // When Gruff Triplets dies, put a number of +1/+1 counters equal to its power on each creature you control named Gruff Triplets.
         this.addAbility(new DiesSourceTriggeredAbility(
                 new AddCountersAllEffect(
-                        CounterType.P1P1.createInstance(0),
+                        CounterType.P1P1.createInstance(),
                         new SourcePermanentPowerCount(),
                         filterNamedGruffTriplets
                 ).setText("put a number of +1/+1 counters equal to its power on each creature you control named Gruff Triplets.")

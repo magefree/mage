@@ -18,7 +18,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.InsectToken;
 
 /**
- *
  * @author weirddan455
  */
 public final class CrawlingInfestation extends CardImpl {
@@ -47,7 +46,7 @@ class CrawlingInfestationTriggeredAbility extends TriggeredAbilityImpl {
 
     public CrawlingInfestationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken()));
-        this.setTriggersOnceEachTurn(true);
+        this.setTriggersLimitEachTurn(1);
         setTriggerPhrase("Whenever one or more creature cards are put into your graveyard from anywhere during your turn, ");
     }
 

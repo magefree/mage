@@ -56,7 +56,8 @@ public abstract class AdventureCard extends CardImpl {
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            game.getState().setZone(getSpellCard().getId(), toZone);
+            Zone currentZone = game.getState().getZone(getId());
+            game.getState().setZone(getSpellCard().getId(), currentZone);
             return true;
         }
         return false;
@@ -133,7 +134,7 @@ public abstract class AdventureCard extends CardImpl {
     public List<String> getSharedRules(Game game) {
         // rules without spellcard
         Abilities<Ability> sourceAbilities = this.getSharedAbilities(game);
-        return CardUtil.getCardRulesWithAdditionalInfo(game, this.getId(), this.getName(), sourceAbilities, sourceAbilities);
+        return CardUtil.getCardRulesWithAdditionalInfo(game, this, sourceAbilities, sourceAbilities);
     }
 
     @Override

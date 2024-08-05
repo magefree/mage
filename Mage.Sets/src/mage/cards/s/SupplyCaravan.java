@@ -38,7 +38,7 @@ public final class SupplyCaravan extends CardImpl {
         // When Supply Caravan enters the battlefield, if you control a tapped creature, create a 1/1 white Warrior creature token with vigilance.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WarriorVigilantToken())),
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "When {this} enters the battlefield, if you control a tapped creature, create a 1/1 white Warrior creature token with vigilance."));
+                "When {this} enters, if you control a tapped creature, create a 1/1 white Warrior creature token with vigilance."));
     }
 
     private SupplyCaravan(final SupplyCaravan card) {

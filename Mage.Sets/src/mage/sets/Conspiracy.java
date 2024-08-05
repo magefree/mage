@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -29,6 +28,7 @@ public final class Conspiracy extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         cards.add(new SetCardInfo("Academy Elite", 20, Rarity.RARE, mage.cards.a.AcademyElite.class));
         cards.add(new SetCardInfo("Aether Tradewinds", 89, Rarity.COMMON, mage.cards.a.AetherTradewinds.class));
+        cards.add(new SetCardInfo("Agent of Acquisitions", 54, Rarity.UNCOMMON, mage.cards.a.AgentOfAcquisitions.class)); // draftmatters ability not implemented
         cards.add(new SetCardInfo("Air Servant", 90, Rarity.UNCOMMON, mage.cards.a.AirServant.class));
         cards.add(new SetCardInfo("Ajani's Sunstriker", 66, Rarity.COMMON, mage.cards.a.AjanisSunstriker.class));
         cards.add(new SetCardInfo("Altar of Dementia", 196, Rarity.RARE, mage.cards.a.AltarOfDementia.class));
@@ -49,6 +49,8 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Chartooth Cougar", 139, Rarity.COMMON, mage.cards.c.ChartoothCougar.class));
         cards.add(new SetCardInfo("Cinder Wall", 140, Rarity.COMMON, mage.cards.c.CinderWall.class));
         cards.add(new SetCardInfo("Coercive Portal", 56, Rarity.MYTHIC, mage.cards.c.CoercivePortal.class));
+        cards.add(new SetCardInfo("Cogwork Librarian", 58, Rarity.COMMON, mage.cards.c.CogworkLibrarian.class)); // draftmatters ability not implemented
+        cards.add(new SetCardInfo("Cogwork Spy", 59, Rarity.COMMON, mage.cards.c.CogworkSpy.class)); // draftmatters ability not implemented
         cards.add(new SetCardInfo("Compulsive Research", 93, Rarity.COMMON, mage.cards.c.CompulsiveResearch.class));
         cards.add(new SetCardInfo("Copperhorn Scout", 160, Rarity.COMMON, mage.cards.c.CopperhornScout.class));
         cards.add(new SetCardInfo("Council Guardian", 15, Rarity.UNCOMMON, mage.cards.c.CouncilGuardian.class));
@@ -59,7 +61,7 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Custodi Squire", 18, Rarity.COMMON, mage.cards.c.CustodiSquire.class));
         cards.add(new SetCardInfo("Dack Fayden", 42, Rarity.MYTHIC, mage.cards.d.DackFayden.class));
         cards.add(new SetCardInfo("Dack's Duplicate", 43, Rarity.RARE, mage.cards.d.DacksDuplicate.class));
-        cards.add(new SetCardInfo("Deal Broker", 61, Rarity.RARE, mage.cards.d.DealBroker.class));
+        cards.add(new SetCardInfo("Deal Broker", 61, Rarity.RARE, mage.cards.d.DealBroker.class)); // draftmatters ability not implemented
         cards.add(new SetCardInfo("Deathforge Shaman", 141, Rarity.UNCOMMON, mage.cards.d.DeathforgeShaman.class));
         cards.add(new SetCardInfo("Deathreap Ritual", 44, Rarity.UNCOMMON, mage.cards.d.DeathreapRitual.class));
         cards.add(new SetCardInfo("Deathrender", 197, Rarity.RARE, mage.cards.d.Deathrender.class));
@@ -107,6 +109,7 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Lead the Stampede", 170, Rarity.UNCOMMON, mage.cards.l.LeadTheStampede.class));
         cards.add(new SetCardInfo("Liliana's Specter", 116, Rarity.COMMON, mage.cards.l.LilianasSpecter.class));
         cards.add(new SetCardInfo("Lizard Warrior", 146, Rarity.COMMON, mage.cards.l.LizardWarrior.class));
+        cards.add(new SetCardInfo("Lore Seeker", 62, Rarity.RARE, mage.cards.l.LoreSeeker.class)); // draftmatters ability not implemented
         cards.add(new SetCardInfo("Magister of Worth", 48, Rarity.RARE, mage.cards.m.MagisterOfWorth.class));
         cards.add(new SetCardInfo("Magus of the Mirror", 117, Rarity.RARE, mage.cards.m.MagusOfTheMirror.class));
         cards.add(new SetCardInfo("Mana Geyser", 147, Rarity.COMMON, mage.cards.m.ManaGeyser.class));
@@ -206,6 +209,7 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Wakedancer", 134, Rarity.COMMON, mage.cards.w.Wakedancer.class));
         cards.add(new SetCardInfo("Wakestone Gargoyle", 88, Rarity.UNCOMMON, mage.cards.w.WakestoneGargoyle.class));
         cards.add(new SetCardInfo("Warmonger's Chariot", 207, Rarity.UNCOMMON, mage.cards.w.WarmongersChariot.class));
+        cards.add(new SetCardInfo("Whispergear Sneak", 64, Rarity.COMMON, mage.cards.w.WhispergearSneak.class)); // draftmatters ability not implemented
         cards.add(new SetCardInfo("Wind Dancer", 111, Rarity.UNCOMMON, mage.cards.w.WindDancer.class));
         cards.add(new SetCardInfo("Wolfbriar Elemental", 182, Rarity.RARE, mage.cards.w.WolfbriarElemental.class));
         cards.add(new SetCardInfo("Wood Sage", 195, Rarity.UNCOMMON, mage.cards.w.WoodSage.class));

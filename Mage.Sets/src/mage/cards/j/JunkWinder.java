@@ -50,7 +50,7 @@ public final class JunkWinder extends CardImpl {
         // Affinity for tokens
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).addHint(hint));
 
-        // Whenever a token enters the battlefield under your control, tap target nonland permanent an opponent controls. It doesn't untap during its controller's next untap step.
+        // Whenever a token you control enters, tap target nonland permanent an opponent controls. It doesn't untap during its controller's next untap step.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new TapTargetEffect(), StaticFilters.FILTER_PERMANENT_TOKEN
         );

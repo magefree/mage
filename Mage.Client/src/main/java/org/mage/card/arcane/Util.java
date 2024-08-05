@@ -68,7 +68,7 @@ public final class Util {
     public static void sleep(int millis) {
         try {
             TimeUnit.MILLISECONDS.sleep(millis);
-        } catch (InterruptedException ignored) {
+        } catch (InterruptedException ignore) {
         }
     }
 

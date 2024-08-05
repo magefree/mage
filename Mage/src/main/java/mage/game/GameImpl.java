@@ -46,7 +46,9 @@ import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
 import mage.game.command.emblems.EmblemOfCard;
+import mage.game.command.emblems.RadiationEmblem;
 import mage.game.command.emblems.TheRingEmblem;
+import mage.game.command.emblems.XmageHelperEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -98,8 +100,10 @@ public abstract class GameImpl implements Game {
 
     private transient Object customData; // temporary data, used in AI simulations
     private transient Player losingPlayer; // temporary data, used in AI simulations
-    protected boolean simulation = false;
-    protected boolean checkPlayableState = false;
+
+    protected boolean simulation = false; // for inner simulations (game without user messages)
+    protected boolean aiGame = false; // for inner simulations (ai game, debug only)
+    protected boolean checkPlayableState = false; // for inner playable calculations (game without user dialogs)
 
     protected AtomicInteger totalErrorsCount = new AtomicInteger(); // for debug only: error stats
 
@@ -180,6 +184,7 @@ public abstract class GameImpl implements Game {
     protected GameImpl(final GameImpl game) {
         //this.customData = game.customData; // temporary data, no need on game copy
         //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
+        this.aiGame = game.aiGame;
         this.simulation = game.simulation;
         this.checkPlayableState = game.checkPlayableState;
 
@@ -248,13 +253,19 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void setSimulation(boolean simulation) {
-        this.simulation = simulation;
+    public Game createSimulationForAI() {
+        Game res = this.copy();
+        ((GameImpl) res).simulation = true;
+        ((GameImpl) res).aiGame = true;
+        return res;
     }
 
     @Override
-    public void setCheckPlayableState(boolean checkPlayableState) {
-        this.checkPlayableState = checkPlayableState;
+    public Game createSimulationForPlayableCalc() {
+        Game res = this.copy();
+        ((GameImpl) res).simulation = true;
+        ((GameImpl) res).checkPlayableState = true;
+        return res;
     }
 
     @Override
@@ -432,6 +443,11 @@ public abstract class GameImpl implements Game {
             for (Designation designation : state.getDesignations()) {
                 if (designation.getId().equals(objectId)) {
                     return designation;
+                }
+            }
+            for (Emblem emblem : state.getHelperEmblems()) {
+                if (emblem.getId().equals(objectId)) {
+                    return emblem;
                 }
             }
             // can be an ability of a sacrificed Token trying to get it's source object
@@ -699,12 +715,6 @@ public abstract class GameImpl implements Game {
             // SyrCarahTheBoldTest.java for an example of when this check is relevant.
             if (obj instanceof Spell) {
                 spell = (Spell) obj;
-            } else if (obj != null) {
-                logger.error(String.format(
-                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                                obj.getClass().getName(), obj.getName()),
-                        new Throwable()
-                );
             }
         }
         return spell;
@@ -800,33 +810,66 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void setConcedingPlayer(UUID playerId) {
-        Player player = null;
-        if (state.getChoosingPlayerId() != null) {
-            player = getPlayer(state.getChoosingPlayerId());
-        } else if (state.getPriorityPlayerId() != null) {
-            player = getPlayer(state.getPriorityPlayerId());
+        // request to concede a player (can be called for any player at any moment by concede button, connection fail, etc)
+        // warning, it's important to process real concede in game thread only (on priority)
+
+        // concede queue (who requested concede)
+        if (!concedingPlayers.contains(playerId)) {
+            concedingPlayers.add(playerId);
         }
-        if (player != null) {
-            if (!player.hasLeft() && player.isHuman()) {
-                if (!concedingPlayers.contains(playerId)) {
-                    logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
-                    concedingPlayers.add(playerId);
-                    player.signalPlayerConcede(); // will be executed on next priority
-                }
-            } else {
-                // no asynchronous action so check directly
-                concedingPlayers.add(playerId);
-                checkConcede();
+
+        Player currentPriorityPlayer = null;
+        if (state.getPriorityPlayerId() != null) {
+            currentPriorityPlayer = getPlayer(state.getPriorityPlayerId()); // started game
+        } else if (state.getChoosingPlayerId() != null) {
+            currentPriorityPlayer = getPlayer(state.getChoosingPlayerId()); // not started game
+        }
+
+        // if something wrong with a game - it's not started, freeze, etc
+        if (currentPriorityPlayer == null) {
+            // try to stop
+            logger.warn("Game don't have priority player - checking game end: " + this);
+            if (!ThreadUtils.isRunGameThread()) {
+                // TODO: if server has that logs then it must be researched and fixed
+                logger.error("Non-game thread can't concede or end games - someone called it from freeze game?");
             }
-        } else {
-            checkConcede();
+            checkConcede(false);
             checkIfGameIsOver();
+            return;
+        }
+
+        // if someone requested concede
+        if (currentPriorityPlayer.getId().equals(playerId)) {
+            // concede for itself
+            // stop current player dialog and execute concede
+            currentPriorityPlayer.signalPlayerConcede(true);
+        } else {
+            // concede for another player
+            // allow current player to continue and check concede on any next priority
+            currentPriorityPlayer.signalPlayerConcede(false);
+        }
+
+        // game thread can call concede directly
+        if (ThreadUtils.isRunGameThread()) {
+            // example: forced lost due state base actions check
+            checkConcede();
         }
     }
 
     public void checkConcede() {
-        while (!concedingPlayers.isEmpty()) {
-            leave(concedingPlayers.removeFirst());
+        checkConcede(true);
+    }
+
+    public void checkConcede(boolean mustRunInGameThread) {
+        // must run in game thread all the time
+        if (mustRunInGameThread) {
+            ThreadUtils.ensureRunInGameThread();
+        }
+
+        UUID playerId = concedingPlayers.poll();
+        while (playerId != null) {
+            leave(playerId);
+            playerId = concedingPlayers.poll();
         }
     }
 
@@ -1228,7 +1271,7 @@ public abstract class GameImpl implements Game {
         Player choosingPlayer = null;
         if (startingPlayerId == null) {
             TargetPlayer targetPlayer = new TargetPlayer();
-            targetPlayer.setTargetName("starting player");
+            targetPlayer.withTargetName("starting player");
             if (choosingPlayerId != null) {
                 choosingPlayer = this.getPlayer(choosingPlayerId);
                 if (choosingPlayer != null && !choosingPlayer.canRespond()) {
@@ -1357,12 +1400,15 @@ public abstract class GameImpl implements Game {
                 }
             }
         }
+
+        initGameDefaultHelperEmblems();
     }
 
     public void initGameDefaultWatchers() {
         List<Watcher> newWatchers = new ArrayList<>();
         newWatchers.add(new CastSpellLastTurnWatcher());
         newWatchers.add(new PlayerLostLifeWatcher());
+        newWatchers.add(new FirstStrikeWatcher()); // required for combat code
         newWatchers.add(new BlockedAttackerWatcher());
         newWatchers.add(new PlanarRollWatcher()); // needed for RollDiceTest (planechase code needs improves)
         newWatchers.add(new AttackedThisTurnWatcher());
@@ -1394,6 +1440,22 @@ public abstract class GameImpl implements Game {
         BloodthirstWatcher bloodthirstWatcher = new BloodthirstWatcher();
         bloodthirstWatcher.setControllerId(playerId);
         getState().addWatcher(bloodthirstWatcher);
+    }
+
+    public void initGameDefaultHelperEmblems() {
+
+        // Rad Counter's trigger source
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            // This is not a real emblem. Just a fake source for the
+            // inherent trigger ability related to Rad counters
+            // Faking a source just to display something on the stack ability.
+            state.addHelperEmblem(new RadiationEmblem(), playerId);
+        }
+
+        // global card hints for better UX
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            state.addHelperEmblem(new XmageHelperEmblem().withCardHint("storm counter", StormAbility.getHint()), playerId);
+        }
     }
 
     protected void sendStartMessage(Player choosingPlayer, Player startingPlayer) {
@@ -1602,6 +1664,10 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
+        if (!this.isSimulation() && this.inCheckPlayableState()) {
+            throw new IllegalStateException("Wrong code usage. Only simulation games can be in CheckPlayableState");
+        }
+
         int priorityErrorsCount = 0;
         infiniteLoopCounter = 0;
         int rollbackBookmarkOnPriorityStart = 0;
@@ -1710,8 +1776,6 @@ public abstract class GameImpl implements Game {
                             // tests - try to fail fast
                             throw new MageException(UNIT_TESTS_ERROR_TEXT);
                         }
-                    } finally {
-                        setCheckPlayableState(false);
                     }
                     state.getPlayerList().getNext();
                 }
@@ -1730,7 +1794,6 @@ public abstract class GameImpl implements Game {
         } finally {
             resetLKI();
             clearAllBookmarks();
-            setCheckPlayableState(false);
         }
     }
 
@@ -1743,7 +1806,6 @@ public abstract class GameImpl implements Game {
         } finally {
             if (top != null) {
                 state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
-                rememberLKI(top.getSourceId(), Zone.STACK, top);
                 checkInfiniteLoop(top.getSourceId());
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
@@ -1866,8 +1928,15 @@ public abstract class GameImpl implements Game {
 
     @Override
     public synchronized void applyEffects() {
-        resetShortLivingLKI();
         state.applyEffects(this);
+    }
+
+    @Override
+    public void processAction() {
+        state.handleSimultaneousEvent(this);
+        resetShortLivingLKI();
+        applyEffects();
+        state.getTriggers().checkStateTriggers(this);
     }
 
     @Override
@@ -1935,9 +2004,9 @@ public abstract class GameImpl implements Game {
         informPlayers("You have planeswalked to " + newPlane.getLogName());
 
         // Fire off the planeswalked event
-        GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), null, newPlane.getId(), 0, true);
+        GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), (Ability) null, newPlane.getId(), 0, true);
         if (!replaceEvent(event)) {
-            GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), null, newPlane.getId(), 0, true);
+            GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), (Ability) null, newPlane.getId(), 0, true);
             fireEvent(ge);
         }
 
@@ -2068,12 +2137,16 @@ public abstract class GameImpl implements Game {
         }
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
+            // 605.4a  A triggered mana ability doesn’t go on the stack, so it can’t be targeted,
+            // countered, or otherwise responded to. Rather, it resolves immediately after the mana
+            // ability that triggered it, without waiting for priority.
             Ability manaAbility = ability.copy();
             if (manaAbility.getSourceObjectZoneChangeCounter() == 0) {
                 manaAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
             }
-            manaAbility.activate(this, false);
-            manaAbility.resolve(this);
+            if (manaAbility.activate(this, false)) {
+                manaAbility.resolve(this);
+            }
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
@@ -2084,6 +2157,46 @@ public abstract class GameImpl implements Game {
                 newAbility.setSourcePermanentTransformCount(this);
             }
             newAbility.setTriggerEvent(triggeringEvent);
+
+            // TODO: non-stack delayed triggers are xmage's workaround to support specific cards
+            //  instead replacement effects usage. That triggers must be executed immediately like mana abilities
+            //  or be reworked, cause current code do not support rule "nothing happens between the two events,
+            //  including state-based actions"
+            //
+            // Search related cards by "usesStack = false".
+            // See conflicting tests in StateBaseTriggeredAbilityTest and BanisherPriestTest
+            //
+            // example 1:
+            // Grasp of Fate: exile ... until Grasp of Fate leaves the battlefield
+            // The exiled cards return to the battlefield immediately after Grasp of Fate leaves the battlefield. Nothing
+            // happens between the two events, including state-based actions.
+            // (2015-11-04)
+            //
+            // example 2:
+            // Banisher Priest: exile ... until Banisher Priest leaves the battlefield
+            // Banisher Priest's ability causes a zone change with a duration, a new style of ability that's
+            // somewhat reminiscent of older cards like Oblivion Ring. However, unlike Oblivion Ring, cards
+            // like Banisher Priest have a single ability that creates two one-shot effects: one that exiles
+            // the creature when the ability resolves, and another that returns the exiled card to the battlefield
+            // immediately after Banisher Priest leaves the battlefield.
+            // (2013-07-01)
+            // The exiled card returns to the battlefield immediately after Banisher Priest leaves the battlefield.
+            // Nothing happens between the two events, including state-based actions. The two creatures aren't on
+            // the battlefield at the same time. For example, if the returning creature is a Clone, it can't enter
+            // the battlefield as a copy of Banisher Priest.
+            // (2013-07-01)
+            //
+            //
+            /* possible code:
+            if (newAbility.isUsesStack()) {
+                state.addTriggeredAbility(newAbility);
+            } else {
+                if (newAbility.activate(this, false)) {
+                    newAbility.resolve(this);
+                }
+            }//*/
+
+            // original code
             state.addTriggeredAbility(newAbility);
         }
     }
@@ -2094,11 +2207,27 @@ public abstract class GameImpl implements Game {
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
         }
-        // return addDelayedTriggeredAbility(delayedAbility);
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
         if (source != null) {
-            newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+            // Relevant ruling:
+            // 603.7e If an activated or triggered ability creates a delayed triggered ability,
+            // the source of that delayed triggered ability is the same as the source of that other ability.
+            // The controller of that delayed triggered ability is the player who controlled that other ability as it resolved.
+            // 603.7f If a static ability generates a replacement effect which causes a delayed triggered ability to be created,
+            // the source of that delayed triggered ability is the object with that static ability.
+            // The controller of that delayed triggered ability is the same as the controller of that object at the time
+            // the replacement effect was applied.
+            //
+            // There are two possibility for the zcc:
+            // 1/ the source is an Ability with a valid (not 0) zcc, and we must use the same.
+            int zcc = source.getSourceObjectZoneChangeCounter();
+            if (zcc == 0) {
+                // 2/ the source has not a valid zcc (it is most likely a StaticAbility instantiated at beginning of game)
+                //    we use the source objects's zcc
+                zcc = getState().getZoneChangeCounter(source.getSourceId());
+            }
+            newAbility.setSourceObjectZoneChangeCounter(zcc);
             newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.init(this);
@@ -2108,26 +2237,33 @@ public abstract class GameImpl implements Game {
 
     @Override
     public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source) {
+        return fireReflexiveTriggeredAbility(reflexiveAbility, source, false);
+    }
+
+    @Override
+    public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source, boolean fireAsSimultaneousEvent) {
         UUID uuid = this.addDelayedTriggeredAbility(reflexiveAbility, source);
-        this.fireEvent(GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source, source.getControllerId()));
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source, source.getControllerId());
+        if (fireAsSimultaneousEvent) {
+            this.getState().addSimultaneousEvent(event, this);
+        } else {
+            this.fireEvent(event);
+        }
         return uuid;
     }
 
     /**
-     * 116.5. Each time a player would get priority, the game first performs all
+     * 117.5. Each time a player would get priority, the game first performs all
      * applicable state-based actions as a single event (see rule 704,
      * “State-Based Actions”), then repeats this process until no state-based
      * actions are performed. Then triggered abilities are put on the stack (see
      * rule 603, “Handling Triggered Abilities”). These steps repeat in order
      * until no further state-based actions are performed and no abilities
      * trigger. Then the player who would have received priority does so.
-     *
-     * @return
      */
     @Override
     public boolean checkStateAndTriggered() {
         boolean somethingHappened = false;
-        //20091005 - 115.5
         while (!isPaused() && !checkIfGameIsOver()) {
             if (!checkStateBasedActions()) {
                 // nothing happened so check triggers
@@ -2136,7 +2272,7 @@ public abstract class GameImpl implements Game {
                     break;
                 }
             }
-            this.getState().processAction(this); // needed e.g if boost effects end and cause creatures to die
+            processAction(); // needed e.g if boost effects end and cause creatures to die
             somethingHappened = true;
         }
         checkConcede();
@@ -2146,10 +2282,8 @@ public abstract class GameImpl implements Game {
     /**
      * Sets the waiting triggered abilities (if there are any) to the stack in
      * the chosen order by player
-     *
-     * @return
      */
-    public boolean checkTriggered() {
+    boolean checkTriggered() {
         boolean played = false;
         state.getTriggers().checkStateTriggers(this);
         for (UUID playerId : state.getPlayerList(state.getActivePlayerId())) {
@@ -2187,15 +2321,13 @@ public abstract class GameImpl implements Game {
     }
 
     /**
-     * 116.5. Each time a player would get priority, the game first performs all
+     * 117.5. Each time a player would get priority, the game first performs all
      * applicable state-based actions as a single event (see rule 704,
      * “State-Based Actions”), then repeats this process until no state-based
      * actions are performed. Then triggered abilities are put on the stack (see
      * rule 603, “Handling Triggered Abilities”). These steps repeat in order
      * until no further state-based actions are performed and no abilities
      * trigger. Then the player who would have received priority does so.
-     *
-     * @return
      */
     protected boolean checkStateBasedActions() {
         boolean somethingHappened = false;
@@ -2205,7 +2337,7 @@ public abstract class GameImpl implements Game {
             if (!player.hasLost()
                     && ((player.getLife() <= 0 && player.canLoseByZeroOrLessLife())
                     || player.getLibrary().isEmptyDraw()
-                    || player.getCounters().getCount(CounterType.POISON) >= 10)) {
+                    || player.getCountersCount(CounterType.POISON) >= 10)) {
                 player.lost(this);
             }
         }
@@ -2741,7 +2873,7 @@ public abstract class GameImpl implements Game {
                 }
                 Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
                 targetLegendaryToKeep.withNotTarget(true);
-                targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
+                targetLegendaryToKeep.withTargetName(legend.getName() + " to keep (Legendary Rule)?");
                 controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
                 for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                     if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
@@ -3055,8 +3187,6 @@ public abstract class GameImpl implements Game {
 
     /**
      * Return a list of all players ignoring the range of visible players
-     *
-     * @return
      */
     @Override
     public PlayerList getPlayerList() {
@@ -3194,7 +3324,7 @@ public abstract class GameImpl implements Game {
             }
         }
         for (Card card : toOutside) {
-            rememberLKI(card.getId(), Zone.BATTLEFIELD, card);
+            rememberLKI(Zone.BATTLEFIELD, card);
         }
         // needed to send event that permanent leaves the battlefield to allow non stack effects to execute
         player.moveCards(toOutside, Zone.OUTSIDE, null, this);
@@ -3455,7 +3585,7 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public boolean getShortLivingLKI(UUID objectId, Zone zone) {
+    public boolean checkShortLivingLKI(UUID objectId, Zone zone) {
         Set<UUID> idSet = lkiShortLiving.get(zone);
         if (idSet != null) {
             return idSet.contains(objectId);
@@ -3466,12 +3596,12 @@ public abstract class GameImpl implements Game {
     /**
      * Remembers object state to be used as Last Known Information.
      *
-     * @param objectId
      * @param zone
      * @param object
      */
     @Override
-    public void rememberLKI(UUID objectId, Zone zone, MageObject object) {
+    public void rememberLKI(Zone zone, MageObject object) {
+        UUID objectId = object.getId();
         if (object instanceof Permanent || object instanceof StackObject) {
             MageObject copy = object.copy();
 
@@ -3827,6 +3957,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public synchronized void rollbackTurns(int turnsToRollback) {
+        // TODO: need async command
         if (gameOptions.rollbackTurnsAllowed && !executingRollback) {
             int turnToGoTo = getTurnNum() - turnsToRollback;
             if (turnToGoTo < 1 || !gameStatesRollBack.containsKey(turnToGoTo)) {
@@ -4001,8 +4132,24 @@ public abstract class GameImpl implements Game {
     @Override
     public String toString() {
         Player activePayer = this.getPlayer(this.getActivePlayerId());
+
+        // show non-standard game state (not part of the real game, e.g. AI or mana calculation)
+        List<String> simInfo = new ArrayList<>();
+        if (this.simulation) {
+            simInfo.add("SIMULATION");
+        }
+        if (this.aiGame) {
+            simInfo.add("AI");
+        }
+        if (this.checkPlayableState) {
+            simInfo.add("PLAYABLE CALC");
+        }
+        if (!ThreadUtils.isRunGameThread()) {
+            simInfo.add("NOT GAME THREAD");
+        }
+
         StringBuilder sb = new StringBuilder()
-                .append(this.isSimulation() ? "!!!SIMULATION!!! " : "")
+                .append(!simInfo.isEmpty() ? "!!!" + String.join(", ", simInfo) + "!!! " : "")
                 .append(this.getGameType().toString())
                 .append("; ").append(CardUtil.getTurnInfo(this))
                 .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))

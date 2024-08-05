@@ -24,7 +24,7 @@ public final class JundSojourners extends CardImpl {
 
     public JundSojourners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

@@ -1,28 +1,34 @@
 package mage.cards.decks;
 
+import mage.MageObject;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.game.GameException;
 import mage.util.Copyable;
 import mage.util.DeckUtil;
-import org.apache.log4j.Logger;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Server side deck with workable cards, also can be used in GUI
+ * <p>
+ * If you need text only deck then look at DeckCardLists
+ */
 public class Deck implements Serializable, Copyable<Deck> {
 
     static final int MAX_CARDS_PER_DECK = 2000;
 
-    private String name;
+    private String name; // TODO: must rework somehow - tiny leaders use deck name to find commander card and hide it for a user
     private final Set<Card> cards = new LinkedHashSet<>();
     private final Set<Card> sideboard = new LinkedHashSet<>();
-    private DeckCardLayout cardsLayout;
-    private DeckCardLayout sideboardLayout;
-    private long deckHashCode = 0;
-    private long deckCompleteHashCode = 0;
+    private DeckCardLayout cardsLayout; // client side only
+    private DeckCardLayout sideboardLayout; // client side only
 
     public Deck() {
         super();
@@ -34,8 +40,6 @@ public class Deck implements Serializable, Copyable<Deck> {
         this.sideboard.addAll(deck.sideboard.stream().map(Card::copy).collect(Collectors.toList()));
         this.cardsLayout = deck.cardsLayout == null ? null : deck.cardsLayout.copy();
         this.sideboardLayout = deck.sideboardLayout == null ? null : deck.sideboardLayout.copy();
-        this.deckHashCode = deck.deckHashCode;
-        this.deckCompleteHashCode = deck.deckCompleteHashCode;
     }
 
     public static Deck load(DeckCardLists deckCardLists) throws GameException {
@@ -46,27 +50,15 @@ public class Deck implements Serializable, Copyable<Deck> {
         return Deck.load(deckCardLists, ignoreErrors, true);
     }
 
-    public static Deck append(Deck deckToAppend, Deck currentDeck) throws GameException {
-        List<String> deckCardNames = new ArrayList<>();
-
-        for (Card card : deckToAppend.getCards()) {
-            if (card != null) {
-                currentDeck.cards.add(card);
-                deckCardNames.add(card.getName());
-            }
-        }
-        List<String> sbCardNames = new ArrayList<>();
-        for (Card card : deckToAppend.getSideboard()) {
-            if (card != null) {
-                currentDeck.sideboard.add(card);
-                deckCardNames.add(card.getName());
-            }
-        }
-        Collections.sort(deckCardNames);
-        Collections.sort(sbCardNames);
-        String deckString = deckCardNames.toString() + sbCardNames.toString();
-        currentDeck.setDeckHashCode(DeckUtil.fixedHash(deckString));
-        return currentDeck;
+    public static Deck append(Deck sourceDeck, Deck currentDeck) throws GameException {
+        Deck newDeck = currentDeck.copy();
+        sourceDeck.getCards().forEach(card -> {
+            newDeck.cards.add(card.copy());
+        });
+        sourceDeck.getSideboard().forEach(card -> {
+            newDeck.sideboard.add(card.copy());
+        });
+        return newDeck;
     }
 
     public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors, boolean mockCards) throws GameException {
@@ -87,69 +79,55 @@ public class Deck implements Serializable, Copyable<Deck> {
         deck.setName(deckCardLists.getName());
         deck.cardsLayout = deckCardLists.getCardLayout() == null ? null : deckCardLists.getCardLayout().copy();
         deck.sideboardLayout = deckCardLists.getSideboardLayout() == null ? null : deckCardLists.getSideboardLayout().copy();
-        List<String> deckCardNames = new ArrayList<>();
-        int totalCards = 0;
-        for (DeckCardInfo deckCardInfo : deckCardLists.getCards()) {
-            Card card = createCard(deckCardInfo, mockCards, cardInfoCache);
-            if (card != null) {
-                if (totalCards > MAX_CARDS_PER_DECK) {
-                    break;
-                }
-                deck.cards.add(card);
-                deckCardNames.add(card.getName());
-                totalCards++;
 
-            } else if (!ignoreErrors) {
-                throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
-            }
-        }
-        List<String> sbCardNames = new ArrayList<>();
-        for (DeckCardInfo deckCardInfo : deckCardLists.getSideboard()) {
-            Card card = createCard(deckCardInfo, mockCards, cardInfoCache);
-            if (card != null) {
+        // load only real cards
+        int totalCards = 0;
+
+        // main
+        main:
+        for (DeckCardInfo deckCardInfo : deckCardLists.getCards()) {
+            for (int i = 1; i <= deckCardInfo.getAmount(); i++) {
                 if (totalCards > MAX_CARDS_PER_DECK) {
-                    break;
+                    break main;
                 }
-                deck.sideboard.add(card);
-                sbCardNames.add(card.getName());
-                totalCards++;
-            } else if (!ignoreErrors) {
-                throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
+
+                Card card = createCard(deckCardInfo, mockCards, cardInfoCache);
+                if (card != null) {
+                    deck.cards.add(card);
+                    totalCards++;
+                } else if (!ignoreErrors) {
+                    throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
+                }
             }
         }
-        Collections.sort(deckCardNames);
-        Collections.sort(sbCardNames);
-        String deckString = deckCardNames.toString() + sbCardNames.toString();
-        deck.setDeckHashCode(DeckUtil.fixedHash(deckString));
-        if (sbCardNames.isEmpty()) {
-            deck.setDeckCompleteHashCode(deck.getDeckHashCode());
-        } else {
-            List<String> deckAllCardNames = new ArrayList<>();
-            deckAllCardNames.addAll(deckCardNames);
-            deckAllCardNames.addAll(sbCardNames);
-            Collections.sort(deckAllCardNames);
-            deck.setDeckCompleteHashCode(DeckUtil.fixedHash(deckAllCardNames.toString()));
+
+        // sideboard
+        side:
+        for (DeckCardInfo deckCardInfo : deckCardLists.getSideboard()) {
+            for (int i = 1; i <= deckCardInfo.getAmount(); i++) {
+                if (totalCards > MAX_CARDS_PER_DECK) {
+                    break side;
+                }
+                Card card = createCard(deckCardInfo, mockCards, cardInfoCache);
+                if (card != null) {
+                    deck.sideboard.add(card);
+                    totalCards++;
+                } else if (!ignoreErrors) {
+                    throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
+                }
+            }
         }
+
         return deck;
     }
 
     private static GameException createCardNotFoundGameException(DeckCardInfo deckCardInfo, String deckName) {
-        // Try WORKAROUND for Card DB error: Try to read a card that does exist
-        CardInfo cardInfo = CardRepository.instance.findCard("Silvercoat Lion");
-        if (cardInfo == null) {
-            // DB seems to have a problem - try to restart the DB (useless in 99%)
-            CardRepository.instance.closeDB();
-            CardRepository.instance.openDB();
-            cardInfo = CardRepository.instance.findCard("Silvercoat Lion");
-            Logger.getLogger(Deck.class).error("Tried to restart the DB: " + (cardInfo == null ? "not successful" : "successful"));
-        }
-
-        if (cardInfo != null) {
+        if (CardRepository.checkDatabaseHealthAndFix()) {
             // it's ok, just unknown card
             String cardError = String.format("Card not found - %s - %s - %s in deck %s.",
                     deckCardInfo.getCardName(),
                     deckCardInfo.getSetCode(),
-                    deckCardInfo.getCardNum(),
+                    deckCardInfo.getCardNumber(),
                     deckName
             );
             cardError += "\n\nPossible reasons:";
@@ -158,9 +136,7 @@ public class Deck implements Serializable, Copyable<Deck> {
             return new GameException(cardError);
         } else {
             // critical error, server must be restarted
-            // TODO: add auto-restart task here someday (with a docker support)
-            //  see https://github.com/magefree/mage/issues/8130
-            return new GameException("Problems detected on the server side (memory issue), wait for a restart.");
+            return new GameException("Critical problems detected on the server side (memory issues), wait for a restart.");
         }
     }
 
@@ -168,15 +144,15 @@ public class Deck implements Serializable, Copyable<Deck> {
         CardInfo cardInfo;
         if (cardInfoCache != null) {
             // from cache
-            String key = String.format("%s_%s", deckCardInfo.getSetCode(), deckCardInfo.getCardNum());
+            String key = String.format("%s_%s", deckCardInfo.getSetCode(), deckCardInfo.getCardNumber());
             cardInfo = cardInfoCache.getOrDefault(key, null);
             if (cardInfo == null) {
-                cardInfo = CardRepository.instance.findCard(deckCardInfo.getSetCode(), deckCardInfo.getCardNum());
+                cardInfo = CardRepository.instance.findCard(deckCardInfo.getSetCode(), deckCardInfo.getCardNumber());
                 cardInfoCache.put(key, cardInfo);
             }
         } else {
             // from db
-            cardInfo = CardRepository.instance.findCard(deckCardInfo.getSetCode(), deckCardInfo.getCardNum());
+            cardInfo = CardRepository.instance.findCard(deckCardInfo.getSetCode(), deckCardInfo.getCardNumber());
         }
 
         if (cardInfo == null) {
@@ -190,13 +166,18 @@ public class Deck implements Serializable, Copyable<Deck> {
         }
     }
 
-    public DeckCardLists getDeckCardLists() {
+    /**
+     * Prepare new deck with cards only without layout and other client side settings.
+     * Use it for any export and server's deck update/submit
+     */
+    public DeckCardLists prepareCardsOnlyDeck() {
         DeckCardLists deckCardLists = new DeckCardLists();
-
         deckCardLists.setName(name);
+
         for (Card card : cards) {
             deckCardLists.getCards().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getExpansionSetCode()));
         }
+
         for (Card card : sideboard) {
             deckCardLists.getSideboard().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getExpansionSetCode()));
         }
@@ -227,6 +208,7 @@ public class Deck implements Serializable, Copyable<Deck> {
         return cards;
     }
 
+    // TODO: delete and replace by getCards()
     public Set<Card> getMaindeckCards() {
         return cards
                 .stream()
@@ -262,22 +244,6 @@ public class Deck implements Serializable, Copyable<Deck> {
         return sideboardLayout;
     }
 
-    public long getDeckHashCode() {
-        return deckHashCode;
-    }
-
-    public void setDeckHashCode(long deckHashCode) {
-        this.deckHashCode = deckHashCode;
-    }
-
-    public long getDeckCompleteHashCode() {
-        return deckCompleteHashCode;
-    }
-
-    public void setDeckCompleteHashCode(long deckHashCode) {
-        this.deckCompleteHashCode = deckHashCode;
-    }
-
     public void clearLayouts() {
         this.cardsLayout = null;
         this.sideboardLayout = null;
@@ -286,5 +252,13 @@ public class Deck implements Serializable, Copyable<Deck> {
     @Override
     public Deck copy() {
         return new Deck(this);
+    }
+
+    public long getDeckHash(boolean ignoreMainBasicLands) {
+        return DeckUtil.getDeckHash(
+                this.cards.stream().map(MageObject::getName).collect(Collectors.toList()),
+                this.sideboard.stream().map(MageObject::getName).collect(Collectors.toList()),
+                ignoreMainBasicLands
+        );
     }
 }

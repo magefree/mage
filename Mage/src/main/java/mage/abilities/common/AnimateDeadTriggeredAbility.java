@@ -44,7 +44,7 @@ public class AnimateDeadTriggeredAbility extends EntersBattlefieldTriggeredAbili
         super(new AnimateDeadReplaceAbilityEffect(becomesAura));
         addEffect(new AnimateDeadPutOntoBattlefieldEffect(becomesAura, tapped));
         addWatcher(new AnimateDeadWatcher());
-        setTriggerPhrase("When {this} enters the battlefield, if it's on the battlefield, ");
+        setTriggerPhrase("When {this} enters, if it's on the battlefield, ");
     }
 
     private AnimateDeadTriggeredAbility(final AnimateDeadTriggeredAbility ability) {
@@ -190,7 +190,7 @@ class AnimateDeadPutOntoBattlefieldEffect extends OneShotEffect {
         }
         // Put card onto the battlefield under your control...
         player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
-        game.getState().processAction(game);
+        game.processAction();
 
         Permanent creature = game.getPermanent(CardUtil.getDefaultCardSideForBattlefield(game, card).getId());
         if (creature == null) {

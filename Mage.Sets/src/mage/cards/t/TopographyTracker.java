@@ -16,6 +16,7 @@ import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.events.ExploreEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.MapToken;
 
 /**
@@ -72,7 +73,8 @@ class TopographyTrackerEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return game.getPermanent(event.getTargetId()).isControlledBy(event.getPlayerId());
+        Permanent permanent = game.getPermanent(event.getTargetId()); 
+        return permanent != null && permanent.isControlledBy(event.getPlayerId());
     }
 
     @Override

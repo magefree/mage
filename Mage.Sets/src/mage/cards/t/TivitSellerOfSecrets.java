@@ -47,7 +47,7 @@ public final class TivitSellerOfSecrets extends CardImpl {
         // Council's dilemma — Whenever Tivit enters the battlefield or deals combat damage to a player, starting with you, each player votes for evidence or bribery. For each evidence vote, investigate. For each bribery vote, create a Treasure token.
         this.addAbility(new OrTriggeredAbility(
                 Zone.BATTLEFIELD, new TivitSellerOfSecretsEffect(), false,
-                "Whenever {this} enters the battlefield or deals combat damage to a player, ",
+                "Whenever {this} enters or deals combat damage to a player, ",
                 new EntersBattlefieldTriggeredAbility(null, false),
                 new DealsCombatDamageToAPlayerTriggeredAbility(null, false)
         ).setAbilityWord(AbilityWord.COUNCILS_DILEMMA));

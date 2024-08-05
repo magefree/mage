@@ -1,29 +1,27 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author notgreat
  */
 public final class SchemaThief extends CardImpl {
+
+    private static final FilterArtifactPermanent filter
+            = new FilterArtifactPermanent("artifact that player controls");
 
     public SchemaThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -38,7 +36,10 @@ public final class SchemaThief extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Schema Thief deals combat damage to a player, create a token that's a copy of target artifact that player controls.
-        this.addAbility(new SchemaThiefTriggeredAbility());
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenCopyTargetEffect(), false, true);
+        ability.addTarget(new TargetPermanent(filter));
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        this.addAbility(ability);
     }
 
     private SchemaThief(final SchemaThief card) {
@@ -51,44 +52,3 @@ public final class SchemaThief extends CardImpl {
     }
 }
 
-class SchemaThiefTriggeredAbility extends TriggeredAbilityImpl {
-
-    SchemaThiefTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect(), false);
-    }
-
-    private SchemaThiefTriggeredAbility(final SchemaThiefTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SchemaThiefTriggeredAbility copy() {
-        return new SchemaThiefTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Player opponent = game.getPlayer(event.getPlayerId());
-        if (opponent == null
-                || !event.getSourceId().equals(this.getSourceId())
-                || !((DamagedEvent) event).isCombatDamage()) {
-            return false;
-        }
-        FilterPermanent filter = new FilterArtifactPermanent("artifact " + opponent.getLogName() + " controls");
-        filter.add(new ControllerIdPredicate(opponent.getId()));
-        this.getTargets().clear();
-        this.addTarget(new TargetPermanent(filter));
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, create a token " +
-                "that's a copy of target artifact that player controls.";
-    }
-}

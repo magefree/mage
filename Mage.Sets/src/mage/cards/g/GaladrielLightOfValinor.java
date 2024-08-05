@@ -34,7 +34,7 @@ public final class GaladrielLightOfValinor extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, choose one that hasn't been chosen this turn —
+        // Alliance — Whenever another creature you control enters, choose one that hasn't been chosen this turn —
         // • Add {G}{G}{G}.
         Ability ability = new AllianceAbility(new AddManaToManaPoolSourceControllerEffect(Mana.GreenMana(3)));
         ability.setModeTag("add mana");

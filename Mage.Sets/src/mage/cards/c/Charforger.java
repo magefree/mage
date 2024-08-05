@@ -35,7 +35,7 @@ public class Charforger extends CardImpl {
         //Whenever another creature or artifact you control is put into a graveyard from the battlefield, put an oil counter on Charforger.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.OIL.createInstance()), false,
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE, false
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT, false
         ));
 
         //Remove three oil counters from Charforger: Exile the top card of your library. You may play that card this turn.

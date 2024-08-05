@@ -26,7 +26,7 @@ public final class CloakAndDagger extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.ROGUE, "a Rogue creature");
 
     public CloakAndDagger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.ROGUE);
         this.subtype.add(SubType.EQUIPMENT);
 

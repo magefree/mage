@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.RavenousAbility;
@@ -40,7 +40,7 @@ public final class Zoanthrope extends CardImpl {
 
         // Warp Blast -- When Zoanthrope enters the battlefield, it deals X damage to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(ManacostVariableValue.ETB, "it")
+                new DamageTargetEffect(GetXValue.instance, "it")
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.withFlavorWord("Warp Blast"));

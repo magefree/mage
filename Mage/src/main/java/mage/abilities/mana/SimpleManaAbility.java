@@ -1,15 +1,15 @@
 package mage.abilities.mana;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.constants.Zone;
 import mage.game.Game;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -17,6 +17,10 @@ import mage.game.Game;
 public class SimpleManaAbility extends ActivatedManaAbilityImpl {
 
     private boolean predictable;
+
+    public SimpleManaAbility(ManaEffect effect, Cost cost) {
+        this(Zone.BATTLEFIELD, effect, cost);
+    }
 
     public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost) {
         this(zone, effect, cost, true);

@@ -45,7 +45,7 @@ public final class ForgeNeverwinterCharlatan extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Ward--Sacrifice a creature.
-        this.addAbility(new WardAbility(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), false));
+        this.addAbility(new WardAbility(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE), false));
 
         // Forge, Neverwinter Charlatan gets +2/+0 for each Treasure you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
@@ -56,7 +56,7 @@ public final class ForgeNeverwinterCharlatan extends CardImpl {
         this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new TreasureToken(), 1, true),
                 StaticFilters.FILTER_PERMANENT_CREATURE, TargetController.ANY, SetTargetPointer.NONE, false
-        ).setTriggersOnceEachTurn(true).setTriggerPhrase("Whenever one or more players sacrifice one or more creatures, "));
+        ).setTriggersLimitEachTurn(1).setTriggerPhrase("Whenever one or more players sacrifice one or more creatures, "));
     }
 
     private ForgeNeverwinterCharlatan(final ForgeNeverwinterCharlatan card) {

@@ -9,7 +9,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -27,7 +27,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SkullmaneBaku extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(RemovedCountersForCostValue.instance);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(GetXValue.instance);
 
     public SkullmaneBaku(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

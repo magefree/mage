@@ -58,9 +58,8 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
         filter.add(TokenPredicate.FALSE);
     }
 
-    public VerdantSuccessionTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new VerdantSuccessionEffect());
-        this.optional = true;
+    VerdantSuccessionTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new VerdantSuccessionEffect(), true);
     }
 
     private VerdantSuccessionTriggeredAbility(final VerdantSuccessionTriggeredAbility ability) {

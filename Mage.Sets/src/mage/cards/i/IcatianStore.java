@@ -12,7 +12,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -44,7 +44,7 @@ public final class IcatianStore extends CardImpl {
         // {tap}, Remove any number of storage counters from Icatian Store: Add {W} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.WhiteMana(1),
-                RemovedCountersForCostValue.instance,
+                GetXValue.instance,
                 new TapSourceCost(),
                 "Add {W} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));

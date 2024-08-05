@@ -1,6 +1,6 @@
 package mage.cards.p;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class PrimalMight extends CardImpl {
 
         // Target creature you control gets +X/+X until end of turn. Then it fights up to one target creature you don’t control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(GetXValue.instance, GetXValue.instance, Duration.EndOfTurn));
         //
         this.getSpellAbility().addEffect(new FightTargetsEffect()
                 .concatBy("Then")

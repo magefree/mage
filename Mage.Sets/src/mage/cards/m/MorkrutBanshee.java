@@ -21,7 +21,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class MorkrutBanshee extends CardImpl {
 
-    private static final String staticText = "<i>Morbid</i> &mdash; When {this} enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.";
+    private static final String staticText = "<i>Morbid</i> &mdash; When {this} enters, if a creature died this turn, target creature gets -4/-4 until end of turn.";
 
     public MorkrutBanshee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

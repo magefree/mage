@@ -8,6 +8,7 @@ Classic Sixth Edition|6ED|
 Seventh Edition|7ED|
 Eighth Edition|8ED|
 Ninth Edition|9ED|
+Alchemy: Dominaria|YDMU|
 Alchemy: Innistrad|Y22|
 Adventures in the Forgotten Realms|AFR|
 Forgotten Realms Commander|AFC|
@@ -33,6 +34,7 @@ Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
 Bloomburrow|BLB|
+Bloomburrow Commander|BLC|
 Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
 Commander 2015 Edition|C15|
@@ -81,6 +83,7 @@ Duel Decks: Nissa vs. Ob Nixilis|DDR|
 Duel Decks: Mind vs. Might|DDS|
 Duel Decks: Merfolk vs. Goblins|DDT|
 Duels of the Planeswalkers|DPA|
+Duskmourn: House of Horror|DSK|
 Dragon's Maze|DGM|
 Dissension|DIS|
 Dark Ascension|DKA|
@@ -107,6 +110,7 @@ Fallout|PIP|
 Fallen Empires|FEM|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
+Foundations|FDN|
 Future Sight|FUT|
 Global Series: Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|
@@ -180,6 +184,7 @@ Launch Party|MLP|
 Modern Horizons|MH1|
 Modern Horizons 2|MH2|
 Modern Horizons 3|MH3|
+Modern Horizons 3 Commander|M3C|
 Modern Masters 2015|MM2|
 Modern Masters 2017|MM3|
 Modern Masters|MMA|
@@ -197,6 +202,7 @@ Odyssey|ODY|
 Oath of the Gatewatch|OGW|
 Onslaught|ONS|
 Outlaws of Thunder Junction|OTJ|
+Outlaws of Thunder Junction Commander|OTC|
 The Big Score|BIG|
 Magic Origins|ORI|
 Phyrexia: All Will Be One|ONE|

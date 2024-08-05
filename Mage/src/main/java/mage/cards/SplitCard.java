@@ -77,8 +77,9 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            game.getState().setZone(getLeftHalfCard().getId(), toZone);
-            game.getState().setZone(getRightHalfCard().getId(), toZone);
+            Zone currentZone = game.getState().getZone(getId());
+            game.getState().setZone(getLeftHalfCard().getId(), currentZone);
+            game.getState().setZone(getRightHalfCard().getId(), currentZone);
             return true;
         }
         return false;
@@ -188,8 +189,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
     public List<String> getRules() {
         Abilities<Ability> sourceAbilities = this.getAbilities();
         List<String> res = CardUtil.getCardRulesWithAdditionalInfo(
-                this.getId(),
-                this.getName(),
+                this,
                 sourceAbilities,
                 sourceAbilities
         );
@@ -204,8 +204,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         Abilities<Ability> sourceAbilities = this.getAbilities(game);
         List<String> res = CardUtil.getCardRulesWithAdditionalInfo(
                 game,
-                this.getId(),
-                this.getName(),
+                this,
                 sourceAbilities,
                 sourceAbilities
         );

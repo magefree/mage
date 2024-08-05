@@ -23,8 +23,8 @@ public enum TokenRepository {
     // - additional card name for controller like "Morph: face up name"
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL = "Face Down";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST = "Manifest";
+    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK = "Cloak";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MORPH = "Morph";
-    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH = "Megamorph";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE = "Disguise";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL = "Foretell";
     public static final String XMAGE_IMAGE_NAME_COPY = "Copy";
@@ -32,6 +32,8 @@ public enum TokenRepository {
     public static final String XMAGE_IMAGE_NAME_DAY = "Day";
     public static final String XMAGE_IMAGE_NAME_NIGHT = "Night";
     public static final String XMAGE_IMAGE_NAME_THE_MONARCH = "The Monarch";
+    public static final String XMAGE_IMAGE_NAME_RADIATION = "Radiation";
+    public static final String XMAGE_IMAGE_NAME_HELPER_EMBLEM = "Helper Emblem";
 
     private static final Logger logger = Logger.getLogger(TokenRepository.class);
 
@@ -277,21 +279,19 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 3, "https://api.scryfall.com/cards/tfrf/4/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST, 4, "https://api.scryfall.com/cards/tncc/3/en?format=image"));
 
-        // Morph
+        // Morph and Megamorph
         // https://scryfall.com/search?q=Morph+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 1, "https://api.scryfall.com/cards/tktk/11/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 2, "https://api.scryfall.com/cards/ta25/15/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MORPH, 3, "https://api.scryfall.com/cards/tc19/27/en?format=image"));
 
-        // Megamorph
-        // warning, mtg don't have megamorph tokens yet so use morph instead (users will see the diff by card name and face up ability text)
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH, 1, "https://api.scryfall.com/cards/tktk/11/en?format=image"));
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH, 2, "https://api.scryfall.com/cards/ta25/15/en?format=image"));
-        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_MEGAMORPH, 3, "https://api.scryfall.com/cards/tc19/27/en?format=image"));
-
         // Disguise
         // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
+
+        // Cloak
+        // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
 
         // Foretell
         // https://scryfall.com/search?q=Foretell+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
@@ -302,6 +302,13 @@ public enum TokenRepository {
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 1, "https://api.scryfall.com/cards/tonc/22/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 2, "https://api.scryfall.com/cards/tcn2/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 3, "https://api.scryfall.com/cards/tltc/15/en?format=image"));
+
+        // Radiation (for trigger)
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_RADIATION, 1, "https://api.scryfall.com/cards/tpip/22/en?format=image"));
+
+        // Helper emblem (for global card hints)
+        // use backface for it
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_HELPER_EMBLEM, 1, "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg"));
 
         return res;
     }

@@ -23,7 +23,7 @@ public final class SpitfireLagac extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // Landfall — Whenever a land enters the battlefield under your control, Spitfire Lagac deals 1 damage to each opponent.
+        // Landfall — Whenever a land you control enters, Spitfire Lagac deals 1 damage to each opponent.
         this.addAbility(new LandfallAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), false));
     }
 

@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,7 +18,7 @@ public final class Syncopate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // Counter target spell unless its controller pays {X}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.REGULAR, true));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(GetXValue.instance, true));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 

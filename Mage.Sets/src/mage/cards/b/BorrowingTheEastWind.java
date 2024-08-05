@@ -2,7 +2,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.HorsemanshipAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class BorrowingTheEastWind extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{G}");
 
         // Borrowing the East Wind deals X damage to each creature with horsemanship and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.REGULAR, filter));                                                                                                  }
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(GetXValue.instance, filter));                                                                                                  }
 
     private BorrowingTheEastWind(final BorrowingTheEastWind card) {
         super(card);

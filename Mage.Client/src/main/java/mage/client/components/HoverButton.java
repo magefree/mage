@@ -1,32 +1,27 @@
 package mage.client.components;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import mage.client.util.Command;
+import mage.client.util.GUISizeHelper;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
-import javax.swing.*;
-
-import mage.client.util.Command;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Image button with hover.
+ * GUI component. Image button with mouse hover and GUI scale support
  *
- * @author nantuko
+ * @author nantuko, JayDi85
  */
 public class HoverButton extends JPanel implements MouseListener {
 
-    static final int TOP_TEXT_IMAGE_GAP = 3;
+    float guiScaleMod = 1.0f;
 
     private Image image;
     private Image hoverImage;
@@ -37,15 +32,18 @@ public class HoverButton extends JPanel implements MouseListener {
     private Rectangle buttonSize;
     private String text;
     private boolean textAlwaysVisible = false;
+
+    // real offset setup in constructor due gui scale
     private int textOffsetY = 0;
     private int textOffsetButtonY = 2;
     private int textOffsetX = -1;
     private int topTextOffsetX = -1;
+
     private Dimension overlayImageSize;
 
     private String topText;
     private Image topTextImage;
-    private Image topTextImageRight;
+    private final List<Image> topTextImagesRight = new ArrayList<>();
     private String centerText;
 
     private boolean wasHovered = false;
@@ -58,15 +56,15 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command onHover = null;
     private Color textColor = Color.white;
     private Color topTextColor = null;
-    private final Rectangle centerTextArea = new Rectangle(5, 18, 75, 40);
+    private final Rectangle centerTextArea;
     private Color centerTextColor = new Color(200, 210, 0, 200);
     private Color origCenterTextColor = new Color(200, 210, 0, 200);
     private final Color textBGColor = Color.black;
 
-    static final Font textFont = new Font("Arial", Font.PLAIN, 12);
-    static final Font textFontMini = new Font("Arial", Font.PLAIN, 11);
-    static final Font textSetFontBoldMini = new Font("Arial", Font.BOLD, 12);
-    static final Font textSetFontBold = new Font("Arial", Font.BOLD, 14);
+    final Font textFont;
+    final Font textFontMini;
+    final Font textSetFontBoldMini;
+    final Font textSetFontBold;
 
     private boolean useMiniFont = false;
 
@@ -80,33 +78,60 @@ public class HoverButton extends JPanel implements MouseListener {
     private boolean doGainFade = true;
 
     public HoverButton(String text, Image image, Rectangle size) {
-        this(text, image, image, null, image, size);
+        this(text, image, image, image, image, size);
         if (image == null) {
             throw new IllegalArgumentException("Image can't be null");
         }
     }
 
     public HoverButton(String text, Image image, Image hover, Image disabled, Rectangle size) {
-        this(text, image, hover, null, disabled, size);
+        this(text, image, hover, null, disabled, size, 1.0f);
+    }
+
+    public HoverButton(String text, Image image, Image hover, Image disabled, Rectangle size, float guiScaleMod) {
+        this(text, image, hover, null, disabled, size, guiScaleMod);
     }
 
     public HoverButton(String text, Image image, Image hover, Image selected, Image disabled, Rectangle size) {
+        this(text, image, hover, selected, disabled, size, 1.0f);
+    }
+
+    public HoverButton(String text, Image image, Image hover, Image selected, Image disabled, Rectangle size, float guiScaleMod) {
         this.image = image;
         this.hoverImage = hover;
         this.selectedImage = selected;
         this.disabledImage = disabled;
-        this.imageSize = size;
+        this.imageSize = size; // already scaled
         this.text = text;
+        this.guiScaleMod = guiScaleMod;
         setOpaque(false);
         addMouseListener(this);
+
+        // late init due gui scale settings
+        this.setFont(this.getFont().deriveFont(sizeMod(this.getFont().getSize2D())));
+        this.centerTextArea = new Rectangle(sizeMod(5), sizeMod(18), sizeMod(75), sizeMod(40));
+        textFont = new Font("Arial", Font.PLAIN, sizeMod(12));
+        textFontMini = new Font("Arial", Font.PLAIN, sizeMod(11));
+        textSetFontBoldMini = new Font("Arial", Font.BOLD, sizeMod(12));
+        textSetFontBold = new Font("Arial", Font.BOLD, sizeMod(14));
+
+        textOffsetY = 0;
+        textOffsetButtonY = sizeMod(2);
+        textOffsetX = -1; // no scale, it's calc on first usage
+        topTextOffsetX = -1; // no scale, it's calc on first usage
     }
 
-    public HoverButton(HoverButton button) {
-        this(button.text, button.image, button.hoverImage, button.selectedImage, button.disabledImage, button.imageSize);
+    private int sizeMod(int value) {
+        return GUISizeHelper.guiSizeScale(value, this.guiScaleMod);
+    }
+
+    private float sizeMod(float value) {
+        return GUISizeHelper.guiSizeScale(value, this.guiScaleMod);
     }
 
     @Override
     public void paintComponent(Graphics g) {
+        // must ignore look and fill, so no calls of super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         if (isEnabled()) {
             if (isHovered || textAlwaysVisible) {
@@ -152,15 +177,18 @@ public class HoverButton extends JPanel implements MouseListener {
             }
             topTextOffsetX = calculateOffsetForTop(g2d, topText);
             g2d.setColor(textBGColor);
-            g2d.drawString(topText, topTextOffsetX + 1, 14);
+            g2d.drawString(topText, topTextOffsetX + sizeMod(1), sizeMod(14));
             g2d.setColor(topTextColor != null ? topTextColor : textColor);
-            g2d.drawString(topText, topTextOffsetX, 13);
+            g2d.drawString(topText, topTextOffsetX, sizeMod(13));
         }
         if (topTextImage != null) {
-            g.drawImage(topTextImage, 4, 3, this);
+            g.drawImage(topTextImage, sizeMod(4), sizeMod(3), this);
         }
-        if (topTextImageRight != null) {
-            g.drawImage(topTextImageRight, this.getWidth() - 20, 3, this);
+
+        int offset = 0;
+        for (Image img : topTextImagesRight) {
+            g.drawImage(img, this.getWidth() - sizeMod(20), sizeMod(3) + offset, this);
+            offset += sizeMod(20);
         }
 
         if (centerText != null) {
@@ -174,16 +202,16 @@ public class HoverButton extends JPanel implements MouseListener {
             } else if (val > 99) {
                 fontSize = 34;
             }
-            drawCenteredStringWOutline(g2d, centerText, centerTextArea, new Font("Arial", Font.BOLD, fontSize));
+            drawCenteredStringWOutline(g2d, centerText, centerTextArea, new Font("Arial", Font.BOLD, sizeMod(fontSize)));
         }
         g2d.setColor(textColor);
         if (overlayImage != null) {
-            g.drawImage(overlayImage, (imageSize.width - overlayImageSize.width) / 2, 10, this);
+            g.drawImage(overlayImage, (imageSize.width - overlayImageSize.width) / 2, sizeMod(10), this);
         } else if (set != null) {
             // draw only if it is not current tab
             if (!drawSet) {
                 g2d.setFont(textSetFontBoldMini);
-                g2d.drawString(set, 5, 25);
+                g2d.drawString(set, sizeMod(5), sizeMod(25));
             }
         }
 
@@ -191,8 +219,8 @@ public class HoverButton extends JPanel implements MouseListener {
             g2d.setFont(textSetFontBold);
             int w = (int) (getWidth() / 2.0);
             int h = (int) (getHeight() / 2.0);
-            int dy = overlayImage == null ? 15 : 25;
-            g2d.translate(w + 5, h + dy);
+            int dy = overlayImage == null ? sizeMod(15) : sizeMod(25);
+            g2d.translate(w + sizeMod(5), h + dy);
             g2d.rotate(-Math.PI / 2.0);
             g2d.drawString(set, 0, 0);
         }
@@ -203,6 +231,7 @@ public class HoverButton extends JPanel implements MouseListener {
     }
 
     private int calculateOffset(Graphics2D g2d) {
+        // already gui scaled here
         if (textOffsetX == -1) { // calculate once
             FontRenderContext frc = g2d.getFontRenderContext();
             int textWidth = (int) textFont.getStringBounds(text, frc).getWidth();
@@ -222,6 +251,7 @@ public class HoverButton extends JPanel implements MouseListener {
     }
 
     private int calculateOffsetForTop(Graphics2D g2d, String text) {
+        // already scaled calc
         if (topTextOffsetX == -1) { // calculate once
             FontRenderContext frc = g2d.getFontRenderContext();
             int textWidth = (int) textFont.getStringBounds(text, frc).getWidth();
@@ -232,13 +262,10 @@ public class HoverButton extends JPanel implements MouseListener {
         return topTextOffsetX;
     }
 
-    public void setTextColor(Color textColor) {
-        this.textColor = textColor;
-    }
-
     /**
      * Overrides textColor for the upper text if non-null.
      * If null, return back to textColor.
+     *
      * @param textColor
      */
     public void setTopTextColor(Color textColor) {
@@ -247,7 +274,7 @@ public class HoverButton extends JPanel implements MouseListener {
 
     public void setOverlayImage(Image image) {
         this.overlayImage = image;
-        this.overlayImageSize = new Dimension(image.getWidth(null), image.getHeight(null));
+        this.overlayImageSize = new Dimension(image.getWidth(null), image.getHeight(null)); // TODO: need sizeMod?
     }
 
     @Override
@@ -283,10 +310,16 @@ public class HoverButton extends JPanel implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
 
+    /**
+     * Set on click action
+     */
     public void setObserver(Command observer) {
         this.observer = observer;
     }
 
+    /**
+     * Set on mouse entered action
+     */
     public void setOnHover(Command onHover) {
         this.onHover = onHover;
     }
@@ -321,6 +354,10 @@ public class HoverButton extends JPanel implements MouseListener {
         this.isSelected = !this.isSelected;
     }
 
+    public String getText() {
+        return this.text;
+    }
+
     public void setText(String text) {
         this.text = text;
     }
@@ -334,13 +371,13 @@ public class HoverButton extends JPanel implements MouseListener {
     }
 
     public void update(String text, Image image, Image hover, Image selected, Image disabled, Rectangle size) {
+        this.text = text;
         this.image = image;
         this.hoverImage = hover;
         this.selectedImage = selected;
         this.disabledImage = disabled;
         this.imageSize = size;
-        this.text = text;
-        repaint();
+        this.invalidate();
     }
 
     public void execute() {
@@ -358,8 +395,12 @@ public class HoverButton extends JPanel implements MouseListener {
         this.textOffsetX = -1; // rest for new calculation
     }
 
-    public void setTopTextImageRight(Image topTextImage) {
-        this.topTextImageRight = topTextImage;
+    public void addTopTextImageRight(Image topTextImage) {
+        this.topTextImagesRight.add(topTextImage);
+    }
+
+    public void clearTopTextImagesRight() {
+        this.topTextImagesRight.clear();
     }
 
     public void setCenterText(String centerText) {
@@ -377,7 +418,7 @@ public class HoverButton extends JPanel implements MouseListener {
     /**
      * Draw a String centered in the middle of a Rectangle.
      *
-     * @param g The Graphics instance.
+     * @param g    The Graphics instance.
      * @param text The String to draw.
      * @param rect The Rectangle to center the text in.
      * @param font

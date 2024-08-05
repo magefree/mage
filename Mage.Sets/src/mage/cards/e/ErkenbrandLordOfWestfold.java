@@ -29,7 +29,7 @@ public final class ErkenbrandLordOfWestfold extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Erkenbrand, Lord of Westfold or another Human enters the battlefield under your control, creatures you control get +1/+0 until end of turn.
+        // Whenever Erkenbrand, Lord of Westfold or another Human you control enters, creatures you control get +1/+0 until end of turn.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BoostControlledEffect(1, 0, Duration.EndOfTurn),
                 filter, false, true

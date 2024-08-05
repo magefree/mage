@@ -60,7 +60,7 @@ public final class MinscBooTimelessHeroes extends CardImpl {
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new BooToken()),
                 true,
-                "When {this} enters the battlefield and at the beginning of your upkeep, ",
+                "When {this} enters and at the beginning of your upkeep, ",
                 new EntersBattlefieldTriggeredAbility(null, false),
                 new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false))
         );

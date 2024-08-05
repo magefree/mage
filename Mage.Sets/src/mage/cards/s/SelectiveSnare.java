@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -16,6 +15,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,12 +57,12 @@ enum SelectiveSnareAdjuster implements TargetAdjuster {
         if (player == null) {
             return;
         }
-        Choice choice = new ChoiceCreatureType();
+        Choice choice = new ChoiceCreatureType(game, ability);
         if (!player.choose(Outcome.Benefit, choice, game)) {
             return;
         }
-        SubType subType = SubType.byDescription(choice.getChoice());
-        int xValue = ability.getManaCostsToPay().getX();
+        SubType subType = SubType.byDescription(choice.getChoiceKey());
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterPermanent filter = new FilterCreaturePermanent(subType.toString() + " creatures");
         filter.add(subType.getPredicate());
         ability.getTargets().clear();

@@ -7,7 +7,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -90,7 +90,7 @@ class OrcusPrinceOfUndeathBoostEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
+        int xValue = GetXValue.instance.calculate(game, source, this);
         game.addEffect(new BoostAllEffect(-xValue, -xValue, Duration.EndOfTurn, true), source);
         controller.loseLife(xValue, game, source, false);
         return true;
@@ -141,7 +141,7 @@ enum OrcusPrinceOfUndeathAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ManacostVariableValue.ETB.calculate(game, ability, null);
+        int xValue = GetXValue.instance.calculate(game, ability, null);
         FilterCreatureCard filter = new FilterCreatureCard("creature cards with total mana value " + xValue + " or less from your graveyard");
         for (Mode mode : ability.getModes().values()) {
             boolean setTarget = false;

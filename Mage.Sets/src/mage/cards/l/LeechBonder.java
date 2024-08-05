@@ -102,11 +102,11 @@ class LeechBonderEffect extends OneShotEffect {
         }
 
         Set<String> possibleChoices = new LinkedHashSet<>(fromPermanent.getCounters(game).keySet());
-        if (possibleChoices.size() == 0) {
+        if (possibleChoices.isEmpty()) {
             return false;
         }
 
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceImpl(false);
         choice.setChoices(possibleChoices);
         if (controller.choose(outcome, choice, game)) {
             String chosen = choice.getChoice();

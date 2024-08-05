@@ -132,7 +132,7 @@ class JerrenCorruptedBishopTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} enters the battlefield or another nontoken Human you control dies, " +
+        return "Whenever {this} enters or another nontoken Human you control dies, " +
                 "you lose 1 life and create a 1/1 white Human creature token.";
     }
 }

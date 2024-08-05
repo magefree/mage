@@ -351,6 +351,6 @@ public enum ThemeType {
         }
 
         // reload card icons and other rendering things from cache - it can depend on current theme
-        GUISizeHelper.refreshGUIAndCards();
+        GUISizeHelper.refreshGUIAndCards(true);
     }
 }

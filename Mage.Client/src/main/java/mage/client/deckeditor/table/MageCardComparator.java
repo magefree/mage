@@ -6,6 +6,8 @@ import mage.cards.RateCard;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 
+import java.util.Collections;
+
 /**
  * {@link MageCard} comparator. Used to sort cards in Deck Editor Table View
  * pane.
@@ -83,8 +85,8 @@ public class MageCardComparator implements CardViewComparator {
                 bCom = Integer.parseInt(b.getCardNumber().replaceAll("[\\D]", ""));
                 break;
             case 9:
-                aCom = RateCard.rateCard(a, null);
-                bCom = RateCard.rateCard(b, null);
+                aCom = RateCard.rateCard(a, Collections.emptyList());
+                bCom = RateCard.rateCard(b, Collections.emptyList());
                 break;
             case 10:
                 aCom = a.getOriginalColorIdentity();

@@ -123,14 +123,23 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
     }
 
     /**
-     * So I copied Jace, Vryns Prodigy with Clever Impersonator (it was tapped
-     * and I needed a blocker for a token...), and Jace got to survive until the
-     * next turn. When I looted, he flipped, and I got an error message I
-     * couldn't get rid of, forcing me to concede. I'm not sure what the correct
-     * outcome is rules-wise.
+     * 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
+     * or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
+     * that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
+     * its current zone.
+     * <p>
+     * * So I copied Jace, Vryns Prodigy with Clever Impersonator (it was tapped
+     * * and I needed a blocker for a token...), and Jace got to survive until the
+     * * next turn. When I looted, he flipped, and I got an error message I
+     * * couldn't get rid of, forcing me to concede. I'm not sure what the correct
+     * * outcome is rules-wise.
      */
     @Test
     public void testCopyCreatureOfFlipPlaneswalker() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        addCard(Zone.LIBRARY, playerA, "Swamp"); // for discard
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
@@ -143,23 +152,24 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
-        setChoice(playerA, "Jace, Vryn's Prodigy");
-        setChoice(playerA, "Jace, Vryn's Prodigy[only copy]"); // keep the copied Jace
+        setChoice(playerA, true); // yes to copy
+        setChoice(playerA, "Jace, Vryn's Prodigy"); // copy Jace
+        setChoice(playerA, "Jace, Vryn's Prodigy[only copy]"); // keep the copied Jace under legend rule
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card");
-        setChoice(playerA, "Pillarfield Ox");
+        setChoice(playerA, "Swamp");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerA, "Jace, Vryn's Prodigy", 1);
-        assertPermanentCount(playerA, "Pillarfield Ox", 1);
-
+        assertPermanentCount(playerA, "Pillarfield Ox", 0);
+        assertExileCount(playerA, "Clever Impersonator", 1); // Clone does not come back as per 712.14a..
     }
 
     /**
      * Reported bug:
-     *      Could not use Clever Impersonator to copy Dawn's Reflection
+     * Could not use Clever Impersonator to copy Dawn's Reflection
      */
     @Test
     public void dawnsReflectionCopiedByImpersonator() {

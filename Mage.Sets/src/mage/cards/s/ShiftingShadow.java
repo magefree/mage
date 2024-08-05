@@ -124,7 +124,7 @@ class ShiftingShadowEffect extends OneShotEffect {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             permanent.destroy(source, game);
-            game.getState().processAction(game);
+            game.processAction();
         }
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {

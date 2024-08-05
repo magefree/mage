@@ -63,7 +63,9 @@ public class HelperPanel extends JPanel {
 
     // originalId of feedback causing ability
     private UUID originalId;
-    private String message;
+    private String basicMessage; // normal size
+    private String secondaryMessage; // smaller size
+    private String autoAnswerMessage; // Filtered version of message which is used for remembering answers to text
 
     private UUID gameId;
     private boolean gameNeedFeedback = false;
@@ -99,38 +101,20 @@ public class HelperPanel extends JPanel {
 
     private void setGUISize() {
         //this.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
-        textAreaScrollPane.setMaximumSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
-        textAreaScrollPane.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
+        textAreaScrollPane.setMaximumSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameFeedbackPanelMaxHeight));
+        textAreaScrollPane.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameFeedbackPanelMaxHeight));
 
 //        dialogTextArea.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
 //        dialogTextArea.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
 //        buttonContainer.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogButtonHeight + 4));
 //        buttonContainer.setMinimumSize(new Dimension(160, GUISizeHelper.gameDialogButtonHeight + 20));
 //        buttonContainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, GUISizeHelper.gameDialogButtonHeight + 4));
-        btnLeft.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnRight.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnUndo.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnLeft.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnRight.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnSpecial.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnUndo.setFont(GUISizeHelper.gameFeedbackPanelFont);
 
-        // update text fonts
-        if (message != null) {
-            int pos1 = this.message.indexOf("font-size:");
-
-            if (pos1 > 0) {
-                int pos2 = this.message.indexOf("font-size:", pos1 + 10);
-
-                String newMessage;
-                if (pos2 > 0) {
-                    // 2 sizes: big + small // TODO: 2 sizes for compatibility only? On 04.02.2018 can't find two size texts (JayDi85)
-                    newMessage = this.message.substring(0, pos1 + 10) + GUISizeHelper.gameDialogAreaFontSizeBig + this.message.substring(pos1 + 12);
-                    newMessage = newMessage.substring(0, pos1 + 10) + GUISizeHelper.gameDialogAreaFontSizeSmall + newMessage.substring(pos1 + 12);
-                } else {
-                    // 1 size: small
-                    newMessage = this.message.substring(0, pos1 + 10) + GUISizeHelper.gameDialogAreaFontSizeSmall + this.message.substring(pos1 + 12);
-                }
-                setBasicMessage(newMessage);
-            }
-        }
+        this.redrawMessages();
 
         autoSizeButtonsAndFeedbackState();
 
@@ -430,9 +414,10 @@ public class HelperPanel extends JPanel {
         }
 
         // search max const size
-        int constButtonSizeW = GUISizeHelper.gameDialogButtonWidth * 200 / 100;
+        // TODO: research and test sizing - need improve (e.g. for long messages)?
+        int constButtonSizeW = GUISizeHelper.gameFeedbackPanelButtonWidth * 200 / 100;
         int constGridSizeW = buttons.size() * constButtonSizeW + BUTTONS_H_GAP * (buttons.size() - 1);
-        int constGridSizeH = Math.round(GUISizeHelper.gameDialogButtonHeight * 150 / 100);
+        int constGridSizeH = Math.round(GUISizeHelper.gameFeedbackPanelButtonHeight * 150 / 100);
 
         if (needButtonSizeW < constButtonSizeW) {
             // same size mode (grid)
@@ -457,13 +442,22 @@ public class HelperPanel extends JPanel {
         this.originalId = originalId;
     }
 
-    public void setBasicMessage(String message) {
-        this.message = message;
-        this.dialogTextArea.setText(message, this.getWidth());
+    public void setMessages(String basicMessage, String secondaryMessage) {
+        this.basicMessage = basicMessage;
+        this.secondaryMessage = secondaryMessage;
+        redrawMessages();
     }
 
-    public void setTextArea(String message) {
-        this.dialogTextArea.setText(message, this.getWidth());
+    private void redrawMessages() {
+        String panelText = this.basicMessage;
+        if (this.secondaryMessage != null) {
+            panelText += "<div style='font-size:" + GUISizeHelper.gameFeedbackPanelExtraMessageFontSize + "pt'>" + secondaryMessage + "</div>";
+        }
+        this.dialogTextArea.setText(panelText, this.getWidth());
+    }
+
+    public void setAutoAnswerMessage(String autoAnswerMessage) {
+        this.autoAnswerMessage = autoAnswerMessage;
     }
 
     @Override
@@ -523,19 +517,23 @@ public class HelperPanel extends JPanel {
     public void handleAutoAnswerPopupMenuEvent(ActionEvent e) {
         switch (e.getActionCommand()) {
             case CMD_AUTO_ANSWER_ID_YES:
-                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_YES, gameId, originalId.toString() + '#' + message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_YES, gameId,
+                        originalId.toString() + '#' + autoAnswerMessage);
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_ID_NO:
-                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_NO, gameId, originalId.toString() + '#' + message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_NO, gameId,
+                        originalId.toString() + '#' + autoAnswerMessage);
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_NAME_YES:
-                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_YES, gameId, message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_YES, gameId,
+                        autoAnswerMessage);
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_NAME_NO:
-                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_NO, gameId, message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_NO, gameId,
+                        autoAnswerMessage);
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_RESET_ALL:

@@ -34,7 +34,7 @@ public final class SosukesSummons extends CardImpl {
         // Create two 1/1 green Snake creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), 2));
 
-        // Whenever a nontoken Snake enters the battlefield under your control, you may return Sosuke's Summons from your graveyard to your hand.
+        // Whenever a nontoken Snake you control enters, you may return Sosuke's Summons from your graveyard to your hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToHandEffect(),

@@ -5,12 +5,15 @@ import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -28,7 +31,9 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     private static final Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
     private static final MageVersion version = new MageVersion(ConsoleFrame.class);
 
-    private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService PING_SENDER_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_PING_SENDER)
+    );
 
     /**
      * @return the session
@@ -63,11 +68,18 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
             session = new SessionImpl(this);
             connectDialog = new ConnectDialog();
+
+            // try auto connect
+            if (!autoConnect()) {
+                SwingUtilities.invokeLater(() -> {
+                    connectDialog.showDialog(this);
+                });
+            }
         } catch (Exception ex) {
             logger.fatal("", ex);
         }
 
-        pingTaskExecutor.scheduleAtFixedRate(() -> session.ping(), 20, 20, TimeUnit.SECONDS);
+        PING_SENDER_EXECUTOR.scheduleAtFixedRate(() -> session.ping(), 20, 20, TimeUnit.SECONDS);
     }
 
     public boolean connect(Connection connection) {
@@ -76,6 +88,29 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             return true;
         }
         return false;
+    }
+
+    public boolean autoConnect() {
+        boolean needAutoConnect = Boolean.parseBoolean(ConsoleFrame.getPreferences().get("autoConnect", "false"));
+        boolean status = false;
+        if (needAutoConnect) {
+            String server = ConsoleFrame.getPreferences().get("serverAddress", "localhost");
+            logger.info("Auto-connecting to " + server);
+            Connection newConnection = new Connection();
+            newConnection.setHost(server);
+            newConnection.setPort(ConsoleFrame.getPreferences().getInt("serverPort", 17171));
+            newConnection.setUsername(SessionImpl.ADMIN_NAME);
+            newConnection.setAdminPassword(ConsoleFrame.getPreferences().get("password", ""));
+            newConnection.setProxyType(Connection.ProxyType.valueOf(ConsoleFrame.getPreferences().get("proxyType", "NONE").toUpperCase(Locale.ENGLISH)));
+            if (!newConnection.getProxyType().equals(Connection.ProxyType.NONE)) {
+                newConnection.setProxyHost(ConsoleFrame.getPreferences().get("proxyAddress", ""));
+                newConnection.setProxyPort(ConsoleFrame.getPreferences().getInt("proxyPort", 0));
+                newConnection.setProxyUsername(ConsoleFrame.getPreferences().get("proxyUsername", ""));
+                newConnection.setProxyPassword(ConsoleFrame.getPreferences().get("proxyPassword", ""));
+            }
+            status = connect(newConnection);
+        }
+        return status;
     }
 
     public void setStatusText(String status) {
@@ -176,7 +211,8 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        logger.info("Starting MAGE server console version " + version);
+        logger.info("Starting MAGE ADMIN version " + version);
+        logger.info("Java version: " + System.getProperty("java.version"));
         logger.info("Logging level: " + logger.getEffectiveLevel());
 
         java.awt.EventQueue.invokeLater(() -> {
@@ -211,7 +247,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void disconnected(boolean askToReconnect) {
+    public void disconnected(boolean askToReconnect, boolean keepMySessionActive) {
         if (SwingUtilities.isEventDispatchThread()) {
             consolePanel1.stop();
             setStatusText("Not connected");

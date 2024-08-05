@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ColorAssignment;
+import mage.abilities.assignment.common.ColorAssignment;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
 import mage.constants.CardType;

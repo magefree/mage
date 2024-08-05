@@ -36,12 +36,12 @@ public final class VengefulRebel extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), false),
                 RevoltCondition.instance,
-                "When {this} enters the battlefield, if a permanent you controlled left the battlefield this turn, "
+                "When {this} enters, if a permanent you controlled left the battlefield this turn, "
                 + "target creature an opponent controls gets -3/-3 until end of turn"
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.setAbilityWord(AbilityWord.REVOLT);
-        this.addAbility(ability, new RevoltWatcher());
+        this.addAbility(ability.addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private VengefulRebel(final VengefulRebel card) {

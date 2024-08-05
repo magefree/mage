@@ -30,7 +30,7 @@ public class TargetTappedPermanentAsYouCast extends TargetPermanent {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        return game.getBattlefield().getAllActivePermanents(getFilter(), game).stream()
+        return game.getBattlefield().getActivePermanents(getFilter(), source.getControllerId(), source, game).stream()
                 .filter(Permanent::isTapped)
                 .map(Permanent::getId)
                 .collect(Collectors.toSet());
@@ -38,7 +38,7 @@ public class TargetTappedPermanentAsYouCast extends TargetPermanent {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        return game.getBattlefield().getAllActivePermanents(getFilter(), game).stream()
+        return game.getBattlefield().getActivePermanents(getFilter(), source.getControllerId(), source, game).stream()
                 .anyMatch(Permanent::isTapped);
     }
 

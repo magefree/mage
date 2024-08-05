@@ -84,6 +84,13 @@ public class MeldEffect extends OneShotEffect {
         if (sourcePermanent == null || meldWithPermanent == null) {
             return false;
         }
+
+        // melding in exile zone, rules:
+        // When two cards are exiled and melded, they each leave the battlefield, then return together as one
+        // new untapped object with no relation to either of the objects that left the battlefield.
+        // Counters, Auras, Equipment, and other effects that affected those two cards don't affect
+        // the melded permanent.
+
         Cards cards = new CardsImpl(sourcePermanent);
         cards.add(meldWithPermanent);
         controller.moveCards(cards, Zone.EXILED, source, game);

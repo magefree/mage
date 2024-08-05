@@ -2,6 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.SquadAbility;
@@ -29,7 +30,7 @@ public final class SicarianInfiltrator extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Squad {2}
-        this.addAbility(new SquadAbility());
+        this.addAbility(new SquadAbility(new GenericManaCost(2)));
 
         // Benediction of Omnissiah -- When Sicarian Infiltrator enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(

@@ -15,6 +15,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,11 +24,11 @@ import java.util.UUID;
  */
 public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
 
-    protected boolean optional;
-    protected boolean leavesTheBattlefieldTrigger;
-    private boolean triggersOnceEachTurn = false;
+    private boolean optional;
+    private boolean leavesTheBattlefieldTrigger;
+    private int triggerLimitEachTurn = Integer.MAX_VALUE; // for "triggers only once|twice each turn"
     private boolean doOnlyOnceEachTurn = false;
-    protected boolean replaceRuleText = false; // if true, replace "{this}" with "it" in effect text
+    private boolean replaceRuleText = false; // if true, replace "{this}" with "it" in effect text
     private GameEvent triggerEvent = null;
     private String triggerPhrase = null;
 
@@ -36,7 +37,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     protected TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
-        super(AbilityType.TRIGGERED, zone);
+        super(AbilityType.TRIGGERED_NONMANA, zone);
         setLeavesTheBattlefieldTrigger(false);
         if (effect != null) {
             addEffect(effect);
@@ -54,7 +55,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         super(ability);
         this.optional = ability.optional;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
-        this.triggersOnceEachTurn = ability.triggersOnceEachTurn;
+        this.triggerLimitEachTurn = ability.triggerLimitEachTurn;
         this.doOnlyOnceEachTurn = ability.doOnlyOnceEachTurn;
         this.replaceRuleText = ability.replaceRuleText;
         this.triggerEvent = ability.triggerEvent;
@@ -70,13 +71,37 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
     }
 
+    // Used for triggers with a per-turn limit.
+    private String getKeyLastTurnTriggered(Game game) {
+        return CardUtil.getCardZoneString(
+                "lastTurnTriggered|" + getOriginalId(), getSourceId(), game
+        );
+    }
+
+    // Used for triggers with a per-turn limit.
+    private String getKeyLastTurnTriggeredCount(Game game) {
+        return CardUtil.getCardZoneString(
+                "lastTurnTriggeredCount|" + getOriginalId(), getSourceId(), game
+        );
+    }
+
     private void setLastTrigger(Game game) {
-        if (!triggersOnceEachTurn) {
+        if (triggerLimitEachTurn == Integer.MAX_VALUE) {
             return;
         }
-        game.getState().setValue(CardUtil.getCardZoneString(
-                "lastTurnTriggered" + originalId, sourceId, game
-        ), game.getTurnNum());
+        String keyLastTurnTriggered = getKeyLastTurnTriggered(game);
+        String keyLastTurnTriggeredCount = getKeyLastTurnTriggeredCount(game);
+        Integer lastTurn = (Integer) game.getState().getValue(keyLastTurnTriggered);
+        int currentTurn = game.getTurnNum();
+        if (lastTurn != null && lastTurn == currentTurn) {
+            // Ability already triggered this turn, incrementing the count.
+            int lastCount = Optional.ofNullable((Integer) game.getState().getValue(keyLastTurnTriggeredCount)).orElse(0);
+            game.getState().setValue(keyLastTurnTriggeredCount, lastCount + 1);
+        } else {
+            // first trigger for Ability this turn.
+            game.getState().setValue(keyLastTurnTriggered, currentTurn);
+            game.getState().setValue(keyLastTurnTriggeredCount, 1);
+        }
     }
 
     @Override
@@ -96,14 +121,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
-    public boolean checkTriggeredAlready(Game game) {
-        if (!triggersOnceEachTurn) {
-            return true;
-        }
-        Integer lastTurnTriggered = (Integer) game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnTriggered" + originalId, sourceId, game)
-        );
-        return lastTurnTriggered == null || lastTurnTriggered != game.getTurnNum();
+    public boolean checkTriggeredLimit(Game game) {
+        return getRemainingTriggersLimitEachTurn(game) > 0;
     }
 
     @Override
@@ -112,20 +131,34 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             return false;
         }
         Integer lastTurnUsed = (Integer) game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnUsed" + originalId, sourceId, game)
+                CardUtil.getCardZoneString("lastTurnUsed" + getOriginalId(), sourceId, game)
         );
         return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
     }
 
     @Override
-    public TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce) {
-        this.triggersOnceEachTurn = triggersOnce;
+    public TriggeredAbility setTriggersLimitEachTurn(int limit) {
+        this.triggerLimitEachTurn = limit;
         return this;
     }
 
     @Override
-    public boolean getTriggersOnceEachTurn() {
-        return this.triggersOnceEachTurn;
+    public int getRemainingTriggersLimitEachTurn(Game game) {
+        if (triggerLimitEachTurn == Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        String keyLastTurnTriggered = getKeyLastTurnTriggered(game);
+        Integer lastTurn = (Integer) game.getState().getValue(keyLastTurnTriggered);
+        int currentTurn = game.getTurnNum();
+        if (lastTurn != null && lastTurn == currentTurn) {
+            // Ability already triggered this turn, so returning the limit minus the count this turn
+            String keyLastTurnTriggeredCount = getKeyLastTurnTriggeredCount(game);
+            int count = Optional.ofNullable((Integer) game.getState().getValue(keyLastTurnTriggeredCount)).orElse(0);
+            return Math.max(0, triggerLimitEachTurn - count);
+        } else {
+            // Ability did not trigger this turn, so returning the limit
+            return triggerLimitEachTurn;
+        }
     }
 
     @Override
@@ -165,7 +198,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
         if (doOnlyOnceEachTurn) {
             game.getState().setValue(CardUtil.getCardZoneString(
-                    "lastTurnUsed" + originalId, sourceId, game
+                    "lastTurnUsed" + getOriginalId(), sourceId, game
             ), game.getTurnNum());
         }
         //20091005 - 603.4
@@ -229,8 +262,20 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 superRule = superRule.replaceFirst("^((?:you may )?sacrifice |(put|remove) [^ ]+ [^ ]+ counters? (on|from) |return |transform |untap |regenerate )?\\{this\\}", "$1it");
             }
             sb.append(superRule);
-            if (triggersOnceEachTurn) {
-                sb.append(" This ability triggers only once each turn.");
+            if (triggerLimitEachTurn != Integer.MAX_VALUE) {
+                sb.append(" This ability triggers only ");
+                switch (triggerLimitEachTurn) {
+                    case 1:
+                        sb.append("once");
+                        break;
+                    case 2:
+                        sb.append("twice");
+                        break;
+                    default:
+                        // No card with that behavior yet, so feel free to change the text once one exist
+                        sb.append(CardUtil.numberToText(triggerLimitEachTurn) + " times");
+                }
+                sb.append(" each turn.");
             }
             if (doOnlyOnceEachTurn) {
                 sb.append(" Do this only once each turn.");
@@ -243,6 +288,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return ruleLow.startsWith("attach")
                 || ruleLow.startsWith("change")
                 || ruleLow.startsWith("counter")
+                || ruleLow.startsWith("create")
                 || ruleLow.startsWith("destroy")
                 || ruleLow.startsWith("distribute")
                 || ruleLow.startsWith("sacrifice")
@@ -264,6 +310,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     /**
      * For use in generating trigger phrases with correct text
+     *
      * @return "When " for an effect that always removes the source from the battlefield, otherwise "Whenever "
      */
     protected final String getWhen() {
@@ -364,21 +411,38 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public TriggeredAbility setOptional() {
+        this.optional = true;
+
+        if (getEffects().stream().anyMatch(
+                effect -> effect instanceof DoIfCostPaid && ((DoIfCostPaid) effect).isOptional())) {
+            throw new IllegalArgumentException(
+                    "DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): "
+                            + this.getClass().getSimpleName());
+        }
+
+        return this;
+    }
+
+    @Override
     public TriggeredAbilityImpl setAbilityWord(AbilityWord abilityWord) {
         super.setAbilityWord(abilityWord);
         return this;
     }
 
+    /**
+     * For triggered abilities that function from the battlefield that must trigger when the source permanent dies
+     * and/or for any other events that happen simultaneously to the source permanent dying.
+     * (Similar logic must be used for any leaves-the-battlefield, but this method assumes to graveyard only.)
+     * NOTE: If your ability functions from another zone (not battlefield) then must use standard logic, not this.
+     */
     public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {
         // Get the source permanent of the ability
         MageObject sourceObject = null;
         if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
             sourceObject = game.getPermanent(source.getSourceId());
         } else {
-            // TODO: multiple calls of ApplyEffects all around the code are breaking a short living lki idea
-            //  (PlayerImpl's call to move to battlefield do the worse thing)
-            //  -
-            //  Original idea: short living LKI must help to find a moment in the inner of resolve
+            //  The idea: short living LKI must help to find a moment in the inner of resolve
             //  -
             //  Example:
             //   --!---------------!-------------!-----!-----------!
@@ -394,16 +458,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             //   - ! empty stack   !  graveyard  ! no  !   no      ! no more to resolve
             //   --!---------------!-------------!-----!-----------!
             //  -
-            //  - Problem 1: move code (well, not only move) calls ApplyEffects in the middle of the resolve
-            //  - and reset short LKI (after short LKI reset dies trigger will not work)
-            //  - Example: Goblin Welder calls sacrifice and card move in the same effect - but move call do
-            //  - a reset and dies trigger ignored (trigger thinks that permanent already dies)
-            //  -
-            //  - Possible fix:
-            //  - replace ApplyEffects in the move code by game.getState().processAction(game);
-            //  - check and fix many broken (is it was a false positive test or something broken)
-            //sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            if (game.getShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
+            if (game.checkShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
                 sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             }
         }

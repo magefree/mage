@@ -16,6 +16,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
+import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.*;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
@@ -135,6 +136,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public void setExpansionSetCode(String expansionSetCode) {
         throw new IllegalStateException("Wrong code usage: you can't change set code for the stack ability");
+    }
+
+    @Override
+    public boolean getUsesVariousArt() {
+        return false;
+    }
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        throw new IllegalStateException("Wrong code usage: you can't change usesVariousArt for the stack ability");
     }
 
     @Override
@@ -377,8 +388,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        return ability.activate(game, noMana);
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        return ability.activate(game, allowedIdentifiers, noMana);
     }
 
     @Override
@@ -414,17 +425,45 @@ public class StackAbility extends StackObjectImpl implements Ability {
     public void addManaCostsToPay(ManaCost manaCost) {
         // Do nothing
     }
+
     @Override
     public Map<String, Object> getCostsTagMap() {
         return ability.getCostsTagMap();
     }
+
     @Override
-    public void setCostsTag(String tag, Object value){
+    public void setCostsTag(String tag, Object value) {
         ability.setCostsTag(tag, value);
     }
+
     @Override
     public AbilityType getAbilityType() {
         return ability.getAbilityType();
+    }
+
+    @Override
+    public boolean isActivatedAbility() {
+        return ability.isActivatedAbility();
+    }
+
+    @Override
+    public boolean isTriggeredAbility() {
+        return ability.isTriggeredAbility();
+    }
+
+    @Override
+    public boolean isNonManaActivatedAbility() {
+        return ability.isNonManaActivatedAbility();
+    }
+
+    @Override
+    public boolean isManaActivatedAbility() {
+        return ability.isManaActivatedAbility();
+    }
+
+    @Override
+    public boolean isManaAbility() {
+        return ability.isManaAbility();
     }
 
     @Override
@@ -540,7 +579,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
+    public Ability withFirstModeCost(Cost cost) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, Set<MageIdentifier> allowedIdentifiers, boolean noMana, Player controller, Game game) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -597,6 +641,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
         return this.ability.getSourceObjectIfItStillExists(game);
+    }
+
+    @Override
+    public Card getSourceCardIfItStillExists(Game game) {
+        return this.ability.getSourceCardIfItStillExists(game);
     }
 
     @Override
@@ -689,6 +738,19 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return false;
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
     }
 
     @Override

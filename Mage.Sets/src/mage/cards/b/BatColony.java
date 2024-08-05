@@ -52,7 +52,7 @@ public final class BatColony extends CardImpl {
                 new BatColonyWatcher()
         );
 
-        // Whenever a Cave enters the battlefield under your control, put a +1/+1 counter on target creature you control.
+        // Whenever a Cave you control enters, put a +1/+1 counter on target creature you control.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 filter
@@ -99,10 +99,11 @@ enum BatColonyValue implements DynamicValue {
 
 /**
  * Inspired by {@link mage.watchers.common.ManaPaidSourceWatcher}
- * If more cards like Bat Colony care for mana spent by Caves in the future, best to refactor the tracking there.
+ * If more cards like Bat Colony care for mana produced by Caves in the future, best to refactor the tracking there.
  * For now the assumption is that it is a 1of, so don't want to track it in any game.
  */
 class BatColonyWatcher extends Watcher {
+    
     private static final class CaveManaPaidTracker implements Serializable, Copyable<CaveManaPaidTracker> {
         private int caveMana = 0;
 

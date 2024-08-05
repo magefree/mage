@@ -80,7 +80,7 @@ class GolemArtisanEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player playerControls = game.getPlayer(source.getControllerId());
         if (permanent != null && playerControls != null) {
-            Choice abilityChoice = new ChoiceImpl();
+            Choice abilityChoice = new ChoiceImpl(true);
             abilityChoice.setMessage("Choose an ability to add");
 
             Set<String> abilities = new HashSet<>();

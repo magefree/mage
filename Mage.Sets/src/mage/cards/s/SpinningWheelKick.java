@@ -13,6 +13,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.SecondTargetPointer;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ enum SpinningWheelKickAdjuster implements TargetAdjuster {
         ability.getTargets().clear();
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetPermanent(
-                ability.getManaCostsToPay().getX(),
+                CardUtil.getSourceCostsTag(game, ability, "X", 0),
                 StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER
         ));
     }

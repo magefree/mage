@@ -56,7 +56,7 @@ public final class PrimalPlasma extends CardImpl {
 
         public PrimalPlasmaReplacementEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Benefit);
-            staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender";
+            staticText = "As {this} enters, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender";
         }
 
         private PrimalPlasmaReplacementEffect(final PrimalPlasmaReplacementEffect effect) {

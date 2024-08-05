@@ -77,7 +77,7 @@ class TeleminPerformanceEffect extends OneShotEffect {
                 opponent.revealCards(source, reveal, game);
                 opponent.moveCards(nonCreatures, Zone.GRAVEYARD, source, game);
                 if (creature != null) {
-                    game.getState().processAction(game);
+                    game.processAction();
                     controller.moveCards(creature, Zone.BATTLEFIELD, source, game);
                 }
             }

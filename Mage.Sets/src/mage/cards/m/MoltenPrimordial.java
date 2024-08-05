@@ -15,14 +15,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -44,7 +41,8 @@ public final class MoltenPrimordial extends CardImpl {
 
         // When Molten Primordial enters the battlefield, for each opponent, take control of up to one target creature that player controls until end of turn. Untap those creatures. They have haste until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MoltenPrimordialEffect(), false);
-        ability.setTargetAdjuster(MoltenPrimordialAdjuster.instance);
+        ability.addTarget(new TargetCreaturePermanent(0,1));
+        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         this.addAbility(ability);
     }
 
@@ -55,24 +53,6 @@ public final class MoltenPrimordial extends CardImpl {
     @Override
     public MoltenPrimordial copy() {
         return new MoltenPrimordial(this);
-    }
-}
-
-enum MoltenPrimordialAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature from opponent " + opponent.getLogName());
-                filter.add(new ControllerIdPredicate(opponentId));
-                TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
-                ability.addTarget(target);
-            }
-        }
     }
 }
 

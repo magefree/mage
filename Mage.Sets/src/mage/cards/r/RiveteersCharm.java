@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.MaxManaValueControlledPermanentPredicate;
+import mage.filter.predicate.permanent.MaxManaValueControlledCreatureOrPlaneswalkerPredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetOpponent;
 
@@ -27,7 +27,7 @@ public final class RiveteersCharm extends CardImpl {
     );
 
     static {
-        filter.add(MaxManaValueControlledPermanentPredicate.instance);
+        filter.add(MaxManaValueControlledCreatureOrPlaneswalkerPredicate.instance);
     }
 
     public RiveteersCharm(UUID ownerId, CardSetInfo setInfo) {

@@ -20,24 +20,21 @@ public enum MageIdentifier {
     // "Once each turn, you may cast an instant or sorcery spell from the top of your library."
     //
     CastFromGraveyardOnceWatcher,
-    CemeteryIlluminatorWatcher,
-    GisaAndGeralfWatcher,
-    DanithaNewBenaliasLightWatcher,
+    OnceEachTurnCastWatcher,
     HaukensInsightWatcher,
     IntrepidPaleontologistWatcher,
-    KaradorGhostChieftainWatcher,
     KessDissidentMageWatcher,
+    IanMalcolmChaoticianWatcher,
     MuldrothaTheGravetideWatcher,
     ShareTheSpoilsWatcher,
     WishWatcher,
     GlimpseTheCosmosWatcher,
     SerraParagonWatcher,
     OneWithTheMultiverseWatcher("Without paying manacost"),
-    JohannApprenticeSorcererWatcher,
-    AssembleThePlayersWatcher,
     KaghaShadowArchdruidWatcher,
     CourtOfLocthwainWatcher("Without paying manacost"),
     LaraCroftTombRaiderWatcher,
+    CoramTheUndertakerWatcher,
 
     // ----------------------------//
     //       alternate casts       //
@@ -71,8 +68,11 @@ public enum MageIdentifier {
     WorldheartPhoenixAlternateCast,
     XandersPactAlternateCast,
     TheTombOfAclazotzWatcher,
-
-    MeTheImmortalAlternateCast;
+    MeTheImmortalAlternateCast,
+    WithoutPayingManaCostAlternateCast,
+    AlurenAlternateCast,
+    OfferingAlternateCast,
+    PrimalPrayersAlternateCast;
 
     /**
      * Additional text if there is need to differentiate two very similar effects

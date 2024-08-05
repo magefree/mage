@@ -80,7 +80,7 @@ public class ClashEffect extends OneShotEffect {
         }
         // choose opponent
         Target target = new TargetOpponent(true);
-        target.setTargetName("an opponent to clash with");
+        target.withTargetName("an opponent to clash with");
         if (!controller.choose(Outcome.Benefit, target, source, game)) {
             return false;
         }

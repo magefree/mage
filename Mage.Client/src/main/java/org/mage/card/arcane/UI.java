@@ -79,6 +79,7 @@ public final class UI {
         if (true) return;
 
         // TODO: wtf, is it used to display images by url?! Remove that code after few releases if no bug reports, 27.11.2023
+        // TODO: is it place to implement emoji?
         editorPane.getDocument().putProperty("imageCache", imageCache); // Read internally by ImageView, but never written.
         editorPane.setEditorKit(new HTMLEditorKit() {
             private static final long serialVersionUID = -54602188235105448L;
@@ -159,15 +160,6 @@ public final class UI {
         } catch (InterruptedException ex) {
         } catch (InvocationTargetException ex) {
             throw new RuntimeException(ex);
-        }
-    }
-
-    public static void setSystemLookAndFeel() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            System.err.println("Error setting look and feel:");
-            ex.printStackTrace();
         }
     }
 

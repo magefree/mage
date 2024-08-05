@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -15,15 +14,16 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class LightningRunner extends CardImpl {
@@ -61,7 +61,7 @@ class LightningRunnerEffect extends OneShotEffect {
 
     LightningRunnerEffect() {
         super(Outcome.Benefit);
-        staticText = "you get {E}{E}, then you may pay {E}{E}{E}{E}{E}{E}{E}{E}. If you pay, "
+        staticText = "you get {E}{E}, then you may pay eight {E}. If you pay, "
                 + "untap all creatures you control, and after this phase, there is an additional combat phase";
     }
 
@@ -74,10 +74,10 @@ class LightningRunnerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             new GetEnergyCountersControllerEffect(2).apply(game, source);
-            if (controller.getCounters().getCount(CounterType.ENERGY) > 7) {
+            if (controller.getCountersCount(CounterType.ENERGY) > 7) {
                 Cost cost = new PayEnergyCost(8);
                 if (controller.chooseUse(outcome,
-                        "Pay {E}{E}{E}{E}{E}{E}{E}{E} to use this? ",
+                        "Pay eight {E} to use this? ",
                         "Untap all creatures you control and after this phase, there is an additional combat phase.",
                         "Yes", "No", source, game)
                         && cost.pay(source, game, source, source.getControllerId(), true)) {

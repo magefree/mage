@@ -2,7 +2,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
@@ -26,7 +26,7 @@ public final class RedSunsZenith extends CardImpl {
         // If a creature dealt damage this way would die this turn, exile it instead.
         // Shuffle Red Sun's Zenith into its owner's library.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));

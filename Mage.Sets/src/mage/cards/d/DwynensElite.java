@@ -40,7 +40,7 @@ public final class DwynensElite extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "When {this} enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token."));
+                "When {this} enters, if you control another Elf, create a 1/1 green Elf Warrior creature token."));
     }
 
     private DwynensElite(final DwynensElite card) {

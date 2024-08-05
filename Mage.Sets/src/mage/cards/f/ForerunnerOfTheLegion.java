@@ -48,7 +48,7 @@ public final class ForerunnerOfTheLegion extends CardImpl {
                 )
         );
 
-        // Whenever another Vampire enters the battlefield under your control, target creature gets +1/+1 until end of turn.
+        // Whenever another Vampire you control enters, target creature gets +1/+1 until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoostTargetEffect(1,1, Duration.EndOfTurn), filterAnotherVampire);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -113,6 +113,7 @@ public abstract class ExpansionSet implements Serializable {
     protected boolean hasBasicLands = true;
 
     protected String blockName; // used to group sets in some GUI dialogs like choose set dialog
+    protected boolean rotationSet = false; // used to determine if a set is a standard rotation
     protected boolean hasBoosters = false;
     protected int numBoosterSpecial;
 
@@ -505,6 +506,10 @@ public abstract class ExpansionSet implements Serializable {
         return hasBasicLands;
     }
 
+    public boolean isRotationSet() {
+        return rotationSet;
+    }
+
     /**
      * Keep only unique cards for booster generation and card ratio calculation
      *
@@ -673,6 +678,15 @@ public abstract class ExpansionSet implements Serializable {
 
     public int getNumBoosterDoubleFaced() {
         return numBoosterDoubleFaced;
+    }
+
+    protected static void addCardInfoToList(List<CardInfo> boosterList, String name, String expansion, String cardNumber) {
+        CardInfo cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber(name, expansion, cardNumber);
+        if (cardInfo != null && cardInfo.getSetCode().equals(expansion) && cardInfo.getCardNumber().equals(cardNumber)) {
+            boosterList.add(cardInfo);
+        } else {
+            throw new IllegalStateException("CardInfo not found: " + name + " (" + expansion + ":" + cardNumber + ")");
+        }
     }
 
 }

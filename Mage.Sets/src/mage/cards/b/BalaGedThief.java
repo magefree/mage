@@ -30,7 +30,7 @@ public final class BalaGedThief extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Bala Ged Thief or another Ally enters the battlefield under your control,
+        // Whenever Bala Ged Thief or another Ally you control enters,
         // target player reveals a number of cards from their hand equal to the number of Allies you control.
         // You choose one of them. That player discards that card.
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect(xValue), false);

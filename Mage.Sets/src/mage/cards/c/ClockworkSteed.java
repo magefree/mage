@@ -23,6 +23,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 
 import java.util.UUID;
@@ -102,7 +103,7 @@ class ClockworkSteedEffect extends OneShotEffect {
             return false;
         }
         int maxCounters = Integer.min(
-                4 - permanent.getCounters(game).getCount(CounterType.P1P0), source.getManaCostsToPay().getX()
+                4 - permanent.getCounters(game).getCount(CounterType.P1P0), CardUtil.getSourceCostsTag(game, source, "X", 0)
         );
         if (maxCounters < 1) {
             return false;

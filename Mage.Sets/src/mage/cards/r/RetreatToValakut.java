@@ -21,7 +21,7 @@ public final class RetreatToValakut extends CardImpl {
     public RetreatToValakut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
-        // <i>Landfall</i>- Whenever a land enters the battlefield under your control, choose one - Target creature gets +2/+0 until end of turn;
+        // <i>Landfall</i>- Whenever a land you control enters, choose one - Target creature gets +2/+0 until end of turn;
         LandfallAbility ability = new LandfallAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
 

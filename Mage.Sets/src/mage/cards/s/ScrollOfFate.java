@@ -67,6 +67,6 @@ class ScrollOfFateEffect extends OneShotEffect {
             return false;
         }
 
-        return ManifestEffect.doManifestCards(game, source, controller, new CardsImpl(targetCard.getTargets()).getCards(game));
+        return !ManifestEffect.doManifestCards(game, source, controller, new CardsImpl(targetCard.getTargets()).getCards(game)).isEmpty();
     }
 }

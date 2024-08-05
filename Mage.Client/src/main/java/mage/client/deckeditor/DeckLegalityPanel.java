@@ -135,7 +135,7 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
         } else {
             // contains mock cards, e.g. it's a Deck Editor
             try {
-                deckToValidate = Deck.load(deck.getDeckCardLists(), true, false);
+                deckToValidate = Deck.load(deck.prepareCardsOnlyDeck(), true, false);
             } catch (Exception ex) {
                 logger.error("Can't load real deck cards for validate: " + ex.getMessage(), ex);
                 return;

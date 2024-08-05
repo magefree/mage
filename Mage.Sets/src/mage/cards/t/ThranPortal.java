@@ -2,16 +2,12 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseBasicLandTypeEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.continuous.AddChosenSubtypeEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.enterAttribute.EnterAttributeAddChosenSubtypeEffect;
@@ -20,6 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -32,15 +29,22 @@ import java.util.UUID;
  */
 public class ThranPortal extends CardImpl {
 
+    private static final FilterLandPermanent filter = new FilterLandPermanent("other lands");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
+    private static final YouControlPermanentCondition condition =
+            new YouControlPermanentCondition(filter, ComparisonType.OR_LESS, 2);
+
     public ThranPortal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         addSubType(SubType.GATE);
 
         // Thran Portal enters the battlefield tapped unless you control two or fewer other lands.
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), ComparisonType.FEWER_THAN, 3));
-        String abilityText = " tapped unless you control two or fewer other lands";
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // As Thran Portal enters the battlefield, choose a basic land type.
         // Thran Portal is the chosen type in addition to its other types.

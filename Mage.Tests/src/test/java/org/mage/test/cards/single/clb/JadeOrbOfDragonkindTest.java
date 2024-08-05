@@ -11,7 +11,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * {@link mage.cards.j.JadeOrbOfDragonkind Jade Orb of Dragonkind}
  * {2}{G}
  * Artifact
- * {T}: Add {G}. When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.
+ * {T}: Add {G}. When you spend this mana to cast a Dragon creature spell, it enters with an additional +1/+1 counter on it and gains hexproof until your next turn.
  * @author NicolasCamachoP, Zelane
  */
 
@@ -43,7 +43,7 @@ public class JadeOrbOfDragonkindTest extends CardTestPlayerBase {
     addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
     addCard(Zone.BATTLEFIELD, playerA, jadeOrb);
     addCard(Zone.BATTLEFIELD, playerA, "Kronch Wrangler");
-    // Whenever a creature with power 4 or greater enters the battlefield under your control, put a +1/+1 counter on Kronch Wrangler.
+    // Whenever a creature with power 4 or greater you control enters, put a +1/+1 counter on Kronch Wrangler.
 
     castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, arcades);
 

@@ -43,7 +43,7 @@ public final class EzuriClawOfProgress extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever a creature with power 2 or less enters the battlefield under your control, you get an experience counter.
+        // Whenever a creature with power 2 or less you control enters, you get an experience counter.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersPlayersEffect(
                 CounterType.EXPERIENCE.createInstance(), TargetController.YOU
         ), filter));
@@ -86,7 +86,7 @@ class EzuriClawOfProgressEffect extends OneShotEffect {
         if (controller != null) {
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
-                int amount = controller.getCounters().getCount(CounterType.EXPERIENCE);
+                int amount = controller.getCountersCount(CounterType.EXPERIENCE);
                 target.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }
             return true;

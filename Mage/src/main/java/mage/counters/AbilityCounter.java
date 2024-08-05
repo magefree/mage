@@ -9,7 +9,7 @@ public class AbilityCounter extends Counter {
 
     private final Ability ability;
 
-    AbilityCounter(Ability ability, int count) {
+    public AbilityCounter(Ability ability, int count) {
         super(makeName(ability.getRule()), count);
         this.ability = ability;
     }

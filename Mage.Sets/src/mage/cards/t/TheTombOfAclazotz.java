@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class TheTombOfAclazotz extends CardImpl {
@@ -47,7 +46,7 @@ public class TheTombOfAclazotz extends CardImpl {
         // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
 
-        // You may cast a creature spell from your graveyard this turn. If you do, it enters the battlefield with a finality counter on it and is a Vampire in addition to its other types.
+        // You may cast a creature spell from your graveyard this turn. If you do, it enters with a finality counter on it and is a Vampire in addition to its other types.
         Ability castSpellAbility = new SimpleActivatedAbility(new TheTombOfAclazotzEffect(), new TapSourceCost());
         castSpellAbility.setIdentifier(MageIdentifier.TheTombOfAclazotzWatcher);
         castSpellAbility.addWatcher(new TheTombOfAclazotzWatcher());
@@ -68,8 +67,8 @@ public class TheTombOfAclazotz extends CardImpl {
 class TheTombOfAclazotzEffect extends AsThoughEffectImpl {
 
     TheTombOfAclazotzEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may cast a creature spell from your graveyard this turn. If you do, it enters the battlefield with a finality counter on it and is a Vampire in addition to its other types. <i>(If a creature with a finality counter on it would die, exile it instead.)</i>";
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "You may cast a creature spell from your graveyard this turn. If you do, it enters with a finality counter on it and is a Vampire in addition to its other types. <i>(If a creature with a finality counter on it would die, exile it instead.)</i>";
     }
 
     private TheTombOfAclazotzEffect(final TheTombOfAclazotzEffect effect) {
@@ -134,15 +133,15 @@ class TheTombOfAclazotzWatcher extends Watcher {
             Card card = target.getCard();
             if (card != null) {
                 game.getState().addEffect(new AddCounterEnteringCreatureEffect(new MageObjectReference(target.getCard(), game),
-                        CounterType.FINALITY.createInstance(), Outcome.Neutral),
+                                CounterType.FINALITY.createInstance(), Outcome.Neutral),
                         target.getSpellAbility());
                 game.getState().addEffect(new AddSubtypeEnteringCreatureEffect(new MageObjectReference(target.getCard(), game), SubType.VAMPIRE, Outcome.Benefit), card.getSpellAbility());
                 // Rule 728.2 we must insure the effect is used (creature is cast successfully) before discarding the play effect
                 UUID playEffectId = this.getPlayFromAnywhereEffect();
                 if (playEffectId != null
-                        && game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, game).listIterator().next().getId().equals(playEffectId)) {
+                        && game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, game).listIterator().next().getId().equals(playEffectId)) {
                     // discard the play effect
-                    game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, game).listIterator().next().discard();
+                    game.getContinuousEffects().getApplicableAsThoughEffects(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, game).listIterator().next().discard();
                 }
             }
         }
@@ -263,9 +262,9 @@ class AddCardSubTypeEnteringTargetEffect extends ContinuousEffectImpl {
             }
         }
         if (card != null
-                && game.getState().getBattlefield().getPermanent(card.getId()) != null
+                && game.getPermanent(card.getId()) != null
                 && game.getState().getZoneChangeCounter(card.getId()) == mor.getZoneChangeCounter() + 1) { // blinking, etc
-            game.getState().getBattlefield().getPermanent(card.getId()).addSubType(game, addedSubType);
+            game.getPermanent(card.getId()).addSubType(game, addedSubType);
         }
         return true;
     }

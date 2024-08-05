@@ -25,7 +25,7 @@ public final class JaddiOffshoot extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, you gain 1 life.
+        // <i>Landfall</i> &mdash; Whenever a land you control enters, you gain 1 life.
         this.addAbility(new LandfallAbility(new GainLifeEffect(1), false));
     }
 

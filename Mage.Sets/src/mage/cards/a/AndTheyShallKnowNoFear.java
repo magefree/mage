@@ -65,18 +65,18 @@ class AndTheyShallKnowNoFearEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (player == null || sourceObject == null) {
+        if (controller == null || sourceObject == null) {
             return false;
         }
-        Choice choice = new ChoiceCreatureType(sourceObject);
-        player.choose(outcome, choice, game);
-        SubType subType = SubType.byDescription(choice.getChoice());
+        Choice choice = new ChoiceCreatureType(game, source);
+        controller.choose(outcome, choice, game);
+        SubType subType = SubType.byDescription(choice.getChoiceKey());
         if (subType == null) {
             return false;
         }
-        game.informPlayers(player.getLogName() + " chooses " + subType);
+        game.informPlayers(controller.getLogName() + " chooses " + subType);
         List<Permanent> permanents = game
                 .getBattlefield()
                 .getActivePermanents(

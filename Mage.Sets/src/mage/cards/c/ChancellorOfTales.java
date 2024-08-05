@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class ChancellorOfTales extends CardImpl {
 
         // Whenever you cast an Adventure spell, you may copy it. You may choose new targets for the copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect(true).withSpellName("it"),
+                new CopyTargetStackObjectEffect(true).withText("it"),
                 filter, true, SetTargetPointer.SPELL
         ));
     }

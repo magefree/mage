@@ -9,6 +9,7 @@ import java.util.Collections;
 public class SubTypes extends ArrayList<SubType> {
 
     private boolean isAllCreatureTypes = false;
+    private boolean isAllNonbasicLandTypes = false;
 
     public SubTypes(SubType... subTypes) {
         super();
@@ -18,6 +19,7 @@ public class SubTypes extends ArrayList<SubType> {
     protected SubTypes(final SubTypes list) {
         this.addAll(list);
         this.isAllCreatureTypes = list.isAllCreatureTypes;
+        this.isAllNonbasicLandTypes = list.isAllNonbasicLandTypes;
     }
 
     public SubTypes copy() {
@@ -32,6 +34,7 @@ public class SubTypes extends ArrayList<SubType> {
         this.clear();
         this.addAll(subtypes);
         this.isAllCreatureTypes = subtypes.isAllCreatureTypes;
+        this.isAllNonbasicLandTypes = subtypes.isAllNonbasicLandTypes;
     }
 
     public boolean removeAll(SubType... subTypes) {
@@ -44,5 +47,13 @@ public class SubTypes extends ArrayList<SubType> {
 
     public boolean isAllCreatureTypes() {
         return isAllCreatureTypes;
+    }
+
+    public void setIsAllNonbasicLandTypes(boolean allNonbasicLandTypes) {
+        isAllNonbasicLandTypes = allNonbasicLandTypes;
+    }
+
+    public boolean isAllNonbasicLandTypes() {
+        return isAllNonbasicLandTypes;
     }
 }

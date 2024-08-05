@@ -1,31 +1,30 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInExile;
+import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +46,8 @@ public final class BronzebeakForagers extends CardImpl {
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, exile up to one target nonland permanent that player controls until {this} leaves the battlefield")
         );
-        etbAbility.setTargetAdjuster(BronzebeakForagerExileAdjuster.instance);
+        etbAbility.addTarget(new TargetNonlandPermanent(0, 1));
+        etbAbility.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         this.addAbility(etbAbility);
 
         // {X}{W}: Put target card with mana value X exiled with Bronzebeak Foragers into its owner's graveyard.
@@ -58,7 +58,7 @@ public final class BronzebeakForagers extends CardImpl {
                 new ManaCostsImpl<>("{X}{W}")
         );
         dissolveAbility.setTargetAdjuster(BronzebeakForagerDissolveAdjuster.instance);
-        dissolveAbility.addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        dissolveAbility.addEffect(new GainLifeEffect(GetXValue.instance));
         this.addAbility(dissolveAbility);
     }
 
@@ -72,26 +72,6 @@ public final class BronzebeakForagers extends CardImpl {
     }
 }
 
-enum BronzebeakForagerExileAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterPermanent("nonland permanent controlled by " + opponent.getLogName());
-            filter.add(new ControllerIdPredicate(opponentId));
-            filter.add(Predicates.not(CardType.LAND.getPredicate()));
-            TargetPermanent target = new TargetPermanent(0, 1, filter, false);
-            ability.addTarget(target);
-        }
-    }
-}
-
 // Based on Gelatinous Cube
 enum BronzebeakForagerDissolveAdjuster implements TargetAdjuster {
     instance;
@@ -99,7 +79,7 @@ enum BronzebeakForagerDissolveAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterCard filter = new FilterCard("card with mana value " + xValue);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetCardInExile(filter, CardUtil.getExileZoneId(game, ability)));

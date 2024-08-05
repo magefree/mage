@@ -38,17 +38,17 @@ public final class SkyclaveShade extends CardImpl {
         // Skyclave Shade can't block.
         this.addAbility(new CantBlockAbility());
 
-        // If Skyclave Shade was kicked, it enters the battlefield with two +1/+1 counters on it.
+        // If Skyclave Shade was kicked, it enters with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.ONCE,
-                "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""
+                "If {this} was kicked, it enters with two +1/+1 counters on it.", ""
         ));
 
-        // Landfall — Whenever a land enters the battlefield under your control, if Skyclave Shade is in your graveyard and it's your turn, you may cast it from your graveyard this turn.
+        // Landfall — Whenever a land you control enters, if Skyclave Shade is in your graveyard and it's your turn, you may cast it from your graveyard this turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new LandfallAbility(Zone.GRAVEYARD, new SkyclaveShadeEffect(), false),
                 SkyclaveShadeCondition.instance, "<i>Landfall</i> &mdash; Whenever a land " +
-                "enters the battlefield under your control, if {this} is in your graveyard and it's your turn, " +
+                "you control enters, if {this} is in your graveyard and it's your turn, " +
                 "you may cast it from your graveyard this turn."
         ));
     }
@@ -76,7 +76,7 @@ enum SkyclaveShadeCondition implements Condition {
 class SkyclaveShadeEffect extends AsThoughEffectImpl {
 
     SkyclaveShadeEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 
     private SkyclaveShadeEffect(final SkyclaveShadeEffect effect) {

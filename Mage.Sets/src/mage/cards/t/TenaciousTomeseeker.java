@@ -36,7 +36,7 @@ public final class TenaciousTomeseeker extends CardImpl {
         // When Tenacious Tomeseeker enters the battlefield, if it was bargained, return target instant or sorcery card from your graveyard to your hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
-                BargainedCondition.instance, "When {this} enters the battlefield, if it was bargained, " +
+                BargainedCondition.instance, "When {this} enters, if it was bargained, " +
                 "return target instant or sorcery card from your graveyard to your hand."
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));

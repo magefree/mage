@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mage.test.cards.abilities.enters;
 
 import mage.constants.PhaseStep;
@@ -11,7 +7,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /* Gather Specimens - Instant {3}{U}{U}{U}
  *
- * If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
+ * If a creature would enter the battlefield under an opponent's control this turn, it enters under your control instead.
  *
  * @author jeffwadsworth
  */
@@ -98,7 +94,7 @@ public class GatherSpecimensTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
 
-        // If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
+        // If a creature would enter the battlefield under an opponent's control this turn, it enters under your control instead.
         castSpell(1, PhaseStep.UPKEEP, playerA, "Gather Specimens");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");

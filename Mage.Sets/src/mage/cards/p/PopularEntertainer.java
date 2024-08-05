@@ -12,13 +12,10 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -51,8 +48,6 @@ public final class PopularEntertainer extends CardImpl {
 
 class PopularEntertainerAbility extends TriggeredAbilityImpl {
 
-    private final List<UUID> damagedPlayerIds = new ArrayList<>();
-
     PopularEntertainerAbility() {
         super(Zone.BATTLEFIELD, new GoadTargetEffect(), false);
     }
@@ -68,31 +63,26 @@ class PopularEntertainerAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
-            damagedPlayerIds.clear();
+        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
+
+        int damage = dEvent.getEvents()
+                .stream()
+                .filter(ev -> ev.getSourceId().equals(controllerId))
+                .mapToInt(GameEvent::getAmount)
+                .sum();
+
+        if (!dEvent.isCombatDamage() || damage < 1){
             return false;
         }
-        if (event.getType() != GameEvent.EventType.DAMAGED_PLAYER
-                || !((DamagedPlayerEvent) event).isCombatDamage()) {
-            return false;
-        }
-        Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature == null
-                || !creature.isControlledBy(getControllerId())
-                || damagedPlayerIds.contains(event.getTargetId())) {
-            return false;
-        }
-        damagedPlayerIds.add(event.getTargetId());
         FilterPermanent filter = new FilterCreaturePermanent(
-                "creature controlled by " + game.getPlayer(event.getTargetId()).getName()
+                "creature controlled by " + game.getPlayer(dEvent.getTargetId()).getName()
         );
-        filter.add(new ControllerIdPredicate(event.getTargetId()));
+        filter.add(new ControllerIdPredicate(dEvent.getTargetId()));
         this.getTargets().clear();
         this.addTarget(new TargetPermanent(filter));
         return true;

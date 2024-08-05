@@ -25,7 +25,7 @@ public final class FelidarRetreat extends CardImpl {
     public FelidarRetreat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        // Landfall — Whenever a land enters the battlefield under your control, choose one —
+        // Landfall — Whenever a land you control enters, choose one —
         // • Create a 2/2 white Cat Beast creature token.
         Ability ability = new LandfallAbility(new CreateTokenEffect(new CatBeastToken()));
 

@@ -92,9 +92,6 @@ public class ChatPanelBasic extends javax.swing.JPanel {
 
     protected boolean startMessageDone = false;
 
-    /**
-     * Creates new form ChatPanel
-     */
     public ChatPanelBasic() {
         initComponents();
         txtConversation.enableHyperlinksAndCardPopups();
@@ -117,7 +114,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
     }
 
     public void changeGUISize(Font font) {
-        txtConversation.setFont(font);
+        txtConversation.changeGUISize(font);
         txtMessage.setFont(font);
         if (jScrollPaneTxt != null) {
             jScrollPaneTxt.setFont(font);

@@ -4,9 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.RateCard;
 import mage.cards.Sets;
 import mage.cards.decks.DeckValidatorFactory;
-import mage.cards.repository.CardScanner;
-import mage.cards.repository.PluginClassloaderRegistery;
-import mage.cards.repository.RepositoryUtil;
+import mage.cards.repository.*;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
@@ -55,6 +53,16 @@ public final class Main {
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final MageVersion version = new MageVersion(Main.class);
 
+    // Server threads:
+    // - worker threads: creates for each connection, controls by maxPoolSize;
+    // - acceptor threads: processing requests to start a new connection, controls by numAcceptThreads;
+    // - backlog threads: processing waiting queue if maxPoolSize reached, controls by backlogSize;
+    // Usage hints:
+    // - if maxPoolSize reached then new clients will freeze in connection dialog until backlog queue overflow;
+    // - so for active server must increase maxPoolSize to big value like "max online * 10" or enable worker idle timeout
+    // - worker idle time will free unused worker thread, so new client can connect;
+    private static final int SERVER_WORKER_THREAD_IDLE_TIMEOUT_SECS = 5 * 60; // no needs to config, must be enabled for all
+
     // arg settings can be setup by run script or IDE's program arguments like -xxx=yyy
     // prop settings can be setup by -Dxxx=yyy in the launcher
     // priority: default setting -> prop setting -> arg setting
@@ -85,7 +93,8 @@ public final class Main {
 
     public static void main(String[] args) {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        logger.info("Starting MAGE server version " + version);
+        logger.info("Starting MAGE SERVER version: " + version);
+        logger.info("Java version: " + System.getProperty("java.version"));
         logger.info("Logging level: " + logger.getEffectiveLevel());
         logger.info("Default charset: " + Charset.defaultCharset());
         String adminPassword = "";
@@ -233,8 +242,10 @@ public final class Main {
             }
         }
 
-        logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
+        logger.info("Config - server address:   " + config.getServerAddress());
+        logger.info("Config - server port:      " + config.getPort());
         logger.info("Config - max game threads: " + config.getMaxGameThreads());
+        logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
         logger.info("Config - max AI opponents: " + config.getMaxAiOpponents());
         logger.info("Config - min usr name le.: " + config.getMinUserNameLength());
         logger.info("Config - max usr name le.: " + config.getMaxUserNameLength());
@@ -248,8 +259,8 @@ public final class Main {
         logger.info("Config - max pool size   : " + config.getMaxPoolSize());
         logger.info("Config - num accp.threads: " + config.getNumAcceptThreads());
         logger.info("Config - second.bind port: " + config.getSecondaryBindPort());
-        logger.info("Config - users registration: " + (config.isAuthenticationActivated() ? "true" : "false"));
-        logger.info("Config - users anon: " + (!config.isAuthenticationActivated() ? "true" : "false"));
+        logger.info("Config - users registr.:   " + (config.isAuthenticationActivated() ? "true" : "false"));
+        logger.info("Config - users anon:       " + (!config.isAuthenticationActivated() ? "true" : "false"));
         logger.info("Config - mailgun api key : " + config.getMailgunApiKey());
         logger.info("Config - mailgun domain  : " + config.getMailgunDomain());
         logger.info("Config - mail smtp Host  : " + config.getMailSmtpHost());
@@ -312,7 +323,7 @@ public final class Main {
                 testServer.getServerState(); // check connection
                 return true;
             }
-        } catch (Throwable t) {
+        } catch (Throwable ignore) {
             // assume server is not running
         }
         return false;
@@ -432,6 +443,7 @@ public final class Main {
             ((BisocketServerInvoker) invoker).setSecondaryBindPort(managerFactory.configSettings().getSecondaryBindPort());
             ((BisocketServerInvoker) invoker).setBacklog(managerFactory.configSettings().getBacklogSize());
             ((BisocketServerInvoker) invoker).setNumAcceptThreads(managerFactory.configSettings().getNumAcceptThreads());
+            ((BisocketServerInvoker) invoker).setIdleTimeout(SERVER_WORKER_THREAD_IDLE_TIMEOUT_SECS);
         }
 
         @Override

@@ -5,17 +5,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ForetellAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.stack.Spell;
+import mage.filter.predicate.other.SpellCastFromAnywhereOtherThanHand;
 
 import java.util.UUID;
 
@@ -24,10 +19,10 @@ import java.util.UUID;
  */
 public final class SageOfTheBeyond extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("Spells you cast from anywhere other than your hand");
 
     static {
-        filter.add(SageOfTheBeyondPredicate.instance);
+        filter.add(SpellCastFromAnywhereOtherThanHand.instance);
     }
 
     public SageOfTheBeyond(UUID ownerId, CardSetInfo setInfo) {
@@ -42,8 +37,7 @@ public final class SageOfTheBeyond extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Spells you cast from anywhere other than your hand cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)
-                .setText("Spells you cast from anywhere other than your hand cost {2} less to cast.")));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
 
         // Foretell {4}{U}
         this.addAbility(new ForetellAbility(this, "{4}{U}"));
@@ -56,20 +50,5 @@ public final class SageOfTheBeyond extends CardImpl {
     @Override
     public SageOfTheBeyond copy() {
         return new SageOfTheBeyond(this);
-    }
-}
-
-enum SageOfTheBeyondPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        if (input.getObject() instanceof Spell) {
-            return !input.getObject().isOwnedBy(input.getPlayerId())
-                    || !Zone.HAND.match(((Spell) input.getObject()).getFromZone());
-        } else {
-            return !input.getObject().isOwnedBy(input.getPlayerId())
-                    || !Zone.HAND.match(game.getState().getZone(input.getObject().getId()));
-        }
     }
 }

@@ -1,13 +1,14 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MayCastTargetThenExileEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -64,7 +65,7 @@ enum FinaleOfPromiseAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
 
-        int xValue = ManacostVariableValue.REGULAR.calculate(game, ability, null);
+        int xValue = GetXValue.instance.calculate(game, ability, null);
 
         // <= must be replaced to &#60;= for html view
         FilterCard filter1 = FinaleOfPromise.filterInstant.copy();
@@ -133,12 +134,13 @@ class FinaleOfPromiseEffect extends OneShotEffect {
         for (UUID id : cardsToCast) {
             Card card = game.getCard(id);
             if (card != null) {
-                new MayCastTargetThenExileEffect(true).setTargetPointer(new FixedTarget(card, game)).apply(game, source);
+                new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true)
+                        .setTargetPointer(new FixedTarget(card, game)).apply(game, source);
             }
         }
 
         // If X is 10 or more, copy each of those spells twice. You may choose new targets for the copies
-        int xValue = ManacostVariableValue.REGULAR.calculate(game, source, null);
+        int xValue = GetXValue.instance.calculate(game, source, null);
         if (xValue >= 10) {
             for (UUID id : cardsToCast) {
                 Card card = game.getCard(id);

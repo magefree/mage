@@ -375,13 +375,12 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     protected void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) (g.create());
-
-        // Defer to subclasses
-        paintCard(g2d);
-
-        // Done, dispose of the context
-        g2d.dispose();
+        Graphics2D g2 = (Graphics2D) g.create();
+        try {
+            paintCard(g2);
+        } finally {
+            g2.dispose();
+        }
     }
 
     @Override

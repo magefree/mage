@@ -73,6 +73,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean renowned;
     protected boolean suspected;
     protected boolean manifested = false;
+    protected boolean cloaked = false;
     protected boolean morphed = false;
     protected boolean disguised = false;
     protected boolean ringBearerFlag = false;
@@ -189,6 +190,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.morphed = permanent.morphed;
         this.disguised = permanent.disguised;
         this.manifested = permanent.manifested;
+        this.cloaked = permanent.cloaked;
         this.createOrder = permanent.createOrder;
         this.prototyped = permanent.prototyped;
         this.canBeSacrificed = permanent.canBeSacrificed;
@@ -203,7 +205,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 + ":" + getCardNumber()
                 + ":" + getImageFileName()
                 + ":" + getImageNumber();
-        return  name
+        return name
                 + ", " + (getBasicMageObject() instanceof Token ? "T" : "C")
                 + ", " + getBasicMageObject().getClass().getSimpleName()
                 + ", " + imageInfo
@@ -599,7 +601,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     game.getTurnStepType() == PhaseStep.UNTAP
             );
             game.fireEvent(event);
-            game.getState().addSimultaneousUntapped(event, game);
+            game.getState().addSimultaneousUntappedToBatch(event, game);
             return true;
         }
         return false;
@@ -617,7 +619,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.tapped = true;
             TappedEvent event = new TappedEvent(objectId, source, source == null ? null : source.getControllerId(), forCombat);
             game.fireEvent(event);
-            game.getState().addSimultaneousTapped(event, game);
+            game.getState().addSimultaneousTappedToBatch(event, game);
             return true;
         }
         return false;
@@ -689,7 +691,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 + CardUtil.getSourceLogName(game, source, this.getId()));
         this.setTransformed(!this.transformed);
         this.transformCount++;
-        game.applyEffects();
+        game.applyEffects(); // not process action - no firing of simultaneous events yet
         this.replaceEvent(EventType.TRANSFORMING, game);
         game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));
         return true;
@@ -1021,6 +1023,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         DamageEvent event = new DamagePermanentEvent(objectId, attackerId, controllerId, damageAmount, preventable, combat);
         event.setAppliedEffects(appliedEffects);
+        // Even if no damage was dealt, some watchers would need a reset next time actions are processed.
+        // For instance PhantomPreventionWatcher used by the [[Phantom Wurm]] type of replacement effect.
+        game.getState().addBatchDamageCouldHaveBeenFired(combat, game);
         if (game.replaceEvent(event)) {
             return 0;
         }
@@ -1053,7 +1058,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (attacker != null && markDamage) {
                 markDamage(CounterType.LOYALTY.createInstance(countersToRemove), attacker, false);
             } else {
-                removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game);
+                removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game, true);
             }
         }
         if (this.isBattle(game)) {
@@ -1062,7 +1067,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (attacker != null && markDamage) {
                 markDamage(CounterType.DEFENSE.createInstance(countersToRemove), attacker, false);
             } else {
-                removeCounters(CounterType.DEFENSE.getName(), countersToRemove, source, game);
+                removeCounters(CounterType.DEFENSE.getName(), countersToRemove, source, game, true);
             }
         }
         DamagedEvent damagedEvent = new DamagedPermanentEvent(this.getId(), attackerId, this.getControllerId(), actualDamageDone, combat);
@@ -1168,15 +1173,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 /* Tokens don't have a spellAbility. We must make a phony one as the source so the events in addCounters
                  * can trace the source back to an object/controller.
                  */
-                source = new SpellAbility(null, ((PermanentToken) mdi.sourceObject).name);
-                source.setSourceId(((PermanentToken) mdi.sourceObject).objectId);
+                PermanentToken sourceToken = (PermanentToken) mdi.sourceObject;
+                source = new SpellAbility(null, sourceToken.name);
+                source.setSourceId(sourceToken.objectId);
+                source.setControllerId(sourceToken.controllerId);
             } else if (mdi.sourceObject instanceof Permanent) {
                 source = ((Permanent) mdi.sourceObject).getSpellAbility();
             }
             if (mdi.addCounters) {
                 addCounters(mdi.counter, game.getControllerId(mdi.sourceObject.getId()), source, game);
             } else {
-                removeCounters(mdi.counter, source, game);
+                removeCounters(mdi.counter, source, game, true);
             }
         }
         markedDamage.clear();
@@ -1261,7 +1268,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.isPlaneswalker(game)) {
             int loyalty;
             if (this.getStartingLoyalty() == -2) {
-                loyalty = source.getManaCostsToPay().getX();
+                loyalty = CardUtil.getSourceCostsTag(game, source, "X", 0);
             } else {
                 loyalty = this.getStartingLoyalty();
             }
@@ -1278,7 +1285,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.isBattle(game)) {
             int defense;
             if (this.getStartingDefense() == -2) {
-                defense = source.getManaCostsToPay().getX();
+                defense = CardUtil.getSourceCostsTag(game, source, "X", 0);
             } else {
                 defense = this.getStartingDefense();
             }
@@ -1295,8 +1302,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
-        if (source != null) {
+    public boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game) {
+        if (sourceObject != null) {
             if (abilities.containsKey(ShroudAbility.getInstance().getId())) {
                 if (game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, null, sourceControllerId, game).isEmpty()) {
                     return false;
@@ -1308,17 +1315,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     && abilities.stream()
                     .filter(HexproofBaseAbility.class::isInstance)
                     .map(HexproofBaseAbility.class::cast)
-                    .anyMatch(ability -> ability.checkObject(source, game))) {
+                    .anyMatch(ability -> ability.checkObject(sourceObject, source, game))) {
                 return false;
             }
 
-            if (hasProtectionFrom(source, game)) {
+            if (hasProtectionFrom(sourceObject, game)) {
                 return false;
             }
 
             // example: Fiendslayer Paladin tried to target with Ultimate Price
             return !game.getContinuousEffects().preventedByRuleModification(
-                    new TargetEvent(this, source.getId(), sourceControllerId),
+                    new TargetEvent(this, sourceObject.getId(), sourceControllerId),
                     null,
                     game,
                     true
@@ -1898,6 +1905,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setManifested(boolean value) {
         manifested = value;
+    }
+
+    @Override
+    public boolean isCloaked() {
+        return cloaked;
+    }
+
+    @Override
+    public void setCloaked(boolean value) {
+        cloaked = value;
     }
 
     @Override

@@ -29,7 +29,7 @@ public final class SymmetryMatrix extends CardImpl {
     public SymmetryMatrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // Whenever a creature with power equal to its toughness enters the battlefield under your control, you may pay {1}. If you do, draw a card.
+        // Whenever a creature with power equal to its toughness you control enters, you may pay {1}. If you do, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(1)
         ), filter));

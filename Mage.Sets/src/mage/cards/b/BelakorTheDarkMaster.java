@@ -59,7 +59,7 @@ public final class BelakorTheDarkMaster extends CardImpl {
         ability.addEffect(new LoseLifeSourceControllerEffect(xValue).concatBy("and"));
         this.addAbility(ability.withFlavorWord("Prince of Chaos").addHint(hint));
 
-        // Lord of Torment -- Whenever another Demon enters the battlefield under your control, it deals damage equal to its power to any target.
+        // Lord of Torment -- Whenever another Demon you control enters, it deals damage equal to its power to any target.
         ability = new EntersBattlefieldControlledTriggeredAbility(new BelakorTheDarkMasterEffect(), filter2);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.withFlavorWord("Lord of Torment"));

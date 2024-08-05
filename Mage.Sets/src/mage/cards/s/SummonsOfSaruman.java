@@ -1,11 +1,9 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.AmassEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -32,7 +30,7 @@ public final class SummonsOfSaruman extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{R}");
 
         // Amass Orcs X. Mill X cards. You may cast an instant or sorcery spell with mana value X or less from among them without paying its mana cost. (To amass Orcs X, put X +1/+1 counters on an Army you control. It’s also an Orc. If you don’t control an Army, create a 0/0 black Orc Army creature token first.)
-        this.getSpellAbility().addEffect(new AmassEffect(SummonsOfSarumanVariableValue.instance, SubType.ORC, false));
+        this.getSpellAbility().addEffect(new AmassEffect(GetXValue.instance, SubType.ORC, false));
         this.getSpellAbility().addEffect(new SummonsOfSarumanEffect());
 
         // Flashback--{3}{U}{R}, Exile X cards from your graveyard.
@@ -48,36 +46,6 @@ public final class SummonsOfSaruman extends CardImpl {
     @Override
     public SummonsOfSaruman copy() {
         return new SummonsOfSaruman(this);
-    }
-}
-
-enum SummonsOfSarumanVariableValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int xValue = sourceAbility.getManaCostsToPay().getX();
-        for (Cost cost : sourceAbility.getCosts()) {
-            if (cost instanceof ExileXFromYourGraveCost) {
-                xValue = ((ExileXFromYourGraveCost) cost).getAmount();
-            }
-        }
-        return xValue;
-    }
-
-    @Override
-    public SummonsOfSarumanVariableValue copy() {
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }
 
@@ -103,7 +71,7 @@ class SummonsOfSarumanEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int xValue = SummonsOfSarumanVariableValue.instance.calculate(game, source, this);
+        int xValue = GetXValue.instance.calculate(game, source, this);
         if (player == null || xValue < 1) {
             return false;
         }

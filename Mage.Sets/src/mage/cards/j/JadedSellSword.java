@@ -34,7 +34,7 @@ public final class JadedSellSword extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(
                         FirstStrikeAbility.getInstance(), Duration.EndOfTurn
-                )), TreasureSpentToCastCondition.instance, "When {this} enters the battlefield, " +
+                )), TreasureSpentToCastCondition.instance, "When {this} enters, " +
                 "if mana from a Treasure was spent to cast it, it gains first strike and haste until end of turn."
         );
         ability.addEffect(new GainAbilitySourceEffect(

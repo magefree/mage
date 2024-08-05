@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -19,14 +18,15 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInExile;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BlightHerder extends CardImpl {
 
     public BlightHerder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}");
         this.subtype.add(SubType.ELDRAZI, SubType.PROCESSOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -71,7 +71,7 @@ class BlightHerderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetCardInExile(2, 2, filter, null);
+            Target target = new TargetCardInExile(2, 2, filter);
             if (target.canChoose(source.getControllerId(), source, game)) {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Cards cardsToGraveyard = new CardsImpl(target.getTargets());

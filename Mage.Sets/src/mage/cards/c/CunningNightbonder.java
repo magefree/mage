@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class CunningNightbonder extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("spells with flash");
     private static final FilterSpell filter2 = new FilterSpell();
     private static final Predicate predicate = new AbilityPredicate(FlashAbility.class);
 
@@ -44,8 +44,7 @@ public final class CunningNightbonder extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Spells you cast with flash cost {1} less to cast and can't be countered.
-        Ability ability = new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
-                .setText("spells with flash you cast cost {1} less to cast"));
+        Ability ability = new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1));
         ability.addEffect(new CantBeCounteredControlledEffect(filter2, Duration.WhileOnBattlefield)
                 .setText("and can't be countered"));
         this.addAbility(ability);

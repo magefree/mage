@@ -35,6 +35,13 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     void setImageNumber(Integer imageNumber);
 
     /**
+     * Set contains multiple cards with same card name but different images (also used for token from card)
+     */
+    boolean getUsesVariousArt();
+
+    void setUsesVariousArt(boolean usesVariousArt);
+
+    /**
      * Get image file name
      * - empty for default name from a card
      * - non-empty for face down objects like Morph (GUI show empty name, but image must show some image)
@@ -167,9 +174,17 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     void setZoneChangeCounter(int value, Game game);
 
     default boolean isHistoric(Game game) {
-        return getCardType(game).contains(CardType.ARTIFACT)
-                || getSuperType(game).contains(SuperType.LEGENDARY)
+        return isArtifact(game)
+                || isLegendary(game)
                 || hasSubtype(SubType.SAGA, game);
+    }
+
+    default boolean isOutlaw(Game game) {
+        return hasSubtype(SubType.ASSASSIN, game)
+                || hasSubtype(SubType.MERCENARY, game)
+                || hasSubtype(SubType.PIRATE, game)
+                || hasSubtype(SubType.ROGUE, game)
+                || hasSubtype(SubType.WARLOCK, game);
     }
 
     default boolean isCreature() {
@@ -236,12 +251,12 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
         return getCardType(game).contains(CardType.PLANESWALKER);
     }
 
-    default boolean isTribal() {
-        return isTribal(null);
+    default boolean isKindred() {
+        return isKindred(null);
     }
 
-    default boolean isTribal(Game game) {
-        return getCardType(game).contains(CardType.TRIBAL);
+    default boolean isKindred(Game game) {
+        return getCardType(game).contains(CardType.KINDRED);
     }
 
     default boolean isBattle() {
@@ -456,6 +471,9 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
         if (subTypeSet == SubTypeSet.CreatureType || subTypeSet == null) {
             this.setIsAllCreatureTypes(game, mageObject.isAllCreatureTypes(game));
         }
+        if (subTypeSet == SubTypeSet.NonBasicLandType || subTypeSet == null) {
+            this.setIsAllNonbasicLandTypes(game, mageObject.isAllNonbasicLandTypes(game));
+        }
         for (SubType subType : mageObject.getSubtype(game)) {
             if (subType.getSubTypeSet() == subTypeSet || subTypeSet == null) {
                 this.addSubType(game, subType);
@@ -470,10 +488,12 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     default void removeAllSubTypes(Game game, SubTypeSet subTypeSet) {
         if (subTypeSet == null) {
             setIsAllCreatureTypes(game, false);
+            setIsAllNonbasicLandTypes(game, false);
             game.getState().getCreateMageObjectAttribute(this, game).getSubtype().clear();
         } else if (subTypeSet == SubTypeSet.CreatureType) {
             removeAllCreatureTypes(game);
         } else if (subTypeSet == SubTypeSet.NonBasicLandType) {
+            setIsAllNonbasicLandTypes(game, false);
             game.getState().getCreateMageObjectAttribute(this, game).getSubtype().removeAll(SubType.getLandTypes());
         } else {
             game.getState().getCreateMageObjectAttribute(this, game).getSubtype().removeAll(SubType.getBySubTypeSet(subTypeSet));
@@ -482,11 +502,13 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     default void retainAllArtifactSubTypes(Game game) {
         setIsAllCreatureTypes(game, false);
+        setIsAllNonbasicLandTypes(game, false);
         game.getState().getCreateMageObjectAttribute(this, game).getSubtype().retainAll(SubType.getArtifactTypes());
     }
 
     default void retainAllEnchantmentSubTypes(Game game) {
         setIsAllCreatureTypes(game, false);
+        setIsAllNonbasicLandTypes(game, false);
         game.getState().getCreateMageObjectAttribute(this, game).getSubtype().retainAll(SubType.getEnchantmentTypes());
     }
 
@@ -545,10 +567,10 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default boolean shareCreatureTypes(Game game, MageObject otherCard) {
-        if (!isCreature(game) && !isTribal(game)) {
+        if (!isCreature(game) && !isKindred(game)) {
             return false;
         }
-        if (!otherCard.isCreature(game) && !otherCard.isTribal(game)) {
+        if (!otherCard.isCreature(game) && !otherCard.isKindred(game)) {
             return false;
         }
         boolean isAllA = this.isAllCreatureTypes(game);
@@ -587,6 +609,18 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
      * @param value
      */
     void setIsAllCreatureTypes(Game game, boolean value);
+
+    boolean isAllNonbasicLandTypes(Game game);
+
+    void setIsAllNonbasicLandTypes(boolean value);
+
+    /**
+     * Change all nonbasic land type mark temporary, for continuous effects only
+     *
+     * @param game
+     * @param value
+     */
+    void setIsAllNonbasicLandTypes(Game game, boolean value);
 
     void removePTCDA();
 }

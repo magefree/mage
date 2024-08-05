@@ -27,7 +27,7 @@ public final class FearlessFledgling extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Landfall - Whenever a land enters the battlefield under your control, put a +1/+1 counter on Fearless Fledgling. It gains flying until end of turn.
+        // Landfall - Whenever a land you control enters, put a +1/+1 counter on Fearless Fledgling. It gains flying until end of turn.
         Ability ability = new LandfallAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         ability.addEffect(new GainAbilitySourceEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn

@@ -32,7 +32,9 @@ public class CardNameUtil {
                 .replace("ü", "u")
                 .replace("É", "E")
                 .replace("ñ", "n")
-                .replace("®", "");
+                .replace("꞉", "")
+                .replace("®", "")
+                .replace("—", "");
     }
 
     private CardNameUtil() {

@@ -101,7 +101,7 @@ class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " +
+        return "<i>Landfall</i> &mdash; Whenever a land you control enters, " +
                 "{this} deals 1 damage to any target. If that land is a Mountain, {this} deals 2 damage instead.";
     }
 }

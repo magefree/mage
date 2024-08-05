@@ -2,7 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class SquallLine extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}{G}");
 
         // Squall Line deals X damage to each creature with flying and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.REGULAR, filter));                                                                                                  }
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(GetXValue.instance, filter));                                                                                                  }
 
     private SquallLine(final SquallLine card) {
         super(card);

@@ -42,7 +42,7 @@ public final class BringerOfTheLastGift extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BringerOfTheLastGiftEffect()),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it, each player sacrifices all other creatures they control. "
+                "When {this} enters, if you cast it, each player sacrifices all other creatures they control. "
                         + "Then each player returns all creature cards from their graveyard that weren't put there this way to the battlefield."
         ));
     }
@@ -95,7 +95,7 @@ class BringerOfTheLastGiftEffect extends OneShotEffect {
         }
 
         // Make sure the sacrifices are processed.
-        game.getState().processAction(game);
+        game.processAction();
 
         Set<Card> toReturn = new HashSet<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

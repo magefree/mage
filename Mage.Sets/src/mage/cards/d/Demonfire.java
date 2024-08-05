@@ -7,7 +7,7 @@ import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -31,7 +31,7 @@ public final class Demonfire extends CardImpl {
 
         // Demonfire deals X damage to any target.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(ManacostVariableValue.REGULAR),
+                new DamageTargetEffect(GetXValue.instance),
                 new InvertCondition(HellbentCondition.instance),
                 "{this} deals X damage to any target"));
 
@@ -41,7 +41,7 @@ public final class Demonfire extends CardImpl {
 
         // Hellbent - If you have no cards in hand, Demonfire can't be countered and the damage can't be prevented.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(ManacostVariableValue.REGULAR, false),
+                new DamageTargetEffect(GetXValue.instance, false),
                 HellbentCondition.instance,
                 "<br/><i>Hellbent</i> &mdash; If you have no cards in hand, this spell can't be countered and the damage can't be prevented."));
         // can't be countered

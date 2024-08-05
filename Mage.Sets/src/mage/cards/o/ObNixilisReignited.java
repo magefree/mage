@@ -30,7 +30,7 @@ public final class ObNixilisReignited extends CardImpl {
         this.setStartingLoyalty(5);
 
         // +1: You draw a card and you lose 1 life.
-        Effect effect = new DrawCardSourceControllerEffect(1, "you");
+        Effect effect = new DrawCardSourceControllerEffect(1, true);
         LoyaltyAbility ability1 = new LoyaltyAbility(effect, 1);
         effect = new LoseLifeSourceControllerEffect(1);
         ability1.addEffect(effect.concatBy("and"));

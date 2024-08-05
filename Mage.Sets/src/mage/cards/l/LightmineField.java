@@ -1,9 +1,5 @@
 package mage.cards.l;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -16,11 +12,14 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class LightmineField extends CardImpl {
@@ -44,7 +43,7 @@ public final class LightmineField extends CardImpl {
 
 class LightmineFieldTriggeredAbility extends TriggeredAbilityImpl {
 
-    public LightmineFieldTriggeredAbility() {
+    LightmineFieldTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LightmineFieldEffect());
         setTriggerPhrase("Whenever one or more creatures attack, ");
     }
@@ -100,7 +99,7 @@ class LightmineFieldEffect extends OneShotEffect {
         int damage = game.getCombat().getAttackers().size();
         Set<MageObjectReference> attackSet = (Set<MageObjectReference>) getValue("Lightmine Field");
         if (damage > 0) {
-            for (Iterator<MageObjectReference> it = attackSet.iterator(); it.hasNext();) {
+            for (Iterator<MageObjectReference> it = attackSet.iterator(); it.hasNext(); ) {
                 MageObjectReference attacker = it.next();
                 Permanent creature = attacker.getPermanent(game);
                 if (creature != null) {

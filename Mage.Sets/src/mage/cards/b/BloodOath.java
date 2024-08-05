@@ -54,7 +54,7 @@ class BloodOathEffect extends OneShotEffect {
         choice.add(CardType.LAND.toString());
         choice.add(CardType.PLANESWALKER.toString());
         choice.add(CardType.SORCERY.toString());
-        choice.add(CardType.TRIBAL.toString());
+        choice.add(CardType.KINDRED.toString());
     }
 
     public BloodOathEffect() {
@@ -77,7 +77,7 @@ class BloodOathEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (player != null && opponent != null && sourceObject != null) {
-            Choice choiceImpl = new ChoiceImpl();
+            Choice choiceImpl = new ChoiceImpl(true);
             choiceImpl.setChoices(choice);
             if (player.choose(Outcome.Neutral, choiceImpl, game)) {
                 CardType type = null;
@@ -97,8 +97,8 @@ class BloodOathEffect extends OneShotEffect {
                     type = CardType.SORCERY;
                 } else if (chosenType.equals(CardType.PLANESWALKER.toString())) {
                     type = CardType.PLANESWALKER;
-                } else if (chosenType.equals(CardType.TRIBAL.toString())) {
-                    type = CardType.TRIBAL;
+                } else if (chosenType.equals(CardType.KINDRED.toString())) {
+                    type = CardType.KINDRED;
                 }
                 if (type != null) {
                     Cards hand = opponent.getHand();

@@ -1,5 +1,8 @@
 package org.mage.plugins.card.dl;
 
+import mage.client.remote.XmageURLConnection;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 import org.jetlang.channels.Channel;
 import org.jetlang.channels.MemoryChannel;
@@ -7,13 +10,15 @@ import org.jetlang.core.Callback;
 import org.jetlang.fibers.Fiber;
 import org.jetlang.fibers.PoolFiberFactory;
 import org.mage.plugins.card.dl.DownloadJob.Destination;
-import org.mage.plugins.card.dl.DownloadJob.Source;
 import org.mage.plugins.card.dl.DownloadJob.State;
 import org.mage.plugins.card.dl.lm.AbstractLaternaBean;
 
 import javax.swing.*;
-import java.io.*;
-import java.net.ConnectException;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -22,7 +27,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Downloader
+ * Download: symbols download service
  *
  * @author Clemens Koza, JayDi85
  */
@@ -34,7 +39,9 @@ public class Downloader extends AbstractLaternaBean {
     private final Channel<DownloadJob> jobsQueue = new MemoryChannel<>();
     private CountDownLatch worksCount = null;
 
-    private final ExecutorService pool = Executors.newCachedThreadPool();
+    private final ExecutorService pool = Executors.newCachedThreadPool(
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_SYMBOLS_DOWNLOADER, false)
+    );
     private final List<Fiber> fibers = new ArrayList<>();
 
     public Downloader() {
@@ -101,11 +108,11 @@ public class Downloader extends AbstractLaternaBean {
                 worksCount.await(60, TimeUnit.SECONDS);
 
                 if (worksCount.getCount() != 0) {
-                    logger.warn("Symbols download too long...");
+                    logger.warn("Download: symbols downloading too long");
                 }
             }
         } catch (InterruptedException e) {
-            logger.error("Need to stop symbols download...");
+            logger.error("Download: symbols downloading must be stopped");
         }
     }
 
@@ -114,8 +121,8 @@ public class Downloader extends AbstractLaternaBean {
     }
 
     /**
-     * Performs the download job: Transfers data from {@link Source} to
-     * {@link Destination} and updates the download job's state to reflect the
+     * Performs the download job: Transfers data from source to
+     * destination and updates the download job's state to reflect the
      * progress.
      */
     private class DownloadCallback implements Callback<DownloadJob> {
@@ -129,7 +136,7 @@ public class Downloader extends AbstractLaternaBean {
                     // take new job
                     job.doPrepareAndStartWork();
                     if (job.getState() != State.WORKING) {
-                        logger.warn("Can't prepare symbols download job: " + job.getName());
+                        logger.warn("Download: can't prepare symbols download job: " + job.getName() + ", reason: " + job.getError());
                         worksCount.countDown();
                         return;
                     }
@@ -142,7 +149,6 @@ public class Downloader extends AbstractLaternaBean {
             // real work for new job
             // download and save data
             try {
-                Source src = job.getSource();
                 Destination dst = job.getDestination();
                 BoundedRangeModel progress = job.getProgress();
 
@@ -151,65 +157,66 @@ public class Downloader extends AbstractLaternaBean {
                     progress.setMaximum(1);
                     progress.setValue(1);
                 } else {
-                    // downloading
+                    // need to download
+
+                    // clean local file
                     if (dst.exists()) {
                         try {
                             dst.delete();
-                        } catch (IOException ex1) {
-                            logger.warn("While deleting not valid file", ex1);
+                        } catch (IOException e) {
+                            logger.warn("Download: can't delete old file " + e, e);
                         }
                     }
-                    progress.setMaximum(src.length());
-                    InputStream is = new BufferedInputStream(src.open());
-                    try {
-                        OutputStream os = new BufferedOutputStream(dst.open());
-                        try {
-                            byte[] buf = new byte[8 * 1024];
-                            int total = 0;
-                            for (int len; (len = is.read(buf)) != -1; ) {
-                                if (job.getState() == State.ABORTED) {
-                                    throw new IOException("Job was aborted");
+
+                    // download
+                    // start debug here with breakpoint like job.getName().contains("C/B")
+                    XmageURLConnection connection = new XmageURLConnection(job.getUrl());
+                    connection.startConnection();
+                    if (connection.isConnected()) {
+                        // start downloading
+                        connection.connect();
+                        if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                            // all fine, can continue and save
+                            progress.setMaximum(connection.getContentLength());
+                            try (InputStream inputStream = connection.getGoodResponseAsStream();
+                                 OutputStream outputStream = new BufferedOutputStream(dst.open())) {
+                                byte[] buf = new byte[8 * 1024];
+                                int total = 0;
+                                for (int len; (len = inputStream.read(buf)) != -1; ) {
+                                    // fast cancel
+                                    if (job.getState() == State.ABORTED) {
+                                        throw new IOException("job was aborted");
+                                    }
+                                    progress.setValue(total += len);
+                                    outputStream.write(buf, 0, len);
                                 }
-                                progress.setValue(total += len);
-                                os.write(buf, 0, len);
-                            }
-                        } catch (IOException ex) {
-                            try {
-                                dst.delete();
-                            } catch (IOException ex1) {
-                                logger.warn("While deleting", ex1);
-                            }
-                            throw ex;
-                        } finally {
-                            try {
-                                os.close();
+                            } catch (IOException e) {
+                                // something bad on downloading
+                                logger.warn("Download: " + job.getName() + " - catch error on downloading network resource "
+                                        + job.getUrl() + " - " + e, e);
+                            } finally {
+                                // clean up
                                 if (!dst.isValid()) {
+                                    logger.warn("Download: " + job.getName() + " - downloaded invalid network resource (not exists?) " + job.getUrl());
                                     dst.delete();
-                                    logger.warn("Resource not found " + job.getName() + " from " + job.getSource().toString());
                                 }
-                            } catch (IOException ex) {
-                                logger.warn("While closing", ex);
                             }
+                        } else {
+                            // something bad with resource on server (example: wrong url)
+                            logger.warn("Download: " + job.getName() + " - can't find network resource " + job.getUrl());
                         }
-                    } finally {
-                        try {
-                            is.close();
-                        } catch (IOException ex) {
-                            logger.warn("While closing", ex);
-                        }
+                    } else {
+                        // something bad with network (example: can't connect due bad network)
+                        logger.warn("Download: " + job.getName() + " - can't connect to network resource " + job.getUrl());
                     }
                 }
+
+                // all done
                 job.setState(State.FINISHED);
-            } catch (ConnectException ex) {
-                String message;
-                if (ex.getMessage() != null) {
-                    message = ex.getMessage();
-                } else {
-                    message = "Unknown error";
-                }
-                logger.warn("Error resource download " + job.getName() + " from " + job.getSource().toString() + ": " + message);
-            } catch (IOException ex) {
-                job.setError(ex);
+            } catch (Exception e) {
+                // TODO: save error in other logger.warn?
+                job.setError(e);
+                logger.warn("Download: " + job.getName() + " - unknown error for network resource " + job.getUrl() + " - " + e, e);
             } finally {
                 worksCount.countDown();
             }

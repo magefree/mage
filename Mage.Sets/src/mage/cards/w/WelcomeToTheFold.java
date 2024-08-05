@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -67,7 +68,7 @@ class WelcomeToTheFoldEffect extends GainControlTargetEffect {
             int maxToughness = 2;
             ManaCosts manaCosts = source.getManaCostsToPay();
             if (!manaCosts.getVariableCosts().isEmpty()) {
-                maxToughness = source.getManaCostsToPay().getX();
+                maxToughness = CardUtil.getSourceCostsTag(game, source, "X", 0);
             }
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null && permanent.getToughness().getValue() > maxToughness) {

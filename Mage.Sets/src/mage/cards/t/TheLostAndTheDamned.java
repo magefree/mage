@@ -20,7 +20,7 @@ public final class TheLostAndTheDamned extends CardImpl {
     public TheLostAndTheDamned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{R}");
 
-        // Whenever a land enters the battlefield under your control from anywhere other than your hand or you cast a spell from anywhere other than your hand, create 3/3 red Spawn creature token.
+        // Whenever a land you control enters from anywhere other than your hand or you cast a spell from anywhere other than your hand, create 3/3 red Spawn creature token.
         this.addAbility(new TheLostAndTheDamnedTriggeredAbility());
     }
 
@@ -38,7 +38,7 @@ class TheLostAndTheDamnedTriggeredAbility extends TriggeredAbilityImpl {
 
     TheLostAndTheDamnedTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpawnToken()));
-        setTriggerPhrase("Whenever a land enters the battlefield under your control from anywhere other than your hand or you cast a spell from anywhere other than your hand, ");
+        setTriggerPhrase("Whenever a land you control enters from anywhere other than your hand or you cast a spell from anywhere other than your hand, ");
     }
 
     private TheLostAndTheDamnedTriggeredAbility(final TheLostAndTheDamnedTriggeredAbility ability) {

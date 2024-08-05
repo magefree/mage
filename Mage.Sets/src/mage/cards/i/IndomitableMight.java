@@ -74,7 +74,7 @@ class IndomitableMightEffect extends AsThoughEffectImpl {
             return false;
         }
         Permanent permanent = game.getPermanent(sourcePermanent.getAttachedTo());
-        if (permanent == null) {
+        if (permanent == null || !sourceId.equals(permanent.getId())) {
             return false;
         }
         Player controller = game.getPlayer(permanent.getControllerId());

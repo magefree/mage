@@ -1,18 +1,20 @@
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author North
@@ -45,8 +47,9 @@ class GalvanothEffect extends OneShotEffect {
 
     GalvanothEffect() {
         super(Outcome.PlayForFree);
-        staticText = "look at the top card of your library. If it's an instant or "
-                + "sorcery card, you may cast it without paying its mana cost";
+        staticText = "look at the top card of your library. "
+                + "You may cast it without paying its mana cost "
+                + "if it's an instant or sorcery spell";
     }
 
     private GalvanothEffect(final GalvanothEffect effect) {
@@ -61,12 +64,9 @@ class GalvanothEffect extends OneShotEffect {
             if (card != null) {
                 controller.lookAtCards(source, null, new CardsImpl(card), game);
                 if (card.isInstantOrSorcery(game)) {
-                    if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                        controller.cast(controller.chooseAbilityForCast(card, game, true),
-                                game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                    }
+                    new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST)
+                            .setTargetPointer(new FixedTarget(card.getId()))
+                            .apply(game, source);
                 }
             }
             return true;

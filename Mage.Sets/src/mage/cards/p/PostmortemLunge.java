@@ -10,16 +10,16 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -35,7 +35,7 @@ public final class PostmortemLunge extends CardImpl {
         // Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new PostmortemLungeEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.getSpellAbility().setTargetAdjuster(PostmortemLungeAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
     }
 
     private PostmortemLunge(final PostmortemLunge card) {
@@ -45,19 +45,6 @@ public final class PostmortemLunge extends CardImpl {
     @Override
     public PostmortemLunge copy() {
         return new PostmortemLunge(this);
-    }
-}
-
-enum PostmortemLungeAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue + " or less from your graveyard");
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().add(new TargetCardInYourGraveyard(filter));
     }
 }
 

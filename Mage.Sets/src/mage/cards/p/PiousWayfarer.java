@@ -25,7 +25,7 @@ public final class PiousWayfarer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Constellation — Whenever an enchantment enters the battlefield under your control, target creature gets +1/+1 until end of turn.
+        // Constellation — Whenever an enchantment you control enters, target creature gets +1/+1 until end of turn.
         Ability ability = new ConstellationAbility(
                 new BoostTargetEffect(1, 1), false, false
         );

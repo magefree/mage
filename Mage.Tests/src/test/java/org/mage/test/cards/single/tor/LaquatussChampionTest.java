@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author Quercitron
  */
 public class LaquatussChampionTest extends CardTestPlayerBase {
@@ -72,7 +71,7 @@ public class LaquatussChampionTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Laquatus's Champion");
         addTarget(playerA, playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Terminate", "Laquatus's Champion", "enters the battlefield", StackClause.WHILE_ON_STACK);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Terminate", "Laquatus's Champion", "enters", StackClause.WHILE_ON_STACK);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

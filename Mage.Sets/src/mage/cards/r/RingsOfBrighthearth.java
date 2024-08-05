@@ -4,7 +4,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -63,7 +62,7 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
+        if (stackAbility == null || stackAbility.getStackAbility().isManaActivatedAbility()) {
             return false;
         }
         this.getEffects().setValue("stackObject", stackAbility);

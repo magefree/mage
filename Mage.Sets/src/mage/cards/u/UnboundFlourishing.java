@@ -5,7 +5,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -90,7 +89,7 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
     UnboundFlourishingCopyAbility() {
         super(Zone.BATTLEFIELD, new UnboundFlourishingCopyEffect(), false);
         setTriggerPhrase("Whenever you cast an instant or sorcery spell or activate an ability, " +
-                         "if that spell's mana cost or that ability's activation cost contains {X}" );
+                "if that spell's mana cost or that ability's activation cost contains {X}");
     }
 
     private UnboundFlourishingCopyAbility(final UnboundFlourishingCopyAbility ability) {
@@ -117,7 +116,7 @@ class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
         // activated ability
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
+            if (stackAbility != null && !stackAbility.getStackAbility().isManaActivatedAbility()) {
                 if (stackAbility.getManaCostsToPay().containsX()) {
                     game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, stackAbility);
                     return true;

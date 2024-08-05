@@ -5,7 +5,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetStackAbilityEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -72,8 +72,8 @@ public final class JayasPhoenix extends CardImpl {
 
 class JayasPhoenixTriggeredAbility extends DelayedTriggeredAbility {
 
-    public JayasPhoenixTriggeredAbility() {
-        super(new CopyTargetStackAbilityEffect(), Duration.EndOfTurn);
+    JayasPhoenixTriggeredAbility() {
+        super(new CopyTargetStackObjectEffect(), Duration.EndOfTurn);
     }
 
     private JayasPhoenixTriggeredAbility(final JayasPhoenixTriggeredAbility ability) {

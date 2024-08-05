@@ -77,9 +77,10 @@ class DragonCultistWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event instanceof DamagedEvent) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
+            Integer amount = event.getAmount();
             map.computeIfAbsent(game.getControllerId(event.getSourceId()), x -> new HashMap<>())
-                    .compute(new MageObjectReference(event.getSourceId(), game), CardUtil::setOrIncrementValue);
+                    .compute(new MageObjectReference(event.getSourceId(), game), (k, v) -> (v == null) ? amount : v + amount);
         }
     }
 

@@ -28,7 +28,7 @@ public class TheMimeoplasmTest extends CardTestPlayerBase {
     @Test
     public void testCloneMimeoplasm() {
         // As The Mimeoplasm enters the battlefield, you may exile two creature cards from graveyards. 
-        // If you do, it enters the battlefield as a copy of one of those cards with a number of additional +1/+1 counters on it equal to the power of the other card.        
+        // If you do, it enters as a copy of one of those cards with a number of additional +1/+1 counters on it equal to the power of the other card.
         addCard(Zone.HAND, playerA, "The Mimeoplasm", 1); // {2}{G}{U}{B}
         
         addCard(Zone.HAND, playerA, "Clone", 1); // {3}{U}

@@ -246,7 +246,7 @@ public class Turn implements Serializable {
             Phase phase;
             switch (extraPhase) {
                 case BEGINNING:
-                    phase = new BeginningPhase();
+                    phase = new BeginningPhase(true);
                     break;
                 case PRECOMBAT_MAIN:
                     phase = new PreCombatMainPhase();
@@ -262,6 +262,10 @@ public class Turn implements Serializable {
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown phase type: " + extraPhase);
+            }
+            PhaseStep skipAllButExtraStep = extraPhaseMod.getSkipAllButExtraStep();
+            if (skipAllButExtraStep != null) {
+                phase.keepOnlyStep(skipAllButExtraStep);
             }
             currentPhase = phase;
             game.fireEvent(new PhaseChangedEvent(activePlayerId, extraPhaseMod));
@@ -368,7 +372,7 @@ public class Turn implements Serializable {
         int delimiter = game.getPlayers().size() - 1;
         for (Player gamePlayer : game.getPlayers().values()) {
             sb.append(gamePlayer.getLife());
-            int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
+            int poison = gamePlayer.getCountersCount(CounterType.POISON);
             if (poison > 0) {
                 sb.append("[P:").append(poison).append(']');
             }

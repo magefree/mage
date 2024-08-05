@@ -3,7 +3,6 @@ package mage.cards.n;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -24,6 +23,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -140,13 +140,7 @@ public final class NightDealings extends CardImpl {
                 return false;
             }
 
-            int cmc = 0;
-            for (Cost cost : source.getCosts()) {
-                if (cost instanceof RemoveVariableCountersSourceCost) {
-                    cmc = ((RemoveVariableCountersSourceCost) cost).getAmount();
-                    break;
-                }
-            }
+            int cmc = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
             FilterCard filter = new FilterNonlandCard("nonland card with mana value " + cmc);
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));

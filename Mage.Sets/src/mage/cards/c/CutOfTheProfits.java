@@ -1,6 +1,6 @@
 package mage.cards.c;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.CasualtyAbility;
@@ -22,8 +22,8 @@ public final class CutOfTheProfits extends CardImpl {
         this.addAbility(new CasualtyAbility(3));
 
         // You draw X cards and you lose X life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR, "you"));
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.REGULAR).concatBy("and"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance, true));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(GetXValue.instance).concatBy("and"));
     }
 
     private CutOfTheProfits(final CutOfTheProfits card) {

@@ -15,6 +15,10 @@ public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     private final boolean setTargetPointer;
 
+    public SacrificeSourceTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
     public SacrificeSourceTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
     }

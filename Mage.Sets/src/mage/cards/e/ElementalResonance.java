@@ -97,7 +97,7 @@ class ElementalResonanceEffect extends OneShotEffect {
         String manaToAdd = "";
         if (manaOptions.size() > 1) {
 //          TODO: Make the choices look nicer, right now the brace notation is hard to visually parse, especially with Reaper King
-            Choice choice = new ChoiceImpl();
+            Choice choice = new ChoiceImpl(false);
             choice.setMessage("Choose a mana combination");
             choice.getChoices().addAll(manaOptions);
             if (!controller.choose(Outcome.PutManaInPool, choice, game)) {

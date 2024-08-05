@@ -90,7 +90,7 @@ class WormfangCrabExileEffect extends OneShotEffect {
         filter.add(new ControllerIdPredicate(controller.getId()));
         TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
-        target.setTargetName("a permanent that player controls");
+        target.withTargetName("a permanent that player controls");
         if (!opponent.choose(outcome, target, source, game)) {
             return false;
         }

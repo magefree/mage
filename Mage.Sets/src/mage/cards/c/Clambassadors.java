@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
@@ -10,7 +9,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -20,8 +22,9 @@ import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Clambassadors extends CardImpl {
@@ -82,7 +85,7 @@ class ClambassadorsEffect extends OneShotEffect {
         if (controller != null) {
             Target target = new TargetControlledPermanent(1, 1, filter, true);
             if (target.canChoose(controller.getId(), source, game)) {
-                while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+                while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                     controller.chooseTarget(outcome, target, source, game);
                 }
             }

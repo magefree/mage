@@ -100,7 +100,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
         List<Permanent> fromBattlefield = new ArrayList<>();
         List<Card> fromHandGraveyard = new ArrayList<>();
 
-        int countBattlefield = game.getBattlefield().getAllActivePermanents(filterAura, game).size() - sourcePermanent.getAttachments().size();
+        int countBattlefield = game.getBattlefield().getActivePermanents(filterAura, source.getControllerId(), source, game).size() - sourcePermanent.getAttachments().size();
         while (controller.canRespond()
                 && countBattlefield > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from the battlefield?", source, game)) {
@@ -117,7 +117,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
             fromBattlefield.add(aura);
             filterAura.add(Predicates.not(new CardIdPredicate(aura.getId())));
 
-            countBattlefield = game.getBattlefield().getAllActivePermanents(filterAura, game).size() - sourcePermanent.getAttachments().size();
+            countBattlefield = game.getBattlefield().getActivePermanents(filterAura, source.getControllerId(), source, game).size() - sourcePermanent.getAttachments().size();
         }
 
         int countHand = controller.getHand().count(filterAuraCard, game);

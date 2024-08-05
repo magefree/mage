@@ -31,7 +31,7 @@ public final class AnchorToReality extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
         // As an additional cost to cast this spell, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
 
         // Search your library for an Equipment or Vehicle card, put that card onto the battlefield, then shuffle. If it has mana value less than the sacrificed permanent's mana value, scry 2.
         this.getSpellAbility().addEffect(new AnchorToRealityEffect());

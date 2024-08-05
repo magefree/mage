@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.AftermathAbility;
@@ -28,7 +28,7 @@ public final class CutRibbons extends SplitCard {
         // Ribbons
         // Each opponent loses X life.
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        getRightHalfCard().getSpellAbility().addEffect(new LoseLifeOpponentsEffect(ManacostVariableValue.REGULAR));
+        getRightHalfCard().getSpellAbility().addEffect(new LoseLifeOpponentsEffect(GetXValue.instance));
 
     }
 

@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
+import mage.abilities.effects.common.combat.CantAttackAllEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -97,7 +97,7 @@ class OrimsChantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && KickedCondition.ONCE.apply(game, source)) {
-            game.addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES), source);
+            game.addEffect(new CantAttackAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES), source);
             return true;
         }
         return false;

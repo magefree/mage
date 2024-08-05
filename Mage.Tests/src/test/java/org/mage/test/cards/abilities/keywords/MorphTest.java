@@ -194,7 +194,7 @@ public class MorphTest extends CardTestPlayerBase {
         // Doomwake Giant  {4}{B}
         // Creature - Giant
         // 4/6
-        // Constellation - When Doomwake Giant or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
+        // Constellation - When Doomwake Giant or another enchantment you control enters, creatures your opponents control get -1/-1 until end of turn.
         addCard(Zone.HAND, playerB, "Doomwake Giant", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 5);
 
@@ -235,7 +235,7 @@ public class MorphTest extends CardTestPlayerBase {
         // Doomwake Giant  {4}{B}
         // Creature - Giant
         // 4/6
-        // Constellation - When Doomwake Giant or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
+        // Constellation - When Doomwake Giant or another enchantment you control enters, creatures your opponents control get -1/-1 until end of turn.
         addCard(Zone.HAND, playerB, "Doomwake Giant", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 5);
 
@@ -1293,5 +1293,24 @@ public class MorphTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+    }
+
+    @Test
+    public void test_Morph_HoodedHydra() {
+        // Morph {2}
+        addCard(Zone.HAND, playerA, "Hooded Hydra");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3+5);
+
+        // prepare face down
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hooded Hydra using Morph");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}{G}{G}: Turn this face-down permanent face up.");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Hooded Hydra", 1);
+        assertPowerToughness(playerA, "Hooded Hydra", 5, 5);
     }
 }

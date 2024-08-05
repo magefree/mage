@@ -69,6 +69,7 @@ public class MorphAbility extends SpellAbility {
             + "as a 2/2 creature for {3}. Turn it face up any time for its megamorph "
             + "cost and put a +1/+1 counter on it.";
     protected Costs<Cost> morphCosts;
+    protected boolean isMegamorph;
 
     public MorphAbility(Card card, Cost morphCost) {
         this(card, morphCost, false);
@@ -79,7 +80,8 @@ public class MorphAbility extends SpellAbility {
         this.timing = TimingRule.SORCERY;
         this.morphCosts = new CostsImpl<>();
         this.morphCosts.add(morphCost);
-        this.setSpellAbilityCastMode(useMegamorph ? SpellAbilityCastMode.MEGAMORPH : SpellAbilityCastMode.MORPH);
+        this.isMegamorph = useMegamorph;
+        this.setSpellAbilityCastMode(SpellAbilityCastMode.MORPH);
         this.setSpellAbilityType(SpellAbilityType.BASE_ALTERNATE);
 
         // face down effect (hidden by default, visible in face down objects)
@@ -93,6 +95,7 @@ public class MorphAbility extends SpellAbility {
     protected MorphAbility(final MorphAbility ability) {
         super(ability);
         this.morphCosts = ability.morphCosts; // can't be changed TODO: looks buggy, need research
+        this.isMegamorph = ability.isMegamorph;
     }
 
     @Override
@@ -109,17 +112,12 @@ public class MorphAbility extends SpellAbility {
         boolean isMana = morphCosts.get(0) instanceof ManaCost;
         String text;
         String reminder;
-        switch (this.getSpellAbilityCastMode()) {
-            case MORPH:
-                text = ABILITY_KEYWORD;
-                reminder = REMINDER_TEXT;
-                break;
-            case MEGAMORPH:
-                text = ABILITY_KEYWORD_MEGA;
-                reminder = REMINDER_TEXT_MEGA;
-                break;
-            default:
-                throw new IllegalArgumentException("Un-supported spell ability cast mode for morph: " + this.getSpellAbilityCastMode());
+        if (isMegamorph){
+            text = ABILITY_KEYWORD_MEGA;
+            reminder = REMINDER_TEXT_MEGA;
+        } else {
+            text = ABILITY_KEYWORD;
+            reminder = REMINDER_TEXT;
         }
         return text + (isMana ? " " : "&mdash;") + morphCosts.getText() + (isMana ? ' ' : ". ") + " <i>(" + reminder + ")</i>";
     }

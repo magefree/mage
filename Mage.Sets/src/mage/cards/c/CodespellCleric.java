@@ -41,7 +41,7 @@ public final class CodespellCleric extends CardImpl {
         // When Codespell Cleric enters the battlefield, if it was the second spell you cast this turn, put a +1/+1 counter on target creature.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance())),
-                CodespellClericCondition.instance, "When {this} enters the battlefield, " +
+                CodespellClericCondition.instance, "When {this} enters, " +
                 "if it was the second spell you cast this turn, put a +1/+1 counter on target creature."
         );
         ability.addTarget(new TargetCreaturePermanent());

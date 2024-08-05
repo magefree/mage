@@ -63,6 +63,6 @@ public class ConspicuousSnoopTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         execute();
 
-        assertAbilityCount(playerA, "Conspicuous Snoop", ActivatedAbility.class, 3); // (2 X casts + gains flying )
+        assertAbilityCount(playerA, "Conspicuous Snoop", ActivatedAbility.class, 2); // (own cast ability + gains flying )
     }
 }

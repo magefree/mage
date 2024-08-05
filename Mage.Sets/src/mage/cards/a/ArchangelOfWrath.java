@@ -44,13 +44,13 @@ public final class ArchangelOfWrath extends CardImpl {
         triggeredAbility.addTarget(new TargetAnyTarget());
         // When Archangel of Wrath enters the battlefield, if it was kicked, it deals 2 damage to any target.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                triggeredAbility, KickedCondition.ONCE, "When {this} enters the battlefield, " +
+                triggeredAbility, KickedCondition.ONCE, "When {this} enters, " +
                 "if it was kicked, it deals 2 damage to any target."
         ));
 
         // When Archangel of Wrath enters the battlefield, if it was kicked twice, it deals 2 damage to any target.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                triggeredAbility.copy(), KickedCondition.TWICE, "When {this} enters the battlefield, " +
+                triggeredAbility.copy(), KickedCondition.TWICE, "When {this} enters, " +
                 "if it was kicked twice, it deals 2 damage to any target."
         ));
     }

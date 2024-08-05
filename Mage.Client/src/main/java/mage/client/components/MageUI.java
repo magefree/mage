@@ -3,18 +3,22 @@ package mage.client.components;
 import mage.util.ThreadUtils;
 import org.apache.log4j.Logger;
 
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.concurrent.*;
-import javax.swing.JButton;
 
+/**
+ * GUI helper class to store global/shared components list like menus, buttons, panels
+ * See MageComponents for all shared components
+ */
 public class MageUI {
 
     private static final Logger logger = Logger.getLogger(MageUI.class);
 
-    private final Map<MageComponents, Component> ui = new EnumMap<>(MageComponents.class);
-    private final Map<MageComponents, Object> sync = new EnumMap<>(MageComponents.class);
+    private final Map<MageComponents, Component> ui = new EnumMap<>(MageComponents.class); // components list
+    private final Map<MageComponents, Object> sync = new EnumMap<>(MageComponents.class); // waiting for components init
 
     public static final ThreadPoolExecutor threadPoolPopups;
     private static int threadCount;
@@ -69,24 +73,33 @@ public class MageUI {
     }
 
     public Component getComponent(MageComponents name) throws InterruptedException {
+        return getComponent(name, true);
+    }
+
+    public Component getComponent(MageComponents name, boolean waitComponentInit) throws InterruptedException {
         Object componentSync;
         synchronized (ui) {
             if (ui.containsKey(name)) {
                 return ui.get(name);
-            } else {
-                componentSync = new Object();
+            }
+        }
+
+        if (waitComponentInit) {
+            // start waiting until component init from other places like plugins
+            componentSync = new Object();
+            synchronized (sync) {
                 sync.put(name, componentSync);
             }
-        }
-
-        synchronized (componentSync) {
-            componentSync.wait();
-            if (!ui.containsKey(name)) {
-                throw new IllegalStateException("Component wasn't initialized. This should not happen.");
+            synchronized (componentSync) {
+                componentSync.wait();
+                if (!ui.containsKey(name)) {
+                    throw new IllegalStateException("Component wasn't initialized. This should not happen.");
+                }
+                return ui.get(name);
             }
-            return ui.get(name);
         }
 
+        return null;
     }
 
     public void addButton(MageComponents name, JButton button) {

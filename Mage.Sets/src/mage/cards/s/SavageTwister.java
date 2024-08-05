@@ -2,7 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class SavageTwister extends CardImpl {
 
 
         // Savage Twister deals X damage to each creature.
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, new FilterCreaturePermanent()));
     }
 
     private SavageTwister(final SavageTwister card) {
