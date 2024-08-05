@@ -44,7 +44,7 @@ public final class PersistentMarshstalker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield)));
 
         // Threshold -- Whenever you attack with one or more Rats, if seven or more cards are in your graveyard, you may pay {2}{B}. If you do, return Persistent Marshstalker from your graveyard to the battlefield tapped and attacking.
-        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new ConditionalOneShotEffect(new DoIfCostPaid(
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(Zone.GRAVEYARD, new ConditionalOneShotEffect(new DoIfCostPaid(
                 new ReturnSourceFromGraveyardToBattlefieldEffect(true, false, false, true), new ManaCostsImpl<>("{2}{B}")),
                 ThresholdCondition.instance), 1, filter).setTriggerPhrase("Whenever you attack with one or more Rats, ")
                 .setAbilityWord(AbilityWord.THRESHOLD));
