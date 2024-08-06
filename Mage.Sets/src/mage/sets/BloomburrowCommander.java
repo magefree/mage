@@ -52,6 +52,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bootleggers' Stash", 207, Rarity.MYTHIC, mage.cards.b.BootleggersStash.class));
         cards.add(new SetCardInfo("Boros Signet", 128, Rarity.UNCOMMON, mage.cards.b.BorosSignet.class));
         cards.add(new SetCardInfo("Boss's Chauffeur", 137, Rarity.RARE, mage.cards.b.BosssChauffeur.class));
+        cards.add(new SetCardInfo("Brightcap Badger", 28, Rarity.RARE, mage.cards.b.BrightcapBadger.class));
         cards.add(new SetCardInfo("Broken Wings", 208, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Brushland", 295, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Burnished Hart", 266, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
