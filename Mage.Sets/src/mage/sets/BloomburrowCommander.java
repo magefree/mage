@@ -302,6 +302,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Unnatural Growth", 245, Rarity.RARE, mage.cards.u.UnnaturalGrowth.class));
         cards.add(new SetCardInfo("Viridescent Bog", 352, Rarity.RARE, mage.cards.v.ViridescentBog.class));
         cards.add(new SetCardInfo("Warstorm Surge", 117, Rarity.RARE, mage.cards.w.WarstormSurge.class));
+        cards.add(new SetCardInfo("Wildsear, Scouring Maw", 8, Rarity.MYTHIC, mage.cards.w.WildsearScouringMaw.class));
         cards.add(new SetCardInfo("Windgrace's Judgment", 263, Rarity.RARE, mage.cards.w.WindgracesJudgment.class));
         cards.add(new SetCardInfo("Wizard Class", 112, Rarity.UNCOMMON, mage.cards.w.WizardClass.class));
         cards.add(new SetCardInfo("Woe Strider", 189, Rarity.RARE, mage.cards.w.WoeStrider.class));
