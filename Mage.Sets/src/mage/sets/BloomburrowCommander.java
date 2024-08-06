@@ -218,6 +218,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Riot Control", 151, Rarity.COMMON, mage.cards.r.RiotControl.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 235, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rites of Flourishing", 122, Rarity.RARE, mage.cards.r.RitesOfFlourishing.class));
+        cards.add(new SetCardInfo("Rolling Hamsphere", 39, Rarity.RARE, mage.cards.r.RollingHamsphere.class));
         cards.add(new SetCardInfo("Rootbound Crag", 326, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Rootcast Apprenticeship", 32, Rarity.RARE, mage.cards.r.RootcastApprenticeship.class));
         cards.add(new SetCardInfo("Rose Room Treasurer", 201, Rarity.RARE, mage.cards.r.RoseRoomTreasurer.class));
