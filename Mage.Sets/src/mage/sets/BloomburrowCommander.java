@@ -204,6 +204,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Psychosis Crawler", 282, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 172, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Putrefy", 257, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
+        cards.add(new SetCardInfo("Pyreswipe Hawk", 26, Rarity.RARE, mage.cards.p.PyreswipeHawk.class));
         cards.add(new SetCardInfo("Raging Ravine", 324, Rarity.RARE, mage.cards.r.RagingRavine.class));
         cards.add(new SetCardInfo("Rain of Riches", 200, Rarity.RARE, mage.cards.r.RainOfRiches.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 233, Rarity.MYTHIC, mage.cards.r.RampagingBaloths.class));

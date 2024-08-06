@@ -27,10 +27,11 @@ public class ExpendTriggeredAbility extends TriggeredAbilityImpl {
     private static final Hint hint = new ValueHint("Mana you expended this turn", ExpendValue.instance);
 
     /**
-     * For memory-usage purpose, we only support expend 4 and expend 8 so far.
+     * For memory-usage purpose, we only support expend 4, expend 6, and expend 8 so far.
      */
     public enum Expend {
         FOUR(4),
+        SIX(6),
         EIGHT(8);
 
         private final int amount;
@@ -106,7 +107,7 @@ enum ExpendValue implements DynamicValue {
 /**
  * Watcher for mana expended this turn.
  * <p>
- * Of note, to reduce memory usage, only tracks the events that did expend 4 and expend 8.
+ * Of note, to reduce memory usage, only tracks the events that did expend 4, expend 6, and expend 8.
  * If expend N extends to more than a couple values, storing the full list (in order) of event id is advised.
  */
 class ExpendWatcher extends Watcher {
@@ -116,6 +117,8 @@ class ExpendWatcher extends Watcher {
 
     // Player id -> event id for the 4th mana expended this turn
     private final Map<UUID, UUID> eventFor4thExpend = new HashMap<>();
+    // Player id -> event id for the 6th mana expended this turn
+    private final Map<UUID, UUID> eventFor6thExpend = new HashMap<>();
     // Player id -> event id for the 8th mana expended this turn
     private final Map<UUID, UUID> eventFor8thExpend = new HashMap<>();
 
@@ -141,6 +144,9 @@ class ExpendWatcher extends Watcher {
             case 4:
                 eventFor4thExpend.put(playerId, eventId);
                 break;
+            case 6:
+                eventFor6thExpend.put(playerId, eventId);
+                break;
             case 8:
                 eventFor8thExpend.put(playerId, eventId);
                 break;
@@ -152,6 +158,7 @@ class ExpendWatcher extends Watcher {
         super.reset();
         manaExpended.clear();
         eventFor4thExpend.clear();
+        eventFor6thExpend.clear();
         eventFor8thExpend.clear();
     }
 
@@ -164,6 +171,9 @@ class ExpendWatcher extends Watcher {
             case FOUR:
                 return watcher.eventFor4thExpend.containsKey(playerId)
                         && watcher.eventFor4thExpend.get(playerId).equals(event.getId());
+            case SIX:
+                return watcher.eventFor6thExpend.containsKey(playerId)
+                        && watcher.eventFor6thExpend.get(playerId).equals(event.getId());
             case EIGHT:
                 return watcher.eventFor8thExpend.containsKey(playerId)
                         && watcher.eventFor8thExpend.get(playerId).equals(event.getId());
