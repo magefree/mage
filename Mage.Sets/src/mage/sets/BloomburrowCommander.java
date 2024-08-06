@@ -299,6 +299,8 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Trailtracker Scout", 35, Rarity.RARE, mage.cards.t.TrailtrackerScout.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 350, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Triskaidekaphile", 178, Rarity.RARE, mage.cards.t.Triskaidekaphile.class));
+        cards.add(new SetCardInfo("Twenty-Toed Toad", 16, Rarity.RARE, mage.cards.t.TwentyToedToad.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Twenty-Toed Toad", 51, Rarity.RARE, mage.cards.t.TwentyToedToad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twilight Mire", 351, Rarity.RARE, mage.cards.t.TwilightMire.class));
         cards.add(new SetCardInfo("Unnatural Growth", 245, Rarity.RARE, mage.cards.u.UnnaturalGrowth.class));
         cards.add(new SetCardInfo("Viridescent Bog", 352, Rarity.RARE, mage.cards.v.ViridescentBog.class));
