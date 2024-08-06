@@ -99,6 +99,7 @@ public class ScryfallImageSupportCards {
             add("PLS"); // Planeshift
             add("7ED"); // Seventh Edition
             add("APC"); // Apocalypse
+            add("PSDG"); // Sega Dreamcast Cards
             add("WC01"); // World Championship Decks 2001
             add("ODY"); // Odyssey
             add("DKM"); // Deckmasters

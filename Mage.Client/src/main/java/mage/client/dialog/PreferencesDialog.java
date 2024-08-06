@@ -46,7 +46,6 @@ import java.util.prefs.Preferences;
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
-    // TODO: add chat font changes in real time (current code require to app restart)
     // TODO: fix card hand size (hand panel can't show full card on too big values - must use auto-height)
 
     private static final Logger logger = Logger.getLogger(PreferencesDialog.class);

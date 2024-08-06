@@ -1579,12 +1579,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void setConnectButtonText(String status) {
         this.btnConnect.setText(status);
 
-        // Needed to layout the tooltbar after text length change
+        // Needed to layout the toolbar after text length change
         // TODO: need research, is it actual?
-        GUISizeHelper.refreshGUIAndCards(false);
+        //GUISizeHelper.refreshGUIAndCards(false);
 
-        this.btnConnect.repaint();
-        this.btnConnect.revalidate();
+        this.btnConnect.invalidate();
+        //this.btnConnect.repaint();
+        //this.btnConnect.revalidate();
     }
 
     public static MageUI getUI() {
