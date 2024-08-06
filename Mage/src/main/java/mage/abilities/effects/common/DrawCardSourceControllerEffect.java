@@ -2,6 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -28,10 +29,18 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         this(amount, false);
     }
 
+    public DrawCardSourceControllerEffect(DynamicValue amount, DynamicValue.EffectPhrasing phrasing) {
+        this(amount, false, phrasing);
+    }
+
     public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw) {
+        this(amount, youDraw, DynamicValue.EffectPhrasing.FOR_EACH);
+    }
+
+    public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw, DynamicValue.EffectPhrasing phrasing) {
         super(Outcome.DrawCard);
         this.amount = amount.copy();
-        createStaticText(youDraw);
+        createStaticText(youDraw, phrasing);
     }
 
     protected DrawCardSourceControllerEffect(final DrawCardSourceControllerEffect effect) {
@@ -55,20 +64,38 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         return false;
     }
 
-    private void createStaticText(boolean youDraw) {
-        StringBuilder sb = new StringBuilder();
-        if (youDraw){
-            sb.append("you draw ");
-        } else {
-            sb.append("draw ");
+    private void createStaticText(boolean youDraw, DynamicValue.EffectPhrasing phrasing) {
+        StringBuilder sb = new StringBuilder(youDraw ? "you " : "");
+        sb.append("draw");
+        String value = " a";
+        if (amount instanceof StaticValue) {
+            value = " " + CardUtil.numberToText(((StaticValue)amount).getValue(), "a");
+        } else if (phrasing == DynamicValue.EffectPhrasing.X_IS || phrasing == DynamicValue.EffectPhrasing.X_HIDDEN) {
+            value = " X";
+        } else if (phrasing == DynamicValue.EffectPhrasing.EQUAL_TO) {
+            value = "";
+        } else if (amount instanceof MultipliedValue) {
+            value = " " + ((MultipliedValue)amount).getMultiplierText();
         }
-        String value = amount.toString();
-        sb.append(CardUtil.numberToText(value, "a"));
-        sb.append(value.equals("1") ? " card" : " cards");
-        String message = amount.getMessage();
-        if (!message.isEmpty()) {
-            sb.append(value.equals("X") ? ", where X is " : " for each ");
-            sb.append(message);
+        sb.append(value).append(value.equals(" a") ? " card" : " cards");
+        if (!(amount instanceof StaticValue)) {
+            switch (phrasing) {
+                case X_IS:
+                    sb.append(", where X is ");
+                    break;
+                case X_HIDDEN:
+                    // No additional text
+                    break;
+                case EQUAL_TO:
+                    sb.append(" equal to ");
+                    break;
+                case FOR_EACH:
+                    sb.append(" for each ");
+                    break;
+                default:
+                    throw new IllegalArgumentException("DynamicValue.EffectPhrasing enum not implemented: " + phrasing);
+            }
+            sb.append(amount.getMessage(phrasing));
         }
         staticText = sb.toString();
     }

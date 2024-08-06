@@ -2,6 +2,8 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -29,9 +31,9 @@ public final class AccumulatedKnowledge extends CardImpl {
 
         // Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        Effect effect = new DrawCardSourceControllerEffect(new CardsInAllGraveyardsCount(filter));
-        effect.setText(", then draw cards equal to the number of cards named {this} in all graveyards");
-        this.getSpellAbility().addEffect(effect);
+        Effect effect = new DrawCardSourceControllerEffect(
+                new CardsInAllGraveyardsCount(filter), DynamicValue.EffectPhrasing.EQUAL_TO);
+        this.getSpellAbility().addEffect(effect.concatBy(", then"));
     }
 
     private AccumulatedKnowledge(final AccumulatedKnowledge card) {

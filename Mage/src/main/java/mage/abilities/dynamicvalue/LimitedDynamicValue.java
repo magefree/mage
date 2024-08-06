@@ -2,6 +2,7 @@ package mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 
 /**
@@ -40,13 +41,13 @@ public class LimitedDynamicValue implements DynamicValue {
     }
 
     @Override
-    public String toString() {
-        return value.toString();
+    public String getMessage(EffectPhrasing phrasing) {
+        return value.getMessage(phrasing);
     }
 
     @Override
-    public String getMessage() {
-        return value.getMessage();
+    public ValueHint getHint() {
+        return value.getHint();
     }
 
     @Override
