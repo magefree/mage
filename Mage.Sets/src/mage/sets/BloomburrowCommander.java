@@ -199,6 +199,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prairie Stream", 323, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Primeval Bounty", 232, Rarity.MYTHIC, mage.cards.p.PrimevalBounty.class));
         cards.add(new SetCardInfo("Promise of Loyalty", 148, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
+        cards.add(new SetCardInfo("Prosperous Bandit", 25, Rarity.RARE, mage.cards.p.ProsperousBandit.class));
         cards.add(new SetCardInfo("Prosperous Innkeeper", 121, Rarity.UNCOMMON, mage.cards.p.ProsperousInnkeeper.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 282, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 172, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
