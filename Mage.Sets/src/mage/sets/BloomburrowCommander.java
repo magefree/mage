@@ -130,6 +130,8 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Harmonize", 120, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Haunted Mire", 311, Rarity.COMMON, mage.cards.h.HauntedMire.class));
         cards.add(new SetCardInfo("Haywire Mite", 274, Rarity.UNCOMMON, mage.cards.h.HaywireMite.class));
+        cards.add(new SetCardInfo("Hazel's Brewmaster", 17, Rarity.RARE, mage.cards.h.HazelsBrewmaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hazel's Brewmaster", 52, Rarity.RARE, mage.cards.h.HazelsBrewmaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hedron Archive", 275, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
         cards.add(new SetCardInfo("Helm of the Host", 276, Rarity.RARE, mage.cards.h.HelmOfTheHost.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 312, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
