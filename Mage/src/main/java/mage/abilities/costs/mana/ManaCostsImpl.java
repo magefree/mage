@@ -418,7 +418,6 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                     game.undo(playerId);
                     this.clearPaid();
 
-                    // TODO: checks Word of Command with Unbound Flourishing's X multiplier
                     // TODO: checks Word of Command with {X}{X} cards
                     int amount = 0;
                     List<VariableCost> variableCosts = getVariableCosts();

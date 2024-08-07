@@ -1668,24 +1668,22 @@ public class HumanPlayer extends PlayerImpl {
      *
      * @param min
      * @param max
-     * @param multiplier - X multiplier after replace events
      * @param message
      * @param ability
      * @param game
      * @return
      */
     @Override
-    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         if (gameInCheckPlayableState(game)) {
             return 0;
         }
 
         int xValue = 0;
-        String extraMessage = (multiplier == 1 ? "" : ", X will be increased by " + multiplier + " times");
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireGetAmountEvent(playerId, message + extraMessage + CardUtil.getSourceLogName(game, ability), min, max);
+                game.fireGetAmountEvent(playerId, message + CardUtil.getSourceLogName(game, ability), min, max);
             }
             waitForResponse(game);
 

@@ -2,7 +2,6 @@ package mage.player.ai;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.AbilityImpl;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
@@ -154,12 +153,8 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
                             }
                         }
                         // find real X value after replace events
-                        int xMultiplier = 1;
-                        if (newAbility instanceof AbilityImpl) {
-                            xMultiplier = ((AbilityImpl) newAbility).handleManaXMultiplier(game, xMultiplier);
-                        }
                         newAbility.addManaCostsToPay(new ManaCostsImpl<>(new StringBuilder("{").append(xAnnounceValue).append('}').toString()));
-                        newAbility.getManaCostsToPay().setX(xAnnounceValue * xMultiplier, xAnnounceValue * xInstancesCount);
+                        newAbility.getManaCostsToPay().setX(xAnnounceValue, xAnnounceValue * xInstancesCount);
                         if (varCost != null) {
                             varCost.setPaid();
                         }

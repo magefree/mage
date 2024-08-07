@@ -19,6 +19,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -114,6 +115,7 @@ class LeoriSparktouchedHunterTriggeredAbility extends DelayedTriggeredAbility {
         super(new CopyStackObjectEffect(), Duration.EndOfTurn, false);
         this.subType = subType;
         this.addHint(new StaticHint("Chosen Subtype: " + subType));
+        setTriggerPhrase("Whenever you activate an ability of a planeswalker of the chosen type, ");
     }
 
     private LeoriSparktouchedHunterTriggeredAbility(final LeoriSparktouchedHunterTriggeredAbility ability) {
@@ -146,13 +148,7 @@ class LeoriSparktouchedHunterTriggeredAbility extends DelayedTriggeredAbility {
         if (permanent == null || !permanent.isPlaneswalker(game) || !permanent.hasSubtype(subType, game)) {
             return false;
         }
-        this.getEffects().setValue("stackObject", stackAbility);
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate an ability of a planeswalker of the chosen type, copy that ability. " +
-                "You may choose new targets for the copies.";
     }
 }

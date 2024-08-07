@@ -278,8 +278,6 @@ public abstract class AbilityImpl implements Ability {
                 int xValue = CardUtil.getSourceCostsTag(game, this, "X", 0);
                 this.clearManaCostsToPay();
                 VariableManaCost xCosts = new VariableManaCost(VariableCostType.ADDITIONAL);
-                // no x events - rules from Unbound Flourishing:
-                // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
                 xCosts.setAmount(xValue, xValue, false);
                 addManaCostsToPay(xCosts);
             } else {
@@ -617,8 +615,6 @@ public abstract class AbilityImpl implements Ability {
                 Cost fixedCost = variableCost.getFixedCostsFromAnnouncedValue(xValue);
                 addCost(fixedCost);
                 // set the xcosts to paid
-                // no x events - rules from Unbound Flourishing:
-                // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
                 variableCost.setAmount(xValue, xValue, false);
                 ((Cost) variableCost).setPaid();
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')'
@@ -651,13 +647,6 @@ public abstract class AbilityImpl implements Ability {
                 getManaCostsToPay().incrPhyrexianPaid();
             }
         }
-    }
-
-    public int handleManaXMultiplier(Game game, int value) {
-        // some spells can change X value without new pays (Unbound Flourishing doubles X)
-        GameEvent xEvent = GameEvent.getEvent(GameEvent.EventType.X_MANA_ANNOUNCE, this.getId(), this, getControllerId(), value);
-        game.replaceEvent(xEvent, this);
-        return xEvent.getAmount();
     }
 
     /**
@@ -695,9 +684,8 @@ public abstract class AbilityImpl implements Ability {
         if (variableManaCost != null) {
             if (!variableManaCost.isPaid()) { // should only happen for human players
                 int xValue;
-                int xValueMultiplier = handleManaXMultiplier(game, 1);
                 if (!noMana || variableManaCost.getCostType().canUseAnnounceOnFreeCast()) {
-                    xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), xValueMultiplier,
+                    xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(),
                             "Announce the value for " + variableManaCost.getText(), game, this);
                     int amountMana = xValue * variableManaCost.getXInstancesCount();
                     StringBuilder manaString = threadLocalBuilder.get();
@@ -728,8 +716,8 @@ public abstract class AbilityImpl implements Ability {
                         }
                     }
                     addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
-                    getManaCostsToPay().setX(xValue * xValueMultiplier, amountMana);
-                    setCostsTag("X", xValue * xValueMultiplier);
+                    getManaCostsToPay().setX(xValue, amountMana);
+                    setCostsTag("X", xValue);
                 }
                 variableManaCost.setPaid();
             }

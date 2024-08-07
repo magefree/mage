@@ -15,6 +15,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -53,6 +54,8 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
 
     AshnodTheUncaringTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect(), true);
+        setTriggerPhrase("Whenever you activate an ability of an artifact or creature that isn't a mana ability, " +
+                "if one or more permanents were sacrificed to activate it, ");
     }
 
     private AshnodTheUncaringTriggeredAbility(final AshnodTheUncaringTriggeredAbility ability) {
@@ -88,14 +91,7 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null || (!permanent.isArtifact(game) && !permanent.isCreature(game))) {
             return false;
         }
-        this.getEffects().setValue("stackObject", stackAbility);
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate an ability of an artifact or creature that isn't a mana ability, " +
-                "if one or more permanents were sacrificed to activate it, " +
-                "you may copy that ability. You may choose new targets for the copy.";
     }
 }
