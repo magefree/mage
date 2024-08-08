@@ -31,7 +31,7 @@ public final class CephalidSage extends CardImpl {
                 new GainAbilitySourceEffect(new EntersBattlefieldTriggeredAbility(
                         new DrawDiscardControllerEffect(3, 2)
                 )), ThresholdCondition.instance, "as long as seven or more cards are in your graveyard, " +
-                "{this} has \"When {this} enters the battlefield, draw three cards, then discard two cards.\""
+                "{this} has \"When {this} enters, draw three cards, then discard two cards.\""
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 

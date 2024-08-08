@@ -23,7 +23,7 @@ public final class TunnelingGeopede extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, Tunneling Geopede deals 1 damage to each opponent.
+        // <i>Landfall</i> &mdash; Whenever a land you control enters, Tunneling Geopede deals 1 damage to each opponent.
         this.addAbility(new LandfallAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), false));
     }
     

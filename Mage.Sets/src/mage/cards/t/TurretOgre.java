@@ -49,7 +49,7 @@ public final class TurretOgre extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new DamagePlayersEffect(2, TargetController.OPPONENT)
-                ), condition, "When {this} enters the battlefield, " +
+                ), condition, "When {this} enters, " +
                 "if you control another creature with power 4 or greater, " +
                 "{this} deals 2 damage to each opponent."
         ));

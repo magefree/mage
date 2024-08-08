@@ -25,7 +25,7 @@ public final class TritonWaverider extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Constellation — Whenever an enchantment enters the battlefield under your control, Triton Waverider gains flying until end of turn.
+        // Constellation — Whenever an enchantment you control enters, Triton Waverider gains flying until end of turn.
         this.addAbility(new ConstellationAbility(new GainAbilitySourceEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn
         ), false, false));

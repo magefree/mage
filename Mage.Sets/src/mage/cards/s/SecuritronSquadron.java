@@ -43,7 +43,7 @@ public final class SecuritronSquadron extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Whenever a creature token enters the battlefield under your control, put a +1/+1 counter on it.
+        // Whenever a creature token you control enters, put a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on it"),

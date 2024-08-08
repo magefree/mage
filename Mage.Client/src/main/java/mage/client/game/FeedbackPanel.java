@@ -9,7 +9,7 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.constants.PlayerAction;
 import mage.constants.TurnPhase;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -27,7 +27,11 @@ import java.util.concurrent.TimeUnit;
 import static mage.constants.Constants.Option.*;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * Game GUI: feedback panel (over hand) with current priority and possible actions like done/cancel/special buttons
+ * <p>
+ * Warning, it's contains only clickable button, but all other logic done in helper panel
+ *
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class FeedbackPanel extends javax.swing.JPanel {
 
@@ -45,14 +49,10 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     private static final int AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS = 8;
     private static final ScheduledExecutorService AUTO_CLOSE_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
-            new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_AUTO_CLOSE_TIMER)
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_AUTO_CLOSE_TIMER)
     );
 
-    /**
-     * Creates new form FeedbackPanel
-     */
     public FeedbackPanel() {
-        //initComponents();
         customInitComponents();
     }
 
@@ -134,13 +134,13 @@ public class FeedbackPanel extends javax.swing.JPanel {
         requestFocusIfPossible();
         updateOptions(options);
 
-        this.revalidate();
-        this.repaint();
         this.helper.setLinks(btnLeft, btnRight, btnSpecial, btnUndo);
 
         this.helper.setVisible(true);
         this.helper.setGameNeedFeedback(gameNeedUserFeedback, gameTurnPhase);
         this.helper.autoSizeButtonsAndFeedbackState();
+
+        this.revalidate();
     }
 
     private void setButtonState(String leftText, String rightText, FeedbackMode mode) {

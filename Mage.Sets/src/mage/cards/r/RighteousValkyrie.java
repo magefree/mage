@@ -47,7 +47,7 @@ public final class RighteousValkyrie extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another Angel or Cleric enters the battlefield under your control, you gain life equal to that creature's toughness.
+        // Whenever another Angel or Cleric you control enters, you gain life equal to that creature's toughness.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new RighteousValkyrieEffect(), filter));
 
         // As long as you have at least 7 life more than your starting life total, creatures you control get +2/+2.

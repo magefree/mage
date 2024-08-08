@@ -21,7 +21,7 @@ import mage.game.permanent.token.ZombieToken;
  */
 public final class Wakedancer extends CardImpl {
 
-    private static final String staticText = "<i>Morbid</i> &mdash; When {this} enters the battlefield, if a creature died this turn, create a 2/2 black Zombie creature token.";
+    private static final String staticText = "<i>Morbid</i> &mdash; When {this} enters, if a creature died this turn, create a 2/2 black Zombie creature token.";
 
     public Wakedancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

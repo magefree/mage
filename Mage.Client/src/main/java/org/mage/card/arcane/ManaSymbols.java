@@ -22,13 +22,15 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.List;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+/**
+ * Mana symbol resources
+ */
 public final class ManaSymbols {
 
     private static final Logger logger = Logger.getLogger(ManaSymbols.class);
@@ -79,13 +81,13 @@ public final class ManaSymbols {
             "S", "T", "Q",
             "U", "UB", "UR", "UP", "2U", "CU",
             "W", "WB", "WU", "WP", "2W", "CW",
-            "X", "C", "E", "P",
+            "X", "C", "E", "P", "H",
             "BGP", "BRP", "GUP", "GWP", "RGP", "RWP", "UBP", "URP", "WBP", "WUP"};
 
     private static final JLabel labelRender = new JLabel(); // render mana text
 
     public static void loadImages() {
-        logger.info("Loading symbols...");
+        logger.info("Symbols: loading...");
 
         // TODO: delete files rename jpg->gif (it was for backward compatibility for one of the old version?)
         renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.SMALL));
@@ -120,18 +122,13 @@ public final class ManaSymbols {
                         ImageIO.write(image, "png", newFile);
                     }
                 } catch (Exception e) {
-                    logger.warn("Can't generate png image for symbol:" + symbol);
+                    logger.warn("Symbols: can't generate png image for symbol:" + symbol);
                 }
             }
         }
 
         // preload set images
         java.util.List<String> setCodes = ExpansionRepository.instance.getSetCodes();
-        if (setCodes == null) {
-            // the cards db file is probaly not included in the client. It will be created after the first connect to a server.
-            logger.warn("No db information for sets found. Connect to a server to create database file on client side. Then try to restart the client.");
-            return;
-        }
         for (String set : setCodes) {
 
             if (withoutSymbols.contains(set)) {
@@ -224,6 +221,8 @@ public final class ManaSymbols {
             } catch (Exception e) {
             }
         }
+
+        logger.info("Symbols: done");
     }
 
     public static File getSymbolFileNameAsSVG(String symbol) {
@@ -289,9 +288,9 @@ public final class ManaSymbols {
         // priority: SVG -> GIF
         // gif remain for backward compatibility
 
-        AtomicIntegerArray iconErrors = new AtomicIntegerArray(2); // 0 - svg, 1 - gif
+        final List<String> svgFails = new ArrayList<>(); // scryfall
+        final List<String> otherFails = new ArrayList<>(); // gatherer
 
-        AtomicBoolean fileErrors = new AtomicBoolean(false);
         Map<String, BufferedImage> sizedSymbols = new ConcurrentHashMap<>();
         IntStream.range(0, symbols.length).parallel().forEach(i -> {
             String symbol = symbols[i];
@@ -302,53 +301,55 @@ public final class ManaSymbols {
             if (SvgUtils.haveSvgSupport()) {
                 file = getSymbolFileNameAsSVG(symbol);
                 if (file.exists()) {
-                    try {
-                        InputStream fileStream = new FileInputStream(file);
+                    try(InputStream fileStream = Files.newInputStream(file.toPath())) {
                         image = loadSymbolAsSVG(fileStream, file.getPath(), size, size);
-                    } catch (FileNotFoundException e) {
-                        // it's ok to hide error
+                    } catch (IOException ignore) {
                     }
                 }
             }
-
-            // gif
             if (image == null) {
+                synchronized (svgFails) {
+                    svgFails.add(symbol);
+                }
+            }
 
-                iconErrors.incrementAndGet(0); // svg fail
-
+            // gif (if svg fails)
+            if (image == null) {
                 file = getSymbolFileNameAsGIF(symbol, size);
                 if (file.exists()) {
                     image = loadSymbolAsGIF(file, size, size);
+                }
+            }
+            if (image == null) {
+                synchronized (otherFails) {
+                    otherFails.add(symbol);
                 }
             }
 
             // save
             if (image != null) {
                 sizedSymbols.put(symbol, image);
-            } else {
-                iconErrors.incrementAndGet(1); // gif fail
-                fileErrors.set(true);
             }
         });
 
         // total errors
         String errorInfo = "";
-        if (iconErrors.get(0) > 0) {
-            errorInfo += "SVG miss - " + iconErrors.get(0);
+        if (!svgFails.isEmpty()) {
+            errorInfo += String.format("SVG miss - %s and %d others", svgFails.get(0), svgFails.size() - 1);
         }
-        if (iconErrors.get(1) > 0) {
+        if (!otherFails.isEmpty()) {
             if (!errorInfo.isEmpty()) {
                 errorInfo += ", ";
             }
-            errorInfo += "GIF miss - " + iconErrors.get(1);
+            errorInfo += String.format("GIF miss - %s and %d others", otherFails.get(0), otherFails.size() - 1);
         }
 
         if (!errorInfo.isEmpty()) {
-            logger.warn("Symbols can't be loaded, make sure you download it by main menu - size " + size + ", " + errorInfo);
+            logger.warn("Symbols: can't load, make sure you download it by main menu - size " + size + ", " + errorInfo);
         }
 
         manaImages.put(size, sizedSymbols);
-        return !fileErrors.get();
+        return errorInfo.isEmpty();
     }
 
     private static void renameSymbols(String path) {

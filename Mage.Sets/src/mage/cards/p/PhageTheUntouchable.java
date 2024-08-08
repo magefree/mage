@@ -38,7 +38,7 @@ public final class PhageTheUntouchable extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new LoseGameSourceControllerEffect(), false),
                 new InvertCondition(CastFromHandSourcePermanentCondition.instance),
-                "When {this} enters the battlefield, if you didn't cast it from your hand, you lose the game"
+                "When {this} enters, if you didn't cast it from your hand, you lose the game"
         ), new CastFromHandWatcher());
 
         // Whenever Phage deals combat damage to a creature, destroy that creature. It can't be regenerated.

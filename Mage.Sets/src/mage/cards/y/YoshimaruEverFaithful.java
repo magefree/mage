@@ -36,7 +36,7 @@ public final class YoshimaruEverFaithful extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever another legendary permanent enters the battlefield under your control, put a +1/+1 counter on Yoshimaru, Ever Faithful.
+        // Whenever another legendary permanent you control enters, put a +1/+1 counter on Yoshimaru, Ever Faithful.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));

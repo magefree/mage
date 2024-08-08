@@ -37,7 +37,7 @@ public final class UnstableGlyphbridge extends CardImpl {
         // When Unstable Glyphbridge enters the battlefield, if you cast it, for each player, choose a creature with power 2 or less that player controls. Then destroy all creatures except creatures chosen this way.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new UnstableGlyphbridgeEffect()), CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it, " +
+                "When {this} enters, if you cast it, " +
                     "for each player, choose a creature with power 2 or less that player controls. " +
                     "Then destroy all creatures except creatures chosen this way."
         ));

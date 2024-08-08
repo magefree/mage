@@ -40,7 +40,7 @@ public final class Gloomdrifter extends CardImpl {
                                 -2, -2, Duration.EndOfTurn,
                                 StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, false
                         ))), ThresholdCondition.instance, "as long as seven or more cards are in your graveyard, " +
-                "{this} has \"When {this} enters the battlefield, nonblack creatures get -2/-2 until end of turn.\""
+                "{this} has \"When {this} enters, nonblack creatures get -2/-2 until end of turn.\""
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 

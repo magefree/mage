@@ -26,7 +26,7 @@ public final class GeyserfieldStalker extends CardImpl {
 
         // Menace
         this.addAbility(new MenaceAbility());
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, Geyserfield Stalker gets +2/+2 until end of turn.
+        // <i>Landfall</i> &mdash; Whenever a land you control enters, Geyserfield Stalker gets +2/+2 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 

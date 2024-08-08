@@ -50,7 +50,7 @@ public final class WildwoodMentor extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever a token enters the battlefield under your control, put a +1/+1 counter on Wildwood Mentor.
+        // Whenever a token you control enters, put a +1/+1 counter on Wildwood Mentor.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 filterToken

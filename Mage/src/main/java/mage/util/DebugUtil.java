@@ -35,8 +35,9 @@ public class DebugUtil {
     public static boolean GUI_GAME_DRAW_BATTLEFIELD_BORDER = false;
     public static boolean GUI_GAME_DRAW_HAND_AND_STACK_BORDER = false;
     public static boolean GUI_GAME_DRAW_PLAYER_PANEL_BORDER = false;
-    public static boolean GUI_GAME_DRAW_COMMAND_BUTTONS_PANEL_BORDER = false;
+    public static boolean GUI_GAME_DRAW_SKIP_BUTTONS_PANEL_BORDER = false;
     public static boolean GUI_GAME_DRAW_PHASE_BUTTONS_PANEL_BORDER = false;
+    public static boolean GUI_GAME_DRAW_COMMANDS_PANEL_BORDER = false;
 
     // game dialogs
     public static boolean GUI_GAME_DIALOGS_DRAW_CARDS_AREA_BORDER = false;
@@ -52,6 +53,10 @@ public class DebugUtil {
     // - execute command: java -cp "h2-1.4.196.jar;%H2DRIVERS%;%CLASSPATH%" org.h2.tools.ConvertTraceFile -traceFile "xxx\Mage.Tests\db\cards.h2.trace.db" -script "xxx\Mage.Tests\db\cards.h2.trace.sql"
     // - open *.sql file for all sql-queries and exec stats
     public static boolean DATABASE_PROFILE_SQL_QUERIES_TO_FILE = false;
+
+    // network
+    public static boolean NETWORK_PROFILE_REQUESTS = false; // collect diff time between requests, http status and url into special log file
+    public static String NETWORK_PROFILE_REQUESTS_DUMP_FILE_NAME = "httpRequests.log";
 
     public static String getMethodNameWithSource(final int depth) {
         return TraceHelper.getMethodNameWithSource(depth);

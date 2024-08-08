@@ -41,7 +41,7 @@ public class AllegiantGeneralPryde extends CardImpl {
                 new DrawCardSourceControllerEffect(2),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)
         ).addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and")))
-                .setTriggerPhrase("When this creature enters the battlefield, ");
+                .setTriggerPhrase("When this creature enters, ");
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(gainedAbility, Duration.WhileOnBattlefield, filter)));
     }
 

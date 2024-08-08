@@ -56,7 +56,7 @@ public final class VerdelothTheAncient extends CardImpl {
         // When Verdeloth the Ancient enters the battlefield, if it was kicked, create X 1/1 green Saproling creature tokens.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new CreateTokenEffect(new SaprolingToken(), GetXValue.instance), false
-        ), KickedCondition.ONCE, "When {this} enters the battlefield, " +
+        ), KickedCondition.ONCE, "When {this} enters, " +
                 "if it was kicked, create X 1/1 green Saproling creature tokens."));
     }
 

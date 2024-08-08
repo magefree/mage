@@ -23,7 +23,7 @@ public final class ScytheLeopard extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // <i>Landfall</i>-Whenever a land enters the battlefield under your control, Scythe Leopard gets +1/+1 until end of turn.
+        // <i>Landfall</i>-Whenever a land you control enters, Scythe Leopard gets +1/+1 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 

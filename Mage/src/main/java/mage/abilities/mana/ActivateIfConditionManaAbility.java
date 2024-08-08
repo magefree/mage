@@ -6,7 +6,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.effects.mana.AddConditionalColorlessManaEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.constants.Zone;
-import mage.game.Game;
 
 public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
 
@@ -24,11 +23,6 @@ public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
 
     public ActivateIfConditionManaAbility(ActivateIfConditionManaAbility ability) {
         super(ability);
-    }
-
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        return super.activate(game, noMana);
     }
 
     @Override

@@ -35,7 +35,7 @@ public final class CallousBloodmage extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Pest11GainLifeToken()));
 
         // • You draw a card and you lose 1 life.
-        Mode mode = new Mode(new DrawCardSourceControllerEffect(1).setText("you draw a card"));
+        Mode mode = new Mode(new DrawCardSourceControllerEffect(1, true));
         mode.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         ability.addMode(mode);
 

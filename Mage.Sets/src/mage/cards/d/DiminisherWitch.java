@@ -36,7 +36,7 @@ public final class DiminisherWitch extends CardImpl {
         // When Diminisher Witch enters the battlefield, if it was bargained, create a Cursed Role token attached to target creature an opponent controls.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateRoleAttachedTargetEffect(RoleType.CURSED)),
-                BargainedCondition.instance, "When {this} enters the battlefield, if it was bargained, " +
+                BargainedCondition.instance, "When {this} enters, if it was bargained, " +
                 "create a Cursed Role token attached to target creature an opponent controls."
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());

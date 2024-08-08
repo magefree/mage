@@ -29,7 +29,7 @@ public final class OnduCleric extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Ondu Cleric or another Ally enters the battlefield under your control, you may gain life equal to the number of Allies you control.
+        // Whenever Ondu Cleric or another Ally you control enters, you may gain life equal to the number of Allies you control.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), true).setAbilityWord(null));
     }
 

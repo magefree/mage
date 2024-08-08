@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
@@ -27,6 +28,7 @@ import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -216,7 +218,8 @@ public class SuspendAbility extends SpecialAction {
         if (card == null) {
             return ActivationStatus.getFalse();
         }
-        if (!card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game)) {
+        Set<MageIdentifier> allowedToBeCastNow = card.getSpellAbility().spellCanBeActivatedNow(playerId, game);
+        if (!allowedToBeCastNow.contains(MageIdentifier.Default) && !allowedToBeCastNow.contains(card.getSpellAbility().getIdentifier())) {
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);

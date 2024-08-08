@@ -38,7 +38,7 @@ public final class OratorOfOjutai extends CardImpl {
         // When Orator of Ojutai enters the battlefield, if you revealed a Dragon card or controlled a Dragon as you cast Orator of Ojutai, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                RevealedOrControlledDragonCondition.instance, "When {this} enters the battlefield, " +
+                RevealedOrControlledDragonCondition.instance, "When {this} enters, " +
                 "if you revealed a Dragon card or controlled a Dragon as you cast this spell, draw a card."
         ), new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
     }

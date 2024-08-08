@@ -18,6 +18,7 @@ public final class Onslaught extends ExpansionSet {
         super("Onslaught", "ONS", ExpansionSet.buildDate(2002, 10, 7), SetType.EXPANSION);
         this.blockName = "Onslaught";
         this.hasBoosters = true;
+        this.rotationSet = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

@@ -1752,7 +1752,7 @@ public class TablesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnStateFinishedActionPerformed
 
     private void buttonWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWhatsNewActionPerformed
-        MageFrame.showWhatsNewDialog();
+        MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_buttonWhatsNewActionPerformed
 
     private void btnQuickStart2PlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartDuelActionPerformed

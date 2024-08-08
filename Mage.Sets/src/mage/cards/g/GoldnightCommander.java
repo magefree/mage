@@ -26,7 +26,7 @@ public final class GoldnightCommander extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
+        // Whenever another creature you control enters, creatures you control get +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false));
     }

@@ -28,7 +28,7 @@ public final class Necroduality extends CardImpl {
     public Necroduality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
-        // Whenever a nontoken Zombie enters the battlefield under your control, create a token that's a copy of that creature.
+        // Whenever a nontoken Zombie you control enters, create a token that's a copy of that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new CreateTokenCopyTargetEffect(true).setText("create a token that's a copy of that creature"),
                 filter, false, SetTargetPointer.PERMANENT));

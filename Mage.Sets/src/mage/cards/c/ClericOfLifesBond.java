@@ -37,7 +37,7 @@ public final class ClericOfLifesBond extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another Cleric enters the battlefield under your control, you gain 1 life.
+        // Whenever another Cleric you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
 
         // Whenever you gain life for the first time each turn, put a +1/+1 counter on Cleric of Life’s Bond.

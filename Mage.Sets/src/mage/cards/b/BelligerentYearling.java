@@ -39,7 +39,7 @@ public final class BelligerentYearling extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever another Dinosaur enters the battlefield under your control, you may have Belligerent Yearling's base power become equal to that creature's power until end of turn.
+        // Whenever another Dinosaur you control enters, you may have Belligerent Yearling's base power become equal to that creature's power until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new BelligerentYearlingEffect(), filter,
                 true, SetTargetPointer.PERMANENT

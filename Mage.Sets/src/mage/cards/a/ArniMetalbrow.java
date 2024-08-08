@@ -33,7 +33,7 @@ public final class ArniMetalbrow extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever a creature you control attacks or a creature enters the battlefield under your control attacking, you may pay {1}{R}. If you do, you may put a creature card with mana value less than that creature's mana value from your hand onto the battlefield tapped and attacking.
+        // Whenever a creature you control attacks or a creature you control enters attacking, you may pay {1}{R}. If you do, you may put a creature card with mana value less than that creature's mana value from your hand onto the battlefield tapped and attacking.
         this.addAbility(new ArniMetalbrowTriggeredAbility());
     }
 
@@ -51,7 +51,7 @@ class ArniMetalbrowTriggeredAbility extends TriggeredAbilityImpl {
 
     ArniMetalbrowTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new ArniMetalbrowEffect(), new ManaCostsImpl<>("{1}{R}")));
-        setTriggerPhrase("Whenever a creature you control attacks or a creature enters the battlefield under your control attacking, ");
+        setTriggerPhrase("Whenever a creature you control attacks or a creature you control enters attacking, ");
     }
 
     private ArniMetalbrowTriggeredAbility(final ArniMetalbrowTriggeredAbility ability) {

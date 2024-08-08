@@ -40,7 +40,7 @@ public final class TerritoryForge extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ExileTargetEffect().setToSourceExileZone(true)),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it, exile target artifact or land."
+                "When {this} enters, if you cast it, exile target artifact or land."
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

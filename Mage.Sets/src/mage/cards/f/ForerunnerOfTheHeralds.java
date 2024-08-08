@@ -51,7 +51,7 @@ public final class ForerunnerOfTheHeralds extends CardImpl {
                 )
         );
 
-        // Whenever another Merfolk enters the battlefield under your control, put a +1/+1 counter on Forerunner of the Heralds.
+        // Whenever another Merfolk you control enters, put a +1/+1 counter on Forerunner of the Heralds.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filterAnotherMerfolk);
         this.addAbility(ability);
     }

@@ -1,6 +1,7 @@
 package mage.abilities;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -215,8 +216,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (!hasMoreActivationsThisTurn(game) || !super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (!hasMoreActivationsThisTurn(game) || !super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
         ActivationInfo activationInfo = getActivationInfo(game);

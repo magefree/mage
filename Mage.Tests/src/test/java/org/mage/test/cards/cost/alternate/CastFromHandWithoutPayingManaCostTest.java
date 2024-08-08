@@ -10,12 +10,15 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
     @Test
     public void testSpellNoCost() {
+        setStrictChooseMode(true);
+
         // You may cast nonland cards from your hand without paying their mana costs.
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience", 1);
 
         addCard(Zone.HAND, playerA, "Gray Ogre", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -32,6 +35,8 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
      */
     @Test
     public void testSpellHasCostIfCastFromGraveyard() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Haakon, Stromgald Scourge", 1);
@@ -55,6 +60,8 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
      */
     @Test
     public void testMonocoloredHybridMana() {
+        setStrictChooseMode(true);
+
         // You may cast nonland cards from your hand without paying their mana costs.
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience", 1);
 
@@ -63,6 +70,8 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Beseech the Queen", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Beseech the Queen");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
+        addTarget(playerA, "Mountain");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -73,12 +82,15 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
     @Test
     public void testColorlessMana() {
+        setStrictChooseMode(true);
+
         // You may cast nonland cards from your hand without paying their mana costs.
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience", 1);
 
         addCard(Zone.HAND, playerA, "Reality Smasher", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reality Smasher");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -89,6 +101,8 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
     @Test
     public void testCastingCreature() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
 
         /* player.getPlayable does not take alternate
@@ -100,7 +114,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -114,6 +128,8 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
     @Test
     public void testCastingSplitCards() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
 
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
@@ -123,7 +139,8 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Fire // Ice");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire", playerB);
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
+        addTargetAmount(playerA, playerB, 2);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -139,6 +156,8 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
     @Test
     public void testCastingShrapnelBlast() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
 
         /* player.getPlayable does not take alternate
@@ -151,7 +170,9 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Shrapnel Blast", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shrapnel Blast");
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
+        setChoice(playerA, "Ornithopter"); // sacrifice cost
+        addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -165,12 +186,14 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
     /**
      * Spell get cast for 0 if Omniscience is being in play. But with
-     * Trinisphere it costs at least {3}. Cost/alternate cost (Omniscience) +
+     * Trinisphere it costs at least {3}. Cost/alternate cost (source: Omniscience) +
      * additional costs - cost reductions + minimum cost (Trinishpere) = total
      * cost.
      */
     @Test
     public void testCastingWithTrinisphere() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
@@ -181,7 +204,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Trinisphere", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
-        setChoice(playerA, true);
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -218,7 +241,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Far // Away");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Far // Away");
-        setChoice(playerA, true); // Cast without paying its mana cost?
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
         addTarget(playerA, "Silvercoat Lion");
         addTarget(playerA, playerB);
         setChoice(playerB, "Pillarfield Ox");
@@ -243,6 +266,8 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
      */
     @Test
     public void testCastingWithFutureSight() {
+        setStrictChooseMode(true);
+
         // You may cast nonland cards from your hand without paying their mana costs.
         addCard(Zone.BATTLEFIELD, playerA, "Omniscience");
         // Play with the top card of your library revealed.
@@ -253,7 +278,6 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 1);
         skipInitShuffling();
 
-        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -288,7 +312,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Bog Wraith", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
-        setChoice(playerA, true); // cast without cost
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
         setChoice(playerA, true); // pay Entwine
         addTarget(playerA, "Bog Wraith"); // target form mode 1
         addTarget(playerA, playerB); // target for mode 2
@@ -329,7 +353,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Vision", playerA);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -365,12 +389,10 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Bog Wraith", 1); // Creature {3}{B} (3/3)
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Omniscience", true);
-        setChoice(playerA, true); // Pay alternative costs? ({W}{U}{B}{R}{G})   
+        setChoice(playerA, "Cast with alternative cost: {W}{U}{B}{R}{G} (source: Jodah, Archmage Eternal");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bog Wraith");
-        // The order of the two alternate casting abilities is not fixed, so it's not clear which ability is asked for first
-        setChoice(playerA, false); // Pay alternative costs? ({W}{U}{B}{R}{G})   
-        setChoice(playerA, true); // Cast without paying its mana cost?
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -382,6 +404,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
     @Test
     public void testJelevaCastingSavageBeatingFromExile() {
+        setStrictChooseMode(true);
 
         /*
         Jeleva, Nephalia's Scourge {1}{U}{B}{R}

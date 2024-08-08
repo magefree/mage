@@ -117,7 +117,7 @@ public class AuthorizedUserRepository {
         try {
             if (usersDao != null && usersDao.getConnectionSource() != null) {
                 DatabaseConnection conn = usersDao.getConnectionSource().getReadWriteConnection(usersDao.getTableName());
-                conn.executeStatement("SHUTDOWN IMMEDIATELY", 0);
+                conn.executeStatement("SHUTDOWN IMMEDIATELY", DatabaseConnection.DEFAULT_RESULT_FLAGS);
                 usersDao.getConnectionSource().releaseConnection(conn);
             }
         } catch (SQLException ex) {

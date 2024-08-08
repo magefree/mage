@@ -34,10 +34,10 @@ public final class PincerSpider extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         
-        // If Pincer Spider was kicked, it enters the battlefield with a +1/+1 counter on it.
+        // If Pincer Spider was kicked, it enters with a +1/+1 counter on it.
         Ability ability = new EntersBattlefieldAbility(
                 new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), KickedCondition.ONCE, ""),
-                  "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.");
+                  "If {this} was kicked, it enters with a +1/+1 counter on it.");
         this.addAbility(ability);
         
     }

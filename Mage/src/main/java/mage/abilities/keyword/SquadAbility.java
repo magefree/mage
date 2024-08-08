@@ -112,7 +112,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
     @Override
     public String getRule() {
         return "Squad " + cost.getText() + " <i>(As an additional cost to cast this spell, you may pay " +
-                cost.getText() + "any number of times. When this creature enters the battlefield, " +
+                cost.getText() + "any number of times. When this creature enters, " +
                 "create that many tokens that are copies of it.)</i>";
     }
 }

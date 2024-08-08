@@ -42,7 +42,7 @@ public final class BrimstoneTrebuchet extends CardImpl {
                 new DamagePlayersEffect(1, TargetController.OPPONENT), new TapSourceCost()
         ));
 
-        // Whenever a Knight enters the battlefield under your control, untap Brimstone Trebuchet.
+        // Whenever a Knight you control enters, untap Brimstone Trebuchet.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new UntapSourceEffect(), filter));
     }
 

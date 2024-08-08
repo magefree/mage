@@ -41,7 +41,7 @@ public final class ThePrydwenSteelFlagship extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another nontoken artifact enters the battlefield under your control,
+        // Whenever another nontoken artifact you control enters,
         // create a 2/2 white Human Knight creature token with
         // "This creature gets +2/+2 as long as an artifact entered the battlefield under your control this turn."
         this.addAbility(

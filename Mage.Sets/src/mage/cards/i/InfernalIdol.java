@@ -27,7 +27,7 @@ public final class InfernalIdol extends CardImpl {
 
         // {1}{B}{B}, {T}, Sacrifice Infernal Idol: You draw two cards and you lose 2 life.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(2, "you"), new ManaCostsImpl<>("{1}{B}{B}")
+                new DrawCardSourceControllerEffect(2, true), new ManaCostsImpl<>("{1}{B}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

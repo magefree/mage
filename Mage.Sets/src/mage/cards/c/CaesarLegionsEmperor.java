@@ -54,7 +54,7 @@ public final class CaesarLegionsEmperor extends CardImpl {
         triggeredAbility.getModes().setMaxModes(2);
 
         // * You draw a card and you lose 1 life.
-        Mode drawMode = new Mode(new DrawCardSourceControllerEffect(1, "you"));
+        Mode drawMode = new Mode(new DrawCardSourceControllerEffect(1, true));
         drawMode.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         triggeredAbility.addMode(drawMode);
 

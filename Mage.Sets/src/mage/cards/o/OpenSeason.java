@@ -31,7 +31,7 @@ public final class OpenSeason extends CardImpl {
     public OpenSeason(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
-        // When {this} enters the battlefield, for each opponent, put a bounty counter on target creature that player controls
+        // When {this} enters, for each opponent, put a bounty counter on target creature that player controls
         Effect effect = new AddCountersTargetEffect(CounterType.BOUNTY.createInstance());
         effect.setText("for each opponent, put a bounty counter on target creature that player controls");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect);

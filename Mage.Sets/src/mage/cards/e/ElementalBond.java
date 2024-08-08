@@ -27,7 +27,7 @@ public final class ElementalBond extends CardImpl {
     public ElementalBond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
-        // Whenever a creature with power 3 or greater enters the battlefield under your control, draw a card.
+        // Whenever a creature with power 3 or greater you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 

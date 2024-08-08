@@ -22,7 +22,7 @@ public final class ShoalKraken extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
-        // Constellation — Whenever an enchantment enters the battlefield under your control, you may a draw card. If you do, discard a card.
+        // Constellation — Whenever an enchantment you control enters, you may a draw card. If you do, discard a card.
         this.addAbility(new ConstellationAbility(
                 new DrawDiscardControllerEffect(1, 1, true), false, false
         ));

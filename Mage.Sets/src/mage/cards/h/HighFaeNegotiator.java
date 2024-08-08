@@ -38,7 +38,7 @@ public final class HighFaeNegotiator extends CardImpl {
         // When High Fae Negotiator enters the battlefield, if it was bargained, each opponent loses 3 life and you gain 3 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(3)),
-                BargainedCondition.instance, "When {this} enters the battlefield, " +
+                BargainedCondition.instance, "When {this} enters, " +
                 "if it was bargained, each opponent loses 3 life and you gain 3 life."
         );
         ability.addEffect(new GainLifeEffect(3));

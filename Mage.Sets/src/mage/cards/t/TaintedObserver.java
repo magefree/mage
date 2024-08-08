@@ -34,7 +34,7 @@ public final class TaintedObserver extends CardImpl {
         // Toxic 1
         this.addAbility(new ToxicAbility(1));
 
-        // Whenever another creature enters the battlefield under your control, you may pay {2}. If you do, proliferate.
+        // Whenever another creature you control enters, you may pay {2}. If you do, proliferate.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DoIfCostPaid(new ProliferateEffect(), new GenericManaCost(2)),
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE

@@ -35,7 +35,7 @@ public final class ImperialMask extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new InfoEffect(""), false),
                 new SourceMatchesFilterCondition(filter),
-                "When {this} enters the battlefield, if it's not a token, "
+                "When {this} enters, if it's not a token, "
                         + "each of your teammates creates a token that's a copy of {this}"
         ));
 

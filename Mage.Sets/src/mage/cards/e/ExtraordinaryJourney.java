@@ -134,7 +134,7 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
 class ExtraordinaryJourneyTriggeredAbility extends TriggeredAbilityImpl {
 
     ExtraordinaryJourneyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, "you"), false);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, true), false);
         setTriggerPhrase("Whenever one or more nontoken creatures enter the battlefield, "
                 + "if one or more of them entered from exile or was cast from exile, ");
         setTriggersLimitEachTurn(1);

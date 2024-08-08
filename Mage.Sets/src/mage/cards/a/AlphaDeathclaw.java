@@ -44,7 +44,7 @@ public final class AlphaDeathclaw extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(null),
                 new BecomesMonstrousSourceTriggeredAbility(null)
         );
-        trigger.setTriggerPhrase("When {this} enters the battlefield or becomes monstrous, ");
+        trigger.setTriggerPhrase("When {this} enters or becomes monstrous, ");
         trigger.addTarget(new TargetPermanent());
         this.addAbility(trigger);
 

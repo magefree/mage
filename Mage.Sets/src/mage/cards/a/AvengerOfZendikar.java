@@ -42,7 +42,7 @@ public final class AvengerOfZendikar extends CardImpl {
         // When Avenger of Zendikar enters the battlefield, create a 0/1 green Plant creature token for each land you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PlantToken(), new PermanentsOnBattlefieldCount(filterLand)), false));
 
-        // Landfall - Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
+        // Landfall - Whenever a land you control enters, you may put a +1/+1 counter on each Plant creature you control.
         this.addAbility(new LandfallAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), true));
     }
 

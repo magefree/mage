@@ -51,7 +51,7 @@ public final class RegalSliver extends CardImpl {
                         new GainAbilityControlledEffect(
                                 trigger, Duration.WhileOnBattlefield,
                                 StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
-                        ).setText("Sliver creatures you control have \"When this creature enters the battlefield, "
+                        ).setText("Sliver creatures you control have \"When this creature enters, "
                                 + "Slivers you control get +1/+1 until end of turn if you're the monarch. Otherwise, you become the monarch.\"")
                 ).addHint(MonarchHint.instance)
         );

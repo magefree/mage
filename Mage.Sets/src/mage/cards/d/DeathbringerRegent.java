@@ -45,7 +45,7 @@ public final class DeathbringerRegent extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter), false),
                 new DeathbringerRegentCondition(),
-                "When {this} enters the battlefield, if you cast it from your hand and there are five or more other creatures on the battlefield, destroy all other creatures."),
+                "When {this} enters, if you cast it from your hand and there are five or more other creatures on the battlefield, destroy all other creatures."),
                 new CastFromHandWatcher());
     }
 

@@ -51,7 +51,7 @@ public final class TatyovaStewardOfTides extends CardImpl {
                 FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter
         )));
 
-        // Whenever a land enters the battlefield under your control, if you control seven or more lands, up to one target land you control becomes a 3/3 Elemental creature with haste. It's still a land.
+        // Whenever a land you control enters, if you control seven or more lands, up to one target land you control becomes a 3/3 Elemental creature with haste. It's still a land.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(new BecomesCreatureTargetEffect(
                         new CreatureToken(

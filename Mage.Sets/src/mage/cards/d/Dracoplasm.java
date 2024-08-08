@@ -68,7 +68,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
 
     public DracoplasmEffect() {
         super(Duration.EndOfGame, Outcome.BoostCreature);
-        this.staticText = "As {this} enters the battlefield, sacrifice any number of creatures. {this}'s power becomes the total power of those creatures and its toughness becomes their total toughness";
+        this.staticText = "As {this} enters, sacrifice any number of creatures. {this}'s power becomes the total power of those creatures and its toughness becomes their total toughness";
     }
 
     private DracoplasmEffect(final DracoplasmEffect effect) {

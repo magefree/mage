@@ -39,7 +39,7 @@ public final class RoaringEarth extends CardImpl {
     public RoaringEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-        // Whenever a land enters the battlefield under your control, put a +1/+1 counter on target creature or Vehicle you control.
+        // Whenever a land you control enters, put a +1/+1 counter on target creature or Vehicle you control.
         Ability ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

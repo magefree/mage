@@ -49,7 +49,7 @@ class AggressiveBiomancyEffect extends OneShotEffect {
     AggressiveBiomancyEffect() {
         super(Outcome.Copy);
         this.staticText = "Create X tokens that are copies of target creature you control, " +
-                "except they have \"When this creature enters the battlefield, " +
+                "except they have \"When this creature enters, " +
                 "it fights up to one target creature you don't control.\"";
     }
 

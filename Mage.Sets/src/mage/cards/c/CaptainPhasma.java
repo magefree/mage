@@ -45,7 +45,7 @@ public final class CaptainPhasma extends CardImpl {
 
         // Nontoken Trooper creatures you control have "When this creature enters the battlefield, create 1/1/ white Trooper creature token."
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TrooperToken()), false)
-                .setTriggerPhrase("When this creature enters the battlefield, ");
+                .setTriggerPhrase("When this creature enters, ");
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter, false)));
 
         // {W}{U}{B}{R}{G}: Search your library for a Trooper creature card, reveal it, put it into your hand, then shuffle your library.

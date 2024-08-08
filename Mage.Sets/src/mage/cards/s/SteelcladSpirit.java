@@ -31,7 +31,7 @@ public final class SteelcladSpirit extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
 
-        // Whenever an enchantment enters the battlefield under your control, Steelclad Spirit can attack this turn as though it didn't have defender.
+        // Whenever an enchantment you control enters, Steelclad Spirit can attack this turn as though it didn't have defender.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), filter
         ));

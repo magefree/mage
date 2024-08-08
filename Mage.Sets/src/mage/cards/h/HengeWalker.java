@@ -29,7 +29,7 @@ public final class HengeWalker extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 AdamantCondition.ANY, "<br><i>Adamant</i> &mdash; " +
                 "If at least three mana of the same color was spent to cast this spell, " +
-                "{this} enters the battlefield with a +1/+1 counter on it.", ""
+                "{this} enters with a +1/+1 counter on it.", ""
         ));
     }
 

@@ -35,7 +35,7 @@ public final class SimulacrumSynthesizer extends CardImpl {
         // When Substitute Synthesizer enters the battlefield, scry 2.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2)));
 
-        // Whenever another artifact with mana value 3 or more enters the battlefield under your control, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
+        // Whenever another artifact with mana value 3 or more you control enters, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CreateTokenEffect(new KarnConstructToken()), filter
         ));

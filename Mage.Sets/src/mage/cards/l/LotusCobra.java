@@ -22,7 +22,7 @@ public final class LotusCobra extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Landfall — Whenever a land enters the battlefield under your control, you may add one mana of any color.
+        // Landfall — Whenever a land you control enters, you may add one mana of any color.
         this.addAbility(new LandfallAbility(new AddManaOfAnyColorEffect(), false));
     }
 

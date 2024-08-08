@@ -26,7 +26,7 @@ import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.util.MultiAmountMessage;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
@@ -244,7 +244,7 @@ public class GameController implements GameCallback {
         // wait all players
         if (JOIN_WAITING_EXECUTOR == null) {
             JOIN_WAITING_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
-                    new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_GAME_JOIN_WAITING + " " + game.getId())
+                    new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_GAME_JOIN_WAITING + " " + game.getId())
             );
         }
         JOIN_WAITING_EXECUTOR.scheduleAtFixedRate(() -> {

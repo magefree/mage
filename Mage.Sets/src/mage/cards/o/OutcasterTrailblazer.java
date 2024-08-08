@@ -42,7 +42,7 @@ public final class OutcasterTrailblazer extends CardImpl {
         // When Outcaster Trailblazer enters the battlefield, add one mana of any color.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect()));
 
-        // Whenever another creature with power 4 or greater enters the battlefield under your control, draw a card.
+        // Whenever another creature with power 4 or greater you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
 
         // Plot {2}{G}

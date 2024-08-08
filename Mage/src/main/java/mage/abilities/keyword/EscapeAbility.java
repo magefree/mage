@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageIdentifier;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -15,6 +16,7 @@ import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -97,8 +99,8 @@ public class EscapeAbility extends SpellAbility {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (super.activate(game, allowedIdentifiers, noMana)) {
             game.getState().setValue(CASTED_WITH_ESCAPE_KEY + getSourceId().toString() + (getSourceObjectZoneChangeCounter() + 1), Boolean.TRUE);
             return true;
         }

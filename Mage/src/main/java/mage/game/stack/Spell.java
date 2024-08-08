@@ -161,10 +161,10 @@ public class Spell extends StackObjectImpl implements Card {
         this.startingDefense = spell.startingDefense;
     }
 
-    public boolean activate(Game game, boolean noMana) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
         setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.BEFORE); // mana payment step started, can use any mana abilities, see AlternateManaPaymentAbility
 
-        if (!ability.activate(game, noMana)) {
+        if (!ability.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
 
@@ -182,7 +182,7 @@ public class Spell extends StackObjectImpl implements Card {
             // see https://github.com/magefree/mage/issues/6603
             payNoMana |= ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED;
 
-            if (!spellAbility.activate(game, payNoMana)) {
+            if (!spellAbility.activate(game, allowedIdentifiers, payNoMana)) {
                 return false;
             }
         }
@@ -190,14 +190,16 @@ public class Spell extends StackObjectImpl implements Card {
         return true;
     }
 
-    public String getActivatedMessage(Game game) {
+    public String getActivatedMessage(Game game, Zone fromZone) {
         StringBuilder sb = new StringBuilder();
+        sb.append(" casts ");
         if (isCopy()) {
-            sb.append(" copies ");
-        } else {
-            sb.append(" casts ");
+            sb.append("a copied ");
         }
-        return sb.append(ability.getGameLogMessage(game)).toString();
+        sb.append(ability.getGameLogMessage(game));
+        sb.append(" from ");
+        sb.append(fromZone.toString().toLowerCase(Locale.ENGLISH));
+        return sb.toString();
     }
 
     public String getSpellCastText(Game game) {

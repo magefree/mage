@@ -77,7 +77,7 @@ class CallidusAssassinApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect())
-                .setTriggerPhrase("When this creature enters the battlefield, ");
+                .setTriggerPhrase("When this creature enters, ");
         ability.addTarget(new TargetPermanent(0, 1, filter));
         blueprint.getAbilities().add(ability);
         return true;
@@ -85,7 +85,7 @@ class CallidusAssassinApplier extends CopyApplier {
 
     @Override
     public String getText() {
-        return ", except it has \"When this creature enters the battlefield, " +
+        return ", except it has \"When this creature enters, " +
                 "destroy up to one other target creature with the same name as this creature.\"";
     }
 }

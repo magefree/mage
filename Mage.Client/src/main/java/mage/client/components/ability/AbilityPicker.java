@@ -331,7 +331,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                     wait();
                 }
             }
-        } catch (InterruptedException ignored) {
+        } catch (InterruptedException ignore) {
         }
 
     }

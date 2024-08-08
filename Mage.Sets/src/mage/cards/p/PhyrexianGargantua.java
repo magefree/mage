@@ -24,7 +24,7 @@ public final class PhyrexianGargantua extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2, "you"), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2, true), false);
         ability.addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"));
         this.addAbility(ability);
     }

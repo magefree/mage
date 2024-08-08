@@ -311,7 +311,10 @@ public class ChoiceImpl implements Choice {
             // no key answer found, try to match by text starting with
             for (String needChoice : answers) {
                 for (Map.Entry<String, String> currentChoice : this.getKeyChoices().entrySet()) {
-                    if (currentChoice.getValue().startsWith(needChoice)) {
+                    String choiceValue = currentChoice.getValue();
+                    // Clean any html part (for easier unit test matching)
+                    String cleanedChoiceValue = choiceValue.replaceAll("<[^<>]*>", "");
+                    if (choiceValue.startsWith(needChoice) || cleanedChoiceValue.startsWith(needChoice)) {
                         if (removeSelectAnswerFromList) {
                             this.setChoiceByKey(currentChoice.getKey(), false);
                             answers.remove(needChoice);
@@ -324,7 +327,9 @@ public class ChoiceImpl implements Choice {
             // string mode
             for (String needChoice : answers) {
                 for (String currentChoice : this.getChoices()) {
-                    if (currentChoice.equals(needChoice)) {
+                    // Clean any html part (for easier unit test matching)
+                    String cleanedChoiceValue = currentChoice.replaceAll("<[^<>]*>", "");
+                    if (currentChoice.equals(needChoice) || cleanedChoiceValue.equals(needChoice)) {
                         if (removeSelectAnswerFromList) {
                             this.setChoice(needChoice, false);
                             answers.remove(needChoice);

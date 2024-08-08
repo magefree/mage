@@ -50,7 +50,7 @@ public final class IsuTheAbominable extends CardImpl {
         // You may play snow lands and cast snow spells from the top of your library.
         this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
-        // Whenever another snow permanent enters the battlefield under your control, you may pay {G}, {W}, or {U}. If you do, put a +1/+1 counter on Isu the Abominable.
+        // Whenever another snow permanent you control enters, you may pay {G}, {W}, or {U}. If you do, put a +1/+1 counter on Isu the Abominable.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DoIfCostPaid(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),

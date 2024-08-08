@@ -4,7 +4,10 @@ import mage.client.util.CardLanguage;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author North, JayDi85
@@ -54,13 +57,10 @@ public interface CardImageSource {
     }
 
     /**
-     * Set additional http headers like user agent, referer, cookies, etc
+     * Set additional headers like user agent, referer, cookies, etc
      */
     default Map<String, String> getHttpRequestHeaders(String fullUrl) {
-        Map<String, String> headers = new LinkedHashMap<>();
-        // TODO: add xmage name and client version here
-        headers.put("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-        return headers;
+        return new LinkedHashMap<>();
     }
 
     default List<String> getSupportedSets() {
@@ -72,5 +72,9 @@ public interface CardImageSource {
 
     default boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
         return false;
+    }
+
+    default void onFinished() {
+        // cleanup temp resources
     }
 }

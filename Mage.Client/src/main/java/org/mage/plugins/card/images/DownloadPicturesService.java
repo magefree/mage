@@ -9,12 +9,12 @@ import mage.cards.repository.TokenRepository;
 import mage.client.MageFrame;
 import mage.client.dialog.DownloadImagesDialog;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.remote.XmageURLConnection;
 import mage.client.util.CardLanguage;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.sets.ConstructedFormats;
-import mage.remote.Connection;
 import mage.util.ThreadUtils;
-import mage.util.XMageThreadFactory;
+import mage.util.XmageThreadFactory;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileInputStream;
 import net.java.truevfs.access.TFileOutputStream;
@@ -31,7 +31,8 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.*;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.*;
@@ -65,8 +66,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     // protect from wrong data save
     // there are possible land images with small sizes, so must research content in check
-    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6; // broken
-    private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 15; // possible broken (need content check)
+    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6; // smaller files will be mark as broken
+    private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 8; // smaller files will be checked for possible broken mark (slow)
 
     private final DownloadImagesDialog uiDialog;
     private boolean needCancel;
@@ -76,14 +77,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private List<CardInfo> cardsAll;
     private List<CardDownloadData> cardsMissing;
     private final List<CardDownloadData> cardsDownloadQueue;
-    private int missingCardsCount = 0;
-    private int missingTokensCount = 0;
 
     private final List<String> selectedSets = new ArrayList<>();
     private static CardImageSource selectedSource;
 
     private final Object sync = new Object();
-    private Proxy proxy = Proxy.NO_PROXY;
 
     enum DownloadSources {
         WIZARDS("1. wizards.com - low quality, cards only", WizardCardsImageSource.instance),
@@ -429,13 +427,13 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     }
 
     private void updateProgressText(int cardCount, int tokenCount) {
-        missingTokensCount = 0;
+        int missingTokensCount = 0;
         for (CardDownloadData card : cardsMissing) {
             if (card.isToken()) {
                 missingTokensCount++;
             }
         }
-        missingCardsCount = cardsMissing.size() - missingTokensCount;
+        int missingCardsCount = cardsMissing.size() - missingTokensCount;
 
         uiDialog.setCurrentInfo("Missing: " + missingCardsCount + " card images / " + missingTokensCount + " token images");
         int imageSum = cardCount + tokenCount;
@@ -446,7 +444,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         } else if (cardIndex == 0) {
             statusEnd = "image download NOT STARTED. Please start.";
         } else {
-            statusEnd = String.format("image downloading... Please wait [%.1f Mb left].", mb);
+            statusEnd = String.format("image downloading... Please wait [%.1f MB left].", mb);
         }
         updateProgressMessage(String.format("%d of %d (%d cards and %d tokens) %s",
                 0, imageSum, cardCount, tokenCount, statusEnd
@@ -618,7 +616,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             }
         });
 
-        if (badContentChecks.get() > 10000) {
+        if (badContentChecks.get() > 1000) {
+            // how-to fix: download full small images and run checks -- make sure it finds fewer files to check
             logger.warn("Wrong code usage: too many file content checks (" + badContentChecks.get() + ") - try to decrease min file size");
         }
 
@@ -630,39 +629,14 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.cardIndex = 0;
         this.resetErrorCount();
 
-        File base = new File(getImagesDir());
-        if (!base.exists()) {
-            base.mkdir();
-        }
-
-        Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
-        Proxy.Type type = Proxy.Type.DIRECT;
-        switch (configProxyType) {
-            case HTTP:
-                type = Proxy.Type.HTTP;
-                break;
-            case SOCKS:
-                type = Proxy.Type.SOCKS;
-                break;
-            case NONE:
-            default:
-                proxy = Proxy.NO_PROXY;
-                break;
-        }
-
-        if (type != Proxy.Type.DIRECT) {
-            try {
-                String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
-                Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
-                proxy = new Proxy(type, new InetSocketAddress(address, port));
-            } catch (Exception ex) {
-                throw new RuntimeException("Gui_DownloadPicturesService : error 1 - " + ex);
+        try {
+            File base = new File(getImagesDir());
+            if (!base.exists()) {
+                base.mkdir();
             }
-        }
 
-        int downloadThreadsAmount = Math.max(1, Integer.parseInt((String) uiDialog.getDownloadThreadsCombo().getSelectedItem()));
+            int downloadThreadsAmount = Math.max(1, Integer.parseInt((String) uiDialog.getDownloadThreadsCombo().getSelectedItem()));
 
-        if (proxy != null) {
             logger.info("Started download of " + cardsDownloadQueue.size() + " images"
                     + " from source: " + selectedSource.getSourceName()
                     + ", language: " + selectedSource.getCurrentLanguage().getCode()
@@ -672,7 +646,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 update(0, cardsDownloadQueue.size());
                 ExecutorService executor = Executors.newFixedThreadPool(
                         downloadThreadsAmount,
-                        new XMageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_IMAGES_DOWNLOADER, false)
+                        new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_IMAGES_DOWNLOADER, false)
                 );
                 for (int i = 0; i < cardsDownloadQueue.size() && !this.isNeedCancel(); i++) {
                     try {
@@ -724,16 +698,23 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     }
                 }
             }
+        } catch (Throwable e) {
+            logger.error("Catch unknown error while downloading: " + e, e);
+            MageFrame.getInstance().showErrorDialog("Catch unknown error while downloading " + e, e);
+        } finally {
+            // must close all active archives anyway
+            try {
+                TVFS.umount();
+            } catch (FsSyncException e) {
+                logger.fatal("Couldn't unmount zip files " + e, e);
+                MageFrame.getInstance().showErrorDialog("Couldn't unmount zip files " + e, e);
+            }
         }
 
-        try {
-            TVFS.umount();
-        } catch (FsSyncException e) {
-            logger.fatal("Couldn't unmount zip files", e);
-            JOptionPane.showMessageDialog(null, "Couldn't unmount zip files", "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            //
-        }
+        // cleanup resources
+        Arrays.stream(DownloadSources.values()).forEach(resource -> {
+            resource.source.onFinished();
+        });
 
         // stop
         reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
@@ -741,11 +722,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         // reset GUI and cards to use new images
         GUISizeHelper.refreshGUIAndCards(false);
-    }
-
-    static String convertStreamToString(InputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
     }
 
     private final class DownloadTask implements Runnable {
@@ -834,17 +810,17 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
                 // can download images from many alternative urls
                 List<String> downloadUrls;
+                XmageURLConnection connection = null;
                 if (this.urls != null) {
                     downloadUrls = this.urls.getDownloadList();
                 } else {
                     downloadUrls = new ArrayList<>();
                 }
 
+                // try to find first workable link
                 boolean isDownloadOK = false;
-                URLConnection httpConn = null;
                 List<String> errorsList = new ArrayList<>();
                 for (String currentUrl : downloadUrls) {
-                    URL url = new URL(currentUrl);
 
                     // fast stop on cancel
                     if (DownloadPicturesService.getInstance().isNeedCancel()) {
@@ -852,29 +828,27 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     }
 
                     // timeout before each request
-                    selectedSource.doPause(url.toString());
+                    selectedSource.doPause(currentUrl);
 
-                    httpConn = url.openConnection(proxy);
-                    if (httpConn != null) {
+                    connection = new XmageURLConnection(currentUrl);
+                    connection.startConnection();
+                    if (connection.isConnected()) {
 
-                        // custom headers like user agent
-                        Map<String, String> headers = selectedSource.getHttpRequestHeaders(url.toString());
-                        for (String key : headers.keySet()) {
-                            httpConn.setRequestProperty(key, headers.get(key));
-                        }
+                        // custom headers (ues
+                        connection.setRequestHeaders(selectedSource.getHttpRequestHeaders(currentUrl));
 
                         try {
-                            httpConn.connect();
+                            connection.connect();
                         } catch (SocketException e) {
                             incErrorCount();
-                            errorsList.add("Wrong image URL or java app is not allowed to use network. Check your firewall or proxy settings. Error: " + e.getMessage() + ". Image URL: " + url.toString());
+                            errorsList.add("Wrong image URL or java app is not allowed to use network. Check your firewall or proxy settings. Error: " + e.getMessage() + ". Image URL: " + currentUrl);
                             break;
                         } catch (UnknownHostException e) {
                             incErrorCount();
-                            errorsList.add("Unknown site. Check your DNS settings. Error: " + e.getMessage() + ". Image URL: " + url.toString());
+                            errorsList.add("Unknown site. Check your DNS settings. Error: " + e.getMessage() + ". Image URL: " + currentUrl);
                             break;
                         }
-                        int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
+                        int responseCode = connection.getResponseCode();
 
                         // check result
                         if (responseCode != 200) {
@@ -883,13 +857,13 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                     card.getSet(),
                                     card.getName(),
                                     responseCode,
-                                    url
+                                    currentUrl
                             );
                             errorsList.add(info);
 
                             if (logger.isDebugEnabled()) {
                                 // Shows the returned html from the request to the web server
-                                logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                                logger.debug("Returned HTML ERROR:\n" + connection.getErrorResponseAsString());
                             }
 
                             // go to next try
@@ -902,28 +876,19 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     }
                 }
 
-                // can save result
-                if (isDownloadOK && httpConn != null) {
+                // if workable link found then save result
+                if (isDownloadOK && connection.isConnected()) {
                     // save data to temp
-                    try (InputStream in = new BufferedInputStream(httpConn.getInputStream());
-                         OutputStream tfileout = new TFileOutputStream(fileTempImage);
-                         OutputStream out = new BufferedOutputStream(tfileout)) {
+                    try (InputStream in = new BufferedInputStream(connection.getGoodResponseAsStream());
+                         OutputStream tempFileStream = new TFileOutputStream(fileTempImage);
+                         OutputStream out = new BufferedOutputStream(tempFileStream)) {
                         byte[] buf = new byte[1024];
                         int len;
                         while ((len = in.read(buf)) != -1) {
                             // user cancelled
                             if (DownloadPicturesService.getInstance().isNeedCancel()) {
                                 // stop download, save current state and exit
-                                TFile archive = destFile.getTopLevelArchive();
-                                ///* not need to unmout/close - it's auto action
-                                if (archive != null && archive.exists()) {
-                                    logger.info("User canceled download. Closing archive file: " + destFile.toString());
-                                    try {
-                                        TVFS.umount(archive);
-                                    } catch (Exception e) {
-                                        logger.error("Can't close archive file: " + e.getMessage(), e);
-                                    }
-                                }
+                                // real archives save will be done on download service finish
                                 try {
                                     TFile.rm(fileTempImage);
                                 } catch (Exception e) {
@@ -931,6 +896,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 }
                                 return;
                             }
+
+                            // all fine, can save data part
                             out.write(buf, 0, len);
                         }
                     }
@@ -947,7 +914,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         } catch (Exception e) {
                             logger.error("Can't delete temp file: " + e.getMessage(), e);
                         }
-
                     }
                 } else {
                     // download errors
@@ -977,11 +943,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         if (cardIndex < needDownloadCount) {
             // downloading
             float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSizeKb()) / 1024;
-            updateProgressMessage(String.format("%d of %d image downloading... Please wait [%.1f Mb left].",
+            updateProgressMessage(String.format("%d of %d image downloading... Please wait [%.1f MB left].",
                     lastCardIndex, needDownloadCount, mb), lastCardIndex, needDownloadCount);
         } else {
             // finished
-            updateProgressMessage("Image download DONE, refreshing stats... Please wait.");
+            updateProgressMessage("Image download DONE, saving last files and refreshing stats... Please wait.");
             List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());
             DownloadPicturesService.this.cardsMissing.parallelStream().forEach(cardDownloadData -> {
                 TFile file = new TFile(CardImageUtils.buildImagePathToCardOrToken(cardDownloadData));
@@ -991,6 +957,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             });
 
             // remove all downloaded cards, missing must be remains
+            // TODO: too slow on finished, must be reworked (e.g. run full check instead remove)
             this.cardsDownloadQueue.removeAll(downloadedCards);
             this.cardsMissing.removeAll(downloadedCards);
 
@@ -1011,11 +978,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         uiDialog.getRedownloadCheckbox().setSelected(false); // reset re-download button after finished
         uiDialog.enableActionControls(true);
         uiDialog.getStartButton().setEnabled(true);
-    }
-
-    @Override
-    public Proxy getProxy() {
-        return proxy;
     }
 
     @Override

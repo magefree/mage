@@ -49,7 +49,7 @@ public final class BilbosRing extends CardImpl {
 
         // Whenever equipped creature attacks alone, you draw a card and you lose 1 life.
         ability = new AttacksAloneAttachedTriggeredAbility(
-                new DrawCardSourceControllerEffect(1, "you")
+                new DrawCardSourceControllerEffect(1, true)
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

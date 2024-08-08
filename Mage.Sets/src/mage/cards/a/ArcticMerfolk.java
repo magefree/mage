@@ -34,10 +34,10 @@ public final class ArcticMerfolk extends CardImpl {
                 new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE, true)
         )));
 
-        // If Arctic Merfolk was kicked, it enters the battlefield with a +1/+1 counter on it.
+        // If Arctic Merfolk was kicked, it enters with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.", ""));
+                KickedCondition.ONCE, "If {this} was kicked, it enters with a +1/+1 counter on it.", ""));
     }
 
     private ArcticMerfolk(final ArcticMerfolk card) {

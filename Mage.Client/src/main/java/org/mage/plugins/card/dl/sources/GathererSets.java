@@ -6,17 +6,18 @@ import mage.client.constants.Constants;
 import mage.constants.Rarity;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.DownloadJob;
-import static org.mage.plugins.card.dl.DownloadJob.fromURL;
-import static org.mage.plugins.card.dl.DownloadJob.toFile;
-import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 import java.io.File;
 import java.util.*;
 
-/**
- * WARNING, unsupported images plugin, last updates from 2018
- */
+import static org.mage.plugins.card.dl.DownloadJob.toFile;
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
+/**
+ * Download: set code symbols download from wizards web size
+ * <p>
+ * Warning, it's outdated source with low quality images. TODO: must migrate to scryfall like mana icons
+ */
 public class GathererSets implements Iterable<DownloadJob> {
 
     private class CheckResult {
@@ -338,6 +339,6 @@ public class GathererSets implements Iterable<DownloadJob> {
             set = codeReplacements.get(set);
         }
         String url = "https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + urlRarity;
-        return new DownloadJob(set + '-' + rarity, fromURL(url), toFile(dst), false);
+        return new DownloadJob(set + '-' + rarity, url, toFile(dst), false);
     }
 }
