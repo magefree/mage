@@ -33,7 +33,7 @@ public final class ButcherOfTheHorde extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sacrifice another creature: Butcher of the Horde gains your choice of vigilance, lifelink, or haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new GainsChoiceOfAbilitiesEffect(true,
+        this.addAbility(new SimpleActivatedAbility(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
                 VigilanceAbility.getInstance(), LifelinkAbility.getInstance(), HasteAbility.getInstance()),
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
     }

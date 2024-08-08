@@ -32,7 +32,7 @@ public final class ArgivianAvenger extends CardImpl {
         // {1}: Until end of turn, Argivian Avenger gets -1/-1 and gains your choice of flying, vigilance, deathtouch, or haste.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-1, -1)
                 .setText("Until end of turn, {this} gets -1/-1"), new GenericManaCost(1));
-        ability.addEffect(new GainsChoiceOfAbilitiesEffect(true, "", false,
+        ability.addEffect(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source, "", false,
                 FlyingAbility.getInstance(), VigilanceAbility.getInstance(), DeathtouchAbility.getInstance(), HasteAbility.getInstance())
                 .concatBy("and"));
         this.addAbility(ability);

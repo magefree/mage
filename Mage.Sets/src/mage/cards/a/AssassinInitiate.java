@@ -28,7 +28,7 @@ public final class AssassinInitiate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}: Assassin Initiate gains your choice of flying, deathtouch, or lifelink until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new GainsChoiceOfAbilitiesEffect(true,
+        this.addAbility(new SimpleActivatedAbility(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
                 FlyingAbility.getInstance(), DeathtouchAbility.getInstance(), LifelinkAbility.getInstance()),
                 new GenericManaCost(1)));
     }

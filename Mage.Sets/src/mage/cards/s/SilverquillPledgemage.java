@@ -26,7 +26,7 @@ public final class SilverquillPledgemage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Magecraft — Whenever you cast or copy an instant or sorcery spell, Silverquill Pledgemage gains your choice of flying or lifelink until end of turn.
-        this.addAbility(new MagecraftAbility(new GainsChoiceOfAbilitiesEffect(true,
+        this.addAbility(new MagecraftAbility(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
                 FlyingAbility.getInstance(), LifelinkAbility.getInstance())));
     }
 

@@ -25,21 +25,26 @@ import java.util.*;
  */
 public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
 
+    public enum TargetType {
+        Source, Target, Both
+    }
+
     private final Map<String, Ability> abilityMap;
-    private final boolean affectSource, includeEnd;
+    private final boolean includeEnd;
+    private final TargetType affects;
     private final String targetDescription;
 
     public GainsChoiceOfAbilitiesEffect(Ability... abilities) {
-        this(false, null, true, abilities);
+        this(TargetType.Target, null, true, abilities);
     }
 
-    public GainsChoiceOfAbilitiesEffect(boolean affectSource, Ability... abilities) {
-        this(affectSource, null, true, abilities);
+    public GainsChoiceOfAbilitiesEffect(TargetType affects, Ability... abilities) {
+        this(affects, null, true, abilities);
     }
 
-    public GainsChoiceOfAbilitiesEffect(boolean affectSource, String targetDescription, boolean includeEnd, Ability... abilities) {
+    public GainsChoiceOfAbilitiesEffect(TargetType affects, String targetDescription, boolean includeEnd, Ability... abilities) {
         super(Outcome.AddAbility);
-        this.affectSource = affectSource;
+        this.affects = affects;
         this.targetDescription = targetDescription;
         this.includeEnd = includeEnd;
         this.abilityMap = new LinkedHashMap<>();
@@ -50,7 +55,7 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
 
     protected GainsChoiceOfAbilitiesEffect(final GainsChoiceOfAbilitiesEffect effect) {
         super(effect);
-        this.affectSource = effect.affectSource;
+        this.affects = effect.affects;
         this.abilityMap = CardUtil.deepCopyObject(effect.abilityMap);
         this.targetDescription = effect.targetDescription;
         this.includeEnd = effect.includeEnd;
@@ -65,10 +70,10 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         List<Permanent> permanents = new ArrayList<>();
-        if (affectSource) {
+        if (affects == TargetType.Source || affects == TargetType.Both) {
             permanents.add(source.getSourcePermanentIfItStillExists(game));
         }
-        if (getTargetPointer().isInitialized()) {
+        if (affects == TargetType.Target || affects == TargetType.Both) {
             for (UUID p : getTargetPointer().getTargets(game, source)) {
                 permanents.add(game.getPermanent(p));
             }
@@ -95,14 +100,23 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (targetDescription != null){
+        if (targetDescription != null) {
             sb.append(targetDescription);
-        } else if (affectSource){
-            sb.append("{this} ");
-        } else {
-            sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that creature")).append(" ");
+            sb.append(" gains");
+        } else switch (affects) {
+            case Source:
+                sb.append("{this} gains");
+                break;
+            case Target:
+                sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that creature")).append(" gains");
+                break;
+            case Both:
+                sb.append("{this} and ");
+                sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that creature"));
+                sb.append(" each gain");
+                break;
         }
-        sb.append("gains your choice of ");
+        sb.append(" your choice of ");
         String[] abilitiesText = abilityMap.keySet().toArray(new String[0]);
         if (abilityMap.size() == 2) {
             sb.append(abilitiesText[0]).append(" or ").append(abilitiesText[1]);

@@ -42,7 +42,7 @@ public final class EzrimAgencyChief extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect(2)));
 
         // {1}, Sacrifice an artifact: Ezrim gains your choice of vigilance, lifelink, or hexproof until end of turn.
-        Ability ability = new SimpleActivatedAbility(new GainsChoiceOfAbilitiesEffect(true,
+        Ability ability = new SimpleActivatedAbility(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
                 VigilanceAbility.getInstance(), LifelinkAbility.getInstance(), HexproofAbility.getInstance()),
                 new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));

@@ -29,10 +29,8 @@ public final class BallroomBrawlers extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever Ballroom Brawlers attacks, Ballroom Brawlers and up to one other target creature you control each gain your choice of first strike or lifelink until end of turn.
-        Ability ability = new AttacksTriggeredAbility(new GainsChoiceOfAbilitiesEffect(true,
-                FirstStrikeAbility.getInstance(), LifelinkAbility.getInstance())
-                .setText("{this} and up to one other target creature you control both gain your choice of " +
-                        "first strike or lifelink until end of turn")).withRuleTextReplacement(false);
+        Ability ability = new AttacksTriggeredAbility(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Both,
+                FirstStrikeAbility.getInstance(), LifelinkAbility.getInstance())).withRuleTextReplacement(false);
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }

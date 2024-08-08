@@ -35,7 +35,7 @@ public final class JodahsAvenger extends CardImpl {
         // {0}: Until end of turn, Jodah's Avenger gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-1, -1)
                 .setText("Until end of turn, {this} gets -1/-1"), new ManaCostsImpl<>("{0}"));
-        ability.addEffect(new GainsChoiceOfAbilitiesEffect(true, "", false,
+        ability.addEffect(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source, "", false,
                 DoubleStrikeAbility.getInstance(), ProtectionAbility.from(ObjectColor.RED), VigilanceAbility.getInstance(), ShadowAbility.getInstance())
                 .concatBy("and"));
         this.addAbility(ability);

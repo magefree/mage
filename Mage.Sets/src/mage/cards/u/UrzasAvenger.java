@@ -34,7 +34,7 @@ public final class UrzasAvenger extends CardImpl {
         // {0}: Urza's Avenger gets -1/-1 and gains your choice of banding, flying, first strike, or trample until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-1, -1)
                 .setText("{this} gets -1/-1"), new ManaCostsImpl<>("{0}"));
-        ability.addEffect(new GainsChoiceOfAbilitiesEffect(true, "", true,
+        ability.addEffect(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source, "", true,
                 BandingAbility.getInstance(), FlyingAbility.getInstance(), FirstStrikeAbility.getInstance(), TrampleAbility.getInstance())
                 .concatBy("and"));
         this.addAbility(ability);
