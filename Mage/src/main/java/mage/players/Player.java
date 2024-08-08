@@ -1000,7 +1000,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
-    boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
+    boolean moveCardsToExile(Set<? extends Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card

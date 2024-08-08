@@ -412,15 +412,23 @@ public class Spell extends StackObjectImpl implements Card {
                 counter(null, /*this.getSpellAbility()*/ game);
                 return false;
             }
-        } else if (isCopy()) {
-            Token token = CopyTokenFunction.createTokenCopy(card, game, this);
-            // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-            token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false);
-            return true;
         } else {
-            MageObjectReference mor = new MageObjectReference(getSpellAbility());
-            game.storePermanentCostsTags(mor, getSpellAbility());
-            return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+            // Check if spell cast with mutate
+            if (SpellAbilityCastMode.MUTATE.equals(ability.getSpellAbilityCastMode())
+                    && ability.getTargets().stillLegal(ability, game)) {
+                return game.mutatePermanent(card, ability.getFirstTarget(), this);
+            }
+
+            if (isCopy()) {
+                Token token = CopyTokenFunction.createTokenCopy(card, game, this);
+                // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
+                token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false);
+                return true;
+            } else {
+                MageObjectReference mor = new MageObjectReference(getSpellAbility());
+                game.storePermanentCostsTags(mor, getSpellAbility());
+                return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+            }
         }
     }
 

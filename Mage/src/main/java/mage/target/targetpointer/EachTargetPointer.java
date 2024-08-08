@@ -130,4 +130,13 @@ public class EachTargetPointer extends TargetPointerImpl {
     public boolean isPlural(Targets targets) {
         return true;
     }
+
+    @Override
+    public void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, Game game) {
+        if (zoneChangeCounter.containsKey(originalTargetId)) {
+            Integer value = zoneChangeCounter.get(originalTargetId);
+            zoneChangeCounter.remove(originalTargetId);
+            zoneChangeCounter.put(newTargetId, value);
+        }
+    }
 }

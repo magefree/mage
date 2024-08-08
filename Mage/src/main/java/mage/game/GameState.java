@@ -113,6 +113,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean hasDayNight = false;
     private boolean isDaytime = true;
     private boolean reverseTurnOrder = false;
+    private Map<UUID, Permanent> mutateZone = new HashMap<>();
 
     private int applyEffectsCounter; // Upcounting number of each applyEffects execution
 
@@ -188,6 +189,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
         this.reverseTurnOrder = state.reverseTurnOrder;
+        for (Map.Entry<UUID, Permanent> entry : state.mutateZone.entrySet()) {
+            mutateZone.put(entry.getKey(), entry.getValue().copy());
+        }
     }
 
     public void clearOnGameRestart() {
@@ -228,6 +232,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         copiedCards.clear();
         usePowerInsteadOfToughnessForDamageLethalityFilters.clear();
         permanentOrderNumber = 0;
+        mutateZone.clear();
     }
 
     public void restoreForRollBack(GameState state) {
@@ -282,6 +287,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
         this.reverseTurnOrder = state.reverseTurnOrder;
+        this.mutateZone = state.mutateZone;
     }
 
     @Override
@@ -331,6 +337,14 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (CombatGroup group : combat.getGroups()) {
             sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
         }
+
+        sb.append("mutatedUnder");
+        List<String> muPerms = new ArrayList<>();
+        for (Permanent permanent : mutateZone.values()) {
+            muPerms.add(permanent.getValue(this));
+        }
+        Collections.sort(muPerms);
+        sb.append(muPerms);
 
         return sb.toString();
     }
@@ -388,6 +402,14 @@ public class GameState implements Serializable, Copyable<GameState> {
             sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
         }
 
+        sb.append("mutatedUnder");
+        List<String> muPerms = new ArrayList<>();
+        for (Permanent permanent : mutateZone.values()) {
+            muPerms.add(permanent.getValue(this));
+        }
+        Collections.sort(muPerms);
+        sb.append(muPerms);
+
         return sb.toString();
     }
 
@@ -443,6 +465,14 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (CombatGroup group : combat.getGroups()) {
             sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
         }
+
+        sb.append("mutatedUnder");
+        List<String> muPerms = new ArrayList<>();
+        for (Permanent permanent : mutateZone.values()) {
+            muPerms.add(permanent.getValue(this));
+        }
+        Collections.sort(muPerms);
+        sb.append(muPerms);
 
         return sb.toString();
     }
@@ -670,6 +700,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Player player : players.values()) {
             player.reset();
         }
+        mutateZone.values().forEach(p -> p.reset(game)); // required since affected by removeAllAbilities
         battlefield.reset(game);
         combat.reset(game);
         this.reset();
@@ -774,9 +805,36 @@ public class GameState implements Serializable, Copyable<GameState> {
         return newPlayerList;
     }
 
+    public void addPermanentToMutateZone(Permanent permanent) {
+        mutateZone.put(permanent.getId(), permanent);
+        setZone(permanent.getId(), Zone.MUTATE);
+    }
+
+    public Permanent getPermanentFromMutateZone(UUID permanentId) {
+        return mutateZone.get(permanentId);
+    }
+
+    public void removePermanentFromMutateZone(UUID permanentId) {
+        removePermanentFromMutateZone(permanentId, null);
+    }
+
+    public void removePermanentFromMutateZone(UUID permanentId, Zone newZone) {
+        mutateZone.remove(permanentId);
+        setZone(permanentId, newZone);
+    }
+
+    public boolean containsPermanentInMutateZone(UUID permanentId) {
+        return mutateZone.containsKey(permanentId);
+    }
+
     public Permanent getPermanent(UUID permanentId) {
-        if (permanentId != null && battlefield.containsPermanent(permanentId)) {
-            return battlefield.getPermanent(permanentId);
+        if (permanentId != null) {
+            if (battlefield.containsPermanent(permanentId)) {
+                return battlefield.getPermanent(permanentId);
+            }
+            if (containsPermanentInMutateZone(permanentId)) {
+                return getPermanentFromMutateZone(permanentId);
+            }
         }
         return null;
     }

@@ -17,7 +17,7 @@ public class ValueHint implements Hint {
         this.value = value;
     }
 
-    private ValueHint(final ValueHint hint) {
+    protected ValueHint(final ValueHint hint) {
         this.name = hint.name;
         this.value = hint.value.copy();
     }

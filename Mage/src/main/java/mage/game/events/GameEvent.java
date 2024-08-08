@@ -675,6 +675,8 @@ public class GameEvent implements Serializable {
          playerId   player who gave the gift
          */
         GAVE_GIFT,
+        /* mutate */
+        CREATURE_MUTATED,
         //custom events
         CUSTOM_EVENT
     }

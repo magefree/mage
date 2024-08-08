@@ -4,10 +4,7 @@ import mage.MageException;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
-import mage.abilities.common.AttachableToRestrictedAbility;
-import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
-import mage.abilities.common.SagaAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.*;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
@@ -52,9 +49,7 @@ import mage.game.command.emblems.XmageHelperEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
-import mage.game.permanent.Battlefield;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
+import mage.game.permanent.*;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackAbility;
@@ -4156,5 +4151,92 @@ public abstract class GameImpl implements Game {
                 .append("; stack: ").append(this.getStack().toString())
                 .append(this.getState().isGameOver() ? "; FINISHED: " + this.getWinner() : "");
         return sb.toString();
+    }
+
+    @Override
+    public boolean mutatePermanent(Card card, UUID permanentId, Spell source) {
+        Player controller = getPlayer(source.getControllerId());
+        if (!getBattlefield().containsPermanent(permanentId) || controller == null) {
+            return false;
+        }
+
+        final Permanent permanent = getBattlefield().getPermanent(permanentId);
+        final Permanent newPermanent = new PermanentCard(card, card.getOwnerId(), this);
+
+        final boolean shouldMutateUnder = controller.chooseUse(Outcome.Neutral,
+                "Select whether to mutate " + source.getLogName() + " UNDER or OVER " + permanent.getLogName(),
+                null, "Under", "Over", source.getSpellAbility(), this);
+
+        if (shouldMutateUnder) {
+            if (!permanent.applyMutateUnder(newPermanent, this)) {
+                return false;
+            }
+
+            state.addPermanentToMutateZone(newPermanent);
+            if (!source.isCopy()) {
+                state.updateZoneChangeCounter(card.getId());
+            }
+
+            // Reassign source of UNDER's triggered abilities to OVER
+            state.getTriggers().removeAbilitiesOfSource(newPermanent.getId());
+            for (Ability ability : newPermanent.getAbilities()) {
+                for (Target target : ability.getTargets()) {
+                    target.replaceMutatedTarget(permanentId, permanent.getId(), permanent.getZoneChangeCounter(this));
+                }
+                if (ability instanceof TriggeredAbility) {
+                    state.getTriggers().add((TriggeredAbility) ability, null, permanent);
+                }
+            }
+            state.getContinuousEffects().replaceMutatedObjects(newPermanent.getId(), permanent.getId(), this);
+
+            fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.CREATURE_MUTATED, permanentId,
+                    source.getSpellAbility(), source.getControllerId()
+            ));
+        } else {
+            if (!newPermanent.applyMutateOver(permanent, this)) {
+                return false;
+            }
+
+            state.addPermanentToMutateZone(permanent);
+            getBattlefield().removePermanent(permanentId);
+            state.removePermanentFromMutateZone(newPermanent.getId(), Zone.BATTLEFIELD);
+            getBattlefield().addPermanent(newPermanent);
+            if (!source.isCopy()) {
+                getState().updateZoneChangeCounter(permanentId);
+            }
+
+            // Replace any targets on the stack pointing to the old permanent to the new permanent
+            for (StackObject stackObject : state.getStack()) {
+                for (Target targets : stackObject.getStackAbility().getTargets()) {
+                    for (UUID target : targets.getTargets()) {
+                        if (target.equals(permanentId)) {
+                            targets.replaceMutatedTarget(permanentId, newPermanent.getId(), newPermanent.getZoneChangeCounter(this));
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Reassign source of UNDER's triggered abilities to OVER
+            state.getTriggers().removeAbilitiesOfSource(permanentId);
+            for (Permanent underPermanent : newPermanent.getMutatedOverList()) {
+                for (Ability ability : underPermanent.getAbilities()) {
+                    for (Target target : ability.getTargets()) {
+                        target.replaceMutatedTarget(permanentId, newPermanent.getId(), newPermanent.getZoneChangeCounter(this));
+                    }
+                    if (ability instanceof TriggeredAbility) {
+                        state.getTriggers().add((TriggeredAbility) ability, null, newPermanent);
+                    }
+                }
+            }
+            state.getContinuousEffects().replaceMutatedObjects(permanentId, newPermanent.getId(), this);
+
+            fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.CREATURE_MUTATED, newPermanent.getId(),
+                    source.getSpellAbility(), source.getControllerId()
+            ));
+        }
+        return true;
     }
 }
