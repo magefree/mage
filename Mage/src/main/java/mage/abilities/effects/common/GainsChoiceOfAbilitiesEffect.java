@@ -101,19 +101,24 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         if (targetDescription != null) {
-            sb.append(targetDescription);
-            sb.append(" gains");
+            if (targetDescription.isEmpty()){
+                sb.append("gains");
+            } else {
+                sb.append(targetDescription);
+                sb.append(" gains");
+            }
         } else switch (affects) {
             case Source:
                 sb.append("{this} gains");
                 break;
             case Target:
-                sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that creature")).append(" gains");
+                sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that creature"));
+                sb.append(" gains");
                 break;
             case Both:
                 sb.append("{this} and ");
                 sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that creature"));
-                sb.append(" each gain");
+                sb.append(" both gain");
                 break;
         }
         sb.append(" your choice of ");
@@ -126,7 +131,7 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
             }
             sb.append("or ").append(abilitiesText[abilityMap.size()-1]);
         } else {
-            throw new IllegalStateException("Only one ability found in GainsChoiceOfAbilitiesEffect");
+            throw new IllegalStateException("Not enough abilities for GainsChoiceOfAbilitiesEffect");
         }
         if (includeEnd) {
             sb.append(" until end of turn");
