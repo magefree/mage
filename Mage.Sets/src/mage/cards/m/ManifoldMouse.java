@@ -3,18 +3,17 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.GainsChoiceOfAbilitiesEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.OffspringAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -38,7 +37,8 @@ public final class ManifoldMouse extends CardImpl {
         this.addAbility(new OffspringAbility("{2}"));
 
         // At the beginning of combat on your turn, target Mouse you control gains your choice of double strike or trample until end of turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new ManifoldMouseEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new GainsChoiceOfAbilitiesEffect(
+                DoubleStrikeAbility.getInstance(), TrampleAbility.getInstance()), TargetController.YOU, false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
@@ -50,36 +50,5 @@ public final class ManifoldMouse extends CardImpl {
     @Override
     public ManifoldMouse copy() {
         return new ManifoldMouse(this);
-    }
-}
-
-class ManifoldMouseEffect extends OneShotEffect {
-
-    ManifoldMouseEffect() {
-        super(Outcome.Benefit);
-        staticText = "target Mouse you control gains your choice of double strike or trample until end of turn";
-    }
-
-    private ManifoldMouseEffect(final ManifoldMouseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ManifoldMouseEffect copy() {
-        return new ManifoldMouseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        Ability ability = player.chooseUse(
-                outcome, "Double strike or trample?", null,
-                "Double strike", "Trample", source, game
-        ) ? DoubleStrikeAbility.getInstance() : TrampleAbility.getInstance();
-        game.addEffect(new GainAbilityTargetEffect(ability, Duration.EndOfTurn), source);
-        return true;
     }
 }

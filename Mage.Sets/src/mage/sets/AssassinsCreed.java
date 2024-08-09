@@ -27,6 +27,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Arno Dorian", 47, Rarity.UNCOMMON, mage.cards.a.ArnoDorian.class));
         cards.add(new SetCardInfo("Assassin Den", 281, Rarity.UNCOMMON, mage.cards.a.AssassinDen.class));
         cards.add(new SetCardInfo("Assassin Gauntlet", 12, Rarity.UNCOMMON, mage.cards.a.AssassinGauntlet.class));
+        cards.add(new SetCardInfo("Assassin Initiate", 22, Rarity.UNCOMMON, mage.cards.a.AssassinInitiate.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 95, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
         cards.add(new SetCardInfo("Aya of Alexandria", 48, Rarity.RARE, mage.cards.a.AyaOfAlexandria.class));
         cards.add(new SetCardInfo("Ballad of the Black Flag", 13, Rarity.UNCOMMON, mage.cards.b.BalladOfTheBlackFlag.class));

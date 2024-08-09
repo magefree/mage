@@ -11,9 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -24,13 +24,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SludgeMonster extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("other creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public SludgeMonster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
@@ -41,9 +34,8 @@ public final class SludgeMonster extends CardImpl {
         // Whenever Sludge Monster enters the battlefield or attacks, put a slime counter on up to one other target creature.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.SLIME.createInstance())
-                        .setText("put a slime counter on up to one other target creature")
         );
-        ability.addTarget(new TargetPermanent(0, 1, filter));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
 
         // Non-Horror creatures with slime counters on them lose all abilities and have base power and toughness 2/2.
