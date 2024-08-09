@@ -2111,6 +2111,9 @@
 |Generate|TOK:WOC|Spirit|||WhiteBlackSpiritToken|
 |Generate|TOK:WOC|Virtuous|||VirtuousRoleToken|
 
+# WHO
+|Generate|TOK:WHO|Alien Insect|||AlienInsectToken|
+
 # PIP
 |Generate|TOK:PIP|Robot|||RobotToken|
 
