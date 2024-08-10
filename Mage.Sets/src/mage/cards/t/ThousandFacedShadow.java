@@ -99,7 +99,7 @@ class ThousandFacedShadowTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield from your hand, if it's attacking, " +
+        return "When {this} enters from your hand, if it's attacking, " +
                 "create a token that's a copy of another target attacking creature. " +
                 "The token enters the battlefield tapped and attacking.";
     }

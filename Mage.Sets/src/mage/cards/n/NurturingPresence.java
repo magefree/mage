@@ -36,7 +36,7 @@ public final class NurturingPresence extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
-        // Enchanted creature has "Whenever a creature enters the battlefield under your control, this creature gets +1/+1 until end of turn."
+        // Enchanted creature has "Whenever a creature you control enters, this creature gets +1/+1 until end of turn."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 new EntersBattlefieldControlledTriggeredAbility(
                         new BoostSourceEffect(1, 1, Duration.EndOfTurn)

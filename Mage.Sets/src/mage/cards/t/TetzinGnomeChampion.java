@@ -47,7 +47,7 @@ public class TetzinGnomeChampion extends CardImpl {
         this.color.setRed(true);
         this.color.setWhite(true);
 
-        // Whenever Tetzin or another double-faced artifact enters the battlefield under your control, mill three cards. You may put an artifact card from among them into your hand.
+        // Whenever Tetzin or another double-faced artifact you control enters, mill three cards. You may put an artifact card from among them into your hand.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new MillThenPutInHandEffect(3, StaticFilters.FILTER_CARD_ARTIFACT_AN).withTextOptions("them"),
                 filter, false, true

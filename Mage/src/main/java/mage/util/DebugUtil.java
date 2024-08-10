@@ -35,8 +35,9 @@ public class DebugUtil {
     public static boolean GUI_GAME_DRAW_BATTLEFIELD_BORDER = false;
     public static boolean GUI_GAME_DRAW_HAND_AND_STACK_BORDER = false;
     public static boolean GUI_GAME_DRAW_PLAYER_PANEL_BORDER = false;
-    public static boolean GUI_GAME_DRAW_COMMAND_BUTTONS_PANEL_BORDER = false;
+    public static boolean GUI_GAME_DRAW_SKIP_BUTTONS_PANEL_BORDER = false;
     public static boolean GUI_GAME_DRAW_PHASE_BUTTONS_PANEL_BORDER = false;
+    public static boolean GUI_GAME_DRAW_COMMANDS_PANEL_BORDER = false;
 
     // game dialogs
     public static boolean GUI_GAME_DIALOGS_DRAW_CARDS_AREA_BORDER = false;

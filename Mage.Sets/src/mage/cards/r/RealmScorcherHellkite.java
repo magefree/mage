@@ -45,7 +45,7 @@ public final class RealmScorcherHellkite extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AddManaInAnyCombinationEffect(4)),
                 BargainedCondition.instance,
-                "When {this} enters the battlefield, if it was bargained, add four mana in any combination of colors."
+                "When {this} enters, if it was bargained, add four mana in any combination of colors."
         ));
 
         // {1}{R}: Realm-Scorcher Hellkite deals 1 damage to any target.

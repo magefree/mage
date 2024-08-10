@@ -78,7 +78,7 @@ class MythosOfIllunaEffect extends OneShotEffect {
         if (condition.apply(game, source)) {
             Ability ability = new ConditionalInterveningIfTriggeredAbility(
                     new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect()),
-                    MythosOfIllunaCondition.instance, "When this permanent enters the battlefield, " +
+                    MythosOfIllunaCondition.instance, "When this permanent enters, " +
                     "if it's a creature, it fights up to one target creature you don't control."
             );
             ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));

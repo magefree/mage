@@ -29,7 +29,7 @@ public final class CursedMirror extends CardImpl {
         // As Cursed Mirror enters the battlefield, you may have it become a copy of any creature on the battlefield until end of turn, except it has haste.
         this.addAbility(new EntersBattlefieldAbility(
                 new CopyPermanentEffect(new CursedMirrorCopyApplier()).setDuration(Duration.EndOfTurn),
-                true, null, "As {this} enters the battlefield, you may have it " +
+                true, null, "As {this} enters, you may have it " +
                 "become a copy of any creature on the battlefield until end of turn, except it has haste.", ""
         ));
     }

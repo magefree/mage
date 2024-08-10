@@ -33,7 +33,7 @@ public final class GuardianProject extends CardImpl {
     public GuardianProject(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
-        // Whenever a nontoken creature enters the battlefield under your control, if that creature does not have the same name as another creature you control or a creature card in your graveyard, draw a card.
+        // Whenever a nontoken creature you control enters, if that creature does not have the same name as another creature you control or a creature card in your graveyard, draw a card.
         this.addAbility(new GuardianProjectTriggeredAbility());
     }
 
@@ -79,7 +79,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
 
     @Override
     public String getRule() {
-        return "Whenever a nontoken creature enters the battlefield under your control, " +
+        return "Whenever a nontoken creature you control enters, " +
                 "if it doesn't have the same name as another creature you control " +
                 "or a creature card in your graveyard, draw a card.";
     }

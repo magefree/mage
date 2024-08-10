@@ -37,7 +37,7 @@ public final class NecroblossomSnarl extends CardImpl {
                 new TapSourceUnlessPaysEffect(
                         new RevealTargetFromHandCost(new TargetCardInHand(filter))
                 ), "you may reveal a Swamp or Forest card from your hand. " +
-                "If you don't, {this} enters the battlefield tapped"
+                "If you don't, {this} enters tapped"
         ));
 
         // {T}: Add {B} or {G}.

@@ -29,7 +29,7 @@ public final class LeylineOfVitality extends CardImpl {
         // Creatures you control get +0/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, false)));
 
-        // Whenever a creature enters the battlefield under your control, you may gain 1 life.
+        // Whenever a creature you control enters, you may gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new GainLifeEffect(1),

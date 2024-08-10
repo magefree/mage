@@ -44,10 +44,10 @@ public final class EmblazonedGolem extends CardImpl {
                 Zone.ALL, new InfoEffect("Spend only colored mana on X. No more than one mana of each color may be spent this way."))
         );
         
-        // If Emblazoned Golem was kicked, it enters the battlefield with X +1/+1 counters on it.                
+        // If Emblazoned Golem was kicked, it enters with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(),
                 EmblazonedGolemKickerValue.instance, false),
-                KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield with X +1/+1 counters on it.", ""));
+                KickedCondition.ONCE, "If {this} was kicked, it enters with X +1/+1 counters on it.", ""));
     }
 
     private EmblazonedGolem(final EmblazonedGolem card) {

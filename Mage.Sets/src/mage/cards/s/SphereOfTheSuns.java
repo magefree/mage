@@ -19,7 +19,7 @@ import mage.counters.CounterType;
  */
 public final class SphereOfTheSuns extends CardImpl {
 
-    private static final String ruleText = "{this} enters the battlefield tapped and with three charge counters on it.";
+    private static final String ruleText = "{this} enters tapped and with three charge counters on it.";
 
     public SphereOfTheSuns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

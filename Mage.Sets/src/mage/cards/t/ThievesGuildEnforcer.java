@@ -39,7 +39,7 @@ public final class ThievesGuildEnforcer extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
-        // Whenever Thieves' Guild Enforcer or another Rogue enters the battlefield under your control, each opponent mills two cards.
+        // Whenever Thieves' Guild Enforcer or another Rogue you control enters, each opponent mills two cards.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new MillCardsEachPlayerEffect(
                         2, TargetController.OPPONENT

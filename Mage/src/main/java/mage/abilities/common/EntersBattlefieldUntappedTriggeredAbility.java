@@ -12,7 +12,7 @@ public class EntersBattlefieldUntappedTriggeredAbility extends EntersBattlefield
 
     public EntersBattlefieldUntappedTriggeredAbility(Effect effect, boolean optional) {
         super(effect, optional);
-        setTriggerPhrase("When {this} enters the battlefield untapped, ");
+        setTriggerPhrase("When {this} enters untapped, ");
     }
 
     private EntersBattlefieldUntappedTriggeredAbility(final EntersBattlefieldUntappedTriggeredAbility ability) {

@@ -39,7 +39,7 @@ class MarchFromTheBlackGateTriggeredAbility extends TriggeredAbilityImpl {
 
     MarchFromTheBlackGateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AmassEffect(1, SubType.ORC));
-        this.setTriggerPhrase("When {this} enters the battlefield and whenever an Army you control attacks, ");
+        this.setTriggerPhrase("When {this} enters and whenever an Army you control attacks, ");
     }
 
     private MarchFromTheBlackGateTriggeredAbility(final MarchFromTheBlackGateTriggeredAbility ability) {

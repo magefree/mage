@@ -38,7 +38,7 @@ public final class GristVoraciousLarva extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
 
-        // Whenever Grist, Voracious Larva or another creature enters the battlefield under your control, if it entered from your graveyard or was cast from your graveyard, you may pay {G}. If you do, exile Grist, then return it to the battlefield transformed under its owner's control.
+        // Whenever Grist, Voracious Larva or another creature you control enters, if it entered from your graveyard or was cast from your graveyard, you may pay {G}. If you do, exile Grist, then return it to the battlefield transformed under its owner's control.
         this.addAbility(new TransformAbility());
         this.addAbility(new GristVoraciousLarvaTriggeredAbility());
     }
@@ -61,7 +61,7 @@ class GristVoraciousLarvaTriggeredAbility extends EntersBattlefieldThisOrAnother
                         new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.IT),
                         new ManaCostsImpl<>("{G}")
                 ), StaticFilters.FILTER_PERMANENT_CREATURE, false, true);
-        setTriggerPhrase("Whenever {this} or another creature enters the battlefield under your control, "
+        setTriggerPhrase("Whenever {this} or another creature you control enters, "
                 + "if it entered from your graveyard or you cast it from your graveyard, ");
     }
 
@@ -100,4 +100,3 @@ class GristVoraciousLarvaTriggeredAbility extends EntersBattlefieldThisOrAnother
         return fromGraveyard && super.checkTrigger(event, game);
     }
 }
-

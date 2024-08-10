@@ -42,7 +42,7 @@ public final class SarkhanSoulAflame extends CardImpl {
         // Dragon spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
-        // Whenever a Dragon enters the battlefield under your control, you may have Sarkhan, Soul Aflame become a copy of it until end of turn, except its name is Sarkhan, Soul Aflame and it's legendary in addition to its other types.
+        // Whenever a Dragon you control enters, you may have Sarkhan, Soul Aflame become a copy of it until end of turn, except its name is Sarkhan, Soul Aflame and it's legendary in addition to its other types.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new SarkhanSoulAflameEffect(), filter2, true
         ));

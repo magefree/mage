@@ -37,7 +37,7 @@ public final class LittjaraKinseekers extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-                ), LittjaraKinseekersCondition.instance, "When {this} enters the battlefield, " +
+                ), LittjaraKinseekersCondition.instance, "When {this} enters, " +
                 "if you control three or more creatures that share a creature type, " +
                 "put a +1/+1 counter on {this}, then scry 1."
         );

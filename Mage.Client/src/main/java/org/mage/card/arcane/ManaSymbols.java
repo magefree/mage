@@ -301,10 +301,9 @@ public final class ManaSymbols {
             if (SvgUtils.haveSvgSupport()) {
                 file = getSymbolFileNameAsSVG(symbol);
                 if (file.exists()) {
-                    try {
-                        InputStream fileStream = new FileInputStream(file);
+                    try(InputStream fileStream = Files.newInputStream(file.toPath())) {
                         image = loadSymbolAsSVG(fileStream, file.getPath(), size, size);
-                    } catch (FileNotFoundException ignore) {
+                    } catch (IOException ignore) {
                     }
                 }
             }

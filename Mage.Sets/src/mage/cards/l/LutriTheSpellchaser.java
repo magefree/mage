@@ -56,7 +56,7 @@ public final class LutriTheSpellchaser extends CardImpl {
         // When Lutri, the Spellchaser enters the battlefield, if you cast it, copy target instant or sorcery spell you control. You may choose new targets for the copy.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CopyTargetStackObjectEffect(), false),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
+                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
                 "if you cast it, copy target instant or sorcery spell you control. " +
                 "You may choose new targets for the copy."
         );

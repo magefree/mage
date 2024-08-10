@@ -36,7 +36,7 @@ public final class PitKeeper extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new CreatureCardsInControllerGraveyardCondition(4),
-                "When {this} enters the battlefield, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand."));
+                "When {this} enters, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand."));
     }
 
     private PitKeeper(final PitKeeper card) {

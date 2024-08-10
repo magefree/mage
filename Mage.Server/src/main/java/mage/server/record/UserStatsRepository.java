@@ -368,7 +368,7 @@ public enum UserStatsRepository {
         try {
             if (statsDao != null && statsDao.getConnectionSource() != null) {
                 DatabaseConnection conn = statsDao.getConnectionSource().getReadWriteConnection(statsDao.getTableName());
-                conn.executeStatement("SHUTDOWN IMMEDIATELY", 0);
+                conn.executeStatement("SHUTDOWN IMMEDIATELY", DatabaseConnection.DEFAULT_RESULT_FLAGS);
                 statsDao.getConnectionSource().releaseConnection(conn);
             }
         } catch (SQLException ex) {

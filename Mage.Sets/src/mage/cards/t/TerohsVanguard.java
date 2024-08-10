@@ -43,7 +43,7 @@ public final class TerohsVanguard extends CardImpl {
                                 Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE
                         )
                 )), ThresholdCondition.instance, "As long as seven or more cards " +
-                "are in your graveyard, {this} has \"When {this} enters the battlefield, " +
+                "are in your graveyard, {this} has \"When {this} enters, " +
                 "creatures you control gain protection from black until end of turn.\""
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }

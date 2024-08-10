@@ -16,7 +16,7 @@ public class FathomMageTest extends CardTestPlayerBase {
     /**
      * Fathom Mage - Creature — Human Wizard 1/1, 2UG
      *
-     * Evolve (Whenever a creature enters the battlefield under your control, if
+     * Evolve (Whenever a creature you control enters, if
      * that creature has greater power or toughness than this creature, put a
      * +1/+1 counter on this creature.) Whenever a +1/+1 counter is placed on
      * Fathom Mage, you may draw a card.

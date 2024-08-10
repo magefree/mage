@@ -41,10 +41,10 @@ public final class TheBlackGate extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GATE);
 
-        // As The Black Gate enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As The Black Gate enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         this.addAbility(new AsEntersBattlefieldAbility(
                 new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
-                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+                "you may pay 3 life. If you don't, it enters tapped"
         ));
 
         // {T}: Add {B}.

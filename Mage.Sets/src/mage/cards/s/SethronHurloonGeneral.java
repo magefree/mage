@@ -46,7 +46,7 @@ public final class SethronHurloonGeneral extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever Sethron, Hurloon General or another nontoken Minotaur enters the battlefield under your control, create a 2/3 red Minotaur creature token.
+        // Whenever Sethron, Hurloon General or another nontoken Minotaur you control enters, create a 2/3 red Minotaur creature token.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new MinotaurToken()), filter, false, true
         ));

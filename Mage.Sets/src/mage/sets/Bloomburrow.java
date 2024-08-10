@@ -28,11 +28,13 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Artist's Talent", 124, Rarity.RARE, mage.cards.a.ArtistsTalent.class));
         cards.add(new SetCardInfo("Azure Beastbinder", 41, Rarity.RARE, mage.cards.a.AzureBeastbinder.class));
         cards.add(new SetCardInfo("Bakersbane Duo", 163, Rarity.COMMON, mage.cards.b.BakersbaneDuo.class));
+        cards.add(new SetCardInfo("Bandit's Talent", 83, Rarity.UNCOMMON, mage.cards.b.BanditsTalent.class));
         cards.add(new SetCardInfo("Banishing Light", 1, Rarity.COMMON, mage.cards.b.BanishingLight.class));
         cards.add(new SetCardInfo("Bark-Knuckle Boxer", 164, Rarity.UNCOMMON, mage.cards.b.BarkKnuckleBoxer.class));
         cards.add(new SetCardInfo("Barkform Harvester", 243, Rarity.COMMON, mage.cards.b.BarkformHarvester.class));
         cards.add(new SetCardInfo("Baylen, the Haymaker", 205, Rarity.RARE, mage.cards.b.BaylenTheHaymaker.class));
         cards.add(new SetCardInfo("Bellowing Crier", 42, Rarity.COMMON, mage.cards.b.BellowingCrier.class));
+        cards.add(new SetCardInfo("Beza, the Bounding Spring", 2, Rarity.MYTHIC, mage.cards.b.BezaTheBoundingSpring.class));
         cards.add(new SetCardInfo("Blacksmith's Talent", 125, Rarity.UNCOMMON, mage.cards.b.BlacksmithsTalent.class));
         cards.add(new SetCardInfo("Blooming Blast", 126, Rarity.UNCOMMON, mage.cards.b.BloomingBlast.class));
         cards.add(new SetCardInfo("Blossoming Sands", 396, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
@@ -169,6 +171,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Pawpatch Formation", 186, Rarity.UNCOMMON, mage.cards.p.PawpatchFormation.class));
         cards.add(new SetCardInfo("Pearl of Wisdom", 64, Rarity.COMMON, mage.cards.p.PearlOfWisdom.class));
         cards.add(new SetCardInfo("Peerless Recycling", 188, Rarity.UNCOMMON, mage.cards.p.PeerlessRecycling.class));
+        cards.add(new SetCardInfo("Persistent Marshstalker", 104, Rarity.UNCOMMON, mage.cards.p.PersistentMarshstalker.class));
         cards.add(new SetCardInfo("Pileated Provisioner", 25, Rarity.COMMON, mage.cards.p.PileatedProvisioner.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Playful Shove", 145, Rarity.UNCOMMON, mage.cards.p.PlayfulShove.class));
@@ -270,6 +273,8 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Wick, the Whorled Mind", 314, Rarity.RARE, mage.cards.w.WickTheWhorledMind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wildfire Howl", 162, Rarity.UNCOMMON, mage.cards.w.WildfireHowl.class));
         cards.add(new SetCardInfo("Wishing Well", 81, Rarity.RARE, mage.cards.w.WishingWell.class));
+        cards.add(new SetCardInfo("Ygra, Eater of All", 241, Rarity.MYTHIC, mage.cards.y.YgraEaterOfAll.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ygra, Eater of All", 294, Rarity.MYTHIC, mage.cards.y.YgraEaterOfAll.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zoraline, Cosmos Caller", 242, Rarity.RARE, mage.cards.z.ZoralineCosmosCaller.class));
     }
 }

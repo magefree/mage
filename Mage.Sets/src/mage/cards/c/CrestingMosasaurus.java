@@ -41,7 +41,7 @@ public final class CrestingMosasaurus extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter), false),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it, return each non-Dinosaur creature to its owner's hand."));
+                "When {this} enters, if you cast it, return each non-Dinosaur creature to its owner's hand."));
     }
 
     private CrestingMosasaurus(final CrestingMosasaurus card) {

@@ -39,7 +39,7 @@ public class AgentsToolkit extends CardImpl {
         counterETBAbility.addEffect(new AddCountersSourceEffect(CounterType.SHIELD.createInstance(1)).setText("and a shield counter on it").concatBy(","));
         this.addAbility(counterETBAbility);
 
-        // Whenever a creature enters the battlefield under your control,
+        // Whenever a creature you control enters,
         // you may move a counter from Agent’s Toolkit onto that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AgentToolkitMoveCounterEffect(),

@@ -45,7 +45,7 @@ public final class MaritLagesSlumber extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
         this.supertype.add(SuperType.SNOW);
 
-        // Whenever Marit Lage's Slumber or another snow permanent enters the battlefield under your control, scry 1.
+        // Whenever Marit Lage's Slumber or another snow permanent you control enters, scry 1.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new ScryEffect(1, false), filter, false, true
         ));

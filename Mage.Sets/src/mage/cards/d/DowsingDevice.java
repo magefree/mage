@@ -33,7 +33,7 @@ public final class DowsingDevice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}");
         this.secondSideCardClazz = mage.cards.g.GeodeGrotto.class;
 
-        // Whenever Dowsing Device or another artifact enters the battlefield under your control, up to one target creature you control gets +1/+0 and gains haste until end of turn. Then transform Dowsing Device if you control four or more artifacts.
+        // Whenever Dowsing Device or another artifact you control enters, up to one target creature you control gets +1/+0 and gains haste until end of turn. Then transform Dowsing Device if you control four or more artifacts.
         this.addAbility(new TransformAbility());
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BoostTargetEffect(1, 0)

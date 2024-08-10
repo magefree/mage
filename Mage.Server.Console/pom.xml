@@ -9,7 +9,7 @@
         <version>1.4.50</version>
     </parent>
 
-    <artifactId>mage.server.console</artifactId>
+    <artifactId>mage-server-console</artifactId>
     <packaging>jar</packaging>
     <name>Mage Server Console</name>
 

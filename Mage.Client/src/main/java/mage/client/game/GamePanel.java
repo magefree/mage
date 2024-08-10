@@ -13,7 +13,6 @@ import mage.client.components.HoverButton;
 import mage.client.components.KeyboundButton;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
-import mage.client.components.layout.RelativeLayout;
 import mage.client.components.tray.MageTray;
 import mage.client.dialog.*;
 import mage.client.dialog.CardInfoWindowDialog.ShowType;
@@ -35,9 +34,8 @@ import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
-import javax.swing.*;
 import javax.swing.Timer;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -102,7 +100,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private final PickMultiNumberDialog pickMultiNumber;
     private JLayeredPane jLayeredPane;
     private String chosenHandKey = "You";
-    private boolean smallMode = false;
+    private boolean smallMode = false; // TODO: no needs in gui scale, delete it
     private boolean initialized = false;
     private final skipButtonsList skipButtons = new skipButtonsList();
 
@@ -194,10 +192,41 @@ public final class GamePanel extends javax.swing.JPanel {
         initComponents = true;
         initComponents();
 
+        // prepare command panels (feedback, hand, skip buttons and stack)
+        if (DebugUtil.GUI_GAME_DRAW_COMMANDS_PANEL_BORDER) {
+            pnlHelperHandButtonsStackArea.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
+        }
+
+        // all game panels
+        pnlHelperHandButtonsStackArea.removeAll();
+        pnlHelperHandButtonsStackArea.setLayout(new BorderLayout());
+        // battlefields + phases
+        JPanel pnlBattlefieldAndPhases = new JPanel(new BorderLayout());
+        pnlBattlefieldAndPhases.setOpaque(false);
+        pnlBattlefieldAndPhases.add(pnlBattlefield, BorderLayout.CENTER);
+        pnlBattlefieldAndPhases.add(phasesContainer, BorderLayout.EAST);
+        pnlHelperHandButtonsStackArea.add(pnlBattlefieldAndPhases, BorderLayout.CENTER);
+        // commands (feedback + hand + skip + stack)
+        JPanel pnlCommandsRoot = new JPanel(new BorderLayout());
+        pnlCommandsRoot.setOpaque(false);
+        // ... feedback + hand
+        JPanel pnlCommandsFeedbackAndHand = new JPanel(new BorderLayout());
+        pnlCommandsFeedbackAndHand.setOpaque(false);
+        pnlCommandsFeedbackAndHand.add(feedbackPanel, BorderLayout.NORTH);
+        pnlCommandsFeedbackAndHand.add(handContainer, BorderLayout.CENTER);
+        // ... skip + stack
+        JPanel pnlCommandsSkipAndStack = new JPanel(new BorderLayout());
+        pnlCommandsSkipAndStack.setOpaque(false);
+        pnlCommandsSkipAndStack.add(pnlShortCuts, BorderLayout.NORTH);
+        pnlCommandsSkipAndStack.add(stackObjects, BorderLayout.CENTER);
+        // ... all
+        pnlCommandsRoot.add(pnlCommandsFeedbackAndHand, BorderLayout.CENTER);
+        pnlCommandsRoot.add(pnlCommandsSkipAndStack, BorderLayout.EAST);
+        pnlHelperHandButtonsStackArea.add(pnlCommandsRoot, BorderLayout.SOUTH);
+
         // prepare commands buttons panel with flow layout (instead custom from IDE)
         // size changes in helper method at the end
-        // TODO: remove IDE form file (it useless anyway due many custom code in init)
-        if (DebugUtil.GUI_GAME_DRAW_COMMAND_BUTTONS_PANEL_BORDER) {
+        if (DebugUtil.GUI_GAME_DRAW_SKIP_BUTTONS_PANEL_BORDER) {
             pnlShortCuts.setBorder(BorderFactory.createLineBorder(Color.red));
         }
         pnlShortCuts.removeAll();
@@ -224,6 +253,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
 
         // Override layout (I can't edit generated code)
+        // TODO: research - why it used all that panels on the root
         this.setLayout(new BorderLayout());
         final JLayeredPane jLayeredBackgroundPane = new JLayeredPane();
         jLayeredBackgroundPane.setSize(1024, 768);
@@ -264,17 +294,21 @@ public final class GamePanel extends javax.swing.JPanel {
         ComponentAdapter componentAdapterPlayField = new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                if (!initComponents) {
-                    if (resizeTimer.isRunning()) {
-                        resizeTimer.restart();
-                    } else {
-                        resizeTimer.start();
-                    }
+                if (initComponents) {
+                    return;
+                }
+                if (resizeTimer.isRunning()) {
+                    resizeTimer.restart();
+                } else {
+                    resizeTimer.start();
                 }
             }
         };
 
         resizeTimer = new Timer(1000, evt -> SwingUtilities.invokeLater(() -> {
+            if (initComponents) {
+                return;
+            }
             resizeTimer.stop();
             setGUISize(false);
             feedbackPanel.changeGUISize();
@@ -304,7 +338,8 @@ public final class GamePanel extends javax.swing.JPanel {
     public void cleanUp() {
         MageFrame.removeGame(gameId);
         saveDividerLocations();
-        this.gameChatPanel.cleanUp();;
+        this.gameChatPanel.cleanUp();
+        ;
         this.userChatPanel.cleanUp();
 
         this.removeListener();
@@ -451,27 +486,17 @@ public final class GamePanel extends javax.swing.JPanel {
         txtHoldPriority.setFont(new Font(GUISizeHelper.gameFeedbackPanelFont.getFontName(), Font.BOLD, GUISizeHelper.gameFeedbackPanelFont.getSize()));
         GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
 
-        // hand + stack panels
-        // the stack takes up a portion of the possible space (GUISizeHelper.stackWidth)
-        // TODO: research and delete rare used settings
-        int newStackWidth = pnlHelperHandButtonsStackArea.getWidth() * GUISizeHelper.stackWidth / 100;
-        newStackWidth = Math.max(410, newStackWidth);
-        Dimension newDimension = new Dimension(
-                pnlHelperHandButtonsStackArea.getWidth() - newStackWidth,
-                MageActionCallback.getHandOrStackMargins(Zone.HAND).getHeight() + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize
-        );
-        handContainer.setPreferredSize(newDimension);
-        handContainer.setMaximumSize(newDimension);
+        // commands panel
+        // TODO: add scrolls and save sizes instead const
+        // hand <|> stack
+        int upperPanelsHeight = getSkipButtonsPanelDefaultHeight();
+        feedbackPanel.setPreferredSize(new Dimension(Short.MAX_VALUE, upperPanelsHeight));
+        feedbackPanel.setMaximumSize(new Dimension(Short.MAX_VALUE, upperPanelsHeight));
+        pnlShortCuts.setPreferredSize(new Dimension(500, upperPanelsHeight));
+        pnlShortCuts.setMaximumSize(new Dimension(500, upperPanelsHeight));
 
         // stack
-        newDimension = new Dimension(
-                newStackWidth,
-                MageActionCallback.getHandOrStackMargins(Zone.STACK).getHeight() + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize
-        );
         stackObjects.setCardDimension(GUISizeHelper.handCardDimension);
-        stackObjects.setPreferredSize(newDimension);
-        stackObjects.setMinimumSize(newDimension);
-        stackObjects.setMaximumSize(newDimension);
         stackObjects.changeGUISize(); // must call to cards fit
 
         // game logs and chat
@@ -483,11 +508,7 @@ public final class GamePanel extends javax.swing.JPanel {
         float guiScale = GUISizeHelper.dialogGuiScale;
         int hGap = GUISizeHelper.guiSizeScale(SKIP_BUTTONS_SPACE_H, guiScale);
         int vGap = GUISizeHelper.guiSizeScale(SKIP_BUTTONS_SPACE_V, guiScale);
-        newDimension = new Dimension(newStackWidth, (4 * vGap) + (2 * GUISizeHelper.gameCommandButtonHeight));
         pnlShortCuts.setLayout(new FlowLayout(FlowLayout.RIGHT, hGap, vGap));
-        pnlShortCuts.setPreferredSize(newDimension);
-        pnlShortCuts.setMinimumSize(newDimension);
-        pnlShortCuts.setMaximumSize(newDimension);
         // skip buttons - sizes
         Dimension strictSize = new Dimension(2 * GUISizeHelper.gameCommandButtonHeight, GUISizeHelper.gameCommandButtonHeight);
         setSkipButtonSize(btnCancelSkip, guiScale, strictSize);
@@ -524,6 +545,14 @@ public final class GamePanel extends javax.swing.JPanel {
         if (themeReload) {
             reloadThemeRelatedGraphic();
         }
+    }
+
+    private int getSkipButtonsPanelDefaultHeight() {
+        // make sure it will get two rows of buttons
+        float guiScale = GUISizeHelper.dialogGuiScale;
+        int vGap = GUISizeHelper.guiSizeScale(SKIP_BUTTONS_SPACE_V, guiScale);
+        int extraSpace = GUISizeHelper.guiSizeScale(30, guiScale); // extra space for messages in feedback
+        return extraSpace + (4 * vGap) + (2 * GUISizeHelper.gameCommandButtonHeight);
     }
 
     private void reloadThemeRelatedGraphic() {
@@ -588,12 +617,6 @@ public final class GamePanel extends javax.swing.JPanel {
         if (button instanceof KeyboundButton) {
             ((KeyboundButton) button).updateGuiScale(guiScale);
         }
-
-        // no needs in size - it controlled by button's icon
-        if (true) return;
-        button.setMinimumSize(size);
-        button.setPreferredSize(size);
-        button.setMaximumSize(size);
     }
 
     private void saveDividerLocations() {
@@ -631,7 +654,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private boolean isSmallMode() {
-        // TODO: no needs on gui scale?
+        // TODO: no needs on gui scale, delete
         return this.getBounds().height < 770;
     }
 
@@ -2021,7 +2044,7 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void getMultiAmount(int messageId, GameView gameView, List<MultiAmountMessage> messages, Map<String, Serializable> options,
-            int min, int max) {
+                               int min, int max) {
         updateGame(messageId, gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
@@ -2101,7 +2124,12 @@ public final class GamePanel extends javax.swing.JPanel {
         lblActivePlayer = new javax.swing.JLabel();
         txtPriority = new javax.swing.JLabel();
         lblPriority = new javax.swing.JLabel();
+
         feedbackPanel = new mage.client.game.FeedbackPanel();
+        helper = new HelperPanel();
+        feedbackPanel.setHelperPanel(helper);
+        feedbackPanel.setLayout(new BorderLayout());
+        feedbackPanel.add(helper, BorderLayout.CENTER);
 
         Border paddingBorder = BorderFactory.createEmptyBorder(4, 4, 4, 4);
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 2);
@@ -2149,7 +2177,7 @@ public final class GamePanel extends javax.swing.JPanel {
         handCards = new HashMap<>();
 
         pnlShortCuts.setOpaque(false);
-        pnlShortCuts.setPreferredSize(new Dimension(410, 72));
+        //pnlShortCuts.setPreferredSize(new Dimension(410, 72));
 
         stackObjects = new mage.client.cards.Cards();
 
@@ -2525,88 +2553,6 @@ public final class GamePanel extends javax.swing.JPanel {
 
         initPopupMenuTriggerOrder();
 
-        // Replay panel to control replay of games
-        javax.swing.GroupLayout gl_pnlReplay = new javax.swing.GroupLayout(pnlReplay);
-        pnlReplay.setLayout(gl_pnlReplay);
-        gl_pnlReplay.setHorizontalGroup(
-                gl_pnlReplay.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(gl_pnlReplay.createSequentialGroup()
-                                .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnStopReplay, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNextPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSkipForward, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        gl_pnlReplay.setVerticalGroup(
-                gl_pnlReplay.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnSkipForward, 0, 0, Short.MAX_VALUE)
-                        .addComponent(btnNextPlay, 0, 0, Short.MAX_VALUE)
-                        .addComponent(btnStopReplay, 0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPlay, 0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
-        );
-
-        // Game info panel (buttons on the right panel)
-        javax.swing.GroupLayout gl_pnlShortCuts = new javax.swing.GroupLayout(pnlShortCuts);
-        pnlShortCuts.setLayout(gl_pnlShortCuts);
-        gl_pnlShortCuts.setHorizontalGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addGroup(gl_pnlShortCuts.createSequentialGroup()
-                        .addComponent(btnSkipToNextTurn)
-                        .addComponent(btnSkipToEndTurn)
-                        .addComponent(btnSkipToNextMain)
-                        .addComponent(btnSkipToYourTurn)
-                        .addComponent(btnSkipStack)
-                        .addComponent(btnSkipToEndStepBeforeYourTurn)
-                )
-                .addGroup(gl_pnlShortCuts.createSequentialGroup()
-                        .addComponent(txtHoldPriority)
-                        /*.addComponent(btnToggleMacro)*/
-                        .addComponent(btnSwitchHands)
-                        .addComponent(btnCancelSkip)
-                        .addComponent(btnConcede)
-                        .addComponent(btnStopWatching)
-                )
-                //.addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                //.addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                //.addComponent(stack, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-
-                .addGroup(gl_pnlShortCuts.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(51, Short.MAX_VALUE))
-        );
-        gl_pnlShortCuts.setVerticalGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(gl_pnlShortCuts.createSequentialGroup()
-                        //.addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        //.addGap(1, 1, 1)
-                        //.addComponent(feedbackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        //.addComponent(stack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
-                        .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnSkipToNextTurn)
-                                .addComponent(btnSkipToEndTurn)
-                                .addComponent(btnSkipToNextMain)
-                                .addComponent(btnSkipToYourTurn)
-                                .addComponent(btnSkipStack)
-                                .addComponent(btnSkipToEndStepBeforeYourTurn)
-                        )
-                        .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                /*.addComponent(btnToggleMacro)*/
-                                .addComponent(txtHoldPriority)
-                                .addComponent(btnSwitchHands)
-                                .addComponent(btnCancelSkip)
-                                .addComponent(btnConcede)
-                                .addComponent(btnStopWatching)
-                        )
-                )
-        );
-
         pnlBattlefield.setLayout(new java.awt.GridBagLayout());
 
         jPhases = new JPanel();
@@ -2633,73 +2579,22 @@ public final class GamePanel extends javax.swing.JPanel {
 
         pnlReplay.setOpaque(false);
 
-        helper = new HelperPanel();
-        feedbackPanel.setHelperPanel(helper);
-
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane2.setResizeWeight(0.5);
         jSplitPane2.setLeftComponent(userChatPanel);
         jSplitPane2.setBottomComponent(gameChatPanel);
 
-        phasesContainer = new JPanel();
-        phasesContainer.setLayout(new RelativeLayout(RelativeLayout.Y_AXIS));
-        phasesContainer.setBackground(new Color(0, 0, 0, 0));
-        Float ratio = (float) 1;
-        JPanel empty1 = new JPanel();
-        empty1.setBackground(new Color(0, 0, 0, 0));
-        phasesContainer.add(empty1, ratio);
+        // phases buttons
+        phasesContainer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        phasesContainer.setOpaque(false);
         phasesContainer.add(jPhases);
 
-        javax.swing.GroupLayout gl_helperHandButtonsStackArea = new javax.swing.GroupLayout(pnlHelperHandButtonsStackArea);
-        gl_helperHandButtonsStackArea.setHorizontalGroup(
-                gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                                //                        .addGap(0)
-                                .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                                                .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                                        .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                )
-                                                .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                                        .addComponent(pnlShortCuts, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(stackObjects, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-                                                )
-                                        )
-                                        .addGap(0)
-                                        //.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                                                .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                                .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        )))
-        );
-        gl_helperHandButtonsStackArea.setVerticalGroup(
-                gl_helperHandButtonsStackArea.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                                .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                        .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                )
-                                //.addPreferredGap(ComponentPlacement.RELATED)
-                                .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
-                                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                                                .addGap(2)
-                                                .addComponent(pnlShortCuts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(stackObjects, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        )
-                                        .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
-                                                .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        )
-                                )
-                        )
-        );
-        pnlHelperHandButtonsStackArea.setLayout(gl_helperHandButtonsStackArea);
-
+        // split: battlefield <|> chats
         jSplitPane1.setLeftComponent(pnlHelperHandButtonsStackArea);
         jSplitPane1.setRightComponent(jSplitPane2);
 
         // Set individual area sizes of big card pane
+        // TODO: research - is it possible to use border layout without all custom code
         GridBagLayout gbl = new GridBagLayout();
         jPanel2.setLayout(gbl);
 
@@ -2721,6 +2616,7 @@ public final class GamePanel extends javax.swing.JPanel {
         // big card and buttons
         jSplitPane0.setRightComponent(jPanel2);
 
+        // TODO: need reseach, possible reason of weird scrolls restore
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(

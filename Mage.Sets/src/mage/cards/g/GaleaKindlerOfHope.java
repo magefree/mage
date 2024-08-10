@@ -122,7 +122,7 @@ class GaleaKindlerOfHopeEffect extends ContinuousEffectImpl {
     private final MageObjectReference spellRef;
     private final MageObjectReference permRef;
     private final Ability ability = new EntersBattlefieldAttachToTarget()
-            .setTriggerPhrase("When this Equipment enters the battlefield, ");
+            .setTriggerPhrase("When this Equipment enters, ");
 
     GaleaKindlerOfHopeEffect(Spell spell, Game game) {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.Benefit);

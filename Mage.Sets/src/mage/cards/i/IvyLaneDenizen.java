@@ -37,7 +37,7 @@ public final class IvyLaneDenizen extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on target creature.
+        // Whenever another green creature you control enters, put a +1/+1 counter on target creature.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),

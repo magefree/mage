@@ -36,7 +36,7 @@ public final class ValakutTheMoltenPinnacle extends CardImpl {
 
         // Valakut, the Molten Pinnacle enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to any target.
+        // Whenever a Mountain you control enters, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to any target.
         this.addAbility(new ValakutTheMoltenPinnacleTriggeredAbility());
         // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
@@ -92,6 +92,6 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have {this} deal 3 damage to any target.";
+        return "Whenever a Mountain you control enters, if you control at least five other Mountains, you may have {this} deal 3 damage to any target.";
     }
 }

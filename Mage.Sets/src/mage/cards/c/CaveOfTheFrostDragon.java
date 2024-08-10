@@ -37,7 +37,7 @@ public final class CaveOfTheFrostDragon extends CardImpl {
 
         // If you control two or more other lands, Cave of the Frost Dragon enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldAbility(
-                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters the battlefield tapped.", null
+                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters tapped.", null
         ));
 
         // {T}: Add {W}.

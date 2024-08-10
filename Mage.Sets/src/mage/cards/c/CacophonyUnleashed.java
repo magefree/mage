@@ -42,10 +42,10 @@ public final class CacophonyUnleashed extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
             new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter)),
             CastFromEverywhereSourceCondition.instance,
-            "When {this} enters the battlefield, if you cast it, destroy all nonenchantment creatures."
+            "When {this} enters, if you cast it, destroy all nonenchantment creatures."
         ));
 
-        // Whenever Cacophony Unleashed or another enchantment enters the battlefield under your control, until end of turn, Cacophony Unleashed becomes a legendary 6/6 Nightmare God creature with menace and deathtouch. It's still an enchantment.
+        // Whenever Cacophony Unleashed or another enchantment you control enters, until end of turn, Cacophony Unleashed becomes a legendary 6/6 Nightmare God creature with menace and deathtouch. It's still an enchantment.
         this.addAbility(
             new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BecomesCreatureSourceEffect(new CacophonyUnleashedToken(), CardType.ENCHANTMENT, Duration.EndOfTurn)

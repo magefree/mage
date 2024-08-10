@@ -37,7 +37,7 @@ public final class SagesRowDenizen extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever another blue creature enters the battlefield under your control, target player puts the top two cards of their library into their graveyard.
+        // Whenever another blue creature you control enters, target player puts the top two cards of their library into their graveyard.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(2), filter, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

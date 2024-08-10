@@ -45,7 +45,7 @@ public final class ScoutingHawk extends CardImpl {
         // Keen Sight — When Scouting Hawk enters the battlefield, if an opponent controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true)),
-                condition, "When {this} enters the battlefield, if an opponent controls more lands than you, " +
+                condition, "When {this} enters, if an opponent controls more lands than you, " +
                 "search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle."
         ).withFlavorWord("Keen Sight"));
     }

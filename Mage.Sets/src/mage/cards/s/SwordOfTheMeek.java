@@ -41,7 +41,7 @@ public final class SwordOfTheMeek extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 2, Duration.WhileOnBattlefield)));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
-        // Whenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
+        // Whenever a 1/1 creature you control enters, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.GRAVEYARD, new SwordOfTheMeekEffect(), filter, true, SetTargetPointer.PERMANENT));
     }
 

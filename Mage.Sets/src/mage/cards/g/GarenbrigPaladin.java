@@ -30,7 +30,7 @@ public final class GarenbrigPaladin extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance()), AdamantCondition.GREEN,
                 "<br><i>Adamant</i> &mdash; If at least three green mana was spent to cast this spell, " +
-                        "{this} enters the battlefield with a +1/+1 counter on it.", ""
+                        "{this} enters with a +1/+1 counter on it.", ""
         ));
 
         // Garenbrig Paladin can't be blocked by creatures with power 2 or less.

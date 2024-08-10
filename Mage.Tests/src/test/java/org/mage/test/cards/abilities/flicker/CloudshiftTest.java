@@ -136,7 +136,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
     @Test
     public void testThatCardIsHandledAsNewInstanceAfterCloudshift() {
-        // Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
+        // Whenever another creature you control enters, you gain life equal to that creature's toughness.
         // {1}{G}{W}, {T}: Populate. (Create a tokenonto the battlefield that's a copy of a creature token you control.)
         addCard(Zone.BATTLEFIELD, playerA, "Trostani, Selesnya's Voice");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
@@ -431,7 +431,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Savannah", 3);
         addCard(Zone.BATTLEFIELD, playerA, mystic);
         addCard(Zone.BATTLEFIELD, playerA, vanguard);
-        addCard(Zone.BATTLEFIELD, playerA, "Orchard Warden"); // Whenever another Treefolk creature enters the battlefield under your control, you may gain life equal to that creature’s toughness.
+        addCard(Zone.BATTLEFIELD, playerA, "Orchard Warden"); // Whenever another Treefolk creature you control enters, you may gain life equal to that creature’s toughness.
         addCard(Zone.HAND, playerA, lignify);
         addCard(Zone.HAND, playerA, cloudshift);
 

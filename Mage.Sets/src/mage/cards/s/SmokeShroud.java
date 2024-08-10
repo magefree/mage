@@ -48,11 +48,11 @@ public final class SmokeShroud extends CardImpl {
         ).setText("and has flying"));
         this.addAbility(ability);
 
-        // When a Ninja enters the battlefield under your control, you may return Smoke Shroud from your graveyard to the battlefield attached to that creature.
+        // When a Ninja you control enters, you may return Smoke Shroud from your graveyard to the battlefield attached to that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD, new SmokeShroudEffect(), filter, true,
                 SetTargetPointer.PERMANENT
-        ).setTriggerPhrase("When a Ninja enters the battlefield under your control, "));
+        ).setTriggerPhrase("When a Ninja you control enters, "));
     }
 
     private SmokeShroud(final SmokeShroud card) {

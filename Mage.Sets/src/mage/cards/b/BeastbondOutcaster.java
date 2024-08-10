@@ -30,7 +30,7 @@ public final class BeastbondOutcaster extends CardImpl {
         // When Beastbond Outcaster enters the battlefield, if you control a creature with power 4 or greater, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                FerociousCondition.instance, "When {this} enters the battlefield, " +
+                FerociousCondition.instance, "When {this} enters, " +
                 "if you control a creature with power 4 or greater, draw a card."
         ).addHint(FerociousHint.instance));
 

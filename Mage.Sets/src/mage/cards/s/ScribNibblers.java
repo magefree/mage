@@ -37,7 +37,7 @@ public final class ScribNibblers extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
-        // Landfall - Whenever a land enters the battlefield under your control, you may untap Scrib Nibblers.
+        // Landfall - Whenever a land you control enters, you may untap Scrib Nibblers.
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), true));
     }
 

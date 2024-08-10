@@ -8,6 +8,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,6 +30,9 @@ public final class FeatherOfFlight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         this.subtype.add(SubType.AURA);
+
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

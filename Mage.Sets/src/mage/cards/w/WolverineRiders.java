@@ -45,7 +45,7 @@ public final class WolverineRiders extends CardImpl {
                 new CreateTokenEffect(new ElfWarriorToken()), TargetController.EACH_PLAYER, false
         ));
 
-        // Whenever another Elf enters the battlefield under your control, you gain life equal to its toughness.
+        // Whenever another Elf you control enters, you gain life equal to its toughness.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new GainLifeEffect(WolverineRidersValue.instance, "you gain life equal to its toughness"), filter
         ));

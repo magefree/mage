@@ -61,7 +61,7 @@ public final class LifeOfTheParty extends CardImpl {
         // When Life of the Party enters the battlefield, if it's not a token, each opponent creates a token that's a copy of it. The tokens are goaded for the rest of the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new LifeOfThePartyEffect()), LifeOfTheParty::checkSource,
-                "When {this} enters the battlefield, if it's not a token, each opponent creates a " +
+                "When {this} enters, if it's not a token, each opponent creates a " +
                         "token that's a copy of it. The tokens are goaded for the rest of the game."
         ));
     }

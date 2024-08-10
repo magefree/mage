@@ -89,9 +89,9 @@ class BewitchingLeechcraftReplacementEffect extends ReplacementEffectImpl {
         int amountBefore = permanentUntapping.getCounters(game).getCount(CounterType.P1P1);
         permanentUntapping.removeCounters(CounterType.P1P1.getName(), 1, source, game);
         int amountAfter = permanentUntapping.getCounters(game).getCount(CounterType.P1P1);
-        // If we could not remove a counter, we are replacing the UNTAP event.
-        // If we could remove a counter, we are not replacing the UNTAP, just adding to it.
-        return amountBefore < amountAfter;
+        // If we could not remove a counter, we are replacing the UNTAP event - return true.
+        // If we could remove a counter, we are not replacing the UNTAP, just adding to it - return false.
+        return amountBefore <= amountAfter;
     }
 
     @Override

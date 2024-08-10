@@ -53,7 +53,8 @@ public final class BloodrootApothecary extends CardImpl {
 
         // Whenever an opponent sacrifices a noncreature token, that player gets two poison counters.
         this.addAbility(new SacrificePermanentTriggeredAbility(
-                Zone.BATTLEFIELD, new AddPoisonCounterTargetEffect(2), filter,
+                Zone.BATTLEFIELD, new AddPoisonCounterTargetEffect(2)
+                .setText("that player gets two poison counters"), filter,
                 TargetController.OPPONENT, SetTargetPointer.PLAYER, false
         ));
     }

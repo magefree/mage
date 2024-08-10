@@ -31,7 +31,7 @@ public final class TheodenKingOfRohan extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever Theoden, King of Rohan or another Human enters the battlefield under your control, target creature gains double strike until end of turn.
+        // Whenever Theoden, King of Rohan or another Human you control enters, target creature gains double strike until end of turn.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance()),
                 filter, false, true

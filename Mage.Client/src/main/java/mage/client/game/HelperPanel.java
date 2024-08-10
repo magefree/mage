@@ -11,7 +11,6 @@ import mage.client.util.audio.AudioManager;
 import mage.constants.TurnPhase;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
 import static mage.constants.PlayerAction.*;
 
 /**
- * Panel with buttons that copy the state of feedback panel.
+ * Game GUI: helper component for feedback panel - implements all feedback logic here
  *
  * @author ayrat, JayDi85
  */
@@ -32,8 +31,7 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
     private javax.swing.JButton btnUndo;
-    //private javax.swing.JButton btnEndTurn;
-    //private javax.swing.JButton btnStopTimer;
+
     private JScrollPane textAreaScrollPane;
     private MageTextArea dialogTextArea;
     JPanel mainPanel;
@@ -104,11 +102,6 @@ public class HelperPanel extends JPanel {
         textAreaScrollPane.setMaximumSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameFeedbackPanelMaxHeight));
         textAreaScrollPane.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameFeedbackPanelMaxHeight));
 
-//        dialogTextArea.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
-//        dialogTextArea.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
-//        buttonContainer.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogButtonHeight + 4));
-//        buttonContainer.setMinimumSize(new Dimension(160, GUISizeHelper.gameDialogButtonHeight + 20));
-//        buttonContainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, GUISizeHelper.gameDialogButtonHeight + 4));
         btnLeft.setFont(GUISizeHelper.gameFeedbackPanelFont);
         btnRight.setFont(GUISizeHelper.gameFeedbackPanelFont);
         btnSpecial.setFont(GUISizeHelper.gameFeedbackPanelFont);
@@ -127,13 +120,13 @@ public class HelperPanel extends JPanel {
     private void initComponents() {
         initPopupMenuTriggerOrder();
 
-        this.setBorder(new EmptyBorder(5, 5, 5, 5));
-        this.setLayout(new GridLayout(0, 1));
+        this.setLayout(new BorderLayout());
         this.setOpaque(false);
+
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(0, 1));
         mainPanel.setOpaque(false);
-        this.add(mainPanel);
+        this.add(mainPanel, BorderLayout.CENTER);
 
         dialogTextArea = new MageTextArea();
         dialogTextArea.setText("<Empty>");
@@ -419,6 +412,7 @@ public class HelperPanel extends JPanel {
         int constGridSizeW = buttons.size() * constButtonSizeW + BUTTONS_H_GAP * (buttons.size() - 1);
         int constGridSizeH = Math.round(GUISizeHelper.gameFeedbackPanelButtonHeight * 150 / 100);
 
+        // TODO: remove due gui scale and user customizable settings?
         if (needButtonSizeW < constButtonSizeW) {
             // same size mode (grid)
             GridLayout gl = new GridLayout(1, buttons.size(), BUTTONS_H_GAP, 0);

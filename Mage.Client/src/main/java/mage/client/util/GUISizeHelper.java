@@ -58,7 +58,6 @@ public final class GUISizeHelper {
     public static int gameFeedbackPanelButtonWidth;
 
     public static Dimension handCardDimension;
-    public static int stackWidth; // percent
 
     public static float playerPanelGuiScale;
     public static float dialogGuiScale;
@@ -156,7 +155,6 @@ public final class GUISizeHelper {
         // game - hand
         int handCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_HAND_SIZE, 14);
         handCardDimension = new Dimension(CARD_IMAGE_WIDTH * handCardSize / 42, CARD_IMAGE_HEIGHT * handCardSize / 42);
-        stackWidth = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_STACK_WIDTH, 30);
 
         int otherZonesCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OTHER_ZONES_SIZE, 14);
         otherZonesCardDimension = new Dimension(CARD_IMAGE_WIDTH * otherZonesCardSize / 42, CARD_IMAGE_HEIGHT * otherZonesCardSize / 42);

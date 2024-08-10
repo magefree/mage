@@ -160,6 +160,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lonis, Cryptozoologist", 215, Rarity.RARE, mage.cards.l.LonisCryptozoologist.class));
         cards.add(new SetCardInfo("Loran of the Third Path", 71, Rarity.RARE, mage.cards.l.LoranOfTheThirdPath.class));
         cards.add(new SetCardInfo("Martial Impetus", 72, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
+        cards.add(new SetCardInfo("Marvo, Deep Operative", 7, Rarity.MYTHIC, mage.cards.m.MarvoDeepOperative.class));
         cards.add(new SetCardInfo("Massacre Wurm", 130, Rarity.MYTHIC, mage.cards.m.MassacreWurm.class));
         cards.add(new SetCardInfo("Master of Death", 216, Rarity.RARE, mage.cards.m.MasterOfDeath.class));
         cards.add(new SetCardInfo("Master of Pearls", 73, Rarity.RARE, mage.cards.m.MasterOfPearls.class));

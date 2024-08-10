@@ -228,7 +228,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Exquisite Blood", 206, Rarity.RARE, mage.cards.e.ExquisiteBlood.class));
         cards.add(new SetCardInfo("Night's Whisper", 207, Rarity.RARE, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Phyrexian Tower", 208, Rarity.RARE, mage.cards.p.PhyrexianTower.class));
-        cards.add(new SetCardInfo("Elesh Norn, Grand Cenobite", 209, Rarity.MYTHIC, mage.cards.e.EleshNornGrandCenobite.class/*, NON_FULL_USE_VARIOUS*/));
+        cards.add(new SetCardInfo("Elesh Norn, Grand Cenobite", 209, Rarity.MYTHIC, mage.cards.e.EleshNornGrandCenobite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jin-Gitaxias, Core Augur", 210, Rarity.MYTHIC, mage.cards.j.JinGitaxiasCoreAugur.class));
         cards.add(new SetCardInfo("Sheoldred, Whispering One", 211, Rarity.MYTHIC, mage.cards.s.SheoldredWhisperingOne.class));
         cards.add(new SetCardInfo("Urabrask the Hidden", 212, Rarity.MYTHIC, mage.cards.u.UrabraskTheHidden.class));
@@ -756,7 +756,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Mystic", 805, Rarity.RARE, mage.cards.e.ElvishMystic.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snapcaster Mage", 808, Rarity.MYTHIC, mage.cards.s.SnapcasterMage.class));
         cards.add(new SetCardInfo("Thrun, the Last Troll", 810, Rarity.MYTHIC, mage.cards.t.ThrunTheLastTroll.class));
-        //cards.add(new SetCardInfo("Elesh Norn, Grand Cenobite", 811, Rarity.MYTHIC, mage.cards.e.EleshNornGrandCenobite.class, NON_FULL_USE_VARIOUS)); // BUG: breaks download of card 209
+        cards.add(new SetCardInfo("Elesh Norn, Grand Cenobite", 811, Rarity.MYTHIC, mage.cards.e.EleshNornGrandCenobite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 820, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Norin the Wary", 827, Rarity.RARE, mage.cards.n.NorinTheWary.class));
         cards.add(new SetCardInfo("The Scarab God", 900, Rarity.MYTHIC, mage.cards.t.TheScarabGod.class));
@@ -1343,7 +1343,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Steelshaper's Gift", 1632, Rarity.RARE, mage.cards.s.SteelshapersGift.class));
         cards.add(new SetCardInfo("Propaganda", 1633, Rarity.RARE, mage.cards.p.Propaganda.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elixir of Immortality", 1634, Rarity.RARE, mage.cards.e.ElixirOfImmortality.class));
-        cards.add(new SetCardInfo("Council's Judgement", 1635, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
+        cards.add(new SetCardInfo("Council's Judgment", 1635, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
         cards.add(new SetCardInfo("Idyllic Tutor", 1636, Rarity.RARE, mage.cards.i.IdyllicTutor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anger", 1637, Rarity.RARE, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Lightning Bolt", 1638, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));

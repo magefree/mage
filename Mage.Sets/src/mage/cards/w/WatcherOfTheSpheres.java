@@ -49,7 +49,7 @@ public final class WatcherOfTheSpheres extends CardImpl {
         // Creature spells with flying you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 
-        // Whenever another creature with flying enters the battlefield under your control, Watcher of the Spheres gets +1/+1 until end of turn.
+        // Whenever another creature with flying you control enters, Watcher of the Spheres gets +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter1, false));
     }
 

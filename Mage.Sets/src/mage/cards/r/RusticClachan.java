@@ -31,7 +31,7 @@ public final class RusticClachan extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Rustic Clachan enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, Rustic Clachan enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Kithkin card from your hand. If you don't, {this} enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Kithkin card from your hand. If you don't, {this} enters tapped"));
 
         // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());

@@ -15,7 +15,7 @@ public class GoldnightCommanderTest extends CardTestPlayerBase {
 
     /*
      * Goldnight Commander {3}{W} Human Cleric Soldier
-     * Whenever another creature enters the battlefield under your control, creatures you control get
+     * Whenever another creature you control enters, creatures you control get
      * +1/+1 until end of turn.
      */
     @Test

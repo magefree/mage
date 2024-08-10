@@ -37,7 +37,7 @@ public final class CourierBat extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
                 new YouGainedLifeCondition(),
-                "When {this} enters the battlefield, if you gained life this turn, return up to one target creature card from your graveyard to your hand."
+                "When {this} enters, if you gained life this turn, return up to one target creature card from your graveyard to your hand."
         );
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability, new PlayerGainedLifeWatcher());
