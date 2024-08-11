@@ -24,7 +24,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.watchers.Watcher;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -122,31 +121,21 @@ class AlaniaDivergentStormCost extends CostImpl {
 enum AlaniaDivergentStormCondition implements Condition {
     instance;
 
-    private static final Logger logger = Logger.getLogger(AlaniaDivergentStormCondition.class);
-
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!game.isSimulation()){
-            int x = 3;
-        }
         Spell spell = (Spell) source.getEffects().get(0).getValue("spellCast");
         if (spell == null) {
             return false;
         }
         Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
         SpellAbility sourceCastAbility = sourcePermanent.getSpellAbility();
-        if (!game.isSimulation()){
-            logger.info("sourcePermanent: " + new MageObjectReference(sourcePermanent, game));
-            logger.info("name: " + sourcePermanent.getName());
-            logger.info("sourceCastAbility: " + sourceCastAbility.getId());
-        }
         // Get source permanent MOR from when it was on the stack
-
+        // The UUID of a spell on the stack is NOT the same as the card that produced it--it uses the UUID of the SpellAbility from that card instead (synced to the ZCC of the source Card).
         MageObjectReference sourceSpellMOR = new MageObjectReference(sourceCastAbility.getId(), sourcePermanent.getZoneChangeCounter(game) - 1, game);
         AlaniaDivergentStormWatcher watcher = game.getState().getWatcher(AlaniaDivergentStormWatcher.class);
         UUID spellControllerID = spell.getControllerId();
         MageObjectReference spellMOR = new MageObjectReference(spell, game);
-        return watcher.spellIsFirstISOCast(spellControllerID, spellMOR, sourceSpellMOR, game);
+        return watcher.spellIsFirstISOCast(spellControllerID, spellMOR, sourceSpellMOR);
     }
 }
 
@@ -157,8 +146,6 @@ class AlaniaDivergentStormWatcher extends Watcher {
     private final Map<UUID, MageObjectReference> playerFirstSorceryCast = new HashMap<>();
     private final Map<UUID, MageObjectReference> playerFirstOtterCast = new HashMap<>();
     private final Map<UUID, MageObjectReference> playerSecondOtterCast = new HashMap<>();
-
-    private static final Logger logger = Logger.getLogger(AlaniaDivergentStormWatcher.class);
 
     public AlaniaDivergentStormWatcher() {
         super(WatcherScope.GAME);
@@ -173,11 +160,6 @@ class AlaniaDivergentStormWatcher extends Watcher {
         if (spell == null) {
             return;
         }
-        if (!game.isSimulation()){
-//            int x = 3;
-            logger.info("Spell cast: " + spell.getName());
-            logger.info("Spell MOR: " + new MageObjectReference(spell, game));
-        }
         UUID spellControllerID = spell.getControllerId();
         MageObjectReference spellMOR = new MageObjectReference(spell, game);
         if (spell.getCardType(game).contains(CardType.INSTANT) &&
@@ -189,19 +171,10 @@ class AlaniaDivergentStormWatcher extends Watcher {
             playerFirstSorceryCast.put(spellControllerID, spellMOR);
         }
         if (spell.getSubtype(game).contains(SubType.OTTER)){
-            if (!game.isSimulation()){
-                logger.info("Is Otter!");
-            }
             if (!playerFirstOtterCast.containsKey(spellControllerID)) {
                 playerFirstOtterCast.put(spellControllerID, spellMOR);
-                if (!game.isSimulation()){
-                    logger.info("Is First");
-                }
             } else if (!playerSecondOtterCast.containsKey(spellControllerID)) {
                 playerSecondOtterCast.put(spellControllerID, spellMOR);
-                if (!game.isSimulation()){
-                    logger.info("Is Second");
-                }
             }
         }
     }
@@ -215,22 +188,12 @@ class AlaniaDivergentStormWatcher extends Watcher {
         playerSecondOtterCast.clear();
     }
 
-    public boolean spellIsFirstISOCast(UUID controllerID, MageObjectReference spell, MageObjectReference AlaniaMOR, Game game) {
+    public boolean spellIsFirstISOCast(UUID controllerID, MageObjectReference spell, MageObjectReference AlaniaMOR) {
 
         MageObjectReference firstOtterMOR = playerFirstOtterCast.get(controllerID);
 
-        if (!game.isSimulation()){
-            logger.info("firstOtterMOR: " + firstOtterMOR);
-            logger.info("spell: " + spell);
-            logger.info("AlaniaMOR: " + AlaniaMOR);
-//            logger.info(AlaniaMOR.getCard(game).getName());
-        }
-
         if (firstOtterMOR != null && firstOtterMOR.equals(AlaniaMOR)) {
             firstOtterMOR = playerSecondOtterCast.get(controllerID);
-            if (!game.isSimulation()){
-                logger.info("oops, that was Alania. ACTUAL firstOtterMOR: " + firstOtterMOR);
-            }
         }
 
         return spell.equals(playerFirstInstantCast.get(controllerID)) ||
