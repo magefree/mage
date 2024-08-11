@@ -617,25 +617,57 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void createAndShowSwitchPanelsMenu(final JComponent component, final AbstractButton windowButton) {
         JPopupMenu menu = new JPopupMenu();
         Component[] windows = desktopPane.getComponentsInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
-        MagePaneMenuItem menuItem;
 
-        // TODO: sort menu by games, not current component order
-        //  lobby -> table 1 tourny, table 1 draft, table 1 game, table 2...
-        for (int i = 0; i < windows.length; i++) {
-            if (windows[i] instanceof MagePane) {
-                MagePane window = (MagePane) windows[i];
-                if (window.isVisible()) {
-                    menuItem = new MagePaneMenuItem(window);
-                    menuItem.setFont(GUISizeHelper.dialogFont);
-                    menuItem.setState(i == 0);
-                    menuItem.addActionListener(ae -> {
-                        MagePane frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
-                        setActive(frame);
-                    });
-                    //menuItem.setIcon(window.getFrameIcon());
-                    menu.add(menuItem);
+        List<MagePane> panels = Arrays.stream(windows)
+                .filter(Component::isVisible)
+                .filter(p -> p instanceof MagePane)
+                .map(p -> (MagePane) p)
+                .collect(Collectors.toList());
+        MagePane activePanel = panels.stream().findFirst().orElse(null);
+
+        panels.sort((p1, p2) -> {
+            // logic order:
+            //  - non-game panels (sort by create order except lobby)
+            //  - game panels (group by table, sort by create order)
+
+            // non-game first
+            int ng1 = p1.getSortTableId() == null ? 0 : 1;
+            int ng2 = p2.getSortTableId() == null ? 0 : 1;
+            if (ng1 != ng2) {
+                return Integer.compare(ng1, ng2);
+            }
+
+            // group by table
+            if (p1.getSortTableId() != null && !p1.getSortTableId().equals(p2.getSortTableId())) {
+                return p1.getSortTableId().compareTo(p2.getSortTableId());
+            }
+
+            // sort inside group
+            return Integer.compare(p1.getSortOrder(), p2.getSortOrder());
+        });
+
+        UUID lastTableId = null;
+        for (MagePane panel : panels) {
+
+            // group by tables
+            if (!Objects.equals(panel.getSortTableId(), lastTableId)) {
+                lastTableId = panel.getSortTableId();
+                if (menu.getComponentCount() > 0) {
+                    menu.addSeparator();
                 }
             }
+
+            MagePaneMenuItem menuItem = new MagePaneMenuItem(panel);
+            if (activePanel == panel) {
+                menuItem.setState(true);
+            }
+            menuItem.setFont(GUISizeHelper.dialogFont);
+            menuItem.addActionListener(ae -> {
+                MagePane frame = ((MagePaneMenuItem) ae.getSource()).getFrame();
+                setActive(frame);
+            });
+            //menuItem.setIcon(window.getFrameIcon());
+            menu.add(menuItem);
         }
 
         menu.addPopupMenuListener(new PopupMenuListener() {

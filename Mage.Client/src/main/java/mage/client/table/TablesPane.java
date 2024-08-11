@@ -123,4 +123,15 @@ public class TablesPane extends MagePane {
             tablesPanel.setTableFilter();
         }
     }
+
+    @Override
+    public UUID getSortTableId() {
+        return null;
+    }
+
+    @Override
+    public int getSortOrder() {
+        // lobby must be first all the time
+        return 0;
+    }
 }

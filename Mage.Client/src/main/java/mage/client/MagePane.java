@@ -1,6 +1,8 @@
  package mage.client;
 
  import java.awt.*;
+ import java.util.UUID;
+ import java.util.concurrent.atomic.AtomicInteger;
 
  /**
   * GUI: basic class for all full screen frames/tabs (example: game pane, deck editor pane, card viewer, etc)
@@ -10,8 +12,12 @@
  public abstract class MagePane extends javax.swing.JLayeredPane {
 
      private String title = "no title set";
+     protected final int createdOrder;
+
+     private static final AtomicInteger createdOrderGenerator = new AtomicInteger();
 
      public MagePane() {
+         this.createdOrder = createdOrderGenerator.incrementAndGet();
          initComponents();
      }
 
@@ -48,6 +54,18 @@
      public Container getContentPane() {
          return this;
      }
+
+     /**
+      * GUI components sorting, e.g. in main menu switch panels
+      */
+     public int getSortOrder() {
+         return this.createdOrder;
+     }
+
+     /**
+      * For game panels only: return assigned table id
+      */
+     abstract public UUID getSortTableId();
 
      /**
       * Active table: game pane, deck editor in sideboarding mode, etc
