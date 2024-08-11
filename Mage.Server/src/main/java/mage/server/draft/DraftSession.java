@@ -156,8 +156,8 @@ public class DraftSession {
         return new DraftPickView(draft.getPlayer(playerId), timeout);
     }
 
-    public UUID getDraftId() {
-        return draft.getId();
+    public Draft getDraft() {
+        return draft;
     }
 
     public UUID getMarkedCard() {

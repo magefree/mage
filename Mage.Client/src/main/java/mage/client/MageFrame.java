@@ -72,9 +72,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -757,19 +756,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     /**
      * Shows a game for a player of the game
-     *
-     * @param gameId
-     * @param playerId
      */
-    public void showGame(UUID gameId, UUID playerId) {
+    public void showGame(UUID currentTableId, UUID parentTableId, UUID gameId, UUID playerId) {
         GamePane gamePane = new GamePane();
         desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
         gamePane.setVisible(true);
-        gamePane.showGame(gameId, playerId);
+        gamePane.showGame(currentTableId, parentTableId, gameId, playerId);
         setActive(gamePane);
     }
 
-    public void watchGame(UUID gameId) {
+    public void watchGame(UUID currentTableId, UUID parentTableId, UUID gameId) {
         for (Component component : desktopPane.getComponents()) {
             if (component instanceof GamePane
                     && ((GamePane) component).getGameId().equals(gameId)) {
@@ -780,7 +776,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         GamePane gamePane = new GamePane();
         desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
         gamePane.setVisible(true);
-        gamePane.watchGame(gameId);
+        gamePane.watchGame(currentTableId, parentTableId, gameId);
         setActive(gamePane);
     }
 
@@ -792,11 +788,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         setActive(gamePane);
     }
 
-    public void showDraft(UUID draftId) {
+    public void showDraft(UUID tableId, UUID draftId) {
         DraftPane draftPane = new DraftPane();
         desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
         draftPane.setVisible(true);
-        draftPane.showDraft(draftId);
+        draftPane.showDraft(tableId, draftId);
         setActive(draftPane);
     }
 
@@ -810,7 +806,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public void showTournament(UUID tournamentId) {
+    public void showTournament(UUID tableId, UUID tournamentId) {
         // existing tourney
         TournamentPane tournamentPane = null;
         for (Component component : desktopPane.getComponents()) {
@@ -825,7 +821,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             tournamentPane = new TournamentPane();
             desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
             tournamentPane.setVisible(true);
-            tournamentPane.showTournament(tournamentId);
+            tournamentPane.showTournament(tableId, tournamentId);
         }
 
         // if user connects on startup then there are possible multiple tables open, so keep only actual
@@ -1109,23 +1105,23 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+                        .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeckEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeckEditorActionPerformed
-        showDeckEditor(DeckEditorMode.FREE_BUILDING, null, null, 0);
+        showDeckEditor(DeckEditorMode.FREE_BUILDING, null, null, null, 0);
     }//GEN-LAST:event_btnDeckEditorActionPerformed
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
@@ -1340,9 +1336,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         return name;
     }
 
-    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int visibleTimer) {
+    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID currentTableId, UUID parentTableId, int visibleTimer) {
         // create or open new editor
-        String name = prepareDeckEditorName(mode, deck, tableId);
+        String name = prepareDeckEditorName(mode, deck, currentTableId);
 
         // already exists
         Component[] windows = desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
@@ -1357,7 +1353,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         DeckEditorPane deckEditor = new DeckEditorPane();
         desktopPane.add(deckEditor, JLayeredPane.DEFAULT_LAYER);
         deckEditor.setVisible(false);
-        deckEditor.show(mode, deck, name, tableId, visibleTimer);
+        deckEditor.show(mode, deck, name, currentTableId, parentTableId, visibleTimer);
         setActive(deckEditor);
     }
 

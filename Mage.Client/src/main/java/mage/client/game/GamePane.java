@@ -9,7 +9,7 @@ import mage.client.MagePane;
 /**
  * Game GUI: game frame (game panel with scrolls)
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class GamePane extends MagePane {
 
@@ -25,10 +25,12 @@ public class GamePane extends MagePane {
 
     }
 
-    public void showGame(UUID gameId, UUID playerId) {
+    public void showGame(UUID currentTableId, UUID parentTableId, UUID gameId, UUID playerId) {
         this.setTitle("Game " + gameId);
+        this.currentTableId = currentTableId;
+        this.parentTableId = parentTableId;
         this.gameId = gameId;
-        gamePanel.showGame(gameId, playerId, this);
+        gamePanel.showGame(currentTableId, parentTableId, gameId, playerId, this);
     }
 
     @Override
@@ -53,14 +55,18 @@ public class GamePane extends MagePane {
         this.removeFrame();
     }
 
-    public void watchGame(UUID gameId) {
+    public void watchGame(UUID currentTableId, UUID parentTableId, UUID gameId) {
         this.setTitle("Watching " + gameId);
+        this.currentTableId = currentTableId;
+        this.parentTableId = parentTableId;
         this.gameId = gameId;
-        gamePanel.watchGame(gameId, this);
+        gamePanel.watchGame(currentTableId, parentTableId, gameId, this);
     }
 
     public void replayGame(UUID gameId) {
         this.setTitle("Replaying " + gameId);
+        this.currentTableId = null;
+        this.parentTableId = null;
         this.gameId = gameId;
         gamePanel.replayGame(gameId);
     }
@@ -108,7 +114,14 @@ public class GamePane extends MagePane {
         gamePanel.handleEvent(event);
     }
 
+    @Override
+    public UUID getSortTableId() {
+        return parentTableId != null ? parentTableId : currentTableId;
+    }
+
     private mage.client.game.GamePanel gamePanel;
     private javax.swing.JScrollPane jScrollPane1;
+    private UUID currentTableId;
+    private UUID parentTableId;
     private UUID gameId;
 }

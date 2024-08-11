@@ -92,6 +92,8 @@ public final class GamePanel extends javax.swing.JPanel {
     private final ArrayList<PickPileDialog> pickPile = new ArrayList<>();
     private final Map<String, CardHintsHelperDialog> cardHintsWindows = new LinkedHashMap<>();
 
+    private UUID currentTableId;
+    private UUID parentTableId;
     private UUID gameId;
     private UUID playerId; // playerId of the player
     GamePane gamePane;
@@ -693,7 +695,9 @@ public final class GamePanel extends javax.swing.JPanel {
         DialogManager.getManager(gameId).setBounds(0, 0, rect.width, rect.height);
     }
 
-    public synchronized void showGame(UUID gameId, UUID playerId, GamePane gamePane) {
+    public synchronized void showGame(UUID currentTableId, UUID parentTableId, UUID gameId, UUID playerId, GamePane gamePane) {
+        this.currentTableId = currentTableId;
+        this.parentTableId = parentTableId;
         this.gameId = gameId;
         this.gamePane = gamePane;
         this.playerId = playerId;
@@ -734,7 +738,9 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public synchronized void watchGame(UUID gameId, GamePane gamePane) {
+    public synchronized void watchGame(UUID currentTableId, UUID parentTableId, UUID gameId, GamePane gamePane) {
+        this.currentTableId = currentTableId;
+        this.parentTableId = parentTableId;
         this.gameId = gameId;
         this.gamePane = gamePane;
         this.playerId = null;
@@ -769,6 +775,8 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public synchronized void replayGame(UUID gameId) {
+        this.currentTableId = null;
+        this.parentTableId = null;
         this.gameId = gameId;
         this.playerId = null;
         MageFrame.addGame(gameId, this);
@@ -3136,6 +3144,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
 class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
 
+    // replay without table - just single game
     private final UUID gameId;
 
     private static final Logger logger = Logger.getLogger(ReplayTask.class);
