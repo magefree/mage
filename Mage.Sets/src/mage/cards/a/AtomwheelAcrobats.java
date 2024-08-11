@@ -78,7 +78,7 @@ class AtomwheelAcrobatsTriggeredAbility extends TriggeredAbilityImpl {
             int result = drEvent.getResult();
             if (result == 1 || result == 2) {
                 this.getEffects().setValue("rolled", result);
-                return result >= 1;
+                return true;
             }
         }
         return false;
