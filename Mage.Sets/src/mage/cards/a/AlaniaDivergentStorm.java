@@ -6,6 +6,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -133,12 +134,15 @@ enum AlaniaDivergentStormCondition implements Condition {
             return false;
         }
         Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
+        SpellAbility sourceCastAbility = sourcePermanent.getSpellAbility();
         if (!game.isSimulation()){
-            logger.info("sourcePermanent: " + sourcePermanent);
+            logger.info("sourcePermanent: " + new MageObjectReference(sourcePermanent, game));
             logger.info("name: " + sourcePermanent.getName());
+            logger.info("sourceCastAbility: " + sourceCastAbility.getId());
         }
         // Get source permanent MOR from when it was on the stack
-        MageObjectReference sourceSpellMOR = new MageObjectReference(sourcePermanent, game, -1);
+
+        MageObjectReference sourceSpellMOR = new MageObjectReference(sourceCastAbility.getId(), sourcePermanent.getZoneChangeCounter(game) - 1, game);
         AlaniaDivergentStormWatcher watcher = game.getState().getWatcher(AlaniaDivergentStormWatcher.class);
         UUID spellControllerID = spell.getControllerId();
         MageObjectReference spellMOR = new MageObjectReference(spell, game);
@@ -172,7 +176,7 @@ class AlaniaDivergentStormWatcher extends Watcher {
         if (!game.isSimulation()){
 //            int x = 3;
             logger.info("Spell cast: " + spell.getName());
-            logger.info("Spell ID: " + spell.getId());
+            logger.info("Spell MOR: " + new MageObjectReference(spell, game));
         }
         UUID spellControllerID = spell.getControllerId();
         MageObjectReference spellMOR = new MageObjectReference(spell, game);
@@ -216,9 +220,9 @@ class AlaniaDivergentStormWatcher extends Watcher {
         MageObjectReference firstOtterMOR = playerFirstOtterCast.get(controllerID);
 
         if (!game.isSimulation()){
-            logger.info("firstOtterMOR: " + firstOtterMOR.getSourceId());
-            logger.info("spell: " + spell.getSourceId());
-            logger.info("AlaniaMOR: " + AlaniaMOR.getSourceId());
+            logger.info("firstOtterMOR: " + firstOtterMOR);
+            logger.info("spell: " + spell);
+            logger.info("AlaniaMOR: " + AlaniaMOR);
 //            logger.info(AlaniaMOR.getCard(game).getName());
         }
 
