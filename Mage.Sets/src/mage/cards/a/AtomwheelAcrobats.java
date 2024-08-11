@@ -20,7 +20,7 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
- * @author jimga150
+ * @author Sidorovich77
  */
 public final class AtomwheelAcrobats extends CardImpl {
 
