@@ -1,14 +1,9 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,6 +11,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -63,7 +59,7 @@ class SixSidedDieEffect extends OneShotEffect {
         setText("choose target creature. Roll a six-sided die." +
                 "<br>1 — It has base toughness 1 until end of turn." +
                 "<br>2 — Put two -1/-1 counters on it." +
-                "<br>3 — Six-Sided Die deals 3 damage to it and you gain 3 life." +
+                "<br>3 — {this} deals 3 damage to it and you gain 3 life." +
                 "<br>4 — It gets -4/-4 until end of turn." +
                 "<br>5 — Destroy it." +
                 "<br>6 — Exile it.");
@@ -81,34 +77,37 @@ class SixSidedDieEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int result = player.rollDice(outcome, source, game, 6);
-            Effect effect = null;
-            if (result == 1) {
-                game.addEffect(new SetBasePowerToughnessTargetEffect(1, 1, Duration.EndOfTurn), source);
-                return true;
-            } else if (result == 2) {
-                effect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(2));
-            } else if (result == 3) {
-                effect = new DamageTargetEffect(3);
-                Player you = game.getPlayer(source.getControllerId());
-                if (you != null) {
-                    player.gainLife(3, game, source);
-                }
-            } else if (result == 4) {
-                game.addEffect(new BoostTargetEffect(-4, -4, Duration.EndOfTurn), source);
-                return true;
-            } else if (result == 5) {
-                effect = new DestroyTargetEffect();
-            } else if (result == 6) {
-                effect = new ExileTargetEffect();
-            }
-
-            if (effect != null) {
-                effect.apply(game, source);
-                return true;
-            }
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
+            return false;
         }
-        return false;
+
+        if (player == null) {
+            return false;
+        }
+        int result = player.rollDice(outcome, source, game, 1);
+
+        switch (result) {
+            case 1:
+                game.addEffect(new SetBasePowerToughnessTargetEffect(1, 1, Duration.EndOfTurn), source);
+                break;
+            case 2:
+                permanent.addCounters(CounterType.M1M1.createInstance(2), source, game);
+                break;
+            case 3:
+                permanent.damage(3, source, game);
+                player.gainLife(3, game, source);
+                break;
+            case 4:
+                game.addEffect(new BoostTargetEffect(-4, -4, Duration.EndOfTurn), source);
+                break;
+            case 5:
+                permanent.destroy(source, game);
+                break;
+            case 6:
+                permanent.moveToExile(null, "{this}", source, game);
+                break;
+        }
+        return true;
     }
 }

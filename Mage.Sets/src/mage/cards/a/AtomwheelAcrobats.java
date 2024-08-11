@@ -15,7 +15,9 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -86,7 +88,7 @@ class AtomwheelAcrobatsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you roll a 1 or 2, put that many +1/+1 counters on Atomwheel Acrobats.";
+        return "Whenever you roll a 1 or 2, put that many +1/+1 counters on {this}.";
     }
 }
 
@@ -111,22 +113,14 @@ class AtomwheelAcrobatsCountersEffect extends OneShotEffect {
             return false;
         }
         int amount = (Integer) getValue("rolled");
-        Effect effect = null;
-        if (amount == 1) {
-            effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(1));
-        }
-        if (amount == 2) {
-            effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(2));
-        }
-        if (effect != null) {
-            effect.apply(game, source);
-            return true;
-        }
-        return amount >= 1;
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount));
+        effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
+        effect.apply(game, source);
+        return true;
     }
 }
 
-// Based on Mr. House, President and CEO
 class AtomwheelAcrobatsDieRollEffect extends OneShotEffect {
 
     AtomwheelAcrobatsDieRollEffect() {
@@ -154,3 +148,4 @@ class AtomwheelAcrobatsDieRollEffect extends OneShotEffect {
         return false;
     }
 }
+
