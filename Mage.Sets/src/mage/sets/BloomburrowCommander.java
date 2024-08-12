@@ -212,6 +212,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rain of Riches", 200, Rarity.RARE, mage.cards.r.RainOfRiches.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 233, Rarity.MYTHIC, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Rampant Growth", 234, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
+        cards.add(new SetCardInfo("Rapid Augmenter", 38, Rarity.RARE, mage.cards.r.RapidAugmenter.class));
         cards.add(new SetCardInfo("Rapid Hybridization", 111, Rarity.UNCOMMON, mage.cards.r.RapidHybridization.class));
         cards.add(new SetCardInfo("Ravenous Squirrel", 258, Rarity.UNCOMMON, mage.cards.r.RavenousSquirrel.class));
         cards.add(new SetCardInfo("Razorverge Thicket", 325, Rarity.RARE, mage.cards.r.RazorvergeThicket.class));
