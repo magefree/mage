@@ -2410,42 +2410,35 @@ public class HumanPlayer extends PlayerImpl {
 
     /**
      * Hide ability picker dialog on one available ability to activate
-     *
-     * @param ability
-     * @param game
-     * @return
      */
     private boolean suppressAbilityPicker(ActivatedAbility ability, Game game) {
-        if (getControllingPlayersUserData(game).isShowAbilityPickerForced()) {
-            // TODO: is it bugged on mana payment + under control?
-            //  (if player under control then priority player must use own settings, not controlling)
-            // user activated an ability picker in preferences
+        // TODO: is it bugged on mana payment + under control?
+        //  (if player under control then priority player must use own settings, not controlling)
+        // user activated an ability picker in preferences
 
-            // force to show ability picker for double faces cards in hand/commander/exile and other zones
-            Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
-            if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
-                if (mainCard instanceof SplitCard
-                        || mainCard instanceof AdventureCard
-                        || mainCard instanceof ModalDoubleFacedCard) {
-                    return false;
-                }
+        // force to show ability picker for double faces cards in hand/commander/exile and other zones
+        Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
+        if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
+            if (mainCard instanceof SplitCard
+                    || mainCard instanceof AdventureCard
+                    || mainCard instanceof ModalDoubleFacedCard) {
+                return false;
             }
-
-            // hide on land play
-            if (ability instanceof PlayLandAbility) {
-                return true;
-            }
-
-            // hide on alternative cost activated
-            if (!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(MageIdentifier.Default)
-                    && ability.getManaCostsToPay().manaValue() > 0) {
-                return true;
-            }
-
-            // hide on mana activate and show all other
-            return ability.isManaActivatedAbility();
         }
-        return true;
+
+        // hide on land play
+        if (ability instanceof PlayLandAbility) {
+            return true;
+        }
+
+        // hide on alternative cost activated
+        if (!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(MageIdentifier.Default)
+                && ability.getManaCostsToPay().manaValue() > 0) {
+            return true;
+        }
+
+        // hide on mana activate and show all other
+        return ability.isManaActivatedAbility();
     }
 
     @Override

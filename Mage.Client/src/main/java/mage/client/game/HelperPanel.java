@@ -319,7 +319,6 @@ public class HelperPanel extends JPanel {
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN = new Color(0, 0, 255, 50);
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE = new Color(255, 0, 0, 50);
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER = new Color(0, 255, 0, 50);
-        int FEEDBACK_COLORIZING_MODE = PreferencesDialog.getBattlefieldFeedbackColorizingMode();
 
         // cleanup current settings to default (flow layout - different sizes)
         this.buttonGrid.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTONS_H_GAP, 0));
@@ -342,42 +341,23 @@ public class HelperPanel extends JPanel {
         // color panel on player's feedback waiting
         if (this.gameNeedFeedback) {
 
-            // wait player's action
-            switch (FEEDBACK_COLORIZING_MODE) {
-                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_DISABLE:
-                    // disabled
-                    this.mainPanel.setOpaque(false);
-                    this.mainPanel.setBorder(null);
-                    break;
-
-                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_ONE_COLOR:
-                    // one color
-                    this.mainPanel.setOpaque(true);
-                    this.mainPanel.setBackground(ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER);
-                    break;
-
-                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR:
-                    // multicolor
-                    this.mainPanel.setOpaque(true);
-                    Color backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER;
-                    if (this.gameTurnPhase != null) {
-                        switch (this.gameTurnPhase) {
-                            case PRECOMBAT_MAIN:
-                            case POSTCOMBAT_MAIN:
-                                backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN;
-                                break;
-                            case COMBAT:
-                                backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    this.mainPanel.setBackground(backColor);
-                    break;
-                default:
-                    break;
+            // wait player's action - colorize feedback panel (depends on current phase)
+            this.mainPanel.setOpaque(true);
+            Color backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER;
+            if (this.gameTurnPhase != null) {
+                switch (this.gameTurnPhase) {
+                    case PRECOMBAT_MAIN:
+                    case POSTCOMBAT_MAIN:
+                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN;
+                        break;
+                    case COMBAT:
+                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
+                        break;
+                    default:
+                        break;
+                }
             }
+            this.mainPanel.setBackground(backColor);
         } else {
             // inform about other players
             this.mainPanel.setOpaque(false);
