@@ -10,7 +10,6 @@ import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.DeckUtil;
-import mage.client.util.GameManager;
 import mage.client.util.IgnoreList;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.object.SaveObjectUtil;
@@ -112,7 +111,6 @@ public class CallbackClientImpl implements CallbackClient {
 
                     case START_GAME: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
-                        GameManager.instance.setCurrentPlayerUUID(message.getPlayerId());
                         gameStarted(callback.getMessageId(), message.getCurrentTableId(), message.getParentTableId(), message.getGameId(), message.getPlayerId());
 
                         // reconnect fix with miss data, part 2 of 2

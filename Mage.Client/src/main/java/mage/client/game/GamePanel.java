@@ -1095,7 +1095,6 @@ public final class GamePanel extends javax.swing.JPanel {
             gamePane.setTitle(sb.toString());
         }
 
-        GameManager.instance.setStackSize(lastGameData.game.getStack().size());
         displayStack(lastGameData.game, bigCard, feedbackPanel, gameId);
 
         // auto-show exile views

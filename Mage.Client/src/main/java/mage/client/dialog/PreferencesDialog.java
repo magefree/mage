@@ -64,16 +64,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GAME_USE_PROFANITY_FILTER = "gameUseProfanityFilter";
 
     // size settings
-    public static final String KEY_GUI_CHAT_FONT_SIZE = "guiChatFontSize";
+    public static final String KEY_GUI_CARD_BATTLEFIELD_SIZE = "guiCardBattlefieldSize";
     public static final String KEY_GUI_CARD_HAND_SIZE = "guiCardHandSize";
     public static final String KEY_GUI_CARD_EDITOR_SIZE = "guiCardEditorSize";
-    public static final String KEY_GUI_STACK_WIDTH = "guiStackWidth";
-    public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
-    public static final String KEY_GUI_DIALOG_FONT_SIZE = "guiDialogFontSize";
     public static final String KEY_GUI_CARD_OTHER_ZONES_SIZE = "guiCardOtherZonesSize";
-    public static final String KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE = "guiCardBattlefieldMinSize";
-    public static final String KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE = "guiCardBattlefieldMaxSize";
+    public static final String KEY_GUI_DIALOG_FONT_SIZE = "guiDialogFontSize";
+    public static final String KEY_GUI_CHAT_FONT_SIZE = "guiChatFontSize";
     public static final String KEY_GUI_PLAYER_PANEL_SIZE = "guiPlayerPanelSize";
+    public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
 
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
     public static final String KEY_DRAFT_LOG_AUTO_SAVE = "draftLogAutoSave";
@@ -568,11 +566,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         createSizeSetting(4, KEY_GUI_TOOLTIP_SIZE,17, true, "Size of popup card hint", "The size of the tooltip window for cards or permanents (use mouse wheel to switch text/image mode)");
         // Game's elements (from position 8)
         createSizeSetting(8, KEY_GUI_PLAYER_PANEL_SIZE,14, false, "Size of player panel", "The size of the player panels on battlefield");
-        createSizeSetting(9, KEY_GUI_CARD_HAND_SIZE,14, false, "Size of cards in hand and stack", "The size of the card images in hand and on the stack");
-        createSizeSetting(10, KEY_GUI_STACK_WIDTH,14, false, "Size of stack zone (right of the hand)", "The % size of the stack object area in relation to the hand card area size."); // TODO: delete
+        createSizeSetting(9, KEY_GUI_CARD_BATTLEFIELD_SIZE,14, false, "Size of permanents in battlefield", "Average permanents size on battlefield (app will auto-size it depends on free space");
+        createSizeSetting(10, KEY_GUI_CARD_HAND_SIZE,14, false, "Size of cards in hand and stack", "The size of the card images in hand and on the stack");
         createSizeSetting(11, KEY_GUI_CARD_OTHER_ZONES_SIZE,14, false, "Size of cards in other zones", "The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
-        createSizeSetting(12, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE,10, false, "Size of permanents (min)", "The minimum size of permanents on the battlefield");
-        createSizeSetting(13, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE,14, false, "Size of permanents (max)", "The maximum size of permanents on the battlefield");
 
         // hide unused controls
         hideUnusedSizeSettings();
@@ -3162,11 +3158,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         int param = 0;
         if (args.length > 0) {
             String param1 = args[0];
-            if (param1.equals(OPEN_CONNECTION_TAB)) {
-                param = 8;
-            }
             if (param1.equals(OPEN_PHASES_TAB)) {
-                param = 6;
+                param = 5;
+            }
+            if (param1.equals(OPEN_CONNECTION_TAB)) {
+                param = 5 + 3;
             }
         }
         final int openedTab = param;
