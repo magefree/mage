@@ -102,7 +102,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private final PickMultiNumberDialog pickMultiNumber;
     private JLayeredPane jLayeredPane;
     private String chosenHandKey = "You";
-    private boolean smallMode = false; // TODO: no needs in gui scale, delete it
     private boolean initialized = false;
     private final skipButtonsList skipButtons = new skipButtonsList();
 
@@ -341,7 +340,6 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.removeGame(gameId);
         saveDividerLocations();
         this.gameChatPanel.cleanUp();
-        ;
         this.userChatPanel.cleanUp();
 
         this.removeListener();
@@ -664,28 +662,13 @@ public final class GamePanel extends javax.swing.JPanel {
         // on resize frame
         Rectangle rect = this.getBounds();
 
-        if (rect.height < 770) {
-            if (!smallMode) {
-                smallMode = true;
-                Dimension bbDimension = new Dimension(128, 184);
-                bigCard.setMaximumSize(bbDimension);
-                bigCard.setMinimumSize(bbDimension);
-                bigCard.setPreferredSize(bbDimension);
-                pnlShortCuts.revalidate();
-                for (PlayAreaPanel p : players.values()) {
-                    p.getPlayerPanel().sizePlayerPanel(smallMode);
-                }
-            }
-        } else if (smallMode) {
-            smallMode = false;
-            Dimension bbDimension = new Dimension(256, 367);
-            bigCard.setMaximumSize(bbDimension);
-            bigCard.setMinimumSize(bbDimension);
-            bigCard.setPreferredSize(bbDimension);
-            pnlShortCuts.revalidate();
-            for (PlayAreaPanel p : players.values()) {
-                p.getPlayerPanel().sizePlayerPanel(smallMode);
-            }
+        Dimension bbDimension = new Dimension(256, 367);
+        bigCard.setMaximumSize(bbDimension);
+        bigCard.setMinimumSize(bbDimension);
+        bigCard.setPreferredSize(bbDimension);
+        pnlShortCuts.revalidate();
+        for (PlayAreaPanel p : players.values()) {
+            p.getPlayerPanel().sizePlayerPanel(false);
         }
 
         ArrowBuilder.getBuilder().setSize(rect.width, rect.height);

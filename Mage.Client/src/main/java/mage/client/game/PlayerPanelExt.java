@@ -992,6 +992,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void sizePlayerPanel(boolean smallMode) {
+        // TODO: after few releases - delete small mode code, no needs anymore with gui scale, 2024-08-12
         int extraForMe = this.isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
         if (smallMode) {
             avatar.setVisible(false);

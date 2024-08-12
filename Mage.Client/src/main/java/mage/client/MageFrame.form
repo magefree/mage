@@ -24,6 +24,16 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDebugTestCardRenderModesDialogActionPerformed"/>
           </Events>
         </MenuItem>
+        <Component class="javax.swing.JPopupMenu$Separator" name="menuDebugSeparator">
+        </Component>
+        <MenuItem class="javax.swing.JMenuItem" name="menuDebugTestCustomCode">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Run custom code"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDebugTestCustomCodeActionPerformed"/>
+          </Events>
+        </MenuItem>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPopupMenu" name="popupDownload">

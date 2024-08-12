@@ -957,6 +957,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         popupDebug = new javax.swing.JPopupMenu();
         menuDebugTestModalDialog = new javax.swing.JMenuItem();
         menuDebugTestCardRenderModesDialog = new javax.swing.JMenuItem();
+        menuDebugSeparator = new javax.swing.JPopupMenu.Separator();
+        menuDebugTestCustomCode = new javax.swing.JMenuItem();
         popupDownload = new javax.swing.JPopupMenu();
         menuDownloadSymbols = new javax.swing.JMenuItem();
         menuDownloadImages = new javax.swing.JMenuItem();
@@ -995,6 +997,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         });
         popupDebug.add(menuDebugTestCardRenderModesDialog);
+        popupDebug.add(menuDebugSeparator);
+
+        menuDebugTestCustomCode.setText("Run custom code");
+        menuDebugTestCustomCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDebugTestCustomCodeActionPerformed(evt);
+            }
+        });
+        popupDebug.add(menuDebugTestCustomCode);
 
         menuDownloadSymbols.setText("Download mana symbols");
         menuDownloadSymbols.addActionListener(new java.awt.event.ActionListener() {
@@ -1137,16 +1148,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-                        .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
         );
 
         pack();
@@ -1232,6 +1243,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void menuDownloadImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDownloadImagesActionPerformed
         downloadImages();
     }//GEN-LAST:event_menuDownloadImagesActionPerformed
+
+    private void menuDebugTestCustomCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDebugTestCustomCodeActionPerformed
+        LOGGER.info("debug: insert custom code here or set breakpoint");
+    }//GEN-LAST:event_menuDebugTestCustomCodeActionPerformed
 
     public void downloadImages() {
         DownloadPicturesService.startDownload();
@@ -1591,7 +1606,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparatorSymbols;
     private javax.swing.JToolBar mageToolbar;
+    private javax.swing.JPopupMenu.Separator menuDebugSeparator;
     private javax.swing.JMenuItem menuDebugTestCardRenderModesDialog;
+    private javax.swing.JMenuItem menuDebugTestCustomCode;
     private javax.swing.JMenuItem menuDebugTestModalDialog;
     private javax.swing.JMenuItem menuDownloadImages;
     private javax.swing.JMenuItem menuDownloadSymbols;
@@ -1913,6 +1930,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         menuDownloadImages.setFont(font);
         menuDebugTestModalDialog.setFont(font);
         menuDebugTestCardRenderModesDialog.setFont(font);
+        menuDebugTestCustomCode.setFont(font);
 
         mageToolbar.getParent().setBackground(PreferencesDialog.getCurrentTheme().getMageToolbar());
 
