@@ -173,6 +173,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("O-Kagachi, Vengeful Kami", 138, Rarity.MYTHIC, mage.cards.o.OKagachiVengefulKami.class));
         cards.add(new SetCardInfo("Oath of Druids", 212, Rarity.MYTHIC, mage.cards.o.OathOfDruids.class));
         cards.add(new SetCardInfo("Once Upon a Time", 71, Rarity.RARE, mage.cards.o.OnceUponATime.class));
+        cards.add(new SetCardInfo("Oracle of the Alpha", 259, Rarity.UNCOMMON, mage.cards.o.OracleOfTheAlpha.class));
         cards.add(new SetCardInfo("Pact of Negation", 169, Rarity.RARE, mage.cards.p.PactOfNegation.class));
         cards.add(new SetCardInfo("Paradoxical Outcome", 33, Rarity.RARE, mage.cards.p.ParadoxicalOutcome.class));
         cards.add(new SetCardInfo("Path to Exile", 15, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
