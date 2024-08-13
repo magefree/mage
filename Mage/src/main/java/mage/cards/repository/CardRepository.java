@@ -47,7 +47,8 @@ public enum CardRepository {
     public static final Set<String> snowLandSetCodes = new HashSet<>(Arrays.asList(
             "CSP",
             "MH1",
-            "ME2"
+            "ME2",
+            "MB2"
     ));
 
     CardRepository() {
