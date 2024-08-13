@@ -196,6 +196,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Rite of Flame", 59, Rarity.COMMON, mage.cards.r.RiteOfFlame.class));
         cards.add(new SetCardInfo("Rot Hulk", 128, Rarity.MYTHIC, mage.cards.r.RotHulk.class));
         cards.add(new SetCardInfo("Ruination", 199, Rarity.RARE, mage.cards.r.Ruination.class));
+        cards.add(new SetCardInfo("Rusko, Clockmaker", 263, Rarity.UNCOMMON, mage.cards.r.RuskoClockmaker.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 72, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Sarkhan, Fireblood", 60, Rarity.MYTHIC, mage.cards.s.SarkhanFireblood.class));
         cards.add(new SetCardInfo("Scalelord Reckoner", 151, Rarity.RARE, mage.cards.s.ScalelordReckoner.class));

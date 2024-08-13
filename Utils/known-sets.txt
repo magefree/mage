@@ -192,6 +192,7 @@ Modern Masters 2017|ModernMasters2017|
 Morningtide|Morningtide|
 Murders at Karlov Manor|MurdersAtKarlovManor|
 Murders at Karlov Manor Commander|MurdersAtKarlovManorCommander|
+Mystery Booster 2|MysteryBooster2|
 Ravnica: Clue Edition|RavnicaClueEdition|
 Nemesis|Nemesis|
 New Phyrexia|NewPhyrexia|

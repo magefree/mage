@@ -195,6 +195,7 @@ Masterpiece Series|MPS|
 Mirrodin|MRD|
 Murders at Karlov Manor|MKM|
 Murders at Karlov Manor Commander|MKC|
+Mystery Booster 2|MB2|
 Ravnica: Clue Edition|CLU|
 Nemesis|NEM|
 New Phyrexia|NPH|
