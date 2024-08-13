@@ -249,6 +249,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Tinder Wall", 215, Rarity.COMMON, mage.cards.t.TinderWall.class));
         cards.add(new SetCardInfo("Tinker", 176, Rarity.UNCOMMON, mage.cards.t.Tinker.class));
         cards.add(new SetCardInfo("Titania, Protector of Argoth", 249, Rarity.MYTHIC, mage.cards.t.TitaniaProtectorOfArgoth.class));
+        cards.add(new SetCardInfo("Toralf's Disciple", 261, Rarity.UNCOMMON, mage.cards.t.ToralfsDisciple.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 235, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
         cards.add(new SetCardInfo("Torpor Orb", 236, Rarity.RARE, mage.cards.t.TorporOrb.class));
         cards.add(new SetCardInfo("Tower of the Magistrate", 242, Rarity.RARE, mage.cards.t.TowerOfTheMagistrate.class));

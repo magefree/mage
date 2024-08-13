@@ -32,5 +32,6 @@ public final class AlchemyInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Soulstealer Axe", 60, Rarity.UNCOMMON, mage.cards.s.SoulstealerAxe.class));
         cards.add(new SetCardInfo("Suntail Squadron", 11, Rarity.RARE, mage.cards.s.SuntailSquadron.class));
         cards.add(new SetCardInfo("Tireless Angler", 23, Rarity.RARE, mage.cards.t.TirelessAngler.class));
+        cards.add(new SetCardInfo("Toralf's Disciple", 44, Rarity.RARE, mage.cards.t.ToralfsDisciple.class));
     }
 }
