@@ -13,16 +13,12 @@ import mage.client.MagePane;
  */
 public class GamePane extends MagePane {
 
-    /**
-     * Creates new form GamePane
-     */
     public GamePane() {
         initComponents();
         SwingUtilities.invokeLater(() -> {
             gamePanel.setJLayeredPane(this);
             gamePanel.installComponents();
         });
-
     }
 
     public void showGame(UUID currentTableId, UUID parentTableId, UUID gameId, UUID playerId) {
@@ -71,6 +67,13 @@ public class GamePane extends MagePane {
         gamePanel.replayGame(gameId);
     }
 
+    /**
+     * Called on game frame prepared and showed as top panel (on new game started, on panel switch from main menu, etc)
+     */
+    public void onShow() {
+        gamePanel.restoreDividerLocations();
+    }
+
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
@@ -101,12 +104,12 @@ public class GamePane extends MagePane {
 
     @Override
     public void deactivated() {
-        gamePanel.deactivated();
+        gamePanel.onDeactivated();
     }
 
     @Override
     public void activated() {
-        gamePanel.activated();
+        gamePanel.onActivated();
     }
 
     @Override

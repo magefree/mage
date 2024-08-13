@@ -84,6 +84,7 @@ public class ThemePluginImpl implements ThemePlugin {
 
                 // TODO: research - is all components used? And why it make transparent?
                 unsetOpaque(ui.get("jSplitPane1"));
+                unsetOpaque(ui.get("jSplitPaneHandStack")); // TODO: miss jSplitPane0?
                 unsetOpaque(ui.get("pnlBattlefield"));
                 unsetOpaque(ui.get("pnlHelperHandButtonsStackArea"));
                 unsetOpaque(ui.get("hand"));

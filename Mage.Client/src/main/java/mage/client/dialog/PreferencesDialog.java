@@ -145,7 +145,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE = "gameManaAutopaymentOnlyOne";
 
     // Size of frame to check if divider locations should be used
-    public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";
+    public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize"; // TODO: remove?
 
     // pref settings of table settings and filtering
     public static final String KEY_TABLES_FILTER_SETTINGS = "tablePanelFilterSettings";
@@ -183,6 +183,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_0 = "gamepanelDividerLocation0";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_1 = "gamepanelDividerLocation1";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_HAND_STACK = "gamepanelDividerLocationsHandStack";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_2 = "gamepanelDividerLocation2";
 
     public static final String KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH = "tournamentPlayerPanelColumnWidth";
@@ -3083,7 +3084,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_showFullImagePathActionPerformed
 
     private void cbSaveToZipFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSaveToZipFilesActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_cbSaveToZipFilesActionPerformed
 
     private void btnBrowseImageLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseImageLocationActionPerformed

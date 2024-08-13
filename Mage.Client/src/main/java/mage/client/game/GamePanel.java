@@ -1,5 +1,7 @@
 package mage.client.game;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import mage.cards.Card;
 import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
@@ -45,6 +47,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyVetoException;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.CancellationException;
@@ -75,6 +78,14 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final String CMD_AUTO_ORDER_NAME_FIRST = "cmdAutoOrderNameFirst";
     private static final String CMD_AUTO_ORDER_NAME_LAST = "cmdAutoOrderNameLast";
     private static final String CMD_AUTO_ORDER_RESET_ALL = "cmdAutoOrderResetAll";
+
+    // on window resize: 0.0 keep left size (hand), 1.0 keep right size (stack), 0.5 keep proportion
+    private static final double DIVIDER_KEEP_LEFT_COMPONENT = 0.0;
+    private static final double DIVIDER_KEEP_RIGHT_COMPONENT = 1.0;
+    private static final double DIVIDER_KEEP_PROPORTION = 0.5;
+    private static final int DIVIDER_POSITION_DEFAULT = -1;
+    private static final int DIVIDER_POSITION_HIDDEN_LEFT_OR_TOP = -2;
+    private static final int DIVIDER_POSITION_HIDDEN_RIGHT_OR_BOTTOM = -3;
 
     private final Map<UUID, PlayAreaPanel> players = new LinkedHashMap<>();
     private final Map<UUID, Boolean> playersWhoLeft = new LinkedHashMap<>();
@@ -220,9 +231,14 @@ public final class GamePanel extends javax.swing.JPanel {
         pnlCommandsSkipAndStack.setOpaque(false);
         pnlCommandsSkipAndStack.add(pnlShortCuts, BorderLayout.NORTH);
         pnlCommandsSkipAndStack.add(stackObjects, BorderLayout.CENTER);
+        // ... split: feedback + hand <|> skip + stack
+        jSplitPaneHandStack.setLeftComponent(pnlCommandsFeedbackAndHand);
+        jSplitPaneHandStack.setRightComponent(pnlCommandsSkipAndStack);
+        jSplitPaneHandStack.setResizeWeight(DIVIDER_KEEP_RIGHT_COMPONENT);
+        pnlCommandsFeedbackAndHand.setMinimumSize(new Dimension(0, 0)); // allow any sizes for hand
+        pnlCommandsSkipAndStack.setMinimumSize(new Dimension(0, 0)); // allow any sizes for stack
         // ... all
-        pnlCommandsRoot.add(pnlCommandsFeedbackAndHand, BorderLayout.CENTER);
-        pnlCommandsRoot.add(pnlCommandsSkipAndStack, BorderLayout.EAST);
+        pnlCommandsRoot.add(jSplitPaneHandStack, BorderLayout.CENTER);
         pnlHelperHandButtonsStackArea.add(pnlCommandsRoot, BorderLayout.SOUTH);
 
         // prepare commands buttons panel with flow layout (instead custom from IDE)
@@ -316,6 +332,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }));
 
         pnlHelperHandButtonsStackArea.addComponentListener(componentAdapterPlayField);
+
         initComponents = false;
 
         setGUISize(true);
@@ -325,6 +342,7 @@ public final class GamePanel extends javax.swing.JPanel {
         Map<String, JComponent> components = new HashMap<>();
 
         components.put("jSplitPane1", jSplitPane1);
+        components.put("jSplitPaneHandStack", jSplitPaneHandStack);
         components.put("pnlBattlefield", pnlBattlefield);
         components.put("pnlHelperHandButtonsStackArea", pnlHelperHandButtonsStackArea);
         components.put("hand", handContainer);
@@ -338,7 +356,13 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public void cleanUp() {
         MageFrame.removeGame(gameId);
+
+        // TODO: on 2+ games it called AFTER new game started, so second game will get old divider settings
+        //  must be another way to save changed settings
+        //  (not on change location -- there are big picture hotkeys to hide/show - it uses divider)
+        //  So current solution: remove hidden big pucture feature and add save on change
         saveDividerLocations();
+
         this.gameChatPanel.cleanUp();
         this.userChatPanel.cleanUp();
 
@@ -481,6 +505,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private void setGUISize(boolean themeReload) {
         jSplitPane0.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+        jSplitPaneHandStack.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
 
         txtHoldPriority.setFont(new Font(GUISizeHelper.gameFeedbackPanelFont.getFontName(), Font.BOLD, GUISizeHelper.gameFeedbackPanelFont.getSize()));
@@ -620,37 +645,138 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void saveDividerLocations() {
+        saveCurrentDividerLocation(jSplitPaneHandStack, PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATIONS_HAND_STACK);
+
+        // TODO: migrate to new version
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
         String sb = Double.toString(rec.getWidth()) + 'x' + rec.getHeight();
         PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, Integer.toString(this.jSplitPane0.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
+        //PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_HAND_STACK, Integer.toString(this.jSplitPaneHandStack.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
     }
 
-    private void restoreDividerLocations() {
-        Rectangle rec = MageFrame.getDesktop().getBounds();
-        if (rec != null) {
-            String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            String sb = Double.toString(rec.getWidth()) + 'x' + rec.getHeight();
-            // use divider positions only if screen size is the same as it was the time the settings were saved
-            if (size != null && size.equals(sb)) {
+    private Map<String, Integer> loadAllDividerLocations(String settingsKey) {
+        Map<String, Integer> res;
+        Type type = new TypeToken<Map<String, Integer>>() {
+        }.getType();
+        try {
+            String savedData = PreferencesDialog.getCachedValue(settingsKey, "");
+            res = new Gson().fromJson(savedData, type);
+        } catch (Exception e) {
+            res = null;
+            logger.error("Found broken data for divider locations " + settingsKey, e);
+        }
 
-                String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, null);
-                if (location != null && jSplitPane0 != null) {
-                    jSplitPane0.setDividerLocation(Integer.parseInt(location));
-                }
-                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, null);
-                if (location != null && jSplitPane1 != null) {
-                    jSplitPane1.setDividerLocation(Integer.parseInt(location));
-                }
-                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_2, null);
-                if (location != null && jSplitPane2 != null) {
-                    jSplitPane2.setDividerLocation(Integer.parseInt(location));
-                }
+        if (res == null) {
+            res = new HashMap<>();
+        }
+
+        return res;
+    }
+
+    private void saveAllDividerLocations(Map<String, Integer> newValues, String settingsKey) {
+        PreferencesDialog.saveValue(settingsKey, new Gson().toJson(newValues));
+    }
+
+    private void saveCurrentDividerLocation(JSplitPane splitPane, String settingsKey) {
+        Map<String, Integer> allLocations = loadAllDividerLocations(settingsKey);
+
+        Rectangle screenRec = MageFrame.getDesktop().getBounds();
+        String screenKey = String.format("%d_x_%d", screenRec.width, screenRec.height);
+
+        // store location or hidden state (left/right)
+        int newLocation = splitPane.getDividerLocation();
+        if (newLocation == splitPane.getMinimumDividerLocation()) {
+            newLocation = DIVIDER_POSITION_HIDDEN_LEFT_OR_TOP;
+        } else if (newLocation == splitPane.getMaximumDividerLocation()) {
+            newLocation = DIVIDER_POSITION_HIDDEN_RIGHT_OR_BOTTOM;
+        }
+
+        allLocations.put(screenKey, newLocation);
+        saveAllDividerLocations(allLocations, settingsKey);
+    }
+
+    /**
+     * Restore split position from last time used
+     *
+     * @param splitPane
+     * @param settingsKey
+     * @param defaultProportion 0.25 means 25% for left component and 75% for right
+     */
+    private void restoreCurrentDividerLocation(JSplitPane splitPane, String settingsKey, double defaultProportion) {
+        Map<String, Integer> allLocations = loadAllDividerLocations(settingsKey);
+
+        Rectangle screenRec = MageFrame.getDesktop().getBounds();
+        String screenKey = String.format("%d_x_%d", screenRec.width, screenRec.height);
+
+        // on first run it has nothing in saved values, so make sure to use default location (depends on inner components preferred sizes)
+        // WARNING, new divider location must be restored independently in swing threads
+        // (possible bug: size is zero until other dividers recalculated, e.g. game panel with hand + stack + chats)
+        int newLocation = allLocations.getOrDefault(screenKey, DIVIDER_POSITION_DEFAULT);
+        if (newLocation == DIVIDER_POSITION_DEFAULT) {
+            // use default location
+            SwingUtilities.invokeLater(() -> {
+                splitPane.setDividerLocation(defaultProportion);
+            });
+        } else if (newLocation == DIVIDER_POSITION_HIDDEN_LEFT_OR_TOP) {
+            // use hidden (hide left)
+            SwingUtilities.invokeLater(() -> {
+                splitPane.setDividerLocation(defaultProportion);
+                splitPane.getLeftComponent().setMinimumSize(new Dimension());
+                splitPane.setDividerLocation(0.0d);
+            });
+        } else if (newLocation == DIVIDER_POSITION_HIDDEN_RIGHT_OR_BOTTOM) {
+            // use hidden (hide right)
+            SwingUtilities.invokeLater(() -> {
+                splitPane.setDividerLocation(defaultProportion);
+                splitPane.getLeftComponent().setMinimumSize(new Dimension());
+                splitPane.setDividerLocation(1.0d);
+            });
+        } else {
+            // use saved location
+            SwingUtilities.invokeLater(() -> {
+                splitPane.setDividerLocation(newLocation);
+            });
+        }
+    }
+
+    public void restoreDividerLocations() {
+        // split/divider locations must be restored after game panel will be visible, e.g. on game show
+
+        // TODO: migrate to new version
+        // restore for each screen size
+        Rectangle rec = MageFrame.getDesktop().getBounds();
+
+        // TODO: save for each size, not last only, need code research
+        String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
+        String sb = Double.toString(rec.getWidth()) + 'x' + rec.getHeight();
+
+        // use divider positions only if screen size is the same as it was the time the settings were saved
+        if (size != null && size.equals(sb)) {
+            String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, null);
+            if (location != null && jSplitPane0 != null) {
+                jSplitPane0.setDividerLocation(Integer.parseInt(location));
+            }
+            location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, null);
+            if (location != null && jSplitPane1 != null) {
+                jSplitPane1.setDividerLocation(Integer.parseInt(location));
+            }
+            location = PreferencesDialog.getCachedValue(KEY_GAMEPANEL_DIVIDER_LOCATIONS_HAND_STACK, null);
+            if (location != null && jSplitPaneHandStack != null) {
+                // TODO: enable
+                //jSplitPaneHandStack.setDividerLocation(Integer.parseInt(location));
+            }
+            location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_2, null);
+            if (location != null && jSplitPane2 != null) {
+                jSplitPane2.setDividerLocation(Integer.parseInt(location));
             }
         }
+
+        // new version
+        restoreCurrentDividerLocation(jSplitPaneHandStack, KEY_GAMEPANEL_DIVIDER_LOCATIONS_HAND_STACK, 0.70);
     }
 
     private boolean isSmallMode() {
@@ -1414,8 +1540,10 @@ public final class GamePanel extends javax.swing.JPanel {
         jPhases.invalidate();
     }
 
-    // Called if the game frame is deactivated because the tabled the deck editor or other frames go to foreground
-    public void deactivated() {
+    public void onDeactivated() {
+        // save current dividers location
+        saveDividerLocations();
+
         // hide the non modal windows (because otherwise they are shown on top of the new active pane)
         // TODO: is it need to hide other dialogs like graveyards (CardsView)?
         for (CardInfoWindowDialog windowDialog : exiles.values()) {
@@ -1441,8 +1569,11 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    // Called if the game frame comes to front again
-    public void activated() {
+    public void onActivated() {
+        // restore divider positions
+        // must be called by swing after all pack and paint done (possible bug: zero size in restored divider)
+        SwingUtilities.invokeLater(this::restoreDividerLocations);
+
         // hide the non modal windows (because otherwise they are shown on top of the new active pane)
         for (CardInfoWindowDialog windowDialog : exiles.values()) {
             windowDialog.show();
@@ -2100,6 +2231,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private void initComponents() {
         abilityPicker = new mage.client.components.ability.AbilityPicker(GUISizeHelper.dialogGuiScale);
         jSplitPane1 = new javax.swing.JSplitPane();
+        jSplitPaneHandStack = new javax.swing.JSplitPane();
         jSplitPane0 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
         pnlHelperHandButtonsStackArea = new javax.swing.JPanel();
@@ -2172,17 +2304,21 @@ public final class GamePanel extends javax.swing.JPanel {
         stackObjects = new mage.client.cards.Cards();
 
         jSplitPane1.setBorder(null);
-        jSplitPane1.setDividerSize(7);
-        jSplitPane1.setResizeWeight(1.0);
+        jSplitPane1.setDividerSize(7); // TODO: add gui scale support?
+        jSplitPane1.setResizeWeight(DIVIDER_KEEP_RIGHT_COMPONENT);
         jSplitPane1.setOneTouchExpandable(true);
-        jSplitPane1.setMinimumSize(new java.awt.Dimension(26, 48));
+        jSplitPane1.setMinimumSize(new java.awt.Dimension(26, 48)); // TODO: add gui scale support?
+
+        jSplitPaneHandStack.setBorder(null);
+        jSplitPaneHandStack.setDividerSize(7);
+        jSplitPaneHandStack.setResizeWeight(DIVIDER_KEEP_RIGHT_COMPONENT);
+        jSplitPaneHandStack.setOneTouchExpandable(true);
+        jSplitPaneHandStack.setMinimumSize(new java.awt.Dimension(26, 48));
 
         jSplitPane0.setBorder(null);
         jSplitPane0.setDividerSize(7);
-        jSplitPane0.setResizeWeight(1.0);
+        jSplitPane0.setResizeWeight(DIVIDER_KEEP_RIGHT_COMPONENT);
         jSplitPane0.setOneTouchExpandable(true);
-
-        restoreDividerLocations();
 
         lblPhase.setLabelFor(txtPhase);
         lblPhase.setText("Phase:");
@@ -2570,7 +2706,7 @@ public final class GamePanel extends javax.swing.JPanel {
         pnlReplay.setOpaque(false);
 
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane2.setResizeWeight(0.5);
+        jSplitPane2.setResizeWeight(DIVIDER_KEEP_PROPORTION);
         jSplitPane2.setLeftComponent(userChatPanel);
         jSplitPane2.setBottomComponent(gameChatPanel);
 
@@ -2580,8 +2716,8 @@ public final class GamePanel extends javax.swing.JPanel {
         phasesContainer.add(jPhases);
 
         // split: battlefield <|> chats
-        jSplitPane1.setLeftComponent(pnlHelperHandButtonsStackArea);
-        jSplitPane1.setRightComponent(jSplitPane2);
+        jSplitPane1.setLeftComponent(pnlHelperHandButtonsStackArea); // TODO: research
+        jSplitPane1.setRightComponent(jSplitPane2); // TODO: reseach
 
         // Set individual area sizes of big card pane
         // TODO: research - is it possible to use border layout without all custom code
@@ -2601,12 +2737,13 @@ public final class GamePanel extends javax.swing.JPanel {
 
         jPanel2.setOpaque(false);
 
-        // game pane and chat/log pane
-        jSplitPane0.setLeftComponent(jSplitPane1);
+        // split: game <|> chat/log
+        jSplitPane0.setLeftComponent(jSplitPane1); // TODO: research -- possible typo, must be jSplitPane1?
         // big card and buttons
-        jSplitPane0.setRightComponent(jPanel2);
+        jSplitPane0.setRightComponent(jPanel2); // TODO: research
 
         // TODO: need reseach, possible reason of weird scrolls restore
+        // TODO: remove
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -3096,6 +3233,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private javax.swing.JPanel pnlHelperHandButtonsStackArea;
     private javax.swing.JSplitPane jSplitPane0;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JSplitPane jSplitPaneHandStack;
     private javax.swing.JLabel lblActivePlayer;
     private javax.swing.JLabel lblPhase;
     private javax.swing.JLabel lblPriority;

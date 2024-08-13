@@ -730,8 +730,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             return;
         }
 
-        LOGGER.debug("Setting " + frame.getTitle() + " active");
-
         activeFrame = frame;
         desktopPane.moveToFront(activeFrame);
         activeFrame.setBounds(0, 0, desktopPane.getWidth(), desktopPane.getHeight());
