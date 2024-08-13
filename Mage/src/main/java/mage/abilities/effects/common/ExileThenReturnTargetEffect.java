@@ -11,6 +11,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -105,7 +106,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         }
         sb.append(" control");
         if (afterEffect != null){
-            sb.append(". ").append(afterEffect.getText(null));
+            sb.append(". ").append(CardUtil.getTextWithFirstCharUpperCase(afterEffect.getText(mode)));
         }
         return sb.toString();
     }

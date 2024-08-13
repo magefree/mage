@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +29,9 @@ public final class SplashPortal extends CardImpl {
         // Exile target creature you control, then return it to the battlefield under its owner's control.
         // If that creature is a Bird, Frog, Otter, or Rat, draw a card.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, false).withAfterEffect(new SplashPortalEffect()));
+        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, false).withAfterEffect(
+                new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new SplashPortalCondition())
+        ));
     }
 
     private SplashPortal(final SplashPortal card) {
@@ -43,40 +44,28 @@ public final class SplashPortal extends CardImpl {
     }
 }
 
-class SplashPortalEffect extends OneShotEffect {
+// Based on TargetHasSubtypeCondition
+class SplashPortalCondition implements Condition {
 
     private static final List<SubType> checkedSubTypes = Arrays.asList(
             SubType.BIRD, SubType.FROG, SubType.OTTER, SubType.RAT
     );
 
-    SplashPortalEffect() {
-        super(Outcome.Benefit);
-        staticText = "If that creature is a Bird, Frog, Otter, or Rat, draw a card.";
-    }
-
-    private SplashPortalEffect(final SplashPortalEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SplashPortalEffect copy() {
-        return new SplashPortalEffect(this);
-    }
-
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent == null){
-                continue;
-            }
-            boolean hasSubType = checkedSubTypes.stream()
-                    .anyMatch(subType -> permanent.hasSubtype(subType, game));
-            if (hasSubType) {
-                Effect effect = new DrawCardSourceControllerEffect(1);
-                return effect.apply(game, source);
-            }
+        if (source.getTargets().isEmpty()) {
+            return false;
         }
-        return true;
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent == null) {
+            return false;
+        }
+        return checkedSubTypes.stream()
+                .anyMatch(subType -> permanent.hasSubtype(subType, game));
+    }
+
+    @Override
+    public String toString() {
+        return "If that creature is a Bird, Frog, Otter, or Rat";
     }
 }
