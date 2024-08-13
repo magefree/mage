@@ -3,7 +3,6 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.components.KeyBindButton;
-import static mage.client.constants.Constants.AUTO_TARGET_NON_FEEL_BAD;
 import mage.client.themes.ThemeType;
 import mage.client.util.CardLanguage;
 import mage.client.util.ClientDefaultSettings;
@@ -11,8 +10,6 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.BufferedImageBuilder;
-import static mage.constants.Constants.*;
-
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
@@ -37,6 +34,9 @@ import java.util.List;
 import java.util.*;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
+
+import static mage.client.constants.Constants.AUTO_TARGET_NON_FEEL_BAD;
+import static mage.constants.Constants.*;
 
 /**
  * GUI: preferences dialog with all user settings
@@ -179,13 +179,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_TABLE_WAITING_COLUMNS_WIDTH = "tableWaitingPanelColumnWidth";
     public static final String KEY_TABLE_WAITING_COLUMNS_ORDER = "tableWaitingPanelColumnSort";
 
-    public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_0 = "gamepanelDividerLocation0";
-    public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_1 = "gamepanelDividerLocation1";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_GAME_AND_BIG_CARD = "gamepanelDividerLocationsGameAndBigCard";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_BATTLEFIELD_AND_CHATS = "gamepanelDividerLocationsBattlefieldAndChats";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_HAND_STACK = "gamepanelDividerLocationsHandStack";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_CHAT_AND_LOGS = "gamepanelDividerLocationsChatAndLogs";
-    public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_2 = "gamepanelDividerLocation2";
 
     public static final String KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH = "tournamentPlayerPanelColumnWidth";
     public static final String KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER = "tournamentPlayerPanelColumnSort";
@@ -346,6 +343,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // prevent fast settings apply on form loading
     private static boolean isLoadingSizes = false;
     private static boolean isLoadingTheme = false;
+
+    // GUI size default settings
+    private final Map<String, DefaultSizeSetting> defaultSizeSettings = new LinkedHashMap<>();
+
+    static class DefaultSizeSetting {
+        String name;
+        Map<String, Integer> values; // settings key, value
+    }
 
     // GUI size settings
     private final Map<String, SizeSetting> sizeSettings = new LinkedHashMap<>();
@@ -564,16 +569,84 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // App's elements (from position 1)
         createSizeSetting(1, KEY_GUI_DIALOG_FONT_SIZE, 14, true, "Font in dialogs and menu", "The size of the font of messages, menu, dialogs and other windows");
         createSizeSetting(2, KEY_GUI_CHAT_FONT_SIZE, 14, true, "Font in logs and chats", "The size of the font used to display the chat text");
-        createSizeSetting(3, KEY_GUI_CARD_EDITOR_SIZE,14, false, "Size of cards in editor and draft panels", "The size of the card in editor and the picked zone of the draft panel ");
-        createSizeSetting(4, KEY_GUI_TOOLTIP_SIZE,17, true, "Size of popup card hint", "The size of the tooltip window for cards or permanents (use mouse wheel to switch text/image mode)");
+        createSizeSetting(3, KEY_GUI_CARD_EDITOR_SIZE, 14, false, "Size of cards in editor and draft panels", "The size of the card in editor and the picked zone of the draft panel ");
+        createSizeSetting(4, KEY_GUI_TOOLTIP_SIZE, 17, true, "Size of popup card hint", "The size of the tooltip window for cards or permanents (use mouse wheel to switch text/image mode)");
         // Game's elements (from position 8)
-        createSizeSetting(8, KEY_GUI_PLAYER_PANEL_SIZE,14, false, "Size of player panel", "The size of the player panels on battlefield");
-        createSizeSetting(9, KEY_GUI_CARD_BATTLEFIELD_SIZE,14, false, "Size of permanents in battlefield", "Average permanents size on battlefield (app will auto-size it depends on free space");
-        createSizeSetting(10, KEY_GUI_CARD_HAND_SIZE,14, false, "Size of cards in hand and stack", "The size of the card images in hand and on the stack");
-        createSizeSetting(11, KEY_GUI_CARD_OTHER_ZONES_SIZE,14, false, "Size of cards in other zones", "The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
+        createSizeSetting(8, KEY_GUI_PLAYER_PANEL_SIZE, 14, false, "Size of player panel", "The size of the player panels on battlefield");
+        createSizeSetting(9, KEY_GUI_CARD_BATTLEFIELD_SIZE, 14, false, "Size of permanents in battlefield", "Average permanents size on battlefield (app will auto-size it depends on free space");
+        createSizeSetting(10, KEY_GUI_CARD_HAND_SIZE, 14, false, "Size of cards in hand and stack", "The size of the card images in hand and on the stack");
+        createSizeSetting(11, KEY_GUI_CARD_OTHER_ZONES_SIZE, 14, false, "Size of cards in other zones", "The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
 
         // hide unused controls
         hideUnusedSizeSettings();
+
+        // prepare default size settings
+        // warning, make sure it use same order as createSizeSetting above
+        List<String> codes = new ArrayList<>();
+        codes.add(KEY_GUI_DIALOG_FONT_SIZE);
+        codes.add(KEY_GUI_CHAT_FONT_SIZE);
+        codes.add(KEY_GUI_CARD_EDITOR_SIZE);
+        codes.add(KEY_GUI_TOOLTIP_SIZE);
+        //
+        codes.add(KEY_GUI_PLAYER_PANEL_SIZE);
+        codes.add(KEY_GUI_CARD_BATTLEFIELD_SIZE);
+        codes.add(KEY_GUI_CARD_HAND_SIZE);
+        codes.add(KEY_GUI_CARD_OTHER_ZONES_SIZE);
+
+        // x6 groups allowed here
+        Map<String, List<Integer>> sizes = new LinkedHashMap<>();
+        sizes.put("800 x 600", Arrays.asList( // TODO: fill
+                10, 10, 10, 10,
+                10, 10, 10, 10
+        ));
+        sizes.put("1024 x 768", Arrays.asList( // TODO: fill
+                10, 10, 10, 10,
+                10, 10, 10, 10
+        ));
+        sizes.put("1366 x 768", Arrays.asList( // TODO: fill
+                10, 10, 10, 10,
+                10, 10, 10, 10
+        ));
+        sizes.put("1920 x 1080", Arrays.asList(
+                17, 15, 14, 20,
+                14, 30, 22, 21
+        ));
+        sizes.put("2560 x 1440", Arrays.asList( // TODO: fill
+                10, 10, 10, 10,
+                10, 10, 10, 10
+        ));
+        sizes.put("3840 x 2160", Arrays.asList( // TODO: fill
+                10, 10, 10, 10,
+                10, 10, 10, 10
+        ));
+
+        // set new settings on button clicks
+        int position = 0;
+        for (String groupName : sizes.keySet()) {
+            position++;
+            JButton button = GUISizeHelper.getComponentByFieldName(this, "buttonSizeDefault" + position);
+            button.setText(groupName);
+            button.addActionListener(e -> {
+                isLoadingSizes = true;
+                try {
+                    List<Integer> values = sizes.get(groupName);
+                    for (int i = 0; i < values.size(); i++) {
+                        sizeSettings.get(codes.get(i)).slider.setValue(values.get(i));
+                    }
+                } finally {
+                    isLoadingSizes = false;
+                }
+                saveGUISize(true, false);
+            });
+        }
+
+        // hide unused buttons
+        for (int i = panelSizeDefaultSettings.getComponentCount() - 1; i >= 0; i--) {
+            JButton button = (JButton) panelSizeDefaultSettings.getComponent(i);
+            if (button.getText().startsWith("set to default")) {
+                panelSizeDefaultSettings.remove(button);
+            }
+        }
 
         cbPreferredImageLanguage.setModel(new DefaultComboBoxModel<>(CardLanguage.toList()));
         cbNumberOfDownloadThreads.setModel(new DefaultComboBoxModel<>(new String[]{"10", "9", "8", "7", "6", "5", "4", "3", "2", "1"}));
@@ -676,6 +749,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel32 = new javax.swing.JPanel();
         jPanel33 = new javax.swing.JPanel();
         tabGuiSize = new javax.swing.JPanel();
+        panelSizeDefaultSettings = new javax.swing.JPanel();
+        buttonSizeDefault1 = new javax.swing.JButton();
+        buttonSizeDefault2 = new javax.swing.JButton();
+        buttonSizeDefault3 = new javax.swing.JButton();
+        buttonSizeDefault4 = new javax.swing.JButton();
+        buttonSizeDefault5 = new javax.swing.JButton();
+        buttonSizeDefault6 = new javax.swing.JButton();
         panelSizeDetailedSettings = new javax.swing.JPanel();
         labelSizeGroup1 = new javax.swing.JLabel();
         panelSize1 = new javax.swing.JPanel();
@@ -1528,6 +1608,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("My Avatar", tabAvatars);
 
+        panelSizeDefaultSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Choose predefined settings due your screen size"));
+        panelSizeDefaultSettings.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
+
+        buttonSizeDefault1.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault1);
+
+        buttonSizeDefault2.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault2);
+
+        buttonSizeDefault3.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault3);
+
+        buttonSizeDefault4.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault4);
+
+        buttonSizeDefault5.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault5);
+
+        buttonSizeDefault6.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault6);
+
         panelSizeDetailedSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detailed settings"));
         panelSizeDetailedSettings.setLayout(new java.awt.GridLayout(16, 1));
 
@@ -1881,14 +1982,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabGuiSizeLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panelSizeDetailedSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(panelSizeDetailedSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
+                    .add(panelSizeDefaultSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabGuiSizeLayout.setVerticalGroup(
             tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabGuiSizeLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panelSizeDetailedSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 534, Short.MAX_VALUE)
+                .add(panelSizeDefaultSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(panelSizeDetailedSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 510, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -3825,6 +3930,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnBrowseBattlefieldImage;
     private javax.swing.JButton btnBrowseImageLocation;
     private javax.swing.JButton bttnResetControls;
+    private javax.swing.JButton buttonSizeDefault1;
+    private javax.swing.JButton buttonSizeDefault2;
+    private javax.swing.JButton buttonSizeDefault3;
+    private javax.swing.JButton buttonSizeDefault4;
+    private javax.swing.JButton buttonSizeDefault5;
+    private javax.swing.JButton buttonSizeDefault6;
     private javax.swing.JCheckBox cbAllowRequestToShowHandCards;
     private javax.swing.JCheckBox cbAskMoveToGraveOrder;
     private javax.swing.JCheckBox cbAutoOrderTrigger;
@@ -4001,6 +4112,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel panelSize7;
     private javax.swing.JPanel panelSize8;
     private javax.swing.JPanel panelSize9;
+    private javax.swing.JPanel panelSizeDefaultSettings;
     private javax.swing.JPanel panelSizeDetailedSettings;
     private javax.swing.JPanel phases_stopSettings;
     private javax.swing.JPanel pnlProxy;

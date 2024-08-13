@@ -1262,10 +1262,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panelSizeDetailedSettings" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="panelSizeDetailedSettings" pref="787" max="32767" attributes="0"/>
+                          <Component id="panelSizeDefaultSettings" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1273,13 +1276,64 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panelSizeDetailedSettings" pref="534" max="32767" attributes="0"/>
+                      <Component id="panelSizeDefaultSettings" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="panelSizeDetailedSettings" min="-2" pref="510" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
+            <Container class="javax.swing.JPanel" name="panelSizeDefaultSettings">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Choose predefined settings due your screen size">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                        <EtchetBorder/>
+                      </Border>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                <Property name="alignment" type="int" value="3"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
             <Container class="javax.swing.JPanel" name="panelSizeDetailedSettings">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
