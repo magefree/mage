@@ -70,7 +70,6 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
             default:
                 throw new UnsupportedOperationException("Unexpected setTargetPointer in ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility: " + setTargetPointer);
         }
-        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 }
