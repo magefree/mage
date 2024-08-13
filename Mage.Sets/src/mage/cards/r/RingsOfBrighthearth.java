@@ -18,7 +18,7 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class RingsOfBrighthearth extends CardImpl {
-    private static final FilterStackObject filter = new FilterActivatedOrTriggeredAbility("an ability that isn't a mana ability");
+    private static final FilterStackObject filter = new FilterActivatedOrTriggeredAbility("an ability, if it isn't a mana ability");
 
     static {
         filter.add(NotManaAbilityPredicate.instance);
