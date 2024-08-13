@@ -27,7 +27,7 @@ public final class EssenceFlux extends CardImpl {
 
         // Exile target creature you control, then return that card to the battlefield under its owner's control. If it's a Spirit, put a +1/+1 counter on it.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, false, new EssenceFluxEffect()));
+        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, false).withAfterEffect(new EssenceFluxEffect()));
     }
 
     private EssenceFlux(final EssenceFlux card) {

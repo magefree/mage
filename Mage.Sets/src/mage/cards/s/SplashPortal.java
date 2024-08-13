@@ -30,7 +30,7 @@ public final class SplashPortal extends CardImpl {
         // Exile target creature you control, then return it to the battlefield under its owner's control.
         // If that creature is a Bird, Frog, Otter, or Rat, draw a card.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, false, new SplashPortalEffect()));
+        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, false).withAfterEffect(new SplashPortalEffect()));
     }
 
     private SplashPortal(final SplashPortal card) {
