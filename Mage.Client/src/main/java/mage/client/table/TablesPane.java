@@ -115,6 +115,7 @@ public class TablesPane extends MagePane {
 
     @Override
     public void deactivated() {
+        super.deactivated();
         tablesPanel.stopTasks();
     }
 

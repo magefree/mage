@@ -106,8 +106,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String SOUNDS_MATCH_MUSIC_ENABLE_BY_DEFAULT = "true";
     public static final String KEY_SOUNDS_MATCH_MUSIC_PATH = "soundsMatchMusicPath";
 
-    public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
-
     // Themes
     public static final String KEY_THEME = "themeSelection";
 
@@ -183,7 +181,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_0 = "gamepanelDividerLocation0";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_1 = "gamepanelDividerLocation1";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_GAME_AND_BIG_CARD = "gamepanelDividerLocationsGameAndBigCard";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_BATTLEFIELD_AND_CHATS = "gamepanelDividerLocationsBattlefieldAndChats";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_HAND_STACK = "gamepanelDividerLocationsHandStack";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_CHAT_AND_LOGS = "gamepanelDividerLocationsChatAndLogs";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_2 = "gamepanelDividerLocation2";
 
     public static final String KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH = "tournamentPlayerPanelColumnWidth";

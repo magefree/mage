@@ -22,6 +22,9 @@ public final class GUISizeHelper {
     static final int CARD_IMAGE_HEIGHT = 445;
     static final int CARD_IMAG_VALUE = 42;
 
+    public static final float CARD_WIDTH_TO_HEIGHT_COEF = (1.0f * CARD_IMAGE_HEIGHT) / (1.0f * CARD_IMAGE_WIDTH);
+    public static final float CARD_HEIGHT_TO_WIDTH_COEF = (1.0f * CARD_IMAGE_WIDTH) / (1.0f * CARD_IMAGE_HEIGHT);
+
     public static String basicSymbolSize = "small";
     static final int MIN_FONT_SIZE = 7;
 

@@ -758,10 +758,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static void deactivate(MagePane frame) {
         frame.setVisible(false);
-        setActive(getTopMost(frame));
-        if (activeFrame != frame) {
-            frame.deactivated();
+        MagePane topPane = getTopMost(frame);
+        if (topPane == frame) {
+            throw new IllegalArgumentException("Impossible use case - deactivated frame can't ref to itself");
         }
+        setActive(topPane);
     }
 
     public static MagePane getTopMost(MagePane exclude) {

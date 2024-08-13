@@ -67,13 +67,6 @@ public class GamePane extends MagePane {
         gamePanel.replayGame(gameId);
     }
 
-    /**
-     * Called on game frame prepared and showed as top panel (on new game started, on panel switch from main menu, etc)
-     */
-    public void onShow() {
-        gamePanel.restoreDividerLocations();
-    }
-
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
@@ -104,6 +97,7 @@ public class GamePane extends MagePane {
 
     @Override
     public void deactivated() {
+        super.deactivated();
         gamePanel.onDeactivated();
     }
 

@@ -87,7 +87,7 @@ public class TournamentPane extends MagePane {
 
     @Override
     public void deactivated() {
+        super.deactivated();
         tournamentPanel.stopTasks();
     }
-
 }
