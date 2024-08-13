@@ -39,13 +39,13 @@ public final class EmissaryGreen extends CardImpl {
         // Put a number of +1/+1 counters on each creature you control equal to the number of security votes.
         this.addAbility(new AttacksTriggeredAbility(new EmissaryGreenEffect()));
     }
+
     private EmissaryGreen(final EmissaryGreen card) {
         super(card);
     }
 
     @Override
-    public EmissaryGreen copy()
-    {
+    public EmissaryGreen copy() {
         return new EmissaryGreen(this);
     }
 }
