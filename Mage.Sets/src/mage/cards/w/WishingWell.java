@@ -51,9 +51,9 @@ class WishingWellEffect extends OneShotEffect {
 
     WishingWellEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put a coin counter on Wishing Well. " +
+        staticText = "Put a coin counter on {this}. " +
                 "When you do, you may cast target instant or sorcery card with mana value equal to the number of coin " +
-                "counters on Wishing Well from your graveyard without paying its mana cost. If that spell would be put " +
+                "counters on {this} from your graveyard without paying its mana cost. If that spell would be put " +
                 "into your graveyard, exile it instead";
     }
 
@@ -79,14 +79,14 @@ class WishingWellEffect extends OneShotEffect {
         }
         int count = permanent.getCounters(game).getCount(CounterType.COIN);
 
-        FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with mana value equal to " + count);
+        FilterInstantOrSorceryCard filter = new FilterInstantOrSorceryCard("instant or sorcery card with mana value " + count);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, count));
 
         ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
                 new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true),
                 true,
                 "When you do, you may cast target instant or sorcery card with mana value equal to the number of " +
-                        "coin counters on Wishing Well from your graveyard without paying its mana cost. If that spell " +
+                        "coin counters on {this} from your graveyard without paying its mana cost. If that spell " +
                         "would be put into your graveyard, exile it instead"
         );
         reflexive.addTarget(new TargetCardInYourGraveyard(filter));
