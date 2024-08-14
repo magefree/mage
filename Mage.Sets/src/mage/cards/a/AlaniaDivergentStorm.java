@@ -106,7 +106,7 @@ class AlaniaDivergentStormCost extends CostImpl {
             if (opponent == null || !opponent.canRespond()){
                 return false;
             }
-            paid = opponent.drawCards(1, source, game) != 0;
+            paid = opponent.drawCards(1, source, game) > 0;
         }
         return paid;
     }
