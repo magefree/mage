@@ -5,8 +5,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldCastTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.*;
 import mage.abilities.keyword.HasteAbility;
@@ -18,8 +18,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.BasePowerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -47,7 +45,7 @@ public final class RapidAugmenter extends CardImpl {
 
         // Whenever another creature you control with base power 1 enters, it gains haste until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new RapidAugmenterHasteEffect(), filterBP1, false);
+                Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance()), filterBP1, false, SetTargetPointer.PERMANENT);
         this.addAbility(ability);
 
         // Whenever another creature you control enters, if it wasn't cast, put a +1/+1 counter on Rapid Augmenter
@@ -66,46 +64,5 @@ public final class RapidAugmenter extends CardImpl {
     @Override
     public RapidAugmenter copy() {
         return new RapidAugmenter(this);
-    }
-}
-
-// Based on GainAbilitySourceEffect
-class RapidAugmenterHasteEffect extends ContinuousEffectImpl {
-
-    protected Ability ability = HasteAbility.getInstance();
-
-    public RapidAugmenterHasteEffect() {
-        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "it gains haste until end of turn";
-        this.generateGainAbilityDependencies(ability, null);
-    }
-
-    protected RapidAugmenterHasteEffect(final RapidAugmenterHasteEffect effect) {
-        super(effect);
-        ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
-    }
-
-    @Override
-    public RapidAugmenterHasteEffect copy() {
-        return new RapidAugmenterHasteEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        // If source permanent is no longer onto battlefield discard the effect
-        if (source.getSourcePermanentIfItStillExists(game) == null) {
-            discard();
-        }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) getValue("permanentEnteringBattlefield");
-        if (permanent != null) {
-            permanent.addAbility(ability, source.getSourceId(), game);
-            return true;
-        }
-        return true;
     }
 }
