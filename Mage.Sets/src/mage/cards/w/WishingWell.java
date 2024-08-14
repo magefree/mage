@@ -73,7 +73,7 @@ class WishingWellEffect extends OneShotEffect {
             return false;
         }
 
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
         if (permanent == null) {
             return false;
         }
