@@ -162,20 +162,19 @@ class AlaniaDivergentStormWatcher extends Watcher {
         }
         UUID spellControllerID = spell.getControllerId();
         MageObjectReference spellMOR = new MageObjectReference(spell, game);
-        if (spell.getCardType(game).contains(CardType.INSTANT) &&
-                !playerFirstInstantCast.containsKey(spellControllerID)) {
-            playerFirstInstantCast.put(spellControllerID, spellMOR);
+        if (spell.getCardType(game).contains(CardType.INSTANT)) {
+            playerFirstInstantCast.putIfAbsent(spellControllerID, spellMOR);
         }
-        if (spell.getCardType(game).contains(CardType.SORCERY) &&
-                !playerFirstSorceryCast.containsKey(spellControllerID)) {
-            playerFirstSorceryCast.put(spellControllerID, spellMOR);
+        if (spell.getCardType(game).contains(CardType.SORCERY)) {
+            playerFirstSorceryCast.putIfAbsent(spellControllerID, spellMOR);
         }
         if (spell.getSubtype(game).contains(SubType.OTTER)){
-            if (!playerFirstOtterCast.containsKey(spellControllerID)) {
-                playerFirstOtterCast.put(spellControllerID, spellMOR);
-            } else if (!playerSecondOtterCast.containsKey(spellControllerID)) {
-                playerSecondOtterCast.put(spellControllerID, spellMOR);
+            if (playerFirstOtterCast.containsKey(spellControllerID)) {
+                // We already cast an otter this turn, put it on the second otter list
+                playerSecondOtterCast.putIfAbsent(spellControllerID, spellMOR);
             }
+            // Will only put if we didnt cast an otter this turn yet
+            playerFirstOtterCast.putIfAbsent(spellControllerID, spellMOR);
         }
     }
 
@@ -193,6 +192,7 @@ class AlaniaDivergentStormWatcher extends Watcher {
         MageObjectReference firstOtterMOR = playerFirstOtterCast.get(controllerID);
 
         if (firstOtterMOR != null && firstOtterMOR.equals(AlaniaMOR)) {
+            // The first otter we cast was the triggering Alania! check if the second otter matches instead
             firstOtterMOR = playerSecondOtterCast.get(controllerID);
         }
 
