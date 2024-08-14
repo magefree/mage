@@ -390,13 +390,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
             this.editor.setText("99");
 
+            // TODO: sample text is useless for UX, it's better to have popup screenshot with selected element
             this.sample.setText("Move mouse to view sample");
 
             // repeat all IDE settings, so no need to change in each instance by IDE
             // only component size must be changed by IDE
             this.slider.setMajorTickSpacing(15);
             this.slider.setMaximum(99);
-            this.slider.setMinimum(10);
+            this.slider.setMinimum(7);
             this.slider.setMinorTickSpacing(5);
             this.slider.setPaintLabels(false);
             this.slider.setPaintTicks(true);
@@ -567,10 +568,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // prepare size table (you can change settings order by new position index)
         // warning, if you change default values then make sure calculateGUISizes uses same
         // App's elements (from position 1)
-        createSizeSetting(1, KEY_GUI_DIALOG_FONT_SIZE, 14, true, "Font in dialogs and menu", "The size of the font of messages, menu, dialogs and other windows");
-        createSizeSetting(2, KEY_GUI_CHAT_FONT_SIZE, 14, true, "Font in logs and chats", "The size of the font used to display the chat text");
+        createSizeSetting(1, KEY_GUI_DIALOG_FONT_SIZE, 14, false, "Font in dialogs and menu", "The size of the font of messages, menu, dialogs and other windows");
+        createSizeSetting(2, KEY_GUI_CHAT_FONT_SIZE, 14, false, "Font in logs and chats", "The size of the font used to display the chat text");
         createSizeSetting(3, KEY_GUI_CARD_EDITOR_SIZE, 14, false, "Size of cards in editor and draft panels", "The size of the card in editor and the picked zone of the draft panel ");
-        createSizeSetting(4, KEY_GUI_TOOLTIP_SIZE, 17, true, "Size of popup card hint", "The size of the tooltip window for cards or permanents (use mouse wheel to switch text/image mode)");
+        createSizeSetting(4, KEY_GUI_TOOLTIP_SIZE, 17, false, "Size of popup card hint", "The size of the tooltip window for cards or permanents (use mouse wheel to switch text/image mode)");
         // Game's elements (from position 8)
         createSizeSetting(8, KEY_GUI_PLAYER_PANEL_SIZE, 14, false, "Size of player panel", "The size of the player panels on battlefield");
         createSizeSetting(9, KEY_GUI_CARD_BATTLEFIELD_SIZE, 14, false, "Size of permanents in battlefield", "Average permanents size on battlefield (app will auto-size it depends on free space");
@@ -594,30 +595,24 @@ public class PreferencesDialog extends javax.swing.JDialog {
         codes.add(KEY_GUI_CARD_OTHER_ZONES_SIZE);
 
         // x6 groups allowed here
+        // minimum system requirements: screen height > 750
+        // lower settings possible, but it's hard to use due low text and image quality
         Map<String, List<Integer>> sizes = new LinkedHashMap<>();
-        sizes.put("800 x 600", Arrays.asList( // TODO: fill
-                10, 10, 10, 10,
-                10, 10, 10, 10
-        ));
-        sizes.put("1024 x 768", Arrays.asList( // TODO: fill
-                10, 10, 10, 10,
-                10, 10, 10, 10
-        ));
-        sizes.put("1366 x 768", Arrays.asList( // TODO: fill
-                10, 10, 10, 10,
-                10, 10, 10, 10
+        sizes.put("1366 x 768", Arrays.asList(
+                10, 15, 17, 15,
+                10, 22, 14, 13
         ));
         sizes.put("1920 x 1080", Arrays.asList(
-                17, 15, 14, 20,
+                17, 18, 23, 20,
                 14, 30, 22, 21
         ));
-        sizes.put("2560 x 1440", Arrays.asList( // TODO: fill
-                10, 10, 10, 10,
-                10, 10, 10, 10
+        sizes.put("2560 x 1440", Arrays.asList(
+                23, 25, 35, 31,
+                18, 42, 31, 28
         ));
-        sizes.put("3840 x 2160", Arrays.asList( // TODO: fill
-                10, 10, 10, 10,
-                10, 10, 10, 10
+        sizes.put("3840 x 2160", Arrays.asList(
+                34, 37, 50, 55,
+                27, 64, 50, 44
         ));
 
         // set new settings on button clicks

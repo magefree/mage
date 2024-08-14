@@ -171,7 +171,7 @@ public final class GUISizeHelper {
 
         int battlefieldCardAvgSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_SIZE, 14);
         int battlefieldMinSize = guiSizeScale(battlefieldCardAvgSize, 0.5f);
-        int battlefieldMaxSize = guiSizeScale(battlefieldCardAvgSize, 2.0f);
+        int battlefieldMaxSize = guiSizeScale(battlefieldCardAvgSize, 1.5f);
         battlefieldCardMinDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldMinSize / 42, CARD_IMAGE_HEIGHT * battlefieldMinSize / 42);
         battlefieldCardMaxDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldMaxSize / 42, CARD_IMAGE_HEIGHT * battlefieldMaxSize / 42);
 
