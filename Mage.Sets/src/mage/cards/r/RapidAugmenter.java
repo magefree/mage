@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.BasePowerPredicate;
@@ -31,12 +32,6 @@ public final class RapidAugmenter extends CardImpl {
     static {
         filterBP1.add(AnotherPredicate.instance);
         filterBP1.add(new BasePowerPredicate(ComparisonType.EQUAL_TO, 1));
-    }
-
-    private static final FilterPermanent filterAnother = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filterAnother.add(AnotherPredicate.instance);
     }
 
     public RapidAugmenter(UUID ownerId, CardSetInfo setInfo) {
@@ -58,7 +53,7 @@ public final class RapidAugmenter extends CardImpl {
         // Whenever another creature you control enters, if it wasn't cast, put a +1/+1 counter on Rapid Augmenter
         // and Rapid Augmenter can't be blocked this turn.
         Ability ability2 = new EntersBattlefieldCastTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(
-                CounterType.P1P1.createInstance()), filterAnother,
+                CounterType.P1P1.createInstance()), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL,
                 false, SetTargetPointer.PERMANENT, false);
         ability2.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn).concatBy(" and "));
         this.addAbility(ability2);
