@@ -78,7 +78,7 @@ class YgraEaterOfAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), source, game)) {
-            if (permanent == game.getPermanent(source.getSourceId())) {
+            if (permanent.getId().equals(source.getSourceId())) {
                 continue;
             }
             switch (layer) {
