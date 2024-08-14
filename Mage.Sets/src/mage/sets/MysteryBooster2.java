@@ -213,11 +213,11 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Simian Spirit Guide", 61, Rarity.COMMON, mage.cards.s.SimianSpiritGuide.class));
         cards.add(new SetCardInfo("Skyclave Apparition", 18, Rarity.RARE, mage.cards.s.SkyclaveApparition.class));
         cards.add(new SetCardInfo("Smokestack", 232, Rarity.RARE, mage.cards.s.Smokestack.class));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 120, Rarity.COMMON, mage.cards.s.SnowCoveredForest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Island", 117, Rarity.COMMON, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 119, Rarity.COMMON, mage.cards.s.SnowCoveredMountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 116, Rarity.COMMON, mage.cards.s.SnowCoveredPlains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 118, Rarity.COMMON, mage.cards.s.SnowCoveredSwamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 120, Rarity.LAND, mage.cards.s.SnowCoveredForest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Island", 117, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 119, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 116, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 118, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Wastes", 121, Rarity.UNCOMMON, mage.cards.s.SnowCoveredWastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Snuff Out", 187, Rarity.COMMON, mage.cards.s.SnuffOut.class));
         cards.add(new SetCardInfo("Sol Ring", 233, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
