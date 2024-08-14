@@ -5,10 +5,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -18,7 +17,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
-import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.CardUtil;
 
@@ -42,7 +40,7 @@ public final class HazelsBrewmaster extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Whenever Hazel's Brewmaster enters or attacks, exile up to one target card from a graveyard and create a Food token.
-        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new HazelsBrewmasterExileEffect());
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ExileTargetEffect().setToSourceExileZone(true));
         ability.addTarget(new TargetCardInGraveyard(0, 1));
         ability.addEffect(new CreateTokenEffect(new FoodToken()).concatBy("and"));
         this.addAbility(ability);
@@ -58,33 +56,6 @@ public final class HazelsBrewmaster extends CardImpl {
     @Override
     public HazelsBrewmaster copy() {
         return new HazelsBrewmaster(this);
-    }
-}
-
-class HazelsBrewmasterExileEffect extends OneShotEffect {
-
-    HazelsBrewmasterExileEffect() {
-        super(Outcome.Benefit);
-        staticText = "exile up to one target card from a graveyard";
-    }
-
-    private HazelsBrewmasterExileEffect(final HazelsBrewmasterExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HazelsBrewmasterExileEffect copy() {
-        return new HazelsBrewmasterExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(source.getFirstTarget());
-        if (player == null || card == null) {
-            return false;
-        }
-        return player.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
     }
 }
 
