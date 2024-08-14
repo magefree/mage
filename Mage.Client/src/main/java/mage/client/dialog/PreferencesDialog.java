@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.*;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
+import java.util.stream.Collectors;
 
 import static mage.client.constants.Constants.AUTO_TARGET_NON_FEEL_BAD;
 import static mage.constants.Constants.*;
@@ -323,6 +324,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CONNECT_AUTO_CONNECT = "autoConnect";
     public static final String KEY_CONNECT_FLAG = "connectFlag";
 
+    // auto-update settings on first run
+    public static final String KEY_SETTINGS_VERSION = "settingsVersion";
+
     private static final Map<String, String> CACHE = new HashMap<>();
 
     public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
@@ -344,12 +348,119 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static boolean isLoadingSizes = false;
     private static boolean isLoadingTheme = false;
 
-    // GUI size default settings
-    private final Map<String, DefaultSizeSetting> defaultSizeSettings = new LinkedHashMap<>();
+    // GUI default size settings
+    private static final DefaultSizeSettings defaultSizeSettings = new DefaultSizeSettings();
 
-    static class DefaultSizeSetting {
-        String name;
-        Map<String, Integer> values; // settings key, value
+    public static class DefaultSizeSettings {
+
+        private final List<String> settingKeys = new ArrayList<>();
+        private final Map<String, List<Integer>> presetValues = new LinkedHashMap<>();
+        private final Map<String, Integer> presetMinHeights = new LinkedHashMap<>(); // preset name, minimum screen height
+
+        public DefaultSizeSettings() {
+            // prepare default size settings
+            // warning, make sure it use same order as createSizeSetting below
+            settingKeys.add(KEY_GUI_DIALOG_FONT_SIZE);
+            settingKeys.add(KEY_GUI_CHAT_FONT_SIZE);
+            settingKeys.add(KEY_GUI_CARD_EDITOR_SIZE);
+            settingKeys.add(KEY_GUI_TOOLTIP_SIZE);
+            //
+            settingKeys.add(KEY_GUI_PLAYER_PANEL_SIZE);
+            settingKeys.add(KEY_GUI_CARD_BATTLEFIELD_SIZE);
+            settingKeys.add(KEY_GUI_CARD_HAND_SIZE);
+            settingKeys.add(KEY_GUI_CARD_OTHER_ZONES_SIZE);
+
+            // x6 groups allowed here
+            // minimum system requirements: screen height > 750
+            // lower settings possible, but it's hard to use due low text and image quality
+            presetMinHeights.put("1366 x 768", 768);
+            presetValues.put("1366 x 768", Arrays.asList(
+                    10, 15, 17, 15,
+                    10, 22, 14, 13
+            ));
+            presetMinHeights.put("1920 x 1080", 1080);
+            presetValues.put("1920 x 1080", Arrays.asList(
+                    17, 18, 23, 20,
+                    14, 30, 22, 21
+            ));
+            presetMinHeights.put("2560 x 1440", 1440);
+            presetValues.put("2560 x 1440", Arrays.asList(
+                    23, 25, 35, 31,
+                    18, 42, 31, 28
+            ));
+            presetMinHeights.put("3840 x 2160", 2160);
+            presetValues.put("3840 x 2160", Arrays.asList(
+                    34, 37, 50, 55,
+                    27, 64, 50, 44
+            ));
+        }
+
+        public List<String> getAllPresets() {
+            return new ArrayList<>(presetValues.keySet());
+        }
+
+        public List<Integer> getPresetValues(String presetName) {
+            List<Integer> res = presetValues.getOrDefault(presetName, null);
+            if (res == null) {
+                throw new IllegalArgumentException("Wrong code usage: unknown size settings preset name " + presetName);
+            }
+            return res;
+        }
+
+        public String findBestPreset() {
+            int screenDPI = Toolkit.getDefaultToolkit().getScreenResolution();
+            int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+            return findBestPreset(screenDPI, screenHeight);
+        }
+
+        public String findBestPreset(int screenDPI, int screenHeight) {
+            // TODO: add java HiDPI monitors support here (or do not use preset on gui scale?)
+            // TODO: test with windows DPI settings
+            // TODO: test with windows compatibility settings https://github.com/magefree/mage/issues/969#issuecomment-2016809163
+            // TODO: test with java 9 scale command line params https://github.com/magefree/mage/issues/969#issuecomment-671055642
+
+            // find min preset (for too small screens)
+            String minPossiblePreset = null;
+            int minPossibleRes = Integer.MAX_VALUE;
+            for (String preset : presetMinHeights.keySet()) {
+                int res = presetMinHeights.get(preset);
+                if (res < minPossibleRes) {
+                    minPossibleRes = res;
+                    minPossiblePreset = preset;
+                }
+            }
+            if (minPossiblePreset == null) {
+                throw new IllegalArgumentException("must found min preset all the time");
+            }
+
+            // find max preset
+            String maxPossiblePreset = null;
+            int maxPossibleRes = Integer.MIN_VALUE;
+            for (String preset : presetMinHeights.keySet()) {
+                int res = presetMinHeights.get(preset);
+                if (res <= screenHeight && res > maxPossibleRes) {
+                    maxPossibleRes = res;
+                    maxPossiblePreset = preset;
+                }
+            }
+
+            return maxPossiblePreset != null ? maxPossiblePreset : minPossiblePreset;
+        }
+
+        public String getSettingsKeyByIndex(int index) {
+            return settingKeys.get(index);
+        }
+
+        public void applyPreset(String presetName) {
+            // WARNING, it's apply settings directly to storage and cache, so opened preferences dialog will be outdated
+            // so usage example: app's starting routine
+            List<Integer> values = getPresetValues(presetName);
+            for (int i = 0; i < values.size(); i++) {
+                String settingsKey = getSettingsKeyByIndex(i);
+                int settingsValue = values.get(i);
+                saveValue(settingsKey, String.valueOf(settingsValue));
+            }
+        }
     }
 
     // GUI size settings
@@ -566,7 +677,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         addAvatars();
 
         // prepare size table (you can change settings order by new position index)
-        // warning, if you change default values then make sure calculateGUISizes uses same
+        // WARNING, if you change default values then make sure calculateGUISizes uses same
+        // WARNING, make sure DefaultSizeSettings uses same settings keys
         // App's elements (from position 1)
         createSizeSetting(1, KEY_GUI_DIALOG_FONT_SIZE, 14, false, "Font in dialogs and menu", "The size of the font of messages, menu, dialogs and other windows");
         createSizeSetting(2, KEY_GUI_CHAT_FONT_SIZE, 14, false, "Font in logs and chats", "The size of the font used to display the chat text");
@@ -578,55 +690,40 @@ public class PreferencesDialog extends javax.swing.JDialog {
         createSizeSetting(10, KEY_GUI_CARD_HAND_SIZE, 14, false, "Size of cards in hand and stack", "The size of the card images in hand and on the stack");
         createSizeSetting(11, KEY_GUI_CARD_OTHER_ZONES_SIZE, 14, false, "Size of cards in other zones", "The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
 
+        // protection from wrong keys amount
+        if (sizeSettings.size() != defaultSizeSettings.presetValues.values().stream().findFirst().get().size()) {
+            throw new IllegalArgumentException("Wrong code usage: size and default size settings must contains same records");
+        } else {
+            // protection from wrong keys order
+            List<String> keys = new ArrayList<>(sizeSettings.keySet());
+            for (int i = 0; i < keys.size(); i++) {
+                if (!defaultSizeSettings.getSettingsKeyByIndex(i).equals(keys.get(i))) {
+                    throw new IllegalArgumentException("Wrong code usage: size and default size settings must use same ordered keys");
+                }
+            }
+        }
+
         // hide unused controls
         hideUnusedSizeSettings();
 
         // prepare default size settings
-        // warning, make sure it use same order as createSizeSetting above
-        List<String> codes = new ArrayList<>();
-        codes.add(KEY_GUI_DIALOG_FONT_SIZE);
-        codes.add(KEY_GUI_CHAT_FONT_SIZE);
-        codes.add(KEY_GUI_CARD_EDITOR_SIZE);
-        codes.add(KEY_GUI_TOOLTIP_SIZE);
-        //
-        codes.add(KEY_GUI_PLAYER_PANEL_SIZE);
-        codes.add(KEY_GUI_CARD_BATTLEFIELD_SIZE);
-        codes.add(KEY_GUI_CARD_HAND_SIZE);
-        codes.add(KEY_GUI_CARD_OTHER_ZONES_SIZE);
-
-        // x6 groups allowed here
-        // minimum system requirements: screen height > 750
-        // lower settings possible, but it's hard to use due low text and image quality
-        Map<String, List<Integer>> sizes = new LinkedHashMap<>();
-        sizes.put("1366 x 768", Arrays.asList(
-                10, 15, 17, 15,
-                10, 22, 14, 13
-        ));
-        sizes.put("1920 x 1080", Arrays.asList(
-                17, 18, 23, 20,
-                14, 30, 22, 21
-        ));
-        sizes.put("2560 x 1440", Arrays.asList(
-                23, 25, 35, 31,
-                18, 42, 31, 28
-        ));
-        sizes.put("3840 x 2160", Arrays.asList(
-                34, 37, 50, 55,
-                27, 64, 50, 44
-        ));
-
         // set new settings on button clicks
         int position = 0;
-        for (String groupName : sizes.keySet()) {
+        String recommendedPreset = defaultSizeSettings.findBestPreset();
+        for (String presetName : defaultSizeSettings.getAllPresets()) {
             position++;
             JButton button = GUISizeHelper.getComponentByFieldName(this, "buttonSizeDefault" + position);
-            button.setText(groupName);
+            String buttonName = presetName;
+            if (presetName.equals(recommendedPreset)) {
+                buttonName += " (recommended)";
+            }
+            button.setText(buttonName);
             button.addActionListener(e -> {
                 isLoadingSizes = true;
                 try {
-                    List<Integer> values = sizes.get(groupName);
+                    List<Integer> values = defaultSizeSettings.getPresetValues(presetName);
                     for (int i = 0; i < values.size(); i++) {
-                        sizeSettings.get(codes.get(i)).slider.setValue(values.get(i));
+                        sizeSettings.get(defaultSizeSettings.getSettingsKeyByIndex(i)).slider.setValue(values.get(i));
                     }
                 } finally {
                     isLoadingSizes = false;
@@ -3791,9 +3888,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         prefs.put(key, value);
         try {
             prefs.flush();
-        } catch (BackingStoreException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error: couldn't save preferences. Please try once again.");
+        } catch (BackingStoreException e) {
+            logger.error("Can't save preferences " + key + " due " + e, e);
         }
         updateCache(key, value);
     }
@@ -3915,6 +4011,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 keyToggleRecordMacro,
                 keySwitchChat
         );
+    }
+
+    public static DefaultSizeSettings getDefaultSizeSettings() {
+        return defaultSizeSettings;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

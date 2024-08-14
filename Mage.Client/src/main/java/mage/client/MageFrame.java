@@ -108,7 +108,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private final ConnectDialog connectDialog;
     private final ErrorDialog errorDialog;
     private static CallbackClient callbackClient;
-    private static final Preferences PREFS = Preferences.userNodeForPackage(MageFrame.class);
+    private static Preferences PREFS = null;
     private final JPanel fakeTopPanel;
     private WhatsNewDialog whatsNewDialog; // can be null
     private JLabel title;
@@ -142,14 +142,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static long startTime;
 
-    /**
-     * @return the session
-     */
     public static JDesktopPane getDesktop() {
         return desktopPane;
     }
 
+    // TODO: migrate to own preferences like MageSettings and add ready-only and fresh install modes support
+    //  current workaround - delete or rename whole registry tree in HKEY_CURRENT_USER\Software\JavaSoft\Prefs\mage\client
     public static Preferences getPreferences() {
+        if (PREFS == null) {
+            PREFS = Preferences.userNodeForPackage(MageFrame.class);
+        }
         return PREFS;
     }
 
@@ -885,7 +887,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public boolean autoConnect() {
-        boolean autoConnectParamValue = startUser != null || Boolean.parseBoolean(PREFS.get("autoConnect", "false"));
+        boolean autoConnectParamValue = startUser != null || Boolean.parseBoolean(MageFrame.getPreferences().get("autoConnect", "false"));
         boolean status = false;
         if (autoConnectParamValue) {
             LOGGER.info("Auto-connecting to " + MagePreferences.getServerAddress());
@@ -900,11 +902,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             int port = MagePreferences.getLastServerPort();
             String userName = MagePreferences.getLastServerUser();
             String password = MagePreferences.getLastServerPassword();
-            String proxyServer = PREFS.get("proxyAddress", "");
-            int proxyPort = Integer.parseInt(PREFS.get("proxyPort", "0"));
-            ProxyType proxyType = ProxyType.valueByText(PREFS.get("proxyType", "None"));
-            String proxyUsername = PREFS.get("proxyUsername", "");
-            String proxyPassword = PREFS.get("proxyPassword", "");
+            String proxyServer = MageFrame.getPreferences().get("proxyAddress", "");
+            int proxyPort = Integer.parseInt(MageFrame.getPreferences().get("proxyPort", "0"));
+            ProxyType proxyType = ProxyType.valueByText(MageFrame.getPreferences().get("proxyType", "None"));
+            String proxyUsername = MageFrame.getPreferences().get("proxyUsername", "");
+            String proxyPassword = MageFrame.getPreferences().get("proxyPassword", "");
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             currentConnection = new Connection();
             currentConnection.setUsername(userName);
@@ -1147,16 +1149,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
-            .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+                        .addComponent(mageToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(mageToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
         );
 
         pack();
@@ -1559,6 +1561,35 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     splash.update();
                 }
             }
+
+            // auto-update user settings here
+            // use case examples:
+            // - delete outdated data
+            // - migrate to new files formats
+            // - etc
+            int settingsVersion = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SETTINGS_VERSION, 0);
+            if (settingsVersion == 0) {
+                // fresh install or first run after 2024-08-14
+                // find best GUI size settings due screen resolution and DPI
+                LOGGER.info("settings: it's a first run, trying to apply GUI size settings");
+
+                int screenDPI = Toolkit.getDefaultToolkit().getScreenResolution();
+                int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+                LOGGER.info(String.format("settings: screen DPI - %d, screen height - %d", screenDPI, screenHeight));
+
+                // find preset for
+                String preset = PreferencesDialog.getDefaultSizeSettings().findBestPreset(screenDPI, screenHeight);
+                if (preset != null) {
+                    LOGGER.info("settings: selected preset " + preset);
+                    PreferencesDialog.getDefaultSizeSettings().applyPreset(preset);
+                } else {
+                    LOGGER.info("settings: WARNING, can't find compatible preset, use Preferences - GUI Size to setup your app");
+                }
+
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_SETTINGS_VERSION, String.valueOf(1));
+            }
+
+            // FIRST GUI CALL (create main window with all prepared frames, dialogs, etc)
             try {
                 instance = new MageFrame();
             } catch (Throwable e) {
