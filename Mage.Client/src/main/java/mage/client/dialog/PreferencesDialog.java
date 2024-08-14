@@ -414,10 +414,24 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
 
         public String findBestPreset(int screenDPI, int screenHeight) {
-            // TODO: add java HiDPI monitors support here (or do not use preset on gui scale?)
-            // TODO: test with windows DPI settings
-            // TODO: test with windows compatibility settings https://github.com/magefree/mage/issues/969#issuecomment-2016809163
-            // TODO: test with java 9 scale command line params https://github.com/magefree/mage/issues/969#issuecomment-671055642
+            // Possible use cases with DPI:
+            //
+            // 1. Normal mode, user setup DPI settings by OS (example: 120%):
+            // * DPI - bigger, resolution - lower
+            // * GUI components: safe to use screen coordinates and sizes
+            // * GUI graphics: must use better images quality to fix pixelated drawing on big DPI values
+            // - bug: pixelated images and text (possible fix: use smooth rendering hints on final stage with card image)
+            //
+            // 2. Java 9+ gui scale mode by -Dsun.java2d.uiScale=2
+            // * TODO: test with java 9 scale command line params https://github.com/magefree/mage/issues/969#issuecomment-671055642
+            //     looks like it works for linux systems only (can't reproduce it with Windows)
+            //
+            // 3. Windows compatibility mode with Override high DPI scaling behavior to System, see here https://github.com/magefree/mage/issues/969#issuecomment-2016809163
+            // * work with increased DPI settings or HiDPI monitors (?)
+            // * DPI - same (native?), resolution - lower
+            // * GUI components: safe to use screen coordinates and sizes
+            // * GUI graphics: safe to use default images - Windows uses smooth scaling for it, so no pixelated drawing
+            // - bug: smoothed images and text (nothing to fix?)
 
             // find min preset (for too small screens)
             String minPossiblePreset = null;
