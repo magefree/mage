@@ -102,7 +102,7 @@ class AlaniaDivergentStormCost extends CostImpl {
         this.getTargets().clearChosen();
         paid = false;
         if (this.getTargets().choose(Outcome.DrawCard, controllerId, source.getSourceId(), source, game)) {
-            Player opponent = game.getPlayer(this.getTargets().get(0).getTargets().get(0));
+            Player opponent = game.getPlayer(this.getTargets().getFirstTarget());
             if (opponent == null || !opponent.canRespond()){
                 return false;
             }
