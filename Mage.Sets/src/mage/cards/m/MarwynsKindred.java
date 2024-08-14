@@ -25,13 +25,13 @@ public final class MarwynsKindred extends CardImpl {
         this.getSpellAbility().addEffect(new MarwynsKindredEffect());
     }
 
-    private MarwynsKindred(final mage.cards.m.MarwynsKindred card) {
+    private MarwynsKindred(final MarwynsKindred card) {
         super(card);
     }
 
     @Override
     public mage.cards.m.MarwynsKindred copy() {
-        return new mage.cards.m.MarwynsKindred(this);
+        return new MarwynsKindred(this);
     }
 }
 
@@ -43,13 +43,13 @@ class MarwynsKindredEffect extends OneShotEffect {
         staticText = "conjure a card named Marwyn, the Nurturer and X cards named Llanowar Elves onto the battlefield";
     }
 
-    private MarwynsKindredEffect(final mage.cards.m.MarwynsKindredEffect effect) {
+    private MarwynsKindredEffect(final MarwynsKindredEffect effect) {
         super(effect);
     }
 
     @Override
-    public mage.cards.m.MarwynsKindredEffect copy() {
-        return new mage.cards.m.MarwynsKindredEffect(this);
+    public MarwynsKindredEffect copy() {
+        return new MarwynsKindredEffect(this);
     }
 
     @Override
