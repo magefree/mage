@@ -65,11 +65,7 @@ enum TwentyToedToadCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player == null || permanent == null) {
-            return false;
-        }
-        return permanent.getCounters(game).getTotalCount() >= 20
-                || player.getHand().size() >= 20;
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        return player != null && (player.getHand().size() >= 20 || (permanent != null && permanent.getCounters(game).getTotalCount() >= 20));
     }
 }
