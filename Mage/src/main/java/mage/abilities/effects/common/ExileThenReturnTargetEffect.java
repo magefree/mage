@@ -26,7 +26,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
     private final boolean yourControl;
     private final boolean textThatCard;
     private final PutCards putCards;
-    private Effect afterEffect = null;
+    private OneShotEffect afterEffect = null;
 
     public ExileThenReturnTargetEffect(boolean yourControl, boolean textThatCard) {
         this(yourControl, textThatCard, PutCards.BATTLEFIELD);
@@ -52,7 +52,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         return new ExileThenReturnTargetEffect(this);
     }
 
-    public ExileThenReturnTargetEffect withAfterEffect(Effect afterEffect) {
+    public ExileThenReturnTargetEffect withAfterEffect(OneShotEffect afterEffect) {
         this.afterEffect = afterEffect;
         return this;
     }
