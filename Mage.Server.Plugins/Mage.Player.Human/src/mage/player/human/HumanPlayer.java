@@ -2599,8 +2599,8 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // done button for "for up" choices only
-            boolean canEndChoice = (modes.getSelectedModes().size() >= modes.getMinModes() && modes.getMaxPawPrints() < 0) ||
-                    (modes.getSelectedPawPrints() >= modes.getMaxPawPrints() && modes.getMaxPawPrints() >= 0) ||
+            boolean canEndChoice = (modes.getSelectedModes().size() >= modes.getMinModes() && modes.getMaxPawPrints() == 0) ||
+                    (modes.getSelectedPawPrints() >= modes.getMaxPawPrints() && modes.getMaxPawPrints() > 0) ||
                     modes.isMayChooseNone();
             if (canEndChoice) {
                 modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
@@ -2609,7 +2609,7 @@ public class HumanPlayer extends PlayerImpl {
 
             // prepare dialog
             String message;
-            if (modes.getMaxPawPrints() < 0){
+            if (modes.getMaxPawPrints() == 0){
                 message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
                         + ", min " + modes.getMinModes() + ")";
             } else {
