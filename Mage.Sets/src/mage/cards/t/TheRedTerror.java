@@ -82,6 +82,7 @@ class TheRedTerrorTriggeredAbility extends TriggeredAbilityImpl {
             if (damage < 1) {
                 return false;
             }
+
             MageObject sourceObject = game.getObject(batchAllEvent1.getSourceId());
             if (sourceObject != null && sourceObject.getColor(game).isRed()) {
                 return true;
