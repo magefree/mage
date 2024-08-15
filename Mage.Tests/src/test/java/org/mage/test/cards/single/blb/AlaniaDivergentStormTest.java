@@ -163,7 +163,7 @@ public class AlaniaDivergentStormTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.HAND, playerA, "Faerie Guidemother"); // adventure card
         addCard(Zone.HAND, playerA, "Maximize Velocity");
         addCard(Zone.HAND, playerA, alania);
