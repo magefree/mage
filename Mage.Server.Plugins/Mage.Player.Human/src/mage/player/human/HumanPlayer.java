@@ -2578,20 +2578,38 @@ public class HumanPlayer extends PlayerImpl {
                     if (!modeText.isEmpty()) {
                         modeText = Character.toUpperCase(modeText.charAt(0)) + modeText.substring(1);
                     }
-                    modeMap.put(mode.getId(), modeIndex + ". " + modeText);
+                    StringBuilder sb = new StringBuilder();
+                    if (mode.getPawPrintValue() > 0){
+                        for (int i = 0; i < mode.getPawPrintValue(); ++i){
+                            sb.append("{P}");
+                        }
+                        sb.append(": ");
+                    } else {
+                        sb.append(modeIndex).append(". ");
+                    }
+                    modeMap.put(mode.getId(), sb.append(modeText).toString());
                 }
             }
 
             // done button for "for up" choices only
-            boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes() || modes.isMayChooseNone();
+            boolean canEndChoice = (modes.getSelectedModes().size() >= modes.getMinModes() && modes.getMaxPawPrints() == 0) ||
+                    (modes.getSelectedPawPrints() >= modes.getMaxPawPrints() && modes.getMaxPawPrints() > 0) ||
+                    modes.isMayChooseNone();
             if (canEndChoice) {
                 modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
             }
             modeMap.put(Modes.CHOOSE_OPTION_CANCEL_ID, "Cancel");
 
             // prepare dialog
-            String message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
-                    + ", min " + modes.getMinModes() + ")";
+            String message;
+            if (modes.getMaxPawPrints() == 0){
+                message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
+                        + ", min " + modes.getMinModes() + ")";
+            } else {
+                message = "Choose mode (selected " + modes.getSelectedPawPrints() + " of " + modes.getMaxPawPrints()
+                        + " {P})";
+            }
+
             if (obj != null) {
                 message = message + "<br>" + obj.getLogName();
             }
