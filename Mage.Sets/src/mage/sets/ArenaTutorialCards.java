@@ -6,6 +6,9 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
+ * Unofficial set with removed MTGA tutorial cards
+ * (it was introduced and later removed from Arena New Player Experience Extras)
+ *
  * @author Svyatoslav28
  */
 public final class ArenaTutorialCards extends ExpansionSet {

@@ -40,6 +40,5 @@ public final class ArenaNewPlayerExperienceExtras extends ExpansionSet {
         cards.add(new SetCardInfo("Take Vengeance", 13, Rarity.COMMON, mage.cards.t.TakeVengeance.class));
         cards.add(new SetCardInfo("Volcanic Dragon", 45, Rarity.UNCOMMON, mage.cards.v.VolcanicDragon.class));
         cards.add(new SetCardInfo("Waterknot", 22, Rarity.COMMON, mage.cards.w.Waterknot.class));
-
     }
 }

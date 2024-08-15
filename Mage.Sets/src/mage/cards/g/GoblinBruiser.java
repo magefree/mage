@@ -9,8 +9,8 @@ import mage.constants.SubType;
 import java.util.UUID;
 
 /**
-
- @author JayDi85*/
+ * @author JayDi85
+ */
 public final class GoblinBruiser extends CardImpl {
 
     public GoblinBruiser(UUID ownerId, CardSetInfo setInfo) {

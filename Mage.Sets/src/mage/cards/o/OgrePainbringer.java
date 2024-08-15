@@ -12,8 +12,8 @@ import mage.constants.TargetController;
 import java.util.UUID;
 
 /**
-
- @author JayDi85*/
+ * @author JayDi85
+ */
 public final class OgrePainbringer extends CardImpl {
 
     public OgrePainbringer(UUID ownerId, CardSetInfo setInfo) {

@@ -12,11 +12,12 @@ import mage.filter.predicate.mageobject.ToughnessPredicate;
 import java.util.UUID;
 
 /**
-
- @author JayDi85*/
+ * @author JayDi85
+ */
 public final class BlindingRadiance extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterOpponentsCreaturePermanent("creatures your opponents control with toughness 2 or less");
+
     static {
         filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
     }
