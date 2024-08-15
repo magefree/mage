@@ -5,9 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.RollDiceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -16,8 +15,6 @@ import mage.game.Game;
 import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -38,7 +35,7 @@ public final class AtomwheelAcrobats extends CardImpl {
         this.addAbility(new AtomwheelAcrobatsTriggeredAbility());
 
         // {2}{G}: Roll a six-sided die.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AtomwheelAcrobatsDieRollEffect(), new ManaCostsImpl<>("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(null, 6), new ManaCostsImpl<>("{2}{G}"));
         this.addAbility(ability);
     }
 
@@ -114,38 +111,7 @@ class AtomwheelAcrobatsCountersEffect extends OneShotEffect {
         }
         int amount = (Integer) getValue("rolled");
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount));
-        effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
-        effect.apply(game, source);
+        sourcePermanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
         return true;
     }
 }
-
-class AtomwheelAcrobatsDieRollEffect extends OneShotEffect {
-
-    AtomwheelAcrobatsDieRollEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Roll a six-sided die.";
-    }
-
-    private AtomwheelAcrobatsDieRollEffect(final AtomwheelAcrobatsDieRollEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AtomwheelAcrobatsDieRollEffect copy() {
-        return new AtomwheelAcrobatsDieRollEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.rollDice(outcome, source, game, 6,
-                    1, 0);
-            return true;
-        }
-        return false;
-    }
-}
-
