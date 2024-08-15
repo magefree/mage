@@ -29,7 +29,7 @@ public class FixedTargets extends TargetPointerImpl {
                 .collect(Collectors.toList()));
     }
 
-    public FixedTargets(Set<Card> objects, Game game) {
+    public FixedTargets(Set<? extends Card> objects, Game game) {
         this(objects
                 .stream()
                 .map(o -> new MageObjectReference(o.getId(), game))
