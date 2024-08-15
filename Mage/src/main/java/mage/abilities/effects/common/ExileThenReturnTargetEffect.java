@@ -2,7 +2,6 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -44,7 +43,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         this.putCards = effect.putCards;
         this.yourControl = effect.yourControl;
         this.textThatCard = effect.textThatCard;
-        this.afterEffect = effect.afterEffect;
+        this.afterEffect = effect.afterEffect == null ? null : effect.afterEffect.copy();
     }
 
     @Override
@@ -78,7 +77,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
                     yourControl ? controller : game.getPlayer(card.getOwnerId()),
                     card.getMainCard(), source, game, "card");
         }
-        if (afterEffect != null){
+        if (afterEffect != null) {
             afterEffect.setTargetPointer(new FixedTargets(toFlicker, game));
             afterEffect.apply(game, source);
         }
@@ -105,7 +104,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
             sb.append(this.yourControl ? "your" : "its owner's");
         }
         sb.append(" control");
-        if (afterEffect != null){
+        if (afterEffect != null) {
             sb.append(". ").append(CardUtil.getTextWithFirstCharUpperCase(afterEffect.getText(mode)));
         }
         return sb.toString();
