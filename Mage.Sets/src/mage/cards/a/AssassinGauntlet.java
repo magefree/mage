@@ -50,7 +50,7 @@ public final class AssassinGauntlet extends CardImpl {
         this.addAbility(boostAbility);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private AssassinGauntlet(final AssassinGauntlet card) {
