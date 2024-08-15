@@ -22,6 +22,9 @@ public final class GUISizeHelper {
     static final int CARD_IMAGE_HEIGHT = 445;
     static final int CARD_IMAG_VALUE = 42;
 
+    public static final float CARD_WIDTH_TO_HEIGHT_COEF = (1.0f * CARD_IMAGE_HEIGHT) / (1.0f * CARD_IMAGE_WIDTH);
+    public static final float CARD_HEIGHT_TO_WIDTH_COEF = (1.0f * CARD_IMAGE_WIDTH) / (1.0f * CARD_IMAGE_HEIGHT);
+
     public static String basicSymbolSize = "small";
     static final int MIN_FONT_SIZE = 7;
 
@@ -58,7 +61,6 @@ public final class GUISizeHelper {
     public static int gameFeedbackPanelButtonWidth;
 
     public static Dimension handCardDimension;
-    public static int stackWidth; // percent
 
     public static float playerPanelGuiScale;
     public static float dialogGuiScale;
@@ -156,7 +158,6 @@ public final class GUISizeHelper {
         // game - hand
         int handCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_HAND_SIZE, 14);
         handCardDimension = new Dimension(CARD_IMAGE_WIDTH * handCardSize / 42, CARD_IMAGE_HEIGHT * handCardSize / 42);
-        stackWidth = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_STACK_WIDTH, 30);
 
         int otherZonesCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OTHER_ZONES_SIZE, 14);
         otherZonesCardDimension = new Dimension(CARD_IMAGE_WIDTH * otherZonesCardSize / 42, CARD_IMAGE_HEIGHT * otherZonesCardSize / 42);
@@ -168,10 +169,11 @@ public final class GUISizeHelper {
             otherZonesCardVerticalOffset = otherZonesCardDimension.height / 10;
         }
 
-        int battlefieldCardMinSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE, 10);
-        battlefieldCardMinDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldCardMinSize / 42, CARD_IMAGE_HEIGHT * battlefieldCardMinSize / 42);
-        int battlefieldCardMaxSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE, 14);
-        battlefieldCardMaxDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldCardMaxSize / 42, CARD_IMAGE_HEIGHT * battlefieldCardMaxSize / 42);
+        int battlefieldCardAvgSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_BATTLEFIELD_SIZE, 14);
+        int battlefieldMinSize = guiSizeScale(battlefieldCardAvgSize, 0.5f);
+        int battlefieldMaxSize = guiSizeScale(battlefieldCardAvgSize, 1.5f);
+        battlefieldCardMinDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldMinSize / 42, CARD_IMAGE_HEIGHT * battlefieldMinSize / 42);
+        battlefieldCardMaxDimension = new Dimension(CARD_IMAGE_WIDTH * battlefieldMaxSize / 42, CARD_IMAGE_HEIGHT * battlefieldMaxSize / 42);
 
         // app - deck editor and draft
         int editorCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_EDITOR_SIZE, 14);

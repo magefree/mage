@@ -46,7 +46,7 @@ public final class PhantomBlade extends CardImpl {
         this.addAbility(boostAbility);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
 
     }
 

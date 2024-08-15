@@ -2167,6 +2167,9 @@ public class ScryfallImageSupportTokens {
             put("WOC/Spirit", "https://api.scryfall.com/cards/twoc/17/en?format=image");
             put("WOC/Virtuous", "https://api.scryfall.com/cards/twoc/3/en?format=image");
 
+            //WHO
+            put("WHO/Alien Insect", "https://api.scryfall.com/cards/twho/19/en?format=image");
+
             // 8ED
             put("8ED/Rukh", "https://api.scryfall.com/cards/p03/7/en?format=image");
 

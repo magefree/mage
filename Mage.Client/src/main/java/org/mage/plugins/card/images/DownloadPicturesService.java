@@ -88,7 +88,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         SCRYFALL_BIG("2a. scryfall.com - BIG: high quality (~15 GB)", ScryfallImageSource.getInstance()),
         SCRYFALL_NORM("2b. scryfall.com - normal: good quality (~10 GB)", ScryfallImageSourceNormal.getInstance()),
         SCRYFALL_SMALL("2c. scryfall.com - small: low quality, unreadable text (~1.5 GB)", ScryfallImageSourceSmall.getInstance()),
-        GRAB_BAG("3. GrabBag - unofficial STAR WARS cards and tokens", GrabbagImageSource.instance),
+        GRAB_BAG("3. GrabBag - unofficial STAR WARS + Arena Tutorial cards", GrabbagImageSource.instance),
         COPYPASTE("4. Experimental - copy and paste image URLs", CopyPasteImageSource.instance); // TODO: need rework for user friendly GUI
 
         private final String text;

@@ -52,6 +52,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bootleggers' Stash", 207, Rarity.MYTHIC, mage.cards.b.BootleggersStash.class));
         cards.add(new SetCardInfo("Boros Signet", 128, Rarity.UNCOMMON, mage.cards.b.BorosSignet.class));
         cards.add(new SetCardInfo("Boss's Chauffeur", 137, Rarity.RARE, mage.cards.b.BosssChauffeur.class));
+        cards.add(new SetCardInfo("Brightcap Badger", 28, Rarity.RARE, mage.cards.b.BrightcapBadger.class));
         cards.add(new SetCardInfo("Broken Wings", 208, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Brushland", 295, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Burnished Hart", 266, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
@@ -129,6 +130,8 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Harmonize", 120, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Haunted Mire", 311, Rarity.COMMON, mage.cards.h.HauntedMire.class));
         cards.add(new SetCardInfo("Haywire Mite", 274, Rarity.UNCOMMON, mage.cards.h.HaywireMite.class));
+        cards.add(new SetCardInfo("Hazel's Brewmaster", 17, Rarity.RARE, mage.cards.h.HazelsBrewmaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hazel's Brewmaster", 52, Rarity.RARE, mage.cards.h.HazelsBrewmaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hedron Archive", 275, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
         cards.add(new SetCardInfo("Helm of the Host", 276, Rarity.RARE, mage.cards.h.HelmOfTheHost.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 312, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
@@ -174,6 +177,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Morbid Opportunist", 183, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Mossfire Valley", 316, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 317, Rarity.RARE, mage.cards.m.MosswortBridge.class));
+        cards.add(new SetCardInfo("Murmuration", 10, Rarity.RARE, mage.cards.m.Murmuration.class));
         cards.add(new SetCardInfo("Mystic Monastery", 318, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Nadier's Nightblade", 184, Rarity.UNCOMMON, mage.cards.n.NadiersNightblade.class));
         cards.add(new SetCardInfo("Narset, Parter of Veils", 76, Rarity.RARE, mage.cards.n.NarsetParterOfVeils.class));
@@ -198,14 +202,17 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prairie Stream", 323, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Primeval Bounty", 232, Rarity.MYTHIC, mage.cards.p.PrimevalBounty.class));
         cards.add(new SetCardInfo("Promise of Loyalty", 148, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
+        cards.add(new SetCardInfo("Prosperous Bandit", 25, Rarity.RARE, mage.cards.p.ProsperousBandit.class));
         cards.add(new SetCardInfo("Prosperous Innkeeper", 121, Rarity.UNCOMMON, mage.cards.p.ProsperousInnkeeper.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 282, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 172, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Putrefy", 257, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
+        cards.add(new SetCardInfo("Pyreswipe Hawk", 26, Rarity.RARE, mage.cards.p.PyreswipeHawk.class));
         cards.add(new SetCardInfo("Raging Ravine", 324, Rarity.RARE, mage.cards.r.RagingRavine.class));
         cards.add(new SetCardInfo("Rain of Riches", 200, Rarity.RARE, mage.cards.r.RainOfRiches.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 233, Rarity.MYTHIC, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Rampant Growth", 234, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
+        cards.add(new SetCardInfo("Rapid Augmenter", 38, Rarity.RARE, mage.cards.r.RapidAugmenter.class));
         cards.add(new SetCardInfo("Rapid Hybridization", 111, Rarity.UNCOMMON, mage.cards.r.RapidHybridization.class));
         cards.add(new SetCardInfo("Ravenous Squirrel", 258, Rarity.UNCOMMON, mage.cards.r.RavenousSquirrel.class));
         cards.add(new SetCardInfo("Razorverge Thicket", 325, Rarity.RARE, mage.cards.r.RazorvergeThicket.class));
@@ -215,6 +222,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Riot Control", 151, Rarity.COMMON, mage.cards.r.RiotControl.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 235, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rites of Flourishing", 122, Rarity.RARE, mage.cards.r.RitesOfFlourishing.class));
+        cards.add(new SetCardInfo("Rolling Hamsphere", 39, Rarity.RARE, mage.cards.r.RollingHamsphere.class));
         cards.add(new SetCardInfo("Rootbound Crag", 326, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Rootcast Apprenticeship", 32, Rarity.RARE, mage.cards.r.RootcastApprenticeship.class));
         cards.add(new SetCardInfo("Rose Room Treasurer", 201, Rarity.RARE, mage.cards.r.RoseRoomTreasurer.class));
@@ -294,10 +302,13 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Trailtracker Scout", 35, Rarity.RARE, mage.cards.t.TrailtrackerScout.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 350, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Triskaidekaphile", 178, Rarity.RARE, mage.cards.t.Triskaidekaphile.class));
+        cards.add(new SetCardInfo("Twenty-Toed Toad", 16, Rarity.RARE, mage.cards.t.TwentyToedToad.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Twenty-Toed Toad", 51, Rarity.RARE, mage.cards.t.TwentyToedToad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twilight Mire", 351, Rarity.RARE, mage.cards.t.TwilightMire.class));
         cards.add(new SetCardInfo("Unnatural Growth", 245, Rarity.RARE, mage.cards.u.UnnaturalGrowth.class));
         cards.add(new SetCardInfo("Viridescent Bog", 352, Rarity.RARE, mage.cards.v.ViridescentBog.class));
         cards.add(new SetCardInfo("Warstorm Surge", 117, Rarity.RARE, mage.cards.w.WarstormSurge.class));
+        cards.add(new SetCardInfo("Wildsear, Scouring Maw", 8, Rarity.MYTHIC, mage.cards.w.WildsearScouringMaw.class));
         cards.add(new SetCardInfo("Windgrace's Judgment", 263, Rarity.RARE, mage.cards.w.WindgracesJudgment.class));
         cards.add(new SetCardInfo("Wizard Class", 112, Rarity.UNCOMMON, mage.cards.w.WizardClass.class));
         cards.add(new SetCardInfo("Woe Strider", 189, Rarity.RARE, mage.cards.w.WoeStrider.class));

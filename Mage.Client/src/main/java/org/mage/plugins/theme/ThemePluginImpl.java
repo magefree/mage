@@ -17,6 +17,8 @@ import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
 
+// TODO: delete as un-used and moved background images in main code
+
 @PluginImplementation
 @Author(name = "nantuko")
 /* udpated by Noahsark */
@@ -83,7 +85,10 @@ public class ThemePluginImpl implements ThemePlugin {
                 ImagePanel bgPanel = new ImagePanel(backgroundImage, ImagePanelStyle.TILED);
 
                 // TODO: research - is all components used? And why it make transparent?
-                unsetOpaque(ui.get("jSplitPane1"));
+                unsetOpaque(ui.get("splitChatAndLogs"));
+                unsetOpaque(ui.get("splitHandAndStack"));
+                unsetOpaque(ui.get("splitBattlefieldAndChats"));
+                unsetOpaque(ui.get("splitGameAndBigCard"));
                 unsetOpaque(ui.get("pnlBattlefield"));
                 unsetOpaque(ui.get("pnlHelperHandButtonsStackArea"));
                 unsetOpaque(ui.get("hand"));

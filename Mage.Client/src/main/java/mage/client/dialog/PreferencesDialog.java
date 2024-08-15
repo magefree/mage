@@ -3,8 +3,6 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.components.KeyBindButton;
-import static mage.client.constants.Constants.AUTO_TARGET_NON_FEEL_BAD;
-import static mage.client.constants.Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR;
 import mage.client.themes.ThemeType;
 import mage.client.util.CardLanguage;
 import mage.client.util.ClientDefaultSettings;
@@ -12,8 +10,6 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.BufferedImageBuilder;
-import static mage.constants.Constants.*;
-
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
@@ -38,6 +34,10 @@ import java.util.List;
 import java.util.*;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
+import java.util.stream.Collectors;
+
+import static mage.client.constants.Constants.AUTO_TARGET_NON_FEEL_BAD;
+import static mage.constants.Constants.*;
 
 /**
  * GUI: preferences dialog with all user settings
@@ -46,7 +46,6 @@ import java.util.prefs.Preferences;
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
-    // TODO: add chat font changes in real time (current code require to app restart)
     // TODO: fix card hand size (hand panel can't show full card on too big values - must use auto-height)
 
     private static final Logger logger = Logger.getLogger(PreferencesDialog.class);
@@ -60,27 +59,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_SHOW_PLAYER_NAMES_PERMANENTLY = "showPlayerNamesPermanently";
     public static final String KEY_DISPLAY_LIVE_ON_AVATAR = "displayLiveOnAvatar";
-    public static final String KEY_SHOW_ABILITY_PICKER_FORCED = "showAbilityPicker";
     public static final String KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS = "gameAllowRequestShowHandCards";
     public static final String KEY_GAME_CONFIRM_EMPTY_MANA_POOL = "gameConfirmEmptyManaPool";
     public static final String KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER = "gameAskMoveToGraveORder";
     public static final String KEY_GAME_USE_PROFANITY_FILTER = "gameUseProfanityFilter";
 
-    public static final String KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE = "battlefieldFeedbackColorizingMode";
-
     // size settings
-    public static final String KEY_GUI_CHAT_FONT_SIZE = "guiChatFontSize";
+    public static final String KEY_GUI_CARD_BATTLEFIELD_SIZE = "guiCardBattlefieldSize";
     public static final String KEY_GUI_CARD_HAND_SIZE = "guiCardHandSize";
     public static final String KEY_GUI_CARD_EDITOR_SIZE = "guiCardEditorSize";
-    public static final String KEY_GUI_STACK_WIDTH = "guiStackWidth";
-    public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
-    public static final String KEY_GUI_DIALOG_FONT_SIZE = "guiDialogFontSize";
     public static final String KEY_GUI_CARD_OTHER_ZONES_SIZE = "guiCardOtherZonesSize";
-    public static final String KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE = "guiCardBattlefieldMinSize";
-    public static final String KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE = "guiCardBattlefieldMaxSize";
+    public static final String KEY_GUI_DIALOG_FONT_SIZE = "guiDialogFontSize";
+    public static final String KEY_GUI_CHAT_FONT_SIZE = "guiChatFontSize";
     public static final String KEY_GUI_PLAYER_PANEL_SIZE = "guiPlayerPanelSize";
+    public static final String KEY_GUI_TOOLTIP_SIZE = "guiTooltipSize";
 
-    public static final String KEY_GAME_LOG_SHOW_TURN_INFO = "gameLogShowTurnInfo";
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
     public static final String KEY_DRAFT_LOG_AUTO_SAVE = "draftLogAutoSave";
     public static final String KEY_LIMITED_DECK_AUTO_SAVE = "draftLimitedAutoSave";
@@ -113,8 +106,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_SOUNDS_MATCH_MUSIC_ON = "soundsMatchMusicOn";
     public static final String SOUNDS_MATCH_MUSIC_ENABLE_BY_DEFAULT = "true";
     public static final String KEY_SOUNDS_MATCH_MUSIC_PATH = "soundsMatchMusicPath";
-
-    public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
     // Themes
     public static final String KEY_THEME = "themeSelection";
@@ -153,7 +144,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE = "gameManaAutopaymentOnlyOne";
 
     // Size of frame to check if divider locations should be used
-    public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";
+    public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize"; // TODO: remove?
 
     // pref settings of table settings and filtering
     public static final String KEY_TABLES_FILTER_SETTINGS = "tablePanelFilterSettings";
@@ -189,9 +180,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_TABLE_WAITING_COLUMNS_WIDTH = "tableWaitingPanelColumnWidth";
     public static final String KEY_TABLE_WAITING_COLUMNS_ORDER = "tableWaitingPanelColumnSort";
 
-    public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_0 = "gamepanelDividerLocation0";
-    public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_1 = "gamepanelDividerLocation1";
-    public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_2 = "gamepanelDividerLocation2";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_GAME_AND_BIG_CARD = "gamepanelDividerLocationsGameAndBigCard";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_BATTLEFIELD_AND_CHATS = "gamepanelDividerLocationsBattlefieldAndChats";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_HAND_STACK = "gamepanelDividerLocationsHandStack";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATIONS_CHAT_AND_LOGS = "gamepanelDividerLocationsChatAndLogs";
 
     public static final String KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH = "tournamentPlayerPanelColumnWidth";
     public static final String KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER = "tournamentPlayerPanelColumnSort";
@@ -332,6 +324,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CONNECT_AUTO_CONNECT = "autoConnect";
     public static final String KEY_CONNECT_FLAG = "connectFlag";
 
+    // auto-update settings on first run
+    public static final String KEY_SETTINGS_VERSION = "settingsVersion";
+
     private static final Map<String, String> CACHE = new HashMap<>();
 
     public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
@@ -352,6 +347,135 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // prevent fast settings apply on form loading
     private static boolean isLoadingSizes = false;
     private static boolean isLoadingTheme = false;
+
+    // GUI default size settings
+    private static final DefaultSizeSettings defaultSizeSettings = new DefaultSizeSettings();
+
+    public static class DefaultSizeSettings {
+
+        private final List<String> settingKeys = new ArrayList<>();
+        private final Map<String, List<Integer>> presetValues = new LinkedHashMap<>();
+        private final Map<String, Integer> presetMinHeights = new LinkedHashMap<>(); // preset name, minimum screen height
+
+        public DefaultSizeSettings() {
+            // prepare default size settings
+            // warning, make sure it use same order as createSizeSetting below
+            settingKeys.add(KEY_GUI_DIALOG_FONT_SIZE);
+            settingKeys.add(KEY_GUI_CHAT_FONT_SIZE);
+            settingKeys.add(KEY_GUI_CARD_EDITOR_SIZE);
+            settingKeys.add(KEY_GUI_TOOLTIP_SIZE);
+            //
+            settingKeys.add(KEY_GUI_PLAYER_PANEL_SIZE);
+            settingKeys.add(KEY_GUI_CARD_BATTLEFIELD_SIZE);
+            settingKeys.add(KEY_GUI_CARD_HAND_SIZE);
+            settingKeys.add(KEY_GUI_CARD_OTHER_ZONES_SIZE);
+
+            // x6 groups allowed here
+            // minimum system requirements: screen height > 750
+            // lower settings possible, but it's hard to use due low text and image quality
+            presetMinHeights.put("1366 x 768", 768);
+            presetValues.put("1366 x 768", Arrays.asList(
+                    10, 15, 17, 15,
+                    10, 22, 14, 13
+            ));
+            presetMinHeights.put("1920 x 1080", 1080);
+            presetValues.put("1920 x 1080", Arrays.asList(
+                    17, 18, 23, 20,
+                    14, 30, 22, 21
+            ));
+            presetMinHeights.put("2560 x 1440", 1440);
+            presetValues.put("2560 x 1440", Arrays.asList(
+                    23, 25, 35, 31,
+                    18, 42, 31, 28
+            ));
+            presetMinHeights.put("3840 x 2160", 2160);
+            presetValues.put("3840 x 2160", Arrays.asList(
+                    34, 37, 50, 55,
+                    27, 64, 50, 44
+            ));
+        }
+
+        public List<String> getAllPresets() {
+            return new ArrayList<>(presetValues.keySet());
+        }
+
+        public List<Integer> getPresetValues(String presetName) {
+            List<Integer> res = presetValues.getOrDefault(presetName, null);
+            if (res == null) {
+                throw new IllegalArgumentException("Wrong code usage: unknown size settings preset name " + presetName);
+            }
+            return res;
+        }
+
+        public String findBestPreset() {
+            int screenDPI = Toolkit.getDefaultToolkit().getScreenResolution();
+            int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+            return findBestPreset(screenDPI, screenHeight);
+        }
+
+        public String findBestPreset(int screenDPI, int screenHeight) {
+            // Possible use cases with DPI:
+            //
+            // 1. Normal mode, user setup DPI settings by OS (example: 120%):
+            // * DPI - bigger, resolution - lower
+            // * GUI components: safe to use screen coordinates and sizes
+            // * GUI graphics: must use better images quality to fix pixelated drawing on big DPI values
+            // - bug: pixelated images and text (possible fix: use smooth rendering hints on final stage with card image)
+            //
+            // 2. Java 9+ gui scale mode by -Dsun.java2d.uiScale=2
+            // * TODO: test with java 9 scale command line params https://github.com/magefree/mage/issues/969#issuecomment-671055642
+            //     looks like it works for linux systems only (can't reproduce it with Windows)
+            //
+            // 3. Windows compatibility mode with Override high DPI scaling behavior to System, see here https://github.com/magefree/mage/issues/969#issuecomment-2016809163
+            // * work with increased DPI settings or HiDPI monitors (?)
+            // * DPI - same (native?), resolution - lower
+            // * GUI components: safe to use screen coordinates and sizes
+            // * GUI graphics: safe to use default images - Windows uses smooth scaling for it, so no pixelated drawing
+            // - bug: smoothed images and text (nothing to fix?)
+
+            // find min preset (for too small screens)
+            String minPossiblePreset = null;
+            int minPossibleRes = Integer.MAX_VALUE;
+            for (String preset : presetMinHeights.keySet()) {
+                int res = presetMinHeights.get(preset);
+                if (res < minPossibleRes) {
+                    minPossibleRes = res;
+                    minPossiblePreset = preset;
+                }
+            }
+            if (minPossiblePreset == null) {
+                throw new IllegalArgumentException("must found min preset all the time");
+            }
+
+            // find max preset
+            String maxPossiblePreset = null;
+            int maxPossibleRes = Integer.MIN_VALUE;
+            for (String preset : presetMinHeights.keySet()) {
+                int res = presetMinHeights.get(preset);
+                if (res <= screenHeight && res > maxPossibleRes) {
+                    maxPossibleRes = res;
+                    maxPossiblePreset = preset;
+                }
+            }
+
+            return maxPossiblePreset != null ? maxPossiblePreset : minPossiblePreset;
+        }
+
+        public String getSettingsKeyByIndex(int index) {
+            return settingKeys.get(index);
+        }
+
+        public void applyPreset(String presetName) {
+            // WARNING, it's apply settings directly to storage and cache, so opened preferences dialog will be outdated
+            // so usage example: app's starting routine
+            List<Integer> values = getPresetValues(presetName);
+            for (int i = 0; i < values.size(); i++) {
+                String settingsKey = getSettingsKeyByIndex(i);
+                int settingsValue = values.get(i);
+                saveValue(settingsKey, String.valueOf(settingsValue));
+            }
+        }
+    }
 
     // GUI size settings
     private final Map<String, SizeSetting> sizeSettings = new LinkedHashMap<>();
@@ -391,13 +515,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
             this.editor.setText("99");
 
+            // TODO: sample text is useless for UX, it's better to have popup screenshot with selected element
             this.sample.setText("Move mouse to view sample");
 
             // repeat all IDE settings, so no need to change in each instance by IDE
             // only component size must be changed by IDE
             this.slider.setMajorTickSpacing(15);
             this.slider.setMaximum(99);
-            this.slider.setMinimum(10);
+            this.slider.setMinimum(7);
             this.slider.setMinorTickSpacing(5);
             this.slider.setPaintLabels(false);
             this.slider.setPaintTicks(true);
@@ -566,22 +691,68 @@ public class PreferencesDialog extends javax.swing.JDialog {
         addAvatars();
 
         // prepare size table (you can change settings order by new position index)
-        // warning, if you change default values then make sure calculateGUISizes uses same
+        // WARNING, if you change default values then make sure calculateGUISizes uses same
+        // WARNING, make sure DefaultSizeSettings uses same settings keys
         // App's elements (from position 1)
-        createSizeSetting(1, KEY_GUI_DIALOG_FONT_SIZE, 14, true, "Font in dialogs and menu", "The size of the font of messages, menu, dialogs and other windows");
-        createSizeSetting(2, KEY_GUI_CHAT_FONT_SIZE, 14, true, "Font in logs and chats", "The size of the font used to display the chat text");
-        createSizeSetting(3, KEY_GUI_CARD_EDITOR_SIZE,14, false, "Size of cards in editor and draft panels", "The size of the card in editor and the picked zone of the draft panel ");
-        createSizeSetting(4, KEY_GUI_TOOLTIP_SIZE,17, true, "Size of popup card hint", "The size of the tooltip window for cards or permanents (use mouse wheel to switch text/image mode)");
+        createSizeSetting(1, KEY_GUI_DIALOG_FONT_SIZE, 14, false, "Font in dialogs and menu", "The size of the font of messages, menu, dialogs and other windows");
+        createSizeSetting(2, KEY_GUI_CHAT_FONT_SIZE, 14, false, "Font in logs and chats", "The size of the font used to display the chat text");
+        createSizeSetting(3, KEY_GUI_CARD_EDITOR_SIZE, 14, false, "Size of cards in editor and draft panels", "The size of the card in editor and the picked zone of the draft panel ");
+        createSizeSetting(4, KEY_GUI_TOOLTIP_SIZE, 17, false, "Size of popup card hint", "The size of the tooltip window for cards or permanents (use mouse wheel to switch text/image mode)");
         // Game's elements (from position 8)
-        createSizeSetting(8, KEY_GUI_PLAYER_PANEL_SIZE,14, false, "Size of player panel", "The size of the player panels on battlefield");
-        createSizeSetting(9, KEY_GUI_CARD_HAND_SIZE,14, false, "Size of cards in hand and stack", "The size of the card images in hand and on the stack");
-        createSizeSetting(10, KEY_GUI_STACK_WIDTH,14, false, "Size of stack zone (right of the hand)", "The % size of the stack object area in relation to the hand card area size."); // TODO: delete
-        createSizeSetting(11, KEY_GUI_CARD_OTHER_ZONES_SIZE,14, false, "Size of cards in other zones", "The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
-        createSizeSetting(12, KEY_GUI_CARD_BATTLEFIELD_MIN_SIZE,10, false, "Size of permanents (min)", "The minimum size of permanents on the battlefield");
-        createSizeSetting(13, KEY_GUI_CARD_BATTLEFIELD_MAX_SIZE,14, false, "Size of permanents (max)", "The maximum size of permanents on the battlefield");
+        createSizeSetting(8, KEY_GUI_PLAYER_PANEL_SIZE, 14, false, "Size of player panel", "The size of the player panels on battlefield");
+        createSizeSetting(9, KEY_GUI_CARD_BATTLEFIELD_SIZE, 14, false, "Size of permanents in battlefield", "Average permanents size on battlefield (app will auto-size it depends on free space");
+        createSizeSetting(10, KEY_GUI_CARD_HAND_SIZE, 14, false, "Size of cards in hand and stack", "The size of the card images in hand and on the stack");
+        createSizeSetting(11, KEY_GUI_CARD_OTHER_ZONES_SIZE, 14, false, "Size of cards in other zones", "The size of card in other game zone (e.g. graveyard, revealed cards etc.)");
+
+        // protection from wrong keys amount
+        if (sizeSettings.size() != defaultSizeSettings.presetValues.values().stream().findFirst().get().size()) {
+            throw new IllegalArgumentException("Wrong code usage: size and default size settings must contains same records");
+        } else {
+            // protection from wrong keys order
+            List<String> keys = new ArrayList<>(sizeSettings.keySet());
+            for (int i = 0; i < keys.size(); i++) {
+                if (!defaultSizeSettings.getSettingsKeyByIndex(i).equals(keys.get(i))) {
+                    throw new IllegalArgumentException("Wrong code usage: size and default size settings must use same ordered keys");
+                }
+            }
+        }
 
         // hide unused controls
         hideUnusedSizeSettings();
+
+        // prepare default size settings
+        // set new settings on button clicks
+        int position = 0;
+        String recommendedPreset = defaultSizeSettings.findBestPreset();
+        for (String presetName : defaultSizeSettings.getAllPresets()) {
+            position++;
+            JButton button = GUISizeHelper.getComponentByFieldName(this, "buttonSizeDefault" + position);
+            String buttonName = presetName;
+            if (presetName.equals(recommendedPreset)) {
+                buttonName += " (recommended)";
+            }
+            button.setText(buttonName);
+            button.addActionListener(e -> {
+                isLoadingSizes = true;
+                try {
+                    List<Integer> values = defaultSizeSettings.getPresetValues(presetName);
+                    for (int i = 0; i < values.size(); i++) {
+                        sizeSettings.get(defaultSizeSettings.getSettingsKeyByIndex(i)).slider.setValue(values.get(i));
+                    }
+                } finally {
+                    isLoadingSizes = false;
+                }
+                saveGUISize(true, false);
+            });
+        }
+
+        // hide unused buttons
+        for (int i = panelSizeDefaultSettings.getComponentCount() - 1; i >= 0; i--) {
+            JButton button = (JButton) panelSizeDefaultSettings.getComponent(i);
+            if (button.getText().startsWith("set to default")) {
+                panelSizeDefaultSettings.remove(button);
+            }
+        }
 
         cbPreferredImageLanguage.setModel(new DefaultComboBoxModel<>(CardLanguage.toList()));
         cbNumberOfDownloadThreads.setModel(new DefaultComboBoxModel<>(new String[]{"10", "9", "8", "7", "6", "5", "4", "3", "2", "1"}));
@@ -638,7 +809,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabsPanel = new javax.swing.JTabbedPane();
         tabMain = new javax.swing.JPanel();
         main_gamelog = new javax.swing.JPanel();
-        cbGameLogShowTurnInfo = new javax.swing.JCheckBox();
         cbGameLogAutoSave = new javax.swing.JCheckBox();
         cbDraftLogAutoSave = new javax.swing.JCheckBox();
         cbLimitedDeckAutoSave = new javax.swing.JCheckBox();
@@ -652,15 +822,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
         showPlayerNamesPermanently = new javax.swing.JCheckBox();
         displayLifeOnAvatar = new javax.swing.JCheckBox();
-        showAbilityPickerForced = new javax.swing.JCheckBox();
         cbAllowRequestToShowHandCards = new javax.swing.JCheckBox();
         cbConfirmEmptyManaPool = new javax.swing.JCheckBox();
         cbAskMoveToGraveOrder = new javax.swing.JCheckBox();
         lblTargetAutoChoose = new javax.swing.JLabel();
         cbTargetAutoChooseLevel = new javax.swing.JComboBox<>();
-        main_battlefield = new javax.swing.JPanel();
-        cbBattlefieldFeedbackColorizingMode = new javax.swing.JComboBox();
-        lblBattlefieldFeedbackColorizingMode = new javax.swing.JLabel();
         tabAvatars = new javax.swing.JPanel();
         avatarPane = new javax.swing.JScrollPane();
         avatarPanel = new javax.swing.JPanel();
@@ -689,6 +855,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel32 = new javax.swing.JPanel();
         jPanel33 = new javax.swing.JPanel();
         tabGuiSize = new javax.swing.JPanel();
+        panelSizeDefaultSettings = new javax.swing.JPanel();
+        buttonSizeDefault1 = new javax.swing.JButton();
+        buttonSizeDefault2 = new javax.swing.JButton();
+        buttonSizeDefault3 = new javax.swing.JButton();
+        buttonSizeDefault4 = new javax.swing.JButton();
+        buttonSizeDefault5 = new javax.swing.JButton();
+        buttonSizeDefault6 = new javax.swing.JButton();
         panelSizeDetailedSettings = new javax.swing.JPanel();
         labelSizeGroup1 = new javax.swing.JLabel();
         panelSize1 = new javax.swing.JPanel();
@@ -892,11 +1065,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_gamelog.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game log"));
         main_gamelog.setLayout(new javax.swing.BoxLayout(main_gamelog, javax.swing.BoxLayout.PAGE_AXIS));
 
-        cbGameLogShowTurnInfo.setSelected(true);
-        cbGameLogShowTurnInfo.setText("Show turn info in game logs (example: 19:01 T2.DA: game message)");
-        cbGameLogShowTurnInfo.setToolTipText("Add turn number and step info after time in game logs");
-        main_gamelog.add(cbGameLogShowTurnInfo);
-
         cbGameLogAutoSave.setSelected(true);
         cbGameLogAutoSave.setText("Save game logs (dest folder: \"..\\xmage\\mage-client\\gamelogs\")");
         cbGameLogAutoSave.setToolTipText("The logs of all your games will be saved to the mentioned folder if this option is switched on.");
@@ -996,10 +1164,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         displayLifeOnAvatar.setText("Display life on avatar image");
         displayLifeOnAvatar.setToolTipText("Display the player's life over its avatar image.");
 
-        showAbilityPickerForced.setSelected(true);
-        showAbilityPickerForced.setText("Show ability picker for 1 available option (spells without costs, mdf/split side, adventure)");
-        showAbilityPickerForced.setToolTipText("This prevents you from accidently activating abilities what you don't want (example: if you haven't mana to cast main side, but clicks on mdf card and play land instead)");
-
         cbAllowRequestToShowHandCards.setSelected(true);
         cbAllowRequestToShowHandCards.setText("Allow requests from players and spectators to show your hand cards");
         cbAllowRequestToShowHandCards.setToolTipText("<html>This is the default setting used for your matches. If activated other players or spectators<br>\nof your match can send a request so you can allow them to see your hand cards.");
@@ -1035,10 +1199,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                         .add(showPlayerNamesPermanently, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(nonLandPermanentsInOnePile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(cbConfirmEmptyManaPool, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(showAbilityPickerForced)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(cbConfirmEmptyManaPool, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+                        .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
         main_gameLayout.setVerticalGroup(
             main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -1048,9 +1211,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(showPlayerNamesPermanently)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(displayLifeOnAvatar)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(showAbilityPickerForced)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(cbAllowRequestToShowHandCards)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(cbConfirmEmptyManaPool)
@@ -1059,42 +1220,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(lblTargetAutoChoose)
-                    .add(cbTargetAutoChooseLevel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(cbTargetAutoChooseLevel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
         cbTargetAutoChooseLevel.getAccessibleContext().setAccessibleName("Auto-choose targets for player combo box");
-
-        main_battlefield.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Battlefield"));
-
-        cbBattlefieldFeedbackColorizingMode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Disable colorizing", "Enable one color for all phases", "Enable multicolor for different phases" }));
-        cbBattlefieldFeedbackColorizingMode.setToolTipText("Battlefield feedback panel colorizing on your turn (e.g. use green color if you must select card or answer to request)");
-        cbBattlefieldFeedbackColorizingMode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbBattlefieldFeedbackColorizingModeActionPerformed(evt);
-            }
-        });
-
-        lblBattlefieldFeedbackColorizingMode.setLabelFor(cbBattlefieldFeedbackColorizingMode);
-        lblBattlefieldFeedbackColorizingMode.setText("Feedback panel colorizing:");
-
-        org.jdesktop.layout.GroupLayout main_battlefieldLayout = new org.jdesktop.layout.GroupLayout(main_battlefield);
-        main_battlefield.setLayout(main_battlefieldLayout);
-        main_battlefieldLayout.setHorizontalGroup(
-            main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_battlefieldLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(lblBattlefieldFeedbackColorizingMode)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbBattlefieldFeedbackColorizingMode, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 278, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        main_battlefieldLayout.setVerticalGroup(
-            main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(main_battlefieldLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                .add(lblBattlefieldFeedbackColorizingMode)
-                .add(cbBattlefieldFeedbackColorizingMode, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        );
 
         org.jdesktop.layout.GroupLayout tabMainLayout = new org.jdesktop.layout.GroupLayout(tabMain);
         tabMain.setLayout(tabMainLayout);
@@ -1105,8 +1236,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(tabMainLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, main_card, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, main_gamelog, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(main_game, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, main_battlefield, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(main_game, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabMainLayout.setVerticalGroup(
@@ -1118,9 +1248,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(main_game, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(main_battlefield, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(20, 20, 20))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -1586,6 +1714,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("My Avatar", tabAvatars);
 
+        panelSizeDefaultSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Choose predefined settings due your screen size"));
+        panelSizeDefaultSettings.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
+
+        buttonSizeDefault1.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault1);
+
+        buttonSizeDefault2.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault2);
+
+        buttonSizeDefault3.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault3);
+
+        buttonSizeDefault4.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault4);
+
+        buttonSizeDefault5.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault5);
+
+        buttonSizeDefault6.setText("set to default");
+        panelSizeDefaultSettings.add(buttonSizeDefault6);
+
         panelSizeDetailedSettings.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Detailed settings"));
         panelSizeDetailedSettings.setLayout(new java.awt.GridLayout(16, 1));
 
@@ -1939,14 +2088,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
             tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabGuiSizeLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panelSizeDetailedSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(panelSizeDetailedSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
+                    .add(panelSizeDefaultSettings, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabGuiSizeLayout.setVerticalGroup(
             tabGuiSizeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabGuiSizeLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panelSizeDetailedSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 534, Short.MAX_VALUE)
+                .add(panelSizeDefaultSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(panelSizeDetailedSettings, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 510, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -2847,27 +3000,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false");
         save(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true", "false");
         save(prefs, dialog.displayLifeOnAvatar, KEY_DISPLAY_LIVE_ON_AVATAR, "true", "false");
-        save(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true", "false");
         save(prefs, dialog.cbAllowRequestToShowHandCards, KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true", "false");
         save(prefs, dialog.cbConfirmEmptyManaPool, KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true", "false");
         save(prefs, dialog.cbAskMoveToGraveOrder, KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true", "false");
-        save(prefs, dialog.cbGameLogShowTurnInfo, KEY_GAME_LOG_SHOW_TURN_INFO, "true", "false");
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false");
         save(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true", "false");
         save(prefs, dialog.cbLimitedDeckAutoSave, KEY_LIMITED_DECK_AUTO_SAVE, "true", "false");
         save(prefs, dialog.cbGameJsonLogAutoSave, KEY_JSON_GAME_LOG_AUTO_SAVE, "true", "false");
 
-        String paramName = KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE;
-        int paramValue = dialog.cbBattlefieldFeedbackColorizingMode.getSelectedIndex();
-        int paramDefault = BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR;
-        if (getCachedValue(paramName, paramDefault) != paramValue) {
-            prefs.putInt(paramName, paramValue);
-            updateCache(paramName, Integer.toString(paramValue));
-        }
-
-        paramName = KEY_AUTO_TARGET_LEVEL;
-        paramValue = dialog.cbTargetAutoChooseLevel.getSelectedIndex();
-        paramDefault = AUTO_TARGET_NON_FEEL_BAD;
+        String paramName = KEY_AUTO_TARGET_LEVEL;
+        int paramValue = dialog.cbTargetAutoChooseLevel.getSelectedIndex();
+        int paramDefault = AUTO_TARGET_NON_FEEL_BAD;
         if (getCachedValue(paramName, paramDefault) != paramValue) {
             prefs.putInt(paramName, paramValue);
             updateCache(paramName, Integer.toString(paramValue));
@@ -3152,12 +3295,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void showFullImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showFullImagePathActionPerformed
     }//GEN-LAST:event_showFullImagePathActionPerformed
 
-    private void cbBattlefieldFeedbackColorizingModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBattlefieldFeedbackColorizingModeActionPerformed
-
-    }//GEN-LAST:event_cbBattlefieldFeedbackColorizingModeActionPerformed
-
     private void cbSaveToZipFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSaveToZipFilesActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_cbSaveToZipFilesActionPerformed
 
     private void btnBrowseImageLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseImageLocationActionPerformed
@@ -3232,11 +3370,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         int param = 0;
         if (args.length > 0) {
             String param1 = args[0];
-            if (param1.equals(OPEN_CONNECTION_TAB)) {
-                param = 8;
-            }
             if (param1.equals(OPEN_PHASES_TAB)) {
-                param = 6;
+                param = 5;
+            }
+            if (param1.equals(OPEN_CONNECTION_TAB)) {
+                param = 5 + 3;
             }
         }
         final int openedTab = param;
@@ -3290,26 +3428,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
         load(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
         load(prefs, dialog.displayLifeOnAvatar, KEY_DISPLAY_LIVE_ON_AVATAR, "true");
-        load(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true");
         load(prefs, dialog.cbAllowRequestToShowHandCards, KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true");
         load(prefs, dialog.cbConfirmEmptyManaPool, KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true");
         load(prefs, dialog.cbAskMoveToGraveOrder, KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true");
 
-        load(prefs, dialog.cbGameLogShowTurnInfo, KEY_GAME_LOG_SHOW_TURN_INFO, "true");
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
         load(prefs, dialog.cbDraftLogAutoSave, KEY_DRAFT_LOG_AUTO_SAVE, "true");
         load(prefs, dialog.cbLimitedDeckAutoSave, KEY_LIMITED_DECK_AUTO_SAVE, "true");
         load(prefs, dialog.cbGameJsonLogAutoSave, KEY_JSON_GAME_LOG_AUTO_SAVE, "true", "false");
-
-        String feedbackParam = "";
-        try {
-            feedbackParam = MageFrame.getPreferences().get(KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE, "2");
-            int feedbackMode = Integer.parseInt(feedbackParam);
-            dialog.cbBattlefieldFeedbackColorizingMode.setSelectedIndex(feedbackMode);
-        } catch (Throwable e) {
-            logger.error("Can't parse and setup param " + KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE + " = " + feedbackParam, e);
-            dialog.cbBattlefieldFeedbackColorizingMode.setSelectedIndex(BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR);
-        }
 
         String autoTargetParam;
         try {
@@ -3776,9 +3902,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         prefs.put(key, value);
         try {
             prefs.flush();
-        } catch (BackingStoreException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error: couldn't save preferences. Please try once again.");
+        } catch (BackingStoreException e) {
+            logger.error("Can't save preferences " + key + " due " + e, e);
         }
         updateCache(key, value);
     }
@@ -3869,7 +3994,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         String userStrId = System.getProperty("user.name");
         return new UserData(UserGroup.PLAYER,
                 PreferencesDialog.selectedAvatarId,
-                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"),
                 getUserSkipPrioritySteps(),
@@ -3885,12 +4009,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY, "false").equals("true"),
                 userStrId
         );
-    }
-
-    public static int getBattlefieldFeedbackColorizingMode() {
-        return PreferencesDialog.getCachedValue(
-                PreferencesDialog.KEY_BATTLEFIELD_FEEDBACK_COLORIZING_MODE,
-                BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR);
     }
 
     public List<KeyBindButton> getKeybindButtons() {
@@ -3909,6 +4027,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
     }
 
+    public static DefaultSizeSettings getDefaultSizeSettings() {
+        return defaultSizeSettings;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane avatarPane;
     private javax.swing.JPanel avatarPanel;
@@ -3917,10 +4039,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnBrowseBattlefieldImage;
     private javax.swing.JButton btnBrowseImageLocation;
     private javax.swing.JButton bttnResetControls;
+    private javax.swing.JButton buttonSizeDefault1;
+    private javax.swing.JButton buttonSizeDefault2;
+    private javax.swing.JButton buttonSizeDefault3;
+    private javax.swing.JButton buttonSizeDefault4;
+    private javax.swing.JButton buttonSizeDefault5;
+    private javax.swing.JButton buttonSizeDefault6;
     private javax.swing.JCheckBox cbAllowRequestToShowHandCards;
     private javax.swing.JCheckBox cbAskMoveToGraveOrder;
     private javax.swing.JCheckBox cbAutoOrderTrigger;
-    private javax.swing.JComboBox cbBattlefieldFeedbackColorizingMode;
     private javax.swing.JCheckBox cbCardRenderHideSetSymbol;
     private javax.swing.JCheckBox cbCardRenderIconsForAbilities;
     private javax.swing.JCheckBox cbCardRenderIconsForPlayable;
@@ -3936,7 +4063,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbEnableSkipButtonsSounds;
     private javax.swing.JCheckBox cbGameJsonLogAutoSave;
     private javax.swing.JCheckBox cbGameLogAutoSave;
-    private javax.swing.JCheckBox cbGameLogShowTurnInfo;
     private javax.swing.JCheckBox cbLimitedDeckAutoSave;
     private javax.swing.JComboBox cbNumberOfDownloadThreads;
     private javax.swing.JCheckBox cbPassPriorityActivation;
@@ -4068,14 +4194,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelYourTurn;
     private javax.swing.JLabel lbSelectLabel;
     private javax.swing.JLabel lbThemeHint;
-    private javax.swing.JLabel lblBattlefieldFeedbackColorizingMode;
     private javax.swing.JLabel lblProxyPassword;
     private javax.swing.JLabel lblProxyPort;
     private javax.swing.JLabel lblProxyServer;
     private javax.swing.JLabel lblProxyUserName;
     private javax.swing.JLabel lblTargetAutoChoose;
     private javax.swing.JLabel lebelSkip;
-    private javax.swing.JPanel main_battlefield;
     private javax.swing.JPanel main_card;
     private javax.swing.JPanel main_game;
     private javax.swing.JPanel main_gamelog;
@@ -4097,6 +4221,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel panelSize7;
     private javax.swing.JPanel panelSize8;
     private javax.swing.JPanel panelSize9;
+    private javax.swing.JPanel panelSizeDefaultSettings;
     private javax.swing.JPanel panelSizeDetailedSettings;
     private javax.swing.JPanel phases_stopSettings;
     private javax.swing.JPanel pnlProxy;
@@ -4116,7 +4241,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JButton sampleSize8;
     private javax.swing.JButton sampleSize9;
     private javax.swing.JButton saveButton;
-    private javax.swing.JCheckBox showAbilityPickerForced;
     private javax.swing.JCheckBox showCardName;
     private javax.swing.JCheckBox showFullImagePath;
     private javax.swing.JCheckBox showPlayerNamesPermanently;

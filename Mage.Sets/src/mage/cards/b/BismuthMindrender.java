@@ -1,11 +1,6 @@
 package mage.cards.b;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.ApprovingObject;
-import mage.MageIdentifier;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -14,21 +9,24 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileCardsFromTopOfLibraryTargetEffect;
-import mage.cards.*;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.MenaceAbility;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -47,7 +45,7 @@ public final class BismuthMindrender extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Bismuth Mindrender deals combat damage to a player, that player exiles cards from the top of their library until they exile a nonland card. You may cast that card by paying life equal to the spell's mana value rather than paying its mana cost.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new BismuthMindrenderEffect(),false, true));

@@ -39,8 +39,8 @@ public final class HivespineWolverine extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
 
         // * Hivespine Wolverine fights target creature token.
-        ability.addMode(new Mode(new FightTargetSourceEffect()));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_TOKEN));
+        ability.addMode(new Mode(new FightTargetSourceEffect())
+                .addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_TOKEN)));
 
         // * Destroy target artifact or enchantment.
         ability.addMode(new Mode(new DestroyTargetEffect())

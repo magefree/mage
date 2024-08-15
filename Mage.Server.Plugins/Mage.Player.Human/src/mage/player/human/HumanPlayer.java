@@ -2410,42 +2410,35 @@ public class HumanPlayer extends PlayerImpl {
 
     /**
      * Hide ability picker dialog on one available ability to activate
-     *
-     * @param ability
-     * @param game
-     * @return
      */
     private boolean suppressAbilityPicker(ActivatedAbility ability, Game game) {
-        if (getControllingPlayersUserData(game).isShowAbilityPickerForced()) {
-            // TODO: is it bugged on mana payment + under control?
-            //  (if player under control then priority player must use own settings, not controlling)
-            // user activated an ability picker in preferences
+        // TODO: is it bugged on mana payment + under control?
+        //  (if player under control then priority player must use own settings, not controlling)
+        // user activated an ability picker in preferences
 
-            // force to show ability picker for double faces cards in hand/commander/exile and other zones
-            Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
-            if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
-                if (mainCard instanceof SplitCard
-                        || mainCard instanceof AdventureCard
-                        || mainCard instanceof ModalDoubleFacedCard) {
-                    return false;
-                }
+        // force to show ability picker for double faces cards in hand/commander/exile and other zones
+        Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
+        if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
+            if (mainCard instanceof SplitCard
+                    || mainCard instanceof AdventureCard
+                    || mainCard instanceof ModalDoubleFacedCard) {
+                return false;
             }
-
-            // hide on land play
-            if (ability instanceof PlayLandAbility) {
-                return true;
-            }
-
-            // hide on alternative cost activated
-            if (!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(MageIdentifier.Default)
-                    && ability.getManaCostsToPay().manaValue() > 0) {
-                return true;
-            }
-
-            // hide on mana activate and show all other
-            return ability.isManaActivatedAbility();
         }
-        return true;
+
+        // hide on land play
+        if (ability instanceof PlayLandAbility) {
+            return true;
+        }
+
+        // hide on alternative cost activated
+        if (!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(MageIdentifier.Default)
+                && ability.getManaCostsToPay().manaValue() > 0) {
+            return true;
+        }
+
+        // hide on mana activate and show all other
+        return ability.isManaActivatedAbility();
     }
 
     @Override
@@ -2585,20 +2578,38 @@ public class HumanPlayer extends PlayerImpl {
                     if (!modeText.isEmpty()) {
                         modeText = Character.toUpperCase(modeText.charAt(0)) + modeText.substring(1);
                     }
-                    modeMap.put(mode.getId(), modeIndex + ". " + modeText);
+                    StringBuilder sb = new StringBuilder();
+                    if (mode.getPawPrintValue() > 0){
+                        for (int i = 0; i < mode.getPawPrintValue(); ++i){
+                            sb.append("{P}");
+                        }
+                        sb.append(": ");
+                    } else {
+                        sb.append(modeIndex).append(". ");
+                    }
+                    modeMap.put(mode.getId(), sb.append(modeText).toString());
                 }
             }
 
             // done button for "for up" choices only
-            boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes() || modes.isMayChooseNone();
+            boolean canEndChoice = (modes.getSelectedModes().size() >= modes.getMinModes() && modes.getMaxPawPrints() == 0) ||
+                    (modes.getSelectedPawPrints() >= modes.getMaxPawPrints() && modes.getMaxPawPrints() > 0) ||
+                    modes.isMayChooseNone();
             if (canEndChoice) {
                 modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
             }
             modeMap.put(Modes.CHOOSE_OPTION_CANCEL_ID, "Cancel");
 
             // prepare dialog
-            String message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
-                    + ", min " + modes.getMinModes() + ")";
+            String message;
+            if (modes.getMaxPawPrints() == 0){
+                message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
+                        + ", min " + modes.getMinModes() + ")";
+            } else {
+                message = "Choose mode (selected " + modes.getSelectedPawPrints() + " of " + modes.getMaxPawPrints()
+                        + " {P})";
+            }
+
             if (obj != null) {
                 message = message + "<br>" + obj.getLogName();
             }

@@ -255,7 +255,9 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Rani", 149, Rarity.RARE, mage.cards.t.TheRani.class));
         cards.add(new SetCardInfo("The Sea Devils", 108, Rarity.RARE, mage.cards.t.TheSeaDevils.class));
         cards.add(new SetCardInfo("The Sixth Doctor", 159, Rarity.RARE, mage.cards.t.TheSixthDoctor.class));
-        cards.add(new SetCardInfo("The Thirteenth Doctor", 4, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class));
+        cards.add(new SetCardInfo("The Thirteenth Doctor", 4, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Thirteenth Doctor", 564, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Thirteenth Doctor", "564z", Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Valeyard", 165, Rarity.RARE, mage.cards.t.TheValeyard.class));
         cards.add(new SetCardInfo("Thespian's Stage", 323, Rarity.RARE, mage.cards.t.ThespiansStage.class));
         cards.add(new SetCardInfo("The Tenth Doctor", 3, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
@@ -293,6 +295,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Twice Upon a Time", 61, Rarity.RARE, mage.cards.t.TwiceUponATime.class));
         cards.add(new SetCardInfo("Vashta Nerada", 73, Rarity.RARE, mage.cards.v.VashtaNerada.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 329, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
+        cards.add(new SetCardInfo("Vrestin, Menoptra Leader", 451, Rarity.RARE, mage.cards.v.VrestinMenoptraLeader.class));
         cards.add(new SetCardInfo("War Room", 330, Rarity.RARE, mage.cards.w.WarRoom.class));
         cards.add(new SetCardInfo("Waterlogged Grove", 331, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 256, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
