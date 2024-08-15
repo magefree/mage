@@ -25,6 +25,7 @@ public enum GrabbagImageSource implements CardImageSource {
     private static final Set<String> supportedSets = new LinkedHashSet<String>() {
         {
             add("SWS");
+            add("ATC");
         }
     };
 
@@ -469,6 +470,11 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/War Room (Star Wars)", "pqQ9kzt.jpeg");
         singleLinks.put("SWS/Xyston Star Destroyer", "oqbHtUC.jpeg");
         singleLinks.put("SWS/Zorii Bliss", "vOyNE39.jpeg");
+        singleLinks.put("ATC/Blinding Radiance", "4B4lBl5.jpeg");
+        singleLinks.put("ATC/Goblin Bruiser", "Di5I8tS.jpeg");
+        singleLinks.put("ATC/Ogre Painbringer", "eA3zL7Y.jpeg");
+        singleLinks.put("ATC/Titanic Pelagosaur", "KWSsiKD.jpeg");
+        singleLinks.put("ATC/Treetop Recluse", "uHnQYpp.jpeg");
 
         // Emblems
         singleLinks.put("SWS/Emblem Obi-Wan Kenobi", "Qyc10aT.png");
