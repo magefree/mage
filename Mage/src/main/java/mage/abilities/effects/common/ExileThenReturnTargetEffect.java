@@ -2,6 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -9,6 +10,8 @@ import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -23,6 +26,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
     private final boolean yourControl;
     private final boolean textThatCard;
     private final PutCards putCards;
+    private OneShotEffect afterEffect = null;
 
     public ExileThenReturnTargetEffect(boolean yourControl, boolean textThatCard) {
         this(yourControl, textThatCard, PutCards.BATTLEFIELD);
@@ -40,11 +44,17 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         this.putCards = effect.putCards;
         this.yourControl = effect.yourControl;
         this.textThatCard = effect.textThatCard;
+        this.afterEffect = effect.afterEffect;
     }
 
     @Override
     public ExileThenReturnTargetEffect copy() {
         return new ExileThenReturnTargetEffect(this);
+    }
+
+    public ExileThenReturnTargetEffect withAfterEffect(OneShotEffect afterEffect) {
+        this.afterEffect = afterEffect;
+        return this;
     }
 
     @Override
@@ -67,6 +77,10 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
             putCards.moveCard(
                     yourControl ? controller : game.getPlayer(card.getOwnerId()),
                     card.getMainCard(), source, game, "card");
+        }
+        if (afterEffect != null){
+            afterEffect.setTargetPointer(new FixedTargets(toFlicker, game));
+            afterEffect.apply(game, source);
         }
         return true;
     }
@@ -91,6 +105,9 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
             sb.append(this.yourControl ? "your" : "its owner's");
         }
         sb.append(" control");
+        if (afterEffect != null){
+            sb.append(". ").append(CardUtil.getTextWithFirstCharUpperCase(afterEffect.getText(mode)));
+        }
         return sb.toString();
     }
 
