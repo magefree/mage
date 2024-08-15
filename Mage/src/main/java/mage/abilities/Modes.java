@@ -619,6 +619,11 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                 sb.append("+ ");
                 sb.append(mode.getCost().getText());
                 sb.append(" &mdash; ");
+            } else if (mode.getPawPrintValue() > 0) {
+                for (int i = 0; i < mode.getPawPrintValue(); ++i){
+                    sb.append("{P}");
+                }
+                sb.append(" &mdash; ");
             } else {
                 sb.append("&bull  ");
             }
