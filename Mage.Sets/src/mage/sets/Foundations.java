@@ -16,9 +16,9 @@ public final class Foundations extends ExpansionSet {
     }
 
     private Foundations() {
-        super("Foundations", "FDN", ExpansionSet.buildDate(2024, 11,15), SetType.EXPANSION);
+        super("Foundations", "FDN", ExpansionSet.buildDate(2024, 11, 15), SetType.EXPANSION);
         this.blockName = "Foundations"; // for sorting in GUI
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Angelic Edict", 490, Rarity.COMMON, mage.cards.a.AngelicEdict.class));
