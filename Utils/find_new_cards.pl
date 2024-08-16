@@ -185,13 +185,16 @@ if (exists ($new_order{$cmd}))
 	print ("\n\n\n");
 	my $set;
 	#print Dumper(\%cards_by_sets);
+	my $total = 0;
 	foreach $set (sort keys (%cards_by_sets))
     {
 		my $cards = $cards_by_sets{$set};
 		print ("* ", $set, " - added ", scalar @{$cards}, " new cards;", "\n");
 		foreach my $card (@{$cards})
 		{
+		    $total++;
 			print ("  * ", $card, "\n");
 		}
 	}
+	print ("* Total cards: ", $total);
 }

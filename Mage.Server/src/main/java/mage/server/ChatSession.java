@@ -132,7 +132,7 @@ public class ChatSession {
                 }
             }
             if (!clientsToRemove.isEmpty()) {
-                final Lock w = lock.readLock();
+                final Lock w = lock.writeLock();
                 w.lock();
                 try {
                     users.keySet().removeAll(clientsToRemove);
