@@ -63,7 +63,7 @@ public class EarlyWinterTest extends CardTestPlayerBase {
 
     @Test
     public void test_ExileEnchantment_CheckControlled() {
-        //setStrictChooseMode(true); // enable once the choice for enchantment can be tested when no choice possible
+        setStrictChooseMode(false); // enable once the choice for enchantment can be tested when no choice possible
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem");

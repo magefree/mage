@@ -48,7 +48,7 @@ public class TargetControllerChangeTest extends CardTestPlayerBase {
         //
         //addTarget(playerB, "Balduvian Bears"); // give small bear to A - AI must choose itself
 
-        //setStrictChooseMode(true); // AI must choose
+        setStrictChooseMode(false); // AI must choose
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

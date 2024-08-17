@@ -279,7 +279,7 @@ public class ConspireTest extends CardTestPlayerBase {
         //setChoice(playerA, "Goblin Assailant^Goblin Assailant"); - AI must choose
         //setChoice(playerA, false); // don't change target 1 - AI must choose
 
-        //setStrictChooseMode(true); - AI must choose
+        setStrictChooseMode(false); // - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -303,7 +303,7 @@ public class ConspireTest extends CardTestPlayerBase {
         //setChoice(playerA, "Goblin Assailant^Goblin Assailant"); - AI must choose
         //setChoice(playerA, false); // don't change target 1 - AI must choose
 
-        //setStrictChooseMode(true); - AI must choose
+        setStrictChooseMode(false); // - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

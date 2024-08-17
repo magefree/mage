@@ -45,7 +45,7 @@ public class BuybackTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elvish Fury", "Silvercoat Lion");
         //setChoice(playerA, true); // use buyback - AI must choose
 
-        //setStrictChooseMode(true); - AI must choose
+        setStrictChooseMode(false); // - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
