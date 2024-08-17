@@ -362,6 +362,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Windreaper Falcon", 289, Rarity.UNCOMMON, mage.cards.w.WindreaperFalcon.class));
         cards.add(new SetCardInfo("Withering Boon", 152, Rarity.UNCOMMON, mage.cards.w.WitheringBoon.class));
         cards.add(new SetCardInfo("Worldly Tutor", 255, Rarity.UNCOMMON, mage.cards.w.WorldlyTutor.class));
+        cards.add(new SetCardInfo("Yare", 48, Rarity.RARE, mage.cards.y.Yare.class));
         cards.add(new SetCardInfo("Zebra Unicorn", 290, Rarity.UNCOMMON, mage.cards.z.ZebraUnicorn.class));
         cards.add(new SetCardInfo("Zhalfirin Commander", 49, Rarity.UNCOMMON, mage.cards.z.ZhalfirinCommander.class));
         cards.add(new SetCardInfo("Zhalfirin Knight", 50, Rarity.COMMON, mage.cards.z.ZhalfirinKnight.class));
