@@ -246,6 +246,11 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Thornvault Forager", 197, Rarity.RARE, mage.cards.t.ThornvaultForager.class));
         cards.add(new SetCardInfo("Thought Shucker", 77, Rarity.COMMON, mage.cards.t.ThoughtShucker.class));
         cards.add(new SetCardInfo("Thought-Stalker Warlock", 118, Rarity.UNCOMMON, mage.cards.t.ThoughtStalkerWarlock.class));
+        cards.add(new SetCardInfo("Three Tree City", 260, Rarity.RARE, mage.cards.t.ThreeTreeCity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Tree City", 337, Rarity.RARE, mage.cards.t.ThreeTreeCity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Tree City", 338, Rarity.RARE, mage.cards.t.ThreeTreeCity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Tree City", 339, Rarity.RARE, mage.cards.t.ThreeTreeCity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Tree City", 340, Rarity.RARE, mage.cards.t.ThreeTreeCity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Three Tree Mascot", 251, Rarity.COMMON, mage.cards.t.ThreeTreeMascot.class));
         cards.add(new SetCardInfo("Three Tree Rootweaver", 198, Rarity.COMMON, mage.cards.t.ThreeTreeRootweaver.class));
         cards.add(new SetCardInfo("Three Tree Scribe", 199, Rarity.UNCOMMON, mage.cards.t.ThreeTreeScribe.class));
