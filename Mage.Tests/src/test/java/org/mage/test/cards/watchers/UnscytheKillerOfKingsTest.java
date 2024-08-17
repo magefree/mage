@@ -65,4 +65,28 @@ public class UnscytheKillerOfKingsTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testTradeAndTrigger() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Unscythe, Killer of Kings");
+        addCard(Zone.BATTLEFIELD, playerA, "Fugitive Wizard"); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Minotaur Aggressor"); // 6/2 first strike
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Fugitive Wizard");
+
+        attack(1, playerA, "Fugitive Wizard", playerB);
+        block(1, playerB, "Minotaur Aggressor", "Fugitive Wizard");
+
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Fugitive Wizard", 1);
+        assertPermanentCount(playerA, "Zombie Token", 1);
+        assertExileCount("Minotaur Aggressor", 1);
+
+    }
+
 }
