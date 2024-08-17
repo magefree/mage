@@ -111,6 +111,9 @@ class AtomwheelAcrobatsCountersEffect extends OneShotEffect {
         }
         int amount = (Integer) getValue("rolled");
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePermanent == null) {
+            return false;
+        }
         sourcePermanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
         return true;
     }

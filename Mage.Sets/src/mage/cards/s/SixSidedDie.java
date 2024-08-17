@@ -4,12 +4,12 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -79,13 +79,12 @@ class SixSidedDieEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Card card = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (player == null || permanent == null || card == null) {
+        if (player == null || permanent == null) {
             return false;
         }
-        int result = player.rollDice(outcome, source, game, 6);
+        int result = player.rollDice(outcome, source, game, 1);
         switch (result) {
-            case 1:
+            case 6:
                 game.addEffect(new SetBasePowerToughnessTargetEffect(1, 1, Duration.EndOfTurn), source);
                 break;
             case 2:
@@ -101,8 +100,8 @@ class SixSidedDieEffect extends OneShotEffect {
             case 5:
                 permanent.destroy(source, game);
                 break;
-            case 6:
-                player.moveCardsToExile(card, source, game, true, null, "");
+            case 1:
+                player.moveCards(permanent, Zone.EXILED, source, game);
                 break;
         }
         return true;
