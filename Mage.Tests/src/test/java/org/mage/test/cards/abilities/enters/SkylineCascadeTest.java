@@ -12,7 +12,6 @@ public class SkylineCascadeTest extends CardTestPlayerBase {
 
     /**
      * Reported bug on Skyline Cascade not working properly.
-     * 
      * Test the typical situation - tapped creature not being able to untap during next untap step.
      */
     @Test
@@ -31,7 +30,7 @@ public class SkylineCascadeTest extends CardTestPlayerBase {
         attack(1, playerA, "Savannah Lions");
 
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Skyline Cascade");
-        // Savannah Lions is autochosen
+        addTarget(playerA, "Savannah Lions");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         
@@ -64,8 +63,8 @@ public class SkylineCascadeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Skyline Cascade");
                 
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Skyline Cascade");
-        // Savannah Lions is autochosen
-        
+        addTarget(playerA, "Savannah Lions");
+
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         
         execute();
