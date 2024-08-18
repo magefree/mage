@@ -65,11 +65,17 @@ class StargazeEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 2 * xValue));
-        TargetCard target = new TargetCardInLibrary(Math.max(xValue, cards.size()), StaticFilters.FILTER_CARD);
-        player.choose(outcome, cards, target, source, game);
-        player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
-        cards.retainZone(Zone.LIBRARY, game);
-        player.moveCards(cards, Zone.GRAVEYARD, source, game);
+        if  (cards.size() > xValue) {
+            TargetCard target = new TargetCardInLibrary(xValue, StaticFilters.FILTER_CARD);
+            player.choose(outcome, cards, target, source, game);
+            player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
+            cards.retainZone(Zone.LIBRARY, game);
+            player.moveCards(cards, Zone.GRAVEYARD, source, game);
+        }
+        // If cards.size() < xValue (e.g., x = 3 but library only has 2 cards), just put all cards into hand
+        else {
+            player.moveCards(cards, Zone.HAND, source, game);
+        }
         player.loseLife(xValue, game, source, false);
         return true;
     }
