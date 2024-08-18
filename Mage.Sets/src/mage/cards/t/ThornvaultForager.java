@@ -42,7 +42,7 @@ public final class ThornvaultForager extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {T}, Forage: Add two mana in any combination of colors.
-        Ability ability = new SimpleManaAbility(new AddManaInAnyCombinationEffect(5), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(new AddManaInAnyCombinationEffect(2), new TapSourceCost());
         ability.addCost(new ForageCost());
         this.addAbility(ability);
 
