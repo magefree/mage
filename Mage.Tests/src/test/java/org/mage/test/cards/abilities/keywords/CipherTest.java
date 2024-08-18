@@ -55,6 +55,7 @@ public class CipherTest extends CardTestPlayerBase {
         // on attack must activated ability to free cast
         attack(5, playerA, "Roil Elemental");
         setChoice(playerA, true); // activate free cast of encoded card
+        addTarget(playerA, "Roil Elemental");
         checkPermanentCount("playerA must have 2 Roil Elemental", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Roil Elemental", 2);
         checkPermanentCount("playerB must have Roil Elemental", 5, PhaseStep.POSTCOMBAT_MAIN, playerB, "Roil Elemental", 1);
 

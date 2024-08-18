@@ -75,6 +75,7 @@ public class BuybackTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Boomerang", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elvish Fury", "Silvercoat Lion");
+        setChoice(playerA, true); // use buyback
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Boomerang", "Silvercoat Lion", "Elvish Fury");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -98,6 +99,7 @@ public class BuybackTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Counterspell", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elvish Fury", "Silvercoat Lion");
+        setChoice(playerA, true); // use buyback
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Elvish Fury", "Elvish Fury");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -2,6 +2,8 @@
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
@@ -99,6 +101,7 @@ public class CrewTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, plow);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew");
+        setChoice(playerA, ox);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -113,6 +116,8 @@ public class CrewTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, crusher);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 2");
+        setChoice(playerA, kotori);
+        addTarget(playerA, crusher);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -120,6 +125,9 @@ public class CrewTest extends CardTestPlayerBase {
         assertTapped(kotori, true);
         assertType(crusher, CardType.ARTIFACT, true);
         assertType(crusher, CardType.CREATURE, SubType.VEHICLE);
+        assertAbility(playerA, crusher, LifelinkAbility.getInstance(), true);
+        assertAbility(playerA, crusher, VigilanceAbility.getInstance(), true);
+
     }
 
     @Test
@@ -128,6 +136,7 @@ public class CrewTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, express);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 4");
+        setChoice(playerA, mechanic);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -143,6 +152,8 @@ public class CrewTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, heart);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Crew 3");
+        setChoice(playerA, true); // remove loyalty counter instead
+        setChoice(playerA, jace);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
