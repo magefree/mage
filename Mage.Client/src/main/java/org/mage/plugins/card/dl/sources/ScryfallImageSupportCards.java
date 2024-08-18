@@ -560,6 +560,7 @@ public class ScryfallImageSupportCards {
             add("BLC"); // Bloomburrow Commander
             add("DSK"); // Duskmourn: House of Horror
             add("FDN"); // Foundations
+            add("MB2"); // Mystery Booster 2
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
