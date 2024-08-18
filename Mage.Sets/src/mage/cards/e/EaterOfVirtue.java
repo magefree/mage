@@ -40,6 +40,7 @@ import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -135,10 +136,9 @@ class EaterOfVirtueGainAbilityAttachedEffect extends ContinuousEffectImpl {
                 && eaterOfVirtue.getAttachedTo() != null) {
             Permanent permanent = game.getPermanent(eaterOfVirtue.getAttachedTo());
             if (permanent != null) {
-                UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + "cards exiled by Eater of Virtue", game);
-                if (game.getState().getExile().getExileZone(exileId) != null
-                        && game.getState().getExile().getExileZone(exileId).size() > 0) {
-                    Set<Card> cardsInExile = game.getState().getExile().getExileZone(exileId).getCards(game);
+                ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(source.getSourceId().toString() + "cards exiled by Eater of Virtue", game));
+                if (exileZone != null && !exileZone.isEmpty()) {
+                    Set<Card> cardsInExile = exileZone.getCards(game);
                     for (Card card : cardsInExile) {
                         for (Ability a : card.getAbilities()) {
                             if (a instanceof FlyingAbility) {
