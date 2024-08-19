@@ -19,17 +19,24 @@ import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.common.FilterCreatureSpell;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 
 import java.util.UUID;
 
 public class HelgaSkittishSeer extends CardImpl {
 
-    private static final FilterSpell CostFilter = new FilterSpell("CMC >= 4");
+    private static final FilterSpell filter = new FilterCreatureSpell("Spell with CMC >= 4");
+
+    static {
+        filter.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 4));
+    }
 
     public HelgaSkittishSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
@@ -42,7 +49,7 @@ public class HelgaSkittishSeer extends CardImpl {
         // Whenever you cast a creature spell with mana value 4 or greater, you draw a card, gain 1 life and put a +1/+1 counter on Helga, Skittish Seer
         Ability spellCastAbility = new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1).
                 setText("Whenever you cast a creature spell with mana value 4 or greater, you draw a card"),
-                CostFilter, false);
+                filter, false);
         spellCastAbility.addEffect(new GainLifeEffect(1).setText("gain 1 life"));
         spellCastAbility.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 .setText("and put a +1/+1 counter on {this}"));
