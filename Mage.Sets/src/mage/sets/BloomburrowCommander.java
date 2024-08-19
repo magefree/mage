@@ -25,6 +25,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aether Channeler", 160, Rarity.RARE, mage.cards.a.AetherChanneler.class));
         cards.add(new SetCardInfo("Aetherize", 161, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
         cards.add(new SetCardInfo("Agate Instigator", 21, Rarity.RARE, mage.cards.a.AgateInstigator.class));
+        cards.add(new SetCardInfo("Alchemist's Talent", 22, Rarity.RARE, mage.cards.a.AlchemistsTalent.class));
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 170, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 134, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class));
         cards.add(new SetCardInfo("Ant Queen", 80, Rarity.RARE, mage.cards.a.AntQueen.class));
