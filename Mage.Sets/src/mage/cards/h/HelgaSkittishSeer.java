@@ -47,14 +47,14 @@ public class HelgaSkittishSeer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a creature spell with mana value 4 or greater, you draw a card, gain 1 life and put a +1/+1 counter on Helga, Skittish Seer
-        Ability spellCastAbility = new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1).
+        Ability ability = new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1).
                 setText("Whenever you cast a creature spell with mana value 4 or greater, you draw a card"),
                 filter, false);
-        spellCastAbility.addEffect(new GainLifeEffect(1).setText("gain 1 life"));
-        spellCastAbility.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+        ability.addEffect(new GainLifeEffect(1).setText("gain 1 life"));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 .setText("and put a +1/+1 counter on {this}"));
 
-        this.addAbility(spellCastAbility);
+        this.addAbility(ability);
 
         // {T}: Add X mana of any one color, where X is Helga, Skittish Seer's power. Use this mana only to cast creature spells with mana value 4 or greater or to cas creature spells with {x} in their mana costs
         this.addAbility(new ConditionalAnyColorManaAbility(
