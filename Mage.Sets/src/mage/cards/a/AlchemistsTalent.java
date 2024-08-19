@@ -13,6 +13,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.ClassReminderAbility;
@@ -51,18 +52,18 @@ public final class AlchemistsTalent extends CardImpl {
         // Treasures you control have "{T}, Sacrifice this artifact: Add two mana of any one color."
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost().setText("sacrifice this artifact"));
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, new FilterPermanent(SubType.TREASURE, "Treasures"))));
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, new FilterPermanent(SubType.TREASURE, "Treasures")), 2)));
 
         // {4}{R}: Level 3
         this.addAbility(new ClassLevelAbility(3, "{4}{R}"));
 
         // Whenever you cast a spell, if mana from a Treasure was spent to cast it, this Class deals damage equal to that spell's mana value to each opponent.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+        this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastControllerTriggeredAbility(
                         new DamagePlayersEffect(AlchemistsTalentValue.instance, TargetController.OPPONENT), StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL
                 ), AlchemistsTalentCondition.instance, "Whenever you cast a spell, if mana from a Treasure " +
                 "was spent to cast it, this Class deals damage equal to that spell's mana value to each opponent"
-        ));
+        ), 3)));
     }
 
     private AlchemistsTalent(final AlchemistsTalent card) {
