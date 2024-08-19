@@ -17,10 +17,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -72,10 +74,8 @@ enum KeenEyedCuratorCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game
-                .getExile()
-                .getExileZone(CardUtil.getExileZoneId(game, source))
-                .getCards(game)
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        return exileZone != null && exileZone.getCards(game)
                 .stream()
                 .map(card -> card.getCardType(game))
                 .flatMap(Collection::stream)
@@ -89,17 +89,17 @@ enum KeenEyedCuratorHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        List<String> types = game
-                .getExile()
-                .getExileZone(CardUtil.getExileZoneId(game, ability))
-                .getCards(game)
-                .stream()
-                .map(card -> card.getCardType(game))
-                .flatMap(Collection::stream)
-                .distinct()
-                .map(CardType::toString)
-                .sorted()
-                .collect(Collectors.toList());
+        List<String> types = new ArrayList<>();
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, ability));
+        if (exileZone != null) {
+            types = exileZone.getCards(game).stream()
+                    .map(card -> card.getCardType(game))
+                    .flatMap(Collection::stream)
+                    .distinct()
+                    .map(CardType::toString)
+                    .sorted()
+                    .collect(Collectors.toList());
+        }
         return "Card types exiled: " + types.size()
                 + (types.size() > 0 ? " (" + String.join(", ", types) + ')' : "");
     }

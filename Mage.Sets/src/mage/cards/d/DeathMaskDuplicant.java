@@ -30,6 +30,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -91,11 +92,9 @@ public final class DeathMaskDuplicant extends CardImpl {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
-                    if (exileId != null
-                            && game.getState().getExile().getExileZone(exileId) != null
-                            && !game.getState().getExile().getExileZone(exileId).isEmpty()) {
-                        for (UUID cardId : game.getState().getExile().getExileZone(exileId)) {
+                    ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game)));
+                    if (exileZone != null && !exileZone.isEmpty()) {
+                        for (UUID cardId : exileZone) {
                             Card card = game.getCard(cardId);
                             if (card != null && card.isCreature(game)) {
                                 for (Ability ability : card.getAbilities(game)) {

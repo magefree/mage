@@ -32,6 +32,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
@@ -327,6 +330,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // auto-update settings on first run
     public static final String KEY_SETTINGS_VERSION = "settingsVersion";
 
+    private static final ReadWriteLock cacheLock = new ReentrantReadWriteLock();
     private static final Map<String, String> CACHE = new HashMap<>();
 
     public static final String OPEN_CONNECTION_TAB = "Open-Connection-Tab";
@@ -3804,15 +3808,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static String getCachedValue(String key, String def) {
-        if (CACHE.containsKey(key)) {
-            return CACHE.get(key);
-        } else {
+        final Lock r = cacheLock.readLock();
+        r.lock();
+        try {
+            if (CACHE.containsKey(key)) {
+                return CACHE.get(key);
+            }
+        } finally {
+            r.unlock();
+        }
+
+        final Lock w = cacheLock.writeLock();
+        w.lock();
+        try {
             String value = MageFrame.getPreferences().get(key, def);
             if (value == null) {
-                return def;
+                value = def;
             }
             CACHE.put(key, value);
             return value;
+        } finally {
+            w.unlock();
         }
     }
 

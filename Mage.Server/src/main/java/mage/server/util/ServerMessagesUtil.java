@@ -15,6 +15,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -53,13 +54,14 @@ public enum ServerMessagesUtil {
     }
 
     public List<String> getMessages() {
-        lock.readLock().lock();
+        final Lock r = lock.readLock();
+        r.lock();
         try {
             List<String> res = new ArrayList<>(this.newsMessages);
             res.add(this.statsMessage);
             return res;
         } finally {
-            lock.readLock().unlock();
+            r.unlock();
         }
     }
 
@@ -68,13 +70,14 @@ public enum ServerMessagesUtil {
         List<String> updatedMessages = new ArrayList<>(readFromFile());
         String updatedStats = getServerStatsMessage();
 
-        lock.writeLock().lock();
+        final Lock w = lock.writeLock();
+        w.lock();
         try {
             this.newsMessages.clear();
             this.newsMessages.addAll(updatedMessages);
             this.statsMessage = updatedStats;
         } finally {
-            lock.writeLock().unlock();
+            w.unlock();
         }
     }
 

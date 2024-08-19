@@ -205,6 +205,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Scrapshooter", 191, Rarity.RARE, mage.cards.s.Scrapshooter.class));
         cards.add(new SetCardInfo("Season of Gathering", 192, Rarity.MYTHIC, mage.cards.s.SeasonOfGathering.class));
         cards.add(new SetCardInfo("Season of Loss", 112, Rarity.MYTHIC, mage.cards.s.SeasonOfLoss.class));
+        cards.add(new SetCardInfo("Season of the Burrow", 29, Rarity.MYTHIC, mage.cards.s.SeasonOfTheBurrow.class));
         cards.add(new SetCardInfo("Seasoned Warrenguard", 30, Rarity.UNCOMMON, mage.cards.s.SeasonedWarrenguard.class));
         cards.add(new SetCardInfo("Seedglaive Mentor", 231, Rarity.UNCOMMON, mage.cards.s.SeedglaiveMentor.class));
         cards.add(new SetCardInfo("Seedpod Squire", 232, Rarity.COMMON, mage.cards.s.SeedpodSquire.class));
@@ -247,6 +248,11 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Thornvault Forager", 197, Rarity.RARE, mage.cards.t.ThornvaultForager.class));
         cards.add(new SetCardInfo("Thought Shucker", 77, Rarity.COMMON, mage.cards.t.ThoughtShucker.class));
         cards.add(new SetCardInfo("Thought-Stalker Warlock", 118, Rarity.UNCOMMON, mage.cards.t.ThoughtStalkerWarlock.class));
+        cards.add(new SetCardInfo("Three Tree City", 260, Rarity.RARE, mage.cards.t.ThreeTreeCity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Tree City", 337, Rarity.RARE, mage.cards.t.ThreeTreeCity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Tree City", 338, Rarity.RARE, mage.cards.t.ThreeTreeCity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Tree City", 339, Rarity.RARE, mage.cards.t.ThreeTreeCity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Tree City", 340, Rarity.RARE, mage.cards.t.ThreeTreeCity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Three Tree Mascot", 251, Rarity.COMMON, mage.cards.t.ThreeTreeMascot.class));
         cards.add(new SetCardInfo("Three Tree Rootweaver", 198, Rarity.COMMON, mage.cards.t.ThreeTreeRootweaver.class));
         cards.add(new SetCardInfo("Three Tree Scribe", 199, Rarity.UNCOMMON, mage.cards.t.ThreeTreeScribe.class));
@@ -256,6 +262,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Treetop Sentries", 201, Rarity.COMMON, mage.cards.t.TreetopSentries.class));
         cards.add(new SetCardInfo("Uncharted Haven", 261, Rarity.COMMON, mage.cards.u.UnchartedHaven.class));
         cards.add(new SetCardInfo("Valley Flamecaller", 158, Rarity.RARE, mage.cards.v.ValleyFlamecaller.class));
+        cards.add(new SetCardInfo("Valley Floodcaller", 79, Rarity.RARE, mage.cards.v.ValleyFloodcaller.class));
         cards.add(new SetCardInfo("Valley Mightcaller", 202, Rarity.RARE, mage.cards.v.ValleyMightcaller.class));
         cards.add(new SetCardInfo("Valley Rally", 159, Rarity.UNCOMMON, mage.cards.v.ValleyRally.class));
         cards.add(new SetCardInfo("Valley Rotcaller", 119, Rarity.RARE, mage.cards.v.ValleyRotcaller.class));
