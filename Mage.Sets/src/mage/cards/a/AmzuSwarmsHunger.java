@@ -54,7 +54,7 @@ public final class AmzuSwarmsHunger extends CardImpl {
         // Whenever one or more cards leave your graveyard, you may create a 1/1 black and green Insect creature token,
         // then put a number of +1/+1 counters on it equal to the greatest mana value among those cards.
         // Do this only once each turn.
-        this.addAbility(new CardsLeaveGraveyardTriggeredAbility(new AmzuSwarmsHungerEffect(), true).setDoOnlyOnceEachTurn(true));
+        this.addAbility(new CardsLeaveGraveyardTriggeredAbility(new AmzuSwarmsHungerEffect()).setDoOnlyOnceEachTurn(true));
     }
 
     private AmzuSwarmsHunger(final AmzuSwarmsHunger card) {

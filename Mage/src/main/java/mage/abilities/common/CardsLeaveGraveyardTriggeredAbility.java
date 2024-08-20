@@ -26,15 +26,7 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public CardsLeaveGraveyardTriggeredAbility(Effect effect, FilterCard filter) {
-        this(effect, filter, false);
-    }
-
-    public CardsLeaveGraveyardTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, StaticFilters.FILTER_CARD_CARDS, false);
-    }
-
-    public CardsLeaveGraveyardTriggeredAbility(Effect effect, FilterCard filter, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        super(Zone.BATTLEFIELD, effect, false);
         this.filter = filter;
         setTriggerPhrase("Whenever one or more " + filter + " leave your graveyard, ");
     }
@@ -62,6 +54,7 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
                 .filter(card -> filter.match(card, getControllerId(), this, game))
                 .filter(card -> this.isControlledBy(card.getOwnerId()))
                 .collect(Collectors.toSet());
+
         this.getAllEffects().setValue("cardsLeavingGraveyard", cards);
         return !cards.isEmpty();
     }
