@@ -59,8 +59,11 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
                 .filter(card -> this.isControlledBy(card.getOwnerId()))
                 .collect(Collectors.toSet());
 
+        if (cards.isEmpty()){
+            return false;
+        }
         this.getAllEffects().setValue("cardsLeavingGraveyard", cards);
-        return !cards.isEmpty();
+        return true;
     }
 
     @Override
