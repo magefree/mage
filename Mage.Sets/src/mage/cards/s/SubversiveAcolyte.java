@@ -65,7 +65,7 @@ class PhyrexianModeEffect extends OneShotEffect {
     PhyrexianModeEffect() {
         super(Outcome.Benefit);
         staticText = "Subversive Acolyte becomes a Phyrexian. It gets +3/+2 " +
-                "and gains trample and “Whenever this creature is dealt damage, sacrifice that many permanents.";
+                "and gains trample and “Whenever this creature is dealt damage, sacrifice that many permanents.“";
     }
 
     private PhyrexianModeEffect(final PhyrexianModeEffect effect) {

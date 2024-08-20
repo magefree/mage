@@ -196,7 +196,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Kiora, the Tide's Fury", 10, Rarity.MYTHIC, mage.cards.k.KioraTheTidesFury.class));
         cards.add(new SetCardInfo("Kitchen Imp", 342, Rarity.COMMON, mage.cards.k.KitchenImp.class));
         cards.add(new SetCardInfo("Kor Skyfisher", 100, Rarity.COMMON, mage.cards.k.KorSkyfisher.class));
-        cards.add(new SetCardInfo("Kraken Hatchling", 781, Rarity.UNCOMMON, mage.cards.k.KrakenHatchling.class));
+        cards.add(new SetCardInfo("Kraken Hatchling", 781, Rarity.COMMON, mage.cards.k.KrakenHatchling.class));
         cards.add(new SetCardInfo("Krenko's Command", 480, Rarity.COMMON, mage.cards.k.KrenkosCommand.class));
         cards.add(new SetCardInfo("Kuldotha Flamefiend", 481, Rarity.UNCOMMON, mage.cards.k.KuldothaFlamefiend.class));
         cards.add(new SetCardInfo("Lancer Sliver", 102, Rarity.COMMON, mage.cards.l.LancerSliver.class));
@@ -331,7 +331,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Sterling Grove", 720, Rarity.RARE, mage.cards.s.SterlingGrove.class));
         cards.add(new SetCardInfo("Stirring Address", 145, Rarity.COMMON, mage.cards.s.StirringAddress.class));
         cards.add(new SetCardInfo("Stitchwing Skaab", 256, Rarity.UNCOMMON, mage.cards.s.StitchwingSkaab.class));
-        cards.add(new SetCardInfo("Stormfront Pegasus", 778, Rarity.COMMON, mage.cards.s.StormfrontPegasus.class));
+        cards.add(new SetCardInfo("Stormfront Pegasus", 778, Rarity.UNCOMMON, mage.cards.s.StormfrontPegasus.class));
         cards.add(new SetCardInfo("Storm God's Oracle", 721, Rarity.COMMON, mage.cards.s.StormGodsOracle.class));
         cards.add(new SetCardInfo("Strike It Rich", 521, Rarity.UNCOMMON, mage.cards.s.StrikeItRich.class));
         cards.add(new SetCardInfo("Striking Sliver", 522, Rarity.COMMON, mage.cards.s.StrikingSliver.class));
