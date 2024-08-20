@@ -56,6 +56,7 @@ public class AmzuSwarmsHungerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.GRAVEYARD, playerA, "Living Hive");
         addCard(Zone.GRAVEYARD, playerA, "Saber Ants");
+        addCard(Zone.GRAVEYARD, playerA, "Blasphemous Act"); // test non-permanent card type
         addCard(Zone.HAND, playerA, "Rakdos Charm");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rakdos Charm", true);
@@ -68,6 +69,6 @@ public class AmzuSwarmsHungerTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Insect Token", 1);
-        assertCounterCount(playerA, "Insect Token", CounterType.P1P1, 8);
+        assertCounterCount(playerA, "Insect Token", CounterType.P1P1, 9);
     }
 }
