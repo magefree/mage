@@ -89,6 +89,9 @@ class AmzuSwarmsHungerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         CreateTokenEffect effect = new CreateTokenEffect(new IzoniInsectToken());
         boolean result = effect.apply(game, source);
+        if (!result){
+            return false;
+        }
 
         Object cardsLeavingGraveyardObj = this.getValue("cardsLeavingGraveyard");
         if (!(cardsLeavingGraveyardObj instanceof Set)) {
@@ -101,8 +104,8 @@ class AmzuSwarmsHungerEffect extends OneShotEffect {
                 .max()
                 .orElse(0);
 
-        if (xvalue <= 0 || !result) {
-            return result;
+        if (xvalue <= 0) {
+            return true;
         }
         for (UUID id : effect.getLastAddedTokenIds()) {
             Permanent token = game.getPermanent(id);
