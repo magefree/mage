@@ -178,6 +178,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Morbid Opportunist", 183, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Mossfire Valley", 316, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 317, Rarity.RARE, mage.cards.m.MosswortBridge.class));
+        cards.add(new SetCardInfo("Ms. Bumbleflower", 3, Rarity.MYTHIC, mage.cards.m.MsBumbleflower.class));
         cards.add(new SetCardInfo("Murmuration", 10, Rarity.RARE, mage.cards.m.Murmuration.class));
         cards.add(new SetCardInfo("Mystic Monastery", 318, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Nadier's Nightblade", 184, Rarity.UNCOMMON, mage.cards.n.NadiersNightblade.class));
@@ -317,6 +318,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wooded Ridgeline", 353, Rarity.COMMON, mage.cards.w.WoodedRidgeline.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 354, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 355, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
+        cards.add(new SetCardInfo("Zinnia, Valley's Voice", 4, Rarity.MYTHIC, mage.cards.z.ZinniaValleysVoice.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 190, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
     }
 }
