@@ -503,6 +503,7 @@ public class ScryfallImageSupportCards {
             add("DBL"); // Innistrad: Double Feature
             add("CC2"); // Commander Collection: Black
             add("NEO"); // Kamigawa: Neon Dynasty
+            add("YNEO"); // Alchemy: Kamigawa
             add("NEC"); // Neon Dynasty Commander
             add("PL22"); // Year of the Tiger 2022
             add("SNC"); // Streets of New Capenna
@@ -558,6 +559,7 @@ public class ScryfallImageSupportCards {
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
             add("BLC"); // Bloomburrow Commander
+            add("YAR"); // Alchemy Rebalanced
             add("DSK"); // Duskmourn: House of Horror
             add("FDN"); // Foundations
             add("MB2"); // Mystery Booster 2
