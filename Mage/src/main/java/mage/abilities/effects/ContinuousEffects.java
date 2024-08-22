@@ -2,6 +2,7 @@ package mage.abilities.effects;
 
 import mage.ApprovingObject;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
@@ -21,6 +22,7 @@ import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.util.trace.TraceInfo;
 import org.apache.log4j.Logger;
@@ -1476,5 +1478,36 @@ public class ContinuousEffects implements Serializable {
     @Override
     public String toString() {
         return "Effects: " + allEffectsLists.stream().mapToInt(ContinuousEffectsList::size).sum();
+    }
+
+    public void replaceMutatedObjects(UUID originalId, UUID newId, Game game) {
+        for (ContinuousEffectsList<?> effectsList : allEffectsLists) {
+            for (ContinuousEffect effect : effectsList) {
+                //effect.getTargetPointer().replaceMutatedTarget(originalId, newId, game);
+                Set<Ability> abilities = effectsList.getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    if (ability.getSourceId() != null && ability.getSourceId().equals(originalId)) {
+                        ability.setSourceId(newId);
+                    }
+                    for (Target target : ability.getTargets()) {
+                        target.replaceMutatedTarget(originalId, newId, game.getState().getZoneChangeCounter(newId));
+                    }
+                }
+                // also replace locked in
+                ContinuousEffectImpl cEffect = (ContinuousEffectImpl) effect;
+                if (cEffect.getAffectedObjectsSet()) {
+                    List<MageObjectReference> newMors = new ArrayList<>();
+                    for (Iterator<MageObjectReference> it = cEffect.affectedObjectList.iterator(); it.hasNext(); ) {
+                        MageObjectReference mor = it.next();
+                        if (mor.getSourceId().equals(originalId)) {
+                            it.remove();
+                            newMors.add(new MageObjectReference(newId, game.getState().getZoneChangeCounter(newId), game));
+                        }
+                    }
+                    cEffect.affectedObjectList.addAll(newMors);
+                }
+            }
+        }
+        game.applyEffects(); // required to get abilities correct before firing mutated event (e.g. lose abilities)
     }
 }

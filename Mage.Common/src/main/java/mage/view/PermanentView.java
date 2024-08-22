@@ -37,6 +37,8 @@ public class PermanentView extends CardView {
     private final boolean attachedToPermanent;
     // If this card is attached to a permanent which is controlled by a player other than the one which controls this permanent
     private final boolean attachedControllerDiffers;
+    private final boolean mutatedOver;
+    private final MutateView mutateView;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
         super(permanent, game, CardUtil.canShowAsControlled(permanent, createdForPlayerId));
@@ -69,6 +71,8 @@ public class PermanentView extends CardView {
         }
         //this.transformed = permanent.isTransformed();
         this.copy = permanent.isCopy();
+        this.mutatedOver = permanent.isMutateOver();
+        this.mutateView = new MutateView(permanent, game);
 
         // for fipped, transformed or copied cards, switch the names
         if (original != null && !original.getName().equals(this.getName())) {
@@ -148,6 +152,8 @@ public class PermanentView extends CardView {
         this.cloaked = permanentView.cloaked;
         this.attachedToPermanent = permanentView.attachedToPermanent;
         this.attachedControllerDiffers = permanentView.attachedControllerDiffers;
+        this.mutatedOver = permanentView.mutatedOver;
+        this.mutateView = permanentView.mutateView;
     }
 
     public boolean isTapped() {
@@ -228,5 +234,13 @@ public class PermanentView extends CardView {
 
     public boolean isCloaked() {
         return cloaked;
+    }
+
+    public boolean isMutatedOver() {
+        return mutatedOver;
+    }
+
+    public MutateView getMutateView() {
+        return mutateView;
     }
 }

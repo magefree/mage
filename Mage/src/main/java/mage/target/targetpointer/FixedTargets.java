@@ -29,7 +29,7 @@ public class FixedTargets extends TargetPointerImpl {
                 .collect(Collectors.toList()));
     }
 
-    public FixedTargets(Set<Card> objects, Game game) {
+    public FixedTargets(Set<? extends Card> objects, Game game) {
         this(objects
                 .stream()
                 .map(o -> new MageObjectReference(o.getId(), game))
@@ -125,5 +125,16 @@ public class FixedTargets extends TargetPointerImpl {
             }
         }
         return null;
+    }
+
+    @Override
+    public void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, Game game) {
+        for (int i = targets.size() - 1; i >= 0; --i) {
+            MageObjectReference ref = targets.get(i);
+            if (ref.getSourceId().equals(originalTargetId)) {
+                int count = ref.getZoneChangeCounter();
+                targets.set(i, new MageObjectReference(newTargetId, count, game));
+            }
+        }
     }
 }

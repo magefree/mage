@@ -4898,7 +4898,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardsToExile(Set<Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
+    public boolean moveCardsToExile(Set<? extends Card> cards, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
         if (cards.isEmpty()) {
             return true;
         }

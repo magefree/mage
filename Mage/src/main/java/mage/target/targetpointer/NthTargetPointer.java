@@ -161,4 +161,13 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
     public boolean isPlural(Targets targets) {
         return targets.size() > this.targetIndex && targets.get(this.targetIndex).getMaxNumberOfTargets() > 1;
     }
+
+    @Override
+    public void replaceMutatedTarget(UUID originalTargetId, UUID newTargetId, Game game) {
+        if (zoneChangeCounter.containsKey(originalTargetId)) {
+            Integer value = zoneChangeCounter.get(originalTargetId);
+            zoneChangeCounter.remove(originalTargetId);
+            zoneChangeCounter.put(newTargetId, value);
+        }
+    }
 }
