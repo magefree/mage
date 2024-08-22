@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 
@@ -18,9 +19,10 @@ public enum AbilitySourceAttachedPredicate implements ObjectSourcePlayerPredicat
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
         MageObject obj = input.getObject();
         Ability source = input.getSource();
+        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
 
-        return obj instanceof StackAbility
-                && ((StackAbility) obj).getSourceId().equals(source.getSourcePermanentOrLKI(game).getAttachedTo());
+        return sourcePermanent != null && obj instanceof StackAbility
+                && ((StackAbility) obj).getSourceId().equals(sourcePermanent.getAttachedTo());
     }
 
     @Override
