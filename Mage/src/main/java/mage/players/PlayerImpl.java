@@ -1076,6 +1076,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         && !(card instanceof PermanentToken) && !card.isCopy()) {
                     Card cardInLib = getLibrary().getFromTop(game);
                     if (cardInLib != null && cardInLib.getId().equals(card.getMainCard().getId())) { // check needed because e.g. commander can go to command zone
+                        cardInLib = getLibrary().drawFromTop(game); // TODO: refactor so this separate step isn't needed
                         getLibrary().putCardToTopXPos(cardInLib, xFromTheTop, game);
                         game.informPlayers((withName ? cardInLib.getLogName() : "A card")
                                 + " is put into "
