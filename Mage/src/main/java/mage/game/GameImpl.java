@@ -22,7 +22,6 @@ import mage.abilities.effects.keyword.StunCounterEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
-import mage.actions.impl.MageAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardInfo;
@@ -3770,11 +3769,6 @@ public abstract class GameImpl implements Game {
     public boolean endTurn(Ability source) {
         getTurn().endTurn(this, getActivePlayerId(), source);
         return true;
-    }
-
-    @Override
-    public int doAction(Ability source, MageAction action) {
-        return action.doAction(source, this);
     }
 
     @Override
