@@ -80,7 +80,7 @@ class InzervaMasterOfInsightsEffect extends OneShotEffect {
                     continue;
                 }
                 for (int i = 0; i < count; i++) {
-                    Card card = opponent.getLibrary().removeFromTop(game);
+                    Card card = opponent.getLibrary().getFromTop(game);
                     cards.add(card);
                 }
                 TargetCard targets = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to PUT on the BOTTOM of " + opponent.getName() + "'s library"));

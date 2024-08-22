@@ -757,7 +757,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (game.replaceEvent(new DrawCardEvent(getId(), source, event))) {
                 continue;
             }
-            Card card = getLibrary().removeFromTop(game);
+            Card card = getLibrary().drawFromTop(game);
             if (card != null) {
                 card.moveToZone(Zone.HAND, source, game, false); // if you want to use event.getSourceId() here then thinks x10 times
                 if (isTopCardRevealed()) {
@@ -1075,7 +1075,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                         && !(card instanceof PermanentToken) && !card.isCopy()) {
                     Card cardInLib = getLibrary().getFromTop(game);
                     if (cardInLib != null && cardInLib.getId().equals(card.getMainCard().getId())) { // check needed because e.g. commander can go to command zone
-                        cardInLib = getLibrary().removeFromTop(game);
                         getLibrary().putCardToTopXPos(cardInLib, xFromTheTop, game);
                         game.informPlayers((withName ? cardInLib.getLogName() : "A card")
                                 + " is put into "

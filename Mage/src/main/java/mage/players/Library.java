@@ -47,13 +47,10 @@ public class Library implements Serializable {
     }
 
     /**
-     * Removes the top card of the Library and returns it
-     *
-     * @param game
-     * @return Card
-     * @see Card
+     * Draws a card from the top of the library, removing it from the library.
+     * If library is empty, returns null and sets flag for drawing from an empty library.
      */
-    public Card removeFromTop(Game game) {
+    public Card drawFromTop(Game game) {
         UUID cardId = library.pollFirst();
         Card card = game.getCard(cardId);
         if (card == null) {
@@ -63,13 +60,10 @@ public class Library implements Serializable {
     }
 
     /**
-     * Removes the bottom card of the Library and returns it
-     *
-     * @param game
-     * @return Card
-     * @see Card
+     * Draws a card from the bottom of the library, removing it from the library.
+     * If library is empty, returns null and sets flag for drawing from an empty library.
      */
-    public Card removeFromBottom(Game game) {
+    public Card drawFromBottom(Game game) {
         UUID cardId = library.pollLast();
         Card card = game.getCard(cardId);
         if (card == null) {
@@ -79,25 +73,19 @@ public class Library implements Serializable {
     }
 
     /**
-     * Returns the top card of the Library without removing it
-     *
-     * @param game
-     * @return Card
-     * @see Card
+     * Returns the top card of the Library (can be null if library is empty).
+     * The card is still in the library, until/unless some zone-handling code moves it
      */
     public Card getFromTop(Game game) {
         return game.getCard(library.peekFirst());
     }
 
     /**
-     * Returns the bottommost card of the Library without removing it
-     *
-     * @param game
-     * @return Card
-     * @see Card
+     * Returns the bottom card of the library (can be null if library is empty)
+     * The card is still in the library, until/unless some zone-handling code moves it
      */
     public Card getFromBottom(Game game) {
-        return game.getCard(library.pollLast());
+        return game.getCard(library.peekLast()); // does not remove the card from its position in the library
     }
 
     public void putOnTop(Card card, Game game) {
@@ -116,7 +104,7 @@ public class Library implements Serializable {
             int idx = 1;
             while (hasCards() && idx < pos) {
                 idx++;
-                save.add(removeFromTop(game));
+                save.add(drawFromTop(game)); // TODO: rework to manipulate directly rather than removing via draw method
             }
             putOnTop(card, game);
             while (!save.isEmpty()) {
@@ -152,10 +140,7 @@ public class Library implements Serializable {
     }
 
     /**
-     * Returns the cards of the library in a list ordered from top to buttom
-     *
-     * @param game
-     * @return
+     * Returns the cards of the library in a list ordered from top to bottom
      */
     public List<Card> getCards(Game game) {
         return library.stream().map(game::getCard).filter(Objects::nonNull).collect(Collectors.toList());
@@ -235,9 +220,6 @@ public class Library implements Serializable {
 
     /**
      * Tests only -- find card position in library
-     *
-     * @param cardId
-     * @return
      */
     public int getCardPosition(UUID cardId) {
         UUID[] list = library.toArray(new UUID[0]);

@@ -73,7 +73,7 @@ class LidlessGazeEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                Card card = player.getLibrary().removeFromTop(game);
+                Card card = player.getLibrary().getFromTop(game);
                 if (card != null) {
                     controller.moveCardsToExile(card, source, game, true, exileId, exileName);
                     cards.add(card);
