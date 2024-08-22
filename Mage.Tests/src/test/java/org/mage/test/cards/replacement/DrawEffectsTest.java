@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;
@@ -104,4 +103,25 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Bear Token", 1);
         assertHandCount(playerA, 1);
     }
+
+    @Test
+    public void testAlmsCollector() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Alms Collector");
+        // If an opponent would draw two or more cards, instead you and that player each draw a card.
+
+        // Draw two cards.
+        addCard(Zone.HAND, playerA, "Counsel of the Soratami", 1); // Sorcery {2}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Counsel of the Soratami");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Counsel of the Soratami", 1);
+        assertHandCount(playerA, 1);
+        assertHandCount(playerB, 1);
+    }
+
 }
