@@ -73,7 +73,7 @@ public class TournamentSession {
             setupTimeout(timeout);
             managerFactory.userManager().getUser(userId).ifPresent(user -> {
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                user.ccConstruct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
+                user.ccConstruct(tournament.getPlayer(playerId).getDeck(), tableId, null, remaining);
             });
         }
     }

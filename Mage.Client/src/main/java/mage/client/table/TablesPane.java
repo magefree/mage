@@ -115,6 +115,7 @@ public class TablesPane extends MagePane {
 
     @Override
     public void deactivated() {
+        super.deactivated();
         tablesPanel.stopTasks();
     }
 
@@ -122,5 +123,16 @@ public class TablesPane extends MagePane {
         if (tablesPanel != null) {
             tablesPanel.setTableFilter();
         }
+    }
+
+    @Override
+    public UUID getSortTableId() {
+        return null;
+    }
+
+    @Override
+    public int getSortOrder() {
+        // lobby must be first all the time
+        return 0;
     }
 }

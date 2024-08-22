@@ -195,6 +195,7 @@ Masterpiece Series|MPS|
 Mirrodin|MRD|
 Murders at Karlov Manor|MKM|
 Murders at Karlov Manor Commander|MKC|
+Mystery Booster 2|MB2|
 Ravnica: Clue Edition|CLU|
 Nemesis|NEM|
 New Phyrexia|NPH|
@@ -224,6 +225,7 @@ Jurassic World Collection|REX|
 Rivals of Ixalan|RIX|
 Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
+Sega Dreamcast Cards|PSDG|
 Starter 2000|S00|
 Starter 1999|S99|
 Starter Commander Decks|SCD|

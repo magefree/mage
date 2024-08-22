@@ -79,7 +79,7 @@ class DevourerOfDestinyTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return true;
+        return this.getControllerId().equals(event.getPlayerId());
     }
 
     @Override

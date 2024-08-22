@@ -3,6 +3,7 @@ package mage.cards.l;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
@@ -52,6 +53,7 @@ public final class LupinflowerVillage extends CardImpl {
                 6, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM
         ), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
 

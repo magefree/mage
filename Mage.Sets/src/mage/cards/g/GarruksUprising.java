@@ -48,7 +48,7 @@ public final class GarruksUprising extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURES
         )));
 
-        // Whenever a creature with power 4 or greater enters the battlefield under your control, draw a card.
+        // Whenever a creature with power 4 or greater you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, false
         ));

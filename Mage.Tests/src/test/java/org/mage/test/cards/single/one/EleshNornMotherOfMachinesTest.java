@@ -53,7 +53,7 @@ public class EleshNornMotherOfMachinesTest extends CardTestPlayerBase {
         //
         // Bloodghast can't block.
         // Bloodghast has haste as long as an opponent has 10 or less life.
-        // Landfall — Whenever a land enters the battlefield under your control,
+        // Landfall — Whenever a land you control enters,
         // you may return Bloodghast from your graveyard to the battlefield.
         addCard(Zone.GRAVEYARD, playerA, "Bloodghast");
         addCard(Zone.HAND, playerA, "Forest");

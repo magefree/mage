@@ -32,7 +32,7 @@ public final class HiddenHerbalists extends CardImpl {
         this.addAbility(
                 new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                         new BasicManaEffect(Mana.GreenMana(2)), false), RevoltCondition.instance,
-                        "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
+                        "<i>Revolt</i> &mdash; When {this} enters, if a permanent you controlled left"
                         + " the battlefield this turn, add {G}{G}.").addHint(RevoltCondition.getHint()),
                 new RevoltWatcher()
         );

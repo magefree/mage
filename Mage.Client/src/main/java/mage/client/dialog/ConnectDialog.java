@@ -13,7 +13,6 @@ import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.*;
@@ -739,11 +738,11 @@ public class ConnectDialog extends MageDialog {
     }//GEN-LAST:event_btnFlagSearchActionPerformed
 
     private void btnCheckStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckStatusActionPerformed
-        AppUtil.openUrlInBrowser("http://xmage.today/servers/");
+        AppUtil.openUrlInSystemBrowser("http://xmage.today/servers/");
     }//GEN-LAST:event_btnCheckStatusActionPerformed
 
     private void btnWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsNewActionPerformed
-        MageFrame.showWhatsNewDialog();
+        MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_btnWhatsNewActionPerformed
 
     private void btnFindMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindMainActionPerformed

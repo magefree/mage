@@ -41,7 +41,7 @@ public final class ElvishWarmaster extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever one or more other Elves enters the battlefield under your control, create a 1/1 green Elf Warrior creature token. This ability triggers only once each turn.
+        // Whenever one or more other Elves you control enters, create a 1/1 green Elf Warrior creature token. This ability triggers only once each turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CreateTokenEffect(new ElfWarriorToken()), filter
         ).setTriggersLimitEachTurn(1));

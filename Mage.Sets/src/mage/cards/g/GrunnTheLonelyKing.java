@@ -34,9 +34,9 @@ public final class GrunnTheLonelyKing extends CardImpl {
         //Kicker {3} (You may pay an additional {3} as you cast this spell.)
         this.addAbility(new KickerAbility("{3}"));
 
-        //If Grunn, the Lonely King was kicked, it enters the battlefield with five +1/+1 counters on it.
+        //If Grunn, the Lonely King was kicked, it enters with five +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
-                                                     KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield with five +1/+1 counters on it.", ""));
+                                                     KickedCondition.ONCE, "If {this} was kicked, it enters with five +1/+1 counters on it.", ""));
 
         //Whenever Grunn attacks alone, double its power and toughness until end of turn.
         SourcePermanentPowerCount power = new SourcePermanentPowerCount();

@@ -83,7 +83,7 @@ class BrinelinTheMoonKrakenTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or whenever you cast a spell with mana value " +
+        return "When {this} enters or whenever you cast a spell with mana value " +
                 "6 or greater, you may return target nonland permanent to its owner's hand.";
     }
 

@@ -38,7 +38,7 @@ public final class Mournwillow extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new MournwillowEffect(), false),
                 DeliriumCondition.instance,
-                "<i>Delirium</i> &mdash; When {this} enters the battlefield, if there are four or more card types among cards in your graveyard, "
+                "<i>Delirium</i> &mdash; When {this} enters, if there are four or more card types among cards in your graveyard, "
                         + "creatures with power 2 or less can't block this turn.");
         ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);

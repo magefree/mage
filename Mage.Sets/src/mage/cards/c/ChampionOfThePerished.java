@@ -32,7 +32,7 @@ public final class ChampionOfThePerished extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever another Zombie enters the battlefield under your control, put a +1/+1 counter on Champion of the Perished.
+        // Whenever another Zombie you control enters, put a +1/+1 counter on Champion of the Perished.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
     }
 

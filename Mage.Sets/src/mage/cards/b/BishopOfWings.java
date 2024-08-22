@@ -33,7 +33,7 @@ public final class BishopOfWings extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // Whenever an Angel enters the battlefield under your control, you gain 4 life.
+        // Whenever an Angel you control enters, you gain 4 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(4), filter));
 
         // Whenever an Angel you control dies, create a 1/1 white Spirit creature token with flying.

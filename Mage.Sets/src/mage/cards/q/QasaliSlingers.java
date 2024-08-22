@@ -33,7 +33,7 @@ public final class QasaliSlingers extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Whenever Qasali Slingers or another Cat enters the battlefield under your control, you may destroy target artifact or enchantment.
+        // Whenever Qasali Slingers or another Cat you control enters, you may destroy target artifact or enchantment.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new DestroyTargetEffect(), filter, true, true
         );

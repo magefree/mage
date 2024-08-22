@@ -10,7 +10,6 @@ import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.DeckUtil;
-import mage.client.util.GameManager;
 import mage.client.util.IgnoreList;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.object.SaveObjectUtil;
@@ -112,8 +111,7 @@ public class CallbackClientImpl implements CallbackClient {
 
                     case START_GAME: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
-                        GameManager.instance.setCurrentPlayerUUID(message.getPlayerId());
-                        gameStarted(callback.getMessageId(), message.getGameId(), message.getPlayerId());
+                        gameStarted(callback.getMessageId(), message.getCurrentTableId(), message.getParentTableId(), message.getGameId(), message.getPlayerId());
 
                         // reconnect fix with miss data, part 2 of 2
                         // START_GAME event can come after GAME_INIT or any other, so must force update with first info
@@ -137,7 +135,7 @@ public class CallbackClientImpl implements CallbackClient {
 
                     case START_TOURNAMENT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
-                        tournamentStarted(callback.getMessageId(), message.getGameId(), message.getPlayerId());
+                        tournamentStarted(callback.getMessageId(), callback.getObjectId(), message.getCurrentTableId(), message.getPlayerId());
                         break;
                     }
 
@@ -147,12 +145,14 @@ public class CallbackClientImpl implements CallbackClient {
                     }
 
                     case SHOW_TOURNAMENT: {
-                        showTournament(callback.getObjectId());
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        showTournament(message.getCurrentTableId(), callback.getObjectId());
                         break;
                     }
 
                     case WATCHGAME: {
-                        watchGame(callback.getObjectId());
+                        TableClientMessage message = (TableClientMessage) callback.getData();
+                        watchGame(message.getCurrentTableId(), message.getParentTableId(), callback.getObjectId());
                         break;
                     }
 
@@ -214,7 +214,7 @@ public class CallbackClientImpl implements CallbackClient {
 
                     case JOINED_TABLE: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
-                        joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
+                        joinedTable(message.getRoomId(), message.getCurrentTableId(), message.getFlag());
                         break;
                     }
 
@@ -431,9 +431,9 @@ public class CallbackClientImpl implements CallbackClient {
                         DeckView deckView = message.getDeck();
                         Deck deck = DeckUtil.construct(deckView);
                         if (message.getFlag()) {
-                            construct_sideboard(deck, message.getTableId(), message.getTime());
+                            construct_sideboard(deck, message.getCurrentTableId(), message.getParentTableId(), message.getTime());
                         } else {
-                            sideboard(deck, message.getTableId(), message.getTime());
+                            sideboard(deck, message.getCurrentTableId(), message.getParentTableId(), message.getTime());
                         }
                         break;
                     }
@@ -442,7 +442,7 @@ public class CallbackClientImpl implements CallbackClient {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         DeckView deckView = message.getDeck();
                         Deck deck = DeckUtil.construct(deckView);
-                        viewLimitedDeck(deck, message.getTableId(), message.getTime());
+                        viewLimitedDeck(deck, message.getCurrentTableId(), message.getParentTableId(), message.getTime());
                         break;
                     }
 
@@ -456,13 +456,13 @@ public class CallbackClientImpl implements CallbackClient {
                         TableClientMessage message = (TableClientMessage) callback.getData();
                         DeckView deckView = message.getDeck();
                         Deck deck = DeckUtil.construct(deckView);
-                        construct(deck, message.getTableId(), message.getTime());
+                        construct(deck, message.getCurrentTableId(), message.getParentTableId(), message.getTime());
                         break;
                     }
 
                     case START_DRAFT: {
                         TableClientMessage message = (TableClientMessage) callback.getData();
-                        draftStarted(callback.getMessageId(), message.getGameId(), message.getPlayerId());
+                        draftStarted(callback.getMessageId(), message.getCurrentTableId(), callback.getObjectId(), message.getPlayerId());
                         break;
                     }
 
@@ -606,10 +606,10 @@ public class CallbackClientImpl implements CallbackClient {
         }
     }
 
-    protected void gameStarted(final int messageId, final UUID gameId, final UUID playerId) {
+    protected void gameStarted(final int messageId, final UUID currentTableId, final UUID parentTableId, final UUID gameId, final UUID playerId) {
         try {
-            frame.showGame(gameId, playerId);
             logger.info("Game " + gameId + " started for player " + playerId);
+            frame.showGame(currentTableId, parentTableId, gameId, playerId);
         } catch (Exception ex) {
             handleException(ex);
         }
@@ -619,20 +619,20 @@ public class CallbackClientImpl implements CallbackClient {
         }
     }
 
-    protected void draftStarted(int messageId, UUID draftId, UUID playerId) {
+    protected void draftStarted(int messageId, UUID tableId, UUID draftId, UUID playerId) {
         try {
-            frame.showDraft(draftId);
             logger.info("Draft " + draftId + " started for player " + playerId);
+            frame.showDraft(tableId, draftId);
         } catch (Exception ex) {
             handleException(ex);
         }
     }
 
-    protected void tournamentStarted(int messageId, UUID tournamentId, UUID playerId) {
+    protected void tournamentStarted(int messageId, UUID tournamentId, UUID tableId, UUID playerId) {
         try {
-            frame.showTournament(tournamentId);
-            AudioManager.playTournamentStarted();
             logger.info("Tournament " + tournamentId + " started for player " + playerId);
+            frame.showTournament(tableId, tournamentId);
+            AudioManager.playTournamentStarted();
         } catch (Exception ex) {
             handleException(ex);
         }
@@ -640,22 +640,20 @@ public class CallbackClientImpl implements CallbackClient {
 
     /**
      * Shows the tournament info panel for a tournament
-     *
-     * @param tournamentId
      */
-    protected void showTournament(UUID tournamentId) {
+    protected void showTournament(UUID tableId, UUID tournamentId) {
         try {
-            frame.showTournament(tournamentId);
             logger.info("Showing tournament " + tournamentId);
+            frame.showTournament(tableId, tournamentId);
         } catch (Exception ex) {
             handleException(ex);
         }
     }
 
-    protected void watchGame(UUID gameId) {
+    protected void watchGame(UUID currentTableId, UUID parentTableId, UUID gameId) {
         try {
-            frame.watchGame(gameId);
             logger.info("Watching game " + gameId);
+            frame.watchGame(currentTableId, parentTableId, gameId);
         } catch (Exception ex) {
             handleException(ex);
         }
@@ -663,27 +661,27 @@ public class CallbackClientImpl implements CallbackClient {
 
     protected void replayGame(UUID gameId) {
         try {
+            logger.info("Replaying game " + gameId);
             frame.replayGame(gameId);
-            logger.info("Replaying game");
         } catch (Exception ex) {
             handleException(ex);
         }
     }
 
-    protected void sideboard(Deck deck, UUID tableId, int time) {
-        frame.showDeckEditor(DeckEditorMode.SIDEBOARDING, deck, tableId, time);
+    protected void sideboard(Deck deck, UUID currentTableId, UUID parentTableId, int time) {
+        frame.showDeckEditor(DeckEditorMode.SIDEBOARDING, deck, currentTableId, parentTableId, time);
     }
 
-    protected void construct(Deck deck, UUID tableId, int time) {
-        frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
+    protected void construct(Deck deck, UUID currentTableId, UUID parentTableId, int time) {
+        frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, currentTableId, parentTableId, time);
     }
 
-    protected void construct_sideboard(Deck deck, UUID tableId, int time) {
-        frame.showDeckEditor(DeckEditorMode.LIMITED_SIDEBOARD_BUILDING, deck, tableId, time);
+    protected void construct_sideboard(Deck deck, UUID currentTableId, UUID parentTableId, int time) {
+        frame.showDeckEditor(DeckEditorMode.LIMITED_SIDEBOARD_BUILDING, deck, currentTableId, parentTableId, time);
     }
 
-    protected void viewLimitedDeck(Deck deck, UUID tableId, int time) {
-        frame.showDeckEditor(DeckEditorMode.VIEW_LIMITED_DECK, deck, tableId, time);
+    protected void viewLimitedDeck(Deck deck, UUID currentTableId, UUID parentTableId, int time) {
+        frame.showDeckEditor(DeckEditorMode.VIEW_LIMITED_DECK, deck, currentTableId, parentTableId, time);
     }
 
     protected void viewSideboard(UUID gameId, UUID playerId) {

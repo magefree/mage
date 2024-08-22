@@ -39,7 +39,7 @@ public final class GolgariRaiders extends CardImpl {
                         new CardsInControllerGraveyardCount(
                                 StaticFilters.FILTER_CARD_CREATURE
                         ), true
-                ), null, AbilityWord.UNDERGROWTH.formatWord() + "{this} enters the battlefield " +
+                ), null, AbilityWord.UNDERGROWTH.formatWord() + "{this} enters " +
                 "with a +1/+1 counter on it for each creature card in your graveyard.", null
         );
         this.addAbility(ability);

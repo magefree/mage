@@ -33,7 +33,7 @@ public final class EmissaryOfTheSleepless extends CardImpl {
         
         // When Emissary of the Sleepless enters the battlefield, if a creature died this turn, create a 1/1 white Spirit creature token with flying.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()));
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, "When {this} enters the battlefield, if a creature died this turn, create a 1/1 white Spirit creature token with flying.").addHint(MorbidHint.instance));
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, "When {this} enters, if a creature died this turn, create a 1/1 white Spirit creature token with flying.").addHint(MorbidHint.instance));
     }
 
     private EmissaryOfTheSleepless(final EmissaryOfTheSleepless card) {

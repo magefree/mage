@@ -25,7 +25,7 @@ public final class TanglespanLookout extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever an Aura enters the battlefield under your control, draw a card.
+        // Whenever an Aura you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filter
         ));

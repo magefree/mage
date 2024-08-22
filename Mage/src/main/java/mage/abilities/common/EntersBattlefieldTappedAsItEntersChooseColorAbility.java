@@ -42,6 +42,6 @@ public class EntersBattlefieldTappedAsItEntersChooseColorAbility extends StaticA
 
     @Override
     public String getRule() {
-        return "{this} enters the battlefield tapped. As it enters, choose a color.";
+        return "{this} enters tapped. As it enters, choose a color.";
     }
 }

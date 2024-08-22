@@ -34,7 +34,7 @@ public final class GlyphElemental extends CardImpl {
         // Bestow {1}{W}
         this.addAbility(new BestowAbility(this, "{1}{W}"));
 
-        // Landfall -- Whenever a land enters the battlefield under your control, put a +1/+1 counter on Glyph Elemental.
+        // Landfall -- Whenever a land you control enters, put a +1/+1 counter on Glyph Elemental.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // Enchanted creature gets +1/+1 for each +1/+1 counter on Glyph Elemental.

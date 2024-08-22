@@ -4,7 +4,10 @@ import mage.client.util.CardLanguage;
 import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.images.CardDownloadData;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author North, JayDi85
@@ -69,5 +72,9 @@ public interface CardImageSource {
 
     default boolean isTokenImageProvided(String setCode, String cardName, Integer tokenNumber) {
         return false;
+    }
+
+    default void onFinished() {
+        // cleanup temp resources
     }
 }

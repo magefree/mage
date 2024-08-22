@@ -205,7 +205,9 @@ class GusthasScepterPutExiledCardsInOwnersGraveyardEffect extends OneShotEffect 
     @Override
     public boolean apply(Game game, Ability source) {
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        exileZone.getCards(game).stream().forEach(card -> card.moveToZone(Zone.GRAVEYARD, source, game, false));
+        if (exileZone != null) {
+            exileZone.getCards(game).forEach(card -> card.moveToZone(Zone.GRAVEYARD, source, game, false));
+        }
         return true;
     }
 

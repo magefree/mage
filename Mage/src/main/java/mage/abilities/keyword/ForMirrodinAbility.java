@@ -20,7 +20,7 @@ public class ForMirrodinAbility extends EntersBattlefieldTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "For Mirrodin! <i>(When this Equipment enters the battlefield, " +
+        return "For Mirrodin! <i>(When this Equipment enters, " +
                 "create a 2/2 red Rebel creature token, then attach this to it.)</i>";
     }
 

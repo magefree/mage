@@ -37,7 +37,7 @@ public final class DevilishValet extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Alliance — Whenever another creature enters the battlefield under your control, double Devilish Valet's power until end of turn.
+        // Alliance — Whenever another creature you control enters, double Devilish Valet's power until end of turn.
         this.addAbility(new AllianceAbility(new DevilishValetEffect()));
     }
 

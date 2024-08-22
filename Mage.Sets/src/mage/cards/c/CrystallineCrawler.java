@@ -33,7 +33,7 @@ public final class CrystallineCrawler extends CardImpl {
         // Converge - Crystalline Crawler enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), ColorsOfManaSpentToCastCount.getInstance(), true),
-                null, "<i>Converge</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.", null));
+                null, "<i>Converge</i> &mdash; {this} enters with a +1/+1 counter on it for each color of mana spent to cast it.", null));
 
         // Remove a +1/+1 counter from Crystalline Crawler: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)),

@@ -31,7 +31,7 @@ public final class CoatiScavenger extends CardImpl {
         // Descend 4 -- When Coati Scavenger enters the battlefield, if there are four or more permanent cards in your graveyard, return target permanent card from your graveyard to your hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
-                DescendCondition.FOUR, "When {this} enters the battlefield, if there are four or more " +
+                DescendCondition.FOUR, "When {this} enters, if there are four or more " +
                 "permanent cards in your graveyard, return target permanent card from your graveyard to your hand."
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT));

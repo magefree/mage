@@ -71,7 +71,7 @@ public enum TableRecordRepository {
         try {
             if (recordsDao != null && recordsDao.getConnectionSource() != null) {
                 DatabaseConnection conn = recordsDao.getConnectionSource().getReadWriteConnection(recordsDao.getTableName());
-                conn.executeStatement("SHUTDOWN IMMEDIATELY", 0);
+                conn.executeStatement("SHUTDOWN IMMEDIATELY", DatabaseConnection.DEFAULT_RESULT_FLAGS);
                 recordsDao.getConnectionSource().releaseConnection(conn);
             }
         } catch (SQLException ex) {

@@ -378,9 +378,14 @@ public class GameController implements GameCallback {
                             if (session != null) {
                                 problemPlayerFixes = "re-send start game event";
                                 logger.warn("Send forced game start event for player " + player.getName() + " in gameId: " + game.getId());
-                                user.ccGameStarted(session.getGameId(), player.getId());
-                                session.init();
-                                managerFactory.gameManager().sendPlayerString(session.getGameId(), user.getId(), "");
+                                Table table = managerFactory.tableManager().getTable(this.tableId);
+                                if (table != null) {
+                                    user.ccGameStarted(table.getId(), table.getParentTableId(), session.getGameId(), player.getId());
+                                    session.init();
+                                    managerFactory.gameManager().sendPlayerString(session.getGameId(), user.getId(), "");
+                                } else {
+                                    logger.error("Can't find table on fix and re-send start game event: " + this.tableId);
+                                }
                             } else {
                                 throw new IllegalStateException("Wrong code usage: session can't be null cause it created in forced joinGame already");
                                 //player.leave();
@@ -735,9 +740,9 @@ public class GameController implements GameCallback {
 
         if (isSideboardOnly) {
             // sideboard data already sent in PlayerView, so no need to re-sent it TODO: re-sent deck instead?
-            user.ccViewSideboard(tableId, game.getId(), targetPlayerId);
+            user.ccViewSideboard(table.getId(), game.getId(), targetPlayerId);
         } else {
-            user.ccViewLimitedDeck(deckSource.getDeckForViewer(), tableId, requestsOpen, true);
+            user.ccViewLimitedDeck(deckSource.getDeckForViewer(), table.getId(), table.getParentTableId(), requestsOpen, true);
         }
     }
 
@@ -1409,5 +1414,9 @@ public class GameController implements GameCallback {
         }
 
         return fixedAlready;
+    }
+
+    public UUID getTableId() {
+        return tableId;
     }
 }

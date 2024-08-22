@@ -35,7 +35,7 @@ public final class ApocalypseHydra extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.
+        // Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters with an additional X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new ApocalypseHydraEffect()));
 
         // {1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to any target.
@@ -61,7 +61,7 @@ class ApocalypseHydraEffect extends OneShotEffect {
 
     ApocalypseHydraEffect() {
         super(Outcome.BoostCreature);
-        staticText = "with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it";
+        staticText = "with X +1/+1 counters on it. If X is 5 or more, it enters with an additional X +1/+1 counters on it";
     }
 
     private ApocalypseHydraEffect(final ApocalypseHydraEffect effect) {

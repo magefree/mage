@@ -33,7 +33,7 @@ public final class ConstrictingSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(ability,
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS)
-                        .setText("Sliver creatures you control have \"When this creature enters the battlefield, "
+                        .setText("Sliver creatures you control have \"When this creature enters, "
                                 + "you may exile target creature an opponent controls until this creature leaves the battlefield.\"")));
     }
 

@@ -27,7 +27,7 @@ public final class NestingDragon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Landfall — Whenever a land enters the battlefield under your control, create a 0/2 red Dragon Egg creature token with defender and "When this creature dies, create a 2/2 red Dragon creature token with flying and '{R}: This creature gets +1/+0 until end of turn.'"
+        // Landfall — Whenever a land you control enters, create a 0/2 red Dragon Egg creature token with defender and "When this creature dies, create a 2/2 red Dragon creature token with flying and '{R}: This creature gets +1/+0 until end of turn.'"
         this.addAbility(new LandfallAbility(
                 new CreateTokenEffect(new NestingDragonToken()), false
         ));

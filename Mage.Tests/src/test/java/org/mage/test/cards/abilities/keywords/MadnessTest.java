@@ -159,7 +159,7 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
         // Flying
-        // Whenever another creature enters the battlefield under your control, you may discard a card. If you do, put a +1/+1 counter on that creature,
+        // Whenever another creature you control enters, you may discard a card. If you do, put a +1/+1 counter on that creature,
         // it gains haste until end of turn, and it becomes a Vampire in addition to its other types.
         addCard(Zone.BATTLEFIELD, playerA, "Olivia, Mobilized for War", 1);
 

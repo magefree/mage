@@ -103,7 +103,7 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
 
     NayaSoulbeastReplacementEffect() {
         super(Duration.OneUse, Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way";
+        staticText = "{this} enters with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way";
     }
 
     private NayaSoulbeastReplacementEffect(final NayaSoulbeastReplacementEffect effect) {

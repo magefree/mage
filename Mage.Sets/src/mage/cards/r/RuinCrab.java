@@ -23,7 +23,7 @@ public final class RuinCrab extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        // Landfall - Whenever a land enters the battlefield under your control, each opponent mills 3 cards.
+        // Landfall - Whenever a land you control enters, each opponent mills 3 cards.
         this.addAbility(new LandfallAbility(new MillCardsEachPlayerEffect(3, TargetController.OPPONENT), false));
     }
 

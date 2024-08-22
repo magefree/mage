@@ -1495,7 +1495,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertExileZoneCount(String exileZoneName, int count) throws AssertionError {
         ExileZone exileZone = currentGame.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneName, currentGame));
-        int actualCount = exileZone.getCards(currentGame).size();
+        int actualCount = exileZone == null ? 0 : exileZone.getCards(currentGame).size();
 
         Assert.assertEquals("(Exile \"" + exileZoneName + "\") Card counts are not equal.", count, actualCount);
     }

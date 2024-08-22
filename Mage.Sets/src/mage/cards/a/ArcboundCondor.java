@@ -41,7 +41,7 @@ public final class ArcboundCondor extends CardImpl {
         // Modular 3
         this.addAbility(new ModularAbility(this, 3));
 
-        // Whenever another artifact enters the battlefield under your control, target creature an opponent controls gets -1/-1 until end of turn.
+        // Whenever another artifact you control enters, target creature an opponent controls gets -1/-1 until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoostTargetEffect(-1, -1), filter);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);

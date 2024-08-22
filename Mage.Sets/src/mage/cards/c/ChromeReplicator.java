@@ -39,7 +39,7 @@ public final class ChromeReplicator extends CardImpl {
         // When Chrome Replicator enters the battlefield, if you control two or more nonland, nontoken permanents with the same name as one another, create a 4/4 colorless Construct artifact creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Construct4Token())),
-                ChromeReplicatorCondition.instance, "When {this} enters the battlefield, " +
+                ChromeReplicatorCondition.instance, "When {this} enters, " +
                 "if you control two or more nonland, nontoken permanents with the same name as one another, " +
                 "create a 4/4 colorless Construct artifact creature token."
         ));

@@ -27,7 +27,7 @@ public final class NoblesPurse extends CardImpl {
         // Noble's Purse enters the battlefield tapped and with three coin counters on it.
         Ability ability = new EntersBattlefieldAbility(
                 new TapSourceEffect(true), false, null,
-                "{this} enters the battlefield tapped and with three coin counters on it.", null
+                "{this} enters tapped and with three coin counters on it.", null
         );
         ability.addEffect(new AddCountersSourceEffect(CounterType.COIN.createInstance(3)));
         this.addAbility(ability);

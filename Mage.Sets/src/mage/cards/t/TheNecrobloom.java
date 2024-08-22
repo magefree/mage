@@ -34,7 +34,7 @@ public final class TheNecrobloom extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(7);
 
-        // Landfall -- Whenever a land enters the battlefield under your control, create a 0/1 green Plant creature
+        // Landfall -- Whenever a land you control enters, create a 0/1 green Plant creature
         // token. If you control seven or more lands with different names, create a 2/2 black Zombie creature token
         // instead.
         this.addAbility(new LandfallAbility(new ConditionalOneShotEffect(

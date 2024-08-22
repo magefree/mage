@@ -33,7 +33,7 @@ public final class BeregondOfTheGuard extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Beregond of the Guard or another Human enters the battlefield under your control, creatures you control get +1/+1 and gain vigilance until end of turn.
+        // Whenever Beregond of the Guard or another Human you control enters, creatures you control get +1/+1 and gain vigilance until end of turn.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn)
                         .setText("creatures you control get +1/+1"),

@@ -45,7 +45,7 @@ public final class SandstalkerMoloch extends CardImpl {
                                 4, 1, StaticFilters.FILTER_CARD_A_PERMANENT,
                                 PutCards.HAND, PutCards.BOTTOM_RANDOM
                         )
-                ), SandstalkerMolochWatcher::checkPlayer, "When {this} enters the battlefield, " +
+                ), SandstalkerMolochWatcher::checkPlayer, "When {this} enters, " +
                 "if an opponent cast a blue and/or black spell this turn, look at the top four cards " +
                 "of your library. You may reveal a permanent card from among them and put it into your hand. " +
                 "Put the rest on the bottom of your library in a random order."

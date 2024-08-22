@@ -33,12 +33,6 @@ public class Connection {
 
     private UserData userData;
 
-//    private int avatarId;
-//    private boolean showAbilityPickerForced;
-//    private boolean allowRequestShowHandCards;
-//    private boolean confirmEmptyManaPool;
-//    private String flagName;
-//    private UserSkipPrioritySteps userSkipPrioritySteps;
     private static final String serialization = "?serializationtype=java";
     private static final String transport = "bisocket";
     private static final String threadpool = "onewayThreadPool=mage.remote.CustomThreadPool";

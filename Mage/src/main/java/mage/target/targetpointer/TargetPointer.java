@@ -32,11 +32,6 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
      */
     UUID getFirst(Game game, Ability source);
 
-    /**
-     * Return first actual target data (null on outdated targets)
-     */
-    FixedTarget getFirstAsFixedTarget(Game game, Ability source);
-
     TargetPointer copy();
 
     /**

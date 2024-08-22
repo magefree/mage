@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.*;
 import mage.cards.decks.DeckValidator;
 import mage.constants.TableState;
+import mage.game.draft.Draft;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
 import mage.game.events.TableEventSource;
@@ -15,7 +16,7 @@ import mage.players.Player;
 import mage.players.PlayerType;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class Table implements Serializable {
 
@@ -28,7 +29,10 @@ public class Table implements Serializable {
     private Seat[] seats;
     private int numSeats;
     private boolean isTournament;
-    private boolean tournamentSubTable;
+
+    private boolean tournamentSubTable; // must assign by setTournamentSubTable only
+    private UUID parentTableId = null; // original tourney table
+
     private DeckValidator validator;
     private TableState state;
     private Match match;
@@ -87,6 +91,10 @@ public class Table implements Serializable {
         return tableId;
     }
 
+    public UUID getParentTableId() {
+        return parentTableId;
+    }
+
     public UUID getRoomId() {
         return roomId;
     }
@@ -104,9 +112,10 @@ public class Table implements Serializable {
         setState(TableState.FINISHED);
     }
 
-    public void initDraft() {
+    public void initDraft(Draft draft) {
         setState(TableState.DRAFTING);
         tournament.setStepStartTime(new Date());
+        draft.setTableId(this.getId());
     }
 
     public void construct() {
@@ -262,8 +271,9 @@ public class Table implements Serializable {
         return tournamentSubTable;
     }
 
-    public void setTournamentSubTable(boolean tournamentSubTable) {
-        this.tournamentSubTable = tournamentSubTable;
+    public void setTournamentSubTable(UUID parentTableId) {
+        this.tournamentSubTable = true;
+        this.parentTableId = parentTableId;
     }
 
     public Date getStartTime() {

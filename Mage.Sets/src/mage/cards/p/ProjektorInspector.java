@@ -38,12 +38,12 @@ public final class ProjektorInspector extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Whenever Projektor Inspector or another Detective enters the battlefield under your control and whenever a Detective you control is turned face up, you may draw a card. If you do, discard a card.
+        // Whenever Projektor Inspector or another Detective you control enters and whenever a Detective you control is turned face up, you may draw a card. If you do, discard a card.
         this.addAbility(new OrTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DrawDiscardControllerEffect(true),
                 false,
-                "Whenever {this} or another Detective enters the battlefield under your control and "
+                "Whenever {this} or another Detective you control enters and "
                         + "whenever a Detective you control is turned face up, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, null, filter1, false),

@@ -26,7 +26,7 @@ public final class MoltenGatekeeper extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever another creature enters the battlefield under your control, Molten Gatekeeper deals 1 damage to each opponent.
+        // Whenever another creature you control enters, Molten Gatekeeper deals 1 damage to each opponent.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DamagePlayersEffect(1, TargetController.OPPONENT), StaticFilters.FILTER_ANOTHER_CREATURE
         ));

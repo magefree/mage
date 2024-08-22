@@ -44,7 +44,7 @@ public final class WoodcallerAutomaton extends CardImpl {
         // When Woodcaller Automaton enters the battlefield, if you cast it, untap target land you control. It becomes a Treefolk creature with haste and base power and toughness equal to Woodcaller Automaton's power and toughness. It's still a land.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new UntapTargetEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
+                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
                 "if you cast it, untap target land you control. It becomes a Treefolk creature with haste " +
                 "and base power and toughness equal to {this}'s power and toughness. It's still a land."
         );

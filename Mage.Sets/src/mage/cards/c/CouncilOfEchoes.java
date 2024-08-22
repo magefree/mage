@@ -44,7 +44,7 @@ public final class CouncilOfEchoes extends CardImpl {
         // Descend 4 -- When Council of Echoes enters the battlefield, if there are four or more permanent cards in your graveyard, return up to one target nonland permanent other than Council of Echoes to its owner's hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false),
-                DescendCondition.FOUR, "When {this} enters the battlefield, "
+                DescendCondition.FOUR, "When {this} enters, "
                 + "if there are four or more permanent cards in your graveyard, "
                 + "return up to one target nonland permanent other than {this} to its owner's hand"
         );

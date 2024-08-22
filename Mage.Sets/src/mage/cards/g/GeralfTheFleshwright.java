@@ -47,7 +47,7 @@ public final class GeralfTheFleshwright extends CardImpl {
         // Whenever you cast a spell during your turn other than your first spell that turn, create a 2/2 blue and black Zombie Rogue creature token.
         this.addAbility(new GeralfTheFleshwrightTriggeredAbility());
 
-        // Whenever a Zombie enters the battlefield under your control, put a +1/+1 counter on it for each other Zombie that entered the battlefield under your control this turn.
+        // Whenever a Zombie you control enters, put a +1/+1 counter on it for each other Zombie that entered the battlefield under your control this turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new GeralfTheFleshwrightEffect(),

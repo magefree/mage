@@ -87,11 +87,6 @@ public final class Constants {
     public static final String BASE_SOUND_PATH = "sounds" + File.separator; // TODO: check path with File.separator
     public static final String BASE_MUSICS_PATH = "music" + File.separator;
 
-    // battlefield feedback panel colors (used in preferences dialogs too)
-    public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_DISABLE = 0;
-    public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_ONE_COLOR = 1;
-    public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR = 2;
-
     public static final int AUTO_TARGET_DISABLE      = 0;
     public static final int AUTO_TARGET_NON_FEEL_BAD = 1;
     public static final int AUTO_TARGET_ALL          = 2;

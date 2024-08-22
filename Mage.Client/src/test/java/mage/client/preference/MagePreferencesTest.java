@@ -1,6 +1,8 @@
 package mage.client.preference;
 
+import mage.client.dialog.PreferencesDialog;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,5 +44,38 @@ public class MagePreferencesTest {
 
         assertFalse(MagePreferences.ignoreList("test.com.xx").contains("test"));
         assertFalse(MagePreferences.ignoreList("test.com.xx").contains("lul"));
+    }
+
+    @Test
+    public void testGuiSizeRecommends() {
+        // possible presets
+        // 1366 x 768
+        // 1920 x 1080
+        // 2560 x 1440
+        // 3840 x 2160
+        PreferencesDialog.DefaultSizeSettings defaultSizeSettings = PreferencesDialog.getDefaultSizeSettings();
+
+        String needPreset = "1366 x 768";
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 0));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 100));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 767));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 768));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 769));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1079));
+
+        needPreset = "1920 x 1080";
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1080));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1081));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1439));
+
+        needPreset = "2560 x 1440";
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1440));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 1441));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 2159));
+
+        needPreset = "3840 x 2160";
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 2160));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 5000));
+        Assert.assertEquals(needPreset, defaultSizeSettings.findBestPreset(96, 5000));
     }
 }

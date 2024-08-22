@@ -30,7 +30,7 @@ public final class UndergrowthChampion extends CardImpl {
                 new PreventDamageAndRemoveCountersEffect(false, true, false)
         ), PreventDamageAndRemoveCountersEffect.createWatcher());
 
-        // <i>Landfall</i>-Whenever a land enters the battlefield under your control, put a +1/+1 counter on Undergrowth Champion.
+        // <i>Landfall</i>-Whenever a land you control enters, put a +1/+1 counter on Undergrowth Champion.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 

@@ -29,7 +29,7 @@ public final class PhyrexianProcessor extends CardImpl {
     public PhyrexianProcessor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // As {this} enters the battlefield, pay any amount of life.
+        // As {this} enters, pay any amount of life.
         this.addAbility(new AsEntersBattlefieldAbility(new PhyrexianProcessorPayLifeEffect()));
 
         // {4}, {tap}: Create an X/X black Minion creature token, where X is the life paid as {this} entered the battlefield.

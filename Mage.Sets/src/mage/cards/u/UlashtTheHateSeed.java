@@ -85,7 +85,7 @@ class UlashtTheHateSeedEffect extends OneShotEffect {
 
     UlashtTheHateSeedEffect() {
         super(Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control.";
+        staticText = "{this} enters with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control.";
     }
 
     private UlashtTheHateSeedEffect(final UlashtTheHateSeedEffect effect) {

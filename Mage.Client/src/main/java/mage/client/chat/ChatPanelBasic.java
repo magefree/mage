@@ -286,8 +286,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
     }
 
     String getTurnInfoPart(String turnInfo) {
-        boolean canUse = Boolean.parseBoolean(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_LOG_SHOW_TURN_INFO, "true"));
-        return (turnInfo == null || !canUse ? "" : ", " + turnInfo);
+        return turnInfo == null ? "" : ", " + turnInfo;
     }
 
     protected String getColoredText(String color, String text) {

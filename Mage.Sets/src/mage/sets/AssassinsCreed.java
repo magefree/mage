@@ -23,6 +23,7 @@ public final class AssassinsCreed extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abstergo Entertainment", 79, Rarity.RARE, mage.cards.a.AbstergoEntertainment.class));
         cards.add(new SetCardInfo("Achilles Davenport", 294, Rarity.RARE, mage.cards.a.AchillesDavenport.class));
+        cards.add(new SetCardInfo("Arbaaz Mir", 46, Rarity.UNCOMMON, mage.cards.a.ArbaazMir.class));
         cards.add(new SetCardInfo("Arno Dorian", 47, Rarity.UNCOMMON, mage.cards.a.ArnoDorian.class));
         cards.add(new SetCardInfo("Assassin Den", 281, Rarity.UNCOMMON, mage.cards.a.AssassinDen.class));
         cards.add(new SetCardInfo("Assassin Gauntlet", 12, Rarity.UNCOMMON, mage.cards.a.AssassinGauntlet.class));
@@ -35,6 +36,8 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Black Market Connections", 87, Rarity.RARE, mage.cards.b.BlackMarketConnections.class));
         cards.add(new SetCardInfo("Brotherhood Ambushers", 285, Rarity.UNCOMMON, mage.cards.b.BrotherhoodAmbushers.class));
         cards.add(new SetCardInfo("Brotherhood Patriarch", 286, Rarity.COMMON, mage.cards.b.BrotherhoodPatriarch.class));
+        cards.add(new SetCardInfo("Brotherhood Regalia", 71, Rarity.UNCOMMON, mage.cards.b.BrotherhoodRegalia.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brotherhood Regalia", 255, Rarity.UNCOMMON, mage.cards.b.BrotherhoodRegalia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brotherhood Spy", 282, Rarity.UNCOMMON, mage.cards.b.BrotherhoodSpy.class));
         cards.add(new SetCardInfo("Bureau Headmaster", 296, Rarity.UNCOMMON, mage.cards.b.BureauHeadmaster.class));
         cards.add(new SetCardInfo("Cathartic Reunion", 94, Rarity.UNCOMMON, mage.cards.c.CatharticReunion.class));
@@ -84,7 +87,9 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Murder", 92, Rarity.UNCOMMON, mage.cards.m.Murder.class));
         cards.add(new SetCardInfo("Nurturing Peatland", 114, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
         cards.add(new SetCardInfo("Origin of the Hidden Ones", 36, Rarity.UNCOMMON, mage.cards.o.OriginOfTheHiddenOnes.class));
+        cards.add(new SetCardInfo("Palazzo Archers", 42, Rarity.UNCOMMON, mage.cards.p.PalazzoArchers.class));
         cards.add(new SetCardInfo("Path to Exile", 81, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
+        cards.add(new SetCardInfo("Petty Larceny", 28, Rarity.UNCOMMON, mage.cards.p.PettyLarceny.class));
         cards.add(new SetCardInfo("Phantom Blade", 29, Rarity.UNCOMMON, mage.cards.p.PhantomBlade.class));
         cards.add(new SetCardInfo("Plains", 101, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Poison-Blade Mentor", 288, Rarity.UNCOMMON, mage.cards.p.PoisonBladeMentor.class));

@@ -2,6 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -39,9 +40,9 @@ public final class WarrenWarleader extends CardImpl {
         );
 
         // * Attacking creatures you control get +1/+1 until end of turn.
-        ability.addEffect(new BoostControlledEffect(
+        ability.addMode(new Mode(new BoostControlledEffect(
                 1, 1, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES
-        ));
+        )));
         this.addAbility(ability);
     }
 

@@ -32,7 +32,7 @@ public final class AesiTyrantOfGyreStrait extends CardImpl {
                 new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)
         ));
 
-        // Whenever a land enters the battlefield under your control, you may draw a card.
+        // Whenever a land you control enters, you may draw a card.
         this.addAbility(new LandfallAbility(new DrawCardSourceControllerEffect(1), true));
     }
 

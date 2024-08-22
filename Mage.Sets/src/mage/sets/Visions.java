@@ -70,6 +70,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Fireblast", 79, Rarity.COMMON, mage.cards.f.Fireblast.class));
         cards.add(new SetCardInfo("Firestorm Hellkite", 130, Rarity.RARE, mage.cards.f.FirestormHellkite.class));
         cards.add(new SetCardInfo("Flooded Shoreline", 32, Rarity.RARE, mage.cards.f.FloodedShoreline.class));
+        cards.add(new SetCardInfo("Forbidden Ritual", 60, Rarity.RARE, mage.cards.f.ForbiddenRitual.class));
         cards.add(new SetCardInfo("Foreshadow", 33, Rarity.UNCOMMON, mage.cards.f.Foreshadow.class));
         cards.add(new SetCardInfo("Freewind Falcon", 5, Rarity.COMMON, mage.cards.f.FreewindFalcon.class));
         cards.add(new SetCardInfo("Funeral Charm", 61, Rarity.COMMON, mage.cards.f.FuneralCharm.class));

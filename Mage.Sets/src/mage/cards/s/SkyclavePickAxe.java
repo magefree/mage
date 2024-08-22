@@ -31,7 +31,7 @@ public final class SkyclavePickAxe extends CardImpl {
         // Skyclave Pick-Axe enters the battlefield, attach it to target creature you control.
         this.addAbility(new EntersBattlefieldAttachToTarget());
 
-        // Landfall — Whenever a land enters the battlefield under your control, equipped creature gets +2/+2 until end of turn.
+        // Landfall — Whenever a land you control enters, equipped creature gets +2/+2 until end of turn.
         this.addAbility(new LandfallAbility(new SkyclavePickAxeEffect()));
 
         // Equip {2}{G}

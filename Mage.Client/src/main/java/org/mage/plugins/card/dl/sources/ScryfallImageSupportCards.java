@@ -99,6 +99,7 @@ public class ScryfallImageSupportCards {
             add("PLS"); // Planeshift
             add("7ED"); // Seventh Edition
             add("APC"); // Apocalypse
+            add("PSDG"); // Sega Dreamcast Cards
             add("WC01"); // World Championship Decks 2001
             add("ODY"); // Odyssey
             add("DKM"); // Deckmasters
@@ -559,6 +560,7 @@ public class ScryfallImageSupportCards {
             add("BLC"); // Bloomburrow Commander
             add("DSK"); // Duskmourn: House of Horror
             add("FDN"); // Foundations
+            add("MB2"); // Mystery Booster 2
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
@@ -679,19 +681,6 @@ public class ScryfallImageSupportCards {
 
         // default
         return null;
-    }
-
-    public static String prepareCardNumber(String xmageCardNumber) {
-        if (xmageCardNumber.endsWith("*")) {
-            return xmageCardNumber.substring(0, xmageCardNumber.length() - 1) + "★";
-        }
-        if (xmageCardNumber.endsWith("+")) {
-            return xmageCardNumber.substring(0, xmageCardNumber.length() - 1) + "†";
-        }
-        if (xmageCardNumber.endsWith("Ph")) {
-            return xmageCardNumber.substring(0, xmageCardNumber.length() - 2) + "Φ";
-        }
-        return xmageCardNumber;
     }
 
     public static String findDirectDownloadLink(String setCode, String cardName, String cardNumber) {

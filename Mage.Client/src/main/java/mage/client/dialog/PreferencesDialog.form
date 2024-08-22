@@ -84,7 +84,6 @@
                           <Component id="main_card" alignment="1" max="32767" attributes="0"/>
                           <Component id="main_gamelog" alignment="1" max="32767" attributes="0"/>
                           <Component id="main_game" alignment="0" max="32767" attributes="0"/>
-                          <Component id="main_battlefield" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -99,9 +98,7 @@
                       <Component id="main_game" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="main_battlefield" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace pref="95" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -124,13 +121,6 @@
                 <Property name="axis" type="int" value="3"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="cbGameLogShowTurnInfo">
-                  <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Show turn info in game logs (example: 19:01 T2.DA: game message)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Add turn number and step info after time in game logs"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JCheckBox" name="cbGameLogAutoSave">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
@@ -293,12 +283,11 @@
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
                                   <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cbConfirmEmptyManaPool" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cbConfirmEmptyManaPool" alignment="0" pref="449" max="32767" attributes="0"/>
                                   <Component id="cbAllowRequestToShowHandCards" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="showAbilityPickerForced" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="179" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -310,9 +299,7 @@
                           <Component id="showPlayerNamesPermanently" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="displayLifeOnAvatar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="showAbilityPickerForced" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="cbAllowRequestToShowHandCards" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbConfirmEmptyManaPool" min="-2" max="-2" attributes="0"/>
@@ -323,6 +310,7 @@
                               <Component id="lblTargetAutoChoose" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbTargetAutoChooseLevel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace pref="27" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -350,13 +338,6 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Display life on avatar image"/>
                     <Property name="toolTipText" type="java.lang.String" value="Display the player&apos;s life over its avatar image."/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JCheckBox" name="showAbilityPickerForced">
-                  <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Show ability picker for 1 available option (spells without costs, mdf/split side, adventure)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="This prevents you from accidently activating abilities what you don&apos;t want (example: if you haven&apos;t mana to cast main side, but clicks on mdf card and play land instead)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbAllowRequestToShowHandCards">
@@ -406,69 +387,6 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="main_battlefield">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Battlefield">
-                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                        <EtchetBorder/>
-                      </Border>
-                    </TitledBorder>
-                  </Border>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblBattlefieldFeedbackColorizingMode" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbBattlefieldFeedbackColorizingMode" min="-2" pref="278" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblBattlefieldFeedbackColorizingMode" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbBattlefieldFeedbackColorizingMode" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JComboBox" name="cbBattlefieldFeedbackColorizingMode">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
-                        <StringItem index="0" value="Disable colorizing"/>
-                        <StringItem index="1" value="Enable one color for all phases"/>
-                        <StringItem index="2" value="Enable multicolor for different phases"/>
-                      </StringArray>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Battlefield feedback panel colorizing on your turn (e.g. use green color if you must select card or answer to request)"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbBattlefieldFeedbackColorizingModeActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblBattlefieldFeedbackColorizingMode">
-                  <Properties>
-                    <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="cbBattlefieldFeedbackColorizingMode"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Feedback panel colorizing:"/>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -1344,10 +1262,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panelSizeDetailedSettings" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="panelSizeDetailedSettings" pref="787" max="32767" attributes="0"/>
+                          <Component id="panelSizeDefaultSettings" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1355,13 +1276,64 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panelSizeDetailedSettings" pref="534" max="32767" attributes="0"/>
+                      <Component id="panelSizeDefaultSettings" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="panelSizeDetailedSettings" min="-2" pref="510" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
+            <Container class="javax.swing.JPanel" name="panelSizeDefaultSettings">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Choose predefined settings due your screen size">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                        <EtchetBorder/>
+                      </Border>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                <Property name="alignment" type="int" value="3"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="buttonSizeDefault6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="set to default"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
             <Container class="javax.swing.JPanel" name="panelSizeDetailedSettings">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

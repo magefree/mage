@@ -47,7 +47,8 @@ public enum CardRepository {
     public static final Set<String> snowLandSetCodes = new HashSet<>(Arrays.asList(
             "CSP",
             "MH1",
-            "ME2"
+            "ME2",
+            "MB2"
     ));
 
     CardRepository() {
@@ -646,10 +647,17 @@ public enum CardRepository {
         try {
             if (cardsDao != null && cardsDao.getConnectionSource() != null) {
                 DatabaseConnection conn = cardsDao.getConnectionSource().getReadWriteConnection(cardsDao.getTableName());
+                // TODO: works but generate silent errors in cards.h2.trace.db on app close (maybe new ormlite library version fixed it)
+                /*
+                at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:1175)
+                at org.h2.jdbc.JdbcStatement.getUpdateCount(JdbcStatement.java:290)
+                at com.j256.ormlite.jdbc.JdbcDatabaseConnection.executeStatement(JdbcDatabaseConnection.java:141)
+                at mage.cards.repository.CardRepository.closeDB(CardRepository.java:651)
+                 */
                 if (writeCompact) {
-                    conn.executeStatement("SHUTDOWN COMPACT", 0); // compact data and rewrite whole db
+                    conn.executeStatement("SHUTDOWN COMPACT", DatabaseConnection.DEFAULT_RESULT_FLAGS); // compact data and rewrite whole db
                 } else {
-                    conn.executeStatement("SHUTDOWN IMMEDIATELY", 0); // close without any writes
+                    conn.executeStatement("SHUTDOWN IMMEDIATELY", DatabaseConnection.DEFAULT_RESULT_FLAGS); // close without any writes
                 }
                 cardsDao.getConnectionSource().releaseConnection(conn);
             }

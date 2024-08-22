@@ -43,7 +43,7 @@ public final class NessianWildsRavager extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 TributeNotPaidCondition.instance,
-                "When {this} enters the battlefield, if tribute wasn't paid, " +
+                "When {this} enters, if tribute wasn't paid, " +
                         "you may have {this} fight another target creature. " +
                         "<i>(Each deals damage equal to its power to the other.)</i>"));
     }

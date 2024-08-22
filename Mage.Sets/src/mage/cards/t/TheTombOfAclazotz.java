@@ -46,7 +46,7 @@ public class TheTombOfAclazotz extends CardImpl {
         // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
 
-        // You may cast a creature spell from your graveyard this turn. If you do, it enters the battlefield with a finality counter on it and is a Vampire in addition to its other types.
+        // You may cast a creature spell from your graveyard this turn. If you do, it enters with a finality counter on it and is a Vampire in addition to its other types.
         Ability castSpellAbility = new SimpleActivatedAbility(new TheTombOfAclazotzEffect(), new TapSourceCost());
         castSpellAbility.setIdentifier(MageIdentifier.TheTombOfAclazotzWatcher);
         castSpellAbility.addWatcher(new TheTombOfAclazotzWatcher());
@@ -68,7 +68,7 @@ class TheTombOfAclazotzEffect extends AsThoughEffectImpl {
 
     TheTombOfAclazotzEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may cast a creature spell from your graveyard this turn. If you do, it enters the battlefield with a finality counter on it and is a Vampire in addition to its other types. <i>(If a creature with a finality counter on it would die, exile it instead.)</i>";
+        staticText = "You may cast a creature spell from your graveyard this turn. If you do, it enters with a finality counter on it and is a Vampire in addition to its other types. <i>(If a creature with a finality counter on it would die, exile it instead.)</i>";
     }
 
     private TheTombOfAclazotzEffect(final TheTombOfAclazotzEffect effect) {

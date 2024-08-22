@@ -27,7 +27,7 @@ public final class TatyovaBenthicDruid extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever a land enters the battlefield under your control, you gain 1 life and draw a card.
+        // Whenever a land you control enters, you gain 1 life and draw a card.
         Ability ability = new LandfallAbility(new GainLifeEffect(1));
         ability.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
         this.addAbility(ability);

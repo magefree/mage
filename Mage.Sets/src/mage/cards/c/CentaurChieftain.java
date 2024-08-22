@@ -45,7 +45,7 @@ public final class CentaurChieftain extends CardImpl {
         ).setText("and gain trample until end of turn"));
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(ability), ThresholdCondition.instance, "As long as seven " +
-                "or more cards are in your graveyard, {this} has \"When {this} enters the battlefield, " +
+                "or more cards are in your graveyard, {this} has \"When {this} enters, " +
                 "creatures you control get +1/+1 and gain trample until end of turn.\""
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }

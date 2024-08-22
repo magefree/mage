@@ -46,7 +46,7 @@ public final class HiveOfTheEyeTyrant extends CardImpl {
         // If you control two or more other lands, Hive of the Eye Tyrant enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldAbility(
                 new TapSourceEffect(), condition, "If you control two or more other lands, " +
-                "{this} enters the battlefield tapped.", ""
+                "{this} enters tapped.", ""
         ));
 
         // {T}: Add {B}.

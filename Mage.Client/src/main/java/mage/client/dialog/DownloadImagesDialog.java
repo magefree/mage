@@ -358,7 +358,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelModeSelect.add(fillerMode1);
 
         buttonSearchSet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
-        buttonSearchSet.setToolTipText("Fast search your flag");
+        buttonSearchSet.setToolTipText("Search set to download");
         buttonSearchSet.setAlignmentX(1.0F);
         buttonSearchSet.setPreferredSize(new java.awt.Dimension(25, 25));
         buttonSearchSet.addActionListener(new java.awt.event.ActionListener() {
@@ -378,7 +378,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelRedownload.setPreferredSize(new java.awt.Dimension(280, 100));
         panelRedownload.setLayout(new java.awt.BorderLayout());
 
-        checkboxRedownload.setText("<html>Re-download all images");
+        checkboxRedownload.setText("<html>Re-download all selected images");
         checkboxRedownload.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         panelRedownload.add(checkboxRedownload, java.awt.BorderLayout.CENTER);
         panelRedownload.add(filler1, java.awt.BorderLayout.PAGE_END);
@@ -444,6 +444,7 @@ public class DownloadImagesDialog extends MageDialog {
     }//GEN-LAST:event_buttonStopActionPerformed
 
     private void doClose(int retStatus) {
+
         returnStatus = retStatus;
         setVisible(false);
         dispose();

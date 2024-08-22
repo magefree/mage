@@ -39,7 +39,7 @@ public final class InspiringCommander extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // Whenever another creature with power 2 or less enters the battlefield under your control, you gain 1 life and draw a card.
+        // Whenever another creature with power 2 or less you control enters, you gain 1 life and draw a card.
         Effect effect1 = new GainLifeEffect(1);
         Effect effect2 = new DrawCardSourceControllerEffect(1);
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(

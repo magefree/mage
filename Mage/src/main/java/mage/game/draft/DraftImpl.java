@@ -25,6 +25,7 @@ public abstract class DraftImpl implements Draft {
     protected static final Logger logger = Logger.getLogger(DraftImpl.class);
 
     protected final UUID id;
+    protected UUID tableId = null;
     protected final Map<UUID, DraftPlayer> players = new LinkedHashMap<>();
     protected final PlayerList table = new PlayerList();
     protected int numberBoosters;
@@ -47,7 +48,7 @@ public abstract class DraftImpl implements Draft {
     protected ScheduledExecutorService boosterLoadingExecutor = null;
 
     public DraftImpl(DraftOptions options, List<ExpansionSet> sets) {
-        id = UUID.randomUUID();
+        this.id = UUID.randomUUID();
         this.setCodes = options.getSetCodes();
         this.draftCube = options.getDraftCube();
         this.timing = options.getTiming();
@@ -58,6 +59,16 @@ public abstract class DraftImpl implements Draft {
     @Override
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public UUID getTableId() {
+        return tableId;
+    }
+
+    @Override
+    public void setTableId(UUID tableId) {
+        this.tableId = tableId;
     }
 
     @Override
