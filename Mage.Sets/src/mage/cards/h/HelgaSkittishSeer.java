@@ -59,7 +59,7 @@ public class HelgaSkittishSeer extends CardImpl {
         // {T}: Add X mana of any one color, where X is Helga, Skittish Seer's power. Use this mana only to cast creature spells with mana value 4 or greater or to cas creature spells with {x} in their mana costs
         this.addAbility(new ConditionalAnyColorManaAbility(
                 new TapSourceCost(),
-                GetXValue.instance,
+                new SourcePermanentPowerCount(),
                 new SourcePermanentPowerCount(),
                 new HelgaSkittishSeerManaBuilder(),
                 true));
