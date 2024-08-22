@@ -8,13 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class AlchemistsGiftTest extends CardTestPlayerBase {
-
-    private final String deathtouch = "Yes";
-    private final String lifelink = "No";
-
-
-
-
     @Test
     public void giveDeathTouch(){
         // Target creature gets +1/+1 and gains your choice of deathtouch or lifelink until end of turn.
@@ -24,7 +17,7 @@ public class AlchemistsGiftTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alchemist's Gift", "Adherent of Hope");
         // give Deathtouch
-        setChoice(playerA, deathtouch);
+        setChoice(playerA, "deathtouch");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -44,7 +37,7 @@ public class AlchemistsGiftTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alchemist's Gift", "Adherent of Hope");
         // give Lifelink
-        setChoice(playerA, lifelink);
+        setChoice(playerA, "lifelink");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
