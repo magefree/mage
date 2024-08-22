@@ -35,8 +35,7 @@ public final class AtomwheelAcrobats extends CardImpl {
         this.addAbility(new AtomwheelAcrobatsTriggeredAbility());
 
         // {2}{G}: Roll a six-sided die.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(null, 6), new ManaCostsImpl<>("{2}{G}"));
-        this.addAbility(ability);
+        this.addAbility(new SimpleActivatedAbility(new RollDiceEffect(6), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private AtomwheelAcrobats(final AtomwheelAcrobats card) {
