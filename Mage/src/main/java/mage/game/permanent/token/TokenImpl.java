@@ -219,11 +219,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created) {
-        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, created, null);
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, created, Arrays.asList(this));
     }
 
     @Override
-    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created, List<Token> additionalTokens) {
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created, List<Token> tokens) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
@@ -233,7 +233,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         lastAddedTokenIds.clear();
 
-        CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, this, additionalTokens);
+        if (tokens == null || tokens.get(0) != this) {
+            throw new IllegalArgumentException("Wrong code usage. token.putOntoBattlefield parameter tokens must be initialized to a list of all tokens to be made, with the first element being the token you are calling putOntoBattlefield() on.");
+        }
+
+        CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, tokens);
         if (!created || !game.replaceEvent(event)) {
             int currentTokens = game.getBattlefield().countTokens(event.getPlayerId());
             int tokenSlots = Math.max(MAX_TOKENS_PER_GAME - currentTokens, 0);

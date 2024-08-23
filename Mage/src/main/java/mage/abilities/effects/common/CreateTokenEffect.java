@@ -25,8 +25,7 @@ import java.util.UUID;
  */
 public class CreateTokenEffect extends OneShotEffect {
 
-    private final Token token;
-    private final List<Token> additionalTokens = new ArrayList<>();
+    private final List<Token> tokens = new ArrayList<>();
     private final DynamicValue amount;
     private final boolean tapped;
     private final boolean attacking;
@@ -58,7 +57,7 @@ public class CreateTokenEffect extends OneShotEffect {
 
     public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {
         super(Outcome.PutCreatureInPlay);
-        this.token = token;
+        this.tokens.add(token);
         this.amount = amount.copy();
         this.tapped = tapped;
         this.attacking = attacking;
@@ -68,7 +67,7 @@ public class CreateTokenEffect extends OneShotEffect {
     protected CreateTokenEffect(final CreateTokenEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
-        this.token = effect.token.copy();
+        this.tokens.addAll(effect.tokens);
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
@@ -76,7 +75,6 @@ public class CreateTokenEffect extends OneShotEffect {
         this.numberOfCounters = effect.numberOfCounters;
         this.additionalRules = effect.additionalRules;
         this.oldPhrasing = effect.oldPhrasing;
-        this.additionalTokens.addAll(effect.additionalTokens);
     }
 
     public CreateTokenEffect entersWithCounters(CounterType counterType, DynamicValue numberOfCounters) {
@@ -86,7 +84,7 @@ public class CreateTokenEffect extends OneShotEffect {
     }
 
     public CreateTokenEffect withAdditionalTokens(Token... tokens) {
-        this.additionalTokens.addAll(Arrays.asList(tokens));
+        this.tokens.addAll(Arrays.asList(tokens));
         return this;
     }
 
@@ -98,8 +96,8 @@ public class CreateTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
-        token.putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking, null, null, true, additionalTokens);
-        this.lastAddedTokenIds = token.getLastAddedTokenIds();
+        tokens.get(0).putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking, null, null, true, tokens);
+        this.lastAddedTokenIds = tokens.get(0).getLastAddedTokenIds();
         // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
         if (counterType != null) {
             for (UUID tokenId : lastAddedTokenIds) {
@@ -158,7 +156,7 @@ public class CreateTokenEffect extends OneShotEffect {
     }
 
     private void setText() {
-        String tokenDescription = token.getDescription();
+        String tokenDescription = tokens.get(0).getDescription();
         boolean singular = amount.toString().equals("1");
         if (tokenDescription.contains(", a legendary")) {
             staticText = "create " + tokenDescription;
@@ -191,37 +189,35 @@ public class CreateTokenEffect extends OneShotEffect {
             }
         }
 
-        if (!additionalTokens.isEmpty()) {
-            for (int i = 0; i < additionalTokens.size(); i++) {
-                Token additionalToken = additionalTokens.get(i);
-                if (additionalTokens.size() > 1) {
-                    sb.append(", ");
+        for (int i = 1; i < tokens.size(); i++) {
+            Token additionalToken = tokens.get(i);
+            if (tokens.size() > 2) {
+                sb.append(", ");
+            } else {
+                sb.append(" ");
+            }
+            if (i+1 == tokens.size()) {
+                sb.append("and ");
+            }
+            if (amount.toString().equals("1")) {
+                if (tapped && !attacking) {
+                    sb.append("a tapped ");
+                    sb.append(additionalToken.getDescription());
                 } else {
-                    sb.append(" ");
+                    sb.append(CardUtil.addArticle(additionalToken.getDescription()));
                 }
-                if (i+1 == additionalTokens.size()) {
-                    sb.append("and ");
+            } else {
+                sb.append(CardUtil.numberToText(amount.toString())).append(' ');
+                if (tapped && !attacking) {
+                    sb.append("tapped ");
                 }
-                if (amount.toString().equals("1")) {
-                    if (tapped && !attacking) {
-                        sb.append("a tapped ");
-                        sb.append(additionalToken.getDescription());
-                    } else {
-                        sb.append(CardUtil.addArticle(additionalToken.getDescription()));
-                    }
-                } else {
-                    sb.append(CardUtil.numberToText(amount.toString())).append(' ');
-                    if (tapped && !attacking) {
-                        sb.append("tapped ");
-                    }
-                    sb.append(additionalToken.getDescription().replace("token. It has", "tokens. They have"));
-                    if (additionalToken.getDescription().endsWith("token")) {
-                        sb.append("s");
-                    }
-                    int tokenLocation = sb.indexOf("token ");
-                    if (tokenLocation != -1) {
-                        sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
-                    }
+                sb.append(additionalToken.getDescription().replace("token. It has", "tokens. They have"));
+                if (additionalToken.getDescription().endsWith("token")) {
+                    sb.append("s");
+                }
+                int tokenLocation = sb.indexOf("token ");
+                if (tokenLocation != -1) {
+                    sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
                 }
             }
         }

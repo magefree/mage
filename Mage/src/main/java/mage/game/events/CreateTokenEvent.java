@@ -18,14 +18,13 @@ public class CreateTokenEvent extends GameEvent {
      * @param source
      * @param controllerId
      * @param amount
-     * @param token
+     * @param tokensList
      */
-    public CreateTokenEvent(Ability source, UUID controllerId, int amount, Token token, List<Token> additionalTokens) {
+    public CreateTokenEvent(Ability source, UUID controllerId, int amount, List<Token> tokensList) {
         super(GameEvent.EventType.CREATE_TOKEN, null, source, controllerId, amount, false);
-        tokens.put(token, amount);
-        if (additionalTokens != null) {
-            for (Token additionalToken : additionalTokens) {
-                tokens.put(additionalToken, amount);
+        if (tokensList != null) {
+            for (Token token : tokensList) {
+                tokens.put(token, amount);
             }
         }
     }

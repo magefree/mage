@@ -66,7 +66,7 @@ class LiberatedLivestockEffect extends OneShotEffect {
         Token firstToken = new CatToken2();
         firstToken.putOntoBattlefield(1, game, source, source.getControllerId(),
                 false, false, null, null, true,
-                Arrays.asList(new BirdToken(), new OxToken()));
+                Arrays.asList(firstToken, new BirdToken(), new OxToken()));
         game.processAction();
 
         for (UUID tokenId : firstToken.getLastAddedTokenIds()) {
