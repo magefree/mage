@@ -218,8 +218,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, true);
     }
 
-    @Override
     public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created) {
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, created, null);
+    }
+
+    @Override
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created, List<Token> additionalTokens) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
@@ -229,7 +233,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         lastAddedTokenIds.clear();
 
-        CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, this);
+        CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, this, additionalTokens);
         if (!created || !game.replaceEvent(event)) {
             int currentTokens = game.getBattlefield().countTokens(event.getPlayerId());
             int tokenSlots = Math.max(MAX_TOKENS_PER_GAME - currentTokens, 0);

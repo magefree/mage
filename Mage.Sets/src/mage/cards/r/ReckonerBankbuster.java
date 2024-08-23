@@ -48,12 +48,10 @@ public final class ReckonerBankbuster extends CardImpl {
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new TreasureToken()), condition,
-                "Then if there are no charge counters on {this}, create a Treasure token"
-        ));
-        ability.addEffect(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new PilotToken()), condition, "and a 1/1 colorless Pilot creature token " +
-                "with \"This creature crews Vehicles as though its power were 2 greater.\""
+                new CreateTokenEffect(new TreasureToken(),
+                        1, false, false, new PilotToken()), condition,
+                "Then if there are no charge counters on {this}, create a Treasure token and a 1/1 colorless " +
+                        "Pilot creature token with \"This creature crews Vehicles as though its power were 2 greater.\""
         ));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));

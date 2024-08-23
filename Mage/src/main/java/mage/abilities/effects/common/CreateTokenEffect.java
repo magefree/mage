@@ -16,6 +16,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ import java.util.UUID;
 public class CreateTokenEffect extends OneShotEffect {
 
     private final Token token;
+    private final List<Token> additionalTokens;
     private final DynamicValue amount;
     private final boolean tapped;
     private final boolean attacking;
@@ -55,11 +57,28 @@ public class CreateTokenEffect extends OneShotEffect {
     }
 
     public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {
+        this(token, amount, tapped, attacking, (List<Token>)null);
+    }
+
+    public CreateTokenEffect(Token token, int amount, boolean tapped, boolean attacking, Token additionalToken) {
+        this(token, StaticValue.get(amount), tapped, attacking, Arrays.asList(additionalToken));
+    }
+
+    public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking, Token additionalToken) {
+        this(token, amount, tapped, attacking, Arrays.asList(additionalToken));
+    }
+
+    public CreateTokenEffect(Token token, int amount, boolean tapped, boolean attacking, List<Token> additionalTokens) {
+        this(token, StaticValue.get(amount), tapped, attacking, additionalTokens);
+    }
+
+    public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking, List<Token> additionalTokens) {
         super(Outcome.PutCreatureInPlay);
         this.token = token;
         this.amount = amount.copy();
         this.tapped = tapped;
         this.attacking = attacking;
+        this.additionalTokens = additionalTokens;
         setText();
     }
 
@@ -74,6 +93,7 @@ public class CreateTokenEffect extends OneShotEffect {
         this.numberOfCounters = effect.numberOfCounters;
         this.additionalRules = effect.additionalRules;
         this.oldPhrasing = effect.oldPhrasing;
+        this.additionalTokens = effect.additionalTokens;
     }
 
     public CreateTokenEffect entersWithCounters(CounterType counterType, DynamicValue numberOfCounters) {
@@ -90,7 +110,7 @@ public class CreateTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
-        token.putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking);
+        token.putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking, null, null, true, additionalTokens);
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
         // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
         if (counterType != null) {
@@ -180,6 +200,41 @@ public class CreateTokenEffect extends OneShotEffect {
             int tokenLocation = sb.indexOf("token ");
             if (tokenLocation != -1) {
                 sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
+            }
+        }
+
+        if (additionalTokens != null) {
+            for (int i = 0; i < additionalTokens.size(); i++) {
+                Token additionalToken = additionalTokens.get(i);
+                if (additionalTokens.size() > 1) {
+                    sb.append(", ");
+                } else {
+                    sb.append(" ");
+                }
+                if (i+1 == additionalTokens.size()) {
+                    sb.append("and ");
+                }
+                if (amount.toString().equals("1")) {
+                    if (tapped && !attacking) {
+                        sb.append("a tapped ");
+                        sb.append(additionalToken.getDescription());
+                    } else {
+                        sb.append(CardUtil.addArticle(additionalToken.getDescription()));
+                    }
+                } else {
+                    sb.append(CardUtil.numberToText(amount.toString())).append(' ');
+                    if (tapped && !attacking) {
+                        sb.append("tapped ");
+                    }
+                    sb.append(additionalToken.getDescription().replace("token. It has", "tokens. They have"));
+                    if (additionalToken.getDescription().endsWith("token")) {
+                        sb.append("s");
+                    }
+                    int tokenLocation = sb.indexOf("token ");
+                    if (tokenLocation != -1) {
+                        sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
+                    }
+                }
             }
         }
 
