@@ -1916,12 +1916,16 @@ public class HumanPlayer extends PlayerImpl {
         // check if enough attackers are declared
         // check if players have to be attacked
         Set<UUID> playersToAttackIfAble = new HashSet<>();
+        boolean mustAttackAPlayer = false;
         for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(null, true, game).entrySet()) {
             RequirementEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
                 UUID playerToAttack = effect.playerMustBeAttackedIfAble(ability, game);
                 if (playerToAttack != null) {
                     playersToAttackIfAble.add(playerToAttack);
+                }
+                if (effect.mustAttack(game)){
+                    mustAttackAPlayer = true;
                 }
             }
         }
@@ -1954,6 +1958,18 @@ public class HumanPlayer extends PlayerImpl {
                     }
                     if (defendingPlayerId != null || attacker.canAttackInPrinciple(forcedToAttackId, game)) {
                         game.informPlayer(this, "You are forced to attack " + forcedToAttack.getName() + " or a controlled planeswalker e.g. with " + attacker.getIdName() + ".");
+                        return false;
+                    }
+                }
+            }
+        }
+
+        if (mustAttackAPlayer && game.getCombat().getAttackers().isEmpty()){
+            // no attackers, but required to attack with something -- check if anything can attack
+            for (Permanent attacker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getId(), game)) {
+                for (UUID opponentId : game.getOpponents(getId(), true)){
+                    if (attacker.canAttackInPrinciple(opponentId, game)){
+                        game.informPlayer(this, "You are forced to attack at least one player, e.g. " + game.getPlayer(opponentId).getName() + " with " + attacker.getIdName() + ".");
                         return false;
                     }
                 }
