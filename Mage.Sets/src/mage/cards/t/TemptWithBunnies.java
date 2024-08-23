@@ -75,15 +75,8 @@ class TemptWithBunniesEffect extends OneShotEffect {
                 }
             }
             if (opponentsAddedTokens > 0) {
-                // Each batch of tokens is independent, per ruling:
-                // After each opponent has decided, the effect happens simultaneously for each one who accepted the
-                // offer. Then, the effect happens again for you a number of times equal to the number of opponents who
-                // accepted.
-                // (2024-07-26)
-                for (int i = 0; i < opponentsAddedTokens; i++) {
-                    controller.drawCards(1, source, game);
-                    tokenCopy.putOntoBattlefield(1, game, source, source.getControllerId(), false, false);
-                }
+                controller.drawCards(opponentsAddedTokens, source, game);
+                tokenCopy.putOntoBattlefield(opponentsAddedTokens, game, source, source.getControllerId(), false, false);
             }
             return true;
         }
