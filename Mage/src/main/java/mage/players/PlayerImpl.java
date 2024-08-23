@@ -765,6 +765,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         for (int i = 0; i < num; i++) {
             DrawCardEvent drawCardEvent = new DrawCardEvent(getId(), source, event);
             if (game.replaceEvent(drawCardEvent)) {
+                numDrawn += drawCardEvent.getCardsDrawn();
                 continue;
             }
             Card card = drawCardEvent.isFromBottom() ? getLibrary().drawFromBottom(game) : getLibrary().drawFromTop(game);
@@ -779,6 +780,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         if (!isTopCardRevealed() && numDrawn > 0) {
             game.fireInformEvent(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
+        }
+        if (event instanceof DrawCardEvent) {
+            ((DrawCardEvent) event).incrementCardsDrawn(numDrawn);
         }
         return numDrawn;
     }

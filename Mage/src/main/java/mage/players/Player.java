@@ -407,25 +407,21 @@ public interface Player extends MageItem, Copyable<Player> {
     void shuffleLibrary(Ability source, Game game);
 
     /**
-     * Draw cards. If you call it in replace events then use method with event.appliedEffects param instead.
-     * Returns 0 if replacement effect triggers on card draw.
+     * Draw cards. If you call it in replace events then use method with event param instead (for appliedEffects)
      *
-     * @param num
+     * @param num cards to draw
      * @param source can be null for game default draws (non effects, example: start of the turn)
-     * @param game
-     * @return
+     * @return number of cards drawn, including as a result of replacement effects
      */
     int drawCards(int num, Ability source, Game game);
 
     /**
      * Draw cards with applied effects, for replaceEvent
-     * Returns 0 if replacement effect triggers on card draw.
      *
-     * @param num
+     * @param num cards to draw
      * @param source can be null for game default draws (non effects, example: start of the turn)
-     * @param game
      * @param event  original draw event in replacement code
-     * @return
+     * @return number of cards drawn, including as a result of replacement effects
      */
     int drawCards(int num, Ability source, Game game, GameEvent event);
 

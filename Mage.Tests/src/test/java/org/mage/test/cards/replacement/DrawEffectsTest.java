@@ -14,6 +14,8 @@ public class DrawEffectsTest extends CardTestPlayerBase {
     private static final String drawOne = "Radical Idea"; // 1U instant
     private static final String drawTwo = "Quick Study"; // 2U instant
     private static final String drawThree = "Jace's Ingenuity"; // 3UU instant
+    private static final String excavation = "Ancient Excavation"; // 2UB instant
+    // Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way.
 
     private static final String reflection = "Thought Reflection";
     // If you would draw a card, draw two cards instead.
@@ -249,6 +251,32 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, notionThief);
         addCard(Zone.BATTLEFIELD, playerA, reflection);
         testSingle(drawOne, 0, 2, reflection);
+    }
+
+    @Test
+    public void testAncientExcavation() {
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 4);
+        addCard(Zone.HAND, playerA, excavation);
+        addCard(Zone.HAND, playerA, "Shock");
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Healing Salve");
+        addCard(Zone.LIBRARY, playerA, "Giant Growth");
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, excavation);
+        // 1 card in hand, thought reflection -> draw 2, then discard two
+        setChoice(playerA, "Shock"); // to discard
+        setChoice(playerA, "Healing Salve"); // to discard
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, excavation, 1);
+        assertGraveyardCount(playerA, "Shock", 1);
+        assertGraveyardCount(playerA, "Healing Salve", 1);
+        assertHandCount(playerA, "Giant Growth", 1);
+        assertHandCount(playerA, 1);
     }
 
 

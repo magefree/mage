@@ -11,6 +11,8 @@ public class DrawCardEvent extends GameEvent {
 
     private boolean fromBottom = false; // for replacement effects that draw from bottom of library instead
 
+    private int cardsDrawn = 0; // for replacement effects to keep track for "cards drawn this way"
+
     public DrawCardEvent(UUID playerId, Ability source, GameEvent originalDrawEvent) {
         super(GameEvent.EventType.DRAW_CARD, playerId, null, playerId, 0, false);
         
@@ -31,6 +33,14 @@ public class DrawCardEvent extends GameEvent {
 
     public boolean isFromBottom() {
         return fromBottom;
+    }
+
+    public void incrementCardsDrawn(int cardsDrawn) {
+        this.cardsDrawn += cardsDrawn;
+    }
+
+    public int getCardsDrawn() {
+        return cardsDrawn;
     }
 
 }
