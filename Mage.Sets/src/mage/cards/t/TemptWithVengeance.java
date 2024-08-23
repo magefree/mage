@@ -68,13 +68,20 @@ class TemptWithVengeanceEffect extends OneShotEffect {
                 Player opponent = game.getPlayer(playerId);
                 if (opponent != null) {
                     if (opponent.chooseUse(outcome, "Create " + xValue + " Elemental tokens?", source, game)) {
-                        opponentsAddedTokens += xValue;
+                        opponentsAddedTokens++;
                         tokenCopy.putOntoBattlefield(xValue, game, source, playerId, false, false);
                     }
                 }
             }
             if (opponentsAddedTokens > 0) {
-                tokenCopy.putOntoBattlefield(opponentsAddedTokens, game, source, source.getControllerId(), false, false);
+                // Each batch of tokens is independent, per ruling:
+                // After each opponent has decided, the effect happens simultaneously for each one who accepted the
+                // offer. Then, the effect happens again for you a number of times equal to the number of opponents who
+                // accepted.
+                // (2013-10-17)
+                for (int i = 0; i < opponentsAddedTokens; i++) {
+                    tokenCopy.putOntoBattlefield(opponentsAddedTokens, game, source, source.getControllerId(), false, false);
+                }
             }
             return true;
         }

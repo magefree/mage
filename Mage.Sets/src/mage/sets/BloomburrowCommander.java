@@ -285,6 +285,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Mystery", 342, Rarity.RARE, mage.cards.t.TempleOfMystery.class));
         cards.add(new SetCardInfo("Temple of Plenty", 343, Rarity.RARE, mage.cards.t.TempleOfPlenty.class));
         cards.add(new SetCardInfo("Temple of Triumph", 344, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
+        cards.add(new SetCardInfo("Tempt with Bunnies", 13, Rarity.RARE, mage.cards.t.TemptWithBunnies.class));
         cards.add(new SetCardInfo("Tempt with Discovery", 124, Rarity.RARE, mage.cards.t.TemptWithDiscovery.class));
         cards.add(new SetCardInfo("Tendershoot Dryad", 242, Rarity.RARE, mage.cards.t.TendershootDryad.class));
         cards.add(new SetCardInfo("Tenuous Truce", 159, Rarity.RARE, mage.cards.t.TenuousTruce.class));
