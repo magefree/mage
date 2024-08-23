@@ -83,6 +83,11 @@ public class CreateTokenEffect extends OneShotEffect {
         return this;
     }
 
+    public CreateTokenEffect withAdditionalToken(Token token) {
+        this.tokens.add(token);
+        return this;
+    }
+
     public CreateTokenEffect withAdditionalTokens(Token... tokens) {
         this.tokens.addAll(Arrays.asList(tokens));
         return this;
