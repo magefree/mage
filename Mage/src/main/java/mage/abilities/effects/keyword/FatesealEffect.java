@@ -54,7 +54,7 @@ public class FatesealEffect extends OneShotEffect {
                     return true;
                 }
                 for (int i = 0; i < count; i++) {
-                    Card card = opponent.getLibrary().getFromTop(game);
+                    Card card = opponent.getLibrary().removeFromTop(game);
                     cards.add(card);
                 }
                 TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);

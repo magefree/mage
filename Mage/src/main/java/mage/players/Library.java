@@ -51,8 +51,7 @@ public class Library implements Serializable {
      * If library is empty, returns null and sets flag for drawing from an empty library.
      */
     public Card drawFromTop(Game game) {
-        UUID cardId = library.pollFirst();
-        Card card = game.getCard(cardId);
+        Card card = game.getCard(library.pollFirst());
         if (card == null) {
             emptyDraw = true;
         }
@@ -64,12 +63,19 @@ public class Library implements Serializable {
      * If library is empty, returns null and sets flag for drawing from an empty library.
      */
     public Card drawFromBottom(Game game) {
-        UUID cardId = library.pollLast();
-        Card card = game.getCard(cardId);
+        Card card = game.getCard(library.pollLast());
         if (card == null) {
             emptyDraw = true;
         }
         return card;
+    }
+
+    /**
+     * Removes the top card from the Library and returns it (can be null if library is empty).
+     */
+    @Deprecated // recommend refactoring methods that re-order library to not require this explicit removal
+    public Card removeFromTop(Game game) {
+        return game.getCard(library.pollFirst());
     }
 
     /**
@@ -104,7 +110,7 @@ public class Library implements Serializable {
             int idx = 1;
             while (hasCards() && idx < pos) {
                 idx++;
-                save.add(drawFromTop(game)); // TODO: rework to manipulate directly rather than removing via draw method
+                save.add(removeFromTop(game));
             }
             putOnTop(card, game);
             while (!save.isEmpty()) {
