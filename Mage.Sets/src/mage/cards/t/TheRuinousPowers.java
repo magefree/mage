@@ -1,5 +1,7 @@
 package mage.cards.t;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -7,12 +9,10 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInExile;
-import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -28,7 +28,6 @@ public final class TheRuinousPowers extends CardImpl {
         // Until end of turn, you may play that card and you may spend mana as though it were mana of any color to cast it.
         // When you cast a spell this way, its owner loses life equal to its mana value.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new TheRuinousPowersEffect(), TargetController.YOU, false);
-        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
@@ -47,7 +46,8 @@ class TheRuinousPowersEffect extends OneShotEffect {
 
     TheRuinousPowersEffect() {
         super(Outcome.Benefit);
-        staticText = "Exile the top card of that player’s library. Until end of turn, you may play that card and you may spend mana as though it were mana of any color to cast it.";
+        staticText = "choose an opponent at random. Exile the top card of that player's library. Until end of turn, " +
+                "you may play that card and you may spend mana as though it were mana of any color to cast it.";
     }
 
     private TheRuinousPowersEffect(final TheRuinousPowersEffect effect) {
@@ -62,7 +62,8 @@ class TheRuinousPowersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(source.getFirstTarget());
+        List<UUID> opponents = new ArrayList<>(game.getOpponents(source.getControllerId()));
+        Player opponent = game.getPlayer(opponents.get(RandomUtil.nextInt(opponents.size())));
         if (player == null || opponent == null) {
             return false;
         }
