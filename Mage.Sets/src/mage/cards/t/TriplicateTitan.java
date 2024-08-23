@@ -14,7 +14,6 @@ import mage.game.permanent.token.GolemFlyingToken;
 import mage.game.permanent.token.GolemTrampleToken;
 import mage.game.permanent.token.GolemVigilanceToken;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -39,7 +38,7 @@ public final class TriplicateTitan extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Triplicate Titan dies, create a 3/3 colorless Golem artifact creature token with flying, a 3/3 colorless Golem artifact creature token with vigilance, and a 3/3 colorless Golem artifact creature token with trample.
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new GolemFlyingToken(), 1, false, false, Arrays.asList(new GolemVigilanceToken(), new GolemTrampleToken()))));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new GolemFlyingToken()).withAdditionalTokens(new GolemVigilanceToken(), new GolemTrampleToken())));
     }
 
     private TriplicateTitan(final TriplicateTitan card) {

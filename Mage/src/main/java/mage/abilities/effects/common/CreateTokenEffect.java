@@ -26,7 +26,7 @@ import java.util.UUID;
 public class CreateTokenEffect extends OneShotEffect {
 
     private final Token token;
-    private final List<Token> additionalTokens;
+    private final List<Token> additionalTokens = new ArrayList<>();
     private final DynamicValue amount;
     private final boolean tapped;
     private final boolean attacking;
@@ -57,28 +57,11 @@ public class CreateTokenEffect extends OneShotEffect {
     }
 
     public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {
-        this(token, amount, tapped, attacking, (List<Token>)null);
-    }
-
-    public CreateTokenEffect(Token token, int amount, boolean tapped, boolean attacking, Token additionalToken) {
-        this(token, StaticValue.get(amount), tapped, attacking, Arrays.asList(additionalToken));
-    }
-
-    public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking, Token additionalToken) {
-        this(token, amount, tapped, attacking, Arrays.asList(additionalToken));
-    }
-
-    public CreateTokenEffect(Token token, int amount, boolean tapped, boolean attacking, List<Token> additionalTokens) {
-        this(token, StaticValue.get(amount), tapped, attacking, additionalTokens);
-    }
-
-    public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking, List<Token> additionalTokens) {
         super(Outcome.PutCreatureInPlay);
         this.token = token;
         this.amount = amount.copy();
         this.tapped = tapped;
         this.attacking = attacking;
-        this.additionalTokens = additionalTokens;
         setText();
     }
 
@@ -93,12 +76,17 @@ public class CreateTokenEffect extends OneShotEffect {
         this.numberOfCounters = effect.numberOfCounters;
         this.additionalRules = effect.additionalRules;
         this.oldPhrasing = effect.oldPhrasing;
-        this.additionalTokens = effect.additionalTokens;
+        this.additionalTokens.addAll(effect.additionalTokens);
     }
 
     public CreateTokenEffect entersWithCounters(CounterType counterType, DynamicValue numberOfCounters) {
         this.counterType = counterType;
         this.numberOfCounters = numberOfCounters;
+        return this;
+    }
+
+    public CreateTokenEffect withAdditionalTokens(Token... tokens) {
+        this.additionalTokens.addAll(Arrays.asList(tokens));
         return this;
     }
 
@@ -203,7 +191,7 @@ public class CreateTokenEffect extends OneShotEffect {
             }
         }
 
-        if (additionalTokens != null) {
+        if (!additionalTokens.isEmpty()) {
             for (int i = 0; i < additionalTokens.size(); i++) {
                 Token additionalToken = additionalTokens.get(i);
                 if (additionalTokens.size() > 1) {

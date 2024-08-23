@@ -50,8 +50,7 @@ public final class SongOfEarendil extends CardImpl {
         // II-- Create a Treasure token and a 2/2 blue Bird creature token with flying.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II,
-                new CreateTokenEffect(new TreasureToken(),
-                        1, false, false, new SwanSongBirdToken())
+                new CreateTokenEffect(new TreasureToken()).withAdditionalTokens(new SwanSongBirdToken())
         );
 
         // III-- Put a flying counter on each creature you control without flying.

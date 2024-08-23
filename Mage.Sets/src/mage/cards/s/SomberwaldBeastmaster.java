@@ -16,7 +16,6 @@ import mage.game.permanent.token.BeastToken;
 import mage.game.permanent.token.BeastToken2;
 import mage.game.permanent.token.WolfToken;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -33,8 +32,7 @@ public final class SomberwaldBeastmaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Somberwald Beastmaster enters the battlefield, create a 2/2 green Wolf creature token, a 3/3 green Beast creature token, and a 4/4 green Beast creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken(),
-                1, false, false, Arrays.asList(new BeastToken(), new BeastToken2()))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken()).withAdditionalTokens(new BeastToken(), new BeastToken2())));
 
         // Creature tokens you control have deathtouch.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

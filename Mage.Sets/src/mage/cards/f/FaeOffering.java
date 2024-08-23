@@ -17,7 +17,6 @@ import mage.game.permanent.token.TreasureToken;
 import mage.game.stack.Spell;
 import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -34,8 +33,7 @@ public final class FaeOffering extends CardImpl {
         // At the beginning of each end step, if you've cast both a creature spell and a noncreature spell this turn, create a Clue token, a Food token, and a Treasure token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new ClueArtifactToken(),
-                                1, false, false,Arrays.asList(new FoodToken(), new TreasureToken())),
+                        new CreateTokenEffect(new ClueArtifactToken()).withAdditionalTokens(new FoodToken(), new TreasureToken()),
                         TargetController.ANY, false
                 ), FaeOfferingCondition.instance, "At the beginning of each end step, " +
                 "if you've cast both a creature spell and a noncreature spell this turn, " +

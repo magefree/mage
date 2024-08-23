@@ -35,8 +35,7 @@ public final class MadameVastra extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // Whenever a creature dealt damage by Madame Vastra this turn dies, create a Clue token and a Food token.
-        this.addAbility(new DealtDamageAndDiedTriggeredAbility(new CreateTokenEffect(new ClueArtifactToken(),
-                1, false, false, new FoodToken())));
+        this.addAbility(new DealtDamageAndDiedTriggeredAbility(new CreateTokenEffect(new ClueArtifactToken()).withAdditionalTokens(new FoodToken())));
     }
 
     private MadameVastra(final MadameVastra card) {

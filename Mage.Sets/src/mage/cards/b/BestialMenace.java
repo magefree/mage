@@ -8,7 +8,6 @@ import mage.game.permanent.token.ElephantToken;
 import mage.game.permanent.token.SnakeToken;
 import mage.game.permanent.token.WolfToken;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -20,8 +19,7 @@ public final class BestialMenace extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
 
         // Create a 1/1 green Snake creature token, a 2/2 green Wolf creature token, and a 3/3 green Elephant creature token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(),
-                1, false, false, Arrays.asList(new WolfToken(), new ElephantToken())));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken()).withAdditionalTokens(new WolfToken(), new ElephantToken()));
     }
 
     private BestialMenace(final BestialMenace card) {

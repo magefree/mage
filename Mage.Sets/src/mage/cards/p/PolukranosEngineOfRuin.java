@@ -50,8 +50,7 @@ public final class PolukranosEngineOfRuin extends CardImpl {
 
         // Whenever Polukranos, Engine of Ruin or another nontoken Hydra you control dies, create a 3/3 green and white Phyrexian Hydra creature token with reach and a 3/3 green and white Phyrexian Hydra creature token with lifelink.
         this.addAbility(new DiesThisOrAnotherTriggeredAbility(
-                new CreateTokenEffect(new PhyrexianHydraWithReachToken(),
-                        1, false, false, new PhyrexianHydraWithLifelinkToken()), false, filter
+                new CreateTokenEffect(new PhyrexianHydraWithReachToken()).withAdditionalTokens(new PhyrexianHydraWithLifelinkToken()), false, filter
         ));
     }
 
