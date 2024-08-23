@@ -7,10 +7,250 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
- * @author LevelX2
+ * @author LevelX2, xenohedron
  */
 public class DrawEffectsTest extends CardTestPlayerBase {
+
+    private static final String drawOne = "Radical Idea"; // 1U instant
+    private static final String drawTwo = "Quick Study"; // 2U instant
+    private static final String drawThree = "Jace's Ingenuity"; // 3UU instant
+
+    private static final String reflection = "Thought Reflection";
+    // If you would draw a card, draw two cards instead.
+    private static final String scrivener = "Blood Scrivener";
+    // If you would draw a card while you have no cards in hand, instead you draw two cards and you lose 1 life.
+    private static final String notionThief = "Notion Thief";
+    // If an opponent would draw a card except the first one they draw in each of their draw steps,
+    // instead that player skips that draw and you draw a card.
+    private static final String asmodeus = "Asmodeus the Archfiend";
+    // If you would draw a card, exile the top card of your library face down instead.
+    private static final String almsCollector = "Alms Collector";
+    // If an opponent would draw two or more cards, instead you and that player each draw a card.
+
+    private void testBase(String cardDraw, int handPlayerA, int handPlayerB) {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+        addCard(Zone.HAND, playerA, cardDraw);
+        addCard(Zone.HAND, playerB, cardDraw);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cardDraw);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, cardDraw);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, cardDraw, 1);
+        assertGraveyardCount(playerB, cardDraw, 1);
+        assertHandCount(playerA, handPlayerA);
+        assertHandCount(playerB, handPlayerB);
+    }
+
+    private void testSingle(String cardDraw, int handPlayerA, int handPlayerB, String... choices) {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerA, cardDraw);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cardDraw);
+        for (String choice : choices) {
+            setChoice(playerA, choice);
+        }
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, cardDraw, 1);
+        assertHandCount(playerA, handPlayerA);
+        assertHandCount(playerB, handPlayerB);
+    }
+
+    @Test
+    public void testReflection1() {
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testBase(drawOne, 2, 1);
+    }
+
+    @Test
+    public void testReflection2() {
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testBase(drawTwo, 4, 2);
+    }
+
+    @Test
+    public void testReflection3() {
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testBase(drawThree, 6, 3);
+    }
+
+    @Test
+    public void testScrivener1() {
+        addCard(Zone.BATTLEFIELD, playerA, scrivener);
+        testBase(drawOne, 2, 1);
+        assertLife(playerA, 19);
+    }
+
+    @Test
+    public void testScrivener2() {
+        addCard(Zone.BATTLEFIELD, playerA, scrivener);
+        testBase(drawTwo, 3, 2);
+        assertLife(playerA, 19);
+    }
+
+    @Test
+    public void testScrivener3() {
+        addCard(Zone.BATTLEFIELD, playerA, scrivener);
+        testBase(drawThree, 4, 3);
+        assertLife(playerA, 19);
+    }
+
+    /*
+     * Each additional Blood Scrivener you control will effectively add one card and 1 life lost.
+     * Say you control two Blood Scriveners and would draw a card while you have no cards in hand.
+     * The effect of one Blood Scrivener will replace the event “draw a card” with “draw two cards and lose 1 life.”
+     * The effect of the other Blood Scrivener will replace the drawing of the first of those two cards with
+     * “draw two cards and lose 1 life.” You’ll draw two cards and lose 1 life,
+     * then draw another card and lose another 1 life. (2013-04-15)
+     */
+
+    @Test
+    public void testDoubleScrivener1() {
+        addCard(Zone.BATTLEFIELD, playerA, scrivener, 2);
+        testSingle(drawOne, 3, 0, scrivener);
+        assertLife(playerA, 18);
+    }
+
+    @Test
+    public void testDoubleScrivener2() {
+        addCard(Zone.BATTLEFIELD, playerA, scrivener, 2);
+        testSingle(drawTwo, 4, 0, scrivener);
+        assertLife(playerA, 18);
+    }
+
+    @Test
+    public void testDoubleScrivener3() {
+        addCard(Zone.BATTLEFIELD, playerA, scrivener, 2);
+        testSingle(drawThree, 5, 0, scrivener);
+        assertLife(playerA, 18);
+    }
+
+    @Test
+    public void testAsmodeus1() {
+        addCard(Zone.BATTLEFIELD, playerA, asmodeus);
+        testBase(drawOne, 0, 1);
+        assertExileCount(playerA, 1);
+    }
+
+    @Test
+    public void testAsmodeus2() {
+        addCard(Zone.BATTLEFIELD, playerA, asmodeus);
+        testBase(drawTwo, 0, 2);
+        assertExileCount(playerA, 2);
+    }
+
+    @Test
+    public void testAsmodeus3() {
+        addCard(Zone.BATTLEFIELD, playerA, asmodeus);
+        testBase(drawThree, 0, 3);
+        assertExileCount(playerA, 3);
+    }
+
+    @Test
+    public void testReflectionAsmodeus1() {
+        addCard(Zone.BATTLEFIELD, playerA, asmodeus);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawOne, 0, 0, reflection);
+        assertExileCount(playerA, 2);
+    }
+
+    @Test
+    public void testReflectionAsmodeus2() {
+        addCard(Zone.BATTLEFIELD, playerA, asmodeus);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawTwo, 0, 0, reflection, reflection);
+        assertExileCount(playerA, 4);
+    }
+
+    @Test
+    public void testReflectionAsmodeus3() {
+        addCard(Zone.BATTLEFIELD, playerA, asmodeus);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawThree, 0, 0, reflection, reflection, reflection);
+        assertExileCount(playerA, 6);
+    }
+
+    @Test
+    public void testAsmodeusReflection1() {
+        addCard(Zone.BATTLEFIELD, playerA, asmodeus);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawOne, 0, 0, asmodeus);
+        assertExileCount(playerA, 1);
+    }
+
+    @Test
+    public void testAsmodeusReflection2() {
+        addCard(Zone.BATTLEFIELD, playerA, asmodeus);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawTwo, 0, 0, asmodeus, asmodeus);
+        assertExileCount(playerA, 2);
+    }
+
+    @Test
+    public void testAsmodeusReflection3() {
+        addCard(Zone.BATTLEFIELD, playerA, asmodeus);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawThree, 0, 0, asmodeus, asmodeus, asmodeus);
+        assertExileCount(playerA, 3);
+    }
+
+    @Test
+    public void testAlmsCollectorReflection1() {
+        addCard(Zone.BATTLEFIELD, playerB, almsCollector);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawOne, 1, 1);
+    }
+
+    @Test
+    public void testAlmsCollectorReflection2() {
+        addCard(Zone.BATTLEFIELD, playerB, almsCollector);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawTwo, 2, 1);
+    }
+
+    @Test
+    public void testAlmsCollectorReflection3() {
+        addCard(Zone.BATTLEFIELD, playerB, almsCollector);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawThree, 2, 1);
+    }
+
+    @Test
+    public void testNotionThiefReflection1() {
+        addCard(Zone.BATTLEFIELD, playerB, notionThief);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawOne, 0, 1, notionThief);
+    }
+
+    @Test
+    public void testNotionThiefReflection2() {
+        addCard(Zone.BATTLEFIELD, playerB, notionThief);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawTwo, 0, 2, notionThief, notionThief);
+    }
+
+    @Test
+    public void testNotionThiefReflection3() {
+        addCard(Zone.BATTLEFIELD, playerB, notionThief);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawThree, 0, 3, notionThief, notionThief, notionThief);
+    }
+
+    @Test
+    public void testReflectionNotionThief1() {
+        addCard(Zone.BATTLEFIELD, playerB, notionThief);
+        addCard(Zone.BATTLEFIELD, playerA, reflection);
+        testSingle(drawOne, 0, 2, reflection);
+    }
+
 
     /**
      * The effects of multiple Thought Reflections are cumulative. For example,

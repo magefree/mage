@@ -739,6 +739,15 @@ public abstract class PlayerImpl implements Player, Serializable {
         return drawCards(num, source, game, null);
     }
 
+    /*
+     * 614.11. Some effects replace card draws. These effects are applied even if no cards could be drawn because
+     * there are no cards in the affected player's library.
+     * 614.11a. If an effect replaces a draw within a sequence of card draws, all actions required by the replacement
+     * are completed, if possible, before resuming the sequence.
+     * 614.11b. If an effect would have a player both draw a card and perform an additional action on that card, and
+     * the draw is replaced, the additional action is not performed on any cards that are drawn as a result of that
+     * replacement effect.
+     */
     @Override
     public int drawCards(int num, Ability source, Game game, GameEvent event) {
         if (num == 0) {
