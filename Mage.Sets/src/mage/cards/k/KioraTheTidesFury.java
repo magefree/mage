@@ -10,8 +10,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.KrakenToken;
 import mage.target.TargetPermanent;
 
@@ -21,7 +21,7 @@ import java.util.UUID;
  * @author Svyatoslav28
  */
 public final class KioraTheTidesFury extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.KRAKEN, "Kraken");
+    private static final FilterPermanent filter = new FilterPermanent (SubType.KRAKEN, "Kraken");
 
     public KioraTheTidesFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}");

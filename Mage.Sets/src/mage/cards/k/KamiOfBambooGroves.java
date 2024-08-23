@@ -1,27 +1,27 @@
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ConjureCardEffect;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.keyword.ChannelAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author Svyatoslav28
  */
 public final class KamiOfBambooGroves extends CardImpl {
 
     public KamiOfBambooGroves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{G}");
-        
+
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -31,7 +31,7 @@ public final class KamiOfBambooGroves extends CardImpl {
                 StaticFilters.FILTER_CARD_LAND_A, false, true
         ), false));
         // Channel -- {2}{G}, Discard Kami of Bamboo Groves: Conjure two cards named Forest into your hand.
-        this.addAbility(new ChannelAbility("{2}{G}", new ConjureCardEffect( "Forest", Zone.HAND,  2)));
+        this.addAbility(new ChannelAbility("{2}{G}", new ConjureCardEffect("Forest", Zone.HAND, 2)));
     }
 
     private KamiOfBambooGroves(final KamiOfBambooGroves card) {

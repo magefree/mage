@@ -1,25 +1,25 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.ConjureCardEffect;
-import mage.constants.SubType;
-import mage.abilities.keyword.NinjutsuAbility;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author Svyatoslav28
  */
 public final class SwarmSaboteur extends CardImpl {
 
     public SwarmSaboteur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.NINJA);
         this.power = new MageInt(2);

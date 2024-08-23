@@ -1,23 +1,24 @@
 
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.abilities.keyword.NinjutsuAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.abilities.keyword.NinjutsuAbility;
-import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 
 /**
- *
  * @author Svyatoslav28
  */
 
@@ -25,7 +26,7 @@ public final class JukaiLiberator extends CardImpl {
 
     public JukaiLiberator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        
+
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.NINJA);
         this.power = new MageInt(3);
@@ -48,21 +49,22 @@ public final class JukaiLiberator extends CardImpl {
         return new JukaiLiberator(this);
     }
 }
+
 class JukaiLiberatorEffect extends OneShotEffect {
 
     JukaiLiberatorEffect() {
         super(Outcome.Benefit);
-        staticText = " choose land or nonland." +
+        staticText = "choose land or nonland." +
                 " Seek a permanent card of the chosen kind.";
     }
 
-    private JukaiLiberatorEffect(final mage.cards.j.JukaiLiberatorEffect effect) {
+    private JukaiLiberatorEffect(final JukaiLiberatorEffect effect) {
         super(effect);
     }
 
     @Override
-    public mage.cards.j.JukaiLiberatorEffect copy() {
-        return new mage.cards.j.JukaiLiberatorEffect(this);
+    public JukaiLiberatorEffect copy() {
+        return new JukaiLiberatorEffect(this);
     }
 
     @Override

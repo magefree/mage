@@ -559,7 +559,6 @@ public class ScryfallImageSupportCards {
             add("ACR"); // Assassin's Creed
             add("BLB"); // Bloomburrow
             add("BLC"); // Bloomburrow Commander
-            add("YAR"); // Alchemy Rebalanced
             add("DSK"); // Duskmourn: House of Horror
             add("FDN"); // Foundations
             add("MB2"); // Mystery Booster 2

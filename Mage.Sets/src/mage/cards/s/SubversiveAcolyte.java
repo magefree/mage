@@ -3,25 +3,24 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ActivateOncePerGameActivatedAbility;
+import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.continuous.*;
+import mage.abilities.effects.common.SacrificeControllerEffect;
+import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -39,10 +38,10 @@ public final class SubversiveAcolyte extends CardImpl {
 
         // {2}: Pay 2 life: Choose one. Activate only once.
         // *  Subversive Acolyte becomes a Human Cleric. It gets +1/+1 and gains lifelink.
-        Ability ability = new ActivateOncePerGameActivatedAbility(Zone.BATTLEFIELD, new AddCardSubTypeSourceEffect(Duration.Custom, SubType.HUMAN, SubType.CLERIC).setText("{this} becomes a Human Cleric"),
+        Ability ability = new ActivateOncePerGameActivatedAbility(Zone.BATTLEFIELD, new AddCardSubTypeSourceEffect(Duration.WhileOnBattlefield, SubType.HUMAN, SubType.CLERIC).setText("{this} becomes a Human Cleric"),
                 new GenericManaCost(2), TimingRule.INSTANT);
-        ability.addEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield));
+        ability.addEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield).setText("It gains +1/+1"));
+        ability.addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield).setText(" and gains lifelink"));
         ability.addCost(new PayLifeCost(2));
 
         // * Subversive Acolyte becomes a Phyrexian. It gets +3/+2 and gains trample and “Whenever this creature is dealt damage, sacrifice that many permanents.”
@@ -64,7 +63,7 @@ class PhyrexianModeEffect extends OneShotEffect {
 
     PhyrexianModeEffect() {
         super(Outcome.Benefit);
-        staticText = "Subversive Acolyte becomes a Phyrexian. It gets +3/+2 " +
+        staticText = "{this} becomes a Phyrexian. It gets +3/+2 " +
                 "and gains trample and \"Whenever this creature is dealt damage, sacrifice that many permanents.\"";
     }
 
@@ -80,53 +79,16 @@ class PhyrexianModeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null ) {
+        if (permanent == null) {
             return false;
         }
-        game.addEffect(new AddCardSubTypeSourceEffect(Duration.Custom, SubType.PHYREXIAN), source);
+        game.addEffect(new AddCardSubTypeSourceEffect(Duration.WhileOnBattlefield, SubType.PHYREXIAN), source);
         game.addEffect(new BoostSourceEffect(3, 2, Duration.WhileOnBattlefield), source);
-        game.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),source);
-        game.addEffect(new GainAbilitySourceEffect(new SubversiveAcolyteTrigerredAbility(), Duration.WhileOnBattlefield),source);
+        game.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), source);
+        game.addEffect(new GainAbilitySourceEffect(
+                new DealtDamageToSourceTriggeredAbility(
+                        new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENTS, SavedDamageValue.MANY, ""),false),
+                Duration.WhileOnBattlefield), source);
         return true;
-    }
-}
-class SubversiveAcolyteTrigerredAbility extends TriggeredAbilityImpl {
-    SubversiveAcolyteTrigerredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 0,""));
-    }
-
-    private SubversiveAcolyteTrigerredAbility(final SubversiveAcolyteTrigerredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public mage.cards.s.SubversiveAcolyteTrigerredAbility copy() {
-        return new mage.cards.s.SubversiveAcolyteTrigerredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.sourceId)) {
-            UUID controller = game.getControllerId(event.getTargetId());
-            if (controller != null) {
-                Player player = game.getPlayer(controller);
-                if (player != null) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                    ((SacrificeEffect) getEffects().get(0)).setAmount(StaticValue.get(event.getAmount()));
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} is dealt damage, sacrifice that many permanents.";
     }
 }

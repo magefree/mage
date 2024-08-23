@@ -1,29 +1,30 @@
 package mage.cards.e;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CrewIncreasedPowerAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.common.DraftFromSpellbookEffect;
-import mage.constants.SubType;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DraftFromSpellbookEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author Svyatoslav28
  */
 public final class ExperimentalPilot extends CardImpl {
+
     private static final List<String> spellbook = Collections.unmodifiableList(Arrays.asList(
             "Bomat Bazaar Barge",
             "Cultivator's Caravan",
@@ -44,7 +45,7 @@ public final class ExperimentalPilot extends CardImpl {
 
     public ExperimentalPilot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PILOT);
         this.power = new MageInt(1);

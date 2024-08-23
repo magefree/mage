@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -14,10 +15,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
 /**
- *
  * @author Svyatoslav28
  */
 public final class BoseijuPathlighter extends CardImpl {
+
     private static final List<String> spellbook = Collections.unmodifiableList(Arrays.asList(
             "Bonders' Enclave",
             "Boseiju, Who Endures",
@@ -38,7 +39,7 @@ public final class BoseijuPathlighter extends CardImpl {
 
     public BoseijuPathlighter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(3);
