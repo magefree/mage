@@ -80,7 +80,7 @@ class TemptWithVengeanceEffect extends OneShotEffect {
                 // accepted.
                 // (2013-10-17)
                 for (int i = 0; i < opponentsAddedTokens; i++) {
-                    tokenCopy.putOntoBattlefield(opponentsAddedTokens, game, source, source.getControllerId(), false, false);
+                    tokenCopy.putOntoBattlefield(xValue, game, source, source.getControllerId(), false, false);
                 }
             }
             return true;
