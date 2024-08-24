@@ -1916,7 +1916,10 @@ public class HumanPlayer extends PlayerImpl {
         // check if enough attackers are declared
         // check if players have to be attacked
         Set<UUID> playersToAttackIfAble = new HashSet<>();
-        boolean mustAttackAPlayer = false;
+        
+        // or if active player must attack with anything
+        boolean mustAttack = false;
+
         for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(null, true, game).entrySet()) {
             RequirementEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
@@ -1925,7 +1928,7 @@ public class HumanPlayer extends PlayerImpl {
                     playersToAttackIfAble.add(playerToAttack);
                 }
                 if (effect.mustAttack(game)){
-                    mustAttackAPlayer = true;
+                    mustAttack = true;
                 }
             }
         }
@@ -1964,7 +1967,7 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
-        if (mustAttackAPlayer && game.getCombat().getAttackers().isEmpty()){
+        if (mustAttack && game.getCombat().getAttackers().isEmpty()){
             // no attackers, but required to attack with something -- check if anything can attack
             for (Permanent attacker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getId(), game)) {
                 if (attacker.canAttackInPrinciple(null, game)){
