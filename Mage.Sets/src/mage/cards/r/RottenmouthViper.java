@@ -46,7 +46,7 @@ public final class RottenmouthViper extends CardImpl {
         // As an additional cost to cast this spell, you may sacrifice any number of nonland permanents. This spell costs {1} less to cast for each permanent sacrificed this way.
         Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND, true);
         cost.setText("you may sacrifice any number of nonland permanents." +
-                "This spell costs {1} less to cast for each permanent sacrificed this way.");
+                "This spell costs {1} less to cast for each permanent sacrificed this way");
         this.getSpellAbility().addCost(cost);
         Ability modAbility = new SimpleStaticAbility(Zone.ALL, new RottenmouthViperCostModificationEffect());
         modAbility.setRuleVisible(false);
