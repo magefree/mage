@@ -51,7 +51,7 @@ public final class ValleyQuestcaller extends CardImpl {
 
         // Whenever one or more other Rabbits, Bats, Birds, and/or Mice you control enter, scry 1.
         this.addAbility(new EntersBattlefieldOneOrMoreTriggeredAbility(
-                new ScryEffect(1),
+                new ScryEffect(1, false),
                 filter,
                 TargetController.YOU)
         );
