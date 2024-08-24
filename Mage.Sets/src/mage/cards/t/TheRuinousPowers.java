@@ -29,7 +29,7 @@ public final class TheRuinousPowers extends CardImpl {
         // Until end of turn, you may play that card and you may spend mana as though it were mana of any color to cast it.
         // When you cast a spell this way, its owner loses life equal to its mana value.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new TheRuinousPowersEffect(), TargetController.YOU, false)
-                .setIdentifier(MageIdentifier.TheRuinousPowersWatcher);
+                .setIdentifier(MageIdentifier.TheRuinousPowersAlternateCast);
         this.addAbility(ability);
     }
 
@@ -106,7 +106,7 @@ class TheRuinousPowersTriggeredAbility extends DelayedTriggeredAbility {
         if (!event.getSourceId().equals(cardId)){
             return false;
         }
-        if (!event.hasApprovingIdentifier(MageIdentifier.TheRuinousPowersWatcher)){
+        if (!event.hasApprovingIdentifier(MageIdentifier.TheRuinousPowersAlternateCast)){
             return false;
         }
         Card card = game.getCard(cardId);

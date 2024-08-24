@@ -25,7 +25,6 @@ public enum MageIdentifier {
     IntrepidPaleontologistWatcher,
     KessDissidentMageWatcher,
     IanMalcolmChaoticianWatcher,
-    TheRuinousPowersWatcher,
     MuldrothaTheGravetideWatcher,
     ShareTheSpoilsWatcher,
     WishWatcher,
@@ -73,6 +72,7 @@ public enum MageIdentifier {
     WithoutPayingManaCostAlternateCast,
     AlurenAlternateCast,
     OfferingAlternateCast,
+    TheRuinousPowersAlternateCast,
     PrimalPrayersAlternateCast;
 
     /**
