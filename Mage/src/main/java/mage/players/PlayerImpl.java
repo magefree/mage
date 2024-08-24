@@ -19,7 +19,6 @@ import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
-import mage.actions.MageDrawAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
@@ -82,7 +81,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * During some steps we can't play anything
      */
-    final static Map<PhaseStep, Step.StepPart> SILENT_PHASES_STEPS = ImmutableMap.<PhaseStep, Step.StepPart>builder().
+    static final Map<PhaseStep, Step.StepPart> SILENT_PHASES_STEPS = ImmutableMap.<PhaseStep, Step.StepPart>builder().
             put(PhaseStep.DECLARE_ATTACKERS, Step.StepPart.PRE).build();
 
     /**
@@ -737,15 +736,60 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int drawCards(int num, Ability source, Game game) {
-        if (num > 0) {
-            return game.doAction(source, new MageDrawAction(this, num, null));
-        }
-        return 0;
+        return drawCards(num, source, game, null);
     }
 
+    /*
+     * 614.11. Some effects replace card draws. These effects are applied even if no cards could be drawn because
+     * there are no cards in the affected player's library.
+     * 614.11a. If an effect replaces a draw within a sequence of card draws, all actions required by the replacement
+     * are completed, if possible, before resuming the sequence.
+     * 614.11b. If an effect would have a player both draw a card and perform an additional action on that card, and
+     * the draw is replaced, the additional action is not performed on any cards that are drawn as a result of that
+     * replacement effect.
+     */
     @Override
     public int drawCards(int num, Ability source, Game game, GameEvent event) {
-        return game.doAction(source, new MageDrawAction(this, num, event));
+        if (num == 0) {
+            return 0;
+        }
+        if (num >= 2) {
+            // Event for replacement effects that only apply when two or more cards are drawn
+            DrawTwoOrMoreCardsEvent multiDrawEvent = new DrawTwoOrMoreCardsEvent(getId(), source, event, num);
+            if (game.replaceEvent(multiDrawEvent)) {
+                return multiDrawEvent.getCardsDrawn();
+            }
+            num = multiDrawEvent.getAmount();
+        }
+        int numDrawn = 0;
+        for (int i = 0; i < num; i++) {
+            DrawCardEvent drawCardEvent = new DrawCardEvent(getId(), source, event);
+            if (game.replaceEvent(drawCardEvent)) {
+                numDrawn += drawCardEvent.getCardsDrawn();
+                continue;
+            }
+            Card card = drawCardEvent.isFromBottom() ? getLibrary().drawFromBottom(game) : getLibrary().drawFromTop(game);
+            if (card != null) {
+                card.moveToZone(Zone.HAND, source, game, false); // if you want to use event.getSourceId() here then thinks x10 times
+                if (isTopCardRevealed()) {
+                    game.fireInformEvent(getLogName() + " draws a revealed card  (" + card.getLogName() + ')');
+                }
+                game.fireEvent(new DrewCardEvent(card.getId(), getId(), source, event));
+                numDrawn++;
+            }
+        }
+        if (!isTopCardRevealed() && numDrawn > 0) {
+            game.fireInformEvent(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
+        }
+        // if this method was called from a replacement event, pass the number of cards back through
+        // (uncomment conditions if correct ruling is to only count cards drawn by the same player)
+        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */ ) {
+            ((DrawCardEvent) event).incrementCardsDrawn(numDrawn);
+        }
+        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */ ) {
+            ((DrawTwoOrMoreCardsEvent) event).incrementCardsDrawn(numDrawn);
+        }
+        return numDrawn;
     }
 
     @Override
