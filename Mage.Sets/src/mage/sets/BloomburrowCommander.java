@@ -178,6 +178,8 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Morbid Opportunist", 183, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Mossfire Valley", 316, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 317, Rarity.RARE, mage.cards.m.MosswortBridge.class));
+        cards.add(new SetCardInfo("Mr. Foxglove", 6, Rarity.MYTHIC, mage.cards.m.MrFoxglove.class));
+        cards.add(new SetCardInfo("Ms. Bumbleflower", 3, Rarity.MYTHIC, mage.cards.m.MsBumbleflower.class));
         cards.add(new SetCardInfo("Murmuration", 10, Rarity.RARE, mage.cards.m.Murmuration.class));
         cards.add(new SetCardInfo("Mystic Monastery", 318, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
         cards.add(new SetCardInfo("Nadier's Nightblade", 184, Rarity.UNCOMMON, mage.cards.n.NadiersNightblade.class));
@@ -284,6 +286,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Mystery", 342, Rarity.RARE, mage.cards.t.TempleOfMystery.class));
         cards.add(new SetCardInfo("Temple of Plenty", 343, Rarity.RARE, mage.cards.t.TempleOfPlenty.class));
         cards.add(new SetCardInfo("Temple of Triumph", 344, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
+        cards.add(new SetCardInfo("Tempt with Bunnies", 13, Rarity.RARE, mage.cards.t.TemptWithBunnies.class));
         cards.add(new SetCardInfo("Tempt with Discovery", 124, Rarity.RARE, mage.cards.t.TemptWithDiscovery.class));
         cards.add(new SetCardInfo("Tendershoot Dryad", 242, Rarity.RARE, mage.cards.t.TendershootDryad.class));
         cards.add(new SetCardInfo("Tenuous Truce", 159, Rarity.RARE, mage.cards.t.TenuousTruce.class));
