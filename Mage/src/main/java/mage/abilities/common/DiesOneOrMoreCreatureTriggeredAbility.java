@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.MageObject;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -10,14 +11,19 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 
-import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author Susucr
  */
-public class DiesOneOrMoreCreatureTriggeredAbility extends TriggeredAbilityImpl {
+public class DiesOneOrMoreCreatureTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     private final FilterCreaturePermanent filter;
+
+    public DiesOneOrMoreCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
+        this(effect, filter, false);
+    }
 
     public DiesOneOrMoreCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -41,15 +47,22 @@ public class DiesOneOrMoreCreatureTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public Stream<ZoneChangeEvent> filterBatchEvent(GameEvent event, Game game) {
         return ((ZoneChangeBatchEvent) event)
                 .getEvents()
                 .stream()
                 .filter(ZoneChangeEvent::isDiesEvent)
-                .map(ZoneChangeEvent::getTargetId)
-                .map(game::getPermanentOrLKIBattlefield)
-                .filter(Objects::nonNull)
-                .anyMatch(p -> filter.match(p, getControllerId(), this, game));
+                .filter(e -> Optional
+                        .of(e)
+                        .map(ZoneChangeEvent::getTargetId)
+                        .map(game::getPermanentOrLKIBattlefield)
+                        .filter(p -> filter.match(p, getControllerId(), this, game))
+                        .isPresent());
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 
     @Override

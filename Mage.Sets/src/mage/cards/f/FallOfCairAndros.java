@@ -1,6 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,13 +14,13 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
-import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -48,7 +49,7 @@ public final class FallOfCairAndros extends CardImpl {
     }
 }
 
-class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl {
+class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     FallOfCairAndrosTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -69,23 +70,31 @@ class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public Stream<DamagedPermanentEvent> filterBatchEvent(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null || !permanent.isCreature(game)
-                || !game.getOpponents(getControllerId()).contains(permanent.getControllerId())) {
-            return false;
+        if (permanent == null
+                || !permanent.isCreature(game)
+                || !game.getOpponents(getControllerId()).contains(permanent.getControllerId())
+        ) {
+            return Stream.empty();
         }
-        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
-        int excessDamage = dEvent.getEvents()
+        return ((DamagedBatchForOnePermanentEvent) event)
+                .getEvents()
                 .stream()
-                .mapToInt(DamagedEvent::getExcess)
-                .sum();
+                .filter(DamagedPermanentEvent::isCombatDamage)
+                .filter(e -> e.getExcess() > 0);
+    }
 
-        if (dEvent.isCombatDamage() || excessDamage < 1) {
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        int amount = filterBatchEvent(event, game)
+                .mapToInt(DamagedPermanentEvent::getExcess)
+                .sum();
+        if (amount <= 0) {
             return false;
         }
         this.getEffects().clear();
-        this.addEffect(new AmassEffect(excessDamage, SubType.ORC));
+        this.addEffect(new AmassEffect(amount, SubType.ORC));
         return true;
     }
 

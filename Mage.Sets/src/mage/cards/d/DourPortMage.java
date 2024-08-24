@@ -2,6 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -20,8 +21,9 @@ import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.TargetPermanent;
 
-import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author TheElk801
@@ -56,7 +58,7 @@ public final class DourPortMage extends CardImpl {
     }
 }
 
-class DourPortMageTriggeredAbility extends TriggeredAbilityImpl {
+class DourPortMageTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     DourPortMageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
@@ -78,16 +80,24 @@ class DourPortMageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public Stream<ZoneChangeEvent> filterBatchEvent(GameEvent event, Game game) {
         return ((ZoneChangeBatchEvent) event)
                 .getEvents()
                 .stream()
                 .filter(zoneChangeEvent -> Zone.BATTLEFIELD.match(zoneChangeEvent.getFromZone()))
-                .filter(zoneChangeEvent -> !Zone.GRAVEYARD.match(zoneChangeEvent.getToZone()))
-                .map(ZoneChangeEvent::getTargetId)
-                .filter(uuid -> !getSourceId().equals(uuid))
-                .map(game::getPermanentOrLKIBattlefield)
-                .filter(Objects::nonNull)
-                .anyMatch(p -> p.isCreature(game) && p.isControlledBy(getControllerId()));
+                .filter(e -> !e.isDiesEvent())
+                .filter(e -> Optional
+                        .of(e)
+                        .map(ZoneChangeEvent::getTargetId)
+                        .filter(uuid -> !getSourceId().equals(uuid))
+                        .map(game::getPermanentOrLKIBattlefield)
+                        .filter(p -> p.isCreature(game) && p.isControlledBy(getControllerId()))
+                        .isPresent()
+                );
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 }

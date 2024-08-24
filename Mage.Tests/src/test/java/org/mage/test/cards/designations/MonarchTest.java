@@ -70,7 +70,6 @@ public class MonarchTest extends CardTestMultiPlayerBase {
         //
         addCard(Zone.BATTLEFIELD, playerD, "Grizzly Bears", 1);
         //
-        // {T} : Prodigal Pyromancer deals 1 damage to any target.
         addCard(Zone.BATTLEFIELD, playerC, "Grizzly Bears", 1);
 
         // A as monarch

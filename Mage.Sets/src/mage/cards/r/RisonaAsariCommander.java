@@ -1,30 +1,33 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+import java.util.stream.Stream;
+
 /**
- *
  * @author weirddan455
  */
 public final class RisonaAsariCommander extends CardImpl {
@@ -62,7 +65,7 @@ public final class RisonaAsariCommander extends CardImpl {
     }
 }
 
-class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl {
+class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     public RisonaAsariCommanderTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()));
@@ -84,12 +87,17 @@ class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
+    public Stream<DamagedPlayerEvent> filterBatchEvent(GameEvent event, Game game) {
         return ((DamagedBatchForPlayersEvent) event)
                 .getEvents()
                 .stream()
                 .filter(DamagedEvent::isCombatDamage)
-                .anyMatch(e -> e.getTargetId().equals(getControllerId()));
+                .filter(e -> e.getTargetId().equals(getControllerId()));
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return filterBatchEvent(event, game).findAny().isPresent();
     }
 }
 
