@@ -264,6 +264,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Valley Flamecaller", 158, Rarity.RARE, mage.cards.v.ValleyFlamecaller.class));
         cards.add(new SetCardInfo("Valley Floodcaller", 79, Rarity.RARE, mage.cards.v.ValleyFloodcaller.class));
         cards.add(new SetCardInfo("Valley Mightcaller", 202, Rarity.RARE, mage.cards.v.ValleyMightcaller.class));
+        cards.add(new SetCardInfo("Valley Questcaller", 36, Rarity.RARE, mage.cards.v.ValleyQuestcaller.class));
         cards.add(new SetCardInfo("Valley Rally", 159, Rarity.UNCOMMON, mage.cards.v.ValleyRally.class));
         cards.add(new SetCardInfo("Valley Rotcaller", 119, Rarity.RARE, mage.cards.v.ValleyRotcaller.class));
         cards.add(new SetCardInfo("Veteran Guardmouse", 237, Rarity.COMMON, mage.cards.v.VeteranGuardmouse.class));
