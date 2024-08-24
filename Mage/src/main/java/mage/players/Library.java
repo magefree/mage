@@ -91,7 +91,7 @@ public class Library implements Serializable {
      * The card is still in the library, until/unless some zone-handling code moves it
      */
     public Card getFromBottom(Game game) {
-        return game.getCard(library.peekLast()); // does not remove the card from its position in the library
+        return game.getCard(library.peekLast());
     }
 
     public void putOnTop(Card card, Game game) {
