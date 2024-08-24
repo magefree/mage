@@ -63,6 +63,7 @@ public class HelgaSkittishSeer extends CardImpl {
                 new SourcePermanentPowerCount(),
                 new HelgaSkittishSeerManaBuilder(),
                 true));
+
     }
 
     private HelgaSkittishSeer(final HelgaSkittishSeer card) {super(card);}
