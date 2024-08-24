@@ -25,6 +25,7 @@ public enum MageIdentifier {
     IntrepidPaleontologistWatcher,
     KessDissidentMageWatcher,
     IanMalcolmChaoticianWatcher,
+    TheRuinousPowersWatcher,
     MuldrothaTheGravetideWatcher,
     ShareTheSpoilsWatcher,
     WishWatcher,

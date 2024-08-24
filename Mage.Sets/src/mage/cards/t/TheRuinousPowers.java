@@ -1,15 +1,16 @@
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
@@ -27,7 +28,8 @@ public final class TheRuinousPowers extends CardImpl {
         // At the beginning of your upkeep, choose an opponent at random. Exile the top card of that player's library.
         // Until end of turn, you may play that card and you may spend mana as though it were mana of any color to cast it.
         // When you cast a spell this way, its owner loses life equal to its mana value.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new TheRuinousPowersEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new TheRuinousPowersEffect(), TargetController.YOU, false)
+                .setIdentifier(MageIdentifier.TheRuinousPowersWatcher);
         this.addAbility(ability);
     }
 
@@ -47,7 +49,8 @@ class TheRuinousPowersEffect extends OneShotEffect {
     TheRuinousPowersEffect() {
         super(Outcome.Benefit);
         staticText = "choose an opponent at random. Exile the top card of that player's library. Until end of turn, " +
-                "you may play that card and you may spend mana as though it were mana of any color to cast it.";
+                "you may play that card and you may spend mana as though it were mana of any color to cast it. " +
+                "When you cast a spell this way, its owner loses life equal to its mana value.";
     }
 
     private TheRuinousPowersEffect(final TheRuinousPowersEffect effect) {
@@ -71,7 +74,54 @@ class TheRuinousPowersEffect extends OneShotEffect {
         player.moveCards(card, Zone.EXILED, source, game);
         if (card != null) {
             CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, true);
+            game.addDelayedTriggeredAbility(new TheRuinousPowersTriggeredAbility(card.getId()), source);
         }
         return true;
+    }
+}
+
+// Based on FiresOfMountDoomDelayedTriggeredAbility
+// Modified to fix potential issues by checking approving object
+class TheRuinousPowersTriggeredAbility extends DelayedTriggeredAbility {
+
+    private final UUID cardId;
+
+    public TheRuinousPowersTriggeredAbility(UUID cardId) {
+        super(null, Duration.EndOfTurn);
+        this.cardId = cardId;
+    }
+
+    private TheRuinousPowersTriggeredAbility(final TheRuinousPowersTriggeredAbility ability) {
+        super(ability);
+        this.cardId = ability.cardId;
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.getSourceId().equals(cardId)){
+            return false;
+        }
+        if (!event.hasApprovingIdentifier(MageIdentifier.TheRuinousPowersWatcher)){
+            return false;
+        }
+        Card card = game.getCard(cardId);
+        Player owner = game.getPlayer(card.getOwnerId());
+        owner.loseLife(card.getManaValue(), game, this, false);
+        return true;
+    }
+
+    @Override
+    public TheRuinousPowersTriggeredAbility copy() {
+        return new TheRuinousPowersTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "When you cast a spell this way, its owner loses life equal to its mana value.";
     }
 }
