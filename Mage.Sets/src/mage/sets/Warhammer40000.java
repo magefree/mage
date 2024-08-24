@@ -265,6 +265,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("The Golden Throne", 157, Rarity.RARE, mage.cards.t.TheGoldenThrone.class));
         cards.add(new SetCardInfo("The Horus Heresy", 126, Rarity.RARE, mage.cards.t.TheHorusHeresy.class));
         cards.add(new SetCardInfo("The Lost and the Damned", 129, Rarity.UNCOMMON, mage.cards.t.TheLostAndTheDamned.class));
+        cards.add(new SetCardInfo("The Ruinous Powers", 139, Rarity.RARE, mage.cards.t.TheRuinousPowers.class));
         cards.add(new SetCardInfo("The Swarmlord", 4, Rarity.MYTHIC, mage.cards.t.TheSwarmlord.class));
         cards.add(new SetCardInfo("The War in Heaven", 69, Rarity.RARE, mage.cards.t.TheWarInHeaven.class));
         cards.add(new SetCardInfo("Their Name Is Death", 62, Rarity.RARE, mage.cards.t.TheirNameIsDeath.class));
