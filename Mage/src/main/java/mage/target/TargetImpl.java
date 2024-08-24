@@ -409,7 +409,7 @@ public abstract class TargetImpl implements Target {
                 illegalTargets.add(targetId);
                 continue;
             }
-            if (!stillLegalTarget(targetId, source, game)) {
+            if (!stillLegalTarget(source.getControllerId(), targetId, source, game)) {
                 illegalTargets.add(targetId);
             }
         }
@@ -546,8 +546,8 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
-        return canTarget(id, source, game);
+    public boolean stillLegalTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        return canTarget(controllerId, id, source, game);
     }
 
     @Override

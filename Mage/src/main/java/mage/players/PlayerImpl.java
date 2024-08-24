@@ -4836,6 +4836,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (enterTransformed != null && enterTransformed && !card.isTransformable()) {
                         continue;
                     }
+                    // 303.4g. If an Aura is entering the battlefield and there is no legal object or player for it to enchant,
+                    // the Aura remains in its current zone, unless that zone is the stack. In that case, the Aura is put into
+                    // its owner's graveyard instead of entering the battlefield. If the Aura is a token, it isn't created.
+                    if (card.hasSubtype(SubType.AURA, game)
+                            && card.getSpellAbility() != null
+                            && !card.getSpellAbility().getTargets().isEmpty()
+                            && !card.getSpellAbility().getTargets().get(0).copy().withNotTarget(true).canChoose(byOwner ? card.getOwnerId() : getId(), game)) {
+                        continue;
+                    }
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source,
                             byOwner ? card.getOwnerId() : getId(), fromZone, Zone.BATTLEFIELD, appliedEffects);
                     infoList.add(new ZoneChangeInfo.Battlefield(event, faceDown, tapped, source));
