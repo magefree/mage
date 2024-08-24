@@ -31,7 +31,7 @@ import java.util.UUID;
 
 public class HelgaSkittishSeer extends CardImpl {
 
-    private static final FilterSpell filter = new FilterCreatureSpell("Spell with CMC >= 4");
+    private static final FilterSpell filter = new FilterCreatureSpell("a creature spell with mana value 4 or greater");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 4));
@@ -47,9 +47,9 @@ public class HelgaSkittishSeer extends CardImpl {
 
         // Whenever you cast a creature spell with mana value 4 or greater, you draw a card, gain 1 life and put a +1/+1 counter on Helga, Skittish Seer
         Ability ability = new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1).
-                setText("Whenever you cast a creature spell with mana value 4 or greater, you draw a card"),
+                setText("you draw a card"),
                 filter, false);
-        ability.addEffect(new GainLifeEffect(1).setText("gain 1 life"));
+        ability.addEffect(new GainLifeEffect(1).setText("gain 1 life").concatBy(","));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 .setText("and put a +1/+1 counter on {this}"));
 
@@ -61,7 +61,8 @@ public class HelgaSkittishSeer extends CardImpl {
                 new SourcePermanentPowerCount(),
                 new SourcePermanentPowerCount(),
                 new HelgaSkittishSeerManaBuilder(),
-                true));
+                true,
+                "Add X mana of any one color, where X is {this}'s power. "));
 
     }
 
@@ -79,7 +80,7 @@ class HelgaSkittishSeerManaBuilder extends ConditionalManaBuilder{
 
     @Override
     public String getRule(){
-        return "Spend this mana only to cast creature spells with mana value 4 or greater or creature spells with {x} in their mana costs";
+        return "Spend this mana only to cast creature spells with mana value 4 or greater or creature spells with {X} in their mana costs";
     }
 }
 
@@ -87,7 +88,7 @@ class HelgaSkittishSeerConditionalMana extends ConditionalMana {
 
     HelgaSkittishSeerConditionalMana(Mana mana){
         super(mana);
-        staticText = "Spend this mana only to cast creature spells with mana value 4 or greater or creature spells with {x} in their mana costs";
+        staticText = "Spend this mana only to cast creature spells with mana value 4 or greater or creature spells with {X} in their mana costs";
         addCondition(new HelgaSkittishSeerManaCondition());
     }
 }
