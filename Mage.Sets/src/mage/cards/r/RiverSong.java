@@ -6,8 +6,8 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DrawCardEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -38,7 +37,7 @@ public final class RiverSong extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Meet in Reverse -- You draw cards from the bottom of your library rather than the top.
-        this.addAbility(new SimpleStaticAbility(new RiverSongDrawFromBottomReplacementEffect())
+        this.addAbility(new SimpleStaticAbility(new RiverSongDrawFromBottomEffect())
                 .withFlavorWord("Meet in Reverse"));
 
         // Spoilers -- Whenever an opponent scries, surveils, or searches their library, put a +1/+1 counter on River Song.
@@ -59,36 +58,30 @@ public final class RiverSong extends CardImpl {
     }
 }
 
-class RiverSongDrawFromBottomReplacementEffect extends ReplacementEffectImpl {
+class RiverSongDrawFromBottomEffect extends ContinuousEffectImpl {
 
-    RiverSongDrawFromBottomReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "You draw cards from the bottom of your library rather than the top";
+    RiverSongDrawFromBottomEffect() {
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
+        staticText = "you draw cards from the bottom of your library rather than the top";
     }
 
-    private RiverSongDrawFromBottomReplacementEffect(final RiverSongDrawFromBottomReplacementEffect effect) {
+    private RiverSongDrawFromBottomEffect(final RiverSongDrawFromBottomEffect effect) {
         super(effect);
     }
 
     @Override
-    public RiverSongDrawFromBottomReplacementEffect copy() {
-        return new RiverSongDrawFromBottomReplacementEffect(this);
+    public RiverSongDrawFromBottomEffect copy() {
+        return new RiverSongDrawFromBottomEffect(this);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((DrawCardEvent) event).setFromBottom(true);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DRAW_CARD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getControllerId().equals(event.getPlayerId());
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        player.setDrawsFromBottom(true);
+        return true;
     }
 }
 

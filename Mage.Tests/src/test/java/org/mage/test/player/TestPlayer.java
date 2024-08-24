@@ -3848,11 +3848,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
-        computerPlayer.setDrawsOnOpponentsTurn(drawsOnOpponentsTurn);
-    }
-
-    @Override
     public boolean canPlotFromTopOfLibrary() {
         return computerPlayer.canPlotFromTopOfLibrary();
     }
@@ -3860,6 +3855,21 @@ public class TestPlayer implements Player {
     @Override
     public void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary) {
         computerPlayer.setPlotFromTopOfLibrary(canPlotFromTopOfLibrary);
+    }
+
+    @Override
+    public void setDrawsFromBottom(boolean drawsFromBottom) {
+        computerPlayer.setDrawsFromBottom(drawsFromBottom);
+    }
+
+    @Override
+    public boolean isDrawsFromBottom() {
+        return computerPlayer.isDrawsFromBottom();
+    }
+
+    @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+        computerPlayer.setDrawsOnOpponentsTurn(drawsOnOpponentsTurn);
     }
 
     @Override

@@ -480,4 +480,53 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         assertLibraryCount(playerA, "Shock", 1);
     }
 
+    @Test
+    public void testRiverSongExtended() {
+        skipInitShuffling();
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3);
+        addCard(Zone.LIBRARY, playerA, "Healing Salve"); // bottom
+        addCard(Zone.LIBRARY, playerA, "Giant Growth");
+        addCard(Zone.LIBRARY, playerA, "Dark Ritual");
+        addCard(Zone.LIBRARY, playerA, "Ornithopter");
+        addCard(Zone.LIBRARY, playerA, "Shock"); // top
+        addCard(Zone.BATTLEFIELD, playerA, "Blood Bairn"); // sac outlet
+        addCard(Zone.HAND, playerA, "River Song");
+        // You draw cards from the bottom of your library rather than the top.
+
+        checkHandCardCount("first draw", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", 1);
+
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "River Song");
+
+        checkHandCardCount("second draw", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Healing Salve", 1);
+
+        checkHandCardCount("third draw", 7, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", 1);
+
+        activateAbility(7, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice");
+        setChoice(playerA, "River Song");
+
+        checkHandCardCount("fourth draw", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Ornithopter", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(9, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, 4);
+        assertLibraryCount(playerA, "Dark Ritual", 1);
+        assertGraveyardCount(playerA, "River Song", 1);
+    }
+
+    @Test
+    public void testRiverSongLaboratoryManiac() {
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "River Song");
+        addCard(Zone.BATTLEFIELD, playerA, "Laboratory Maniac");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertWonTheGame(playerA);
+    }
+
 }

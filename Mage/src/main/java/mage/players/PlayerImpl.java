@@ -154,6 +154,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
     protected boolean canPlotFromTopOfLibrary = false;
+    protected boolean drawsFromBottom = false;
     protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
@@ -253,6 +254,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard;
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary;
+        this.drawsFromBottom = player.drawsFromBottom;
         this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
 
         this.attachments.addAll(player.attachments);
@@ -367,6 +369,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
+        this.drawsFromBottom = player.isDrawsFromBottom();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
         this.alternativeSourceCosts = CardUtil.deepCopyObject(player.getAlternativeSourceCosts());
 
@@ -481,6 +484,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = true;
         this.canPlotFromTopOfLibrary = false;
+        this.drawsFromBottom = false;
         this.drawsOnOpponentsTurn = false;
 
         this.sacrificeCostFilter = null;
@@ -524,6 +528,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = false;
         this.canPlotFromTopOfLibrary = false;
+        this.drawsFromBottom = false;
         this.drawsOnOpponentsTurn = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
@@ -768,7 +773,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 numDrawn += drawCardEvent.getCardsDrawn();
                 continue;
             }
-            Card card = drawCardEvent.isFromBottom() ? getLibrary().drawFromBottom(game) : getLibrary().drawFromTop(game);
+            Card card = isDrawsFromBottom() ? getLibrary().drawFromBottom(game) : getLibrary().drawFromTop(game);
             if (card != null) {
                 card.moveToZone(Zone.HAND, source, game, false); // if you want to use event.getSourceId() here then thinks x10 times
                 if (isTopCardRevealed()) {
@@ -4659,6 +4664,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary) {
         this.canPlotFromTopOfLibrary = canPlotFromTopOfLibrary;
+    }
+
+    @Override
+    public void setDrawsFromBottom(boolean drawsFromBottom) {
+        this.drawsFromBottom = drawsFromBottom;
+    }
+
+    @Override
+    public boolean isDrawsFromBottom() {
+        return drawsFromBottom;
     }
 
     @Override
