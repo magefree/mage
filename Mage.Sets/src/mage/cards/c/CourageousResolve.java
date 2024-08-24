@@ -39,15 +39,15 @@ public final class CourageousResolve extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // Up to one target creature you control gains protection from each of your opponents until end of turn.
-        // Draw a card. (It can’t be blocked, targeted, dealt damage, enchanted, or equipped by anything controlled by those players.)
+        // Draw a card. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything controlled by those players.)
         this.getSpellAbility().addEffect(new CourageousResolveEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("Draw a card. <i>(It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything controlled by those players.)</i>"));
 
 
-        //Fateful hour — If you have 5 or less life, you can’t lose life this turn, you can’t lose the game this turn,
-        // and your opponents can’t win the game this turn.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new CantLoseLifeControllerEffect(Duration.EndOfTurn), FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; If you have 5 or less life, you can’t lose life this turn, "));
+        //Fateful hour — If you have 5 or less life, you can't lose life this turn, you can't lose the game this turn,
+        // and your opponents can't win the game this turn.
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new CantLoseLifeControllerEffect(Duration.EndOfTurn), FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; If you have 5 or less life, you can't lose life this turn, "));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(new CourageousResolveWinLoseEffect(), FatefulHourCondition.instance));
 
 
