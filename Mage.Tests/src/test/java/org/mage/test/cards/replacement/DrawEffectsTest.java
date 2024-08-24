@@ -456,4 +456,28 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         assertHandCount(playerB, 1);
     }
 
+    @Test
+    public void testRiverSong() {
+        skipInitShuffling();
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.LIBRARY, playerA, "Healing Salve"); // bottom
+        addCard(Zone.LIBRARY, playerA, "Giant Growth");
+        addCard(Zone.LIBRARY, playerA, "Shock"); // top
+        addCard(Zone.BATTLEFIELD, playerA, "River Song");
+        // You draw cards from the bottom of your library rather than the top.
+        addCard(Zone.HAND, playerA, drawOne, 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, drawOne);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, drawOne, 1);
+        assertHandCount(playerA, 1);
+        assertHandCount(playerA, "Healing Salve", 1);
+        assertLibraryCount(playerA, "Shock", 1);
+    }
+
 }
