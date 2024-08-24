@@ -1916,12 +1916,19 @@ public class HumanPlayer extends PlayerImpl {
         // check if enough attackers are declared
         // check if players have to be attacked
         Set<UUID> playersToAttackIfAble = new HashSet<>();
+        
+        // or if active player must attack with anything
+        boolean mustAttack = false;
+
         for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(null, true, game).entrySet()) {
             RequirementEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
                 UUID playerToAttack = effect.playerMustBeAttackedIfAble(ability, game);
                 if (playerToAttack != null) {
                     playersToAttackIfAble.add(playerToAttack);
+                }
+                if (effect.mustAttack(game)){
+                    mustAttack = true;
                 }
             }
         }
@@ -1956,6 +1963,16 @@ public class HumanPlayer extends PlayerImpl {
                         game.informPlayer(this, "You are forced to attack " + forcedToAttack.getName() + " or a controlled planeswalker e.g. with " + attacker.getIdName() + ".");
                         return false;
                     }
+                }
+            }
+        }
+
+        if (mustAttack && game.getCombat().getAttackers().isEmpty()){
+            // no attackers, but required to attack with something -- check if anything can attack
+            for (Permanent attacker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getId(), game)) {
+                if (attacker.canAttackInPrinciple(null, game)){
+                    game.informPlayer(this, "You are forced to attack with at least one creature, e.g. " + attacker.getIdName() + ".");
+                    return false;
                 }
             }
         }
