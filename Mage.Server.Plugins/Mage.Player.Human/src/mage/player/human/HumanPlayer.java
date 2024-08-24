@@ -1967,11 +1967,9 @@ public class HumanPlayer extends PlayerImpl {
         if (mustAttackAPlayer && game.getCombat().getAttackers().isEmpty()){
             // no attackers, but required to attack with something -- check if anything can attack
             for (Permanent attacker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getId(), game)) {
-                for (UUID opponentId : game.getOpponents(getId(), true)){
-                    if (attacker.canAttackInPrinciple(opponentId, game)){
-                        game.informPlayer(this, "You are forced to attack at least one player, e.g. " + game.getPlayer(opponentId).getName() + " with " + attacker.getIdName() + ".");
-                        return false;
-                    }
+                if (attacker.canAttackInPrinciple(null, game)){
+                    game.informPlayer(this, "You are forced to attack with at least one creature, e.g. " + attacker.getIdName() + ".");
+                    return false;
                 }
             }
         }
