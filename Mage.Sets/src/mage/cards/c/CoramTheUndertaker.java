@@ -197,7 +197,6 @@ class CoramTheUndertakerCastSpellFromGraveyardEffect extends AsThoughEffectImpl 
         return card != null
                 && watcher != null
                 && watcher.cardPutFromGraveyardThisTurn(new MageObjectReference(card.getMainCard(), game))
-                && card.isPermanent(game)
                 && !watcher.spellCastFromGraveyard(source, game);
     }
 }

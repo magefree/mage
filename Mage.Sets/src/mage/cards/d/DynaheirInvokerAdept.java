@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
@@ -91,6 +92,7 @@ class DynaheirInvokerAdeptTriggeredAbility extends DelayedTriggeredAbility {
 
     DynaheirInvokerAdeptTriggeredAbility() {
         super(new CopyStackObjectEffect(), Duration.EndOfTurn, true);
+        setTriggerPhrase("When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, ");
     }
 
     private DynaheirInvokerAdeptTriggeredAbility(final DynaheirInvokerAdeptTriggeredAbility ability) {
@@ -118,13 +120,7 @@ class DynaheirInvokerAdeptTriggeredAbility extends DelayedTriggeredAbility {
                 || ManaPaidSourceWatcher.getTotalPaid(stackAbility.getId(), game) < 4) {
             return false;
         }
-        this.getEffects().setValue("stackObject", stackAbility);
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, " +
-                "copy that ability. You may choose new targets for the copy.";
     }
 }

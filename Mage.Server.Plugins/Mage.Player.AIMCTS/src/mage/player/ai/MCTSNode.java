@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.common.PassAbility;
 import mage.cards.Card;
@@ -270,7 +269,7 @@ public class MCTSNode {
                 player.getHand().clear();
                 player.getLibrary().shuffle();
                 for (int i = 0; i < handSize; i++) {
-                    Card card = player.getLibrary().removeFromTop(game);
+                    Card card = player.getLibrary().drawFromTop(game);
                     card.setZone(Zone.HAND, game);
                     player.getHand().add(card);
                 }
