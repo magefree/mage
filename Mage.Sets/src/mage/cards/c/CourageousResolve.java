@@ -138,8 +138,8 @@ class CourageousResolveProtectionAbility extends ProtectionAbility {
 class CourageousResolveWinLoseEffect extends ContinuousRuleModifyingEffectImpl {
 
     CourageousResolveWinLoseEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit, true, true);
-        staticText = " you can’t lose the game this turn, and your opponents can’t win the game this turn.";
+        super(Duration.EndOfTurn, Outcome.Benefit, false, true);
+        staticText = " you can't lose the game this turn, and your opponents can't win the game this turn.";
     }
 
     private CourageousResolveWinLoseEffect(final CourageousResolveWinLoseEffect effect) {
