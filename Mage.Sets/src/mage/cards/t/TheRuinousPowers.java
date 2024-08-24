@@ -65,9 +65,15 @@ class TheRuinousPowersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
+        if (player == null){
+            return false;
+        }
         List<UUID> opponents = new ArrayList<>(game.getOpponents(source.getControllerId()));
+        if (opponents.isEmpty()) {
+            return false;
+        }
         Player opponent = game.getPlayer(opponents.get(RandomUtil.nextInt(opponents.size())));
-        if (player == null || opponent == null) {
+        if (opponent == null) {
             return false;
         }
         Card card = opponent.getLibrary().getFromTop(game);
@@ -109,7 +115,13 @@ class TheRuinousPowersTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         Card card = game.getCard(cardId);
+        if (card == null){
+            return false;
+        }
         Player owner = game.getPlayer(card.getOwnerId());
+        if (owner == null){
+            return false;
+        }
         owner.loseLife(card.getManaValue(), game, this, false);
         return true;
     }
