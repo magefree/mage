@@ -320,6 +320,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         setChoice(playerA, true); // yes to flicker
         addTarget(playerA, "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 

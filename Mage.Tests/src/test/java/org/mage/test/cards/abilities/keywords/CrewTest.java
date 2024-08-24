@@ -119,6 +119,7 @@ public class CrewTest extends CardTestPlayerBase {
         setChoice(playerA, kotori);
         addTarget(playerA, crusher);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

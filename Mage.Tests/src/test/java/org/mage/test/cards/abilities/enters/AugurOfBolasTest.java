@@ -25,6 +25,7 @@ public class AugurOfBolasTest extends CardTestPlayerBase {
         addTarget(playerA, "Lightning Bolt"); // to hand
         setChoice(playerA, "Lightning Bolt"); // order to bottom
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

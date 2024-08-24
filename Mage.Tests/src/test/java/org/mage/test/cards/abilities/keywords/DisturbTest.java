@@ -349,6 +349,7 @@ public class DisturbTest extends CardTestPlayerBase {
         addTarget(playerA, "Alloy Myr");
         setChoice(playerA, "Blue"); // choose mana color
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertPermanentCount(playerA, ghastlyMimicry, 1);

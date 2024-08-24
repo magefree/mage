@@ -253,6 +253,7 @@ public class CursesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Death's Hold", playerB);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
