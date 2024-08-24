@@ -134,7 +134,7 @@ class CourageousResolveProtectionAbility extends ProtectionAbility {
     }
 }
 
-//Based on Angel's Grace
+//Based on Angels Grace
 class CourageousResolveWinLoseEffect extends ContinuousRuleModifyingEffectImpl {
 
     CourageousResolveWinLoseEffect() {
