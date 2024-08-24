@@ -75,7 +75,7 @@ public class GameEvent implements Serializable {
         ZONE_CHANGE,
         ZONE_CHANGE_GROUP, // between two specific zones only; TODO: rework all usages to ZONE_CHANGE_BATCH instead, see #11895
         ZONE_CHANGE_BATCH, // all zone changes that occurred from a single effect
-        DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
+        DRAW_TWO_OR_MORE_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
         EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
         ECHO_PAID,
@@ -218,13 +218,6 @@ public class GameEvent implements Serializable {
          targetId    the id of the mount
          sourceId    sourceId of the mount
          playerId    the id of the controlling player
-         */
-        X_MANA_ANNOUNCE,
-        /* X_MANA_ANNOUNCE
-         mana x-costs announced by players (X value can be changed by replace events like Unbound Flourishing)
-         targetId    id of the spell that's cast
-         playerId    player that casts the spell or ability
-         amount      X multiplier to change X value, default 1
          */
         CAST_SPELL,
         CAST_SPELL_LATE,

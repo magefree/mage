@@ -22,6 +22,7 @@ import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlaneswalkerPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -72,6 +73,7 @@ class RowansTalentTriggeredAbility extends TriggeredAbilityImpl {
 
     RowansTalentTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect());
+        setTriggerPhrase("Whenever you activate a loyalty ability of enchanted planeswalker, ");
     }
 
     private RowansTalentTriggeredAbility(final RowansTalentTriggeredAbility ability) {
@@ -100,13 +102,7 @@ class RowansTalentTriggeredAbility extends TriggeredAbilityImpl {
         if (stackObject == null || !(stackObject.getStackAbility() instanceof LoyaltyAbility)) {
             return false;
         }
-        this.getEffects().setValue("stackObject", stackObject);
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate a loyalty ability of enchanted planeswalker, " +
-                "copy that ability. You may choose new targets for the copy.";
     }
 }
