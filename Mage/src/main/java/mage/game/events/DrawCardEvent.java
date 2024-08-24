@@ -9,8 +9,6 @@ import java.util.UUID;
  */
 public class DrawCardEvent extends GameEvent {
 
-    private boolean fromBottom = false; // for replacement effects that draw from bottom of library instead
-
     private int cardsDrawn = 0; // for replacement effects to keep track for "cards drawn this way"
 
     public DrawCardEvent(UUID playerId, Ability source, GameEvent originalDrawEvent) {
@@ -25,14 +23,6 @@ public class DrawCardEvent extends GameEvent {
         if (originalDrawEvent != null) {
             this.addAppliedEffects(originalDrawEvent.getAppliedEffects());
         }
-    }
-
-    public void setFromBottom(boolean fromBottom) {
-        this.fromBottom = fromBottom;
-    }
-
-    public boolean isFromBottom() {
-        return fromBottom;
     }
 
     public void incrementCardsDrawn(int cardsDrawn) {
