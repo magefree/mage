@@ -9,6 +9,8 @@ import java.util.UUID;
  */
 public class DrawTwoOrMoreCardsEvent extends GameEvent {
 
+    private int cardsDrawn = 0; // for replacement effects to keep track for "cards drawn this way"
+
     public DrawTwoOrMoreCardsEvent(UUID playerId, Ability source, GameEvent originalDrawEvent, int amount) {
         super(GameEvent.EventType.DRAW_TWO_OR_MORE_CARDS, playerId, null, playerId, amount, false);
 
@@ -22,4 +24,13 @@ public class DrawTwoOrMoreCardsEvent extends GameEvent {
             this.addAppliedEffects(originalDrawEvent.getAppliedEffects());
         }
     }
+
+    public void incrementCardsDrawn(int cardsDrawn) {
+        this.cardsDrawn += cardsDrawn;
+    }
+
+    public int getCardsDrawn() {
+        return cardsDrawn;
+    }
+
 }

@@ -279,6 +279,70 @@ public class DrawEffectsTest extends CardTestPlayerBase {
         assertHandCount(playerA, 1);
     }
 
+    @Test
+    public void testAncientExcavationNotionThief() {
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 4);
+        addCard(Zone.HAND, playerA, excavation);
+        addCard(Zone.HAND, playerA, "Shock");
+        addCard(Zone.HAND, playerA, "Dark Ritual");
+        addCard(Zone.HAND, playerA, "Ornithopter");
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Healing Salve");
+        addCard(Zone.LIBRARY, playerA, "Giant Growth");
+        addCard(Zone.BATTLEFIELD, playerB, notionThief);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, excavation);
+        // 3 cards in hand, notion thief -> instead opponent draws three
+        // but cards were still drawn this way, so discard all three (no choice to make)
+        // if this turns out to be incorrect, modify the test accordingly
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, excavation, 1);
+        assertGraveyardCount(playerA, "Shock", 1);
+        assertGraveyardCount(playerA, "Dark Ritual", 1);
+        assertGraveyardCount(playerA, "Ornithopter", 1);
+        assertHandCount(playerA, 0);
+        assertLibraryCount(playerA, "Healing Salve", 1);
+        assertLibraryCount(playerA, "Giant Growth", 1);
+        assertHandCount(playerB, 3);
+    }
+
+    @Test
+    public void testAncientExcavationAlmsCollector() {
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 4);
+        addCard(Zone.HAND, playerA, excavation);
+        addCard(Zone.HAND, playerA, "Shock");
+        addCard(Zone.HAND, playerA, "Dark Ritual");
+        addCard(Zone.HAND, playerA, "Ornithopter");
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Healing Salve");
+        addCard(Zone.LIBRARY, playerA, "Giant Growth");
+        addCard(Zone.BATTLEFIELD, playerB, almsCollector);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, excavation);
+        // 3 cards in hand, alms collector -> instead each player draws one
+        // interpret as two cards were drawn this way in total
+        // if this turns out to be incorrect, modify the test accordingly
+        setChoice(playerA, "Shock"); // to discard
+        setChoice(playerA, "Giant Growth"); // to discard
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, excavation, 1);
+        assertGraveyardCount(playerA, "Shock", 1);
+        assertGraveyardCount(playerA, "Giant Growth", 1);
+        assertHandCount(playerA, "Dark Ritual", 1);
+        assertHandCount(playerA, "Ornithopter", 1);
+        assertHandCount(playerA, 2);
+        assertLibraryCount(playerA, "Healing Salve", 1);
+        assertHandCount(playerB, 1);
+    }
+
 
     /**
      * The effects of multiple Thought Reflections are cumulative. For example,

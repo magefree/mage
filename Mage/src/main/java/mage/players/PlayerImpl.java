@@ -755,9 +755,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         if (num >= 2) {
             // Event for replacement effects that only apply when two or more cards are drawn
-            GameEvent multiDrawEvent = new DrawTwoOrMoreCardsEvent(getId(), source, event, num);
+            DrawTwoOrMoreCardsEvent multiDrawEvent = new DrawTwoOrMoreCardsEvent(getId(), source, event, num);
             if (game.replaceEvent(multiDrawEvent)) {
-                return 0;
+                return multiDrawEvent.getCardsDrawn();
             }
             num = multiDrawEvent.getAmount();
         }
@@ -781,8 +781,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!isTopCardRevealed() && numDrawn > 0) {
             game.fireInformEvent(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
         }
-        if (event instanceof DrawCardEvent) {
+        // if this method was called from a replacement event, pass the number of cards back through
+        // (uncomment conditions if correct ruling is to only count cards drawn by the same player)
+        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */ ) {
             ((DrawCardEvent) event).incrementCardsDrawn(numDrawn);
+        }
+        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */ ) {
+            ((DrawTwoOrMoreCardsEvent) event).incrementCardsDrawn(numDrawn);
         }
         return numDrawn;
     }
