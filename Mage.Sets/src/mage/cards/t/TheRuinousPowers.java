@@ -81,7 +81,6 @@ class TheRuinousPowersEffect extends OneShotEffect {
 }
 
 // Based on FiresOfMountDoomDelayedTriggeredAbility
-// Modified to fix potential issues by checking approving object
 class TheRuinousPowersTriggeredAbility extends DelayedTriggeredAbility {
 
     private final UUID cardId;

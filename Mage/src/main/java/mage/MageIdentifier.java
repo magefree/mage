@@ -73,6 +73,7 @@ public enum MageIdentifier {
     AlurenAlternateCast,
     OfferingAlternateCast,
     TheRuinousPowersAlternateCast,
+    FiresOfMountDoomAlternateCast,
     PrimalPrayersAlternateCast;
 
     /**
