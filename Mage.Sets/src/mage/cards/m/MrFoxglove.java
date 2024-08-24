@@ -51,8 +51,8 @@ class MrFoxgloveEffect extends OneShotEffect {
 
     MrFoxgloveEffect() {
         super(Outcome.Benefit);
-        staticText = "draw cards equal to the number of cards in defending player’s hand minus the number of cards" +
-                " in your hand. If you didn’t draw cards this way, you may put a creature card from your hand onto" +
+        staticText = "draw cards equal to the number of cards in defending player's hand minus the number of cards" +
+                " in your hand. If you didn't draw cards this way, you may put a creature card from your hand onto" +
                 " the battlefield.";
     }
 
