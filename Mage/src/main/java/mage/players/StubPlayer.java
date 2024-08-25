@@ -156,7 +156,7 @@ public class StubPlayer extends PlayerImpl {
     }
 
     @Override
-    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         return 0;
     }
 

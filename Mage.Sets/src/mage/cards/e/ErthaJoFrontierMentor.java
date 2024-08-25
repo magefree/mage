@@ -14,15 +14,12 @@ import mage.constants.Zone;
 import mage.filter.FilterPlayer;
 import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.TargetsPermanentOrPlayerPredicate;
-import mage.filter.predicate.mageobject.TargetsPermanentPredicate;
-import mage.filter.predicate.mageobject.TargetsPlayerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.MercenaryToken;
 import mage.game.stack.StackObject;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -94,7 +91,7 @@ class ErthaJoFrontierMentorTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         // For the copy effect to find.
-        this.getEffects().setValue("stackObject", stackObject);
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 }

@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -92,8 +93,7 @@ class AbolethSpawnTriggeredAbility extends TriggeredAbilityImpl {
         if (triggerEvent.getSourceId() != permanent.getId()) {
             return false; // only triggered abilities of that creature
         }
-        // CopyStackObjectEffect needs value set
-        getEffects().setValue("stackObject", stackObject);
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 
