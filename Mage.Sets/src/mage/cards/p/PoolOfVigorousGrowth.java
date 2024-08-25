@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import mage.util.functions.CopyTokenFunction;
 
@@ -72,8 +73,8 @@ class PoolOfVigorousGrowthEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        
-        int xValue = source.getManaCostsToPay().getX();
+
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (game.isSimulation()) {
             // Create dummy token to prevent multiple DB find cards what causes H2 java.lang.IllegalStateException if AI cancels calculation because of time out
             Token token = new CreatureToken(xValue, xValue + 1);
