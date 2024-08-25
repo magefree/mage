@@ -30,7 +30,7 @@ public class SkylineCascadeTest extends CardTestPlayerBase {
         attack(1, playerA, "Savannah Lions");
 
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Skyline Cascade");
-        addTarget(playerA, "Savannah Lions");
+        addTarget(playerB, "Savannah Lions");
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
@@ -63,7 +63,7 @@ public class SkylineCascadeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Skyline Cascade");
                 
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Skyline Cascade");
-        addTarget(playerA, "Savannah Lions");
+        addTarget(playerB, "Savannah Lions");
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
