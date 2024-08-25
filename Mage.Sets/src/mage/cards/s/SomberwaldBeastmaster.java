@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -33,10 +32,7 @@ public final class SomberwaldBeastmaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Somberwald Beastmaster enters the battlefield, create a 2/2 green Wolf creature token, a 3/3 green Beast creature token, and a 4/4 green Beast creature token.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken()));
-        ability.addEffect(new CreateTokenEffect(new BeastToken()).setText(", a 3/3 green Beast creature token"));
-        ability.addEffect(new CreateTokenEffect(new BeastToken2()).setText(", and a 4/4 green Beast creature token"));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken()).withAdditionalTokens(new BeastToken(), new BeastToken2())));
 
         // Creature tokens you control have deathtouch.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

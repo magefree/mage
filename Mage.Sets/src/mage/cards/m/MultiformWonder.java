@@ -8,22 +8,18 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainsChoiceOfAbilitiesEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -42,7 +38,8 @@ public final class MultiformWonder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(3), false));
 
         // Pay {E}: Multiform Wonder gains your choice of flying, vigilance, or lifelink until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MultiformWonderEffect(), new PayEnergyCost(1)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
+                FlyingAbility.getInstance(), VigilanceAbility.getInstance(), LifelinkAbility.getInstance()), new PayEnergyCost(1)));
 
         // Pay {E}: Multiform Wonder gets +2/-2 or -2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MultiformWonder2Effect(), new PayEnergyCost(1)));
@@ -55,62 +52,6 @@ public final class MultiformWonder extends CardImpl {
     @Override
     public MultiformWonder copy() {
         return new MultiformWonder(this);
-    }
-}
-
-class MultiformWonderEffect extends OneShotEffect {
-
-    private static final Set<String> choices = new LinkedHashSet<>();
-
-    static {
-        choices.add("Flying");
-        choices.add("Vigilance");
-        choices.add("Lifelink");
-    }
-
-    public MultiformWonderEffect() {
-        super(Outcome.AddAbility);
-        staticText = "{this} gains your choice of flying, vigilance, or lifelink until end of turn";
-    }
-
-    private MultiformWonderEffect(final MultiformWonderEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MultiformWonderEffect copy() {
-        return new MultiformWonderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Choose ability to add");
-            choice.setChoices(choices);
-            if (!controller.choose(outcome, choice, game)) {
-                return false;
-            }
-
-            Ability gainedAbility;
-            String chosen = choice.getChoice();
-            switch (chosen) {
-                case "Flying":
-                    gainedAbility = FlyingAbility.getInstance();
-                    break;
-                case "Vigilance":
-                    gainedAbility = VigilanceAbility.getInstance();
-                    break;
-                default:
-                    gainedAbility = LifelinkAbility.getInstance();
-                    break;
-            }
-
-            game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.EndOfTurn), source);
-            return true;
-        }
-        return false;
     }
 }
 

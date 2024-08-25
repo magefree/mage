@@ -23,6 +23,7 @@ public class ProteanHydraTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Protean Hydra");
 
+        setStrictChooseMode(false); // test AI use max for X
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

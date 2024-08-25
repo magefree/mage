@@ -59,11 +59,7 @@ public final class AKillerAmongUs extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // When A Killer Among Us enters the battlefield, create a 1/1 white Human creature token, a 1/1 blue Merfolk creature token, and a 1/1 red Goblin creature token. Then secretly choose Human, Merfolk, or Goblin.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanToken()));
-        ability.addEffect(new CreateTokenEffect(new MerfolkToken())
-                .setText(", a 1/1 blue Merfolk creature token"));
-        ability.addEffect(new CreateTokenEffect(new GoblinToken())
-                .setText(", and a 1/1 red Goblin creature token."));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanToken()).withAdditionalTokens(new MerfolkToken(), new GoblinToken()));
         ability.addEffect(new ChooseHumanMerfolkOrGoblinEffect());
         this.addAbility(ability);
 

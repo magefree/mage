@@ -106,7 +106,7 @@ public class SearchNameExileTests extends CardTestPlayerBase {
 
         // Should be no choices in the graveyard available since the back side spell doesn't match the front side name
         // Non-strict mode tries to select all possible targets, no current method to check if choosing is impossible
-        // setStrictChooseMode(true);
+        setStrictChooseMode(false);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -136,7 +136,7 @@ public class SearchNameExileTests extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "fused Ready // Willing");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Test of Talents", "Ready // Willing", "Ready // Willing");
 
-        // setStrictChooseMode(true);
+        setStrictChooseMode(false);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

@@ -186,7 +186,7 @@ public class ReplicateTest extends CardTestPlayerBase {
         //setChoice(playerA, false); // don't change target 1
         //setChoice(playerA, false); // don't change target 2
 
-        //setStrictChooseMode(true); - AI must choice
+        setStrictChooseMode(false); // - AI must choice
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

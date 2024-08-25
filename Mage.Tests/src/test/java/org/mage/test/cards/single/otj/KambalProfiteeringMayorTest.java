@@ -59,8 +59,8 @@ public class KambalProfiteeringMayorTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Wolf Token", 1);
         assertPermanentCount(playerA, "Elephant Token", 1);
         assertPermanentCount(playerB, "Snake Token", 1);
-        assertPermanentCount(playerB, "Wolf Token", 0);     // TODO: this is a bug, should be 1, see #10811
-        assertPermanentCount(playerB, "Elephant Token", 0); // TODO: this is a bug, should be 1, see #10811
+        assertPermanentCount(playerB, "Wolf Token", 1);
+        assertPermanentCount(playerB, "Elephant Token", 1);
     }
 
     @Test

@@ -43,8 +43,9 @@ public class ChampionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Goblin Roughrider");
         addCard(Zone.HAND, playerA, "Lightning Crafter");
 
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Crafter");
+        setChoice(playerA, true); // yes to champion
+        setChoice(playerA, "Goblin Roughrider");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -60,8 +61,9 @@ public class ChampionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Goblin Roughrider");
         addCard(Zone.HAND, playerA, "Lightning Crafter");
 
-
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Crafter");
+        setChoice(playerA, true); // yes to champion
+        setChoice(playerA, "Goblin Roughrider");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals 3 damage to ", "Lightning Crafter");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -91,6 +93,8 @@ public class ChampionTest extends CardTestPlayerBase {
         addTarget(playerA, playerB);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mistbind Clique");
+        setChoice(playerA, true); // yes to champion
+        setChoice(playerA, "Zephyr Sprite");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
