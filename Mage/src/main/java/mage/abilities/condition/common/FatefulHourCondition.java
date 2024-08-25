@@ -16,4 +16,9 @@ public enum FatefulHourCondition implements Condition {
         Player player = game.getPlayer(source.getControllerId());
         return player != null && player.getLife() <= 5;
     }
+
+    @Override
+    public String toString() {
+        return "you have 5 or less life";
+    }
 }

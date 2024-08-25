@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ControlArtifactAndEnchantmentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.common.ControlArtifactAndEnchantmentHint;
@@ -28,12 +27,9 @@ public final class KamiOfTerribleSecrets extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Kami of Terrible Secrets enters the battlefield, if you control an artifact and an enchantment, you draw a card and you gain 1 life.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                ControlArtifactAndEnchantmentCondition.instance, "When {this} enters, " +
-                "if you control an artifact and an enchantment, you draw a card and you gain 1 life."
-        );
-        ability.addEffect(new GainLifeEffect(1));
+        Ability ability =  new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1, true))
+                .withInterveningIf(ControlArtifactAndEnchantmentCondition.instance);
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability.addHint(ControlArtifactAndEnchantmentHint.instance));
     }
 

@@ -1,6 +1,6 @@
-
 package mage.abilities;
 
+import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -53,6 +53,8 @@ public interface TriggeredAbility extends Ability {
      * if true, replaces "{this}" with "it" in the effect text
      */
     TriggeredAbility withRuleTextReplacement(boolean replaceRuleText);
+
+    TriggeredAbility withInterveningIf(Condition condition);
 
     boolean checkInterveningIfClause(Game game);
 

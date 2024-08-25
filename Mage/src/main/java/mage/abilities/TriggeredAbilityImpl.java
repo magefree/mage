@@ -1,6 +1,7 @@
 package mage.abilities;
 
 import mage.MageObject;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.*;
 import mage.constants.AbilityType;
@@ -25,6 +26,7 @@ import java.util.UUID;
 public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
 
     private boolean optional;
+    private Condition interveningIfCondition;
     private boolean leavesTheBattlefieldTrigger;
     private int triggerLimitEachTurn = Integer.MAX_VALUE; // for "triggers only once|twice each turn"
     private boolean doOnlyOnceEachTurn = false;
@@ -54,6 +56,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     protected TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
         super(ability);
         this.optional = ability.optional;
+        this.interveningIfCondition = ability.interveningIfCondition;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
         this.triggerLimitEachTurn = ability.triggerLimitEachTurn;
         this.doOnlyOnceEachTurn = ability.doOnlyOnceEachTurn;
@@ -175,8 +178,14 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public TriggeredAbility withInterveningIf(Condition interveningIfCondition) {
+        this.interveningIfCondition = interveningIfCondition;
+        return this;
+    }
+
+    @Override
     public boolean checkInterveningIfClause(Game game) {
-        return true;
+        return interveningIfCondition == null || interveningIfCondition.apply(game, this);
     }
 
     @Override
@@ -239,6 +248,17 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
         sb.append(triggerPhrase == null ? "" : triggerPhrase);
 
+        if (interveningIfCondition != null) {
+            String conditionText = interveningIfCondition.toString();
+            if (replaceRuleText && triggerPhrase != null && triggerPhrase.contains("{this}")) {
+                conditionText = conditionText.replace("{this}", "it");
+            }
+            if (!conditionText.startsWith("if ")) {
+                sb.append("if ");
+            }
+            sb.append(conditionText).append(", ");
+        }
+
         String superRule = super.getRule(true);
         if (!superRule.isEmpty()) {
             String ruleLow = superRule.toLowerCase(Locale.ENGLISH);
@@ -273,7 +293,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         break;
                     default:
                         // No card with that behavior yet, so feel free to change the text once one exist
-                        sb.append(CardUtil.numberToText(triggerLimitEachTurn) + " times");
+                        sb.append(CardUtil.numberToText(triggerLimitEachTurn)).append(" times");
                 }
                 sb.append(" each turn.");
             }
