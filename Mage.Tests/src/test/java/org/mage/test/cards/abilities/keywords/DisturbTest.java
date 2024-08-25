@@ -336,7 +336,7 @@ public class DisturbTest extends CardTestPlayerBase {
     @Test
     public void testDisturbAura() {
         String mirrorhallMimic = "Mirrorhall Mimic";
-        String ghastlyMimictry = "Ghastly Mimicry";
+        String ghastlyMimicry = "Ghastly Mimicry";
         String lightningBolt = "Lightning Bolt";
 
         addCard(Zone.GRAVEYARD, playerA, mirrorhallMimic);
@@ -345,11 +345,14 @@ public class DisturbTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.HAND, playerA, lightningBolt);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + ghastlyMimictry + " using Disturb");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + ghastlyMimicry + " using Disturb");
+        addTarget(playerA, "Alloy Myr");
+        setChoice(playerA, "Blue"); // choose mana color
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
-        assertPermanentCount(playerA, ghastlyMimictry, 1);
+        assertPermanentCount(playerA, ghastlyMimicry, 1);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, "Alloy Myr");
 

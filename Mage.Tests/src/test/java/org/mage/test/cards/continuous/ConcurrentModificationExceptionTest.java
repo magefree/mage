@@ -43,7 +43,7 @@ public class ConcurrentModificationExceptionTest extends CardTestPlayerBaseWithA
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Warp World");
         aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
-        //setStrictChooseMode(true); // need AI while cards adding
+        setStrictChooseMode(false); // need AI while cards adding
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
     }

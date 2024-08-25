@@ -34,7 +34,7 @@ public class EonFrolickerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Chandra's Fury");
         //addTarget(playerB, playerB);
 
-        //setStrictChooseMode(true); // AI must choose target for fury (itself)
+        setStrictChooseMode(false); // AI must choose target for fury (itself)
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
