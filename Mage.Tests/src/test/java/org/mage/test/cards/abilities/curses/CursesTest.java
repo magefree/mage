@@ -288,6 +288,7 @@ public class CursesTest extends CardTestPlayerBase {
         addTarget(playerB, "Curse of Death's Hold"); // opponent's choice
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Curse of Death's Hold", playerB);
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
