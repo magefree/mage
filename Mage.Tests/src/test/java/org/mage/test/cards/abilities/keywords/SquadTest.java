@@ -68,7 +68,7 @@ public class SquadTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, flagellant);
         //setChoice(playerA, false); - AI must choose
 
-        //setStrictChooseMode(true); - AI must choose
+        setStrictChooseMode(false); // - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -220,7 +220,7 @@ public class SquadTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
         checkStackSize("after copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // spell + copy
 
-        //setStrictChooseMode(true);
+        setStrictChooseMode(false);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -251,7 +251,7 @@ public class SquadTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA,
                 "{2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy.");
 
-        //setStrictChooseMode(true); // Could not make it work for explicitly target the trigger with Lithoform Engine
+        setStrictChooseMode(false); // // Could not make it work for explicitly target the trigger with Lithoform Engine
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -273,7 +273,7 @@ public class SquadTest extends CardTestPlayerBase {
         setChoice(playerA, true); // pay squad once
         setChoice(playerA, false);
 
-        //setStrictChooseMode(true); // There is a double trigger to put in the stack, not sure how to order them.
+        setStrictChooseMode(false); // // There is a double trigger to put in the stack, not sure how to order them.
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -300,7 +300,7 @@ public class SquadTest extends CardTestPlayerBase {
         setChoice(playerA, true);  // yes to the 'may copy'
         setChoice(playerA, "@flaggy");  // cloning the original flagellant.
 
-        //setStrictChooseMode(true);
+        setStrictChooseMode(false);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
