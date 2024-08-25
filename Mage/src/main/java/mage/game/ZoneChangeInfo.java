@@ -16,6 +16,7 @@ public class ZoneChangeInfo {
 
     public boolean faceDown;
     public ZoneChangeEvent event;
+    List<ZoneChangeInfo> additionalMoves = new ArrayList<>(); // additions objects move (example: meld parts), TODO: must research, can be un-used by real code
 
     public ZoneChangeInfo(ZoneChangeEvent event) {
         this.event = event;
@@ -27,9 +28,10 @@ public class ZoneChangeInfo {
         this.faceDown = faceDown;
     }
 
-    public ZoneChangeInfo(ZoneChangeInfo info) {
+    private ZoneChangeInfo(final ZoneChangeInfo info) {
         this.event = info.event;
         this.faceDown = info.faceDown;
+        this.additionalMoves = new ArrayList<>(info.additionalMoves);
     }
 
     public ZoneChangeInfo copy() {
@@ -146,8 +148,6 @@ public class ZoneChangeInfo {
 
     public static class Unmelded extends ZoneChangeInfo {
 
-        List<ZoneChangeInfo> subInfo = new ArrayList<>();
-
         public Unmelded(ZoneChangeInfo info, Game game) {
             super(info.event);
             MeldCard meld = game.getMeldCard(info.event.getTargetId());
@@ -157,14 +157,14 @@ public class ZoneChangeInfo {
                             event.getPlayerId(), event.getFromZone(), event.getToZone(), event.getAppliedEffects());
                     ZoneChangeInfo topInfo = info.copy();
                     topInfo.event = topEvent;
-                    subInfo.add(topInfo);
+                    additionalMoves.add(topInfo);
                 }
                 if (meld.hasBottomHalf(game)) {
                     ZoneChangeEvent bottomEvent = new ZoneChangeEvent(meld.getBottomHalfCard().getId(), event.getSource(),
                             event.getPlayerId(), event.getFromZone(), event.getToZone(), event.getAppliedEffects());
                     ZoneChangeInfo bottomInfo = info.copy();
                     bottomInfo.event = bottomEvent;
-                    subInfo.add(bottomInfo);
+                    additionalMoves.add(bottomInfo);
                 }
             }
         }

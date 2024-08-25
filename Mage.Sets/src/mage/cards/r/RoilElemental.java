@@ -29,7 +29,7 @@ public final class RoilElemental extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Landfall - Whenever a land enters the battlefield under your control, you may gain control of target creature for as long as you control Roil Elemental.
+        // Landfall - Whenever a land you control enters, you may gain control of target creature for as long as you control Roil Elemental.
         Ability ability = new LandfallAbility(new GainControlTargetEffect(Duration.WhileControlled), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

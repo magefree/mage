@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.dynamicvalue.common.HalfValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.cards.CardImpl;
@@ -21,9 +21,9 @@ public final class ContaminatedDrink extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{B}");
 
         // Draw X cards, then you get half X rad counters, rounded up.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new AddCountersPlayersEffect(
-                CounterType.RAD.createInstance(), new HalfValue(ManacostVariableValue.REGULAR, true), TargetController.YOU
+                CounterType.RAD.createInstance(), new HalfValue(GetXValue.instance, true), TargetController.YOU
         ).setText(", then you get half X rad counters, rounded up"));
     }
 

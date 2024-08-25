@@ -29,10 +29,7 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Supplier;
 
 /**
@@ -65,7 +62,7 @@ public final class TransmutationFont extends CardImpl {
 
 class TransmutationFontEffect extends OneShotEffect {
 
-    private static final Map<String, Supplier<Token>> map = new HashMap<>();
+    private static final Map<String, Supplier<Token>> map = new LinkedHashMap<>();
 
     static {
         map.put("Blood", BloodToken::new);
@@ -95,9 +92,11 @@ class TransmutationFontEffect extends OneShotEffect {
         }
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Choose a token to create");
-        choice.setChoices(map.keySet());
+        choice.setChoices(new LinkedHashSet<>(map.keySet()));
         player.choose(outcome, choice, game);
-        return map.get(choice.getChoice()).get().putOntoBattlefield(1, game, source);
+        Supplier<Token> tokenType = map.getOrDefault(choice.getChoice(), null);
+        return tokenType != null
+                && tokenType.get().putOntoBattlefield(1, game, source);
     }
 }
 

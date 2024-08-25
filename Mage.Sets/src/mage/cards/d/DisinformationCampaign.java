@@ -24,7 +24,7 @@ public final class DisinformationCampaign extends CardImpl {
 
         // When Disinformation Campaign enters the battlefield, you draw a card and each opponent discards a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(1, "you"));
+                new DrawCardSourceControllerEffect(1, true));
         ability.addEffect(new DiscardEachPlayerEffect(
                 StaticValue.get(1), false, TargetController.OPPONENT).concatBy("and"));
         this.addAbility(ability);

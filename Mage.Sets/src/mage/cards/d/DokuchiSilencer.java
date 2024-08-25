@@ -42,7 +42,7 @@ public final class DokuchiSilencer extends CardImpl {
         this.addAbility(new NinjutsuAbility("{1}{B}"));
 
         // Whenever Dokuchi Silencer deals combat damage to a player, you may discard a creature card. When you do, destroy target creature or planeswalker that player controls.
-        this.addAbility(new BlindZealotTriggeredAbility());
+        this.addAbility(new DokuchiSilencerTriggeredAbility());
     }
 
     private DokuchiSilencer(final DokuchiSilencer card) {
@@ -55,19 +55,19 @@ public final class DokuchiSilencer extends CardImpl {
     }
 }
 
-class BlindZealotTriggeredAbility extends TriggeredAbilityImpl {
+class DokuchiSilencerTriggeredAbility extends TriggeredAbilityImpl {
 
-    BlindZealotTriggeredAbility() {
+    DokuchiSilencerTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    private BlindZealotTriggeredAbility(final BlindZealotTriggeredAbility ability) {
+    private DokuchiSilencerTriggeredAbility(final DokuchiSilencerTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public BlindZealotTriggeredAbility copy() {
-        return new BlindZealotTriggeredAbility(this);
+    public DokuchiSilencerTriggeredAbility copy() {
+        return new DokuchiSilencerTriggeredAbility(this);
     }
 
     @Override

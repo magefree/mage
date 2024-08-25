@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialAction;
@@ -22,6 +21,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -78,7 +80,7 @@ class GuardianAngelEffect extends OneShotEffect {
             } else {
                 targetName = "player " + targetPlayer.getName();
             }
-            ContinuousEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, source.getManaCostsToPay().getX(), false);
+            ContinuousEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, CardUtil.getSourceCostsTag(game, source, "X", 0), false);
             effect.setTargetPointer(this.getTargetPointer().copy());
             game.addEffect(effect, source);
             SpecialAction specialAction = new GuardianAngelAction();

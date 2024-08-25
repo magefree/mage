@@ -34,7 +34,7 @@ public final class BenalishEmissary extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
-            "When {this} enters the battlefield, if it was kicked, destroy target land."));
+            "When {this} enters, if it was kicked, destroy target land."));
     }
 
     private BenalishEmissary(final BenalishEmissary card) {

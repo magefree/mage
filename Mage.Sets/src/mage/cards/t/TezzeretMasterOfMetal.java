@@ -3,30 +3,33 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
+import mage.abilities.effects.common.continuous.GainControlAllControlledTargetEffect;
 import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.PutCards;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
  * @author Styxo
  */
 public final class TezzeretMasterOfMetal extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("artifacts and creatures");
+
+    static {
+        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
+    }
 
     public TezzeretMasterOfMetal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");
@@ -45,7 +48,7 @@ public final class TezzeretMasterOfMetal extends CardImpl {
         this.addAbility(ability);
 
         // -8: Gain control of all artifacts and creatures target opponent controls.
-        ability = new LoyaltyAbility(new TezzeretMasterOfMetalEffect(), -8);
+        ability = new LoyaltyAbility(new GainControlAllControlledTargetEffect(filter), -8);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -57,68 +60,5 @@ public final class TezzeretMasterOfMetal extends CardImpl {
     @Override
     public TezzeretMasterOfMetal copy() {
         return new TezzeretMasterOfMetal(this);
-    }
-}
-
-class TezzeretMasterOfMetalEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifacts and creatures");
-
-    static {
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ARTIFACT.getPredicate()));
-    }
-
-    public TezzeretMasterOfMetalEffect() {
-        super(Outcome.GainControl);
-        this.staticText = "Gain control of all artifacts and creatures target opponent controls";
-    }
-
-    private TezzeretMasterOfMetalEffect(final TezzeretMasterOfMetalEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TezzeretMasterOfMetalEffect copy() {
-        return new TezzeretMasterOfMetalEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game);
-        for (Permanent permanent : permanents) {
-            ContinuousEffect effect = new TezzeretMasterOfMetalControlEffect(source.getControllerId());
-            effect.setTargetPointer(new FixedTarget(permanent, game));
-            game.addEffect(effect, source);
-        }
-        return true;
-    }
-}
-
-class TezzeretMasterOfMetalControlEffect extends ContinuousEffectImpl {
-
-    private final UUID controllerId;
-
-    public TezzeretMasterOfMetalControlEffect(UUID controllerId) {
-        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.controllerId = controllerId;
-    }
-
-    private TezzeretMasterOfMetalControlEffect(final TezzeretMasterOfMetalControlEffect effect) {
-        super(effect);
-        this.controllerId = effect.controllerId;
-    }
-
-    @Override
-    public TezzeretMasterOfMetalControlEffect copy() {
-        return new TezzeretMasterOfMetalControlEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null && controllerId != null) {
-            return permanent.changeControllerId(controllerId, game, source);
-        }
-        return false;
     }
 }

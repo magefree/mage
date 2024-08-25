@@ -265,7 +265,7 @@ public class CardIconsTest extends CardTestPlayerBase {
             GameView gameView = getGameView(player);
             Assert.assertEquals("ability activated - must have 1 card in stack", 1, gameView.getStack().values().size());
             CardView cardView = gameView.getStack().values().stream().findFirst().get();
-            Assert.assertEquals("ability activated - must have x cost card icons in stack", 1, cardView.getCardIcons().size());
+            Assert.assertTrue("ability activated - must have x cost card icons in stack", cardView.getCardIcons().stream().anyMatch(x -> x.getText().equals("x=2")));
         });
 
         // battlefield (ability activated, not visible)
@@ -291,7 +291,7 @@ public class CardIconsTest extends CardTestPlayerBase {
         //
         // Agadeem, the Undercrypt
         // Land
-        // As Agadeem, the Undercrypt enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As Agadeem, the Undercrypt enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         addCard(Zone.HAND, playerA, "Agadeem's Awakening", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
 

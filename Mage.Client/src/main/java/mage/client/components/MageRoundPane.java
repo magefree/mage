@@ -14,7 +14,7 @@ import mage.client.util.ImageCaches;
 import mage.client.util.SoftValuesLoadingCache;
 
 /**
- * Mage round pane with transparency. Used for tooltips.
+ * GUI component. Mage round pane with transparency. Used for tooltips and player panels.
  *
  * @author nantuko
  */
@@ -144,37 +144,40 @@ public class MageRoundPane extends JPanel {
 
         BufferedImage image = GraphicsUtilities.createCompatibleTranslucentImage(key.width, key.height);
         Graphics2D g2 = image.createGraphics();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        try {
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        BufferedImage shadow = ROUND_PANEL_SHADOW_IMAGES_CACHE.getOrThrow(new ShadowKey(w, h));
+            BufferedImage shadow = ROUND_PANEL_SHADOW_IMAGES_CACHE.getOrThrow(new ShadowKey(w, h));
 
-        {
-            int xOffset = (shadow.getWidth() - w) / 2;
-            int yOffset = (shadow.getHeight() - h) / 2;
-            g2.drawImage(shadow, x - xOffset, y - yOffset, null);
+            {
+                int xOffset = (shadow.getWidth() - w) / 2;
+                int yOffset = (shadow.getHeight() - h) / 2;
+                g2.drawImage(shadow, x - xOffset, y - yOffset, null);
+            }
+
+            //////////////////////////////////////////////////////////////////
+            // fill content
+            /**
+             * Add white translucent substrate
+             */
+            /*if (ALPHA != 0) {
+                g2.setColor(new Color(255, 255, 255, ALPHA));
+                g2.fillRoundRect(x, y, w, h, arc, arc);
+            }*/
+            g2.setColor(key.backgroundColor);
+            g2.fillRoundRect(x, y, w, h, arc, arc);
+            //////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////
+            // draw border
+            g2.setStroke(new BasicStroke(1.5f));
+            g2.setColor(Color.BLACK);
+            g2.drawRoundRect(x, y, w, h, arc, arc);
+            // ////////////////////////////////////////////////////////////////
+        } finally {
+            g2.dispose();
         }
 
-        //////////////////////////////////////////////////////////////////
-        // fill content
-        /**
-         * Add white translucent substrate
-         */
-        /*if (ALPHA != 0) {
-            g2.setColor(new Color(255, 255, 255, ALPHA));
-            g2.fillRoundRect(x, y, w, h, arc, arc);
-        }*/
-        g2.setColor(key.backgroundColor);
-        g2.fillRoundRect(x, y, w, h, arc, arc);
-        //////////////////////////////////////////////////////////////////
-
-        //////////////////////////////////////////////////////////////////
-        // draw border
-        g2.setStroke(new BasicStroke(1.5f));
-        g2.setColor(Color.BLACK);
-        g2.drawRoundRect(x, y, w, h, arc, arc);
-        // ////////////////////////////////////////////////////////////////
-
-        g2.dispose();
         return image;
     }
 
@@ -194,9 +197,12 @@ public class MageRoundPane extends JPanel {
 
         BufferedImage base = GraphicsUtilities.createCompatibleTranslucentImage(w, h);
         Graphics2D g2 = base.createGraphics();
-        g2.setColor(Color.WHITE);
-        g2.fillRoundRect(0, 0, w, h, arc, arc);
-        g2.dispose();
+        try {
+            g2.setColor(Color.WHITE);
+            g2.fillRoundRect(0, 0, w, h, arc, arc);
+        } finally {
+            g2.dispose();
+        }
 
         ShadowRenderer renderer = new ShadowRenderer(shadowSize, 0.5f,
                 Color.GRAY);

@@ -43,7 +43,7 @@ public final class BubbleSnare extends CardImpl {
         // When Bubble Snare enters the battlefield, if it was kicked, tap enchanted creature.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()), KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, tap enchanted creature."
+                "When {this} enters, if it was kicked, tap enchanted creature."
         ));
 
         // Enchanted creature doesn't untap during its controller's untap step.

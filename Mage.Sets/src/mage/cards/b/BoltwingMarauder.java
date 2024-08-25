@@ -29,7 +29,7 @@ public final class BoltwingMarauder extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever another creature enters the battlefield under your control, target creature gets +2/+0 until end of turn.
+        // Whenever another creature you control enters, target creature gets +2/+0 until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(2,0, Duration.EndOfTurn), StaticFilters.FILTER_ANOTHER_CREATURE,false);
         ability.addTarget(new TargetCreaturePermanent());

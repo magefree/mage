@@ -47,7 +47,7 @@ public final class ArcadesTheStrategist extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Whenever a creature with defender enters the battlefield under your control, draw a card.
+        // Whenever a creature with defender you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), defenderSingle
         ));

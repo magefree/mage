@@ -167,7 +167,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
                 && Valki != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             FilterCard filter = new FilterCard();
-            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, CardUtil.getSourceCostsTag(game, source, "X", 0)));
             TargetCardInExile target = new TargetCardInExile(filter, exileId);
             Cards cards = game.getExile().getExileZone(exileId);
             if (cards != null

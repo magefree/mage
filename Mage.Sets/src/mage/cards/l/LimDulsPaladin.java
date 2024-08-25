@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
@@ -17,23 +16,20 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class LimDulsPaladin extends CardImpl {
 
     public LimDulsPaladin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(0);
@@ -48,7 +44,7 @@ public final class LimDulsPaladin extends CardImpl {
         // Whenever Lim-Dul's Paladin attacks and isn't blocked, it assigns no combat damage to defending player this turn and that player loses 4 life.
         Effect effect = new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn);
         effect.setText("it assigns no combat damage this turn");
-        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(effect, false, true);
+        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(effect, false, SetTargetPointer.PLAYER);
         effect = new LoseLifeTargetEffect(4);
         effect.setText("and defending player loses 4 life");
         ability.addEffect(effect);
@@ -84,11 +80,11 @@ class LimDulsPaladinEffect extends SacrificeSourceUnlessPaysEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if(permanent != null) {
+        if (permanent != null) {
             super.apply(game, source);
             // Not in play anymore -> was sacrificed, draw a card
-            if(game.getPermanent(source.getSourceId()) == null) {
-                 return new DrawCardSourceControllerEffect(1).apply(game, source);
+            if (game.getPermanent(source.getSourceId()) == null) {
+                return new DrawCardSourceControllerEffect(1).apply(game, source);
             }
             return true;
         }

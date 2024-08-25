@@ -97,7 +97,7 @@ class KaitoDancingShadowEffect extends OneShotEffect {
         filter.add(new PermanentReferenceInCollectionPredicate(
                 watcher.getPermanents(controller.getId(),damagedPlayer.getId())));
         TargetPermanent target = new TargetPermanent(0, 1, filter, true);
-        target.setTargetName("creature to return to hand?");
+        target.withTargetName("creature to return to hand?");
         if (target.chooseTarget(Outcome.ReturnToHand, source.getControllerId(), source, game)) {
             Card card = game.getPermanent(target.getFirstTarget());
             if (card != null) {

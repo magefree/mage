@@ -9,7 +9,7 @@ import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
@@ -56,7 +56,7 @@ public final class EnergyVortex extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(
                         CounterType.VORTEX.createInstance(),
-                        ManacostVariableValue.REGULAR, true
+                        GetXValue.instance, true
                 ), new ManaCostsImpl<>("{X}"),
                 new IsStepCondition(PhaseStep.UPKEEP)
         ));

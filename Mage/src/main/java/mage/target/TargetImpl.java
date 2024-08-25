@@ -103,10 +103,12 @@ public abstract class TargetImpl implements Target {
         StringBuilder sb = new StringBuilder();
         int min = getMinNumberOfTargets();
         int max = getMaxNumberOfTargets();
+        String targetName = getTargetName();
         if (min > 0 && max == Integer.MAX_VALUE) {
             sb.append(CardUtil.numberToText(min));
             sb.append(" or more ");
-        } else if (!getTargetName().startsWith("X") && (min != 1 || max != 1)) {
+        } else if (!targetName.startsWith("X ") && (min != 1 || max != 1)) {
+            targetName = targetName.replace("another", "other"); //If non-singular, use "other" instead of "another"
             if (min < max && max != Integer.MAX_VALUE) {
                 if (min == 1 && max == 2) {
                     sb.append("one or ");
@@ -122,10 +124,10 @@ public abstract class TargetImpl implements Target {
         boolean addTargetWord = false;
         if (!isNotTarget()) {
             addTargetWord = true;
-            if (getTargetName().contains("target ")) {
+            if (targetName.contains("target ")) {
                 addTargetWord = false;
-            } else if (getTargetName().endsWith("any target")
-                    || getTargetName().endsWith("any other target")) {
+            } else if (targetName.endsWith("any target")
+                    || targetName.endsWith("any other target")) {
                 addTargetWord = false;
             }
             // endsWith needs to be specific.
@@ -135,15 +137,15 @@ public abstract class TargetImpl implements Target {
             sb.append("target ");
         }
         if (isNotTarget() && min == 1 && max == 1) {
-            sb.append(CardUtil.addArticle(getTargetName()));
+            sb.append(CardUtil.addArticle(targetName));
         } else {
-            sb.append(getTargetName());
+            sb.append(targetName);
         }
         return sb.toString();
     }
 
     @Override
-    public String getMessage() {
+    public String getMessage(Game game) {
         // UI choose message
         String suffix = "";
         if (this.chooseHint != null) {
@@ -177,8 +179,9 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public void setTargetName(String name) {
+    public TargetImpl withTargetName(String name) {
         this.targetName = name;
+        return this;
     }
 
     @Override
@@ -203,7 +206,9 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean isRequired(Ability ability) {
-        return ability == null || ability.isActivated() || !(ability.getAbilityType() == AbilityType.SPELL || ability.getAbilityType() == AbilityType.ACTIVATED);
+        return ability == null
+                || ability.isActivated()
+                || !(ability.getAbilityType() == AbilityType.SPELL || ability.getAbilityType().isActivatedAbility());
     }
 
     @Override
@@ -213,7 +218,7 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean isChosen() {
+    public boolean isChosen(Game game) {
         if (getMaxNumberOfTargets() == 0 && getNumberOfTargets() == 0) {
             return true;
         }
@@ -221,7 +226,7 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean doneChoosing() {
+    public boolean doneChoosing(Game game) {
         return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets();
     }
 
@@ -330,7 +335,7 @@ public abstract class TargetImpl implements Target {
                 return chosen;
             }
             chosen = targets.size() >= getNumberOfTargets();
-        } while (!isChosen() && !doneChoosing());
+        } while (!isChosen(game) && !doneChoosing(game));
         return chosen;
     }
 
@@ -373,7 +378,7 @@ public abstract class TargetImpl implements Target {
                 }
             }
             chosen = targets.size() >= getNumberOfTargets();
-        } while (!isChosen() && !doneChoosing());
+        } while (!isChosen(game) && !doneChoosing(game));
 
         return chosen;
     }
@@ -404,7 +409,7 @@ public abstract class TargetImpl implements Target {
                 illegalTargets.add(targetId);
                 continue;
             }
-            if (!stillLegalTarget(targetId, source, game)) {
+            if (!stillLegalTarget(source.getControllerId(), targetId, source, game)) {
                 illegalTargets.add(targetId);
             }
         }
@@ -541,8 +546,8 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
-        return canTarget(id, source, game);
+    public boolean stillLegalTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        return canTarget(controllerId, id, source, game);
     }
 
     @Override
@@ -675,10 +680,10 @@ public abstract class TargetImpl implements Target {
         String abilityText = source.getRule(true).toLowerCase();
         boolean strictModeEnabled = player.getStrictChooseMode();
         boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() // Targets must be picked
-                                && possibleTargets.size() == this.getNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
-                                && !strictModeEnabled  // Test AI is not set to strictChooseMode(true)
-                                && playerAutoTargetLevel > 0 // Human player has enabled auto-choose in settings
-                                && !abilityText.contains("search"); // Do not autochoose for any effects which involve searching
+                && possibleTargets.size() == this.getNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
+                && !strictModeEnabled  // Test AI is not set to strictChooseMode(true)
+                && playerAutoTargetLevel > 0 // Human player has enabled auto-choose in settings
+                && !abilityText.contains("search"); // Do not autochoose for any effects which involve searching
 
 
         if (canAutoChoose) {

@@ -23,6 +23,10 @@ import mage.client.util.Listener;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.counters.Counter;
+import mage.counters.CounterType;
+import mage.designations.CitysBlessing;
+import mage.designations.Monarch;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameImpl;
@@ -61,7 +65,9 @@ import java.util.*;
 public class TestCardRenderDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(TestCardRenderDialog.class);
+
     float cardSizeMod = 1.0f;
+    float playerSizeMod = 1.0f;
     private Match match = null;
     private Game game = null;
     private BigCard bigCard = null;
@@ -100,10 +106,10 @@ public class TestCardRenderDialog extends MageDialog {
         // init player panel
         player = new PlayerPanelExt();
         this.playerPanel.setLayout(new BorderLayout(5, 5));
-        this.playerPanel.add(player, BorderLayout.NORTH);
+        this.playerPanel.add(player, BorderLayout.CENTER);
 
         // render cards
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
 
         // windows settings
         MageFrame.getDesktop().remove(this);
@@ -217,20 +223,20 @@ public class TestCardRenderDialog extends MageDialog {
         return cardView;
     }
 
-    private AbilityView createEmblem(Emblem emblem) {
-        AbilityView emblemView = new AbilityView(emblem.getAbilities().get(0), emblem.getName(), new CardView(new EmblemView(emblem)));
+    private AbilityView createEmblem(Game game, Emblem emblem) {
+        AbilityView emblemView = new AbilityView(emblem.getAbilities().get(0), emblem.getName(), new CardView(new EmblemView(emblem, game)));
         emblemView.setName(emblem.getName());
         return emblemView;
     }
 
-    private AbilityView createDungeon(Dungeon dungeon) {
+    private AbilityView createDungeon(Game game, Dungeon dungeon) {
         AbilityView emblemView = new AbilityView(dungeon.getAbilities().get(0), dungeon.getName(), new CardView(new DungeonView(dungeon)));
         emblemView.setName(dungeon.getName());
         return emblemView;
     }
 
-    private AbilityView createPlane(Plane plane) {
-        AbilityView planeView = new AbilityView(plane.getAbilities().get(0), plane.getName(), new CardView(new PlaneView(plane)));
+    private AbilityView createPlane(Game game, Plane plane) {
+        AbilityView planeView = new AbilityView(plane.getAbilities().get(0), plane.getName(), new CardView(new PlaneView(plane, game)));
         planeView.setName(plane.getName());
         return planeView;
     }
@@ -255,9 +261,16 @@ public class TestCardRenderDialog extends MageDialog {
         return cardView;
     }
 
-    private void reloadCardsAndPlayer() {
+    private void reloadCardsAndPlayer(boolean refreshTheme) {
+        // it contains GUI reload feature (must re-render all frames with new look and fill style),
+        // so call it for theme combobox only
+        // bug example: null errors on card size slider usage
+
         // apply selected theme (warning, it will be applied for all app, so can be bugged in other dialogs - but it's ok for debug)
-        PreferencesDialog.setCurrentTheme((ThemeType) comboTheme.getSelectedItem());
+        // bug example: render part of elements with old colors
+        if (refreshTheme) {
+            PreferencesDialog.setCurrentTheme((ThemeType) comboTheme.getSelectedItem());
+        }
 
         // prepare fake game and players without real match
         // it's a workaround with minimum code and data init
@@ -265,6 +278,9 @@ public class TestCardRenderDialog extends MageDialog {
         this.game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
         Deck deck = new Deck();
         Player playerYou = new StubPlayer("player1", RangeOfInfluence.ALL);
+        playerYou.addDesignation(new CitysBlessing());
+        game.getState().setMonarchId(playerYou.getId());
+        playerYou.addCounters(new Counter(CounterType.POISON.toString(), 10), playerYou.getId(), null, game);
         this.match.addPlayer(playerYou, deck);
         this.game.addPlayer(playerYou, deck);
         Player playerOpponent = new StubPlayer("player2", RangeOfInfluence.ALL);
@@ -316,8 +332,18 @@ public class TestCardRenderDialog extends MageDialog {
             possibleTargets.add(playerYou.getId());
         }
 
-        this.player.cleanUp();
-        this.player.changeGUISize();
+        // player's panel
+        if (this.player == null) {
+            // create new panel
+            this.playerPanel.setLayout(new BorderLayout(5, 5));
+            this.player = new PlayerPanelExt(this.playerSizeMod);
+            this.playerPanel.add(player, BorderLayout.CENTER);
+        } else {
+            // update existing panel (recreate all inner components)
+            this.player.fullRefresh(this.playerSizeMod);
+        }
+        this.playerPanel.setPreferredSize(new java.awt.Dimension(Math.round(100 * this.playerSizeMod), 10));
+        // update data in player's panel
         GameView gameView = new GameView(this.game.getState(), this.game, controlledId, null);
         PlayerView currentPlayerView = gameView.getPlayers()
                 .stream()
@@ -326,7 +352,7 @@ public class TestCardRenderDialog extends MageDialog {
                 .orElse(null);
         this.player.init(this.game.getId(), playerYou.getId(), isMe, this.bigCard, 0);
         this.player.update(gameView, currentPlayerView, possibleTargets);
-        PlayAreaPanel.sizePlayerPanel(this.player, isMe, smallMode);
+        this.player.sizePlayerPanel(smallMode);
 
         // update CARDS
 
@@ -854,13 +880,13 @@ public class TestCardRenderDialog extends MageDialog {
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void buttonReloadCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadCardsActionPerformed
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(true);
     }//GEN-LAST:event_buttonReloadCardsActionPerformed
 
     private void comboRenderModeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboRenderModeItemStateChanged
         // render modes are loading on show dialog, so must ignore change event on startup
         if (this.isVisible()) {
-            reloadCardsAndPlayer();
+            reloadCardsAndPlayer(false);
         }
     }//GEN-LAST:event_comboRenderModeItemStateChanged
 
@@ -870,57 +896,58 @@ public class TestCardRenderDialog extends MageDialog {
         float sliderFrac = ((float) (sliderSize.getValue() - 50)) / 50;
         // Convert to frac in [0.5, 2.0] exponentially
         cardSizeMod = (float) Math.pow(2, sliderFrac);
-        reloadCardsAndPlayer();
+        playerSizeMod = (float) Math.pow(2, sliderFrac);
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_sliderSizeStateChanged
 
     private void checkBoxGenerateManyCardsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBoxGenerateManyCardsItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_checkBoxGenerateManyCardsItemStateChanged
 
     private void comboCardIconsPositionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardIconsPositionItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_comboCardIconsPositionItemStateChanged
 
     private void spinnerCardIconsMaxVisibleStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerCardIconsMaxVisibleStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_spinnerCardIconsMaxVisibleStateChanged
 
     private void spinnerCardIconsAdditionalAmountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerCardIconsAdditionalAmountStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_spinnerCardIconsAdditionalAmountStateChanged
 
     private void comboCardIconsOrderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardIconsOrderItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_comboCardIconsOrderItemStateChanged
 
     private void comboThemeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboThemeItemStateChanged
         // themes list are loading on show dialog, so must ignore change event on startup
         if (this.isVisible()) {
-            reloadCardsAndPlayer();
+            reloadCardsAndPlayer(true);
         }
     }//GEN-LAST:event_comboThemeItemStateChanged
 
     private void comboCardColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCardColorItemStateChanged
         // card icon colors list are loading on show dialog, so must ignore change event on startup
         if (this.isVisible()) {
-            reloadCardsAndPlayer();
+            reloadCardsAndPlayer(false);
         }
     }//GEN-LAST:event_comboCardColorItemStateChanged
 
     private void comboPlayerStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPlayerStatusItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_comboPlayerStatusItemStateChanged
 
     private void comboPlayerControllerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPlayerControllerItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_comboPlayerControllerItemStateChanged
 
     private void checkPlayerSmallModeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkPlayerSmallModeItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_checkPlayerSmallModeItemStateChanged
 
     private void checkPlayerAsTargetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkPlayerAsTargetItemStateChanged
-        reloadCardsAndPlayer();
+        reloadCardsAndPlayer(false);
     }//GEN-LAST:event_checkPlayerAsTargetItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

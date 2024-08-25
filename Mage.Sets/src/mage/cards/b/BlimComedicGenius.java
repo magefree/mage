@@ -86,7 +86,7 @@ class BlimComedicGeniusEffect extends OneShotEffect {
         game.addEffect(new GainControlTargetEffect(
                 Duration.Custom, true, getTargetPointer().getFirst(game, source)
         ).setTargetPointer(new FixedTarget(source.getFirstTarget(), game)), source);
-        game.getState().processAction(game);
+        game.processAction();
         Map<UUID, Cards> cardsMap = new HashMap<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -98,7 +98,7 @@ class BlimComedicGeniusEffect extends OneShotEffect {
                 continue;
             }
             player.loseLife(count, game, source, true);
-            TargetDiscard target = new TargetDiscard(StaticFilters.FILTER_CARD, playerId);
+            TargetDiscard target = new TargetDiscard(count, StaticFilters.FILTER_CARD, playerId);
             player.choose(outcome, target, source, game);
             cardsMap.put(playerId, new CardsImpl(target.getTargets()));
         }

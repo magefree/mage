@@ -41,7 +41,7 @@ public final class AkoumFirebird extends CardImpl {
         // Akoum Firebird attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
 
-        // <i>Landfall</i>-Whenever a land enters the battlefield under your control, you may pay {4}{R}{R}.
+        // <i>Landfall</i>-Whenever a land you control enters, you may pay {4}{R}{R}.
         // If you do, return Akoum Firebird from your graveyard to the battlefield.
         this.addAbility(new AkoumFirebirdLandfallAbility(new DoIfCostPaid(
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl<>("{4}{R}{R}")), false));
@@ -61,7 +61,7 @@ class AkoumFirebirdLandfallAbility extends TriggeredAbilityImpl {
 
     public AkoumFirebirdLandfallAbility(Effect effect, boolean optional) {
         this(Zone.GRAVEYARD, effect, optional);
-        setTriggerPhrase("<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " );
+        setTriggerPhrase("<i>Landfall</i> &mdash; Whenever a land you control enters, " );
     }
 
     public AkoumFirebirdLandfallAbility (Zone zone, Effect effect, boolean optional ) {

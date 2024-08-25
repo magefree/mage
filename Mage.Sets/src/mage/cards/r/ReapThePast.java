@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -59,7 +60,7 @@ class ReapThePastEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Cards cards = new CardsImpl(player.getGraveyard());
         while (cards.size() > xValue) {
             cards.remove(cards.getRandom(game));

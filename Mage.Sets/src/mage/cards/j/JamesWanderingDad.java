@@ -7,14 +7,13 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -46,7 +45,7 @@ public final class JamesWanderingDad extends AdventureCard {
         // Instant — Adventure
         // Investigate X times.
         this.getSpellCard().getSpellAbility().addEffect(
-                new InvestigateEffect(ManacostVariableValue.REGULAR)
+                new InvestigateEffect(GetXValue.instance)
                         .setText("Investigate X times")
         );
 
@@ -90,12 +89,9 @@ class JamesWanderingDadManaCondition extends ManaCondition implements Condition 
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source != null && !source.isActivated()) {
-            // ex: SimpleManaAbility is an ACTIVATED ability, but it is categorized as a MANA ability
-            return source.getAbilityType() == AbilityType.MANA
-                    || source.getAbilityType() == AbilityType.ACTIVATED;
-        }
-        return false;
+        return source != null
+                && !source.isActivated()
+                && source.isActivatedAbility();
     }
 
     @Override

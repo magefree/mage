@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.constants.EnterEventType;
-import static mage.constants.EnterEventType.SELF;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 

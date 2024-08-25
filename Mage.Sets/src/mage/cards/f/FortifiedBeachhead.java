@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -26,8 +24,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class FortifiedBeachhead extends CardImpl {
@@ -73,7 +72,7 @@ class FortifiedBeachheadEffect extends OneShotEffect {
 
     public FortifiedBeachheadEffect() {
         super(Outcome.Tap);
-        this.staticText = "you may reveal a Soldier card from your hand. {this} enters the battlefield tapped unless you revealed a Soldier card this way or you control a Soldier.";
+        this.staticText = "you may reveal a Soldier card from your hand. {this} enters tapped unless you revealed a Soldier card this way or you control a Soldier.";
     }
 
     private FortifiedBeachheadEffect(final FortifiedBeachheadEffect effect) {
@@ -99,6 +98,7 @@ class FortifiedBeachheadEffect extends OneShotEffect {
                 return true;
             }
         }
+        // Intentional use of Permanent::setTapped, to not cause any trigger
         land.setTapped(true);
         return true;
     }

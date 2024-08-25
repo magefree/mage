@@ -85,46 +85,46 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Worldgorger Dragon");
         setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        setChoice(playerA, "When {this} enters, if it's");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
 
         setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        setChoice(playerA, "When {this} enters, if it's");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
 
         setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        setChoice(playerA, "When {this} enters, if it's");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
 
         setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        setChoice(playerA, "When {this} enters, if it's");
         setChoice(playerA, false);
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
 
         setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        setChoice(playerA, "When {this} enters, if it's");
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
 
         setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        setChoice(playerA, "When {this} enters, if it's");
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
 
         setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        setChoice(playerA, "When {this} enters, if it's");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
@@ -192,14 +192,14 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        setChoice(playerA, "When {this} enters, if it's");
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         setChoice(playerA, "Silvercoat Lion");
 
-        setChoice(playerA, "When {this} enters the battlefield, if it's");
+        setChoice(playerA, "When {this} enters, if it's");
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");

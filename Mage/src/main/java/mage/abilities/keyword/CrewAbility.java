@@ -151,7 +151,7 @@ class CrewCost extends CostImpl {
         }
         Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
             @Override
-            public String getMessage() {
+            public String getMessage(Game game) {
                 // shows selected power
                 int selectedPower = this.targets.keySet().stream()
                         .map(game::getPermanent)
@@ -162,7 +162,7 @@ class CrewCost extends CostImpl {
                 if (selectedPower >= value) {
                     extraInfo = HintUtils.prepareText(extraInfo, Color.GREEN);
                 }
-                return super.getMessage() + " " + extraInfo;
+                return super.getMessage(game) + " " + extraInfo;
             }
         };
 

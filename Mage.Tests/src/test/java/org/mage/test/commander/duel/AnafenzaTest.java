@@ -77,7 +77,7 @@ public class AnafenzaTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerA, "Acidic Slime", 1);
 
         addCard(Zone.HAND, playerB, "Forest", 2);
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, put a 5/5 red and green Elemental creature token onto the battlefield.
+        // <i>Landfall</i> &mdash; Whenever a land you control enters, put a 5/5 red and green Elemental creature token onto the battlefield.
         // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to any target.
         addCard(Zone.BATTLEFIELD, playerB, "Omnath, Locus of Rage", 1);
 

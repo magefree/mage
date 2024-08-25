@@ -112,7 +112,7 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
         checkPermanentCounters("counters", 1, PhaseStep.BEGIN_COMBAT, playerB, "Balduvian Bears", CounterType.P1P1, 2);
 
         // AI cast avatar on turn 3 and target 1 creature to kil by 3 damage
-        //setStrictChooseMode(true); // AI
+        setStrictChooseMode(false); // AI
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 

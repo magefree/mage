@@ -38,7 +38,7 @@ public final class FrodoBaggins extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Whenever Frodo Baggins or another legendary creature enters the battlefield under your control, the Ring tempts you.
+        // Whenever Frodo Baggins or another legendary creature you control enters, the Ring tempts you.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new TheRingTemptsYouEffect(), filter, false, true
         ));

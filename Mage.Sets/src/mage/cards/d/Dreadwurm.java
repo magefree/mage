@@ -25,7 +25,7 @@ public final class Dreadwurm extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        // Landfall — Whenever a land enters the battlefield under your control, Dreadwurm gains indestructible until end of turn.
+        // Landfall — Whenever a land you control enters, Dreadwurm gains indestructible until end of turn.
         this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         )));

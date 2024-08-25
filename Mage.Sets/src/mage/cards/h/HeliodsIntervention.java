@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -15,6 +15,7 @@ import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ import java.util.UUID;
  */
 public final class HeliodsIntervention extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(GetXValue.instance, 2);
 
     public HeliodsIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
@@ -61,7 +62,7 @@ enum HeliodsInterventionAdjuster implements TargetAdjuster {
         }
         mode.getTargets().clear();
         mode.addTarget(new TargetPermanent(
-                ability.getManaCostsToPay().getX(), StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT
+                CardUtil.getSourceCostsTag(game, ability, "X", 0), StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT
         ));
     }
 }

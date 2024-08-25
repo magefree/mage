@@ -66,7 +66,7 @@ class OminousRoostTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or whenever you cast a spell from your graveyard, create a " +
+        return "When {this} enters or whenever you cast a spell from your graveyard, create a " +
                 "1/1 blue Bird creature token with flying and \"This creature can block only creatures with flying.\"";
     }
 

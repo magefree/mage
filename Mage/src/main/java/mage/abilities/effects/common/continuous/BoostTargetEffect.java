@@ -34,11 +34,6 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         this(power, toughness, Duration.EndOfTurn);
     }
 
-    /**
-     * @param power
-     * @param toughness
-     * @param duration
-     */
     public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, CardUtil.getBoostOutcome(power, toughness));
         this.power = power;
@@ -60,6 +55,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (getAffectedObjectsSet()) {
+            // Boost must be locked in (if it's a dynamic value) for non-static ability
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
         }

@@ -42,7 +42,7 @@ public final class SpiritBonds extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
 
-        // Whenever a nontoken creature enters the battlefield under your control, you may pay {W}. If you do, but a 1/1 white Spirit creature token with flying into play.
+        // Whenever a nontoken creature you control enters, you may pay {W}. If you do, but a 1/1 white Spirit creature token with flying into play.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{W}")), StaticFilters.FILTER_CREATURE_NON_TOKEN, false));
 
         // {1}{W}, Sacrifice a Spirit: Target non-Spirit creature gains indestructible until end of turn.

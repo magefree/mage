@@ -29,7 +29,7 @@ public final class SultaiFlayer extends CardImpl {
 
     public SultaiFlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(3);

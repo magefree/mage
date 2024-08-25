@@ -38,7 +38,7 @@ public final class UnquenchableThirst extends CardImpl {
         // When Unquenchable Thirst enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()),
-                DesertControlledOrGraveyardCondition.instance, "When {this} enters the battlefield, " +
+                DesertControlledOrGraveyardCondition.instance, "When {this} enters, " +
                 "if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature."
         ).addHint(DesertControlledOrGraveyardCondition.getHint()));
 

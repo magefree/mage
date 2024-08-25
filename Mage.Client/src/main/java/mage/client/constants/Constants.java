@@ -42,7 +42,7 @@ public final class Constants {
     public static final int POWBOX_TEXT_MAX_LEFT = 212;
     public static final int DAMAGE_MAX_LEFT = 180;
 
-    // tooltip hints delay in ms (need more time to display long hints withour hiding)
+    // tooltip hints delay in ms (need more time to display long hints without hiding)
     public static final int TOOLTIPS_DELAY_MS = 60 * 1000;
 
     public static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2, 2, 2, 2);
@@ -64,7 +64,7 @@ public final class Constants {
     public static final String RESOURCE_SYMBOL_FOLDER_PNG = "png";
 
     public enum ResourceSymbolSize {
-        SMALL,
+        SMALL, // TODO: delete SMALL, MEDIUM and LARGE as outdated (svg or generated png works fine)
         MEDIUM,
         LARGE,
         SVG,
@@ -86,11 +86,6 @@ public final class Constants {
     // sound
     public static final String BASE_SOUND_PATH = "sounds" + File.separator; // TODO: check path with File.separator
     public static final String BASE_MUSICS_PATH = "music" + File.separator;
-
-    // battlefield feedback panel colors (used in preferences dialogs too)
-    public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_DISABLE = 0;
-    public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_ONE_COLOR = 1;
-    public static final int BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR = 2;
 
     public static final int AUTO_TARGET_DISABLE      = 0;
     public static final int AUTO_TARGET_NON_FEEL_BAD = 1;

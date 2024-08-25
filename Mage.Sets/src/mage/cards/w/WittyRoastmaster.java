@@ -24,7 +24,7 @@ public final class WittyRoastmaster extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, Witty Roastmaster deals 1 damage to each opponent.
+        // Alliance — Whenever another creature you control enters, Witty Roastmaster deals 1 damage to each opponent.
         this.addAbility(new AllianceAbility(new DamagePlayersEffect(1, TargetController.OPPONENT)));
     }
 

@@ -39,7 +39,7 @@ public final class KronchWrangler extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever a creature with power 4 or greater enters the battlefield under your control, put a +1/+1 counter on Kronch Wrangler.
+        // Whenever a creature with power 4 or greater you control enters, put a +1/+1 counter on Kronch Wrangler.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));

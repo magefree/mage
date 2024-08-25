@@ -32,7 +32,7 @@ public final class ShadowsLair extends CardImpl {
 
         // {B}, {T}, Remove a dread counter from Shadows' Lair: You draw a card and you lose 1 life.
         Ability ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(1, "you"), new ManaCostsImpl<>("{B}")
+                new DrawCardSourceControllerEffect(1, true), new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.DREAD.createInstance()));

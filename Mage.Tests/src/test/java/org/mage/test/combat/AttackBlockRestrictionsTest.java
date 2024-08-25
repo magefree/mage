@@ -184,7 +184,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     public void testChampionOfLambholt() {
         //  Champion of Lambholt: Creature — Human Warrior 1/1, 1GG
         //  - Creatures with power less than Champion of Lambholt's power can't block creatures you control.
-        //  - Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Champion of Lambholt.
+        //  - Whenever another creature you control enters, put a +1/+1 counter on Champion of Lambholt.
         addCard(Zone.BATTLEFIELD, playerB, "Champion of Lambholt");
 
         // Elite Vanguard: Creature — Human Soldier 2/1, W
@@ -306,7 +306,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testTurntimberBasilisk() {
-        // Landfall - Whenever a land enters the battlefield under your control, you may
+        // Landfall - Whenever a land you control enters, you may
         // have target creature block Turntimber Basilisk this turn if able.
         addCard(Zone.BATTLEFIELD, playerA, "Turntimber Basilisk");
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");

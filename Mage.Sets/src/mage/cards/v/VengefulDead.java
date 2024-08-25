@@ -3,7 +3,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class VengefulDead extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Vengeful Dead or another Zombie dies, each opponent loses 1 life.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter));
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter));
     }
 
     private VengefulDead(final VengefulDead card) {

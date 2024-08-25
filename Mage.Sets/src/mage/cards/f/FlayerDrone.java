@@ -44,7 +44,7 @@ public final class FlayerDrone extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         
-        // Whenever another colorless creature enters the battlefield under your control, target opponent loses 1 life.
+        // Whenever another colorless creature you control enters, target opponent loses 1 life.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), filter, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

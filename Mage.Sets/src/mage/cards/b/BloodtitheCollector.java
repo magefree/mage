@@ -34,7 +34,7 @@ public final class BloodtitheCollector extends CardImpl {
         // When Bloodtithe Collector enters the battlefield, if an opponent lost life this turn, each opponent discards a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT)),
-                OpponentsLostLifeCondition.instance, "When {this} enters the battlefield, " +
+                OpponentsLostLifeCondition.instance, "When {this} enters, " +
                 "if an opponent lost life this turn, each opponent discards a card."
         ).addHint(OpponentsLostLifeHint.instance));
     }

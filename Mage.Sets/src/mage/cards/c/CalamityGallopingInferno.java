@@ -21,6 +21,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -101,6 +102,7 @@ class CalamityGallopingInfernoEffect extends OneShotEffect {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
                     null, null, false, 1, true, true
             );
+            effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
             effect.sacrificeTokensCreatedAtNextEndStep(game, source);
         }

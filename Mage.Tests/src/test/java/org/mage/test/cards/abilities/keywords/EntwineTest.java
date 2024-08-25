@@ -130,7 +130,7 @@ public class EntwineTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barbed Lightning");
-        setChoice(playerA, true); // cast for free
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience"); // cast for free
         setChoice(playerA, true); // use Entwine
         addTarget(playerA, "Balduvian Bears");
         addTarget(playerA, playerA);

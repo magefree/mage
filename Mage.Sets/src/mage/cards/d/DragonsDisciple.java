@@ -69,7 +69,7 @@ class DragonsDiscipleEffect extends OneShotEffect {
 
     public DragonsDiscipleEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may reveal a Dragon card from your hand. If you do or if you control a Dragon, {this} enters the battlefield with a +1/+1 counter on it";
+        this.staticText = "you may reveal a Dragon card from your hand. If you do or if you control a Dragon, {this} enters with a +1/+1 counter on it";
     }
 
     private DragonsDiscipleEffect(final DragonsDiscipleEffect effect) {

@@ -12,7 +12,6 @@ public class UserData implements Serializable {
 
     protected int groupId;
     protected int avatarId;
-    protected boolean showAbilityPickerForced;
     protected boolean allowRequestShowHandCards;
     protected boolean confirmEmptyManaPool;
     protected UserSkipPrioritySteps userSkipPrioritySteps;
@@ -26,7 +25,7 @@ public class UserData implements Serializable {
     protected int autoTargetLevel;
     protected boolean useSameSettingsForReplacementEffects;
     protected boolean useFirstManaAbility = false;
-    private String userIdStr;
+    private String userIdStr; // TODO: delete as un-used or use for hardware id instead?
     protected Map<UUID, Set<UUID>> requestedHandPlayersList; // game -> players list
 
     protected String matchHistory;
@@ -40,7 +39,6 @@ public class UserData implements Serializable {
 
     public UserData(UserGroup userGroup,
                     int avatarId,
-                    boolean showAbilityPickerForced,
                     boolean allowRequestShowHandCards,
                     boolean confirmEmptyManaPool,
                     UserSkipPrioritySteps userSkipPrioritySteps,
@@ -57,7 +55,6 @@ public class UserData implements Serializable {
                     String userIdStr) {
         this.groupId = userGroup.getGroupId();
         this.avatarId = avatarId;
-        this.showAbilityPickerForced = showAbilityPickerForced;
         this.allowRequestShowHandCards = allowRequestShowHandCards;
         this.userSkipPrioritySteps = userSkipPrioritySteps;
         this.confirmEmptyManaPool = confirmEmptyManaPool;
@@ -82,7 +79,6 @@ public class UserData implements Serializable {
     public void update(UserData userData) {
         this.groupId = userData.groupId;
         this.avatarId = userData.avatarId;
-        this.showAbilityPickerForced = userData.showAbilityPickerForced;
         this.allowRequestShowHandCards = userData.allowRequestShowHandCards;
         this.userSkipPrioritySteps = userData.userSkipPrioritySteps;
         this.confirmEmptyManaPool = userData.confirmEmptyManaPool;
@@ -104,7 +100,6 @@ public class UserData implements Serializable {
         return new UserData(
                 UserGroup.DEFAULT,
                 0,
-                false,
                 false,
                 true,
                 new UserSkipPrioritySteps(),
@@ -136,14 +131,6 @@ public class UserData implements Serializable {
 
     public void setAvatarId(int avatarId) {
         this.avatarId = avatarId;
-    }
-
-    public boolean isShowAbilityPickerForced() {
-        return showAbilityPickerForced;
-    }
-
-    public void setShowAbilityPickerForced(boolean showAbilityPickerForced) {
-        this.showAbilityPickerForced = showAbilityPickerForced;
     }
 
     public boolean isAllowRequestHandToAll() {

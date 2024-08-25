@@ -35,7 +35,7 @@ public final class DisplacedDinosaurs extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
-        // As a historic permanent enters the battlefield under your control, it becomes a 7/7 Dinosaur creature in
+        // As a historic permanent you control enters, it becomes a 7/7 Dinosaur creature in
         // addition to its other types.
         this.addAbility(new SimpleStaticAbility(new DisplacedDinosaursEntersBattlefieldEffect()));
     }
@@ -54,7 +54,7 @@ class DisplacedDinosaursEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     DisplacedDinosaursEntersBattlefieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "As a historic permanent enters the battlefield under your control, it becomes a 7/7 Dinosaur creature in addition to its other types. <i>(Artifacts, legendaries, and Sagas are historic.)</i>";
+        staticText = "As a historic permanent you control enters, it becomes a 7/7 Dinosaur creature in addition to its other types. <i>(Artifacts, legendaries, and Sagas are historic.)</i>";
     }
 
     private DisplacedDinosaursEntersBattlefieldEffect(mage.cards.d.DisplacedDinosaursEntersBattlefieldEffect effect) {

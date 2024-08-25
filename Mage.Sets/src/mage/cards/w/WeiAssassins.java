@@ -1,16 +1,15 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -20,8 +19,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class WeiAssassins extends CardImpl {
@@ -77,7 +77,7 @@ class WeiAssassinsEffect extends OneShotEffect {
         filter.add(new ControllerIdPredicate(player.getId()));
         Target target = new TargetPermanent(1, 1, filter, true);
         if (target.canChoose(player.getId(), source, game)) {
-            while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+            while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
                 player.chooseTarget(Outcome.DestroyPermanent, target, source, game);
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());

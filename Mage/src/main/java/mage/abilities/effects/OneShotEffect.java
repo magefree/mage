@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects;
 
 import mage.constants.EffectType;
@@ -37,4 +35,7 @@ public abstract class OneShotEffect extends EffectImpl {
         super.setTargetPointer(targetPointer);
         return this;
     }
+
+    @Override
+    abstract public OneShotEffect copy();
 }

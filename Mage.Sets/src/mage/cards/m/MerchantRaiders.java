@@ -30,7 +30,7 @@ public final class MerchantRaiders extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever Merchant Raiders or another Pirate enters the battlefield under your control, tap up to one target creature. That creature doesn't untap during its controller's untap step for as long as you control Merchant Raiders.
+        // Whenever Merchant Raiders or another Pirate you control enters, tap up to one target creature. That creature doesn't untap during its controller's untap step for as long as you control Merchant Raiders.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new TapTargetEffect("tap up to one target creature"),
                 filter, false, true

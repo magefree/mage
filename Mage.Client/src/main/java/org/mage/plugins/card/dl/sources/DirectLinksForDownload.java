@@ -6,12 +6,11 @@ import org.mage.plugins.card.dl.DownloadJob;
 import java.io.File;
 import java.util.*;
 
-import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
- * Additional images from a third party sources
+ * Download: additional images from a third party sources, used for symbols
  *
  * @author noxx
  */
@@ -44,7 +43,7 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
         for (Map.Entry<String, String> url : directLinks.entrySet()) {
             File dst = new File(outDir, url.getKey());
             // download images every time (need to update low quality image)
-            jobs.add(new DownloadJob(url.getKey(), fromURL(url.getValue()), toFile(dst), true));
+            jobs.add(new DownloadJob(url.getKey(), url.getValue(), toFile(dst), true));
         }
         return jobs.iterator();
     }

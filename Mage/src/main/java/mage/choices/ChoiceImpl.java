@@ -1,5 +1,6 @@
 package mage.choices;
 
+import mage.game.Game;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
@@ -7,7 +8,11 @@ import org.apache.log4j.Logger;
 import java.util.*;
 
 /**
- * @author BetaSteward_at_googlemail.com, JayDi85
+ * Game's choose dialog to select one item from a list
+ * <p>
+ * Support GUI related features like headers, sorting, tooltips/popups
+ *
+ * @author JayDi85
  */
 public class ChoiceImpl implements Choice {
 
@@ -21,6 +26,7 @@ public class ChoiceImpl implements Choice {
     protected Set<String> choices = new LinkedHashSet<>();
     protected Map<String, String> keyChoices = new LinkedHashMap<>();
     protected Map<String, Integer> sortData = new LinkedHashMap<>();
+    protected Map<String, List<String>> hintData = new LinkedHashMap<>(); // value -> [type, hint]
     protected String message;
     protected String subMessage;
     protected boolean searchEnabled = true; // enable for all windows by default
@@ -36,14 +42,13 @@ public class ChoiceImpl implements Choice {
 
     protected boolean manaColorChoice = false; // set true to allow automatic choosing with Outcome.PutManaInPool
 
-    public ChoiceImpl() {
-        this(false);
-    }
-
     public ChoiceImpl(boolean required) {
         this(required, ChoiceHintType.TEXT);
     }
 
+    /**
+     * @param hintType enable card popup hint (each value will be used as card/dungeon name)
+     */
     public ChoiceImpl(boolean required, ChoiceHintType hintType) {
         this.required = required;
         this.hintType = hintType;
@@ -233,6 +238,40 @@ public class ChoiceImpl implements Choice {
     }
 
     @Override
+    public Map<String, List<String>> getHintData() {
+        return this.hintData;
+    }
+
+    @Override
+    public Choice withItem(String key, String value, Integer sort, ChoiceHintType hintType, String hintValue) {
+        this.keyChoices.put(key, value);
+        if (sort != null) {
+            this.sortData.put(key, sort);
+        }
+        if (hintType != null) {
+            this.hintData.put(key, Arrays.asList(hintType.toString(), hintValue));
+        }
+        return this;
+    }
+
+    @Override
+    public void setHintData(Map<String, List<String>> hintData) {
+        // runtime check
+        hintData.forEach((key, info) -> {
+            try {
+                ChoiceHintType hintType = ChoiceHintType.valueOf(info.get(0));
+                if (hintType == ChoiceHintType.GAME_OBJECT) {
+                    UUID objectId = UUID.fromString(info.get(1));
+                }
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Wrong code usage: hints info must contains valid data, but found - " + info);
+            }
+        });
+
+        this.hintData = hintData;
+    }
+
+    @Override
     public void setRandomChoice() {
 
         if (this.isKeyChoice()) {
@@ -272,7 +311,10 @@ public class ChoiceImpl implements Choice {
             // no key answer found, try to match by text starting with
             for (String needChoice : answers) {
                 for (Map.Entry<String, String> currentChoice : this.getKeyChoices().entrySet()) {
-                    if (currentChoice.getValue().startsWith(needChoice)) {
+                    String choiceValue = currentChoice.getValue();
+                    // Clean any html part (for easier unit test matching)
+                    String cleanedChoiceValue = choiceValue.replaceAll("<[^<>]*>", "");
+                    if (choiceValue.startsWith(needChoice) || cleanedChoiceValue.startsWith(needChoice)) {
                         if (removeSelectAnswerFromList) {
                             this.setChoiceByKey(currentChoice.getKey(), false);
                             answers.remove(needChoice);
@@ -285,7 +327,9 @@ public class ChoiceImpl implements Choice {
             // string mode
             for (String needChoice : answers) {
                 for (String currentChoice : this.getChoices()) {
-                    if (currentChoice.equals(needChoice)) {
+                    // Clean any html part (for easier unit test matching)
+                    String cleanedChoiceValue = currentChoice.replaceAll("<[^<>]*>", "");
+                    if (currentChoice.equals(needChoice) || cleanedChoiceValue.equals(needChoice)) {
                         if (removeSelectAnswerFromList) {
                             this.setChoice(needChoice, false);
                             answers.remove(needChoice);
@@ -361,5 +405,15 @@ public class ChoiceImpl implements Choice {
             this.required = false;
             logger.error("Empty choice dialog in " + this.getClass().getCanonicalName(), new Throwable());
         }
+    }
+
+    @Override
+    public void onChooseStart(Game game, UUID choosingPlayerId) {
+        // nothing to do
+    }
+
+    @Override
+    public void onChooseEnd(Game game, UUID choosingPlayerId, String choiceResult) {
+        // nothing to do
     }
 }

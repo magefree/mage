@@ -41,7 +41,7 @@ public interface Match {
 
     void submitDeck(UUID playerId, Deck deck);
 
-    void updateDeck(UUID playerId, Deck deck);
+    void updateDeck(UUID playerId, Deck deck, boolean ignoreMainBasicLands);
 
     void startMatch();
 

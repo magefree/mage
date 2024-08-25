@@ -66,6 +66,7 @@ public class PutToGraveyardTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swords to Plowshares", "Silvercoat Lion");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}");
+        addTarget(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

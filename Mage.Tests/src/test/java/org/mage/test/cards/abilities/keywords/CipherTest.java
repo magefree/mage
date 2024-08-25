@@ -32,7 +32,7 @@ public class CipherTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Stolen Identity"); // Sorcery {4}{U}{U}
 
         // Flying
-        // Landfall - Whenever a land enters the battlefield under your control, you may gain control of target creature for as long as you control Roil Elemental.
+        // Landfall - Whenever a land you control enters, you may gain control of target creature for as long as you control Roil Elemental.
         addCard(Zone.BATTLEFIELD, playerB, "Roil Elemental");
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox");
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
@@ -55,6 +55,7 @@ public class CipherTest extends CardTestPlayerBase {
         // on attack must activated ability to free cast
         attack(5, playerA, "Roil Elemental");
         setChoice(playerA, true); // activate free cast of encoded card
+        addTarget(playerA, "Roil Elemental");
         checkPermanentCount("playerA must have 2 Roil Elemental", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Roil Elemental", 2);
         checkPermanentCount("playerB must have Roil Elemental", 5, PhaseStep.POSTCOMBAT_MAIN, playerB, "Roil Elemental", 1);
 

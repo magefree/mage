@@ -5,7 +5,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -53,7 +53,7 @@ public final class JeskaThriceReborn extends CardImpl {
         this.addAbility(ability);
 
         // −X: Jeska, Thrice Reborn deals X damage to each of up to three targets.
-        ability = new LoyaltyAbility(new DamageTargetEffect(GetXLoyaltyValue.instance)
+        ability = new LoyaltyAbility(new DamageTargetEffect(GetXValue.instance)
                 .setText("{this} deals X damage to each of up to three targets"));
         ability.addTarget(new TargetAnyTarget(0, 3));
         this.addAbility(ability);

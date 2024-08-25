@@ -15,6 +15,7 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
@@ -105,7 +106,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void addAbility(Ability ability);
 
-    Counters getCounters();
+    /**
+     * The counters should be manipulated (adding or removing counters) with the appropriate addCounters/removeCounters/getCounterCount methods.
+     * This returns a copy for specific usage, to make sure the Player's counters are not altered from there.
+     */
+    Counters getCountersAsCopy();
 
     int getLife();
 
@@ -199,6 +204,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canPlotFromTopOfLibrary();
 
+    void setDrawsFromBottom(boolean drawsFromBottom);
+
+    boolean isDrawsFromBottom();
+
     void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn);
 
     boolean isDrawsOnOpponentsTurn();
@@ -272,6 +281,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void idleTimeout(Game game);
 
+    // TODO: research usage of !hasLeft() && !hasLost() replace it by isInGame() if possible
     boolean hasLeft();
 
     /**
@@ -291,7 +301,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     ManaPool getManaPool();
 
-    Set<UUID> getInRange();
+    /**
+     * Is checking player in range of current player.
+     * Warning, range list updates on start of the turn due rules.
+     */
+    boolean hasPlayerInRange(UUID checkingPlayerId);
 
     boolean isTopCardRevealed();
 
@@ -375,10 +389,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setTestMode(boolean value);
 
-    void addAction(String action);
-
-    int getActionCount();
-
     void setAllowBadMoves(boolean allowBadMoves);
 
     /**
@@ -401,25 +411,21 @@ public interface Player extends MageItem, Copyable<Player> {
     void shuffleLibrary(Ability source, Game game);
 
     /**
-     * Draw cards. If you call it in replace events then use method with event.appliedEffects param instead.
-     * Returns 0 if replacement effect triggers on card draw.
+     * Draw cards. If you call it in replace events then use method with event param instead (for appliedEffects)
      *
-     * @param num
+     * @param num cards to draw
      * @param source can be null for game default draws (non effects, example: start of the turn)
-     * @param game
-     * @return
+     * @return number of cards drawn, including as a result of replacement effects
      */
     int drawCards(int num, Ability source, Game game);
 
     /**
      * Draw cards with applied effects, for replaceEvent
-     * Returns 0 if replacement effect triggers on card draw.
      *
-     * @param num
+     * @param num cards to draw
      * @param source can be null for game default draws (non effects, example: start of the turn)
-     * @param game
      * @param event  original draw event in replacement code
-     * @return
+     * @return number of cards drawn, including as a result of replacement effects
      */
     int drawCards(int num, Ability source, Game game, GameEvent event);
 
@@ -493,6 +499,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param approvingObject reference to the ability that allows to play the card
      * @return
      */
+    // TODO: should have a version taking a PlayLandAbility or SpellAbility to handle MDFC/Zoetic Cavern/Adventure/etc...
     boolean playCard(Card card, Game game, boolean noMana, ApprovingObject approvingObject);
 
     /**
@@ -504,13 +511,14 @@ public interface Player extends MageItem, Copyable<Player> {
      *                     of lands you already played.
      * @return
      */
+    // TODO: should have a version taking a PlayLandAbility to handle MDFC/Zoetic Cavern/etc...
     boolean playLand(Card card, Game game, boolean ignoreTiming);
 
     boolean activateAbility(ActivatedAbility ability, Game game);
 
     boolean triggerAbility(TriggeredAbility ability, Game game);
 
-    boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game);
+    boolean canBeTargetedBy(MageObject sourceObject, UUID sourceControllerId, Ability source, Game game);
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
@@ -560,7 +568,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void abortReset();
 
-    void signalPlayerConcede();
+    void signalPlayerConcede(boolean stopCurrentChooseDialog);
 
     void signalPlayerCheat();
 
@@ -723,17 +731,13 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean shuffleCardsToLibrary(Card card, Game game, Ability source);
 
     // set the value for X mana spells and abilities
-    default int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        return announceXMana(min, max, 1, message, game, ability);
-    }
-
-    int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability);
+    int announceXMana(int min, int max, String message, Game game, Ability ability);
 
     // set the value for non mana X costs
     int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost);
 
-    // TODO: rework choose replacement effects to use array, not map (it'a random order now)
-    int chooseReplacementEffect(Map<String, String> abilityMap, Game game);
+    // TODO: rework to use pair's list of effect + ability instead string's map
+    int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game);
 
     TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game);
 
@@ -834,9 +838,44 @@ public interface Player extends MageItem, Copyable<Player> {
 
     Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game originalGame);
 
+    /**
+     * add counter to the player (action verb is `get`, but not using that one to avoid ambiguity with getters)
+     */
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game);
 
-    void removeCounters(String name, int amount, Ability source, Game game);
+    /**
+     * lose {@param amount} counters of the specified kind.
+     */
+    void loseCounters(String counterName, int amount, Ability source, Game game);
+
+    /**
+     * lose all counters of any kind.
+     *
+     * @return the amount of counters removed this way.
+     */
+    int loseAllCounters(Ability source, Game game);
+
+    /**
+     * lose all counters of a specific kind.
+     *
+     * @return the amount of counters removed this way.
+     */
+    int loseAllCounters(String counterName, Ability source, Game game);
+
+    /**
+     * @return the amount of counters of the specified kind the player has
+     */
+    int getCountersCount(CounterType counterType);
+
+    /**
+     * @return the amount of counters of the specified kind the player has
+     */
+    int getCountersCount(String counterName);
+
+    /**
+     * @return the amount of counters in total of any kind the player has
+     */
+    int getCountersTotalCount();
 
     List<UUID> getAttachments();
 
@@ -1212,4 +1251,10 @@ public interface Player extends MageItem, Copyable<Player> {
     }
 
     public UserData getControllingPlayersUserData(Game game);
+
+    /**
+     * Some player implementations (TestPlayer, Simulated) uses facade structure with hidden player object,
+     * so that's method helps to find real player that used by a game (in most use cases it's a PlayerImpl)
+     */
+    Player getRealPlayer();
 }

@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class BrackishTrudge extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
+    private static final Condition condition = new YouGainedLifeCondition();
     private static final Hint hint = new ConditionHint(condition, "You gained life this turn");
 
     public BrackishTrudge(UUID ownerId, CardSetInfo setInfo) {

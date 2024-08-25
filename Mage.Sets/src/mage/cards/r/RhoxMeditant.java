@@ -28,7 +28,7 @@ public final class RhoxMeditant extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
     
-    private static final String rule = "When {this} enters the battlefield, if you control a green permanent, draw a card.";
+    private static final String rule = "When {this} enters, if you control a green permanent, draw a card.";
 
     public RhoxMeditant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

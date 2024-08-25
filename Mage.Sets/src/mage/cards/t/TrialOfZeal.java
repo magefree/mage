@@ -34,7 +34,7 @@ public final class TrialOfZeal extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
-        // When a Cartouche enters the battlefield under your control, return Trial of Zeal to its owner's hand.
+        // When a Cartouche you control enters, return Trial of Zeal to its owner's hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ReturnToHandSourceEffect(), filter
         ));
     }

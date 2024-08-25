@@ -90,7 +90,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Desolate Mire", 287, Rarity.RARE, mage.cards.d.DesolateMire.class));
         cards.add(new SetCardInfo("Dig Through Time", 95, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Diluvian Primordial", 96, Rarity.RARE, mage.cards.d.DiluvianPrimordial.class));
-        cards.add(new SetCardInfo("Dimir Aqueduct", 288, Rarity.COMMON, mage.cards.d.DimirAqueduct.class));
+        cards.add(new SetCardInfo("Dimir Aqueduct", 288, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
         cards.add(new SetCardInfo("Dire Fleet Daredevil", 162, Rarity.RARE, mage.cards.d.DireFleetDaredevil.class));
         cards.add(new SetCardInfo("Dire Fleet Ravager", 132, Rarity.MYTHIC, mage.cards.d.DireFleetRavager.class));
         cards.add(new SetCardInfo("Discreet Retreat", 20, Rarity.RARE, mage.cards.d.DiscreetRetreat.class));
@@ -118,6 +118,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Faithless Looting", 165, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Fallen Shinobi", 226, Rarity.RARE, mage.cards.f.FallenShinobi.class));
         cards.add(new SetCardInfo("Feed the Swarm", 134, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
+        cards.add(new SetCardInfo("Felix Five-Boots", 6, Rarity.MYTHIC, mage.cards.f.FelixFiveBoots.class));
         cards.add(new SetCardInfo("Fellwar Stone", 257, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Ferrous Lake", 294, Rarity.RARE, mage.cards.f.FerrousLake.class));
         cards.add(new SetCardInfo("Fetid Heath", 295, Rarity.RARE, mage.cards.f.FetidHeath.class));
@@ -135,7 +136,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 135, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
         cards.add(new SetCardInfo("Graywater's Fixer", 36, Rarity.RARE, mage.cards.g.GraywatersFixer.class));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 168, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
-        cards.add(new SetCardInfo("Guttersnipe", 169, Rarity.COMMON, mage.cards.g.Guttersnipe.class));
+        cards.add(new SetCardInfo("Guttersnipe", 169, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Harrow", 194, Rarity.COMMON, mage.cards.h.Harrow.class));
         cards.add(new SetCardInfo("Hashep Oasis", 299, Rarity.UNCOMMON, mage.cards.h.HashepOasis.class));
         cards.add(new SetCardInfo("Haughty Djinn", 99, Rarity.RARE, mage.cards.h.HaughtyDjinn.class));
@@ -195,7 +196,7 @@ public final class OutlawsOfThunderJunctionCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Opulent Palace", 307, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
         cards.add(new SetCardInfo("Oracle of Mul Daya", 200, Rarity.RARE, mage.cards.o.OracleOfMulDaya.class));
         cards.add(new SetCardInfo("Orochi Soul-Reaver", 22, Rarity.RARE, mage.cards.o.OrochiSoulReaver.class));
-        cards.add(new SetCardInfo("Orzhov Signet", 261, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Orzhov Signet", 261, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Overflowing Basin", 308, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Painful Truths", 146, Rarity.RARE, mage.cards.p.PainfulTruths.class));
         cards.add(new SetCardInfo("Painted Bluffs", 309, Rarity.COMMON, mage.cards.p.PaintedBluffs.class));

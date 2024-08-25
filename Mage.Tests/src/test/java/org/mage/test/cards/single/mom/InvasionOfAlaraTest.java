@@ -73,7 +73,7 @@ public class InvasionOfAlaraTest extends CardTestPlayerBase {
         addTargetAmount(playerA, behemoth, 1);
         // 3 chosen targets (max)
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, 1);
-        setChoice(playerA, "When {this} enters the battlefield, you gain"); // order triggers
+        setChoice(playerA, "When {this} enters, you gain"); // order triggers
         addTarget(playerA, anthem); // to destroy
 
         setStopAt(1, PhaseStep.END_TURN);

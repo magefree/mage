@@ -37,6 +37,7 @@ Double Strike|instance|
 Dredge|number|
 Echo|manaString|
 Embalm|cost, card|
+Emerge|card, manaString|
 Enchant|type|
 Encore|cost|
 Enlist|new|
@@ -58,7 +59,9 @@ Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
 For Mirrodin!|new|
+Freerunning|manaString|
 Friends forever|instance|
+Gift|card|
 Haste|instance|
 Hexproof|instance|
 Hideaway|number|
@@ -89,6 +92,7 @@ Mutate|card, manaString|
 Myriad|new|
 Nightbound|new|
 Ninjutsu|manaString|
+Offspring|manaString|
 Outlast|cost|
 Partner|instance|
 Persist|new|
@@ -122,7 +126,7 @@ Sunburst|new|
 Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
-Totem armor|new|
+Umbra armor|new|
 Toxic|number|
 Training|new|
 Trample|instance|

@@ -16,7 +16,7 @@ public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Living weapon <i>(When this Equipment enters the battlefield, " +
+        return "Living weapon <i>(When this Equipment enters, " +
                 "create a 0/0 black Phyrexian Germ creature token, then attach this to it.)</i>";
     }
 

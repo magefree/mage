@@ -26,6 +26,7 @@ public final class Innistrad extends ExpansionSet {
         super("Innistrad", "ISD", ExpansionSet.buildDate(2011, 9, 30), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.hasBoosters = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;
@@ -343,24 +344,24 @@ class InnistradCollator implements BoosterCollator {
     private final CardRun land = new CardRun(false, "250", "251", "252", "253", "254", "255", "256", "257", "258", "259", "260", "261", "262", "263", "264");
 
     private final BoosterStructure AABBC1C1C1C1C1 = new BoosterStructure(
-        commonA, commonA,
-        commonB, commonB,
-        commonC1, commonC1, commonC1, commonC1, commonC1
+            commonA, commonA,
+            commonB, commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1
     );
     private final BoosterStructure AAABC1C1C1C1C1 = new BoosterStructure(
-        commonA, commonA, commonA,
-        commonB,
-        commonC1, commonC1, commonC1, commonC1, commonC1
+            commonA, commonA, commonA,
+            commonB,
+            commonC1, commonC1, commonC1, commonC1, commonC1
     );
     private final BoosterStructure AAABBC2C2C2C2 = new BoosterStructure(
-        commonA, commonA, commonA,
-        commonB, commonB,
-        commonC2, commonC2, commonC2, commonC2
+            commonA, commonA, commonA,
+            commonB, commonB,
+            commonC2, commonC2, commonC2, commonC2
     );
     private final BoosterStructure AAAABBBC2C2 = new BoosterStructure(
-        commonA, commonA, commonA, commonA,
-        commonB, commonB, commonB,
-        commonC2, commonC2
+            commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB,
+            commonC2, commonC2
     );
     private final BoosterStructure AAB = new BoosterStructure(uncommonA, uncommonA, uncommonB);
     private final BoosterStructure ABB = new BoosterStructure(uncommonA, uncommonB, uncommonB);
@@ -378,18 +379,18 @@ class InnistradCollator implements BoosterCollator {
     // 2.46 C1 commons (135 / 55)
     // 1.64 C2 commons (90 / 55)
     private final RarityConfiguration commonRuns = new RarityConfiguration(
-    AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1,
-    AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1,
-    AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1,
-    AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1,
-    AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1,
-    AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1,
-    AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2,
-    AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2,
-    AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2,
-    AAABBC2C2C2C2, AAABBC2C2C2C2,
-    AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2,
-    AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2
+            AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1,
+            AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1,
+            AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1, AABBC1C1C1C1C1,
+            AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1,
+            AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1,
+            AAABC1C1C1C1C1, AAABC1C1C1C1C1, AAABC1C1C1C1C1,
+            AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2,
+            AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2,
+            AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2, AAABBC2C2C2C2,
+            AAABBC2C2C2C2, AAABBC2C2C2C2,
+            AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2,
+            AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2, AAAABBBC2C2
     );
     // In order for equal numbers of each uncommon to exist, the average booster must contain:
     // 1.65 A uncommons (33 / 20)

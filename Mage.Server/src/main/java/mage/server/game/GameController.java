@@ -25,6 +25,8 @@ import mage.server.Main;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.util.MultiAmountMessage;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
@@ -53,7 +55,7 @@ public class GameController implements GameCallback {
     private final ExecutorService gameExecutor;
     private static final Logger logger = Logger.getLogger(GameController.class);
 
-    protected final ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
+    private ScheduledExecutorService JOIN_WAITING_EXECUTOR = null;
 
     private ScheduledFuture<?> futureTimeout;
     private final ManagerFactory managerFactory;
@@ -238,13 +240,21 @@ public class GameController implements GameCallback {
                     }
                 }
         );
-        joinWaitingExecutor.scheduleAtFixedRate(() -> {
+
+        // wait all players
+        if (JOIN_WAITING_EXECUTOR == null) {
+            JOIN_WAITING_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+                    new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_GAME_JOIN_WAITING + " " + game.getId())
+            );
+        }
+        JOIN_WAITING_EXECUTOR.scheduleAtFixedRate(() -> {
             try {
                 sendInfoAboutPlayersNotJoinedYetAndTryToFixIt();
             } catch (Exception ex) {
                 logger.fatal("Send info about player not joined yet:", ex);
             }
         }, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, TimeUnit.SECONDS);
+
         checkJoinAndStart();
     }
 
@@ -347,7 +357,9 @@ public class GameController implements GameCallback {
     }
 
     private void sendInfoAboutPlayersNotJoinedYetAndTryToFixIt() {
-        // runs every 10 secs untill all players join
+        // TODO: need code and feature review - is it useful? 2024-06-23
+        // runs every 10 secs until all players join
+        // runs BEFORE game start, so it's safe to call player.leave here
         for (Player player : game.getPlayers().values()) {
             if (player.canRespond() && player.isHuman()) {
                 Optional<User> requestedUser = getUserByPlayerId(player.getId());
@@ -366,9 +378,14 @@ public class GameController implements GameCallback {
                             if (session != null) {
                                 problemPlayerFixes = "re-send start game event";
                                 logger.warn("Send forced game start event for player " + player.getName() + " in gameId: " + game.getId());
-                                user.ccGameStarted(session.getGameId(), player.getId());
-                                session.init();
-                                managerFactory.gameManager().sendPlayerString(session.getGameId(), user.getId(), "");
+                                Table table = managerFactory.tableManager().getTable(this.tableId);
+                                if (table != null) {
+                                    user.ccGameStarted(table.getId(), table.getParentTableId(), session.getGameId(), player.getId());
+                                    session.init();
+                                    managerFactory.gameManager().sendPlayerString(session.getGameId(), user.getId(), "");
+                                } else {
+                                    logger.error("Can't find table on fix and re-send start game event: " + this.tableId);
+                                }
                             } else {
                                 throw new IllegalStateException("Wrong code usage: session can't be null cause it created in forced joinGame already");
                                 //player.leave();
@@ -412,7 +429,7 @@ public class GameController implements GameCallback {
 
     private void checkJoinAndStart() {
         if (isAllJoined()) {
-            joinWaitingExecutor.shutdownNow();
+            JOIN_WAITING_EXECUTOR.shutdownNow();
             managerFactory.threadExecutor().getCallExecutor().execute(this::startGame);
         }
     }
@@ -516,6 +533,8 @@ public class GameController implements GameCallback {
                     if (game.canRollbackTurns(turnsToRollback)) {
                         UUID playerId = getPlayerId(userId);
                         if (game.getPriorityPlayerId().equals(playerId)) {
+                            // rollback request on own priority - can stop current choose dialog
+                            // TODO: make it async on any priority like concede
                             requestsOpen = requestPermissionToRollback(userId, turnsToRollback);
                             if (requestsOpen == 0) {
                                 game.rollbackTurns(turnsToRollback);
@@ -721,9 +740,9 @@ public class GameController implements GameCallback {
 
         if (isSideboardOnly) {
             // sideboard data already sent in PlayerView, so no need to re-sent it TODO: re-sent deck instead?
-            user.ccViewSideboard(tableId, game.getId(), targetPlayerId);
+            user.ccViewSideboard(table.getId(), game.getId(), targetPlayerId);
         } else {
-            user.ccViewLimitedDeck(deckSource.getDeckForViewer(), tableId, requestsOpen, true);
+            user.ccViewLimitedDeck(deckSource.getDeckForViewer(), table.getId(), table.getParentTableId(), requestsOpen, true);
         }
     }
 
@@ -925,8 +944,8 @@ public class GameController implements GameCallback {
         }
     }
 
-    private synchronized void informPersonal(UUID playerId, final String message) throws MageException {
-        perform(playerId, playerId1 -> getGameSession(playerId1).informPersonal(message));
+    private void informPersonal(UUID playerId, final String message) throws MageException {
+        perform(playerId, playerId1 -> getGameSession(playerId1).informPersonal(message), false);
     }
 
     private void error(String message, Exception ex) {
@@ -1296,13 +1315,13 @@ public class GameController implements GameCallback {
             return "";
         }
 
-        logger.warn("FIX command was called by " + user.getName() + " for game " + game.getId() + " - players: " +
-                game.getPlayerList().stream()
-                        .map(game::getPlayer)
-                        .filter(Objects::nonNull)
-                        .map(p -> p.getName() + (p.isInGame() ? " (play)" : " (out)"))
-                        .collect(Collectors.joining(", ")));
-
+        String playersInfo = game.getPlayerList().stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(p -> p.getName() + (p.isInGame() ? " (play)" : " (out)"))
+                .collect(Collectors.joining(", "));
+        logger.warn("FIX command was called for game " + game.getId() + " by " + user.getName()
+                + "; players: " + playersInfo + "; " + game);
         StringBuilder sb = new StringBuilder();
         sb.append("<font color='red'>FIX command called by ").append(user.getName()).append("</font>");
         sb.append("<font size='-2'>"); // font resize start for all next logs
@@ -1361,7 +1380,7 @@ public class GameController implements GameCallback {
         sb.append("</font>"); // font resize end
         sb.append("<br>");
 
-        logger.warn("FIX command result for game " + game.getId() + ": " + appliedFixes);
+        logger.warn("FIX command result: " + appliedFixes);
 
         return sb.toString();
     }
@@ -1395,5 +1414,9 @@ public class GameController implements GameCallback {
         }
 
         return fixedAlready;
+    }
+
+    public UUID getTableId() {
+        return tableId;
     }
 }

@@ -34,7 +34,7 @@ public final class SteelExemplar extends CardImpl {
         // Steel Exemplar enters the battlefield with two +1/+1 counters on it unless two or more colors of mana were spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                SteelExemplarCondition.instance, "{this} enters the battlefield with " +
+                SteelExemplarCondition.instance, "{this} enters with " +
                 "two +1/+1 counters on it unless two or more colors of mana were spent to cast it.", ""
         ));
     }

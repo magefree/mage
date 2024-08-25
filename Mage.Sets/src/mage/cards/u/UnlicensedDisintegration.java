@@ -1,16 +1,17 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -26,8 +27,7 @@ public final class UnlicensedDisintegration extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetControllerEffect(3),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()),
-                "If you control an artifact, {this} deals 3 damage to that creature's controller"));
+                new YouControlPermanentCondition(new FilterArtifactPermanent())));
         
     }
 

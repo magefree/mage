@@ -39,7 +39,7 @@ public final class BattlewingMystic extends CardImpl {
         triggeredAbility.addEffect(new DrawCardSourceControllerEffect(2));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility, KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, discard your hand, then draw two cards."
+                "When {this} enters, if it was kicked, discard your hand, then draw two cards."
         ));
     }
 

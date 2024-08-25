@@ -7,9 +7,18 @@ import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
+ * Needs PlayerGainedLifeWatcher to work
+ * <p>
  * Created by IGOUDT on 5-4-2017.
  */
 public class YouGainedLifeCondition extends IntCompareCondition {
+
+    /**
+     * "if you gained life this turn"
+     */
+    public YouGainedLifeCondition() {
+        super(ComparisonType.MORE_THAN, 0);
+    }
 
     public YouGainedLifeCondition(ComparisonType type, int value) {
         super(type, value);

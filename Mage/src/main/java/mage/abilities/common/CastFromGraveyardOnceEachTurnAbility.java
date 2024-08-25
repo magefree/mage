@@ -51,7 +51,7 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
         this.staticText = "Once during each of your turns, you may cast " + filter.getMessage()
-                + (filter.getMessage().contains("from your graveyard") ? "" : " from your graveyard");
+                + (filter.getMessage().contains("your graveyard") ? "" : " from your graveyard");
     }
 
     private CastFromGraveyardOnceEffect(final CastFromGraveyardOnceEffect effect) {
@@ -79,12 +79,14 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         CastFromGraveyardOnceWatcher watcher = game.getState().getWatcher(CastFromGraveyardOnceWatcher.class);
-        if (controller == null || sourcePermanent == null || watcher == null) {
+        Card cardToCast = game.getCard(objectId);
+        if (controller == null || sourcePermanent == null || watcher == null || cardToCast == null) {
             return false;
         }
         if (game.isActivePlayer(playerId) // only during your turn
                 && source.isControlledBy(playerId) // only you may cast
                 && Zone.GRAVEYARD.equals(game.getState().getZone(objectId)) // from graveyard
+                && cardToCast.getOwnerId().equals(playerId) // only your graveyard
                 && affectedAbility instanceof SpellAbility // characteristics to check
                 && watcher.abilityNotUsed(new MageObjectReference(sourcePermanent, game)) // once per turn
         ) {
@@ -93,8 +95,10 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
             if (spellAbility.getManaCosts().isEmpty()) {
                 return false;
             }
-            return spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)
-                    && filter.match(cardToCheck, playerId, source, game);
+            Set<MageIdentifier> allowedToBeCastNow = spellAbility.spellCanBeActivatedNow(playerId, game);
+            if (allowedToBeCastNow.contains(MageIdentifier.Default)) {
+                return filter.match(cardToCheck, playerId, source, game);
+            }
         }
         return false;
     }

@@ -117,14 +117,18 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     private void setGUISize() {
         jTablePlayers.getTableHeader().setFont(GUISizeHelper.tableFont);
         jTablePlayers.setFont(GUISizeHelper.tableFont);
-        jTablePlayers.setRowHeight(GUISizeHelper.getTableRowHeight());
+        jTablePlayers.setRowHeight(GUISizeHelper.tableRowHeight);
         jScrollPanePlayers.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         jScrollPanePlayers.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
         jScrollPaneSystem.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         jScrollPaneSystem.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
 
-        jTabbedPaneText.setFont(GUISizeHelper.getTabFont());
+        jTabbedPaneText.setFont(GUISizeHelper.tableFont);
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+
+        // chats and logs
+        colorPaneSystem.changeGUISize(GUISizeHelper.chatFont);
+        jScrollPaneTalk.changeGUISize(GUISizeHelper.chatFont);
     }
 
     public void setSplitDividerLocation(int location) {

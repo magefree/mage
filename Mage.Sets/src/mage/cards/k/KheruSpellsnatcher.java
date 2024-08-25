@@ -25,7 +25,7 @@ public final class KheruSpellsnatcher extends CardImpl {
 
     public KheruSpellsnatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(3);

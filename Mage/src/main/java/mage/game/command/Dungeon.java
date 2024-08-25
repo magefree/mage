@@ -331,6 +331,19 @@ public class Dungeon extends CommandObjectImpl {
     public void setIsAllCreatureTypes(Game game, boolean value) {
     }
 
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return false;
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+    }
+
     public void discardEffects() {
         for (Ability ability : abilites) {
             for (Effect effect : ability.getEffects()) {

@@ -6,7 +6,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -23,8 +23,8 @@ public final class BlatantThievery extends CardImpl {
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom, true)
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, gain control of target permanent that player controls"));
-        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
     }
 
     private BlatantThievery(final BlatantThievery card) {

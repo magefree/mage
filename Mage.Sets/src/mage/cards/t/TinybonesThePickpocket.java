@@ -1,29 +1,36 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.CastManaAdjustment;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.card.OwnerIdPredicate;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
 /**
- * @author Susucr
+ * @author notgreat
  */
 public final class TinybonesThePickpocket extends CardImpl {
+
+    private static final FilterCard filter
+            = new FilterPermanentCard("nonland permanent card from that player's graveyard");
+
+    static {
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+    }
 
     public TinybonesThePickpocket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
@@ -38,7 +45,11 @@ public final class TinybonesThePickpocket extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever Tinybones, the Pickpocket deals combat damage to a player, you may cast target nonland permanent card from that player's graveyard, and mana of any type can be spent to cast that spell.
-        this.addAbility(new TinybonesThePickpocketTriggeredAbility());
+        OneShotEffect effect = new MayCastTargetCardEffect(CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, false);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
+        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
+        this.addAbility(ability);
     }
 
     private TinybonesThePickpocket(final TinybonesThePickpocket card) {
@@ -48,54 +59,5 @@ public final class TinybonesThePickpocket extends CardImpl {
     @Override
     public TinybonesThePickpocket copy() {
         return new TinybonesThePickpocket(this);
-    }
-}
-
-/**
- * Similar to {@link mage.cards.w.WrexialTheRisenDeep}
- */
-class TinybonesThePickpocketTriggeredAbility extends TriggeredAbilityImpl {
-
-    TinybonesThePickpocketTriggeredAbility() {
-        super(
-                Zone.BATTLEFIELD,
-                new MayCastTargetCardEffect(CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, false)
-                        .setText("you may cast target nonland permanent card from "
-                                + "that player's graveyard, and mana of any type can be spent to cast that spell"),
-                false
-        );
-        setTriggerPhrase("Whenever {this} deals combat damage to a player, ");
-    }
-
-    private TinybonesThePickpocketTriggeredAbility(final TinybonesThePickpocketTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TinybonesThePickpocketTriggeredAbility copy() {
-        return new TinybonesThePickpocketTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(this.sourceId) || !((DamagedPlayerEvent) event).isCombatDamage()) {
-            return false;
-        }
-        Player damagedPlayer = game.getPlayer(event.getTargetId());
-        if (damagedPlayer == null) {
-            return false;
-        }
-        FilterCard filter = new FilterPermanentCard("nonland permanent card from " + damagedPlayer.getName() + "'s graveyard");
-        filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        Target target = new TargetCardInGraveyard(filter);
-        this.getTargets().clear();
-        this.addTarget(target);
-        return true;
     }
 }

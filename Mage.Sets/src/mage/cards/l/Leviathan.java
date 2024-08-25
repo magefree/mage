@@ -52,7 +52,7 @@ public final class Leviathan extends CardImpl {
 
         // Leviathan enters the battlefield tapped and doesn't untap during your untap step.
         Ability abilityTapped = new EntersBattlefieldTappedAbility(
-                "{this} enters the battlefield tapped and doesn't untap during your untap step.");
+                "{this} enters tapped and doesn't untap during your untap step.");
         abilityTapped.addEffect(new DontUntapInControllersUntapStepSourceEffect());
         this.addAbility(abilityTapped);
 

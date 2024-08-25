@@ -66,7 +66,7 @@ class OverwhelmingForcesEffect extends OneShotEffect {
                 }
             }
             if (destroyedCreature > 0) {
-                game.getState().processAction(game);
+                game.processAction();
                 new DrawCardSourceControllerEffect(destroyedCreature).apply(game, source);
             }
             return true;

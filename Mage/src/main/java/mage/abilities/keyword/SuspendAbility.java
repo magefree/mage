@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
@@ -27,6 +28,7 @@ import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -216,7 +218,8 @@ public class SuspendAbility extends SpecialAction {
         if (card == null) {
             return ActivationStatus.getFalse();
         }
-        if (!card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game)) {
+        Set<MageIdentifier> allowedToBeCastNow = card.getSpellAbility().spellCanBeActivatedNow(playerId, game);
+        if (!allowedToBeCastNow.contains(MageIdentifier.Default) && !allowedToBeCastNow.contains(card.getSpellAbility().getIdentifier())) {
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);
@@ -269,7 +272,7 @@ class SuspendExileEffect extends OneShotEffect {
         if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of "
                 + controller.getName(), source, game, Zone.HAND, true)) {
             if (suspend == Integer.MAX_VALUE) {
-                suspend = source.getManaCostsToPay().getX();
+                suspend = CardUtil.getSourceCostsTag(game, source, "X", 0);
             }
             card.addCounters(CounterType.TIME.createInstance(suspend), source.getControllerId(), source, game);
             game.informPlayers(controller.getLogName()

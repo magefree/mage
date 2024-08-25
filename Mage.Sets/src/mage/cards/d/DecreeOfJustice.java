@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -28,7 +28,7 @@ public final class DecreeOfJustice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{2}{W}{W}");
 
         // Create X 4/4 white Angel creature tokens with flying.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), GetXValue.instance));
 
         // Cycling {2}{W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}{W}")));

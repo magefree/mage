@@ -3,7 +3,7 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.ReinforceAbility;
@@ -34,7 +34,7 @@ public final class WrensRunHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // Reinforce X—{X}{G}{G}
-        this.addAbility(new ReinforceAbility(ManacostVariableValue.REGULAR, new ManaCostsImpl<>("{X}{G}{G}")));
+        this.addAbility(new ReinforceAbility(GetXValue.instance, new ManaCostsImpl<>("{X}{G}{G}")));
     }
 
     private WrensRunHydra(final WrensRunHydra card) {

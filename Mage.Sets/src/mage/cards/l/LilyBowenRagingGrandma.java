@@ -1,7 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -12,15 +10,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoubleCountersSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.*;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author Cguy7777
@@ -51,8 +51,7 @@ public final class LilyBowenRagingGrandma extends CardImpl {
                         CounterType.P1P1.createInstance(2)),
                 "with two +1/+1 counters on it"));
 
-        // At the beginning of your upkeep, double the number of +1/+1 counters on Lily Bowen if its power is 16 or less.
-        // Otherwise, remove all but one +1/+1 counter from it, then you gain 1 life for each +1/+1 counter removed this way.
+        // At the beginning of your upkeep, double the number of +1/+1 counters on Lily Bowen if its power is 16 or less. Otherwise, remove all but one +1/+1 counter from it, then you gain 1 life for each +1/+1 counter removed this way.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ConditionalOneShotEffect(
                         new DoubleCountersSourceEffect(CounterType.P1P1),
@@ -93,14 +92,18 @@ class LilyBowenRagingGrandmaEffect extends OneShotEffect {
         }
 
         // Remove all but one +1/+1 counter from it, then you gain 1 life for each +1/+1 counter removed this way.
-        int count = permanent.getCounters(game).getCount(CounterType.P1P1);
-        if (count <= 1) {
+        int countBefore = permanent.getCounters(game).getCount(CounterType.P1P1);
+        if (countBefore <= 1) {
             return true;
         }
 
-        int countToRemove = count - 1;
+        int countToRemove = countBefore - 1;
         permanent.removeCounters(CounterType.P1P1.createInstance(countToRemove), source, game);
-        new GainLifeEffect(countToRemove).apply(game, source);
+        int countAfter = permanent.getCounters(game).getCount(CounterType.P1P1);
+        int countersRemoved = Math.max(0, countBefore - countAfter);
+        if (countersRemoved > 0) {
+            new GainLifeEffect(countersRemoved).apply(game, source);
+        }
         return true;
     }
 

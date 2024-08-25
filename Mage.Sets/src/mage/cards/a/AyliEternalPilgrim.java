@@ -1,10 +1,9 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.MoreThanStartingLifeTotalCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -21,13 +20,11 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class AyliEternalPilgrim extends CardImpl {
@@ -54,7 +51,7 @@ public final class AyliEternalPilgrim extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ExileTargetEffect(),
                 new ManaCostsImpl<>("{1}{W}{B}"),
-                new AyliEternalPilgrimCondition()
+                MoreThanStartingLifeTotalCondition.TEN
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addTarget(new TargetNonlandPermanent().withChooseHint("to exile"));
@@ -68,22 +65,5 @@ public final class AyliEternalPilgrim extends CardImpl {
     @Override
     public AyliEternalPilgrim copy() {
         return new AyliEternalPilgrim(this);
-    }
-}
-
-class AyliEternalPilgrimCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if(player != null) {
-            return player.getLife() >= game.getStartingLife() + 10;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "you have at least 10 life more than your starting life total";
     }
 }

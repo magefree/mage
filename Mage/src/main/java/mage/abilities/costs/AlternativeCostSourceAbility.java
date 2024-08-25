@@ -7,7 +7,6 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
 import mage.constants.AbilityType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -115,69 +114,88 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     }
 
     @Override
-    public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        if (ability != null && AbilityType.SPELL == ability.getAbilityType()) {
-            if (filter != null) {
-                Card card = game.getCard(ability.getSourceId());
-                if (!filter.match(card, ability.getControllerId(), ability, game)) {
-                    return false;
-                }
-            }
-            Player player = game.getPlayer(ability.getControllerId());
-            if (player != null) {
-                Costs<AlternativeCost> alternativeCostsToCheck;
-                if (dynamicCost != null) {
-                    alternativeCostsToCheck = new CostsImpl<>();
-                    alternativeCostsToCheck.add(convertToAlternativeCost(dynamicCost.getCost(ability, game)));
-                } else {
-                    alternativeCostsToCheck = this.alternateCosts;
-                }
-
-                String costChoiceText;
-                if (dynamicCost != null) {
-                    costChoiceText = dynamicCost.getText(ability, game);
-                } else {
-                    costChoiceText = alternativeCostsToCheck.isEmpty() ? "Cast without paying its mana cost?" : "Pay alternative costs? (" + alternativeCostsToCheck.getText() + ')';
-                }
-                if (alternativeCostsToCheck.canPay(ability, ability, ability.getControllerId(), game)
-                        && player.chooseUse(Outcome.Benefit, costChoiceText, this, game)) {
-                    if (ability instanceof SpellAbility) {
-                        ability.getManaCostsToPay().removeIf(VariableCost.class::isInstance);
-                        CardUtil.reduceCost((SpellAbility) ability, ability.getManaCosts());
-
-                    } else {
-                        ability.clearManaCostsToPay();
-                    }
-                    if (!onlyMana) {
-                        ability.clearCosts();
-                    }
-                    for (AlternativeCost alternateCost : alternativeCostsToCheck) {
-                        alternateCost.activate();
-                        for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext(); ) {
-                            Cost costDetailed = (Cost) it.next();
-                            if (costDetailed instanceof ManaCost) {
-                                ability.addManaCostsToPay((ManaCost) costDetailed.copy());
-                            } else if (costDetailed != null) {
-                                ability.addCost(costDetailed.copy());
-                            }
-                        }
-                    }
-
-                    // Those cost have been paid, we want to store them.
-                    if (dynamicCost != null) {
-                        rememberDynamicCost(game, ability, alternativeCostsToCheck);
-                    }
-
-                    // save activated status
-                    doActivate(game, ability);
-                } else {
-                    return false;
-                }
-            } else {
+    public boolean canActivateAlternativeCostsNow(Ability ability, Game game) {
+        if (ability == null || !AbilityType.SPELL.equals(ability.getAbilityType())) {
+            return isActivated(ability, game);
+        }
+        if (filter != null) {
+            Card card = game.getCard(ability.getSourceId());
+            if (!filter.match(card, ability.getControllerId(), ability, game)) {
                 return false;
             }
         }
-        return isActivated(ability, game);
+        Player player = game.getPlayer(ability.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        Costs<AlternativeCost> alternativeCostsToCheck;
+        if (dynamicCost != null) {
+            alternativeCostsToCheck = new CostsImpl<>();
+            alternativeCostsToCheck.add(convertToAlternativeCost(dynamicCost.getCost(ability, game)));
+        } else {
+            alternativeCostsToCheck = this.alternateCosts;
+        }
+
+        return alternativeCostsToCheck.canPay(ability, ability, ability.getControllerId(), game);
+    }
+
+    @Override
+    public String getAlternativeCostText(Ability ability, Game game) {
+        if (dynamicCost != null) {
+            return "Cast with alternative cost: " + dynamicCost.getText(ability, game) + CardUtil.getSourceLogName(game, this);
+        } else {
+            Costs<AlternativeCost> alternativeCostsToCheck;
+            if (dynamicCost != null) {
+                alternativeCostsToCheck = new CostsImpl<>();
+                alternativeCostsToCheck.add(convertToAlternativeCost(dynamicCost.getCost(ability, game)));
+            } else {
+                alternativeCostsToCheck = this.alternateCosts;
+            }
+            return alternativeCostsToCheck.isEmpty()
+                    ? "Cast without paying its mana cost" + CardUtil.getSourceLogName(game, this)
+                    : "Cast with alternative cost: " + alternativeCostsToCheck.getText() + CardUtil.getSourceLogName(game, this);
+        }
+    }
+
+    @Override
+    public boolean activateAlternativeCosts(Ability ability, Game game) {
+        Costs<AlternativeCost> alternativeCostsToCheck;
+        if (dynamicCost != null) {
+            alternativeCostsToCheck = new CostsImpl<>();
+            alternativeCostsToCheck.add(convertToAlternativeCost(dynamicCost.getCost(ability, game)));
+        } else {
+            alternativeCostsToCheck = this.alternateCosts;
+        }
+        if (ability instanceof SpellAbility) {
+            ability.getManaCostsToPay().removeIf(VariableCost.class::isInstance);
+            CardUtil.reduceCost((SpellAbility) ability, ability.getManaCosts());
+
+        } else {
+            ability.clearManaCostsToPay();
+        }
+        if (!onlyMana) {
+            ability.clearCosts();
+        }
+        for (AlternativeCost alternateCost : alternativeCostsToCheck) {
+            alternateCost.activate();
+            for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext(); ) {
+                Cost costDetailed = (Cost) it.next();
+                if (costDetailed instanceof ManaCost) {
+                    ability.addManaCostsToPay((ManaCost) costDetailed.copy());
+                } else if (costDetailed != null) {
+                    ability.addCost(costDetailed.copy());
+                }
+            }
+        }
+
+        // Those cost have been paid, we want to store them.
+        if (dynamicCost != null) {
+            rememberDynamicCost(game, ability, alternativeCostsToCheck);
+        }
+
+        // save activated status
+        doActivate(game, ability);
+        return true;
     }
 
     protected void doActivate(Game game, Ability ability) {
@@ -211,12 +229,13 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     /**
      * Search activated status of alternative cost.
      * <p>
-     * If you need it on resolve then use current ZCC (on stack)
-     * If you need it on battlefield then use previous ZCC (-1)
+     * If you need it on resolve then use current ZCC (on stack) If you need it
+     * on battlefield then use previous ZCC (-1)
      *
      * @param game
      * @param source
-     * @param alternativeCostOriginalId you must save originalId on card's creation
+     * @param alternativeCostOriginalId you must save originalId on card's
+     *                                  creation
      * @param searchPrevZCC             true on battlefield, false on stack
      * @return
      */
@@ -232,21 +251,20 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     @Override
     public boolean isActivated(Ability source, Game game) {
-        Costs<AlternativeCost> alternativeCostsToCheck;
-        if (dynamicCost != null) {
-            alternativeCostsToCheck = (Costs<AlternativeCost>) game.getState().getValue(getDynamicCostActivatedKey(source));
-            if (alternativeCostsToCheck == null) {
-                return false;
-            }
-        } else {
-            alternativeCostsToCheck = this.alternateCosts;
+        Costs<AlternativeCost> alternativeCostsToCheck = dynamicCost != null
+                ? (Costs<AlternativeCost>) game.getState().getValue(getDynamicCostActivatedKey(source))
+                : this.alternateCosts;
+
+        if (alternativeCostsToCheck == null) {
+            return false;
         }
+
         for (AlternativeCost cost : alternativeCostsToCheck) {
             if (cost.isActivated(game)) {
                 return true;
             }
         }
-        return false;
+        return onlyMana && alternativeCostsToCheck.isEmpty();
     }
 
     @Override

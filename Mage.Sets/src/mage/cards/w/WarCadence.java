@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,7 +44,7 @@ public final class WarCadence extends CardImpl {
 
 class WarCadenceReplacementEffect extends ReplacementEffectImpl {
 
-    DynamicValue xCosts = ManacostVariableValue.REGULAR;
+    DynamicValue xCosts = GetXValue.instance;
 
     WarCadenceReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);

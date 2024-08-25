@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -10,16 +9,18 @@ import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class SuqAtaAssassin extends CardImpl {
 
     public SuqAtaAssassin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(1);
@@ -30,7 +31,7 @@ public final class SuqAtaAssassin extends CardImpl {
         // Whenever Suq'Ata Assassin attacks and isn't blocked, defending player gets a poison counter.
         Effect effect = new AddPoisonCounterTargetEffect(1);
         effect.setText("defending player gets a poison counter");
-        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(effect, false, true));
+        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(effect, false, SetTargetPointer.PLAYER));
     }
 
     private SuqAtaAssassin(final SuqAtaAssassin card) {

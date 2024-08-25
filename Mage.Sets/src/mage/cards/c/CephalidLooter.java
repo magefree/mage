@@ -20,7 +20,7 @@ public final class CephalidLooter extends CardImpl {
 
     public CephalidLooter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.ROGUE);
 
         this.power = new MageInt(2);

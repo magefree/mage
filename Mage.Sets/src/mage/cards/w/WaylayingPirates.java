@@ -39,7 +39,7 @@ public final class WaylayingPirates extends CardImpl {
         // When Waylaying Pirates enters the battlefield, if you control an artifact, tap target artifact or creature an opponent controls and put a stun counter on it.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TapTargetEffect()),
-                condition, "When {this} enters the battlefield, if you control an artifact, " +
+                condition, "When {this} enters, if you control an artifact, " +
                 "tap target artifact or creature an opponent controls and put a stun counter on it."
         );
         ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance()));

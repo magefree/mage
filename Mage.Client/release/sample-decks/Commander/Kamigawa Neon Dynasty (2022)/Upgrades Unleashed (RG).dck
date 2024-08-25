@@ -1,0 +1,77 @@
+1 [M13:159] Acidic Slime
+1 [MKC:145] Agitator Ant
+1 [NEC:18] Akki Battle Squad
+1 [ELD:331] Arcane Signet
+1 [NEC:24] Ascendant Acolyte
+1 [ROE:177] Bear Umbra
+1 [NPH:103] Beast Within
+1 [DOM:211] Blackblade Reforged
+1 [MBS:100] Bonehoard
+1 [WWK:74] Chain Reaction
+1 [AVR:171] Champion of Lambholt
+1 [OTC:160] Chaos Warp
+1 [BFZ:235] Cinder Glade
+1 [NEC:19] Collision of Realms
+1 [ELD:333] Command Tower
+1 [NEC:25] Concord with the Kami
+1 [ODY:287] Decimate
+1 [SHM:90] Elemental Mastery
+1 [CON:142] Exotic Orchard
+1 [IKO:152] Fertilid
+1 [M14:210] Fireshrieker
+14 [OTJ:276] Forest
+1 [SCG:120] Forgotten Ancient
+1 [SOI:276] Game Trail
+1 [M15:176] Genesis Hydra
+1 [CON:64] Goblin Razerunners
+1 [ELD:192] Grumgully, the Generous
+1 [CLU:238] Gruul Turf
+1 [M12:180] Hunter's Insight
+1 [NEO:223] Invigorating Hot Spring
+1 [NEC:3] Kaima, the Fractured Calm
+1 [NEC:20] Kami of Celebration
+1 [CHK:225] Kodama's Reach
+1 [NEC:21] Komainu Battle Armor
+1 [NEC:26] Kosei, Penitent Warlord
+1 [WAR:137] Krenko, Tin Street Kingpin
+1 [CMM:304] Loyal Guardian
+1 [ARB:57] Mage Slayer
+2 [ODY:321] Mossfire Valley
+12 [BLB:274] Mountain
+1 [NEC:27] One with the Kami
+1 [M3C:361] Opal Palace
+1 [ZEN:221] Oran-Rief, the Vastwood
+1 [THS:170] Ordeal of Nylea
+1 [NEO:203] Orochi Merge-Keeper
+1 [THB:147] Ox of Agonas
+1 [NEC:124] Primeval Protector
+1 [WWK:141] Raging Ravine
+1 [M12:190] Rampant Growth
+1 [NEC:28] Rampant Rejuvenator
+1 [RNA:201] Rhythm of the Wild
+1 [AER:123] Rishkar's Expertise
+1 [AER:122] Rishkar, Peema Renegade
+1 [CHK:239] Sakura-Tribe Elder
+1 [FRF:138] Shamanic Revelation
+1 [NEC:109] Shifting Shadow
+1 [NEC:29] Silkguard
+1 [NEC:22] Smoke Spirits' Aid
+1 [ROE:207] Snake Umbra
+1 [SUM:274] Sol Ring
+1 [CON:92] Soul's Majesty
+1 [ALA:150] Spearbreaker Behemoth
+1 [ONS:238] Starstorm
+1 [M12:219] Swiftfoot Boots
+1 [M11:216] Sword of Vengeance
+1 [NEC:30] Tanuki Transplanter
+1 [MOR:109] Taurean Mauler
+1 [NEO:262] Towashi Guide-Bot
+1 [GPT:136] Ulasht, the Hate Seed
+1 [NEC:23] Unquenchable Fury
+1 [ZNR:217] Vastwood Surge
+1 [NEO:263] Walking Skyscraper
+1 [NEC:134] Whiptongue Hydra
+1 [THB:347] Temple of Abandon
+SB: 1 [NEC:1] Chishiro, the Shattered Blade
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,61)|([NEC:21],[NEC:30],[NEO:262],[NEO:263])([ELD:331],[DOM:211],[MBS:100],[M14:210],[ARB:57],[SUM:274],[M12:219],[M11:216])([M13:159],[MKC:145],[NEC:18],[NEC:24],[AVR:171],[IKO:152],[SCG:120],[M15:176],[CON:64],[ELD:192],[NEC:3],[NEC:20],[NEC:26],[WAR:137],[CMM:304],[NEO:203],[THB:147],[NEC:124],[NEC:28],[AER:122],[CHK:239],[ALA:150],[MOR:109],[GPT:136],[NEC:134])([ROE:177],[NEC:25],[SHM:90],[NEO:223],[NEC:27],[THS:170],[RNA:201],[NEC:109],[ROE:207],[NEC:23])([NPH:103],[OTC:160],[M12:180],[NEC:29],[ONS:238])([BFZ:235],[ELD:333],[CON:142],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[SOI:276],[CLU:238],[ODY:321],[ODY:321],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[M3C:361],[ZEN:221],[WWK:141],[THB:347])([WWK:74],[NEC:19],[ODY:287],[CHK:225],[M12:190],[AER:123],[FRF:138],[NEC:22],[CON:92],[ZNR:217])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([NEC:1])

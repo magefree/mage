@@ -16,6 +16,7 @@ import mage.abilities.mana.ManaAbility;
 import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -406,6 +407,7 @@ public class HumanPlayer extends PlayerImpl {
 
         MessageToClient messageToClient = new MessageToClient(message, secondMessage);
         Map<String, Serializable> options = new HashMap<>(2);
+        String autoAnswerMessage = message; // Removes self-referential text for the purposes of auto-answering
         if (trueText != null) {
             options.put("UI.left.btn.text", trueText);
         }
@@ -414,18 +416,24 @@ public class HumanPlayer extends PlayerImpl {
         }
         if (source != null) {
             //options.put(Constants.Option.ORIGINAL_ID, "")
+            String sourceName = getRelatedObjectName(source, game);
+            if (sourceName != null) {
+                autoAnswerMessage = autoAnswerMessage.replace(sourceName, "{this}");
+            }
         }
 
+        options.put(Constants.Option.AUTO_ANSWER_MESSAGE, autoAnswerMessage);
 
         // auto-answer
         Boolean answer = null;
         if (source != null) {
             // ability + text
-            answer = requestAutoAnswerId.get(source.getOriginalId() + "#" + message);
+            answer = requestAutoAnswerId
+                    .get(source.getOriginalId() + "#" + autoAnswerMessage);
         }
         if (answer == null) {
             // text
-            answer = requestAutoAnswerText.get(message);
+            answer = requestAutoAnswerText.get(autoAnswerMessage);
         }
         if (answer != null) {
             return answer;
@@ -479,12 +487,12 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
         if (gameInCheckPlayableState(game, true)) { // ignore warning logs until double call for TAPPED_FOR_MANA will be fix
             return 0;
         }
 
-        if (rEffects.size() <= 1) {
+        if (effectsMap.size() <= 1) {
             return 0;
         }
 
@@ -499,8 +507,8 @@ public class HumanPlayer extends PlayerImpl {
             for (String autoText : autoSelectReplacementEffects) {
                 int count = 0;
                 // find effect with same saved text
-                for (String effectKey : rEffects.keySet()) {
-                    String currentText = prepareReplacementText(rEffects.get(effectKey), useSameSettings);
+                for (String effectKey : effectsMap.keySet()) {
+                    String currentText = prepareReplacementText(effectsMap.get(effectKey), useSameSettings);
                     if (currentText.equals(autoText)) {
                         return count;
                     }
@@ -511,7 +519,17 @@ public class HumanPlayer extends PlayerImpl {
 
         replacementEffectChoice.clearChoice();
         replacementEffectChoice.getChoices().clear();
-        replacementEffectChoice.setKeyChoices(rEffects);
+        replacementEffectChoice.getKeyChoices().clear();
+        effectsMap.forEach((key, value) -> {
+            MageObject object = objectsMap.getOrDefault(key, null);
+            replacementEffectChoice.withItem(
+                    key,
+                    value,
+                    null,
+                    object != null ? ChoiceHintType.GAME_OBJECT : null,
+                    object != null ? object.getId().toString() : null
+            );
+        });
 
         // if same choices then select first
         int differentChoices = 0;
@@ -529,6 +547,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
+                replacementEffectChoice.onChooseStart(game, playerId);
                 game.fireChooseChoiceEvent(playerId, replacementEffectChoice);
             }
             waitForResponse(game);
@@ -551,8 +570,9 @@ public class HumanPlayer extends PlayerImpl {
 
                 if (replacementEffectChoice.getChoiceKey() != null) {
                     int index = 0;
-                    for (String key : rEffects.keySet()) {
+                    for (String key : effectsMap.keySet()) {
                         if (replacementEffectChoice.getChoiceKey().equals(key)) {
+                            replacementEffectChoice.onChooseEnd(game, playerId, replacementEffectChoice.getChoiceKey());
                             return index;
                         }
                         index++;
@@ -606,6 +626,7 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
+                choice.onChooseStart(game, playerId);
                 game.fireChooseChoiceEvent(playerId, choice);
             }
             waitForResponse(game);
@@ -617,9 +638,11 @@ public class HumanPlayer extends PlayerImpl {
                 } else {
                     choice.setChoice(val);
                 }
+                choice.onChooseEnd(game, playerId, val);
                 return true;
             } else if (!choice.isRequired()) {
                 // cancel
+                choice.onChooseEnd(game, playerId, null);
                 return false;
             }
         }
@@ -668,7 +691,7 @@ public class HumanPlayer extends PlayerImpl {
 
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), possibleTargetIds, required, getOptions(target, options));
+                    game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(game), getRelatedObjectName(source, game)), possibleTargetIds, required, getOptions(target, options));
                 }
                 waitForResponse(game);
                 responseId = getFixedResponseUUID(game);
@@ -690,7 +713,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (target instanceof TargetPermanent) {
                     if (((TargetPermanent) target).canTarget(abilityControllerId, responseId, source, game, false)) {
                         target.add(responseId, game);
-                        if (target.doneChoosing()) {
+                        if (target.doneChoosing(game)) {
                             return true;
                         }
                     }
@@ -702,7 +725,7 @@ public class HumanPlayer extends PlayerImpl {
                                 target.remove(responseId);
                             } else {
                                 target.addTarget(responseId, (Ability) object, game);
-                                if (target.doneChoosing()) {
+                                if (target.doneChoosing(game)) {
                                     return true;
                                 }
                             }
@@ -712,7 +735,7 @@ public class HumanPlayer extends PlayerImpl {
                             target.remove(responseId);
                         } else {
                             target.addTarget(responseId, null, game);
-                            if (target.doneChoosing()) {
+                            if (target.doneChoosing(game)) {
                                 return true;
                             }
                         }
@@ -769,7 +792,7 @@ public class HumanPlayer extends PlayerImpl {
 
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)),
+                    game.fireSelectTargetEvent(getId(), new MessageToClient(target.getMessage(game), getRelatedObjectName(source, game)),
                             possibleTargetIds, required, getOptions(target, options));
                 }
                 waitForResponse(game);
@@ -786,7 +809,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (possibleTargetIds.contains(responseId)) {
                     if (target.canTarget(abilityControllerId, responseId, source, game)) {
                         target.addTarget(responseId, source, game);
-                        if (target.doneChoosing()) {
+                        if (target.doneChoosing(game)) {
                             return true;
                         }
                     }
@@ -867,7 +890,7 @@ public class HumanPlayer extends PlayerImpl {
 
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()), cards, required, options);
+                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(game)), cards, required, options);
                 }
                 waitForResponse(game);
 
@@ -880,7 +903,7 @@ public class HumanPlayer extends PlayerImpl {
                 } else {
                     if (target.canTarget(abilityControllerId, responseId, source, cards, game)) {
                         target.add(responseId, game);
-                        if (target.doneChoosing()) {
+                        if (target.doneChoosing(game)) {
                             return true;
                         }
                     }
@@ -950,7 +973,7 @@ public class HumanPlayer extends PlayerImpl {
 
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
-                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(), getRelatedObjectName(source, game)), cards, required, options);
+                    game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage(game), getRelatedObjectName(source, game)), cards, required, options);
                 }
                 waitForResponse(game);
 
@@ -962,7 +985,7 @@ public class HumanPlayer extends PlayerImpl {
                     target.remove(responseId);
                 } else if (target.canTarget(abilityControllerId, responseId, source, cards, game)) {
                     target.addTarget(responseId, source, game);
-                    if (target.doneChoosing()) {
+                    if (target.doneChoosing(game)) {
                         return true;
                     }
                 }
@@ -1045,7 +1068,7 @@ public class HumanPlayer extends PlayerImpl {
                 prepareForResponse(game);
                 if (!isExecutingMacro()) {
                     String multiType = multiAmountType == MultiAmountType.DAMAGE ? " to divide %d damage" : " to distribute %d counters";
-                    String message = target.getMessage() + String.format(multiType, amountTotal);
+                    String message = target.getMessage(game) + String.format(multiType, amountTotal);
                     game.fireSelectTargetEvent(playerId, new MessageToClient(message, getRelatedObjectName(source, game)), possibleTargetIds, required, options);
                 }
                 waitForResponse(game);
@@ -1158,7 +1181,7 @@ public class HumanPlayer extends PlayerImpl {
                     return false;
                 }
                 if (controllingPlayer.getUserData().isPassPriorityActivation()
-                        && getJustActivatedType() == AbilityType.ACTIVATED) {
+                        && getJustActivatedType().isNonManaActivatedAbility()) {
                     setJustActivatedType(null);
                     pass(game);
                     return false;
@@ -1645,24 +1668,22 @@ public class HumanPlayer extends PlayerImpl {
      *
      * @param min
      * @param max
-     * @param multiplier - X multiplier after replace events
      * @param message
      * @param ability
      * @param game
      * @return
      */
     @Override
-    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         if (gameInCheckPlayableState(game)) {
             return 0;
         }
 
         int xValue = 0;
-        String extraMessage = (multiplier == 1 ? "" : ", X will be increased by " + multiplier + " times");
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireGetAmountEvent(playerId, message + extraMessage + CardUtil.getSourceLogName(game, ability), min, max);
+                game.fireGetAmountEvent(playerId, message + CardUtil.getSourceLogName(game, ability), min, max);
             }
             waitForResponse(game);
 
@@ -1895,12 +1916,19 @@ public class HumanPlayer extends PlayerImpl {
         // check if enough attackers are declared
         // check if players have to be attacked
         Set<UUID> playersToAttackIfAble = new HashSet<>();
+        
+        // or if active player must attack with anything
+        boolean mustAttack = false;
+
         for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(null, true, game).entrySet()) {
             RequirementEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
                 UUID playerToAttack = effect.playerMustBeAttackedIfAble(ability, game);
                 if (playerToAttack != null) {
                     playersToAttackIfAble.add(playerToAttack);
+                }
+                if (effect.mustAttack(game)){
+                    mustAttack = true;
                 }
             }
         }
@@ -1935,6 +1963,16 @@ public class HumanPlayer extends PlayerImpl {
                         game.informPlayer(this, "You are forced to attack " + forcedToAttack.getName() + " or a controlled planeswalker e.g. with " + attacker.getIdName() + ".");
                         return false;
                     }
+                }
+            }
+        }
+
+        if (mustAttack && game.getCombat().getAttackers().isEmpty()){
+            // no attackers, but required to attack with something -- check if anything can attack
+            for (Permanent attacker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getId(), game)) {
+                if (attacker.canAttackInPrinciple(null, game)){
+                    game.informPlayer(this, "You are forced to attack with at least one creature, e.g. " + attacker.getIdName() + ".");
+                    return false;
                 }
             }
         }
@@ -1983,7 +2021,7 @@ public class HumanPlayer extends PlayerImpl {
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null) {
                     sb.append(" (").append(attacker.getName()).append(')');
-                    target.setTargetName(sb.toString());
+                    target.withTargetName(sb.toString());
                 }
             }
             if (chooseTarget(Outcome.Damage, target, null, game)) {
@@ -2175,7 +2213,7 @@ public class HumanPlayer extends PlayerImpl {
             Target target = new TargetAnyTarget();
             target.withNotTarget(true);
             if (singleTargetName != null) {
-                target.setTargetName(singleTargetName);
+                target.withTargetName(singleTargetName);
             }
             this.choose(Outcome.Damage, target, source, game);
             if (targets.isEmpty() || targets.contains(target.getFirstTarget())) {
@@ -2358,7 +2396,7 @@ public class HumanPlayer extends PlayerImpl {
         }
         if (userData.isUseFirstManaAbility() && object instanceof Permanent && object.isLand(game)) {
             ActivatedAbility ability = abilities.values().iterator().next();
-            if (ability instanceof ActivatedManaAbilityImpl) {
+            if (ability.isActivatedAbility() && ability.isManaAbility()) {
                 activateAbility(ability, game);
                 return;
             }
@@ -2387,42 +2425,35 @@ public class HumanPlayer extends PlayerImpl {
 
     /**
      * Hide ability picker dialog on one available ability to activate
-     *
-     * @param ability
-     * @param game
-     * @return
      */
     private boolean suppressAbilityPicker(ActivatedAbility ability, Game game) {
-        if (getControllingPlayersUserData(game).isShowAbilityPickerForced()) {
-            // TODO: is it bugged on mana payment + under control?
-            //  (if player under control then priority player must use own settings, not controlling)
-            // user activated an ability picker in preferences
+        // TODO: is it bugged on mana payment + under control?
+        //  (if player under control then priority player must use own settings, not controlling)
+        // user activated an ability picker in preferences
 
-            // force to show ability picker for double faces cards in hand/commander/exile and other zones
-            Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
-            if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
-                if (mainCard instanceof SplitCard
-                        || mainCard instanceof AdventureCard
-                        || mainCard instanceof ModalDoubleFacedCard) {
-                    return false;
-                }
+        // force to show ability picker for double faces cards in hand/commander/exile and other zones
+        Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
+        if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
+            if (mainCard instanceof SplitCard
+                    || mainCard instanceof AdventureCard
+                    || mainCard instanceof ModalDoubleFacedCard) {
+                return false;
             }
-
-            // hide on land play
-            if (ability instanceof PlayLandAbility) {
-                return true;
-            }
-
-            // hide on alternative cost activated
-            if (!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(MageIdentifier.Default)
-                    && ability.getManaCostsToPay().manaValue() > 0) {
-                return true;
-            }
-
-            // hide on mana activate and show all other
-            return ability instanceof ActivatedManaAbilityImpl;
         }
-        return true;
+
+        // hide on land play
+        if (ability instanceof PlayLandAbility) {
+            return true;
+        }
+
+        // hide on alternative cost activated
+        if (!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), Collections.emptySet()).contains(MageIdentifier.Default)
+                && ability.getManaCostsToPay().manaValue() > 0) {
+            return true;
+        }
+
+        // hide on mana activate and show all other
+        return ability.isManaActivatedAbility();
     }
 
     @Override
@@ -2562,20 +2593,38 @@ public class HumanPlayer extends PlayerImpl {
                     if (!modeText.isEmpty()) {
                         modeText = Character.toUpperCase(modeText.charAt(0)) + modeText.substring(1);
                     }
-                    modeMap.put(mode.getId(), modeIndex + ". " + modeText);
+                    StringBuilder sb = new StringBuilder();
+                    if (mode.getPawPrintValue() > 0){
+                        for (int i = 0; i < mode.getPawPrintValue(); ++i){
+                            sb.append("{P}");
+                        }
+                        sb.append(": ");
+                    } else {
+                        sb.append(modeIndex).append(". ");
+                    }
+                    modeMap.put(mode.getId(), sb.append(modeText).toString());
                 }
             }
 
             // done button for "for up" choices only
-            boolean canEndChoice = modes.getSelectedModes().size() >= modes.getMinModes() || modes.isMayChooseNone();
+            boolean canEndChoice = (modes.getSelectedModes().size() >= modes.getMinModes() && modes.getMaxPawPrints() == 0) ||
+                    (modes.getSelectedPawPrints() >= modes.getMaxPawPrints() && modes.getMaxPawPrints() > 0) ||
+                    modes.isMayChooseNone();
             if (canEndChoice) {
                 modeMap.put(Modes.CHOOSE_OPTION_DONE_ID, "Done");
             }
             modeMap.put(Modes.CHOOSE_OPTION_CANCEL_ID, "Cancel");
 
             // prepare dialog
-            String message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
-                    + ", min " + modes.getMinModes() + ")";
+            String message;
+            if (modes.getMaxPawPrints() == 0){
+                message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
+                        + ", min " + modes.getMinModes() + ")";
+            } else {
+                message = "Choose mode (selected " + modes.getSelectedPawPrints() + " of " + modes.getMaxPawPrints()
+                        + " {P})";
+            }
+
             if (obj != null) {
                 message = message + "<br>" + obj.getLogName();
             }
@@ -2613,7 +2662,7 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // triggered abilities can't be skipped by cancel or wrong answer
-            if (source.getAbilityType() != AbilityType.TRIGGERED) {
+            if (!source.isTriggeredAbility()) {
                 done = true;
             }
         }
@@ -2719,12 +2768,17 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public void signalPlayerConcede() {
+    public void signalPlayerConcede(boolean stopCurrentChooseDialog) {
         // waitResponseOpen(); // concede is async event, will be processed on first priority
+
+        // may be executed in CALL, HEALTH, GAME and other threads
+        // so make sure another player can't break/stop currently choosing player
+
         synchronized (response) {
-            response.setAsyncWantConcede();
-            response.notifyAll();
-            logger.debug("Set check concede for waiting player: " + getId());
+            response.setAsyncWantConcede(); // tell game that it must check conceding players
+            if (stopCurrentChooseDialog) {
+                response.notifyAll(); // will force to stop a current waiting dialog (so game can continue)
+            }
         }
     }
 
@@ -2781,7 +2835,9 @@ public class HumanPlayer extends PlayerImpl {
                 holdingPriority = false;
                 break;
             case TOGGLE_RECORD_MACRO:
-                if (true) return; // TODO: macro unsupported in current version
+                if (true) {
+                    return; // TODO: macro unsupported in current version
+                }
                 if (recordingMacro) {
                     logger.debug("Finished Recording Macro");
                     activatingMacro = true;

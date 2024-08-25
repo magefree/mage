@@ -1,10 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -21,6 +17,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -68,7 +68,7 @@ class DivineReckoningEffect extends OneShotEffect {
                 if (player != null) {
                     Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
                     if (target.canChoose(player.getId(), source, game)) {
-                        while (player.canRespond() && !target.isChosen() && target.canChoose(player.getId(), source, game)) {
+                        while (player.canRespond() && !target.isChosen(game) && target.canChoose(player.getId(), source, game)) {
                             player.chooseTarget(Outcome.Benefit, target, source, game);
                         }
                         Permanent permanent = game.getPermanent(target.getFirstTarget());

@@ -36,7 +36,7 @@ public final class NissaOfShadowedBoughs extends CardImpl {
         this.subtype.add(SubType.NISSA);
         this.setStartingLoyalty(4);
 
-        // Landfall — Whenever a land enters the battlefield under your control, put a loyalty counter on Nissa of Shadowed Boughs.
+        // Landfall — Whenever a land you control enters, put a loyalty counter on Nissa of Shadowed Boughs.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance())));
 
         // +1: Untap target land you control. You may have it become a 3/3 Elemental creature with haste and menace until end of turn. It's still a land.

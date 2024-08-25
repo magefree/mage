@@ -31,7 +31,7 @@ public final class ScholarOfStars extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),
-                "When {this} enters the battlefield, if you control an artifact, draw a card."
+                "When {this} enters, if you control an artifact, draw a card."
         ));
     }
 

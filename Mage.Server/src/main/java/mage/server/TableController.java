@@ -37,7 +37,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class TableController {
 
@@ -204,7 +204,7 @@ public class TableController {
             if (seat.getPlayer().isHuman()) {
                 seat.getPlayer().setUserData(user.getUserData());
                 user.addTable(player.getId(), table);
-                user.ccJoinedTable(table.getRoomId(), table.getId(), true);
+                user.ccJoinedTable(table.getRoomId(), table.getId(), table.getParentTableId(), true);
                 userPlayerMap.put(userId, player.getId());
             }
 
@@ -394,7 +394,7 @@ public class TableController {
             if (!table.isTournamentSubTable()) {
                 user.addTable(player.getId(), table);
             }
-            user.ccJoinedTable(table.getRoomId(), table.getId(), false);
+            user.ccJoinedTable(table.getRoomId(), table.getId(), table.getParentTableId(), false);
             userPlayerMap.put(userId, player.getId());
         }
 
@@ -503,15 +503,18 @@ public class TableController {
     }
 
     private void updateDeck(UUID userId, UUID playerId, Deck deck) {
+        // strict mode - players can't add any lands while sideboarding in single game
+        // ignore mode - players can add any lands while construction/sideboarding in draft tourney
+        boolean ignoreMainBasicLands = table.isTournament() || table.isTournamentSubTable();
         if (table.isTournament()) {
             if (tournament != null) {
                 // TODO: is it possible to update from direct call command in game?!
-                managerFactory.tournamentManager().updateDeck(tournament.getId(), playerId, deck);
+                managerFactory.tournamentManager().updateDeck(tournament.getId(), playerId, deck, ignoreMainBasicLands);
             } else {
                 logger.fatal("Tournament == null  table: " + table.getId() + " userId: " + userId);
             }
         } else if (table.getState() == TableState.SIDEBOARDING) {
-            match.updateDeck(playerId, deck);
+            match.updateDeck(playerId, deck, ignoreMainBasicLands);
         } else {
             // deck was meanwhile submitted so the autoupdate can be ignored
             // TODO: need research
@@ -521,7 +524,7 @@ public class TableController {
 
     public boolean watchTable(UUID userId) {
         if (table.isTournament()) {
-            managerFactory.userManager().getUser(userId).ifPresent(user -> user.ccShowTournament(table.getTournament().getId()));
+            managerFactory.userManager().getUser(userId).ifPresent(user -> user.ccShowTournament(table.getId(), table.getTournament().getId()));
             return true;
         } else {
             if (table.isTournamentSubTable() && !table.getTournament().getOptions().isWatchingAllowed()) {
@@ -538,7 +541,7 @@ public class TableController {
             if (!_user.isPresent()) {
                 return false;
             }
-            return _user.get().ccWatchGame(match.getGame().getId());
+            return _user.get().ccWatchGame(table.getId(), table.getParentTableId(), match.getGame().getId());
         }
     }
 
@@ -682,7 +685,7 @@ public class TableController {
                     Optional<User> _user = managerFactory.userManager().getUser(entry.getKey());
                     if (_user.isPresent()) {
                         User user = _user.get();
-                        user.ccGameStarted(match.getGame().getId(), entry.getValue());
+                        user.ccGameStarted(table.getId(), table.getParentTableId(), match.getGame().getId(), entry.getValue());
 
                         if (creator == null) {
                             creator = user.getName();
@@ -741,7 +744,7 @@ public class TableController {
                 for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
                     managerFactory.userManager().getUser(entry.getKey()).ifPresent(user -> {
                         logger.info(new StringBuilder("User ").append(user.getName()).append(" tournament started: ").append(tournament.getId()).append(" userId: ").append(user.getId()));
-                        user.ccTournamentStarted(tournament.getId(), entry.getValue());
+                        user.ccTournamentStarted(table.getId(), tournament.getId(), entry.getValue());
                     });
                 }
                 ServerMessagesUtil.instance.incTournamentsStarted();
@@ -754,13 +757,13 @@ public class TableController {
     }
 
     public void startDraft(Draft draft) {
-        table.initDraft();
+        table.initDraft(draft);
         managerFactory.draftManager().createDraftSession(draft, userPlayerMap, table.getId());
         for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
             Optional<User> user = managerFactory.userManager().getUser(entry.getKey());
             if (user.isPresent()) {
                 logger.info(new StringBuilder("User ").append(user.get().getName()).append(" draft started: ").append(draft.getId()).append(" userId: ").append(user.get().getId()));
-                user.get().ccDraftStarted(draft.getId(), entry.getValue());
+                user.get().ccDraftStarted(table.getId(), draft.getId(), entry.getValue());
             } else {
                 logger.fatal(new StringBuilder("Start draft user not found userId: ").append(entry.getKey()));
             }
@@ -773,7 +776,7 @@ public class TableController {
             if (entry.getValue().equals(playerId)) {
                 Optional<User> user = managerFactory.userManager().getUser(entry.getKey());
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                user.ifPresent(user1 -> user1.ccSideboard(deck, table.getId(), remaining, options.isLimited()));
+                user.ifPresent(user1 -> user1.ccSideboard(deck, table.getId(), table.getParentTableId(), remaining, options.isLimited()));
                 break;
             }
         }

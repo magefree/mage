@@ -23,7 +23,7 @@ public final class AngelicChorus extends CardImpl {
     public AngelicChorus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
 
-        // Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
+        // Whenever a creature you control enters, you gain life equal to its toughness.
         this.addAbility(new AngelicChorusTriggeredAbility());
     }
 
@@ -66,7 +66,7 @@ class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.";
+        return "Whenever a creature you control enters, you gain life equal to its toughness.";
     }
 
     @Override

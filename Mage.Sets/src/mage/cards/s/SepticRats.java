@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -9,23 +8,23 @@ import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class SepticRats extends CardImpl {
 
     public SepticRats(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.RAT);
 
@@ -67,10 +66,10 @@ class SepticRatsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId()) ) {
+        if (event.getSourceId().equals(this.getSourceId())) {
             Player target = game.getPlayer(event.getTargetId());
             if (target != null) {
-                if (target.getCounters().getCount(CounterType.POISON) > 0) {
+                if (target.getCountersCount(CounterType.POISON) > 0) {
                     return true;
                 }
             }

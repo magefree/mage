@@ -9,7 +9,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class GreenManaBattery extends CardImpl {
         // then add an additional {G} for each charge counter removed this way.
         ability = new DynamicManaAbility(
                 Mana.GreenMana(1),
-                new IntPlusDynamicValue(1, RemovedCountersForCostValue.instance),
+                new IntPlusDynamicValue(1, GetXValue.instance),
                 new TapSourceCost(),
                 "Add {G}, then add {G} for each charge counter removed this way",
                 true, new IntPlusDynamicValue(1, new CountersSourceCount(CounterType.CHARGE)));

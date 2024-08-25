@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class MeteorShower extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
 
         // Meteor Shower deals X plus 1 damage divided as you choose among any number of targets.
-        DynamicValue xValue = new IntPlusDynamicValue(1, ManacostVariableValue.REGULAR);
+        DynamicValue xValue = new IntPlusDynamicValue(1, GetXValue.instance);
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
     }

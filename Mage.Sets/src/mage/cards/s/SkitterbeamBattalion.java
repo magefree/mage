@@ -39,7 +39,7 @@ public final class SkitterbeamBattalion extends CardImpl {
         // When Skitterbeam Battalion enters the battlefield, if you cast it, create two tokens that are copies of it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenCopySourceEffect(2)),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
+                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
                 "if you cast it, create two tokens that are copies of it."
         ));
     }

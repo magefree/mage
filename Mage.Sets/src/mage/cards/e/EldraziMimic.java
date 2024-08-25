@@ -37,7 +37,7 @@ public final class EldraziMimic extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever another colorless creature enters the battlefield under your control, you may have the base power and toughness of Eldrazi Mimic
+        // Whenever another colorless creature you control enters, you may have the base power and toughness of Eldrazi Mimic
         // become that creature's power and toughness until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new EldraziMimicEffect(), filter,

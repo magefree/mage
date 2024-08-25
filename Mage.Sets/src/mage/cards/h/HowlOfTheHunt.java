@@ -45,7 +45,7 @@ public final class HowlOfTheHunt extends CardImpl {
         // When Howl of the Hunt enters the battlefield, if enchanted creature is a Wolf or Werewolf, untap that creature.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new UntapAttachedEffect()),
-                HowlOfTheHuntCondition.instance, "When {this} enters the battlefield, " +
+                HowlOfTheHuntCondition.instance, "When {this} enters, " +
                 "if enchanted creature is a Wolf or Werewolf, untap that creature."
         ));
 

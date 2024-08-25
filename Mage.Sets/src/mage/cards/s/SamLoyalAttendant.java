@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -78,7 +77,7 @@ class SamLoyalAttendantEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!(abilityToModify instanceof ActivatedAbility)) {
+        if (!(abilityToModify.isActivatedAbility())) {
             return false;
         }
         Permanent permanent = abilityToModify.getSourcePermanentIfItStillExists(game);

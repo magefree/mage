@@ -51,6 +51,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Clockwork Droid", 172, Rarity.UNCOMMON, mage.cards.c.ClockworkDroid.class));
         cards.add(new SetCardInfo("Command Tower", 263, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 240, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
+        cards.add(new SetCardInfo("Confession Dial", 173, Rarity.RARE, mage.cards.c.ConfessionDial.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Confession Dial", 456, Rarity.RARE, mage.cards.c.ConfessionDial.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Confession Dial", 778, Rarity.RARE, mage.cards.c.ConfessionDial.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Confession Dial", 1047, Rarity.RARE, mage.cards.c.ConfessionDial.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coward // Killer", 77, Rarity.RARE, mage.cards.c.CowardKiller.class));
         cards.add(new SetCardInfo("Crack in Time", 16, Rarity.RARE, mage.cards.c.CrackInTime.class));
         cards.add(new SetCardInfo("Creeping Tar Pit", 267, Rarity.RARE, mage.cards.c.CreepingTarPit.class));
@@ -96,6 +100,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Five Hundred Year Diary", 42, Rarity.RARE, mage.cards.f.FiveHundredYearDiary.class));
         cards.add(new SetCardInfo("Flaming Tyrannosaurus", 85, Rarity.RARE, mage.cards.f.FlamingTyrannosaurus.class));
         cards.add(new SetCardInfo("Flatline", 43, Rarity.RARE, mage.cards.f.Flatline.class));
+        cards.add(new SetCardInfo("Flesh Duplicate", 44, Rarity.RARE, mage.cards.f.FleshDuplicate.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 279, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Forest", 204, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortified Village", 280, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
@@ -136,6 +141,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Karvanista, Loyal Lupari", 106, Rarity.RARE, mage.cards.k.KarvanistaLoyalLupari.class));
         cards.add(new SetCardInfo("Kate Stewart", 139, Rarity.RARE, mage.cards.k.KateStewart.class));
         cards.add(new SetCardInfo("Laser Screwdriver", 178, Rarity.UNCOMMON, mage.cards.l.LaserScrewdriver.class));
+        cards.add(new SetCardInfo("Last Night Together", 140, Rarity.RARE, mage.cards.l.LastNightTogether.class));
         cards.add(new SetCardInfo("Lavaclaw Reaches", 289, Rarity.RARE, mage.cards.l.LavaclawReaches.class));
         cards.add(new SetCardInfo("Leela, Sevateem Warrior", 107, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leela, Sevateem Warrior", 398, Rarity.RARE, mage.cards.l.LeelaSevateemWarrior.class, NON_FULL_USE_VARIOUS));
@@ -151,6 +157,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 202, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myriad Landscape", 290, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Mystic Monastery", 291, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
+        cards.add(new SetCardInfo("Nanogene Conversion", 49, Rarity.RARE, mage.cards.n.NanogeneConversion.class));
         cards.add(new SetCardInfo("Ominous Cemetery", 189, Rarity.UNCOMMON, mage.cards.o.OminousCemetery.class));
         cards.add(new SetCardInfo("Out of Time", 209, Rarity.RARE, mage.cards.o.OutOfTime.class));
         cards.add(new SetCardInfo("Overgrown Farmland", 292, Rarity.RARE, mage.cards.o.OvergrownFarmland.class));
@@ -168,8 +175,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Regenerations Restored", 151, Rarity.RARE, mage.cards.r.RegenerationsRestored.class));
         cards.add(new SetCardInfo("Reliquary Tower", 296, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Renegade Silent", 53, Rarity.UNCOMMON, mage.cards.r.RenegadeSilent.class));
+        cards.add(new SetCardInfo("Return the Past", 92, Rarity.RARE, mage.cards.r.ReturnThePast.class));
         cards.add(new SetCardInfo("Return to Dust", 211, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Reverse the Polarity", 54, Rarity.RARE, mage.cards.r.ReverseThePolarity.class));
+        cards.add(new SetCardInfo("River Song", 152, Rarity.RARE, mage.cards.r.RiverSong.class));
         cards.add(new SetCardInfo("River of Tears", 297, Rarity.RARE, mage.cards.r.RiverOfTears.class));
         cards.add(new SetCardInfo("Rockfall Vale", 298, Rarity.RARE, mage.cards.r.RockfallVale.class));
         cards.add(new SetCardInfo("Rogue's Passage", 299, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
@@ -244,9 +253,12 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Ninth Doctor", 148, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ninth Doctor", 432, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ninth Doctor", 560, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Rani", 149, Rarity.RARE, mage.cards.t.TheRani.class));
         cards.add(new SetCardInfo("The Sea Devils", 108, Rarity.RARE, mage.cards.t.TheSeaDevils.class));
         cards.add(new SetCardInfo("The Sixth Doctor", 159, Rarity.RARE, mage.cards.t.TheSixthDoctor.class));
-        cards.add(new SetCardInfo("The Thirteenth Doctor", 4, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class));
+        cards.add(new SetCardInfo("The Thirteenth Doctor", 4, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Thirteenth Doctor", 564, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Thirteenth Doctor", "564z", Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Valeyard", 165, Rarity.RARE, mage.cards.t.TheValeyard.class));
         cards.add(new SetCardInfo("Thespian's Stage", 323, Rarity.RARE, mage.cards.t.ThespiansStage.class));
         cards.add(new SetCardInfo("The Tenth Doctor", 3, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
@@ -273,19 +285,27 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Throes of Chaos", 227, Rarity.UNCOMMON, mage.cards.t.ThroesOfChaos.class));
         cards.add(new SetCardInfo("Time Beetle", 58, Rarity.UNCOMMON, mage.cards.t.TimeBeetle.class));
         cards.add(new SetCardInfo("Time Lord Regeneration", 59, Rarity.UNCOMMON, mage.cards.t.TimeLordRegeneration.class));
+        cards.add(new SetCardInfo("Time Reaper", 71, Rarity.RARE, mage.cards.t.TimeReaper.class));
         cards.add(new SetCardInfo("Time Wipe", 238, Rarity.RARE, mage.cards.t.TimeWipe.class));
         cards.add(new SetCardInfo("Traverse Eternity", 60, Rarity.RARE, mage.cards.t.TraverseEternity.class));
+        cards.add(new SetCardInfo("Trenzalore Clocktower", 190, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trenzalore Clocktower", 463, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trenzalore Clocktower", 795, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trenzalore Clocktower", 1054, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Truth or Consequences", 163, Rarity.UNCOMMON, mage.cards.t.TruthOrConsequences.class));
         cards.add(new SetCardInfo("Twice Upon a Time", 61, Rarity.RARE, mage.cards.t.TwiceUponATime.class));
         cards.add(new SetCardInfo("Vashta Nerada", 73, Rarity.RARE, mage.cards.v.VashtaNerada.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 329, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
+        cards.add(new SetCardInfo("Vrestin, Menoptra Leader", 451, Rarity.RARE, mage.cards.v.VrestinMenoptraLeader.class));
         cards.add(new SetCardInfo("War Room", 330, Rarity.RARE, mage.cards.w.WarRoom.class));
         cards.add(new SetCardInfo("Waterlogged Grove", 331, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 256, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Wedding Ring", 213, Rarity.MYTHIC, mage.cards.w.WeddingRing.class));
+        cards.add(new SetCardInfo("Weeping Angel", 168, Rarity.RARE, mage.cards.w.WeepingAngel.class));
         cards.add(new SetCardInfo("Wibbly-wobbly, Timey-wimey", 62, Rarity.COMMON, mage.cards.w.WibblyWobblyTimeyWimey.class));
         cards.add(new SetCardInfo("Wound Reflection", 223, Rarity.RARE, mage.cards.w.WoundReflection.class));
         cards.add(new SetCardInfo("Wreck and Rebuild", 169, Rarity.UNCOMMON, mage.cards.w.WreckAndRebuild.class));
         cards.add(new SetCardInfo("Yasmin Khan", 7, Rarity.RARE, mage.cards.y.YasminKhan.class));
+        cards.add(new SetCardInfo("Zygon Infiltrator", 63, Rarity.UNCOMMON, mage.cards.z.ZygonInfiltrator.class));
     }
 }

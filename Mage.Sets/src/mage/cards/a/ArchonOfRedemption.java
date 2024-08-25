@@ -39,7 +39,7 @@ public final class ArchonOfRedemption extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Archon of Redemption or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power.
+        // Whenever Archon of Redemption or another creature with flying you control enters, you may gain life equal to that creature's power.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new ArchonOfRedemptionEffect(), filter, true, SetTargetPointer.PERMANENT, true
         ));

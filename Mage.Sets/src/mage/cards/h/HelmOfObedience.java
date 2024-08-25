@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -70,7 +70,7 @@ class HelmOfObedienceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        int max = ManacostVariableValue.REGULAR.calculate(game, source, this);
+        int max = GetXValue.instance.calculate(game, source, this);
         if (targetOpponent == null || controller == null || max < 1) {
             return false;
         }

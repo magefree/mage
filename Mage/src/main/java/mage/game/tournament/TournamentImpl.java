@@ -26,6 +26,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public abstract class TournamentImpl implements Tournament {
 
     protected UUID id = UUID.randomUUID();
+    protected UUID tableId = null; // assign on table create
     protected List<Round> rounds = new CopyOnWriteArrayList<>();
     protected Map<UUID, TournamentPlayer> players = new HashMap<>();
     protected TournamentOptions options;
@@ -139,13 +140,13 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
-    public void updateDeck(UUID playerId, Deck deck) {
+    public void updateDeck(UUID playerId, Deck deck, boolean ignoreMainBasicLands) {
         TournamentPlayer player = players.getOrDefault(playerId, null);
         if (player == null) {
             return;
         }
 
-        player.updateDeck(deck);
+        player.updateDeck(deck, ignoreMainBasicLands);
     }
 
     protected Round createRoundRandom() {

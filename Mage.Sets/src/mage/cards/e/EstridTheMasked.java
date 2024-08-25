@@ -47,7 +47,7 @@ public final class EstridTheMasked extends CardImpl {
                 filter, "untap each enchanted permanent you control"
         ), 2));
 
-        // -1: Create a white Aura enchantment token named Mask attached to another target permanent. The token has enchant permanent and totem armor.
+        // -1: Create a white Aura enchantment token named Mask attached to another target permanent. The token has enchant permanent and umbra armor.
         Ability ability = new LoyaltyAbility(
                 new EstridTheMaskedTokenEffect(), -1
         );
@@ -79,7 +79,7 @@ class EstridTheMaskedTokenEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.staticText = "create a white Aura enchantment token named Mask "
                 + "attached to another target permanent. "
-                + "The token has enchant permanent and totem armor";
+                + "The token has enchant permanent and umbra armor";
     }
 
     private EstridTheMaskedTokenEffect(final EstridTheMaskedTokenEffect effect) {

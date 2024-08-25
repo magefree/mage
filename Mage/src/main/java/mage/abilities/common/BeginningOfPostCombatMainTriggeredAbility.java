@@ -6,6 +6,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -73,6 +74,15 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
                     }
                 }
                 return true;
+            case ENCHANTED:
+                Permanent permanent = getSourcePermanentIfItStillExists(game);
+                if (permanent == null || !game.isActivePlayer(permanent.getAttachedTo())) {
+                    break;
+                }
+                if (getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
         }
         return false;
     }
@@ -85,6 +95,8 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
                 return "At the beginning of each opponent's postcombat main phase, " + generateZoneString();
             case ANY:
                 return "At the beginning of each player's postcombat main phase, " + generateZoneString();
+            case ENCHANTED:
+                return "At the beginning of enchanted player's postcombat main phase, " + generateZoneString();
         }
         return "";
     }

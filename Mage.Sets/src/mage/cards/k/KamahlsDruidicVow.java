@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LegendarySpellAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -8,11 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
@@ -20,6 +15,9 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy Created on 4/8/18.
@@ -67,7 +65,7 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         controller.lookAtCards(source, null, cards, game);
         if (!cards.isEmpty()) {

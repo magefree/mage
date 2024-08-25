@@ -50,9 +50,9 @@ enum AphettoDredgingAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(game.getObject(ability.getSourceId()));
+        Choice typeChoice = new ChoiceCreatureType(game, ability);
         if (controller != null && controller.choose(Outcome.PutCreatureInPlay, typeChoice, game)) {
-            String chosenType = typeChoice.getChoice();
+            String chosenType = typeChoice.getChoiceKey();
             FilterCreatureCard filter = new FilterCreatureCard(chosenType + " cards");
             filter.add(SubType.byDescription(chosenType).getPredicate());
             ability.addTarget(new TargetCardInYourGraveyard(0, 3, filter));

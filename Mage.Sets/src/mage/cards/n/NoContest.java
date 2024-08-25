@@ -62,7 +62,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
             return false;
         }
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, sourceControllerId, game)) {
-            if (permanent.getPower().getValue() > maxPower && permanent.canBeTargetedBy(sourceCard, sourceControllerId, game)) {
+            if (permanent.getPower().getValue() > maxPower && permanent.canBeTargetedBy(sourceCard, sourceControllerId, source, game)) {
                 maxPower = permanent.getPower().getValue();
             }
         }
@@ -70,7 +70,7 @@ class TargetCreatureWithLessPowerPermanent extends TargetPermanent {
         FilterCreaturePermanent checkFilter = new FilterCreaturePermanent();
         checkFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, maxPower));
         for (Permanent permanent : game.getBattlefield().getActivePermanents(checkFilter, sourceControllerId, source, game)) {
-            if (permanent.canBeTargetedBy(sourceCard, sourceControllerId, game)) {
+            if (permanent.canBeTargetedBy(sourceCard, sourceControllerId, source, game)) {
                 return true;
             }
         }

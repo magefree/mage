@@ -51,7 +51,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected SpellAbility spellAbility;
     protected boolean flipCard;
     protected String flipCardName;
-    protected boolean usesVariousArt = false;
     protected boolean morphCard;
     protected List<UUID> attachments = new ArrayList<>();
     protected boolean extraDeckCard = false;
@@ -65,6 +64,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         this.rarity = setInfo.getRarity();
         this.setExpansionSetCode(setInfo.getExpansionSetCode());
+        this.setUsesVariousArt(setInfo.getUsesVariousArt());
         this.setCardNumber(setInfo.getCardNumber());
         this.setImageFileName(""); // use default
         this.setImageNumber(0);
@@ -86,7 +86,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         CardGraphicInfo graphicInfo = setInfo.getGraphicInfo();
         if (graphicInfo != null) {
-            this.usesVariousArt = graphicInfo.getUsesVariousArt();
             if (graphicInfo.getFrameColor() != null) {
                 this.frameColor = graphicInfo.getFrameColor().copy();
             }
@@ -145,7 +144,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         spellAbility = null; // will be set on first getSpellAbility call if card has one
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
-        usesVariousArt = card.usesVariousArt;
         morphCard = card.morphCard;
         extraDeckCard = card.extraDeckCard;
 
@@ -232,13 +230,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public List<String> getRules() {
         Abilities<Ability> sourceAbilities = this.getAbilities();
-        return CardUtil.getCardRulesWithAdditionalInfo(this.getId(), this.getName(), sourceAbilities, sourceAbilities);
+        return CardUtil.getCardRulesWithAdditionalInfo(this, sourceAbilities, sourceAbilities);
     }
 
     @Override
     public List<String> getRules(Game game) {
         Abilities<Ability> sourceAbilities = this.getAbilities(game);
-        return CardUtil.getCardRulesWithAdditionalInfo(game, this.getId(), this.getName(), sourceAbilities, sourceAbilities);
+        return CardUtil.getCardRulesWithAdditionalInfo(game, this, sourceAbilities, sourceAbilities);
     }
 
     /**
@@ -564,7 +562,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         if (removed) {
             if (fromZone != Zone.OUTSIDE) {
-                game.rememberLKI(lkiObject != null ? lkiObject.getId() : objectId, fromZone, lkiObject != null ? lkiObject : this);
+                game.rememberLKI(fromZone, lkiObject != null ? lkiObject : this);
             }
         } else {
             logger.warn("Couldn't find card in fromZone, card=" + getIdName() + ", fromZone=" + fromZone);
@@ -612,7 +610,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             // This is somewhat a band-aid on the special action nature of turning a permanent face up.
             // 708.8. As a face-down permanent is turned face up, its copiable values revert to its normal copiable values.
             // Any effects that have been applied to the face-down permanent still apply to the face-up permanent.
-            game.getState().processAction(game);
+            game.processAction();
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNED_FACE_UP, getId(), source, playerId));
             return true;
         }
@@ -725,16 +723,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public boolean getUsesVariousArt() {
-        return usesVariousArt;
-    }
-
-    @Override
-    public void setUsesVariousArt(boolean usesVariousArt) {
-        this.usesVariousArt = usesVariousArt;
-    }
-
-    @Override
     public Counters getCounters(Game game) {
         return getCounters(game.getState());
     }
@@ -807,6 +795,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 GameEvent addedAllEvent = GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, source, playerAddingCounters, counter.getName(), amount);
                 addedAllEvent.setFlag(isEffectFlag);
                 game.fireEvent(addedAllEvent);
+            } else {
+                returnCode = false;
             }
         } else {
             returnCode = false;
@@ -815,36 +805,66 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
+    public void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
+
+        if (amount <= 0) {
+            return;
+        }
+
+        if (getCounters(game).getCount(counterName) <= 0) {
+            return;
+        }
+
+        GameEvent removeCountersEvent = new RemoveCountersEvent(counterName, this, source, amount, isDamage);
+        if (game.replaceEvent(removeCountersEvent)) {
+            return;
+        }
+
         int finalAmount = 0;
-        for (int i = 0; i < amount; i++) {
-            if (!getCounters(game).removeCounter(name, 1)) {
+        for (int i = 0; i < removeCountersEvent.getAmount(); i++) {
+
+            GameEvent event = new RemoveCounterEvent(counterName, this, source, isDamage);
+            if (game.replaceEvent(event)) {
+                continue;
+            }
+
+            if (!getCounters(game).removeCounter(counterName, 1)) {
                 break;
             }
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, source, getControllerOrOwnerId());
-            if (source != null
-                    && source.getControllerId() != null) {
-                event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counter
-            }
-            event.setData(name);
+
+            event = new CounterRemovedEvent(counterName, this, source, isDamage);
             game.fireEvent(event);
+
             finalAmount++;
         }
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTERS_REMOVED, objectId, source, getControllerOrOwnerId());
-        if (source != null
-                && source.getControllerId() != null) {
-            event.setPlayerId(source.getControllerId()); // player who controls the source ability that removed the counter
-        }
-        event.setData(name);
-        event.setAmount(finalAmount);
+
+        GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, isDamage);
         game.fireEvent(event);
     }
 
     @Override
-    public void removeCounters(Counter counter, Ability source, Game game) {
+    public void removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
         if (counter != null) {
-            removeCounters(counter.getName(), counter.getCount(), source, game);
+            removeCounters(counter.getName(), counter.getCount(), source, game, isDamage);
         }
+    }
+
+    @Override
+    public int removeAllCounters(Ability source, Game game, boolean isDamage) {
+        int amountBefore = getCounters(game).getTotalCount();
+        for (Counter counter : getCounters(game).copy().values()) {
+            removeCounters(counter.getName(), counter.getCount(), source, game, isDamage);
+        }
+        int amountAfter = getCounters(game).getTotalCount();
+        return Math.max(0, amountBefore - amountAfter);
+    }
+
+    @Override
+    public int removeAllCounters(String counterName, Ability source, Game game, boolean isDamage) {
+        int amountBefore = getCounters(game).getCount(counterName);
+        removeCounters(counterName, amountBefore, source, game, isDamage);
+        int amountAfter = getCounters(game).getCount(counterName);
+        return Math.max(0, amountBefore - amountAfter);
     }
 
     @Override

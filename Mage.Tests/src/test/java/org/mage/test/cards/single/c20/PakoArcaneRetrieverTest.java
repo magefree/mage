@@ -54,7 +54,7 @@ public class PakoArcaneRetrieverTest extends CardTestPlayerBase {
     
     @Test
     public void test_CastExiled() {
-        // setStrictChooseMode(true);
+        setStrictChooseMode(false);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);

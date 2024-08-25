@@ -61,7 +61,7 @@ public class TargetStackObjectByAITest extends CardTestPlayerBaseWithAIHelps {
         //setChoice(playerB, "Swamp"); // discard
 
         setStopAt(1, PhaseStep.END_TURN);
-        //setStrictChooseMode(true); // AI must choose
+        setStrictChooseMode(false); // AI must choose
         execute();
 
         assertGraveyardCount(playerB, "Grizzly Bears", 0);

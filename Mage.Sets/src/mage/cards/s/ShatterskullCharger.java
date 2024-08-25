@@ -47,10 +47,10 @@ public final class ShatterskullCharger extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // If Shatterskull Charger was kicked, it enters the battlefield with a +1/+1 counter on it.
+        // If Shatterskull Charger was kicked, it enters with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), KickedCondition.ONCE,
-                "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.", ""
+                "If {this} was kicked, it enters with a +1/+1 counter on it.", ""
         ));
 
         // At the beginning of your end step, if Shatterskull Charger doesn't have a +1/+1 counter on it, return it to its owner's hand.

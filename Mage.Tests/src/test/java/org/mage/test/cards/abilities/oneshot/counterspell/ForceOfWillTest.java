@@ -21,22 +21,25 @@ public class ForceOfWillTest extends CardTestPlayerBase {
      */
     @Test
     public void testWithBlueCardsInHand() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Thoughtseize");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
-        
+
         addCard(Zone.HAND, playerB, "Force of Will");
         addCard(Zone.HAND, playerB, "Remand", 2); // blue cards to pay force of will
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thoughtseize", playerB);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Force of Will", "Thoughtseize");
-        playerB.addChoice("Yes"); // use alternate costs
-        
+        setChoice(playerB, "Cast with alternative cost: Pay 1 life, Exile a blue card from your hand (source: Force of Will");
+        setChoice(playerB, "Remand");
+
         setStopAt(1, PhaseStep.CLEANUP);
         execute();
 
-        assertLife(playerA, 20); 
+        assertLife(playerA, 20);
         assertLife(playerB, 19); // losing 1 from Force of Will
 
         assertHandCount(playerA, 0);
@@ -45,7 +48,7 @@ public class ForceOfWillTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, 1); // Force of Will 
         assertExileCount("Remand", 1); // one Remand (cost from Force of Will)
     }
-    
+
     /**
      * Test that Force of Will can't be played with alternate casting costs
      * if no blue card is in hand and not enough mana available

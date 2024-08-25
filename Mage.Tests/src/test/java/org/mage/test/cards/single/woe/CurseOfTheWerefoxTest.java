@@ -24,7 +24,7 @@ public class CurseOfTheWerefoxTest extends CardTestPlayerBase {
      * Creature — Satyr Archer
      * <p>
      * Reach
-     * Constellation — Whenever an enchantment enters the battlefield under your control, you gain 2 life.
+     * Constellation — Whenever an enchantment you control enters, you gain 2 life.
      * <p>
      * 1/4
      */

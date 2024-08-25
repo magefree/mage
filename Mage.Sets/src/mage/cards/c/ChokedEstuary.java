@@ -33,7 +33,7 @@ public final class ChokedEstuary extends CardImpl {
 
         // As Choked Estuary enters the battlefield, you may reveal an Island or Swamp card from your hand. If you don't, Choked Estuary enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),
-                "you may reveal an Island or Swamp card from your hand. If you don't, {this} enters the battlefield tapped"));
+                "you may reveal an Island or Swamp card from your hand. If you don't, {this} enters tapped"));
 
         // {T}: Add {U} or {B}.
         this.addAbility(new BlueManaAbility());

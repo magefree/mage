@@ -147,14 +147,14 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
             Target target2 = new TargetOpponent(true);
 
             if (target1.canChoose(controller.getId(), source, game)) {
-                while (!target1.isChosen()
+                while (!target1.isChosen(game)
                         && target1.canChoose(controller.getId(), source, game)
                         && controller.canRespond()) {
                     controller.chooseTarget(outcome, target1, source, game);
                 }
             }
             if (target2.canChoose(controller.getId(), source, game)) {
-                while (!target2.isChosen()
+                while (!target2.isChosen(game)
                         && target2.canChoose(controller.getId(), source, game)
                         && controller.canRespond()) {
                     controller.chooseTarget(outcome, target2, source, game);

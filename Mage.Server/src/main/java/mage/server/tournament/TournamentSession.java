@@ -73,7 +73,7 @@ public class TournamentSession {
             setupTimeout(timeout);
             managerFactory.userManager().getUser(userId).ifPresent(user -> {
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                user.ccConstruct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
+                user.ccConstruct(tournament.getPlayer(playerId).getDeck(), tableId, null, remaining);
             });
         }
     }
@@ -83,8 +83,8 @@ public class TournamentSession {
         tournament.submitDeck(playerId, deck);
     }
 
-    public void updateDeck(Deck deck) {
-        tournament.updateDeck(playerId, deck);
+    public void updateDeck(Deck deck, boolean ignoreMainBasicLands) {
+        tournament.updateDeck(playerId, deck, ignoreMainBasicLands);
     }
 
     public void setKilled() {

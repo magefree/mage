@@ -32,9 +32,9 @@ public final class ArdentSoldier extends CardImpl {
         this.addAbility(new KickerAbility("{2}"));
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
-        // If Ardent Soldier was kicked, it enters the battlefield with a +1/+1 counter on it.
+        // If Ardent Soldier was kicked, it enters with a +1/+1 counter on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.", ""));
+            KickedCondition.ONCE, "If {this} was kicked, it enters with a +1/+1 counter on it.", ""));
     }
 
     private ArdentSoldier(final ArdentSoldier card) {

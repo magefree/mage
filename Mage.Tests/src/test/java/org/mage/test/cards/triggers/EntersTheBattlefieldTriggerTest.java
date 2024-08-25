@@ -402,7 +402,7 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Uro, Titan of Nature's Wrath with Escape");
         setChoice(playerA, "Balduvian Bears^Balduvian Bears^Balduvian Bears^Balduvian Bears^Balduvian Bears");
-        setChoice(playerA, "When {this} enters the battlefield, sacrifice it"); // sacrifice trigger must go first
+        setChoice(playerA, "When {this} enters, sacrifice it"); // sacrifice trigger must go first
         setChoice(playerA, false); // do not put land to battlefield
 
         // sacrifice trigger must found escape ability by getSpellOrLKIStack and keep uro on battlefield

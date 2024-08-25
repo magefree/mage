@@ -24,7 +24,7 @@ public final class KorCelebrant extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // Whenever Kor Celebrant or another creature enters the battlefield under your control, you gain 1 life.
+        // Whenever Kor Celebrant or another creature you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GainLifeEffect(1), StaticFilters.FILTER_PERMANENT_CREATURE, false, true
         ));

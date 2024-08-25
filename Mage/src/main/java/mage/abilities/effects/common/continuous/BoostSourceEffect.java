@@ -12,7 +12,6 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -55,11 +54,8 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (getAffectedObjectsSet()) {
-            try {
-                affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(BoostSourceEffect.class).error("Could not get sourceId reference: " + source.getRule());
-            }
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+            // Boost must be locked in (if it's a dynamic value) for non-static ability
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
         }

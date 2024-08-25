@@ -34,7 +34,7 @@ public final class BloodhallPriest extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 HellbentCondition.instance,
-                "Whenever {this} enters the battlefield or attacks, if you have no cards in hand, {this} deals 2 damage to any target"
+                "Whenever {this} enters or attacks, if you have no cards in hand, {this} deals 2 damage to any target"
         ));
 
         // Madness {1}{B}{R}

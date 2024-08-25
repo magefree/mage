@@ -5,6 +5,7 @@ import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
+import mage.client.util.AppUtil;
 import mage.client.util.ClientDefaultSettings;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.remote.Connection;
@@ -12,7 +13,6 @@ import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.*;
@@ -108,78 +108,9 @@ public class ConnectDialog extends MageDialog {
         BufferedReader in = null;
         Writer output = null;
         try {
-            String serverUrl = PreferencesDialog.getCachedValue(KEY_CONNECTION_URL_SERVER_LIST, "http://xmage.de/files/server-list.txt");
-            if (serverUrl.contains("xmage.info/files/")) {
-                serverUrl = serverUrl.replace("xmage.info/files/", "xmage.de/files/"); // replace old URL if still saved
-                PreferencesDialog.saveValue(KEY_CONNECTION_URL_SERVER_LIST, serverUrl);
-            }
-            URL serverListURL = new URL(serverUrl);
-
-            Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
-            Proxy p = null;
-            Proxy.Type type = Proxy.Type.DIRECT;
-            switch (configProxyType) {
-                case HTTP:
-                    type = Proxy.Type.HTTP;
-                    break;
-                case SOCKS:
-                    type = Proxy.Type.SOCKS;
-                    break;
-                case NONE:
-                default:
-                    p = Proxy.NO_PROXY;
-                    break;
-            }
-
-            if (p == null || !p.equals(Proxy.NO_PROXY)) {
-                try {
-                    String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
-                    Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
-                    p = new Proxy(type, new InetSocketAddress(address, port));
-                } catch (Exception ex) {
-                    throw new RuntimeException("Gui_DownloadPictures : error 1 - " + ex);
-                }
-            }
-
-            if (p == null) {
-                JOptionPane.showMessageDialog(null, "Couldn't configure Proxy object!", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            boolean URLNotFound = false;
-            try {
-                in = new BufferedReader(new InputStreamReader(serverListURL.openConnection(p).getInputStream()));
-            } catch (SocketTimeoutException | FileNotFoundException | UnknownHostException ex) {
-                logger.warn("Could not read serverlist from: " + serverListURL.toString());
-                File f = new File("serverlist.txt");
-                if (f.exists() && !f.isDirectory()) {
-                    logger.info("Using buffered serverlist: serverlist.txt");
-                    URLNotFound = true;
-                    in = new BufferedReader(new FileReader("serverlist.txt"));
-                }
-            }
             List<String> servers = new ArrayList<>();
-            if (in != null) {
-
-                if (!URLNotFound) {
-                    // write serverlist to be able to read if URL is not available
-                    File file = new File("serverlist.txt");
-                    if (file.exists() && !file.isDirectory()) {
-                        file.delete();
-                    }
-                    output = new BufferedWriter(new FileWriter(file));
-                }
-
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    logger.debug("Found server: " + inputLine);
-                    servers.add(inputLine);
-                    if (output != null) {
-                        output.append(inputLine).append('\n');
-
-                    }
-                }
-            }
+            // TODO: add recent servers list here
+            
             if (servers.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Couldn't find any server.");
                 return;
@@ -807,17 +738,11 @@ public class ConnectDialog extends MageDialog {
     }//GEN-LAST:event_btnFlagSearchActionPerformed
 
     private void btnCheckStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckStatusActionPerformed
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            try {
-                Desktop.getDesktop().browse(new URI("http://xmage.today/servers/"));
-            } catch (Exception e) {
-                //
-            }
-        }
+        AppUtil.openUrlInSystemBrowser("http://xmage.today/servers/");
     }//GEN-LAST:event_btnCheckStatusActionPerformed
 
     private void btnWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsNewActionPerformed
-        MageFrame.showWhatsNewDialog();
+        MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_btnWhatsNewActionPerformed
 
     private void btnFindMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindMainActionPerformed

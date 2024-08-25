@@ -26,7 +26,7 @@ public final class AltarOfTheBrood extends CardImpl {
     public AltarOfTheBrood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // Whenever another permanent enters the battlefield under your control, each opponent mills a card.
+        // Whenever another permanent you control enters, each opponent mills a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new MillCardsEachPlayerEffect(1, TargetController.OPPONENT), filter, false));
     }

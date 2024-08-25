@@ -29,6 +29,7 @@ public final class FatalPush extends CardImpl {
         this.getSpellAbility().addEffect(new FatalPushEffect());
         this.getSpellAbility().addWatcher(new RevoltWatcher());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addHint(RevoltCondition.getHint());
     }
 
     private FatalPush(final FatalPush card) {

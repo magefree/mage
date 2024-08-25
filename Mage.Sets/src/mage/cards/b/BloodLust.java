@@ -66,7 +66,7 @@ class TargetMatchesFilterCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getBattlefield().getPermanent(source.getFirstTarget());
+        Permanent target = game.getPermanent(source.getFirstTarget());
         if (target != null) {
             if (filter.match(target, source.getControllerId(), source, game)) {
                 return true;

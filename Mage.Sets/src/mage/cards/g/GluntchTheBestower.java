@@ -87,7 +87,7 @@ class GluntchTheBestowerEffect extends OneShotEffect {
 
         TargetPlayer playerChoice = new TargetPlayer();
         playerChoice.withNotTarget(true);
-        playerChoice.setTargetName("a player that will put two +1/+1 counters on a creature they control");
+        playerChoice.withTargetName("a player that will put two +1/+1 counters on a creature they control");
         controller.choose(Outcome.BoostCreature, playerChoice, source, game);
 
         UUID firstChosenPlayerId = playerChoice.getFirstTarget();
@@ -99,7 +99,7 @@ class GluntchTheBestowerEffect extends OneShotEffect {
         game.informPlayers(firstChosenPlayer.getLogName() + " has been chosen for the first effect.");
         TargetPermanent targetChosenCreature = new TargetControlledCreaturePermanent();
         targetChosenCreature.withNotTarget(true);
-        playerChoice.setTargetName("a creature you control to add two +1/+1 counters on it");
+        playerChoice.withTargetName("a creature you control to add two +1/+1 counters on it");
         firstChosenPlayer.choose(Outcome.BoostCreature, targetChosenCreature, source, game);
 
         Permanent chosenCreature = game.getPermanent(targetChosenCreature.getFirstTarget());
@@ -116,7 +116,7 @@ class GluntchTheBestowerEffect extends OneShotEffect {
         filterNotFirst.add(Predicates.not(new PlayerIdPredicate(firstChosenPlayerId)));
         playerChoice = new TargetPlayer(filterNotFirst);
         playerChoice.withNotTarget(true);
-        playerChoice.setTargetName("a player that will draw a card");
+        playerChoice.withTargetName("a player that will draw a card");
         controller.choose(Outcome.DrawCard, playerChoice, source, game);
 
         UUID secondChosenPlayerId = playerChoice.getFirstTarget();
@@ -138,7 +138,7 @@ class GluntchTheBestowerEffect extends OneShotEffect {
         filterNotFirstNorSecond.add(Predicates.not(new PlayerIdPredicate(secondChosenPlayerId)));
         playerChoice = new TargetPlayer(filterNotFirstNorSecond);
         playerChoice.withNotTarget(true);
-        playerChoice.setTargetName("a player that will create two Treasure tokens");
+        playerChoice.withTargetName("a player that will create two Treasure tokens");
         controller.choose(Outcome.DrawCard, playerChoice, source, game);
 
         UUID thirdChosenPlayerId = playerChoice.getFirstTarget();

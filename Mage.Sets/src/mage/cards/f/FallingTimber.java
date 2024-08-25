@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
@@ -11,11 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -36,7 +32,9 @@ public final class FallingTimber extends CardImpl {
         effect.setText("Prevent all combat damage target creature would deal this turn. If this spell was kicked, " +
                 "prevent all combat damage another target creature would deal this turn.");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(FallingTimberAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
+                new TargetCreaturePermanent(2)));
     }
 
     private FallingTimber(final FallingTimber card) {
@@ -46,15 +44,5 @@ public final class FallingTimber extends CardImpl {
     @Override
     public FallingTimber copy() {
         return new FallingTimber(this);
-    }
-}
-
-enum FallingTimberAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(KickedCondition.ONCE.apply(game, ability) ? 2 : 1));
     }
 }

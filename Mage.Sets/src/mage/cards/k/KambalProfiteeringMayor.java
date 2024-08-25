@@ -73,7 +73,7 @@ class KambalProfiteeringMayorTriggeredAbility extends TriggeredAbilityImpl {
 
     KambalProfiteeringMayorTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
-        this.setTriggersOnceEachTurn(true);
+        this.setTriggersLimitEachTurn(1);
     }
 
     private KambalProfiteeringMayorTriggeredAbility(final KambalProfiteeringMayorTriggeredAbility effect) {

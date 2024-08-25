@@ -10,6 +10,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.DatabaseUtils;
 import mage.cards.repository.RepositoryUtil;
 import org.apache.log4j.Logger;
 import org.apache.shiro.crypto.RandomNumberGenerator;
@@ -24,7 +25,6 @@ import java.util.List;
 
 public class AuthorizedUserRepository {
 
-    private static final String JDBC_URL = "jdbc:h2:file:./db/authorized_user.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "authorized_user";
     // raise this if db structure was changed
     private static final long DB_VERSION = 2;
@@ -32,10 +32,10 @@ public class AuthorizedUserRepository {
 
     private static final AuthorizedUserRepository instance;
     static {
-        instance = new AuthorizedUserRepository(JDBC_URL);
+        instance = new AuthorizedUserRepository(DatabaseUtils.prepareH2Connection(DatabaseUtils.DB_NAME_USERS, false));
     }
 
-    private Dao<AuthorizedUser, Object> dao;
+    private Dao<AuthorizedUser, Object> usersDao;
 
     public AuthorizedUserRepository(String connectionString) {
         File file = new File("db");
@@ -45,7 +45,7 @@ public class AuthorizedUserRepository {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(connectionString);
             TableUtils.createTableIfNotExists(connectionSource, AuthorizedUser.class);
-            dao = DaoManager.createDao(connectionSource, AuthorizedUser.class);
+            usersDao = DaoManager.createDao(connectionSource, AuthorizedUser.class);
         } catch (SQLException ex) {
             Logger.getLogger(AuthorizedUserRepository.class).error("Error creating / assigning authorized_user repository - ", ex);
         }
@@ -59,7 +59,7 @@ public class AuthorizedUserRepository {
         try {
             Hash hash = new SimpleHash(Sha256Hash.ALGORITHM_NAME, password, rng.nextBytes(), 1024);
             AuthorizedUser user = new AuthorizedUser(userName, hash, email);
-            dao.create(user);
+            usersDao.create(user);
         } catch (SQLException ex) {
             Logger.getLogger(AuthorizedUserRepository.class).error("Error adding a user to DB - ", ex);
         }
@@ -67,7 +67,7 @@ public class AuthorizedUserRepository {
 
     public void remove(final String userName) {
         try {
-            DeleteBuilder<AuthorizedUser, Object> db = dao.deleteBuilder();
+            DeleteBuilder<AuthorizedUser, Object> db = usersDao.deleteBuilder();
             db.where().eq("name", new SelectArg(userName));
             db.delete();
         } catch (SQLException ex) {
@@ -77,9 +77,9 @@ public class AuthorizedUserRepository {
 
     public AuthorizedUser getByName(String userName) {
         try {
-            QueryBuilder<AuthorizedUser, Object> qb = dao.queryBuilder();
+            QueryBuilder<AuthorizedUser, Object> qb = usersDao.queryBuilder();
             qb.where().eq("name", new SelectArg(userName));
-            List<AuthorizedUser> results = dao.query(qb.prepare());
+            List<AuthorizedUser> results = usersDao.query(qb.prepare());
             if (results.size() == 1) {
                 return results.get(0);
             }
@@ -92,7 +92,7 @@ public class AuthorizedUserRepository {
 
     public void update(AuthorizedUser authorizedUser) {
         try {
-            dao.update(authorizedUser);
+            usersDao.update(authorizedUser);
         } catch (SQLException ex) {
             Logger.getLogger(AuthorizedUserRepository.class).error("Error updating authorized_user", ex);
         }
@@ -100,9 +100,9 @@ public class AuthorizedUserRepository {
 
     public AuthorizedUser getByEmail(String userName) {
         try {
-            QueryBuilder<AuthorizedUser, Object> qb = dao.queryBuilder();
+            QueryBuilder<AuthorizedUser, Object> qb = usersDao.queryBuilder();
             qb.where().eq("email", new SelectArg(userName));
-            List<AuthorizedUser> results = dao.query(qb.prepare());
+            List<AuthorizedUser> results = usersDao.query(qb.prepare());
             if (results.size() == 1) {
                 return results.get(0);
             }
@@ -115,9 +115,10 @@ public class AuthorizedUserRepository {
 
     public void closeDB() {
         try {
-            if (dao != null && dao.getConnectionSource() != null) {
-                DatabaseConnection conn = dao.getConnectionSource().getReadWriteConnection(dao.getTableName());
-                conn.executeStatement("shutdown compact", 0);
+            if (usersDao != null && usersDao.getConnectionSource() != null) {
+                DatabaseConnection conn = usersDao.getConnectionSource().getReadWriteConnection(usersDao.getTableName());
+                conn.executeStatement("SHUTDOWN IMMEDIATELY", DatabaseConnection.DEFAULT_RESULT_FLAGS);
+                usersDao.getConnectionSource().releaseConnection(conn);
             }
         } catch (SQLException ex) {
             Logger.getLogger(AuthorizedUserRepository.class).error("Error closing authorized_user repository - ", ex);
@@ -126,7 +127,7 @@ public class AuthorizedUserRepository {
 
     public long getDBVersionFromDB() {
         try {
-            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            ConnectionSource connectionSource = new JdbcConnectionSource(DatabaseUtils.prepareH2Connection(DatabaseUtils.DB_NAME_USERS, false));
             return RepositoryUtil.getDatabaseVersion(connectionSource, VERSION_ENTITY_NAME);
         } catch (SQLException ex) {
             Logger.getLogger(CardRepository.class).error("Error getting DB version from DB - ", ex);
@@ -145,11 +146,11 @@ public class AuthorizedUserRepository {
     private boolean migrateFrom1To2() {
         try {
             Logger.getLogger(AuthorizedUserRepository.class).info("Starting " + VERSION_ENTITY_NAME + " DB migration from version 1 to version 2");
-            dao.executeRaw("ALTER TABLE authorized_user ADD COLUMN active BOOLEAN DEFAULT true;");
-            dao.executeRaw("ALTER TABLE authorized_user ADD COLUMN lockedUntil DATETIME;");
-            dao.executeRaw("ALTER TABLE authorized_user ADD COLUMN chatLockedUntil DATETIME;");
-            dao.executeRaw("ALTER TABLE authorized_user ADD COLUMN lastConnection DATETIME;");
-            RepositoryUtil.updateVersion(dao.getConnectionSource(), VERSION_ENTITY_NAME, DB_VERSION);
+            usersDao.executeRaw("ALTER TABLE authorized_user ADD COLUMN active BOOLEAN DEFAULT true;");
+            usersDao.executeRaw("ALTER TABLE authorized_user ADD COLUMN lockedUntil DATETIME;");
+            usersDao.executeRaw("ALTER TABLE authorized_user ADD COLUMN chatLockedUntil DATETIME;");
+            usersDao.executeRaw("ALTER TABLE authorized_user ADD COLUMN lastConnection DATETIME;");
+            RepositoryUtil.updateVersion(usersDao.getConnectionSource(), VERSION_ENTITY_NAME, DB_VERSION);
             Logger.getLogger(AuthorizedUserRepository.class).info("Migration finished.");
             return true;
         } catch (SQLException ex) {

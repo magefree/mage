@@ -29,7 +29,7 @@ public final class KabiraEvangel extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever Kabira Evangel or another Ally enters the battlefield under your control, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.
+        // Whenever Kabira Evangel or another Ally you control enters, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(
                 new GainProtectionFromColorAllEffect(Duration.EndOfTurn, FILTER1)
                         .setText("choose a color. If you do, Allies you control gain protection " +

@@ -31,7 +31,7 @@ public final class HiredHexblade extends CardImpl {
         // When Hired Hexblade enters the battlefield, if mana from a Treasure was spent to cast it, you draw a card and you lose 1 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                TreasureSpentToCastCondition.instance, "When {this} enters the battlefield, " +
+                TreasureSpentToCastCondition.instance, "When {this} enters, " +
                 "if mana from a Treasure was spent to cast it, you draw a card and you lose 1 life."
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1));

@@ -69,7 +69,7 @@ public final class DiscerningFinancier extends CardImpl {
                 new ManaCostsImpl<>("{2}{W}")
         );
         ability.addTarget(new TargetControlledPermanent(filter));
-        ability.addEffect(new DrawCardSourceControllerEffect(1, "you"));
+        ability.addEffect(new DrawCardSourceControllerEffect(1, true));
         this.addAbility(ability);
     }
 

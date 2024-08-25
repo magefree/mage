@@ -8,7 +8,7 @@ import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -42,8 +42,8 @@ public final class BearUmbra extends CardImpl {
         ), AttachmentType.AURA).setText("and has \"Whenever this creature attacks, untap all lands you control.\""));
         this.addAbility(ability);
 
-        // Totem armor
-        this.addAbility(new TotemArmorAbility());
+        // Umbra armor
+        this.addAbility(new UmbraArmorAbility());
     }
 
     private BearUmbra(final BearUmbra card) {

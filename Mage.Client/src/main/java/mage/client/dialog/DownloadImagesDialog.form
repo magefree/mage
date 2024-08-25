@@ -387,7 +387,7 @@
                             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                               <Image iconType="3" name="/buttons/search_24.png"/>
                             </Property>
-                            <Property name="toolTipText" type="java.lang.String" value="Fast search your flag"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Search set to download"/>
                             <Property name="alignmentX" type="float" value="1.0"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[25, 25]"/>
@@ -419,7 +419,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JCheckBox" name="checkboxRedownload">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;Re-download all images"/>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;Re-download all selected images"/>
                         <Property name="verticalAlignment" type="int" value="3"/>
                       </Properties>
                       <Constraints>

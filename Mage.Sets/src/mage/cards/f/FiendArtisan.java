@@ -21,7 +21,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -83,7 +83,7 @@ class FiendArtisanEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue + " or less");
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)).apply(game, source);

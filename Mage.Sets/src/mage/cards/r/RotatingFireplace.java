@@ -29,7 +29,7 @@ public final class RotatingFireplace extends CardImpl {
         // Rotating Fireplace enters the battlefield tapped with a time counter on it.
         Ability ability = new EntersBattlefieldAbility(
                 new TapSourceEffect(true), false, null,
-                "{this} enters the battlefield tapped with a time counter on it.", null
+                "{this} enters tapped with a time counter on it.", null
         );
         ability.addEffect(new AddCountersSourceEffect(CounterType.TIME.createInstance()));
         this.addAbility(ability);

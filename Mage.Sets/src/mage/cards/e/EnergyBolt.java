@@ -3,7 +3,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -22,9 +22,9 @@ public final class EnergyBolt extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{W}");
 
         // Choose one - Energy Bolt deals X damage to target player; or target player gains X life.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
-        Mode mode = new Mode(new GainLifeTargetEffect(ManacostVariableValue.REGULAR));
+        Mode mode = new Mode(new GainLifeTargetEffect(GetXValue.instance));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }

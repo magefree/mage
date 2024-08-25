@@ -4,19 +4,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.FractalToken;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -36,9 +32,10 @@ public final class SequenceEngine extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(FractalToken.getEffect(
-                ManacostVariableValue.REGULAR, "Put X +1/+1 counters on it"
+                GetXValue.instance, "Put X +1/+1 counters on it"
         ));
-        ability.setTargetAdjuster(SequenceEngineAdjuster.instance);
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 
@@ -49,18 +46,5 @@ public final class SequenceEngine extends CardImpl {
     @Override
     public SequenceEngine copy() {
         return new SequenceEngine(this);
-    }
-}
-
-enum SequenceEngineAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        ability.getTargets().clear();
-        FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue);
-        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        ability.addTarget(new TargetCardInGraveyard(filter));
     }
 }

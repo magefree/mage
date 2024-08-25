@@ -22,7 +22,7 @@ public final class IorRuinExpedition extends CardImpl {
     public IorRuinExpedition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-        // Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Ior Ruin Expedition.
+        // Landfall - Whenever a land you control enters, you may put a quest counter on Ior Ruin Expedition.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
 
         // Remove three quest counters from Ior Ruin Expedition and sacrifice it: Draw two cards.

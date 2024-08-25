@@ -52,7 +52,7 @@ public final class WildbornPreserver extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Whenever another non-Human creature enters the battlefield under your control, you may pay {X}. When you do, put X +1/+1 counters on Wildborn Preserver.
+        // Whenever another non-Human creature you control enters, you may pay {X}. When you do, put X +1/+1 counters on Wildborn Preserver.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new WildbornPreserverCreateReflexiveTriggerEffect(), filter
         ));

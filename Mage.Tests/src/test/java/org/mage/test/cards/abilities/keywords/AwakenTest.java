@@ -38,8 +38,7 @@ public class AwakenTest extends CardTestPlayerBase {
      */
     @Test
     public void testShamblingVentAndAnimation() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Lantern", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 5);
         // Shambling Vent enters the battlefield tapped.
         // {T}: Add {W} or {B}.
         // {1}{W}{B}: Shambling Vent becomes a 2/3 white and black Elemental creature with lifelink until end of turn. It's still a land.
@@ -69,7 +68,6 @@ public class AwakenTest extends CardTestPlayerBase {
     @Test
     public void testShamblingVent() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Chromatic Lantern", 1);
         // Shambling Vent enters the battlefield tapped.
         // {T}: Add {W} or {B}.
         // {1}{W}{B}: Shambling Vent becomes a 2/3 white and black Elemental creature with lifelink until end of turn. It's still a land.

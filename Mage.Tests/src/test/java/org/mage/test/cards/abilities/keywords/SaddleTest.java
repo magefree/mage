@@ -1,9 +1,11 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.MageObjectReference;
 import mage.abilities.keyword.MenaceAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.SaddledMountWatcher;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -20,7 +22,7 @@ public class SaddleTest extends CardTestPlayerBase {
         Permanent permanent = getPermanent(name);
         Assert.assertEquals(
                 name + " should " + (saddled ? "" : "not ") + "be saddled",
-                saddled, permanent.isSaddled()
+                saddled, SaddledMountWatcher.hasBeenSaddledThisTurn(new MageObjectReference(permanent.getId(), currentGame), currentGame)
         );
     }
 
@@ -78,13 +80,10 @@ public class SaddleTest extends CardTestPlayerBase {
         setChoice(playerA, bear);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
 
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
-        execute();
-
         attack(1, playerA, possum, playerB);
         setChoice(playerA, bear);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -113,16 +112,14 @@ public class SaddleTest extends CardTestPlayerBase {
         setChoice(playerA, lion);
 
         setStopAt(1, PhaseStep.END_TURN);
+
+        // TODO: test framework must have tools to check targeting (as workaround try to check it by look at test command error)
         try {
             execute();
         } catch (AssertionError e) {
-            Assert.assertEquals(
-                    "Lion can't be targeted",
-                    "Missing CHOICE def for turn 1, step DECLARE_ATTACKERS, PlayerA\n" +
-                            "Object: PermanentCard: Rambling Possum;\n" +
-                            "Target: TargetPermanent: Select creatures that saddled it this turn (selected 0)",
-                    e.getMessage()
-            );
+            if (!e.getMessage().contains("Select creatures that saddled it this turn (selected 0)")) {
+                Assert.fail("Lion can't be targeted, but catch another error:\n" + e.getMessage());
+            }
         }
 
         assertTapped(bear, true);

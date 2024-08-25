@@ -1,14 +1,11 @@
-
 package mage.cards.v;
 
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -21,7 +18,8 @@ public final class VitalizingCascade extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}{W}");
 
         // You gain X plus 3 life.
-        this.getSpellAbility().addEffect(new GainLifeEffect(VitalizingCascadeValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new IntPlusDynamicValue(3, GetXValue.instance))
+                .setText("you gain X plus 3 life"));
     }
 
     private VitalizingCascade(final VitalizingCascade card) {
@@ -33,28 +31,3 @@ public final class VitalizingCascade extends CardImpl {
         return new VitalizingCascade(this);
     }
 }
-
-enum VitalizingCascadeValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return sourceAbility.getManaCosts().getX() + 3;
-    }
-
-    @Override
-    public VitalizingCascadeValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return "X plus 3";
-    }
-}
-

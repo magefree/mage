@@ -76,7 +76,7 @@ class ShapeshifterEffect extends OneShotEffect {
             mageObject = game.getPermanent(source.getSourceId());
         }
         if (controller != null) {
-            Choice numberChoice = new ChoiceImpl();
+            Choice numberChoice = new ChoiceImpl(false);
             numberChoice.setMessage("Choose a number beween 0 and 7");
             Set<String> numbers = new HashSet<>();
             for (int i = 0; i <= 7; i++) {

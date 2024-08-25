@@ -2,7 +2,7 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ public final class FanningTheFlames extends CardImpl {
         this.addAbility(new BuybackAbility("{3}"));
         
         // Fanning the Flames deals X damage to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

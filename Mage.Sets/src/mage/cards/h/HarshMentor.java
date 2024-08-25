@@ -5,7 +5,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -72,7 +71,7 @@ class HarshMentorTriggeredAbility extends TriggeredAbilityImpl {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (source != null && (source.isArtifact(game) || source.isCreature(game) || source.isLand(game))) {
                 StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
+                if (!stackAbility.getStackAbility().isManaActivatedAbility()) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }

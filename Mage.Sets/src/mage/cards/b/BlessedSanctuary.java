@@ -31,7 +31,7 @@ public class BlessedSanctuary extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PreventAllNonCombatDamageToAllEffect(
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES, true)));
 
-        //Whenever a nontoken creature enters the battlefield under your control, create a 2/2 white Unicorn creature token.
+        //Whenever a nontoken creature you control enters, create a 2/2 white Unicorn creature token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new UnicornToken()), filterNontoken, false));
     }

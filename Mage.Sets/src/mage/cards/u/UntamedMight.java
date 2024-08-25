@@ -3,7 +3,7 @@
 package mage.cards.u;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class UntamedMight extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}");
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(GetXValue.instance, GetXValue.instance, Duration.EndOfTurn));
     }
 
     private UntamedMight(final UntamedMight card) {

@@ -79,7 +79,7 @@ class NefariousImpTriggeredAbility extends TriggeredAbilityImpl {
                 zEvent.getCards()
                         .stream()
                         .map(MageItem::getId)
-                        .map(game::getPermanent)
+                        .map(game::getPermanentOrLKIBattlefield)
                         .filter(Objects::nonNull)
         ).map(Controllable::getControllerId).anyMatch(this::isControlledBy);
     }

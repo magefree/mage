@@ -118,14 +118,15 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         int col = x / (cardWidth + GRID_PADDING);
         int gridWidth = cardGrid.isEmpty() ? 0 : cardGrid.get(0).size();
 
+        int countLabelHeight = getCountLabelHeight();
         if (dx < GRID_PADDING && col < gridWidth) {
             // Which row to add to?
-            int curY = COUNT_LABEL_HEIGHT;
+            int curY = countLabelHeight;
             int rowIndex = 0;
             for (int i = 0; i < cardGrid.size(); ++i) {
                 int maxStack = maxStackSize.get(i);
                 int rowHeight = cardTopHeight * (maxStack - 1) + cardHeight;
-                int rowBottom = curY + rowHeight + COUNT_LABEL_HEIGHT;
+                int rowBottom = curY + rowHeight + countLabelHeight;
 
                 // Break out if we're in that row
                 if (y < rowBottom) {
@@ -147,13 +148,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             col = Math.min(col, gridWidth);
 
             // Determine place in the col
-            int curY = COUNT_LABEL_HEIGHT;
+            int curY = countLabelHeight;
             int rowIndex = 0;
             int offsetIntoStack = 0;
             for (int i = 0; i < cardGrid.size(); ++i) {
                 int maxStack = maxStackSize.get(i);
                 int rowHeight = cardTopHeight * (maxStack - 1) + cardHeight;
-                int rowBottom = curY + rowHeight + COUNT_LABEL_HEIGHT;
+                int rowBottom = curY + rowHeight + countLabelHeight;
 
                 // Break out if we're in that row
                 if (y < rowBottom) {
@@ -228,14 +229,15 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         int col = x / (cardWidth + GRID_PADDING);
         int gridWidth = cardGrid.isEmpty() ? 0 : cardGrid.get(0).size();
 
+        int countLabelHeight = getCountLabelHeight();
         if (dx < GRID_PADDING && col < gridWidth) {
             // Which row to add to?
-            int curY = COUNT_LABEL_HEIGHT;
+            int curY = countLabelHeight;
             int rowIndex = 0;
             for (int i = 0; i < cardGrid.size(); ++i) {
                 int maxStack = maxStackSize.get(i);
                 int rowHeight = cardTopHeight * (maxStack - 1) + cardHeight;
-                int rowBottom = curY + rowHeight + COUNT_LABEL_HEIGHT;
+                int rowBottom = curY + rowHeight + countLabelHeight;
 
                 // Break out if we're in that row
                 if (y < rowBottom) {
@@ -272,13 +274,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             col = Math.min(col, gridWidth);
 
             // Determine place in the col
-            int curY = COUNT_LABEL_HEIGHT;
+            int curY = countLabelHeight;
             int rowIndex = 0;
             int offsetIntoStack = 0;
             for (int i = 0; i < cardGrid.size(); ++i) {
                 int maxStack = maxStackSize.get(i);
                 int rowHeight = cardTopHeight * (maxStack - 1) + cardHeight;
-                int rowBottom = curY + rowHeight + COUNT_LABEL_HEIGHT;
+                int rowBottom = curY + rowHeight + countLabelHeight;
 
                 // Break out if we're in that row
                 if (y < rowBottom) {
@@ -341,6 +343,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     }
 
     public void changeGUISize() {
+        Font countLabelFont = DragCardGrid.getCountLabelFont();
+        stackCountLabels.stream().flatMap(Collection::stream).forEach(label -> {
+            label.setFont(countLabelFont);
+        });
+
         layoutGrid();
         cardScroll.getVerticalScrollBar().setUnitIncrement(CardRenderer.getCardTopHeight(getCardWidth()));
         repaintGrid();
@@ -533,10 +540,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             return card.isBattle();
         }
     };
-    private final CardTypeCounter tribalCounter = new CardTypeCounter() {
+    private final CardTypeCounter kindredCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.isTribal();
+            return card.isKindred();
         }
     };
 
@@ -549,7 +556,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             planeswalkerCounter,
             sorceryCounter,
             battleCounter,
-            tribalCounter
+            kindredCounter
     };
 
     // Listener
@@ -567,7 +574,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     }
 
     // Constants
-    public static final int COUNT_LABEL_HEIGHT = 40; // can contains 1 or 2 lines
+    private static final int DEFAULT_COUNT_LABEL_HEIGHT = 40; // can contain 1 or 2 lines
     public static final int GRID_PADDING = 10;
 
     private static final ImageIcon INSERT_ROW_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_row.png"));
@@ -1253,7 +1260,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             --col2;
         }
 
-        int curY = COUNT_LABEL_HEIGHT;
+        int countLabelHeight = getCountLabelHeight();
+        int curY = countLabelHeight;
         for (int rowIndex = 0; rowIndex < cardGrid.size(); ++rowIndex) {
             int stackStartIndex;
             if (y1 < curY) {
@@ -1290,7 +1298,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     }
                 }
             }
-            curY += cardTopHeight * (maxStackSize.get(rowIndex) - 1) + cardHeight + COUNT_LABEL_HEIGHT;
+            curY += cardTopHeight * (maxStackSize.get(rowIndex) - 1) + cardHeight + countLabelHeight;
         }
     }
 
@@ -1914,8 +1922,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     return planeswalkerCounter.get();
                 case SORCERY:
                     return sorceryCounter.get();
-                case TRIBAL:
-                    return tribalCounter.get();
+                case KINDRED:
+                    return kindredCounter.get();
                 default:
                     break;
             }
@@ -2279,9 +2287,11 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         int cardHeight = getCardHeight();
         int cardTopHeight = CardRenderer.getCardTopHeight(cardWidth);
 
+        int countLabelHeight = getCountLabelHeight();
+
         // Layout one at a time
         int layerIndex = 0;
-        int currentY = COUNT_LABEL_HEIGHT;
+        int currentY = countLabelHeight;
         int maxWidth = 0;
         for (int rowIndex = 0; rowIndex < cardGrid.size(); ++rowIndex) {
             int rowMaxStackSize = 0;
@@ -2326,8 +2336,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 } else {
                     String description = cardSort.getComparator().getCategoryName(stack.get(0));
                     DragCardGrid.updateCountLabel(countLabel, stack.size(), description);
-                    countLabel.setLocation(GRID_PADDING + (cardWidth + GRID_PADDING) * colIndex, currentY - COUNT_LABEL_HEIGHT);
-                    countLabel.setSize(cardWidth, COUNT_LABEL_HEIGHT);
+                    countLabel.setLocation(GRID_PADDING + (cardWidth + GRID_PADDING) * colIndex, currentY - countLabelHeight);
+                    countLabel.setSize(cardWidth, countLabelHeight);
                     countLabel.setVisible(true);
                 }
 
@@ -2348,17 +2358,31 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Update the max stack size for this row and the max width
             maxWidth = Math.max(maxWidth, GRID_PADDING + (GRID_PADDING + cardWidth) * gridRow.size());
             maxStackSize.set(rowIndex, rowMaxStackSize);
-            currentY += (cardTopHeight * (rowMaxStackSize - 1) + cardHeight) + COUNT_LABEL_HEIGHT;
+            currentY += (cardTopHeight * (rowMaxStackSize - 1) + cardHeight) + countLabelHeight;
         }
 
         // Resize card container
-        cardContent.setPreferredSize(new Dimension(maxWidth, currentY - COUNT_LABEL_HEIGHT + GRID_PADDING));
+        cardContent.setPreferredSize(new Dimension(maxWidth, currentY - countLabelHeight + GRID_PADDING));
         //cardContent.setSize(maxWidth, currentY - COUNT_LABEL_HEIGHT + GRID_PADDING);
+    }
+
+    public static int getCountLabelHeight() {
+        // must allow 2 lines of text
+        return Math.round(1.3f * 2.0f * getCountLabelFontSize());
+    }
+
+    private static float getCountLabelFontSize() {
+        return 0.8f * GUISizeHelper.dialogFont.getSize();
+    }
+
+    public static Font getCountLabelFont() {
+        return GUISizeHelper.dialogFont.deriveFont(Font.BOLD, getCountLabelFontSize());
     }
 
     public static JLabel createCountLabel(MouseListener mouseListener) {
         JLabel countLabel = new JLabel("", JLabel.CENTER);
-        countLabel.setForeground(Color.WHITE); // TODO: add theme support
+        countLabel.setFont(getCountLabelFont());
+        countLabel.setForeground(Color.WHITE); // TODO: add theme support for better visible text?
         if (mouseListener != null) {
             countLabel.addMouseListener(mouseListener);
         }
@@ -2369,7 +2393,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         // two modes:
         // * small: one line with count
         // * big: two lines with count and description
-        String descHtml = ManaSymbols.replaceSymbolsWithHTML(description, ManaSymbols.Type.TABLE);
+        String labelText = ManaSymbols.replaceSymbolsWithHTML(description, Math.round(getCountLabelFontSize()));
+        String labelHint = ManaSymbols.replaceSymbolsWithHTML(description, ManaSymbols.Type.TOOLTIP);
         boolean smallMode = description.isEmpty();
         boolean supportCustomClicks = countLabel.getMouseListeners().length > 0
                 && !(countLabel.getMouseListeners()[0] instanceof ToolTipManager); // ignore auto-added ToolTipManager for mouse over hints
@@ -2379,11 +2404,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         countLabel.setText("<html>"
                 + "<div style='text-align: center;'>"
                 + "  <div>" + amount + "</div>"
-                + (smallMode ? "" : "  <div style=''>" + descHtml + "</div>")
-                + "</div>"
-                + "");
+                + (smallMode ? "" : "  <div style=''>" + labelText + "</div>")
+                + "</div>");
         countLabel.setToolTipText("<html>"
-                + amount + (smallMode ? "" : " - " + description)
+                + amount + (smallMode ? "" : " - " + labelHint)
                 + (supportCustomClicks ? "<br>Click on the count label to select/unselect cards stack." : "")
         );
         countLabel.setVerticalAlignment(smallMode ? JLabel.CENTER : JLabel.TOP);

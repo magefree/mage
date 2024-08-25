@@ -27,7 +27,7 @@ public final class TerritorialScythecat extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Landfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on Territorial Scythecat.
+        // Landfall — Whenever a land you control enters, put a +1/+1 counter on Territorial Scythecat.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 

@@ -39,7 +39,7 @@ public final class SuleimansLegacy extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new DestroyTargetEffect("destroy it. It can't be regenerated.", true),
                 filter, false, SetTargetPointer.PERMANENT
-        ).setTriggerPhrase("Whenever a Djinn or Efreet enters the battlefield, "));
+        ).setTriggerPhrase("Whenever a Djinn or Efreet enters, "));
     }
 
     private SuleimansLegacy(final SuleimansLegacy card) {

@@ -27,7 +27,7 @@ public final class SkyswimmerKoi extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever an artifact enters the battlefield under your control, you may draw a card. If you do, discard a card.
+        // Whenever an artifact you control enters, you may draw a card. If you do, discard a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DrawDiscardControllerEffect(1, 1, true),
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN

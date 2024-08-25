@@ -47,7 +47,7 @@ public final class YorvoLordOfGarenbrig extends CardImpl {
                 "with four +1/+1 counters on it"
         ));
 
-        // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on Yorvo. Then if that creature's power is greater than Yorvo's power, put another +1/+1 counter on Yorvo.
+        // Whenever another green creature you control enters, put a +1/+1 counter on Yorvo. Then if that creature's power is greater than Yorvo's power, put another +1/+1 counter on Yorvo.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new YorvoLordOfGarenbrigEffect(), filter, false, SetTargetPointer.PERMANENT
         ));
@@ -91,7 +91,7 @@ class YorvoLordOfGarenbrigEffect extends OneShotEffect {
         if (permanent == null) {
             return true;
         }
-        game.getState().processAction(game);
+        game.processAction();
         if (permanent.getPower().getValue() > sourcePerm.getPower().getValue()) {
             sourcePerm.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }

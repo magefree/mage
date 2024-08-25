@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -65,7 +65,7 @@ class TheBattleOfYavinEffect extends OneShotEffect {
             return false;
         }
 
-        int amount = (ManacostVariableValue.REGULAR).calculate(game, source, this);
+        int amount = (GetXValue.instance).calculate(game, source, this);
         if (amount > 0) {
             LinkedList<Permanent> sacrifices = new LinkedList<>();
 

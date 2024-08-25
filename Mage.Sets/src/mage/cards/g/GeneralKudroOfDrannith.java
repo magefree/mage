@@ -58,7 +58,7 @@ public final class GeneralKudroOfDrannith extends CardImpl {
                 1, 1, Duration.WhileOnBattlefield, filter, true
         )));
 
-        // Whenever General Kudro of Drannith or another Human enters the battlefield under your control, exile target card from an opponent's graveyard.
+        // Whenever General Kudro of Drannith or another Human you control enters, exile target card from an opponent's graveyard.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(new ExileTargetEffect(), filter2, false, true);
         ability.addTarget(new TargetCardInOpponentsGraveyard(filter3));
         this.addAbility(ability);

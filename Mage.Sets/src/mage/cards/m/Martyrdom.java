@@ -90,7 +90,7 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
         if (!playerId.equals(caster)) {
             return ActivationStatus.getFalse();
         }
-        Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
+        Permanent permanent = game.getPermanent(this.getSourceId());
         if (permanent == null || !permanent.isCreature(game)) {
             return ActivationStatus.getFalse();
         }
@@ -128,7 +128,7 @@ class MartyrdomRedirectDamageTargetEffect extends RedirectionEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {

@@ -75,15 +75,13 @@ class ManascapeRefractorGainAbilitiesEffect extends ContinuousEffectImpl {
         if (perm == null) {
             return false;
         }
-        for (Ability ability : game.getState()
-                .getBattlefield()
+        for (Ability ability : game.getBattlefield()
                 .getActivePermanents(filter, source.getControllerId(), source, game)
                 .stream()
                 .map(permanent -> permanent.getAbilities(game))
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull)
-                .filter(ability -> ability.getAbilityType() == AbilityType.ACTIVATED
-                        || ability.getAbilityType() == AbilityType.MANA)
+                .filter(Ability::isActivatedAbility)
                 .collect(Collectors.toList())) {
             // optimization to disallow the adding of duplicate, unnecessary basic mana abilities
             if (!(ability instanceof BasicManaAbility)

@@ -26,7 +26,7 @@ public final class GontisAetherHeart extends CardImpl {
 
         this.supertype.add(SuperType.LEGENDARY);
 
-        // Whenever Gonti's Aether Heart or another artifact enters the battlefield under your control, you get {E}{E} <i>(two energy counters).
+        // Whenever Gonti's Aether Heart or another artifact you control enters, you get {E}{E} <i>(two energy counters).
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GetEnergyCountersControllerEffect(2),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT, false, true

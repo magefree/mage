@@ -30,7 +30,7 @@ public class TargetTappedPermanentAsYouCast extends TargetPermanent {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        return game.getBattlefield().getAllActivePermanents(getFilter(), game).stream()
+        return game.getBattlefield().getActivePermanents(getFilter(), source.getControllerId(), source, game).stream()
                 .filter(Permanent::isTapped)
                 .map(Permanent::getId)
                 .collect(Collectors.toSet());
@@ -38,7 +38,7 @@ public class TargetTappedPermanentAsYouCast extends TargetPermanent {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        return game.getBattlefield().getAllActivePermanents(getFilter(), game).stream()
+        return game.getBattlefield().getActivePermanents(getFilter(), source.getControllerId(), source, game).stream()
                 .anyMatch(Permanent::isTapped);
     }
 
@@ -53,10 +53,10 @@ public class TargetTappedPermanentAsYouCast extends TargetPermanent {
 
     // See ruling: https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/253345-dream-leash
     @Override
-    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
+    public boolean stillLegalTarget(UUID controllerId, UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         return permanent != null 
                 && getFilter().match(permanent, game)
-                && super.canTarget(id, game);  // check everything but leave out the tapped requirement
+                && super.canTarget(controllerId, id, source, game);  // check everything but leave out the tapped requirement
     }
 }

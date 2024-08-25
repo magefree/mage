@@ -437,19 +437,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_CARD_COUNTERS, cardName, counterType.toString(), count.toString());
     }
 
-    public void checkExileCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+    public void checkExileCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
-        check(checkName, turnNum, step, player, CHECK_COMMAND_EXILE_COUNT, permanentName, count.toString());
+        check(checkName, turnNum, step, player, CHECK_COMMAND_EXILE_COUNT, cardName, count.toString());
     }
 
-    public void checkGraveyardCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+    public void checkGraveyardCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
-        check(checkName, turnNum, step, player, CHECK_COMMAND_GRAVEYARD_COUNT, permanentName, count.toString());
+        check(checkName, turnNum, step, player, CHECK_COMMAND_GRAVEYARD_COUNT, cardName, count.toString());
     }
 
-    public void checkLibraryCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {
+    public void checkLibraryCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String cardName, Integer count) {
         //Assert.assertNotEquals("", permanentName);
-        check(checkName, turnNum, step, player, CHECK_COMMAND_LIBRARY_COUNT, permanentName, count.toString());
+        check(checkName, turnNum, step, player, CHECK_COMMAND_LIBRARY_COUNT, cardName, count.toString());
     }
 
     public void checkHandCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, Integer count) {
@@ -1071,7 +1071,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert counter count on a permanent
      *
-     * @param cardName Name of the cards that should be counted.
+     * @param cardName Name of the card that should be counted.
      * @param type     Type of the counter that should be counted.
      * @param count    Expected count.
      */
@@ -1079,7 +1079,28 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         this.assertCounterCount(null, cardName, type, count);
     }
 
+    /**
+     * Assert counter count on a permanent
+     *
+     * @param player   Player who owns the card named cardName
+     * @param cardName Name of the card that should be counted.
+     * @param type     Type of the counter that should be counted.
+     * @param count    Expected count.
+     */
     public void assertCounterCount(Player player, String cardName, CounterType type, int count) throws AssertionError {
+        this.assertCounterCount(player, cardName, type.getName(), count);
+    }
+
+    /**
+     * Assert counter count on a permanent
+     *
+     * @param player      Player who owns the card named cardName
+     * @param cardName    Name of the card that should be counted.
+     * @param counterName Name of the counter that should be counted.
+     *                    (for custom ability counters, use getRule() from the ability)
+     * @param count       Expected count.
+     */
+    public void assertCounterCount(Player player, String cardName, String counterName, int count) throws AssertionError {
         //Assert.assertNotEquals("", cardName);
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
@@ -1089,7 +1110,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertNotNull("There is no such permanent " + (player == null ? "" : "for player " + player.getName()) + " on the battlefield, cardName=" + cardName, found);
-        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ':' + type + ')', count, found.getCounters(currentGame).getCount(type));
+        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ':' + counterName + ')', count, found.getCounters(currentGame).getCount(counterName));
     }
 
     /**
@@ -1122,7 +1143,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param count  Expected count.
      */
     public void assertCounterCount(Player player, CounterType type, int count) throws AssertionError {
-        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + player.getName() + ':' + type + ')', count, player.getCounters().getCount(type));
+        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + player.getName() + ':' + type + ')', count, player.getCountersCount(type));
     }
 
     /**
@@ -1474,7 +1495,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertExileZoneCount(String exileZoneName, int count) throws AssertionError {
         ExileZone exileZone = currentGame.getExile().getExileZone(CardUtil.getExileZoneId(exileZoneName, currentGame));
-        int actualCount = exileZone.getCards(currentGame).size();
+        int actualCount = exileZone == null ? 0 : exileZone.getCards(currentGame).size();
 
         Assert.assertEquals("(Exile \"" + exileZoneName + "\") Card counts are not equal.", count, actualCount);
     }
@@ -1586,6 +1607,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertTopCardRevealed(TestPlayer player, boolean isRevealed) {
         Assert.assertEquals(isRevealed, player.isTopCardRevealed());
     }
+
     /**
      * Asserts if, or if not, theAttachment is attached to thePermanent.
      *
@@ -1596,14 +1618,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 .filter(permanent -> permanent.isControlledBy(thePlayer.getId()))
                 .filter(permanent -> permanent.getName().equals(thePermanent))
                 .collect(Collectors.toList());
-        assertTrue(theAttachment + " was "+ (!isAttached ? "":"not") +" attached to " + thePermanent,
+        assertTrue(theAttachment + " was " + (!isAttached ? "" : "not") + " attached to " + thePermanent,
                 !isAttached ^
-                permanents.stream()
-                        .anyMatch(permanent -> permanent.getAttachments()
-                                .stream()
-                                .map(id -> currentGame.getCard(id))
-                                .map(MageObject::getName)
-                                .collect(Collectors.toList()).contains(theAttachment)));
+                        permanents.stream()
+                                .anyMatch(permanent -> permanent.getAttachments()
+                                        .stream()
+                                        .map(id -> currentGame.getCard(id))
+                                        .map(MageObject::getName)
+                                        .collect(Collectors.toList()).contains(theAttachment)));
     }
 
 

@@ -9,11 +9,13 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -105,9 +107,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     private void addKickerCostAndSetup(OptionalAdditionalCost newCost) {
         this.kickerCosts.add(newCost);
-        this.kickerCosts.forEach(cost -> {
-            cost.setCostType(VariableCostType.ADDITIONAL);
-        });
+        this.kickerCosts.forEach(cost -> cost.setCostType(VariableCostType.ADDITIONAL));
     }
 
     private void resetKicker() {
@@ -124,10 +124,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
      * Return total kicker activations with the specified Cost (blank for all kickers/multikickers)
      * Checks the start of the tags, to work for that blank method, which requires direct access
      *
-     * @param game
-     * @param source
      * @param needKickerCost use cost.getText(true)
-     * @return
      */
     public static int getKickedCounterStrict(Game game, Ability source, String needKickerCost) {
         Map<String, Object> costsTags = CardUtil.getSourceCostsTagsMap(game, source);
@@ -148,10 +145,6 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     /**
      * Return total kicker activations (kicker + multikicker)
-     *
-     * @param game
-     * @param source
-     * @return
      */
     public static int getKickedCounter(Game game, Ability source) {
         return getKickedCounterStrict(game, source, "");
@@ -159,10 +152,6 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     /**
      * If spell was kicked
-     *
-     * @param game
-     * @param source
-     * @return
      */
     public boolean isKicked(Game game, Ability source) {
         return isKicked(game, source, "");
@@ -171,10 +160,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     /**
      * If spell was kicked by specific kicker cost
      *
-     * @param game
-     * @param source
      * @param needKickerCost use cost.getText(true)
-     * @return
      */
     public boolean isKicked(Game game, Ability source, String needKickerCost) {
         return getKickedCounterStrict(game, source, needKickerCost) > 0;
@@ -285,18 +271,4 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         return sb.toString();
     }
 
-    /**
-     * Find spell's kicked stats. Must be used on stack only, e.g. for SPELL_CAST events
-     *
-     * @param game
-     * @param spellId
-     * @return
-     */
-    public static int getSpellKickedCount(Game game, UUID spellId) {
-        Spell spell = game.getSpellOrLKIStack(spellId);
-        if (spell != null) {
-            return KickerAbility.getKickedCounter(game, spell.getSpellAbility());
-        }
-        return 0;
-    }
 }

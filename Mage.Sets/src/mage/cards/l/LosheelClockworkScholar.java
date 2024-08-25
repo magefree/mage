@@ -47,7 +47,7 @@ public final class LosheelClockworkScholar extends CardImpl {
         // Whenever one or more artifact creatures enter the battlefield under your control, draw a card. This ability triggers only once each turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filter2
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
     }
 
     private LosheelClockworkScholar(final LosheelClockworkScholar card) {

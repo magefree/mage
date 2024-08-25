@@ -60,12 +60,12 @@ public class AddCounterChoiceSourceEffect extends OneShotEffect {
             return false;
         }
 
-        Choice counterChoice = new ChoiceImpl();
+        Choice counterChoice = new ChoiceImpl(true);
         counterChoice.setMessage("Choose counter type");
         counterChoice.setChoices(
                 this.counterTypes
                         .stream()
-                        .map(counterType -> AddCounterChoiceSourceEffect.capitalize(counterType.getName()))
+                        .map(counterType -> CardUtil.getTextWithFirstCharUpperCase(counterType.getName()))
                         .collect(Collectors.toSet())
         );
 
@@ -80,10 +80,6 @@ public class AddCounterChoiceSourceEffect extends OneShotEffect {
         Counter counter = counterChosen.createInstance();
 
         return permanent.addCounters(counter, source.getControllerId(), source, game);
-    }
-
-    private static String capitalize(String string) {
-        return string != null ? string.substring(0, 1).toUpperCase(Locale.ENGLISH) + string.substring(1) : null;
     }
 
     @Override

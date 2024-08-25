@@ -147,7 +147,7 @@ public class AboutDialog extends MageDialog {
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsNewActionPerformed
-        MageFrame.showWhatsNewDialog();
+        MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_btnWhatsNewActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

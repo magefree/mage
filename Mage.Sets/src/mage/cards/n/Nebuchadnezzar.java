@@ -15,6 +15,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -69,7 +70,7 @@ class NebuchadnezzarEffect extends OneShotEffect {
         if (opponent == null || sourceObject == null || cardName.isEmpty()) {
             return false;
         }
-        int costX = source.getManaCostsToPay().getX();
+        int costX = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (costX <= 0 || opponent.getHand().isEmpty()) {
             return true;
         }

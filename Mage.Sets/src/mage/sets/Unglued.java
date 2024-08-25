@@ -18,7 +18,7 @@ public final class Unglued extends ExpansionSet {
     }
 
     private Unglued() {
-        super("Unglued", "UGL", ExpansionSet.buildDate(1998, 8, 11), SetType.JOKESET);
+        super("Unglued", "UGL", ExpansionSet.buildDate(1998, 8, 11), SetType.JOKE_SET);
 
         cards.add(new SetCardInfo("Burning Cinder Fury of Crimson Chaos Fire", 40, Rarity.RARE, mage.cards.b.BurningCinderFuryOfCrimsonChaosFire.class));
         cards.add(new SetCardInfo("Checks and Balances", 16, Rarity.UNCOMMON, mage.cards.c.ChecksAndBalances.class));
@@ -59,6 +59,7 @@ public final class Unglued extends ExpansionSet {
         cards.add(new SetCardInfo("Spatula of the Ages", 81, Rarity.UNCOMMON, mage.cards.s.SpatulaOfTheAges.class));
         cards.add(new SetCardInfo("Strategy, Schmategy", 52, Rarity.RARE, mage.cards.s.StrategySchmategy.class));
         cards.add(new SetCardInfo("Swamp", 86, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.UGL_FULL_ART_BASIC, false)));
+        cards.add(new SetCardInfo("Team Spirit", 67, Rarity.COMMON, mage.cards.t.TeamSpirit.class));
         cards.add(new SetCardInfo("Temp of the Damned", 38, Rarity.COMMON, mage.cards.t.TempOfTheDamned.class));
         cards.add(new SetCardInfo("The Cheese Stands Alone", 2, Rarity.RARE, mage.cards.t.TheCheeseStandsAlone.class));
         cards.add(new SetCardInfo("Timmy, Power Gamer", 68, Rarity.RARE, mage.cards.t.TimmyPowerGamer.class));

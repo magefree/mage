@@ -23,6 +23,7 @@ public enum TokenRepository {
     // - additional card name for controller like "Morph: face up name"
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL = "Face Down";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MANIFEST = "Manifest";
+    public static final String XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK = "Cloak";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_MORPH = "Morph";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE = "Disguise";
     public static final String XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL = "Foretell";
@@ -32,6 +33,7 @@ public enum TokenRepository {
     public static final String XMAGE_IMAGE_NAME_NIGHT = "Night";
     public static final String XMAGE_IMAGE_NAME_THE_MONARCH = "The Monarch";
     public static final String XMAGE_IMAGE_NAME_RADIATION = "Radiation";
+    public static final String XMAGE_IMAGE_NAME_HELPER_EMBLEM = "Helper Emblem";
 
     private static final Logger logger = Logger.getLogger(TokenRepository.class);
 
@@ -287,6 +289,10 @@ public enum TokenRepository {
         // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_DISGUISE, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
 
+        // Cloak
+        // support only 1 image: https://scryfall.com/card/tmkm/21/a-mysterious-creature
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_CLOAK, 1, "https://api.scryfall.com/cards/tmkm/21/en?format=image"));
+
         // Foretell
         // https://scryfall.com/search?q=Foretell+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL, 1, "https://api.scryfall.com/cards/tkhm/23/en?format=image"));
@@ -299,6 +305,10 @@ public enum TokenRepository {
 
         // Radiation (for trigger)
         res.add(createXmageToken(XMAGE_IMAGE_NAME_RADIATION, 1, "https://api.scryfall.com/cards/tpip/22/en?format=image"));
+
+        // Helper emblem (for global card hints)
+        // use backface for it
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_HELPER_EMBLEM, 1, "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg"));
 
         return res;
     }

@@ -97,7 +97,7 @@ public class MatchPlayer implements Serializable {
         this.doneSideboarding = true;
     }
 
-    public boolean updateDeck(Deck newDeck) {
+    public boolean updateDeck(Deck newDeck, boolean ignoreMainBasicLands) {
         // used for auto-save by timeout from client side
 
         // workaround to keep deck name for Tiny Leaders because it must be hidden for players
@@ -106,7 +106,7 @@ public class MatchPlayer implements Serializable {
         }
 
         // make sure it's the same deck (player do not add or remove something)
-        boolean isGood = (this.deck.getDeckHash() == newDeck.getDeckHash());
+        boolean isGood = (this.deck.getDeckHash(ignoreMainBasicLands) == newDeck.getDeckHash(ignoreMainBasicLands));
         if (!isGood) {
             logger.error("Found cheating player " + player.getName()
                     + " with changed deck, main " + newDeck.getCards().size() + ", side " + newDeck.getSideboard().size());

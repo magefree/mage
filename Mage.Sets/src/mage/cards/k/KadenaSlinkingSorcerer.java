@@ -43,7 +43,7 @@ public final class KadenaSlinkingSorcerer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -54,7 +54,7 @@ public final class KadenaSlinkingSorcerer extends CardImpl {
                         .setText("The first face-down creature spell you cast each turn costs {3} less to cast.")
         ), new KadenaSlinkingSorcererWatcher());
 
-        // Whenever a face-down creature enters the battlefield under your control, draw a card.
+        // Whenever a face-down creature you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filterFaceDownPermanent
         ));

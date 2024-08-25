@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.common.FerociousHint;
 import mage.cards.CardImpl;
@@ -24,8 +24,8 @@ public final class CratersClaws extends CardImpl {
         // Crater's Claws deals X damage to any target.
         // <i>Ferocious</i> &mdash; Crater's Claws deals X plus 2 damage to that creature or player instead if you control a creature with power 4 or greater.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(new IntPlusDynamicValue(2, ManacostVariableValue.REGULAR)),
-                new DamageTargetEffect(ManacostVariableValue.REGULAR),
+                new DamageTargetEffect(new IntPlusDynamicValue(2, GetXValue.instance)),
+                new DamageTargetEffect(GetXValue.instance),
                 FerociousCondition.instance,
                 "{this} deals X damage to any target."
                         + "<br><i>Ferocious</i> &mdash; {this} deals X plus 2 damage instead if you control a creature with power 4 or greater"));

@@ -150,6 +150,7 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
     public String describeTargets(Targets targets, String defaultDescription) {
         if (targets.size() <= this.targetIndex) {
             // TODO: need research, is it used for non setup targets ?!
+            // Typical usage example: trigger sets fixed target pointer
             return defaultDescription;
         } else {
             return targets.get(this.targetIndex).getDescription();
