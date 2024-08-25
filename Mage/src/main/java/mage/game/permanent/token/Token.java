@@ -40,6 +40,8 @@ public interface Token extends MageObject {
 
     boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created);
 
+    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created, List<Token> additionalTokens);
+
     void setPower(int power);
 
     void setToughness(int toughness);

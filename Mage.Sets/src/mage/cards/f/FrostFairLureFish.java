@@ -42,7 +42,7 @@ public final class FrostFairLureFish extends CardImpl {
         // When Frost Fair Lure Fish enters the battlefield, create two 1/1 blue Fish creature tokens and two tapped Treasure tokens.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FishNoAbilityToken(), 2));
         ability.addEffect(new CreateTokenEffect(new TreasureToken(), 2, true)
-                .setText("and two tapped Treasure tokens"));
+                .setText("and create two tapped Treasure tokens"));
         this.addAbility(ability);
 
         // Fish you control have haste and can't be blocked by Humans.
