@@ -70,7 +70,7 @@ public class CreateTokenEffect extends OneShotEffect {
     protected CreateTokenEffect(final CreateTokenEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
-        for (Token token : tokens) {
+        for (Token token : effect.tokens) {
             this.tokens.add(token.copy());
         }
         this.tapped = effect.tapped;
