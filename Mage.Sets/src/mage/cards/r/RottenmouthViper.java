@@ -39,12 +39,11 @@ public final class RottenmouthViper extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // As an additional cost to cast this spell, you may sacrifice any number of nonland permanents.
+        // As an additional cost to cast this spell, you may sacrifice any number of nonland permanents. This spell costs {1} less to cast for each permanent sacrificed this way.
         Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND, true);
         cost.setText("you may sacrifice any number of nonland permanents. " +
                 "This spell costs {1} less to cast for each permanent sacrificed this way");
         this.getSpellAbility().addCost(cost);
-        // This spell costs {1} less to cast for each permanent sacrificed this way.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new RottenmouthViperCostReductionEffect()));
 
         // Whenever Rottenmouth Viper enters or attacks, put a blight counter on it. Then for each blight counter on it, each opponent loses 4 life unless that player sacrifices a nonland permanent or discards a card.
