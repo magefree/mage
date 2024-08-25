@@ -1,7 +1,5 @@
 package mage.cards.r;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -21,13 +19,11 @@ import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -43,14 +39,13 @@ public final class RottenmouthViper extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // As an additional cost to cast this spell, you may sacrifice any number of nonland permanents. This spell costs {1} less to cast for each permanent sacrificed this way.
+        // As an additional cost to cast this spell, you may sacrifice any number of nonland permanents.
         Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND, true);
-        cost.setText("you may sacrifice any number of nonland permanents." +
+        cost.setText("you may sacrifice any number of nonland permanents. " +
                 "This spell costs {1} less to cast for each permanent sacrificed this way");
         this.getSpellAbility().addCost(cost);
-        Ability modAbility = new SimpleStaticAbility(Zone.ALL, new RottenmouthViperCostModificationEffect());
-        modAbility.setRuleVisible(false);
-        this.addAbility(modAbility, new RottenmouthViperCostModificationWatcher());
+        // This spell costs {1} less to cast for each permanent sacrificed this way.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new RottenmouthViperCostReductionEffect()));
 
         // Whenever Rottenmouth Viper enters or attacks, put a blight counter on it. Then for each blight counter on it, each opponent loses 4 life unless that player sacrifices a nonland permanent or discards a card.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
@@ -74,7 +69,7 @@ class RottenmouthViperEffect extends OneShotEffect{
 
     DynamicValue blightCounterAmount;
 
-    public RottenmouthViperEffect(DynamicValue blightCounterAmount) {
+    RottenmouthViperEffect(DynamicValue blightCounterAmount) {
         super(Outcome.LoseLife);
         this.blightCounterAmount = blightCounterAmount;
         this.staticText = "Then for each blight counter on it, each opponent loses 4 life unless that player sacrifices a nonland permanent or discards a card.";
@@ -82,7 +77,7 @@ class RottenmouthViperEffect extends OneShotEffect{
 
     private RottenmouthViperEffect(final RottenmouthViperEffect effect) {
         super(effect);
-        this.blightCounterAmount = effect.blightCounterAmount;
+        this.blightCounterAmount = effect.blightCounterAmount.copy();
     }
 
     @Override
@@ -115,7 +110,7 @@ class RottenmouthViperEffect extends OneShotEffect{
                             }
                         }
                         if (!opponent.getHand().isEmpty() && opponent.chooseUse(outcome, "Discard a card? (Iteration " + i + " of " + repeat + ")",
-                                "Otherwise you lose 4 life.", "Discard", "Lose 3 life", source, game)) {
+                                "Otherwise you lose 4 life.", "Discard", "Lose 4 life", source, game)) {
                             opponent.discardOne(false, false, source, game);
                             continue;
                         }
@@ -129,19 +124,19 @@ class RottenmouthViperEffect extends OneShotEffect{
     }
 }
 
-class RottenmouthViperCostModificationEffect extends CostModificationEffectImpl{
+class RottenmouthViperCostReductionEffect extends CostModificationEffectImpl{
 
-    RottenmouthViperCostModificationEffect(){
+    RottenmouthViperCostReductionEffect(){
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
     }
 
-    private RottenmouthViperCostModificationEffect(final RottenmouthViperCostModificationEffect effect) {
+    private RottenmouthViperCostReductionEffect(final RottenmouthViperCostReductionEffect effect) {
         super(effect);
     }
 
     @Override
-    public RottenmouthViperCostModificationEffect copy() {
-        return new RottenmouthViperCostModificationEffect(this);
+    public RottenmouthViperCostReductionEffect copy() {
+        return new RottenmouthViperCostReductionEffect(this);
     }
 
     @Override
@@ -159,10 +154,6 @@ class RottenmouthViperCostModificationEffect extends CostModificationEffectImpl{
             }
             break;
         }
-        RottenmouthViperCostModificationWatcher watcher = game.getState().getWatcher(RottenmouthViperCostModificationWatcher.class);
-        if (watcher != null) {
-            reduction += watcher.getSacCount(source.getControllerId());
-        }
         CardUtil.adjustCost(spellAbility, reduction);
         return true;
     }
@@ -170,35 +161,5 @@ class RottenmouthViperCostModificationEffect extends CostModificationEffectImpl{
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify instanceof SpellAbility && abilityToModify.getSourceId().equals(source.getSourceId());
-    }
-}
-
-class RottenmouthViperCostModificationWatcher extends Watcher {
-
-    private static final Map<UUID, Integer> sacMap = new HashMap<>();
-
-    RottenmouthViperCostModificationWatcher(){
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SACRIFICED_PERMANENT) {
-            return;
-        }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent != null && (!(permanent.isLand(game)))) {
-            sacMap.compute(event.getTargetId(), CardUtil::setOrIncrementValue);
-        }
-    }
-
-    @Override
-    public void reset(){
-        sacMap.clear();
-        super.reset();
-    }
-
-    int getSacCount(UUID playerId){
-        return sacMap.getOrDefault(playerId, 0);
     }
 }
