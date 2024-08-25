@@ -33,7 +33,7 @@ public enum CreaturesYouControlCount implements DynamicValue {
     public String getMessage(EffectPhrasing phrasing) {
         switch (phrasing) {
             case FOR_EACH:
-                return "for each creature you control";
+                return "creature you control";
             case X_HIDDEN:
                 return "";
             default:
