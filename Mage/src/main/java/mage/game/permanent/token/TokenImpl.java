@@ -219,7 +219,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created) {
-        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, created, Arrays.asList(this));
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, created, Collections.singletonList(this));
     }
 
     @Override

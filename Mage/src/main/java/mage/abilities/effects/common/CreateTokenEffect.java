@@ -57,6 +57,9 @@ public class CreateTokenEffect extends OneShotEffect {
 
     public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {
         super(Outcome.PutCreatureInPlay);
+        if (token == null) {
+            throw new IllegalArgumentException("Wrong code usage. Token provided to CreateTokenEffect must not be null.");
+        }
         this.tokens.add(token);
         this.amount = amount.copy();
         this.tapped = tapped;
@@ -67,7 +70,9 @@ public class CreateTokenEffect extends OneShotEffect {
     protected CreateTokenEffect(final CreateTokenEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
-        this.tokens.addAll(effect.tokens);
+        for (Token token : tokens) {
+            this.tokens.add(token.copy());
+        }
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
@@ -80,11 +85,6 @@ public class CreateTokenEffect extends OneShotEffect {
     public CreateTokenEffect entersWithCounters(CounterType counterType, DynamicValue numberOfCounters) {
         this.counterType = counterType;
         this.numberOfCounters = numberOfCounters;
-        return this;
-    }
-
-    public CreateTokenEffect withAdditionalToken(Token token) {
-        this.tokens.add(token);
         return this;
     }
 
@@ -161,63 +161,42 @@ public class CreateTokenEffect extends OneShotEffect {
     }
 
     private void setText() {
-        String tokenDescription = tokens.get(0).getDescription();
         boolean singular = amount.toString().equals("1");
-        if (tokenDescription.contains(", a legendary")) {
-            staticText = "create " + tokenDescription;
-            return;
-        }
-        if (oldPhrasing) {
-            tokenDescription = tokenDescription.replace("token with \"",
-                    singular ? "token. It has \"" : "tokens. They have \"");
-        }
         StringBuilder sb = new StringBuilder("create ");
-        if (singular) {
-            if (tapped && !attacking) {
-                sb.append("a tapped ");
+        for (int i = 0; i < tokens.size(); i++) {
+            if (i > 0) {
+                if (tokens.size() > 2) {
+                    sb.append(", ");
+                } else {
+                    sb.append(" ");
+                }
+                if (i+1 == tokens.size()) {
+                    sb.append("and ");
+                }
+            }
+            String tokenDescription = tokens.get(i).getDescription();
+            if (tokenDescription.contains(", a legendary")) {
                 sb.append(tokenDescription);
-            } else {
-                sb.append(CardUtil.addArticle(tokenDescription));
+                continue;
             }
-        } else {
-            sb.append(CardUtil.numberToText(amount.toString())).append(' ');
-            if (tapped && !attacking) {
-                sb.append("tapped ");
+            if (oldPhrasing) {
+                tokenDescription = tokenDescription.replace("token with \"",
+                        singular ? "token. It has \"" : "tokens. They have \"");
             }
-            sb.append(tokenDescription);
-            if (tokenDescription.endsWith("token")) {
-                sb.append("s");
-            }
-            int tokenLocation = sb.indexOf("token ");
-            if (tokenLocation != -1) {
-                sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
-            }
-        }
-
-        for (int i = 1; i < tokens.size(); i++) {
-            Token additionalToken = tokens.get(i);
-            if (tokens.size() > 2) {
-                sb.append(", ");
-            } else {
-                sb.append(" ");
-            }
-            if (i+1 == tokens.size()) {
-                sb.append("and ");
-            }
-            if (amount.toString().equals("1")) {
+            if (singular) {
                 if (tapped && !attacking) {
                     sb.append("a tapped ");
-                    sb.append(additionalToken.getDescription());
+                    sb.append(tokenDescription);
                 } else {
-                    sb.append(CardUtil.addArticle(additionalToken.getDescription()));
+                    sb.append(CardUtil.addArticle(tokenDescription));
                 }
             } else {
                 sb.append(CardUtil.numberToText(amount.toString())).append(' ');
                 if (tapped && !attacking) {
                     sb.append("tapped ");
                 }
-                sb.append(additionalToken.getDescription().replace("token. It has", "tokens. They have"));
-                if (additionalToken.getDescription().endsWith("token")) {
+                sb.append(tokenDescription);
+                if (tokenDescription.endsWith("token")) {
                     sb.append("s");
                 }
                 int tokenLocation = sb.indexOf("token ");
@@ -228,7 +207,7 @@ public class CreateTokenEffect extends OneShotEffect {
         }
 
         if (attacking) {
-            if (singular) {
+            if (singular && tokens.size() == 1) {
                 sb.append(" that's");
             } else {
                 sb.append(" that are");

@@ -18,7 +18,7 @@ public final class ForbiddenFriendship extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Create a 1/1 red Dinosaur creature token with haste and a 1/1 white Human Soldier creature token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new DinosaurHasteToken()).withAdditionalToken(new HumanSoldierToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new DinosaurHasteToken()).withAdditionalTokens(new HumanSoldierToken()));
     }
 
     private ForbiddenFriendship(final ForbiddenFriendship card) {
