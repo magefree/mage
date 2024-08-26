@@ -43,6 +43,6 @@ public enum CreaturesYouControlCount implements DynamicValue {
 
     @Override
     public ValueHint getHint() {
-        return new ValueHint("creatures you control", this);
+        return new ValueHint("Creatures you control", this);
     }
 }
