@@ -63,7 +63,7 @@ public class AlelaCunningConquerorTest extends MultiplayerTriggerTest {
 
     @Test
     public void attackTwoPlayers() {
-        //setStrictChooseMode(true); // did not succesfully differentiate the two very similar triggers to order them in the stack.
+        setStrictChooseMode(false); // did not successfully differentiate the two very similar triggers to order them in the stack.
         addCard(Zone.BATTLEFIELD, playerA, alela);
         addCard(Zone.BATTLEFIELD, playerA, pestermite);
         addCard(Zone.BATTLEFIELD, playerB, bears);

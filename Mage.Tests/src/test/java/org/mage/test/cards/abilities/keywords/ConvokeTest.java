@@ -127,7 +127,7 @@ public class ConvokeTest extends CardTestPlayerBaseWithAIHelps {
         // AI must use special actions to pay as convoke
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stoke the Flames", playerB);
 
-        //setStrictChooseMode(true); AI must choose targets
+        setStrictChooseMode(false); // AI must choose targets
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

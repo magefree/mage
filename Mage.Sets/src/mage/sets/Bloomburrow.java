@@ -171,6 +171,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Overprotect", 185, Rarity.UNCOMMON, mage.cards.o.Overprotect.class));
         cards.add(new SetCardInfo("Patchwork Banner", 247, Rarity.UNCOMMON, mage.cards.p.PatchworkBanner.class));
         cards.add(new SetCardInfo("Pawpatch Formation", 186, Rarity.UNCOMMON, mage.cards.p.PawpatchFormation.class));
+        cards.add(new SetCardInfo("Pawpatch Recruit", 187, Rarity.RARE, mage.cards.p.PawpatchRecruit.class));
         cards.add(new SetCardInfo("Pearl of Wisdom", 64, Rarity.COMMON, mage.cards.p.PearlOfWisdom.class));
         cards.add(new SetCardInfo("Peerless Recycling", 188, Rarity.UNCOMMON, mage.cards.p.PeerlessRecycling.class));
         cards.add(new SetCardInfo("Persistent Marshstalker", 104, Rarity.UNCOMMON, mage.cards.p.PersistentMarshstalker.class));
@@ -194,6 +195,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Repel Calamity", 27, Rarity.UNCOMMON, mage.cards.r.RepelCalamity.class));
         cards.add(new SetCardInfo("Reptilian Recruiter", 149, Rarity.UNCOMMON, mage.cards.r.ReptilianRecruiter.class));
         cards.add(new SetCardInfo("Rockface Village", 259, Rarity.UNCOMMON, mage.cards.r.RockfaceVillage.class));
+        cards.add(new SetCardInfo("Rottenmouth Viper", 107, Rarity.MYTHIC, mage.cards.r.RottenmouthViper.class));
         cards.add(new SetCardInfo("Roughshod Duo", 150, Rarity.COMMON, mage.cards.r.RoughshodDuo.class));
         cards.add(new SetCardInfo("Run Away Together", 67, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Rust-Shield Rampager", 190, Rarity.COMMON, mage.cards.r.RustShieldRampager.class));

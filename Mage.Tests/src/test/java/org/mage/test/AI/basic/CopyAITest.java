@@ -167,7 +167,7 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         //addTarget(playerA, "Spectral Bears"); // AI must choose
 
         setStopAt(1, PhaseStep.END_TURN);
-        //setStrictChooseMode(true); // AI must choose
+        setStrictChooseMode(false); // AI must choose
         execute();
 
         assertPermanentCount(playerA, "Spectral Bears", 1);
@@ -191,7 +191,7 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         //addTarget(playerA, "Spectral Bears"); // AI must choose
 
         setStopAt(1, PhaseStep.END_TURN);
-        //setStrictChooseMode(true); // AI must choose
+        setStrictChooseMode(false); // AI must choose
         execute();
 
         assertPermanentCount(playerA, "Spectral Bears", 1);

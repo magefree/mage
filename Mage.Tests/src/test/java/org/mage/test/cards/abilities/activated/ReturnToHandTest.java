@@ -58,8 +58,9 @@ public class ReturnToHandTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Swamp");
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp");
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setChoice(playerA, true);
 
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Swamp", 1);
@@ -82,8 +83,9 @@ public class ReturnToHandTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Urborg, Tomb of Yawgmoth", 1);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flood Plain");
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setChoice(playerA, true);
 
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Flood Plain", 1);

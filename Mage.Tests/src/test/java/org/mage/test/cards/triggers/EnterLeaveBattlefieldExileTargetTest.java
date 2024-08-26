@@ -97,7 +97,7 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
         setChoice(playerA, true);
         //addTarget(playerA, "Silvercoat Lion^Balduvian Bears"); // AI must target
 
-        //setStrictChooseMode(true); // AI must target
+        setStrictChooseMode(false); // AI must target
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 

@@ -47,7 +47,7 @@ public class TargetRequiredTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Redcap Melee", "Silvercoat Lion");
         //addTarget(playerA, "Mountain"); AI must select targets
 
-        //setStrictChooseMode(true); AI must select targets
+        setStrictChooseMode(false); // AI must select targets
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -87,7 +87,7 @@ public class TargetRequiredTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Redcap Melee", "Silvercoat Lion");
         //addTarget(playerA, "Mountain"); no lands to sacrifice
 
-        //setStrictChooseMode(true);
+        setStrictChooseMode(false);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
