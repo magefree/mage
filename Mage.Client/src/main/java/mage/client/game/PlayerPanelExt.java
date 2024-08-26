@@ -287,10 +287,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             changedFontLife = false;
         }
         setTextForLabel("life", lifeLabel, life, playerLife, false, PreferencesDialog.getCurrentTheme().getTextColor());
-        setTextForLabel("poison", poisonLabel, poison, counterOfName(player, "poison"), false);
-        setTextForLabel("energy", energyLabel, energy, counterOfName(player, "energy"), false);
-        setTextForLabel("experience", experienceLabel, experience, counterOfName(player, "experience"), false);
-        setTextForLabel("rad", radLabel, rad, counterOfName(player, "rad"), false);
+        setTextForLabel("poison", poisonLabel, poison, counterOfName(player, "poison"), false, PreferencesDialog.getCurrentTheme().getTextColor());
+        setTextForLabel("energy", energyLabel, energy, counterOfName(player, "energy"), false, PreferencesDialog.getCurrentTheme().getTextColor());
+        setTextForLabel("experience", experienceLabel, experience, counterOfName(player, "experience"), false, PreferencesDialog.getCurrentTheme().getTextColor());
+        setTextForLabel("rad", radLabel, rad, counterOfName(player, "rad"), false, PreferencesDialog.getCurrentTheme().getTextColor());
         setTextForLabel("hand zone", handLabel, hand, player.getHandCount(), false, PreferencesDialog.getCurrentTheme().getTextColor());
         int libraryCards = player.getLibraryCount();
         if (libraryCards > 99) {
@@ -325,7 +325,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         setTextForLabel("graveyard zone", graveLabel, grave, graveCards, false, graveColor);
         graveLabel.setToolTipText("Card Types: " + qtyCardTypes(player.getGraveyard()));
 
-        Color commandColor = Color.BLACK;
+        Color commandColor = PreferencesDialog.getCurrentTheme().getTextColor();
         for (CommandObjectView com : player.getCommandObjectList()) {
             if (game != null && game.getCanPlayObjects() != null && game.getCanPlayObjects().containsObject(com.getId())) {
                 commandColor = activeValueColor;
