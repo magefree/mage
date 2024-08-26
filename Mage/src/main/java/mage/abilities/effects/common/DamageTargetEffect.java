@@ -164,7 +164,6 @@ public class DamageTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
         if (amount instanceof StaticValue) {
             sb.append(((StaticValue)amount).getValue());
