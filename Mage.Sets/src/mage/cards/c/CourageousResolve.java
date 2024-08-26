@@ -6,10 +6,10 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.CantLoseLifeControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
@@ -24,7 +24,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.target.common.TargetCreaturePermanent;
+import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,13 +42,13 @@ public final class CourageousResolve extends CardImpl {
         // Up to one target creature you control gains protection from each of your opponents until end of turn.
         // Draw a card. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything controlled by those players.)
         this.getSpellAbility().addEffect(new CourageousResolveEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("Draw a card. <i>(It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything controlled by those players.)</i>"));
 
 
         //Fateful hour — If you have 5 or less life, you can't lose life this turn, you can't lose the game this turn,
         // and your opponents can't win the game this turn.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new CantLoseLifeControllerEffect(Duration.EndOfTurn), FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; If you have 5 or less life, you can't lose life this turn, "));
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new CantLoseLifeEffect(), FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; If you have 5 or less life, you can't lose life this turn, "));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(new CourageousResolveWinLoseEffect(), FatefulHourCondition.instance));
 
 
@@ -115,9 +116,6 @@ class CourageousResolveProtectionAbility extends ProtectionAbility {
 
     @Override
     public boolean canTarget(MageObject source, Game game) {
-        if (source == null) {
-            return true;
-        }
         if (source instanceof Permanent) {
             return playerSet.stream().noneMatch(((Permanent) source)::isControlledBy);
         }
@@ -129,6 +127,32 @@ class CourageousResolveProtectionAbility extends ProtectionAbility {
         }
         if (source instanceof Card) {
             return playerSet.stream().noneMatch(((Card) source)::isOwnedBy);
+        }
+        return true;
+    }
+}
+
+class CantLoseLifeEffect extends ContinuousEffectImpl {
+
+    public CantLoseLifeEffect() {
+        super(Duration.EndOfTurn, Outcome.Benefit);
+    }
+
+    protected CantLoseLifeEffect(final CantLoseLifeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public CantLoseLifeEffect copy() {
+        return new CantLoseLifeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.setCanLoseLife(false);
+            return true;
         }
         return true;
     }
