@@ -34,7 +34,8 @@ public enum ThemeType {
             // card icons
             new Color(169, 176, 190),
             Color.black,
-            new Color(51, 98, 140)
+            new Color(51, 98, 140),
+            Color.black
     ),
     GREY("Grey",
             "grey-theme/",
@@ -56,6 +57,7 @@ public enum ThemeType {
             new Color(99, 99, 99, 200), // playerPanel_deadBackgroundColor
             // card icons
             new Color(158, 158, 158),
+            Color.black,
             Color.black,
             Color.black
     ),
@@ -80,7 +82,8 @@ public enum ThemeType {
             // card icons
             new Color(246, 136, 158),
             Color.black,
-            new Color(106, 0, 255)
+            new Color(106, 0, 255),
+            Color.black
     ),
     COFFEE("Coffee",
             "coffee-theme/",
@@ -103,7 +106,8 @@ public enum ThemeType {
             // card icons
             new Color(219, 193, 172),
             Color.black,
-            new Color(97, 27, 0)
+            new Color(97, 27, 0),
+            Color.black
     ),
     ISLAND("Island",
             "island-theme/",
@@ -121,12 +125,36 @@ public enum ThemeType {
             new Color(0, 78, 97), // nimbusBase
             new Color(172, 195, 219), // mageToolbar
             new Color(172, 195, 219), // playerPanel_inactiveBackgroundColor
-            new Color(204, 236, 201), // playerPanel_inactiveBackgroundColor
+            new Color(204, 236, 201), // playerPanel_activeBackgroundColor
             new Color(50, 68, 99, 255), // playerPanel_deadBackgroundColor
             // card icons
             new Color(172, 197, 219),
             Color.black,
-            new Color(0, 78, 97)
+            new Color(0, 78, 97),
+            Color.black
+    ),
+    CARBON_FIBER("Carbon Fiber",
+            "carbon_fiber-theme/",
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            new Color(43, 45, 49), // buttons, scrollar background, disabled inputs
+            new Color(49, 51, 56), // window background
+            new Color(58, 56, 64), // inputs, table rows
+            new Color(58, 56, 64), // tooltips
+            new Color(25, 25, 25), // title bars, scrollbar foreground
+            new Color(43, 45, 49), // mageToolbar
+            new Color(43, 45, 49), // playerPanel_inactiveBackgroundColor
+            new Color(64, 61, 56), // playerPanel_activeBackgroundColor
+            new Color(50, 68, 99, 255), // playerPanel_deadBackgroundColor
+            new Color(172, 197, 219),
+            Color.BLACK,
+            new Color(0, 78, 97),
+            new Color(220, 220, 220)
     );
 
     private final String name;
@@ -151,6 +179,9 @@ public enum ThemeType {
     private final Color cardIconsFillColor;
     private final Color cardIconsStrokeColor;
     private final Color cardIconsTextColor;
+    private final Color textColor;
+
+    //private final Color nimbusSelection;
 
     ThemeType(String name,
               String path,
@@ -172,7 +203,8 @@ public enum ThemeType {
               Color playerPanel_deadBackgroundColor,
               Color cardIconsFillColor,
               Color cardIconsStrokeColor,
-              Color cardIconsTextColor
+              Color cardIconsTextColor,
+	          Color textColor
     ) {
         this.name = name;
         this.path = path;
@@ -195,6 +227,7 @@ public enum ThemeType {
         this.cardIconsFillColor = cardIconsFillColor;
         this.cardIconsStrokeColor = cardIconsStrokeColor;
         this.cardIconsTextColor = cardIconsTextColor;
+	    this.textColor = textColor;
     }
 
     @Override
@@ -241,6 +274,10 @@ public enum ThemeType {
 
     public Color getMageToolbar() {
         return mageToolbar;
+    }
+
+    public Color getTextColor() {
+        return textColor;
     }
 
     public Color getPlayerPanel_inactiveBackgroundColor() {

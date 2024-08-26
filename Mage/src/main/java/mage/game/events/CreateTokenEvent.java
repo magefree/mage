@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.game.permanent.token.Token;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,11 +18,15 @@ public class CreateTokenEvent extends GameEvent {
      * @param source
      * @param controllerId
      * @param amount
-     * @param token
+     * @param tokensList
      */
-    public CreateTokenEvent(Ability source, UUID controllerId, int amount, Token token) {
+    public CreateTokenEvent(Ability source, UUID controllerId, int amount, List<Token> tokensList) {
         super(GameEvent.EventType.CREATE_TOKEN, null, source, controllerId, amount, false);
-        tokens.put(token, amount);
+        if (tokensList != null) {
+            for (Token token : tokensList) {
+                tokens.put(token, amount);
+            }
+        }
     }
 
     public Map<Token, Integer> getTokens() {

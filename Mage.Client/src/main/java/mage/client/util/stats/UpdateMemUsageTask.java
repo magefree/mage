@@ -1,4 +1,5 @@
 package mage.client.util.stats;
+import mage.client.dialog.PreferencesDialog;
 
 import java.awt.*;
 import java.util.List;
@@ -75,7 +76,7 @@ public class UpdateMemUsageTask extends SwingWorker<Void, MemoryStats> {
                             + "Application memory limit almost reached. Errors and freezes are very possible.";
 
                 }else{
-                    jLabelToDisplayInfo.setForeground(Color.black);
+                    jLabelToDisplayInfo.setForeground(PreferencesDialog.getCurrentTheme().getTextColor());
                 }
 
                 this.jLabelToDisplayInfo.setToolTipText("<html>Memory usage statistics" + warning + optimizeHint);
