@@ -73,7 +73,8 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
      * @return A ValueHint with a shortened descriptor of this DynamicValue
      * example:
      *      getMessage(EQUAL_TO) -> the number of card types among cards in your graveyard
-     *      getHint() -> ValueHint("card types in your graveyard", this)
+     *      getHint() -> ValueHint("Card types in your graveyard", this)
+     * Note: make sure to capitalize the ValueHunt name field
      */
     ValueHint getHint();
 
