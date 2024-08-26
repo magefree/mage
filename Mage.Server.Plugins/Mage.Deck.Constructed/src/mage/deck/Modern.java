@@ -43,6 +43,7 @@ public class Modern extends Constructed {
         banned.add("Golgari Grave-Troll");
         banned.add("Great Furnace");
         banned.add("Green Sun's Zenith");
+        banned.add("Grief");
         banned.add("Hogaak, Arisen Necropolis");
         banned.add("Hypergenesis");
         banned.add("Krark-Clan Ironworks");
@@ -51,6 +52,7 @@ public class Modern extends Constructed {
         banned.add("Mox Opal");
         banned.add("Mycosynth Lattice");
         banned.add("Mystic Sanctuary");
+        banned.add("Nadu, Winged Wisdom");
         banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
         banned.add("Ponder");
@@ -73,7 +75,5 @@ public class Modern extends Constructed {
         banned.add("Vault of Whispers");
         banned.add("Violent Outburst");
         banned.add("Yorion, Sky Nomad");
-        banned.add("Nadu, Winged Wisdom");
-        banned.add("Grief");
     }
 }
