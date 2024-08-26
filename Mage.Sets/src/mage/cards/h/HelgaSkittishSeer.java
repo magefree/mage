@@ -8,25 +8,29 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.mana.ConditionalAnyColorManaAbility;
+import mage.abilities.effects.mana.ManaEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.choices.ChoiceColor;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class HelgaSkittishSeer extends CardImpl {
@@ -56,14 +60,13 @@ public class HelgaSkittishSeer extends CardImpl {
         this.addAbility(ability);
 
         // {T}: Add X mana of any one color, where X is Helga, Skittish Seer's power. Use this mana only to cast creature spells with mana value 4 or greater or to cas creature spells with {x} in their mana costs
-        this.addAbility(new ConditionalAnyColorManaAbility(
-                new TapSourceCost(),
-                new SourcePermanentPowerCount(),
-                new SourcePermanentPowerCount(),
-                new HelgaSkittishSeerManaBuilder(),
-                true,
-                "Add X mana of any one color, where X is {this}'s power. "));
-
+        this.addAbility(
+                new SimpleManaAbility(
+                        Zone.BATTLEFIELD,
+                        new HelgaSkittishSeerManaEffect(new SourcePermanentPowerCount()),
+                        new TapSourceCost()
+                )
+        );
     }
 
     private HelgaSkittishSeer(final HelgaSkittishSeer card) {super(card);}
@@ -106,5 +109,57 @@ class HelgaSkittishSeerManaCondition extends CreatureCastManaCondition {
             }
         }
         return false;
+    }
+}
+
+class HelgaSkittishSeerManaEffect extends ManaEffect {
+
+    ConditionalManaBuilder manaBuilder = new HelgaSkittishSeerManaBuilder();
+    DynamicValue power;
+
+    HelgaSkittishSeerManaEffect(DynamicValue power) {
+        this.power = power;
+        this.staticText = "Add X mana of any one color, where X is {this}'s power. " + manaBuilder.getRule();
+    }
+
+    private HelgaSkittishSeerManaEffect(final HelgaSkittishSeerManaEffect effect) {
+        super(effect);
+        this.power = effect.power.copy();
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        if (game != null){
+            netMana.add(manaBuilder.setMana(Mana.BlackMana(power.calculate(game, source, this)), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.BlueMana(power.calculate(game, source, this)), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.RedMana(power.calculate(game, source, this)), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.GreenMana(power.calculate(game, source, this)), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.WhiteMana(power.calculate(game, source, this)), source, game).build());
+        }
+        return netMana;
+    }
+
+    @Override
+    public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null){
+            return mana;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null){
+            ChoiceColor choice = new ChoiceColor();
+            if (!controller.choose(Outcome.PutManaInPool, choice, game)){
+                return mana;
+            }
+            Mana chosen = choice.getMana(power.calculate(game, source, this));
+            return manaBuilder.setMana(chosen, source, game).build();
+        }
+        return mana;
+    }
+
+    @Override
+    public OneShotEffect copy() {
+        return new HelgaSkittishSeerManaEffect(this);
     }
 }

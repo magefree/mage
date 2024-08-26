@@ -51,11 +51,6 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
                 + ". " + manaBuilder.getRule();
     }
 
-    public AddConditionalManaOfAnyColorEffect(DynamicValue amount, DynamicValue netAmount, ConditionalManaBuilder manaBuilder, boolean oneChoice, String text){
-        this(amount, netAmount, manaBuilder, oneChoice);
-        staticText = text + manaBuilder.getRule();
-    }
-
     protected AddConditionalManaOfAnyColorEffect(final AddConditionalManaOfAnyColorEffect effect) {
         super(effect);
         this.amount = effect.amount;

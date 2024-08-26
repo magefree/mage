@@ -39,11 +39,6 @@ public class ConditionalAnyColorManaAbility extends ActivatedManaAbilityImpl {
         this.amount = amount;
     }
 
-    public ConditionalAnyColorManaAbility(Cost cost, DynamicValue amount, DynamicValue netAmount, ConditionalManaBuilder manaBuilder, boolean oneChoice, String text){
-        super(Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(amount, netAmount, manaBuilder, oneChoice, text), cost);
-        this.amount = amount;
-    }
-
     protected ConditionalAnyColorManaAbility(final ConditionalAnyColorManaAbility ability) {
         super(ability);
         this.amount = ability.amount;
