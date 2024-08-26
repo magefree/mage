@@ -73,5 +73,7 @@ public class Modern extends Constructed {
         banned.add("Vault of Whispers");
         banned.add("Violent Outburst");
         banned.add("Yorion, Sky Nomad");
+        banned.add("Nadu, Winged Wisdom");
+        banned.add("Grief");
     }
 }

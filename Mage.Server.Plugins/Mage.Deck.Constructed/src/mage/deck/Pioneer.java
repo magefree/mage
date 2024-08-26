@@ -47,5 +47,7 @@ public class Pioneer extends Constructed {
         banned.add("Veil of Summer");
         banned.add("Walking Ballista");
         banned.add("Wilderness Reclamation");
+        banned.add("Amalia Benavides Aguirre");
+        banned.add("Sorin, Imperious Bloodlord");
     }
 }

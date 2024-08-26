@@ -70,5 +70,7 @@ public class Vintage extends Constructed {
         restricted.add("Wheel of Fortune");
         restricted.add("Windfall");
         restricted.add("Yawgmoth's Will");
+        restricted.add("Urza's Saga");
+        restricted.add("Vexing Bauble");
     }
 }

@@ -78,5 +78,6 @@ public class Legacy extends Constructed {
         banned.add("Yawgmoth's Bargain");
         banned.add("Yawgmoth's Will");
         banned.add("Zirda, the Dawnwaker");
+        banned.add("Grief");
     }
 }
