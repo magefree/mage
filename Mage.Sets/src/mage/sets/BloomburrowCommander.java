@@ -40,6 +40,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Beast Within", 206, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 118, Rarity.RARE, mage.cards.b.BeastmasterAscension.class));
         cards.add(new SetCardInfo("Beledros Witherbloom", 247, Rarity.MYTHIC, mage.cards.b.BeledrosWitherbloom.class));
+        cards.add(new SetCardInfo("Bello, Bard of the Brambles", 1, Rarity.MYTHIC, mage.cards.b.BelloBardOfTheBrambles.class));
         cards.add(new SetCardInfo("Berserkers' Onslaught", 192, Rarity.RARE, mage.cards.b.BerserkersOnslaught.class));
         cards.add(new SetCardInfo("Bident of Thassa", 162, Rarity.RARE, mage.cards.b.BidentOfThassa.class));
         cards.add(new SetCardInfo("Big Score", 193, Rarity.COMMON, mage.cards.b.BigScore.class));

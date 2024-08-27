@@ -494,6 +494,8 @@ public final class GuiDisplayUtil {
         UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
         UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
 
+	    UIManager.put("text", PreferencesDialog.getCurrentTheme().getTextColor()); // Default text color
+
         //UIManager.put("nimbusDisabledText", Color.green); // TODO: improve disabled color
         //UIManager.put("Table.rowHeight", GUISizeHelper.tableRowHeight);
 

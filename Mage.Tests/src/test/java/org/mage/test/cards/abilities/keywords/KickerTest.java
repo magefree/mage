@@ -76,7 +76,7 @@ public class KickerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
         //setChoice(playerA, true); // with Kicker - AI must choose
 
-        //setStrictChooseMode(true); - AI must choose
+        setStrictChooseMode(false); // - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -112,7 +112,7 @@ public class KickerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
         //setChoice(playerA, false); - AI must choose
 
-        //setStrictChooseMode(true); - AI must choose
+        setStrictChooseMode(false); // - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
