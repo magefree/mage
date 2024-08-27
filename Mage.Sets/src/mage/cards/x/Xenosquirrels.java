@@ -81,6 +81,12 @@ class XenosquirrelsEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ROLL_DIE
+                && ((RollDieEvent) event).getRollDieType() == RollDieType.NUMERICAL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId());
     }
