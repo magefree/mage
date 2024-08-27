@@ -10,7 +10,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -50,12 +49,11 @@ public class HelgaSkittishSeer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a creature spell with mana value 4 or greater, you draw a card, gain 1 life and put a +1/+1 counter on Helga, Skittish Seer
-        Ability ability = new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1).
-                setText("you draw a card"),
-                filter, false);
-        ability.addEffect(new GainLifeEffect(1).setText("gain 1 life").concatBy(","));
-        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-                .setText("and put a +1/+1 counter on {this}"));
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new DrawCardSourceControllerEffect(1, true), filter, false
+        );
+        ability.addEffect(new GainLifeEffect(1).setText(", gain 1 life"));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy("and"));
 
         this.addAbility(ability);
 
@@ -69,10 +67,14 @@ public class HelgaSkittishSeer extends CardImpl {
         );
     }
 
-    private HelgaSkittishSeer(final HelgaSkittishSeer card) {super(card);}
+    private HelgaSkittishSeer(final HelgaSkittishSeer card) {
+        super(card);
+    }
 
     @Override
-    public HelgaSkittishSeer copy(){return new HelgaSkittishSeer(this);}
+    public HelgaSkittishSeer copy(){
+        return new HelgaSkittishSeer(this);
+    }
 }
 
 class HelgaSkittishSeerManaBuilder extends ConditionalManaBuilder{
@@ -131,11 +133,12 @@ class HelgaSkittishSeerManaEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         if (game != null){
-            netMana.add(manaBuilder.setMana(Mana.BlackMana(power.calculate(game, source, this)), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.BlueMana(power.calculate(game, source, this)), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.RedMana(power.calculate(game, source, this)), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.GreenMana(power.calculate(game, source, this)), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.WhiteMana(power.calculate(game, source, this)), source, game).build());
+            int currentPower = calculatePower(game, source);
+            netMana.add(manaBuilder.setMana(Mana.BlackMana(currentPower), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.BlueMana(currentPower), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.RedMana(currentPower), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.GreenMana(currentPower), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.WhiteMana(currentPower), source, game).build());
         }
         return netMana;
     }
@@ -152,14 +155,18 @@ class HelgaSkittishSeerManaEffect extends ManaEffect {
             if (!controller.choose(Outcome.PutManaInPool, choice, game)){
                 return mana;
             }
-            Mana chosen = choice.getMana(power.calculate(game, source, this));
+            Mana chosen = choice.getMana(calculatePower(game, source));
             return manaBuilder.setMana(chosen, source, game).build();
         }
         return mana;
     }
 
+    private int calculatePower(Game game, Ability source){
+        return power.calculate(game, source, this);
+    }
+
     @Override
-    public OneShotEffect copy() {
+    public HelgaSkittishSeerManaEffect copy() {
         return new HelgaSkittishSeerManaEffect(this);
     }
 }
