@@ -8,6 +8,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.abilities.mana.WhiteManaAbility;
+import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -62,7 +67,7 @@ class NearbyPlanetEffect extends ContinuousEffectImpl {
     NearbyPlanetEffect() {
         super(Duration.Custom, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "Rangeling <i>(This card is every land type, including Plains, Island, Swamp, " +
-                "Mountain, Forest, Desert, Gate, Lair, Locus, and all those Urza's ones.)</i>";
+                "Mountain, Forest, Desert, Gate, Lair, Locus, and all those Urza's ones.)</i>.";
     }
 
     private NearbyPlanetEffect(final NearbyPlanetEffect effect) {
