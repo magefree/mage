@@ -26,6 +26,12 @@ public final class NearbyPlanet extends CardImpl {
         // Rangeling
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new NearbyPlanetEffect()));
 
+        this.addAbility(new WhiteManaAbility());
+        this.addAbility(new BlueManaAbility());
+        this.addAbility(new BlackManaAbility());
+        this.addAbility(new RedManaAbility());
+        this.addAbility(new GreenManaAbility());
+
         // Nearby Planet enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
@@ -33,6 +39,7 @@ public final class NearbyPlanet extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)).setText("sacrifice it unless you pay {1}")
         ));
+
     }
 
     private NearbyPlanet(final NearbyPlanet card) {
