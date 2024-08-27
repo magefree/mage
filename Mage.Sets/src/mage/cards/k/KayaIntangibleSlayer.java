@@ -51,7 +51,7 @@ public final class KayaIntangibleSlayer extends CardImpl {
         this.addAbility(ability);
 
         // 0: You draw two cards. Then each opponent may scry 1.
-        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(2, "you"), 0);
+        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(2, true), 0);
         ability.addEffect(new KayaIntangibleSlayerScryEffect());
         this.addAbility(ability);
 

@@ -26,7 +26,7 @@ public final class QuicksmithGenius extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Whenever an artifact enters the battlefield under your control, you may discard a card. If you do, draw a card.
+        // Whenever an artifact you control enters, you may discard a card. If you do, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT, false));

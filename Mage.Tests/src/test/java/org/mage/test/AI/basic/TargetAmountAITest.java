@@ -23,7 +23,7 @@ public class TargetAmountAITest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blessings of Nature");
 
         setStopAt(1, PhaseStep.END_TURN);
-        //setStrictChooseMode(true); // ai must choose
+        setStrictChooseMode(false); // ai must choose
         execute();
 
         assertPowerToughness(playerA, "Balduvian Bears", 2 + 4, 2 + 4); // boost one creature (it's just a choose code, so can be different from simulation results)

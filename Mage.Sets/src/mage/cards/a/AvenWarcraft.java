@@ -1,22 +1,22 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class AvenWarcraft extends CardImpl {
@@ -45,7 +45,7 @@ class AvenWarcraftEffect extends OneShotEffect {
 
     AvenWarcraftEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<br><br><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, "
+        this.staticText = "<br>" + AbilityWord.THRESHOLD.formatWord() + "If seven or more cards are in your graveyard, "
                 + "choose a color. Creatures you control also gain protection from the chosen color until end of turn";
     }
 
@@ -60,7 +60,7 @@ class AvenWarcraftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (new CardsInControllerGraveyardCondition(7).apply(game, source)) {
+        if (ThresholdCondition.instance.apply(game, source)) {
             game.addEffect(new GainProtectionFromColorAllEffect(
                     Duration.EndOfTurn,
                     StaticFilters.FILTER_CONTROLLED_CREATURES

@@ -33,7 +33,7 @@ public final class PortTown extends CardImpl {
 
         // As Port Town enters the battlefield, you may reveal a Plains or Island card from your hand. If you don't, Port Town enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),
-                "you may reveal a Plains or Island card from your hand. If you don't, {this} enters the battlefield tapped"));
+                "you may reveal a Plains or Island card from your hand. If you don't, {this} enters tapped"));
 
         // {T}: Add {W} or {U}.
         this.addAbility(new WhiteManaAbility());

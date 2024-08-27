@@ -24,11 +24,16 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
     protected boolean modal = false;
 
-    /**
-     * Creates new form MageDialog
-     */
+    // GUI performance and bugs issues:
+    // TODO: swing components should override paintComponent() instead paint()
+    // TODO: swing components should use this.revalidate() instead parent.validate()
+    // TODO: swing components in paintComponent() must call super or paint full rect on opaque = true
+
     public MageDialog() {
         initComponents();
+
+        // paint calls optimization - no needs in transparent
+        setOpaque(true);
 
         // enable a minimizing window on double clicks
         if (this instanceof MageDesktopIconifySupport) {
@@ -52,6 +57,12 @@ public class MageDialog extends javax.swing.JInternalFrame {
                 }
             });
         }
+    }
+
+    @Override
+    public boolean isValidateRoot() {
+        // paint calls optimization - no frame auto-size on child changes
+        return true;
     }
 
     public void changeGUISize() {

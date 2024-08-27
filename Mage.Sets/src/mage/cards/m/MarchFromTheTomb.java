@@ -72,7 +72,7 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
                 leftPossibleTargets.add(targetId);
             }
         }
-        setTargetName("any number of target Ally creature cards with total mana value of 8 or less (" + cmcLeft + " left) from your graveyard");
+        withTargetName("any number of target Ally creature cards with total mana value of 8 or less (" + cmcLeft + " left) from your graveyard");
         return leftPossibleTargets;
     }
 

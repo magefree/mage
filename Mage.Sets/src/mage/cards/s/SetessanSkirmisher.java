@@ -24,7 +24,7 @@ public final class SetessanSkirmisher extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Constellation — Whenever an enchantment enters the battlefield under your control, Setessan Skirmisher gets +1/+1 until end of turn.
+        // Constellation — Whenever an enchantment you control enters, Setessan Skirmisher gets +1/+1 until end of turn.
         this.addAbility(new ConstellationAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn), false, false
         ));

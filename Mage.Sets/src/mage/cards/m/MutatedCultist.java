@@ -1,33 +1,19 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.RemoveAllCountersSourceCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
-import mage.constants.*;
-import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.counters.CounterType;
+import mage.constants.*;
 import mage.filter.FilterOpponent;
 import mage.filter.FilterPermanent;
-import mage.filter.FilterPlayer;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentOrPlayer;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,8 +21,9 @@ import mage.target.common.TargetPermanentOrPlayer;
 import mage.util.CardUtil;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author grimreap124
  */
 public final class MutatedCultist extends CardImpl {
@@ -49,7 +36,7 @@ public final class MutatedCultist extends CardImpl {
 
     public MutatedCultist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        
+
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);
@@ -119,7 +106,7 @@ class MutatedCultistSpellsCostReductionEffect extends CostModificationEffectImpl
 
     int spellsCast;
     int reductionAmount;
-    
+
     public MutatedCultistSpellsCostReductionEffect(int reductionAmount) {
         super(Duration.EndOfTurn, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.reductionAmount = reductionAmount;
@@ -136,7 +123,7 @@ class MutatedCultistSpellsCostReductionEffect extends CostModificationEffectImpl
         super.init(source, game);
         CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
         if (watcher != null) {
-            spellsCast =  watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId());
+            spellsCast = watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId());
         }
     }
 
@@ -154,7 +141,7 @@ class MutatedCultistSpellsCostReductionEffect extends CostModificationEffectImpl
                 discard(); // only one use 
                 return false;
             }
-        }        
+        }
         if (abilityToModify instanceof SpellAbility) {
             return abilityToModify.isControlledBy(source.getControllerId());
         }

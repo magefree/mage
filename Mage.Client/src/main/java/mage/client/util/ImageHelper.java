@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.*;
+
 import static mage.client.constants.Constants.FRAME_MAX_HEIGHT;
 import static mage.client.constants.Constants.FRAME_MAX_WIDTH;
 import static mage.client.constants.Constants.SYMBOL_MAX_SPACE;
@@ -123,5 +125,15 @@ public final class ImageHelper {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static Image getImageFromResourcesScaledToHeight(String pathToImage, int height) {
+        Image res = null;
+        Image image = ImageHelper.getImageFromResources(pathToImage);
+        if (image != null) {
+            int width = Math.round(height * image.getWidth(null) / image.getHeight(null));
+            res = ImageHelper.scale((BufferedImage) image, BufferedImage.TYPE_4BYTE_ABGR, width, height);
+        }
+        return res;
     }
 }

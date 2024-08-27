@@ -13,6 +13,10 @@ public class TargetAnyTarget extends TargetPermanentOrPlayer {
         this(1);
     }
 
+    public TargetAnyTarget(FilterAnyTarget filter) {
+        this(1, 1, filter);
+    }
+
     public TargetAnyTarget(int numTargets) {
         this(numTargets, numTargets);
     }

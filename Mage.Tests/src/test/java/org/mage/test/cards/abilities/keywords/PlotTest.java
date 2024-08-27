@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -82,7 +77,7 @@ public class PlotTest extends CardTestPlayerBase {
      * <p>
      * When Kellan Joins Up enters the battlefield, you may exile a nonland card with mana value 3 or less from your hand. If you do, it becomes plotted. (You may cast it as a sorcery on a later turn without paying its mana cost.)
      * <p>
-     * Whenever a legendary creature enters the battlefield under your control, put a +1/+1 counter on each creature you control.
+     * Whenever a legendary creature you control enters, put a +1/+1 counter on each creature you control.
      */
     private static final String kellanJoinsUp = "Kellan Joins Up";
 

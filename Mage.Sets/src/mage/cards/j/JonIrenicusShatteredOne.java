@@ -56,7 +56,7 @@ public final class JonIrenicusShatteredOne extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a creature you own but don't control attacks, you draw a card.
-        this.addAbility(new AttacksAllTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), false, filter, SetTargetPointer.NONE, false));
+        this.addAbility(new AttacksAllTriggeredAbility(new DrawCardSourceControllerEffect(1, true), false, filter, SetTargetPointer.NONE, false));
     }
 
     private JonIrenicusShatteredOne(final JonIrenicusShatteredOne card) {super(card);}
@@ -93,7 +93,7 @@ class JonIrenicusShatteredOneEffect extends OneShotEffect {
         ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, opponent.getId());
         effect.setTargetPointer(new FixedTarget(creature, game));
         game.addEffect(effect, source);
-        game.getState().processAction(game);
+        game.processAction();
         creature.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
         creature.tap(source, game);
         game.addEffect(new GoadTargetEffect()

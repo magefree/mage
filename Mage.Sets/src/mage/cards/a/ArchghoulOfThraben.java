@@ -3,7 +3,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
@@ -36,7 +36,7 @@ public final class ArchghoulOfThraben extends CardImpl {
         // Whenever Archghoul of Thraben or another Zombie you control dies, look at the top card of your library.
         // If it's a Zombie card, you may reveal it and put it into your hand.
         // If you don't put the card into your hand, you may put it into your graveyard.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new ArchghoulOfThrabenEffect(), false, filter));
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(new ArchghoulOfThrabenEffect(), false, filter));
     }
 
     private ArchghoulOfThraben(final ArchghoulOfThraben card) {

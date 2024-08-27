@@ -47,8 +47,8 @@ public final class LullmagesDomination extends CardImpl {
         // Gain control of target creature with converted mana cost X.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom)
                 .setText("gain control of target creature with mana value X"));
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
     }
 
     private LullmagesDomination(final LullmagesDomination card) {

@@ -41,7 +41,7 @@ public final class TheGreatHenge extends CardImpl {
         ability.addEffect(new GainLifeEffect(2).setText("You gain 2 life."));
         this.addAbility(ability);
 
-        // Whenever a nontoken creature enters the battlefield under your control, put a +1/+1 counter on it and draw a card.
+        // Whenever a nontoken creature you control enters, put a +1/+1 counter on it and draw a card.
         ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on it"),
                 StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT

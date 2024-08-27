@@ -43,7 +43,7 @@ public class EvolvingAdaptive extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(oilCounters, oilCounters, Duration.WhileOnBattlefield)
                 .setText("{this} gets +1/+1 for each oil counter on it")));
 
-        // Whenever another creature enters the battlefield under your control, if that creature has greater power or
+        // Whenever another creature you control enters, if that creature has greater power or
         // toughness than Evolving Adaptive, put an oil counter on Evolving Adaptive.
         this.addAbility(new EvolvingAdaptiveTriggeredAbility());
     }

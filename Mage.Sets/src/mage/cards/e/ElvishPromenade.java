@@ -27,7 +27,7 @@ public final class ElvishPromenade extends CardImpl {
     private static final DynamicValue elfCount = new PermanentsOnBattlefieldCount(filter);
 
     public ElvishPromenade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{3}{G}");
         this.subtype.add(SubType.ELF);
         this.getSpellAbility().addHint(new ValueHint("Elves you control", elfCount));
 

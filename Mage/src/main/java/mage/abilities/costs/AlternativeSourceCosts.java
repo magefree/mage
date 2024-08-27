@@ -1,5 +1,6 @@
 package mage.abilities.costs;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.game.Game;
 
@@ -10,16 +11,34 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public interface AlternativeSourceCosts {
+public interface AlternativeSourceCosts extends Ability {
 
     /**
-     * Ask the player if they want to use the alternative costs
+     * If non-Default, allow to link this cost to permission abilities
+     */
+    MageIdentifier getIdentifier();
+
+    /**
+     * Check that the alternative ability can be used for the ability.
      *
      * @param ability ability the alternative cost is activated for
      * @param game
      * @return
      */
-    boolean askToActivateAlternativeCosts(Ability ability, Game game);
+    boolean canActivateAlternativeCostsNow(Ability ability, Game game);
+
+    String getAlternativeCostText(Ability ability, Game game);
+
+    /**
+     * activate a specific alternative cost.
+     * A check to canActivateAlternativeCostsNow should be made before-end
+     * to check if it is valid.
+     *
+     * @param ability ability the alternative cost is activated for
+     * @param game
+     * @return
+     */
+    boolean activateAlternativeCosts(Ability ability, Game game);
 
     /**
      * Is the alternative spell cost currently available

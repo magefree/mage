@@ -2,12 +2,8 @@
 
 package mage.cards.s;
 
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
@@ -24,19 +20,24 @@ import java.util.UUID;
  */
 public final class SulfurFalls extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent("an Island or a Mountain");
 
     static {
         filter.add(Predicates.or(SubType.ISLAND.getPredicate(), SubType.MOUNTAIN.getPredicate()));
     }
 
-    public SulfurFalls(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+    private static final YouControlPermanentCondition condition = new YouControlPermanentCondition(filter);
 
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter));
-        String abilityText = " tapped unless you control an Island or a Mountain";
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+    public SulfurFalls(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
+
+        // Sulfur Falls enters the battlefield tapped unless you control an Island or a Mountain.
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
+
+        // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());
+
+        // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
     }
 

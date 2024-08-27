@@ -11,7 +11,6 @@ import mage.client.util.audio.AudioManager;
 import mage.constants.TurnPhase;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
 import static mage.constants.PlayerAction.*;
 
 /**
- * Panel with buttons that copy the state of feedback panel.
+ * Game GUI: helper component for feedback panel - implements all feedback logic here
  *
  * @author ayrat, JayDi85
  */
@@ -32,8 +31,7 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
     private javax.swing.JButton btnUndo;
-    //private javax.swing.JButton btnEndTurn;
-    //private javax.swing.JButton btnStopTimer;
+
     private JScrollPane textAreaScrollPane;
     private MageTextArea dialogTextArea;
     JPanel mainPanel;
@@ -101,18 +99,13 @@ public class HelperPanel extends JPanel {
 
     private void setGUISize() {
         //this.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
-        textAreaScrollPane.setMaximumSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
-        textAreaScrollPane.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
+        textAreaScrollPane.setMaximumSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameFeedbackPanelMaxHeight));
+        textAreaScrollPane.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameFeedbackPanelMaxHeight));
 
-//        dialogTextArea.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
-//        dialogTextArea.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
-//        buttonContainer.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogButtonHeight + 4));
-//        buttonContainer.setMinimumSize(new Dimension(160, GUISizeHelper.gameDialogButtonHeight + 20));
-//        buttonContainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, GUISizeHelper.gameDialogButtonHeight + 4));
-        btnLeft.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnRight.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnUndo.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnLeft.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnRight.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnSpecial.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnUndo.setFont(GUISizeHelper.gameFeedbackPanelFont);
 
         this.redrawMessages();
 
@@ -127,13 +120,13 @@ public class HelperPanel extends JPanel {
     private void initComponents() {
         initPopupMenuTriggerOrder();
 
-        this.setBorder(new EmptyBorder(5, 5, 5, 5));
-        this.setLayout(new GridLayout(0, 1));
+        this.setLayout(new BorderLayout());
         this.setOpaque(false);
+
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(0, 1));
         mainPanel.setOpaque(false);
-        this.add(mainPanel);
+        this.add(mainPanel, BorderLayout.CENTER);
 
         dialogTextArea = new MageTextArea();
         dialogTextArea.setText("<Empty>");
@@ -326,7 +319,6 @@ public class HelperPanel extends JPanel {
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN = new Color(0, 0, 255, 50);
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE = new Color(255, 0, 0, 50);
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER = new Color(0, 255, 0, 50);
-        int FEEDBACK_COLORIZING_MODE = PreferencesDialog.getBattlefieldFeedbackColorizingMode();
 
         // cleanup current settings to default (flow layout - different sizes)
         this.buttonGrid.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTONS_H_GAP, 0));
@@ -349,42 +341,23 @@ public class HelperPanel extends JPanel {
         // color panel on player's feedback waiting
         if (this.gameNeedFeedback) {
 
-            // wait player's action
-            switch (FEEDBACK_COLORIZING_MODE) {
-                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_DISABLE:
-                    // disabled
-                    this.mainPanel.setOpaque(false);
-                    this.mainPanel.setBorder(null);
-                    break;
-
-                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_ONE_COLOR:
-                    // one color
-                    this.mainPanel.setOpaque(true);
-                    this.mainPanel.setBackground(ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER);
-                    break;
-
-                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR:
-                    // multicolor
-                    this.mainPanel.setOpaque(true);
-                    Color backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER;
-                    if (this.gameTurnPhase != null) {
-                        switch (this.gameTurnPhase) {
-                            case PRECOMBAT_MAIN:
-                            case POSTCOMBAT_MAIN:
-                                backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN;
-                                break;
-                            case COMBAT:
-                                backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    this.mainPanel.setBackground(backColor);
-                    break;
-                default:
-                    break;
+            // wait player's action - colorize feedback panel (depends on current phase)
+            this.mainPanel.setOpaque(true);
+            Color backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER;
+            if (this.gameTurnPhase != null) {
+                switch (this.gameTurnPhase) {
+                    case PRECOMBAT_MAIN:
+                    case POSTCOMBAT_MAIN:
+                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN;
+                        break;
+                    case COMBAT:
+                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
+                        break;
+                    default:
+                        break;
+                }
             }
+            this.mainPanel.setBackground(backColor);
         } else {
             // inform about other players
             this.mainPanel.setOpaque(false);
@@ -414,10 +387,12 @@ public class HelperPanel extends JPanel {
         }
 
         // search max const size
-        int constButtonSizeW = GUISizeHelper.gameDialogButtonWidth * 200 / 100;
+        // TODO: research and test sizing - need improve (e.g. for long messages)?
+        int constButtonSizeW = GUISizeHelper.gameFeedbackPanelButtonWidth * 200 / 100;
         int constGridSizeW = buttons.size() * constButtonSizeW + BUTTONS_H_GAP * (buttons.size() - 1);
-        int constGridSizeH = Math.round(GUISizeHelper.gameDialogButtonHeight * 150 / 100);
+        int constGridSizeH = Math.round(GUISizeHelper.gameFeedbackPanelButtonHeight * 150 / 100);
 
+        // TODO: remove due gui scale and user customizable settings?
         if (needButtonSizeW < constButtonSizeW) {
             // same size mode (grid)
             GridLayout gl = new GridLayout(1, buttons.size(), BUTTONS_H_GAP, 0);
@@ -450,7 +425,7 @@ public class HelperPanel extends JPanel {
     private void redrawMessages() {
         String panelText = this.basicMessage;
         if (this.secondaryMessage != null) {
-            panelText += "<div style='font-size:" + GUISizeHelper.gameDialogAreaFontSizeSmall + "pt'>" + secondaryMessage + "</div>";
+            panelText += "<div style='font-size:" + GUISizeHelper.gameFeedbackPanelExtraMessageFontSize + "pt'>" + secondaryMessage + "</div>";
         }
         this.dialogTextArea.setText(panelText, this.getWidth());
     }

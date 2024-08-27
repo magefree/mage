@@ -2,7 +2,7 @@
 package mage.cards.e;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class Excise extends CardImpl {
 
         // Excise target nonwhite attacking creature unless its controller pays {X}. 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new ExileTargetEffect(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new ExileTargetEffect(), GetXValue.instance));
     }
 
     private Excise(final Excise card) {

@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class LathielTheBounteousDawn extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
+    private static final Condition condition = new YouGainedLifeCondition();
 
     public LathielTheBounteousDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");

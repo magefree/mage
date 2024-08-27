@@ -34,7 +34,7 @@ public final class KrosanDruid extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(10)),
                 KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, you gain 10 life"
+                "When {this} enters, if it was kicked, you gain 10 life"
         ));
     }
 

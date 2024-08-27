@@ -1,5 +1,8 @@
 package mage.cards.i;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
@@ -18,6 +21,8 @@ import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.cards.Card;
 
 /**
  * @author LevelX2
@@ -72,10 +77,14 @@ class InducedAmnesiaExileEffect extends OneShotEffect {
         if (numberOfCards < 1) {
             return false;
         }
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject == null) {
+            return false;
+        }
         Cards cards = new CardsImpl(targetPlayer.getHand());
         targetPlayer.moveCardsToExile(
                 cards.getCards(game), source, game, false,
-                CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
+                CardUtil.getExileZoneId(game, mageObject.getId(), game.getState().getZoneChangeCounter(mageObject.getId())), CardUtil.getSourceName(game, source)
         );
         cards.getCards(game)
                 .stream()
@@ -104,11 +113,30 @@ class InducedAmnesiaReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        return controller != null
-                && exileZone != null
-                && !exileZone.isEmpty()
-                && controller.moveCards(exileZone, Zone.HAND, source, game);
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (mageObject == null) {
+            return false;
+        }
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, mageObject.getId(), game.getState().getZoneChangeCounter(mageObject.getId()) - 1));
+        if (exileZone == null
+                || exileZone.isEmpty()) {
+            return false;
+        }
+        Set<Card> cards = exileZone.getCards(game);
+        Map<UUID, Cards> cardsByOwner = new HashMap<>();
+
+        // Group exiled cards by owners (ie: Strionic Resonator)
+        for (Card card : cards) {
+            cardsByOwner.computeIfAbsent(card.getOwnerId(), k -> new CardsImpl()).add(card);
+        }
+
+        // Move cards to their respective owner's hands
+        for (Map.Entry<UUID, Cards> entry : cardsByOwner.entrySet()) {
+            Player owner = game.getPlayer(entry.getKey());
+            if (owner != null) {
+                owner.moveCards(entry.getValue(), Zone.HAND, source, game);
+            }
+        }
+        return true;
     }
 }

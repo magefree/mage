@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -19,6 +19,7 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlaneswalkerPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -40,17 +41,17 @@ public final class MishrasCommand extends CardImpl {
 
         // * This spell deals X damage to target creature.
         this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(
-                ManacostVariableValue.REGULAR, "this spell"
+                GetXValue.instance, "this spell"
         )).addTarget(new TargetCreaturePermanent()));
 
         // * This spell deals X damage to target planeswalker.
         this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(
-                ManacostVariableValue.REGULAR, "this spell"
+                GetXValue.instance, "this spell"
         )).addTarget(new TargetPlaneswalkerPermanent()));
 
         // * Target creature gets +X/+0 and gains haste until end of turn.
         this.getSpellAbility().addMode(new Mode(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn
+                GetXValue.instance, StaticValue.get(0), Duration.EndOfTurn
         ).setText("target creature gets +X/+0")).addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains haste until end of turn")).addTarget(new TargetCreaturePermanent()));
@@ -86,7 +87,7 @@ class MishrasCommandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (player != null && xValue > 0) {
             player.drawCards(player.discard(
                     0, xValue, false, source, game

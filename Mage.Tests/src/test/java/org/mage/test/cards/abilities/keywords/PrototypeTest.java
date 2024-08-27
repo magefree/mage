@@ -683,7 +683,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Slimebind", "Drizzt Do'Urden");
         checkPT("Drizzt is shrunk",1, PhaseStep.BEGIN_COMBAT, playerA, "Drizzt Do'Urden",1, 1);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, automatonWithPrototype); // 5/0
-        setChoice(playerA, "Whenever a creature enters"); //Stack the trigger
+        setChoice(playerA, "Whenever a creature you control enters"); //Stack the trigger
         addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.END_TURN);

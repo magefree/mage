@@ -40,7 +40,7 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
     @Test
     public void test_AIvsAI_LongGame() {
         // many bears and bolts must help to end game fast
-        int maxTurn = 40;
+        int maxTurn = 50;
         removeAllCardsFromLibrary(playerA);
         removeAllCardsFromLibrary(playerB);
 

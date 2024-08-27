@@ -34,7 +34,7 @@ public final class NotOfThisWorld extends CardImpl {
     }
 
     public NotOfThisWorld(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{7}");
         this.subtype.add(SubType.ELDRAZI);
 
         // Counter target spell or ability that targets a permanent you control.

@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -22,8 +21,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class TormentOfVenom extends CardImpl {
@@ -46,6 +46,7 @@ public final class TormentOfVenom extends CardImpl {
     }
 }
 
+// TODO: simplify using DoUnlessTargetPlayerOrTargetsControllerPaysEffect and OrCost
 class TormentOfVenomEffect extends OneShotEffect {
 
     TormentOfVenomEffect() {

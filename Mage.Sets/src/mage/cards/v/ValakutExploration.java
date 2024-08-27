@@ -30,7 +30,7 @@ public final class ValakutExploration extends CardImpl {
     public ValakutExploration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-        // Landfall — Whenever a land enters the battlefield under your control, exile the top card of your library. You may play that card for as long as it remains exiled.
+        // Landfall — Whenever a land you control enters, exile the top card of your library. You may play that card for as long as it remains exiled.
         this.addAbility(new LandfallAbility(new ValakutExplorationExileEffect()));
 
         // At the beginning of your end step, if there are cards exiled with Valakut Exploration, put them into their owner's graveyard, then Valakut Exploration deals that much damage to each opponent.

@@ -6,7 +6,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,6 +18,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ public final class KnollspineInvocation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
 
         // {X}, Discard a card with converted mana cost X: Knollspine Invocation deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR, true), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(GetXValue.instance, true), new ManaCostsImpl<>("{X}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter)));
         ability.addTarget(new TargetAnyTarget());
         ability.setCostAdjuster(KnollspineInvocationAdjuster.instance);
@@ -54,7 +55,7 @@ enum KnollspineInvocationAdjuster implements CostAdjuster {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         for (Cost cost : ability.getCosts()) {
             if (!(cost instanceof DiscardTargetCost)) {
                 continue;

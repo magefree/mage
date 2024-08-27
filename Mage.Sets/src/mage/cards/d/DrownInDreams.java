@@ -4,7 +4,7 @@ import mage.abilities.Mode;
 import mage.abilities.condition.common.ControlACommanderCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class DrownInDreams extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(GetXValue.instance, 2);
 
     public DrownInDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{2}{U}");
@@ -31,7 +31,7 @@ public final class DrownInDreams extends CardImpl {
         this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
 
         // • Target player draws X cards.
-        this.getSpellAbility().addEffect(new DrawCardTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("draws X cards"));
 
         // • Target player mills twice X cards.

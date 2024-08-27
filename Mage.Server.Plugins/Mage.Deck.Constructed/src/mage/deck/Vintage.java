@@ -25,8 +25,8 @@ public class Vintage extends Constructed {
         restricted.add("Balance");
         restricted.add("Black Lotus");
         restricted.add("Brainstorm");
-        restricted.add("Channel");
         restricted.add("Chalice of the Void");
+        restricted.add("Channel");
         restricted.add("Demonic Consultation");
         restricted.add("Demonic Tutor");
         restricted.add("Dig Through Time");
@@ -66,7 +66,9 @@ public class Vintage extends Constructed {
         restricted.add("Tolarian Academy");
         restricted.add("Treasure Cruise");
         restricted.add("Trinisphere");
+        restricted.add("Urza's Saga");
         restricted.add("Vampiric Tutor");
+        restricted.add("Vexing Bauble");
         restricted.add("Wheel of Fortune");
         restricted.add("Windfall");
         restricted.add("Yawgmoth's Will");

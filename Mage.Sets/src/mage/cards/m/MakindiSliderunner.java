@@ -27,7 +27,7 @@ public final class MakindiSliderunner extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // <i>Landfall</i>- Whenever a land enters the battlefield under your control, Makindi Sliderunner gets +1/+1 until end of turn.
+        // <i>Landfall</i>- Whenever a land you control enters, Makindi Sliderunner gets +1/+1 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 

@@ -36,7 +36,7 @@ import mage.watchers.Watcher;
 public final class ConduitOfRuin extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card with mana value 7 or greater");
-    private static final FilterCreatureCard filterCost = new FilterCreatureCard("The first creature spell");
+    private static final FilterCreatureCard filterCost = new FilterCreatureCard("the first creature spell you cast each turn");
 
     static {
         filter.add(ColorlessPredicate.instance);
@@ -56,7 +56,6 @@ public final class ConduitOfRuin extends CardImpl {
 
         // The first creature spell you cast each turn costs {2} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filterCost, 2);
-        effect.setText("The first creature spell you cast each turn costs {2} less to cast.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new ConduitOfRuinWatcher());
     }
 

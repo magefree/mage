@@ -84,7 +84,7 @@ class DireStrainRampageEffect extends OneShotEffect {
         }
         boolean landTargeted = permanent.isLand(game);
         boolean destroyed = permanent.destroy(source, game, false);
-        game.getState().processAction(game);
+        game.processAction();
         TargetCardInLibrary target = landTargeted && destroyed ?
                 new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS) :
                 new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_BASIC_LAND);

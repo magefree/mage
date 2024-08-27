@@ -95,7 +95,7 @@ class EtchedSlithPutWhenDoEffect extends OneShotEffect {
         }
         int beforeP1P1 = permanent.getCounters(game).getCount(CounterType.P1P1);
         new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);
-        game.getState().processAction(game);
+        game.processAction();
         int afterP1P1 = permanent.getCounters(game).getCount(CounterType.P1P1);
         for (int i = beforeP1P1 + 1; i <= afterP1P1; ++i) {
             // Releases notes rulling:

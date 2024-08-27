@@ -18,7 +18,7 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
     public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, optional); // Zone.All because a creature with trigger can be put into play and be sacrificed during the resolution of an effect (discard Obstinate Baloth with Smallpox)
         this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
-        setTriggerPhrase("When {this} enters the battlefield, ");
+        setTriggerPhrase("When {this} enters, ");
     }
 
     protected EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {

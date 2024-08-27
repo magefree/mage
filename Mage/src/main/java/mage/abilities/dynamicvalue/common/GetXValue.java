@@ -6,9 +6,6 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.util.CardUtil;
 
-/**
- * @author BetaSteward_at_googlemail.com
- */
 public enum GetXValue implements DynamicValue {
     instance;
 

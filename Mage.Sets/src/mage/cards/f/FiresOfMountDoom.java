@@ -1,5 +1,6 @@
 package mage.cards.f;
 
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -50,7 +51,8 @@ public final class FiresOfMountDoom extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new FiresOfMountDoomEffect(),
-                new ManaCostsImpl<>("{2}{R}")));
+                new ManaCostsImpl<>("{2}{R}")
+        ).setIdentifier(MageIdentifier.FiresOfMountDoomAlternateCast));
     }
 
     private FiresOfMountDoom(final FiresOfMountDoom card) {
@@ -68,7 +70,7 @@ class FiresOfMountDoomEffect extends OneShotEffect {
     FiresOfMountDoomEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top card of your library. You may play that card this turn. " +
-                "When you play a card this way, Fires of Mount Doom deals 2 damage to each player";
+                "When you play a card this way, {this} deals 2 damage to each player";
     }
 
     private FiresOfMountDoomEffect(final FiresOfMountDoomEffect effect) {
@@ -100,19 +102,9 @@ class FiresOfMountDoomEffect extends OneShotEffect {
     }
 }
 
-// TODO: this is not quite right in corner cases.
-//       Inspired by Havengul Lich which I feel has similar problems.
-//       For instance what if the card is [[Squee, the Immortal]] and
-//       is cast with squee AsThought.
-//       Or if the card is played with the AsThought, then replayed
-//       during the same turn. With current code, that would trigger
-//       incorrectly again.
-//       Is mor the solution there? Or having a way to get the specific
-//       used AsThought and having a way to identify that it was the
-//       same one as the FiresOfMountDoomEffect makeCardPlayable.
 class FiresOfMountDoomDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private UUID cardId;
+    private final UUID cardId;
 
     public FiresOfMountDoomDelayedTriggeredAbility(UUID cardId) {
         super(new DamagePlayersEffect(2, TargetController.ANY), Duration.EndOfTurn);
@@ -133,6 +125,9 @@ class FiresOfMountDoomDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.hasApprovingIdentifier(MageIdentifier.FiresOfMountDoomAlternateCast)){
+            return false;
+        }
         return event.getSourceId().equals(cardId);
     }
 

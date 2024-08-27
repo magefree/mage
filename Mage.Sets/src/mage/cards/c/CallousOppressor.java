@@ -34,7 +34,7 @@ public final class CallousOppressor extends CardImpl {
 
     public CallousOppressor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
@@ -122,20 +122,19 @@ class CallousOppressorChooseCreatureTypeEffect extends OneShotEffect {
             }
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null && mageObject != null) {
-                Choice typeChoice = new ChoiceCreatureType(mageObject);
-                typeChoice.setMessage("Choose creature type");
+                Choice typeChoice = new ChoiceCreatureType(game, source);
                 if (!opponent.choose(outcome, typeChoice, game)) {
                     return false;
                 }
-                if (typeChoice.getChoice() == null) {
+                if (typeChoice.getChoiceKey() == null) {
                     return false;
                 }
                 if (!game.isSimulation()) {
-                    game.informPlayers(mageObject.getName() + ": " + opponent.getLogName() + " has chosen " + typeChoice.getChoice());
+                    game.informPlayers(mageObject.getName() + ": " + opponent.getLogName() + " has chosen " + typeChoice.getChoiceKey());
                 }
-                game.getState().setValue(mageObject.getId() + "_type", SubType.byDescription(typeChoice.getChoice()));
+                game.getState().setValue(mageObject.getId() + "_type", SubType.byDescription(typeChoice.getChoiceKey()));
                 if (mageObject instanceof Permanent) {
-                    ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
+                    ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoiceKey()), game);
                 }
                 return true;
             }

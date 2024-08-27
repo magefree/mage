@@ -28,7 +28,7 @@ public class UserRequestDialog extends MageDialog {
     }
 
     private void setGUISize() {
-        Font font = GUISizeHelper.gameRequestsFont;
+        Font font = GUISizeHelper.dialogFont;
         lblText.setFont(font);
         lblText.setMaximumSize(new Dimension(300 + font.getSize() * 15, 200 + font.getSize() * 5));
         lblText.setMinimumSize(new Dimension(300 + font.getSize() * 15, 20 + font.getSize() * 5));

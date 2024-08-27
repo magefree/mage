@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.common.CelebrationWatcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ public final class BelligerentOfTheBall extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.setAbilityWord(AbilityWord.CELEBRATION);
         ability.addHint(CelebrationCondition.getHint());
-        this.addAbility(ability, new CelebrationWatcher());
+        this.addAbility(ability, new PermanentsEnteredBattlefieldWatcher());
     }
 
     private BelligerentOfTheBall(final BelligerentOfTheBall card) {

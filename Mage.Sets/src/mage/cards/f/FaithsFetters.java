@@ -84,9 +84,7 @@ class FaithsFettersEffect extends ContinuousRuleModifyingEffectImpl {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.isAttachedTo(event.getSourceId())) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability.isPresent() && ability.get().isManaAbility()) {
-                return true;
-            }
+            return ability.isPresent() && ability.get().isNonManaActivatedAbility();
 
         }
         return false;

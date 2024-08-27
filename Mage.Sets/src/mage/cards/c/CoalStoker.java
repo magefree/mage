@@ -30,7 +30,7 @@ public final class CoalStoker extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BasicManaEffect(Mana.RedMana(3)), false),
                 CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters the battlefield, if you cast it from your hand, add {R}{R}{R}."),
+                "When {this} enters, if you cast it from your hand, add {R}{R}{R}."),
                 new CastFromHandWatcher());
     }
 

@@ -29,7 +29,7 @@ public final class GriffinProtector extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.
+        // Whenever another creature you control enters, Griffin Protector gets +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
                 StaticFilters.FILTER_ANOTHER_CREATURE, false));
 

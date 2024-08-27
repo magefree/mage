@@ -71,17 +71,18 @@ class SorcerousSquallEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
         FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from that player's graveyard");
         filter.add(new OwnerIdPredicate(source.getFirstTarget()));
-        Target target = new TargetCardInGraveyard(1, 1, filter, true);
-        player.choose(outcome, target, source, game);
-        Effect effect = new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true);
-        effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
-        effect.apply(game, source);
+        Target target = new TargetCardInGraveyard(0, 1, filter, true);
+        if (player.choose(outcome, target, source, game)) {
+            Effect effect = new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST, true);
+            effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
+            effect.apply(game, source);
+        }
         return true;
     }
 }

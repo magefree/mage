@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
@@ -53,7 +53,7 @@ class GigantoplasmCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        Effect effect = new SetBasePowerToughnessSourceEffect(ManacostVariableValue.REGULAR, Duration.Custom);
+        Effect effect = new SetBasePowerToughnessSourceEffect(GetXValue.instance, Duration.Custom);
         effect.setText("This creature has base power and toughness X/X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}"));
         blueprint.getAbilities().add(ability);

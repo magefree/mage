@@ -3,7 +3,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -20,7 +20,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class BattleAtTheBridge extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(GetXValue.instance);
 
     public BattleAtTheBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}");
@@ -32,7 +32,7 @@ public final class BattleAtTheBridge extends CardImpl {
         
         this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new GainLifeEffect(GetXValue.instance));
     }
 
     private BattleAtTheBridge(final BattleAtTheBridge card) {

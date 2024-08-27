@@ -24,13 +24,47 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDebugTestCardRenderModesDialogActionPerformed"/>
           </Events>
         </MenuItem>
+        <Component class="javax.swing.JPopupMenu$Separator" name="menuDebugSeparator">
+        </Component>
+        <MenuItem class="javax.swing.JMenuItem" name="menuDebugTestCustomCode">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Run custom code"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDebugTestCustomCodeActionPerformed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPopupMenu" name="popupDownload">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="menuDownloadSymbols">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Download mana symbols"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDownloadSymbolsActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="menuDownloadImages">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Download card images"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDownloadImagesActionPerformed"/>
+          </Events>
+        </MenuItem>
       </SubComponents>
     </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="0"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1024, 768]"/>
+      <Dimension value="[1000, 500]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -181,37 +215,21 @@
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator6">
         </Component>
-        <Component class="javax.swing.JButton" name="btnSymbols">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/menu/symbol.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Symbols"/>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Load the mana and other card symbols from the internet.&lt;br&gt;&#xa;Otherwise you only see the replacement sequence like {U} for blue mana symbol.&lt;br&gt;&#xa;You need to do that only once."/>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="horizontalTextPosition" type="int" value="4"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSymbolsActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparatorSymbols">
-        </Component>
-        <Component class="javax.swing.JButton" name="btnImages">
+        <Component class="javax.swing.JButton" name="btnDownload">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/menu/images.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Images"/>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Load card images from external sources."/>
+            <Property name="text" type="java.lang.String" value="Download"/>
+            <Property name="toolTipText" type="java.lang.String" value="Download cards images and mana symbols"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImagesActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDownloadMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparatorImages">
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparatorSymbols">
         </Component>
         <Component class="javax.swing.JButton" name="btnAbout">
           <Properties>

@@ -38,7 +38,7 @@ public final class FurycalmSnarl extends CardImpl {
                 new TapSourceUnlessPaysEffect(
                         new RevealTargetFromHandCost(new TargetCardInHand(filter))
                 ), "you may reveal a Mountain or Plains card from your hand. " +
-                "If you don't, {this} enters the battlefield tapped"
+                "If you don't, {this} enters tapped"
         ));
 
         // {T}: Add {R} or {W}.

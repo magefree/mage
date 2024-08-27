@@ -552,7 +552,7 @@ public class SessionImpl implements Session {
             if (askForReconnect) {
                 client.showError("Network error. Can't connect to  " + connection.getHost());
             }
-            client.disconnected(askForReconnect); // MageFrame with check to reconnect
+            client.disconnected(askForReconnect, keepMySessionActive); // MageFrame with check to reconnect
             pingTime.clear();
         }
 
@@ -568,7 +568,7 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized void connectReconnect(Throwable throwable) {
-        client.disconnected(true);
+        client.disconnected(true, true);
     }
 
     @Override
@@ -1648,12 +1648,12 @@ public class SessionImpl implements Session {
 
     private void handleMageException(MageException ex) {
         logger.fatal("Server error", ex);
-        client.showError(ex.getMessage());
+        client.showError("Server error: " + ex.getMessage());
     }
 
     private void handleGameException(GameException ex) {
         logger.warn(ex.getMessage());
-        client.showError(ex.getMessage());
+        client.showError("Game error: " + ex.getMessage());
     }
 
     @Override

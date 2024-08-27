@@ -6,6 +6,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import mage.watchers.common.PermanentWasCastWatcher;
 
 /**
@@ -22,7 +23,8 @@ public class EntersBattlefieldCastTriggeredAbility extends EntersBattlefieldCont
         super(zone, effect, filter, optional, setTargetPointer);
         this.mustCast = mustCast;
         this.addWatcher(new PermanentWasCastWatcher());
-        setTriggerPhrase(getTriggerPhraseFromFilter() + " under your control, if it " + (mustCast ? "was" : "wasn't") + " cast, " );
+        setTriggerPhrase(getWhen() + CardUtil.addArticle(filter.getMessage()) +
+                " you control enters, if it " + (mustCast ? "was" : "wasn't") + " cast, " );
     }
 
     protected EntersBattlefieldCastTriggeredAbility(final EntersBattlefieldCastTriggeredAbility ability) {

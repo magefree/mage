@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.watchers.common.CelebrationWatcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public final class PestsOfHonor extends CardImpl {
                         TargetController.YOU, false
                 ), CelebrationCondition.instance, "At the beginning of combat on your turn, if two or more " +
                 "nonland permanents entered the battlefield under your control this turn, put a +1/+1 counter on {this}."
-        ).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new CelebrationWatcher());
+        ).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new PermanentsEnteredBattlefieldWatcher());
     }
 
     private PestsOfHonor(final PestsOfHonor card) {

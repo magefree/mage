@@ -34,7 +34,7 @@ public final class GodtrackerOfJund extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever a creature with power 5 or greater enters the battlefield under your control, you may put a +1/+1 counter on Godtracker of Jund.
+        // Whenever a creature with power 5 or greater you control enters, you may put a +1/+1 counter on Godtracker of Jund.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, true));
     }

@@ -1,11 +1,13 @@
 package mage.server.util;
 
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -13,6 +15,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -20,7 +23,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Handles server messages (Messages of the Day). Reloads messages every 5
  * minutes.
  *
- * @author nantuko
+ * @author nantuko, JayDi85
  */
 public enum ServerMessagesUtil {
     instance;
@@ -29,11 +32,13 @@ public enum ServerMessagesUtil {
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
     private static final int SERVER_MSG_REFRESH_RATE_SECS = 60;
 
-    private final List<String> messages = new ArrayList<>();
+    private final List<String> newsMessages = new ArrayList<>();
+    private String statsMessage = "";
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private static boolean ignore = false;
 
     private static long startDate;
+    private static int maxUsersOnline = 0;
     private static final AtomicInteger gamesStarted = new AtomicInteger(0);
     private static final AtomicInteger gamesEnded = new AtomicInteger(0);
     private static final AtomicInteger tournamentsStarted = new AtomicInteger(0);
@@ -42,31 +47,37 @@ public enum ServerMessagesUtil {
     private static final AtomicInteger reconnects = new AtomicInteger(0);
 
     ServerMessagesUtil() {
-        ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
-        updateExecutor.scheduleAtFixedRate(this::reloadMessages, 5, SERVER_MSG_REFRESH_RATE_SECS, TimeUnit.SECONDS);
+        ScheduledExecutorService NEWS_MESSAGES_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+                new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_NEWS_REFRESH)
+        );
+        NEWS_MESSAGES_EXECUTOR.scheduleAtFixedRate(this::reloadMessages, 5, SERVER_MSG_REFRESH_RATE_SECS, TimeUnit.SECONDS);
     }
 
     public List<String> getMessages() {
-        lock.readLock().lock();
+        final Lock r = lock.readLock();
+        r.lock();
         try {
-            return messages;
+            List<String> res = new ArrayList<>(this.newsMessages);
+            res.add(this.statsMessage);
+            return res;
         } finally {
-            lock.readLock().unlock();
+            r.unlock();
         }
     }
 
     private void reloadMessages() {
         LOGGER.debug("Reading server messages...");
-        List<String> motdMessages = readFromFile();
-        List<String> newMessages = new ArrayList<>(motdMessages);
-        newMessages.add(getServerStatistics());
+        List<String> updatedMessages = new ArrayList<>(readFromFile());
+        String updatedStats = getServerStatsMessage();
 
-        lock.writeLock().lock();
+        final Lock w = lock.writeLock();
+        w.lock();
         try {
-            messages.clear();
-            messages.addAll(newMessages);
+            this.newsMessages.clear();
+            this.newsMessages.addAll(updatedMessages);
+            this.statsMessage = updatedStats;
         } finally {
-            lock.writeLock().unlock();
+            w.unlock();
         }
     }
 
@@ -80,14 +91,15 @@ public enum ServerMessagesUtil {
         if (!file.exists() || !file.canRead()) {
             // warn user about miss messages file, except dev environment
             if (!file.getAbsolutePath().contains("Mage.Server")) {
-                LOGGER.warn("Couldn't find server messages file using path: " + file.getAbsolutePath());
+                LOGGER.warn("Can't find server messages file: " + file.getAbsolutePath());
             }
         } else {
             try {
-                is = new FileInputStream(file);
+                is = Files.newInputStream(file.toPath());
                 ignore = false;
-            } catch (Exception f) {
-                LOGGER.error(f, f);
+            } catch (Exception e) {
+                // don't read file anymore on any error
+                LOGGER.error("Can't read server messages file: " + file.getAbsolutePath() + " - " + e.getMessage(), e);
                 ignore = true;
             }
         }
@@ -106,19 +118,20 @@ public enum ServerMessagesUtil {
                 newMessages.add(message.trim());
             }
         } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
+            LOGGER.error("Can't read message from server messages file: " + e.getMessage(), e);
         } finally {
             StreamUtils.closeQuietly(is);
         }
         return newMessages;
     }
 
-    private String getServerStatistics() {
+    private String getServerStatsMessage() {
         long current = System.currentTimeMillis();
         long hours = ((current - startDate) / (1000 * 60 * 60));
         String updated = new Date().toInstant().atOffset(ZoneOffset.UTC).toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        return String.format("Server uptime: %d hours; active games: %d of %d, tourneys: %d of %d; stats from %s",
+        return String.format("Server uptime: %d hours; max online: %d; active games: %d of %d, tourneys: %d of %d; stats from %s",
                 hours,
+                maxUsersOnline,
                 gamesStarted.get() - gamesEnded.get(),
                 gamesStarted.get(),
                 tournamentsStarted.get() - tournamentsEnded.get(),
@@ -129,6 +142,10 @@ public enum ServerMessagesUtil {
 
     public void setStartDate(long milliseconds) {
         startDate = milliseconds;
+    }
+
+    public void setMaxUsersOnline(int newOnline) {
+        maxUsersOnline = newOnline;
     }
 
     public void incGamesStarted() {

@@ -48,7 +48,7 @@ public final class BrineboundGift extends CardImpl {
 
         // Whenever Brinebound Gift enters the battlefield or enchanted creature becomes the target of an Aura spell, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new OrTriggeredAbility(Zone.ALL, new CreateTokenEffect(new SpiritWhiteToken()), false,
-                "Whenever {this} enters the battlefield or enchanted creature becomes the target of an Aura spell, ",
+                "Whenever {this} enters or enchanted creature becomes the target of an Aura spell, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new BecomesTargetAttachedTriggeredAbility(null, filter, SetTargetPointer.NONE, false)));
 

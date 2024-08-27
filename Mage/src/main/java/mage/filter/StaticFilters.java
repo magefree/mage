@@ -988,6 +988,14 @@ public final class StaticFilters {
         FILTER_PERMANENT_TOKEN.setLockedFilter(true);
     }
 
+
+    public static final FilterPermanent FILTER_PERMANENT_TOKENS = new FilterPermanent("tokens");
+
+    static {
+        FILTER_PERMANENT_TOKENS.add(TokenPredicate.TRUE);
+        FILTER_PERMANENT_TOKENS.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKEN = new FilterCreaturePermanent("creature token");
 
     static {
@@ -1003,13 +1011,20 @@ public final class StaticFilters {
         FILTER_CONTROLLED_CREATURE_NON_TOKEN.setLockedFilter(true);
     }
 
+    public static final FilterCreaturePermanent FILTER_CONTROLLED_CREATURES_NON_TOKEN = new FilterCreaturePermanent("nontoken creatures you control");
+
+    static {
+        FILTER_CONTROLLED_CREATURES_NON_TOKEN.add(TargetController.YOU.getControllerPredicate());
+        FILTER_CONTROLLED_CREATURES_NON_TOKEN.add(TokenPredicate.FALSE);
+        FILTER_CONTROLLED_CREATURES_NON_TOKEN.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_CREATURE_NON_TOKEN = new FilterCreaturePermanent("a nontoken creature");
 
     static {
         FILTER_CREATURE_NON_TOKEN.add(TokenPredicate.FALSE);
         FILTER_CREATURE_NON_TOKEN.setLockedFilter(true);
     }
-
 
     public static final FilterCreaturePermanent FILTER_CREATURES_NON_TOKEN = new FilterCreaturePermanent("nontoken creatures");
 

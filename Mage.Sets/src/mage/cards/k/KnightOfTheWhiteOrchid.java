@@ -38,7 +38,7 @@ public final class KnightOfTheWhiteOrchid extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, new FilterBySubtypeCard(SubType.PLAINS)), false), true),
                 new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS),
-                "When {this} enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle."));
+                "When {this} enters, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle."));
         
     }
 
