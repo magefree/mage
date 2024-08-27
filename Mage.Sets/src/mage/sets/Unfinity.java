@@ -21,6 +21,7 @@ public final class Unfinity extends ExpansionSet {
         this.hasBoosters = false; // not likely to be able to drafts at any point
 
         cards.add(new SetCardInfo("\"Name Sticker\" Goblin", "107m", Rarity.COMMON, mage.cards.n.NameStickerGoblin.class));
+        cards.add(new SetCardInfo("Atomwheel Acrobats", 130, Rarity.COMMON, mage.cards.a.AtomwheelAcrobats.class));
         cards.add(new SetCardInfo("Attempted Murder", 66, Rarity.UNCOMMON, mage.cards.a.AttemptedMurder.class));
         cards.add(new SetCardInfo("Blood Crypt", 279, Rarity.RARE, mage.cards.b.BloodCrypt.class));
         cards.add(new SetCardInfo("Boing!", 40, Rarity.COMMON, mage.cards.b.Boing.class));
@@ -51,6 +52,7 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 240, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Sacred Foundry", 285, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Saw in Half", 88, Rarity.RARE, mage.cards.s.SawInHalf.class));
+        cards.add(new SetCardInfo("Six-Sided Die", 92, Rarity.COMMON, mage.cards.s.SixSidedDie.class));
         cards.add(new SetCardInfo("Slight Malfunction", 123, Rarity.COMMON, mage.cards.s.SlightMalfunction.class));
         cards.add(new SetCardInfo("Starlight Spectacular", 28, Rarity.RARE, mage.cards.s.StarlightSpectacular.class));
         cards.add(new SetCardInfo("Steam Vents", 283, Rarity.RARE, mage.cards.s.SteamVents.class));
@@ -61,5 +63,6 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("The Space Family Goblinson", 179, Rarity.UNCOMMON, mage.cards.t.TheSpaceFamilyGoblinson.class));
         cards.add(new SetCardInfo("Vegetation Abomination", 160, Rarity.COMMON, mage.cards.v.VegetationAbomination.class));
         cards.add(new SetCardInfo("Watery Grave", 278, Rarity.RARE, mage.cards.w.WateryGrave.class));
+        cards.add(new SetCardInfo("Xenosquirrels", 96, Rarity.COMMON, mage.cards.x.Xenosquirrels.class));
     }
 }
