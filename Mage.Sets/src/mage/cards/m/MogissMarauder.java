@@ -41,8 +41,8 @@ public final class MogissMarauder extends CardImpl {
                 HasteAbility.getInstance(), Duration.EndOfTurn,
                 "and haste until end of turn, where X is your devotion to black"
         ));
-        ability.setTargetAdjuster(new TargetsCountAdjuster(DevotionCount.B));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(DevotionCount.B));
         ability.addHint(DevotionCount.B.getHint());
         this.addAbility(ability);
     }

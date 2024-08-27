@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -85,7 +86,7 @@ class HydroidKrasisEffect extends OneShotEffect {
         if (!(obj instanceof SpellAbility)) {
             return false;
         }
-        int halfCost = Math.floorDiv(((SpellAbility) obj).getManaCostsToPay().getX(), 2);
+        int halfCost = Math.floorDiv(CardUtil.getSourceCostsTag(game, ((SpellAbility) obj), "X", 0), 2);
         player.drawCards(halfCost, source, game);
         player.gainLife(halfCost, game, source);
         return true;

@@ -32,8 +32,8 @@ public final class QuarantineField extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect()
                 .setText("for each isolation counter on it, exile up to one target nonland permanent an opponent controls until {this} leaves the battlefield")
         );
-        ability.setTargetAdjuster(new TargetsCountAdjuster(new CountersSourceCount(CounterType.ISOLATION)));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(new CountersSourceCount(CounterType.ISOLATION)));
         this.addAbility(ability);
     }
 

@@ -124,7 +124,7 @@ class CascadeEffect extends OneShotEffect {
             cardsToExile.add(card);
             // the card move is sequential, not all at once.
             controller.moveCards(card, Zone.EXILED, source, game);
-            game.getState().processAction(game);  // Laelia, the Blade Reforged
+            game.processAction();  // Laelia, the Blade Reforged
             if (!card.isLand(game)
                     && card.getManaValue() < sourceCost) {
                 cardToCast = card;

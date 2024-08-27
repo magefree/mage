@@ -1,24 +1,19 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 
@@ -29,9 +24,8 @@ import java.util.UUID;
  */
 public final class MonumentalHenge extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.PLAINS);
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.PLAINS);
+    private static final YouControlPermanentCondition condition = new YouControlPermanentCondition(filter);
 
     private static final FilterCard filterCard = new FilterCard("a historic card");
 
@@ -43,9 +37,7 @@ public final class MonumentalHenge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Monumental Henge enters the battlefield tapped unless you control a Plains.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
-                new TapSourceEffect(), condition
-        ), "tapped unless you control a Plains"));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());

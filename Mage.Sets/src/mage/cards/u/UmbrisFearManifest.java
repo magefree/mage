@@ -53,7 +53,7 @@ public final class UmbrisFearManifest extends CardImpl {
                 Duration.WhileOnBattlefield
         )));
 
-        // Whenever Umbris or another Nightmare or Horror enters the battlefield under your control, target opponent exiles cards from the top of their library until they exile a land card.
+        // Whenever Umbris or another Nightmare or Horror you control enters, target opponent exiles cards from the top of their library until they exile a land card.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new UmbrisFearManifestEffect(), filter, false, true
         );

@@ -47,7 +47,7 @@ public final class VaultbornTyrant extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever Vaultborn Tyrant or another creature with power 4 or greater enters the battlefield under your control, you gain 3 life and draw a card.
+        // Whenever Vaultborn Tyrant or another creature with power 4 or greater you control enters, you gain 3 life and draw a card.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GainLifeEffect(3), filter, false, true
         );

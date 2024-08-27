@@ -27,7 +27,7 @@ public final class SteelfinWhale extends CardImpl {
         // Affinity for artifacts
         this.addAbility(new AffinityForArtifactsAbility());
 
-        // Whenever an artifact enters the battlefield under your control, untap Steelfin Whale.
+        // Whenever an artifact you control enters, untap Steelfin Whale.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new UntapSourceEffect(), StaticFilters.FILTER_PERMANENT_ARTIFACT_AN
         ));

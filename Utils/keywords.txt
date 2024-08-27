@@ -59,7 +59,9 @@ Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
 For Mirrodin!|new|
+Freerunning|manaString|
 Friends forever|instance|
+Gift|card|
 Haste|instance|
 Hexproof|instance|
 Hideaway|number|
@@ -90,6 +92,7 @@ Mutate|card, manaString|
 Myriad|new|
 Nightbound|new|
 Ninjutsu|manaString|
+Offspring|manaString|
 Outlast|cost|
 Partner|instance|
 Persist|new|

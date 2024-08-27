@@ -45,7 +45,7 @@ public final class RadiantSolar extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // Whenever Radiant Solar or another nontoken creature enters the battlefield under your control, venture into the dungeon.
+        // Whenever Radiant Solar or another nontoken creature you control enters, venture into the dungeon.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new VentureIntoTheDungeonEffect(), filter, false, true
         ));

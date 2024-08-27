@@ -26,9 +26,9 @@ public final class PlayableCountIcon extends CardIconImpl {
     private static String getHint(PlayableObjectStats objectStats) {
         String res = "Playable abilities: " + objectStats.getPlayableAmount();
         // abilities list already sorted
-        List<String> list = objectStats.getPlayableAbilities();
+        List<String> list = objectStats.getPlayableAbilityNames();
         final int[] counter = {0};
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             res += "<br>" + list
                     .stream()
                     .map(s -> {

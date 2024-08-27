@@ -26,7 +26,7 @@ public final class WeldfastWingsmith extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever an artifact enters the battlefield under your control, Weldfast Wingsmith gains flying until end of turn.
+        // Whenever an artifact you control enters, Weldfast Wingsmith gains flying until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), StaticFilters.FILTER_PERMANENT_ARTIFACT));
     }

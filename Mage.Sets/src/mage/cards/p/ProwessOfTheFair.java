@@ -27,7 +27,7 @@ public final class ProwessOfTheFair extends CardImpl {
     }
 
     public ProwessOfTheFair(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{1}{B}");
         this.subtype.add(SubType.ELF);
 
         // Whenever another nontoken Elf is put into your graveyard from the battlefield, you may create a 1/1 green Elf Warrior creature token.

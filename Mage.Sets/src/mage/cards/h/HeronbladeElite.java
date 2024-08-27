@@ -44,7 +44,7 @@ public final class HeronbladeElite extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Heronblade Elite.
+        // Whenever another Human you control enters, put a +1/+1 counter on Heronblade Elite.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));

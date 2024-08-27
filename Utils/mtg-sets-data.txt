@@ -34,6 +34,7 @@ Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
 Bloomburrow|BLB|
+Bloomburrow Commander|BLC|
 Commander 2013 Edition|C13|
 Commander 2014 Edition|C14|
 Commander 2015 Edition|C15|
@@ -82,6 +83,7 @@ Duel Decks: Nissa vs. Ob Nixilis|DDR|
 Duel Decks: Mind vs. Might|DDS|
 Duel Decks: Merfolk vs. Goblins|DDT|
 Duels of the Planeswalkers|DPA|
+Duskmourn: House of Horror|DSK|
 Dragon's Maze|DGM|
 Dissension|DIS|
 Dark Ascension|DKA|
@@ -108,6 +110,7 @@ Fallout|PIP|
 Fallen Empires|FEM|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
+Foundations|FDN|
 Future Sight|FUT|
 Global Series: Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|
@@ -192,6 +195,7 @@ Masterpiece Series|MPS|
 Mirrodin|MRD|
 Murders at Karlov Manor|MKM|
 Murders at Karlov Manor Commander|MKC|
+Mystery Booster 2|MB2|
 Ravnica: Clue Edition|CLU|
 Nemesis|NEM|
 New Phyrexia|NPH|
@@ -221,6 +225,7 @@ Jurassic World Collection|REX|
 Rivals of Ixalan|RIX|
 Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
+Sega Dreamcast Cards|PSDG|
 Starter 2000|S00|
 Starter 1999|S99|
 Starter Commander Decks|SCD|

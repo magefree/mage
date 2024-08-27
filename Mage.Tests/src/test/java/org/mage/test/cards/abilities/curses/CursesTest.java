@@ -50,6 +50,7 @@ public class CursesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Echoes", playerB);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Jace's Ingenuity");
+        setChoice(playerA, true); // yes to copy
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -118,7 +119,7 @@ public class CursesTest extends CardTestPlayerBase {
 
         castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Copy Enchantment");
-        // Choices for Copy Enchantment get auto-chosen
+        setStrictChooseMode(false); // auto choose
 
         checkPlayableAbility("Can't cast a 2nd spell", 4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Lightning", false);
 
@@ -211,6 +212,8 @@ public class CursesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Misfortunes", playerB);
 
+        setStrictChooseMode(false); // auto choose, not valid choice since same name
+
         setStopAt(3, PhaseStep.DRAW);
         execute();
 
@@ -227,6 +230,9 @@ public class CursesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Misfortunes", playerB);
+
+        setChoice(playerA, true);
+        addTarget(playerA, "Curse of Bloodletting");
 
         setStopAt(3, PhaseStep.DRAW);
         execute();
@@ -247,6 +253,7 @@ public class CursesTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Death's Hold", playerB);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
@@ -273,12 +280,15 @@ public class CursesTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Death's Hold", playerB);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Reclamation Sage");
+        setChoice(playerB, true); // yes to destroy artifact or enchantment
         addTarget(playerB, "Curse of Death's Hold");
 
         // {2}{G/U}{G/U}: Put the top two cards of your library into your graveyard, then return a nonland card of an opponent's choice from your graveyard to your hand.
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{G/U}{G/U}: Mill two cards");
+        addTarget(playerB, "Curse of Death's Hold"); // opponent's choice
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Curse of Death's Hold", playerB);
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
@@ -345,6 +355,7 @@ public class CursesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, memnite);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+        setChoice(playerB, memnite);
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -363,6 +374,7 @@ public class CursesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, ugin);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+        setChoice(playerB, ugin);
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

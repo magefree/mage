@@ -25,7 +25,7 @@ public final class CreamOfTheCrop extends CardImpl {
     public CreamOfTheCrop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-        // Whenever a creature enters the battlefield under your control, 
+        // Whenever a creature you control enters,
         // you may look at the top X cards of your library, where X is that 
         // creature's power. If you do, put one of those cards on top of your 
         // library and the rest on the bottom of your library in any order.

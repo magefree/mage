@@ -89,8 +89,8 @@ public class EntersBattlefieldAbility extends StaticAbility {
         } else {
             prefix = null;
         }
-        String rule = (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") +
-                " the battlefield" + (!superRule.isEmpty() && superRule.charAt(0) == ' ' ? "" : " ") + superRule;
+        String rule = (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s")
+                + (!superRule.isEmpty() && superRule.charAt(0) == ' ' ? "" : " ") + superRule;
         if (prefix != null) {
             return prefix + CardUtil.getTextWithFirstCharUpperCase(rule);
         }

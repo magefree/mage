@@ -2,19 +2,13 @@
 
 package mage.abilities.keyword;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.LoseLifeOpponentsYouGainLifeLostEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * FAQ 2013/01/11
@@ -32,7 +26,10 @@ import java.util.UUID;
 public class ExtortAbility extends TriggeredAbilityImpl {
 
     public ExtortAbility() {
-        super(Zone.BATTLEFIELD, new ExtortEffect(), false);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(
+                new LoseLifeOpponentsYouGainLifeLostEffect(1),
+                new ManaCostsImpl<>("{W/B}"),
+                "Pay {W/B} to Extort?"));
     }
 
     protected ExtortAbility(final ExtortAbility ability) {
@@ -57,45 +54,5 @@ public class ExtortAbility extends TriggeredAbilityImpl {
     @Override
     public ExtortAbility copy() {
         return new ExtortAbility(this);
-    }
-}
-
-class ExtortEffect extends OneShotEffect {
-    public ExtortEffect() {
-        super(Outcome.Damage);
-        staticText = "each opponent loses 1 life and you gain that much life";
-    }
-
-    protected ExtortEffect(final ExtortEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            if (player.chooseUse(Outcome.Damage, new StringBuilder("Extort opponents? (").append(permanent.getName()).append(')').toString(), source, game)) {
-                Cost cost = new ManaCostsImpl<>("{W/B}");
-                if (cost.pay(source, game, source, player.getId(), false, null)) {
-                    int loseLife = 0;
-                    for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                        loseLife += game.getPlayer(opponentId).loseLife(1, game, source, false);
-                    }
-                    if (loseLife > 0) {
-                        game.getPlayer(source.getControllerId()).gainLife(loseLife, game, source);
-                    }
-                    if (!game.isSimulation())
-                        game.informPlayers(new StringBuilder(permanent.getName()).append(" extorted opponents ").append(loseLife).append(" life").toString());
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ExtortEffect copy() {
-        return new ExtortEffect(this);
     }
 }

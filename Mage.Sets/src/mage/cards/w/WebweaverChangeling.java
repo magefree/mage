@@ -40,7 +40,7 @@ public final class WebweaverChangeling extends CardImpl {
         // When Webweaver Changeling enters the battlefield, if there are three or more creature cards in your graveyard, you gain 5 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5)), condition,
-                "When {this} enters the battlefield, if there are three or more " +
+                "When {this} enters, if there are three or more " +
                         "creature cards in your graveyard, you gain 5 life."
         ));
     }

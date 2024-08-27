@@ -7,8 +7,6 @@ import java.net.Proxy;
  */
 public interface DownloadServiceInfo {
 
-    Proxy getProxy();
-
     boolean isNeedCancel();
 
     void incErrorCount();

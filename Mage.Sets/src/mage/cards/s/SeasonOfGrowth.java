@@ -27,7 +27,7 @@ public final class SeasonOfGrowth extends CardImpl {
     public SeasonOfGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-        // Whenever a creature enters the battlefield under your control, scry 1.
+        // Whenever a creature you control enters, scry 1.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new ScryEffect(1), StaticFilters.FILTER_PERMANENT_A_CREATURE
         ));

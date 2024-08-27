@@ -11,7 +11,7 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.watchers.common.CelebrationWatcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public final class LadyOfLaughter extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), TargetController.YOU,
                 CelebrationCondition.instance, false
-        ).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new CelebrationWatcher());
+        ).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new PermanentsEnteredBattlefieldWatcher());
     }
 
     private LadyOfLaughter(final LadyOfLaughter card) {

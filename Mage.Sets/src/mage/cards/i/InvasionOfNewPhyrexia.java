@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SiegeAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class InvasionOfNewPhyrexia extends CardImpl {
         this.addAbility(new SiegeAbility());
 
         // When Invasion of New Phyrexia enters the battlefield, create X 2/2 white and blue Knight creature tokens with vigilance.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightWhiteBlueToken(), ManacostVariableValue.ETB)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightWhiteBlueToken(), GetXValue.instance)));
     }
 
     private InvasionOfNewPhyrexia(final InvasionOfNewPhyrexia card) {

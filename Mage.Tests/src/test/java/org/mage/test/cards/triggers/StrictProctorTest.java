@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
@@ -23,7 +18,7 @@ public class StrictProctorTest extends CardTestPlayerBase {
         // Whenever a permanent entering the battlefield causes a triggered ability to 
         // trigger, counter that ability unless its controller pays {2}.
         addCard(Zone.BATTLEFIELD, playerA, "Strict Proctor", 1);
-        // Whenever a land enters the battlefield under your control, you gain 3 life.
+        // Whenever a land you control enters, you gain 3 life.
         addCard(Zone.BATTLEFIELD, playerA, "Primeval Bounty", 1);
         // land to play for trigger
         addCard(Zone.HAND, playerA, "Swamp", 1);
@@ -45,7 +40,7 @@ public class StrictProctorTest extends CardTestPlayerBase {
         // Whenever a permanent entering the battlefield causes a triggered ability to 
         // trigger, counter that ability unless its controller pays {2}.
         addCard(Zone.BATTLEFIELD, playerA, "Strict Proctor", 1);
-        // Whenever a land enters the battlefield under your control, you gain 3 life.
+        // Whenever a land you control enters, you gain 3 life.
         addCard(Zone.BATTLEFIELD, playerA, "Primeval Bounty", 1);
         // land to play for trigger
         addCard(Zone.HAND, playerA, "Swamp", 1);

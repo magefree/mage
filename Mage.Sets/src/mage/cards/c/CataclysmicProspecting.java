@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -40,7 +40,7 @@ public final class CataclysmicProspecting extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
 
         // Cataclysmic Prospecting deals X damage to each creature. For each mana from a Desert spent to cast this spell, create a tapped Treasure token.
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, StaticFilters.FILTER_PERMANENT_CREATURE));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken(), CataclysmicProspectingValue.instance, true, false)
                 .setText("For each mana from a Desert spent to cast this spell, create a tapped Treasure token."));
         this.getSpellAbility().addWatcher(new CataclysmicProspectingWatcher());

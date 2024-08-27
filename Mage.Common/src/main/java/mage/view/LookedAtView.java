@@ -2,9 +2,12 @@
 
 package mage.view;
 
+import mage.MageObject;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 
 import java.io.Serializable;
 
@@ -20,7 +23,12 @@ public class LookedAtView implements Serializable {
     public LookedAtView(String name, Cards cards, Game game) {
         this.name = name;
         for (Card card: cards.getCards(game)) {
-            this.cards.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt()));
+            if (card instanceof PermanentCard && card.isFaceDown(game)) {
+                MageObject trueCard = ((Permanent) card).getBasicMageObject();
+                this.cards.put(card.getId(), new SimpleCardView(trueCard.getId(), trueCard.getExpansionSetCode(), trueCard.getCardNumber(), trueCard.getUsesVariousArt()));
+            } else {
+                this.cards.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt()));
+            }
         }
     }
 

@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class CribSwap extends CardImpl {
 
     public CribSwap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{2}{W}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling

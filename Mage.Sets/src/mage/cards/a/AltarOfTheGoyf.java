@@ -26,7 +26,7 @@ public final class AltarOfTheGoyf extends CardImpl {
             = new FilterCreaturePermanent(SubType.LHURGOYF, "Lhurgoyf creatures");
 
     public AltarOfTheGoyf(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ARTIFACT}, "{5}");
 
         this.subtype.add(SubType.LHURGOYF);
 

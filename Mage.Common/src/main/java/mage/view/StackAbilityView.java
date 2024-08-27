@@ -3,11 +3,9 @@ package mage.view;
 import mage.MageObject;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.icon.CardIconImpl;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -16,7 +14,6 @@ import mage.game.Game;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.target.Target;
-import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
 
@@ -92,9 +89,7 @@ public class StackAbilityView extends CardView {
                 List<UUID> targetList = new ArrayList<>();
                 for (Effect effect : mode.getEffects()) {
                     TargetPointer targetPointer = effect.getTargetPointer();
-                    if (targetPointer instanceof FixedTarget) {
-                        targetList.add(((FixedTarget) targetPointer).getTarget());
-                    }
+                    targetList.addAll(targetPointer.getTargets(game, ability));
                 }
                 if (!targetList.isEmpty()) {
                     overrideTargets(targetList);

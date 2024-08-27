@@ -1,8 +1,6 @@
 
 package mage.abilities.effects.common;
 
-import static java.lang.Integer.min;
-
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -41,7 +39,7 @@ public class ReplaceOpponentCardsInHandWithSelectedEffect extends OneShotEffect 
                 targetOpponent.putCardsOnTopOfLibrary(targetOpponent.getHand(), game, source, false);
 
                 int librarySize = targetOpponent.getLibrary().size();
-                int searchLibraryForNum = min(originalHandSize, librarySize);
+                int searchLibraryForNum = Integer.min(originalHandSize, librarySize);
 
                 TargetCardInLibrary target = new TargetCardInLibrary(searchLibraryForNum, searchLibraryForNum, new FilterCard());
 

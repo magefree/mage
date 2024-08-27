@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class WildfireAwakener extends CardImpl {
         // When Wildfire Awakener enters the battlefield, create X 1/1 red Elemental creature tokens
         // with "Whenever this creature becomes tapped, it deals 1 damage to target player."
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new WildfireAwakenerToken(), ManacostVariableValue.ETB)
+                new CreateTokenEffect(new WildfireAwakenerToken(), GetXValue.instance)
         ));
     }
 

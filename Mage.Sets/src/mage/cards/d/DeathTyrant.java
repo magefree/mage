@@ -59,8 +59,8 @@ public final class DeathTyrant extends CardImpl {
 
 class DeathTyrantTriggeredAbility extends TriggeredAbilityImpl {
 
-    public DeathTyrantTriggeredAbility() {
-        super(Zone.ALL, new CreateTokenEffect(new ZombieToken()));
+    DeathTyrantTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()));
         setTriggerPhrase("Whenever an attacking creature you control or a blocking creature an opponent controls dies, ");
     }
 

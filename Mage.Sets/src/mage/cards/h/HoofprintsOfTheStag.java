@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class HoofprintsOfTheStag extends CardImpl {
 
     public HoofprintsOfTheStag(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add(SubType.ELEMENTAL);
 
         // Whenever you draw a card, you may put a hoofprint counter on Hoofprints of the Stag.

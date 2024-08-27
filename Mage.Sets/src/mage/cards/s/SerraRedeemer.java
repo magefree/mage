@@ -39,7 +39,7 @@ public final class SerraRedeemer extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another creature with power 2 or less enters the battlefield under your control, put two +1/+1 counters on that creature.
+        // Whenever another creature with power 2 or less you control enters, put two +1/+1 counters on that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)),
                 filter, false, SetTargetPointer.PERMANENT

@@ -96,7 +96,7 @@ class ShurikenEffect extends OneShotEffect {
         if (object instanceof Permanent) {
             name = ((Permanent) object).getName();
         }
-        return name + "deals 2 damage to target creature. That creature's controller gains control of "
+        return name + " deals 2 damage to target creature. That creature's controller gains control of "
                 + name + " unless it was unattached from a Ninja.";
     }
 }

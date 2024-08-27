@@ -1,0 +1,86 @@
+1 [AFC:14] Arcane Endeavor
+1 [ALA:220] Arcane Sanctum
+1 [ELD:331] Arcane Signet
+1 [THS:187] Ashen Rider
+1 [CLU:229] Azorius Chancery
+1 [OTC:215] Baleful Strix
+1 [AFC:57] Bucknard's Everfull Purse
+1 [THS:213] Burnished Hart
+1 [KLD:9] Cataclysmic Gearhulk
+1 [HOU:31] Champion of Wits
+1 [SOI:270] Choked Estuary
+1 [AFC:58] Clay Golem
+1 [KLD:176] Cloudblazer
+1 [ELD:333] Command Tower
+1 [LCC:301] Commander's Sphere
+1 [AFC:59] Component Pouch
+1 [AKH:49] Curator of Mysteries
+1 [ODY:319] Darkwater Catacombs
+1 [WAR:190] Despark
+1 [CLU:233] Dimir Aqueduct
+1 [10E:137] Doomed Necromancer
+1 [AFR:242] Dungeon Map
+1 [ALA:223] Esper Panorama
+1 [SCG:12] Eternal Dragon
+1 [WOE:256] Evolving Wilds
+1 [CON:142] Exotic Orchard
+1 [OTC:225] Extract Brain
+1 [9ED:297] Fellwar Stone
+1 [CLU:86] Forbidden Alchemy
+1 [EMN:203] Geier Reach Sanitarium
+1 [AFC:24] Grave Endeavor
+1 [AFR:224] Hama Pashar, Ruin Seeker
+1 [MMQ:320] High Market
+1 [XLN:223] Hostage Taker
+1 [AFC:276] Immovable Rod
+5 [OTJ:273] Island
+1 [ULG:11] Karmic Guide
+1 [MRD:199] Lightning Greaves
+1 [M12:65] Merfolk Looter
+1 [M20:232] Meteor Golem
+1 [AFC:322] Midnight Pathlighter
+1 [AFR:24] Minimus Containment
+1 [AFC:16] Minn, Wily Illusionist
+1 [LRW:76] Mulldrifter
+1 [ISD:70] Murder of Crows
+1 [SCD:94] Necromantic Selection
+1 [PLC:159] Necrotic Sliver
+1 [AFC:323] Nihiloor
+1 [FUT:178] Nimbus Maze
+1 [M21:223] Obsessive Stitcher
+1 [CLU:241] Orzhov Basilica
+1 [M12:72] Phantasmal Image
+1 [AFC:18] Phantom Steed
+1 [GRN:82] Plaguecrafter
+7 [OTJ:272] Plains
+1 [SOI:278] Port Town
+1 [BFZ:241] Prairie Stream
+1 [TMP:80] Propaganda
+1 [AFC:278] Radiant Solar
+1 [M19:116] Reassembling Skeleton
+1 [AFC:10] Revivify
+1 [AFC:19] Rod of Absorption
+1 [CSP:16] Ronom Unicorn
+1 [LRW:139] Shriekmaw
+1 [SUM:274] Sol Ring
+1 [M21:239] Solemn Simulacrum
+1 [M12:39] Sun Titan
+1 [SOM:22] Sunblast Angel
+1 [BFZ:249] Sunken Hollow
+7 [OTJ:274] Swamp
+1 [ICE:54] Swords to Plowshares
+1 [ONE:261] Terramorphic Expanse
+1 [AFC:12] Thorough Investigation
+1 [CLU:251] Thriving Heath
+1 [CLU:252] Thriving Isle
+1 [CLU:253] Thriving Moor
+1 [ISD:122] Unburial Rites
+1 [KTK:210] Utter End
+1 [CSP:133] Vanish into Memory
+1 [USG:166] Victimize
+1 [ROE:53] Wall of Omens
+1 [AFC:28] Wand of Orcus
+1 [5DN:165] Wayfarer's Bauble
+SB: 1 [AFC:3] Sefris of the Hidden Ways
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,55)|([OTC:215],[THS:213],[KLD:9],[AFC:58],[M20:232],[M21:239])([ELD:331],[AFC:57],[LCC:301],[AFC:59],[AFR:242],[9ED:297],[AFC:276],[MRD:199],[AFC:19],[SUM:274],[AFC:28],[5DN:165])([THS:187],[HOU:31],[KLD:176],[AKH:49],[10E:137],[SCG:12],[AFR:224],[XLN:223],[ULG:11],[M12:65],[AFC:322],[AFC:16],[LRW:76],[ISD:70],[PLC:159],[AFC:323],[M21:223],[M12:72],[AFC:18],[GRN:82],[AFC:278],[M19:116],[CSP:16],[LRW:139],[M12:39],[SOM:22],[ROE:53])([AFR:24],[TMP:80],[AFC:12])([WAR:190],[CLU:86],[AFC:24],[AFC:10],[ICE:54],[KTK:210],[CSP:133])([ALA:220],[CLU:229],[SOI:270],[ELD:333],[ODY:319],[CLU:233],[ALA:223],[WOE:256],[CON:142],[EMN:203],[MMQ:320],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[FUT:178],[CLU:241],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[SOI:278],[BFZ:241],[BFZ:249],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[ONE:261],[CLU:251],[CLU:252],[CLU:253])([AFC:14],[OTC:225],[SCD:94],[ISD:122],[USG:166])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([AFC:3])

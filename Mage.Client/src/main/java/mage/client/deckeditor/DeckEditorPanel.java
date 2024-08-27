@@ -25,6 +25,8 @@ import mage.components.CardInfoPane;
 import mage.game.GameException;
 import mage.remote.Session;
 import mage.util.DeckUtil;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
@@ -56,7 +58,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     private final Map<UUID, Card> temporaryCards = new HashMap<>(); // Cards dragged out of one part of the view into another
     private final String LAST_DECK_FOLDER = "lastDeckFolder";
     private Deck deck = new Deck();
-    private UUID tableId;
+    private UUID currentTableId;
+    private UUID parentTableId;
     private DeckEditorMode mode;
     private int timeout;
     private javax.swing.Timer countdown;
@@ -200,11 +203,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.deckArea.changeGUISize();
     }
 
-    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int visibleTimer) {
+    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID currentTableId, UUID parentTableId, int visibleTimer) {
         if (deck != null) {
             this.deck = deck;
         }
-        this.tableId = tableId;
+        this.currentTableId = currentTableId;
+        this.parentTableId = parentTableId;
         this.mode = mode;
         this.btnAddLand.setVisible(false);
 
@@ -241,7 +245,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 if (timeout != 0) {
                     countdown.start();
                     if (updateDeckTask == null || updateDeckTask.isDone()) {
-                        updateDeckTask = new UpdateDeckTask(SessionHandler.getSession(), tableId, deck);
+                        updateDeckTask = new UpdateDeckTask(SessionHandler.getSession(), currentTableId, deck);
                         updateDeckTask.execute();
                     }
                 }
@@ -1486,23 +1490,26 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             updateDeckTask.cancel(true);
         }
 
-        if (SessionHandler.submitDeck(mode, tableId, deck.prepareCardsOnlyDeck())) {
+        if (SessionHandler.submitDeck(mode, currentTableId, deck.prepareCardsOnlyDeck())) {
             removeDeckEditor();
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnSubmitTimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitTimerActionPerformed
 
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor(
+                new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_SUBMIT_TIMER)
+        );
         timeToSubmit = 60;
         this.btnSubmitTimer.setEnabled(false);
 
-        scheduledExecutorService.schedule(() -> {
+        // TODO: need code and feature review. It sends deck every minute -- is it useless? There is another feature with auto-save
+        executorService.schedule(() -> {
             if (updateDeckTask != null) {
                 updateDeckTask.cancel(true);
             }
 
-            if (SessionHandler.submitDeck(mode, tableId, deck.prepareCardsOnlyDeck())) {
+            if (SessionHandler.submitDeck(mode, currentTableId, deck.prepareCardsOnlyDeck())) {
                 SwingUtilities.invokeLater(this::removeDeckEditor);
             }
             return null;

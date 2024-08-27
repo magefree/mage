@@ -17,8 +17,8 @@ import mage.target.targetpointer.FixedTarget;
 public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterPermanent filter;
-    private boolean setTargetPointer;
-    private boolean onlyToControllerGraveyard;
+    private final boolean setTargetPointer;
+    private final boolean onlyToControllerGraveyard;
 
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
         this(effect, optional, filter, setTargetPointer, false);

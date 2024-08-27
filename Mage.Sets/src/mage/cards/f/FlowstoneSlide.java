@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -20,8 +20,8 @@ public final class FlowstoneSlide extends CardImpl {
     public FlowstoneSlide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{2}{R}{R}");
 
-        DynamicValue xPos = ManacostVariableValue.REGULAR;
-        DynamicValue xNeg = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+        DynamicValue xPos = GetXValue.instance;
+        DynamicValue xNeg = new SignInversionDynamicValue(GetXValue.instance);
         
         // All creatures get +X/-X until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(xPos, xNeg, Duration.EndOfTurn));

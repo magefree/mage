@@ -37,7 +37,7 @@ public final class DesertsHold extends CardImpl {
         // When Desert's Hold enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, you gain 3 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)),
-                DesertControlledOrGraveyardCondition.instance, "When {this} enters the battlefield, " +
+                DesertControlledOrGraveyardCondition.instance, "When {this} enters, " +
                 "if you control a Desert or there is a Desert card in your graveyard, you gain 3 life."
         ).addHint(DesertControlledOrGraveyardCondition.getHint()));
 

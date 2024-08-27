@@ -1,10 +1,8 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -17,16 +15,16 @@ import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author cbt33
  */
 public final class AboshansDesire extends CardImpl {
 
     public AboshansDesire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -34,14 +32,17 @@ public final class AboshansDesire extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
+
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
+                FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield
+        )));
+
         // Threshold - Enchanted creature has shroud as long as seven or more cards are in your graveyard.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield),
-            new CardsInControllerGraveyardCondition(7), "enchanted creature has shroud as long as seven or more cards are in your graveyard"));
-        ability.setAbilityWord(AbilityWord.THRESHOLD);
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield),
+                ThresholdCondition.instance, "enchanted creature has shroud as long as seven or more cards are in your graveyard"
+        )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 
     private AboshansDesire(final AboshansDesire card) {

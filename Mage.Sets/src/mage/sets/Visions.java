@@ -70,6 +70,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Fireblast", 79, Rarity.COMMON, mage.cards.f.Fireblast.class));
         cards.add(new SetCardInfo("Firestorm Hellkite", 130, Rarity.RARE, mage.cards.f.FirestormHellkite.class));
         cards.add(new SetCardInfo("Flooded Shoreline", 32, Rarity.RARE, mage.cards.f.FloodedShoreline.class));
+        cards.add(new SetCardInfo("Forbidden Ritual", 60, Rarity.RARE, mage.cards.f.ForbiddenRitual.class));
         cards.add(new SetCardInfo("Foreshadow", 33, Rarity.UNCOMMON, mage.cards.f.Foreshadow.class));
         cards.add(new SetCardInfo("Freewind Falcon", 5, Rarity.COMMON, mage.cards.f.FreewindFalcon.class));
         cards.add(new SetCardInfo("Funeral Charm", 61, Rarity.COMMON, mage.cards.f.FuneralCharm.class));
@@ -126,6 +127,7 @@ public final class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Walker", 152, Rarity.COMMON, mage.cards.p.PhyrexianWalker.class));
         cards.add(new SetCardInfo("Pillar Tombs of Aku", 67, Rarity.RARE, mage.cards.p.PillarTombsOfAku.class));
         cards.add(new SetCardInfo("Prosperity", 40, Rarity.UNCOMMON, mage.cards.p.Prosperity.class));
+        cards.add(new SetCardInfo("Pygmy Hippo", 133, Rarity.RARE, mage.cards.p.PygmyHippo.class));
         cards.add(new SetCardInfo("Python", 68, Rarity.COMMON, mage.cards.p.Python.class));
         cards.add(new SetCardInfo("Quicksand", 166, Rarity.UNCOMMON, mage.cards.q.Quicksand.class));
         cards.add(new SetCardInfo("Quirion Druid", 116, Rarity.RARE, mage.cards.q.QuirionDruid.class));

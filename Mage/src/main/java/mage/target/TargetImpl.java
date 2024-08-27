@@ -103,10 +103,12 @@ public abstract class TargetImpl implements Target {
         StringBuilder sb = new StringBuilder();
         int min = getMinNumberOfTargets();
         int max = getMaxNumberOfTargets();
+        String targetName = getTargetName();
         if (min > 0 && max == Integer.MAX_VALUE) {
             sb.append(CardUtil.numberToText(min));
             sb.append(" or more ");
-        } else if (!getTargetName().contains("X") && (min != 1 || max != 1)) {
+        } else if (!targetName.startsWith("X ") && (min != 1 || max != 1)) {
+            targetName = targetName.replace("another", "other"); //If non-singular, use "other" instead of "another"
             if (min < max && max != Integer.MAX_VALUE) {
                 if (min == 1 && max == 2) {
                     sb.append("one or ");
@@ -122,10 +124,10 @@ public abstract class TargetImpl implements Target {
         boolean addTargetWord = false;
         if (!isNotTarget()) {
             addTargetWord = true;
-            if (getTargetName().contains("target ")) {
+            if (targetName.contains("target ")) {
                 addTargetWord = false;
-            } else if (getTargetName().endsWith("any target")
-                    || getTargetName().endsWith("any other target")) {
+            } else if (targetName.endsWith("any target")
+                    || targetName.endsWith("any other target")) {
                 addTargetWord = false;
             }
             // endsWith needs to be specific.
@@ -135,9 +137,9 @@ public abstract class TargetImpl implements Target {
             sb.append("target ");
         }
         if (isNotTarget() && min == 1 && max == 1) {
-            sb.append(CardUtil.addArticle(getTargetName()));
+            sb.append(CardUtil.addArticle(targetName));
         } else {
-            sb.append(getTargetName());
+            sb.append(targetName);
         }
         return sb.toString();
     }
@@ -177,8 +179,9 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public void setTargetName(String name) {
+    public TargetImpl withTargetName(String name) {
         this.targetName = name;
+        return this;
     }
 
     @Override
@@ -406,7 +409,7 @@ public abstract class TargetImpl implements Target {
                 illegalTargets.add(targetId);
                 continue;
             }
-            if (!stillLegalTarget(targetId, source, game)) {
+            if (!stillLegalTarget(source.getControllerId(), targetId, source, game)) {
                 illegalTargets.add(targetId);
             }
         }
@@ -543,8 +546,8 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
-        return canTarget(id, source, game);
+    public boolean stillLegalTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        return canTarget(controllerId, id, source, game);
     }
 
     @Override

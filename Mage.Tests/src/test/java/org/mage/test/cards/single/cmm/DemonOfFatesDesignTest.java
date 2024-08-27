@@ -3,6 +3,7 @@ package org.mage.test.cards.single.cmm;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -28,7 +29,7 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Glorious Anthem"); // Enchantment {1}{W}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem");
-        setChoice(playerA, true); // yes to alt cast
+        setChoice(playerA, "Cast with alternative cost: Pay 3 life"); // yes to alt cast
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -46,7 +47,7 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Glorious Anthem"); // Enchantment {1}{W}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem");
-        setChoice(playerA, false); // no to alt cast
+        setChoice(playerA, TestPlayer.CHOICE_NORMAL_COST); // no to alt cast
 
         boolean hadError = false;
         try {
@@ -70,7 +71,7 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Absolute Law"); // Enchantment {1}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem");
-        setChoice(playerA, true); // yes to alt cast
+        setChoice(playerA, "Cast with alternative cost: Pay 3 life"); // yes to alt cast
 
         checkPlayableAbility("playable", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Absolute Law", false);
 
@@ -124,7 +125,7 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Absolute Law"); // Enchantment {1}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem");
-        setChoice(playerA, true); // yes to alt cast
+        setChoice(playerA, "Cast with alternative cost: Pay 3 life"); // yes to alt cast
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -133,7 +134,7 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         assertLife(playerA, 20 - 3);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Absolute Law");
-        setChoice(playerA, true); // yes to alt cast
+        setChoice(playerA, "Cast with alternative cost: Pay 2 life"); // yes to alt cast
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -156,10 +157,10 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Absolute Law"); // Enchantment {1}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem", true);
-        setChoice(playerA, true); // yes to alt cast
+        setChoice(playerA, "Cast with alternative cost: Pay 3 life"); // yes to alt cast
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", demon, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Absolute Law");
-        setChoice(playerA, true); // yes to alt cast
+        setChoice(playerA, "Cast with alternative cost: Pay 2 life"); // yes to alt cast
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -182,7 +183,7 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Glorious Anthem"); // Enchantment {1}{W}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem");
-        setChoice(playerA, true); // yes to alt cast
+        setChoice(playerA, "Cast with alternative cost: Pay 3 life"); // yes to alt cast
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unsubstantiate", "Glorious Anthem");
 
         // Did not keep the alt cost from the first cast
@@ -199,16 +200,21 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
     public void DoubleDemonDoubleCast() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, demon, 2);
+        addCard(Zone.BATTLEFIELD, playerA, demon);
+        addCard(Zone.HAND, playerA, "Sakashima the Impostor"); // Clone with distinct name
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor", true);
+        setChoice(playerA, true); // yes to Sakashima to copy Demon
+        setChoice(playerA, demon); // copy Demon
 
         addCard(Zone.HAND, playerA, "Glorious Anthem"); // Enchantment {1}{W}{W}
         addCard(Zone.HAND, playerA, "Absolute Law"); // Enchantment {1}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem", true);
-        setChoice(playerA, false); // no to the first one
-        setChoice(playerA, true); // yes to second one
+        setChoice(playerA, "Cast with alternative cost: Pay 3 life (source: Sakashima the Impostor");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Absolute Law");
-        setChoice(playerA, true); // yes to first one
+        setChoice(playerA, "Cast with alternative cost: Pay 2 life (source: " + demon);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -218,39 +224,25 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         assertLife(playerA, 20 - 3 - 2);
     }
 
-    //118.9a Only one alternative cost can be applied to any one spell as it’s being cast.
-    @Test
-    public void DoubleDemon() {
-        setStrictChooseMode(true);
-
-        addCard(Zone.BATTLEFIELD, playerA, demon, 2);
-
-        addCard(Zone.HAND, playerA, "Glorious Anthem"); // Enchantment {1}{W}{W}
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem");
-        setChoice(playerA, true); // yes to alt cast of first demon
-        // second demon has no choice to make.
-
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
-        assertPermanentCount(playerA, "Glorious Anthem", 1);
-        assertLife(playerA, 20 - 3);
-    }
-
     @Test
     public void DoubleDemonDoubleCast2() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, demon, 2);
+        addCard(Zone.BATTLEFIELD, playerA, demon);
+        addCard(Zone.HAND, playerA, "Sakashima the Impostor"); // Clone with distinct name
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor", true);
+        setChoice(playerA, true); // yes to Sakashima to copy Demon
+        setChoice(playerA, demon); // copy Demon
 
         addCard(Zone.HAND, playerA, "Glorious Anthem"); // Enchantment {1}{W}{W}
         addCard(Zone.HAND, playerA, "Absolute Law"); // Enchantment {1}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem", true);
-        setChoice(playerA, true); // yes to the first one
+        setChoice(playerA, "Cast with alternative cost: Pay 3 life (source: " + demon);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Absolute Law");
-        setChoice(playerA, true); // yes to second one
+        setChoice(playerA, "Cast with alternative cost: Pay 2 life (source: Sakashima the Impostor");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

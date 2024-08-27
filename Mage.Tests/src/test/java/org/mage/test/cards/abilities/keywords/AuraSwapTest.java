@@ -36,6 +36,7 @@ public class AuraSwapTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,  "Arcanum Wings", "Silvercoat Lion");
         
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Aura swap");
+        setChoice(playerA, "Eldrazi Conscription");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

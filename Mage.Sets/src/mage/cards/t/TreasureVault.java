@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class TreasureVault extends CardImpl {
 
         // {X}{X}, {T}, Sacrifice Treasure Vault: Create X Treasure tokens.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new TreasureToken(), ManacostVariableValue.REGULAR),
+                new CreateTokenEffect(new TreasureToken(), GetXValue.instance),
                 new ManaCostsImpl<>("{X}{X}")
         );
         ability.addCost(new TapSourceCost());

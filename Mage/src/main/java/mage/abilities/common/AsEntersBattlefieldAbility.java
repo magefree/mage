@@ -47,6 +47,6 @@ public class AsEntersBattlefieldAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "As {this} enters the battlefield, " + super.getRule();
+        return "As {this} enters, " + super.getRule();
     }
 }

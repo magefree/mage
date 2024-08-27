@@ -35,8 +35,8 @@ public final class ReturnToTheRanks extends CardImpl {
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
         effect.setText("Return X target creature cards with mana value 2 or less from your graveyard to the battlefield");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private ReturnToTheRanks(final ReturnToTheRanks card) {

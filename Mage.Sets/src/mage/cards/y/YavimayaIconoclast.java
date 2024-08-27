@@ -40,7 +40,7 @@ public final class YavimayaIconoclast extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn));
         ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, it gets +1/+1 and gains haste until end of turn."));
+                "When {this} enters, if it was kicked, it gets +1/+1 and gains haste until end of turn."));
     }
 
     private YavimayaIconoclast(final YavimayaIconoclast card) {
