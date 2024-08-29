@@ -76,7 +76,9 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
      *      getHint() -> ValueHint("Card types in your graveyard", this)
      * Note: make sure to capitalize the ValueHunt name field
      */
-    ValueHint getHint();
+    default ValueHint getHint(){
+        return null;
+    }
 
     /**
      *

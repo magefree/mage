@@ -51,10 +51,6 @@ public class StaticValue implements DynamicValue {
         return value;
     }
 
-    public ValueHint getHint(){
-        return null;
-    }
-
     public int getValue() {
         return value;
     }
