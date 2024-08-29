@@ -1074,6 +1074,11 @@ public abstract class AbilityImpl implements Ability {
     }
 
     protected static boolean canChooseTargetAbility(Ability ability, Modes modes, Game game, UUID controllerId) {
+        if (ability.getTargetAdjuster() != null){
+            // We can't easily determine how the adjuster will adjust the target
+            // So just always treat it as legal to cast
+            return true;
+        }
         int found = 0;
         for (Mode mode : modes.values()) {
             boolean validTargets = true;
