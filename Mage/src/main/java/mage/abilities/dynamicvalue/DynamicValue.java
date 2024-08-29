@@ -62,7 +62,7 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
      * Factor in the Phrasing, which changes the plurality (see EffectPhrasing)
      * If this value represents something that isn't normally phrased like a discreet count, feel free to ignore the phrasing argument.
      * For example:
-     *      "the number of creatures you control" or "for each creature you control" (discreet count)
+     *      "the number of creatures you control" or [for each] "creature you control" (discreet count)
      *      vs
      *      "the sacrificed creature's power" (non-discreet)
      */
