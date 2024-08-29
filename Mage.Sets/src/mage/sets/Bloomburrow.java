@@ -55,6 +55,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Byway Barterer", 129, Rarity.RARE, mage.cards.b.BywayBarterer.class));
         cards.add(new SetCardInfo("Cache Grab", 167, Rarity.COMMON, mage.cards.c.CacheGrab.class));
         cards.add(new SetCardInfo("Calamitous Tide", 43, Rarity.UNCOMMON, mage.cards.c.CalamitousTide.class));
+        cards.add(new SetCardInfo("Camellia, the Seedmiser", 207, Rarity.RARE, mage.cards.c.CamelliaTheSeedmiser.class));
         cards.add(new SetCardInfo("Caretaker's Talent", 6, Rarity.RARE, mage.cards.c.CaretakersTalent.class));
         cards.add(new SetCardInfo("Carrot Cake", 7, Rarity.COMMON, mage.cards.c.CarrotCake.class));
         cards.add(new SetCardInfo("Charmed Sleep", 388, Rarity.COMMON, mage.cards.c.CharmedSleep.class));

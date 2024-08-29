@@ -514,7 +514,7 @@ public class GameEvent implements Serializable {
          flag        true if no regeneration is allowed
          */
         DESTROYED_PERMANENT,
-        SACRIFICE_PERMANENT, SACRIFICED_PERMANENT,
+        SACRIFICE_PERMANENT, SACRIFICED_PERMANENT, SACRIFICED_PERMANENT_BATCH,
         FIGHTED_PERMANENT,
         BATCH_FIGHT,
         EXPLOITED_CREATURE,

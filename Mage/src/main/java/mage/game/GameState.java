@@ -796,7 +796,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
-    public void addSimultaneousEvent(GameEvent event, Game game) {
+    public void
+    addSimultaneousEvent(GameEvent event, Game game) {
         simultaneousEvents.add(event);
     }
 
@@ -927,6 +928,24 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         if (!isBatchForPlayerUsed) {
             addSimultaneousEvent(new MilledBatchForOnePlayerEvent(milledEvent), game);
+        }
+    }
+
+    public void addSimultaneousSacrificedPermanentToBatch(GameEvent sacrificedEvent, Game game) {
+        // Combine multiple sacrificed permanent events in the single event (batch)
+
+        // existing batch
+        boolean isBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof SacrificedPermanentBatchEvent) {
+                ((SacrificedPermanentBatchEvent) event).addEvent(sacrificedEvent);
+                isBatchUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new SacrificedPermanentBatchEvent(sacrificedEvent), game);
         }
     }
 
