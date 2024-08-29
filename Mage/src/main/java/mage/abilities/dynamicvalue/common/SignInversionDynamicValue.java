@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 
 public class SignInversionDynamicValue implements DynamicValue {
@@ -45,8 +46,13 @@ public class SignInversionDynamicValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage() {
-        return value.getMessage();
+    public String getMessage(EffectPhrasing phrasing) {
+        return value.getMessage(phrasing);
+    }
+
+    @Override
+    public ValueHint getHint() {
+        return value.getHint();
     }
 
     @Override
