@@ -46,8 +46,8 @@ public class LimitedDynamicValue implements DynamicValue {
     }
 
     @Override
-    public ValueHint getHint() {
-        return value.getHint();
+    public ValueHint getValueHint() {
+        return value.getValueHint();
     }
 
     @Override

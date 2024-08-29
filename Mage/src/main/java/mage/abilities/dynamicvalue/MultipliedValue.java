@@ -66,8 +66,8 @@ public class MultipliedValue implements DynamicValue {
 
     }
 
-    public ValueHint getHint(){
-        return value.getHint();
+    public ValueHint getValueHint(){
+        return value.getValueHint();
     }
 
     @Override

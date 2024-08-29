@@ -50,9 +50,9 @@ public class LockedInDynamicValue implements DynamicValue {
     }
 
     @Override
-    public ValueHint getHint() {
+    public ValueHint getValueHint() {
         //TODO: should this conditionally provide what value it has been locked into?
-        return basicDynamicValue.getHint();
+        return basicDynamicValue.getValueHint();
     }
 
 }

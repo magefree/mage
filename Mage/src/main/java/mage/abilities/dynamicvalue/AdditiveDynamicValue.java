@@ -59,7 +59,7 @@ public class AdditiveDynamicValue implements DynamicValue {
     }
 
     @Override
-    public ValueHint getHint() {
+    public ValueHint getValueHint() {
         return new ValueHint("total", this);
     }
 }
