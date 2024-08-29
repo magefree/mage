@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
-import mage.abilities.common.SacrificePermanentTriggeredAbility;
+import mage.abilities.common.SacrificeOneOrMorePermanentsTriggeredAbility;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class BloodHypnotist extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.BLOOD, "one or more Blood tokens");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.BLOOD, "Blood tokens");
 
     static {
         filter.add(TokenPredicate.TRUE);
@@ -38,7 +38,7 @@ public final class BloodHypnotist extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // Whenever you sacrifice one or more Blood tokens, target creature can't block this turn. This ability triggers only once each turn.
-        Ability ability = new SacrificePermanentTriggeredAbility(
+        Ability ability = new SacrificeOneOrMorePermanentsTriggeredAbility(
                 new CantBlockTargetEffect(Duration.EndOfTurn), filter
         ).setTriggersLimitEachTurn(1);
         ability.addTarget(new TargetCreaturePermanent());
