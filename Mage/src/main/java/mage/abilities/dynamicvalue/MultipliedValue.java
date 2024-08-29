@@ -31,7 +31,7 @@ public class MultipliedValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return multiplier * value.calculate(game, sourceAbility, effect);
+        return CardUtil.overflowMultiply(value.calculate(game, sourceAbility, effect), multiplier);
     }
 
     @Override
