@@ -104,6 +104,7 @@ public class DamageTargetEffect extends OneShotEffect {
         this.targetDescription = effect.targetDescription;
         this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
         this.sourceName = effect.sourceName;
+        this.phrasing = effect.phrasing;
     }
 
     public DamageTargetEffect withTargetDescription(String targetDescription) {
