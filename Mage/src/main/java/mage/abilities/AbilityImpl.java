@@ -36,6 +36,7 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.Targets;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 import mage.target.targetadjustment.GenericTargetAdjuster;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
@@ -1074,6 +1075,11 @@ public abstract class AbilityImpl implements Ability {
     }
 
     protected static boolean canChooseTargetAbility(Ability ability, Modes modes, Game game, UUID controllerId) {
+        if (ability.getTargetAdjuster() != null && ability.getTargetAdjuster() instanceof ConditionalTargetAdjuster){
+            // ConditionalTargetAdjuster can sometimes make the target more permissive
+            // So always treat it as satisfying target requirements
+            return true;
+        }
         int found = 0;
         for (Mode mode : modes.values()) {
             boolean validTargets = true;
