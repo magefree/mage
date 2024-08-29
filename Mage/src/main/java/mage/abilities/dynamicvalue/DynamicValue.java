@@ -66,7 +66,9 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
      *      vs
      *      "the sacrificed creature's power" (non-discreet)
      */
-    String getMessage(EffectPhrasing phrasing);
+    default String getMessage(EffectPhrasing phrasing){
+        return "";
+    }
 
     /**
      *
