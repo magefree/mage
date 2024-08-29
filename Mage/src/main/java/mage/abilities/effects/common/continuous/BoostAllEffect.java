@@ -168,7 +168,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         }
         sb.append(filter.getMessage());
         sb.append(each ? " gets " : " get ");
-        sb.append(CardUtil.getBoostText(power, toughness, duration));
+        sb.append(CardUtil.getBoostText(power, toughness, duration, true));
         staticText = sb.toString();
     }
 

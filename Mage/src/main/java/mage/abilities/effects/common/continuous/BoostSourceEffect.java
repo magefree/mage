@@ -36,7 +36,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
-        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration);
+        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration, true);
     }
 
     protected BoostSourceEffect(final BoostSourceEffect effect) {

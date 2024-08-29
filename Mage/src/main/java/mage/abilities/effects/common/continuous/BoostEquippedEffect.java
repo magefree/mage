@@ -42,7 +42,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         if (duration == Duration.EndOfTurn) {
             fixedTarget = true;
         }
-        this.staticText = "equipped creature gets " + CardUtil.getBoostText(power, toughness, duration);
+        this.staticText = "equipped creature gets " + CardUtil.getBoostText(power, toughness, duration, true);
     }
 
     protected BoostEquippedEffect(final BoostEquippedEffect effect) {
