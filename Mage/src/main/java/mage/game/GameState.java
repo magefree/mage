@@ -796,8 +796,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
-    public void
-    addSimultaneousEvent(GameEvent event, Game game) {
+    public void addSimultaneousEvent(GameEvent event, Game game) {
         simultaneousEvents.add(event);
     }
 
