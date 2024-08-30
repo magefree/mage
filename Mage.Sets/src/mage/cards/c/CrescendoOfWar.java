@@ -33,11 +33,11 @@ public final class CrescendoOfWar extends CardImpl {
 
         // Attacking creatures get +1/+0 for each strife counter on Crescendo of War.
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(xValue, StaticValue.get(0),
-                Duration.WhileOnBattlefield, StaticFilters.FILTER_ATTACKING_CREATURES, false)));
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_ATTACKING_CREATURES, false).usingForEach()));
 
         // Blocking creatures you control get +1/+0 for each strife counter on Crescendo of War.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(xValue, StaticValue.get(0),
-                Duration.WhileOnBattlefield, StaticFilters.FILTER_BLOCKING_CREATURES, false)));
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_BLOCKING_CREATURES, false).usingForEach()));
     }
 
     private CrescendoOfWar(final CrescendoOfWar card) {

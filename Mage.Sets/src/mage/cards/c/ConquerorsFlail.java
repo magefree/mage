@@ -36,7 +36,7 @@ public final class ConquerorsFlail extends CardImpl {
         // Equipped creature gets +1/+1 for each color among permanents you control.
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(
                 ConquerorsFlailColorCount.instance, ConquerorsFlailColorCount.instance, Duration.WhileOnBattlefield
-        )));
+        ).usingForEach()));
 
         // As long as Conqueror's Flail is attached to a creature, your opponents can't cast spells during your turn.
         this.addAbility(new SimpleStaticAbility(new ConquerorsFlailEffect()));
