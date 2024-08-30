@@ -22,7 +22,6 @@ public final class SixSidedDie extends CardImpl {
 
     public SixSidedDie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
-
         // Choose target creature. Roll a six-sided die.
         //
         //1 — It has base toughness 1 until end of turn.
