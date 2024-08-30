@@ -3,7 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.hint.ValueHint;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class StaticValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(EffectPhrasing phrasing) {
+    public String getMessage(ValuePhrasing phrasing) {
         return "";
     }
 

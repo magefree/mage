@@ -882,7 +882,7 @@ public final class CardUtil {
         // If two DynamicValue implementations have the same message, assume they're the same.
         // Can't check classes for comparison, since decorator classes will make two different DynamicValues with the
         // same decorator look like the same value.
-        boolean sameMessage = toughness.getMessage(DynamicValue.EffectPhrasing.X_IS).equals(power.getMessage(DynamicValue.EffectPhrasing.X_IS));
+        boolean sameMessage = toughness.getMessage(ValuePhrasing.X_IS).equals(power.getMessage(ValuePhrasing.X_IS));
 
         if (useX && p.contains("X") && !sameMessage){
             // Different value, different variable
@@ -928,15 +928,15 @@ public final class CardUtil {
 
         if (!(power instanceof StaticValue) || !(toughness instanceof StaticValue)) {
             if (useX && boostCount.contains("X")){
-                String powerMessage = power.getMessage(DynamicValue.EffectPhrasing.X_IS);
-                String toughnessMessage = toughness.getMessage(DynamicValue.EffectPhrasing.X_IS);
+                String powerMessage = power.getMessage(ValuePhrasing.X_IS);
+                String toughnessMessage = toughness.getMessage(ValuePhrasing.X_IS);
                 sb.append(", where X is ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
                 if (boostCount.contains("Y")){
                     sb.append(", and Y is ").append(toughnessMessage);
                 }
             } else {
-                String powerMessage = power.getMessage(DynamicValue.EffectPhrasing.FOR_EACH);
-                String toughnessMessage = toughness.getMessage(DynamicValue.EffectPhrasing.FOR_EACH);
+                String powerMessage = power.getMessage(ValuePhrasing.FOR_EACH);
+                String toughnessMessage = toughness.getMessage(ValuePhrasing.FOR_EACH);
                 sb.append(" for each ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
             }
         }

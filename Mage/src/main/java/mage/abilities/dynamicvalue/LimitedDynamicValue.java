@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.ValueHint;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 
 /**
@@ -41,7 +42,7 @@ public class LimitedDynamicValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(EffectPhrasing phrasing) {
+    public String getMessage(ValuePhrasing phrasing) {
         return value.getMessage(phrasing);
     }
 

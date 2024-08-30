@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.ValueHint;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 
 /**
@@ -36,7 +37,7 @@ public class HalfValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(EffectPhrasing phrasing) {
+    public String getMessage(ValuePhrasing phrasing) {
         switch (phrasing) {
             case FOR_EACH:
                 throw new IllegalArgumentException("FOR_EACH phrasing generation not supported for HalfValue");

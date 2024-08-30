@@ -6,6 +6,7 @@ import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -29,15 +30,15 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         this(amount, false);
     }
 
-    public DrawCardSourceControllerEffect(DynamicValue amount, DynamicValue.EffectPhrasing phrasing) {
+    public DrawCardSourceControllerEffect(DynamicValue amount, ValuePhrasing phrasing) {
         this(amount, false, phrasing);
     }
 
     public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw) {
-        this(amount, youDraw, DynamicValue.EffectPhrasing.LEGACY);
+        this(amount, youDraw, ValuePhrasing.LEGACY);
     }
 
-    public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw, DynamicValue.EffectPhrasing phrasing) {
+    public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw, ValuePhrasing phrasing) {
         super(Outcome.DrawCard);
         this.amount = amount.copy();
         createStaticText(youDraw, phrasing);
@@ -64,8 +65,8 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         return false;
     }
 
-    private void createStaticText(boolean youDraw, DynamicValue.EffectPhrasing phrasing) {
-        if (phrasing == DynamicValue.EffectPhrasing.LEGACY){
+    private void createStaticText(boolean youDraw, ValuePhrasing phrasing) {
+        if (phrasing == ValuePhrasing.LEGACY){
             StringBuilder sb = new StringBuilder();
             if (youDraw){
                 sb.append("you draw ");
@@ -90,9 +91,9 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         String value = " a";
         if (amount instanceof StaticValue) {
             value = " " + CardUtil.numberToText(((StaticValue)amount).getValue(), "a");
-        } else if (phrasing == DynamicValue.EffectPhrasing.X_IS || phrasing == DynamicValue.EffectPhrasing.X_HIDDEN) {
+        } else if (phrasing == ValuePhrasing.X_IS || phrasing == ValuePhrasing.X_HIDDEN) {
             value = " X";
-        } else if (phrasing == DynamicValue.EffectPhrasing.EQUAL_TO) {
+        } else if (phrasing == ValuePhrasing.EQUAL_TO) {
             value = "";
         } else if (amount instanceof MultipliedValue) {
             value = " " + ((MultipliedValue)amount).getMultiplierText();
@@ -113,7 +114,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
                     sb.append(" for each ");
                     break;
                 default:
-                    throw new IllegalArgumentException("DynamicValue.EffectPhrasing enum not implemented: " + phrasing);
+                    throw new IllegalArgumentException("ValuePhrasing enum not implemented: " + phrasing);
             }
             sb.append(amount.getMessage(phrasing));
         }

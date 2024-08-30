@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import java.util.UUID;
 
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -11,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.ValuePhrasing;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,7 +31,7 @@ public final class ArtilleryBlast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Domain--Artillery Blast deals X damage to target tapped creature, where X is 1 plus the number of basic land types among lands you control.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new IntPlusDynamicValue(1, DomainValue.REGULAR)).withPhrasing(DynamicValue.EffectPhrasing.X_IS));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new IntPlusDynamicValue(1, DomainValue.REGULAR)).withPhrasing(ValuePhrasing.X_IS));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
         this.getSpellAbility().addHint(DomainHint.instance);

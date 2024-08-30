@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.ValueHint;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -48,10 +49,10 @@ public class MultipliedValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(EffectPhrasing phrasing) {
+    public String getMessage(ValuePhrasing phrasing) {
         switch (phrasing) {
             case FOR_EACH:
-                return value.getMessage(EffectPhrasing.FOR_EACH);
+                return value.getMessage(ValuePhrasing.FOR_EACH);
             case X_HIDDEN:
                 return "";
             default:

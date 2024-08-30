@@ -8,6 +8,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -23,7 +24,7 @@ import java.util.UUID;
 public class DamageTargetEffect extends OneShotEffect {
 
     protected DynamicValue amount;
-    protected DynamicValue.EffectPhrasing phrasing;
+    protected ValuePhrasing phrasing;
     protected boolean preventable;
     protected String targetDescription;
     protected boolean useOnlyTargetPointer; // TODO: investigate why do we ignore targetPointer by default??
@@ -69,14 +70,14 @@ public class DamageTargetEffect extends OneShotEffect {
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription) {
-        this(amount, preventable, targetDescription, false, DynamicValue.EffectPhrasing.LEGACY);
+        this(amount, preventable, targetDescription, false, ValuePhrasing.LEGACY);
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer) {
-        this(amount, preventable, targetDescription, useOnlyTargetPointer, DynamicValue.EffectPhrasing.LEGACY);
+        this(amount, preventable, targetDescription, useOnlyTargetPointer, ValuePhrasing.LEGACY);
     }
 
-    public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer, DynamicValue.EffectPhrasing phrasing) {
+    public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer, ValuePhrasing phrasing) {
         super(Outcome.Damage);
         this.amount = amount;
         this.preventable = preventable;
@@ -112,7 +113,7 @@ public class DamageTargetEffect extends OneShotEffect {
         return this;
     }
 
-    public DamageTargetEffect withPhrasing(DynamicValue.EffectPhrasing phrasing) {
+    public DamageTargetEffect withPhrasing(ValuePhrasing phrasing) {
         this.phrasing = phrasing;
         return this;
     }
@@ -167,15 +168,15 @@ public class DamageTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
-        if (phrasing == DynamicValue.EffectPhrasing.LEGACY){
+        if (phrasing == ValuePhrasing.LEGACY){
             if (!message.equals("1")) {
                 sb.append(amount);
             }
         } else if (amount instanceof StaticValue) {
             sb.append(((StaticValue)amount).getValue());
-        } else if (phrasing == DynamicValue.EffectPhrasing.X_IS || phrasing == DynamicValue.EffectPhrasing.X_HIDDEN) {
+        } else if (phrasing == ValuePhrasing.X_IS || phrasing == ValuePhrasing.X_HIDDEN) {
             sb.append("X");
-        } else if (phrasing == DynamicValue.EffectPhrasing.EQUAL_TO) {
+        } else if (phrasing == ValuePhrasing.EQUAL_TO) {
             // do nothing
         } else if (amount instanceof MultipliedValue) {
             sb.append(((MultipliedValue)amount).getMultiplierText());
@@ -212,7 +213,7 @@ public class DamageTargetEffect extends OneShotEffect {
                 sb.append("that target");
             }
         }
-        if (phrasing == DynamicValue.EffectPhrasing.LEGACY){
+        if (phrasing == ValuePhrasing.LEGACY){
             if (!message.isEmpty()) {
                 if (message.equals("1")) {
                     sb.append(" equal to the number of ");
@@ -240,7 +241,7 @@ public class DamageTargetEffect extends OneShotEffect {
                     sb.append(" for each ");
                     break;
                 default:
-                    throw new IllegalArgumentException("DynamicValue.EffectPhrasing enum not implemented: " + phrasing);
+                    throw new IllegalArgumentException("ValuePhrasing enum not implemented: " + phrasing);
             }
             sb.append(amount.getMessage(phrasing));
         }

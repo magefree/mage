@@ -4,6 +4,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.constants.Duration;
 import mage.constants.SubLayer;
+import mage.constants.ValuePhrasing;
 
 /**
  * @author xenohedron
@@ -15,7 +16,7 @@ public class SetBasePowerToughnessPlusOneSourceEffect extends SetBasePowerToughn
      */
     public SetBasePowerToughnessPlusOneSourceEffect(DynamicValue amount) {
         super(amount, new IntPlusDynamicValue(1, amount), Duration.EndOfGame, SubLayer.CharacteristicDefining_7a);
-        this.staticText = "{this}'s power is equal to " + amount.getMessage(DynamicValue.EffectPhrasing.EQUAL_TO) + " and its toughness is equal to that number plus 1";
+        this.staticText = "{this}'s power is equal to " + amount.getMessage(ValuePhrasing.EQUAL_TO) + " and its toughness is equal to that number plus 1";
     }
 
     protected SetBasePowerToughnessPlusOneSourceEffect(final SetBasePowerToughnessPlusOneSourceEffect effect) {

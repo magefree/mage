@@ -5,10 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 
 /**
@@ -129,8 +126,8 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         }
 
         // Relies on StaticValue messages all being empty
-        String powerMessage = power.getMessage(DynamicValue.EffectPhrasing.EQUAL_TO);
-        String toughnessMessage = toughness.getMessage(DynamicValue.EffectPhrasing.EQUAL_TO);
+        String powerMessage = power.getMessage(ValuePhrasing.EQUAL_TO);
+        String toughnessMessage = toughness.getMessage(ValuePhrasing.EQUAL_TO);
 
         if (toughnessMessage.equals(powerMessage)) {
             if (duration.toString().isEmpty()) {
@@ -190,7 +187,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
             return sb.toString();
         }
 
-        sb.append("equal to ").append(value.getMessage(DynamicValue.EffectPhrasing.EQUAL_TO));
+        sb.append("equal to ").append(value.getMessage(ValuePhrasing.EQUAL_TO));
         sb.append(duration);
 
         return sb.toString();

@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.ValueHint;
+import mage.constants.ValuePhrasing;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 
@@ -30,7 +31,7 @@ public enum CreaturesYouControlCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage(EffectPhrasing phrasing) {
+    public String getMessage(ValuePhrasing phrasing) {
         switch (phrasing) {
             case FOR_EACH:
                 return "creature you control";

@@ -4,10 +4,9 @@ package mage.abilities.dynamicvalue;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.ValueHint;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 import mage.util.CardUtil;
-
-import java.util.stream.Collectors;
 
 /**
  *
@@ -39,7 +38,7 @@ public class IntPlusDynamicValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(EffectPhrasing phrasing) {
+    public String getMessage(ValuePhrasing phrasing) {
         switch(phrasing){
             case X_HIDDEN:
                 return "";
