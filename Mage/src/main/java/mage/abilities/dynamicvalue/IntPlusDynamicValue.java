@@ -44,12 +44,9 @@ public class IntPlusDynamicValue implements DynamicValue {
             case X_HIDDEN:
                 return "";
             case FOR_EACH:
-                throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in AdditiveDynamicValue");
-            case X_IS:
-            case EQUAL_TO:
-                return CardUtil.numberToText(baseValue) + " plus " + value.getMessage(phrasing);
+                throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in IntPlusDynamicValue");
             default:
-                throw new IllegalArgumentException("enum " + phrasing + " is not supported in AdditiveDynamicValue");
+                return CardUtil.numberToText(baseValue) + " plus " + value.getMessage(phrasing);
         }
     }
 
