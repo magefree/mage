@@ -24,7 +24,7 @@ import java.util.UUID;
 public class DamageTargetEffect extends OneShotEffect {
 
     protected DynamicValue amount;
-    protected ValuePhrasing phrasing;
+    protected ValuePhrasing phrasing = ValuePhrasing.LEGACY;
     protected boolean preventable;
     protected String targetDescription;
     protected boolean useOnlyTargetPointer; // TODO: investigate why do we ignore targetPointer by default??
@@ -70,20 +70,15 @@ public class DamageTargetEffect extends OneShotEffect {
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription) {
-        this(amount, preventable, targetDescription, false, ValuePhrasing.LEGACY);
+        this(amount, preventable, targetDescription, false);
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer) {
-        this(amount, preventable, targetDescription, useOnlyTargetPointer, ValuePhrasing.LEGACY);
-    }
-
-    public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer, ValuePhrasing phrasing) {
         super(Outcome.Damage);
         this.amount = amount;
         this.preventable = preventable;
         this.targetDescription = targetDescription;
         this.useOnlyTargetPointer = useOnlyTargetPointer;
-        this.phrasing = phrasing;
     }
 
     public int getAmount() {
