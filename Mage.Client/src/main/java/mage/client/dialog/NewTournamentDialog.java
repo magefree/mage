@@ -52,7 +52,7 @@ public class NewTournamentDialog extends MageDialog {
     private static final int CONSTRUCTION_TIME_MAX = 30;
     private boolean isRandom = false;
     private boolean isRichMan = false;
-    private boolean isRemixed = false;
+    private boolean isReshuffled = false;
     private String cubeFromDeckFilename = "";
     private String jumpstartPacksFilename = "";
     private boolean automaticChange = false;
@@ -664,7 +664,7 @@ public class NewTournamentDialog extends MageDialog {
 
         // CHECKS
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-        if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isRemixed()) {
+        if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isReshuffled()) {
             if (tOptions.getLimitedOptions().getSetCodes().size() < 1) {
                 JOptionPane.showMessageDialog(
                         MageFrame.getDesktop(),
@@ -905,8 +905,8 @@ public class NewTournamentDialog extends MageDialog {
         if (tournamentType.isLimited()) {
             this.isRandom = tournamentType.isRandom();
             this.isRichMan = tournamentType.isRichMan();
-            this.isRemixed = tournamentType.isRemixed();
-            if (this.isRandom || this.isRichMan || this.isRemixed) {
+            this.isReshuffled = tournamentType.isReshuffled();
+            if (this.isRandom || this.isRichMan || this.isReshuffled) {
                 createRandomPacks();
             } else {
                 createPacks(tournamentType.getNumBoosters());
@@ -951,7 +951,7 @@ public class NewTournamentDialog extends MageDialog {
                 this.lblPacks.setVisible(false);
                 this.pnlPacks.setVisible(false);
                 this.pnlRandomPacks.setVisible(false);
-            } else if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isRemixed()) {
+            } else if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isReshuffled()) {
                 this.lblDraftCube.setVisible(false);
                 this.cbDraftCube.setVisible(false);
                 this.lblPacks.setVisible(true);
@@ -1035,7 +1035,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void showRandomPackSelectorDialog() {
-        randomPackSelector.showDialog(isRandom, isRichMan, isRemixed);
+        randomPackSelector.showDialog(isRandom, isRichMan, isReshuffled);
         this.txtRandomPacks.setText(String.join(";", randomPackSelector.getSelectedPacks()));
         this.pack();
         this.revalidate();
@@ -1237,7 +1237,7 @@ public class NewTournamentDialog extends MageDialog {
         if (tournamentType.isLimited()) {
             tOptions.getLimitedOptions().setConstructionTime((Integer) this.spnConstructTime.getValue() * 60);
             tOptions.getLimitedOptions().setIsRandom(tournamentType.isRandom());
-            tOptions.getLimitedOptions().setIsRemixed(tournamentType.isRemixed());
+            tOptions.getLimitedOptions().setIsReshuffled(tournamentType.isReshuffled());
             tOptions.getLimitedOptions().setIsRichMan(tournamentType.isRichMan());
             tOptions.getLimitedOptions().setIsJumpstart(tournamentType.isJumpstart());
 
@@ -1273,7 +1273,7 @@ public class NewTournamentDialog extends MageDialog {
             } else if (tournamentType.isRandom() || tournamentType.isRichMan()) {
                 this.isRandom = tournamentType.isRandom();
                 this.isRichMan = tournamentType.isRichMan();
-                this.isRemixed = tournamentType.isRemixed();
+                this.isReshuffled = tournamentType.isReshuffled();
                 tOptions.getLimitedOptions().getSetCodes().clear();
                 java.util.List<String> selected = randomPackSelector.getSelectedPacks();
                 Collections.shuffle(selected);
@@ -1290,10 +1290,10 @@ public class NewTournamentDialog extends MageDialog {
                 } else {
                     tOptions.getLimitedOptions().getSetCodes().addAll(selected);
                 }
-            } else if (tournamentType.isRemixed()) {
+            } else if (tournamentType.isReshuffled()) {
                 this.isRandom = tournamentType.isRandom();
                 this.isRichMan = tournamentType.isRichMan();
-                this.isRemixed = tournamentType.isRemixed();
+                this.isReshuffled = tournamentType.isReshuffled();
                 tOptions.getLimitedOptions().getSetCodes().clear();
                 tOptions.getLimitedOptions().getSetCodes().addAll(randomPackSelector.getSelectedPacks());
             } else {
@@ -1389,7 +1389,7 @@ public class NewTournamentDialog extends MageDialog {
                 numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT + versionStr, "4"));
                 prepareTourneyView(numPlayers);
 
-                if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isRemixed()) {
+                if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isReshuffled()) {
                     loadRandomPacks(version);
                 } else {
                     loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT + versionStr, ""));
@@ -1450,7 +1450,7 @@ public class NewTournamentDialog extends MageDialog {
             if (deckFile != null && !deckFile.isEmpty()) {
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE + versionStr, deckFile);
             }
-            if (tOptions.getLimitedOptions().getIsRandom() || tOptions.getLimitedOptions().getIsRichMan() || tOptions.getLimitedOptions().getIsRemixed()) {
+            if (tOptions.getLimitedOptions().getIsRandom() || tOptions.getLimitedOptions().getIsRichMan() || tOptions.getLimitedOptions().getIsReshuffled()) {
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT + versionStr, String.join(";", this.randomPackSelector.getSelectedPacks()));
             }
         }
