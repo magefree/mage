@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 
 public class StaticValue implements DynamicValue {
 
-    private static final List<StaticValue> staticValues = new ArrayList();
+    private static final List<StaticValue> staticValues = new ArrayList<>();
 
     static {
         IntStream.rangeClosed(-10, 10)
