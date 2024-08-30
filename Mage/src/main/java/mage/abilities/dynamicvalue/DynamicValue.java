@@ -19,6 +19,8 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
 
     DynamicValue copy();
 
+    // TODO: this will be removed once all DynamicValue implementations have been converted
+    // WARNING: You must override at least one getMessage in a DynamicValue implementation, otherwise these will loop infinitely.
     default String getMessage(){
         return getMessage(ValuePhrasing.LEGACY);
     }
@@ -35,7 +37,7 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
      */
     default String getMessage(ValuePhrasing phrasing){
         // TODO: this will lose its default status once all DynamicValue implementations have been converted
-        return "";
+        return getMessage();
     }
 
     /**
