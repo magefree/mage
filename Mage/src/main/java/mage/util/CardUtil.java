@@ -870,17 +870,22 @@ public final class CardUtil {
         String p = useX ? "X" : "1";
 
         if (power instanceof StaticValue){
-            //Static values get a number literal
+            // Static values get a number literal
             p = Integer.toString(((StaticValue)power).getValue());
         } else if (power.getSign() < 0){
-            //Non-static values will need their minus sign manually inserted
+            // Non-static values will need their minus sign manually inserted
             p = "-" + p;
         }
 
         String t = useX ? "X" : "1";
 
-        if (useX && p.contains("X") && !power.getClass().equals(toughness.getClass())){
-            //Different value, different variable
+        // If two DynamicValue implementations have the same message, assume they're the same.
+        // Can't check classes for comparison, since decorator classes will make two different DynamicValues with the
+        // same decorator look like the same value.
+        boolean sameMessage = toughness.getMessage(DynamicValue.EffectPhrasing.X_IS).equals(power.getMessage(DynamicValue.EffectPhrasing.X_IS));
+
+        if (useX && p.contains("X") && !sameMessage){
+            // Different value, different variable
             t = "Y";
         }
 
