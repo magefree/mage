@@ -67,9 +67,9 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         if (power == null && toughness == null){
             throw new IllegalArgumentException("Power and Toughness cannot both be null");
         }
-        if ((power instanceof StaticValue && !(toughness instanceof StaticValue)) ||
-                (!(power instanceof StaticValue) && toughness instanceof StaticValue)){
-            throw new IllegalArgumentException("Power and Toughness must both be static or both be dynamic. Use the static constructor for the former.");
+        if ((power instanceof StaticValue && !(toughness instanceof StaticValue) && toughness != null) ||
+                (!(power instanceof StaticValue) && toughness instanceof StaticValue) && power != null){
+            throw new IllegalArgumentException("Wrong code usage. Power and Toughness must either both be StaticValue/null, or both be DynamicValue/null. Mixing StaticValue with DynamicValue is not supported.");
         }
         setStaticText(duration);
     }
