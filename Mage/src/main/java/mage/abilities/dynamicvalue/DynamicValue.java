@@ -59,7 +59,7 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
     DynamicValue copy();
 
     default String getMessage(){
-        return getMessage(EffectPhrasing.FOR_EACH);
+        return getMessage(EffectPhrasing.LEGACY);
     }
 
     /**
