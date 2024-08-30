@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -106,6 +105,7 @@ class SixSidedDieEffect extends OneShotEffect {
         return true;
     }
 }
+
 class SixSidedDieToughnessEffect extends ContinuousEffectImpl {
 
     SixSidedDieToughnessEffect() {
