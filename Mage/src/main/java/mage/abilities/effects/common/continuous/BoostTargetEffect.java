@@ -21,7 +21,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
-    private boolean XPhrasing;
+    private boolean XPhrasing = true;
 
     public BoostTargetEffect(int power, int toughness) {
         this(power, toughness, Duration.EndOfTurn);
@@ -36,14 +36,9 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     }
 
     public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, true);
-    }
-
-    public BoostTargetEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean XPhrasing) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, CardUtil.getBoostOutcome(power, toughness));
         this.power = power;
         this.toughness = toughness;
-        this.XPhrasing = XPhrasing;
     }
 
     protected BoostTargetEffect(final BoostTargetEffect effect) {
@@ -56,6 +51,11 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
     @Override
     public BoostTargetEffect copy() {
         return new BoostTargetEffect(this);
+    }
+
+    public BoostTargetEffect usingForEach(){
+        this.XPhrasing = false;
+        return this;
     }
 
     @Override

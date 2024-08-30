@@ -19,6 +19,7 @@ import mage.util.CardUtil;
 public class BoostSourceEffect extends ContinuousEffectImpl {
     private DynamicValue power;
     private DynamicValue toughness;
+    private final String description;
 
     public BoostSourceEffect(int power, int toughness, Duration duration) {
         this(power, toughness, duration, "{this}");
@@ -36,6 +37,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
+        this.description = description;
         this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration, true);
     }
 
@@ -43,11 +45,17 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();
+        this.description = effect.description;
     }
 
     @Override
     public BoostSourceEffect copy() {
         return new BoostSourceEffect(this);
+    }
+
+    public BoostSourceEffect usingForEach(){
+        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration, true);
+        return this;
     }
 
     @Override

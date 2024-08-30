@@ -50,6 +50,11 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
         return new BoostEnchantedEffect(this);
     }
 
+    public BoostEnchantedEffect usingForEach(){
+        this.staticText = "enchanted creature gets " + CardUtil.getBoostText(power, toughness, duration, false);
+        return this;
+    }
+
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);

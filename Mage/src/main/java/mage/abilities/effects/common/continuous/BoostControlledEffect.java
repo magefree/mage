@@ -57,7 +57,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         this.toughness = toughness;
         this.filter = (filter == null ? StaticFilters.FILTER_PERMANENT_CREATURES : filter);
         this.excludeSource = excludeSource;
-        setText();
+        setText(true);
     }
 
     protected BoostControlledEffect(final BoostControlledEffect effect) {
@@ -71,6 +71,11 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     @Override
     public BoostControlledEffect copy() {
         return new BoostControlledEffect(this);
+    }
+
+    public BoostControlledEffect usingForEach(){
+        setText(false);
+        return this;
     }
 
     @Override
@@ -112,7 +117,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private void setText() {
+    private void setText(boolean useX) {
         StringBuilder sb = new StringBuilder();
         String message = filter.getMessage().toLowerCase(Locale.ENGLISH);
         boolean each = message.startsWith("each");
@@ -124,7 +129,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
             sb.append(" you control");
         }
         sb.append(each ? " gets " : " get ");
-        sb.append(CardUtil.getBoostText(power, toughness, duration, true));
+        sb.append(CardUtil.getBoostText(power, toughness, duration, useX));
         staticText = sb.toString();
     }
 

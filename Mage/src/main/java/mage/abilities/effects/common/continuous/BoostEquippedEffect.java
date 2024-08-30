@@ -57,6 +57,11 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         return new BoostEquippedEffect(this);
     }
 
+    public BoostEquippedEffect usingForEach(){
+        this.staticText = "equipped creature gets " + CardUtil.getBoostText(power, toughness, duration, false);
+        return this;
+    }
+
     @Override
     public void init(Ability source, Game game) {
         if (fixedTarget) {
