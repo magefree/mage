@@ -68,6 +68,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
                 (!(power instanceof StaticValue) && toughness instanceof StaticValue) && power != null){
             throw new IllegalArgumentException("Wrong code usage. Power and Toughness must either both be StaticValue/null, or both be DynamicValue/null. Mixing StaticValue with DynamicValue is not supported.");
         }
+
         setStaticText(duration);
     }
 
@@ -119,7 +120,9 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
 
         StringBuilder sb = new StringBuilder("{this}");
 
-        if (duration.toString().isEmpty()) {
+        boolean indefiniteDuration = duration.toString().isEmpty() || duration == Duration.EndOfGame;
+
+        if (indefiniteDuration) {
             sb.append("'s power ");
         } else {
             sb.append(" has base power ");
@@ -129,8 +132,15 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         String powerMessage = power.getMessage(ValuePhrasing.EQUAL_TO);
         String toughnessMessage = toughness.getMessage(ValuePhrasing.EQUAL_TO);
 
+        if (!powerMessage.startsWith("the")) {
+            powerMessage = "the number of " + powerMessage;
+        }
+        if (!toughnessMessage.startsWith("the")) {
+            toughnessMessage = "the number of " + toughnessMessage;
+        }
+
         if (toughnessMessage.equals(powerMessage)) {
-            if (duration.toString().isEmpty()) {
+            if (indefiniteDuration) {
                 sb.append("and toughness ");
             } else {
                 sb.append("and base toughness ");
@@ -141,7 +151,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
             // Assume that if one is static, the other is static too
             sb.append(((StaticValue)power).getValue()).append("/").append(((StaticValue)toughness).getValue());
         } else {
-            if (duration.toString().isEmpty()) {
+            if (indefiniteDuration) {
                 if (toughnessMessage.equals(powerMessage)) {
                     sb.append("are ");
                 } else {
@@ -154,7 +164,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
             }
             sb.append("equal to ").append(powerMessage);
             if (!toughnessMessage.equals(powerMessage)) {
-                if (duration.toString().isEmpty()) {
+                if (indefiniteDuration) {
                     sb.append("and {this}'s toughness is equal to ").append(toughnessMessage);
                 } else {
                     sb.append("and toughness equal to ").append(toughnessMessage);
@@ -162,7 +172,9 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
             }
         }
 
-        sb.append(duration);
+        if (!indefiniteDuration) {
+            sb.append(duration);
+        }
 
         staticText = sb.toString();
     }
@@ -170,7 +182,9 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
     private String getSingleStatText(DynamicValue value, String statName, Duration duration){
         StringBuilder sb = new StringBuilder("{this}");
 
-        if (duration.toString().isEmpty()) {
+        boolean indefiniteDuration = duration.toString().isEmpty() || duration == Duration.EndOfGame;
+
+        if (indefiniteDuration) {
             sb.append("'s ");
         } else {
             sb.append(" has base ");
@@ -178,7 +192,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
 
         sb.append(statName).append(" ");
 
-        if (duration.toString().isEmpty()) {
+        if (indefiniteDuration) {
             sb.append("is ");
         }
 
@@ -188,7 +202,10 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         }
 
         sb.append("equal to ").append(value.getMessage(ValuePhrasing.EQUAL_TO));
-        sb.append(duration);
+
+        if (!indefiniteDuration) {
+            sb.append(duration);
+        }
 
         return sb.toString();
     }
