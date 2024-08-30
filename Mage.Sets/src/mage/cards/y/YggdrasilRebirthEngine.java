@@ -127,13 +127,16 @@ class YggdrasilRebirthEngineReturnCreatureEffect extends OneShotEffect {
         target.withNotTarget(true);
         player.chooseTarget(outcome, exile, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
-        if(card == null){
+        if (card == null){
             return false;
         }
         if (!player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return false;
         }
         Permanent movedCard = game.getPermanent(card.getId());
+        if (movedCard == null){
+            return false;
+        }
         game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                 .setTargetPointer(new FixedTarget(movedCard, game)), source);
         return true;
