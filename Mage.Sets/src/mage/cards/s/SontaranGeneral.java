@@ -14,6 +14,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
@@ -38,9 +39,9 @@ public final class SontaranGeneral extends CardImpl {
 
         // Battalion -- Whenever Sontaran General and at least two other creatures attack, for each opponent,
         // goad up to one target creature that player controls. Those creatures can't block this turn.
-        Ability ability = new BattalionAbility(new GoadTargetEffect()
+        Ability ability = new BattalionAbility(new GoadTargetEffect().setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, goad up to one target creature that player controls."));
-        ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
+        ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn).setTargetPointer(new EachTargetPointer())
                 .setText("Those creatures can't block this turn."));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
