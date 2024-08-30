@@ -906,6 +906,10 @@ public final class CardUtil {
         return getBoostCountAsStr(StaticValue.get(power), StaticValue.get(toughness), false);
     }
 
+    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness) {
+        return getBoostCountAsStr(power, toughness, true);
+    }
+
     public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration, boolean useX) {
         String boostCount = getBoostCountAsStr(power, toughness, useX);
         StringBuilder sb = new StringBuilder(boostCount);

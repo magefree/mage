@@ -32,12 +32,12 @@ public class BoostCountTest {
         DynamicValue plusX = GetXValue.instance;
         DynamicValue minusX = new SignInversionDynamicValue(plusX);
 
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(plusX, zero, true), "+X/+0");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(zero, plusX, true), "+0/+X");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(plusX, plusX, true), "+X/+X");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(minusX, zero, true), "-X/-0");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(zero, minusX, true), "-0/-X");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(minusX, plusX, true), "-X/+X");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(plusX, minusX, true), "+X/-X");
+        Assert.assertEquals(CardUtil.getBoostCountAsStr(plusX, zero), "+X/+0");
+        Assert.assertEquals(CardUtil.getBoostCountAsStr(zero, plusX), "+0/+X");
+        Assert.assertEquals(CardUtil.getBoostCountAsStr(plusX, plusX), "+X/+X");
+        Assert.assertEquals(CardUtil.getBoostCountAsStr(minusX, zero), "-X/-0");
+        Assert.assertEquals(CardUtil.getBoostCountAsStr(zero, minusX), "-0/-X");
+        Assert.assertEquals(CardUtil.getBoostCountAsStr(minusX, plusX), "-X/+X");
+        Assert.assertEquals(CardUtil.getBoostCountAsStr(plusX, minusX), "+X/-X");
     }
 }
