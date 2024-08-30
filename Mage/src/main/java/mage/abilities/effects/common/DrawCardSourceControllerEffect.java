@@ -34,7 +34,7 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
     }
 
     public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw) {
-        this(amount, youDraw, DynamicValue.EffectPhrasing.FOR_EACH);
+        this(amount, youDraw, DynamicValue.EffectPhrasing.LEGACY);
     }
 
     public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw, DynamicValue.EffectPhrasing phrasing) {
@@ -65,6 +65,26 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
     }
 
     private void createStaticText(boolean youDraw, DynamicValue.EffectPhrasing phrasing) {
+        if (phrasing == DynamicValue.EffectPhrasing.LEGACY){
+            StringBuilder sb = new StringBuilder();
+            if (youDraw){
+                sb.append("you draw ");
+            } else {
+                sb.append("draw ");
+            }
+            String value = amount.toString();
+            sb.append(CardUtil.numberToText(value, "a"));
+            if (!value.contains("card")) {
+                sb.append(value.equals("1") ? " card" : " cards");
+            }
+            String message = amount.getMessage();
+            if (!message.isEmpty()) {
+                sb.append(value.equals("X") ? ", where X is " : " for each ");
+                sb.append(message);
+            }
+            staticText = sb.toString();
+            return;
+        }
         StringBuilder sb = new StringBuilder(youDraw ? "you " : "");
         sb.append("draw");
         String value = " a";

@@ -45,7 +45,13 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
         // This phrasing can be used with multipliers, including being negative, but addition and subtraction don't work here.
         // example with multiplier of 3:
         // You gain 3 life for each creature attacking you.
-        FOR_EACH
+        FOR_EACH,
+
+        // TODO: remove once all DynamicValue implementations have been converted
+        // Legacy phrasing
+        // This indicates that an effect should use its original phrasing implementation for this DynamicValue.
+        // DO NOT check for this in getMessage(). it's a "dont care".
+        LEGACY
     }
 
     int calculate(Game game, Ability sourceAbility, Effect effect);

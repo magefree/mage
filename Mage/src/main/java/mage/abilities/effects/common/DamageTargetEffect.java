@@ -69,11 +69,11 @@ public class DamageTargetEffect extends OneShotEffect {
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription) {
-        this(amount, preventable, targetDescription, false, DynamicValue.EffectPhrasing.EQUAL_TO);
+        this(amount, preventable, targetDescription, false, DynamicValue.EffectPhrasing.LEGACY);
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer) {
-        this(amount, preventable, targetDescription, useOnlyTargetPointer, DynamicValue.EffectPhrasing.EQUAL_TO);
+        this(amount, preventable, targetDescription, useOnlyTargetPointer, DynamicValue.EffectPhrasing.LEGACY);
     }
 
     public DamageTargetEffect(DynamicValue amount, boolean preventable, String targetDescription, boolean useOnlyTargetPointer, DynamicValue.EffectPhrasing phrasing) {
@@ -165,8 +165,13 @@ public class DamageTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
+        String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
-        if (amount instanceof StaticValue) {
+        if (phrasing == DynamicValue.EffectPhrasing.LEGACY){
+            if (!message.equals("1")) {
+                sb.append(amount);
+            }
+        } else if (amount instanceof StaticValue) {
             sb.append(((StaticValue)amount).getValue());
         } else if (phrasing == DynamicValue.EffectPhrasing.X_IS || phrasing == DynamicValue.EffectPhrasing.X_HIDDEN) {
             sb.append("X");
@@ -207,7 +212,20 @@ public class DamageTargetEffect extends OneShotEffect {
                 sb.append("that target");
             }
         }
-        if (!(amount instanceof StaticValue)) {
+        if (phrasing == DynamicValue.EffectPhrasing.LEGACY){
+            if (!message.isEmpty()) {
+                if (message.equals("1")) {
+                    sb.append(" equal to the number of ");
+                } else {
+                    if (message.startsWith("the") || message.startsWith("that") || message.startsWith("twice")) {
+                        sb.append(" equal to ");
+                    } else {
+                        sb.append(" for each ");
+                    }
+                }
+                sb.append(message);
+            }
+        } else if (!(amount instanceof StaticValue)) {
             switch (phrasing) {
                 case X_IS:
                     sb.append(", where X is ");
