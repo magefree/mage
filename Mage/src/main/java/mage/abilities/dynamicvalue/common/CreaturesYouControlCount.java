@@ -30,6 +30,10 @@ public enum CreaturesYouControlCount implements DynamicValue {
         return "X";
     }
 
+    public String getMessage() {
+        return "creatures you control";
+    }
+
     @Override
     public String getMessage(ValuePhrasing phrasing) {
         switch (phrasing) {
