@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.ValuePhrasing;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 
@@ -33,5 +34,17 @@ public enum LandsYouControlCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "lands you control";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing phrasing) {
+        switch (phrasing) {
+            case FOR_EACH:
+                return "land you control";
+            case X_HIDDEN:
+                return "";
+            default:
+                return "the number of lands you control";
+        }
     }
 }

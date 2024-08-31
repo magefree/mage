@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.SubType;
+import mage.constants.ValuePhrasing;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 
@@ -64,5 +65,17 @@ public enum DomainValue implements DynamicValue {
     @Override
     public String getMessage() {
         return "basic land type among lands " + (this == TARGET ? "they control" : "you control");
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing phrasing) {
+        switch (phrasing) {
+            case FOR_EACH:
+                return "basic land type among lands " + (this == TARGET ? "they control" : "you control");
+            case X_HIDDEN:
+                return "";
+            default:
+                return "the number of basic land types among lands " + (this == TARGET ? "they control" : "you control");
+        }
     }
 }
