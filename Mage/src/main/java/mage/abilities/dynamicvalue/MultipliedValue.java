@@ -48,6 +48,23 @@ public class MultipliedValue implements DynamicValue {
         return CardUtil.numberToText(multiplier);
     }
 
+    public String toString() {
+        if (value.toString().equals("1")) {
+            return Integer.toString(multiplier);
+        }
+        StringBuilder sb = new StringBuilder();
+        if (multiplier == 2) {
+            sb.append("twice ");
+        } else {
+            sb.append(multiplier).append(" * ");
+        }
+        return sb.append(value).toString();
+    }
+
+    public String getMessage() {
+        return value.getMessage();
+    }
+
     @Override
     public String getMessage(ValuePhrasing phrasing) {
         switch (phrasing) {

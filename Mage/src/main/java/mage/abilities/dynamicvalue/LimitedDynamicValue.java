@@ -41,6 +41,14 @@ public class LimitedDynamicValue implements DynamicValue {
         return new LimitedDynamicValue(this);
     }
 
+    public String toString() {
+        return value.toString();
+    }
+
+    public String getMessage() {
+        return value.getMessage();
+    }
+
     @Override
     public String getMessage(ValuePhrasing phrasing) {
         return value.getMessage(phrasing);

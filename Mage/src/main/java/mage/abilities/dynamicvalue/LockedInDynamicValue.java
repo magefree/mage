@@ -45,6 +45,10 @@ public class LockedInDynamicValue implements DynamicValue {
         return new LockedInDynamicValue(this, true);
     }
 
+    public String getMessage() {
+        return basicDynamicValue.getMessage();
+    }
+
     @Override
     public String getMessage(ValuePhrasing phrasing) {
         return basicDynamicValue.getMessage(phrasing);

@@ -44,6 +44,10 @@ public class AdditiveDynamicValue implements DynamicValue {
         return new AdditiveDynamicValue(this.dynamicValues);
     }
 
+    public String getMessage() {
+        return this.dynamicValues.stream().map(DynamicValue::getMessage).collect(Collectors.joining(" "));
+    }
+
     @Override
     public String getMessage(ValuePhrasing phrasing) {
         switch(phrasing){
