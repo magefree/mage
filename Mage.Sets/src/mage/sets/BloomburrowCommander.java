@@ -31,6 +31,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ant Queen", 80, Rarity.RARE, mage.cards.a.AntQueen.class));
         cards.add(new SetCardInfo("Arasta of the Endless Web", 205, Rarity.RARE, mage.cards.a.ArastaOfTheEndlessWeb.class));
         cards.add(new SetCardInfo("Arcane Signet", 127, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Arthur, Marigold Knight", 5, Rarity.MYTHIC, mage.cards.a.ArthurMarigoldKnight.class));
         cards.add(new SetCardInfo("Azorius Signet", 265, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
         cards.add(new SetCardInfo("Baird, Steward of Argive", 135, Rarity.UNCOMMON, mage.cards.b.BairdStewardOfArgive.class));
         cards.add(new SetCardInfo("Baleful Strix", 86, Rarity.RARE, mage.cards.b.BalefulStrix.class));
