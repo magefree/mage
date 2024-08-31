@@ -8,6 +8,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -21,7 +22,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
-    private boolean XPhrasing = true;
+    private ValuePhrasing phrasing = ValuePhrasing.LEGACY;
 
     public BoostTargetEffect(int power, int toughness) {
         this(power, toughness, Duration.EndOfTurn);
@@ -45,7 +46,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();
-        this.XPhrasing = effect.XPhrasing;
+        this.phrasing = effect.phrasing;
     }
 
     @Override
@@ -53,8 +54,8 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         return new BoostTargetEffect(this);
     }
 
-    public BoostTargetEffect usingForEach(){
-        this.XPhrasing = false;
+    public BoostTargetEffect usingPhrasing(ValuePhrasing phrasing){
+        this.phrasing = phrasing;
         return this;
     }
 
@@ -89,6 +90,6 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         }
         return getTargetPointer().describeTargets(mode.getTargets(), "it") +
                 (getTargetPointer().isPlural(mode.getTargets()) ? " each get " : " gets ") +
-                CardUtil.getBoostText(power, toughness, duration, XPhrasing);
+                CardUtil.getBoostText(power, toughness, duration, phrasing);
     }
 }

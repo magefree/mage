@@ -8,11 +8,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 
@@ -39,7 +35,7 @@ public final class CopperhoofVorrac extends CardImpl {
 
         // Copperhoof Vorrac gets +1/+1 for each untapped permanent your opponents control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield).usingForEach()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield).usingPhrasing(ValuePhrasing.FOR_EACH)));
     }
 
     private CopperhoofVorrac(final CopperhoofVorrac card) {

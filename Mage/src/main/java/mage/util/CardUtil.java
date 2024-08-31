@@ -865,7 +865,26 @@ public final class CardUtil {
         }
     }
 
-    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness, boolean useX) {
+    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness) {
+        // sign fix for zero values
+        // -1/+0 must be -1/-0
+        // +0/-1 must be -0/-1
+        String p = power.toString();
+        String t = toughness.toString();
+        if (!p.startsWith("-")) {
+            p = t.startsWith("-") && p.equals("0") ? "-0" : "+" + p;
+        }
+        if (!t.startsWith("-")) {
+            t = p.startsWith("-") && t.equals("0") ? "-0" : "+" + t;
+        }
+        return p + "/" + t;
+    }
+
+    public static String getBoostCountAsStr(int power, int toughness) {
+        return getBoostCountAsStr(StaticValue.get(power), StaticValue.get(toughness));
+    }
+
+    public static String getBoostCountAsStr_phrasing(DynamicValue power, DynamicValue toughness, boolean useX) {
 
         String p = useX ? "X" : "1";
 
@@ -907,16 +926,21 @@ public final class CardUtil {
         return p + "/" + t;
     }
 
-    public static String getBoostCountAsStr(int power, int toughness) {
-        return getBoostCountAsStr(StaticValue.get(power), StaticValue.get(toughness), false);
+    public static String getBoostCountAsStr_phrasing(int power, int toughness) {
+        return getBoostCountAsStr_phrasing(StaticValue.get(power), StaticValue.get(toughness), false);
     }
 
-    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness) {
-        return getBoostCountAsStr(power, toughness, true);
+    public static String getBoostCountAsStr_phrasing(DynamicValue power, DynamicValue toughness) {
+        return getBoostCountAsStr_phrasing(power, toughness, true);
     }
 
-    public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration, boolean useX) {
-        String boostCount = getBoostCountAsStr(power, toughness, useX);
+    public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration, ValuePhrasing phrasing) {
+        String boostCount;
+        if (phrasing == ValuePhrasing.LEGACY){
+            boostCount = getBoostCountAsStr(power, toughness);
+        } else {
+            boostCount = getBoostCountAsStr_phrasing(power, toughness, phrasing == ValuePhrasing.X_HIDDEN || phrasing == ValuePhrasing.X_IS);
+        }
         StringBuilder sb = new StringBuilder(boostCount);
         // don't include "for the rest of the game" for emblems, etc.
         if (duration != Duration.EndOfGame) {
@@ -926,18 +950,39 @@ public final class CardUtil {
             }
         }
 
-        if (!(power instanceof StaticValue) || !(toughness instanceof StaticValue)) {
-            if (useX && boostCount.contains("X")){
-                String powerMessage = power.getMessage(ValuePhrasing.X_IS);
-                String toughnessMessage = toughness.getMessage(ValuePhrasing.X_IS);
-                sb.append(", where X is ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
-                if (boostCount.contains("Y")){
-                    sb.append(", and Y is ").append(toughnessMessage);
+        if (phrasing == ValuePhrasing.LEGACY) {
+            String message = power.getMessage();
+            if (message.isEmpty()) {
+                message = toughness.getMessage();
+            }
+            if (!message.isEmpty()) {
+                sb.append(boostCount.contains("X") ? ", where X is " : " for each ").append(message);
+            }
+        } else {
+            if (!(power instanceof StaticValue) || !(toughness instanceof StaticValue)) {
+                String powerMessage;
+                String toughnessMessage;
+                switch (phrasing){
+                    case X_IS:
+                        if (!boostCount.contains("X")) {
+                            break;
+                        }
+                        powerMessage = power.getMessage(ValuePhrasing.X_IS);
+                        toughnessMessage = toughness.getMessage(ValuePhrasing.X_IS);
+                        sb.append(", where X is ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
+                        if (boostCount.contains("Y")){
+                            sb.append(", and Y is ").append(toughnessMessage);
+                        }
+                        break;
+                    case X_HIDDEN:
+
+                        break;
+                    case FOR_EACH:
+                        powerMessage = power.getMessage(ValuePhrasing.FOR_EACH);
+                        toughnessMessage = toughness.getMessage(ValuePhrasing.FOR_EACH);
+                        sb.append(" for each ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
+                        break;
                 }
-            } else {
-                String powerMessage = power.getMessage(ValuePhrasing.FOR_EACH);
-                String toughnessMessage = toughness.getMessage(ValuePhrasing.FOR_EACH);
-                sb.append(" for each ").append(powerMessage.isEmpty() ? toughnessMessage : powerMessage);
             }
         }
         return sb.toString();

@@ -11,10 +11,7 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -36,7 +33,7 @@ public final class ConquerorsFlail extends CardImpl {
         // Equipped creature gets +1/+1 for each color among permanents you control.
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(
                 ConquerorsFlailColorCount.instance, ConquerorsFlailColorCount.instance, Duration.WhileOnBattlefield
-        ).usingForEach()));
+        ).usingPhrasing(ValuePhrasing.FOR_EACH)));
 
         // As long as Conqueror's Flail is attached to a creature, your opponents can't cast spells during your turn.
         this.addAbility(new SimpleStaticAbility(new ConquerorsFlailEffect()));

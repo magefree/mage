@@ -8,6 +8,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
+import mage.constants.ValuePhrasing;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -57,7 +58,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         this.excludeSource = excludeSource;
 
         if (rule == null || rule.isEmpty()) {
-            setText(true);
+            setText(ValuePhrasing.LEGACY);
         } else {
             this.staticText = rule;
         }
@@ -79,7 +80,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         this.excludeSource = excludeSource;
 
         if (rule == null || rule.isEmpty()) {
-            setText(true);
+            setText(ValuePhrasing.LEGACY);
         } else {
             this.staticText = rule;
         }
@@ -98,8 +99,8 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         return new BoostAllEffect(this);
     }
 
-    public BoostAllEffect usingForEach(){
-        setText(false);
+    public BoostAllEffect usingPhrasing(ValuePhrasing phrasing) {
+        setText(phrasing);
         return this;
     }
 
@@ -165,7 +166,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    protected void setText(boolean useX) {
+    protected void setText(ValuePhrasing phrasing) {
         StringBuilder sb = new StringBuilder();
         boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
         if (excludeSource && !each) {
@@ -173,7 +174,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         }
         sb.append(filter.getMessage());
         sb.append(each ? " gets " : " get ");
-        sb.append(CardUtil.getBoostText(power, toughness, duration, useX));
+        sb.append(CardUtil.getBoostText(power, toughness, duration, phrasing));
         staticText = sb.toString();
     }
 

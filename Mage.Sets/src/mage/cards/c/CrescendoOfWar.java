@@ -10,10 +10,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 
@@ -33,11 +30,11 @@ public final class CrescendoOfWar extends CardImpl {
 
         // Attacking creatures get +1/+0 for each strife counter on Crescendo of War.
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(xValue, StaticValue.get(0),
-                Duration.WhileOnBattlefield, StaticFilters.FILTER_ATTACKING_CREATURES, false).usingForEach()));
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_ATTACKING_CREATURES, false).usingPhrasing(ValuePhrasing.FOR_EACH)));
 
         // Blocking creatures you control get +1/+0 for each strife counter on Crescendo of War.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(xValue, StaticValue.get(0),
-                Duration.WhileOnBattlefield, StaticFilters.FILTER_BLOCKING_CREATURES, false).usingForEach()));
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_BLOCKING_CREATURES, false).usingPhrasing(ValuePhrasing.FOR_EACH)));
     }
 
     private CrescendoOfWar(final CrescendoOfWar card) {

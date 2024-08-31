@@ -5,10 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -38,7 +35,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
         this.power = power;
         this.toughness = toughness;
         this.description = description;
-        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration, true);
+        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration, ValuePhrasing.LEGACY);
     }
 
     protected BoostSourceEffect(final BoostSourceEffect effect) {
@@ -53,8 +50,8 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
         return new BoostSourceEffect(this);
     }
 
-    public BoostSourceEffect usingForEach(){
-        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration, true);
+    public BoostSourceEffect usingPhrasing(ValuePhrasing phrasing){
+        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration, phrasing);
         return this;
     }
 

@@ -5,10 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -57,7 +54,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         this.toughness = toughness;
         this.filter = (filter == null ? StaticFilters.FILTER_PERMANENT_CREATURES : filter);
         this.excludeSource = excludeSource;
-        setText(true);
+        setText(ValuePhrasing.LEGACY);
     }
 
     protected BoostControlledEffect(final BoostControlledEffect effect) {
@@ -73,8 +70,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         return new BoostControlledEffect(this);
     }
 
-    public BoostControlledEffect usingForEach(){
-        setText(false);
+    public BoostControlledEffect usingPhrasing(ValuePhrasing phrasing) {
+        setText(phrasing);
         return this;
     }
 
@@ -117,7 +114,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private void setText(boolean useX) {
+    private void setText(ValuePhrasing phrasing) {
         StringBuilder sb = new StringBuilder();
         String message = filter.getMessage().toLowerCase(Locale.ENGLISH);
         boolean each = message.startsWith("each");
@@ -129,7 +126,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
             sb.append(" you control");
         }
         sb.append(each ? " gets " : " get ");
-        sb.append(CardUtil.getBoostText(power, toughness, duration, useX));
+        sb.append(CardUtil.getBoostText(power, toughness, duration, phrasing));
         staticText = sb.toString();
     }
 
