@@ -13,10 +13,7 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffec
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -97,7 +94,7 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
     }
 
     @Override
-    public String getMessage() {
-        return "nonbasic land cards in your opponents' graveyards";
+    public String getMessage(ValuePhrasing phrasing) {
+        return "the number of nonbasic land cards in your opponents' graveyards";
     }
 }

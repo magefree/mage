@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.ValuePhrasing;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -71,8 +72,8 @@ class SoullessOneDynamicCount implements DynamicValue {
     }
     
     @Override
-    public String getMessage() {
-        return "Zombies on the battlefield plus the number of Zombie cards in all graveyards";
+    public String getMessage(ValuePhrasing phrasing) {
+        return "the number of Zombies on the battlefield plus the number of Zombie cards in all graveyards";
     }
 
     @Override

@@ -6,6 +6,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseOpponentEffect;
@@ -38,9 +39,7 @@ public final class LostOrderOfJarkeld extends CardImpl {
         // Lost Order of Jarkeld's power and toughness are each equal to 1 plus the number of creatures the chosen player controls.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerToughnessSourceEffect(new AdditiveDynamicValue(
-                        CreaturesControlledByChosenPlayer.instance, StaticValue.get(1)
-                ))
+                new SetBasePowerToughnessSourceEffect(new IntPlusDynamicValue(1, CreaturesControlledByChosenPlayer.instance))
         ));
     }
 
@@ -75,8 +74,8 @@ enum CreaturesControlledByChosenPlayer implements DynamicValue {
     }
 
     @Override
-    public String getMessage() {
-        return "1 plus the number of creatures controlled by chosen player";
+    public String getMessage(ValuePhrasing phrasing) {
+        return "the number of creatures the chosen player controls";
     }
 
     @Override

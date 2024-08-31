@@ -13,6 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.ValuePhrasing;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -66,7 +67,7 @@ class CurrentHourCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage() {
-        return "current hour, using the twelve-hour system";
+    public String getMessage(ValuePhrasing phrasing) {
+        return "the current hour, using the twelve-hour system";
     }
 }

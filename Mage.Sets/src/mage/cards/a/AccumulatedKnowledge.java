@@ -19,7 +19,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  */
 public final class AccumulatedKnowledge extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("card named Accumulated Knowledge");
+    private static final FilterCard filter = new FilterCard("cards named Accumulated Knowledge");
 
     static {
         filter.add(new NamePredicate("Accumulated Knowledge"));

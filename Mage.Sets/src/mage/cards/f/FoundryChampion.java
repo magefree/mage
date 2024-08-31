@@ -11,10 +11,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -33,7 +30,7 @@ public final class FoundryChampion extends CardImpl {
         this.toughness = new MageInt(4);
 
         //When Foundry Champion enters the battlefield, it deals damage to any target equal to the number of creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(CreaturesYouControlCount.instance, "it"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(CreaturesYouControlCount.instance, "it").withPhrasing(ValuePhrasing.EQUAL_TO));
         ability.addTarget(new TargetAnyTarget());
         ability.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability);

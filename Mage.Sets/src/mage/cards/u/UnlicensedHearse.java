@@ -16,6 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.ValuePhrasing;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
@@ -56,8 +57,8 @@ enum UnlicensedHearseValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage() {
-        return "cards exiled with it";
+    public String getMessage(ValuePhrasing phrasing) {
+        return "the number of cards exiled with it";
     }
 }
 
