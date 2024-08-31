@@ -13,7 +13,6 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.abilities.keyword.HasteAbility;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
