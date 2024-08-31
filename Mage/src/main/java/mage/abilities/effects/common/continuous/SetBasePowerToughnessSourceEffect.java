@@ -140,16 +140,13 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         }
 
         if (toughnessMessage.equals(powerMessage)) {
-            if (indefiniteDuration) {
-                sb.append("and toughness ");
-            } else {
-                sb.append("and base toughness ");
-            }
+            sb.append("and toughness ");
         }
 
         if (power instanceof StaticValue) {
             // Assume that if one is static, the other is static too
             sb.append(((StaticValue)power).getValue()).append("/").append(((StaticValue)toughness).getValue());
+            sb.append(" ");
         } else {
             if (indefiniteDuration) {
                 if (toughnessMessage.equals(powerMessage)) {
