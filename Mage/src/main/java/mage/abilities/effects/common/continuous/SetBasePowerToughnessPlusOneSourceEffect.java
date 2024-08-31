@@ -16,7 +16,7 @@ public class SetBasePowerToughnessPlusOneSourceEffect extends SetBasePowerToughn
      */
     public SetBasePowerToughnessPlusOneSourceEffect(DynamicValue amount) {
         super(amount, new IntPlusDynamicValue(1, amount), Duration.EndOfGame, SubLayer.CharacteristicDefining_7a);
-        this.staticText = "{this}'s power is equal to " + amount.getMessage(ValuePhrasing.EQUAL_TO) + " and its toughness is equal to that number plus 1";
+        setStaticText(amount);
     }
 
     protected SetBasePowerToughnessPlusOneSourceEffect(final SetBasePowerToughnessPlusOneSourceEffect effect) {
@@ -26,6 +26,23 @@ public class SetBasePowerToughnessPlusOneSourceEffect extends SetBasePowerToughn
     @Override
     public SetBasePowerToughnessPlusOneSourceEffect copy() {
         return new SetBasePowerToughnessPlusOneSourceEffect(this);
+    }
+
+    void setStaticText(DynamicValue amount) {
+
+        StringBuilder sb = new StringBuilder("{this}'s power is ");
+
+        // Relies on StaticValue messages all being empty
+        String message = amount.getMessage(ValuePhrasing.EQUAL_TO);
+
+        if (!message.startsWith("the")) {
+            message = "the number of " + message;
+        }
+
+        sb.append("equal to ").append(message);
+        sb.append(" and its toughness is equal to that number plus 1");
+
+        staticText = sb.toString();
     }
 
 }

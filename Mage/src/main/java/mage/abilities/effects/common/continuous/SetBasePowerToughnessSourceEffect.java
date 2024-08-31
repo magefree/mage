@@ -132,13 +132,6 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         String powerMessage = power.getMessage(ValuePhrasing.EQUAL_TO);
         String toughnessMessage = toughness.getMessage(ValuePhrasing.EQUAL_TO);
 
-        if (!powerMessage.startsWith("the")) {
-            powerMessage = "the number of " + powerMessage;
-        }
-        if (!toughnessMessage.startsWith("the")) {
-            toughnessMessage = "the number of " + toughnessMessage;
-        }
-
         if (toughnessMessage.equals(powerMessage)) {
             sb.append("and toughness ");
         }
@@ -195,13 +188,12 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
 
         if (value instanceof StaticValue) {
             sb.append(((StaticValue)value).getValue());
-            return sb.toString();
+        } else {
+            sb.append("equal to ").append(value.getMessage(ValuePhrasing.EQUAL_TO));
         }
 
-        sb.append("equal to ").append(value.getMessage(ValuePhrasing.EQUAL_TO));
-
         if (!indefiniteDuration) {
-            sb.append(duration);
+            sb.append(" ").append(duration);
         }
 
         return sb.toString();
