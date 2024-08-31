@@ -46,7 +46,7 @@ public class KickerTest extends CardTestPlayerBase {
     /**
      * Aether Figment Creature — Illusion 1/1, 1U (2) Kicker {3} (You may pay an
      * additional {3} as you cast this spell.) Aether Figment can't be blocked.
-     * If Aether Figment was kicked, it enters the battlefield with two +1/+1
+     * If Aether Figment was kicked, it enters with two +1/+1
      * counters on it.
      */
     @Test
@@ -76,7 +76,7 @@ public class KickerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
         //setChoice(playerA, true); // with Kicker - AI must choose
 
-        //setStrictChooseMode(true); - AI must choose
+        setStrictChooseMode(false); // - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -112,7 +112,7 @@ public class KickerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aether Figment");
         //setChoice(playerA, false); - AI must choose
 
-        //setStrictChooseMode(true); - AI must choose
+        setStrictChooseMode(false); // - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -188,8 +188,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
         // Kicker {1}{G} and/or {2}{U}
-        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
-        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
@@ -211,8 +211,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
         // Kicker {1}{G} and/or {2}{U}
-        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
-        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise", 2);
@@ -239,8 +239,8 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
         // Kicker {1}{G} and/or {2}{U}
-        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
-        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.
         addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
 
         addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise", 1);
@@ -253,7 +253,7 @@ public class KickerTest extends CardTestPlayerBase {
         setChoice(playerA, true);  // use kicker {1}{G} - destroy target creature with flying
         setChoice(playerA, true); // use kicker {2}{U} - draw two cards
         // spell must be countered, so no chooses
-        //setChoice(playerA, "When "); // two triggers rised: When {this} enters the battlefield, if it was kicked...
+        //setChoice(playerA, "When "); // two triggers rised: When {this} enters, if it was kicked...
         //addTarget(playerA, "Birds of Paradise"); // target for {1}{G} trigger
 
         // counter kicked spell
@@ -459,7 +459,7 @@ public class KickerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         //
         // Kicker {4}
-        // If Academy Drake was kicked, it enters the battlefield with two +1/+1 counters on it.
+        // If Academy Drake was kicked, it enters with two +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Academy Drake", 1); // {2}{U}, 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4 + 4 + 3);
         //
@@ -666,7 +666,7 @@ public class KickerTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         // Kicker {2}
-        // If Ardent Soldier was kicked, it enters the battlefield with a +1/+1 counter on it.
+        // If Ardent Soldier was kicked, it enters with a +1/+1 counter on it.
         addCard(Zone.LIBRARY, playerA, "Ardent Soldier", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2); // for kicker cost
         //
@@ -767,4 +767,89 @@ public class KickerTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, scourge, 10, 10);
     }
 
+    @Test
+    public void testSkizzikNotKicked() {
+        String skizzik = "Skizzik"; // 3R Creature 5/3 trample haste
+        // Kicker {R} At the beginning of the end step, if Skizzik wasn’t kicked, sacrifice it.
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, skizzik);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, skizzik);
+        setChoice(playerA, false); // not kicked
+
+        attack(1, playerA, skizzik, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 15);
+        assertPermanentCount(playerA, skizzik, 0);
+        assertGraveyardCount(playerA, skizzik, 1);
+    }
+
+    @Test
+    public void testSkizzikKicked() {
+        String skizzik = "Skizzik"; // 3R Creature 5/3 trample haste
+        // Kicker {R} At the beginning of the end step, if Skizzik wasn’t kicked, sacrifice it.
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, skizzik);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, skizzik);
+        setChoice(playerA, true);
+
+        attack(1, playerA, skizzik, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 15);
+        assertPermanentCount(playerA, skizzik, 1);
+        assertGraveyardCount(playerA, skizzik, 0);
+        assertTappedCount("Mountain", true, 5);
+    }
+
+    @Test
+    public void testWastescapeBattlemage() {
+        String battlemage = "Wastescape Battlemage"; // 1C + kickers G (exile artifact/enchantment) + 1U (bounce creature)
+
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 3);
+        addCard(Zone.HAND, playerA, battlemage, 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Darksteel Relic", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Squire", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Counterspell", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, battlemage);
+        setChoice(playerA, true);
+        setChoice(playerA, false);
+        addTarget(playerA, "Darksteel Relic");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, battlemage);
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setChoice(playerA, "When you cast this spell, if it was kicked with its {G} kicker, exile");
+        addTarget(playerA, "Darksteel Relic");
+        addTarget(playerA, "Squire");
+        //Abilities have not resolved yet
+        checkStackSize("Spell+2 Triggers on Stack", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, 3);
+        checkPermanentCount("Darksteel Relic count", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Darksteel Relic", 1);
+        checkPermanentCount("Squire count", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Squire", 2);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Counterspell", battlemage);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, battlemage, 1);
+        assertPermanentCount(playerB, "Darksteel Relic", 0);
+        assertPermanentCount(playerB, "Squire", 1);
+        assertExileCount(playerB, 2);
+        assertHandCount(playerB, "Squire", 1);
+    }
 }

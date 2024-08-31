@@ -22,7 +22,7 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.token.HazezonTamarSandWarriorToken;
+import mage.game.permanent.token.SandWarriorToken;
 import mage.players.Player;
 
 /**
@@ -83,7 +83,7 @@ class HazezonTamarEntersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Effect effect = new CreateTokenEffect(new HazezonTamarSandWarriorToken(), new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent()));
+            Effect effect = new CreateTokenEffect(new SandWarriorToken(), new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent()));
             effect.setText("create X 1/1 Sand Warrior creature tokens that are red, green, and white, where X is the number of lands you control at that time");
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(effect);
             game.addDelayedTriggeredAbility(delayedAbility, source);

@@ -20,7 +20,7 @@ import mage.game.permanent.token.FaerieRogueToken;
 public final class Bitterblossom extends CardImpl {
 
     public Bitterblossom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add(SubType.FAERIE);
 
         // At the beginning of your upkeep, you lose 1 life and create a 1/1 black Faerie Rogue creature token with flying.

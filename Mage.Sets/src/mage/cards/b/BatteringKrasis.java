@@ -25,7 +25,7 @@ public final class BatteringKrasis extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Evolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
+        // Evolve (Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
         this.addAbility(new EvolveAbility());
     }
 

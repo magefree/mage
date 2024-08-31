@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class DefenseGridTest extends CardTestPlayerBase {
@@ -15,10 +14,11 @@ public class DefenseGridTest extends CardTestPlayerBase {
     /**
      * Defense Grid vs Mindbreak Trap Not sure how this is coded, but Mindbreak
      * Trap should still cost 3 more (0+3=3).
-     *
      */
     @Test
     public void testCostIncrease() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.HAND, playerA, "Lightning Bolt", 3);
 
@@ -35,6 +35,7 @@ public class DefenseGridTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mindbreak Trap", "Lightning Bolt^Lightning Bolt^Lightning Bolt");
+        setChoice(playerB, "Cast with alternative cost: {0} (source: Mindbreak Trap");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

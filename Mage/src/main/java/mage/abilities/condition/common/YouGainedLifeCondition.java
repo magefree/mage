@@ -13,6 +13,13 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  */
 public class YouGainedLifeCondition extends IntCompareCondition {
 
+    /**
+     * "if you gained life this turn"
+     */
+    public YouGainedLifeCondition() {
+        super(ComparisonType.MORE_THAN, 0);
+    }
+
     public YouGainedLifeCondition(ComparisonType type, int value) {
         super(type, value);
     }

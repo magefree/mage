@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -12,16 +11,18 @@ import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class DauthiMindripper extends CardImpl {
 
     public DauthiMindripper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.DAUTHI);
         this.subtype.add(SubType.MINION);
         this.power = new MageInt(2);
@@ -32,7 +33,10 @@ public final class DauthiMindripper extends CardImpl {
         // Whenever Dauthi Mindripper attacks and isn't blocked, you may sacrifice it. If you do, defending player discards three cards.
         Effect effect = new DiscardTargetEffect(3);
         effect.setText("defending player discards three cards");
-        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(effect, new SacrificeSourceCost()), false, true));
+        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(
+                new DoIfCostPaid(effect, new SacrificeSourceCost()),
+                false, SetTargetPointer.PLAYER
+        ));
     }
 
     private DauthiMindripper(final DauthiMindripper card) {

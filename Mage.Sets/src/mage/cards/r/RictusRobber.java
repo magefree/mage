@@ -32,7 +32,7 @@ public final class RictusRobber extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieRogueToken())),
                 MorbidCondition.instance,
-                "When {this} enters the battlefield, if a creature died this turn, create a 2/2 blue and black Zombie Rogue creature token."
+                "When {this} enters, if a creature died this turn, create a 2/2 blue and black Zombie Rogue creature token."
         ).addHint(MorbidHint.instance));
 
         // Plot {2}{B}

@@ -95,7 +95,7 @@ class BeseechTheMirrorEffect extends OneShotEffect {
                     // you may cast the exiled card without paying its mana cost if that spell's mana value is 4 or less.
                     CardUtil.castSpellWithAttributesForFree(controller, source, game, card, filter);
                 }
-                game.getState().processAction(game);
+                game.processAction();
 
                 if (game.getState().getZone(card.getId()).equals(Zone.EXILED)) {
                     // Put the exiled card into your hand if it wasn't cast this way.

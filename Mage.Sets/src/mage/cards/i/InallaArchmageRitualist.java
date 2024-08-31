@@ -62,16 +62,16 @@ public final class InallaArchmageRitualist extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // Eminence - Whenever another nontoken Wizard enters the battlefield under your control, if Inalla, Archmage Ritualist is in the command zone or on the battlefield, you may pay {1}. If you do, create a token that's a copy of that Wizard. The token gains haste. Exile it at the beginning of the next end step.
+        // Eminence - Whenever another nontoken Wizard you control enters, if Inalla, Archmage Ritualist is in the command zone or on the battlefield, you may pay {1}. If you do, create a token that's a copy of that Wizard. The token gains haste. Exile it at the beginning of the next end step.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(Zone.ALL, new DoIfCostPaid(
                         new InallaArchmageRitualistEffect(), new ManaCostsImpl<>("{1}"), "Pay {1} to create a token copy?"),
                         filter, false, SetTargetPointer.PERMANENT),
                 SourceOnBattlefieldOrCommandZoneCondition.instance,
-                "Whenever another nontoken Wizard enters the battlefield under your control, "
-                + "{this} is in the command zone or on the battlefield, "
+                "Whenever another nontoken Wizard you control enters, "
+                + "if {this} is in the command zone or on the battlefield, "
                 + "you may pay {1}. If you do, create a token that's a copy of that Wizard. "
-                + "That token gains haste. Exile it at the beginning of the next end step");
+                + "The token gains haste. Exile it at the beginning of the next end step");
         ability.setAbilityWord(AbilityWord.EMINENCE);
         this.addAbility(ability);
 

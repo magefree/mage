@@ -24,7 +24,7 @@ public final class BoonOfTheSpiritRealm extends CardImpl {
     public BoonOfTheSpiritRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
 
-        // Constellation -- Whenever Boon of the Spirit Realm or another enchantment enters the battlefield under your control, put a blessing counter on Boon of the Spirit Realm.
+        // Constellation -- Whenever Boon of the Spirit Realm or another enchantment you control enters, put a blessing counter on Boon of the Spirit Realm.
         this.addAbility(new ConstellationAbility(new AddCountersSourceEffect(CounterType.BLESSING.createInstance())));
 
         // Creatures you control get +1/+1 for each blessing counter on Boon of the Spirit Realm.

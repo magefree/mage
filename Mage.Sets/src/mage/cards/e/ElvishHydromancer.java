@@ -34,7 +34,7 @@ public final class ElvishHydromancer extends CardImpl {
         // When Elvish Hydromancer enters the battlefield, if it was kicked, create a token that's a copy of target creature you control.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenCopyTargetEffect()),
-                KickedCondition.ONCE, "When {this} enters the battlefield, " +
+                KickedCondition.ONCE, "When {this} enters, " +
                 "if it was kicked, create a token that's a copy of target creature you control."
         );
         ability.addTarget(new TargetControlledCreaturePermanent());

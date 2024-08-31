@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class TarmogoyfNest extends CardImpl {
 
     public TarmogoyfNest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{2}{G}");
 
         this.subtype.add(SubType.LHURGOYF);
         this.subtype.add(SubType.AURA);

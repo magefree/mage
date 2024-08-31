@@ -1,11 +1,9 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -18,8 +16,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class BattlefieldScrounger extends CardImpl {
@@ -32,14 +31,10 @@ public final class BattlefieldScrounger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Threshold - Put three cards from your graveyard on the bottom of your library: Battlefield Scrounger gets +3/+3 until end of turn. Activate this ability only once each turn, and only if seven or more cards are in your graveyard.
-        Ability ability = new LimitedTimesPerTurnActivatedAbility(
-                Zone.BATTLEFIELD,
-                new BoostSourceEffect(3, 3, Duration.EndOfTurn),
-                new BattlefieldScroungerCost(),
-                1,
-                new CardsInControllerGraveyardCondition(7));
-        ability.setAbilityWord(AbilityWord.THRESHOLD);
-        this.addAbility(ability);
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(
+                Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn),
+                new BattlefieldScroungerCost(), 1, ThresholdCondition.instance
+        ).setAbilityWord(AbilityWord.THRESHOLD));
     }
 
     private BattlefieldScrounger(final BattlefieldScrounger card) {
@@ -69,7 +64,7 @@ class BattlefieldScroungerCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             if (this.getTargets().choose(Outcome.Removal, controllerId, source.getSourceId(), source, game)) {
-                for (UUID targetId: this.getTargets().get(0).getTargets()) {
+                for (UUID targetId : this.getTargets().get(0).getTargets()) {
                     Card card = game.getCard(targetId);
                     if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
                         return false;

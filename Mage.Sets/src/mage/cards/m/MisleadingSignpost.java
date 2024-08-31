@@ -33,7 +33,7 @@ public final class MisleadingSignpost extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReselectDefenderAttackedByTargetEffect(true), true),
                 new IsStepCondition(PhaseStep.DECLARE_ATTACKERS, false),
-                "When {this} enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. "
+                "When {this} enters during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. "
                 + "<i>(It can't attack its controller or their permanents)</i>");
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);

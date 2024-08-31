@@ -69,7 +69,7 @@ class PureReflectionEffect extends OneShotEffect {
         filter.add(SubType.REFLECTION.getPredicate());
         game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)
                 .forEach(permanent -> permanent.destroy(source, game,false));
-        game.getState().processAction(game);
+        game.processAction();
 
         // Then that player creates an X/X white Reflection creature token, where X is the converted mana cost of that spell.
         ReflectionPureToken token = new ReflectionPureToken(spell.getManaValue());

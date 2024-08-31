@@ -79,7 +79,7 @@ public class TableWaitingDialog extends MageDialog {
     private void setGUISize() {
         jTableSeats.getTableHeader().setFont(GUISizeHelper.tableFont);
         jTableSeats.setFont(GUISizeHelper.tableFont);
-        jTableSeats.setRowHeight(GUISizeHelper.getTableRowHeight());
+        jTableSeats.setRowHeight(GUISizeHelper.tableRowHeight);
 
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));

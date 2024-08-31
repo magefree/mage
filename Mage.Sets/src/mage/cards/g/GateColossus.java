@@ -40,7 +40,7 @@ public final class GateColossus extends CardImpl {
         // Gate Colossus can't be blocked by creatures with power 2 or less.
         this.addAbility(new DauntAbility());
 
-        // Whenever a Gate enters the battlefield under your control, you may put Gate Colossus from your graveyard on top of your library.
+        // Whenever a Gate you control enters, you may put Gate Colossus from your graveyard on top of your library.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD,
                 new PutOnLibrarySourceEffect(

@@ -14,6 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetadjustment.TargetsCountAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -31,8 +32,8 @@ public final class CometStorm extends CardImpl {
         // Choose any target, then choose another any target for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
         this.getSpellAbility().addEffect(new CometStormEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget(1));
-        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(new IntPlusDynamicValue(1, MultikickerCount.instance)));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(new IntPlusDynamicValue(1, MultikickerCount.instance)));
     }
 
     private CometStorm(final CometStorm card) {
@@ -58,7 +59,7 @@ class CometStormEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int damage = source.getManaCostsToPay().getX();
+        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (UUID uuid : this.getTargetPointer().getTargets(game, source)) {

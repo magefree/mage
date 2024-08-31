@@ -30,8 +30,8 @@ public final class EntDraughtBasin extends CardImpl {
                 new ManaCostsImpl<>("{X}")
         );
         ability.addCost(new TapSourceCost());
-        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.EQUAL_TO));
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.EQUAL_TO));
         this.addAbility(ability);
     }
 

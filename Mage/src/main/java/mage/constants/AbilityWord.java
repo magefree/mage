@@ -58,6 +58,7 @@ public enum AbilityWord {
     TEMPTING_OFFER("Tempting offer"),
     THRESHOLD("Threshold"),
     UNDERGROWTH("Undergrowth"),
+    VALIANT("Valiant"),
     WILL_OF_THE_COUNCIL("Will of the council"),
     WILL_OF_THE_PLANESWALKERS("Will of the planeswalkers");
 

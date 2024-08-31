@@ -51,7 +51,7 @@ public final class KodamaOfTheEastTree extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Whenever another permanent enters the battlefield under your control, if it wasn't put onto the battlefield with this ability, you may put a permanent card with equal or lesser converted mana cost from your hand onto the battlefield.
+        // Whenever another permanent you control enters, if it wasn't put onto the battlefield with this ability, you may put a permanent card with equal or lesser converted mana cost from your hand onto the battlefield.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldAllTriggeredAbility(new KodamaOfTheEastTreeEffect(), filter),
                 KodamaOfTheEastTreeCondition.instance, "Whenever another permanent enters the battlefield " +

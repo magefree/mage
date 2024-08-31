@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -44,7 +44,7 @@ public final class SlurrkAllIngesting extends CardImpl {
         ));
 
         // Whenever Slurrk or another creature you control dies, if it had a +1/+1 counter on it, put a +1/+1 counter on each creature you control that has a +1/+1 counter on it.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new AddCountersAllEffect(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(), filter
         ).setText("if it had a +1/+1 counter on it, put a +1/+1 counter " +
                 "on each creature you control that has a +1/+1 counter on it"), false, filter));

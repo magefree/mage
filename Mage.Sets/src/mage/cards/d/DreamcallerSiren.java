@@ -56,7 +56,7 @@ public final class DreamcallerSiren extends CardImpl {
         ability.addTarget(new TargetNonlandPermanent(0, 2, false));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability,
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "when {this} enters the battlefield, if you control another Pirate, tap up to two target nonland permanents."));
+                "when {this} enters, if you control another Pirate, tap up to two target nonland permanents."));
     }
 
     private DreamcallerSiren(final DreamcallerSiren card) {

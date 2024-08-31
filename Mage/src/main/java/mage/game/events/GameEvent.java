@@ -32,7 +32,6 @@ public class GameEvent implements Serializable {
     protected Zone zone;
     protected List<UUID> appliedEffects = new ArrayList<>();
     protected ApprovingObject approvingObject; // e.g. the approving object for casting a spell from non hand zone
-    protected UUID customEventType = null;
 
     public enum EventType {
 
@@ -75,7 +74,7 @@ public class GameEvent implements Serializable {
         ZONE_CHANGE,
         ZONE_CHANGE_GROUP, // between two specific zones only; TODO: rework all usages to ZONE_CHANGE_BATCH instead, see #11895
         ZONE_CHANGE_BATCH, // all zone changes that occurred from a single effect
-        DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
+        DRAW_TWO_OR_MORE_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
         EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
         ECHO_PAID,
@@ -219,13 +218,6 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the mount
          playerId    the id of the controlling player
          */
-        X_MANA_ANNOUNCE,
-        /* X_MANA_ANNOUNCE
-         mana x-costs announced by players (X value can be changed by replace events like Unbound Flourishing)
-         targetId    id of the spell that's cast
-         playerId    player that casts the spell or ability
-         amount      X multiplier to change X value, default 1
-         */
         CAST_SPELL,
         CAST_SPELL_LATE,
         /* SPELL_CAST, CAST_SPELL_LATE
@@ -247,6 +239,7 @@ public class GameEvent implements Serializable {
          */
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
+         WARNING, do not use choose dialogs inside, can be calls multiple types, e.g. on playable checking
          targetId    id of the ability to activate / use
          sourceId    sourceId of the object with that ability
          playerId    player that tries to use this ability
@@ -521,7 +514,7 @@ public class GameEvent implements Serializable {
          flag        true if no regeneration is allowed
          */
         DESTROYED_PERMANENT,
-        SACRIFICE_PERMANENT, SACRIFICED_PERMANENT,
+        SACRIFICE_PERMANENT, SACRIFICED_PERMANENT, SACRIFICED_PERMANENT_BATCH,
         FIGHTED_PERMANENT,
         BATCH_FIGHT,
         EXPLOITED_CREATURE,
@@ -662,28 +655,32 @@ public class GameEvent implements Serializable {
          playerId   owner of the plotted card (the one able to cast the card)
          */
         BECOME_PLOTTED,
-        //custom events
+        /* the player foraged
+         targetId   same as sourceId
+         sourceId   of the ability
+         playerId   player who foraged
+         */
+        FORAGED,
+        /* gave a gift
+         targetId   the player who received the gift
+         sourceId   of the ability
+         playerId   player who gave the gift
+         */
+        GAVE_GIFT,
+        // custom events - must store some unique data to track
         CUSTOM_EVENT
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId) {
-        this(type, null, targetId, source, playerId, 0, false);
+        this(type, targetId, source, playerId, 0, false, null);
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId, ApprovingObject approvingObject) {
-        this(type, null, targetId, source, playerId, 0, false, approvingObject);
+        this(type, targetId, source, playerId, 0, false, approvingObject);
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
-        this(type, null, targetId, source, playerId, amount, flag);
-    }
-
-    public GameEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId) {
-        this(EventType.CUSTOM_EVENT, customEventType, targetId, source, playerId, 0, false);
-    }
-
-    public GameEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
-        this(EventType.CUSTOM_EVENT, customEventType, targetId, source, playerId, amount, flag);
+        this(type, targetId, source, playerId, amount, flag, null);
     }
 
     public static GameEvent getEvent(EventType type, UUID targetId, Ability source, UUID playerId, int amount) {
@@ -710,24 +707,10 @@ public class GameEvent implements Serializable {
         return event;
     }
 
-    public static GameEvent getEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount) {
-        return new GameEvent(customEventType, targetId, source, playerId, amount, false);
-    }
-
-    public static GameEvent getEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId) {
-        return new GameEvent(customEventType, targetId, source, playerId);
-    }
-
-    private GameEvent(EventType type, UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
-        this(type, customEventType, targetId, source, playerId, amount, flag, null);
-    }
-
-    private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, Ability source, UUID playerId,
+    private GameEvent(EventType type, UUID targetId, Ability source, UUID playerId,
                       int amount, boolean flag, ApprovingObject approvingObject
     ) {
         this.type = type;
-        this.customEventType = customEventType;
         this.targetId = targetId;
         this.sourceId = source == null ? null : source.getSourceId(); // We only keep the sourceId from the whole source.
         this.amount = amount;
@@ -741,18 +724,12 @@ public class GameEvent implements Serializable {
         return type;
     }
 
-    public UUID getCustomEventType() {
-        return customEventType;
-    }
-
     public UUID getId() {
         return id;
     }
 
     /**
      * Some batch events can contain multiple events list, see BatchGameEvent for usage
-     *
-     * @return
      */
     public UUID getTargetId() {
         return targetId;
@@ -819,8 +796,6 @@ public class GameEvent implements Serializable {
 
     /**
      * Returns possibly approving object that allowed the creation of the event.
-     *
-     * @return
      */
     public ApprovingObject getAdditionalReference() {
         return approvingObject;
@@ -841,15 +816,9 @@ public class GameEvent implements Serializable {
      * creature or player, it deals double that damage to that creature or
      * player instead." A creature that normally deals 2 damage will deal 8
      * damage--not just 4, and not an infinite amount.
-     *
-     * @return
      */
     public List<UUID> getAppliedEffects() {
         return appliedEffects;
-    }
-
-    public boolean isCustomEvent(UUID customEventType) {
-        return type == EventType.CUSTOM_EVENT && this.customEventType.equals(customEventType);
     }
 
     public void addAppliedEffects(List<UUID> appliedEffects) {
@@ -861,7 +830,7 @@ public class GameEvent implements Serializable {
     public void setAppliedEffects(List<UUID> appliedEffects) {
         if (appliedEffects != null) {
             if (this.appliedEffects.isEmpty()) {
-                this.appliedEffects = appliedEffects; // Use object refecence to handle that an replacement effect can only be once applied to an event
+                this.appliedEffects = appliedEffects; // Use object reference to handle that an replacement effect can only be once applied to an event
             } else {
                 this.appliedEffects.addAll(appliedEffects);
             }
@@ -882,9 +851,7 @@ public class GameEvent implements Serializable {
      * Custom sourceId setup for some events (use it in constructor).
      * TODO: replace all custom sourceId to normal event classes
      *       for now, having the setter helps find all that do not provide an Ability source,
-     *       so keeping it is worthwhile until a thoughtfull cleanup.
-     *
-     * @param sourceId
+     *       so keeping it is worthwhile until a thoughtful cleanup.
      */
     protected void setSourceId(UUID sourceId) {
         this.sourceId = sourceId;

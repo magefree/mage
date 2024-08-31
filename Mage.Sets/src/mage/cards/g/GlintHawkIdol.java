@@ -32,7 +32,7 @@ public final class GlintHawkIdol extends CardImpl {
     public GlintHawkIdol (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         
-        // Whenever another artifact enters the battlefield under your control, you may have {this} become a 2/2 Bird artifact creature with flying until end of turn.
+        // Whenever another artifact you control enters, you may have {this} become a 2/2 Bird artifact creature with flying until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GlintHawkIdolToken(), CardType.ARTIFACT, Duration.EndOfTurn), filter, true));
 

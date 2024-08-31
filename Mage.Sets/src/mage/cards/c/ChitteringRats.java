@@ -69,9 +69,7 @@ class ChitteringRatsEffect extends OneShotEffect {
         Player targetOpponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (targetOpponent != null) {
             if (!targetOpponent.getHand().isEmpty()) {
-                TargetCardInHand target = new TargetCardInHand();
-                target.withNotTarget(true);
-                target.setTargetName("a card from your hand to put on top of your library");
+                TargetCardInHand target = new TargetCardInHand().withChooseHint("to put on top of your library");
                 targetOpponent.choose(Outcome.Detriment, target, source, game);
                 Card card = targetOpponent.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {

@@ -29,7 +29,7 @@ public final class SummonTheSchool extends CardImpl {
     }
 
     public SummonTheSchool(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{3}{W}");
         this.subtype.add(SubType.MERFOLK);
 
         // Create two 1/1 blue Merfolk Wizard creature tokens.

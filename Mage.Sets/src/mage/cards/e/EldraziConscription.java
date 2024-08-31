@@ -25,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class EldraziConscription extends CardImpl {
 
     public EldraziConscription (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{8}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ENCHANTMENT},"{8}");
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.AURA);
 

@@ -41,7 +41,7 @@ public final class BladewingsThrall extends CardImpl {
         // When a Dragon enters the battlefield, you may return Bladewing's Thrall from your graveyard to the battlefield.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(), new FilterPermanent(SubType.DRAGON, "a Dragon"), true)
-                .setTriggerPhrase("When a Dragon enters the battlefield, "));
+                .setTriggerPhrase("When a Dragon enters, "));
     }
 
     private BladewingsThrall(final BladewingsThrall card) {

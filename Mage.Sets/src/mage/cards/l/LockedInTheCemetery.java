@@ -42,7 +42,7 @@ public final class LockedInTheCemetery extends CardImpl {
         // When Locked in the Cemetery enters the battlefield, if there are five or more cards in your graveyard, tap enchanted creature.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()),
-                condition, "When {this} enters the battlefield, if there are " +
+                condition, "When {this} enters, if there are " +
                 "five or more cards in your graveyard, tap enchanted creature."
         ));
 

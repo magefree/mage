@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author magenoxx_at_gmail.com
  */
 public final class ReturnToRavnica extends ExpansionSet {
@@ -27,11 +26,13 @@ public final class ReturnToRavnica extends ExpansionSet {
         super("Return to Ravnica", "RTR", ExpansionSet.buildDate(2012, 10, 5), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Abrupt Decay", 141, Rarity.RARE, mage.cards.a.AbruptDecay.class));
         cards.add(new SetCardInfo("Aerial Predation", 113, Rarity.COMMON, mage.cards.a.AerialPredation.class));
         cards.add(new SetCardInfo("Angel of Serenity", 1, Rarity.MYTHIC, mage.cards.a.AngelOfSerenity.class));

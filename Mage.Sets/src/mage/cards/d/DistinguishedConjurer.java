@@ -39,7 +39,7 @@ public final class DistinguishedConjurer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature enters the battlefield under your control, you gain 1 life.
+        // Whenever another creature you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
 
         // {4}{W}, {T}: Exile another target creature you control, then return it to the battlefield under its owner’s control.

@@ -28,7 +28,7 @@ public final class RoilCartographer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Landfall -- Whenever a land enters the battlefield under your control, you get {E}.
+        // Landfall -- Whenever a land you control enters, you get {E}.
         this.addAbility(new LandfallAbility(
                 new GetEnergyCountersControllerEffect(1), false
         ));

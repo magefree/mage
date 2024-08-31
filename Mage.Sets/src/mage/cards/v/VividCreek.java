@@ -23,7 +23,7 @@ public final class VividCreek extends CardImpl {
     public VividCreek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         // Vivid Creek enters the battlefield tapped with two charge counters on it.
-        Ability ability = new EntersBattlefieldAbility(new TapSourceEffect(true), false, null, "{this} enters the battlefield tapped with two charge counters on it.", null);
+        Ability ability = new EntersBattlefieldAbility(new TapSourceEffect(true), false, null, "{this} enters tapped with two charge counters on it.", null);
         ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
         this.addAbility(ability);
         // {tap}: Add {U}.

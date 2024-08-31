@@ -44,38 +44,43 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
         return new ReturnToBattlefieldUnderOwnerControlTargetEffect(this);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Cards cardsToBattlefield = new CardsImpl();
-            if (returnFromExileZoneOnly) {
-                for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
-                    if (game.getExile().containsId(targetId, game)) {
-                        cardsToBattlefield.add(targetId);
-                    } else {
-                        Card card = game.getCard(targetId);
-                        if (card instanceof MeldCard) {
-                            MeldCard meldCard = (MeldCard) card;
-                            Card topCard = meldCard.getTopHalfCard();
-                            Card bottomCard = meldCard.getBottomHalfCard();
-                            if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter() && game.getExile().containsId(topCard.getId(), game)) {
-                                cardsToBattlefield.add(topCard);
-                            }
-                            if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter() && game.getExile().containsId(bottomCard.getId(), game)) {
-                                cardsToBattlefield.add(bottomCard);
-                            }
+    protected Cards getCardsToReturn(Game game, Ability source) {
+        Cards cardsToBattlefield = new CardsImpl();
+        if (returnFromExileZoneOnly) {
+            for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
+                if (game.getExile().containsId(targetId, game)) {
+                    cardsToBattlefield.add(targetId);
+                } else {
+                    Card card = game.getCard(targetId);
+                    if (card instanceof MeldCard) {
+                        MeldCard meldCard = (MeldCard) card;
+                        Card topCard = meldCard.getTopHalfCard();
+                        Card bottomCard = meldCard.getBottomHalfCard();
+                        if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter() && game.getExile().containsId(topCard.getId(), game)) {
+                            cardsToBattlefield.add(topCard);
+                        }
+                        if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter() && game.getExile().containsId(bottomCard.getId(), game)) {
+                            cardsToBattlefield.add(bottomCard);
                         }
                     }
                 }
-            } else {
-                cardsToBattlefield.addAll(getTargetPointer().getTargets(game, source));
             }
-            if (!cardsToBattlefield.isEmpty()) {
-                controller.moveCards(cardsToBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, tapped, false, true, null);
-            }
-            return true;
+        } else {
+            cardsToBattlefield.addAll(getTargetPointer().getTargets(game, source));
         }
-        return false;
+        return cardsToBattlefield;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        Cards cardsToBattlefield = getCardsToReturn(game, source);
+        if (!cardsToBattlefield.isEmpty()) {
+            controller.moveCards(cardsToBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, tapped, false, true, null);
+        }
+        return true;
     }
 }

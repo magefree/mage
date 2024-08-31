@@ -62,7 +62,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
                 message += "Pay " + costValueMessage;
                 logMessage += "pay " + costValueMessage;
             } else if (costValueMessage.length() > 1) {
-                message += costValueMessage.substring(0, 1).toUpperCase() + costValueMessage.substring(1);
+                message += CardUtil.getTextWithFirstCharUpperCase(costValueMessage);
                 logMessage += costValueMessage;
             }
             message += '?';

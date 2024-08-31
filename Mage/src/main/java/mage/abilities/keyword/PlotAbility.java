@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageIdentifier;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -17,6 +18,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -78,7 +80,8 @@ public class PlotAbility extends SpecialAction {
             // Not Allowed from other zones
             return ActivationStatus.getFalse();
         }
-        if (!card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game)) {
+        Set<MageIdentifier> allowedToBeCastNow = card.getSpellAbility().spellCanBeActivatedNow(playerId, game);
+        if (!allowedToBeCastNow.contains(MageIdentifier.Default) && !allowedToBeCastNow.contains(card.getSpellAbility().getIdentifier())) {
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);

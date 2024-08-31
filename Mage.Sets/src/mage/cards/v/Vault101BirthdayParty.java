@@ -35,8 +35,7 @@ public final class Vault101BirthdayParty extends CardImpl {
 
         // I -- Create a 1/1 white Human Soldier creature token and a Food token.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I,
-                new CreateTokenEffect(new HumanSoldierToken()),
-                new CreateTokenEffect(new FoodToken()).setText("and a Food token"));
+                new CreateTokenEffect(new HumanSoldierToken()).withAdditionalTokens(new FoodToken()));
 
         // II, III -- You may put an Aura or Equipment card from your hand or graveyard onto the battlefield.
         // If an Equipment is put onto the battlefield this way, you may attach it to a creature you control.

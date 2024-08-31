@@ -30,8 +30,6 @@ import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardRendererUtils;
 import org.ocpsoft.prettytime.Duration;
 import org.ocpsoft.prettytime.PrettyTime;
-import org.ocpsoft.prettytime.TimeFormat;
-import org.ocpsoft.prettytime.units.JustNow;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -54,7 +52,6 @@ import java.util.List;
 import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static mage.client.dialog.PreferencesDialog.*;
@@ -592,11 +589,11 @@ public class TablesPanel extends javax.swing.JPanel {
     private void setGUISize() {
         tableTables.getTableHeader().setFont(GUISizeHelper.tableFont);
         tableTables.setFont(GUISizeHelper.tableFont);
-        tableTables.setRowHeight(GUISizeHelper.getTableRowHeight());
+        tableTables.setRowHeight(GUISizeHelper.tableRowHeight);
 
         tableCompleted.getTableHeader().setFont(GUISizeHelper.tableFont);
         tableCompleted.setFont(GUISizeHelper.tableFont);
-        tableCompleted.setRowHeight(GUISizeHelper.getTableRowHeight());
+        tableCompleted.setRowHeight(GUISizeHelper.tableRowHeight);
 
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPaneTables.setDividerSize(GUISizeHelper.dividerBarSize);
@@ -605,20 +602,20 @@ public class TablesPanel extends javax.swing.JPanel {
 
         ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/state_waiting.png"));
         Image img = icon.getImage();
-        Image newimg = img.getScaledInstance(GUISizeHelper.menuFont.getSize(), GUISizeHelper.menuFont.getSize(), java.awt.Image.SCALE_SMOOTH);
+        Image newimg = img.getScaledInstance(GUISizeHelper.dialogFont.getSize(), GUISizeHelper.dialogFont.getSize(), java.awt.Image.SCALE_SMOOTH);
         btnStateWaiting.setIcon(new ImageIcon(newimg));
 
         icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/state_active.png"));
         img = icon.getImage();
-        newimg = img.getScaledInstance(GUISizeHelper.menuFont.getSize(), GUISizeHelper.menuFont.getSize(), java.awt.Image.SCALE_SMOOTH);
+        newimg = img.getScaledInstance(GUISizeHelper.dialogFont.getSize(), GUISizeHelper.dialogFont.getSize(), java.awt.Image.SCALE_SMOOTH);
         btnStateActive.setIcon(new ImageIcon(newimg));
 
         icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"));
         img = icon.getImage();
-        newimg = img.getScaledInstance(GUISizeHelper.menuFont.getSize(), GUISizeHelper.menuFont.getSize(), java.awt.Image.SCALE_SMOOTH);
+        newimg = img.getScaledInstance(GUISizeHelper.dialogFont.getSize(), GUISizeHelper.dialogFont.getSize(), java.awt.Image.SCALE_SMOOTH);
         btnStateFinished.setIcon(new ImageIcon(newimg));
 
-        int iconSize = 48 + GUISizeHelper.menuFont.getSize() * 2 - 15;
+        int iconSize = 48 + GUISizeHelper.dialogFont.getSize() * 2 - 15;
         icon = new javax.swing.ImageIcon(getClass().getResource("/buttons/match_new.png"));
         img = icon.getImage();
         newimg = img.getScaledInstance(iconSize, iconSize, java.awt.Image.SCALE_SMOOTH);
@@ -630,19 +627,39 @@ public class TablesPanel extends javax.swing.JPanel {
         btnNewTournament.setIcon(new ImageIcon(newimg));
 
         for (JToggleButton component : filterButtons) {
-            component.setFont(GUISizeHelper.menuFont);
+            component.setFont(GUISizeHelper.dialogFont);
         }
-        Dimension newDimension = new Dimension((int) jPanelBottom.getPreferredSize().getWidth(), GUISizeHelper.menuFont.getSize() + 28);
+        Dimension newDimension = new Dimension((int) jPanelBottom.getPreferredSize().getWidth(), GUISizeHelper.dialogFont.getSize() + 28);
         jPanelBottom.setMinimumSize(newDimension);
         jPanelBottom.setPreferredSize(newDimension);
-        buttonWhatsNew.setFont(GUISizeHelper.menuFont);
-        buttonNextMessage.setFont(GUISizeHelper.menuFont);
-        labelMessageHeader.setFont(new Font(GUISizeHelper.menuFont.getName(), Font.BOLD, GUISizeHelper.menuFont.getSize()));
-        labelMessageText.setFont(GUISizeHelper.menuFont);
+        buttonWhatsNew.setFont(GUISizeHelper.dialogFont);
+        buttonNextMessage.setFont(GUISizeHelper.dialogFont);
+        labelMessageHeader.setFont(new Font(GUISizeHelper.dialogFont.getName(), Font.BOLD, GUISizeHelper.dialogFont.getSize()));
+        labelMessageText.setFont(GUISizeHelper.dialogFont);
+
+        btnQuickStart2Player.setFont(GUISizeHelper.dialogFont);
+        btnQuickStart4Player.setFont(GUISizeHelper.dialogFont);
+        btnQuickStartMCTS.setFont(GUISizeHelper.dialogFont);
+    }
+
+    private void restoreDividerLocations() {
+        Rectangle currentBounds = MageFrame.getDesktop().getBounds();
+        if (currentBounds != null) {
+            String firstDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_1, null);
+            String tableDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_2, null);
+            String chatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_3, null);
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, firstDivider, jSplitPane1);
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, tableDivider, jSplitPaneTables);
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, chatDivider, chatPanelMain);
+        }
     }
 
     private void saveDividerLocations() {
-        // save divider locations and divider saveDividerLocations
+        // save divider locations
+        if (this.jSplitPane1.getDividerLocation() == -1) {
+            // server lobby hidden by default, so ignore that settings
+            return;
+        }
         GuiDisplayUtil.saveCurrentBoundsToPrefs();
         GuiDisplayUtil.saveDividerLocationToPrefs(KEY_TABLES_DIVIDER_LOCATION_1, this.jSplitPane1.getDividerLocation());
         GuiDisplayUtil.saveDividerLocationToPrefs(KEY_TABLES_DIVIDER_LOCATION_2, this.jSplitPaneTables.getDividerLocation());
@@ -657,18 +674,6 @@ public class TablesPanel extends javax.swing.JPanel {
     private void saveGuiSettings() {
         TableUtil.saveActiveFiltersToPrefs(KEY_TABLES_FILTER_SETTINGS, filterButtons);
         TableUtil.saveColumnWidthAndOrderToPrefs(tableTables, KEY_TABLES_COLUMNS_WIDTH, KEY_TABLES_COLUMNS_ORDER);
-    }
-
-    private void restoreDividers() {
-        Rectangle currentBounds = MageFrame.getDesktop().getBounds();
-        if (currentBounds != null) {
-            String firstDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_1, null);
-            String tableDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_2, null);
-            String chatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_3, null);
-            GuiDisplayUtil.restoreDividerLocations(currentBounds, firstDivider, jSplitPane1);
-            GuiDisplayUtil.restoreDividerLocations(currentBounds, tableDivider, jSplitPaneTables);
-            GuiDisplayUtil.restoreDividerLocations(currentBounds, chatDivider, chatPanelMain);
-        }
     }
 
     public Map<String, JComponent> getUIComponents() {
@@ -774,12 +779,9 @@ public class TablesPanel extends javax.swing.JPanel {
         //tableModel.setSession(session);
 
         reloadServerMessages();
-
         MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
 
-        // divider locations have to be set with delay else values set are overwritten with system defaults
-        Executors.newSingleThreadScheduledExecutor().schedule(() -> restoreDividers(), 300, TimeUnit.MILLISECONDS);
-
+        restoreDividerLocations();
     }
 
     protected void reloadServerMessages() {
@@ -1683,7 +1685,7 @@ public class TablesPanel extends javax.swing.JPanel {
             DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile, false);
 
             PlayerType aiType = useMonteCarloAI ? PlayerType.COMPUTER_MONTE_CARLO : PlayerType.COMPUTER_MAD;
-            int numSeats = gameName.contains("2") ? 2 : 4;
+            int numSeats = gameName.contains("2") || gameName.contains("Monte Carlo") ? 2 : 4;
             boolean multiPlayer = numSeats > 2;
 
             MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer, numSeats);
@@ -1750,7 +1752,7 @@ public class TablesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnStateFinishedActionPerformed
 
     private void buttonWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonWhatsNewActionPerformed
-        MageFrame.showWhatsNewDialog();
+        MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_buttonWhatsNewActionPerformed
 
     private void btnQuickStart2PlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickStartDuelActionPerformed

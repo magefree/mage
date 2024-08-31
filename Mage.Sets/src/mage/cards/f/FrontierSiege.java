@@ -37,14 +37,14 @@ public final class FrontierSiege extends CardImpl {
     }
 
     private static final String ruleTrigger1 = "&bull  Khans &mdash; At the beginning of each of your main phases, add {G}{G}.";
-    private static final String ruleTrigger2 = "&bull  Dragons &mdash; Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.";
+    private static final String ruleTrigger2 = "&bull  Dragons &mdash; Whenever a creature with flying you control enters, you may have it fight target creature you don't control.";
 
     public FrontierSiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // As Frontier Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
-                "As {this} enters the battlefield, choose Khans or Dragons.", ""));
+                "As {this} enters, choose Khans or Dragons.", ""));
 
         // * Khans - At the beginning of each of your main phases, add {G}{G}.
         this.addAbility(new ConditionalTriggeredAbility(
@@ -52,7 +52,7 @@ public final class FrontierSiege extends CardImpl {
                 new ModeChoiceSourceCondition("Khans"),
                 ruleTrigger1));
 
-        // * Dragons - Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.
+        // * Dragons - Whenever a creature with flying you control enters, you may have it fight target creature you don't control.
         Ability ability2 = new ConditionalTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT),
                 new ModeChoiceSourceCondition("Dragons"),

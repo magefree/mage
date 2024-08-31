@@ -45,7 +45,7 @@ public final class ChishiroTheShatteredBlade extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever an Aura or Equipment enters the battlefield under your control, create a 2/2 red Spirit creature token.
+        // Whenever an Aura or Equipment you control enters, create a 2/2 red Spirit creature token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CreateTokenEffect(new SpiritRedToken()), filter
         ));

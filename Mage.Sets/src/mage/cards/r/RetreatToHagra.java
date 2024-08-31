@@ -25,7 +25,7 @@ public final class RetreatToHagra extends CardImpl {
     public RetreatToHagra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
-        // <i>Landfall</i>- Whenever a land enters the battlefield under your control, 
+        // <i>Landfall</i>- Whenever a land you control enters,
         // choose one - Target creature gets +1/+0 and gains deathtouch until end of turn;
         LandfallAbility ability = new LandfallAbility(new BoostTargetEffect(1, 0, Duration.EndOfTurn).setText("target creature gets +1/+0"), false);
         Effect effect = new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn).setText("and gains deathtouch until end of turn");

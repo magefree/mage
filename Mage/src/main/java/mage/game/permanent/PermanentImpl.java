@@ -21,7 +21,7 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.filter.FilterOpponent;
+import mage.filter.*;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.ZoneChangeInfo;
@@ -691,7 +691,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 + CardUtil.getSourceLogName(game, source, this.getId()));
         this.setTransformed(!this.transformed);
         this.transformCount++;
-        game.applyEffects();
+        game.applyEffects(); // not process action - no firing of simultaneous events yet
         this.replaceEvent(EventType.TRANSFORMING, game);
         game.addSimultaneousEvent(GameEvent.getEvent(EventType.TRANSFORMED, this.getId(), this.getControllerId()));
         return true;
@@ -1268,7 +1268,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.isPlaneswalker(game)) {
             int loyalty;
             if (this.getStartingLoyalty() == -2) {
-                loyalty = source.getManaCostsToPay().getX();
+                loyalty = CardUtil.getSourceCostsTag(game, source, "X", 0);
             } else {
                 loyalty = this.getStartingLoyalty();
             }
@@ -1285,7 +1285,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.isBattle(game)) {
             int defense;
             if (this.getStartingDefense() == -2) {
-                defense = source.getManaCostsToPay().getX();
+                defense = CardUtil.getSourceCostsTag(game, source, "X", 0);
             } else {
                 defense = this.getStartingDefense();
             }
@@ -1355,7 +1355,20 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 return !ability.getDoesntRemoveControlled() || isControlledBy(game.getControllerId(attachment.getId()));
             }
         }
-        return game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);
+
+        boolean canAttach = true;
+        Permanent attachmentPermanent = game.getPermanent(attachment.getId());
+        // If attachment is an aura, ensures this permanent can still be legally enchanted, according to the enchantment's Enchant ability
+        if (attachment.hasSubtype(SubType.AURA, game)
+                && attachmentPermanent != null
+                && attachmentPermanent.getSpellAbility() != null
+                && !attachmentPermanent.getSpellAbility().getTargets().isEmpty()) {
+            // Line of code below functionally gets the target of the aura's Enchant ability, then compares to this permanent. Enchant improperly implemented in XMage, see #9583
+            // Note: stillLegalTarget used exclusively to account for Dream Leash. Can be made canTarget in the event that that card is rewritten (and "stillLegalTarget" removed from TargetImpl).
+            canAttach = attachmentPermanent.getSpellAbility().getTargets().get(0).copy().withNotTarget(true).stillLegalTarget(attachmentPermanent.getControllerId(), this.getId(), source, game);
+        }
+
+        return !canAttach || game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);
     }
 
     @Override
@@ -1408,7 +1421,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (player != null) {
                 game.informPlayers(player.getLogName() + " sacrificed " + this.getLogName() + CardUtil.getSourceLogName(game, source));
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SACRIFICED_PERMANENT, objectId, source, controllerId));
+            GameEvent sacrificedEvent = GameEvent.getEvent(GameEvent.EventType.SACRIFICED_PERMANENT, objectId, source, controllerId);
+            game.fireEvent(sacrificedEvent);
+            game.getState().addSimultaneousSacrificedPermanentToBatch(sacrificedEvent, game);
             return true;
         }
         return false;

@@ -1,37 +1,43 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class ConcealedCourtyard extends CardImpl {
+
+    private static final FilterLandPermanent filter = new FilterLandPermanent("other lands");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
+    private static final YouControlPermanentCondition condition =
+            new YouControlPermanentCondition(filter, ComparisonType.OR_LESS, 2);
 
     public ConcealedCourtyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Concealed Courtyard enters the battlefield tapped unless you control two or fewer other lands.
-        Condition controls = new InvertCondition(new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_LANDS, ComparisonType.FEWER_THAN, 3));
-        String abilityText = " tapped unless you control two or fewer other lands";
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
-        // {T}: Add {W} or {B}.this.addAbility(new BlackManaAbility());
+        // {T}: Add {W}.
+
         this.addAbility(new WhiteManaAbility());
+        // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
     }
 

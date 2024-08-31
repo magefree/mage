@@ -11,16 +11,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class AugurOfBolasTest extends CardTestPlayerBase {
 
-    /*
-        Aether Figment   {1}{U}
-        Creature - Illusion
-        1/1
-        Kicker {3} (You may pay an additional as you cast this spell.)
-        Aether Figment can't be blocked.
-        If Aether Figment was kicked, it enters the battlefield with two +1/+1 counters on it.
-     */
     @Test
-    public void testEnteringWithCounters() {
+    public void testAbility() {
         addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 3);
         skipInitShuffling();
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
@@ -29,7 +21,11 @@ public class AugurOfBolasTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Augur of Bolas"); // Creature {1}{U}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Augur of Bolas");
+        setChoice(playerA, true);
+        addTarget(playerA, "Lightning Bolt"); // to hand
+        setChoice(playerA, "Lightning Bolt"); // order to bottom
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

@@ -40,7 +40,7 @@ public final class CycloneSummoner extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new ReturnToHandFromBattlefieldAllEffect(filter), false
-                ), CastFromHandSourcePermanentCondition.instance, "When {this} enters the battlefield, " +
+                ), CastFromHandSourcePermanentCondition.instance, "When {this} enters, " +
                 "if you cast it from your hand, return all permanents to their owners' hands " +
                 "except for Giants, Wizards, and lands."
         ), new CastFromHandWatcher());

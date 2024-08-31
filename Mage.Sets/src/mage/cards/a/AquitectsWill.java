@@ -27,7 +27,7 @@ public final class AquitectsWill extends CardImpl {
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     public AquitectsWill(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{U}");
         this.subtype.add(SubType.MERFOLK);
 
         // Put a flood counter on target land.

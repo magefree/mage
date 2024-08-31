@@ -29,7 +29,7 @@ public final class PhalanxVanguard extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Whenever an artifact enters the battlefield under your control, Phalanx Vanguard gets +1/+0 until end of turn.
+        // Whenever an artifact you control enters, Phalanx Vanguard gets +1/+0 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN
