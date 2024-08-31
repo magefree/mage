@@ -94,12 +94,14 @@ class RottenmouthViperEffect extends OneShotEffect{
                 for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                     Player opponent = game.getPlayer(opponentId);
                     if (opponent != null) {
+                        // AI hint - use life by priority (ignore sacrifice and discard)
+                        Outcome aiOutcome = opponent.getLife() > 10 ? Outcome.Detriment : Outcome.Benefit;
                         int permanents = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_NON_LAND, opponentId, game);
-                        if (permanents > 0 && opponent.chooseUse(outcome, "Sacrifices a nonland permanent? (Iteration " + i + " of " + repeat + ")",
+                        if (permanents > 0 && opponent.chooseUse(aiOutcome, "Sacrifices a nonland permanent? (Iteration " + i + " of " + repeat + ")",
                                 "Otherwise you have to discard a card or lose 4 life.", "Sacrifice", "Discard or life loss", source, game)) {
                             Target target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
                             target.withNotTarget(true);
-                            if (opponent.choose(outcome, target, source, game)) {
+                            if (opponent.choose(Outcome.Sacrifice, target, source, game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null) {
                                     if (permanent.sacrifice(source, game)) {
@@ -108,7 +110,7 @@ class RottenmouthViperEffect extends OneShotEffect{
                                 }
                             }
                         }
-                        if (!opponent.getHand().isEmpty() && opponent.chooseUse(outcome, "Discard a card? (Iteration " + i + " of " + repeat + ")",
+                        if (!opponent.getHand().isEmpty() && opponent.chooseUse(aiOutcome, "Discard a card? (Iteration " + i + " of " + repeat + ")",
                                 "Otherwise you lose 4 life.", "Discard", "Lose 4 life", source, game)) {
                             opponent.discardOne(false, false, source, game);
                             continue;

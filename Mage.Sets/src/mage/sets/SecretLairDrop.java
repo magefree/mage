@@ -1327,7 +1327,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Ringleader", 1616, Rarity.RARE, mage.cards.g.GoblinRingleader.class));
         cards.add(new SetCardInfo("Goblin Welder", 1617, Rarity.RARE, mage.cards.g.GoblinWelder.class));
         cards.add(new SetCardInfo("Mogg War Marshal", 1618, Rarity.RARE, mage.cards.m.MoggWarMarshal.class));
-        cards.add(new SetCardInfo("Tezzeret the Seeker", 1619, Rarity.RARE, mage.cards.t.TezzeretTheSeeker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tezzeret the Seeker", 1619, Rarity.MYTHIC, mage.cards.t.TezzeretTheSeeker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Griselbrand", 1620, Rarity.MYTHIC, mage.cards.g.Griselbrand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 1621, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
         cards.add(new SetCardInfo("Nicol Bolas, Planeswalker", 1622, Rarity.MYTHIC, mage.cards.n.NicolBolasPlaneswalker.class));
