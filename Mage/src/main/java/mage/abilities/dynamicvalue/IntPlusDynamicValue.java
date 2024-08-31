@@ -16,15 +16,22 @@ public class IntPlusDynamicValue implements DynamicValue {
 
     private final DynamicValue value;
     private final int baseValue;
+    private final boolean useWord;
 
     public IntPlusDynamicValue(int baseValue, DynamicValue value) {
+        this(baseValue, value, false);
+    }
+
+    public IntPlusDynamicValue(int baseValue, DynamicValue value, boolean useWord) {
         this.value = value;
         this.baseValue = baseValue;
+        this.useWord = useWord;
     }
 
     IntPlusDynamicValue(final IntPlusDynamicValue dynamicValue) {
         this.value = dynamicValue.value;
         this.baseValue = dynamicValue.baseValue;
+        this.useWord = dynamicValue.useWord;
     }
 
     @Override
@@ -55,7 +62,7 @@ public class IntPlusDynamicValue implements DynamicValue {
             case FOR_EACH:
                 throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in IntPlusDynamicValue");
             default:
-                return CardUtil.numberToText(baseValue) + " plus " + value.getMessage(phrasing);
+                return (useWord ? CardUtil.numberToText(baseValue) : baseValue) + " plus " + value.getMessage(phrasing);
         }
     }
 
