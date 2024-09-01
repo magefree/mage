@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.dynamicvalue.common.ManaSpentToCastCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.constants.*;
@@ -14,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 /**
@@ -68,7 +68,7 @@ class MockingbirdEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int manaSpent = CardUtil.getSourceCostsTag(game, source, "X", 0);
+        int manaSpent = ManaSpentToCastCount.instance.calculate(game, source, this);
         FilterCreaturePermanent filter = new FilterCreaturePermanent(
                 "creature on the battlefield with mana value less than or equal to the amount of mana spent " +
                         "to cast Mockingbird"
