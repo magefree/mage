@@ -90,6 +90,7 @@ class EmptyTheLaboratoryEffect extends OneShotEffect {
                 sacrificed++;
             }
         }
+        game.processAction();
         Cards toReveal = new CardsImpl();
         int zombies = 0;
         for (Card card : player.getLibrary().getCards(game)) {
