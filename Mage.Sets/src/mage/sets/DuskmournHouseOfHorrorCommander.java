@@ -16,7 +16,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
     }
 
     private DuskmournHouseOfHorrorCommander() {
-        super("Duskmourn: House of Horror", "DSC", ExpansionSet.buildDate(2024, 9, 27), SetType.SUPPLEMENTAL);
+        super("Duskmourn: House of Horror Commander", "DSC", ExpansionSet.buildDate(2024, 9, 27), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Archon of Cruelty", 371, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
