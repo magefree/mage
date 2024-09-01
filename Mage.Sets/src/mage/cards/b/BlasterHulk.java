@@ -51,7 +51,7 @@ public final class BlasterHulk extends CardImpl {
         // Whenever Blaster Hulk attacks, you get {E}{E}, then you may pay eight {E}. When you do, Blaster Hulk deals 8 damage divided as you choose among up to eight targets.
         Ability ability = new AttacksTriggeredAbility(new GetEnergyCountersControllerEffect(2));
         ReflexiveTriggeredAbility reflexiveAbility = new ReflexiveTriggeredAbility(new DamageMultiEffect(8).setText("{this} deals 8 damage divided as you choose among up to eight targets"), false);
-        reflexiveAbility.addTarget(new TargetAnyTargetAmount(4));
+        reflexiveAbility.addTarget(new TargetAnyTargetAmount(8));
         ability.addEffect(new DoWhenCostPaid(reflexiveAbility, new PayEnergyCost(8), "Pay eight {E} to deal 8 damage divided as you choose among up to eight targets?"));
 
         this.addAbility(ability);
