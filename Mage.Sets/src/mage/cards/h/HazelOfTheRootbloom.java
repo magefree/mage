@@ -3,6 +3,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -29,7 +30,7 @@ import mage.target.TargetPermanent;
  */
 public final class HazelOfTheRootbloom extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Tokens you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped tokens you control");
     private static final FilterPermanent filter2 = new FilterControlledPermanent("token you control");
 
     static {
@@ -99,5 +100,10 @@ class HazelOfTheRotbloomEffect extends CreateTokenCopyTargetEffect {
             }
         }
         return super.apply(game, source);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return super.getText(mode) + ". If that token is a Squirrel, instead create two tokens that are copies of it.";
     }
 }
