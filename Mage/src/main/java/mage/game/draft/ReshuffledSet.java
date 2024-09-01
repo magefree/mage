@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class RemixedSet implements Serializable {
+public class ReshuffledSet implements Serializable {
 
     protected final int numBoosterCommons;
     protected final int numBoosterUncommons;
@@ -29,11 +29,11 @@ public class RemixedSet implements Serializable {
     protected final List<CardInfo> specials;
     protected final double chanceMythic;
 
-    public RemixedSet (List<ExpansionSet> sets, int c, int u, int r) {
+    public ReshuffledSet(List<ExpansionSet> sets, int c, int u, int r) {
         this(sets, c, u, r, 0);
     }
 
-    public RemixedSet(List<ExpansionSet> sets, int c, int u, int r, int special) {
+    public ReshuffledSet(List<ExpansionSet> sets, int c, int u, int r, int special) {
         this.numBoosterCommons = c;
         this.numBoosterUncommons = u;
         this.numBoosterRares = r;
@@ -58,7 +58,7 @@ public class RemixedSet implements Serializable {
         List<CardInfo> cardInfos = CardRepository.instance.findCards(new CardCriteria()
                 .setCodes(set.getCode())
                 .rarities(rarity)
-                .maxCardNumber(set.getMaxCardNumberInBooster())); // TODO: Make sure this parameter is set appropriately where needed
+                .maxCardNumber(set.getMaxCardNumberInBooster()));
 
         cardInfos.removeIf(next -> (
                 next.getCardNumber().contains("*")

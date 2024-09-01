@@ -61,8 +61,8 @@ public enum TournamentFactory {
                         rv.append(';');
                     }
                     tournament.setBoosterInfo(rv.toString());
-                } else if (tournament.getTournamentType().isRemixed()) {
-                    StringBuilder rv = new StringBuilder( "Chaos Remixed Draft using sets: ");
+                } else if (tournament.getTournamentType().isReshuffled()) {
+                    StringBuilder rv = new StringBuilder( "Chaos Reshuffled Draft using sets: ");
                     for (Map.Entry<String, Integer> entry: setInfo.entrySet()){
                         rv.append(entry.getKey());
                         rv.append(';');
