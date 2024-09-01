@@ -13,6 +13,7 @@ public class ConditionalTargetAdjuster implements TargetAdjuster {
     private final Condition condition;
     private final boolean keepExistingTargets;
     private final Targets replacementTargets;
+    private Targets checkTargets = null;
 
     /**
      * If the condition is true, replace the target
@@ -37,6 +38,27 @@ public class ConditionalTargetAdjuster implements TargetAdjuster {
         this.replacementTargets = new Targets(replacementTargets);
     }
 
+    /**
+     * Use a special set of targets for checking if the spell/ability is legal to cast/activate
+     * @param targets
+     */
+    public ConditionalTargetAdjuster withSpecificCheckTargets(Target... targets){
+        this.checkTargets = new Targets(targets);
+        return this;
+    }
+
+    /**
+     * Use the replacement targets for checking if the spell/ability is legal to cast/activate.
+     * Since this is to be used only if the targets are more general, keepExistingTargets must be false.
+     */
+    public ConditionalTargetAdjuster withCheckTargets(){
+        if (this.keepExistingTargets){
+            throw new IllegalStateException("withCheckTargets requires keepExistingTargets be false (consider withSpecificCheckTargets)");
+        }
+        this.checkTargets = this.replacementTargets;
+        return this;
+    }
+
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (condition.apply(game, ability)) {
@@ -44,6 +66,17 @@ public class ConditionalTargetAdjuster implements TargetAdjuster {
                 ability.getTargets().clear();
             }
             for (Target target : replacementTargets) {
+                ability.addTarget(target.copy());
+            }
+        }
+    }
+
+    public void adjustTargetsCheck(Ability ability, Game game){
+        if (checkTargets == null) {
+            adjustTargets(ability, game); // use the normal targets
+        } else {
+            ability.getTargets().clear(); // use the special check targets
+            for (Target target : checkTargets) {
                 ability.addTarget(target.copy());
             }
         }

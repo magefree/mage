@@ -28,7 +28,7 @@ public final class TearAsunder extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect().setText("Exile target artifact or enchantment. If this spell was kicked, exile target nonland permanent instead."));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
-                new TargetNonlandPermanent()));
+                new TargetNonlandPermanent()).withCheckTargets());
     }
 
     private TearAsunder(final TearAsunder card) {

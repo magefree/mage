@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
@@ -44,7 +45,7 @@ public final class GaladrielsDismissal extends CardImpl {
         ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
-                new TargetPlayer()));
+                new TargetPlayer()).withSpecificCheckTargets(new TargetCreatureOrPlayer()));
     }
 
     private GaladrielsDismissal(final GaladrielsDismissal card) {

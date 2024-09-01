@@ -29,7 +29,7 @@ public final class BloodBeckoning extends CardImpl {
                         "instead return two target creature cards from your graveyard to your hand"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
-                new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_CREATURE)));
+                new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARD_CREATURE)).withCheckTargets());
 
     }
 

@@ -36,7 +36,8 @@ public final class WasteManagement extends CardImpl {
         this.getSpellAbility().addEffect(new WasteManagementEffect());
         this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD));
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
-                new TargetPlayer()));
+                new TargetPlayer())); //Could use withSpecificCheckTargets, but not needed since default target is "up to"
+        //And doing so correctly would require a "target card in graveyard or player"
     }
 
     private WasteManagement(final WasteManagement card) {

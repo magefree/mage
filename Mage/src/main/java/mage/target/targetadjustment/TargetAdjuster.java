@@ -19,4 +19,11 @@ public interface TargetAdjuster extends Serializable {
      */
     default void addDefaultTargets(Ability ability) {
     }
+
+    /**
+     * Adjust the targets for checking inside of Ability.canChooseTargetAbility
+     */
+    default void adjustTargetsCheck(Ability ability, Game game){
+        adjustTargets(ability, game);
+    }
 }
