@@ -21,8 +21,8 @@ import mage.game.permanent.token.SquirrelToken;
  */
 public final class SwarmyardMassacre extends CardImpl {
 
-    static final FilterCreaturePermanent notSwarmyardFilter = new FilterCreaturePermanent("Insect, Rat, Spider, or Squirrel");
-    static final FilterCreaturePermanent swarmyardFilter = new FilterCreaturePermanent("creature you control that’s an Insect, Rat, Spider, or Squirrel");
+    static final FilterCreaturePermanent notSwarmyardFilter = new FilterCreaturePermanent("each creature that isn't an Insect, Rat, Spider, or Squirrel");
+    static final FilterCreaturePermanent swarmyardFilter = new FilterCreaturePermanent("creature you control that's an Insect, Rat, Spider, or Squirrel");
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(swarmyardFilter, -1);
 
     static {
