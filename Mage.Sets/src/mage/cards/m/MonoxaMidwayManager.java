@@ -38,7 +38,7 @@ public final class MonoxaMidwayManager extends CardImpl {
         this.addAbility(new MonoxaMidwayManagerTriggeredAbility());
 
         // {6}: Roll a six-sided die.
-        this.addAbility(new SimpleActivatedAbility(new RollDiceEffect(null, 6), new GenericManaCost(6)));
+        this.addAbility(new SimpleActivatedAbility(new RollDiceEffect(6), new GenericManaCost(6)));
     }
 
     private MonoxaMidwayManager(final MonoxaMidwayManager card) {

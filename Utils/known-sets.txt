@@ -83,6 +83,7 @@ Duel Decks: Venser vs. Koth|DuelDecksVenserVsKoth|
 Duel Decks: Zendikar vs. Eldrazi|DuelDecksZendikarVsEldrazi|
 Duels of the Planeswalkers|DuelsOfThePlaneswalkers|
 Duskmourn: House of Horror|DuskmournHouseOfHorror|
+Duskmourn: House of Horror Commander|DuskmournHouseOfHorrorCommander|
 Eighth Edition|EighthEdition|
 Eldritch Moon|EldritchMoon|
 Eternal Masters|EternalMasters|

@@ -24,6 +24,7 @@ public enum CounterType {
     AWAKENING("awakening"),
     BLAZE("blaze"),
     BLESSING("blessing"),
+    BLIGHT("blight"),
     BLOOD("blood"),
     BLOODLINE("bloodline"),
     BLOODSTAIN("bloodstain"),

@@ -716,6 +716,30 @@ public final class CardUtil {
         }
     }
 
+    /**
+     * Checks if a given integer is prime
+     *
+     * @param number
+     * @return
+     */
+    public static boolean isPrime(int number) {
+        // if it's 1 or less it's not prime
+        if (number < 2) {
+            return false;
+        }
+        // easy to check 2 and 3 first
+        if (number == 2 || number == 3) {
+            return true;
+        }
+        // sieve of eratosthenes, only need to check up to sqrt(x) to find a divisor
+        for (int i = 2; i * i <= number; i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {
         String title;
         if (source != null) {

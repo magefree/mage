@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
+import mage.target.TargetSpell;
 
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ public final class DazzlingDenial extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Counter target spell unless its controller pays {2}. If you control a Bird, counter that spell unless its controller pays {4} instead.
+        this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterUnlessPaysEffect(new GenericManaCost(4)),
                 new CounterUnlessPaysEffect(new GenericManaCost(2)),

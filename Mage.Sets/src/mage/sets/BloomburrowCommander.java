@@ -31,6 +31,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ant Queen", 80, Rarity.RARE, mage.cards.a.AntQueen.class));
         cards.add(new SetCardInfo("Arasta of the Endless Web", 205, Rarity.RARE, mage.cards.a.ArastaOfTheEndlessWeb.class));
         cards.add(new SetCardInfo("Arcane Signet", 127, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Arthur, Marigold Knight", 5, Rarity.MYTHIC, mage.cards.a.ArthurMarigoldKnight.class));
         cards.add(new SetCardInfo("Azorius Signet", 265, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
         cards.add(new SetCardInfo("Baird, Steward of Argive", 135, Rarity.UNCOMMON, mage.cards.b.BairdStewardOfArgive.class));
         cards.add(new SetCardInfo("Baleful Strix", 86, Rarity.RARE, mage.cards.b.BalefulStrix.class));
@@ -40,6 +41,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Beast Within", 206, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 118, Rarity.RARE, mage.cards.b.BeastmasterAscension.class));
         cards.add(new SetCardInfo("Beledros Witherbloom", 247, Rarity.MYTHIC, mage.cards.b.BeledrosWitherbloom.class));
+        cards.add(new SetCardInfo("Bello, Bard of the Brambles", 1, Rarity.MYTHIC, mage.cards.b.BelloBardOfTheBrambles.class));
         cards.add(new SetCardInfo("Berserkers' Onslaught", 192, Rarity.RARE, mage.cards.b.BerserkersOnslaught.class));
         cards.add(new SetCardInfo("Bident of Thassa", 162, Rarity.RARE, mage.cards.b.BidentOfThassa.class));
         cards.add(new SetCardInfo("Big Score", 193, Rarity.COMMON, mage.cards.b.BigScore.class));
@@ -131,6 +133,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Harmonize", 120, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Haunted Mire", 311, Rarity.COMMON, mage.cards.h.HauntedMire.class));
         cards.add(new SetCardInfo("Haywire Mite", 274, Rarity.UNCOMMON, mage.cards.h.HaywireMite.class));
+        cards.add(new SetCardInfo("Hazel of the Rootbloom", 2, Rarity.MYTHIC, mage.cards.h.HazelOfTheRootbloom.class));
         cards.add(new SetCardInfo("Hazel's Brewmaster", 17, Rarity.RARE, mage.cards.h.HazelsBrewmaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hazel's Brewmaster", 52, Rarity.RARE, mage.cards.h.HazelsBrewmaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hedron Archive", 275, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
@@ -271,6 +274,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sunscorch Regent", 158, Rarity.RARE, mage.cards.s.SunscorchRegent.class));
         cards.add(new SetCardInfo("Sunscorched Divide", 336, Rarity.RARE, mage.cards.s.SunscorchedDivide.class));
         cards.add(new SetCardInfo("Swarmyard", 133, Rarity.RARE, mage.cards.s.Swarmyard.class));
+        cards.add(new SetCardInfo("Swarmyard Massacre", 20, Rarity.RARE, mage.cards.s.SwarmyardMassacre.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 286, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 109, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Tainted Wood", 337, Rarity.UNCOMMON, mage.cards.t.TaintedWood.class));
@@ -293,6 +297,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 345, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Tetsuko Umezawa, Fugitive", 177, Rarity.UNCOMMON, mage.cards.t.TetsukoUmezawaFugitive.class));
         cards.add(new SetCardInfo("The Gitrog Monster", 88, Rarity.MYTHIC, mage.cards.t.TheGitrogMonster.class));
+        cards.add(new SetCardInfo("The Odd Acorn Gang", 7, Rarity.MYTHIC, mage.cards.t.TheOddAcornGang.class));
         cards.add(new SetCardInfo("Thopter Engineer", 204, Rarity.UNCOMMON, mage.cards.t.ThopterEngineer.class));
         cards.add(new SetCardInfo("Thought Vessel", 289, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Thran Dynamo", 290, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));

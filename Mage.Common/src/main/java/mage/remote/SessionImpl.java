@@ -503,11 +503,15 @@ public class SessionImpl implements Session {
                 message = "Server is not responding." + message;
                 break;
             }
+            if (t.toString().contains("to make private")) {
+                // example: Unable to make private void java.io.ObjectOutputStream.clear() accessible: module java.base does not "opens java.io" to unnamed module
+                message = "Wrong java version - check your client running scripts and params." + message;
+                break;
+            }
             if (t.getCause() != null && logger.isDebugEnabled()) {
                 message = '\n' + t.getCause().getMessage() + message;
                 logger.debug(t.getCause().getMessage());
             }
-
             t = t.getCause();
         }
         client.showMessage("Unable connect to server. " + message);

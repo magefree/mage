@@ -55,6 +55,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Byway Barterer", 129, Rarity.RARE, mage.cards.b.BywayBarterer.class));
         cards.add(new SetCardInfo("Cache Grab", 167, Rarity.COMMON, mage.cards.c.CacheGrab.class));
         cards.add(new SetCardInfo("Calamitous Tide", 43, Rarity.UNCOMMON, mage.cards.c.CalamitousTide.class));
+        cards.add(new SetCardInfo("Camellia, the Seedmiser", 207, Rarity.RARE, mage.cards.c.CamelliaTheSeedmiser.class));
         cards.add(new SetCardInfo("Caretaker's Talent", 6, Rarity.RARE, mage.cards.c.CaretakersTalent.class));
         cards.add(new SetCardInfo("Carrot Cake", 7, Rarity.COMMON, mage.cards.c.CarrotCake.class));
         cards.add(new SetCardInfo("Charmed Sleep", 388, Rarity.COMMON, mage.cards.c.CharmedSleep.class));
@@ -103,6 +104,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Fountainport", 253, Rarity.RARE, mage.cards.f.Fountainport.class));
         cards.add(new SetCardInfo("Frilled Sparkshooter", 136, Rarity.COMMON, mage.cards.f.FrilledSparkshooter.class));
         cards.add(new SetCardInfo("Galewind Moose", 173, Rarity.UNCOMMON, mage.cards.g.GalewindMoose.class));
+        cards.add(new SetCardInfo("Gev, Scaled Scorch", 214, Rarity.RARE, mage.cards.g.GevScaledScorch.class));
         cards.add(new SetCardInfo("Giant Growth", 393, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Glarb, Calamity's Augur", 215, Rarity.MYTHIC, mage.cards.g.GlarbCalamitysAugur.class));
         cards.add(new SetCardInfo("Glidedive Duo", 96, Rarity.COMMON, mage.cards.g.GlidediveDuo.class));
@@ -115,6 +117,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Heaped Harvest", 175, Rarity.COMMON, mage.cards.h.HeapedHarvest.class));
         cards.add(new SetCardInfo("Heartfire Hero", 138, Rarity.UNCOMMON, mage.cards.h.HeartfireHero.class));
         cards.add(new SetCardInfo("Hearthborn Battler", 139, Rarity.RARE, mage.cards.h.HearthbornBattler.class));
+        cards.add(new SetCardInfo("Helga, Skittish Seer", 217, Rarity.MYTHIC, mage.cards.h.HelgaSkittishSeer.class));
         cards.add(new SetCardInfo("Hidden Grotto", 254, Rarity.COMMON, mage.cards.h.HiddenGrotto.class));
         cards.add(new SetCardInfo("High Stride", 176, Rarity.COMMON, mage.cards.h.HighStride.class));
         cards.add(new SetCardInfo("Hired Claw", 140, Rarity.RARE, mage.cards.h.HiredClaw.class));
@@ -132,6 +135,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 266, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jolly Gerbils", 19, Rarity.UNCOMMON, mage.cards.j.JollyGerbils.class));
         cards.add(new SetCardInfo("Junkblade Bruiser", 220, Rarity.COMMON, mage.cards.j.JunkbladeBruiser.class));
+        cards.add(new SetCardInfo("Kastral, the Windcrested", 221, Rarity.RARE, mage.cards.k.KastralTheWindcrested.class));
         cards.add(new SetCardInfo("Keen-Eyed Curator", 181, Rarity.RARE, mage.cards.k.KeenEyedCurator.class));
         cards.add(new SetCardInfo("Kindlespark Duo", 142, Rarity.COMMON, mage.cards.k.KindlesparkDuo.class));
         cards.add(new SetCardInfo("Kitnap", 53, Rarity.RARE, mage.cards.k.Kitnap.class));
@@ -156,6 +160,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Spring", 389, Rarity.RARE, mage.cards.m.MindSpring.class));
         cards.add(new SetCardInfo("Mindwhisker", 60, Rarity.UNCOMMON, mage.cards.m.Mindwhisker.class));
         cards.add(new SetCardInfo("Mistbreath Elder", 184, Rarity.RARE, mage.cards.m.MistbreathElder.class));
+        cards.add(new SetCardInfo("Mockingbird", 61, Rarity.RARE, mage.cards.m.Mockingbird.class));
         cards.add(new SetCardInfo("Moonrise Cleric", 226, Rarity.COMMON, mage.cards.m.MoonriseCleric.class));
         cards.add(new SetCardInfo("Moonstone Harbinger", 101, Rarity.UNCOMMON, mage.cards.m.MoonstoneHarbinger.class));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
@@ -194,6 +199,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Repel Calamity", 27, Rarity.UNCOMMON, mage.cards.r.RepelCalamity.class));
         cards.add(new SetCardInfo("Reptilian Recruiter", 149, Rarity.UNCOMMON, mage.cards.r.ReptilianRecruiter.class));
         cards.add(new SetCardInfo("Rockface Village", 259, Rarity.UNCOMMON, mage.cards.r.RockfaceVillage.class));
+        cards.add(new SetCardInfo("Rottenmouth Viper", 107, Rarity.MYTHIC, mage.cards.r.RottenmouthViper.class));
         cards.add(new SetCardInfo("Roughshod Duo", 150, Rarity.COMMON, mage.cards.r.RoughshodDuo.class));
         cards.add(new SetCardInfo("Run Away Together", 67, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Rust-Shield Rampager", 190, Rarity.COMMON, mage.cards.r.RustShieldRampager.class));

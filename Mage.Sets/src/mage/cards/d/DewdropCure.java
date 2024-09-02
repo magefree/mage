@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.abilities.condition.common.GiftWasPromisedCondition;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.GiftAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +36,7 @@ public final class DewdropCure extends CardImpl {
         this.addAbility(new GiftAbility(this, GiftType.CARD));
 
         // Return up to two target creature cards each with mana value 2 or less from your graveyard to the battlefield. If the gift was promised, instead return up to three target creature cards each with mana value 2 or less from your graveyard to the battlefield.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addEffect(new InfoEffect(
                 "If the gift was promised, instead return up to three target creature cards " +
                         "each with mana value 2 or less from your graveyard to the battlefield"
