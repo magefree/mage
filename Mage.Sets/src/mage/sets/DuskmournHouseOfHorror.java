@@ -21,6 +21,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Abandoned Campground", 255, Rarity.COMMON, mage.cards.a.AbandonedCampground.class));
         cards.add(new SetCardInfo("Chainsaw", 128, Rarity.RARE, mage.cards.c.Chainsaw.class));
         cards.add(new SetCardInfo("Cursed Recording", 131, Rarity.RARE, mage.cards.c.CursedRecording.class));
         cards.add(new SetCardInfo("Demonic Counsel", 92, Rarity.RARE, mage.cards.d.DemonicCounsel.class));
