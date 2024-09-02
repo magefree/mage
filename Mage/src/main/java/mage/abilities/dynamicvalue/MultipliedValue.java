@@ -67,8 +67,8 @@ public class MultipliedValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        switch (phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
             case FOR_EACH:
                 return value.getMessage(ValuePhrasing.FOR_EACH);
             case X_HIDDEN:
@@ -80,7 +80,7 @@ public class MultipliedValue implements DynamicValue {
                 } else {
                     sb.append(getMultiplierText()).append(" times ");
                 }
-                return sb.append(value.getMessage(phrasing)).toString();
+                return sb.append(value.getMessage(textPhrasing)).toString();
         }
 
     }

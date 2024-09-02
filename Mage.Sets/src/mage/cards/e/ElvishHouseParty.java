@@ -72,7 +72,7 @@ class CurrentHourCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
         return "the current hour, using the twelve-hour system";
     }
 }

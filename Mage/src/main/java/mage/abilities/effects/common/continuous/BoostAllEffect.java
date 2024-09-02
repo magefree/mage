@@ -99,8 +99,8 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         return new BoostAllEffect(this);
     }
 
-    public BoostAllEffect usingPhrasing(ValuePhrasing phrasing) {
-        setText(phrasing);
+    public BoostAllEffect usingPhrasing(ValuePhrasing textPhrasing) {
+        setText(textPhrasing);
         return this;
     }
 
@@ -166,7 +166,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    protected void setText(ValuePhrasing phrasing) {
+    protected void setText(ValuePhrasing textPhrasing) {
         StringBuilder sb = new StringBuilder();
         boolean each = filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each");
         if (excludeSource && !each) {
@@ -174,7 +174,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         }
         sb.append(filter.getMessage());
         sb.append(each ? " gets " : " get ");
-        sb.append(CardUtil.getBoostText(power, toughness, duration, phrasing));
+        sb.append(CardUtil.getBoostText(power, toughness, duration, textPhrasing));
         staticText = sb.toString();
     }
 

@@ -69,7 +69,7 @@ class MwonvuliOozePTValue extends CountersSourceCount {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
         return "1 plus twice the number of age counters on it";
     }
 }

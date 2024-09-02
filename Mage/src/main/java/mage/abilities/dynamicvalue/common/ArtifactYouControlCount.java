@@ -35,8 +35,8 @@ public enum ArtifactYouControlCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        switch (phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
             case FOR_EACH:
                 return "artifact you control";
             case X_HIDDEN:

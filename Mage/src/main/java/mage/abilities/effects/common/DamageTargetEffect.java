@@ -24,7 +24,7 @@ import java.util.UUID;
 public class DamageTargetEffect extends OneShotEffect {
 
     protected DynamicValue amount;
-    protected ValuePhrasing phrasing = ValuePhrasing.LEGACY;
+    protected ValuePhrasing textPhrasing = ValuePhrasing.LEGACY;
     protected boolean preventable;
     protected String targetDescription;
     protected boolean useOnlyTargetPointer; // TODO: investigate why do we ignore targetPointer by default??
@@ -100,7 +100,7 @@ public class DamageTargetEffect extends OneShotEffect {
         this.targetDescription = effect.targetDescription;
         this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
         this.sourceName = effect.sourceName;
-        this.phrasing = effect.phrasing;
+        this.textPhrasing = effect.textPhrasing;
     }
 
     public DamageTargetEffect withTargetDescription(String targetDescription) {
@@ -108,8 +108,8 @@ public class DamageTargetEffect extends OneShotEffect {
         return this;
     }
 
-    public DamageTargetEffect withPhrasing(ValuePhrasing phrasing) {
-        this.phrasing = phrasing;
+    public DamageTargetEffect withTextPhrasing(ValuePhrasing textPhrasing) {
+        this.textPhrasing = textPhrasing;
         return this;
     }
 
@@ -163,15 +163,15 @@ public class DamageTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
-        if (phrasing == ValuePhrasing.LEGACY){
+        if (textPhrasing == ValuePhrasing.LEGACY){
             if (!message.equals("1")) {
                 sb.append(amount);
             }
         } else if (amount instanceof StaticValue) {
             sb.append(((StaticValue)amount).getValue());
-        } else if (phrasing == ValuePhrasing.X_IS || phrasing == ValuePhrasing.X_HIDDEN) {
+        } else if (textPhrasing == ValuePhrasing.X_IS || textPhrasing == ValuePhrasing.X_HIDDEN) {
             sb.append("X");
-        } else if (phrasing == ValuePhrasing.EQUAL_TO) {
+        } else if (textPhrasing == ValuePhrasing.EQUAL_TO) {
             // do nothing
         } else if (amount instanceof MultipliedValue) {
             sb.append(((MultipliedValue)amount).getMultiplierText());
@@ -208,7 +208,7 @@ public class DamageTargetEffect extends OneShotEffect {
                 sb.append("that target");
             }
         }
-        if (phrasing == ValuePhrasing.LEGACY){
+        if (textPhrasing == ValuePhrasing.LEGACY){
             if (!message.isEmpty()) {
                 if (message.equals("1")) {
                     sb.append(" equal to the number of ");
@@ -222,7 +222,7 @@ public class DamageTargetEffect extends OneShotEffect {
                 sb.append(message);
             }
         } else if (!(amount instanceof StaticValue)) {
-            switch (phrasing) {
+            switch (textPhrasing) {
                 case X_IS:
                     sb.append(", where X is ");
                     break;
@@ -236,9 +236,9 @@ public class DamageTargetEffect extends OneShotEffect {
                     sb.append(" for each ");
                     break;
                 default:
-                    throw new IllegalArgumentException("ValuePhrasing enum not implemented: " + phrasing);
+                    throw new IllegalArgumentException("ValuePhrasing enum not implemented: " + textPhrasing);
             }
-            sb.append(amount.getMessage(phrasing));
+            sb.append(amount.getMessage(textPhrasing));
         }
         if (!preventable) {
             sb.append(". The damage can't be prevented");

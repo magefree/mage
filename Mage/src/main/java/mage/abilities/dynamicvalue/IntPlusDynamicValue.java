@@ -56,14 +56,14 @@ public class IntPlusDynamicValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        switch(phrasing){
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch(textPhrasing){
             case X_HIDDEN:
                 return "";
             case FOR_EACH:
                 throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in IntPlusDynamicValue");
             default:
-                return (useWord ? CardUtil.numberToText(baseValue) : baseValue) + " plus " + value.getMessage(phrasing);
+                return (useWord ? CardUtil.numberToText(baseValue) : baseValue) + " plus " + value.getMessage(textPhrasing);
         }
     }
 

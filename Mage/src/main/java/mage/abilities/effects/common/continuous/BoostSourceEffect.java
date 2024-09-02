@@ -50,8 +50,8 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
         return new BoostSourceEffect(this);
     }
 
-    public BoostSourceEffect usingPhrasing(ValuePhrasing phrasing){
-        this.staticText = sourceDescription + " gets " + CardUtil.getBoostText(power, toughness, duration, phrasing);
+    public BoostSourceEffect usingPhrasing(ValuePhrasing textPhrasing){
+        this.staticText = sourceDescription + " gets " + CardUtil.getBoostText(power, toughness, duration, textPhrasing);
         return this;
     }
 

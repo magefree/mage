@@ -68,8 +68,8 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        switch (phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
             case FOR_EACH:
                 return filter.getMessage() + " in your graveyard";
             case X_HIDDEN:

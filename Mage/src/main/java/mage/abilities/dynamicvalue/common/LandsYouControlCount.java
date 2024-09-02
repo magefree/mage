@@ -37,8 +37,8 @@ public enum LandsYouControlCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        switch (phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
             case FOR_EACH:
                 return "land you control";
             case X_HIDDEN:

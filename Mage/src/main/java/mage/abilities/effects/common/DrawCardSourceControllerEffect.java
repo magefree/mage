@@ -30,18 +30,18 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         this(amount, false);
     }
 
-    public DrawCardSourceControllerEffect(DynamicValue amount, ValuePhrasing phrasing) {
-        this(amount, false, phrasing);
+    public DrawCardSourceControllerEffect(DynamicValue amount, ValuePhrasing textPhrasing) {
+        this(amount, false, textPhrasing);
     }
 
     public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw) {
         this(amount, youDraw, ValuePhrasing.LEGACY);
     }
 
-    public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw, ValuePhrasing phrasing) {
+    public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw, ValuePhrasing textPhrasing) {
         super(Outcome.DrawCard);
         this.amount = amount.copy();
-        createStaticText(youDraw, phrasing);
+        createStaticText(youDraw, textPhrasing);
     }
 
     protected DrawCardSourceControllerEffect(final DrawCardSourceControllerEffect effect) {
@@ -65,8 +65,8 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         return false;
     }
 
-    private void createStaticText(boolean youDraw, ValuePhrasing phrasing) {
-        if (phrasing == ValuePhrasing.LEGACY){
+    private void createStaticText(boolean youDraw, ValuePhrasing textPhrasing) {
+        if (textPhrasing == ValuePhrasing.LEGACY){
             StringBuilder sb = new StringBuilder();
             if (youDraw){
                 sb.append("you draw ");
@@ -91,16 +91,16 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         String value = " a";
         if (amount instanceof StaticValue) {
             value = " " + CardUtil.numberToText(((StaticValue)amount).getValue(), "a");
-        } else if (phrasing == ValuePhrasing.X_IS || phrasing == ValuePhrasing.X_HIDDEN) {
+        } else if (textPhrasing == ValuePhrasing.X_IS || textPhrasing == ValuePhrasing.X_HIDDEN) {
             value = " X";
-        } else if (phrasing == ValuePhrasing.EQUAL_TO) {
+        } else if (textPhrasing == ValuePhrasing.EQUAL_TO) {
             value = "";
         } else if (amount instanceof MultipliedValue) {
             value = " " + ((MultipliedValue)amount).getMultiplierText();
         }
         sb.append(value).append(value.equals(" a") ? " card" : " cards");
         if (!(amount instanceof StaticValue)) {
-            switch (phrasing) {
+            switch (textPhrasing) {
                 case X_IS:
                     sb.append(", where X is ");
                     break;
@@ -114,9 +114,9 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
                     sb.append(" for each ");
                     break;
                 default:
-                    throw new IllegalArgumentException("ValuePhrasing enum not implemented: " + phrasing);
+                    throw new IllegalArgumentException("ValuePhrasing enum not implemented: " + textPhrasing);
             }
-            sb.append(amount.getMessage(phrasing));
+            sb.append(amount.getMessage(textPhrasing));
         }
         staticText = sb.toString();
     }

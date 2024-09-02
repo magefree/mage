@@ -79,7 +79,7 @@ enum CreaturesControlledByChosenPlayer implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
         return "the number of creatures the chosen player controls";
     }
 

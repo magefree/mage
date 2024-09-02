@@ -64,10 +64,10 @@ public class CountersSourceCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
         String optCounterName = counterType != null ? counterType.toString() + ' ' : "";
         // TODO: add option to use "it" instead of {this}
-        switch (phrasing) {
+        switch (textPhrasing) {
             case FOR_EACH:
                 return optCounterName + "counter on {this}";
             case X_HIDDEN:

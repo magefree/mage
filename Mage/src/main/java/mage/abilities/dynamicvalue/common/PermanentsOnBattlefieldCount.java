@@ -63,8 +63,8 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        switch (phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
             case FOR_EACH:
                 return filter.getMessage();
             case X_HIDDEN:

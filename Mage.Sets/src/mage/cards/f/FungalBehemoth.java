@@ -90,7 +90,7 @@ class P1P1CountersOnControlledCreaturesCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
         return "the number of +1/+1 counters on creatures you control";
     }
 }

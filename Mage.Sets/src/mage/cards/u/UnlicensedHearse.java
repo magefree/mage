@@ -62,7 +62,7 @@ enum UnlicensedHearseValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
         return "the number of cards exiled with it";
     }
 }

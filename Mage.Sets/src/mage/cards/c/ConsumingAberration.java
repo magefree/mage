@@ -118,8 +118,8 @@ class CardsInOpponentsGraveyardsCount implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        switch (phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
             case FOR_EACH:
                 return "card in your opponents' graveyards";
             case X_HIDDEN:

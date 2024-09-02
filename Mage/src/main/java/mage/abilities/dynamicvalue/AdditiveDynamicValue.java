@@ -51,14 +51,14 @@ public class AdditiveDynamicValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        switch(phrasing){
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch(textPhrasing){
             case X_HIDDEN:
                 return "";
             case FOR_EACH:
                 throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in AdditiveDynamicValue");
             default:
-                return this.dynamicValues.stream().map(dv -> dv.getMessage(phrasing)).collect(Collectors.joining(" plus "));
+                return this.dynamicValues.stream().map(dv -> dv.getMessage(textPhrasing)).collect(Collectors.joining(" plus "));
         }
     }
 

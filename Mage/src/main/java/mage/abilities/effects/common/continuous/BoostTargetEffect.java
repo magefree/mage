@@ -22,7 +22,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
-    private ValuePhrasing phrasing = ValuePhrasing.LEGACY;
+    private ValuePhrasing textPhrasing = ValuePhrasing.LEGACY;
 
     public BoostTargetEffect(int power, int toughness) {
         this(power, toughness, Duration.EndOfTurn);
@@ -46,7 +46,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();
-        this.phrasing = effect.phrasing;
+        this.textPhrasing = effect.textPhrasing;
     }
 
     @Override
@@ -54,8 +54,8 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         return new BoostTargetEffect(this);
     }
 
-    public BoostTargetEffect usingPhrasing(ValuePhrasing phrasing){
-        this.phrasing = phrasing;
+    public BoostTargetEffect usingPhrasing(ValuePhrasing textPhrasing){
+        this.textPhrasing = textPhrasing;
         return this;
     }
 
@@ -90,6 +90,6 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         }
         return getTargetPointer().describeTargets(mode.getTargets(), "it") +
                 (getTargetPointer().isPlural(mode.getTargets()) ? " each get " : " gets ") +
-                CardUtil.getBoostText(power, toughness, duration, phrasing);
+                CardUtil.getBoostText(power, toughness, duration, textPhrasing);
     }
 }

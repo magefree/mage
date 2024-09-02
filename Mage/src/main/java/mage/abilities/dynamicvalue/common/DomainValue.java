@@ -68,8 +68,8 @@ public enum DomainValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        switch (phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
             case FOR_EACH:
                 return "basic land type among lands " + (this == TARGET ? "they control" : "you control");
             case X_HIDDEN:

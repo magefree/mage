@@ -979,12 +979,12 @@ public final class CardUtil {
         return getBoostCountAsStr(power, toughness, true);
     }
 
-    public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration, ValuePhrasing phrasing) {
+    public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration, ValuePhrasing textPhrasing) {
         String boostCount;
-        if (phrasing == ValuePhrasing.LEGACY){
+        if (textPhrasing == ValuePhrasing.LEGACY){
             boostCount = getBoostCountAsStrLegacy(power, toughness);
         } else {
-            boostCount = getBoostCountAsStr(power, toughness, phrasing == ValuePhrasing.X_HIDDEN || phrasing == ValuePhrasing.X_IS);
+            boostCount = getBoostCountAsStr(power, toughness, textPhrasing == ValuePhrasing.X_HIDDEN || textPhrasing == ValuePhrasing.X_IS);
         }
         StringBuilder sb = new StringBuilder(boostCount);
         // don't include "for the rest of the game" for emblems, etc.
@@ -995,7 +995,7 @@ public final class CardUtil {
             }
         }
 
-        if (phrasing == ValuePhrasing.LEGACY) {
+        if (textPhrasing == ValuePhrasing.LEGACY) {
             String message = power.getMessage();
             if (message.isEmpty()) {
                 message = toughness.getMessage();
@@ -1007,7 +1007,7 @@ public final class CardUtil {
             if (!(power instanceof StaticValue) || !(toughness instanceof StaticValue)) {
                 String powerMessage;
                 String toughnessMessage;
-                switch (phrasing){
+                switch (textPhrasing){
                     case X_IS:
                         if (!boostCount.contains("X")) {
                             break;

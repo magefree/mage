@@ -99,7 +99,7 @@ class NonBasicLandsInOpponentsGraveyards implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
         return "the number of nonbasic land cards in your opponents' graveyards";
     }
 }

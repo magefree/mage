@@ -70,8 +70,8 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         return new BoostControlledEffect(this);
     }
 
-    public BoostControlledEffect usingPhrasing(ValuePhrasing phrasing) {
-        setText(phrasing);
+    public BoostControlledEffect usingPhrasing(ValuePhrasing textPhrasing) {
+        setText(textPhrasing);
         return this;
     }
 
@@ -114,7 +114,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private void setText(ValuePhrasing phrasing) {
+    private void setText(ValuePhrasing textPhrasing) {
         StringBuilder sb = new StringBuilder();
         String message = filter.getMessage().toLowerCase(Locale.ENGLISH);
         boolean each = message.startsWith("each");
@@ -126,7 +126,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
             sb.append(" you control");
         }
         sb.append(each ? " gets " : " get ");
-        sb.append(CardUtil.getBoostText(power, toughness, duration, phrasing));
+        sb.append(CardUtil.getBoostText(power, toughness, duration, textPhrasing));
         staticText = sb.toString();
     }
 

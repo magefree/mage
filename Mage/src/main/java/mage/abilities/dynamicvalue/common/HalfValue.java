@@ -49,15 +49,15 @@ public class HalfValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        switch (phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
             case FOR_EACH:
                 throw new IllegalArgumentException("FOR_EACH phrasing generation not supported for HalfValue");
             case X_HIDDEN:
                 return "";
             default:
                 StringBuilder sb = new StringBuilder();
-                sb.append("half ").append(value.getMessage(phrasing));
+                sb.append("half ").append(value.getMessage(textPhrasing));
                 if (roundedUp) {
                     sb.append(", rounded up");
                 } else {

@@ -77,7 +77,7 @@ class SoullessOneDynamicCount implements DynamicValue {
     }
     
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
+    public String getMessage(ValuePhrasing textPhrasing) {
         return "the number of Zombies on the battlefield plus the number of Zombie cards in all graveyards";
     }
 

@@ -51,8 +51,8 @@ public class LockedInDynamicValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage(ValuePhrasing phrasing) {
-        return basicDynamicValue.getMessage(phrasing);
+    public String getMessage(ValuePhrasing textPhrasing) {
+        return basicDynamicValue.getMessage(textPhrasing);
     }
 
     @Override

@@ -32,7 +32,7 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
      *      vs
      *      "the sacrificed creature's power" (non-discreet)
      */
-    default String getMessage(ValuePhrasing phrasing){
+    default String getMessage(ValuePhrasing textPhrasing){
         // TODO: this will lose its default status once all DynamicValue implementations have been converted
         return getMessage();
     }
