@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -117,10 +117,10 @@ class ArthurMarigoldKnightEffect extends OneShotEffect {
         }
         game.getCombat().addAttackingCreature(permanent.getId(), game);
         cards.remove(card);
-        // Return to Hand at end of turn
+        // Return to Hand at end of combat
         Effect returnToHandEffect = new ReturnToHandTargetEffect();
         returnToHandEffect.setTargetPointer(new FixedTarget(permanent, game));
-        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandEffect);
+        DelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(returnToHandEffect);
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return player.putCardsOnBottomOfLibrary(cards, game, source, false);
     }
