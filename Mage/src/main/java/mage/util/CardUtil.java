@@ -889,6 +889,15 @@ public final class CardUtil {
         }
     }
 
+    // TODO: remove, switch all uses to getBoostCountAsStr
+    /**
+     * Returns the "+X/+X", "+1/+0", "+X/-X" part of boost strings
+     * @deprecated use getBoostCountAsStr is possible
+     *
+     * @param power
+     * @param toughness
+     * @return
+     */
     public static String getBoostCountAsStrLegacy(DynamicValue power, DynamicValue toughness) {
         // sign fix for zero values
         // -1/+0 must be -1/-0
@@ -908,6 +917,16 @@ public final class CardUtil {
         return getBoostCountAsStrLegacy(StaticValue.get(power), StaticValue.get(toughness));
     }
 
+    /**
+     * Returns the "+X/+X", "+1/+0", "+X/+Y", "+X/-X" part of boost strings
+     * This uses the new DynamicValue scheme
+     *
+     * @param power
+     * @param toughness
+     * @param useX true when X/Y variables should be used, false if (+/-)1/(+/-)1 should be used.
+     *             Does not affect parsing of instances of StaticValue
+     * @return
+     */
     public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness, boolean useX) {
 
         String p = useX ? "X" : "1";
