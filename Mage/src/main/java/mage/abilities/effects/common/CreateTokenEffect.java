@@ -90,6 +90,7 @@ public class CreateTokenEffect extends OneShotEffect {
 
     public CreateTokenEffect withAdditionalTokens(Token... tokens) {
         this.tokens.addAll(Arrays.asList(tokens));
+        setText();
         return this;
     }
 
