@@ -53,7 +53,7 @@ public class HelgaSkittishSeer extends CardImpl {
                 new DrawCardSourceControllerEffect(1, true), filter, false
         );
         ability.addEffect(new GainLifeEffect(1).setText(", gain 1 life"));
-        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy("and"));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy(", and"));
 
         this.addAbility(ability);
 
@@ -72,12 +72,13 @@ public class HelgaSkittishSeer extends CardImpl {
     }
 
     @Override
-    public HelgaSkittishSeer copy(){
+    public HelgaSkittishSeer copy() {
         return new HelgaSkittishSeer(this);
     }
 }
 
-class HelgaSkittishSeerManaBuilder extends ConditionalManaBuilder{
+class HelgaSkittishSeerManaBuilder extends ConditionalManaBuilder {
+
     @Override
     public ConditionalMana build(Object... options){
         return new HelgaSkittishSeerConditionalMana(this.mana);
@@ -91,7 +92,7 @@ class HelgaSkittishSeerManaBuilder extends ConditionalManaBuilder{
 
 class HelgaSkittishSeerConditionalMana extends ConditionalMana {
 
-    HelgaSkittishSeerConditionalMana(Mana mana){
+    HelgaSkittishSeerConditionalMana(Mana mana) {
         super(mana);
         staticText = "Spend this mana only to cast creature spells with mana value 4 or greater or creature spells with {X} in their mana costs";
         addCondition(new HelgaSkittishSeerManaCondition());
@@ -116,8 +117,8 @@ class HelgaSkittishSeerManaCondition extends CreatureCastManaCondition {
 
 class HelgaSkittishSeerManaEffect extends ManaEffect {
 
-    ConditionalManaBuilder manaBuilder = new HelgaSkittishSeerManaBuilder();
-    DynamicValue power;
+    private final ConditionalManaBuilder manaBuilder = new HelgaSkittishSeerManaBuilder();
+    private final DynamicValue power;
 
     HelgaSkittishSeerManaEffect(DynamicValue power) {
         this.power = power;
@@ -133,7 +134,7 @@ class HelgaSkittishSeerManaEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         if (game != null){
-            int currentPower = calculatePower(game, source);
+            int currentPower = power.calculate(game, source, this);
             netMana.add(manaBuilder.setMana(Mana.BlackMana(currentPower), source, game).build());
             netMana.add(manaBuilder.setMana(Mana.BlueMana(currentPower), source, game).build());
             netMana.add(manaBuilder.setMana(Mana.RedMana(currentPower), source, game).build());
@@ -155,14 +156,10 @@ class HelgaSkittishSeerManaEffect extends ManaEffect {
             if (!controller.choose(Outcome.PutManaInPool, choice, game)){
                 return mana;
             }
-            Mana chosen = choice.getMana(calculatePower(game, source));
+            Mana chosen = choice.getMana(power.calculate(game, source, this));
             return manaBuilder.setMana(chosen, source, game).build();
         }
         return mana;
-    }
-
-    private int calculatePower(Game game, Ability source){
-        return power.calculate(game, source, this);
     }
 
     @Override

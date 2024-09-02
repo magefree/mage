@@ -52,7 +52,8 @@ public final class TheOddAcornGang extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Squirrels you control have "{T}: Target Squirrel gets +2/+2 and gains trample until end of turn. Activate only as a sorcery."
-        Ability ability = new ActivateAsSorceryActivatedAbility(new BoostTargetEffect(2, 2), new TapSourceCost());
+        Ability ability = new ActivateAsSorceryActivatedAbility(new BoostTargetEffect(2, 2)
+                .setText("Target Squirrel gets +2/+2"), new TapSourceCost());
         ability.addEffect(
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
                         .setText("and gains trample until end of turn")

@@ -28,7 +28,7 @@ import mage.game.permanent.token.SquirrelToken;
 public final class CamelliaTheSeedmiser extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterSquirrels =
-            new FilterControlledCreaturePermanent("Squirrels");
+            new FilterControlledCreaturePermanent("other Squirrel you control");
 
 
     static {

@@ -55,7 +55,8 @@ public final class ForgeNeverwinterCharlatan extends CardImpl {
 
         // Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token. This ability triggers only once each turn.
         this.addAbility(new SacrificeOneOrMorePermanentsTriggeredAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new TreasureToken(), 1, true),
+                new CreateTokenEffect(new TreasureToken(), 1, true)
+                        .setText("you create a tapped Treasure token"),
                 new FilterCreaturePermanent("creatures"), TargetController.ANY, SetTargetPointer.NONE, false
         ).setTriggersLimitEachTurn(1));
     }

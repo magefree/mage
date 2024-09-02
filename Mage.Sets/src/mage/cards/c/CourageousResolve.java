@@ -163,7 +163,7 @@ class CourageousResolveWinLoseEffect extends ContinuousRuleModifyingEffectImpl {
 
     CourageousResolveWinLoseEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, true);
-        staticText = " you can't lose the game this turn, and your opponents can't win the game this turn.";
+        staticText = "you can't lose the game this turn, and your opponents can't win the game this turn.";
     }
 
     private CourageousResolveWinLoseEffect(final CourageousResolveWinLoseEffect effect) {
