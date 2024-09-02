@@ -61,6 +61,7 @@ public class MultipliedValue implements DynamicValue {
         return sb.append(value).toString();
     }
 
+    @Override
     public String getMessage() {
         return value.getMessage();
     }

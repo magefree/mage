@@ -25,6 +25,7 @@ public class DeckValidatorError {
         return this.group;
     }
 
+    @Override
     public String getMessage() {
         return this.message;
     }

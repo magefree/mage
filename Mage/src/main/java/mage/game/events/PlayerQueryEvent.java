@@ -235,6 +235,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         return new PlayerQueryEvent(playerId, message);
     }
 
+    @Override
     public String getMessage() {
         return message;
     }

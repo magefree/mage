@@ -108,6 +108,7 @@ public class GameClientMessage implements Serializable {
         return cardsView2;
     }
 
+    @Override
     public String getMessage() {
         return message;
     }

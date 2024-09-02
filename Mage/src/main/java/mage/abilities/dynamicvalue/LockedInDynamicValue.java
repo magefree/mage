@@ -45,6 +45,7 @@ public class LockedInDynamicValue implements DynamicValue {
         return new LockedInDynamicValue(this, true);
     }
 
+    @Override
     public String getMessage() {
         return basicDynamicValue.getMessage();
     }

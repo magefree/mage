@@ -44,6 +44,7 @@ public class AdditiveDynamicValue implements DynamicValue {
         return new AdditiveDynamicValue(this.dynamicValues);
     }
 
+    @Override
     public String getMessage() {
         return this.dynamicValues.stream().map(DynamicValue::getMessage).collect(Collectors.joining(" "));
     }
