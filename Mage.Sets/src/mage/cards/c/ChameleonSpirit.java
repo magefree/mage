@@ -83,6 +83,11 @@ enum PermanentsOfTheChosenColorOpponentsControlCount implements DynamicValue {
     }
 
     @Override
+    public String getMessage() {
+        return "";
+    }
+
+    @Override
     public String getMessage(ValuePhrasing phrasing) {
         return "the number of permanents of the chosen color your opponents control";
     }

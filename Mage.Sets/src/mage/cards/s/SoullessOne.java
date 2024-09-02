@@ -70,6 +70,11 @@ class SoullessOneDynamicCount implements DynamicValue {
     public SoullessOneDynamicCount copy() {
         return new SoullessOneDynamicCount();
     }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
     
     @Override
     public String getMessage(ValuePhrasing phrasing) {

@@ -65,6 +65,11 @@ class MostCardsInOpponentsHandCount implements DynamicValue {
     }
 
     @Override
+    public String getMessage() {
+        return "";
+    }
+
+    @Override
     public String getMessage(ValuePhrasing phrasing) {
         return "the number of cards in the hand of the opponent with the most cards in hand";
     }

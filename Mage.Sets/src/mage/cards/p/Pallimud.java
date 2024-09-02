@@ -76,6 +76,11 @@ class PallimudCount implements DynamicValue {
     }
 
     @Override
+    public String getMessage() {
+        return "";
+    }
+
+    @Override
     public String getMessage(ValuePhrasing phrasing) {
         return "the number of tapped lands the chosen player controls";
     }

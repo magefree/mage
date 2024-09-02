@@ -74,6 +74,11 @@ class AwakenedAmalgamLandNamesCount implements DynamicValue {
     }
 
     @Override
+    public String getMessage() {
+        return "";
+    }
+
+    @Override
     public String getMessage(ValuePhrasing phrasing) {
         return "the number of differently named lands you control";
     }

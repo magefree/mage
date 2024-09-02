@@ -47,6 +47,11 @@ public class SignInversionDynamicValue implements DynamicValue {
     }
 
     @Override
+    public String getMessage() {
+        return value.getMessage();
+    }
+
+    @Override
     public String getMessage(ValuePhrasing phrasing) {
         return value.getMessage(phrasing);
     }

@@ -72,6 +72,11 @@ class CardsInTargetOpponentsGraveyardCount implements DynamicValue {
     }
 
     @Override
+    public String getMessage() {
+        return "";
+    }
+
+    @Override
     public String getMessage(ValuePhrasing phrasing) {
         return "the number of cards in the chosen player's graveyard";
     }

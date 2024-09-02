@@ -90,6 +90,11 @@ enum SunbirdEffigyValue implements DynamicValue {
     }
 
     @Override
+    public String getMessage() {
+        return "";
+    }
+
+    @Override
     public String getMessage(ValuePhrasing phrasing) {
         return "the number of colors among the exiled cards used to craft it";
     }

@@ -37,6 +37,18 @@ public class HalfValue implements DynamicValue {
     }
 
     @Override
+    public String getMessage() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("half ").append(value.getMessage());
+        if (roundedUp) {
+            sb.append(", rounded up");
+        } else {
+            sb.append(", rounded down");
+        }
+        return sb.toString();
+    }
+
+    @Override
     public String getMessage(ValuePhrasing phrasing) {
         switch (phrasing) {
             case FOR_EACH:

@@ -20,10 +20,7 @@ public interface DynamicValue extends Serializable, Copyable<DynamicValue> {
     DynamicValue copy();
 
     // TODO: this will be removed once all DynamicValue implementations have been converted
-    // WARNING: You must override at least one getMessage in a DynamicValue implementation, otherwise these will loop infinitely.
-    default String getMessage(){
-        return getMessage(ValuePhrasing.LEGACY);
-    }
+    String getMessage();
 
     /**
      *
