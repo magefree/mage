@@ -671,7 +671,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
 
         // normal mana
-        if (colorless < 20) {
+        if (colorless < 6) {
             for (int i = 0; i < colorless; i++) {
                 sbMana.append("{C}");
             }

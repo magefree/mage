@@ -71,13 +71,13 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
     }
 
     private String generateTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever one or more " + this.filterPermanent.getMessage() + " enter the battlefield under ");
+        StringBuilder sb = new StringBuilder("Whenever one or more " + this.filterPermanent.getMessage());
         switch (targetController) {
             case YOU:
-                sb.append("your control, ");
+                sb.append(" you control enter, ");
                 break;
             case OPPONENT:
-                sb.append("an opponent's control, ");
+                sb.append(" enter under an opponent's control, ");
                 break;
             default:
                 throw new UnsupportedOperationException();

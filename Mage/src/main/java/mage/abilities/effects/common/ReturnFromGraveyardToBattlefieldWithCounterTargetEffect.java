@@ -49,17 +49,18 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
 
     private String makeText(Counter counter, boolean additional) {
         StringBuilder sb = new StringBuilder(" with ");
-        if (additional) {
-            sb.append(CardUtil.numberToText(counter.getCount(), "an"));
-            sb.append(" additional");
+        if (counter.getCount() == 1) {
+            if (additional) {
+                sb.append("an additional ").append(counter.getName());
+            } else {
+                sb.append(CardUtil.addArticle(counter.getName()));
+            }
+            sb.append(" counter");
         } else {
-            sb.append(CardUtil.numberToText(counter.getCount(), "a"));
-        }
-        sb.append(' ');
-        sb.append(counter.getName());
-        sb.append(" counter");
-        if (counter.getCount() != 1) {
-            sb.append('s');
+            sb.append(CardUtil.numberToText(counter.getCount()));
+            sb.append(additional ? " additional" : " ");
+            sb.append(counter.getName());
+            sb.append(" counters");
         }
         return sb.toString();
     }
