@@ -120,7 +120,6 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
         return eventType;
     }
 
-    @Override
     public String getMessage() {
         return message;
     }

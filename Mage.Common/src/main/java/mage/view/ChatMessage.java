@@ -50,7 +50,6 @@ public class ChatMessage implements Serializable {
         this.soundToPlay = soundToPlay;
     }
 
-    @Override
     public String getMessage() {
         return message;
     }

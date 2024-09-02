@@ -67,7 +67,6 @@ public class AbilityPickerView implements Serializable {
         return choices;
     }
 
-    @Override
     public String getMessage() {
         return message;
     }

@@ -144,7 +144,6 @@ public class DownloadJob extends AbstractLaternaBean {
         return error.getValue();
     }
 
-    @Override
     public String getMessage() {
         return message.getValue();
     }

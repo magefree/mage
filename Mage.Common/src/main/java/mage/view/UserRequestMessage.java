@@ -86,7 +86,6 @@ public class UserRequestMessage implements Serializable {
         return serialVersionUID;
     }
 
-    @Override
     public String getMessage() {
         return message;
     }

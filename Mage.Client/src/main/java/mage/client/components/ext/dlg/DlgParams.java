@@ -68,7 +68,6 @@ public class DlgParams {
 
     private String message;
 
-    @Override
     public String getMessage() {
         return message;
     }

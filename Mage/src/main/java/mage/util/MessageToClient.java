@@ -24,7 +24,6 @@ public class MessageToClient {
         this.hintText = hintText;
     }
 
-    @Override
     public String getMessage() {
         return message;
     }

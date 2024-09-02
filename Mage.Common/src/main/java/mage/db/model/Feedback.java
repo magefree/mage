@@ -68,7 +68,6 @@ public class Feedback {
         this.type = type;
     }
 
-    @Override
     public String getMessage() {
         return message;
     }
