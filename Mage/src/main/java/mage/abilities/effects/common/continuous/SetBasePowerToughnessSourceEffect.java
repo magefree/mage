@@ -155,7 +155,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
             sb.append("equal to ").append(powerMessage);
             if (!toughnessMessage.equals(powerMessage)) {
                 if (indefiniteDuration) {
-                    sb.append("and {this}'s toughness is equal to ").append(toughnessMessage);
+                    sb.append("and its toughness is equal to ").append(toughnessMessage);
                 } else {
                     sb.append("and toughness equal to ").append(toughnessMessage);
                 }
