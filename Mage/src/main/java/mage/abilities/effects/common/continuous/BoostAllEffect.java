@@ -99,7 +99,7 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         return new BoostAllEffect(this);
     }
 
-    public BoostAllEffect usingPhrasing(ValuePhrasing textPhrasing) {
+    public BoostAllEffect usingTextPhrasing(ValuePhrasing textPhrasing) {
         setText(textPhrasing);
         return this;
     }

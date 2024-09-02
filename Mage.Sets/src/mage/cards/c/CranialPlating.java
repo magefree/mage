@@ -32,7 +32,7 @@ public final class CranialPlating extends CardImpl {
 
         // Equipped creature gets +1/+0 for each artifact you control.
         this.addAbility(new SimpleStaticAbility(
-                new BoostEquippedEffect(ArtifactYouControlCount.instance, StaticValue.get(0)).usingPhrasing(ValuePhrasing.FOR_EACH)
+                new BoostEquippedEffect(ArtifactYouControlCount.instance, StaticValue.get(0)).usingTextPhrasing(ValuePhrasing.FOR_EACH)
         ).addHint(ArtifactYouControlHint.instance));
 
         // {B}{B}: Attach Cranial Plating to target creature you control.
