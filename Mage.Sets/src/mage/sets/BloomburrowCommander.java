@@ -295,6 +295,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 345, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Tetsuko Umezawa, Fugitive", 177, Rarity.UNCOMMON, mage.cards.t.TetsukoUmezawaFugitive.class));
         cards.add(new SetCardInfo("The Gitrog Monster", 88, Rarity.MYTHIC, mage.cards.t.TheGitrogMonster.class));
+        cards.add(new SetCardInfo("The Odd Acorn Gang", 7, Rarity.MYTHIC, mage.cards.t.TheOddAcornGang.class));
         cards.add(new SetCardInfo("Thopter Engineer", 204, Rarity.UNCOMMON, mage.cards.t.ThopterEngineer.class));
         cards.add(new SetCardInfo("Thought Vessel", 289, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Thran Dynamo", 290, Rarity.UNCOMMON, mage.cards.t.ThranDynamo.class));
