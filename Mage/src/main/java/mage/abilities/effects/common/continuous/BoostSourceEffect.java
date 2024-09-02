@@ -16,33 +16,33 @@ import mage.util.CardUtil;
 public class BoostSourceEffect extends ContinuousEffectImpl {
     private DynamicValue power;
     private DynamicValue toughness;
-    private final String description;
+    private final String sourceDescription;
 
     public BoostSourceEffect(int power, int toughness, Duration duration) {
         this(power, toughness, duration, "{this}");
     }
 
-    public BoostSourceEffect(int power, int toughness, Duration duration, String description) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, description);
+    public BoostSourceEffect(int power, int toughness, Duration duration, String sourceDescription) {
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, sourceDescription);
     }
 
     public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
         this(power, toughness, duration, "{this}");
     }
 
-    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, String description) {
+    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, String sourceDescription) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
-        this.description = description;
-        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration, ValuePhrasing.LEGACY);
+        this.sourceDescription = sourceDescription;
+        this.staticText = sourceDescription + " gets " + CardUtil.getBoostText(power, toughness, duration, ValuePhrasing.LEGACY);
     }
 
     protected BoostSourceEffect(final BoostSourceEffect effect) {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();
-        this.description = effect.description;
+        this.sourceDescription = effect.sourceDescription;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
     }
 
     public BoostSourceEffect usingPhrasing(ValuePhrasing phrasing){
-        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration, phrasing);
+        this.staticText = sourceDescription + " gets " + CardUtil.getBoostText(power, toughness, duration, phrasing);
         return this;
     }
 
