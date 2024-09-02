@@ -55,6 +55,7 @@ public enum AbilityWord {
     SECRET_COUNCIL("Secret council"),
     SPELL_MASTERY("Spell mastery"),
     STRIVE("Strive"),
+    SURVIVOR("Survivor"),
     SWEEP("Sweep"),
     TEMPTING_OFFER("Tempting offer"),
     THRESHOLD("Threshold"),
