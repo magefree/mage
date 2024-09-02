@@ -137,7 +137,7 @@ class PanopticProjektorReplacementEffect extends ReplacementEffectImpl {
 
     PanopticProjektorReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a Wizard entering the battlefield under your control causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
+        staticText = "If turning a face-down permanent face up causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
     }
 
     private PanopticProjektorReplacementEffect(final PanopticProjektorReplacementEffect effect) {
