@@ -15,15 +15,15 @@ public class BoostCountTest {
 
     @Test
     public void test_BoostCountSigns() {
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(0, 0), "+0/+0");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(1, 0), "+1/+0");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(0, 1), "+0/+1");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(1, 1), "+1/+1");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(0, 0), "+0/+0");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(1, 0), "+1/+0");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(0, 1), "+0/+1");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(1, 1), "+1/+1");
 
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(-1, 0), "-1/-0");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(0, -1), "-0/-1");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(-1, 1), "-1/+1");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(1, -1), "+1/-1");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(-1, 0), "-1/-0");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(0, -1), "-0/-1");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(-1, 1), "-1/+1");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(1, -1), "+1/-1");
     }
 
     @Test
@@ -32,12 +32,12 @@ public class BoostCountTest {
         DynamicValue plusX = GetXValue.instance;
         DynamicValue minusX = new SignInversionDynamicValue(plusX);
 
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(plusX, zero), "+X/+0");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(zero, plusX), "+0/+X");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(plusX, plusX), "+X/+X");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(minusX, zero), "-X/-0");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(zero, minusX), "-0/-X");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(minusX, plusX), "-X/+X");
-        Assert.assertEquals(CardUtil.getBoostCountAsStr(plusX, minusX), "+X/-X");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(plusX, zero), "+X/+0");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(zero, plusX), "+0/+X");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(plusX, plusX), "+X/+X");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(minusX, zero), "-X/-0");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(zero, minusX), "-0/-X");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(minusX, plusX), "-X/+X");
+        Assert.assertEquals(CardUtil.getBoostCountAsStrLegacy(plusX, minusX), "+X/-X");
     }
 }

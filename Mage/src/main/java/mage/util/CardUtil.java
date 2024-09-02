@@ -889,7 +889,7 @@ public final class CardUtil {
         }
     }
 
-    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness) {
+    public static String getBoostCountAsStrLegacy(DynamicValue power, DynamicValue toughness) {
         // sign fix for zero values
         // -1/+0 must be -1/-0
         // +0/-1 must be -0/-1
@@ -904,11 +904,11 @@ public final class CardUtil {
         return p + "/" + t;
     }
 
-    public static String getBoostCountAsStr(int power, int toughness) {
-        return getBoostCountAsStr(StaticValue.get(power), StaticValue.get(toughness));
+    public static String getBoostCountAsStrLegacy(int power, int toughness) {
+        return getBoostCountAsStrLegacy(StaticValue.get(power), StaticValue.get(toughness));
     }
 
-    public static String getBoostCountAsStr_phrasing(DynamicValue power, DynamicValue toughness, boolean useX) {
+    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness, boolean useX) {
 
         String p = useX ? "X" : "1";
 
@@ -925,6 +925,8 @@ public final class CardUtil {
         // If two DynamicValue implementations have the same message, assume they're the same.
         // Can't check classes for comparison, since decorator classes will make two different DynamicValues with the
         // same decorator look like the same value.
+        // Additionally, if the same DynamicValue is passed in under different decorators (or one having no decorator while the other one does),
+        // they should use the same variable name
         boolean sameMessage = toughness.getMessage(ValuePhrasing.X_IS).equals(power.getMessage(ValuePhrasing.X_IS));
 
         if (useX && p.contains("X") && !sameMessage){
@@ -950,20 +952,20 @@ public final class CardUtil {
         return p + "/" + t;
     }
 
-    public static String getBoostCountAsStr_phrasing(int power, int toughness) {
-        return getBoostCountAsStr_phrasing(StaticValue.get(power), StaticValue.get(toughness), false);
+    public static String getBoostCountAsStr(int power, int toughness) {
+        return getBoostCountAsStr(StaticValue.get(power), StaticValue.get(toughness), false);
     }
 
-    public static String getBoostCountAsStr_phrasing(DynamicValue power, DynamicValue toughness) {
-        return getBoostCountAsStr_phrasing(power, toughness, true);
+    public static String getBoostCountAsStr(DynamicValue power, DynamicValue toughness) {
+        return getBoostCountAsStr(power, toughness, true);
     }
 
     public static String getBoostText(DynamicValue power, DynamicValue toughness, Duration duration, ValuePhrasing phrasing) {
         String boostCount;
         if (phrasing == ValuePhrasing.LEGACY){
-            boostCount = getBoostCountAsStr(power, toughness);
+            boostCount = getBoostCountAsStrLegacy(power, toughness);
         } else {
-            boostCount = getBoostCountAsStr_phrasing(power, toughness, phrasing == ValuePhrasing.X_HIDDEN || phrasing == ValuePhrasing.X_IS);
+            boostCount = getBoostCountAsStr(power, toughness, phrasing == ValuePhrasing.X_HIDDEN || phrasing == ValuePhrasing.X_IS);
         }
         StringBuilder sb = new StringBuilder(boostCount);
         // don't include "for the rest of the game" for emblems, etc.
