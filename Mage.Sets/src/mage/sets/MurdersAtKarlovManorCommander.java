@@ -198,6 +198,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Advokist", 77, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Otherworldly Gaze", 115, Rarity.COMMON, mage.cards.o.OtherworldlyGaze.class));
         cards.add(new SetCardInfo("Overseer of the Damned", 132, Rarity.RARE, mage.cards.o.OverseerOfTheDamned.class));
+        cards.add(new SetCardInfo("Panoptic Projektor", 44, Rarity.RARE, mage.cards.p.PanopticProjektor.class));
         cards.add(new SetCardInfo("Path of Ancestry", 279, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 78, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Phyrexian Arena", 133, Rarity.RARE, mage.cards.p.PhyrexianArena.class));
