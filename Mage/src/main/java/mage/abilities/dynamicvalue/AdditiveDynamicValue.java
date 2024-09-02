@@ -5,6 +5,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.hint.ValueHint;
 import mage.constants.ValuePhrasing;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -63,6 +64,6 @@ public class AdditiveDynamicValue implements DynamicValue {
 
     @Override
     public ValueHint getValueHint() {
-        return new ValueHint("total", this);
+        return new ValueHint(CardUtil.getTextWithFirstCharUpperCase(getMessage(ValuePhrasing.EQUAL_TO)), this);
     }
 }
