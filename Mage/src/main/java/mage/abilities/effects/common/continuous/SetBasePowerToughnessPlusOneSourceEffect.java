@@ -28,7 +28,7 @@ public class SetBasePowerToughnessPlusOneSourceEffect extends SetBasePowerToughn
         return new SetBasePowerToughnessPlusOneSourceEffect(this);
     }
 
-    void setStaticText(DynamicValue amount) {
+    private void setStaticText(DynamicValue amount) {
 
         StringBuilder sb = new StringBuilder("{this}'s power is ");
 

@@ -107,7 +107,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    void setStaticText(Duration duration) {
+    private void setStaticText(Duration duration) {
 
         if (power == null){
             staticText = getSingleStatText(toughness, "toughness", duration);
