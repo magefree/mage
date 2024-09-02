@@ -137,7 +137,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         }
 
         if (power instanceof StaticValue) {
-            // Assume that if one is static, the other is static too
+            // If one is static, the other is static too (static/null value combinations dealt with above)
             sb.append(((StaticValue)power).getValue()).append("/").append(((StaticValue)toughness).getValue());
             sb.append(" ");
         } else {
