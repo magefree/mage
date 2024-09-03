@@ -53,8 +53,8 @@ class MockingbirdEffect extends OneShotEffect {
 
     MockingbirdEffect() {
         super(Outcome.Benefit);
-        staticText = "as a copy of any creature on the battlefield with mana value less than or equal to the mana " +
-                "spent to cast Mockingbird, except it is a Bird in addition to its other types and has flying.";
+        staticText = "as a copy of any creature on the battlefield with mana value less than or equal to the amount of mana " +
+                "spent to cast {this}, except it's a Bird in addition to its other types and has flying.";
     }
 
     private MockingbirdEffect(final MockingbirdEffect effect) {

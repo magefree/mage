@@ -55,6 +55,7 @@ public final class RuskoClockmaker extends CardImpl {
         );
         ability.addEffect(new LoseLifeOpponentsEffect(1));
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
+        this.addAbility(ability);
     }
 
     private RuskoClockmaker(final RuskoClockmaker card) {

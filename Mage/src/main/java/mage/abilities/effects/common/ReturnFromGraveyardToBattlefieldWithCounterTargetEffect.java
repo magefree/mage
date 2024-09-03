@@ -58,7 +58,7 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
             sb.append(" counter");
         } else {
             sb.append(CardUtil.numberToText(counter.getCount()));
-            sb.append(additional ? " additional" : " ");
+            sb.append(additional ? " additional " : " ");
             sb.append(counter.getName());
             sb.append(" counters");
         }

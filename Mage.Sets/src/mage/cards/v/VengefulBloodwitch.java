@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -27,7 +28,8 @@ public final class VengefulBloodwitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever this creature or another creature you control dies, target opponent loses 1 life and you gain 1 life.
-        Ability ability = new DiesThisOrAnotherTriggeredAbility(new LoseLifeTargetEffect(1), false);
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(new LoseLifeTargetEffect(1), false,
+                StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

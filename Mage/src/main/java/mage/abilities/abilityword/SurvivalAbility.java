@@ -24,7 +24,7 @@ public class SurvivalAbility extends TriggeredAbilityImpl {
     public SurvivalAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         setTriggerPhrase("At the beginning of your second main phase, if {this} is tapped, ");
-        setAbilityWord(AbilityWord.SURVIVOR);
+        setAbilityWord(AbilityWord.SURVIVAL);
     }
 
     private SurvivalAbility(final SurvivalAbility ability) {

@@ -21,7 +21,7 @@ public enum EnergySpentOrLostThisTurnCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "{E} spent or lost this turn";
+        return "{E} you've paid or lost this turn";
     }
 
     @Override

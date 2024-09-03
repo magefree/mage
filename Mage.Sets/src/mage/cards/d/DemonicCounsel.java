@@ -33,7 +33,7 @@ public final class DemonicCounsel extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false),
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
-                DeliriumCondition.instance, "earch your library for a Demon card, reveal it, " +
+                DeliriumCondition.instance, "search your library for a Demon card, reveal it, " +
                 "put it into your hand, then shuffle.<br>" + AbilityWord.DELIRIUM.formatWord() +
                 "If there are four or more card types among cards in your graveyard, " +
                 "instead search your library for any card, put it into your hand, then shuffle."

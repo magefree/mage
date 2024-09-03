@@ -676,7 +676,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 sbMana.append("{C}");
             }
         } else {
-            sbMana.append(colorless).append("{C}");
+            sbMana.append(CardUtil.numberToText(colorless)).append(" {C}");
         }
 
         String colorsInOrder = getColorsInOrder();
