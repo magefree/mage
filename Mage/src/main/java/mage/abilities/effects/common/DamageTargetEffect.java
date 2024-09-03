@@ -163,18 +163,32 @@ public class DamageTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
-        if (textPhrasing == ValuePhrasing.LEGACY){
-            if (!message.equals("1")) {
-                sb.append(amount);
-            }
-        } else if (amount instanceof StaticValue) {
+        if (amount instanceof StaticValue) {
             sb.append(((StaticValue)amount).getValue());
-        } else if (textPhrasing == ValuePhrasing.X_IS || textPhrasing == ValuePhrasing.X_HIDDEN) {
-            sb.append("X");
-        } else if (textPhrasing == ValuePhrasing.EQUAL_TO) {
-            // do nothing
-        } else if (amount instanceof MultipliedValue) {
-            sb.append(((MultipliedValue)amount).getMultiplierText());
+        } else {
+            switch (textPhrasing){
+                case LEGACY:
+                    if (!message.equals("1")) {
+                        sb.append(amount);
+                    }
+                    break;
+                case X_HIDDEN:
+                case X_IS:
+                    sb.append("X");
+                    break;
+                case EQUAL_TO:
+                    // do nothing
+                    break;
+                case FOR_EACH:
+                    if (amount instanceof MultipliedValue) {
+                        sb.append(((MultipliedValue)amount).getMultiplierText());
+                    } else {
+                        sb.append("1");
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Phrasing " + textPhrasing + " is not supported in DamageTargetEffect");
+            }
         }
         if (!sb.toString().endsWith(" ")) {
             sb.append(' ');

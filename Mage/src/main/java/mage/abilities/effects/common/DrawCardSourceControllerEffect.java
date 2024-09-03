@@ -88,15 +88,30 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder(youDraw ? "you " : "");
         sb.append("draw");
-        String value = " a";
+        String value;
         if (amount instanceof StaticValue) {
             value = " " + CardUtil.numberToText(((StaticValue)amount).getValue(), "a");
-        } else if (textPhrasing == ValuePhrasing.X_IS || textPhrasing == ValuePhrasing.X_HIDDEN) {
-            value = " X";
-        } else if (textPhrasing == ValuePhrasing.EQUAL_TO) {
-            value = "";
-        } else if (amount instanceof MultipliedValue) {
-            value = " " + ((MultipliedValue)amount).getMultiplierText();
+        } else {
+            switch (textPhrasing){
+//                case LEGACY: // Unreachable due to above check
+//                    break;
+                case X_HIDDEN:
+                case X_IS:
+                    value = " X";
+                    break;
+                case EQUAL_TO:
+                    value = "";
+                    break;
+                case FOR_EACH:
+                    if (amount instanceof MultipliedValue) {
+                        value = " " + ((MultipliedValue)amount).getMultiplierText();
+                    } else {
+                        value = " a";
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Phrasing " + textPhrasing + " is not supported in DamageTargetEffect");
+            }
         }
         sb.append(value).append(value.equals(" a") ? " card" : " cards");
         if (!(amount instanceof StaticValue)) {
