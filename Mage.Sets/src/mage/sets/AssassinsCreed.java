@@ -41,6 +41,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Brotherhood Regalia", 255, Rarity.UNCOMMON, mage.cards.b.BrotherhoodRegalia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brotherhood Spy", 282, Rarity.UNCOMMON, mage.cards.b.BrotherhoodSpy.class));
         cards.add(new SetCardInfo("Bureau Headmaster", 296, Rarity.UNCOMMON, mage.cards.b.BureauHeadmaster.class));
+        cards.add(new SetCardInfo("Caduceus, Staff of Hermes", 2, Rarity.RARE, mage.cards.c.CaduceusStaffOfHermes.class));
         cards.add(new SetCardInfo("Cathartic Reunion", 94, Rarity.UNCOMMON, mage.cards.c.CatharticReunion.class));
         cards.add(new SetCardInfo("Chain Assassination", 23, Rarity.UNCOMMON, mage.cards.c.ChainAssassination.class));
         cards.add(new SetCardInfo("Cleopatra, Exiled Pharaoh", 52, Rarity.MYTHIC, mage.cards.c.CleopatraExiledPharaoh.class));
