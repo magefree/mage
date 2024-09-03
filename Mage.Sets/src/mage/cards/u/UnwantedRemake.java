@@ -62,6 +62,7 @@ class UnwantedRemakeEffect extends OneShotEffect {
         Player player = game.getPlayer(permanent.getControllerId());
         permanent.destroy(source, game);
         if (player != null) {
+            game.processAction();
             ManifestDreadEffect.doManifestDread(player, source, game);
         }
         return true;

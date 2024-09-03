@@ -37,7 +37,7 @@ public final class GlimmerSeeker extends CardImpl {
 
         // Survival -- At the beginning of your second main phase, if Glimmer Seeker is tapped, draw a card if you control a Glimmer creature. If you don't control a Glimmer creature, create a 1/1 white Glimmer enchantment creature token.
         this.addAbility(new SurvivalAbility(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new GlimmerToken()), new DrawCardSourceControllerEffect(1),
+                new DrawCardSourceControllerEffect(1), new CreateTokenEffect(new GlimmerToken()),
                 condition, "draw a card if you control a Glimmer creature. " +
                 "If you don't control a Glimmer creature, create a 1/1 white Glimmer enchantment creature token"
         )).addHint(hint));
