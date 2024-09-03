@@ -48,7 +48,7 @@ public final class CourageousResolve extends CardImpl {
 
         //Fateful hour — If you have 5 or less life, you can't lose life this turn, you can't lose the game this turn,
         // and your opponents can't win the game this turn.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new CantLoseLifeEffect(), FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; If you have 5 or less life, you can't lose life this turn, "));
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new CantLoseLifeEffect(), FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; If you have 5 or less life, you can't lose life this turn"));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(new CourageousResolveWinLoseEffect(), FatefulHourCondition.instance));
 
 
