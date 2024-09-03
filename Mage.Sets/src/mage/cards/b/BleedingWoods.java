@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.condition.common.APlayerHas13LifeCondition;
-import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,9 +21,9 @@ public final class BleedingWoods extends CardImpl {
         // Bleeding Woods enters tapped unless a player has 13 or less life.
         this.addAbility(new EntersBattlefieldTappedUnlessAbility(APlayerHas13LifeCondition.instance));
 
-        // {T}: Add {R} or {B}.
+        // {T}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
-        this.addAbility(new BlackManaAbility());
+        this.addAbility(new GreenManaAbility());
     }
 
     private BleedingWoods(final BleedingWoods card) {
