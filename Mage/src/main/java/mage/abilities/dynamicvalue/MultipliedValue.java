@@ -48,6 +48,7 @@ public class MultipliedValue implements DynamicValue {
         return CardUtil.numberToText(multiplier);
     }
 
+    @Override
     public String toString() {
         if (value.toString().equals("1")) {
             return Integer.toString(multiplier);
