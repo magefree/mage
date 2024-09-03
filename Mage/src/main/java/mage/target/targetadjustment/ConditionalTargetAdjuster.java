@@ -13,6 +13,7 @@ public class ConditionalTargetAdjuster implements TargetAdjuster {
     private final Condition condition;
     private final boolean keepExistingTargets;
     private final Targets replacementTargets;
+    private Targets originalTargets;
     private Targets checkTargets = null;
 
     /**
@@ -51,8 +52,8 @@ public class ConditionalTargetAdjuster implements TargetAdjuster {
      * Use the replacement targets for checking if the spell/ability is legal to cast/activate.
      * Since this is to be used only if the targets are more general, keepExistingTargets must be false.
      */
-    public ConditionalTargetAdjuster withCheckTargets(){
-        if (this.keepExistingTargets){
+    public ConditionalTargetAdjuster withCheckTargets() {
+        if (this.keepExistingTargets) {
             throw new IllegalStateException("withCheckTargets requires keepExistingTargets be false (consider withSpecificCheckTargets)");
         }
         this.checkTargets = this.replacementTargets;
@@ -60,11 +61,24 @@ public class ConditionalTargetAdjuster implements TargetAdjuster {
     }
 
     @Override
+    public void addDefaultTargets(Ability ability) {
+        if (originalTargets == null) {
+            originalTargets = ability.getTargets().copy();
+        } else {
+            throw new IllegalStateException("Wrong code usage: target adjuster already has blueprint target - " + originalTargets);
+        }
+    }
+
+    @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (condition.apply(game, ability)) {
-            if (!keepExistingTargets) {
-                ability.getTargets().clear();
+        boolean check = condition.apply(game, ability);
+        ability.getTargets().clear();
+        if (!check || keepExistingTargets) {
+            for (Target target : originalTargets) {
+                ability.addTarget(target.copy());
             }
+        }
+        if (check) {
             for (Target target : replacementTargets) {
                 ability.addTarget(target.copy());
             }
