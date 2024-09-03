@@ -100,6 +100,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Flusterstorm", 163, Rarity.RARE, mage.cards.f.Flusterstorm.class));
         cards.add(new SetCardInfo("Foil", 243, Rarity.COMMON, mage.cards.f.Foil.class));
         cards.add(new SetCardInfo("Forest Bear", 206, Rarity.COMMON, mage.cards.f.ForestBear.class));
+        cards.add(new SetCardInfo("Forsaken Crossroads", 264, Rarity.UNCOMMON, mage.cards.f.ForsakenCrossroads.class));
         cards.add(new SetCardInfo("Future Sight", 122, Rarity.RARE, mage.cards.f.FutureSight.class));
         cards.add(new SetCardInfo("Gerrard, Weatherlight Hero", 251, Rarity.RARE, mage.cards.g.GerrardWeatherlightHero.class));
         cards.add(new SetCardInfo("Ghost Quarter", 109, Rarity.UNCOMMON, mage.cards.g.GhostQuarter.class));
