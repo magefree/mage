@@ -174,6 +174,7 @@ public enum CounterType {
     POLYP("polyp"),
     POINT("point"),
     POISON("poison"),
+    POSSESSION("possession"),
     PRESSURE("pressure"),
     PREY("prey"),
     PUPA("pupa"),
