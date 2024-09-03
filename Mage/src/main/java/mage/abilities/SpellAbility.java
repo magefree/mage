@@ -65,13 +65,13 @@ public class SpellAbility extends ActivatedAbilityImpl {
             }
             SpellAbility left = ((SplitCard) card).getLeftHalfCard().getSpellAbility();
             SpellAbility right = ((SplitCard) card).getRightHalfCard().getSpellAbility();
-            return canChooseTargetAbility(left, left.getModes(), game, playerId) && canChooseTargetAbility(right, right.getModes(), game, playerId);
+            return canChooseTargetAbility(left, game, playerId) && canChooseTargetAbility(right, game, playerId);
         }
         return super.canChooseTarget(game, playerId);
     }
 
     public boolean canSpliceOnto(Ability abilityToModify, Game game) {
-        return canChooseTargetAbility(abilityToModify, getModes(), game, abilityToModify.getControllerId());
+        return canChooseTargetAbility(abilityToModify, this, game, abilityToModify.getControllerId());
     }
 
     /*
