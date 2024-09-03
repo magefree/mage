@@ -59,7 +59,7 @@ public final class CaduceusStaffOfHermes extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalPreventionEffect(
                         new PreventDamageToAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT, false),
                         new LifeCompareCondition(TargetController.YOU, ComparisonType.OR_GREATER, 30),
-                        "and has “Prevent all damage that would be dealt to this creature.”"
+                        "and has \"Prevent all damage that would be dealt to this creature.\""
                         )
                     )
         );
