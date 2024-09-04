@@ -72,7 +72,7 @@ public final class MjolnirStormHammer extends CardImpl {
     }
 }
 
-enum TappedCreaturesControlledByTargetsOwnerCount implements DynamicValue {
+enum TappedCreaturesControlledByTargetsControllerCount implements DynamicValue {
     instance;
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
