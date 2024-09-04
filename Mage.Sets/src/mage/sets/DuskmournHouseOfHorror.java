@@ -56,6 +56,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Murky Sewer", 263, Rarity.COMMON, mage.cards.m.MurkySewer.class));
         cards.add(new SetCardInfo("Neglected Manor", 264, Rarity.COMMON, mage.cards.n.NeglectedManor.class));
         cards.add(new SetCardInfo("Overlord of the Floodpits", 68, Rarity.MYTHIC, mage.cards.o.OverlordOfTheFloodpits.class));
+        cards.add(new SetCardInfo("Overlord of the Hauntwoods", 194, Rarity.MYTHIC, mage.cards.o.OverlordOfTheHauntwoods.class));
         cards.add(new SetCardInfo("Patched Plaything", 24, Rarity.UNCOMMON, mage.cards.p.PatchedPlaything.class));
         cards.add(new SetCardInfo("Patchwork Beastie", 195, Rarity.UNCOMMON, mage.cards.p.PatchworkBeastie.class));
         cards.add(new SetCardInfo("Peculiar Lighthouse", 265, Rarity.COMMON, mage.cards.p.PeculiarLighthouse.class));
