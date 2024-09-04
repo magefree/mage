@@ -1,28 +1,34 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.Duration;
-import mage.constants.SubType;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class SardianCliffstomper extends CardImpl {
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.MOUNTAIN));
+    private static final Hint hint = new ValueHint("Mountains you control", xValue);
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.MOUNTAIN);
     private static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
@@ -42,6 +48,7 @@ public final class SardianCliffstomper extends CardImpl {
                 condition,
                 "As long as it's your turn and you control four or more Mountains, {this} gets +X/+0, where X is the number of Mountains you control."
         )));
+        this.getSpellAbility().addHint(hint);
     }
 
     private SardianCliffstomper(final SardianCliffstomper card) {

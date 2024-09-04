@@ -1,22 +1,24 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.constants.SubType;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -27,11 +29,15 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Floodgate extends CardImpl {
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.ISLAND));
+    private static final Hint hint = new ValueHint("Islands you control", xValue);
 
     public Floodgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -48,6 +54,7 @@ public final class Floodgate extends CardImpl {
 
         // When Floodgate leaves the battlefield, it deals damage equal to half the number of Islands you control, rounded down, to each nonblue creature without flying.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new FloodgateDamageEffect(), false));
+        this.getSpellAbility().addHint(hint);
     }
 
     private Floodgate(final Floodgate card) {

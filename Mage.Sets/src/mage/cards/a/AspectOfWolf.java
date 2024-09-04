@@ -3,9 +3,12 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,6 +29,9 @@ import java.util.UUID;
  */
 public final class AspectOfWolf extends CardImpl {
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.FOREST));
+    private static final Hint hint = new ValueHint("Forests you control", xValue);
+
     public AspectOfWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.subtype.add(SubType.AURA);
@@ -41,6 +47,7 @@ public final class AspectOfWolf extends CardImpl {
                 AspectOfWolfValue.UP, AspectOfWolfValue.DOWN, Duration.WhileOnBattlefield
         ).setText("enchanted creature gets +X/+Y, where X is half the number of Forests you control, " +
                 "rounded down, and Y is half the number of Forests you control, rounded up")));
+        this.getSpellAbility().addHint(hint);
     }
 
     private AspectOfWolf(final AspectOfWolf card) {

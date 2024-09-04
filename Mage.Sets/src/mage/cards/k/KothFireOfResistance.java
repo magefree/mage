@@ -2,10 +2,13 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,6 +26,9 @@ import java.util.UUID;
  * @author PurpleCrowbar
  */
 public final class KothFireOfResistance extends CardImpl {
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.MOUNTAIN));
+    private static final Hint hint = new ValueHint("Mountains you control", xValue);
 
     private static final FilterCard filter = new FilterCard("basic Mountain card");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Mountains you control");
@@ -51,6 +57,7 @@ public final class KothFireOfResistance extends CardImpl {
 
         // −7: You get an emblem with "Whenever a Mountain you control enters, this emblem deals 4 damage to any target."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KothFireOfResistanceEmblem()), -7));
+        this.getSpellAbility().addHint(hint);
     }
 
     private KothFireOfResistance(final KothFireOfResistance card) {

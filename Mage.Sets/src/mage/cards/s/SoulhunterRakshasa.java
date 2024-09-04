@@ -6,7 +6,11 @@ import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,6 +30,9 @@ import java.util.UUID;
  */
 public final class SoulhunterRakshasa extends CardImpl {
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.SWAMP));
+    private static final Hint hint = new ValueHint("Swamps you control", xValue);
+
     public SoulhunterRakshasa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.DEMON);
@@ -43,6 +50,7 @@ public final class SoulhunterRakshasa extends CardImpl {
                 "When {this} enters, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control.");
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new CastFromHandWatcher());
+        this.getSpellAbility().addHint(hint);
     }
 
     private SoulhunterRakshasa(final SoulhunterRakshasa card) {

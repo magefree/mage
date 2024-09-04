@@ -5,9 +5,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,6 +24,9 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public final class FireDragon extends CardImpl {
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.MOUNTAIN));
+    private static final Hint hint = new ValueHint("Mountains you control", xValue);
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("for each Mountain you control");
 
@@ -43,6 +49,7 @@ public final class FireDragon extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+        this.getSpellAbility().addHint(hint);
     }
 
     private FireDragon(final FireDragon card) {
