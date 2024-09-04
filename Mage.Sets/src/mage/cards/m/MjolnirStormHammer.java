@@ -91,7 +91,7 @@ enum TappedCreaturesControlledByTargetsControllerCount implements DynamicValue {
     }
 
     @Override
-    public TappedCreaturesControlledByTargetsOwnerCount copy() {
+    public TappedCreaturesControlledByTargetsControllerCount copy() {
         return this;
     }
 
