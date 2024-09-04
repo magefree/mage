@@ -2389,3 +2389,6 @@
 |Generate|TOK:BLB|Sword|||SwordToken|
 |Generate|TOK:BLB|Treasure|||TreasureToken|
 |Generate|TOK:BLB|Wall|||WallWhiteToken|
+
+# BLC
+|Generate|TOK:BLC|Racoon|||RaccoonToken|
