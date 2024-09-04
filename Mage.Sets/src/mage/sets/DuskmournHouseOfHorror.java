@@ -45,6 +45,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Lakeside Shack", 262, Rarity.COMMON, mage.cards.l.LakesideShack.class));
         cards.add(new SetCardInfo("Leyline of Hope", 18, Rarity.RARE, mage.cards.l.LeylineOfHope.class));
+        cards.add(new SetCardInfo("Leyline of Resonance", 143, Rarity.RARE, mage.cards.l.LeylineOfResonance.class));
         cards.add(new SetCardInfo("Leyline of the Void", 106, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class));
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Murky Sewer", 263, Rarity.COMMON, mage.cards.m.MurkySewer.class));
