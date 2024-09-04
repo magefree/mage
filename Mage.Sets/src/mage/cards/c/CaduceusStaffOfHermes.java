@@ -40,7 +40,7 @@ public final class CaduceusStaffOfHermes extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has lifelink.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.EQUIPMENT).setText("has lifelink"));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.EQUIPMENT).setText("has lifelink")));
         // As long as you have 30 or more life, equipped creature gets +5/+5 and has indestructible and "Prevent all damage that would be dealt to this creature."
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                         new BoostEquippedEffect(5,5),
@@ -74,16 +74,5 @@ public final class CaduceusStaffOfHermes extends CardImpl {
     @Override
     public CaduceusStaffOfHermes copy() {
         return new CaduceusStaffOfHermes(this);
-    }
-}
-
-enum CaduceusStaffOfHermesCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        return (controller.getLife() >= 30);
     }
 }
