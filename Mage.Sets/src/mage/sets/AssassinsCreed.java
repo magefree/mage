@@ -83,6 +83,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Mary Read and Anne Bonny", 61, Rarity.RARE, mage.cards.m.MaryReadAndAnneBonny.class));
         cards.add(new SetCardInfo("Merciless Harlequin", 287, Rarity.COMMON, mage.cards.m.MercilessHarlequin.class));
         cards.add(new SetCardInfo("Misthios's Fury", 291, Rarity.COMMON, mage.cards.m.MisthiossFury.class));
+        cards.add(new SetCardInfo("Mjolnir, Storm Hammer", 74, Rarity.RARE, mage.cards.m.MjolnirStormHammer.class));
         cards.add(new SetCardInfo("Mortify", 96, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mountain", 107, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Murder", 92, Rarity.UNCOMMON, mage.cards.m.Murder.class));
