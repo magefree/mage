@@ -122,6 +122,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Golgari Rot Farm", 308, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Golgari Signet", 272, Rarity.UNCOMMON, mage.cards.g.GolgariSignet.class));
         cards.add(new SetCardInfo("Goreclaw, Terror of Qal Sisma", 222, Rarity.RARE, mage.cards.g.GoreclawTerrorOfQalSisma.class));
+        cards.add(new SetCardInfo("Gourmand's Talent", 31, Rarity.RARE, mage.cards.g.GourmandsTalent.class));
         cards.add(new SetCardInfo("Gratuitous Violence", 197, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
         cards.add(new SetCardInfo("Greater Good", 223, Rarity.RARE, mage.cards.g.GreaterGood.class));
         cards.add(new SetCardInfo("Grim Backwoods", 309, Rarity.RARE, mage.cards.g.GrimBackwoods.class));
