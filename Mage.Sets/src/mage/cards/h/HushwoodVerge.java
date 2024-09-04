@@ -1,4 +1,4 @@
-package mage.cards.g;
+package mage.cards.h;
 
 import mage.Mana;
 import mage.abilities.condition.Condition;
@@ -8,7 +8,7 @@ import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
-import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,38 +22,38 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GloomlakeVerge extends CardImpl {
+public final class HushwoodVerge extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("you control an Island or a Swamp");
+    private static final FilterPermanent filter = new FilterPermanent("you control a Forest or a Plains");
 
     static {
         filter.add(Predicates.or(
-                SubType.ISLAND.getPredicate(),
-                SubType.SWAMP.getPredicate()
+                SubType.FOREST.getPredicate(),
+                SubType.PLAINS.getPredicate()
         ));
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(condition, "You control an Island or a Swamp");
+    private static final Hint hint = new ConditionHint(condition, "You control a Forest or a Plains");
 
-    public GloomlakeVerge(UUID ownerId, CardSetInfo setInfo) {
+    public HushwoodVerge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Add {U}.
-        this.addAbility(new BlueManaAbility());
+        // {T}: Add {G}.
+        this.addAbility(new GreenManaAbility());
 
-        // {T}: Add {B}. Activate only if you control an Island or a Swamp.
+        // {T}: Add {W}. Activate only if you control a Forest or a Plains.
         this.addAbility(new ActivateIfConditionManaAbility(
-                Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(1)), new TapSourceCost(), condition
+                Zone.BATTLEFIELD, new BasicManaEffect(Mana.WhiteMana(1)), new TapSourceCost(), condition
         ).addHint(hint));
     }
 
-    private GloomlakeVerge(final GloomlakeVerge card) {
+    private HushwoodVerge(final HushwoodVerge card) {
         super(card);
     }
 
     @Override
-    public GloomlakeVerge copy() {
-        return new GloomlakeVerge(this);
+    public HushwoodVerge copy() {
+        return new HushwoodVerge(this);
     }
 }
