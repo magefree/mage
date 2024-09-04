@@ -61,6 +61,7 @@ public enum MageIdentifier {
     HelbruteAlternateCast,
     MaestrosAscendencyAlternateCast,
     NashiMoonSagesScionAlternateCast,
+    OsteomancerAdeptAlternateCast,
     RafinnesGuidanceAlternateCast,
     RonaSheoldredsFaithfulAlternateCast,
     ScourgeOfNelTothAlternateCast,
