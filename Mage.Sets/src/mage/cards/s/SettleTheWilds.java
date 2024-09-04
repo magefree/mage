@@ -3,11 +3,13 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SeekCardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -26,7 +28,7 @@ public final class SettleTheWilds extends CardImpl {
 
         // Seek a basic land card and put it onto the battlefield tapped.
         // Then seek a permanent card with mana value equal to the number of lands you control.
-        //this.getSpellAbility().addEffect(new SeekCardEffect(StaticFilters.FILTER_CARD_BASIC_LAND, Zone.BATTLEFIELD, true).setText("Seek a basic land card and put it onto the battlefield tapped. "));
+        this.getSpellAbility().addEffect(new SeekCardEffect(StaticFilters.FILTER_CARD_BASIC_LAND, Zone.BATTLEFIELD, true).setText("Seek a basic land card and put it onto the battlefield tapped. "));
         this.getSpellAbility().addEffect(new SettleTheWildsSeekEffect());
 
     }
