@@ -19,7 +19,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.DamagedBatchAllEvent;
 import mage.game.events.DamagedEvent;
@@ -35,7 +35,7 @@ import java.util.UUID;
  */
 public final class LongRiverLurker extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.FROG, "Frogs");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.FROG, "Frogs");
 
     public LongRiverLurker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -123,14 +123,11 @@ class LongRiverLurkerTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int amount = ((DamagedBatchAllEvent) event)
+        return ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()
                 .filter(DamagedEvent::isCombatDamage)
-                .filter(e -> mor.refersTo(e.getAttackerId(), game))
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-        return amount >= 1;
+                .anyMatch(e -> mor.refersTo(e.getAttackerId(), game));
     }
 
     @Override
