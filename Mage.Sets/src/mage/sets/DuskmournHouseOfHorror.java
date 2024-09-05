@@ -63,6 +63,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Murky Sewer", 263, Rarity.COMMON, mage.cards.m.MurkySewer.class));
         cards.add(new SetCardInfo("Neglected Manor", 264, Rarity.COMMON, mage.cards.n.NeglectedManor.class));
+        cards.add(new SetCardInfo("Overlord of the Boilerbilges", 146, Rarity.MYTHIC, mage.cards.o.OverlordOfTheBoilerbilges.class));
         cards.add(new SetCardInfo("Overlord of the Floodpits", 68, Rarity.MYTHIC, mage.cards.o.OverlordOfTheFloodpits.class));
         cards.add(new SetCardInfo("Overlord of the Hauntwoods", 194, Rarity.MYTHIC, mage.cards.o.OverlordOfTheHauntwoods.class));
         cards.add(new SetCardInfo("Overlord of the Mistmoors", 23, Rarity.MYTHIC, mage.cards.o.OverlordOfTheMistmoors.class));
