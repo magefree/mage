@@ -21,7 +21,11 @@ public class EerieAbility extends TriggeredAbilityImpl {
     }
 
     public EerieAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional);
+    }
+
+    public EerieAbility(Zone zone, Effect effect, boolean optional) {
+        super(zone, effect, optional);
         setAbilityWord(AbilityWord.EERIE);
         setTriggerPhrase("Whenever an enchantment you control enters and whenever you fully unlock a Room, ");
     }
