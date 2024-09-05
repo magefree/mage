@@ -85,6 +85,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Shrewd Storyteller", 232, Rarity.UNCOMMON, mage.cards.s.ShrewdStoryteller.class));
         cards.add(new SetCardInfo("Slavering Branchsnapper", 198, Rarity.COMMON, mage.cards.s.SlaveringBranchsnapper.class));
         cards.add(new SetCardInfo("Split Up", 32, Rarity.RARE, mage.cards.s.SplitUp.class));
+        cards.add(new SetCardInfo("Stalked Researcher", 73, Rarity.COMMON, mage.cards.s.StalkedResearcher.class));
         cards.add(new SetCardInfo("Stay Hidden, Stay Silent", 74, Rarity.UNCOMMON, mage.cards.s.StayHiddenStaySilent.class));
         cards.add(new SetCardInfo("Strangled Cemetery", 268, Rarity.COMMON, mage.cards.s.StrangledCemetery.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
