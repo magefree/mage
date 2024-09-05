@@ -26,7 +26,7 @@ public final class DragDown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Domain - Target creature gets -1/-1 until end of turn for each basic land type among lands you control.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn).usingTextPhrasing(ValuePhrasing.FOR_EACH));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn).withTextPhrasing(ValuePhrasing.FOR_EACH));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addHint(DomainHint.instance);
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);

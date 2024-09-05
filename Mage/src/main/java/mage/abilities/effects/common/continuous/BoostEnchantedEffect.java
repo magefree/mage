@@ -51,7 +51,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
         return new BoostEnchantedEffect(this);
     }
 
-    public BoostEnchantedEffect usingTextPhrasing(ValuePhrasing textPhrasing){
+    public BoostEnchantedEffect withTextPhrasing(ValuePhrasing textPhrasing){
         this.staticText = "enchanted creature gets " + CardUtil.getBoostText(power, toughness, duration, textPhrasing);
         return this;
     }

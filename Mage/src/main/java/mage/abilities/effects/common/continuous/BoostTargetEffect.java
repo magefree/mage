@@ -54,7 +54,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         return new BoostTargetEffect(this);
     }
 
-    public BoostTargetEffect usingTextPhrasing(ValuePhrasing textPhrasing){
+    public BoostTargetEffect withTextPhrasing(ValuePhrasing textPhrasing){
         this.textPhrasing = textPhrasing;
         return this;
     }

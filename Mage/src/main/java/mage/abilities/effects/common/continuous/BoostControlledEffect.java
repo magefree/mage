@@ -70,7 +70,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         return new BoostControlledEffect(this);
     }
 
-    public BoostControlledEffect usingTextPhrasing(ValuePhrasing textPhrasing) {
+    public BoostControlledEffect withTextPhrasing(ValuePhrasing textPhrasing) {
         setText(textPhrasing);
         return this;
     }

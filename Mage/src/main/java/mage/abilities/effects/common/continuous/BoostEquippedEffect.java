@@ -54,7 +54,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         return new BoostEquippedEffect(this);
     }
 
-    public BoostEquippedEffect usingTextPhrasing(ValuePhrasing textPhrasing){
+    public BoostEquippedEffect withTextPhrasing(ValuePhrasing textPhrasing){
         this.staticText = "equipped creature gets " + CardUtil.getBoostText(power, toughness, duration, textPhrasing);
         return this;
     }
