@@ -36,7 +36,7 @@ public final class PopularEgotist extends CardImpl {
         filter.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()
-        ))
+        ));
     }
 
     public PopularEgotist(UUID ownerId, CardSetInfo setInfo) {
