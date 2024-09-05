@@ -8,6 +8,7 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
@@ -34,15 +35,15 @@ public class ManifestDreadEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        return player != null && doManifestDread(player, source, game);
+        return player != null && doManifestDread(player, source, game) != null;
     }
 
-    public static boolean doManifestDread(Player player, Ability source, Game game) {
+    public static Permanent doManifestDread(Player player, Ability source, Game game) {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 2));
         Card card;
         switch (cards.size()) {
             case 0:
-                return false;
+                return null;
             case 1:
                 card = cards.getRandom(game);
                 break;
@@ -52,11 +53,18 @@ public class ManifestDreadEffect extends OneShotEffect {
                 player.choose(Outcome.PutCreatureInPlay, target, source, game);
                 card = cards.get(target.getFirstTarget(), game);
         }
+        Permanent permanent;
         if (card != null) {
-            ManifestEffect.doManifestCards(game, source, player, new CardsImpl(card).getCards(game));
+            permanent = ManifestEffect
+                    .doManifestCards(game, source, player, new CardsImpl(card).getCards(game))
+                    .stream()
+                    .findFirst()
+                    .orElse(null);
+        } else {
+            permanent = null;
         }
         cards.retainZone(Zone.LIBRARY, game);
         player.moveCards(cards, Zone.GRAVEYARD, source, game);
-        return true;
+        return permanent;
     }
 }
