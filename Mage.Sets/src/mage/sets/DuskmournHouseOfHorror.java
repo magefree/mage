@@ -53,6 +53,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Fear of Isolation", 58, Rarity.UNCOMMON, mage.cards.f.FearOfIsolation.class));
         cards.add(new SetCardInfo("Fear of Lost Teeth", 97, Rarity.COMMON, mage.cards.f.FearOfLostTeeth.class));
         cards.add(new SetCardInfo("Fear of Missing Out", 136, Rarity.RARE, mage.cards.f.FearOfMissingOut.class));
+        cards.add(new SetCardInfo("Fear of Surveillance", 11, Rarity.COMMON, mage.cards.f.FearOfSurveillance.class));
         cards.add(new SetCardInfo("Fear of the Dark", 98, Rarity.COMMON, mage.cards.f.FearOfTheDark.class));
         cards.add(new SetCardInfo("Floodfarm Verge", 259, Rarity.RARE, mage.cards.f.FloodfarmVerge.class));
         cards.add(new SetCardInfo("Floodpits Drowner", 59, Rarity.UNCOMMON, mage.cards.f.FloodpitsDrowner.class));
