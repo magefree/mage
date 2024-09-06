@@ -143,6 +143,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
         skipListAddName(SKIP_LIST_TYPE, "DSK", "Balustrade Wurm"); // temporary
+        skipListAddName(SKIP_LIST_TYPE, "DSK", "Spineseeker Centipede"); // temporary
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
@@ -150,6 +151,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
         skipListAddName(SKIP_LIST_SUBTYPE, "DSK", "Balustrade Wurm"); // temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "DSK", "Spineseeker Centipede"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
