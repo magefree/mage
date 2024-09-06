@@ -1165,7 +1165,7 @@ public final class CardUtil {
                 .filter(Objects::nonNull)
                 .mapToInt(valueMapper)
                 .sum();
-        target.withChooseHint("selected " + selectedValue + " of " + maxValue);
+        target.withChooseHint("selected total value " + selectedValue);
         int remainingValue = maxValue - selectedValue;
         Set<UUID> validTargets = new HashSet<>();
         if (remainingValue <= 0) {
