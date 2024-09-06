@@ -83,6 +83,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Patchwork Beastie", 195, Rarity.UNCOMMON, mage.cards.p.PatchworkBeastie.class));
         cards.add(new SetCardInfo("Peculiar Lighthouse", 265, Rarity.COMMON, mage.cards.p.PeculiarLighthouse.class));
         cards.add(new SetCardInfo("Peer Past the Veil", 226, Rarity.RARE, mage.cards.p.PeerPastTheVeil.class));
+        cards.add(new SetCardInfo("Piggy Bank", 148, Rarity.UNCOMMON, mage.cards.p.PiggyBank.class));
         cards.add(new SetCardInfo("Piranha Fly", 70, Rarity.COMMON, mage.cards.p.PiranhaFly.class));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Popular Egotist", 114, Rarity.UNCOMMON, mage.cards.p.PopularEgotist.class));
