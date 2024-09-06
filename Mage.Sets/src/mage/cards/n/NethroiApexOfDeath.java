@@ -1,6 +1,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.MutatesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -18,6 +19,7 @@ import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -89,9 +91,21 @@ class NethroiApexOfDeathTarget extends TargetCardInYourGraveyard {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        return CardUtil.checkPossibleTargetsTotalValueLimit(this,
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
                 super.possibleTargets(sourceControllerId, source, game),
                 m -> m.getPower().getValue(), 10, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .map(MageObject::getPower)
+                .mapToInt(MageInt::getValue)
+                .sum();
+        return super.getMessage(game) + " (selected total power " + selectedValue + ")";
     }
 
 }

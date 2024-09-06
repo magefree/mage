@@ -1151,21 +1151,20 @@ public final class CardUtil {
 
     /**
      * For overriding `possibleTargets()` with usages such as "any number of target cards with total mana value X or less".
-     * Adds a selection hint for the total value of the targets already chosen.
-     * @param target          this
+     *
+     * @param selectedTargets this.getTargets()
      * @param possibleTargets super.possibleTargets()
      * @param valueMapper     e.g. MageObject::getManaValue or m -> m.getPower().getValue()
      * @param maxValue        the maximum total value of the parameter
      * @return the set of possible targets that don't exceed the maximum total value.
      */
-    public static Set<UUID> checkPossibleTargetsTotalValueLimit(Target target, Set<UUID> possibleTargets,
+    public static Set<UUID> checkPossibleTargetsTotalValueLimit(Collection<UUID> selectedTargets, Set<UUID> possibleTargets,
                                                                 ToIntFunction<MageObject> valueMapper, int maxValue, Game game) {
-        int selectedValue = target.getTargets().stream()
+        int selectedValue = selectedTargets.stream()
                 .map(game::getObject)
                 .filter(Objects::nonNull)
                 .mapToInt(valueMapper)
                 .sum();
-        target.withChooseHint("selected total value " + selectedValue);
         int remainingValue = maxValue - selectedValue;
         Set<UUID> validTargets = new HashSet<>();
         for (UUID id: possibleTargets) {

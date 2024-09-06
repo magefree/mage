@@ -22,6 +22,7 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -110,8 +111,19 @@ class LivelyDirgeTarget extends TargetCardInYourGraveyard {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        return CardUtil.checkPossibleTargetsTotalValueLimit(this,
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
                 super.possibleTargets(sourceControllerId, source, game),
                 MageObject::getManaValue, 4, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getManaValue)
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
     }
 }
