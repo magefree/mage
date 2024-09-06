@@ -103,6 +103,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Threats Around Every Corner", 200, Rarity.UNCOMMON, mage.cards.t.ThreatsAroundEveryCorner.class));
         cards.add(new SetCardInfo("Toby, Beastie Befriender", 35, Rarity.RARE, mage.cards.t.TobyBeastieBefriender.class));
         cards.add(new SetCardInfo("Trapped in the Screen", 36, Rarity.COMMON, mage.cards.t.TrappedInTheScreen.class));
+        cards.add(new SetCardInfo("Turn Inside Out", 160, Rarity.COMMON, mage.cards.t.TurnInsideOut.class));
         cards.add(new SetCardInfo("Twitching Doll", 201, Rarity.RARE, mage.cards.t.TwitchingDoll.class));
         cards.add(new SetCardInfo("Tyvar, the Pummeler", 202, Rarity.MYTHIC, mage.cards.t.TyvarThePummeler.class));
         cards.add(new SetCardInfo("Untimely Malfunction", 161, Rarity.UNCOMMON, mage.cards.u.UntimelyMalfunction.class));
