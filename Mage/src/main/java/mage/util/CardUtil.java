@@ -1168,9 +1168,6 @@ public final class CardUtil {
         target.withChooseHint("selected total value " + selectedValue);
         int remainingValue = maxValue - selectedValue;
         Set<UUID> validTargets = new HashSet<>();
-        if (remainingValue <= 0) {
-            return validTargets;
-        }
         for (UUID id: possibleTargets) {
             MageObject mageObject = game.getObject(id);
             if (mageObject != null && valueMapper.applyAsInt(mageObject) <= remainingValue) {
