@@ -88,7 +88,7 @@ class GourmandsTalentEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_ARTIFACT, source.getControllerId(), source, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, source.getControllerId(), source, game)) {
             if (permanent.getId().equals(source.getSourceId())) {
                 continue;
             }
