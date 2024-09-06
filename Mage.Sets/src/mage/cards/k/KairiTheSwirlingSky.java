@@ -18,13 +18,13 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 
-import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -70,11 +70,11 @@ public final class KairiTheSwirlingSky extends CardImpl {
 
 class KairiTheSwirlingSkyTarget extends TargetPermanent {
 
-    private static final FilterPermanent filter
+    private static final FilterPermanent filterStatic
             = new FilterNonlandPermanent("nonland permanents with total mana value 6 or less");
 
     KairiTheSwirlingSkyTarget() {
-        super(0, Integer.MAX_VALUE, filter, false);
+        super(0, Integer.MAX_VALUE, filterStatic, false);
     }
 
     private KairiTheSwirlingSkyTarget(final KairiTheSwirlingSkyTarget target) {
@@ -88,24 +88,16 @@ class KairiTheSwirlingSkyTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(id);
-        if (permanent == null) {
-            return false;
-        }
-        int added = 0; // We need to prevent the target to be counted twice on revalidation.
-        if (!this.getTargets().contains(id)) {
-            added = permanent.getManaValue();// fresh target, adding its MV
-        }
-        return added +
-                this.getTargets()
-                        .stream()
-                        .map(game::getPermanent)
-                        .filter(Objects::nonNull)
-                        .mapToInt(MageObject::getManaValue)
-                        .sum() <= 6;
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, 6, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this,
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, 6, game);
     }
 }
 

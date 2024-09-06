@@ -1,9 +1,7 @@
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,18 +11,21 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
-import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -101,7 +102,7 @@ class OrcusPrinceOfUndeathTarget extends TargetCardInYourGraveyard {
 
     private final int xValue;
 
-    public OrcusPrinceOfUndeathTarget(int xValue, FilterCreatureCard filter) {
+    OrcusPrinceOfUndeathTarget(int xValue, FilterCreatureCard filter) {
         super(0, xValue, filter);
         this.xValue = xValue;
     }
@@ -117,22 +118,17 @@ class OrcusPrinceOfUndeathTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, xValue, game);
+    }
+
+    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        int maxManaValue = this.xValue;
-        for (UUID targetId : this.getTargets()) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                maxManaValue -= card.getManaValue();
-            }
-        }
-        for (UUID possibleTargetId : super.possibleTargets(sourceControllerId, source, game)) {
-            Card card = game.getCard(possibleTargetId);
-            if (card != null && card.getManaValue() <= maxManaValue) {
-                possibleTargets.add(possibleTargetId);
-            }
-        }
-        return possibleTargets;
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this,
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, xValue, game);
     }
 }
 

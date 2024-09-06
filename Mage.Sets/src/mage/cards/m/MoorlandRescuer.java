@@ -21,7 +21,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -80,6 +82,7 @@ class MoorlandRescuerEffect extends OneShotEffect {
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         Card sourceCard = source.getSourceCardIfItStillExists(game);
         if (sourceCard != null) {
+            game.processAction();
             player.moveCards(sourceCard, Zone.EXILED, source, game);
         }
         return true;
@@ -108,21 +111,16 @@ class MoorlandRescuerTarget extends TargetCardInYourGraveyard {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        int powerSum = this
-                .getTargets()
-                .stream()
-                .map(game::getCard)
-                .map(Card::getPower)
-                .mapToInt(MageInt::getValue)
-                .sum();
-        return card.getPower().getValue() + powerSum <= xValue;
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, m -> m.getPower().getValue(), xValue, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this,
+                super.possibleTargets(sourceControllerId, source, game),
+                m -> m.getPower().getValue(), xValue, game);
     }
 
     private static FilterCard makeFilter(int xValue, Ability source, Game game) {

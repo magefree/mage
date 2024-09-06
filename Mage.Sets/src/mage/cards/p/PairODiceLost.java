@@ -1,9 +1,9 @@
 package mage.cards.p;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -15,7 +15,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -78,19 +80,18 @@ class PairODiceLostEffect extends OneShotEffect {
 
 class PairODiceLostTarget extends TargetCardInYourGraveyard {
 
-    private static final FilterCard filter = new FilterCard(
-            "cards with total mana value X or less from your graveyard"
-    );
-    private final int value;
+    private final int xValue;
 
-    PairODiceLostTarget(int value) {
-        super(0, Integer.MAX_VALUE, filter, true);
-        this.value = value;
+    PairODiceLostTarget(int xValue) {
+        super(0, Integer.MAX_VALUE, new FilterCard(
+                "cards with total mana value " + xValue + " or less from your graveyard"
+        ), true);
+        this.xValue = xValue;
     }
 
     private PairODiceLostTarget(final PairODiceLostTarget target) {
         super(target);
-        this.value = target.value;
+        this.xValue = target.xValue;
     }
 
     @Override
@@ -100,15 +101,15 @@ class PairODiceLostTarget extends TargetCardInYourGraveyard {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        return card != null &&
-                this.getTargets()
-                        .stream()
-                        .map(game::getCard)
-                        .mapToInt(Card::getManaValue)
-                        .sum() + card.getManaValue() <= value;
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, xValue, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this,
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, xValue, game);
     }
 }
