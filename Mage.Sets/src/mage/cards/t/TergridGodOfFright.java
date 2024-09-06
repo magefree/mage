@@ -3,9 +3,11 @@ package mage.cards.t;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.OrCost;
+import mage.abilities.costs.SacrificeCost;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -17,15 +19,21 @@ import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetSacrifice;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -61,7 +69,7 @@ public final class TergridGodOfFright extends ModalDoubleFacedCard {
                         new LoseLifeTargetEffect(3),
                         new OrCost(
                                 "sacrifice a nonland permanent or discard a card",
-                                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_NON_LAND),
+                                new TergridsLanternCost(StaticFilters.FILTER_PERMANENT_NON_LAND),
                                 new DiscardCardCost()
                         ),
                         "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
@@ -172,4 +180,111 @@ class TergridGodOfFrightEffect extends OneShotEffect {
         }
         return false;
     }
+}
+
+// Based on SacrificeTargetCost
+class TergridsLanternCost extends CostImpl implements SacrificeCost {
+
+    private final List<Permanent> permanents = new ArrayList<>();
+
+    /**
+     * Sacrifice a permanent matching the filter:
+     *
+     * @param filter can be generic, will automatically add article and sacrifice predicates
+     */
+    public TergridsLanternCost(FilterPermanent filter) {
+        this(1, filter);
+    }
+
+    /**
+     * Sacrifice N permanents matching the filter:
+     *
+     * @param filter can be generic, will automatically add sacrifice predicates
+     */
+    public TergridsLanternCost(int numToSac, FilterPermanent filter) {
+        this(new TargetSacrifice(numToSac, filter));
+    }
+
+    public TergridsLanternCost(TargetSacrifice target) {
+        this.addTarget(target);
+        target.setRequired(false); // can be canceled
+        this.text = "sacrifice " + makeText(target);
+    }
+
+    public TergridsLanternCost(TergridsLanternCost cost) {
+        super(cost);
+        for (Permanent permanent : cost.permanents) {
+            this.permanents.add(permanent.copy());
+        }
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        UUID payingPlayer = source.getFirstTarget();
+        // can be cancelled by payer
+        if (this.getTargets().choose(Outcome.Sacrifice, payingPlayer, source.getSourceId(), source, game)) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
+                Permanent permanent = game.getPermanent(targetId);
+                if (permanent == null) {
+                    return false;
+                }
+                addSacrificeTarget(game, permanent);
+                paid |= permanent.sacrifice(source, game);
+            }
+            if (!paid && this.getTargets().get(0).getNumberOfTargets() == 0) {
+                paid = true; // e.g. for Devouring Rage
+            }
+        }
+        return paid;
+    }
+
+    /**
+     * For storing additional info upon selecting permanents to sacrifice
+     */
+    protected void addSacrificeTarget(Game game, Permanent permanent) {
+        permanents.add(permanent.copy());
+    }
+
+    @Override
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        UUID payingPlayer = source.getFirstTarget();
+
+        int validTargets = 0;
+        int neededTargets = this.getTargets().get(0).getNumberOfTargets();
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(((TargetPermanent) this.getTargets().get(0)).getFilter(), controllerId, source, game)) {
+            if (game.getPlayer(payingPlayer).canPaySacrificeCost(permanent, source, controllerId, game)) {
+                validTargets++;
+                if (validTargets >= neededTargets) {
+                    return true;
+                }
+            }
+        }
+        // solves issue #8097, if a sacrifice cost is optional and you don't have valid targets, then the cost can be paid
+        if (validTargets == 0 && this.getTargets().get(0).getMinNumberOfTargets() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public TergridsLanternCost copy() {
+        return new TergridsLanternCost(this);
+    }
+
+    public List<Permanent> getPermanents() {
+        return permanents;
+    }
+
+    private static String makeText(TargetSacrifice target) {
+        if (target.getMinNumberOfTargets() != target.getMaxNumberOfTargets()) {
+            return target.getTargetName();
+        }
+        if (target.getNumberOfTargets() == 1
+                || target.getTargetName().startsWith("a ")
+                || target.getTargetName().startsWith("an ")) {
+            return CardUtil.addArticle(target.getTargetName());
+        }
+        return CardUtil.numberToText(target.getNumberOfTargets()) + ' ' + target.getTargetName();
+    }
+
 }
