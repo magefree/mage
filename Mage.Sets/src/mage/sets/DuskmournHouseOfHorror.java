@@ -114,6 +114,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Trapped in the Screen", 36, Rarity.COMMON, mage.cards.t.TrappedInTheScreen.class));
         cards.add(new SetCardInfo("Tunnel Surveyor", 76, Rarity.COMMON, mage.cards.t.TunnelSurveyor.class));
         cards.add(new SetCardInfo("Turn Inside Out", 160, Rarity.COMMON, mage.cards.t.TurnInsideOut.class));
+        cards.add(new SetCardInfo("Twist Reality", 77, Rarity.COMMON, mage.cards.t.TwistReality.class));
         cards.add(new SetCardInfo("Twitching Doll", 201, Rarity.RARE, mage.cards.t.TwitchingDoll.class));
         cards.add(new SetCardInfo("Tyvar, the Pummeler", 202, Rarity.MYTHIC, mage.cards.t.TyvarThePummeler.class));
         cards.add(new SetCardInfo("Unsettling Twins", 38, Rarity.COMMON, mage.cards.u.UnsettlingTwins.class));
