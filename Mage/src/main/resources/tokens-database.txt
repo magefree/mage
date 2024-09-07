@@ -134,6 +134,7 @@
 |Generate|EMBLEM:MH3|Emblem Tamiyo|||TamiyoSeasonedScholarEmblem|
 |Generate|EMBLEM:M3C|Emblem Garruk|||GarrukApexPredatorEmblem|
 |Generate|EMBLEM:M3C|Emblem Vivien|||VivienReidEmblem|
+|Generate|EMBLEM:ACR|Emblem Capitoline Triad|||TheCapitolineTriadEmblem|
 |Generate|EMBLEM:BLB|Emblem Ral|||RalCracklingWitEmblem|
 
 # ALL PLANES
