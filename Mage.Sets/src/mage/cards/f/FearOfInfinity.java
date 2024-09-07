@@ -2,8 +2,8 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.abilityword.EerieAbility;
+import mage.abilities.common.CantBlockAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
-import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class FearOfInfinity extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Fear of Infinity can't block.
-        this.addAbility(FearAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
 
         // Eerie -- Whenever an enchantment you control enters and whenever you fully unlock a Room, you may return Fear of Infinity from your graveyard to your hand.
         this.addAbility(new EerieAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), true));
