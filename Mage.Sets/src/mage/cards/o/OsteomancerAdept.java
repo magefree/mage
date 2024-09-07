@@ -82,8 +82,7 @@ class OsteomancerAdeptEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId)
-                || !game.isActivePlayer(affectedControllerId)) {
+        if (!source.isControlledBy(affectedControllerId)) {
             return false;
         }
         Card card = game.getCard(objectId);
