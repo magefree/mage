@@ -55,6 +55,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Distract the Guards", 3, Rarity.UNCOMMON, mage.cards.d.DistractTheGuards.class));
         cards.add(new SetCardInfo("Eagle Vision", 17, Rarity.UNCOMMON, mage.cards.e.EagleVision.class));
         cards.add(new SetCardInfo("Eivor, Battle-Ready", 274, Rarity.MYTHIC, mage.cards.e.EivorBattleReady.class));
+        cards.add(new SetCardInfo("Eivor, Wolf-Kissed", 54, Rarity.MYTHIC, mage.cards.e.EivorWolfKissed.class));
         cards.add(new SetCardInfo("Escape Detection", 18, Rarity.UNCOMMON, mage.cards.e.EscapeDetection.class));
         cards.add(new SetCardInfo("Escarpment Fortress", 278, Rarity.RARE, mage.cards.e.EscarpmentFortress.class));
         cards.add(new SetCardInfo("Evie Frye", 19, Rarity.RARE, mage.cards.e.EvieFrye.class));
