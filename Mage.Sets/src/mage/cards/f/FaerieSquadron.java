@@ -33,9 +33,9 @@ public final class FaerieSquadron extends CardImpl {
 
         // Kicker {3}{U}
         this.addAbility(new KickerAbility("{3}{U}"));
-        // If Faerie Squadron was kicked, it enters the battlefield with two +1/+1 counters on it and with flying.
+        // If Faerie Squadron was kicked, it enters with two +1/+1 counters on it and with flying.
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-            KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it and with flying.", "");
+            KickedCondition.ONCE, "If {this} was kicked, it enters with two +1/+1 counters on it and with flying.", "");
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }

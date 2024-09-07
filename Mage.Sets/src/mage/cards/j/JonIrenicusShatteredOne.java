@@ -56,7 +56,7 @@ public final class JonIrenicusShatteredOne extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a creature you own but don't control attacks, you draw a card.
-        this.addAbility(new AttacksAllTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), false, filter, SetTargetPointer.NONE, false));
+        this.addAbility(new AttacksAllTriggeredAbility(new DrawCardSourceControllerEffect(1, true), false, filter, SetTargetPointer.NONE, false));
     }
 
     private JonIrenicusShatteredOne(final JonIrenicusShatteredOne card) {super(card);}

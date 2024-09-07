@@ -15,6 +15,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.token.BooToken;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -72,7 +73,7 @@ class MinscBelovedRangerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         game.addEffect(new SetBasePowerToughnessTargetEffect(xValue, xValue, Duration.EndOfTurn), source);
         game.addEffect(new AddCardSubTypeTargetEffect(SubType.GIANT, Duration.EndOfTurn), source);
         return true;

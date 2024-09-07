@@ -1,5 +1,7 @@
 package mage.server.util;
 
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
 
@@ -13,6 +15,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -44,18 +47,21 @@ public enum ServerMessagesUtil {
     private static final AtomicInteger reconnects = new AtomicInteger(0);
 
     ServerMessagesUtil() {
-        ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
-        updateExecutor.scheduleAtFixedRate(this::reloadMessages, 5, SERVER_MSG_REFRESH_RATE_SECS, TimeUnit.SECONDS);
+        ScheduledExecutorService NEWS_MESSAGES_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+                new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_NEWS_REFRESH)
+        );
+        NEWS_MESSAGES_EXECUTOR.scheduleAtFixedRate(this::reloadMessages, 5, SERVER_MSG_REFRESH_RATE_SECS, TimeUnit.SECONDS);
     }
 
     public List<String> getMessages() {
-        lock.readLock().lock();
+        final Lock r = lock.readLock();
+        r.lock();
         try {
             List<String> res = new ArrayList<>(this.newsMessages);
             res.add(this.statsMessage);
             return res;
         } finally {
-            lock.readLock().unlock();
+            r.unlock();
         }
     }
 
@@ -64,13 +70,14 @@ public enum ServerMessagesUtil {
         List<String> updatedMessages = new ArrayList<>(readFromFile());
         String updatedStats = getServerStatsMessage();
 
-        lock.writeLock().lock();
+        final Lock w = lock.writeLock();
+        w.lock();
         try {
             this.newsMessages.clear();
             this.newsMessages.addAll(updatedMessages);
             this.statsMessage = updatedStats;
         } finally {
-            lock.writeLock().unlock();
+            w.unlock();
         }
     }
 

@@ -26,7 +26,11 @@ import mage.counters.Counter;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.GameState;
@@ -712,6 +716,30 @@ public final class CardUtil {
         }
     }
 
+    /**
+     * Checks if a given integer is prime
+     *
+     * @param number
+     * @return
+     */
+    public static boolean isPrime(int number) {
+        // if it's 1 or less it's not prime
+        if (number < 2) {
+            return false;
+        }
+        // easy to check 2 and 3 first
+        if (number == 2 || number == 3) {
+            return true;
+        }
+        // sieve of eratosthenes, only need to check up to sqrt(x) to find a divisor
+        for (int i = 2; i * i <= number; i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {
         String title;
         if (source != null) {
@@ -979,7 +1007,7 @@ public final class CardUtil {
     }
 
     public static String getTextWithFirstCharUpperCase(String text) {
-        if (text != null && text.length() >= 1) {
+        if (text != null && !text.isEmpty()) {
             return Character.toUpperCase(text.charAt(0)) + text.substring(1);
         } else {
             return text;
@@ -987,7 +1015,7 @@ public final class CardUtil {
     }
 
     public static String getTextWithFirstCharLowerCase(String text) {
-        if (text != null && text.length() >= 1) {
+        if (text != null && !text.isEmpty()) {
             return Character.toLowerCase(text.charAt(0)) + text.substring(1);
         } else {
             return text;
@@ -1203,9 +1231,9 @@ public final class CardUtil {
         }
     }
 
-    public static List<String> getCardRulesWithAdditionalInfo(UUID cardId, String cardName,
+    public static List<String> getCardRulesWithAdditionalInfo(MageObject object,
                                                               Abilities<Ability> rulesSource, Abilities<Ability> hintAbilities) {
-        return getCardRulesWithAdditionalInfo(null, cardId, cardName, rulesSource, hintAbilities);
+        return getCardRulesWithAdditionalInfo(null, object, rulesSource, hintAbilities);
     }
 
     /**
@@ -1214,10 +1242,10 @@ public final class CardUtil {
      * @param rulesSource abilities list to show as rules
      * @param hintsSource abilities list to show as card hints only (you can add additional hints here; example: from second or transformed side)
      */
-    public static List<String> getCardRulesWithAdditionalInfo(Game game, UUID cardId, String cardName,
+    public static List<String> getCardRulesWithAdditionalInfo(Game game, MageObject object,
                                                               Abilities<Ability> rulesSource, Abilities<Ability> hintsSource) {
         try {
-            List<String> rules = rulesSource.getRules(cardName);
+            List<String> rules = rulesSource.getRules();
 
             if (game == null || game.getPhase() == null) {
                 // dynamic hints for started game only
@@ -1225,7 +1253,10 @@ public final class CardUtil {
             }
 
             // additional effect's info from card.addInfo methods
-            rules.addAll(game.getState().getCardState(cardId).getInfo().values());
+            CardState cardState = game.getState().getCardState(object.getId());
+            if (cardState != null) {
+                rules.addAll(cardState.getInfo().values());
+            }
 
             // ability hints
             List<String> abilityHints = new ArrayList<>();
@@ -1241,6 +1272,7 @@ public final class CardUtil {
             }
 
             // restrict hints only for permanents, not cards
+
             // total hints
             if (!abilityHints.isEmpty()) {
                 rules.add(HintUtils.HINT_START_MARK);
@@ -1249,7 +1281,7 @@ public final class CardUtil {
 
             return rules;
         } catch (Exception e) {
-            logger.error("Exception in rules generation for card: " + cardName, e);
+            logger.error("Exception in rules generation for object: " + object.getName(), e);
         }
         return RULES_ERROR_INFO;
     }
@@ -1722,7 +1754,8 @@ public final class CardUtil {
     /**
      * Returns the entire cost tags map of either the source ability, or the permanent source of the ability. May be null.
      * Works in any moment (even before source ability activated)
-     * Usually you should use one of the single tag functions instead: getSourceCostsTag() or checkSourceCostsTagExists()
+     * <p>
+     * Usually you should use one of the single tag functions instead: getSourceCostsTag() or checkSourceCostsTagExists().
      * Use this function with caution, as it directly exposes the backing data structure.
      *
      * @param game
@@ -1731,11 +1764,30 @@ public final class CardUtil {
      */
     public static Map<String, Object> getSourceCostsTagsMap(Game game, Ability source) {
         Map<String, Object> costTags;
-        costTags = source.getCostsTagMap();
-        if (costTags == null && source.getSourcePermanentOrLKI(game) != null) {
-            costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
+        if (game == null) {
+            return null;
         }
-        return costTags;
+
+        // from spell ability - direct access
+        costTags = source.getCostsTagMap();
+        if (costTags != null) {
+            return costTags;
+        }
+
+        // from any ability after resolve - access by permanent
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        if (permanent != null) {
+            costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
+            return costTags;
+        }
+
+        // from any ability before resolve (on stack) - access by spell ability
+        Spell sourceObject = game.getSpellOrLKIStack(source.getSourceId());
+        if (sourceObject != null) {
+            return sourceObject.getSpellAbility().getCostsTagMap();
+        }
+
+        return null;
     }
 
     /**
@@ -1770,7 +1822,7 @@ public final class CardUtil {
             if (value == null) {
                 throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type null but is trying to be read. Use checkSourceCostsTagExists");
             }
-            if (value.getClass() != defaultValue.getClass()) {
+            if (defaultValue != null && value.getClass() != defaultValue.getClass()) {
                 throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type " + value.getClass().getName() + " different from default of type " + defaultValue.getClass().getName());
             }
             return (T) value;
@@ -2060,6 +2112,15 @@ public final class CardUtil {
 
     public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
         return stream.filter(clazz::isInstance).map(clazz::cast).filter(Objects::nonNull);
+    }
+
+    public static void AssertNoControllerOwnerPredicates(Target target) {
+        List<Predicate> list = new ArrayList<>();
+        Predicates.collectAllComponents(target.getFilter().getPredicates(), target.getFilter().getExtraPredicates(), list);
+        if (list.stream().anyMatch(p -> p instanceof TargetController.ControllerPredicate || p instanceof TargetController.OwnerPredicate
+                || p instanceof OwnerIdPredicate || p instanceof ControllerIdPredicate)) {
+            throw new IllegalArgumentException("Wrong code usage: target adjuster will add controller/owner predicate, but target's filter already has one - " + target);
+        }
     }
 
     /**

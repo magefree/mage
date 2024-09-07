@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
@@ -60,7 +60,7 @@ class AnotherRoundEffect extends OneShotEffect {
             return false;
         }
 
-        int xValue = ManacostVariableValue.REGULAR.calculate(game, source, this);
+        int xValue = GetXValue.instance.calculate(game, source, this);
         TargetControlledCreaturePermanent target =
                 new TargetControlledCreaturePermanent(
                         0, Integer.MAX_VALUE,

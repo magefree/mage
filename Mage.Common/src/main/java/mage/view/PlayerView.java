@@ -40,13 +40,15 @@ public class PlayerView implements Serializable {
     private final CardsView graveyard = new CardsView();
     private final CardsView exile = new CardsView();
     private final CardsView sideboard = new CardsView();
+    private final CardsView helperCards = new CardsView();
     private final Map<UUID, PermanentView> battlefield = new LinkedHashMap<>();
     private final CardView topCard;
     private final UserData userData;
     private final List<CommandObjectView> commandList = new ArrayList<>();
     private final List<UUID> attachments = new ArrayList<>();
     private final int statesSavedSize;
-    private final int priorityTimeLeft;
+    private final long priorityTimeSavedTimeMs;
+    private final int priorityTimeLeftSecs;
     private final int bufferTimeLeft;
     private final boolean passedTurn; // F4
     private final boolean passedUntilEndOfTurn; // F5
@@ -71,7 +73,8 @@ public class PlayerView implements Serializable {
         this.manaPool = new ManaPoolView(player.getManaPool());
         this.isActive = (player.getId().equals(state.getActivePlayerId()));
         this.hasPriority = player.getId().equals(state.getPriorityPlayerId());
-        this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.priorityTimeLeftSecs = player.getPriorityTimeLeft();
+        this.priorityTimeSavedTimeMs = System.currentTimeMillis();
         this.bufferTimeLeft = player.getBufferTimeLeft();
         this.timerActive = (this.hasPriority && player.isGameUnderControl())
                 || (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId()))
@@ -94,17 +97,13 @@ public class PlayerView implements Serializable {
                 sideboard.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId)));
             }
         }
-
-        try {
-            for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
-                if (showInBattlefield(permanent, state)) {
-                    PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()), createdForPlayerId, game);
-                    battlefield.put(view.getId(), view);
-                }
+        for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
+            if (showInBattlefield(permanent, state)) {
+                PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()), createdForPlayerId, game);
+                battlefield.put(view.getId(), view);
             }
-        } catch (ConcurrentModificationException e) {
-            // can happen as a player left battlefield while PlayerView is created
         }
+
         Card cardOnTop = (player.isTopCardRevealed() && player.getLibrary().hasCards())
                 ? player.getLibrary().getFromTop(game) : null;
         this.topCard = cardOnTop != null ? new CardView(cardOnTop, game) : null;
@@ -118,7 +117,7 @@ public class PlayerView implements Serializable {
             if (commandObject instanceof Emblem) {
                 Emblem emblem = (Emblem) commandObject;
                 if (emblem.getControllerId().equals(this.playerId)) {
-                    commandList.add(new EmblemView(emblem));
+                    commandList.add(new EmblemView(emblem, game));
                 }
             } else if (commandObject instanceof Dungeon) {
                 Dungeon dungeon = (Dungeon) commandObject;
@@ -128,7 +127,7 @@ public class PlayerView implements Serializable {
             } else if (commandObject instanceof Plane) {
                 Plane plane = (Plane) commandObject;
                 // Planes are universal and all players can see them.
-                commandList.add(new PlaneView(plane));
+                commandList.add(new PlaneView(plane, game));
             } else if (commandObject instanceof Commander) {
                 Commander commander = (Commander) commandObject;
                 if (commander.getControllerId().equals(this.playerId)) {
@@ -270,8 +269,10 @@ public class PlayerView implements Serializable {
         return statesSavedSize;
     }
 
-    public int getPriorityTimeLeft() {
-        return priorityTimeLeft;
+    public int getPriorityTimeLeftSecs() {
+        // workaround to find real time
+        int secsAfterUpdate = (int) ((System.currentTimeMillis() - this.priorityTimeSavedTimeMs) / 1000);
+        return Math.max(0, this.priorityTimeLeftSecs - secsAfterUpdate);
     }
 
     public int getBufferTimeLeft() {

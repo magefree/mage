@@ -47,7 +47,7 @@ public final class BoxingRing extends CardImpl {
     public BoxingRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{G}");
 
-        // Whenever a creature enters the battlefield under your control, it fights up to one target creature you don't control with the same mana value.
+        // Whenever a creature you control enters, it fights up to one target creature you don't control with the same mana value.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new BoxingRingFightEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE
         );

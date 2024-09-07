@@ -44,7 +44,7 @@ public class AnimateDeadTriggeredAbility extends EntersBattlefieldTriggeredAbili
         super(new AnimateDeadReplaceAbilityEffect(becomesAura));
         addEffect(new AnimateDeadPutOntoBattlefieldEffect(becomesAura, tapped));
         addWatcher(new AnimateDeadWatcher());
-        setTriggerPhrase("When {this} enters the battlefield, if it's on the battlefield, ");
+        setTriggerPhrase("When {this} enters, if it's on the battlefield, ");
     }
 
     private AnimateDeadTriggeredAbility(final AnimateDeadTriggeredAbility ability) {

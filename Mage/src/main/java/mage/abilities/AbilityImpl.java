@@ -19,6 +19,9 @@ import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
+import mage.choices.Choice;
+import mage.choices.ChoiceHintType;
+import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Dungeon;
@@ -33,6 +36,7 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.Targets;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.targetadjustment.GenericTargetAdjuster;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.CardUtil;
 import mage.util.GameLog;
@@ -254,7 +258,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
         Player controller = game.getPlayer(this.getControllerId());
         if (controller == null) {
             return false;
@@ -271,11 +275,9 @@ public abstract class AbilityImpl implements Ability {
         // For Flashback ability can be set X before, so the X costs have to be restored for the flashbacked ability
         if (noMana) {
             if (!this.getManaCostsToPay().getVariableCosts().isEmpty()) {
-                int xValue = this.getManaCostsToPay().getX();
+                int xValue = CardUtil.getSourceCostsTag(game, this, "X", 0);
                 this.clearManaCostsToPay();
                 VariableManaCost xCosts = new VariableManaCost(VariableCostType.ADDITIONAL);
-                // no x events - rules from Unbound Flourishing:
-                // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
                 xCosts.setAmount(xValue, xValue, false);
                 addManaCostsToPay(xCosts);
             } else {
@@ -301,7 +303,9 @@ public abstract class AbilityImpl implements Ability {
         // or her intentions to pay any or all of those costs (see rule 601.2e).
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
         if (isMainPartAbility) {
-            activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game);
+            if (!activateAlternateOrAdditionalCosts(sourceObject, allowedIdentifiers, noMana, controller, game)) {
+                return false;
+            }
         }
 
         // 117.6. Some mana costs contain no mana symbols. This represents an unpayable cost. An ability can
@@ -437,7 +441,7 @@ public abstract class AbilityImpl implements Ability {
             game.informPlayers(announceString);
         }
         if (variableManaCost != null) {
-            int xValue = getManaCostsToPay().getX();
+            int xValue = CardUtil.getSourceCostsTag(game, this, "X", 0);
             game.informPlayers(controller.getLogName() + " announces a value of " + xValue + " for " + variableManaCost.getText()
                     + CardUtil.getSourceLogName(game, this));
         }
@@ -450,8 +454,11 @@ public abstract class AbilityImpl implements Ability {
         return activated;
     }
 
+    /**
+     * @return true if choices for the activation were made (can be to activate with the regular cost)
+     */
     @Override
-    public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
+    public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, Set<MageIdentifier> allowedIdentifiers, boolean noMana, Player controller, Game game) {
         boolean canUseAlternativeCost = true;
         boolean canUseAdditionalCost = true;
 
@@ -493,48 +500,104 @@ public abstract class AbilityImpl implements Ability {
             canUseAlternativeCost = false;
         }
 
-        boolean alternativeCostUsed = false;
-        if (sourceObject != null && !(sourceObject instanceof Permanent)) {
-            // it's important to apply alternative cost first
-            // example: Omniscience gives free mana as alternative, but Entwine ability adds {2} as additional
-            Abilities<Ability> abilities = CardUtil.getAbilities(sourceObject, game);
+        // TODO: Why the check for permanent?
+        if (sourceObject == null || sourceObject instanceof Permanent) {
+            return true;
+        }
 
-            // 1. ALTERNATIVE COSTS
-            for (Ability ability : abilities) {
-                // if cast for noMana no Alternative costs are allowed
-                if (canUseAlternativeCost && !noMana && ability instanceof AlternativeSourceCosts) {
-                    AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
-                    if (alternativeSpellCosts.isAvailable(this, game)) {
-                        if (alternativeSpellCosts.askToActivateAlternativeCosts(this, game)) {
-                            // only one alternative costs may be activated
-                            alternativeCostUsed = true;
-                            break;
-                        }
-                    }
-                }
-            }
-            // controller specific alternate spell costs
-            if (canUseAlternativeCost && !noMana && !alternativeCostUsed) {
-                for (AlternativeSourceCosts alternativeSourceCosts : controller.getAlternativeSourceCosts()) {
-                    if (alternativeSourceCosts.isAvailable(this, game)) {
-                        if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
-                            // only one alternative costs may be activated
-                            alternativeCostUsed = true;
-                            break;
-                        }
-                    }
-                }
-            }
+        // it's important to apply alternative cost first
+        // example: Omniscience gives free mana as alternative, but Entwine ability adds {2} as additional
+        Abilities<Ability> abilities = CardUtil.getAbilities(sourceObject, game);
 
-            // 2. ADDITIONAL COST
-            for (Ability ability : abilities) {
-                if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
-                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
+        // 1. ALTERNATIVE COSTS
+        // Collect all possible alternatives costs:
+        List<AlternativeSourceCosts> possibleAlternatives = new ArrayList<>();
+        for (Ability ability : abilities) {
+            // if cast for noMana no Alternative costs are allowed
+            if (canUseAlternativeCost && !noMana && ability instanceof AlternativeSourceCosts) {
+                AlternativeSourceCosts alternativeSpellCosts = (AlternativeSourceCosts) ability;
+                if (alternativeSpellCosts.isAvailable(this, game)
+                        && alternativeSpellCosts.canActivateAlternativeCostsNow(this, game)
+                        && (allowedIdentifiers.contains(MageIdentifier.Default) || allowedIdentifiers.contains(ability.getIdentifier()))) {
+                    possibleAlternatives.add(alternativeSpellCosts);
                 }
             }
         }
-
-        return alternativeCostUsed;
+        // controller specific alternate spell costs
+        if (canUseAlternativeCost && !noMana) {
+            for (AlternativeSourceCosts alternativeSourceCosts : controller.getAlternativeSourceCosts()) {
+                if (alternativeSourceCosts.isAvailable(this, game)
+                        && alternativeSourceCosts.canActivateAlternativeCostsNow(this, game)
+                        && (allowedIdentifiers.contains(MageIdentifier.Default) || allowedIdentifiers.contains(alternativeSourceCosts.getIdentifier()))) {
+                    possibleAlternatives.add(alternativeSourceCosts);
+                }
+            }
+        }
+        Player player = game.getPlayer(getControllerId());
+        if (player == null) {
+            // No controller to activate.
+            return false;
+        }
+        Choice choice = new ChoiceImpl(false); // not required, cancelling will cancel the cast (as you could do once in the pay mana mode).
+        choice.setSubMessage("for casting " + CardUtil.getSourceLogName(game, "", this, "", ""));
+        AlternativeSourceCosts alternativeChosen = null;
+        if (!possibleAlternatives.isEmpty()) {
+            // At least one alternative cost is available.
+            // We open a menu for the player to choose up to one.
+            boolean mustChooseAlternative = !(allowedIdentifiers.contains(MageIdentifier.Default) || allowedIdentifiers.contains(getIdentifier()));
+            choice.setMessage(
+                    mustChooseAlternative
+                            ? "Choose an alternative cost"
+                            : "You may choose an alternative cost"
+            );
+            Map<String, Integer> sort = new LinkedHashMap<>();
+            int i;
+            for (i = 0; i < possibleAlternatives.size(); i++) {
+                String key = Integer.toString(i + 1);
+                sort.put(key, i);
+                AlternativeSourceCosts alternative = possibleAlternatives.get(i);
+                MageObject object = alternative.getSourceObject(game);
+                choice.withItem(
+                        key,
+                        possibleAlternatives.get(i).getAlternativeCostText(this, game),
+                        i,
+                        object != null ? ChoiceHintType.GAME_OBJECT : null,
+                        object != null ? object.getId().toString() : null
+                );
+            }
+            if (!mustChooseAlternative) {
+                // add the non-alternative cast as the last option.
+                String key = Integer.toString(i + 1);
+                sort.put(key, i);
+                choice.withItem(
+                        key,
+                        "Cast with no alternative cost: " + this.getManaCosts().getText(),
+                        i,
+                        ChoiceHintType.GAME_OBJECT,
+                        sourceObject.getId().toString()
+                );
+            }
+            if (!player.choose(Outcome.Benefit, choice, game)) {
+                return false;
+            }
+            String choiceKey = choice.getChoiceKey();
+            if (sort.containsKey(choiceKey)) {
+                int choiceNumber = sort.get(choiceKey);
+                if (choiceNumber < possibleAlternatives.size()) {
+                    alternativeChosen = possibleAlternatives.get(choiceNumber);
+                }
+            }
+        }
+        if (alternativeChosen != null) {
+            alternativeChosen.activateAlternativeCosts(this, game);
+        }
+        // 2. ADDITIONAL COST
+        for (Ability ability : abilities) {
+            if (canUseAdditionalCost && ability instanceof OptionalAdditionalSourceCosts) {
+                ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
+            }
+        }
+        return true;
     }
 
     /**
@@ -552,8 +615,6 @@ public abstract class AbilityImpl implements Ability {
                 Cost fixedCost = variableCost.getFixedCostsFromAnnouncedValue(xValue);
                 addCost(fixedCost);
                 // set the xcosts to paid
-                // no x events - rules from Unbound Flourishing:
-                // - Spells with additional costs that include X won't be affected by Unbound Flourishing. X must be in the spell's mana cost.
                 variableCost.setAmount(xValue, xValue, false);
                 ((Cost) variableCost).setPaid();
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')'
@@ -586,13 +647,6 @@ public abstract class AbilityImpl implements Ability {
                 getManaCostsToPay().incrPhyrexianPaid();
             }
         }
-    }
-
-    public int handleManaXMultiplier(Game game, int value) {
-        // some spells can change X value without new pays (Unbound Flourishing doubles X)
-        GameEvent xEvent = GameEvent.getEvent(GameEvent.EventType.X_MANA_ANNOUNCE, this.getId(), this, getControllerId(), value);
-        game.replaceEvent(xEvent, this);
-        return xEvent.getAmount();
     }
 
     /**
@@ -630,9 +684,8 @@ public abstract class AbilityImpl implements Ability {
         if (variableManaCost != null) {
             if (!variableManaCost.isPaid()) { // should only happen for human players
                 int xValue;
-                int xValueMultiplier = handleManaXMultiplier(game, 1);
                 if (!noMana || variableManaCost.getCostType().canUseAnnounceOnFreeCast()) {
-                    xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), xValueMultiplier,
+                    xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(),
                             "Announce the value for " + variableManaCost.getText(), game, this);
                     int amountMana = xValue * variableManaCost.getXInstancesCount();
                     StringBuilder manaString = threadLocalBuilder.get();
@@ -663,8 +716,8 @@ public abstract class AbilityImpl implements Ability {
                         }
                     }
                     addManaCostsToPay(new ManaCostsImpl<>(manaString.toString()));
-                    getManaCostsToPay().setX(xValue * xValueMultiplier, amountMana);
-                    setCostsTag("X", xValue * xValueMultiplier);
+                    getManaCostsToPay().setX(xValue, amountMana);
+                    setCostsTag("X", xValue);
                 }
                 variableManaCost.setPaid();
             }
@@ -1288,6 +1341,7 @@ public abstract class AbilityImpl implements Ability {
         StringBuilder sb = new StringBuilder(); // threadLocal StringBuilder can't be used because calling method already uses it
         if (!targets.isEmpty()) {
             String usedVerb = null;
+            boolean isFirstTarget = true;
             for (Target target : targets) {
                 if (!target.getTargets().isEmpty()) {
                     String targetHintInfo = target.getChooseHint() == null ? "" : " (" + target.getChooseHint() + ")";
@@ -1300,6 +1354,12 @@ public abstract class AbilityImpl implements Ability {
                         usedVerb = " choosing ";
                         sb.append(usedVerb);
                     }
+
+                    if (!isFirstTarget) {
+                        sb.append(", ");
+                    }
+                    isFirstTarget = false;
+
                     sb.append(target.getTargetedName(game));
                     sb.append(targetHintInfo);
                 }
@@ -1423,7 +1483,11 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public AbilityImpl setTargetAdjuster(TargetAdjuster targetAdjuster) {
+        if (targetAdjuster instanceof GenericTargetAdjuster && this.getTargets().isEmpty()) {
+            throw new IllegalStateException("Target adjuster being added but no targets are set!");
+        }
         this.targetAdjuster = targetAdjuster;
+        this.targetAdjuster.addDefaultTargets(this);
         return this;
     }
 

@@ -22,6 +22,7 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -87,7 +88,7 @@ class BreechesTheBlastmakerEffect extends OneShotEffect {
         if (player.flipCoin(source, game, true)) {
             Effect effect = new CopyStackObjectEffect();
             effect.setText("copy that spell. You may choose new targets for the copy");
-            effect.setValue("stackObject", spell);
+            effect.setTargetPointer(new FixedTarget(spell.getId(), game));
             ability = new ReflexiveTriggeredAbility(effect, false);
         } else {
             int mv = Optional

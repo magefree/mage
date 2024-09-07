@@ -61,7 +61,7 @@ public final class ActivatedSleeper extends CardImpl {
 class ActivatedSleeperEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCreatureCard(
-            "creature card in a graveyard that was put there from the battelfield this turn"
+            "creature card in a graveyard that was put there from the battlefield this turn"
     );
 
     static {

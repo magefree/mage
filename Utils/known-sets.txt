@@ -20,6 +20,7 @@ Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|
 Betrayers of Kamigawa|BetrayersOfKamigawa|
 Bloomburrow|Bloomburrow|
+Bloomburrow Commander|BloomburrowCommander|
 Born of the Gods|BornOfTheGods|
 Champions of Kamigawa|ChampionsOfKamigawa|
 Champs|Champs|
@@ -81,6 +82,8 @@ Duel Decks: Speed vs. Cunning|DuelDecksSpeedVsCunning|
 Duel Decks: Venser vs. Koth|DuelDecksVenserVsKoth|
 Duel Decks: Zendikar vs. Eldrazi|DuelDecksZendikarVsEldrazi|
 Duels of the Planeswalkers|DuelsOfThePlaneswalkers|
+Duskmourn: House of Horror|DuskmournHouseOfHorror|
+Duskmourn: House of Horror Commander|DuskmournHouseOfHorrorCommander|
 Eighth Edition|EighthEdition|
 Eldritch Moon|EldritchMoon|
 Eternal Masters|EternalMasters|
@@ -93,6 +96,7 @@ Fallen Empires|FallenEmpires|
 Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
 Fifth Edition|FifthEdition|
+Foundations|Foundations|
 Fourth Edition|FourthEdition|
 Friday Night Magic|FridayNightMagic|
 From the Vault: Angels|FromTheVaultAngels|
@@ -189,6 +193,7 @@ Modern Masters 2017|ModernMasters2017|
 Morningtide|Morningtide|
 Murders at Karlov Manor|MurdersAtKarlovManor|
 Murders at Karlov Manor Commander|MurdersAtKarlovManorCommander|
+Mystery Booster 2|MysteryBooster2|
 Ravnica: Clue Edition|RavnicaClueEdition|
 Nemesis|Nemesis|
 New Phyrexia|NewPhyrexia|
@@ -221,6 +226,7 @@ Revised Edition|RevisedEdition|
 Rise of the Eldrazi|RiseOfTheEldrazi|
 Rivals of Ixalan|RivalsOfIxalan|
 Saviors of Kamigawa|SaviorsOfKamigawa|
+Sega Dreamcast Cards|SegaDreamcastCards|
 Scars of Mirrodin|ScarsOfMirrodin|
 Scourge|Scourge|
 Secret Lair Drop|SecretLairDrop|

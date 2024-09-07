@@ -37,7 +37,7 @@ public final class ViashinoBranchrider extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // If Viashino Branchrider was kicked, it enters the battlefield with two +1/+1 counters on it.
+        // If Viashino Branchrider was kicked, it enters with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
                 KickedCondition.ONCE, "If {this} was kicked, " +

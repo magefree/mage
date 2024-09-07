@@ -59,7 +59,7 @@ class TempleOfTheDragonQueenEffect extends OneShotEffect {
     public TempleOfTheDragonQueenEffect() {
         super(Outcome.Tap);
         this.staticText = "you may reveal a Dragon card from your hand. "
-                + "{this} enters the battlefield tapped unless you revealed a Dragon card this way or you control a Dragon";
+                + "{this} enters tapped unless you revealed a Dragon card this way or you control a Dragon";
     }
 
     private TempleOfTheDragonQueenEffect(final TempleOfTheDragonQueenEffect effect) {

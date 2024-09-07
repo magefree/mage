@@ -18,7 +18,7 @@ public class GristVoraciousLarvaTest extends CardTestPlayerBase {
      * {@link mage.cards.g.GristVoraciousLarva Grist, Voracious Larva} {G}
      * Legendary Creature — Insect
      * Deathtouch
-     * Whenever Grist, Voracious Larva or another creature enters the battlefield under your control, if it entered from your graveyard or you cast it from your graveyard, you may pay {G}. If you do, exile Grist, then return it to the battlefield transformed under its owner’s control.
+     * Whenever Grist, Voracious Larva or another creature you control enters, if it entered from your graveyard or you cast it from your graveyard, you may pay {G}. If you do, exile Grist, then return it to the battlefield transformed under its owner’s control.
      * 1/2
      * // {@link mage.cards.g.GristThePlagueSwarm Grist, the Plague Swarm}
      * Legendary Planeswalker — Grist

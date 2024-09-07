@@ -41,7 +41,7 @@
 
      private Dimension cardDimension;
      private final List<JLabel> countLabels = new ArrayList<>(); // count label code copy-pasted from CardGrid.java
-     private int rowHeight;
+     private int cardOffsetInStack;
      private CardsView cards;
      private Map<UUID, MageCard> mageCards = new LinkedHashMap<>();
      protected BigCard bigCard;
@@ -105,9 +105,9 @@
      private void setGUISize() {
          mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
          mainTable.setFont(GUISizeHelper.tableFont);
-         mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());
+         mainTable.setRowHeight(GUISizeHelper.tableRowHeight);
          cardDimension = GUISizeHelper.editorCardDimension;
-         rowHeight = GUISizeHelper.editorCardVertOffsetInStack;
+         cardOffsetInStack = GUISizeHelper.editorCardVertOffsetInStack;
      }
 
      private void makeTransparent() {
@@ -357,13 +357,13 @@
                      String description = comparator.getCategoryName(card);
                      DragCardGrid.updateCountLabel(lastCountLabel, curRow + 1, description);
 
-                     rectangle.setLocation(curColumn * cardDimension.width, curRow * rowHeight + DragCardGrid.COUNT_LABEL_HEIGHT);
+                     rectangle.setLocation(curColumn * cardDimension.width, curRow * cardOffsetInStack + DragCardGrid.getCountLabelHeight());
                      setCardBounds(mageCards.get(card.getId()), rectangle);
 
                      curRow++;
                      lastCard = card;
                  } else {
-                     rectangle.setLocation(curColumn * cardDimension.width, curRow * rowHeight);
+                     rectangle.setLocation(curColumn * cardDimension.width, curRow * cardOffsetInStack);
                      setCardBounds(mageCards.get(card.getId()), rectangle);
                      curColumn++;
                      if (curColumn == numColumns) {
@@ -377,7 +377,7 @@
          maxRow = Math.max(maxRow, curRow);
          maxColumn = Math.max(maxColumn, curColumn);
          updateCounts();
-         cardArea.setPreferredSize(new Dimension((maxColumn + 1) * cardDimension.width, cardDimension.height + maxRow * rowHeight));
+         cardArea.setPreferredSize(new Dimension((maxColumn + 1) * cardDimension.width, cardDimension.height + maxRow * cardOffsetInStack));
          cardArea.revalidate();
          this.revalidate();
          this.repaint();
@@ -389,7 +389,7 @@
          this.countLabels.add(label);
          cardArea.add(label, (Integer) 0); // draw on background
          label.setLocation(columnNumber * cardDimension.width, 5);
-         label.setSize(cardDimension.width, DragCardGrid.COUNT_LABEL_HEIGHT);
+         label.setSize(cardDimension.width, DragCardGrid.getCountLabelHeight());
          label.setVisible(true);
          return label;
      }

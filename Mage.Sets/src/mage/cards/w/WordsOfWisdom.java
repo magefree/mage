@@ -24,7 +24,7 @@ public final class WordsOfWisdom extends CardImpl {
 
 
         // You draw two cards, then each other player draws a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("you draw two cards"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, true));
         this.getSpellAbility().addEffect(new WordsOfWisdomEffect());
     }
 

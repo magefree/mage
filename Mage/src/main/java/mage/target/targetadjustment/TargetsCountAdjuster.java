@@ -9,8 +9,7 @@ import mage.target.Target;
 /**
  * @author TheElk801, notgreat
  */
-public class TargetsCountAdjuster implements TargetAdjuster {
-    private Target blueprintTarget = null;
+public class TargetsCountAdjuster extends GenericTargetAdjuster {
     private final DynamicValue dynamicValue;
 
     /**
@@ -26,10 +25,6 @@ public class TargetsCountAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if (blueprintTarget == null) {
-            blueprintTarget = ability.getTargets().get(0).copy();
-            blueprintTarget.clearChosen();
-        }
         Target newTarget = blueprintTarget.copy();
         int count = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
         newTarget.setMaxNumberOfTargets(count);

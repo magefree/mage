@@ -31,11 +31,11 @@ public final class VerduranEmissary extends CardImpl {
         // Kicker {1}{R}
         this.addAbility(new KickerAbility("{1}{R}"));
 
-        // When {this} enters the battlefield, if it was kicked, destroy target artifact. It can't be regenerated.
+        // When {this} enters, if it was kicked, destroy target artifact. It can't be regenerated.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(true));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, destroy target artifact. It can't be regenerated."));
+                "When {this} enters, if it was kicked, destroy target artifact. It can't be regenerated."));
     }
 
     private VerduranEmissary(final VerduranEmissary card) {

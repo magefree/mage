@@ -2,6 +2,7 @@ package mage.players;
 
 import com.google.common.collect.Iterables;
 import mage.MageItem;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
@@ -155,7 +156,7 @@ public class StubPlayer extends PlayerImpl {
     }
 
     @Override
-    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         return 0;
     }
 
@@ -165,7 +166,7 @@ public class StubPlayer extends PlayerImpl {
     }
 
     @Override
-    public int chooseReplacementEffect(Map<String, String> abilityMap, Game game) {
+    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
         return 0;
     }
 

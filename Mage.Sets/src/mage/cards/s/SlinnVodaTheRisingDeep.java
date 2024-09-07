@@ -50,7 +50,7 @@ public final class SlinnVodaTheRisingDeep extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)),
                 KickedCondition.ONCE,
-                "when {this} enters the battlefield, if it was kicked, "
+                "when {this} enters, if it was kicked, "
                 + "return all creatures to their owners' hands except for "
                 + "Merfolk, Krakens, Leviathans, Octopuses, and Serpents."
         ));

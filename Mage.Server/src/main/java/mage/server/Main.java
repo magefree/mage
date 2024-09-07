@@ -4,9 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.cards.RateCard;
 import mage.cards.Sets;
 import mage.cards.decks.DeckValidatorFactory;
-import mage.cards.repository.CardScanner;
-import mage.cards.repository.PluginClassloaderRegistery;
-import mage.cards.repository.RepositoryUtil;
+import mage.cards.repository.*;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
@@ -244,8 +242,10 @@ public final class Main {
             }
         }
 
-        logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
+        logger.info("Config - server address:   " + config.getServerAddress());
+        logger.info("Config - server port:      " + config.getPort());
         logger.info("Config - max game threads: " + config.getMaxGameThreads());
+        logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
         logger.info("Config - max AI opponents: " + config.getMaxAiOpponents());
         logger.info("Config - min usr name le.: " + config.getMinUserNameLength());
         logger.info("Config - max usr name le.: " + config.getMaxUserNameLength());
@@ -259,8 +259,8 @@ public final class Main {
         logger.info("Config - max pool size   : " + config.getMaxPoolSize());
         logger.info("Config - num accp.threads: " + config.getNumAcceptThreads());
         logger.info("Config - second.bind port: " + config.getSecondaryBindPort());
-        logger.info("Config - users registration: " + (config.isAuthenticationActivated() ? "true" : "false"));
-        logger.info("Config - users anon: " + (!config.isAuthenticationActivated() ? "true" : "false"));
+        logger.info("Config - users registr.:   " + (config.isAuthenticationActivated() ? "true" : "false"));
+        logger.info("Config - users anon:       " + (!config.isAuthenticationActivated() ? "true" : "false"));
         logger.info("Config - mailgun api key : " + config.getMailgunApiKey());
         logger.info("Config - mailgun domain  : " + config.getMailgunDomain());
         logger.info("Config - mail smtp Host  : " + config.getMailSmtpHost());
@@ -323,7 +323,7 @@ public final class Main {
                 testServer.getServerState(); // check connection
                 return true;
             }
-        } catch (Throwable t) {
+        } catch (Throwable ignore) {
             // assume server is not running
         }
         return false;

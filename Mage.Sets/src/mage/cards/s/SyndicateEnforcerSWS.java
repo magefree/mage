@@ -34,7 +34,7 @@ public final class SyndicateEnforcerSWS extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // When {this} enters the battlefield, put a bounty counter on target creature an opponent controls 
+        // When {this} enters, put a bounty counter on target creature an opponent controls
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);

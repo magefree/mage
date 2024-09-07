@@ -160,9 +160,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jToggleCardView.setToolTipText(jToggleCardView.getToolTipText() + " (works only up to " + CardGrid.MAX_IMAGES + " cards).");
     }
 
-    /**
-     * Free all references
-     */
     public void cleanUp() {
         this.cardGrid.clear();
         this.mainModel.clear();
@@ -184,7 +181,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void setGUISize() {
         mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
         mainTable.setFont(GUISizeHelper.tableFont);
-        mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());
+        mainTable.setRowHeight(GUISizeHelper.tableRowHeight);
 
     }
 

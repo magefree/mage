@@ -24,7 +24,7 @@ public final class ThoughtrenderLamia extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 
-        // Constellation - Whenever Thoughtrender Lamia or another enchantment enters the battlefield under your control, each opponent discards a card.
+        // Constellation - Whenever Thoughtrender Lamia or another enchantment you control enters, each opponent discards a card.
         this.addAbility(new ConstellationAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT)));
     }
 

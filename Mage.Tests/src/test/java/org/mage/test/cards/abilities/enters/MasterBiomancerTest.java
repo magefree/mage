@@ -98,6 +98,9 @@ public class MasterBiomancerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Progenitor Mimic");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Progenitor Mimic");
+        setChoice(playerA, true); // yes to copy
+        setChoice(playerA, "Master Biomancer");
+        setStrictChooseMode(false); // something weird with replacement effect ordering?
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();

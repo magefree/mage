@@ -44,7 +44,7 @@ public final class GuideOfSouls extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature enters the battlefield under your control, you gain 1 life and get {E}.
+        // Whenever another creature you control enters, you gain 1 life and get {E}.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter);
         ability.addEffect(new GetEnergyCountersControllerEffect(1).setText("and get {E}"));
         this.addAbility(ability);

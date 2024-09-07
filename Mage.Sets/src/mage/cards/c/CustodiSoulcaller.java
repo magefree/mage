@@ -40,8 +40,8 @@ public final class CustodiSoulcaller extends CardImpl {
         // Whenever Custodi Soulcaller attacks, return target creature card with converted mana cost X or less from your graveyard to the battlefield, where X is the number of players you attacked with a creature this combat.
         Ability ability = new AttacksTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect().setText("return target creature card with mana value X or less from your graveyard to the battlefield, where X is the number of players you attacked this combat"), false);
         ability.addWatcher(new CustodiSoulcallerWatcher());
-        ability.setTargetAdjuster(new ManaValueTargetAdjuster(CustodiSoulcallerValue.instance, ComparisonType.OR_LESS));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.setTargetAdjuster(new ManaValueTargetAdjuster(CustodiSoulcallerValue.instance, ComparisonType.OR_LESS));
         this.addAbility(ability);
     }
 

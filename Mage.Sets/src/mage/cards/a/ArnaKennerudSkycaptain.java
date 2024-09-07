@@ -56,7 +56,7 @@ public final class ArnaKennerudSkycaptain extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Ward--Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost()));
+        this.addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Whenever a modified creature you control attacks, double the number of each kind of counter on it. Then for each nontoken permanent attached to it, create a token that's a copy of that permanent attached to that creature.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(

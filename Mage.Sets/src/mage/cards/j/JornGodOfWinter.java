@@ -59,7 +59,7 @@ public final class JornGodOfWinter extends ModalDoubleFacedCard {
         // 2.
         // Kaldring, the Rimestaff
         // Legendary Snow Artifact
-        // {T}: You may play target snow permanent card from your graveyard this turn. If you do, it enters the battlefield tapped.
+        // {T}: You may play target snow permanent card from your graveyard this turn. If you do, it enters tapped.
         Ability ability = new SimpleActivatedAbility(new KaldringTheRimestaffEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.getRightHalfCard().addAbility(ability);
@@ -79,7 +79,7 @@ class KaldringTheRimestaffEffect extends OneShotEffect {
 
     KaldringTheRimestaffEffect() {
         super(Outcome.Benefit);
-        staticText = "You may play target snow permanent card from your graveyard this turn. If you do, it enters the battlefield tapped";
+        staticText = "You may play target snow permanent card from your graveyard this turn. If you do, it enters tapped";
     }
 
     private KaldringTheRimestaffEffect(final KaldringTheRimestaffEffect effect) {

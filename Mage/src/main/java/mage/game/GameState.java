@@ -62,8 +62,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     // warning, do not use another keys with same starting text cause copy code search and clean all related values
     public static final String COPIED_CARD_KEY = "CopiedCard";
 
-    private final Players players;
-    private final PlayerList playerList;
+    private final Players players; // full players by ID (static list, table added order)
+    private final PlayerList playerList; // full players (static list, turn order e.g. apnap)
     private UUID choosingPlayerId; // player that makes a choice at game start
 
     // revealed cards <Name, <Cards>>, will be reset if all players pass priority
@@ -85,7 +85,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean isPlaneChase;
     private List<String> seenPlanes = new ArrayList<>();
     private List<Designation> designations = new ArrayList<>();
-    private List<Emblem> inherentEmblems = new ArrayList<>();
+    private List<Emblem> helperEmblems = new ArrayList<>(); // fake emblems for inner usage like better UX
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
@@ -158,7 +158,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes.addAll(state.seenPlanes);
         this.designations.addAll(state.designations);
-        this.inherentEmblems = CardUtil.deepCopyObject(state.inherentEmblems);
+        this.helperEmblems = CardUtil.deepCopyObject(state.helperEmblems);
         this.exile = state.exile.copy();
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
@@ -206,7 +206,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         exile.clear();
         command.clear();
         designations.clear();
-        inherentEmblems.clear();
+        helperEmblems.clear();
         seenPlanes.clear();
         isPlaneChase = false;
         revealed.clear();
@@ -248,7 +248,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes = state.seenPlanes;
         this.designations = state.designations;
-        this.inherentEmblems = state.inherentEmblems;
+        this.helperEmblems = state.helperEmblems;
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
@@ -519,12 +519,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         return designations;
     }
 
-    public List<Emblem> getInherentEmblems() {
-        return inherentEmblems;
+    public List<Emblem> getHelperEmblems() {
+        return helperEmblems;
     }
 
     public Plane getCurrentPlane() {
-        if (command != null && command.size() > 0) {
+        if (command != null && !command.isEmpty()) {
             for (CommandObject cobject : command) {
                 if (cobject instanceof Plane) {
                     return (Plane) cobject;
@@ -720,7 +720,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
      *
-     * @return playerList
+     * Warning, it's ignore range, must be used by game engine only.
      */
     public PlayerList getPlayerList() {
         return playerList;
@@ -730,13 +730,12 @@ public class GameState implements Serializable, Copyable<GameState> {
      * Returns a list of all active players of the game, setting the playerId to
      * the current player of the list.
      *
-     * @param playerId
-     * @return playerList
+     * Warning, it's ignore range, must be used by game engine only.
      */
     public PlayerList getPlayerList(UUID playerId) {
         PlayerList newPlayerList = new PlayerList();
         for (Player player : players.values()) {
-            if (!player.hasLeft() && !player.hasLost()) {
+            if (player.isInGame()) {
                 newPlayerList.add(player.getId());
             }
         }
@@ -744,25 +743,29 @@ public class GameState implements Serializable, Copyable<GameState> {
         return newPlayerList;
     }
 
+    // TODO: check usage of getPlayersInRange in cards and replace with correct call of excludeLeavedPlayers
+    public PlayerList getPlayersInRange(UUID playerId, Game game) {
+        return getPlayersInRange(playerId, game, false);
+    }
+
     /**
      * Returns a list of all active players of the game in range of playerId,
      * also setting the playerId to the first/current player of the list. Also
      * returning the other players in turn order.
      * <p>
-     * Not safe for continuous effects, see rule 800.4k (effects must work until
-     * end of turn even after player leaves) Use Player.InRange() to find active
-     * players list at the start of the turn
+     * Continuous effects, triggers and other must include leaved players, see rule 800.4k (effects must work until
+     * end of turn even after player leaves). But one short effects and dialogs must use actual players list.
      *
-     * @param playerId
-     * @param game
-     * @return playerList
+     * @param excludeLeavedPlayers - true for dialogs and one short effects, false for triggers and continuous effects
      */
-    public PlayerList getPlayersInRange(UUID playerId, Game game) {
+    public PlayerList getPlayersInRange(UUID playerId, Game game, boolean excludeLeavedPlayers) {
         PlayerList newPlayerList = new PlayerList();
         Player currentPlayer = game.getPlayer(playerId);
         if (currentPlayer != null) {
+            // must fill PlayerList by table added order (same as main game)
             for (Player player : players.values()) {
-                if (player.isInGame() && currentPlayer.getInRange().contains(player.getId())) {
+                if ((!excludeLeavedPlayers || player.isInGame())
+                        && currentPlayer.hasPlayerInRange(player.getId())) {
                     newPlayerList.add(player.getId());
                 }
             }
@@ -924,6 +927,24 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         if (!isBatchForPlayerUsed) {
             addSimultaneousEvent(new MilledBatchForOnePlayerEvent(milledEvent), game);
+        }
+    }
+
+    public void addSimultaneousSacrificedPermanentToBatch(SacrificedPermanentEvent sacrificedPermanentEvent, Game game) {
+        // Combine multiple sacrificed permanent events in the single event (batch)
+
+        // existing batch
+        boolean isBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof SacrificedPermanentBatchEvent) {
+                ((SacrificedPermanentBatchEvent) event).addEvent(sacrificedPermanentEvent);
+                isBatchUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new SacrificedPermanentBatchEvent(sacrificedPermanentEvent), game);
         }
     }
 
@@ -1181,16 +1202,13 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Inherent triggers (Rad counters) in the rules have no source.
-     * However to fit better with the engine, we make a fake emblem source,
-     * which is not displayed in any game zone. That allows the trigger to
-     * have a source, which helps with a bunch of situation like hosting,
-     * rather than having a  trigger.
+     * Add fake/helper emblems for hidden source of inherent triggers like Rad counters,
+     * additional card hints like storm counter, etc. See GameImpl.initGameDefaultHelperEmblems
      * <p>
-     * Should not be used except in very specific situations
+     * It allows game and GUI find and show full card object in stack's triggers, logs and hints popup.
      */
-    public void addInherentEmblem(Emblem emblem, UUID controllerId) {
-        getInherentEmblems().add(emblem);
+    public void addHelperEmblem(Emblem emblem, UUID controllerId) {
+        helperEmblems.add(emblem);
         emblem.setControllerId(controllerId);
         for (Ability ability : emblem.getInitAbilities()) {
             ability.setControllerId(controllerId);

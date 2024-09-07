@@ -1,11 +1,7 @@
 package mage.target.targetpointer;
 
-import mage.abilities.Ability;
-import mage.game.Game;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author JayDi85
@@ -57,13 +53,4 @@ public abstract class TargetPointerImpl implements TargetPointer {
         return this;
     }
 
-    @Override
-    public final FixedTarget getFirstAsFixedTarget(Game game, Ability source) {
-        UUID firstId = this.getFirst(game, source);
-        if (firstId != null) {
-            return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
-        }
-
-        return null;
-    }
 }

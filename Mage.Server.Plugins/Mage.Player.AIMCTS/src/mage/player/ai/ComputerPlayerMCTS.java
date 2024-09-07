@@ -13,6 +13,7 @@ import mage.game.combat.CombatGroup;
 import mage.player.ai.MCTSPlayer.NextAction;
 import mage.players.Player;
 import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -172,11 +173,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
                             0L,
                             TimeUnit.MILLISECONDS,
                             new LinkedBlockingQueue<>(),
-                            r -> {
-                                Thread thread = new Thread(r);
-                                thread.setName(ThreadUtils.THREAD_PREFIX_AI_SIMULATION + "-MCTS-" + thread.getId());
-                                return thread;
-                            });
+                            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_AI_SIMULATION_MCTS) // TODO: add player/game to thread name?
+                    );
                 }
 
                 List<MCTSExecutor> tasks = new ArrayList<>();
@@ -311,7 +309,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
                 newPlayer.getHand().clear();
                 newPlayer.getLibrary().shuffle();
                 for (int i = 0; i < handSize; i++) {
-                    Card card = newPlayer.getLibrary().removeFromTop(mcts);
+                    Card card = newPlayer.getLibrary().drawFromTop(mcts);
                     card.setZone(Zone.HAND, mcts);
                     newPlayer.getHand().add(card);
                 }

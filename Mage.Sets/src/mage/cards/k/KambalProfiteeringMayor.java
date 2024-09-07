@@ -103,7 +103,7 @@ class KambalProfiteeringMayorTriggeredAbility extends TriggeredAbilityImpl {
                         && controller.hasOpponent(zce.getPlayerId(), game))   // & under your opponent's control
                 .map(ZoneChangeEvent::getTarget)
                 .filter(Objects::nonNull)
-                .filter(p -> p instanceof PermanentToken) // collect only tokens
+                .filter(PermanentToken.class::isInstance) // collect only tokens
                 .map(Permanent::getId)
                 .collect(Collectors.toList());
         if (tokensIds.isEmpty()) {
@@ -116,7 +116,7 @@ class KambalProfiteeringMayorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more tokens enter the battlefield under your opponents' control, "
+        return "Whenever one or more tokens your opponents control enter, "
                 + "for each of them, create a tapped token that's a copy of it. "
                 + "This ability triggers only once each turn.";
     }

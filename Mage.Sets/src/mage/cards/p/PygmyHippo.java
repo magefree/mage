@@ -25,13 +25,13 @@ public final class PygmyHippo extends CardImpl {
 
     public PygmyHippo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
-        
+
         this.subtype.add(SubType.HIPPO);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Whenever Pygmy Hippo attacks and isn't blocked, you may have defending player activate a mana ability of each land they control and lose all unspent mana. If you do, Pygmy Hippo assigns no combat damage this turn and at the beginning of your next main phase this turn, you add an amount of {C} equal to the amount of mana that player lost this way.
-        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new PygmyHippoEffect(), true, true));
+        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new PygmyHippoEffect(), true, SetTargetPointer.PLAYER));
     }
 
     private PygmyHippo(final PygmyHippo card) {
@@ -77,11 +77,11 @@ class PygmyHippoEffect extends OneShotEffect {
         game.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn, true), source);
 
         if (amountToAdd > 0) {
-        DelayedTriggeredAbility delayed = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(
-                new AddManaToManaPoolSourceControllerEffect(new Mana(ManaType.COLORLESS, amountToAdd)),
-                false, TargetController.YOU,
-                AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN_THIS_TURN);
-        game.addDelayedTriggeredAbility(delayed, source);
+            DelayedTriggeredAbility delayed = new AtTheBeginOfMainPhaseDelayedTriggeredAbility(
+                    new AddManaToManaPoolSourceControllerEffect(new Mana(ManaType.COLORLESS, amountToAdd)),
+                    false, TargetController.YOU,
+                    AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN_THIS_TURN);
+            game.addDelayedTriggeredAbility(delayed, source);
         }
         return true;
     }

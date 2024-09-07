@@ -54,7 +54,7 @@ public final class KadenaSlinkingSorcerer extends CardImpl {
                         .setText("The first face-down creature spell you cast each turn costs {3} less to cast.")
         ), new KadenaSlinkingSorcererWatcher());
 
-        // Whenever a face-down creature enters the battlefield under your control, draw a card.
+        // Whenever a face-down creature you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filterFaceDownPermanent
         ));

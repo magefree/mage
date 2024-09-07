@@ -5,7 +5,7 @@ import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTargetsPermanentCondition;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.cards.CardImpl;
@@ -44,7 +44,7 @@ public final class TorchBreath extends CardImpl {
         this.addAbility(new CantBeCounteredSourceAbility().setRuleAtTheTop(true));
 
         // Torch Breath deals X damage to target creature or planeswalker.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 

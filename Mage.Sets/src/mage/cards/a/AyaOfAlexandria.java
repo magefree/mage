@@ -39,7 +39,7 @@ public final class AyaOfAlexandria extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());

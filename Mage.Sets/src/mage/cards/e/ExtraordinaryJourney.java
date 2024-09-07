@@ -43,8 +43,8 @@ public final class ExtraordinaryJourney extends CardImpl {
 
         // When Extraordinary Journey enters the battlefield, exile up to X target creatures. For each of those cards, its owner may play it for as long as it remains exiled.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExtraordinaryJourneyEffect());
-        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability);
 
         // Whenever one or more nontoken creatures enter the battlefield, if one or more of them entered from exile or was cast from exile, you draw a card. This ability triggers only once each turn.
@@ -134,7 +134,7 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
 class ExtraordinaryJourneyTriggeredAbility extends TriggeredAbilityImpl {
 
     ExtraordinaryJourneyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, "you"), false);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, true), false);
         setTriggerPhrase("Whenever one or more nontoken creatures enter the battlefield, "
                 + "if one or more of them entered from exile or was cast from exile, ");
         setTriggersLimitEachTurn(1);

@@ -16,6 +16,7 @@ import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ class RedSunsTwilightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;

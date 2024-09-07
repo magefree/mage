@@ -8,7 +8,7 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.HintUtils;
@@ -743,18 +743,10 @@ public class CardView extends SimpleCardView {
         }
 
         // icon - x cost
-        if (showCard != null
-                && showCard.getManaCost().containsX()
-                && showAbility != null
+        if (showCard != null && showAbility != null
+                && (showCard.getManaCost().containsX() || CardUtil.checkSourceCostsTagExists(game, showAbility, "X"))
                 && (showZone.match(Zone.BATTLEFIELD) || showZone.match(Zone.STACK))) {
-            int costX;
-            if (showCard instanceof Permanent) {
-                // permanent on battlefield (can show x icon multiple turns, so use end_game source)
-                costX = ManacostVariableValue.END_GAME.calculate(game, showAbility, null);
-            } else {
-                // other like Stack (can show x icon on stack only, so use normal source)
-                costX = ManacostVariableValue.REGULAR.calculate(game, showAbility, null);
-            }
+            int costX = GetXValue.instance.calculate(game, showAbility, null);
             this.cardIcons.add(CardIconImpl.variableCost(costX));
         }
 
@@ -829,7 +821,7 @@ public class CardView extends SimpleCardView {
             this.mageObjectType = MageObjectType.EMBLEM;
             Emblem emblem = (Emblem) object;
             this.rarity = Rarity.SPECIAL;
-            this.rules = new ArrayList<>(emblem.getAbilities().getRules(emblem.getName()));
+            this.rules = new ArrayList<>(emblem.getAbilities().getRules(game, emblem));
         } else if (object instanceof Dungeon) {
             this.mageObjectType = MageObjectType.DUNGEON;
             Dungeon dungeon = (Dungeon) object;
@@ -842,14 +834,14 @@ public class CardView extends SimpleCardView {
             this.frameStyle = FrameStyle.M15_NORMAL;
             // Display in landscape/rotated/on its side
             this.rotate = true;
-            this.rules = new ArrayList<>(plane.getAbilities().getRules(plane.getName()));
+            this.rules = new ArrayList<>(plane.getAbilities().getRules(game, plane));
         } else if (object instanceof Designation) {
             this.mageObjectType = MageObjectType.DESIGNATION;
             Designation designation = (Designation) object;
             this.rarity = Rarity.SPECIAL;
             this.frameStyle = FrameStyle.M15_NORMAL;
             // Display in landscape/rotated/on its side
-            this.rules = new ArrayList<>(designation.getAbilities().getRules(designation.getName()));
+            this.rules = new ArrayList<>(designation.getAbilities().getRules(game, designation));
         }
         if (this.rarity == null && object instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) object;
@@ -993,7 +985,6 @@ public class CardView extends SimpleCardView {
                 && a.getManaCostStr().equals(b.getManaCostStr())
                 && a.getRules().equals(b.getRules())
                 && Objects.equals(a.getRarity(), b.getRarity())
-
                 && a.getFrameStyle() == b.getFrameStyle()
                 && Objects.equals(a.getCounters(), b.getCounters())
                 && a.isFaceDown() == b.isFaceDown())) {
@@ -1004,6 +995,7 @@ public class CardView extends SimpleCardView {
                 && Objects.equals(a.getCardNumber(), b.getCardNumber())
                 && Objects.equals(a.getImageNumber(), b.getImageNumber())
                 && Objects.equals(a.getImageFileName(), b.getImageFileName())
+                && Objects.equals(a.getUsesVariousArt(), b.getUsesVariousArt())
         )) {
             return false;
         }
@@ -1114,7 +1106,7 @@ public class CardView extends SimpleCardView {
         this.name = token.getName();
         this.displayName = token.getName();
         this.displayFullName = token.getName();
-        this.rules = new ArrayList<>(token.getAbilities().getRules(this.name));
+        this.rules = new ArrayList<>(token.getAbilities().getRules(game, token));
         this.power = token.getPower().toString();
         this.toughness = token.getToughness().toString();
         this.loyalty = "";
@@ -1528,8 +1520,7 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorText() {
-        String colorText = getColor().getDescription();
-        return colorText.substring(0, 1).toUpperCase(Locale.ENGLISH) + colorText.substring(1);
+        return CardUtil.getTextWithFirstCharUpperCase(getColor().getDescription());
     }
 
     public String getTypeText() {

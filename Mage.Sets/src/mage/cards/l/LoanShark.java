@@ -33,7 +33,7 @@ public final class LoanShark extends CardImpl {
         // When Loan Shark enters the battlefield, if you've cast two or more spells this turn, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                LoanSharkCondition.instance, "When {this} enters the battlefield, " +
+                LoanSharkCondition.instance, "When {this} enters, " +
                 "if you've cast two or more spells this turn, draw a card."
         ).addHint(StormAbility.getHint()));
 

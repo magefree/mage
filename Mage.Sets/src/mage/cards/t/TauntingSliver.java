@@ -30,7 +30,7 @@ public final class TauntingSliver extends CardImpl {
 
         // Sliver creatures you control have "When this creature enters the battlefield, goad target creature an opponent controls."
         Ability ability = new EntersBattlefieldTriggeredAbility(new GoadTargetEffect())
-                .setTriggerPhrase("When this creature enters the battlefield, ");
+                .setTriggerPhrase("When this creature enters, ");
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_SLIVERS

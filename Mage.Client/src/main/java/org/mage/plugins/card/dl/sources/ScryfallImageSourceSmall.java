@@ -11,19 +11,19 @@ import java.util.stream.Collectors;
 public class ScryfallImageSourceSmall extends ScryfallImageSource {
 
     private static final ScryfallImageSourceSmall instanceSmall = new ScryfallImageSourceSmall();
-    
+
     public static ScryfallImageSource getInstance() {
         return instanceSmall;
     }
 
     private static String innerModifyUrlString(String oneUrl) {
-        return oneUrl.replaceFirst("/large/","/small/").replaceFirst("format=image","format=image&version=small");
+        return oneUrl.replaceFirst("/large/", "/small/").replaceFirst("format=image", "format=image&version=small");
     }
 
     private static CardImageUrls innerModifyUrl(CardImageUrls cardUrls) {
-        List<String> downloadUrls = cardUrls.getDownloadList().stream() 
-            .map(ScryfallImageSourceSmall::innerModifyUrlString)
-            .collect(Collectors.toList());
+        List<String> downloadUrls = cardUrls.getDownloadList().stream()
+                .map(ScryfallImageSourceSmall::innerModifyUrlString)
+                .collect(Collectors.toList());
         return new CardImageUrls(downloadUrls);
     }
 
@@ -48,4 +48,8 @@ public class ScryfallImageSourceSmall extends ScryfallImageSource {
         return 14f;
     }
 
+    @Override
+    public String getImageQuality() {
+        return "small";
+    }
 }

@@ -67,7 +67,7 @@ class CrowdControlWardenReplacementEffect extends ReplacementEffectImpl {
 
     CrowdControlWardenReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "as {this} enters the battlefield or is turned face up, " +
+        staticText = "as {this} enters or is turned face up, " +
                 "put X +1/+1 counters on it, where X is the number of other creatures you control";
     }
 

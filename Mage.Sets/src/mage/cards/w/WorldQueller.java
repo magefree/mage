@@ -64,7 +64,7 @@ class WorldQuellerEffect extends OneShotEffect {
         choice.add(CardType.KINDRED.toString());
     }
 
-    public WorldQuellerEffect() {
+    WorldQuellerEffect() {
         super(Outcome.Benefit);
         staticText = "you may choose a card type. If you do, each player sacrifices a permanent of that type";
     }
@@ -84,7 +84,7 @@ class WorldQuellerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
         if (player != null && sourceCreature != null) {
-            Choice choiceImpl = new ChoiceImpl();
+            Choice choiceImpl = new ChoiceImpl(false);
             choiceImpl.setChoices(choice);
             if (!player.choose(Outcome.Neutral, choiceImpl, game)) {
                 return false;

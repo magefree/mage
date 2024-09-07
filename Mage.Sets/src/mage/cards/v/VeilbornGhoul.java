@@ -35,7 +35,7 @@ public final class VeilbornGhoul extends CardImpl {
         // Veilborn Ghoul can't block.
         this.addAbility(new CantBlockAbility());
         
-        // Whenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.
+        // Whenever a Swamp you control enters, you may return Veilborn Ghoul from your graveyard to your hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD,  new ReturnSourceFromGraveyardToHandEffect(), filter, true));
 

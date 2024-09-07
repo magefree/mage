@@ -49,7 +49,7 @@ public final class HistoriansWisdom extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 HistoriansWisdomCondition.instance,
-                "When {this} enters the battlefield, if enchanted permanent is a creature with the greatest power among creatures on the battlefield, draw a card."
+                "When {this} enters, if enchanted permanent is a creature with the greatest power among creatures on the battlefield, draw a card."
         ));
 
         // As long as enchanted permanent is a creature, it gets +2/+1.

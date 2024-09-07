@@ -44,7 +44,7 @@ public class HauntAbility extends TriggeredAbilityImpl {
         super(Zone.ALL, effect, false);
         boolean creatureHaunt = card.isCreature();
         addSubAbility(new HauntExileAbility(creatureHaunt));
-        setTriggerPhrase((creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, "
+        setTriggerPhrase((creatureHaunt ? "When {this} enters or the creature it haunts dies, "
                                         : "When the creature {this} haunts dies, ")
         );
     }

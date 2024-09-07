@@ -23,7 +23,7 @@ public final class HedronCrab extends CardImpl {
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
-        // Landfall - Whenever a land enters the battlefield under your control, target player puts the top three cards of their library into their graveyard.
+        // Landfall - Whenever a land you control enters, target player puts the top three cards of their library into their graveyard.
         LandfallAbility ability = new LandfallAbility(new MillCardsTargetEffect(3), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

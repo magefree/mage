@@ -27,7 +27,7 @@ public final class OrcSureshot extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature enters the battlefield under your control, target creature an opponent controls gets -1/-1 until end of turn.
+        // Whenever another creature you control enters, target creature an opponent controls gets -1/-1 until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new BoostTargetEffect(-1,-1, Duration.EndOfTurn),
                 StaticFilters.FILTER_ANOTHER_CREATURE);

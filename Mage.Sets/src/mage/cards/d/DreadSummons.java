@@ -11,6 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -65,7 +66,7 @@ class DreadSummonsEffect extends OneShotEffect {
                 continue;
             }
             creatureCount += player
-                    .millCards(source.getManaCostsToPay().getX(), source, game)
+                    .millCards(CardUtil.getSourceCostsTag(game, source, "X", 0), source, game)
                     .getCards(game)
                     .stream()
                     .filter(Objects::nonNull)

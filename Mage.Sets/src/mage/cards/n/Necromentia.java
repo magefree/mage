@@ -50,6 +50,7 @@ public final class Necromentia extends CardImpl {
     }
 }
 
+//Based on SearchTargetGraveyardHandLibraryForCardNameAndExileEffect
 class NecromentiaEffect extends OneShotEffect {
 
     NecromentiaEffect() {

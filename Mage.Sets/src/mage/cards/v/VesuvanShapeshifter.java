@@ -41,7 +41,7 @@ public final class VesuvanShapeshifter extends CardImpl {
         // As Vesuvan Shapeshifter turned face up, may choose another creature. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
         Ability ability = new SimpleStaticAbility(new AsTurnedFaceUpEffect(
                 new VesuvanShapeshifterEffect(), false
-        ).setText("As {this} enters the battlefield or is turned face up, " +
+        ).setText("As {this} enters or is turned face up, " +
                 "you may choose another creature on the battlefield. If you do, " +
                 "until {this} is turned face down, it becomes a copy of that creature, " +
                 "except it has \"At the beginning of your upkeep, you may turn this creature face down.\"")

@@ -135,6 +135,7 @@
 |Generate|EMBLEM:M3C|Emblem Garruk|||GarrukApexPredatorEmblem|
 |Generate|EMBLEM:M3C|Emblem Vivien|||VivienReidEmblem|
 |Generate|EMBLEM:ACR|Emblem Capitoline Triad|||TheCapitolineTriadEmblem|
+|Generate|EMBLEM:BLB|Emblem Ral|||RalCracklingWitEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2111,6 +2112,9 @@
 |Generate|TOK:WOC|Spirit|||WhiteBlackSpiritToken|
 |Generate|TOK:WOC|Virtuous|||VirtuousRoleToken|
 
+# WHO
+|Generate|TOK:WHO|Alien Insect|||AlienInsectToken|
+
 # PIP
 |Generate|TOK:PIP|Robot|||RobotToken|
 
@@ -2372,3 +2376,20 @@
 |Generate|TOK:M3C|Spirit|||UginTheIneffableToken|
 |Generate|TOK:M3C|Tarmogoyf|||TarmogoyfToken|
 |Generate|TOK:M3C|Thopter|||ThopterColorlessToken|
+
+# BLB
+|Generate|TOK:BLB|Bat|||BatToken|
+|Generate|TOK:BLB|Cragflame|||CragflameToken|
+|Generate|TOK:BLB|Fish|||FishNoAbilityToken|
+|Generate|TOK:BLB|Food|||FoodToken|
+|Generate|TOK:BLB|Otter|||OtterProwessToken|
+|Generate|TOK:BLB|Rabbit|||RabbitToken|
+|Generate|TOK:BLB|Rat|||VrenRatToken|
+|Generate|TOK:BLB|Snail|||SnailToken|
+|Generate|TOK:BLB|Squirrel|||SquirrelToken|
+|Generate|TOK:BLB|Sword|||SwordToken|
+|Generate|TOK:BLB|Treasure|||TreasureToken|
+|Generate|TOK:BLB|Wall|||WallWhiteToken|
+
+# BLC
+|Generate|TOK:BLC|Racoon|||RaccoonToken|

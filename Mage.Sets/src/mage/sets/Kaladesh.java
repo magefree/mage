@@ -30,6 +30,7 @@ public final class Kaladesh extends ExpansionSet {
         this.blockName = "Kaladesh";
         this.hasBoosters = true;
         this.hasBasicLands = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

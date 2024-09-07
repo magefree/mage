@@ -59,7 +59,6 @@ public class DuelCommander extends Commander {
         banned.add("Natural Order");
         banned.add("Necrotic Ooze");
         banned.add("Oath of Druids");
-        banned.add("Polymorph");
         banned.add("Price of Progress");
         banned.add("Protean Hulk");
         banned.add("Ragavan, Nimble Pilferer");
@@ -87,7 +86,6 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Ajani, Nacatl Pariah");
         bannedCommander.add("Akiri, Line-Slinger");
         bannedCommander.add("Arahbo, Roar of the World");
-        bannedCommander.add("Ardenn, Intrepid Archaeologist");
         bannedCommander.add("Asmoranomardicadaistinaculdacar");
         bannedCommander.add("Baral, Chief of Compliance");
         bannedCommander.add("Breya, Etherium Shaper");
@@ -105,13 +103,13 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Nadu, Winged Wisdom");
         bannedCommander.add("Najeela, the Blade-Blossom");
         bannedCommander.add("Oloro, Ageless Ascetic");
+        bannedCommander.add("Old Stickfingers");
         bannedCommander.add("Omnath, Locus of Creation");
         bannedCommander.add("Prime Speaker Vannifar");
         bannedCommander.add("Raffine, Scheming Seer");
         bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Shorikai, Genesis Engine");
         bannedCommander.add("Tasigur, the Golden Fang");
-        bannedCommander.add("Thrasios, Triton Hero");
         bannedCommander.add("Urza, Lord High Artificer");
         bannedCommander.add("Vial Smasher the Fierce");
         bannedCommander.add("Winota, Joiner of Forces");

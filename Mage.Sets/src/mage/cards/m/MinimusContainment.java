@@ -29,7 +29,7 @@ public final class MinimusContainment extends CardImpl {
         // Enchant nonland permanent
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_LAND);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 

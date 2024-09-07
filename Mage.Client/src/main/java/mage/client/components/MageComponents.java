@@ -6,6 +6,7 @@ public enum MageComponents {
     NEW_TABLE_OK_BUTTON("btnOK"),
     TABLE_WAITING_START_BUTTON("btnStart"),
     DESKTOP_PANE("desktopPane"),
+    DESKTOP_TOOLBAR("desktopToolbar"),
     CARD_INFO_PANE("cardInfoPane"),
     POPUP_CONTAINER("popupContainer"),
     CARD_PREVIEW_PANE("cardPreviewPane"),

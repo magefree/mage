@@ -503,11 +503,15 @@ public class SessionImpl implements Session {
                 message = "Server is not responding." + message;
                 break;
             }
+            if (t.toString().contains("to make private")) {
+                // example: Unable to make private void java.io.ObjectOutputStream.clear() accessible: module java.base does not "opens java.io" to unnamed module
+                message = "Wrong java version - check your client running scripts and params." + message;
+                break;
+            }
             if (t.getCause() != null && logger.isDebugEnabled()) {
                 message = '\n' + t.getCause().getMessage() + message;
                 logger.debug(t.getCause().getMessage());
             }
-
             t = t.getCause();
         }
         client.showMessage("Unable connect to server. " + message);
@@ -552,7 +556,7 @@ public class SessionImpl implements Session {
             if (askForReconnect) {
                 client.showError("Network error. Can't connect to  " + connection.getHost());
             }
-            client.disconnected(askForReconnect); // MageFrame with check to reconnect
+            client.disconnected(askForReconnect, keepMySessionActive); // MageFrame with check to reconnect
             pingTime.clear();
         }
 
@@ -568,7 +572,7 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized void connectReconnect(Throwable throwable) {
-        client.disconnected(true);
+        client.disconnected(true, true);
     }
 
     @Override
@@ -1648,12 +1652,12 @@ public class SessionImpl implements Session {
 
     private void handleMageException(MageException ex) {
         logger.fatal("Server error", ex);
-        client.showError(ex.getMessage());
+        client.showError("Server error: " + ex.getMessage());
     }
 
     private void handleGameException(GameException ex) {
         logger.warn(ex.getMessage());
-        client.showError(ex.getMessage());
+        client.showError("Game error: " + ex.getMessage());
     }
 
     @Override

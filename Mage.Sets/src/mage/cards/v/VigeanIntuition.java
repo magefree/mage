@@ -81,7 +81,7 @@ class VigeanIntuitionEffect extends OneShotEffect {
             return false;
         }
 
-        Choice choiceImpl = new ChoiceImpl();
+        Choice choiceImpl = new ChoiceImpl(true);
         choiceImpl.setChoices(choice);
         if (player.choose(Outcome.Neutral, choiceImpl, game)) {
             String chosenType = choiceImpl.getChoice();

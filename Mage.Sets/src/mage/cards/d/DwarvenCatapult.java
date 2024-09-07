@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
@@ -13,6 +12,9 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -53,7 +55,7 @@ class DwarvenCatapultEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int howMany = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getFirstTarget(), game).size();
-        int amount = source.getManaCostsToPay().getX()/howMany;
+        int amount = CardUtil.getSourceCostsTag(game, source, "X", 0)/howMany;
         
         DamageAllControlledTargetEffect dmgEffect = new DamageAllControlledTargetEffect(amount, new FilterCreaturePermanent());
         return dmgEffect.apply(game, source);

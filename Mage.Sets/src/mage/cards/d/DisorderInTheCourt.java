@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
@@ -35,8 +35,8 @@ public final class DisorderInTheCourt extends CardImpl {
 
         // Exile X target creatures, then investigate X times. Return the exiled cards to the battlefield tapped under their owners' control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new DisorderInTheCourtEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private DisorderInTheCourt(final DisorderInTheCourt card) {
@@ -80,7 +80,7 @@ class DisorderInTheCourtEffect extends OneShotEffect {
             controller.moveCardsToExile(toExile, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
             game.processAction();
         }
-        new InvestigateEffect(ManacostVariableValue.REGULAR).apply(game, source);
+        new InvestigateEffect(GetXValue.instance).apply(game, source);
         if (!toExile.isEmpty()) {
             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, true);
             effect.setTargetPointer(new FixedTargets(toExile

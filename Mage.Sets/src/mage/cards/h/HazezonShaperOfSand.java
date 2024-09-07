@@ -48,7 +48,7 @@ public final class HazezonShaperOfSand extends CardImpl {
         // You may play Desert lands from your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayLandsFromGraveyardControllerEffect(filter2)));
 
-        // Whenever a Desert enters the battlefield under your control create two 1/1 red, green, and white Sand Warrior creature tokens.
+        // Whenever a Desert you control enters create two 1/1 red, green, and white Sand Warrior creature tokens.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new CreateTokenEffect(
                 new SandWarriorToken(), 2), filter3
         ));

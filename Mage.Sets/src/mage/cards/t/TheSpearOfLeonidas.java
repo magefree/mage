@@ -45,7 +45,7 @@ public final class TheSpearOfLeonidas extends CardImpl {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private TheSpearOfLeonidas(final TheSpearOfLeonidas card) {

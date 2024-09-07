@@ -36,10 +36,10 @@ public final class UntamedKavu extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
 
-        // If Untamed Kavu was kicked, it enters the battlefield with three +1/+1 counters on it.
+        // If Untamed Kavu was kicked, it enters with three +1/+1 counters on it.
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
                 KickedCondition.ONCE,
-                "If Untamed Kavu was kicked, it enters the battlefield with three +1/+1 counters on it.", "");
+                "If Untamed Kavu was kicked, it enters with three +1/+1 counters on it.", "");
         this.addAbility(ability);
     }
 

@@ -531,7 +531,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         // treated as 0, even if the value of X is defined somewhere within its text.
 
         // Whenever you cast an instant or sorcery spell, you may pay {U}{R}. If you do, copy that spell. You may choose new targets for the copy.
-        // Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, create a token that’s a copy of that creature.
+        // Whenever another nontoken creature you control enters, you may pay {G}{U}. If you do, create a token that’s a copy of that creature.
         addCard(Zone.BATTLEFIELD, playerA, "Riku of Two Reflections", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);

@@ -44,7 +44,7 @@ public final class SandScout extends CardImpl {
         // When Sand Scout enters the battlefield, if an opponent controls more lands than you, search your library for a Desert card, put it onto the battlefield tapped, then shuffle.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true)),
-                condition, "When {this} enters the battlefield, if an opponent controls more lands than you, " +
+                condition, "When {this} enters, if an opponent controls more lands than you, " +
                 "search your library for a Desert card, put it onto the battlefield tapped, then shuffle."
         ));
 

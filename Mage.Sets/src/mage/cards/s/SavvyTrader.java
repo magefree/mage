@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public final class SavvyTrader extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("Spells you cast from anywhere other than your hand");
 
     static {
         filter.add(SpellCastFromAnywhereOtherThanHand.instance);
@@ -52,8 +52,7 @@ public final class SavvyTrader extends CardImpl {
         this.addAbility(ability);
 
         // Spells you cast from anywhere other than your hand cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
-                .setText("Spells you cast from anywhere other than your hand cost {1} less to cast.")));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private SavvyTrader(final SavvyTrader card) {

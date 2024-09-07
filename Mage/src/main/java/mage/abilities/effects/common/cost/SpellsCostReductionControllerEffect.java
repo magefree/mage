@@ -1,13 +1,12 @@
 package mage.abilities.effects.common.cost;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.cards.Card;
@@ -20,24 +19,50 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
+ * Reduces cost of spell for the controller of the effect.
+ *
  * @author North
  */
 public class SpellsCostReductionControllerEffect extends CostModificationEffectImpl {
 
+    // Which spells to apply cost reduction to
     private final FilterCard filter;
+
+    // Number of times to apply cost reduction
+    // When just reducing colorless mana, (constructors without a ManaCosts<ManaCost> argument)
+    // this is the amount of colorless mana to reduce by
     private final DynamicValue amount;
+
+    // adds "up to" sliding scale for mana reduction (only available for generic mana cost reduction)
     private final boolean upTo;
+
     private ManaCosts<ManaCost> manaCostsToReduce = null;
 
+    // true when colored mana can also reduce generic mana if no more mana of that color remains in the cost
+    // See CardUtil.adjustCost
+    private final boolean convertToGeneric;
+
     public SpellsCostReductionControllerEffect(FilterCard filter, ManaCosts<ManaCost> manaCostsToReduce) {
+        this(filter, manaCostsToReduce, StaticValue.get(1));
+    }
+
+    public SpellsCostReductionControllerEffect(FilterCard filter, ManaCosts<ManaCost> manaCostsToReduce, DynamicValue amount) {
+        this(filter, manaCostsToReduce, amount, false);
+    }
+
+    public SpellsCostReductionControllerEffect(FilterCard filter, ManaCosts<ManaCost> manaCostsToReduce, DynamicValue amount, boolean convertToGeneric) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
-        this.amount = StaticValue.get(0);
+        this.amount = amount;
         this.manaCostsToReduce = manaCostsToReduce;
         this.upTo = false;
-        this.staticText = filter.getMessage() + " you cast cost " + manaCostsToReduce.getText() +
-                " less to cast. This effect reduces only the amount of colored mana you pay.";
+        this.convertToGeneric = convertToGeneric;
+
+        createStaticText();
     }
 
     public SpellsCostReductionControllerEffect(FilterCard filter, int amount) {
@@ -57,9 +82,9 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.filter = filter;
         this.amount = amount;
         this.upTo = upTo;
-        this.staticText = (filter.getMessage().contains("you cast") ? filter.getMessage()
-                : filter.getMessage() + " you cast")
-                + " cost " + (upTo ? "up to " : "") + '{' + amount + "} less to cast";
+        this.convertToGeneric = false;
+
+        createStaticText();
     }
 
     protected SpellsCostReductionControllerEffect(final SpellsCostReductionControllerEffect effect) {
@@ -68,14 +93,20 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.amount = effect.amount;
         this.manaCostsToReduce = effect.manaCostsToReduce;
         this.upTo = effect.upTo;
+        this.convertToGeneric = effect.convertToGeneric;
+        this.staticText = effect.staticText;
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        int reductionAmount = this.amount.calculate(game, source, this);
         if (manaCostsToReduce != null) {
-            CardUtil.adjustCost((SpellAbility) abilityToModify, manaCostsToReduce, false);
+            ManaCosts<ManaCost> calculatedManaCostsToReduce = new ManaCostsImpl<>();;
+            for (int i = 0; i < reductionAmount; i++) {
+                calculatedManaCostsToReduce.add(this.manaCostsToReduce.copy());
+            }
+            CardUtil.adjustCost(abilityToModify, calculatedManaCostsToReduce, convertToGeneric);
         } else {
-            int reductionAmount = this.amount.calculate(game, source, this);
             if (upTo) {
                 Mana mana = abilityToModify.getManaCostsToPay().getMana();
                 int reduceMax = mana.getGeneric();
@@ -126,6 +157,37 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
             }
         }
         return false;
+    }
+
+    private void createStaticText(){
+        StringBuilder sb = new StringBuilder(filter.getMessage());
+        if (!sb.toString().contains("you cast")){
+            sb.append(" you cast");
+        }
+        if (sb.toString().toLowerCase().contains("spells")){
+            sb.append(" cost ");
+        } else {
+            sb.append(" costs ");
+        }
+        if (upTo){
+            sb.append("up to ");
+        }
+        if (manaCostsToReduce != null) {
+            sb.append(manaCostsToReduce.getText());
+            if (convertToGeneric){
+                sb.append(" (<i>or {1}</i>)");
+            }
+        } else {
+            sb.append("{").append(amount).append("}");
+        }
+        sb.append(" less to cast");
+        if (!(amount instanceof StaticValue)){
+            sb.append(" for each ").append(amount.getMessage());
+        }
+        if (!convertToGeneric && manaCostsToReduce != null){
+            sb.append(". This effect reduces only the amount of colored mana you pay");
+        }
+        staticText = sb.toString();
     }
 
     @Override

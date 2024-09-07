@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class AssassinMenaceToken extends TokenImpl {
 
     public AssassinMenaceToken() {
-        super("Assassin Token", "1/1 black Assassin creature token menace");
+        super("Assassin Token", "1/1 black Assassin creature token with menace");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ASSASSIN);

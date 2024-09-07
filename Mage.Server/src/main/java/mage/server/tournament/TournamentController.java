@@ -224,7 +224,7 @@ public class TournamentController {
         try {
             TableManager tableManager = managerFactory.tableManager();
             Table table = tableManager.createTable(managerFactory.gamesRoomManager().getMainRoomId(), matchOptions);
-            table.setTournamentSubTable(true);
+            table.setTournamentSubTable(this.tableId);
             table.setTournament(tournament);
             table.setState(TableState.WAITING);
             TournamentPlayer player1 = pair.getPlayer1();
@@ -267,7 +267,7 @@ public class TournamentController {
         try {
             TableManager tableManager = managerFactory.tableManager();
             Table table = tableManager.createTable(managerFactory.gamesRoomManager().getMainRoomId(), matchOptions);
-            table.setTournamentSubTable(true);
+            table.setTournamentSubTable(this.tableId);
             table.setTournament(tournament);
             table.setState(TableState.WAITING);
             if (round.getAllPlayers().stream().allMatch(tournamentPlayer -> getPlayerUserId(tournamentPlayer.getPlayer().getId()).isPresent())) {
@@ -397,7 +397,7 @@ public class TournamentController {
                 } else {
                     managerFactory.draftManager().getController(tableId).ifPresent(draftController -> {
                         draftController.getDraftSession(playerId).ifPresent(draftSession
-                                -> managerFactory.draftManager().kill(draftSession.getDraftId(), userId));
+                                -> managerFactory.draftManager().kill(draftSession.getDraft().getId(), userId));
 
                     });
                 }
@@ -525,5 +525,9 @@ public class TournamentController {
             return false;
         }
         return true;
+    }
+
+    public UUID getTableId() {
+        return tableId;
     }
 }

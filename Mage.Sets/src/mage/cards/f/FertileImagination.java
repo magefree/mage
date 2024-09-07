@@ -80,7 +80,7 @@ class FertileImaginationEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (player != null && opponent != null && sourceObject != null) {
-            Choice choiceImpl = new ChoiceImpl();
+            Choice choiceImpl = new ChoiceImpl(true);
             choiceImpl.setChoices(choice);
             if (player.choose(Outcome.Neutral, choiceImpl, game)) {
                 CardType type = null;
