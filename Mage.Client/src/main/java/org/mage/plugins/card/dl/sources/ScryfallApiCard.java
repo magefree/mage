@@ -16,6 +16,7 @@ import java.util.Map;
  */
 public class ScryfallApiCard {
 
+    public String id;
     public String name;
     public String set; // set code
     public String collector_number;

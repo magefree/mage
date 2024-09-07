@@ -451,6 +451,7 @@ public class ScryfallImageSource implements CardImageSource {
 
         // bulk files are too big, so must read and parse it in stream mode only
         // 500k reprints in diff languages
+        Set<String> usedCards = new HashSet<>();
         Gson gson = new Gson();
         try (TFileInputStream inputStream = new TFileInputStream(textBulkPath.toFile());
              InputStreamReader inputReader = new InputStreamReader(inputStream);
@@ -477,6 +478,13 @@ public class ScryfallImageSource implements CardImageSource {
                         && bulkCardsDatabaseDefault.containsKey(key)) {
                     continue;
                 }
+
+                // workaround for duplicated lines in bulk data, see https://github.com/magefree/mage/issues/12817
+                if (usedCards.contains(card.id)) {
+                    logger.warn("WARNING, must report to scryfall about duplicated lines for bulk data: " + key + ", id " + card.id);
+                    continue;
+                }
+                usedCards.add(card.id);
 
                 // default versions list depends on scryfall bulk data order (en first)
                 bulkCardsDatabaseDefault.put(key, card);
