@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.*;
 import java.util.List;
@@ -28,21 +29,20 @@ import static mage.client.dialog.PreferencesDialog.*;
 /**
  * App GUI: connection windows
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ConnectDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ConnectDialog.class);
+
     private Connection connection;
     private ConnectTask task;
     private final RegisterUserDialog registerUserDialog;
     private final ResetPasswordDialog resetPasswordDialog;
+    ConnectCallback callback = null;
 
     private final ActionListener connectAction = evt -> btnConnectActionPerformed(evt);
 
-    /**
-     * Creates new form ConnectDialog
-     */
     public ConnectDialog() {
         initComponents();
 
@@ -51,14 +51,18 @@ public class ConnectDialog extends MageDialog {
         this.txtUserName.addActionListener(connectAction);
         this.txtPassword.addActionListener(connectAction);
 
-        registerUserDialog = new RegisterUserDialog(this);
-        MageFrame.getDesktop().add(registerUserDialog, JLayeredPane.MODAL_LAYER);
+        registerUserDialog = new RegisterUserDialog();
+        MageFrame.getDesktop().add(registerUserDialog, registerUserDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
 
-        resetPasswordDialog = new ResetPasswordDialog(this);
-        MageFrame.getDesktop().add(resetPasswordDialog, JLayeredPane.MODAL_LAYER);
+        resetPasswordDialog = new ResetPasswordDialog();
+        MageFrame.getDesktop().add(resetPasswordDialog, resetPasswordDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
     }
 
-    public void showDialog() {
+    public interface ConnectCallback {
+        void onConnectClosed();
+    }
+
+    public void showDialog(ConnectCallback callback) {
         this.lblStatus.setText("");
         String serverAddress = MagePreferences.getServerAddressWithDefault(ClientDefaultSettings.serverName);
         this.txtServer.setText(serverAddress);
@@ -77,8 +81,30 @@ public class ConnectDialog extends MageDialog {
             }
         }
         this.setModal(true);
-        this.setLocation(50, 50);
+
+        // windows settings
+        MageFrame.getDesktop().remove(this);
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
+        //this.makeWindowCentered();
+        this.setLocation(50, 50); // make sure it will be visible in any sizes
+
+        // Close on "ESC"
+        registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
         this.setVisible(true);
+    }
+
+    private void onCancel() {
+        MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
+        MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
+        if (task != null && !task.isDone()) {
+            task.cancel(true);
+        } else {
+            this.hideDialog();
+            if (callback != null) {
+                callback.onConnectClosed();
+            }
+        }
     }
 
     private void saveSettings() {
@@ -535,13 +561,7 @@ public class ConnectDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
-        MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
-        if (task != null && !task.isDone()) {
-            task.cancel(true);
-        } else {
-            this.hideDialog();
-        }
+        onCancel();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
@@ -658,6 +678,9 @@ public class ConnectDialog extends MageDialog {
     private void doAfterConnected() {
         this.saveSettings();
         this.hideDialog();
+        if (this.callback != null) {
+            this.callback.onConnectClosed();
+        }
     }
 
     private void keyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyTyped
@@ -689,11 +712,11 @@ public class ConnectDialog extends MageDialog {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        registerUserDialog.showDialog();
+        registerUserDialog.showDialog(this.getServer(), this.getPort());
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnForgotPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgotPasswordActionPerformed
-        resetPasswordDialog.showDialog();
+        resetPasswordDialog.showDialog(this.getServer(), this.getPort());
     }//GEN-LAST:event_btnForgotPasswordActionPerformed
 
     private void connectXmageDe(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFind1findPublicServerActionPerformed
@@ -795,13 +818,14 @@ public class ConnectDialog extends MageDialog {
         // ask for new value
         PickChoiceDialog dlg = new PickChoiceDialog();
         dlg.setWindowSize(300, 500);
-        dlg.showDialog(choice, needSelectValue);
-        if (choice.isChosen()) {
-            flagItem = new String[2];
-            flagItem[0] = choice.getChoiceValue();
-            flagItem[1] = choice.getChoiceKey();
-            flagModel.setSelectedItem(flagItem);
-        }
+        dlg.showDialog(choice, needSelectValue, () -> {
+            if (choice.isChosen()) {
+                String[] flag = new String[2];
+                flag[0] = choice.getChoiceValue();
+                flag[1] = choice.getChoiceKey();
+                flagModel.setSelectedItem(flag);
+            }
+        });
     }
 
     public String getServer() {

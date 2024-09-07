@@ -224,7 +224,12 @@ public class DeckGeneratorDialog {
         dlg = optionPane.createDialog("Generating Deck");
         dlg.setResizable(false);
         dlg.setVisible(true);
-        dlg.dispose();
+        if (dlg.isModal()) {
+            // on modal - it's done here
+            dlg.dispose();
+        } else {
+            // on non-modal - it's do nothing yet
+        }
     }
 
     private void enableAdvancedPanel(boolean enable) {

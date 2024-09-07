@@ -513,7 +513,7 @@ public final class GuiDisplayUtil {
 
         // re-render existing components with new style
         for (Frame frame : Frame.getFrames()) {
-            refreshLookAndFill(frame);
+            refreshLookAndFeel(frame);
         }
 
         // re-render hidden/shared components
@@ -528,9 +528,9 @@ public final class GuiDisplayUtil {
         });
     }
 
-    private static void refreshLookAndFill(Window window) {
+    private static void refreshLookAndFeel(Window window) {
         for (Window childWindow : window.getOwnedWindows()) {
-            refreshLookAndFill(childWindow);
+            refreshLookAndFeel(childWindow);
         }
         SwingUtilities.updateComponentTreeUI(window);
     }
