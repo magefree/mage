@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -24,8 +23,6 @@ import java.util.UUID;
  */
 public final class TwitchingDoll extends CardImpl {
 
-    private static final DynamicValue xValue = new CountersSourceCount();
-
     public TwitchingDoll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{G}");
 
@@ -36,12 +33,12 @@ public final class TwitchingDoll extends CardImpl {
 
         // {T}: Add one mana of any color. Put a nest counter on Twitching Doll.
         Ability ability = new AnyColorManaAbility();
-        ability.addEffect(new AddCountersSourceEffect(CounterType.OMEN.createInstance()));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.NEST.createInstance()));
         this.addAbility(ability);
 
         // {T}, Sacrifice Twitching Doll: Create a 2/2 green Spider creature token with reach for each counter on Twitching Doll. Activate only as a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(
-                new CreateTokenEffect(new Spider22Token(), xValue), new TapSourceCost()
+                new CreateTokenEffect(new Spider22Token(), CountersSourceCount.ANY), new TapSourceCost()
         );
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
