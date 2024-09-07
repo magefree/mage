@@ -10,8 +10,7 @@ import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.mageobject.TargetsPermanentPredicate;
-import mage.filter.predicate.other.NumberOfTargetsPredicate;
+import mage.filter.predicate.other.HasOnlySingleTargetPermanentPredicate;
 
 import java.util.UUID;
 
@@ -25,8 +24,7 @@ public final class LeylineOfResonance extends CardImpl {
     );
 
     static {
-        filter.add(new TargetsPermanentPredicate(StaticFilters.FILTER_CONTROLLED_CREATURE));
-        filter.add(new NumberOfTargetsPredicate(1));
+        filter.add(new HasOnlySingleTargetPermanentPredicate(StaticFilters.FILTER_PERMANENT_CREATURE));
     }
 
     public LeylineOfResonance(UUID ownerId, CardSetInfo setInfo) {
