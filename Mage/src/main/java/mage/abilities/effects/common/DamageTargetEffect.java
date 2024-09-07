@@ -25,6 +25,7 @@ public class DamageTargetEffect extends OneShotEffect {
 
     protected DynamicValue amount;
     protected ValuePhrasing textPhrasing = ValuePhrasing.LEGACY;
+    protected boolean rulesTextTargetFirst = false;
     protected boolean preventable;
     protected String targetDescription;
     protected boolean useOnlyTargetPointer; // TODO: investigate why do we ignore targetPointer by default??
@@ -101,6 +102,7 @@ public class DamageTargetEffect extends OneShotEffect {
         this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
         this.sourceName = effect.sourceName;
         this.textPhrasing = effect.textPhrasing;
+        this.rulesTextTargetFirst = effect.rulesTextTargetFirst;
     }
 
     public DamageTargetEffect withTargetDescription(String targetDescription) {
@@ -110,6 +112,11 @@ public class DamageTargetEffect extends OneShotEffect {
 
     public DamageTargetEffect withTextPhrasing(ValuePhrasing textPhrasing) {
         this.textPhrasing = textPhrasing;
+        return this;
+    }
+
+    public DamageTargetEffect withTargetFirst() {
+        this.rulesTextTargetFirst = true;
         return this;
     }
 
@@ -160,69 +167,50 @@ public class DamageTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        String message = amount.getMessage();
-        sb.append(this.sourceName).append(" deals ");
-        if (amount instanceof StaticValue) {
-            sb.append(((StaticValue)amount).getValue());
-        } else {
-            switch (textPhrasing){
-                case LEGACY:
-                    if (!message.equals("1")) {
-                        sb.append(amount);
-                    }
-                    break;
-                case X_HIDDEN:
-                case X_IS:
-                    sb.append("X");
-                    break;
-                case EQUAL_TO:
-                    // do nothing
-                    break;
-                case FOR_EACH:
-                    if (amount instanceof MultipliedValue) {
-                        sb.append(((MultipliedValue)amount).getMultiplierText());
-                    } else {
-                        sb.append("1");
-                    }
-                    break;
-                default:
-                    throw new IllegalArgumentException("Phrasing " + textPhrasing + " is not supported in DamageTargetEffect");
-            }
-        }
-        if (!sb.toString().endsWith(" ")) {
-            sb.append(' ');
-        }
-        sb.append("damage to ");
+
+        // Generate target description
+        String targetString = "";
         if (!targetDescription.isEmpty()) {
-            sb.append(targetDescription);
+            targetString = targetDescription;
         } else {
             if (!mode.getTargets().isEmpty()) {
                 Target firstTarget = mode.getTargets().get(0);
                 String targetName = firstTarget.getTargetName();
                 if (targetName.contains("any")) {
-                    sb.append(targetName);
+                    targetString = targetName;
                 } else {
                     if (firstTarget.getMinNumberOfTargets() == 0) {
                         int maxTargets = firstTarget.getMaxNumberOfTargets();
                         if (maxTargets == Integer.MAX_VALUE) {
-                            sb.append("any number of ");
+                            targetString = "any number of ";
                         } else {
-                            sb.append("up to ");
-                            sb.append(CardUtil.numberToText(maxTargets));
-                            sb.append(' ');
+                            targetString = "up to " + CardUtil.numberToText(maxTargets) + " ";
                         }
                     }
                     if (!targetName.contains("target ")) {
-                        sb.append("target ");
+                        targetString += "target ";
                     }
-                    sb.append(targetName);
+                    targetString += targetName;
                 }
             } else {
-                sb.append("that target");
+                targetString = "that target";
             }
         }
+
+        // Build rules text
+        String rulesText;
         if (textPhrasing == ValuePhrasing.LEGACY){
+            StringBuilder sb = new StringBuilder();
+            String message = amount.getMessage();
+            sb.append(this.sourceName).append(" deals ");
+            if (!message.equals("1")) {
+                sb.append(amount);
+            }
+            if (!sb.toString().endsWith(" ")) {
+                sb.append(' ');
+            }
+            sb.append("damage to ");
+            sb.append(targetString);
             if (!message.isEmpty()) {
                 if (message.equals("1")) {
                     sb.append(" equal to the number of ");
@@ -235,28 +223,44 @@ public class DamageTargetEffect extends OneShotEffect {
                 }
                 sb.append(message);
             }
-        } else if (!(amount instanceof StaticValue)) {
-            switch (textPhrasing) {
-                case X_IS:
-                    sb.append(", where X is ");
-                    break;
+            rulesText = sb.toString();
+        } else {
+            switch (textPhrasing){
                 case X_HIDDEN:
-                    // No additional text
+                    rulesText = "{source} deals X damage to {target}";
+                    break;
+                case X_IS:
+                    rulesText = "{source} deals X damage to {target}, where X is {amount}";
                     break;
                 case EQUAL_TO:
-                    sb.append(" equal to ");
+                    if (rulesTextTargetFirst){
+                        rulesText = "{source} deals damage to {target} equal to {amount}";
+                    } else {
+                        rulesText = "{source} deals damage equal to {amount} to {target}";
+                    }
                     break;
                 case FOR_EACH:
-                    sb.append(" for each ");
+                    rulesText = "{source} deals {N} damage to {target} for each {amount}";
                     break;
                 default:
-                    throw new IllegalArgumentException("ValuePhrasing enum not implemented: " + textPhrasing);
+                    throw new IllegalArgumentException("Phrasing " + textPhrasing + " is not supported in DamageTargetEffect");
             }
-            sb.append(amount.getMessage(textPhrasing));
+            if (amount.getMessage(textPhrasing).equals("that much")) {
+                rulesText = "{source} deals that much damage to {target}";
+            }
+            if (amount instanceof StaticValue){
+                rulesText = "{source} deals " + ((StaticValue)amount).getValue() + " damage to {target}";
+            }
+
+            rulesText = rulesText.replace("{source}", sourceName);
+            rulesText = rulesText.replace("{target}", targetString);
+            rulesText = rulesText.replace("{amount}", amount.getMessage(textPhrasing));
+            rulesText = rulesText.replace("{N}", (amount instanceof MultipliedValue) ? Integer.toString(((MultipliedValue)amount).getMultiplier()) : "1");
         }
+
         if (!preventable) {
-            sb.append(". The damage can't be prevented");
+            rulesText += ". The damage can't be prevented";
         }
-        return sb.toString();
+        return rulesText;
     }
 }

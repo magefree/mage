@@ -48,6 +48,10 @@ public class MultipliedValue implements DynamicValue {
         return CardUtil.numberToText(multiplier);
     }
 
+    public String getMultiplierText(String forOne){
+        return CardUtil.numberToText(multiplier, forOne);
+    }
+
     @Override
     public String toString() {
         if (value.toString().equals("1")) {
