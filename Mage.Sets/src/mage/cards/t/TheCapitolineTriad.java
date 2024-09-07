@@ -3,42 +3,36 @@ package mage.cards.t;
 import java.awt.*;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.OrCost;
-import mage.abilities.costs.common.ExileManaValueFromGraveyardCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.ManaValueInGraveyard;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.hint.ValueHint;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.game.Game;
 import mage.game.command.emblems.TheCapitolineTriadEmblem;
-import mage.game.permanent.token.CitizenToken;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
 /**
- * @author grimreap124
+ * @author grimreap124, Grath
  */
 public final class TheCapitolineTriad extends CardImpl {
 
@@ -69,7 +63,7 @@ public final class TheCapitolineTriad extends CardImpl {
 
 
         // Exile any number of historic cards from your graveyard with total mana value 30 or greater: You get an emblem with "Creatures you control have base power and toughness 9/9."
-        ability = new SimpleActivatedAbility(new GetEmblemEffect(new TheCapitolineTriadEmblem()), new ExileManaValueFromGraveyardCost(new TheCapitolineTriadTarget(), 30));
+        ability = new SimpleActivatedAbility(new GetEmblemEffect(new TheCapitolineTriadEmblem()), new TheCapitolineTriadCost());
         ability.addHint(new ValueHint("Mana value of historic cards in graveyard", manaValueGraveyard));
         this.addAbility(ability);
     }
@@ -81,6 +75,53 @@ public final class TheCapitolineTriad extends CardImpl {
     @Override
     public TheCapitolineTriad copy() {
         return new TheCapitolineTriad(this);
+    }
+}
+
+class TheCapitolineTriadCost extends CostImpl {
+
+    public TheCapitolineTriadCost() {
+        this.addTarget(new TheCapitolineTriadTarget());
+        this.text = "exile any number of historic cards from your graveyard with total mana value 30 or greater";
+    }
+
+    private TheCapitolineTriadCost(final TheCapitolineTriadCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
+        Player player = game.getPlayer(controllerId);
+        int sumManaValue = 0;
+        if (this.getTargets().choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
+                Card card = game.getCard(targetId);
+                if (card != null && player.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source))) {
+                    sumManaValue += card.getManaValue();
+                }
+            }
+        }
+        game.informPlayers("Exile historic cards with total mana value of " + sumManaValue);
+        paid = sumManaValue >= 30;
+        return paid;
+    }
+
+    @Override
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Player player = game.getPlayer(controllerId);
+        int sumManaValue = 0;
+        for (UUID cardId : player.getGraveyard()) {
+            Card card = game.getCard(cardId);
+            if (card != null) {
+                sumManaValue += card.getManaValue();
+            }
+        }
+        return sumManaValue >= 30;
+    }
+
+    @Override
+    public TheCapitolineTriadCost copy() {
+        return new TheCapitolineTriadCost(this);
     }
 }
 
@@ -112,9 +153,9 @@ class TheCapitolineTriadTarget extends TargetCardInYourGraveyard {
 
     @Override
     public String getMessage(Game game) {
-        String text = "Select " + CardUtil.addArticle(targetName);
+        String text = "Select " + targetName;
         int manaValueOfSelection = manaValueOfSelection(this.getTargets(), game);
-        text += " (selected " + this.getTargets().size() + " cards; card types: ";
+        text += " (selected " + this.getTargets().size() + " cards; mana value: ";
         text += HintUtils.prepareText(
                 manaValueOfSelection + " of 30",
                 manaValueOfSelection >= 30 ? Color.GREEN : Color.RED
