@@ -311,11 +311,14 @@ public class ScryfallImageSource implements CardImageSource {
         }
 
         // if up to date
-        if (isBulkDataPrepared()) {
+        if (isBulkDataPrepared(downloadServiceInfo)) {
             return true;
         }
 
         // NEED TO DOWNLOAD
+        if (downloadServiceInfo.isNeedCancel()) {
+            return false;
+        }
 
         // clean
         TFile bulkTempFile = prepareTempFileForBulkData();
@@ -424,14 +427,18 @@ public class ScryfallImageSource implements CardImageSource {
             }
         }
 
-        return isBulkDataPrepared();
+        return isBulkDataPrepared(downloadServiceInfo);
     }
 
-    private boolean isBulkDataPrepared() {
+    private boolean isBulkDataPrepared(DownloadServiceInfo downloadServiceInfo) {
 
         // already loaded
         if (bulkCardsDatabaseAll.size() > 0) {
             return true;
+        }
+
+        if (downloadServiceInfo.isNeedCancel()) {
+            return false;
         }
 
         // file not exists
@@ -462,6 +469,10 @@ public class ScryfallImageSource implements CardImageSource {
 
             jsonReader.beginArray();
             while (jsonReader.hasNext()) {
+                if (downloadServiceInfo.isNeedCancel()) {
+                    return false;
+                }
+
                 ScryfallApiCard card = gson.fromJson(jsonReader, ScryfallApiCard.class);
 
                 // prepare data

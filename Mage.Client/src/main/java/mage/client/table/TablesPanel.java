@@ -57,6 +57,8 @@ import java.util.concurrent.TimeUnit;
 import static mage.client.dialog.PreferencesDialog.*;
 
 /**
+ * GUI: lobby's main component
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class TablesPanel extends javax.swing.JPanel {
@@ -140,9 +142,12 @@ public class TablesPanel extends javax.swing.JPanel {
     private UpdateTablesTask updateTablesTask;
     private UpdatePlayersTask updatePlayersTask;
     private UpdateMatchesTask updateMatchesTask;
+
+    // no needs in multiple create/join tables dialogs, it's a client side action
     private JoinTableDialog joinTableDialog;
     private NewTableDialog newTableDialog;
     private NewTournamentDialog newTournamentDialog;
+
     private final GameChooser gameChooser;
     private java.util.List<String> messages;
     private int currentMessage;
@@ -439,14 +444,18 @@ public class TablesPanel extends javax.swing.JPanel {
                             LOGGER.info("Joining tournament " + tableId);
                             if (!gameType.startsWith("Constructed")) {
                                 if (TablesTableModel.PASSWORD_VALUE_YES.equals(pwdColumn)) {
+                                    // need enter password
                                     joinTableDialog.showDialog(roomId, tableId, true, !gameType.startsWith("Constructed"));
                                 } else {
+                                    // direct join (no pass, no deck)
                                     SessionHandler.joinTournamentTable(roomId, tableId, SessionHandler.getUserName(), PlayerType.HUMAN, 1, null, "");
                                 }
                             } else {
+                                // need choose deck
                                 joinTableDialog.showDialog(roomId, tableId, true, !gameType.startsWith("Constructed"));
                             }
                         } else {
+                            // need choose deck
                             LOGGER.info("Joining table " + tableId);
                             joinTableDialog.showDialog(roomId, tableId, false, false);
                         }
@@ -758,15 +767,15 @@ public class TablesPanel extends javax.swing.JPanel {
         }
         if (newTableDialog == null) {
             newTableDialog = new NewTableDialog();
-            MageFrame.getDesktop().add(newTableDialog, JLayeredPane.MODAL_LAYER);
+            MageFrame.getDesktop().add(newTableDialog, newTableDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         }
         if (newTournamentDialog == null) {
             newTournamentDialog = new NewTournamentDialog();
-            MageFrame.getDesktop().add(newTournamentDialog, JLayeredPane.MODAL_LAYER);
+            MageFrame.getDesktop().add(newTournamentDialog, newTournamentDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         }
         if (joinTableDialog == null) {
             joinTableDialog = new JoinTableDialog();
-            MageFrame.getDesktop().add(joinTableDialog, JLayeredPane.MODAL_LAYER);
+            MageFrame.getDesktop().add(joinTableDialog, joinTableDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         }
         if (chatRoomId != null) {
             this.chatPanelMain.getUserChatPanel().connect(chatRoomId);
@@ -810,7 +819,7 @@ public class TablesPanel extends javax.swing.JPanel {
         this.saveDividerLocations();
         for (Component component : MageFrame.getDesktop().getComponents()) {
             if (component instanceof TableWaitingDialog) {
-                ((TableWaitingDialog) component).closeDialog();
+                ((TableWaitingDialog) component).doClose();
             }
         }
         stopTasks();

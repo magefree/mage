@@ -44,7 +44,7 @@ public class NewTournamentDialog extends MageDialog {
     private UUID roomId;
     private String lastSessionId;
     private RandomPacksSelectorDialog randomPackSelector;
-    private CustomOptionsDialog customOptions;
+    private final CustomOptionsDialog customOptions;
     private JTextArea txtRandomPacks;
     private final java.util.List<TournamentPlayerPanel> players = new ArrayList<>();
     private final java.util.List<JPanel> packPanels = new ArrayList<>();
@@ -60,7 +60,7 @@ public class NewTournamentDialog extends MageDialog {
     public NewTournamentDialog() {
         initComponents();
         this.customOptions = new CustomOptionsDialog(CustomOptionsDialog.SaveLoadKeys.TOURNEY, btnCustomOptions);
-        MageFrame.getDesktop().add(customOptions, JLayeredPane.MODAL_LAYER);
+        MageFrame.getDesktop().add(customOptions, customOptions.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         lastSessionId = "";
         txtName.setText("Tournament");
         this.spnNumWins.setModel(new SpinnerNumberModel(2, 1, 5, 1));
@@ -657,6 +657,13 @@ public class NewTournamentDialog extends MageDialog {
 
     }//GEN-LAST:event_cbTournamentTypeActionPerformed
 
+    private void doClose() {
+        if (this.customOptions.isVisible()) {
+            this.customOptions.hideDialog();
+        }
+        this.hideDialog();
+    }
+
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
 
         // get settings
@@ -714,7 +721,7 @@ public class NewTournamentDialog extends MageDialog {
                 DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true),
                 tOptions.getPassword())) {
             // all fine, can close create dialog (join dialog will be opened after feedback from server)
-            this.hideDialog();
+            doClose();
             return;
         }
 
@@ -726,7 +733,7 @@ public class NewTournamentDialog extends MageDialog {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.table = null;
         // this.playerId = null;
-        this.hideDialog();
+        doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void updateNumSeats() {

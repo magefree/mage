@@ -19,6 +19,7 @@ import mage.client.dialog.AddLandDialog;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.Event;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.components.CardInfoPane;
@@ -30,6 +31,7 @@ import mage.util.XmageThreadFactory;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
+import org.mage.card.arcane.ManaSymbols;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -674,7 +676,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     private void refreshDeck() {
-        refreshDeck(false);
+        if (this.isVisible()) { // TODO: test auto-close deck with active lands dialog, e.g. on timeout
+            refreshDeck(false);
+        }
     }
 
     private void refreshDeck(boolean useLayout) {
@@ -786,31 +790,51 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void importFromClipboard(ActionEvent evt) {
         final DeckImportClipboardDialog dialog = new DeckImportClipboardDialog();
-        dialog.showDialog();
+        dialog.showDialog(tempDeckPath -> {
+            if (!tempDeckPath.isEmpty()) {
+                loadDeck(tempDeckPath, false);
+            }
+        });
 
-        if (!dialog.getTmpPath().isEmpty()) {
-            loadDeck(dialog.getTmpPath(), false);
+        if (dialog.isModal()) {
+            // on modal - it's done here
+            dialog.dispose();
+        } else {
+            // on non-modal - it's do nothing yet
         }
+    }
+
+    private void onImportReady(String deckPath) {
+        SwingUtilities.invokeLater(() -> {
+            if (deckPath.isEmpty()) {
+                loadDeck(deckPath, false);
+            }
+        });
     }
 
     private void importFromClipboardWithAppend(ActionEvent evt) {
         final DeckImportClipboardDialog dialog = new DeckImportClipboardDialog();
-        dialog.showDialog();
-
-        if (!dialog.getTmpPath().isEmpty()) {
-            StringBuilder errorMessages = new StringBuilder();
-
-            MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            try {
-                Deck deckToAppend = Deck.load(DeckImporter.importDeckFromFile(dialog.getTmpPath(), errorMessages, false), true, true);
-                processAndShowImportErrors(errorMessages);
-                this.deck = Deck.append(deckToAppend, this.deck);
-                refreshDeck();
-            } catch (GameException e1) {
-                JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        dialog.showDialog(tempDeckPath -> {
+            if (!tempDeckPath.isEmpty()) {
+                StringBuilder errorMessages = new StringBuilder();
+                MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+                try {
+                    Deck deckToAppend = Deck.load(DeckImporter.importDeckFromFile(tempDeckPath, errorMessages, false), true, true);
+                    processAndShowImportErrors(errorMessages);
+                    this.deck = Deck.append(deckToAppend, this.deck);
+                    refreshDeck();
+                } catch (GameException e1) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                }
             }
+        });
+        if (dialog.isModal()) {
+            // on modal - it's done here
+            dialog.dispose();
+        } else {
+            // on non-modal - it's do nothing yet
         }
     }
 
@@ -1462,9 +1486,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLandActionPerformed
-        AddLandDialog addLand = new AddLandDialog();
-        addLand.showDialog(deck, mode);
-        refreshDeck();
+        AddLandDialog dialog = new AddLandDialog();
+        dialog.showDialog(deck, mode, this::refreshDeck);
     }//GEN-LAST:event_btnAddLandActionPerformed
 
     private void btnGenDeckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenDeckActionPerformed
