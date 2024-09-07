@@ -8,6 +8,7 @@ import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
@@ -22,6 +23,7 @@ public final class TrappedInTheScreen extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or enchantment an opponent controls");
 
     static {
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate(),

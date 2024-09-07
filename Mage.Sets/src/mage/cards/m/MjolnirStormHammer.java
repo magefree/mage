@@ -31,12 +31,9 @@ import mage.target.TargetPermanent;
 public final class MjolnirStormHammer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature defending player controls");
-    private static final FilterPermanent filter2 = new FilterCreaturePermanent("tapped creatures that opponent controls");
 
     static {
         filter.add(DefendingPlayerControlsAttachedAttackingPredicate.instance);
-        filter2.add(DefendingPlayerControlsAttachedAttackingPredicate.instance);
-        filter2.add(TappedPredicate.TAPPED);
     }
 
     public MjolnirStormHammer(UUID ownerId, CardSetInfo setInfo) {

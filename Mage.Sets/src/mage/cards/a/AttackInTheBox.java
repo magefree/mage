@@ -30,7 +30,7 @@ public final class AttackInTheBox extends CardImpl {
         // Whenever Attack-in-the-Box attacks, you may have it get +4/+0 until end of turn. If you do, sacrifice it at the beginning of the next end step.
         Ability ability = new AttacksTriggeredAbility(new BoostSourceEffect(
                 4, 0, Duration.EndOfTurn
-        ).setText("have it get +4/+0 until end of turn"));
+        ).setText("have it get +4/+0 until end of turn"), true);
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect())
         ).setText("If you do, sacrifice it at the beginning of the next end step"));

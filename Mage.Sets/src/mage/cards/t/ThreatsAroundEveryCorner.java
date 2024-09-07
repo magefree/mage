@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
 import mage.target.common.TargetCardInLibrary;
 
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class ThreatsAroundEveryCorner extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a face-down permanent you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent("a face-down permanent you control");
 
     static {
         filter.add(FaceDownPredicate.instance);

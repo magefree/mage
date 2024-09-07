@@ -74,6 +74,7 @@ class StarfallInvocationEffect extends OneShotEffect {
         }
 
         if (controller != null && GiftWasPromisedCondition.TRUE.apply(game, source)) {
+            game.processAction();
             TargetCard target = new TargetCardInYourGraveyard();
             controller.choose(Outcome.PutCreatureInPlay, yourCreatureCards, target, source, game);
             Card targetCard = game.getCard(target.getFirstTarget());

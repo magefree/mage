@@ -29,7 +29,7 @@ public final class DashingBloodsucker extends CardImpl {
 
         // Eerie -- Whenever an enchantment you control enters and whenever you fully unlock a Room, Dashing Bloodsucker gets +2/+0 and gains lifelink until end of turn.
         Ability ability = new EerieAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn).setText("{this} gets +2/+0"));
-        ability.addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()).setText("and gains lifelink until end of turn"));
+        ability.addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn).setText("and gains lifelink until end of turn"));
         this.addAbility(ability);
     }
 

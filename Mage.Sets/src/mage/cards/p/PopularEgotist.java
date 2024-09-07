@@ -20,6 +20,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -59,6 +60,7 @@ public final class PopularEgotist extends CardImpl {
         ability = new SacrificePermanentTriggeredAbility(
                 new LoseLifeTargetEffect(1), StaticFilters.FILTER_PERMANENT
         );
+        ability.addTarget(new TargetOpponent());
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
