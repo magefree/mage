@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -17,6 +18,10 @@ import mage.util.CardUtil;
 public class DrawCardSourceControllerEffect extends OneShotEffect {
 
     protected DynamicValue amount;
+    protected ValuePhrasing textPhrasing;
+    protected boolean youDraw;
+    protected boolean rulesTextAmountFirst = false;
+    protected boolean additionalClause = false;
 
     public DrawCardSourceControllerEffect(int amount) {
         this(amount, false);
@@ -41,11 +46,31 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
     public DrawCardSourceControllerEffect(DynamicValue amount, boolean youDraw, ValuePhrasing textPhrasing) {
         super(Outcome.DrawCard);
         this.amount = amount.copy();
-        createStaticText(youDraw, textPhrasing);
+        this.youDraw = youDraw;
+        this.textPhrasing = textPhrasing;
+    }
+
+    // with "for each" phrasings, this changes
+    // "draw {N} card{s} for each {amount}"
+    // to
+    // "for each {amount}, draw {N} card{s}"
+    public DrawCardSourceControllerEffect withAmountFirst() {
+        this.rulesTextAmountFirst = true;
+        return this;
+    }
+
+    // Use for phrasings like "draw an additional card" instead of "draw a card"
+    public DrawCardSourceControllerEffect withAdditionalPhrasing() {
+        this.additionalClause = true;
+        return this;
     }
 
     protected DrawCardSourceControllerEffect(final DrawCardSourceControllerEffect effect) {
         super(effect);
+        this.rulesTextAmountFirst = effect.rulesTextAmountFirst;
+        this.additionalClause = effect.additionalClause;
+        this.textPhrasing = effect.textPhrasing;
+        this.youDraw = effect.youDraw;
         this.amount = effect.amount.copy();
     }
 
@@ -65,7 +90,12 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
         return false;
     }
 
-    private void createStaticText(boolean youDraw, ValuePhrasing textPhrasing) {
+    public String getText(Mode mode) {
+
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+
         if (textPhrasing == ValuePhrasing.LEGACY){
             StringBuilder sb = new StringBuilder();
             if (youDraw){
@@ -83,56 +113,76 @@ public class DrawCardSourceControllerEffect extends OneShotEffect {
                 sb.append(value.equals("X") ? ", where X is " : " for each ");
                 sb.append(message);
             }
-            staticText = sb.toString();
-            return;
+            return sb.toString();
         }
-        StringBuilder sb = new StringBuilder(youDraw ? "you " : "");
-        sb.append("draw");
-        String value;
-        if (amount instanceof StaticValue) {
-            value = " " + CardUtil.numberToText(((StaticValue)amount).getValue(), "a");
+
+        // Currently handled phrasings:
+        // draw {N} card{s} for each {amount}
+        // draw an additional card for each {amount}
+        // for each {amount}, draw {N} card{s}
+        // draw cards equal to {amount}
+        // draw X cards, where X is {amount}
+        // draw X cards
+        // draw that many cards
+
+        String rulesText;
+        switch (textPhrasing){
+            case X_HIDDEN:
+                rulesText = "draw X cards";
+                break;
+            case X_IS:
+                rulesText = "draw X cards, where X is {amount}";
+                break;
+            case EQUAL_TO:
+                rulesText = "draw cards equal to {amount}";
+                break;
+            case FOR_EACH:
+                if (rulesTextAmountFirst){
+                    rulesText = "for each {amount}, draw {N} card{s}";
+                } else {
+                    rulesText = "draw {N} card{s} for each {amount}";
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Phrasing " + textPhrasing + " is not supported in DrawCardSourceControllerEffect");
+        }
+        if (amount.getMessage(textPhrasing).equals("that many")) {
+            rulesText = "draw that many cards";
+        }
+
+        if (youDraw){
+            rulesText = rulesText.replace("draw", "you draw");
+        }
+
+        rulesText = rulesText.replace("{amount}", amount.getMessage(textPhrasing));
+
+        // Generate replacement for {N} in "for each" phrasings
+        String NString = "a";
+        if (amount instanceof MultipliedValue){
+            NString = ((MultipliedValue)amount).getMultiplierText("a");
+        }
+
+        // Handle static cases
+        if (amount instanceof StaticValue){
+            rulesText = "draw {N} card{s}";
+            NString = CardUtil.numberToText(((StaticValue)amount).getValue(), "a");
+        }
+
+        // Detect plurality
+        if (NString.equals("a")){
+            rulesText = rulesText.replace("{s}", "");
         } else {
-            switch (textPhrasing){
-//                case LEGACY: // Unreachable due to above check
-//                    break;
-                case X_HIDDEN:
-                case X_IS:
-                    value = " X";
-                    break;
-                case EQUAL_TO:
-                    value = "";
-                    break;
-                case FOR_EACH:
-                    if (amount instanceof MultipliedValue) {
-                        value = " " + ((MultipliedValue)amount).getMultiplierText();
-                    } else {
-                        value = " a";
-                    }
-                    break;
-                default:
-                    throw new IllegalArgumentException("Phrasing " + textPhrasing + " is not supported in DamageTargetEffect");
-            }
+            rulesText = rulesText.replace("{s}", "s");
         }
-        sb.append(value).append(value.equals(" a") ? " card" : " cards");
-        if (!(amount instanceof StaticValue)) {
-            switch (textPhrasing) {
-                case X_IS:
-                    sb.append(", where X is ");
-                    break;
-                case X_HIDDEN:
-                    // No additional text
-                    break;
-                case EQUAL_TO:
-                    sb.append(" equal to ");
-                    break;
-                case FOR_EACH:
-                    sb.append(" for each ");
-                    break;
-                default:
-                    throw new IllegalArgumentException("ValuePhrasing enum not implemented: " + textPhrasing);
+
+        if (additionalClause){
+            if (NString.equals("a")){
+                NString = "an";
             }
-            sb.append(amount.getMessage(textPhrasing));
+            NString += " additional";
         }
-        staticText = sb.toString();
+        rulesText = rulesText.replace("{N}", NString);
+
+        return rulesText;
     }
 }
