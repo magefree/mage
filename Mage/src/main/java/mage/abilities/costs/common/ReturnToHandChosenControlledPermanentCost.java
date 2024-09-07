@@ -13,14 +13,14 @@ import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
+
+    private final List<Permanent> permanents = new ArrayList<>();
 
     public ReturnToHandChosenControlledPermanentCost(TargetControlledPermanent target) {
         target.withNotTarget(true);
@@ -37,8 +37,11 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
         }
     }
 
-    private ReturnToHandChosenControlledPermanentCost(final ReturnToHandChosenControlledPermanentCost cost) {
+    protected ReturnToHandChosenControlledPermanentCost(final ReturnToHandChosenControlledPermanentCost cost) {
         super(cost);
+        for (Permanent permanent : cost.permanents) {
+            this.permanents.add(permanent.copy());
+        }
     }
 
     @Override
@@ -52,6 +55,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
                     if (permanent == null) {
                         return false;
                     }
+                    addReturnTarget(game, permanent);
                     permanentsToReturn.add(permanent);
                 }
                 controller.moveCards(permanentsToReturn, Zone.HAND, ability, game);
@@ -59,6 +63,10 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
             }
         }
         return paid;
+    }
+
+    protected void addReturnTarget(Game game, Permanent permanent) {
+        permanents.add(permanent.copy());
     }
 
     @Override
@@ -69,6 +77,10 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
     @Override
     public ReturnToHandChosenControlledPermanentCost copy() {
         return new ReturnToHandChosenControlledPermanentCost(this);
+    }
+
+    public List<Permanent> getPermanents() {
+        return permanents;
     }
 
 }
