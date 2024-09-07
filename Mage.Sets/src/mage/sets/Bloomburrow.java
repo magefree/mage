@@ -95,6 +95,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Fell", 95, Rarity.UNCOMMON, mage.cards.f.Fell.class));
         cards.add(new SetCardInfo("Finch Formation", 50, Rarity.COMMON, mage.cards.f.FinchFormation.class));
         cards.add(new SetCardInfo("Finneas, Ace Archer", 212, Rarity.RARE, mage.cards.f.FinneasAceArcher.class));
+        cards.add(new SetCardInfo("Fireglass Mentor", 213, Rarity.UNCOMMON, mage.cards.f.FireglassMentor.class));
         cards.add(new SetCardInfo("Flame Lash", 391, Rarity.COMMON, mage.cards.f.FlameLash.class));
         cards.add(new SetCardInfo("Flamecache Gecko", 135, Rarity.UNCOMMON, mage.cards.f.FlamecacheGecko.class));
         cards.add(new SetCardInfo("Flowerfoot Swordmaster", 14, Rarity.UNCOMMON, mage.cards.f.FlowerfootSwordmaster.class));
@@ -145,6 +146,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Lightshell Duo", 56, Rarity.COMMON, mage.cards.l.LightshellDuo.class));
         cards.add(new SetCardInfo("Lilypad Village", 255, Rarity.UNCOMMON, mage.cards.l.LilypadVillage.class));
         cards.add(new SetCardInfo("Lilysplash Mentor", 222, Rarity.UNCOMMON, mage.cards.l.LilysplashMentor.class));
+        cards.add(new SetCardInfo("Long River Lurker", 57, Rarity.UNCOMMON, mage.cards.l.LongRiverLurker.class));
         cards.add(new SetCardInfo("Long River's Pull", 58, Rarity.UNCOMMON, mage.cards.l.LongRiversPull.class));
         cards.add(new SetCardInfo("Longstalk Brawl", 182, Rarity.COMMON, mage.cards.l.LongstalkBrawl.class));
         cards.add(new SetCardInfo("Lumra, Bellow of the Woods", 183, Rarity.MYTHIC, mage.cards.l.LumraBellowOfTheWoods.class));
@@ -241,6 +243,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Stormcatch Mentor", 234, Rarity.UNCOMMON, mage.cards.s.StormcatchMentor.class));
         cards.add(new SetCardInfo("Stormchaser's Talent", 75, Rarity.RARE, mage.cards.s.StormchasersTalent.class));
         cards.add(new SetCardInfo("Stormsplitter", 154, Rarity.MYTHIC, mage.cards.s.Stormsplitter.class));
+        cards.add(new SetCardInfo("Sugar Coat", 76, Rarity.UNCOMMON, mage.cards.s.SugarCoat.class));
         cards.add(new SetCardInfo("Sunshower Druid", 195, Rarity.COMMON, mage.cards.s.SunshowerDruid.class));
         cards.add(new SetCardInfo("Sunspine Lynx", 155, Rarity.RARE, mage.cards.s.SunspineLynx.class));
         cards.add(new SetCardInfo("Swamp", 270, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));

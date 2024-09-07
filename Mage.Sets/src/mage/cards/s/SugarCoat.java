@@ -1,15 +1,17 @@
-package mage.cards.m;
+package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.token.TreasureAbility;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.token.FoodAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -17,53 +19,62 @@ import mage.target.TargetPermanent;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author notgreat
  */
-public final class MinimusContainment extends CardImpl {
+public final class SugarCoat extends CardImpl {
 
-    public MinimusContainment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
+    private static final FilterPermanent filter = new FilterPermanent("creature or Food");
+
+    static {
+        filter.add(Predicates.or(SubType.FOOD.getPredicate(), CardType.CREATURE.getPredicate()));
+    }
+
+    public SugarCoat(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         this.subtype.add(SubType.AURA);
 
-        // Enchant nonland permanent
-        TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_LAND);
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+
+        // Enchant creature or Food
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
-        // Enchanted permanent is a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color," and it loses all other abilities.
-        this.addAbility(new SimpleStaticAbility(new MinimusContainmentEffect()));
+        // Enchanted permanent is a colorless Food artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life" and loses all other card types and abilities.
+        this.addAbility(new SimpleStaticAbility(new SugarCoatEffect()));
     }
 
-    private MinimusContainment(final MinimusContainment card) {
+    private SugarCoat(final SugarCoat card) {
         super(card);
     }
 
     @Override
-    public MinimusContainment copy() {
-        return new MinimusContainment(this);
+    public SugarCoat copy() {
+        return new SugarCoat(this);
     }
 }
 
-class MinimusContainmentEffect extends ContinuousEffectImpl {
+// Based on MinimusContainmentEffect
+class SugarCoatEffect extends ContinuousEffectImpl {
 
-    private static final Ability ability = new TreasureAbility(false);
+    private static final Ability ability = new FoodAbility(false);
 
-    MinimusContainmentEffect() {
+    SugarCoatEffect() {
         super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
-        staticText = "enchanted permanent is a Treasure artifact with " +
-                "\"{T}, Sacrifice this artifact: Add one mana of any color,\" and it loses all other abilities";
+        staticText = "Enchanted permanent is a colorless Food artifact with " +
+                "\"{2}, {T}, Sacrifice this artifact: You gain 3 life\" and loses all other card types and abilities";
     }
 
-    private MinimusContainmentEffect(final MinimusContainmentEffect effect) {
+    private SugarCoatEffect(final SugarCoatEffect effect) {
         super(effect);
     }
 
     @Override
-    public MinimusContainmentEffect copy() {
-        return new MinimusContainmentEffect(this);
+    public SugarCoatEffect copy() {
+        return new SugarCoatEffect(this);
     }
 
     @Override
@@ -81,7 +92,7 @@ class MinimusContainmentEffect extends ContinuousEffectImpl {
                 permanent.retainAllArtifactSubTypes(game);
                 permanent.removeAllCardTypes(game);
                 permanent.addCardType(game, CardType.ARTIFACT);
-                permanent.addSubType(game, SubType.TREASURE);
+                permanent.addSubType(game, SubType.FOOD);
                 return true;
             case AbilityAddingRemovingEffects_6:
                 permanent.removeAllAbilities(source.getSourceId(), game);
@@ -101,3 +112,4 @@ class MinimusContainmentEffect extends ContinuousEffectImpl {
         return layer == Layer.TypeChangingEffects_4 || layer == Layer.AbilityAddingRemovingEffects_6;
     }
 }
+
