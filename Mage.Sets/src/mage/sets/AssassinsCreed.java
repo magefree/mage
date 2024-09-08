@@ -23,6 +23,7 @@ public final class AssassinsCreed extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abstergo Entertainment", 79, Rarity.RARE, mage.cards.a.AbstergoEntertainment.class));
         cards.add(new SetCardInfo("Achilles Davenport", 294, Rarity.RARE, mage.cards.a.AchillesDavenport.class));
+        cards.add(new SetCardInfo("Adewale, Breaker of Chains", 44, Rarity.UNCOMMON, mage.cards.a.AdewaleBreakerOfChains.class));
         cards.add(new SetCardInfo("Arbaaz Mir", 46, Rarity.UNCOMMON, mage.cards.a.ArbaazMir.class));
         cards.add(new SetCardInfo("Arno Dorian", 47, Rarity.UNCOMMON, mage.cards.a.ArnoDorian.class));
         cards.add(new SetCardInfo("Assassin Den", 281, Rarity.UNCOMMON, mage.cards.a.AssassinDen.class));
@@ -55,6 +56,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Detained by Legionnaires", 277, Rarity.COMMON, mage.cards.d.DetainedByLegionnaires.class));
         cards.add(new SetCardInfo("Distract the Guards", 3, Rarity.UNCOMMON, mage.cards.d.DistractTheGuards.class));
         cards.add(new SetCardInfo("Eagle Vision", 17, Rarity.UNCOMMON, mage.cards.e.EagleVision.class));
+        cards.add(new SetCardInfo("Edward Kenway", 53, Rarity.MYTHIC, mage.cards.e.EdwardKenway.class));
         cards.add(new SetCardInfo("Eivor, Battle-Ready", 274, Rarity.MYTHIC, mage.cards.e.EivorBattleReady.class));
         cards.add(new SetCardInfo("Eivor, Wolf-Kissed", 54, Rarity.MYTHIC, mage.cards.e.EivorWolfKissed.class));
         cards.add(new SetCardInfo("Escape Detection", 18, Rarity.UNCOMMON, mage.cards.e.EscapeDetection.class));
