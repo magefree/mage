@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
 import java.util.UUID;
 
 /**
@@ -22,18 +23,12 @@ public final class SixSidedDie extends CardImpl {
     public SixSidedDie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
         // Choose target creature. Roll a six-sided die.
-        //
-        //1 — It has base toughness 1 until end of turn.
-        //
-        //2 — Put two -1/-1 counters on it.
-        //
-        //3 — Six-Sided Die deals 3 damage to it, and you gain 3 life.
-        //
-        //4 — It gets -4/-4 until end of turn.
-        //
-        //5 — Destroy it.
-        //
-        //6 — Exile it.
+        // 1 — It has base toughness 1 until end of turn.
+        // 2 — Put two -1/-1 counters on it.
+        // 3 — Six-Sided Die deals 3 damage to it, and you gain 3 life.
+        // 4 — It gets -4/-4 until end of turn.
+        // 5 — Destroy it.
+        // 6 — Exile it.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new SixSidedDieEffect());
     }
