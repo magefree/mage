@@ -49,6 +49,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Enduring Tenacity", 95, Rarity.RARE, mage.cards.e.EnduringTenacity.class));
         cards.add(new SetCardInfo("Etched Cornfield", 258, Rarity.COMMON, mage.cards.e.EtchedCornfield.class));
         cards.add(new SetCardInfo("Ethereal Armor", 7, Rarity.UNCOMMON, mage.cards.e.EtherealArmor.class));
+        cards.add(new SetCardInfo("Fear of Being Hunted", 134, Rarity.UNCOMMON, mage.cards.f.FearOfBeingHunted.class));
         cards.add(new SetCardInfo("Fear of Failed Tests", 55, Rarity.UNCOMMON, mage.cards.f.FearOfFailedTests.class));
         cards.add(new SetCardInfo("Fear of Immobility", 10, Rarity.COMMON, mage.cards.f.FearOfImmobility.class));
         cards.add(new SetCardInfo("Fear of Impostors", 57, Rarity.UNCOMMON, mage.cards.f.FearOfImpostors.class));
