@@ -193,7 +193,7 @@ if (exists ($new_order{$cmd}))
 	foreach $set (sort keys (%cards_by_sets))
     {
 		my $cards = $cards_by_sets{$set};
-		print ("* ", $set, " - added ", scalar @{$cards}, " new cards;", "\n");
+		print ("* ", $set, " - added ", scalar @{$cards}, " new cards:", "\n");
 		foreach my $card (@{$cards})
 		{
 		    $total++;
