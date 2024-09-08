@@ -1,4 +1,23 @@
 services:
   server:
     build: .
-    # TODO
+    image: ghcr.io/magefree/mage
+    ports:
+      - '17171:17171'
+      - '17179:17179'
+    # Uncomment this to configure the server for your deployment URL
+    # extra_hosts:
+    #   - 'your-mage-domain.com:0.0.0.0'
+    environment:
+      # Uncomment this to configure the server for your deployment URL
+      # - MAGE_SERVER_ADDRESS=your-mage-domain.com
+      # Give the server a name, if you want to
+      - MAGE_SERVER_NAME=mage-server
+      - MAGE_MAX_SECONDS_IDLE=6000
+      - MAGE_AUTHENTICATION_ACTIVATED=false
+    volumes:
+      - xmage-db:/xmage/db
+      - xmage-saved:/xmage/saved
+volumes:
+  xmage-db:
+  xmage-saved:
