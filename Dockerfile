@@ -1,10 +1,14 @@
-FROM maven:3.9 AS builder
+FROM odinuge/maven-javafx:3-jdk-8 AS builder
+
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
+
+# additional tools
+RUN apt update && apt install -y \
+    build-essential
 
 COPY . .
 RUN mvn clean install -DskipTests \ 
-    && cd ./Mage.Client \
-    && mvn package assembly:single \
-    && cd ../Mage.Server \
+    && cd ./Mage.Server \
     && mvn package assembly:single
 
 FROM openjdk:8-jre
