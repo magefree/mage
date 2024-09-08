@@ -68,6 +68,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Gloomlake Verge", 260, Rarity.RARE, mage.cards.g.GloomlakeVerge.class));
         cards.add(new SetCardInfo("Grasping Longneck", 180, Rarity.COMMON, mage.cards.g.GraspingLongneck.class));
         cards.add(new SetCardInfo("Hand That Feeds", 139, Rarity.COMMON, mage.cards.h.HandThatFeeds.class));
+        cards.add(new SetCardInfo("House Cartographer", 185, Rarity.UNCOMMON, mage.cards.h.HouseCartographer.class));
         cards.add(new SetCardInfo("Hushwood Verge", 261, Rarity.RARE, mage.cards.h.HushwoodVerge.class));
         cards.add(new SetCardInfo("Infernal Phantom", 141, Rarity.UNCOMMON, mage.cards.i.InfernalPhantom.class));
         cards.add(new SetCardInfo("Insidious Fungus", 186, Rarity.UNCOMMON, mage.cards.i.InsidiousFungus.class));
