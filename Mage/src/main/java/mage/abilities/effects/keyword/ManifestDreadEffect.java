@@ -50,7 +50,7 @@ public class ManifestDreadEffect extends OneShotEffect {
             default:
                 TargetCard target = new TargetCardInLibrary();
                 target.withChooseHint("to manifest");
-                player.choose(Outcome.PutCreatureInPlay, target, source, game);
+                player.choose(Outcome.PutCreatureInPlay, cards, target, source, game);
                 card = cards.get(target.getFirstTarget(), game);
         }
         Permanent permanent;
