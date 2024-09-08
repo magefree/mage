@@ -64,8 +64,7 @@ public final class TibaltWickedTormentor extends CardImpl {
         ability.addEffect(new DraftFromSpellbookThenExileCastThisTurnEffect(spellbook));
         this.addAbility(ability);
 
-        // +1: Tibalt, Wicked Tormentor deals 4 damage to target creature or planeswalker unless its controller has Tibalt deal 4 damage to them.
-        // If they do, you may discard a card. If you do, draw a card.
+        // +1: Tibalt, Wicked Tormentor deals 4 damage to target creature or planeswalker unless its controller has Tibalt deal 4 damage to them. If they do, you may discard a card. If you do, draw a card.
         Ability ability1 = new LoyaltyAbility(new TibaltDamageEffect(), 1);
         ability1.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(ability1);
@@ -104,9 +103,12 @@ class TibaltDamageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        Player player = game.getPlayer(source.getControllerId());
+        if (permanent == null) {
+            return false;
+        }
+        Player you = game.getPlayer(source.getControllerId());
         Player controller = game.getPlayer(permanent.getControllerId());
-        if (player == null || controller == null) {
+        if (you != null || controller != null) {
             String message = "Have Tibalt, Wicked Tormentor do 4 damage to you?";
             if (controller.chooseUse(Outcome.Damage, message, source, game)) {
                 controller.damage(4, source.getSourceId(), source, game);
@@ -117,7 +119,7 @@ class TibaltDamageEffect extends OneShotEffect {
             }
             return true;
         }
-        return false;
+        return true;
     }
 }
 
