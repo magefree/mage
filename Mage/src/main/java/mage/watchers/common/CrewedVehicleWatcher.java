@@ -8,6 +8,7 @@ import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -51,5 +52,17 @@ public class CrewedVehicleWatcher extends Watcher {
                 .crewMap
                 .getOrDefault(new MageObjectReference(vehicle, game), Collections.emptySet())
                 .size();
+    }
+
+    public static Set<Permanent> getCrewers(Permanent vehicle, Game game) {
+        return game
+                .getState()
+                .getWatcher(CrewedVehicleWatcher.class)
+                .crewMap
+                .getOrDefault(new MageObjectReference(vehicle, game), Collections.emptySet())
+                .stream()
+                .map(mor -> mor.getPermanent(game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 }
