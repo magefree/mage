@@ -1,10 +1,4 @@
-FROM odinuge/maven-javafx:3-jdk-8 AS builder
-
-RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
-
-# additional tools
-RUN apt update && apt install -y \
-    build-essential
+FROM maven:3.9 AS builder
 
 COPY . .
 RUN mvn clean install -DskipTests \ 

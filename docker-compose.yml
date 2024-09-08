@@ -5,12 +5,12 @@ services:
     ports:
       - '17171:17171'
       - '17179:17179'
-    # Uncomment this to configure the server for your deployment URL
-    # extra_hosts:
-    #   - 'your-mage-domain.com:0.0.0.0'
+    extra_hosts:
+      # Adjust this to configure the server for your deployment URL (`localhost` -> `yourDomain.com`)
+      - 'localhost:0.0.0.0'
     environment:
-      # Uncomment this to configure the server for your deployment URL
-      # - MAGE_SERVER_ADDRESS=your-mage-domain.com
+      # Adjust this to configure the server for your deployment URL (`localhost` -> `yourDomain.com`)
+      - MAGE_SERVER_ADDRESS=localhost
       # Give the server a name, if you want to
       - MAGE_SERVER_NAME=mage-server
       - MAGE_MAX_SECONDS_IDLE=6000
