@@ -930,6 +930,24 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    public void addSimultaneousSacrificedPermanentToBatch(SacrificedPermanentEvent sacrificedPermanentEvent, Game game) {
+        // Combine multiple sacrificed permanent events in the single event (batch)
+
+        // existing batch
+        boolean isBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof SacrificedPermanentBatchEvent) {
+                ((SacrificedPermanentBatchEvent) event).addEvent(sacrificedPermanentEvent);
+                isBatchUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new SacrificedPermanentBatchEvent(sacrificedPermanentEvent), game);
+        }
+    }
+
     public void addSimultaneousLifeLossToBatch(LifeLostEvent lifeLossEvent, Game game) {
         // Combine multiple life loss events in the single event (batch)
         // see GameEvent.LOST_LIFE_BATCH

@@ -774,7 +774,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     /**
-     * Checks if an event won't happen because of an rule modifying effect
+     * Checks if an event won't happen because of a rule modifying effect
      *
      * @param event
      * @param targetAbility ability the event is attached to. can be null.

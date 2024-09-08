@@ -61,8 +61,10 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Cloudshift");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Knight of Meadowgrain");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Knight of Meadowgrain"); // clone has name of copied permanent
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Heirs of Stromkirk");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -120,6 +122,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addTarget(playerB, "Timberland Guide");
         attack(2, playerB, "Fervent Cathar");
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Cloudshift", "Timberland Guide");
+        addTarget(playerA, "Timberland Guide"); // where to put counter
         block(2, playerA, "Timberland Guide", "Fervent Cathar");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
@@ -314,8 +317,10 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Act of Treason", "Silvercoat Lion");
-        // Silvercoat Lion is autochosen
+        setChoice(playerA, true); // yes to flicker
+        addTarget(playerA, "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -356,6 +361,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flickerwisp");
         addTarget(playerA, "Flickerwisp");
         addTarget(playerA, "Courser of Kruphix");
+        setChoice(playerA, "At the beginning"); // order triggers
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();

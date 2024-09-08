@@ -91,6 +91,7 @@ public class DiscardTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Liliana's Caress", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Coercion", playerB);
+        setChoice(playerA, "Island"); // to discard
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

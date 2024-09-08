@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-
 import java.util.UUID;
 
 /**
@@ -53,6 +52,7 @@ class SixSidedDieEffect extends OneShotEffect {
 
     SixSidedDieEffect() {
         super(Outcome.Detriment);
+
         setText("choose target creature. Roll a six-sided die." +
                 "<br>1 — It has base toughness 1 until end of turn." +
                 "<br>2 — Put two -1/-1 counters on it." +
@@ -98,6 +98,7 @@ class SixSidedDieEffect extends OneShotEffect {
                 permanent.destroy(source, game);
                 break;
             case 6:
+
                 player.moveCards(permanent, Zone.EXILED, source, game);
                 break;
         }

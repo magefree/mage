@@ -26,6 +26,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Almost Perfect", 90, Rarity.RARE, mage.cards.a.AlmostPerfect.class));
         cards.add(new SetCardInfo("Alpha Deathclaw", 91, Rarity.RARE, mage.cards.a.AlphaDeathclaw.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 209, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
+        cards.add(new SetCardInfo("Animal Friend", 72, Rarity.RARE, mage.cards.a.AnimalFriend.class));
         cards.add(new SetCardInfo("Arcade Gannon", 92, Rarity.RARE, mage.cards.a.ArcadeGannon.class));
         cards.add(new SetCardInfo("Arcane Signet", 224, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Armory Paladin", 93, Rarity.RARE, mage.cards.a.ArmoryPaladin.class));
@@ -85,6 +86,8 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Charisma Bobblehead", 130, Rarity.UNCOMMON, mage.cards.c.CharismaBobblehead.class));
         cards.add(new SetCardInfo("Cinder Glade", 257, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 258, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
+        cards.add(new SetCardInfo("Codsworth, Handy Helper", 14, Rarity.RARE, mage.cards.c.CodsworthHandyHelper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Codsworth, Handy Helper", 366, Rarity.RARE, mage.cards.c.CodsworthHandyHelper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colonel Autumn", 98, Rarity.RARE, mage.cards.c.ColonelAutumn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colonel Autumn", 411, Rarity.RARE, mage.cards.c.ColonelAutumn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Colonel Autumn", 626, Rarity.RARE, mage.cards.c.ColonelAutumn.class, NON_FULL_USE_VARIOUS));

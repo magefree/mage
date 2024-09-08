@@ -494,6 +494,8 @@ public final class GuiDisplayUtil {
         UIManager.put("info", PreferencesDialog.getCurrentTheme().getInfo()); // tooltips
         UIManager.put("nimbusBase", PreferencesDialog.getCurrentTheme().getNimbusBase()); // title bars, scrollbar foreground
 
+	    UIManager.put("text", PreferencesDialog.getCurrentTheme().getTextColor()); // Default text color
+
         //UIManager.put("nimbusDisabledText", Color.green); // TODO: improve disabled color
         //UIManager.put("Table.rowHeight", GUISizeHelper.tableRowHeight);
 
@@ -511,7 +513,7 @@ public final class GuiDisplayUtil {
 
         // re-render existing components with new style
         for (Frame frame : Frame.getFrames()) {
-            refreshLookAndFill(frame);
+            refreshLookAndFeel(frame);
         }
 
         // re-render hidden/shared components
@@ -526,9 +528,9 @@ public final class GuiDisplayUtil {
         });
     }
 
-    private static void refreshLookAndFill(Window window) {
+    private static void refreshLookAndFeel(Window window) {
         for (Window childWindow : window.getOwnedWindows()) {
-            refreshLookAndFill(childWindow);
+            refreshLookAndFeel(childWindow);
         }
         SwingUtilities.updateComponentTreeUI(window);
     }

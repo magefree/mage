@@ -1,17 +1,18 @@
 
 package mage.game.stack;
 
-import java.util.ArrayDeque;
-import java.util.Date;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.PutCards;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayDeque;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -82,6 +83,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, source, stackObject.getControllerId()))) {
                 if (!(stackObject instanceof Spell)) { // spells are removed from stack by the card movement
                     this.remove(stackObject, game);
+                    game.rememberLKI(Zone.STACK, stackObject);
                 }
                 stackObject.counter(source, game, putCard);
                 if (!game.isSimulation()) {

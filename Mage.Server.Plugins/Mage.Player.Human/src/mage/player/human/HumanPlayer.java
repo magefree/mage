@@ -1668,24 +1668,22 @@ public class HumanPlayer extends PlayerImpl {
      *
      * @param min
      * @param max
-     * @param multiplier - X multiplier after replace events
      * @param message
      * @param ability
      * @param game
      * @return
      */
     @Override
-    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         if (gameInCheckPlayableState(game)) {
             return 0;
         }
 
         int xValue = 0;
-        String extraMessage = (multiplier == 1 ? "" : ", X will be increased by " + multiplier + " times");
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireGetAmountEvent(playerId, message + extraMessage + CardUtil.getSourceLogName(game, ability), min, max);
+                game.fireGetAmountEvent(playerId, message + CardUtil.getSourceLogName(game, ability), min, max);
             }
             waitForResponse(game);
 
@@ -1918,12 +1916,19 @@ public class HumanPlayer extends PlayerImpl {
         // check if enough attackers are declared
         // check if players have to be attacked
         Set<UUID> playersToAttackIfAble = new HashSet<>();
+        
+        // or if active player must attack with anything
+        boolean mustAttack = false;
+
         for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(null, true, game).entrySet()) {
             RequirementEffect effect = entry.getKey();
             for (Ability ability : entry.getValue()) {
                 UUID playerToAttack = effect.playerMustBeAttackedIfAble(ability, game);
                 if (playerToAttack != null) {
                     playersToAttackIfAble.add(playerToAttack);
+                }
+                if (effect.mustAttack(game)){
+                    mustAttack = true;
                 }
             }
         }
@@ -1958,6 +1963,16 @@ public class HumanPlayer extends PlayerImpl {
                         game.informPlayer(this, "You are forced to attack " + forcedToAttack.getName() + " or a controlled planeswalker e.g. with " + attacker.getIdName() + ".");
                         return false;
                     }
+                }
+            }
+        }
+
+        if (mustAttack && game.getCombat().getAttackers().isEmpty()){
+            // no attackers, but required to attack with something -- check if anything can attack
+            for (Permanent attacker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getId(), game)) {
+                if (attacker.canAttackInPrinciple(null, game)){
+                    game.informPlayer(this, "You are forced to attack with at least one creature, e.g. " + attacker.getIdName() + ".");
+                    return false;
                 }
             }
         }

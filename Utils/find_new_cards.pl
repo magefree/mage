@@ -18,10 +18,14 @@ foreach $tag (@lines)
 {
     my $orig_num = $tag;
     my $num = $tag;
-	# 1.4.52-V7-beta9
-    if ($num =~ m/(\d+)\.(\d+).(\d+)-v(\d+)-beta(\d+)/img)
-    {
+
+    if ($num =~ m/(\d+)\.(\d+).(\d+)-v(\d+)-beta(\d+)/img) {
+        # 1.4.52-V7-beta9
         $num = $1 * 20000 + $2 * 1000 + $3 * 200 + $4 * 10 + $5;
+        $order_of_tags {$num} = $tag;
+    } elsif ($num =~ m/(\d+)\.(\d+).(\d+)v(\d+)/img) {
+        # 1.4.53V1
+        $num = $1 * 20000 + $2 * 1000 + $3 * 200 + $4 * 10;
         $order_of_tags {$num} = $tag;
     }
 }

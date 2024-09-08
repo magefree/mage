@@ -43,6 +43,7 @@ public enum SubType {
     CLASS("Class", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),
     ROLE("Role", SubTypeSet.EnchantmentType),
+    ROOM("Room", SubTypeSet.EnchantmentType),
     RUNE("Rune", SubTypeSet.EnchantmentType),
     SAGA("Saga", SubTypeSet.EnchantmentType),
     SHARD("Shard", SubTypeSet.EnchantmentType),
@@ -90,6 +91,7 @@ public enum SubType {
     AZRA("Azra", SubTypeSet.CreatureType),
     // B
     BADGER("Badger", SubTypeSet.CreatureType),
+    BALLOON("Balloon", SubTypeSet.CreatureType),
     BARABEL("Barabel", SubTypeSet.CreatureType, true), // Star Wars
     BARBARIAN("Barbarian", SubTypeSet.CreatureType),
     BARD("Bard", SubTypeSet.CreatureType),
@@ -307,6 +309,7 @@ public enum SubType {
     PEASANT("Peasant", SubTypeSet.CreatureType),
     PEGASUS("Pegasus", SubTypeSet.CreatureType),
     PENTAVITE("Pentavite", SubTypeSet.CreatureType),
+    PERFORMER("Performer", SubTypeSet.CreatureType),
     PEST("Pest", SubTypeSet.CreatureType),
     PHELDDAGRIF("Phelddagrif", SubTypeSet.CreatureType),
     PHOENIX("Phoenix", SubTypeSet.CreatureType),
@@ -396,6 +399,7 @@ public enum SubType {
     THRULL("Thrull", SubTypeSet.CreatureType),
     TIEFLING("Tiefling", SubTypeSet.CreatureType),
     TIME_LORD("Time Lord", SubTypeSet.CreatureType),
+    TOY("Toy", SubTypeSet.CreatureType),
     TRANDOSHAN("Trandoshan", SubTypeSet.CreatureType, true), // Star Wars
     TREEFOLK("Treefolk", SubTypeSet.CreatureType),
     TRILOBITE("Trilobite", SubTypeSet.CreatureType),

@@ -50,7 +50,7 @@ public class ImproviseTest extends CardTestPlayerBaseWithAIHelps {
         // AI must use special actions to pay as delve
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bastion Inventor");
 
-        //setStrictChooseMode(true); AI must choose targets
+        setStrictChooseMode(false); // AI must choose targets
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

@@ -1134,13 +1134,13 @@ public class CardView extends SimpleCardView {
             this.targets = new ArrayList<>();
         }
 
-        // need only unique targets for arrow drawning
-        Set<UUID> newTargets = new HashSet<>();
+        // need only unique targets for arrow drawing
+        Set<UUID> uniqueTarget = new LinkedHashSet<>(); // use linked, so it will use stable sort order
 
         // from normal targets
         for (Target target : targets) {
             if (target.isChosen(game)) {
-                newTargets.addAll(target.getTargets());
+                uniqueTarget.addAll(target.getTargets());
             }
         }
 
@@ -1151,9 +1151,9 @@ public class CardView extends SimpleCardView {
                 .map(p -> p.getTargets(game, source))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-        newTargets.addAll(fromPointers);
+        uniqueTarget.addAll(fromPointers);
 
-        this.targets.addAll(newTargets);
+        this.targets.addAll(uniqueTarget);
     }
 
     private void setOriginalValues(MageObject object) {

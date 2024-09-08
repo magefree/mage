@@ -19,7 +19,6 @@ import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
-import mage.actions.MageDrawAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
@@ -82,7 +81,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * During some steps we can't play anything
      */
-    final static Map<PhaseStep, Step.StepPart> SILENT_PHASES_STEPS = ImmutableMap.<PhaseStep, Step.StepPart>builder().
+    static final Map<PhaseStep, Step.StepPart> SILENT_PHASES_STEPS = ImmutableMap.<PhaseStep, Step.StepPart>builder().
             put(PhaseStep.DECLARE_ATTACKERS, Step.StepPart.PRE).build();
 
     /**
@@ -155,6 +154,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean loseByZeroOrLessLife = true;
     protected boolean canPlayCardsFromGraveyard = true;
     protected boolean canPlotFromTopOfLibrary = false;
+    protected boolean drawsFromBottom = false;
     protected boolean drawsOnOpponentsTurn = false;
 
     protected FilterPermanent sacrificeCostFilter;
@@ -254,6 +254,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard;
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary;
+        this.drawsFromBottom = player.drawsFromBottom;
         this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
 
         this.attachments.addAll(player.attachments);
@@ -368,6 +369,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
+        this.drawsFromBottom = player.isDrawsFromBottom();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
         this.alternativeSourceCosts = CardUtil.deepCopyObject(player.getAlternativeSourceCosts());
 
@@ -482,6 +484,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = true;
         this.canPlotFromTopOfLibrary = false;
+        this.drawsFromBottom = false;
         this.drawsOnOpponentsTurn = false;
 
         this.sacrificeCostFilter = null;
@@ -525,6 +528,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.loseByZeroOrLessLife = true;
         this.canPlayCardsFromGraveyard = false;
         this.canPlotFromTopOfLibrary = false;
+        this.drawsFromBottom = false;
         this.drawsOnOpponentsTurn = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
@@ -737,15 +741,60 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int drawCards(int num, Ability source, Game game) {
-        if (num > 0) {
-            return game.doAction(source, new MageDrawAction(this, num, null));
-        }
-        return 0;
+        return drawCards(num, source, game, null);
     }
 
+    /*
+     * 614.11. Some effects replace card draws. These effects are applied even if no cards could be drawn because
+     * there are no cards in the affected player's library.
+     * 614.11a. If an effect replaces a draw within a sequence of card draws, all actions required by the replacement
+     * are completed, if possible, before resuming the sequence.
+     * 614.11b. If an effect would have a player both draw a card and perform an additional action on that card, and
+     * the draw is replaced, the additional action is not performed on any cards that are drawn as a result of that
+     * replacement effect.
+     */
     @Override
     public int drawCards(int num, Ability source, Game game, GameEvent event) {
-        return game.doAction(source, new MageDrawAction(this, num, event));
+        if (num == 0) {
+            return 0;
+        }
+        if (num >= 2) {
+            // Event for replacement effects that only apply when two or more cards are drawn
+            DrawTwoOrMoreCardsEvent multiDrawEvent = new DrawTwoOrMoreCardsEvent(getId(), source, event, num);
+            if (game.replaceEvent(multiDrawEvent)) {
+                return multiDrawEvent.getCardsDrawn();
+            }
+            num = multiDrawEvent.getAmount();
+        }
+        int numDrawn = 0;
+        for (int i = 0; i < num; i++) {
+            DrawCardEvent drawCardEvent = new DrawCardEvent(getId(), source, event);
+            if (game.replaceEvent(drawCardEvent)) {
+                numDrawn += drawCardEvent.getCardsDrawn();
+                continue;
+            }
+            Card card = isDrawsFromBottom() ? getLibrary().drawFromBottom(game) : getLibrary().drawFromTop(game);
+            if (card != null) {
+                card.moveToZone(Zone.HAND, source, game, false); // if you want to use event.getSourceId() here then thinks x10 times
+                if (isTopCardRevealed()) {
+                    game.fireInformEvent(getLogName() + " draws a revealed card  (" + card.getLogName() + ')');
+                }
+                game.fireEvent(new DrewCardEvent(card.getId(), getId(), source, event));
+                numDrawn++;
+            }
+        }
+        if (!isTopCardRevealed() && numDrawn > 0) {
+            game.fireInformEvent(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
+        }
+        // if this method was called from a replacement event, pass the number of cards back through
+        // (uncomment conditions if correct ruling is to only count cards drawn by the same player)
+        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */ ) {
+            ((DrawCardEvent) event).incrementCardsDrawn(numDrawn);
+        }
+        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */ ) {
+            ((DrawTwoOrMoreCardsEvent) event).incrementCardsDrawn(numDrawn);
+        }
+        return numDrawn;
     }
 
     @Override
@@ -4618,6 +4667,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void setDrawsFromBottom(boolean drawsFromBottom) {
+        this.drawsFromBottom = drawsFromBottom;
+    }
+
+    @Override
+    public boolean isDrawsFromBottom() {
+        return drawsFromBottom;
+    }
+
+    @Override
     public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
         this.drawsOnOpponentsTurn = drawsOnOpponentsTurn;
     }
@@ -4790,6 +4849,15 @@ public abstract class PlayerImpl implements Player, Serializable {
                     // its current zone.
                     Boolean enterTransformed = (Boolean) game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId());
                     if (enterTransformed != null && enterTransformed && !card.isTransformable()) {
+                        continue;
+                    }
+                    // 303.4g. If an Aura is entering the battlefield and there is no legal object or player for it to enchant,
+                    // the Aura remains in its current zone, unless that zone is the stack. In that case, the Aura is put into
+                    // its owner's graveyard instead of entering the battlefield. If the Aura is a token, it isn't created.
+                    if (card.hasSubtype(SubType.AURA, game)
+                            && card.getSpellAbility() != null
+                            && !card.getSpellAbility().getTargets().isEmpty()
+                            && !card.getSpellAbility().getTargets().get(0).copy().withNotTarget(true).canChoose(byOwner ? card.getOwnerId() : getId(), game)) {
                         continue;
                     }
                     ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), source,

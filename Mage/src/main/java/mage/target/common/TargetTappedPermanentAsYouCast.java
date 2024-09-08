@@ -53,10 +53,10 @@ public class TargetTappedPermanentAsYouCast extends TargetPermanent {
 
     // See ruling: https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/253345-dream-leash
     @Override
-    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
+    public boolean stillLegalTarget(UUID controllerId, UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         return permanent != null 
                 && getFilter().match(permanent, game)
-                && super.canTarget(id, game);  // check everything but leave out the tapped requirement
+                && super.canTarget(controllerId, id, source, game);  // check everything but leave out the tapped requirement
     }
 }

@@ -102,7 +102,7 @@ class BanditsTalentDiscardEffect extends OneShotEffect {
         }
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player targetPlayer = game.getPlayer(playerId);
-            if (targetPlayer == null || targetPlayer.getHand().isEmpty()) {
+            if (targetPlayer == null || targetPlayer.getHand().isEmpty() || !controller.hasOpponent(playerId, game)) {
                 continue;
             }
 

@@ -76,6 +76,7 @@ public class GreenbeltRampagerTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gonti, Lord of Luxury", true);
         // addTarget(playerA, playerB); playerB is autochosen since only option
+        setStrictChooseMode(false);
         setChoice(playerA, "Greenbelt Rampager");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Greenbelt Rampager");

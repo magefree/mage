@@ -11,7 +11,6 @@ import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.PreventionEffectData;
-import mage.actions.impl.MageAction;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.MeldCard;
@@ -551,8 +550,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void resetControlAfterSpellResolve(UUID topId);
 
     boolean endTurn(Ability source);
-
-    int doAction(Ability source, MageAction action);
 
     //game transaction methods
     void saveState(boolean bookmark);

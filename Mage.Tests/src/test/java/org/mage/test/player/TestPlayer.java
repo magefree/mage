@@ -2816,7 +2816,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
             for (String choice : choices) {
@@ -2830,7 +2830,7 @@ public class TestPlayer implements Player {
 
         this.chooseStrictModeFailed("choice", game, getInfo(ability, game)
                 + "\nMessage: " + message);
-        return computerPlayer.announceXMana(min, max, multiplier, message, game, ability);
+        return computerPlayer.announceXMana(min, max, message, game, ability);
     }
 
     @Override
@@ -3848,11 +3848,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
-        computerPlayer.setDrawsOnOpponentsTurn(drawsOnOpponentsTurn);
-    }
-
-    @Override
     public boolean canPlotFromTopOfLibrary() {
         return computerPlayer.canPlotFromTopOfLibrary();
     }
@@ -3860,6 +3855,21 @@ public class TestPlayer implements Player {
     @Override
     public void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary) {
         computerPlayer.setPlotFromTopOfLibrary(canPlotFromTopOfLibrary);
+    }
+
+    @Override
+    public void setDrawsFromBottom(boolean drawsFromBottom) {
+        computerPlayer.setDrawsFromBottom(drawsFromBottom);
+    }
+
+    @Override
+    public boolean isDrawsFromBottom() {
+        return computerPlayer.isDrawsFromBottom();
+    }
+
+    @Override
+    public void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn) {
+        computerPlayer.setDrawsOnOpponentsTurn(drawsOnOpponentsTurn);
     }
 
     @Override

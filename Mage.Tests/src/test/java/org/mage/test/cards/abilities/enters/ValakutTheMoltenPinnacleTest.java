@@ -41,6 +41,8 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain"); // 3 damage because already 5 Mountains on battlefield
+        setChoice(playerA, true); // yes to deal damage
+        addTarget(playerA, playerB); // to deal damage
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -66,6 +68,10 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scapeshift");
         setChoice(playerA, "Forest^Forest^Forest^Forest^Forest^Forest");
+        addTarget(playerA, "Mountain^Mountain^Mountain^Mountain^Mountain^Mountain");
+        setChoice(playerA, "Whenever", 5); // order triggers
+        setChoice(playerA, true, 6); // yes to deal damage
+        addTarget(playerA, playerB, 6); // to deal damage
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -89,6 +95,10 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scapeshift");
         setChoice(playerA, "Forest^Forest^Forest^Forest^Forest^Forest^Forest");
+        addTarget(playerA, "Mountain^Mountain^Mountain^Mountain^Mountain^Mountain^Valakut, the Molten Pinnacle");
+        setChoice(playerA, "Whenever", 5); // order triggers
+        setChoice(playerA, true, 6); // yes to deal damage
+        addTarget(playerA, playerB, 6); // to deal damage
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -114,9 +124,13 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scapeshift");
         setChoice(playerA, "Forest^Forest^Forest^Forest^Forest^Forest^Forest");
+        addTarget(playerA, "Mountain^Mountain^Mountain^Stomping Ground^Stomping Ground^Stomping Ground^Valakut, the Molten Pinnacle");
         setChoice(playerA, false); // Stomping Ground can be tapped
         setChoice(playerA, false); // Stomping Ground can be tapped
         setChoice(playerA, false); // Stomping Ground can be tapped
+        setChoice(playerA, "Whenever", 5); // order triggers
+        setChoice(playerA, true, 6); // yes to deal damage
+        addTarget(playerA, playerB, 6); // to deal damage
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -153,6 +167,7 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
         addTarget(playerA, playerB);
 
+        setStrictChooseMode(false); // auto-choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

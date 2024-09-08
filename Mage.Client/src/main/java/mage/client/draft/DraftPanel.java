@@ -431,7 +431,7 @@
              text = text + Integer.toString(second);
          }
          this.editTimeRemaining.setText(text);
-         
+
          // red color for small time
          Color timerColor;
          if (s <= 10) {
@@ -439,10 +439,10 @@
          } else if (s <= 30) {
              timerColor = new Color(255, 160, 60); // orange
          } else {
-             timerColor = Color.BLACK;
+             timerColor = PreferencesDialog.getCurrentTheme().getTextColor();
          }
          this.editTimeRemaining.setForeground(timerColor);
-         
+
          // warning sound at the end
          if (s == 6 && !draftBooster.isEmptyGrid()) {
              AudioManager.playOnCountdown1();

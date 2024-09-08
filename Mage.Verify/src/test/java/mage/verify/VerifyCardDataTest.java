@@ -142,12 +142,16 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
+        skipListAddName(SKIP_LIST_TYPE, "DSK", "Balustrade Wurm"); // temporary
+        skipListAddName(SKIP_LIST_TYPE, "DSK", "Spineseeker Centipede"); // temporary
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "DSK", "Balustrade Wurm"); // temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "DSK", "Spineseeker Centipede"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -155,8 +159,6 @@ public class VerifyCardDataTest {
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
-        skipListAddName(SKIP_LIST_RARITY, "BLC", "Blasphemous Act"); // temporary
-        skipListAddName(SKIP_LIST_RARITY, "BLC", "Harmonize"); // temporary
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);

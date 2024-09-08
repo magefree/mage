@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.watchers.common.AbilityResolvedWatcher;
 
 import java.util.UUID;
 
@@ -38,7 +39,7 @@ public final class HarvestriteHost extends CardImpl {
                 2, new DrawCardSourceControllerEffect(1)
         ));
         ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
     private HarvestriteHost(final HarvestriteHost card) {
