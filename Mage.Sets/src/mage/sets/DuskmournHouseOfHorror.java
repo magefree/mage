@@ -171,6 +171,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Vicious Clown", 163, Rarity.COMMON, mage.cards.v.ViciousClown.class));
         cards.add(new SetCardInfo("Victor, Valgavoth's Seneschal", 238, Rarity.RARE, mage.cards.v.VictorValgavothsSeneschal.class));
         cards.add(new SetCardInfo("Wary Watchdog", 206, Rarity.COMMON, mage.cards.w.WaryWatchdog.class));
+        cards.add(new SetCardInfo("Wickerfolk Thresher", 207, Rarity.UNCOMMON, mage.cards.w.WickerfolkThresher.class));
         cards.add(new SetCardInfo("Wildfire Wickerfolk", 239, Rarity.UNCOMMON, mage.cards.w.WildfireWickerfolk.class));
         cards.add(new SetCardInfo("Winter, Misanthropic Guide", 240, Rarity.RARE, mage.cards.w.WinterMisanthropicGuide.class));
         cards.add(new SetCardInfo("Withering Torment", 124, Rarity.UNCOMMON, mage.cards.w.WitheringTorment.class));
