@@ -18,10 +18,11 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -62,14 +63,13 @@ public final class RampagingYaoGuai extends CardImpl {
     }
 }
 
-//Based on Kairi, The Swirling Sky
 class RampagingYaoGuaiTarget extends TargetPermanent {
 
-    private static final FilterPermanent filter
+    private static final FilterPermanent filterStatic
             = new FilterArtifactOrEnchantmentPermanent("artifacts and/or enchantments with total mana value X or less");
 
     RampagingYaoGuaiTarget() {
-        super(0, Integer.MAX_VALUE, filter, false);
+        super(0, Integer.MAX_VALUE, filterStatic, false);
     }
 
     private RampagingYaoGuaiTarget(final RampagingYaoGuaiTarget target) {
@@ -83,23 +83,26 @@ class RampagingYaoGuaiTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(id);
-        if (permanent == null) {
-            return false;
-        }
-        int added = 0; // We need to prevent the target to be counted twice on revalidation.
-        if (!this.getTargets().contains(id)) {
-            added = permanent.getManaValue();// fresh target, adding its MV
-        }
-        return added +
-                this.getTargets()
-                        .stream()
-                        .map(game::getPermanent)
-                        .filter(Objects::nonNull)
-                        .mapToInt(MageObject::getManaValue)
-                        .sum() <= GetXValue.instance.calculate(game, source, null);
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, GetXValue.instance.calculate(game, source, null), game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, GetXValue.instance.calculate(game, source, null), game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getManaValue)
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
     }
 }

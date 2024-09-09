@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -7,20 +8,23 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
@@ -38,8 +42,7 @@ public final class TheWarInHeaven extends CardImpl {
         // I -- You draw three cards and you lose 3 life.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I,
-                new DrawCardSourceControllerEffect(3)
-                        .setText("you draw three cards"),
+                new DrawCardSourceControllerEffect(3, true),
                 new LoseLifeSourceControllerEffect(3)
                         .concatBy("and")
         );
@@ -71,7 +74,7 @@ class TheWarInHeavenEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "choose up to three target creature cards with total mana value 8 or less in your graveyard. "
                 + "Return each of them to the battlefield with a necrodermis counter on it. "
-                + "They\'re artifacts in addition to their other types";
+                + "They're artifacts in addition to their other types";
     }
 
     private TheWarInHeavenEffect(final TheWarInHeavenEffect effect) {
@@ -108,15 +111,11 @@ class TheWarInHeavenEffect extends OneShotEffect {
 
 class TheWarInHeavenTarget extends TargetCardInYourGraveyard {
 
-    private static final FilterCard filter
+    private static final FilterCreatureCard filterStatic
             = new FilterCreatureCard("creature cards with total mana value 8 or less from your graveyard");
 
-    static {
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 9));
-    }
-
     TheWarInHeavenTarget() {
-        super(0, 3, filter, false);
+        super(0, 3, filterStatic, false);
     }
 
     private TheWarInHeavenTarget(final TheWarInHeavenTarget target) {
@@ -130,15 +129,26 @@ class TheWarInHeavenTarget extends TargetCardInYourGraveyard {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        return card != null
-                && this.getTargets()
-                        .stream()
-                        .map(game::getCard)
-                        .mapToInt(Card::getManaValue)
-                        .sum() + card.getManaValue() <= 8;
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, 8, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, 8, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getManaValue)
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
     }
 }

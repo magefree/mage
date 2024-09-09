@@ -57,6 +57,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -1121,6 +1122,58 @@ public final class CardUtil {
         targetMap.put(event.getTargetId(), targetingObjects);
         game.getState().setValue(stateKey, targetMap);
         return false;
+    }
+
+    /**
+     * For overriding `canTarget()` with usages such as "any number of target cards with total mana value X or less".
+     * Call this after super.canTarget() returns true.
+     *
+     * @param selectedTargets this.getTargets()
+     * @param checkTargetId   id from canTarget
+     * @param valueMapper     e.g. MageObject::getManaValue or m -> m.getPower().getValue()
+     * @param maxValue        the maximum total value of the parameter
+     * @return true if the total value would not be exceeded by the target being checked.
+     */
+    public static boolean checkCanTargetTotalValueLimit(Collection<UUID> selectedTargets, UUID checkTargetId,
+                                                        ToIntFunction<MageObject> valueMapper, int maxValue,
+                                                        Game game) {
+        MageObject checkTarget = game.getObject(checkTargetId);
+        if (checkTarget == null) {
+            return false;
+        }
+        return maxValue >= selectedTargets.stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(valueMapper)
+                .sum()
+                + (selectedTargets.contains(checkTargetId) ? 0 : valueMapper.applyAsInt(checkTarget));
+    }
+
+    /**
+     * For overriding `possibleTargets()` with usages such as "any number of target cards with total mana value X or less".
+     *
+     * @param selectedTargets this.getTargets()
+     * @param possibleTargets super.possibleTargets()
+     * @param valueMapper     e.g. MageObject::getManaValue or m -> m.getPower().getValue()
+     * @param maxValue        the maximum total value of the parameter
+     * @return the set of possible targets that don't exceed the maximum total value.
+     */
+    public static Set<UUID> checkPossibleTargetsTotalValueLimit(Collection<UUID> selectedTargets, Set<UUID> possibleTargets,
+                                                                ToIntFunction<MageObject> valueMapper, int maxValue, Game game) {
+        int selectedValue = selectedTargets.stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(valueMapper)
+                .sum();
+        int remainingValue = maxValue - selectedValue;
+        Set<UUID> validTargets = new HashSet<>();
+        for (UUID id: possibleTargets) {
+            MageObject mageObject = game.getObject(id);
+            if (mageObject != null && valueMapper.applyAsInt(mageObject) <= remainingValue) {
+                validTargets.add(id);
+            }
+        }
+        return validTargets;
     }
 
     /**
@@ -2325,6 +2378,6 @@ public final class CardUtil {
      */
     public static boolean isInformationAbility(Ability ability) {
         return !ability.getEffects().isEmpty()
-                && ability.getEffects().stream().allMatch(e -> e instanceof InfoEffect);
+                && ability.getEffects().stream().allMatch(InfoEffect.class::isInstance);
     }
 }
