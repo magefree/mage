@@ -68,13 +68,13 @@ public class HumanPlayer extends PlayerImpl {
 
     private static final boolean ALLOW_USERS_TO_PUT_NON_PLAYABLE_SPELLS_ON_STACK_WORKAROUND = false; // warning, see workaround's info on usage
 
-    // TODO: all user feedback actions executed and waited in diff threads and can't catch exeptions, e.g. on wrong code usage
+    // TODO: all user feedback actions executed and waited in diff threads and can't catch exceptions, e.g. on wrong code usage
     //  must catch and log such errors
 
     // Network and threads logic:
     // * starting point: ThreadExecutorImpl.java
     // * server executing a game's code by single game thread (named: "GAME xxx", one thread per game)
-    // * data transfering goes by inner jboss threads (named: "WorkerThread xxx", one thread per client connection)
+    // * data transferring goes by inner jboss threads (named: "WorkerThread xxx", one thread per client connection)
     //   - from server to client: sync mode, a single game thread uses jboss networking to send data to each player and viewer/watcher one by one
     //   - from client to server: async mode, each income command executes by shared call thread
     //

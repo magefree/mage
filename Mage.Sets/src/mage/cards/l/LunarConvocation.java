@@ -45,6 +45,7 @@ public final class LunarConvocation extends CardImpl {
                 new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new PayLifeCost(2));
+        ability.addWatcher(new PlayerGainedLifeWatcher());
         this.addAbility(ability);
     }
 
