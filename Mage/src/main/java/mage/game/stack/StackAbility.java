@@ -856,4 +856,9 @@ public class StackAbility extends StackObjectImpl implements Ability {
     public String toString() {
         return this.name;
     }
+
+    @Override
+    public boolean hasName(String name, Game game) {
+        return Objects.equals(name, this.name);
+    }
 }

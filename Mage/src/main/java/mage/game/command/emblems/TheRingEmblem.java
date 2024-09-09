@@ -98,6 +98,11 @@ public final class TheRingEmblem extends Emblem {
         }
         game.informPlayers(name + " gains a new Ring ability: \"" + logText + "\"");
     }
+
+    @Override
+    public boolean hasName(String name, Game game) {
+        return "The One Ring".equals(name);
+    }
 }
 
 enum TheRingEmblemPredicate implements Predicate<Permanent> {

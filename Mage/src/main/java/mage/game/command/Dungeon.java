@@ -344,6 +344,11 @@ public class Dungeon extends CommandObjectImpl {
     public void setIsAllNonbasicLandTypes(Game game, boolean value) {
     }
 
+    @Override
+    public boolean hasName(String name, Game game) {
+        return Objects.equals(name, getName());
+    }
+
     public void discardEffects() {
         for (Ability ability : abilites) {
             for (Effect effect : ability.getEffects()) {

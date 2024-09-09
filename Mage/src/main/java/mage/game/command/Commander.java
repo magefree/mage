@@ -332,6 +332,11 @@ public class Commander extends CommandObjectImpl {
     }
 
     @Override
+    public boolean hasName(String name, Game game) {
+        return sourceObject.hasName(name, game);
+    }
+
+    @Override
     public void removePTCDA() {
     }
 }

@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.CardUtil;
 import mage.util.SubTypes;
 
 import java.util.Collections;
@@ -258,6 +257,11 @@ public abstract class Emblem extends CommandObjectImpl {
 
     @Override
     public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+    }
+
+    @Override
+    public boolean hasName(String name, Game game) {
+        return false;
     }
 
     public void discardEffects() {
