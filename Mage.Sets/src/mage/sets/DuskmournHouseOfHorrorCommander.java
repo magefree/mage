@@ -32,7 +32,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Goryo's Vengeance", 372, Rarity.MYTHIC, mage.cards.g.GoryosVengeance.class));
         cards.add(new SetCardInfo("Growth Spiral", 88, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Living Death", 373, Rarity.MYTHIC, mage.cards.l.LivingDeath.class));
-        cards.add(new SetCardInfo("Sol Ring", 94, Rarity.COMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Sol Ring", 94, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("They Came from the Pipes", 14, Rarity.RARE, mage.cards.t.TheyCameFromThePipes.class));
     }
 }
