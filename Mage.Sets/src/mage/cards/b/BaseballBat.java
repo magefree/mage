@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAttachToTarget;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -32,7 +32,7 @@ public final class BaseballBat extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // Whenever equipped creature attacks, tap up to one target creature.
-        Ability ability = new AttacksTriggeredAbility(new TapTargetEffect());
+        Ability ability = new AttacksAttachedTriggeredAbility(new TapTargetEffect());
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
