@@ -176,6 +176,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Osteomancer Adept", 103, Rarity.RARE, mage.cards.o.OsteomancerAdept.class));
         cards.add(new SetCardInfo("Otterball Antics", 63, Rarity.UNCOMMON, mage.cards.o.OtterballAntics.class));
         cards.add(new SetCardInfo("Overprotect", 185, Rarity.UNCOMMON, mage.cards.o.Overprotect.class));
+        cards.add(new SetCardInfo("Parting Gust", 24, Rarity.UNCOMMON, mage.cards.p.PartingGust.class));
         cards.add(new SetCardInfo("Patchwork Banner", 247, Rarity.UNCOMMON, mage.cards.p.PatchworkBanner.class));
         cards.add(new SetCardInfo("Pawpatch Formation", 186, Rarity.UNCOMMON, mage.cards.p.PawpatchFormation.class));
         cards.add(new SetCardInfo("Pawpatch Recruit", 187, Rarity.RARE, mage.cards.p.PawpatchRecruit.class));
