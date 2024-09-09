@@ -144,6 +144,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Unwilling Vessel", 81, Rarity.UNCOMMON, mage.cards.u.UnwillingVessel.class));
         cards.add(new SetCardInfo("Valgavoth's Faithful", 121, Rarity.UNCOMMON, mage.cards.v.ValgavothsFaithful.class));
         cards.add(new SetCardInfo("Valgavoth's Lair", 271, Rarity.RARE, mage.cards.v.ValgavothsLair.class));
+        cards.add(new SetCardInfo("Valgavoth's Onslaught", 204, Rarity.RARE, mage.cards.v.ValgavothsOnslaught.class));
         cards.add(new SetCardInfo("Vanish from Sight", 82, Rarity.COMMON, mage.cards.v.VanishFromSight.class));
         cards.add(new SetCardInfo("Vengeful Possession", 162, Rarity.UNCOMMON, mage.cards.v.VengefulPossession.class));
         cards.add(new SetCardInfo("Veteran Survivor", 40, Rarity.UNCOMMON, mage.cards.v.VeteranSurvivor.class));
