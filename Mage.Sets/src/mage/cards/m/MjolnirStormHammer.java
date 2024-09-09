@@ -52,7 +52,8 @@ public final class MjolnirStormHammer extends CardImpl {
         ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance())
                 .setText(" and put a stun counter on it"));
         ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new DamagePlayersEffect(TappedCreaturesControlledByTargetsControllerCount.instance, TargetController.OPPONENT));
+        ability.addEffect(new DamagePlayersEffect(TappedCreaturesControlledByTargetsControllerCount.instance, TargetController.OPPONENT)
+                .setText("Then {this} deals damage to each opponent equal to the number of tapped creatures that opponent controls."));
         this.addAbility(ability);
 
         // Equip {4}

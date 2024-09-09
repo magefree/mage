@@ -43,7 +43,7 @@ public final class AdewaleBreakerOfChains extends CardImpl {
         // When Adewale enters the battlefield, reveal the top six cards of your library. Put an Assassin, Pirate, or Vehicle card from among them into your hand and the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new RevealLibraryPickControllerEffect(
-                        6, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM
+                        6, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM, false
                 ), false));
 
         // Whenever a Vehicle you control deals combat damage to a player, you may return Adewale from your graveyard to your hand.

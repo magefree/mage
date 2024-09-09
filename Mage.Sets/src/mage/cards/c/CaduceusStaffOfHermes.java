@@ -50,6 +50,7 @@ public final class CaduceusStaffOfHermes extends CardImpl {
                 ), AttachmentType.EQUIPMENT), condition,
                 "and has \"Prevent all damage that would be dealt to this creature.\""
         ));
+        this.addAbility(ability);
 
         // Equip {W}{W}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{W}{W}"), false));

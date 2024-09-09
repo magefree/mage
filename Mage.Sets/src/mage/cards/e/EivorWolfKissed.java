@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -40,7 +40,7 @@ public final class EivorWolfKissed extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Eivor, Wolf-Kissed deals combat damage to a player, you mill that many cards. You may put a Saga card and/or a land card from among them onto the battlefield.
-        this.addAbility(new DealsCombatDamageTriggeredAbility(new EivorWolfKissedEffect(), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new EivorWolfKissedEffect(), false));
     }
 
     private EivorWolfKissed(final EivorWolfKissed card) {

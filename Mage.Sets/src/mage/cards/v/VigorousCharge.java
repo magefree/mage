@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.MageObjectReference;
@@ -42,7 +41,7 @@ public final class VigorousCharge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         // Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new VigorousChargeEffect(), KickedCondition.ONCE));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new VigorousChargeEffect(), KickedCondition.ONCE, staticText));
 
     }
 
