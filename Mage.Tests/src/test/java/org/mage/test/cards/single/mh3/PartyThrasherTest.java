@@ -76,4 +76,35 @@ public class PartyThrasherTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testTryPlayFromExileNextTurn() {
+        skipInitShuffling();
+
+        addCard(Zone.LIBRARY, playerA, "Memnite");
+        addCard(Zone.LIBRARY, playerA, "Accorder's Shield");
+        addCard(Zone.BATTLEFIELD, playerA, partyThrasher, 1);
+        addCard(Zone.HAND, playerA, "Memnarch", 1);
+
+        setChoice(playerA, "Yes"); // Discard card?
+        setChoice(playerA, "Memnarch"); // Which card to pitch?
+        setChoice(playerA, "Memnite");
+
+        setChoice(playerA, "No"); // Discard card? (next turn)
+
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+
+        try {
+            execute();
+            Assert.fail("Should have failed to execute, as Memnite should not be castable the turn after Party Thrasher Exiled it.");
+        } catch (Throwable e) {
+            if (!e.getMessage().contains("Can't find ability to activate command: Cast Memnite")) {
+                Assert.fail("must throw error about missing ability:\n" + e.getMessage());
+            }
+        }
+
+    }
+
 }
