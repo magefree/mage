@@ -356,6 +356,17 @@ public final class StaticFilters {
         FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT.setLockedFilter(true);
     }
 
+
+    public static final FilterPermanent FILTER_PERMANENT_ANOTHER_CREATURE_OR_ENCHANTMENT = new FilterPermanent("another creature or enchantment");
+
+    static {
+        FILTER_PERMANENT_ANOTHER_CREATURE_OR_ENCHANTMENT.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate()
+        ));
+        FILTER_PERMANENT_ANOTHER_CREATURE_OR_ENCHANTMENT.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_CREATURE_OR_ENCHANTMENT = new FilterPermanent("artifact, creature, or enchantment");
 
     static {

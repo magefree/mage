@@ -17,9 +17,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -28,17 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class PopularEgotist extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent("another creature or enchantment");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.ENCHANTMENT.getPredicate()
-        ));
-    }
 
     public PopularEgotist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -52,7 +38,7 @@ public final class PopularEgotist extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(filter));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ANOTHER_CREATURE_OR_ENCHANTMENT));
         ability.addEffect(new TapSourceEffect().setText("tap it"));
         this.addAbility(ability);
 
