@@ -60,7 +60,7 @@ public final class TlincalliHunter extends AdventureCard {
     }
 }
 
-enum ExiledSpellCondition implements Condition {
+enum ExiledCreatureSpellCondition implements Condition {
     instance;
 
     @Override
@@ -87,7 +87,7 @@ class TlincalliHunterAlternativeCost extends AlternativeCostSourceAbility {
     private boolean wasActivated;
 
     TlincalliHunterAlternativeCost() {
-        super(new ManaCostsImpl<>("{0}"), ExiledSpellCondition.instance);
+        super(new ManaCostsImpl<>("{0}"), ExiledCreatureSpellCondition.instance);
     }
 
     private TlincalliHunterAlternativeCost(final TlincalliHunterAlternativeCost ability) {
