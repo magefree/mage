@@ -22,6 +22,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Abandoned Campground", 255, Rarity.COMMON, mage.cards.a.AbandonedCampground.class));
+        cards.add(new SetCardInfo("Abhorrent Oculus", 42, Rarity.MYTHIC, mage.cards.a.AbhorrentOculus.class));
         cards.add(new SetCardInfo("Altanak, the Thrice-Called", 166, Rarity.UNCOMMON, mage.cards.a.AltanakTheThriceCalled.class));
         cards.add(new SetCardInfo("Anthropede", 167, Rarity.COMMON, mage.cards.a.Anthropede.class));
         cards.add(new SetCardInfo("Appendage Amalgam", 83, Rarity.COMMON, mage.cards.a.AppendageAmalgam.class));
