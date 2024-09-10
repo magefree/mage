@@ -84,6 +84,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Gloomlake Verge", 260, Rarity.RARE, mage.cards.g.GloomlakeVerge.class));
         cards.add(new SetCardInfo("Grasping Longneck", 180, Rarity.COMMON, mage.cards.g.GraspingLongneck.class));
         cards.add(new SetCardInfo("Gremlin Tamer", 215, Rarity.UNCOMMON, mage.cards.g.GremlinTamer.class));
+        cards.add(new SetCardInfo("Grievous Wound", 102, Rarity.RARE, mage.cards.g.GrievousWound.class));
         cards.add(new SetCardInfo("Growing Dread", 216, Rarity.UNCOMMON, mage.cards.g.GrowingDread.class));
         cards.add(new SetCardInfo("Hand That Feeds", 139, Rarity.COMMON, mage.cards.h.HandThatFeeds.class));
         cards.add(new SetCardInfo("Hardened Escort", 16, Rarity.COMMON, mage.cards.h.HardenedEscort.class));
