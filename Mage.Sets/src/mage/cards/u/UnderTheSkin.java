@@ -48,16 +48,17 @@ class UnderTheSkinEffect extends OneShotEffect {
 
     UnderTheSkinEffect() {
         super(Outcome.Benefit);
+        this.concatBy("<br>");
         staticText = "You may return a permanent card from your graveyard to your hand.";
     }
 
-    private UnderTheSkinEffect(final mage.cards.u.UnderTheSkinEffect effect) {
+    private UnderTheSkinEffect(final UnderTheSkinEffect effect) {
         super(effect);
     }
 
     @Override
     public mage.cards.u.UnderTheSkinEffect copy() {
-        return new mage.cards.u.UnderTheSkinEffect(this);
+        return new UnderTheSkinEffect(this);
     }
 
     @Override
@@ -67,12 +68,12 @@ class UnderTheSkinEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInYourGraveyard(0, 1, filter, true);
-        if (!player.choose(Outcome.ReturnToHand, target, source, game)) {
-            return true;
-        }
+
+        player.choose(Outcome.ReturnToHand, target, source, game);
+
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
-            return true;
+            return false;
         }
         player.moveCards(card, Zone.HAND, source, game);
         return true;
