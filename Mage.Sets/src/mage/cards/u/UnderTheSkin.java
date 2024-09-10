@@ -57,7 +57,7 @@ class UnderTheSkinEffect extends OneShotEffect {
     }
 
     @Override
-    public mage.cards.u.UnderTheSkinEffect copy() {
+    public UnderTheSkinEffect copy() {
         return new UnderTheSkinEffect(this);
     }
 
@@ -75,7 +75,6 @@ class UnderTheSkinEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.moveCards(card, Zone.HAND, source, game);
-        return true;
+        return player.moveCards(card, Zone.HAND, source, game);
     }
 }
