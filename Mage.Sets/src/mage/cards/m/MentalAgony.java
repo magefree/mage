@@ -21,7 +21,7 @@ public final class MentalAgony extends CardImpl {
 
         // Target player discards two cards and loses 2 life.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
-        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2).setText("and loses 2 life"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

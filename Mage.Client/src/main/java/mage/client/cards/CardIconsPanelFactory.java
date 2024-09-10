@@ -38,7 +38,7 @@ public class CardIconsPanelFactory {
                 CardIconPosition.TOP,
                 CardIconOrder.CENTER,
                 CardIconColor.RED,
-                1,
+                3,
                 30 * 2 // TODO: big size doesn't work due icons same size limits, see CardIconsPanel
         );
     }

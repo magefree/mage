@@ -38,7 +38,7 @@ public final class JunkGolem extends CardImpl {
         // At the beginning of your upkeep, sacrifice Junk Golem unless you remove a +1/+1 counter from it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(
-                        new RemoveCountersSourceCost(CounterType.P1P1.createInstance())
+                        new RemoveCountersSourceCost(CounterType.P1P1.createInstance()).setText("remove a +1/+1 counter from it")
                 ), TargetController.YOU, false
         ));
 

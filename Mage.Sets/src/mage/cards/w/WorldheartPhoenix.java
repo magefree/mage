@@ -1,37 +1,33 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCounterEnteringCreatureEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.watchers.Watcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class WorldheartPhoenix extends CardImpl {
 
     public WorldheartPhoenix(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.PHOENIX);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -40,10 +36,10 @@ public final class WorldheartPhoenix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost.
-        // If you do, it enters the battlefield with two +1/+1 counters on it.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new WorldheartPhoenixPlayEffect());
-        ability.addEffect(new EntersBattlefieldEffect(new WorldheartPhoenixEntersBattlefieldEffect(),
-                "If you do, it enters the battlefield with two +1/+1 counters on it"));
+        // If you do, it enters with two +1/+1 counters on it.
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new WorldheartPhoenixPlayEffect())
+                .setIdentifier(MageIdentifier.WorldheartPhoenixAlternateCast);
+        ability.addWatcher(new WorldheartPhoenixWatcher());
         this.addAbility(ability);
 
     }
@@ -56,78 +52,65 @@ public final class WorldheartPhoenix extends CardImpl {
     public WorldheartPhoenix copy() {
         return new WorldheartPhoenix(this);
     }
+}
 
-    class WorldheartPhoenixPlayEffect extends AsThoughEffectImpl {
+class WorldheartPhoenixPlayEffect extends AsThoughEffectImpl {
 
-        public WorldheartPhoenixPlayEffect() {
-            super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-            staticText = "You may cast {this} from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost";
-        }
-
-        public WorldheartPhoenixPlayEffect(final WorldheartPhoenixPlayEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
-        public WorldheartPhoenixPlayEffect copy() {
-            return new WorldheartPhoenixPlayEffect(this);
-        }
-
-        @Override
-        public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-            if (sourceId.equals(source.getSourceId()) && source.isControlledBy(affectedControllerId)) {
-                if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                    Player player = game.getPlayer(affectedControllerId);
-                    if (player != null) {
-                        // can sometimes be cast with base mana cost from grave????
-                        player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), null);
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
+    WorldheartPhoenixPlayEffect() {
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        staticText = "You may cast {this} from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. " +
+                "If you do, it enters with two +1/+1 counters on it";
     }
 
-    class WorldheartPhoenixEntersBattlefieldEffect extends OneShotEffect {
-
-        public WorldheartPhoenixEntersBattlefieldEffect() {
-            super(Outcome.BoostCreature);
-            staticText = "If you do, it enters the battlefield with two +1/+1 counters on it";
-        }
-
-        public WorldheartPhoenixEntersBattlefieldEffect(final WorldheartPhoenixEntersBattlefieldEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanentEntering(source.getSourceId());
-            if (permanent != null) {
-                SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-                if (spellAbility != null
-                        && spellAbility.getSourceId().equals(source.getSourceId())
-                        && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
-                    // TODO: No perfect solution because there could be other effects that allow to cast the card for this mana cost
-                    if (spellAbility.getManaCosts().getText().equals("{W}{U}{B}{R}{G}")) {
-                        permanent.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
-                    }
-                }
-            }
-            return true;
-        }
-
-        @Override
-        public WorldheartPhoenixEntersBattlefieldEffect copy() {
-            return new WorldheartPhoenixEntersBattlefieldEffect(this);
-        }
-
+    private WorldheartPhoenixPlayEffect(final WorldheartPhoenixPlayEffect effect) {
+        super(effect);
     }
 
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public WorldheartPhoenixPlayEffect copy() {
+        return new WorldheartPhoenixPlayEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+        if (sourceId.equals(source.getSourceId()) && source.isControlledBy(affectedControllerId)) {
+            if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
+                Player player = game.getPlayer(affectedControllerId);
+                if (player != null) {
+                    player.setCastSourceIdWithAlternateMana(
+                            sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), null,
+                            MageIdentifier.WorldheartPhoenixAlternateCast
+                    );
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+}
+
+class WorldheartPhoenixWatcher extends Watcher {
+
+    WorldheartPhoenixWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (GameEvent.EventType.SPELL_CAST.equals(event.getType())
+                && event.hasApprovingIdentifier(MageIdentifier.WorldheartPhoenixAlternateCast)) {
+            Spell target = game.getSpell(event.getTargetId());
+            if (target != null) {
+                game.getState().addEffect(new AddCounterEnteringCreatureEffect(new MageObjectReference(target.getCard(), game),
+                                CounterType.P1P1.createInstance(2), Outcome.BoostCreature),
+                        target.getSpellAbility());
+            }
+        }
+    }
 }

@@ -15,30 +15,34 @@ import org.apache.log4j.Logger;
  */
 public abstract class DraftCube {
 
-    public class CardIdentity {
+    public static class CardIdentity {
 
-        private String name;
-        private String extension;
+        private final String name;
+        private final String extension;
+        /**
+         * optional number in the extension (some sets have multiple version of a card)
+         * null means no set one.
+         */
+        private final String number;
 
         public CardIdentity(String name, String extension) {
+            this(name, extension, null);
+        }
+
+        public CardIdentity(String name, String extension, String number) {
             this.name = name;
             this.extension = extension;
+            this.number = number;
         }
 
         public String getName() {
             return name;
         }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
         public String getExtension() {
             return extension;
         }
-
-        public void setExtension(String extension) {
-            this.extension = extension;
+        public String getCardNumber() {
+            return number;
         }
     }
 
@@ -51,7 +55,7 @@ public abstract class DraftCube {
     protected List<CardIdentity> cubeCards = new ArrayList<>();
     protected List<CardIdentity> leftCubeCards = new ArrayList<>();
 
-    public DraftCube(String name) {
+    protected DraftCube(String name) {
         this.name = name;
         this.code = getClass().getSimpleName();
     }
@@ -84,13 +88,15 @@ public abstract class DraftCube {
                 if (!cardId.getName().isEmpty()) {
                     CardInfo cardInfo = null;
                     if (!cardId.getExtension().isEmpty()) {
-                        cardInfo = CardRepository.instance.findCardWPreferredSet(cardId.getName(), cardId.getExtension());
+                        cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber(
+                                cardId.getName(), cardId.getExtension(), cardId.getCardNumber()
+                        );
                     } else {
                         cardInfo = CardRepository.instance.findPreferredCoreExpansionCard(cardId.getName());
                     }
 
                     if (cardInfo != null) {
-                        booster.add(cardInfo.getCard());
+                        booster.add(cardInfo.createCard());
                         done = true;
                     } else {
                         logger.warn(new StringBuilder(this.getName()).append(" - Card not found: ").append(cardId.getName()).append(':').append(cardId.extension));

@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -13,7 +14,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 
 /**
- *
  * @author LevelX
  */
 //20130711
@@ -21,7 +21,7 @@ import mage.game.events.ManaEvent;
  * 903.9. If mana would be added to a player's mana pool of a color that isn't in the color identity
  * of that player's commander, that amount of colorless mana is added to that player's mana pool instead.
  *
- * Commander rule #4 was removed Jan. 18, 2016 
+ * Commander rule #4 was removed Jan. 18, 2016
  *
  */
 @Deprecated
@@ -37,7 +37,7 @@ public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
         this.commanderMana = commanderMana;
     }
 
-    public CommanderManaReplacementEffect(final CommanderManaReplacementEffect effect) {
+    protected CommanderManaReplacementEffect(final CommanderManaReplacementEffect effect) {
         super(effect);
         this.playerId = effect.playerId;
         this.commanderMana = effect.commanderMana;
@@ -46,11 +46,6 @@ public class CommanderManaReplacementEffect extends ReplacementEffectImpl {
     @Override
     public CommanderManaReplacementEffect copy() {
         return new CommanderManaReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

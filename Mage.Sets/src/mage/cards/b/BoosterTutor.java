@@ -47,12 +47,12 @@ public final class BoosterTutor extends CardImpl {
 
 class BoosterTutorEffect extends OneShotEffect {
 
-    public BoosterTutorEffect() {
+    BoosterTutorEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Open a sealed Magic booster pack, reveal the cards, and put one of those cards into your hand";
+        this.staticText = "Open a sealed Magic booster pack, reveal the cards, and put one of them into your hand";
     }
 
-    public BoosterTutorEffect(final BoosterTutorEffect effect) {
+    private BoosterTutorEffect(final BoosterTutorEffect effect) {
         super(effect);
     }
 
@@ -90,8 +90,8 @@ class BoosterTutorEffect extends OneShotEffect {
                     Set<Card> cardsToLoad = new HashSet<Card>(boosterPack);
                     game.loadCards(cardsToLoad, controller.getId());
                     CardsImpl cards = new CardsImpl();
-                    cards.addAll(boosterPack);
-                    if (controller.choose(Outcome.Benefit, cards, targetCard, game)) {
+                    cards.addAllCards(boosterPack);
+                    if (controller.choose(Outcome.Benefit, cards, targetCard, source, game)) {
                         Card card = game.getCard(targetCard.getFirstTarget());
                         if (card != null) {
                             controller.moveCards(card, Zone.HAND, source, game);

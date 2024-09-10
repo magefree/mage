@@ -4,17 +4,14 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutSourceCountersOnTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -42,7 +39,7 @@ public final class SpitefulSquad extends CardImpl {
         ));
 
         // When Spiteful Squad dies, put its counters on target creature you control.
-        Ability ability = new DiesSourceTriggeredAbility(new SpitefulSquadEffect());
+        Ability ability = new DiesSourceTriggeredAbility(new PutSourceCountersOnTargetEffect());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
@@ -54,37 +51,5 @@ public final class SpitefulSquad extends CardImpl {
     @Override
     public SpitefulSquad copy() {
         return new SpitefulSquad(this);
-    }
-}
-
-class SpitefulSquadEffect extends OneShotEffect {
-
-    SpitefulSquadEffect() {
-        super(Outcome.Benefit);
-        staticText = "put its counters on target creature you control";
-    }
-
-    private SpitefulSquadEffect(final SpitefulSquadEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SpitefulSquadEffect copy() {
-        return new SpitefulSquadEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = (Permanent) getValue("permanentLeftBattlefield");
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (sourcePermanent == null || permanent == null) {
-            return false;
-        }
-        sourcePermanent
-                .getCounters(game)
-                .values()
-                .stream()
-                .forEach(counter -> permanent.addCounters(counter, source.getControllerId(), source, game));
-        return true;
     }
 }

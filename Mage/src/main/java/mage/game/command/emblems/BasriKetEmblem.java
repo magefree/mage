@@ -17,17 +17,24 @@ public final class BasriKetEmblem extends Emblem {
      */
 
     public BasriKetEmblem() {
-        setName("Emblem Basri");
+        super("Emblem Basri");
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 Zone.COMMAND,
                 new CreateTokenEffect(new SoldierToken()),
                 TargetController.YOU, false, false);
         ability.addEffect(
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED)
-                .setText(", then put a +1/+1 counter on each creature you control")
+                        .setText(", then put a +1/+1 counter on each creature you control")
         );
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("M21");
+    private BasriKetEmblem(final BasriKetEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public BasriKetEmblem copy() {
+        return new BasriKetEmblem(this);
     }
 }

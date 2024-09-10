@@ -26,7 +26,7 @@ public final class KaaliaZenithSeeker extends CardImpl {
     public KaaliaZenithSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(3);
@@ -98,7 +98,7 @@ class KaaliaZenithSeekerEffect extends OneShotEffect {
         Cards toHand = new CardsImpl();
         for (CreatureFinder creatureFinder : CreatureFinder.values()) {
             TargetCard targetCard = creatureFinder.getTarget();
-            if (player.choose(outcome, cards, targetCard, game)) {
+            if (player.choose(outcome, cards, targetCard, source, game)) {
                 toHand.addAll(targetCard.getTargets());
             }
         }

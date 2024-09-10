@@ -31,7 +31,7 @@ public final class ZagrasThiefOfHeartbeats extends CardImpl {
     public ZagrasThiefOfHeartbeats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(4);

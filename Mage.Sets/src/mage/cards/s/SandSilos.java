@@ -12,7 +12,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -44,11 +44,11 @@ public final class SandSilos extends CardImpl {
         // {tap}, Remove any number of storage counters from Sand Silos: Add {U} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.BlueMana(1),
-                RemovedCountersForCostValue.instance,
+                GetXValue.instance,
                 new TapSourceCost(),
                 "Add {U} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE,
                 "Remove any number of storage counters from {this}"));
         this.addAbility(ability);
     }

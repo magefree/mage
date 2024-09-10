@@ -1,9 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
@@ -16,6 +13,11 @@ import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -43,13 +45,13 @@ public final class AnimistsAwakening extends CardImpl {
 
 class AnimistsAwakeningEffect extends OneShotEffect {
 
-    public AnimistsAwakeningEffect() {
+    AnimistsAwakeningEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in any order."
+        staticText = "Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in a random order."
                 + "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, untap those lands";
     }
 
-    public AnimistsAwakeningEffect(final AnimistsAwakeningEffect effect) {
+    private AnimistsAwakeningEffect(final AnimistsAwakeningEffect effect) {
         super(effect);
     }
 
@@ -61,8 +63,8 @@ class AnimistsAwakeningEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        int xValue = source.getManaCostsToPay().getX();
-        cards.addAll(controller.getLibrary().getTopCards(game, xValue));
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
+        cards.addAllCards(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
             Set<Card> toBattlefield = new LinkedHashSet<>();

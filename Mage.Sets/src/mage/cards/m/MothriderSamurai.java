@@ -28,7 +28,7 @@ public final class MothriderSamurai extends CardImpl {
         this.addAbility(new BushidoAbility(1));
     }
 
-    public MothriderSamurai (final MothriderSamurai card) {
+    private MothriderSamurai(final MothriderSamurai card) {
         super(card);
     }
 

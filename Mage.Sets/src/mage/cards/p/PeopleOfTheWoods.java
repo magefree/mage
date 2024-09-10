@@ -9,7 +9,6 @@ import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -33,7 +32,7 @@ public final class PeopleOfTheWoods extends CardImpl {
         this.toughness = new MageInt(0);
 
         // People of the Woods's toughness is equal to the number of Forests you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBaseToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBaseToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands))));
     }
 
     private PeopleOfTheWoods(final PeopleOfTheWoods card) {

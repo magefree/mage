@@ -43,12 +43,12 @@ public final class DestroyTheEvidence extends CardImpl {
 
 class DestroyTheEvidenceEffect extends OneShotEffect {
 
-    public DestroyTheEvidenceEffect() {
+    DestroyTheEvidenceEffect() {
         super(Outcome.Discard);
         this.staticText = "Its controller reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard";
     }
 
-    public DestroyTheEvidenceEffect(final DestroyTheEvidenceEffect effect) {
+    private DestroyTheEvidenceEffect(final DestroyTheEvidenceEffect effect) {
         super(effect);
     }
 

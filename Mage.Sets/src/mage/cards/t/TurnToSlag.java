@@ -25,7 +25,7 @@ public final class TurnToSlag extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TurnToSlag (final TurnToSlag card) {
+    private TurnToSlag(final TurnToSlag card) {
         super(card);
     }
 

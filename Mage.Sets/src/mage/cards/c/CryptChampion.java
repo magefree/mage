@@ -68,7 +68,7 @@ class CryptChampionEffect extends OneShotEffect {
         this.staticText = "each player puts a creature card with mana value 3 or less from their graveyard onto the battlefield";
     }
 
-    CryptChampionEffect(final CryptChampionEffect effect) {
+    private CryptChampionEffect(final CryptChampionEffect effect) {
         super(effect);
     }
 

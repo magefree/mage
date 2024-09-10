@@ -26,7 +26,7 @@ public final class SorcerousSight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
         
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private SorcerousSight(final SorcerousSight card) {

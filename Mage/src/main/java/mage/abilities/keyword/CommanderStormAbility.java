@@ -22,7 +22,7 @@ public class CommanderStormAbility extends TriggeredAbilityImpl {
 
     public CommanderStormAbility() {
         super(Zone.STACK, new CommanderStormEffect());
-        this.ruleAtTheTop = true;
+        this.setRuleAtTheTop(true);
     }
 
     private CommanderStormAbility(final CommanderStormAbility ability) {

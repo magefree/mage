@@ -29,7 +29,7 @@ public final class NyleasColossus extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Constellation — Whenever Nylea's Colossus or another enchantment enters the battlefield under your control, double target creature's power and toughness until end of turn.
+        // Constellation — Whenever Nylea's Colossus or another enchantment you control enters, double target creature's power and toughness until end of turn.
         Ability ability = new ConstellationAbility(new NyleasColossusEffect(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -47,12 +47,12 @@ public final class NyleasColossus extends CardImpl {
 
 class NyleasColossusEffect extends OneShotEffect {
 
-    public NyleasColossusEffect() {
+    NyleasColossusEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "double target creature's power and toughness until end of turn";
     }
 
-    public NyleasColossusEffect(final NyleasColossusEffect effect) {
+    private NyleasColossusEffect(final NyleasColossusEffect effect) {
         super(effect);
     }
 

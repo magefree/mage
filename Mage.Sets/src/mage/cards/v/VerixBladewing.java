@@ -24,7 +24,7 @@ public final class VerixBladewing extends CardImpl {
 
     public VerixBladewing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(4);
@@ -42,7 +42,7 @@ public final class VerixBladewing extends CardImpl {
                 new CreateTokenEffect(new KaroxBladewingDragonToken()));
 
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, create Karox Bladewing, " +
+                "When {this} enters, if it was kicked, create Karox Bladewing, " +
                         "a legendary 4/4 red Dragon creature token with flying."));
     }
 

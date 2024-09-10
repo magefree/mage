@@ -50,7 +50,7 @@ class RenegadeKrasisTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(1), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1), false);
     }
 
-    public RenegadeKrasisTriggeredAbility(final RenegadeKrasisTriggeredAbility ability) {
+    private RenegadeKrasisTriggeredAbility(final RenegadeKrasisTriggeredAbility ability) {
         super(ability);
     }
 

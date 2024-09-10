@@ -22,7 +22,7 @@ public final class AesiTyrantOfGyreStrait extends CardImpl {
     public AesiTyrantOfGyreStrait(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -32,7 +32,7 @@ public final class AesiTyrantOfGyreStrait extends CardImpl {
                 new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)
         ));
 
-        // Whenever a land enters the battlefield under your control, you may draw a card.
+        // Whenever a land you control enters, you may draw a card.
         this.addAbility(new LandfallAbility(new DrawCardSourceControllerEffect(1), true));
     }
 

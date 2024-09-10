@@ -57,7 +57,7 @@ class FertileImaginationEffect extends OneShotEffect {
         choice.add(CardType.LAND.toString());
         choice.add(CardType.PLANESWALKER.toString());
         choice.add(CardType.SORCERY.toString());
-        choice.add(CardType.TRIBAL.toString());
+        choice.add(CardType.KINDRED.toString());
     }
 
     public FertileImaginationEffect() {
@@ -65,7 +65,7 @@ class FertileImaginationEffect extends OneShotEffect {
         staticText = "Choose a card type. Target opponent reveals their hand. Create two 1/1 green Saproling creature tokens for each card of the chosen type revealed this way";
     }
 
-    public FertileImaginationEffect(final FertileImaginationEffect effect) {
+    private FertileImaginationEffect(final FertileImaginationEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class FertileImaginationEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (player != null && opponent != null && sourceObject != null) {
-            Choice choiceImpl = new ChoiceImpl();
+            Choice choiceImpl = new ChoiceImpl(true);
             choiceImpl.setChoices(choice);
             if (player.choose(Outcome.Neutral, choiceImpl, game)) {
                 CardType type = null;
@@ -100,8 +100,8 @@ class FertileImaginationEffect extends OneShotEffect {
                     type = CardType.SORCERY;
                 } else if (chosenType.equals(CardType.PLANESWALKER.toString())) {
                     type = CardType.PLANESWALKER;
-                } else if (chosenType.equals(CardType.TRIBAL.toString())) {
-                    type = CardType.TRIBAL;
+                } else if (chosenType.equals(CardType.KINDRED.toString())) {
+                    type = CardType.KINDRED;
                 }
                 if (type != null) {
                     Cards hand = opponent.getHand();

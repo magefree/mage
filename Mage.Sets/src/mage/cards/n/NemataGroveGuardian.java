@@ -31,7 +31,7 @@ public final class NemataGroveGuardian extends CardImpl {
 
     public NemataGroveGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
 
         this.power = new MageInt(4);
@@ -40,7 +40,7 @@ public final class NemataGroveGuardian extends CardImpl {
         // {2}{G}: Create a 1/1 green Saproling creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl<>("{2}{G}")));
         // Sacrifice a Saproling: Saproling creatures get +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), new SacrificeTargetCost(new TargetControlledPermanent(filter1))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), new SacrificeTargetCost(filter1)));
     }
 
     private NemataGroveGuardian(final NemataGroveGuardian card) {

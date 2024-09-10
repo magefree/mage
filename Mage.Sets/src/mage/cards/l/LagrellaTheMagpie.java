@@ -5,9 +5,8 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,15 +39,14 @@ public final class LagrellaTheMagpie extends CardImpl {
     public LagrellaTheMagpie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // When Lagrella, the Magpie enters the battlefield, exile any number of other target creatures controlled by different players until Lagrella leaves the battlefield. When an exiled card enters the battlefield under your control this way, put two +1/+1 counters on it.
+        // When Lagrella, the Magpie enters the battlefield, exile any number of other target creatures controlled by different players until Lagrella leaves the battlefield. When an exiled card you control enters this way, put two +1/+1 counters on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LagrellaTheMagpieEffect(), false);
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         ability.addTarget(new LagrellaTheMagpieTarget());
         this.addAbility(ability);
     }
@@ -103,6 +101,7 @@ class LagrellaTheMagpieEffect extends OneShotEffect {
                 CardUtil.getExileZoneId(game, source),
                 CardUtil.getSourceName(game, source)
         );
+        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         game.addDelayedTriggeredAbility(new LagrellaTheMagpieTriggeredAbility(cards, game), source);
         return true;
     }
@@ -189,6 +188,6 @@ class LagrellaTheMagpieTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When an exiled card enters the battlefield under your control this way, put two +1/+1 counters on it.";
+        return "When an exiled card you control enters this way, put two +1/+1 counters on it.";
     }
 }

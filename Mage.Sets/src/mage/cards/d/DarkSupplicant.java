@@ -31,11 +31,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class DarkSupplicant extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clerics you control");
-
-    static {
-        filter.add(SubType.CLERIC.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.CLERIC, "Clerics");
 
     public DarkSupplicant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
@@ -47,7 +43,7 @@ public final class DarkSupplicant extends CardImpl {
 
         // {T}, Sacrifice three Clerics: Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DarkSupplicantEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, true)));
+        ability.addCost(new SacrificeTargetCost(3, filter));
         this.addAbility(ability);
     }
 
@@ -63,12 +59,12 @@ public final class DarkSupplicant extends CardImpl {
 
 class DarkSupplicantEffect extends OneShotEffect {
 
-    public DarkSupplicantEffect() {
+    DarkSupplicantEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle";
     }
 
-    public DarkSupplicantEffect(final DarkSupplicantEffect effect) {
+    private DarkSupplicantEffect(final DarkSupplicantEffect effect) {
         super(effect);
     }
 
@@ -89,7 +85,7 @@ class DarkSupplicantEffect extends OneShotEffect {
         // Graveyard check
         if (controller.chooseUse(Outcome.Benefit, "Search your graveyard for Scion of Darkness?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter, true);
-            if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
+            if (controller.choose(outcome, controller.getGraveyard(), target, source, game)) {
                 selectedCard = game.getCard(target.getFirstTarget());
             }
         }
@@ -97,7 +93,7 @@ class DarkSupplicantEffect extends OneShotEffect {
         if (selectedCard == null
                 && controller.chooseUse(Outcome.Benefit, "Search your hand for Scion of Darkness?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(0, 1, filter);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     selectedCard = game.getCard(target.getFirstTarget());
                 }

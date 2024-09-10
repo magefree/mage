@@ -19,7 +19,7 @@ public final class DigUp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // Cleave {1}{B}{B}{G}
-        this.addAbility(new CleaveAbility(this, new SearchLibraryPutInHandEffect(new TargetCardInLibrary()), "{1}{B}{B}{G}"));
+        this.addAbility(new CleaveAbility(this, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false), "{1}{B}{B}{G}"));
 
         // Search your library for a [basic land] card, [reveal it,] put it into your hand, then shuffle.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(

@@ -30,7 +30,7 @@ public final class TrollAscetic extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{G}")));
     }
 
-    public TrollAscetic (final TrollAscetic card) {
+    private TrollAscetic(final TrollAscetic card) {
         super(card);
     }
 

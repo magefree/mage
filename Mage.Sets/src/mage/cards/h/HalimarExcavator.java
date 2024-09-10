@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,7 +36,7 @@ public final class HalimarExcavator extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter)), false);
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new MillCardsTargetEffect(new PermanentsOnBattlefieldCount(filter)), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability.setAbilityWord(null));
     }

@@ -1,6 +1,6 @@
 package mage.cards.n;
 
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +19,7 @@ public final class NarsetsReversal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{U}");
 
         // Copy target instant or sorcery spell, then return it to its owner's hand. You may choose new targets for the copy.
-        this.getSpellAbility().addEffect(new CopyTargetSpellEffect()
+        this.getSpellAbility().addEffect(new CopyTargetStackObjectEffect()
                 .setText("Copy target instant or sorcery spell,"));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect()
                 .setText("then return it to its owner's hand. You may choose new targets for the copy."));

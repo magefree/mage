@@ -17,8 +17,8 @@ public final class SnowCoveredPlains extends CardImpl {
 
     public SnowCoveredPlains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.BASIC);
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.BASIC);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.PLAINS);
 
         // W

@@ -36,7 +36,7 @@ public final class TitaniaNaturesForce extends CardImpl {
     public TitaniaNaturesForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -44,7 +44,7 @@ public final class TitaniaNaturesForce extends CardImpl {
         // You may play Forests from your graveyard.
         this.addAbility(new SimpleStaticAbility(new PlayLandsFromGraveyardControllerEffect(filter)));
 
-        // Whenever a Forest enters the battlefield under your control, create a 5/3 green Elemental creature token.
+        // Whenever a Forest you control enters, create a 5/3 green Elemental creature token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CreateTokenEffect(new TitaniaProtectorOfArgothElementalToken()), filter2
         ));

@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -14,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author Plopman
  */
 public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect {
@@ -27,7 +27,7 @@ public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect {
         staticText = "return all " + filter.getMessage() + " to their owners' hands";
     }
 
-    public ReturnToHandFromBattlefieldAllEffect(final ReturnToHandFromBattlefieldAllEffect effect) {
+    protected ReturnToHandFromBattlefieldAllEffect(final ReturnToHandFromBattlefieldAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

@@ -26,7 +26,7 @@ public final class BlitzwingAdaptiveAssailant extends CardImpl {
     public BlitzwingAdaptiveAssailant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
@@ -38,7 +38,7 @@ public final class BlitzwingAdaptiveAssailant extends CardImpl {
 
         // At the beginning of combat on your turn, choose flying or indestructible at random. Blitzwing gains that ability until end of turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new BlitzwingCruelTormentorEffect(), TargetController.YOU, false
+                new BlitzwingAdaptiveAssailantEffect(), TargetController.YOU, false
         ));
 
         // Whenever Blitzwing deals combat damage to a player, convert it.

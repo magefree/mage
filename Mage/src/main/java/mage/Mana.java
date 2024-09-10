@@ -9,17 +9,20 @@ import mage.util.Copyable;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.BiFunction;
 
 /**
  * WARNING, all mana operations must use overflow check, see usage of CardUtil.addWithOverflowCheck and same methods
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
-    private static final transient Logger logger = Logger.getLogger(Mana.class);
+    private static final Logger logger = Logger.getLogger(Mana.class);
 
     protected int white;
     protected int blue;
@@ -77,7 +80,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      *
      * @param mana object to create copy from.
      */
-    public Mana(final Mana mana) {
+    protected Mana(final Mana mana) {
         Objects.requireNonNull(mana, "The passed in mana can not be null");
         this.white = mana.white;
         this.blue = mana.blue;
@@ -166,8 +169,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     /**
      * Creates a {@link Mana} object of #num mana of the passed {@link ManaType}.
      *
-     * @param manaType  The type of mana to set.
-     * @param num       The number of mana available of the passed ManaType.
+     * @param manaType The type of mana to set.
+     * @param num      The number of mana available of the passed ManaType.
      **/
     public Mana(final ManaType manaType, int num) {
         this();
@@ -338,6 +341,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     /**
      * Helper function for increase and decrease to not have the code duplicated.
+     *
      * @param manaType
      * @param increase
      */
@@ -420,6 +424,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public void increaseAny() {
         any = CardUtil.overflowInc(any, 1);
     }
+
     public void decreaseAny() {
         any = CardUtil.overflowDec(any, 1);
     }
@@ -438,6 +443,20 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         generic = CardUtil.overflowDec(generic, mana.generic);
         colorless = CardUtil.overflowDec(colorless, mana.colorless);
         any = CardUtil.overflowDec(any, mana.any);
+    }
+
+    /**
+     * Mana must contains only positive values
+     */
+    public boolean isValid() {
+        return white >= 0
+                && blue >= 0
+                && black >= 0
+                && red >= 0
+                && green >= 0
+                && generic >= 0
+                && colorless >= 0
+                && any >= 0;
     }
 
     /**
@@ -697,7 +716,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * Returns if the cost (this) can be paid by the mana provided by the passed in {@link Mana} object.
      *
      * @param avail The mana to compare too.
-     * @return      boolean indicating if there is enough available mana to pay.
+     * @return boolean indicating if there is enough available mana to pay.
      */
     public boolean enough(final Mana avail) {
         Mana compare = avail.copy();
@@ -769,11 +788,11 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     /**
      * Returns the total mana needed to meet the cost of this given the available mana passed in
      * as a {@link Mana} object.
-     *
+     * <p>
      * Used by the AI to calculate what mana it needs to obtain for a spell to become playable.
      *
      * @param avail the mana available to pay the cost
-     * @return      the total mana needed to pay this given the available mana passed in as a {@link Mana} object.
+     * @return the total mana needed to pay this given the available mana passed in as a {@link Mana} object.
      */
     public Mana needed(final Mana avail) {
         Mana compare = avail.copy();
@@ -1209,24 +1228,99 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Returns if this {@link Mana} object has more than or equal values of mana
-     * as the passed in {@link Mana} object. Ignores {Any} mana to prevent
-     * endless iterations.
-     *
-     * @param mana the mana to compare with
-     * @return if this object has more than or equal mana to the passed in
-     * {@link Mana}.
+     * Compare two mana - is one part includes into another part. Support any mana types and uses a payment logic.
+     * <p>
+     * Used for AI and mana optimizations to remove duplicated mana options.
      */
-    public boolean includesMana(Mana mana) {
-        return this.white >= mana.white
-                && this.blue >= mana.blue
-                && this.black >= mana.black
-                && this.red >= mana.red
-                && this.green >= mana.green
-                && this.colorless >= mana.colorless
-                && (this.generic >= mana.generic
-                || CardUtil.overflowInc(this.countColored(), this.colorless) >= mana.count());
+    public boolean includesMana(Mana manaPart) {
+        if (!this.isValid() || !manaPart.isValid()) {
+            // how-to fix: make sure mana calculations do not add or subtract values without result checks or isValid call
+            throw new IllegalArgumentException("Wrong code usage: found negative values in mana calculations: main " + this + ", part " + manaPart);
+        }
 
+        if (this.count() < manaPart.count()) {
+            return false;
+        }
+
+        if (manaPart.count() == 0) {
+            return true;
+        }
+
+        // it's uses pay logic with additional {any} mana support:
+        // - {any} in cost - can be paid by {any} mana only
+        // - {any} in pay - can be used to pay {any}, {1} and colored mana (but not {C})
+        Mana pool = this.copy();
+        Mana cost = manaPart.copy();
+
+        // first pay type by type (it's important to pay {any} first)
+        // 10 - 3 = 7 in pool, 0 in cost
+        // 5 - 7 = 0 in pool, 2 in cost
+        pool.subtract(cost);
+        cost.white = Math.max(0, -1 * pool.white);
+        pool.white = Math.max(0, pool.white);
+        cost.blue = Math.max(0, -1 * pool.blue);
+        pool.blue = Math.max(0, pool.blue);
+        cost.black = Math.max(0, -1 * pool.black);
+        pool.black = Math.max(0, pool.black);
+        cost.red = Math.max(0, -1 * pool.red);
+        pool.red = Math.max(0, pool.red);
+        cost.green = Math.max(0, -1 * pool.green);
+        pool.green = Math.max(0, pool.green);
+        cost.generic = Math.max(0, -1 * pool.generic);
+        pool.generic = Math.max(0, pool.generic);
+        cost.colorless = Math.max(0, -1 * pool.colorless);
+        pool.colorless = Math.max(0, pool.colorless);
+        cost.any = Math.max(0, -1 * pool.any);
+        pool.any = Math.max(0, pool.any);
+        if (cost.count() > pool.count()) {
+            throw new IllegalArgumentException("Wrong mana calculation: " + cost + " - " + pool);
+        }
+
+        // can't pay {any} or {C}
+        if (cost.any > 0 || cost.colorless > 0) {
+            return false;
+        }
+
+        // then pay colored by {any}
+        if (pool.any > 0 && cost.white > 0) {
+            int diff = Math.min(pool.any, cost.white);
+            pool.any -= diff;
+            cost.white -= diff;
+        }
+        if (pool.any > 0 && cost.blue > 0) {
+            int diff = Math.min(pool.any, cost.blue);
+            pool.any -= diff;
+            cost.blue -= diff;
+        }
+        if (pool.any > 0 && cost.black > 0) {
+            int diff = Math.min(pool.any, cost.black);
+            pool.any -= diff;
+            cost.black -= diff;
+        }
+        if (pool.any > 0 && cost.red > 0) {
+            int diff = Math.min(pool.any, cost.red);
+            pool.any -= diff;
+            cost.red -= diff;
+        }
+        if (pool.any > 0 && cost.green > 0) {
+            int diff = Math.min(pool.any, cost.green);
+            pool.any -= diff;
+            cost.green -= diff;
+        }
+
+        // can't pay colored
+        if (cost.countColored() > 0) {
+            return false;
+        }
+
+        // then pay generic by {any}, colored or {C}
+        int leftPool = pool.count();
+        if (leftPool > 0 && cost.generic > 0) {
+            int diff = Math.min(leftPool, cost.generic);
+            cost.generic -= diff;
+        }
+
+        return cost.count() == 0;
     }
 
     public boolean isMoreValuableThan(Mana that) {
@@ -1239,19 +1333,19 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * not contain one less mana in any type but generic.
      * <p>
      * See tests ManaTest.moreValuableManaTest for several examples
-     *
+     * <p>
      * Examples:
-     *      {1}       and {R}       -> {R}
-     *      {2}       and {1}{W}    -> {1}{W}
-     *      {3}       and {1}{W}    -> {1}{W}
-     *      {1}{W}{R} and {G}{W}{R} -> {G}{W}{R}
-     *      {G}{W}{R} and {G}{W}{R} -> null
-     *      {G}{W}{B} and {G}{W}{R} -> null
-     *      {C}       and {ANY}     -> null
+     * {1}       and {R}       -> {R}
+     * {2}       and {1}{W}    -> {1}{W}
+     * {3}       and {1}{W}    -> {1}{W}
+     * {1}{W}{R} and {G}{W}{R} -> {G}{W}{R}
+     * {G}{W}{R} and {G}{W}{R} -> null
+     * {G}{W}{B} and {G}{W}{R} -> null
+     * {C}       and {ANY}     -> null
      *
-     * @param mana1     The 1st mana to compare.
-     * @param mana2     The 2nd mana to compare.
-     * @return          The greater of the two manas, or null if they're the same OR they cannot be compared
+     * @param mana1 The 1st mana to compare.
+     * @param mana2 The 2nd mana to compare.
+     * @return The greater of the two manas, or null if they're the same OR they cannot be compared
      */
     public static Mana getMoreValuableMana(final Mana mana1, final Mana mana2) {
         if (mana1.equals(mana2)) {
@@ -1279,8 +1373,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 || mana2.colorless > mana1.colorless
                 || mana2.countColored() > mana1.countColored()
                 || (mana2.countColored() == mana1.countColored()
-                        && mana2.colorless == mana1.colorless
-                        && mana2.count() > mana1.count())) {
+                && mana2.colorless == mana1.colorless
+                && mana2.count() > mana1.count())) {
             moreMana = mana2;
             lessMana = mana1;
         } else {
@@ -1348,19 +1442,19 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public int getDifferentColors() {
         int count = 0;
         if (white > 0) {
-            count = CardUtil.overflowInc(count, 1);
+            count++;
         }
         if (blue > 0) {
-            count = CardUtil.overflowInc(count, 1);
+            count++;
         }
         if (black > 0) {
-            count = CardUtil.overflowInc(count, 1);
+            count++;
         }
         if (red > 0) {
-            count = CardUtil.overflowInc(count, 1);
+            count++;
         }
         if (green > 0) {
-            count = CardUtil.overflowInc(count, 1);
+            count++;
         }
         return count;
     }

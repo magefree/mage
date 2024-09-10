@@ -77,7 +77,7 @@ class DiscipleOfCaelusNinFirstEffect extends OneShotEffect {
             toKeep.add(source.getSourceId());
         }
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(source.getControllerId());
+            Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
@@ -113,11 +113,6 @@ class DiscipleOfCaelusNinSecondEffect extends ContinuousRuleModifyingEffectImpl 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.PHASE_IN;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

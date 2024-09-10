@@ -4,8 +4,10 @@ import mage.constants.Duration;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.Copyable;
 import mage.watchers.Watcher;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -13,9 +15,10 @@ import java.util.UUID;
 /**
  * @author L_J
  */
-public class ControlCombatRedundancyWatcher extends Watcher { // workaround for solving timestamp issues regarding "you choose which creatures block and how those creatures block" effects
+public class ControlCombatRedundancyWatcher extends Watcher {
 
-    private static final class PlayerDuration implements java.io.Serializable {  // class must be serilizable Bug #8497
+    // workaround for solving timestamp issues regarding "you choose which creatures block and how those creatures block" effects
+    private static final class PlayerDuration implements Serializable, Copyable<PlayerDuration> {
 
         private final Duration duration;
         private final UUID playerId;
@@ -25,12 +28,22 @@ public class ControlCombatRedundancyWatcher extends Watcher { // workaround for 
             this.playerId = playerId;
         }
 
+        private PlayerDuration(final PlayerDuration playerDuration) {
+            this.duration = playerDuration.duration;
+            this.playerId = playerDuration.playerId;
+        }
+
         private boolean isCombat() {
             return duration == Duration.EndOfCombat;
         }
 
         private boolean isPlayer(UUID playerId) {
             return playerId.equals(this.playerId);
+        }
+
+        @Override
+        public PlayerDuration copy() {
+            return new PlayerDuration(this);
         }
     }
 

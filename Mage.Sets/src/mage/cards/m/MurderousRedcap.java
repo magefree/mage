@@ -51,12 +51,12 @@ public final class MurderousRedcap extends CardImpl {
 
 class MurderousRedcapEffect extends OneShotEffect {
 
-    public MurderousRedcapEffect() {
+    MurderousRedcapEffect() {
         super(Outcome.Damage);
         staticText = "it deals damage equal to its power to any target";
     }
 
-    public MurderousRedcapEffect(final MurderousRedcapEffect effect) {
+    private MurderousRedcapEffect(final MurderousRedcapEffect effect) {
         super(effect);
     }
 

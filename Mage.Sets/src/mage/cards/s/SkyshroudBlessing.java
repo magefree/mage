@@ -24,7 +24,7 @@ public final class SkyshroudBlessing extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(ShroudAbility.getInstance(),
             Duration.EndOfTurn, new FilterLandPermanent("all lands")));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private SkyshroudBlessing(final SkyshroudBlessing card) {

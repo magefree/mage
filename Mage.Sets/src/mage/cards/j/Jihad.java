@@ -70,7 +70,7 @@ class JihadTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When the chosen player controls no nontoken permanents of the chosen color, ");
     }
 
-    public JihadTriggeredAbility(final JihadTriggeredAbility ability) {
+    private JihadTriggeredAbility(final JihadTriggeredAbility ability) {
         super(ability);
     }
 

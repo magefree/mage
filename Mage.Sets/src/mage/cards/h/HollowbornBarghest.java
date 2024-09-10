@@ -68,12 +68,12 @@ public final class HollowbornBarghest extends CardImpl {
 
 class HollowbornBarghestEffect extends OneShotEffect {
 
-    public HollowbornBarghestEffect() {
+    HollowbornBarghestEffect() {
         super(Outcome.Benefit);
         staticText = "Each opponent loses 2 life";
     }
 
-    public HollowbornBarghestEffect(final HollowbornBarghestEffect effect) {
+    private HollowbornBarghestEffect(final HollowbornBarghestEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class HollowbornBarghestTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
     }
 
-    public HollowbornBarghestTriggeredAbility(final HollowbornBarghestTriggeredAbility ability) {
+    private HollowbornBarghestTriggeredAbility(final HollowbornBarghestTriggeredAbility ability) {
         super(ability);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -9,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterArtifactSpell;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -25,8 +24,7 @@ public final class VedalkenArchmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an artifact spell, draw a card.
-        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false));
     }
 
     private VedalkenArchmage(final VedalkenArchmage card) {

@@ -45,7 +45,7 @@ public final class KumenaTyrantOfOrazca extends CardImpl {
     public KumenaTyrantOfOrazca(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);

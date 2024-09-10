@@ -22,7 +22,7 @@ public final class KyokiSanitysEclipse extends CardImpl {
 
     public KyokiSanitysEclipse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.SPIRIT);
 

@@ -65,12 +65,12 @@ public final class GoblinRockSled extends CardImpl {
 
 class DontUntapIfAttackedLastTurnSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public DontUntapIfAttackedLastTurnSourceEffect() {
+    DontUntapIfAttackedLastTurnSourceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
         staticText = "{this} doesn't untap during your untap step if it attacked during your last turn";
     }
 
-    public DontUntapIfAttackedLastTurnSourceEffect(final DontUntapIfAttackedLastTurnSourceEffect effect) {
+    private DontUntapIfAttackedLastTurnSourceEffect(final DontUntapIfAttackedLastTurnSourceEffect effect) {
         super(effect);
     }
 
@@ -80,18 +80,13 @@ class DontUntapIfAttackedLastTurnSourceEffect extends ContinuousRuleModifyingEff
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP
+        if (game.getTurnStepType() == PhaseStep.UNTAP
                 && event.getTargetId().equals(source.getSourceId())) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null && permanent.isControlledBy(game.getActivePlayerId())) {

@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.ClassReminderAbility;
@@ -62,7 +62,7 @@ public final class RangerClass extends CardImpl {
 
         // You may cast creature spells from the top of your library.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
-                new PlayTheTopCardEffect(TargetController.YOU, filter, false), 3
+                new PlayFromTopOfLibraryEffect(filter), 3
         )));
     }
 

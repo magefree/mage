@@ -3,13 +3,9 @@ package mage.cards.x;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeTargetEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardTargetEffect;
+import mage.abilities.effects.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +28,7 @@ public final class XanatharGuildKingpin extends CardImpl {
 
     public XanatharGuildKingpin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEHOLDER);
 
         this.power = new MageInt(5);
@@ -44,9 +40,9 @@ public final class XanatharGuildKingpin extends CardImpl {
                 .setText("choose target opponent. Until end of turn, that player can't cast spells,"),
                 TargetController.YOU, false
         );
-        ability.addEffect(new LookAtTopCardOfLibraryAnyTimeTargetEffect(Duration.EndOfTurn)
+        ability.addEffect(new XanatharLookAtTopCardOfLibraryEffect()
                 .setText(" you may look at the top card of their library any time,"));
-        ability.addEffect(new PlayTheTopCardTargetEffect()
+        ability.addEffect(new XanatharPlayFromTopOfTargetLibraryEffect()
                 .setText(" you may play the top card of their library,"));
         ability.addEffect(new XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect()
                 .setText(" and you may spend mana as thought it were mana of any color to cast spells this way"));
@@ -67,7 +63,7 @@ public final class XanatharGuildKingpin extends CardImpl {
 
 class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public XanatharGuildKingpinRuleModifyingEffect() {
+    XanatharGuildKingpinRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
     }
 
@@ -78,11 +74,6 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
     @Override
     public XanatharGuildKingpinRuleModifyingEffect copy() {
         return new XanatharGuildKingpinRuleModifyingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -107,9 +98,100 @@ class XanatharGuildKingpinRuleModifyingEffect extends ContinuousRuleModifyingEff
     }
 }
 
+class XanatharLookAtTopCardOfLibraryEffect extends ContinuousEffectImpl {
+
+    XanatharLookAtTopCardOfLibraryEffect() {
+        super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+    }
+
+    private XanatharLookAtTopCardOfLibraryEffect(final XanatharLookAtTopCardOfLibraryEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public XanatharLookAtTopCardOfLibraryEffect copy() {
+        return new XanatharLookAtTopCardOfLibraryEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (game.inCheckPlayableState()) { // Ignored - see https://github.com/magefree/mage/issues/6994
+            return false;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || opponent == null) {
+            return false;
+        }
+        if (!canLookAtNextTopLibraryCard(game)) {
+            return false;
+        }
+        Card topCard = opponent.getLibrary().getFromTop(game);
+        if (topCard == null) {
+            return false;
+        }
+        controller.lookAtCards("Top card of " + opponent.getName() + "'s library", topCard, game);
+        return true;
+    }
+
+}
+
+class XanatharPlayFromTopOfTargetLibraryEffect extends AsThoughEffectImpl {
+
+    XanatharPlayFromTopOfTargetLibraryEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+    }
+
+    private XanatharPlayFromTopOfTargetLibraryEffect(final XanatharPlayFromTopOfTargetLibraryEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public XanatharPlayFromTopOfTargetLibraryEffect copy() {
+        return new XanatharPlayFromTopOfTargetLibraryEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        Card cardToCheck = game.getCard(objectId);
+        if (cardToCheck == null) {
+            return false;
+        }
+        if (affectedAbility instanceof SpellAbility) {
+            SpellAbility spell = (SpellAbility) affectedAbility;
+            cardToCheck = spell.getCharacteristics(game);
+            if (spell.getManaCosts().isEmpty()) {
+                return false;  // prevent casting cards without mana cost?
+            }
+        }
+        // only permits you to cast
+        if (!playerId.equals(source.getControllerId())) {
+            return false;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || opponent == null) {
+            return false;
+        }
+        // main card of spell/land must be on top of the opponent's library
+        Card topCard = opponent.getLibrary().getFromTop(game);
+        return topCard != null && topCard.getId().equals(cardToCheck.getMainCard().getId());
+    }
+}
+
 class XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect extends OneShotEffect {
 
-    public XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect() {
+    XanatharGuildKingpinSpendManaAsAnyColorOneShotEffect() {
         super(Outcome.Benefit);
     }
 
@@ -142,7 +224,7 @@ class SpendManaAsAnyColorToCastTopOfLibraryTargetEffect extends AsThoughEffectIm
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
     }
 
-    public SpendManaAsAnyColorToCastTopOfLibraryTargetEffect(final SpendManaAsAnyColorToCastTopOfLibraryTargetEffect effect) {
+    private SpendManaAsAnyColorToCastTopOfLibraryTargetEffect(final SpendManaAsAnyColorToCastTopOfLibraryTargetEffect effect) {
         super(effect);
     }
 

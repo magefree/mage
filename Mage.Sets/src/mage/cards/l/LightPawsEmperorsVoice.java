@@ -40,13 +40,13 @@ public final class LightPawsEmperorsVoice extends CardImpl {
     public LightPawsEmperorsVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever an Aura enters the battlefield under your control, if you cast it, you may search your library for an Aura card with mana value less than or equal to that Aura and with a different name than each Aura you control, put that card onto the battlefield attached to Light-Paws, Emperor's Voice, then shuffle.
+        // Whenever an Aura you control enters, if you cast it, you may search your library for an Aura card with mana value less than or equal to that Aura and with a different name than each Aura you control, put that card onto the battlefield attached to Light-Paws, Emperor's Voice, then shuffle.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new LightPawsEmperorsVoiceEffect(), filter));
     }
 

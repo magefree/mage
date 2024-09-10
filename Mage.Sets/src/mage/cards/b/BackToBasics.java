@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -23,7 +22,7 @@ public final class BackToBasics extends CardImpl {
 
 
         // Nonbasic lands don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, FilterLandPermanent.nonbasicLands())));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, FilterLandPermanent.nonbasicLands())));
     }
 
     private BackToBasics(final BackToBasics card) {

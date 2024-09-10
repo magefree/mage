@@ -49,7 +49,7 @@ public final class OracleEnVec extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new OracleEnVecEffect(), new TapSourceCost(), MyTurnCondition.instance);
         ability.addTarget(new TargetOpponent());
         ability.addHint(MyTurnHint.instance);
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
     }
 
     private OracleEnVec(final OracleEnVec card) {
@@ -71,7 +71,7 @@ class OracleEnVecEffect extends OneShotEffect {
                 + "destroy each of the chosen creatures that didn't attack this turn";
     }
 
-    OracleEnVecEffect(final OracleEnVecEffect effect) {
+    private OracleEnVecEffect(final OracleEnVecEffect effect) {
         super(effect);
     }
 
@@ -111,7 +111,7 @@ class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
         super(Duration.UntilEndOfYourNextTurn);
     }
 
-    OracleEnVecMustAttackRequirementEffect(final OracleEnVecMustAttackRequirementEffect effect) {
+    private OracleEnVecMustAttackRequirementEffect(final OracleEnVecMustAttackRequirementEffect effect) {
         super(effect);
     }
 
@@ -150,7 +150,7 @@ class OracleEnVecMustAttackRequirementEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
+        return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override
@@ -166,7 +166,7 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
         this.staticText = "{this} can't attack.";
     }
 
-    OracleEnVecCantAttackRestrictionEffect(final OracleEnVecCantAttackRestrictionEffect effect) {
+    private OracleEnVecCantAttackRestrictionEffect(final OracleEnVecCantAttackRestrictionEffect effect) {
         super(effect);
     }
 
@@ -199,7 +199,7 @@ class OracleEnVecCantAttackRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return game.getPhase().getType() == TurnPhase.END && this.isYourNextTurn(game);
+        return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 }
 
@@ -213,7 +213,7 @@ class OracleEnVecDelayedTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("At the beginning of that turn's end step, ");
     }
 
-    OracleEnVecDelayedTriggeredAbility(final OracleEnVecDelayedTriggeredAbility ability) {
+    private OracleEnVecDelayedTriggeredAbility(final OracleEnVecDelayedTriggeredAbility ability) {
         super(ability);
         this.startingTurn = ability.startingTurn;
     }
@@ -244,7 +244,7 @@ class OracleEnVecDestroyEffect extends OneShotEffect {
         this.staticText = "destroy each of the chosen creatures that didn't attack";
     }
 
-    OracleEnVecDestroyEffect(final OracleEnVecDestroyEffect effect) {
+    private OracleEnVecDestroyEffect(final OracleEnVecDestroyEffect effect) {
         super(effect);
         this.chosenCreatures = effect.chosenCreatures;
     }

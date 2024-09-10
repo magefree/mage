@@ -41,12 +41,12 @@ public final class SecondHarvest extends CardImpl {
 
 class SecondHarvestEffect extends OneShotEffect {
 
-    public SecondHarvestEffect() {
+    SecondHarvestEffect() {
         super(Outcome.Benefit);
         this.staticText = "For each token you control, create a token that's a copy of that permanent";
     }
 
-    public SecondHarvestEffect(final SecondHarvestEffect effect) {
+    private SecondHarvestEffect(final SecondHarvestEffect effect) {
         super(effect);
     }
 

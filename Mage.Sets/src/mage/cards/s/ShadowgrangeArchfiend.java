@@ -55,7 +55,7 @@ public final class ShadowgrangeArchfiend extends CardImpl {
 
 class ShadowgrangeArchfiendEffect extends OneShotEffect {
 
-    public ShadowgrangeArchfiendEffect() {
+    ShadowgrangeArchfiendEffect() {
         super(Outcome.Benefit);
         this.staticText = "each opponent sacrifices a creature with the greatest power among creatures they control. " +
                 "You gain life equal to the greatest power among creatures sacrificed this way";
@@ -69,7 +69,9 @@ class ShadowgrangeArchfiendEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {return false; }
+        if (controller == null) {
+            return false;
+        }
 
         List<Permanent> toSacrifice = new ArrayList<>();
 

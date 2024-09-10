@@ -43,12 +43,12 @@ public final class EchoCirclet extends CardImpl {
 
 class EchoCircletEffect extends ContinuousEffectImpl {
 
-    public EchoCircletEffect() {
+    EchoCircletEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Equipped creature can block an additional creature each combat";
     }
 
-    public EchoCircletEffect(final EchoCircletEffect effect) {
+    private EchoCircletEffect(final EchoCircletEffect effect) {
         super(effect);
     }
 

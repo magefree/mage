@@ -9,7 +9,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 import java.util.UUID;
@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class Necroduality extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.ZOMBIE);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.ZOMBIE, "a nontoken Zombie");
 
     static {
         filter.add(TokenPredicate.FALSE);
@@ -28,12 +28,10 @@ public final class Necroduality extends CardImpl {
     public Necroduality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
-        // Whenever a nontoken Zombie enters the battlefield under your control, create a token that's a copy of that creature.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect(true), filter, false,
-                SetTargetPointer.PERMANENT, "Whenever a nontoken Zombie enters the battlefield " +
-                "under your control, create a token that's a copy of that creature."
-        ));
+        // Whenever a nontoken Zombie you control enters, create a token that's a copy of that creature.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
+                new CreateTokenCopyTargetEffect(true).setText("create a token that's a copy of that creature"),
+                filter, false, SetTargetPointer.PERMANENT));
     }
 
     private Necroduality(final Necroduality card) {

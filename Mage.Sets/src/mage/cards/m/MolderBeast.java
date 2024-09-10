@@ -49,7 +49,7 @@ class MolderBeastTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), false);
     }
 
-    public MolderBeastTriggeredAbility(final MolderBeastTriggeredAbility ability) {
+    private MolderBeastTriggeredAbility(final MolderBeastTriggeredAbility ability) {
         super(ability);
     }
 

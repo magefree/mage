@@ -70,12 +70,12 @@ public final class MeanderingTowershell extends CardImpl {
 
 class MeanderingTowershellEffect extends OneShotEffect {
 
-    public MeanderingTowershellEffect() {
+    MeanderingTowershellEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile it. Return it to the battlefield under your control tapped and attacking at the beginning of the declare attackers step on your next turn";
     }
 
-    public MeanderingTowershellEffect(final MeanderingTowershellEffect effect) {
+    private MeanderingTowershellEffect(final MeanderingTowershellEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility extends
         super(new MeanderingTowershellReturnEffect());
     }
 
-    public AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility(final AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility ability) {
+    private AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility(final AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility ability) {
         super(ability);
         this.startingTurn = ability.startingTurn;
     }
@@ -144,11 +144,11 @@ class AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility extends
 
 class MeanderingTowershellReturnEffect extends OneShotEffect {
 
-    public MeanderingTowershellReturnEffect() {
+    MeanderingTowershellReturnEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 
-    public MeanderingTowershellReturnEffect(final MeanderingTowershellReturnEffect effect) {
+    private MeanderingTowershellReturnEffect(final MeanderingTowershellReturnEffect effect) {
         super(effect);
     }
 

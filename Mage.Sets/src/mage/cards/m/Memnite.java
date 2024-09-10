@@ -22,7 +22,7 @@ public final class Memnite extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public Memnite (final Memnite card) {
+    private Memnite(final Memnite card) {
         super(card);
     }
 

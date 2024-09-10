@@ -48,12 +48,12 @@ public final class IllicitAuction extends CardImpl {
 // effect is based on GainControlTargetEffect
 class IllicitAuctionEffect extends GainControlTargetEffect {
 
-    public IllicitAuctionEffect() {
+    IllicitAuctionEffect() {
         super(Duration.EndOfGame);
         this.staticText = "Each player may bid life for control of target creature. You start the bidding with a bid of 0. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and gains control of the creature.";
     }
 
-    public IllicitAuctionEffect(final IllicitAuctionEffect effect) {
+    private IllicitAuctionEffect(final IllicitAuctionEffect effect) {
         super(effect);
     }
 
@@ -64,6 +64,8 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (controller != null && targetCreature != null) {
@@ -108,7 +110,6 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
             winner.loseLife(highBid, game, source, false);
             super.controllingPlayerId = winner.getId();
         }
-        super.init(source, game);
     }
 }
 

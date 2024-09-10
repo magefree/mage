@@ -21,7 +21,7 @@ public final class ZhouYuChiefCommander extends CardImpl {
 
     public ZhouYuChiefCommander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

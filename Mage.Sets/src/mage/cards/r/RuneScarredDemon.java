@@ -29,11 +29,11 @@ public final class RuneScarredDemon extends CardImpl {
         this.toughness = new MageInt( 6);
         this.addAbility(FlyingAbility.getInstance());
         TargetCardInLibrary target = new TargetCardInLibrary();
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, false));
         this.addAbility(ability);
     }
 
-    public RuneScarredDemon (final RuneScarredDemon card) {
+    private RuneScarredDemon(final RuneScarredDemon card) {
         super(card);
     }
 

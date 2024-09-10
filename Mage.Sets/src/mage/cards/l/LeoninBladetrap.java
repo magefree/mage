@@ -36,7 +36,7 @@ public final class LeoninBladetrap extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // {2}, Sacrifice Leonin Bladetrap: Leonin Bladetrap deals 2 damage to each attacking creature without flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(2, filter), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(2, "it", filter), new GenericManaCost(2));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 

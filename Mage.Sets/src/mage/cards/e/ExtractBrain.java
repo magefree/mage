@@ -61,14 +61,14 @@ class ExtractBrainEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (controller == null || opponent == null || opponent.getHand().isEmpty() || xValue < 1) {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(
                 Math.min(opponent.getHand().size(), xValue), StaticFilters.FILTER_CARD
         );
-        opponent.choose(Outcome.Detriment, opponent.getHand(), target, game);
+        opponent.choose(Outcome.Detriment, opponent.getHand(), target, source, game);
         Cards cards = new CardsImpl(target.getTargets());
         controller.lookAtCards(source, null, cards, game);
         CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, StaticFilters.FILTER_CARD);

@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,8 +19,8 @@ public final class HailOfArrows extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
 
         // Hail of Arrows deals X damage divided as you choose among any number of target attacking creatures.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(ManacostVariableValue.REGULAR, StaticFilters.FILTER_ATTACKING_CREATURES));
+        this.getSpellAbility().addEffect(new DamageMultiEffect(GetXValue.instance));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(GetXValue.instance, StaticFilters.FILTER_ATTACKING_CREATURES));
     }
 
     private HailOfArrows(final HailOfArrows card) {

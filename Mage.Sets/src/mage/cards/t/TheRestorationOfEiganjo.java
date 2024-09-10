@@ -47,7 +47,7 @@ public final class TheRestorationOfEiganjo extends CardImpl {
         // I - Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, new SearchLibraryPutInHandEffect(
-                        new TargetCardInLibrary(filter), true, true
+                        new TargetCardInLibrary(filter), true
                 )
         );
 

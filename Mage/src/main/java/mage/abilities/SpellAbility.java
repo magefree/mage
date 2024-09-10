@@ -1,9 +1,8 @@
 package mage.abilities;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObject;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.keyword.FlashAbility;
@@ -17,6 +16,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -44,11 +44,12 @@ public class SpellAbility extends ActivatedAbilityImpl {
         this.cardName = cardName;
         this.spellAbilityType = spellAbilityType;
         this.spellAbilityCastMode = spellAbilityCastMode;
-        this.addManaCost(cost);
+        this.addCost(cost);
+        this.setIdentifier(MageIdentifier.Default);
         setSpellName();
     }
 
-    public SpellAbility(final SpellAbility ability) {
+    protected SpellAbility(final SpellAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
         this.spellAbilityCastMode = ability.spellAbilityCastMode;
@@ -79,10 +80,20 @@ public class SpellAbility extends ActivatedAbilityImpl {
      *                      can be casted that are affected by the CastAsInstant effect.
      *                      (i.e. Vizier of the Menagerie and issue #5816)
      */
-    public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
+
+    private static final Set<MageIdentifier> activationSetAllowAll = new HashSet();
+
+    static {
+        activationSetAllowAll.add(MageIdentifier.Default);
+    }
+
+    /**
+     * @return the set of cast method MageIdentifer that are allowed to be cast at this time (if MageIdentifier.Default is in it, there is no restriction)
+     */
+    public Set<MageIdentifier> spellCanBeActivatedNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
         if (object == null) {
-            return false;
+            return Collections.emptySet();
         }
 
         // forced to cast (can be part id or main id)
@@ -93,31 +104,63 @@ public class SpellAbility extends ActivatedAbilityImpl {
         }
         for (UUID idToCheck : idsToCheck) {
             if (game.getState().getValue("PlayFromNotOwnHandZone" + idToCheck) != null) {
-                return (Boolean) game.getState().getValue("PlayFromNotOwnHandZone" + idToCheck);  // card like Chandra, Torch of Defiance +1 loyal ability)
+                if ((Boolean) game.getState().getValue("PlayFromNotOwnHandZone" + idToCheck)) {
+                    return activationSetAllowAll;
+                } else {
+                    return Collections.emptySet();
+                }
             }
         }
 
-        return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
-                || timing == TimingRule.INSTANT
+        // OfferingAbility is doing side effects in its asThough computation.
+        // so we call it before the timing check.
+        // TODO: maybe Offering could be reworked with the MageIdentifier solution of linking
+        //       CAST_AS_INSTANT with alternative cast methods?
+        Set<ApprovingObject> asInstantApprovers = game.getContinuousEffects()
+                .asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game);
+
+        if (timing == TimingRule.INSTANT
                 || object.isInstant(game)
                 || object.hasAbility(FlashAbility.getInstance(), game)
-                || game.canPlaySorcery(playerId);
+                || game.canPlaySorcery(playerId)) {
+            return activationSetAllowAll;
+        }
+
+        // In case there is a need for as AsThoughEffectType.CAST_AS_INSTANT, we do collect the MageIdentifer of the approving objects
+        // to match later on with the real method to cast. When only non-Default MageIdentifier are used, only some of the alternative
+        // cast are possible to activate.
+        Set<MageIdentifier> setOfIdentifier = new HashSet<>();
+        setOfIdentifier.addAll(
+                asInstantApprovers
+                        .stream()
+                        .map(ApprovingObject::getApprovingAbility)
+                        .map(Ability::getIdentifier)
+                        .collect(Collectors.toSet())
+        );
+        return setOfIdentifier;
     }
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         // spells can be cast from non hand zones, so must use custom check
         // no super.canActivate() call
-
-        if (this.spellCanBeActivatedRegularlyNow(playerId, game)) {
+        Set<MageIdentifier> allowedIdentifiers = this.spellCanBeActivatedNow(playerId, game);
+        if (!allowedIdentifiers.isEmpty()) {
             if (spellAbilityType == SpellAbilityType.SPLIT
                     || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
                 return ActivationStatus.getFalse();
             }
 
             // play from not own hand
-            ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
-            if (approvingObject == null) {
+            Set<ApprovingObject> approvingObjects = new HashSet<>();
+            approvingObjects.addAll(game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game));
+            approvingObjects.addAll(game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, this, playerId, game));
+            if (approvingObjects.isEmpty() && getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
+                // allowed to cast adventures from non-hand?
+                approvingObjects = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
+            }
+
+            if (approvingObjects.isEmpty()) {
                 Card card = game.getCard(sourceId);
                 if (!(card != null && card.isOwnedBy(playerId))) {
                     return ActivationStatus.getFalse();
@@ -136,31 +179,51 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 }
             }
 
+            // TODO: this check may not be required, but removing it require more investigation.
+            //       As of now it is only a way for One with the Multiverse to work.
+            if (!approvingObjects.isEmpty()) {
+                Card card = game.getCard(sourceId);
+                Zone zone = game.getState().getZone(sourceId);
+                if (card != null && card.isOwnedBy(playerId) && Zone.HAND.match(zone)) {
+                    // Regular casting, to be an alternative to the AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE from hand (e.g. One with the Multiverse):
+                    approvingObjects.add(new ApprovingObject(this, game));
+                }
+            }
+
             // no mana restrict
             // Alternate spell abilities (Flashback, Overload) can't be cast with no mana to pay option
             if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
                 if (player != null
-                        && player.getCastSourceIdWithAlternateMana().contains(getSourceId())) {
+                        && player.getCastSourceIdWithAlternateMana()
+                        .getOrDefault(getSourceId(), Collections.emptySet())
+                        .contains(MageIdentifier.Default)
+                ) {
                     return ActivationStatus.getFalse();
                 }
             }
 
             // can pay all costs and choose targets
-            if (costs.canPay(this, this, playerId, game)) {
+            if (getCosts().canPay(this, this, playerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
                         // fused can be called from hand only, so not permitting object allows or other zones checks
                         // see https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/251926-snapcaster-mage-and-fuse
                         if (game.getState().getZone(splitCard.getId()) == Zone.HAND) {
-                            return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)
-                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId), null);
+                            return ActivationStatus.withoutApprovingObject(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)
+                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId));
                         }
                     }
                     return ActivationStatus.getFalse();
                 } else {
-                    return new ActivationStatus(canChooseTarget(game, playerId), approvingObject);
+                    if (canChooseTarget(game, playerId)) {
+                        if (approvingObjects == null || approvingObjects.isEmpty()) {
+                            return ActivationStatus.withoutApprovingObject(true);
+                        } else {
+                            return new ActivationStatus(approvingObjects);
+                        }
+                    }
                 }
             }
         }
@@ -178,12 +241,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
             return new StringBuilder(super.getRule(all)).append(name).toString();
         }
         return super.getRule(false);
-    }
-
-    public void clear() {
-        getTargets().clearChosen();
-        this.manaCosts.clearPaid();
-        this.costs.clearPaid();
     }
 
     public String getName() {
@@ -228,7 +285,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
     public int getConvertedXManaCost(Card card) {
         int xMultiplier = 0;
-        int amount = 0;
         if (card == null) {
             return 0;
         }
@@ -242,18 +298,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
         }
 
         // mana cost final X value
-        boolean hasNonManaXCost = false;
-        for (Cost cost : getCosts()) {
-            if (cost instanceof VariableCost) {
-                hasNonManaXCost = true;
-                amount = ((VariableCost) cost).getAmount();
-                break;
-            }
+        Map<String, Object> tagMap = this.getCostsTagMap();
+        if (tagMap == null) {
+            return 0;
         }
-
-        if (!hasNonManaXCost) {
-            amount = getManaCostsToPay().getX();
-        }
+        int amount = (int) tagMap.getOrDefault("X", 0);
         return amount * xMultiplier;
     }
 
@@ -286,28 +335,42 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     /**
-     * Returns a card object with the spell characteristics like calor, types,
+     * Returns combined card object with the spell characteristics like color, types,
      * subtypes etc. E.g. if you cast a Bestow card as enchantment, the
      * characteristics don't include the creature type.
+     * <p>
+     * Warning, it's not a real card - use it as a blueprint or characteristics searching
      *
-     * @param game
      * @return card object with the spell characteristics
      */
     public Card getCharacteristics(Game game) {
         Card spellCharacteristics = game.getSpell(this.getId());
         if (spellCharacteristics == null) {
+            // playable check (without put to stack)
             spellCharacteristics = game.getCard(this.getSourceId());
         }
+
         if (spellCharacteristics != null) {
             if (getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
-                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, game);
+                // transform characteristics (morph, transform, bestow, etc)
+                spellCharacteristics = getSpellAbilityCastMode().getTypeModifiedCardObjectCopy(spellCharacteristics, this, game);
             }
+            spellCharacteristics = spellCharacteristics.copy();
         }
         return spellCharacteristics;
     }
 
+    /**
+     * Given a spell cast event, returns the relevant SpellAbility involved
+     * Currently used to get the characteristics of the spell, specifically
+     * for "can't cast" effects using CAST_SPELL_LATE events
+     *
+     * @param event
+     * @param game
+     * @return SpellAbility of the event
+     */
     public static SpellAbility getSpellAbilityFromEvent(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.CAST_SPELL) {
+        if (event.getType() != GameEvent.EventType.CAST_SPELL && event.getType() != GameEvent.EventType.CAST_SPELL_LATE) {
             return null;
         }
 
@@ -323,6 +386,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     public void setId(UUID idToUse) {
-        this.id = idToUse;
+        this.id = idToUse; // TODO: research, why is it needed
     }
 }

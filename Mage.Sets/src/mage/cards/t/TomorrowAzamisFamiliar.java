@@ -20,7 +20,7 @@ public final class TomorrowAzamisFamiliar extends CardImpl {
 
     public TomorrowAzamisFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
@@ -47,18 +47,13 @@ class TomorrowAzamisFamiliarReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would draw a card, look at the top three cards of your library instead. Put one of those cards into your hand and the rest on the bottom of your library in any order";
     }
 
-    TomorrowAzamisFamiliarReplacementEffect(final TomorrowAzamisFamiliarReplacementEffect effect) {
+    private TomorrowAzamisFamiliarReplacementEffect(final TomorrowAzamisFamiliarReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public TomorrowAzamisFamiliarReplacementEffect copy() {
         return new TomorrowAzamisFamiliarReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

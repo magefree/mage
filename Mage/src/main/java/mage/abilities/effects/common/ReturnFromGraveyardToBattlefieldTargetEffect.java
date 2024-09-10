@@ -24,6 +24,8 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
     private final boolean tapped;
     private final boolean attacking;
 
+    // Targets are returned under the control of the effect controller (e.g. "under your control")
+
     public ReturnFromGraveyardToBattlefieldTargetEffect() {
         this(false);
     }
@@ -87,11 +89,13 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE
                     && target.getMinNumberOfTargets() == 0) {
                 sb.append("any number of ");
+            } else if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                sb.append(' ');
             } else if (target.getMaxNumberOfTargets() > 1) {
-                if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-                    sb.append("up to ");
-                }
-                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                sb.append(' ');
             }
             String targetName = mode.getTargets().get(0).getTargetName();
             if (!targetName.contains("target ")) {

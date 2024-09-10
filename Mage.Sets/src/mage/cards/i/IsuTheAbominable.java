@@ -7,14 +7,13 @@ import mage.abilities.costs.OrCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -39,8 +38,8 @@ public final class IsuTheAbominable extends CardImpl {
     public IsuTheAbominable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.YETI);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -49,11 +48,9 @@ public final class IsuTheAbominable extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may play snow lands and cast snow spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(
-                TargetController.YOU, filter, false
-        )));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
-        // Whenever another snow permanent enters the battlefield under your control, you may pay {G}, {W}, or {U}. If you do, put a +1/+1 counter on Isu the Abominable.
+        // Whenever another snow permanent you control enters, you may pay {G}, {W}, or {U}. If you do, put a +1/+1 counter on Isu the Abominable.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DoIfCostPaid(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),

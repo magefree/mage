@@ -55,7 +55,7 @@ class WatchdogFilter extends FilterAttackingCreature {
         super("creatures attacking you");
     }
 
-    public WatchdogFilter(final WatchdogFilter filter) {
+    private WatchdogFilter(final WatchdogFilter filter) {
         super(filter);
     }
 

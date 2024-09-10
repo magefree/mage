@@ -37,7 +37,7 @@ public final class Micromancer extends CardImpl {
 
         // When Micromancer enters the battlefield, you may search your library for an instant or sorcery card with mana value 1, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), true));
     }
 

@@ -25,7 +25,7 @@ public final class MelokuTheCloudedMirror extends CardImpl {
 
     public MelokuTheCloudedMirror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MOONFOLK);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -39,7 +39,7 @@ public final class MelokuTheCloudedMirror extends CardImpl {
                 new MelokuTheCloudedMirrorToken(), 1
         ), new GenericManaCost(1));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)
+                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND)
         ));
         this.addAbility(ability);
     }

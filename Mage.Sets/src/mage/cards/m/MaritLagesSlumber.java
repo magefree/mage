@@ -42,10 +42,10 @@ public final class MaritLagesSlumber extends CardImpl {
     public MaritLagesSlumber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.SNOW);
 
-        // Whenever Marit Lage's Slumber or another snow permanent enters the battlefield under your control, scry 1.
+        // Whenever Marit Lage's Slumber or another snow permanent you control enters, scry 1.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new ScryEffect(1, false), filter, false, true
         ));

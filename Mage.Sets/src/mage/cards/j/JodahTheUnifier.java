@@ -43,7 +43,7 @@ public final class JodahTheUnifier extends CardImpl {
     public JodahTheUnifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);
@@ -72,7 +72,7 @@ public final class JodahTheUnifier extends CardImpl {
 
 class JodahTheUnifierEffect extends OneShotEffect {
 
-    public JodahTheUnifierEffect() {
+    JodahTheUnifierEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "exile cards from the top of your library until you exile a legendary nonland card with lesser mana value. You may cast that card without paying its mana cost. Put the rest on the bottom of your library in a random order.";
     }
@@ -101,8 +101,8 @@ class JodahTheUnifierEffect extends OneShotEffect {
         for (Card card : controller.getLibrary().getCards(game)) {
             exiledCards.add(card);
             controller.moveCards(card, Zone.EXILED, source, game);
-            game.getState().processAction(game);
-            if (card.isLegendary() && !card.isLand(game) && card.getManaValue() < manaValue) {
+            game.processAction();
+            if (card.isLegendary(game) && !card.isLand(game) && card.getManaValue() < manaValue) {
                 CardUtil.castSpellWithAttributesForFree(controller, source, game, card);
                 break;
             }

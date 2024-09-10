@@ -26,7 +26,7 @@ public final class SarkhansTriumph extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Search your library for a Dragon creature card, reveal it, put it into your hand, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
     private SarkhansTriumph(final SarkhansTriumph card) {

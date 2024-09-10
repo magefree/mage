@@ -34,7 +34,7 @@ public final class BattalionFootSoldier extends CardImpl {
 
         // When Battalion Foot Soldier enters the battlefield, you may search your library for any number of cards named Battalion Foot Soldier, reveal them, put them into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), true, true
+                new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), true
         ), true));
     }
 

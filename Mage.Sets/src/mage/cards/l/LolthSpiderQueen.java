@@ -28,7 +28,7 @@ public final class LolthSpiderQueen extends CardImpl {
     public LolthSpiderQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LOLTH);
         this.setStartingLoyalty(4);
 

@@ -27,7 +27,7 @@ public final class AquitectsWill extends CardImpl {
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     public AquitectsWill(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{U}");
         this.subtype.add(SubType.MERFOLK);
 
         // Put a flood counter on target land.
@@ -72,7 +72,7 @@ class AquitectsWillEffect extends BecomesBasicLandTargetEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent land = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (land == null || land.getCounters(game).getCount(CounterType.FLOOD) < 1) {
             discard();
             return false;

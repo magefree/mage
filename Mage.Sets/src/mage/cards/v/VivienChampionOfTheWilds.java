@@ -37,7 +37,7 @@ public final class VivienChampionOfTheWilds extends CardImpl {
     public VivienChampionOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
         this.setStartingLoyalty(4);
 
@@ -101,7 +101,7 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         Cards cardsToLook = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         FilterCard filter = new FilterCard("card to exile face down");
         TargetCard target = new TargetCardInLibrary(filter);
-        if (!player.choose(outcome, cardsToLook, target, game)) {
+        if (!player.choose(outcome, cardsToLook, target, source, game)) {
             return false;
         }
 
@@ -173,7 +173,7 @@ class VivienChampionOfTheWildsCastFromExileEffect extends AsThoughEffectImpl {
     private final UUID authorizedPlayerId;
 
     VivienChampionOfTheWildsCastFromExileEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.authorizedPlayerId = authorizedPlayerId;
     }
 

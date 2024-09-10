@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -24,7 +23,7 @@ public final class FlamecastWheel extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {5}, {T}, Sacrifice Flamecast Wheel: Flamecast Wheel deals 3 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new GenericManaCost(5));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3, "it"), new GenericManaCost(5));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

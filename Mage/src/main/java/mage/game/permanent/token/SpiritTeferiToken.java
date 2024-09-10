@@ -9,7 +9,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 
 /**
- *
  * @author weirddan455
  */
 public class SpiritTeferiToken extends TokenImpl {
@@ -23,8 +22,6 @@ public class SpiritTeferiToken extends TokenImpl {
         toughness = new MageInt(2);
         addAbility(VigilanceAbility.getInstance());
         addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-
-        this.setExpansionSetCodeForImage("BRO");
     }
 
     private SpiritTeferiToken(final SpiritTeferiToken token) {

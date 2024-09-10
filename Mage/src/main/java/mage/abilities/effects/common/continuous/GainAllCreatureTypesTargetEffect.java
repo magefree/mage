@@ -21,7 +21,7 @@ public class GainAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
     }
 
-    public GainAllCreatureTypesTargetEffect(final GainAllCreatureTypesTargetEffect effect) {
+    protected GainAllCreatureTypesTargetEffect(final GainAllCreatureTypesTargetEffect effect) {
         super(effect);
     }
 
@@ -33,7 +33,7 @@ public class GainAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(permanentId);
             if (target != null) {
                 target.setIsAllCreatureTypes(game, true);
@@ -48,6 +48,6 @@ public class GainAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target " + mode.getTargets().get(0).getTargetName() + " gains all creature types " + duration.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") + " gains all creature types " + duration.toString();
     }
 }

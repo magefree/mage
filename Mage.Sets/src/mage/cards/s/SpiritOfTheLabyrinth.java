@@ -76,23 +76,18 @@ class SpiritOfTheLabyrinthWatcher extends Watcher {
 
 class SpiritOfTheLabyrinthEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SpiritOfTheLabyrinthEffect() {
+    SpiritOfTheLabyrinthEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
         staticText = "Each player can't draw more than one card each turn";
     }
 
-    public SpiritOfTheLabyrinthEffect(final SpiritOfTheLabyrinthEffect effect) {
+    private SpiritOfTheLabyrinthEffect(final SpiritOfTheLabyrinthEffect effect) {
         super(effect);
     }
 
     @Override
     public SpiritOfTheLabyrinthEffect copy() {
         return new SpiritOfTheLabyrinthEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

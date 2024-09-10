@@ -33,8 +33,8 @@ public final class BenalishSleeper extends CardImpl {
 
         // When Benalish Sleeper enters the battlefield, if it was kicked, each player sacrifices a creature.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new SacrificeAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        ), KickedCondition.ONCE, "When {this} enters the battlefield, " +
+                new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE)
+        ), KickedCondition.ONCE, "When {this} enters, " +
                 "if it was kicked, each player sacrifices a creature."));
     }
 

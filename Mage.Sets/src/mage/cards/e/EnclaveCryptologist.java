@@ -49,7 +49,7 @@ public final class EnclaveCryptologist extends LevelerCard {
         setMaxLevelCounters(3);
     }
 
-    public EnclaveCryptologist (final EnclaveCryptologist card) {
+    private EnclaveCryptologist(final EnclaveCryptologist card) {
         super(card);
     }
 

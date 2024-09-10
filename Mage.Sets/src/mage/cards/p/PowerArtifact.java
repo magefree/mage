@@ -1,8 +1,6 @@
 package mage.cards.p;
 
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -67,10 +65,10 @@ class PowerArtifactCostModificationEffect extends CostModificationEffectImpl {
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player controller = game.getPlayer(abilityToModify.getControllerId());
         if (controller != null) {
-            int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 2, 1);            
+            int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 2, 1);
             if (reduceMax <= 0) {
                 return true;
-            }            
+            }
             CardUtil.reduceCost(abilityToModify, reduceMax);
         }
         return true;
@@ -81,9 +79,7 @@ class PowerArtifactCostModificationEffect extends CostModificationEffectImpl {
         Permanent artifact = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
         if (artifact != null
                 && artifact.getAttachments().contains(source.getSourceId())) {
-            if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                    || (abilityToModify.getAbilityType() == AbilityType.MANA
-                    && (abilityToModify instanceof ActivatedAbility))) {
+            if (abilityToModify.isActivatedAbility()){
                 return true;
             }
         }

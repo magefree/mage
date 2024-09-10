@@ -20,7 +20,7 @@ public final class RuhanOfTheFomori extends CardImpl {
 
     public RuhanOfTheFomori(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WARRIOR);
 

@@ -31,17 +31,17 @@ public class TargetCardInGraveyard extends TargetCard {
     public TargetCardInGraveyard(int minNumTargets, int maxNumTargets) {
         this(minNumTargets, maxNumTargets, defaultFilter, false);
     }
-    
+
     public TargetCardInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
         this(minNumTargets, maxNumTargets, filter, false);
     }
 
     public TargetCardInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-        this.setNotTarget(notTarget);
+        this.withNotTarget(notTarget);
     }
 
-    public TargetCardInGraveyard(final TargetCardInGraveyard target) {
+    protected TargetCardInGraveyard(final TargetCardInGraveyard target) {
         super(target);
     }
 

@@ -51,7 +51,7 @@ class DarksteelReactorStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new WinGameSourceControllerEffect());
     }
 
-    public DarksteelReactorStateTriggeredAbility(final DarksteelReactorStateTriggeredAbility ability) {
+    private DarksteelReactorStateTriggeredAbility(final DarksteelReactorStateTriggeredAbility ability) {
         super(ability);
     }
 

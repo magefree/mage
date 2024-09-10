@@ -19,6 +19,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,10 +91,10 @@ class VedalkenEngineerEffect extends ManaEffect {
         super();
         this.amount = amount;
         this.manaBuilder = manaBuilder;
-        staticText = "Add " + amount + " mana of any one color. " + manaBuilder.getRule();
+        staticText = "Add " + CardUtil.numberToText(amount) + " mana of any one color. " + manaBuilder.getRule();
     }
 
-    public VedalkenEngineerEffect(final VedalkenEngineerEffect effect) {
+    private VedalkenEngineerEffect(final VedalkenEngineerEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.manaBuilder = effect.manaBuilder;

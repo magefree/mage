@@ -42,12 +42,12 @@ public final class HealTheScars extends CardImpl {
 
 class HealTheScarsEffect extends OneShotEffect {
 
-    public HealTheScarsEffect() {
+    HealTheScarsEffect() {
         super(Outcome.GainLife);
         staticText = "You gain life equal to that creature's toughness";
     }
 
-    public HealTheScarsEffect(final HealTheScarsEffect effect) {
+    private HealTheScarsEffect(final HealTheScarsEffect effect) {
         super(effect);
     }
 

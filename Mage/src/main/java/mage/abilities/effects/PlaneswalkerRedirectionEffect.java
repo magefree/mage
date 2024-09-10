@@ -3,6 +3,7 @@ package mage.abilities.effects;
 
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -28,7 +29,7 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
         super(Duration.EndOfGame);
     }
 
-    public PlaneswalkerRedirectionEffect(final PlaneswalkerRedirectionEffect effect) {
+    protected PlaneswalkerRedirectionEffect(final PlaneswalkerRedirectionEffect effect) {
         super(effect);
     }
 
@@ -79,7 +80,7 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
         if (source != null) {
             return source.getControllerId();
         }
-        Permanent permanent = game.getBattlefield().getPermanent(sourceId);
+        Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
             return permanent.getControllerId();
         }

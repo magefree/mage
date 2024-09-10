@@ -34,7 +34,7 @@ public final class Crash extends CardImpl {
 
 
         // You may sacrifice a Mountain rather than pay Crash's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, alternativeCostFilter, true))));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(alternativeCostFilter)));
 
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

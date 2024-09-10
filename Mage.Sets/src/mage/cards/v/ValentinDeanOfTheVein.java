@@ -14,7 +14,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -29,18 +29,19 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ValentinDeanOfTheVein extends ModalDoubleFacesCard {
+public final class ValentinDeanOfTheVein extends ModalDoubleFacedCard {
 
     public ValentinDeanOfTheVein(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.VAMPIRE, SubType.WARLOCK}, "{B}",
-                "Lisette, Dean of the Root", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.DRUID}, "{2}{G}{G}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.VAMPIRE, SubType.WARLOCK}, "{B}",
+                "Lisette, Dean of the Root",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.DRUID}, "{2}{G}{G}"
         );
 
         // 1.
         // Valentin, Dean of the Vein
         // Legendary Creature - Vampire Warlock
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(1, 1);
 
         // Menace
@@ -55,7 +56,6 @@ public final class ValentinDeanOfTheVein extends ModalDoubleFacesCard {
         // 2.
         // Lisette, Dean of the Root
         // Legendary Creature - Human Druid
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setPT(4, 4);
 
         // Whenever you gain life, you may pay {1}. If you do, put a +1/+1 counter on each creature you control and those creatures gain trample until end of turn.

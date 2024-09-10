@@ -60,7 +60,7 @@ class MirrorGolemImprintEffect extends OneShotEffect {
         this.staticText = "you may exile target card from a graveyard";
     }
 
-    MirrorGolemImprintEffect(final MirrorGolemImprintEffect effect) {
+    private MirrorGolemImprintEffect(final MirrorGolemImprintEffect effect) {
         super(effect);
     }
 
@@ -89,13 +89,13 @@ class MirrorGolemImprintEffect extends OneShotEffect {
 
 class MirrorGolemEffect extends ContinuousEffectImpl {
 
-    public MirrorGolemEffect() {
+    MirrorGolemEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.addDependedToType(DependencyType.AddingAbility);
         staticText = "{this} has protection from each of the exiled card's card types.";
     }
 
-    public MirrorGolemEffect(final MirrorGolemEffect effect) {
+    private MirrorGolemEffect(final MirrorGolemEffect effect) {
         super(effect);
     }
 
@@ -116,8 +116,8 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
                         FilterCard filterCard;
                         if (cardType.equals(CardType.SORCERY)) {
                             filterCard = new FilterCard("sorceries");
-                        } else if (cardType.equals(CardType.TRIBAL)) {
-                            filterCard = new FilterCard("tribal");
+                        } else if (cardType.equals(CardType.KINDRED)) {
+                            filterCard = new FilterCard("kindred");
                         } else {
                             filterCard = new FilterCard(cardType.toString() + "s");
                         }

@@ -36,7 +36,7 @@ public final class SpontaneousMutation extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
 
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);

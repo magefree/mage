@@ -5,7 +5,6 @@ package mage.filter.common;
 import mage.filter.predicate.permanent.AttackingPredicate;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterAttackingCreature extends FilterCreaturePermanent {
@@ -19,7 +18,7 @@ public class FilterAttackingCreature extends FilterCreaturePermanent {
         this.add(AttackingPredicate.instance);
     }
 
-    public FilterAttackingCreature(final FilterAttackingCreature filter) {
+    protected FilterAttackingCreature(final FilterAttackingCreature filter) {
         super(filter);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -14,10 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.Target;
 import mage.target.TargetSpell;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -25,11 +23,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class VoidmageProdigy extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Wizard");
-
-    static {
-        filter.add(SubType.WIZARD.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.WIZARD, "a Wizard");
 
     public VoidmageProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
@@ -41,13 +35,13 @@ public final class VoidmageProdigy extends CardImpl {
 
         // {U}{U}, Sacrifice a Wizard: Counter target spell.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}{U}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        ability.addCost(new SacrificeTargetCost(filter));
         Target target = new TargetSpell();
         ability.addTarget(target);
         this.addAbility(ability);
 
         // Morph {U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{U}")));
     }
 
     private VoidmageProdigy(final VoidmageProdigy card) {

@@ -2,12 +2,12 @@ package org.mage.test.serverside.deck;
 
 import mage.deck.Commander;
 import org.junit.Test;
-import org.mage.test.serverside.base.MageTestBase;
+import org.mage.test.serverside.base.MageTestPlayerBase;
 
 /**
  * @author TheElk801
  */
-public class CommanderDeckValidationTest extends MageTestBase {
+public class CommanderDeckValidationTest extends MageTestPlayerBase {
 
     private static final String piper = "The Prismatic Piper";
 
@@ -21,6 +21,17 @@ public class CommanderDeckValidationTest extends MageTestBase {
         deckTester.addSideboard("Grist, the Hunger Tide", 1);
 
         deckTester.validate("Grist should be legal as a commander");
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testTwoInvalidCommanders() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Wastes", 99);
+
+        deckTester.addSideboard("Tiana, Ship's Caretaker", 1);
+        deckTester.addSideboard("Mazzy, Truesword Paladin", 1);
+
+        deckTester.validate("These commanders don't have partner");
     }
 
     @Test
@@ -70,5 +81,29 @@ public class CommanderDeckValidationTest extends MageTestBase {
         deckTester.addSideboard("Thrasios, Triton Hero", 1);
 
         deckTester.validate();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testBackgrounds() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Forest", 98);
+
+        deckTester.addSideboard("Thrasios, Triton Hero", 1);
+        deckTester.addSideboard("Haunted One", 1);
+
+        deckTester.validate(
+                "Commanders without the 'Choose a Background' ability should not be able to have a background as an additional commander");
+    }
+
+    @Test()
+    public void testBackgrounds2() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Plains", 98);
+
+        deckTester.addSideboard("Abdel Adrian, Gorion's Ward", 1);
+        deckTester.addSideboard("Haunted One", 1);
+
+        deckTester.validate(
+                "Commanders with the 'Choose a Background' ability should be able to have a background as an additional commander");
     }
 }

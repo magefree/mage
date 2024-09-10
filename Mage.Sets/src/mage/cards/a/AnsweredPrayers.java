@@ -28,7 +28,7 @@ public final class AnsweredPrayers extends CardImpl {
     public AnsweredPrayers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
 
-        // Whenever a creature enters the battlefield under your control, you gain 1 life. If Answered Prayers isn't a creature, it becomes a 3/3 Angel creature with flying in addition to its other types until end of turn.
+        // Whenever a creature you control enters, you gain 1 life. If Answered Prayers isn't a creature, it becomes a 3/3 Angel creature with flying in addition to its other types until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AnsweredPrayersEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE
         ));
@@ -72,7 +72,7 @@ class AnsweredPrayersEffect extends OneShotEffect {
             return true;
         }
         game.addEffect(new BecomesCreatureSourceEffect(
-                new AnsweredPrayersToken(), "enchantment", Duration.EndOfTurn
+                new AnsweredPrayersToken(), CardType.ENCHANTMENT, Duration.EndOfTurn
         ), source);
         return true;
     }

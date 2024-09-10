@@ -32,7 +32,7 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} deals damage to a player" + (orPlaneswalker ? " or planeswalker" : "") + ", ");
     }
 
-    public DealsDamageToAPlayerTriggeredAbility(final DealsDamageToAPlayerTriggeredAbility ability) {
+    protected DealsDamageToAPlayerTriggeredAbility(final DealsDamageToAPlayerTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.orPlaneswalker = ability.orPlaneswalker;

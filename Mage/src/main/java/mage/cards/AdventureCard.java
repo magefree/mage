@@ -9,6 +9,7 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +27,11 @@ public abstract class AdventureCard extends CardImpl {
         this.spellCard = new AdventureCardSpellImpl(ownerId, setInfo, adventureName, typesSpell, costsSpell, this);
     }
 
-    public AdventureCard(AdventureCard card) {
+    public void finalizeAdventure() {
+        spellCard.finalizeAdventure();
+    }
+
+    protected AdventureCard(final AdventureCard card) {
         super(card);
         this.spellCard = card.getSpellCard().copy();
         this.spellCard.setParentCard(this);
@@ -51,7 +56,8 @@ public abstract class AdventureCard extends CardImpl {
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            game.getState().setZone(getSpellCard().getId(), toZone);
+            Zone currentZone = game.getState().getZone(getId());
+            game.getState().setZone(getSpellCard().getId(), currentZone);
             return true;
         }
         return false;
@@ -123,6 +129,12 @@ public abstract class AdventureCard extends CardImpl {
     public Abilities<Ability> getSharedAbilities(Game game) {
         // abilities without spellcard
         return super.getAbilities(game);
+    }
+
+    public List<String> getSharedRules(Game game) {
+        // rules without spellcard
+        Abilities<Ability> sourceAbilities = this.getSharedAbilities(game);
+        return CardUtil.getCardRulesWithAdditionalInfo(game, this, sourceAbilities, sourceAbilities);
     }
 
     @Override

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.common.delayed;
 
 import mage.abilities.DelayedTriggeredAbility;
@@ -43,4 +39,3 @@ public class AtTheBeginOfYourNextDrawStepDelayedTriggeredAbility extends Delayed
         return event.getPlayerId().equals(this.controllerId);
     }
 }
-

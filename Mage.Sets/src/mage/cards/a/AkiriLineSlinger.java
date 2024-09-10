@@ -24,7 +24,7 @@ public final class AkiriLineSlinger extends CardImpl {
     public AkiriLineSlinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.SOLDIER);
         this.subtype.add(SubType.ALLY);

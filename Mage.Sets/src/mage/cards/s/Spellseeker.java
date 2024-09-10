@@ -36,7 +36,7 @@ public final class Spellseeker extends CardImpl {
 
         // When Spellseeker enters the battlefield, you may search your library for an instant or sorcery card with converted mana cost 2 or less, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
                 true
         ));
     }

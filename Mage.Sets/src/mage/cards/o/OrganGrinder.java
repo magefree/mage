@@ -31,7 +31,7 @@ public final class OrganGrinder extends CardImpl {
 
         // {tap}, Exile three cards from your graveyard: Target player loses 3 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(3), new TapSourceCost());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, new FilterCard("three cards from your graveyard"))));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, new FilterCard("cards from your graveyard"))));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

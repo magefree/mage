@@ -37,11 +37,12 @@ public class ExileFromHandCost extends CostImpl {
      */
     public ExileFromHandCost(TargetCardInHand target, boolean setXFromCMC) {
         this.addTarget(target);
-        this.text = "exile " + target.getTargetName();
+        this.text = "exile " + target.getDescription() +
+                (target.getDescription().contains("from your hand") ? "" : " from your hand");
         this.setXFromCMC = setXFromCMC;
     }
 
-    public ExileFromHandCost(final ExileFromHandCost cost) {
+    protected ExileFromHandCost(final ExileFromHandCost cost) {
         super(cost);
         for (Card card : cost.cards) {
             this.cards.add(card.copy());
@@ -51,10 +52,10 @@ public class ExileFromHandCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
+        if (this.getTargets().choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
             Player player = game.getPlayer(controllerId);
             int cmc = 0;
-            for (UUID targetId : targets.get(0).getTargets()) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card == null) {
                     return false;
@@ -63,7 +64,7 @@ public class ExileFromHandCost extends CostImpl {
                 this.cards.add(card);
             }
             Cards cardsToExile = new CardsImpl();
-            cardsToExile.addAll(cards);
+            cardsToExile.addAllCards(cards);
             player.moveCards(cardsToExile, Zone.EXILED, ability, game);
             paid = true;
             if (setXFromCMC) {
@@ -73,7 +74,7 @@ public class ExileFromHandCost extends CostImpl {
                 // TODO: wtf, look at setXFromCMC usage -- it used in cards with alternative costs, not additional... need to fix?
                 vmc.setAmount(cmc, cmc, false);
                 vmc.setPaid();
-                ability.getManaCostsToPay().add(vmc);
+                ability.addManaCostsToPay(vmc);
             }
         }
         return paid;
@@ -81,7 +82,7 @@ public class ExileFromHandCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

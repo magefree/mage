@@ -31,7 +31,7 @@ public final class SliverOverlord extends CardImpl {
 
     public SliverOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SLIVER);
         this.subtype.add(SubType.MUTANT);
 

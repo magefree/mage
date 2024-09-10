@@ -35,7 +35,7 @@ public final class VaevictisAsmadiTheDire extends CardImpl {
     public VaevictisAsmadiTheDire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
@@ -60,11 +60,12 @@ public final class VaevictisAsmadiTheDire extends CardImpl {
 
 class VaevictisAsmadiTheDireTriggeredAbility extends TriggeredAbilityImpl {
 
-    public VaevictisAsmadiTheDireTriggeredAbility() {
+    VaevictisAsmadiTheDireTriggeredAbility() {
         super(Zone.BATTLEFIELD, new VaevictisAsmadiTheDireEffect(), false);
+        setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public VaevictisAsmadiTheDireTriggeredAbility(final VaevictisAsmadiTheDireTriggeredAbility ability) {
+    private VaevictisAsmadiTheDireTriggeredAbility(final VaevictisAsmadiTheDireTriggeredAbility ability) {
         super(ability);
     }
 
@@ -97,19 +98,11 @@ class VaevictisAsmadiTheDireTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever {this} attacks, for each player, "
-                + "choose target permanent that player controls. "
-                + "Those players sacrifice those permanents. "
-                + "Each player who sacrificed a permanent this way reveals the top card of their library, "
-                + "then puts it onto the battlefield if it's a permanent card";
-    }
 }
 
 class VaevictisAsmadiTheDireEffect extends OneShotEffect {
 
-    public VaevictisAsmadiTheDireEffect() {
+    VaevictisAsmadiTheDireEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "for each player, choose target permanent that player controls. "
                 + "Those players sacrifice those permanents. "
@@ -117,7 +110,7 @@ class VaevictisAsmadiTheDireEffect extends OneShotEffect {
                 + "then puts it onto the battlefield if it's a permanent card";
     }
 
-    public VaevictisAsmadiTheDireEffect(final VaevictisAsmadiTheDireEffect effect) {
+    private VaevictisAsmadiTheDireEffect(final VaevictisAsmadiTheDireEffect effect) {
         super(effect);
     }
 

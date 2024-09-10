@@ -11,7 +11,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public final class BuildersBane extends CardImpl {
         // Destroy X target artifacts. Builder's Bane deals damage to each player equal to the number of artifacts they controlled put into a graveyard this way.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addEffect(new BuildersBaneEffect());
-        this.getSpellAbility().setTargetAdjuster(BuildersBaneAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private BuildersBane(final BuildersBane card) {
@@ -41,25 +41,14 @@ public final class BuildersBane extends CardImpl {
     }
 }
 
-enum BuildersBaneAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        ability.addTarget(new TargetArtifactPermanent(xValue, xValue));
-    }
-}
-
 class BuildersBaneEffect extends OneShotEffect {
 
-    public BuildersBaneEffect() {
+    BuildersBaneEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy X target artifacts. {this} deals damage to each player equal to the number of artifacts they controlled that were put into a graveyard this way";
     }
 
-    public BuildersBaneEffect(final BuildersBaneEffect effect) {
+    private BuildersBaneEffect(final BuildersBaneEffect effect) {
         super(effect);
     }
 
@@ -73,11 +62,11 @@ class BuildersBaneEffect extends OneShotEffect {
         Map<UUID, Integer> destroyedArtifactPerPlayer = new HashMap<>();
 
         // Destroy X target artifacts.
-        for (UUID targetID : this.targetPointer.getTargets(game, source)) {
+        for (UUID targetID : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
                 if (permanent.destroy(source, game, false)) {
-                    game.getState().processAction(game);
+                    game.processAction();
                     if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
                             && game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD) {
                         // A replacement effect has moved the card to another zone as grvayard

@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -23,18 +24,15 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 502.46. Convoke
@@ -70,6 +68,7 @@ import java.util.UUID;
  */
 public class ConvokeAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
+    public static final String convokingCreaturesKey = "convokingCreatures";
     private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent();
 
     static {
@@ -82,7 +81,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
         this.addHint(new ValueHint("Untapped creatures you control", new PermanentsOnBattlefieldCount(filterUntapped)));
     }
 
-    public ConvokeAbility(final ConvokeAbility ability) {
+    protected ConvokeAbility(final ConvokeAbility ability) {
         super(ability);
     }
 
@@ -133,7 +132,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
                     filter.add(Predicates.or(colorPredicates));
                 }
                 Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
-                target.setTargetName("tap creature card as convoke's pay");
+                target.withTargetName("creature to tap for convoke");
                 specialAction.addTarget(target);
                 if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);
@@ -178,7 +177,7 @@ class ConvokeSpecialAction extends SpecialAction {
         this.addEffect(new ConvokeEffect(unpaid));
     }
 
-    public ConvokeSpecialAction(final ConvokeSpecialAction ability) {
+    protected ConvokeSpecialAction(final ConvokeSpecialAction ability) {
         super(ability);
     }
 
@@ -198,7 +197,7 @@ class ConvokeEffect extends OneShotEffect {
         this.staticText = "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)";
     }
 
-    public ConvokeEffect(final ConvokeEffect effect) {
+    protected ConvokeEffect(final ConvokeEffect effect) {
         super(effect);
         this.unpaid = effect.unpaid;
     }
@@ -226,6 +225,7 @@ class ConvokeEffect extends OneShotEffect {
                         if (chooseManaType.getChoices().size() > 1) {
                             chooseManaType.getChoices().add("Colorless");
                             chooseManaType.setMessage("Choose mana color to reduce from " + perm.getName());
+                            // TODO: must be AI optimization to pay most rare mana color first
                             if (!controller.choose(Outcome.Benefit, chooseManaType, game)) {
                                 return false;
                             }
@@ -262,7 +262,9 @@ class ConvokeEffect extends OneShotEffect {
                         manaPool.unlockManaType(ManaType.COLORLESS);
                         manaName = "colorless";
                     }
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CONVOKED, perm.getId(), source, source.getControllerId()));
+                    HashSet<MageObjectReference> set = CardUtil.getSourceCostsTag(game, spell.getSpellAbility(), ConvokeAbility.convokingCreaturesKey, new HashSet<>());
+                    set.add(new MageObjectReference(perm, game));
+                    spell.getSpellAbility().setCostsTag(ConvokeAbility.convokingCreaturesKey, set);
                     game.informPlayers("Convoke: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
 
                     // can't use mana abilities after that (convoke cost must be payed after mana abilities only)

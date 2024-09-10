@@ -28,11 +28,11 @@ public final class Karakas extends CardImpl {
 
     public Karakas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
-        // {tap}: Add {W}.
+        // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
-        // {tap}: Return target legendary creature to its owner's hand.
+        // {T}: Return target legendary creature to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

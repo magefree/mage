@@ -10,6 +10,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
+import mage.server.game.GameController;
 import mage.server.game.GameSessionPlayer;
 import mage.server.managers.ManagerFactory;
 import mage.server.rating.GlickoRating;
@@ -19,7 +20,7 @@ import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentController;
 import mage.server.tournament.TournamentSession;
 import mage.server.util.ServerMessagesUtil;
-import mage.server.util.SystemUtil;
+import mage.utils.SystemUtil;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
 
@@ -29,17 +30,19 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class User {
 
     private static final Logger logger = Logger.getLogger(User.class);
 
+    public static final String ADMIN_NAME = "Admin"; // if you change here then change in SessionImpl too
+
     public enum UserState {
         Created, // Used if user is created an not connected to the session
         Connected, // Used if user is correctly connected
         Disconnected, // Used if the user lost connection
-        Offline // set if the user was disconnected and expired or regularly left XMage. Removed is the user later after some time
+        Offline // Used if user was disconnected too long, offline users removes from users list by service routines
     }
 
     private final ManagerFactory managerFactory;
@@ -56,6 +59,7 @@ public class User {
     private final Map<UUID, Deck> sideboarding;
     private final List<UUID> watchedGames;
     private String sessionId;
+    private String restoreSessionId; // keep sessionId for possible restore on reconnect
     private String pingInfo = "";
     private Date lastActivity;
     private UserState userState;
@@ -118,6 +122,10 @@ public class User {
         return sessionId;
     }
 
+    public String getRestoreSessionId() {
+        return restoreSessionId;
+    }
+
     public Date getChatLockedUntil() {
         return chatLockedUntil;
     }
@@ -132,19 +140,10 @@ public class User {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
-        if (sessionId.isEmpty()) {
-            setUserState(UserState.Disconnected);
-            lostConnection();
-            logger.trace("USER - lost connection: " + userName + " id: " + userId);
+    }
 
-        } else if (userState == UserState.Created) {
-            setUserState(UserState.Connected);
-            logger.trace("USER - created: " + userName + " id: " + userId);
-        } else {
-            setUserState(UserState.Connected);
-            reconnect();
-            logger.trace("USER - reconnected: " + userName + " id: " + userId);
-        }
+    public void setRestoreSessionId(String restoreSessionId) {
+        this.restoreSessionId = restoreSessionId;
     }
 
     public void setClientVersion(String clientVersion) {
@@ -178,14 +177,44 @@ public class User {
         updateAuthorizedUser();
     }
 
-    public void lostConnection() {
-        // Because watched games don't get restored after reconnection call stop watching
+    /**
+     * Shared code for any user disconnection
+     * <p>
+     * Full user instance remove will be done by reconnect or by server health check
+     *
+     * @param reason
+     */
+    public void onLostConnection(DisconnectReason reason) {
+        // stats for bad connections only
+        if (reason != DisconnectReason.DisconnectedByUser
+                && reason != DisconnectReason.DisconnectedByUserButKeepTables) {
+            ServerMessagesUtil.instance.incLostConnection();
+        }
+
+        // chats restored on reconnection from a scrach by game panels - so don't keep it
+        managerFactory.chatManager().removeUser(userId, reason);
+
+        // watched games don't get restored after reconnection call - so don't keep it
         for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext(); ) {
             UUID gameId = iterator.next();
             managerFactory.gameManager().stopWatching(gameId, userId);
             iterator.remove();
         }
-        ServerMessagesUtil.instance.incLostConnection();
+
+        // game tables
+        if (reason.isRemoveUserTables) {
+            // full disconnection
+            removeUserFromAllTables(reason); // it's duplicates some chat/watch code inside, but it ok
+            setUserState(UserState.Offline);
+            managerFactory.userManager().removeUser(getId());
+        } else {
+            setUserState(UserState.Disconnected);
+        }
+
+        // kill active session
+        String oldSessionId = sessionId;
+        setSessionId("");
+        managerFactory.sessionManager().disconnect(oldSessionId, reason, false);
     }
 
     public boolean isConnected() {
@@ -234,56 +263,92 @@ public class User {
         }
     }
 
-    public void ccJoinedTable(final UUID roomId, final UUID tableId, boolean isTournament) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.JOINED_TABLE, tableId, new TableClientMessage(roomId, tableId, isTournament)));
+    public void ccJoinedTable(final UUID roomId, final UUID currentTableId, final UUID parentTableId, boolean isTournament) {
+        fireCallback(new ClientCallback(
+                ClientCallbackMethod.JOINED_TABLE,
+                currentTableId,
+                new TableClientMessage().withRoom(roomId).withTable(currentTableId, parentTableId).withFlag(isTournament)
+        ));
     }
 
-    public void ccGameStarted(final UUID gameId, final UUID playerId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.START_GAME, gameId, new TableClientMessage(gameId, playerId)));
+    public void ccGameStarted(final UUID currentTableId, final UUID parentTableId, final UUID gameId, final UUID playerId) {
+        fireCallback(new ClientCallback(
+                ClientCallbackMethod.START_GAME,
+                gameId,
+                new TableClientMessage().withTable(currentTableId, parentTableId).withGame(gameId).withPlayer(playerId)
+        ));
     }
 
-    public void ccDraftStarted(final UUID draftId, final UUID playerId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.START_DRAFT, draftId, new TableClientMessage(draftId, playerId)));
+    public void ccDraftStarted(final UUID tableId, final UUID draftId, final UUID playerId) {
+        fireCallback(new ClientCallback(
+                ClientCallbackMethod.START_DRAFT,
+                draftId,
+                new TableClientMessage().withTable(tableId, null).withPlayer(playerId)
+        ));
     }
 
-    public void ccTournamentStarted(final UUID tournamentId, final UUID playerId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.START_TOURNAMENT, tournamentId, new TableClientMessage(tournamentId, playerId)));
+    public void ccTournamentStarted(final UUID tableID, final UUID tournamentId, final UUID playerId) {
+        fireCallback(new ClientCallback(
+                ClientCallbackMethod.START_TOURNAMENT,
+                tournamentId,
+                new TableClientMessage().withTable(tableID, null).withPlayer(playerId)
+        ));
     }
 
-    public void ccSideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.SIDEBOARD, tableId, new TableClientMessage(deck, tableId, time, limited)));
-        sideboarding.put(tableId, deck);
+    public void ccSideboard(final Deck deck, final UUID currentTableId, final UUID parentTableId, final int time, boolean limited) {
+        fireCallback(new ClientCallback(
+                ClientCallbackMethod.SIDEBOARD,
+                currentTableId,
+                new TableClientMessage().withDeck(deck).withTable(currentTableId, parentTableId).withTime(time).withFlag(limited)
+        ));
+        sideboarding.put(currentTableId, deck);
     }
 
-    public void ccViewLimitedDeck(final Deck deck, final UUID tableId, final int time, boolean limited) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.VIEW_LIMITED_DECK, tableId, new TableClientMessage(deck, tableId, time, limited)));
+    public void ccViewLimitedDeck(final Deck deck, final UUID currentTableId, final UUID parentTableId, final int time, boolean limited) {
+        fireCallback(new ClientCallback(
+                ClientCallbackMethod.VIEW_LIMITED_DECK,
+                currentTableId,
+                new TableClientMessage().withDeck(deck).withTable(currentTableId, parentTableId).withTime(time).withFlag(limited)
+        ));
     }
 
     public void ccViewSideboard(final UUID tableId, final UUID gameId, final UUID targetPlayerId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.VIEW_SIDEBOARD, tableId, new TableClientMessage(gameId, targetPlayerId)));
+        fireCallback(new ClientCallback(
+                ClientCallbackMethod.VIEW_SIDEBOARD,
+                tableId,
+                new TableClientMessage().withGame(gameId).withPlayer(targetPlayerId)
+        ));
     }
 
-    public void ccConstruct(final Deck deck, final UUID tableId, final int time) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.CONSTRUCT, tableId, new TableClientMessage(deck, tableId, time)));
+    public void ccConstruct(final Deck deck, final UUID currentTableId, final UUID parentTableId, final int time) {
+        fireCallback(new ClientCallback(
+                ClientCallbackMethod.CONSTRUCT,
+                currentTableId,
+                new TableClientMessage().withDeck(deck).withTable(currentTableId, parentTableId).withTime(time)
+        ));
     }
 
-    public void ccShowTournament(final UUID tournamentId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_TOURNAMENT, tournamentId));
+    public void ccShowTournament(final UUID tableId, final UUID tournamentId) {
+        fireCallback(new ClientCallback(
+                ClientCallbackMethod.SHOW_TOURNAMENT,
+                tournamentId,
+                new TableClientMessage().withTable(tableId, null)
+        ));
     }
 
-    public void ccShowGameEndDialog(final UUID gameId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_GAME_END_DIALOG, gameId));
-    }
-
-    public void showUserMessage(final String titel, String message) {
+    public void showUserMessage(final String title, String message) {
         List<String> messageData = new LinkedList<>();
-        messageData.add(titel);
+        messageData.add(title);
         messageData.add(message);
         fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
     }
 
-    public boolean ccWatchGame(final UUID gameId) {
-        fireCallback(new ClientCallback(ClientCallbackMethod.WATCHGAME, gameId));
+    public boolean ccWatchGame(final UUID currentTableId, final UUID parentTableId, final UUID gameId) {
+        fireCallback(new ClientCallback(
+                ClientCallbackMethod.WATCHGAME,
+                gameId,
+                new TableClientMessage().withTable(currentTableId, parentTableId)
+        ));
         return true;
     }
 
@@ -321,9 +386,7 @@ public class User {
             this.pingInfo = pingInfo;
         }
         lastActivity = new Date();
-        if (userState == UserState.Disconnected) { // this can happen if user reconnects very fast after disconnect
-            setUserState(UserState.Connected);
-        }
+        setUserState(UserState.Connected);
     }
 
     public boolean isExpired(Date expired) {
@@ -336,48 +399,66 @@ public class User {
 
     }
 
-    private void reconnect() {
-        logger.trace(userName + " started reconnect");
+    /**
+     * Restore all active tables and another data
+     */
+    public void onReconnect() {
+        // TODO: research tables restore - it's old code, so check table state, timers, actions, ?concede?, ?skips?
+        ServerMessagesUtil.instance.incReconnects();
+
+        // active tables
         for (Entry<UUID, Table> entry : tables.entrySet()) {
-            ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
+            ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().getParentTableId(), entry.getValue().isTournament());
         }
+
+        // active tourneys
         for (Iterator<Entry<UUID, UUID>> iterator = userTournaments.entrySet().iterator(); iterator.hasNext(); ) {
             Entry<UUID, UUID> next = iterator.next();
             Optional<TournamentController> tournamentController = managerFactory.tournamentManager().getTournamentController(next.getValue());
             if (tournamentController.isPresent()) {
-                ccTournamentStarted(next.getValue(), next.getKey());
+                ccTournamentStarted(tournamentController.get().getTableId(), next.getValue(), next.getKey());
                 tournamentController.get().rejoin(next.getKey());
             } else {
                 iterator.remove(); // tournament has ended meanwhile
             }
         }
+
+        // active games
         for (Entry<UUID, GameSessionPlayer> entry : gameSessions.entrySet()) {
-            ccGameStarted(entry.getValue().getGameId(), entry.getKey());
-            entry.getValue().init();
-            managerFactory.gameManager().sendPlayerString(entry.getValue().getGameId(), userId, "");
+            GameController gameController = managerFactory.gameManager().getGameController().getOrDefault(entry.getValue().getGameId(), null);
+            if (gameController != null) {
+                Table table = managerFactory.tableManager().getTable(gameController.getTableId());
+                if (table != null) {
+                    ccGameStarted(table.getId(), table.getParentTableId(), entry.getValue().getGameId(), entry.getKey());
+                    entry.getValue().init();
+                    managerFactory.gameManager().sendPlayerString(entry.getValue().getGameId(), userId, "");
+                }
+            }
         }
 
+        // active drafts
         for (Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
-            ccDraftStarted(entry.getValue().getDraftId(), entry.getKey());
+            ccDraftStarted(entry.getValue().getDraft().getTableId(), entry.getValue().getDraft().getId(), entry.getKey());
             entry.getValue().init();
             entry.getValue().update();
         }
 
+        // active constructing
         for (Entry<UUID, TournamentSession> entry : constructing.entrySet()) {
             entry.getValue().construct(0); // TODO: Check if this is correct
         }
+
+        // active sideboarding
         for (Entry<UUID, Deck> entry : sideboarding.entrySet()) {
-            Optional<TableController> controller = managerFactory.tableManager().getController(entry.getKey());
-            if (controller.isPresent()) {
-                ccSideboard(entry.getValue(), entry.getKey(), controller.get().getRemainingTime(), controller.get().getOptions().isLimited());
+            TableController controller = managerFactory.tableManager().getController(entry.getKey()).orElse(null);
+            if (controller != null) {
+                ccSideboard(entry.getValue(), controller.getTable().getId(), controller.getTable().getParentTableId(), controller.getRemainingTime(), controller.getOptions().isLimited());
             } else {
                 // Table is missing after connection was lost during sideboard.
                 // Means other players were removed or conceded the game?
                 logger.debug(getName() + " reconnects during sideboarding but tableId not found: " + entry.getKey());
             }
         }
-        ServerMessagesUtil.instance.incReconnects();
-        logger.trace(userName + " ended reconnect");
     }
 
     public void addGame(UUID playerId, GameSessionPlayer gameSession) {
@@ -570,7 +651,7 @@ public class User {
         if (!watchedGames.isEmpty()) {
             sb.append("Watch: ").append(watchedGames.size()).append(' ');
         }
-        return sb.toString();
+        return sb.length() == 0 ? "not active" : sb.toString();
     }
 
     public void addGameWatchInfo(UUID gameId) {
@@ -819,5 +900,10 @@ public class User {
             authorizedUser.active = this.active;
             AuthorizedUserRepository.getInstance().update(authorizedUser);
         }
+    }
+
+    public boolean isOnlineUser() {
+        return this.getUserState() != User.UserState.Offline
+                && !this.getName().equals(User.ADMIN_NAME);
     }
 }

@@ -32,7 +32,7 @@ public final class RogueElephant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Rogue Elephant enters the battlefield, sacrifice it unless you sacrifice a Forest.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(filter))));
     }
 
     private RogueElephant(final RogueElephant card) {

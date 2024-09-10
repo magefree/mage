@@ -33,7 +33,7 @@ public final class PlantElemental extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Plant Elemental enters the battlefield, sacrifice it unless you sacrifice a Forest.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(filter))));
     }
 
     private PlantElemental(final PlantElemental card) {

@@ -27,7 +27,7 @@ public final class JhessianInfiltrator extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public JhessianInfiltrator (final JhessianInfiltrator card) {
+    private JhessianInfiltrator(final JhessianInfiltrator card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class ToilsOfNightAndDay extends CardImpl {
             this.staticText = "You may tap or untap target permanent, then you may tap or untap another target permanent";
         }
 
-        public ToilsOfNightAndDayEffect(final ToilsOfNightAndDayEffect effect) {
+        private ToilsOfNightAndDayEffect(final ToilsOfNightAndDayEffect effect) {
             super(effect);
         }
 

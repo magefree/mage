@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlAttachedEffect;
-import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class Abduction extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
         
         // When Abduction enters the battlefield, untap enchanted creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapEnchantedEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapAttachedEffect()));
         
         // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));

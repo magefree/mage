@@ -3,6 +3,7 @@ package mage.target.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -15,7 +16,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCardInYourGraveyard extends TargetCard {
@@ -46,10 +46,10 @@ public class TargetCardInYourGraveyard extends TargetCard {
 
     public TargetCardInYourGraveyard(int minNumTarget, int maxNumTargets, FilterCard filter, boolean notTarget) {
         super(minNumTarget, maxNumTargets, Zone.GRAVEYARD, filter);
-        this.setNotTarget(notTarget);
+        this.withNotTarget(notTarget);
     }
 
-    public TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
+    protected TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
         super(target);
     }
 
@@ -88,10 +88,14 @@ public class TargetCardInYourGraveyard extends TargetCard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Ability source, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         Player player = game.getPlayer(sourceControllerId);
-        for (Card card : cards.getCards(filter, game)) {
+        if (player == null) {
+            return possibleTargets;
+        }
+
+        for (Card card : cards.getCards(filter, sourceControllerId, source, game)) {
             if (player.getGraveyard().getCards(game).contains(card)) {
                 possibleTargets.add(card.getId());
             }

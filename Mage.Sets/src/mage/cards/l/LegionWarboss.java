@@ -60,14 +60,14 @@ public final class LegionWarboss extends CardImpl {
 
 class LegionWarbossEffect extends OneShotEffect {
 
-    public LegionWarbossEffect() {
+    LegionWarbossEffect() {
         super(Outcome.Benefit);
         staticText = "create a 1/1 red Goblin creature token. "
                 + "That token gains haste until end of turn "
                 + "and attacks this combat if able";
     }
 
-    public LegionWarbossEffect(final LegionWarbossEffect effect) {
+    private LegionWarbossEffect(final LegionWarbossEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class LegionWarbossAbility extends StaticAbility {
         ).setText("this creature attacks this combat if able"));
     }
 
-    public LegionWarbossAbility(LegionWarbossAbility ability) {
+    private LegionWarbossAbility(final LegionWarbossAbility ability) {
         super(ability);
     }
 

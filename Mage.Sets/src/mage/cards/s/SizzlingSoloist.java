@@ -12,6 +12,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.watchers.common.AbilityResolvedWatcher;
 
 import java.util.UUID;
 
@@ -28,13 +29,13 @@ public final class SizzlingSoloist extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, target creature an opponent controls can't block this turn. If this is the second time this ability has resolved this turn, that creature attacks during its controller's next combat phase if able.
+        // Alliance — Whenever another creature you control enters, target creature an opponent controls can't block this turn. If this is the second time this ability has resolved this turn, that creature attacks during its controller's next combat phase if able.
         Ability ability = new AllianceAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(
                 Outcome.Benefit, 2, new SizzlingSoloistEffect()
         ));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
     private SizzlingSoloist(final SizzlingSoloist card) {
@@ -49,12 +50,12 @@ public final class SizzlingSoloist extends CardImpl {
 
 class SizzlingSoloistEffect extends RequirementEffect {
 
-    public SizzlingSoloistEffect() {
+    SizzlingSoloistEffect() {
         super(Duration.Custom);
         staticText = "that creature attacks during its controller's next combat phase if able";
     }
 
-    public SizzlingSoloistEffect(final SizzlingSoloistEffect effect) {
+    private SizzlingSoloistEffect(final SizzlingSoloistEffect effect) {
         super(effect);
     }
 
@@ -74,8 +75,8 @@ class SizzlingSoloistEffect extends RequirementEffect {
             return true;
         }
         return game.isActivePlayer(game.getControllerId(getTargetPointer().getFirst(game, source)))
-                && game.getPhase().getType() == TurnPhase.COMBAT
-                && game.getStep().getType() == PhaseStep.END_COMBAT;
+                && game.getTurnPhaseType() == TurnPhase.COMBAT
+                && game.getTurnStepType() == PhaseStep.END_COMBAT;
     }
 
     @Override

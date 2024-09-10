@@ -18,7 +18,9 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     public static final ObjectColor RED = new ObjectColor("R");
     public static final ObjectColor GREEN = new ObjectColor("G");
 
-    public static final ObjectColor GOLD = new ObjectColor("O");
+    public static final ObjectColor COLORLESS = new ObjectColor();
+
+    public static final ObjectColor GOLD = new ObjectColor("O"); // Not multicolored - Sword of Dungeons & Dragons
 
     private boolean white;
     private boolean blue;

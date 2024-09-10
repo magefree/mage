@@ -19,7 +19,7 @@ public final class AmbitionsCost extends CardImpl {
 
 
         // You draw three cards and you lose 3 life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3).setText("you draw three cards"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3, true));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(3).concatBy("and"));
     }
 

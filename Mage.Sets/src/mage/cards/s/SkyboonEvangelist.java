@@ -71,7 +71,7 @@ class SkyboonEvangelistTriggeredAbility extends AttacksAllTriggeredAbility {
         ).setText("that creature gains flying until end of turn"), false, filter, SetTargetPointer.PERMANENT, false);
     }
 
-    SkyboonEvangelistTriggeredAbility(final SkyboonEvangelistTriggeredAbility effect) {
+    private SkyboonEvangelistTriggeredAbility(final SkyboonEvangelistTriggeredAbility effect) {
         super(effect);
     }
 

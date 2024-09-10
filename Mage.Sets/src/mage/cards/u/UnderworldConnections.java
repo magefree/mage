@@ -49,7 +49,7 @@ public final class UnderworldConnections extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public UnderworldConnections (final UnderworldConnections card) {
+    private UnderworldConnections(final UnderworldConnections card) {
         super(card);
     }
 

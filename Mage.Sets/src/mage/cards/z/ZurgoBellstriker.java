@@ -26,7 +26,7 @@ public final class ZurgoBellstriker extends CardImpl {
 
     public ZurgoBellstriker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC, SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

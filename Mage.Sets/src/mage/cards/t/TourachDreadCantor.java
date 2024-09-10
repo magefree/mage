@@ -29,7 +29,7 @@ public final class TourachDreadCantor extends CardImpl {
     public TourachDreadCantor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -49,7 +49,7 @@ public final class TourachDreadCantor extends CardImpl {
         // When Tourach enters the battelfield, if it was kicked, target opponent discards two cards at random.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(2, true)),
-                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
                 "target opponent discards two cards at random."
         );
         ability.addTarget(new TargetOpponent());

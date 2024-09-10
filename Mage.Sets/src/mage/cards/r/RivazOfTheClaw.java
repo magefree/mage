@@ -1,30 +1,30 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.CastFromGraveyardOnceStaticAbility;
+import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
-import mage.constants.*;
-import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.predicate.card.CastFromZonePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class RivazOfTheClaw extends CardImpl {
 
     private static final FilterCreatureSpell manaAbilityFilter = new FilterCreatureSpell("Dragon creature spells");
-    private static final FilterCreatureCard staticAbilityFilter = new FilterCreatureCard();
+    private static final FilterCreatureCard staticAbilityFilter = new FilterCreatureCard("a Dragon creature spell");
     private static final FilterCreatureSpell spellCastFilter = new FilterCreatureSpell("a Dragon creature spell from your graveyard");
 
     static {
@@ -37,8 +37,8 @@ public final class RivazOfTheClaw extends CardImpl {
     public RivazOfTheClaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VIASHINO);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -50,7 +50,7 @@ public final class RivazOfTheClaw extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(2, new ConditionalSpellManaBuilder(manaAbilityFilter)));
 
         // Once during each of your turns, you may cast a Dragon creature spell from your graveyard.
-        this.addAbility(new CastFromGraveyardOnceStaticAbility(staticAbilityFilter, "Once during each of your turns, you may cast a Dragon creature spell from your graveyard"));
+        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(staticAbilityFilter));
 
         // Whenever you cast a Dragon creature spell from your graveyard, it gains "When this creature dies, exile it."
         this.addAbility(new SpellCastControllerTriggeredAbility(
@@ -61,7 +61,7 @@ public final class RivazOfTheClaw extends CardImpl {
                         "it gains \"When this creature dies, exile it.\"",
                         true
                 ),
-                spellCastFilter, false, true, true
+                spellCastFilter, false, SetTargetPointer.CARD
         ));
     }
 

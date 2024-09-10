@@ -48,6 +48,6 @@ public class PhageTheUntouchableTest extends CardTestPlayerBase {
 
         Assert.assertTrue("Game has ended.", currentGame.hasEnded());
         assertWonTheGame(playerA);
-        Assert.assertTrue("Game ist At end phase", currentGame.getPhase().getType() == TurnPhase.END);
+        Assert.assertTrue("Game ist At end phase", currentGame.getTurnPhaseType() == TurnPhase.END);
     }
 }

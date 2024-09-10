@@ -13,7 +13,6 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
@@ -33,7 +32,7 @@ public final class ThawingGlaciers extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {1}, {tap}: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library. Return Thawing Glaciers to its owner's hand at the beginning of the next cleanup step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, Outcome.PutLandInPlay), new GenericManaCost(1));
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new ReturnToHandSourceEffect(true))));
 

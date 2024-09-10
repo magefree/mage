@@ -28,7 +28,7 @@ public final class GrimInitiate extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // When Grim Initiate dies, amass 1.
-        this.addAbility(new DiesSourceTriggeredAbility(new AmassEffect(1)));
+        this.addAbility(new DiesSourceTriggeredAbility(new AmassEffect(1, SubType.ZOMBIE)));
     }
 
     private GrimInitiate(final GrimInitiate card) {

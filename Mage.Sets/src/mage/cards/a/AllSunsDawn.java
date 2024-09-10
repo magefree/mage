@@ -63,7 +63,7 @@ public final class AllSunsDawn extends CardImpl {
 
 class AllSunsDawnEffect extends OneShotEffect {
 
-    public AllSunsDawnEffect() {
+    AllSunsDawnEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "For each color, return up to one target card of that color from your graveyard to your hand";
     }

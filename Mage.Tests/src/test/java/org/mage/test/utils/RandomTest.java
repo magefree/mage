@@ -94,7 +94,7 @@ public class RandomTest {
         String dest = "f:/test/xmage/";
         //RandomUtil.setSeed(123);
         Player player = new HumanPlayer("random", RangeOfInfluence.ALL, 1);
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 50);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 60, 50, 7);
 
         int height = 512;
         int weight = 512;
@@ -117,7 +117,7 @@ public class RandomTest {
         String dest = "f:/test/xmage/";
         //RandomUtil.setSeed(123);
         Player player = new HumanPlayer("random", RangeOfInfluence.ALL, 1);
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 50);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 60, 50, 7);
 
         int height = 512;
         int weight = 512;
@@ -142,9 +142,9 @@ public class RandomTest {
         String dest = "f:/test/xmage/";
         //RandomUtil.setSeed(123);
         Player player = new HumanPlayer("random", RangeOfInfluence.ALL, 1);
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 50);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 60, 50, 7);
         Deck deck = DeckTestUtils.buildRandomDeck("WGUBR", false, "GRN");
-        player.getLibrary().addAll(deck.getCards(), game);
+        player.getLibrary().addAll(deck.getMaindeckCards(), game);
 
         // multiple cards analyze
         for (int i = 0; i < player.getLibrary().size(); i++) {

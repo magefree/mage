@@ -51,7 +51,7 @@ public final class ScarredPuma extends CardImpl {
             staticText = "{this} can't attack unless a black or green creature also attacks";
         }
 
-        public ScarredPumaEffect(final ScarredPumaEffect effect) {
+        private ScarredPumaEffect(final ScarredPumaEffect effect) {
             super(effect);
         }
 

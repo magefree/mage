@@ -26,7 +26,7 @@ public final class WeldingJar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WeldingJar (final WeldingJar card) {
+    private WeldingJar(final WeldingJar card) {
         super(card);
     }
 

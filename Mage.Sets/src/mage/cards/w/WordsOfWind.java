@@ -45,12 +45,12 @@ public final class WordsOfWind extends CardImpl {
 
 class WordsOfWindEffect extends ReplacementEffectImpl {
 
-    public WordsOfWindEffect() {
+    WordsOfWindEffect() {
         super(Duration.EndOfTurn, Outcome.ReturnToHand);
         staticText = "The next time you would draw a card this turn, each player returns a permanent they control to its owner's hand instead";
     }
 
-    public WordsOfWindEffect(final WordsOfWindEffect effect) {
+    private WordsOfWindEffect(final WordsOfWindEffect effect) {
         super(effect);
     }
 

@@ -28,8 +28,9 @@ public final class Invigorate extends CardImpl {
     public Invigorate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
-        // If you control a Forest, rather than pay Invigorate's mana cost, you may have an opponent gain 3 life.
-        this.addAbility(new AlternativeCostSourceAbility(new GainLifeOpponentCost(3), new PermanentsOnTheBattlefieldCondition(filter)));    
+        // If you control a Forest, rather than pay this spell's mana cost, you may have an opponent gain 3 life.
+        this.addAbility(new AlternativeCostSourceAbility(new GainLifeOpponentCost(3), new PermanentsOnTheBattlefieldCondition(filter),
+                "If you control a Forest, rather than pay this spell's mana cost, you may have an opponent gain 3 life."));
         
         // Target creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4,4,Duration.EndOfTurn));

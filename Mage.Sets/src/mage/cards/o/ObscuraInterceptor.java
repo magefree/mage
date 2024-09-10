@@ -24,7 +24,7 @@ public final class ObscuraInterceptor extends CardImpl {
     public ObscuraInterceptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
 
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

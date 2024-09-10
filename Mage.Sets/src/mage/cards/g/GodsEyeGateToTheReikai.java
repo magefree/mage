@@ -18,7 +18,7 @@ public final class GodsEyeGateToTheReikai extends CardImpl {
 
     public GodsEyeGateToTheReikai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -23,7 +23,7 @@ public final class BladewingDeathlessTyrant extends CardImpl {
 
     public BladewingDeathlessTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SKELETON);
 
@@ -38,14 +38,9 @@ public final class BladewingDeathlessTyrant extends CardImpl {
 
         // Whenever Bladewing, Deathless Tyrant deals combat damage to a player or planeswalker,
         // for each creature card in your graveyard, create a 2/2 black Zombie Knight creature token with menace.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new CreateTokenEffect(
-                        new ZombieKnightToken(),
-                        new CardsInControllerGraveyardCount(
-                                StaticFilters.FILTER_CARD_CREATURE
-                        )
-                ), false
-        ).setOrPlaneswalker(true));
+        this.addAbility(new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(
+                new CreateTokenEffect(new ZombieKnightToken(),
+                        new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)), false));
     }
 
     private BladewingDeathlessTyrant(final BladewingDeathlessTyrant card) {

@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,12 +51,12 @@ public final class ShapeStealer extends CardImpl {
 
 class ShapeStealerEffect extends OneShotEffect {
 
-    public ShapeStealerEffect() {
+    ShapeStealerEffect() {
         super(Outcome.Detriment);
         this.staticText = "change {this}'s base power and toughness to that creature's power and toughness until end of turn";
     }
 
-    public ShapeStealerEffect(final ShapeStealerEffect effect) {
+    private ShapeStealerEffect(final ShapeStealerEffect effect) {
         super(effect);
     }
 
@@ -74,7 +73,7 @@ class ShapeStealerEffect extends OneShotEffect {
             return false;
         }
 
-        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b, true);
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn);
         game.addEffect(effect, source);
         return true;
     }

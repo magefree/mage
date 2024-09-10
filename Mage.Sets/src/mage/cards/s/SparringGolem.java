@@ -25,7 +25,7 @@ public final class SparringGolem extends CardImpl {
 
         // Whenever Sparring Golem becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(
-                new BoostSourceEffect(BlockingCreatureCount.SOURCE, BlockingCreatureCount.SOURCE, Duration.EndOfTurn, true, "it"),
+                new BoostSourceEffect(BlockingCreatureCount.SOURCE, BlockingCreatureCount.SOURCE, Duration.EndOfTurn, "it"),
                 false
         ));
     }

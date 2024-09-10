@@ -49,7 +49,7 @@ class ProvidenceDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new SetPlayerLifeSourceEffect(26));
     }
 
-    ProvidenceDelayedTriggeredAbility(ProvidenceDelayedTriggeredAbility ability) {
+    private ProvidenceDelayedTriggeredAbility(final ProvidenceDelayedTriggeredAbility ability) {
         super(ability);
     }
 

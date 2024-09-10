@@ -59,12 +59,12 @@ public final class NewBlood extends CardImpl {
 
 class NewBloodEffect extends OneShotEffect {
 
-    public NewBloodEffect() {
+    NewBloodEffect() {
         super(Outcome.Benefit);
         this.staticText = "Gain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire";
     }
 
-    public NewBloodEffect(final NewBloodEffect effect) {
+    private NewBloodEffect(final NewBloodEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
         this.staticText = "Change the text of that creature by replacing all instances of one creature type with Vampire";
     }
 
-    public ChangeCreatureTypeTargetEffect(final ChangeCreatureTypeTargetEffect effect) {
+    private ChangeCreatureTypeTargetEffect(final ChangeCreatureTypeTargetEffect effect) {
         super(effect);
         this.fromSubType = effect.fromSubType;
         this.toSubType = effect.toSubType;
@@ -110,24 +110,24 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return;
         }
         if (fromSubType == null) {
-            Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
+            Choice typeChoice = new ChoiceCreatureType(game, source);
             typeChoice.setMessage("Choose creature type to change to Vampire");
             if (!controller.choose(outcome, typeChoice, game)) {
                 discard();
                 return;
             }
-            fromSubType = SubType.byDescription(typeChoice.getChoice());
+            fromSubType = SubType.byDescription(typeChoice.getChoiceKey());
             if (!game.isSimulation()) {
                 game.informPlayers(controller.getLogName() + " has chosen the creature type: " + fromSubType.toString());
             }
         }
-
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -140,7 +140,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
             throw new UnsupportedOperationException("No subtype to change set");
         }
         boolean objectFound = false;
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             MageObject targetObject = game.getObject(targetId);
             if (targetObject != null) {
                 objectFound = true;

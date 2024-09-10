@@ -56,7 +56,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals their hand. You choose a nonland card from that player's graveyard or hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
 
-    public PsychicIntrusionExileEffect(final PsychicIntrusionExileEffect effect) {
+    private PsychicIntrusionExileEffect(final PsychicIntrusionExileEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = game.getObject(source);
         if (opponent != null && sourceObject != null) {
             opponent.revealCards(sourceObject.getName(), opponent.getHand(), game);
@@ -89,14 +89,14 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 Card card = null;
                 if (cardsHand > 0 && fromHand) {
                     TargetCard target = new TargetCard(Zone.HAND, filter);
-                    if (controller.choose(Outcome.Benefit, opponent.getHand(), target, game)) {
+                    if (controller.choose(Outcome.Benefit, opponent.getHand(), target, source, game)) {
                         card = opponent.getHand().get(target.getFirstTarget(), game);
 
                     }
                 }
                 if (cardsGraveyard > 0 && !fromHand) {
                     TargetCard target = new TargetCard(Zone.GRAVEYARD, filter);
-                    if (controller.choose(Outcome.Benefit, opponent.getGraveyard(), target, game)) {
+                    if (controller.choose(Outcome.Benefit, opponent.getGraveyard(), target, source, game)) {
                         card = opponent.getGraveyard().get(target.getFirstTarget(), game);
 
                     }
@@ -123,12 +123,12 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
 
 class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
 
-    public PsychicIntrusionCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+    PsychicIntrusionCastFromExileEffect() {
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
 
-    public PsychicIntrusionCastFromExileEffect(final PsychicIntrusionCastFromExileEffect effect) {
+    private PsychicIntrusionCastFromExileEffect(final PsychicIntrusionCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -164,7 +164,7 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl implements A
         staticText = "you may spend mana as though it were mana of any color to cast it";
     }
 
-    public PsychicIntrusionSpendAnyManaEffect(final PsychicIntrusionSpendAnyManaEffect effect) {
+    private PsychicIntrusionSpendAnyManaEffect(final PsychicIntrusionSpendAnyManaEffect effect) {
         super(effect);
     }
 

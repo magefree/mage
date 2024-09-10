@@ -21,7 +21,7 @@ public class CanAttackAsThoughItDidntHaveDefenderTargetEffect extends AsThoughEf
         super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
     }
 
-    public CanAttackAsThoughItDidntHaveDefenderTargetEffect(final CanAttackAsThoughItDidntHaveDefenderTargetEffect effect) {
+    protected CanAttackAsThoughItDidntHaveDefenderTargetEffect(final CanAttackAsThoughItDidntHaveDefenderTargetEffect effect) {
         super(effect);
     }
 
@@ -45,14 +45,11 @@ public class CanAttackAsThoughItDidntHaveDefenderTargetEffect extends AsThoughEf
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (!mode.getTargets().isEmpty()) {
-            if (this.duration == Duration.EndOfTurn) {
-                return "target " + mode.getTargets().get(0).getTargetName() + " can attack this turn as though it didn't have defender";
-            } else {
-                return "target " + mode.getTargets().get(0).getTargetName() + " can attack as though it didn't have defender";
-            }
-        } else {
-            throw new UnsupportedOperationException("No target defined");
-        }
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                " can attack " +
+                (duration == Duration.EndOfTurn ? "this turn " : "" ) +
+                "as though" +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " they " : " it ") +
+                "didn't have defender";
     }
 }

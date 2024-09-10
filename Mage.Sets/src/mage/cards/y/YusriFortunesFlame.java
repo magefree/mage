@@ -23,7 +23,7 @@ public final class YusriFortunesFlame extends CardImpl {
     public YusriFortunesFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EFREET);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -50,7 +50,7 @@ class YusriFortunesFlameEffect extends OneShotEffect {
     YusriFortunesFlameEffect() {
         super(Outcome.Benefit);
         staticText = "choose a number between 1 and 5. Flip that many coins. For each flip you win, draw a card. " +
-                "For each flip you lose, {this} deals 2 damage to you. You you won five flips this way, " +
+                "For each flip you lose, {this} deals 2 damage to you. If you won five flips this way, " +
                 "you may cast spells from your hand this turn without paying their mana costs";
     }
 

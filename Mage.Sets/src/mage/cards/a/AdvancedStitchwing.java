@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -33,8 +33,8 @@ public final class AdvancedStitchwing extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {2}{U}, Discard two cards: Return Advanced Stitchwing from your graveyard to the battlefield tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl<>("{2}{U}"));
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false), new ManaCostsImpl<>("{2}{U}"));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);
     }
 

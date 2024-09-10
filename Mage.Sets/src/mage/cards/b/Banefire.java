@@ -1,11 +1,10 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -21,6 +20,9 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,12 +74,12 @@ class testCondition implements Condition {
 
 class BaneFireEffect extends OneShotEffect {
 
-    public BaneFireEffect() {
+    BaneFireEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals X damage to any target";
     }
 
-    public BaneFireEffect(final BaneFireEffect effect) {
+    private BaneFireEffect(final BaneFireEffect effect) {
         super(effect);
     }
 
@@ -90,7 +92,7 @@ class BaneFireEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        int damage = source.getManaCostsToPay().getX();
+        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0);
         boolean preventable = damage < 5;
         if (targetPlayer != null) {
             targetPlayer.damage(damage, source.getSourceId(), source, game, false, preventable);
@@ -106,14 +108,14 @@ class BaneFireEffect extends OneShotEffect {
 
 class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private Condition condition = new testCondition(ManacostVariableValue.REGULAR, 5);
+    private Condition condition = new testCondition(GetXValue.instance, 5);
 
     public BanefireCantCounterEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit);
         staticText = "If X is 5 or more, this spell can't be countered and the damage can't be prevented";
     }
 
-    public BanefireCantCounterEffect(final BanefireCantCounterEffect effect) {
+    private BanefireCantCounterEffect(final BanefireCantCounterEffect effect) {
         super(effect);
         this.condition = effect.condition;
     }
@@ -124,19 +126,21 @@ class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.COUNTER) { return false; }
-
         Card card = game.getCard(source.getSourceId());
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         UUID spellId = card.getSpellAbility().getId();
-        if (!event.getTargetId().equals(spellId)) { return false; }
+        if (!event.getTargetId().equals(spellId)) {
+            return false;
+        }
 
         return condition.apply(game, source);
     }

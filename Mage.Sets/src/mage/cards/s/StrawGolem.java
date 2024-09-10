@@ -24,7 +24,8 @@ public final class StrawGolem extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When an opponent casts a creature spell, sacrifice Straw Golem.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false)
+                .setTriggerPhrase("When an opponent casts a creature spell, "));
     }
 
     private StrawGolem(final StrawGolem card) {

@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ import mage.filter.common.FilterControlledPermanent;
 public final class AngelicOverseer extends CardImpl {
 
     private static final String rule1 = "As long as you control a Human, {this} has hexproof";
-    private static final String rule2 = "and is indestructible";
+    private static final String rule2 = "and indestructible";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {

@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.MageInt;
@@ -10,14 +9,13 @@ import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class HermitDruid extends CardImpl {
@@ -31,7 +29,9 @@ public final class HermitDruid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}, {tap}: Reveal cards from the top of your library until you reveal a basic land card. Put that card into your hand and all other cards revealed this way into your graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealCardsFromLibraryUntilEffect(StaticFilters.FILTER_CARD_BASIC_LAND, Zone.HAND, Zone.GRAVEYARD), new ManaCostsImpl<>("{G}"));
+        Ability ability = new SimpleActivatedAbility(new RevealCardsFromLibraryUntilEffect(
+                StaticFilters.FILTER_CARD_BASIC_LAND, PutCards.HAND, PutCards.GRAVEYARD
+        ), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

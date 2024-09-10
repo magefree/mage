@@ -22,7 +22,7 @@ public final class OdricLunarchMarshal extends CardImpl {
 
     public OdricLunarchMarshal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -80,7 +80,7 @@ class OdricLunarchMarshalEffect extends OneShotEffect {
         this.staticText = "creatures you control gain first strike until end of turn if a creature you control has first strike. The same is true for flying, deathtouch, double strike, haste, hexproof, indestructible, lifelink, menace, reach, skulk, trample, and vigilance.";
     }
 
-    OdricLunarchMarshalEffect(final OdricLunarchMarshalEffect effect) {
+    private OdricLunarchMarshalEffect(final OdricLunarchMarshalEffect effect) {
         super(effect);
     }
 

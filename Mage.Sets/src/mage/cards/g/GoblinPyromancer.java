@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,10 +37,10 @@ public final class GoblinPyromancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Goblin Pyromancer enters the battlefield, Goblin creatures get +3/+0 until end of turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(3, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(3, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false)));
 
         // At the beginning of the end step, destroy all Goblins.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DestroyAllEffect(filterPermanent, false), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DestroyAllEffect(filterPermanent, false), TargetController.NEXT, false));
     }
 
     private GoblinPyromancer(final GoblinPyromancer card) {

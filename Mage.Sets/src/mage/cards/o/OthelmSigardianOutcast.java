@@ -36,7 +36,7 @@ public final class OthelmSigardianOutcast extends CardImpl {
     public OthelmSigardianOutcast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

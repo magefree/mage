@@ -30,7 +30,8 @@ public final class RunawayCarriage extends CardImpl {
 
         // When Runaway Carriage attacks or blocks, sacrifice it at end of combat.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())), false));
+                new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect()
+                        .setText("sacrifice it at end of combat")).setTriggerPhrase("")), false));
     }
 
     private RunawayCarriage(final RunawayCarriage card) {

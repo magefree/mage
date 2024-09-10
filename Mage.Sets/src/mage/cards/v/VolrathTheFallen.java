@@ -26,7 +26,7 @@ public final class VolrathTheFallen extends CardImpl {
 
     public VolrathTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(6);

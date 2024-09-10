@@ -1,10 +1,11 @@
 package mage.cards.r;
 
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.CasualtyAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ public final class RobTheArchives extends CardImpl {
         this.addAbility(new CasualtyAbility(1));
 
         // Exile the top two cards of your library. You may play those cards this turn.
-        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(2, false));
+        this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn));
     }
 
     private RobTheArchives(final RobTheArchives card) {

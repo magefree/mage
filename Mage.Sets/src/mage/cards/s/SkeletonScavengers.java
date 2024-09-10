@@ -2,23 +2,21 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.RegenerateSourceWithReflexiveEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.ManaUtil;
 
@@ -37,10 +35,17 @@ public final class SkeletonScavengers extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Skeleton Scavengers enters the battlefield with a +1/+1 counter on it.
-        this.addAbility(new AsEntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                "with a +1/+1 counter on it"));
 
         // Pay {1} for each +1/+1 counter on Skeleton Scavengers: Regenerate Skeleton Scavengers. When it regenerates this way, put a +1/+1 counter on it.
-        this.addAbility(new SimpleActivatedAbility(new SkeletonScavengersEffect(), new DynamicValueGenericManaCost(new CountersSourceCount(CounterType.P1P1))));
+        this.addAbility(new SimpleActivatedAbility(
+                new RegenerateSourceWithReflexiveEffect(new ReflexiveTriggeredAbility(
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                        false
+                ), false),
+                new DynamicValueGenericManaCost(new CountersSourceCount(CounterType.P1P1))
+        ));
 
     }
 
@@ -63,7 +68,7 @@ class DynamicValueGenericManaCost extends CostImpl {
         setText();
     }
 
-    public DynamicValueGenericManaCost(DynamicValueGenericManaCost cost) {
+    private DynamicValueGenericManaCost(final DynamicValueGenericManaCost cost) {
         super(cost);
         this.amount = cost.amount;
     }
@@ -98,33 +103,5 @@ class DynamicValueGenericManaCost extends CostImpl {
 
     private void setText() {
         text = ("Pay {1} for each +1/+1 counter on {this}");
-    }
-}
-
-class SkeletonScavengersEffect extends OneShotEffect {
-
-    SkeletonScavengersEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Regenerate {this}. When it regenerates this way, put a +1/+1 counter on it";
-    }
-
-    SkeletonScavengersEffect(final SkeletonScavengersEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SkeletonScavengersEffect copy() {
-        return new SkeletonScavengersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent skeletonScavengers = game.getPermanent(source.getSourceId());
-        if (skeletonScavengers != null) {
-            if (new RegenerateSourceEffect().apply(game, source)) {
-                return new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);
-            }
-        }
-        return false;
     }
 }

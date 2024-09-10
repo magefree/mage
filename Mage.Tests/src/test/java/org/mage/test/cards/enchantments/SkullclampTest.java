@@ -3,6 +3,7 @@ package org.mage.test.cards.enchantments;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -25,8 +26,7 @@ public class SkullclampTest extends CardTestPlayerBase {
      * 704.5n.)
      *
      */
-    
-    // This test does not work, but the example works in the game fine.
+    @Test
     @Ignore
     public void testPerniciousDeed() {
         // Equipped creature gets +1/-1.

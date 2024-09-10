@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class StartledAwake extends CardImpl {
 
         // Target opponent puts the top thirteen cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(13));
 
         // {3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new TransformAbility());
@@ -52,12 +52,12 @@ public final class StartledAwake extends CardImpl {
 
 class StartledAwakeReturnTransformedEffect extends OneShotEffect {
 
-    public StartledAwakeReturnTransformedEffect() {
+    StartledAwakeReturnTransformedEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Put {this} from your graveyard onto the battlefield transformed";
     }
 
-    public StartledAwakeReturnTransformedEffect(final StartledAwakeReturnTransformedEffect effect) {
+    private StartledAwakeReturnTransformedEffect(final StartledAwakeReturnTransformedEffect effect) {
         super(effect);
     }
 
@@ -69,14 +69,13 @@ class StartledAwakeReturnTransformedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (controller == null || !(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (controller == null || card == null) {
             return false;
         }
         if (game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
             return true;
         }
-        Card card = (Card) sourceObject;
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), true);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         return true;

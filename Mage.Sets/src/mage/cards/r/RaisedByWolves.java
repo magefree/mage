@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -14,7 +13,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.WolfToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -25,11 +24,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class RaisedByWolves extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Wolf you control");
-
-    static {
-        filter.add(SubType.WOLF.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.WOLF, "Wolf you control");
 
     public RaisedByWolves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{G}");

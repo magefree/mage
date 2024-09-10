@@ -37,7 +37,7 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
         this.filter = filter;
     }
 
-    public BecomesSubtypeAllEffect(final BecomesSubtypeAllEffect effect) {
+    protected BecomesSubtypeAllEffect(final BecomesSubtypeAllEffect effect) {
         super(effect);
         this.subtypes.addAll(effect.subtypes);
         this.loseOther = effect.loseOther;

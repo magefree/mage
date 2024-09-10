@@ -27,7 +27,7 @@ public final class UnnaturalSpeed extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public UnnaturalSpeed (final UnnaturalSpeed card) {
+    private UnnaturalSpeed(final UnnaturalSpeed card) {
         super(card);
     }
 

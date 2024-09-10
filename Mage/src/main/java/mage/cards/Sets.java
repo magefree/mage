@@ -127,7 +127,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         List<Card> cardPool = new ArrayList<>();
         while (count < cardsCount) {
             CardInfo cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
-            Card card = cardInfo != null ? cardInfo.getCard() : null;
+            Card card = cardInfo != null ? cardInfo.createCard() : null;
             if (card != null) {
 
                 FilterMana manaCard = card.getColorIdentity();
@@ -199,15 +199,30 @@ public class Sets extends HashMap<String, ExpansionSet> {
         return null;
     }
 
-    public static ExpansionSet.SetCardInfo findCardByClass(Class<?> clazz, String preferredSetCode) {
+    public static ExpansionSet findSetByName(String setName) {
+        return instance.values().stream()
+                .filter(expansionSet -> expansionSet.getName().equals(setName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public static ExpansionSet.SetCardInfo findCardByClass(Class<?> clazz, String preferredSetCode, String preferredCardNumber) {
         ExpansionSet.SetCardInfo info = null;
         if (instance.containsKey(preferredSetCode)) {
-            info = instance.get(preferredSetCode).findCardInfoByClass(clazz).stream().findFirst().orElse(null);
+            info = instance.get(preferredSetCode).findCardInfoByClass(clazz)
+                    .stream()
+                    .filter(card -> preferredCardNumber.isEmpty() || card.getCardNumber().equals(preferredCardNumber))
+                    .findFirst()
+                    .orElse(null);
         }
 
         if (info == null) {
             for (Map.Entry<String, ExpansionSet> entry : instance.entrySet()) {
-                info = entry.getValue().findCardInfoByClass(clazz).stream().findFirst().orElse(null);
+                info = entry.getValue().findCardInfoByClass(clazz)
+                        .stream()
+                        .filter(card -> preferredCardNumber.isEmpty() || card.getCardNumber().equals(preferredCardNumber))
+                        .findFirst()
+                        .orElse(null);
                 if (info != null) {
                     break;
                 }

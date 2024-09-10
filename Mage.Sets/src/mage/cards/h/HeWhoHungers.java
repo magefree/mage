@@ -39,7 +39,7 @@ public final class HeWhoHungers extends CardImpl {
 
     public HeWhoHungers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
@@ -52,7 +52,7 @@ public final class HeWhoHungers extends CardImpl {
          * That player discards that card. Activate this ability only any time you could cast a sorcery. */
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetEffect(), new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetOpponent());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
 
         //Soulshift 4 (When this creature dies, you may return target Spirit card with converted mana cost 4 or less from your graveyard to your hand.)

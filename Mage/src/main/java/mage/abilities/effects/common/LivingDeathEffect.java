@@ -20,7 +20,7 @@ public class LivingDeathEffect extends OneShotEffect {
         this.staticText = "Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield";
     }
 
-    public LivingDeathEffect(final LivingDeathEffect effect) {
+    protected LivingDeathEffect(final LivingDeathEffect effect) {
         super(effect);
     }
 
@@ -47,14 +47,14 @@ public class LivingDeathEffect extends OneShotEffect {
                     }
                 }
             }
-            game.getState().processAction(game);
+            game.processAction();
 
             // Sacrifice all creatures
             for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
                 permanent.sacrifice(source, game);
             }
 
-            game.getState().processAction(game);
+            game.processAction();
 
             // Exiled cards are put onto the battlefield at the same time under their owner's control
             Set<Card> cardsToReturnFromExile = new HashSet<>();

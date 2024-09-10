@@ -54,7 +54,7 @@ public final class SurgeEngine extends CardImpl {
                 new ManaCostsImpl<>("{2}{U}"), SurgeEngineCondition.instance
         );
         ability.addEffect(new SetBasePowerToughnessSourceEffect(
-                5, 4, Duration.Custom, SubLayer.SetPT_7b
+                5, 4, Duration.Custom
         ).setText("and has base power and toughness 5/4"));
         this.addAbility(ability);
 
@@ -80,7 +80,7 @@ enum SurgeEngineCondition implements Condition {
         return Optional
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .filter(Objects::nonNull)
-                .map(permanent -> permanent.hasAbility(DefenderAbility.getInstance(), game))
+                .map(permanent -> !permanent.hasAbility(DefenderAbility.getInstance(), game))
                 .orElse(false);
     }
 

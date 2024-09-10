@@ -1,28 +1,28 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author nantuko
  */
 public class BecomesTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    public BecomesTappedSourceTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
     public BecomesTappedSourceTriggeredAbility(Effect effect, boolean isOptional) {
         super(Zone.BATTLEFIELD, effect, isOptional);
-    }
-
-    public BecomesTappedSourceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
         setTriggerPhrase("Whenever {this} becomes tapped, ");
+        this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
     }
 
-    public BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
+    protected BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
         super(ability);
     }
 

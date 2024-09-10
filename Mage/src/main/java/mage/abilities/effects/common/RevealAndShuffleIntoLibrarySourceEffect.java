@@ -17,18 +17,17 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 
 public class RevealAndShuffleIntoLibrarySourceEffect extends OneShotEffect {
-    
+
     public RevealAndShuffleIntoLibrarySourceEffect() {
         super(Outcome.Neutral);
         staticText = "reveal {this} and shuffle it into its owner's library instead";
     }
 
-    public RevealAndShuffleIntoLibrarySourceEffect(final RevealAndShuffleIntoLibrarySourceEffect effect) {
+    protected RevealAndShuffleIntoLibrarySourceEffect(final RevealAndShuffleIntoLibrarySourceEffect effect) {
         super(effect);
     }
 
@@ -41,7 +40,7 @@ public class RevealAndShuffleIntoLibrarySourceEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             Permanent permanent = null;
             if (sourceObject instanceof Spell) {
-                sourceObject = ((Spell)sourceObject).getCard();
+                sourceObject = ((Spell) sourceObject).getCard();
             }
             if (sourceObject instanceof Permanent) {
                 permanent = (Permanent) sourceObject;
@@ -50,8 +49,8 @@ public class RevealAndShuffleIntoLibrarySourceEffect extends OneShotEffect {
                     cards.add(permanent);
                 }
             } else if (sourceObject instanceof Card) {
-                owner = game.getPlayer(((Card)sourceObject).getOwnerId());
-                cards.add((Card)sourceObject);
+                owner = game.getPlayer(((Card) sourceObject).getOwnerId());
+                cards.add((Card) sourceObject);
             }
             if (owner != null) {
                 Zone fromZone = game.getState().getZone(sourceObject.getId());

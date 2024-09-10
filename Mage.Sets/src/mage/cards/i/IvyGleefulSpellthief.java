@@ -12,18 +12,18 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
+import mage.filter.predicate.other.HasOnlySingleTargetPermanentPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.target.Target;
-import mage.util.TargetAddress;
 import mage.util.functions.StackObjectCopyApplier;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -34,13 +34,13 @@ public final class IvyGleefulSpellthief extends CardImpl {
             = new FilterSpell("a spell that targets only a single creature other than {this}");
 
     static {
-        filter.add(IvyGleefulSpellthiefPredicate.instance);
+        filter.add(new HasOnlySingleTargetPermanentPredicate(StaticFilters.FILTER_ANOTHER_CREATURE));
     }
 
     public IvyGleefulSpellthief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -60,36 +60,6 @@ public final class IvyGleefulSpellthief extends CardImpl {
     @Override
     public IvyGleefulSpellthief copy() {
         return new IvyGleefulSpellthief(this);
-    }
-}
-
-enum IvyGleefulSpellthiefPredicate implements ObjectSourcePlayerPredicate<Spell> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
-        Spell spell = input.getObject();
-        if (spell == null) {
-            return false;
-        }
-        UUID singleTarget = null;
-        for (TargetAddress addr : TargetAddress.walk(spell)) {
-            Target targetInstance = addr.getTarget(spell);
-            for (UUID targetId : targetInstance.getTargets()) {
-                if (singleTarget == null) {
-                    singleTarget = targetId;
-                } else if (!singleTarget.equals(targetId)) {
-                    return false;
-                }
-            }
-        }
-        if (singleTarget == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(singleTarget);
-        return permanent != null
-                && permanent.isCreature(game)
-                && !permanent.getId().equals(input.getSourceId());
     }
 }
 

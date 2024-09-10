@@ -29,14 +29,14 @@ public final class UurgSpawnOfTurg extends CardImpl {
     public UurgSpawnOfTurg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FROG);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
 
         // Uurg, Spawn of Turg's power is equal to the number of land cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(xValue)));
 
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
@@ -45,7 +45,7 @@ public final class UurgSpawnOfTurg extends CardImpl {
 
         // {B}{G}, Sacrifice a land: You gain 2 life.
         Ability ability = new SimpleActivatedAbility(new GainLifeEffect(2), new ManaCostsImpl<>("{B}{G}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         this.addAbility(ability);
     }
 

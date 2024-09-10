@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -29,8 +28,7 @@ public final class RisingWaters extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
 
         // Lands don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_LANDS)));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_LANDS)));
         
         // At the beginning of each player's upkeep, that player untaps a land they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RisingWatersUntapEffect(), TargetController.ANY, false));
@@ -48,12 +46,12 @@ public final class RisingWaters extends CardImpl {
 
 class RisingWatersUntapEffect extends OneShotEffect {
 
-    public RisingWatersUntapEffect() {
+    RisingWatersUntapEffect() {
         super(Outcome.Untap);
         this.staticText = "that player untaps a land they control";
     }
 
-    public RisingWatersUntapEffect(final RisingWatersUntapEffect effect) {
+    private RisingWatersUntapEffect(final RisingWatersUntapEffect effect) {
         super(effect);
     }
 

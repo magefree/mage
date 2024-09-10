@@ -44,13 +44,13 @@ public final class BarbarianBully extends CardImpl {
 
 class BarbarianBullyEffect extends OneShotEffect {
 
-    public BarbarianBullyEffect() {
+    BarbarianBullyEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "{this} gets +2/+2 until end of turn "
                 + "unless a player has {this} deal 4 damage to them";
     }
 
-    public BarbarianBullyEffect(final BarbarianBullyEffect effect) {
+    private BarbarianBullyEffect(final BarbarianBullyEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class BarbarianBullyEffect extends OneShotEffect {
             return false;
         }
         boolean costPaid = false;
-        for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;

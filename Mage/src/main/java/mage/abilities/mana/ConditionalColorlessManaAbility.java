@@ -24,7 +24,7 @@ public class ConditionalColorlessManaAbility extends ActivatedManaAbilityImpl {
         super(Zone.BATTLEFIELD, new AddConditionalColorlessManaEffect(amount, manaBuilder, netAmount), cost);
     }
 
-    public ConditionalColorlessManaAbility(final ConditionalColorlessManaAbility ability) {
+    protected ConditionalColorlessManaAbility(final ConditionalColorlessManaAbility ability) {
         super(ability);
     }
 

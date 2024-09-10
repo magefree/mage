@@ -3,9 +3,7 @@ package mage.cards.j;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.PartyCount;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.common.PartyCountHint;
@@ -34,7 +32,6 @@ public final class JourneyToOblivion extends CardImpl {
         // When Journey to Oblivion enters the battlefield, exile target nonland permanent an opponent controls until Journey to Oblivion leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }
 

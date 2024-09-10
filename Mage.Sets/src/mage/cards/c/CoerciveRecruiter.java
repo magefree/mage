@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class CoerciveRecruiter extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.PIRATE, "Pirate");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.PIRATE, "Pirate");
 
     public CoerciveRecruiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
@@ -34,7 +34,7 @@ public final class CoerciveRecruiter extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // Whenever Coercive Recruiter or another Pirate enters the battlefield under your control, gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and becomes a Pirate in addition to its other types.
+        // Whenever Coercive Recruiter or another Pirate you control enters, gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and becomes a Pirate in addition to its other types.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GainControlTargetEffect(Duration.EndOfTurn), filter, false, true
         );

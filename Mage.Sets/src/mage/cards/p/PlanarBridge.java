@@ -24,7 +24,7 @@ public final class PlanarBridge extends CardImpl {
     public PlanarBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {8}, {T}: Search your library for a permanent card, put it onto the battlefield, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(

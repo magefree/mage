@@ -63,12 +63,12 @@ public final class BloodTribute extends CardImpl {
 
 class BloodTributeLoseLifeEffect extends OneShotEffect {
 
-    public BloodTributeLoseLifeEffect() {
+    BloodTributeLoseLifeEffect() {
         super(Outcome.Damage);
         this.staticText = "Target opponent loses half their life, rounded up";
     }
 
-    public BloodTributeLoseLifeEffect(final BloodTributeLoseLifeEffect effect) {
+    private BloodTributeLoseLifeEffect(final BloodTributeLoseLifeEffect effect) {
         super(effect);
     }
 
@@ -94,12 +94,12 @@ class BloodTributeLoseLifeEffect extends OneShotEffect {
 
 class BloodTributeGainLifeEffect extends OneShotEffect {
 
-    public BloodTributeGainLifeEffect() {
+    BloodTributeGainLifeEffect() {
         super(Outcome.GainLife);
         this.staticText = "If Blood Tribute was kicked, you gain life equal to the life lost this way";
     }
 
-    public BloodTributeGainLifeEffect(final BloodTributeGainLifeEffect effect) {
+    private BloodTributeGainLifeEffect(final BloodTributeGainLifeEffect effect) {
         super(effect);
     }
 

@@ -12,10 +12,7 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -26,8 +23,8 @@ import mage.players.Player;
  */
 public final class MoltenSentry extends CardImpl {
 
-    private static final String rule = "As {this} enters the battlefield, flip a coin. If the coin comes up heads, {this} enters the battlefield as a "
-            + "5/2 creature with haste. If it comes up tails, {this} enters the battlefield as a 2/5 creature with defender.";
+    private static final String rule = "As {this} enters, flip a coin. If the coin comes up heads, {this} enters as a "
+            + "5/2 creature with haste. If it comes up tails, {this} enters as a 2/5 creature with defender.";
 
     public MoltenSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
@@ -52,11 +49,11 @@ public final class MoltenSentry extends CardImpl {
 
 class MoltenSentryEffect extends OneShotEffect {
 
-    public MoltenSentryEffect() {
+    MoltenSentryEffect() {
         super(Outcome.Damage);
     }
 
-    public MoltenSentryEffect(MoltenSentryEffect effect) {
+    private MoltenSentryEffect(final MoltenSentryEffect effect) {
         super(effect);
     }
 
@@ -82,7 +79,7 @@ class MoltenSentryEffect extends OneShotEffect {
             toughness = 5;
             gainedAbility = DefenderAbility.getInstance();
         }
-        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield), source);
         game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), source);
         return true;
     }

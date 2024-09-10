@@ -90,7 +90,7 @@ class NinjutsuEffect extends OneShotEffect {
                 + "from your hand tapped and attacking";
     }
 
-    public NinjutsuEffect(final NinjutsuEffect effect) {
+    protected NinjutsuEffect(final NinjutsuEffect effect) {
         super(effect);
     }
 
@@ -138,7 +138,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
     private UUID defendingPlayerId = null;
 
     public ReturnAttackerToHandTargetCost() {
-        this.addTarget(new TargetControlledPermanent(filter));
+        this.addTarget(new TargetControlledPermanent(1, 1, filter, true));
         this.text = "Return an unblocked attacker you control to hand";
     }
 
@@ -148,8 +148,8 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
-            for (UUID targetId : targets.get(0).getTargets()) {
+        if (this.getTargets().choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 Player controller = game.getPlayer(controllerId);
                 if (permanent == null
@@ -165,7 +165,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

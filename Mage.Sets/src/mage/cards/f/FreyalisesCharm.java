@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class FreyalisesCharm extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("black spell");
+    private static final FilterSpell filter = new FilterSpell("a black spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
@@ -32,7 +32,7 @@ public final class FreyalisesCharm extends CardImpl {
         // Whenever an opponent casts a black spell, you may pay {G}{G}. If you do, you draw a card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 new DoIfCostPaid(
-                        new DrawCardSourceControllerEffect(1, "you"),
+                        new DrawCardSourceControllerEffect(1, true),
                         new ManaCostsImpl<>("{G}{G}")
                 ), filter, false
         ));

@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -15,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -37,9 +35,9 @@ public final class VipersKiss extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets -1/-1 and its activated abilities can't be activated.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1,-1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(-1,-1, Duration.WhileOnBattlefield));
         Effect effect = new CantActivateAbilitiesAttachedEffect();
-        effect.setText("and its activated abilities can't be activated");
+        effect.setText(", and its activated abilities can't be activated");
         ability.addEffect(effect);
         this.addAbility(ability);
 

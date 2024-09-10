@@ -48,7 +48,7 @@ public final class NimDeathmantle extends CardImpl {
         ).setText(", and is a black"));
         ability.addEffect(new SetCardSubtypeAttachedEffect(
                 Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT, SubType.ZOMBIE
-        ).setText("Zombie"));
+        ).setText(" Zombie"));
         this.addAbility(ability);
 
         // Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach Nim Deathmantle to it.
@@ -74,7 +74,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new NimDeathmantleEffect(), false);
     }
 
-    NimDeathmantleTriggeredAbility(NimDeathmantleTriggeredAbility ability) {
+    private NimDeathmantleTriggeredAbility(final NimDeathmantleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -119,7 +119,7 @@ class NimDeathmantleEffect extends OneShotEffect {
 
     }
 
-    public NimDeathmantleEffect(NimDeathmantleEffect effect) {
+    private NimDeathmantleEffect(final NimDeathmantleEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class NimDeathmantleEffect extends OneShotEffect {
             if (controller.chooseUse(Outcome.Benefit, equipment.getName() + " - Pay " + cost.getText() + '?', source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source, source.getControllerId(), false)) {
-                    UUID target = targetPointer.getFirst(game, source);
+                    UUID target = getTargetPointer().getFirst(game, source);
                     if (target != null) {
                         Card card = game.getCard(target);
                         // check if it's still in graveyard

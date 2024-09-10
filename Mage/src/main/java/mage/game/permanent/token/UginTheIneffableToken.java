@@ -11,7 +11,6 @@ public final class UginTheIneffableToken extends TokenImpl {
 
     public UginTheIneffableToken() {
         super("Spirit Token", "2/2 colorless Spirit creature token");
-        setExpansionSetCodeForImage("WAR"); // default
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         power = new MageInt(2);

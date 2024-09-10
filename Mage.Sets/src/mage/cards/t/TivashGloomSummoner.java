@@ -7,7 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -25,12 +25,12 @@ import java.util.UUID;
  */
 public final class TivashGloomSummoner extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
+    private static final Condition condition = new YouGainedLifeCondition();
 
     public TivashGloomSummoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(4);
@@ -43,7 +43,7 @@ public final class TivashGloomSummoner extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new TivashGloomSummonerEffect(),
                 TargetController.YOU, condition, false
-        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private TivashGloomSummoner(final TivashGloomSummoner card) {

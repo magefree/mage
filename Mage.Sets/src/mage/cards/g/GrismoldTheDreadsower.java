@@ -34,7 +34,7 @@ public final class GrismoldTheDreadsower extends CardImpl {
     public GrismoldTheDreadsower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);

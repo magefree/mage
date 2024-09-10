@@ -32,6 +32,7 @@ public final class DoubleMasters extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 2;
         this.ratioBoosterMythic = 8;
+        this.maxCardNumberInBooster = 332;
 
         cards.add(new SetCardInfo("Abrade", 114, Rarity.COMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Academy Ruins", 309, Rarity.RARE, mage.cards.a.AcademyRuins.class, NON_FULL_USE_VARIOUS));

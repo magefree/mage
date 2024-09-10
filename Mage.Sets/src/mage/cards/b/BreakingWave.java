@@ -47,12 +47,12 @@ public final class BreakingWave extends CardImpl {
 
 class BreakingWaveEffect extends OneShotEffect {
 
-    public BreakingWaveEffect() {
+    BreakingWaveEffect() {
         super(Outcome.Neutral);
         staticText = "Simultaneously untap all tapped creatures and tap all untapped creatures.";
     }
 
-    public BreakingWaveEffect(BreakingWaveEffect copy) {
+    private BreakingWaveEffect(final BreakingWaveEffect copy) {
         super(copy);
     }
 

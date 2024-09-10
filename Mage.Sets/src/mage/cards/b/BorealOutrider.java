@@ -28,7 +28,7 @@ public final class BorealOutrider extends CardImpl {
     public BorealOutrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -37,7 +37,8 @@ public final class BorealOutrider extends CardImpl {
         // Whenever you cast a creature spell, if {S} of any of that spell's color was spent to cast it, that creature enters the battlefield with an additional +1/+1 counter on it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new SpellCastControllerTriggeredAbility(
-                        new BorealOutriderEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false, true
+                        new BorealOutriderEffect(), StaticFilters.FILTER_SPELL_A_CREATURE,
+                        false, SetTargetPointer.SPELL
                 ), BorealOutriderCondition.instance, "Whenever you cast a creature spell, " +
                 "if {S} of any of that spell's colors was spent to cast it, that creature " +
                 "enters the battlefield with an additional +1/+1 counter on it."
@@ -83,11 +84,6 @@ class BorealOutriderEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Spell spell = (Spell) getValue("spellCast");
         return spell != null && event.getTargetId().equals(spell.getCard().getId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

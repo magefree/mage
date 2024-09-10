@@ -3,8 +3,6 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -21,14 +19,16 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
-import mage.watchers.common.PlayerLostLifeNonCombatWatcher;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
+import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -39,7 +39,7 @@ public final class SupremeLeaderSnoke extends CardImpl {
     public SupremeLeaderSnoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNOKE);
         this.setStartingLoyalty(3);
 
@@ -59,7 +59,8 @@ public final class SupremeLeaderSnoke extends CardImpl {
         ability3.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield).setText("It gains haste"));
         ability3.addEffect(new GainAbilityTargetEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect()), Duration.WhileOnBattlefield)
                 .setText("Sacrifice that creature at the beginning of the next end step"));
-        ability3.setTargetAdjuster(SupremeLeaderSnokeAdjuster.instance);
+        ability3.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE));
+        ability3.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability3);
     }
 
@@ -73,25 +74,8 @@ public final class SupremeLeaderSnoke extends CardImpl {
     }
 }
 
-enum SupremeLeaderSnokeAdjuster implements TargetAdjuster {
+enum OpponentNoncombatLostLifeCount implements DynamicValue {
     instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int cmc = 0;
-        for (Cost cost : ability.getCosts()) {
-            if (cost instanceof PayVariableLoyaltyCost) {
-                cmc = ((PayVariableLoyaltyCost) cost).getAmount();
-            }
-        }
-        FilterCreaturePermanent newFilter = StaticFilters.FILTER_PERMANENT_CREATURE.copy();
-        newFilter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(newFilter));
-    }
-}
-
-class OpponentNoncombatLostLifeCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -104,7 +88,7 @@ class OpponentNoncombatLostLifeCount implements DynamicValue {
 
     @Override
     public OpponentNoncombatLostLifeCount copy() {
-        return new OpponentNoncombatLostLifeCount();
+        return this;
     }
 
     @Override
@@ -123,7 +107,7 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
         staticText = "Put a loyalty counter on {this} for each life lost by all opponents from noncombat sources this turn";
     }
 
-    public SupremeLeaderSnokeCounterEffect(final SupremeLeaderSnokeCounterEffect effect) {
+    private SupremeLeaderSnokeCounterEffect(final SupremeLeaderSnokeCounterEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
     }
@@ -132,7 +116,7 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            int amount = new OpponentNoncombatLostLifeCount().calculate(game, source, this);
+            int amount = OpponentNoncombatLostLifeCount.instance.calculate(game, source, this);
             if (amount > 0) {
                 Counter counterToAdd = counter.copy();
                 counterToAdd.add(amount - counter.getCount());
@@ -145,5 +129,48 @@ class SupremeLeaderSnokeCounterEffect extends OneShotEffect {
     @Override
     public SupremeLeaderSnokeCounterEffect copy() {
         return new SupremeLeaderSnokeCounterEffect(this);
+    }
+}
+
+class PlayerLostLifeNonCombatWatcher extends Watcher {
+
+    private final Map<UUID, Integer> amountOfLifeLostThisTurn = new HashMap<>();
+
+    PlayerLostLifeNonCombatWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        // non combat lose life
+        if (event.getType() == GameEvent.EventType.LOST_LIFE && !event.getFlag()) {
+            UUID playerId = event.getPlayerId();
+            if (playerId != null) {
+                Integer amount = amountOfLifeLostThisTurn.get(playerId);
+                if (amount == null) {
+                    amount = event.getAmount();
+                } else {
+                    amount = amount + event.getAmount();
+                }
+                amountOfLifeLostThisTurn.put(playerId, amount);
+            }
+        }
+    }
+
+    public int getAllOppLifeLost(UUID playerId, Game game) {
+        int amount = 0;
+        for (UUID opponentId : this.amountOfLifeLostThisTurn.keySet()) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null && opponent.hasOpponent(playerId, game)) {
+                amount += this.amountOfLifeLostThisTurn.getOrDefault(opponentId, 0);
+            }
+        }
+        return amount;
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        amountOfLifeLostThisTurn.clear();
     }
 }

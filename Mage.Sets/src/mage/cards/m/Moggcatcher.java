@@ -38,7 +38,7 @@ public final class Moggcatcher extends CardImpl {
 
         // {3}, {T}: Search your library for a Goblin permanent card and put it onto the battlefield. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(3));
+        ability.addCost(new GenericManaCost(3));
         this.addAbility(ability);
     }
 

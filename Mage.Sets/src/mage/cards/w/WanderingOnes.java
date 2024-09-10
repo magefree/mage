@@ -23,7 +23,7 @@ public final class WanderingOnes extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public WanderingOnes (final WanderingOnes card) {
+    private WanderingOnes(final WanderingOnes card) {
         super(card);
     }
 

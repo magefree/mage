@@ -26,7 +26,7 @@ public final class LegionsLanding extends CardImpl {
     public LegionsLanding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.secondSideCardClazz = mage.cards.a.AdantoTheFirstFort.class;
 
@@ -55,7 +55,7 @@ class LegionsLandingTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When you attack with three or more creatures, " );
     }
 
-    public LegionsLandingTriggeredAbility(final LegionsLandingTriggeredAbility ability) {
+    private LegionsLandingTriggeredAbility(final LegionsLandingTriggeredAbility ability) {
         super(ability);
     }
 

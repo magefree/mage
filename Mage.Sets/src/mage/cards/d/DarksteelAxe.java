@@ -35,7 +35,7 @@ public final class DarksteelAxe extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
-    public DarksteelAxe (final DarksteelAxe card) {
+    private DarksteelAxe(final DarksteelAxe card) {
         super(card);
     }
 

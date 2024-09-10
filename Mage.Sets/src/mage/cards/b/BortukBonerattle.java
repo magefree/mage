@@ -32,7 +32,7 @@ public final class BortukBonerattle extends CardImpl {
     public BortukBonerattle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);
@@ -49,7 +49,7 @@ public final class BortukBonerattle extends CardImpl {
                         null
                 )),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it, choose target creature card in your graveyard. " +
+                "When {this} enters, if you cast it, choose target creature card in your graveyard. " +
                         "Return that card to the battlefield if its mana value is less than or equal to the number of basic land types among lands you control. " +
                         "Otherwise, put it into your hand."
         );

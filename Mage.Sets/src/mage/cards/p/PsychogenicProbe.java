@@ -43,7 +43,7 @@ class PsychogenicProbeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
     }
 
-    PsychogenicProbeTriggeredAbility(final PsychogenicProbeTriggeredAbility ability) {
+    private PsychogenicProbeTriggeredAbility(final PsychogenicProbeTriggeredAbility ability) {
         super(ability);
     }
 

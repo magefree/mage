@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInHand;
 
@@ -25,7 +26,7 @@ public final class ZombieInfestation extends CardImpl {
         // Discard two cards: Create a 2/2 black Zombie creature token.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new ZombieToken()),
-                new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
+                new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);
     }
 

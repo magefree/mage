@@ -38,7 +38,7 @@ public final class ConiferWurm extends CardImpl {
     public ConiferWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.WURM);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

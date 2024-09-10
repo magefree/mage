@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.RenownedHint;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -24,9 +25,11 @@ public class RenownAbility extends TriggeredAbilityImpl {
     public RenownAbility(int renownValue) {
         super(Zone.BATTLEFIELD, new BecomesRenownedSourceEffect(renownValue), false);
         this.renownValue = renownValue;
+
+        this.addHint(RenownedHint.instance);
     }
 
-    public RenownAbility(final RenownAbility ability) {
+    private RenownAbility(final RenownAbility ability) {
         super(ability);
         this.renownValue = ability.renownValue;
     }
@@ -60,12 +63,12 @@ public class RenownAbility extends TriggeredAbilityImpl {
 
 class BecomesRenownedSourceEffect extends OneShotEffect {
 
-    public BecomesRenownedSourceEffect(int renownValue) {
+    BecomesRenownedSourceEffect(int renownValue) {
         super(Outcome.BoostCreature);
         this.staticText = setText(renownValue);
     }
 
-    public BecomesRenownedSourceEffect(final BecomesRenownedSourceEffect effect) {
+    private BecomesRenownedSourceEffect(final BecomesRenownedSourceEffect effect) {
         super(effect);
     }
 
@@ -82,7 +85,7 @@ class BecomesRenownedSourceEffect extends OneShotEffect {
             int renownValue = ((RenownAbility) source).getRenownValue();
             // handle renown = X
             if (renownValue == Integer.MAX_VALUE) {
-                renownValue = source.getManaCostsToPay().getX();
+                renownValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
             }
             new AddCountersSourceEffect(CounterType.P1P1.createInstance(renownValue), true).apply(game, source);
             permanent.setRenowned(true);

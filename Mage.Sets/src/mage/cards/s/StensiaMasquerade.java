@@ -68,7 +68,7 @@ class StensiaMasqueradeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public StensiaMasqueradeTriggeredAbility(final StensiaMasqueradeTriggeredAbility ability) {
+    private StensiaMasqueradeTriggeredAbility(final StensiaMasqueradeTriggeredAbility ability) {
         super(ability);
     }
 

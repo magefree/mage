@@ -60,7 +60,7 @@ class SlaveringNullsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1), true);
     }
 
-    public SlaveringNullsTriggeredAbility(final SlaveringNullsTriggeredAbility ability) {
+    private SlaveringNullsTriggeredAbility(final SlaveringNullsTriggeredAbility ability) {
         super(ability);
     }
 

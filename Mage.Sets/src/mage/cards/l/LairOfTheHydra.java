@@ -1,7 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -20,6 +18,9 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class LairOfTheHydra extends CardImpl {
 
         // If you control two or more other lands, Lair of the Hydra enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldAbility(
-                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters the battlefield tapped.", null
+                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters tapped.", null
         ));
 
         // {T}: Add {G}.
@@ -51,6 +52,7 @@ public final class LairOfTheHydra extends CardImpl {
         for (Object cost : manaCosts) {
             if (cost instanceof VariableManaCost) {
                 ((VariableManaCost) cost).setMinX(1);
+                break;
             }
         }
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LairOfTheHydraEffect(), manaCosts));
@@ -68,7 +70,7 @@ public final class LairOfTheHydra extends CardImpl {
 
 class LairOfTheHydraEffect extends OneShotEffect {
 
-    public LairOfTheHydraEffect() {
+    LairOfTheHydraEffect() {
         super(Outcome.BecomeCreature);
         this.staticText = "Until end of turn, {this} becomes an X/X green Hydra creature. It's still a land. X can't be 0";
     }
@@ -84,12 +86,12 @@ class LairOfTheHydraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         game.addEffect(new BecomesCreatureSourceEffect(
                 new CreatureToken(xValue, xValue, "X/X green Hydra creature")
                     .withColor("G")
                     .withSubType(SubType.HYDRA),
-                "land", Duration.EndOfTurn), source
+                CardType.LAND, Duration.EndOfTurn), source
         );
         return true;
     }

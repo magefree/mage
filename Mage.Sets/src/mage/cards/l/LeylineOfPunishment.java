@@ -53,7 +53,7 @@ class LeylineOfPunishmentEffect2 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Damage can't be prevented";
     }
 
-    public LeylineOfPunishmentEffect2(final LeylineOfPunishmentEffect2 effect) {
+    private LeylineOfPunishmentEffect2(final LeylineOfPunishmentEffect2 effect) {
         super(effect);
     }
 

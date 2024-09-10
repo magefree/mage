@@ -55,7 +55,7 @@ class ThranWeaponryEffect extends BoostAllEffect{
         staticText = "All creatures get +2/+2 for as long as Thran Weaponry remains tapped";
     }
 
-    public ThranWeaponryEffect(final ThranWeaponryEffect effect) {
+    private ThranWeaponryEffect(final ThranWeaponryEffect effect) {
         super(effect);
     }
 

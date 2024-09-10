@@ -40,7 +40,7 @@ public final class RangerOfEos extends CardImpl {
         // When Ranger of Eos enters the battlefield, you may search your library for up to two creature cards with converted mana cost 1 or less,
         // reveal them, and put them into your hand. If you do, shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true), true));
     }
 
     private RangerOfEos(final RangerOfEos card) {

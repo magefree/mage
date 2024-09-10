@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -10,17 +9,18 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
-import mage.constants.AbilityWord;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class MoodmarkPainter extends CardImpl {
@@ -39,7 +39,7 @@ public final class MoodmarkPainter extends CardImpl {
                 new GainAbilityTargetEffect(
                         new MenaceAbility(false),
                         Duration.EndOfTurn
-                ).setText("target creature gains menace."),
+                ).setText("target creature gains menace"),
                 false);
         // target creature gains menace and gets +X/+0 until end of turn,
         // where X is the number of creature cards in your graveyard.

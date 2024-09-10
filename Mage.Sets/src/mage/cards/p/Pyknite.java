@@ -27,7 +27,8 @@ public final class Pyknite extends CardImpl {
 
         // When Pyknite enters the battlefield, draw a card at the beginning of the next turn's upkeep.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse)), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse))
+                .setText("draw a card at the beginning of the next turn's upkeep"), false));
     }
 
     private Pyknite(final Pyknite card) {

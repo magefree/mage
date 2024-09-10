@@ -9,6 +9,7 @@ import mage.abilities.condition.common.HaveInitiativeCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +26,7 @@ public final class ImoenMysticTrickster extends CardImpl {
     public ImoenMysticTrickster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.subtype.add(SubType.WIZARD);
@@ -44,6 +45,7 @@ public final class ImoenMysticTrickster extends CardImpl {
                 new DrawCardSourceControllerEffect(1), CompletedDungeonCondition.instance,
                 "Draw another card if you've completed a dungeon"
         ));
+        ability.addHint(InitiativeHint.instance);
         this.addAbility(ability.addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
 
         // Choose a Background

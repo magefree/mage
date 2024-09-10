@@ -30,7 +30,7 @@ public final class GiantLadybug extends CardImpl {
 
         // When Giant Ladybug enters the battlefield, you may search your library for a basic land card, reveal it, then shuffle and put that card on top.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A), true, true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A), true
         ), true));
     }
 

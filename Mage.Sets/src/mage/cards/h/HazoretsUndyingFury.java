@@ -9,9 +9,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -24,8 +22,6 @@ import java.util.UUID;
  */
 public final class HazoretsUndyingFury extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledLandPermanent("Lands you control");
-
     public HazoretsUndyingFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
 
@@ -36,9 +32,7 @@ public final class HazoretsUndyingFury extends CardImpl {
 
         //Land you control don't untap during your next untap step.
         this.getSpellAbility().addEffect(new DontUntapInControllersUntapStepAllEffect(
-                Duration.UntilYourNextTurn, TargetController.YOU,
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND
-        ).setText("Lands you control don't untap during your next untap phase"));
+                Duration.UntilYourNextTurn, TargetController.YOU, StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS));
     }
 
     private HazoretsUndyingFury(final HazoretsUndyingFury card) {
@@ -59,14 +53,14 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 6));
     }
 
-    public HazoretsUndyingFuryEffect() {
+    HazoretsUndyingFuryEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Shuffle your library, then exile the top four cards. " +
                 "You may cast any number of spells with mana value " +
                 "5 or less from among them without paying their mana costs";
     }
 
-    public HazoretsUndyingFuryEffect(final HazoretsUndyingFuryEffect effect) {
+    private HazoretsUndyingFuryEffect(final HazoretsUndyingFuryEffect effect) {
         super(effect);
     }
 

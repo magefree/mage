@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -7,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
@@ -51,12 +49,12 @@ public final class SingingTree extends CardImpl {
 
 class SingingTreeEffect extends OneShotEffect {
 
-    public SingingTreeEffect() {
+    SingingTreeEffect() {
         super(Outcome.Detriment);
         staticText = "Target attacking creature has base power 0 until end of turn.";
     }
 
-    public SingingTreeEffect(final SingingTreeEffect effect) {
+    private SingingTreeEffect(final SingingTreeEffect effect) {
         super(effect);
     }
 
@@ -64,7 +62,6 @@ class SingingTreeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         if (targetCreature != null) {
-            int toughness = targetCreature.getToughness().getModifiedBaseValue();
             game.addEffect(new SetBasePowerToughnessTargetEffect(StaticValue.get(0), null, Duration.EndOfTurn), source);
             return true;
         }
@@ -72,7 +69,7 @@ class SingingTreeEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public SingingTreeEffect copy() {
         return new SingingTreeEffect(this);
     }
 }

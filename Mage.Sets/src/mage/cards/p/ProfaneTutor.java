@@ -24,7 +24,7 @@ public final class ProfaneTutor extends CardImpl {
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{1}{B}"), this));
 
         // Search your library for a card, put that card into your hand, then shuffle.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true));
     }
 
     private ProfaneTutor(final ProfaneTutor card) {

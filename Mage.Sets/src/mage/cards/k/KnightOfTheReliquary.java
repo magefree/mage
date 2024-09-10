@@ -1,13 +1,9 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
@@ -16,12 +12,14 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,11 +46,10 @@ public final class KnightOfTheReliquary extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
 
         // {T}, Sacrifice a Forest or Plains: Search your library for a land card, put it onto the battlefield, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
-        Costs<Cost> costs = new CostsImpl<>();
-        costs.add(new TapSourceCost());
-        costs.add(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_LAND);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(filter));
+        this.addAbility(ability);
     }
 
     private KnightOfTheReliquary(final KnightOfTheReliquary card) {

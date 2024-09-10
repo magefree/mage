@@ -48,7 +48,7 @@ public final class SpeakeasyServer extends CardImpl {
 
 class SpeakeasyServerEffect extends OneShotEffect {
 
-    public SpeakeasyServerEffect() {
+    SpeakeasyServerEffect() {
         super(Outcome.GainLife);
         this.staticText = "you gain 1 life for each other creature you control";
     }

@@ -21,7 +21,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
  */
 public final class ThryxTheSuddenStorm extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("spells you cast with mana value 5 or greater");
     private static final FilterSpell filter2 = new FilterSpell();
 
     static {
@@ -33,7 +33,7 @@ public final class ThryxTheSuddenStorm extends CardImpl {
     public ThryxTheSuddenStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.GIANT);
         this.power = new MageInt(4);
@@ -46,8 +46,7 @@ public final class ThryxTheSuddenStorm extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Spells you cast with converted mana cost 5 or greater cost {1} less to cast and can't be countered.
-        Ability ability = new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
-                .setText("spells you cast with mana value 5 or greater cost {1} less to cast"));
+        Ability ability = new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1));
         ability.addEffect(new CantBeCounteredControlledEffect(
                 filter2, null, Duration.WhileOnBattlefield
         ).setText("and can't be countered"));

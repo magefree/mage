@@ -36,7 +36,7 @@ import mage.watchers.Watcher;
 public final class ConduitOfRuin extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card with mana value 7 or greater");
-    private static final FilterCreatureCard filterCost = new FilterCreatureCard("The first creature spell");
+    private static final FilterCreatureCard filterCost = new FilterCreatureCard("the first creature spell you cast each turn");
 
     static {
         filter.add(ColorlessPredicate.instance);
@@ -52,11 +52,10 @@ public final class ConduitOfRuin extends CardImpl {
 
         // When you cast Conduit of Ruin, you may search your library for a colorless creature card with converted mana cost 7 or greater, then shuffle your library and put that card on top of it.
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        this.addAbility(new CastSourceTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true), true));
+        this.addAbility(new CastSourceTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true), true));
 
         // The first creature spell you cast each turn costs {2} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filterCost, 2);
-        effect.setText("The first creature spell you cast each turn costs {2} less to cast.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new ConduitOfRuinWatcher());
     }
 

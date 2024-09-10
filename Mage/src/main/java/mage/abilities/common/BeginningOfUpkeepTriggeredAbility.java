@@ -38,7 +38,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public BeginningOfUpkeepTriggeredAbility(final BeginningOfUpkeepTriggeredAbility ability) {
+    protected BeginningOfUpkeepTriggeredAbility(final BeginningOfUpkeepTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.setTargetPointer = ability.setTargetPointer;

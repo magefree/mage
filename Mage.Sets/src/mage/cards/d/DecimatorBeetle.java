@@ -15,7 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -32,7 +32,7 @@ public final class DecimatorBeetle extends CardImpl {
     public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public DecimatorBeetle(UUID ownerId, CardSetInfo setInfo) {
@@ -67,12 +67,12 @@ public final class DecimatorBeetle extends CardImpl {
 
 class DecimatorBeetleEffect extends OneShotEffect {
 
-    public DecimatorBeetleEffect() {
+    DecimatorBeetleEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "remove a -1/-1 counter from target creature you control and put a -1/-1 counter on up to one target creature defending player controls";
     }
 
-    public DecimatorBeetleEffect(DecimatorBeetleEffect effect) {
+    private DecimatorBeetleEffect(final DecimatorBeetleEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class DecimatorBeetleEffect extends OneShotEffect {
         if (targetCreature != null
                 && targetCreature.getCounters(game).containsKey(CounterType.M1M1)) {
             Effect effect = new RemoveCounterTargetEffect(CounterType.M1M1.createInstance(1));
-            effect.setTargetPointer(targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             effect.apply(game, source);
         }
         targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());

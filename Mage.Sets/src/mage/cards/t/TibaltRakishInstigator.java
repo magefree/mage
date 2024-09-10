@@ -19,7 +19,7 @@ public final class TibaltRakishInstigator extends CardImpl {
     public TibaltRakishInstigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIBALT);
         this.setStartingLoyalty(5);
 

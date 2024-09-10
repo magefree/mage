@@ -35,7 +35,7 @@ public final class SparkTrooper extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // At the beginning of the end step, sacrifice Spark Trooper.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
 
     }
 

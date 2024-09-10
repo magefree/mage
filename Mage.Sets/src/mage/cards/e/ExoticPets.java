@@ -108,7 +108,7 @@ class ExoticPetsEffect extends OneShotEffect {
                 .map(PermanentIdPredicate::new)
                 .collect(Collectors.toSet())));
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         for (CounterType counterType : counterTypes) {
             target.clearChosen();
             target.withChooseHint("to add " + counterType.getArticle() + ' ' + counterType + " counter to");

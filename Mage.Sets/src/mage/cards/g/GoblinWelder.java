@@ -63,7 +63,7 @@ public final class GoblinWelder extends CardImpl {
             this.setTargetPointer(new EachTargetPointer());
         }
 
-        public GoblinWelderEffect(final GoblinWelderEffect effect) {
+        private GoblinWelderEffect(final GoblinWelderEffect effect) {
             super(effect);
         }
 
@@ -85,7 +85,6 @@ public final class GoblinWelder extends CardImpl {
                 return false;
             }
             boolean sacrifice = artifact.sacrifice(source, game);
-            game.getState().processAction(game); // bug #7672
             boolean putOnBF = owner.moveCards(card, Zone.BATTLEFIELD, source, game);
             if (sacrifice || putOnBF) {
                 return true;
@@ -107,7 +106,7 @@ public final class GoblinWelder extends CardImpl {
             targetName = "target artifact card in that player's graveyard";
         }
 
-        public GoblinWelderTarget(final GoblinWelderTarget target) {
+        private GoblinWelderTarget(final GoblinWelderTarget target) {
             super(target);
         }
 

@@ -18,8 +18,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.*;
 
@@ -62,15 +61,15 @@ class WorldQuellerEffect extends OneShotEffect {
         choice.add(CardType.LAND.toString());
         choice.add(CardType.PLANESWALKER.toString());
         choice.add(CardType.SORCERY.toString());
-        choice.add(CardType.TRIBAL.toString());
+        choice.add(CardType.KINDRED.toString());
     }
 
-    public WorldQuellerEffect() {
+    WorldQuellerEffect() {
         super(Outcome.Benefit);
         staticText = "you may choose a card type. If you do, each player sacrifices a permanent of that type";
     }
 
-    public WorldQuellerEffect(final WorldQuellerEffect effect) {
+    private WorldQuellerEffect(final WorldQuellerEffect effect) {
         super(effect);
     }
 
@@ -85,7 +84,7 @@ class WorldQuellerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
         if (player != null && sourceCreature != null) {
-            Choice choiceImpl = new ChoiceImpl();
+            Choice choiceImpl = new ChoiceImpl(false);
             choiceImpl.setChoices(choice);
             if (!player.choose(Outcome.Neutral, choiceImpl, game)) {
                 return false;
@@ -106,21 +105,20 @@ class WorldQuellerEffect extends OneShotEffect {
                 type = CardType.SORCERY;
             } else if (chosenType.equals(CardType.PLANESWALKER.toString())) {
                 type = CardType.PLANESWALKER;
-            } else if (chosenType.equals(CardType.TRIBAL.toString())) {
-                type = CardType.TRIBAL;
+            } else if (chosenType.equals(CardType.KINDRED.toString())) {
+                type = CardType.KINDRED;
             }
             if (type != null) {
                 FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control of type " + type.toString());
                 filter.add(type.getPredicate());
 
-                TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
-                target.setNotTarget(true);
+                TargetSacrifice target = new TargetSacrifice(filter);
 
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player2 = game.getPlayer(playerId);
                     if (player2 != null && target.canChoose(playerId, source, game)) {
-                        while (player2.canRespond() && !target.isChosen() && target.canChoose(playerId, source, game)) {
-                            player2.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        while (player2.canRespond() && !target.isChosen(game) && target.canChoose(playerId, source, game)) {
+                            player2.choose(Outcome.Sacrifice, target, source, game);
                         }
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {

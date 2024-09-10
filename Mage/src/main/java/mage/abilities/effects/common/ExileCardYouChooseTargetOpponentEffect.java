@@ -20,7 +20,7 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect {
     public ExileCardYouChooseTargetOpponentEffect(FilterCard filter) {
         super(Outcome.Discard);
         this.staticText = "target opponent reveals their hand. You choose "
-                + filter.getMessage() + " from it and exile that card";
+                + filter.getMessage() + (filter.getMessage().contains("from it") ? "" : " from it") + " and exile that card";
         this.filter = filter;
     }
 
@@ -32,7 +32,7 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller == null || opponent == null) {
             return false;
         }
@@ -41,7 +41,7 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCard(Zone.HAND, filter);
-        controller.choose(Outcome.Exile, opponent.getHand(), target, game);
+        controller.choose(Outcome.Exile, opponent.getHand(), target, source, game);
         Card card = opponent.getHand().get(target.getFirstTarget(), game);
         if (card != null) {
             controller.moveCards(card, Zone.EXILED, source, game);

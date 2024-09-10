@@ -92,7 +92,7 @@ class OwlbearCubEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "look at the top eight cards of your library. You may put a creature card " +
                 "from among them onto the battlefield tapped and attacking that player. " +
-                "Put the rest on the bottom of your library in random order";
+                "Put the rest on the bottom of your library in a random order";
     }
 
     private OwlbearCubEffect(final OwlbearCubEffect effect) {
@@ -112,7 +112,7 @@ class OwlbearCubEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 8));
         TargetCard target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_CREATURE);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);

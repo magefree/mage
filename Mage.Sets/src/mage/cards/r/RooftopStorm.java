@@ -56,7 +56,7 @@ class RooftopStormRuleEffect extends ContinuousEffectImpl {
         staticText = "You may pay {0} rather than pay the mana cost for Zombie creature spells you cast";
     }
 
-    public RooftopStormRuleEffect(final RooftopStormRuleEffect effect) {
+    private RooftopStormRuleEffect(final RooftopStormRuleEffect effect) {
         super(effect);
     }
 

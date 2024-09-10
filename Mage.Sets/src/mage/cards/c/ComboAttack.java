@@ -44,7 +44,7 @@ class ComboAttackEffect extends OneShotEffect {
         this.staticText = "Two target creatures your team controls each deal damage equal to their power to target creature";
     }
 
-    ComboAttackEffect(final ComboAttackEffect effect) {
+    private ComboAttackEffect(final ComboAttackEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class ComboAttackEffect extends OneShotEffect {
         }
         Permanent permanent1 = game.getPermanent(source.getTargets().get(0).getTargets().get(0));
         Permanent permanent2 = game.getPermanent(source.getTargets().get(0).getTargets().get(1));
-        Permanent permanent3 = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
+        Permanent permanent3 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent3 == null) {
             return false;
         }

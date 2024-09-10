@@ -22,7 +22,7 @@ public final class VirtusTheVeiled extends CardImpl {
     public VirtusTheVeiled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AZRA);
         this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(1);

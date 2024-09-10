@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -57,7 +57,7 @@ public final class BasrisLieutenant extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Basri's Lieutenant or another creature you control dies, if it had a +1/+1 counter on it, create a 2/2 white Knight creature token with vigilance.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new KnightToken()).setText("if it had a +1/+1 counter on it, create a 2/2 white Knight creature token with vigilance"),
                 false,
                 controlledCreatureWithP1P1CounterFilter

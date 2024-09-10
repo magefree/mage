@@ -62,7 +62,7 @@ public class DraftFromSpellbookEffect extends OneShotEffect {
         }
         CardInfo cardInfo = CardRepository
                 .instance
-                .findCards(new CardCriteria().nameExact(cardName))
+                .findCards(new CardCriteria().name(cardName))
                 .stream()
                 .findFirst()
                 .orElse(null);
@@ -70,7 +70,7 @@ public class DraftFromSpellbookEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = new HashSet<>();
-        cards.add(cardInfo.getCard());
+        cards.add(cardInfo.createCard());
         game.loadCards(cards, player.getId());
         player.moveCards(cards, Zone.HAND, source, game);
         return true;

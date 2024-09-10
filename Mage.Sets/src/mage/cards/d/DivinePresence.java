@@ -39,12 +39,12 @@ public final class DivinePresence extends CardImpl {
 
 class DivinePresenceEffect extends ReplacementEffectImpl {
 
-    public DivinePresenceEffect() {
+    DivinePresenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "If a source would deal 4 or more damage to a permanent or player, that source deals 3 damage to that permanent or player instead.";
     }
 
-    public DivinePresenceEffect(final DivinePresenceEffect effect) {
+    private DivinePresenceEffect(final DivinePresenceEffect effect) {
         super(effect);
     }
 
@@ -62,11 +62,6 @@ class DivinePresenceEffect extends ReplacementEffectImpl {
             default:
                 return false;
         }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

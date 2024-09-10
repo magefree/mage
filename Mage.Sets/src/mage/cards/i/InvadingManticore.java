@@ -24,7 +24,7 @@ public final class InvadingManticore extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Invading Manticore enters the battlefield, amass 2.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(2, SubType.ZOMBIE)));
     }
 
     private InvadingManticore(final InvadingManticore card) {

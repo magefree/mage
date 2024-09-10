@@ -59,7 +59,7 @@ class IslandSanctuaryEffect extends ReplacementEffectImpl {
         staticText = "If you would draw a card during your draw step, instead you may skip that draw. If you do, until your next turn, you can't be attacked except by creatures with flying and/or islandwalk";
     }
 
-    IslandSanctuaryEffect(final IslandSanctuaryEffect effect) {
+    private IslandSanctuaryEffect(final IslandSanctuaryEffect effect) {
         super(effect);
     }
 
@@ -81,12 +81,7 @@ class IslandSanctuaryEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.isControlledBy(event.getPlayerId()) && game.getTurn().getStepType() == PhaseStep.DRAW && game.getActivePlayerId().equals(source.getControllerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+        return source.isControlledBy(event.getPlayerId()) && game.getTurnStepType() == PhaseStep.DRAW && game.getActivePlayerId().equals(source.getControllerId());
     }
 
     @Override

@@ -8,13 +8,13 @@ import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 
 /**
- *
  * @author JRHerlehy
  */
 public class TinyLeadersDuel extends GameTinyLeadersImpl {
 
-    public TinyLeadersDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife);
+    public TinyLeadersDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range,
+                           Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, startLife, startHandSize);
     }
 
     public TinyLeadersDuel(final TinyLeadersDuel game) {

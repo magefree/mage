@@ -51,7 +51,7 @@ class BloodFrenzyCastRestriction extends ContinuousRuleModifyingEffectImpl {
         staticText = "Cast this spell only before the combat damage step";
     }
 
-    BloodFrenzyCastRestriction(final BloodFrenzyCastRestriction effect) {
+    private BloodFrenzyCastRestriction(final BloodFrenzyCastRestriction effect) {
         super(effect);
     }
 
@@ -68,20 +68,15 @@ class BloodFrenzyCastRestriction extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if(event.getSourceId().equals(source.getSourceId())) {
-            if(game.getPhase().getType() == TurnPhase.COMBAT
+            if(game.getTurnPhaseType() == TurnPhase.COMBAT
                 // There cannot be a legal target before declare attackers,
                 // so in practice it is limited to these two steps.
-                && (game.getStep().getType() == PhaseStep.DECLARE_ATTACKERS
-                || game.getStep().getType() == PhaseStep.DECLARE_BLOCKERS)) {
+                && (game.getTurnStepType() == PhaseStep.DECLARE_ATTACKERS
+                || game.getTurnStepType() == PhaseStep.DECLARE_BLOCKERS)) {
                 return false;
             }
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 }

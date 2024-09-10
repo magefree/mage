@@ -16,11 +16,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -38,12 +36,9 @@ public final class RhythmOfTheWild extends CardImpl {
 
     private static final FilterSpell filter
             = new FilterCreatureSpell("Creature spells you control");
-    private static final FilterPermanent filter2
-            = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter2.add(TokenPredicate.FALSE);
     }
 
     public RhythmOfTheWild(UUID ownerId, CardSetInfo setInfo) {
@@ -57,7 +52,8 @@ public final class RhythmOfTheWild extends CardImpl {
         // Nontoken creatures you control have riot.
         Ability ability = new SimpleStaticAbility(new RhythmOfTheWildEffect());
         ability.addEffect(new GainAbilityControlledEffect(
-                new RiotAbility(), Duration.WhileOnBattlefield, filter2
+                new RiotAbility(), Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN
         ).setText(""));
         this.addAbility(ability);
     }

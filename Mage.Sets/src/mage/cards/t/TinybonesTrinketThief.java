@@ -30,7 +30,7 @@ public final class TinybonesTrinketThief extends CardImpl {
     public TinybonesTrinketThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SKELETON);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(1);

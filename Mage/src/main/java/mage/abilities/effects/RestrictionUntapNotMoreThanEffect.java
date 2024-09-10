@@ -11,7 +11,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public abstract class RestrictionUntapNotMoreThanEffect extends ContinuousEffectImpl {
@@ -26,12 +25,12 @@ public abstract class RestrictionUntapNotMoreThanEffect extends ContinuousEffect
         this.filter = filter;
     }
 
-    public RestrictionUntapNotMoreThanEffect(final RestrictionUntapNotMoreThanEffect effect) {
+    protected RestrictionUntapNotMoreThanEffect(final RestrictionUntapNotMoreThanEffect effect) {
         super(effect);
         this.number = effect.number;
         if (effect.filter != null) {
             this.filter = effect.filter.copy();
-        } 
+        }
     }
 
     @Override

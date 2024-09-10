@@ -22,7 +22,7 @@ public class ChannelAbility extends ActivatedAbilityImpl {
         this.setAbilityWord(AbilityWord.CHANNEL);
     }
 
-    public ChannelAbility(final ChannelAbility ability) {
+    protected ChannelAbility(final ChannelAbility ability) {
         super(ability);
     }
 

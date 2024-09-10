@@ -29,7 +29,8 @@ public final class FogElemental extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Fog Elemental attacks or blocks, sacrifice it at end of combat.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())), false));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())
+                .setTriggerPhrase("")).setText("sacrifice it at end of combat"), false));
     }
 
     private FogElemental(final FogElemental card) {

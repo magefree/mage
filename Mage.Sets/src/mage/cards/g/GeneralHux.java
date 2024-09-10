@@ -31,13 +31,13 @@ public final class GeneralHux extends CardImpl {
     public GeneralHux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever General Hux or another nontoken creature enters the battlefield under your control, until end of turn, target creature gains "{B}: This creature gets +1/+1 until end of turn."
+        // Whenever General Hux or another nontoken creature you control enters, until end of turn, target creature gains "{B}: This creature gets +1/+1 until end of turn."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn)
                         .setText("This creature gets +1/+1 until end of turn"),

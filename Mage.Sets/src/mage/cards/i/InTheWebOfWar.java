@@ -15,7 +15,6 @@ import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -26,10 +25,10 @@ public final class InTheWebOfWar extends CardImpl {
     public InTheWebOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
 
-        // Whenever a creature enters the battlefield under your control, it gets +2/+0 and gains haste until end of turn.
+        // Whenever a creature you control enters, it gets +2/+0 and gains haste until end of turn.
         Effect effect = new BoostTargetEffect(2,0, Duration.EndOfTurn);
         effect.setText("it gets +2/+0");
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_PERMANENT_A_CREATURE, false, SetTargetPointer.PERMANENT, null);
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_PERMANENT_A_CREATURE, false, SetTargetPointer.PERMANENT);
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains haste until end of turn");
         ability.addEffect(effect);

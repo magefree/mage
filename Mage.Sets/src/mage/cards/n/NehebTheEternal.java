@@ -23,7 +23,7 @@ public final class NehebTheEternal extends CardImpl {
     public NehebTheEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);

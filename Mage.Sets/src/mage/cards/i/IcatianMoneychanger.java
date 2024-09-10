@@ -50,7 +50,7 @@ public final class IcatianMoneychanger extends CardImpl {
         
         // Sacrifice Icatian Moneychanger: You gain 1 life for each credit counter on Icatian Moneychanger. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
-                new GainLifeEffect(new CountersSourceCount(CounterType.CREDIT)), new SacrificeSourceCost(), new IsStepCondition(PhaseStep.UPKEEP), null));
+                new GainLifeEffect(new CountersSourceCount(CounterType.CREDIT)), new SacrificeSourceCost(), new IsStepCondition(PhaseStep.UPKEEP)));
     }
 
     private IcatianMoneychanger(final IcatianMoneychanger card) {

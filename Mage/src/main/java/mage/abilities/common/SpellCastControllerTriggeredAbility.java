@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
@@ -11,61 +12,55 @@ import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- * @author North
+ * @author North, Susucr
  */
 public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     protected final FilterSpell filter;
-    protected String rule;  // TODO: This sould be final, but is not because of the telescoping contructors
 
-    // The source SPELL that triggered the ability will be set as target to effect
-    protected boolean rememberSource;
-    // Use it if you want to remember CARD instead spell
-    protected boolean rememberSourceAsCard;
+    // If either the cast spell or the card must be set as TargetPointer of effects.
+    protected final SetTargetPointer setTargetPointer;
+
     // Trigger only for spells cast from this zone. Default is from any zone.
-    private Zone fromZone = Zone.ALL;
+    private final Zone fromZone;
 
     public SpellCastControllerTriggeredAbility(Effect effect, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL_A, optional, false);
+        this(effect, null, optional);
     }
 
     public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
-        this(effect, filter, optional, false);
+        this(effect, filter, optional, SetTargetPointer.NONE);
     }
 
-    public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, Zone fromZone) {
-        this(effect, filter, optional, false);
-        this.fromZone = fromZone;
-        makeTriggerPhrase();
+    public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter,
+                                               boolean optional, SetTargetPointer setTargetPointer) {
+        this(Zone.BATTLEFIELD, effect, filter, optional, setTargetPointer);
     }
 
-    public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, String rule) {
-        this(effect, filter, optional, false);
-        this.rule = rule;
+    public SpellCastControllerTriggeredAbility(Zone zone, Effect effect, FilterSpell filter,
+                                               boolean optional, SetTargetPointer setTargetPointer) {
+        this(zone, effect, filter, optional, setTargetPointer, null);
     }
 
-    public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
-        this(Zone.BATTLEFIELD, effect, filter, optional, rememberSource);
-    }
 
-    public SpellCastControllerTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
-        this(zone, effect, filter, optional, rememberSource, false);
-    }
-
-    public SpellCastControllerTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, boolean rememberSource, boolean rememberSourceAsCard) {
+    public SpellCastControllerTriggeredAbility(Zone zone, Effect effect, FilterSpell filter,
+                                               boolean optional, SetTargetPointer setTargetPointer,
+                                               Zone fromZone) {
         super(zone, effect, optional);
-        this.filter = filter;
-        this.rememberSource = rememberSource;
-        this.rememberSourceAsCard = rememberSourceAsCard;
+        this.filter = filter == null ? StaticFilters.FILTER_SPELL_A : filter;
+        this.setTargetPointer = setTargetPointer;
+        this.fromZone = fromZone == null ? Zone.ALL : fromZone;
         makeTriggerPhrase();
     }
 
-    public SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
+    public static SpellCastControllerTriggeredAbility createWithFromZone(Effect effect, FilterSpell filter, boolean optional, Zone fromZone) {
+        return new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, filter, optional, SetTargetPointer.NONE, fromZone);
+    }
+
+    protected SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
-        this.rule = ability.rule;
-        this.rememberSource = ability.rememberSource;
-        this.rememberSourceAsCard = ability.rememberSourceAsCard;
+        this.setTargetPointer = ability.setTargetPointer;
         this.fromZone = ability.fromZone;
     }
 
@@ -86,15 +81,20 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         this.getEffects().setValue("spellCast", spell);
-        if (rememberSource) {
-            this.getEffects().setTargetPointer(new FixedTarget(rememberSourceAsCard ? spell.getCard().getId() : spell.getId(), game));
+        switch (setTargetPointer) {
+            case NONE:
+            case PLAYER: // for subclasses only, needs to be handled there
+                break;
+            case SPELL:
+                getAllEffects().setTargetPointer(new FixedTarget(spell.getId(), game));
+                break;
+            case CARD:
+                getAllEffects().setTargetPointer(new FixedTarget(spell.getCard().getId()));
+                break;
+            default:
+                throw new UnsupportedOperationException("Unexpected setTargetPointer in SpellCastControllerTriggeredAbility: " + setTargetPointer);
         }
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return rule != null ? rule : super.getRule();
     }
 
     @Override
@@ -103,6 +103,18 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private void makeTriggerPhrase() {
-        setTriggerPhrase("Whenever you cast " + filter.getMessage() + (fromZone != Zone.ALL ? " from your " + fromZone.toString().toLowerCase() : "") + ", ");
+        String text = getWhen() + "you cast " + filter.getMessage();
+
+        switch (fromZone) {
+            case ALL:
+                break;
+            case EXILED:
+                text += " from exile";
+                break;
+            default:
+                text += " from your " + fromZone.toString().toLowerCase();
+                break;
+        }
+        setTriggerPhrase(text + ", ");
     }
 }

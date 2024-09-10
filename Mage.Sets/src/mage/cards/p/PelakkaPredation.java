@@ -4,7 +4,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
@@ -17,7 +17,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class PelakkaPredation extends ModalDoubleFacesCard {
+public final class PelakkaPredation extends ModalDoubleFacedCard {
 
     private static final FilterCard filter = new FilterCard("a card from it with mana value 3 or greater");
 

@@ -56,7 +56,6 @@ public class DeckBuilderTest {
 
         public RandomArtifactCreature(UUID ownerId, int cardNumber, String name) {
             super(ownerId, new CardSetInfo(name, "MRD", String.valueOf(cardNumber), Rarity.COMMON), new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
-            this.expansionSetCode = "MRD";
             this.power = new MageInt(1);
             this.toughness = new MageInt(1);
         }

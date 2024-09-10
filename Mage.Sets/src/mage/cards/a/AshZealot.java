@@ -45,7 +45,7 @@ public final class AshZealot extends CardImpl {
 
     }
 
-    public AshZealot (final AshZealot card) {
+    private AshZealot(final AshZealot card) {
         super(card);
     }
 
@@ -61,7 +61,7 @@ class AshZealotTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3), false);
     }
 
-    public AshZealotTriggeredAbility(final AshZealotTriggeredAbility ability) {
+    private AshZealotTriggeredAbility(final AshZealotTriggeredAbility ability) {
         super(ability);
     }
 

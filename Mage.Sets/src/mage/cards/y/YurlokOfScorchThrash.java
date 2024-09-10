@@ -28,8 +28,8 @@ public final class YurlokOfScorchThrash extends CardImpl {
     public YurlokOfScorchThrash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VIASHINO);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

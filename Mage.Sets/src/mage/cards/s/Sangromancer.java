@@ -35,7 +35,7 @@ public final class Sangromancer extends CardImpl {
         this.addAbility(new SangromancerSecondTriggeredAbility());
     }
 
-    public Sangromancer (final Sangromancer card) {
+    private Sangromancer(final Sangromancer card) {
         super(card);
     }
 
@@ -51,7 +51,7 @@ class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature an opponent controls dies, ");
     }
 
-    SangromancerFirstTriggeredAbility(final SangromancerFirstTriggeredAbility ability) {
+    private SangromancerFirstTriggeredAbility(final SangromancerFirstTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,7 +83,7 @@ class SangromancerSecondTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent discards a card, ");
     }
 
-    SangromancerSecondTriggeredAbility(final SangromancerSecondTriggeredAbility ability) {
+    private SangromancerSecondTriggeredAbility(final SangromancerSecondTriggeredAbility ability) {
         super(ability);
     }
 

@@ -26,7 +26,7 @@ public final class GiselaBladeOfGoldnight extends CardImpl {
 
     public GiselaBladeOfGoldnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);
@@ -88,11 +88,6 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
         }
         return player.hasOpponent(event.getTargetId(), game)
                 || player.hasOpponent(game.getControllerId(event.getTargetId()), game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

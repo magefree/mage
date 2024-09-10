@@ -8,10 +8,11 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -62,12 +63,11 @@ class BreakthroughEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int amountToKeep = source.getManaCostsToPay().getX();
+        int amountToKeep = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (amountToKeep == 0) {
             player.discard(player.getHand(), false, source, game);
         } else if (amountToKeep < player.getHand().size()) {
-            TargetCardInHand target = new TargetCardInHand(amountToKeep, new FilterCard());
-            target.setTargetName("cards to keep");
+            TargetCardInHand target = new TargetCardInHand(amountToKeep, StaticFilters.FILTER_CARD).withChooseHint("to keep");
             target.choose(Outcome.Benefit, player.getId(), source.getSourceId(), source, game);
             Cards cards = player.getHand().copy();
             cards.removeIf(target.getTargets()::contains);

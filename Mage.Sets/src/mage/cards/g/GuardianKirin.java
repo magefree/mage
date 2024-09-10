@@ -9,9 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,13 +17,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GuardianKirin extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public GuardianKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -39,7 +30,7 @@ public final class GuardianKirin extends CardImpl {
 
         // Whenever another creature you control dies, put a +1/+1 counter on Guardian Kirin.
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL
         ));
     }
 

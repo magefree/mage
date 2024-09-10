@@ -5,7 +5,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.SacrificeCost;
 import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,6 +15,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public final class AshnodTheUncaring extends CardImpl {
     public AshnodTheUncaring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
@@ -54,6 +54,8 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
 
     AshnodTheUncaringTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect(), true);
+        setTriggerPhrase("Whenever you activate an ability of an artifact or creature that isn't a mana ability, " +
+                "if one or more permanents were sacrificed to activate it, ");
     }
 
     private AshnodTheUncaringTriggeredAbility(final AshnodTheUncaringTriggeredAbility ability) {
@@ -77,7 +79,7 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
         if (stackAbility == null
-                || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl
+                || stackAbility.getStackAbility().isManaActivatedAbility()
                 || stackAbility
                 .getStackAbility()
                 .getCosts()
@@ -85,18 +87,11 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
                 .noneMatch(SacrificeCost.class::isInstance)) {
             return false;
         }
-        Permanent permanent = game.getPermanent(stackAbility.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(stackAbility.getSourceId());
         if (permanent == null || (!permanent.isArtifact(game) && !permanent.isCreature(game))) {
             return false;
         }
-        this.getEffects().setValue("stackObject", stackAbility);
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you activate an ability of an artifact or creature that isn't a mana ability, " +
-                "if one or more permanents were sacrificed to activate it, " +
-                "you may copy that ability. You may choose new targets for the copy.";
     }
 }

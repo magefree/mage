@@ -1,32 +1,25 @@
 package mage.cards.c;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.CreatureExploresTriggeredAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.c.CarnelianOrbOfDragonkindHasteEffect;
-import mage.cards.c.CarnelianOrbOfDragonkindWatcher;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +52,7 @@ public final class CarnelianOrbOfDragonkind extends CardImpl {
 
 class CarnelianOrbOfDragonkindWatcher extends Watcher {
 
-    private List<UUID> creatures = new ArrayList<>();
+    private final List<UUID> creatures = new ArrayList<>();
 
     public CarnelianOrbOfDragonkindWatcher() {
         super(WatcherScope.CARD);
@@ -72,7 +65,7 @@ class CarnelianOrbOfDragonkindWatcher extends Watcher {
         }
 
         MageObject target = game.getObject(event.getTargetId());
-        if (target == null || !(target instanceof Spell)) {
+        if (!(target instanceof Spell)) {
             return;
         }
 
@@ -104,17 +97,17 @@ class CarnelianOrbOfDragonkindWatcher extends Watcher {
 
 class CarnelianOrbOfDragonkindHasteEffect extends ContinuousEffectImpl {
 
-    public CarnelianOrbOfDragonkindHasteEffect() {
+    CarnelianOrbOfDragonkindHasteEffect() {
         super(Duration.EndOfGame, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    public CarnelianOrbOfDragonkindHasteEffect(final mage.cards.c.CarnelianOrbOfDragonkindHasteEffect effect) {
+    private CarnelianOrbOfDragonkindHasteEffect(final CarnelianOrbOfDragonkindHasteEffect effect) {
         super(effect);
     }
 
     @Override
-    public ContinuousEffect copy() {
-        return new mage.cards.c.CarnelianOrbOfDragonkindHasteEffect(this);
+    public CarnelianOrbOfDragonkindHasteEffect copy() {
+        return new CarnelianOrbOfDragonkindHasteEffect(this);
     }
 
     @Override

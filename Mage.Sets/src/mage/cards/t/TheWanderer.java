@@ -38,7 +38,7 @@ public final class TheWanderer extends CardImpl {
     public TheWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.setStartingLoyalty(5);
 
         // Prevent all noncombat damage that would be dealt to you and other permanents you control.

@@ -27,7 +27,7 @@ public final class GalazethPrismari extends CardImpl {
     public GalazethPrismari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);

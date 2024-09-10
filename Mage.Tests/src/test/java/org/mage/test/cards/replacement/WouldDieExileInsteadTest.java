@@ -128,4 +128,26 @@ public class WouldDieExileInsteadTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, hGiant, 1);
         assertExileCount(playerB, hGiant, 0);
     }
+
+    @Test
+    public void miseryShadowReplacement() {
+        // Misery's Shadow {1}{B} - 2/2 Creature
+        // If a creature an opponent controls would die, exile it instead.
+        // {1}: Misery’s Shadow gets +1/+1 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Misery's Shadow", 1);
+        // Doom Blade {1}{B} - Instant
+        // Destroy target non-black creature.
+        addCard(Zone.HAND, playerA, "Doom Blade", 1);
+        // Giant Spider - 2/4 Creature
+        // Reach
+        addCard(Zone.BATTLEFIELD, playerB, "Giant Spider", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Doom Blade", "Giant Spider");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Giant Spider", 0);
+        assertExileCount("Giant Spider", 1);
+    }
 }

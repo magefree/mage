@@ -66,7 +66,7 @@ public final class WishclawTalisman extends CardImpl {
 
 class WishclawTalismanEffect extends OneShotEffect {
 
-    private static final Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary());
+    private static final Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false);
 
     WishclawTalismanEffect() {
         super(Outcome.Benefit);
@@ -91,7 +91,7 @@ class WishclawTalismanEffect extends OneShotEffect {
             return false;
         }
         TargetPlayer target = new TargetOpponent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.choose(outcome, target, source, game)) {
             return false;
         }

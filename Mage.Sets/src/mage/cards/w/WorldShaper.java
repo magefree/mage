@@ -51,12 +51,12 @@ public final class WorldShaper extends CardImpl {
 
 class WorldShaperEffect extends OneShotEffect {
 
-    public WorldShaperEffect() {
+    WorldShaperEffect() {
         super(Outcome.PutLandInPlay);
         this.staticText = "return all land cards from your graveyard to the battlefield tapped";
     }
 
-    public WorldShaperEffect(final WorldShaperEffect effect) {
+    private WorldShaperEffect(final WorldShaperEffect effect) {
         super(effect);
     }
 

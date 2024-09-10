@@ -4,22 +4,30 @@ import java.util.UUID;
 import mage.client.MagePane;
 
 /**
+ * Game GUI: tournament frame
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentPane extends MagePane {
 
-    /**
-     * Creates new form TournamentPane
-     */
+    UUID tableId = null;
+    UUID tournamentId = null;
+
     public TournamentPane() {
         initComponents();
     }
 
-    public void showTournament(UUID tournamentId) {
+    public void showTournament(UUID tableId, UUID tournamentId) {
+        this.tableId = tableId;
+        this.tournamentId = tournamentId;
         this.setTitle("Tournament " + tournamentId);
         this.tournamentPanel.showTournament(tournamentId);
         this.repaint();
+    }
+
+    @Override
+    public boolean isActiveTable() {
+        return this.tournamentId != null;
     }
 
     public void removeTournament() {
@@ -37,6 +45,11 @@ public class TournamentPane extends MagePane {
             return null;
         }
         return tournamentPanel.getTournamentId();
+    }
+
+    @Override
+    public UUID getSortTableId() {
+        return tableId;
     }
 
     /**
@@ -74,7 +87,7 @@ public class TournamentPane extends MagePane {
 
     @Override
     public void deactivated() {
+        super.deactivated();
         tournamentPanel.stopTasks();
     }
-
 }

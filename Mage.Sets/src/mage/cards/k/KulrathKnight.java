@@ -63,7 +63,7 @@ class KulrathKnightRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures your opponents control with counters on them can't attack or block.";
     }
 
-    public KulrathKnightRestrictionEffect(final KulrathKnightRestrictionEffect effect) {
+    private KulrathKnightRestrictionEffect(final KulrathKnightRestrictionEffect effect) {
         super(effect);
     }
 

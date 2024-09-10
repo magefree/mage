@@ -52,12 +52,12 @@ public final class VanguardsShield extends CardImpl {
 
 class VanguardsShieldEffect extends ContinuousEffectImpl {
 
-    public VanguardsShieldEffect() {
+    VanguardsShieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.AddAbility);
         staticText = "Equipped creature can block an additional creature each combat";
     }
 
-    public VanguardsShieldEffect(final VanguardsShieldEffect effect) {
+    private VanguardsShieldEffect(final VanguardsShieldEffect effect) {
         super(effect);
     }
 

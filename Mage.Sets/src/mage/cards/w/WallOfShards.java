@@ -21,7 +21,7 @@ public final class WallOfShards extends CardImpl {
 
     public WallOfShards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.WALL);
         this.power = new MageInt(1);
         this.toughness = new MageInt(8);

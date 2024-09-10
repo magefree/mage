@@ -8,12 +8,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
@@ -23,12 +22,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class RumblingAftershocks extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public RumblingAftershocks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
@@ -58,7 +51,7 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a kicked spell, ");
     }
 
-    RumblingAftershocksTriggeredAbility(final RumblingAftershocksTriggeredAbility ability) {
+    private RumblingAftershocksTriggeredAbility(final RumblingAftershocksTriggeredAbility ability) {
         super(ability);
     }
 
@@ -74,10 +67,13 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int kickedCount = KickerAbility.getSpellKickedCount(game, event.getTargetId());
-        if (kickedCount > 0) {
-            this.getEffects().get(0).setValue("damageAmount", kickedCount);
-            return true;
+        Spell spell = game.getSpell(event.getTargetId());
+        if (spell != null) {
+            int kickedCount = KickerAbility.getKickedCounter(game, spell.getSpellAbility());
+            if (kickedCount > 0) {
+                this.getEffects().get(0).setValue("damageAmount", kickedCount);
+                return true;
+            }
         }
         return false;
     }
@@ -85,12 +81,12 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
 
 class RumblingAftershocksDealDamageEffect extends OneShotEffect {
 
-    public RumblingAftershocksDealDamageEffect() {
+    RumblingAftershocksDealDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "you may have {this} deal damage to any target equal to the number of times that spell was kicked";
     }
 
-    public RumblingAftershocksDealDamageEffect(final RumblingAftershocksDealDamageEffect effect) {
+    private RumblingAftershocksDealDamageEffect(final RumblingAftershocksDealDamageEffect effect) {
         super(effect);
     }
 
@@ -104,12 +100,12 @@ class RumblingAftershocksDealDamageEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Integer damageAmount = (Integer) this.getValue("damageAmount");
         if (player != null && damageAmount > 0) {
-            Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+            Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (targetPlayer != null) {
                 targetPlayer.damage(damageAmount, source.getSourceId(), source, game);
                 return true;
             }
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 permanent.damage(damageAmount, source.getSourceId(), source, game, false, true);
                 return true;

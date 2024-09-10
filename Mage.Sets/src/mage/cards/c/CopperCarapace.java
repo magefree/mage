@@ -1,7 +1,8 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.combat.CantBlockAttachedEffect;
@@ -13,7 +14,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 
 /**
  *
@@ -26,9 +26,11 @@ public final class CopperCarapace extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
+
         // Equipped creature gets +2/+2 and can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
+        ability.addEffect(new CantBlockAttachedEffect(AttachmentType.EQUIPMENT).setText("and can't block"));
+        this.addAbility(ability);
     }
 
     private CopperCarapace(final CopperCarapace card) {

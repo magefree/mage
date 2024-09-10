@@ -43,7 +43,7 @@ public final class BreachingLeviathan extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BreachingLeviathanEffect(), false),
                 CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters the battlefield, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps."),
+                "When {this} enters, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps."),
                 new CastFromHandWatcher());
     }
 
@@ -70,7 +70,7 @@ class BreachingLeviathanEffect extends OneShotEffect {
         this.staticText = "tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps";
     }
 
-    public BreachingLeviathanEffect(final BreachingLeviathanEffect effect) {
+    private BreachingLeviathanEffect(final BreachingLeviathanEffect effect) {
         super(effect);
     }
 

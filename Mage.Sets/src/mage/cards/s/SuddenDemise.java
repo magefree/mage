@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -15,6 +14,9 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,12 +44,12 @@ public final class SuddenDemise extends CardImpl {
 
 class SuddenDemiseDamageEffect extends OneShotEffect {
 
-    public SuddenDemiseDamageEffect() {
+    SuddenDemiseDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "Choose a color. {this} deals X damage to each creature of the chosen color";
     }
 
-    public SuddenDemiseDamageEffect(final SuddenDemiseDamageEffect effect) {
+    private SuddenDemiseDamageEffect(final SuddenDemiseDamageEffect effect) {
         super(effect);
     }
 
@@ -61,7 +63,7 @@ class SuddenDemiseDamageEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         ChoiceColor choice = new ChoiceColor();
         if (controller != null && controller.choose(outcome, choice, game)) {
-            final int damage = source.getManaCostsToPay().getX();
+            final int damage = CardUtil.getSourceCostsTag(game, source, "X", 0);
             FilterPermanent filter = new FilterCreaturePermanent();
             filter.add(new ColorPredicate(choice.getColor()));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {

@@ -38,10 +38,10 @@ public final class Overtaker extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
-        Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
-        ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        ability.addEffect(effect);
+        ability.addEffect(new GainControlTargetEffect(Duration.EndOfTurn)
+                .setText("and gain control of it until end of turn"));
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
+                .setText("that creature gains haste until end of turn"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

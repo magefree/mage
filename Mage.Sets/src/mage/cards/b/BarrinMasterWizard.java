@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.MageInt;
@@ -12,8 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -26,7 +24,7 @@ public final class BarrinMasterWizard extends CardImpl {
 
     public BarrinMasterWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(1);
@@ -34,7 +32,7 @@ public final class BarrinMasterWizard extends CardImpl {
 
         //{2}, Sacrifice a permanent: Return target creature to its owner's hand.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent())));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

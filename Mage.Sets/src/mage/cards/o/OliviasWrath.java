@@ -43,6 +43,7 @@ public final class OliviasWrath extends CardImpl {
                 "each non-Vampire creature gets -X/-X until end of turn, "
                 + "where X is the number of Vampires you control"
         ));
+        this.getSpellAbility().addHint(hint);
     }
 
     private OliviasWrath(final OliviasWrath card) {

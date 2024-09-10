@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -21,7 +21,7 @@ public final class FamiliarGround extends CardImpl {
 
 
         // Each creature you control can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneAllEffect(new FilterControlledCreaturePermanent())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE)));
     }
 
     private FamiliarGround(final FamiliarGround card) {

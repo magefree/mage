@@ -34,7 +34,7 @@ public final class SaheeliRai extends CardImpl {
 
     public SaheeliRai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SAHEELI);
 
         this.setStartingLoyalty(3);
@@ -72,7 +72,7 @@ class SaheeliRaiCreateTokenEffect extends OneShotEffect {
         this.staticText = "Create a token that's a copy of target artifact or creature you control, except it's an artifact in addition to its other types. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    SaheeliRaiCreateTokenEffect(final SaheeliRaiCreateTokenEffect effect) {
+    private SaheeliRaiCreateTokenEffect(final SaheeliRaiCreateTokenEffect effect) {
         super(effect);
     }
 

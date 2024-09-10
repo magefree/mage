@@ -7,21 +7,22 @@ import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 
 /**
- *
  * @author Plopman
  */
-public class SwampcyclingAbility extends CyclingAbility{
-    
+public class SwampcyclingAbility extends CyclingAbility {
+
     private static final FilterLandCard filter = new FilterLandCard("Swamp card");
     private static final String text = "Swampcycling";
-    static{
+
+    static {
         filter.add(SubType.SWAMP.getPredicate());
     }
+
     public SwampcyclingAbility(ManaCosts costs) {
         super(costs, filter, text);
     }
 
-    public SwampcyclingAbility(final SwampcyclingAbility ability) {
+    protected SwampcyclingAbility(final SwampcyclingAbility ability) {
         super(ability);
     }
 

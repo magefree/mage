@@ -56,7 +56,7 @@ class BeguilerOfWillsTarget extends TargetPermanent {
         super(new FilterCreaturePermanent("creature with power less than or equal to the number of creatures you control"));
     }
 
-    public BeguilerOfWillsTarget(final BeguilerOfWillsTarget target) {
+    private BeguilerOfWillsTarget(final BeguilerOfWillsTarget target) {
         super(target);
     }
 

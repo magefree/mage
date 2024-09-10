@@ -14,6 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,12 +59,12 @@ public final class SteamVines extends CardImpl {
 
 class SteamVinesEffect extends OneShotEffect {
 
-    public SteamVinesEffect() {
+    SteamVinesEffect() {
         super(Outcome.Detriment);
         staticText = "destroy it and {this} deals 1 damage to that land's controller. That player attaches {this} to a land of their choice";
     }
 
-    public SteamVinesEffect(final SteamVinesEffect effect) {
+    private SteamVinesEffect(final SteamVinesEffect effect) {
         super(effect);
     }
 
@@ -87,9 +88,9 @@ class SteamVinesEffect extends OneShotEffect {
                         landsController.damage(1, source.getSourceId(), source, game);
                     }
                 }
-                if (!game.getBattlefield().getAllActivePermanents(CardType.LAND, game).isEmpty()) { //lands are available on the battlefield
+                if (game.getBattlefield().contains(StaticFilters.FILTER_LAND, source, game, 1)) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();
-                    target.setNotTarget(true); //not a target, it is chosen
+                    target.withNotTarget(true); //not a target, it is chosen
                     Card steamVinesCard = game.getCard(source.getSourceId());
                     if (steamVinesCard != null && landsController != null) {
                         if (landsController.choose(Outcome.DestroyPermanent, target, source, game)) {

@@ -118,6 +118,7 @@ public final class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Sol'kanar the Swamp King", 85, Rarity.RARE, mage.cards.s.SolkanarTheSwampKing.class));
         cards.add(new SetCardInfo("Stangg", 86, Rarity.RARE, mage.cards.s.Stangg.class));
         cards.add(new SetCardInfo("Storm Seeker", 70, Rarity.UNCOMMON, mage.cards.s.StormSeeker.class));
+        cards.add(new SetCardInfo("Takklemaggot", 37, Rarity.UNCOMMON, mage.cards.t.Takklemaggot.class));
         cards.add(new SetCardInfo("Teleport", 26, Rarity.RARE, mage.cards.t.Teleport.class));
         cards.add(new SetCardInfo("The Fallen", 38, Rarity.UNCOMMON, mage.cards.t.TheFallen.class));
         cards.add(new SetCardInfo("The Wretched", 39, Rarity.RARE, mage.cards.t.TheWretched.class));

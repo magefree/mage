@@ -57,7 +57,7 @@ class ChancellorOfTheTangleDelayedTriggeredAbility extends DelayedTriggeredAbili
         super(new BasicManaEffect(Mana.GreenMana(1)));
     }
 
-    ChancellorOfTheTangleDelayedTriggeredAbility(ChancellorOfTheTangleDelayedTriggeredAbility ability) {
+    private ChancellorOfTheTangleDelayedTriggeredAbility(final ChancellorOfTheTangleDelayedTriggeredAbility ability) {
         super(ability);
     }
 

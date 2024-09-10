@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -28,20 +28,19 @@ public final class VizierOfTheMenagerie extends CardImpl {
 
     public VizierOfTheMenagerie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         // You may look at the top card of your library. (You may do this at any time.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LookAtTopCardOfLibraryAnyTimeEffect()));
+        this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast creature spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
         // You may spend mana as though it were mana of any type to cast creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VizierOfTheMenagerieManaEffect()));
-
+        this.addAbility(new SimpleStaticAbility(new VizierOfTheMenagerieManaEffect()));
     }
 
     private VizierOfTheMenagerie(final VizierOfTheMenagerie card) {
@@ -61,7 +60,7 @@ class VizierOfTheMenagerieManaEffect extends AsThoughEffectImpl implements AsTho
         staticText = "You may spend mana as though it were mana of any type to cast creature spells";
     }
 
-    public VizierOfTheMenagerieManaEffect(final VizierOfTheMenagerieManaEffect effect) {
+    private VizierOfTheMenagerieManaEffect(final VizierOfTheMenagerieManaEffect effect) {
         super(effect);
     }
 

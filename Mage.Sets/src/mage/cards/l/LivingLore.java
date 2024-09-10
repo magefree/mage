@@ -20,6 +20,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -45,12 +46,11 @@ public final class LivingLore extends CardImpl {
 
         // Living Lore's power and toughness are each equal to the exiled card's converted mana cost.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(LivingLoreValue.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(LivingLoreValue.instance)
                 .setText("{this}'s power and toughness are each equal to the exiled card's mana value")
         ));
 
-        // Whenever Living Lore deals combat damage, you may sacrifice it. If you do, 
-        // you may cast the exiled card without paying its mana cost.
+        // Whenever Living Lore deals combat damage, you may sacrifice it. If you do, you may cast the exiled card without paying its mana cost.
         this.addAbility(new DealsCombatDamageTriggeredAbility(new DoIfCostPaid(
                 new LivingLoreCastEffect(), new SacrificeSourceCost().setText("sacrifice it")
         ), false));
@@ -68,12 +68,12 @@ public final class LivingLore extends CardImpl {
 
 class LivingLoreExileEffect extends OneShotEffect {
 
-    public LivingLoreExileEffect() {
+    LivingLoreExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile an instant or sorcery card from your graveyard";
     }
 
-    public LivingLoreExileEffect(final LivingLoreExileEffect effect) {
+    private LivingLoreExileEffect(final LivingLoreExileEffect effect) {
         super(effect);
     }
 
@@ -91,15 +91,21 @@ class LivingLoreExileEffect extends OneShotEffect {
         TargetCard target = new TargetCardInYourGraveyard(
                 StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.chooseTarget(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;
         }
+        // The source ability on the stack will have a 0 ZCC.
+        // We retrieve the ZCC from the object source instead.
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if(mageObject == null) {
+            return false;
+        }
         controller.moveCardsToExile(
                 card, source, game, true,
-                CardUtil.getExileZoneId(game, source, 1),
+                CardUtil.getExileZoneId(game, mageObject.getId(), mageObject.getZoneChangeCounter(game) + 1),
                 CardUtil.getSourceName(game, source)
         );
         return true;
@@ -111,10 +117,14 @@ enum LivingLoreValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int offset = game.getPermanent(sourceAbility.getSourceId()) != null ? 1 : 0;
+        Permanent permanent = sourceAbility.getSourcePermanentOrLKI(game);
+        if(permanent == null) {
+            return 0;
+        }
+
         ExileZone exileZone = game
                 .getExile()
-                .getExileZone(CardUtil.getExileZoneId(game, sourceAbility, offset));
+                .getExileZone(CardUtil.getExileZoneId(game, permanent.getId(), permanent.getZoneChangeCounter(game)));
         if (exileZone == null) {
             return 0;
         }
@@ -143,7 +153,7 @@ class LivingLoreCastEffect extends OneShotEffect {
         this.staticText = "you may cast the exiled card without paying its mana cost";
     }
 
-    public LivingLoreCastEffect(final LivingLoreCastEffect effect) {
+    private LivingLoreCastEffect(final LivingLoreCastEffect effect) {
         super(effect);
     }
 
@@ -155,12 +165,16 @@ class LivingLoreCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -2));
-        return controller != null
-                && exileZone != null
-                && !exileZone.isEmpty()
-                && CardUtil.castSpellWithAttributesForFree(
-                controller, source, game, new CardsImpl(exileZone), StaticFilters.FILTER_CARD
-        );
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        if(permanent == null) {
+            return false;
+        }
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, permanent.getId(), permanent.getZoneChangeCounter(game)));
+        if (controller == null || exileZone == null || exileZone.isEmpty()) {
+            return false;
+        }
+
+        return CardUtil.castSpellWithAttributesForFree(controller, source, game,
+                new CardsImpl(exileZone), StaticFilters.FILTER_CARD);
     }
 }

@@ -10,7 +10,7 @@ import mage.game.permanent.PermanentCard;
 import java.util.List;
 
 /**
- * Make sure that AI won't level up whenever there are maximum possible level up counters.
+ * AI: make sure that AI won't level up whenever there are maximum possible level up counters.
  *
  * @author ayratn
  */
@@ -23,7 +23,7 @@ public class LevelUpOptimizer extends BaseTreeOptimizer {
      * @param actions
      */
     @Override
-    public void filter(Game game, List<Ability> actions) {
+    public void filter(Game game, List<Ability> actions, List<Ability> actionsToRemove) {
         for (Ability ability : actions) {
             if (ability instanceof LevelUpAbility) {
                 Permanent permanent = game.getPermanent(ability.getSourceId());
@@ -31,7 +31,7 @@ public class LevelUpOptimizer extends BaseTreeOptimizer {
                     PermanentCard leveler = (PermanentCard) permanent;
                     // check already existing Level counters and compare to maximum that make sense
                     if (permanent.getCounters(game).getCount(CounterType.LEVEL) >= leveler.getMaxLevelCounters()) {
-                        removeAbility(ability);
+                        actionsToRemove.add(ability);
                     }
                 }
             }

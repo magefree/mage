@@ -60,7 +60,7 @@ class CrashingBoarsEffect extends OneShotEffect {
         this.staticText = "defending player chooses an untapped creature they control. That creature blocks {this} this turn if able";
     }
     
-    CrashingBoarsEffect(final CrashingBoarsEffect effect) {
+    private CrashingBoarsEffect(final CrashingBoarsEffect effect) {
         super(effect);
     }
     

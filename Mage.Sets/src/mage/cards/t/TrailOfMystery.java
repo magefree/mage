@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -32,8 +31,8 @@ public final class TrailOfMystery extends CardImpl {
     public TrailOfMystery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-        // Whenever a face-down creature enters the battlefield under your control, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true);
+        // Whenever a face-down creature you control enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
+        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true);
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter, true));
 
         // Whenever a permanent you control is turned face up, if it's a creature, it gets +2/+2 until end of turn.
@@ -52,11 +51,11 @@ public final class TrailOfMystery extends CardImpl {
 
 class TrailOfMysteryTriggeredAbility extends TurnedFaceUpAllTriggeredAbility {
 
-    public TrailOfMysteryTriggeredAbility() {
+    TrailOfMysteryTriggeredAbility() {
         super(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new FilterControlledCreaturePermanent(), true);
     }
 
-    public TrailOfMysteryTriggeredAbility(final TrailOfMysteryTriggeredAbility ability) {
+    private TrailOfMysteryTriggeredAbility(final TrailOfMysteryTriggeredAbility ability) {
         super(ability);
     }
 

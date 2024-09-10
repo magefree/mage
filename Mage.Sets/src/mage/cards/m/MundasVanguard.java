@@ -1,37 +1,22 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.abilityword.CohortAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
  * @author fireshoes
  */
 public final class MundasVanguard extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an untapped Ally you control");
-
-    static {
-        filter.add(SubType.ALLY.getPredicate());
-        filter.add(TappedPredicate.UNTAPPED);
-    }
 
     public MundasVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");
@@ -42,11 +27,7 @@ public final class MundasVanguard extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: Put a +1/+1 counter on each creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()),
-                new TapSourceCost());
-        ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
-        ability.setAbilityWord(AbilityWord.COHORT);
-        this.addAbility(ability);
+        this.addAbility(new CohortAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE)));
     }
 
     private MundasVanguard(final MundasVanguard card) {

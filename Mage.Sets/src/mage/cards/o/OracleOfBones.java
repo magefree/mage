@@ -38,8 +38,8 @@ public final class OracleOfBones extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new CastFromHandForFreeEffect(
                         StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
                 ), false),
-                TributeNotPaidCondition.instance, "When {this} enters the battlefield, " +
-                "if its tribute wasn't paid, you may cast an instant or " +
+                TributeNotPaidCondition.instance, "When {this} enters, " +
+                "if tribute wasn't paid, you may cast an instant or " +
                 "sorcery spell from your hand without paying its mana cost."
         ));
     }

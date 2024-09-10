@@ -30,7 +30,7 @@ public final class DiamondFaerie extends CardImpl {
 
     public DiamondFaerie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}{U}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.FAERIE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

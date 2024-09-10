@@ -55,7 +55,7 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
         addEffect(new TransformSourceEffect());
     }
 
-    public HomicidalBruteTriggeredAbility(HomicidalBruteTriggeredAbility ability) {
+    private HomicidalBruteTriggeredAbility(final HomicidalBruteTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,7 +82,7 @@ class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of your end step, if {this} didn't attack this turn, tap {this}, then transform it";
+        return "At the beginning of your end step, if {this} didn't attack this turn, tap {this}, then transform it.";
     }
 }
 

@@ -51,7 +51,7 @@ public final class SinstrikersWill extends CardImpl {
                         AttachmentType.AURA,
                         Duration.WhileOnBattlefield,
                         "Enchanted creature has "
-                        + "\"{tap}: This creature deals damage "
+                        + "\"{T}: This creature deals damage "
                         + "equal to its power to target "
                         + "attacking or blocking creature.\""
                 )

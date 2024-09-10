@@ -62,7 +62,7 @@ class WarFalconEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you control a Knight or a Soldier";
     }
 
-    public WarFalconEffect(final WarFalconEffect effect) {
+    private WarFalconEffect(final WarFalconEffect effect) {
         super(effect);
     }
 

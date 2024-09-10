@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -13,7 +14,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class CantGainLifeAllEffect extends ContinuousEffectImpl {
@@ -35,7 +35,7 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
 
     }
 
-    public CantGainLifeAllEffect(final CantGainLifeAllEffect effect) {
+    protected CantGainLifeAllEffect(final CantGainLifeAllEffect effect) {
         super(effect);
         this.targetController = effect.targetController;
     }

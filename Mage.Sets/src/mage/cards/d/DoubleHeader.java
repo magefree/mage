@@ -8,7 +8,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
@@ -69,8 +69,8 @@ class DoubleHeaderPredicate implements Predicate<MageObject> {
         String name = input.getName();
         if (input instanceof SplitCard) {
             return hasTwoWords(((SplitCard) input).getLeftHalfCard().getName()) || hasTwoWords(((SplitCard) input).getRightHalfCard().getName());
-        } else if (input instanceof ModalDoubleFacesCard) {
-            return hasTwoWords(((ModalDoubleFacesCard) input).getLeftHalfCard().getName()) || hasTwoWords(((ModalDoubleFacesCard) input).getRightHalfCard().getName());
+        } else if (input instanceof ModalDoubleFacedCard) {
+            return hasTwoWords(((ModalDoubleFacedCard) input).getLeftHalfCard().getName()) || hasTwoWords(((ModalDoubleFacedCard) input).getRightHalfCard().getName());
         } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
             SplitCard card = (SplitCard) ((Spell) input).getCard();
             return hasTwoWords(card.getLeftHalfCard().getName()) || hasTwoWords(card.getRightHalfCard().getName());

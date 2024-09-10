@@ -19,10 +19,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author L_J
@@ -51,12 +48,12 @@ public final class StaffOfTheLetterMagus extends CardImpl {
 
 class StaffOfTheLetterMagusChooseLetterEffect extends OneShotEffect {
 
-    public StaffOfTheLetterMagusChooseLetterEffect() {
+    StaffOfTheLetterMagusChooseLetterEffect() {
         super(Outcome.Benefit);
         staticText = "choose a consonant other than N, R, S, or T";
     }
 
-    public StaffOfTheLetterMagusChooseLetterEffect(final StaffOfTheLetterMagusChooseLetterEffect effect) {
+    private StaffOfTheLetterMagusChooseLetterEffect(final StaffOfTheLetterMagusChooseLetterEffect effect) {
         super(effect);
     }
 
@@ -70,7 +67,7 @@ class StaffOfTheLetterMagusChooseLetterEffect extends OneShotEffect {
 
         ChoiceImpl choice = new ChoiceImpl(true);
         choice.setMessage("Choose letter");
-        Set<String> choices = new HashSet<>();
+        Set<String> choices = new LinkedHashSet<>();
         // Can I choose Y?
         // Yes. We play by popular game show rules here. Y is a consonant.
         // https://magic.wizards.com/en/articles/archive/news/unstable-faqawaslfaqpaftidawabiajtbt-2017-12-06
@@ -103,12 +100,12 @@ class StaffOfTheLetterMagusChooseLetterEffect extends OneShotEffect {
 
 class StaffOfTheLetterMagusEffect extends OneShotEffect {
 
-    public StaffOfTheLetterMagusEffect() {
+    StaffOfTheLetterMagusEffect() {
         super(Outcome.GainLife);
         staticText = "you gain 1 life for each time the chosen letter appears in that spell's name";
     }
 
-    public StaffOfTheLetterMagusEffect(final StaffOfTheLetterMagusEffect effect) {
+    private StaffOfTheLetterMagusEffect(final StaffOfTheLetterMagusEffect effect) {
         super(effect);
     }
 

@@ -38,12 +38,12 @@ public final class IvoryTower extends CardImpl {
 
 class IvoryTowerEffect extends OneShotEffect {
 
-    public IvoryTowerEffect() {
+    IvoryTowerEffect() {
         super(Outcome.GainLife);
         this.staticText = "you gain X life, where X is the number of cards in your hand minus 4.";
     }
 
-    public IvoryTowerEffect(IvoryTowerEffect effect) {
+    private IvoryTowerEffect(final IvoryTowerEffect effect) {
         super(effect);
     }
 
@@ -66,4 +66,3 @@ class IvoryTowerEffect extends OneShotEffect {
     }
 
 }
-

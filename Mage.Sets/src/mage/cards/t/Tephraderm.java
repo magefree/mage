@@ -1,27 +1,27 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageToThisAllTriggeredAbility;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class Tephraderm extends CardImpl {
@@ -33,7 +33,12 @@ public final class Tephraderm extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever a creature deals damage to Tephraderm, Tephraderm deals that much damage to that creature.
-        this.addAbility(new TephradermCreatureDamageTriggeredAbility());
+        this.addAbility(new DealsDamageToThisAllTriggeredAbility(
+                new DamageTargetEffect(SavedDamageValue.MUCH)
+                        .setText("{this} deals that much damage to that creature"),
+                false, StaticFilters.FILTER_PERMANENT_CREATURE,
+                SetTargetPointer.PERMANENT, false
+        ));
 
         // Whenever a spell deals damage to Tephraderm, Tephraderm deals that much damage to that spell's controller.
         this.addAbility(new TephradermSpellDamageTriggeredAbility());
@@ -49,62 +54,13 @@ public final class Tephraderm extends CardImpl {
     }
 }
 
-class TephradermCreatureDamageTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCreaturePermanent FILTER_CREATURE = new FilterCreaturePermanent();
-
-    public TephradermCreatureDamageTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
-    }
-
-    public TephradermCreatureDamageTriggeredAbility(final TephradermCreatureDamageTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getTargetId().equals(this.getSourceId())) {
-            return false;
-        }
-
-        Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-        if (sourcePermanent != null
-                && FILTER_CREATURE.match(sourcePermanent, getControllerId(), this, game)) {
-            for (Effect effect : getEffects()) {
-                if (effect instanceof DamageTargetEffect) {
-                    effect.setTargetPointer(new FixedTarget(sourcePermanent.getId(), game));
-                    ((DamageTargetEffect) effect).setAmount(StaticValue.get(event.getAmount()));
-                }
-            }
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public TriggeredAbility copy() {
-        return new TephradermCreatureDamageTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature deals damage to {this}, {this} deals that much damage to that creature.";
-    }
-}
-
 class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    public TephradermSpellDamageTriggeredAbility() {
+    TephradermSpellDamageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
     }
 
-    public TephradermSpellDamageTriggeredAbility(final TephradermSpellDamageTriggeredAbility ability) {
+    private TephradermSpellDamageTriggeredAbility(final TephradermSpellDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -134,7 +90,7 @@ class TephradermSpellDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public TephradermSpellDamageTriggeredAbility copy() {
         return new TephradermSpellDamageTriggeredAbility(this);
     }
 

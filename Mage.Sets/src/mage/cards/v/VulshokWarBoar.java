@@ -30,7 +30,7 @@ public final class VulshokWarBoar extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Vulshok War Boar enters the battlefield, sacrifice it unless you sacrifice an artifact.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(filter))));
     }
 
     private VulshokWarBoar(final VulshokWarBoar card) {

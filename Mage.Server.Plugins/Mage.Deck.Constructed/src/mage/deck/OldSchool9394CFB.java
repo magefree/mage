@@ -213,6 +213,9 @@ public class OldSchool9394CFB extends Constructed {
         banned.add("Wildfire Eternal");
         banned.add("Xathrid Necromancer");
 
+        // unban chaos orb, we allow it (restricted) for the xmage-errated version in Old School Constructed.
+        banned.removeIf(name -> name.equals("Chaos Orb"));
+
         restricted.add("Ancestral Recall");
         restricted.add("Balance");
         restricted.add("Black Lotus");

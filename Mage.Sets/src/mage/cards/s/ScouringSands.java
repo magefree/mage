@@ -53,7 +53,7 @@ class ScouringSandsDamageEffect extends OneShotEffect {
         staticText = "{this} deals 1 damage to each creature your opponents control";
     }
 
-    public ScouringSandsDamageEffect(ScouringSandsDamageEffect effect) {
+    private ScouringSandsDamageEffect(final ScouringSandsDamageEffect effect) {
         super(effect);
     }
 

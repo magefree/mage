@@ -9,7 +9,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class BlackbloomRogue extends ModalDoubleFacesCard {
+public final class BlackbloomRogue extends ModalDoubleFacedCard {
 
     public BlackbloomRogue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

@@ -54,9 +54,9 @@ public interface GamePlay {
      *
      * @param passPriorityAction
      * @param gameId
-     * @param Data
+     * @param data
      * @return
      */
-    boolean sendPlayerAction(PlayerAction passPriorityAction, UUID gameId, Object Data);
+    boolean sendPlayerAction(PlayerAction passPriorityAction, UUID gameId, Object data);
 
 }

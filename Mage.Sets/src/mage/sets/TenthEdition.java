@@ -23,6 +23,7 @@ public final class TenthEdition extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+        this.hasAlternateBoosterPrintings = false; // Printings with * are foils without reminder text, not alt art for booster gen purpose
 
         cards.add(new SetCardInfo("Abundance", 249, Rarity.RARE, mage.cards.a.Abundance.class));
         cards.add(new SetCardInfo("Academy Researchers", 63, Rarity.UNCOMMON, mage.cards.a.AcademyResearchers.class));

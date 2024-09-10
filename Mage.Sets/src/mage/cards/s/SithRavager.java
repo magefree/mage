@@ -51,7 +51,7 @@ public final class SithRavager extends CardImpl {
             addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         }
 
-        public LostNonCombatLifeTriggeredAbility(final LostNonCombatLifeTriggeredAbility ability) {
+        private LostNonCombatLifeTriggeredAbility(final LostNonCombatLifeTriggeredAbility ability) {
             super(ability);
         }
 

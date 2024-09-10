@@ -59,7 +59,7 @@ class LeechingBiteEffect extends ContinuousEffectImpl {
         this.staticText = "Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn";
     }
     
-    public LeechingBiteEffect(final LeechingBiteEffect effect) {
+    private LeechingBiteEffect(final LeechingBiteEffect effect) {
         super(effect);
     }
     

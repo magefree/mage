@@ -50,7 +50,7 @@ class SamiteMinistrationEffect extends PreventionEffectImpl {
         this.targetSource = new TargetSource();
     }
 
-    public SamiteMinistrationEffect(final SamiteMinistrationEffect effect) {
+    private SamiteMinistrationEffect(final SamiteMinistrationEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
@@ -62,6 +62,7 @@ class SamiteMinistrationEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 

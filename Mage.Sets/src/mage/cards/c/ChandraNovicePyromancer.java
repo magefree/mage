@@ -28,7 +28,7 @@ public final class ChandraNovicePyromancer extends CardImpl {
     public ChandraNovicePyromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(5);
 

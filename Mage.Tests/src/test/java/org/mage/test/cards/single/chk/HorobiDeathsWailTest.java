@@ -2,7 +2,6 @@ package org.mage.test.cards.single.chk;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -10,7 +9,6 @@ public class HorobiDeathsWailTest extends CardTestPlayerBase {
 
     // issue 7772
     @Test
-    @Ignore
     public void animateDeadOnHorobi(){
         // Animate Dead
         addCard(Zone.HAND, playerA, "Animate Dead");

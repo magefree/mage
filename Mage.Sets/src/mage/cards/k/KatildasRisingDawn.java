@@ -49,7 +49,7 @@ public final class KatildasRisingDawn extends CardImpl {
     public KatildasRisingDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AURA);
         this.color.setWhite(true);
         this.nightCard = true;

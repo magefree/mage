@@ -51,12 +51,12 @@ public final class TheAntiquitiesWar extends CardImpl {
 
 class TheAntiquitiesWarEffect extends ContinuousEffectImpl {
 
-    public TheAntiquitiesWarEffect() {
+    TheAntiquitiesWarEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         this.staticText = "Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn";
     }
 
-    public TheAntiquitiesWarEffect(final TheAntiquitiesWarEffect effect) {
+    private TheAntiquitiesWarEffect(final TheAntiquitiesWarEffect effect) {
         super(effect);
     }
 

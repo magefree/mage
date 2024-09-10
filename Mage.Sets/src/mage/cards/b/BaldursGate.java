@@ -39,7 +39,7 @@ public final class BaldursGate extends CardImpl {
     public BaldursGate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GATE);
 
         // {T}: Add {C}.

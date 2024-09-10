@@ -8,10 +8,11 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 public final class FeatherToken extends TokenImpl {
 
-    private static final FilterCard filter = new FilterCard("Phoenix card");
+    private static final FilterCard filter = new FilterCard("Phoenix card from your graveyard");
 
     static {
         filter.add(SubType.PHOENIX.getPredicate());
@@ -19,15 +20,14 @@ public final class FeatherToken extends TokenImpl {
 
     public FeatherToken() {
         super("Feather", "red artifact token named Feather with \"{1}, Sacrifice Feather: Return target Phoenix card from your graveyard to the battlefield tapped.\"");
-
         this.cardType.add(CardType.ARTIFACT);
         this.color.setRed(true);
         Ability ability = new SimpleActivatedAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(true), new GenericManaCost(1)
         );
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
-        setOriginalExpansionSetCode("IKO");
     }
 
     private FeatherToken(final FeatherToken token) {

@@ -7,41 +7,57 @@ import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.game.Game;
 
-import java.util.UUID;
+import java.util.*;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, Susucr
  */
 public interface ActivatedAbility extends Ability {
 
     final class ActivationStatus {
 
-        private final boolean canActivate;
-        private final ApprovingObject approvingObject;
+        // Expected to not be modified after creation.
+        private final Set<ApprovingObject> approvingObjects;
 
-        public ActivationStatus(boolean canActivate, ApprovingObject approvingObject) {
-            this.canActivate = canActivate;
-            this.approvingObject = approvingObject;
+        // If true, the Activation Status will not check if there is an approvingObject.
+        private final boolean forcedCanActivate;
+
+        public ActivationStatus(ApprovingObject approvingObject) {
+            this.forcedCanActivate = false;
+            this.approvingObjects = Collections.singleton(approvingObject);
+        }
+
+        public ActivationStatus(Set<ApprovingObject> approvingObjects) {
+            this(false, approvingObjects);
+        }
+
+        private ActivationStatus(boolean forcedCanActivate, Set<ApprovingObject> approvingObjects) {
+            this.forcedCanActivate = forcedCanActivate;
+            this.approvingObjects = new HashSet<>();
+            this.approvingObjects.addAll(approvingObjects);
         }
 
         public boolean canActivate() {
-            return canActivate;
-        }
-
-        public ApprovingObject getApprovingObject() {
-            return approvingObject;
-        }
-
-        public static ActivationStatus getFalse() {
-            return new ActivationStatus(false, null);
+            return forcedCanActivate || !approvingObjects.isEmpty();
         }
 
         /**
-         * @param approvingObjectAbility ability that allows to activate/use current ability
+         * @return the set of all approving objects for that ActivationStatus.
+         * That Set is readonly in spirit, as there might be different parts
+         * of the engine retrieving info from it.
          */
-        public static ActivationStatus getTrue(Ability approvingObjectAbility, Game game) {
-            ApprovingObject approvingObject = approvingObjectAbility == null ? null : new ApprovingObject(approvingObjectAbility, game);
-            return new ActivationStatus(true, approvingObject);
+        public Set<ApprovingObject> getApprovingObjects() {
+            return approvingObjects;
+        }
+
+        private static final ActivationStatus falseInstance = new ActivationStatus(Collections.emptySet());
+
+        public static ActivationStatus getFalse() {
+            return falseInstance;
+        }
+
+        public static ActivationStatus withoutApprovingObject(boolean forcedCanActivate) {
+            return new ActivationStatus(forcedCanActivate, Collections.emptySet());
         }
     }
 
@@ -83,7 +99,7 @@ public interface ActivatedAbility extends Ability {
 
     int getMaxActivationsPerTurn(Game game);
 
-    public void setTiming(TimingRule timing);
+    ActivatedAbility setTiming(TimingRule timing);
 
-    public ActivatedAbility setCondition(Condition condition);
+    ActivatedAbility setCondition(Condition condition);
 }

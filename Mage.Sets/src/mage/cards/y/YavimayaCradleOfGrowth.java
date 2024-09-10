@@ -18,7 +18,7 @@ public final class YavimayaCradleOfGrowth extends CardImpl {
     public YavimayaCradleOfGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Each land is a Forest in addition to its other land types.
         this.addAbility(new SimpleStaticAbility(new AddBasicLandTypeAllLandsEffect(SubType.FOREST)));

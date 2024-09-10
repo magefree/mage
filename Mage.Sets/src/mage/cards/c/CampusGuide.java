@@ -26,7 +26,7 @@ public final class CampusGuide extends CardImpl {
 
         // When Campus Guide enters the battlefield, you may search your library for a basic land card, reveal it, then shuffle and put that card on top.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
         ), true));
     }
 

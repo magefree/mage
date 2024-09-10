@@ -6,7 +6,7 @@ package mage.designations;
 public class CitysBlessing extends Designation {
 
     public CitysBlessing() {
-        super(DesignationType.CITYS_BLESSING, "RIX");
+        super(DesignationType.CITYS_BLESSING);
     }
 
     private CitysBlessing(final CitysBlessing card) {

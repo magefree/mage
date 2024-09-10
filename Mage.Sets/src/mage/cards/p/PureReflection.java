@@ -1,10 +1,8 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,50 +37,49 @@ public final class PureReflection extends CardImpl {
     public PureReflection copy() {
         return new PureReflection(this);
     }
+}
 
-    private class PureReflectionEffect extends OneShotEffect {
+class PureReflectionEffect extends OneShotEffect {
 
-        public PureReflectionEffect() {
-            super(Outcome.Benefit);
-            staticText = "destroy all Reflections. Then that player creates an X/X white Reflection creature token, where X is the mana value of that spell.";
+    PureReflectionEffect() {
+        super(Outcome.Benefit);
+        staticText = "destroy all Reflections. Then that player creates an X/X white Reflection creature token, where X is the mana value of that spell.";
+    }
+
+    private PureReflectionEffect(final PureReflectionEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+
+        if (controller == null || game.getPermanentOrLKIBattlefield(source.getSourceId()) == null) {
+            return false;
         }
 
-        public PureReflectionEffect(PureReflectionEffect effect) {
-            super(effect);
+        Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
+
+        if (spell == null) {
+            return false;
         }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
+        // destroy all Reflections
+        FilterPermanent filter = new FilterPermanent("Reflections");
+        filter.add(SubType.REFLECTION.getPredicate());
+        game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)
+                .forEach(permanent -> permanent.destroy(source, game,false));
+        game.processAction();
 
-            if (controller == null || game.getPermanentOrLKIBattlefield(source.getSourceId()) == null) {
-                return false;
-            }
+        // Then that player creates an X/X white Reflection creature token, where X is the converted mana cost of that spell.
+        ReflectionPureToken token = new ReflectionPureToken(spell.getManaValue());
+        token.putOntoBattlefield(1, game, source, spell.getControllerId());
 
-            Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
+        return true;
+    }
 
-            if (spell == null) {
-                return false;
-            }
-
-            // destroy all Reflections
-            FilterPermanent filter = new FilterPermanent("Reflections");
-            filter.add(SubType.REFLECTION.getPredicate());
-            game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).forEach((permanent) -> {
-                permanent.destroy(source, game,false);
-            });
-            game.getState().processAction(game);
-            
-            // Then that player creates an X/X white Reflection creature token, where X is the converted mana cost of that spell.
-            ReflectionPureToken token = new ReflectionPureToken(spell.getManaValue());
-            token.putOntoBattlefield(1, game, source, spell.getControllerId());
-
-            return true;
-        }
-
-        @Override
-        public Effect copy() {
-            return new PureReflectionEffect(this);
-        }
+    @Override
+    public PureReflectionEffect copy() {
+        return new PureReflectionEffect(this);
     }
 }

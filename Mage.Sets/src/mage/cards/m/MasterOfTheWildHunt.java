@@ -74,7 +74,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
         staticText = "Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves";
     }
 
-    public MasterOfTheWildHuntEffect(final MasterOfTheWildHuntEffect effect) {
+    private MasterOfTheWildHuntEffect(final MasterOfTheWildHuntEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
         if (target != null && game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 permanent.tap(source, game);
-                target.damage(permanent.getToughness().getValue(), permanent.getId(), source, game);
+                target.damage(permanent.getPower().getValue(), permanent.getId(), source, game);
                 wolves.add(permanent.getId());
             }
             Player player = game.getPlayer(target.getControllerId());

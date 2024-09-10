@@ -40,7 +40,7 @@ public final class Avarax extends CardImpl {
 
         // When Avarax enters the battlefield, you may search your library for a card named Avarax, reveal it, and put it into your hand. If you do, shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(1, filter), true, true
+                new TargetCardInLibrary(1, filter), true
         ), true));
 
         // {1}{R}: Avarax gets +1/+0 until end of turn.

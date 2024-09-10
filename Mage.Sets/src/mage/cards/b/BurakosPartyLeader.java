@@ -25,7 +25,7 @@ public final class BurakosPartyLeader extends CardImpl {
     public BurakosPartyLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

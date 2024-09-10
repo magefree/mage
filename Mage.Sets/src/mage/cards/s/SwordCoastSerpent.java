@@ -37,12 +37,14 @@ public final class SwordCoastSerpent extends AdventureCard {
         this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(), SwordCoastSerpentCondition.instance,
                 "{this} can't be blocked as long as you've cast a noncreature spell this turn"
-        )), new SpellsCastWatcher());
+        )));
 
         // Capsizing Wave
         // Return target creature to its owner's hand.
         this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private SwordCoastSerpent(final SwordCoastSerpent card) {

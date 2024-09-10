@@ -23,7 +23,7 @@ public final class PillarfieldOx extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public PillarfieldOx (final PillarfieldOx card) {
+    private PillarfieldOx(final PillarfieldOx card) {
         super(card);
     }
 

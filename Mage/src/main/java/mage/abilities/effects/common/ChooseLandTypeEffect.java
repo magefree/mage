@@ -24,7 +24,7 @@ public class ChooseLandTypeEffect extends OneShotEffect {
         staticText = "choose a land type";
     }
 
-    public ChooseLandTypeEffect(final ChooseLandTypeEffect effect) {
+    protected ChooseLandTypeEffect(final ChooseLandTypeEffect effect) {
         super(effect);
     }
 

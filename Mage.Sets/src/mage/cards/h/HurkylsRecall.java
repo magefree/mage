@@ -52,9 +52,9 @@ class HurkylsRecallReturnToHandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (targetPointer.getFirst(game, source) != null) {
+        if (getTargetPointer().getFirst(game, source) != null) {
             FilterPermanent filter = new FilterArtifactPermanent();
-            filter.add(new OwnerIdPredicate(targetPointer.getFirst(game, source)));
+            filter.add(new OwnerIdPredicate(getTargetPointer().getFirst(game, source)));
             return new ReturnToHandFromBattlefieldAllEffect(filter).apply(game, source);
         }
         return false;

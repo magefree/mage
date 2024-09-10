@@ -77,15 +77,15 @@ class MemoryLeakEffect extends OneShotEffect {
         if (controller.chooseUse(outcome, "Exile a card from hand or graveyard?", null, "Hand", "Graveyard", source, game)) {
             FilterCard filter = new FilterNonlandCard("nonland card in " + opponent.getName() + "'s hand");
             target = new TargetCard(Zone.HAND, filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             cards = opponent.getHand();
         } else {
             FilterCard filter = new FilterNonlandCard("nonland card in " + opponent.getName() + "'s graveyard");
             target = new TargetCard(Zone.GRAVEYARD, filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             cards = opponent.getGraveyard();
         }
-        if (controller.choose(outcome, cards, target, game)) {
+        if (controller.choose(outcome, cards, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 controller.moveCards(card, Zone.EXILED, source, game);

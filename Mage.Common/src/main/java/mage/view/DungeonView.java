@@ -14,14 +14,18 @@ public class DungeonView implements CommandObjectView, Serializable {
 
     protected UUID id;
     protected String name;
-    protected String expansionSetCode;
+    protected String imageFileName = "";
+    protected int imageNumber = 0;
+    protected String expansionSetCode = "";
     protected List<String> rules;
     protected PlayableObjectStats playableStats = new PlayableObjectStats();
 
     public DungeonView(Dungeon dungeon) {
         this.id = dungeon.getId();
         this.name = dungeon.getName();
-        this.expansionSetCode = dungeon.getExpansionSetCodeForImage();
+        this.imageFileName = dungeon.getImageFileName();
+        this.imageNumber = dungeon.getImageNumber();
+        this.expansionSetCode = dungeon.getExpansionSetCode();
         this.rules = dungeon.getRules();
     }
 
@@ -38,6 +42,16 @@ public class DungeonView implements CommandObjectView, Serializable {
     @Override
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    @Override
+    public int getImageNumber() {
+        return imageNumber;
     }
 
     @Override

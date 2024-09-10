@@ -26,7 +26,7 @@ public final class OboshThePreypiercer extends CardImpl {
     public OboshThePreypiercer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B/R}{B/R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HELLION);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
@@ -58,7 +58,7 @@ enum OboshThePreypiercerCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck
                 .stream()
                 .filter(card -> !card.hasCardTypeForDeckbuilding(CardType.LAND))

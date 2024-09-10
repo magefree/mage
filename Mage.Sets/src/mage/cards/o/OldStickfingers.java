@@ -13,6 +13,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -26,7 +27,7 @@ public final class OldStickfingers extends CardImpl {
     public OldStickfingers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{B}{G}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HORROR);
 
         // When you cast this spell, reveal cards from the top of your library until you reveal X creature cards. Put all the creature cards revealed this way into your graveyard and the rest on the bottom of your library in a random order.
@@ -34,7 +35,7 @@ public final class OldStickfingers extends CardImpl {
 
         // Old Stickfingers' power and toughness are equal to the number of creature cards in your graveyard.
         DynamicValue value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value)));
     }
 
     private OldStickfingers(final OldStickfingers card) {
@@ -49,12 +50,12 @@ public final class OldStickfingers extends CardImpl {
 
 class OldStickfingersEffect extends OneShotEffect {
 
-    public OldStickfingersEffect() {
+    OldStickfingersEffect() {
         super(Outcome.Discard);
         this.staticText = "reveal cards from the top of your library until you reveal X creature cards. Put all creature cards revealed this way into your graveyard, then put the rest on the bottom of your library in a random order";
     }
 
-    public OldStickfingersEffect(final OldStickfingersEffect effect) {
+    private OldStickfingersEffect(final OldStickfingersEffect effect) {
         super(effect);
     }
 
@@ -69,7 +70,7 @@ class OldStickfingersEffect extends OneShotEffect {
         if (!(obj instanceof SpellAbility)) {
             return false;
         }
-        int xValue = ((SpellAbility) obj).getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ((SpellAbility) obj), "X", 0);
         if (xValue < 1) {
             return false;
         }

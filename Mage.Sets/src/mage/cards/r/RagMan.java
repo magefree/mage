@@ -55,12 +55,12 @@ public final class RagMan extends CardImpl {
 
 class RagManDiscardEffect extends OneShotEffect {
 
-    public RagManDiscardEffect() {
+    RagManDiscardEffect() {
         super(Outcome.Discard);
         this.staticText = "and discards a creature card at random";
     }
 
-    public RagManDiscardEffect(final RagManDiscardEffect effect) {
+    private RagManDiscardEffect(final RagManDiscardEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class RagManDiscardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             Cards creatureCardsInHand = new CardsImpl();
             for (UUID cardId : player.getHand()) {

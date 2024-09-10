@@ -28,7 +28,7 @@ public final class OloroAgelessAscetic extends CardImpl {
 
     public OloroAgelessAscetic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.SOLDIER);
 

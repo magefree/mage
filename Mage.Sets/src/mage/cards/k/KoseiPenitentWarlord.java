@@ -30,7 +30,7 @@ public final class KoseiPenitentWarlord extends CardImpl {
     public KoseiPenitentWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.SAMURAI);
         this.power = new MageInt(0);

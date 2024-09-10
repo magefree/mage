@@ -36,9 +36,7 @@ public final class Hobblefiend extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

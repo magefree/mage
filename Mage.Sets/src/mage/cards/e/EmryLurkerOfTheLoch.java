@@ -28,7 +28,7 @@ public final class EmryLurkerOfTheLoch extends CardImpl {
     public EmryLurkerOfTheLoch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -63,7 +63,7 @@ public final class EmryLurkerOfTheLoch extends CardImpl {
 class EmryLurkerOfTheLochPlayEffect extends AsThoughEffectImpl {
 
     EmryLurkerOfTheLochPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Choose target artifact card in your graveyard. You may cast that card this turn.";
     }
 

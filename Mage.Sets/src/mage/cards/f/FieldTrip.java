@@ -29,7 +29,7 @@ public final class FieldTrip extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library for a basic Forest card, put that card onto the battlefield tapped, then shuffle.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, true));
 
         // Learn.
         this.getSpellAbility().addEffect(new LearnEffect().concatBy("<br>"));

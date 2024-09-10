@@ -11,15 +11,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.common.PassAbility;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.combat.Combat;
-import mage.game.combat.CombatGroup;
 import mage.game.turn.Step.StepPart;
 import mage.players.Player;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -89,7 +88,7 @@ public class MCTSNode {
         if (game.getStep().getStepPart() == StepPart.PRIORITY) {
             playerId = game.getPriorityPlayerId();
         } else {
-            if (game.getStep().getType() == PhaseStep.DECLARE_BLOCKERS) {
+            if (game.getTurnStepType() == PhaseStep.DECLARE_BLOCKERS) {
                 playerId = game.getCombat().getDefenders().iterator().next();
             } else {
                 playerId = game.getActivePlayerId();
@@ -113,7 +112,7 @@ public class MCTSNode {
                     uct = ((node.visits - node.wins) / (node.visits)) + (selectionCoefficient * Math.sqrt(Math.log(visits) / (node.visits)));
             else
                 // ensure that a random unvisited node is played first
-                uct = 10000 + 1000 * Math.random();
+                uct = 10000 + 1000 * RandomUtil.nextDouble();
             if (uct > bestValue) {
                 bestChild = node;
                 bestValue = uct;
@@ -127,64 +126,7 @@ public class MCTSNode {
         if (player.getNextAction() == null) {
             logger.fatal("next action is null");
         }
-        switch (player.getNextAction()) {
-            case PRIORITY:
-//                logger.info("Priority for player:" + player.getName() + " turn: " + game.getTurnNum() + " phase: " + game.getPhase().getType() + " step: " + game.getStep().getType());
-                List<Ability> abilities;
-                if (!USE_ACTION_CACHE)
-                    abilities = player.getPlayableOptions(game);
-                else
-                    abilities = getPlayables(player, fullStateValue, game);
-                for (Ability ability: abilities) {
-                    Game sim = game.copy();
-//                    logger.info("expand " + ability.toString());
-                    MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
-                    simPlayer.activateAbility((ActivatedAbility)ability, sim);
-                    sim.resume();
-                    children.add(new MCTSNode(this, sim, ability));
-                }
-                break;
-            case SELECT_ATTACKERS:
-//                logger.info("Select attackers:" + player.getName());
-                List<List<UUID>> attacks;
-                if (!USE_ACTION_CACHE)
-                    attacks = player.getAttacks(game);
-                else
-                    attacks = getAttacks(player, fullStateValue, game);
-                UUID defenderId = game.getOpponents(player.getId()).iterator().next();
-                for (List<UUID> attack: attacks) {
-                    Game sim = game.copy();
-                    MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
-                    for (UUID attackerId: attack) {
-                        simPlayer.declareAttacker(attackerId, defenderId, sim, false);
-                    }
-                    sim.resume();
-                    children.add(new MCTSNode(this, sim, sim.getCombat()));
-                }
-                break;
-            case SELECT_BLOCKERS:
-//                logger.info("Select blockers:" + player.getName());
-                List<List<List<UUID>>> blocks;
-                if (!USE_ACTION_CACHE)
-                    blocks = player.getBlocks(game);
-                else
-                    blocks = getBlocks(player, fullStateValue, game);
-                for (List<List<UUID>> block: blocks) {
-                    Game sim = game.copy();
-                    MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
-                    List<CombatGroup> groups = sim.getCombat().getGroups();
-                    for (int i = 0; i < groups.size(); i++) {
-                        if (i < block.size()) {
-                            for (UUID blockerId: block.get(i)) {
-                                simPlayer.declareBlocker(simPlayer.getId(), blockerId, groups.get(i).getAttackers().get(0), sim);
-                            }
-                        }
-                    }
-                    sim.resume();
-                    children.add(new MCTSNode(this, sim, sim.getCombat()));
-                }
-                break;
-        }
+        children.addAll(MCTSNextActionFactory.createNextAction(player.getNextAction()).performNextAction(this, player, game, fullStateValue));
         game = null;
     }
 
@@ -302,7 +244,7 @@ public class MCTSNode {
      * @return a new game object with simulated players
      */
     protected Game createSimulation(Game game, UUID playerId) {
-        Game sim = game.copy();
+        Game sim = game.createSimulationForAI();
 
         for (Player oldPlayer: sim.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();
@@ -311,7 +253,6 @@ public class MCTSNode {
             sim.getState().getPlayers().put(oldPlayer.getId(), newPlayer);
         }
         randomizePlayers(sim, playerId);
-        sim.setSimulation(true);
         return sim;
     }
 
@@ -328,7 +269,7 @@ public class MCTSNode {
                 player.getHand().clear();
                 player.getLibrary().shuffle();
                 for (int i = 0; i < handSize; i++) {
-                    Card card = player.getLibrary().removeFromTop(game);
+                    Card card = player.getLibrary().drawFromTop(game);
                     card.setZone(Zone.HAND, game);
                     player.getHand().add(card);
                 }
@@ -462,8 +403,8 @@ public class MCTSNode {
     private static long attacksMiss = 0;
     private static long blocksHit = 0;
     private static long blocksMiss = 0;
-    
-    private static List<Ability> getPlayables(MCTSPlayer player, String state, Game game) {
+
+    protected static List<Ability> getPlayables(MCTSPlayer player, String state, Game game) {
         if (playablesCache.containsKey(state)) {
             playablesHit++;
             return playablesCache.get(state);
@@ -475,8 +416,8 @@ public class MCTSNode {
             return abilities;
         }
     }
-    
-    private static List<List<UUID>> getAttacks(MCTSPlayer player, String state, Game game) {
+
+    protected static List<List<UUID>> getAttacks(MCTSPlayer player, String state, Game game) {
         if (attacksCache.containsKey(state)) {
             attacksHit++;
             return attacksCache.get(state);
@@ -489,7 +430,7 @@ public class MCTSNode {
         }
     }
     
-    private static List<List<List<UUID>>> getBlocks(MCTSPlayer player, String state, Game game) {
+    protected static List<List<List<UUID>>> getBlocks(MCTSPlayer player, String state, Game game) {
         if (blocksCache.containsKey(state)) {
             blocksHit++;
             return blocksCache.get(state);

@@ -24,7 +24,7 @@ public final class FrostAugur extends CardImpl {
     public FrostAugur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -73,8 +73,8 @@ class FrostAugurEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards("", card, game);
-        if (card.isSnow() && player.chooseUse(
+        player.lookAtCards("Top card of library", card, game);
+        if (card.isSnow(game) && player.chooseUse(
                 outcome, "Reveal " + card.getName() + " and put it into your hand?", source, game
         )) {
             player.revealCards(source, new CardsImpl(card), game);

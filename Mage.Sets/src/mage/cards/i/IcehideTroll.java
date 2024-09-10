@@ -25,7 +25,7 @@ public final class IcehideTroll extends CardImpl {
     public IcehideTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);

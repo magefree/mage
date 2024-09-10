@@ -9,10 +9,9 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 
 /**
  * 702.40. Entwine
@@ -32,9 +31,9 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
 
     private static final String keywordText = "Entwine";
     protected static final String reminderText = "You may {cost} in addition to any other costs to use all modes.";
+    protected static final String ENTWINE_ACTIVATION_VALUE_KEY = "entwineActivation";
 
     protected OptionalAdditionalCost entwineCost;
-    protected Set<String> activations = new HashSet<>(); // same logic as KickerAbility: activations per zoneChangeCounter
 
     public EntwineAbility(String manaString) {
         super(Zone.STACK, null);
@@ -57,12 +56,11 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         this.entwineCost.setCostType(VariableCostType.ADDITIONAL);
     }
 
-    public EntwineAbility(final EntwineAbility ability) {
+    protected EntwineAbility(final EntwineAbility ability) {
         super(ability);
         if (ability.entwineCost != null) {
             this.entwineCost = ability.entwineCost.copy();
         }
-        this.activations.addAll(ability.activations);
     }
 
     @Override
@@ -92,12 +90,12 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
             for (Iterator it = ((Costs) entwineCost).iterator(); it.hasNext(); ) {
                 Cost cost = (Cost) it.next();
                 if (cost instanceof ManaCostsImpl) {
-                    ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                    ability.addManaCostsToPay((ManaCostsImpl) cost.copy());
                 } else {
-                    ability.getCosts().add(cost.copy());
+                    ability.addCost(cost.copy());
                 }
             }
-            activateEntwine(game, ability);
+            ability.setCostsTag(ENTWINE_ACTIVATION_VALUE_KEY, null);
         }
     }
 
@@ -135,23 +133,9 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         if (entwineCost != null) {
             entwineCost.reset();
         }
-
-        String key = getActivationKey(source, game);
-        this.activations.remove(key);
-    }
-
-    private void activateEntwine(Game game, Ability source) {
-        String key = getActivationKey(source, game);
-        this.activations.add(key);
     }
 
     public boolean costWasActivated(Ability ability, Game game) {
-        String key = getActivationKey(ability, game);
-        return this.activations.contains(key);
-    }
-
-    private String getActivationKey(Ability source, Game game) {
-        // same logic as KickerAbility
-        return KickerAbility.getActivationKey(source, game);
+        return CardUtil.checkSourceCostsTagExists(game, ability, ENTWINE_ACTIVATION_VALUE_KEY);
     }
 }

@@ -34,7 +34,7 @@ import java.util.UUID;
 public final class BelakorTheDarkMaster extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DEMON, "Demons you control");
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
     private static final Hint hint = new ValueHint("Demons you control", xValue);
     private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.DEMON, "another Demon");
 
@@ -45,7 +45,7 @@ public final class BelakorTheDarkMaster extends CardImpl {
     public BelakorTheDarkMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(6);
@@ -59,7 +59,7 @@ public final class BelakorTheDarkMaster extends CardImpl {
         ability.addEffect(new LoseLifeSourceControllerEffect(xValue).concatBy("and"));
         this.addAbility(ability.withFlavorWord("Prince of Chaos").addHint(hint));
 
-        // Lord of Torment -- Whenever another Demon enters the battlefield under your control, it deals damage equal to its power to any target.
+        // Lord of Torment -- Whenever another Demon you control enters, it deals damage equal to its power to any target.
         ability = new EntersBattlefieldControlledTriggeredAbility(new BelakorTheDarkMasterEffect(), filter2);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.withFlavorWord("Lord of Torment"));
@@ -78,7 +78,7 @@ public final class BelakorTheDarkMaster extends CardImpl {
 class BelakorTheDarkMasterEffect extends OneShotEffect {
 
     BelakorTheDarkMasterEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
         staticText = "it deals damage equal to its power to any target";
     }
 

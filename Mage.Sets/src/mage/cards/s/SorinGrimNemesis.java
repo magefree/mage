@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -24,7 +24,7 @@ public final class SorinGrimNemesis extends CardImpl {
     
     public SorinGrimNemesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
         
         this.setStartingLoyalty(6);
@@ -33,9 +33,9 @@ public final class SorinGrimNemesis extends CardImpl {
         this.addAbility(new LoyaltyAbility(new SorinGrimNemesisRevealEffect(), 1));
 
         // -X: Sorin, Grim Nemesis deals X damage to target creature or planeswalker and you gain X life.
-        Ability ability = new LoyaltyAbility(new DamageTargetEffect(GetXLoyaltyValue.instance));
+        Ability ability = new LoyaltyAbility(new DamageTargetEffect(GetXValue.instance));
         ability.addTarget(new TargetCreatureOrPlaneswalker());
-        ability.addEffect(new GainLifeEffect(GetXLoyaltyValue.instance).concatBy("and"));
+        ability.addEffect(new GainLifeEffect(GetXValue.instance).concatBy("and"));
         this.addAbility(ability);
 
         // -9: Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players.
@@ -59,7 +59,7 @@ class SorinGrimNemesisRevealEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library and put that card into your hand. Each opponent loses life equal to its mana value";
     }
     
-    public SorinGrimNemesisRevealEffect(final SorinGrimNemesisRevealEffect effect) {
+    private SorinGrimNemesisRevealEffect(final SorinGrimNemesisRevealEffect effect) {
         super(effect);
     }
     

@@ -75,6 +75,6 @@ class CryptGhastTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever you tap a Swamp for mana, add {B} <i>(in addition to the mana the land produces)</i>.";
+        return "Whenever you tap a Swamp for mana, add an additional {B}.";
     }
 }

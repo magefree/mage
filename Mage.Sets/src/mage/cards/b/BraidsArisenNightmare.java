@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
 /**
@@ -29,7 +30,7 @@ public final class BraidsArisenNightmare extends CardImpl {
     public BraidsArisenNightmare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -86,11 +87,11 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+        TargetSacrifice target = new TargetSacrifice(filter);
         if (!target.canChoose(controller.getId(), source, game)) {
             return false;
         }
-        controller.chooseTarget(Outcome.Sacrifice, target, source, game);
+        controller.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
@@ -101,7 +102,7 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
         if (!permanent.sacrifice(source, game)) {
             return false;
         }
-        for (UUID opponentId : game.getOpponents(controller.getId())) {
+        for (UUID opponentId : game.getOpponents(controller.getId(), true)) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null) {
                 continue;
@@ -115,14 +116,14 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
     }
 
     private boolean braidsSacrifice(Player opponent, FilterControlledPermanent opponentFilter, Game game, Ability source) {
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, opponentFilter, true);
+        TargetSacrifice target = new TargetSacrifice(opponentFilter);
         if (!target.canChoose(opponent.getId(), source, game)) {
             return false;
         }
         if (!opponent.chooseUse(Outcome.Sacrifice, "Sacrifice " + CardUtil.addArticle(opponentFilter.getMessage()) + '?', source, game)) {
             return false;
         }
-        opponent.chooseTarget(Outcome.Sacrifice, target, source, game);
+        opponent.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.sacrifice(source, game);
     }

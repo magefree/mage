@@ -1,17 +1,15 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * FAQ 2013/01/11
@@ -19,7 +17,7 @@ import mage.target.targetpointer.FixedTarget;
  * 702.98. Evolve
  * <p>
  * 702.98a Evolve is a triggered ability. "Evolve" means "Whenever a creature
- * enters the battlefield under your control, if that creature's power is
+ * you control enters, if that creature's power is
  * greater than this creature's power and/or that creature's toughness is
  * greater than this creature's toughness, put a +1/+1 counter on this
  * creature."
@@ -64,10 +62,10 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class EvolveAbility extends TriggeredAbilityImpl {
+public class EvolveAbility extends EntersBattlefieldAllTriggeredAbility {
 
     public EvolveAbility() {
-        super(Zone.BATTLEFIELD, new EvolveEffect());
+        super(Zone.BATTLEFIELD, new EvolveEffect(), StaticFilters.FILTER_CONTROLLED_CREATURE, false);
     }
 
     public EvolveAbility(EvolveAbility ability) {
@@ -75,42 +73,25 @@ public class EvolveAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getTargetId().equals(this.getSourceId())) {
-            Permanent triggeringCreature = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (triggeringCreature != null
-                    && triggeringCreature.isCreature(game)
-                    && triggeringCreature.isControlledBy(this.controllerId)) {
-                Permanent sourceCreature = game.getPermanent(sourceId);
-                if (sourceCreature != null && isPowerOrThoughnessGreater(sourceCreature, triggeringCreature)) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean checkInterveningIfClause(Game game) {
-        return true;
-    }
-
-    public static boolean isPowerOrThoughnessGreater(Permanent sourceCreature, Permanent newCreature) {
-        if (newCreature.getPower().getValue() > sourceCreature.getPower().getValue()) {
-            return true;
-        }
-        return newCreature.getToughness().getValue() > sourceCreature.getToughness().getValue();
+        Permanent sourcePermanent = getSourcePermanentOrLKI(game);
+        Permanent permanentEntering = (Permanent) this
+                .getEffects()
+                .stream()
+                .map(effect -> effect.getValue("permanentEnteringBattlefield"))
+                .findFirst()
+                .orElse(null);
+        return sourcePermanent != null
+                && permanentEntering != null
+                && sourcePermanent.isCreature(game)
+                && permanentEntering.isCreature(game)
+                && (permanentEntering.getPower().getValue() > sourcePermanent.getPower().getValue()
+                || permanentEntering.getToughness().getValue() > sourcePermanent.getToughness().getValue());
     }
 
     @Override
     public String getRule() {
-        return "Evolve <i>(Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)</i>";
+        return "Evolve <i>(Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)</i>";
     }
 
     @Override
@@ -125,7 +106,7 @@ class EvolveEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
     }
 
-    public EvolveEffect(final EvolveEffect effect) {
+    protected EvolveEffect(final EvolveEffect effect) {
         super(effect);
     }
 
@@ -136,15 +117,15 @@ class EvolveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent triggeringCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if (triggeringCreature != null) {
-            Permanent sourceCreature = game.getPermanent(source.getSourceId());
-            if (sourceCreature != null && EvolveAbility.isPowerOrThoughnessGreater(sourceCreature, triggeringCreature)) {
-                sourceCreature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.EVOLVED_CREATURE, sourceCreature.getId(), source, source.getControllerId()));
-            }
-            return true;
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            return false;
         }
+        permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+        game.fireEvent(GameEvent.getEvent(
+                GameEvent.EventType.EVOLVED_CREATURE,
+                permanent.getId(), source, source.getControllerId()
+        ));
         return false;
     }
 }

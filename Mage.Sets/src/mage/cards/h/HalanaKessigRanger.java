@@ -28,7 +28,7 @@ public final class HalanaKessigRanger extends CardImpl {
     public HalanaKessigRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARCHER);
         this.subtype.add(SubType.RANGER);
@@ -38,12 +38,11 @@ public final class HalanaKessigRanger extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Whenever another creature enters the battlefield under your control, you may pay {2}. When you do, that creature deals damage equal to its power to target creature.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new DoIfCostPaid(new HalanaKessigRangerTriggerEffect(), new GenericManaCost(2)),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT,
-                "Whenever another creature enters the battlefield under your control, you may pay {2}. " +
-                        "When you do, that creature deals damage equal to its power to target creature."
+        // Whenever another creature you control enters, you may pay {2}. When you do, that creature deals damage equal to its power to target creature.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
+                new DoIfCostPaid(new HalanaKessigRangerTriggerEffect(), new GenericManaCost(2))
+                        .setText("you may pay {2}. When you do, that creature deals damage equal to its power to target creature."),
+                StaticFilters.FILTER_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT
         ));
 
         // Partner
@@ -80,7 +79,7 @@ class HalanaKessigRangerTriggerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new HalanaKessigRangerDamageEffect(
-                        new MageObjectReference(targetPointer.getFirst(game, source), game)
+                        new MageObjectReference(getTargetPointer().getFirst(game, source), game)
                 ), false, "that creature deals damage equal to its power to target creature"
         );
         ability.addTarget(new TargetCreaturePermanent());

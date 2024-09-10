@@ -58,7 +58,7 @@ class BloodforgedBattleAxeAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenCopySourceEffect());
     }
 
-    public BloodforgedBattleAxeAbility(final BloodforgedBattleAxeAbility ability) {
+    private BloodforgedBattleAxeAbility(final BloodforgedBattleAxeAbility ability) {
         super(ability);
     }
 

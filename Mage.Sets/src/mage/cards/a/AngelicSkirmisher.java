@@ -1,10 +1,8 @@
 
 package mage.cards.a;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -59,10 +57,10 @@ class AngelicSkirmisherEffect extends OneShotEffect {
 
     AngelicSkirmisherEffect() {
         super(Outcome.AddAbility);
-        staticText = "choose first strike, vigilance or lifelink. Creatures you control gain that ability until end of turn";
+        staticText = "choose first strike, vigilance, or lifelink. Creatures you control gain that ability until end of turn";
     }
 
-    AngelicSkirmisherEffect(final AngelicSkirmisherEffect effect) {
+    private AngelicSkirmisherEffect(final AngelicSkirmisherEffect effect) {
         super(effect);
     }
 
@@ -72,7 +70,7 @@ class AngelicSkirmisherEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             Choice abilityChoice = new ChoiceImpl(true);
-            Set<String> abilityChoices = new HashSet<>(3);
+            Set<String> abilityChoices = new LinkedHashSet<>(3);
             abilityChoice.setMessage("Choose ability for your creatures");
             abilityChoices.add("First strike");
             abilityChoices.add("Vigilance");

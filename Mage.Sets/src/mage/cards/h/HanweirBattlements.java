@@ -29,7 +29,9 @@ public final class HanweirBattlements extends CardImpl {
 
     public HanweirBattlements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+
         this.meldsWithClazz = mage.cards.h.HanweirGarrison.class;
+        this.meldsToClazz = mage.cards.h.HanweirTheWrithingTownship.class;
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

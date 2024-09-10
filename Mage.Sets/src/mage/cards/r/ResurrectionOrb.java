@@ -4,7 +4,7 @@ import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -35,7 +35,7 @@ public final class ResurrectionOrb extends CardImpl {
         // Whenever equipped creature dies, return that card to the battlefield under its owner's control at the beginning of the next end step.
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                        new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.ANY
+                        new ReturnToBattlefieldUnderOwnerControlAttachedEffect(), TargetController.ANY
                 ), true
         ).setText("return that card to the battlefield under its owner's control at the beginning of the next end step"), "equipped creature"));
 

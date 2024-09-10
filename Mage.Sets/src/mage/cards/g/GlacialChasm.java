@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.PreventDamageToControllerEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
-import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
+import mage.abilities.effects.common.combat.CantAttackAllEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class GlacialChasm extends CardImpl {
         // Creatures you control can't attack.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
         filter.add(TargetController.YOU.getControllerPredicate());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAllEffect(Duration.WhileOnBattlefield, filter)));
         // Prevent all damage that would be dealt to you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.WhileOnBattlefield)));
     }

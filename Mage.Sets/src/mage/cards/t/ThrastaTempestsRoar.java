@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -18,7 +18,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class ThrastaTempestsRoar extends CardImpl {
 
     public ThrastaTempestsRoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
@@ -50,7 +49,7 @@ public final class ThrastaTempestsRoar extends CardImpl {
         // Thrasta has hexproof as long as it entered the battlefield this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
-                ThrastaCondition.instance, "{this} has hexproof as long as it entered the battlefield this turn"
+                SourceEnteredThisTurnCondition.instance, "{this} has hexproof as long as it entered the battlefield this turn"
         )));
     }
 
@@ -89,15 +88,5 @@ enum ThrastaDynamicValue implements DynamicValue {
     @Override
     public String getMessage() {
         return "other spell cast this turn";
-    }
-}
-
-enum ThrastaCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        return permanent != null && permanent.getTurnsOnBattlefield() == 0;
     }
 }

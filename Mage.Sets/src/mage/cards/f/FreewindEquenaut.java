@@ -43,7 +43,7 @@ public final class FreewindEquenaut extends CardImpl {
                 new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield),
                 new EnchantedSourceCondition(),
-                "As long as {this} is enchanted, it has \"{T}: {this} deals 2 damage to target attacking or blocking creature\"")));
+                "As long as {this} is enchanted, it has \"{T}: {this} deals 2 damage to target attacking or blocking creature.\"")));
     }
 
     private FreewindEquenaut(final FreewindEquenaut card) {

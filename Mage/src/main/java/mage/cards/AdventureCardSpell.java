@@ -7,4 +7,6 @@ public interface AdventureCardSpell extends SubCard<AdventureCard> {
 
     @Override
     AdventureCardSpell copy();
+
+    void finalizeAdventure();
 }

@@ -28,12 +28,10 @@ public final class BurningProphet extends CardImpl {
 
         // Whenever you cast a noncreature spell, Burning Prophet gets +1/+0 until end of turn, then scry 1.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new BoostSourceEffect(
-                        1, 0, Duration.EndOfTurn
-                ).setText("{this} gets +1/+0 until end of turn, then"),
+                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         );
-        ability.addEffect(new ScryEffect(1, false));
+        ability.addEffect(new ScryEffect(1, false).concatBy(", then"));
         this.addAbility(ability);
     }
 

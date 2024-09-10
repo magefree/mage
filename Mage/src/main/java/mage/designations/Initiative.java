@@ -8,7 +8,7 @@ import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPlayerBatchEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -21,7 +21,7 @@ import java.util.UUID;
 public class Initiative extends Designation {
 
     public Initiative() {
-        super(DesignationType.THE_INITIATIVE, "CLB");
+        super(DesignationType.THE_INITIATIVE);
 
         // Whenever one or more creatures a player controls deals combat damage to you, that player takes the initiative.
         this.addAbility(new InitiativeDamageTriggeredAbility());
@@ -57,12 +57,12 @@ class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerBatchEvent dEvent = (DamagedPlayerBatchEvent) event;
+        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
         UUID playerId = dEvent
                 .getEvents()
                 .stream()

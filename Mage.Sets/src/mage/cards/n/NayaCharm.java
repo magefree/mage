@@ -9,7 +9,7 @@ import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,7 +31,7 @@ public final class NayaCharm extends CardImpl {
         mode.addTarget(new TargetCardInGraveyard());
         this.getSpellAbility().addMode(mode);
         // or tap all creatures target player controls.
-        mode = new Mode(new TapAllTargetPlayerControlsEffect(FILTER_PERMANENT_CREATURES));
+        mode = new Mode(new TapAllTargetPlayerControlsEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
         mode.addTarget(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }

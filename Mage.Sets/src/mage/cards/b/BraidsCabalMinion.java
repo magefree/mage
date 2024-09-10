@@ -28,7 +28,7 @@ public final class BraidsCabalMinion extends CardImpl {
 
     public BraidsCabalMinion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.MINION);
 
         this.power = new MageInt(2);

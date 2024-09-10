@@ -36,12 +36,12 @@ public final class ElspethUndauntedHero extends CardImpl {
     public ElspethUndauntedHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELSPETH);
         this.setStartingLoyalty(5);
 
         // +2: Put a +1/+1 counter on each of up to two target creatures.
-        Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 2);
+        Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on each of up to two target creatures"), 2);
         ability.addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES));
         this.addAbility(ability);
 

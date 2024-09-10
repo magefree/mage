@@ -35,7 +35,7 @@ public final class AstorBearerOfBlades extends CardImpl {
     public AstorBearerOfBlades(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

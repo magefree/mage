@@ -36,16 +36,14 @@ public final class MoltenEchoes extends CardImpl {
         // As Molten Echoes enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Copy)));
 
-        // Whenever a nontoken creature of the chosen type enters the battlefield under your control, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
+        // Whenever a nontoken creature of the chosen type you control enters, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("nontoken creature of the chosen type");
         filter.add(TokenPredicate.FALSE);
         filter.add(ChosenSubtypePredicate.TRUE);
 
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new MoltenEchoesEffect(),
-                filter, false, SetTargetPointer.PERMANENT,
-                "Whenever a nontoken creature of the chosen type enters the battlefield under your control, "
-                        + "create a token that's a copy of that creature. "
-                        + "That token gains haste. Exile it at the beginning of the next end step.");
+                filter, false, SetTargetPointer.PERMANENT
+        );
         this.addAbility(ability);
     }
 
@@ -61,12 +59,12 @@ public final class MoltenEchoes extends CardImpl {
 
 class MoltenEchoesEffect extends OneShotEffect {
 
-    public MoltenEchoesEffect() {
+    MoltenEchoesEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    public MoltenEchoesEffect(final MoltenEchoesEffect effect) {
+    private MoltenEchoesEffect(final MoltenEchoesEffect effect) {
         super(effect);
     }
 
@@ -80,7 +78,7 @@ class MoltenEchoesEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true);
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             if (effect.apply(game, source)) {
                 for (Permanent tokenPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();
@@ -95,4 +93,3 @@ class MoltenEchoesEffect extends OneShotEffect {
         return false;
     }
 }
-

@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -11,7 +10,6 @@ import mage.game.events.GameEvent;
 import mage.target.TargetSource;
 
 /**
- *
  * @author LevelX2
  */
 public class PreventAllDamageFromChosenSourceToYouEffect extends PreventionEffectImpl {
@@ -32,7 +30,7 @@ public class PreventAllDamageFromChosenSourceToYouEffect extends PreventionEffec
         this.staticText = setText();
     }
 
-    public PreventAllDamageFromChosenSourceToYouEffect(final PreventAllDamageFromChosenSourceToYouEffect effect) {
+    protected PreventAllDamageFromChosenSourceToYouEffect(final PreventAllDamageFromChosenSourceToYouEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
@@ -44,7 +42,12 @@ public class PreventAllDamageFromChosenSourceToYouEffect extends PreventionEffec
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
+        // be sure to note the target source's zcc, etc, if able.
+        if (targetSource.getFirstTarget() != null) {
+            this.targetSource.updateTarget(targetSource.getFirstTarget(), game);
+        }
     }
 
     @Override
@@ -56,7 +59,9 @@ public class PreventAllDamageFromChosenSourceToYouEffect extends PreventionEffec
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(targetSource.getFirstTarget())) {
+            if (event.getTargetId().equals(source.getControllerId())
+                    && event.getSourceId().equals(targetSource.getFirstTarget())
+                    && targetSource.isLegal(source, game)) {  // source is blinked, becomes a new object, etc.
                 return true;
             }
         }

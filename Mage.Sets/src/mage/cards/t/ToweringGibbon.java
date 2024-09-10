@@ -11,7 +11,6 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -38,7 +37,7 @@ public final class ToweringGibbon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerSourceEffect(
-                        ToweringGibbonValue.instance, Duration.EndOfGame
+                        ToweringGibbonValue.instance
                 ).setText("{this}'s power is equal to the greatest mana value among creatures you control")
         ));
     }

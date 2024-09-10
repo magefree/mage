@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.MageObject;
@@ -15,17 +14,25 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
- *
  * @author spjspj
  */
 public final class NarsetTranscendentEmblem extends Emblem {
-    
+
     // "Your opponents can't cast noncreature spells.
     public NarsetTranscendentEmblem() {
 
-        this.setName("Emblem Narset");
+        super("Emblem Narset");
 
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new NarsetTranscendentCantCastEffect()));
+    }
+
+    private NarsetTranscendentEmblem(final NarsetTranscendentEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public NarsetTranscendentEmblem copy() {
+        return new NarsetTranscendentEmblem(this);
     }
 }
 
@@ -36,18 +43,13 @@ class NarsetTranscendentCantCastEffect extends ContinuousRuleModifyingEffectImpl
         staticText = "Your opponents can't cast noncreature spells";
     }
 
-    public NarsetTranscendentCantCastEffect(final NarsetTranscendentCantCastEffect effect) {
+    protected NarsetTranscendentCantCastEffect(final NarsetTranscendentCantCastEffect effect) {
         super(effect);
     }
 
     @Override
     public NarsetTranscendentCantCastEffect copy() {
         return new NarsetTranscendentCantCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

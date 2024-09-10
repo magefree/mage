@@ -44,8 +44,6 @@ class GhostflameSliverEffect extends ContinuousEffectImpl {
     
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
-    private static ObjectColor colorless = new ObjectColor();
-
     public GhostflameSliverEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         staticText = "All Slivers are colorless";
@@ -55,7 +53,7 @@ class GhostflameSliverEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (filter.match(perm, game)) {
-                perm.getColor(game).setColor(colorless);
+                perm.getColor(game).setColor(ObjectColor.COLORLESS);
             }
         }
         return true;

@@ -38,12 +38,12 @@ public final class AyulaQueenAmongBears extends CardImpl {
     public AyulaQueenAmongBears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEAR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another Bear enters the battlefield under your control, choose one —
+        // Whenever another Bear you control enters, choose one —
         // • Put two +1/+1 counters on target Bear.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), filter

@@ -29,7 +29,7 @@ public final class AetherworksMarvel extends CardImpl {
 
     public AetherworksMarvel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever a permanent you control is put into a graveyard, you get {E}.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
@@ -60,12 +60,12 @@ class AetherworksMarvelEffect extends OneShotEffect {
     AetherworksMarvelEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Look at the top six cards of your library. "
-                + "You may cast a card from among them without paying "
+                + "You may cast a spell from among them without paying "
                 + "its mana cost. Put the rest on the bottom of your "
                 + "library in a random order";
     }
 
-    AetherworksMarvelEffect(final AetherworksMarvelEffect effect) {
+    private AetherworksMarvelEffect(final AetherworksMarvelEffect effect) {
         super(effect);
     }
 

@@ -34,7 +34,7 @@ public final class GibberingBarricade extends CardImpl {
 
         // {2}{B}, Sacrifice a creature: You gain 1 life and draw a card.
         Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new ManaCostsImpl<>("{2}{B}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }

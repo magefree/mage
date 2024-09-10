@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
@@ -25,7 +24,7 @@ import java.util.UUID;
  * @author noxx
  */
 public final class DevoutChaplain extends CardImpl {
-    private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
+    private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Humans you control");
 
     static {
         humanFilter.add(TappedPredicate.UNTAPPED);

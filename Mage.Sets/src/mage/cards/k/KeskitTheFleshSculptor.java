@@ -39,7 +39,7 @@ public final class KeskitTheFleshSculptor extends CardImpl {
     public KeskitTheFleshSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
@@ -51,7 +51,7 @@ public final class KeskitTheFleshSculptor extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(3, 2, PutCards.HAND, PutCards.GRAVEYARD),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
+        ability.addCost(new SacrificeTargetCost(3, filter));
         this.addAbility(ability);
 
         // Partner

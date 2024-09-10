@@ -1,10 +1,13 @@
 package mage.verify.mtgjson;
 
 import com.google.gson.Gson;
+import mage.client.remote.XmageURLConnection;
+import org.apache.log4j.Logger;
 
-import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.Normalizer;
@@ -12,7 +15,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipInputStream;
 
+/**
+ * MTGJSON v5: basic service to work with mtgjson data
+ *
+ * @author JayDi85
+ */
 public final class MtgJsonService {
+
+    private static final Logger logger = Logger.getLogger(MtgJsonService.class);
 
     public static Map<String, String> mtgJsonToXMageCodes = new HashMap<>();
     public static Map<String, String> xMageToMtgJsonCodes = new HashMap<>();
@@ -36,23 +46,36 @@ public final class MtgJsonService {
     }
 
     private static <T> T readFromZip(String filename, Class<T> clazz) throws IOException {
+
+        // build-in file
         InputStream stream = MtgJsonService.class.getResourceAsStream(filename);
-        if (stream == null) {
-            File file = new File(filename);
-            if (!file.exists()) {
-                String url = "https://mtgjson.com/api/v5/" + filename;
-                System.out.println("Downloading " + url + " to " + file.getAbsolutePath());
-                URLConnection connection = new URL(url).openConnection();
-                connection.setRequestProperty("user-agent", "xmage");
-                InputStream download = connection.getInputStream();
-                Files.copy(download, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Downloading DONE");
-            } else {
-                System.out.println("Found file " + filename + " from " + file.getAbsolutePath());
-            }
-            stream = new FileInputStream(file);
+        if (stream != null) {
+            logger.info("mtgjson: use build-in file " + filename);
+            return readFromZip(stream, clazz);
         }
 
+        // already downloaded file
+        File file = new File(filename);
+        if (file.exists()) {
+            logger.info("mtgjson: use existing file " + filename + " from " + file.getAbsolutePath());
+            return readFromZip(Files.newInputStream(file.toPath()), clazz);
+        }
+
+        // new download
+        String url = "https://mtgjson.com/api/v5/" + filename;
+        logger.info("mtgjson: downloading new file " + url);
+        // mtgjson site require user-agent in headers (otherwise it return 403)
+        stream = XmageURLConnection.downloadBinary(url);
+        if (stream != null) {
+            logger.info("mtgjson: download DONE, saved to " + file.getAbsolutePath());
+            Files.copy(stream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            return readFromZip(Files.newInputStream(file.toPath()), clazz);
+        }
+
+        throw new IOException("mtgjson: can't found or download file, check your connection " + filename);
+    }
+
+    private static <T> T readFromZip(InputStream stream, Class<T> clazz) throws IOException {
         try (ZipInputStream zipInputStream = new ZipInputStream(stream)) {
             zipInputStream.getNextEntry();
             return new Gson().fromJson(new InputStreamReader(zipInputStream), clazz);
@@ -63,6 +86,10 @@ public final class MtgJsonService {
         return SetHolder.sets;
     }
 
+    public static Map<String, MtgJsonCard> cards() {
+        return CardHolder.cards;
+    }
+
     public static MtgJsonMetadata meta() {
         return SetHolder.meta;
     }
@@ -71,15 +98,21 @@ public final class MtgJsonService {
         return findReference(CardHolder.cards, name);
     }
 
+    public static MtgJsonCard cardByClassName(String classFullName) {
+        String shortName = classFullName.replaceAll(".*\\.", "").toLowerCase(Locale.ENGLISH);
+        return findReference(CardHolder.cardsByClasses, shortName);
+    }
+
     public static List<MtgJsonCard> cardsFromSet(String setCode, String name) {
         MtgJsonSet set = findReference(SetHolder.sets, setCode);
         if (set == null) {
             return new ArrayList<>();
         }
 
+        // for a double faced cards each side goes here as one card, so must search by face name
         String needName = convertXmageToMtgJsonCardName(name);
         return set.cards.stream()
-                .filter(c -> needName.equals(c.getRealCardName()))
+                .filter(c -> needName.equals(c.getNameAsFace()))
                 .collect(Collectors.toList());
     }
 
@@ -94,18 +127,9 @@ public final class MtgJsonService {
     private static <T> T findReference(Map<String, T> reference, String name) {
         T ref = reference.get(name);
         if (ref == null) {
-            //name = name.replaceFirst("\\bA[Ee]", "Æ");
-            //ref = reference.get(name);
-        }
-        if (ref == null) {
-            //name = name.replace("'", "\""); // for Kongming, "Sleeping Dragon" & Pang Tong, "Young Phoenix"
-            //ref = reference.get(name);
-        }
-        if (ref == null) {
             name = convertXmageToMtgJsonCardName(name);
             ref = reference.get(name);
         }
-
         return ref;
     }
 
@@ -143,15 +167,15 @@ public final class MtgJsonService {
 
     private static final class AtomicCardsModel {
 
-        // list by card names, each name can havem multiple cards (two faces, different cards with same name from un-sets)
-        public HashMap<String, ArrayList<MtgJsonCard>> data;
+        // list by card names, each name can have multiple cards (two faces, different cards with same name from un-sets)
+        public Map<String, ArrayList<MtgJsonCard>> data;
 
         private boolean containsSameNames(ArrayList<MtgJsonCard> list) {
-            Set<String> names = list.stream().map(MtgJsonCard::getRealCardName).collect(Collectors.toSet());
+            Set<String> names = list.stream().map(MtgJsonCard::getNameAsFace).collect(Collectors.toSet());
             return names.size() == 1;
         }
 
-        public HashMap<String, MtgJsonCard> prepareIndex() {
+        public Map<String, MtgJsonCard> prepareIndex() {
             HashMap<String, MtgJsonCard> index = new HashMap<>();
             for (Map.Entry<String, ArrayList<MtgJsonCard>> rec : data.entrySet()) {
                 if (rec.getValue().size() == 1) {
@@ -178,12 +202,13 @@ public final class MtgJsonService {
     }
 
     private static final class AllPrintingsModel {
-        public HashMap<String, MtgJsonSet> data;
+        public Map<String, MtgJsonSet> data;
         public MtgJsonMetadata meta;
     }
 
     private static final class CardHolder {
-        private static final Map<String, MtgJsonCard> cards;
+        private static final Map<String, MtgJsonCard> cards; // key: card name like Grizzly Bears
+        private static final Map<String, MtgJsonCard> cardsByClasses; // key: short class name in lower case like grizzlybears
 
         static {
             try {
@@ -212,6 +237,14 @@ public final class MtgJsonService {
                 cards.keySet().removeAll(keysToDelete);
 
                 addAliases(cards);
+
+                // create index for class names searching
+                // lower case with ascii symbols without space
+                cardsByClasses = new HashMap<>(cards.size());
+                cards.forEach((name, card) -> {
+                    String className = name.replaceAll("[^ -~]|[ ]", "").toLowerCase(Locale.ENGLISH);
+                    cardsByClasses.put(className, card);
+                });
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -233,5 +266,4 @@ public final class MtgJsonService {
             }
         }
     }
-
 }

@@ -57,7 +57,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         this.buybackCost.setCostType(VariableCostType.ADDITIONAL);
     }
 
-    public BuybackAbility(final BuybackAbility ability) {
+    protected BuybackAbility(final BuybackAbility ability) {
         super(ability);
         this.buybackCost = ability.buybackCost.copy();
         this.amountToReduceBy = ability.amountToReduceBy;
@@ -144,9 +144,9 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
                     for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext(); ) {
                         Cost cost = (Cost) it.next();
                         if (cost instanceof ManaCostsImpl) {
-                            ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                            ability.addManaCostsToPay((ManaCostsImpl) cost.copy());
                         } else {
-                            ability.getCosts().add(cost.copy());
+                            ability.addCost(cost.copy());
                         }
                     }
                 }
@@ -172,7 +172,7 @@ class BuybackEffect extends ReplacementEffectImpl {
         staticText = "When {this} resolves and you payed buyback costs, put it back to hand instead";
     }
 
-    public BuybackEffect(final BuybackEffect effect) {
+    protected BuybackEffect(final BuybackEffect effect) {
         super(effect);
     }
 
@@ -191,15 +191,17 @@ class BuybackEffect extends ReplacementEffectImpl {
         if (event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             // if spell fizzled, the sourceId is null
-            return zEvent.getFromZone() == Zone.STACK && zEvent.getToZone() == Zone.GRAVEYARD
+            return zEvent.getFromZone() == Zone.STACK
+                    && (zEvent.getToZone() == Zone.GRAVEYARD ||
+                            // Innocuous Insect from Mystery Boosters is stretching a little what Buyback can do.
+                            // Although that does not impact normal Buyback usage on instants/sorceries.
+                            //
+                            // (2019-11-12) If you pay the buyback cost for a permanent spell, it doesn't enter
+                            // the battlefield as it resolves. It moves from the stack to its owner's hand.
+                            zEvent.getToZone() == Zone.BATTLEFIELD)
                     && source.getSourceId().equals(event.getSourceId());
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

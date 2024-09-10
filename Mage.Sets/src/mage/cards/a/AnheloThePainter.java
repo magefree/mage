@@ -29,7 +29,7 @@ public class AnheloThePainter extends CardImpl {
     public AnheloThePainter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.VAMPIRE, SubType.ASSASSIN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -65,7 +65,7 @@ class AnheloThePainterGainCausalityEffect extends ContinuousEffectImpl {
                 "When you do, copy the spell and you may choose new targets for the copy.)</i>";
     }
 
-    AnheloThePainterGainCausalityEffect(final AnheloThePainterGainCausalityEffect effect) {
+    private AnheloThePainterGainCausalityEffect(final AnheloThePainterGainCausalityEffect effect) {
         super(effect);
     }
 

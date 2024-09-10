@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -46,7 +46,7 @@ public final class BrainInAJar extends CardImpl {
         // {3}, {T}, Remove X charge counters from Brain in a Jar: Scry X.
         ability = new SimpleActivatedAbility(new BrainInAJarScryEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE));
         this.addAbility(ability);
     }
 
@@ -62,14 +62,14 @@ public final class BrainInAJar extends CardImpl {
 
 class BrainInAJarCastEffect extends OneShotEffect {
 
-    public BrainInAJarCastEffect() {
+    BrainInAJarCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = ", then you may cast an instant or sorcery spell "
                 + "with mana value equal to the number of charge "
                 + "counters on {this} from your hand without paying its mana cost";
     }
 
-    public BrainInAJarCastEffect(final BrainInAJarCastEffect effect) {
+    private BrainInAJarCastEffect(final BrainInAJarCastEffect effect) {
         super(effect);
     }
 
@@ -94,12 +94,12 @@ class BrainInAJarCastEffect extends OneShotEffect {
 
 class BrainInAJarScryEffect extends OneShotEffect {
 
-    public BrainInAJarScryEffect() {
+    BrainInAJarScryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Scry X";
     }
 
-    public BrainInAJarScryEffect(final BrainInAJarScryEffect effect) {
+    private BrainInAJarScryEffect(final BrainInAJarScryEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class BrainInAJarScryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int x = RemovedCountersForCostValue.instance.calculate(game, source, this);
+            int x = GetXValue.instance.calculate(game, source, this);
             if (x > 0) {
                 return controller.scry(x, source, game);
             }

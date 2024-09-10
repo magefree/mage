@@ -31,7 +31,7 @@ public final class CharixTheRagingIsle extends CardImpl {
     public CharixTheRagingIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LEVIATHAN);
         this.subtype.add(SubType.CRAB);
         this.power = new MageInt(0);
@@ -44,7 +44,7 @@ public final class CharixTheRagingIsle extends CardImpl {
 
         // {3}: Charix gets +X/-X until end of turn, where X is the number of Islands you control.
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
-                xValue, xValue2, Duration.EndOfTurn, true
+                xValue, xValue2, Duration.EndOfTurn
         ).setText("{this} gets +X/-X until end of turn, where X is the number of Islands you control"), new GenericManaCost(3)));
     }
 

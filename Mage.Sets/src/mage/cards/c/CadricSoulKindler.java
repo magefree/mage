@@ -44,7 +44,7 @@ public final class CadricSoulKindler extends CardImpl {
     public CadricSoulKindler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
@@ -53,7 +53,7 @@ public final class CadricSoulKindler extends CardImpl {
         // The "legend rule" doesn't apply to tokens you control.
         this.addAbility(new SimpleStaticAbility(new LegendRuleDoesntApplyEffect(filter2)));
 
-        // Whenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
+        // Whenever another nontoken legendary permanent you control enters, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DoIfCostPaid(new CadricSoulKindlerTokenEffect(), new GenericManaCost(1)), filter
         ));

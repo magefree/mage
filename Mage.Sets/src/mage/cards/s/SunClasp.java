@@ -55,7 +55,7 @@ public final class SunClasp extends CardImpl {
 
 class SunClaspReturnEffect extends OneShotEffect {
 
-    public SunClaspReturnEffect() {
+    SunClaspReturnEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return enchanted creature to its owner's hand";
     }

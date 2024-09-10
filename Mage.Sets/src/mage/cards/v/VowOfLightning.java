@@ -44,7 +44,7 @@ public final class VowOfLightning extends CardImpl {
         Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText(", has first strike");
         ability.addEffect(effect);
-        effect = new CantAttackControllerAttachedEffect(AttachmentType.AURA);
+        effect = new CantAttackControllerAttachedEffect(AttachmentType.AURA, true);
         effect.setText(", and can't attack you or planeswalkers you control");
         ability.addEffect(effect);
         this.addAbility(ability);        

@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class DevouredCreaturesCount implements DynamicValue {
@@ -26,7 +25,7 @@ public class DevouredCreaturesCount implements DynamicValue {
         this.multiplier = multiplier;
     }
 
-    public DevouredCreaturesCount(final DevouredCreaturesCount dynamicValue) {
+    protected DevouredCreaturesCount(final DevouredCreaturesCount dynamicValue) {
         super();
         this.multiplier = dynamicValue.multiplier;
     }

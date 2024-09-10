@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -31,7 +30,7 @@ public final class PrimevalTitan extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Primeval Titan enters the battlefield or attacks, you may search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library.
-        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterLandCard("land cards")), true, Outcome.PutLandInPlay), true));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterLandCard("land cards")), true), true));
     }
 
     private PrimevalTitan(final PrimevalTitan card) {

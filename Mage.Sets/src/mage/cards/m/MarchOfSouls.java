@@ -40,12 +40,12 @@ public final class MarchOfSouls extends CardImpl {
 
 class MarchOfSoulsEffect extends OneShotEffect {
 
-    public MarchOfSoulsEffect() {
+    MarchOfSoulsEffect() {
         super(Outcome.Benefit);
         staticText = "Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller creates a 1/1 white Spirit creature token with flying.";
     }
 
-    public MarchOfSoulsEffect(final MarchOfSoulsEffect effect) {
+    private MarchOfSoulsEffect(final MarchOfSoulsEffect effect) {
         super(effect);
     }
 
@@ -66,6 +66,7 @@ class MarchOfSoulsEffect extends OneShotEffect {
                 playersWithCreatures.put(controllerId, playersWithCreatures.getOrDefault(controllerId, 0) + 1);
             }
         }
+        game.processAction();
         SpiritWhiteToken token = new SpiritWhiteToken();
         for (Map.Entry<UUID, Integer> destroyedCreaturePerPlayer : playersWithCreatures.entrySet()) {
             token.putOntoBattlefield(destroyedCreaturePerPlayer.getValue(), game, source, destroyedCreaturePerPlayer.getKey());

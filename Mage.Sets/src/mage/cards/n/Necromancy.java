@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -19,8 +20,6 @@ import java.util.UUID;
  * @author LevelX2, awjackson
  */
 public final class Necromancy extends CardImpl {
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from a graveyard");
 
     public Necromancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
@@ -35,7 +34,7 @@ public final class Necromancy extends CardImpl {
         // a graveyard onto the battlefield under your control and attach Necromancy to it. When Necromancy
         // leaves the battlefield, that creature's controller sacrifices it.
         Ability ability = new AnimateDeadTriggeredAbility(true);
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
     }
 

@@ -49,7 +49,7 @@ class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
     }
 
-    public DealtDamageLoseLifeTriggeredAbility(final DealtDamageLoseLifeTriggeredAbility ability) {
+    private DealtDamageLoseLifeTriggeredAbility(final DealtDamageLoseLifeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -60,7 +60,7 @@ class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override

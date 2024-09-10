@@ -57,7 +57,7 @@ class SpectralBearsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepSourceEffect());
     }
 
-    public SpectralBearsTriggeredAbility(final SpectralBearsTriggeredAbility ability) {
+    private SpectralBearsTriggeredAbility(final SpectralBearsTriggeredAbility ability) {
         super(ability);
     }
 

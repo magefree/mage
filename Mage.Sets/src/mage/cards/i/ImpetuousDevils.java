@@ -61,7 +61,7 @@ class ImpetuousDevilsAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat), false);
     }
 
-    public ImpetuousDevilsAbility(final ImpetuousDevilsAbility ability) {
+    private ImpetuousDevilsAbility(final ImpetuousDevilsAbility ability) {
         super(ability);
     }
 

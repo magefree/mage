@@ -24,7 +24,7 @@ public final class HeraldOfTheDreadhorde extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Herald of the Dreadhorde dies, amass 2.
-        this.addAbility(new DiesSourceTriggeredAbility(new AmassEffect(2)));
+        this.addAbility(new DiesSourceTriggeredAbility(new AmassEffect(2, SubType.ZOMBIE)));
     }
 
     private HeraldOfTheDreadhorde(final HeraldOfTheDreadhorde card) {

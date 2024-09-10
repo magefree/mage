@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -29,7 +29,7 @@ public final class DranaKalastriaBloodchief extends CardImpl {
 
     public DranaKalastriaBloodchief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-       addSuperType(SuperType.LEGENDARY);
+       this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.SHAMAN);
 
@@ -37,8 +37,8 @@ public final class DranaKalastriaBloodchief extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(StaticValue.get(0), new SignInversionDynamicValue(ManacostVariableValue.REGULAR), Duration.EndOfTurn), new ManaCostsImpl<>("{X}{B}{B}"));
-        ability.addEffect(new BoostSourceEffect(ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn).concatBy("and"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(StaticValue.get(0), new SignInversionDynamicValue(GetXValue.instance), Duration.EndOfTurn), new ManaCostsImpl<>("{X}{B}{B}"));
+        ability.addEffect(new BoostSourceEffect(GetXValue.instance, StaticValue.get(0), Duration.EndOfTurn).concatBy("and"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

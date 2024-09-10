@@ -37,7 +37,7 @@ public final class Cromat extends CardImpl {
 
     public Cromat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ILLUSION);
 
         this.power = new MageInt(5);

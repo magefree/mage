@@ -47,12 +47,12 @@ public final class SpectralSearchlight extends CardImpl {
 
 class SpectralSearchlightManaEffect extends ManaEffect {
 
-    public SpectralSearchlightManaEffect() {
+    SpectralSearchlightManaEffect() {
         super();
         this.staticText = "That player adds one mana of any color they choose";
     }
 
-    public SpectralSearchlightManaEffect(final SpectralSearchlightManaEffect effect) {
+    private SpectralSearchlightManaEffect(final SpectralSearchlightManaEffect effect) {
         super(effect);
     }
 

@@ -66,7 +66,7 @@ class AutumnTailKitsuneSage extends TokenImpl {
 
     AutumnTailKitsuneSage() {
         super("Autumn-Tail, Kitsune Sage", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.FOX);
@@ -80,7 +80,7 @@ class AutumnTailKitsuneSage extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public AutumnTailKitsuneSage(final AutumnTailKitsuneSage token) {
+    private AutumnTailKitsuneSage(final AutumnTailKitsuneSage token) {
         super(token);
     }
 
@@ -91,12 +91,12 @@ class AutumnTailKitsuneSage extends TokenImpl {
 
 class AutumnTailEffect extends OneShotEffect {
 
-    public AutumnTailEffect() {
+    AutumnTailEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Attach target Aura attached to a creature to another creature";
     }
 
-    public AutumnTailEffect(final AutumnTailEffect effect) {
+    private AutumnTailEffect(final AutumnTailEffect effect) {
         super(effect);
     }
 

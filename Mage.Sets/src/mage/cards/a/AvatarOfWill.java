@@ -27,7 +27,7 @@ public final class AvatarOfWill extends CardImpl {
 
         // If an opponent has no cards in hand, Avatar of Will costs {6} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, OpponentHasNoCardsInHandCondition.instance)
-                        .setText("If an opponent has no cards in hand, Avatar of Will costs {6} less to cast")
+                        .setText("If an opponent has no cards in hand, this spell costs {6} less to cast")
                 ).addHint(new ConditionHint(OpponentHasNoCardsInHandCondition.instance, "Opponent has no cards in hand"))
         );
 

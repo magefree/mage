@@ -20,7 +20,7 @@ public final class DosansOldestChant extends CardImpl {
         // You gain 6 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(6));
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private DosansOldestChant(final DosansOldestChant card) {

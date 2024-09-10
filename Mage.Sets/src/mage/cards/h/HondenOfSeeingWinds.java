@@ -30,7 +30,7 @@ public final class HondenOfSeeingWinds extends CardImpl {
 
     public HondenOfSeeingWinds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
 
 

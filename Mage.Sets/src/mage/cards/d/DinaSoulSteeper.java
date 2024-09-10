@@ -29,7 +29,7 @@ public final class DinaSoulSteeper extends CardImpl {
     public DinaSoulSteeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRYAD);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(1);
@@ -43,9 +43,7 @@ public final class DinaSoulSteeper extends CardImpl {
                 SacrificeCostCreaturesPower.instance,
                 StaticValue.get(0), Duration.EndOfTurn
         ), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

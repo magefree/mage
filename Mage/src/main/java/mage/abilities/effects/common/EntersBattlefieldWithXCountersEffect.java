@@ -1,14 +1,13 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +21,31 @@ import java.util.UUID;
 public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
 
     protected final Counter counter;
+    private final int multiplier;
 
     public EntersBattlefieldWithXCountersEffect(Counter counter) {
-        super(Outcome.BoostCreature);
-        this.counter = counter;
-        staticText = "with X " + counter.getName() + " counters on it";
+        this(counter, 1);
     }
 
-    public EntersBattlefieldWithXCountersEffect(final EntersBattlefieldWithXCountersEffect effect) {
+    public EntersBattlefieldWithXCountersEffect(Counter counter, int multiplier) {
+        super(Outcome.BoostCreature);
+        this.counter = counter;
+        this.multiplier = multiplier;
+
+        String countText = "X";
+        if (multiplier == 2) {
+            countText = "twice " + countText;
+        }
+        if (multiplier > 2) {
+            countText = CardUtil.numberToText(multiplier) + " times " + countText;
+        }
+        staticText = "with " + countText + " " + counter.getName() + " counters on it";
+    }
+
+    protected EntersBattlefieldWithXCountersEffect(final EntersBattlefieldWithXCountersEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
+        this.multiplier = effect.multiplier;
     }
 
     @Override
@@ -43,19 +57,12 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
             }
         }
         if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
-                if (spellAbility.getSourceId().equals(source.getSourceId())) { // put into play by normal cast
-                    int amount = spellAbility.getManaCostsToPay().getX();
-                    if (amount > 0) {
-                        Counter counterToAdd = counter.copy();
-                        counterToAdd.add(amount - counter.getCount());
-                        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-                        permanent.addCounters(counterToAdd, source.getControllerId(), source, game, appliedEffects);
-                    }
-                }
+            int amount = CardUtil.getSourceCostsTag(game, source, "X", 0) * multiplier;
+            if (amount > 0) {
+                Counter counterToAdd = counter.copy();
+                counterToAdd.add(amount - counter.getCount());
+                List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                permanent.addCounters(counterToAdd, source.getControllerId(), source, game, appliedEffects);
             }
         }
         return true;

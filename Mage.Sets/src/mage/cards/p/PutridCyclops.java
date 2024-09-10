@@ -51,13 +51,13 @@ public final class PutridCyclops extends CardImpl {
 
 class PutridCyclopEffect extends OneShotEffect {
 
-    public PutridCyclopEffect() {
+    PutridCyclopEffect() {
         super(Outcome.Detriment);
         this.staticText = "scry 1, then reveal the top card of your library. {this} gets -X/-X until end of turn, where X is that card's mana value."
                 + " <i>(To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)</i>";
     }
 
-    public PutridCyclopEffect(final PutridCyclopEffect effect) {
+    private PutridCyclopEffect(final PutridCyclopEffect effect) {
         super(effect);
     }
 

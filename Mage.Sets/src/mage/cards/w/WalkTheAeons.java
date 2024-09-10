@@ -28,7 +28,7 @@ public final class WalkTheAeons extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
 
         // Buyback—Sacrifice three Islands. (You may sacrifice three Islands in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)
-        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, filter))));
+        this.addAbility(new BuybackAbility(new SacrificeTargetCost(3, filter)));
 
         // Target player takes an extra turn after this one.
         this.getSpellAbility().addEffect(new AddExtraTurnTargetEffect());

@@ -43,7 +43,6 @@ public final class Instigator extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPlayer());
-        ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);
     }
 
@@ -59,12 +58,12 @@ public final class Instigator extends CardImpl {
 
 class InstigatorEffect extends OneShotEffect {
 
-    public InstigatorEffect() {
+    InstigatorEffect() {
         super(Outcome.Detriment);
         staticText = "Creatures target player controls attack this turn if able";
     }
 
-    public InstigatorEffect(final InstigatorEffect effect) {
+    private InstigatorEffect(final InstigatorEffect effect) {
         super(effect);
     }
 

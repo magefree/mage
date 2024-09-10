@@ -54,7 +54,7 @@ public final class Aetherspouts extends CardImpl {
 */
 class AetherspoutsEffect extends OneShotEffect {
 
-    public AetherspoutsEffect() {
+    AetherspoutsEffect() {
         super(Outcome.Benefit);
         this.staticText = "For each attacking creature, its owner puts it on the top or bottom of their library";
     }
@@ -72,7 +72,9 @@ class AetherspoutsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         game.getPlayerList();
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         PlayerList playerList = game.getState().getPlayersInRange(controller.getId(), game);
         playerList.setCurrent(game.getActivePlayerId());
@@ -81,7 +83,7 @@ class AetherspoutsEffect extends OneShotEffect {
         do {
             List<Permanent> permanentsToTop = new ArrayList<>();
             List<Permanent> permanentsToBottom = new ArrayList<>();
-            for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(new FilterAttackingCreature(), player.getId(), source, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterAttackingCreature(), player.getId(), source, game)) {
                 if (permanent.isOwnedBy(player.getId())) {
                     if (player.chooseUse(outcome, "Put " + permanent.getLogName() + " to the top? (else it goes to bottom)", source, game)) {
                         permanentsToTop.add(permanent);
@@ -110,7 +112,7 @@ class AetherspoutsEffect extends OneShotEffect {
                 if (!player.canRespond()) {
                     return false;
                 }
-                player.choose(Outcome.Neutral, cards, target, game);
+                player.choose(Outcome.Neutral, cards, target, source, game);
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
@@ -147,7 +149,7 @@ class AetherspoutsEffect extends OneShotEffect {
             }
             target = new TargetCard(Zone.BATTLEFIELD, new FilterCard("order to put on bottom of library (last chosen will be bottommost card)"));
             while (player.canRespond() && cards.size() > 1) {
-                player.choose(Outcome.Neutral, cards, target, game);
+                player.choose(Outcome.Neutral, cards, target, source, game);
 
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {

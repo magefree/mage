@@ -3,11 +3,12 @@ package mage.client.components.ext.dlg;
 import mage.client.cards.BigCard;
 import mage.client.components.ext.MessageDialogType;
 import mage.client.game.FeedbackPanel;
+import mage.util.CardUtil;
 import mage.view.CardsView;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ public class DlgParams {
 
     private boolean isAI = false;
 
-    private Set<String> manaChoices = new HashSet<>();
+    private Set<String> manaChoices = new LinkedHashSet<>();
 
     public int getPlayerID() {
         return playerID;
@@ -80,6 +81,7 @@ public class DlgParams {
     }
 
     public void setManaChoices(Set<String> manaChoices) {
+        CardUtil.checkSetParamForSerializationCompatibility(manaChoices);
         this.manaChoices = manaChoices;
     }
 
@@ -103,7 +105,7 @@ public class DlgParams {
         return stringList;
     }
 
-    public void setStringList(ArrayList<String> stringList) {
+    public void setStringList(List<String> stringList) {
         this.stringList = stringList;
     }
 
@@ -119,7 +121,7 @@ public class DlgParams {
         return objectList;
     }
 
-    public void setObjectList(ArrayList<Object> objectList) {
+    public void setObjectList(List<Object> objectList) {
         this.objectList = objectList;
     }
 

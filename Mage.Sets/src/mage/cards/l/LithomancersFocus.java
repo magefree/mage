@@ -43,12 +43,12 @@ public final class LithomancersFocus extends CardImpl {
 
 class LithomancersFocusPreventDamageToTargetEffect extends PreventionEffectImpl {
 
-    public LithomancersFocusPreventDamageToTargetEffect() {
+    LithomancersFocusPreventDamageToTargetEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
         staticText = "Prevent all damage that would be dealt to that creature this turn by colorless sources";
     }
 
-    public LithomancersFocusPreventDamageToTargetEffect(final LithomancersFocusPreventDamageToTargetEffect effect) {
+    private LithomancersFocusPreventDamageToTargetEffect(final LithomancersFocusPreventDamageToTargetEffect effect) {
         super(effect);
     }
 
@@ -59,7 +59,7 @@ class LithomancersFocusPreventDamageToTargetEffect extends PreventionEffectImpl 
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game) && event.getTargetId().equals(targetPointer.getFirst(game, source))) {
+        if (super.applies(event, source, game) && event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
             MageObject object = game.getObject(event.getSourceId());
             return object != null && object.getColor(game).isColorless();
         }

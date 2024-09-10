@@ -1,5 +1,7 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
@@ -9,8 +11,7 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -29,9 +30,9 @@ public class SpectacleAbility extends SpellAbility {
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
 
-        this.getManaCosts().clear();
-        this.getManaCostsToPay().clear();
-        this.addManaCost(spectacleCosts.copy());
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
+        this.addCost(spectacleCosts.copy());
 
         this.setRuleAtTheTop(true);
         this.rule = "Spectacle " + spectacleCosts.getText()
@@ -39,7 +40,7 @@ public class SpectacleAbility extends SpellAbility {
         this.addHint(OpponentsLostLifeHint.instance);
     }
 
-    public SpectacleAbility(final SpectacleAbility ability) {
+    protected SpectacleAbility(final SpectacleAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }
@@ -48,21 +49,15 @@ public class SpectacleAbility extends SpellAbility {
     public ActivationStatus canActivate(UUID playerId, Game game) {
         if (OpponentsLostLifeCount.instance.calculate(game, playerId) > 0
                 && super.canActivate(playerId, game).canActivate()) {
-            return ActivationStatus.getTrue(this, game);
+            return new ActivationStatus(new ApprovingObject(this, game));
         }
         return ActivationStatus.getFalse();
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public boolean activate(Game game, boolean noMana) {
-        if (super.activate(game, noMana)) {
-            List<Integer> spectacleActivations = (ArrayList) game.getState().getValue(SPECTACLE_ACTIVATION_VALUE_KEY + getSourceId());
-            if (spectacleActivations == null) {
-                spectacleActivations = new ArrayList<>(); // zoneChangeCounter
-                game.getState().setValue(SPECTACLE_ACTIVATION_VALUE_KEY + getSourceId(), spectacleActivations);
-            }
-            spectacleActivations.add(game.getState().getZoneChangeCounter(getSourceId()));
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (super.activate(game, allowedIdentifiers, noMana)) {
+            this.setCostsTag(SPECTACLE_ACTIVATION_VALUE_KEY, null);
             return true;
         }
         return false;

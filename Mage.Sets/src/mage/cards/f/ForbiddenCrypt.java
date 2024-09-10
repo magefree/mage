@@ -47,12 +47,12 @@ public final class ForbiddenCrypt extends CardImpl {
 
 class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
 
-    public ForbiddenCryptDrawCardReplacementEffect() {
+    ForbiddenCryptDrawCardReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game";
     }
 
-    public ForbiddenCryptDrawCardReplacementEffect(final ForbiddenCryptDrawCardReplacementEffect effect) {
+    private ForbiddenCryptDrawCardReplacementEffect(final ForbiddenCryptDrawCardReplacementEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             boolean cardReturned = false;
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (target.canChoose(controller.getId(), source, game)) {
                 if (target.choose(Outcome.ReturnToHand, controller.getId(), source.getSourceId(), source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
@@ -100,23 +100,18 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
 
 class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEffectImpl {
 
-    public ForbiddenCryptPutIntoYourGraveyardReplacementEffect() {
+    ForbiddenCryptPutIntoYourGraveyardReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "If a card would be put into your graveyard from anywhere, exile that card instead";
     }
 
-    public ForbiddenCryptPutIntoYourGraveyardReplacementEffect(final ForbiddenCryptPutIntoYourGraveyardReplacementEffect effect) {
+    private ForbiddenCryptPutIntoYourGraveyardReplacementEffect(final ForbiddenCryptPutIntoYourGraveyardReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public ForbiddenCryptPutIntoYourGraveyardReplacementEffect copy() {
         return new ForbiddenCryptPutIntoYourGraveyardReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

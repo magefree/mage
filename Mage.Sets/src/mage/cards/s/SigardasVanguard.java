@@ -80,6 +80,7 @@ class SigardasVanguardEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetCreaturesWithDifferentPowers();
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         if (target.getTargets().isEmpty()) {
             return false;

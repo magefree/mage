@@ -28,12 +28,12 @@ public final class BodyCount extends CardImpl {
     public BodyCount(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
-        // Spectacle {B}
-        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{B}")));
-
         // Draw a card for each creature that died under your control this turn.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(BodyCountValue.instance));
         this.getSpellAbility().addHint(hint);
+
+        // Spectacle {B}
+        this.addAbility(new SpectacleAbility(this, new ManaCostsImpl<>("{B}")));
     }
 
     private BodyCount(final BodyCount card) {

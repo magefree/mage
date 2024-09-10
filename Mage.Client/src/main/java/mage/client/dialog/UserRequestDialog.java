@@ -10,7 +10,8 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import java.awt.*;
 
 /**
- * App GUI: confirm some actions from the user (example: close the app)
+ * App GUI: global window message with additional action to choose (example: close the app)
+ * Can be used in any places (in games, in app, etc)
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -18,16 +19,13 @@ public class UserRequestDialog extends MageDialog {
 
     private UserRequestMessage userRequestMessage;
 
-    /**
-     * Creates new form AskDialog
-     */
     public UserRequestDialog() {
         initComponents();
         setGUISize();
     }
 
     private void setGUISize() {
-        Font font = GUISizeHelper.gameRequestsFont;
+        Font font = GUISizeHelper.dialogFont;
         lblText.setFont(font);
         lblText.setMaximumSize(new Dimension(300 + font.getSize() * 15, 200 + font.getSize() * 5));
         lblText.setMinimumSize(new Dimension(300 + font.getSize() * 15, 20 + font.getSize() * 5));
@@ -58,19 +56,33 @@ public class UserRequestDialog extends MageDialog {
         this.lblText.setText(text);
         if (userRequestMessage.getButton1Text() != null) {
             this.btn1.setText(userRequestMessage.getButton1Text());
+            this.btn1.setFocusable(false);
         } else {
             this.btn1.setVisible(false);
         }
         if (userRequestMessage.getButton2Text() != null) {
             this.btn2.setText(userRequestMessage.getButton2Text());
+            this.btn2.setFocusable(false);
         } else {
             this.btn2.setVisible(false);
         }
         if (userRequestMessage.getButton3Text() != null) {
             this.btn3.setText(userRequestMessage.getButton3Text());
+            this.btn3.setFocusable(false);
         } else {
             this.btn3.setVisible(false);
         }
+
+        // improved auto-size
+        // height looks bad, so change only width
+        this.pack();
+        Dimension newPreferedSize = new Dimension(this.getPreferredSize());
+        newPreferedSize.setSize(
+                newPreferedSize.width * userRequestMessage.getWindowSizeRatio(),
+                newPreferedSize.height/* * userRequestMessage.getWindowSizeRatio()*/
+        );
+        this.setPreferredSize(newPreferedSize);
+
         this.pack();
         this.revalidate();
         this.repaint();
@@ -174,7 +186,7 @@ public class UserRequestDialog extends MageDialog {
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void sendUserReplay(PlayerAction playerAction) {
-        MageFrame.getInstance().sendUserReplay(playerAction, userRequestMessage);
+        SwingUtilities.invokeLater(() ->MageFrame.getInstance().sendUserReplay(playerAction, userRequestMessage));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

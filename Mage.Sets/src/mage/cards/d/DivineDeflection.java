@@ -12,6 +12,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -41,23 +42,18 @@ public final class DivineDeflection extends CardImpl {
 
 class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
 
-    public DivineDeflectionPreventDamageTargetEffect(Duration duration) {
+    DivineDeflectionPreventDamageTargetEffect(Duration duration) {
         super(duration, Integer.MIN_VALUE, false, true);
         staticText = "Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to any target";
     }
 
-    public DivineDeflectionPreventDamageTargetEffect(final DivineDeflectionPreventDamageTargetEffect effect) {
+    private DivineDeflectionPreventDamageTargetEffect(final DivineDeflectionPreventDamageTargetEffect effect) {
         super(effect);
     }
 
     @Override
     public DivineDeflectionPreventDamageTargetEffect copy() {
         return new DivineDeflectionPreventDamageTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -113,7 +109,7 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
             if (amountToPrevent == Integer.MIN_VALUE) {
-                amountToPrevent = source.getManaCostsToPay().getX();
+                amountToPrevent = CardUtil.getSourceCostsTag(game, source, "X", 0);
             }
             //   check permanent first
             Permanent permanent = game.getPermanent(event.getTargetId());

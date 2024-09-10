@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class SetBasePowerEnchantedEffect extends ContinuousEffectImpl {
@@ -23,7 +22,7 @@ public class SetBasePowerEnchantedEffect extends ContinuousEffectImpl {
         this.power = power;
     }
 
-    public SetBasePowerEnchantedEffect(final SetBasePowerEnchantedEffect effect) {
+    protected SetBasePowerEnchantedEffect(final SetBasePowerEnchantedEffect effect) {
         super(effect);
         this.power = effect.power;
     }

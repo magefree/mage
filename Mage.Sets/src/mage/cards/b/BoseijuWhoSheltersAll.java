@@ -30,7 +30,7 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
 
     public BoseijuWhoSheltersAll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Boseiju, Who Shelters All enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -43,7 +43,7 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
         ability.getEffects().get(0).setText("Add {C}. If that mana is spent on an instant or sorcery spell, that spell can't be countered");
         this.addAbility(ability, new BoseijuWhoSheltersAllWatcher(ability.getOriginalId()));
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BoseijuWhoSheltersAllCantCounterEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BoseijuWhoSheltersAllCantCounterEffect()).setRuleVisible(false));
     }
 
     private BoseijuWhoSheltersAll(final BoseijuWhoSheltersAll card) {
@@ -91,23 +91,17 @@ class BoseijuWhoSheltersAllWatcher extends Watcher {
 
 class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public BoseijuWhoSheltersAllCantCounterEffect() {
+    BoseijuWhoSheltersAllCantCounterEffect() {
         super(Duration.EndOfGame, Outcome.Benefit);
-        staticText = null;
     }
 
-    public BoseijuWhoSheltersAllCantCounterEffect(final BoseijuWhoSheltersAllCantCounterEffect effect) {
+    private BoseijuWhoSheltersAllCantCounterEffect(final BoseijuWhoSheltersAllCantCounterEffect effect) {
         super(effect);
     }
 
     @Override
     public BoseijuWhoSheltersAllCantCounterEffect copy() {
         return new BoseijuWhoSheltersAllCantCounterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

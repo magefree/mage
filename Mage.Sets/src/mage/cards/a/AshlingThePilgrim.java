@@ -30,7 +30,7 @@ public final class AshlingThePilgrim extends CardImpl {
 
     public AshlingThePilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.SHAMAN);
 
@@ -75,14 +75,11 @@ class AshlingThePilgrimEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null) {
-            int counters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
-            if (counters < 1) {
-                return false;
-            }
-            sourcePermanent.removeCounters(CounterType.P1P1.createInstance(counters), source, game);
-            return new DamageEverythingEffect(counters, StaticFilters.FILTER_PERMANENT_CREATURE).apply(game, source);
+        if (sourcePermanent == null) {
+            return false;
         }
+        int amountRemoved = sourcePermanent.removeAllCounters(CounterType.P1P1.getName(), source, game);
+        new DamageEverythingEffect(amountRemoved, StaticFilters.FILTER_PERMANENT_CREATURE).apply(game, source);
         return true;
     }
 }

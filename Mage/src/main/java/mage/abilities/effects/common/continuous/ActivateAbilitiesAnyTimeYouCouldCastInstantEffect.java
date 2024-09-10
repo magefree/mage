@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.AsThoughEffectType;
@@ -9,7 +10,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
- *
  * @author Styxo
  */
 public class ActivateAbilitiesAnyTimeYouCouldCastInstantEffect extends AsThoughEffectImpl {
@@ -22,7 +22,7 @@ public class ActivateAbilitiesAnyTimeYouCouldCastInstantEffect extends AsThoughE
         staticText = "You may activate " + activatedAbilityName + " any time you could cast an instant";
     }
 
-    public ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(final ActivateAbilitiesAnyTimeYouCouldCastInstantEffect effect) {
+    protected ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(final ActivateAbilitiesAnyTimeYouCouldCastInstantEffect effect) {
         super(effect);
         this.activatedAbility = effect.activatedAbility;
     }

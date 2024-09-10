@@ -37,7 +37,7 @@ public final class KeldonTwilight extends CardImpl {
         effect.setText("that player sacrifices a creature they controlled since the beginning of the turn");
         BeginningOfEndStepTriggeredAbility ability
                 = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, new KeldonTwilightCondition(), false);
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
     }
 
     private KeldonTwilight(final KeldonTwilight card) {

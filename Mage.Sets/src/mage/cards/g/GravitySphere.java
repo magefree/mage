@@ -20,7 +20,7 @@ public final class GravitySphere extends CardImpl {
 
     public GravitySphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // All creatures lose flying.
         Effect effect = new LoseAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_CREATURES);

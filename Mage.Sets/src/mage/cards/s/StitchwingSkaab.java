@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -35,7 +36,7 @@ public final class StitchwingSkaab extends CardImpl {
 
         // {1}{U}, Discard two cards: Return Stitchwing Skaab from your graveyard to the battlefield tapped.
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false), new ManaCostsImpl<>("{1}{U}"));
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);
     }
 

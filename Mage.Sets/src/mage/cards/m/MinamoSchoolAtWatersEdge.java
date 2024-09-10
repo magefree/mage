@@ -33,7 +33,7 @@ public final class MinamoSchoolAtWatersEdge extends CardImpl {
 
     public MinamoSchoolAtWatersEdge (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addAbility(new BlueManaAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
@@ -41,7 +41,7 @@ public final class MinamoSchoolAtWatersEdge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MinamoSchoolAtWatersEdge (final MinamoSchoolAtWatersEdge card) {
+    private MinamoSchoolAtWatersEdge(final MinamoSchoolAtWatersEdge card) {
         super(card);
     }
 

@@ -18,7 +18,7 @@ public enum AddendumCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (!game.isActivePlayer(source.getControllerId()) ||
-                !game.getPhase().getType().isMain()) {
+                !game.getTurnPhaseType().isMain()) {
             return false;
         }
         if (CastFromEverywhereSourceCondition.instance.apply(game, source)) {

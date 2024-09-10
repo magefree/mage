@@ -17,6 +17,7 @@ import java.util.UUID;
 public final class BlindingRadiance extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterOpponentsCreaturePermanent("creatures your opponents control with toughness 2 or less");
+
     static {
         filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
     }

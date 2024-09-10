@@ -63,7 +63,7 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
         staticText = "If a source would deal damage to {this}, prevent that damage. The source's controller draws cards equal to the damage prevented this way";
     }
 
-    SwansOfBrynArgollEffect(final SwansOfBrynArgollEffect effect) {
+    private SwansOfBrynArgollEffect(final SwansOfBrynArgollEffect effect) {
         super(effect);
     }
 
@@ -121,11 +121,6 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getType() == EventType.DAMAGE_PERMANENT
                 && event.getTargetId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

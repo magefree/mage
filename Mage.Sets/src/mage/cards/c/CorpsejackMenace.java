@@ -11,6 +11,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -57,13 +58,13 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
         staticText = "If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead";
     }
 
-    CorpsejackMenaceReplacementEffect(final CorpsejackMenaceReplacementEffect effect) {
+    private CorpsejackMenaceReplacementEffect(final CorpsejackMenaceReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() * 2, true);
+        event.setAmountForCounters(CardUtil.overflowMultiply(event.getAmount(), 2), true);
         return false;
     }
 
@@ -83,11 +84,6 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
                     && permanent.isCreature(game);
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

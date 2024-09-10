@@ -8,7 +8,6 @@ import mage.constants.EnterEventType;
 import mage.constants.Zone;
 
 /**
- *
  * @author North
  */
 public class AsEntersBattlefieldAbility extends StaticAbility {
@@ -25,7 +24,7 @@ public class AsEntersBattlefieldAbility extends StaticAbility {
         super(Zone.ALL, new EntersBattlefieldEffect(effect, null, text, true, false, enterEventType));
     }
 
-    public AsEntersBattlefieldAbility(final AsEntersBattlefieldAbility ability) {
+    protected AsEntersBattlefieldAbility(final AsEntersBattlefieldAbility ability) {
         super(ability);
     }
 
@@ -48,6 +47,6 @@ public class AsEntersBattlefieldAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "As {this} enters the battlefield, " + super.getRule();
+        return "As {this} enters, " + super.getRule();
     }
 }

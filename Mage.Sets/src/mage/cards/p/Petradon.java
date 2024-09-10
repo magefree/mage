@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
@@ -39,7 +38,7 @@ public final class Petradon extends CardImpl {
 
         // When Petradon leaves the battlefield, return the exiled cards to the battlefield under their owners' control.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD)
-                .withReturnName("cards", "their owners'"), false));
+                .withText(true, true, false), false));
 
         // {R}: Petradon gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));

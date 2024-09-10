@@ -32,7 +32,7 @@ public final class FrostBite extends CardImpl {
     public FrostBite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Frost Bite deals 2 damage to target creature or planeswalker. If you control three or more snow permanents, it deals 3 damage instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

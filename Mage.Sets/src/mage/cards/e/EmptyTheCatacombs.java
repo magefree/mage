@@ -47,7 +47,7 @@ class EmptyTheCatacombsEffect extends OneShotEffect {
         staticText = "Each player returns all creature cards from their graveyard to their hand";
     }
 
-    public EmptyTheCatacombsEffect(final EmptyTheCatacombsEffect effect) {
+    private EmptyTheCatacombsEffect(final EmptyTheCatacombsEffect effect) {
         super(effect);
     }
 

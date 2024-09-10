@@ -28,7 +28,7 @@ public final class TangleHulk extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
-    public TangleHulk (final TangleHulk card) {
+    private TangleHulk(final TangleHulk card) {
         super(card);
     }
 

@@ -58,12 +58,12 @@ public final class RakdosGuildmage extends CardImpl {
 
 class RakdosGuildmageEffect extends OneShotEffect {
 
-    public RakdosGuildmageEffect() {
+    RakdosGuildmageEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 2/1 red Goblin creature token with haste. Exile it at the beginning of the next end step";
     }
 
-    public RakdosGuildmageEffect(final RakdosGuildmageEffect effect) {
+    private RakdosGuildmageEffect(final RakdosGuildmageEffect effect) {
         super(effect);
     }
 

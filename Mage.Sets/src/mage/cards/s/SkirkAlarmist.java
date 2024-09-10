@@ -68,12 +68,12 @@ public final class SkirkAlarmist extends CardImpl {
 
 class SkirkAlarmistEffect extends OneShotEffect {
 
-    public SkirkAlarmistEffect() {
+    SkirkAlarmistEffect() {
         super(Outcome.Sacrifice);
         staticText = "At the beginning of the next end step, sacrifice it";
     }
 
-    public SkirkAlarmistEffect(final SkirkAlarmistEffect effect) {
+    private SkirkAlarmistEffect(final SkirkAlarmistEffect effect) {
         super(effect);
     }
 

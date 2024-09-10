@@ -44,13 +44,13 @@ public final class TemptWithImmortality extends CardImpl {
 
 class TemptWithImmortalityEffect extends OneShotEffect {
 
-    public TemptWithImmortalityEffect() {
+    TemptWithImmortalityEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "<i>Tempting offer</i> &mdash; Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from their graveyard to the battlefield. For each opponent who does, return a creature card from your graveyard to the battlefield";
 
     }
 
-    public TemptWithImmortalityEffect(final TemptWithImmortalityEffect effect) {
+    private TemptWithImmortalityEffect(final TemptWithImmortalityEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class TemptWithImmortalityEffect extends OneShotEffect {
 
     private boolean returnCreatureFromGraveToBattlefield(Player player, Ability source, Game game) {
         Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(false);
+        target.withNotTarget(true);
         if (target.canChoose(source.getControllerId(), source, game)) {
             if (player.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());

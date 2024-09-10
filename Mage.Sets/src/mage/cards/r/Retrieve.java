@@ -10,6 +10,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ import java.util.UUID;
  */
 public final class Retrieve extends CardImpl {
 
-    private static final FilterCard filter = new FilterPermanentCard("noncreature permanent card");
+    private static final FilterCard filter = new FilterPermanentCard("noncreature permanent card from your graveyard");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
@@ -29,8 +30,8 @@ public final class Retrieve extends CardImpl {
 
         // Return up to one target creature card and up to one target noncreature permanent card from your graveyard to your hand. Exile Retrieve.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect()
-                .setText("return up to one target creature card and up to one target " +
-                        "noncreature permanent card from your graveyard to your hand"));
+                .setTargetPointer(new EachTargetPointer())
+        );
         this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE

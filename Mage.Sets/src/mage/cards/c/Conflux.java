@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ColorAssignment;
+import mage.abilities.assignment.common.ColorAssignment;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -23,7 +23,7 @@ public final class Conflux extends CardImpl {
 
         // Search your library for a white card, a blue card, a black card, a red card, and a green card. Reveal those cards and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
-                new ConfluxTarget(), true, true
+                new ConfluxTarget(), true
         ).setText("search your library for a white card, a blue card, a black card, a red card, and a green card. " +
                 "Reveal those cards, put them into your hand, then shuffle"));
     }

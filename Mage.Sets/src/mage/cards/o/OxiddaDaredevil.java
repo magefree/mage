@@ -38,10 +38,10 @@ public final class OxiddaDaredevil extends CardImpl {
 
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+                new SacrificeTargetCost(filter)));
     }
 
-    public OxiddaDaredevil (final OxiddaDaredevil card) {
+    private OxiddaDaredevil(final OxiddaDaredevil card) {
         super(card);
     }
 

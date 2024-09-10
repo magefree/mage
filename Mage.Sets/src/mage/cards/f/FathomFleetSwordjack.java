@@ -69,7 +69,7 @@ class FathomFleetSwordjackEffect extends OneShotEffect {
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
                 source.getControllerId(), source, game
         );
-        return artifactCount > 0 && game.damagePlayerOrPlaneswalker(
+        return artifactCount > 0 && game.damagePlayerOrPermanent(
                 game.getCombat().getDefenderId(source.getSourceId()), artifactCount,
                 source.getSourceId(), source, game, false, true
         ) > 0;

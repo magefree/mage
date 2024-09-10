@@ -54,12 +54,12 @@ public final class AvengerEnDal extends CardImpl {
 
 class AvengerEnDalEffect extends OneShotEffect {
 
-    public AvengerEnDalEffect() {
+    AvengerEnDalEffect() {
         super(Outcome.GainLife);
         staticText = "Its controller gains life equal to its toughness";
     }
 
-    public AvengerEnDalEffect(final AvengerEnDalEffect effect) {
+    private AvengerEnDalEffect(final AvengerEnDalEffect effect) {
         super(effect);
     }
 

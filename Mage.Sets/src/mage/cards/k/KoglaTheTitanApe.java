@@ -21,7 +21,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -37,13 +37,13 @@ public final class KoglaTheTitanApe extends CardImpl {
             = new FilterControlledPermanent(SubType.HUMAN);
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public KoglaTheTitanApe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.APE);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
@@ -51,7 +51,7 @@ public final class KoglaTheTitanApe extends CardImpl {
         // When Kogla, the Titan Ape enters the battlefield, it fights up to one target creature you don't control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect()
                 .setText("it fights up to one target creature you don't control"));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // Whenever Kogla attacks, destroy target artifact or enchantment defending player controls.

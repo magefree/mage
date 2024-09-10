@@ -74,10 +74,12 @@ class CelestialJudgmentEffect extends OneShotEffect {
                 .stream()
                 .collect(Collectors.toMap(
                         permanent -> permanent.getPower().getValue(),
-                        permanent -> Arrays.asList(permanent),
+                        Arrays::asList,
                         (a1, a2) -> {
-                            a1.addAll(a2);
-                            return a1;
+                            List<Permanent> res = new ArrayList<>();
+                            res.addAll(a1);
+                            res.addAll(a2);
+                            return res;
                         }));
         Set<UUID> toKeep = new HashSet<>();
         for (Map.Entry<Integer, List<Permanent>> entry : powerMap.entrySet()) {
@@ -88,7 +90,7 @@ class CelestialJudgmentEffect extends OneShotEffect {
             FilterPermanent filter = new FilterCreaturePermanent("creature with power " + entry.getKey() + " to save");
             filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, entry.getKey()));
             TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             toKeep.add(target.getFirstTarget());
         }

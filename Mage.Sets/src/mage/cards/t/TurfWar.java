@@ -56,7 +56,7 @@ public final class TurfWar extends CardImpl {
 
 class TurfWarCounterEffect extends OneShotEffect {
 
-    public TurfWarCounterEffect() {
+    TurfWarCounterEffect() {
         super(Outcome.Benefit);
         this.staticText = "for each player, put a contested counter on target land that player controls";
     }
@@ -160,7 +160,7 @@ class TurfWarTriggeredAbility extends TriggeredAbilityImpl {
 
 class TurfWarControlEffect extends OneShotEffect {
 
-    public TurfWarControlEffect() {
+    TurfWarControlEffect() {
         super(Outcome.GainControl);
         this.staticText = "that creature's controller gains control of one of those lands of their choice and untaps it";
     }

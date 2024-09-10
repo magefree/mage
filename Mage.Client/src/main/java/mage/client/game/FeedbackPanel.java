@@ -4,16 +4,19 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.dialog.MageDialog;
-import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.PlayerAction;
 import mage.constants.TurnPhase;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -24,7 +27,11 @@ import java.util.concurrent.TimeUnit;
 import static mage.constants.Constants.Option.*;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * Game GUI: feedback panel (over hand) with current priority and possible actions like done/cancel/special buttons
+ * <p>
+ * Warning, it's contains only clickable button, but all other logic done in helper panel
+ *
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class FeedbackPanel extends javax.swing.JPanel {
 
@@ -38,16 +45,14 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private FeedbackMode mode;
     private MageDialog connectedDialog;
     private ChatPanelBasic connectedChatPanel;
-    private int lastMessageId;
     private Map<String, Serializable> lastOptions = new HashMap<>();
 
-    private static final ScheduledExecutorService WORKER = Executors.newSingleThreadScheduledExecutor();
+    private static final int AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS = 8;
+    private static final ScheduledExecutorService AUTO_CLOSE_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_AUTO_CLOSE_TIMER)
+    );
 
-    /**
-     * Creates new form FeedbackPanel
-     */
     public FeedbackPanel() {
-        //initComponents();
         customInitComponents();
     }
 
@@ -65,24 +70,27 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private void setGUISize() {
     }
 
-    public void prepareFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options,
-                                int messageId, boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
+    public void prepareFeedback(FeedbackMode mode, String basicMessage, String additionalMessage, boolean special, Map<String, Serializable> options,
+                                boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
         synchronized (this) {
-            if (messageId < this.lastMessageId) {
-                // if too many warning messages here then look at GAME_REDRAW_GUI event logic
-                LOGGER.warn("catch un-synced message from later source (possible reason: connection or performance problems): " + messageId + ", text=" + message);
-                return;
-            }
-            this.lastMessageId = messageId;
             this.lastOptions = options;
             this.mode = mode;
         }
 
-        this.helper.setBasicMessage(message);
-        this.helper.setOriginalId(null); // reference to the feedback causing ability
-        String lblText = addAdditionalText(message, options);
-        this.helper.setTextArea(lblText);
+        // build secondary message (will use smaller font)
+        java.util.ArrayList<String> secondaryMessages = new ArrayList<>();
+        if (additionalMessage != null && !additionalMessage.isEmpty()) {
+            // client side additional info like active priority/player
+            secondaryMessages.add(additionalMessage);
+        }
+        String serverSideAdditionalMessage = options != null && options.containsKey(SECOND_MESSAGE) ? (String) options.get(SECOND_MESSAGE) : null;
+        if (serverSideAdditionalMessage != null && !serverSideAdditionalMessage.isEmpty()) {
+            // server side additional info like card/source info
+            secondaryMessages.add(serverSideAdditionalMessage);
+        }
 
+        this.helper.setMessages(basicMessage, String.join("<br>", secondaryMessages));
+        this.helper.setOriginalId(null); // reference to the feedback causing ability
 
         switch (this.mode) {
             case INFORM:
@@ -93,6 +101,12 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 if (options != null && options.containsKey(ORIGINAL_ID)) {
                     // allows yes/no auto-answers for ability related
                     this.helper.setOriginalId((UUID) options.get(ORIGINAL_ID));
+                }
+                if (options != null && options.containsKey(AUTO_ANSWER_MESSAGE)) {
+                    // Uses a filtered message for remembering choice if the original message contains a self-reference
+                    this.helper.setAutoAnswerMessage((String) options.get(AUTO_ANSWER_MESSAGE));
+                } else {
+                    this.helper.setAutoAnswerMessage(basicMessage);
                 }
                 break;
             case CONFIRM:
@@ -120,13 +134,13 @@ public class FeedbackPanel extends javax.swing.JPanel {
         requestFocusIfPossible();
         updateOptions(options);
 
-        this.revalidate();
-        this.repaint();
         this.helper.setLinks(btnLeft, btnRight, btnSpecial, btnUndo);
 
         this.helper.setVisible(true);
         this.helper.setGameNeedFeedback(gameNeedUserFeedback, gameTurnPhase);
         this.helper.autoSizeButtonsAndFeedbackState();
+
+        this.revalidate();
     }
 
     private void setButtonState(String leftText, String rightText, FeedbackMode mode) {
@@ -135,18 +149,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
         btnRight.setVisible(!rightText.isEmpty());
         btnRight.setText(rightText);
         this.helper.setState(leftText, !leftText.isEmpty(), rightText, !rightText.isEmpty(), mode);
-    }
-
-    private String addAdditionalText(String message, Map<String, Serializable> options) {
-        if (options != null && options.containsKey(SECOND_MESSAGE)) {
-            return message + getSmallText((String) options.get(SECOND_MESSAGE));
-        } else {
-            return message;
-        }
-    }
-
-    protected static String getSmallText(String text) {
-        return "<div style='font-size:" + GUISizeHelper.gameDialogAreaFontSizeSmall + "pt'>" + text + "</div>";
     }
 
     private void setSpecial(String text, boolean visible) {
@@ -159,17 +161,20 @@ public class FeedbackPanel extends javax.swing.JPanel {
      * Close game window by pressing OK button after 8 seconds
      */
     private void endWithTimeout() {
+        // TODO: add auto-close disable, e.g. keep opened game and chat for longer period like 5 minutes
         Runnable task = () -> {
-            LOGGER.info("Ending game...");
-            Component c = MageFrame.getGame(gameId);
-            while (c != null && !(c instanceof GamePane)) {
-                c = c.getParent();
-            }
-            if (c != null && c.isVisible()) { // check if GamePanel still visible
-                FeedbackPanel.this.btnRight.doClick();
-            }
+            SwingUtilities.invokeLater(() -> {
+                LOGGER.info("Ending game...");
+                Component c = MageFrame.getGame(gameId);
+                while (c != null && !(c instanceof GamePane)) {
+                    c = c.getParent();
+                }
+                if (c != null && c.isVisible()) { // check if GamePanel still visible
+                    FeedbackPanel.this.btnRight.doClick();
+                }
+            });
         };
-        WORKER.schedule(task, 8, TimeUnit.SECONDS);
+        AUTO_CLOSE_EXECUTOR.schedule(task, AUTO_CLOSE_END_DIALOG_TIMEOUT_SECS, TimeUnit.SECONDS);
     }
 
     public void updateOptions(Map<String, Serializable> options) {

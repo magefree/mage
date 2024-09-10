@@ -27,7 +27,7 @@ public final class CephalidFacetaker extends CardImpl {
     public CephalidFacetaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
@@ -39,7 +39,7 @@ public final class CephalidFacetaker extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new CephalidFacetakerEffect(), TargetController.YOU, true
         );
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

@@ -27,7 +27,7 @@ public final class IwamoriOfTheOpenFist extends CardImpl {
 
     public IwamoriOfTheOpenFist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
 
@@ -64,7 +64,7 @@ class IwamoriOfTheOpenFistEffect extends OneShotEffect {
         this.staticText = "each opponent may put a legendary creature card from their hand onto the battlefield";
     }
 
-    public IwamoriOfTheOpenFistEffect(final IwamoriOfTheOpenFistEffect effect) {
+    private IwamoriOfTheOpenFistEffect(final IwamoriOfTheOpenFistEffect effect) {
         super(effect);
     }
 

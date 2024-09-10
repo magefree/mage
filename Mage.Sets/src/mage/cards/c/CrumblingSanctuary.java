@@ -40,23 +40,18 @@ public final class CrumblingSanctuary extends CardImpl {
 
 class CrumblingSanctuaryEffect extends PreventionEffectImpl {
 
-    public CrumblingSanctuaryEffect() {
+    CrumblingSanctuaryEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
         staticText = "If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.";
     }
 
-    public CrumblingSanctuaryEffect(final CrumblingSanctuaryEffect effect) {
+    private CrumblingSanctuaryEffect(final CrumblingSanctuaryEffect effect) {
         super(effect);
     }
 
     @Override
     public CrumblingSanctuaryEffect copy() {
         return new CrumblingSanctuaryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

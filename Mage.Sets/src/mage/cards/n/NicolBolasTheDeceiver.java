@@ -31,7 +31,7 @@ public final class NicolBolasTheDeceiver extends CardImpl {
 
     public NicolBolasTheDeceiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{U}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
         this.setStartingLoyalty(5);
 
@@ -61,12 +61,12 @@ public final class NicolBolasTheDeceiver extends CardImpl {
 
 class NicolBolasTheDeceiverFirstEffect extends OneShotEffect {
 
-    public NicolBolasTheDeceiverFirstEffect() {
+    NicolBolasTheDeceiverFirstEffect() {
         super(Outcome.Damage);
         staticText = "Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card";
     }
 
-    public NicolBolasTheDeceiverFirstEffect(final NicolBolasTheDeceiverFirstEffect effect) {
+    private NicolBolasTheDeceiverFirstEffect(final NicolBolasTheDeceiverFirstEffect effect) {
         super(effect);
     }
 

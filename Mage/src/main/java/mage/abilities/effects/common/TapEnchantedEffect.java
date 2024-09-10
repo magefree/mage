@@ -20,13 +20,13 @@ public class TapEnchantedEffect extends OneShotEffect {
         staticText = "tap enchanted " + name;
     }
 
-    public TapEnchantedEffect(final TapEnchantedEffect effect) {
+    protected TapEnchantedEffect(final TapEnchantedEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
         if (permanent != null) {
             Permanent attach = game.getPermanent(permanent.getAttachedTo());
             if (attach != null) {

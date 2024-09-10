@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
@@ -43,7 +43,7 @@ public final class StorrevDevkarinLich extends CardImpl {
     public StorrevDevkarinLich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WIZARD);
@@ -54,9 +54,8 @@ public final class StorrevDevkarinLich extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Storrev, Devkarin Lich deals combat damage to a player or planeswalker, return to your hand target creature or planeswalker card in your graveyard that wasn't put there this combat.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new ReturnToHandTargetEffect(), false
-        ).setOrPlaneswalker(true);
+        Ability ability = new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(
+                new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability, new StorrevDevkarinLichWatcher());
     }

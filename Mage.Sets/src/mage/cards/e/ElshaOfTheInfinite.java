@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class ElshaOfTheInfinite extends CardImpl {
     public ElshaOfTheInfinite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DJINN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(3);
@@ -45,7 +45,7 @@ public final class ElshaOfTheInfinite extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast noncreature spells from the top of your library. If you cast a spell this way, you may cast it as though it had flash.
-        Ability ability = new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false));
+        Ability ability = new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter));
         ability.addEffect(new CastAsThoughItHadFlashAllEffect(
                 Duration.WhileOnBattlefield, filter
         ).setText("If you cast a spell this way, you may cast it as though it had flash."));
@@ -61,4 +61,3 @@ public final class ElshaOfTheInfinite extends CardImpl {
         return new ElshaOfTheInfinite(this);
     }
 }
-

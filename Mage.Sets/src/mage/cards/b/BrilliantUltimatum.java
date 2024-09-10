@@ -1,8 +1,5 @@
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -16,6 +13,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -42,12 +43,15 @@ public final class BrilliantUltimatum extends CardImpl {
 
 class BrilliantUltimatumEffect extends OneShotEffect {
 
-    public BrilliantUltimatumEffect() {
+    BrilliantUltimatumEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Exile the top five cards of your library. An opponent separates those cards into two piles. You may play any number of cards from one of those piles without paying their mana costs";
+        this.staticText = "Exile the top five cards of your library. "
+                + "An opponent separates those cards into two piles. "
+                + "You may play lands and cast spells from one of those piles. "
+                + "If you cast a spell this way, you cast it without paying its mana cost";
     }
 
-    public BrilliantUltimatumEffect(final BrilliantUltimatumEffect effect) {
+    private BrilliantUltimatumEffect(final BrilliantUltimatumEffect effect) {
         super(effect);
     }
 
@@ -65,7 +69,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
         }
 
         Cards pile2 = new CardsImpl();
-        pile2.addAll(controller.getLibrary().getTopCards(game, 5));
+        pile2.addAllCards(controller.getLibrary().getTopCards(game, 5));
         controller.moveCardsToExile(pile2.getCards(game), source, game, true, source.getSourceId(), sourceObject.getIdName());
 
         TargetOpponent targetOpponent = new TargetOpponent(true);
@@ -77,7 +81,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
             Cards pile1 = new CardsImpl();
             List<Card> pileOne = new ArrayList<>();
             List<Card> pileTwo = new ArrayList<>();
-            if (opponent.choose(Outcome.Neutral, pile2, target, game)) {
+            if (opponent.choose(Outcome.Neutral, pile2, target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = pile2.get(targetId, game);

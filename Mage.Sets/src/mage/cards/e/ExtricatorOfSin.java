@@ -42,11 +42,11 @@ public final class ExtricatorOfSin extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        this.secondSideCardClazz = ExtricatorOfFlesh.class;
+        this.secondSideCardClazz = mage.cards.e.ExtricatorOfFlesh.class;
 
         // When Extricator of Sin enters the battlefield, you may sacrifice another permanent. If you do, create a 3/2 colorless Eldrazi Horror creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new EldraziHorrorToken()),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))), false));
+                new SacrificeTargetCost(filter)), false));
 
         // <i>Delirium</i> &mdash; At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform Extricator of Sin.
         this.addAbility(new TransformAbility());

@@ -29,7 +29,7 @@ public final class GrazilaxxIllithidScholar extends CardImpl {
     public GrazilaxxIllithidScholar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

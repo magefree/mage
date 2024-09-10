@@ -39,7 +39,7 @@ public final class CloakOfInvisibility extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has phasing and can't be blocked except by Walls.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(PhasingAbility.getInstance(), AttachmentType.AURA).setText("Enchanted creature has phasing "));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(PhasingAbility.getInstance(), AttachmentType.AURA).setText("Enchanted creature has phasing"));
         ability.addEffect(new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.AURA)
                 .setText("and can't be blocked except by Walls. " +
                         "<i>(It phases in or out before its controller untaps during each of their untap steps. " +

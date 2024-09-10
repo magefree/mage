@@ -2,7 +2,6 @@
 package mage.constants;
 
 /**
- *
  * @author North
  */
 public enum Zone {

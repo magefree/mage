@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,16 +8,15 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockAllEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +55,7 @@ class DroningBureaucratsEffect extends OneShotEffect {
         this.staticText = "Each creature with mana value X can't attack or block this turn";
     }
 
-    DroningBureaucratsEffect(final DroningBureaucratsEffect effect) {
+    private DroningBureaucratsEffect(final DroningBureaucratsEffect effect) {
         super(effect);
     }
 
@@ -68,7 +66,7 @@ class DroningBureaucratsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value X");
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         game.addEffect(new CantAttackBlockAllEffect(Duration.EndOfTurn, filter), source);

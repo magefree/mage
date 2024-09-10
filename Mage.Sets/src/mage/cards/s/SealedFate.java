@@ -11,6 +11,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -58,7 +59,7 @@ class SealedFateEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(source.getFirstTarget());
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         if (controller == null || opponent == null) {
             return false;
@@ -72,7 +73,7 @@ class SealedFateEffect extends OneShotEffect {
             return controller.moveCards(cards, Zone.EXILED, source, game);
         }
         TargetCard targetCard = new TargetCardInLibrary();
-        controller.choose(outcome, cards, targetCard, game);
+        controller.choose(outcome, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card != null) {
             controller.moveCards(card, Zone.EXILED, source, game);

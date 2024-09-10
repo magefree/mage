@@ -28,7 +28,7 @@ public final class RhoxCharger extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public RhoxCharger (final RhoxCharger card) {
+    private RhoxCharger(final RhoxCharger card) {
         super(card);
     }
 

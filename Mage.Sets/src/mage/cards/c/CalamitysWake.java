@@ -42,7 +42,7 @@ public final class CalamitysWake extends CardImpl {
 
 class CalamitysWakeEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CalamitysWakeEffect() {
+    CalamitysWakeEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         this.staticText = "Players can't cast noncreature spells this turn.";
     }

@@ -26,7 +26,7 @@ public final class GravePeril extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // When a nonblack creature enters the battlefield, sacrifice Grave Peril. If you do, destroy that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GravePerilEffect(), StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK, false, SetTargetPointer.PERMANENT, null).setTriggerPhrase("When a nonblack creature enters the battlefield, "));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GravePerilEffect(), StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK, false, SetTargetPointer.PERMANENT).setTriggerPhrase("When a nonblack creature enters, "));
     }
 
     private GravePeril(final GravePeril card) {
@@ -46,7 +46,7 @@ class GravePerilEffect extends OneShotEffect {
         this.staticText = "sacrifice Grave Peril. If you do, destroy that creature";
     }
 
-    GravePerilEffect(final GravePerilEffect effect) {
+    private GravePerilEffect(final GravePerilEffect effect) {
         super(effect);
     }
 
@@ -57,11 +57,11 @@ class GravePerilEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             if (permanent.sacrifice(source, game)) {
                 Effect effect = new DestroyTargetEffect();
-                effect.setTargetPointer(this.getTargetPointer());
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 return effect.apply(game, source);
             }
         }

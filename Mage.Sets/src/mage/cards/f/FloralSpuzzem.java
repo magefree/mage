@@ -1,23 +1,23 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class FloralSpuzzem extends CardImpl {
@@ -26,7 +26,7 @@ public final class FloralSpuzzem extends CardImpl {
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public FloralSpuzzem(UUID ownerId, CardSetInfo setInfo) {

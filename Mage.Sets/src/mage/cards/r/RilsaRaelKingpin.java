@@ -9,6 +9,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.MenaceAbility;
@@ -30,7 +31,7 @@ public final class RilsaRaelKingpin extends CardImpl {
     public RilsaRaelKingpin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -40,7 +41,7 @@ public final class RilsaRaelKingpin extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // When Rilsa Rael, Kingpin enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // Whenever you attack, target attacking creature gains deathtouch until end of turn. If you've completed a dungeon, that creature also gets +5/+0 and gains first strike and menace until end of turn.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(

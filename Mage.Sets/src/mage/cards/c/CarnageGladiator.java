@@ -38,7 +38,7 @@ public final class CarnageGladiator extends CardImpl {
 
     }
 
-    public CarnageGladiator (final CarnageGladiator card) {
+    private CarnageGladiator(final CarnageGladiator card) {
         super(card);
     }
 
@@ -55,7 +55,7 @@ class CarnageGladiatorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
     }
 
-    public CarnageGladiatorTriggeredAbility(final CarnageGladiatorTriggeredAbility ability) {
+    private CarnageGladiatorTriggeredAbility(final CarnageGladiatorTriggeredAbility ability) {
         super(ability);
     }
 

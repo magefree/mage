@@ -38,7 +38,7 @@ public final class NarsetTranscendent extends CardImpl {
 
     public NarsetTranscendent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NARSET);
 
         this.setStartingLoyalty(6);
@@ -70,7 +70,7 @@ class NarsetTranscendentEffect1 extends OneShotEffect {
         this.staticText = "Look at the top card of your library. If it's a noncreature, nonland card, you may reveal it and put it into your hand";
     }
 
-    public NarsetTranscendentEffect1(final NarsetTranscendentEffect1 effect) {
+    private NarsetTranscendentEffect1(final NarsetTranscendentEffect1 effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
 
     public NarsetTranscendentTriggeredAbility() {
         super(new NarsetTranscendentGainReboundEffect(), Duration.EndOfTurn, true);
-        setTriggerPhrase("When you cast your next instant or sorcery spell from your hand this turn, ");
+        setTriggerPhrase("When you next cast an instant or sorcery spell from your hand this turn, ");
     }
 
     private NarsetTranscendentTriggeredAbility(final NarsetTranscendentTriggeredAbility ability) {
@@ -143,12 +143,12 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
 
 class NarsetTranscendentGainReboundEffect extends ContinuousEffectImpl {
 
-    public NarsetTranscendentGainReboundEffect() {
+    NarsetTranscendentGainReboundEffect() {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "it gains rebound";
     }
 
-    public NarsetTranscendentGainReboundEffect(final NarsetTranscendentGainReboundEffect effect) {
+    private NarsetTranscendentGainReboundEffect(final NarsetTranscendentGainReboundEffect effect) {
         super(effect);
     }
 

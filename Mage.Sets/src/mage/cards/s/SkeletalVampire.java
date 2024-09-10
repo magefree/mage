@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -16,9 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.BatToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -26,11 +24,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class SkeletalVampire extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Bat");
-
-    static {
-        filter.add(SubType.BAT.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.BAT, "a Bat");
 
     public SkeletalVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
@@ -46,10 +40,10 @@ public final class SkeletalVampire extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BatToken(), 2)));
         // {3}{B}{B}, Sacrifice a Bat: Create two 1/1 black Bat creature tokens with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BatToken(), 2), new ManaCostsImpl<>("{3}{B}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
         // Sacrifice a Bat: Regenerate Skeletal Vampire.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(filter)));
     }
 
     private SkeletalVampire(final SkeletalVampire card) {
@@ -61,4 +55,3 @@ public final class SkeletalVampire extends CardImpl {
         return new SkeletalVampire(this);
     }
 }
-

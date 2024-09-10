@@ -48,12 +48,12 @@ public final class SuddenSpoiling extends CardImpl {
 
 class SuddenSpoilingEffect extends ContinuousEffectImpl {
 
-    public SuddenSpoilingEffect(Duration duration) {
+    SuddenSpoilingEffect(Duration duration) {
         super(duration, Outcome.LoseAbility);
         staticText = "Until end of turn, creatures target player controls lose all abilities and have base power and toughness 0/2";
     }
 
-    public SuddenSpoilingEffect(final SuddenSpoilingEffect effect) {
+    private SuddenSpoilingEffect(final SuddenSpoilingEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
         if (player == null) {
             return;
         }
-        for (Permanent perm : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
             affectedObjectList.add(new MageObjectReference(perm, game));
         }
     }
@@ -80,7 +80,7 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
         if (player == null) {
             return false;
         }
-        for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
             if (affectedObjectList.contains(new MageObjectReference(permanent, game))) {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:

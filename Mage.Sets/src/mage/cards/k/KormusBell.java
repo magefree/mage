@@ -7,7 +7,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.custom.CreatureToken;
 
 /**
@@ -17,15 +17,17 @@ import mage.game.permanent.token.custom.CreatureToken;
  */
 public final class KormusBell extends CardImpl {
 
+    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.SWAMP, "All Swamps");
+
     public KormusBell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // All Swamps are 1/1 black creatures that are still lands.
         ContinuousEffect effect = new BecomesCreatureAllEffect(
-                new CreatureToken(1, 1, "1/1 black creature").withColor("B"),
-                "lands", new FilterPermanent(SubType.SWAMP, "Swamps"),
+                new CreatureToken(1, 1, "1/1 black creatures").withColor("B"),
+                "lands", filter,
                 Duration.WhileOnBattlefield, true);
-        effect.addDependedToType(DependencyType.BecomeSwamp);
+        effect.addDependedToType(DependencyType.BecomeSwamp); // TODO: are these dependencies correct/complete?
         effect.addDependedToType(DependencyType.BecomeIsland);
         effect.addDependedToType(DependencyType.BecomeForest);
         effect.addDependedToType(DependencyType.BecomeMountain);

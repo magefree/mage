@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,13 +27,13 @@ public final class CurseOfTheBloodyTome extends CardImpl {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, that player puts the top two cards of their library into their graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new PutLibraryIntoGraveTargetEffect(2)
+                new MillCardsTargetEffect(2)
                         .setText("that player mills two cards"),
                 TargetController.ENCHANTED, false
         ));

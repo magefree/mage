@@ -1,14 +1,14 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,9 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -32,7 +30,7 @@ public final class BagOfHolding extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Whenever you discard a card, exile that card from your graveyard.
-        this.addAbility(new BagOfHoldingTriggeredAbility());
+        this.addAbility(new DiscardCardControllerTriggeredAbility(new BagOfHoldingExileEffect(), false));
 
         // {2}, {T}: Draw a card, then discard a card.
         Ability ability = new SimpleActivatedAbility(
@@ -42,7 +40,7 @@ public final class BagOfHolding extends CardImpl {
         this.addAbility(ability);
 
         // {4}, {T}, Sacrifice Bag of Holding: Return all cards exiled with Bag of Holding to their owner's hand.
-        ability = new SimpleActivatedAbility(new BagOfHoldingEffect(), new GenericManaCost(4));
+        ability = new SimpleActivatedAbility(new BagOfHoldingReturnCardsEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -58,58 +56,52 @@ public final class BagOfHolding extends CardImpl {
     }
 }
 
-class BagOfHoldingTriggeredAbility extends TriggeredAbilityImpl {
+class BagOfHoldingExileEffect extends OneShotEffect {
 
-    BagOfHoldingTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
+    BagOfHoldingExileEffect() {
+        super(Outcome.Benefit);
+        staticText = "exile that card from your graveyard";
     }
 
-    private BagOfHoldingTriggeredAbility(final BagOfHoldingTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BagOfHoldingTriggeredAbility copy() {
-        return new BagOfHoldingTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DISCARDED_CARD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (isControlledBy(event.getPlayerId())) {
-            this.getEffects().clear();
-            this.addEffect(
-                    new ExileTargetForSourceEffect().setTargetPointer(new FixedTarget(event.getTargetId(), game))
-            );
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you discard a card, exile that card from your graveyard.";
-    }
-}
-
-class BagOfHoldingEffect extends OneShotEffect {
-
-    BagOfHoldingEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "return all cards exiled with {this} to their owner's hand";
-    }
-
-    private BagOfHoldingEffect(final BagOfHoldingEffect effect) {
+    private BagOfHoldingExileEffect(final BagOfHoldingExileEffect effect) {
         super(effect);
     }
 
     @Override
-    public BagOfHoldingEffect copy() {
-        return new BagOfHoldingEffect(this);
+    public BagOfHoldingExileEffect copy() {
+        return new BagOfHoldingExileEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Card card = (Card) getValue("discardedCard");
+        if (player == null || card == null || !card.isOwnedBy(player.getId())
+                || !Zone.GRAVEYARD.match(game.getState().getZone(card.getId()))) {
+            return false;
+        }
+        return player.moveCardsToExile(
+                card, source, game, true,
+                CardUtil.getExileZoneId(game, source),
+                CardUtil.getSourceName(game, source)
+        );
+    }
+}
+
+class BagOfHoldingReturnCardsEffect extends OneShotEffect {
+
+    BagOfHoldingReturnCardsEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "return all cards exiled with {this} to their owner's hand";
+    }
+
+    private BagOfHoldingReturnCardsEffect(final BagOfHoldingReturnCardsEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public BagOfHoldingReturnCardsEffect copy() {
+        return new BagOfHoldingReturnCardsEffect(this);
     }
 
     @Override

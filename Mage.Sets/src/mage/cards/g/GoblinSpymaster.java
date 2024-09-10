@@ -48,12 +48,12 @@ public final class GoblinSpymaster extends CardImpl {
 
 class SpyMasterGoblinCreateTokenEffect extends OneShotEffect {
 
-    public SpyMasterGoblinCreateTokenEffect() {
+    SpyMasterGoblinCreateTokenEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player creates a 1/1 red Goblin creature token with \"Creatures you control attack each combat if able.\"";
     }
 
-    public SpyMasterGoblinCreateTokenEffect(final SpyMasterGoblinCreateTokenEffect effect) {
+    private SpyMasterGoblinCreateTokenEffect(final SpyMasterGoblinCreateTokenEffect effect) {
         super(effect);
     }
 

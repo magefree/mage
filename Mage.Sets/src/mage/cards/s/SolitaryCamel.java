@@ -29,7 +29,7 @@ public final class SolitaryCamel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(LifelinkAbility.getInstance()),
                 DesertControlledOrGraveyardCondition.instance, "{this} has lifelink as long as " +
-                "you control a desert or there is a desert card in your graveyard."
+                "you control a Desert or there is a Desert card in your graveyard."
         )).addHint(DesertControlledOrGraveyardCondition.getHint()));
     }
 

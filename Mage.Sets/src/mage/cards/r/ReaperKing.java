@@ -32,7 +32,7 @@ public final class ReaperKing extends CardImpl {
 
     public ReaperKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2/W}{2/U}{2/B}{2/R}{2/G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SCARECROW);
 
         this.power = new MageInt(6);
@@ -40,7 +40,7 @@ public final class ReaperKing extends CardImpl {
 
         // Other Scarecrow creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-        // Whenever another Scarecrow enters the battlefield under your control, destroy target permanent.
+        // Whenever another Scarecrow you control enters, destroy target permanent.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new DestroyTargetEffect(), filterTrigger);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

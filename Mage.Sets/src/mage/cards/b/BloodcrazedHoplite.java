@@ -33,7 +33,8 @@ public final class BloodcrazedHoplite extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Heroic - Whenever you cast a spell that targets Bloodcrazed Hoplite, put a +1/+1 counter on it.
-        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)));
+        this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false))
+                .withRuleTextReplacement(true));
         // Whenever a +1/+1 counter is put on Bloodcrazed Hoplite, remove a +1/+1 counter from target creature an opponent controls.
         Ability ability = new BloodcrazedHopliteTriggeredAbility();
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
@@ -57,7 +58,7 @@ class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a +1/+1 counter is put on {this}, ");
     }
 
-    public BloodcrazedHopliteTriggeredAbility(BloodcrazedHopliteTriggeredAbility ability) {
+    private BloodcrazedHopliteTriggeredAbility(final BloodcrazedHopliteTriggeredAbility ability) {
         super(ability);
     }
 

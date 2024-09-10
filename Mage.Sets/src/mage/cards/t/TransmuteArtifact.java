@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
@@ -16,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.ManaUtil;
 
 import java.util.UUID;
@@ -44,12 +46,12 @@ public final class TransmuteArtifact extends CardImpl {
 
 class TransmuteArtifactEffect extends SearchEffect {
 
-    public TransmuteArtifactEffect() {
+    TransmuteArtifactEffect() {
         super(new TargetCardInLibrary(new FilterArtifactCard()), Outcome.PutCardInPlay);
         staticText = "Sacrifice an artifact. If you do, search your library for an artifact card. If that card's mana value is less than or equal to the sacrificed artifact's mana value, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle";
     }
 
-    public TransmuteArtifactEffect(final TransmuteArtifactEffect effect) {
+    private TransmuteArtifactEffect(final TransmuteArtifactEffect effect) {
         super(effect);
     }
 
@@ -67,8 +69,8 @@ class TransmuteArtifactEffect extends SearchEffect {
         //Sacrifice an artifact.
         int manaValue = 0;
         boolean sacrifice = false;
-        TargetControlledPermanent targetArtifact = new TargetControlledPermanent(new FilterControlledArtifactPermanent());
-        if (controller.chooseTarget(Outcome.Sacrifice, targetArtifact, source, game)) {
+        TargetSacrifice targetArtifact = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_ARTIFACT);
+        if (controller.choose(Outcome.Sacrifice, targetArtifact, source, game)) {
             Permanent permanent = game.getPermanent(targetArtifact.getFirstTarget());
             if (permanent != null) {
                 manaValue = permanent.getManaValue();

@@ -73,7 +73,7 @@ class SuspendEffect extends OneShotEffect {
         }
         UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
         if (!controller.moveCardToExileWithInfo(
-                card, exileId, "Suspended cards of " + controller.getLogName(),
+                card, exileId, "Suspended cards of " + controller.getName(),
                 source, game, Zone.HAND, true
         )) {
             return true;

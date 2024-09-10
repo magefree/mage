@@ -2,7 +2,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +19,7 @@ public final class MemorySluice extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U/B}");
 
         // Target player puts the top four cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Conspire

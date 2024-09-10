@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -12,19 +11,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author emerald000
  */
 public final class SeekerOfTheWay extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public SeekerOfTheWay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
@@ -38,7 +31,8 @@ public final class SeekerOfTheWay extends CardImpl {
         this.addAbility(new ProwessAbility());
         
         // Whenever you cast a noncreature spell, Seeker of the Way gains lifelink until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn)
+                .setText("{this} gains lifelink until end of turn"), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false));
     }
 
     private SeekerOfTheWay(final SeekerOfTheWay card) {

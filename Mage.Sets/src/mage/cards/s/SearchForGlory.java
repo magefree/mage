@@ -13,7 +13,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-import mage.watchers.common.ManaPaidSourceWatcher;
 
 import java.util.UUID;
 
@@ -33,7 +32,7 @@ public final class SearchForGlory extends CardImpl {
     public SearchForGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Search your library for a snow permanent card, a legendary card, or a Saga card, reveal it, put it into your hand, then shuffle your library. You gain 1 life for each {S} spent to cast this spell.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
@@ -59,8 +58,8 @@ enum SearchForGloryPredicate implements Predicate<Card> {
 
     @Override
     public boolean apply(Card input, Game game) {
-        return (input.isPermanent(game) && input.isSnow())
-                || input.isLegendary()
+        return (input.isPermanent(game) && input.isSnow(game))
+                || input.isLegendary(game)
                 || input.hasSubtype(SubType.SAGA, game);
     }
 }

@@ -89,10 +89,10 @@ class OnceAndFutureEffect extends OneShotEffect {
             player.moveCards(cards, Zone.HAND, source, game);
         } else {
             player.moveCards(card1, Zone.HAND, source, game);
-            game.getState().processAction(game);
+            game.processAction();
             player.putCardsOnTopOfLibrary(card2, game, source, true);
         }
-        game.getState().processAction(game);
+        game.processAction();
         return new ExileSpellEffect().apply(game, source);
     }
 

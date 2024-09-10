@@ -35,7 +35,7 @@ public final class PalladiaMorsTheRuiner extends CardImpl {
     public PalladiaMorsTheRuiner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
@@ -77,7 +77,7 @@ enum PalladiaMorsTheRuinerCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         PalladiaMorsTheRuinerWatcher watcher = game.getState().getWatcher(PalladiaMorsTheRuinerWatcher.class);
         return permanent != null && !watcher.getDamagers().contains(new MageObjectReference(permanent, game));
     }

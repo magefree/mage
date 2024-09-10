@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
@@ -30,7 +29,7 @@ public final class SakuraTribeElder extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, true), new SacrificeSourceCost()));
     }
 
     private SakuraTribeElder(final SakuraTribeElder card) {

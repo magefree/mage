@@ -21,7 +21,7 @@ public final class RimeboundDead extends CardImpl {
 
     public RimeboundDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SKELETON);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

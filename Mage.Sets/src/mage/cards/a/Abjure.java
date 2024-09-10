@@ -29,7 +29,7 @@ public final class Abjure extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // As an additional cost to cast Abjure, sacrifice a blue permanent.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1,1,filter, true)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
         
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

@@ -47,7 +47,7 @@ public final class SaheeliSublimeArtificer extends CardImpl {
     public SaheeliSublimeArtificer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U/R}{U/R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SAHEELI);
         this.setStartingLoyalty(5);
 

@@ -52,7 +52,7 @@ class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
     }
 
-    EnduringScalelordTriggeredAbility(final EnduringScalelordTriggeredAbility ability) {
+    private EnduringScalelordTriggeredAbility(final EnduringScalelordTriggeredAbility ability) {
         super(ability);
     }
 

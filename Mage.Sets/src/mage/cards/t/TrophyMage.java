@@ -36,7 +36,7 @@ public final class TrophyMage extends CardImpl {
 
         // When Trophy Mage enters the battlefield, you may search your library for an artifact card with converted mana cost 3, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), true));
     }
 

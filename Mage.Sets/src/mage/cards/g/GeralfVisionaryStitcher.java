@@ -41,7 +41,7 @@ public final class GeralfVisionaryStitcher extends CardImpl {
     public GeralfVisionaryStitcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -69,7 +69,7 @@ public final class GeralfVisionaryStitcher extends CardImpl {
 
 class GeralfVisionaryStitcherEffect extends OneShotEffect {
 
-    public GeralfVisionaryStitcherEffect() {
+    GeralfVisionaryStitcherEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X blue Zombie creature token, where X is the sacrificed creature's toughness";
     }

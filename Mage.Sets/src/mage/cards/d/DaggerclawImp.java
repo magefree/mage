@@ -27,7 +27,7 @@ public final class DaggerclawImp extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public DaggerclawImp (final DaggerclawImp card) {
+    private DaggerclawImp(final DaggerclawImp card) {
         super(card);
     }
 

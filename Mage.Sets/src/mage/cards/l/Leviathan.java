@@ -35,7 +35,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class Leviathan extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Islands");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
     static {
         filter.add(SubType.ISLAND.getPredicate());
     }
@@ -52,7 +52,7 @@ public final class Leviathan extends CardImpl {
 
         // Leviathan enters the battlefield tapped and doesn't untap during your untap step.
         Ability abilityTapped = new EntersBattlefieldTappedAbility(
-                "{this} enters the battlefield tapped and doesn't untap during your untap step.");
+                "{this} enters tapped and doesn't untap during your untap step.");
         abilityTapped.addEffect(new DontUntapInControllersUntapStepSourceEffect());
         this.addAbility(abilityTapped);
 
@@ -60,7 +60,7 @@ public final class Leviathan extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(new UntapSourceEffect(), 
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false))),
+                new SacrificeTargetCost(2, filter)),
                 TargetController.YOU,
                 false));
 
@@ -82,18 +82,18 @@ public final class Leviathan extends CardImpl {
 
 class LeviathanCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Islands");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
     static {
         filter.add(SubType.ISLAND.getPredicate());
     }
 
     LeviathanCostToAttackBlockEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK,
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
+                new SacrificeTargetCost(2, filter));
         staticText = "{this} can't attack unless you sacrifice two Islands. <i>(This cost is paid as attackers are declared.)</i>";
     }
 
-    LeviathanCostToAttackBlockEffect(LeviathanCostToAttackBlockEffect effect) {
+    private LeviathanCostToAttackBlockEffect(final LeviathanCostToAttackBlockEffect effect) {
         super(effect);
     }
 

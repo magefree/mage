@@ -31,7 +31,7 @@ public final class KarnSilverGolem extends CardImpl {
     
     public KarnSilverGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -57,12 +57,12 @@ public final class KarnSilverGolem extends CardImpl {
 
 class KarnSilverGolemEffect extends ContinuousEffectImpl {
 
-    public KarnSilverGolemEffect() {
+    KarnSilverGolemEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
     }
 
-    public KarnSilverGolemEffect(final KarnSilverGolemEffect effect) {
+    private KarnSilverGolemEffect(final KarnSilverGolemEffect effect) {
         super(effect);
     }
 

@@ -28,7 +28,7 @@ public final class SisterRepentia extends CardImpl {
 
         // Martyrdom -- When Sister Repentia dies, you gain 2 life and draw two cards.
         Ability ability = new DiesSourceTriggeredAbility(new GainLifeEffect(2));
-        ability.addEffect(new DrawCardSourceControllerEffect(2));
+        ability.addEffect(new DrawCardSourceControllerEffect(2).concatBy("and"));
         this.addAbility(ability.withFlavorWord("Martyrdom"));
 
         // Miracle {W}{B}

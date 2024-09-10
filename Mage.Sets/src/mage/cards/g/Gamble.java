@@ -21,7 +21,7 @@ public final class Gamble extends CardImpl {
 
 
         // Search your library for a card, put that card into your hand, discard a card at random, then shuffle your library.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true);
+        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false);
         effect.setText("Search your library for a card, put that card into your hand");        
         this.getSpellAbility().addEffect(effect);
         effect = new DiscardControllerEffect(1, true);

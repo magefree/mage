@@ -42,7 +42,7 @@ public final class Grozoth extends CardImpl {
 
         // When Grozoth enters the battlefield, you may search your library for any number of cards that have converted mana cost 9, reveal them, and put them into your hand. If you do, shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), true, true
+                new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), true
         ), true));
 
         // {4}: Grozoth loses defender until end of turn.

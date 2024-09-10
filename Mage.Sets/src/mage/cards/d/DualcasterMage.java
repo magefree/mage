@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class DualcasterMage extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         
         // When Dualcaster Mage enters the battlefield, copy target instant or sorcery spell. You may choose new targets for the copy.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CopyTargetSpellEffect(), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CopyTargetStackObjectEffect(), false);
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.addAbility(ability);
 

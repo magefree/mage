@@ -35,7 +35,7 @@ public final class AzorsGateway extends CardImpl {
     public AzorsGateway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.secondSideCardClazz = mage.cards.s.SanctumOfTheSun.class;
 
         // {1}, {T}: Draw a card, then exile a card from your hand.
@@ -59,14 +59,14 @@ public final class AzorsGateway extends CardImpl {
 
 class AzorsGatewayEffect extends OneShotEffect {
 
-    public AzorsGatewayEffect() {
+    AzorsGatewayEffect() {
         super(Outcome.Benefit);
         this.staticText = "Draw a card, then exile a card from your hand. " +
                 "If cards with five or more different mana values are exiled with {this}, " +
                 "you gain 5 life, untap Azor's Gateway, and transform it";
     }
 
-    public AzorsGatewayEffect(final AzorsGatewayEffect effect) {
+    private AzorsGatewayEffect(final AzorsGatewayEffect effect) {
         super(effect);
     }
 
@@ -78,10 +78,14 @@ class AzorsGatewayEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject == null) { return false; }
+        if (sourceObject == null) {
+            return false;
+        }
 
         UUID exileId = CardUtil.getCardExileZoneId(game, source);
 

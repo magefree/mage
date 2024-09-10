@@ -1,14 +1,16 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetControlledPermanentTriggeredAbility;
+import mage.abilities.common.BecomesTargetAnyTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ForetellAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -28,8 +30,8 @@ public final class BattleMammoth extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
-        this.addAbility(new BecomesTargetControlledPermanentTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), true
+        this.addAbility(new BecomesTargetAnyTriggeredAbility(new DrawCardSourceControllerEffect(1),
+                StaticFilters.FILTER_CONTROLLED_A_PERMANENT, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.NONE, true
         ));
 
         // Foretell {2}{G}{G}

@@ -28,7 +28,7 @@ public final class YahenniUndyingPartisan extends CardImpl {
     public YahenniUndyingPartisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AETHERBORN);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(2);
@@ -46,7 +46,7 @@ public final class YahenniUndyingPartisan extends CardImpl {
         // Sacrifice another creature: Yahenni gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         ));
     }
 

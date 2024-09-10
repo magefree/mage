@@ -7,7 +7,7 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -18,7 +18,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class SongMadTreachery extends ModalDoubleFacesCard {
+public final class SongMadTreachery extends ModalDoubleFacedCard {
 
     public SongMadTreachery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

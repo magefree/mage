@@ -23,7 +23,7 @@ public final class JwariScuttler extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public JwariScuttler (final JwariScuttler card) {
+    private JwariScuttler(final JwariScuttler card) {
         super(card);
     }
 

@@ -11,7 +11,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX
  */
 public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl {
@@ -32,7 +31,7 @@ public class PreventAllDamageByAllPermanentsEffect extends PreventionEffectImpl 
         setText();
     }
 
-    public PreventAllDamageByAllPermanentsEffect(final PreventAllDamageByAllPermanentsEffect effect) {
+    protected PreventAllDamageByAllPermanentsEffect(final PreventAllDamageByAllPermanentsEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

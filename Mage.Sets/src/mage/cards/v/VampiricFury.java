@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -30,8 +29,10 @@ public final class VampiricFury extends CardImpl {
 
 
         // Vampire creatures you control get +2/+0 and gain first strike until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, vampires));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, vampires));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, vampires)
+                .setText("Vampire creatures you control get +2/+0"));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, vampires)
+                .setText("and gain first strike until end of turn"));
     }
 
     private VampiricFury(final VampiricFury card) {

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.dynamicvalue.common.CardTypeAssignment;
+import mage.abilities.assignment.common.CardTypeAssignment;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
@@ -27,7 +27,7 @@ public final class HurkylMasterWizard extends CardImpl {
     public HurkylMasterWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.subtype.add(SubType.ADVISOR);
@@ -92,9 +92,9 @@ class HurkylMasterWizardEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 5));
         player.revealCards(source, cards, game);
         TargetCard target = new HurkylMasterWizardTarget(source, game);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl(target.getTargets());
-        player.moveCards(toHand, Zone.HAND, source, game);
+        player.moveCardsToHandWithInfo(toHand, source, game, true);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;

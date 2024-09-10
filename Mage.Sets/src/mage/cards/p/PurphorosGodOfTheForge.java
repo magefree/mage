@@ -33,7 +33,7 @@ public final class PurphorosGodOfTheForge extends CardImpl {
     public PurphorosGodOfTheForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(6);
@@ -46,7 +46,7 @@ public final class PurphorosGodOfTheForge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.R, 5))
                 .addHint(DevotionCount.R.getHint()));
 
-        // Whenever another creature enters the battlefield under your control, Purphoros deals 2 damage to each opponent.
+        // Whenever another creature you control enters, Purphoros deals 2 damage to each opponent.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DamagePlayersEffect(2, TargetController.OPPONENT), filter
         ));

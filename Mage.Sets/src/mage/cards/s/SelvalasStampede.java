@@ -94,7 +94,7 @@ class SelvalasStampedeEffect extends OneShotEffect {
         // You may put a permanent card from your hand onto the battlefield for each free vote
         if (freeCount > 0) {
             TargetCardInHand target = new TargetCardInHand(0, freeCount, StaticFilters.FILTER_CARD_PERMANENT);
-            player.choose(Outcome.PutCreatureInPlay, player.getHand(), target, game);
+            player.choose(Outcome.PutCreatureInPlay, player.getHand(), target, source, game);
             creatureCards.clear();
             creatureCards.addAll(target.getTargets());
             player.moveCards(creatureCards, Zone.BATTLEFIELD, source, game);

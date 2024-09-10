@@ -24,7 +24,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class MoggSquad extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature on the battlefield");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature on the battlefield");
 
     static {
         filter.add(AnotherPredicate.instance);

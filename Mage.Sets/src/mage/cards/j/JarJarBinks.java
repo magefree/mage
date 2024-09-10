@@ -30,7 +30,7 @@ public final class JarJarBinks extends CardImpl {
 
     public JarJarBinks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GUNGAN);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
@@ -59,12 +59,12 @@ public final class JarJarBinks extends CardImpl {
 
 class JarJarBinksEffect extends OneShotEffect {
 
-    public JarJarBinksEffect() {
+    JarJarBinksEffect() {
         super(Outcome.GainControl);
         this.staticText = "target opponent gains control of it";
     }
 
-    public JarJarBinksEffect(final JarJarBinksEffect effect) {
+    private JarJarBinksEffect(final JarJarBinksEffect effect) {
         super(effect);
     }
 
@@ -75,12 +75,12 @@ class JarJarBinksEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent jarJar = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent jarJar = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && jarJar != null && opponent != null) {
             ContinuousEffect effect = new JarJarBinksGainControlSourceEffect();
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             game.addEffect(effect, source);
             game.informPlayers(jarJar.getName() + " is now controlled by " + opponent.getLogName());
             return true;
@@ -91,11 +91,11 @@ class JarJarBinksEffect extends OneShotEffect {
 
 class JarJarBinksGainControlSourceEffect extends ContinuousEffectImpl {
 
-    public JarJarBinksGainControlSourceEffect() {
+    JarJarBinksGainControlSourceEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
-    public JarJarBinksGainControlSourceEffect(final JarJarBinksGainControlSourceEffect effect) {
+    private JarJarBinksGainControlSourceEffect(final JarJarBinksGainControlSourceEffect effect) {
         super(effect);
     }
 
@@ -120,12 +120,12 @@ class JarJarBinksGainControlSourceEffect extends ContinuousEffectImpl {
 
 class JarJarBinksTapEffect extends OneShotEffect {
 
-    public JarJarBinksTapEffect() {
+    JarJarBinksTapEffect() {
         super(Outcome.Tap);
         this.staticText = "tap the creature you control with the highest power. If two or more creatures are tied for the greatest power, you choose one of them";
     }
 
-    public JarJarBinksTapEffect(final JarJarBinksTapEffect effect) {
+    private JarJarBinksTapEffect(final JarJarBinksTapEffect effect) {
         super(effect);
     }
 
@@ -155,7 +155,7 @@ class JarJarBinksTapEffect extends OneShotEffect {
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("one of the creatures with the highest power");
                 filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, highestPower));
                 Target target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.canChoose(source.getControllerId(), source, game)) {
                     if (controller.choose(outcome, target, source, game)) {
                         permanentToTap = game.getPermanent(target.getFirstTarget());

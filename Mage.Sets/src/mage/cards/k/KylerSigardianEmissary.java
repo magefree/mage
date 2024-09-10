@@ -41,13 +41,13 @@ public final class KylerSigardianEmissary extends CardImpl {
     public KylerSigardianEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Kyler, Sigardian Emissary.
+        // Whenever another Human you control enters, put a +1/+1 counter on Kyler, Sigardian Emissary.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));

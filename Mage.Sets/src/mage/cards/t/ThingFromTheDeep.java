@@ -33,7 +33,7 @@ public final class ThingFromTheDeep extends CardImpl {
         this.toughness = new MageInt(9);
 
         // Whenever Thing from the Deep attacks, sacrifice it unless you sacrifice an Island.
-        Effect effect = new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Effect effect = new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(filter));
         effect.setText("sacrifice it unless you sacrifice an Island");
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }

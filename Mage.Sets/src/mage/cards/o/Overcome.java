@@ -25,7 +25,7 @@ public final class Overcome extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Overcome(final Overcome overcome){
+    private Overcome(final Overcome overcome){
         super(overcome);
     }
 

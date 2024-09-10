@@ -39,12 +39,12 @@ public final class StitchInTime extends CardImpl {
 
 class StitchInTimeEffect extends OneShotEffect {
 
-    public StitchInTimeEffect() {
+    StitchInTimeEffect() {
         super(Outcome.DrawCard);
         staticText = "Flip a coin. If you win the flip, take an extra turn after this one";
     }
 
-    public StitchInTimeEffect(final StitchInTimeEffect effect) {
+    private StitchInTimeEffect(final StitchInTimeEffect effect) {
         super(effect);
     }
 
@@ -53,7 +53,7 @@ class StitchInTimeEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (player.flipCoin(source, game, true)) {
-                game.getState().getTurnMods().add(new TurnMod(player.getId(), false));
+                game.getState().getTurnMods().add(new TurnMod(player.getId()).withExtraTurn());
                 return true;
             }
         }

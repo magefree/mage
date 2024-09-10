@@ -108,7 +108,7 @@ class SelectiveAdaptationEffect extends OneShotEffect {
                 continue;
             }
             TargetCard target = abilitySelector.makeTarget();
-            player.choose(Outcome.DrawCard, top7, target, game);
+            player.choose(Outcome.DrawCard, top7, target, source, game);
             toHand.add(target.getFirstTarget());
             toGrave.remove(target.getFirstTarget());
         }
@@ -117,7 +117,7 @@ class SelectiveAdaptationEffect extends OneShotEffect {
         }
         if (toHand.count(filter, game) > 0) {
             TargetCard target = new TargetCardInLibrary(filter);
-            player.choose(Outcome.PutCreatureInPlay, toHand, target, game);
+            player.choose(Outcome.PutCreatureInPlay, toHand, target, source, game);
             Card toBattlefield = game.getCard(target.getFirstTarget());
             if (toBattlefield != null
                     && player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game)

@@ -64,7 +64,7 @@ class PrismaticStrandsEffect extends OneShotEffect {
         this.staticText = "Prevent all damage that sources of the color of your choice would deal this turn";
     }
 
-    PrismaticStrandsEffect(final PrismaticStrandsEffect effect) {
+    private PrismaticStrandsEffect(final PrismaticStrandsEffect effect) {
         super(effect);
     }
 
@@ -101,14 +101,9 @@ class PrismaticStrandsPreventionEffect extends PreventionEffectImpl {
         this.color = color;
     }
 
-    PrismaticStrandsPreventionEffect(PrismaticStrandsPreventionEffect effect) {
+    private PrismaticStrandsPreventionEffect(final PrismaticStrandsPreventionEffect effect) {
         super(effect);
         this.color = effect.color;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

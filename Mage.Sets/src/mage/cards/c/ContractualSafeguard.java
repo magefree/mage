@@ -23,6 +23,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.RandomUtil;
 
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -80,7 +81,7 @@ class ContractualSafeguardFirstEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.withChooseHint("to give a shield counter").setNotTarget(true);
+        target.withChooseHint("to give a shield counter").withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.addCounters(CounterType.SHIELD.createInstance(), source, game);
@@ -119,13 +120,13 @@ class ContractualSafeguardSecondEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
         }
-        Set<String> counterTypes = permanent.getCounters(game).keySet();
+        Set<String> counterTypes = new LinkedHashSet<>(permanent.getCounters(game).keySet());
         String chosenType;
         switch (counterTypes.size()) {
             case 0:

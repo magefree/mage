@@ -10,7 +10,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.dynamicvalue.common.OpponentsCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenAllEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -34,7 +34,7 @@ public final class RasputinTheOneiromancer extends CardImpl {
 
     public RasputinTheOneiromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -52,11 +52,11 @@ public final class RasputinTheOneiromancer extends CardImpl {
         // {T}, Remove one or more dream counters from Rasputin: Add that much {C}.
         Ability ability2 = new DynamicManaAbility(
                 Mana.ColorlessMana(1),
-                RemovedCountersForCostValue.instance,
+                GetXValue.instance,
                 new TapSourceCost(),
                 "Add that much {C}",
                 true, new CountersSourceCount(CounterType.DREAM));
-        ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.DREAM.createInstance(), 1,
+        ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.DREAM, 1,
                 "Remove one or more dream counters from {this}"));
         this.addAbility(ability2);
 

@@ -16,7 +16,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class SpitefulShadowsTest extends CardTestPlayerBase {
 
     @Test
-    public void testCard() {
+    public void SpitefulShadowsPoisonTest() {
         // Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
         addCard(Zone.BATTLEFIELD, playerA, "Glistener Elf");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
@@ -32,13 +32,13 @@ public class SpitefulShadowsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 20);
+        assertLife(playerA, currentGame.getStartingLife());
+        assertLife(playerB, currentGame.getStartingLife());
         assertCounterCount(playerA, CounterType.POISON, 3);
     }
 
     @Test
-    public void testCard1() {
+    public void SpitefulShadowsRegularTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Craw Wurm"); // Creature 6/4
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
@@ -53,9 +53,42 @@ public class SpitefulShadowsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertLife(playerA, 17);
-        assertLife(playerB, 20);
+        assertLife(playerA, currentGame.getStartingLife() - 3);
+        assertLife(playerB, currentGame.getStartingLife());
         assertCounterCount(playerA, CounterType.POISON, 0);
+    }
+
+    @Test
+    public void SpitefulShadowsMultiDamageTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Craw Wurm"); // Creature 6/4
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Agent of Stromgald", 1);
+
+        // Whenever an opponent is dealt noncombat damage, Chandra’s Spitfire gets +3/+0 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Chandra's Spitfire", 1);
+
+        // Enchant creature
+        // Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
+        addCard(Zone.HAND, playerA, "Spiteful Shadows");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spiteful Shadows", "Craw Wurm");
+
+        attack(1, playerA, "Craw Wurm", playerB);
+        block(1, playerB, "Memnite", "Craw Wurm");
+        block(1, playerB, "Agent of Stromgald", "Craw Wurm");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, currentGame.getStartingLife() - 2);
+        assertLife(playerB, currentGame.getStartingLife());
+        assertCounterCount(playerA, CounterType.POISON, 0);
+
+        // Since Spiteful Shadows should have only triggered once, so should have chandra's spitfire.
+        assertPowerToughness(playerB, "Chandra's Spitfire", 4, 3);
     }
 
 }

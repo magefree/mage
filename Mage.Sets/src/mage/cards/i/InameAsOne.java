@@ -43,7 +43,7 @@ public final class InameAsOne extends CardImpl {
 
     public InameAsOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{B}{B}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -52,7 +52,7 @@ public final class InameAsOne extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter)), true),
                 CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle."),
+                "When {this} enters, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle."),
                 new CastFromHandWatcher());
 
         // When Iname as One dies, you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield.
@@ -73,12 +73,12 @@ public final class InameAsOne extends CardImpl {
 
 class InameAsOneEffect extends OneShotEffect {
 
-    public InameAsOneEffect() {
+    InameAsOneEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield";
     }
 
-    public InameAsOneEffect(final InameAsOneEffect effect) {
+    private InameAsOneEffect(final InameAsOneEffect effect) {
         super(effect);
     }
 

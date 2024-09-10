@@ -42,7 +42,7 @@ public final class NimbusWings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NimbusWings (final NimbusWings card) {
+    private NimbusWings(final NimbusWings card) {
         super(card);
     }
 

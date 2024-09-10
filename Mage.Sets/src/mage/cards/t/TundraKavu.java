@@ -50,12 +50,12 @@ public final class TundraKavu extends CardImpl {
 
 class TundraKavuEffect extends BecomesBasicLandTargetEffect {
 
-    public TundraKavuEffect() {
+    TundraKavuEffect() {
         super(Duration.EndOfTurn);
         staticText = "Target land becomes a Plains or an Island until end of turn.";
     }
 
-    public TundraKavuEffect(final TundraKavuEffect effect) {
+    private TundraKavuEffect(final TundraKavuEffect effect) {
         super(effect);
     }
 

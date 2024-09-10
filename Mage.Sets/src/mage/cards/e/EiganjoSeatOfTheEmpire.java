@@ -22,7 +22,7 @@ public final class EiganjoSeatOfTheEmpire extends CardImpl {
     public EiganjoSeatOfTheEmpire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());

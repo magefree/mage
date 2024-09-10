@@ -9,7 +9,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -21,8 +24,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -43,7 +48,7 @@ public final class AoTheDawnSky extends CardImpl {
     public AoTheDawnSky(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(5);
@@ -100,7 +105,7 @@ class AoTheDawnSkyEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 7));
         TargetCard target = new AoTheDawnSkyTarget();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
@@ -110,14 +115,13 @@ class AoTheDawnSkyEffect extends OneShotEffect {
 
 class AoTheDawnSkyTarget extends TargetCardInLibrary {
 
-    private static final FilterCard filter = new FilterPermanentCard("nonland permanent card");
-
+    private static final FilterCard filterStatic = new FilterPermanentCard("nonland permanent cards with total mana value 4 or less from your graveyard");
     static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        filterStatic.add(Predicates.not(CardType.LAND.getPredicate()));
     }
 
     AoTheDawnSkyTarget() {
-        super(0, Integer.MAX_VALUE, filter);
+        super(0, Integer.MAX_VALUE, filterStatic);
     }
 
     private AoTheDawnSkyTarget(final AoTheDawnSkyTarget target) {
@@ -130,19 +134,27 @@ class AoTheDawnSkyTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        return card != null
-                && card.getManaValue()
-                + this
-                .getTargets()
-                .stream()
-                .map(game::getCard)
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, 4, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, 4, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
                 .filter(Objects::nonNull)
                 .mapToInt(MageObject::getManaValue)
-                .sum() <= 4;
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
     }
 }

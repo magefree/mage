@@ -4,17 +4,17 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.game.Game;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -23,6 +23,12 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AgentOfTreachery extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledPermanent();
+
+    static {
+        filter.add(TargetController.NOT_YOU.getOwnerPredicate());
+    }
 
     public AgentOfTreachery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
@@ -42,9 +48,9 @@ public final class AgentOfTreachery extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new DrawCardSourceControllerEffect(3),
                         TargetController.YOU, false
-                ), AgentOfTreacheryCondition.instance, "At the beginning of your end step, " +
+                ), new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2), "At the beginning of your end step, " +
                 "if you control three or more permanents you don't own, draw three cards."
-        ));
+        ).addHint(new ValueHint("Permanents you control but don't own", new PermanentsOnBattlefieldCount(filter))));
     }
 
     private AgentOfTreachery(final AgentOfTreachery card) {
@@ -54,18 +60,5 @@ public final class AgentOfTreachery extends CardImpl {
     @Override
     public AgentOfTreachery copy() {
         return new AgentOfTreachery(this);
-    }
-}
-
-enum AgentOfTreacheryCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getBattlefield()
-                .getAllActivePermanents(source.getControllerId())
-                .stream()
-                .filter(permanent -> !permanent.getOwnerId().equals(source.getControllerId()))
-                .count() > 2;
     }
 }

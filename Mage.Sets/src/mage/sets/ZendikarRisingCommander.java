@@ -33,7 +33,7 @@ public final class ZendikarRisingCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Blackblade Reforged", 107, Rarity.RARE, mage.cards.b.BlackbladeReforged.class));
         cards.add(new SetCardInfo("Blighted Woodland", 121, Rarity.UNCOMMON, mage.cards.b.BlightedWoodland.class));
         cards.add(new SetCardInfo("Bonehoard", 108, Rarity.RARE, mage.cards.b.Bonehoard.class));
-        cards.add(new SetCardInfo("Boros Garrison", 122, Rarity.COMMON, mage.cards.b.BorosGarrison.class));
+        cards.add(new SetCardInfo("Boros Garrison", 122, Rarity.UNCOMMON, mage.cards.b.BorosGarrison.class));
         cards.add(new SetCardInfo("Boros Guildgate", 123, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
         cards.add(new SetCardInfo("Changeling Outcast", 40, Rarity.COMMON, mage.cards.c.ChangelingOutcast.class));
         cards.add(new SetCardInfo("Circuitous Route", 62, Rarity.UNCOMMON, mage.cards.c.CircuitousRoute.class));
@@ -130,7 +130,7 @@ public final class ZendikarRisingCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Scytheclaw", 118, Rarity.RARE, mage.cards.s.Scytheclaw.class));
         cards.add(new SetCardInfo("Seer's Sundial", 119, Rarity.RARE, mage.cards.s.SeersSundial.class));
         cards.add(new SetCardInfo("Selesnya Guildgate", 139, Rarity.COMMON, mage.cards.s.SelesnyaGuildgate.class));
-        cards.add(new SetCardInfo("Selesnya Sanctuary", 140, Rarity.COMMON, mage.cards.s.SelesnyaSanctuary.class));
+        cards.add(new SetCardInfo("Selesnya Sanctuary", 140, Rarity.UNCOMMON, mage.cards.s.SelesnyaSanctuary.class));
         cards.add(new SetCardInfo("Sepulchral Primordial", 54, Rarity.RARE, mage.cards.s.SepulchralPrimordial.class));
         cards.add(new SetCardInfo("Silumgar's Command", 99, Rarity.RARE, mage.cards.s.SilumgarsCommand.class));
         cards.add(new SetCardInfo("Slither Blade", 36, Rarity.COMMON, mage.cards.s.SlitherBlade.class));

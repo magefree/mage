@@ -14,7 +14,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.GremlinToken;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
 
@@ -34,16 +34,16 @@ public final class ChandraGremlinWrangler extends CardImpl {
     public ChandraGremlinWrangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(3);
 
         // +1: Create a 2/2 red Gremlin creature token.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new GremlinToken()), 1));
 
-        // -2: Chandra, Gremlin Wrangler deals X damage to any target, where X is the number of Gremlins you control.
-        Ability ability = new LoyaltyAbility(new DamageTargetEffect(xValue).setText("{this} deals X damage to any target, where X is the number of Gremlins you control."), -2);
-        ability.addTarget(new TargetAnyTarget());
+        // -2: Chandra, Gremlin Wrangler deals X damage to target creature or player, where X is the number of Gremlins you control.
+        Ability ability = new LoyaltyAbility(new DamageTargetEffect(xValue).setText("{this} deals X damage to target creature or player, where X is the number of Gremlins you control."), -2);
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

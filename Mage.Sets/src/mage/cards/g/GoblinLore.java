@@ -22,7 +22,7 @@ public final class GoblinLore extends CardImpl {
         // Draw four cards, then discard three cards at random.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
         Effect effect = new DiscardControllerEffect(3, true);
-        effect.setText("then discard three cards at random");
+        effect.setText(", then discard three cards at random");
         this.getSpellAbility().addEffect(effect);    }
 
     private GoblinLore(final GoblinLore card) {

@@ -39,7 +39,7 @@ public final class DaruCavalier extends CardImpl {
         
         // When Daru Cavalier enters the battlefield, you may search your library for a card named Daru Cavalier, reveal it, and put it into your hand. If you do, shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true), true));
     }
 
     private DaruCavalier(final DaruCavalier card) {

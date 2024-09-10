@@ -17,6 +17,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -57,10 +58,10 @@ class RustElementalEffect extends OneShotEffect {
 
     public RustElementalEffect() {
         super(Outcome.Damage);
-        this.staticText = "Sacrifice an artifact other than {this}. If you can't, tap {this} and you lose 4 life.";
+        this.staticText = "sacrifice an artifact other than {this}. If you can't, tap {this} and you lose 4 life.";
     }
 
-    public RustElementalEffect(final RustElementalEffect effect) {
+    private RustElementalEffect(final RustElementalEffect effect) {
         super(effect);
     }
 
@@ -76,7 +77,7 @@ class RustElementalEffect extends OneShotEffect {
             // create cost for sacrificing an artifact
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+                TargetSacrifice target = new TargetSacrifice(filter);
                 // if they can pay the cost, then they must pay
                 if (target.canChoose(controller.getId(), source, game)) {
                     controller.choose(Outcome.Sacrifice, target, source, game);

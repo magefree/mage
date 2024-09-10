@@ -14,11 +14,13 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -54,12 +56,12 @@ public final class Doomgape extends CardImpl {
 
 class DoomgapeEffect extends OneShotEffect {
 
-    public DoomgapeEffect() {
+    DoomgapeEffect() {
         super(Outcome.GainLife);
         this.staticText = "sacrifice a creature. You gain life equal to that creature's toughness";
     }
 
-    public DoomgapeEffect(final DoomgapeEffect effect) {
+    private DoomgapeEffect(final DoomgapeEffect effect) {
         super(effect);
     }
 
@@ -72,8 +74,7 @@ class DoomgapeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
             if (controller.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {

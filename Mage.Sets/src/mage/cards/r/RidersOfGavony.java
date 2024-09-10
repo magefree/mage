@@ -65,7 +65,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
         staticText = "Human creatures you control have protection from creatures of the chosen type";
     }
 
-    public RidersOfGavonyGainAbilityControlledEffect(final RidersOfGavonyGainAbilityControlledEffect effect) {
+    private RidersOfGavonyGainAbilityControlledEffect(final RidersOfGavonyGainAbilityControlledEffect effect) {
         super(effect);
         protectionFilter = effect.protectionFilter;
     }

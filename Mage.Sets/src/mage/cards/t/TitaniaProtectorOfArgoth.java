@@ -33,7 +33,7 @@ public final class TitaniaProtectorOfArgoth extends CardImpl {
 
     public TitaniaProtectorOfArgoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(5);

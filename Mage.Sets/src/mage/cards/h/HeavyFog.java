@@ -59,7 +59,7 @@ class HeavyFogEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you this turn by attacking creatures";
     }
 
-    HeavyFogEffect(final HeavyFogEffect effect) {
+    private HeavyFogEffect(final HeavyFogEffect effect) {
         super(effect);
     }
 

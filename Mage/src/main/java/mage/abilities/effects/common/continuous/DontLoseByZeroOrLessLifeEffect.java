@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -23,7 +22,7 @@ public class DontLoseByZeroOrLessLifeEffect extends ContinuousEffectImpl {
         staticText = "You don't lose the game for having 0 or less life";
     }
 
-    public DontLoseByZeroOrLessLifeEffect(final DontLoseByZeroOrLessLifeEffect effect) {
+    protected DontLoseByZeroOrLessLifeEffect(final DontLoseByZeroOrLessLifeEffect effect) {
         super(effect);
     }
 

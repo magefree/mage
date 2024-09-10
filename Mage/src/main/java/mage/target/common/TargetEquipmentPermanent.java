@@ -6,11 +6,10 @@ import mage.filter.common.FilterEquipmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author TheElk801
  */
 public class TargetEquipmentPermanent extends TargetPermanent {
-    
+
     public TargetEquipmentPermanent() {
         this(1, 1, new FilterEquipmentPermanent(), false);
     }
@@ -27,7 +26,7 @@ public class TargetEquipmentPermanent extends TargetPermanent {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetEquipmentPermanent(final TargetEquipmentPermanent target) {
+    protected TargetEquipmentPermanent(final TargetEquipmentPermanent target) {
         super(target);
     }
 

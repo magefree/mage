@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
 
 import java.util.UUID;
 
@@ -29,6 +30,7 @@ public final class DraconicRoar extends CardImpl {
         // Draconic Roar deals 3 damage to target creature. If you revealed a Dragon card or controlled a Dragon as you cast Draconic Roar, Draconic Roar deals 3 damage to that creature's controller.
         this.getSpellAbility().addEffect(new DraconicRoarEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addWatcher(new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
     }
 
     private DraconicRoar(final DraconicRoar card) {

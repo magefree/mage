@@ -30,7 +30,7 @@ public final class HondenOfInfiniteRage extends CardImpl {
 
     public HondenOfInfiniteRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your upkeep, Honden of Infinite Rage deals damage to any target equal to the number of Shrines you control.

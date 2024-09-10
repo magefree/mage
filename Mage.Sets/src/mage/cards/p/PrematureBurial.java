@@ -1,15 +1,17 @@
 package mage.cards.p;
 
-import mage.MageObject;
 import mage.MageObjectReference;
-import mage.abilities.Ability;
+import mage.ObjectColor;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.WatcherScope;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -19,17 +21,25 @@ import mage.watchers.Watcher;
 import java.util.*;
 
 /**
- * @author noahg
+ * @author noahg, xenohedron
  */
 public final class PrematureBurial extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(
+            "nonblack creature that entered the battlefield since your last turn ended");
+
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        filter.add(PrematureBurialPredicate.instance);
+    }
 
     public PrematureBurial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Destroy target nonblack creature that entered the battlefield since your last turn ended.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new ETBSinceYourLastTurnTarget(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
-        this.getSpellAbility().addWatcher(new ETBSinceYourLastTurnWatcher());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addWatcher(new PrematureBurialWatcher());
     }
 
     private PrematureBurial(final PrematureBurial card) {
@@ -42,55 +52,20 @@ public final class PrematureBurial extends CardImpl {
     }
 }
 
-class ETBSinceYourLastTurnTarget extends TargetCreaturePermanent {
-
-    public ETBSinceYourLastTurnTarget(FilterCreaturePermanent filter) {
-        super(filter);
-        this.targetName = "nonblack creature that entered the battlefield since your last turn ended";
-    }
-
-    public ETBSinceYourLastTurnTarget(ETBSinceYourLastTurnTarget target) {
-        super(target);
-    }
+enum PrematureBurialPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
     @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        ETBSinceYourLastTurnWatcher watcher = game.getState().getWatcher(ETBSinceYourLastTurnWatcher.class);
-        if (watcher != null) {
-            if (watcher.enteredSinceLastTurn(controllerId, new MageObjectReference(id, game))) {
-                return super.canTarget(controllerId, id, source, game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        MageObject targetSource = game.getObject(source);
-        ETBSinceYourLastTurnWatcher watcher = game.getState().getWatcher(ETBSinceYourLastTurnWatcher.class);
-        if (targetSource != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                    if (watcher != null && watcher.enteredSinceLastTurn(sourceControllerId, new MageObjectReference(permanent.getId(), game))) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ETBSinceYourLastTurnTarget copy() {
-        return new ETBSinceYourLastTurnTarget(this);
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return PrematureBurialWatcher.checkEnteredSinceLastTurn(input.getPlayerId(), new MageObjectReference(input.getObject().getId(), game), game);
     }
 }
 
-class ETBSinceYourLastTurnWatcher extends Watcher {
+class PrematureBurialWatcher extends Watcher {
 
     private final Map<UUID, Set<MageObjectReference>> playerToETBMap;
 
-    public ETBSinceYourLastTurnWatcher() {
+    public PrematureBurialWatcher() {
         super(WatcherScope.GAME);
         this.playerToETBMap = new HashMap<>();
     }
@@ -106,13 +81,19 @@ class ETBSinceYourLastTurnWatcher extends Watcher {
                     if (!playerToETBMap.containsKey(player)) {
                         playerToETBMap.put(player, new HashSet<>());
                     }
-                    playerToETBMap.get(player).add(new MageObjectReference(etbPermanent.getBasicMageObject(game), game));
+                    playerToETBMap.get(player).add(new MageObjectReference(etbPermanent.getId(), game));
                 }
             }
         }
     }
 
-    public boolean enteredSinceLastTurn(UUID player, MageObjectReference mor) {
-        return playerToETBMap.get(player).contains(mor);
+    static boolean checkEnteredSinceLastTurn(UUID player, MageObjectReference mor, Game game) {
+        return game
+                .getState()
+                .getWatcher(PrematureBurialWatcher.class)
+                .playerToETBMap
+                .getOrDefault(player, Collections.emptySet())
+                .contains(mor);
     }
+
 }

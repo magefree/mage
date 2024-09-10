@@ -1,8 +1,5 @@
 package mage.cards.l;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -19,10 +16,12 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlaneswalker;
-import mage.watchers.common.EachCreatureThatConvokedSourceWatcher;
+import mage.util.CardUtil;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author Susucre
  */
 public final class LethalScheme extends CardImpl {
@@ -37,7 +36,6 @@ public final class LethalScheme extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
         // Each creature that convoked Lethal Scheme connives.
-        this.getSpellAbility().addWatcher(new EachCreatureThatConvokedSourceWatcher());
         this.getSpellAbility().addEffect(new LethalSchemeEffect());
     }
 
@@ -54,12 +52,12 @@ public final class LethalScheme extends CardImpl {
 // Based loosely on "Venerated Loxodon" and "Change of Plans"
 class LethalSchemeEffect extends OneShotEffect {
 
-    public LethalSchemeEffect() {
+    LethalSchemeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each creature that convoked Lethal Scheme connives.";
+        this.staticText = "Each creature that convoked {this} connives.";
     }
 
-    public LethalSchemeEffect(final LethalSchemeEffect effect) {
+    private LethalSchemeEffect(final LethalSchemeEffect effect) {
         super(effect);
     }
 
@@ -70,30 +68,21 @@ class LethalSchemeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        EachCreatureThatConvokedSourceWatcher watcher = game.getState().getWatcher(EachCreatureThatConvokedSourceWatcher.class);
-        if (watcher == null) {
-            return false;
-        }
-
-        MageObjectReference mor = new MageObjectReference(source.getSourceId(), game);
-        Set<MageObjectReference> creatures = watcher.getConvokingCreatures(mor);
-        if (creatures == null) {
-            return false;
-        }
-
+        HashSet<MageObjectReference> convokingCreatures = CardUtil.getSourceCostsTag(game, source,
+                ConvokeAbility.convokingCreaturesKey, new HashSet<>(0));
         Set<AbstractMap.SimpleEntry<UUID, Permanent>> playerPermanentsPairs =
-            creatures
-                .stream()
-                .map(creatureMOR -> creatureMOR.getPermanentOrLKIBattlefield(game))
-                .filter(Objects::nonNull)
-                .map(permanent -> new AbstractMap.SimpleEntry<>(permanent.getControllerId(),permanent))
-                .collect(Collectors.toSet());
+                convokingCreatures
+                        .stream()
+                        .map(mor->mor.getPermanentOrLKIBattlefield(game))
+                        .filter(Objects::nonNull)
+                        .map(permanent -> new AbstractMap.SimpleEntry<>(permanent.getControllerId(), permanent))
+                        .collect(Collectors.toSet());
 
         Map<Player, Set<Permanent>> permanentsPerPlayer = new HashMap<>();
 
         playerPermanentsPairs.forEach(pair -> {
             Player player = game.getPlayer(pair.getKey());
-            if(!permanentsPerPlayer.containsKey(player)){
+            if (!permanentsPerPlayer.containsKey(player)) {
                 permanentsPerPlayer.put(player, new HashSet<>());
             }
             permanentsPerPlayer.get(player).add(pair.getValue());
@@ -104,13 +93,13 @@ class LethalSchemeEffect extends OneShotEffect {
         }
 
         for (Player player : game
-            .getState()
-            .getPlayersInRange(source.getControllerId(), game)
-            .stream()
-            .map(game::getPlayer)
-            .filter(Objects::nonNull)
-            .filter(permanentsPerPlayer::containsKey)
-            .collect(Collectors.toList())) {
+                .getState()
+                .getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .filter(permanentsPerPlayer::containsKey)
+                .collect(Collectors.toList())) {
 
             Set<Permanent> permanents = permanentsPerPlayer.get(player);
 
@@ -126,10 +115,18 @@ class LethalSchemeEffect extends OneShotEffect {
                 player.choose(Outcome.Neutral, choiceForThisLoop, game);
 
                 String choice = choiceForThisLoop.getChoice();
-                Permanent choicePermanent = permanents.stream().filter(permanent -> permanent.getIdName().equals(choice)).findFirst().get();
-
-                ConniveSourceEffect.connive(choicePermanent, 1, source, game);
-                permanents.remove(choicePermanent);
+                Permanent choicePermanent = permanents
+                        .stream()
+                        .filter(permanent -> permanent.getIdName().equals(choice))
+                        .findFirst()
+                        .orElse(null);
+                if (choicePermanent != null) {
+                    ConniveSourceEffect.connive(choicePermanent, 1, source, game);
+                    permanents.remove(choicePermanent);
+                } else {
+                    // no choices, e.g. disconnection
+                    break;
+                }
             }
         }
         return true;

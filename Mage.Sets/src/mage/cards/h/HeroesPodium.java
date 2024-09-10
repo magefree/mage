@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -38,7 +38,7 @@ public final class HeroesPodium extends CardImpl {
 
     public HeroesPodium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Each legendary creature you control gets +1/+1 for each other legendary creature you control.
         this.addAbility(new SimpleStaticAbility(
@@ -47,7 +47,7 @@ public final class HeroesPodium extends CardImpl {
         // You may reveal a legendary creature card from among them and put it into your hand.
         // Put the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(
-                new LookLibraryAndPickControllerEffect(ManacostVariableValue.REGULAR, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
+                new LookLibraryAndPickControllerEffect(GetXValue.instance, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM),
                 new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

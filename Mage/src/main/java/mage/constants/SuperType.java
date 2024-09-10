@@ -26,7 +26,7 @@ public enum SuperType {
 
         @Override
         public boolean apply(MageObject input, Game game) {
-            return input.getSuperType().contains(supertype);
+            return input.getSuperType(game).contains(supertype);
         }
 
         @Override

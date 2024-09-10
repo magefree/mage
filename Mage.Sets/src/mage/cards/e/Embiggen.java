@@ -72,7 +72,7 @@ class EmbiggenEffect extends OneShotEffect {
             return false;
         }
         int count = permanent
-                .getSuperType()
+                .getSuperType(game)
                 .size()
                 + permanent
                 .getCardType(game)

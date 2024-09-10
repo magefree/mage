@@ -7,8 +7,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -25,8 +23,6 @@ public final class BooToken extends TokenImpl {
 
         addAbility(TrampleAbility.getInstance());
         addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("AFR", "CLB");
     }
 
     private BooToken(final BooToken token) {

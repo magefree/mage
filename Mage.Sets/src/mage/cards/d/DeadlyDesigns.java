@@ -57,7 +57,7 @@ class DeadlyDesignsTriggerAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new DeadlyDesignsEffect());
     }
 
-    public DeadlyDesignsTriggerAbility(final DeadlyDesignsTriggerAbility ability) {
+    private DeadlyDesignsTriggerAbility(final DeadlyDesignsTriggerAbility ability) {
         super(ability);
     }
 
@@ -74,7 +74,7 @@ class DeadlyDesignsTriggerAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When there are five or more plot counters on {this}, sacrifice it. If you do, destroy up to two target creatures";
+        return "When there are five or more plot counters on {this}, sacrifice it. If you do, destroy up to two target creatures.";
     }
 }
 
@@ -86,7 +86,7 @@ class DeadlyDesignsEffect extends SacrificeSourceEffect {
         super();
     }
 
-    public DeadlyDesignsEffect(final DeadlyDesignsEffect effect) {
+    private DeadlyDesignsEffect(final DeadlyDesignsEffect effect) {
         super(effect);
         this.sacrificed = effect.sacrificed;
     }

@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.target.Target;
@@ -17,6 +18,14 @@ public class Mode implements Serializable {
     protected final Targets targets;
     protected final Effects effects;
     protected String flavorWord;
+    protected Cost cost = null;
+    protected int pawPrintValue = 0; //0 = does not use pawprints
+    /**
+     * Optional Tag to distinguish this mode from others.
+     * In the case of modes that players can only choose once,
+     * the tag is directly what is displayed in ModesAlreadyUsedHint
+     */
+    protected String modeTag;
 
     public Mode(Effect effect) {
         this.id = UUID.randomUUID();
@@ -27,11 +36,14 @@ public class Mode implements Serializable {
         }
     }
 
-    public Mode(final Mode mode) {
+    protected Mode(final Mode mode) {
         this.id = mode.id;
         this.targets = mode.targets.copy();
         this.effects = mode.effects.copy();
         this.flavorWord = mode.flavorWord;
+        this.modeTag = mode.modeTag;
+        this.cost = mode.cost != null ? mode.cost.copy() : null;
+        this.pawPrintValue = mode.pawPrintValue;
     }
 
     public UUID setRandomId() {
@@ -71,6 +83,21 @@ public class Mode implements Serializable {
         return this;
     }
 
+    /**
+     * Tag the mode to be retrieved elsewhere thanks to the tag.
+     */
+    public Mode setModeTag(String tag) {
+        this.modeTag = tag;
+        return this;
+    }
+
+    /**
+     * @return the mode tag for this mode, if set
+     */
+    public String getModeTag() {
+        return this.modeTag == null ? "" : this.modeTag;
+    }
+
     public String getFlavorWord() {
         return flavorWord;
     }
@@ -84,5 +111,23 @@ public class Mode implements Serializable {
     public Mode withFlavorWord(String flavorWord) {
         this.flavorWord = flavorWord;
         return this;
+    }
+
+    public Mode withCost(Cost cost) {
+        this.cost = cost;
+        return this;
+    }
+
+    public Cost getCost() {
+        return cost;
+    }
+
+    public Mode withPawPrintValue(int pawPrintValue) {
+        this.pawPrintValue = pawPrintValue;
+        return this;
+    }
+
+    public int getPawPrintValue() {
+        return pawPrintValue;
     }
 }

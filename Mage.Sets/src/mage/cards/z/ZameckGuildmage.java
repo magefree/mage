@@ -52,12 +52,12 @@ public final class ZameckGuildmage extends CardImpl {
 
 class ZameckGuildmageEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public ZameckGuildmageEntersBattlefieldEffect() {
+    ZameckGuildmageEntersBattlefieldEffect() {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
         this.staticText = "This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    public ZameckGuildmageEntersBattlefieldEffect(ZameckGuildmageEntersBattlefieldEffect effect) {
+    private ZameckGuildmageEntersBattlefieldEffect(final ZameckGuildmageEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -70,11 +70,6 @@ class ZameckGuildmageEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
         return permanent != null && permanent.isControlledBy(source.getControllerId()) && permanent.isCreature(game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

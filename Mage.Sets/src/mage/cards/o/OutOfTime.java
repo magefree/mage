@@ -1,7 +1,5 @@
 package mage.cards.o;
 
-import java.util.*;
-
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -9,8 +7,7 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,8 +21,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.*;
+
 /**
- *
  * @author weirddan455
  */
 public final class OutOfTime extends CardImpl {
@@ -38,8 +36,7 @@ public final class OutOfTime extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OutOfTimePhaseOutEffect()));
 
         // Vanishing
-        this.addAbility(new VanishingUpkeepAbility(0, "enchantment"));
-        this.addAbility(new VanishingSacrificeAbility());
+        this.addAbility(new VanishingAbility(0));
     }
 
     private OutOfTime(final OutOfTime card) {
@@ -54,10 +51,10 @@ public final class OutOfTime extends CardImpl {
 
 class OutOfTimePhaseOutEffect extends OneShotEffect {
 
-    public OutOfTimePhaseOutEffect() {
+    OutOfTimePhaseOutEffect() {
         super(Outcome.AIDontUseIt);
-        this.staticText = "untap all creatures, then phase them out until {this} leaves the battlefield. "
-                + "Put a time counter on {this} for each creature phased out this way";
+        this.staticText = "untap all creatures, then those creatures phase out until {this} leaves the battlefield. "
+                + "Put a time counter on {this} for each creature that phased out this way";
     }
 
     private OutOfTimePhaseOutEffect(final OutOfTimePhaseOutEffect effect) {
@@ -85,6 +82,7 @@ class OutOfTimePhaseOutEffect extends OneShotEffect {
             Permanent outOfTime = game.getPermanent(source.getSourceId());
             if (outOfTime != null) {
                 new PhaseOutAllEffect(new ArrayList<>(creatureIds)).apply(game, source);
+                game.processAction();
                 new AddCountersSourceEffect(CounterType.TIME.createInstance(numCreatures)).apply(game, source);
                 game.getState().setValue("phasedOutCreatures"
                         + source.getId().toString(), creatureIds);
@@ -130,7 +128,7 @@ class OutOfTimeDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class OutOfTimeLeavesBattlefieldEffect extends OneShotEffect {
 
-    public OutOfTimeLeavesBattlefieldEffect() {
+    OutOfTimeLeavesBattlefieldEffect() {
         super(Outcome.Neutral);
     }
 
@@ -165,7 +163,7 @@ class OutOfTimeLeavesBattlefieldEffect extends OneShotEffect {
 // Stops creatures from phasing back in on their controller's next turn
 class OutOfTimeReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OutOfTimeReplacementEffect() {
+    OutOfTimeReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
     }
 
@@ -181,11 +179,6 @@ class OutOfTimeReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.PHASE_IN;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

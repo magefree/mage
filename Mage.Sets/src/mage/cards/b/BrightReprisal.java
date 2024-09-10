@@ -23,7 +23,7 @@ public final class BrightReprisal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private BrightReprisal(final BrightReprisal card) {

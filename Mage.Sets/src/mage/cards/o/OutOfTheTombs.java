@@ -49,24 +49,19 @@ public final class OutOfTheTombs extends CardImpl {
 
 class OutOfTheTombsReplacementEffect extends ReplacementEffectImpl {
 
-    public OutOfTheTombsReplacementEffect() {
+    OutOfTheTombsReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card while your library has no cards in it, instead return a creature card " +
                 "from your graveyard to the battlefield. If you can't, you lose the game.";
     }
 
-    public OutOfTheTombsReplacementEffect(final OutOfTheTombsReplacementEffect effect) {
+    private OutOfTheTombsReplacementEffect(final OutOfTheTombsReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public OutOfTheTombsReplacementEffect copy() {
         return new OutOfTheTombsReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -77,7 +72,7 @@ class OutOfTheTombsReplacementEffect extends ReplacementEffectImpl {
         }
         boolean cardReturned = false;
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(player.getId(), source, game)) {
             if (target.choose(Outcome.PutCreatureInPlay, player.getId(), source.getSourceId(), source, game)) {
                 Card card = game.getCard(target.getFirstTarget());

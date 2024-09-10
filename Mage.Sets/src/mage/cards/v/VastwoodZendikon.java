@@ -2,7 +2,7 @@
 package mage.cards.v;
 
 import java.util.UUID;
-import mage.ObjectColor;
+
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,7 +13,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.permanent.token.custom.ElementalCreatureToken;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -39,7 +39,7 @@ public final class VastwoodZendikon extends CardImpl {
         this.addAbility(ability);
         
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
-                new ElementalCreatureToken(6, 4, "6/4 green Elemental creature", new ObjectColor("G")),
+                new CreatureToken(6, 4, "6/4 green Elemental creature", SubType.ELEMENTAL).withColor("G"),
                 "Enchanted land is a 6/4 green Elemental creature. It's still a land", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
         this.addAbility(ability2);
         

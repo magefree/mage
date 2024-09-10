@@ -12,7 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 
@@ -61,8 +62,10 @@ enum AnathemancerCount implements DynamicValue {
         if (sourceAbility.getFirstTarget() == null) {
             return 0;
         }
+        FilterLandPermanent filter = FilterLandPermanent.nonbasicLands();
+        filter.add(new ControllerIdPredicate(sourceAbility.getFirstTarget()));
         return game.getBattlefield().count(
-                StaticFilters.FILTER_LANDS_NONBASIC,
+                filter,
                 sourceAbility.getControllerId(),
                 sourceAbility, game
         );

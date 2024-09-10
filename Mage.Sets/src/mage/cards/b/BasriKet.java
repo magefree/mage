@@ -37,7 +37,7 @@ public final class BasriKet extends CardImpl {
     public BasriKet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BASRI);
         this.setStartingLoyalty(3);
 
@@ -74,7 +74,7 @@ class BasriKetTriggeredAbility extends DelayedTriggeredAbility {
         super(null, Duration.EndOfTurn, false);
     }
 
-    public BasriKetTriggeredAbility(BasriKetTriggeredAbility ability) {
+    private BasriKetTriggeredAbility(final BasriKetTriggeredAbility ability) {
         super(ability);
     }
 

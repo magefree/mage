@@ -28,13 +28,13 @@ public final class JeditOjanenMercenary extends CardImpl {
 
     public JeditOjanenMercenary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.CAT);
         this.addSubType(SubType.MERCENARY);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Jedit Ojanen, Mercenary or another legendary creature enters the battlefield under your control, you may pay {G}.
+        // Whenever Jedit Ojanen, Mercenary or another legendary creature you control enters, you may pay {G}.
         // If you do, create a 2/2 green Cat Warrior creature token with forestwalk.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenEffect(new CatWarriorToken()), new ManaCostsImpl<>("{G}")

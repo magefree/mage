@@ -6,7 +6,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,14 +28,14 @@ public final class PyromancersGoggles extends CardImpl {
 
     public PyromancersGoggles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {R}.
         Ability ability = new RedManaAbility();
         this.addAbility(ability);
 
         // When that mana is used to cast a red instant or sorcery spell, copy that spell and you may choose new targets for the copy.
-        Effect effect = new CopyTargetSpellEffect(true);
+        Effect effect = new CopyTargetStackObjectEffect(true);
         effect.setText("copy that spell and you may choose new targets for the copy");
         this.addAbility(new PyromancersGogglesTriggeredAbility(ability.getOriginalId(), effect));
 
@@ -67,7 +67,7 @@ class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When that mana is used to cast a red instant or sorcery spell, ");
     }
 
-    public PyromancersGogglesTriggeredAbility(final PyromancersGogglesTriggeredAbility ability) {
+    private PyromancersGogglesTriggeredAbility(final PyromancersGogglesTriggeredAbility ability) {
         super(ability);
         this.abilityOriginalId = ability.abilityOriginalId;
     }

@@ -35,7 +35,7 @@ public final class WhisperSquad extends CardImpl {
 
         // {1}{B}: Search your library for a card named Whisper Squad, put it onto the battlefield tapped, then shuffle your library.
         this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), new ManaCostsImpl<>("{1}{B}")));
     }
 

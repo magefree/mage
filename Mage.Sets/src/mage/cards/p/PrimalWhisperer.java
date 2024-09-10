@@ -23,7 +23,7 @@ import mage.filter.predicate.card.FaceDownPredicate;
  */
 public final class PrimalWhisperer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creature on the battlefield");
 
     static {
         filter.add(FaceDownPredicate.instance);
@@ -40,7 +40,7 @@ public final class PrimalWhisperer extends CardImpl {
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
         // Morph {3}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{G}")));
     }
 
     private PrimalWhisperer(final PrimalWhisperer card) {

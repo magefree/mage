@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,13 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -30,15 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class BloodAspirant extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.ENCHANTMENT.getPredicate()
-        ));
-    }
 
     public BloodAspirant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -49,14 +35,17 @@ public final class BloodAspirant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you sacrifice a permanent, put a +1/+1 counter on Blood Aspirant.
-        this.addAbility(new BloodAspirantAbility());
+        this.addAbility(new SacrificePermanentTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                StaticFilters.FILTER_PERMANENT
+        ));
 
         // {1}{R}, {T}, Sacrifice a creature or enchantment: Blood Aspirant deals 1 damage to target creature. That creature can't block this turn.
         Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT));
         ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
                 .setText("That creature can't block this turn."));
         ability.addTarget(new TargetCreaturePermanent());
@@ -70,36 +59,5 @@ public final class BloodAspirant extends CardImpl {
     @Override
     public BloodAspirant copy() {
         return new BloodAspirant(this);
-    }
-}
-
-class BloodAspirantAbility extends TriggeredAbilityImpl {
-
-    BloodAspirantAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-    }
-
-    private BloodAspirantAbility(final BloodAspirantAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BloodAspirantAbility copy() {
-        return new BloodAspirantAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you sacrifice a permanent, put a +1/+1 counter on {this}.";
     }
 }

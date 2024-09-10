@@ -3,7 +3,9 @@ Afterlife|number|
 Annihilator|number|
 Ascend|new|
 Assist|new|
+Backup|card, number|
 Basic landcycling|cost|
+Bargain|new|
 Battle cry|new|
 Bestow|card, manaString|
 Blitz|card, manaString|
@@ -27,12 +29,15 @@ Delve|new|
 Dethrone|new|
 Devoid|color|
 Defender|instance|
+Disguise|card, cost|
 Disturb|cost|
 Dredge|number|
+Doctor's companion|instance|
 Double Strike|instance|
 Dredge|number|
 Echo|manaString|
 Embalm|cost, card|
+Emerge|card, manaString|
 Enchant|type|
 Encore|cost|
 Enlist|new|
@@ -53,10 +58,14 @@ Flying|instance|
 Forestcycling|cost|
 Forestwalk|new|
 Foretell|card, manaString|
+For Mirrodin!|new|
+Freerunning|manaString|
 Friends forever|instance|
+Gift|card|
 Haste|instance|
 Hexproof|instance|
 Hideaway|number|
+Impending|manaString|
 Improvise|new|
 Indestructible|instance|
 Infect|instance|
@@ -84,12 +93,14 @@ Mutate|card, manaString|
 Myriad|new|
 Nightbound|new|
 Ninjutsu|manaString|
+Offspring|manaString|
 Outlast|cost|
 Partner|instance|
 Persist|new|
 Phasing|instance|
 Plainscycling|cost|
 Plainswalk|new|
+Plot|manaString|
 Poisonous|number|
 Prototype|card, manaString|
 Provoke|new|
@@ -101,6 +112,7 @@ Reconfigure|manaString|
 Renown|number|
 Replicate|manaString|
 Riot|new|
+Saddle|number|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|
@@ -108,13 +120,15 @@ Soulbond|new|
 Soulshift|number|
 Skulk|new|
 Spectacle|card, cost|
-Squad|new|
+Spree|card|
+Squad|cost|
 Storm|new|
 Sunburst|new|
 Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
-Totem armor|new|
+Umbra armor|new|
+Toxic|number|
 Training|new|
 Trample|instance|
 Tribute|number|
@@ -123,6 +137,7 @@ Undaunted|new|
 Undying|new|
 Unearth|cost|
 Unleash|new|
+Vanishing|number|
 Vigilance|instance|
 Ward|cost|
 Wither|instance|

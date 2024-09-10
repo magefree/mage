@@ -10,15 +10,15 @@ import mage.game.permanent.Permanent;
 /**
  * @author jeffwadsworth
  */
-public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl {
 
     public BecomesEnchantmentSourceEffect() {
         super(Duration.Custom, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.AddAbility);
-        staticText = "{this} becomes an Enchantment";
+        staticText = "{this} becomes an enchantment";
         dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
     }
 
-    public BecomesEnchantmentSourceEffect(final BecomesEnchantmentSourceEffect effect) {
+    protected BecomesEnchantmentSourceEffect(final BecomesEnchantmentSourceEffect effect) {
         super(effect);
     }
 
@@ -43,7 +43,6 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl impleme
         permanent.removeAllCardTypes(game);
         permanent.addCardType(game, CardType.ENCHANTMENT);
         permanent.retainAllEnchantmentSubTypes(game);
-        permanent.setIsAllCreatureTypes(game, false);
         return true;
     }
 }

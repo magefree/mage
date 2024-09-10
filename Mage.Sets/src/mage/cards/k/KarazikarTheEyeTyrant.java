@@ -30,7 +30,7 @@ public final class KarazikarTheEyeTyrant extends CardImpl {
     public KarazikarTheEyeTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEHOLDER);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

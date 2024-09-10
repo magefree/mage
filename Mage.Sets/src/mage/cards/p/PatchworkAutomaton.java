@@ -10,8 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterArtifactSpell;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,8 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class PatchworkAutomaton extends CardImpl {
-
-    private static final FilterSpell filter = new FilterArtifactSpell("an artifact spell");
 
     public PatchworkAutomaton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
@@ -34,7 +31,7 @@ public final class PatchworkAutomaton extends CardImpl {
 
         // Whenever you cast an artifact spell, put a +1/+1 counter on Patchwork Automaton.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false
         ));
     }
 

@@ -31,7 +31,7 @@ public final class HamzaGuardianOfArashin extends CardImpl {
     public HamzaGuardianOfArashin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEPHANT);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);

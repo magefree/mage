@@ -21,6 +21,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,7 +49,7 @@ public final class LunarchMantle extends CardImpl {
         SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
-        abilityToGain.addCost(new SacrificeTargetCost(new TargetControlledPermanent()));
+        abilityToGain.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
         ability2.addEffect(new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield, rule));
         this.addAbility(ability2);
     }

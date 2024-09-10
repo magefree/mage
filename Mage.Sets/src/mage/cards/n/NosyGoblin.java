@@ -23,7 +23,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class NosyGoblin extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face down creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creature");
 
     static {
         filter.add(FaceDownPredicate.instance);

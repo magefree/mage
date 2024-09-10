@@ -4,8 +4,10 @@ import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.client.remote.XmageURLConnection;
 import mage.client.util.CardLanguage;
 import org.apache.log4j.Logger;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -508,7 +510,6 @@ public enum WizardCardsImageSource implements CardImageSource {
 
     private Map<String, String> getSetLinks(String cardSet) {
         LinkedHashMap<String, String> setLinks = new LinkedHashMap<>();
-        ExecutorService executor = Executors.newFixedThreadPool(10);
         try {
             String setNames = setsAliases.get(cardSet);
             if (setNames == null) {
@@ -523,7 +524,8 @@ public enum WizardCardsImageSource implements CardImageSource {
                 while (page < 999) {
                     String searchUrl = "https://gatherer.wizards.com/Pages/Search/Default.aspx?sort=cn+&page=" + page + "&action=advanced&output=spoiler&method=visual&set=+%5B%22" + URLSetName + "%22%5D";
                     logger.debug("URL: " + searchUrl);
-                    Document doc = CardImageUtils.downloadHtmlDocument(searchUrl);
+                    String sourceData = XmageURLConnection.downloadText(searchUrl);
+                    Document doc = Jsoup.parse(sourceData);
                     Elements cardsImages = doc.select("img[src^=../../Handlers/]");
                     if (cardsImages.isEmpty()) {
                         break;
@@ -563,26 +565,18 @@ public enum WizardCardsImageSource implements CardImageSource {
             logger.error("Exception when parsing the wizards page: " + ex.getMessage());
         }
 
-        executor.shutdown();
-
-        while (!executor.isTerminated()) {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException ie) {
-            }
-        }
-
         return setLinks;
     }
 
-    private void getLandVariations(LinkedHashMap<String, String> setLinks, String cardSet, int multiverseId, String cardName) throws IOException, NumberFormatException {
+    private void getLandVariations(LinkedHashMap<String, String> setLinks, String cardSet, int multiverseId, String cardName) {
         CardCriteria criteria = new CardCriteria();
-        criteria.nameExact(cardName);
+        criteria.name(cardName);
         criteria.setCodes(cardSet);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
         String urlLandDocument = "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
-        Document landDoc = CardImageUtils.downloadHtmlDocument(urlLandDocument);
+        String sourceData = XmageURLConnection.downloadText(urlLandDocument);
+        Document landDoc = Jsoup.parse(sourceData);
         Elements variations = landDoc.select("a.variationlink");
         if (!variations.isEmpty()) {
             if (variations.size() > cards.size()) {
@@ -627,9 +621,10 @@ public enum WizardCardsImageSource implements CardImageSource {
         }
     }
 
-    private Map<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) throws IOException {
+    private Map<String, Integer> getlocalizedMultiverseIds(Integer englishMultiverseId) {
         String cardLanguagesUrl = "https://gatherer.wizards.com/Pages/Card/Languages.aspx?multiverseid=" + englishMultiverseId;
-        Document cardLanguagesDoc = CardImageUtils.downloadHtmlDocument(cardLanguagesUrl);
+        String sourceData = XmageURLConnection.downloadText(cardLanguagesUrl);
+        Document cardLanguagesDoc = Jsoup.parse(sourceData);
         Elements languageTableRows = cardLanguagesDoc.select("tr.cardItem");
         Map<String, Integer> localizedIds = new HashMap<>();
         if (!languageTableRows.isEmpty()) {
@@ -674,7 +669,7 @@ public enum WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public float getAverageSize() {
+    public float getAverageSizeKb() {
         return 60.0f;
     }
 
@@ -706,10 +701,6 @@ public enum WizardCardsImageSource implements CardImageSource {
     @Override
     public CardLanguage getCurrentLanguage() {
         return currentLanguage;
-    }
-
-    @Override
-    public void doPause(String httpImageUrl) {
     }
 
     @Override

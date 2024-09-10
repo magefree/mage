@@ -30,7 +30,7 @@ public final class ShisatoWhisperingHunter extends CardImpl {
 
     public ShisatoWhisperingHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -40,7 +40,7 @@ public final class ShisatoWhisperingHunter extends CardImpl {
         // At the beginning of your upkeep, sacrifice a Snake.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1,""), TargetController.YOU, false));
         // Whenever Shisato, Whispering Hunter deals combat damage to a player, that player skips their next untap step.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SkipNextPlayerUntapStepEffect("that"), false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SkipNextPlayerUntapStepEffect("that player"), false, true));
     }
 
     private ShisatoWhisperingHunter(final ShisatoWhisperingHunter card) {

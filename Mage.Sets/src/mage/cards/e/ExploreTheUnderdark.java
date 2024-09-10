@@ -2,6 +2,7 @@ package mage.cards.e;
 
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,6 +40,7 @@ public final class ExploreTheUnderdark extends CardImpl {
 
         // You take the initiative.
         this.getSpellAbility().addEffect(new TakeTheInitiativeEffect().concatBy("<br>"));
+        this.getSpellAbility().addHint(InitiativeHint.instance);
     }
 
     private ExploreTheUnderdark(final ExploreTheUnderdark card) {

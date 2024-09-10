@@ -1,11 +1,14 @@
 package mage.choices;
 
+import mage.game.Game;
+import mage.players.Player;
 import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -40,6 +43,10 @@ public interface Choice extends Serializable, Copyable<Choice> {
     String getSpecialHint();
 
     ChoiceHintType getHintType();
+
+    boolean isManaColorChoice();
+
+    Choice setManaColorChoice(boolean manaColorChoice);
 
     // string choice
     void setChoices(Set<String> choices);
@@ -87,8 +94,27 @@ public interface Choice extends Serializable, Copyable<Choice> {
 
     Map<String, Integer> getSortData();
 
+    // custom hints
+    void setHintData(Map<String, List<String>> hintData);
+
+    Map<String, List<String>> getHintData();
+
+    // builder
+
+    /**
+     * Fast add single key item. Use null value to ignore sort or hint data
+     */
+    Choice withItem(String key, String value, Integer sort, ChoiceHintType hintType, String hintValue);
+
     // random choice (for AI usage)
     void setRandomChoice();
 
     boolean setChoiceByAnswers(List<String> answers, boolean removeSelectAnswerFromList);
+
+    /**
+     * Run additional code before player start to choose (example: add info and hints for choosing player)
+     */
+    void onChooseStart(Game game, UUID choosingPlayerId);
+
+    void onChooseEnd(Game game, UUID choosingPlayerId, String choiceResult);
 }

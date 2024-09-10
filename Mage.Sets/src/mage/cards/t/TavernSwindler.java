@@ -49,12 +49,12 @@ public final class TavernSwindler extends CardImpl {
 
 class TavernSwindlerEffect extends OneShotEffect {
 
-    public TavernSwindlerEffect() {
+    TavernSwindlerEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, you gain 6 life";
     }
 
-    public TavernSwindlerEffect(TavernSwindlerEffect effect) {
+    private TavernSwindlerEffect(final TavernSwindlerEffect effect) {
         super(effect);
     }
 

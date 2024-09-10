@@ -88,7 +88,7 @@ class GhastlyMimicryEffect extends OneShotEffect {
             return false;
         }
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
-        effect.setAdditionalSubType(SubType.SPIRIT);
+        effect.withAdditionalSubType(SubType.SPIRIT);
         return effect.setTargetPointer(new FixedTarget(attached, game)).apply(game, source);
     }
 }

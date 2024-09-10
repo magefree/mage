@@ -63,7 +63,7 @@ class InvocationOfSaintTraftEffect extends OneShotEffect {
         staticText = "create a 4/4 white Angel creature token with flying tapped and attacking. Exile that token at end of combat";
     }
 
-    InvocationOfSaintTraftEffect(final InvocationOfSaintTraftEffect effect) {
+    private InvocationOfSaintTraftEffect(final InvocationOfSaintTraftEffect effect) {
         super(effect);
     }
 

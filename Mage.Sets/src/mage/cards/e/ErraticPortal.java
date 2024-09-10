@@ -55,7 +55,7 @@ class ErraticPortalEffect extends OneShotEffect {
         this.cost = cost;
     }
 
-    public ErraticPortalEffect(final ErraticPortalEffect effect) {
+    private ErraticPortalEffect(final ErraticPortalEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

@@ -24,7 +24,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, MulliganType.GAME_DEFAULT.getMulligan(0), 60, 20, 7);
 
         playerA = createPlayer(game, "PlayerA", deckNameA);
         playerB = createPlayer(game, "PlayerB", deckNameB);

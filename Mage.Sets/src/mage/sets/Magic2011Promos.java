@@ -22,8 +22,6 @@ public class Magic2011Promos extends ExpansionSet {
 
         cards.add(new SetCardInfo("Ancient Hellkite", "122*", Rarity.RARE, mage.cards.a.AncientHellkite.class));
         cards.add(new SetCardInfo("Birds of Paradise", "165*", Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
-        cards.add(new SetCardInfo("Liliana's Specter", 104, Rarity.COMMON, mage.cards.l.LilianasSpecter.class));
-        cards.add(new SetCardInfo("Mitotic Slime", 53, Rarity.RARE, mage.cards.m.MitoticSlime.class));
         cards.add(new SetCardInfo("Sun Titan", "35*", Rarity.MYTHIC, mage.cards.s.SunTitan.class));
     }
 }

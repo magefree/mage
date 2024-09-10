@@ -7,7 +7,6 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -41,7 +40,7 @@ public final class Interdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetActivatedAbility(filter));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Interdict(final Interdict card) {
@@ -61,7 +60,7 @@ class InterdictPredicate implements Predicate<StackObject> {
 
     @Override
     public boolean apply(StackObject input, Game game) {
-        if (input instanceof StackAbility && ((StackAbility) input).getAbilityType() == AbilityType.ACTIVATED) {
+        if (input instanceof StackAbility && ((StackAbility) input).isActivatedAbility()){
             MageObject sourceObject = ((StackAbility) input).getSourceObject(game);
             if (sourceObject != null) {
                 return (sourceObject.isArtifact(game)
@@ -76,12 +75,12 @@ class InterdictPredicate implements Predicate<StackObject> {
 
 class InterdictCounterEffect extends OneShotEffect {
 
-    public InterdictCounterEffect() {
+    InterdictCounterEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target activated ability from an artifact, creature, enchantment, or land. That permanent's activated abilities can't be activated this turn.";
     }
 
-    public InterdictCounterEffect(final InterdictCounterEffect effect) {
+    private InterdictCounterEffect(final InterdictCounterEffect effect) {
         super(effect);
     }
 
@@ -109,12 +108,12 @@ class InterdictCounterEffect extends OneShotEffect {
 
 class InterdictCantActivateEffect extends RestrictionEffect {
 
-    public InterdictCantActivateEffect() {
+    InterdictCantActivateEffect() {
         super(Duration.EndOfTurn);
         staticText = "That permanent's activated abilities can't be activated this turn";
     }
 
-    public InterdictCantActivateEffect(final InterdictCantActivateEffect effect) {
+    private InterdictCantActivateEffect(final InterdictCantActivateEffect effect) {
         super(effect);
     }
 

@@ -19,7 +19,7 @@ public final class IcehideGolem extends CardImpl {
     public IcehideGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{S}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

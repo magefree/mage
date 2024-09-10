@@ -7,7 +7,9 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
@@ -22,15 +24,23 @@ public final class LolthSpiderQueenEmblem extends Emblem {
 
     // −8: You get an emblem with "Whenever an opponent is dealt combat damage by one or more creatures you control, if that player lost less than 8 life this turn, they lose life equal to the difference."
     public LolthSpiderQueenEmblem() {
-        this.setName("Emblem Lolth");
-        this.setExpansionSetCodeForImage("AFR");
+        super("Emblem Lolth");
         this.getAbilities().add(new ConditionalInterveningIfTriggeredAbility(
                 new DealCombatDamageControlledTriggeredAbility(
-                        Zone.COMMAND, new LolthSpiderQueenEmblemEffect(), true, true
+                        Zone.COMMAND, new LolthSpiderQueenEmblemEffect(), StaticFilters.FILTER_PERMANENT_CREATURES, SetTargetPointer.PLAYER, false
                 ), LolthSpiderQueenEmblemCondition.instance, "Whenever an opponent " +
                 "is dealt combat damage by one or more creatures you control, " +
                 "if that player lost less than 8 life this turn, they lose life equal to the difference."
         ));
+    }
+
+    private LolthSpiderQueenEmblem(final LolthSpiderQueenEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public LolthSpiderQueenEmblem copy() {
+        return new LolthSpiderQueenEmblem(this);
     }
 }
 

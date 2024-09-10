@@ -26,7 +26,7 @@ public final class ArdozCobblerOfWar extends CardImpl {
     public ArdozCobblerOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
@@ -35,13 +35,13 @@ public final class ArdozCobblerOfWar extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Whenever Ardoz, Cobbler of War or another creature enters the battlefield under your control, that creature gets +2/+0 until end of turn.
+        // Whenever Ardoz, Cobbler of War or another creature you control enters, that creature gets +2/+0 until end of turn.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BoostTargetEffect(2, 0)
                         .setText("that creature gets +2/+0 until end of turn"),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false,
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE, false,
                 SetTargetPointer.PERMANENT, true
-        ));
+        ).setTriggerPhrase("Whenever {this} or another creature you control enters, "));
 
         // {3}{R}: Create a 1/1 red Goblin creature token with haste. Activate only as sorcery.
         this.addAbility(new ActivateAsSorceryActivatedAbility(

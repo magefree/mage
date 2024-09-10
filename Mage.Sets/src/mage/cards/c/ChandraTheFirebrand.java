@@ -20,7 +20,7 @@ public final class ChandraTheFirebrand extends CardImpl {
 
     public ChandraTheFirebrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
         this.setStartingLoyalty(3);

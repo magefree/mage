@@ -5,7 +5,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
+import mage.players.Player;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -24,12 +26,16 @@ public class ControlTargetPlayerNextTurnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID targetId = source.getFirstTarget();
-        UUID controllerId = source.getControllerId();
-        if (targetId != null && controllerId != null && !targetId.equals(controllerId)) {
-            game.getState().getTurnMods().add(new TurnMod(targetId, controllerId));
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (targetPlayer == null) {
+            return false;
+        }
+
+        if (!Objects.equals(source.getControllerId(), targetPlayer.getId())) {
+            game.getState().getTurnMods().add(new TurnMod(targetPlayer.getId()).withNewController(source.getControllerId()));
             return true;
         }
+
         return false;
     }
 

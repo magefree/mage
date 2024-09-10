@@ -32,7 +32,7 @@ public final class OrosTheAvenger extends CardImpl {
 
     public OrosTheAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(6);

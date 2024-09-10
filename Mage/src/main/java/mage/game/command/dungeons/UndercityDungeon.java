@@ -14,6 +14,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -37,7 +38,7 @@ import mage.util.RandomUtil;
 public class UndercityDungeon extends Dungeon {
 
     public UndercityDungeon() {
-        super("Undercity", "CLB");
+        super("Undercity");
 
         // Secret Entrance — Search your library for a basic land card,
         //                   reveal it,
@@ -46,7 +47,7 @@ public class UndercityDungeon extends Dungeon {
         DungeonRoom secretEntrance = new DungeonRoom(
                 "Secret Entrance",
                 new SearchLibraryPutInHandEffect(
-                        new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND)
+                        new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
                 )
         );
 
@@ -152,15 +153,17 @@ class ThroneOfTheDeadThreeEffect extends OneShotEffect {
                 break;
             default:
                 TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE);
-                player.choose(outcome, cards, target, game);
+                player.choose(outcome, cards, target, source, game);
                 card = cards.get(target.getFirstTarget(), game);
         }
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
             Permanent permanent = game.getPermanent(card.getId());
-            permanent.addCounters(CounterType.P1P1.createInstance(3), source, game);
-            game.addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance())
-                    .setTargetPointer(new FixedTarget(permanent, game)), source);
+            if (permanent != null) {
+                permanent.addCounters(CounterType.P1P1.createInstance(3), source, game);
+                game.addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.UntilYourNextTurn)
+                        .setTargetPointer(new FixedTarget(permanent, game)), source);
+            }
         }
         player.shuffleLibrary(source, game);
         return true;

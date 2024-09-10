@@ -25,7 +25,7 @@ public final class ZurgoHelmsmasher extends CardImpl {
 
     public ZurgoHelmsmasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC, SubType.WARRIOR);
 
         this.power = new MageInt(7);

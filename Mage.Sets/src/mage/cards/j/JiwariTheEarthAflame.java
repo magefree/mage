@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.ChannelAbility;
@@ -37,20 +37,20 @@ public final class JiwariTheEarthAflame extends CardImpl {
 
     public JiwariTheEarthAflame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // {X}{R}, {tap}: Jiwari, the Earth Aflame deals X damage to target creature without flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
         // Channel - {X}{R}{R}{R}, Discard Jiwari: Jiwari deals X damage to each creature without flying.
-        this.addAbility(new ChannelAbility("{X}{R}{R}{R}", new DamageAllEffect(ManacostVariableValue.REGULAR, filter)));
+        this.addAbility(new ChannelAbility("{X}{R}{R}{R}", new DamageAllEffect(GetXValue.instance, filter)));
     }
 
     private JiwariTheEarthAflame(final JiwariTheEarthAflame card) {

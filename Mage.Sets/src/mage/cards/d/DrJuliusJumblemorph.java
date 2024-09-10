@@ -27,14 +27,14 @@ public final class DrJuliusJumblemorph extends CardImpl {
 
     public DrJuliusJumblemorph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // Dr. Julius Jumblemorph is every creature type (even if this card isn't on the battlefield).
         this.addAbility(new ChangelingAbility(false));
 
-        // Whenever a host enters the battlefield under your control, you may search your library and/or graveyard for a card with augment and combine it with that host. If you search your library this way, shuffle it.
+        // Whenever a host you control enters, you may search your library and/or graveyard for a card with augment and combine it with that host. If you search your library this way, shuffle it.
         // TODO: Host currently isn't implemented, so this ability currently would never trigger
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new InfoEffect("you may search your library and/or graveyard for a card with augment " +

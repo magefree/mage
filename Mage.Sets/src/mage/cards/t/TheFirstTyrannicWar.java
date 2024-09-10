@@ -39,7 +39,7 @@ public final class TheFirstTyrannicWar extends CardImpl {
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
         SagaAbility sagaAbility = new SagaAbility(this);
 
-        // I -- You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters the battlefield with a number of +1/+1 counters on it equal to the number of lands you control.
+        // I -- You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters with a number of +1/+1 counters on it equal to the number of lands you control.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new TheFirstTyrannicWarFirstEffect());
 
         // II, III -- Double the number of each kind of counter on target creature you control.
@@ -65,7 +65,7 @@ class TheFirstTyrannicWarFirstEffect extends OneShotEffect {
     TheFirstTyrannicWarFirstEffect() {
         super(Outcome.Benefit);
         staticText = "you may put a creature card from your hand onto the battlefield. " +
-                "If its mana cost contains {X}, it enters the battlefield " +
+                "If its mana cost contains {X}, it enters " +
                 "with a number of +1/+1 counters on it equal to the number of lands you control";
     }
 
@@ -85,7 +85,7 @@ class TheFirstTyrannicWarFirstEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_CREATURE);
-        player.choose(outcome, player.getHand(), target, game);
+        player.choose(outcome, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;
@@ -104,7 +104,7 @@ class TheFirstTyrannicWarReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    TheFirstTyrannicWarReplacementEffect(TheFirstTyrannicWarReplacementEffect effect) {
+    private TheFirstTyrannicWarReplacementEffect(final TheFirstTyrannicWarReplacementEffect effect) {
         super(effect);
     }
 
@@ -116,11 +116,6 @@ class TheFirstTyrannicWarReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

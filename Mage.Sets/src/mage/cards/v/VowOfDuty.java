@@ -44,7 +44,7 @@ public final class VowOfDuty extends CardImpl {
         Effect effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText(", has vigilance");
         ability.addEffect(effect);
-        effect = new CantAttackControllerAttachedEffect(AttachmentType.AURA);
+        effect = new CantAttackControllerAttachedEffect(AttachmentType.AURA, true);
         effect.setText(", and can't attack you or planeswalkers you control");
         ability.addEffect(effect);
         this.addAbility(ability);          

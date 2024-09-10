@@ -20,10 +20,7 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -33,7 +30,7 @@ public final class ElspethResplendent extends CardImpl {
     public ElspethResplendent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELSPETH);
         this.setStartingLoyalty(5);
 
@@ -61,7 +58,7 @@ public final class ElspethResplendent extends CardImpl {
 
 class ElspethResplendentCounterEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("Flying");
@@ -135,7 +132,7 @@ class ElspethResplendentLookEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 7));
         TargetCard target = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);

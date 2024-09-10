@@ -57,4 +57,28 @@ public class XanatharGuildKingpinTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.END_TURN);
         execute();
     }
+
+    @Test
+    public void test_PlayLand() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        // At the beginning of your upkeep, choose target opponent.
+        // Until end of turn, that player can’t cast spells, you may look at the top card of their library any time,
+        // you may play the top card of their library, and you may spend mana as though it were mana of any color
+        // to cast spells this way.
+        addCard(Zone.BATTLEFIELD, playerA, "Xanathar, Guild Kingpin");
+        addCard(Zone.LIBRARY, playerB, "Taiga");
+
+        // activate on opponent
+        addTarget(playerA, playerB);
+
+        // play from B
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Taiga");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Taiga", 1);
+    }
 }

@@ -26,7 +26,7 @@ public final class JiangYangguWildcrafter extends CardImpl {
     public JiangYangguWildcrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.YANGGU);
         this.setStartingLoyalty(3);
 

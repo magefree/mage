@@ -42,7 +42,7 @@ class ExquisiteBloodTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public ExquisiteBloodTriggeredAbility(final ExquisiteBloodTriggeredAbility ability) {
+    private ExquisiteBloodTriggeredAbility(final ExquisiteBloodTriggeredAbility ability) {
         super(ability);
     }
 

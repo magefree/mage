@@ -41,7 +41,7 @@ public final class KnotvinePaladin extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, xValue, Duration.EndOfTurn, true, "it"
+                xValue, xValue, Duration.EndOfTurn, "it"
         ), false).addHint(hint));
     }
 

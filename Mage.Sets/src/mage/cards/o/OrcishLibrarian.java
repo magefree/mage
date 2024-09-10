@@ -53,12 +53,12 @@ public final class OrcishLibrarian extends CardImpl {
 
 class OrcishLibrarianEffect extends OneShotEffect {
 
-    public OrcishLibrarianEffect() {
+    OrcishLibrarianEffect() {
         super(Outcome.Neutral);
         this.staticText = "Look at the top eight cards of your library. Exile four of them at random, then put the rest on top of your library in any order";
     }
 
-    public OrcishLibrarianEffect(final OrcishLibrarianEffect effect) {
+    private OrcishLibrarianEffect(final OrcishLibrarianEffect effect) {
         super(effect);
     }
 

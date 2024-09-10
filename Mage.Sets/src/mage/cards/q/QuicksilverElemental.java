@@ -77,6 +77,7 @@ class QuicksilverElementalEffect extends OneShotEffect {
             for (ActivatedAbility ability : creature.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
                 Ability newAbility = ability.copy();
                 newAbility.newOriginalId();
+                newAbility.getSubAbilities().clear(); //Should not copy subabilities
                 game.addEffect(new GainAbilitySourceEffect(newAbility, Duration.EndOfTurn), source);
             }
             return true;

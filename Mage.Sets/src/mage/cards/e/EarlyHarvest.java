@@ -51,7 +51,7 @@ class UntapAllLandsTargetEffect extends OneShotEffect {
         staticText = "Target player untaps all basic lands they control";
     }
 
-    public UntapAllLandsTargetEffect(final UntapAllLandsTargetEffect effect) {
+    private UntapAllLandsTargetEffect(final UntapAllLandsTargetEffect effect) {
         super(effect);
     }
 

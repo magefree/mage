@@ -25,7 +25,7 @@ public final class JetmirNexusOfRevels extends CardImpl {
     public JetmirNexusOfRevels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(5);

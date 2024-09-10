@@ -5,7 +5,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author weirddan455
  */
 public class Construct2Token extends TokenImpl {
@@ -17,9 +16,6 @@ public class Construct2Token extends TokenImpl {
         subtype.add(SubType.CONSTRUCT);
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        this.setExpansionSetCodeForImage("BRO");
-        this.setTokenType(2);
     }
 
     private Construct2Token(final Construct2Token token) {

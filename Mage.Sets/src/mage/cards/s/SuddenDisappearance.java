@@ -1,22 +1,21 @@
 package mage.cards.s;
 
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
-import mage.cards.*;
+import mage.abilities.effects.common.ExileReturnBattlefieldNextEndStepTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTargets;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -45,38 +44,28 @@ public final class SuddenDisappearance extends CardImpl {
 
 class SuddenDisappearanceEffect extends OneShotEffect {
 
-    private static FilterNonlandPermanent filter = new FilterNonlandPermanent();
-
-    public SuddenDisappearanceEffect() {
+    SuddenDisappearanceEffect() {
         super(Outcome.Exile);
         staticText = "Exile all nonland permanents target player controls. Return the exiled cards to the battlefield under their owner's control at the beginning of the next end step";
     }
 
-    public SuddenDisappearanceEffect(final SuddenDisappearanceEffect effect) {
+    private SuddenDisappearanceEffect(final SuddenDisappearanceEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            Set<Card> permsSet = new HashSet<>(game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game));
-            if (!permsSet.isEmpty()) {
-                controller.moveCardsToExile(permsSet, source, game, true, source.getSourceId(), sourceObject.getIdName());
-                Cards targets = new CardsImpl();
-                for (Card card : permsSet) {
-                    targets.add(card.getId());
-                }
-                Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
-                effect.setText("Return the exiled cards to the battlefield under their owner's control");
-                effect.setTargetPointer(new FixedTargets(targets, game));
-                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
-            }
-            return true;
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player == null) {
+            return false;
         }
-
-        return false;
+        Cards targets = new CardsImpl(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENTS_NON_LAND, player.getId(), game));
+        if (targets.isEmpty()) {
+            return false;
+        }
+        Effect effect = new ExileReturnBattlefieldNextEndStepTargetEffect().returnExiledOnly(true);
+        effect.setTargetPointer(new FixedTargets(targets, game));
+        return effect.apply(game, source);
     }
 
     @Override

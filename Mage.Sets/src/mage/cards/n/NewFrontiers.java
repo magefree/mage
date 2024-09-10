@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -12,9 +13,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.cards.CardsImpl;
 
 /**
  *
@@ -41,12 +42,12 @@ public final class NewFrontiers extends CardImpl {
 
 class NewFrontiersEffect extends OneShotEffect {
 
-    public NewFrontiersEffect() {
+    NewFrontiersEffect() {
         super(Outcome.Detriment);
         this.staticText = "Each player may search their library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched their library this way shuffles";
     }
 
-    public NewFrontiersEffect(final NewFrontiersEffect effect) {
+    private NewFrontiersEffect(final NewFrontiersEffect effect) {
         super(effect);
     }
 
@@ -59,7 +60,7 @@ class NewFrontiersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int amount = source.getManaCostsToPay().getX();
+            int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && player.chooseUse(outcome, "Search your library for up to " + amount + " basic lands?", source, game)) {

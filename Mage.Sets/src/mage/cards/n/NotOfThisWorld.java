@@ -34,7 +34,7 @@ public final class NotOfThisWorld extends CardImpl {
     }
 
     public NotOfThisWorld(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{7}");
         this.subtype.add(SubType.ELDRAZI);
 
         // Counter target spell or ability that targets a permanent you control.
@@ -70,7 +70,7 @@ enum NotOfThisWorldCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject sourceSpell = game.getStack().getStackObject(source.getSourceId());
-        if (sourceSpell == null || !sourceSpell.getStackAbility().getTargets().isChosen()) {
+        if (sourceSpell == null || !sourceSpell.getStackAbility().getTargets().isChosen(game)) {
             return false;
         }
         StackObject objectToCounter = game.getStack().getStackObject(sourceSpell.getStackAbility().getTargets().getFirstTarget());

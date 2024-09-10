@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class ShuffleHandIntoLibraryDrawThatManySourceEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class ShuffleHandIntoLibraryDrawThatManySourceEffect extends OneShotEffec
         this.staticText = "shuffle the cards from your hand into your library, then draw that many cards";
     }
 
-    public ShuffleHandIntoLibraryDrawThatManySourceEffect(final ShuffleHandIntoLibraryDrawThatManySourceEffect effect) {
+    protected ShuffleHandIntoLibraryDrawThatManySourceEffect(final ShuffleHandIntoLibraryDrawThatManySourceEffect effect) {
         super(effect);
     }
 
@@ -36,7 +35,7 @@ public class ShuffleHandIntoLibraryDrawThatManySourceEffect extends OneShotEffec
             if (cardsHand > 0) {
                 controller.moveCards(controller.getHand(), Zone.LIBRARY, source, game);
                 controller.shuffleLibrary(source, game);
-                game.getState().processAction(game); // then
+                game.processAction(); // then
                 controller.drawCards(cardsHand, source, game);
             }
             return true;

@@ -31,7 +31,7 @@ public class OskarRubbishReclaimer extends CardImpl {
     public OskarRubbishReclaimer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.HUMAN, SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -36,7 +36,8 @@ public final class Dragonshift extends CardImpl {
                         .withSubType(SubType.DRAGON)
                         .withColor("UR")
                         .withAbility(FlyingAbility.getInstance()),
-                true, false, Duration.EndOfTurn);
+                true, false, Duration.EndOfTurn)
+                .withDurationRuleAtStart(true);
         effect.setText("Until end of turn, target creature you control becomes a blue and red Dragon with base power and toughness 4/4, loses all abilities, and gains flying.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

@@ -42,7 +42,7 @@ public final class RazeToTheGround extends CardImpl {
 
 class RazeToTheGroundEffect extends OneShotEffect {
 
-    public RazeToTheGroundEffect() {
+    RazeToTheGroundEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target artifact. If its mana value was 1 or less, draw a card.";
     }

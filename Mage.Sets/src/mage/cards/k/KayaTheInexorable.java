@@ -44,7 +44,7 @@ public final class KayaTheInexorable extends CardImpl {
     public KayaTheInexorable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAYA);
         this.setStartingLoyalty(5);
 
@@ -113,7 +113,7 @@ class KayaTheInexorableTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
             sourcePermanent = game.getPermanent(getSourceId());
         } else {
-            if (game.getShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
+            if (game.checkShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
                 sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
             }
         }

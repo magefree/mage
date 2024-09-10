@@ -28,7 +28,7 @@ public final class DeposeDeploy extends SplitCard {
         // Draw a card.
         this.getLeftHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getLeftHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
         // Deploy
         // Creature two 1/1 colorless Thopter artifact creature tokens with flying, then you gain 1 life for each creature you control.

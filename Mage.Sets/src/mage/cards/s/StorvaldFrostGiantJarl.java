@@ -29,7 +29,7 @@ public final class StorvaldFrostGiantJarl extends CardImpl {
     public StorvaldFrostGiantJarl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

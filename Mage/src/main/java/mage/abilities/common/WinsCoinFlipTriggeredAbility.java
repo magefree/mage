@@ -18,7 +18,7 @@ public class WinsCoinFlipTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player wins a coin flip, ");
     }
 
-    public WinsCoinFlipTriggeredAbility(final WinsCoinFlipTriggeredAbility ability) {
+    protected WinsCoinFlipTriggeredAbility(final WinsCoinFlipTriggeredAbility ability) {
         super(ability);
     }
 

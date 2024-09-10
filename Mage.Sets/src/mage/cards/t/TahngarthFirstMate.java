@@ -14,12 +14,14 @@ import mage.constants.*;
 import mage.filter.common.FilterPlayerOrPlaneswalker;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -30,7 +32,7 @@ public final class TahngarthFirstMate extends CardImpl {
     public TahngarthFirstMate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);
@@ -126,14 +128,14 @@ class TahngarthFirstMateEffect extends OneShotEffect {
             return false;
         }
         TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!controller.choose(outcome, target, source, game)) {
             return false;
         }
         ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfCombat, player.getId());
         effect.setTargetPointer(new FixedTarget(permanent, game));
         game.addEffect(effect, source);
-        game.getState().processAction(game);
+        game.processAction();
         return game.getCombat().addAttackerToCombat(permanent.getId(), target.getFirstTarget(), game);
     }
 }
@@ -143,7 +145,12 @@ enum TahngarthFirstMatePlayerPredicate implements Predicate<Player> {
 
     @Override
     public boolean apply(Player input, Game game) {
-        return game.getCombat().getDefenders().contains(input.getId());
+        return game.getCombat()
+                .getGroups()
+                .stream()
+                .map(CombatGroup::getDefenderId)
+                .filter(Objects::nonNull)
+                .anyMatch(id -> id.equals(input.getId()));
     }
 }
 
@@ -152,6 +159,11 @@ enum TahngarthFirstMatePermanentPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return game.getCombat().getDefenders().contains(input.getId());
+        return game.getCombat()
+                .getGroups()
+                .stream()
+                .map(CombatGroup::getDefenderId)
+                .filter(Objects::nonNull)
+                .anyMatch(id -> id.equals(input.getId()));
     }
 }

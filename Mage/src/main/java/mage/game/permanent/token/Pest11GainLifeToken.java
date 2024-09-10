@@ -6,8 +6,6 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -22,9 +20,7 @@ public final class Pest11GainLifeToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(1)));
-
-        availableImageSetCodes = Arrays.asList("STX");
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(1)).setTriggerPhrase("When this creature dies, "));
     }
 
     private Pest11GainLifeToken(final Pest11GainLifeToken token) {

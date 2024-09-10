@@ -20,6 +20,7 @@ import mage.game.permanent.token.FractalToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,17 +30,19 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
+public final class KianneDeanOfSubstance extends ModalDoubleFacedCard {
 
     public KianneDeanOfSubstance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELF, SubType.DRUID}, "{2}{G}",
-                "Imbraham, Dean of Theory", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD, SubType.WIZARD}, "{2}{U}{U}");
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELF, SubType.DRUID}, "{2}{G}",
+                "Imbraham, Dean of Theory",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD, SubType.WIZARD}, "{2}{U}{U}"
+        );
 
         // 1.
         // Kianne, Dean of Substance
         // Legendary Creature - Elf Druid
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(2, 2);
 
         // {T}: Exile the top card of your library. If it's a land card, put it into your hand. Otherwise, put a study counter on it.
@@ -56,7 +59,6 @@ public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
         // 2.
         // Imbraham, Dean of Theory
         // Legendary Creature - Bird Wizard
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setPT(3, 3);
 
         // Flying
@@ -202,7 +204,7 @@ class ImbrahamDeanOfTheoryEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards.getCards(game)) {
             if (card == null) {
@@ -210,8 +212,8 @@ class ImbrahamDeanOfTheoryEffect extends OneShotEffect {
             }
             card.addCounters(CounterType.STUDY.createInstance(), source.getControllerId(), source, game);
         }
-        TargetCard targetCard = new TargetCardInExile(0, 1, filter, null);
-        targetCard.setNotTarget(true);
+        TargetCard targetCard = new TargetCardInExile(0, 1, filter);
+        targetCard.withNotTarget(true);
         player.choose(outcome, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card != null) {

@@ -23,7 +23,7 @@ public final class PlatedSeastrider extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public PlatedSeastrider (final PlatedSeastrider card) {
+    private PlatedSeastrider(final PlatedSeastrider card) {
         super(card);
     }
 

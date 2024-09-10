@@ -18,8 +18,8 @@ public enum AfterBlockersAreDeclaredCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        return !(game.getStep().getType() == PhaseStep.BEGIN_COMBAT
-                || game.getStep().getType() == PhaseStep.DECLARE_ATTACKERS);
+        return !(game.getTurnStepType() == PhaseStep.BEGIN_COMBAT
+                || game.getTurnStepType() == PhaseStep.DECLARE_ATTACKERS);
     }
 
     @Override

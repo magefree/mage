@@ -44,7 +44,7 @@ public final class AnvilOfBogardan extends CardImpl {
 
 class AnvilOfBogardanEffect extends OneShotEffect {
     
-    public AnvilOfBogardanEffect(final AnvilOfBogardanEffect effect) {
+    private AnvilOfBogardanEffect(final AnvilOfBogardanEffect effect) {
         super(effect);
     }
     
@@ -55,7 +55,7 @@ class AnvilOfBogardanEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             targetPlayer.drawCards(1, source, game);
             targetPlayer.discard(1, false, false, source, game);

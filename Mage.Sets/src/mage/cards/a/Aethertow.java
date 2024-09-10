@@ -51,13 +51,13 @@ class AethertowEffect extends OneShotEffect {
         staticText = "Put target attacking or blocking creature on top of its owner's library";
     }
 
-    AethertowEffect(final AethertowEffect effect) {
+    private AethertowEffect(final AethertowEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (targetCreature != null) {
             return controller.putCardsOnTopOfLibrary(targetCreature, game, source, true);

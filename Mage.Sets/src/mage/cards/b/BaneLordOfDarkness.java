@@ -45,7 +45,7 @@ public final class BaneLordOfDarkness extends CardImpl {
     public BaneLordOfDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);
@@ -81,7 +81,6 @@ enum BaneLordOfDarknessCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return Optional
                 .ofNullable(game.getPlayer(source.getControllerId()))
-                .filter(Objects::nonNull)
                 .map(Player::getLife)
                 .map(x -> 2 * x <= game.getStartingLife())
                 .orElse(false);

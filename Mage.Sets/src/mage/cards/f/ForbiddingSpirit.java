@@ -28,11 +28,10 @@ public final class ForbiddingSpirit extends CardImpl {
 
         // When Forbidding Spirit enters the battlefield, until your next turn, creatures can't attack you or a planeswalker you control unless their controller pays {2} for each of those creatures.
         ContinuousEffect effect = new CantAttackYouUnlessPayAllEffect(
-                new ManaCostsImpl<>("{2}"), true
+            Duration.UntilYourNextTurn,
+            new ManaCostsImpl<>("{2}"),
+            CantAttackYouUnlessPayAllEffect.Scope.YOU_AND_CONTROLLED_PLANESWALKERS
         );
-        effect.setDuration(Duration.UntilYourNextTurn);
-        effect.setText("until your next turn, creatures can't attack you or planeswalkers you control " +
-                "unless their controller pays {2} for each of those creatures.");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 

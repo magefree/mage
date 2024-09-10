@@ -46,12 +46,12 @@ public final class FormOfTheDinosaur extends CardImpl {
 
 class FormOfTheDinosaurEffect extends OneShotEffect {
 
-    public FormOfTheDinosaurEffect() {
+    FormOfTheDinosaurEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 15 damage to target creature an opponent controls and that creature deals damage equal to its power to you";
     }
 
-    public FormOfTheDinosaurEffect(final FormOfTheDinosaurEffect effect) {
+    private FormOfTheDinosaurEffect(final FormOfTheDinosaurEffect effect) {
         super(effect);
     }
 

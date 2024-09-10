@@ -38,7 +38,7 @@ public final class BattlegraceAngel extends CardImpl {
         ).setText("it gains lifelink until end of turn"), true, false));
     }
 
-    public BattlegraceAngel(final BattlegraceAngel card) {
+    private BattlegraceAngel(final BattlegraceAngel card) {
         super(card);
     }
 

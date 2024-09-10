@@ -39,7 +39,7 @@ public final class GrakmawSkyclaveRavager extends CardImpl {
     public GrakmawSkyclaveRavager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HYDRA);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(0);

@@ -24,7 +24,7 @@ public final class JazalGoldmane extends CardImpl {
 
     public JazalGoldmane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.WARRIOR);
 
@@ -36,7 +36,7 @@ public final class JazalGoldmane extends CardImpl {
         // {3}{W}{W}: Attacking creatures you control get +X/+X until end of turn, where X is the number of attacking creatures.
         DynamicValue xValue = new AttackingCreatureCount("the number of attacking creatures");
         this.addAbility(new SimpleActivatedAbility(
-                new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false, true),
+                new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false),
                 new ManaCostsImpl<>("{3}{W}{W}")));
     }
 

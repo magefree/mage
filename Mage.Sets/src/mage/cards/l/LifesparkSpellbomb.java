@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -18,17 +17,22 @@ import mage.constants.Zone;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class LifesparkSpellbomb extends CardImpl {
 
     public LifesparkSpellbomb(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {G}, Sacrifice Lifespark Spellbomb: Until end of turn, target land becomes a 3/3 creature that's still a land.
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new CreatureToken(3, 3), false, true, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G));
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new BecomesCreatureTargetEffect(
+                        new CreatureToken(3, 3),
+                        false, true, Duration.EndOfTurn)
+                        .withDurationRuleAtStart(true), new ColoredManaCost(ColoredManaSymbol.G));
         firstAbility.addCost(new SacrificeSourceCost());
         firstAbility.addTarget(new TargetLandPermanent());
         this.addAbility(firstAbility);

@@ -9,7 +9,8 @@ import mage.abilities.condition.common.HaveInitiativeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessEffect;
+import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessControlledEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,23 +32,21 @@ public final class RasaadYnBashir extends CardImpl {
     public RasaadYnBashir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
         // Each creature you control assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE, true
-        )));
+        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessControlledEffect()));
 
         // Whenever Rasaad yn Bashir attacks, if you have the initiative, double the toughness of each creature you control until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new RasaadYnBashirEffect()),
                 HaveInitiativeCondition.instance, "Whenever {this} attacks, if you have the initiative, " +
                 "double the toughness of each creature you control until end of turn."
-        ));
+        ).addHint(InitiativeHint.instance));
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());

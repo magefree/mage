@@ -56,7 +56,7 @@ public final class CemeteryProwler extends CardImpl {
 
 class CemeteryProwlerExileEffect extends OneShotEffect {
 
-    public CemeteryProwlerExileEffect() {
+    CemeteryProwlerExileEffect() {
         super(Outcome.Exile);
         staticText = "exile a card from a graveyard";
     }
@@ -75,7 +75,7 @@ class CemeteryProwlerExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetCardInGraveyard target = new TargetCardInGraveyard();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             controller.choose(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
@@ -91,7 +91,7 @@ class CemeteryProwlerExileEffect extends OneShotEffect {
 
 class CemeteryProwlerCostReductionEffect extends CostModificationEffectImpl {
 
-    public CemeteryProwlerCostReductionEffect() {
+    CemeteryProwlerCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Spells you cast cost {1} less to cast for each card type they share with cards exiled with {this}";
     }

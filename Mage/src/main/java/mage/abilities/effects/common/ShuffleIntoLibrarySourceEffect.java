@@ -13,18 +13,17 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author emerald000
  */
 
 public class ShuffleIntoLibrarySourceEffect extends OneShotEffect {
-    
+
     public ShuffleIntoLibrarySourceEffect() {
         super(Outcome.Neutral);
         staticText = "shuffle it into its owner's library";
     }
 
-    public ShuffleIntoLibrarySourceEffect(final ShuffleIntoLibrarySourceEffect effect) {
+    protected ShuffleIntoLibrarySourceEffect(final ShuffleIntoLibrarySourceEffect effect) {
         super(effect);
     }
 
@@ -44,13 +43,13 @@ public class ShuffleIntoLibrarySourceEffect extends OneShotEffect {
             } else if (mageObject instanceof Card) {
                 owner = game.getPlayer(((Card) mageObject).getOwnerId());
                 if (owner != null) {
-                    owner.moveCardToLibraryWithInfo((Card)mageObject, source, game, fromZone, true, true);
+                    owner.moveCardToLibraryWithInfo((Card) mageObject, source, game, fromZone, true, true);
                     owner.shuffleLibrary(source, game);
                     return true;
                 }
             }
 
-            
+
         }
         return false;
     }

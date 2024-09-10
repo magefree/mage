@@ -30,7 +30,7 @@ public final class LoreBroker extends CardImpl {
 
         // {tap}: Each player draws a card, then discards a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardAllEffect(1), new TapSourceCost());
-        ability.addEffect(new DiscardEachPlayerEffect());
+        ability.addEffect(new DiscardEachPlayerEffect().setText(", then discards a card"));
         this.addAbility(ability);
     }
 

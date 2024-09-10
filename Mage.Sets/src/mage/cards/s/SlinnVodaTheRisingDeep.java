@@ -38,7 +38,7 @@ public final class SlinnVodaTheRisingDeep extends CardImpl {
     public SlinnVodaTheRisingDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LEVIATHAN);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -50,7 +50,7 @@ public final class SlinnVodaTheRisingDeep extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)),
                 KickedCondition.ONCE,
-                "when {this} enters the battlefield, if it was kicked, "
+                "when {this} enters, if it was kicked, "
                 + "return all creatures to their owners' hands except for "
                 + "Merfolk, Krakens, Leviathans, Octopuses, and Serpents."
         ));

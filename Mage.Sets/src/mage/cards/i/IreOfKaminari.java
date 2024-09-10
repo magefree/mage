@@ -29,7 +29,8 @@ public final class IreOfKaminari extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         // Ire of Kaminari deals damage to any target equal to the number of Arcane cards in your graveyard.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter))
+                .setText("{this} deals damage to any target equal to the number of Arcane cards in your graveyard"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 

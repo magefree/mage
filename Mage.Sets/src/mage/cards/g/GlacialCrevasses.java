@@ -32,7 +32,7 @@ public final class GlacialCrevasses extends CardImpl {
         // Sacrifice a snow Mountain: Prevent all combat damage that would be dealt this turn.
         Effect effect = new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

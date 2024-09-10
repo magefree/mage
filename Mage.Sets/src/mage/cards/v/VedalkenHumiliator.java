@@ -35,8 +35,7 @@ public final class VedalkenHumiliator extends CardImpl {
         TriggeredAbility ability = new AttacksTriggeredAbility(
                 new SetBasePowerToughnessAllEffect(
                         1, 1, Duration.EndOfTurn,
-                        StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE,
-                        true
+                        StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
                 ), false
         );
         ability.addEffect(new LoseAllAbilitiesAllEffect(

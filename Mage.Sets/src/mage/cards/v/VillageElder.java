@@ -39,7 +39,7 @@ public final class VillageElder extends CardImpl {
         // {G}, {tap}, Sacrifice a Forest: Regenerate target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

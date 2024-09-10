@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import mage.MageIdentifier;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +18,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
@@ -31,7 +33,8 @@ public final class MaestrosAscendancy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
         // Once during each of your turns, you may cast an instant or sorcery spell from your graveyard by sacrificing a creature in addition to paying its other costs. If a spell cast this way would be put into your graveyard, exile it instead.
-        Ability ability = new SimpleStaticAbility(new MaestrosAscendancyCastEffect());
+        Ability ability = new SimpleStaticAbility(new MaestrosAscendancyCastEffect())
+                .setIdentifier(MageIdentifier.MaestrosAscendencyAlternateCast);
         ability.addEffect(new MaestrosAscendancyExileEffect());
         this.addAbility(ability, new MaestrosAscendancyWatcher());
     }
@@ -49,7 +52,7 @@ public final class MaestrosAscendancy extends CardImpl {
 class MaestrosAscendancyCastEffect extends AsThoughEffectImpl {
 
     MaestrosAscendancyCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.AIDontUseIt);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.AIDontUseIt);
         staticText = "once during each of your turns, you may cast an instant or sorcery spell " +
                 "from your graveyard by sacrificing a creature in addition to paying its other costs.";
     }
@@ -81,13 +84,16 @@ class MaestrosAscendancyCastEffect extends AsThoughEffectImpl {
                 || !card.isOwnedBy(affectedControllerId)
                 || !card.isInstantOrSorcery(game)
                 || !game.getState().getZone(objectId).match(Zone.GRAVEYARD)
-                || !MaestrosAscendancyWatcher.checkPlayer(source, game)) {
+                || MaestrosAscendancyWatcher.checkPlayer(source, game)) {
             return false;
         }
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.addAll(card.getSpellAbility().getCosts());
-        newCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
-        player.setCastSourceIdWithAlternateMana(card.getId(), card.getManaCost(), newCosts);
+        newCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
+        player.setCastSourceIdWithAlternateMana(
+                card.getId(), card.getManaCost(), newCosts,
+                MageIdentifier.MaestrosAscendencyAlternateCast
+        );
         return true;
     }
 }
@@ -110,10 +116,8 @@ class MaestrosAscendancyExileEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(event.getTargetId());
-        return controller != null && card != null
-                && controller.moveCards(card, Zone.EXILED, source, game);
+        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
+        return false;
     }
 
     @Override
@@ -124,8 +128,10 @@ class MaestrosAscendancyExileEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Spell spell = game.getSpellOrLKIStack(zEvent.getTargetId());
         return zEvent.getToZone() == Zone.GRAVEYARD
-                && MaestrosAscendancyWatcher.checkSpell(zEvent.getTargetId(), source, game);
+                && spell != null
+                && MaestrosAscendancyWatcher.checkSpell(spell, source, game);
     }
 }
 
@@ -141,6 +147,7 @@ class MaestrosAscendancyWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST
+                && event.hasApprovingIdentifier(MageIdentifier.MaestrosAscendencyAlternateCast)
                 && event.getAdditionalReference() != null) {
             playerMap.computeIfAbsent(
                     event.getAdditionalReference()
@@ -167,16 +174,16 @@ class MaestrosAscendancyWatcher extends Watcher {
                 .getState()
                 .getWatcher(MaestrosAscendancyWatcher.class)
                 .playerMap
-                .getOrDefault(new MageObjectReference(source), Collections.emptySet())
+                .getOrDefault(new MageObjectReference(source.getSourcePermanentIfItStillExists(game), game), Collections.emptySet())
                 .contains(source.getControllerId());
     }
 
-    static boolean checkSpell(UUID id, Ability source, Game game) {
+    static boolean checkSpell(Spell spell, Ability source, Game game) {
         return game
                 .getState()
                 .getWatcher(MaestrosAscendancyWatcher.class)
                 .spellMap
-                .getOrDefault(new MageObjectReference(source), Collections.emptySet())
-                .contains(new MageObjectReference(id, game));
+                .getOrDefault(new MageObjectReference(source.getSourcePermanentOrLKI(game), game), Collections.emptySet())
+                .contains(new MageObjectReference(spell, game));
     }
 }

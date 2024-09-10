@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -18,14 +17,13 @@ import mage.game.command.Emblem;
 import mage.target.common.TargetAnyTarget;
 
 /**
- *
  * @author spjspj
  */
 public final class ArlinnEmbracedByTheMoonEmblem extends Emblem {
     // "Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'"
 
     public ArlinnEmbracedByTheMoonEmblem() {
-        this.setName("Emblem Arlinn");
+        super("Emblem Arlinn");
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures");
         GainAbilityControlledEffect effect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfGame, filter);
         effect.setText("Creatures you control have haste");
@@ -38,7 +36,14 @@ public final class ArlinnEmbracedByTheMoonEmblem extends Emblem {
         effect.setText("and '{T}: This creature deals damage equal to its power to any target");
         ability.addEffect(effect);
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("SOI");
+    private ArlinnEmbracedByTheMoonEmblem(final ArlinnEmbracedByTheMoonEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public ArlinnEmbracedByTheMoonEmblem copy() {
+        return new ArlinnEmbracedByTheMoonEmblem(this);
     }
 }

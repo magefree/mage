@@ -22,7 +22,7 @@ public final class MaChaoWesternWarrior extends CardImpl {
 
     public MaChaoWesternWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.subtype.add(SubType.WARRIOR);

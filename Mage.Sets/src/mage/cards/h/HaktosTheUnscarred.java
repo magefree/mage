@@ -36,7 +36,7 @@ public final class HaktosTheUnscarred extends CardImpl {
     public HaktosTheUnscarred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(6);
@@ -95,7 +95,7 @@ class HaktosTheUnscarredChooseEffect extends OneShotEffect {
         }
         int number = 2 + RandomUtil.nextInt(3);
         game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + number + " at random");
-        game.getState().setValue(permanent.getId() + "" + (permanent.getZoneChangeCounter(game) + 1) + "_haktos_number", number);
+        game.getState().setValue(permanent.getId() + "" + source.getSourceObjectZoneChangeCounter() + "_haktos_number", number);
         permanent.addInfo("chosen number", CardUtil.addToolTipMarkTags("Chosen number: " + number), game);
         return true;
     }

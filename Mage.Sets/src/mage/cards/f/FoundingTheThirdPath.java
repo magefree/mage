@@ -1,12 +1,9 @@
 package mage.cards.f;
 
-import mage.ApprovingObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.cost.CastFromHandForFreeEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -14,8 +11,6 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -54,7 +49,8 @@ public final class FoundingTheThirdPath extends CardImpl {
         // III -- Exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
-                new FoundingTheThirdPathEffect(),
+                new ExileTargetCardCopyAndCastEffect(false).setText(
+                        "exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy"),
                 new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD)
         );
         this.addAbility(sagaAbility);
@@ -67,43 +63,5 @@ public final class FoundingTheThirdPath extends CardImpl {
     @Override
     public FoundingTheThirdPath copy() {
         return new FoundingTheThirdPath(this);
-    }
-}
-
-class FoundingTheThirdPathEffect extends OneShotEffect {
-
-    FoundingTheThirdPathEffect() {
-        super(Outcome.Benefit);
-        staticText = "exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy";
-    }
-
-    private FoundingTheThirdPathEffect(final FoundingTheThirdPathEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FoundingTheThirdPathEffect copy() {
-        return new FoundingTheThirdPathEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (controller == null || card == null) {
-            return false;
-        }
-        controller.moveCards(card, Zone.EXILED, source, game);
-        if (!controller.chooseUse(outcome, "Cast copy of " + card.getName() + '?', source, game)) {
-            return true;
-        }
-        Card copiedCard = game.copyCard(card, source, controller.getId());
-        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
-        controller.cast(
-                controller.chooseAbilityForCast(copiedCard, game, false),
-                game, false, new ApprovingObject(source, game)
-        );
-        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
-        return true;
     }
 }

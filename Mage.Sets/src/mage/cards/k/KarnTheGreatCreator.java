@@ -35,7 +35,7 @@ public final class KarnTheGreatCreator extends CardImpl {
     public KarnTheGreatCreator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KARN);
         this.setStartingLoyalty(5);
 

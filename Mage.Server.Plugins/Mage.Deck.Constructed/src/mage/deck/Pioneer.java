@@ -23,22 +23,23 @@ public class Pioneer extends Constructed {
             }
         }
 
-        banned.add("Bloodstained Mire");
-        banned.add("Flooded Strand");
-        banned.add("Polluted Delta");
-        banned.add("Windswept Heath");
-        banned.add("Wooded Foothills");
+        banned.add("Amalia Benavides Aguirre");
         banned.add("Balustrade Spy");
+        banned.add("Bloodstained Mire");
         banned.add("Felidar Guardian");
         banned.add("Field of the Dead");
+        banned.add("Flooded Strand");
+        banned.add("Geological Appraiser");
         banned.add("Inverter of Truth");
+        banned.add("Karn, the Great Creator");
         banned.add("Kethis, the Hidden Hand");
         banned.add("Leyline of Abundance");
         banned.add("Lurrus of the Dream-Den");
         banned.add("Nexus of Fate");
         banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
-        banned.add("Smuggler's Copter");
+        banned.add("Polluted Delta");
+        banned.add("Sorin, Imperious Bloodlord");
         banned.add("Teferi, Time Raveler");
         banned.add("Undercity Informer");
         banned.add("Underworld Breach");
@@ -46,5 +47,7 @@ public class Pioneer extends Constructed {
         banned.add("Veil of Summer");
         banned.add("Walking Ballista");
         banned.add("Wilderness Reclamation");
+        banned.add("Windswept Heath");
+        banned.add("Wooded Foothills");
     }
 }

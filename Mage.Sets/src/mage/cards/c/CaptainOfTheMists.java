@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 
@@ -27,7 +27,7 @@ import mage.target.TargetPermanent;
  */
 public final class CaptainOfTheMists extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
+    private static final FilterPermanent filter = new FilterControlledPermanent("another Human");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -42,7 +42,7 @@ public final class CaptainOfTheMists extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever another Human enters the battlefield under your control, untap Captain of the Mists.
+        // Whenever another Human you control enters, untap Captain of the Mists.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new UntapSourceEffect(), filter));
 
         // {1}{U}, {tap}: You may tap or untap target permanent.

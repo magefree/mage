@@ -68,8 +68,6 @@ class MnemonicDelugeEffect extends OneShotEffect {
         Cards cards = new CardsImpl();
         for (int i = 0; i < 3; i++) {
             Card copiedCard = game.copyCard(card, source, source.getControllerId());
-            game.getExile().add(source.getSourceId(), "", copiedCard);
-            game.getState().setZone(copiedCard.getId(), Zone.EXILED);
             cards.add(copiedCard);
         }
         for (Card copiedCard : cards.getCards(game)) {

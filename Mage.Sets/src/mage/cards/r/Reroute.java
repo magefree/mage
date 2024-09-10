@@ -31,7 +31,7 @@ public final class Reroute extends CardImpl {
         this.getSpellAbility().addTarget(new TargetActivatedAbility(filter));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Reroute(final Reroute card) {

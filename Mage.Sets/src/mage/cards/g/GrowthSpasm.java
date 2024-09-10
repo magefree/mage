@@ -24,7 +24,7 @@ public final class GrowthSpasm extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
 
         // Create a 0/1 colorless Eldrazi Spawn creature token. It has “Sacrifice this creature: Add {C}.”
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken()).withTextOptions(true));
     }
 
     private GrowthSpasm(final GrowthSpasm card) {

@@ -1,4 +1,3 @@
-
 package mage.cards.q;
 
 import java.util.UUID;
@@ -31,7 +30,8 @@ public final class Quagnoth extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
 
         // When a spell or ability an opponent controls causes you to discard Quagnoth, return it to your hand.
-        this.addAbility(new DiscardedByOpponentTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new DiscardedByOpponentTriggeredAbility(new ReturnToHandSourceEffect()
+                .setText("return it to your hand"), true));
     }
 
     private Quagnoth(final Quagnoth card) {

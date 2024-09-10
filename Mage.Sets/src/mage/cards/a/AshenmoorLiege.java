@@ -1,25 +1,19 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +29,6 @@ public final class AshenmoorLiege extends CardImpl {
         filterRedCreature.add(new ColorPredicate(ObjectColor.RED));
     }
 
-
     public AshenmoorLiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/R}{B/R}{B/R}");
         this.subtype.add(SubType.ELEMENTAL);
@@ -50,10 +43,8 @@ public final class AshenmoorLiege extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterRedCreature, true)));
 
         // Whenever Ashenmoor Liege becomes the target of a spell or ability an opponent controls, that player loses 4 life.
-        this.addAbility(new AshenmoorLiegeTriggeredAbility());
-
-
-
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new LoseLifeTargetEffect(4),
+                StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.PLAYER, false));
     }
 
     private AshenmoorLiege(final AshenmoorLiege card) {
@@ -64,40 +55,4 @@ public final class AshenmoorLiege extends CardImpl {
     public AshenmoorLiege copy() {
         return new AshenmoorLiege(this);
     }
-}
-
-class AshenmoorLiegeTriggeredAbility extends TriggeredAbilityImpl {
-
-    public AshenmoorLiegeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(4), false);
-    }
-
-    public AshenmoorLiegeTriggeredAbility(final AshenmoorLiegeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public AshenmoorLiegeTriggeredAbility copy() {
-        return new AshenmoorLiegeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TARGETED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getSourceId()) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} becomes the target of a spell or ability an opponent controls, that player loses 4 life.";
-    }
-
 }

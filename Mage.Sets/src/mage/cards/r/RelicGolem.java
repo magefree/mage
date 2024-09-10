@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockUnlessConditionSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class RelicGolem extends CardImpl {
         ).addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
 
         // {2}, {T}: Target player mills two cards.
-        Ability ability = new SimpleActivatedAbility(new PutLibraryIntoGraveTargetEffect(2), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

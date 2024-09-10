@@ -50,7 +50,7 @@ public final class MinscBooTimelessHeroes extends CardImpl {
     public MinscBooTimelessHeroes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINSC);
         this.setStartingLoyalty(3);
 
@@ -60,7 +60,7 @@ public final class MinscBooTimelessHeroes extends CardImpl {
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new BooToken()),
                 true,
-                "When {this} enters the battlefield and at the beginning of your upkeep, ",
+                "When {this} enters and at the beginning of your upkeep, ",
                 new EntersBattlefieldTriggeredAbility(null, false),
                 new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false))
         );
@@ -121,7 +121,7 @@ class MinscBooTimelessHeroesEffect extends OneShotEffect {
         }
 
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
 
         Permanent permanent = game.getPermanent(target.getFirstTarget());

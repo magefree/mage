@@ -46,12 +46,12 @@ public final class HeatStroke extends CardImpl {
 
 class HeatStrokeEffect extends OneShotEffect {
 
-    public HeatStrokeEffect() {
+    HeatStrokeEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy each creature that blocked or was blocked this turn";
     }
 
-    public HeatStrokeEffect(HeatStrokeEffect effect) {
+    private HeatStrokeEffect(final HeatStrokeEffect effect) {
         super(effect);
     }
 

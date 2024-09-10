@@ -24,7 +24,7 @@ public final class GutTrueSoulZealot extends CardImpl {
     public GutTrueSoulZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
@@ -34,7 +34,7 @@ public final class GutTrueSoulZealot extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenEffect(
                         new SkeletonMenaceToken(), 1, true, true
-                ).withAdditionalRules("<i>(It can't be blocked except by two or more creatures.)</i>"),
+                ).withAdditionalRules(". <i>(It can't be blocked except by two or more creatures.)</i>"),
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_OTHER_CREATURE)
         ), 1));
 

@@ -51,12 +51,12 @@ public final class AetherVial extends CardImpl {
 
 class AetherVialEffect extends OneShotEffect {
 
-    public AetherVialEffect() {
+    AetherVialEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "You may put a creature card with mana value equal to the number of charge counters on {this} from your hand onto the battlefield";
     }
 
-    public AetherVialEffect(final AetherVialEffect effect) {
+    private AetherVialEffect(final AetherVialEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class AetherVialEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (permanent == null) {

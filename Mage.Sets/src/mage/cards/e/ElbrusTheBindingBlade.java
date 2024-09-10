@@ -28,7 +28,7 @@ public final class ElbrusTheBindingBlade extends CardImpl {
 
     public ElbrusTheBindingBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         this.secondSideCardClazz = mage.cards.w.WithengarUnbound.class;
@@ -37,7 +37,7 @@ public final class ElbrusTheBindingBlade extends CardImpl {
         // Equipped creature gets +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
         // When equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.
-        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new ElbrusTheBindingBladeEffect(), "equipped", true));
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new ElbrusTheBindingBladeEffect(), "equipped", false));
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
     }
@@ -53,12 +53,12 @@ public final class ElbrusTheBindingBlade extends CardImpl {
 }
 
 class ElbrusTheBindingBladeEffect extends OneShotEffect {
-    public ElbrusTheBindingBladeEffect() {
+    ElbrusTheBindingBladeEffect() {
         super(Outcome.BecomeCreature);
         staticText = "unattach {this}, then transform it";
     }
 
-    public ElbrusTheBindingBladeEffect(final ElbrusTheBindingBladeEffect effect) {
+    private ElbrusTheBindingBladeEffect(final ElbrusTheBindingBladeEffect effect) {
         super(effect);
     }
 

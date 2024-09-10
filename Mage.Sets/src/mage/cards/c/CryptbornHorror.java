@@ -55,7 +55,7 @@ class CryptbornHorrorEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
     }
 
-    CryptbornHorrorEffect(final CryptbornHorrorEffect effect) {
+    private CryptbornHorrorEffect(final CryptbornHorrorEffect effect) {
         super(effect);
     }
 

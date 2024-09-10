@@ -52,7 +52,7 @@ public final class JunglePatrol extends CardImpl {
         // Sacrifice a token named Wood: Add {R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)),
-                new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
+                new SacrificeTargetCost(filter)));
     }
 
     private JunglePatrol(final JunglePatrol card) {

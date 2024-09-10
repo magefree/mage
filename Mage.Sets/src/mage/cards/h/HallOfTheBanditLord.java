@@ -33,7 +33,7 @@ public final class HallOfTheBanditLord extends CardImpl {
 
     public HallOfTheBanditLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Hall of the Bandit Lord enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -45,7 +45,7 @@ public final class HallOfTheBanditLord extends CardImpl {
         effect.setText("Add {C}. If that mana is spent on a creature spell, it gains haste");
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addCost(new PayLifeCost(3));
-        this.addAbility(ability, new HallOfTheBanditLordWatcher(ability));
+        this.addAbility(ability, new HallOfTheBanditLordWatcher());
     }
 
     private HallOfTheBanditLord(final HallOfTheBanditLord card) {
@@ -60,12 +60,10 @@ public final class HallOfTheBanditLord extends CardImpl {
 
 class HallOfTheBanditLordWatcher extends Watcher {
 
-    private final Ability source;
     private final List<UUID> creatures = new ArrayList<>();
 
-    HallOfTheBanditLordWatcher(Ability source) {
+    HallOfTheBanditLordWatcher() {
         super(WatcherScope.CARD);
-        this.source = source;
     }
 
     @Override
@@ -99,6 +97,7 @@ class HallOfTheBanditLordWatcher extends Watcher {
             if (creatures.contains(event.getSourceId())) {
                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                 effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
+                Ability source = game.getPermanent(event.getSourceId()).getSpellAbility();
                 game.addEffect(effect, source);
                 creatures.remove(event.getSourceId());
             }

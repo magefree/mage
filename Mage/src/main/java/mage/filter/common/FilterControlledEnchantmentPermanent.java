@@ -4,7 +4,6 @@ package mage.filter.common;
 import mage.constants.CardType;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -15,7 +14,6 @@ public class FilterControlledEnchantmentPermanent extends FilterControlledPerman
     }
 
     /**
-     *
      * @param name
      */
     public FilterControlledEnchantmentPermanent(String name) {
@@ -23,7 +21,7 @@ public class FilterControlledEnchantmentPermanent extends FilterControlledPerman
         this.add(CardType.ENCHANTMENT.getPredicate());
     }
 
-    public FilterControlledEnchantmentPermanent(final FilterControlledEnchantmentPermanent filter) {
+    protected FilterControlledEnchantmentPermanent(final FilterControlledEnchantmentPermanent filter) {
         super(filter);
     }
 

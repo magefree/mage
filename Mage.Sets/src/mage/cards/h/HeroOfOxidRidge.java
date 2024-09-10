@@ -47,12 +47,12 @@ public final class HeroOfOxidRidge extends CardImpl {
 
 class HeroOfOxidRidgeEffect extends RestrictionEffect {
 
-    public HeroOfOxidRidgeEffect() {
+    HeroOfOxidRidgeEffect() {
         super(Duration.EndOfTurn);
         staticText = "creatures with power 1 or less can't block this turn";
     }
 
-    public HeroOfOxidRidgeEffect(final HeroOfOxidRidgeEffect effect) {
+    private HeroOfOxidRidgeEffect(final HeroOfOxidRidgeEffect effect) {
         super(effect);
     }
 

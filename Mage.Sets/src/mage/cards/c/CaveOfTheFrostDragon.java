@@ -37,7 +37,7 @@ public final class CaveOfTheFrostDragon extends CardImpl {
 
         // If you control two or more other lands, Cave of the Frost Dragon enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldAbility(
-                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters the battlefield tapped.", null
+                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters tapped.", null
         ));
 
         // {T}: Add {W}.
@@ -49,7 +49,7 @@ public final class CaveOfTheFrostDragon extends CardImpl {
                         .withColor("W")
                         .withSubType(SubType.DRAGON)
                         .withAbility(FlyingAbility.getInstance()),
-                "land", Duration.EndOfTurn), new ManaCostsImpl<>("{4}{W}")));
+                CardType.LAND, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{W}")));
     }
 
     private CaveOfTheFrostDragon(final CaveOfTheFrostDragon card) {

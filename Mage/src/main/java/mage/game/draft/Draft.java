@@ -20,6 +20,9 @@ import mage.players.Player;
  */
 public interface Draft extends MageItem, Serializable {
 
+    UUID getTableId();
+    void setTableId(UUID tableId);
+
     void addPlayer(Player player);
     Collection<DraftPlayer> getPlayers();
     boolean replacePlayer(Player oldPlayer, Player newPlayer);
@@ -44,6 +47,8 @@ public interface Draft extends MageItem, Serializable {
     void fireEndDraftEvent();
     void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
     void firePickCardEvent(UUID playerId);
+
+    int getPickTimeout();
 
     boolean isAbort();
     void setAbort(boolean abort);

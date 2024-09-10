@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
 
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ public final class DragonlordsPrerogative extends CardImpl {
                 new ConditionalContinuousRuleModifyingEffect(
                         new CantBeCounteredSourceEffect(), RevealedOrControlledDragonCondition.instance
                 ).setText("if you revealed a Dragon card or controlled a Dragon as you cast this spell, this spell can't be countered")
-        ));
+        ), new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
 
         // Draw four cards.        
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));

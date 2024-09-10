@@ -45,12 +45,12 @@ public final class EaterOfHope extends CardImpl {
 
         // {B}, Sacrifice another creature: Regenerate Eater of Hope.
         Ability regenAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
-        regenAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true)));
+        regenAbility.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(regenAbility);
 
         // {2}{B}, Sacrifice two other creatures: Destroy target creature.
         Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
-        destroyAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, destroyFilter, true)));
+        destroyAbility.addCost(new SacrificeTargetCost(2, destroyFilter));
         destroyAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(destroyAbility);
     }

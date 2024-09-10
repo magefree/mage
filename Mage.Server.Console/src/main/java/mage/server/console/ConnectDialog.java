@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.*;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.remote.SessionImpl;
 import org.apache.log4j.Logger;
 
 /**
@@ -20,6 +21,7 @@ import org.apache.log4j.Logger;
 public class ConnectDialog extends JDialog {
 
     private static final Logger logger = Logger.getLogger(ConnectDialog.class);
+
     private ConsoleFrame console;
     private Connection connection;
     private ConnectTask task;
@@ -30,6 +32,7 @@ public class ConnectDialog extends JDialog {
     public ConnectDialog() {
         initComponents();
         cbProxyType.setModel(new DefaultComboBoxModel(Connection.ProxyType.values()));
+        setVisible(false);
     }
 
     public void showDialog(ConsoleFrame console) {
@@ -37,8 +40,8 @@ public class ConnectDialog extends JDialog {
         this.txtServer.setText(ConsoleFrame.getPreferences().get("serverAddress", "localhost"));
         this.txtPort.setText(ConsoleFrame.getPreferences().get("serverPort", Integer.toString(17171)));
         this.chkAutoConnect.setSelected(Boolean.parseBoolean(ConsoleFrame.getPreferences().get("autoConnect", "false")));
-        this.txtProxyServer.setText(ConsoleFrame.getPreferences().get("proxyAddress", "localhost"));
-        this.txtProxyPort.setText(ConsoleFrame.getPreferences().get("proxyPort", Integer.toString(17171)));
+        this.txtProxyServer.setText(ConsoleFrame.getPreferences().get("proxyAddress", ""));
+        this.txtProxyPort.setText(ConsoleFrame.getPreferences().get("proxyPort", Integer.toString(0)));
         this.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(ConsoleFrame.getPreferences().get("proxyType", "NONE").toUpperCase(Locale.ENGLISH)));
         this.txtProxyUserName.setText(ConsoleFrame.getPreferences().get("proxyUsername", ""));
         this.txtPasswordField.setText(ConsoleFrame.getPreferences().get("proxyPassword", ""));
@@ -69,7 +72,16 @@ public class ConnectDialog extends JDialog {
     private void saveSettings() {
         ConsoleFrame.getPreferences().put("serverAddress", txtServer.getText());
         ConsoleFrame.getPreferences().put("serverPort", txtPort.getText());
-        ConsoleFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
+        if (chkAutoConnect.isSelected()) {
+            ConsoleFrame.getPreferences().putBoolean("autoConnect", true);
+            char[] input = txtPassword.getPassword();
+            ConsoleFrame.getPreferences().put("password", new String(input));
+            Arrays.fill(input, '0');
+        } else {
+            ConsoleFrame.getPreferences().putBoolean("autoConnect", false);
+            ConsoleFrame.getPreferences().put("password", "");
+        }
+
         ConsoleFrame.getPreferences().put("proxyAddress", txtProxyServer.getText());
         ConsoleFrame.getPreferences().put("proxyPort", txtProxyPort.getText());
         ConsoleFrame.getPreferences().put("proxyType", cbProxyType.getSelectedItem().toString());
@@ -352,7 +364,7 @@ public class ConnectDialog extends JDialog {
         connection.setHost(this.txtServer.getText());
         connection.setPort(Integer.parseInt(this.txtPort.getText()));
         connection.setAdminPassword(new String(txtPassword.getPassword()));
-        connection.setUsername("Admin");
+        connection.setUsername(SessionImpl.ADMIN_NAME);
         connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
         if (!this.cbProxyType.getSelectedItem().equals(ProxyType.NONE)) {
             connection.setProxyHost(this.txtProxyServer.getText());

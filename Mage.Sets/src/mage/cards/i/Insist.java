@@ -31,9 +31,7 @@ public final class Insist extends CardImpl {
         this.getSpellAbility().addWatcher(new InsistWatcher());
 
         // Draw a card.
-        Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("<br><br>Draw a card");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Insist(final Insist card) {
@@ -53,7 +51,7 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "The next creature spell you cast this turn can't be countered";
     }
 
-    InsistEffect(final InsistEffect effect) {
+    private InsistEffect(final InsistEffect effect) {
         super(effect);
     }
 
@@ -69,11 +67,6 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
         if (watcher != null) {
             watcher.setReady();
         }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

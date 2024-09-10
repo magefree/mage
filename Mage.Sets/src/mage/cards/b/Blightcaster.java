@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -20,11 +19,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class Blightcaster extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
 
     public Blightcaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
@@ -35,7 +29,7 @@ public final class Blightcaster extends CardImpl {
 
         // Whenever you cast an enchantment spell, you may have target creature get -2/-2 until end of turn.
         Effect effect = new BoostTargetEffect(-2,-2, Duration.EndOfTurn);
-        Ability ability = new SpellCastControllerTriggeredAbility(effect, filter, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

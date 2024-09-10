@@ -29,7 +29,7 @@ public final class DranaLiberatorOfMalakir extends CardImpl {
 
     public DranaLiberatorOfMalakir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
-       addSuperType(SuperType.LEGENDARY);
+       this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ALLY);
         this.power = new MageInt(2);

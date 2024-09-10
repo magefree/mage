@@ -5,8 +5,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -22,8 +20,6 @@ public final class FungusBeastToken extends TokenImpl {
         toughness = new MageInt(4);
 
         addAbility(TrampleAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("C21");
     }
 
     private FungusBeastToken(final FungusBeastToken token) {

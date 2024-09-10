@@ -28,7 +28,7 @@ public final class EnlightenedTutor extends CardImpl {
 
 
         // Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
-        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true));
     }
 
     private EnlightenedTutor(final EnlightenedTutor card) {

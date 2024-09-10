@@ -29,7 +29,7 @@ public final class AkkiUnderminer extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeEffect(new FilterPermanent(), 1, "that player"), false, true));
     }
 
-    public AkkiUnderminer (final AkkiUnderminer card) {
+    private AkkiUnderminer(final AkkiUnderminer card) {
         super(card);
     }
 

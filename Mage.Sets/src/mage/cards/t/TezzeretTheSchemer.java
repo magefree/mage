@@ -29,7 +29,7 @@ public final class TezzeretTheSchemer extends CardImpl {
 
     public TezzeretTheSchemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
 
         //Starting Loyalty - 5

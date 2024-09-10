@@ -29,29 +29,22 @@ public class ReinforceAbility extends SimpleActivatedAbility {
     }
 
 
-    public ReinforceAbility(final ReinforceAbility ability) {
+    protected ReinforceAbility(final ReinforceAbility ability) {
         super(ability);
         this.cost = ability.cost.copy();
         this.count = ability.count;
     }
 
     @Override
-    public SimpleActivatedAbility copy() {
+    public ReinforceAbility copy() {
         return new ReinforceAbility(this);
     }
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Reinforce ");
-        sb.append(count.toString()).append("&mdash;");
-        sb.append(cost.getText());
-        sb.append(" <i>(").append(cost.getText()).append(", Discard this card: Put ");
-        if (count.toString().equals("1")) {
-            sb.append("a +1/+1 counter");
-        } else {
-            sb.append(CardUtil.numberToText(count.toString())).append(" +1/+1 counters");
-        }
-        sb.append(" on target creature.)</i>");
-        return sb.toString();
+        String countStr = count.toString();
+        return "Reinforce " + countStr + "&mdash;" + cost.getText() + " <i>(" + cost.getText() + ", Discard this card: Put "
+                + CardUtil.numberToText(countStr, "a") + " +1/+1 counter" + (countStr.equals("1")?"":"s")
+                + " on target creature.)</i>";
     }
 }

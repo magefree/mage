@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -18,12 +18,12 @@ public final class SphinxsRevelation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{U}{U}");
 
         // You gain X life and draw X cards.
-        ManacostVariableValue manaX = ManacostVariableValue.REGULAR;
+        GetXValue manaX = GetXValue.instance;
         this.getSpellAbility().addEffect(new GainLifeEffect(manaX));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(manaX).concatBy("and"));
     }
 
-    public SphinxsRevelation(final SphinxsRevelation card) {
+    private SphinxsRevelation(final SphinxsRevelation card) {
         super(card);
     }
 

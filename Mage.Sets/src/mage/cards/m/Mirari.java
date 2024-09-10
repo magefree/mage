@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class Mirari extends CardImpl {
 
     public Mirari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever you cast an instant or sorcery spell, you may pay {3}. If you do, copy that spell. You may choose new targets for the copy.
         this.addAbility(new MirariTriggeredAbility());
@@ -54,11 +54,11 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
 
     MirariTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(
-                new CopyTargetSpellEffect(true),
+                new CopyTargetStackObjectEffect(true),
                 new GenericManaCost(3)), false);
     }
 
-    MirariTriggeredAbility(final MirariTriggeredAbility ability) {
+    private MirariTriggeredAbility(final MirariTriggeredAbility ability) {
         super(ability);
     }
 

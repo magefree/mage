@@ -21,7 +21,7 @@ public final class ShoulderToShoulder extends CardImpl {
         getSpellAbility().addEffect(new SupportEffect(this, 2, false));
 
         // Draw a card.
-        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ShoulderToShoulder(final ShoulderToShoulder card) {

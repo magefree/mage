@@ -53,7 +53,7 @@ public final class Subtlety extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Subtlety enters the battlefield, choose up to one target creature spell or planeswalker spell. Its owner puts it on the top or bottom of their library.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnTopOrBottomLibraryTargetEffect(
+        Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnTopOrBottomLibraryTargetEffect(false).setText(
                 "choose up to one target creature spell or planeswalker spell. " +
                         "Its owner puts it on the top or bottom of their library"
         ));

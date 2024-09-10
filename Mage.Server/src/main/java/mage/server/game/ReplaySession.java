@@ -32,7 +32,7 @@ public class ReplaySession implements GameCallback {
     }
 
     public void stop() {
-        gameResult("stopped replay");
+        endGameWithResult("stopped replay");
     }
 
     public synchronized void next() {
@@ -51,7 +51,7 @@ public class ReplaySession implements GameCallback {
     }
 
     @Override
-    public void gameResult(final String result) {
+    public void endGameWithResult(final String result) {
         managerFactory.userManager().getUser(userId).ifPresent(user ->
                 user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_DONE, replay.getGame().getId(), result)));
 
@@ -60,7 +60,7 @@ public class ReplaySession implements GameCallback {
 
     private void updateGame(final GameState state, Game game) {
         if (state == null) {
-            gameResult("game ended");
+            endGameWithResult("game ended");
         } else {
             managerFactory.userManager().getUser(userId).ifPresent(user ->
                     user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_UPDATE, replay.getGame().getId(), new GameView(state, game, null, null))));

@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -25,8 +25,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author North
  */
 public final class SigilOfTheNayanGods extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public SigilOfTheNayanGods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{W}");
@@ -39,7 +37,7 @@ public final class SigilOfTheNayanGods extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+1 for each creature you control.
-        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 1);
+        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE, 1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
 
         // Cycling {G/W}

@@ -31,7 +31,7 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
         this.multiplier = multiplier;
     }
 
-    public CardsInControllerGraveyardCount(final CardsInControllerGraveyardCount dynamicValue) {
+    protected CardsInControllerGraveyardCount(final CardsInControllerGraveyardCount dynamicValue) {
         this.filter = dynamicValue.filter;
         this.multiplier = dynamicValue.multiplier;
     }

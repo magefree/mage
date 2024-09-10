@@ -38,12 +38,12 @@ public final class BlazingSalvo extends CardImpl {
 
 class BlazingSalvoEffect extends OneShotEffect {
 
-    public BlazingSalvoEffect() {
+    BlazingSalvoEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 3 damage to target creature unless that creature's controller has {this} deal 5 damage to them";
     }
 
-    public BlazingSalvoEffect(final BlazingSalvoEffect effect) {
+    private BlazingSalvoEffect(final BlazingSalvoEffect effect) {
         super(effect);
     }
 
@@ -54,7 +54,7 @@ class BlazingSalvoEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {

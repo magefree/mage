@@ -50,7 +50,7 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
         this.effects.addAll(effect.effects);
         this.targets.addAll(effect.targets);
         this.costs.addAll(effect.costs);
-        this.useAttachedCost = effect.useAttachedCost.copy();
+        this.useAttachedCost = effect.useAttachedCost == null ? null : effect.useAttachedCost.copy();
     }
 
     @Override
@@ -60,20 +60,20 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSetAtInit(source)) {
             Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
             }
         }
+        super.init(source, game); // must call at the end due target pointer setup
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = null;
-        if (affectedObjectsSet) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (getAffectedObjectsSet()) {
+            permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
                 discard();
                 return true;

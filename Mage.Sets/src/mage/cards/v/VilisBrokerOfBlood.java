@@ -29,7 +29,7 @@ public final class VilisBrokerOfBlood extends CardImpl {
     public VilisBrokerOfBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

@@ -9,6 +9,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +36,7 @@ public final class CanalCourier extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Canal Courier enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Whenever Canal Courier and another creature attack different players, Canal Courier can't be blocked this combat.
         Effect effect = new CantBeBlockedSourceEffect(Duration.EndOfCombat);
@@ -61,7 +62,7 @@ class CanalCourierTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} and another creature attack different players, ");
     }
 
-    public CanalCourierTriggeredAbility(final CanalCourierTriggeredAbility ability) {
+    private CanalCourierTriggeredAbility(final CanalCourierTriggeredAbility ability) {
         super(ability);
     }
 

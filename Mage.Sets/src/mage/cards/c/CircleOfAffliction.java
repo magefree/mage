@@ -56,7 +56,7 @@ class CircleOfAfflictionTriggeredAbility extends TriggeredAbilityImpl {
         ((DoIfCostPaid) getEffects().get(0)).addEffect(new GainLifeEffect(1));
     }
 
-    public CircleOfAfflictionTriggeredAbility(final CircleOfAfflictionTriggeredAbility ability) {
+    private CircleOfAfflictionTriggeredAbility(final CircleOfAfflictionTriggeredAbility ability) {
         super(ability);
     }
 

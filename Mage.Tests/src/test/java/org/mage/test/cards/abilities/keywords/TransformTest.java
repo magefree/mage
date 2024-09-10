@@ -21,7 +21,7 @@ public class TransformTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         // When Nissa, Vastwood Seer enters the battlefield, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle your library.
-        // Whenever a land enters the battlefield under your control, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control.
+        // Whenever a land you control enters, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control.
 
         addCard(Zone.HAND, playerA, "Nissa, Vastwood Seer");
 
@@ -493,5 +493,32 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Delver of Secrets", 1);
         assertPermanentCount(playerA, "Insectile Aberration", 0);
+    }
+
+    @Test
+    public void testMoonmistHuntmasterDressdown() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Huntmaster of the Fells"); //Has on-transform triggers
+        addCard(Zone.BATTLEFIELD, playerA, "Maskwood Nexus"); //Make back side human
+
+
+        addCard(Zone.HAND, playerA, "Dress Down"); //Creatures lose all abilities
+        addCard(Zone.HAND, playerA, "Moonmist", 2);
+
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Dress Down");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Moonmist");
+        checkPermanentCount("Huntmaster flipped", 1, PhaseStep.BEGIN_COMBAT, playerA, "Ravager of the Fells", 1);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Moonmist");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Dress Down", 1);
+        assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
+        assertPermanentCount(playerA, 6+1+1);
     }
 }

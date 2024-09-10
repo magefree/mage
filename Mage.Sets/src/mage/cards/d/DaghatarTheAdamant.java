@@ -33,7 +33,7 @@ public final class DaghatarTheAdamant extends CardImpl {
 
     public DaghatarTheAdamant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(0);
@@ -66,12 +66,12 @@ public final class DaghatarTheAdamant extends CardImpl {
 
 class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
 
-    public MoveCounterFromTargetToTargetEffect() {
+    MoveCounterFromTargetToTargetEffect() {
         super(Outcome.Detriment);
         this.staticText = "Move a +1/+1 counter from target creature onto a second target creature";
     }
 
-    public MoveCounterFromTargetToTargetEffect(final MoveCounterFromTargetToTargetEffect effect) {
+    private MoveCounterFromTargetToTargetEffect(final MoveCounterFromTargetToTargetEffect effect) {
         super(effect);
     }
 

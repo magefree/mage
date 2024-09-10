@@ -14,7 +14,7 @@ public class ProwessAbility extends SpellCastControllerTriggeredAbility {
         super(new BoostSourceEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_SPELL_NON_CREATURE, false);
     }
 
-    public ProwessAbility(final ProwessAbility ability) {
+    protected ProwessAbility(final ProwessAbility ability) {
         super(ability);
     }
 

@@ -24,7 +24,7 @@ public final class HeartOfKiran extends CardImpl {
     public HeartOfKiran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

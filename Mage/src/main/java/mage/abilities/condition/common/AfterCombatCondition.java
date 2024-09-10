@@ -15,7 +15,7 @@ public enum AfterCombatCondition implements Condition {
     @Override
 
     public boolean apply(Game game, Ability source) {
-        return game.getStep().getType().isAfter(PhaseStep.END_COMBAT);
+        return game.getTurnStepType().isAfter(PhaseStep.END_COMBAT);
     }
 
     @Override

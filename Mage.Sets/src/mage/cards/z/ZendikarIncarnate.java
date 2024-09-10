@@ -10,7 +10,6 @@ import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -33,7 +32,7 @@ public final class ZendikarIncarnate extends CardImpl {
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filter);
 
         // Zendikar Incarnate's power is equal to the amount of lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(controlledLands, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(controlledLands)));
     }
 
     private ZendikarIncarnate(final ZendikarIncarnate card) {

@@ -43,14 +43,14 @@ public final class EnchantersBane extends CardImpl {
 
 class EnchantersBaneEffect extends OneShotEffect {
 
-    public EnchantersBaneEffect() {
+    EnchantersBaneEffect() {
         super(Outcome.Benefit);
         this.staticText = "target enchantment deals damage equal to "
                 + "its mana value to its controller "
                 + "unless that player sacrifices it";
     }
 
-    public EnchantersBaneEffect(final EnchantersBaneEffect effect) {
+    private EnchantersBaneEffect(final EnchantersBaneEffect effect) {
         super(effect);
     }
 

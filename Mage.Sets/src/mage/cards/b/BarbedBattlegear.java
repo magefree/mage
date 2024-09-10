@@ -32,7 +32,7 @@ public final class BarbedBattlegear extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Neutral, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
-    public BarbedBattlegear (final BarbedBattlegear card) {
+    private BarbedBattlegear(final BarbedBattlegear card) {
         super(card);
     }
 

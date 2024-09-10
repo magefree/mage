@@ -22,7 +22,7 @@ public final class RadhaHeirToKeld extends CardImpl {
 
     public RadhaHeirToKeld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);

@@ -31,7 +31,7 @@ public final class SphinxOfTheSteelWind extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED, ObjectColor.GREEN));
     }
 
-    public SphinxOfTheSteelWind (final SphinxOfTheSteelWind card) {
+    private SphinxOfTheSteelWind(final SphinxOfTheSteelWind card) {
         super(card);
     }
 

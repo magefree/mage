@@ -123,7 +123,7 @@ class MiracleEffect extends OneShotEffect {
         this.miracleCosts = new ManaCostsImpl<>(miracleCosts);
     }
 
-    public MiracleEffect(final MiracleEffect effect) {
+    protected MiracleEffect(final MiracleEffect effect) {
         super(effect);
         this.miracleCosts = effect.miracleCosts;
     }

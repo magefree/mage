@@ -44,12 +44,12 @@ public final class IceCave extends CardImpl {
 
 class IceCaveEffect extends OneShotEffect {
 
-    public IceCaveEffect() {
+    IceCaveEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "any other player may pay that spell's mana cost. If a player does, counter the spell";
     }
 
-    public IceCaveEffect(final IceCaveEffect effect) {
+    private IceCaveEffect(final IceCaveEffect effect) {
         super(effect);
     }
 
@@ -62,10 +62,10 @@ class IceCaveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Spell spell = (Spell) game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        Spell spell = (Spell) game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && spell != null && controller != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
-            Cost cost = new ManaCostsImpl<>(spell.getSpellAbility().getManaCosts().getText());
+            Cost cost = new ManaCostsImpl<>(spell.getSpellAbility() == null ? "" : spell.getSpellAbility().getManaCosts().getText());
             if (spellController != null) {
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player = game.getPlayer(playerId);

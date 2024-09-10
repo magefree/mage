@@ -60,12 +60,12 @@ public final class HeavyArbalest extends CardImpl {
 
 class HeavyArbalestEffect extends ReplacementEffectImpl {
 
-    public HeavyArbalestEffect() {
+    HeavyArbalestEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Equipped creature doesn't untap during its controller's untap step";
     }
 
-    public HeavyArbalestEffect(final HeavyArbalestEffect effect) {
+    private HeavyArbalestEffect(final HeavyArbalestEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class HeavyArbalestEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP) {
             Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 Permanent equipped = game.getPermanent(equipment.getAttachedTo());

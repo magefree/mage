@@ -24,7 +24,7 @@ public final class ZeganaUtopianSpeaker extends CardImpl {
     public ZeganaUtopianSpeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(4);
@@ -35,7 +35,7 @@ public final class ZeganaUtopianSpeaker extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(
                         new DrawCardSourceControllerEffect(1), false
                 ), new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1),
-                "When {this} enters the battlefield, " +
+                "When {this} enters, " +
                         "if you control another creature " +
                         "with a +1/+1 counter on it, draw a card."
                 )

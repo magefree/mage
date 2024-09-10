@@ -18,6 +18,7 @@ import java.util.UUID;
 
 /**
  * Based on TargetCardInHand
+ *
  * @author Alex-Vasile
  */
 public class TargetCardInCommandZone extends TargetCard {
@@ -26,7 +27,7 @@ public class TargetCardInCommandZone extends TargetCard {
         super(1, 1, Zone.COMMAND, filter);
     }
 
-    public TargetCardInCommandZone(final TargetCardInCommandZone targetCardInCommandZone) {
+    protected TargetCardInCommandZone(final TargetCardInCommandZone targetCardInCommandZone) {
         super(targetCardInCommandZone);
     }
 

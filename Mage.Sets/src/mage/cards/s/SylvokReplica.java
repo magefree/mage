@@ -36,7 +36,7 @@ public final class SylvokReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SylvokReplica (final SylvokReplica card) {
+    private SylvokReplica(final SylvokReplica card) {
         super(card);
     }
 

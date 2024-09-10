@@ -24,7 +24,7 @@ public final class SaddledRimestag extends CardImpl {
     public SaddledRimestag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ELK);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

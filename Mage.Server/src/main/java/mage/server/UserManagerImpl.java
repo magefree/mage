@@ -1,10 +1,12 @@
 package mage.server;
 
-import mage.server.User.UserState;
-import mage.server.managers.UserManager;
 import mage.server.managers.ManagerFactory;
+import mage.server.managers.UserManager;
 import mage.server.record.UserStats;
 import mage.server.record.UserStatsRepository;
+import mage.server.util.ServerMessagesUtil;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 
@@ -15,23 +17,31 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * manages users - if a user is disconnected and 10 minutes have passed with no
- * activity the user is removed
+ * Server: manage active user instances (connected to the server)
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class UserManagerImpl implements UserManager {
 
-    private static final int SERVER_TIMEOUTS_USER_INFORM_OPPONENTS_ABOUT_DISCONNECT_AFTER_SECS = 30; // send to chat info about disconnection troubles, must be more than ping timeout
-    private static final int SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS = 3 * 60; // removes from all games and chats too (can be seen in users list with disconnected status)
-    private static final int SERVER_TIMEOUTS_USER_REMOVE_FROM_SERVER_AFTER_SECS = 8 * 60; // removes from users list
+    // timeouts on user's activity (on connection problems)
+    private static final int USER_CONNECTION_TIMEOUTS_CHECK_SECS = 30;
+    private static final int USER_CONNECTION_TIMEOUT_INFORM_AFTER_SECS = 30; // inform user's opponents about problem
+    private static final int USER_CONNECTION_TIMEOUT_SESSION_EXPIRE_AFTER_SECS = 3 * 60; // session expire - remove from all tables and chats (can't reconnect after it)
+    private static final int USER_CONNECTION_TIMEOUT_REMOVE_FROM_SERVER_SECS = 8 * 60; // removes from users list
+
+    private static final int SERVER_USERS_LIST_UPDATE_SECS = 10; // server side updates (client use own timeouts to request users list)
 
     private static final Logger logger = Logger.getLogger(UserManagerImpl.class);
 
-    protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
-    protected final ScheduledExecutorService userListExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected final ScheduledExecutorService CONNECTION_EXPIRED_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_CONNECTION_EXPIRED_CHECK)
+    );
+    protected final ScheduledExecutorService USERS_LIST_REFRESH_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_SERVICE_USERS_LIST_REFRESH)
+    );
 
-    private List<UserView> userInfoList = new ArrayList<>();
+    private List<UserView> userInfoList = new ArrayList<>(); // all users list for main room/chat
+    private int maxUsersOnline = 0;
     private final ManagerFactory managerFactory;
 
 
@@ -46,9 +56,8 @@ public class UserManagerImpl implements UserManager {
 
     public void init() {
         USER_EXECUTOR = managerFactory.threadExecutor().getCallExecutor();
-        expireExecutor.scheduleAtFixedRate(this::checkExpired, 60, 60, TimeUnit.SECONDS);
-
-        userListExecutor.scheduleAtFixedRate(this::updateUserInfoList, 4, 4, TimeUnit.SECONDS);
+        CONNECTION_EXPIRED_EXECUTOR.scheduleAtFixedRate(this::checkExpired, USER_CONNECTION_TIMEOUTS_CHECK_SECS, USER_CONNECTION_TIMEOUTS_CHECK_SECS, TimeUnit.SECONDS);
+        USERS_LIST_REFRESH_EXECUTOR.scheduleAtFixedRate(this::updateUserInfoList, SERVER_USERS_LIST_UPDATE_SECS, SERVER_USERS_LIST_UPDATE_SECS, TimeUnit.SECONDS);
     }
 
     @Override
@@ -69,11 +78,16 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public Optional<User> getUser(UUID userId) {
-        if (!users.containsKey(userId)) {
-            //logger.warn(String.format("User with id %s could not be found", userId), new Throwable()); // TODO: remove after session freezes fixed
+        if (userId == null) {
             return Optional.empty();
-        } else {
-            return Optional.of(users.get(userId));
+        }
+
+        final Lock r = lock.readLock();
+        r.lock();
+        try {
+            return Optional.ofNullable(users.getOrDefault(userId, null));
+        } finally {
+            r.unlock();
         }
     }
 
@@ -82,12 +96,13 @@ public class UserManagerImpl implements UserManager {
         final Lock r = lock.readLock();
         r.lock();
         try {
-            return users.values().stream().filter(user -> user.getName().equals(userName))
+            return users.values()
+                    .stream()
+                    .filter(user -> user.getName().equals(userName))
                     .findFirst();
         } finally {
             r.unlock();
         }
-
     }
 
     @Override
@@ -106,9 +121,9 @@ public class UserManagerImpl implements UserManager {
     @Override
     public boolean connectToSession(String sessionId, UUID userId) {
         if (userId != null) {
-            User user = users.get(userId);
-            if (user != null) {
-                user.setSessionId(sessionId);
+            Optional<User> user = getUser(userId);
+            if (user.isPresent()) {
+                user.get().setSessionId(sessionId);
                 return true;
             }
         }
@@ -117,45 +132,17 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public void disconnect(UUID userId, DisconnectReason reason) {
-        Optional<User> user = getUser(userId);
-        if (user.isPresent()) {
-            user.get().setSessionId("");
-            if (reason == DisconnectReason.Disconnected) {
-                removeUserFromAllTablesAndChat(userId, reason);
-                user.get().setUserState(UserState.Offline);
-            }
+        User user = getUser(userId).orElse(null);
+        if (user != null) {
+            user.onLostConnection(reason);
         }
     }
 
     @Override
     public boolean isAdmin(UUID userId) {
-        if (userId != null) {
-            User user = users.get(userId);
-            if (user != null) {
-                return user.getName().equals("Admin");
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void removeUserFromAllTablesAndChat(final UUID userId, final DisconnectReason reason) {
-        if (userId != null) {
-            getUser(userId).ifPresent(user
-                    -> USER_EXECUTOR.execute(
-                    () -> {
-                        try {
-                            logger.info("USER REMOVE - " + user.getName() + " (" + reason.toString() + ")  userId: " + userId + " [" + user.getGameInfo() + ']');
-                            user.removeUserFromAllTables(reason);
-                            managerFactory.chatManager().removeUser(user.getId(), reason);
-                            logger.debug("USER REMOVE END - " + user.getName());
-                        } catch (Exception ex) {
-                            handleException(ex);
-                        }
-                    }
-            ));
-
-        }
+        return getUser(userId)
+                .filter(u -> u.getName().equals(User.ADMIN_NAME))
+                .isPresent();
     }
 
     @Override
@@ -193,13 +180,13 @@ public class UserManagerImpl implements UserManager {
      */
     private void checkExpired() {
         try {
-            Calendar calendarInform = Calendar.getInstance();
-            calendarInform.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_INFORM_OPPONENTS_ABOUT_DISCONNECT_AFTER_SECS);
-            Calendar calendarExp = Calendar.getInstance();
-            calendarExp.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_DISCONNECT_FROM_SERVER_AFTER_SECS);
-            Calendar calendarRemove = Calendar.getInstance();
-            calendarRemove.add(Calendar.SECOND, -1 * SERVER_TIMEOUTS_USER_REMOVE_FROM_SERVER_AFTER_SECS);
-            List<User> toRemove = new ArrayList<>();
+            Calendar calInform = Calendar.getInstance();
+            calInform.add(Calendar.SECOND, -1 * USER_CONNECTION_TIMEOUT_INFORM_AFTER_SECS);
+            Calendar calSessionExpire = Calendar.getInstance();
+            calSessionExpire.add(Calendar.SECOND, -1 * USER_CONNECTION_TIMEOUT_SESSION_EXPIRE_AFTER_SECS);
+            Calendar calUserRemove = Calendar.getInstance();
+            calUserRemove.add(Calendar.SECOND, -1 * USER_CONNECTION_TIMEOUT_REMOVE_FROM_SERVER_SECS);
+            List<User> usersToRemove = new ArrayList<>();
             logger.debug("Start Check Expired");
             List<User> userList = new ArrayList<>();
             final Lock r = lock.readLock();
@@ -211,37 +198,60 @@ public class UserManagerImpl implements UserManager {
             }
             for (User user : userList) {
                 try {
-                    if (user.getUserState() != UserState.Offline
-                            && user.isExpired(calendarInform.getTime())) {
-                        long secsInfo = (Calendar.getInstance().getTimeInMillis() - user.getLastActivity().getTime()) / 1000;
-                        informUserOpponents(user.getId(), user.getName() + " got connection problem for " + secsInfo + " secs");
-                    }
+                    // expire logic:
+                    // - any user actions will update user's last activity date
+                    // - expire code schedules to check last activity every few seconds (minutes)
+                    // - if something outdated then it will be removed from a server
+                    // - user lifecycle: created -> connected/disconnected (bad connection, bad session) -> offline
 
-                    if (user.getUserState() == UserState.Offline) {
-                        if (user.isExpired(calendarRemove.getTime())) {
-                            // removes from users list
-                            toRemove.add(user);
+                    boolean isBadConnection = user.isExpired(calInform.getTime());
+                    boolean isBadSession = user.isExpired(calSessionExpire.getTime());
+                    boolean isBadUser = user.isExpired(calUserRemove.getTime());
+
+                    switch (user.getUserState()) {
+                        case Created: {
+                            // ignore
+                            break;
                         }
-                    } else {
-                        if (user.isExpired(calendarExp.getTime())) {
-                            // set disconnected status and removes from all activities (tourney/tables/games/drafts/chats)
-                            if (user.getUserState() == UserState.Connected) {
-                                user.lostConnection();
-                                disconnect(user.getId(), DisconnectReason.BecameInactive);
+
+                        case Offline: {
+                            // remove user from a server (users list for GUI)
+                            if (isBadUser) {
+                                usersToRemove.add(user);
                             }
-                            removeUserFromAllTablesAndChat(user.getId(), DisconnectReason.SessionExpired);
-                            user.setUserState(UserState.Offline);
+                            break;
+                        }
+
+                        case Connected:
+                        case Disconnected: {
+                            if (isBadConnection) {
+                                long secsInfo = (Calendar.getInstance().getTimeInMillis() - user.getLastActivity().getTime()) / 1000;
+                                informUserOpponents(user.getId(), String.format("%s catch connection problems for %s secs (left before expire: %d secs)",
+                                        user.getName(),
+                                        secsInfo,
+                                        Math.max(0, USER_CONNECTION_TIMEOUT_SESSION_EXPIRE_AFTER_SECS - secsInfo)
+                                ));
+                            }
+                            if (isBadSession) {
+                                // full disconnect
+                                disconnect(user.getId(), DisconnectReason.SessionExpired);
+                            }
+                            break;
+                        }
+
+                        default: {
+                            throw new IllegalArgumentException("Unknown user state: " + user.getUserState());
                         }
                     }
                 } catch (Exception ex) {
                     handleException(ex);
                 }
             }
-            logger.debug("Users to remove " + toRemove.size());
-            final Lock w = lock.readLock();
+            logger.debug("Users to remove " + usersToRemove.size());
+            final Lock w = lock.writeLock();
             w.lock();
             try {
-                for (User user : toRemove) {
+                for (User user : usersToRemove) {
                     users.remove(user.getId());
                 }
             } finally {
@@ -254,11 +264,34 @@ public class UserManagerImpl implements UserManager {
     }
 
     /**
-     * This method recreated the user list that will be send to all clients
+     * Remove user instance from a server
+     * Warning, call it after all tables/chats and other user related data removes
+     *
+     * @param userId
+     */
+    @Override
+    public void removeUser(UUID userId) {
+        try {
+            final Lock w = lock.writeLock();
+            w.lock();
+            try {
+                users.remove(userId);
+            } finally {
+                w.unlock();
+            }
+        } catch (Exception e) {
+            handleException(e);
+        }
+
+    }
+
+    /**
+     * This method recreated the user list that will be sent to all clients
      */
     private void updateUserInfoList() {
         try {
             List<UserView> newUserInfoList = new ArrayList<>();
+            int currentOnlineCount = 0;
             for (User user : getUsers()) {
                 newUserInfoList.add(new UserView(
                         user.getName(),
@@ -273,8 +306,20 @@ public class UserManagerImpl implements UserManager {
                         user.getEmail(),
                         user.getUserIdStr()
                 ));
+
+                if (user.isOnlineUser()) {
+                    currentOnlineCount++;
+                }
             }
             userInfoList = newUserInfoList;
+
+            // max users online stats
+            if (currentOnlineCount > maxUsersOnline) {
+                maxUsersOnline = currentOnlineCount;
+                // TODO: if server get too much logs after restart (on massive reconnect) then add logs timeout here
+                logger.info(String.format("New max users online: %d", maxUsersOnline));
+                ServerMessagesUtil.instance.setMaxUsersOnline(maxUsersOnline); // update online stats for news panel
+            }
         } catch (Exception ex) {
             handleException(ex);
         }
@@ -319,5 +364,11 @@ public class UserManagerImpl implements UserManager {
                 getUserByName(updatedUser).ifPresent(User::resetUserStats);
             }
         });
+    }
+
+    @Override
+    public void checkHealth() {
+        //logger.info("Checking users...");
+        // TODO: add broken users check and report (too long without sessions)
     }
 }

@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class AkoumWarrior extends ModalDoubleFacesCard {
+public final class AkoumWarrior extends ModalDoubleFacedCard {
 
     public AkoumWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

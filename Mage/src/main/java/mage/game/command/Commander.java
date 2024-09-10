@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.*;
-import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -13,14 +12,17 @@ import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.GameLog;
 import mage.util.SubTypes;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
-public class Commander implements CommandObject {
+public class Commander extends CommandObjectImpl {
 
     private final Card sourceObject;
     private boolean copy;
@@ -28,6 +30,7 @@ public class Commander implements CommandObject {
     private final Abilities<Ability> abilities = new AbilitiesImpl<>();
 
     public Commander(Card card) {
+        super(card.getName());
         this.sourceObject = card;
 
         // All abilities must be added to the game before usage. It adding by addCard and addCommandObject calls
@@ -52,10 +55,9 @@ public class Commander implements CommandObject {
                     case ADVENTURE_SPELL:
                         // can be used from command zone
                         if (canUseAbilityFromCommandZone(spellAbility)) {
-                            abilities.add(new CastCommanderAbility(card, spellAbility));
+                            abilities.add(spellAbility.copyWithZone(Zone.COMMAND));
                         }
                         break;
-                    case FACE_DOWN_CREATURE: // dynamic added spell for alternative cost like cast as face down
                     case SPLICE: // only from hand
                     case SPLIT_AFTERMATH: // only from graveyard
                         // can't use from command zone
@@ -103,6 +105,7 @@ public class Commander implements CommandObject {
     }
 
     private Commander(final Commander commander) {
+        super(commander);
         this.sourceObject = commander.sourceObject.copy();
         this.copy = commander.copy;
         this.copyFrom = (commander.copyFrom != null ? commander.copyFrom.copy() : null);
@@ -125,7 +128,8 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public void assignNewId() {
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
     }
 
     @Override
@@ -160,15 +164,6 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public String getLogName() {
-        return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public void setName(String name) {
-    }
-
-    @Override
     public List<CardType> getCardType(Game game) {
         return sourceObject.getCardType(game);
     }
@@ -189,8 +184,8 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
-        return sourceObject.getSuperType();
+    public List<SuperType> getSuperType(Game game) {
+        return sourceObject.getSuperType(game);
     }
 
     @Override
@@ -249,6 +244,11 @@ public class Commander implements CommandObject {
     }
 
     @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public int getManaValue() {
         return sourceObject.getManaValue();
     }
@@ -273,13 +273,17 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public UUID getId() {
-        return sourceObject.getId();
+    public int getStartingDefense() {
+        return sourceObject.getStartingDefense();
     }
 
     @Override
-    public String getImageName() {
-        return sourceObject.getImageName();
+    public void setStartingDefense(int startingDefense) {
+    }
+
+    @Override
+    public UUID getId() {
+        return sourceObject.getId();
     }
 
     @Override
@@ -310,6 +314,21 @@ public class Commander implements CommandObject {
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
         sourceObject.setIsAllCreatureTypes(game, value);
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return sourceObject.isAllNonbasicLandTypes(game);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+        sourceObject.setIsAllNonbasicLandTypes(value);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+        sourceObject.setIsAllNonbasicLandTypes(game, value);
     }
 
     @Override

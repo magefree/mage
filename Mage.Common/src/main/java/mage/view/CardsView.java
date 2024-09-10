@@ -12,6 +12,7 @@ import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.TargetPointer;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import org.apache.log4j.Logger;
 
@@ -50,15 +51,15 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
         }
     }
 
-    public CardsView(Game game, Collection<? extends Card> cards) {
+    public CardsView(Game game, Collection<? extends Card> cards, UUID createdForPlayerId) {
         for (Card card : cards) {
-            this.put(card.getId(), new CardView(card, game, false));
+            this.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId)));
         }
     }
 
-    public CardsView(Game game, Collection<? extends Card> cards, boolean showFaceDown, boolean storeZone) {
+    public CardsView(Game game, Collection<? extends Card> cards, UUID createdForPlayerId, boolean storeZone) {
         for (Card card : cards) {
-            this.put(card.getId(), new CardView(card, game, false, showFaceDown, storeZone));
+            this.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId), storeZone));
         }
     }
 
@@ -95,27 +96,33 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                 case STACK:
                 case HAND: // Miracle
                 case LIBRARY:
-                case OUTSIDE:
                     sourceObject = game.getObject(ability.getSourceId());
                     if (sourceObject instanceof Card) {
                         isCard = true;
                     }
                     break;
+                case OUTSIDE:
+                    sourceObject = game.getObject(ability.getSourceId());
+                    if (sourceObject instanceof Card) {
+                        isCard = true;
+                    }
+                    if (sourceObject instanceof Emblem) {
+                        // emblems are not normally OUTSIDE, except the helper emblems like Radiation
+                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new EmblemView((Emblem) sourceObject, game)));
+                        abilityView.setName(sourceObject.getName());
+                    }
+                    break;
                 case COMMAND:
                     sourceObject = game.getObject(ability.getSourceId());
                     if (sourceObject instanceof Emblem) {
-//                        Card sourceCard = (Card) ((Emblem) sourceObject).getSourceObject();
-//                        if (sourceCard == null) {
-//                            throw new IllegalArgumentException("Source card for emblem not found.");
-//                        }
-                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new EmblemView((Emblem) sourceObject)));
+                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new EmblemView((Emblem) sourceObject, game)));
                         abilityView.setName(sourceObject.getName());
                         // abilityView.setExpansionSetCode(sourceCard.getExpansionSetCode());
                     } else if (sourceObject instanceof Dungeon) {
                         abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new DungeonView((Dungeon) sourceObject)));
                         abilityView.setName(sourceObject.getName());
                     } else if (sourceObject instanceof Plane) {
-                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new PlaneView((Plane) sourceObject)));
+                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new PlaneView((Plane) sourceObject, game)));
                         abilityView.setName(sourceObject.getName());
                     }
                     break;

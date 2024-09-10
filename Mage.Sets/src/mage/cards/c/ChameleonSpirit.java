@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -33,15 +33,15 @@ public final class ChameleonSpirit extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Chameleon Spirit enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
         // Chameleon Spirit's power and toughness are each equal to the number 
         // of permanents of the chosen color your opponents control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerToughnessSourceEffect(
-                        PermanentsOfTheChosenColorOpponentsControlCount.instance,
-                        Duration.EndOfGame)));
+                        PermanentsOfTheChosenColorOpponentsControlCount.instance
+                )));
     }
 
     private ChameleonSpirit(final ChameleonSpirit card) {

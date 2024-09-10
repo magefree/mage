@@ -29,7 +29,7 @@ public final class JaceTheMindSculptor extends CardImpl {
 
     public JaceTheMindSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
         this.setStartingLoyalty(3);
@@ -73,7 +73,7 @@ class JaceTheMindSculptorEffect1 extends OneShotEffect {
         staticText = "Look at the top card of target player's library. You may put that card on the bottom of that player's library";
     }
 
-    public JaceTheMindSculptorEffect1(final JaceTheMindSculptorEffect1 effect) {
+    private JaceTheMindSculptorEffect1(final JaceTheMindSculptorEffect1 effect) {
         super(effect);
     }
 
@@ -111,7 +111,7 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect {
         staticText = "Exile all cards from target player's library, then that player shuffles their hand into their library";
     }
 
-    public JaceTheMindSculptorEffect2(final JaceTheMindSculptorEffect2 effect) {
+    private JaceTheMindSculptorEffect2(final JaceTheMindSculptorEffect2 effect) {
         super(effect);
     }
 

@@ -31,7 +31,7 @@ public final class KayaGhostAssassin extends CardImpl {
 
     public KayaGhostAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAYA);
 
         this.setStartingLoyalty(5);
@@ -69,13 +69,13 @@ public final class KayaGhostAssassin extends CardImpl {
 
 class KayaGhostAssassinEffect extends OneShotEffect {
 
-    public KayaGhostAssassinEffect() {
+    KayaGhostAssassinEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile {this} or up to one target creature. Return that card to the battlefield under its owner's control at the beginning of your next upkeep. "
                 + "You lose 2 life";
     }
 
-    public KayaGhostAssassinEffect(final KayaGhostAssassinEffect effect) {
+    private KayaGhostAssassinEffect(final KayaGhostAssassinEffect effect) {
         super(effect);
     }
 

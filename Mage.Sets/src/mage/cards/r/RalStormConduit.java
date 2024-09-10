@@ -27,7 +27,7 @@ public final class RalStormConduit extends CardImpl {
     public RalStormConduit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAL);
         this.setStartingLoyalty(4);
 

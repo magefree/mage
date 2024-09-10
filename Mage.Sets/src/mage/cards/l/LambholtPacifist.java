@@ -29,7 +29,7 @@ public final class LambholtPacifist extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        this.secondSideCardClazz = LambholtButcher.class;
+        this.secondSideCardClazz = mage.cards.l.LambholtButcher.class;
 
         // Lambholt Pacifist can't attack unless you control a creature with power 4 or greater.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LambholtPacifistEffect()));
@@ -62,7 +62,7 @@ class LambholtPacifistEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you control a creature with power 4 or greater";
     }
 
-    public LambholtPacifistEffect(final LambholtPacifistEffect effect) {
+    private LambholtPacifistEffect(final LambholtPacifistEffect effect) {
         super(effect);
     }
 

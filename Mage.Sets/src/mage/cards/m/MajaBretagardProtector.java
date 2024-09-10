@@ -23,7 +23,7 @@ public final class MajaBretagardProtector extends CardImpl {
     public MajaBretagardProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -34,7 +34,7 @@ public final class MajaBretagardProtector extends CardImpl {
                 1, 1, Duration.WhileOnBattlefield, true
         )));
 
-        // Whenever a land enters the battlefield under your control, create a 1/1 white Human Warrior creature token.
+        // Whenever a land you control enters, create a 1/1 white Human Warrior creature token.
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new HumanWarriorToken())));
     }
 

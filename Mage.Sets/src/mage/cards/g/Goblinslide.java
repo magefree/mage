@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class Goblinslide extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenEffect(new GoblinToken(true)),
                 new GenericManaCost(1)),
-                StaticFilters.FILTER_SPELL_NON_CREATURE,
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE,
                 false
         ));
     }

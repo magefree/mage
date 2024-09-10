@@ -1,33 +1,29 @@
 package mage.cards.j;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.ReplaceTreasureWithAdditionalEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.combat.Combat;
-import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -37,7 +33,7 @@ import java.util.UUID;
  */
 public final class JoleneThePlunderQueen extends CardImpl {
 
-    private static final FilterControlledPermanent filterTreasures = new FilterControlledPermanent(SubType.TREASURE, "treasures");
+    private static final FilterControlledPermanent filterTreasures = new FilterControlledPermanent(SubType.TREASURE, "Treasures");
 
     public JoleneThePlunderQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
@@ -57,7 +53,7 @@ public final class JoleneThePlunderQueen extends CardImpl {
         // Sacrifice five Treasures: Put five +1/+1 counters on Jolene.
         this.addAbility(new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
-                new SacrificeTargetCost(new TargetControlledPermanent(5, filterTreasures))
+                new SacrificeTargetCost(5, filterTreasures)
         ));
     }
 
@@ -116,7 +112,7 @@ class JoleneThePlunderQueenTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player attacks one of your opponents, " +
+        return "Whenever a player attacks one or more of your opponents, " +
                "that attacking player creates a Treasure token.";
     }
 }

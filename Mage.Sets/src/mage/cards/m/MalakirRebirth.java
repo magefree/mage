@@ -7,7 +7,7 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -18,7 +18,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class MalakirRebirth extends ModalDoubleFacesCard {
+public final class MalakirRebirth extends ModalDoubleFacedCard {
 
     public MalakirRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

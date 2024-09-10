@@ -288,53 +288,73 @@ public abstract class StackObjectImpl implements StackObject {
     /**
      * Handles the change of one target instance of a mode
      *
-     * @param targetController         - player that can choose the new target
+     * @param targetController         player that can choose the new target
      * @param ability
      * @param mode
-     * @param target
+     * @param target                   original target
      * @param forceChange
-     * @param newTargetFilterPredicate
+     * @param newTargetFilterPredicate additional filter for target selection (e.g. force to select 1 specific permanent)
      * @param game
      * @return
      */
     private Target chooseNewTarget(Player targetController, Ability ability, Mode mode, Target target, boolean forceChange, Predicate newTargetFilterPredicate, Game game) {
         Target newTarget = target.copy();
+        newTarget.clearChosen();
 
-        // filter targets
+        // prepare temp target
+
+        // additional filter for possible targets
         if (newTargetFilterPredicate != null) {
             newTarget.getFilter().add(newTargetFilterPredicate);
-            // If adding a predicate, there will only be one choice and therefore target can be automatic
+            // if adding a predicate, there will only be one choice and therefore target can be automatic
+            // TODO: it's a card specific code like Radiate and limit usage of newTargetFilterPredicate (only for 1 to 1 target replace),
+            //  so must must be refactored to a standard way to check like possibleTargets/currentTargets compare
             newTarget.setRandom(true);
         }
-
+        // TODO: new targets must be selected without TARGETED events - is it ok by rules (triggers like whenever xxx becomes the target)?
         newTarget.setEventReporting(false);
         if (!targetController.getId().equals(getControllerId())) {
             newTarget.setTargetController(targetController.getId()); // target controller for the change is different from spell controller
             newTarget.setAbilityController(getControllerId());
         }
-        newTarget.clearChosen();
-        for (UUID targetId : target.getTargets()) {
-            String targetNames = getNamesOftargets(targetId, game);
-            String targetAmount = "";
-            if (target.getTargetAmount(targetId) > 0) {
-                targetAmount = " (amount: " + target.getTargetAmount(targetId) + ")";
-            }
-            // change the target?
-            Outcome outcome = mode.getEffects().getOutcome(ability);
 
-            if (targetNames != null
-                    && (forceChange || targetController.chooseUse(outcome, "Change this target: " + targetNames + targetAmount + '?', ability, game))) {
-                Set<UUID> possibleTargets = target.possibleTargets(getControllerId(), ability, game);
-                // choose exactly one other target - already targeted objects are not counted
+        // try to replace each targeted with a new
+        // * target - original target, do not change it
+        // * newTarget - final target, must store result from a tempTarget, do not clear it
+        // * tempTarget - temporary target for choosing a single replacement
+        int targetNumber = 0;
+        for (UUID oldTargetId : target.getTargets()) {
+            targetNumber++;
+            String targetName = getNameOftarget(oldTargetId, game);
+            String targetAmount = "";
+            if (target.getTargetAmount(oldTargetId) > 0) {
+                targetAmount = " (amount: " + target.getTargetAmount(oldTargetId) + ")";
+            }
+
+            Outcome outcome = mode.getEffects().getOutcome(ability);
+            if (targetName != null
+                    && (forceChange || targetController.chooseUse(
+                    outcome,
+                    String.format("Change this %d of %d target: %s?",
+                            targetNumber,
+                            target.getTargets().size(),
+                            targetName + targetAmount),
+                    ability,
+                    game))) {
+
+                // try single target replacement by a new
+                Set<UUID> possibleTargets = newTarget.possibleTargets(getControllerId(), ability, game);
                 if (forceChange && possibleTargets != null && possibleTargets.size() > 1) { // controller of spell must be used (e.g. TargetOpponent)
+                    // required replacement of 1 target
                     int iteration = 0;
                     do {
                         if (iteration > 0 && !game.isSimulation()) {
                             game.informPlayer(targetController, "You may only select exactly one target that must be different from the origin target!");
                         }
                         iteration++;
-                        newTarget.clearChosen();
 
+                        // TODO: bugged, must use tempTarget here also must keep amount value?
+                        newTarget.clearChosen();
                         newTarget.chooseTarget(outcome, getControllerId(), ability, game);
 
                         // workaround to stop infinite AI choose (remove after chooseTarget can be called with extra filter to disable some ids)
@@ -342,10 +362,12 @@ public abstract class StackObjectImpl implements StackObject {
                             break;
                         }
                     }
-                    while (targetController.canRespond() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
-                    // choose a new target
+                    while (targetController.canRespond() && (oldTargetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
                 } else {
-                    // build a target definition with exactly one possible target to select that replaces old target
+                    // optional replacement of 1 target (amount value must be same)
+
+                    // prepare temp target
+                    // TODO: must use shared code for target prepare (see comments at the start)
                     Target tempTarget = target.copy();
                     if (newTargetFilterPredicate != null) {
                         tempTarget.getFilter().add(newTargetFilterPredicate);
@@ -354,7 +376,7 @@ public abstract class StackObjectImpl implements StackObject {
                     }
                     tempTarget.setEventReporting(false);
                     if (target instanceof TargetAmount) {
-                        ((TargetAmount) tempTarget).setAmountDefinition(StaticValue.get(target.getTargetAmount(targetId)));
+                        ((TargetAmount) tempTarget).setAmountDefinition(StaticValue.get(target.getTargetAmount(oldTargetId)));
                     }
                     tempTarget.setMinNumberOfTargets(1);
                     tempTarget.setMaxNumberOfTargets(1);
@@ -362,48 +384,51 @@ public abstract class StackObjectImpl implements StackObject {
                         tempTarget.setTargetController(targetController.getId());
                         tempTarget.setAbilityController(getControllerId());
                     }
+
                     boolean again;
                     do {
+                        // TODO: bugged, must have workaround for infinite AI choose (see above)
                         again = false;
                         tempTarget.clearChosen();
                         if (!tempTarget.chooseTarget(outcome, getControllerId(), ability, game)) {
                             if (targetController.chooseUse(Outcome.Benefit, "No target object selected. Reset to original target?", ability, game)) {
                                 // use previous target no target was selected
-                                newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, true);
+                                newTarget.addTarget(oldTargetId, target.getTargetAmount(oldTargetId), ability, game, true);
                             } else {
                                 again = true;
                             }
-                        } else // if possible add the alternate Target - it may not be included in the old definition nor in the already selected targets of the new definition
-                        {
+                        } else {
+                            // if possible add the alternate Target - it may not be included in the old definition nor in the already selected targets of the new definition
                             if (newTarget.getTargets().contains(tempTarget.getFirstTarget()) || target.getTargets().contains(tempTarget.getFirstTarget())) {
                                 if (targetController.isHuman()) {
                                     if (targetController.chooseUse(Outcome.Benefit, "This target was already selected from origin spell. Reset to original target?", ability, game)) {
                                         // use previous target no target was selected
-                                        newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, true);
+                                        newTarget.addTarget(oldTargetId, target.getTargetAmount(oldTargetId), ability, game, true);
                                     } else {
                                         again = true;
                                     }
                                 } else {
-                                    newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, true);
+                                    newTarget.addTarget(oldTargetId, target.getTargetAmount(oldTargetId), ability, game, true);
                                 }
                             } else if (!target.canTarget(getControllerId(), tempTarget.getFirstTarget(), ability, game)) {
+                                // TODO: bugged, must use newTarget.canTarget instead target.canTarget?
                                 if (targetController.isHuman()) {
                                     game.informPlayer(targetController, "This target is not valid!");
                                     again = true;
                                 } else {
                                     // keep the old
-                                    newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, true);
+                                    newTarget.addTarget(oldTargetId, target.getTargetAmount(oldTargetId), ability, game, true);
                                 }
                             } else {
                                 // valid target was selected, add it to the new target definition
-                                newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), ability, game, true);
+                                newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(oldTargetId), ability, game, true);
                             }
                         }
                     } while (again && targetController.canRespond());
                 }
-            } // keep the target
-            else {
-                newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, true);
+            } else {
+                // keep old target
+                newTarget.addTarget(oldTargetId, target.getTargetAmount(oldTargetId), ability, game, true);
             }
         }
         return newTarget;
@@ -433,18 +458,18 @@ public abstract class StackObjectImpl implements StackObject {
         return false;
     }
 
-    private String getNamesOftargets(UUID targetId, Game game) {
-        MageObject object = game.getObject(targetId);
-        String name = null;
-        if (object == null) {
-            Player targetPlayer = game.getPlayer(targetId);
-            if (targetPlayer != null) {
-                name = targetPlayer.getLogName();
-            }
-        } else {
-            name = object.getIdName();
+    private String getNameOftarget(UUID targetId, Game game) {
+        Player targetPlayer = game.getPlayer(targetId);
+        if (targetPlayer != null) {
+            return targetPlayer.getLogName();
         }
-        return name;
+
+        MageObject object = game.getObject(targetId);
+        if (object != null) {
+            return object.getIdName();
+        }
+
+        return null;
     }
 
     @Override

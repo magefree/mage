@@ -30,7 +30,7 @@ public final class PharikaGodOfAffliction extends CardImpl {
 
     public PharikaGodOfAffliction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(5);

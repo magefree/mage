@@ -50,7 +50,7 @@ public final class BoseijuWhoEndures extends CardImpl {
     public BoseijuWhoEndures(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());

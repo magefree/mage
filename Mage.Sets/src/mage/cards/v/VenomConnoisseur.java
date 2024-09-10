@@ -14,6 +14,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.watchers.common.AbilityResolvedWatcher;
 
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ public final class VenomConnoisseur extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, Venom Connoisseur gains deathtouch until end of turn. If this is the second time this ability has resolved this turn, all creatures you control gain deathtouch until end of turn.
+        // Alliance — Whenever another creature you control enters, Venom Connoisseur gains deathtouch until end of turn. If this is the second time this ability has resolved this turn, all creatures you control gain deathtouch until end of turn.
         Ability ability = new AllianceAbility(new GainAbilitySourceEffect(
                 DeathtouchAbility.getInstance(), Duration.EndOfTurn
         ));
@@ -41,7 +42,7 @@ public final class VenomConnoisseur extends CardImpl {
                         StaticFilters.FILTER_CONTROLLED_CREATURE
                 ).setText("all creatures you control gain deathtouch until end of turn")
         ));
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
     private VenomConnoisseur(final VenomConnoisseur card) {

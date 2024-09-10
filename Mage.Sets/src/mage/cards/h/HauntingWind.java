@@ -44,7 +44,7 @@ class HauntingWindTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
-    HauntingWindTriggeredAbility(final HauntingWindTriggeredAbility ability) {
+    private HauntingWindTriggeredAbility(final HauntingWindTriggeredAbility ability) {
         super(ability);
     }
 

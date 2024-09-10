@@ -26,7 +26,7 @@ public final class LoxodonPartisan extends CardImpl {
         this.addAbility(new BattleCryAbility());
     }
 
-    public LoxodonPartisan (final LoxodonPartisan card) {
+    private LoxodonPartisan(final LoxodonPartisan card) {
         super(card);
     }
 

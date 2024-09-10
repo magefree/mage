@@ -18,11 +18,18 @@ import mage.game.events.GameEvent;
 public final class GideonOfTheTrialsEmblem extends Emblem {
 
     public GideonOfTheTrialsEmblem() {
-        this.setName("Emblem Gideon");
+        super("Emblem Gideon");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GideonOfTheTrialsCantLoseEffect());
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("AKH");
+    private GideonOfTheTrialsEmblem(final GideonOfTheTrialsEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public GideonOfTheTrialsEmblem copy() {
+        return new GideonOfTheTrialsEmblem(this);
     }
 }
 
@@ -39,13 +46,14 @@ class GideonOfTheTrialsCantLoseEffect extends ContinuousRuleModifyingEffectImpl 
         staticText = "As long as you control a Gideon planeswalker, you can't lose the game and your opponents can't win the game";
     }
 
-    public GideonOfTheTrialsCantLoseEffect(final GideonOfTheTrialsCantLoseEffect effect) {
+    protected GideonOfTheTrialsCantLoseEffect(final GideonOfTheTrialsCantLoseEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.WINS
+                || event.getType() == GameEvent.EventType.LOSES;
     }
 
     @Override

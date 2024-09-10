@@ -6,6 +6,8 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.components.table.MageTable;
+import mage.components.table.TableInfo;
 import mage.remote.MageRemoteException;
 import mage.view.RoomUsersView;
 import mage.view.UsersView;
@@ -93,7 +95,6 @@ public class PlayersChatPanel extends javax.swing.JPanel {
             jScrollPanePlayers.getViewport().setBackground(new Color(0, 0, 0, CHAT_ALPHA));
             jScrollPanePlayers.setViewportBorder(null);
         }
-
     }
 
     public ChatPanelBasic getUserChatPanel() {
@@ -116,14 +117,18 @@ public class PlayersChatPanel extends javax.swing.JPanel {
     private void setGUISize() {
         jTablePlayers.getTableHeader().setFont(GUISizeHelper.tableFont);
         jTablePlayers.setFont(GUISizeHelper.tableFont);
-        jTablePlayers.setRowHeight(GUISizeHelper.getTableRowHeight());
+        jTablePlayers.setRowHeight(GUISizeHelper.tableRowHeight);
         jScrollPanePlayers.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         jScrollPanePlayers.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
         jScrollPaneSystem.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         jScrollPaneSystem.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
 
-        jTabbedPaneText.setFont(GUISizeHelper.getTabFont());
+        jTabbedPaneText.setFont(GUISizeHelper.tableFont);
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+
+        // chats and logs
+        colorPaneSystem.changeGUISize(GUISizeHelper.chatFont);
+        jScrollPaneTalk.changeGUISize(GUISizeHelper.chatFont);
     }
 
     public void setSplitDividerLocation(int location) {

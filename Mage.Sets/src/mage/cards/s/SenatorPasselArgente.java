@@ -19,7 +19,7 @@ public final class SenatorPasselArgente extends CardImpl {
 
     public SenatorPasselArgente(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOORIVAR);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);

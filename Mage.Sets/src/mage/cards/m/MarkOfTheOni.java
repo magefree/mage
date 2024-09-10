@@ -14,7 +14,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,9 +42,9 @@ public final class MarkOfTheOni extends CardImpl {
         // At the beginning of the end step, if you control no Demons, sacrifice Mark of the Oni.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
                 new SacrificeSourceEffect(),
-                TargetController.ANY,
+                TargetController.NEXT,
                 new PermanentsOnTheBattlefieldCondition(
-                        new FilterControlledCreaturePermanent(SubType.DEMON, "if you control no Demons"),
+                        new FilterControlledPermanent(SubType.DEMON, "if you control no Demons"),
                         ComparisonType.FEWER_THAN, 1),
                 false));
     }

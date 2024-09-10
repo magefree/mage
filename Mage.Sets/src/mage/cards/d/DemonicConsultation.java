@@ -45,7 +45,7 @@ class DemonicConsultationEffect extends OneShotEffect {
                 "Put that card into your hand and exile all other cards revealed this way";
     }
 
-    DemonicConsultationEffect(final DemonicConsultationEffect effect) {
+    private DemonicConsultationEffect(final DemonicConsultationEffect effect) {
         super(effect);
     }
 

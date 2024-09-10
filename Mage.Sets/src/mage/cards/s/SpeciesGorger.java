@@ -8,7 +8,7 @@ import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -25,7 +25,7 @@ public final class SpeciesGorger extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At the beginning of your upkeep, return a creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE), TargetController.YOU, false));
         
     }
 
@@ -38,4 +38,3 @@ public final class SpeciesGorger extends CardImpl {
         return new SpeciesGorger(this);
     }
 }
-

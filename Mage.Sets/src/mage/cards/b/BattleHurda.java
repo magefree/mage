@@ -25,7 +25,7 @@ public final class BattleHurda extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public BattleHurda (final BattleHurda card) {
+    private BattleHurda(final BattleHurda card) {
         super(card);
     }
 

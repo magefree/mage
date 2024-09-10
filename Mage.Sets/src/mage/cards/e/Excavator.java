@@ -10,7 +10,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +37,7 @@ public final class Excavator extends CardImpl {
 
         // {tap}, Sacrifice a basic land: Target creature gains landwalk of each of the land types of the sacrificed land until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExcavatorEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -53,7 +52,7 @@ public final class Excavator extends CardImpl {
     }
 }
 
-class ExcavatorEffect extends ContinuousEffectImpl implements SourceEffect {
+class ExcavatorEffect extends ContinuousEffectImpl {
 
     private Abilities<Ability> abilities = new AbilitiesImpl();
 
@@ -62,7 +61,7 @@ class ExcavatorEffect extends ContinuousEffectImpl implements SourceEffect {
         setText("Target creature gains landwalk of each of the land types of the sacrificed land until end of turn");
     }
 
-    public ExcavatorEffect(final ExcavatorEffect effect) {
+    private ExcavatorEffect(final ExcavatorEffect effect) {
         super(effect);
         this.abilities = abilities.copy();
     }
@@ -107,7 +106,7 @@ class ExcavatorEffect extends ContinuousEffectImpl implements SourceEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
             if (permanent != null) {
                 for(Ability ability : abilities)

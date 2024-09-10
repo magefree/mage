@@ -14,7 +14,11 @@ import mage.game.events.GameEvent;
 public class LegendarySpellAbility extends SimpleStaticAbility {
 
     public LegendarySpellAbility() {
-        super(Zone.ALL, new LegendarySpellAbilityCheckEffect());
+        this(false);
+    }
+
+    public LegendarySpellAbility(boolean isInstant) {
+        super(Zone.ALL, new LegendarySpellAbilityCheckEffect(isInstant));
         this.setRuleAtTheTop(true);
     }
 
@@ -44,9 +48,11 @@ class LegendarySpellAbilityCheckEffect extends ContinuousRuleModifyingEffectImpl
         );
     }
 
-    public LegendarySpellAbilityCheckEffect() {
+    public LegendarySpellAbilityCheckEffect(boolean isInstant) {
         super(Duration.EndOfGame, Outcome.Detriment);
-        staticText = "<i>(You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)</i>";
+        staticText = "<i>(You may cast a legendary " +
+                (isInstant ? "instant" : "sorcery") +
+                " only if you control a legendary creature or planeswalker.)</i>";
     }
 
     private LegendarySpellAbilityCheckEffect(final LegendarySpellAbilityCheckEffect effect) {

@@ -24,7 +24,7 @@ public final class JhessianLookout extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public JhessianLookout (final JhessianLookout card) {
+    private JhessianLookout(final JhessianLookout card) {
         super(card);
     }
 

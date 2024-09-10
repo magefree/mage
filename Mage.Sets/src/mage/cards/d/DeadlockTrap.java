@@ -54,12 +54,12 @@ public final class DeadlockTrap extends CardImpl {
 
 class DeadlockTrapCantActivateEffect extends RestrictionEffect {
 
-    public DeadlockTrapCantActivateEffect() {
+    DeadlockTrapCantActivateEffect() {
         super(Duration.EndOfTurn);
         staticText = "Its activated abilities can't be activated this turn";
     }
 
-    public DeadlockTrapCantActivateEffect(final DeadlockTrapCantActivateEffect effect) {
+    private DeadlockTrapCantActivateEffect(final DeadlockTrapCantActivateEffect effect) {
         super(effect);
     }
 

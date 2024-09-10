@@ -2,6 +2,7 @@
 package mage.cards.m;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -60,12 +61,12 @@ public final class MonkeyMonkeyMonkey extends CardImpl {
 
 class ChooseLetterEffect extends OneShotEffect {
 
-    public ChooseLetterEffect() {
+    ChooseLetterEffect() {
         super(Outcome.Benefit);
         staticText = "choose a letter";
     }
 
-    public ChooseLetterEffect(final ChooseLetterEffect effect) {
+    private ChooseLetterEffect(final ChooseLetterEffect effect) {
         super(effect);
     }
 
@@ -79,7 +80,7 @@ class ChooseLetterEffect extends OneShotEffect {
 
         ChoiceImpl choice = new ChoiceImpl(true);
         choice.setMessage("Choose letter");
-        Set<String> choices = new HashSet<>();
+        Set<String> choices = new LinkedHashSet<>();
         for (char letter = 'A'; letter <= 'Z'; letter++) {
             choices.add(Character.toString(letter));
         }
@@ -109,7 +110,7 @@ class MonkeyMonkeyMonkeyCount implements DynamicValue {
     public MonkeyMonkeyMonkeyCount() {
     }
 
-    public MonkeyMonkeyMonkeyCount(final MonkeyMonkeyMonkeyCount countersCount) {
+    private MonkeyMonkeyMonkeyCount(final MonkeyMonkeyMonkeyCount countersCount) {
     }
 
     @Override

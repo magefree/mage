@@ -42,7 +42,7 @@ public final class Trinisphere extends CardImpl {
 
 class TrinisphereEffect extends CostModificationEffectImpl {
 
-    public TrinisphereEffect() {
+    TrinisphereEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, CostModificationType.SET_COST);
         this.staticText = "As long as {this} is untapped, each spell that would cost less than three mana to cast costs three mana to cast";
     }

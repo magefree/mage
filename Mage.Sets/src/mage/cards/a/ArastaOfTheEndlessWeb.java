@@ -22,7 +22,7 @@ public final class ArastaOfTheEndlessWeb extends CardImpl {
     public ArastaOfTheEndlessWeb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIDER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);

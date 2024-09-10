@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 
@@ -38,7 +37,7 @@ public final class Cognivore extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Cognivore's power and toughness are each equal to the number of instant cards in all graveyards.
         DynamicValue value = (new CardsInAllGraveyardsCount(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value)));
     }
 
     private Cognivore(final Cognivore card) {

@@ -27,7 +27,7 @@ public final class Rile extends CardImpl {
                 .setText("That creature gains trample until end of turn"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Rile(final Rile card) {

@@ -66,11 +66,7 @@ class FieryEmancipationEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.overflowInc(
-                CardUtil.overflowInc(
-                        event.getAmount(), event.getAmount()
-                ), event.getAmount()
-        ));
+        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 3));
         return false;
     }
 }

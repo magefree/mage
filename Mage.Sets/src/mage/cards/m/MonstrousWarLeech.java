@@ -16,7 +16,6 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -51,16 +50,16 @@ public final class MonstrousWarLeech extends CardImpl {
         // As Monstrous War-Leech enters the battlefield, if it was kicked, mill four cards.
         this.addAbility(new EntersBattlefieldAbility(
                 new MillCardsControllerEffect(4), KickedCondition.ONCE,
-                "As {this} enters the battlefield, if it was kicked, mill four cards.", ""
+                "As {this} enters, if it was kicked, mill four cards.", ""
         ));
 
         // Monstrous War-Leech's power and toughness are each equal to the highest mana value among cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerToughnessSourceEffect(
-                        MonstrousWarLeechValue.instance, Duration.EndOfGame
+                        MonstrousWarLeechValue.instance
                 )
-        ));
+        ).addHint(hint));
     }
 
     private MonstrousWarLeech(final MonstrousWarLeech card) {

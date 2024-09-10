@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.card.CardManaCostLessThanControlledLandCountPredicate;
+import mage.filter.predicate.card.ManaValueLessThanControlledLandCountPredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -18,7 +18,7 @@ public final class BeseechTheQueen extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card with mana value less than or equal to the number of lands you control");
     static {
-        filter.add(CardManaCostLessThanControlledLandCountPredicate.getInstance());
+        filter.add(ManaValueLessThanControlledLandCountPredicate.instance);
     }
 
     public BeseechTheQueen(UUID ownerId, CardSetInfo setInfo) {
@@ -27,7 +27,7 @@ public final class BeseechTheQueen extends CardImpl {
 
         // <i>({2B} can be paid with any two mana or with {B}. This card's converted mana cost is 6.)</i>
         // Search your library for a card with converted mana cost less than or equal to the number of lands you control, reveal it, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
     private BeseechTheQueen(final BeseechTheQueen card) {

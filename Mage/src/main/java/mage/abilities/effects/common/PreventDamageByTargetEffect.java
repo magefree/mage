@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -16,13 +15,8 @@ import mage.target.TargetSpell;
  */
 public class PreventDamageByTargetEffect extends PreventionEffectImpl {
 
-    public PreventDamageByTargetEffect(Duration duration) {
-        this(duration, false);
-    }
-
-    public PreventDamageByTargetEffect(Duration duration, int amount) {
-        this(duration, amount, false);
-    }
+    private boolean passiveVoice = true;
+    private boolean durationRuleAtEnd = true;
 
     public PreventDamageByTargetEffect(Duration duration, boolean onlyCombat) {
         this(duration, Integer.MAX_VALUE, onlyCombat);
@@ -32,8 +26,10 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
         super(duration, amount, onlyCombat);
     }
 
-    public PreventDamageByTargetEffect(final PreventDamageByTargetEffect effect) {
+    protected PreventDamageByTargetEffect(final PreventDamageByTargetEffect effect) {
         super(effect);
+        this.passiveVoice = effect.passiveVoice;
+        this.durationRuleAtEnd = effect.durationRuleAtEnd;
     }
 
     @Override
@@ -60,31 +56,28 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
         return false;
     }
 
+    public PreventDamageByTargetEffect withTextOptions(boolean passiveVoice, boolean durationRuleAtEnd) {
+        this.passiveVoice = passiveVoice;
+        this.durationRuleAtEnd = durationRuleAtEnd;
+        return this;
+    }
+
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (amountToPrevent == Integer.MAX_VALUE) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Prevent all");
-            if (onlyCombat) {
-                sb.append(" combat");
-            }
-            sb.append(" damage target ");
-            sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
-            return sb.toString();
+        String durationText = duration == Duration.EndOfTurn ? " this turn" : ' ' + duration.toString();
+        String targetText = getTargetPointer().describeTargets(mode.getTargets(), "it");
+        String preventText = (amountToPrevent == Integer.MAX_VALUE ? "Prevent all" : "Prevent the next" + amountToPrevent)
+                + (onlyCombat ? " combat damage " : " damage ");
+        if (passiveVoice) {
+            preventText += "that would be dealt" + (durationRuleAtEnd ?
+                    " by " + targetText + durationText :
+                    durationText + " by " + targetText);
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Prevent the next ").append(amountToPrevent);
-            if (onlyCombat) {
-                sb.append("combat ");
-            }
-            sb.append(" damage that ");
-            sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
-            return sb.toString();
+            preventText += targetText + " would deal" + durationText;
         }
-
+        return preventText;
     }
-
 }

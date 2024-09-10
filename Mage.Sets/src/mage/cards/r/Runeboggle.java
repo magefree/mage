@@ -21,7 +21,7 @@ public final class Runeboggle extends CardImpl {
 
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
         this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Runeboggle(final Runeboggle card) {

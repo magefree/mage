@@ -45,7 +45,7 @@ public final class KollTheForgemaster extends CardImpl {
     public KollTheForgemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);

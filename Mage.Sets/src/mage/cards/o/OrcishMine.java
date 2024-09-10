@@ -71,7 +71,7 @@ class OrcishMineAbility extends TriggeredAbilityImpl {
         this.addEffect(new DamageAttachedControllerEffect(2));
     }
 
-    public OrcishMineAbility(final OrcishMineAbility ability) {
+    private OrcishMineAbility(final OrcishMineAbility ability) {
         super(ability);
     }
 
@@ -82,7 +82,7 @@ class OrcishMineAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getData().equals("ore") && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getData().equals(CounterType.ORE.getName()) && event.getTargetId().equals(this.getSourceId())) {
             Permanent p = game.getPermanent(this.getSourceId());
             if (p != null) {
                 return p.getCounters(game).getCount(CounterType.ORE) == 0;

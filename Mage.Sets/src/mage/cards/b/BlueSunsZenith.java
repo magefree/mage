@@ -3,7 +3,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
@@ -21,12 +21,12 @@ public final class BlueSunsZenith extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}{U}{U}");
 
         // Target player draws X cards. Shuffle Blue Sun's Zenith into its owner's library.
-        this.getSpellAbility().addEffect(new DrawCardTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public BlueSunsZenith (final BlueSunsZenith card) {
+    private BlueSunsZenith(final BlueSunsZenith card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class NurglesRot extends CardImpl {
 
         // When enchanted creature dies, return Nurgle's Rot to its owner's hand and you create a 1/3 black Demon creature token named Plaguebearer of Nurgle.
         Ability ability = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(false, true), "enchanted creature");
-        ability.addEffect(new CreateTokenEffect(new PlaguebearerOfNurgleToken()).concatBy("and"));
+        ability.addEffect(new CreateTokenEffect(new PlaguebearerOfNurgleToken()).concatBy("and you"));
         this.addAbility(ability);
     }
 

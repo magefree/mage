@@ -39,7 +39,7 @@ public final class ChronatogTotem extends CardImpl {
                         .withColor("U")
                         .withSubType(SubType.ATOG)
                         .withType(CardType.ARTIFACT),
-                "", Duration.EndOfTurn
+                CardType.ARTIFACT, Duration.EndOfTurn
         ), new ManaCostsImpl<>("{1}{U}")));
 
         // {0}: Chronatog Totem gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn and only if Chronatog Totem is a creature.

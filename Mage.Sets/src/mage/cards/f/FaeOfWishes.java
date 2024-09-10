@@ -13,7 +13,6 @@ import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 
@@ -23,8 +22,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class FaeOfWishes extends AdventureCard {
-
-    private static final FilterCard filter = new FilterCard("two cards");
 
     public FaeOfWishes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{U}", "Granted", "{3}{U}");
@@ -41,13 +38,15 @@ public final class FaeOfWishes extends AdventureCard {
         Ability ability = new SimpleActivatedAbility(
                 new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")
         );
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, filter)));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);
 
         // Granted
         // You may reveal a noncreature card you own from outside the game and put it into your hand.
         this.getSpellCard().getSpellAbility().addEffect(new WishEffect(StaticFilters.FILTER_CARD_A_NON_CREATURE));
         this.getSpellCard().getSpellAbility().addHint(OpenSideboardHint.instance);
+
+        this.finalizeAdventure();
     }
 
     private FaeOfWishes(final FaeOfWishes card) {

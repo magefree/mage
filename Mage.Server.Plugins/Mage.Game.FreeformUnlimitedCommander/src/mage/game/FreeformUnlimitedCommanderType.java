@@ -1,6 +1,8 @@
 package mage.game;
 
-public class FreeformUnlimitedCommanderType extends FreeformCommanderFreeForAllType {
+import mage.game.match.MatchType;
+
+public class FreeformUnlimitedCommanderType extends MatchType {
 
     public FreeformUnlimitedCommanderType() {
         this.name = "Freeform Unlimited Commander";
@@ -10,7 +12,7 @@ public class FreeformUnlimitedCommanderType extends FreeformCommanderFreeForAllT
         this.playersPerTeam = 0;
         this.useAttackOption = true;
         this.useRange = true;
-        this.sideboardingAllowed = false;
+        this.sideboardingAllowed = true;
     }
 
     protected FreeformUnlimitedCommanderType(final FreeformUnlimitedCommanderType matchType) {

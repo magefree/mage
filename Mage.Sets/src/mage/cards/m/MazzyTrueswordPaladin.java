@@ -40,7 +40,7 @@ public final class MazzyTrueswordPaladin extends CardImpl {
     public MazzyTrueswordPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HALFLING);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);
@@ -78,7 +78,7 @@ class MazzyAttackTriggeredAbility extends AttacksAllTriggeredAbility {
         this.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    MazzyAttackTriggeredAbility(final MazzyAttackTriggeredAbility effect) {
+    private MazzyAttackTriggeredAbility(final MazzyAttackTriggeredAbility effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class MazzyAttackTriggeredAbility extends AttacksAllTriggeredAbility {
 
 class MazzyExileEffect extends OneShotEffect {
 
-    public MazzyExileEffect() {
+    MazzyExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile it. Until the end of your next turn, you may cast that card.";
     }

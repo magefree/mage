@@ -78,7 +78,7 @@ class StormElementalEffect extends OneShotEffect {
         this.staticText = "If the exiled card is a snow land, {this} gets +1/+1 until end of turn";
     }
 
-    public StormElementalEffect(final StormElementalEffect effect) {
+    private StormElementalEffect(final StormElementalEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class ExileTopCardLibraryCost extends CostImpl {
         this.text = "Exile the top card of your library";
     }
 
-    public ExileTopCardLibraryCost(final ExileTopCardLibraryCost cost) {
+    private ExileTopCardLibraryCost(final ExileTopCardLibraryCost cost) {
         super(cost);
         this.card = cost.getCard();
     }

@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubLayer;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ public final class BrokersInitiate extends CardImpl {
 
         // {4}{G/U}: Brokers Initiate has base power and toughness 5/5 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new SetBasePowerToughnessSourceEffect(5, 5, Duration.EndOfTurn, SubLayer.SetPT_7b, true),
+                new SetBasePowerToughnessSourceEffect(5, 5, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{4}{G/U}")
         ));
     }

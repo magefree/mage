@@ -32,7 +32,7 @@ public final class SludgeStrider extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever another artifact enters the battlefield under your control or another artifact you control leaves the battlefield, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.
+        // Whenever another artifact you control enters or another artifact you control leaves the battlefield, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.
         Ability ability = new SludgeStriderTriggeredAbility();
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -63,7 +63,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SludgeStriderEffect(), new GenericManaCost(1)), false);
     }
 
-    public SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
+    private SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,7 +101,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever another artifact enters the battlefield under your control or another artifact you control leaves the battlefield, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.";
+        return "Whenever another artifact you control enters or another artifact you control leaves the battlefield, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.";
     }
 }
 
@@ -112,7 +112,7 @@ class SludgeStriderEffect extends OneShotEffect {
         staticText = "target player loses 1 life and you gain 1 life";
     }
 
-    SludgeStriderEffect(final SludgeStriderEffect effect) {
+    private SludgeStriderEffect(final SludgeStriderEffect effect) {
         super(effect);
     }
 

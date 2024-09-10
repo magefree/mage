@@ -38,7 +38,7 @@ public final class NestingWurm extends CardImpl {
 
         // When Nesting Wurm enters the battlefield, you may search your library for up to three cards named Nesting Wurm, reveal them, and put them into your hand. If you do, shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true), true));
     }
 
     private NestingWurm(final NestingWurm card) {

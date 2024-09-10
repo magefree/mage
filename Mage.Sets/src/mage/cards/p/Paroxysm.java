@@ -72,7 +72,7 @@ class ParoxysmEffect extends OneShotEffect {
                 + "Otherwise, it gets +3/+3 until end of turn.";
     }
 
-    ParoxysmEffect(final ParoxysmEffect effect) {
+    private ParoxysmEffect(final ParoxysmEffect effect) {
         super(effect);
     }
 

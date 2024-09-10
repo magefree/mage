@@ -82,7 +82,7 @@ class ReckonerShakedownEffect extends OneShotEffect {
         }
         player.revealCards(source, player.getHand(), game);
         TargetCard target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_A_NON_LAND);
-        controller.choose(Outcome.Discard, player.getHand(), target, game);
+        controller.choose(Outcome.Discard, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.discard(card, false, source, game);
@@ -92,8 +92,8 @@ class ReckonerShakedownEffect extends OneShotEffect {
             return true;
         }
         TargetPermanent targetPermanent = new TargetPermanent(filter);
-        targetPermanent.setNotTarget(true);
-        player.choose(Outcome.BoostCreature, targetPermanent, source, game);
+        targetPermanent.withNotTarget(true);
+        controller.choose(Outcome.BoostCreature, targetPermanent, source, game);
         Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());
         if (permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(2), source, game);

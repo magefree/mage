@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.MageInt;
@@ -26,7 +25,7 @@ import java.util.UUID;
  */
 public final class RimescaleDragon extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with ice counters");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with ice counters on them");
 
     static {
         filter.add(CounterType.ICE.getPredicate());
@@ -35,7 +34,7 @@ public final class RimescaleDragon extends CardImpl {
     public RimescaleDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -55,9 +54,7 @@ public final class RimescaleDragon extends CardImpl {
         this.addAbility(ability);
 
         // Creatures with ice counters on them don't untap during their controllers' untap steps.
-        effect = new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter);
-        effect.setText("Creatures with ice counters on them don't untap during their controllers' untap steps");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
     private RimescaleDragon(final RimescaleDragon card) {

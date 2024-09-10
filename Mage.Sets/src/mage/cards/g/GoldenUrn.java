@@ -32,7 +32,7 @@ public final class GoldenUrn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoldenUrn (final GoldenUrn card) {
+    private GoldenUrn(final GoldenUrn card) {
         super(card);
     }
 

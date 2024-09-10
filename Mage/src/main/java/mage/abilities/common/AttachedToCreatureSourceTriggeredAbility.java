@@ -14,24 +14,29 @@ public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityIm
 
     public AttachedToCreatureSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("As {this} becomes attached to a creature, ");
+        setTriggerPhrase("Whenever {this} becomes attached to a creature, ");
     }
 
-    public AttachedToCreatureSourceTriggeredAbility(final AttachedToCreatureSourceTriggeredAbility ability) {
+    protected AttachedToCreatureSourceTriggeredAbility(final AttachedToCreatureSourceTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACHED
-                && event.getSourceId() != null
-                && event.getSourceId().equals(this.getSourceId());
+        return event.getType() == GameEvent.EventType.ATTACHED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.getSourceId().equals(this.getSourceId())) {
+            return false;
+        }
         Permanent attachedPermanent = game.getPermanent(event.getTargetId());
-        return attachedPermanent != null && attachedPermanent.isCreature(game);
+        if (attachedPermanent == null || !attachedPermanent.isCreature(game)) {
+            return false;
+        }
+        this.getEffects().setValue("attachedPermanent", attachedPermanent);
+        return true;
     }
 
     @Override

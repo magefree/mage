@@ -30,7 +30,7 @@ public final class BazaarOfWonders extends CardImpl {
     public BazaarOfWonders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // When Bazaar of Wonders enters the battlefield, exile all cards from all graveyards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllPlayersEffect()));
@@ -53,13 +53,13 @@ public final class BazaarOfWonders extends CardImpl {
 
 class BazaarOfWondersEffect extends OneShotEffect {
 
-    public BazaarOfWondersEffect() {
+    BazaarOfWondersEffect() {
         super(Outcome.Benefit);
         this.staticText = "counter it if a card with the same name is in a graveyard "
                 + "or a nontoken permanent with the same name is on the battlefield";
     }
 
-    public BazaarOfWondersEffect(final BazaarOfWondersEffect effect) {
+    private BazaarOfWondersEffect(final BazaarOfWondersEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class BazaarOfWondersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getSpell(getTargetPointer().getFirst(game, source));
         if (spell == null) {
             return false;
         }

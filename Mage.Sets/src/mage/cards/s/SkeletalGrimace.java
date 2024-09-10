@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -16,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
@@ -32,17 +30,19 @@ public final class SkeletalGrimace extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
         this.subtype.add(SubType.AURA);
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
+
         // Enchanted creature gets +1/+1 and has "{B}: Regenerate this creature."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
+        Ability staticAbility = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
+        staticAbility.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)
+                .setText("and has \"{B}: Regenerate this creature.\""));
+        this.addAbility(staticAbility);
     }
 
     private SkeletalGrimace(final SkeletalGrimace card) {

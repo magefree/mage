@@ -37,7 +37,7 @@ public final class BrudicladTelchorEngineer extends CardImpl {
     public BrudicladTelchorEngineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(4);
@@ -73,7 +73,7 @@ class BrudicladTelchorEngineerEffect extends OneShotEffect {
         this.staticText = "create a 2/1 blue Phyrexian Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token";
     }
 
-    public BrudicladTelchorEngineerEffect(final BrudicladTelchorEngineerEffect effect) {
+    private BrudicladTelchorEngineerEffect(final BrudicladTelchorEngineerEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class BrudicladTelchorEngineerEffect extends OneShotEffect {
 
         if (effect.apply(game, source)) {
             TargetControlledPermanent target = new TargetControlledPermanent(0, 1, filter, true);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.chooseUse(outcome, "Select a token to copy?", source, game)
                     && controller.choose(Outcome.Neutral, target, source, game)) {
                 Permanent toCopyFromPermanent = game.getPermanent(target.getFirstTarget());

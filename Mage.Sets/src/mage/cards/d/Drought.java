@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,20 +9,13 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class Drought extends CardImpl {
@@ -66,7 +58,7 @@ class DroughtAdditionalCostEffect extends CostModificationEffectImpl {
         this.appliesToSpells = appliesToSpells;
     }
 
-    DroughtAdditionalCostEffect(DroughtAdditionalCostEffect effect) {
+    private DroughtAdditionalCostEffect(final DroughtAdditionalCostEffect effect) {
         super(effect);
         appliesToSpells = effect.appliesToSpells;
     }
@@ -74,16 +66,14 @@ class DroughtAdditionalCostEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int blackSymbols = abilityToModify.getManaCosts().getMana().getBlack();
-        TargetControlledPermanent target = new TargetControlledPermanent(blackSymbols, blackSymbols, filter, true);
-        target.setRequired(false);
-        abilityToModify.addCost(new SacrificeTargetCost(target));
+        abilityToModify.addCost(new SacrificeTargetCost(blackSymbols, filter));
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return (appliesToSpells && abilityToModify.getAbilityType() == AbilityType.SPELL)
-                || (!appliesToSpells && (abilityToModify.getAbilityType() == AbilityType.ACTIVATED || abilityToModify.getAbilityType() == AbilityType.MANA));
+                || (!appliesToSpells && abilityToModify.isActivatedAbility());
     }
 
     @Override

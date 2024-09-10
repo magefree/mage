@@ -29,7 +29,7 @@ public class TargetControlledPermanent extends TargetPermanent {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetControlledPermanent(final TargetControlledPermanent target) {
+    protected TargetControlledPermanent(final TargetControlledPermanent target) {
         super(target);
     }
 

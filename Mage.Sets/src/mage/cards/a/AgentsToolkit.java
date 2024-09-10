@@ -3,12 +3,9 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.token.ClueAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
@@ -16,13 +13,13 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -42,7 +39,7 @@ public class AgentsToolkit extends CardImpl {
         counterETBAbility.addEffect(new AddCountersSourceEffect(CounterType.SHIELD.createInstance(1)).setText("and a shield counter on it").concatBy(","));
         this.addAbility(counterETBAbility);
 
-        // Whenever a creature enters the battlefield under your control,
+        // Whenever a creature you control enters,
         // you may move a counter from Agent’s Toolkit onto that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AgentToolkitMoveCounterEffect(),
@@ -50,9 +47,7 @@ public class AgentsToolkit extends CardImpl {
         ));
 
         // {2}, Sacrifice Agent’s Toolkit: Draw a card.
-        Ability drawAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
-        drawAbility.addCost(new SacrificeSourceCost());
-        this.addAbility(drawAbility);
+        this.addAbility(new ClueAbility(true));
     }
 
     private AgentsToolkit(final AgentsToolkit card) {
@@ -67,7 +62,7 @@ public class AgentsToolkit extends CardImpl {
 
 class AgentToolkitMoveCounterEffect extends OneShotEffect {
 
-    public AgentToolkitMoveCounterEffect() {
+    AgentToolkitMoveCounterEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may move a counter from {this} onto that creature";
     }
@@ -89,8 +84,12 @@ class AgentToolkitMoveCounterEffect extends OneShotEffect {
         }
         Permanent enteringCreature = (Permanent) enteringObject;
 
+        Set<String> possibleCounterNames = new LinkedHashSet<>(agentsToolkitPermanent.getCounters(game).keySet());
+        if (possibleCounterNames.isEmpty()) {
+            return false;
+        }
+
         Choice moveCounterChoice = new ChoiceImpl(false);
-        Set<String> possibleCounterNames = agentsToolkitPermanent.getCounters(game).keySet();
         moveCounterChoice.setMessage("Choose counter to move");
         moveCounterChoice.setChoices(possibleCounterNames);
 

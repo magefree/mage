@@ -16,9 +16,9 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
  * @author TheElk801
@@ -44,14 +44,14 @@ public final class HeronbladeElite extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Heronblade Elite.
+        // Whenever another Human you control enters, put a +1/+1 counter on Heronblade Elite.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));
 
         // {T}: Add X mana of any one color, where X is Heronblade Elite's power.
         this.addAbility(new DynamicManaAbility(
-                new Mana(0, 0, 0, 0, 0, 0, 1, 0), xValue, new TapSourceCost(), "Add X mana "
+                Mana.AnyMana(1), xValue, new TapSourceCost(), "Add X mana "
                 + "of any one color, where X is {this}'s power", true
         ));
     }

@@ -29,7 +29,7 @@ public final class ConjurersBan extends CardImpl {
         this.getSpellAbility().addEffect(new ConjurersBanEffect());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ConjurersBan(final ConjurersBan card) {
@@ -46,16 +46,11 @@ class ConjurersBanEffect extends ContinuousRuleModifyingEffectImpl {
 
     ConjurersBanEffect() {
         super(Duration.UntilYourNextTurn, Outcome.Detriment, true, false);
-        this.staticText = "Until your next turn spells with the chosen name can't be cast and lands with the chosen name can't be played";
+        this.staticText = "Until your next turn, spells with the chosen name can't be cast and lands with the chosen name can't be played";
     }
 
     private ConjurersBanEffect(final ConjurersBanEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -64,13 +59,16 @@ class ConjurersBanEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL
+                || event.getType() == GameEvent.EventType.PLAY_LAND;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL || event.getType() == GameEvent.EventType.PLAY_LAND) {
-            MageObject object = game.getObject(event.getSourceId());
-            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-            return CardUtil.haveSameNames(object, cardName, game);
-        }
-        return false;
+        MageObject object = game.getObject(event.getSourceId());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        return CardUtil.haveSameNames(object, cardName, game);
     }
 
     @Override

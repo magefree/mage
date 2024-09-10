@@ -21,6 +21,7 @@ import mage.choices.ChoiceBasicLandType;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,12 +59,12 @@ public final class IllusionaryTerrain extends CardImpl {
 
 class IllusionaryTerrainEffect extends ContinuousEffectImpl {
 
-    public IllusionaryTerrainEffect() {
+    IllusionaryTerrainEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Basic lands of the first chosen type are the second chosen type";
     }
 
-    public IllusionaryTerrainEffect(final IllusionaryTerrainEffect effect) {
+    private IllusionaryTerrainEffect(final IllusionaryTerrainEffect effect) {
         super(effect);
     }
 
@@ -77,12 +78,12 @@ class IllusionaryTerrainEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         SubType firstChoice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "firstChoice"));
         SubType secondChoice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "secondChoice"));
-        List<Permanent> lands = game.getBattlefield().getAllActivePermanents(CardType.LAND, game);
+        List<Permanent> lands = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game);
         if (controller != null
                 && firstChoice != null
                 && secondChoice != null) {
             for (Permanent land : lands) {
-                if (land.isBasic()) {
+                if (land.isBasic(game)) {
                     switch (layer) {
                         case TypeChangingEffects_4:
                             // the land mana ability is intrinsic, so add it here, not layer 6
@@ -141,7 +142,7 @@ class ChooseTwoBasicLandTypesEffect extends OneShotEffect {
         this.staticText = "choose two basic land types";
     }
 
-    public ChooseTwoBasicLandTypesEffect(final ChooseTwoBasicLandTypesEffect effect) {
+    private ChooseTwoBasicLandTypesEffect(final ChooseTwoBasicLandTypesEffect effect) {
         super(effect);
     }
 

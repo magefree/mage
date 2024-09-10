@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class HistoriansBoon extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledEnchantmentPermanent("another nontoken enchantment");
+            = new FilterControlledEnchantmentPermanent("nontoken enchantment");
 
     static {
         filter.add(TokenPredicate.FALSE);
@@ -38,7 +38,7 @@ public final class HistoriansBoon extends CardImpl {
     public HistoriansBoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        // Whenever Historian's Boon or another nontoken enchantment enters the battlefield under your control, create a 1/1 white Soldier creature token.
+        // Whenever Historian's Boon or another nontoken enchantment you control enters, create a 1/1 white Soldier creature token.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new SoldierToken()), filter, false, true
         ));
@@ -61,6 +61,7 @@ class HistoriansBoonTriggeredAbility extends TriggeredAbilityImpl {
 
     HistoriansBoonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelVigilanceToken()));
+        setTriggerPhrase("Whenever the final chapter ability of a Saga you control triggers, ");
     }
 
     private HistoriansBoonTriggeredAbility(final HistoriansBoonTriggeredAbility ability) {
@@ -80,7 +81,7 @@ class HistoriansBoonTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
-        Permanent permanent = game.getPermanent(event.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (stackObject == null
                 || permanent == null
                 || !permanent.isControlledBy(getControllerId())
@@ -95,9 +96,4 @@ class HistoriansBoonTriggeredAbility extends TriggeredAbilityImpl {
         return SagaAbility.isFinalAbility(stackObject.getStackAbility(), maxChapter);
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever the final chapter of a Saga you control triggers, " +
-                "create a 4/4 white Angel creature token with flying and vigilance.";
-    }
 }

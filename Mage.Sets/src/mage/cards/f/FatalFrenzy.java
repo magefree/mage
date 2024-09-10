@@ -55,12 +55,12 @@ public final class FatalFrenzy extends CardImpl {
 
 class FatalFrenzyEffect extends OneShotEffect {
 
-    public FatalFrenzyEffect() {
+    FatalFrenzyEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Sacrifice it at the beginning of the next end step";
     }
 
-    public FatalFrenzyEffect(final FatalFrenzyEffect effect) {
+    private FatalFrenzyEffect(final FatalFrenzyEffect effect) {
         super(effect);
     }
 

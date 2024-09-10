@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesExertSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -18,7 +17,7 @@ public class BecomesExertSourceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} becomes exerted, ");
     }
 
-    public BecomesExertSourceTriggeredAbility(final BecomesExertSourceTriggeredAbility ability) {
+    protected BecomesExertSourceTriggeredAbility(final BecomesExertSourceTriggeredAbility ability) {
         super(ability);
     }
 

@@ -27,7 +27,7 @@ public final class SceptreOfEternalGlory extends CardImpl {
     public SceptreOfEternalGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());

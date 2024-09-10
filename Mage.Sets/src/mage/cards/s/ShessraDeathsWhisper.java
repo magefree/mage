@@ -25,7 +25,7 @@ public final class ShessraDeathsWhisper extends CardImpl {
     public ShessraDeathsWhisper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARLOCK);

@@ -8,7 +8,6 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
@@ -23,8 +22,8 @@ public final class BoneyardWurm extends CardImpl {
         this.subtype.add(SubType.WURM);
 
         // Boneyard Wurm's power and toughness are each equal to the number of creature cards in your graveyard.
-        DynamicValue value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value, Duration.EndOfGame)));
+        DynamicValue value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES);
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value)));
     }
 
     private BoneyardWurm(final BoneyardWurm card) {

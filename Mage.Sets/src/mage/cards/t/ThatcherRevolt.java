@@ -43,12 +43,12 @@ public final class ThatcherRevolt extends CardImpl {
 
 class ThatcherRevoltEffect extends OneShotEffect {
 
-    public ThatcherRevoltEffect() {
+    ThatcherRevoltEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create three 1/1 red Human creature tokens with haste. Sacrifice those tokens at the beginning of the next end step";
     }
 
-    public ThatcherRevoltEffect(final ThatcherRevoltEffect effect) {
+    private ThatcherRevoltEffect(final ThatcherRevoltEffect effect) {
         super(effect);
     }
 

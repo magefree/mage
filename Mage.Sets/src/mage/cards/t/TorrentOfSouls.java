@@ -63,11 +63,11 @@ public final class TorrentOfSouls extends CardImpl {
 
 class TorrentOfSoulsEffect extends OneShotEffect {
 
-    public TorrentOfSoulsEffect() {
+    TorrentOfSoulsEffect() {
         super(Outcome.BoostCreature);
     }
 
-    public TorrentOfSoulsEffect(final TorrentOfSoulsEffect effect) {
+    private TorrentOfSoulsEffect(final TorrentOfSoulsEffect effect) {
         super(effect);
     }
 

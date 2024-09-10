@@ -50,7 +50,7 @@ public final class SkophosWarleader extends CardImpl {
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn)
                         .setText("{this} gets +1/+0"),
                 new ColoredManaCost(ColoredManaSymbol.R));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn)
                 .setText("and gains menace until end of turn. " +
                         "<i>(It can't be blocked except by two or more creatures.)</i>"));

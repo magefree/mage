@@ -23,7 +23,7 @@ public final class UrilTheMiststalker extends CardImpl {
 
     public UrilTheMiststalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(5);

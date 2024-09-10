@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -42,7 +43,9 @@ class CommenceTheEndgameEffect extends OneShotEffect {
 
     CommenceTheEndgameEffect() {
         super(Outcome.Benefit);
-        staticText = "Draw two cards, then amass X, where X is the number of cards in your hand.";
+        staticText = "draw two cards, then amass Zombies X, where X is the number of cards in your hand. " +
+                "<i>(Put X +1/+1 counterson an Army you control. It's also a Zombie. If you don't control an Army, " +
+                "create a 0/0 black Zombie Army creature token first.)</i>";
     }
 
     private CommenceTheEndgameEffect(final CommenceTheEndgameEffect effect) {
@@ -61,6 +64,7 @@ class CommenceTheEndgameEffect extends OneShotEffect {
             return false;
         }
         player.drawCards(2, source, game);
-        return new AmassEffect(player.getHand().size()).apply(game, source);
+        AmassEffect.doAmass(player.getHand().size(), SubType.ZOMBIE, game, source);
+        return true;
     }
 }

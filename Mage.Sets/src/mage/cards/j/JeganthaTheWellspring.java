@@ -8,16 +8,21 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.CompanionCondition;
+import mage.abilities.mana.ConditionalColoredManaAbility;
+import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
 
-import java.util.*;
-import mage.abilities.mana.ConditionalColoredManaAbility;
-import mage.abilities.mana.builder.ConditionalManaBuilder;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -27,7 +32,7 @@ public final class JeganthaTheWellspring extends CardImpl {
     public JeganthaTheWellspring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R/G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.ELK);
         this.power = new MageInt(5);
@@ -61,7 +66,7 @@ enum JeganthaTheWellspringCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck.stream().noneMatch(JeganthaTheWellspringCompanionCondition::checkCard);
     }
 

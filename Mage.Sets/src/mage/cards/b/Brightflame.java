@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class Brightflame extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{W}{W}");
 
         // Radiance - Brightflame deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.
-        this.getSpellAbility().addEffect(new BrightflameEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new BrightflameEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().setAbilityWord(AbilityWord.RADIANCE);
     }
@@ -57,7 +57,7 @@ class BrightflameEffect extends OneShotEffect {
         staticText = "{this} deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.";
     }
 
-    BrightflameEffect(final BrightflameEffect effect) {
+    private BrightflameEffect(final BrightflameEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -66,8 +66,10 @@ class BrightflameEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int damageDealt = 0;
 
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
-        if (target == null) { return false; }
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (target == null) {
+            return false;
+        }
 
         ObjectColor color = target.getColor(game);
         damageDealt += target.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);

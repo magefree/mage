@@ -59,7 +59,7 @@ public final class CantStayAway extends CardImpl {
 
 class CantStayAwayEffect extends OneShotEffect {
 
-    public CantStayAwayEffect() {
+    CantStayAwayEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains \"If this creature would die, exile it instead.\"";
     }
@@ -93,7 +93,7 @@ class CantStayAwayEffect extends OneShotEffect {
 
 class CantStayAwayReplacementEffect extends ReplacementEffectImpl {
 
-    public CantStayAwayReplacementEffect() {
+    CantStayAwayReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If {this} would die, exile it instead";
     }

@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +30,7 @@ public final class Abeyance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Abeyance(final Abeyance card) {
@@ -62,11 +61,6 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
@@ -74,6 +68,12 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
                     + "that aren't mana abilities this turn (" + mageObject.getIdName() + ").";
         }
         return null;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL
+                || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
     @Override
@@ -92,8 +92,7 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            return ability.isPresent()
-                    && !(ability.get() instanceof ActivatedManaAbilityImpl);
+            return ability.isPresent() && !ability.get().isManaActivatedAbility();
         }
         return false;
     }

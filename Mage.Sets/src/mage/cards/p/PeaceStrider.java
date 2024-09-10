@@ -25,7 +25,7 @@ public final class PeaceStrider extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
     }
 
-    public PeaceStrider (final PeaceStrider card) {
+    private PeaceStrider(final PeaceStrider card) {
         super(card);
     }
 

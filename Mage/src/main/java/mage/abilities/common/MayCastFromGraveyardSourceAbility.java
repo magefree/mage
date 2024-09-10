@@ -34,7 +34,7 @@ public class MayCastFromGraveyardSourceAbility extends StaticAbility {
 class MayCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     MayCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.PutCreatureInPlay);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.PutCreatureInPlay);
         staticText = "you may cast {this} from your graveyard";
     }
 

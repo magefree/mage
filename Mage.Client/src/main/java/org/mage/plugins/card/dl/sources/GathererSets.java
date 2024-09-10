@@ -10,14 +10,14 @@ import org.mage.plugins.card.dl.DownloadJob;
 import java.io.File;
 import java.util.*;
 
-import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
- * WARNING, unsupported images plugin, last updates from 2018
+ * Download: set code symbols download from wizards web size
+ * <p>
+ * Warning, it's outdated source with low quality images. TODO: must migrate to scryfall like mana icons
  */
-
 public class GathererSets implements Iterable<DownloadJob> {
 
     private class CheckResult {
@@ -97,7 +97,15 @@ public class GathererSets implements Iterable<DownloadJob> {
             "GS1", "BBD", "C18",
             "GNT", "UMA", "GRN",
             "RNA", "WAR", "MH1",
-            "M20"
+            "M20",
+            "C19", "ELD", "MB1", "GN2", "J20", "THB", "UND", "C20", "IKO", "M21",
+            "JMP", "2XM", "ZNR", "KLR", "CMR", "KHC", "KHM", "TSR", "STX", "STA",
+            "C21", "MH2", "AFR", "AFC", "J21", "MID", "MIC", "VOW", "VOC", "YMID",
+            "NEC", "YNEO", "NEO", "SNC", "NCC", "CLB", "2X2", "DMU", "DMC", "YDMU", "40K", "GN3",
+            "UNF", "BRO", "BRC", "BOT", "30A", "J22", "SCD", "DMR", "ONE", "ONC",
+            "MOM", "MOC", "MUL", "MAT", "LTR", "CMM", "WOE", "WHO", "RVR", "WOT",
+            "WOC", "SPG", "LCI", "LCC", "REX", "PIP", "MKM", "MKC", "CLU", "OTJ",
+            "OTC", "OTP", "BIG", "MH3", "M3C", "ACR", "BLB"
             // "HHO", "ANA" -- do not exist on gatherer
     };
 
@@ -331,6 +339,6 @@ public class GathererSets implements Iterable<DownloadJob> {
             set = codeReplacements.get(set);
         }
         String url = "https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=" + set + "&size=small&rarity=" + urlRarity;
-        return new DownloadJob(set + '-' + rarity, fromURL(url), toFile(dst));
+        return new DownloadJob(set + '-' + rarity, url, toFile(dst), false);
     }
 }

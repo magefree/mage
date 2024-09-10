@@ -16,7 +16,7 @@ import mage.filter.predicate.Predicates;
  */
 public final class LairDelve extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("all creature and land cards");
+    private static final FilterCard filter = new FilterCard("creature and land cards");
 
     static {
         filter.add(Predicates.or(CardType.LAND.getPredicate(), CardType.CREATURE.getPredicate()));

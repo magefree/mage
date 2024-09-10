@@ -34,8 +34,8 @@ public final class HivisOfTheScale extends CardImpl {
     public HivisOfTheScale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VIASHINO);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

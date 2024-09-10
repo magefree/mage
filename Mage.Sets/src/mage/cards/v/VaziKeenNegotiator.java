@@ -2,7 +2,6 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.TreasureSpentToCastCondition;
@@ -28,7 +27,6 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.CreatedTokenWatcher;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -39,7 +37,7 @@ public class VaziKeenNegotiator extends CardImpl {
     public VaziKeenNegotiator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.HUMAN, SubType.ADVISOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -93,18 +91,19 @@ class VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility extends Trigger
     public boolean checkTrigger(GameEvent event, Game game) {
         Player controller = game.getPlayer(getControllerId());
         Player caster = game.getPlayer(event.getPlayerId());
-        Optional<Ability> optionalAbility = game.getAbility(event.getTargetId(), this.sourceId);
         if (controller == null
                 || caster == null
-                || !game.getOpponents(controller.getId()).contains(caster.getId())
-                || !optionalAbility.isPresent()) {
+                || !game.getOpponents(controller.getId()).contains(caster.getId())) {
             return false;
         }
-        return TreasureSpentToCastCondition.instance.apply(game, optionalAbility.get());
+
+        Ability ability = game.getStack().getStackObject(event.getTargetId()).getStackAbility();
+
+        return TreasureSpentToCastCondition.instance.apply(game, ability);
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility copy() {
         return new VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility(this);
     }
 }

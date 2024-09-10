@@ -13,7 +13,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPlayerBatchEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
@@ -30,7 +30,7 @@ public final class MalcolmKeenEyedNavigator extends CardImpl {
     public MalcolmKeenEyedNavigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SIREN);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(2);
@@ -68,12 +68,12 @@ class MalcolmKeenEyedNavigatorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerBatchEvent dEvent = (DamagedPlayerBatchEvent) event;
+        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
         Set<UUID> opponents = new HashSet<>();
         for (DamagedEvent damagedEvent : dEvent.getEvents()) {
             Permanent permanent = game.getPermanent(damagedEvent.getSourceId());

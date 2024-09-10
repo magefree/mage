@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -15,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -49,13 +47,13 @@ public final class BloodlineShaman extends CardImpl {
 
 class BloodlineShamanEffect extends OneShotEffect {
 
-    public BloodlineShamanEffect() {
+    BloodlineShamanEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose a creature type. Reveal the top card of your library. If that card is a creature card of the chosen type, put it into your hand. "
                 + "Otherwise, put it into your graveyard";
     }
 
-    public BloodlineShamanEffect(final BloodlineShamanEffect effect) {
+    private BloodlineShamanEffect(final BloodlineShamanEffect effect) {
         super(effect);
     }
 
@@ -67,17 +65,21 @@ class BloodlineShamanEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (sourceObject == null) { return false; }
+        if (sourceObject == null) {
+            return false;
+        }
 
-        Choice typeChoice = new ChoiceCreatureType(sourceObject);
-        if (!controller.choose(outcome, typeChoice, game)) { return false; }
-
-        game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
-        FilterCard filterSubtype = new FilterCard();
-        filterSubtype.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
+        Choice typeChoice = new ChoiceCreatureType(game, source);
+        if (!controller.choose(outcome, typeChoice, game)) {
+            return false;
+        }
+        SubType subType = SubType.byDescription(typeChoice.getChoiceKey());
+        game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoiceKey());
 
         // Reveal the top card of your library.
         if (controller.getLibrary().hasCards()) {
@@ -87,7 +89,7 @@ class BloodlineShamanEffect extends OneShotEffect {
 
             if (card != null) {
                 // If that card is a creature card of the chosen type, put it into your hand.
-                if (filterSubtype.match(card, game)) {
+                if (card.isCreature(game) && subType != null && card.getSubtype(game).contains(subType)) {
                     controller.moveCards(card, Zone.HAND, source, game);
                     // Otherwise, put it into your graveyard.
                 } else {

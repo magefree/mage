@@ -8,9 +8,9 @@ import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 
 public class CommanderDuel extends GameCommanderImpl {
-   
-    public CommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 100);
+
+    public CommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 100, startLife, startHandSize);
     }
 
     public CommanderDuel(final CommanderDuel game) {

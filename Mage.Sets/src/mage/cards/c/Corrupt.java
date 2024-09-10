@@ -54,7 +54,7 @@ class CorruptEffect extends OneShotEffect {
         staticText = "{this} deals damage to any target equal to the number of Swamps you control. You gain life equal to the damage dealt this way";
     }
 
-    public CorruptEffect(final CorruptEffect effect) {
+    private CorruptEffect(final CorruptEffect effect) {
         super(effect);
     }
 

@@ -54,7 +54,7 @@ class AshnodsCylixEffect extends OneShotEffect {
         this.staticText = "Target player looks at the top three cards of their library, puts one of them back on top of their library, then exiles the rest";
     }
 
-    AshnodsCylixEffect(final AshnodsCylixEffect effect) {
+    private AshnodsCylixEffect(final AshnodsCylixEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class AshnodsCylixEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         player.lookAtCards(source, null, cards, game);
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on top of your library"));
-        if (player.choose(Outcome.Benefit, cards, target, game)) {
+        if (player.choose(Outcome.Benefit, cards, target, source, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);

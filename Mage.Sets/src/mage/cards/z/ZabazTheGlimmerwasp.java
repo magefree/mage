@@ -20,6 +20,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -31,7 +32,7 @@ public final class ZabazTheGlimmerwasp extends CardImpl {
     public ZabazTheGlimmerwasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -71,13 +72,13 @@ class ZabazTheGlimmerwaspEffect extends ReplacementEffectImpl {
                 "that many plus one +1/+1 counters are put on it instead";
     }
 
-    ZabazTheGlimmerwaspEffect(final ZabazTheGlimmerwaspEffect effect) {
+    private ZabazTheGlimmerwaspEffect(final ZabazTheGlimmerwaspEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() + 1, true);
+        event.setAmountForCounters(CardUtil.overflowInc(event.getAmount(), 1), true);
         return false;
     }
 
@@ -102,11 +103,6 @@ class ZabazTheGlimmerwaspEffect extends ReplacementEffectImpl {
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
                 && permanent.isCreature(game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

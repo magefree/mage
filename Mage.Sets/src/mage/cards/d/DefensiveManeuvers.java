@@ -47,7 +47,7 @@ class DefensiveManeuversEffect extends OneShotEffect {
         this.staticText = "Creatures of the creature type of your choice get +0/+4 until end of turn.";
     }
 
-    DefensiveManeuversEffect(final DefensiveManeuversEffect effect) {
+    private DefensiveManeuversEffect(final DefensiveManeuversEffect effect) {
         super(effect);
     }
 
@@ -63,10 +63,10 @@ class DefensiveManeuversEffect extends OneShotEffect {
         if (player == null || sourceObject == null) {
             return false;
         }
-        Choice choice = new ChoiceCreatureType(sourceObject);
+        Choice choice = new ChoiceCreatureType(game, source);
         SubType subType = null;
         if (player.choose(outcome, choice, game)) {
-            subType = SubType.byDescription(choice.getChoice());
+            subType = SubType.byDescription(choice.getChoiceKey());
         }
         if (subType == null) {
             return false;

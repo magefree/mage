@@ -65,12 +65,12 @@ public final class YouLookUponTheTarrasque extends CardImpl {
 
 class YouLookUponTheTarrasqueEffect extends RequirementEffect {
 
-    public YouLookUponTheTarrasqueEffect() {
+    YouLookUponTheTarrasqueEffect() {
         super(Duration.EndOfTurn);
         staticText = "All creatures your opponents control able to block that creature this turn do so";
     }
 
-    public YouLookUponTheTarrasqueEffect(final YouLookUponTheTarrasqueEffect effect) {
+    private YouLookUponTheTarrasqueEffect(final YouLookUponTheTarrasqueEffect effect) {
         super(effect);
     }
 

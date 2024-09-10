@@ -9,10 +9,12 @@ import mage.watchers.common.DamageDoneWatcher;
  *
  * @author LevelX2
  */
-
 public class SourceDealtDamageCondition implements Condition {
     private final int value;
 
+    /**
+     * Must add DamageDoneWatcher on card init
+     */
     public SourceDealtDamageCondition(int value) {
         this.value = value;
     }

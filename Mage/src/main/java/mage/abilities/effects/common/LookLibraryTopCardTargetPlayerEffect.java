@@ -14,7 +14,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
@@ -51,7 +50,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
         this(1);
     }
 
-    public LookLibraryTopCardTargetPlayerEffect(final LookLibraryTopCardTargetPlayerEffect effect) {
+    protected LookLibraryTopCardTargetPlayerEffect(final LookLibraryTopCardTargetPlayerEffect effect) {
         super(effect);
         amount = effect.amount;
         putToGraveyard = effect.putToGraveyard;
@@ -70,7 +69,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         if (player != null && targetPlayer != null && sourceObject != null) {
             Cards cards = new CardsImpl();
-            cards.addAll(targetPlayer.getLibrary().getTopCards(game, amount));
+            cards.addAllCards(targetPlayer.getLibrary().getTopCards(game, amount));
             player.lookAtCards(sourceObject.getIdName(), cards, game);
             if (putToGraveyard) {
                 for (Card card : cards.getCards(game)) {
@@ -107,7 +106,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
             } else {
                 sb.append("that card");
             }
-            sb.append(" into their graveyard");
+            sb.append(" into that player's graveyard");
         }
         if (mayShuffleAfter) {
             sb.append(". You may then have that player shuffle that library");

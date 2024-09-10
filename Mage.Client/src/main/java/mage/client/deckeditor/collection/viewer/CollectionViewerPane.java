@@ -8,9 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
- * Collection viewer pane.
+ * GUI: card viewer pane.
  * Contains background and components container.
  *
  * @author nantuko
@@ -19,7 +20,7 @@ public class CollectionViewerPane extends MagePane {
 
     public CollectionViewerPane() {
         boolean initialized = false;
-        this.setTitle("Collection Viewer");
+        this.setTitle("Card Viewer");
         if (Plugins.instance.isThemePluginLoaded()) {
             Map<String, JComponent> uiComponents = new HashMap<>();
             JComponent container = Plugins.instance.updateTablePanel(uiComponents);
@@ -53,11 +54,21 @@ public class CollectionViewerPane extends MagePane {
     }
 
     @Override
+    public boolean isActiveTable() {
+        return false;
+    }
+
+    @Override
     public void setVisible(boolean aFlag) {
         super.setVisible(aFlag);
         if (collectionViewerPanel != null) {
             collectionViewerPanel.showCards();
         }
+    }
+
+    @Override
+    public UUID getSortTableId() {
+        return null;
     }
 
     private CollectionViewerPanel collectionViewerPanel;

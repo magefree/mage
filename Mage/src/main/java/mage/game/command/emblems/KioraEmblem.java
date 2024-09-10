@@ -19,9 +19,17 @@ public final class KioraEmblem extends Emblem {
      */
 
     public KioraEmblem() {
-        this.setName("Emblem Kiora");
-        this.setExpansionSetCodeForImage("BNG");
+        super("Emblem Kiora");
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new CreateTokenEffect(new Kraken99Token()), TargetController.YOU, null, false);
         this.getAbilities().add(ability);
+    }
+
+    private KioraEmblem(final KioraEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public KioraEmblem copy() {
+        return new KioraEmblem(this);
     }
 }

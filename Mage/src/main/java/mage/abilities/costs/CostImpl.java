@@ -12,19 +12,19 @@ public abstract class CostImpl implements Cost {
     protected UUID id;
     protected String text;
     protected boolean paid;
-    protected Targets targets;
+    private Targets targets;
 
     public CostImpl() {
         id = UUID.randomUUID();
         paid = false;
-        targets = new Targets();
+        targets = null; // rare usage, must be null by default for performance optimization
     }
 
-    public CostImpl(final CostImpl cost) {
+    protected CostImpl(final CostImpl cost) {
         this.id = cost.id;
         this.text = cost.text;
         this.paid = cost.paid;
-        this.targets = cost.targets.copy();
+        this.targets = cost.targets == null ? null : cost.targets.copy();
     }
 
     @Override
@@ -43,14 +43,23 @@ public abstract class CostImpl implements Cost {
         return this;
     }
 
-    public void addTarget(Target target) {
-        if (target != null) {
-            this.targets.add(target);
+    private void prepareTargets() {
+        if (this.targets == null) {
+            this.targets = new Targets();
         }
+    }
+
+    public void addTarget(Target target) {
+        if (target == null) {
+            throw new IllegalArgumentException("Wrong code usage: can't add nullable target to the cost");
+        }
+        prepareTargets();
+        this.targets.add(target);
     }
 
     @Override
     public Targets getTargets() {
+        prepareTargets();
         return this.targets;
     }
 
@@ -62,6 +71,8 @@ public abstract class CostImpl implements Cost {
     @Override
     public void clearPaid() {
         paid = false;
+        prepareTargets();
+        targets.clearChosen();
     }
 
     @Override

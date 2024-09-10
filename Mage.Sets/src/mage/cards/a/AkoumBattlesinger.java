@@ -38,7 +38,7 @@ public final class AkoumBattlesinger extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        // Whenever Akoum Battlesinger or another Ally enters the battlefield under your control, you may have Ally creatures you control get +1/+0 until end of turn.
+        // Whenever Akoum Battlesinger or another Ally you control enters, you may have Ally creatures you control get +1/+0 until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter, false), true).setAbilityWord(null));
     }
 

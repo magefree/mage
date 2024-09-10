@@ -18,7 +18,7 @@ public final class YargleGluttonOfUrborg extends CardImpl {
     public YargleGluttonOfUrborg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FROG);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(9);

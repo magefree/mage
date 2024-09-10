@@ -33,13 +33,13 @@ public final class ArchenemyNicolBolas extends ExpansionSet {
         cards.add(new SetCardInfo("Chandra, Pyromaster", 42, Rarity.MYTHIC, mage.cards.c.ChandraPyromaster.class));
         cards.add(new SetCardInfo("Chandra's Outrage", 43, Rarity.COMMON, mage.cards.c.ChandrasOutrage.class));
         cards.add(new SetCardInfo("Chandra's Phoenix", 44, Rarity.RARE, mage.cards.c.ChandrasPhoenix.class));
-        cards.add(new SetCardInfo("Compulsive Research", 23, Rarity.UNCOMMON, mage.cards.c.CompulsiveResearch.class));
+        cards.add(new SetCardInfo("Compulsive Research", 23, Rarity.COMMON, mage.cards.c.CompulsiveResearch.class));
         cards.add(new SetCardInfo("Coordinated Assault", 45, Rarity.UNCOMMON, mage.cards.c.CoordinatedAssault.class));
         cards.add(new SetCardInfo("Cruel Ultimatum", 82, Rarity.RARE, mage.cards.c.CruelUltimatum.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 92, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
         cards.add(new SetCardInfo("Cultivate", 62, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Deathbringer Regent", 32, Rarity.RARE, mage.cards.d.DeathbringerRegent.class));
-        cards.add(new SetCardInfo("Doom Blade", 33, Rarity.COMMON, mage.cards.d.DoomBlade.class));
+        cards.add(new SetCardInfo("Doom Blade", 33, Rarity.UNCOMMON, mage.cards.d.DoomBlade.class));
         cards.add(new SetCardInfo("Doomed Traveler", 4, Rarity.COMMON, mage.cards.d.DoomedTraveler.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 93, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dreadbore", 83, Rarity.RARE, mage.cards.d.Dreadbore.class));
@@ -75,7 +75,7 @@ public final class ArchenemyNicolBolas extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 103, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 98, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Khalni Heart Expedition", 67, Rarity.COMMON, mage.cards.k.KhalniHeartExpedition.class));
-        cards.add(new SetCardInfo("Lightning Bolt", 54, Rarity.COMMON, mage.cards.l.LightningBolt.class));
+        cards.add(new SetCardInfo("Lightning Bolt", 54, Rarity.UNCOMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Lightwielder Paladin", 14, Rarity.RARE, mage.cards.l.LightwielderPaladin.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 15, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
         cards.add(new SetCardInfo("Moment of Heroism", 16, Rarity.COMMON, mage.cards.m.MomentOfHeroism.class));

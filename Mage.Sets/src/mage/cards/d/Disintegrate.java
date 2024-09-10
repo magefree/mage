@@ -2,7 +2,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileTargetIfDiesEffect;
@@ -23,7 +23,7 @@ public final class Disintegrate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
         // Disintegrate deals X damage to any target. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new CantRegenerateTargetEffect(Duration.EndOfTurn, "That creature"));
         Effect effect = new ExileTargetIfDiesEffect();
         effect.setText("If the creature would die this turn, exile it instead");

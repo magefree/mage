@@ -12,9 +12,8 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -31,7 +30,8 @@ public final class Firestorm extends CardImpl {
 
         // Firestorm deals X damage to each of X target creatures and/or players.
         this.getSpellAbility().addEffect(new FirestormEffect());
-        this.getSpellAbility().setTargetAdjuster(FirestormAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private Firestorm(final Firestorm card) {
@@ -44,27 +44,14 @@ public final class Firestorm extends CardImpl {
     }
 }
 
-enum FirestormAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = GetXValue.instance.calculate(game, ability, null);
-        if (xValue > 0) {
-            Target target = new TargetAnyTarget(xValue);
-            ability.addTarget(target);
-        }
-    }
-}
-
 class FirestormEffect extends OneShotEffect {
 
-    public FirestormEffect() {
+    FirestormEffect() {
         super(Outcome.Benefit);
-        staticText = "{this} deals X damage to each of X target creatures and/or players";
+        staticText = "{this} deals X damage to each of X targets";
     }
 
-    public FirestormEffect(final FirestormEffect effect) {
+    private FirestormEffect(final FirestormEffect effect) {
         super(effect);
     }
 

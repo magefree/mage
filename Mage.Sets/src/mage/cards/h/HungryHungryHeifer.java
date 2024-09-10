@@ -56,7 +56,7 @@ class HungryHungryHeiferEffect extends OneShotEffect {
         this.staticText = "you may remove a counter from a permanent you control. If you don't, sacrifice {this}";
     }
 
-    public HungryHungryHeiferEffect(final HungryHungryHeiferEffect effect) {
+    private HungryHungryHeiferEffect(final HungryHungryHeiferEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class HungryHungryHeiferEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject != null && controller != null) {
             if (controller.chooseUse(outcome, "Remove a counter from a permanent you control?", source, game)) {
                 TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);

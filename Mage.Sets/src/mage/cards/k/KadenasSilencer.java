@@ -24,7 +24,7 @@ public final class KadenasSilencer extends CardImpl {
     public KadenasSilencer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
 
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
@@ -33,7 +33,7 @@ public final class KadenasSilencer extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new KadenasSilencerEffect()));
 
         // Megamorph {1}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{U}"), true));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{U}"), true));
     }
 
     private KadenasSilencer(final KadenasSilencer card) {

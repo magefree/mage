@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class ClearwaterPathway extends ModalDoubleFacesCard {
+public final class ClearwaterPathway extends ModalDoubleFacedCard {
 
     public ClearwaterPathway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

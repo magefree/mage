@@ -28,7 +28,7 @@ public final class InfernoOfTheStarMounts extends CardImpl {
     public InfernoOfTheStarMounts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -60,7 +60,7 @@ public final class InfernoOfTheStarMounts extends CardImpl {
 
 class InfernoOfTheStarMountsEffect extends OneShotEffect {
 
-    public InfernoOfTheStarMountsEffect() {
+    InfernoOfTheStarMountsEffect() {
         super(Outcome.Damage);
         this.staticText = "When its power becomes 20 this way, it deals 20 damage to any target";
     }

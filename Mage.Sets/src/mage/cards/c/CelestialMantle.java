@@ -66,7 +66,7 @@ class CelestialMantleAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CelestialMantleEffect());
     }
 
-    public CelestialMantleAbility(final CelestialMantleAbility ability) {
+    private CelestialMantleAbility(final CelestialMantleAbility ability) {
         super(ability);
     }
 
@@ -99,7 +99,7 @@ class CelestialMantleEffect extends OneShotEffect {
         super(Outcome.GainLife);
     }
 
-    CelestialMantleEffect(final CelestialMantleEffect effect) {
+    private CelestialMantleEffect(final CelestialMantleEffect effect) {
         super(effect);
     }
 

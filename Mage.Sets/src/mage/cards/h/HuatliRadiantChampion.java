@@ -27,7 +27,7 @@ public final class HuatliRadiantChampion extends CardImpl {
     public HuatliRadiantChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUATLI);
         this.setStartingLoyalty(3);
 
@@ -43,7 +43,7 @@ public final class HuatliRadiantChampion extends CardImpl {
         ability2.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability2);
 
-        // -8: You get an emblem with "Whenever a creature enters the battlefield under your control, you may draw a card."
+        // -8: You get an emblem with "Whenever a creature you control enters, you may draw a card."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new HuatliRadiantChampionEmblem()), -8));
     }
 

@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,11 +14,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +29,7 @@ public final class AlexiZephyrMage extends CardImpl {
 
     public AlexiZephyrMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);
@@ -40,9 +40,9 @@ public final class AlexiZephyrMage extends CardImpl {
         effect.setText("Return X target creatures to their owner's hands");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURES));
-        ability.setTargetAdjuster(XTargetsAdjuster.instance);
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability);
     }
 

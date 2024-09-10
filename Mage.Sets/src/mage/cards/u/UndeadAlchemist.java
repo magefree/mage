@@ -59,7 +59,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new CreateTokenEffect(new ZombieToken()));
     }
 
-    public UndeadAlchemistTriggeredAbility(final UndeadAlchemistTriggeredAbility ability) {
+    private UndeadAlchemistTriggeredAbility(final UndeadAlchemistTriggeredAbility ability) {
         super(ability);
     }
 
@@ -131,11 +131,6 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

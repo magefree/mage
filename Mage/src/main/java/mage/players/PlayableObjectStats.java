@@ -55,16 +55,16 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
             // collect info about abilities for card icons popup, must be simple online text (html symbols are possible)
             // some long html tags can be miss (example: ability extra hint) -- that's ok
             String shortInfo = ability.toString();
+            shortInfo = shortInfo.replace("<br>", " ");
+            shortInfo = shortInfo.replace("\n", " ");
             if (shortInfo.length() > 50) {
                 shortInfo = shortInfo.substring(0, 50 - 1) + "...";
             }
-            shortInfo = shortInfo.replace("<br>", " ");
-            shortInfo = shortInfo.replace("\n", " ");
             dest.add(new PlayableObjectRecord(ability.getId(), shortInfo));
         }
     }
 
-    public PlayableObjectStats(final PlayableObjectStats source) {
+    protected PlayableObjectStats(final PlayableObjectStats source) {
         for (PlayableObjectRecord rec : source.basicManaAbilities) {
             this.basicManaAbilities.add(rec.copy());
         }
@@ -91,12 +91,21 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
                 + this.other.size();
     }
 
-    public List<String> getPlayableAbilities() {
+    public List<String> getPlayableAbilityNames() {
         List<String> all = new ArrayList<>();
         all.addAll(this.basicManaAbilities.stream().map(PlayableObjectRecord::getValue).sorted().collect(Collectors.toList()));
         all.addAll(this.basicPlayAbilities.stream().map(PlayableObjectRecord::getValue).sorted().collect(Collectors.toList()));
         all.addAll(this.basicCastAbilities.stream().map(PlayableObjectRecord::getValue).sorted().collect(Collectors.toList()));
         all.addAll(this.other.stream().map(PlayableObjectRecord::getValue).sorted().collect(Collectors.toList()));
+        return all;
+    }
+
+    public List<UUID> getPlayableAbilityIds() {
+        List<UUID> all = new ArrayList<>();
+        all.addAll(this.basicManaAbilities.stream().map(PlayableObjectRecord::getId).collect(Collectors.toList()));
+        all.addAll(this.basicPlayAbilities.stream().map(PlayableObjectRecord::getId).collect(Collectors.toList()));
+        all.addAll(this.basicCastAbilities.stream().map(PlayableObjectRecord::getId).collect(Collectors.toList()));
+        all.addAll(this.other.stream().map(PlayableObjectRecord::getId).collect(Collectors.toList()));
         return all;
     }
 

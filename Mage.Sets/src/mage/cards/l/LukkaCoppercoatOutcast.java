@@ -30,7 +30,7 @@ public final class LukkaCoppercoatOutcast extends CardImpl {
     public LukkaCoppercoatOutcast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LUKKA);
         this.setStartingLoyalty(5);
 
@@ -96,7 +96,7 @@ class LukkaCoppercoatOutcastCastEffect extends AsThoughEffectImpl {
     private static final FilterPermanent filter = new FilterPlaneswalkerPermanent(SubType.LUKKA);
 
     LukkaCoppercoatOutcastCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.staticText = "You may cast this card from exile as long as you control a Lukka planeswalker.";
     }
 

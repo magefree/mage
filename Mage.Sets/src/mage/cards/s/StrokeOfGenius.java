@@ -3,7 +3,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,11 +21,11 @@ public final class StrokeOfGenius extends CardImpl {
 
 
         // Target player draws X cards.
-        this.getSpellAbility().addEffect(new DrawCardTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public StrokeOfGenius (final StrokeOfGenius card) {
+    private StrokeOfGenius(final StrokeOfGenius card) {
         super(card);
     }
 

@@ -19,7 +19,7 @@ public final class Revelation extends CardImpl {
 
     public Revelation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // Players play with their hands revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));

@@ -1,9 +1,6 @@
 package org.mage.test.cards.single.ncc;
 
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.SuspendAbility;
 import mage.constants.PhaseStep;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
@@ -29,6 +26,7 @@ public class SinisterConciergeTest extends CardTestPlayerBase {
      */
     @Test
     public void testWorking() {
+        // TODO: remove multiple calls to execute()
         addCard(Zone.HAND, playerA, lightningBolt);
         addCard(Zone.BATTLEFIELD, playerA, sinisterConcierge);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
@@ -59,12 +57,14 @@ public class SinisterConciergeTest extends CardTestPlayerBase {
         assertExileCount(playerB, bondedConstruct, 1);
         assertCounterOnExiledCardCount(bondedConstruct, CounterType.TIME, 1);
 
+        setChoice(playerB, true); // yes to cast
         setStopAt(6, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertExileCount(playerA, sinisterConcierge, 1);
         assertExileCount(playerB, bondedConstruct, 0);
         assertPermanentCount(playerB, bondedConstruct, 1);
 
+        setChoice(playerA, true); // yes to cast
         setStopAt(7, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertExileCount(playerA, sinisterConcierge, 0);

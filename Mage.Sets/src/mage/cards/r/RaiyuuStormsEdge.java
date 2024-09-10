@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAloneControlledTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.FirstCombatPhaseCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -13,9 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TurnPhase;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -27,7 +25,7 @@ public final class RaiyuuStormsEdge extends CardImpl {
     public RaiyuuStormsEdge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SAMURAI);
         this.power = new MageInt(3);
@@ -43,7 +41,7 @@ public final class RaiyuuStormsEdge extends CardImpl {
                 true, false
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                new AdditionalCombatPhaseEffect(), RaiyuuStormsEdgeCondition.instance,
+                new AdditionalCombatPhaseEffect(), FirstCombatPhaseCondition.instance,
                 "If it's the first combat phase of the turn, there is an additional combat phase after this phase"
         ));
         this.addAbility(ability);
@@ -56,14 +54,5 @@ public final class RaiyuuStormsEdge extends CardImpl {
     @Override
     public RaiyuuStormsEdge copy() {
         return new RaiyuuStormsEdge(this);
-    }
-}
-
-enum RaiyuuStormsEdgeCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getTurn().getPhase(TurnPhase.COMBAT).getCount() == 0;
     }
 }

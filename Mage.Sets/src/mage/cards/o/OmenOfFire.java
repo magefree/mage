@@ -70,7 +70,7 @@ class OmenOfFireEffect extends OneShotEffect {
         this.staticText = "Each player sacrifices a Plains or a white permanent for each white permanent they control";
     }
 
-    public OmenOfFireEffect(final OmenOfFireEffect effect) {
+    private OmenOfFireEffect(final OmenOfFireEffect effect) {
         super(effect);
     }
 

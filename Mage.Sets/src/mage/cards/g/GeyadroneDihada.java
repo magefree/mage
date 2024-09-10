@@ -1,7 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -13,15 +11,17 @@ import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +30,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
 public final class GeyadroneDihada extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanents with corruption counters on them");
-    private static final FilterPermanent filter2 = new FilterCreatureOrPlaneswalkerPermanent("other creature or planeswalker");
+    private static final FilterPermanent filter2 = new FilterCreatureOrPlaneswalkerPermanent("other target creature or planeswalker");
 
     static {
         filter.add(CounterType.CORRUPTION.getPredicate());
@@ -40,7 +40,7 @@ public final class GeyadroneDihada extends CardImpl {
     public GeyadroneDihada(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DIHADA);
         this.setStartingLoyalty(4);
 
@@ -50,8 +50,7 @@ public final class GeyadroneDihada extends CardImpl {
         // +1: Each opponent loses 2 life and you gain 2 life. Put a corruption counter on up to one other target creature or planeswalker.
         Ability ability = new LoyaltyAbility(new LoseLifeOpponentsEffect(2), 1);
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
-        ability.addEffect(new AddCountersTargetEffect(CounterType.CORRUPTION.createInstance(), Outcome.Detriment)
-                .setText("Put a corruption counter on up to one other target creature or planeswalker"));
+        ability.addEffect(new AddCountersTargetEffect(CounterType.CORRUPTION.createInstance(), Outcome.Detriment));
         ability.addTarget(new TargetPermanent(0, 1, filter2));
         this.addAbility(ability);
 

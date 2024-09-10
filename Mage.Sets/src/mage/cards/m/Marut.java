@@ -37,7 +37,7 @@ public final class Marut extends CardImpl {
         // When Marut enters the battlefield, if mana from a Treasure was spent to cast it, create a Treasure token for each mana from a Treasure spent to cast it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken(), MarutValue.instance)),
-                TreasureSpentToCastCondition.instance, "When {this} enters the battlefield, if mana from a " +
+                TreasureSpentToCastCondition.instance, "When {this} enters, if mana from a " +
                 "Treasure was spent to cast it, create a Treasure token for each mana from a Treasure spent to cast it."
         ));
     }

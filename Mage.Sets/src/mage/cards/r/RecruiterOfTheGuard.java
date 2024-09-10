@@ -35,7 +35,7 @@ public final class RecruiterOfTheGuard extends CardImpl {
         // When Recruiter of the Guard enters the battlefield, you may search your library for a creature card with toughness 2 or less, 
         // reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true), true));
+                new TargetCardInLibrary(filter), true), true));
     }
 
     private RecruiterOfTheGuard(final RecruiterOfTheGuard card) {

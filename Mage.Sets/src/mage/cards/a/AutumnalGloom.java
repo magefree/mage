@@ -25,7 +25,7 @@ public final class AutumnalGloom extends CardImpl {
 
     public AutumnalGloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.secondSideCardClazz = AncientOfTheEquinox.class;
+        this.secondSideCardClazz = mage.cards.a.AncientOfTheEquinox.class;
 
         // {B}: Put the top card of your library into your graveyard.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsControllerEffect(1), new ManaCostsImpl<>("{B}")));

@@ -71,11 +71,11 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
         if (source != null) {
             MageObject targetSource = source.getSourceObject(game);
             if (permanent != null) {
-                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game)
+                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), source, game)
                         && filter.match(permanent, source.getControllerId(), source, game);
             }
             if (player != null) {
-                return player.canBeTargetedBy(targetSource, source.getControllerId(), game)
+                return player.canBeTargetedBy(targetSource, source.getControllerId(), source, game)
                         && filter.match(player, game);
             }
         }
@@ -99,7 +99,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player == null
-                    || !player.canBeTargetedBy(targetSource, sourceControllerId, game)
+                    || !player.canBeTargetedBy(targetSource, sourceControllerId, source, game)
                     || !filter.match(player, game)) {
                 continue;
             }
@@ -109,7 +109,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
-            if (!permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+            if (!permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                 continue;
             }
             count++;
@@ -160,7 +160,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .filter(player -> player.canBeTargetedBy(targetSource, sourceControllerId, game)
+                .filter(player -> player.canBeTargetedBy(targetSource, sourceControllerId, source, game)
                         && filter.match(player, game)
                 )
                 .map(Player::getId)
@@ -170,7 +170,7 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
                 .getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(permanent -> permanent.canBeTargetedBy(targetSource, sourceControllerId, game))
+                .filter(permanent -> permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game))
                 .map(Permanent::getId)
                 .forEach(possibleTargets::add);
 

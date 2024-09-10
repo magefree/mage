@@ -90,7 +90,7 @@ public final class Dissension extends ExpansionSet {
         cards.add(new SetCardInfo("Hallowed Fountain", 174, Rarity.RARE, mage.cards.h.HallowedFountain.class));
         cards.add(new SetCardInfo("Helium Squirter", 26, Rarity.COMMON, mage.cards.h.HeliumSquirter.class));
         cards.add(new SetCardInfo("Hellhole Rats", 113, Rarity.UNCOMMON, mage.cards.h.HellholeRats.class));
-        cards.add(new SetCardInfo("Hide // Seek", 151, Rarity.UNCOMMON, mage.cards.h.HideSeek.class));
+        cards.add(new SetCardInfo("Hide // Seek", 151, Rarity.RARE, mage.cards.h.HideSeek.class));
         cards.add(new SetCardInfo("Hit // Run", 152, Rarity.UNCOMMON, mage.cards.h.HitRun.class));
         cards.add(new SetCardInfo("Ignorant Bliss", 64, Rarity.UNCOMMON, mage.cards.i.IgnorantBliss.class));
         cards.add(new SetCardInfo("Indrik Stomphowler", 86, Rarity.UNCOMMON, mage.cards.i.IndrikStomphowler.class));

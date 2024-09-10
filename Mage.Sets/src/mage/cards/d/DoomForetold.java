@@ -13,13 +13,12 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KnightToken;
 import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -81,11 +80,8 @@ class DoomForetoldEffect extends OneShotEffect {
         if (controller == null || player == null) {
             return false;
         }
-        FilterPermanent filter2 = filter.copy();
-        filter2.add(new ControllerIdPredicate(player.getId()));
-        if (game.getBattlefield().contains(filter2, source, game, 1)) {
-            TargetPermanent target = new TargetPermanent(filter2);
-            target.setNotTarget(true);
+        TargetSacrifice target = new TargetSacrifice(filter);
+        if (target.canChoose(player.getId(), source, game)) {
             if (player.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null && permanent.sacrifice(source, game)) {

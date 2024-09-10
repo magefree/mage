@@ -25,7 +25,7 @@ public final class OathOfGideon extends CardImpl {
 
     public OathOfGideon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Gideon enters the battlefield, create two 1/1 Kor Ally creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KorAllyToken(), 2), false));
@@ -51,7 +51,7 @@ class OathOfGideonReplacementEffect extends ReplacementEffectImpl {
         staticText = "Each planeswalker you control enters the battlefield with an additional loyalty counter on it";
     }
 
-    OathOfGideonReplacementEffect(OathOfGideonReplacementEffect effect) {
+    private OathOfGideonReplacementEffect(final OathOfGideonReplacementEffect effect) {
         super(effect);
     }
 
@@ -66,11 +66,6 @@ class OathOfGideonReplacementEffect extends ReplacementEffectImpl {
         return creature != null && creature.isControlledBy(source.getControllerId())
                 && creature.isPlaneswalker(game)
                 && !event.getTargetId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

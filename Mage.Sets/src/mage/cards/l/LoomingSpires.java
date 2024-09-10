@@ -1,11 +1,9 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -29,10 +27,10 @@ public final class LoomingSpires extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         
         // When Looming Spires enters the battlefield, target creature gets +1/+1 and gain first strike until end of turn.
-        Effect effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains first strike");
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
-        ability.addEffect(effect);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn)
+                .setText("target creature gets +1/+1"), false);
+        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains first strike until end of turn"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         

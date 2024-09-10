@@ -17,7 +17,8 @@ public final class WastefulHarvest extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Mill five cards. You may put a permanent card from among the cards milled this way into your hand.
-        this.getSpellAbility().addEffect(new MillThenPutInHandEffect(5, StaticFilters.FILTER_CARD_A_PERMANENT));
+        this.getSpellAbility().addEffect(new MillThenPutInHandEffect(5, StaticFilters.FILTER_CARD_A_PERMANENT)
+                .withTextOptions("the cards milled this way"));
     }
 
     private WastefulHarvest(final WastefulHarvest card) {

@@ -17,7 +17,7 @@ import mage.game.permanent.token.RogueToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInASingleGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -34,7 +34,9 @@ public final class WasteManagement extends CardImpl {
 
         // Exile up to two target cards from a single graveyard. If this spell was kicked, instead exile target player's graveyard. Create a 2/2 black Rogue creature token for each creature card exiled this way.
         this.getSpellAbility().addEffect(new WasteManagementEffect());
-        this.getSpellAbility().setTargetAdjuster(WasteManagementAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD));
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
+                new TargetPlayer()));
     }
 
     private WasteManagement(final WasteManagement card) {
@@ -44,20 +46,6 @@ public final class WasteManagement extends CardImpl {
     @Override
     public WasteManagement copy() {
         return new WasteManagement(this);
-    }
-}
-
-enum WasteManagementAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        if (KickedCondition.ONCE.apply(game, ability)) {
-            ability.addTarget(new TargetPlayer());
-        } else {
-            ability.addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD));
-        }
     }
 }
 
@@ -101,6 +89,7 @@ class WasteManagementEffect extends OneShotEffect {
         cards.retainZone(Zone.EXILED, game);
         int count = cards.count(StaticFilters.FILTER_CARD_CREATURE, game);
         if (count > 0) {
+            game.processAction();
             new RogueToken().putOntoBattlefield(count, game, source);
         }
         return true;

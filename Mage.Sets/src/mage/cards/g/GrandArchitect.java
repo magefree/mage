@@ -14,6 +14,8 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -24,7 +26,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-import mage.filter.FilterPermanent;
 
 /**
  * @author BetaSteward_at_googlemail.com, nantuko
@@ -32,11 +33,12 @@ import mage.filter.FilterPermanent;
 public final class GrandArchitect extends CardImpl {
 
     private static final FilterCreaturePermanent boostFilter = new FilterCreaturePermanent("blue creatures");
-    private static final FilterCreaturePermanent targetFilter = new FilterCreaturePermanent("artifact creature");
+    private static final FilterControlledCreaturePermanent tapFilter = new FilterControlledCreaturePermanent("untapped blue creature you control");
 
     static {
         boostFilter.add(new ColorPredicate(ObjectColor.BLUE));
-        targetFilter.add(CardType.ARTIFACT.getPredicate());
+        tapFilter.add(new ColorPredicate(ObjectColor.BLUE));
+        tapFilter.add(TappedPredicate.UNTAPPED);
     }
 
     public GrandArchitect(UUID ownerId, CardSetInfo setInfo) {
@@ -52,14 +54,11 @@ public final class GrandArchitect extends CardImpl {
 
         // {U}: Target artifact creature becomes blue until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl<>("{U}"));
-        ability.addTarget(new TargetPermanent(targetFilter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE));
         this.addAbility(ability);
 
         // Tap an untapped blue creature you control: Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped blue creature");
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(TappedPredicate.UNTAPPED);
-        this.addAbility(new GrandArchitectManaAbility(filter));
+        this.addAbility(new GrandArchitectManaAbility(tapFilter));
     }
 
     private GrandArchitect(final GrandArchitect card) {
@@ -75,12 +74,12 @@ public final class GrandArchitect extends CardImpl {
 
 class GrandArchitectEffect extends ContinuousEffectImpl {
 
-    public GrandArchitectEffect() {
+    GrandArchitectEffect() {
         super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Detriment);
         staticText = "Target artifact creature becomes blue until end of turn";
     }
 
-    public GrandArchitectEffect(final GrandArchitectEffect effect) {
+    private GrandArchitectEffect(final GrandArchitectEffect effect) {
         super(effect);
     }
 
@@ -116,7 +115,7 @@ class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
         this.filter = filter;
     }
 
-    GrandArchitectManaAbility(GrandArchitectManaAbility ability) {
+    private GrandArchitectManaAbility(final GrandArchitectManaAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
     }
@@ -129,10 +128,19 @@ class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
 
 class GrandArchitectConditionalMana extends ConditionalMana {
 
-    public GrandArchitectConditionalMana() {
+    GrandArchitectConditionalMana() {
         super(Mana.ColorlessMana(2));
         staticText = "Spend this mana only to cast artifact spells or activate abilities of artifacts";
         addCondition(new GrandArchitectManaCondition());
+    }
+
+    private GrandArchitectConditionalMana(final GrandArchitectConditionalMana conditionalMana) {
+        super(conditionalMana);
+    }
+
+    @Override
+    public GrandArchitectConditionalMana copy() {
+        return new GrandArchitectConditionalMana(this);
     }
 }
 

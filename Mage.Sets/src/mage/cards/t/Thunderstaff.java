@@ -55,7 +55,7 @@ class ThunderstaffPreventionEffect extends PreventionEffectImpl {
         staticText = "As long as {this} is untapped, if a creature would deal combat damage to you, prevent 1 of that damage";
     }
 
-    public ThunderstaffPreventionEffect(final ThunderstaffPreventionEffect effect) {
+    private ThunderstaffPreventionEffect(final ThunderstaffPreventionEffect effect) {
         super(effect);
     }
 

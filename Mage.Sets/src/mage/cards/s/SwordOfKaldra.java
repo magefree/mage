@@ -23,7 +23,7 @@ public final class SwordOfKaldra extends CardImpl {
 
     public SwordOfKaldra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +5/+5.
@@ -51,7 +51,7 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever equipped creature deals damage to a creature, ");
     }
 
-    public SwordOfKaldraTriggeredAbility(final SwordOfKaldraTriggeredAbility ability) {
+    private SwordOfKaldraTriggeredAbility(final SwordOfKaldraTriggeredAbility ability) {
         super(ability);
     }
 

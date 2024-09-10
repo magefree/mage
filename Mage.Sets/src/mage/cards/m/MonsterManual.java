@@ -36,6 +36,8 @@ public final class MonsterManual extends AdventureCard {
         // Zoological Study
         // Mill five cards, then return a creature card milled this way to your hand.
         this.getSpellCard().getSpellAbility().addEffect(new ZoologicalStudyEffect());
+
+        this.finalizeAdventure();
     }
 
     private MonsterManual(final MonsterManual card) {
@@ -82,7 +84,7 @@ class ZoologicalStudyEffect extends OneShotEffect {
                 break;
             default:
                 TargetCard target = new TargetCard(Zone.ALL, StaticFilters.FILTER_CARD_CREATURE);
-                player.choose(outcome, cards, target, game);
+                player.choose(outcome, cards, target, source, game);
                 card = cards.get(target.getFirstTarget(), game);
         }
         player.moveCards(card, Zone.HAND, source, game);

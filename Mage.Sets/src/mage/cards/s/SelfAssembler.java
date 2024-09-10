@@ -33,7 +33,7 @@ public final class SelfAssembler extends CardImpl {
 
         // When Self-Assembler enters the battlefield, you may search your library for an Assembly-Worker creature card, reveal it, put it into your hand,
         // then shuffle your library.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true, true);
+        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true);
         effect.setText("you may search your library for an Assembly-Worker creature card, reveal it, put it into your hand, then shuffle");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }

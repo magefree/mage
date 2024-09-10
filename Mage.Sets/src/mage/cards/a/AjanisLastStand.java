@@ -65,7 +65,7 @@ class AjanisLastStandTriggeredAbility extends TriggeredAbilityImpl {
         ), false);
     }
 
-    public AjanisLastStandTriggeredAbility(final AjanisLastStandTriggeredAbility ability) {
+    private AjanisLastStandTriggeredAbility(final AjanisLastStandTriggeredAbility ability) {
         super(ability);
     }
 

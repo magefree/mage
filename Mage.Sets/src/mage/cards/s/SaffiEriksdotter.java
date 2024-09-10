@@ -26,7 +26,7 @@ public final class SaffiEriksdotter extends CardImpl {
 
     public SaffiEriksdotter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.SCOUT);
 
         this.power = new MageInt(2);

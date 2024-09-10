@@ -87,7 +87,7 @@ class EnigmaticIncarnationEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        game.getState().processAction(game);
+        game.processAction();
         int cmc = permanent.getManaValue();
         if (!permanent.sacrifice(source, game)) {
             return false;

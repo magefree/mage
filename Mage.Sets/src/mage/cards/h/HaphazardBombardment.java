@@ -58,12 +58,12 @@ public final class HaphazardBombardment extends CardImpl {
 
 class HaphazardBombardmentEffect extends OneShotEffect {
 
-    public HaphazardBombardmentEffect() {
+    HaphazardBombardmentEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose four nonenchantment permanents you don't control and put an aim counter on each of them";
     }
 
-    public HaphazardBombardmentEffect(final HaphazardBombardmentEffect effect) {
+    private HaphazardBombardmentEffect(final HaphazardBombardmentEffect effect) {
         super(effect);
     }
 
@@ -103,12 +103,12 @@ class HaphazardBombardmentEffect extends OneShotEffect {
 
 class HaphazardBombardmentEndOfTurnEffect extends OneShotEffect {
 
-    public HaphazardBombardmentEndOfTurnEffect() {
+    HaphazardBombardmentEndOfTurnEffect() {
         super(Outcome.Benefit);
         this.staticText = "destroy one of those permanents at random";
     }
 
-    public HaphazardBombardmentEndOfTurnEffect(final HaphazardBombardmentEndOfTurnEffect effect) {
+    private HaphazardBombardmentEndOfTurnEffect(final HaphazardBombardmentEndOfTurnEffect effect) {
         super(effect);
     }
 

@@ -24,7 +24,7 @@ public class InfoEffect extends OneShotEffect {
         this.staticText = text;
     }
 
-    public InfoEffect(final InfoEffect effect) {
+    protected InfoEffect(final InfoEffect effect) {
         super(effect);
     }
 

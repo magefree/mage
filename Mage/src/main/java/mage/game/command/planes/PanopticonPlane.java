@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
@@ -36,7 +35,6 @@ public class PanopticonPlane extends Plane {
 
     public PanopticonPlane() {
         this.setPlaneType(Planes.PLANE_PANOPTICON);
-        this.setExpansionSetCodeForImage("PCA");
 
         // When you planeswalk to Panopticon, draw a card
         Ability pwability = new PanopticonTriggeredAbility(new DrawCardTargetEffect(1));
@@ -62,6 +60,15 @@ public class PanopticonPlane extends Plane {
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
     }
+
+    private PanopticonPlane(final PanopticonPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public PanopticonPlane copy() {
+        return new PanopticonPlane(this);
+    }
 }
 
 class PanopticonTriggeredAbility extends TriggeredAbilityImpl {
@@ -70,7 +77,7 @@ class PanopticonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.COMMAND, effect);
     }
 
-    public PanopticonTriggeredAbility(final PanopticonTriggeredAbility ability) {
+    protected PanopticonTriggeredAbility(final PanopticonTriggeredAbility ability) {
         super(ability);
     }
 

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,7 +21,7 @@ public final class JaceBeleren extends CardImpl {
 
     public JaceBeleren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
         this.setStartingLoyalty(3);
@@ -35,7 +35,7 @@ public final class JaceBeleren extends CardImpl {
         this.addAbility(ability1);
 
         // -10: Target player puts the top twenty cards of their library into their graveyard.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(20), -10);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new MillCardsTargetEffect(20), -10);
         ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
     }

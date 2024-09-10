@@ -44,7 +44,7 @@ class BowerPassageEffect extends RestrictionEffect {
         staticText = "Creatures with flying can't block creatures you control";
     }
 
-    BowerPassageEffect(final BowerPassageEffect effect) {
+    private BowerPassageEffect(final BowerPassageEffect effect) {
         super(effect);
     }
 

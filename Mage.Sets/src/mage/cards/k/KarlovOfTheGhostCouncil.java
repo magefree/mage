@@ -27,7 +27,7 @@ public final class KarlovOfTheGhostCouncil extends CardImpl {
 
     public KarlovOfTheGhostCouncil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);

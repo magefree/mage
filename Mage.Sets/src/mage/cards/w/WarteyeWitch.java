@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +33,7 @@ public final class WarteyeWitch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Warteye Witch or another creature you control dies, scry 1.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new ScryEffect(1, false), false, filter
         ));
     }

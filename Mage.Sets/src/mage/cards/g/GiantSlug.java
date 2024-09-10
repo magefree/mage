@@ -82,27 +82,27 @@ class GiantSlugEffect extends OneShotEffect {
         switch (choices.getChoice()) {
             case "Plains":
                 game.addEffect(new GainAbilitySourceEffect(
-                        new PlainswalkAbility(), Duration.EndOfTurn, false
+                        new PlainswalkAbility(), Duration.EndOfTurn
                 ), source);
                 return true;
             case "Island":
                 game.addEffect(new GainAbilitySourceEffect(
-                        new IslandwalkAbility(), Duration.EndOfTurn, false
+                        new IslandwalkAbility(), Duration.EndOfTurn
                 ), source);
                 return true;
             case "Swamp":
                 game.addEffect(new GainAbilitySourceEffect(
-                        new SwampwalkAbility(), Duration.EndOfTurn, false
+                        new SwampwalkAbility(), Duration.EndOfTurn
                 ), source);
                 return true;
             case "Mountain":
                 game.addEffect(new GainAbilitySourceEffect(
-                        new MountainwalkAbility(), Duration.EndOfTurn, false
+                        new MountainwalkAbility(), Duration.EndOfTurn
                 ), source);
                 return true;
             case "Forest":
                 game.addEffect(new GainAbilitySourceEffect(
-                        new ForestwalkAbility(), Duration.EndOfTurn, false
+                        new ForestwalkAbility(), Duration.EndOfTurn
                 ), source);
                 return true;
             default:

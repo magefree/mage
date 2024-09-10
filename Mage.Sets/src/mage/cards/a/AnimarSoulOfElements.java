@@ -27,7 +27,7 @@ public final class AnimarSoulOfElements extends CardImpl {
 
     public AnimarSoulOfElements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(1);
@@ -61,7 +61,7 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Creature spells you cast cost {1} less to cast for each +1/+1 counter on Animar";
     }
 
-    AnimarCostReductionEffect(AnimarCostReductionEffect effect) {
+    private AnimarCostReductionEffect(final AnimarCostReductionEffect effect) {
         super(effect);
     }
 

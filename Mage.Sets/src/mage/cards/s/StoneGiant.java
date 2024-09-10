@@ -58,7 +58,7 @@ class StoneGiantTarget extends TargetPermanent {
         super(new FilterControlledCreaturePermanent("creature you control with toughness less than {this}'s power"));
     }
 
-    public StoneGiantTarget(final StoneGiantTarget target) {
+    private StoneGiantTarget(final StoneGiantTarget target) {
         super(target);
     }
 

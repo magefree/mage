@@ -56,8 +56,7 @@ class DawnsReflectionManaEffect extends ManaEffect {
 
     DawnsReflectionManaEffect() {
         super();
-        this.staticText = "its controller adds two mana in any combination of colors " +
-                "<i>(in addition to the mana the land produces)</i>";
+        this.staticText = "its controller adds an additional two mana in any combination of colors";
     }
 
     private DawnsReflectionManaEffect(final DawnsReflectionManaEffect effect) {

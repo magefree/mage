@@ -4,6 +4,8 @@ import mage.interfaces.callback.CallbackClient;
 import mage.utils.MageVersion;
 
 /**
+ * Network: client side commands to process from a server
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public interface MageClient extends CallbackClient {
@@ -12,7 +14,7 @@ public interface MageClient extends CallbackClient {
 
     void connected(String message);
 
-    void disconnected(boolean askToReconnect);
+    void disconnected(boolean askToReconnect, boolean keepMySessionActive);
 
     void showMessage(String message);
 

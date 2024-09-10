@@ -10,7 +10,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.command.CommandObject;
@@ -26,12 +26,6 @@ import java.util.UUID;
 
 public final class Biotransference extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an artifact spell");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
-
     public Biotransference(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
@@ -39,7 +33,7 @@ public final class Biotransference extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BiotransferenceEffect()));
 
         // Whenever you cast an artifact spell, you lose 1 life and create a 2/2 black Necron Warrior artifact creature token.
-        Ability ability = new SpellCastControllerTriggeredAbility(new LoseLifeSourceControllerEffect(1), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new LoseLifeSourceControllerEffect(1), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false);
         ability.addEffect(new CreateTokenEffect(new NecronWarriorToken(), 1).concatBy("and"));
         this.addAbility(ability);
     }

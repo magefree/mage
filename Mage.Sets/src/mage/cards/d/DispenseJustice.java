@@ -54,7 +54,7 @@ class DispenseJusticeEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    DispenseJusticeEffect(DispenseJusticeEffect effect) {
+    private DispenseJusticeEffect(final DispenseJusticeEffect effect) {
         super(effect);
     }
 

@@ -47,12 +47,12 @@ public final class BlessedReincarnation extends CardImpl {
 
 class BlessedReincarnationEffect extends OneShotEffect {
 
-    public BlessedReincarnationEffect() {
+    BlessedReincarnationEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Exile target creature an opponent controls. That player reveals cards from the top of their library until a creature card is revealed. The player puts that card onto the battlefield, then shuffles the rest into their library";
     }
 
-    public BlessedReincarnationEffect(final BlessedReincarnationEffect effect) {
+    private BlessedReincarnationEffect(final BlessedReincarnationEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class BlessedReincarnationEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null && controller != null) {
             controller.moveCards(permanent, Zone.EXILED, source, game);
-            game.getState().processAction(game);
+            game.processAction();
 
             Player permanentController = game.getPlayer(permanent.getControllerId());
             if (permanentController != null) {

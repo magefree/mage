@@ -23,7 +23,7 @@ public class ReturnToHandSpellEffect extends OneShotEffect implements MageSingle
 
     private ReturnToHandSpellEffect() {
         super(Outcome.Benefit);
-        staticText = "Return {this} to its owner's hand";
+        staticText = "return {this} to its owner's hand";
     }
 
     @Override

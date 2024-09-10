@@ -8,9 +8,8 @@ import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -41,8 +40,7 @@ public final class CraterElemental extends CardImpl {
         // <i>Formidable</i> &mdash; {2}{R}: Crater Elemental has base power 8 until end of turn. Activate this ability only if creatures you control have total power 8 or greater.
         ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SetBasePowerToughnessSourceEffect(StaticValue.get(8), null, Duration.EndOfTurn, SubLayer.SetPT_7b,true)
-                        .setText("{this} has base power 8 until end of turn"),
+                new SetBasePowerSourceEffect(8, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{2}{R}"),
                 FormidableCondition.instance
         );

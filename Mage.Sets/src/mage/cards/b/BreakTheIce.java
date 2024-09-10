@@ -56,7 +56,7 @@ enum BreakTheIcePredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input.isSnow()
+        return input.isSnow(game)
                 || input
                 .getAbilities()
                 .getActivatedManaAbilities(Zone.BATTLEFIELD)

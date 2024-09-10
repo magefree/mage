@@ -12,9 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -30,16 +28,10 @@ import java.util.stream.Collectors;
  */
 public final class LivioOathswornSentinel extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public LivioOathswornSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(2);
@@ -49,7 +41,7 @@ public final class LivioOathswornSentinel extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new LivioOathswornSentinelExileEffect(), new ManaCostsImpl<>("{1}{W}")
         );
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
 
         // {2}{W}, {T}: Return all exiled cards with aegis counters on them to the battlefield under their owners' control.

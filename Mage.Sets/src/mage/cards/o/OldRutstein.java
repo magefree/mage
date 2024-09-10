@@ -25,7 +25,7 @@ public final class OldRutstein extends CardImpl {
     public OldRutstein(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PEASANT);
         this.power = new MageInt(1);
@@ -76,7 +76,7 @@ class OldRutsteinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or at the beginning of your upkeep, mill a card. " +
+        return "When {this} enters or at the beginning of your upkeep, mill a card. " +
                 "If a land card is milled this way, create a Treasure token. " +
                 "If a creature card is milled this way, create a 1/1 green Insect creature token. " +
                 "If a noncreature, nonland card is milled this way, create a Blood token.";

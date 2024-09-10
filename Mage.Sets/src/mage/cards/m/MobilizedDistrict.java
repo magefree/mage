@@ -37,7 +37,7 @@ public final class MobilizedDistrict extends CardImpl {
 
         // {4}: Mobilized District becomes a 3/3 Citizen creature with vigilance until end of turn. It's still a land. This ability costs {1} less to activate for each legendary creature and planeswalker you control.
         Ability ability = new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new MobilizedDistrictToken(), "land", Duration.EndOfTurn
+                new MobilizedDistrictToken(), CardType.LAND, Duration.EndOfTurn
         ).setText("{this} becomes a 3/3 Citizen creature with vigilance until end of turn. " +
                 "It's still a land. This ability costs {1} less to activate " +
                 "for each legendary creature and planeswalker you control."

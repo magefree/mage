@@ -26,7 +26,7 @@ public final class SelesnyaSignet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SelesnyaSignet (final SelesnyaSignet card) {
+    private SelesnyaSignet(final SelesnyaSignet card) {
         super(card);
     }
 

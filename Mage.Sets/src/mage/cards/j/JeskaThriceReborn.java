@@ -5,7 +5,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -36,7 +36,7 @@ public final class JeskaThriceReborn extends CardImpl {
     public JeskaThriceReborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JESKA);
         this.setStartingLoyalty(0);
 
@@ -53,7 +53,7 @@ public final class JeskaThriceReborn extends CardImpl {
         this.addAbility(ability);
 
         // −X: Jeska, Thrice Reborn deals X damage to each of up to three targets.
-        ability = new LoyaltyAbility(new DamageTargetEffect(GetXLoyaltyValue.instance)
+        ability = new LoyaltyAbility(new DamageTargetEffect(GetXValue.instance)
                 .setText("{this} deals X damage to each of up to three targets"));
         ability.addTarget(new TargetAnyTarget(0, 3));
         this.addAbility(ability);
@@ -136,7 +136,7 @@ class JeskaThriceRebornEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!((DamagePlayerEvent) event).isCombatDamage()
-                || !event.getSourceId().equals(targetPointer.getFirst(game, source))) {
+                || !event.getSourceId().equals(getTargetPointer().getFirst(game, source))) {
             return false;
         }
         Player player = game.getPlayer(source.getControllerId());
@@ -144,15 +144,8 @@ class JeskaThriceRebornEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        int amount = event.getAmount();
-        event.setAmount(CardUtil.overflowInc(amount, event.getAmount()));
-        event.setAmount(CardUtil.overflowInc(amount, event.getAmount()));
+        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 3));
         return false;
     }
 }

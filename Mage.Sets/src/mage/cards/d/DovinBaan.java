@@ -30,7 +30,7 @@ public final class DovinBaan extends CardImpl {
 
     public DovinBaan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOVIN);
 
         this.setStartingLoyalty(3);
@@ -71,18 +71,13 @@ class DovinBaanCantActivateAbilitiesEffect extends ContinuousRuleModifyingEffect
         staticText = "and its activated abilities can't be activated";
     }
 
-    DovinBaanCantActivateAbilitiesEffect(final DovinBaanCantActivateAbilitiesEffect effect) {
+    private DovinBaanCantActivateAbilitiesEffect(final DovinBaanCantActivateAbilitiesEffect effect) {
         super(effect);
     }
 
     @Override
     public DovinBaanCantActivateAbilitiesEffect copy() {
         return new DovinBaanCantActivateAbilitiesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

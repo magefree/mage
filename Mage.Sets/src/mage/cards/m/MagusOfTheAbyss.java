@@ -52,7 +52,7 @@ class MagusOfTheAbyssTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(true), false);
     }
 
-    MagusOfTheAbyssTriggeredAbility(final MagusOfTheAbyssTriggeredAbility ability) {
+    private MagusOfTheAbyssTriggeredAbility(final MagusOfTheAbyssTriggeredAbility ability) {
         super(ability);
     }
 

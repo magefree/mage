@@ -34,7 +34,7 @@ public final class WaterkinShaman extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever a creature with flying enters the battlefield under your control, Waterkin Shaman gets +1/+1 until end of turn.
+        // Whenever a creature with flying you control enters, Waterkin Shaman gets +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter
         ));

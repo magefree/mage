@@ -7,7 +7,9 @@ public enum SagaChapter {
     CHAPTER_I(1, "I"),
     CHAPTER_II(2, "II"),
     CHAPTER_III(3, "III"),
-    CHAPTER_IV(4, "IV");
+    CHAPTER_IV(4, "IV"),
+    CHAPTER_V(5, "V"),
+    CHAPTER_VI(6, "VI");
 
     private final String text;
     private final int number;

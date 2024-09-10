@@ -30,7 +30,7 @@ public final class HavengulLaboratory extends CardImpl {
 
     public HavengulLaboratory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.secondSideCardClazz = mage.cards.h.HavengulMystery.class;
 

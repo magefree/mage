@@ -28,7 +28,6 @@ public class TheEonFogPlane extends Plane {
 
     public TheEonFogPlane() {
         this.setPlaneType(Planes.PLANE_THE_EON_FOG);
-        this.setExpansionSetCodeForImage("PCA");
 
         // All players miss their untap step
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new TheEonFogSkipUntapStepEffect(Duration.Custom, true));
@@ -50,25 +49,32 @@ public class TheEonFogPlane extends Plane {
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
     }
+
+    private TheEonFogPlane(final TheEonFogPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public TheEonFogPlane copy() {
+        return new TheEonFogPlane(this);
+    }
 }
 
 class TheEonFogSkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
 
-    boolean allPlayers = false;
+    final boolean allPlayers;
 
     public TheEonFogSkipUntapStepEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
-        this.allPlayers = false;
-        staticText = "Players skip their untap steps";
+        this(Duration.WhileOnBattlefield, false);
     }
 
-    public TheEonFogSkipUntapStepEffect(Duration d, boolean allPlayers) {
-        super(d, Outcome.Neutral, false, false);
+    public TheEonFogSkipUntapStepEffect(Duration duration, boolean allPlayers) {
+        super(duration, Outcome.Neutral, false, false);
         this.allPlayers = allPlayers;
         staticText = "Players skip their untap steps";
     }
 
-    public TheEonFogSkipUntapStepEffect(final TheEonFogSkipUntapStepEffect effect) {
+    protected TheEonFogSkipUntapStepEffect(final TheEonFogSkipUntapStepEffect effect) {
         super(effect);
         this.allPlayers = effect.allPlayers;
     }
@@ -76,6 +82,11 @@ class TheEonFogSkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public TheEonFogSkipUntapStepEffect copy() {
         return new TheEonFogSkipUntapStepEffect(this);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNTAP_STEP;
     }
 
     @Override
@@ -87,6 +98,6 @@ class TheEonFogSkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
         if (!cPlane.getPlaneType().equals(Planes.PLANE_THE_EON_FOG)) {
             return false;
         }
-        return event.getType() == GameEvent.EventType.UNTAP_STEP;
+        return true;
     }
 }

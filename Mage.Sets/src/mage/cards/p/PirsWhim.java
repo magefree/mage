@@ -51,7 +51,7 @@ class PirsWhimEffect extends OneShotEffect {
                 + "Each foe sacrifices an artifact or enchantment they control.";
     }
 
-    PirsWhimEffect(final PirsWhimEffect effect) {
+    private PirsWhimEffect(final PirsWhimEffect effect) {
         super(effect);
     }
 

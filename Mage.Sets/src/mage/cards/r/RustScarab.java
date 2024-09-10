@@ -1,6 +1,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
@@ -11,11 +12,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author LevelX2
  */
 public final class RustScarab extends CardImpl {
@@ -24,11 +24,11 @@ public final class RustScarab extends CardImpl {
             = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public RustScarab(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.subtype.add(SubType.INSECT);
 
         this.power = new MageInt(4);

@@ -15,12 +15,12 @@ public class UndauntedAbility extends SimpleStaticAbility {
         setRuleAtTheTop(true);
     }
 
-    public UndauntedAbility(final UndauntedAbility ability) {
+    protected UndauntedAbility(final UndauntedAbility ability) {
         super(ability);
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public UndauntedAbility copy() {
         return new UndauntedAbility(this);
     }
 

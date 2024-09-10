@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.CopyPermanentEffect;
-import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -65,11 +66,21 @@ class AlteredEgoCopyApplier extends CopyApplier {
         // effect is applied to that object after applying the copy effect with that exception, the
         // exception’s effect doesn’t happen.
 
-        if (!isCopyOfCopy(source, blueprint, copyToObjectId)) {
+        if (!isCopyOfCopy(source, blueprint, copyToObjectId) && CardUtil.checkSourceCostsTagExists(game, source, "X")) {
             // except it enters with an additional X +1/+1 counters on it
             blueprint.getAbilities().add(
-                    new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance()))
+                    new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(
+                            CardUtil.getSourceCostsTag(game, source, "X", 0)
+                    )))
             );
+
+            /*
+             * If the chosen creature has {X} in its mana cost, that X is considered to be 0.
+             * The value of X in Altered Ego's last ability will be whatever value was chosen for X while casting Altered Ego.
+             * (2016-04-08)
+             * So the X value of Altered Ego must be separate from the copied creature's X value
+             */
+            CardUtil.getSourceCostsTagsMap(game, source).remove("X");
         }
 
         return true;

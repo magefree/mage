@@ -24,12 +24,12 @@ public final class AngelsTomb extends CardImpl {
     public AngelsTomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // Whenever a creature enters the battlefield under your control, you may have Angel's Tomb become a 3/3 white Angel artifact creature with flying until end of turn.
+        // Whenever a creature you control enters, you may have Angel's Tomb become a 3/3 white Angel artifact creature with flying until end of turn.
         Effect effect = new BecomesCreatureSourceEffect(new CreatureToken(3, 3, "3/3 white Angel artifact creature with flying")
                 .withColor("W")
                 .withSubType(SubType.ANGEL)
                 .withAbility(FlyingAbility.getInstance()),
-                "", Duration.EndOfTurn)
+                CardType.ARTIFACT, Duration.EndOfTurn)
                 .setText("have {this} become a 3/3 white Angel artifact creature with flying until end of turn");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,

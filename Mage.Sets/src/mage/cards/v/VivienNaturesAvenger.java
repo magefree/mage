@@ -20,11 +20,11 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class VivienNaturesAvenger extends CardImpl {
-    
+
     public VivienNaturesAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
-        
-        this.addSuperType(SuperType.LEGENDARY);
+
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
         this.setStartingLoyalty(3);
 
@@ -37,7 +37,7 @@ public final class VivienNaturesAvenger extends CardImpl {
 
         // −1: Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new RevealCardsFromLibraryUntilEffect(
-                StaticFilters.FILTER_CARD_CREATURE, Zone.HAND, Zone.HAND, false, false
+                StaticFilters.FILTER_CARD_CREATURE, PutCards.HAND, PutCards.BOTTOM_RANDOM
         ), -1));
 
         // −6: Target creature gets +10/+10 and gains trample until end of turn.
@@ -50,11 +50,11 @@ public final class VivienNaturesAvenger extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    
+
     private VivienNaturesAvenger(final VivienNaturesAvenger card) {
         super(card);
     }
-    
+
     @Override
     public VivienNaturesAvenger copy() {
         return new VivienNaturesAvenger(this);

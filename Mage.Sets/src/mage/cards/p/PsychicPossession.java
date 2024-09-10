@@ -62,7 +62,7 @@ class PsychicPossessionTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public PsychicPossessionTriggeredAbility(final PsychicPossessionTriggeredAbility ability) {
+    private PsychicPossessionTriggeredAbility(final PsychicPossessionTriggeredAbility ability) {
         super(ability);
     }
 
@@ -91,7 +91,7 @@ class PsychicPossessionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted opponent draws a card, you may draw a card";
+        return "Whenever enchanted opponent draws a card, you may draw a card.";
     }
 
 }

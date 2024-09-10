@@ -513,7 +513,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
     }
 
     @Test
-    //@Ignore("Not yet working correctly.")
     public void testCastTreatsToShareWithWrennAndSixEmblem() {
         /*
          * Wrenn and Six {R}{G}
@@ -534,7 +533,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         // showAvailableAbilities("abils", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         // retrace - You may cast this card from your graveyard by discarding a land card as an additional cost to cast it
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share with retrace");
         setChoice(playerA, "Forest");
 
         setStrictChooseMode(true);
@@ -735,6 +734,7 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         checkExileCount("after exile 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Curious Pair", 1);
         // play as adventure spell
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Treats to Share");
+        setChoice(playerA, "Hostage Taker"); // Not sure why there is an alternative there. No issue with using either. TODO: investigate?
         waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
         checkPermanentCount("after play 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Food Token", 1);
 

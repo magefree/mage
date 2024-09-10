@@ -206,6 +206,7 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Hecatomb", 167, Rarity.RARE, mage.cards.h.Hecatomb.class));
         cards.add(new SetCardInfo("Helm of Chatzuk", 376, Rarity.RARE, mage.cards.h.HelmOfChatzuk.class));
         cards.add(new SetCardInfo("Hill Giant", 239, Rarity.COMMON, mage.cards.h.HillGiant.class));
+        cards.add(new SetCardInfo("Hipparion", 34, Rarity.COMMON, mage.cards.h.Hipparion.class));
         cards.add(new SetCardInfo("Hollow Trees", 418, Rarity.RARE, mage.cards.h.HollowTrees.class));
         cards.add(new SetCardInfo("Holy Strength", 35, Rarity.COMMON, mage.cards.h.HolyStrength.class));
         cards.add(new SetCardInfo("Homarid Warrior", 92, Rarity.COMMON, mage.cards.h.HomaridWarrior.class));

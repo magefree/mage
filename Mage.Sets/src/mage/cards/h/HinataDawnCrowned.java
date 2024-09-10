@@ -25,7 +25,7 @@ public final class HinataDawnCrowned extends CardImpl {
     public HinataDawnCrowned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(4);

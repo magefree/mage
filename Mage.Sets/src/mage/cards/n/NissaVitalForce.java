@@ -35,7 +35,7 @@ public final class NissaVitalForce extends CardImpl {
 
     public NissaVitalForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
         this.setStartingLoyalty(5);
@@ -44,7 +44,7 @@ public final class NissaVitalForce extends CardImpl {
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability.addEffect(new BecomesCreatureTargetEffect(
                 new NissaVitalForceToken(), false, true, Duration.UntilYourNextTurn
-        ).setText("Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land"));
+        ).withDurationRuleAtStart(true).setText("Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land"));
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
 
@@ -53,7 +53,7 @@ public final class NissaVitalForce extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
 
-        // -6: You get an emblem with "Whenever a land enters the battlefield under your control, you may draw a card."
+        // -6: You get an emblem with "Whenever a land you control enters, you may draw a card."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new NissaVitalForceEmblem()), -6));
     }
 
@@ -79,7 +79,7 @@ class NissaVitalForceToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public NissaVitalForceToken(final NissaVitalForceToken token) {
+    private NissaVitalForceToken(final NissaVitalForceToken token) {
         super(token);
     }
 

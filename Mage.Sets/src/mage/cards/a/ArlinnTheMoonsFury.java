@@ -25,7 +25,7 @@ public final class ArlinnTheMoonsFury extends CardImpl {
     public ArlinnTheMoonsFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
         this.setStartingLoyalty(4);
         this.color.setRed(true);

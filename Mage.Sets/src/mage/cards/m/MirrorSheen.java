@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,7 +37,7 @@ public final class MirrorSheen extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U/R}{U/R}");
 
         // {1}{UR}{UR}: Copy target instant or sorcery spell that targets you. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl<>("{1}{U/R}{U/R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetStackObjectEffect(), new ManaCostsImpl<>("{1}{U/R}{U/R}"));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
 

@@ -15,7 +15,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ChancellorAbility extends StaticAbility implements OpeningHandAction {
@@ -28,7 +27,7 @@ public class ChancellorAbility extends StaticAbility implements OpeningHandActio
         super(Zone.HAND, effect);
     }
 
-    public ChancellorAbility(final ChancellorAbility ability) {
+    protected ChancellorAbility(final ChancellorAbility ability) {
         super(ability);
     }
 

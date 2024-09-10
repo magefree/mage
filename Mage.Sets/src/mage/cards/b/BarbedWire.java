@@ -55,12 +55,12 @@ public final class BarbedWire extends CardImpl {
 
 class BarbwireDamageEffect extends OneShotEffect {
 
-    public BarbwireDamageEffect() {
+    BarbwireDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "";
     }
 
-    public BarbwireDamageEffect(final BarbwireDamageEffect effect) {
+    private BarbwireDamageEffect(final BarbwireDamageEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class BarbwireDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player activePlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player activePlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (activePlayer != null) {
             activePlayer.damage(1, source.getSourceId(), source, game);
             return true;
@@ -83,12 +83,12 @@ class BarbwireDamageEffect extends OneShotEffect {
 
 class BarbedWirePreventionEffect extends PreventionEffectImpl {
 
-    public BarbedWirePreventionEffect() {
+    BarbedWirePreventionEffect() {
         super(Duration.EndOfTurn, 1, false);
         staticText = "Prevent the next 1 damage that would be dealt by {this} this turn";
     }
 
-    public BarbedWirePreventionEffect(final BarbedWirePreventionEffect effect) {
+    private BarbedWirePreventionEffect(final BarbedWirePreventionEffect effect) {
         super(effect);
     }
 

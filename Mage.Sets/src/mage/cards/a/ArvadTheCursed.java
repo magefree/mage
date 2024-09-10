@@ -32,7 +32,7 @@ public final class ArvadTheCursed extends CardImpl {
     public ArvadTheCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE, SubType.KNIGHT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

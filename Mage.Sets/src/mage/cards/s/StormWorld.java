@@ -19,7 +19,7 @@ public final class StormWorld extends CardImpl {
     public StormWorld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
 
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, Storm World deals X damage to that player, where X is 4 minus the number of cards in their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new StormWorldEffect(), TargetController.ANY, false, true));
@@ -38,12 +38,12 @@ public final class StormWorld extends CardImpl {
 
 class StormWorldEffect extends OneShotEffect {
 
-    public StormWorldEffect() {
+    StormWorldEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals X damage to that player, where X is 4 minus the number of cards in their hand";
     }
 
-    public StormWorldEffect(final StormWorldEffect effect) {
+    private StormWorldEffect(final StormWorldEffect effect) {
         super(effect);
     }
 
@@ -54,7 +54,7 @@ class StormWorldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int damage = 4 - player.getHand().size();
             if (damage > 0) {

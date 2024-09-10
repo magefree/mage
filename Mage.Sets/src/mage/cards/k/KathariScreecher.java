@@ -33,7 +33,7 @@ public final class KathariScreecher extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{2}{U}")));
     }
 
-    public KathariScreecher (final KathariScreecher card) {
+    private KathariScreecher(final KathariScreecher card) {
         super(card);
     }
 

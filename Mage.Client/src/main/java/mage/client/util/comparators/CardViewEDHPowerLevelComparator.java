@@ -314,7 +314,7 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
             thisMaxPower = Math.max(thisMaxPower, 1);
         }
 
-        if (card.isPlanesWalker()) {
+        if (card.isPlaneswalker()) {
             thisMaxPower = Math.max(thisMaxPower, 6);
         }
 

@@ -40,7 +40,7 @@ public final class UmbrisFearManifest extends CardImpl {
     public UmbrisFearManifest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);
@@ -53,7 +53,7 @@ public final class UmbrisFearManifest extends CardImpl {
                 Duration.WhileOnBattlefield
         )));
 
-        // Whenever Umbris or another Nightmare or Horror enters the battlefield under your control, target opponent exiles cards from the top of their library until they exile a land card.
+        // Whenever Umbris or another Nightmare or Horror you control enters, target opponent exiles cards from the top of their library until they exile a land card.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new UmbrisFearManifestEffect(), filter, false, true
         );

@@ -29,7 +29,7 @@ public final class AsajjVentress extends CardImpl {
 
     public AsajjVentress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DATHOMIRIAN, SubType.SITH);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -38,7 +38,7 @@ public final class AsajjVentress extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // When Asajj Ventress becomes blocked, she gets +1/+1 until end of turn for each creature blocking her.
-        Effect effect = new BoostSourceEffect(BlockingCreatureCount.SOURCE, BlockingCreatureCount.SOURCE, Duration.EndOfTurn, true);
+        Effect effect = new BoostSourceEffect(BlockingCreatureCount.SOURCE, BlockingCreatureCount.SOURCE, Duration.EndOfTurn);
         effect.setText("she gets +1/+1 until end of turn for each creature blocking her");
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
 

@@ -1,8 +1,6 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -16,9 +14,10 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
+import mage.filter.predicate.mageobject.PowerGreaterThanBasePowerPredicate;
 import mage.game.permanent.token.SoldierToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class BairdArgivianRecruiter extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("you control a creature with power greater than its base power");
 
     static {
-        filter.add(BairdArgivianRecruiterPredicate.instance);
+        filter.add(PowerGreaterThanBasePowerPredicate.instance);
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
@@ -37,7 +36,7 @@ public final class BairdArgivianRecruiter extends CardImpl {
 
     public BairdArgivianRecruiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
 
         this.power = new MageInt(2);
@@ -57,15 +56,5 @@ public final class BairdArgivianRecruiter extends CardImpl {
     @Override
     public BairdArgivianRecruiter copy() {
         return new BairdArgivianRecruiter(this);
-    }
-}
-
-enum BairdArgivianRecruiterPredicate implements Predicate<MageObject> {
-    instance;
-
-    @Override
-    public boolean apply(MageObject input, Game game) {
-        MageInt power = input.getPower();
-        return power.getValue() > power.getModifiedBaseValue();
     }
 }

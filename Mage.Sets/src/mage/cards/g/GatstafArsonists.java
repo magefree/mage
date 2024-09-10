@@ -22,7 +22,7 @@ public final class GatstafArsonists extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        this.secondSideCardClazz = GatstafRavagers.class;
+        this.secondSideCardClazz = mage.cards.g.GatstafRavagers.class;
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Gatstaf Arsonists.
         this.addAbility(new TransformAbility());

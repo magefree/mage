@@ -34,7 +34,7 @@ public final class NoEscape extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
 
         // Scry 1.
-        this.getSpellAbility().addEffect(new ScryEffect(1, false));
+        this.getSpellAbility().addEffect(new ScryEffect(1, false).concatBy("<br>"));
     }
 
     private NoEscape(final NoEscape card) {

@@ -25,7 +25,7 @@ public final class BrinelinTheMoonKraken extends CardImpl {
     public BrinelinTheMoonKraken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KRAKEN);
         this.power = new MageInt(6);
         this.toughness = new MageInt(8);
@@ -83,7 +83,7 @@ class BrinelinTheMoonKrakenTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or whenever you cast a spell with mana value " +
+        return "When {this} enters or whenever you cast a spell with mana value " +
                 "6 or greater, you may return target nonland permanent to its owner's hand.";
     }
 

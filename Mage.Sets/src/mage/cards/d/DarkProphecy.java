@@ -23,7 +23,7 @@ public final class DarkProphecy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
 
         // Whenever a creature you control dies, you draw a card and you lose 1 life.
-        Effect effect = new DrawCardSourceControllerEffect(1, "you");
+        Effect effect = new DrawCardSourceControllerEffect(1, true);
         Ability ability = new DiesCreatureTriggeredAbility(effect, false, StaticFilters.FILTER_CONTROLLED_A_CREATURE);
         effect = new LoseLifeSourceControllerEffect(1);
         ability.addEffect(effect.concatBy("and"));

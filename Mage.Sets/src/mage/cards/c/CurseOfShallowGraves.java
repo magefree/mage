@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
@@ -64,7 +63,7 @@ class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public CurseOfShallowTriggeredAbility(final CurseOfShallowTriggeredAbility ability) {
+    private CurseOfShallowTriggeredAbility(final CurseOfShallowTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,12 +100,12 @@ class CurseOfShallowTriggeredAbility extends TriggeredAbilityImpl {
 
 class CurseOfShallowEffect extends OneShotEffect {
 
-    public CurseOfShallowEffect() {
+    CurseOfShallowEffect() {
         super(Outcome.Benefit);
         this.staticText = "that attacking player may create a tapped 2/2 black Zombie creature token";
     }
 
-    public CurseOfShallowEffect(final CurseOfShallowEffect effect) {
+    private CurseOfShallowEffect(final CurseOfShallowEffect effect) {
         super(effect);
     }
 
@@ -120,7 +119,7 @@ class CurseOfShallowEffect extends OneShotEffect {
         Player attacker = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (attacker != null && attacker.chooseUse(outcome, "create a tapped 2/2 black Zombie creature token?", source, game)) {
             Effect effect = new CreateTokenTargetEffect(new ZombieToken(), StaticValue.get(1), true, false);
-            effect.setTargetPointer(targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.apply(game, source);
         }
         return false;

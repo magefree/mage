@@ -90,7 +90,7 @@ class FrontierWarmongerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more creatures attack an opponent or a planeswalker an opponent controls, " +
+        return "Whenever one or more creatures attack one of your opponents or a planeswalker they control, " +
                 "those creatures gain menace until end of turn.";
     }
 }

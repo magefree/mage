@@ -62,7 +62,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
                 "instant and/or sorcery spells from among the revealed cards instead of one.";
     }
 
-    public TalentOfTheTelepathEffect(final TalentOfTheTelepathEffect effect) {
+    private TalentOfTheTelepathEffect(final TalentOfTheTelepathEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller == null || opponent == null) {
             return false;
         }

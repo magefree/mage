@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class KaerveksTorch extends CardImpl {
         // As long as Kaervek's Torch is on the stack, spells that target it cost {2} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new KaerveksTorchCostIncreaseEffect()));
         // Kaervek's Torch deals X damage to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
@@ -52,10 +52,10 @@ class KaerveksTorchCostIncreaseEffect extends CostModificationEffectImpl {
 
     KaerveksTorchCostIncreaseEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Spells that target {this} cost {2} more to cast";
+        staticText = "As long as {this} is on the stack, spells that target it cost {2} more to cast";
     }
 
-    KaerveksTorchCostIncreaseEffect(KaerveksTorchCostIncreaseEffect effect) {
+    private KaerveksTorchCostIncreaseEffect(final KaerveksTorchCostIncreaseEffect effect) {
         super(effect);
     }
 

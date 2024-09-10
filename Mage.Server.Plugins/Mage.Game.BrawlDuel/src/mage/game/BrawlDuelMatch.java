@@ -17,7 +17,12 @@ public class BrawlDuelMatch extends MatchImpl {
     public void startGame() throws GameException {
         int startLife = 25;
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        BrawlDuel game = new BrawlDuel(options.getAttackOption(), options.getRange(), mulligan, startLife);
+        startLife = options.isCustomStartLifeEnabled() ? options.getCustomStartLife() : startLife;
+        int startHandSize = options.isCustomStartHandSizeEnabled() ? options.getCustomStartHandSize() : 7;
+        BrawlDuel game = new BrawlDuel(
+                options.getAttackOption(), options.getRange(),
+                mulligan, startLife, startHandSize
+        );
         game.setCheckCommanderDamage(false);
         game.setStartMessage(this.createGameStartMessage());
         initGame(game);

@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -13,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -22,11 +20,6 @@ import mage.target.TargetPermanent;
  * @author nantuko
  */
 public final class FiendHunter extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public FiendHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
@@ -38,7 +31,7 @@ public final class FiendHunter extends CardImpl {
 
         // When Fiend Hunter enters the battlefield, you may exile another target creature.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), true);
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE);
         ability1.addTarget(target);
         this.addAbility(ability1);
 

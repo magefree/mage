@@ -23,7 +23,7 @@ public final class KingMacarTheGoldCursed extends CardImpl {
 
     public KingMacarTheGoldCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.NOBLE);
 
         this.power = new MageInt(2);

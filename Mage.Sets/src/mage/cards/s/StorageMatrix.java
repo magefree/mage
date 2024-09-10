@@ -10,7 +10,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.PhaseStep;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -28,7 +27,7 @@ public final class StorageMatrix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StorageMatrixRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new StorageMatrixRestrictionEffect()));
     }
 
     private StorageMatrix(final StorageMatrix card) {
@@ -55,12 +54,12 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
 
     private CardType type;
 
-    public StorageMatrixRestrictionEffect() {
+    StorageMatrixRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step";
+        staticText = "As long as {this} is untapped, each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step";
     }
 
-    public StorageMatrixRestrictionEffect(final StorageMatrixRestrictionEffect effect) {
+    private StorageMatrixRestrictionEffect(final StorageMatrixRestrictionEffect effect) {
         super(effect);
         this.type = effect.type;
         this.turn = effect.turn;
@@ -69,35 +68,39 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getStep().getType() == PhaseStep.UNTAP) {
-            if (game.getTurnNum() != turn) {
-                turn = game.getTurnNum();
-                applies = false;
-                Permanent storageMatrix = game.getPermanent(source.getSourceId());
-                if (storageMatrix != null && !storageMatrix.isTapped()) {
-                    Choice choiceImpl = new ChoiceImpl(true);
-                    choiceImpl.setMessage("Untap which kind of permanent?");
-                    choiceImpl.setChoices(choice);
-                    Player player = game.getPlayer(game.getActivePlayerId());
-                    if (player != null && player.choose(outcome, choiceImpl, game)) {
-                        String chosenType = choiceImpl.getChoice();
-                        if (chosenType != null) {
-                            game.informPlayers(storageMatrix.getLogName() + ": " + player.getLogName() + " chose to untap " + chosenType);
+        if (game.getTurnStepType() != PhaseStep.UNTAP || !permanent.isControlledBy(game.getActivePlayerId())) {
+            return false;
+        }
+        if (game.getTurnNum() != turn) {
+            applies = makeChoice(game, source);
+        }
+        if (applies) {
+            return !permanent.getCardType(game).contains(type);
+        }
+        return false;
+    }
 
-                            if (chosenType.equals(CardType.ARTIFACT.toString())) {
-                                type = CardType.ARTIFACT;
-                            } else if (chosenType.equals(CardType.LAND.toString())) {
-                                type = CardType.LAND;
-                            } else {
-                                type = CardType.CREATURE;
-                            }
-                            applies = true;
-                        }
+    private boolean makeChoice(Game game, Ability source) {
+        turn = game.getTurnNum();
+        Permanent storageMatrix = game.getPermanent(source.getSourceId());
+        if (storageMatrix != null && !storageMatrix.isTapped()) {
+            Choice choiceImpl = new ChoiceImpl(true);
+            choiceImpl.setMessage("Untap which kind of permanent?");
+            choiceImpl.setChoices(choice);
+            Player player = game.getPlayer(game.getActivePlayerId());
+            if (player != null && player.choose(outcome, choiceImpl, game)) {
+                String chosenType = choiceImpl.getChoice();
+                if (chosenType != null) {
+                    game.informPlayers(storageMatrix.getLogName() + ": " + player.getLogName() + " chose to untap " + chosenType);
+                    if (chosenType.equals(CardType.ARTIFACT.toString())) {
+                        type = CardType.ARTIFACT;
+                    } else if (chosenType.equals(CardType.LAND.toString())) {
+                        type = CardType.LAND;
+                    } else {
+                        type = CardType.CREATURE;
                     }
+                    return true;
                 }
-            }
-            if (applies) {
-                return !permanent.getCardType(game).contains(type);
             }
         }
         return false;

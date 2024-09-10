@@ -48,14 +48,14 @@ public final class SecretSalvage extends CardImpl {
 
 class SecretSalvageEffect extends OneShotEffect {
 
-    public SecretSalvageEffect() {
+    SecretSalvageEffect() {
         super(Outcome.DrawCard);
         staticText = "Exile target nonland card from your graveyard. " +
                 "Search your library for any number of cards with the same name as that card, " +
                 "reveal them, put them into your hand, then shuffle";
     }
 
-    public SecretSalvageEffect(final SecretSalvageEffect effect) {
+    private SecretSalvageEffect(final SecretSalvageEffect effect) {
         super(effect);
     }
 
@@ -77,6 +77,6 @@ class SecretSalvageEffect extends OneShotEffect {
         nameFilter.add(new NamePredicate(nameToSearch));
         return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                 0, Integer.MAX_VALUE, nameFilter
-        ), true, true).apply(game, source);
+        ), true).apply(game, source);
     }
 }

@@ -3,9 +3,11 @@ package mage.cards.c;
 
 import java.util.UUID;
 
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,14 +31,17 @@ public final class ChimericSphere extends CardImpl {
                         .withSubType(SubType.CONSTRUCT)
                         .withType(CardType.ARTIFACT)
                         .withAbility(FlyingAbility.getInstance()),
-                "", Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
+                CardType.ARTIFACT, Duration.EndOfTurn).withDurationRuleAtStart(true), new ManaCostsImpl<>("{2}")));
 
         // {2}: Until end of turn, Chimeric Sphere becomes a 3/2 Construct artifact creature without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
-                new CreatureToken(3, 2, "3/2 Construct artifact creature without flying")
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(3, 2, "3/2 Construct artifact creature")
                         .withSubType(SubType.CONSTRUCT)
                         .withType(CardType.ARTIFACT),
-                "", Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
+                CardType.ARTIFACT, Duration.EndOfTurn).withDurationRuleAtStart(true), new ManaCostsImpl<>("{2}"));
+        ability.addEffect(new LoseAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("and loses flying"));
+        this.addAbility(ability);
+
     }
 
     private ChimericSphere(final ChimericSphere card) {
@@ -48,4 +53,3 @@ public final class ChimericSphere extends CardImpl {
         return new ChimericSphere(this);
     }
 }
-

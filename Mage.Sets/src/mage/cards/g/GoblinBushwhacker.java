@@ -44,7 +44,7 @@ public final class GoblinBushwhacker extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 KickedCondition.ONCE,
-                "When {this} enters the battlefield, "
+                "When {this} enters, "
                 + "if it was kicked, "
                 + "creatures you control get +1/+0 and gain haste until end of turn."
         ));

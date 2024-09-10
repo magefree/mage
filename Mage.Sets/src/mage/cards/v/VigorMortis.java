@@ -55,7 +55,7 @@ class VigorMortisReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    VigorMortisReplacementEffect(VigorMortisReplacementEffect effect) {
+    private VigorMortisReplacementEffect(final VigorMortisReplacementEffect effect) {
         super(effect);
     }
 
@@ -69,11 +69,6 @@ class VigorMortisReplacementEffect extends ReplacementEffectImpl {
         if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
             return condition.apply(game, source);
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

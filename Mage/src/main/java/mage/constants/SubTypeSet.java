@@ -1,6 +1,7 @@
 package mage.constants;
 
 public enum SubTypeSet {
+    BattleType,
     CreatureType,
     SpellType,
     BasicLandType(true),

@@ -49,25 +49,25 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     /**
-     * @param zone              The zone in which the source permanent has to be in for the ability to trigger
-     * @param effect            The effect to apply if condition is met
-     * @param filter            Filter for matching the spell cast
-     * @param optional          Whether the player can choose to apply the effect
-     * @param onlyFromNonHand   Whether to trigger only when spells are cast from not the hand
-     * @param setTargetPointer  Supported: SPELL, PLAYER
+     * @param zone             The zone in which the source permanent has to be in for the ability to trigger
+     * @param effect           The effect to apply if condition is met
+     * @param filter           Filter for matching the spell cast
+     * @param optional         Whether the player can choose to apply the effect
+     * @param onlyFromNonHand  Whether to trigger only when spells are cast from not the hand
+     * @param setTargetPointer Supported: SPELL, PLAYER
      */
     public SpellCastOpponentTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyFromNonHand) {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
         this.onlyFromNonHand = onlyFromNonHand;
-        setTriggerPhrase("Whenever an opponent casts "
+        setTriggerPhrase(getWhen() + "an opponent casts "
                 + filter.getMessage()
                 + (onlyFromNonHand ? " from anywhere other than their hand" : "")
                 + ", ");
     }
 
-    public SpellCastOpponentTriggeredAbility(final SpellCastOpponentTriggeredAbility ability) {
+    protected SpellCastOpponentTriggeredAbility(final SpellCastOpponentTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

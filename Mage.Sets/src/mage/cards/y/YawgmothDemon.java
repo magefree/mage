@@ -50,12 +50,12 @@ public final class YawgmothDemon extends CardImpl {
 
 class YawgmothDemonEffect extends OneShotEffect {
 
-    public YawgmothDemonEffect() {
+    YawgmothDemonEffect() {
         super(Outcome.Detriment);
         this.staticText = "you may sacrifice an artifact. If you don't, tap {this} and it deals 2 damage to you";
     }
 
-    public YawgmothDemonEffect(final YawgmothDemonEffect effect) {
+    private YawgmothDemonEffect(final YawgmothDemonEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class YawgmothDemonEffect extends OneShotEffect {
                 }
             }
             if (!artifactSacrificed) {
-                Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+                Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
                 if (sourceObject != null) {
                     sourceObject.tap(source, game);
                     controller.damage(2, source.getSourceId(), source, game);

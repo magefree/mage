@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -32,14 +32,14 @@ public final class MiaraThornOfTheGlade extends CardImpl {
     public MiaraThornOfTheGlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
         // Whenever Miara, Thorn of the Glade or another Elf you control dies, you may pay {1} and 1 life. If you do, draw a card.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new DoIfCostPaid(
                         new DrawCardSourceControllerEffect(1),
                         new CompositeCost(

@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ public final class LordOfTresserhorn extends CardImpl {
 
     public LordOfTresserhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(10);
@@ -37,7 +36,7 @@ public final class LordOfTresserhorn extends CardImpl {
 
         // When Lord of Tresserhorn enters the battlefield, you lose 2 life, you sacrifice two creatures, and target opponent draws two cards.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(2), false);
-        ability.addEffect(new SacrificeControllerEffect(new FilterControlledCreaturePermanent("creatures"), 2, "you"));
+        ability.addEffect(new SacrificeControllerEffect(new FilterControlledCreaturePermanent("creatures"), 2, ", you"));
         Effect effect = new DrawCardTargetEffect(2);
         effect.setText(", and target opponent draws two cards");
         ability.addEffect(effect);

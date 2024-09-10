@@ -7,15 +7,15 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.GainAbilitySpellsEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterObject;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class SoulfireGrandMaster extends CardImpl {
 
-    private static final FilterObject filter = new FilterObject("instant and sorcery spells you control");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("instant and sorcery spells you control");
 
     static {
         filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
@@ -47,7 +47,7 @@ public final class SoulfireGrandMaster extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Instant and sorcery spells you control have lifelink.
-        Effect effect = new GainAbilitySpellsEffect(LifelinkAbility.getInstance(), filter);
+        Effect effect = new GainAbilityControlledSpellsEffect(LifelinkAbility.getInstance(), filter);
         effect.setText("Instant and sorcery spells you control have lifelink");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
@@ -82,14 +82,9 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
         this.staticText = "The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of into your graveyard as it resolves";
     }
 
-    SoulfireGrandMasterCastFromHandReplacementEffect(SoulfireGrandMasterCastFromHandReplacementEffect effect) {
+    private SoulfireGrandMasterCastFromHandReplacementEffect(final SoulfireGrandMasterCastFromHandReplacementEffect effect) {
         super(effect);
         this.spellId = effect.spellId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override

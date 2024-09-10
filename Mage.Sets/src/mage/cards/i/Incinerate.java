@@ -44,23 +44,18 @@ public final class Incinerate extends CardImpl {
 
 class IncinerateEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public IncinerateEffect() {
+    IncinerateEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment, true, false);
         staticText = "A creature dealt damage this way can't be regenerated this turn";
     }
 
-    public IncinerateEffect(final IncinerateEffect effect) {
+    private IncinerateEffect(final IncinerateEffect effect) {
         super(effect);
     }
 
     @Override
     public IncinerateEffect copy() {
         return new IncinerateEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

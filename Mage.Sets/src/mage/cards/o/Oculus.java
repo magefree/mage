@@ -27,7 +27,7 @@ public final class Oculus extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public Oculus (final Oculus card) {
+    private Oculus(final Oculus card) {
         super(card);
     }
 

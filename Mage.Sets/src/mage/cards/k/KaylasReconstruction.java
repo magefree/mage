@@ -16,6 +16,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -77,8 +78,8 @@ class KaylasReconstructionEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 7));
-        TargetCardInLibrary target = new TargetCardInLibrary(0, source.getManaCostsToPay().getX(), filter);
-        player.choose(outcome, cards, target, game);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, CardUtil.getSourceCostsTag(game, source, "X", 0), filter);
+        player.choose(outcome, cards, target, source, game);
         Cards toBattlefield = new CardsImpl(target.getTargets());
         player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);

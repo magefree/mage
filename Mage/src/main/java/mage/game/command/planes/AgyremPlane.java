@@ -46,7 +46,6 @@ public class AgyremPlane extends Plane {
 
     public AgyremPlane() {
         this.setPlaneType(Planes.PLANE_AGYREM);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step
         DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(Zone.COMMAND, new AgyremEffect(), false, filterWhite, true);
@@ -70,6 +69,15 @@ public class AgyremPlane extends Plane {
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
     }
+
+    private AgyremPlane(final AgyremPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public AgyremPlane copy() {
+        return new AgyremPlane(this);
+    }
 }
 
 class AgyremEffect extends OneShotEffect {
@@ -79,7 +87,7 @@ class AgyremEffect extends OneShotEffect {
         this.staticText = "return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public AgyremEffect(final AgyremEffect effect) {
+    protected AgyremEffect(final AgyremEffect effect) {
         super(effect);
     }
 
@@ -109,7 +117,7 @@ class AgyremEffect2 extends OneShotEffect {
         this.staticText = "return it to its owner's hand at the beginning of the next end step";
     }
 
-    public AgyremEffect2(final AgyremEffect2 effect) {
+    protected AgyremEffect2(final AgyremEffect2 effect) {
         super(effect);
     }
 

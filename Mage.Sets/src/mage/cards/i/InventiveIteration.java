@@ -94,8 +94,8 @@ class InventiveIterationEffect extends OneShotEffect {
                 break;
             default:
                 TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT);
-                target.setNotTarget(true);
-                player.choose(outcome, player.getGraveyard(), target, game);
+                target.withNotTarget(true);
+                player.choose(outcome, player.getGraveyard(), target, source, game);
                 card = game.getCard(target.getFirstTarget());
         }
         player.moveCards(card, Zone.HAND, source, game);

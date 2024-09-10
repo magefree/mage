@@ -31,7 +31,7 @@ public final class GnostroVoiceOfTheCrags extends CardImpl {
     public GnostroVoiceOfTheCrags(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHIMERA);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

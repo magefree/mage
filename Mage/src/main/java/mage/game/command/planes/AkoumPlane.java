@@ -37,7 +37,6 @@ public class AkoumPlane extends Plane {
 
     public AkoumPlane() {
         this.setPlaneType(Planes.PLANE_AKOUM);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Players may cast enchantment spells as if they had flash
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.COMMAND, new CastAsThoughItHadFlashAllEffect(Duration.Custom, filterCard, true));
@@ -57,5 +56,14 @@ public class AkoumPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private AkoumPlane(final AkoumPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public AkoumPlane copy() {
+        return new AkoumPlane(this);
     }
 }

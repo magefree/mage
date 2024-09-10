@@ -4,7 +4,6 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import static mage.abilities.keyword.AscendAbility.ASCEND_RULE;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -17,7 +16,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class AscendAbility extends SimpleStaticAbility {
@@ -28,7 +26,7 @@ public class AscendAbility extends SimpleStaticAbility {
         super(Zone.BATTLEFIELD, new AscendContinuousEffect());
     }
 
-    public AscendAbility(final AscendAbility ability) {
+    protected AscendAbility(final AscendAbility ability) {
         super(ability);
     }
 
@@ -70,10 +68,10 @@ class AscendContinuousEffect extends ContinuousEffectImpl {
 
     public AscendContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = ASCEND_RULE;
+        staticText = AscendAbility.ASCEND_RULE;
     }
 
-    public AscendContinuousEffect(final AscendContinuousEffect effect) {
+    protected AscendContinuousEffect(final AscendContinuousEffect effect) {
         super(effect);
     }
 

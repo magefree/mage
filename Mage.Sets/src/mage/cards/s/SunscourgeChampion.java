@@ -54,12 +54,12 @@ public final class SunscourgeChampion extends CardImpl {
 
 class SunscourgeChampionEffect extends OneShotEffect {
 
-    public SunscourgeChampionEffect() {
+    SunscourgeChampionEffect() {
         super(Outcome.Benefit);
         staticText = "you gain life equal to its power.";
     }
 
-    public SunscourgeChampionEffect(final SunscourgeChampionEffect effect) {
+    private SunscourgeChampionEffect(final SunscourgeChampionEffect effect) {
         super(effect);
     }
 

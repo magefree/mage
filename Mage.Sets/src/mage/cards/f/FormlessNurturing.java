@@ -42,12 +42,12 @@ public final class FormlessNurturing extends CardImpl {
 
 class FormlessNurturingEffect extends OneShotEffect {
 
-    public FormlessNurturingEffect() {
+    FormlessNurturingEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Manifest the top card of your library, then put a +1/+1 counter on it";
     }
 
-    public FormlessNurturingEffect(final FormlessNurturingEffect effect) {
+    private FormlessNurturingEffect(final FormlessNurturingEffect effect) {
         super(effect);
     }
 

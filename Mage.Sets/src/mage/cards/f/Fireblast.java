@@ -20,7 +20,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class Fireblast extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Mountains");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
@@ -30,7 +30,7 @@ public final class Fireblast extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}{R}");
 
         // You may sacrifice two Mountains rather than pay Fireblast's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(2, filter)));
 
         // Fireblast deals 4 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

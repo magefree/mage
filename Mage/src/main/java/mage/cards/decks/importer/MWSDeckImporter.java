@@ -2,13 +2,11 @@ package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
-import mage.util.RandomUtil;
-
-import java.util.List;
 
 /**
+ * Deck import: Magic Workstation app
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class MWSDeckImporter extends PlainTextDeckImporter {
@@ -37,16 +35,9 @@ public class MWSDeckImporter extends PlainTextDeckImporter {
         try {
             int num = Integer.parseInt(lineNum);
             CardInfo cardInfo = null;
-            if (!setCode.isEmpty()) {
-                CardCriteria criteria = new CardCriteria();
-                criteria.name(lineName);
-                criteria.setCodes(setCode);
-                List<CardInfo> cards = getCardLookup().lookupCardInfo(criteria);
-                if (!cards.isEmpty()) {
-                    cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
-                }
-            }
-            if (cardInfo == null) {
+            if (setCode.isEmpty()) {
+                cardInfo = getCardLookup().lookupCardInfo(lineName, setCode).orElse(null);
+            } else {
                 cardInfo = getCardLookup().lookupCardInfo(lineName).orElse(null);
             }
 

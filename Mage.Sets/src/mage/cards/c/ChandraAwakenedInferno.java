@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CantBeCounteredSourceAbility;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -37,7 +37,7 @@ public final class ChandraAwakenedInferno extends CardImpl {
     public ChandraAwakenedInferno(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(6);
 
@@ -51,7 +51,7 @@ public final class ChandraAwakenedInferno extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DamageAllEffect(3, filter), -3));
 
         // -X: Chandra, Awakened Inferno deals X damage to target creature or planeswalker. If a permanent dealt damage this way would die this turn, exile it instead.
-        Ability ability = new LoyaltyAbility(new DamageTargetEffect(GetXLoyaltyValue.instance));
+        Ability ability = new LoyaltyAbility(new DamageTargetEffect(GetXValue.instance));
         ability.addEffect(
                 new ExileTargetIfDiesEffect()
                         .setText("If a permanent dealt damage this way would die this turn, exile it instead.")
@@ -90,7 +90,7 @@ class ChandraAwakenedInfernoEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            game.addEmblem(new ChandraAwakenedInfernoEmblem(), source.getSourceObjectIfItStillExists(game), playerId);
+            game.addEmblem(new ChandraAwakenedInfernoEmblem(), source.getSourceObject(game), playerId);
         }
         return true;
     }

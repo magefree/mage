@@ -31,7 +31,7 @@ public final class IlhargTheRazeBoar extends CardImpl {
     public IlhargTheRazeBoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOAR);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(6);
@@ -81,7 +81,7 @@ class IlhargTheRazeBoarEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_CREATURE);
-        if (!player.choose(outcome, player.getHand(), target, game)) {
+        if (!player.choose(outcome, player.getHand(), target, source, game)) {
             return false;
         }
         Card card = game.getCard(target.getFirstTarget());

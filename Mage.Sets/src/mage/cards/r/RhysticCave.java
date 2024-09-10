@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.mana.DoUnlessAnyPlayerPaysManaEffect;
@@ -57,7 +56,7 @@ class RhysticCaveManaAbility extends ActivatedManaAbilityImpl {
 
     }
 
-    public RhysticCaveManaAbility(final RhysticCaveManaAbility ability) {
+    private RhysticCaveManaAbility(final RhysticCaveManaAbility ability) {
         super(ability);
     }
 
@@ -83,12 +82,12 @@ class RhysticCaveManaAbility extends ActivatedManaAbilityImpl {
 
 class RhysticCaveManaEffect extends ManaEffect {
 
-    public RhysticCaveManaEffect() {
+    RhysticCaveManaEffect() {
         super();
         this.staticText = "Choose a color. Add one mana of that color";
     }
 
-    public RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {
+    private RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {
         super(effect);
     }
 
@@ -113,7 +112,7 @@ class RhysticCaveManaEffect extends ManaEffect {
     }
 
     @Override
-    public Effect copy() {
+    public RhysticCaveManaEffect copy() {
         return new RhysticCaveManaEffect(this);
     }
 }

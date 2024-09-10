@@ -39,7 +39,7 @@ public final class PurphorosBronzeBlooded extends CardImpl {
     public PurphorosBronzeBlooded(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

@@ -31,7 +31,7 @@ public final class LagomosHandOfHatred extends CardImpl {
     public LagomosHandOfHatred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
@@ -43,10 +43,10 @@ public final class LagomosHandOfHatred extends CardImpl {
         // {T}: Search your library for a card, put it into your hand, then shuffle. Activate only if five or more creatures died this turn.
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary()),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false),
                 new TapSourceCost(),
                 LagomosHandOfHatredCondition.instance
-        ), new CreaturesDiedWatcher());
+        ));
     }
 
     private LagomosHandOfHatred(final LagomosHandOfHatred card) {
@@ -61,7 +61,7 @@ public final class LagomosHandOfHatred extends CardImpl {
 
 class LagomosHandOfHatredEffect extends OneShotEffect {
 
-    public LagomosHandOfHatredEffect() {
+    LagomosHandOfHatredEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a 2/1 red Elemental creature token with trample and haste. Sacrifice it at the beginning of the next end step.";
     }

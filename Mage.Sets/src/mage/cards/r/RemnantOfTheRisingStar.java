@@ -65,7 +65,7 @@ public final class RemnantOfTheRisingStar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another creature enters the battlefield under your control, you may pay {X}. When you do, put X +1/+1 counters on that creature.
+        // Whenever another creature you control enters, you may pay {X}. When you do, put X +1/+1 counters on that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new RemnantOfTheRisingStarEffect(), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         ));

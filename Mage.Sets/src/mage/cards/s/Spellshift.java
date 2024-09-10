@@ -49,12 +49,12 @@ public final class Spellshift extends CardImpl {
 
 class SpellshiftEffect extends OneShotEffect {
 
-    public SpellshiftEffect() {
+    SpellshiftEffect() {
         super(Outcome.Detriment);
         this.staticText = "Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then the player shuffles";
     }
 
-    public SpellshiftEffect(final SpellshiftEffect effect) {
+    private SpellshiftEffect(final SpellshiftEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class SpellshiftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player spellController = game.getPlayer(((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK)).getControllerId());
+        Player spellController = game.getPlayer(((Spell) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK)).getControllerId());
         if (spellController != null) {
             Cards cardsToReveal = new CardsImpl();
             Card toCast = null;

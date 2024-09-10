@@ -40,7 +40,7 @@ public final class KheruDreadmaw extends CardImpl {
         Effect effect = new GainLifeEffect(SacrificeCostCreaturesToughness.instance);
         effect.setText("You gain life equal to the sacrificed creature's toughness");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

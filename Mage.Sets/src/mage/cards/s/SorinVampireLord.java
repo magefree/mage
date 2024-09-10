@@ -32,7 +32,7 @@ public final class SorinVampireLord extends CardImpl {
     public SorinVampireLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
         this.setStartingLoyalty(4);
 

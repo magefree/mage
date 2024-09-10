@@ -1,25 +1,31 @@
 package mage.cards.u;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.ActivateAbilityTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.effects.common.CopyStackObjectEffect;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.FilterSpell;
+import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
+import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -27,18 +33,33 @@ import java.util.UUID;
  */
 public final class UnboundFlourishing extends CardImpl {
 
-    final static String needPrefix = "_UnboundFlourishing_NeedCopy";
+    private static final FilterSpell filterPermanent = new FilterSpell("a permanent spell with a mana cost that contains {X}");
+    private static final FilterSpell filterInstantSorcery = new FilterInstantOrSorcerySpell("an instant or sorcery spell with a mana cost that contains {X}");
+    private static final FilterStackObject filterAbility = new FilterActivatedOrTriggeredAbility("an activated ability with an activation cost that contains {X}");
+
+    static {
+        filterPermanent.add(PermanentPredicate.instance);
+        filterPermanent.add(UnboundFlourishingCostContainsXPredicate.instance);
+        filterInstantSorcery.add(UnboundFlourishingCostContainsXPredicate.instance);
+        filterAbility.add(UnboundFlourishingCostContainsXPredicate.instance);
+    }
 
     public UnboundFlourishing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Whenever you cast a permanent spell with a mana cost that contains {X}, double the value of X.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnboundFlourishingDoubleXEffect()));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UnboundFlourishingDoubleXEffect(), filterPermanent, false, SetTargetPointer.SPELL));
 
         // Whenever you cast an instant or sorcery spell or activate an ability,
         // if that spell’s mana cost or that ability’s activation cost contains {X}, copy that spell or ability.
         // You may choose new targets for the copy.
-        this.addAbility(new UnboundFlourishingCopyAbility());
+        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD,
+                new CopyStackObjectEffect("that spell or ability"), false,
+                "Whenever you cast an instant or sorcery spell or activate an ability, " +
+                        "if that spell's mana cost or that ability's activation cost contains {X}, ",
+                new SpellCastControllerTriggeredAbility(null, filterInstantSorcery, false, SetTargetPointer.SPELL),
+                new ActivateAbilityTriggeredAbility(null, filterAbility, SetTargetPointer.SPELL)
+        ));
     }
 
     private UnboundFlourishing(final UnboundFlourishing card) {
@@ -51,135 +72,53 @@ public final class UnboundFlourishing extends CardImpl {
     }
 }
 
-class UnboundFlourishingDoubleXEffect extends ReplacementEffectImpl {
+enum UnboundFlourishingCostContainsXPredicate implements Predicate<StackObject> {
+    instance;
+
+    @Override
+    public boolean apply(StackObject input, Game game) {
+        if (input instanceof Spell) {
+            return ((Spell) input).getSpellAbility().getManaCostsToPay().containsX();
+        } else if (input instanceof StackAbility) {
+            return input.getStackAbility().getManaCostsToPay().containsX();
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Contains {X}";
+    }
+}
+
+class UnboundFlourishingDoubleXEffect extends OneShotEffect {
 
     UnboundFlourishingDoubleXEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, false);
-        staticText = "Whenever you cast a permanent spell with a mana cost that contains {X}, double the value of X";
+        super(Outcome.Benefit);
+        this.staticText = "double the value of X";
     }
 
-    UnboundFlourishingDoubleXEffect(final UnboundFlourishingDoubleXEffect effect) {
+    private UnboundFlourishingDoubleXEffect(final UnboundFlourishingDoubleXEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.X_MANA_ANNOUNCE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Spell spell = game.getSpell(event.getTargetId());
-        return spell != null && spell.isPermanent(game) && spell.isControlledBy(source.getControllerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
     public UnboundFlourishingDoubleXEffect copy() {
         return new UnboundFlourishingDoubleXEffect(this);
     }
-}
-
-class UnboundFlourishingCopyAbility extends TriggeredAbilityImpl {
-
-    UnboundFlourishingCopyAbility() {
-        super(Zone.BATTLEFIELD, new UnboundFlourishingCopyEffect(), false);
-        setTriggerPhrase("Whenever you cast an instant or sorcery spell or activate an ability, " +
-                         "if that spell's mana cost or that ability's activation cost contains {X}" );
-    }
-
-    UnboundFlourishingCopyAbility(final UnboundFlourishingCopyAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public UnboundFlourishingCopyAbility copy() {
-        return new UnboundFlourishingCopyAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY
-                || event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(getControllerId())) {
-            return false;
-        }
-
-        // activated ability
-        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
-            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
-                if (stackAbility.getManaCostsToPay().containsX()) {
-                    game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, stackAbility);
-                    return true;
-                }
-            }
-        }
-
-        // spell
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isInstantOrSorcery(game)) {
-                if (spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                    game.getState().setValue(this.getSourceId() + UnboundFlourishing.needPrefix, spell);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-}
-
-class UnboundFlourishingCopyEffect extends OneShotEffect {
-
-    UnboundFlourishingCopyEffect() {
-        super(Outcome.Benefit);
-        this.staticText = ", copy that spell or ability. You may choose new targets for the copy";
-    }
-
-    UnboundFlourishingCopyEffect(final UnboundFlourishingCopyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UnboundFlourishingCopyEffect copy() {
-        return new UnboundFlourishingCopyEffect(this);
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && controller != null) {
-            Object needObject = game.getState().getValue(source.getSourceId() + UnboundFlourishing.needPrefix);
-
-            // copy ability
-            if (needObject instanceof StackAbility) {
-                StackAbility stackAbility = (StackAbility) needObject;
-                stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
-                return true;
-            }
-
-            // copy spell
-            if (needObject instanceof Spell) {
-                Spell spell = (Spell) needObject;
-                spell.createCopyOnStack(game, source, source.getControllerId(), true);
-                return true;
+            Spell needObject = game.getSpell(getTargetPointer().getFirst(game, source));
+            if (needObject != null) {
+                Map<String, Object> tagsMap = CardUtil.getSourceCostsTagsMap(game, needObject.getSpellAbility());
+                if (tagsMap.containsKey("X")) {
+                    tagsMap.put("X", ((int) tagsMap.get("X")) * 2);
+                }
             }
         }
         return false;

@@ -2,27 +2,28 @@
 package mage.cards.t;
 
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import mage.filter.common.FilterArtifactCreaturePermanent;
 import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ThopterColorlessToken;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
  * @author fireshoes
  */
 public final class ThopterSpyNetwork extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterArtifactCreaturePermanent("artifact creatures");
 
     public ThopterSpyNetwork(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
@@ -31,7 +32,7 @@ public final class ThopterSpyNetwork extends CardImpl {
         this.addAbility(new ThopterSpyNetworkUpkeepTriggeredAbility());
 
         // Whenever one or more artifact creatures you control deals combat damage to a player, draw a card.
-        this.addAbility(new ThopterSpyNetworkDamageTriggeredAbility());
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
     private ThopterSpyNetwork(final ThopterSpyNetwork card) {
@@ -77,52 +78,5 @@ class ThopterSpyNetworkUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "At the beginning of your upkeep, if you control an artifact, create a 1/1 colorless Thopter artifact creature token with flying.";
-    }
-}
-
-class ThopterSpyNetworkDamageTriggeredAbility extends TriggeredAbilityImpl {
-
-    private final List<UUID> damagedPlayerIds = new ArrayList<>();
-
-    ThopterSpyNetworkDamageTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
-    }
-
-    private ThopterSpyNetworkDamageTriggeredAbility(final ThopterSpyNetworkDamageTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ThopterSpyNetworkDamageTriggeredAbility copy() {
-        return new ThopterSpyNetworkDamageTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (((DamagedPlayerEvent) event).isCombatDamage()) {
-                Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.isControlledBy(controllerId)
-                        && creature.isArtifact(game) && !damagedPlayerIds.contains(event.getTargetId())) {
-                    damagedPlayerIds.add(event.getTargetId());
-                    return true;
-                }
-            }
-        }
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
-            damagedPlayerIds.clear();
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever one or more artifact creatures you control deal combat damage to a player, draw a card.";
     }
 }

@@ -48,7 +48,7 @@ public final class UncheckedGrowth extends CardImpl {
             staticText = "If it's a Spirit, it gains trample until end of turn";
         }
 
-        public UncheckedGrowthTrampleEffect(final UncheckedGrowthTrampleEffect effect) {
+        private UncheckedGrowthTrampleEffect(final UncheckedGrowthTrampleEffect effect) {
             super(effect);
         }
 
@@ -60,7 +60,7 @@ public final class UncheckedGrowth extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             int affectedTargets = 0;
-            for (UUID permanentId : targetPointer.getTargets(game, source)) {
+            for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null && permanent.hasSubtype(SubType.SPIRIT, game)) {
                     permanent.addAbility(TrampleAbility.getInstance(), source.getSourceId(), game);

@@ -39,7 +39,7 @@ public final class CallerOfGales extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CallerOfGales (final CallerOfGales card) {
+    private CallerOfGales(final CallerOfGales card) {
         super(card);
     }
 

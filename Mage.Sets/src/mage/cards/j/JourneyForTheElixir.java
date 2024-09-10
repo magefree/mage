@@ -121,14 +121,14 @@ class JourneyForTheElixirLibraryTarget extends TargetCardInLibrary {
             return true;
         }
         Cards cards = new CardsImpl(this.getTargets());
-        if (card.isBasic()
+        if (card.isBasic(game)
                 && card.isLand(game)
                 && cards
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(MageObject::isBasic)
-                .anyMatch(card1 -> card1.isLand(game))) {
+                .filter(c -> c.isBasic(game))
+                .anyMatch(c -> c.isLand(game))) {
             return false;
         }
         if (name.equals(card.getName())
@@ -185,14 +185,14 @@ class JourneyForTheElixirGraveyardTarget extends TargetCardInYourGraveyard {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(card1 -> card1.isLand(game))
-                .anyMatch(MageObject::isBasic);
+                .filter(c -> c.isLand(game))
+                .anyMatch(c -> c.isBasic(game));
         possibleTargets.removeIf(uuid -> {
             Card card = game.getCard(uuid);
             return card != null
                     && hasBasic
                     && card.isLand(game)
-                    && card.isBasic();
+                    && card.isBasic(game);
         });
         boolean hasYanggu = alreadyTargeted
                 .getCards(game)

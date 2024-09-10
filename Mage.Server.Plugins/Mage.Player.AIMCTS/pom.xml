@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-server-plugins</artifactId>
-        <version>1.4.50</version>
+        <version>1.4.54</version>
     </parent>
 
     <artifactId>mage-player-ai-mcts</artifactId>
@@ -54,6 +54,8 @@
         <finalName>mage-player-ai-mcts</finalName>
     </build>
 
-    <properties/>
+    <properties>
+        <root.dir>${project.basedir}/../..</root.dir>
+    </properties>
 
 </project>

@@ -20,11 +20,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -86,15 +86,17 @@ class CommandersPlateEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game);
-        if (!affectedObjectsSet) {
+        if (!getAffectedObjectsSetAtInit(source)) {
             return;
         }
         Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (equipment == null || equipment.getAttachedTo() == null) {
+            discard();
             return;
         }
         this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game));
+
+        super.init(source, game); // must call at the end due target pointer setup
     }
 
     @Override
@@ -104,8 +106,8 @@ class CommandersPlateEffect extends ContinuousEffectImpl {
             return false;
         }
         Permanent permanent = null;
-        if (affectedObjectsSet) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (getAffectedObjectsSet()) {
+            permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
                 discard();
                 return true;

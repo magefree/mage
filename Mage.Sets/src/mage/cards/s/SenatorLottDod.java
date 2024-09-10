@@ -24,7 +24,7 @@ public final class SenatorLottDod extends CardImpl {
 
     public SenatorLottDod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NEIMOIDIAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);
@@ -49,7 +49,7 @@ public final class SenatorLottDod extends CardImpl {
 
 class SenatorLottDodSpellsTargetingCreatureCostModificationEffect extends CostModificationEffectImpl {
 
-    public SenatorLottDodSpellsTargetingCreatureCostModificationEffect() {
+    SenatorLottDodSpellsTargetingCreatureCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         this.staticText = "Spell your opponents cast that target a creature you control cost {1} more to cast";
     }
@@ -111,7 +111,7 @@ class SenatorLottDodSpellsTargetingCreatureCostModificationEffect extends CostMo
 
 class SenatorLottDodSpellsTargetingYouCostModificationEffect extends CostModificationEffectImpl {
 
-    public SenatorLottDodSpellsTargetingYouCostModificationEffect() {
+    SenatorLottDodSpellsTargetingYouCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         this.staticText = "Spells your opponents cast that target you cost {2} more to cast";
     }

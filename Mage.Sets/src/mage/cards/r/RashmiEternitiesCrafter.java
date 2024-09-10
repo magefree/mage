@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.List;
 import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageInt;
@@ -31,7 +30,7 @@ public final class RashmiEternitiesCrafter extends CardImpl {
 
     public RashmiEternitiesCrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
@@ -40,7 +39,7 @@ public final class RashmiEternitiesCrafter extends CardImpl {
         // Whenever you cast your first spell each turn, reveal the top card of your library. 
         // If it's a nonland card with converted mana cost less than that spell's, you may cast it 
         // without paying its mana cost. If you don't cast the revealed card, put it into your hand.
-        this.addAbility(new RashmiEternitiesCrafterTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new RashmiEternitiesCrafterTriggeredAbility());
     }
 
     private RashmiEternitiesCrafter(final RashmiEternitiesCrafter card) {
@@ -59,7 +58,7 @@ class RashmiEternitiesCrafterTriggeredAbility extends SpellCastControllerTrigger
         super(new RashmiEternitiesCrafterEffect(), false);
     }
 
-    RashmiEternitiesCrafterTriggeredAbility(RashmiEternitiesCrafterTriggeredAbility ability) {
+    private RashmiEternitiesCrafterTriggeredAbility(final RashmiEternitiesCrafterTriggeredAbility ability) {
         super(ability);
     }
 
@@ -72,16 +71,13 @@ class RashmiEternitiesCrafterTriggeredAbility extends SpellCastControllerTrigger
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-            if (watcher != null) {
-                List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
-                if (spells != null && spells.size() == 1) {
-                    Spell spell = game.getStack().getSpell(event.getTargetId());
-                    if (spell != null) {
-                        for (Effect effect : getEffects()) {
-                            effect.setValue("RashmiEternitiesCrafterCMC", spell.getManaValue());
-                        }
-                        return true;
+            if (watcher != null && watcher.getCount(event.getPlayerId()) == 1) {
+                Spell spell = game.getStack().getSpell(event.getTargetId());
+                if (spell != null) {
+                    for (Effect effect : getEffects()) {
+                        effect.setValue("RashmiEternitiesCrafterCMC", spell.getManaValue());
                     }
+                    return true;
                 }
             }
         }
@@ -107,7 +103,7 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
                 + "revealed card, put it into your hand";
     }
 
-    RashmiEternitiesCrafterEffect(final RashmiEternitiesCrafterEffect effect) {
+    private RashmiEternitiesCrafterEffect(final RashmiEternitiesCrafterEffect effect) {
         super(effect);
     }
 
@@ -118,7 +114,7 @@ class RashmiEternitiesCrafterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Boolean cardWasCast = false;
+        boolean cardWasCast = false;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = controller.getLibrary().getFromTop(game);

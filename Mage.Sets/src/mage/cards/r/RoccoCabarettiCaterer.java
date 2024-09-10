@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class RoccoCabarettiCaterer extends CardImpl {
     public RoccoCabarettiCaterer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(3);
@@ -48,7 +48,7 @@ public final class RoccoCabarettiCaterer extends CardImpl {
                         true
                 ),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, " +
+                "When {this} enters, " +
                 "if you cast it, you may search your library for a creature card with mana value X or less, " +
                 "put it onto the battlefield, then shuffle.")
         );
@@ -73,6 +73,6 @@ enum RoccoCabarettiCatererPredicate implements ObjectSourcePlayerPredicate<Card>
             return false;
         }
         return input.getObject().getManaValue()
-                <= ManacostVariableValue.ETB.calculate(game, input.getSource(), null);
+                <= GetXValue.instance.calculate(game, input.getSource(), null);
     }
 }

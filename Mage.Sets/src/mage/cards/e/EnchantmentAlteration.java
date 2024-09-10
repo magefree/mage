@@ -103,12 +103,12 @@ class SharesEnchantedCardTypePredicate implements ObjectSourcePlayerPredicate<Ma
 
 class EnchantmentAlterationEffect extends OneShotEffect {
 
-    public EnchantmentAlterationEffect() {
+    EnchantmentAlterationEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Attach target Aura attached to a creature or land to another permanent of that type";
     }
 
-    public EnchantmentAlterationEffect(final EnchantmentAlterationEffect effect) {
+    private EnchantmentAlterationEffect(final EnchantmentAlterationEffect effect) {
         super(effect);
     }
 

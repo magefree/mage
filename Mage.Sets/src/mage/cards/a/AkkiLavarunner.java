@@ -57,7 +57,7 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new FlipSourceEffect(new TokTokVolcanoBorn()));
     }
 
-    public AkkiLavarunnerAbility(final AkkiLavarunnerAbility ability) {
+    private AkkiLavarunnerAbility(final AkkiLavarunnerAbility ability) {
         super(ability);
     }
 
@@ -86,7 +86,7 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl {
 class TokTokVolcanoBorn extends TokenImpl {
     TokTokVolcanoBorn() {
         super("Tok-Tok, Volcano Born", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.GOBLIN);
@@ -96,7 +96,7 @@ class TokTokVolcanoBorn extends TokenImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TokTokVolcanoBornEffect()));
     }
-    public TokTokVolcanoBorn(final TokTokVolcanoBorn token) {
+    private TokTokVolcanoBorn(final TokTokVolcanoBorn token) {
         super(token);
     }
 
@@ -112,7 +112,7 @@ class TokTokVolcanoBornEffect extends ReplacementEffectImpl {
         staticText = "If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead";
     }
 
-    TokTokVolcanoBornEffect(final TokTokVolcanoBornEffect effect) {
+    private TokTokVolcanoBornEffect(final TokTokVolcanoBornEffect effect) {
         super(effect);
     }
 

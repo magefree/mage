@@ -33,7 +33,7 @@ public final class ShannaSisaysLegacy extends CardImpl {
     public ShannaSisaysLegacy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(0);
@@ -63,23 +63,18 @@ public final class ShannaSisaysLegacy extends CardImpl {
 
 class ShannaSisaysLegacyEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public ShannaSisaysLegacyEffect() {
+    ShannaSisaysLegacyEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "{this} can't be the target of abilities your opponents control";
     }
 
-    public ShannaSisaysLegacyEffect(final ShannaSisaysLegacyEffect effect) {
+    private ShannaSisaysLegacyEffect(final ShannaSisaysLegacyEffect effect) {
         super(effect);
     }
 
     @Override
     public ShannaSisaysLegacyEffect copy() {
         return new ShannaSisaysLegacyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

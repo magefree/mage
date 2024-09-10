@@ -46,7 +46,7 @@ class DeathOrGloryEffect extends OneShotEffect {
         this.staticText = "Separate all creature cards in your graveyard into two piles. Exile the pile of an opponent's choice and return the other to the battlefield";
     }
 
-    DeathOrGloryEffect(final DeathOrGloryEffect effect) {
+    private DeathOrGloryEffect(final DeathOrGloryEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class DeathOrGloryEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 TargetCard targetCards = new TargetCard(0, cards.size(), Zone.GRAVEYARD, new FilterCard("cards to put in the first pile"));
                 List<Card> pile1 = new ArrayList<>();
-                if (controller.choose(Outcome.Neutral, cards, targetCards, game)) {
+                if (controller.choose(Outcome.Neutral, cards, targetCards, source, game)) {
                     List<UUID> targets = targetCards.getTargets();
                     for (UUID targetId : targets) {
                         Card card = cards.get(targetId, game);

@@ -22,7 +22,8 @@ public final class Mugging extends CardImpl {
 
         // Mugging deals 2 damage to target creature. That creature can't block this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
+                .setText("That creature can't block this turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

@@ -33,8 +33,8 @@ public final class ZirilanOfTheClaw extends CardImpl {
 
     public ZirilanOfTheClaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VIASHINO, SubType.SHAMAN);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.LIZARD, SubType.SHAMAN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
@@ -57,13 +57,13 @@ public final class ZirilanOfTheClaw extends CardImpl {
 
 class ZirilanOfTheClawEffect extends OneShotEffect {
 
-    public ZirilanOfTheClawEffect() {
+    ZirilanOfTheClawEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Search your library for a Dragon permanent card and put that card onto the battlefield. Then shuffle."
+        this.staticText = "Search your library for a Dragon permanent card, put that card onto the battlefield, then shuffle."
                 + " That Dragon gains haste until end of turn. Exile it at the beginning of the next end step";
     }
 
-    public ZirilanOfTheClawEffect(final ZirilanOfTheClawEffect effect) {
+    private ZirilanOfTheClawEffect(final ZirilanOfTheClawEffect effect) {
         super(effect);
     }
 

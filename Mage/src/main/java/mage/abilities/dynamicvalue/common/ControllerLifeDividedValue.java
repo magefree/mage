@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class ControllerLifeDividedValue implements DynamicValue {
@@ -18,7 +17,7 @@ public class ControllerLifeDividedValue implements DynamicValue {
         this.divider = divider;
     }
 
-    public ControllerLifeDividedValue(final ControllerLifeDividedValue dynamicValue) {
+    protected ControllerLifeDividedValue(final ControllerLifeDividedValue dynamicValue) {
         this.divider = dynamicValue.divider;
     }
 

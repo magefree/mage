@@ -53,12 +53,12 @@ public final class PlatedPegasus extends CardImpl {
 
 class PlatedPegasusEffect extends PreventionEffectImpl {
 
-    public PlatedPegasusEffect() {
+    PlatedPegasusEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
         staticText = "If a spell would deal damage to a permanent or player, prevent 1 damage that spell would deal to that permanent or player.";
     }
 
-    public PlatedPegasusEffect(PlatedPegasusEffect effect) {
+    private PlatedPegasusEffect(final PlatedPegasusEffect effect) {
         super(effect);
     }
 

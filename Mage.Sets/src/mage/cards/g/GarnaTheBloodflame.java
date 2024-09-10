@@ -38,7 +38,7 @@ public final class GarnaTheBloodflame extends CardImpl {
     public GarnaTheBloodflame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -72,7 +72,7 @@ class GarnaTheBloodflameEffect extends OneShotEffect {
         staticText = "return to your hand all creature cards in your graveyard that were put there from anywhere this turn";
     }
 
-    GarnaTheBloodflameEffect(final GarnaTheBloodflameEffect effect) {
+    private GarnaTheBloodflameEffect(final GarnaTheBloodflameEffect effect) {
         super(effect);
     }
 

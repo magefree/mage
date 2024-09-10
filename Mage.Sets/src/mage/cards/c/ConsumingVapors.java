@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReboundAbility;
@@ -8,13 +7,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +50,7 @@ class ConsumingVaporsEffect extends OneShotEffect {
         staticText = "Target player sacrifices a creature. You gain life equal to that creature's toughness";
     }
 
-    ConsumingVaporsEffect(ConsumingVaporsEffect effect) {
+    private ConsumingVaporsEffect(final ConsumingVaporsEffect effect) {
         super(effect);
     }
 
@@ -59,18 +59,17 @@ class ConsumingVaporsEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getTargets().getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
 
-        FilterControlledPermanent filter = new FilterControlledPermanent("creature");
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+        TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
 
         if (player != null && target.canChoose(player.getId(), source, game)) {
             player.choose(Outcome.Sacrifice, target, source, game);
 
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
+                int toughness = permanent.getToughness().getValue();
                 permanent.sacrifice(source, game);
-                controller.gainLife(permanent.getToughness().getValue(), game, source);
+                game.processAction();
+                controller.gainLife(toughness, game, source);
             }
             return true;
         }

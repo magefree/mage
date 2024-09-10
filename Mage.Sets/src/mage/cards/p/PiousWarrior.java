@@ -13,7 +13,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
@@ -53,7 +53,7 @@ class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} is dealt combat damage, ");
     }
 
-    public PiousWarriorTriggeredAbility(final PiousWarriorTriggeredAbility effect) {
+    private PiousWarriorTriggeredAbility(final PiousWarriorTriggeredAbility effect) {
         super(effect);
     }
 
@@ -64,14 +64,18 @@ class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.sourceId) && ((DamagedEvent)event).isCombatDamage() ) {
-   			this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-       		return true;
+
+        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
+        int damage = dEvent.getAmount();
+
+        if (event.getTargetId().equals(this.sourceId) && dEvent.isCombatDamage() && damage > 0) {
+            this.getEffects().setValue("damageAmount", damage);
+            return true;
         }
         return false;
     }
@@ -85,7 +89,7 @@ class PiousWarriorGainLifeEffect extends OneShotEffect {
 		staticText = "you gain that much life";
 	}
 
-    public PiousWarriorGainLifeEffect(final PiousWarriorGainLifeEffect effect) {
+    private PiousWarriorGainLifeEffect(final PiousWarriorGainLifeEffect effect) {
         super(effect);
     }
 

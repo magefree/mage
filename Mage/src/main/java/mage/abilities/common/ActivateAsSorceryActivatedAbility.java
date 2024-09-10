@@ -18,7 +18,7 @@ public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
         timing = TimingRule.SORCERY;
     }
 
-    public ActivateAsSorceryActivatedAbility(final ActivateAsSorceryActivatedAbility ability) {
+    protected ActivateAsSorceryActivatedAbility(final ActivateAsSorceryActivatedAbility ability) {
         super(ability);
     }
 
@@ -29,9 +29,14 @@ public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        if (mayActivate == TargetController.OPPONENT) {
-            return super.getRule() + " Only your opponents may activate this ability and only as a sorcery.";
+        String superRule = super.getRule();
+        String newText = (mayActivate == TargetController.OPPONENT
+                ? " Only your opponents may activate this ability and only as a sorcery."
+                : " Activate only as a sorcery.");
+        if (superRule.endsWith("</i>")) {
+            return superRule.replaceFirst(" <i>", newText + " <i>");
+        } else {
+            return superRule + newText;
         }
-        return super.getRule() + " Activate only as a sorcery.";
     }
 }

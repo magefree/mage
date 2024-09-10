@@ -29,7 +29,7 @@ public final class EerieProcession extends CardImpl {
 
 
         // Search your library for an Arcane card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
     }
 
     private EerieProcession(final EerieProcession card) {

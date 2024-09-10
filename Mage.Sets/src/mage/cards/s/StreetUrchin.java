@@ -26,7 +26,7 @@ public final class StreetUrchin extends CardImpl {
     public StreetUrchin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "{1}, Sacrifice another creature or an artifact: This creature deals 1 damage to any target."

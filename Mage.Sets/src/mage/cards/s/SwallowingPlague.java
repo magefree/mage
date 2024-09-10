@@ -2,7 +2,7 @@
 
 package mage.cards.s;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -23,12 +23,12 @@ public final class SwallowingPlague extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");
         this.subtype.add(SubType.ARCANE);
 
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(GetXValue.instance).concatBy("and"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SwallowingPlague (final SwallowingPlague card) {
+    private SwallowingPlague(final SwallowingPlague card) {
         super(card);
     }
 

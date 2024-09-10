@@ -42,13 +42,13 @@ public final class RiskFactor extends CardImpl {
 
 class RiskFactorEffect extends OneShotEffect {
 
-    public RiskFactorEffect() {
+    RiskFactorEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent may have {this} deal 4 damage to them. "
                 + "If that player doesn't, you draw three cards.";
     }
 
-    public RiskFactorEffect(final RiskFactorEffect effect) {
+    private RiskFactorEffect(final RiskFactorEffect effect) {
         super(effect);
     }
 

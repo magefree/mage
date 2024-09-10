@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -14,11 +13,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.MerfolkToken;
 import mage.target.TargetSpell;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -26,7 +25,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class LullmageMentor extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Merfolk you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 
     static {
         filter.add(SubType.MERFOLK.getPredicate());
@@ -45,7 +44,7 @@ public final class LullmageMentor extends CardImpl {
         this.addAbility(new SpellCounteredControllerTriggeredAbility(new CreateTokenEffect(new MerfolkToken()), true));
 
         // Tap seven untapped Merfolk you control: Counter target spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(7, 7, filter, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapTargetCost(new TargetControlledPermanent(7, 7, filter, true)));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
 

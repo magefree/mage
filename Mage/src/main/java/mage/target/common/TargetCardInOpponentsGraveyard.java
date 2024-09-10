@@ -3,6 +3,7 @@ package mage.target.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
@@ -30,7 +31,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
         this.allFromOneOpponent = allFromOneOpponent;
     }
 
-    public TargetCardInOpponentsGraveyard(final TargetCardInOpponentsGraveyard target) {
+    protected TargetCardInOpponentsGraveyard(final TargetCardInOpponentsGraveyard target) {
         super(target);
         this.allFromOneOpponent = target.allFromOneOpponent;
     }
@@ -74,13 +75,13 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
         return canChoose(sourceControllerId, null, game);
     }
 
-   /**
+    /**
      * Checks if there are enough {@link Card} that can be chosen.
      *
      * @param sourceControllerId - controller of the target event source
      * @param source
-    * @param game
-    * @return - true if enough valid {@link Card} exist
+     * @param game
+     * @return - true if enough valid {@link Card} exist
      */
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
@@ -89,7 +90,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
             return true;
         }
         Player sourceController = game.getPlayer(sourceControllerId);
-        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             if (!sourceController.hasOpponent(playerId, game)) {
                 continue;
             }

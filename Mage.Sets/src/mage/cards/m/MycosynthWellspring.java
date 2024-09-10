@@ -22,7 +22,7 @@ public final class MycosynthWellspring extends CardImpl {
         // When Mycosynth Wellspring enters the battlefield or is put into a graveyard from the battlefield,
         // you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldOrDiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
         ), true, false));
     }
 

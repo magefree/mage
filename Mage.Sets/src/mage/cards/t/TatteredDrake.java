@@ -31,7 +31,7 @@ public final class TatteredDrake extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
-    public TatteredDrake (final TatteredDrake card) {
+    private TatteredDrake(final TatteredDrake card) {
         super(card);
     }
 

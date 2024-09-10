@@ -53,7 +53,7 @@ class CommandBeaconEffect extends OneShotEffect {
         this.staticText = "Put your commander into your hand from the command zone";
     }
 
-    CommandBeaconEffect(final CommandBeaconEffect effect) {
+    private CommandBeaconEffect(final CommandBeaconEffect effect) {
         super(effect);
     }
 

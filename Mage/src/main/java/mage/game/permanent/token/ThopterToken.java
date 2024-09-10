@@ -1,46 +1,27 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class ThopterToken extends TokenImpl {
 
     public ThopterToken() {
         super("Thopter Token", "1/1 blue Thopter artifact creature token with flying");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.THOPTER);
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("ALA", "C16", "C18", "2XM", "BRC");
     }
 
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode().equals("2XM")) {
-            this.setTokenType(2);
-        }
-
-        if (getOriginalExpansionSetCode().equals("C18")) {
-            this.setTokenType(3);
-        }
-    }
-
-    public ThopterToken(final ThopterToken token) {
+    private ThopterToken(final ThopterToken token) {
         super(token);
     }
 

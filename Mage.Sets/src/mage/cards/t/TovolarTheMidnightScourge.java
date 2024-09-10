@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -39,7 +39,7 @@ public final class TovolarTheMidnightScourge extends CardImpl {
     public TovolarTheMidnightScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -58,7 +58,7 @@ public final class TovolarTheMidnightScourge extends CardImpl {
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("Target Wolf or Werewolf you control gets +X/+0"), new ManaCostsImpl<>("{X}{R}{G}"));
         ability.addEffect(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, StaticValue.get(0), Duration.EndOfTurn
+                GetXValue.instance, StaticValue.get(0), Duration.EndOfTurn
         ).setText("and gains trample until end of turn"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

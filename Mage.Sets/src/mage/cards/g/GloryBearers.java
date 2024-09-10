@@ -7,8 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -16,12 +15,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GloryBearers extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public GloryBearers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{W}");
@@ -35,7 +28,7 @@ public final class GloryBearers extends CardImpl {
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(
                 new BoostTargetEffect(0, 1)
                         .setText("it gets +0/+1 until end of turn"),
-                false, filter, true
+                false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, true
         ));
     }
 

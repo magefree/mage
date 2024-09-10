@@ -67,7 +67,7 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} is put into your graveyard from the battlefield, ");
     }
 
-    EnigmaSphinxTriggeredAbility(EnigmaSphinxTriggeredAbility ability) {
+    private EnigmaSphinxTriggeredAbility(final EnigmaSphinxTriggeredAbility ability) {
         super(ability);
     }
 
@@ -98,12 +98,12 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
 class EnigmaSphinxEffect extends OneShotEffect {
 
-    public EnigmaSphinxEffect() {
+    EnigmaSphinxEffect() {
         super(Outcome.ReturnToHand);
         staticText = "put it into your library third from the top";
     }
 
-    public EnigmaSphinxEffect(final EnigmaSphinxEffect effect) {
+    private EnigmaSphinxEffect(final EnigmaSphinxEffect effect) {
         super(effect);
     }
 
@@ -118,7 +118,7 @@ class EnigmaSphinxEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card card = (Card) source.getSourceObjectIfItStillExists(game);
+        Card card = source.getSourceCardIfItStillExists(game);
         if (card != null) {
             controller.putCardOnTopXOfLibrary(card, game, source, 3, true);
         }

@@ -1,11 +1,9 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -27,7 +25,7 @@ public final class ChandraBoldPyromancer extends CardImpl {
     public ChandraBoldPyromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(5);
 
@@ -43,10 +41,9 @@ public final class ChandraBoldPyromancer extends CardImpl {
         this.addAbility(ability);
 
         // −7: Chandra, Bold Pyromancer deals 10 damage to target player and each creature and planeswalker they control.
-        Effects effects1 = new Effects();
-        effects1.add(new DamageTargetEffect(10));
-        effects1.add(new DamageAllControlledTargetEffect(10, new FilterCreatureOrPlaneswalkerPermanent()).setText("and each creature and planeswalker they control"));
-        LoyaltyAbility ability3 = new LoyaltyAbility(effects1, -7);
+        LoyaltyAbility ability3 = new LoyaltyAbility(new DamageTargetEffect(10), -7);
+        ability3.addEffect(new DamageAllControlledTargetEffect(10, new FilterCreatureOrPlaneswalkerPermanent())
+                .setText("and each creature and planeswalker they control"));
         ability3.addTarget(new TargetPlayer());
         this.addAbility(ability3);
     }

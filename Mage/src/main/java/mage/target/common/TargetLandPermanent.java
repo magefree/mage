@@ -6,7 +6,6 @@ import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetLandPermanent extends TargetPermanent {
@@ -31,7 +30,7 @@ public class TargetLandPermanent extends TargetPermanent {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetLandPermanent(final TargetLandPermanent target) {
+    protected TargetLandPermanent(final TargetLandPermanent target) {
         super(target);
     }
 

@@ -8,18 +8,18 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyStackObjectEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackAbility;
-import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
@@ -41,10 +41,12 @@ public final class ChandrasRegulator extends CardImpl {
     public ChandrasRegulator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever you activate a loyalty ability of a Chandra planeswalker, you may pay {1}. If you do, copy that ability. You may choose new targets for the copy.
-        this.addAbility(new ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(new ChandrasRegulatorEffect(), SubType.CHANDRA));
+        this.addAbility(new ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(
+                new DoIfCostPaid(new CopyStackObjectEffect(), new ManaCostsImpl<>("{1}")),
+                SubType.CHANDRA, SetTargetPointer.SPELL));
 
         // {1}, {T}, Discard a Mountain card or a red card: Draw a card.
         Ability ability = new SimpleActivatedAbility(
@@ -62,47 +64,5 @@ public final class ChandrasRegulator extends CardImpl {
     @Override
     public ChandrasRegulator copy() {
         return new ChandrasRegulator(this);
-    }
-}
-
-class ChandrasRegulatorEffect extends OneShotEffect {
-
-    ChandrasRegulatorEffect() {
-        super(Outcome.Benefit);
-        staticText = "you may pay {1}. If you do, copy that ability. You may choose new targets for the copy";
-    }
-
-    private ChandrasRegulatorEffect(final ChandrasRegulatorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChandrasRegulatorEffect copy() {
-        return new ChandrasRegulatorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        ManaCostsImpl cost = new ManaCostsImpl<>("{1}");
-        if (player == null) {
-            return false;
-        }
-        if (!cost.canPay(source, source, player.getId(), game)
-                || !player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() +
-                "? If you do, copy that ability. You may choose new targets for the copy.", source, game)) {
-            return true;
-        }
-        if (!cost.pay(source, game, source, source.getControllerId(), false, null)) {
-            return true;
-        }
-        StackAbility ability = (StackAbility) getValue("stackObject");
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (ability == null || controller == null || sourcePermanent == null) {
-            return false;
-        }
-        ability.createCopyOnStack(game, source, source.getControllerId(), true);
-        return true;
     }
 }

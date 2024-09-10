@@ -12,7 +12,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -41,7 +40,7 @@ public final class CracklingDrake extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SetBasePowerSourceEffect(
-                        InstantSorceryExileGraveyardCount.instance, Duration.EndOfGame
+                        InstantSorceryExileGraveyardCount.instance
                 ).setText("{this}'s power is equal to the total number "
                         + "of instant and sorcery cards you own "
                         + "in exile and in your graveyard.")

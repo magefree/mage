@@ -7,7 +7,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -44,7 +44,7 @@ public final class NaruMehaMasterWizard extends CardImpl {
     public NaruMehaMasterWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(3);
@@ -54,7 +54,7 @@ public final class NaruMehaMasterWizard extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         //When Naru Meha, Master Wizard enters the battlefield, copy target instant or sorcery spell you control. You may choose new targets for the copy.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CopyTargetSpellEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CopyTargetStackObjectEffect());
         ability.addTarget(new TargetSpell(spellFilter));
         this.addAbility(ability);
 

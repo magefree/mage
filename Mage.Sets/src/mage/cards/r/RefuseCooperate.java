@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
@@ -34,7 +34,7 @@ public final class RefuseCooperate extends SplitCard {
         // Aftermath
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
-        getRightHalfCard().getSpellAbility().addEffect(new CopyTargetSpellEffect());
+        getRightHalfCard().getSpellAbility().addEffect(new CopyTargetStackObjectEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetSpell(new FilterInstantOrSorcerySpell()));
     }
 
@@ -50,12 +50,12 @@ public final class RefuseCooperate extends SplitCard {
 
 class RefuseEffect extends OneShotEffect {
 
-    public RefuseEffect() {
+    RefuseEffect() {
         super(Outcome.Damage);
         staticText = "Refuse deals damage to target spell's controller equal to that spell's mana value";
     }
 
-    public RefuseEffect(final RefuseEffect effect) {
+    private RefuseEffect(final RefuseEffect effect) {
         super(effect);
     }
 

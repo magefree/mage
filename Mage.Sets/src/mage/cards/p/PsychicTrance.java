@@ -36,7 +36,7 @@ public final class PsychicTrance extends CardImpl {
         Ability abilityToAdd = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapSourceCost());
         abilityToAdd.addTarget(new TargetSpell());
         Effect effect = new GainAbilityControlledEffect(abilityToAdd, Duration.EndOfTurn, filter);
-        effect.setText("until end of turn, Wizards you control gain \"{tap}: Counter target spell\"");
+        effect.setText("until end of turn, Wizards you control gain \"{T}: Counter target spell.\"");
         this.getSpellAbility().addEffect(effect);
     }
 

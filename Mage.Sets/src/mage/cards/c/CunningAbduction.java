@@ -54,7 +54,7 @@ class CunningAbductionExileEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals their hand. You choose a nonland card from that player's hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
 
-    public CunningAbductionExileEffect(final CunningAbductionExileEffect effect) {
+    private CunningAbductionExileEffect(final CunningAbductionExileEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class CunningAbductionExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = game.getObject(source);
         if (opponent != null && sourceObject != null) {
             opponent.revealCards(sourceObject.getName(), opponent.getHand(), game);
@@ -75,7 +75,7 @@ class CunningAbductionExileEffect extends OneShotEffect {
                 Card card = null;
                 if (cardsHand > 0) {
                     TargetCard target = new TargetCard(Zone.HAND, filter);
-                    if (controller.choose(Outcome.Benefit, opponent.getHand(), target, game)) {
+                    if (controller.choose(Outcome.Benefit, opponent.getHand(), target, source, game)) {
                         card = opponent.getHand().get(target.getFirstTarget(), game);
                     }
                 }
@@ -106,7 +106,7 @@ class CunningAbductionSpendAnyManaEffect extends AsThoughEffectImpl implements A
         staticText = "you may spend mana as though it were mana of any color to cast it";
     }
 
-    public CunningAbductionSpendAnyManaEffect(final CunningAbductionSpendAnyManaEffect effect) {
+    private CunningAbductionSpendAnyManaEffect(final CunningAbductionSpendAnyManaEffect effect) {
         super(effect);
     }
 

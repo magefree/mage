@@ -31,7 +31,7 @@ public final class StalkingYeti extends CardImpl {
     public StalkingYeti(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.YETI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -40,7 +40,7 @@ public final class StalkingYeti extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new StalkingYetiEffect()),
                 SourceOnBattlefieldCondition.instance,
-                "When {this} enters the battlefield, if it's on the battlefield, "
+                "When {this} enters, if it's on the battlefield, "
                 + "it deals damage equal to its power to target creature an opponent controls "
                 + "and that creature deals damage equal to its power to {this}."
         );
@@ -69,7 +69,7 @@ class StalkingYetiEffect extends OneShotEffect {
                 + "and that creature deals damage equal to its power to {this}";
     }
 
-    StalkingYetiEffect(final StalkingYetiEffect effect) {
+    private StalkingYetiEffect(final StalkingYetiEffect effect) {
         super(effect);
     }
 

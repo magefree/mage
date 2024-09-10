@@ -27,7 +27,7 @@ public final class ExultantSkymarcher extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ExultantSkymarcher (final ExultantSkymarcher card) {
+    private ExultantSkymarcher(final ExultantSkymarcher card) {
         super(card);
     }
 

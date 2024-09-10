@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -23,10 +22,10 @@ public final class GripOfTheRoil extends CardImpl {
         // Tap target creature. It doesn't untap during its controller's next untap step.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new TapTargetEffect());
-        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
+        this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("It"));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
         // Surge {1}{U}
         addAbility(new SurgeAbility(this, "{1}{U}"));

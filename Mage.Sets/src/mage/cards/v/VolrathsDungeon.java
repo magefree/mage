@@ -56,12 +56,12 @@ public final class VolrathsDungeon extends CardImpl {
 
 class VolrathsDungeonEffect extends OneShotEffect {
 
-    public VolrathsDungeonEffect() {
+    VolrathsDungeonEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target player puts a card from their hand on top of their library";
     }
 
-    public VolrathsDungeonEffect(final VolrathsDungeonEffect effect) {
+    private VolrathsDungeonEffect(final VolrathsDungeonEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class VolrathsDungeonEffect extends OneShotEffect {
         Player targetedPlayer = game.getPlayer(source.getFirstTarget());
         if (targetedPlayer != null) {
             TargetCardInHand target = new TargetCardInHand();
-            if (targetedPlayer.choose(Outcome.Detriment, targetedPlayer.getHand(), target, game)) {
+            if (targetedPlayer.choose(Outcome.Detriment, targetedPlayer.getHand(), target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 // must hides the card name from other players
                 return card != null && targetedPlayer.putCardOnTopXOfLibrary(card, game, source, 0, false);

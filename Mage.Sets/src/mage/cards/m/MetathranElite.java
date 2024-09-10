@@ -18,7 +18,7 @@ import mage.constants.Zone;
  */
 public final class MetathranElite extends CardImpl {
 
-    private static final String rule = "{this} is unblockable as long as it's enchanted.";
+    private static final String rule = "{this} can't be blocked as long as it's enchanted.";
 
     public MetathranElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

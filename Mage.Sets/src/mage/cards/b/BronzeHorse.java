@@ -59,7 +59,7 @@ class BronzeHorsePreventionEffect extends PreventAllDamageToSourceEffect {
     }
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
-    public BronzeHorsePreventionEffect() {
+    BronzeHorsePreventionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "as long as you control another creature, prevent all damage that would be dealt to {this} by spells that target it";
     }

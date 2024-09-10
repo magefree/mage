@@ -43,7 +43,7 @@ public final class ImposterMech extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new CopyPermanentEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, applier),
                 null, "You may have {this} enter the battlefield as a copy of a creature " +
-                "an opponent controls, except its a Vehicle artifact with crew 3 and it loses all other card types.", null
+                "an opponent controls, except it's a Vehicle artifact with crew 3 and it loses all other card types.", null
         ));
 
         // Crew 3

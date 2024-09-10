@@ -55,7 +55,7 @@ class NecropolisRegentTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), false);
     }
 
-    public NecropolisRegentTriggeredAbility(final NecropolisRegentTriggeredAbility ability) {
+    private NecropolisRegentTriggeredAbility(final NecropolisRegentTriggeredAbility ability) {
         super(ability);
     }
 

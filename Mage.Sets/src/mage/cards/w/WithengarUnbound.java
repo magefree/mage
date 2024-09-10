@@ -26,7 +26,7 @@ public final class WithengarUnbound extends CardImpl {
 
     public WithengarUnbound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.color.setBlack(true);
 
@@ -60,7 +60,7 @@ class WithengarUnboundTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(13)), false);
     }
 
-    public WithengarUnboundTriggeredAbility(final WithengarUnboundTriggeredAbility ability) {
+    private WithengarUnboundTriggeredAbility(final WithengarUnboundTriggeredAbility ability) {
         super(ability);
     }
 

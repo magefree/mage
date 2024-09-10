@@ -33,7 +33,7 @@ public final class PiaNalaar extends CardImpl {
 
     public PiaNalaar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
@@ -50,7 +50,7 @@ public final class PiaNalaar extends CardImpl {
         // {1}, Sacrifice an artifact: Target creature can't block this turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new GenericManaCost(1));
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         this.addAbility(ability);
     }
 

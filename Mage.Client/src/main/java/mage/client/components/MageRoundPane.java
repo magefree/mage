@@ -14,7 +14,7 @@ import mage.client.util.ImageCaches;
 import mage.client.util.SoftValuesLoadingCache;
 
 /**
- * Mage round pane with transparency. Used for tooltips.
+ * GUI component. Mage round pane with transparency. Used for tooltips and player panels.
  *
  * @author nantuko
  */
@@ -24,12 +24,12 @@ public class MageRoundPane extends JPanel {
     private int Y_OFFSET = 30;
     private final Color defaultBackgroundColor = new Color(141, 130, 112, 200); // color of the frame of the popup window
     private Color backgroundColor = defaultBackgroundColor;
-    private static final SoftValuesLoadingCache<ShadowKey, BufferedImage> SHADOW_IMAGE_CACHE;
-    private static final SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<ShadowKey, BufferedImage> ROUND_PANEL_SHADOW_IMAGES_CACHE;
+    private static final SoftValuesLoadingCache<Key, BufferedImage> ROUND_PANEL_IMAGES_CACHE;
 
     static {
-        SHADOW_IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(MageRoundPane::createShadowImage));
-        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(MageRoundPane::createImage));
+        ROUND_PANEL_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(MageRoundPane::createImage));
+        ROUND_PANEL_SHADOW_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(MageRoundPane::createShadowImage));
     }
 
     private static final class ShadowKey {
@@ -132,7 +132,7 @@ public class MageRoundPane extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        g.drawImage(IMAGE_CACHE.getOrThrow(new Key(getWidth(), getHeight(), X_OFFSET, Y_OFFSET, backgroundColor)), 0, 0, null);
+        g.drawImage(ROUND_PANEL_IMAGES_CACHE.getOrThrow(new Key(getWidth(), getHeight(), X_OFFSET, Y_OFFSET, backgroundColor)), 0, 0, null);
     }
 
     private static BufferedImage createImage(Key key) {
@@ -144,37 +144,40 @@ public class MageRoundPane extends JPanel {
 
         BufferedImage image = GraphicsUtilities.createCompatibleTranslucentImage(key.width, key.height);
         Graphics2D g2 = image.createGraphics();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        try {
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        BufferedImage shadow = SHADOW_IMAGE_CACHE.getOrThrow(new ShadowKey(w, h));
+            BufferedImage shadow = ROUND_PANEL_SHADOW_IMAGES_CACHE.getOrThrow(new ShadowKey(w, h));
 
-        {
-            int xOffset = (shadow.getWidth() - w) / 2;
-            int yOffset = (shadow.getHeight() - h) / 2;
-            g2.drawImage(shadow, x - xOffset, y - yOffset, null);
+            {
+                int xOffset = (shadow.getWidth() - w) / 2;
+                int yOffset = (shadow.getHeight() - h) / 2;
+                g2.drawImage(shadow, x - xOffset, y - yOffset, null);
+            }
+
+            //////////////////////////////////////////////////////////////////
+            // fill content
+            /**
+             * Add white translucent substrate
+             */
+            /*if (ALPHA != 0) {
+                g2.setColor(new Color(255, 255, 255, ALPHA));
+                g2.fillRoundRect(x, y, w, h, arc, arc);
+            }*/
+            g2.setColor(key.backgroundColor);
+            g2.fillRoundRect(x, y, w, h, arc, arc);
+            //////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////
+            // draw border
+            g2.setStroke(new BasicStroke(1.5f));
+            g2.setColor(Color.BLACK);
+            g2.drawRoundRect(x, y, w, h, arc, arc);
+            // ////////////////////////////////////////////////////////////////
+        } finally {
+            g2.dispose();
         }
 
-        //////////////////////////////////////////////////////////////////
-        // fill content
-        /**
-         * Add white translucent substrate
-         */
-        /*if (ALPHA != 0) {
-            g2.setColor(new Color(255, 255, 255, ALPHA));
-            g2.fillRoundRect(x, y, w, h, arc, arc);
-        }*/
-        g2.setColor(key.backgroundColor);
-        g2.fillRoundRect(x, y, w, h, arc, arc);
-        //////////////////////////////////////////////////////////////////
-
-        //////////////////////////////////////////////////////////////////
-        // draw border
-        g2.setStroke(new BasicStroke(1.5f));
-        g2.setColor(Color.BLACK);
-        g2.drawRoundRect(x, y, w, h, arc, arc);
-        // ////////////////////////////////////////////////////////////////
-
-        g2.dispose();
         return image;
     }
 
@@ -194,9 +197,12 @@ public class MageRoundPane extends JPanel {
 
         BufferedImage base = GraphicsUtilities.createCompatibleTranslucentImage(w, h);
         Graphics2D g2 = base.createGraphics();
-        g2.setColor(Color.WHITE);
-        g2.fillRoundRect(0, 0, w, h, arc, arc);
-        g2.dispose();
+        try {
+            g2.setColor(Color.WHITE);
+            g2.fillRoundRect(0, 0, w, h, arc, arc);
+        } finally {
+            g2.dispose();
+        }
 
         ShadowRenderer renderer = new ShadowRenderer(shadowSize, 0.5f,
                 Color.GRAY);

@@ -19,7 +19,7 @@ public final class SorinsVengeance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}{B}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(10));
-        this.getSpellAbility().addEffect(new GainLifeEffect(10));
+        this.getSpellAbility().addEffect(new GainLifeEffect(10).concatBy("and"));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 

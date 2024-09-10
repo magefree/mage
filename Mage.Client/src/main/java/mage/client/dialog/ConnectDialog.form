@@ -34,7 +34,6 @@
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblStatus" alignment="1" max="32767" attributes="0"/>
-                  <Component id="chkForceUpdateDB" alignment="0" max="32767" attributes="0"/>
                   <Component id="chkAutoConnect" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtUserName" alignment="0" max="32767" attributes="0"/>
                   <Component id="panelFlag" alignment="0" max="32767" attributes="0"/>
@@ -97,7 +96,7 @@
                           <Component id="lblPassword" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="filler2" max="32767" attributes="0"/>
+                  <Component id="filler2" pref="52" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -106,14 +105,12 @@
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Component id="chkAutoConnect" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="chkForceUpdateDB" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jProxySettingsButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="btnWhatsNew" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="lblStatus" min="-2" pref="24" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -178,15 +175,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkAutoConnectActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="chkForceUpdateDB">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Force update of card database"/>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;If active the comparison of the server cards database to the client database will be enforced.&lt;br&gt;If not, the comparison will only done if the database version of the client is lower than the version of the server."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkForceUpdateDBActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jProxySettingsButton">
@@ -365,6 +353,7 @@
             <Property name="text" type="java.lang.String" value="X"/>
             <Property name="toolTipText" type="java.lang.String" value="Connect to xmage.de (first Europe server, most popular, registration needs)"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 2, 2, 2]"/>
             </Property>
@@ -401,8 +390,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnFindBeta">
           <Properties>
-            <Property name="text" type="java.lang.String" value="BETA, AI"/>
-            <Property name="toolTipText" type="java.lang.String" value="Connect to BETA server, AI enabled (use any username without registration)"/>
+            <Property name="text" type="java.lang.String" value="BETA"/>
+            <Property name="toolTipText" type="java.lang.String" value="Connect to BETA server, AI disabled (use any username without registration)"/>
             <Property name="alignmentY" type="float" value="0.0"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -424,6 +413,7 @@
             <Property name="text" type="java.lang.String" value="US"/>
             <Property name="toolTipText" type="java.lang.String" value="Connect to us.xmage.today (USA, use any username without registration)"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 2, 2, 2]"/>
             </Property>
@@ -439,6 +429,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Other..."/>
             <Property name="toolTipText" type="java.lang.String" value="Choose server from full servers list"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>
@@ -453,6 +444,7 @@
             <Property name="text" type="java.lang.String" value="EU"/>
             <Property name="toolTipText" type="java.lang.String" value="Connect to eu.xmage.today (second Europe server, use any username without registration)"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 2, 2, 2]"/>
             </Property>
@@ -527,6 +519,7 @@
             <Property name="text" type="java.lang.String" value="Check online status"/>
             <Property name="toolTipText" type="java.lang.String" value="Go to servers online statuses page"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 2, 2, 2]"/>
             </Property>

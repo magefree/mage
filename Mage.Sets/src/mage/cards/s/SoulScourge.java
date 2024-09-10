@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -20,8 +20,10 @@ import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SoulScourge extends CardImpl {
@@ -61,13 +63,13 @@ class SoulScourgeEntersBattlefieldTriggeredAbility extends EntersBattlefieldTrig
         super(effect, false);
     }
 
-    public SoulScourgeEntersBattlefieldTriggeredAbility(final SoulScourgeEntersBattlefieldTriggeredAbility ability) {
+    private SoulScourgeEntersBattlefieldTriggeredAbility(final SoulScourgeEntersBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (super.activate(game, allowedIdentifiers, noMana)) {
             Player player = game.getPlayer(getFirstTarget());
             if (player != null) {
                 String key = CardUtil.getCardZoneString("targetPlayer", getSourceId(), game);
@@ -90,7 +92,7 @@ class SoulScourgeLeavesBattlefieldTriggeredAbility extends LeavesBattlefieldTrig
         super(new GainLifeTargetEffect(3), false);
     }
 
-    public SoulScourgeLeavesBattlefieldTriggeredAbility(SoulScourgeLeavesBattlefieldTriggeredAbility ability) {
+    private SoulScourgeLeavesBattlefieldTriggeredAbility(final SoulScourgeLeavesBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 

@@ -27,7 +27,7 @@ public final class ThreeDreams extends CardImpl {
         // Search your library for up to three Aura cards with different names, reveal them, and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
                 new TargetCardWithDifferentNameInLibrary(0, 3, aurafilter),
-                true, true
+                true
         ));
     }
 

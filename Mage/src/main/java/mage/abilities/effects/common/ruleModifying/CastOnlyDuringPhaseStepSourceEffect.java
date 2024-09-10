@@ -46,8 +46,8 @@ public class CastOnlyDuringPhaseStepSourceEffect extends ContinuousRuleModifying
     public boolean applies(GameEvent event, Ability source, Game game) {
         // has to return true, if the spell cannot be cast in the current phase / step
         if (event.getSourceId().equals(source.getSourceId())) {
-            if ((turnPhase != null && game.getPhase().getType() != turnPhase)
-                    || (phaseStep != null && (game.getTurn().getStepType() != phaseStep))
+            if ((turnPhase != null && game.getTurnPhaseType() != turnPhase)
+                    || (phaseStep != null && (game.getTurnStepType() != phaseStep))
                     || (condition != null && !condition.apply(game, source))) {
                 return true;
             }

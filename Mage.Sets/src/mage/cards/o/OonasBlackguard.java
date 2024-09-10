@@ -61,7 +61,7 @@ class OonasBlackguardReplacementEffect extends ReplacementEffectImpl {
         staticText = "Each other Rogue creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    OonasBlackguardReplacementEffect(OonasBlackguardReplacementEffect effect) {
+    private OonasBlackguardReplacementEffect(final OonasBlackguardReplacementEffect effect) {
         super(effect);
     }
 
@@ -79,11 +79,6 @@ class OonasBlackguardReplacementEffect extends ReplacementEffectImpl {
                 && !event.getTargetId().equals(source.getSourceId())) {
             return true;
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 
@@ -108,7 +103,7 @@ class OonasBlackguardTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1), false);
     }
 
-    public OonasBlackguardTriggeredAbility(final OonasBlackguardTriggeredAbility ability) {
+    private OonasBlackguardTriggeredAbility(final OonasBlackguardTriggeredAbility ability) {
         super(ability);
     }
 

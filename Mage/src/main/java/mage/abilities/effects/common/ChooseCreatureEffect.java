@@ -5,8 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -20,17 +19,10 @@ import mage.util.CardUtil;
  */
 public class ChooseCreatureEffect extends OneShotEffect {
 
-    private static final FilterPermanent defaultFilter
-            = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        defaultFilter.add(AnotherPredicate.instance);
-    }
-
     private final FilterPermanent filter;
 
     public ChooseCreatureEffect() {
-        this(defaultFilter);
+        this(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL);
     }
 
     public ChooseCreatureEffect(FilterPermanent filter) {

@@ -9,12 +9,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TimingRule;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
 /**
@@ -23,8 +22,8 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public final class CrawlFromTheCellar extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent(SubType.ZOMBIE);
+    private static final FilterControlledPermanent filter
+            = new FilterControlledPermanent(SubType.ZOMBIE);
 
     public CrawlFromTheCellar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
@@ -34,7 +33,7 @@ public final class CrawlFromTheCellar extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setTargetPointer(new SecondTargetPointer()));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1, filter, false));
+        this.getSpellAbility().addTarget(new TargetControlledPermanent(0, 1, filter, false));
 
         // Flashback {3}{B}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{B}")));

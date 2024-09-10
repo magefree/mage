@@ -3,26 +3,21 @@ package mage.view;
 import mage.MageObject;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.icon.other.VariableCostCardIcon;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
-import mage.target.targetpointer.FixedTarget;
+import mage.game.stack.StackObject;
+import mage.target.Target;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.game.stack.StackObject;
-import mage.target.Target;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -35,24 +30,25 @@ public class StackAbilityView extends CardView {
     // selectable, chooseable, card icons etc. Search by getSourceCard
     private final CardView sourceCard;
 
-    public StackAbilityView(Game game, StackAbility ability, String sourceName, CardView sourceCard) {
+    public StackAbilityView(Game game, StackAbility ability, String sourceName, MageObject sourceObject, CardView sourceView) {
         this.id = ability.getId();
         this.mageObjectType = MageObjectType.ABILITY_STACK;
         this.abilityType = ability.getStackAbility().getAbilityType();
-        this.sourceCard = sourceCard;
+        this.sourceCard = sourceView;
         this.sourceCard.setMageObjectType(mageObjectType);
         this.name = "Ability";
         this.loyalty = "";
+        this.defense = "";
 
         this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
-        this.superTypes = ability.getSuperType();
+        this.superTypes = ability.getSuperType(game);
         this.color = ability.getColor(game);
-        this.manaCostLeftStr = String.join("", ability.getManaCostSymbols());
-        this.manaCostRightStr = "";
+        this.manaCostLeftStr = ability.getManaCostSymbols();
+        this.manaCostRightStr = new ArrayList<>();
         this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
-        this.superTypes = ability.getSuperType();
+        this.superTypes = ability.getSuperType(game);
         this.color = ability.getColor(game);
         this.power = ability.getPower().toString();
         this.toughness = ability.getToughness().toString();
@@ -64,8 +60,8 @@ public class StackAbilityView extends CardView {
             tmpSourceCard.subTypes.clear();
             tmpSourceCard.cardTypes.clear();
             tmpSourceCard.cardTypes.add(CardType.CREATURE);
-            tmpSourceCard.manaCostLeftStr = "";
-            tmpSourceCard.manaCostRightStr = "";
+            tmpSourceCard.manaCostLeftStr = new ArrayList<>();
+            tmpSourceCard.manaCostRightStr = new ArrayList<>();
             tmpSourceCard.power = "2";
             tmpSourceCard.toughness = "2";
             nameToShow = "creature without name";
@@ -78,12 +74,7 @@ public class StackAbilityView extends CardView {
 
         updateTargets(game, ability);
 
-        // card icons (warning, it must be synced in gui dialogs with replaced card, see comments at the start of the file)
-        // cost x
-        if (ability.getManaCostsToPay().containsX()) {
-            int costX = ManacostVariableValue.END_GAME.calculate(game, ability, null);
-            this.cardIcons.add(new VariableCostCardIcon(costX));
-        }
+        this.generateCardIcons(ability, sourceObject, game);
     }
 
     private void updateTargets(Game game, StackAbility ability) {
@@ -93,17 +84,16 @@ public class StackAbilityView extends CardView {
             if (!mode.getTargets().isEmpty()) {
                 addTargets(mode.getTargets(), mode.getEffects(), ability, game);
             } else {
-                List<UUID> targetList = new ArrayList<>();
+                // need only unique targets for arrow drawing
+                Set<UUID> uniqueTargets = new LinkedHashSet<>(); // use linked, so it will use stable sort order
                 for (Effect effect : mode.getEffects()) {
                     TargetPointer targetPointer = effect.getTargetPointer();
-                    if (targetPointer instanceof FixedTarget) {
-                        targetList.add(((FixedTarget) targetPointer).getTarget());
-                    }
+                    uniqueTargets.addAll(targetPointer.getTargets(game, ability));
                 }
-                if (!targetList.isEmpty()) {
-                    overrideTargets(targetList);
+                if (!uniqueTargets.isEmpty()) {
+                    overrideTargets(new ArrayList<>(uniqueTargets));
 
-                    for (UUID uuid : targetList) {
+                    for (UUID uuid : uniqueTargets) {
                         MageObject mageObject = game.getObject(uuid);
                         if (mageObject != null) {
                             if ((mageObject instanceof Card) && ((Card) mageObject).isFaceDown(game)) {

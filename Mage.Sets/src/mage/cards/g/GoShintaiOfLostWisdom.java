@@ -35,7 +35,7 @@ public final class GoShintaiOfLostWisdom extends CardImpl {
     public GoShintaiOfLostWisdom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

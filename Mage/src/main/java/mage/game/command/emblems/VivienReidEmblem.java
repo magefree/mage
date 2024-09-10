@@ -13,15 +13,13 @@ import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
 /**
- *
  * @author TheElk801
  */
 public final class VivienReidEmblem extends Emblem {
     // -8: You get an emblem with "Creatures you control get +2/+2 and have vigilance, trample, and indestructible.
 
     public VivienReidEmblem() {
-        this.setName("Emblem Vivien");
-        this.setExpansionSetCodeForImage("M19");
+        super("Emblem Vivien");
         Ability ability = new SimpleStaticAbility(
                 Zone.COMMAND,
                 new BoostControlledEffect(
@@ -46,5 +44,14 @@ public final class VivienReidEmblem extends Emblem {
                 StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText(", and indestructible"));
         this.getAbilities().add(ability);
+    }
+
+    private VivienReidEmblem(final VivienReidEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public VivienReidEmblem copy() {
+        return new VivienReidEmblem(this);
     }
 }

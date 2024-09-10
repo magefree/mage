@@ -4,7 +4,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author LevelX2
  */
 public class FilterControlledLandPermanent extends FilterControlledPermanent {
@@ -24,7 +23,7 @@ public class FilterControlledLandPermanent extends FilterControlledPermanent {
         this.add(subtype.getPredicate());
     }
 
-    public FilterControlledLandPermanent(final FilterControlledLandPermanent filter) {
+    protected FilterControlledLandPermanent(final FilterControlledLandPermanent filter) {
         super(filter);
     }
 

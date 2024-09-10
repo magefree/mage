@@ -17,8 +17,7 @@ public final class GarrukCursedHuntsmanEmblem extends Emblem {
 
     // -6: You get an emblem with "Creatures you control get +3/+3 and have trample."
     public GarrukCursedHuntsmanEmblem() {
-        this.setName("Emblem Garruk");
-        this.setExpansionSetCodeForImage("ELD");
+        super("Emblem Garruk");
         Ability ability = new SimpleStaticAbility(
                 Zone.COMMAND,
                 new BoostControlledEffect(
@@ -33,5 +32,14 @@ public final class GarrukCursedHuntsmanEmblem extends Emblem {
                 StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("and have trample"));
         this.getAbilities().add(ability);
+    }
+
+    private GarrukCursedHuntsmanEmblem(final GarrukCursedHuntsmanEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public GarrukCursedHuntsmanEmblem copy() {
+        return new GarrukCursedHuntsmanEmblem(this);
     }
 }

@@ -11,13 +11,14 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
@@ -25,11 +26,17 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DrakusethMawOfFlames extends CardImpl {
+    private static final FilterPermanentOrPlayer filter = new FilterAnyTarget("any target");
+
+    static {
+        filter.getPlayerFilter().add(new AnotherTargetPredicate(2, true));
+        filter.getPermanentFilter().add(new AnotherTargetPredicate(2, true));
+    }
 
     public DrakusethMawOfFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
@@ -39,15 +46,10 @@ public final class DrakusethMawOfFlames extends CardImpl {
 
         // Whenever Drakuseth, Maw of Flames attacks, it deals 4 damage to any target and 3 damage to each of up to two other targets.
         Ability ability = new AttacksTriggeredAbility(new DrakusethMawOfFlamesEffect(), false);
-        Target target = new TargetAnyTarget().withChooseHint("to deal 4 damage");
-        target.setTargetTag(1);
-        ability.addTarget(target);
-        FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker("any target");
-        filter.getPlayerFilter().add(new AnotherTargetPredicate(2, true));
-        filter.getPermanentFilter().add(new AnotherTargetPredicate(2, true));
-        target = new TargetAnyTarget(0, 2, filter).withChooseHint("to deal 3 damage");
-        target.setTargetTag(2);
-        ability.addTarget(target);
+        ability.addTarget(new TargetAnyTarget().withChooseHint("to deal 4 damage").setTargetTag(1));
+        ability.addTarget(new TargetPermanentOrPlayer(
+                0, 2, filter, false
+        ).withChooseHint("to deal 3 damage").setTargetTag(2));
         this.addAbility(ability);
     }
 

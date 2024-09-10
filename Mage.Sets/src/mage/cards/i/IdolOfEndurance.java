@@ -159,7 +159,7 @@ class IdolOfEnduranceLeaveEffect extends OneShotEffect {
 class IdolOfEnduranceCastFromExileEffect extends AsThoughEffectImpl {
 
     IdolOfEnduranceCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, you may cast a creature spell from among cards exiled with {this} without paying its mana cost";
     }
 

@@ -31,7 +31,7 @@ public final class SepulcherGhoul extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         ));
     }
 

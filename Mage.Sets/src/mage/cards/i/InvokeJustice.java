@@ -7,15 +7,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetAmount;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetPermanentAmount;
@@ -54,8 +55,8 @@ class InvokeJusticeEffect extends OneShotEffect {
 
     InvokeJusticeEffect() {
         super(Outcome.Benefit);
-        staticText = ", then distribute four +1/+1 counters among " +
-                "any number of creatures and/or Vehicles target player controls";
+        staticText = ", then distribute four +1/+1 counters among "
+                + "any number of creatures and/or Vehicles target player controls";
         this.setTargetPointer(new SecondTargetPointer());
     }
 
@@ -75,16 +76,18 @@ class InvokeJusticeEffect extends OneShotEffect {
         if (controller == null || player == null) {
             return false;
         }
-        FilterPermanent filter = new FilterPermanent(
-                "creatures and/or Vehicles controlled by " + player.getName()
-        );
+        FilterPermanent filter = new FilterPermanent("creatures and/or Vehicles " + player.getName() + " controls");
+        filter.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                SubType.VEHICLE.getPredicate()
+        ));
         filter.add(new ControllerIdPredicate(player.getId()));
         if (!game.getBattlefield().contains(filter, source, game, 1)) {
             return false;
         }
-        TargetAmount target = new TargetPermanentAmount(4, filter);
-        target.setNotTarget(true);
-        controller.choose(outcome, target, source, game);
+        TargetPermanentAmount target = new TargetPermanentAmount(4, filter);
+        target.withNotTarget(true);
+        target.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {

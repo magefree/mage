@@ -51,14 +51,14 @@ public final class BogardanPhoenix extends CardImpl {
 
 class BogardanPhoenixEffect extends OneShotEffect {
 
-    public BogardanPhoenixEffect() {
+    BogardanPhoenixEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile it if it had a death counter on it. "
                 + "Otherwise, return it to the battlefield under your control "
                 + "and put a death counter on it.";
     }
 
-    public BogardanPhoenixEffect(final BogardanPhoenixEffect effect) {
+    private BogardanPhoenixEffect(final BogardanPhoenixEffect effect) {
         super(effect);
     }
 

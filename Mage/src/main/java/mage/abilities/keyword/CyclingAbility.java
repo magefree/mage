@@ -27,13 +27,13 @@ public class CyclingAbility extends ActivatedAbilityImpl {
     }
 
     public CyclingAbility(Cost cost, FilterCard filter, String text) {
-        super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), cost);
+        super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), cost);
         this.addCost(new CyclingDiscardCost());
         this.cost = cost;
         this.text = text;
     }
 
-    public CyclingAbility(final CyclingAbility ability) {
+    protected CyclingAbility(final CyclingAbility ability) {
         super(ability);
         this.cost = ability.cost;
         this.text = ability.text;

@@ -41,7 +41,7 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(triggerPhrase);
     }
 
-    public ZoneChangeTriggeredAbility(final ZoneChangeTriggeredAbility ability) {
+    protected ZoneChangeTriggeredAbility(final ZoneChangeTriggeredAbility ability) {
         super(ability);
         this.fromZone = ability.fromZone;
         this.toZone = ability.toZone;

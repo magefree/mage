@@ -21,6 +21,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -79,7 +80,7 @@ class EvershrikeEffect extends OneShotEffect {
         if (controller == null || evershrikeCard == null) {
             return false;
         }
-        int xAmount = source.getManaCostsToPay().getX();
+        int xAmount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         controller.moveCards(evershrikeCard, Zone.BATTLEFIELD, source, game);
         Permanent evershrikePermanent = game.getPermanent(evershrikeCard.getId());
         if (evershrikePermanent == null) {
@@ -97,7 +98,7 @@ class EvershrikeEffect extends OneShotEffect {
         int count = controller.getHand().count(filterAuraCard, game);
         if (count > 0 && controller.chooseUse(Outcome.Benefit, "Put an Aura card from your hand onto the battlefield attached to " + evershrikeCard.getIdName() + "?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);
-            if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, game)) {
+            if (controller.choose(Outcome.Benefit, controller.getHand(), targetAura, source, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
                     game.getState().setValue("attachTo:" + aura.getId(), evershrikePermanent);

@@ -8,7 +8,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -28,7 +28,7 @@ import java.util.UUID;
 /**
  * @author htrajan
  */
-public final class SelflessGlyphweaver extends ModalDoubleFacesCard {
+public final class SelflessGlyphweaver extends ModalDoubleFacedCard {
 
     public SelflessGlyphweaver(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -70,7 +70,7 @@ class DeadlyVanityEffect extends OneShotEffect {
         staticText = "choose a creature or planeswalker, then destroy all other creatures and planeswalkers";
     }
 
-    DeadlyVanityEffect(DeadlyVanityEffect effect) {
+    private DeadlyVanityEffect(final DeadlyVanityEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class DeadlyVanityEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetCreatureOrPlaneswalker();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
 
         FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();

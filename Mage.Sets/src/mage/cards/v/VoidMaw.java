@@ -59,23 +59,18 @@ public final class VoidMaw extends CardImpl {
 
 class VoidMawEffect extends ReplacementEffectImpl {
 
-    public VoidMawEffect() {
+    VoidMawEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If another creature would die, exile it instead";
     }
 
-    public VoidMawEffect(final VoidMawEffect effect) {
+    private VoidMawEffect(final VoidMawEffect effect) {
         super(effect);
     }
 
     @Override
     public VoidMawEffect copy() {
         return new VoidMawEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -127,7 +122,7 @@ class VoidMawCost extends CostImpl {
         this.text = "Put a card exiled with {this} into its owner's graveyard";
     }
 
-    public VoidMawCost(VoidMawCost cost) {
+    private VoidMawCost(final VoidMawCost cost) {
         super(cost);
     }
 
@@ -136,11 +131,11 @@ class VoidMawCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             TargetCardInExile target = new TargetCardInExile(new FilterCard(), CardUtil.getCardExileZoneId(game, ability));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, ability));
             if (cards != null
                     && !cards.isEmpty()
-                    && controller.choose(Outcome.Benefit, cards, target, game)) {
+                    && controller.choose(Outcome.Benefit, cards, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     if (controller.moveCardToGraveyardWithInfo(card, source, game, Zone.EXILED)) {

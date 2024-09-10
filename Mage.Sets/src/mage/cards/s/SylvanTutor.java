@@ -18,7 +18,7 @@ public final class SylvanTutor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // Search your library for a creature card and reveal that card. Shuffle your library, then put the card on top of it.
-        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true));
     }
 
     private SylvanTutor(final SylvanTutor card) {

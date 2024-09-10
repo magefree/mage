@@ -19,8 +19,6 @@ import mage.game.events.GameEvent;
 import java.util.Arrays;
 import java.util.UUID;
 
-import static mage.game.events.GameEvent.EventType.CAST_SPELL;
-
 /**
  * @author TheElk801
  */
@@ -92,7 +90,7 @@ class ArchonOfValorsReachReplacementEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == CAST_SPELL;
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override

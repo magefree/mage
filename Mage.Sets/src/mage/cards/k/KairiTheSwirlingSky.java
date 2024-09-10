@@ -18,13 +18,14 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -35,7 +36,7 @@ public final class KairiTheSwirlingSky extends CardImpl {
     public KairiTheSwirlingSky(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(6);
@@ -70,11 +71,11 @@ public final class KairiTheSwirlingSky extends CardImpl {
 
 class KairiTheSwirlingSkyTarget extends TargetPermanent {
 
-    private static final FilterPermanent filter
+    private static final FilterPermanent filterStatic
             = new FilterNonlandPermanent("nonland permanents with total mana value 6 or less");
 
     KairiTheSwirlingSkyTarget() {
-        super(0, Integer.MAX_VALUE, filter, false);
+        super(0, Integer.MAX_VALUE, filterStatic, false);
     }
 
     private KairiTheSwirlingSkyTarget(final KairiTheSwirlingSkyTarget target) {
@@ -88,20 +89,27 @@ class KairiTheSwirlingSkyTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(id);
-        if (permanent == null) {
-            return false;
-        }
-        return permanent.getManaValue()
-                + this.getTargets()
-                .stream()
-                .map(game::getPermanent)
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, 6, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, 6, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
                 .filter(Objects::nonNull)
                 .mapToInt(MageObject::getManaValue)
-                .sum() <= 6;
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
     }
 }
 
@@ -132,8 +140,8 @@ class KairiTheSwirlingSkyEffect extends OneShotEffect {
         TargetCard target = new TargetCardInGraveyard(
                 0, 2, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
         );
-        target.setNotTarget(true);
-        player.choose(outcome, player.getGraveyard(), target, game);
+        target.withNotTarget(true);
+        player.choose(outcome, player.getGraveyard(), target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
     }
 }

@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
@@ -23,7 +24,7 @@ public final class Forbid extends CardImpl {
 
 
         // Buyback-Discard two cards.
-        this.addAbility(new BuybackAbility(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards")))));
+        this.addAbility(new BuybackAbility(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS))));
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());

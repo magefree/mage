@@ -89,12 +89,12 @@ class OathOfScholarsPredicate implements ObjectSourcePlayerPredicate<Player> {
 
 class OathOfScholarsEffect extends OneShotEffect {
 
-    public OathOfScholarsEffect() {
+    OathOfScholarsEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "that player chooses target player who has more cards in hand than they do and is their opponent. The first player may discard their hand and draw three cards";
     }
 
-    public OathOfScholarsEffect(OathOfScholarsEffect effect) {
+    private OathOfScholarsEffect(final OathOfScholarsEffect effect) {
         super(effect);
     }
 

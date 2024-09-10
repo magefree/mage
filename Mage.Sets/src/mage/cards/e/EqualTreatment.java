@@ -26,7 +26,7 @@ public final class EqualTreatment extends CardImpl {
         this.getSpellAbility().addEffect(new EqualTreatmentEffect());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private EqualTreatment(final EqualTreatment card) {
@@ -41,12 +41,12 @@ public final class EqualTreatment extends CardImpl {
 
 class EqualTreatmentEffect extends ReplacementEffectImpl {
 
-    public EqualTreatmentEffect() {
+    EqualTreatmentEffect() {
         super(Duration.EndOfTurn, Outcome.PreventDamage);
         staticText = "If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead";
     }
 
-    public EqualTreatmentEffect(final EqualTreatmentEffect effect) {
+    private EqualTreatmentEffect(final EqualTreatmentEffect effect) {
         super(effect);
     }
 
@@ -64,11 +64,6 @@ class EqualTreatmentEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getAmount() > 0;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

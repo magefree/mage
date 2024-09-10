@@ -30,7 +30,7 @@ public final class GlissaTheTraitor extends CardImpl {
 
     public GlissaTheTraitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.ELF);
@@ -46,14 +46,14 @@ public final class GlissaTheTraitor extends CardImpl {
 
         // Whenever a creature an opponent controls dies, you may return target artifact card from your graveyard to your hand.
         Ability ability = new DiesCreatureTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect(), false,
+                new ReturnFromGraveyardToHandTargetEffect(), true,
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 
-    public GlissaTheTraitor(final GlissaTheTraitor card) {
+    private GlissaTheTraitor(final GlissaTheTraitor card) {
         super(card);
     }
 

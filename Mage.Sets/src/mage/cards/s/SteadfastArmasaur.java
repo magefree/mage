@@ -43,7 +43,8 @@ public final class SteadfastArmasaur extends CardImpl {
 
         // {1}{W}, {T}: Steadfast Armasaur deals damage equal to its toughness to target creature blocking or blocked by it.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(SourcePermanentToughnessValue.getInstance()), new ManaCostsImpl<>("{1}{W}")
+                new DamageTargetEffect(SourcePermanentToughnessValue.getInstance())
+                        .setText("{this} deals damage equal to its toughness to target creature blocking or blocked by it"), new ManaCostsImpl<>("{1}{W}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));

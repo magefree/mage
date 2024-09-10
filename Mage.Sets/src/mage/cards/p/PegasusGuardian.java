@@ -4,8 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
@@ -37,13 +36,14 @@ public final class PegasusGuardian extends AdventureCard {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(new PegasusToken()), TargetController.YOU,
                 RevoltCondition.instance, false
-        ), new RevoltWatcher());
+        ).addHint(RevoltCondition.getHint()), new RevoltWatcher());
 
         // Rescue the Foal
         // Exile target creature you control, then return that card to the battlefield under its owner's control.
-        this.getSpellCard().getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
+        this.getSpellCard().getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, true));
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private PegasusGuardian(final PegasusGuardian card) {

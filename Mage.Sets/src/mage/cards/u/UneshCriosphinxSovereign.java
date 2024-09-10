@@ -29,7 +29,7 @@ public final class UneshCriosphinxSovereign extends CardImpl {
     public UneshCriosphinxSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -40,7 +40,7 @@ public final class UneshCriosphinxSovereign extends CardImpl {
         // Sphinx spells you cast cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
 
-        // Whenever Unesh, Criosphinx Sovereign or another Sphinx enters the battlefield under your control, reveal the top four cards of your library. An opponent seperates those cards into two piles. Put one pile into your hand and the other into your graveyard.
+        // Whenever Unesh, Criosphinx Sovereign or another Sphinx you control enters, reveal the top four cards of your library. An opponent seperates those cards into two piles. Put one pile into your hand and the other into your graveyard.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new RevealAndSeparatePilesEffect(
                 4, TargetController.OPPONENT, TargetController.YOU, Zone.GRAVEYARD
         ), filter2, false, true));

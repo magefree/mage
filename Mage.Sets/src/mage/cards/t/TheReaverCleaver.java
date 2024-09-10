@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
@@ -25,7 +25,7 @@ public final class TheReaverCleaver extends CardImpl {
 
     public TheReaverCleaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 and has trample and “Whenever this creature deals
@@ -38,9 +38,8 @@ public final class TheReaverCleaver extends CardImpl {
                 "and has trample"
         ));
         ability.addEffect(new GainAbilityAttachedEffect(
-                new DealsCombatDamageToAPlayerTriggeredAbility(
-                        new CreateTokenEffect(new TreasureToken(), SavedDamageValue.MANY), false
-                ).setOrPlaneswalker(true),
+                new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(
+                        new CreateTokenEffect(new TreasureToken(), SavedDamageValue.MANY), false),
                 AttachmentType.EQUIPMENT,
                 Duration.WhileOnBattlefield,
                 " and \"Whenever this creature deals combat damage to a player or planeswalker, create that many Treasure tokens.\""

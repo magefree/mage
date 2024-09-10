@@ -9,7 +9,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -27,7 +27,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SkullmaneBaku extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(RemovedCountersForCostValue.instance);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(GetXValue.instance);
 
     public SkullmaneBaku(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -42,7 +42,7 @@ public final class SkullmaneBaku extends CardImpl {
         // {1}, {T}, Remove X ki counters from Skullmane Baku: Target creature gets -X/-X until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

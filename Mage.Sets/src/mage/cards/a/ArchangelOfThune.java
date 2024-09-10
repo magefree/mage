@@ -36,7 +36,7 @@ public final class ArchangelOfThune extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(),
-                        StaticFilters.FILTER_CONTROLLED_CREATURES
+                        StaticFilters.FILTER_CONTROLLED_CREATURE
                 ), false
         ));
     }

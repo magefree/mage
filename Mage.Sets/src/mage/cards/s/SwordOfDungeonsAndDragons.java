@@ -80,7 +80,7 @@ class SwordOfDungeonsAndDragonsAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SwordOfDungeonsAndDragonsEffect(),false);
     }
 
-    public SwordOfDungeonsAndDragonsAbility(final SwordOfDungeonsAndDragonsAbility ability) {
+    private SwordOfDungeonsAndDragonsAbility(final SwordOfDungeonsAndDragonsAbility ability) {
         super(ability);
     }
 
@@ -119,7 +119,7 @@ class SwordOfDungeonsAndDragonsEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public SwordOfDungeonsAndDragonsEffect(final SwordOfDungeonsAndDragonsEffect effect) {
+    private SwordOfDungeonsAndDragonsEffect(final SwordOfDungeonsAndDragonsEffect effect) {
         super(effect);
     }
 

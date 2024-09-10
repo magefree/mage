@@ -28,13 +28,13 @@ public final class TorgaarFamineIncarnate extends CardImpl {
     public TorgaarFamineIncarnate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 
         // As an additional cost to cast this spell, you may sacrifice any number of creatures.
-        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
+        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_PERMANENT_CREATURES);
         cost.setText("As an additional cost to cast this spell, you may sacrifice any number of creatures");
         this.getSpellAbility().addCost(cost);
         // This spell costs {2} less to cast for each creature sacrificed this way.
@@ -59,12 +59,12 @@ public final class TorgaarFamineIncarnate extends CardImpl {
 
 class TorgaarFamineIncarnateEffect extends OneShotEffect {
 
-    public TorgaarFamineIncarnateEffect() {
+    TorgaarFamineIncarnateEffect() {
         super(Outcome.Benefit);
         this.staticText = "up to one target player's life total becomes half their starting life total, rounded down";
     }
 
-    public TorgaarFamineIncarnateEffect(final TorgaarFamineIncarnateEffect effect) {
+    private TorgaarFamineIncarnateEffect(final TorgaarFamineIncarnateEffect effect) {
         super(effect);
     }
 
@@ -86,12 +86,12 @@ class TorgaarFamineIncarnateEffect extends OneShotEffect {
 
 class TorgaarFamineIncarnateEffectCostReductionEffect extends CostModificationEffectImpl {
 
-    public TorgaarFamineIncarnateEffectCostReductionEffect() {
+    TorgaarFamineIncarnateEffectCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "This spell costs {2} less to cast for each creature sacrificed this way";
     }
 
-    public TorgaarFamineIncarnateEffectCostReductionEffect(final TorgaarFamineIncarnateEffectCostReductionEffect effect) {
+    private TorgaarFamineIncarnateEffectCostReductionEffect(final TorgaarFamineIncarnateEffectCostReductionEffect effect) {
         super(effect);
     }
 

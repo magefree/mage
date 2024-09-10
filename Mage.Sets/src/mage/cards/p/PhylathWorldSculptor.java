@@ -39,7 +39,7 @@ public final class PhylathWorldSculptor extends CardImpl {
     public PhylathWorldSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -47,7 +47,7 @@ public final class PhylathWorldSculptor extends CardImpl {
         // When Phylath, World Sculptor enters the battlefield, create a 0/1 green Plant creature token for each basic land you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PlantToken(), xValue)));
 
-        // Landfall — Whenever a land enters the battlefield under your control, put four +1/+1 counters on target Plant you control.
+        // Landfall — Whenever a land you control enters, put four +1/+1 counters on target Plant you control.
         Ability ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(4)));
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);

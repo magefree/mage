@@ -36,7 +36,7 @@ public final class BowOfNylea extends CardImpl {
 
     public BowOfNylea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.ARTIFACT},"{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Attacking creatures you control have deathtouch.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_ATTACKING_CREATURES, false)));

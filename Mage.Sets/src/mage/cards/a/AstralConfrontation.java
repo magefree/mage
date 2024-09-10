@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -66,6 +67,7 @@ enum AstralConfrontationValue implements DynamicValue {
                         .anyMatch(sourceAbility::isControlledBy)
                 )
                 .map(CombatGroup::getDefenderId)
+                .filter(Objects::nonNull)
                 .distinct()
                 .filter(opponents::contains)
                 .mapToInt(x -> 1)

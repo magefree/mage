@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -12,7 +13,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DamageAllEffect extends OneShotEffect {
@@ -40,7 +40,7 @@ public class DamageAllEffect extends OneShotEffect {
         setText();
     }
 
-    public DamageAllEffect(final DamageAllEffect effect) {
+    protected DamageAllEffect(final DamageAllEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter.copy();
@@ -76,11 +76,4 @@ public class DamageAllEffect extends OneShotEffect {
         staticText = sb.toString();
     }
 
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
 }

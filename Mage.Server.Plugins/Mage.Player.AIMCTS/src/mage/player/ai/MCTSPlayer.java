@@ -1,4 +1,3 @@
-
 package mage.player.ai;
 
 import mage.abilities.Ability;
@@ -15,14 +14,16 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ * AI: server side bot with monte carlo logic (experimental, the latest version)
+ * <p>
+ * Simple implementation for random play, outdate and do not support,
+ * see <a href="https://github.com/magefree/mage/issues/7075">more details here</a>
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class MCTSPlayer extends ComputerPlayer {
 
-     private static final Logger logger = Logger.getLogger(MCTSPlayer.class);
-
-    protected PassAbility pass = new PassAbility();
+    private static final Logger logger = Logger.getLogger(MCTSPlayer.class);
 
     private NextAction nextAction;
 
@@ -32,12 +33,10 @@ public class MCTSPlayer extends ComputerPlayer {
 
     public MCTSPlayer(UUID id) {
         super(id);
-        this.pass.setControllerId(id);
     }
 
     public MCTSPlayer(final MCTSPlayer player) {
         super(player);
-        this.pass = player.pass.copy();
         this.nextAction = player.nextAction;
     }
 
@@ -48,29 +47,26 @@ public class MCTSPlayer extends ComputerPlayer {
 
     protected List<ActivatedAbility> getPlayableAbilities(Game game) {
         List<ActivatedAbility> playables = getPlayable(game, true);
-        playables.add(pass);
+        playables.add(new PassAbility());
         return playables;
     }
 
     public List<Ability> getPlayableOptions(Game game) {
         List<Ability> all = new ArrayList<>();
         List<ActivatedAbility> playables = getPlayableAbilities(game);
-        for (ActivatedAbility ability: playables) {
+        for (ActivatedAbility ability : playables) {
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
             if (options.isEmpty()) {
                 if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                     simulateVariableCosts(ability, all, game);
-                }
-                else {
+                } else {
                     all.add(ability);
                 }
-            }
-            else {
-                for (Ability option: options) {
+            } else {
+                for (Ability option : options) {
                     if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                         simulateVariableCosts(option, all, game);
-                    }
-                    else {
+                    } else {
                         all.add(option);
                     }
                 }
@@ -91,7 +87,7 @@ public class MCTSPlayer extends ComputerPlayer {
         }
         for (int i = start; i < numAvailable; i++) {
             Ability newAbility = ability.copy();
-            newAbility.getManaCostsToPay().add(new GenericManaCost(i));
+            newAbility.addManaCostsToPay(new GenericManaCost(i));
             options.add(newAbility);
         }
     }
@@ -141,7 +137,7 @@ public class MCTSPlayer extends ComputerPlayer {
 
     private List<List<UUID>> copyEngagement(List<List<UUID>> engagement) {
         List<List<UUID>> newEngagement = new ArrayList<>();
-        for (List<UUID> group: engagement) {
+        for (List<UUID> group : engagement) {
             newEngagement.add(new ArrayList<>(group));
         }
         return newEngagement;
@@ -158,7 +154,7 @@ public class MCTSPlayer extends ComputerPlayer {
         List<Permanent> remaining = remove(blockers, blocker);
         for (int i = 0; i < numGroups; i++) {
             if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
-                List<List<UUID>>newEngagement = copyEngagement(engagement);
+                List<List<UUID>> newEngagement = copyEngagement(engagement);
                 newEngagement.get(i).add(blocker.getId());
                 engagements.add(newEngagement);
 //                    logger.debug("simulating -- found redundant block combination");

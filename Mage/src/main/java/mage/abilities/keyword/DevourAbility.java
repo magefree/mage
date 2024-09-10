@@ -3,8 +3,9 @@ package mage.abilities.keyword;
 
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DevourEffect;
-import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  * 502.82. Devour
@@ -40,15 +41,28 @@ import mage.constants.Zone;
  * can't sacrifice the same creature to satisfy multiple devour abilities.) All
  * creatures devoured this way are sacrificed at the same time.
  *
- * @author LevelX2
+ * @author LevelX2, Susucr
  */
 public class DevourAbility extends SimpleStaticAbility {
 
-    public DevourAbility(DevourFactor devourFactor) {
-        super(Zone.ALL, new DevourEffect(devourFactor));
+    private static final FilterControlledPermanent filterCreature = new FilterControlledCreaturePermanent("creature");
+
+    // Integer.MAX_VALUE is a special value
+    // for "devour X, where X is the number of devored permanents"
+    // see DevourEffect for the full details.
+    public static DevourAbility DevourX() {
+        return new DevourAbility(Integer.MAX_VALUE);
     }
 
-    public DevourAbility(final DevourAbility ability) {
+    public DevourAbility(int devourFactor) {
+        this(devourFactor, filterCreature);
+    }
+
+    public DevourAbility(int devourFactor, FilterControlledPermanent filterDevoured) {
+        super(Zone.ALL, new DevourEffect(devourFactor, filterDevoured));
+    }
+
+    private DevourAbility(final DevourAbility ability) {
         super(ability);
     }
 

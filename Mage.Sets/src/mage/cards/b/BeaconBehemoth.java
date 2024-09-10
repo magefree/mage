@@ -40,7 +40,7 @@ public final class BeaconBehemoth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BeaconBehemoth (final BeaconBehemoth card) {
+    private BeaconBehemoth(final BeaconBehemoth card) {
         super(card);
     }
 

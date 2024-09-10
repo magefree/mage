@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.EntwineAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -15,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -29,22 +28,15 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public final class InciteWar extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     public InciteWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Choose one - Creatures target player controls attack this turn if able;
         this.getSpellAbility().addEffect(new InciteWarMustAttackEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
 
         // or creatures you control gain first strike until end of turn.
-        Mode mode = new Mode(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter));
+        Mode mode = new Mode(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {2}
@@ -63,12 +55,12 @@ public final class InciteWar extends CardImpl {
 
 class InciteWarMustAttackEffect extends OneShotEffect {
 
-    public InciteWarMustAttackEffect() {
+    InciteWarMustAttackEffect() {
         super(Outcome.Detriment);
         staticText = "Creatures target player controls attack this turn if able";
     }
 
-    public InciteWarMustAttackEffect(final InciteWarMustAttackEffect effect) {
+    private InciteWarMustAttackEffect(final InciteWarMustAttackEffect effect) {
         super(effect);
     }
 

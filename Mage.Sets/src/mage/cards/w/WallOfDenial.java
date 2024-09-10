@@ -30,7 +30,7 @@ public final class WallOfDenial extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public WallOfDenial (final WallOfDenial card) {
+    private WallOfDenial(final WallOfDenial card) {
         super(card);
     }
 

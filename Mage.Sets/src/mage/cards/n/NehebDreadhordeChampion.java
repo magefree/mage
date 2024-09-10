@@ -3,7 +3,7 @@ package mage.cards.n;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ public final class NehebDreadhordeChampion extends CardImpl {
     public NehebDreadhordeChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);
@@ -33,9 +33,7 @@ public final class NehebDreadhordeChampion extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Neheb, Dreadhorde Champion deals combat damage to a player or planeswalker, you may discard any number of cards. If you do, draw that many cards and add that much {R}. Until end of turn, you don't lose this mana as steps and phases end.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new NehebDreadhordeChampionEffect(), true).setOrPlaneswalker(true)
-        );
+        this.addAbility(new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(new NehebDreadhordeChampionEffect(), true));
     }
 
     private NehebDreadhordeChampion(final NehebDreadhordeChampion card) {

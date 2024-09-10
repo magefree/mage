@@ -46,7 +46,7 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature with flying attacks, ");
     }
 
-    public GravityWellTriggeredAbility(final GravityWellTriggeredAbility ability) {
+    private GravityWellTriggeredAbility(final GravityWellTriggeredAbility ability) {
         super(ability);
     }
 
@@ -75,12 +75,12 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl {
 
 class GravityWellEffect extends ContinuousEffectImpl {
 
-    public GravityWellEffect() {
+    GravityWellEffect() {
         super(Duration.EndOfTurn, Outcome.LoseAbility);
         staticText = "it loses flying until end of turn";
     }
 
-    public GravityWellEffect(final GravityWellEffect effect) {
+    private GravityWellEffect(final GravityWellEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class GravityWellEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:

@@ -25,13 +25,13 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility {
         addHint(new ValueHint(pluralName + " you control", new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public AffinityForLandTypeAbility(final AffinityForLandTypeAbility ability) {
+    protected AffinityForLandTypeAbility(final AffinityForLandTypeAbility ability) {
         super(ability);
         this.rulesText = ability.rulesText;
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public AffinityForLandTypeAbility copy() {
         return new AffinityForLandTypeAbility(this);
     }
 

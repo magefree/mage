@@ -1,0 +1,83 @@
+1 [SOK:121] Arashi, the Sky Asunder
+1 [ELD:331] Arcane Signet
+1 [NPH:103] Beast Within
+1 [GTC:213] Biomass Mutation
+1 [STX:164] Biomathematician
+1 [BFZ:233] Blighted Woodland
+1 [HOU:31] Champion of Wits
+1 [DIS:107] Coiling Oracle
+1 [ELD:333] Command Tower
+1 [C21:23] Commander's Insight
+1 [RIX:33] Crafty Cutpurse
+1 [C21:24] Curiosity Crafter
+1 [THS:46] Curse of the Swine
+1 [C21:26] Deekah, Fractal Theorist
+1 [BFZ:6] Desolation Twin
+1 [MKC:210] Esix, Fractal Bloom
+1 [STX:184] Eureka Moment
+1 [CON:142] Exotic Orchard
+1 [CMM:287] Ezuri's Predation
+11 [OTJ:276] Forest
+1 [SCG:120] Forgotten Ancient
+1 [C21:388] Fractal Harness
+1 [M13:174] Garruk, Primal Hunter
+1 [C21:404] Geometric Nexus
+1 [STX:190] Golden Ratio
+1 [C21:389] Guardian Augmenter
+1 [M15:177] Hornet Nest
+1 [M15:178] Hornet Queen
+1 [JOU:128] Hydra Broodmaster
+1 [M3C:297] Idol of Oblivion
+1 [CLU:197] Incubation // Incongruity
+1 [RNA:131] Incubation Druid
+10 [OTJ:273] Island
+1 [C21:221] Kaseto, Orochi Archmage
+1 [ROE:191] Kazandu Tuskcaller
+1 [CHK:225] Kodama's Reach
+1 [TSP:202] Krosan Grip
+1 [FUT:171] Llanowar Reborn
+1 [ONS:320] Lonely Sandbar
+1 [BFZ:239] Lumbering Falls
+1 [ORI:186] Managorger Hydra
+1 [CLU:200] Master Biomancer
+1 [LRW:270] Mosswort Bridge
+1 [M3C:358] Myriad Landscape
+1 [M15:188] Nissa's Expedition
+1 [DIS:175] Novijen, Heart of Progress
+1 [M3C:361] Opal Palace
+1 [ZEN:221] Oran-Rief, the Vastwood
+1 [C21:399] Oversimplify
+1 [C21:391] Paradox Zone
+1 [WOC:102] Perplexing Test
+1 [DIS:123] Plaxcaster Frogling
+1 [IKO:200] Primal Empathy
+1 [STX:271] Quandrix Campus
+1 [STX:218] Quandrix Cultivator
+1 [ZEN:178] Rampaging Baloths
+1 [M12:190] Rampant Growth
+1 [CLU:93] Rapid Hybridization
+1 [MH3:271] Reef Worm
+1 [M3C:192] Replication Technique
+1 [ELD:172] Return of the Wildspeaker
+1 [ZEN:61] Rite of Replication
+1 [ORI:250] Rogue's Passage
+1 [C21:393] Ruxa, Patient Professor
+1 [C21:394] Sequence Engine
+1 [FRF:138] Shamanic Revelation
+1 [CLU:247] Simic Growth Chamber
+1 [CLU:228] Simic Signet
+1 [SUM:274] Sol Ring
+1 [C21:33] Spawning Kraken
+1 [EVE:162] Spitting Image
+1 [C21:80] Study Hall
+1 [M21:254] Temple of Mystery
+1 [SCG:143] Temple of the False God
+1 [WWK:115] Terastodon
+1 [WOC:112] Theoretical Duplication
+1 [ONS:326] Tranquil Thicket
+1 [DIS:133] Trygon Predator
+1 [DMU:261] Yavimaya Coast
+1 [STX:250] Zimone, Quandrix Prodigy
+SB: 1 [MKC:198] Adrix and Nev, Twincasters
+LAYOUT MAIN:(1,8)(CARD_TYPE,false,55)|([ELD:331],[C21:388],[C21:404],[M3C:297],[C21:394],[CLU:228],[SUM:274])([SOK:121],[STX:164],[HOU:31],[DIS:107],[RIX:33],[C21:24],[C21:26],[BFZ:6],[MKC:210],[SCG:120],[C21:389],[M15:177],[M15:178],[JOU:128],[RNA:131],[C21:221],[ROE:191],[ORI:186],[CLU:200],[DIS:123],[STX:218],[ZEN:178],[MH3:271],[C21:393],[C21:33],[WWK:115],[DIS:133],[STX:250])([C21:391],[IKO:200])([NPH:103],[GTC:213],[C21:23],[STX:184],[TSP:202],[WOC:102],[CLU:93],[ELD:172],[WOC:112])([BFZ:233],[ELD:333],[CON:142],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[FUT:171],[ONS:320],[BFZ:239],[LRW:270],[M3C:358],[DIS:175],[M3C:361],[ZEN:221],[STX:271],[ORI:250],[CLU:247],[C21:80],[M21:254],[SCG:143],[ONS:326],[DMU:261])([M13:174])([CLU:197])([THS:46],[CMM:287],[STX:190],[CHK:225],[M15:188],[C21:399],[M12:190],[M3C:192],[ZEN:61],[FRF:138],[EVE:162])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([MKC:198])

@@ -98,6 +98,11 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_Terraformer"));
+        if (choice == null) {
+            discard();
+            return;
+        }
+
         switch (choice) {
             case FOREST:
                 dependencyTypes.add(DependencyType.BecomeForest);
@@ -115,7 +120,7 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
                 dependencyTypes.add(DependencyType.BecomeSwamp);
                 break;
         }
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             game.getBattlefield()
                     .getActivePermanents(
                             StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
@@ -128,7 +133,7 @@ class TerraformerContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_ElsewhereFlask"));
+        SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_Terraformer"));
         if (choice == null) {
             return false;
         }

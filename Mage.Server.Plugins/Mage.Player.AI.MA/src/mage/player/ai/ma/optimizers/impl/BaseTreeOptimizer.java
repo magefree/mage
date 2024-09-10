@@ -8,54 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Base class for tree optimizers.
+ * AI: base class for tree optimizers.
  *
  * @author ayratn
  */
 public abstract class BaseTreeOptimizer implements TreeOptimizer {
 
     /**
-     * List of abilities that should be removed because of optimization.
-     *
-     */
-    protected List<Ability> toRemove;
-
-    /**
-     * Inner method for filtering actions.
-     * Should be implemented by classes.
+     * Filter and ignore bad actions
      *
      * @param game
      * @param actions
+     * @param actionsToRemove that must be removed/ignored from a possible AI actions
      */
-    abstract void filter(Game game, List<Ability> actions);
+    abstract void filter(Game game, List<Ability> actions, List<Ability> actionsToRemove);
 
-    /**
-     * Template method for optimization.
-     *
-     * @param game
-     * @param actions
-     */
     @Override
     public final void optimize(Game game, List<Ability> actions) {
-        filter(game, actions);
-
-        if (toRemove != null) {
-            for (Ability r : toRemove) {
-                actions.remove(r);
-            }
+        List<Ability> actionsToRemove = new ArrayList<>();
+        filter(game, actions, actionsToRemove);
+        for (Ability r : actionsToRemove) {
+            actions.remove(r);
         }
-    }
-
-    /**
-     * Mark an ability to be removed
-     * Not thread-safe for performance reasons.
-     *
-     * @param ability
-     */
-    protected void removeAbility(Ability ability) {
-        if (toRemove == null) {
-            toRemove = new ArrayList<>();
-        }
-        toRemove.add(ability);
     }
 }

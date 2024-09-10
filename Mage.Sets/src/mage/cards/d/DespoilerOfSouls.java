@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class DespoilerOfSouls extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("two other creature cards from your graveyard");
+    private static final FilterCard filter = new FilterCreatureCard("other creature cards from your graveyard");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -42,7 +42,7 @@ public final class DespoilerOfSouls extends CardImpl {
         // {B}{B}, Exile two other creature cards from your graveyard: Return Despoiler of Souls from your graveyard to the battlefield.
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(false),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new ManaCostsImpl<>("{B}{B}")
         );
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, filter)));

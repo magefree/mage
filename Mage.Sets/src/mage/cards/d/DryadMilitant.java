@@ -48,23 +48,18 @@ public final class DryadMilitant extends CardImpl {
 
 class DryadMilitantReplacementEffect extends ReplacementEffectImpl {
 
-    public DryadMilitantReplacementEffect() {
+    DryadMilitantReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If an instant or sorcery card would be put into a graveyard from anywhere, exile it instead";
     }
 
-    public DryadMilitantReplacementEffect(final DryadMilitantReplacementEffect effect) {
+    private DryadMilitantReplacementEffect(final DryadMilitantReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public DryadMilitantReplacementEffect copy() {
         return new DryadMilitantReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

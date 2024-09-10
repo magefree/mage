@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -15,26 +14,19 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class ErtaiTheCorrupted extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or enchantment");
-    
-    static {
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
-    }
 
     public ErtaiTheCorrupted(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}{B}");
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
@@ -44,10 +36,10 @@ public final class ErtaiTheCorrupted extends CardImpl {
         // {U}, {tap}, Sacrifice a creature or enchantment: Counter target spell.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
-}
+    }
 
     private ErtaiTheCorrupted(final ErtaiTheCorrupted card) {
         super(card);

@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -6,7 +5,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -21,7 +20,7 @@ public final class AetherGale extends CardImpl {
 
         // Return six target nonland permanents to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent(6,6, new FilterNonlandPermanent(), false));
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent(6,6, StaticFilters.FILTER_PERMANENTS_NON_LAND, false));
     }
 
     private AetherGale(final AetherGale card) {

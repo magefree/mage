@@ -40,12 +40,12 @@ public final class BuriedAlive extends CardImpl {
 
 class BuriedAliveEffect extends OneShotEffect {
 
-    public BuriedAliveEffect() {
+    BuriedAliveEffect() {
         super(Outcome.Detriment);
         staticText = "search your library for up to three creature cards, put them into your graveyard, then shuffle";
     }
 
-    public BuriedAliveEffect(final BuriedAliveEffect effect) {
+    private BuriedAliveEffect(final BuriedAliveEffect effect) {
         super(effect);
     }
 

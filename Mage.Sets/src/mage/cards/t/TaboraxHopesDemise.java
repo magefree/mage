@@ -46,7 +46,7 @@ public final class TaboraxHopesDemise extends CardImpl {
     public TaboraxHopesDemise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -98,7 +98,7 @@ class TaboraxHopesDemiseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent == null || !permanent.hasSubtype(SubType.CLERIC, game)) {
             return false;
         }

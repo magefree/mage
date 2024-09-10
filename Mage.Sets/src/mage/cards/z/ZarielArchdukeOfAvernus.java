@@ -27,7 +27,7 @@ public final class ZarielArchdukeOfAvernus extends CardImpl {
     public ZarielArchdukeOfAvernus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZARIEL);
         this.setStartingLoyalty(4);
 

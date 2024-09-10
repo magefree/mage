@@ -31,7 +31,7 @@ public final class BlazingBladeAskari extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // {2}: Blazing Blade Askari becomes colorless until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(new ObjectColor(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(ObjectColor.COLORLESS, Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
     }
 
     private BlazingBladeAskari(final BlazingBladeAskari card) {

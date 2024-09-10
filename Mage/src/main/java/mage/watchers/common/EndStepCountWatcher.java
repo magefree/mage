@@ -17,6 +17,9 @@ public class EndStepCountWatcher extends Watcher {
 
     private final Map<UUID, Integer> playerMap = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public EndStepCountWatcher() {
         super(WatcherScope.GAME);
     }

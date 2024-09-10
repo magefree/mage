@@ -46,7 +46,7 @@ public final class TovolarDireOverlord extends CardImpl {
     public TovolarDireOverlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
         this.power = new MageInt(3);

@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -8,7 +9,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author nantuko
  */
 public class SacrificeEquippedEffect extends OneShotEffect {
@@ -18,7 +18,7 @@ public class SacrificeEquippedEffect extends OneShotEffect {
         staticText = "sacrifice equipped permanent";
     }
 
-    public SacrificeEquippedEffect(final SacrificeEquippedEffect effect) {
+    protected SacrificeEquippedEffect(final SacrificeEquippedEffect effect) {
         super(effect);
     }
 

@@ -40,13 +40,13 @@ public final class SethronHurloonGeneral extends CardImpl {
     public SethronHurloonGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever Sethron, Hurloon General or another nontoken Minotaur enters the battlefield under your control, create a 2/3 red Minotaur creature token.
+        // Whenever Sethron, Hurloon General or another nontoken Minotaur you control enters, create a 2/3 red Minotaur creature token.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new MinotaurToken()), filter, false, true
         ));

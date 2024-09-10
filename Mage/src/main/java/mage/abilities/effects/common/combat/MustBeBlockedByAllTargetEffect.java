@@ -3,6 +3,7 @@
 package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.constants.AbilityType;
@@ -12,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.BlockedAttackerWatcher;
 
 /**
- *
  * @author LevelX2
  */
 public class MustBeBlockedByAllTargetEffect extends RequirementEffect {
@@ -24,12 +24,12 @@ public class MustBeBlockedByAllTargetEffect extends RequirementEffect {
                 "do so";
     }
 
-    public MustBeBlockedByAllTargetEffect(final MustBeBlockedByAllTargetEffect effect) {
+    protected MustBeBlockedByAllTargetEffect(final MustBeBlockedByAllTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {        
+    public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent attackingCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (attackingCreature != null && attackingCreature.isAttacking()) {
             if (source.getAbilityType() != AbilityType.STATIC) {

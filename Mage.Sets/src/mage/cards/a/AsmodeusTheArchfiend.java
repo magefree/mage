@@ -1,6 +1,6 @@
 package mage.cards.a;
 
-import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -11,9 +11,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -21,8 +21,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class AsmodeusTheArchfiend extends CardImpl {
@@ -30,7 +32,7 @@ public final class AsmodeusTheArchfiend extends CardImpl {
     public AsmodeusTheArchfiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(6);
@@ -58,7 +60,7 @@ public final class AsmodeusTheArchfiend extends CardImpl {
 
 class AsmodeusTheArchfiendReplacementEffect extends ReplacementEffectImpl {
 
-    public AsmodeusTheArchfiendReplacementEffect() {
+    AsmodeusTheArchfiendReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         this.staticText = "If you would draw a card, exile the top card of your library face down instead";
     }
@@ -115,8 +117,8 @@ class AsmodeusTheArchfiendReturnAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (super.activate(game, allowedIdentifiers, noMana)) {
             Permanent sourcePermanent = this.getSourcePermanentIfItStillExists(game);
             if (sourcePermanent != null) {
                 // Needed to save zcc on activation so it still works if the permanent changes zones in response to the ability being activated.
@@ -130,7 +132,7 @@ class AsmodeusTheArchfiendReturnAbility extends ActivatedAbilityImpl {
 
 class AsmodeusTheArchfiendReturnEffect extends OneShotEffect {
 
-    public AsmodeusTheArchfiendReturnEffect() {
+    AsmodeusTheArchfiendReturnEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Return all cards exiled with {this} to their owner's hand and you lose that much life";
     }

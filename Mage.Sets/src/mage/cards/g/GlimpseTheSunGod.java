@@ -1,19 +1,15 @@
 
 package mage.cards.g;
 
-import mage.abilities.Ability;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  * @author LevelX2
@@ -26,7 +22,8 @@ public final class GlimpseTheSunGod extends CardImpl {
         // Tap X target creatures. Scry 1.
         this.getSpellAbility().addEffect(new TapTargetEffect("tap X target creatures"));
         this.getSpellAbility().addEffect(new ScryEffect(1));
-        this.getSpellAbility().setTargetAdjuster(GlimpseTheSunGodAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private GlimpseTheSunGod(final GlimpseTheSunGod card) {
@@ -36,16 +33,5 @@ public final class GlimpseTheSunGod extends CardImpl {
     @Override
     public GlimpseTheSunGod copy() {
         return new GlimpseTheSunGod(this);
-    }
-}
-
-enum GlimpseTheSunGodAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int numberToTap = ability.getManaCostsToPay().getX();
-        ability.addTarget(new TargetCreaturePermanent(numberToTap, numberToTap, FILTER_PERMANENT_CREATURES, false));
     }
 }

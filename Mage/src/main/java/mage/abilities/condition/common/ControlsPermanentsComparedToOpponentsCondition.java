@@ -39,12 +39,11 @@ public class ControlsPermanentsComparedToOpponentsCondition implements Condition
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("if you control ");
-        sb.append(type.getText1()).append(" ");
-        sb.append(filterPermanent.getMessage()).append(" ");
-        sb.append(type.getText2());
-        sb.append(" each opponent");
-        return sb.toString();
+        switch (type) {
+            case FEWER_THAN: return String.format("you control fewer %s than each opponent", filterPermanent.getMessage());
+            case MORE_THAN: return String.format("you control more %s than each opponent", filterPermanent.getMessage());
+            default: return "";
+        }
     }
 
 }

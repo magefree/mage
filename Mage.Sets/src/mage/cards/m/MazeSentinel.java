@@ -44,7 +44,7 @@ public final class MazeSentinel extends CardImpl {
 
     }
 
-    public MazeSentinel (final MazeSentinel card) {
+    private MazeSentinel(final MazeSentinel card) {
         super(card);
     }
 

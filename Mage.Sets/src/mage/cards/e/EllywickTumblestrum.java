@@ -24,7 +24,7 @@ public final class EllywickTumblestrum extends CardImpl {
     public EllywickTumblestrum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELLYWICK);
         this.setStartingLoyalty(4);
 
@@ -76,13 +76,13 @@ class EllywickTumblestrumEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_CREATURE);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {
             player.revealCards(source, new CardsImpl(card), game);
             player.moveCards(card, Zone.HAND, source, game);
             cards.remove(card);
-            if (card.isLegendary()) {
+            if (card.isLegendary(game)) {
                 player.gainLife(3, game, source);
             }
         }

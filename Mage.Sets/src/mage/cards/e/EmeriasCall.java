@@ -8,7 +8,7 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class EmeriasCall extends ModalDoubleFacesCard {
+public final class EmeriasCall extends ModalDoubleFacedCard {
 
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("Non-Angel creatures you control");
@@ -52,10 +52,10 @@ public final class EmeriasCall extends ModalDoubleFacesCard {
         // Emeria, Shattered Skyclave
         // Land
 
-        // As Emeria, Shattered Skyclave enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As Emeria, Shattered Skyclave enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(
                 new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
-                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+                "you may pay 3 life. If you don't, it enters tapped"
         ));
 
         // {T}: Add {W}.

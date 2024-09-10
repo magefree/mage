@@ -27,7 +27,7 @@ public final class AncientKavu extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}: Ancient Kavu becomes colorless until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(new ObjectColor(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(ObjectColor.COLORLESS, Duration.EndOfTurn), new ManaCostsImpl<>("{2}")));
     }
 
     private AncientKavu(final AncientKavu card) {

@@ -65,7 +65,7 @@ class GlisteningOilEffect extends OneShotEffect {
         staticText = "put a -1/-1 counter on enchanted creature";
     }
 
-    GlisteningOilEffect(final GlisteningOilEffect effect) {
+    private GlisteningOilEffect(final GlisteningOilEffect effect) {
         super(effect);
     }
 

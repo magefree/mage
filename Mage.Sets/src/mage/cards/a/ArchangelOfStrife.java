@@ -1,12 +1,10 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -36,7 +34,7 @@ public final class ArchangelOfStrife extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As Archangel of Strife enters the battlefield, each player chooses war or peace.
-        this.addAbility(new EntersBattlefieldAbility(new ArchangelOfStrifeChooseEffect(), "As Archangel of Strife enters the battlefield, each player chooses war or peace."));
+        this.addAbility(new AsEntersBattlefieldAbility(new ArchangelOfStrifeChooseEffect()));
 
         // Creatures controlled by players who chose war get +3/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchangelOfStrifeWarEffect()));
@@ -57,13 +55,13 @@ public final class ArchangelOfStrife extends CardImpl {
 
 class ArchangelOfStrifeChooseEffect extends OneShotEffect {
 
-    public ArchangelOfStrifeChooseEffect() {
+    ArchangelOfStrifeChooseEffect() {
         super(Outcome.Neutral);
 
         this.staticText = "each player chooses war or peace.";
     }
 
-    public ArchangelOfStrifeChooseEffect(ArchangelOfStrifeChooseEffect effect) {
+    private ArchangelOfStrifeChooseEffect(final ArchangelOfStrifeChooseEffect effect) {
         super(effect);
     }
 
@@ -101,7 +99,7 @@ class ArchangelOfStrifeChooseEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public ArchangelOfStrifeChooseEffect copy() {
         return new ArchangelOfStrifeChooseEffect(this);
     }
 
@@ -128,7 +126,7 @@ class ArchangelOfStrifeWarEffect extends BoostAllEffect {
         return false;
     }
 
-    public ArchangelOfStrifeWarEffect(ArchangelOfStrifeWarEffect effect) {
+    private ArchangelOfStrifeWarEffect(final ArchangelOfStrifeWarEffect effect) {
         super(effect);
     }
 
@@ -159,7 +157,7 @@ class ArchangelOfStrifePeaceEffect extends BoostAllEffect {
         return false;
     }
 
-    public ArchangelOfStrifePeaceEffect(ArchangelOfStrifePeaceEffect effect) {
+    private ArchangelOfStrifePeaceEffect(final ArchangelOfStrifePeaceEffect effect) {
         super(effect);
     }
 

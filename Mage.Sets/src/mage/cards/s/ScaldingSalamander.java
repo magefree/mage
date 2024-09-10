@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -13,10 +14,9 @@ import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 
 /**
- *
  * @author TheElk801
  */
 public final class ScaldingSalamander extends CardImpl {
@@ -25,7 +25,7 @@ public final class ScaldingSalamander extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 

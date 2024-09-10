@@ -24,7 +24,7 @@ public final class RevekaWizardSavant extends CardImpl {
 
     public RevekaWizardSavant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(0);

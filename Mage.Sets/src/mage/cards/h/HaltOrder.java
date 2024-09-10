@@ -21,10 +21,10 @@ public final class HaltOrder extends CardImpl {
         // Counter target artifact spell. Draw a card.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterArtifactSpell()));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
-    public HaltOrder (final HaltOrder card) {
+    private HaltOrder(final HaltOrder card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         // Courser of Kruphix {1}{G}{G}
         // Play with the top card of your library revealed.
         // You may play the top card of your library if it's a land card.
-        // Whenever a land enters the battlefield under your control, you gain 1 life.
+        // Whenever a land you control enters, you gain 1 life.
         addCard(Zone.LIBRARY, playerB, "Courser of Kruphix");
         skipInitShuffling(); // to keep this card on top of library
 
@@ -91,8 +91,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of Pearls", true);
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of Pearls using Morph", true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Villainous Wealth", playerB);
         setChoice(playerA, "X=3");

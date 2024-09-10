@@ -1,6 +1,7 @@
 
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -11,14 +12,13 @@ import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterPermanent filter;
-    private boolean setTargetPointer;
-    private boolean onlyToControllerGraveyard;
+    private final boolean setTargetPointer;
+    private final boolean onlyToControllerGraveyard;
 
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
         this(effect, optional, filter, setTargetPointer, false);
@@ -34,7 +34,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
                 + " graveyard from the battlefield, ");
     }
 
-    public PutIntoGraveFromBattlefieldAllTriggeredAbility(final PutIntoGraveFromBattlefieldAllTriggeredAbility ability) {
+    protected PutIntoGraveFromBattlefieldAllTriggeredAbility(final PutIntoGraveFromBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.onlyToControllerGraveyard = ability.onlyToControllerGraveyard;
@@ -49,24 +49,24 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), this.getControllerId(), this, game)) {
-                if (onlyToControllerGraveyard && !this.isControlledBy(game.getOwnerId(zEvent.getTargetId()))) {
-                    return false;
-                }
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game.getObject(event.getTargetId()).getZoneChangeCounter(game)));
-                    }
-                }
-                return true;
-            }
+        if (!zEvent.isDiesEvent() || !filter.match(zEvent.getTarget(), this.getControllerId(), this, game)
+                || onlyToControllerGraveyard && !this.isControlledBy(game.getOwnerId(zEvent.getTargetId()))) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("permanentDied", zEvent.getTarget());
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game.getObject(event.getTargetId()).getZoneChangeCounter(game)));
+        }
+        return true;
     }
 
     @Override
     public PutIntoGraveFromBattlefieldAllTriggeredAbility copy() {
         return new PutIntoGraveFromBattlefieldAllTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

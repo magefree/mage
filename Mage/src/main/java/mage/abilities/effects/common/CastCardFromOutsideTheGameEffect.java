@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Set;
+
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -29,7 +30,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
         this.filterCard = filter;
     }
 
-    public CastCardFromOutsideTheGameEffect(final CastCardFromOutsideTheGameEffect effect) {
+    protected CastCardFromOutsideTheGameEffect(final CastCardFromOutsideTheGameEffect effect) {
         super(effect);
         filterCard = effect.filterCard;
     }
@@ -69,7 +70,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
             }
 
             TargetCard target = new TargetCard(Zone.OUTSIDE, filterCard);
-            if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
+            if (player.choose(Outcome.Benefit, filteredCards, target, source, game)) {
                 Card card = player.getSideboard().get(target.getFirstTarget(), game);
                 if (card != null) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);

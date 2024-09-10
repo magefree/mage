@@ -83,7 +83,7 @@ class CallToArmsEffect extends ContinuousEffectImpl {
                 + "the chosen player controls but isn't tied for most common.";
     }
 
-    public CallToArmsEffect(final CallToArmsEffect effect) {
+    private CallToArmsEffect(final CallToArmsEffect effect) {
         super(effect);
     }
 
@@ -115,9 +115,11 @@ class CallToArmsStateTriggeredAbility extends StateTriggeredAbility {
 
     public CallToArmsStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        setTriggerPhrase("When the chosen color isn't the most common color among nontoken permanents " +
+                "the chosen player controls or is tied for most common, ");
     }
 
-    public CallToArmsStateTriggeredAbility(final CallToArmsStateTriggeredAbility ability) {
+    private CallToArmsStateTriggeredAbility(final CallToArmsStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -139,13 +141,6 @@ class CallToArmsStateTriggeredAbility extends StateTriggeredAbility {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When the chosen color isn't the most common color "
-                + "among nontoken permanents the chosen player controls "
-                + "or is tied for most common, sacrifice {this}";
     }
 
 }

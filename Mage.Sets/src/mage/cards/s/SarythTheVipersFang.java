@@ -14,9 +14,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterUntappedCreature;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -29,11 +28,13 @@ import java.util.UUID;
  */
 public final class SarythTheVipersFang extends CardImpl {
 
-    private static final FilterPermanent filterTapped = new FilterControlledCreaturePermanent("tapped creatures");
+    private static final FilterPermanent filterTapped = new FilterCreaturePermanent("tapped creatures");
+    private static final FilterPermanent filterUntapped = new FilterCreaturePermanent("untapped creatures");
     private static final FilterPermanent filterAbility = new FilterControlledPermanent("another target creature or land you control");
 
     static {
         filterTapped.add(TappedPredicate.TAPPED);
+        filterUntapped.add(TappedPredicate.UNTAPPED);
         filterAbility.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 CardType.LAND.getPredicate()
@@ -44,20 +45,20 @@ public final class SarythTheVipersFang extends CardImpl {
     public SarythTheVipersFang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         // Other tapped creatures you control have deathtouch.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filterTapped, true)
         ));
 
         // Other untapped creatures you control have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterUntappedCreature("untapped creatures"), true)
+        this.addAbility(new SimpleStaticAbility(
+                new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filterUntapped, true)
         ));
 
         // {1}, {T}: Untap another target creature or land you control.

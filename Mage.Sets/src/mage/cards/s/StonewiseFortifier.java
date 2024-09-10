@@ -52,23 +52,18 @@ public final class StonewiseFortifier extends CardImpl {
 
 class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
 
-    public StonewiseFortifierPreventAllDamageToEffect() {
+    StonewiseFortifierPreventAllDamageToEffect() {
         super(Duration.EndOfTurn);
         staticText = "Prevent all damage that would be dealt to {this} by target creature this turn";
     }
 
-    public StonewiseFortifierPreventAllDamageToEffect(final StonewiseFortifierPreventAllDamageToEffect effect) {
+    private StonewiseFortifierPreventAllDamageToEffect(final StonewiseFortifierPreventAllDamageToEffect effect) {
         super(effect);
     }
 
     @Override
     public StonewiseFortifierPreventAllDamageToEffect copy() {
         return new StonewiseFortifierPreventAllDamageToEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -93,7 +88,7 @@ class StonewiseFortifierPreventAllDamageToEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId())) {
-            return event.getSourceId().equals(targetPointer.getFirst(game, source));
+            return event.getSourceId().equals(getTargetPointer().getFirst(game, source));
         }
         return false;
     }

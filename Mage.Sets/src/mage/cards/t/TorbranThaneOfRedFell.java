@@ -23,7 +23,7 @@ public final class TorbranThaneOfRedFell extends CardImpl {
     public TorbranThaneOfRedFell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(2);

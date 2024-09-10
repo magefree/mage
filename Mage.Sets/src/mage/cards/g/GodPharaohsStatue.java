@@ -21,7 +21,7 @@ public final class GodPharaohsStatue extends CardImpl {
     public GodPharaohsStatue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Spells your opponents cast cost {2} more to cast.
         this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(2, new FilterCard("Spells"), TargetController.OPPONENT)));

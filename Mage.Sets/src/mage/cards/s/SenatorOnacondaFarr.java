@@ -23,7 +23,7 @@ public final class SenatorOnacondaFarr extends CardImpl {
 
     public SenatorOnacondaFarr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RODIAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);

@@ -30,7 +30,7 @@ public final class ObuunMulDayaAncestor extends CardImpl {
     public ObuunMulDayaAncestor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(3);
@@ -45,7 +45,7 @@ public final class ObuunMulDayaAncestor extends CardImpl {
         ));
         this.addAbility(ability);
 
-        // Landfall - Whenever a land enters the battlefield under your control, put a +1/+1 counter on target creature.
+        // Landfall - Whenever a land you control enters, put a +1/+1 counter on target creature.
         ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

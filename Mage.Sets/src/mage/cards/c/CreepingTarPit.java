@@ -36,11 +36,13 @@ public final class CreepingTarPit extends CardImpl {
 
         // {1}{U}{B}: Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and can't be blocked. It's still a land.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
-                new CreatureToken(3, 2, "3/2 blue and black Elemental creature and can't be blocked")
+                new CreatureToken(3, 2, "3/2 blue and black Elemental creature")
                         .withColor("BU")
                         .withSubType(SubType.ELEMENTAL)
                         .withAbility(new CantBeBlockedSourceAbility()),
-                "land", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}{B}")));
+                CardType.LAND, Duration.EndOfTurn)
+                .setText("{this} becomes a 3/2 blue and black Elemental creature until end of turn and can't be blocked this turn. It's still a land"),
+                new ManaCostsImpl<>("{1}{U}{B}")));
     }
 
     private CreepingTarPit(final CreepingTarPit card) {

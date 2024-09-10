@@ -34,7 +34,7 @@ public final class FreyaliseLlanowarsFury extends CardImpl {
 
     public FreyaliseLlanowarsFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FREYALISE);
 
         this.setStartingLoyalty(3);

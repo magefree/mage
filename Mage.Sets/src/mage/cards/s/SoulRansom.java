@@ -13,7 +13,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,7 +45,7 @@ public final class SoulRansom extends CardImpl {
                 Zone.BATTLEFIELD,
                 new SoulRansomEffect(),
                 new DiscardTargetCost(
-                        new TargetCardInHand(2, 2, new FilterCard("two cards"))
+                        new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)
                 )
         );
         ability2.setMayActivate(TargetController.OPPONENT);
@@ -67,10 +67,10 @@ class SoulRansomEffect extends OneShotEffect {
 
     SoulRansomEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this}'s controller sacrifices it, then draws two cards. Only any opponent may activate this ability";
+        this.staticText = "{this}'s controller sacrifices it, then draws two cards. Only your opponents may activate this ability";
     }
 
-    SoulRansomEffect(final SoulRansomEffect effect) {
+    private SoulRansomEffect(final SoulRansomEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class BeaconOfDestinyEffect extends RedirectionEffect {
         this.damageSource = new TargetSource();
     }
 
-    public BeaconOfDestinyEffect(final BeaconOfDestinyEffect effect) {
+    private BeaconOfDestinyEffect(final BeaconOfDestinyEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }
@@ -71,8 +71,8 @@ class BeaconOfDestinyEffect extends RedirectionEffect {
 
     @Override
     public void init(Ability source, Game game) {
-        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
+        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

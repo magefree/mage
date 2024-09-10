@@ -22,7 +22,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.target.targetpointer.FixedTargets;
 
 import java.util.ArrayList;
@@ -42,7 +42,8 @@ public final class WakeTheDead extends CardImpl {
 
         // Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
         this.getSpellAbility().addEffect(new WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().setTargetAdjuster(WakeTheDeadAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private WakeTheDead(final WakeTheDead card) {
@@ -55,24 +56,14 @@ public final class WakeTheDead extends CardImpl {
     }
 }
 
-enum WakeTheDeadAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
-    }
-}
-
 class WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect {
 
-    public WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect() {
+    WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step";
     }
 
-    public WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect(final WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect effect) {
+    private WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect(final WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect effect) {
         super(effect);
     }
 

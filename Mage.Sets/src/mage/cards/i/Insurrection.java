@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -41,12 +42,12 @@ public final class Insurrection extends CardImpl {
 
 class InsurrectionEffect extends OneShotEffect {
 
-    public InsurrectionEffect() {
+    InsurrectionEffect() {
         super(Outcome.Benefit);
         this.staticText = "Untap all creatures and gain control of them until end of turn. They gain haste until end of turn";
     }
 
-    public InsurrectionEffect(final InsurrectionEffect effect) {
+    private InsurrectionEffect(final InsurrectionEffect effect) {
         super(effect);
     }
 
@@ -57,17 +58,15 @@ class InsurrectionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean result = false;
         ContinuousEffect gainControl = new GainControlTargetEffect(Duration.EndOfTurn);
         ContinuousEffect gainHaste = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(CardType.CREATURE, game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
             creature.untap(game);
             gainControl.setTargetPointer(new FixedTarget(creature.getId(), game));
             gainHaste.setTargetPointer(new FixedTarget(creature.getId(), game));
             game.addEffect(gainControl, source);
             game.addEffect(gainHaste, source);
-            result = true;
         }
-        return result;
+        return true;
     }
 }

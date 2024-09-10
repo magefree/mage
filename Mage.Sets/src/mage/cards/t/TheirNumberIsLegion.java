@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.common.MayCastFromGraveyardSourceAbility;
 import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -23,7 +23,7 @@ public final class TheirNumberIsLegion extends CardImpl {
 
         // Create X tapped 2/2 black Necron Warrior artifact creature tokens, then you gain life equal to the number of artifacts you control. Exile Their Number Is Legion.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new NecronWarriorToken(), ManacostVariableValue.REGULAR
+                new NecronWarriorToken(), GetXValue.instance, true, false
         ));
         this.getSpellAbility().addEffect(new GainLifeEffect(ArtifactYouControlCount.instance)
                 .setText(", then you gain life equal to the number of artifacts you control"));

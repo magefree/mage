@@ -38,7 +38,7 @@ public final class ErtaisTrickery extends CardImpl {
 
 class ErtaisTrickeryEffect extends CounterTargetEffect {
 
-    public ErtaisTrickeryEffect() {
+    ErtaisTrickeryEffect() {
         super();
         staticText = "Counter target spell if it was kicked.";
     }

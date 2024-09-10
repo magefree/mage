@@ -18,7 +18,7 @@ public final class FrostMarsh extends CardImpl {
 
     public FrostMarsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Frost Marsh enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -37,7 +37,7 @@ public final class PyreSledgeArsonist extends CardImpl {
     public PyreSledgeArsonist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -48,7 +48,7 @@ public final class PyreSledgeArsonist extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(ability.addHint(hint));
+        this.addAbility(ability.addHint(hint), new PyreSledgeArsonistWatcher());
     }
 
     private PyreSledgeArsonist(final PyreSledgeArsonist card) {

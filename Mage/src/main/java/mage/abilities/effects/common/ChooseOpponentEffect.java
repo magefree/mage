@@ -11,7 +11,6 @@ import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class ChooseOpponentEffect extends OneShotEffect {
@@ -23,7 +22,7 @@ public class ChooseOpponentEffect extends OneShotEffect {
         this.staticText = "choose an opponent";
     }
 
-    public ChooseOpponentEffect(final ChooseOpponentEffect effect) {
+    protected ChooseOpponentEffect(final ChooseOpponentEffect effect) {
         super(effect);
     }
 

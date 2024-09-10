@@ -32,7 +32,7 @@ public final class OpalGuardian extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}{W}");
 
         // When an opponent casts a creature spell, if Opal Guardian is an enchantment, Opal Guardian becomes a 3/4 Gargoyle creature with flying and protection from red.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalGuardianGargoyle(), "", Duration.WhileOnBattlefield, true, false),
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalGuardianGargoyle(), null, Duration.WhileOnBattlefield),
                 new FilterCreatureSpell(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 3/4 Gargoyle creature with flying and protection from red."));
@@ -58,7 +58,7 @@ class OpalGuardianGargoyle extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
-    public OpalGuardianGargoyle(final OpalGuardianGargoyle token) {
+    private OpalGuardianGargoyle(final OpalGuardianGargoyle token) {
         super(token);
     }
 

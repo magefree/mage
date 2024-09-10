@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -9,7 +8,7 @@ import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -21,7 +20,7 @@ public final class WailOfTheNim extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
         // Choose one - Regenerate each creature you control;
-        this.getSpellAbility().addEffect(new RegenerateAllEffect(new FilterControlledCreaturePermanent()));
+        this.getSpellAbility().addEffect(new RegenerateAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE));
         
         // or Wail of the Nim deals 1 damage to each creature and each player.
         Mode mode = new Mode(new DamageEverythingEffect(1));

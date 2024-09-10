@@ -21,6 +21,8 @@ public final class TheHive extends CardImpl {
 
     public TheHive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
+
+        // {5}, {T}: Create a 1/1 colorless Insect artifact creature token with flying named Wasp. (It can’t be blocked except by creatures with flying or reach.)
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WaspToken(), 1), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

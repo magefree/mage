@@ -28,7 +28,7 @@ public final class KuldothaRingleader extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public KuldothaRingleader (final KuldothaRingleader card) {
+    private KuldothaRingleader(final KuldothaRingleader card) {
         super(card);
     }
 

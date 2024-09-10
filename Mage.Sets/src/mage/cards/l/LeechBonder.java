@@ -26,6 +26,7 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -75,12 +76,12 @@ public final class LeechBonder extends CardImpl {
 
 class LeechBonderEffect extends OneShotEffect {
 
-    public LeechBonderEffect() {
+    LeechBonderEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "Move a counter from target creature onto a second target creature";
     }
 
-    public LeechBonderEffect(final LeechBonderEffect effect) {
+    private LeechBonderEffect(final LeechBonderEffect effect) {
         super(effect);
     }
 
@@ -100,12 +101,12 @@ class LeechBonderEffect extends OneShotEffect {
             return false;
         }
 
-        Set<String> possibleChoices = new HashSet<>(fromPermanent.getCounters(game).keySet());
-        if (possibleChoices.size() == 0) {
+        Set<String> possibleChoices = new LinkedHashSet<>(fromPermanent.getCounters(game).keySet());
+        if (possibleChoices.isEmpty()) {
             return false;
         }
 
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceImpl(false);
         choice.setChoices(possibleChoices);
         if (controller.choose(outcome, choice, game)) {
             String chosen = choice.getChoice();

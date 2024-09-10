@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -12,17 +11,23 @@ import mage.game.command.Emblem;
 import mage.players.Player;
 
 /**
- *
  * @author spjspj
  */
 public final class DovinBaanEmblem extends Emblem {
 
     public DovinBaanEmblem() {
-        this.setName("Emblem Dovin");
+        super("Emblem Dovin");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new DovinBaanCantUntapEffect());
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("KLD");
+    private DovinBaanEmblem(final DovinBaanEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public DovinBaanEmblem copy() {
+        return new DovinBaanEmblem(this);
     }
 }
 

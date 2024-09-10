@@ -32,7 +32,7 @@ public final class CloudheathDrake extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
     }
 
-    public CloudheathDrake (final CloudheathDrake card) {
+    private CloudheathDrake(final CloudheathDrake card) {
         super(card);
     }
 

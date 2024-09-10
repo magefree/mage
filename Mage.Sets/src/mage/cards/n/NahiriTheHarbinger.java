@@ -53,7 +53,7 @@ public final class NahiriTheHarbinger extends CardImpl {
 
     public NahiriTheHarbinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
 
         this.setStartingLoyalty(4);
@@ -95,7 +95,7 @@ class NahiriTheHarbingerEffect extends SearchEffect {
         this.staticText = "Search your library for an artifact or creature card, put it onto the battlefield, then shuffle. It gains haste. Return it to your hand at the beginning of the next end step";
     }
 
-    NahiriTheHarbingerEffect(final NahiriTheHarbingerEffect effect) {
+    private NahiriTheHarbingerEffect(final NahiriTheHarbingerEffect effect) {
         super(effect);
     }
 

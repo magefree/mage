@@ -6,7 +6,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.MaxManaValueControlledPermanentPredicate;
+import mage.filter.predicate.permanent.MaxManaValueControlledCreatureOrPlaneswalkerPredicate;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public final class SoulShatter extends CardImpl {
     );
 
     static {
-        filter.add(MaxManaValueControlledPermanentPredicate.instance);
+        filter.add(MaxManaValueControlledCreatureOrPlaneswalkerPredicate.instance);
     }
 
     public SoulShatter(UUID ownerId, CardSetInfo setInfo) {

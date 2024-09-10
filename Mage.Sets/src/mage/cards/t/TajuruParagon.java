@@ -47,7 +47,7 @@ public final class TajuruParagon extends CardImpl {
         // When Tajuru Paragon enters the battlefield, if it was kicked, reveal the top six cards of your library. You may put a card that shares a creature type with it from among them into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TajuruParagonEffect()),
-                KickedCondition.ONCE, "When {this} enters the battlefield, " +
+                KickedCondition.ONCE, "When {this} enters, " +
                 "if it was kicked, reveal the top six cards of your library. " +
                 "You may put a card that shares a creature type with it from among them into your hand. " +
                 "Put the rest on the bottom of your library in a random order."
@@ -92,10 +92,10 @@ class TajuruParagonEffect extends OneShotEffect {
             FilterCard filter = new FilterCard("card that shares a creature type with " + permanent.getName());
             filter.add(new SharesCreatureTypePredicate(permanent));
             TargetCard target = new TargetCardInLibrary(0, 1, filter);
-            player.choose(outcome, cards, target, game);
+            player.choose(outcome, cards, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                player.moveCards(card, Zone.HAND, source, game);
+                player.moveCardToHandWithInfo(card, source, game, true);
                 cards.remove(card);
             }
         }

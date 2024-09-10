@@ -38,7 +38,7 @@ public final class MuxusGoblinGrandee extends CardImpl {
     public MuxusGoblinGrandee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(4);

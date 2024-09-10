@@ -41,12 +41,12 @@ public final class SwiftSilence extends CardImpl {
 
 class SwiftSilenceEffect extends OneShotEffect {
 
-    public SwiftSilenceEffect() {
+    SwiftSilenceEffect() {
         super(Outcome.Detriment);
         staticText = "Counter all other spells. Draw a card for each spell countered this way.";
     }
 
-    public SwiftSilenceEffect(final SwiftSilenceEffect effect) {
+    private SwiftSilenceEffect(final SwiftSilenceEffect effect) {
         super(effect);
     }
 

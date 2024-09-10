@@ -29,7 +29,7 @@ public class DetainAllEffect extends OneShotEffect {
         this.staticText = "detain " + filter.getMessage();
     }
 
-    public DetainAllEffect(final DetainAllEffect effect) {
+    protected DetainAllEffect(final DetainAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -46,8 +46,7 @@ public class DetainAllEffect extends OneShotEffect {
             if (!game.isSimulation()) {
                 game.informPlayers("Detained permanent: " + permanent.getName());
             }
-            FixedTarget fixedTarget = new FixedTarget(permanent, game);
-            detainedObjects.add(fixedTarget);
+            detainedObjects.add(new FixedTarget(permanent, game));
         }
 
         game.addEffect(new DetainAllRestrictionEffect(detainedObjects), source);
@@ -65,7 +64,7 @@ class DetainAllRestrictionEffect extends RestrictionEffect {
         staticText = "";
     }
 
-    public DetainAllRestrictionEffect(final DetainAllRestrictionEffect effect) {
+    protected DetainAllRestrictionEffect(final DetainAllRestrictionEffect effect) {
         super(effect);
         this.detainedObjects = effect.detainedObjects;
     }

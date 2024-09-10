@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -12,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -24,7 +22,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public final class DauthiWarlord extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures with shadow");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures with shadow on the battlefield");
 
     static{
         filter.add(new AbilityPredicate(ShadowAbility.class));
@@ -41,7 +39,7 @@ public final class DauthiWarlord extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
         
         // Dauthi Warlord's power is equal to the number of creatures with shadow on the battlefield.
-        Effect effect = new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
+        Effect effect = new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(filter));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 

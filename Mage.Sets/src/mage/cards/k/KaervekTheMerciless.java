@@ -23,7 +23,7 @@ public final class KaervekTheMerciless extends CardImpl {
 
     public KaervekTheMerciless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -49,12 +49,12 @@ public final class KaervekTheMerciless extends CardImpl {
 
 class KaervekTheMercilessEffect extends OneShotEffect {
 
-    public KaervekTheMercilessEffect() {
+    KaervekTheMercilessEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals damage equal to that spell's mana value to any target";
     }
 
-    public KaervekTheMercilessEffect(final KaervekTheMercilessEffect effect) {
+    private KaervekTheMercilessEffect(final KaervekTheMercilessEffect effect) {
         super(effect);
     }
 

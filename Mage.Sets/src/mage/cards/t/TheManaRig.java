@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class TheManaRig extends CardImpl {
 
     public TheManaRig(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever you cast a multicolored spell, create a tapped Powerstone token.
         this.addAbility(new SpellCastControllerTriggeredAbility(
@@ -34,7 +34,7 @@ public final class TheManaRig extends CardImpl {
 
         // {X}{X}{X}, {T}: Look at the top X cards of your library. Put up to two of them into your hand and the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
-                ManacostVariableValue.REGULAR, 2, PutCards.HAND, PutCards.BOTTOM_RANDOM, true
+                GetXValue.instance, 2, PutCards.HAND, PutCards.BOTTOM_RANDOM, true
                 ).setText("Look at the top X cards of your library. " +
                 "Put up to two of them into your hand and the rest on the bottom of your library in a random order"),
                 new ManaCostsImpl<>("{X}{X}{X}")

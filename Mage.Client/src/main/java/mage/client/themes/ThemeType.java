@@ -2,6 +2,8 @@ package mage.client.themes;
 
 import mage.abilities.hint.HintUtils;
 import mage.abilities.icon.CardIconColor;
+import mage.client.util.GUISizeHelper;
+import mage.client.util.ImageCaches;
 import org.mage.card.arcane.SvgUtils;
 
 import java.awt.*;
@@ -32,7 +34,8 @@ public enum ThemeType {
             // card icons
             new Color(169, 176, 190),
             Color.black,
-            new Color(51, 98, 140)
+            new Color(51, 98, 140),
+            Color.black
     ),
     GREY("Grey",
             "grey-theme/",
@@ -55,6 +58,7 @@ public enum ThemeType {
             // card icons
             new Color(158, 158, 158),
             Color.black,
+            Color.black,
             Color.black
     ),
     SUNSET_VAPORWAVE("Vaporwave Sunset",
@@ -66,19 +70,20 @@ public enum ThemeType {
             true,
             true,
             false,
-            new Color(246, 136, 158),
-            new Color(243, 233, 164),
-            new Color(204, 236, 201),
-            new Color(117, 174, 238),
-            new Color(106, 0, 255),
-            new Color(192, 166, 232),
-            new Color(243, 233, 164),
-            new Color(204, 236, 201),
-            new Color(106, 0, 255),
+            new Color(246, 136, 158), // nimbusBlueGrey
+            new Color(243, 233, 164), // control
+            new Color(204, 236, 201), // nimbusLightBackground
+            new Color(117, 174, 238), // info
+            new Color(106, 0, 255), // nimbusBase
+            new Color(192, 166, 232), // mageToolbar
+            new Color(243, 233, 164), // playerPanel_inactiveBackgroundColor
+            new Color(204, 236, 201), // playerPanel_activeBackgroundColor
+            new Color(106, 0, 255), // playerPanel_deadBackgroundColor
             // card icons
             new Color(246, 136, 158),
             Color.black,
-            new Color(106, 0, 255)
+            new Color(106, 0, 255),
+            Color.black
     ),
     COFFEE("Coffee",
             "coffee-theme/",
@@ -95,13 +100,14 @@ public enum ThemeType {
             new Color(219, 197, 182), // info
             new Color(97, 27, 0), // nimbusBase
             new Color(219, 193, 172), // mageToolbar
-            new Color(219, 193, 172),
-            new Color(204, 236, 201),
-            new Color(99, 72, 50, 255),
+            new Color(219, 193, 172), // playerPanel_inactiveBackgroundColor
+            new Color(204, 236, 201), // playerPanel_activeBackgroundColor
+            new Color(99, 72, 50, 255), // playerPanel_deadBackgroundColor
             // card icons
             new Color(219, 193, 172),
             Color.black,
-            new Color(97, 27, 0)
+            new Color(97, 27, 0),
+            Color.black
     ),
     ISLAND("Island",
             "island-theme/",
@@ -118,13 +124,37 @@ public enum ThemeType {
             new Color(182, 200, 219), // info
             new Color(0, 78, 97), // nimbusBase
             new Color(172, 195, 219), // mageToolbar
-            new Color(172, 195, 219),
-            new Color(204, 236, 201),
-            new Color(50, 68, 99, 255),
+            new Color(172, 195, 219), // playerPanel_inactiveBackgroundColor
+            new Color(204, 236, 201), // playerPanel_activeBackgroundColor
+            new Color(50, 68, 99, 255), // playerPanel_deadBackgroundColor
             // card icons
             new Color(172, 197, 219),
             Color.black,
-            new Color(0, 78, 97)
+            new Color(0, 78, 97),
+            Color.black
+    ),
+    CARBON_FIBER("Carbon Fiber",
+            "carbon_fiber-theme/",
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            new Color(43, 45, 49), // buttons, scrollar background, disabled inputs
+            new Color(49, 51, 56), // window background
+            new Color(58, 56, 64), // inputs, table rows
+            new Color(58, 56, 64), // tooltips
+            new Color(25, 25, 25), // title bars, scrollbar foreground
+            new Color(43, 45, 49), // mageToolbar
+            new Color(43, 45, 49), // playerPanel_inactiveBackgroundColor
+            new Color(64, 61, 56), // playerPanel_activeBackgroundColor
+            new Color(50, 68, 99, 255), // playerPanel_deadBackgroundColor
+            new Color(172, 197, 219),
+            Color.BLACK,
+            new Color(0, 78, 97),
+            new Color(220, 220, 220)
     );
 
     private final String name;
@@ -135,7 +165,7 @@ public enum ThemeType {
     private final boolean hasSkipButtons;
     private final boolean hasPhaseIcons;
     private final boolean hasWinLossImages;
-    private final boolean shortcutsVisibleForSkipButtons; // Whether or not to display skip button shortcuts
+    private final boolean shortcutsVisibleForSkipButtons; // Whether to display skip button shortcuts
     private final Color nimbusBlueGrey;  // buttons, scrollbar background, disabled inputs
     private final Color control;  // window bg
     private final Color nimbusLightBackground; // inputs, table rows
@@ -149,6 +179,9 @@ public enum ThemeType {
     private final Color cardIconsFillColor;
     private final Color cardIconsStrokeColor;
     private final Color cardIconsTextColor;
+    private final Color textColor;
+
+    //private final Color nimbusSelection;
 
     ThemeType(String name,
               String path,
@@ -170,7 +203,8 @@ public enum ThemeType {
               Color playerPanel_deadBackgroundColor,
               Color cardIconsFillColor,
               Color cardIconsStrokeColor,
-              Color cardIconsTextColor
+              Color cardIconsTextColor,
+	          Color textColor
     ) {
         this.name = name;
         this.path = path;
@@ -193,6 +227,7 @@ public enum ThemeType {
         this.cardIconsFillColor = cardIconsFillColor;
         this.cardIconsStrokeColor = cardIconsStrokeColor;
         this.cardIconsTextColor = cardIconsTextColor;
+	    this.textColor = textColor;
     }
 
     @Override
@@ -239,6 +274,10 @@ public enum ThemeType {
 
     public Color getMageToolbar() {
         return mageToolbar;
+    }
+
+    public Color getTextColor() {
+        return textColor;
     }
 
     public Color getPlayerPanel_inactiveBackgroundColor() {
@@ -347,5 +386,8 @@ public enum ThemeType {
         for (CardIconColor cardIconColor : CardIconColor.values()) {
             SvgUtils.prepareCss(this.getCardIconsCssFile(cardIconColor), this.getCardIconsCssSettings(cardIconColor), true);
         }
+
+        // reload card icons and other rendering things from cache - it can depend on current theme
+        GUISizeHelper.refreshGUIAndCards(true);
     }
 }

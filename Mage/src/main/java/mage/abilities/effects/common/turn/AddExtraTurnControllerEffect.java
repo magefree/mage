@@ -42,7 +42,7 @@ public class AddExtraTurnControllerEffect extends OneShotEffect {
         this.turnModApplier = turnModApplier;
     }
 
-    public AddExtraTurnControllerEffect(final AddExtraTurnControllerEffect effect) {
+    protected AddExtraTurnControllerEffect(final AddExtraTurnControllerEffect effect) {
         super(effect);
         this.loseGameAtEnd = effect.loseGameAtEnd;
         this.turnModApplier = effect.turnModApplier;
@@ -59,7 +59,7 @@ public class AddExtraTurnControllerEffect extends OneShotEffect {
         if (player == null) {
             return true;
         }
-        TurnMod extraTurn = new TurnMod(player.getId(), false);
+        TurnMod extraTurn = new TurnMod(player.getId()).withExtraTurn();
         game.getState().getTurnMods().add(extraTurn);
         if (loseGameAtEnd) {
             game.addDelayedTriggeredAbility(new LoseGameDelayedTriggeredAbility(extraTurn.getId()), source);
@@ -82,16 +82,16 @@ public class AddExtraTurnControllerEffect extends OneShotEffect {
 
 class LoseGameDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private final UUID connectedTurnMod;
+    private final UUID turnId;
 
-    public LoseGameDelayedTriggeredAbility(UUID connectedTurnMod) {
+    public LoseGameDelayedTriggeredAbility(UUID turnId) {
         super(new LoseGameSourceControllerEffect(), Duration.EndOfGame);
-        this.connectedTurnMod = connectedTurnMod;
+        this.turnId = turnId;
     }
 
-    public LoseGameDelayedTriggeredAbility(final LoseGameDelayedTriggeredAbility ability) {
+    protected LoseGameDelayedTriggeredAbility(final LoseGameDelayedTriggeredAbility ability) {
         super(ability);
-        this.connectedTurnMod = ability.connectedTurnMod;
+        this.turnId = ability.turnId;
     }
 
     @Override
@@ -106,7 +106,7 @@ class LoseGameDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return connectedTurnMod != null && connectedTurnMod.equals(game.getState().getTurnId());
+        return this.turnId != null && this.turnId.equals(game.getState().getExtraTurnId());
     }
 
     @Override

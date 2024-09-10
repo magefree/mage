@@ -19,6 +19,7 @@ import mage.client.util.ImageHelper;
 import mage.constants.EnlargeMode;
 import org.jdesktop.swingx.JXPanel;
 import mage.client.util.TransformedImageCache;
+import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
 /**
@@ -96,7 +97,7 @@ public class BigCard extends JComponent {
                     displayedText.append("<p style='margin: 2px'>").append(textLine).append("</p>");
                 }                
             }        
-            this.text.setText(displayedText.toString());
+            this.text.setText(ManaSymbols.replaceSymbolsWithHTML(displayedText.toString(), ManaSymbols.Type.DIALOG));
             repaint();
         }
     }

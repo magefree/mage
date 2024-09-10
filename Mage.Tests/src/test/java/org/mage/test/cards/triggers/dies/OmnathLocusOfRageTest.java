@@ -19,7 +19,7 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
      */
     @Test
     public void testDiesTriggeredAbility() {
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, put a 5/5 red and green Elemental creature token onto the battlefield.
+        // <i>Landfall</i> &mdash; Whenever a land you control enters, put a 5/5 red and green Elemental creature token onto the battlefield.
         // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Rage", 1);
 
@@ -29,7 +29,7 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Diabolic Edict");
         addTarget(playerB, playerA);
-        addTarget(playerA, "Omnath, Locus of Rage"); // sacrifice target
+        setChoice(playerA, "Omnath, Locus of Rage"); // sacrifice target
         addTarget(playerA, playerB); // target for dies trigger with damage
 
         setStrictChooseMode(true);
@@ -46,7 +46,7 @@ public class OmnathLocusOfRageTest extends CardTestPlayerBase {
 
     @Test
     public void testDiesTriggeredAbilityOnlyIfPresent() {
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, put a 5/5 red and green Elemental creature token onto the battlefield.
+        // <i>Landfall</i> &mdash; Whenever a land you control enters, put a 5/5 red and green Elemental creature token onto the battlefield.
         // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Rage", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Lightning Elemental", 1); // 4/1 Elemental - Haste

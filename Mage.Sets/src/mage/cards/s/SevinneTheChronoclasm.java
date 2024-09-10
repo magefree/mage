@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class SevinneTheChronoclasm extends CardImpl {
     public SevinneTheChronoclasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -54,7 +54,7 @@ public final class SevinneTheChronoclasm extends CardImpl {
 class SevinneTheChronoclasmTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
     SevinneTheChronoclasmTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false, false);
+        super(null, StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY, false);
     }
 
     private SevinneTheChronoclasmTriggeredAbility(final SevinneTheChronoclasmTriggeredAbility ability) {
@@ -71,7 +71,7 @@ class SevinneTheChronoclasmTriggeredAbility extends SpellCastControllerTriggered
             return false;
         }
         this.getEffects().clear();
-        Effect effect = new CopyTargetSpellEffect(true);
+        Effect effect = new CopyTargetStackObjectEffect(true);
         effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
         this.addEffect(effect);
         return true;

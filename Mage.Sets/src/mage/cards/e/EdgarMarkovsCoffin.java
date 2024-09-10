@@ -26,7 +26,7 @@ public final class EdgarMarkovsCoffin extends CardImpl {
     public EdgarMarkovsCoffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.color.setWhite(true);
         this.color.setBlack(true);
         this.nightCard = true;

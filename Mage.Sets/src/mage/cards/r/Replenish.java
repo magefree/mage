@@ -43,7 +43,7 @@ class ReplenishEffect extends OneShotEffect {
         this.staticText = "Return all enchantment cards from your graveyard to the battlefield";
     }
 
-    ReplenishEffect(final ReplenishEffect effect) {
+    private ReplenishEffect(final ReplenishEffect effect) {
         super(effect);
     }
 

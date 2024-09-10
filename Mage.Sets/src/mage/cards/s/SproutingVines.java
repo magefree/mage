@@ -22,7 +22,7 @@ public final class SproutingVines extends CardImpl {
 
 
         // Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
         // Storm
         this.addAbility(new StormAbility());
     }

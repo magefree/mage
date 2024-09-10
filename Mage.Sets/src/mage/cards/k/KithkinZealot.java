@@ -63,7 +63,7 @@ class KithkinZealotEffect extends OneShotEffect {
         this.staticText = "you gain 1 life for each black and/or red permanent target opponent controls";
     }
 
-    public KithkinZealotEffect(final KithkinZealotEffect effect) {
+    private KithkinZealotEffect(final KithkinZealotEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class KithkinZealotEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
 
         if (you!= null && opponent != null) {
             int amount = game.getBattlefield().countAll(filter, opponent.getId(), game);

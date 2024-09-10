@@ -31,7 +31,7 @@ public final class ThornbiteStaff extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.SHAMAN, "a Shaman creature");
 
     public ThornbiteStaff(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.SHAMAN);
         this.subtype.add(SubType.EQUIPMENT);
 
@@ -49,7 +49,7 @@ public final class ThornbiteStaff extends CardImpl {
         // Whenever a Shaman creature enters the battlefield, you may attach Thornbite Staff to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
-                filter, true, SetTargetPointer.PERMANENT, null));
+                filter, true, SetTargetPointer.PERMANENT));
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }

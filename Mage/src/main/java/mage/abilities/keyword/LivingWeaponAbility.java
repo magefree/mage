@@ -10,18 +10,18 @@ public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
         super(new CreateTokenAttachSourceEffect(new PhyrexianGermToken()));
     }
 
-    public LivingWeaponAbility(final LivingWeaponAbility ability) {
+    protected LivingWeaponAbility(final LivingWeaponAbility ability) {
         super(ability);
     }
 
     @Override
     public String getRule() {
-        return "Living weapon <i>(When this Equipment enters the battlefield, " +
+        return "Living weapon <i>(When this Equipment enters, " +
                 "create a 0/0 black Phyrexian Germ creature token, then attach this to it.)</i>";
     }
 
     @Override
-    public EntersBattlefieldTriggeredAbility copy() {
+    public LivingWeaponAbility copy() {
         return new LivingWeaponAbility(this);
     }
 }

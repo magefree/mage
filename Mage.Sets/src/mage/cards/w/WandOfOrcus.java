@@ -29,7 +29,7 @@ public final class WandOfOrcus extends CardImpl {
     public WandOfOrcus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature attacks or blocks, it and Zombies you control gain

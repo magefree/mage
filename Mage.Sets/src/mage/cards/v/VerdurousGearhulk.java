@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -11,9 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -22,11 +20,6 @@ import mage.target.common.TargetCreaturePermanentAmount;
  */
 public final class VerdurousGearhulk extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public VerdurousGearhulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{G}{G}");
@@ -39,7 +32,7 @@ public final class VerdurousGearhulk extends CardImpl {
 
         // When Verdurous Gearhulk enters the battlefield, distribute four +1/+1 counters among any number of target creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 4, false, "any number of target creatures you control"), false);
-        ability.addTarget(new TargetCreaturePermanentAmount(4, filter));
+        ability.addTarget(new TargetCreaturePermanentAmount(4, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
     }
 

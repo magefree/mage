@@ -34,7 +34,7 @@ public final class TalusPaladin extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever Talus Paladin or another Ally enters the battlefield under your control, you may have Allies you control gain lifelink until end of turn, and you may put a +1/+1 counter on Talus Paladin.
+        // Whenever Talus Paladin or another Ally you control enters, you may have Allies you control gain lifelink until end of turn, and you may put a +1/+1 counter on Talus Paladin.
         this.addAbility(new TalusPaladinTriggeredAbility());
     }
     
@@ -61,7 +61,7 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new TalusPaladinEffect());
     }
     
-    TalusPaladinTriggeredAbility(final TalusPaladinTriggeredAbility ability) {
+    private TalusPaladinTriggeredAbility(final TalusPaladinTriggeredAbility ability) {
         super(ability);
     }
     
@@ -92,7 +92,7 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public String getRule() {
-        return "Whenever {this} or another Ally enters the battlefield under your control, you may have Allies you control gain lifelink until end of turn, and you may put a +1/+1 counter on {this}.";
+        return "Whenever {this} or another Ally you control enters, you may have Allies you control gain lifelink until end of turn, and you may put a +1/+1 counter on {this}.";
     }
 }
 
@@ -102,7 +102,7 @@ class TalusPaladinEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
     
-    public TalusPaladinEffect(final TalusPaladinEffect effect) {
+    private TalusPaladinEffect(final TalusPaladinEffect effect) {
         super(effect);
     }
     

@@ -36,7 +36,7 @@ public final class KyodaiSoulOfKamigawa extends CardImpl {
     public KyodaiSoulOfKamigawa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(3);

@@ -31,7 +31,7 @@ public final class GaeasBlessing extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInTargetPlayersGraveyard(3));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
         // When Gaea's Blessing is put into your graveyard from your library, shuffle your graveyard into your library.
         this.addAbility(new GaeasBlessingTriggeredAbility());

@@ -9,7 +9,7 @@ import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
@@ -17,6 +17,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.Set;
 import java.util.UUID;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 /**
  * @author JayDi85
  */
-public final class AgadeemsAwakening extends ModalDoubleFacesCard {
+public final class AgadeemsAwakening extends ModalDoubleFacedCard {
 
     public AgadeemsAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -48,10 +49,10 @@ public final class AgadeemsAwakening extends ModalDoubleFacesCard {
         // Agadeem, the Undercrypt
         // Land
 
-        // As Agadeem, the Undercrypt enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As Agadeem, the Undercrypt enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(
                 new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
-                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+                "you may pay 3 life. If you don't, it enters tapped"
         ));
 
         // {T}: Add {B}.
@@ -74,7 +75,7 @@ enum AgadeemsAwakeningAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new AgadeemsAwakeningTarget(ability.getManaCostsToPay().getX()));
+        ability.addTarget(new AgadeemsAwakeningTarget(CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }
 

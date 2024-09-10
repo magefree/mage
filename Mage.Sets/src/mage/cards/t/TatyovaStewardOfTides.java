@@ -40,7 +40,7 @@ public final class TatyovaStewardOfTides extends CardImpl {
     public TatyovaStewardOfTides(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(3);
@@ -51,7 +51,7 @@ public final class TatyovaStewardOfTides extends CardImpl {
                 FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter
         )));
 
-        // Whenever a land enters the battlefield under your control, if you control seven or more lands, up to one target land you control becomes a 3/3 Elemental creature with haste. It's still a land.
+        // Whenever a land you control enters, if you control seven or more lands, up to one target land you control becomes a 3/3 Elemental creature with haste. It's still a land.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(new BecomesCreatureTargetEffect(
                         new CreatureToken(

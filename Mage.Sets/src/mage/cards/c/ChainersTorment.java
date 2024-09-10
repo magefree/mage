@@ -58,7 +58,7 @@ class ChainersTormentEffect extends OneShotEffect {
         this.staticText = "Create an X/X black Nightmare Horror creature token, where X is half your life total, rounded up. It deals X damage to you";
     }
 
-    ChainersTormentEffect(final ChainersTormentEffect effect) {
+    private ChainersTormentEffect(final ChainersTormentEffect effect) {
         super(effect);
     }
 

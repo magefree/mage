@@ -45,7 +45,7 @@ public final class ProfessorOnyx extends CardImpl {
     public ProfessorOnyx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
         this.setStartingLoyalty(5);
 

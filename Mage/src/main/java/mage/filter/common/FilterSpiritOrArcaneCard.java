@@ -12,10 +12,10 @@ public class FilterSpiritOrArcaneCard extends FilterSpell {
 
     public FilterSpiritOrArcaneCard(String name) {
         super(name);
-        this.add(Predicates.or(SubType.SPIRIT.getPredicate(),SubType.ARCANE.getPredicate()));
+        this.add(Predicates.or(SubType.SPIRIT.getPredicate(), SubType.ARCANE.getPredicate()));
     }
 
-    public FilterSpiritOrArcaneCard(final FilterSpiritOrArcaneCard filter) {
+    protected FilterSpiritOrArcaneCard(final FilterSpiritOrArcaneCard filter) {
         super(filter);
     }
 

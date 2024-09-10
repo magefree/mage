@@ -21,7 +21,7 @@ public final class KarplusanWolverine extends CardImpl {
 
     public KarplusanWolverine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.WOLVERINE);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(1);

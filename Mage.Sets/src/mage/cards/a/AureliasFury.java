@@ -4,7 +4,7 @@ package mage.cards.a;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -61,7 +61,7 @@ public final class AureliasFury extends CardImpl {
 
         // Aurelia's Fury deals X damage divided as you choose among any number of target creatures and/or players.
         // Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
-        DynamicValue xValue = ManacostVariableValue.REGULAR;
+        DynamicValue xValue = GetXValue.instance;
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
         this.getSpellAbility().addEffect(new AureliasFuryEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
@@ -134,11 +134,6 @@ class AureliasFuryCantCastEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         if (mageObject != null) {
@@ -176,20 +171,25 @@ class AureliasFuryDamagedByWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        MageObject obj = game.getObject(event.getSourceId());
-        if (!(obj instanceof Spell) || !sourceId.equals(((Spell) obj).getSourceId())) {
-            return;
-        }
         switch (event.getType()) {
             case DAMAGED_PERMANENT:
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.isCreature(game)) {
+                if (isOurSource(event, game) && permanent != null && permanent.isCreature(game)) {
                     damagedCreatures.add(event.getTargetId());
                 }
-                return;
+                break;
             case DAMAGED_PLAYER:
-                damagedPlayers.add(event.getTargetId());
+                if (isOurSource(event, game)) {
+                    damagedPlayers.add(event.getTargetId());
+                }
+                break;
         }
+    }
+
+    private boolean isOurSource(GameEvent event, Game game) {
+        // must call after event filter
+        MageObject obj = game.getObject(event.getSourceId());
+        return obj instanceof Spell && sourceId.equals(((Spell) obj).getSourceId());
     }
 
     @Override

@@ -3,6 +3,8 @@ package mage.game;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.constants.CardType;
+import mage.constants.SuperType;
+import mage.util.Copyable;
 import mage.util.SubTypes;
 
 import java.io.Serializable;
@@ -15,22 +17,25 @@ import java.util.List;
  *
  * @author LevelX2
  */
-public class MageObjectAttribute implements Serializable {
+public class MageObjectAttribute implements Serializable, Copyable<MageObjectAttribute> {
 
-    protected ObjectColor color;
-    protected SubTypes subtype;
-    protected List<CardType> cardType;
+    protected final ObjectColor color;
+    protected final SubTypes subtype;
+    protected final List<CardType> cardType;
+    protected final List<SuperType> superType;
 
     public MageObjectAttribute(MageObject mageObject, Game game) {
         color = mageObject.getColor().copy();
-        subtype = new SubTypes(mageObject.getSubtype(game));
+        subtype = mageObject.getSubtype(game).copy();
         cardType = new ArrayList<>(mageObject.getCardType(game));
+        superType = new ArrayList<>(mageObject.getSuperType(game));
     }
 
     public MageObjectAttribute(MageObjectAttribute mageObjectAttribute) {
         this.color = mageObjectAttribute.color;
         this.subtype = mageObjectAttribute.subtype;
         this.cardType = mageObjectAttribute.cardType;
+        this.superType = mageObjectAttribute.superType;
     }
 
     public MageObjectAttribute copy() {
@@ -47,5 +52,9 @@ public class MageObjectAttribute implements Serializable {
 
     public List<CardType> getCardType() {
         return cardType;
+    }
+
+    public List<SuperType> getSuperType() {
+        return superType;
     }
 }

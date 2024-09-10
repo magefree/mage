@@ -44,12 +44,12 @@ public final class Hallow extends CardImpl {
 
 class HallowPreventDamageByTargetEffect extends PreventionEffectImpl {
 
-    public HallowPreventDamageByTargetEffect(Duration duration) {
+    HallowPreventDamageByTargetEffect(Duration duration) {
         super(duration, Integer.MAX_VALUE, false);
         staticText = "Prevent all damage target spell would deal this turn. You gain life equal to the damage prevented this way";
     }
 
-    public HallowPreventDamageByTargetEffect(final HallowPreventDamageByTargetEffect effect) {
+    private HallowPreventDamageByTargetEffect(final HallowPreventDamageByTargetEffect effect) {
         super(effect);
     }
 

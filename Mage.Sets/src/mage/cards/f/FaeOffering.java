@@ -31,16 +31,14 @@ public final class FaeOffering extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // At the beginning of each end step, if you've cast both a creature spell and a noncreature spell this turn, create a Clue token, a Food token, and a Treasure token.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new ClueArtifactToken()), TargetController.ANY, false
+                        new CreateTokenEffect(new ClueArtifactToken()).withAdditionalTokens(new FoodToken(), new TreasureToken()),
+                        TargetController.ANY, false
                 ), FaeOfferingCondition.instance, "At the beginning of each end step, " +
                 "if you've cast both a creature spell and a noncreature spell this turn, " +
                 "create a Clue token, a Food token, and a Treasure token."
-        );
-        ability.addEffect(new CreateTokenEffect(new FoodToken()));
-        ability.addEffect(new CreateTokenEffect(new TreasureToken()));
-        this.addAbility(ability.addHint(FaeOfferingHint.instance), new SpellsCastWatcher());
+        ).addHint(FaeOfferingHint.instance));
     }
 
     private FaeOffering(final FaeOffering card) {
@@ -93,7 +91,7 @@ enum FaeOfferingHint implements Hint {
                 .map(b -> b ? "Creature spell" : "Noncreature spell")
                 .sorted()
                 .collect(Collectors.toList());
-        if (messages.size() == 0) {
+        if (messages.isEmpty()) {
             return "You have not cast any spells this turn";
         }
         return "You have cast a " + String.join(" and a ", messages) + " this turn";

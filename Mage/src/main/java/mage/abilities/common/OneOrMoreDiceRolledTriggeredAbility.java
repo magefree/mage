@@ -45,7 +45,7 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
         int maxRoll = ((DiceRolledEvent) event)
                 .getResults()
                 .stream()
-                .filter(Integer.class::isInstance) // only numerical die result can be masured
+                .filter(Integer.class::isInstance) // only numerical die result can be measured
                 .map(Integer.class::cast)
                 .mapToInt(Integer::intValue)
                 .max()
@@ -53,7 +53,7 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
         int totalRoll = ((DiceRolledEvent) event)
                 .getResults()
                 .stream()
-                .filter(Integer.class::isInstance) // only numerical die result can be masured
+                .filter(Integer.class::isInstance) // only numerical die result can be measured
                 .map(Integer.class::cast)
                 .mapToInt(Integer::intValue)
                 .sum();

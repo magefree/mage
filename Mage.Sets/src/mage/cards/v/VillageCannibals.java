@@ -50,7 +50,7 @@ class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever another Human creature dies, ");
     }
 
-    public VillageCannibalsTriggeredAbility(final VillageCannibalsTriggeredAbility ability) {
+    private VillageCannibalsTriggeredAbility(final VillageCannibalsTriggeredAbility ability) {
         super(ability);
     }
 

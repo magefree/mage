@@ -103,8 +103,8 @@ class OKagachiMadeManifestEffect extends OneShotEffect {
                 break;
             default:
                 TargetCard target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_A_NON_LAND);
-                target.setNotTarget(true);
-                player.choose(Outcome.ReturnToHand, controller.getGraveyard(), target, game);
+                target.withNotTarget(true);
+                player.choose(Outcome.ReturnToHand, controller.getGraveyard(), target, source, game);
                 card = game.getCard(target.getFirstTarget());
         }
         if (card == null) {

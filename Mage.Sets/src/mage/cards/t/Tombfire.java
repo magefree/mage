@@ -55,13 +55,13 @@ class TombfireEffect extends OneShotEffect {
         staticText = "Target player exiles all cards with flashback from their graveyard";
     }
 
-    public TombfireEffect(final TombfireEffect effect) {
+    private TombfireEffect(final TombfireEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             for (Card card : targetPlayer.getGraveyard().getCards(filter, game)) {
                 card.moveToExile(null, "", source, game);

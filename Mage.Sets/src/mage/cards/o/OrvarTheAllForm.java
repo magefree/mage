@@ -14,10 +14,7 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
@@ -48,7 +45,7 @@ public final class OrvarTheAllForm extends CardImpl {
     public OrvarTheAllForm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -61,10 +58,12 @@ public final class OrvarTheAllForm extends CardImpl {
                 new SpellCastControllerTriggeredAbility(
                         new OrvarTheAllFormEffect(),
                         StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY,
-                        false, true
-                ), OrvarTheAllFormCondition.instance, "Whenever you cast an instant or sorcery spell, " +
-                "if it targets one or more other permanents you control, " +
-                "create a token that's a copy of one of those permanents."
+                        false, SetTargetPointer.SPELL
+                ),
+                OrvarTheAllFormCondition.instance,
+                "Whenever you cast an instant or sorcery spell, "
+                        + "if it targets one or more other permanents you control, "
+                        + "create a token that's a copy of one of those permanents."
         ));
 
         // When a spell or ability an opponent controls causes you to discard this card, create a token that's a copy of target permanent.
@@ -155,7 +154,7 @@ class OrvarTheAllFormEffect extends OneShotEffect {
         filter.add(Predicates.or(predicates));
         filter.add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(source))));
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         return new CreateTokenCopyTargetEffect()
                 .setTargetPointer(new FixedTarget(target.getFirstTarget(), game))

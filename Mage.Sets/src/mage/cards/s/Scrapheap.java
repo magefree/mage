@@ -45,7 +45,7 @@ class ScrapheapTriggeredAbility extends TriggeredAbilityImpl {
         return new ScrapheapTriggeredAbility(this);
     }
     
-    public ScrapheapTriggeredAbility(final ScrapheapTriggeredAbility ability){
+    private ScrapheapTriggeredAbility(final ScrapheapTriggeredAbility ability){
         super(ability);
     }
     

@@ -1,21 +1,27 @@
 package mage.client.dialog;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
+import mage.cards.action.TransferData;
 import mage.choices.Choice;
 import mage.choices.ChoiceHintType;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.VirtualCardInfo;
+import mage.client.components.MageEditorPane;
+import mage.client.game.GamePanel;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.MageDialogState;
 import mage.game.command.Dungeon;
 import mage.view.CardView;
 import mage.view.DungeonView;
+import org.mage.card.arcane.ManaSymbols;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.List;
+import java.util.*;
 
 /**
  * GUI: choosing one of the list's item. Uses in game's and non game's GUI like fast search
@@ -33,22 +39,48 @@ public class PickChoiceDialog extends MageDialog {
     UUID gameId;
 
     java.util.List<KeyValueItem> allItems = new ArrayList<>();
-    DefaultListModel<KeyValueItem> dataModel = new DefaultListModel<>();
+    KeyValueItem biggestItem = null; // for render optimization
+    PickChoiceCallback callback = null;
 
     final private static String HTML_HEADERS_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
-    public void showDialog(Choice choice, String startSelectionValue) {
-        showDialog(choice, startSelectionValue, null, null, null);
+    public PickChoiceDialog() {
+        initComponents();
+
+        this.textMessage.enableHyperlinksAndCardPopups();
+        this.textMessage.enableTextLabelMode();
+        this.textSubMessage.enableHyperlinksAndCardPopups();
+        this.textSubMessage.enableTextLabelMode();
+
+        // pick choice shared in multiple dialogs, so modify window size only one time
+        this.setSize(GUISizeHelper.dialogGuiScaleSize(this.getSize()));
+
+        this.listChoices.setModel(new DefaultListModel<KeyValueItem>());
+        this.setModal(true);
     }
 
-    public void showDialog(Choice choice, String startSelectionValue, UUID objectId, MageDialogState mageDialogState, BigCard bigCard) {
+    public interface PickChoiceCallback {
+        void onChoiceDone();
+    }
+
+    public void showDialog(Choice choice, String startSelectionValue, PickChoiceCallback callback) {
+        showDialog(choice, startSelectionValue, null, null, null, callback);
+    }
+
+    public void showDialog(Choice choice, String startSelectionValue, UUID objectId, MageDialogState mageDialogState, BigCard bigCard, PickChoiceCallback callback) {
         this.choice = choice;
         this.bigCard = bigCard;
         this.gameId = objectId;
+        this.callback = callback;
 
-        setLabelText(this.labelMessage, choice.getMessage());
-        setLabelText(this.labelSubMessage, choice.getSubMessage());
+        changeGUISize();
+
+        setMessageText(this.textMessage, choice.getMessage());
+        setMessageText(this.textSubMessage, choice.getSubMessage());
+
         btCancel.setEnabled(!choice.isRequired());
+
+        // popup support in headers
 
         // special choice (example: auto-choose answer next time)
         cbSpecial.setVisible(choice.isSpecialEnabled());
@@ -56,27 +88,58 @@ public class PickChoiceDialog extends MageDialog {
         cbSpecial.setToolTipText(choice.getSpecialHint());
 
         // 2 modes: string or key-values
-        // sore data in allItems for inremental filtering
+        // store data in allItems for inremental filtering
         // http://logicbig.com/tutorials/core-java-tutorial/swing/list-filter/
         this.allItems.clear();
+        this.biggestItem = null;
         if (choice.isKeyChoice()) {
             for (Map.Entry<String, String> entry : choice.getKeyChoices().entrySet()) {
-                this.allItems.add(new KeyValueItem(entry.getKey(), entry.getValue(), choice.getHintType()));
+                // with default hints
+                KeyValueItem newItem = new KeyValueItem(entry.getKey(), entry.getValue(), entry.getValue(), choice.getHintType());
+                this.allItems.add(newItem);
+                if (this.biggestItem == null || newItem.valueAsHtml.length() > this.biggestItem.valueAsHtml.length()) {
+                    biggestItem = newItem;
+                }
             }
         } else {
             for (String value : choice.getChoices()) {
-                this.allItems.add(new KeyValueItem(value, value, choice.getHintType()));
+                // with default hints
+                KeyValueItem newItem =new KeyValueItem(value, value, value, choice.getHintType());
+                this.allItems.add(newItem);
+                if (this.biggestItem == null || newItem.valueAsHtml.length() > this.biggestItem.valueAsHtml.length()) {
+                    biggestItem = newItem;
+                }
             }
         }
 
-        // sorting
+        // custom sorting
         if (choice.isSortEnabled()) {
             this.allItems.sort((o1, o2) -> {
                 Integer n1 = choice.getSortData().get(o1.getKey());
                 Integer n2 = choice.getSortData().get(o2.getKey());
-                return Integer.compare(n1, n2);
+                if (n1.equals(n2)) {
+                    // default sorting by value
+                    return o1.value.compareTo(o2.value);
+                } else {
+                    return Integer.compare(n1, n2);
+                }
             });
         }
+
+        // custom hints (per item)
+        if (!choice.getHintData().isEmpty()) {
+            this.allItems.forEach(item -> {
+                List<String> info = choice.getHintData().getOrDefault(item.key, null);
+                if (info != null) {
+                    item.hintType = ChoiceHintType.valueOf(info.get(0));
+                    item.hint = info.get(1);
+                }
+            });
+        }
+
+        // render optimization (use the biggest cell for one time size calculation)
+        // can help with slow search in big lists like choose card name dialog
+        this.listChoices.setPrototypeCellValue(this.biggestItem);
 
         // search
         if (choice.isSearchEnabled()) {
@@ -87,7 +150,7 @@ public class PickChoiceDialog extends MageDialog {
             this.editSearch.setText("");
         }
 
-        // listeners for inremental filtering
+        // listeners for incremental filtering
         editSearch.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -136,6 +199,9 @@ public class PickChoiceDialog extends MageDialog {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 if (e.getClickCount() == 2) {
                     doChoose();
                 }
@@ -184,11 +250,7 @@ public class PickChoiceDialog extends MageDialog {
 
         // window settings
         MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-        }
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         if (mageDialogState != null) {
             mageDialogState.setStateToDialog(this);
         } else {
@@ -218,65 +280,84 @@ public class PickChoiceDialog extends MageDialog {
         this.setVisible(true);
     }
 
-    private void choiceHintShow(int modelIndex) {
+    @Override
+    public void changeGUISize() {
+        super.changeGUISize();
 
-        switch (choice.getHintType()) {
+        this.textMessage.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.textSubMessage.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.labelSearch.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.editSearch.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.cbSpecial.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.listChoices.setFont(GUISizeHelper.tableFont);
+        this.btOK.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        this.btCancel.setFont(GUISizeHelper.gameFeedbackPanelFont);
+    }
+
+    private void choiceHintShow(int modelIndex) {
+        // close old hint
+        if (lastModelIndex != modelIndex) {
+            cardInfo.onMouseExited();
+            listChoices.setToolTipText(null);
+        }
+
+        KeyValueItem item = (KeyValueItem) listChoices.getModel().getElementAt(modelIndex);
+        switch (item.getHintType()) {
             case CARD:
-            case CARD_DUNGEON: {
+            case CARD_DUNGEON:
+            case GAME_OBJECT: {
                 // as popup card
                 if (lastModelIndex != modelIndex) {
-                    // new card
-                    KeyValueItem item = (KeyValueItem) listChoices.getModel().getElementAt(modelIndex);
-                    String cardName = item.getValue();
-
-                    if (choice.getHintType() == ChoiceHintType.CARD) {
-                        cardInfo.init(cardName, this.bigCard, this.gameId);
-                    } else if (choice.getHintType() == ChoiceHintType.CARD_DUNGEON) {
-                        CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(cardName)));
+                    // NEW
+                    if (item.getHintType() == ChoiceHintType.CARD) {
+                        // as card name
+                        cardInfo.init(item.getHint(), this.bigCard, this.gameId);
+                    } else if (item.getHintType() == ChoiceHintType.CARD_DUNGEON) {
+                        // as card name
+                        CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(item.getHint())));
                         cardInfo.init(cardView, this.bigCard, this.gameId);
+                    } else if (item.getHintType() == ChoiceHintType.GAME_OBJECT) {
+                        // as object
+                        GamePanel game = MageFrame.getGame(this.gameId);
+                        if (game != null) {
+                            UUID objectId = UUID.fromString(item.getHint());
+                            CardView cardView = game.getLastGameData().findCard(objectId);
+                            if (cardView != null) {
+                                cardInfo.init(cardView, this.bigCard, this.gameId);
+                            }
+                        }
                     }
-
+                    cardInfo.setPopupAutoLocationMode(TransferData.PopupAutoLocationMode.PUT_NEAR_MOUSE_POSITION);
                     cardInfo.onMouseEntered(MouseInfo.getPointerInfo().getLocation());
                 } else {
-                    // old card
+                    // OLD - keep it opened
                     cardInfo.onMouseMoved(MouseInfo.getPointerInfo().getLocation());
                 }
                 lastModelIndex = modelIndex;
                 break;
             }
 
-            default:
             case TEXT: {
                 // as popup text
                 if (lastModelIndex != modelIndex) {
-                    // new hint
-                    listChoices.setToolTipText(null);
-                    KeyValueItem item = (KeyValueItem) listChoices.getModel().getElementAt(modelIndex);
-                    listChoices.setToolTipText(item.getValue());
+                    String hint = item.getHint();
+                    hint = ManaSymbols.replaceSymbolsWithHTML(hint, ManaSymbols.Type.DIALOG);
+                    hint = GUISizeHelper.textToHtmlWithSize(hint, listChoices.getFont());
+                    listChoices.setToolTipText(hint);
                 }
                 lastModelIndex = modelIndex;
                 break;
+            }
+
+            default: {
+                throw new IllegalArgumentException("Unsupported hint type " + item.getHintType());
             }
         }
     }
 
     private void choiceHintHide() {
-        switch (choice.getHintType()) {
-            case CARD:
-            case CARD_DUNGEON: {
-                // as popup card
-                cardInfo.onMouseExited();
-                break;
-            }
-
-            default:
-            case TEXT: {
-                // as popup text
-                listChoices.setToolTipText(null);
-                break;
-            }
-        }
-
+        cardInfo.onMouseExited();
+        listChoices.setToolTipText(null);
         lastModelIndex = -1;
     }
 
@@ -298,21 +379,28 @@ public class PickChoiceDialog extends MageDialog {
         }
         filter = filter.toLowerCase(Locale.ENGLISH);
 
-        this.dataModel.clear();
+        // render fix: make changes to new model instead current, so it can help with GUI freeze on fast text deleting
+        // https://github.com/magefree/mage/issues/8671
+        DefaultListModel<KeyValueItem> newModel = new DefaultListModel<>();
         for (KeyValueItem item : this.allItems) {
             if (!choice.isSearchEnabled() || item.getValue().toLowerCase(Locale.ENGLISH).contains(filter)) {
-                this.dataModel.addElement(item);
+                newModel.addElement(item);
             }
         }
+
+        this.listChoices.setModel(newModel);
     }
 
-    private void setLabelText(JLabel label, String text) {
+    private void setMessageText(MageEditorPane editor, String text) {
+        editor.setGameData(this.gameId, this.bigCard);
+
         if ((text != null) && !text.equals("")) {
-            label.setText(String.format(HTML_HEADERS_TEMPLATE, text));
-            label.setVisible(true);
+            String realText = ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.DIALOG);
+            editor.setText(String.format(HTML_HEADERS_TEMPLATE, realText));
+            editor.setVisible(true);
         } else {
-            label.setText("");
-            label.setVisible(false);
+            editor.setText("");
+            editor.setVisible(false);
         }
     }
 
@@ -335,30 +423,28 @@ public class PickChoiceDialog extends MageDialog {
 
     private void doChoose() {
         if (setChoice()) {
-            this.hideDialog();
+            doClose();
         }
     }
 
     private void doCancel() {
         this.listChoices.clearSelection();
         this.choice.clearChoice();
-        hideDialog();
+        doClose();
     }
 
-    /**
-     * Creates new form PickChoiceDialog
-     */
-    public PickChoiceDialog() {
-        initComponents();
-        this.listChoices.setModel(dataModel);
-        this.setModal(true);
+    private void doClose() {
+        this.hideDialog();
+        if (this.callback != null) {
+            this.callback.onChoiceDone();
+        }
     }
 
     public boolean setChoice() {
         KeyValueItem item = (KeyValueItem) this.listChoices.getSelectedValue();
         boolean isSpecial = choice.isSpecialEnabled() && cbSpecial.isSelected();
 
-        // auto select one item (after incemental filtering)
+        // auto select one item (after incremental filtering)
         if ((item == null) && (this.listChoices.getModel().getSize() == 1)) {
             this.listChoices.setSelectedIndex(0);
             item = (KeyValueItem) this.listChoices.getSelectedValue();
@@ -391,13 +477,17 @@ public class PickChoiceDialog extends MageDialog {
     static class KeyValueItem {
 
         protected final String key;
-        protected final String value;
-        protected final ChoiceHintType hint;
+        protected String value;
+        protected String valueAsHtml; // final html view
+        protected String hint;
+        protected ChoiceHintType hintType;
 
-        public KeyValueItem(String key, String value, ChoiceHintType hint) {
+        public KeyValueItem(String key, String value, String hint, ChoiceHintType hintType) {
             this.key = key;
             this.value = value;
+            this.valueAsHtml = "<html>" + ManaSymbols.replaceSymbolsWithHTML(value, ManaSymbols.Type.TABLE);
             this.hint = hint;
+            this.hintType = hintType;
         }
 
         public String getKey() {
@@ -408,13 +498,21 @@ public class PickChoiceDialog extends MageDialog {
             return this.value;
         }
 
-        public ChoiceHintType getHint() {
+        public String getValueAsHtml() {
+            return this.valueAsHtml;
+        }
+
+        public String getHint() {
             return this.hint;
+        }
+
+        public ChoiceHintType getHintType() {
+            return this.hintType;
         }
 
         @Override
         public String toString() {
-            return this.value;
+            return valueAsHtml;
         }
     }
 
@@ -428,8 +526,8 @@ public class PickChoiceDialog extends MageDialog {
     private void initComponents() {
 
         panelHeader = new javax.swing.JPanel();
-        labelMessage = new javax.swing.JLabel();
-        labelSubMessage = new javax.swing.JLabel();
+        textMessage = new mage.client.components.MageEditorPane();
+        textSubMessage = new mage.client.components.MageEditorPane();
         panelSearch = new javax.swing.JPanel();
         labelSearch = new javax.swing.JLabel();
         editSearch = new javax.swing.JTextField();
@@ -442,31 +540,23 @@ public class PickChoiceDialog extends MageDialog {
 
         setResizable(true);
 
-        labelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMessage.setText("<html><div style='text-align: center;'>example long message example long message example long message example long message example long message</div></html>");
+        panelHeader.setLayout(new java.awt.BorderLayout());
 
-        labelSubMessage.setFont(labelSubMessage.getFont().deriveFont((labelSubMessage.getFont().getStyle() | java.awt.Font.ITALIC) | java.awt.Font.BOLD));
-        labelSubMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelSubMessage.setText("<html><div style='text-align: center;'>example long message example long</div></html>");
+        textMessage.setEditable(false);
+        textMessage.setBorder(null);
+        textMessage.setText("<html><div style='text-align: center;'>example long message example long message example long message example long message example long message</div></html>");
+        textMessage.setAutoscrolls(false);
+        textMessage.setFocusable(false);
+        textMessage.setOpaque(false);
+        panelHeader.add(textMessage, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
-        panelHeader.setLayout(panelHeaderLayout);
-        panelHeaderLayout.setHorizontalGroup(
-            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelHeaderLayout.createSequentialGroup()
-                .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                    .addComponent(labelSubMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
-        );
-        panelHeaderLayout.setVerticalGroup(
-            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelHeaderLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(labelMessage)
-                .addGap(0, 0, 0)
-                .addComponent(labelSubMessage))
-        );
+        textSubMessage.setEditable(false);
+        textSubMessage.setBorder(null);
+        textSubMessage.setText("<html><div style='text-align: center;'>example long message example long</div></html>");
+        textSubMessage.setAutoscrolls(false);
+        textSubMessage.setFocusable(false);
+        textSubMessage.setOpaque(false);
+        panelHeader.add(textSubMessage, java.awt.BorderLayout.SOUTH);
 
         labelSearch.setText("Search:");
 
@@ -475,28 +565,34 @@ public class PickChoiceDialog extends MageDialog {
         javax.swing.GroupLayout panelSearchLayout = new javax.swing.GroupLayout(panelSearch);
         panelSearch.setLayout(panelSearchLayout);
         panelSearchLayout.setHorizontalGroup(
-            panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSearchLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(labelSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editSearch)
-                .addGap(0, 0, 0))
+                panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSearchLayout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addComponent(labelSearch)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editSearch)
+                                .addGap(0, 0, 0))
         );
         panelSearchLayout.setVerticalGroup(
-            panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSearchLayout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addGroup(panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelSearch)
-                    .addComponent(editSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3))
+                panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSearchLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addGroup(panelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(labelSearch)
+                                        .addComponent(editSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(3, 3, 3))
         );
 
         listChoices.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "item1", "item2", "item3" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            String[] strings = {"item1", "item2", "item3"};
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
         });
         scrollList.setViewportView(listChoices);
 
@@ -519,27 +615,27 @@ public class PickChoiceDialog extends MageDialog {
         javax.swing.GroupLayout panelCommandsLayout = new javax.swing.GroupLayout(panelCommands);
         panelCommands.setLayout(panelCommandsLayout);
         panelCommandsLayout.setHorizontalGroup(
-            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCommandsLayout.createSequentialGroup()
-                .addComponent(cbSpecial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btOK)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCommandsLayout.createSequentialGroup()
+                                .addComponent(cbSpecial)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btOK)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
-        panelCommandsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancel, btOK});
+        panelCommandsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[]{btCancel, btOK});
 
         panelCommandsLayout.setVerticalGroup(
-            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCommandsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCancel)
-                    .addComponent(btOK)
-                    .addComponent(cbSpecial))
-                .addContainerGap())
+                panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCommandsLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btCancel)
+                                        .addComponent(btOK)
+                                        .addComponent(cbSpecial))
+                                .addContainerGap())
         );
 
         getRootPane().setDefaultButton(btOK);
@@ -547,28 +643,28 @@ public class PickChoiceDialog extends MageDialog {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollList, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelCommands, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(scrollList, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(panelCommands, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                                        .addComponent(panelSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
         pack();
@@ -594,13 +690,13 @@ public class PickChoiceDialog extends MageDialog {
     private javax.swing.JButton btOK;
     private javax.swing.JCheckBox cbSpecial;
     private javax.swing.JTextField editSearch;
-    private javax.swing.JLabel labelMessage;
     private javax.swing.JLabel labelSearch;
-    private javax.swing.JLabel labelSubMessage;
     private javax.swing.JList listChoices;
     private javax.swing.JPanel panelCommands;
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelSearch;
     private javax.swing.JScrollPane scrollList;
+    private mage.client.components.MageEditorPane textMessage;
+    private mage.client.components.MageEditorPane textSubMessage;
     // End of variables declaration//GEN-END:variables
 }

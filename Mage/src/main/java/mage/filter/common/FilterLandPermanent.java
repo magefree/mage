@@ -40,7 +40,7 @@ public class FilterLandPermanent extends FilterPermanent {
         return filter;
     }
 
-    public FilterLandPermanent(final FilterLandPermanent filter) {
+    protected FilterLandPermanent(final FilterLandPermanent filter) {
         super(filter);
     }
 

@@ -13,7 +13,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
- *
  * @author LevelX2
  */
 public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
@@ -27,18 +26,13 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
         }
     }
 
-    public DealtDamageToCreatureBySourceDies(final DealtDamageToCreatureBySourceDies effect) {
+    protected DealtDamageToCreatureBySourceDies(final DealtDamageToCreatureBySourceDies effect) {
         super(effect);
     }
 
     @Override
     public DealtDamageToCreatureBySourceDies copy() {
         return new DealtDamageToCreatureBySourceDies(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

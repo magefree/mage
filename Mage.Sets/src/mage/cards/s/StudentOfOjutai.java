@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -9,20 +8,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author fireshoes
  */
 public final class StudentOfOjutai extends CardImpl {
-    
-    private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
-
-    static {
-        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public StudentOfOjutai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
@@ -32,7 +24,7 @@ public final class StudentOfOjutai extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you cast a noncreature spell, you gain 2 life.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(2), filterNonCreature, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(2), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false));
     }
 
     private StudentOfOjutai(final StudentOfOjutai card) {

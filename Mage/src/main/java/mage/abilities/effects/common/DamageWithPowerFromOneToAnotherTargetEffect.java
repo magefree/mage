@@ -13,20 +13,27 @@ import mage.players.Player;
  */
 public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
 
-    String firstTargetName;
+    private final String firstTargetName;
+    private final int multiplier;
 
     public DamageWithPowerFromOneToAnotherTargetEffect() {
         this("");
     }
 
     public DamageWithPowerFromOneToAnotherTargetEffect(String firstTargetName) {
-        super(Outcome.Damage);
-        this.firstTargetName = firstTargetName;
+        this(firstTargetName, 1);
     }
 
-    public DamageWithPowerFromOneToAnotherTargetEffect(final DamageWithPowerFromOneToAnotherTargetEffect effect) {
+    public DamageWithPowerFromOneToAnotherTargetEffect(String firstTargetName, int multiplier) {
+        super(Outcome.Damage);
+        this.firstTargetName = firstTargetName;
+        this.multiplier = multiplier;
+    }
+
+    protected DamageWithPowerFromOneToAnotherTargetEffect(final DamageWithPowerFromOneToAnotherTargetEffect effect) {
         super(effect);
         this.firstTargetName = effect.firstTargetName;
+        this.multiplier = effect.multiplier;
     }
 
     @Override
@@ -34,16 +41,18 @@ public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
         if (source.getTargets().size() != 2) {
             throw new IllegalStateException("It must have two targets, but found " + source.getTargets().size());
         }
-
         Permanent myPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (myPermanent == null) {
+            return false;
+        }
+        int damageValue = myPermanent.getPower().getValue() * multiplier;
         Permanent anotherPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         Player anotherPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
-
-        if (myPermanent != null && anotherPermanent != null) {
-            anotherPermanent.damage(myPermanent.getPower().getValue(), myPermanent.getId(), source, game, false, true);
+        if (anotherPermanent != null) {
+            anotherPermanent.damage(damageValue, myPermanent.getId(), source, game, false, true);
             return true;
-        } else if (myPermanent != null && anotherPlayer != null) {
-            anotherPlayer.damage(myPermanent.getPower().getValue(), myPermanent.getId(), source, game);
+        } else if (anotherPlayer != null) {
+            anotherPlayer.damage(damageValue, myPermanent.getId(), source, game);
             return true;
         }
         return false;
@@ -64,6 +73,8 @@ public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
             throw new IllegalStateException("It must have two targets, but found " + mode.getTargets().size());
         }
 
-        return (firstTargetName.isEmpty() ? mode.getTargets().get(0).getDescription() : firstTargetName) + " deals damage equal to its power to " + mode.getTargets().get(1).getDescription();
+        return (firstTargetName.isEmpty() ? mode.getTargets().get(0).getDescription() : firstTargetName) +
+                " deals damage equal to" + (multiplier == 2 ? " twice" : "") +
+                " its power to " + mode.getTargets().get(1).getDescription();
     }
 }

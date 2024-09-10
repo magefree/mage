@@ -1,11 +1,11 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -17,7 +17,9 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.VerseCounterAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +40,7 @@ public final class Recantation extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{U}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(0, 0, new FilterPermanent("up to X target permanents, where X is the number of verse counters on {this}."), false));
-        ability.setTargetAdjuster(VerseCounterAdjuster.instance);
+        ability.setTargetAdjuster(new TargetsCountAdjuster(new CountersSourceCount(CounterType.VERSE)));
         this.addAbility(ability);
     }
 

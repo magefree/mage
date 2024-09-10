@@ -1,7 +1,6 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -31,7 +30,7 @@ public final class FeasterOfFools extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Devour 2
-        this.addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour2));
+        this.addAbility(new DevourAbility(2));
     }
 
     private FeasterOfFools(final FeasterOfFools card) {

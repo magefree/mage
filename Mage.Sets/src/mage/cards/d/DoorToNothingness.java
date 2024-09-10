@@ -50,12 +50,12 @@ public final class DoorToNothingness extends CardImpl {
 
 class DoorToNothingnessEffect extends OneShotEffect {
 
-    public DoorToNothingnessEffect() {
+    DoorToNothingnessEffect() {
         super(Outcome.Damage);
         this.staticText = "Target player loses the game";
     }
 
-    public DoorToNothingnessEffect(final DoorToNothingnessEffect effect) {
+    private DoorToNothingnessEffect(final DoorToNothingnessEffect effect) {
         super(effect);
     }
 

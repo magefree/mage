@@ -80,6 +80,7 @@ public final class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Dwarven Berserker", 97, Rarity.COMMON, mage.cards.d.DwarvenBerserker.class));
         cards.add(new SetCardInfo("Dwarven Thaumaturgist", 98, Rarity.RARE, mage.cards.d.DwarvenThaumaturgist.class));
         cards.add(new SetCardInfo("Empyrial Armor", 13, Rarity.COMMON, mage.cards.e.EmpyrialArmor.class));
+        cards.add(new SetCardInfo("Ertai's Familiar", 38, Rarity.RARE, mage.cards.e.ErtaisFamiliar.class));
         cards.add(new SetCardInfo("Fallow Wurm", 126, Rarity.UNCOMMON, mage.cards.f.FallowWurm.class));
         cards.add(new SetCardInfo("Familiar Ground", 127, Rarity.UNCOMMON, mage.cards.f.FamiliarGround.class));
         cards.add(new SetCardInfo("Fatal Blow", 67, Rarity.COMMON, mage.cards.f.FatalBlow.class));

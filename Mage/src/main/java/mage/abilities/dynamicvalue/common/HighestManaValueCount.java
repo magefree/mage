@@ -10,7 +10,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author nigelzor
  */
 public class HighestManaValueCount implements DynamicValue {
@@ -25,7 +24,7 @@ public class HighestManaValueCount implements DynamicValue {
         this.filter = filter;
     }
 
-    public HighestManaValueCount(final HighestManaValueCount dynamicValue){
+    protected HighestManaValueCount(final HighestManaValueCount dynamicValue) {
         super();
         this.filter = dynamicValue.filter.copy();
     }
@@ -45,7 +44,7 @@ public class HighestManaValueCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public HighestManaValueCount copy() {
         return new HighestManaValueCount(this);
     }
 

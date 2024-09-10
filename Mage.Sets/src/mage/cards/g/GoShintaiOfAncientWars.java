@@ -35,7 +35,7 @@ public final class GoShintaiOfAncientWars extends CardImpl {
     public GoShintaiOfAncientWars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

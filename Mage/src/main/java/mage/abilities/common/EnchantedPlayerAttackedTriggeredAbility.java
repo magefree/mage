@@ -18,7 +18,7 @@ public class EnchantedPlayerAttackedTriggeredAbility extends TriggeredAbilityImp
         setTriggerPhrase("Whenever enchanted player is attacked, ");
     }
 
-    public EnchantedPlayerAttackedTriggeredAbility(final EnchantedPlayerAttackedTriggeredAbility ability) {
+    protected EnchantedPlayerAttackedTriggeredAbility(final EnchantedPlayerAttackedTriggeredAbility ability) {
         super(ability);
     }
 

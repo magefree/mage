@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,9 +36,9 @@ public final class FromUnderTheFloorboards extends CardImpl {
         // If From Under the Floorboards's madness cost was paid, instead create X of those tokens tapped and you gain X life.      
         DynamicValue xValue = new FromUnderTheFloorboardsManacostVariableValue();
         Effect effect = new CreateTokenEffect(new ZombieToken(), xValue, true, false);
-        effect.setText("Create three 2/2 black Zombie creature tokens tapped and you gain 3 life. If {this} madness cost was paid, instead create X of those tokens tapped and you gain X life");
+        effect.setText("Create three tapped 2/2 black Zombie creature tokens and you gain 3 life. If this spell's madness cost was paid, instead create X of those tokens");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new GainLifeEffect(xValue));        
+        this.getSpellAbility().addEffect(new GainLifeEffect(xValue).concatBy("and"));
     }
 
     private FromUnderTheFloorboards(final FromUnderTheFloorboards card) {
@@ -57,7 +59,7 @@ class FromUnderTheFloorboardsManacostVariableValue implements DynamicValue {
         if (manaCosts.getVariableCosts().isEmpty()) {
             return 3;
         }
-        return sourceAbility.getManaCostsToPay().getX();
+        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
     }
 
     @Override

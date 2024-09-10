@@ -44,12 +44,12 @@ public final class Upwelling extends CardImpl {
 
 class UpwellingRuleEffect extends ContinuousEffectImpl {
 
-    public UpwellingRuleEffect() {
+    UpwellingRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players don't lose unspent mana as steps and phases end";
     }
 
-    public UpwellingRuleEffect(final UpwellingRuleEffect effect) {
+    private UpwellingRuleEffect(final UpwellingRuleEffect effect) {
         super(effect);
     }
 

@@ -34,7 +34,7 @@ public final class LlanowarSentinel extends CardImpl {
 
         // When Llanowar Sentinel enters the battlefield, you may pay {1}{G}. If you do, search your library for a card named Llanowar Sentinel and put that card onto the battlefield. Then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new ManaCostsImpl<>("{1}{G}")
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), new ManaCostsImpl<>("{1}{G}")
         )));
     }
 

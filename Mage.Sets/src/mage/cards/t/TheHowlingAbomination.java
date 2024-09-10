@@ -1,0 +1,76 @@
+package mage.cards.t;
+
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.watchers.common.CastSpellLastTurnWatcher;
+
+import java.util.UUID;
+
+/**
+ * @author TheElk801
+ */
+public final class TheHowlingAbomination extends CardImpl {
+
+    public TheHowlingAbomination(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
+
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.BEAST);
+        this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+
+        // Rolling Attack—Blanka, Ferocious Friend has trample as long as you've cast three or more spells this turn.
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(TrampleAbility.getInstance()), TheHowlingAbominationCondition.instance,
+                "{this} has trample as long as you've cast three or more spells this turn"
+        )));
+
+        // Electric Thunder—Whenever Blanka becomes the target of a spell, he gets +2/+2 until end of turn and deals 2 damage to each opponent.
+        Ability ability = new BecomesTargetSourceTriggeredAbility(new BoostSourceEffect(
+                2, 2, Duration.EndOfTurn
+        ).setText("it gets +2/+2 until end of turn"), StaticFilters.FILTER_SPELL_A).setTriggerPhrase("Whenever {this} becomes the target of a spell, ");
+        ability.addEffect(new DamagePlayersEffect(2, TargetController.OPPONENT)
+                .setText("and deals 2 damage to each opponent"));
+        this.addAbility(ability);
+    }
+
+    private TheHowlingAbomination(final TheHowlingAbomination card) {
+        super(card);
+    }
+
+    @Override
+    public TheHowlingAbomination copy() {
+        return new TheHowlingAbomination(this);
+    }
+}
+
+enum TheHowlingAbominationCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return game
+                .getState()
+                .getWatcher(CastSpellLastTurnWatcher.class)
+                .getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) >= 3;
+    }
+}

@@ -31,7 +31,7 @@ public final class JaceTheLivingGuildpact extends CardImpl {
 
     public JaceTheLivingGuildpact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
         this.setStartingLoyalty(5);
@@ -46,7 +46,7 @@ public final class JaceTheLivingGuildpact extends CardImpl {
 
         // -8: Each player shuffles their hand and graveyard into their library. You draw seven cards.
         ability = new LoyaltyAbility(new ShuffleHandGraveyardAllEffect(), -8);
-        ability.addEffect(new DrawCardSourceControllerEffect(7, "you"));
+        ability.addEffect(new DrawCardSourceControllerEffect(7, true));
         this.addAbility(ability);
     }
 

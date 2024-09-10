@@ -7,7 +7,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -36,10 +36,10 @@ public final class MoltenSlagheap extends CardImpl {
         this.addAbility(ability);
         // {1}, Remove X storage counters from Molten Slagheap: Add X mana in any combination of {B} and/or {R}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance,
+                new AddManaInAnyCombinationEffect(GetXValue.instance,
                         new CountersSourceCount(CounterType.STORAGE), ColoredManaSymbol.B, ColoredManaSymbol.R),
                 new GenericManaCost(1));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE));
         this.addAbility(ability);
     }
 

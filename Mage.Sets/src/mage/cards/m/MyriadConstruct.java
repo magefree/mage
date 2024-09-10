@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -52,15 +52,15 @@ public final class MyriadConstruct extends CardImpl {
         // Kicker {3}
         this.addAbility(new KickerAbility("{3}"));
 
-        // If Myriad Construct was kicked, it enters the battlefield with a +1/+1 counter on it for each nonbasic land your opponents control.
+        // If Myriad Construct was kicked, it enters with a +1/+1 counter on it for each nonbasic land your opponents control.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), xValue, false),
-                KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield " +
+                KickedCondition.ONCE, "If {this} was kicked, it enters " +
                 "with a +1/+1 counter on it for each nonbasic land your opponents control.", ""
         ));
 
         // When Myriad Construct becomes the target of a spell, sacrifice it and create a number of 1/1 colourless Construct artifact creature tokens equal to its power.
-        Ability ability = new BecomesTargetTriggeredAbility(
+        Ability ability = new BecomesTargetSourceTriggeredAbility(
                 new SacrificeSourceEffect().setText("sacrifice it"), StaticFilters.FILTER_SPELL_A
         );
         ability.addEffect(new CreateTokenEffect(new ConstructToken(), xValue2)

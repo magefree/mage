@@ -46,13 +46,13 @@ public final class PatientRebuilding extends CardImpl {
 
 class PatientRebuildingEffect extends OneShotEffect {
 
-    public PatientRebuildingEffect() {
+    PatientRebuildingEffect() {
         super(Outcome.DrawCard);
         this.staticText = "target opponent mills three cards, "
                 + "then you draw a card for each land card put into that graveyard this way";
     }
 
-    public PatientRebuildingEffect(final PatientRebuildingEffect effect) {
+    private PatientRebuildingEffect(final PatientRebuildingEffect effect) {
         super(effect);
     }
 

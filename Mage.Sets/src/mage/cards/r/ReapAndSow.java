@@ -30,7 +30,7 @@ public final class ReapAndSow extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         //or search your library for a land card, put that card onto the battlefield, then shuffle your library.
-        Mode mode = new Mode(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterLandCard())));
+        Mode mode = new Mode(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterLandCard()), false, true));
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {1}{G}

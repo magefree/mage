@@ -5,9 +5,8 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -16,7 +15,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class SkyclaveCleric extends ModalDoubleFacesCard {
+public final class SkyclaveCleric extends ModalDoubleFacedCard {
 
     public SkyclaveCleric(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

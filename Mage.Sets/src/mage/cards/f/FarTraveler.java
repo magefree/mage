@@ -3,8 +3,7 @@ package mage.cards.f;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,14 +30,13 @@ public final class FarTraveler extends CardImpl {
     public FarTraveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "At the beginning of your end step, exile up to one target tapped creature you control, then return it to the battlefield under its owner's control."
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ExileTargetForSourceEffect(), TargetController.YOU, false
+                new ExileThenReturnTargetEffect(false, false), TargetController.YOU, false
         );
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield,

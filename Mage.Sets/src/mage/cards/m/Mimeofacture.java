@@ -56,7 +56,7 @@ class MimeofactureEffect extends OneShotEffect {
                 + "Then that player shuffles.";
     }
 
-    MimeofactureEffect(final MimeofactureEffect effect) {
+    private MimeofactureEffect(final MimeofactureEffect effect) {
         super(effect);
     }
 

@@ -9,20 +9,19 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Quercitron
  */
 public class PreventAllDamageToAndByAttachedEffect extends PreventionEffectImpl {
 
     private final String attachedDescription;
-    
+
     public PreventAllDamageToAndByAttachedEffect(Duration duration, String attachedDescription, boolean onlyCombat) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
         this.attachedDescription = attachedDescription;
         this.staticText = setText();
     }
 
-    public PreventAllDamageToAndByAttachedEffect(final PreventAllDamageToAndByAttachedEffect effect) {
+    protected PreventAllDamageToAndByAttachedEffect(final PreventAllDamageToAndByAttachedEffect effect) {
         super(effect);
         this.attachedDescription = effect.attachedDescription;
     }
@@ -54,5 +53,5 @@ public class PreventAllDamageToAndByAttachedEffect extends PreventionEffectImpl 
         sb.append(attachedDescription);
         return sb.toString();
     }
-    
+
 }

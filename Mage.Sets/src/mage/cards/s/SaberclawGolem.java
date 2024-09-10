@@ -29,7 +29,7 @@ public final class SaberclawGolem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
-    public SaberclawGolem (final SaberclawGolem card) {
+    private SaberclawGolem(final SaberclawGolem card) {
         super(card);
     }
 

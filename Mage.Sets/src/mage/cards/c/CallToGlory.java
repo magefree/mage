@@ -17,7 +17,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class CallToGlory extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai creatures");
 
     static {
         filter.add(SubType.SAMURAI.getPredicate());
@@ -26,8 +26,8 @@ public final class CallToGlory extends CardImpl {
     public CallToGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
         
-        //Untap all creatures you control. Samurai creatures you control get +1/+1 until end of turn.
-        this.getSpellAbility().addEffect(new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE));
+        // Untap all creatures you control. Samurai creatures you control get +1/+1 until end of turn.
+        this.getSpellAbility().addEffect(new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, false));
     }
 

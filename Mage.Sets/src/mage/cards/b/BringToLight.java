@@ -44,14 +44,14 @@ public final class BringToLight extends CardImpl {
 
 class BringToLightEffect extends OneShotEffect {
 
-    public BringToLightEffect() {
+    BringToLightEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "search your library for a creature, instant, or sorcery card with mana value " +
                 "less than or equal to the number of colors of mana spent to cast this spell, exile that card, "
                 + "then shuffle. You may cast that card without paying its mana cost";
     }
 
-    public BringToLightEffect(final BringToLightEffect effect) {
+    private BringToLightEffect(final BringToLightEffect effect) {
         super(effect);
     }
 

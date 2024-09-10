@@ -60,7 +60,7 @@ class ForcefieldEffect extends OneShotEffect {
         this.staticText = "The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage";
     }
 
-    ForcefieldEffect(final ForcefieldEffect effect) {
+    private ForcefieldEffect(final ForcefieldEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class ForcefieldPreventionEffect extends PreventionEffectImpl {
         this.staticText = "Prevent all but 1 of that damage";
     }
 
-    ForcefieldPreventionEffect(ForcefieldPreventionEffect effect) {
+    private ForcefieldPreventionEffect(final ForcefieldPreventionEffect effect) {
         super(effect);
     }
 

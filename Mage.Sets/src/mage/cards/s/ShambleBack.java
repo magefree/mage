@@ -8,6 +8,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInGraveyard;
@@ -23,7 +24,7 @@ public final class ShambleBack extends CardImpl {
 
         // Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token. You gain 2 life.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }

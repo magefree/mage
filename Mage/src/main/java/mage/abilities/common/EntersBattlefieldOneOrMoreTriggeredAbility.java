@@ -1,6 +1,5 @@
 package mage.abilities.common;
 
-import mage.MageItem;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
@@ -8,12 +7,10 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
-import mage.game.permanent.Permanent;
+import mage.game.events.ZoneChangeBatchEvent;
 import mage.players.Player;
 
-import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.UUID;
 
 /**
  * "Whenever one or more {filter} enter the battlefield under {target controller} control,
@@ -40,37 +37,32 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
+
         Player controller = game.getPlayer(this.controllerId);
-        if (zEvent.getToZone() != Zone.BATTLEFIELD || controller == null) {
+        if (controller == null) {
             return false;
         }
 
-        switch (this.targetController) {
-            case YOU:
-                if (!controller.getId().equals(zEvent.getPlayerId())) {
-                    return false;
-                }
-                break;
-            case OPPONENT:
-                if (!controller.hasOpponent(zEvent.getPlayerId(), game)) {
-                    return false;
-                }
-                break;
-        }
-
-        return Stream.concat(
-                zEvent.getTokens().stream(),
-                zEvent.getCards().stream()
-                        .map(MageItem::getId)
-                        .map(game::getPermanent)
-                        .filter(Objects::nonNull)
-        ).anyMatch(permanent -> filterPermanent.match(permanent, this.controllerId, this, game));
+        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
+        return zEvent.getEvents().stream()
+                .filter(z -> z.getToZone() == Zone.BATTLEFIELD)
+                .filter(z -> filterPermanent.match(z.getTarget(), this.controllerId, this, game))
+                .anyMatch(z -> {
+                    UUID enteringPermanentControllerID = z.getTarget().getControllerId();
+                    switch (this.targetController) {
+                        case YOU:
+                            return enteringPermanentControllerID.equals(this.controllerId);
+                        case OPPONENT:
+                            return controller.hasOpponent(enteringPermanentControllerID, game);
+                        default:
+                            throw new IllegalArgumentException("Unsupported target: " + this.targetController);
+                    }
+                });
     }
 
     @Override
@@ -79,16 +71,20 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
     }
 
     private String generateTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever one or more " + this.filterPermanent.getMessage() + " enter the battlefield under ");
+        StringBuilder sb = new StringBuilder("Whenever one or more " + filterPermanent.getMessage());
         switch (targetController) {
             case YOU:
-                sb.append("your control, ");
+                if (filterPermanent.getMessage().contains("you control")) {
+                    sb.append(" enter, ");
+                } else {
+                    sb.append(" you control enter, ");
+                }
                 break;
             case OPPONENT:
-                sb.append("an opponent's control, ");
+                sb.append(" enter under an opponent's control, ");
                 break;
             default:
-                throw new UnsupportedOperationException();
+                throw new IllegalArgumentException("Unsupported TargetController in EntersBattlefieldOneOrMoreTriggeredAbility");
         }
         return sb.toString();
     }

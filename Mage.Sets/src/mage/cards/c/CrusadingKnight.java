@@ -19,7 +19,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public final class CrusadingKnight extends CardImpl {
 
-    private static final FilterLandPermanent swampFilter = new FilterLandPermanent("Swamp your opponent controls");
+    private static final FilterLandPermanent swampFilter = new FilterLandPermanent("Swamp your opponents control");
     static {
       swampFilter.add(SubType.SWAMP.getPredicate());
       swampFilter.add(TargetController.OPPONENT.getControllerPredicate());

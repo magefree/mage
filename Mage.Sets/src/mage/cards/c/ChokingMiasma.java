@@ -50,7 +50,7 @@ public final class ChokingMiasma extends CardImpl {
 
 class ChokingMiasmaEffect extends OneShotEffect {
 
-    public ChokingMiasmaEffect() {
+    ChokingMiasmaEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "If this spell was kicked, put a +1/+1 counter on a creature you control.";
     }
@@ -74,7 +74,7 @@ class ChokingMiasmaEffect extends OneShotEffect {
             return false;
         }
         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(controller.getId(), source, game)) {
             return false;
         }

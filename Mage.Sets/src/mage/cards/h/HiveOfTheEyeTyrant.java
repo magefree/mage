@@ -46,7 +46,7 @@ public final class HiveOfTheEyeTyrant extends CardImpl {
         // If you control two or more other lands, Hive of the Eye Tyrant enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldAbility(
                 new TapSourceEffect(), condition, "If you control two or more other lands, " +
-                "{this} enters the battlefield tapped.", ""
+                "{this} enters tapped.", ""
         ));
 
         // {T}: Add {B}.
@@ -63,8 +63,8 @@ public final class HiveOfTheEyeTyrant extends CardImpl {
                         3, 3, "3/3 black Beholder creature with menace and " +
                         "\"Whenever this creature attacks, exile target card from defending player's graveyard.\""
                 ).withSubType(SubType.BEHOLDER).withColor("B").withAbility(new MenaceAbility()).withAbility(ability),
-                "land", Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{3}{B}")));
+                CardType.LAND, Duration.EndOfTurn
+        ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{3}{B}")));
     }
 
     private HiveOfTheEyeTyrant(final HiveOfTheEyeTyrant card) {

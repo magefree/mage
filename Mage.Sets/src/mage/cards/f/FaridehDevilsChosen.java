@@ -28,7 +28,7 @@ public final class FaridehDevilsChosen extends CardImpl {
     public FaridehDevilsChosen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIEFLING);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(3);

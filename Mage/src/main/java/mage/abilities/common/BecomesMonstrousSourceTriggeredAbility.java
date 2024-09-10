@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -24,7 +23,7 @@ public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl
         this(effect, false);
     }
 
-    public BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
+    protected BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
         super(ability);
         this.monstrosityValue = ability.monstrosityValue;
     }

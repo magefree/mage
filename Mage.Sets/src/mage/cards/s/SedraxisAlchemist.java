@@ -29,7 +29,7 @@ public final class SedraxisAlchemist extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
     
-    private static final String rule = "When {this} enters the battlefield, if you control a blue permanent, return target nonland permanent to its owner's hand.";
+    private static final String rule = "When {this} enters, if you control a blue permanent, return target nonland permanent to its owner's hand.";
 
     public SedraxisAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

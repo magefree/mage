@@ -44,7 +44,7 @@ public final class BondsOfQuicksilver extends CardImpl {
         
     }
 
-    public BondsOfQuicksilver (final BondsOfQuicksilver card) {
+    private BondsOfQuicksilver(final BondsOfQuicksilver card) {
         super(card);
     }
 

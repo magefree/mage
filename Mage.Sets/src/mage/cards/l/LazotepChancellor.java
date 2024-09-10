@@ -27,7 +27,7 @@ public final class LazotepChancellor extends CardImpl {
 
         // Whenever you discard a card, you may pay {1}. If you do, amass 2.
         this.addAbility(new DiscardCardControllerTriggeredAbility(
-                new DoIfCostPaid(new AmassEffect(2), new GenericManaCost(1)), false
+                new DoIfCostPaid(new AmassEffect(2, SubType.ZOMBIE), new GenericManaCost(1)), false
         ));
     }
 

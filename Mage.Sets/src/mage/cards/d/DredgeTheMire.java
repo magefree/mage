@@ -69,8 +69,8 @@ class DredgeTheMireEffect extends OneShotEffect {
                 continue;
             }
             TargetCard target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-            target.setNotTarget(true);
-            if (!player.choose(outcome, player.getGraveyard(), target, game)) {
+            target.withNotTarget(true);
+            if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
                 continue;
             }
             cards.add(target.getFirstTarget());

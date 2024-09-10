@@ -25,7 +25,7 @@ public final class TraxosScourgeOfKroog extends CardImpl {
     public TraxosScourgeOfKroog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
@@ -35,7 +35,7 @@ public final class TraxosScourgeOfKroog extends CardImpl {
 
         // Traxos, Scourge of Kroog enters the battlefield tapped and doesn't untap during your untap step.
         Ability ability = new EntersBattlefieldTappedAbility(
-                "{this} enters the battlefield tapped and doesn't untap during your untap step.");
+                "{this} enters tapped and doesn't untap during your untap step.");
         ability.addEffect(new DontUntapInControllersUntapStepSourceEffect());
         this.addAbility(ability);
         // Whenever you cast a historic spell untap Traxos.

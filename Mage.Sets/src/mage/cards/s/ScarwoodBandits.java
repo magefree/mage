@@ -83,7 +83,7 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
         this.chooseUseText = chooseUseText;
     }
 
-    public DoUnlessAnyOpponentPaysEffect(final DoUnlessAnyOpponentPaysEffect effect) {
+    private DoUnlessAnyOpponentPaysEffect(final DoUnlessAnyOpponentPaysEffect effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.cost = effect.cost.copy();
@@ -129,7 +129,7 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
             // do the effects if nobody paid
             if (doEffect) {
                 for (Effect effect : executingEffects) {
-                    effect.setTargetPointer(this.targetPointer);
+                    effect.setTargetPointer(this.getTargetPointer().copy());
                     if (effect instanceof OneShotEffect) {
                         result &= effect.apply(game, source);
                     } else {

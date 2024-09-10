@@ -39,13 +39,13 @@ public final class ChishiroTheShatteredBlade extends CardImpl {
     public ChishiroTheShatteredBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.SAMURAI);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever an Aura or Equipment enters the battlefield under your control, create a 2/2 red Spirit creature token.
+        // Whenever an Aura or Equipment you control enters, create a 2/2 red Spirit creature token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CreateTokenEffect(new SpiritRedToken()), filter
         ));

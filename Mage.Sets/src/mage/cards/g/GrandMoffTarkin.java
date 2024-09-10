@@ -26,7 +26,7 @@ public final class GrandMoffTarkin extends CardImpl {
 
     public GrandMoffTarkin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);
@@ -53,7 +53,7 @@ class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the beginning of each opponent's upkeep, ");
     }
 
-    public GrandMoffTarkinTriggeredAbility(final GrandMoffTarkinTriggeredAbility ability) {
+    private GrandMoffTarkinTriggeredAbility(final GrandMoffTarkinTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,12 +86,12 @@ class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
 
 class GrandMoffTarkinEffect extends OneShotEffect {
 
-    public GrandMoffTarkinEffect() {
+    GrandMoffTarkinEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "destroy target creature that that player controls unless that player pays 2 life. If a player pays life this way, draw a card";
     }
 
-    public GrandMoffTarkinEffect(final GrandMoffTarkinEffect effect) {
+    private GrandMoffTarkinEffect(final GrandMoffTarkinEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class GrandMoffTarkinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature == null) {
             return false;
         }

@@ -4,8 +4,7 @@ import mage.abilities.common.CycleControllerTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoWhenCostPaid;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,11 +35,8 @@ public final class EscapeProtocol extends CardImpl {
 
         // Whenever you cycle a card, you may pay {1}. When you do, exile target artifact or creature you control, then return it to the battlefield under its owner's control.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new ExileTargetForSourceEffect(), false,
-                "exile target artifact or creature you control, " +
-                        "then return it to the battlefield under its owner's control"
+                new ExileThenReturnTargetEffect(false, false), false
         );
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new CycleControllerTriggeredAbility(new DoWhenCostPaid(
                 ability, new GenericManaCost(1), "Pay {1}?"

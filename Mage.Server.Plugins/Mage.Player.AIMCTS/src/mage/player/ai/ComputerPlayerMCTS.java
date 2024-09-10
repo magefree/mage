@@ -12,20 +12,19 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.player.ai.MCTSPlayer.NextAction;
 import mage.players.Player;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
+public class ComputerPlayerMCTS extends ComputerPlayer {
 
     private static final int THINK_MIN_RATIO = 40;
     private static final int THINK_MAX_RATIO = 100;
@@ -36,6 +35,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
     protected int maxThinkTime;
     private static final Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
     private int poolSize;
+
+    private ExecutorService threadPoolSimulations = null;
 
     public ComputerPlayerMCTS(String name, RangeOfInfluence range, int skill) {
         super(name, range);
@@ -61,7 +62,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 
     @Override
     public boolean priority(Game game) {
-        if (game.getStep().getType() == PhaseStep.UPKEEP) {
+        if (game.getTurnStepType() == PhaseStep.UPKEEP) {
             if (!lastPhase.equals(game.getTurn().getValue(game.getTurnNum()))) {
                 logList(game.getTurn().getValue(game.getTurnNum()) + name + " hand: ", new ArrayList(hand.getCards(game)));
                 lastPhase = game.getTurn().getValue(game.getTurnNum());
@@ -94,8 +95,10 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
             root = new MCTSNode(playerId, sim);
         }
         applyMCTS(game, action);
-        root = root.bestChild();
-        root.emancipate();
+        if (root != null && root.bestChild() != null) {
+            root = root.bestChild();
+            root.emancipate();
+        }
     }
 
     protected void getNextAction(Game game, NextAction nextAction) {
@@ -161,7 +164,19 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
 
         if (thinkTime > 0) {
             if (USE_MULTIPLE_THREADS) {
-                ExecutorService pool = Executors.newFixedThreadPool(poolSize);
+                if (this.threadPoolSimulations == null) {
+                    // same params as Executors.newFixedThreadPool
+                    // no needs errors check in afterExecute here cause that pool used for FutureTask with result check already
+                    this.threadPoolSimulations = new ThreadPoolExecutor(
+                            poolSize,
+                            poolSize,
+                            0L,
+                            TimeUnit.MILLISECONDS,
+                            new LinkedBlockingQueue<>(),
+                            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_AI_SIMULATION_MCTS) // TODO: add player/game to thread name?
+                    );
+                }
+
                 List<MCTSExecutor> tasks = new ArrayList<>();
                 for (int i = 0; i < poolSize; i++) {
                     Game sim = createMCTSGame(game);
@@ -172,11 +187,18 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                 }
 
                 try {
-                    pool.invokeAll(tasks, thinkTime, TimeUnit.SECONDS);
-                    pool.awaitTermination(1, TimeUnit.SECONDS);
-                    pool.shutdownNow();
-                } catch (InterruptedException | RejectedExecutionException ex) {
-                    logger.warn("applyMCTS interrupted");
+                    List<Future<Boolean>> runningTasks = threadPoolSimulations.invokeAll(tasks, thinkTime, TimeUnit.SECONDS);
+                    for (Future<Boolean> runningTask : runningTasks) {
+                        runningTask.get();
+                    }
+                } catch (InterruptedException | CancellationException e) {
+                    logger.warn("applyMCTS timeout");
+                } catch (ExecutionException e) {
+                    // real games: must catch and log
+                    // unit tests: must raise again for fast fail
+                    if (this.isTestsMode()) {
+                        throw new IllegalStateException("One of the simulated games raise the error: " + e, e);
+                    }
                 }
 
                 int simCount = 0;
@@ -236,7 +258,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
         if (root.getNumChildren() > 0)
             nodeSizeRatio = root.getVisits() / root.getNumChildren();
 //        logger.info("Ratio: " + nodeSizeRatio);
-        PhaseStep curStep = game.getStep().getType();
+        PhaseStep curStep = game.getTurnStepType();
         if (action == NextAction.SELECT_ATTACKERS || action == NextAction.SELECT_BLOCKERS) {
             if (nodeSizeRatio < THINK_MIN_RATIO) {
                 thinkTime = maxThinkTime;
@@ -274,19 +296,20 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
      * @return a new game object with simulated players
      */
     protected Game createMCTSGame(Game game) {
-        Game mcts = game.copy();
+        Game mcts = game.createSimulationForAI();
 
         for (Player copyPlayer : mcts.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
             MCTSPlayer newPlayer = new MCTSPlayer(copyPlayer.getId());
             newPlayer.restore(origPlayer);
+            newPlayer.setMatchPlayer(origPlayer.getMatchPlayer());
             if (!newPlayer.getId().equals(playerId)) {
                 int handSize = newPlayer.getHand().size();
                 newPlayer.getLibrary().addAll(newPlayer.getHand().getCards(mcts), mcts);
                 newPlayer.getHand().clear();
                 newPlayer.getLibrary().shuffle();
                 for (int i = 0; i < handSize; i++) {
-                    Card card = newPlayer.getLibrary().removeFromTop(mcts);
+                    Card card = newPlayer.getLibrary().drawFromTop(mcts);
                     card.setZone(Zone.HAND, mcts);
                     newPlayer.getHand().add(card);
                 }
@@ -295,7 +318,6 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
             }
             mcts.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
         }
-        mcts.setSimulation(true);
         mcts.resume();
         return mcts;
     }

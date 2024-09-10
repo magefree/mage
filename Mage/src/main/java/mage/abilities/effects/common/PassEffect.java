@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.constants.Outcome;
@@ -9,6 +7,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
+ * AI: fake effect to pass priority in game simulations
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -18,7 +17,7 @@ public class PassEffect extends OneShotEffect {
         super(Outcome.Neutral);
     }
 
-    public PassEffect(final PassEffect effect) {
+    protected PassEffect(final PassEffect effect) {
         super(effect);
     }
 

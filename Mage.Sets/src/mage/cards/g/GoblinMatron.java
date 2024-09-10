@@ -32,7 +32,7 @@ public final class GoblinMatron extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Goblin Matron enters the battlefield, you may search your library for a Goblin card, reveal that card, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), true));
     }
 
     private GoblinMatron(final GoblinMatron card) {

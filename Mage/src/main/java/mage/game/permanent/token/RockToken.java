@@ -11,12 +11,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
 
-import java.util.Arrays;
-
 public final class RockToken extends TokenImpl {
 
     public RockToken() {
-        super("Rock", "artifact equipment token named Rock with \"Equipped creature has '{1}, {T}, Sacrifice Rock: This creature deals 2 damage to any target'\" and equip {1}");
+        super("Rock", "colorless Equipment artifact token named Rock with \"Equipped creature has '{1}, {T}, Sacrifice Rock: This creature deals 2 damage to any target'\" and equip {1}");
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.EQUIPMENT);
 
@@ -25,20 +23,13 @@ public final class RockToken extends TokenImpl {
                 new DamageTargetEffect(2), new TargetAnyTarget(), new SacrificeAttachmentCost(), new GenericManaCost(1), new TapSourceCost()
         )));
         this.addAbility(new EquipAbility(1));
-
-        availableImageSetCodes = Arrays.asList("CMR");
     }
 
-    public RockToken(final RockToken token) {
+    private RockToken(final RockToken token) {
         super(token);
     }
 
     public RockToken copy() {
         return new RockToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
     }
 }

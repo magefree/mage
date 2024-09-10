@@ -1,6 +1,5 @@
 package mage.game.draft;
 
-import java.util.*;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.game.draft.DraftOptions.TimingOption;
@@ -8,15 +7,17 @@ import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.players.Player;
 import mage.players.PlayerList;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import org.apache.log4j.Logger;
 
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class DraftImpl implements Draft {
@@ -24,6 +25,7 @@ public abstract class DraftImpl implements Draft {
     protected static final Logger logger = Logger.getLogger(DraftImpl.class);
 
     protected final UUID id;
+    protected UUID tableId = null;
     protected final Map<UUID, DraftPlayer> players = new LinkedHashMap<>();
     protected final PlayerList table = new PlayerList();
     protected int numberBoosters;
@@ -34,19 +36,19 @@ public abstract class DraftImpl implements Draft {
     protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
     protected TimingOption timing;
     protected int boosterLoadingCounter; // number of times the boosters have been sent to players until all are confirmed to have received them
-    protected final int BOOSTER_LOADING_INTERVAL = 3; // interval in seconds
+    protected final int BOOSTER_LOADING_INTERVAL = 2; // interval in seconds
 
     protected boolean abort = false;
     protected boolean started = false;
 
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
-    
+
     protected ScheduledFuture<?> boosterLoadingHandle;
-    protected final ScheduledExecutorService boosterLoadingExecutor = Executors.newSingleThreadScheduledExecutor();
+    protected ScheduledExecutorService boosterLoadingExecutor = null;
 
     public DraftImpl(DraftOptions options, List<ExpansionSet> sets) {
-        id = UUID.randomUUID();
+        this.id = UUID.randomUUID();
         this.setCodes = options.getSetCodes();
         this.draftCube = options.getDraftCube();
         this.timing = options.getTiming();
@@ -57,6 +59,16 @@ public abstract class DraftImpl implements Draft {
     @Override
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public UUID getTableId() {
+        return tableId;
+    }
+
+    @Override
+    public void setTableId(UUID tableId) {
+        this.tableId = tableId;
     }
 
     @Override
@@ -158,8 +170,12 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public void autoPick(UUID playerId) {
-        List<Card> booster = players.get(playerId).getBooster();
-        this.addPick(playerId, booster.get(booster.size()-1).getId(), null);
+        if (players.containsKey(playerId)) {
+            List<Card> booster = players.get(playerId).getBooster();
+            if (booster.size() > 0) {
+                this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
+            }
+        }
     }
 
     protected void passBoosterToLeft() {
@@ -236,13 +252,20 @@ public abstract class DraftImpl implements Draft {
         cardNum++;
         return true;
     }
-    
+
     protected void setupBoosterLoadingHandle() {
         cancelBoosterLoadingHandle();
         boosterLoadingCounter = 0;
+
+        if (this.boosterLoadingExecutor == null) {
+            this.boosterLoadingExecutor = Executors.newSingleThreadScheduledExecutor(
+                    new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TOURNEY_BOOSTERS_SEND)
+            );
+        }
+
         boosterLoadingHandle = boosterLoadingExecutor.scheduleAtFixedRate(() -> {
             try {
-                if (loadBoosters() == true) {
+                if (loadBoosters()) {
                     cancelBoosterLoadingHandle();
                 } else {
                     boosterLoadingCounter++;
@@ -252,14 +275,14 @@ public abstract class DraftImpl implements Draft {
             }
         }, 0, BOOSTER_LOADING_INTERVAL, TimeUnit.SECONDS);
     }
-    
+
     protected void cancelBoosterLoadingHandle() {
         if (boosterLoadingHandle != null) {
             boosterLoadingHandle.cancel(true);
         }
     }
-    
-    protected boolean loadBoosters () {
+
+    protected boolean loadBoosters() {
         boolean allBoostersLoaded = true;
         for (DraftPlayer player : players.values()) {
             if (player.isPicking() && !player.isBoosterLoaded()) {
@@ -269,7 +292,7 @@ public abstract class DraftImpl implements Draft {
         }
         return allBoostersLoaded;
     }
-    
+
     protected boolean donePicking() {
         if (isAbort()) {
             return true;
@@ -309,9 +332,19 @@ public abstract class DraftImpl implements Draft {
     @Override
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
+        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), getPickTimeout());
+    }
+
+    @Override
+    public int getPickTimeout() {
         int cardNum = Math.min(15, this.cardNum);
-        int time = timing.getPickTimeout(cardNum) - boosterLoadingCounter * BOOSTER_LOADING_INTERVAL;
-        playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
+        int time = timing.getPickTimeout(cardNum);
+        // if the pack is re-sent to a player because they haven't been able to successfully load it, the pick time is reduced appropriately because of the elapsed time
+        // the time is always at least 1 second unless it's set to 0, i.e. unlimited time
+        if (time > 0) {
+            time = Math.max(1, time - boosterLoadingCounter * BOOSTER_LOADING_INTERVAL);
+        }
+        return time;
     }
 
     @Override
@@ -331,7 +364,7 @@ public abstract class DraftImpl implements Draft {
         }
         return !player.isPicking();
     }
-    
+
     @Override
     public void setBoosterLoaded(UUID playerId) {
         DraftPlayer player = players.get(playerId);

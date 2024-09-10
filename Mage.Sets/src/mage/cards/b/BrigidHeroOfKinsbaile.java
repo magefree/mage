@@ -21,7 +21,7 @@ public final class BrigidHeroOfKinsbaile extends CardImpl {
 
     public BrigidHeroOfKinsbaile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KITHKIN, SubType.ARCHER);
 
         this.power = new MageInt(2);

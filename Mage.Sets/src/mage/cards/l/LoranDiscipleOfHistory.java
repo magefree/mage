@@ -31,13 +31,13 @@ public final class LoranDiscipleOfHistory extends CardImpl {
     public LoranDiscipleOfHistory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Loran, Disciple of History or another legendary creature enters the battlefield under your control, return target artifact card from your graveyard to your hand.
+        // Whenever Loran, Disciple of History or another legendary creature you control enters, return target artifact card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new ReturnFromGraveyardToHandTargetEffect(), filter, false, true
         );

@@ -45,7 +45,7 @@ public final class MishraLostToPhyrexia extends MeldCard {
     public MishraLostToPhyrexia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(9);

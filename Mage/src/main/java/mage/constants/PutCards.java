@@ -1,6 +1,7 @@
 package mage.constants;
 
 import mage.abilities.Ability;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -8,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author awjackson
  */
 
@@ -17,11 +17,13 @@ public enum PutCards {
     GRAVEYARD(Outcome.Discard, Zone.GRAVEYARD, "into your graveyard"),
     BATTLEFIELD(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield"),
     BATTLEFIELD_TAPPED(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield tapped"),
+    BATTLEFIELD_TRANSFORMED(Outcome.PutCardInPlay, Zone.BATTLEFIELD, "onto the battlefield transformed"),
     EXILED(Outcome.Exile, Zone.EXILED, "into exile"), // may need special case code to generate correct text
     TOP_OR_BOTTOM(Outcome.Benefit, Zone.LIBRARY, "on the top or bottom of your library"),
     TOP_ANY(Outcome.Benefit, Zone.LIBRARY, "on top of your library", " in any order"),
     BOTTOM_ANY(Outcome.Benefit, Zone.LIBRARY, "on the bottom of your library", " in any order"),
-    BOTTOM_RANDOM(Outcome.Benefit, Zone.LIBRARY, "on the bottom of your library", " in a random order");
+    BOTTOM_RANDOM(Outcome.Benefit, Zone.LIBRARY, "on the bottom of your library", " in a random order"),
+    SHUFFLE(Outcome.Benefit, Zone.LIBRARY, "shuffled into your library"); // may need special case code to generate correct text
 
     private final Outcome outcome;
     private final Zone zone;
@@ -73,6 +75,10 @@ public enum PutCards {
                 return player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, false);
             case BATTLEFIELD_TAPPED:
                 return player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+            case SHUFFLE:
+                return player.shuffleCardsToLibrary(card, game, source);
+            case BATTLEFIELD_TRANSFORMED:
+                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
             case BATTLEFIELD:
             case EXILED:
             case HAND:
@@ -95,6 +101,10 @@ public enum PutCards {
                 return player.putCardsOnBottomOfLibrary(cards, game, source, false);
             case BATTLEFIELD_TAPPED:
                 return player.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+            case SHUFFLE:
+                return player.shuffleCardsToLibrary(cards, game, source);
+            case BATTLEFIELD_TRANSFORMED:
+                cards.stream().forEach(uuid -> game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + uuid, Boolean.TRUE));
             case BATTLEFIELD:
             case EXILED:
             case HAND:

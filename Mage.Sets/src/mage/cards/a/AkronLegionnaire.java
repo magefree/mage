@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
+import mage.abilities.effects.common.combat.CantAttackAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -35,7 +35,7 @@ public final class AkronLegionnaire extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack.
-        Effect effect = new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter);
+        Effect effect = new CantAttackAllEffect(Duration.WhileOnBattlefield, filter);
         effect.setText("Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         

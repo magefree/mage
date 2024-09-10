@@ -34,7 +34,7 @@ public final class PriestOfTheHauntedEdge extends CardImpl {
     public PriestOfTheHauntedEdge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ZOMBIE, SubType.CLERIC);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

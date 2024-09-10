@@ -3,7 +3,6 @@ package mage.target.common;
 import mage.filter.common.FilterPlayerOrPlaneswalker;
 
 /**
- *
  * @author LevelX2
  */
 public class TargetPlayerOrPlaneswalker extends TargetPermanentOrPlayer {
@@ -24,7 +23,7 @@ public class TargetPlayerOrPlaneswalker extends TargetPermanentOrPlayer {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetPlayerOrPlaneswalker(final TargetPlayerOrPlaneswalker target) {
+    protected TargetPlayerOrPlaneswalker(final TargetPlayerOrPlaneswalker target) {
         super(target);
     }
 

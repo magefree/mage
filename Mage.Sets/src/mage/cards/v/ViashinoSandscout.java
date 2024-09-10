@@ -20,7 +20,7 @@ public final class ViashinoSandscout extends CardImpl {
 
     public ViashinoSandscout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SCOUT);
 
         this.power = new MageInt(2);
@@ -29,7 +29,7 @@ public final class ViashinoSandscout extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of the end step, return Viashino Sandscout to its owner's hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.NEXT, false));
     }
 
     private ViashinoSandscout(final ViashinoSandscout card) {

@@ -1,12 +1,12 @@
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.Locale;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Locale;
 
 /**
  * @author nantuko
@@ -23,7 +23,7 @@ public class AddCardSuperTypeAttachedEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public AddCardSuperTypeAttachedEffect(final AddCardSuperTypeAttachedEffect effect) {
+    protected AddCardSuperTypeAttachedEffect(final AddCardSuperTypeAttachedEffect effect) {
         super(effect);
         this.addedSuperType = effect.addedSuperType;
         this.attachmentType = effect.attachmentType;
@@ -34,8 +34,8 @@ public class AddCardSuperTypeAttachedEffect extends ContinuousEffectImpl {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
-            if (target != null && !target.getSuperType().contains(addedSuperType)) {
-                target.addSuperType(addedSuperType);
+            if (target != null) {
+                target.addSuperType(game, addedSuperType);
             }
         }
         return true;

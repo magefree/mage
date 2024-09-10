@@ -25,7 +25,7 @@ public final class BogTatters extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public BogTatters (final BogTatters card) {
+    private BogTatters(final BogTatters card) {
         super(card);
     }
 

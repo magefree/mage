@@ -47,14 +47,14 @@ public final class DivineVisitation extends CardImpl {
 
 class DivineVisitationEffect extends ReplacementEffectImpl {
 
-    public DivineVisitationEffect() {
+    DivineVisitationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, false);
         staticText = "If one or more creature tokens would be created "
                 + "under your control, that many 4/4 white Angel creature "
                 + "tokens with flying and vigilance are created instead.";
     }
 
-    public DivineVisitationEffect(DivineVisitationEffect effect) {
+    private DivineVisitationEffect(final DivineVisitationEffect effect) {
         super(effect);
     }
 

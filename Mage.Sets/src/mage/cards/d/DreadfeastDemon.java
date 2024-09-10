@@ -43,9 +43,7 @@ public final class DreadfeastDemon extends CardImpl {
         // At the beginning of your end step, sacrifice a non-Demon creature. If you do, create a token that's a copy of Dreadfeast Demon.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenCopySourceEffect(),
-                new SacrificeTargetCost(
-                        new TargetControlledPermanent(filter)
-                ), null, false
+                new SacrificeTargetCost(filter), null, false
         ), TargetController.YOU, false));
     }
 

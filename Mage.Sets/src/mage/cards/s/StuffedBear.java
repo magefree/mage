@@ -22,11 +22,11 @@ public final class StuffedBear extends CardImpl {
 
         // {2}: Stuffed Bear becomes a 4/4 green Bear artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new CreatureToken(4, 4, "4/4 green Bear artifact creature until end of turn")
+                new CreatureToken(4, 4, "4/4 green Bear artifact creature")
                         .withColor("G")
                         .withSubType(SubType.BEAR)
                         .withType(CardType.ARTIFACT),
-                "", Duration.EndOfTurn
+                CardType.ARTIFACT, Duration.EndOfTurn
         ), new GenericManaCost(2)));
     }
 

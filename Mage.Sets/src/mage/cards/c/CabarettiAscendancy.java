@@ -42,7 +42,7 @@ public final class CabarettiAscendancy extends CardImpl {
 
 class CabarettiAscendencyEffect extends OneShotEffect {
 
-    public CabarettiAscendencyEffect() {
+    CabarettiAscendencyEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it on the bottom of your library";
     }

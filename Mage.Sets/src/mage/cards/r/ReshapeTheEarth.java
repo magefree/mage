@@ -20,7 +20,7 @@ public final class ReshapeTheEarth extends CardImpl {
         // Search your library for up to ten land cards, put them onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
                 0, 10, StaticFilters.FILTER_CARD_LANDS
-        ), true, true));
+        ), true));
     }
 
     private ReshapeTheEarth(final ReshapeTheEarth card) {

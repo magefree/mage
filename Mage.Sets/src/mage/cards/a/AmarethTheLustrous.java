@@ -32,7 +32,7 @@ public final class AmarethTheLustrous extends CardImpl {
     public AmarethTheLustrous(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -40,7 +40,7 @@ public final class AmarethTheLustrous extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another permanent enters the battlefield under your control, look at the top card of your library. If it shares a card type with that permanent, you may reveal that card and put it into your hand.
+        // Whenever another permanent you control enters, look at the top card of your library. If it shares a card type with that permanent, you may reveal that card and put it into your hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AmarethTheLustrousEffect(), filter));
     }
 

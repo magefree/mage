@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -24,7 +24,7 @@ public final class OrcishSquatters extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent("land defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public OrcishSquatters(UUID ownerId, CardSetInfo setInfo) {

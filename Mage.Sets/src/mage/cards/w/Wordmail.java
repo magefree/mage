@@ -58,7 +58,7 @@ class WordmailCount implements DynamicValue {
     public WordmailCount() {
     }
 
-    public WordmailCount(final WordmailCount dynamicValue) {
+    private WordmailCount(final WordmailCount dynamicValue) {
     }
 
     @Override

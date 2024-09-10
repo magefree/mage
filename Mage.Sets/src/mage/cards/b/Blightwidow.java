@@ -28,7 +28,7 @@ public final class Blightwidow extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public Blightwidow (final Blightwidow card) {
+    private Blightwidow(final Blightwidow card) {
         super(card);
     }
 

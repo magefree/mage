@@ -1,18 +1,14 @@
-# faster builds
+language: java
+jdk:
+  - openjdk17
+dist: jammy
 git:
   depth: 3
   submodules: false
-sudo: false
-dist: focal
-language: java
-jdk:
-  - openjdk11
-#  - openjdk-ea
-#matrix:
-#  allow_failures:
-#    - jdk: openjdk-ea
 before_install:
   - echo "MAVEN_OPTS='-Xmx2g'" > ~/.mavenrc
+script:
+  - mvn test -B -Dlog4j.configuration=file:${TRAVIS_BUILD_DIR}/.travis/log4j.properties
 cache:
   directories:
     - $HOME/.m2

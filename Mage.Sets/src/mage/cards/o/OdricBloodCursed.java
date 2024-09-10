@@ -25,7 +25,7 @@ public final class OdricBloodCursed extends CardImpl {
     public OdricBloodCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -47,7 +47,7 @@ public final class OdricBloodCursed extends CardImpl {
 
 class OdricBloodCursedEffect extends OneShotEffect {
 
-    public OdricBloodCursedEffect() {
+    OdricBloodCursedEffect() {
         super(Outcome.Benefit);
         staticText = "create X Blood tokens, where X is the number of abilities from among flying, first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance found among creatures you control";
     }

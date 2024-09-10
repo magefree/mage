@@ -9,8 +9,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -27,8 +25,6 @@ public final class PursuedWhaleToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(new CantBlockSourceEffect(Duration.WhileOnBattlefield)
                 .setText("this creature can't block")));
         this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES)));
-
-        availableImageSetCodes = Arrays.asList("M21", "CLB");
     }
 
     private PursuedWhaleToken(final PursuedWhaleToken token) {

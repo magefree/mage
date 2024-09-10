@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -15,17 +14,13 @@ import mage.filter.FilterPermanent;
  */
 public final class RootCage extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("Mercenaries");
-
-    static {
-        filter.add(SubType.MERCENARY.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.MERCENARY, "Mercenaries");
 
     public RootCage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // Mercenaries don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
     private RootCage(final RootCage card) {

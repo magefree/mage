@@ -39,7 +39,7 @@ public final class HowlpackResurgence extends CardImpl {
 
         // Each creature you control that's a Wolf or a Werewolf gets +1/+1 and has trample.
         Effect effect = new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter);
-        effect.setText("Each creature you control that's Wolf or a Werewolf gets +1/+1");
+        effect.setText("Each creature you control that's a Wolf or a Werewolf gets +1/+1");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("and has trample");

@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -75,11 +74,8 @@ class BookwurmEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        return player != null
-                && sourceObject instanceof Card
-                && player.putCardOnTopXOfLibrary(
-                (Card) sourceObject, game, source, 3, true
-        );
+        Card card = source.getSourceCardIfItStillExists(game);
+        return player != null && card != null
+                && player.putCardOnTopXOfLibrary(card, game, source, 3, true);
     }
 }

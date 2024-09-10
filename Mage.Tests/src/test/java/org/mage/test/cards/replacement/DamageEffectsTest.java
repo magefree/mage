@@ -18,7 +18,7 @@ public class DamageEffectsTest extends CardTestPlayerBase {
      */
     @Test
     public void testDamageIsDoubledWithLifelink() {
-        // Landfall - Whenever a land enters the battlefield under your control, you may have target player lose 3 life.
+        // Landfall - Whenever a land you control enters, you may have target player lose 3 life.
         // If you do, put three +1/+1 counters on Ob Nixilis, the Fallen.
         addCard(Zone.BATTLEFIELD, playerB, "Ob Nixilis, the Fallen");
         addCard(Zone.HAND, playerB, "Mountain");

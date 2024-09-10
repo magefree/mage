@@ -27,7 +27,7 @@ public final class StormscaleAnarch extends CardImpl {
     public StormscaleAnarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -51,14 +51,14 @@ public final class StormscaleAnarch extends CardImpl {
 
 class StormscaleAnarchEffect extends OneShotEffect {
 
-    public StormscaleAnarchEffect() {
+    StormscaleAnarchEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals 2 damage to any target. "
                 + "If the discarded card was multicolored, "
-                + "{this} deals 4 damage to that permanent or player instead.";
+                + "{this} deals 4 damage instead.";
     }
 
-    public StormscaleAnarchEffect(final StormscaleAnarchEffect effect) {
+    private StormscaleAnarchEffect(final StormscaleAnarchEffect effect) {
         super(effect);
     }
 

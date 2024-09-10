@@ -50,7 +50,7 @@ class HarvestHandReturnTransformedEffect extends OneShotEffect {
 
     HarvestHandReturnTransformedEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Return {this} to the battlefield transformed under your control";
+        this.staticText = "return it to the battlefield transformed under your control";
     }
 
     private HarvestHandReturnTransformedEffect(final HarvestHandReturnTransformedEffect effect) {
@@ -65,15 +65,12 @@ class HarvestHandReturnTransformedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (!(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (controller == null || card == null) {
             return false;
         }
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game);
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         return true;
     }
 }

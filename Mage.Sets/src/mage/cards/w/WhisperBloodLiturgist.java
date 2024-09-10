@@ -28,7 +28,7 @@ public final class WhisperBloodLiturgist extends CardImpl {
     public WhisperBloodLiturgist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -38,7 +38,7 @@ public final class WhisperBloodLiturgist extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("Return target creature card from your graveyard to the battlefield"),
                  new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, new FilterControlledCreaturePermanent("creatures"), true)));
+        ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_CREATURES));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

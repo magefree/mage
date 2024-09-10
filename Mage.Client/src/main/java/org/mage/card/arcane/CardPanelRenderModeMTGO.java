@@ -3,22 +3,19 @@ package org.mage.card.arcane;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import mage.cards.action.ActionCallback;
-import mage.client.constants.Constants;
+import mage.client.util.ImageCaches;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.view.CardView;
 import mage.view.CounterView;
 import mage.view.PermanentView;
-import mage.view.StackAbilityView;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.mage.plugins.card.images.ImageCache;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,19 +23,23 @@ import java.util.concurrent.TimeUnit;
  */
 public class CardPanelRenderModeMTGO extends CardPanel {
 
-    // Map of generated images
-    private final static Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder
-            .newBuilder()
-            .maximumSize(3000)
-            .expireAfterAccess(60, TimeUnit.MINUTES)
-            .softValues()
-            .build();
+    // TODO: share code and use for all images/rendering (potential injection point - images cache), see #969
+    private static final boolean MTGO_MODE_RENDER_SMOOTH_IMAGES_ENABLED = false;
+    private static final int MTGO_MODE_RENDER_SCALED_IMAGES_COEF = 1; // TODO: experiment with scale settings, is it useful to render in x2-x4 sizes?
+
+    // https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
+
+    private static final Cache<ImageKey, BufferedImage> MTGO_MODE_RENDERED_CACHE = ImageCaches.register(
+            CacheBuilder
+                    .newBuilder()
+                    .maximumSize(3000)
+                    .expireAfterAccess(60, TimeUnit.MINUTES)
+                    .softValues()
+                    .build()
+    );
 
     // The art image for the card, loaded in from the disk
     private BufferedImage artImage;
-
-    // The faceart image for the card, loaded in from the disk (based on artid from mtgo)
-    private BufferedImage faceArtImage;
 
     // Factory to generate card appropriate views
     private final CardRendererFactory cardRendererFactory = new CardRendererFactory();
@@ -49,42 +50,6 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     private CardRenderer cardRenderer;
 
     private int updateArtImageStamp;
-
-    private static boolean cardViewEquals(CardView a, CardView b) { // TODO: This belongs in CardView
-        if (a == b) {
-            return true;
-        }
-        if (a == null || b == null || a.getClass() != b.getClass()) {
-            return false;
-        }
-
-        if (!(a.getDisplayName().equals(b.getDisplayName()) // TODO: Original code not checking everything. Why is it only checking these values?
-                && a.getPower().equals(b.getPower())
-                && a.getToughness().equals(b.getToughness())
-                && a.getLoyalty().equals(b.getLoyalty())
-                && 0 == a.getColor().compareTo(b.getColor())
-                && a.getCardTypes().equals(b.getCardTypes())
-                && a.getSubTypes().equals(b.getSubTypes())
-                && a.getSuperTypes().equals(b.getSuperTypes())
-                && a.getManaCostStr().equals(b.getManaCostStr())
-                && a.getRules().equals(b.getRules())
-                && Objects.equals(a.getRarity(), b.getRarity())
-                && Objects.equals(a.getCardNumber(), b.getCardNumber())
-                && Objects.equals(a.getExpansionSetCode(), b.getExpansionSetCode())
-                && a.getFrameStyle() == b.getFrameStyle()
-                && Objects.equals(a.getCounters(), b.getCounters())
-                && a.isFaceDown() == b.isFaceDown())) {
-            return false;
-        }
-
-        if (!(a instanceof PermanentView)) {
-            return true;
-        }
-        PermanentView aa = (PermanentView) a;
-        PermanentView bb = (PermanentView) b;
-        return aa.hasSummoningSickness() == bb.hasSummoningSickness()
-                && aa.getDamage() == bb.getDamage();
-    }
 
     private static class ImageKey {
         final BufferedImage artImage;
@@ -128,8 +93,9 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             sb.append(this.view.getPower());
             sb.append(this.view.getToughness());
             sb.append(this.view.getLoyalty());
+            sb.append(this.view.getDefense());
             sb.append(this.view.getColor().toString());
-            sb.append(this.view.getType());
+            sb.append(this.view.getImageNumber());
             sb.append(this.view.getExpansionSetCode());
             for (CardType type : this.view.getCardTypes()) {
                 sb.append((char) type.ordinal());
@@ -172,7 +138,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
                     && this.height == that.height
                     && this.isChoosable == that.isChoosable
                     && this.isSelected == that.isSelected
-                    && cardViewEquals(this.view, that.view);
+                    && CardView.cardViewEquals(this.view, that.view);
         }
     }
 
@@ -193,11 +159,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         if (artImage == null) {
             return null;
         }
-        if (getGameCard().isFaceDown()) {
-            return getFaceDownImage();
-        } else {
-            return ImageCache.getImageOriginal(getGameCard());
-        }
+        return ImageCache.getCardImageOriginal(getGameCard()).getImage();
     }
 
     @Override
@@ -205,22 +167,45 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // Render the card if we don't have an image ready to use
         if (cardImage == null) {
             // Try to get card image from cache based on our card characteristics
-            ImageKey key = new ImageKey(getGameCard(), artImage,
-                    getCardWidth(), getCardHeight(),
-                    isChoosable(), isSelected(), isTransformed());
+            ImageKey key = new ImageKey(
+                    getGameCard(),
+                    artImage,
+                    getCardWidth() * MTGO_MODE_RENDER_SCALED_IMAGES_COEF,
+                    getCardHeight() * MTGO_MODE_RENDER_SCALED_IMAGES_COEF,
+                    isChoosable(),
+                    isSelected(),
+                    isTransformed()
+            );
             try {
-                cardImage = IMAGE_CACHE.get(key, this::renderCard);
-            } catch (ExecutionException e) {
+                cardImage = MTGO_MODE_RENDERED_CACHE.get(key, this::renderCard);
+            } catch (Exception e) {
+                // TODO: research and replace with logs, message and backface image
                 throw new RuntimeException(e);
             }
-
-            // No cached copy exists? Render one and cache it
         }
 
         // And draw the image we now have
         int cardOffsetX = 0;
         int cardOffsetY = 0;
-        g.drawImage(cardImage, cardOffsetX, cardOffsetY, null);
+
+        Graphics2D g2 = (Graphics2D) g.create();
+        try {
+            // render with antialiasing
+            if (MTGO_MODE_RENDER_SMOOTH_IMAGES_ENABLED) {
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            }
+
+            // render scaled
+            if (MTGO_MODE_RENDER_SCALED_IMAGES_COEF > 1) {
+                g2.drawImage(cardImage, cardOffsetX, cardOffsetY, getCardWidth(), getCardHeight(), null);
+            } else {
+                g2.drawImage(cardImage, cardOffsetX, cardOffsetY, null);
+            }
+        } finally {
+            g2.dispose();
+        }
     }
 
     @Override
@@ -269,8 +254,6 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             // Use the art image and current rendered image from the card
             artImage = impl.artImage;
             cardRenderer.setArtImage(artImage);
-            faceArtImage = impl.faceArtImage;
-            cardRenderer.setFaceArtImage(faceArtImage);
             cardImage = impl.cardImage;
         }
     }
@@ -284,7 +267,6 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         cardImage = null;
         cardRenderer = cardRendererFactory.create(getGameCard());
         cardRenderer.setArtImage(artImage);
-        cardRenderer.setFaceArtImage(faceArtImage);
 
         // Repaint
         repaint();
@@ -296,7 +278,6 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         artImage = null;
         cardImage = null;
         cardRenderer.setArtImage(null);
-        cardRenderer.setFaceArtImage(null);
 
         // Stop animation
         setTappedAngle(isTapped() ? CardPanel.TAPPED_ANGLE : 0);
@@ -308,32 +289,18 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // See if the image is already loaded
         //artImage = ImageCache.tryGetImage(gameCard, getCardWidth(), getCardHeight());
         //this.cardRenderer.setArtImage(artImage);
+
         // Submit a task to draw with the card art when it arrives
         if (artImage == null) {
             final int stamp = ++updateArtImageStamp;
             Util.threadPool.submit(() -> {
                 try {
                     final BufferedImage srcImage;
-                    final BufferedImage faceArtSrcImage;
-                    if (getGameCard().isFaceDown()) {
-                        // Nothing to do
-                        srcImage = null;
-                        faceArtSrcImage = null;
-                    } else if (getCardWidth() > Constants.THUMBNAIL_SIZE_FULL.width) {
-                        srcImage = ImageCache.getImage(getGameCard(), getCardWidth(), getCardHeight());
-                        faceArtSrcImage = ImageCache.getFaceImage(getGameCard(), getCardWidth(), getCardHeight());
-                    } else {
-                        srcImage = ImageCache.getThumbnail(getGameCard());
-                        faceArtSrcImage = ImageCache.getFaceImage(getGameCard(), getCardWidth(), getCardHeight());
-                    }
-
+                    srcImage = ImageCache.getCardImage(getGameCard(), getCardWidth(), getCardHeight()).getImage();
                     UI.invokeLater(() -> {
                         if (stamp == updateArtImageStamp) {
                             artImage = srcImage;
                             cardRenderer.setArtImage(srcImage);
-                            faceArtImage = faceArtSrcImage;
-                            cardRenderer.setFaceArtImage(faceArtSrcImage);
-
                             if (srcImage != null) {
                                 // Invalidate and repaint
                                 cardImage = null;
@@ -352,21 +319,6 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         return new CardPanelAttributes(getCardWidth(), getCardHeight(), isChoosable(), isSelected(), isTransformed());
     }
 
-    private BufferedImage getFaceDownImage() {
-        // TODO: add download default images
-        if (isPermanent() && getGameCard() instanceof PermanentView) {
-            if (((PermanentView) getGameCard()).isMorphed()) {
-                return ImageCache.getMorphImage();
-            } else {
-                return ImageCache.getManifestImage();
-            }
-        } else if (this.getGameCard() instanceof StackAbilityView) {
-            return ImageCache.getMorphImage();
-        } else {
-            return ImageCache.getCardbackImage();
-        }
-    }
-
     /**
      * Render the card to a new BufferedImage at it's current dimensions
      *
@@ -379,18 +331,19 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // Create image to render to
         BufferedImage image
                 = GraphicsUtilities.createCompatibleTranslucentImage(cardWidth, cardHeight);
-        Graphics2D g2d = image.createGraphics();
+        Graphics2D g2 = image.createGraphics();
+        try {
+            // Render with Antialialsing
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-        // Render with Antialialsing
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            // Draw card itself
+            cardRenderer.draw(g2, getAttributes(), image);
+        } finally {
+            g2.dispose();
+        }
 
-        // Draw card itself
-        cardRenderer.draw(g2d, getAttributes(), image);
-
-        // Done
-        g2d.dispose();
         return image;
     }
 }

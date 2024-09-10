@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,7 +28,7 @@ public final class CatharticAdept extends CardImpl {
         this.toughness = new MageInt(1);
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutLibraryIntoGraveTargetEffect(1),
+                new MillCardsTargetEffect(1),
                 new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

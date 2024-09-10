@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -20,10 +19,11 @@ public final class Breach extends CardImpl {
     public Breach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
-
         // Target creature gets +2/+0 and gains fear until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn)
+                .setText("target creature gets +2/+0"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains fear until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

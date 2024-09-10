@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -9,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -26,7 +25,7 @@ public final class RoaringPrimadox extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, return a creature you control to its owner's hand.
-        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent())));
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE)));
     }
 
     private RoaringPrimadox(final RoaringPrimadox card) {

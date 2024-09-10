@@ -30,7 +30,7 @@ public final class Kranioceros extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 3, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}")));
     }
 
-    public Kranioceros (final Kranioceros card) {
+    private Kranioceros(final Kranioceros card) {
         super(card);
     }
 

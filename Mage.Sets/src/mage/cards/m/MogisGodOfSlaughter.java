@@ -17,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public final class MogisGodOfSlaughter extends CardImpl {
 
     public MogisGodOfSlaughter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
         this.power = new MageInt(7);
@@ -83,8 +84,7 @@ class MogisGodOfSlaughterEffect extends OneShotEffect {
         if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, game.getActivePlayerId(), game) == 0) {
             return player.damage(2, source.getSourceId(), source, game) > 0;
         }
-        TargetPermanent target = new TargetControlledCreaturePermanent(1);
-        target.setNotTarget(true);
+        TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
         if (target.canChoose(player.getId(), source, game)
                 && player.chooseUse(Outcome.Detriment, "Sacrifice a creature to prevent 2 damage?", source, game)
                 && player.choose(Outcome.Sacrifice, target, source, game)) {

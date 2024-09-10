@@ -15,7 +15,7 @@ public class ChoiceLandType extends ChoiceImpl {
         this.message = "Choose a land type";
     }
 
-    public ChoiceLandType(final ChoiceLandType choice) {
+    protected ChoiceLandType(final ChoiceLandType choice) {
         super(choice);
     }
 

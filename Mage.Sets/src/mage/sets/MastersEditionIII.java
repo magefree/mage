@@ -45,6 +45,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Bartel Runeaxe", 145, Rarity.UNCOMMON, mage.cards.b.BartelRuneaxe.class));
         cards.add(new SetCardInfo("Bayou", 204, Rarity.RARE, mage.cards.b.Bayou.class));
         cards.add(new SetCardInfo("Bazaar of Baghdad", 205, Rarity.RARE, mage.cards.b.BazaarOfBaghdad.class));
+        cards.add(new SetCardInfo("Benthic Explorers", 29, Rarity.COMMON, mage.cards.b.BenthicExplorers.class));
         cards.add(new SetCardInfo("Black Vise", 191, Rarity.RARE, mage.cards.b.BlackVise.class));
         cards.add(new SetCardInfo("Blood Lust", 88, Rarity.COMMON, mage.cards.b.BloodLust.class));
         cards.add(new SetCardInfo("Bone Flute", 192, Rarity.COMMON, mage.cards.b.BoneFlute.class));
@@ -131,6 +132,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Kei Takahashi", 155, Rarity.UNCOMMON, mage.cards.k.KeiTakahashi.class));
         cards.add(new SetCardInfo("Killer Bees", 126, Rarity.UNCOMMON, mage.cards.k.KillerBees.class));
         cards.add(new SetCardInfo("Kjeldoran Frostbeast", 156, Rarity.UNCOMMON, mage.cards.k.KjeldoranFrostbeast.class));
+        cards.add(new SetCardInfo("Knowledge Vault", 198, Rarity.UNCOMMON, mage.cards.k.KnowledgeVault.class));
         cards.add(new SetCardInfo("Kobold Drill Sergeant", 104, Rarity.UNCOMMON, mage.cards.k.KoboldDrillSergeant.class));
         cards.add(new SetCardInfo("Kobold Overlord", 105, Rarity.UNCOMMON, mage.cards.k.KoboldOverlord.class));
         cards.add(new SetCardInfo("Kobolds of Kher Keep", 107, Rarity.COMMON, mage.cards.k.KoboldsOfKherKeep.class));
@@ -142,6 +144,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Lady Orca", 159, Rarity.COMMON, mage.cards.l.LadyOrca.class));
         cards.add(new SetCardInfo("Land Equilibrium", 40, Rarity.RARE, mage.cards.l.LandEquilibrium.class));
         cards.add(new SetCardInfo("Land Tax", 17, Rarity.RARE, mage.cards.l.LandTax.class));
+        cards.add(new SetCardInfo("Lesser Werewolf", 71, Rarity.COMMON, mage.cards.l.LesserWerewolf.class));
         cards.add(new SetCardInfo("Life Chisel", 199, Rarity.RARE, mage.cards.l.LifeChisel.class));
         cards.add(new SetCardInfo("Lightning Blow", 18, Rarity.COMMON, mage.cards.l.LightningBlow.class));
         cards.add(new SetCardInfo("Liu Bei, Lord of Shu", 19, Rarity.RARE, mage.cards.l.LiuBeiLordOfShu.class));
@@ -201,6 +204,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Sol Grail", 201, Rarity.COMMON, mage.cards.s.SolGrail.class));
         cards.add(new SetCardInfo("Sorrow's Path", 211, Rarity.RARE, mage.cards.s.SorrowsPath.class));
         cards.add(new SetCardInfo("Spectral Shield", 176, Rarity.UNCOMMON, mage.cards.s.SpectralShield.class));
+        cards.add(new SetCardInfo("Spiny Starfish", 50, Rarity.UNCOMMON, mage.cards.s.SpinyStarfish.class));
         cards.add(new SetCardInfo("Spirit Shackle", 74, Rarity.COMMON, mage.cards.s.SpiritShackle.class));
         cards.add(new SetCardInfo("Spoils of Victory", 134, Rarity.COMMON, mage.cards.s.SpoilsOfVictory.class));
         cards.add(new SetCardInfo("Stangg", 177, Rarity.UNCOMMON, mage.cards.s.Stangg.class));
@@ -214,6 +218,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 223, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 224, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword of the Ages", 202, Rarity.RARE, mage.cards.s.SwordOfTheAges.class));
+        cards.add(new SetCardInfo("Takklemaggot", 76, Rarity.UNCOMMON, mage.cards.t.Takklemaggot.class));
         cards.add(new SetCardInfo("Tetsuo Umezawa", 179, Rarity.RARE, mage.cards.t.TetsuoUmezawa.class));
         cards.add(new SetCardInfo("The Abyss", 77, Rarity.RARE, mage.cards.t.TheAbyss.class));
         cards.add(new SetCardInfo("The Lady of the Mountain", 180, Rarity.COMMON, mage.cards.t.TheLadyOfTheMountain.class));
@@ -230,6 +235,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Urborg", 214, Rarity.UNCOMMON, mage.cards.u.Urborg.class));
         cards.add(new SetCardInfo("Vaevictis Asmadi", 185, Rarity.RARE, mage.cards.v.VaevictisAsmadi.class));
         cards.add(new SetCardInfo("Volcanic Island", 215, Rarity.RARE, mage.cards.v.VolcanicIsland.class));
+        cards.add(new SetCardInfo("Voodoo Doll", 203, Rarity.RARE, mage.cards.v.VoodooDoll.class));
         cards.add(new SetCardInfo("Wall of Light", 27, Rarity.COMMON, mage.cards.w.WallOfLight.class));
         cards.add(new SetCardInfo("Wandering Mage", 186, Rarity.RARE, mage.cards.w.WanderingMage.class));
         cards.add(new SetCardInfo("Wei Elite Companions", 79, Rarity.COMMON, mage.cards.w.WeiEliteCompanions.class));

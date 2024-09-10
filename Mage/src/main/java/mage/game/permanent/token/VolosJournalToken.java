@@ -7,19 +7,14 @@ import mage.abilities.hint.Hint;
 import mage.abilities.keyword.HexproofAbility;
 import mage.choices.ChoiceCreatureType;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.util.RandomUtil;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -28,17 +23,15 @@ public final class VolosJournalToken extends TokenImpl {
 
     public VolosJournalToken() {
         super("Volo's Journal", "Volo's Journal, a legendary colorless artifact token with hexproof and \"Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact.\"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.cardType.add(CardType.ARTIFACT);
         this.addAbility(HexproofAbility.getInstance());
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new VolosJournalTokenEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false
         ).addHint(VolosJournalTokenHint.instance));
-
-        availableImageSetCodes = Arrays.asList("CLB");
     }
 
-    public VolosJournalToken(final VolosJournalToken token) {
+    private VolosJournalToken(final VolosJournalToken token) {
         super(token);
     }
 
@@ -48,13 +41,13 @@ public final class VolosJournalToken extends TokenImpl {
 
     public static Set<String> getNotedTypes(Game game, Permanent permanent) {
         if (permanent == null) {
-            return new HashSet<>();
+            return new LinkedHashSet<>();
         }
 
         String key = "notedTypes_" + permanent.getId() + '_' + permanent.getZoneChangeCounter(game);
         Object value = game.getState().getValue(key);
         if (value == null) {
-            Set<String> types = new HashSet<>();
+            Set<String> types = new LinkedHashSet<>();
             game.getState().setValue(key, types);
             return types;
         }
@@ -107,39 +100,43 @@ class VolosJournalTokenEffect extends OneShotEffect {
 
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
-            return true;
+            return false;
         }
 
         Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
 
-        Set<String> types = VolosJournalToken.getNotedTypes(game, permanent);
+        Set<String> notedTypes = VolosJournalToken.getNotedTypes(game, permanent);
 
-        ChoiceCreatureType choice = new ChoiceCreatureType();
+        ChoiceCreatureType choice = new ChoiceCreatureType(game, source);
 
         // By default ChoiceCreatureType pre-populates all creatures into choices
         // Limit the available choices to those on the creature being cast
         if (!spell.isAllCreatureTypes(game)) {
-            choice.setChoices(
-                    spell.getSubtype(game)
+            choice.getKeyChoices().clear();
+            spell.getSubtype(game)
                     .stream()
                     .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
                     .map(SubType::getDescription)
-                    .collect(Collectors.toSet())
-            );
+                    .forEach(subType -> {
+                        choice.withItem(subType, subType, null, null, null);
+                    });
         }
         // Remove from the possible choices the subtypes which have already been chosen.
-        choice.getChoices().removeIf(types::contains);
+        choice.getKeyChoices().keySet().removeIf(notedTypes::contains);
 
-        switch (choice.getChoices().size()) {
+        switch (choice.getKeyChoices().size()) {
             case 0:
                 return false;
             case 1:
-                types.add(choice.getChoices().stream().findFirst().get());
+                notedTypes.add(choice.getKeyChoices().keySet().stream().findFirst().get());
                 return true;
         }
 
         player.choose(outcome, choice, game);
-        types.add(choice.getChoice());
+        notedTypes.add(choice.getChoiceKey());
         return true;
     }
 }

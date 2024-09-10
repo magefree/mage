@@ -22,7 +22,7 @@ public final class KozilekButcherOfTruth extends CardImpl {
 
     public KozilekButcherOfTruth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);

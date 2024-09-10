@@ -1,4 +1,3 @@
-
 package mage.abilities.effects;
 
 import mage.MageObject;
@@ -16,16 +15,15 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    protected Effects baseEffects = new Effects();
-    protected String text;
-    protected Condition condition;
-    protected boolean optional;
-    protected EnterEventType enterEventType;
+    private final Effects baseEffects;
+    private final String text;
+    private final Condition condition;
+    private final boolean optional;
+    private final EnterEventType enterEventType;
 
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
@@ -47,6 +45,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
     public EntersBattlefieldEffect(Effect baseEffect, Condition condition, String text, boolean selfScope, boolean optional, EnterEventType enterEventType) {
         super(Duration.WhileOnBattlefield, baseEffect.getOutcome(), selfScope);
+        this.baseEffects = new Effects();
         this.baseEffects.add(baseEffect);
         this.enterEventType = enterEventType;
         this.text = text;
@@ -54,7 +53,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
         this.optional = optional;
     }
 
-    public EntersBattlefieldEffect(final EntersBattlefieldEffect effect) {
+    protected EntersBattlefieldEffect(final EntersBattlefieldEffect effect) {
         super(effect);
         this.baseEffects = effect.baseEffects.copy();
         this.text = effect.text;
@@ -84,12 +83,8 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())) {
-            if (condition == null || condition.apply(game, source)) {
-                return true;
-            }
-        }
-        return false;
+        return event.getTargetId().equals(source.getSourceId())
+                && (condition == null || condition.apply(game, source));
     }
 
     @Override

@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
@@ -41,7 +42,7 @@ public final class Sarcatog extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("artifact")))));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT)));
     }
 
     private Sarcatog(final Sarcatog card) {

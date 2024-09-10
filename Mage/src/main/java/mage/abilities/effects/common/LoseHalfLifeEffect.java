@@ -16,7 +16,7 @@ public class LoseHalfLifeEffect extends OneShotEffect {
         staticText = "you lose half your life, rounded up";
     }
 
-    public LoseHalfLifeEffect(final LoseHalfLifeEffect effect) {
+    protected LoseHalfLifeEffect(final LoseHalfLifeEffect effect) {
         super(effect);
     }
 

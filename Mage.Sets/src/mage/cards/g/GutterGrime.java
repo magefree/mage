@@ -50,7 +50,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new GutterGrimeEffect());
     }
 
-    public GutterGrimeTriggeredAbility(GutterGrimeTriggeredAbility ability) {
+    private GutterGrimeTriggeredAbility(final GutterGrimeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -87,11 +87,11 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
 
 class GutterGrimeEffect extends OneShotEffect {
 
-    public GutterGrimeEffect() {
+    GutterGrimeEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 
-    public GutterGrimeEffect(final GutterGrimeEffect effect) {
+    private GutterGrimeEffect(final GutterGrimeEffect effect) {
         super(effect);
     }
 

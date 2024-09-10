@@ -38,7 +38,7 @@ public final class LevitatingStatue extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(
                         1, 1, "1/1 Construct artifact creature", SubType.CONSTRUCT
-                ).withType(CardType.ARTIFACT), "", Duration.EndOfTurn
+                ).withType(CardType.ARTIFACT), CardType.ARTIFACT, Duration.EndOfTurn
         ), new GenericManaCost(2)));
     }
 

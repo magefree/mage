@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,18 +11,15 @@ import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
+import mage.filter.FilterPlayer;
+import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
@@ -86,56 +82,14 @@ class GuardianArchonEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
+        FilterPlayer filter = new FilterPlayer(player.getName());
+        filter.add(new PlayerIdPredicate(player.getId()));
         game.addEffect(new GainAbilityTargetEffect(
-                new GuardianArchonProtectionAbility(player.getId()), Duration.EndOfTurn
+                new ProtectionAbility(filter), Duration.EndOfTurn
         ), source);
         game.addEffect(new GainAbilityControllerEffect(
-                new GuardianArchonProtectionAbility(player.getId()), Duration.EndOfTurn
+                new ProtectionAbility(filter), Duration.EndOfTurn
         ), source);
-        return true;
-    }
-}
-
-class GuardianArchonProtectionAbility extends ProtectionAbility {
-
-    private final UUID playerId;
-
-    public GuardianArchonProtectionAbility(UUID playerId) {
-        super(new FilterCard());
-        this.playerId = playerId;
-    }
-
-    public GuardianArchonProtectionAbility(final GuardianArchonProtectionAbility ability) {
-        super(ability);
-        this.playerId = ability.playerId;
-    }
-
-    @Override
-    public GuardianArchonProtectionAbility copy() {
-        return new GuardianArchonProtectionAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} has protection from the chosen player.";
-    }
-
-    @Override
-    public boolean canTarget(MageObject source, Game game) {
-        if (playerId != null && source != null) {
-            if (source instanceof Permanent) {
-                return !((Permanent) source).isControlledBy(playerId);
-            }
-            if (source instanceof Spell) {
-                return !((Spell) source).isControlledBy(playerId);
-            }
-            if (source instanceof StackObject) {
-                return !((StackObject) source).isControlledBy(playerId);
-            }
-            if (source instanceof Card) { // e.g. for Vengeful Pharaoh
-                return !((Card) source).isOwnedBy(playerId);
-            }
-        }
         return true;
     }
 }

@@ -38,7 +38,7 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
                 + ", reveal it, and put it into your hand. " + (forceToSearchBoth ? "Then shuffle" : "If you search your library this way, shuffle");
     }
 
-    public SearchLibraryGraveyardPutInHandEffect(final SearchLibraryGraveyardPutInHandEffect effect) {
+    protected SearchLibraryGraveyardPutInHandEffect(final SearchLibraryGraveyardPutInHandEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.forceToSearchBoth = effect.forceToSearchBoth;
@@ -71,7 +71,7 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
             if (cardFound == null && controller.chooseUse(outcome, "Search your graveyard for a card named " + filter.getMessage() + '?', source, game)) {
                 TargetCard target = new TargetCardInYourGraveyard(0, 1, filter, true);
                 target.clearChosen();
-                if (controller.choose(outcome, controller.getGraveyard(), target, game)) {
+                if (controller.choose(outcome, controller.getGraveyard(), target, source, game)) {
                     if (!target.getTargets().isEmpty()) {
                         cardFound = game.getCard(target.getFirstTarget());
                     }

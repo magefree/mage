@@ -28,7 +28,7 @@ public final class NykthosShrineToNyx extends CardImpl {
 
     public NykthosShrineToNyx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

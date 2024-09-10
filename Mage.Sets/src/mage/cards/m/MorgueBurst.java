@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -44,12 +43,12 @@ public final class MorgueBurst extends CardImpl {
 
 class MorgueBurstEffect extends OneShotEffect {
 
-    public MorgueBurstEffect() {
+    MorgueBurstEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target creature card from your graveyard to your hand. Morgue Burst deals damage to any target equal to the power of the card returned this way";
     }
 
-    public MorgueBurstEffect(final MorgueBurstEffect effect) {
+    private MorgueBurstEffect(final MorgueBurstEffect effect) {
         super(effect);
     }
 
@@ -66,12 +65,12 @@ class MorgueBurstEffect extends OneShotEffect {
             if (player != null) {
                 player.moveCards(card, Zone.HAND, source, game);
                 int damage = card.getPower().getValue();
-                Permanent creature = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
+                Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                 if (creature != null) {
                     creature.damage(damage, source.getSourceId(), source, game, false, true);
                     return true;
                 }
-                Player targetPlayer = game.getPlayer(source.getTargets().get(1).getTargets().get(0));
+                Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
                 if (targetPlayer != null) {
                     targetPlayer.damage(damage, source.getSourceId(), source, game);
                     return true;

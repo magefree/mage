@@ -41,12 +41,12 @@ public final class HonorablePassage extends CardImpl {
 
 class HonorablePassageEffect extends PreventNextDamageFromChosenSourceToTargetEffect {
 
-    public HonorablePassageEffect() {
+    HonorablePassageEffect() {
         super(Duration.EndOfTurn);
         this.staticText = "The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, {this} deals that much damage to the source's controller";
     }
 
-    public HonorablePassageEffect(final HonorablePassageEffect effect) {
+    private HonorablePassageEffect(final HonorablePassageEffect effect) {
         super(effect);
     }
 

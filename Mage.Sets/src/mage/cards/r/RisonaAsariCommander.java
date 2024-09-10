@@ -18,7 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamagedBatchEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -32,7 +32,7 @@ public final class RisonaAsariCommander extends CardImpl {
     public RisonaAsariCommander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SAMURAI);
         this.power = new MageInt(3);
@@ -80,24 +80,16 @@ class RisonaAsariCommanderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (controllerId == null) {
-            return false;
-        }
-        if (!(event instanceof DamagedBatchEvent)) {
-            return false;
-        }
-        DamagedBatchEvent batchEvent = (DamagedBatchEvent) event;
-        for (DamagedEvent damageEvent : batchEvent.getEvents()) {
-            if (damageEvent.isCombatDamage() && controllerId.equals(damageEvent.getTargetId())) {
-                return true;
-            }
-        }
-        return false;
+        return ((DamagedBatchForPlayersEvent) event)
+                .getEvents()
+                .stream()
+                .filter(DamagedEvent::isCombatDamage)
+                .anyMatch(e -> e.getTargetId().equals(getControllerId()));
     }
 }
 

@@ -41,7 +41,8 @@ public final class Vampirism extends CardImpl {
 
         // When Vampirism enters the battlefield, draw a card at the beginning of the next turn's upkeep.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse)), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse))
+                .setText("draw a card at the beginning of the next turn's upkeep"), false));
 
         // Enchanted creature gets +1/+1 for each other creature you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VampirismBoostEnchantedEffect()));
@@ -63,12 +64,12 @@ public final class Vampirism extends CardImpl {
 
 class VampirismBoostEnchantedEffect extends ContinuousEffectImpl {
 
-    public VampirismBoostEnchantedEffect() {
+    VampirismBoostEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Enchanted creature gets +1/+1 for each other creature you control";
     }
 
-    public VampirismBoostEnchantedEffect(final VampirismBoostEnchantedEffect effect) {
+    private VampirismBoostEnchantedEffect(final VampirismBoostEnchantedEffect effect) {
         super(effect);
     }
 

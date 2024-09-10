@@ -31,7 +31,7 @@ public final class ChimericIdol extends CardImpl {
                 new CreatureToken(3, 3, "3/3 Turtle artifact creature")
                         .withSubType(SubType.TURTLE)
                         .withType(CardType.ARTIFACT),
-                "", Duration.EndOfTurn));
+                CardType.ARTIFACT, Duration.EndOfTurn));
         this.addAbility(ability);
 
     }

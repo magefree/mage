@@ -34,7 +34,7 @@ public final class GoShintaiOfSharedPurpose extends CardImpl {
     public GoShintaiOfSharedPurpose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

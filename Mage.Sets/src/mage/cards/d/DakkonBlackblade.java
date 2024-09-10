@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -27,7 +26,7 @@ public final class DakkonBlackblade extends CardImpl {
 
     public DakkonBlackblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(0);
@@ -35,7 +34,7 @@ public final class DakkonBlackblade extends CardImpl {
 
         // Dakkon Blackblade's power and toughness are each equal to the number of lands you control.
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(controlledLands, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(controlledLands)));
     }
 
     private DakkonBlackblade(final DakkonBlackblade card) {

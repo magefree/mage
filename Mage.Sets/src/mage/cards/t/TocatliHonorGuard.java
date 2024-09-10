@@ -1,14 +1,13 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.ruleModifying.DontCauseTriggerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class TocatliHonorGuard extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Creatures entering the battlefield don't cause abilities to trigger.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TorporOrbEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontCauseTriggerEffect()));
     }
 
     private TocatliHonorGuard(final TocatliHonorGuard card) {

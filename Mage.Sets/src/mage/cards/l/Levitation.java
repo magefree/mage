@@ -25,7 +25,7 @@ public final class Levitation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, false)));
     }
 
-    public Levitation (final Levitation card) {
+    private Levitation(final Levitation card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class OctaviaLivingThesis extends CardImpl {
     public OctaviaLivingThesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{8}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.OCTOPUS);
         this.power = new MageInt(8);

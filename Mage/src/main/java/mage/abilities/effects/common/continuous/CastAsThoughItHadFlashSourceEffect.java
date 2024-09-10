@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.AsThoughEffectType;
@@ -10,7 +11,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -21,7 +21,7 @@ public class CastAsThoughItHadFlashSourceEffect extends AsThoughEffectImpl {
         staticText = "you may cast {this} as though it had flash";
     }
 
-    public CastAsThoughItHadFlashSourceEffect(final CastAsThoughItHadFlashSourceEffect effect) {
+    protected CastAsThoughItHadFlashSourceEffect(final CastAsThoughItHadFlashSourceEffect effect) {
         super(effect);
     }
 

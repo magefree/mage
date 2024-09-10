@@ -30,11 +30,11 @@ public final class KioraBehemothBeckoner extends CardImpl {
     public KioraBehemothBeckoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G/U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIORA);
         this.setStartingLoyalty(7);
 
-        // Whenever a creature with power 4 or greater enters the battlefield under your control, draw a card.
+        // Whenever a creature with power 4 or greater you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, false
         ));

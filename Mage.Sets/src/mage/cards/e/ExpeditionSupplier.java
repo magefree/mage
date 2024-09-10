@@ -27,10 +27,10 @@ public final class ExpeditionSupplier extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Expedition Supplier or another Human enters the battlefield under your control, conjure a card named Utility Knife onto the battlefield. This ability triggers only once each turn.
+        // Whenever Expedition Supplier or another Human you control enters, conjure a card named Utility Knife onto the battlefield. This ability triggers only once each turn.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new ConjureCardEffect(
                 "Utility Knife", Zone.BATTLEFIELD, 1
-        ), filter, false, true).setTriggersOnce(true));
+        ), filter, false, true).setTriggersLimitEachTurn(1));
     }
 
     private ExpeditionSupplier(final ExpeditionSupplier card) {

@@ -36,7 +36,7 @@ public final class KjeldoranSkycaptain extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public KjeldoranSkycaptain (final KjeldoranSkycaptain card) {
+    private KjeldoranSkycaptain(final KjeldoranSkycaptain card) {
         super(card);
     }
 

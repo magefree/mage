@@ -66,7 +66,7 @@ class BoldwyrIntimidatorEffect extends RestrictionEffect {
         staticText = "Cowards can't block Warriors";
     }
 
-    BoldwyrIntimidatorEffect(final BoldwyrIntimidatorEffect effect) {
+    private BoldwyrIntimidatorEffect(final BoldwyrIntimidatorEffect effect) {
         super(effect);
     }
 

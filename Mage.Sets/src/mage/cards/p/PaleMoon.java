@@ -55,11 +55,6 @@ class PaleMoonReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ManaEvent manaEvent = (ManaEvent) event;
         Mana mana = manaEvent.getMana();
@@ -75,6 +70,6 @@ class PaleMoonReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
-        return permanent != null && permanent.isLand(game) && !permanent.isBasic();
+        return permanent != null && permanent.isLand(game) && !permanent.isBasic(game);
     }
 }

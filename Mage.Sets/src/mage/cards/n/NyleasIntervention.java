@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -19,6 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public final class NyleasIntervention extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(GetXValue.instance, 2);
 
     public NyleasIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
@@ -76,9 +77,9 @@ class NyleasInterventionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                 0, xValue, StaticFilters.FILTER_CARD_LAND
-        ), true, true).apply(game, source);
+        ), true).apply(game, source);
     }
 }

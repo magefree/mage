@@ -31,7 +31,8 @@ public final class GatesAblaze extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Gates Ablaze deals X damage to each creature, where X is the number of Gates you control.
-        this.getSpellAbility().addEffect(new DamageAllEffect(xValue, StaticFilters.FILTER_PERMANENT_CREATURE));
+        this.getSpellAbility().addEffect(new DamageAllEffect(xValue, StaticFilters.FILTER_PERMANENT_CREATURE)
+                .setText("{this} deals X damage to each creature, where X is the number of Gates you control"));
     }
 
     private GatesAblaze(final GatesAblaze card) {

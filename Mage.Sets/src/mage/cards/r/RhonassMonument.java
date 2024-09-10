@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -43,15 +42,16 @@ public final class RhonassMonument extends CardImpl {
     public RhonassMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Green creature spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever you cast a creature spell, target creature you control gets +2/+2 and gains trample until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), filter2, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn)
+                .setText("target creature you control gets +2/+2"), filter2, false);
         Effect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText(" and gains trample until end of turn");
+        effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

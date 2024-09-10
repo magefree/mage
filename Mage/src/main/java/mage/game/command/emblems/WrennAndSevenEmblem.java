@@ -13,11 +13,18 @@ public final class WrennAndSevenEmblem extends Emblem {
 
     // You get an emblem with "You have no maximum hand size."
     public WrennAndSevenEmblem() {
-        this.setName("Emblem Wrenn");
+        super("Emblem Wrenn");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(
                 Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET
         )));
+    }
 
-        this.setExpansionSetCodeForImage("MID");
+    private WrennAndSevenEmblem(final WrennAndSevenEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public WrennAndSevenEmblem copy() {
+        return new WrennAndSevenEmblem(this);
     }
 }

@@ -44,7 +44,7 @@ public final class MazeBehemoth extends CardImpl {
 
     }
 
-    public MazeBehemoth (final MazeBehemoth card) {
+    private MazeBehemoth(final MazeBehemoth card) {
         super(card);
     }
 

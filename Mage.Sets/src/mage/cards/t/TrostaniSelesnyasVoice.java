@@ -33,13 +33,13 @@ public final class TrostaniSelesnyasVoice extends CardImpl {
 
     public TrostaniSelesnyasVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRYAD);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
-        // Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
+        // Whenever another creature you control enters, you gain life equal to that creature's toughness.
         this.addAbility(new TrostaniSelesnyasVoiceTriggeredAbility());
 
         // {1}{G}{W}, {T}: Populate. (Create a token that's a copy of a creature token you control.)
@@ -62,10 +62,10 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
 
     public TrostaniSelesnyasVoiceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TrostaniSelesnyasVoiceEffect(), false);
-        setTriggerPhrase("Whenever another creature enters the battlefield under your control, ");
+        setTriggerPhrase("Whenever another creature you control enters, ");
     }
 
-    public TrostaniSelesnyasVoiceTriggeredAbility(TrostaniSelesnyasVoiceTriggeredAbility ability) {
+    private TrostaniSelesnyasVoiceTriggeredAbility(final TrostaniSelesnyasVoiceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,12 +99,12 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
 
 class TrostaniSelesnyasVoiceEffect extends OneShotEffect {
 
-    public TrostaniSelesnyasVoiceEffect() {
+    TrostaniSelesnyasVoiceEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to that creature's toughness";
     }
 
-    public TrostaniSelesnyasVoiceEffect(final TrostaniSelesnyasVoiceEffect effect) {
+    private TrostaniSelesnyasVoiceEffect(final TrostaniSelesnyasVoiceEffect effect) {
         super(effect);
     }
 

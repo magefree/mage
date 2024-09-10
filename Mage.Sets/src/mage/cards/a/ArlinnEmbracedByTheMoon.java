@@ -29,7 +29,7 @@ public final class ArlinnEmbracedByTheMoon extends CardImpl {
 
     public ArlinnEmbracedByTheMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ARLINN);
         this.color.setRed(true);
         this.color.setGreen(true);

@@ -30,7 +30,7 @@ public final class PsychicVortex extends CardImpl {
 
         // At the beginning of your end step, sacrifice a land and discard your hand.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new SacrificeControllerEffect(
-                StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, 1, null
+                StaticFilters.FILTER_LAND, 1, null
         ), TargetController.YOU, false);
         ability.addEffect(new DiscardHandControllerEffect().concatBy("and"));
         this.addAbility(ability);

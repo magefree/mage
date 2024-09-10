@@ -1,5 +1,7 @@
 package org.mage.test.serverside;
 
+import mage.abilities.hint.HintUtils;
+import mage.abilities.icon.CardIconType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.view.CardView;
@@ -27,8 +29,8 @@ public class CardIconsTest extends CardTestPlayerBase {
         // hand (not visible)
         runCode("card icons in hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             GameView gameView = getGameView(player);
-            Assert.assertEquals("must have 1 card in hand", 1, gameView.getHand().values().size());
-            CardView cardView = gameView.getHand().values().stream().findFirst().get();
+            Assert.assertEquals("must have 1 card in hand", 1, gameView.getMyHand().values().size());
+            CardView cardView = gameView.getMyHand().values().stream().findFirst().get();
             Assert.assertEquals("must have non x cost card icons in hand", 0, cardView.getCardIcons().size());
         });
 
@@ -65,7 +67,7 @@ public class CardIconsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_CostX_Copies() {
+    public void test_CostX_StackCopy() {
         // Grenzo, Dungeon Warden enters the battlefield with X +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Grenzo, Dungeon Warden", 1);// {X}{B}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
@@ -98,12 +100,12 @@ public class CardIconsTest extends CardTestPlayerBase {
             Assert.assertEquals("must have 2 cards in stack", 2, gameView.getStack().values().size());
             CardView originalCardView = gameView.getStack().values()
                     .stream()
-                    .filter(c -> !c.getOriginalCard().isCopy())
+                    .filter(c -> !c.isOriginalACopy())
                     .findFirst()
                     .get();
             CardView copiedCardView = gameView.getStack().values()
                     .stream()
-                    .filter(c -> c.getOriginalCard().isCopy())
+                    .filter(c -> c.isOriginalACopy())
                     .findFirst()
                     .get();
             Assert.assertNotNull("stack must have original spell", originalCardView);
@@ -144,6 +146,67 @@ public class CardIconsTest extends CardTestPlayerBase {
                     .orElse(null);
             Assert.assertNotNull("copied card must be in battlefield", copiedCardView);
             Assert.assertEquals("copied must have x cost card icons", 1, copiedCardView.getCardIcons().size());
+            Assert.assertEquals("copied x cost text", "x=2", copiedCardView.getCardIcons().get(0).getText());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_CostX_TokenCopy() {
+        //Legend Rule doesn't apply
+        addCard(Zone.BATTLEFIELD, playerA, "Mirror Gallery", 1);
+        // Grenzo, Dungeon Warden enters the battlefield with X +1/+1 counters on it.
+        addCard(Zone.HAND, playerA, "Grenzo, Dungeon Warden", 1);// {X}{B}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // Create a token that's a copy of target creature you control.
+        // should not copy the X value of the Grenzo
+        addCard(Zone.HAND, playerA, "Quasiduplicate", 1); // {1}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // cast Grenzo
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 1);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grenzo, Dungeon Warden");
+        setChoice(playerA, "X=2");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // cast Quasiduplicate
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 3);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quasiduplicate", "Grenzo, Dungeon Warden");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grenzo, Dungeon Warden", 2);
+
+        // battlefield (card and copied card as token)
+        runCode("card icons in battlefield (cloned)", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            PlayerView playerView = gameView.getPlayers().get(0);
+            Assert.assertEquals("player", player.getName(), playerView.getName());
+            // original
+            CardView originalCardView = playerView.getBattlefield().values()
+                    .stream()
+                    .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
+                    .filter(p -> !p.isToken())
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertNotNull("original card must be in battlefield", originalCardView);
+            Assert.assertEquals("original must have x cost card icons", 1, originalCardView.getCardIcons().size());
+            Assert.assertEquals("original x cost text", "x=2", originalCardView.getCardIcons().get(0).getText());
+            //
+            CardView copiedCardView = playerView.getBattlefield().values()
+                    .stream()
+                    .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
+                    .filter(p -> p.isToken())
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertNotNull("copied card must be in battlefield", copiedCardView);
+            Assert.assertEquals("copied must have x cost card icons", 1, copiedCardView.getCardIcons().size());
             Assert.assertEquals("copied x cost text", "x=0", copiedCardView.getCardIcons().get(0).getText());
         });
 
@@ -163,8 +226,8 @@ public class CardIconsTest extends CardTestPlayerBase {
         // hand (not visible)
         runCode("card icons in hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             GameView gameView = getGameView(player);
-            Assert.assertEquals("must have 1 card in hand", 1, gameView.getHand().values().size());
-            CardView cardView = gameView.getHand().values().stream().findFirst().get();
+            Assert.assertEquals("must have 1 card in hand", 1, gameView.getMyHand().values().size());
+            CardView cardView = gameView.getMyHand().values().stream().findFirst().get();
             Assert.assertEquals("must have non x cost card icons in hand", 0, cardView.getCardIcons().size());
         });
 
@@ -202,7 +265,7 @@ public class CardIconsTest extends CardTestPlayerBase {
             GameView gameView = getGameView(player);
             Assert.assertEquals("ability activated - must have 1 card in stack", 1, gameView.getStack().values().size());
             CardView cardView = gameView.getStack().values().stream().findFirst().get();
-            Assert.assertEquals("ability activated - must have x cost card icons in stack", 1, cardView.getCardIcons().size());
+            Assert.assertTrue("ability activated - must have x cost card icons in stack", cardView.getCardIcons().stream().anyMatch(x -> x.getText().equals("x=2")));
         });
 
         // battlefield (ability activated, not visible)
@@ -228,14 +291,14 @@ public class CardIconsTest extends CardTestPlayerBase {
         //
         // Agadeem, the Undercrypt
         // Land
-        // As Agadeem, the Undercrypt enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As Agadeem, the Undercrypt enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         addCard(Zone.HAND, playerA, "Agadeem's Awakening", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
 
         // hand (not visible)
         runCode("card icons in hand", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             GameView gameView = getGameView(player);
-            CardView cardView = gameView.getHand().values().stream()
+            CardView cardView = gameView.getMyHand().values().stream()
                     .filter(c -> c.getName().equals("Agadeem's Awakening"))
                     .findFirst()
                     .orElse(null);
@@ -271,6 +334,48 @@ public class CardIconsTest extends CardTestPlayerBase {
             Assert.assertNotNull("must have Agadeem, the Undercrypt in battlefield", cardView);
             Assert.assertEquals("main must have not x cost card icons in battlefield", 0, cardView.getCardIcons().size());
             Assert.assertNull("second side must be null", cardView.getSecondCardFace());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_RestrictionsIcon() {
+        // Felhide Brawler can't block unless you control another Minotaur.
+        addCard(Zone.BATTLEFIELD, playerA, "Felhide Brawler", 1);
+        //
+        addCard(Zone.HAND, playerA, "Felhide Brawler", 1); // {1}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // active restriction
+        runCode("has restrictions", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            PlayerView playerView = gameView.getPlayers().get(0);
+            Assert.assertEquals("player", player.getName(), playerView.getName());
+            CardView cardView = playerView.getBattlefield().values().stream().filter(p -> p.getName().equals("Felhide Brawler")).findFirst().orElse(null);
+            Assert.assertNotNull("must have 1 creature in battlefield", cardView);
+            Assert.assertTrue("creature must have restriction hint", cardView.getRules().stream().anyMatch(s -> s.startsWith(HintUtils.HINT_ICON_RESTRICT)));
+            Assert.assertTrue("creature must have restriction icon", cardView.getCardIcons().stream().anyMatch(icon -> icon.getIconType().equals(CardIconType.OTHER_HAS_RESTRICTIONS)));
+        });
+
+        // cast another creature and disable restriction
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Felhide Brawler");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        runCode("no restrictions", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            GameView gameView = getGameView(player);
+            PlayerView playerView = gameView.getPlayers().get(0);
+            Assert.assertEquals("player", player.getName(), playerView.getName());
+            Assert.assertEquals("must have 2 creature in battlefield", 2, playerView.getBattlefield().values()
+                    .stream()
+                    .filter(p -> p.getName().equals("Felhide Brawler"))
+                    .count()
+            );
+            CardView cardView = playerView.getBattlefield().values().stream().filter(p -> p.getName().equals("Felhide Brawler")).findFirst().orElse(null);
+            Assert.assertNotNull("can't find creature", cardView);
+            Assert.assertFalse("creature must not have restriction hint", cardView.getRules().stream().anyMatch(s -> s.startsWith(HintUtils.HINT_ICON_RESTRICT)));
+            Assert.assertFalse("creature must not have restriction icon", cardView.getCardIcons().stream().anyMatch(icon -> icon.getIconType().equals(CardIconType.OTHER_HAS_RESTRICTIONS)));
         });
 
         setStrictChooseMode(true);

@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -89,11 +89,11 @@ class RepeatedReverberationTriggeredAbility extends DelayedTriggeredAbility {
             if (spell != null && spell.isInstantOrSorcery(game)) {
                 this.getEffects().clear();
                 this.addEffect(
-                        new CopyTargetSpellEffect(true)
+                        new CopyTargetStackObjectEffect(true)
                                 .setTargetPointer(new FixedTarget(event.getTargetId(), game))
                 );
                 this.addEffect(
-                        new CopyTargetSpellEffect(true)
+                        new CopyTargetStackObjectEffect(true)
                                 .setTargetPointer(new FixedTarget(event.getTargetId(), game))
                 );
                 return true;
@@ -122,7 +122,7 @@ class RepeatedReverberationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (stackAbility == null) {
             return false;
         }

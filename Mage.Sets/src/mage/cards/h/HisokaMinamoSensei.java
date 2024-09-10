@@ -27,7 +27,7 @@ public final class HisokaMinamoSensei extends CardImpl {
 
     public HisokaMinamoSensei(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(1);
@@ -56,13 +56,13 @@ class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
         staticText = "Counter target spell if it has the same mana value as the discarded card";
     }
 
-    HisokaMinamoSenseiCounterEffect(final HisokaMinamoSenseiCounterEffect effect) {
+    private HisokaMinamoSenseiCounterEffect(final HisokaMinamoSenseiCounterEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell == null) {
             return false;
         }
@@ -70,7 +70,7 @@ class HisokaMinamoSenseiCounterEffect extends OneShotEffect {
                 .map(DiscardTargetCost::getCards)
                 .flatMap(Collection::stream)
                 .anyMatch(card -> card.getManaValue() == spell.getManaValue())) {
-            return game.getStack().counter(targetPointer.getFirst(game, source), source, game);
+            return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
         }
         return false;
     }

@@ -69,7 +69,7 @@ class PhantomCarriageEffect extends SearchEffect {
         staticText = "search your library for a card with flashback or disturb, put it into your graveyard, then shuffle";
     }
 
-    public PhantomCarriageEffect(final PhantomCarriageEffect effect) {
+    private PhantomCarriageEffect(final PhantomCarriageEffect effect) {
         super(effect);
     }
 

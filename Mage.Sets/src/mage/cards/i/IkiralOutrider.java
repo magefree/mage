@@ -45,7 +45,7 @@ public final class IkiralOutrider extends LevelerCard {
         setMaxLevelCounters(4);
     }
 
-    public IkiralOutrider (final IkiralOutrider card) {
+    private IkiralOutrider(final IkiralOutrider card) {
         super(card);
     }
 

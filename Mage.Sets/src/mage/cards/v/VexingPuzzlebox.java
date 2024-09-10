@@ -36,13 +36,13 @@ public final class VexingPuzzlebox extends CardImpl {
 
         // {T}: Add one mana of any color. Roll a d20.
         AnyColorManaAbility manaAbility = new AnyColorManaAbility();
-        manaAbility.addEffect(new RollDiceEffect(null, 20).setText("Roll a d20"));
+        manaAbility.addEffect(new RollDiceEffect(20).setText("Roll a d20"));
         manaAbility.setUndoPossible(false);
         this.addAbility(manaAbility);
 
         // {T}, Remove 100 charge counters from Vexing Puzzlebox: Search your library for an artifact card, put that card onto the battlefield, then shuffle.
         Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT_AN)
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT_AN), false, true
         ), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(100)));
         this.addAbility(ability);

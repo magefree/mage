@@ -1,26 +1,28 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.FabricateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class MarionetteMaster extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledArtifactPermanent("an artifact you control");
 
     public MarionetteMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
@@ -33,9 +35,11 @@ public final class MarionetteMaster extends CardImpl {
         this.addAbility(new FabricateAbility(3));
 
         // Whenever an artifact you control is put into a graveyard from the battlefield, target opponent loses life equal to Marionette Master's power.
-        Effect effect = new LoseLifeTargetEffect(new SourcePermanentPowerCount(false));
-        effect.setText("target opponent loses life equal to Marionette Master's power");
-        Ability ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(effect, false, new FilterControlledArtifactPermanent("an artifact you control"), false);
+        Ability ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(
+                new LoseLifeTargetEffect(new SourcePermanentPowerCount(false))
+                        .setText("target opponent loses life equal to {this}'s power"),
+                false, filter, false
+        );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

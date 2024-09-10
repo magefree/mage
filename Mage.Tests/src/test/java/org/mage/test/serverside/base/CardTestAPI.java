@@ -172,6 +172,15 @@ public interface CardTestAPI {
     void assertPermanentCount(Player player, String cardName, int count) throws AssertionError;
 
     /**
+     * Assert token count under player's control.
+     *
+     * @param player {@link Player} which permanents should be counted.
+     * @param tokenName Name of the tokens that should be counted.
+     * @param count Expected count.
+     */
+    void assertTokenCount(Player player, String tokenName, int count) throws AssertionError;
+
+    /**
      * Assert command zone object count in player's command zone
      *
      * @param player {@link Player} which permanents should be counted.

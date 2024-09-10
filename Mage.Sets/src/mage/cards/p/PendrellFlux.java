@@ -57,7 +57,7 @@ public final class PendrellFlux extends CardImpl {
 
 class PendrellFluxEffect extends OneShotEffect {
 
-    public PendrellFluxEffect() {
+    PendrellFluxEffect() {
         super(Outcome.Sacrifice);
         staticText =  "sacrifice this creature unless you pay its mana cost";
     }

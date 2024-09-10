@@ -25,7 +25,7 @@ public class EntersBattlefieldFromGraveyardTriggeredAbility extends TriggeredAbi
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public EntersBattlefieldFromGraveyardTriggeredAbility(final EntersBattlefieldFromGraveyardTriggeredAbility ability) {
+    protected EntersBattlefieldFromGraveyardTriggeredAbility(final EntersBattlefieldFromGraveyardTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
     }
@@ -50,7 +50,7 @@ public class EntersBattlefieldFromGraveyardTriggeredAbility extends TriggeredAbi
     }
 
     private String generateTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("When {this} enters the battlefield from ");
+        StringBuilder sb = new StringBuilder("When {this} enters from ");
         switch (targetController) {
             case YOU:
                 sb.append("your");

@@ -1,12 +1,13 @@
 
 package mage.abilities.dynamicvalue.common;
 
+import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -16,13 +17,17 @@ public enum GreatestToughnessAmongControlledCreaturesValue implements DynamicVal
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        for (Permanent p : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, sourceAbility.getControllerId(), game
-        )) {
-            amount = Math.max(p.getToughness().getValue(), amount);
-        }
-        return amount;
+        return game
+                .getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_CREATURE,
+                        sourceAbility.getControllerId(), game
+                )
+                .stream()
+                .map(MageObject::getToughness)
+                .mapToInt(MageInt::getValue)
+                .max()
+                .orElse(0);
     }
 
     @Override

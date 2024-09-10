@@ -1,7 +1,6 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -13,9 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,12 +27,14 @@ public final class Skinwing extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Living Weapom
+        // Living weapon
         this.addAbility(new LivingWeaponAbility());
 
         // Equipped creature gets +2/+2 and has flying
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
+        ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT)
+                .setText("and has flying"));
+        this.addAbility(ability);
 
         // Equip {6}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(6), false));

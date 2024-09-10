@@ -22,7 +22,7 @@ public final class IllunaApexOfWishes extends CardImpl {
     public IllunaApexOfWishes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEAST);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.DINOSAUR);

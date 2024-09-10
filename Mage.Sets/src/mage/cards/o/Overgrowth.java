@@ -35,7 +35,7 @@ public final class Overgrowth extends CardImpl {
         // Whenever enchanted land is tapped for mana, its controller adds {G}{G}.
         this.addAbility(new EnchantedTappedTriggeredManaAbility(new AddManaToManaPoolTargetControllerEffect(
                 Mana.GreenMana(2), "their"
-        )));
+        ).setText("its controller adds an additional {G}{G}")));
     }
 
     private Overgrowth(final Overgrowth card) {

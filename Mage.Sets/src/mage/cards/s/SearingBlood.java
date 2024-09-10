@@ -23,7 +23,7 @@ public final class SearingBlood extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new WhenTargetDiesDelayedTriggeredAbility(
-                        new DamageTargetEffect(3, true, "that creature's controller"),
+                        new DamageTargetEffect(3, true, "the creature's controller"),
                         SetTargetPointer.PLAYER
                 )
         ));

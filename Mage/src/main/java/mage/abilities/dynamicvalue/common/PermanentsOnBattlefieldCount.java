@@ -7,7 +7,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 
 /**
- *
  * @author North
  */
 public class PermanentsOnBattlefieldCount implements DynamicValue {
@@ -24,16 +23,15 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
     }
 
     /**
-     * 
      * @param filter
-     * @param multiplier 
+     * @param multiplier
      */
     public PermanentsOnBattlefieldCount(FilterPermanent filter, Integer multiplier) {
         this.filter = filter;
         this.multiplier = multiplier;
     }
 
-    public PermanentsOnBattlefieldCount(final PermanentsOnBattlefieldCount dynamicValue) {
+    protected PermanentsOnBattlefieldCount(final PermanentsOnBattlefieldCount dynamicValue) {
         this.filter = dynamicValue.filter;
         this.multiplier = dynamicValue.multiplier;
     }

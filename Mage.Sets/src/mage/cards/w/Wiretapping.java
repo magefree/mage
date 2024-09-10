@@ -71,7 +71,7 @@ class WiretappingTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return game.isActivePlayer(event.getPlayerId())
-                && game.getStep().getType() == PhaseStep.DRAW
+                && game.getTurnStepType() == PhaseStep.DRAW
                 && isControlledBy(event.getPlayerId())
                 && game
                 .getState()

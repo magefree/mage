@@ -7,8 +7,10 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +29,7 @@ public final class StormTheVault extends CardImpl {
     public StormTheVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.secondSideCardClazz = mage.cards.v.VaultOfCatlacan.class;
 
@@ -39,10 +41,9 @@ public final class StormTheVault extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, ComparisonType.MORE_THAN, 4),
-                "At the beginning of your end step, if you control five or more artifacts, transform {this}"));
-
+                "At the beginning of your end step, if you control five or more artifacts, transform {this}"
+        ).addHint(new ValueHint("Artifacts you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT))));
     }
-
 
     private StormTheVault(final StormTheVault card) {
         super(card);

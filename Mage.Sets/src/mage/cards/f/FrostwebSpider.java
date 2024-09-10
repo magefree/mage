@@ -32,7 +32,7 @@ public final class FrostwebSpider extends CardImpl {
 
     public FrostwebSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SPIDER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

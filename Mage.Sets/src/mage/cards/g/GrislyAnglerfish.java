@@ -48,12 +48,12 @@ public final class GrislyAnglerfish extends CardImpl {
 
 class GrislyAnglerfishMustAttackEffect extends RequirementEffect {
 
-    public GrislyAnglerfishMustAttackEffect() {
+    GrislyAnglerfishMustAttackEffect() {
         super(Duration.EndOfTurn);
         staticText = "Creatures your opponents control attack this turn if able";
     }
 
-    public GrislyAnglerfishMustAttackEffect(final GrislyAnglerfishMustAttackEffect effect) {
+    private GrislyAnglerfishMustAttackEffect(final GrislyAnglerfishMustAttackEffect effect) {
         super(effect);
     }
 

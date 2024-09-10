@@ -44,12 +44,12 @@ public final class EncirclingFissure extends CardImpl {
 
 class EncirclingFissurePreventEffect extends PreventionEffectImpl {
 
-    public EncirclingFissurePreventEffect() {
+    EncirclingFissurePreventEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, true, false);
         staticText = "Prevent all combat damage that would be dealt this turn by creatures target opponent controls";
     }
 
-    public EncirclingFissurePreventEffect(final EncirclingFissurePreventEffect effect) {
+    private EncirclingFissurePreventEffect(final EncirclingFissurePreventEffect effect) {
         super(effect);
     }
 

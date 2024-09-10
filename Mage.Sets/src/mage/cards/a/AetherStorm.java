@@ -48,18 +48,13 @@ public final class AetherStorm extends CardImpl {
 
 class AetherStormReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public AetherStormReplacementEffect() {
+    AetherStormReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Creature spells can't be cast";
     }
 
     private AetherStormReplacementEffect(final AetherStormReplacementEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

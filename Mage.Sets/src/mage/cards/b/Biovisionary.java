@@ -5,7 +5,9 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -32,9 +34,10 @@ public final class Biovisionary extends CardImpl {
         //At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new WinGameSourceControllerEffect(), 
-                TargetController.ANY, 
+                TargetController.NEXT,
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 3),
-                false));
+                false
+        ).addHint(new ValueHint("Creatures you control named Biovisionary", new PermanentsOnBattlefieldCount(filter))));
     }
 
     private Biovisionary(final Biovisionary card) {
@@ -46,4 +49,3 @@ public final class Biovisionary extends CardImpl {
         return new Biovisionary(this);
     }
 }
-

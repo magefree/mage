@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,6 +9,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +44,7 @@ class MeltdownEffect extends OneShotEffect {
         this.staticText = "Destroy each artifact with mana value X or less";
     }
     
-    MeltdownEffect(final MeltdownEffect effect) {
+    private MeltdownEffect(final MeltdownEffect effect) {
         super(effect);
     }
     
@@ -54,7 +56,7 @@ class MeltdownEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (permanent != null && permanent.isArtifact(game) && permanent.getManaValue() <= source.getManaCostsToPay().getX()) {
+            if (permanent != null && permanent.isArtifact(game) && permanent.getManaValue() <= CardUtil.getSourceCostsTag(game, source, "X", 0)) {
                 permanent.destroy(source, game, false);
             }
         }

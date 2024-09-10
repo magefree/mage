@@ -24,15 +24,14 @@ public final class Snakeform extends CardImpl {
 
 
         // Until end of turn, target creature loses all abilities and becomes a green Snake with base power and toughness 1/1.
-        Effect effect = new BecomesCreatureTargetEffect(new SnakeToken(), true, false, Duration.EndOfTurn);
+        Effect effect = new BecomesCreatureTargetEffect(new SnakeToken(), true, false, Duration.EndOfTurn)
+                .withDurationRuleAtStart(true);
         effect.setText("Until end of turn, target creature loses all abilities and becomes a green Snake with base power and toughness 1/1");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Draw a card.
-        effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("<br>Draw a card.");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
         
     }
 

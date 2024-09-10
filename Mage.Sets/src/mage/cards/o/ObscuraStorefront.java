@@ -38,7 +38,7 @@ public final class ObscuraStorefront extends CardImpl {
 
         // When Obscura Storefront enters the battlefield, sacrifice it. When you do, search your library for a basic Plains, Island, or Swamp card, put it onto the battlefield tapped, then shuffle and you gain 1 life.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), false);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(

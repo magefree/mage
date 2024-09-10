@@ -35,7 +35,7 @@ public final class AinokGuide extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
 
         // * Search your library for a basic land card, reveal it, then shuffle your library and put that card on top of it.
-        Mode mode = new Mode(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
+        Mode mode = new Mode(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
         ability.addMode(mode);
         this.addAbility(ability);
 

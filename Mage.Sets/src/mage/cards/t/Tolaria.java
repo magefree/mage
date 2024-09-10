@@ -27,7 +27,7 @@ public final class Tolaria extends CardImpl {
 
     public Tolaria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());

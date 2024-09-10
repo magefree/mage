@@ -28,7 +28,7 @@ import mage.target.TargetPermanent;
  */
 public final class SlitheryStalker extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a green or white creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green or white creature an opponent controls");
 
     static {
         filter.add(Predicates.or(
@@ -48,7 +48,7 @@ public final class SlitheryStalker extends CardImpl {
         this.addAbility(new SwampwalkAbility());
 
         // When Slithery Stalker enters the battlefield, exile target green or white creature an opponent controls.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), true);
+        Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect());
         Target target = new TargetPermanent(filter);
         ability1.addTarget(target);
         this.addAbility(ability1);

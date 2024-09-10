@@ -25,7 +25,7 @@ public final class OrcaSiegeDemon extends CardImpl {
 
     public OrcaSiegeDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(5);

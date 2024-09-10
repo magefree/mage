@@ -17,6 +17,7 @@ import mage.constants.SuperType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
@@ -26,6 +27,7 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -35,7 +37,7 @@ public final class DarthTyranusCountOfSerenno extends CardImpl {
 
     public DarthTyranusCountOfSerenno(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOOKU);
 
         this.setStartingLoyalty(3);
@@ -68,19 +70,19 @@ public final class DarthTyranusCountOfSerenno extends CardImpl {
 
 class DarthTyranusEffect extends OneShotEffect {
 
-    public DarthTyranusEffect() {
+    DarthTyranusEffect() {
         super(Outcome.Benefit);
         staticText = "Target player's life total becomes 5. Another target players's life total becomes 30";
     }
 
-    public DarthTyranusEffect(DarthTyranusEffect effect) {
+    private DarthTyranusEffect(final DarthTyranusEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player1 = game.getPlayer(targetPointer.getTargets(game, source).get(0));
-        Player player2 = game.getPlayer(targetPointer.getTargets(game, source).get(1));
+        Player player1 = game.getPlayer(getTargetPointer().getTargets(game, source).get(0));
+        Player player2 = game.getPlayer(getTargetPointer().getTargets(game, source).get(1));
         if (player1 != null && player2 != null) {
             player1.setLife(5, game, source);
             player1.setLife(30, game, source);
@@ -97,12 +99,12 @@ class DarthTyranusEffect extends OneShotEffect {
 
 class TransmuteArtifactEffect extends SearchEffect {
 
-    public TransmuteArtifactEffect() {
+    TransmuteArtifactEffect() {
         super(new TargetCardInLibrary(new FilterArtifactCard()), Outcome.PutCardInPlay);
         staticText = "Sacrifice an artifact. If you do, search your library for an artifact card and put that card onto the battlefield. Shuffle your library";
     }
 
-    public TransmuteArtifactEffect(final TransmuteArtifactEffect effect) {
+    private TransmuteArtifactEffect(final TransmuteArtifactEffect effect) {
         super(effect);
     }
 
@@ -116,8 +118,8 @@ class TransmuteArtifactEffect extends SearchEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             boolean sacrifice = false;
-            TargetControlledPermanent targetArtifact = new TargetControlledPermanent(new FilterControlledArtifactPermanent());
-            if (controller.chooseTarget(Outcome.Sacrifice, targetArtifact, source, game)) {
+            TargetSacrifice targetArtifact = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_ARTIFACT);
+            if (controller.choose(Outcome.Sacrifice, targetArtifact, source, game)) {
                 Permanent permanent = game.getPermanent(targetArtifact.getFirstTarget());
                 if (permanent != null) {
                     sacrifice = permanent.sacrifice(source, game);

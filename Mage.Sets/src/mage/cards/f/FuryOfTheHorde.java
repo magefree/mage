@@ -21,7 +21,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public final class FuryOfTheHorde extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two red cards");
+    private static final FilterCard filter = new FilterCard("red cards");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
@@ -36,7 +36,6 @@ public final class FuryOfTheHorde extends CardImpl {
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addEffect(new UntapAllThatAttackedEffect());
         this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
 
     }
 

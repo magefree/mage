@@ -50,9 +50,7 @@ public final class GoblinTrashmaster extends CardImpl {
         // Sacrifice a Goblin: Destroy target artifact.
         Ability ability = new SimpleActivatedAbility(
                 new DestroyTargetEffect(),
-                new SacrificeTargetCost(
-                        new TargetControlledPermanent(filter2)
-                )
+                new SacrificeTargetCost(filter2)
         );
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

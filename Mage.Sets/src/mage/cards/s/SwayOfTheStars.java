@@ -48,12 +48,12 @@ public final class SwayOfTheStars extends CardImpl {
 
 class SwayOfTheStarsEffect extends OneShotEffect {
 
-    public SwayOfTheStarsEffect() {
+    SwayOfTheStarsEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles their hand, graveyard, and permanents they own into their library";
+        staticText = "Each player shuffles their hand, graveyard, and all permanents they own into their library";
     }
 
-    public SwayOfTheStarsEffect(final SwayOfTheStarsEffect effect) {
+    private SwayOfTheStarsEffect(final SwayOfTheStarsEffect effect) {
         super(effect);
     }
 

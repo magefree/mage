@@ -31,7 +31,7 @@ public final class TheCauldronOfEternity extends CardImpl {
     public TheCauldronOfEternity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{10}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {2} less to cast for each creature card in your graveyard.
         DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);

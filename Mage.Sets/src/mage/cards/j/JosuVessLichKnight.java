@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import mage.MageInt;
@@ -8,7 +7,6 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,7 +20,7 @@ public final class JosuVessLichKnight extends CardImpl {
 
     public JosuVessLichKnight(UUID ownerID, CardSetInfo cardSetInfo){
         super(ownerID, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE, SubType.KNIGHT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -36,15 +34,15 @@ public final class JosuVessLichKnight extends CardImpl {
         //When Josu Vess, Lich Knight enters the battlefield, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieKnightToken(), 8));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace."));
+                "When {this} enters, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace."));
     }
 
-    public JosuVessLichKnight(final JosuVessLichKnight josuVessLichKnight){
-        super(josuVessLichKnight);
+    private JosuVessLichKnight(final JosuVessLichKnight card){
+        super(card);
     }
 
     @Override
-    public Card copy() {
+    public JosuVessLichKnight copy() {
         return new JosuVessLichKnight(this);
     }
 }

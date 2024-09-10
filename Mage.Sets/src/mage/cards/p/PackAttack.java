@@ -55,6 +55,7 @@ enum PackAttackValue implements DynamicValue {
                 .getGroups()
                 .stream()
                 .map(CombatGroup::getDefenderId)
+                .filter(Objects::nonNull)
                 .distinct()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

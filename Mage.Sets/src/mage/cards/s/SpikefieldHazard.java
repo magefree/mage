@@ -4,9 +4,8 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 import mage.abilities.mana.RedManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
@@ -16,7 +15,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class SpikefieldHazard extends ModalDoubleFacesCard {
+public final class SpikefieldHazard extends ModalDoubleFacedCard {
 
     public SpikefieldHazard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

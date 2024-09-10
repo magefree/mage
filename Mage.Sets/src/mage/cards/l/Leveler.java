@@ -45,7 +45,7 @@ public final class Leveler extends CardImpl {
 
 class LevelerExileLibraryEffect extends OneShotEffect {
 
-    public LevelerExileLibraryEffect() {
+    LevelerExileLibraryEffect() {
         super(Outcome.Exile);
         staticText = "exile all cards from your library";
     }

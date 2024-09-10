@@ -33,7 +33,7 @@ public final class RootwaterAlligator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice a Forest: Regenerate Rootwater Alligator.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(filter)));
     }
 
     private RootwaterAlligator(final RootwaterAlligator card) {

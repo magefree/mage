@@ -42,12 +42,12 @@ public final class AmassTheComponents extends CardImpl {
 
 class AmassTheComponentsEffect extends OneShotEffect {
 
-    public AmassTheComponentsEffect() {
+    AmassTheComponentsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw three cards, then put a card from your hand on the bottom of your library";
     }
 
-    public AmassTheComponentsEffect(final AmassTheComponentsEffect effect) {
+    private AmassTheComponentsEffect(final AmassTheComponentsEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class AmassTheComponentsEffect extends OneShotEffect {
             FilterCard filter = new FilterCard("card from your hand to put on the bottom of your library");
             TargetCard target = new TargetCard(Zone.HAND, filter);
 
-            if (player.choose(Outcome.Detriment, player.getHand(), target, game)) {
+            if (player.choose(Outcome.Detriment, player.getHand(), target, source, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     return player.putCardsOnBottomOfLibrary(card, game, source, true);

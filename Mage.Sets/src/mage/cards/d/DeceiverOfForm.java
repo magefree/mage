@@ -45,12 +45,12 @@ public final class DeceiverOfForm extends CardImpl {
 
 class DeceiverOfFormEffect extends OneShotEffect {
 
-    public DeceiverOfFormEffect() {
+    DeceiverOfFormEffect() {
         super(Outcome.Copy);
         this.staticText = "reveal the top card of your library. If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form becomes copies of that card until end of turn. You may put that card on the bottom of your library";
     }
 
-    public DeceiverOfFormEffect(final DeceiverOfFormEffect effect) {
+    private DeceiverOfFormEffect(final DeceiverOfFormEffect effect) {
         super(effect);
     }
 
@@ -77,15 +77,12 @@ class DeceiverOfFormEffect extends OneShotEffect {
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                             if (!permanent.getId().equals(sourceObject.getId())) {
                                 // handle MDFC
-                                if (cardFromTop instanceof ModalDoubleFacesCard
-                                        && ((ModalDoubleFacesCard) cardFromTop).getLeftHalfCard().isCreature(game)) {
-                                    copyFromCard = ((ModalDoubleFacesCard) cardFromTop).getLeftHalfCard();
+                                if (cardFromTop instanceof ModalDoubleFacedCard
+                                        && ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard().isCreature(game)) {
+                                    copyFromCard = ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard();
                                 }
-                                Permanent newBluePrint = null;
-                                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
-                                newBluePrint.assignNewId();
+                                Permanent newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                                 CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, permanent.getId());
-                                copyEffect.newId();
                                 Ability newAbility = source.copy();
                                 copyEffect.init(newAbility, game);
                                 game.addEffect(copyEffect, newAbility);

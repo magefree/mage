@@ -32,7 +32,7 @@ public final class RocketLauncher extends CardImpl {
                 new GenericManaCost(2), RocketLauncherCondition.instance);
         ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DestroySourceEffect(true))
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DestroySourceEffect())
         ).setText("destroy {this} at the beginning of the next end step"));
         this.addAbility(ability);
     }

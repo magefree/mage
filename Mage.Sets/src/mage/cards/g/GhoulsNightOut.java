@@ -45,7 +45,7 @@ public final class GhoulsNightOut extends CardImpl {
 
 class GhoulsNightOutEffect extends OneShotEffect {
 
-    public GhoulsNightOutEffect() {
+    GhoulsNightOutEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "For each player, choose a creature card in that player's graveyard. Put those cards onto the battlefield under your control. They're black Zombies in addition to their other colors and types and they gain decayed";
     }
@@ -79,7 +79,7 @@ class GhoulsNightOutEffect extends OneShotEffect {
                     if (creatureInGraveyard) {
                         FilterCreatureCard filter = new FilterCreatureCard("creature card in " + player.getName() + "'s graveyard");
                         TargetCard target = new TargetCard(Zone.GRAVEYARD, filter);
-                        target.setNotTarget(true);
+                        target.withNotTarget(true);
                         controller.chooseTarget(controllerId.equals(playerId) ? Outcome.Benefit : Outcome.Detriment, player.getGraveyard(), target, source, game);
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
@@ -107,7 +107,7 @@ class GhoulsNightOutEffect extends OneShotEffect {
 
 class GhoulsNightOutTypeChangingEffect extends ContinuousEffectImpl {
 
-    public GhoulsNightOutTypeChangingEffect() {
+    GhoulsNightOutTypeChangingEffect() {
         super(Duration.Custom, Outcome.Neutral);
     }
 
@@ -123,7 +123,7 @@ class GhoulsNightOutTypeChangingEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer subLayer, Ability source, Game game) {
         boolean isActive = false;
-        for (UUID permId : targetPointer.getTargets(game, source)) {
+        for (UUID permId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permId);
             if (permanent != null) {
                 switch (layer) {

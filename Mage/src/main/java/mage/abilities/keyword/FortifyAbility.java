@@ -32,7 +32,7 @@ public class FortifyAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public FortifyAbility(final FortifyAbility ability) {
+    protected FortifyAbility(final FortifyAbility ability) {
         super(ability);
     }
 
@@ -44,6 +44,6 @@ public class FortifyAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Fortify " + costs.getText() + manaCosts.getText() + " (" + manaCosts.getText() + ": <i>Attach to target land you control. Fortify only as a sorcery.)</i>";
+        return "Fortify " + getCosts().getText() + getManaCosts().getText() + " (" + getManaCosts().getText() + ": <i>Attach to target land you control. Fortify only as a sorcery.)</i>";
     }
 }

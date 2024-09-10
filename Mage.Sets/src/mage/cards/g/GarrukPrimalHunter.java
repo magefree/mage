@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -13,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -32,7 +31,7 @@ public final class GarrukPrimalHunter extends CardImpl {
 
     public GarrukPrimalHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
         this.setStartingLoyalty(3);
@@ -65,7 +64,7 @@ class GarrukPrimalHunterEffect extends OneShotEffect {
         staticText = "Draw cards equal to the greatest power among creatures you control";
     }
 
-    GarrukPrimalHunterEffect(final GarrukPrimalHunterEffect effect) {
+    private GarrukPrimalHunterEffect(final GarrukPrimalHunterEffect effect) {
         super(effect);
     }
 
@@ -74,7 +73,7 @@ class GarrukPrimalHunterEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int amount = 0;
-            for (Permanent p : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent p : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), game)) {
                 if (p.getPower().getValue() > amount) {
                     amount = p.getPower().getValue();
                 }

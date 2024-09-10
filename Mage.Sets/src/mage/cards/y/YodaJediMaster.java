@@ -35,7 +35,7 @@ public final class YodaJediMaster extends CardImpl {
 
     public YodaJediMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.YODA);
 
         this.setStartingLoyalty(3);
@@ -65,12 +65,12 @@ public final class YodaJediMaster extends CardImpl {
 
 class YodaJediMasterEffect extends OneShotEffect {
 
-    public YodaJediMasterEffect() {
+    YodaJediMasterEffect() {
         super(Outcome.Detriment);
         staticText = "Exile another target permanent you own. Return that card to the battlefield under your control at the beginning of your next end step";
     }
 
-    public YodaJediMasterEffect(final YodaJediMasterEffect effect) {
+    private YodaJediMasterEffect(final YodaJediMasterEffect effect) {
         super(effect);
     }
 

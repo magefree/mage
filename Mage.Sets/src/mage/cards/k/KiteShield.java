@@ -28,7 +28,7 @@ public final class KiteShield extends CardImpl {
 
     }
 
-    public KiteShield (final KiteShield card) {
+    private KiteShield(final KiteShield card) {
         super(card);
     }
 

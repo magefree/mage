@@ -64,7 +64,7 @@ class HydrasGrowthDoubleEffect extends OneShotEffect {
         staticText = "double the number of +1/+1 counters on enchanted creature";
     }
 
-    HydrasGrowthDoubleEffect(final HydrasGrowthDoubleEffect effect) {
+    private HydrasGrowthDoubleEffect(final HydrasGrowthDoubleEffect effect) {
         super(effect);
     }
 

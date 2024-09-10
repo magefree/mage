@@ -25,7 +25,7 @@ public final class BalmorBattlemageCaptain extends CardImpl {
     public BalmorBattlemageCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);

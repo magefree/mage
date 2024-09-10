@@ -4,7 +4,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
@@ -16,7 +16,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class KhalniAmbush extends ModalDoubleFacesCard {
+public final class KhalniAmbush extends ModalDoubleFacedCard {
 
     public KhalniAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

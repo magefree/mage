@@ -38,7 +38,7 @@ public final class DireFleetCaptain extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Dire Fleet Captain attacks, it gets +1/+1 until end of turn for each other attacking Pirate.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, "it"), false));
     }
 
     private DireFleetCaptain(final DireFleetCaptain card) {

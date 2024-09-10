@@ -52,12 +52,12 @@ public final class Mirrorweave extends CardImpl {
 
 class MirrorWeaveEffect extends OneShotEffect {
 
-    public MirrorWeaveEffect() {
+    MirrorWeaveEffect() {
         super(Outcome.Copy);
         this.staticText = "Each other creature becomes a copy of target nonlegendary creature until end of turn";
     }
 
-    public MirrorWeaveEffect(final MirrorWeaveEffect effect) {
+    private MirrorWeaveEffect(final MirrorWeaveEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class MirrorWeaveEffect extends OneShotEffect {
             Permanent copyFromCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (copyFromCreature != null) {
                 filter.add(Predicates.not(new PermanentIdPredicate(copyFromCreature.getId())));
-                for (Permanent copyToCreature : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                for (Permanent copyToCreature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (copyToCreature != null) {
                         game.copyPermanent(Duration.EndOfTurn, copyFromCreature, copyToCreature.getId(), source, new EmptyCopyApplier());
                     }

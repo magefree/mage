@@ -6,6 +6,7 @@ import mage.abilities.common.CompletedDungeonTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,6 +29,7 @@ public final class LootDispute extends CardImpl {
         // When Loot Dispute enters the battlefield, you take the initiative and create a Treasure token.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect());
         ability.addEffect(new CreateTokenEffect(new TreasureToken()).setText("and create a Treasure token"));
+        ability.addHint(InitiativeHint.instance);
         this.addAbility(ability);
 
         // Whenever you attack a player who has the initiative, create a Treasure token.

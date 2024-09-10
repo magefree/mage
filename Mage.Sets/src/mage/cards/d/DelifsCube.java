@@ -14,11 +14,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public final class DelifsCube extends CardImpl {
         // {2}, Remove a cube counter from Delif's Cube: Regenerate target creature.
         ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new GenericManaCost(2));
         ability.addCost(new RemoveCountersSourceCost(CounterType.CUBE.createInstance()));
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

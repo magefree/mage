@@ -52,12 +52,12 @@ public final class ChokingSands extends CardImpl {
 
 class ChokingSandsEffect extends OneShotEffect {
 
-    public ChokingSandsEffect() {
+    ChokingSandsEffect() {
         super(Outcome.Damage);
         this.staticText = "If that land was nonbasic, Choking Sands deals 2 damage to the land's controller";
     }
 
-    public ChokingSandsEffect(final ChokingSandsEffect effect) {
+    private ChokingSandsEffect(final ChokingSandsEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class ChokingSandsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        if (permanent != null && !permanent.isBasic()) {
+        if (permanent != null && !permanent.isBasic(game)) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 player.damage(2, source.getSourceId(), source, game);

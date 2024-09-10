@@ -46,12 +46,12 @@ public final class IndenturedOaf extends CardImpl {
 
 class IndenturedOafPreventEffectEffect extends PreventionEffectImpl {
 
-    public IndenturedOafPreventEffectEffect(Duration duration) {
+    IndenturedOafPreventEffectEffect(Duration duration) {
         super(duration, Integer.MAX_VALUE, false);
         staticText = "Prevent all damage that {this} would deal to red creatures";
     }
 
-    public IndenturedOafPreventEffectEffect(final IndenturedOafPreventEffectEffect effect) {
+    private IndenturedOafPreventEffectEffect(final IndenturedOafPreventEffectEffect effect) {
         super(effect);
     }
 

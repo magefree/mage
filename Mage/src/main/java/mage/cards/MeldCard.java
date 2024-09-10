@@ -7,6 +7,7 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,10 +29,10 @@ public abstract class MeldCard extends CardImpl {
         this.nightCard = true;
     }
 
-    public MeldCard(final MeldCard card) {
+    protected MeldCard(final MeldCard card) {
         super(card);
-        this.topHalfCard = card.topHalfCard;
-        this.bottomHalfCard = card.bottomHalfCard;
+        this.topHalfCard = CardUtil.deepCopyObject(card.topHalfCard);
+        this.bottomHalfCard = CardUtil.deepCopyObject(card.bottomHalfCard);
         this.topLastZoneChangeCounter = card.topLastZoneChangeCounter;
         this.bottomLastZoneChangeCounter = card.bottomLastZoneChangeCounter;
         this.halves = new CardsImpl(card.halves);
@@ -109,6 +110,8 @@ public abstract class MeldCard extends CardImpl {
 
     @Override
     public boolean isTransformable() {
+        // there are multiple day cards for one meld card, so can't show it as second side
+        // TODO: can be fixed after mutiple sides implement, e.g. with Mutate support
         return false;
     }
 
@@ -133,6 +136,7 @@ public abstract class MeldCard extends CardImpl {
         boolean value = topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)
                 && halves.contains(topHalfCard.getId());
         if (!value) {
+            // TODO: sync code with deleting halfs ref smells bad - looks like melds have problems with zcc sync (topLastZoneChangeCounter)
             halves.remove(topHalfCard);
         }
         return value;
@@ -142,6 +146,7 @@ public abstract class MeldCard extends CardImpl {
         boolean value = bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)
                 && halves.contains(bottomHalfCard.getId());
         if (!value) {
+            // TODO: sync code with deleting halfs ref smells bad - looks like melds have problems with zcc sync (bottomLastZoneChangeCounter)
             halves.remove(bottomHalfCard);
         }
         return value;

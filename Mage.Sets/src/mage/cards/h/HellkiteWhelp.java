@@ -1,21 +1,21 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class HellkiteWhelp extends CardImpl {
@@ -24,7 +24,7 @@ public final class HellkiteWhelp extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public HellkiteWhelp(UUID ownerId, CardSetInfo setInfo) {

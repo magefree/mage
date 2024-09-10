@@ -9,6 +9,7 @@ import mage.abilities.effects.common.combat.BlocksIfAbleAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
@@ -26,7 +27,7 @@ public final class YouveBeenCaughtStealing extends CardImpl {
 
         // Choose one —
         // • Threaten the Merchant — Each creature blocks this turn if able.
-        this.getSpellAbility().addEffect(new BlocksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE)
+        this.getSpellAbility().addEffect(new BlocksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE, Duration.EndOfTurn)
                 .setText("each creature blocks this turn if able"));
         this.getSpellAbility().withFirstModeFlavorWord("Threaten the Merchant");
 

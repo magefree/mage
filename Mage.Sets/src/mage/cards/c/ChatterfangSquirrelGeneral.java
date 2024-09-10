@@ -35,7 +35,7 @@ public final class ChatterfangSquirrelGeneral extends CardImpl {
     public ChatterfangSquirrelGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SQUIRREL);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -68,7 +68,7 @@ public final class ChatterfangSquirrelGeneral extends CardImpl {
 
 class ChatterfangSquirrelGeneralReplacementEffect extends ReplacementEffectImpl {
 
-    public ChatterfangSquirrelGeneralReplacementEffect() {
+    ChatterfangSquirrelGeneralReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = "If one or more tokens would be created under your control, those tokens plus that many 1/1 green Squirrel creature tokens are created instead";
     }

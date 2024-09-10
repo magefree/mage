@@ -44,12 +44,12 @@ public final class TrainingDrone extends CardImpl {
 
 class TrainingDroneEffect extends RestrictionEffect {
 
-    public TrainingDroneEffect() {
+    TrainingDroneEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless it's equipped";
     }
 
-    public TrainingDroneEffect(final TrainingDroneEffect effect) {
+    private TrainingDroneEffect(final TrainingDroneEffect effect) {
         super(effect);
     }
 
@@ -58,7 +58,7 @@ class TrainingDroneEffect extends RestrictionEffect {
         if (permanent.getId().equals(source.getSourceId())) {
             List<UUID> attachments = permanent.getAttachments();
             for (UUID uuid : attachments) {
-                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                Permanent attached = game.getPermanent(uuid);
                 if (attached.hasSubtype(SubType.EQUIPMENT, game)) {
                     return false;
                 }

@@ -25,7 +25,7 @@ public class DredgeAbility extends SimpleStaticAbility {
         super(Zone.GRAVEYARD, new DredgeEffect(value));
     }
 
-    public DredgeAbility(final DredgeAbility ability) {
+    protected DredgeAbility(final DredgeAbility ability) {
         super(ability);
     }
 
@@ -47,7 +47,7 @@ class DredgeEffect extends ReplacementEffectImpl {
                 + " instead. If you do, return this card from your graveyard to your hand.)</i>";
     }
 
-    public DredgeEffect(final DredgeEffect effect) {
+    protected DredgeEffect(final DredgeEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -55,11 +55,6 @@ class DredgeEffect extends ReplacementEffectImpl {
     @Override
     public DredgeEffect copy() {
         return new DredgeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -72,7 +67,7 @@ class DredgeEffect extends ReplacementEffectImpl {
         if (owner != null
                 && owner.getLibrary().size() >= amount
                 && owner.chooseUse(outcome, new StringBuilder("Dredge ").append(sourceCard.getLogName()).
-                        append("? (").append(amount).append(" cards are milled)").toString(), source, game)) {
+                append("? (").append(amount).append(" cards are milled)").toString(), source, game)) {
             if (!game.isSimulation()) {
                 game.informPlayers(new StringBuilder(owner.getLogName()).append(" dredges ").append(sourceCard.getLogName()).toString());
             }

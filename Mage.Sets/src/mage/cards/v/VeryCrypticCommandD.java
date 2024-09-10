@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -18,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.FilterSpell;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.NumberOfTargetsPredicate;
@@ -28,13 +28,15 @@ import mage.target.TargetPermanent;
 import mage.target.TargetStackObject;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author spjspj
  */
 public final class VeryCrypticCommandD extends CardImpl {
 
-    private static final FilterStackObject filter = new FilterStackObject("spell or ability with a single target");
+    private static final FilterStackObject filter = new FilterSpell("spell with a single target");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("nontoken creature");
 
     static {
@@ -88,7 +90,7 @@ class TurnOverEffect extends OneShotEffect {
         this.staticText = "Turn over target nontoken creature";
     }
 
-    TurnOverEffect(final TurnOverEffect effect) {
+    private TurnOverEffect(final TurnOverEffect effect) {
         super(effect);
     }
 
@@ -101,9 +103,20 @@ class TurnOverEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature != null) {
+            // To turn over a creature means to physically turn the card over. If the result is a face-down card, it’s
+            // a colorless 2/2 creature, the same as one would get from using the morph ability. Turning a face-down
+            // card over results in it being turned face up. Any abilities that trigger when it’s turned face up will
+            // work. Turning a double-faced card over is the same as transforming it. Any abilities that trigger when
+            // you transform it will work. Turning a combined host/augment creature over will result in a big colorless
+            // 2/2 creature represented by two cards. Turning a melded creature over will result in the two cards
+            // breaking apart and forming two separate creatures, but they’ll probably just get right back together.
+            // Turning B.F.M. (Big Furry Monster) over is the same as turning a combined creature over.
+            // (2018-01-19)
             if (creature.isFaceDown(game)) {
+                // face down -> face up
                 creature.turnFaceUp(source, game, source.getControllerId());
             } else {
+                // face up -> face down without face up ability
                 creature.turnFaceDown(source, game, source.getControllerId());
                 MageObjectReference objectReference = new MageObjectReference(creature.getId(), creature.getZoneChangeCounter(game), game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(null, objectReference, Duration.Custom, FaceDownType.MANUAL), source);

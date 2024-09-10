@@ -20,7 +20,7 @@ public final class GethsVerdict extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");
 
         this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target player"));
-        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
+        this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1).setText("and loses 1 life"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

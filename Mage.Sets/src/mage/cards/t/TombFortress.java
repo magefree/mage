@@ -79,7 +79,7 @@ class TombFortressEffect extends OneShotEffect {
         }
         player.millCards(4, source, game);
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return true;
         }

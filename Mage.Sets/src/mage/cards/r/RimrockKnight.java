@@ -32,6 +32,8 @@ public final class RimrockKnight extends AdventureCard {
         // Target creature gets +2/+0 until end of turn.
         this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private RimrockKnight(final RimrockKnight card) {

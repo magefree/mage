@@ -27,7 +27,8 @@ public final class Jinx extends CardImpl {
         
         // Draw a card at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false)
+                .concatBy("<br>"));
     }
 
     private Jinx(final Jinx card) {

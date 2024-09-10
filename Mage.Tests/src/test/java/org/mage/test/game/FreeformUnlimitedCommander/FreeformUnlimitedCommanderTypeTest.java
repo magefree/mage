@@ -90,11 +90,11 @@ public class FreeformUnlimitedCommanderTypeTest extends MageTestPlayerBase {
     }
 
     @Test
-    public void test_isSideboardingAllowed_returnsFalse() {
+    public void test_isSideboardingAllowed_returnsTrue() {
         // Arrange
         MatchType gametype = new FreeformUnlimitedCommanderType();
 
         // Assert
-        Assert.assertFalse(gametype.isSideboardingAllowed());
+        Assert.assertTrue(gametype.isSideboardingAllowed());
     }
 }

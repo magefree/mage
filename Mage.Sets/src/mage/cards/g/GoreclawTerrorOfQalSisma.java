@@ -28,7 +28,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  */
 public final class GoreclawTerrorOfQalSisma extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard();
+    private static final FilterCard filter = new FilterCreatureCard("Creature spells you cast with power 4 or greater");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
 
     static {
@@ -39,7 +39,7 @@ public final class GoreclawTerrorOfQalSisma extends CardImpl {
     public GoreclawTerrorOfQalSisma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEAR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -48,7 +48,6 @@ public final class GoreclawTerrorOfQalSisma extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new SpellsCostReductionControllerEffect(filter, 2)
-                        .setText("Creature spells you cast with power 4 or greater cost {2} less to cast")
         ));
 
         // Whenever Goreclaw, Terror of Qal Sisma attacks, each creature you control with power 4 or greater gets +1/+1 and gains trample until end of turn.

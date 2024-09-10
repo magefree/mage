@@ -66,7 +66,7 @@ class CuratorsWardTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), false);
     }
 
-    public CuratorsWardTriggeredAbility(CuratorsWardTriggeredAbility ability) {
+    private CuratorsWardTriggeredAbility(final CuratorsWardTriggeredAbility ability) {
         super(ability);
     }
 

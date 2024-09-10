@@ -59,12 +59,12 @@ public final class ColfenorsUrn extends CardImpl {
 
 class ColfenorsUrnEffect extends OneShotEffect {
 
-    public ColfenorsUrnEffect() {
+    ColfenorsUrnEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "If you do, return those cards to the battlefield under their owner's control";
     }
 
-    public ColfenorsUrnEffect(final ColfenorsUrnEffect effect) {
+    private ColfenorsUrnEffect(final ColfenorsUrnEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class ColfenorsUrnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && permanent != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             ExileZone exile = game.getExile().getExileZone(exileId);

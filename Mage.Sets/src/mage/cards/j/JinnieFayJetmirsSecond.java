@@ -25,7 +25,7 @@ public final class JinnieFayJetmirsSecond extends CardImpl {
     public JinnieFayJetmirsSecond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R/G}{G}{G/W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(3);

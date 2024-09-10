@@ -26,7 +26,7 @@ public final class LinvalaThePreserver extends CardImpl {
 
     public LinvalaThePreserver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -37,12 +37,12 @@ public final class LinvalaThePreserver extends CardImpl {
         // When Linvala, the Preserver enters the battlefield, if an opponent has more life than you, you gain 5 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5), false),
                 OpponentHasMoreLifeCondition.instance,
-                "When {this} enters the battlefield, if an opponent has more life than you, you gain 5 life."));
+                "When {this} enters, if an opponent has more life than you, you gain 5 life."));
 
         // When Linvala enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Angel33Token()), false),
                 new OpponentControlsMoreCondition(new FilterCreaturePermanent()),
-                "When {this} enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying."));
+                "When {this} enters, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying."));
     }
 
     private LinvalaThePreserver(final LinvalaThePreserver card) {

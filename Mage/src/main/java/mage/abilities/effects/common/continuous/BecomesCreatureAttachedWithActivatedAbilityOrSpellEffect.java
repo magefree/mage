@@ -24,7 +24,7 @@ public class BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect extends On
         this.duration = duration;
     }
 
-    public BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(final BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect effect) {
+    protected BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(final BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect effect) {
         super(effect);
         this.token = effect.token.copy();
         this.duration = effect.duration;

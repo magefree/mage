@@ -4,7 +4,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -33,16 +33,16 @@ public final class OmnathLocusOfRage extends CardImpl {
 
     public OmnathLocusOfRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, create a 5/5 red and green Elemental creature token.
+        // <i>Landfall</i> &mdash; Whenever a land you control enters, create a 5/5 red and green Elemental creature token.
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new OmnathElementalToken()), false));
 
         // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to any target.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new DamageTargetEffect(3), false, filter);
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(new DamageTargetEffect(3), false, filter);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

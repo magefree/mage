@@ -39,12 +39,12 @@ public final class ParallectricFeedback extends CardImpl {
 
 class ParallectricFeedbackEffect extends OneShotEffect {
 
-    public ParallectricFeedbackEffect() {
+    ParallectricFeedbackEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals damage to target spell's controller equal to that spell's mana value";
     }
 
-    public ParallectricFeedbackEffect(final ParallectricFeedbackEffect effect) {
+    private ParallectricFeedbackEffect(final ParallectricFeedbackEffect effect) {
         super(effect);
     }
 

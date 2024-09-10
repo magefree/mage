@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedBatchEvent;
+import mage.game.events.DamagedBatchAllEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.BloodToken;
 import mage.target.common.TargetAnyTarget;
@@ -72,16 +72,15 @@ class OliviasAttendantsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH
-                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ALL;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int amount = ((DamagedBatchEvent) event)
+        int amount = ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()
-                .filter(e -> e.getSourceId().equals(getSourceId()))
+                .filter(e -> e.getAttackerId().equals(this.getSourceId()))
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (amount < 1) {

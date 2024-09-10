@@ -40,7 +40,7 @@ public final class KomaCosmosSerpent extends CardImpl {
     public KomaCosmosSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -56,7 +56,7 @@ public final class KomaCosmosSerpent extends CardImpl {
         // Sacrifice another Serpent: Choose one —
         // • Tap target permanent. Its activated abilities can't be activated this turn.
         Ability ability = new SimpleActivatedAbility(
-                new TapTargetEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new TapTargetEffect(), new SacrificeTargetCost(filter)
         );
         ability.addEffect(new KomaCosmosSerpentEffect());
         ability.addTarget(new TargetPermanent());
@@ -78,7 +78,7 @@ public final class KomaCosmosSerpent extends CardImpl {
 
 class KomaCosmosSerpentEffect extends RestrictionEffect {
 
-    public KomaCosmosSerpentEffect() {
+    KomaCosmosSerpentEffect() {
         super(Duration.EndOfTurn);
         staticText = "Its activated abilities can't be activated this turn";
     }

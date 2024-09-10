@@ -2,7 +2,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class Hurricane extends CardImpl {
 
 
         // Hurricane deals X damage to each creature with flying and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.REGULAR, filter));
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(GetXValue.instance, filter));
     }
 
     private Hurricane(final Hurricane card) {

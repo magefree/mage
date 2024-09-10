@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -35,7 +35,7 @@ public final class AstarionTheDecadent extends CardImpl {
     public AstarionTheDecadent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ROGUE);
@@ -51,14 +51,17 @@ public final class AstarionTheDecadent extends CardImpl {
         // At the beginning of your end step, choose one —
         // • Feed — Target opponent loses life equal to the amount of life they lost this turn.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeTargetEffect(AstarionTheDecadentValue.instance), TargetController.YOU, false
+                new LoseLifeTargetEffect(AstarionTheDecadentValue.instance)
+                        .setText("target opponent loses life equal to the amount of life they lost this turn"),
+                TargetController.YOU, false
         );
         ability.addTarget(new TargetOpponent());
         ability.withFirstModeFlavorWord("Feed");
-        ability.addHint(ControllerGotLifeCount.getHint());
+        ability.addHint(ControllerGainedLifeCount.getHint());
 
         // • Friends — You gain life equal to the amount of life you gained this turn.
-        ability.addMode(new Mode(new GainLifeEffect(ControllerGotLifeCount.instance)).withFlavorWord("Friends"));
+        ability.addMode(new Mode(new GainLifeEffect(ControllerGainedLifeCount.instance)
+                .setText("you gain life equal to the amount of life you gained this turn")).withFlavorWord("Friends"));
         this.addAbility(ability.addHint(AstarionTheDecadentHint.instance), new PlayerGainedLifeWatcher());
     }
 

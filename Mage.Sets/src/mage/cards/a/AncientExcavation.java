@@ -43,12 +43,12 @@ public final class AncientExcavation extends CardImpl {
 
 class AncientExcavationEffect extends OneShotEffect {
 
-    public AncientExcavationEffect() {
+    AncientExcavationEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way";
     }
 
-    public AncientExcavationEffect(final AncientExcavationEffect effect) {
+    private AncientExcavationEffect(final AncientExcavationEffect effect) {
         super(effect);
     }
 
@@ -63,8 +63,8 @@ class AncientExcavationEffect extends OneShotEffect {
         if (player != null) {
             DynamicValue numCards = CardsInControllerHandCount.instance;
             int amount = numCards.calculate(game, source, this);
-            player.drawCards(amount, source, game);
-            player.discard(amount, false, false, source, game);
+            int cardsDrawn = player.drawCards(amount, source, game);
+            player.discard(cardsDrawn, false, false, source, game);
             return true;
         }
         return false;

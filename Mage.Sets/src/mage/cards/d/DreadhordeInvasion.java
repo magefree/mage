@@ -37,7 +37,7 @@ public final class DreadhordeInvasion extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new LoseLifeSourceControllerEffect(1), TargetController.YOU, false
         );
-        ability.addEffect(new AmassEffect(1).concatBy("and"));
+        ability.addEffect(new AmassEffect(1, SubType.ZOMBIE).concatBy("and"));
         this.addAbility(ability);
 
         // Whenever a Zombie token you control with power 6 or greater attacks, it gains lifelink until end of turn.

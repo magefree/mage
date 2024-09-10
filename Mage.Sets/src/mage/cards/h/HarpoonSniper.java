@@ -37,7 +37,9 @@ public final class HarpoonSniper extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter))
+                .setText("{this} deals X damage to target attacking or blocking creature, where X is the number of Merfolk you control"),
+                new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);

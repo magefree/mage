@@ -52,10 +52,10 @@ public final class TirelessAngler extends CardImpl {
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(1);
+        this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever an Island or Swamp enters the battlefield under your control, draft a card from Tireless Angler's spellbook.
+        // Whenever an Island or Swamp you control enters, draft a card from Tireless Angler's spellbook.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DraftFromSpellbookEffect(spellbook), filter
         ));

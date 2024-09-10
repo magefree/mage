@@ -81,7 +81,7 @@ class DiseasedVerminEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to target opponent previously dealt damage by it, where X is the number of infection counters on it";
     }
 
-    public DiseasedVerminEffect(final DiseasedVerminEffect effect) {
+    private DiseasedVerminEffect(final DiseasedVerminEffect effect) {
         super(effect);
     }
 

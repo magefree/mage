@@ -45,7 +45,7 @@ public final class WolfStrike extends CardImpl {
 
 class WolfStikeEffect extends OneShotEffect {
 
-    public WolfStikeEffect() {
+    WolfStikeEffect() {
         super(Outcome.BoostCreature);
         staticText = "Target creature you control gets +2/+0 until end of turn if it's night";
     }

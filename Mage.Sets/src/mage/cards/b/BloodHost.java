@@ -36,7 +36,7 @@ public final class BloodHost extends CardImpl {
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on {this}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         // and you gain 2 life.
         effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");

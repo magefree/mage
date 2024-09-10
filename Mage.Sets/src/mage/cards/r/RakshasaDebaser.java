@@ -35,7 +35,6 @@ public final class RakshasaDebaser extends CardImpl {
     public RakshasaDebaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

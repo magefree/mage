@@ -6,7 +6,7 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -16,7 +16,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class KazanduMammoth extends ModalDoubleFacesCard {
+public final class KazanduMammoth extends ModalDoubleFacedCard {
 
     public KazanduMammoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -29,7 +29,7 @@ public final class KazanduMammoth extends ModalDoubleFacesCard {
         // Creature — Elephant
         this.getLeftHalfCard().setPT(new MageInt(3), new MageInt(3));
 
-        // Landfall — Whenever a land enters the battlefield under your control, Kazandu Mammoth gets +2/+2 until end of turn.
+        // Landfall — Whenever a land you control enters, Kazandu Mammoth gets +2/+2 until end of turn.
         this.getLeftHalfCard().addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)));
 
         // 2.

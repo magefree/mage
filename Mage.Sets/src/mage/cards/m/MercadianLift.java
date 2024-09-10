@@ -1,9 +1,7 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -22,6 +20,9 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class MercadianLift extends CardImpl {
 
         // {tap}, Remove X winch counters from Mercadian Lift: You may put a creature card with converted mana cost X from your hand onto the battlefield.
         Ability ability2 = new SimpleActivatedAbility(new MercadianLiftEffect(), new TapSourceCost());
-        ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.WINCH.createInstance(1)));
+        ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.WINCH));
         this.addAbility(ability2);
 
     }
@@ -56,12 +57,12 @@ public final class MercadianLift extends CardImpl {
 
 class MercadianLiftEffect extends OneShotEffect {
 
-    public MercadianLiftEffect() {
+    MercadianLiftEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "You may put a creature card with mana value X from your hand onto the battlefield";
     }
 
-    public MercadianLiftEffect(final MercadianLiftEffect effect) {
+    private MercadianLiftEffect(final MercadianLiftEffect effect) {
         super(effect);
     }
 
@@ -74,13 +75,7 @@ class MercadianLiftEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int numberOfCounters = 0;
-            for (Cost cost : source.getCosts()) {
-                if (cost instanceof RemoveVariableCountersSourceCost) {
-                    numberOfCounters = ((RemoveVariableCountersSourceCost) cost).getAmount();
-                }
-            }
-            System.out.println("The number is " + numberOfCounters);
+            int numberOfCounters = CardUtil.getSourceCostsTag(game, source, "X", 0);
             FilterCreatureCard filter = new FilterCreatureCard();
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, numberOfCounters));
             filter.setMessage("creature card with mana value " + numberOfCounters);

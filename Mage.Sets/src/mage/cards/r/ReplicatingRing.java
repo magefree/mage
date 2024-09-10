@@ -25,7 +25,7 @@ public final class ReplicatingRing extends CardImpl {
     public ReplicatingRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
@@ -74,9 +74,7 @@ class ReplicatingRingEffect extends OneShotEffect {
         if (permanent == null || permanent.getCounters(game).getCount(CounterType.NIGHT) < 8) {
             return true;
         }
-        permanent.removeCounters(CounterType.NIGHT.createInstance(
-                permanent.getCounters(game).getCount(CounterType.NIGHT)
-        ),source,game);
+        permanent.removeAllCounters(CounterType.NIGHT.getName(), source, game);
         new ReplicatedRingToken().putOntoBattlefield(8, game, source, source.getControllerId());
         return true;
     }

@@ -52,7 +52,7 @@ class DenseCanopyCantBlockEffect extends RestrictionEffect {
         staticText = "creatures with flying can block only creatures with flying";
     }
 
-    public DenseCanopyCantBlockEffect(final DenseCanopyCantBlockEffect effect) {
+    private DenseCanopyCantBlockEffect(final DenseCanopyCantBlockEffect effect) {
         super(effect);
     }
 

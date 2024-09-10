@@ -25,15 +25,13 @@ public final class PhantasmalForm extends CardImpl {
         // Until end of turn, up to two target creatures each have base power and toughness 3/3, gain flying, and become blue Illusions in addition to their other colors and types.
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(
                         new PhantasmalFormToken(), false, false, Duration.EndOfTurn
-                ).setText("Until end of turn, up to two target creatures each have base power and toughness 3/3, " +
+                ).withDurationRuleAtStart(true).setText("Until end of turn, up to two target creatures each have base power and toughness 3/3, " +
                         "gain flying, and become blue Illusions in addition to their other colors and types.")
         );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(
-                new DrawCardSourceControllerEffect(1).setText("<br>Draw a card.")
-        );
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private PhantasmalForm(final PhantasmalForm card) {

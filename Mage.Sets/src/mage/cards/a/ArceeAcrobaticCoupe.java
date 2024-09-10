@@ -30,7 +30,7 @@ public final class ArceeAcrobaticCoupe extends CardImpl {
     public ArceeAcrobaticCoupe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

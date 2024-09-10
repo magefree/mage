@@ -6,7 +6,6 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
@@ -22,11 +21,11 @@ public final class Harrow extends CardImpl {
         this.color.setGreen(true);        
 
         // As an additional cost to cast Harrow, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
 
         // Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS);
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false));
     }
 
     private Harrow(final Harrow card) {

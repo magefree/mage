@@ -30,7 +30,7 @@ public final class SpitFlame extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        // Whenever a Dragon enters the battlefield under your control, you may pay {R}. If you do, return Spit Flame from your graveyard to your hand.
+        // Whenever a Dragon you control enters, you may pay {R}. If you do, return Spit Flame from your graveyard to your hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD,
                 new DoIfCostPaid(

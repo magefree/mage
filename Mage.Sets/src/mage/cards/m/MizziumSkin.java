@@ -24,15 +24,14 @@ import mage.target.common.TargetCreaturePermanent;
 public final class MizziumSkin extends CardImpl {
 
 
-
     public MizziumSkin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
         // Target creature you control gets +0/+1 and gains hexproof until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(0,1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(0,1, Duration.EndOfTurn).setText("target creature you control gets +0/+1"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn).setText("and gains hexproof until end of turn"));
 
         // Overload {1}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
         OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(0,1, Duration.EndOfTurn,StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED,false), new ManaCostsImpl<>("{1}{U}"));

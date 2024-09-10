@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,13 +14,11 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -32,7 +30,7 @@ public final class PashalikMons extends CardImpl {
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent(SubType.GOBLIN, "Goblin you control");
     private static final FilterControlledPermanent filter2
-            = new FilterControlledCreaturePermanent(SubType.GOBLIN, "a Goblin");
+            = new FilterControlledPermanent(SubType.GOBLIN, "a Goblin");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -42,14 +40,14 @@ public final class PashalikMons extends CardImpl {
     public PashalikMons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Whenever Pashalik Mons or another Goblin you control dies, Pashalik Mons deals 1 damage to any target.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(
                 new DamageTargetEffect(1), false, filter
         );
         ability.addTarget(new TargetAnyTarget());
@@ -59,7 +57,7 @@ public final class PashalikMons extends CardImpl {
         ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new GoblinToken(), 2), new ManaCostsImpl<>("{3}{R}")
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
     }
 

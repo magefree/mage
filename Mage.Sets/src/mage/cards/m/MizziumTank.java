@@ -34,7 +34,7 @@ public final class MizziumTank extends CardImpl {
         // Whenever you cast a noncreature spell, Mizzium Tank becomes an artifact creature and gets +1/+1 until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new AddCardTypeSourceEffect(
                 Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
-        ).setText("{this} becomes an artifact creature"), StaticFilters.FILTER_SPELL_NON_CREATURE, false);
+        ).setText("{this} becomes an artifact creature"), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false);
         ability.addEffect(new BoostSourceEffect(
                 1, 1, Duration.EndOfTurn
         ).setText("and gets +1/+1 until end of turn"));

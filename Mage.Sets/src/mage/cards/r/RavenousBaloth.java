@@ -11,8 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
@@ -20,10 +19,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class RavenousBaloth extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Beast");
-    static {
-        filter.add(SubType.BEAST.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.BEAST, "a Beast");
 
     public RavenousBaloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
@@ -34,7 +30,7 @@ public final class RavenousBaloth extends CardImpl {
 
         // Sacrifice a Beast: You gain 4 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true))));
+                new SacrificeTargetCost(filter)));
     }
 
     private RavenousBaloth(final RavenousBaloth card) {

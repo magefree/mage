@@ -55,7 +55,7 @@ class LastLaughStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When no creatures are on the battlefield, ");
     }
 
-    public LastLaughStateTriggeredAbility(final LastLaughStateTriggeredAbility ability) {
+    private LastLaughStateTriggeredAbility(final LastLaughStateTriggeredAbility ability) {
         super(ability);
     }
 

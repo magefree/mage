@@ -21,18 +21,13 @@ public class CantCastOrActivateOpponentsYourTurnEffect extends ContinuousRuleMod
                 "or activate abilities of artifacts, creatures, or enchantments";
     }
 
-    public CantCastOrActivateOpponentsYourTurnEffect(final CantCastOrActivateOpponentsYourTurnEffect effect) {
+    protected CantCastOrActivateOpponentsYourTurnEffect(final CantCastOrActivateOpponentsYourTurnEffect effect) {
         super(effect);
     }
 
     @Override
     public CantCastOrActivateOpponentsYourTurnEffect copy() {
         return new CantCastOrActivateOpponentsYourTurnEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -65,9 +60,9 @@ public class CantCastOrActivateOpponentsYourTurnEffect extends ContinuousRuleMod
             case ACTIVATE_ABILITY:
                 Permanent permanent = game.getPermanent(event.getSourceId());
                 return permanent != null
-                        && permanent.isArtifact(game)
+                        && (permanent.isArtifact(game)
                         || permanent.isCreature(game)
-                        || permanent.isEnchantment(game);
+                        || permanent.isEnchantment(game));
         }
         return false;
     }

@@ -68,6 +68,48 @@ public class BlitzTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testBlitzCopy() {
+        //Copying the spell on the stack must include the Blitz ability activation
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 6);
+        addCard(Zone.HAND, playerA, decoy);
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major",decoy);
+
+        setChoice(playerA, ""); //stack triggers
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, decoy, 0);
+        assertGraveyardCount(playerA, decoy, 1);
+        assertGraveyardCount(playerA, "Double Major", 1);
+        assertHandCount(playerA, 2);
+    }
+    @Test
+    public void testBlitzClone() {
+        //Copying the creature permanent must not include Blitz activation
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 8);
+        addCard(Zone.HAND, playerA, decoy);
+        addCard(Zone.HAND, playerA, "Clone");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
+        waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA,true);
+        setChoice(playerA,decoy);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, decoy, 1);
+        assertGraveyardCount(playerA, decoy, 1);
+        assertHandCount(playerA, 1);
+    }
+    @Test
     public void testNoBlitz() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.HAND, playerA, decoy);
@@ -102,6 +144,54 @@ public class BlitzTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, underdog, 1);
         assertLife(playerA, 20);
+    }
+
+    @Test
+    public void testTenaciousUnderdogTwice() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        addCard(Zone.GRAVEYARD, playerA, underdog);
+        addCard(Zone.HAND, playerA, "Go for the Throat");
+        addCard(Zone.LIBRARY, playerA, "Plains", 5);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, underdog + withBlitz);
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Go for the Throat", underdog);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, underdog + withBlitz);
+        // There are two delayed triggers, only one will actually sacrifice the underdog.
+        setChoice(playerA, "At the beginning of the");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+
+        execute();
+
+        assertHandCount(playerA, "Plains", 2);
+        assertLife(playerA, 16);
+        assertGraveyardCount(playerA, underdog, 1);
+    }
+
+
+    @Test
+    public void testTenaciousUnderdogSTP() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.GRAVEYARD, playerA, underdog);
+        addCard(Zone.LIBRARY, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains");
+        addCard(Zone.HAND, playerB, "Swords to Plowshares");
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, underdog + withBlitz);
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Swords to Plowshares", underdog);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+
+        execute();
+
+        assertHandCount(playerA, "Plains", 0);
+        assertLife(playerA, 20 - 2 + 3);
+        assertGraveyardCount(playerA, underdog, 0);
     }
 
     @Test

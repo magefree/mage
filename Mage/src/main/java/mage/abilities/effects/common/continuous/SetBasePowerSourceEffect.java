@@ -1,54 +1,39 @@
-
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.game.Game;
 
 /**
- *
- * @author LevelX2
+ * @author xenohedron
  */
-public class SetBasePowerSourceEffect extends ContinuousEffectImpl {
+public class SetBasePowerSourceEffect extends SetBasePowerToughnessSourceEffect {
 
-    private final DynamicValue amount;
-
-    public SetBasePowerSourceEffect(DynamicValue amount, Duration duration) {
-        this(amount, duration, SubLayer.CharacteristicDefining_7a);
-    }
-
-    public SetBasePowerSourceEffect(DynamicValue amount, Duration duration, SubLayer subLayer) {
-        super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
-        setCharacterDefining(subLayer == SubLayer.CharacteristicDefining_7a);
-        this.amount = amount;
+    /**
+     * @param amount Power to set as a characteristic-defining ability
+     */
+    public SetBasePowerSourceEffect(DynamicValue amount) {
+        super(amount, null, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a);
         staticText = "{this}'s power is equal to the number of " + amount.getMessage();
     }
 
-    public SetBasePowerSourceEffect(final SetBasePowerSourceEffect effect) {
+    /**
+     * @param amount Power to set in layer 7b
+     * @param duration Duration for the effect
+     */
+    public SetBasePowerSourceEffect(int amount, Duration duration) {
+        super(StaticValue.get(amount), null, duration, SubLayer.SetPT_7b);
+        staticText = "{this} has base power " + amount + ' ' + duration.toString();
+    }
+
+    protected SetBasePowerSourceEffect(final SetBasePowerSourceEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
     public SetBasePowerSourceEffect copy() {
         return new SetBasePowerSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source);
-        if (mageObject == null) {
-            return false;
-        }
-        int value = amount.calculate(game, source, this);
-        mageObject.getPower().setModifiedBaseValue(value);
-        return true;
     }
 
 }

@@ -43,14 +43,14 @@ public final class VraskaGolgariQueen extends CardImpl {
     public VraskaGolgariQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VRASKA);
         this.setStartingLoyalty(4);
 
         // +2: You may sacrifice another permanent. If you do, you gain 1 life and draw a card.
         DoIfCostPaid effect = new DoIfCostPaid(
                 new GainLifeEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter1))
+                new SacrificeTargetCost(filter1)
         );
         effect.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
         this.addAbility(new LoyaltyAbility(effect, 2));

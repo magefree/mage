@@ -70,7 +70,7 @@ class MoratoriumStoneEffect extends OneShotEffect {
         this.staticText = "Exile target nonland card from a graveyard, all other cards from graveyards with the same name as that card, and all permanents with that name.";
     }
 
-    MoratoriumStoneEffect(final MoratoriumStoneEffect effect) {
+    private MoratoriumStoneEffect(final MoratoriumStoneEffect effect) {
         super(effect);
     }
 

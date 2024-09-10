@@ -33,7 +33,7 @@ public final class HaraldKingOfSkemfar extends CardImpl {
     public HaraldKingOfSkemfar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);

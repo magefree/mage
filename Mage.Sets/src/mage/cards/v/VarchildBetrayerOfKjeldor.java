@@ -8,7 +8,7 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
-import mage.abilities.effects.common.combat.CantAttackYouOrPlaneswalkerAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.effects.common.continuous.GainControlAllEffect;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class VarchildBetrayerOfKjeldor extends CardImpl {
     public VarchildBetrayerOfKjeldor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);
@@ -49,9 +49,8 @@ public final class VarchildBetrayerOfKjeldor extends CardImpl {
 
         // Survivors your opponents control can't block, and they can't attack you or a planeswalker you control.
         Ability ability = new SimpleStaticAbility(new CantBlockAllEffect(filter1, Duration.WhileOnBattlefield));
-        ability.addEffect(new CantAttackYouOrPlaneswalkerAllEffect(
-                Duration.WhileOnBattlefield, filter1
-        ).setText("and can't attack you or planeswalkers you control"));
+        ability.addEffect(new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter1, true)
+                .setText(", and they can't attack you or planeswalkers you control"));
         this.addAbility(ability);
 
         // When Varchild leaves the battlefield, gain control of all Survivors.

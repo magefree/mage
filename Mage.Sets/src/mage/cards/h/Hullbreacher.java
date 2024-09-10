@@ -65,11 +65,6 @@ class HullbreacherReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         new TreasureToken().putOntoBattlefield(1, game, source, source.getControllerId());
         return true;
@@ -86,7 +81,7 @@ class HullbreacherReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
         if (!game.isActivePlayer(event.getPlayerId())
-                || game.getStep().getType() != PhaseStep.DRAW) {
+                || game.getTurnStepType() != PhaseStep.DRAW) {
             return true;
         }
         CardsDrawnDuringDrawStepWatcher watcher = game.getState().getWatcher(CardsDrawnDuringDrawStepWatcher.class);

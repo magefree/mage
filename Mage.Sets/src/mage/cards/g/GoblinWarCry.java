@@ -49,7 +49,7 @@ class GoblinWarCryEffect extends OneShotEffect {
         this.staticText = "Target opponent chooses a creature they control. Other creatures they control can't block this turn.";
     }
 
-    GoblinWarCryEffect(final GoblinWarCryEffect effect) {
+    private GoblinWarCryEffect(final GoblinWarCryEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class GoblinWarCryEffect extends OneShotEffect {
         filter.add(new ControllerIdPredicate(player.getId()));
         Target target = new TargetPermanent(1, 1, filter, true);
         if (target.canChoose(player.getId(), source, game)) {
-            while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+            while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
                 player.chooseTarget(Outcome.DestroyPermanent, target, source, game);
             }
             Permanent permanent = game.getPermanent(target.getFirstTarget());
@@ -90,7 +90,7 @@ class GoblinWarCryRestrictionEffect extends RestrictionEffect {
         this.targetId = targetId;
     }
 
-    public GoblinWarCryRestrictionEffect(final GoblinWarCryRestrictionEffect effect) {
+    private GoblinWarCryRestrictionEffect(final GoblinWarCryRestrictionEffect effect) {
         super(effect);
         targetId = effect.targetId;
     }

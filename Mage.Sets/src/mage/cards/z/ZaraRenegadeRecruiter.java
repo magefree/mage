@@ -32,7 +32,7 @@ public final class ZaraRenegadeRecruiter extends CardImpl {
     public ZaraRenegadeRecruiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(4);
@@ -78,14 +78,14 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller == null || player == null || player.getHand().isEmpty()) {
             return false;
         }
         TargetCardInHand targetCard = new TargetCardInHand(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE
         );
-        controller.choose(outcome, player.getHand(), targetCard, game);
+        controller.choose(outcome, player.getHand(), targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card == null) {
             return false;
@@ -111,7 +111,7 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
             filter.getPlayerFilter().add(new PlayerIdPredicate(player.getId()));
             filter.getPermanentFilter().add(new ControllerIdPredicate(player.getId()));
             TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             controller.choose(outcome, target, source, game);
             defenderId = target.getFirstTarget();
         }

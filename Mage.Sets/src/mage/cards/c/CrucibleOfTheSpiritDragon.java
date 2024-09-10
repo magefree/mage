@@ -11,7 +11,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
@@ -44,12 +44,12 @@ public final class CrucibleOfTheSpiritDragon extends CardImpl {
         // {T}, Remove X storage counters from Crucible of the Spirit Dragon: Add X mana in any combination of colors. Spend this mana only to cast Dragon spells or activate abilities of Dragons.
         ability = new ConditionalAnyColorManaAbility(
                 new TapSourceCost(),
-                RemovedCountersForCostValue.instance,
+                GetXValue.instance,
                 new CountersSourceCount(CounterType.STORAGE),
                 new CrucibleOfTheSpiritDragonManaBuilder(),
                 false
         );
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE));
         this.addAbility(ability);
     }
 

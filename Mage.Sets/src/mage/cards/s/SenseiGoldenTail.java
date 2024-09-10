@@ -25,7 +25,7 @@ public final class SenseiGoldenTail extends CardImpl {
 
     public SenseiGoldenTail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.SAMURAI);
 

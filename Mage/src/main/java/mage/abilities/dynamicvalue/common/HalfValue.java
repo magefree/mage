@@ -7,7 +7,6 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 
 /**
- *
  * @author Quercitron
  */
 public class HalfValue implements DynamicValue {
@@ -20,7 +19,7 @@ public class HalfValue implements DynamicValue {
         this.roundedUp = roundedUp;
     }
 
-    public HalfValue(final HalfValue halfValue) {
+    protected HalfValue(final HalfValue halfValue) {
         this.value = halfValue.value.copy();
         this.roundedUp = halfValue.roundedUp;
     }

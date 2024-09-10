@@ -36,7 +36,7 @@ public final class ShrineSteward extends CardImpl {
 
         // When Shrine Steward enters the battlefield, you may search your library for an Aura or Shrine card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), true));
     }
 

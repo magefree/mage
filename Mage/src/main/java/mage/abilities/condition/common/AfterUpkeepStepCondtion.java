@@ -14,7 +14,7 @@ public enum AfterUpkeepStepCondtion implements Condition {
     @Override
 
     public boolean apply(Game game, Ability source) {
-        return game.getStep().getType().isAfter(PhaseStep.UPKEEP);
+        return game.getTurnStepType().isAfter(PhaseStep.UPKEEP);
     }
 
     @Override

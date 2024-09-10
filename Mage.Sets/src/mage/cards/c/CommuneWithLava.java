@@ -41,12 +41,12 @@ public final class CommuneWithLava extends CardImpl {
 
 class CommuneWithLavaEffect extends OneShotEffect {
 
-    public CommuneWithLavaEffect() {
+    CommuneWithLavaEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Exile the top X cards of your library. Until the end of your next turn, you may play those cards";
     }
 
-    public CommuneWithLavaEffect(final CommuneWithLavaEffect effect) {
+    private CommuneWithLavaEffect(final CommuneWithLavaEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class CommuneWithLavaEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null && sourceCard != null) {
-            int amount = source.getManaCostsToPay().getX();
+            int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
             Set<Card> cards = controller.getLibrary().getTopCards(game, amount);
             controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard.getIdName());
 
@@ -85,7 +85,7 @@ class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
         this.staticText = "Until the end of your next turn, you may play that card.";
     }
 
-    public CommuneWithLavaMayPlayEffect(final CommuneWithLavaMayPlayEffect effect) {
+    private CommuneWithLavaMayPlayEffect(final CommuneWithLavaMayPlayEffect effect) {
         super(effect);
         castOnTurn = effect.castOnTurn;
     }

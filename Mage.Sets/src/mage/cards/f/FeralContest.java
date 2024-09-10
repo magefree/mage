@@ -54,7 +54,7 @@ public final class FeralContest extends CardImpl {
 
 class FeralContestEffect extends RequirementEffect {
 
-    public FeralContestEffect() {
+    FeralContestEffect() {
         this(Duration.EndOfTurn);
     }
 
@@ -63,7 +63,7 @@ class FeralContestEffect extends RequirementEffect {
         staticText = "Another target creature blocks it this turn if able";
     }
 
-    public FeralContestEffect(final FeralContestEffect effect) {
+    private FeralContestEffect(final FeralContestEffect effect) {
         super(effect);
     }
 

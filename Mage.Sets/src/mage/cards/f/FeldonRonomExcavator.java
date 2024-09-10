@@ -25,7 +25,7 @@ public final class FeldonRonomExcavator extends CardImpl {
     public FeldonRonomExcavator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
@@ -87,12 +87,12 @@ class FeldonRonomExcavatorEffect extends OneShotEffect {
                 break;
             default:
                 TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
-                target.setNotTarget(true);
-                player.choose(outcome, cards, target, game);
+                target.withNotTarget(true);
+                player.choose(outcome, cards, target, source, game);
                 card = game.getCard(target.getFirstTarget());
         }
         if (card != null) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.UntilEndOfYourNextTurn, false);
         }
         return true;
     }

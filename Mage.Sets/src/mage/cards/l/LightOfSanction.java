@@ -42,13 +42,13 @@ public final class LightOfSanction extends CardImpl {
 
 class LightOfSanctionEffect extends PreventionEffectImpl {
 
-    public LightOfSanctionEffect() {
+    LightOfSanctionEffect() {
         super(Duration.EndOfGame);
         this.staticText = "Prevent all damage that would be dealt to creatures you control by sources you control.";
         consumable = false;
     }
 
-    public LightOfSanctionEffect(LightOfSanctionEffect effect) {
+    private LightOfSanctionEffect(final LightOfSanctionEffect effect) {
         super(effect);
     }
 

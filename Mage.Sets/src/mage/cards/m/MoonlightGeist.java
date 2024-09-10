@@ -33,8 +33,10 @@ public final class MoonlightGeist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{W}: Prevent all combat damage that would be dealt to and dealt by Moonlight Geist this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventCombatDamageToSourceEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{3}{W}"));
-        ability.addEffect(new PreventCombatDamageBySourceEffect(Duration.EndOfTurn));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventCombatDamageToSourceEffect(Duration.EndOfTurn)
+                .setText("prevent all combat damage that would be dealt to"), new ManaCostsImpl<>("{3}{W}"));
+        ability.addEffect(new PreventCombatDamageBySourceEffect(Duration.EndOfTurn)
+                .setText("and dealt by {this} this turn"));
         this.addAbility(ability);
     }
 

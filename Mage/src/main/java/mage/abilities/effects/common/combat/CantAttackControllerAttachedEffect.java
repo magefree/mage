@@ -13,16 +13,20 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-
 public class CantAttackControllerAttachedEffect extends RestrictionEffect {
 
-    public CantAttackControllerAttachedEffect(AttachmentType attachmentType) {
+    private final boolean orPlaneswalker;
+
+    public CantAttackControllerAttachedEffect(AttachmentType attachmentType, boolean orPlaneswalker) {
         super(Duration.WhileOnBattlefield);
-        this.staticText = attachmentType.verb() + " creature can't attack you or planeswalkers you control";
+        this.orPlaneswalker = orPlaneswalker;
+        this.staticText = attachmentType.verb() + " creature can't attack you" +
+                (orPlaneswalker ? " or planeswalkers you control" : "");
     }
 
-    public CantAttackControllerAttachedEffect(final CantAttackControllerAttachedEffect effect) {
+    private CantAttackControllerAttachedEffect(final CantAttackControllerAttachedEffect effect) {
         super(effect);
+        this.orPlaneswalker = effect.orPlaneswalker;
     }
 
     @Override
@@ -32,21 +36,19 @@ public class CantAttackControllerAttachedEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (defenderId == null) {
-            return true;
-        }
-
-        if (defenderId.equals(source.getControllerId())) {
+        if (source.isControlledBy(defenderId)) {
             return false;
         }
+        if (!orPlaneswalker) {
+            return true;
+        }
         Permanent planeswalker = game.getPermanent(defenderId);
-        return planeswalker == null || !planeswalker.isControlledBy(source.getControllerId());
+        return planeswalker == null || !planeswalker.isPlaneswalker(game)
+                || !planeswalker.isControlledBy(source.getControllerId());
     }
-
 
     @Override
     public CantAttackControllerAttachedEffect copy() {
         return new CantAttackControllerAttachedEffect(this);
     }
-
 }

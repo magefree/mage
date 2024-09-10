@@ -25,7 +25,7 @@ public final class KazuulTyrantOfTheCliffs extends CardImpl {
 
     public KazuulTyrantOfTheCliffs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -99,7 +99,7 @@ class KazuulTyrantOfTheCliffsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player payee = game.getPlayer(targetPointer.getFirst(game, source));
+        Player payee = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (payee == null) {
             return false;
         }

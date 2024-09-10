@@ -35,7 +35,7 @@ public final class ZacamaPrimalCalamity extends CardImpl {
     public ZacamaPrimalCalamity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(9);
@@ -54,7 +54,7 @@ public final class ZacamaPrimalCalamity extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new UntapAllLandsControllerEffect(), false),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it, untap all lands you control."));
+                "When {this} enters, if you cast it, untap all lands you control."));
 
         // {2}{R}: Zacama deals 3 damage to target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl<>("{2}{R}"));

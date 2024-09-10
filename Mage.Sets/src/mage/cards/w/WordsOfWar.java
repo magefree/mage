@@ -50,7 +50,7 @@ class WordsOfWarEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, {this} deals 2 damage to any target instead.";
     }
 
-    WordsOfWarEffect(final WordsOfWarEffect effect) {
+    private WordsOfWarEffect(final WordsOfWarEffect effect) {
         super(effect);
     }
 
@@ -60,22 +60,17 @@ class WordsOfWarEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Player player = game.getPlayer(targetPointer.getFirst(game, source));
+            Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null) {
                 player.damage(2, source.getSourceId(), source, game);
                 this.used = true;
                 discard();
                 return true;
             }
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 permanent.damage(2, source.getSourceId(), source, game, false, true);
                 this.used = true;

@@ -63,7 +63,7 @@ class AngelOfDeliveranceDealsDamageTriggeredAbility extends TriggeredAbilityImpl
         super(Zone.BATTLEFIELD, new ExileTargetEffect(), false);
     }
 
-    public AngelOfDeliveranceDealsDamageTriggeredAbility(final AngelOfDeliveranceDealsDamageTriggeredAbility ability) {
+    private AngelOfDeliveranceDealsDamageTriggeredAbility(final AngelOfDeliveranceDealsDamageTriggeredAbility ability) {
         super(ability);
     }
 

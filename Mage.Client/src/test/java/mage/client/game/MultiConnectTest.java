@@ -55,7 +55,7 @@ public class MultiConnectTest {
             connection.setPort(17171);
             connection.setProxyType(Connection.ProxyType.NONE);
 
-            session.connect(connection);
+            session.connectStart(connection);
         }
 
         @Override
@@ -71,7 +71,7 @@ public class MultiConnectTest {
         }
 
         @Override
-        public void disconnected(boolean askToReconnect) {
+        public void disconnected(boolean askToReconnect, boolean keepMySessionActive) {
             logger.info("disconnected");
         }
 
@@ -86,8 +86,13 @@ public class MultiConnectTest {
         }
 
         @Override
-        public void processCallback(ClientCallback callback) {
-            logger.info("processCallback");
+        public void onNewConnection() {
+            logger.info("onNewConnection");
+        }
+
+        @Override
+        public void onCallback(ClientCallback callback) {
+            logger.info("onCallback");
         }
     }
 

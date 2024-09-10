@@ -28,7 +28,7 @@ public final class BluntTheAssault extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
     }
 
-    public BluntTheAssault (final BluntTheAssault card) {
+    private BluntTheAssault(final BluntTheAssault card) {
         super(card);
     }
 

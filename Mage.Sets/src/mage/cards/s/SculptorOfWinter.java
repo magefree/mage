@@ -30,7 +30,7 @@ public final class SculptorOfWinter extends CardImpl {
     public SculptorOfWinter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);

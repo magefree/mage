@@ -23,7 +23,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -40,7 +39,7 @@ public final class FirkraagCunningInstigator extends CardImpl {
     public FirkraagCunningInstigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -56,7 +55,6 @@ public final class FirkraagCunningInstigator extends CardImpl {
 
         // Whenever a creature deals combat damage to one of your opponents, if that creature had to attack this combat, you put a +1/+1 counter on Firkraag, Cunning Instigator and you draw a card.
         Ability ability = new DealsDamageToAPlayerAllTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                         .setText("you put a +1/+1 counter on {this}"),
                 filter, false, SetTargetPointer.NONE,
@@ -85,9 +83,8 @@ enum FirkraagCunningInstigatorPredicate implements Predicate<Permanent> {
         return game
                 .getCombat()
                 .getCreaturesForcedToAttack()
-                .values()
+                .keySet()
                 .stream()
-                .flatMap(Collection::stream)
                 .anyMatch(input.getId()::equals);
     }
 }
@@ -126,6 +123,7 @@ class FirkraagCunningInstigatorTriggeredAbility extends TriggeredAbilityImpl {
             );
             filter.add(new ControllerIdPredicate(event.getTargetId()));
             this.addTarget(new TargetPermanent(filter));
+            return true;
         }
         return false;
     }

@@ -1,5 +1,3 @@
-
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -24,8 +22,8 @@ public final class Incite extends CardImpl {
 
         // Target creature becomes red until end of turn and attacks this turn if able.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn, "Target creature becomes red until end of turn"));
-        this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn).setText("and attacks this turn if able"));
     }
 
     private Incite(final Incite card) {

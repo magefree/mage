@@ -19,7 +19,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class PrimevalForce extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("three Forests");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Forests");
     static{
         filter.add(SubType.FOREST.getPredicate());
     }
@@ -32,7 +32,7 @@ public final class PrimevalForce extends CardImpl {
         this.toughness = new MageInt(8);
 
         // When Primeval Force enters the battlefield, sacrifice it unless you sacrifice three Forests.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, true)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(3, filter))));
     }
 
     private PrimevalForce(final PrimevalForce card) {

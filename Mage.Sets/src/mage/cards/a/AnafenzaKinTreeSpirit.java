@@ -30,13 +30,13 @@ public final class AnafenzaKinTreeSpirit extends CardImpl {
 
     public AnafenzaKinTreeSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another nontoken creature enters the battlefield under your control, bolster 1.
+        // Whenever another nontoken creature you control enters, bolster 1.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BolsterEffect(1), filter, false));
     }
 

@@ -37,6 +37,8 @@ public final class RealmCloakedGiant extends AdventureCard {
         // Cast Off
         // Destroy all non-Giant creatures.
         this.getSpellCard().getSpellAbility().addEffect(new DestroyAllEffect(filter));
+
+        this.finalizeAdventure();
     }
 
     private RealmCloakedGiant(final RealmCloakedGiant card) {

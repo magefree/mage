@@ -22,12 +22,12 @@ public class UndyingAbility extends DiesSourceTriggeredAbility {
         this.addEffect(new ReturnSourceFromGraveyardToBattlefieldEffect(false, true));
     }
 
-    public UndyingAbility(final UndyingAbility ability) {
+    protected UndyingAbility(final UndyingAbility ability) {
         super(ability);
     }
 
     @Override
-    public DiesSourceTriggeredAbility copy() {
+    public UndyingAbility copy() {
         return new UndyingAbility(this);
     }
 
@@ -55,7 +55,7 @@ class UndyingEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    public UndyingEffect(final UndyingEffect effect) {
+    protected UndyingEffect(final UndyingEffect effect) {
         super(effect);
     }
 

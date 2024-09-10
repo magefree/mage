@@ -25,7 +25,7 @@ public class FilterPlaneswalkerPermanent extends FilterPermanent {
         this.add(CardType.PLANESWALKER.getPredicate());
     }
 
-    public FilterPlaneswalkerPermanent(final FilterPlaneswalkerPermanent filter) {
+    protected FilterPlaneswalkerPermanent(final FilterPlaneswalkerPermanent filter) {
         super(filter);
     }
 

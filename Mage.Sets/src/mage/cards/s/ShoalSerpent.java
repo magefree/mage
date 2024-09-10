@@ -29,7 +29,7 @@ public final class ShoalSerpent extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         
-        // Landfall - Whenever a land enters the battlefield under your control, Shoal Serpent loses defender until end of turn.
+        // Landfall - Whenever a land you control enters, Shoal Serpent loses defender until end of turn.
         Ability ability = new LandfallAbility(Zone.BATTLEFIELD, new ShoalSerpentEffect(), false);
         this.addAbility(ability);
     }
@@ -46,12 +46,12 @@ public final class ShoalSerpent extends CardImpl {
 
 class ShoalSerpentEffect extends ContinuousEffectImpl {
 
-    public ShoalSerpentEffect() {
+    ShoalSerpentEffect() {
         super(Duration.EndOfTurn, Outcome.AddAbility);
         staticText = "{this} loses defender until end of turn";
     }
 
-    public ShoalSerpentEffect(final ShoalSerpentEffect effect) {
+    private ShoalSerpentEffect(final ShoalSerpentEffect effect) {
         super(effect);
     }
 

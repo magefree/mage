@@ -69,10 +69,16 @@ public class SourceHasCounterCondition implements Condition {
     @Override
     public String toString() {
         if (from != -1) {
-            if (to == Integer.MAX_VALUE) {
-                return "{this} has equal to or more than " + from + " " + this.counterType.toString() + " counters";
+            if (from == 0) {
+                if (to == 0) {
+                    return "{this} has no " + this.counterType.toString() + " counters on it";
+                }
+                return "{this} has " + CardUtil.numberToText(to) + " or fewer " + this.counterType.toString() + " counters on it";
             }
-            return "{this} has between " + from + " and " + to + " " + this.counterType.toString() + " counters";
+            if (to == Integer.MAX_VALUE) {
+                return "{this} has " + CardUtil.numberToText(from) + " or more " + this.counterType.toString() + " counters on it";
+            }
+            return "{this} has between " + from + " and " + to + " " + this.counterType.toString() + " counters on it";
         } else {
             return "{this} has " + CardUtil.numberToText(amount) + " or more " + this.counterType.toString() + " counters on it";
         }

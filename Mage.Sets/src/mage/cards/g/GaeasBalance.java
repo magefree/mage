@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -13,7 +13,6 @@ import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -26,12 +25,11 @@ public final class GaeasBalance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // As an additional cost to cast Gaea's Balance, sacrifice five lands.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(5, StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)
-        ));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(5, StaticFilters.FILTER_LANDS));
 
         // Search your library for a land card of each basic land type and put them onto the battlefield. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new GaeasBalanceTarget()));
+        String ruleText = "Search your library for a land card of each basic land type, put those cards onto the battlefield, then shuffle.";
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new GaeasBalanceTarget()).setText(ruleText));
     }
 
     private GaeasBalance(final GaeasBalance card) {

@@ -11,7 +11,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
-import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -73,11 +73,11 @@ public final class DanceOfTheDead extends CardImpl {
 
 class DanceOfTheDeadDoIfCostPaidEffect extends DoIfCostPaid {
 
-    public DanceOfTheDeadDoIfCostPaidEffect() {
-        super(new UntapEnchantedEffect(), new ManaCostsImpl<>("{1}{B}"));
+    DanceOfTheDeadDoIfCostPaidEffect() {
+        super(new UntapAttachedEffect(), new ManaCostsImpl<>("{1}{B}"));
     }
 
-    public DanceOfTheDeadDoIfCostPaidEffect(final DanceOfTheDeadDoIfCostPaidEffect effect) {
+    private DanceOfTheDeadDoIfCostPaidEffect(final DanceOfTheDeadDoIfCostPaidEffect effect) {
         super(effect);
     }
 

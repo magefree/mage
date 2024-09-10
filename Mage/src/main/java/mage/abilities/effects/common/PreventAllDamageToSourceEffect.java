@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PreventAllDamageToSourceEffect extends PreventionEffectImpl {
@@ -21,7 +20,7 @@ public class PreventAllDamageToSourceEffect extends PreventionEffectImpl {
         }
     }
 
-    public PreventAllDamageToSourceEffect(final PreventAllDamageToSourceEffect effect) {
+    protected PreventAllDamageToSourceEffect(final PreventAllDamageToSourceEffect effect) {
         super(effect);
     }
 

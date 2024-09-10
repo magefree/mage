@@ -65,18 +65,18 @@ class LandwalkEffect extends RestrictionEffect {
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (game.getBattlefield().contains(filter, blocker.getControllerId(), source, game, 1)
-                && null == game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_LANDWALK, null, blocker.getControllerId(), game)) {
+                && game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_LANDWALK, null, blocker.getControllerId(), game).isEmpty()) {
             switch (filter.getMessage()) {
                 case "plains":
-                    return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_PLAINSWALK, null, blocker.getControllerId(), game);
+                    return !game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_PLAINSWALK, null, blocker.getControllerId(), game).isEmpty();
                 case "island":
-                    return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_ISLANDWALK, null, blocker.getControllerId(), game);
+                    return !game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_ISLANDWALK, null, blocker.getControllerId(), game).isEmpty();
                 case "swamp":
-                    return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SWAMPWALK, null, blocker.getControllerId(), game);
+                    return !game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SWAMPWALK, null, blocker.getControllerId(), game).isEmpty();
                 case "mountain":
-                    return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_MOUNTAINWALK, null, blocker.getControllerId(), game);
+                    return !game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_MOUNTAINWALK, null, blocker.getControllerId(), game).isEmpty();
                 case "forest":
-                    return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_FORESTWALK, null, blocker.getControllerId(), game);
+                    return !game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_FORESTWALK, null, blocker.getControllerId(), game).isEmpty();
                 default:
                     return false;
             }

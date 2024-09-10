@@ -29,7 +29,7 @@ public final class NavSquadCommandos extends CardImpl {
 
         // Battalion — Whenever Nav Squad Commandos and at least two other creatures attack, Nav Squad Commandos gets +1/+1 until end of turn. Untap it.
         Ability ability = new BattalionAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn));
-        ability.addEffect(new UntapSourceEffect());
+        ability.addEffect(new UntapSourceEffect().setText("untap it"));
         this.addAbility(ability);
     }
 

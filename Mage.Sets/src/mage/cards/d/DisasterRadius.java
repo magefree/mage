@@ -57,7 +57,7 @@ class DisasterRadiusEffect extends OneShotEffect {
         staticText = "{this} deals X damage to each creature your opponents control, where X is the revealed card's mana value";
     }
 
-    public DisasterRadiusEffect(DisasterRadiusEffect effect) {
+    private DisasterRadiusEffect(final DisasterRadiusEffect effect) {
         super(effect);
     }
 

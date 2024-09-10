@@ -86,7 +86,7 @@ class SmeltingVatEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 8));
         player.revealCards(source, cards, game);
         TargetCard target = new SmeltingVatTarget(source);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
@@ -105,7 +105,7 @@ class SmeltingVatTarget extends TargetCardInLibrary {
     private final int value;
 
     SmeltingVatTarget(Ability source) {
-        super(0, Integer.MAX_VALUE, filter);
+        super(0, 2, filter);
         this.value = CardUtil
                 .castStream(source.getCosts().stream(), SacrificeTargetCost.class)
                 .map(SacrificeTargetCost::getPermanents)

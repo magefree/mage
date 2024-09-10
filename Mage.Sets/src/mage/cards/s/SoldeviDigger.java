@@ -40,12 +40,12 @@ public final class SoldeviDigger extends CardImpl {
 
 class SoldeviDiggerEffect extends OneShotEffect {
 
-    public SoldeviDiggerEffect() {
+    SoldeviDiggerEffect() {
         super(Outcome.Benefit);
         this.staticText = "put the top card of your graveyard on the bottom of your library";
     }
 
-    public SoldeviDiggerEffect(final SoldeviDiggerEffect effect) {
+    private SoldeviDiggerEffect(final SoldeviDiggerEffect effect) {
         super(effect);
     }
 

@@ -9,15 +9,15 @@ import mage.client.MagePane;
 import mage.client.plugins.impl.Plugins;
 
 /**
- * Game GUI: draft panel with scrolls
+ * Game GUI: draft frame
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftPane extends MagePane {
 
-    /**
-     * Creates new form DraftPane
-     */
+    UUID tableId = null;
+    UUID draftId = null;
+
     public DraftPane() {
         boolean initialized = false;
         if (Plugins.instance.isThemePluginLoaded()) {
@@ -39,18 +39,30 @@ public class DraftPane extends MagePane {
 
     @Override
     public void changeGUISize() {
-        super.changeGUISize(); //To change body of generated methods, choose Tools | Templates.
+        super.changeGUISize();
         draftPanel1.changeGUISize();
     }
 
-    public void showDraft(UUID draftId) {
+    public void showDraft(UUID tableId, UUID draftId) {
+        this.tableId = tableId;
+        this.draftId = draftId;
         this.setTitle("Draft - " + draftId);
         this.draftPanel1.showDraft(draftId);
+    }
+
+    @Override
+    public boolean isActiveTable() {
+        return this.draftId != null;
     }
 
     public void removeDraft() {
         draftPanel1.cleanUp();
         this.removeFrame();
+    }
+
+    @Override
+    public UUID getSortTableId() {
+        return tableId;
     }
 
     /**

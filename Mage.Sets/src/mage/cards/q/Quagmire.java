@@ -39,12 +39,12 @@ public final class Quagmire extends CardImpl {
 
 class QuagmireEffect extends AsThoughEffectImpl {
 
-    public QuagmireEffect() {
+    QuagmireEffect() {
         super(AsThoughEffectType.BLOCK_SWAMPWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with swampwalk can be blocked as though they didn't have swampwalk";
     }
 
-    public QuagmireEffect(final QuagmireEffect effect) {
+    private QuagmireEffect(final QuagmireEffect effect) {
         super(effect);
     }
 

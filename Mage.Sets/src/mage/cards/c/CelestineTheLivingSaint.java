@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -40,7 +40,7 @@ public final class CelestineTheLivingSaint extends CardImpl {
     public CelestineTheLivingSaint(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -59,7 +59,7 @@ public final class CelestineTheLivingSaint extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(
                 ability.withFlavorWord("Healing Tears")
-                        .addHint(ControllerGotLifeCount.getHint()),
+                       .addHint(ControllerGainedLifeCount.getHint()),
                 new PlayerGainedLifeWatcher()
         );
     }

@@ -14,13 +14,9 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.DefendingPlayerControlsAttachedAttackingPredicate;
 import mage.target.TargetPermanent;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -31,7 +27,7 @@ public final class GreatswordOfTyr extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(GreatswordOfTyrPredicate.instance);
+        filter.add(DefendingPlayerControlsAttachedAttackingPredicate.instance);
     }
 
     public GreatswordOfTyr(UUID ownerId, CardSetInfo setInfo) {
@@ -58,23 +54,5 @@ public final class GreatswordOfTyr extends CardImpl {
     @Override
     public GreatswordOfTyr copy() {
         return new GreatswordOfTyr(this);
-    }
-}
-
-enum GreatswordOfTyrPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return Optional.ofNullable(input.getSource().getSourcePermanentOrLKI(game))
-                .map(Permanent::getAttachedTo)
-                .map(uuid -> game.getCombat().getDefendingPlayerId(uuid, game))
-                .map(input.getObject()::isControlledBy)
-                .orElse(false);
-    }
-
-    @Override
-    public String toString() {
-        return "";
     }
 }

@@ -66,7 +66,7 @@ class WharfInfiltratorDiscardAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you discard a creature card, " );
     }
 
-    WharfInfiltratorDiscardAbility(final WharfInfiltratorDiscardAbility ability) {
+    private WharfInfiltratorDiscardAbility(final WharfInfiltratorDiscardAbility ability) {
         super(ability);
     }
 

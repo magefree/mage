@@ -1,7 +1,6 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -14,11 +13,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
-import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -28,7 +25,7 @@ public final class NivMizzetReborn extends CardImpl {
     public NivMizzetReborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(6);
@@ -76,20 +73,14 @@ class NivMizzetRebornEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 10));
-        game.informPlayers(player.getLogName() + " reveals " + CardUtil.concatWithAnd(
-                cards.getCards(game).stream().map(MageObject::getName).collect(Collectors.toList())
-        ));
         if (cards.isEmpty()) {
             return false;
         }
         player.revealCards(source, cards, game);
         TargetCard target = new NivMizzetRebornTarget();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl(target.getTargets());
-        player.moveCards(toHand, Zone.HAND, source, game);
-        game.informPlayers(player.getLogName() + " moves " + CardUtil.concatWithAnd(
-                toHand.getCards(game).stream().map(MageObject::getName).collect(Collectors.toList())
-        ) + " to hand");
+        player.moveCardsToHandWithInfo(toHand, source, game, true);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;

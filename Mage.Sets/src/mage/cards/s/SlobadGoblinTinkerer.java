@@ -34,7 +34,7 @@ public final class SlobadGoblinTinkerer extends CardImpl {
 
     public SlobadGoblinTinkerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -44,7 +44,7 @@ public final class SlobadGoblinTinkerer extends CardImpl {
         // Sacrifice an artifact: Target artifact is indestructible this turn.
         Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(filterControlled))
+                new SacrificeTargetCost(filterControlled)
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

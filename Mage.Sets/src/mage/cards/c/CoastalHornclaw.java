@@ -34,7 +34,7 @@ public final class CoastalHornclaw extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Sacrifice a land: Coastal Hornclaw gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(filter)));
     }
 
     private CoastalHornclaw(final CoastalHornclaw card) {

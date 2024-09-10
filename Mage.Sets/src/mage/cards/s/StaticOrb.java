@@ -48,7 +48,7 @@ class StaticOrbEffect extends RestrictionUntapNotMoreThanEffect {
         staticText = "As long as Static Orb is untapped, players can't untap more than two permanents during their untap steps";
     }
 
-    public StaticOrbEffect(final StaticOrbEffect effect) {
+    private StaticOrbEffect(final StaticOrbEffect effect) {
         super(effect);
     }
 

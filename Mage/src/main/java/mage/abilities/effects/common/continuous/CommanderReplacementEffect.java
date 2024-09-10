@@ -2,6 +2,7 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.Locale;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -44,7 +45,6 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
     private final String commanderTypeName;
 
     /**
-     *
      * @param commanderId
      * @param alsoHand          is the replacement effect also applied if
      *                          commander object goes to hand zone
@@ -71,7 +71,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
         this.commanderTypeName = commanderTypeName;
     }
 
-    public CommanderReplacementEffect(final CommanderReplacementEffect effect) {
+    protected CommanderReplacementEffect(final CommanderReplacementEffect effect) {
         super(effect);
         this.commanderId = effect.commanderId;
         this.alsoHand = effect.alsoHand;
@@ -83,11 +83,6 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
     @Override
     public CommanderReplacementEffect copy() {
         return new CommanderReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -144,10 +139,10 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             Permanent permanent = zEvent.getTarget();
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getOwnerId());
-                if (player != null && (forceToMove || player.chooseUse(Outcome.Benefit, "Move " + commanderTypeName + " to command zone instead " + originToZone + "?", source, game))) {
+                if (player != null && (forceToMove || player.chooseUse(Outcome.Benefit, "Move " + permanent.getLogName() + " to command zone instead of your " + originToZone + "?", source, game))) {
                     zEvent.setToZone(Zone.COMMAND);
                     if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " has moved their " + commanderTypeName + " to the command zone instead " + originToZone);
+                        game.informPlayers(player.getLogName() + " has moved " + permanent.getLogName() + " to the command zone instead of their " + originToZone);
                     }
                 }
             }
@@ -164,10 +159,10 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             }
             if (card != null) {
                 Player player = game.getPlayer(card.getOwnerId());
-                if (player != null && (forceToMove || player.chooseUse(Outcome.Benefit, "Move " + commanderTypeName + " to command zone instead " + originToZone + "?", source, game))) {
+                if (player != null && (forceToMove || player.chooseUse(Outcome.Benefit, "Move " + card.getLogName() + " to command zone instead of your " + originToZone + "?", source, game))) {
                     ((ZoneChangeEvent) event).setToZone(Zone.COMMAND);
                     if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " has moved their " + commanderTypeName + " to the command zone instead " + originToZone);
+                        game.informPlayers(player.getLogName() + " has moved " + card.getLogName() + " to the command zone instead of their " + originToZone);
                     }
                 }
             }

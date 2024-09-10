@@ -1,5 +1,7 @@
 package mage.view;
 
+import mage.cards.decks.DeckCardInfo;
+import mage.constants.MatchBufferTime;
 import mage.constants.SkillLevel;
 import mage.constants.TableState;
 import mage.game.Game;
@@ -7,7 +9,9 @@ import mage.game.Seat;
 import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftOptions;
+import mage.game.match.MatchOptions;
 import mage.game.match.MatchPlayer;
+import mage.game.mulligan.MulliganType;
 import mage.game.tournament.TournamentPlayer;
 
 import java.io.Serializable;
@@ -28,7 +32,8 @@ public class TableView implements Serializable {
     private final String deckType;
     private String tableName;
     private String controllerName;
-    private final String additionalInfo;
+    private final String additionalInfoShort;
+    private final String additionalInfoFull;
     private Date createTime;
     private TableState tableState;
     private final SkillLevel skillLevel;
@@ -94,30 +99,30 @@ public class TableView implements Serializable {
             }
             this.controllerName += sb.toString();
             this.deckType = table.getDeckType();
-            StringBuilder addInfo = new StringBuilder();
+            StringBuilder infoTextShort = new StringBuilder();
+            StringBuilder infoTextLong = new StringBuilder();
             if (table.getMatch().getGames().isEmpty()) {
-                addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
-                addInfo.append(" Time: ").append(table.getMatch().getOptions().getMatchTimeLimit().toString());
-                if (table.getMatch().getFreeMulligans() > 0) {
-                    addInfo.append(" FM: ").append(table.getMatch().getFreeMulligans());
-                }
+                infoTextShort.append("Wins: ").append(table.getMatch().getWinsNeeded());
+                infoTextLong.append("Wins required: ").append(table.getMatch().getWinsNeeded())
+                        .append(" (Best of ").append(table.getMatch().getWinsNeeded()*2-1).append(")");
+                buildMatchOptionsTextShared(table.getMatch().getOptions(),infoTextShort,infoTextLong);
             } else {
-                addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
-                addInfo.append(sbScore.toString());
+                infoTextShort.append("Wins: ").append(table.getMatch().getWinsNeeded()).append(sbScore);
+                infoTextLong.append("Wins required: ").append(table.getMatch().getWinsNeeded()).append(sbScore);
             }
-            if (table.getMatch().getOptions().isRollbackTurnsAllowed()) {
-                addInfo.append(" RB");
-            }
-            if (table.getMatch().getOptions().isPlaneChase()) {
-                addInfo.append(" PC");
-            }
+            infoTextLong.append("<br>Seats: ").append(this.seatsInfo);
             if (table.getMatch().getOptions().isSpectatorsAllowed()) {
-                addInfo.append(" SP");
+                infoTextShort.append(", SP");
+                infoTextLong.append("<br>Spectators allowed (SP)");
             }
+            infoTextLong.append("<br>Game type: ").append(table.getGameType());
+            infoTextLong.append("<br>Deck type: ").append(table.getDeckType());
             if (table.getNumberOfSeats() > 3) {
-                addInfo.append(" Rng: ").append(table.getMatch().getOptions().getRange().toString());
+                infoTextShort.append(", Rng: ").append(table.getMatch().getOptions().getRange().toString());
+                infoTextLong.append("<br>Range of Influence: ").append(table.getMatch().getOptions().getRange().toString());
             }
-            this.additionalInfo = addInfo.toString();
+            this.additionalInfoShort = infoTextShort.toString();
+            this.additionalInfoFull = infoTextLong.toString();
             this.skillLevel = table.getMatch().getOptions().getSkillLevel();
             this.quitRatio = Integer.toString(table.getMatch().getOptions().getQuitRatio());
             this.minimumRating = Integer.toString(table.getMatch().getOptions().getMinimumRating());
@@ -128,7 +133,7 @@ public class TableView implements Serializable {
         } else {
             // TOURNAMENT
             if (table.getTournament().getOptions().getNumberRounds() > 0) {
-                this.gameType = new StringBuilder(this.gameType).append(' ').append(table.getTournament().getOptions().getNumberRounds()).append(" Rounds").toString();
+                this.gameType = this.gameType + ' ' + table.getTournament().getOptions().getNumberRounds() + " Rounds";
             }
             StringBuilder sb1 = new StringBuilder();
             for (TournamentPlayer tp : table.getTournament().getPlayers()) {
@@ -138,10 +143,13 @@ public class TableView implements Serializable {
             }
             this.controllerName += sb1.toString();
             this.seatsInfo = "" + table.getTournament().getPlayers().size() + "/" + table.getNumberOfSeats();
-            StringBuilder infoText = new StringBuilder();
+            StringBuilder infoTextShort = new StringBuilder();
+            StringBuilder infoTextLong = new StringBuilder();
             StringBuilder stateText = new StringBuilder(table.getState().toString());
-            infoText.append("Wins:").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded());
-            infoText.append(" Seats: ").append(this.seatsInfo);
+            infoTextShort.append("Wins: ").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded());
+            infoTextLong.append("Wins required: ").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded())
+                    .append(" (Best of ").append(table.getTournament().getOptions().getMatchOptions().getWinsNeeded()*2-1).append(")");
+            infoTextLong.append("<br>Seats: ").append(this.seatsInfo);
             switch (table.getState()) {
                 case WAITING:
                 case READY_TO_START:
@@ -149,27 +157,25 @@ public class TableView implements Serializable {
                     if (TableState.WAITING.equals(table.getState())) {
                         stateText.append(" (").append(table.getTournament().getPlayers().size()).append('/').append(table.getNumberOfSeats()).append(')');
                     }
-                    infoText.append(" Time: ").append(table.getTournament().getOptions().getMatchOptions().getMatchTimeLimit().toString());
-                    if (table.getTournament().getOptions().getMatchOptions().getFreeMulligans() > 0) {
-                        infoText.append(" FM: ").append(table.getTournament().getOptions().getMatchOptions().getFreeMulligans());
-                    }
+                    buildMatchOptionsTextShared(table.getTournament().getOptions().getMatchOptions(), infoTextShort, infoTextLong);
                     if (table.getTournament().getTournamentType().isLimited()) {
-                        infoText.append(" Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Min.");
+                        infoTextShort.append(", Constr.: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append("m");
+                        infoTextLong.append("<br>Construction time: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime() / 60).append(" Minutes");
                     }
                     if (table.getTournament().getOptions().getLimitedOptions() instanceof DraftOptions) {
                         DraftOptions draftOptions = (DraftOptions) table.getTournament().getOptions().getLimitedOptions();
-                        infoText.append(" Pick time: ").append(draftOptions.getTiming().getShortName());
-                    }
-                    if (table.getTournament().getOptions().getMatchOptions().isRollbackTurnsAllowed()) {
-                        infoText.append(" RB");
-                    }
-                    if (table.getTournament().getOptions().getMatchOptions().isPlaneChase()) {
-                        infoText.append(" PC");
+                        infoTextShort.append(", Pick time: ").append(draftOptions.getTiming().getShortName());
+                        infoTextLong.append("<br>Pick time: ").append(draftOptions.getTiming().getName());
                     }
                     if (table.getTournament().getOptions().isWatchingAllowed()) {
-                        infoText.append(" SP");
+                        infoTextShort.append(", SP");
+                        infoTextLong.append("<br>Spectators allowed (SP)");
                     }
-                    
+                    infoTextLong.append("<br>Game type: ").append(table.getGameType());
+                    infoTextLong.append("<br>Deck type: ").append(table.getDeckType());
+                    if (!table.getTournament().getBoosterInfo().isEmpty()){
+                        infoTextLong.append("<br>Boosters: ").append(table.getTournament().getBoosterInfo());
+                    }
                     break;
                 case DUELING:
                     stateText.append(" Round: ").append(table.getTournament().getRounds().size());
@@ -182,7 +188,8 @@ public class TableView implements Serializable {
                     break;
                 default:
             }
-            this.additionalInfo = infoText.toString();
+            this.additionalInfoShort = infoTextShort.toString();
+            this.additionalInfoFull = infoTextLong.toString();
             this.tableStateText = stateText.toString();
             this.deckType = table.getDeckType() + ' ' + table.getTournament().getBoosterInfo();
             this.skillLevel = table.getTournament().getOptions().getMatchOptions().getSkillLevel();
@@ -195,6 +202,53 @@ public class TableView implements Serializable {
         }
     }
 
+    private void buildMatchOptionsTextShared(MatchOptions options, StringBuilder shortBuilder, StringBuilder longBuilder){
+        longBuilder.append("<br>Time: ").append(options.getMatchTimeLimit().toString());
+        shortBuilder.append(", Time: ").append(options.getMatchTimeLimit().getShortName());
+        if (options.getMatchBufferTime() != MatchBufferTime.NONE){
+            shortBuilder.append("(+").append(options.getMatchBufferTime().getShortName()).append(")");
+            longBuilder.append("<br>Buffer time: ").append(options.getMatchBufferTime().toString());
+        }
+        int customOptions = 0;
+        if (options.getMulliganType() != MulliganType.GAME_DEFAULT) {
+            longBuilder.append("<br>Mulligan: \"").append(options.getMulliganType().toString()).append("\"");
+            customOptions += 1;
+        }
+        if (options.getFreeMulligans() > 0) {
+            longBuilder.append("<br>Free Mulligans: ").append(options.getFreeMulligans());
+            customOptions += 1;
+        }
+        if (options.isCustomStartLifeEnabled()) {
+            longBuilder.append("<br>Starting Life: ").append(options.getCustomStartLife());
+            customOptions += 1;
+        }
+        if (options.isCustomStartHandSizeEnabled()) {
+            longBuilder.append("<br>Starting Hand Size: ").append(options.getCustomStartHandSize());
+            customOptions += 1;
+        }
+        if (options.isPlaneChase()) {
+            longBuilder.append("<br>Planechase");
+            customOptions += 1;
+        }
+        if (!(options.getPerPlayerEmblemCards().isEmpty())
+                || !(options.getGlobalEmblemCards().isEmpty())) {
+            longBuilder.append("<br>Emblem cards:");
+            for(DeckCardInfo card: options.getPerPlayerEmblemCards()){
+                longBuilder.append("<br>* <b>").append(card.getCardName()).append("</b> (per player)");
+            }
+            for(DeckCardInfo card: options.getGlobalEmblemCards()){
+                longBuilder.append("<br>* <b>").append(card.getCardName()).append("</b> (global)");
+            }
+            customOptions += 1;
+        }
+        if (customOptions > 0){
+            shortBuilder.append(", Custom options (").append(customOptions).append(")");
+        }
+        if (options.isRollbackTurnsAllowed()) {
+            shortBuilder.append(", RB");
+            longBuilder.append("<br>Rollbacks allowed (RB)");
+        }
+    }
     public UUID getTableId() {
         return tableId;
     }
@@ -244,8 +298,12 @@ public class TableView implements Serializable {
         return this.isTournament;
     }
 
-    public String getAdditionalInfo() {
-        return this.additionalInfo;
+    public String getAdditionalInfoShort() {
+        return this.additionalInfoShort;
+    }
+
+    public String getAdditionalInfoFull() {
+        return this.additionalInfoFull;
     }
 
     public String getTableStateText() {

@@ -18,7 +18,7 @@ public class SkipUntapOptionalSourceEffect extends RestrictionEffect {
         staticText = "You may choose not to untap {this} during your untap step";
     }
 
-    public SkipUntapOptionalSourceEffect(final SkipUntapOptionalSourceEffect effect) {
+    protected SkipUntapOptionalSourceEffect(final SkipUntapOptionalSourceEffect effect) {
         super(effect);
     }
 

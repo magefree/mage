@@ -23,7 +23,7 @@ public final class Bargain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
         
         // You gain 7 life.
-        this.getSpellAbility().addEffect(new GainLifeEffect(7));
+        this.getSpellAbility().addEffect(new GainLifeEffect(7).concatBy("<br>"));
     }
 
     private Bargain(final Bargain card) {

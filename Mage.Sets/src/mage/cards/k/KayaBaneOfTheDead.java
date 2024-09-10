@@ -22,7 +22,7 @@ public final class KayaBaneOfTheDead extends CardImpl {
     public KayaBaneOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W/B}{W/B}{W/B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAYA);
         this.setStartingLoyalty(7);
 

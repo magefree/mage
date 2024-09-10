@@ -1,10 +1,8 @@
 package mage.cards.l;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.common.CastFromGraveyardOnceStaticAbility;
+import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
 import mage.abilities.keyword.CompanionAbility;
 import mage.abilities.keyword.CompanionCondition;
 import mage.abilities.keyword.LifelinkAbility;
@@ -18,12 +16,15 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
 public final class LurrusOfTheDreamDen extends CardImpl {
 
-    private static final FilterPermanentCard filter = new FilterPermanentCard();
+    private static final FilterPermanentCard filter = new FilterPermanentCard("a permanent spell with mana value 2 or less");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
@@ -32,7 +33,7 @@ public final class LurrusOfTheDreamDen extends CardImpl {
     public LurrusOfTheDreamDen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W/B}{W/B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.NIGHTMARE);
         this.power = new MageInt(3);
@@ -45,7 +46,7 @@ public final class LurrusOfTheDreamDen extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // During each of your turns, you may cast one permanent spell with converted mana cost 2 or less from your graveyard.
-        this.addAbility(new CastFromGraveyardOnceStaticAbility(filter, "During each of your turns, you may cast one permanent spell with mana value 2 or less from your graveyard"));
+        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(filter));
     }
 
     private LurrusOfTheDreamDen(final LurrusOfTheDreamDen card) {
@@ -67,7 +68,7 @@ enum LurrusOfTheDreamDenCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck.stream()
                 .filter(MageObject::isPermanent)
                 .mapToInt(MageObject::getManaValue)

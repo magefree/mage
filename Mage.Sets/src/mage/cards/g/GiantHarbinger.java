@@ -31,7 +31,7 @@ public final class GiantHarbinger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Giant Harbinger enters the battlefield, you may search your library for a Giant card, reveal it, then shuffle your library and put that card on top of it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true), true));
     }
 
     private GiantHarbinger(final GiantHarbinger card) {

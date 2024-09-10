@@ -42,7 +42,10 @@ public final class SimicBasilisk extends CardImpl {
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
         effect.setText("destroy that creature at end of combat");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new DealsDamageToACreatureTriggeredAbility(effect, true, false, true), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
+                new DealsDamageToACreatureTriggeredAbility(effect, true, false, true), Duration.EndOfTurn)
+                .setText("Until end of turn, target creature with a +1/+1 counter on it gains \"Whenever this creature deals combat damage to a creature, destroy that creature at end of combat.\""),
+                new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_A_CREATURE_P1P1));
         this.addAbility(ability);
     }

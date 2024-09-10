@@ -67,12 +67,12 @@ public final class FlamerushRider extends CardImpl {
 
 class FlamerushRiderEffect extends OneShotEffect {
 
-    public FlamerushRiderEffect() {
+    FlamerushRiderEffect() {
         super(Outcome.Copy);
-        this.staticText = "create a token tapped and attacking that's a copy of another target attacking creature. Exile the token at end of combat";
+        this.staticText = "create a token that's a copy of another target attacking creature and that's tapped and attacking. Exile the token at end of combat";
     }
 
-    public FlamerushRiderEffect(final FlamerushRiderEffect effect) {
+    private FlamerushRiderEffect(final FlamerushRiderEffect effect) {
         super(effect);
     }
 

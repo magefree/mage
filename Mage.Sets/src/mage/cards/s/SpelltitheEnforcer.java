@@ -35,7 +35,7 @@ public final class SpelltitheEnforcer extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new SpelltitheEnforcerEffect(),
-                StaticFilters.FILTER_SPELL,
+                StaticFilters.FILTER_SPELL_A,
                 false,
                 SetTargetPointer.PLAYER
         ));
@@ -58,7 +58,7 @@ class SpelltitheEnforcerEffect extends SacrificeEffect {
         this.staticText = "that player sacrifices a permanent unless they pay {1}";
     }
 
-    SpelltitheEnforcerEffect(final SpelltitheEnforcerEffect effect) {
+    private SpelltitheEnforcerEffect(final SpelltitheEnforcerEffect effect) {
         super(effect);
     }
 

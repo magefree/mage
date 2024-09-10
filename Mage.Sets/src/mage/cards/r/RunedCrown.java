@@ -88,8 +88,8 @@ class RunedCrownEffect extends OneShotEffect {
         Zone zone = null;
         if (controller.chooseUse(Outcome.Neutral, "Search your graveyard for a Rune card?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-            target.setNotTarget(true);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, game)) {
+            target.withNotTarget(true);
+            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     zone = Zone.GRAVEYARD;
@@ -98,7 +98,7 @@ class RunedCrownEffect extends OneShotEffect {
         }
         if (card == null && controller.chooseUse(Outcome.Neutral, "Search your hand for a Rune card?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     zone = Zone.HAND;

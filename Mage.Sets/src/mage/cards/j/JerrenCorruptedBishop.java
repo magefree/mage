@@ -40,7 +40,7 @@ public final class JerrenCorruptedBishop extends CardImpl {
     public JerrenCorruptedBishop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -132,7 +132,7 @@ class JerrenCorruptedBishopTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} enters the battlefield or another nontoken Human you control dies, " +
+        return "Whenever {this} enters or another nontoken Human you control dies, " +
                 "you lose 1 life and create a 1/1 white Human creature token.";
     }
 }

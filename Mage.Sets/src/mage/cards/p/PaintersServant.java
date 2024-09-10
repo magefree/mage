@@ -50,7 +50,7 @@ public final class PaintersServant extends CardImpl {
 
 class PaintersServantEffect extends ContinuousEffectImpl {
 
-    public PaintersServantEffect() {
+    PaintersServantEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         staticText = "All cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors";
     }
@@ -108,9 +108,9 @@ class PaintersServantEffect extends ContinuousEffectImpl {
                 game.getState().getCreateMageObjectAttribute(card, game).getColor().addColor(color);
 
                 // mdf cards
-                if (card instanceof ModalDoubleFacesCard) {
-                    ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-                    ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                if (card instanceof ModalDoubleFacedCard) {
+                    ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+                    ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                     game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().addColor(color);
                     game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().addColor(color);
                 }

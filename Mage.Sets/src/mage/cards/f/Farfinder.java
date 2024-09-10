@@ -30,7 +30,7 @@ public final class Farfinder extends CardImpl {
 
         // When Farfinder etners the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
         ), true));
     }
 

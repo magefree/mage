@@ -16,6 +16,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -58,7 +59,7 @@ enum NemesisPhoenixCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getStep().getType() != PhaseStep.DECLARE_ATTACKERS) {
+        if (game.getTurnStepType() != PhaseStep.DECLARE_ATTACKERS) {
             return false;
         }
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
@@ -72,6 +73,7 @@ enum NemesisPhoenixCondition implements Condition {
                         .map(game::getControllerId)
                         .anyMatch(source::isControlledBy))
                 .map(CombatGroup::getDefenderId)
+                .filter(Objects::nonNull)
                 .distinct()
                 .filter(opponents::contains)
                 .count() >= 2;

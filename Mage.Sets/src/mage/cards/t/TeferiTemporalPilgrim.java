@@ -31,7 +31,7 @@ public final class TeferiTemporalPilgrim extends CardImpl {
     public TeferiTemporalPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
         this.setStartingLoyalty(4);
 
@@ -62,7 +62,7 @@ public final class TeferiTemporalPilgrim extends CardImpl {
 
 class TeferiTemporalPilgrimEffect extends OneShotEffect {
 
-    public TeferiTemporalPilgrimEffect() {
+    TeferiTemporalPilgrimEffect() {
         super(Outcome.Removal);
         this.staticText = "Target opponent chooses a permanent they control and returns it to its owner's hand. Then they shuffle each nonland permanent they control into its owner's library.";
     }
@@ -83,12 +83,12 @@ class TeferiTemporalPilgrimEffect extends OneShotEffect {
             return false;
         }
         TargetControlledPermanent target = new TargetControlledPermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         opponent.chooseTarget(Outcome.ReturnToHand, target, source, game);
         Permanent toHand = game.getPermanent(target.getFirstTarget());
         if (toHand != null) {
             opponent.moveCards(toHand, Zone.HAND, source, game);
-            game.getState().processAction(game);
+            game.processAction();
         }
         HashSet<Permanent> toLibrary = new HashSet<>(game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_NON_LAND, opponent.getId(), game));
         if (toLibrary.isEmpty()) {

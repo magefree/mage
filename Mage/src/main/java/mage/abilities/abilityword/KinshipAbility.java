@@ -30,7 +30,7 @@ public class KinshipAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the beginning of your upkeep, ");
     }
 
-    public KinshipAbility(final KinshipAbility ability) {
+    protected KinshipAbility(final KinshipAbility ability) {
         super(ability);
     }
 
@@ -69,7 +69,7 @@ class KinshipBaseEffect extends OneShotEffect {
         this.staticText = "you may look at the top card of your library. If it shares a creature type with {this}, you may reveal it. If you do, ";
     }
 
-    public KinshipBaseEffect(final KinshipBaseEffect effect) {
+    protected KinshipBaseEffect(final KinshipBaseEffect effect) {
         super(effect);
         this.kinshipEffects.addAll(effect.kinshipEffects.copy());
     }

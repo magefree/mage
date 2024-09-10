@@ -42,7 +42,7 @@ public final class SparkReaper extends CardImpl {
         // {3}, Sacrifice a creature or planeswalker: You gain 1 life and draw a card.
         Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new GenericManaCost(3));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

@@ -21,7 +21,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class SoulSpike extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two black cards");
+    private static final FilterCard filter = new FilterCard("black cards");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
@@ -36,7 +36,7 @@ public final class SoulSpike extends CardImpl {
         // Soul Spike deals 4 damage to any target and you gain 4 life.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addEffect(new GainLifeEffect(4));
+        this.getSpellAbility().addEffect(new GainLifeEffect(4).concatBy("and"));
     }
 
     private SoulSpike(final SoulSpike card) {

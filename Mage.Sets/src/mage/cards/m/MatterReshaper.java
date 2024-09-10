@@ -49,13 +49,13 @@ public final class MatterReshaper extends CardImpl {
 
 class MatterReshaperEffect extends OneShotEffect {
 
-    public MatterReshaperEffect() {
+    MatterReshaperEffect() {
         super(Outcome.Benefit);
         staticText = "reveal the top card of your library. You may put that card onto the battlefield if it's a permanent card"
                 + " with mana value 3 or less. Otherwise, put that card into your hand";
     }
 
-    public MatterReshaperEffect(final MatterReshaperEffect effect) {
+    private MatterReshaperEffect(final MatterReshaperEffect effect) {
         super(effect);
     }
 

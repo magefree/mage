@@ -2,7 +2,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ public final class MindSculpt extends CardImpl {
 
 
         // Target opponent puts the top seven cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(7));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(7));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 

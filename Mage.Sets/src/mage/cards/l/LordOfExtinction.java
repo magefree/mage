@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -31,7 +30,7 @@ public final class LordOfExtinction extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Lord of Extinction's power and toughness are each equal to the number of cards in all graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new LordOfExtinctionDynamicCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new LordOfExtinctionDynamicCount())));
     }
 
     private LordOfExtinction(final LordOfExtinction card) {

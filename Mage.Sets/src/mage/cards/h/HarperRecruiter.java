@@ -3,7 +3,7 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
@@ -76,7 +76,7 @@ class HarperRecruiterEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
         TargetCard target = new HarperRecruiterTarget();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl(target.getTargets());
         player.revealCards(source, toHand, game);
         player.moveCards(toHand, Zone.HAND, source, game);

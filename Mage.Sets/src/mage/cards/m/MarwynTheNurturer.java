@@ -30,12 +30,12 @@ public final class MarwynTheNurturer extends CardImpl {
 
     public MarwynTheNurturer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF, SubType.DRUID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever another Elf enters the battlefield under your control, put a +1/+1 counter on Marwyn, the Nurturer.
+        // Whenever another Elf you control enters, put a +1/+1 counter on Marwyn, the Nurturer.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
 
         // {T}: Add an amount of {G} equal to Marwyn's power.

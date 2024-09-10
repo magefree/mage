@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -22,15 +23,23 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
-import static mage.cards.c.CityInABottle.getArabianNightsNamePredicates;
 
 /**
  * @author emerald000
  */
 public final class CityInABottle extends CardImpl {
+
+    // Arabian Nights names per CR 206.3a
+    static final List<NamePredicate> ARABIAN_NIGHTS_CARD_NAME_PREDICATES = new ArrayList<>();
+    static {
+        List<String> nameStrings = Arrays.asList("Abu Ja'far", "Aladdin", "Aladdin's Lamp", "Aladdin's Ring", "Ali Baba", "Ali from Cairo", "Army of Allah", "Bazaar of Baghdad", "Bird Maiden", "Bottle of Suleiman", "Brass Man", "Camel", "City in a Bottle", "City of Brass", "Cuombajj Witches", "Cyclone", "Dancing Scimitar", "Dandan", "Desert", "Desert Nomads", "Desert Twister", "Diamond Valley", "Drop of Honey", "Ebony Horse", "Elephant Graveyard", "El-Hajjaj", "Erg Raiders", "Erhnam Djinn", "Eye for an Eye", "Fishliver Oil", "Flying Carpet", "Flying Men", "Ghazban Ogre", "Giant Tortoise", "Guardian Beast", "Hasran Ogress", "Hurr Jackal", "Ifh-Biff Efreet", "Island Fish Jasconius", "Island of Wak-Wak", "Jandor's Ring", "Jandor's Saddlebags", "Jeweled Bird", "Jihad", "Junun Efreet", "Juzam Djinn", "Khabal Ghoul", "King Suleiman", "Kird Ape", "Library of Alexandria", "Magnetic Mountain", "Merchant Ship", "Metamorphosis", "Mijae Djinn", "Moorish Cavalry", "Nafs Asp", "Oasis", "Old Man of the Sea", "Oubliette", "Piety", "Pyramids", "Repentant Blacksmith", "Ring of Ma'ruf", "Rukh Egg", "Sandals of Abdallah", "Sandstorm", "Serendib Djinn", "Serendib Efreet", "Shahrazad", "Sindbad", "Singing Tree", "Sorceress Queen", "Stone-Throwing Devils", "Unstable Mutation", "War Elephant", "Wyluli Wolf", "Ydwen Efreet");
+        for (String name : nameStrings) {
+            ARABIAN_NIGHTS_CARD_NAME_PREDICATES.add(new NamePredicate(name));
+        }
+    }
 
     public CityInABottle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -39,7 +48,7 @@ public final class CityInABottle extends CardImpl {
         this.addAbility(new CityInABottleStateTriggeredAbility());
 
         // Players can't play cards originally printed in the Arabian Nights expansion.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CityInABottleCantPlayEffect()));
+        this.addAbility(new SimpleStaticAbility(new CityInABottleCantPlayEffect()));
     }
 
     private CityInABottle(final CityInABottle card) {
@@ -51,103 +60,23 @@ public final class CityInABottle extends CardImpl {
         return new CityInABottle(this);
     }
 
-    static public List<NamePredicate> getArabianNightsNamePredicates() {
-        List<NamePredicate> namePredicatesArabianNights = new ArrayList<>();
-        namePredicatesArabianNights.add(new NamePredicate("Abu Ja'far"));
-        namePredicatesArabianNights.add(new NamePredicate("Aladdin"));
-        namePredicatesArabianNights.add(new NamePredicate("Aladdin's Lamp"));
-        namePredicatesArabianNights.add(new NamePredicate("Aladdin's Ring"));
-        namePredicatesArabianNights.add(new NamePredicate("Ali Baba"));
-        namePredicatesArabianNights.add(new NamePredicate("Ali from Cairo"));
-        namePredicatesArabianNights.add(new NamePredicate("Army of Allah"));
-        namePredicatesArabianNights.add(new NamePredicate("Bazaar of Baghdad"));
-        namePredicatesArabianNights.add(new NamePredicate("Bird Maiden"));
-        namePredicatesArabianNights.add(new NamePredicate("Bottle of Suleiman"));
-        namePredicatesArabianNights.add(new NamePredicate("Brass Man"));
-        namePredicatesArabianNights.add(new NamePredicate("Camel"));
-        namePredicatesArabianNights.add(new NamePredicate("City of Brass"));
-        namePredicatesArabianNights.add(new NamePredicate("Cuombajj Witches"));
-        namePredicatesArabianNights.add(new NamePredicate("Cyclone"));
-        namePredicatesArabianNights.add(new NamePredicate("Dancing Scimitar"));
-        namePredicatesArabianNights.add(new NamePredicate("Dandan"));
-        namePredicatesArabianNights.add(new NamePredicate("Desert"));
-        namePredicatesArabianNights.add(new NamePredicate("Desert Nomads"));
-        namePredicatesArabianNights.add(new NamePredicate("Desert Twister"));
-        namePredicatesArabianNights.add(new NamePredicate("Diamond Valley"));
-        namePredicatesArabianNights.add(new NamePredicate("Drop of Honey"));
-        namePredicatesArabianNights.add(new NamePredicate("Ebony Horse"));
-        namePredicatesArabianNights.add(new NamePredicate("El-Hajjaj"));
-        namePredicatesArabianNights.add(new NamePredicate("Elephant Graveyard"));
-        namePredicatesArabianNights.add(new NamePredicate("Erg Raiders"));
-        namePredicatesArabianNights.add(new NamePredicate("Erhnam Djinn"));
-        namePredicatesArabianNights.add(new NamePredicate("Eye for an Eye"));
-        namePredicatesArabianNights.add(new NamePredicate("Fishliver Oil"));
-        namePredicatesArabianNights.add(new NamePredicate("Flying Carpet"));
-        namePredicatesArabianNights.add(new NamePredicate("Flying Men"));
-        namePredicatesArabianNights.add(new NamePredicate("Ghazban Ogre"));
-        namePredicatesArabianNights.add(new NamePredicate("Giant Tortoise"));
-        namePredicatesArabianNights.add(new NamePredicate("Guardian Beast"));
-        namePredicatesArabianNights.add(new NamePredicate("Hasran Ogress"));
-        namePredicatesArabianNights.add(new NamePredicate("Hurr Jackal"));
-        namePredicatesArabianNights.add(new NamePredicate("Ifh-Biff Efreet"));
-        namePredicatesArabianNights.add(new NamePredicate("Island Fish Jasconius"));
-        namePredicatesArabianNights.add(new NamePredicate("Island of Wak-Wak"));
-        namePredicatesArabianNights.add(new NamePredicate("Jandor's Ring"));
-        namePredicatesArabianNights.add(new NamePredicate("Jandor's Saddlebags"));
-        namePredicatesArabianNights.add(new NamePredicate("Jeweled Bird"));
-        namePredicatesArabianNights.add(new NamePredicate("Jihad"));
-        namePredicatesArabianNights.add(new NamePredicate("Junun Efreet"));
-        namePredicatesArabianNights.add(new NamePredicate("Juzam Djinn"));
-        namePredicatesArabianNights.add(new NamePredicate("Khabal Ghoul"));
-        namePredicatesArabianNights.add(new NamePredicate("King Suleiman"));
-        namePredicatesArabianNights.add(new NamePredicate("Kird Ape"));
-        namePredicatesArabianNights.add(new NamePredicate("Library of Alexandria"));
-        namePredicatesArabianNights.add(new NamePredicate("Magnetic Mountain"));
-        namePredicatesArabianNights.add(new NamePredicate("Merchant Ship"));
-        namePredicatesArabianNights.add(new NamePredicate("Metamorphosis"));
-        namePredicatesArabianNights.add(new NamePredicate("Mijae Djinn"));
-        namePredicatesArabianNights.add(new NamePredicate("Moorish Cavalry"));
-        namePredicatesArabianNights.add(new NamePredicate("Nafs Asp"));
-        namePredicatesArabianNights.add(new NamePredicate("Oasis"));
-        namePredicatesArabianNights.add(new NamePredicate("Old Man of the Sea"));
-        namePredicatesArabianNights.add(new NamePredicate("Oubliette"));
-        namePredicatesArabianNights.add(new NamePredicate("Piety"));
-        namePredicatesArabianNights.add(new NamePredicate("Pyramids"));
-        namePredicatesArabianNights.add(new NamePredicate("Repentant Blacksmith"));
-        namePredicatesArabianNights.add(new NamePredicate("Ring of Ma'ruf"));
-        namePredicatesArabianNights.add(new NamePredicate("Rukh Egg"));
-        namePredicatesArabianNights.add(new NamePredicate("Sandals of Abdallah"));
-        namePredicatesArabianNights.add(new NamePredicate("Sandstorm"));
-        namePredicatesArabianNights.add(new NamePredicate("Serendib Djinn"));
-        namePredicatesArabianNights.add(new NamePredicate("Serendib Efreet"));
-        namePredicatesArabianNights.add(new NamePredicate("Shahrazad"));
-        namePredicatesArabianNights.add(new NamePredicate("Sindbad"));
-        namePredicatesArabianNights.add(new NamePredicate("Singing Tree"));
-        namePredicatesArabianNights.add(new NamePredicate("Sorceress Queen"));
-        namePredicatesArabianNights.add(new NamePredicate("Stone-Throwing Devils"));
-        namePredicatesArabianNights.add(new NamePredicate("Unstable Mutation"));
-        namePredicatesArabianNights.add(new NamePredicate("War Elephant"));
-        namePredicatesArabianNights.add(new NamePredicate("Wyluli Wolf"));
-        namePredicatesArabianNights.add(new NamePredicate("Ydwen Efreet"));
-        return namePredicatesArabianNights;
-    }
 }
 
 class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
 
-    private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent originally printed in the Arabian Nights expansion other than City in a Bottle");
-
+    private static final FilterPermanent filter = new FilterPermanent("other nontoken permanents with a name originally printed in the Arabian Nights expansion");
     static {
         filter.add(TokenPredicate.FALSE);
-        filter.add(Predicates.or(getArabianNightsNamePredicates()));
-
+        filter.add(Predicates.or(CityInABottle.ARABIAN_NIGHTS_CARD_NAME_PREDICATES));
+        filter.add(AnotherPredicate.instance);
     }
 
     CityInABottleStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CityInABottleSacrificeEffect());
+        setTriggerPhrase("Whenever one or more other nontoken permanents with a name originally printed in the <i>Arabian Nights</i> expansion are on the battlefield, ");
     }
 
-    CityInABottleStateTriggeredAbility(final CityInABottleStateTriggeredAbility ability) {
+    private CityInABottleStateTriggeredAbility(final CityInABottleStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -161,27 +90,24 @@ class CityInABottleStateTriggeredAbility extends StateTriggeredAbility {
         return game.getBattlefield().contains(filter, this.getControllerId(), this, game, 1);
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever one or more other nontoken permanents with a name originally printed in the <i>Arabian Nights</i> expansion are on the battlefield, their controllers sacrifice them";
-    }
 }
 
 class CityInABottleSacrificeEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent originally printed in the Arabian Nights expansion other than City in a Bottle");
+    private static final FilterPermanent filter = new FilterPermanent("other nontoken permanents with a name originally printed in the Arabian Nights expansion");
 
     static {
         filter.add(TokenPredicate.FALSE);
-        filter.add(Predicates.or(getArabianNightsNamePredicates()));
+        filter.add(Predicates.or(CityInABottle.ARABIAN_NIGHTS_CARD_NAME_PREDICATES));
+        filter.add(AnotherPredicate.instance);
     }
 
     CityInABottleSacrificeEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "its controller sacrifices it";
+        this.staticText = "their controllers sacrifice them";
     }
 
-    CityInABottleSacrificeEffect(final CityInABottleSacrificeEffect effect) {
+    private CityInABottleSacrificeEffect(final CityInABottleSacrificeEffect effect) {
         super(effect);
     }
 
@@ -201,24 +127,19 @@ class CityInABottleSacrificeEffect extends OneShotEffect {
 
 class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private static final FilterCard filter = new FilterCard("cards originally printed in the Arabian Nights expansion");
+    private static final FilterCard filter = new FilterCard();
 
     static {
-        filter.add(Predicates.or(getArabianNightsNamePredicates()));
+        filter.add(Predicates.or(CityInABottle.ARABIAN_NIGHTS_CARD_NAME_PREDICATES));
     }
 
     CityInABottleCantPlayEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Players can't play cards originally printed in the <i>Arabian Nights</i> expansion";
+        staticText = "Players can't cast spells or play lands with a name originally printed in the <i>Arabian Nights</i> expansion";
     }
 
-    CityInABottleCantPlayEffect(final CityInABottleCantPlayEffect effect) {
+    private CityInABottleCantPlayEffect(final CityInABottleCantPlayEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -228,7 +149,7 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        return "You can't play cards originally printed in the Arabian Nights expansion";
+        return "You can't play cards with a name originally printed in the Arabian Nights expansion";
     }
 
     @Override

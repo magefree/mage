@@ -25,15 +25,13 @@ import java.util.UUID;
  */
 public final class RiseFall extends SplitCard {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public RiseFall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{B}", "{B}{R}", SpellAbilityType.SPLIT);
 
         // Rise
         // Return target creature card from a graveyard and target creature on the battlefield to their owners' hands.
         getLeftHalfCard().getSpellAbility().addEffect(new RiseEffect());
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Fall

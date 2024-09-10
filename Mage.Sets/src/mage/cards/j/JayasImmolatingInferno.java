@@ -3,7 +3,7 @@ package mage.cards.j;
 import java.util.UUID;
 
 import mage.abilities.common.LegendarySpellAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -19,13 +19,13 @@ public final class JayasImmolatingInferno extends CardImpl {
 
     public JayasImmolatingInferno(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
         this.addAbility(new LegendarySpellAbility());
 
         // Jaya's Immolating Inferno deals X damage to each of up to three targets.
-        Effect effect = new DamageTargetEffect(ManacostVariableValue.REGULAR);
+        Effect effect = new DamageTargetEffect(GetXValue.instance);
         effect.setText("{this} deals X damage to each of up to three targets");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget(1, 3));

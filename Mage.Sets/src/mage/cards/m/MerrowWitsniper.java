@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +26,7 @@ public final class MerrowWitsniper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Merrow Witsniper enters the battlefield, target player puts the top card of their library into their graveyard.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new PutLibraryIntoGraveTargetEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetEffect(1));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

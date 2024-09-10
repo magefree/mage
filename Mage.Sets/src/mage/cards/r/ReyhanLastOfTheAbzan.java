@@ -31,7 +31,7 @@ public final class ReyhanLastOfTheAbzan extends CardImpl {
     public ReyhanLastOfTheAbzan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(0);
@@ -65,7 +65,7 @@ class ReyhanLastOfTheAbzanTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, true);
     }
 
-    public ReyhanLastOfTheAbzanTriggeredAbility(final ReyhanLastOfTheAbzanTriggeredAbility ability) {
+    private ReyhanLastOfTheAbzanTriggeredAbility(final ReyhanLastOfTheAbzanTriggeredAbility ability) {
         super(ability);
     }
 

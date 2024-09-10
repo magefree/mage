@@ -3,6 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +29,7 @@ public final class AvengingHunter extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Avenging Hunter enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
     }
 
     private AvengingHunter(final AvengingHunter card) {

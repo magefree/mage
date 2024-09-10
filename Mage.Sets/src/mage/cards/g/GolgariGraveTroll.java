@@ -58,11 +58,11 @@ public final class GolgariGraveTroll extends CardImpl {
 
 class GolgariGraveTrollEffect extends OneShotEffect {
 
-    public GolgariGraveTrollEffect() {
+    GolgariGraveTrollEffect() {
         super(Outcome.BoostCreature);
     }
 
-    public GolgariGraveTrollEffect(final GolgariGraveTrollEffect effect) {
+    private GolgariGraveTrollEffect(final GolgariGraveTrollEffect effect) {
         super(effect);
     }
 

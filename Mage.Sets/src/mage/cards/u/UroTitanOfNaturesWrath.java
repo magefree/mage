@@ -29,7 +29,7 @@ public final class UroTitanOfNaturesWrath extends CardImpl {
     public UroTitanOfNaturesWrath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.GIANT);
         this.power = new MageInt(6);
@@ -61,7 +61,7 @@ public final class UroTitanOfNaturesWrath extends CardImpl {
 class UroTitanOfNaturesWrathEffect extends OneShotEffect {
 
     UroTitanOfNaturesWrathEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Sacrifice);
         staticText = "sacrifice it unless it escaped";
     }
 

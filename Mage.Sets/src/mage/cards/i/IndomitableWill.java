@@ -35,7 +35,7 @@ public final class IndomitableWill extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
     }
 
-    public IndomitableWill (final IndomitableWill card) {
+    private IndomitableWill(final IndomitableWill card) {
         super(card);
     }
 

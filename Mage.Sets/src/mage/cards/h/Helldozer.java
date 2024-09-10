@@ -54,12 +54,12 @@ public final class Helldozer extends CardImpl {
 
 class HelldozerEffect extends OneShotEffect {
 
-    public HelldozerEffect() {
+    HelldozerEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target land. If that land was nonbasic, untap Helldozer";
     }
 
-    public HelldozerEffect(final HelldozerEffect effect) {
+    private HelldozerEffect(final HelldozerEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class HelldozerEffect extends OneShotEffect {
         Permanent helldozer = game.getPermanent(source.getSourceId());
         Permanent landTarget = game.getPermanent(source.getFirstTarget());
         if (landTarget != null) {
-            boolean wasNonBasic = !landTarget.isBasic();
+            boolean wasNonBasic = !landTarget.isBasic(game);
             landTarget.destroy(source, game, false);
             if (wasNonBasic
                     && helldozer != null) {

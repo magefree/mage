@@ -49,12 +49,12 @@ public final class GoblinBangchuckers extends CardImpl {
 
 class GoblinBangchuckersEffect extends OneShotEffect {
 
-    public GoblinBangchuckersEffect() {
+    GoblinBangchuckersEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, {this} deals 2 damage to any target. If you lose the flip, {this} deals 2 damage to itself";
     }
 
-    public GoblinBangchuckersEffect(GoblinBangchuckersEffect effect) {
+    private GoblinBangchuckersEffect(final GoblinBangchuckersEffect effect) {
         super(effect);
     }
 
@@ -63,12 +63,12 @@ class GoblinBangchuckersEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.flipCoin(source, game, true)) {
-                Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+                Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
                     permanent.damage(2, source.getSourceId(), source, game, false, true);
                     return true;
                 }
-                Player player = game.getPlayer(targetPointer.getFirst(game, source));
+                Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
                 if (player != null) {
                     player.damage(2, source.getSourceId(), source, game);
                     return true;

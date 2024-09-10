@@ -29,17 +29,28 @@ public abstract class MageObjectImpl implements MageObject {
 
     protected String name;
     protected ManaCosts<ManaCost> manaCost;
+
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
+
+    private String expansionSetCode = "";
+    private String cardNumber = "";
+    private boolean usesVariousArt = false;
+    private String imageFileName = "";
+    private int imageNumber = 0;
+
+    protected List<SuperType> supertype = new ArrayList<>();
     protected List<CardType> cardType = new ArrayList<>();
     protected SubTypes subtype = new SubTypes();
-    protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
+
     protected String text;
     protected MageInt power;
     protected MageInt toughness;
     protected int startingLoyalty = -1; // -2 means X, -1 means none, 0 and up is normal
+    protected int startingDefense = -1; // -2 means X, -1 means none, 0 and up is normal
+
     protected boolean copy;
     protected MageObject copyFrom; // copied card INFO (used to call original adjusters)
 
@@ -58,7 +69,7 @@ public abstract class MageObjectImpl implements MageObject {
         abilities = new AbilitiesImpl<>();
     }
 
-    public MageObjectImpl(final MageObjectImpl object) {
+    protected MageObjectImpl(final MageObjectImpl object) {
         objectId = object.objectId;
         name = object.name;
         manaCost = object.manaCost.copy();
@@ -66,9 +77,15 @@ public abstract class MageObjectImpl implements MageObject {
         color = object.color.copy();
         frameColor = object.frameColor.copy();
         frameStyle = object.frameStyle;
+        expansionSetCode = object.expansionSetCode;
+        usesVariousArt = object.usesVariousArt;
+        cardNumber = object.cardNumber;
+        imageFileName = object.imageFileName;
+        imageNumber = object.imageNumber;
         power = object.power.copy();
         toughness = object.toughness.copy();
         startingLoyalty = object.startingLoyalty;
+        startingDefense = object.startingDefense;
         abilities = object.abilities.copy();
         this.cardType.addAll(object.cardType);
         this.subtype.copyFrom(object.subtype);
@@ -95,11 +112,6 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public String getLogName() {
         return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public String getImageName() {
-        return name;
     }
 
     @Override
@@ -138,7 +150,14 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
+    public List<SuperType> getSuperType(Game game) {
+        if (game != null) {
+            // dynamic
+            MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
+            if (mageObjectAttribute != null) {
+                return mageObjectAttribute.getSuperType();
+            }
+        }
         return supertype;
     }
 
@@ -174,6 +193,16 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
         this.startingLoyalty = startingLoyalty;
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return startingDefense;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+        this.startingDefense = startingDefense;
     }
 
     @Override
@@ -222,8 +251,63 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public String getExpansionSetCode() {
+        return expansionSetCode;
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        this.expansionSetCode = expansionSetCode;
+    }
+
+    @Override
+    public boolean getUsesVariousArt() {
+        return usesVariousArt;
+    }
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        this.usesVariousArt = usesVariousArt;
+    }
+
+    @Override
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    @Override
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    @Override
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
+    }
+
+    @Override
+    public Integer getImageNumber() {
+        return imageNumber;
+    }
+
+    @Override
+    public void setImageNumber(Integer imageNumber) {
+        this.imageNumber = imageNumber;
+    }
+
+    @Override
     public ManaCosts<ManaCost> getManaCost() {
         return manaCost;
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        this.manaCost = costs.copy();
     }
 
     @Override
@@ -239,10 +323,9 @@ public abstract class MageObjectImpl implements MageObject {
         if (value == null) {
             return false;
         }
-        if (value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes(game)) {
-            return true;
-        }
-        return getSubtype(game).contains(value);
+        return value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes(game)
+                || value.getSubTypeSet() == SubTypeSet.NonBasicLandType && isAllNonbasicLandTypes(game)
+                || getSubtype(game).contains(value);
     }
 
     @Override
@@ -283,12 +366,27 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
-        this.getSubtype().setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
+        this.getSubtype().setIsAllCreatureTypes(value && (this.isKindred() || this.isCreature()));
     }
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal(game) || this.isCreature(game)));
+        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isKindred(game) || this.isCreature(game)));
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return this.getSubtype(game).isAllNonbasicLandTypes();
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+        this.getSubtype().setIsAllNonbasicLandTypes(value && this.isLand());
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+        this.getSubtype(game).setIsAllNonbasicLandTypes(value && this.isLand(game));
     }
 
     /**

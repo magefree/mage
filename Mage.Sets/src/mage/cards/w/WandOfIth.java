@@ -47,18 +47,18 @@ public final class WandOfIth extends CardImpl {
 
 class WandOfIthEffect extends OneShotEffect {
 
-    public WandOfIthEffect() {
+    WandOfIthEffect() {
         super(Outcome.Discard);
         staticText = "Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its mana value";
     }
 
-    public WandOfIthEffect(final WandOfIthEffect effect) {
+    private WandOfIthEffect(final WandOfIthEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player != null && !player.getHand().isEmpty()) {
             Cards revealed = new CardsImpl();

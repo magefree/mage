@@ -35,7 +35,7 @@ public final class AbominableTreefolk extends CardImpl {
     public AbominableTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.TREEFOLK);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -45,7 +45,7 @@ public final class AbominableTreefolk extends CardImpl {
 
         // Abominable Treefolk's power and toughness are each equal to the number of snow permanents you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)
         ));
 
         // When Abominable Treefolk enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.

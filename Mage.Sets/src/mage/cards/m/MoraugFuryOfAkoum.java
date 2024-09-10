@@ -30,19 +30,19 @@ public final class MoraugFuryOfAkoum extends CardImpl {
     public MoraugFuryOfAkoum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
         // Each creature you control gets +1/+0 for each time it has attacked this turn.
-        this.addAbility(new SimpleStaticAbility(new MoraugFuryOfAkoumBoostEffect()), new AttackedThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new MoraugFuryOfAkoumBoostEffect()));
 
-        // Landfall — Whenever a land enters the battlefield under your control, if it's your main phase, there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control.
+        // Landfall — Whenever a land you control enters, if it's your main phase, there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new LandfallAbility(new MoraugFuryOfAkoumCombatEffect()), MoraugFuryOfAkoumCondition.instance,
-                "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " +
+                "<i>Landfall</i> &mdash; Whenever a land you control enters, " +
                         "if it's your main phase, there's an additional combat phase after this phase. " +
                         "At the beginning of that combat, untap all creatures you control."
         ), new MoraugFuryOfAkoumWatcher());
@@ -63,7 +63,7 @@ enum MoraugFuryOfAkoumCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.isActivePlayer(source.getControllerId()) && game.getPhase().getType().isMain();
+        return game.isActivePlayer(source.getControllerId()) && game.getTurnPhaseType().isMain();
     }
 }
 
@@ -113,18 +113,19 @@ class MoraugFuryOfAkoumCombatEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TurnPhase turnPhase = game.getPhase().getType();
+        TurnPhase turnPhase = game.getTurnPhaseType();
         for (TurnMod turnMod : game.getState().getTurnMods()) {
-            if ("moraug".equals(turnMod.getNote())
+            if ("moraug".equals(turnMod.getTag())
                     && turnMod.getPlayerId().equals(source.getControllerId())
                     && turnMod.getAfterPhase() == turnPhase) {
                 turnPhase = TurnPhase.COMBAT;
-                turnMod.setNote("moraugIgnore");
+                turnMod.withTag("moraugIgnore");
                 break;
             }
         }
-        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, turnPhase, false);
-        combat.setNote("moraug");
+        TurnMod combat = new TurnMod(source.getControllerId())
+                .withExtraPhase(TurnPhase.COMBAT, turnPhase)
+                .withTag("moraug");
         game.getState().getTurnMods().add(combat);
         game.addDelayedTriggeredAbility(new MoraugFuryOfAkoumDelayedTriggeredAbility(combat.getId()), source);
         return true;
@@ -192,8 +193,8 @@ class MoraugFuryOfAkoumWatcher extends Watcher {
             return;
         }
         for (TurnMod turnMod : game.getState().getTurnMods()) {
-            if ("moraug".equals(turnMod.getNote())) {
-                turnMod.setNote("moraugIgnore");
+            if ("moraug".equals(turnMod.getTag())) {
+                turnMod.withTag("moraugIgnore");
             }
         }
     }

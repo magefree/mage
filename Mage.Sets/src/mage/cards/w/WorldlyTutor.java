@@ -18,7 +18,7 @@ public final class WorldlyTutor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Search your library for a creature card and reveal that card. Shuffle your library, then put the card on top of it.
-        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true));
     }
 
     private WorldlyTutor(final WorldlyTutor card) {

@@ -12,9 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -23,13 +21,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class BiblioplexKraken extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public BiblioplexKraken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
@@ -44,7 +35,7 @@ public final class BiblioplexKraken extends CardImpl {
         // Whenever Biblioplex Kraken attacks, you may return another creature you control to its owner's hand. If you do, Biblioplex Kraken can't be blocked this turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
-                new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter))
+                new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL))
         )));
     }
 

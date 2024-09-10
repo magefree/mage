@@ -35,9 +35,7 @@ public final class JarOfEyeballs extends CardImpl {
                 false, StaticFilters.FILTER_CONTROLLED_A_CREATURE
         ));
 
-        // {3}, {tap}, Remove all eyeball counters from Jar of Eyeballs:
-        // Look at the top X cards of your library, where X is the number of eyeball counters removed this way.
-        // Put one of them into your hand and the rest on the bottom of your library in any order.
+        // {3}, {tap}, Remove all eyeball counters from Jar of Eyeballs: Look at the top X cards of your library, where X is the number of eyeball counters removed this way. Put one of them into your hand and the rest on the bottom of your library in any order.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new LookLibraryAndPickControllerEffect(JarOfEyeballsValue.instance, 1, PutCards.HAND, PutCards.BOTTOM_ANY),
                 new GenericManaCost(3));

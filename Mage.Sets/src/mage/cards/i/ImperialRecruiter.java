@@ -35,7 +35,7 @@ public final class ImperialRecruiter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Imperial Recruiter enters the battlefield, search your library for a creature card with power 2 or less, reveal it, and put it into your hand. Then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true)));
     }
 
     private ImperialRecruiter(final ImperialRecruiter card) {

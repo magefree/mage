@@ -7,7 +7,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author weirddan455
  */
 public final class BlackBirdToken extends TokenImpl {
@@ -19,7 +18,6 @@ public final class BlackBirdToken extends TokenImpl {
         subtype.add(SubType.BIRD);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        setOriginalExpansionSetCode("DMU");
 
         addAbility(FlyingAbility.getInstance());
         addAbility(new CantBlockAbility());
@@ -32,14 +30,5 @@ public final class BlackBirdToken extends TokenImpl {
     @Override
     public BlackBirdToken copy() {
         return new BlackBirdToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DMU")) {
-            setTokenType(1);
-        }
     }
 }

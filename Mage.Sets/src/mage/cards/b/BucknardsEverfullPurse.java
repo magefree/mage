@@ -5,17 +5,14 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.effects.common.PlayerToRightGainsControlOfSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -30,6 +27,7 @@ public final class BucknardsEverfullPurse extends CardImpl {
         // {1}, {T}: Roll a d4 and create a number of Treasure tokens equal to the result. The player to your right gains control of Bucknard's Everfull Purse.
         Ability ability = new SimpleActivatedAbility(new BucknardsEverfullPurseEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
+        ability.addEffect(new PlayerToRightGainsControlOfSourceEffect());
         this.addAbility(ability);
     }
 
@@ -47,8 +45,7 @@ class BucknardsEverfullPurseEffect extends OneShotEffect {
 
     BucknardsEverfullPurseEffect() {
         super(Outcome.Benefit);
-        staticText = "roll a d4 and create a number of Treasure tokens equal to the result. " +
-                "The player to your right gains control of {this}";
+        staticText = "roll a d4 and create a number of Treasure tokens equal to the result";
     }
 
     private BucknardsEverfullPurseEffect(final BucknardsEverfullPurseEffect effect) {
@@ -66,26 +63,9 @@ class BucknardsEverfullPurseEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        new TreasureToken().putOntoBattlefield(
+        return new TreasureToken().putOntoBattlefield(
                 player.rollDice(outcome, source, game, 4),
                 game, source, source.getControllerId()
         );
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            return true;
-        }
-        UUID playerToRightId = game
-                .getState()
-                .getPlayersInRange(source.getControllerId(), game)
-                .stream()
-                .reduce((u1, u2) -> u2)
-                .orElse(null);
-        if (playerToRightId == null) {
-            return false;
-        }
-        game.addEffect(new GainControlTargetEffect(
-                Duration.Custom, true, playerToRightId
-        ).setTargetPointer(new FixedTarget(permanent, game)), source);
-        return true;
     }
 }

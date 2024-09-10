@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public final class TournamentUtil {
 
     /**
-     * Tries to calculate the most appropiate sets to add basic lands for cards of a deck
+     * Tries to calculate the most appropriate sets to add basic lands for cards of a deck
      *
      * @param setCodesDeck
      * @return setCode for lands
@@ -68,12 +68,12 @@ public final class TournamentUtil {
         } else {
             criteria.ignoreSetsWithSnowLands();
         }
-        criteria.rarities(Rarity.LAND).nameExact(landName);
+        criteria.rarities(Rarity.LAND).name(landName);
         List<CardInfo> lands = CardRepository.instance.findCards(criteria);
         List<Card> cards = new ArrayList<>();
         if (!lands.isEmpty()) {
             for (int i = 0; i < number; i++) {
-                Card land = lands.get(RandomUtil.nextInt(lands.size())).getCard();
+                Card land = lands.get(RandomUtil.nextInt(lands.size())).createCard();
                 cards.add(land);
             }
         }

@@ -41,7 +41,7 @@ public final class ShaleskinBruiser extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Whenever Shaleskin Bruiser attacks, it gets +3/+0 until end of turn for each other attacking Beast.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, "it"), false));
     }
 
     private ShaleskinBruiser(final ShaleskinBruiser card) {

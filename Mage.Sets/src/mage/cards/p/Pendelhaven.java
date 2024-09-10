@@ -32,7 +32,7 @@ public final class Pendelhaven extends CardImpl {
 
     public Pendelhaven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());

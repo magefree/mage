@@ -3,6 +3,7 @@ package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -70,7 +71,7 @@ public class VesuvaTest extends CardTestPlayerBase {
 
         Permanent darkDepth = getPermanent("Dark Depths", playerA);
         if (darkDepth != null) {
-            Assert.assertEquals(10, darkDepth.getCounters(currentGame).getCount("ice"));
+            Assert.assertEquals(10, darkDepth.getCounters(currentGame).getCount(CounterType.ICE));
         }
         assertTappedCount("Dark Depths", true, 1);
     }

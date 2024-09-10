@@ -3,7 +3,6 @@
 package mage.choices;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -16,7 +15,7 @@ public class ChoiceLeftOrRight extends ChoiceImpl {
         this.message = "Choose left or right";
     }
 
-    public ChoiceLeftOrRight(final ChoiceLeftOrRight choice) {
+    protected ChoiceLeftOrRight(final ChoiceLeftOrRight choice) {
         super(choice);
     }
 

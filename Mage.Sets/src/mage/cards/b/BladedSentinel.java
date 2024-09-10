@@ -29,7 +29,7 @@ public final class BladedSentinel extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
-    public BladedSentinel (final BladedSentinel card) {
+    private BladedSentinel(final BladedSentinel card) {
         super(card);
     }
 

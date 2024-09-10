@@ -2,8 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,8 +29,7 @@ public final class SettleBeyondReality extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
 
         // • Exile target creature you control, then return it to the battlefield under its owner's control.
-        Mode mode = new Mode(new ExileTargetForSourceEffect());
-        mode.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
+        Mode mode = new Mode(new ExileThenReturnTargetEffect(false, false));
         mode.addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

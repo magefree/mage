@@ -43,14 +43,13 @@ public final class ForerunnerOfTheEmpire extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(
                         new SearchLibraryPutOnLibraryEffect(
                                 new TargetCardInLibrary(new FilterBySubtypeCard(SubType.DINOSAUR)),
-                                true,
                                 true
                         ),
                         true
                 )
         );
 
-        // Whenever a Dinosaur enters the battlefield under your control, you may have Forerunner of the Empire deal 1 damage to each creature.
+        // Whenever a Dinosaur you control enters, you may have Forerunner of the Empire deal 1 damage to each creature.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DamageAllEffect(1, new FilterCreaturePermanent()).setText("have {this} deal 1 damage to each creature"),

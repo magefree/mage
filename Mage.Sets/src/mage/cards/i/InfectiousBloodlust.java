@@ -55,7 +55,7 @@ public final class InfectiousBloodlust extends CardImpl {
 
         // When enchanted creature dies, you may search your library for a card named Infectious Bloodlust, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new DiesAttachedTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), "enchanted creature", true));
     }
 

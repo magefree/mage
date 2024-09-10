@@ -46,7 +46,7 @@ public final class TreasureKeeper extends CardImpl {
 
 class TreasureKeeperEffect extends OneShotEffect {
 
-    public TreasureKeeperEffect() {
+    TreasureKeeperEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "reveal cards from the top of your library until you reveal a "
                 + "nonland card with mana value 3 or less. "
@@ -54,7 +54,7 @@ class TreasureKeeperEffect extends OneShotEffect {
                 + "cards not cast this way on the bottom of your library in a random order";
     }
 
-    public TreasureKeeperEffect(TreasureKeeperEffect effect) {
+    private TreasureKeeperEffect(final TreasureKeeperEffect effect) {
         super(effect);
     }
 

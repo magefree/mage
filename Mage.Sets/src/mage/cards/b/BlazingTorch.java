@@ -107,6 +107,6 @@ class BlazingTorchEffect extends OneShotEffect {
         if (object instanceof Permanent) {
             name = ((Permanent) object).getName();
         }
-        return name + "deals 2 damage to target any target.";
+        return name + " deals 2 damage to any target.";
     }
 }

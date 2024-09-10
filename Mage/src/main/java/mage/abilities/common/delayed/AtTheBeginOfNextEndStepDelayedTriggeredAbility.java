@@ -36,7 +36,7 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(final AtTheBeginOfNextEndStepDelayedTriggeredAbility ability) {
+    protected AtTheBeginOfNextEndStepDelayedTriggeredAbility(final AtTheBeginOfNextEndStepDelayedTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.condition = ability.condition;

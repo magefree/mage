@@ -57,7 +57,7 @@ class SkillBorrowerAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new GainActivatedAbilitiesOfTopCardEffect(filter));
     }
 
-    public SkillBorrowerAbility(SkillBorrowerAbility ability) {
+    private SkillBorrowerAbility(final SkillBorrowerAbility ability) {
         super(ability);
     }
 

@@ -41,7 +41,7 @@ public final class Dreamwinder extends CardImpl {
         ability.addTarget(new TargetLandPermanent().withChooseHint("becomes an Island"));
         FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an Island");
         filter.add(SubType.ISLAND.getPredicate());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }   
     

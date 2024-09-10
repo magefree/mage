@@ -45,7 +45,7 @@ public final class CorpseExplosion extends CardImpl {
 
 class CorpseExplosionEffect extends OneShotEffect {
 
-    public CorpseExplosionEffect() {
+    CorpseExplosionEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage equal to the exiled card's power to each creature and each planeswalker";
     }

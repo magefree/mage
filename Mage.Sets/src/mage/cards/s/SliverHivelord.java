@@ -21,7 +21,7 @@ public final class SliverHivelord extends CardImpl {
 
     public SliverHivelord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SLIVER);
 
         this.power = new MageInt(5);

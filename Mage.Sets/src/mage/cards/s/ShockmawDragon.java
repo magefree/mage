@@ -28,7 +28,7 @@ public final class ShockmawDragon extends CardImpl {
         // Whenever Shockmaw Dragon deals combat damage to a player,
         // it deals 1 damage to each creature that player controls.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DamageAllControlledTargetEffect(1, "it"),
+                new DamageAllControlledTargetEffect(1),
                 false, true));
     }
 

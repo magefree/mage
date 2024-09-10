@@ -33,7 +33,7 @@ public final class AnaraWolvidFamiliar extends CardImpl {
     public AnaraWolvidFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WOLF);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);

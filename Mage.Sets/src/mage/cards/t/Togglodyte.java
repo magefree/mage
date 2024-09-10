@@ -58,12 +58,12 @@ public final class Togglodyte extends CardImpl {
 
 class TogglodyteEntersEffect extends OneShotEffect {
 
-    public TogglodyteEntersEffect() {
+    TogglodyteEntersEffect() {
         super(Outcome.Neutral);
         staticText = "turned on";
     }
 
-    public TogglodyteEntersEffect(final TogglodyteEntersEffect effect) {
+    private TogglodyteEntersEffect(final TogglodyteEntersEffect effect) {
         super(effect);
     }
 
@@ -92,12 +92,12 @@ class TogglodyteEntersEffect extends OneShotEffect {
 
 class TogglodyteToggleEffect extends OneShotEffect {
 
-    public TogglodyteToggleEffect() {
+    TogglodyteToggleEffect() {
         super(Outcome.Neutral);
         staticText = "toggle {this}'s ON/OFF switch";
     }
 
-    public TogglodyteToggleEffect(final TogglodyteToggleEffect effect) {
+    private TogglodyteToggleEffect(final TogglodyteToggleEffect effect) {
         super(effect);
     }
 
@@ -124,12 +124,12 @@ class TogglodyteToggleEffect extends OneShotEffect {
 
 class TogglodyteRestrictionEffect extends RestrictionEffect {
 
-    public TogglodyteRestrictionEffect() {
+    TogglodyteRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "";
     }
 
-    public TogglodyteRestrictionEffect(final TogglodyteRestrictionEffect effect) {
+    private TogglodyteRestrictionEffect(final TogglodyteRestrictionEffect effect) {
         super(effect);
     }
 
@@ -156,12 +156,12 @@ class TogglodyteRestrictionEffect extends RestrictionEffect {
 
 class TogglodytePreventionEffect extends PreventionEffectImpl {
 
-    public TogglodytePreventionEffect() {
+    TogglodytePreventionEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false);
         staticText = "As long as {this} is turned off, it can't attack or block, and prevent all damage it would deal";
     }
 
-    public TogglodytePreventionEffect(final TogglodytePreventionEffect effect) {
+    private TogglodytePreventionEffect(final TogglodytePreventionEffect effect) {
         super(effect);
     }
 

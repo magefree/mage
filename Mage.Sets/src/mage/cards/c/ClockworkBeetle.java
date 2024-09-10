@@ -57,7 +57,7 @@ class ClockworkBeetleEffect extends OneShotEffect {
         staticText = "remove a +1/+1 counter from {this} at end of combat";
     }
 
-    ClockworkBeetleEffect(final ClockworkBeetleEffect effect) {
+    private ClockworkBeetleEffect(final ClockworkBeetleEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class GoblinTinkererDamageEffect extends OneShotEffect {
         this.staticText = "That artifact deals damage equal to its mana value to {this}";
     }
     
-    public GoblinTinkererDamageEffect(final GoblinTinkererDamageEffect effect) {
+    private GoblinTinkererDamageEffect(final GoblinTinkererDamageEffect effect) {
         super(effect);
     }
     

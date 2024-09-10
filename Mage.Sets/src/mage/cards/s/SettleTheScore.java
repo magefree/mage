@@ -55,7 +55,7 @@ class SettleTheScoreEffect extends OneShotEffect {
         this.staticText = "Put two loyalty counters on a planeswalker you control";
     }
 
-    public SettleTheScoreEffect(final SettleTheScoreEffect effect) {
+    private SettleTheScoreEffect(final SettleTheScoreEffect effect) {
         super(effect);
     }
 

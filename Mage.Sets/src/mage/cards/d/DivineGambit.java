@@ -61,7 +61,7 @@ public final class DivineGambit extends CardImpl {
 
 class DivineGambitEffect extends OneShotEffect {
 
-    public DivineGambitEffect() {
+    DivineGambitEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "That player may put a permanent card from their hand onto the battlefield";
     }

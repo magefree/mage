@@ -59,7 +59,7 @@ public final class Opalescence extends CardImpl {
             this.dependencyTypes.add(DependencyType.BecomeCreature);  // Conspiracy
         }
 
-        public OpalescenceEffect(final OpalescenceEffect effect) {
+        private OpalescenceEffect(final OpalescenceEffect effect) {
             super(effect);
         }
 

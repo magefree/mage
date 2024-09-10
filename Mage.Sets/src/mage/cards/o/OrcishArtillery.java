@@ -32,7 +32,7 @@ public final class OrcishArtillery extends CardImpl {
         // {tap}: Orcish Artillery deals 2 damage to any target and 3 damage to you.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
-        ability.addEffect(new DamageControllerEffect(3));
+        ability.addEffect(new DamageControllerEffect(3).setText("and 3 damage to you"));
         this.addAbility(ability);
     }
 

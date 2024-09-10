@@ -51,6 +51,8 @@ class DayboundEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         if (!game.hasDayNight()) {
+            // 702.145d
+            // Any time a player controls a permanent with daybound, if it’s neither day nor night, it becomes day.
             game.setDaytime(true);
         }
         return true;

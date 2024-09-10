@@ -44,7 +44,7 @@ public class MillHalfLibraryTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target " + (mode.getTargets().isEmpty() ? "that player" : mode.getTargets().get(0).getTargetName()) +
+        return getTargetPointer().describeTargets(mode.getTargets(), "that player") +
                 " mills half their library, rounded " + (roundUp ? "up" : "down");
     }
 }

@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -25,12 +24,11 @@ import mage.target.TargetPermanent;
  */
 public final class GoblinWizard extends CardImpl {
 
-    private static final FilterPermanentCard filter = new FilterPermanentCard("Goblin");
-    private static final FilterPermanent goblinPermanent = new FilterPermanent("Goblin");
+    private static final FilterPermanentCard filterCard = new FilterPermanentCard("a Goblin permanent card");
+    private static final FilterPermanent filter2 = new FilterPermanent(SubType.GOBLIN, "Goblin");
 
     static {
-        filter.add(SubType.GOBLIN.getPredicate());
-        goblinPermanent.add(SubType.GOBLIN.getPredicate());
+        filterCard.add(SubType.GOBLIN.getPredicate());
     }
 
     public GoblinWizard(UUID ownerId, CardSetInfo setInfo) {
@@ -45,13 +43,13 @@ public final class GoblinWizard extends CardImpl {
 
         // {tap}: You may put a Goblin permanent card from your hand onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCardFromHandOntoBattlefieldEffect(filter),
+                new PutCardFromHandOntoBattlefieldEffect(filterCard),
                 new TapSourceCost()));
 
         // {R}: Target Goblin gains protection from white until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.WHITE), Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
-        Target target = new TargetPermanent(goblinPermanent);
+        Target target = new TargetPermanent(filter2);
         ability.addTarget(target);
         this.addAbility(ability);
 

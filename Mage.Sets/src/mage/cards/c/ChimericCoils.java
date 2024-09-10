@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -41,12 +42,12 @@ public final class ChimericCoils extends CardImpl {
 
 class ChimericCoilsEffect extends ContinuousEffectImpl {
 
-    public ChimericCoilsEffect() {
+    ChimericCoilsEffect() {
         super(Duration.Custom, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Construct artifact creature";
     }
 
-    public ChimericCoilsEffect(final ChimericCoilsEffect effect) {
+    private ChimericCoilsEffect(final ChimericCoilsEffect effect) {
         super(effect);
     }
 
@@ -74,7 +75,7 @@ class ChimericCoilsEffect extends ContinuousEffectImpl {
                 break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    int xValue = source.getManaCostsToPay().getX();
+                    int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
                     permanent.getPower().setModifiedBaseValue(xValue);
                     permanent.getToughness().setModifiedBaseValue(xValue);
                 }

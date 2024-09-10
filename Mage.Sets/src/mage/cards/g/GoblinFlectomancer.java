@@ -30,7 +30,7 @@ public final class GoblinFlectomancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice Goblin Flectomancer: You may change the targets of target instant or sorcery spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseNewTargetsTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseNewTargetsTargetEffect().setText("you may change the targets of target instant or sorcery spell"), new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(new FilterInstantOrSorcerySpell()));
         this.addAbility(ability);
     }

@@ -32,7 +32,7 @@ public final class DemonlordOfAshmouth extends CardImpl {
         // When Demonlord of Ashmouth enters the battlefield, exile it unless you sacrifice another creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new ExileSourceUnlessPaysEffect(
-                        new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))
+                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
                 )
         ));
 

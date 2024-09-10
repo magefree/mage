@@ -1,11 +1,12 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
@@ -16,6 +17,9 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -44,12 +48,12 @@ public final class GenesisWave extends CardImpl {
 
 class GenesisWaveEffect extends OneShotEffect {
 
-    public GenesisWaveEffect() {
+    GenesisWaveEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Reveal the top X cards of your library. You may put any number of permanent cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard";
     }
 
-    public GenesisWaveEffect(final GenesisWaveEffect effect) {
+    private GenesisWaveEffect(final GenesisWaveEffect effect) {
         super(effect);
     }
 
@@ -59,15 +63,15 @@ class GenesisWaveEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(source, cards, game);
             FilterCard filter = new FilterPermanentCard("cards with mana value " + xValue + " or less to put onto the battlefield");
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-            target1.setNotTarget(true);
-            controller.choose(Outcome.PutCardInPlay, cards, target1, game);
+            target1.withNotTarget(true);
+            controller.choose(Outcome.PutCardInPlay, cards, target1, source, game);
             Cards toBattlefield = new CardsImpl(target1.getTargets());
             cards.removeAll(toBattlefield);
             controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);

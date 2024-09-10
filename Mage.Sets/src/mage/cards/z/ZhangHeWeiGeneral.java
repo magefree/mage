@@ -22,7 +22,7 @@ public final class ZhangHeWeiGeneral extends CardImpl {
 
     public ZhangHeWeiGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);

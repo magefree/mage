@@ -23,13 +23,13 @@ public final class ObNixilisTheFallen extends CardImpl {
 
     public ObNixilisTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Landfall - Whenever a land enters the battlefield under your control, you may have target player lose 3 life.
+        // Landfall - Whenever a land you control enters, you may have target player lose 3 life.
         // If you do, put three +1/+1 counters on Ob Nixilis, the Fallen.
         Ability ability = new LandfallAbility(new LoseLifeTargetEffect(3).setText("target player lose 3 life"), true);
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)).concatBy("If you do,"));

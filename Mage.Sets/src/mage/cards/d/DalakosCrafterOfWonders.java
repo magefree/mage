@@ -40,7 +40,7 @@ public final class DalakosCrafterOfWonders extends CardImpl {
     public DalakosCrafterOfWonders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
