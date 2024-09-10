@@ -3,6 +3,7 @@ package mage.game.stack;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.constants.PutCards;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
@@ -43,6 +44,10 @@ public interface StackObject extends MageObject, Controllable {
     boolean isTargetChanged();
 
     void setTargetChanged(boolean targetChanged);
+
+    ActivationManaAbilityStep getCurrentActivatingManaAbilitiesStep();
+
+    void setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep currentActivatingManaAbilitiesStep);
 
     @Override
     StackObject copy();

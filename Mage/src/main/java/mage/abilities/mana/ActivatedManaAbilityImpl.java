@@ -5,10 +5,10 @@ import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.mana.ManaEffect;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.ManaType;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 
 import java.util.*;
 
@@ -45,15 +45,12 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
         // check if player is in the process of playing spell costs and they are no longer allowed to use
         // activated mana abilities (e.g. because they started to use improvise or convoke)
         if (!game.getStack().isEmpty()) {
-            StackObject stackObject = game.getStack().getFirst();
-            if (stackObject instanceof Spell) {
-                switch (((Spell) stackObject).getCurrentActivatingManaAbilitiesStep()) {
-                    case BEFORE:
-                    case NORMAL:
-                        break;
-                    case AFTER:
-                        return ActivationStatus.getFalse();
-                }
+            switch (game.getStack().getFirst().getCurrentActivatingManaAbilitiesStep()) {
+                case BEFORE:
+                case NORMAL:
+                    break;
+                case AFTER:
+                    return ActivationStatus.getFalse();
             }
         }
 

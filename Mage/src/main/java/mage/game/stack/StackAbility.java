@@ -72,6 +72,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
         this.targetAdjuster = stackAbility.targetAdjuster;
         this.targetChanged = stackAbility.targetChanged;
         this.costAdjuster = stackAbility.costAdjuster;
+        this.currentActivatingManaAbilitiesStep = stackAbility.currentActivatingManaAbilitiesStep;
     }
 
     @Override
