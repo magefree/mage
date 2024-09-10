@@ -112,6 +112,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Nashi, Searcher in the Dark", 223, Rarity.RARE, mage.cards.n.NashiSearcherInTheDark.class));
         cards.add(new SetCardInfo("Neglected Manor", 264, Rarity.COMMON, mage.cards.n.NeglectedManor.class));
         cards.add(new SetCardInfo("Oblivious Bookworm", 225, Rarity.UNCOMMON, mage.cards.o.ObliviousBookworm.class));
+        cards.add(new SetCardInfo("Optimistic Scavenger", 21, Rarity.UNCOMMON, mage.cards.o.OptimisticScavenger.class));
         cards.add(new SetCardInfo("Orphans of the Wheat", 22, Rarity.UNCOMMON, mage.cards.o.OrphansOfTheWheat.class));
         cards.add(new SetCardInfo("Overlord of the Boilerbilges", 146, Rarity.MYTHIC, mage.cards.o.OverlordOfTheBoilerbilges.class));
         cards.add(new SetCardInfo("Overlord of the Floodpits", 68, Rarity.MYTHIC, mage.cards.o.OverlordOfTheFloodpits.class));
