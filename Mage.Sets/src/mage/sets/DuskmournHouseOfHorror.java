@@ -78,6 +78,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Floodfarm Verge", 259, Rarity.RARE, mage.cards.f.FloodfarmVerge.class));
         cards.add(new SetCardInfo("Floodpits Drowner", 59, Rarity.UNCOMMON, mage.cards.f.FloodpitsDrowner.class));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Frantic Strength", 179, Rarity.COMMON, mage.cards.f.FranticStrength.class));
         cards.add(new SetCardInfo("Friendly Ghost", 12, Rarity.COMMON, mage.cards.f.FriendlyGhost.class));
         cards.add(new SetCardInfo("Friendly Teddy", 247, Rarity.COMMON, mage.cards.f.FriendlyTeddy.class));
         cards.add(new SetCardInfo("Give In to Violence", 101, Rarity.COMMON, mage.cards.g.GiveInToViolence.class));
