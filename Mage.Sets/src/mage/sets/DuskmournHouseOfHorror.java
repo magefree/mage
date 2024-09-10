@@ -28,6 +28,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Appendage Amalgam", 83, Rarity.COMMON, mage.cards.a.AppendageAmalgam.class));
         cards.add(new SetCardInfo("Arabella, Abandoned Doll", 208, Rarity.UNCOMMON, mage.cards.a.ArabellaAbandonedDoll.class));
         cards.add(new SetCardInfo("Attack-in-the-Box", 242, Rarity.UNCOMMON, mage.cards.a.AttackInTheBox.class));
+        cards.add(new SetCardInfo("Balemurk Leech", 84, Rarity.COMMON, mage.cards.b.BalemurkLeech.class));
         cards.add(new SetCardInfo("Balustrade Wurm", 168, Rarity.RARE, mage.cards.b.BalustradeWurm.class));
         cards.add(new SetCardInfo("Baseball Bat", 209, Rarity.UNCOMMON, mage.cards.b.BaseballBat.class));
         cards.add(new SetCardInfo("Bashful Beastie", 169, Rarity.COMMON, mage.cards.b.BashfulBeastie.class));
