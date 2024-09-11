@@ -35,6 +35,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Growth Spiral", 88, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Living Death", 373, Rarity.MYTHIC, mage.cards.l.LivingDeath.class));
         cards.add(new SetCardInfo("Mesa Enchantress", 68, Rarity.RARE, mage.cards.m.MesaEnchantress.class));
+        cards.add(new SetCardInfo("Metamorphosis Fanatic", 21, Rarity.RARE, mage.cards.m.MetamorphosisFanatic.class));
         cards.add(new SetCardInfo("Moon-Blessed Cleric", 69, Rarity.UNCOMMON, mage.cards.m.MoonBlessedCleric.class));
         cards.add(new SetCardInfo("Ponder", 73, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Portent", 74, Rarity.COMMON, mage.cards.p.Portent.class));
