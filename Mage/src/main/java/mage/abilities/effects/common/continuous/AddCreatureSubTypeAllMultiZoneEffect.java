@@ -24,19 +24,35 @@ public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
     private final FilterControlledCreaturePermanent filterPermanent;
     private final FilterControlledCreatureSpell filterSpell;
     private final FilterOwnedCreatureCard filterCard;
+    private final SubType chosenType;
 
     public AddCreatureSubTypeAllMultiZoneEffect(
             FilterControlledCreaturePermanent filterPermanent,
             FilterControlledCreatureSpell filterSpell,
             FilterOwnedCreatureCard filterCard
     ) {
+        this(filterPermanent, filterSpell, filterCard, null);
+    }
+
+    public AddCreatureSubTypeAllMultiZoneEffect(
+            FilterControlledCreaturePermanent filterPermanent,
+            FilterControlledCreatureSpell filterSpell,
+            FilterOwnedCreatureCard filterCard,
+            SubType chosenType
+    ) {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
 
         this.filterPermanent = filterPermanent;
         this.filterSpell = filterSpell;
         this.filterCard = filterCard;
+        this.chosenType = chosenType;
 
-        staticText = filterPermanent.getMessage() + " are the chosen type in addition to their other types. "
+        String typeMessage = "the chosen type";
+        if (chosenType != null) {
+            typeMessage = chosenType.getPluralName();
+        }
+
+        staticText = filterPermanent.getMessage() + " are " + typeMessage + " in addition to their other types. "
                 + "The same is true for " + filterSpell.getMessage()
                 + " and " + filterCard.getMessage() + " that aren't on the battlefield";
     }
@@ -46,6 +62,7 @@ public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
         this.filterPermanent = effect.filterPermanent;
         this.filterSpell = effect.filterSpell;
         this.filterCard = effect.filterCard;
+        this.chosenType = effect.chosenType;
     }
 
     @Override
@@ -57,7 +74,10 @@ public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         UUID controllerId = source.getControllerId();
         Player controller = game.getPlayer(controllerId);
-        SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
+        SubType subType = this.chosenType;
+        if (subType == null) {
+            subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
+        }
         if (controller == null || subType == null) {
             return false;
         }

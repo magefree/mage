@@ -19,6 +19,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         super("Duskmourn: House of Horror Commander", "DSC", ExpansionSet.buildDate(2024, 9, 27), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Aminatou's Augury", 71, Rarity.RARE, mage.cards.a.AminatousAugury.class));
         cards.add(new SetCardInfo("Arcane Signet", 92, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archon of Cruelty", 371, Rarity.MYTHIC, mage.cards.a.ArchonOfCruelty.class));
         cards.add(new SetCardInfo("Ash Barrens", 260, Rarity.COMMON, mage.cards.a.AshBarrens.class));
@@ -28,11 +29,20 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 96, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Crypt Ghast", 368, Rarity.MYTHIC, mage.cards.c.CryptGhast.class));
         cards.add(new SetCardInfo("Damn", 369, Rarity.MYTHIC, mage.cards.d.Damn.class));
+        cards.add(new SetCardInfo("Diabolic Vision", 87, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
         cards.add(new SetCardInfo("Exhume", 370, Rarity.MYTHIC, mage.cards.e.Exhume.class));
         cards.add(new SetCardInfo("Goryo's Vengeance", 372, Rarity.MYTHIC, mage.cards.g.GoryosVengeance.class));
         cards.add(new SetCardInfo("Growth Spiral", 88, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Living Death", 373, Rarity.MYTHIC, mage.cards.l.LivingDeath.class));
-        cards.add(new SetCardInfo("Sol Ring", 94, Rarity.COMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Mesa Enchantress", 68, Rarity.RARE, mage.cards.m.MesaEnchantress.class));
+        cards.add(new SetCardInfo("Metamorphosis Fanatic", 21, Rarity.RARE, mage.cards.m.MetamorphosisFanatic.class));
+        cards.add(new SetCardInfo("Moon-Blessed Cleric", 69, Rarity.UNCOMMON, mage.cards.m.MoonBlessedCleric.class));
+        cards.add(new SetCardInfo("Ponder", 73, Rarity.COMMON, mage.cards.p.Ponder.class));
+        cards.add(new SetCardInfo("Portent", 74, Rarity.COMMON, mage.cards.p.Portent.class));
+        cards.add(new SetCardInfo("Sol Ring", 94, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Telling Time", 75, Rarity.UNCOMMON, mage.cards.t.TellingTime.class));
+        cards.add(new SetCardInfo("Terminus", 70, Rarity.RARE, mage.cards.t.Terminus.class));
         cards.add(new SetCardInfo("They Came from the Pipes", 14, Rarity.RARE, mage.cards.t.TheyCameFromThePipes.class));
+        cards.add(new SetCardInfo("Utter End", 91, Rarity.RARE, mage.cards.u.UtterEnd.class));
     }
 }

@@ -8,6 +8,7 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.ManifestedDreadEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -65,6 +66,8 @@ public class ManifestDreadEffect extends OneShotEffect {
         }
         cards.retainZone(Zone.LIBRARY, game);
         player.moveCards(cards, Zone.GRAVEYARD, source, game);
+        cards.retainZone(Zone.GRAVEYARD, game);
+        game.fireEvent(new ManifestedDreadEvent(permanent, source, player.getId(), cards, game));
         return permanent;
     }
 }
