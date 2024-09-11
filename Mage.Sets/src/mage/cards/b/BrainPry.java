@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -60,7 +59,7 @@ class BrainPryEffect extends OneShotEffect {
         if (targetPlayer != null && controller != null && sourceObject != null && cardName != null) {
             boolean hasDiscarded = false;
             for (Card card : targetPlayer.getHand().getCards(game)) {
-                if (CardUtil.haveSameNames(card, cardName, game)) {
+                if (card.hasName(cardName, game)) {
                     targetPlayer.discard(card, false, source, game);
                     hasDiscarded = true;
                     break;

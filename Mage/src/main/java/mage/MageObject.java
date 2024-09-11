@@ -622,11 +622,11 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
      */
     void setIsAllNonbasicLandTypes(Game game, boolean value);
 
-    default boolean hasName(String name) {
-        return hasName(name, null);
-    }
-
     boolean hasName(String name, Game game);
+
+    default boolean sharesName(MageObject mageObject, Game game) {
+        return !mageObject.getName().isEmpty() && hasName(mageObject.getName(), game);
+    }
 
     void removePTCDA();
 }

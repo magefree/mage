@@ -12,7 +12,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -68,7 +67,7 @@ class ConjurersBanEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-        return CardUtil.haveSameNames(object, cardName, game);
+        return object.hasName(cardName, game);
     }
 
     @Override

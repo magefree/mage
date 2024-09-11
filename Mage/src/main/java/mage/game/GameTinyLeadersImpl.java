@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
-import mage.util.CardUtil;
 import mage.watchers.common.CommanderInfoWatcher;
 
 import java.util.HashSet;
@@ -92,7 +91,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
     private Card findCommander(Game game, Player player, String commanderName) {
         return game.getCommanderCardsFromAnyZones(player, CommanderCardType.ANY, Zone.ALL)
                 .stream()
-                .filter(c -> CardUtil.haveSameNames(c, commanderName, game))
+                .filter(c -> c.hasName(commanderName, game))
                 .findFirst()
                 .orElse(null);
     }

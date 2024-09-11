@@ -24,7 +24,6 @@ import mage.util.GameLog;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class AlhammarretHighArbiter extends CardImpl {
@@ -162,7 +161,7 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
             if (card == null) {
                 return false;
             }
-            return CardUtil.haveSameNames(card, cardName, game);
+            return card.hasName(cardName, game);
         }
         return false;
     }

@@ -29,7 +29,6 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.OwnerIdPredicate;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.CardState;
 import mage.game.Game;
@@ -773,20 +772,12 @@ public final class CardUtil {
         }
     }
 
-    public static boolean haveSameNames(String name1, String name2) {
-        return haveSameNames(name1, name2, false);
-    }
-
     public static boolean haveSameNames(MageObject object1, MageObject object2) {
-        return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName());
+        return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName(), false);
     }
 
     public static boolean haveSameNames(MageObject object, String needName, Game game) {
-        return containsName(object, needName, game);
-    }
-
-    public static boolean containsName(MageObject object, String name, Game game) {
-        return new NamePredicate(name).apply(object, game);
+        return object.hasName(needName, game);
     }
 
     public static boolean haveEmptyName(String name) {
@@ -1167,7 +1158,7 @@ public final class CardUtil {
                 .sum();
         int remainingValue = maxValue - selectedValue;
         Set<UUID> validTargets = new HashSet<>();
-        for (UUID id: possibleTargets) {
+        for (UUID id : possibleTargets) {
             MageObject mageObject = game.getObject(id);
             if (mageObject != null && valueMapper.applyAsInt(mageObject) <= remainingValue) {
                 validTargets.add(id);
