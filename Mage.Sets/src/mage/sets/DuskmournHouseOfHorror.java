@@ -65,6 +65,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Enduring Tenacity", 95, Rarity.RARE, mage.cards.e.EnduringTenacity.class));
         cards.add(new SetCardInfo("Enduring Vitality", 176, Rarity.RARE, mage.cards.e.EnduringVitality.class));
         cards.add(new SetCardInfo("Enter the Enigma", 52, Rarity.COMMON, mage.cards.e.EnterTheEnigma.class));
+        cards.add(new SetCardInfo("Entity Tracker", 53, Rarity.RARE, mage.cards.e.EntityTracker.class));
         cards.add(new SetCardInfo("Erratic Apparition", 54, Rarity.COMMON, mage.cards.e.ErraticApparition.class));
         cards.add(new SetCardInfo("Etched Cornfield", 258, Rarity.COMMON, mage.cards.e.EtchedCornfield.class));
         cards.add(new SetCardInfo("Ethereal Armor", 7, Rarity.UNCOMMON, mage.cards.e.EtherealArmor.class));
