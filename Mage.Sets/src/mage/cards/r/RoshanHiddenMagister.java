@@ -44,7 +44,7 @@ public final class RoshanHiddenMagister extends CardImpl {
 
         // Other creatures you control are Assassins in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
         this.addAbility(new SimpleStaticAbility(new AddCreatureSubTypeAllMultiZoneEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURES,
+                StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES,
                 filterSpells,
                 filterCards,
                 SubType.ASSASSIN

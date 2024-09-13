@@ -33,7 +33,6 @@ public final class ImpossibleInferno extends CardImpl {
                 "four or more card types among cards in your graveyard, exile the top card of your library. " +
                 "You may play it until the end of your next turn"
         ));
-        this.getSpellAbility().setAbilityWord(AbilityWord.DELIRIUM);
         this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
     }
 

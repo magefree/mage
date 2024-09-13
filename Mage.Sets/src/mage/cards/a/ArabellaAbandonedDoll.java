@@ -28,9 +28,7 @@ public final class ArabellaAbandonedDoll extends CardImpl {
         filter.add(new PowerPredicate(ComparisonType.OR_LESS, 2));
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
-            filter, null
-    );
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 1);
     private static final Hint hint = new ValueHint("Creatures you control with power 2 or less", xValue);
 
     public ArabellaAbandonedDoll(UUID ownerId, CardSetInfo setInfo) {

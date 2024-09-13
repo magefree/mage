@@ -48,7 +48,7 @@ public final class CaduceusStaffOfHermes extends CardImpl {
                         new PreventDamageToSourceEffect(Duration.WhileOnBattlefield, Integer.MAX_VALUE)
                                 .setText("Prevent all damage that would be dealt to this creature")
                 ), AttachmentType.EQUIPMENT), condition,
-                "and has \"Prevent all damage that would be dealt to this creature.\""
+                "and \"Prevent all damage that would be dealt to this creature.\""
         ));
         this.addAbility(ability);
 
