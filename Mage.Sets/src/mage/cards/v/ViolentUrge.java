@@ -5,6 +5,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -39,6 +40,7 @@ public final class ViolentUrge extends CardImpl {
                 DeliriumCondition.instance, AbilityWord.DELIRIUM.formatWord() + "If there are four or more " +
                 "card types among cards in your graveyard, that creature gains double strike until end of turn"
         ));
+        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
     }
 
     private ViolentUrge(final ViolentUrge card) {
