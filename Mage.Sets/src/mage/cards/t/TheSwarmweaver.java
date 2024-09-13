@@ -19,7 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.IzoniInsectToken;
+import mage.game.permanent.token.InsectBlackGreenFlyingToken;
 
 import java.util.UUID;
 
@@ -49,7 +49,7 @@ public final class TheSwarmweaver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When The Swarmweaver enters, create two 1/1 black and green Insect creature tokens with flying.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new IzoniInsectToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new InsectBlackGreenFlyingToken(), 2)));
 
         // Delirium -- As long as there are four or more card types among cards in your graveyard, Insects and Spiders you control get +1/+1 and have deathtouch.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(

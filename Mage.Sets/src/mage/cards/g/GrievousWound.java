@@ -15,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -76,10 +75,8 @@ class GrievousWoundTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!Optional
-                .ofNullable(getSourcePermanentIfItStillExists(game))
-                .map(Permanent::getAttachedTo)
-                .equals(event.getTargetId())) {
+        Permanent attachment = getSourcePermanentIfItStillExists(game);
+        if (attachment == null || !event.getTargetId().equals(attachment.getAttachedTo())) {
             return false;
         }
         this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));

@@ -58,7 +58,7 @@ public final class HedgeShredder extends CardImpl {
 class HedgeShredderTriggeredAbility extends TriggeredAbilityImpl {
 
     HedgeShredderTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect());
+        super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(true));
     }
 
     private HedgeShredderTriggeredAbility(final HedgeShredderTriggeredAbility ability) {

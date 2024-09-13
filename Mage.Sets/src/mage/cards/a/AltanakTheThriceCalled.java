@@ -16,6 +16,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -24,6 +25,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AltanakTheThriceCalled extends CardImpl {
+
+    private static final FilterLandCard filter = new FilterLandCard("land card from your graveyard");
 
     public AltanakTheThriceCalled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
@@ -47,7 +50,7 @@ public final class AltanakTheThriceCalled extends CardImpl {
                 Zone.HAND, new ReturnFromGraveyardToBattlefieldTargetEffect(true), new ManaCostsImpl<>("{1}{G}")
         );
         ability.addCost(new DiscardSourceCost());
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_LAND));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 

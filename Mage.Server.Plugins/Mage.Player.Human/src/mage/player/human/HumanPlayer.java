@@ -282,7 +282,7 @@ public class HumanPlayer extends PlayerImpl {
                 return;
             }
             if (logger.isDebugEnabled()) {
-                logger.debug("Setting game priority for " + getId() + " [" + DebugUtil.getMethodNameWithSource(2) + ']');
+                logger.debug("Setting game priority for " + getId() + " [" + DebugUtil.getMethodNameWithSource(1) + ']');
             }
             game.getState().setPriorityPlayerId(getId());
         }
@@ -313,7 +313,7 @@ public class HumanPlayer extends PlayerImpl {
         while (loop) {
             // start waiting for next answer
             response.clear();
-            response.setActiveAction(game, DebugUtil.getMethodNameWithSource(2));
+            response.setActiveAction(game, DebugUtil.getMethodNameWithSource(1));
             game.resumeTimer(getTurnControlledBy());
             responseOpenedForAnswer = true;
 

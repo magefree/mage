@@ -27,7 +27,7 @@ public final class KonaRescueBeastie extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Survival - At the beginning of your second main phase, if Kona, Rescue Beastie is tapped, you may put a permanent card from your hand onto the battlefield
-        this.addAbility(new SurvivalAbility(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A)));
+        this.addAbility(new SurvivalAbility(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_A_PERMANENT)));
     }
 
     private KonaRescueBeastie(final KonaRescueBeastie card) {

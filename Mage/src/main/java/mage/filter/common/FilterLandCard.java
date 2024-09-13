@@ -1,9 +1,6 @@
-
-
 package mage.filter.common;
 
 import mage.constants.CardType;
-import mage.constants.SuperType;
 import mage.filter.FilterCard;
 
 /**
@@ -18,12 +15,6 @@ public class FilterLandCard extends FilterCard {
     public FilterLandCard(String name) {
         super(name);
         this.add(CardType.LAND.getPredicate());
-    }
-
-    public static FilterLandCard basicLandCard() {
-        FilterLandCard filter = new FilterLandCard("basic land card");
-        filter.add(SuperType.BASIC.getPredicate());
-        return filter;
     }
 
     protected FilterLandCard(final FilterLandCard filter) {

@@ -9,6 +9,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -32,7 +33,7 @@ public final class BarbedFoliage extends CardImpl {
 
         // Whenever a creature attacks you, it loses flanking until end of turn.
         this.addAbility(new AttackedByCreatureTriggeredAbility(
-                new LoseAbilityTargetEffect(new FlankingAbility())
+                new LoseAbilityTargetEffect(new FlankingAbility(), Duration.EndOfTurn)
                         .setText("it loses flanking until end of turn"),
                 false, SetTargetPointer.PERMANENT
         ));

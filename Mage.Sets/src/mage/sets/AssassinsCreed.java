@@ -24,12 +24,14 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Abstergo Entertainment", 79, Rarity.RARE, mage.cards.a.AbstergoEntertainment.class));
         cards.add(new SetCardInfo("Achilles Davenport", 294, Rarity.RARE, mage.cards.a.AchillesDavenport.class));
         cards.add(new SetCardInfo("Adewale, Breaker of Chains", 44, Rarity.UNCOMMON, mage.cards.a.AdewaleBreakerOfChains.class));
+        cards.add(new SetCardInfo("Adrestia", 68, Rarity.UNCOMMON, mage.cards.a.Adrestia.class));
         cards.add(new SetCardInfo("Arbaaz Mir", 46, Rarity.UNCOMMON, mage.cards.a.ArbaazMir.class));
         cards.add(new SetCardInfo("Arno Dorian", 47, Rarity.UNCOMMON, mage.cards.a.ArnoDorian.class));
         cards.add(new SetCardInfo("Assassin Den", 281, Rarity.UNCOMMON, mage.cards.a.AssassinDen.class));
         cards.add(new SetCardInfo("Assassin Gauntlet", 12, Rarity.UNCOMMON, mage.cards.a.AssassinGauntlet.class));
         cards.add(new SetCardInfo("Assassin Initiate", 22, Rarity.UNCOMMON, mage.cards.a.AssassinInitiate.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 95, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
+        cards.add(new SetCardInfo("Aveline de Grandpre", 40, Rarity.RARE, mage.cards.a.AvelineDeGrandpre.class));
         cards.add(new SetCardInfo("Aya of Alexandria", 48, Rarity.RARE, mage.cards.a.AyaOfAlexandria.class));
         cards.add(new SetCardInfo("Ballad of the Black Flag", 13, Rarity.UNCOMMON, mage.cards.b.BalladOfTheBlackFlag.class));
         cards.add(new SetCardInfo("Basim Ibn Ishaq", 49, Rarity.RARE, mage.cards.b.BasimIbnIshaq.class));

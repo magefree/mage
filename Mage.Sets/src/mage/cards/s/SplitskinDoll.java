@@ -51,7 +51,7 @@ public final class SplitskinDoll extends CardImpl {
         // When Splitskin Doll enters, draw a card. Then discard a card unless you control another creature with power 2 or less.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1));
         ability.addEffect(new ConditionalOneShotEffect(
-                new DiscardControllerEffect(1), condition, "then discard " +
+                new DiscardControllerEffect(1), condition, "Then discard " +
                 "a card unless you control another creature with power 2 or less"
         ));
         this.addAbility(ability.addHint(hint));

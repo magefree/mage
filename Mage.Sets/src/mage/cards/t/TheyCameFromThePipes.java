@@ -31,7 +31,7 @@ public final class TheyCameFromThePipes extends CardImpl {
 
         // When They Came from the Pipes enters, manifest dread twice.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ManifestDreadEffect());
-        ability.addEffect(new ManifestDreadEffect().setText("twice"));
+        ability.addEffect(new ManifestDreadEffect().setText(" twice"));
         this.addAbility(ability);
 
         // Whenever a face-down creature you control enters, draw a card.

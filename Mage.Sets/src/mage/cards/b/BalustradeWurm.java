@@ -2,6 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldWithCounterEffect;
@@ -28,6 +29,8 @@ public final class BalustradeWurm extends CardImpl {
         this.toughness = new MageInt(5);
 
         // This spell can't be countered.
+        this.addAbility(new CantBeCounteredSourceAbility());
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 

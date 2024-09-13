@@ -11,11 +11,10 @@ import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 import java.util.UUID;
 
@@ -24,9 +23,12 @@ import java.util.UUID;
  */
 public final class ArabellaAbandonedDoll extends CardImpl {
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
-            new FilterControlledCreaturePermanent("creatures you control with power 2 or less"), null
-    );
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures you control with power 2 or less");
+    static {
+        filter.add(new PowerPredicate(ComparisonType.OR_LESS, 2));
+    }
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 1);
     private static final Hint hint = new ValueHint("Creatures you control with power 2 or less", xValue);
 
     public ArabellaAbandonedDoll(UUID ownerId, CardSetInfo setInfo) {
@@ -42,7 +44,7 @@ public final class ArabellaAbandonedDoll extends CardImpl {
                 new DamagePlayersEffect(xValue, TargetController.OPPONENT)
                         .setText("it deals X damage to each opponent")
         );
-        ability.addEffect(new GainLifeEffect(xValue));
+        ability.addEffect(new GainLifeEffect(xValue).setText("and you gain X life, where X is the number of creatures you control with power 2 or less"));
         this.addAbility(ability.addHint(hint));
     }
 

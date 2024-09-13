@@ -25,7 +25,7 @@ public final class VengefulPossession extends CardImpl {
 
         // Gain control of target creature until end of turn. Untap it. It gains haste until end of turn. You may discard a card. If you do, draw a card.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap it"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ).setText("It gains haste until end of turn."));

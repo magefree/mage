@@ -29,7 +29,8 @@ public final class ClockworkPercussionist extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Clockwork Percussionist dies, exile the top card of your library. You may play it until the end of your next turn.
-        this.addAbility(new DiesSourceTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndOfYourNextTurn)));
+        this.addAbility(new DiesSourceTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndOfYourNextTurn)
+                .withTextOptions("it", true)));
     }
 
     private ClockworkPercussionist(final ClockworkPercussionist card) {

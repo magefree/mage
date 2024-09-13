@@ -33,7 +33,7 @@ public final class CynicalLoner extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
 
         // Survival -- At the beginning of your second main phase, if Cynical Loner is tapped, you may search your library for a card, put it into your graveyard, then shuffle.
-        this.addAbility(new SurvivalAbility(new SearchLibraryPutInGraveyardEffect(false)));
+        this.addAbility(new SurvivalAbility(new SearchLibraryPutInGraveyardEffect(false), true));
     }
 
     private CynicalLoner(final CynicalLoner card) {
