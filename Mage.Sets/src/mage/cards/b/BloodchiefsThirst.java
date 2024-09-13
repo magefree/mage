@@ -40,7 +40,7 @@ public final class BloodchiefsThirst extends CardImpl {
                 "Destroy target creature or planeswalker with mana value 2 or less. " +
                         "If this spell was kicked, instead destroy target creature or planeswalker."
         ));
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
                 new TargetPermanent(filter), new TargetCreatureOrPlaneswalker()));
     }

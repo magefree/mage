@@ -7,6 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.GiftType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
@@ -23,6 +24,7 @@ public final class IntoTheFloodMaw extends CardImpl {
     private static final FilterPermanent playableFilter = new FilterPermanent("creature or nonland permanent");
 
     static {
+        playableFilter.add(TargetController.OPPONENT.getControllerPredicate());
         playableFilter.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 Predicates.not(CardType.LAND.getPredicate())
