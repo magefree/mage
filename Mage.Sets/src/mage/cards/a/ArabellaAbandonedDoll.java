@@ -44,7 +44,7 @@ public final class ArabellaAbandonedDoll extends CardImpl {
                 new DamagePlayersEffect(xValue, TargetController.OPPONENT)
                         .setText("it deals X damage to each opponent")
         );
-        ability.addEffect(new GainLifeEffect(xValue).concatBy("and"));
+        ability.addEffect(new GainLifeEffect(xValue).setText("and you gain X life, where X is the number of creatures you control with power 2 or less"));
         this.addAbility(ability.addHint(hint));
     }
 
