@@ -116,6 +116,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Overflowing Basin", 293, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Oversimplify", 228, Rarity.RARE, mage.cards.o.Oversimplify.class));
         cards.add(new SetCardInfo("Overwhelming Stampede", 192, Rarity.RARE, mage.cards.o.OverwhelmingStampede.class));
+        cards.add(new SetCardInfo("Persistent Constrictor", 22, Rarity.RARE, mage.cards.p.PersistentConstrictor.class));
         cards.add(new SetCardInfo("Ponder", 73, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Portent", 74, Rarity.COMMON, mage.cards.p.Portent.class));
         cards.add(new SetCardInfo("Primordial Mist", 123, Rarity.RARE, mage.cards.p.PrimordialMist.class));
