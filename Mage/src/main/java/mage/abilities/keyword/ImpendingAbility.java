@@ -7,6 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.AlternativeSourceCostsImpl;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
@@ -39,7 +40,7 @@ public class ImpendingAbility extends AlternativeSourceCostsImpl {
     private static final Condition counterCondition = new SourceHasCounterCondition(CounterType.TIME, 0, 0);
 
     public ImpendingAbility(int amount, String manaString) {
-        super(IMPENDING_KEYWORD + ' ' + amount, String.format(IMPENDING_REMINDER, CardUtil.numberToText(amount)), manaString);
+        super(IMPENDING_KEYWORD + ' ' + amount, String.format(IMPENDING_REMINDER, CardUtil.numberToText(amount)), new ManaCostsImpl<>(manaString), IMPENDING_KEYWORD);
         this.setRuleAtTheTop(true);
         this.addSubAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
                 new AddCountersSourceEffect(CounterType.TIME.createInstance(amount)), ImpendingCondition.instance, ""
