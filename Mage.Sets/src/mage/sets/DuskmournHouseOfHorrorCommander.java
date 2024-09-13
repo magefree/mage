@@ -80,6 +80,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ezuri's Predation", 178, Rarity.RARE, mage.cards.e.EzurisPredation.class));
         cards.add(new SetCardInfo("Feed the Swarm", 78, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Flooded Grove", 276, Rarity.RARE, mage.cards.f.FloodedGrove.class));
+        cards.add(new SetCardInfo("Gleeful Arsonist", 27, Rarity.RARE, mage.cards.g.GleefulArsonist.class));
         cards.add(new SetCardInfo("Goryo's Vengeance", 372, Rarity.MYTHIC, mage.cards.g.GoryosVengeance.class));
         cards.add(new SetCardInfo("Grapple with the Past", 82, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Greater Tanuki", 181, Rarity.COMMON, mage.cards.g.GreaterTanuki.class));
