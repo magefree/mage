@@ -191,6 +191,7 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Plumecreed Mentor", 228, Rarity.UNCOMMON, mage.cards.p.PlumecreedMentor.class));
         cards.add(new SetCardInfo("Polliwallop", 189, Rarity.COMMON, mage.cards.p.Polliwallop.class));
         cards.add(new SetCardInfo("Pond Prophet", 229, Rarity.COMMON, mage.cards.p.PondProphet.class));
+        cards.add(new SetCardInfo("Portent of Calamity", 66, Rarity.RARE, mage.cards.p.PortentOfCalamity.class));
         cards.add(new SetCardInfo("Psychic Whorl", 105, Rarity.COMMON, mage.cards.p.PsychicWhorl.class));
         cards.add(new SetCardInfo("Quaketusk Boar", 146, Rarity.UNCOMMON, mage.cards.q.QuaketuskBoar.class));
         cards.add(new SetCardInfo("Rabbit Response", 26, Rarity.COMMON, mage.cards.r.RabbitResponse.class));
