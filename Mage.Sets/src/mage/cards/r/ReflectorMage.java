@@ -16,9 +16,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -59,7 +57,8 @@ class ReflectorMageEffect extends OneShotEffect {
 
     ReflectorMageEffect() {
         super(Outcome.Benefit);
-        this.staticText = "return target creature an opponent controls to its owner's hand. That creature's owner can't cast spells with the same name as that creature until your next turn";
+        this.staticText = "return target creature an opponent controls to its owner's hand. " +
+                "That creature's owner can't cast spells with the same name as that creature until your next turn";
     }
 
     private ReflectorMageEffect(final ReflectorMageEffect effect) {
@@ -74,35 +73,31 @@ class ReflectorMageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (targetCreature != null) {
-                controller.moveCards(targetCreature, Zone.HAND, source, game);
-                if (!CardUtil.haveEmptyName(targetCreature)) { // if the creature had no name, no restrict effect will be created
-                    game.addEffect(new ExclusionRitualReplacementEffect(targetCreature.getName(), targetCreature.getOwnerId()), source);
-                }
-            }
-            return true;
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || targetCreature == null) {
+            return false;
         }
-        return false;
+        controller.moveCards(targetCreature, Zone.HAND, source, game);
+        game.addEffect(new ReflectorMageReplacementEffect(targetCreature, targetCreature.getOwnerId()), source);
+        return true;
     }
 }
 
-class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl {
+class ReflectorMageReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private final String creatureName;
+    private final Permanent creature;
     private final UUID ownerId;
 
-    ExclusionRitualReplacementEffect(String creatureName, UUID ownerId) {
+    ReflectorMageReplacementEffect(Permanent creature, UUID ownerId) {
         super(Duration.UntilYourNextTurn, Outcome.Detriment);
         staticText = "That creature's owner can't cast spells with the same name as that creature until your next turn";
-        this.creatureName = creatureName;
+        this.creature = creature.copy();
         this.ownerId = ownerId;
     }
 
-    private ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
+    private ReflectorMageReplacementEffect(final ReflectorMageReplacementEffect effect) {
         super(effect);
-        this.creatureName = effect.creatureName;
+        this.creature = effect.creature.copy();
         this.ownerId = effect.ownerId;
     }
 
@@ -114,18 +109,12 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
-        if (spellAbility == null) {
-            return false;
-        }
         Card card = spellAbility.getCharacteristics(game);
-        if (card == null) {
-            return false;
-        }
-        return CardUtil.haveSameNames(card, creatureName, game) && Objects.equals(ownerId, card.getOwnerId());
+        return spellAbility != null && card != null && card.isOwnedBy(ownerId) && card.sharesName(creature, game);
     }
 
     @Override
-    public ExclusionRitualReplacementEffect copy() {
-        return new ExclusionRitualReplacementEffect(this);
+    public ReflectorMageReplacementEffect copy() {
+        return new ReflectorMageReplacementEffect(this);
     }
 }

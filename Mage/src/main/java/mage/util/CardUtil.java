@@ -776,6 +776,10 @@ public final class CardUtil {
         return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName(), false);
     }
 
+    /**
+     * Replaced by hasName method, kept to reduce refactoring of old cards
+     */
+    @Deprecated
     public static boolean haveSameNames(MageObject object, String needName, Game game) {
         return object.hasName(needName, game);
     }

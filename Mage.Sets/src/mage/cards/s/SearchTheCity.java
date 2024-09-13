@@ -1,28 +1,30 @@
 package mage.cards.s;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.PlayCardTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+import mage.target.TargetCard;
+import mage.target.common.TargetCardInExile;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -37,7 +39,6 @@ public final class SearchTheCity extends CardImpl {
 
         // Whenever you play a card with the same name as one of the exiled cards, you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with Search the City, sacrifice it. If you do, take an extra turn after this one.
         this.addAbility(new SearchTheCityTriggeredAbility());
-
     }
 
     private SearchTheCity(final SearchTheCity card) {
@@ -64,17 +65,10 @@ class SearchTheCityExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            // move cards from library to exile
-            for (int i = 0; i < 5; i++) {
-                if (player.getLibrary().hasCards()) {
-                    Card topCard = player.getLibrary().getFromTop(game);
-                    topCard.moveToExile(source.getSourceId(), "Cards exiled by Search the City", source, game);
-                }
-            }
-            return true;
-        }
-        return false;
+        return player != null && player.moveCardsToExile(
+                player.getLibrary().getTopCards(game, 5), source, game, true,
+                CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
+        );
     }
 
     @Override
@@ -86,8 +80,8 @@ class SearchTheCityExileEffect extends OneShotEffect {
 class SearchTheCityTriggeredAbility extends PlayCardTriggeredAbility {
 
     public SearchTheCityTriggeredAbility() {
-        super(TargetController.YOU, Zone.BATTLEFIELD, new SearchTheCityExiledCardToHandEffect(), true);
-        setTriggerPhrase("Whenever you play a card with the same name as one of the exiled cards, " );
+        super(TargetController.YOU, Zone.BATTLEFIELD, new SearchTheCityExiledCardToHandEffect());
+        setTriggerPhrase("Whenever you play a card with the same name as one of the exiled cards, ");
     }
 
     private SearchTheCityTriggeredAbility(final SearchTheCityTriggeredAbility ability) {
@@ -99,30 +93,33 @@ class SearchTheCityTriggeredAbility extends PlayCardTriggeredAbility {
         if (!super.checkTrigger(event, game)) {
             return false;
         }
-        String cardName = "";
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null) {
-                cardName = spell.getName();
-            }
+        MageObject object;
+        switch (event.getType()) {
+            case SPELL_CAST:
+                object = game.getStack().getSpell(event.getTargetId());
+                break;
+            case LAND_PLAYED:
+                object = game.getCard(event.getTargetId());
+                break;
+            default:
+                object = null;
         }
-        if (event.getType() == GameEvent.EventType.LAND_PLAYED) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null) {
-                cardName = card.getName();
-            }
-        }
-        if (cardName.isEmpty()) {
+        if (object == null) {
             return false;
         }
-        ExileZone searchTheCityExileZone = game.getExile().getExileZone(this.getSourceId());
-        FilterCard filter = new FilterCard();
-        filter.add(new NamePredicate(cardName));
-
-        if (searchTheCityExileZone.count(filter, game) == 0) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, this));
+        if (exileZone == null || exileZone.isEmpty()) {
             return false;
         }
-        this.getEffects().get(0).setValue("cardName", cardName);
+        Set<Card> cards = exileZone
+                .getCards(game)
+                .stream()
+                .filter(card -> card.sharesName(object, game))
+                .collect(Collectors.toSet());
+        if (cards.isEmpty()) {
+            return false;
+        }
+        this.getEffects().setTargetPointer(new FixedTargets(cards, game));
         return true;
     }
 
@@ -136,7 +133,8 @@ class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
 
     SearchTheCityExiledCardToHandEffect() {
         super(Outcome.DrawCard);
-        staticText = "you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with {this}, sacrifice it. If you do, take an extra turn after this one";
+        staticText = "you may put one of those cards with that name into its owner's hand. Then if there are " +
+                "no cards exiled with {this}, sacrifice it. If you do, take an extra turn after this one";
     }
 
     private SearchTheCityExiledCardToHandEffect(final SearchTheCityExiledCardToHandEffect effect) {
@@ -145,33 +143,27 @@ class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String cardName = (String) this.getValue("cardName");
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
-        ExileZone searchTheCityExileZone = game.getExile().getExileZone(source.getSourceId());
-        if (cardName != null
-                && searchTheCityExileZone != null) {
-            for (Card card : searchTheCityExileZone.getCards(game)) {
-                if (CardUtil.haveSameNames(card, cardName, game)) {
-                    if (controller.moveCards(card, Zone.HAND, source, game)) {
-                        game.informPlayers("Search the City: put " + card.getName() + " into owner's hand");
-                    }
-                    searchTheCityExileZone.remove(card);
-                    if (searchTheCityExileZone.isEmpty()) {
-                        Permanent permanent = game.getPermanent(source.getSourceId());
-                        if (permanent != null) {
-                            permanent.sacrifice(source, game);
-                            // extra turn
-                            game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
-                        }
-                    }
-                    return true;
-                }
-            }
+        Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
+        cards.retainZone(Zone.EXILED, game);
+        TargetCard target = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD);
+        controller.choose(outcome, cards, target, source, game);
+        Card card = game.getCard(target.getFirstTarget());
+        if (card != null) {
+            controller.moveCards(card, Zone.HAND, source, game);
         }
-        return false;
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        if (exileZone != null && !exileZone.isEmpty()) {
+            return true;
+        }
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (sourcePermanent != null && sourcePermanent.sacrifice(source, game)) {
+            game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
+        }
+        return true;
     }
 
     @Override

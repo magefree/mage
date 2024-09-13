@@ -200,18 +200,7 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
                 for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
                     StackObject stackObject = iterator.next();
                     MageObject mageObject = game.getObject(card.getId());
-                    String name1;
-                    String name2;
-                    if (mageObject instanceof SplitCard) {
-                        name1 = ((SplitCard) mageObject).getLeftHalfCard().getName();
-                        name2 = ((SplitCard) mageObject).getRightHalfCard().getName();
-                    } else {
-                        // modal double faces cards, adventure cards -- all have one name in non stack/battlefield zone
-                        name1 = mageObject.getName();
-                        name2 = name1;
-                    }
-
-                    if (CardUtil.haveSameNames(stackObject, name1, game) || CardUtil.haveSameNames(stackObject, name2, game)) {
+                    if (stackObject.sharesName(mageObject, game)) {
                         Spell spell = (Spell) stackObject;
                         game.getStack().counter(stackObject.getId(), source, game);
                         game.informPlayers(sourceObject.getLogName() + ": spell " + spell.getIdName() + " was countered.");
