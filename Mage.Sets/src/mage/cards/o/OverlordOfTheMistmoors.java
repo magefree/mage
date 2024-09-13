@@ -26,7 +26,7 @@ public final class OverlordOfTheMistmoors extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Impending 4--{2}{W}{W}
-        this.addAbility(new ImpendingAbility("{2}{W}{W}"));
+        this.addAbility(new ImpendingAbility(4, "{2}{W}{W}"));
 
         // Whenever Overlord of the Mistmoors enters or attacks, create two 2/1 white Insect creature tokens with flying.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new CreateTokenEffect(new InsectWhiteToken(), 2)));

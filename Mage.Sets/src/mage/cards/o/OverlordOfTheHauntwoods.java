@@ -26,7 +26,7 @@ public final class OverlordOfTheHauntwoods extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Impending 4--{1}{G}{G}
-        this.addAbility(new ImpendingAbility("{1}{G}{G}"));
+        this.addAbility(new ImpendingAbility(4, "{1}{G}{G}"));
 
         // Whenever Overlord of the Hauntwoods enters or attacks, create a tapped colorless land token named Everywhere that is every basic land type.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(

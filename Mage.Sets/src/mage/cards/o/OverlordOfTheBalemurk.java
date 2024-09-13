@@ -36,7 +36,7 @@ public final class OverlordOfTheBalemurk extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Impending 5--{1}{B}
-        this.addAbility(new ImpendingAbility("{1}{B}", 5));
+        this.addAbility(new ImpendingAbility(5, "{1}{B}"));
 
         // Whenever Overlord of the Balemurk enters or attacks, mill four cards, then you may return a non-Avatar creature card or a planeswalker card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new MillCardsControllerEffect(4));

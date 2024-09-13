@@ -27,7 +27,7 @@ public final class OverlordOfTheBoilerbilges extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Impending 4--{2}{R}{R}
-        this.addAbility(new ImpendingAbility("{2}{R}{R}"));
+        this.addAbility(new ImpendingAbility(4, "{2}{R}{R}"));
 
         // Whenever Overlord of the Boilerbilges enters or attacks, it deals 4 damage to any target.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(4));
