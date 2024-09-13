@@ -35,7 +35,8 @@ public final class InfernalPhantom extends CardImpl {
         this.addAbility(new EerieAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)));
 
         // When Infernal Phantom dies, it deals damage equal to its power to any target.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(xValue, "it"));
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(xValue, "it")
+                .setText("it deals damage equal to its power to any target"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

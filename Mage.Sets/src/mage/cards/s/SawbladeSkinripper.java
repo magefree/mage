@@ -103,12 +103,12 @@ enum SawbladeSkinripperValue implements DynamicValue {
     }
 
     @Override
-    public String getMessage() {
+    public String toString() {
         return "that much";
     }
 
     @Override
-    public String toString() {
+    public String getMessage() {
         return "";
     }
 }

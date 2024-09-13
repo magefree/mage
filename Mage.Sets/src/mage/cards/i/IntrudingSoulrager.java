@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 
@@ -35,7 +36,7 @@ public final class IntrudingSoulrager extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // {T}, Sacrifice a Room: Intruding Soulrager deals 2 damage to each opponent. Draw a card.
-        Ability ability = new SimpleActivatedAbility(new DamagePlayersEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamagePlayersEffect(2, TargetController.OPPONENT), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter));
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);

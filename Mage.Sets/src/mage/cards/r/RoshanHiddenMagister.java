@@ -26,8 +26,8 @@ import mage.filter.predicate.card.FaceDownPredicate;
 public final class RoshanHiddenMagister extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Face-down creatures");
-    public static final FilterControlledCreatureSpell filterSpells = new FilterControlledCreatureSpell("creature spells you control");
-    public static final FilterOwnedCreatureCard filterCards = new FilterOwnedCreatureCard("creature cards you own");
+    private static final FilterControlledCreatureSpell filterSpells = new FilterControlledCreatureSpell("creature spells you control");
+    private static final FilterOwnedCreatureCard filterCards = new FilterOwnedCreatureCard("creature cards you own");
 
     static {
         filter.add(FaceDownPredicate.instance);
@@ -44,7 +44,7 @@ public final class RoshanHiddenMagister extends CardImpl {
 
         // Other creatures you control are Assassins in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
         this.addAbility(new SimpleStaticAbility(new AddCreatureSubTypeAllMultiZoneEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURES,
+                StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES,
                 filterSpells,
                 filterCards,
                 SubType.ASSASSIN
@@ -59,10 +59,10 @@ public final class RoshanHiddenMagister extends CardImpl {
 
         // Whenever a permanent you control is turned face up, you draw a card and you lose 1 life.
         Ability ability = new TurnedFaceUpAllTriggeredAbility(
-                new DrawCardSourceControllerEffect(1),
+                new DrawCardSourceControllerEffect(1, true),
                 StaticFilters.FILTER_CONTROLLED_A_PERMANENT
         );
-        ability.addEffect(new LoseLifeSourceControllerEffect(1));
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 

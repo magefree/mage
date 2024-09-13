@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class GetOut extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature or enchantment spell");
-    private static final FilterPermanent filter2 = new FilterPermanent("creatures and/or enchantments you own to your hand");
+    private static final FilterPermanent filter2 = new FilterPermanent("creatures and/or enchantments you own");
     private static final Predicate<MageObject> predicate = Predicates.or(
             CardType.CREATURE.getPredicate(),
             CardType.ENCHANTMENT.getPredicate()
@@ -44,7 +44,7 @@ public final class GetOut extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
 
         // * Return one or two target creatures and/or enchantments you own to your hand.
-        this.getSpellAbility().addMode(new Mode(new ReturnToHandTargetEffect())
+        this.getSpellAbility().addMode(new Mode(new ReturnToHandTargetEffect().setText("return one or two target creatures and/or enchantments you own to your hand"))
                 .addTarget(new TargetPermanent(1, 2, filter2)));
     }
 

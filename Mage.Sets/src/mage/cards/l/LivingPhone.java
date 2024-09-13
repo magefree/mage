@@ -35,7 +35,7 @@ public final class LivingPhone extends CardImpl {
 
         // When Living Phone dies, look at the top five cards of your library. You may reveal a creature card with power 2 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new DiesSourceTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                4, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM
+                5, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM
         )));
     }
 

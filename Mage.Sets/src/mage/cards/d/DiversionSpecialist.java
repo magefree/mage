@@ -33,7 +33,8 @@ public final class DiversionSpecialist extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // {1}, Sacrifice another creature or enchantment: Exile the top card of your library. You may play it this turn.
-        Ability ability = new SimpleActivatedAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+                .withTextOptions("it", true), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ANOTHER_CREATURE_OR_ENCHANTMENT));
         this.addAbility(ability);
     }

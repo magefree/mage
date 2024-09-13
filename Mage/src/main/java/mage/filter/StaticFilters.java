@@ -360,6 +360,7 @@ public final class StaticFilters {
     public static final FilterPermanent FILTER_PERMANENT_ANOTHER_CREATURE_OR_ENCHANTMENT = new FilterPermanent("another creature or enchantment");
 
     static {
+        FILTER_PERMANENT_ANOTHER_CREATURE_OR_ENCHANTMENT.add(AnotherPredicate.instance);
         FILTER_PERMANENT_ANOTHER_CREATURE_OR_ENCHANTMENT.add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()

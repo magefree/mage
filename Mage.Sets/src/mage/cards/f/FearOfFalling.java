@@ -9,6 +9,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -39,9 +40,9 @@ public final class FearOfFalling extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Fear of Falling attacks, target creature defending player controls gets -2/-0 and loses flying until your next turn.
-        Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(-2, 0)
+        Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(-2, 0, Duration.UntilYourNextTurn)
                 .setText("target creature defending player controls gets -2/-0"));
-        ability.addEffect(new LoseAbilityTargetEffect(FlyingAbility.getInstance()).setText("and loses flying"));
+        ability.addEffect(new LoseAbilityTargetEffect(FlyingAbility.getInstance(), Duration.UntilYourNextTurn).setText("and loses flying until your next turn"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

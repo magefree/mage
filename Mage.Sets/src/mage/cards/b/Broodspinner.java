@@ -16,7 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.IzoniInsectToken;
+import mage.game.permanent.token.InsectBlackGreenFlyingToken;
 
 import java.util.UUID;
 
@@ -40,8 +40,9 @@ public final class Broodspinner extends CardImpl {
 
         // {4}{B}{G}, {T}, Sacrifice Broodspinner: Create a number of 1/1 black and green Insect creature tokens with flying equal to the number of card types among cards in your graveyard.
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(
-                new IzoniInsectToken(), CardTypesInGraveyardCount.YOU
-        ), new ManaCostsImpl<>("{4}{B}{G}"));
+                new InsectBlackGreenFlyingToken(), CardTypesInGraveyardCount.YOU
+        ).setText("create a number of 1/1 black and green Insect creature tokens with flying equal to the number of card types among cards in your graveyard"),
+                new ManaCostsImpl<>("{4}{B}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability.addHint(CardTypesInGraveyardHint.YOU));
