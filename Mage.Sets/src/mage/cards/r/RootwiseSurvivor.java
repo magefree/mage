@@ -13,8 +13,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -38,8 +39,9 @@ public final class RootwiseSurvivor extends CardImpl {
         Ability ability = new SurvivalAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)));
         ability.addEffect(new BecomesCreatureTargetEffect(new CreatureToken(
                 0, 0, "0/0 Elemental creature"
-        ).withSubType(SubType.ELEMENTAL), false, false, Duration.EndOfTurn));
-        ability.addTarget(new TargetLandPermanent(0, 1));
+        ).withSubType(SubType.ELEMENTAL), false, false, Duration.Custom)
+                .setText("That land becomes a 0/0 Elemental creature in addition to its other types"));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         ability.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.UntilYourNextTurn
         ).setText("it gains haste until your next turn"));
