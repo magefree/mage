@@ -33,6 +33,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Baseball Bat", 209, Rarity.UNCOMMON, mage.cards.b.BaseballBat.class));
         cards.add(new SetCardInfo("Bashful Beastie", 169, Rarity.COMMON, mage.cards.b.BashfulBeastie.class));
         cards.add(new SetCardInfo("Bear Trap", 243, Rarity.COMMON, mage.cards.b.BearTrap.class));
+        cards.add(new SetCardInfo("Bedhead Beastie", 125, Rarity.COMMON, mage.cards.b.BedheadBeastie.class));
         cards.add(new SetCardInfo("Betrayer's Bargain", 126, Rarity.UNCOMMON, mage.cards.b.BetrayersBargain.class));
         cards.add(new SetCardInfo("Blazemire Verge", 256, Rarity.RARE, mage.cards.b.BlazemireVerge.class));
         cards.add(new SetCardInfo("Bleeding Woods", 257, Rarity.COMMON, mage.cards.b.BleedingWoods.class));
