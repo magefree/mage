@@ -55,6 +55,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Citanul Hierophants", 81, Rarity.RARE, mage.cards.c.CitanulHierophants.class));
         cards.add(new SetCardInfo("Command Tower", 96, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 244, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
+        cards.add(new SetCardInfo("Convert to Slime", 37, Rarity.RARE, mage.cards.c.ConvertToSlime.class));
         cards.add(new SetCardInfo("Counterspell", 114, Rarity.COMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Crypt Ghast", 368, Rarity.MYTHIC, mage.cards.c.CryptGhast.class));
         cards.add(new SetCardInfo("Cultivate", 174, Rarity.COMMON, mage.cards.c.Cultivate.class));
