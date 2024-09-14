@@ -38,7 +38,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     private int maxPawPrints;
     private Filter maxModesFilter; // calculates the max number of available modes
     private Condition moreCondition; // allows multiple modes choose (example: choose one... if condition, you may choose both)
-    private int moreLimit = Integer.MAX_VALUE; // if multiple modes are allowed, this limits how many additional modes may be chosen (usually doesn't need to change)
+    private int moreLimit; // if multiple modes are allowed, this limits how many additional modes may be chosen
 
     private boolean limitUsageByOnce = false; // limit mode selection to once per game
     private boolean limitUsageResetOnNewTurn = false; // reset once per game limit on new turn, example: Galadriel, Light of Valinor
@@ -303,12 +303,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         this.put(mode.getId(), mode);
     }
 
-    public void setMoreCondition(Condition moreCondition) {
-        this.moreCondition = moreCondition;
-    }
-
-    public void setMoreLimit(int moreLimit) {
+    public void setMoreCondition(int moreLimit, Condition moreCondition) {
         this.moreLimit = moreLimit;
+        this.moreCondition = moreCondition;
     }
 
     private boolean isAlreadySelectedModesOutdated(Game game, Ability source) {

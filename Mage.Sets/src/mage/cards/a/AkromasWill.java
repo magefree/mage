@@ -33,7 +33,7 @@ public final class AkromasWill extends CardImpl {
         this.getSpellAbility().getModes().setChooseText(
                 "Choose one. If you control a commander as you cast this spell, you may choose both instead."
         );
-        this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
+        this.getSpellAbility().getModes().setMoreCondition(2, ControlACommanderCondition.instance);
 
         // • Creatures you control gain flying, vigilance, and double strike until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
