@@ -110,6 +110,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Growing Dread", 216, Rarity.UNCOMMON, mage.cards.g.GrowingDread.class));
         cards.add(new SetCardInfo("Hand That Feeds", 139, Rarity.COMMON, mage.cards.h.HandThatFeeds.class));
         cards.add(new SetCardInfo("Hardened Escort", 16, Rarity.COMMON, mage.cards.h.HardenedEscort.class));
+        cards.add(new SetCardInfo("Haunted Screen", 250, Rarity.UNCOMMON, mage.cards.h.HauntedScreen.class));
         cards.add(new SetCardInfo("Hedge Shredder", 183, Rarity.RARE, mage.cards.h.HedgeShredder.class));
         cards.add(new SetCardInfo("Horrid Vigor", 184, Rarity.COMMON, mage.cards.h.HorridVigor.class));
         cards.add(new SetCardInfo("House Cartographer", 185, Rarity.UNCOMMON, mage.cards.h.HouseCartographer.class));
