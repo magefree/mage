@@ -1,12 +1,9 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -17,6 +14,8 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.watchers.common.CreaturesDiedWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +34,7 @@ public final class SeasonOfLoss extends CardImpl {
 
         // {P} -- Each player sacrifices a creature.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(1, StaticFilters.FILTER_PERMANENT_CREATURE));
-        this.spellAbility.getModes().getMode().withPawPrintValue(1);
+        this.getSpellAbility().getModes().getMode().withPawPrintValue(1);
 
         // {P}{P} -- Draw a card for each creature you controlled that died this turn.
         Mode mode2 = new Mode(new DrawCardSourceControllerEffect(SeasonOfLossValue.instance));

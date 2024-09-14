@@ -44,7 +44,7 @@ public final class SeasonOfWeaving extends CardImpl {
 
         // {P} -- Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.spellAbility.getModes().getMode().withPawPrintValue(1);
+        this.getSpellAbility().getModes().getMode().withPawPrintValue(1);
 
         // {P}{P} -- Choose an artifact or creature you control. Create a token that's a copy of it.
         Mode mode2 = new Mode(new SeasonOfWeavingEffect());

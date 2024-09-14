@@ -40,7 +40,7 @@ public final class SeasonOfTheBurrow extends CardImpl {
 
         // {P} -- Create a 1/1 white Rabbit creature token.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RabbitToken()));
-        this.spellAbility.getModes().getMode().withPawPrintValue(1);
+        this.getSpellAbility().getModes().getMode().withPawPrintValue(1);
 
         // {P}{P} -- Exile target nonland permanent. Its controller draws a card.
         Mode mode2 = new Mode(new ExileTargetEffect());
