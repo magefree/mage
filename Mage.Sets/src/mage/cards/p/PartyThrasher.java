@@ -21,7 +21,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.targetpointer.FixedTargets;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -118,7 +118,7 @@ class PartyThrasherEffect extends OneShotEffect {
         exileZone.setCleanupOnEndTurn(true);
         game.getExile().moveToAnotherZone(card, game, exileZone);
         game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn)
-                .setTargetPointer(new FixedTargets(cards, game)), source);
+                .setTargetPointer(new FixedTarget(card, game)), source);
         return true;
     }
 
