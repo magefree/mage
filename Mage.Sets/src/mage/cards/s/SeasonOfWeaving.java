@@ -51,7 +51,8 @@ public final class SeasonOfWeaving extends CardImpl {
         this.getSpellAbility().addMode(mode2.withPawPrintValue(2));
 
         // {P}{P}{P} -- Return each nonland, nontoken permanent to its owner's hand.
-        Mode mode3 = new Mode(new ReturnToHandFromBattlefieldAllEffect(filter));
+        Mode mode3 = new Mode(new ReturnToHandFromBattlefieldAllEffect(filter)
+                .setText("return each nonland, nontoken permanent to its owner's hand"));
         this.getSpellAbility().addMode(mode3.withPawPrintValue(3));
     }
 

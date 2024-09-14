@@ -37,7 +37,8 @@ public final class SeasonOfTheBold extends CardImpl {
         this.getSpellAbility().getModes().getMode().withPawPrintValue(1);
 
         // {P}{P} -- Exile the top two cards of your library. Until the end of your next turn, you may play them.
-        Mode mode2 = new Mode(new ExileTopXMayPlayUntilEffect(2, Duration.UntilEndOfYourNextTurn));
+        Mode mode2 = new Mode(new ExileTopXMayPlayUntilEffect(2, Duration.UntilEndOfYourNextTurn)
+                .withTextOptions("them", false));
         this.getSpellAbility().addMode(mode2.withPawPrintValue(2));
 
         // {P}{P}{P} -- Until the end of your next turn, whenever you cast a spell, Season of the Bold deals 2 damage to up to one target creature.

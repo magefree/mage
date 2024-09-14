@@ -33,7 +33,7 @@ public final class FoundFootage extends CardImpl {
         ));
 
         // {2}, Sacrifice Found Footage: Surveil 2, then draw a card.
-        Ability ability = new SimpleActivatedAbility(new SurveilEffect(2), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new SurveilEffect(2, false), new GenericManaCost(2));
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
         this.addAbility(ability);
