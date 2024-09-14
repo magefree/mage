@@ -42,6 +42,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Break Down the Door", 170, Rarity.UNCOMMON, mage.cards.b.BreakDownTheDoor.class));
         cards.add(new SetCardInfo("Broodspinner", 211, Rarity.UNCOMMON, mage.cards.b.Broodspinner.class));
         cards.add(new SetCardInfo("Cackling Slasher", 85, Rarity.COMMON, mage.cards.c.CacklingSlasher.class));
+        cards.add(new SetCardInfo("Cathartic Parting", 171, Rarity.UNCOMMON, mage.cards.c.CatharticParting.class));
         cards.add(new SetCardInfo("Cautious Survivor", 172, Rarity.COMMON, mage.cards.c.CautiousSurvivor.class));
         cards.add(new SetCardInfo("Chainsaw", 128, Rarity.RARE, mage.cards.c.Chainsaw.class));
         cards.add(new SetCardInfo("Clammy Prowler", 45, Rarity.COMMON, mage.cards.c.ClammyProwler.class));
