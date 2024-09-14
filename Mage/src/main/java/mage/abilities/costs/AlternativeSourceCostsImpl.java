@@ -30,11 +30,15 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
     }
 
     protected AlternativeSourceCostsImpl(String name, String reminderText, Cost cost) {
+        this(name, reminderText, cost, name);
+    }
+
+    protected AlternativeSourceCostsImpl(String name, String reminderText, Cost cost, String activationKey) {
         super(Zone.ALL, null);
         this.name = name;
         this.reminderText = reminderText;
         this.alternativeCost = new AlternativeCostImpl<>(name, reminderText, cost);
-        this.activationKey = getActivationKey(name);
+        this.activationKey = getActivationKey(activationKey);
     }
 
     protected AlternativeSourceCostsImpl(final AlternativeSourceCostsImpl ability) {

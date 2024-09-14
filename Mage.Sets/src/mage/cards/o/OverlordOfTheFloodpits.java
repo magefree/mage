@@ -26,7 +26,7 @@ public final class OverlordOfTheFloodpits extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Impending 4--{1}{U}{U}
-        this.addAbility(new ImpendingAbility("{1}{U}{U}"));
+        this.addAbility(new ImpendingAbility(4, "{1}{U}{U}"));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

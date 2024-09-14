@@ -224,7 +224,5 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Winter, Misanthropic Guide", 240, Rarity.RARE, mage.cards.w.WinterMisanthropicGuide.class));
         cards.add(new SetCardInfo("Withering Torment", 124, Rarity.UNCOMMON, mage.cards.w.WitheringTorment.class));
         cards.add(new SetCardInfo("Zimone, All-Questioning", 241, Rarity.RARE, mage.cards.z.ZimoneAllQuestioning.class));
-
-        cards.removeIf(setCardInfo -> setCardInfo.getName().startsWith("Overlord"));
     }
 }
