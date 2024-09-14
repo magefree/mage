@@ -167,6 +167,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Razorkin Needlehead", 153, Rarity.RARE, mage.cards.r.RazorkinNeedlehead.class));
         cards.add(new SetCardInfo("Razortrap Gorge", 267, Rarity.COMMON, mage.cards.r.RazortrapGorge.class));
         cards.add(new SetCardInfo("Resurrected Cultist", 115, Rarity.COMMON, mage.cards.r.ResurrectedCultist.class));
+        cards.add(new SetCardInfo("Rip, Spawn Hunter", 228, Rarity.RARE, mage.cards.r.RipSpawnHunter.class));
         cards.add(new SetCardInfo("Ripchain Razorkin", 154, Rarity.COMMON, mage.cards.r.RipchainRazorkin.class));
         cards.add(new SetCardInfo("Rite of the Moth", 229, Rarity.UNCOMMON, mage.cards.r.RiteOfTheMoth.class));
         cards.add(new SetCardInfo("Rootwise Survivor", 196, Rarity.UNCOMMON, mage.cards.r.RootwiseSurvivor.class));
