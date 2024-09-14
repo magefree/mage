@@ -171,6 +171,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Screaming Nemesis", 157, Rarity.MYTHIC, mage.cards.s.ScreamingNemesis.class));
         cards.add(new SetCardInfo("Seized from Slumber", 28, Rarity.COMMON, mage.cards.s.SeizedFromSlumber.class));
         cards.add(new SetCardInfo("Shardmage's Rescue", 29, Rarity.UNCOMMON, mage.cards.s.ShardmagesRescue.class));
+        cards.add(new SetCardInfo("Sheltered by Ghosts", 30, Rarity.UNCOMMON, mage.cards.s.ShelteredByGhosts.class));
         cards.add(new SetCardInfo("Shepherding Spirits", 31, Rarity.COMMON, mage.cards.s.ShepherdingSpirits.class));
         cards.add(new SetCardInfo("Shrewd Storyteller", 232, Rarity.UNCOMMON, mage.cards.s.ShrewdStoryteller.class));
         cards.add(new SetCardInfo("Shroudstomper", 233, Rarity.UNCOMMON, mage.cards.s.Shroudstomper.class));
