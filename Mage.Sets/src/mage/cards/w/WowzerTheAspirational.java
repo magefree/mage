@@ -62,7 +62,7 @@ public class WowzerTheAspirational extends CardImpl {
         // are the monarch, and have the city's blessing and the initiative, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new WinGameSourceControllerEffect()),
-                new CompoundCondition(condition),
+                condition,
                 "Whenever {this} attacks, " +
                         "if you have an {E}, control a Blood, a Clue, a Food, a Map, a Powerstone, and a Treasure, " +
                         "are the monarch, and have the city's blessing and the initiative, you win the game."
