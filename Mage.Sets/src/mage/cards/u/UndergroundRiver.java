@@ -24,10 +24,10 @@ public final class UndergroundRiver extends CardImpl {
 
         this.addAbility(new ColorlessManaAbility());
 
-        Ability blueManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new TapSourceCost());
+        Ability blueManaAbility = new BlueManaAbility();
         blueManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blueManaAbility);
-        Ability blackManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new TapSourceCost());
+        Ability blackManaAbility = new BlackManaAbility();
         blackManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blackManaAbility);
     }

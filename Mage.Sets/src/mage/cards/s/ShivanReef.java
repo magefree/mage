@@ -26,10 +26,10 @@ public final class ShivanReef extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         //Tap: Add Blue or Red. Shivan Reef deals 1 damage to you.
-        Ability blueManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new TapSourceCost());
+        Ability blueManaAbility = new BlueManaAbility();
         blueManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blueManaAbility);
-        Ability redManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new TapSourceCost());
+        Ability redManaAbility = new RedManaAbility();
         redManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(redManaAbility);
     }

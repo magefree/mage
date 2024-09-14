@@ -26,10 +26,10 @@ public final class BattlefieldForge extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // Tap: Add Red or White. Battlefield Forge deals 1 damage to you.
-        Ability redManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new TapSourceCost());
+        Ability redManaAbility = new RedManaAbility();
         redManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(redManaAbility);
-        Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new TapSourceCost());
+        Ability whiteManaAbility = new WhiteManaAbility();
         whiteManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(whiteManaAbility);
     }

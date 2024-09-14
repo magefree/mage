@@ -26,10 +26,10 @@ public final class YavimayaCoast extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // Tap: Add Green or Blue. Yavimaya Coast deals 1 damage to you.
-        Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new TapSourceCost());
+        Ability greenManaAbility = new GreenManaAbility();
         greenManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(greenManaAbility);
-        Ability blueManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new TapSourceCost());
+        Ability blueManaAbility = new BlueManaAbility();
         blueManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blueManaAbility);
     }
