@@ -245,7 +245,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
 
         // use case: make more modes chooseable
         if (moreCondition != null && moreCondition.apply(game, source)) {
-            realMaxModes = this.moreLimit;
+            realMaxModes = Math.min(this.moreLimit, this.size());
         }
 
         // use case: limit max modes by opponents (example: choose one or more... each mode must target a different player)
