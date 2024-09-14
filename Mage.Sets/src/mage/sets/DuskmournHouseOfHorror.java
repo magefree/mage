@@ -60,6 +60,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Dissection Tools", 245, Rarity.RARE, mage.cards.d.DissectionTools.class));
         cards.add(new SetCardInfo("Disturbing Mirth", 212, Rarity.UNCOMMON, mage.cards.d.DisturbingMirth.class));
         cards.add(new SetCardInfo("Diversion Specialist", 132, Rarity.UNCOMMON, mage.cards.d.DiversionSpecialist.class));
+        cards.add(new SetCardInfo("Don't Make a Sound", 49, Rarity.COMMON, mage.cards.d.DontMakeASound.class));
         cards.add(new SetCardInfo("Doomsday Excruciator", 94, Rarity.RARE, mage.cards.d.DoomsdayExcruciator.class));
         cards.add(new SetCardInfo("Drag to the Roots", 213, Rarity.UNCOMMON, mage.cards.d.DragToTheRoots.class));
         cards.add(new SetCardInfo("Duskmourn's Domination", 50, Rarity.UNCOMMON, mage.cards.d.DuskmournsDomination.class));
