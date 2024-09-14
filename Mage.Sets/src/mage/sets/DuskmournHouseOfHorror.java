@@ -162,6 +162,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Piranha Fly", 70, Rarity.COMMON, mage.cards.p.PiranhaFly.class));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Popular Egotist", 114, Rarity.UNCOMMON, mage.cards.p.PopularEgotist.class));
+        cards.add(new SetCardInfo("Possessed Goat", 25, Rarity.COMMON, mage.cards.p.PossessedGoat.class));
         cards.add(new SetCardInfo("Pyroclasm", 149, Rarity.UNCOMMON, mage.cards.p.Pyroclasm.class));
         cards.add(new SetCardInfo("Ragged Playmate", 150, Rarity.COMMON, mage.cards.r.RaggedPlaymate.class));
         cards.add(new SetCardInfo("Raucous Carnival", 266, Rarity.COMMON, mage.cards.r.RaucousCarnival.class));
