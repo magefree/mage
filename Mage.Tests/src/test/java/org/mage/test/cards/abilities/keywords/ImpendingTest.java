@@ -19,7 +19,7 @@ public class ImpendingTest extends CardTestPlayerBase {
     private static final String hauntwoods = "Overlord of the Hauntwoods";
 
     public void assertHasImpending(String name, boolean hasAbility) {
-        Permanent permanent = getPermanent(hauntwoods);
+        Permanent permanent = getPermanent(name);
         Assert.assertEquals(
                 "Should" + (hasAbility ? "" : "n't") + " have Impending ability",
                 hasAbility, permanent.getAbilities(currentGame).containsClass(ImpendingAbility.class)
