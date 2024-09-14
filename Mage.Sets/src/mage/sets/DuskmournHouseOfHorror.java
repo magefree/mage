@@ -140,6 +140,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Malevolent Chandelier", 252, Rarity.COMMON, mage.cards.m.MalevolentChandelier.class));
         cards.add(new SetCardInfo("Manifest Dread", 189, Rarity.COMMON, mage.cards.m.ManifestDread.class));
         cards.add(new SetCardInfo("Marina Vendrell's Grimoire", 64, Rarity.RARE, mage.cards.m.MarinaVendrellsGrimoire.class));
+        cards.add(new SetCardInfo("Marvin, Murderous Mimic", 253, Rarity.RARE, mage.cards.m.MarvinMurderousMimic.class));
         cards.add(new SetCardInfo("Miasma Demon", 109, Rarity.UNCOMMON, mage.cards.m.MiasmaDemon.class));
         cards.add(new SetCardInfo("Midnight Mayhem", 222, Rarity.UNCOMMON, mage.cards.m.MidnightMayhem.class));
         cards.add(new SetCardInfo("Most Valuable Slayer", 144, Rarity.COMMON, mage.cards.m.MostValuableSlayer.class));
