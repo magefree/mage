@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.LandsYouControlHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +38,7 @@ public final class GeistpackAlpha extends CardImpl {
 
 
         // When Geistpack Alpha dies, seek a permanent card with mana value equal to the number of lands you control.
-        this.addAbility(new DiesSourceTriggeredAbility(new GeistpackAlphaDiesEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new GeistpackAlphaDiesEffect()).addHint(LandsYouControlHint.instance));
 
     }
 

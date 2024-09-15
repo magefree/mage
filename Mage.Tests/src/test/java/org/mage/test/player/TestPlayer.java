@@ -3673,6 +3673,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public Set<Card> seekCard(FilterCard filter, Zone inZone, boolean tapped, int amount, Ability source, Game game) {
+        return computerPlayer.seekCard(filter,inZone, tapped, amount, source, game);
+    }
+
+    @Override
     public void lookAtAllLibraries(Ability source, Game game) {
         computerPlayer.lookAtAllLibraries(source, game);
     }

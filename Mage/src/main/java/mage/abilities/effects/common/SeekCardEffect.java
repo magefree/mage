@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -8,40 +9,58 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.RandomUtil;
+import mage.util.CardUtil;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author karapuzz14
  */
 public class SeekCardEffect extends OneShotEffect {
+
     private final FilterCard filter;
+
     private final Zone inZone;
+
     private final boolean tapped;
 
+    private final int amount;
+
     public SeekCardEffect(FilterCard filter) {
-        this(filter, Zone.HAND, false);
+        this(filter, 1, Zone.HAND, false);
     }
 
-    public SeekCardEffect(FilterCard filter, Zone inZone) {
-        this(filter, inZone, false);
+    public SeekCardEffect(FilterCard filter, int amount) {
+        this(filter, amount, Zone.HAND, false);
     }
+
+    public SeekCardEffect(FilterCard filter, int amount, Zone inZone) {
+        this(filter, amount, inZone, false);
+    }
+
     /**
      * @param filter for selecting a card
      */
-    public SeekCardEffect(FilterCard filter, Zone inZone, boolean tapped) {
+    public SeekCardEffect(FilterCard filter, int amount, Zone inZone, boolean tapped) {
         super(Outcome.Benefit);
         this.filter = filter;
+        this.amount = amount;
         this.inZone = inZone;
         this.tapped = tapped;
-        this.staticText = "seek a " + filter.getMessage();
+        StringBuilder sb = new StringBuilder("seek ");
+        String value = StaticValue.get(amount).toString();
+        sb.append(CardUtil.numberToText(value, ""));
+        if (amount > 1) {
+            sb.append(" ");
+        }
+        sb.append(filter.getMessage());
+        this.staticText = sb.toString();
     }
 
     private SeekCardEffect(final SeekCardEffect effect) {
         super(effect);
         this.filter = effect.filter;
+        this.amount = effect.amount;
         this.inZone = effect.inZone;
         this.tapped = effect.tapped;
     }
@@ -54,25 +73,9 @@ public class SeekCardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Set<Card> cards = controller.getLibrary()
-                    .getCards(game)
-                    .stream()
-                    .filter(card -> filter.match(card, getId(), source, game))
-                    .collect(Collectors.toSet());
-            Card card = RandomUtil.randomFromCollection(cards);
-            if (card == null) {
-                return false;
-            }
-            game.informPlayers(controller.getLogName() + " seeks a card from their library");
-            if (inZone == Zone.BATTLEFIELD) {
-                controller.moveCards(card, inZone, source, game, tapped, false, false, null);
-            } else {
-                controller.moveCards(card, inZone, source, game);
-            }
-            return true;
-        }
-        return false;
+        Set<Card> cards = controller.seekCard(filter, inZone, tapped, amount, source, game);
+
+        return !cards.isEmpty();
     }
 
 }

@@ -478,6 +478,12 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean seekCard(FilterCard filter, Ability source, Game game);
 
     /**
+     * Gets random cards (or card) which matches the given filter and puts it in given zone
+     * Doesn't reveal the cards
+     */
+    Set<Card> seekCard(FilterCard filter, Zone inZone, boolean tapped, int amount, Ability source, Game game);
+
+    /**
      * Reveals all players' libraries. Useful for abilities like Jace, Architect
      * of Thought's -8 that have effects that require information from all
      * libraries.

@@ -26,9 +26,8 @@ public final class SettleTheWilds extends CardImpl {
     public SettleTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
-        // Seek a basic land card and put it onto the battlefield tapped.
-        // Then seek a permanent card with mana value equal to the number of lands you control.
-        this.getSpellAbility().addEffect(new SeekCardEffect(StaticFilters.FILTER_CARD_BASIC_LAND, Zone.BATTLEFIELD, true).setText("Seek a basic land card and put it onto the battlefield tapped. "));
+        // Seek a basic land card and put it onto the battlefield tapped. Then seek a permanent card with mana value equal to the number of lands you control.
+        this.getSpellAbility().addEffect(new SeekCardEffect(StaticFilters.FILTER_CARD_BASIC_LAND_A, 1, Zone.BATTLEFIELD, true).setText("Seek a basic land card and put it onto the battlefield tapped"));
         this.getSpellAbility().addEffect(new SettleTheWildsSeekEffect());
 
     }
@@ -68,8 +67,6 @@ class SettleTheWildsSeekEffect extends OneShotEffect {
         int lands = game.getBattlefield().countAll(StaticFilters.FILTER_LAND, game.getControllerId(source.getSourceId()), game);
         FilterPermanentCard filter = new FilterPermanentCard();
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, lands));
-        player.seekCard(filter, source, game);
-        return true;
+        return player.seekCard(filter, source, game);
     }
 }
-
