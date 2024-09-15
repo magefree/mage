@@ -278,6 +278,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Wish", 64, Rarity.RARE, mage.cards.w.Wish.class));
         cards.add(new SetCardInfo("Wishclaw Talisman", 51, Rarity.RARE, mage.cards.w.WishclawTalisman.class));
         cards.add(new SetCardInfo("Worst Fears", 52, Rarity.MYTHIC, mage.cards.w.WorstFears.class));
+        cards.add(new SetCardInfo("Wowzer, the Aspirational", 365, Rarity.RARE, mage.cards.w.WowzerTheAspirational.class));
         cards.add(new SetCardInfo("Xantcha, Sleeper Agent", 253, Rarity.RARE, mage.cards.x.XantchaSleeperAgent.class));
         cards.add(new SetCardInfo("Yorion, Sky Nomad", 94, Rarity.RARE, mage.cards.y.YorionSkyNomad.class));
         cards.add(new SetCardInfo("Zombie Master", 188, Rarity.RARE, mage.cards.z.ZombieMaster.class));
