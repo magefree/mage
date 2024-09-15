@@ -59,7 +59,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         UUID activator = controllerId;
-        if (ability.getAbilityType().isActivatedAbility() || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
+         if (ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             activator = ((ActivatedAbilityImpl) ability).getActivatorId();
         }
         // can be cancel by user
