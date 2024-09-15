@@ -75,7 +75,7 @@ public class SeekCardEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Set<Card> cards = controller.seekCard(filter, inZone, tapped, amount, source, game);
 
-        return !cards.isEmpty();
+        return cards != null && !cards.isEmpty();
     }
 
 }
