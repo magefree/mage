@@ -28,7 +28,8 @@ public final class CatharticParting extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // The owner of target artifact or enchantment an opponent controls shuffles it into their library. You may shuffle up to four target cards from your graveyard into your library.
-        this.getSpellAbility().addEffect(new ShuffleIntoLibraryTargetEffect());
+        this.getSpellAbility().addEffect(new ShuffleIntoLibraryTargetEffect()
+                .setText("the owner of target artifact or enchantment an opponent controls shuffles it into their library"));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new ShuffleIntoLibraryTargetEffect(true)
                 .setTargetPointer(new SecondTargetPointer()));

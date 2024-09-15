@@ -29,10 +29,10 @@ public final class JumpScare extends CardImpl {
                 .setText(", gains flying"));
         this.getSpellAbility().addEffect(new AddCardSubTypeTargetEffect(
                 SubType.HORROR, Duration.EndOfTurn
-        ).setText(", and becomes "));
+        ).setText(", and becomes"));
         this.getSpellAbility().addEffect(new AddCardTypeTargetEffect(
                 Duration.EndOfTurn, CardType.ENCHANTMENT, CardType.CREATURE
-        ).setText("a Horror enchantment creature in addition to its other types"));
+        ).setText(" a Horror enchantment creature in addition to its other types"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

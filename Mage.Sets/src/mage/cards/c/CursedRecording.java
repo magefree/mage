@@ -37,7 +37,7 @@ public final class CursedRecording extends CardImpl {
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new RemoveAllCountersSourceEffect(CounterType.TIME),
-                condition, "then if there are seven or more time counters on it, " +
+                condition, "Then if there are seven or more time counters on it, " +
                 "remove those counters and it deals 20 damage to you"
         ).addEffect(new DamageControllerEffect(20)));
         this.addAbility(ability);

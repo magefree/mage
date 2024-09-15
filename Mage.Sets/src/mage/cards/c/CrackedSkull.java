@@ -44,7 +44,7 @@ public final class CrackedSkull extends CardImpl {
         this.addAbility(new DealtDamageAttachedTriggeredAbility(
                 Zone.BATTLEFIELD, new DestroyTargetEffect("destroy it"),
                 false, SetTargetPointer.PERMANENT
-        ));
+        ).setTriggerPhrase("When enchanted creature is dealt damage, "));
     }
 
     private CrackedSkull(final CrackedSkull card) {

@@ -32,7 +32,8 @@ public final class NecropolisRegent extends CardImpl {
 
         // Whenever a creature you control deals combat damage to a player, put that many +1/+1 counters on it.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), SavedDamageValue.MANY),
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), SavedDamageValue.MANY)
+                        .setText("put that many +1/+1 counters on it"),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE,
                 false, SetTargetPointer.PERMANENT, true
         ));
