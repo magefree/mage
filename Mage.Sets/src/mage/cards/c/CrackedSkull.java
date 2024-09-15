@@ -3,9 +3,10 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.abilities.effects.common.discard.LookTargetHandChooseDiscardEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +36,8 @@ public final class CrackedSkull extends CardImpl {
 
         // When Cracked Skull enters, look at target player's hand. You may choose a nonland card from it. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_LAND).setOptional(true)
+                new LookTargetHandChooseDiscardEffect(true, StaticValue.get(1), StaticFilters.FILTER_CARD_NON_LAND)
+                        .setText("look at target player's hand. You may choose a nonland card from it. That player discards that card")
         );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
