@@ -1,7 +1,13 @@
 package org.mage.test.cards.cost.sacrifice;
 
+import mage.abilities.common.LicidAbility;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.keyword.HasteAbility;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -100,6 +106,34 @@ public class SacrificeTargetCostTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Memnite", 0);
         assertGraveyardCount(playerB, "Memnite", 1);
         assertHandCount(playerB, "Memnarch", 1);
+    }
+
+    /**
+     * Use special action that has opponent sac a permanent
+     */
+    @Test
+    public void SpecialActionTest() {
+        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
+        // That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn.
+        addCard(Zone.HAND, playerA, "Volrath's Curse");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerB, "Memnarch");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volrath's Curse");
+        addTarget(playerA, "Memnarch");
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice a ", "Volrath's Curse");
+        setChoice(playerB, "Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Memnite", 0);
+        assertGraveyardCount(playerB, "Memnite", 1);
+        assertPermanentCount(playerB, "Memnarch", 1);
     }
 
 }
