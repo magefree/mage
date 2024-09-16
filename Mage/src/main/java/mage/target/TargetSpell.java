@@ -108,6 +108,7 @@ public class TargetSpell extends TargetObject {
 
     private boolean canBeChosen(StackObject stackObject, UUID sourceControllerId, Ability source, Game game) {
         return stackObject instanceof Spell
+                && !stackObject.getId().equals(source.getId()) // 115.5. A spell or ability on the stack is an illegal target for itself.
                 && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
                 && canTarget(sourceControllerId, stackObject.getId(), source, game);
     }
