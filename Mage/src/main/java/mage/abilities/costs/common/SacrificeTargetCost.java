@@ -89,7 +89,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         UUID activator = controllerId;
-        if (ability.getAbilityType().isActivatedAbility() || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
+        if (ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
                 activator = ((ActivatedAbilityImpl) ability).getActivatorId();
             }  // else, Activator not filled?
