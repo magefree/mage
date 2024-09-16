@@ -788,10 +788,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         // if this method was called from a replacement event, pass the number of cards back through
         // (uncomment conditions if correct ruling is to only count cards drawn by the same player)
-        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */ ) {
+        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */) {
             ((DrawCardEvent) event).incrementCardsDrawn(numDrawn);
         }
-        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */ ) {
+        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */) {
             ((DrawTwoOrMoreCardsEvent) event).incrementCardsDrawn(numDrawn);
         }
         return numDrawn;
@@ -1983,7 +1983,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             do {
                 playerCanceledSelection = false;
                 // select permanents to untap to consume the "notMoreThan" effects
-                for (Map.Entry<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> handledEntry : notMoreThanEffectsUsage.entrySet()) {
+                for (Entry<Entry<RestrictionUntapNotMoreThanEffect, Set<Ability>>, Integer> handledEntry : notMoreThanEffectsUsage.entrySet()) {
                     // select a permanent to untap for this entry
                     int numberToUntap = handledEntry.getValue();
                     if (numberToUntap > 0) {
@@ -2970,6 +2970,40 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.informPlayers(this.getLogName() + " seeks a card from their library");
         this.moveCards(card, Zone.HAND, source, game);
         return true;
+    }
+
+    @Override
+    public Set<Card> seekCard(FilterCard filter, Zone inZone, boolean tapped, int amount, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Set<Card> cards = controller.getLibrary()
+                    .getCards(game)
+                    .stream()
+                    .filter(card -> filter.match(card, getId(), source, game))
+                    .collect(Collectors.toSet());
+
+            Set<Card> soughtCards = new HashSet<>();
+            for (int i = 0; i < amount; i++) {
+                Card randomCard = RandomUtil.randomFromCollection(cards);
+                soughtCards.add(randomCard);
+                cards.remove(randomCard);
+            }
+
+            if (soughtCards.size() > 1) {
+                game.informPlayers(controller.getLogName() + " seeks cards from their library");
+            } else {
+                game.informPlayers(controller.getLogName() + " seeks a card from their library");
+            }
+
+            if (inZone == Zone.BATTLEFIELD) {
+                controller.moveCards(soughtCards, inZone, source, game, tapped, false, false, null);
+            } else {
+                controller.moveCards(soughtCards, inZone, source, game);
+            }
+
+            return soughtCards;
+        }
+        return null;
     }
 
     @Override
