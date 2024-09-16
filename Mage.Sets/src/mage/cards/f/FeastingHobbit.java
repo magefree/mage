@@ -14,7 +14,6 @@ import mage.filter.StaticFilters;
 import java.util.UUID;
 
 /**
- *
  * @author Susucr
  */
 public final class FeastingHobbit extends CardImpl {

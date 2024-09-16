@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.abilities.keyword.FlyingAbility;
@@ -8,6 +7,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import java.util.Objects;
 
 /**
  * 702.82. Devour
@@ -27,9 +28,11 @@ public class DevourTest extends CardTestPlayerBase {
             String devourTargets,
             int assertCounter,
             boolean assertLion,
-            boolean assertMyr,
+            boolean assertGolem,
             boolean assertGinger,
-            boolean assertRelic
+            boolean assertRelic,
+            boolean assertAngrath,
+            int life
     ) {
         setStrictChooseMode(true);
 
@@ -46,16 +49,20 @@ public class DevourTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, devourer);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // Creature
-        addCard(Zone.BATTLEFIELD, playerA, "Alpha Myr"); // Creature Artifact
+        addCard(Zone.BATTLEFIELD, playerA, "Enatu Golem"); // Artifact Creature - gain 4 life on death
         addCard(Zone.BATTLEFIELD, playerA, "Gingerbrute"); // Artifact Creature — Food Golem
         addCard(Zone.BATTLEFIELD, playerA, "Darksteel Relic"); // Artifact
+        addCard(Zone.BATTLEFIELD, playerA, "Angrath, Captain of Chaos"); // Planeswalker
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, devourer);
-        if (devourTargets == "") {
+        if (Objects.equals(devourTargets, "")) {
             setChoice(playerA, false);   // no to devour
         } else {
             setChoice(playerA, true);    // yes to devour
             addTarget(playerA, devourTargets); // devour targets.
+        }
+        if (!assertGolem && devourer.equals("Marrow Chomper")) {
+            setChoice(playerA, "When {this} dies, you gain 4 life"); // order triggers
         }
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -70,12 +77,15 @@ public class DevourTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Silvercoat Lion", assertLion ? 1 : 0);
         assertGraveyardCount(playerA, "Silvercoat Lion", assertLion ? 0 : 1);
-        assertPermanentCount(playerA, "Alpha Myr", assertMyr ? 1 : 0);
-        assertGraveyardCount(playerA, "Alpha Myr", assertMyr ? 0 : 1);
+        assertPermanentCount(playerA, "Enatu Golem", assertGolem ? 1 : 0);
+        assertGraveyardCount(playerA, "Enatu Golem", assertGolem ? 0 : 1);
         assertPermanentCount(playerA, "Gingerbrute", assertGinger ? 1 : 0);
         assertGraveyardCount(playerA, "Gingerbrute", assertGinger ? 0 : 1);
         assertPermanentCount(playerA, "Darksteel Relic", assertRelic ? 1 : 0);
         assertGraveyardCount(playerA, "Darksteel Relic", assertRelic ? 0 : 1);
+        assertPermanentCount(playerA, "Angrath, Captain of Chaos", assertAngrath ? 1 : 0);
+        assertGraveyardCount(playerA, "Angrath, Captain of Chaos", assertAngrath ? 0 : 1);
+        assertLife(playerA, life);
     }
 
     private void expectedIllegalTest(
@@ -97,7 +107,7 @@ public class DevourTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, devourer);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // Creature
-        addCard(Zone.BATTLEFIELD, playerA, "Alpha Myr"); // Creature Artifact
+        addCard(Zone.BATTLEFIELD, playerA, "Enatu Golem"); // Creature Artifact
         addCard(Zone.BATTLEFIELD, playerA, "Gingerbrute"); // Artifact Creature — Food Golem
         addCard(Zone.BATTLEFIELD, playerA, "Darksteel Relic"); // Artifact
 
@@ -130,25 +140,25 @@ public class DevourTest extends CardTestPlayerBase {
     @Test
     public void Wurm_NoDevour() {
         expectedPossibleTest(gorgerWurm, "",
-                1 * 0, true, true, true, true);
+                1 * 0, true, true, true, true, true, 20);
     }
 
     @Test
     public void Wurm_OneDevour() {
-        expectedPossibleTest(gorgerWurm, "Alpha Myr",
-                1 * 1, true, false, true, true);
+        expectedPossibleTest(gorgerWurm, "Enatu Golem",
+                1 * 1, true, false, true, true, true, 24);
     }
 
     @Test
     public void Wurm_TwoDevour() {
-        expectedPossibleTest(gorgerWurm, "Alpha Myr^Gingerbrute",
-                1 * 2, true, false, false, true);
+        expectedPossibleTest(gorgerWurm, "Enatu Golem^Gingerbrute",
+                1 * 2, true, false, false, true, true, 24);
     }
 
     @Test
     public void Wurm_ThreeDevour() {
-        expectedPossibleTest(gorgerWurm, "Alpha Myr^Gingerbrute^Silvercoat Lion",
-                1 * 3, false, false, false, true);
+        expectedPossibleTest(gorgerWurm, "Enatu Golem^Gingerbrute^Silvercoat Lion",
+                1 * 3, false, false, false, true, true, 24);
     }
 
     @Test
@@ -168,25 +178,25 @@ public class DevourTest extends CardTestPlayerBase {
     @Test
     public void Thromok_NoDevour() {
         expectedPossibleTest(thromok, "",
-                0 * 0, true, true, true, true);
+                0 * 0, true, true, true, true, true, 20);
     }
 
     @Test
     public void Thromok_OneDevour() {
-        expectedPossibleTest(thromok, "Alpha Myr",
-                1 * 1, true, false, true, true);
+        expectedPossibleTest(thromok, "Enatu Golem",
+                1 * 1, true, false, true, true, true, 24);
     }
 
     @Test
     public void Thromok_TwoDevour() {
-        expectedPossibleTest(thromok, "Alpha Myr^Gingerbrute",
-                2 * 2, true, false, false, true);
+        expectedPossibleTest(thromok, "Enatu Golem^Gingerbrute",
+                2 * 2, true, false, false, true, true, 24);
     }
 
     @Test
     public void Thromok_ThreeDevour() {
-        expectedPossibleTest(thromok, "Alpha Myr^Gingerbrute^Silvercoat Lion",
-                3 * 3, false, false, false, true);
+        expectedPossibleTest(thromok, "Enatu Golem^Gingerbrute^Silvercoat Lion",
+                3 * 3, false, false, false, true, true, 24);
     }
 
     @Test
@@ -206,18 +216,18 @@ public class DevourTest extends CardTestPlayerBase {
     @Test
     public void Hobbit_NoDevour() {
         expectedPossibleTest(hobbit, "",
-                3 * 0, true, true, true, true);
+                3 * 0, true, true, true, true, true, 20);
     }
 
     @Test
     public void Hobbit_OneDevour() {
         expectedPossibleTest(hobbit, "Gingerbrute",
-                3 * 1, true, true, false, true);
+                3 * 1, true, true, false, true, true, 20);
     }
 
     @Test
     public void Hobbit_IllegalDevour() {
-        expectedIllegalTest(hobbit, "Alpha Myr");
+        expectedIllegalTest(hobbit, "Enatu Golem");
     }
 
     // Caprichrome
@@ -236,25 +246,25 @@ public class DevourTest extends CardTestPlayerBase {
     @Test
     public void Caprichrome_NoDevour() {
         expectedPossibleTest(caprichrome, "",
-                1 * 0, true, true, true, true);
+                1 * 0, true, true, true, true, true, 20);
     }
 
     @Test
     public void Caprichrome_OneDevour() {
-        expectedPossibleTest(caprichrome, "Alpha Myr",
-                1 * 1, true, false, true, true);
+        expectedPossibleTest(caprichrome, "Enatu Golem",
+                1 * 1, true, false, true, true, true, 24);
     }
 
     @Test
     public void Caprichrome_TwoDevour() {
-        expectedPossibleTest(caprichrome, "Alpha Myr^Gingerbrute",
-                1 * 2, true, false, false, true);
+        expectedPossibleTest(caprichrome, "Enatu Golem^Gingerbrute",
+                1 * 2, true, false, false, true, true, 24);
     }
 
     @Test
     public void Caprichrome_ThreeDevour() {
-        expectedPossibleTest(caprichrome, "Alpha Myr^Gingerbrute^Darksteel Relic",
-                1 * 3, true, false, false, false);
+        expectedPossibleTest(caprichrome, "Enatu Golem^Gingerbrute^Darksteel Relic",
+                1 * 3, true, false, false, false, true, 24);
     }
 
     @Test
@@ -276,31 +286,31 @@ public class DevourTest extends CardTestPlayerBase {
     @Test
     public void Hatchling_NoDevour() {
         expectedPossibleTest(hatchling, "",
-                1 * 0, true, true, true, true);
+                1 * 0, true, true, true, true, true, 20);
         assertAbility(playerA, hatchling, FlyingAbility.getInstance(), false);
         assertAbility(playerA, hatchling, TrampleAbility.getInstance(), false);
     }
 
     @Test
     public void Hatchling_OneDevour() {
-        expectedPossibleTest(hatchling, "Alpha Myr",
-                1 * 1, true, false, true, true);
+        expectedPossibleTest(hatchling, "Enatu Golem",
+                1 * 1, true, false, true, true, true, 24);
         assertAbility(playerA, hatchling, FlyingAbility.getInstance(), true);
         assertAbility(playerA, hatchling, TrampleAbility.getInstance(), true);
     }
 
     @Test
     public void Hatchling_TwoDevour() {
-        expectedPossibleTest(hatchling, "Alpha Myr^Gingerbrute",
-                1 * 2, true, false, false, true);
+        expectedPossibleTest(hatchling, "Enatu Golem^Gingerbrute",
+                1 * 2, true, false, false, true, true, 24);
         assertAbility(playerA, hatchling, FlyingAbility.getInstance(), true);
         assertAbility(playerA, hatchling, TrampleAbility.getInstance(), true);
     }
 
     @Test
     public void Hatchling_ThreeDevour() {
-        expectedPossibleTest(hatchling, "Alpha Myr^Gingerbrute^Silvercoat Lion",
-                1 * 3, false, false, false, true);
+        expectedPossibleTest(hatchling, "Enatu Golem^Gingerbrute^Silvercoat Lion",
+                1 * 3, false, false, false, true, true, 24);
         assertAbility(playerA, hatchling, FlyingAbility.getInstance(), true);
         assertAbility(playerA, hatchling, TrampleAbility.getInstance(), true);
     }
@@ -322,33 +332,65 @@ public class DevourTest extends CardTestPlayerBase {
     @Test
     public void Chomper_NoDevour() {
         expectedPossibleTest(chomper, "",
-                2 * 0, true, true, true, true);
-        assertLife(playerA, 20 + 2 * 0);
+                2 * 0, true, true, true, true, true, 20);
     }
 
     @Test
     public void Chomper_OneDevour() {
-        expectedPossibleTest(chomper, "Alpha Myr",
-                2 * 1, true, false, true, true);
-        assertLife(playerA, 20 + 2 * 1);
+        expectedPossibleTest(chomper, "Enatu Golem",
+                2 * 1, true, false, true, true, true, 26);
     }
 
     @Test
     public void Chomper_TwoDevour() {
-        expectedPossibleTest(chomper, "Alpha Myr^Gingerbrute",
-                2 * 2, true, false, false, true);
-        assertLife(playerA, 20 + 2 * 2);
+        expectedPossibleTest(chomper, "Enatu Golem^Gingerbrute",
+                2 * 2, true, false, false, true, true, 28);
     }
 
     @Test
     public void Chomper_ThreeDevour() {
-        expectedPossibleTest(chomper, "Alpha Myr^Gingerbrute^Silvercoat Lion",
-                2 * 3, false, false, false, true);
-        assertLife(playerA, 20 + 2 * 3);
+        expectedPossibleTest(chomper, "Enatu Golem^Gingerbrute^Silvercoat Lion",
+                2 * 3, false, false, false, true, true, 30);
     }
 
     @Test
     public void Chomper_IllegalDevour() {
         expectedIllegalTest(chomper, "Darksteel Relic");
     }
+
+    //  Devouring Hellion {2}{R}
+    // Creature — Hellion
+    // As Devouring Hellion enters, you may sacrifice any number of creatures and/or planeswalkers.
+    // If you do, it enters with twice that many +1/+1 counters on it.
+    private static final String hellion = "Devouring Hellion";
+
+    @Test
+    public void hellionNoDevour() {
+        expectedPossibleTest(hellion, "",
+                0, true, true, true, true, true, 20);
+    }
+
+    @Test
+    public void hellionOneDevour() {
+        expectedPossibleTest(hellion, "Angrath, Captain of Chaos",
+                2, true, true, true, true, false, 20);
+    }
+
+    @Test
+    public void hellionTwoDevour() {
+        expectedPossibleTest(hellion, "Enatu Golem^Angrath, Captain of Chaos",
+                4, true, false, true, true, false, 24);
+    }
+
+    @Test
+    public void hellionThreeDevour() {
+        expectedPossibleTest(hellion, "Enatu Golem^Gingerbrute^Angrath, Captain of Chaos",
+                6, true, false, false, true, false, 24);
+    }
+
+    @Test
+    public void hellionIllegalDevour() {
+        expectedIllegalTest(hellion, "Darksteel Relic");
+    }
+
 }
