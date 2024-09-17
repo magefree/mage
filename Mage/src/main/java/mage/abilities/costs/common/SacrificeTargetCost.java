@@ -8,6 +8,7 @@ import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
@@ -82,10 +83,14 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller == null){
+            return false;
+        }
         int validTargets = 0;
         int neededTargets = this.getTargets().get(0).getNumberOfTargets();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(((TargetPermanent) this.getTargets().get(0)).getFilter(), controllerId, source, game)) {
-            if (game.getPlayer(controllerId).canPaySacrificeCost(permanent, source, controllerId, game)) {
+            if (controller.canPaySacrificeCost(permanent, source, controllerId, game)) {
                 validTargets++;
                 if (validTargets >= neededTargets) {
                     return true;
