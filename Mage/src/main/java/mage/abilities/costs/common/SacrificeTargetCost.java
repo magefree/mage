@@ -1,11 +1,9 @@
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.SacrificeCost;
-import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -58,12 +56,8 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        UUID activator = controllerId;
-         if (ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
-            activator = ((ActivatedAbilityImpl) ability).getActivatorId();
-        }
-        // can be cancel by user
-        if (this.getTargets().choose(Outcome.Sacrifice, activator, source.getSourceId(), source, game)) {
+        // can be cancelled by user
+        if (this.getTargets().choose(Outcome.Sacrifice, controllerId, source.getSourceId(), source, game)) {
             for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
@@ -88,17 +82,10 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        UUID activator = controllerId;
-        if (ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
-            if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
-                activator = ((ActivatedAbilityImpl) ability).getActivatorId();
-            }  // else, Activator not filled?
-        }
-
         int validTargets = 0;
         int neededTargets = this.getTargets().get(0).getNumberOfTargets();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(((TargetPermanent) this.getTargets().get(0)).getFilter(), controllerId, source, game)) {
-            if (game.getPlayer(activator).canPaySacrificeCost(permanent, source, controllerId, game)) {
+            if (game.getPlayer(controllerId).canPaySacrificeCost(permanent, source, controllerId, game)) {
                 validTargets++;
                 if (validTargets >= neededTargets) {
                     return true;
@@ -106,10 +93,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
             }
         }
         // solves issue #8097, if a sacrifice cost is optional and you don't have valid targets, then the cost can be paid
-        if (validTargets == 0 && this.getTargets().get(0).getMinNumberOfTargets() == 0) {
-            return true;
-        }
-        return false;
+        return validTargets == 0 && this.getTargets().get(0).getMinNumberOfTargets() == 0;
     }
 
     @Override
