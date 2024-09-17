@@ -166,7 +166,7 @@ class ApexObservatoryEffect extends ContinuousEffectImpl {
             Card apexObservatory = game.getCard(source.getSourceId());
             if (apexObservatory != null) {
                 Boolean wasItUsed = (Boolean) game.getState().getValue(
-                        apexObservatory.getId().toString());
+                        apexObservatory.getId().toString() + game.getTurnNum());
                 if (wasItUsed == null) {
                     ApexObservatoryAlternativeCostAbility alternateCostAbility = new ApexObservatoryAlternativeCostAbility(chosenCardType);
                     alternateCostAbility.setSourceId(source.getSourceId());
@@ -214,7 +214,7 @@ class ApexObservatoryAlternativeCostAbility extends AlternativeCostSourceAbility
         }
         Card apexObservatory = game.getCard(this.getSourceId());
         if (apexObservatory != null) {
-            game.getState().setValue(apexObservatory.getId().toString(), true);
+            game.getState().setValue(apexObservatory.getId().toString() + game.getTurnNum(), true);
         }
         return true;
     }
