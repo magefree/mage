@@ -11,12 +11,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -41,6 +39,7 @@ public final class BoxingRing extends CardImpl {
             = new FilterCreaturePermanent("creature you don't control with the same mana value");
 
     static {
+        filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filter.add(BoxingRingPredicate.instance);
     }
 
