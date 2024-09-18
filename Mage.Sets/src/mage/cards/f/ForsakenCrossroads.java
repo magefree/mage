@@ -10,7 +10,6 @@ import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.mana.AddManaChosenColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,13 +43,13 @@ public final class ForsakenCrossroads extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaChosenColorEffect(), new TapSourceCost()));
     }
 
-    private ForsakenCrossroads(final mage.cards.f.ForsakenCrossroads card) {
+    private ForsakenCrossroads(final ForsakenCrossroads card) {
         super(card);
     }
 
     @Override
-    public mage.cards.f.ForsakenCrossroads copy() {
-        return new mage.cards.f.ForsakenCrossroads(this);
+    public ForsakenCrossroads copy() {
+        return new ForsakenCrossroads(this);
     }
 }
 
@@ -58,7 +57,7 @@ class ForsakenCrossroadsEffect extends OneShotEffect {
 
     ForsakenCrossroadsEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "When {this} enters, scry 1. If you weren't the starting player, you may untap {this} instead.";
+        this.staticText = "scry 1. If you weren't the starting player, you may untap {this} instead.";
     }
 
     private ForsakenCrossroadsEffect(final ForsakenCrossroadsEffect effect) {
@@ -73,10 +72,12 @@ class ForsakenCrossroadsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (!controller.getId().equals(game.getStartingPlayerId())) {
+        if (controller != null && !controller.getId().equals(game.getStartingPlayerId())) {
             if (controller.chooseUse(Outcome.Untap, "Untap {this} instead of scrying 1?", "", "Untap", "Scry 1", source, game)) {
-                Card card = source.getSourceCardIfItStillExists(game);
-                Permanent permanent = game.getPermanent(card.getId());
+                Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+                if (permanent == null) {
+                    return false;
+                }
                 permanent.untap(game);
                 return true;
             }
