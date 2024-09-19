@@ -8,10 +8,12 @@ import mage.client.cards.BigCard;
 import mage.client.cards.VirtualCardInfo;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.game.GamePanel;
+import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.view.CardView;
+import mage.view.DungeonView;
 import mage.view.PlaneView;
 
 import javax.swing.*;
@@ -156,7 +158,7 @@ public class MageEditorPane extends JEditorPane {
                 // show real object by priority (workable card hints and actual info)
                 CardView cardView = needCard;
 
-                // if no game object found then show default card
+                // if no game object found then show default card/object
                 if (cardView == null) {
                     CardInfo card = CardRepository.instance.findCards(cardName).stream().findFirst().orElse(null);
                     if (card != null) {
@@ -169,6 +171,14 @@ public class MageEditorPane extends JEditorPane {
                     Plane plane = Plane.createPlaneByFullName(cardName);
                     if (plane != null) {
                         cardView = new CardView(new PlaneView(plane, null));
+                    }
+                }
+
+                // dungeon
+                if (cardView == null) {
+                    Dungeon dungeon = Dungeon.createDungeon(cardName, false);
+                    if (dungeon != null) {
+                        cardView = new CardView(new DungeonView(dungeon));
                     }
                 }
 

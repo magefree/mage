@@ -584,6 +584,9 @@ public abstract class GameImpl implements Game {
             return emblem;
         }
         TheRingEmblem newEmblem = new TheRingEmblem(playerId);
+
+        // TODO: add image info
+
         state.addCommandObject(newEmblem);
         return newEmblem;
     }
@@ -1971,7 +1974,9 @@ public abstract class GameImpl implements Game {
             ability.setSourceId(newEmblem.getId());
         }
 
-        state.addCommandObject(newEmblem); // TODO: generate image for emblem here?
+        // image info setup in setSourceObject
+
+        state.addCommandObject(newEmblem);
     }
 
     /**
@@ -1999,6 +2004,9 @@ public abstract class GameImpl implements Game {
         for (Ability ability : newPlane.getAbilities()) {
             ability.setSourceId(newPlane.getId());
         }
+
+        // image info setup in setSourceObject
+
         state.addCommandObject(newPlane);
         informPlayers("You have planeswalked to " + newPlane.getLogName());
 
@@ -2020,6 +2028,7 @@ public abstract class GameImpl implements Game {
     @Override
     public Dungeon addDungeon(Dungeon dungeon, UUID playerId) {
         dungeon.setControllerId(playerId);
+        dungeon.setSourceObject();
         state.addCommandObject(dungeon);
         return dungeon;
     }

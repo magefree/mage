@@ -13,6 +13,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.HintUtils;
 import mage.cards.FrameStyle;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
@@ -87,6 +89,11 @@ public class Dungeon extends CommandObjectImpl {
     }
 
     public void moveToNextRoom(UUID playerId, Game game) {
+        Dungeon dungeon = game.getPlayerDungeon(playerId);
+        if (dungeon == null) {
+            return;
+        }
+
         if (currentRoom == null) {
             currentRoom = dungeonRooms.get(0);
         } else {
@@ -94,7 +101,7 @@ public class Dungeon extends CommandObjectImpl {
         }
         Player player = game.getPlayer(getControllerId());
         if (player != null) {
-            game.informPlayers(player.getLogName() + " has entered " + currentRoom.getName());
+            game.informPlayers(player.getLogName() + " has entered " + currentRoom.getName() + " (dungeon: " + dungeon.getLogName() + ")");
         }
         game.fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.ROOM_ENTERED, currentRoom.getId(), null, playerId
@@ -139,14 +146,14 @@ public class Dungeon extends CommandObjectImpl {
         choice.setChoices(dungeonNames);
         player.choose(Outcome.Neutral, choice, game);
         if (choice.getChoice() != null) {
-            return createDungeon(choice.getChoice());
+            return createDungeon(choice.getChoice(), true);
         } else {
             // on disconnect
-            return createDungeon("Tomb of Annihilation");
+            return createDungeon("Tomb of Annihilation", true);
         }
     }
 
-    public static Dungeon createDungeon(String name) {
+    public static Dungeon createDungeon(String name, boolean isNameMustExists) {
         switch (name) {
             case "Tomb of Annihilation":
                 return new TombOfAnnihilationDungeon();
@@ -155,7 +162,26 @@ public class Dungeon extends CommandObjectImpl {
             case "Dungeon of the Mad Mage":
                 return new DungeonOfTheMadMageDungeon();
             default:
-                throw new UnsupportedOperationException("A dungeon should have been chosen");
+                if (isNameMustExists) {
+                    throw new UnsupportedOperationException("A dungeon should have been chosen");
+                } else {
+                    return null;
+                }
+        }
+    }
+
+    public void setSourceObject() {
+        // choose set code due source
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(this.getClass().getName(), null);
+        if (foundInfo != null) {
+            this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
+            this.setCardNumber("");
+            this.setImageFileName(""); // use default
+            this.setImageNumber(foundInfo.getImageNumber());
+        } else {
+            // how-to fix: add dungeon to the tokens-database
+            throw new IllegalArgumentException("Wrong code usage: can't find token info for the dungeon: " + this.getClass().getName());
         }
     }
 

@@ -314,7 +314,7 @@ public class PickChoiceDialog extends MageDialog {
                         cardInfo.init(item.getHint(), this.bigCard, this.gameId);
                     } else if (item.getHintType() == ChoiceHintType.CARD_DUNGEON) {
                         // as card name
-                        CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(item.getHint())));
+                        CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(item.getHint(), true)));
                         cardInfo.init(cardView, this.bigCard, this.gameId);
                     } else if (item.getHintType() == ChoiceHintType.GAME_OBJECT) {
                         // as object
