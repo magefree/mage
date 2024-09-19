@@ -2769,6 +2769,9 @@ public class VerifyCardDataTest {
     public void test_checkCardConstructors() {
         // create all cards, can catch additional verify and runtime checks from abilities and effects
         // example: wrong code usage errors
+        //
+        // warning, look at stack trace logs, not card names -- some error code can be hidden in static methods and can be called from un-related cards
+        // use test_showCardInfo for detailed errors
         Collection<String> errorsList = new ArrayList<>();
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {
@@ -2777,7 +2780,7 @@ public class VerifyCardDataTest {
                     Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
                             setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card == null) {
-                        errorsList.add("Error: broken constructor " + setInfo.getCardClass());
+                        errorsList.add("Error: can't create card - " + setInfo.getCardClass() + " - see logs for errors");
                         continue;
                     }
                     if (!card.getExpansionSetCode().equals(set.getCode())) {
@@ -2785,7 +2788,7 @@ public class VerifyCardDataTest {
                     }
                 } catch (Throwable e) {
                     // CardImpl.createCard don't throw exceptions (only error logs), so that logs are useless here
-                    logger.error("Error: can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
+                    errorsList.add("Error: can't create card - " + setInfo.getCardClass() + " - see logs for errors");
                 }
             }
         }

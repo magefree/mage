@@ -99,12 +99,12 @@ class ConduitOfRuinWatcher extends Watcher {
     }
 }
 
-class FirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate<Controllable> {
+class FirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
-    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
-        if (input.getObject() instanceof Card
-                && ((Card) input.getObject()).isCreature(game)) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        if (input.getObject() != null
+                && input.getObject().isCreature(game)) {
             ConduitOfRuinWatcher watcher = game.getState().getWatcher(ConduitOfRuinWatcher.class);
             return watcher != null && watcher.creatureSpellsCastThisTurn(input.getPlayerId()) == 0;
         }

@@ -1,10 +1,13 @@
 package mage.filter;
 
 import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
 import java.util.ArrayList;
@@ -43,6 +46,11 @@ public class FilterStackObject extends FilterObject<StackObject> {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
+
+        // verify check
+        // Spell implements Card interface, so it can use some default predicates like owner
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, StackObject.class, Spell.class, Card.class);
+
         extraPredicates.add(predicate);
     }
 
