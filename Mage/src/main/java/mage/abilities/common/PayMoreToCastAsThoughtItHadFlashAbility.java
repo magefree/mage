@@ -1,6 +1,8 @@
 package mage.abilities.common;
 
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
@@ -14,14 +16,22 @@ import mage.util.CardUtil;
  */
 public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
 
-    private final ManaCosts costsToAdd;
+    private final Cost costsToAdd;
 
     public PayMoreToCastAsThoughtItHadFlashAbility(Card card, ManaCosts<ManaCost> costsToAdd) {
-        super(card.getSpellAbility().getManaCosts().copy(), card.getName() + " as though it had flash", Zone.HAND, SpellAbilityType.BASE_ALTERNATE);
+        this(card, (Cost) costsToAdd);
+        CardUtil.increaseCost(this, costsToAdd);
+    }
+
+    public PayMoreToCastAsThoughtItHadFlashAbility(Card card, Costs<Cost> costsToAdd) {
+        this(card, (Cost) costsToAdd);
+        this.addCost(costsToAdd);
+    }
+
+    public PayMoreToCastAsThoughtItHadFlashAbility(Card card, Cost costsToAdd) {
+        super(card.getSpellAbility().getManaCosts().copy(), card.getName(), Zone.HAND, SpellAbilityType.BASE_ALTERNATE);
         this.costsToAdd = costsToAdd;
         this.timing = TimingRule.INSTANT;
-        this.setRuleAtTheTop(true);
-        CardUtil.increaseCost(this, costsToAdd);
     }
 
     protected PayMoreToCastAsThoughtItHadFlashAbility(final PayMoreToCastAsThoughtItHadFlashAbility ability) {
@@ -38,10 +48,13 @@ public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
     public String getRule(boolean all) {
         return getRule();
     }
-
     @Override
     public String getRule() {
-        return "You may cast {this} as though it had flash if you pay " + costsToAdd.getText() + " more to cast it. <i>(You may cast it any time you could cast an instant.)</i>";
+        if (costsToAdd instanceof ManaCosts) {
+            return "You may cast {this} as though it had flash if you pay " + costsToAdd.getText() + " more to cast it. <i>(You may cast it any time you could cast an instant.)</i>";
+        } else {
+            return "You may cast {this} as though it had flash by " + costsToAdd.getText() + " in addition to paying its other costs. <i>(You may cast it any time you could cast an instant.)</i>";
+        }
     }
 
 }
